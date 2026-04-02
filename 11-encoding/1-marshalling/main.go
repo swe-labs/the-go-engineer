@@ -1,3 +1,7 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+// Commercial use is prohibited without permission.
+
 package main
 
 import (
@@ -110,7 +114,7 @@ func main() {
 	// json.MarshalIndent adds newlines and indentation for readability.
 	// Arguments: (value, prefix, indent)
 	//   prefix: string prepended to each line (usually "")
-	//   indent: string used for each indentation level (usually "  " or "\t")
+	//   indent: string used for each indentation level (usually "  " or "	")
 	prettyData, err := json.MarshalIndent(laptop, "", "  ")
 	if err != nil {
 		log.Fatal("MarshalIndent error:", err)

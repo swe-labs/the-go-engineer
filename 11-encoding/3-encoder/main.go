@@ -1,3 +1,7 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+// Commercial use is prohibited without permission.
+
 package main
 
 import (
@@ -111,5 +115,5 @@ func main() {
 	fmt.Println("  - json.NewEncoder(w io.Writer) streams data directly to the writer")
 	fmt.Println("  - Highly memory-efficient for large files or HTTP responses")
 	fmt.Println("  - Use this for APIs (ResponseWriter) instead of json.Marshal")
-	fmt.Println("  - Encode() automatically appends a newline (\\n) after the JSON")
+	fmt.Println("  - Encode() automatically appends a newline (\n) after the JSON")
 }
