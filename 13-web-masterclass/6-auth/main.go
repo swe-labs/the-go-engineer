@@ -124,7 +124,7 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 	usersMutex.RLock()
 	user, exists := users[email]
 	usersMutex.RUnlock()
-	
+
 	if !exists {
 		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
 		return
