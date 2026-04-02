@@ -66,7 +66,7 @@ func SequentialDownloader(urls []string, destDir string) error {
 		}
 	}
 
-	fmt.Printf("Download %s took %s\n", urls, time.Since(start))
+	fmt.Printf("All sequential downloads (%d files) completed in %s\n", len(urls), time.Since(start))
 	return nil
 }
 

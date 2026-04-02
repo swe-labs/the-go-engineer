@@ -110,8 +110,8 @@ func main() {
 	})
 
 	// Chain middleware: outermost runs first
-	// Request flow: secureHeaders → logRequest → recoverPanic → handler
-	handler := secureHeaders(logRequest(logger)(recoverPanic(logger)(mux)))
+	// Request flow: recoverPanic → secureHeaders → logRequest → handler
+	handler := recoverPanic(logger)(secureHeaders(logRequest(logger)(mux)))
 
 	log.Println("Starting server with middleware on :8080")
 	log.Fatal(http.ListenAndServe(":8080", handler))

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/rand"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -62,8 +64,9 @@ func (s *SessionStore) Create() (string, *Session) {
 	defer s.mu.Unlock()
 
 	// In production, use crypto/rand for secure token generation.
-	// This is simplified for learning purposes.
-	id := fmt.Sprintf("session_%d", time.Now().UnixNano())
+	b := make([]byte, 16)
+	rand.Read(b)
+	id := hex.EncodeToString(b)
 	sess := &Session{
 		Data:      make(map[string]any),
 		CreatedAt: time.Now(),

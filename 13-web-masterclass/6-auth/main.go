@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sync"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -54,7 +55,10 @@ type User struct {
 }
 
 // In-memory user store (production: use a database)
-var users = map[string]*User{}
+var (
+	users      = map[string]*User{}
+	usersMutex = sync.RWMutex{}
+)
 
 func main() {
 	mux := http.NewServeMux()
@@ -79,10 +83,13 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	usersMutex.RLock()
 	if _, exists := users[email]; exists {
+		usersMutex.RUnlock()
 		http.Error(w, "User already exists", http.StatusConflict)
 		return
 	}
+	usersMutex.RUnlock()
 
 	// bcrypt.GenerateFromPassword:
 	//   - Adds a random salt automatically (no need to manage salts)
@@ -94,11 +101,13 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	usersMutex.Lock()
 	users[email] = &User{
 		ID:       len(users) + 1,
 		Email:    email,
 		Password: string(hashedPassword),
 	}
+	usersMutex.Unlock()
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
@@ -112,7 +121,10 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
 	password := r.FormValue("password")
 
+	usersMutex.RLock()
 	user, exists := users[email]
+	usersMutex.RUnlock()
+	
 	if !exists {
 		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
 		return

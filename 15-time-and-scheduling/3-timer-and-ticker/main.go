@@ -30,7 +30,10 @@ import (
 )
 
 func main() {
-	ticker := time.NewTicker(1 * time.Hour)
+	timerExample()
+	fmt.Println()
+
+	ticker := time.NewTicker(1 * time.Second)
 	counter := 0
 	defer ticker.Stop()
 	for range ticker.C {

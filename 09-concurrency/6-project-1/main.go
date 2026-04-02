@@ -69,9 +69,9 @@ func main() {
 			case <-timeout:
 				fmt.Println("operation completed")
 				// 5. Channel Teardown
-				// Closing `pingerCh` signals to any active readers that no more data
-				// will EVER be sent.
-				close(pingerCh)
+				// Context cancellation (cancel() above) handled shutdown gracefully.
+				// We DO NOT close pingerCh here to avoid data races and "send on closed channel" panics
+				// from ping/pong goroutines that are concurrently trying to write.
 				done <- struct{}{} // Signal the main thread we are finished
 				return
 			case msg := <-pingerCh:

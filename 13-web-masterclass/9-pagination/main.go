@@ -5,6 +5,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"math"
 	"net/http"
 	"strconv"
@@ -135,5 +136,5 @@ func main() {
 	})
 
 	fmt.Println("Pagination demo: http://localhost:8080/api/items?page=1&page_size=10")
-	http.ListenAndServe(":8080", mux)
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }

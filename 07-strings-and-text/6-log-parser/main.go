@@ -1,7 +1,7 @@
 package main
 
 // ============================================================================
-// Section 7: Strings & Text — Log Parser (Exercise)
+// Section 7: Strings & Text — Config Parser (Exercise)
 // Level: Intermediate
 // ============================================================================
 //

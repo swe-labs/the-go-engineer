@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"regexp"
-	"strings"
 )
 
 // ============================================================================
@@ -143,5 +142,5 @@ func main() {
 	fmt.Println("  - MatchString checks, FindAllString extracts, ReplaceAllString replaces")
 	fmt.Println("  - Capture groups ( ) extract structured data from text")
 	fmt.Println("  - Named groups (?P<name>) improve readability")
-	_ = strings.Builder{} // Force import (used in examples above)
+
 }

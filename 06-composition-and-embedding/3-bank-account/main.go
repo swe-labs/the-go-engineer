@@ -68,7 +68,7 @@ func (sa *SavingsAccount) AddInterest() {
 	fmt.Printf("Adding interest $%.2f to savings account %s. ", interest, sa.AccountNumber)
 	err := sa.Deposit(interest) // Uses promoted Deposit method
 	if err != nil {
-		fmt.Printf("AddInterst: Error depositing $%.2f to savings account. %v\n", interest, err)
+		fmt.Printf("AddInterest: Error depositing $%.2f to savings account. %v\n", interest, err)
 	}
 }
 
