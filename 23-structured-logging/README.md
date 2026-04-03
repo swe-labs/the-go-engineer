@@ -31,6 +31,7 @@ For most services `slog` is sufficient. Reach for `zerolog` only when pprof show
 | `2-context-logger/` | Context-keyed logger, HTTP middleware | Intermediate |
 | `3-custom-handler/` | Implement `slog.Handler` interface | Advanced |
 | `4-zerolog-comparison/` | zerolog patterns, when to use it | Advanced |
+| `5-exercise/` | PII redacting logger with `ReplaceAttr` | Intermediate |
 
 ## How to Run
 
@@ -39,6 +40,7 @@ go run ./23-structured-logging/1-slog-basics
 go run ./23-structured-logging/2-context-logger
 go run ./23-structured-logging/3-custom-handler
 go run ./23-structured-logging/4-zerolog-comparison
+go run ./23-structured-logging/5-exercise
 ```
 
 ## References
