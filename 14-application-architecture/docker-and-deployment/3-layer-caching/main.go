@@ -35,3 +35,12 @@ First build: Takes ~30 seconds (downloads dependencies)
 Second build (no source change): Takes ~5 seconds (uses cache)
 Third build (fast rebuild after code change): Takes ~10 seconds (recompile, reuses dep cache)
 */
+
+func main() {
+	// This lesson demonstrates Docker layer caching optimization.
+	// See the Dockerfile in this directory for the optimized approach.
+	// Run: docker build -t myapp:latest .
+	// First build takes ~30 seconds (downloads dependencies)
+	// Subsequent builds are much faster due to layer caching.
+	println("Docker layer caching lesson - see Dockerfile in this directory")
+}

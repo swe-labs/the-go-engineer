@@ -16,3 +16,11 @@ Result: Final image is  ~15MB instead of ~350MB!
 // RUN: docker build -t myapp:latest .
 // RUN: docker run myapp:latest
 */
+
+func main() {
+	// This lesson demonstrates multi-stage Docker builds.
+	// See the Dockerfile in this directory for the implementation.
+	// Run: docker build -t myapp:latest .
+	// Then: docker run myapp:latest
+	println("Multi-stage Dockerfile lesson - see Dockerfile in this directory")
+}
