@@ -9,7 +9,7 @@ package main
 // Level: Advanced
 // ============================================================================
 //
-// RUN: go run ./09-concurrency/7-downloader
+// RUN: go run ./11-concurrency/concurrency/7-downloader
 // ============================================================================
 
 import (

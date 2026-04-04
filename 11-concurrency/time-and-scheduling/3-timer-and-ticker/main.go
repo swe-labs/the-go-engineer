@@ -24,7 +24,7 @@ package main
 //   keeps it in the global min-heap forever, causing massive memory leaks in
 //   long-running daemons!
 //
-// RUN: go run ./11-concurrency/time-and-scheduling/3-timer-and-ticker
+// RUN: go run ./11-concurrency/concurrency/time-and-scheduling/3-timer-and-ticker
 // ============================================================================
 
 import (

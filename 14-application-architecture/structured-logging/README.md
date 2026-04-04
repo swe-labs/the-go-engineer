@@ -34,10 +34,10 @@ For most services `slog` is sufficient. Reach for `zerolog` only when pprof show
 ## How to Run
 
 ```bash
-go run ./23-structured-logging/1-slog-basics
-go run ./23-structured-logging/2-context-logger
-go run ./23-structured-logging/3-custom-handler
-go run ./23-structured-logging/4-zerolog-comparison
+go run ./14-application-architecture/structured-logging/1-slog-basics
+go run ./14-application-architecture/structured-logging/2-context-logger
+go run ./14-application-architecture/structured-logging/3-custom-handler
+go run ./14-application-architecture/structured-logging/4-zerolog-comparison
 ```
 
 ## References

@@ -27,7 +27,7 @@ import (
 //   wrap their parent in a linked list, this empty struct acts as the immutable,
 //   zero-byte invisible root anchor for the entire concurrency tree.
 //
-// RUN: go run ./11-concurrency/context/1-background
+// RUN: go run ./11-concurrency/concurrency/context/1-background
 // ============================================================================
 
 func main() {

@@ -30,7 +30,7 @@ import (
 //   deadline arrives, the runtime's timer goroutine fires the context's internal
 //   `cancel()` function, closing the Done() channel and unblocking all waiters.
 //
-// RUN: go run ./11-concurrency/context/3-with-timeout
+// RUN: go run ./11-concurrency/concurrency/context/3-with-timeout
 // ============================================================================
 
 func main() {

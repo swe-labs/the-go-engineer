@@ -21,7 +21,7 @@ package main
 //   which completely eradicated the lock, utilizing the much faster ChaCha8 and PCG
 //   algorithms. It is radically faster and structurally avoids global contention.
 //
-// RUN: go run ./11-concurrency/time-and-scheduling/4-random
+// RUN: go run ./11-concurrency/concurrency/time-and-scheduling/4-random
 // ============================================================================
 
 import (

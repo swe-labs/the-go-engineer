@@ -125,7 +125,7 @@ func main() {
 	fmt.Println("  - NEVER use time.Sleep to wait — use sync.WaitGroup or channels")
 	fmt.Println("  - Pass loop variables as parameters to avoid closure bugs")
 	fmt.Println("  - The main goroutine must wait, or it will exit (killing all goroutines)")
-	fmt.Println("  - Next: go run ./09-concurrency/2-wait-group (deeper WaitGroup patterns)")
+	fmt.Println("  - Next: go run ./11-concurrency/concurrency/2-wait-group (deeper WaitGroup patterns)")
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("🚀 NEXT UP: GC.2 WaitGroups")
 	fmt.Println("   Current: GC.1 (goroutines)")

@@ -26,7 +26,7 @@ import (
 //   and `expectedError`.
 //   This pattern yields 100% test coverage with minimal duplicate code.
 //
-// RUN: go test -v ./16-http-clients-and-mocking/5-manual-mock-table-driven
+// RUN: go test -v ./13-quality-and-performance/http-client-testing/5-manual-mock-table-driven
 // ============================================================================
 
 func main() {

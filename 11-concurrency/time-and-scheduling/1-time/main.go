@@ -23,7 +23,7 @@ package main
 //   intelligently uses the Monotonic clock to guarantee the Duration is perfectly
 //   accurate, even if the OS suddenly synced its Wall Clock backward by an hour!
 //
-// RUN: go run ./11-concurrency/time-and-scheduling/1-time
+// RUN: go run ./11-concurrency/concurrency/time-and-scheduling/1-time
 // ============================================================================
 
 import (

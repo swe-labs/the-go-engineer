@@ -1,7 +1,7 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
-// RUN: go run ./23-structured-logging/5-exercise
+// RUN: go run ./14-application-architecture/structured-logging/5-exercise
 package main
 
 import (

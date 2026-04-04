@@ -23,7 +23,7 @@ package main
 //   UTC time in your databases. Only convert to a local `time.Location` at the
 //   very last millisecond before rendering the UI for the user!
 //
-// RUN: go run ./11-concurrency/time-and-scheduling/6-timezone
+// RUN: go run ./11-concurrency/concurrency/time-and-scheduling/6-timezone
 // ============================================================================
 
 import (

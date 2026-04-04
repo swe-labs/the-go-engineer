@@ -41,7 +41,7 @@ import (
 //     cancel := func() { once.Do(func() { close(done) }) }
 //     // ... 20 lines of error propagation ...
 //
-// RUN: go run ./12-concurrency-patterns/24-errgroup-and-pools/2-errgroup-context
+// RUN: go run ./12-concurrency-patterns/24-errgroup-and-pools/24-errgroup-and-pools/2-errgroup-context
 // ============================================================================
 
 // WorkItem represents a URL to be crawled.

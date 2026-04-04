@@ -43,8 +43,8 @@ import (
 //   advantage over REST with hand-written clients that only fail at runtime.
 //
 // RUN:
-//   Terminal 1: go run ./26-grpc/1-unary/server
-//   Terminal 2: go run ./26-grpc/1-unary/client
+//   Terminal 1: go run ./14-application-architecture/grpc/1-unary/server
+//   Terminal 2: go run ./14-application-architecture/grpc/1-unary/client
 // ============================================================================
 
 func main() {

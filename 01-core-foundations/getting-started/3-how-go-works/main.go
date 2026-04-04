@@ -52,7 +52,7 @@ import (
 // "go build" does steps 1-2 and saves the binary to disk.
 //
 // TRY IT:
-//   go build -o hello ./00-getting-started/3-how-go-works
+//   go run ./01-core-foundations/getting-started/3-how-go-works
 //   ./hello                    # Run the binary directly
 //   file hello                 # Shows it's a native executable
 //   ls -lh hello               # Shows the binary size (~2MB)

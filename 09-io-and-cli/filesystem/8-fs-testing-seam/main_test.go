@@ -18,7 +18,7 @@ import (
 // This is the definitive demonstration of why accepting fs.FS is superior
 // to accepting a string path.
 //
-// RUN: go test -v ./10-filesystem/8-fs-testing-seam
+// RUN: go test -v ./09-io-and-cli/filesystem/8-fs-testing-seam
 // ============================================================================
 
 func TestSearchLogs_FindsMatches(t *testing.T) {

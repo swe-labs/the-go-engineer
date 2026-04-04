@@ -39,7 +39,7 @@ import (
 //   Put(). Otherwise the next caller gets stale data — a serious security bug
 //   if the buffer contains HTTP headers or auth tokens.
 //
-// RUN: go run ./12-concurrency-patterns/24-errgroup-and-pools/3-sync-pool
+// RUN: go run ./12-concurrency-patterns/24-errgroup-and-pools/24-errgroup-and-pools/3-sync-pool
 // ============================================================================
 
 // ============================================================================

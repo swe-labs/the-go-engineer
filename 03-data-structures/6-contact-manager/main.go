@@ -24,7 +24,7 @@ import "fmt"
 //   exactly which slice index a name lives at, we achieve O(1) instant
 //   lookups. This is precisely how database table indexes work under the hood!
 //
-// RUN: go run ./03-collections-and-pointers/6-contact-manager
+// RUN: go run ./03-data-structures/6-contact-manager
 // ============================================================================
 
 // Contact structure. Maps real-world data to a Go object.

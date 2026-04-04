@@ -56,7 +56,7 @@ import (
 //   If you genuinely need ALL errors, use errors.Join() in each goroutine to
 //   build a combined error, or collect into a []error with a mutex.
 //
-// RUN: go run ./12-concurrency-patterns/24-errgroup-and-pools/1-errgroup
+// RUN: go run ./12-concurrency-patterns/24-errgroup-and-pools/24-errgroup-and-pools/1-errgroup
 // ============================================================================
 
 // Service represents a microservice dependency that must be checked at startup.

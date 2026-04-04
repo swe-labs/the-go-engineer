@@ -103,7 +103,7 @@ func main() {
 
 	// WHAT JUST HAPPENED (behind the scenes):
 	//
-	// 1. You ran:     go run ./00-getting-started/2-hello-world
+	// 1. You ran:     go run ./01-core-foundations/getting-started/2-hello-world
 	// 2. Go compiled: Translated this entire file to native MACHINE CODE
 	//                 (the binary language your CPU speaks — 1s and 0s)
 	// 3. Go executed: Started at func main() and ran each line top-to-bottom

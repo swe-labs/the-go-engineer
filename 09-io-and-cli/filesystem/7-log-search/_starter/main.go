@@ -29,7 +29,7 @@ import "fmt"
 //   - d.IsDir() checks if the current entry is a directory
 //   - filepath.Ext(path) returns the file extension including the dot
 //
-// RUN: go run ./10-filesystem/7-log-search/_starter
+// RUN: go run ./09-io-and-cli/filesystem/7-log-search/_starter
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 

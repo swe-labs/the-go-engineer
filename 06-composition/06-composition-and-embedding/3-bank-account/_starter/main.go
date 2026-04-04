@@ -28,7 +28,7 @@ import "fmt"
 //   - Embedding: type SavingsAccount struct { Account; InterestRate float64 }
 //   - Embedded fields are "promoted" — sa.Balance accesses Account.Balance
 //
-// RUN: go run ./06-composition-and-embedding/3-bank-account/_starter
+// RUN: go run ./06-composition/06-composition-and-embedding/3-bank-account/_starter
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 

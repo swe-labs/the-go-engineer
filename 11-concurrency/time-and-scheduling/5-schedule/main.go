@@ -23,7 +23,7 @@ package main
 //   a signal to every child's `stopChan`, and safely blocks until the `WaitGroup`
 //   counter hits zero. This guarantees zero zombie processes during deployments!
 //
-// RUN: go run ./11-concurrency/time-and-scheduling/5-schedule
+// RUN: go run ./11-concurrency/concurrency/time-and-scheduling/5-schedule
 // ============================================================================
 
 import (
