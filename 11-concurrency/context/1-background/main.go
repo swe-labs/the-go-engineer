@@ -27,7 +27,7 @@ import (
 //   wrap their parent in a linked list, this empty struct acts as the immutable,
 //   zero-byte invisible root anchor for the entire concurrency tree.
 //
-// RUN: go run ./17-context/1-background
+// RUN: go run ./11-concurrency/context/1-background
 // ============================================================================
 
 func main() {
@@ -104,6 +104,10 @@ func main() {
 	fmt.Println("  4. Cancelling a parent cancels ALL children automatically")
 	fmt.Println()
 	fmt.Println("   Next: go run ./17-context/2-with-cancel")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CT.2 WithCancel")
+	fmt.Println("   Current: CT.1 (Background &amp; TODO)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // processRequest demonstrates the Go convention: context is ALWAYS the first parameter.

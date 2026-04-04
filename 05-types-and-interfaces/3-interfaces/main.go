@@ -223,4 +223,8 @@ func main() {
 	fmt.Println("  - Accept interfaces, return structs (design principle)")
 	fmt.Println("  - Use type assertions (value, ok) to extract concrete types")
 	fmt.Println("  - Interfaces are Go's primary tool for abstraction and testing")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: TI.4 Stringer")
+	fmt.Println("   Current: TI.3 (interfaces)")
+	fmt.Println("---------------------------------------------------")
 }

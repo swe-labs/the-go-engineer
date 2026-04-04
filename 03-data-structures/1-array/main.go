@@ -25,7 +25,7 @@ import "fmt"
 //   they are "Value Types", passing a `[1000]int` array to a function copies all
 //   1000 integers sequentially in RAM—which is why Slices are used 99% of the time.
 //
-// RUN: go run ./03-collections-and-pointers/1-array
+// RUN: go run ./03-data-structures/1-array
 // ============================================================================
 
 func main() {
@@ -93,4 +93,8 @@ func main() {
 	// - Arrays are VALUE TYPES — assignment creates a full copy
 	// - In practice, Go programmers almost always use SLICES (next lesson)
 	//   because slices are dynamic and pass by reference to the underlying data
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: DS.2 slices")
+	fmt.Println("   Current: DS.1 (arrays)")
+	fmt.Println("---------------------------------------------------")
 }

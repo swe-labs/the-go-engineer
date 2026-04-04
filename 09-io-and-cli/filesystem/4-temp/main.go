@@ -36,7 +36,7 @@ import (
 //   3. Security: Temp files are created with restrictive permissions (0600),
 //      preventing other users on the system from reading your temporary data.
 //
-// RUN: go run ./10-filesystem/4-temp
+// RUN: go run ./09-io-and-cli/filesystem/4-temp
 // ============================================================================
 
 func main() {
@@ -116,4 +116,8 @@ func main() {
 	fmt.Println("  - The first argument \"\" uses the OS default temp directory")
 	fmt.Println("  - The second argument \"prefix-*\" determines the naming pattern")
 	fmt.Println("  - ALWAYS defer os.RemoveAll(dir) or os.Remove(file) immediately after creation")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FS.5 embed")
+	fmt.Println("   Current: FS.4 (temp files)")
+	fmt.Println("---------------------------------------------------")
 }

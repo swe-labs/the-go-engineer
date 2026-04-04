@@ -109,4 +109,8 @@ func main() {
 	// - Each closure instance maintains its own state
 	// - Functions are first-class: store them in variables, pass them around
 	// - Anonymous functions are essential for goroutines (Section 09)
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FE.3 variadic functions")
+	fmt.Println("   Current: FE.2 (closures &amp; recursion)")
+	fmt.Println("---------------------------------------------------")
 }

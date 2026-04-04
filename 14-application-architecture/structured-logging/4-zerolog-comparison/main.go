@@ -4,6 +4,7 @@
 package main
 
 import (
+	"fmt"
 	"log/slog"
 	"os"
 	"time"
@@ -50,7 +51,7 @@ import (
 //       To use zerolog for real, add: go get github.com/rs/zerolog
 //       Then change the import and use the chain API shown in comments below.
 //
-// RUN: go run ./23-structured-logging/4-zerolog-comparison
+// RUN: go run ./14-application-architecture/structured-logging/4-zerolog-comparison
 // ============================================================================
 
 // zeroLogEquivalent shows zerolog patterns alongside their slog equivalents.
@@ -150,4 +151,8 @@ func main() {
 	// - Default choice: slog. It is fast enough for 99% of services.
 	// - Reach for zerolog ONLY after pprof confirms logging is the bottleneck.
 	// - Never add a dependency to solve a problem you haven't measured.
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GR.1 proto definition + gen")
+	fmt.Println("   Current: SL.4 (zerolog comparison)")
+	fmt.Println("---------------------------------------------------")
 }

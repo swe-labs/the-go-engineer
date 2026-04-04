@@ -36,7 +36,7 @@ import "fmt"
 //   Composition keeps each piece independent and swappable.
 //   Go has NO class inheritance. Period. Composition is the way.
 //
-// RUN: go run ./06-composition-and-embedding/1-composition
+// RUN: go run ./06-composition/06-composition-and-embedding/1-composition
 // ============================================================================
 
 // --- COMPONENT TYPES (small, focused, reusable) ---
@@ -177,4 +177,8 @@ func main() {
 	fmt.Println("  - Composed types access component methods via dot: w.Location.String()")
 	fmt.Println("  - Components are reusable across many different parent types")
 	fmt.Println("  - Next lesson: Embedding (promoted methods for cleaner syntax)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CO.2 embedding")
+	fmt.Println("   Current: CO.1 (composition)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -110,4 +110,8 @@ func main() {
 	// - Named returns are useful for documentation but use naked returns sparingly
 	// - nil error means success; non-nil error means something went wrong
 	// - This pattern replaces try/catch exceptions found in other languages
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FE.5 custom errors")
+	fmt.Println("   Current: FE.4 (multiple return values)")
+	fmt.Println("---------------------------------------------------")
 }

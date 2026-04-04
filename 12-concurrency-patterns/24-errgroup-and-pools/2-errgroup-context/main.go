@@ -41,7 +41,7 @@ import (
 //     cancel := func() { once.Do(func() { close(done) }) }
 //     // ... 20 lines of error propagation ...
 //
-// RUN: go run ./24-errgroup-and-pools/2-errgroup-context
+// RUN: go run ./12-concurrency-patterns/24-errgroup-and-pools/2-errgroup-context
 // ============================================================================
 
 // WorkItem represents a URL to be crawled.
@@ -199,4 +199,8 @@ func main() {
 	// - Separate goroutine closes the results channel after g.Wait()
 	// - ctx.Done() in select cases makes goroutines respond to cancellation
 	// - This replaces hundreds of lines of manual done-channel machinery
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CP.3 sync.Pool")
+	fmt.Println("   Current: CP.2 (errgroup + context)")
+	fmt.Println("---------------------------------------------------")
 }

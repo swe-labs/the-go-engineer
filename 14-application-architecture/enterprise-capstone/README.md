@@ -44,3 +44,9 @@ curl -X POST -H "Authorization: Bearer <ID_FROM_LOGIN>" -H "Content-Type: applic
 # View Posts
 curl http://localhost:8080/posts
 ```
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |

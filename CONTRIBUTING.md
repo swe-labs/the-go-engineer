@@ -43,6 +43,10 @@ func main() {
     // KEY TAKEAWAY:
     // - Summary point 1
     // - Summary point 2
+    fmt.Println("\n---------------------------------------------------")
+    fmt.Println("🚀 NEXT UP: SS.N next-lesson-name")
+    fmt.Println("   Current: SS.N (current-lesson-name)")
+    fmt.Println("---------------------------------------------------")
 }
 ```
 
@@ -70,15 +74,17 @@ func main() {
 
 1. Create a directory: `NN-section-name/N-lesson-name/`
 2. Create `main.go` following the template above
-3. Update the section's `README.md` with the new lesson in the contents table
-4. Update the root `README.md` if adding a new section
-5. Verify: `make build && make test && make lint`
+3. Update the section's `README.md` with the new lesson in the `Learning Path` table
+4. Update `curriculum.json` with the new lesson ID, concept, and prerequisites
+5. Run `go run scripts/validate_curriculum.go` to verify the mapping
+6. Update the root `README.md` if adding a new section
+7. Verify: `make build && make test && make lint`
 
 ## Adding an Exercise
 
 Exercises include both complete solutions and starter stubs:
 
-```
+```text
 NN-section-name/
 └── N-exercise-name/
     ├── main.go              ← Complete solution with comments
@@ -88,16 +94,16 @@ NN-section-name/
 
 The `_starter/main.go` should:
 
-- Have the same file header and REQUIREMENTS checklist
-- Contain function signatures with `// TODO: implement this` bodies
-- Compile successfully (return zero-values from stubs)
-- Print a message directing students to the requirements
+1. Have the same file header and REQUIREMENTS checklist
+2. Contain function signatures with `// TODO: implement this` bodies
+3. Compile successfully (return zero-values from stubs)
+4. Print a message directing students to the requirements
 
 ## Commit Messages
 
 Use clear, descriptive commit messages:
 
-```
+```text
 Add: Section 17 Context deep-dive (4 lessons)
 Fix: go vet warning in 07-strings formatting
 Update: Backfill comments in Section 02 control flow
@@ -111,7 +117,9 @@ Before submitting, verify:
 - [ ] `make vet` passes (no suspicious code)
 - [ ] `make fmt-check` passes (code is formatted)
 - [ ] `make test` passes (all tests pass)
+- [ ] `go run scripts/validate_curriculum.go` passes
 - [ ] Every new Go file has the standard header template
+- [ ] Every new Go file has the "NEXT UP" footer
 - [ ] Every concept has inline teaching comments
-- [ ] The section README is updated
+- [ ] The section README is updated with the ID-based table
 - [ ] CI pipeline passes on push (GitHub Actions)

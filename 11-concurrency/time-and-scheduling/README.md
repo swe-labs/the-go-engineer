@@ -24,3 +24,15 @@ Build a countdown reminder that uses `time.NewTicker` and `time.AfterFunc`. Try 
 go run ./15-time-and-scheduling/7-reminder/_starter 5 "Break time!"  # Try the exercise
 go run ./15-time-and-scheduling/7-reminder 5 "Break time!"           # See the solution
 ```
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| TM.1 | [time basics](./1-time) | time.Time · Duration · Add · Sub · wall vs monotonic clock | 🟢 entry |
+| TM.2 | [formatting](./2-formatting) | Reference Time "2006-01-02 15:04:05" · Parse · RFC3339 | TM.1 |
+| TM.3 | [timers &amp; tickers](./3-timer-and-ticker) | time.NewTimer · time.NewTicker · &lt;-C · ticker.Stop() leak | TM.1, TM.2 |
+| TM.4 | [random numbers](./4-random) | rand/v2 · IntN · Shuffle · Perm · seeded PCG | TM.1 |
+| TM.5 | [scheduler](./5-schedule) | Actor model · ScheduleOnce · ScheduleInterval · StopAll drain | TM.3 |
+| TM.6 | [timezones](./6-timezone) | time.LoadLocation · IANA database · In() · always store UTC | TM.1, TM.2 |

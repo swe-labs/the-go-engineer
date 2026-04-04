@@ -22,7 +22,7 @@ package main
 //   You simply write down what that specific reference time would look like
 //   in your desired format, and the engine tokenizes it underneath.
 //
-// RUN: go run ./15-time-and-scheduling/2-formatting
+// RUN: go run ./11-concurrency/time-and-scheduling/2-formatting
 // ============================================================================
 
 import (
@@ -65,7 +65,10 @@ func main() {
 			parsedTimeRFC, parsedTimeRFC.Location(), getOffsetInSeconds(parsedTimeRFC))
 		fmt.Printf("Parsed RFC3339 (in UTC): %s\n", parsedTimeRFC.UTC())
 	}
-
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: TM.3 timers &amp; tickers")
+	fmt.Println("   Current: TM.2 (formatting)")
+	fmt.Println("---------------------------------------------------")
 }
 
 func getOffsetInSeconds(t time.Time) int {

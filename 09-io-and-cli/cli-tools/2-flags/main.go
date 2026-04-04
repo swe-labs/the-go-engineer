@@ -2,7 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./19-cli-tools/2-flags
+// RUN: go run ./09-io-and-cli/cli-tools/2-flags
 package main
 
 import (
@@ -92,4 +92,8 @@ func main() {
 	// - flag functions return pointers — dereference with *
 	// - -help is auto-generated from your flag definitions
 	// - For complex CLIs with subcommands, see 3-subcommands/
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CL.3 subcommands")
+	fmt.Println("   Current: CL.2 (flags)")
+	fmt.Println("---------------------------------------------------")
 }

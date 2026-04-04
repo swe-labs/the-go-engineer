@@ -1,7 +1,7 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
-// RUN: go run ./26-grpc/1-unary/client
+// RUN: go run ./14-application-architecture/grpc/1-unary/client
 package main
 
 import (
@@ -141,6 +141,10 @@ func main() {
 		Quantity:   0,
 	})
 	handleGRPCError(logger, "CreateOrder (invalid)", err)
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GS.1 signal.NotifyContext")
+	fmt.Println("   Current: GR.3 (unary client)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // handleGRPCError extracts the gRPC status code and message from an error.

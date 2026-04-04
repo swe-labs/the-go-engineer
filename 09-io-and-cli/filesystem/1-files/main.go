@@ -45,7 +45,7 @@ import (
 //   0755 = owner: all (7), group: read+execute (5), others: read+execute (5)
 //   The first 0 means it's an octal number (base 8).
 //
-// RUN: go run ./10-filesystem/1-files
+// RUN: go run ./09-io-and-cli/filesystem/1-files
 // ============================================================================
 
 func main() {
@@ -170,6 +170,10 @@ func main() {
 	fmt.Println("  - os.Create: new file or truncate existing (CAUTION: erases!)")
 	fmt.Println("  - ALWAYS defer file.Close() after opening a file")
 	fmt.Println("  - File permissions: 0644 (read-write owner, read others)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FS.2 paths")
+	fmt.Println("   Current: FS.1 (files)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // readLineByLine demonstrates the bufio.Scanner pattern.

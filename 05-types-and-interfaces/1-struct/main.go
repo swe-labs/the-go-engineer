@@ -151,4 +151,8 @@ func main() {
 	// - Use NewX() constructors to ensure valid initial state
 	// - Structs are value types: assignment creates a COPY
 	// - Use pointers (&server) when you need to modify the original
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: TI.2 methods")
+	fmt.Println("   Current: TI.1 (structs)")
+	fmt.Println("---------------------------------------------------")
 }

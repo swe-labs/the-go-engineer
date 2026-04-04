@@ -32,7 +32,7 @@ import (
 //   misconfigure your dependencies, it won't even compile. You catch
 //   infrastructure failures during `go build` rather than mid-flight at runtime.
 //
-// RUN: go run ./13-web-masterclass/2-dependency-injection
+// RUN: go run ./10-web-and-database/web-masterclass/2-dependency-injection
 // ============================================================================
 
 // config holds application configuration
@@ -83,6 +83,10 @@ func main() {
 	)
 
 	log.Fatal(http.ListenAndServe(app.config.port, mux))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.3 templates")
+	fmt.Println("   Current: WM.2 (dependency injection)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // handleHome is a method on *application, NOT a standalone function.

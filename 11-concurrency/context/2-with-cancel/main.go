@@ -31,7 +31,7 @@ import (
 //   signal to all children in the array, and then removes itself from the parent
 //   to allow the Garbage Collector to sweep the dead goroutines.
 //
-// RUN: go run ./17-context/2-with-cancel
+// RUN: go run ./11-concurrency/context/2-with-cancel
 // ============================================================================
 
 func main() {
@@ -100,6 +100,10 @@ func main() {
 	fmt.Println("  5. Forgetting cancel() causes GOROUTINE LEAKS (memory leak)")
 	fmt.Println()
 	fmt.Println("   Next: go run ./17-context/3-with-timeout")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CT.3 WithTimeout")
+	fmt.Println("   Current: CT.2 (WithCancel)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // worker simulates a long-running task that checks for cancellation.

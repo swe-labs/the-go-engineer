@@ -24,7 +24,7 @@ package main
 //   keeps it in the global min-heap forever, causing massive memory leaks in
 //   long-running daemons!
 //
-// RUN: go run ./15-time-and-scheduling/3-timer-and-ticker
+// RUN: go run ./11-concurrency/time-and-scheduling/3-timer-and-ticker
 // ============================================================================
 
 import (
@@ -48,6 +48,10 @@ func main() {
 			return
 		}
 	}
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: TM.5 scheduler")
+	fmt.Println("   Current: TM.3 (timers &amp; tickers)")
+	fmt.Println("---------------------------------------------------")
 }
 
 func timerExample() {

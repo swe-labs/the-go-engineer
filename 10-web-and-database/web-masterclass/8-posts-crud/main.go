@@ -40,7 +40,7 @@ import (
 //   fires a cancellation signal to the database engine via the socket, killing the
 //   heavy query mid-flight! This prevents massive resource exhaustion attacks.
 //
-// RUN: go run ./13-web-masterclass/8-posts-crud
+// RUN: go run ./10-web-and-database/web-masterclass/8-posts-crud
 // ============================================================================
 
 // Post represents a blog post.
@@ -187,6 +187,10 @@ func main() {
 	fmt.Println("   GET  /api/posts/{id}   — Get a post by ID")
 	fmt.Println("   GET  /api/posts?page=1 — List posts (paginated)")
 	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.9 pagination")
+	fmt.Println("   Current: WM.8 (posts CRUD)")
+	fmt.Println("---------------------------------------------------")
 }
 
 func (app *application) handleCreatePost(w http.ResponseWriter, r *http.Request) {

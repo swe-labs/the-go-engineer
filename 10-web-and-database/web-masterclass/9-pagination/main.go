@@ -35,7 +35,7 @@ import (
 //   Offsets entirely and use "Cursor Pagination" (`WHERE id > ? LIMIT 10`), taking
 //   advantage of sub-millisecond O(log N) B-Tree Primary Key index seeks!
 //
-// RUN: go run ./13-web-masterclass/9-pagination
+// RUN: go run ./10-web-and-database/web-masterclass/9-pagination
 // ============================================================================
 
 // Metadata holds pagination information for API responses.
@@ -141,4 +141,8 @@ func main() {
 
 	fmt.Println("Pagination demo: http://localhost:8080/api/items?page=1&page_size=10")
 	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.10 comments")
+	fmt.Println("   Current: WM.9 (pagination)")
+	fmt.Println("---------------------------------------------------")
 }

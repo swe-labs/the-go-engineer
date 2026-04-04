@@ -9,7 +9,7 @@ package main
 // Level: Advanced
 // ============================================================================
 //
-// RUN: go run ./10-filesystem/6-io-patterns
+// RUN: go run ./09-io-and-cli/filesystem/6-io-patterns
 // ============================================================================
 
 import (
@@ -76,6 +76,10 @@ func main() {
 
 	// 7. Custom Reader — implement the interface yourself
 	customReaderDemo()
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: ⭐ FS.8 fs.FS testing seam")
+	fmt.Println("   Current: FS.6 (io.Reader / io.Writer patterns)")
+	fmt.Println("---------------------------------------------------")
 }
 
 func readerFromString() {

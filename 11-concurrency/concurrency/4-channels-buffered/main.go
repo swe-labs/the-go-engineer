@@ -37,7 +37,7 @@ import (
 //   - cap(ch) returns the buffer capacity
 //   - len(ch) returns the number of items currently in the buffer
 //
-// RUN: go run ./09-concurrency/4-channels-buffered
+// RUN: go run ./11-concurrency/concurrency/4-channels-buffered
 // ============================================================================
 
 // logEvent represents a system event to be processed asynchronously.
@@ -122,4 +122,8 @@ func main() {
 	fmt.Println("  - Use buffered channels to decouple fast producers from slow consumers")
 	fmt.Println("  - Buffer size should be tuned based on throughput needs")
 	fmt.Println("  - When in doubt, start unbuffered — add buffer only for performance")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GC.5 closing channels")
+	fmt.Println("   Current: GC.4 (buffered channels)")
+	fmt.Println("---------------------------------------------------")
 }

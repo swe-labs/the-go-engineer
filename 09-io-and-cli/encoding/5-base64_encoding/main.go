@@ -37,7 +37,7 @@ import (
 //   Why use it? Many protocols (HTTP headers, JSON, Email) were designed for text.
 //   Base64 lets you safely transport binary data (images, tokens) over text channels.
 //
-// RUN: go run ./11-encoding/5-base64_encoding
+// RUN: go run ./09-io-and-cli/encoding/5-base64_encoding
 // ============================================================================
 
 func main() {
@@ -111,4 +111,8 @@ func main() {
 	fmt.Println("  - base64.StdEncoding for JSON, Headers, General purpose")
 	fmt.Println("  - base64.URLEncoding for tokens inside URLs (swaps +/ for -_)")
 	fmt.Println("  - Base64 increases data size by exactly 33%")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CL.1 args")
+	fmt.Println("   Current: EN.5 (Base64)")
+	fmt.Println("---------------------------------------------------")
 }

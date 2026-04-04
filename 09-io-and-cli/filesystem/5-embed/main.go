@@ -37,7 +37,7 @@ import (
 //   standalone. You can ship a web server with all HTML, CSS, and JS
 //   inside a single executable! No more "missing template" errors in production.
 //
-// RUN: go run ./10-filesystem/5-embed
+// RUN: go run ./09-io-and-cli/filesystem/5-embed
 // ============================================================================
 
 // --- 1. Embed as a string ---
@@ -114,4 +114,8 @@ func main() {
 	fmt.Println("  - Use `string` or `[]byte` for single files.")
 	fmt.Println("  - Use `embed.FS` for directories (great for web server assets).")
 	fmt.Println("  - Solves the 'works on my machine but missing files in prod' problem.")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: ⭐ FS.8 fs.FS testing seam")
+	fmt.Println("   Current: FS.5 (embed)")
+	fmt.Println("---------------------------------------------------")
 }

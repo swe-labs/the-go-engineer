@@ -2,7 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./19-cli-tools/3-subcommands
+// RUN: go run ./09-io-and-cli/cli-tools/3-subcommands
 package main
 
 import (
@@ -61,6 +61,10 @@ func main() {
 		printUsage()
 		os.Exit(1)
 	}
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: DB.1 connecting")
+	fmt.Println("   Current: CL.3 (subcommands)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // --- SUBCOMMAND: greet ---

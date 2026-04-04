@@ -51,7 +51,7 @@ import (
 //   Any code that accepts fs.FS works with ALL of them — real disk, embedded binary,
 //   or in-memory test fixture. This is the io.Reader pattern applied to filesystems.
 //
-// RUN: go run ./10-filesystem/8-fs-testing-seam
+// RUN: go run ./09-io-and-cli/filesystem/8-fs-testing-seam
 // ============================================================================
 
 // SearchResult holds one matching line from the log search.
@@ -172,4 +172,8 @@ KEY TAKEAWAY:
   - fs.WalkDir, fs.ReadFile, fs.Glob all work with any fs.FS implementation
   - embed.FS from Section 10/5 also implements fs.FS — reuse the same code
 `)
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: EN.1 JSON marshalling")
+	fmt.Println("   Current: FS.8 (fs.FS testing seam)")
+	fmt.Println("---------------------------------------------------")
 }

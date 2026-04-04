@@ -108,4 +108,8 @@ func main() {
 	//   2. for condition { }                — while-style
 	//   3. for { }                          — infinite loop
 	//   4. for index, value := range x { }  — iterate collections
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CF.2 if / else")
+	fmt.Println("   Current: CF.1 (for loop)")
+	fmt.Println("---------------------------------------------------")
 }

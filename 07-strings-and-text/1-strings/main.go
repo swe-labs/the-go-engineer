@@ -126,4 +126,8 @@ func main() {
 	fmt.Println("  - strings.Builder for efficient loop concatenation (not +)")
 	fmt.Println("  - strings.Contains/HasPrefix/HasSuffix for searching")
 	fmt.Println("  - strings.ReplaceAll for template-like substitutions")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: ST.2 formatting")
+	fmt.Println("   Current: ST.1 (strings)")
+	fmt.Println("---------------------------------------------------")
 }

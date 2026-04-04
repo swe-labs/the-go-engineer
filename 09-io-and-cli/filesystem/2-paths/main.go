@@ -38,7 +38,7 @@ import (
 //   filepath.Join automatically uses the correct separator for the OS.
 //   NEVER hardcode "/" or "\" in path strings — your code will break on other OSes.
 //
-// RUN: go run ./10-filesystem/2-paths
+// RUN: go run ./09-io-and-cli/filesystem/2-paths
 // ============================================================================
 
 func main() {
@@ -121,4 +121,8 @@ func main() {
 	fmt.Println("  - filepath.Clean normalizes messy paths (resolves . and ..)")
 	fmt.Println("  - filepath.Abs converts relative to absolute path")
 	fmt.Println("  - filepath is cross-platform — works on Linux, macOS, AND Windows")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FS.3 directories")
+	fmt.Println("   Current: FS.2 (paths)")
+	fmt.Println("---------------------------------------------------")
 }

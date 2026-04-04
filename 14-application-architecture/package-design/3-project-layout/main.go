@@ -27,7 +27,7 @@ import "fmt"
 //   layer structs won't leak into the public API boundaries of users importing
 //   your module!
 //
-// RUN: go run ./18-package-design/3-project-layout
+// RUN: go run ./14-application-architecture/package-design/3-project-layout
 // ============================================================================
 
 func main() {
@@ -128,4 +128,8 @@ func main() {
 	fmt.Println("  3. pkg/ is optional — only for code you intend to share publicly")
 	fmt.Println("  4. Tests live NEXT TO the code they test (user.go → user_test.go)")
 	fmt.Println("  5. Don't cargo-cult complex layouts for small projects")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: SL.1 slog basics")
+	fmt.Println("   Current: PD.3 (project layout)")
+	fmt.Println("---------------------------------------------------")
 }

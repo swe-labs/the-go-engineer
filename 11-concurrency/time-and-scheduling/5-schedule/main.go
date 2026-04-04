@@ -23,7 +23,7 @@ package main
 //   a signal to every child's `stopChan`, and safely blocks until the `WaitGroup`
 //   counter hits zero. This guarantees zero zombie processes during deployments!
 //
-// RUN: go run ./15-time-and-scheduling/5-schedule
+// RUN: go run ./11-concurrency/time-and-scheduling/5-schedule
 // ============================================================================
 
 import (
@@ -217,5 +217,8 @@ func main() {
 	//time.AfterFunc(5*time.Second, scheduler.StopAll)
 
 	scheduler.globalWg.Wait()
-
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: TM.6 timezones")
+	fmt.Println("   Current: TM.5 (scheduler)")
+	fmt.Println("---------------------------------------------------")
 }

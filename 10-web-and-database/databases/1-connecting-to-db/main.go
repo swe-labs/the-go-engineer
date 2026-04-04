@@ -34,7 +34,7 @@ import (
 //   LAZILY the very first time you execute a query or call `db.Ping()`.
 //   Go manages this connection pool for you implicitly in the background.
 //
-// RUN: go run ./12-databases/1-connecting-to-db
+// RUN: go run ./10-web-and-database/databases/1-connecting-to-db
 // ============================================================================
 
 var schema = `
@@ -95,4 +95,8 @@ func main() {
 	// - Import DB drivers with `_` to register them invisibly.
 	// - `sql.Open` is lazy. It doesn't connect until you `Ping()`.
 	// - `db.Exec` runs queries that don't return data.
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: DB.2 query — INSERT")
+	fmt.Println("   Current: DB.1 (connecting)")
+	fmt.Println("---------------------------------------------------")
 }

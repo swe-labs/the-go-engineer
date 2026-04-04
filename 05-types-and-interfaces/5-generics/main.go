@@ -161,4 +161,8 @@ func main() {
 	fmt.Println("  - Custom constraints (int | float64) restrict to specific types")
 	fmt.Println("  - Use generics for data structures, algorithms, utilities")
 	fmt.Println("  - Use interfaces for behavior abstraction (polymorphism)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CO.1 composition")
+	fmt.Println("   Current: TI.5 (generics)")
+	fmt.Println("---------------------------------------------------")
 }

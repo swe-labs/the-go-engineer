@@ -38,7 +38,7 @@ import (
 //   to a different folder on the same disk is instantaneous—the OS just rewrites
 //   a 16-byte inode pointer; it doesn't move any actual data!
 //
-// RUN: go run ./10-filesystem/3-dir
+// RUN: go run ./09-io-and-cli/filesystem/3-dir
 // ============================================================================
 
 func main() {
@@ -169,4 +169,8 @@ func main() {
 	fmt.Println("  - os.Stat + os.IsNotExist checks if path exists")
 	fmt.Println("  - os.RemoveAll recursively deletes directory and all contents")
 	fmt.Println("  - Always use filepath.Join for cross-platform paths")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FS.4 temp files")
+	fmt.Println("   Current: FS.3 (directories)")
+	fmt.Println("---------------------------------------------------")
 }

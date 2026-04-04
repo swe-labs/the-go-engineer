@@ -41,7 +41,7 @@ import (
 //   database connection for absolutely no reason. NEVER do slow non-DB work
 //   inside an active SQL Transaction.
 //
-// RUN: go run ./12-databases/5-transactions
+// RUN: go run ./10-web-and-database/databases/5-transactions
 // ============================================================================
 
 var profileSchema = `
@@ -75,6 +75,10 @@ func main() {
 	} else {
 		fmt.Printf("✅ Transaction Succeeded! Created User %d + Profile\n", userID)
 	}
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.1 routing")
+	fmt.Println("   Current: DB.5 (transactions)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // createUserWithProfile demonstrates the canonical Go Transaction pattern.

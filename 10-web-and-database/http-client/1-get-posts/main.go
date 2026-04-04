@@ -34,7 +34,7 @@ import (
 //   If the server is hanging, your Goroutine will hang FOREVER.
 //   In production, ALWAYS create a custom `http.Client` with a timeout.
 //
-// RUN: go run ./16-http-clients-and-mocking/1-get-posts
+// RUN: go run ./10-web-and-database/http-client/1-get-posts
 // ============================================================================
 
 type RemoteDevice struct {
@@ -126,4 +126,8 @@ func main() {
 	fmt.Println("  - Use json.NewDecoder(resp.Body) to stream-parse the response.")
 	fmt.Println("  - Hardcoded http.Get calls make your function impossible to unit test!")
 	fmt.Println("  - (Proceed to 2-refactor-for-testability to see the solution)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: HC.2 refactor for testability")
+	fmt.Println("   Current: HC.1 (basic GET)")
+	fmt.Println("---------------------------------------------------")
 }

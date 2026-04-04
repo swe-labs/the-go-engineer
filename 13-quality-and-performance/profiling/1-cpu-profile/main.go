@@ -44,7 +44,7 @@ import (
 //   "flat" time: time spent executing this function (not its callees)
 //   "cum" (cumulative) time: time in this function + everything it calls
 //
-// RUN: go run ./25-profiling/1-cpu-profile
+// RUN: go run ./13-quality-and-performance/profiling/1-cpu-profile
 // ============================================================================
 
 // ============================================================================
@@ -178,4 +178,8 @@ KEY TAKEAWAY:
   - "flat" time = in this function; "cum" time = this function + callees
   - Top anti-patterns found via pprof: regex-in-loop, string +, json on large structs
 `)
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: PR.2 live pprof endpoint")
+	fmt.Println("   Current: PR.1 (CPU profile)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -43,7 +43,7 @@ import (
 //   (removes it from the OS thread) and schedules another goroutine.
 //   This is a userspace context switch — ~10ns vs ~1μs for OS threads.
 //
-// RUN: go run ./09-concurrency/3-channels
+// RUN: go run ./11-concurrency/concurrency/3-channels
 // ============================================================================
 
 // ScanResult represents the result of scanning a server port.
@@ -170,4 +170,8 @@ func main() {
 	fmt.Println("  - Use chan<- (send-only) and <-chan (receive-only) for safety")
 	fmt.Println("  - close(ch) signals all receivers that no more values are coming")
 	fmt.Println("  - Channels replace shared memory + mutexes for most use cases")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GC.4 buffered channels")
+	fmt.Println("   Current: GC.3 (channels (unbuffered))")
+	fmt.Println("---------------------------------------------------")
 }

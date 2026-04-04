@@ -159,4 +159,8 @@ func main() {
 	// - Use errors.As() to extract typed errors through wrapped chains
 	// - Use errors.Join() when you have multiple independent errors
 	// - NEVER match error strings — they break when errors are wrapped
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FE.7 defer")
+	fmt.Println("   Current: FE.6 (error wrapping)")
+	fmt.Println("---------------------------------------------------")
 }

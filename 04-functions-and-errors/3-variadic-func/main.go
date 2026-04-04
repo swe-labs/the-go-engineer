@@ -92,4 +92,8 @@ func main() {
 	// - Inside the function, the variadic parameter is a regular slice
 	// - Use slice... to spread an existing slice into a variadic call
 	// - This pattern replaces default/optional parameters (which Go doesn't have)
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FE.4 multiple return values")
+	fmt.Println("   Current: FE.3 (variadic functions)")
+	fmt.Println("---------------------------------------------------")
 }

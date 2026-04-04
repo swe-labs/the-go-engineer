@@ -21,7 +21,7 @@ package main
 //   which completely eradicated the lock, utilizing the much faster ChaCha8 and PCG
 //   algorithms. It is radically faster and structurally avoids global contention.
 //
-// RUN: go run ./15-time-and-scheduling/4-random
+// RUN: go run ./11-concurrency/time-and-scheduling/4-random
 // ============================================================================
 
 import (
@@ -71,4 +71,8 @@ func main() {
 	for i := 0; i < 3; i++ {
 		fmt.Printf("  IntN(100): %d, Float64: %.4f\n", rng3.IntN(100), rng3.Float64())
 	}
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: TM.5 scheduler")
+	fmt.Println("   Current: TM.4 (random numbers)")
+	fmt.Println("---------------------------------------------------")
 }

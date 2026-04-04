@@ -31,3 +31,16 @@ The `io.Reader` and `io.Writer` interfaces are the beating heart of Go's standar
 3. **Stream target contents:** When you open a valid file, do not load the whole file. Initialize a `bufio.Scanner` attached to the file reader.
    - *Hint:* By reading line-by-line via `scanner.Scan()`, the program consumes mere kilobytes of RAM, safely navigating logs of any size!
 4. **Log the results:** Print the Line Number and Line Content whenever a target regex string matches.
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| FS.1 | [files](./1-files) | os.WriteFile · os.ReadFile · bufio.Scanner · os.OpenFile flags | 🟢 entry |
+| FS.2 | [paths](./2-paths) | filepath.Join · Base · Dir · Ext · Abs · Clean · Glob | FS.1 |
+| FS.3 | [directories](./3-dir) | MkdirAll · ReadDir · WalkDir · RemoveAll · os.Stat | FS.1, FS.2 |
+| FS.4 | [temp files](./4-temp) | MkdirTemp · CreateTemp · unique names · immediate defer | FS.1, FS.3 |
+| FS.5 | [embed](./5-embed) | //go:embed · string/[]byte · embed.FS · single-binary deployment | FS.3, FS.4 |
+| FS.6 | [io.Reader / io.Writer patterns](./6-io-patterns) | strings.Reader · bytes.Buffer · io.Copy · TeeReader · MultiWriter | FS.1, FS.2, FS.3 |
+| **FS.8** ⭐ | [fs.FS testing seam](./8-fs-testing-seam) | os.DirFS · fstest.MapFS · zero-disk-IO tests | FS.5, FS.6 |

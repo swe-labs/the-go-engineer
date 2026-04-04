@@ -34,3 +34,11 @@ defer stop()
 - [signal.NotifyContext](https://pkg.go.dev/os/signal#NotifyContext)
 - [http.Server.Shutdown](https://pkg.go.dev/net/http#Server.Shutdown)
 - [Go Blog: Graceful Shutdown](https://go.dev/doc/articles/wiki/)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| GS.1 | [signal.NotifyContext](./1-signal-context) | SIGTERM · SIGINT · ctx cancel on signal · second Ctrl+C force-kill | 🟢 entry |
+| GS.2 | [HTTP graceful drain](./2-http-server) | http.Server.Shutdown · ErrServerClosed · 30s deadline · readiness 503 | GS.1 |

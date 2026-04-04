@@ -26,7 +26,7 @@ import "fmt"
 //   logic. This is one of the hundreds of micro-optimizations that makes the Go
 //   compiler legendary for its compilation speed.
 //
-// RUN: go run ./18-package-design/2-visibility
+// RUN: go run ./14-application-architecture/package-design/2-visibility
 // ============================================================================
 
 // --- EXPORT RULES ---
@@ -131,4 +131,8 @@ func main() {
 	fmt.Println("  3. Use constructors (NewX) to validate on creation")
 	fmt.Println("  4. Use getters for controlled access to internal state")
 	fmt.Println("  5. Once exported, it's part of your API — removing it is a breaking change")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: PD.3 project layout")
+	fmt.Println("   Current: PD.2 (visibility)")
+	fmt.Println("---------------------------------------------------")
 }

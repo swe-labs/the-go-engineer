@@ -37,7 +37,7 @@ import (
 //   their respective parent's memory address. This instantly constructs an n-ary
 //   tree out of a flat array with zero recursion overhead!
 //
-// RUN: go run ./13-web-masterclass/10-comments
+// RUN: go run ./10-web-and-database/web-masterclass/10-comments
 // ============================================================================
 
 // Comment represents a single comment on a post.
@@ -174,4 +174,8 @@ func main() {
 
 	fmt.Println("Comments API: http://localhost:8080/api/posts/1/comments")
 	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: HC.1 basic GET")
+	fmt.Println("   Current: WM.10 (comments)")
+	fmt.Println("---------------------------------------------------")
 }

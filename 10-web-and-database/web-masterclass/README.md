@@ -74,3 +74,19 @@ Request → secureHeaders → logRequest → recoverPanic → Router → Handler
 - [Let's Go by Alex Edwards](https://lets-go.alexedwards.net/)
 - [Go 1.22 HTTP Routing Enhancements](https://go.dev/blog/routing-enhancements)
 - [Writing Web Applications (Official)](https://go.dev/doc/articles/wiki/)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| WM.1 | [routing](./1-routing) | http.NewServeMux · method patterns · {param} · HandleFunc | 🟢 entry |
+| WM.2 | [dependency injection](./2-dependency-injection) | application struct · constructor · handler methods on struct | WM.1 |
+| WM.3 | [templates](./3-templates) | html/template · cache once · layout + partials + page | WM.1, WM.2 |
+| WM.4 | [middleware](./4-middleware) | func(http.Handler) http.Handler · chain · panic recovery | WM.1, WM.2, WM.3 |
+| WM.5 | [sessions](./5-sessions) | Cookie-based sessions · flash messages · session store | WM.1, WM.2, WM.3, WM.4 |
+| WM.6 | [authentication](./6-auth) | bcrypt · requireAuth middleware · context.WithValue user ID | WM.1, WM.2, WM.4, WM.5 |
+| WM.7 | [forms](./7-forms) | Form struct · Required · MinLength · MatchesField · Valid() | WM.1, WM.2, WM.4 |
+| WM.8 | [posts CRUD](./8-posts-crud) | PostRepository interface · ExecContext · pagination offset | WM.1, WM.2, WM.4, WM.6, WM.7 |
+| WM.9 | [pagination](./9-pagination) | computeMetadata · LIMIT/OFFSET · HasNext/HasPrev · links | WM.8 |
+| WM.10 | [comments](./10-comments) | Adjacency list · 2-pass tree build · sync.RWMutex store | WM.8, WM.9 |

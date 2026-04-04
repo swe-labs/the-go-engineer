@@ -24,7 +24,7 @@ import "fmt"
 //   using method receivers (like the `String()` method), blending standard
 //   constants directly into Go's powerful Interface ecosystem smoothly.
 //
-// RUN: go run ./01-language-basics/3-enums
+// RUN: go run ./01-core-foundations/language-basics/3-enums
 // ============================================================================
 
 // --- BASIC IOTA: Auto-incrementing Constants ---
@@ -116,4 +116,8 @@ func main() {
 	// - Always use a named type (like LogLevel) for production enums.
 	// - Add a String() method so your enums print readable names.
 	// - Start at iota+1 when 0 should mean "unset/unknown".
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CF.1 for loop")
+	fmt.Println("   Current: LB.3 (enums / iota)")
+	fmt.Println("---------------------------------------------------")
 }

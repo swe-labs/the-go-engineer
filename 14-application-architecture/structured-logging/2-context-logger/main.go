@@ -36,7 +36,7 @@ import (
 //   Google's internal style guide mandates option 3. It integrates naturally
 //   with the context-first pattern every I/O function already follows.
 //
-// RUN: go run ./23-structured-logging/2-context-logger
+// RUN: go run ./14-application-architecture/structured-logging/2-context-logger
 //   Then: curl http://localhost:8080/api/orders/42
 // ============================================================================
 
@@ -172,4 +172,8 @@ func main() {
 	// - Middleware injects the request-scoped logger into context ONCE
 	// - All downstream functions use FromContext — no logger parameters needed
 	// - This pattern gives every log line the same request_id automatically
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: SL.3 custom slog.Handler")
+	fmt.Println("   Current: SL.2 (context-keyed logger)")
+	fmt.Println("---------------------------------------------------")
 }

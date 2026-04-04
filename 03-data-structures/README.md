@@ -34,3 +34,14 @@ This section's capstone forces you to manipulate slices and pointers safely.
    - *Hint:* Use `append(slice[:index], slice[index+1:]...)`. Understand that this shifts elements in memory and is an $O(N)$ operation.
 5. **Implement Update:**
    - *Hint:* Pass the contact slice or a specific contact by **Pointer** (`*Contact`) so the modifications stick. Passing by value will only modify a copy!
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| DS.1 | [arrays](./1-array) | Fixed-size contiguous memory · value-type copy | 🟢 entry |
+| DS.2 | [slices](./2-slices) | Slice header · make · append · capacity growth | DS.1 |
+| DS.3 | [maps](./3-maps) | Hash table · O(1) lookup · comma-ok · delete | DS.2 |
+| DS.4 | [pointers](./4-pointers) | &amp; · * · pass-by-value vs reference · nil | DS.1, DS.2 |
+| DS.5 | [slices-2](./5-slices-2) | Sub-slicing · shared backing array · re-allocation trap | DS.2, DS.4 |

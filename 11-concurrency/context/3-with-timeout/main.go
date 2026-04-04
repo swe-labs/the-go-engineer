@@ -30,7 +30,7 @@ import (
 //   deadline arrives, the runtime's timer goroutine fires the context's internal
 //   `cancel()` function, closing the Done() channel and unblocking all waiters.
 //
-// RUN: go run ./17-context/3-with-timeout
+// RUN: go run ./11-concurrency/context/3-with-timeout
 // ============================================================================
 
 func main() {
@@ -112,6 +112,10 @@ func main() {
 	fmt.Println("  3. ALWAYS defer cancel() — even with auto-cancellation")
 	fmt.Println("  4. Check ctx.Err() to distinguish DeadlineExceeded vs Canceled")
 	fmt.Println("  5. PRODUCTION RULE: Never call a DB or API without a timeout context")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CT.4 WithValue")
+	fmt.Println("   Current: CT.3 (WithTimeout)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // slowOperation simulates an operation that takes the specified duration.

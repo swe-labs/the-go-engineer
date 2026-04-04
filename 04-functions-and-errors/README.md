@@ -32,3 +32,17 @@ This project will force you to implement custom error structs and use `errors.Is
 4. **Inspect the Error:** In `main()`, check the returned error.
    - *Hint:* **Do not** use `if err != nil { string matching }`. This is an ANTI-PATTERN.
    - *Hint:* Use `errors.As(err, &myMathErr)` to extract the struct fields safely and idiomatically.
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| FE.1 | [functions](./1-function) | Parameters · return types · pass-by-value | 🟢 entry |
+| FE.2 | [closures &amp; recursion](./2-function-2) | Captured variables · anonymous functions · stack frames | FE.1 |
+| FE.3 | [variadic functions](./3-variadic-func) | ...T syntax · slice internally · spread operator | FE.1, FE.2 |
+| FE.4 | [multiple return values](./4-function-multi-values) | (value, error) convention · named returns · naked return | FE.1, FE.3 |
+| FE.5 | [custom errors](./5-custom-error) | error interface · sentinel errors · errors.Is | FE.4 |
+| FE.6 | [error wrapping](./5b-error-wrapping) | fmt.Errorf %w · errors.As · errors.Join | FE.5 |
+| FE.7 | [defer](./6-defer) | LIFO execution · argument evaluation timing · resource cleanup | FE.1, FE.5 |
+| FE.8 | [panic &amp; recover](./7-panic-recover) | Stack unwinding · recover inside defer only | FE.7 |

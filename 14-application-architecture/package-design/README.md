@@ -45,3 +45,12 @@ go run ./18-package-design/3-project-layout
 - [Effective Go: Package Names](https://go.dev/doc/effective_go#package-names)
 - [Standard Go Project Layout](https://github.com/golang-standards/project-layout)
 - [Go Blog: Package Names](https://go.dev/blog/package-names)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| PD.1 | [naming](./1-naming) | Short lowercase names · no stutter · no utils · name by domain | 🟢 entry |
+| PD.2 | [visibility](./2-visibility) | Uppercase = exported · internal/ compiler enforcement · minimal API | PD.1 |
+| PD.3 | [project layout](./3-project-layout) | cmd/ · internal/ · pkg/ · start flat · anti-patterns | PD.1, PD.2 |

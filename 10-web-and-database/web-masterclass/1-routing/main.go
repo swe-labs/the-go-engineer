@@ -30,7 +30,7 @@ import (
 //   (`GET /posts/{id}`) directly in the standard library! This parses millions of
 //   incoming URLs per second with almost zero memory allocations.
 //
-// RUN: go run ./13-web-masterclass/1-routing
+// RUN: go run ./10-web-and-database/web-masterclass/1-routing
 // VISIT: http://localhost:8080
 // ============================================================================
 
@@ -69,6 +69,10 @@ func main() {
 	// ListenAndServe starts an HTTP server on the given address.
 	// It blocks until the server shuts down or encounters an error.
 	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.2 dependency injection")
+	fmt.Println("   Current: WM.1 (routing)")
+	fmt.Println("---------------------------------------------------")
 }
 
 func handleHome(w http.ResponseWriter, r *http.Request) {

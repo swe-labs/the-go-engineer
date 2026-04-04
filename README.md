@@ -44,51 +44,61 @@ go run ./01-core-foundations/getting-started/2-hello-world
 
 This repository follows a strict **Language → Runtime → IO → Quality → Architecture** progression. Every chapter cleanly decouples concepts by their primary domain.
 
-- `01-core-foundations`: Development environment, syntax basics, constants, variable types.
-- `02-control-flow`: Execution branches, for loops, line-of-sight principle.
-- `03-data-structures`: Deep dives into arrays, slices, maps, pointers, and heap allocations.
-- `04-functions-and-errors`: First-class closures, defer mechanics, and idiomatic error design.
-- `05-types-and-interfaces`: Structs, methods, and duck-typing abstractions.
-- `06-composition`: Achieving flexible architecture through struct embedding.
-- `07-strings-and-text`: UTF-8 internals, regex buffers, and templates.
-- `08-modules-and-packages`: Go modules, versioning, dependency tracking.
-- `09-io-and-cli`: Standard inputs, filesystem traversal, encoding formats (JSON/XML), and flag-driven CLI tools.
-- `10-web-and-database`: SQL migrations, HTTP REST Web Servers, Routing, and raw HTTP Client executions.
-- `11-concurrency`: Goroutine mechanics, waitgroups, channel syncing, time/scheduling logic, context lifetimes.
-- `12-concurrency-patterns`: High efficiency fan-out, errgroup bounds, and zero-allocation sync.Pool.
-- `13-quality-and-performance`: Unit testing arrays, mocking external interfaces, profiling flamegraphs, benchmarking.
-- `14-application-architecture`: Full scale project layers, Docker orchestration, Structured Logging, gRPC protocols.
-- `15-code-generation`: Abstracted tooling via `//go:generate`.
+- `01-core-foundations`: Development environment, syntax basics, constants (GS, LB).
+- `02-control-flow`: Execution branches, for loops (CF).
+- `03-data-structures`: Arrays, slices, maps, pointers (DS).
+- `04-functions-and-errors`: First-class closures, defer, error design (FE).
+- `05-types-and-interfaces`: Structs, methods, interfaces, generics (TI).
+- `06-composition`: Struct embedding (CO).
+- `07-strings-and-text`: UTF-8, regex, templates (ST).
+- `08-modules-and-packages`: Go modules, versioning (MP).
+- `09-io-and-cli`: Filesystem (FS), Encoding (EN), CLI Tools (CL).
+- `10-web-and-database`: Databases (DB), Masterclass (WM), HTTP Client (HC).
+- `11-concurrency`: Goroutines (GC), Context (CT), Time (TM).
+- `12-concurrency-patterns`: errgroup, sync.Pool (CP).
+- `13-quality-and-performance`: Testing (TE), Mocking (HM), Profiling (PR).
+- `14-application-architecture`: Package Design (PD), Logging (SL), gRPC (GR), Shutdown (GS), Capstone (EC).
+- `15-code-generation`: //go:generate (CG).
+
+## Guided Learning Patterns
+
+This curriculum is not just a linear list. It follows specific architectural decisions:
+
+| Pattern | Behavior | Examples |
+| ------- | -------- | -------- |
+| **Linear** | Strictly A → B → C | Control Flow, Composition, gRPC |
+| **Fork/Rejoin** | Independent paths that merge | DS.4 (Pointers) needed by DS.5 only |
+| **Deep Exercise** | Synthesis of all previous prereqs | DS.6, FE.9, TI.6, GC.7 |
+| **Parallel Track** | Non-blocking concurrent subjects | Race conditions run alongside channels |
 
 ## Projects & Exercises
 
 Each module culminates in a hands-on project to test your understanding:
 
-| Chapter | Exercise | Description |
-| ------- | -------- | ----------- |
-| **01** Core Foundations | `language-basics/4-application-logger` | Application Logger with severity levels |
-| **02** Control Flow | `4-pricing-calculator` | Pricing Calculator engine |
-| **03** Data Structures | `6-contact-manager` | Slice-based Contact Manager System |
-| **04** Functions & Errors | `8-error-handling` | Custom mathematical error handling |
-| **05** Types & Interfaces | `6-payroll-processor` | Polymorphic User Payroll Processor |
-| **06** Composition | `3-bank-account` | Bank Account System with deposits/withdrawals |
-| **07** Strings & Text | `6-log-parser` | Log File Parsing System |
-| **09** IO and CLI | `cli-tools/4-file-organizer` | CLI file organizer by extension |
-| **09** IO and CLI | `filesystem/7-log-search` | Directory traversal log search tool |
-| **09** IO and CLI | `encoding/6-config-parser` | JSON config file parser with validation |
-| **10** Web & Database | `databases/6-repository` | CRUD SQLite App using Repository Pattern |
-| **10** Web & Database | `web-masterclass/1-routing/exercise` | Multi-route Bookstore Web API |
-| **11** Concurrency | `concurrency/7-downloader` | Concurrent Multi-File Downloader |
-| **11** Concurrency | `time-and-scheduling/7-reminder` | Console reminder with countdown timer |
-| **11** Concurrency | `context/5-timeout-client` | Timeout-aware HTTP API client |
-| **12** Concurrency Patterns | `4-bounded-pipeline-exercise` | Image resizer with bounded concurrency via `errgroup` |
-| **12** Concurrency Patterns | `5-url-checker-exercise` | URL health checker with zero-alloc pooled clients |
-| **13** Quality & Performance | `http-client-testing/6-testify-mock` | Mocking an external REST API Data Fetcher |
-| **13** Quality & Performance | `profiling/1-cpu-profile` | Profile slow vs fast log processor |
-| **14** Application Architecture | `enterprise-capstone/cmd/api` | **The Multi-Package Docker Enterprise Backend** |
-| **14** Application Architecture | `structured-logging/2-context-logger` | HTTP middleware request-scoped logger extraction |
-| **14** Application Architecture | `grpc/1-unary` | Type-safe OrderService client/server via Interceptors |
-| **14** Application Architecture | `graceful-shutdown/3-capstone` | Complete readiness → HTTP drain → generic shutdown |
+| Chapter | ID | Exercise | Description |
+| ------- | --- | -------- | ----------- |
+| **01** | LB.4 | `language-basics/4-app-logger` | Synthesise types + iota + Stringer |
+| **02** | CF.4 | `4-pricing-calculator` | Map lookups · HasSuffix · switch on bool |
+| **03** | DS.6 | `6-contact-manager` | Secondary index · init() · pointer returns |
+| **04** | FE.9 | `8-error-handling` | Custom struct error · errors.As · defer |
+| **05** | TI.6 | `6-payroll-processor` | Polymorphic slice · embedded interface |
+| **06** | CO.3 | `3-bank-account` | Embedded shadowing |
+| **07** | ST.6 | `6-log-parser` | Regex · scanner · strings.Builder |
+| **09** | FS.7 | `filesystem/7-log-search` | WalkDir filter · Scanner per file |
+| **09** | EN.6 | `encoding/6-config-parser` | Decoder · validate() · zero-value detection |
+| **09** | CL.4 | `cli-tools/4-file-organizer` | --dry-run · ReadDir · Rename |
+| **10** | DB.6  | `databases/6-repository` | SQLite impl · dependency injection |
+| **10** | WM.11 | `enterprise-capstone` | Full production-ready server |
+| **11** | GC.7  | `concurrency/7-downloader` | Semaphore pattern · WaitGroup + channel |
+| **11** | TM.7  | `time-and-scheduling/7-reminder` | AfterFunc · ticker · select |
+| **11** | CT.5  | `context/5-timeout-client` | DeadlineExceeded detection |
+| **12** | CP.4  | `4-bounded-pipeline` | g.SetLimit · g.TryGo · pooled buffers |
+| **12** | CP.5 | `5-url-checker` | Pooled client · sorting by latency |
+| **13** | HM.4 | `http-client-testing/6-testify-mock` | .On/.Return · AssertNumberOfCalls |
+| **13** | PR.1 | `profiling/1-cpu-profile` | flat vs cum · go tool pprof |
+| **14** | SL.5 | `structured-logging/5-exercise` | PII redactor · ReplaceAttr · mapping |
+| **14** | GR.2 | `grpc/1-unary` | Generated interface · interceptors |
+| **14** | GS.3 | `graceful-shutdown/3-capstone` | Signal → ready=503 → drain → order |
 
 ## How to Use This Repository
 

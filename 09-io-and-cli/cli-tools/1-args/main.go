@@ -2,7 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./19-cli-tools/1-args
+// RUN: go run ./09-io-and-cli/cli-tools/1-args
 package main
 
 import (
@@ -108,4 +108,8 @@ func main() {
 	fmt.Println("  4. Exit 0 = success, Exit 1 = error (defers DON'T run after os.Exit)")
 	fmt.Println()
 	fmt.Println("   Next: go run ./19-cli-tools/2-flags -name='Go Mastery' -count=3")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CL.2 flags")
+	fmt.Println("   Current: CL.1 (args)")
+	fmt.Println("---------------------------------------------------")
 }

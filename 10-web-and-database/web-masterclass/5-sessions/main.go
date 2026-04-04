@@ -39,7 +39,7 @@ import (
 // IMPORTANT: This uses a simple in-memory store for learning.
 // In production, use a library like gorilla/sessions or scs.
 //
-// RUN: go run ./13-web-masterclass/5-sessions
+// RUN: go run ./10-web-and-database/web-masterclass/5-sessions
 // ============================================================================
 
 // Session stores data for a single user session.
@@ -109,6 +109,10 @@ func main() {
 
 	log.Println("Starting server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.6 authentication")
+	fmt.Println("   Current: WM.5 (sessions)")
+	fmt.Println("---------------------------------------------------")
 }
 
 func (app *application) handleHome(w http.ResponseWriter, r *http.Request) {

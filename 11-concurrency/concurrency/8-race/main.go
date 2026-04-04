@@ -39,7 +39,7 @@ import (
 //   - Run with: go run -race ./... or go test -race ./...
 //   - ALWAYS test with -race in CI/CD pipelines
 //
-// RUN: go run ./09-concurrency/8-race
+// RUN: go run ./11-concurrency/concurrency/8-race
 // ============================================================================
 
 // --- EXAMPLE 1: The Race (WITHOUT protection) ---
@@ -160,4 +160,8 @@ func main() {
 	fmt.Println("  - sync/atomic: lock-free CPU operations (fastest for simple values)")
 	fmt.Println("  - ALWAYS test with: go run -race or go test -race")
 	fmt.Println("  - Prefer channels over shared memory when possible")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GC.10 sync primitives")
+	fmt.Println("   Current: GC.8 (race conditions)")
+	fmt.Println("---------------------------------------------------")
 }

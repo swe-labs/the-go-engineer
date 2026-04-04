@@ -32,3 +32,18 @@ This capstone teaches you the limits of goroutines when dealing with I/O and how
 3. **Launch Goroutines:** Loop through the slice and spawn a generic func: `go download(url, results)`.
 4. **Wait for Results:** In your `main()` thread, loop the exact number of URLs to pull from the channel: `<-results`.
    - *Hint:* If you loop infinitely, you will hit a `fatal error: all goroutines are asleep - deadlock!`. Channel receivers block until data exists!
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| GC.1 | [goroutines](./1-goroutine) | go keyword · M:N scheduler · 2KB stack · closure-capture bug | 🟢 entry |
+| GC.2 | [WaitGroups](./2-wait-group) | Add · defer Done · Wait · pass by pointer rule | GC.1 |
+| GC.3 | [channels (unbuffered)](./3-channels) | make(chan T) · send · receive · block-until-ready · chan&lt;- / &lt;-chan | GC.1, GC.2 |
+| GC.4 | [buffered channels](./4-channels-buffered) | make(chan T, N) · len vs cap · producer-consumer decoupling | GC.3 |
+| GC.5 | [closing channels](./5-channels-closing) | close() · range over channel · comma-ok · broadcast signal | GC.3, GC.4 |
+| GC.6 | [pipeline project](./6-project-1) | ping/pong actors · select on done channel · context cancel | GC.3, GC.4, GC.5 |
+| **GC.8** ⭐ | [race conditions](./8-race) | sync.Mutex · sync.RWMutex · sync/atomic · -race flag | GC.1, GC.3 |
+| GC.9 | [select deep dive](./9-select-deep-dive) | Multiplexing · timeout with time.After · non-blocking default · fan-in | GC.3, GC.4, GC.5 |
+| GC.10 | [sync primitives](./10-sync-primitives) | sync.Once singleton · sync.Map · when to use each | GC.8 |

@@ -25,7 +25,7 @@ import "fmt"
 //   guarantees memory safety by automatically sweeping newly declared variables
 //   and forcefully setting every byte to 0. This is known as "Zero Values".
 //
-// RUN: go run ./01-language-basics/1-variables
+// RUN: go run ./01-core-foundations/language-basics/1-variables
 // ============================================================================
 
 func main() {
@@ -105,4 +105,8 @@ func main() {
 	//   1. var name string          — Explicit type, zero value
 	//   2. var name = "value"       — Type inferred from value
 	//   3. name := "value"          — Short declaration (inside functions only)
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: LB.2 constants")
+	fmt.Println("   Current: LB.1 (variables)")
+	fmt.Println("---------------------------------------------------")
 }

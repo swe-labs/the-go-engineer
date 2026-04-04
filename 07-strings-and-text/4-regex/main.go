@@ -146,5 +146,8 @@ func main() {
 	fmt.Println("  - MatchString checks, FindAllString extracts, ReplaceAllString replaces")
 	fmt.Println("  - Capture groups ( ) extract structured data from text")
 	fmt.Println("  - Named groups (?P<name>) improve readability")
-
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: ST.5 text templates")
+	fmt.Println("   Current: ST.4 (regex)")
+	fmt.Println("---------------------------------------------------")
 }

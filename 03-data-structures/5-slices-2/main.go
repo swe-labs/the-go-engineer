@@ -28,7 +28,7 @@ import (
 //   but introduces memory leak risks if a tiny sub-slice keeps a gigantic
 //   10GB underlying array alive in memory.
 //
-// RUN: go run ./03-collections-and-pointers/5-slices-2
+// RUN: go run ./03-data-structures/5-slices-2
 // ============================================================================
 
 func main() {
@@ -99,4 +99,8 @@ func main() {
 	// - The capacity of a sub-slice extends to the end of the backing array.
 	// - Appending to a sub-slice CAN overwrite data in the original slice if capacity allows it.
 	// - If capacity is exceeded, append allocates new memory, breaking the link.
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FE.1 functions")
+	fmt.Println("   Current: DS.5 (slices-2)")
+	fmt.Println("---------------------------------------------------")
 }

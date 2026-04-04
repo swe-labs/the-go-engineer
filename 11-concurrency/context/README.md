@@ -63,3 +63,13 @@ go run ./17-context/5-timeout-client            # See the solution
 
 - [Go Blog: Go Concurrency Patterns: Context](https://go.dev/blog/context)
 - [Package context documentation](https://pkg.go.dev/context)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| CT.1 | [Background &amp; TODO](./1-background) | Root context · Context interface (Deadline/Done/Err/Value) | 🟢 entry |
+| CT.2 | [WithCancel](./2-with-cancel) | cancel func · ctx.Done() · goroutine leak prevention · tree propagation | CT.1 |
+| CT.3 | [WithTimeout](./3-with-timeout) | Duration-based auto-cancel · WithDeadline · DeadlineExceeded | CT.1, CT.2 |
+| CT.4 | [WithValue](./4-with-value) | Private key type · request-scoped metadata · O(depth) lookup | CT.1, CT.2, CT.3 |

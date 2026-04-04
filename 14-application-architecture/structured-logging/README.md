@@ -45,3 +45,13 @@ go run ./23-structured-logging/4-zerolog-comparison
 - [Go Blog: Structured Logging with slog](https://go.dev/blog/slog)
 - [Package slog](https://pkg.go.dev/log/slog)
 - [zerolog](https://github.com/rs/zerolog)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| SL.1 | [slog basics](./1-slog-basics) | TextHandler · JSONHandler · levels · typed attrs · With · Groups | 🟢 entry |
+| SL.2 | [context-keyed logger](./2-context-logger) | Private key type · FromContext · LoggingMiddleware · request_id | SL.1 |
+| SL.3 | [custom slog.Handler](./3-custom-handler) | Enabled/Handle/WithAttrs/WithGroup · PrettyHandler · MultiHandler | SL.1, SL.2 |
+| SL.4 | [zerolog comparison](./4-zerolog-comparison) | 0-alloc builder chain · when to choose zerolog vs slog | SL.1, SL.3 |

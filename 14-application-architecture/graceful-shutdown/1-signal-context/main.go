@@ -49,7 +49,7 @@ import (
 //   the signal arrives. This integrates naturally with every context-aware API
 //   (database queries, HTTP clients, gRPC calls) — they all cancel automatically.
 //
-// RUN: go run ./27-graceful-shutdown/1-signal-context
+// RUN: go run ./14-application-architecture/graceful-shutdown/1-signal-context
 //   Then press Ctrl+C to see the signal handling in action.
 //   Or send: kill -TERM <pid>
 // ============================================================================
@@ -161,4 +161,8 @@ func main() {
 	// - Call stop() after ctx.Done() so a 2nd Ctrl+C force-kills the process
 	// - Use a separate context with a deadline for the cleanup phase itself
 	// - defer db.Close() runs even when the process receives a signal
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GS.2 HTTP graceful drain")
+	fmt.Println("   Current: GS.1 (signal.NotifyContext)")
+	fmt.Println("---------------------------------------------------")
 }

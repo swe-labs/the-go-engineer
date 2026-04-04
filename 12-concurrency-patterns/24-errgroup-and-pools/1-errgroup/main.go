@@ -56,7 +56,7 @@ import (
 //   If you genuinely need ALL errors, use errors.Join() in each goroutine to
 //   build a combined error, or collect into a []error with a mutex.
 //
-// RUN: go run ./24-errgroup-and-pools/1-errgroup
+// RUN: go run ./12-concurrency-patterns/24-errgroup-and-pools/1-errgroup
 // ============================================================================
 
 // Service represents a microservice dependency that must be checked at startup.
@@ -186,4 +186,8 @@ func main() {
 	// - Use errors.Join() in each goroutine if you need ALL errors
 	// - g.SetLimit(N) + g.TryGo(f) = bounded concurrency without chan struct{}
 	// - Use Go: github.com/rasel9t6/the-go-engineer already has x/sync
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CP.2 errgroup + context")
+	fmt.Println("   Current: CP.1 (errgroup basics)")
+	fmt.Println("---------------------------------------------------")
 }

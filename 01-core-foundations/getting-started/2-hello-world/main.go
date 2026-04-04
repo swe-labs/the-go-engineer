@@ -27,7 +27,7 @@ import "fmt"
 //   into raw machine code upfront. This eliminates an entire class of syntax
 //   errors from ever reaching production.
 //
-// RUN: go run ./00-getting-started/2-hello-world
+// RUN: go run ./01-core-foundations/getting-started/2-hello-world
 // ============================================================================
 
 // --- LINE-BY-LINE EXPLANATION ---
@@ -119,6 +119,8 @@ func main() {
 	//   - Single binary: "go build" produces one file with zero dependencies
 
 	fmt.Println()
-	fmt.Println("✅ Congratulations! You've run your first Go program.")
-	fmt.Println("   Next step: go run ./00-getting-started/3-how-go-works")
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GS.3 how-go-works")
+	fmt.Println("   Current: GS.2 (hello-world)")
+	fmt.Println("---------------------------------------------------")
 }

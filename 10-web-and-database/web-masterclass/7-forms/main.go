@@ -33,7 +33,7 @@ import (
 //   in a custom `Form` struct to attach an `Errors map[string][]string` directly
 //   to the execution lifecycle, cleanly isolating business validation from transport.
 //
-// RUN: go run ./13-web-masterclass/7-forms
+// RUN: go run ./10-web-and-database/web-masterclass/7-forms
 // ============================================================================
 
 // Form wraps url.Values and adds validation capabilities.
@@ -145,4 +145,8 @@ func main() {
 
 	fmt.Println("Form demo server starting on http://localhost:8080")
 	http.ListenAndServe(":8080", mux)
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.8 posts CRUD")
+	fmt.Println("   Current: WM.7 (forms)")
+	fmt.Println("---------------------------------------------------")
 }

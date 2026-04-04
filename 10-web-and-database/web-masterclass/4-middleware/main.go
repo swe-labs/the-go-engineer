@@ -35,7 +35,7 @@ import (
 //   This means code BEFORE `next` runs on the inbound request, and code AFTER
 //   `next` runs exactly on the outbound response.
 //
-// RUN: go run ./13-web-masterclass/4-middleware
+// RUN: go run ./10-web-and-database/web-masterclass/4-middleware
 // ============================================================================
 
 // secureHeaders adds security-related HTTP headers to every response.
@@ -119,4 +119,8 @@ func main() {
 
 	log.Println("Starting server with middleware on :8080")
 	log.Fatal(http.ListenAndServe(":8080", handler))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.5 sessions")
+	fmt.Println("   Current: WM.4 (middleware)")
+	fmt.Println("---------------------------------------------------")
 }
