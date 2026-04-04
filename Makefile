@@ -63,6 +63,18 @@ tidy: ## Sync go.mod with imports
 	go mod tidy
 	@echo "✅ Modules tidied"
 
+deps-check: ## Check module dependencies
+	@echo "📋 Checking dependencies..."
+	@echo "All dependencies:"
+	go list -u -m all
+	@echo "✅ Dependency check complete"
+
+deps-update: ## Update all dependencies to latest patch version
+	@echo "🔄 Updating dependencies..."
+	go get -u ./...
+	go mod tidy
+	@echo "✅ Dependencies updated"
+
 clean: ## Remove build artifacts
 	@echo "🧹 Cleaning..."
 	rm -f coverage.out

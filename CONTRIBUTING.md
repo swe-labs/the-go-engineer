@@ -2,6 +2,12 @@
 
 Thank you for your interest in contributing! This guide will help you get started.
 
+## Quick Links
+
+- **[Testing Standards](./TESTING-STANDARDS.md)** - How to write tests
+- **[Code Quality Standards](./CODE-STANDARDS.md)** - Code style and best practices
+- **[Curriculum Map](./docs/curriculum/README.md)** - Complete curriculum structure
+
 ## Getting Started
 
 ```bash

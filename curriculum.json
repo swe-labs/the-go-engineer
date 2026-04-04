@@ -85,6 +85,20 @@
           "is_exercise": false,
           "sub_graph": "Language Basics",
           "path": "01-core-foundations/language-basics/3-enums"
+        },
+        {
+          "id": "LB.4",
+          "name": "application logger",
+          "concept": "Practical exercise combining variables, constants, and control flow",
+          "prerequisites": [
+            "LB.1",
+            "LB.2",
+            "LB.3"
+          ],
+          "is_entry": false,
+          "is_exercise": true,
+          "sub_graph": "Language Basics",
+          "path": "01-core-foundations/language-basics/4-application-logger"
         }
       ]
     },
@@ -128,6 +142,20 @@
           "is_exercise": false,
           "sub_graph": "",
           "path": "02-control-flow/3-switch"
+        },
+        {
+          "id": "CF.4",
+          "name": "pricing calculator project",
+          "concept": "Practical exercise combining loops, conditionals, and switch statements",
+          "prerequisites": [
+            "CF.1",
+            "CF.2",
+            "CF.3"
+          ],
+          "is_entry": false,
+          "is_exercise": true,
+          "sub_graph": "",
+          "path": "02-control-flow/4-pricing-calculator"
         }
       ]
     },
@@ -196,6 +224,22 @@
           "is_exercise": false,
           "sub_graph": "",
           "path": "03-data-structures/5-slices-2"
+        },
+        {
+          "id": "DS.6",
+          "name": "contact manager project",
+          "concept": "Practical exercise combining arrays, slices, maps, and pointers",
+          "prerequisites": [
+            "DS.1",
+            "DS.2",
+            "DS.3",
+            "DS.4",
+            "DS.5"
+          ],
+          "is_entry": false,
+          "is_exercise": true,
+          "sub_graph": "",
+          "path": "03-data-structures/6-contact-manager"
         }
       ]
     },
@@ -301,6 +345,23 @@
           "is_exercise": false,
           "sub_graph": "",
           "path": "04-functions-and-errors/7-panic-recover"
+        },
+        {
+          "id": "FE.9",
+          "name": "error handling project",
+          "concept": "Practical exercise combining custom errors, wrapping, and defer cleanup",
+          "prerequisites": [
+            "FE.1",
+            "FE.4",
+            "FE.5",
+            "FE.6",
+            "FE.7",
+            "FE.8"
+          ],
+          "is_entry": false,
+          "is_exercise": true,
+          "sub_graph": "",
+          "path": "04-functions-and-errors/8-error-handling"
         }
       ]
     },
@@ -370,6 +431,22 @@
           "is_exercise": false,
           "sub_graph": "",
           "path": "05-types-and-interfaces/5-generics"
+        },
+        {
+          "id": "TI.6",
+          "name": "payroll processor project",
+          "concept": "Practical exercise combining structs, methods, interfaces, and generics",
+          "prerequisites": [
+            "TI.1",
+            "TI.2",
+            "TI.3",
+            "TI.4",
+            "TI.5"
+          ],
+          "is_entry": false,
+          "is_exercise": true,
+          "sub_graph": "",
+          "path": "05-types-and-interfaces/6-payroll-processor"
         }
       ]
     },
@@ -1449,6 +1526,49 @@
       ]
     },
     {
+      "id": "s14docker",
+      "num": "§14 · Docker",
+      "title": "Architecture — Docker & Deployment",
+      "description": "Single-stage Dockerfile before multi-stage. Layer caching is fundamental to optimization. Compose orchestrates local development with multiple services.",
+      "lessons": [
+        {
+          "id": "DO.1",
+          "name": "single-stage Dockerfile",
+          "concept": "FROM alpine \u00b7 WORKDIR \u00b7 COPY \u00b7 RUN \u00b7 ENTRYPOINT \u00b7 minimal base image",
+          "prerequisites": [],
+          "is_entry": true,
+          "is_exercise": false,
+          "sub_graph": "",
+          "path": "14-application-architecture/docker-and-deployment/1-dockerfile"
+        },
+        {
+          "id": "DO.2",
+          "name": "multi-stage build",
+          "concept": "Build stage \u00b7 runtime stage \u00b7 COPY --from \u00b7 minimal final image",
+          "prerequisites": [
+            "DO.1"
+          ],
+          "is_entry": false,
+          "is_exercise": false,
+          "sub_graph": "",
+          "path": "14-application-architecture/docker-and-deployment/2-multi-stage"
+        },
+        {
+          "id": "DO.3",
+          "name": "layer caching",
+          "concept": "Dockerfile optimization \u00b7 go.mod caching \u00b7 order of commands \u00b7 .dockerignore",
+          "prerequisites": [
+            "DO.1",
+            "DO.2"
+          ],
+          "is_entry": false,
+          "is_exercise": false,
+          "sub_graph": "",
+          "path": "14-application-architecture/docker-and-deployment/3-layer-caching"
+        }
+      ]
+    },
+    {
       "id": "s14log",
       "num": "\u00a714 \u00b7 Logging",
       "title": "Architecture \u2014 Structured Logging",
@@ -1582,7 +1702,28 @@
       "num": "\u00a714 \u00b7 Capstone",
       "title": "Architecture \u2014 Enterprise Capstone",
       "description": "This is the curriculum's culminating project. Every previous section contributes at least one pattern. The Docker Compose boots Postgres, runs embedded migrations, and serves the REST API.",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "EC.1",
+          "name": "full REST API with Postgres",
+          "concept": "Integration: routing, DI, auth, CRUD, Docker Compose, migrations, graceful shutdown",
+          "prerequisites": [
+            "WM.1",
+            "WM.2",
+            "WM.4",
+            "WM.6",
+            "DB.1",
+            "DB.2",
+            "DB.3",
+            "GS.1",
+            "GS.2"
+          ],
+          "is_entry": true,
+          "is_exercise": true,
+          "sub_graph": "",
+          "path": "14-application-architecture/enterprise-capstone"
+        }
+      ]
     },
     {
       "id": "s15",

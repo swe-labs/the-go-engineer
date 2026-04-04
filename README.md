@@ -25,14 +25,23 @@ go version
 go run ./01-core-foundations/getting-started/2-hello-world
 ```
 
+## Choose Your Learning Path
+
+New to Go? → **Start at [01-core-foundations](./01-core-foundations/)**  
+Know another language? → **See [LEARNING-PATH.md](./LEARNING-PATH.md) for your track**  
+Experienced with Go? → **Jump to [§11 Concurrency](./11-concurrency/) or browse [curriculum map](./docs/curriculum/README.md)**
+
 ## Reference Documents
 
 | Document | Purpose |
 | -------- | ------- |
+| [LEARNING-PATH.md](./LEARNING-PATH.md) | **Complete learning guide** with prerequisites and recommended tracks |
+| [docs/curriculum/README.md](./docs/curriculum/README.md) | **Curriculum map** showing all 80+ lessons and dependencies |
 | [COMMON-MISTAKES.md](./COMMON-MISTAKES.md) | 15 most common Go bugs with fixes and section cross-references |
 | [ROADMAP.md](./ROADMAP.md) | What is built, in progress, and planned |
 | [CHANGELOG.md](./CHANGELOG.md) | History of additions and bug fixes |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | How to add lessons, exercises, and sections |
+| [RELEASE.md](./RELEASE.md) | Release planning and process guide |
 
 ## Who is This For?
 

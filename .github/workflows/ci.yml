@@ -18,8 +18,42 @@ jobs:
       - name: Vet
         run: go vet ./...
 
+      - name: Format Check
+        run: gofmt -l . | grep . && exit 1 || true
+
+      - name: Module Tidy Check
+        run: |
+          go mod tidy
+          if [ -n "$(git diff --name-only)" ]; then
+            echo "❌ go.mod or go.sum needs updating. Run 'go mod tidy' locally."
+            git diff
+            exit 1
+          fi
+
       - name: Test
         run: go test ./...
 
-      - name: Format Check
-        run: gofmt -l . | grep . && exit 1 || true
+      - name: Test with Race Detector
+        run: go test -race ./...
+
+      - name: Coverage Report
+        run: |
+          go test -coverprofile=coverage.out ./...
+          go tool cover -html=coverage.out -o coverage.html
+          COVERAGE=$(go tool cover -func=coverage.out | grep total | awk '{print $3}')
+          echo "## Code Coverage: $COVERAGE" >> $GITHUB_STEP_SUMMARY
+
+      - name: Run Benchmarks
+        run: |
+          go test -bench=. -benchmem -count=1 ./13-quality-and-performance/testing/benchmarks/ || true
+
+      - name: Validate Curriculum
+        run: go run ./scripts/validate_curriculum.go
+
+      - name: Upload Coverage
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage.html
+

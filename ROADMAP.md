@@ -69,20 +69,20 @@ This document tracks what is built, what is in progress, and what is planned.
 
 - `concurrency-patterns`: errgroup.Group, fan-out pipelines, sync.Pool zero-allocation (CP.1–5)
 
-## 13 — Quality and Performance 🚧
+## 13 — Quality and Performance ✅
 
 - `testing`: unit tests, table-driven, HTTP handler tests, benchmarking (TE.1–4)
 - `http-client-testing`: manual mocks, testify/mocking abstractions (HM.1–4)
-- `profiling`: CPU profiles, memory profiles, flame graphs, pprof (PR.1–2) 🚧
+- `profiling`: CPU profiles, memory profiles, flame graphs, pprof (PR.1–2)
 
-## 14 — Application Architecture 🚧
+## 14 — Application Architecture ✅
 
 - `package-design`: naming, visibility, internal/, project layout (PD.1–3)
-- `docker-and-deployment`: multi-stage Dockerfile, layer caching
+- `docker-and-deployment`: single-stage Dockerfile, multi-stage builds, layer caching (DO.1–3)
 - `enterprise-capstone`: full REST API, PostgreSQL, Docker Compose (EC.1)
-- `structured-logging`: slog basics, context-keyed logger (SL.1–5)
-- `grpc`: proto3 service definition, unary and streaming RPC (GR.1–3) 🚧
-- `graceful-shutdown`: signal.NotifyContext, full graceful drain shutdown (GS.1–3)
+- `structured-logging`: slog basics, context-keyed logger, custom handlers (SL.1–4)
+- `grpc`: proto3 service definition, unary and streaming RPC (GR.1–3)
+- `graceful-shutdown`: signal.NotifyContext, HTTP graceful drain (GS.1–2)
 
 ## 15 — Code Generation 📋
 

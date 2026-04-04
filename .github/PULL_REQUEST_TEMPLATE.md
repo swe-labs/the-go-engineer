@@ -11,17 +11,86 @@ Fixes # (issue)
 - [ ] ✨ New feature (new exercise, new section)
 - [ ] 📝 Documentation update (README or CONTRIBUTING)
 - [ ] ♻️ Refactoring (improving existing code without changing behavior)
+- [ ] 🔧 Build system or CI/CD improvement
+- [ ] 🧪 Test improvements
 
-## Contributor Checklist
+## Pre-Submission Checklist
 
-Before submitting this PR, please verify the following:
+### Code Quality
+- [ ] Code formatted with `gofmt` (run `make fmt`)
+- [ ] Passes `go vet` checks (run `make vet`)
+- [ ] Builds without errors (run `make build`)
+- [ ] All tests pass (run `make test`)
+- [ ] Race condition check passes (run `make test-race`)
 
-- [ ] I have read the [CONTRIBUTING.md](../CONTRIBUTING.md) guidelines.
-- [ ] My code follows the `gofmt` style guidelines.
-- [ ] I have run `make build` or `go build ./...` and it compiles without error.
-- [ ] I have run `make test` or `go test ./...` and all tests pass.
-- [ ] If adding an exercise, I have included a `_starter/` stub.
-- [ ] If adding new concepts, I have included the standard file header and inline teaching comments.
+### Documentation
+- [ ] File has proper header comment (if applicable)
+- [ ] Complex logic is documented with inline comments
+- [ ] Exported functions have doc comments
+- [ ] No TODO comments without tracking issues
 
-## Reviewer Notes
-<!-- Add any specific things you want the reviewer to look at. -->
+### Tests
+- [ ] New code includes tests
+- [ ] Tests use table-driven pattern (when appropriate)
+- [ ] Coverage is appropriate (aim for > 75%)
+- [ ] Tests are named descriptively
+
+### For Lesson Additions
+- [ ] Follows the standard file template from [CODE-STANDARDS.md](../../CODE-STANDARDS.md)
+- [ ] Includes learning objectives in header
+- [ ] Includes "ENGINEERING DEPTH" section explaining production relevance
+- [ ] Includes a `_starter/` stub if exercise
+- [ ] Curriculum mapping added to `curriculum.json`
+- [ ] Navigation footer added (next lesson reference)
+
+### Repository Maintenance
+- [ ] `go.mod` and `go.sum` are updated (`go mod tidy`)
+- [ ] No unnecessary dependencies added
+- [ ] No large files (> 10MB) committed
+- [ ] No credentials or sensitive data committed
+- [ ] Changelog updated if user-facing change
+
+## Testing Instructions
+
+<!-- Describe how to test this change. Include specific commands if applicable. -->
+
+```bash
+# For bug fixes
+go test -run TestName ./path/to/package
+
+# For new lessons
+go run ./path/to/lesson
+
+# For curriculum changes
+go run ./scripts/validate_curriculum.go
+```
+
+## Performance Impact
+
+<!-- For changes that might affect performance, include benchmarks. -->
+
+- [ ] No performance impact
+- [ ] Improvement: [describe]
+- [ ] Regression: [justify]
+
+If applicable, run benchmarks:
+```bash
+make bench
+```
+
+## Reviewer Guidance
+
+<!-- Add any specific things you want the reviewer to look at, concerns, or questions. -->
+
+## Screenshots/Output
+
+<!-- If visual changes, include screenshots. If code output, show terminal output. -->
+
+---
+
+**Note**: Maintainers will verify:
+- All CI checks pass
+- Code style compliance
+- Test coverage
+- Curriculum consistency
+
