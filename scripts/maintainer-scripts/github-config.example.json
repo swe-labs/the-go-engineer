@@ -1,0 +1,98 @@
+{
+  "owner": "rasel9t6",
+  "repo": "the-go-engineer",
+  "labels": [
+    {
+      "name": "epic",
+      "color": "3E1B6F",
+      "description": "Large feature spanning multiple issues or sections"
+    },
+    {
+      "name": "feature",
+      "color": "0366D6",
+      "description": "New lesson, feature, or capability"
+    },
+    {
+      "name": "bug",
+      "color": "D73A49",
+      "description": "Something is broken or not working as expected"
+    },
+    {
+      "name": "documentation",
+      "color": "0075CA",
+      "description": "Improvements or additions to documentation"
+    },
+    {
+      "name": "priority/high",
+      "color": "FF6B6B",
+      "description": "Important for users/learners, needed soon"
+    },
+    {
+      "name": "priority/medium",
+      "color": "FFA500",
+      "description": "Important but not urgent"
+    },
+    {
+      "name": "priority/low",
+      "color": "FBCA04",
+      "description": "Nice to have, can wait"
+    },
+    {
+      "name": "size/small",
+      "color": "9BCD9B",
+      "description": "1-2 hours"
+    },
+    {
+      "name": "size/medium",
+      "color": "FFD700",
+      "description": "2-4 hours"
+    },
+    {
+      "name": "size/large",
+      "color": "FFA500",
+      "description": "4-8 hours"
+    },
+    {
+      "name": "status/ready",
+      "color": "C6E48B",
+      "description": "Ready to work on"
+    },
+    {
+      "name": "status/in-progress",
+      "color": "1E90FF",
+      "description": "Someone is actively working on it"
+    },
+    {
+      "name": "status/done",
+      "color": "228B22",
+      "description": "Completed and merged"
+    }
+  ],
+  "issues": [
+    {
+      "title": "[EPIC] Complete Chapters 13-15 Implementation",
+      "body": "## Overview\nComplete implementation of Chapters 13-15 with all lessons and documentation updates.\n\n## Sub-Tasks\n- [ ] Documentation Updates\n- [ ] PR.3: Memory Profile Lesson\n- [ ] GR.4: Streaming RPC Lesson\n- [ ] GR.5: Interceptors Lesson\n- [ ] CG.2-4: Code Generation Lessons\n- [ ] Update curriculum.json\n\n## Success Criteria\n✓ All lessons compile and run without errors\n✓ All follow curriculum style guide\n✓ All changes merged to main branch",
+      "labels": ["epic", "priority/high"],
+      "assignees": []
+    },
+    {
+      "title": "[DOCS] Documentation Updates for Chapters 13-15",
+      "body": "## Overview\nUpdate all documentation files to reflect completion of Chapters 13-15.\n\n## Tasks\n- [ ] Update ROADMAP.md\n- [ ] Update CHANGELOG.md\n- [ ] Update README.md\n- [ ] Create section READMEs\n- [ ] Verify all links\n\n## Success Criteria\n✓ All documentation updated\n✓ No broken links\n✓ CI passes",
+      "labels": ["documentation", "priority/high"],
+      "assignees": []
+    },
+    {
+      "title": "[FEATURE] Add PR.3: Memory Profile Lesson",
+      "body": "Add memory profiling lesson to Chapter 13.\n\n## Requirements\n- Heap vs allocs profiles\n- sync.Pool optimization\n- Memory leak detection\n\n## Testing\n- [ ] Compiles without error\n- [ ] Follows curriculum style\n- [ ] All CI checks pass",
+      "labels": ["feature", "priority/high", "size/medium"],
+      "assignees": []
+    },
+    {
+      "title": "[FEATURE] Add GR.4: Streaming RPC Lesson",
+      "body": "Add streaming RPC lesson to Chapter 14.\n\n## Files to Create\n- proto/stream.proto\n- server/main.go\n- client/main.go\n\n## Testing\n- [ ] Protobuf compiles\n- [ ] Server and client work together\n- [ ] All streaming patterns demonstrated",
+      "labels": ["feature", "priority/high", "size/large"],
+      "assignees": []
+    }
+  ],
+  "discussions": []
+}
