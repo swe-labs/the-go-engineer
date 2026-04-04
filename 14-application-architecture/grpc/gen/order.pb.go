@@ -541,7 +541,7 @@ const file_proto_order_proto_rawDesc = "" +
 	"\vCreateOrder\x12\x1c.order.v1.CreateOrderRequest\x1a\x1d.order.v1.CreateOrderResponse\x12A\n" +
 	"\bGetOrder\x12\x19.order.v1.GetOrderRequest\x1a\x1a.order.v1.GetOrderResponse\x12T\n" +
 	"\x10WatchOrderStatus\x12!.order.v1.WatchOrderStatusRequest\x1a\x1b.order.v1.OrderStatusUpdate0\x01\x12F\n" +
-	"\x12ProcessOrderStream\x12\x13.order.v1.OrderItem\x1a\x17.order.v1.ProcessResult(\x010\x01B1Z/github.com/rasel9t6/the-go-engineer/26-grpc/genb\x06proto3"
+	"\x12ProcessOrderStream\x12\x13.order.v1.OrderItem\x1a\x17.order.v1.ProcessResult(\x010\x01B1Z/github.com/rasel9t6/the-go-engineer/14-application-architecture/grpc/genb\x06proto3"
 
 var (
 	file_proto_order_proto_rawDescOnce sync.Once

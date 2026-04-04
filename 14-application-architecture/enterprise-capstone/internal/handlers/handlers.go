@@ -12,9 +12,9 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/rasel9t6/the-go-engineer/22-enterprise-capstone/internal/middleware"
-	"github.com/rasel9t6/the-go-engineer/22-enterprise-capstone/internal/models"
-	"github.com/rasel9t6/the-go-engineer/22-enterprise-capstone/internal/repository"
+	"github.com/rasel9t6/the-go-engineer/14-application-architecture/enterprise-capstone/internal/middleware"
+	"github.com/rasel9t6/the-go-engineer/14-application-architecture/enterprise-capstone/internal/models"
+	"github.com/rasel9t6/the-go-engineer/14-application-architecture/enterprise-capstone/internal/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 

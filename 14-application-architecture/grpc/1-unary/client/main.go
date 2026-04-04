@@ -17,7 +17,7 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	pb "github.com/rasel9t6/the-go-engineer/26-grpc/gen"
+	pb "github.com/rasel9t6/the-go-engineer/14-application-architecture/grpc/gen"
 )
 
 // ============================================================================

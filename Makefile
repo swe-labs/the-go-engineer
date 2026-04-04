@@ -36,7 +36,7 @@ test-verbose: ## Run all tests with verbose output
 
 bench: ## Run benchmarks
 	@echo "📊 Running benchmarks..."
-	go test -bench=. -benchmem -count=1 ./14-testing/benchmarks/
+	go test -bench=. -benchmem -count=1 ./13-quality-and-performance/testing/benchmarks/
 
 ## Code Quality
 vet: ## Run go vet (find suspicious code)
@@ -71,10 +71,10 @@ clean: ## Remove build artifacts
 
 ## Run Examples
 run-hello: ## Run the Hello World example
-	go run ./00-getting-started/2-hello-world
+	go run ./01-core-foundations/getting-started/2-hello-world
 
 run-env: ## Run the environment check
-	go run ./00-getting-started/4-dev-environment
+	go run ./01-core-foundations/getting-started/4-dev-environment
 
 ## Coverage
 cover: ## Run tests with coverage report

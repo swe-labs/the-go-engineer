@@ -6,6 +6,22 @@ Format: **[Date] — Description**. Sections: `Added`, `Fixed`, `Changed`, `Remo
 
 ---
 
+## [2026-04-05] — The v1.0 Curriculum Migration
+
+### Changed
+
+- **Curriculum Architecture:** Completely refactored the legacy 28 flat-folder structure into an elite, chronologically ordered 15-chapter book format.
+- **Cross-Domain Separation:** Decoupled concepts by their primary domain, cleanly separating runtime operations (`11-concurrency/time-and-scheduling`) and external operations (`09-io-and-cli/encoding`).
+- **HTTP Domain Split:** Amputated the HTTP Clients/Mocking directory exactly down the middle, separating true HTTP networking (`10-web-and-database/http-client`) from test abstraction limits (`13-quality-and-performance/http-client-testing`).
+- **Internal Imports:** Ran a mass-migration script converting all legacy `internal/` pointers uniformly.
+- **Docs Update:** Rewrote README tables, ROADMAP tracking lists, and CONTRIBUTING guides natively reflecting the elite `v1` path routing.
+
+### Removed
+
+- DELETED the legacy compatibility `symlinks` from the repository root entirely!
+
+---
+
 ## [2026-04-04] — Phase 7 additions + bug fixes
 
 ### Added

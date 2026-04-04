@@ -33,7 +33,7 @@ import (
 
 	_ "github.com/mattn/go-sqlite3"
 
-	"github.com/rasel9t6/the-go-engineer/12-databases/6-repository/repository"
+	"github.com/rasel9t6/the-go-engineer/10-web-and-database/databases/6-repository/repository"
 )
 
 // The startup script creates the DB table so this demo works cleanly

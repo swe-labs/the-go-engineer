@@ -8,7 +8,7 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/rasel9t6/the-go-engineer/12-databases/6-repository/models"
+	"github.com/rasel9t6/the-go-engineer/10-web-and-database/databases/6-repository/models"
 	"golang.org/x/crypto/bcrypt"
 )
 

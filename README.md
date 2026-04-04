@@ -10,7 +10,7 @@ Welcome to **The Go Engineer** — the definitive open-source Go curriculum. Eve
 ## Quick Start
 
 ```bash
-# 1. Install Go: https://go.dev/dl/  (see 00-getting-started for detailed instructions)
+# 1. Install Go: https://go.dev/dl/  (see 01-core-foundations/getting-started)
 # 2. Clone this repository
 git clone https://github.com/rasel9t6/the-go-engineer.git
 cd the-go-engineer
@@ -22,7 +22,7 @@ go mod download
 go version
 
 # 5. Run your first program
-go run ./00-getting-started/2-hello-world
+go run ./01-core-foundations/getting-started/2-hello-world
 ```
 
 ## Reference Documents
@@ -36,109 +36,59 @@ go run ./00-getting-started/2-hello-world
 
 ## Who is This For?
 
-- **Complete beginners** — Never programmed before? Start at Section 00. Every line is explained.
-- **Developers from other languages** — Know Python/JS/Java? Start at Section 01. Skim the basics, deep-dive into Go-specific patterns.
-- **Go developers leveling up** — Already write Go? Jump to Sections 09+ for concurrency, testing, and production patterns.
+- **Complete beginners** — Never programmed before? Start at Section 01. Every line is explained.
+- **Developers from other languages** — Know Python/JS/Java? Skim the basics, deep-dive into Go-specific patterns.
+- **Go developers leveling up** — Already write Go? Jump to Chapters 09+ for concurrency, testing, and production patterns.
 
-## The Structured 4-Phase Learning Path
+## The Elite 15-Chapter Learning Path
 
-This repository follows a strict **Beginner → Expert** progression. Every section builds on the previous one.
+This repository follows a strict **Language → Runtime → IO → Quality → Architecture** progression. Every chapter cleanly decouples concepts by their primary domain.
 
-### Phase 0: Setup
-
-Get your development environment ready.
-
-- `00-getting-started`: Installation, Hello World, how Go works, dev environment setup
-
-### Phase 1: Fundamentals
-
-Start here to understand the syntax, memory model, and error handling philosophies of Go.
-
-- `01-language-basics`: Variables, types, scope, zero values, and formatting
-- `02-control-flow`: Loops, if/switch statements, branching
-- `03-collections-and-pointers`: Arrays, Slices, Maps, and Pointers (Stack vs Heap)
-- `04-functions-and-errors`: First-class functions, closures, defer mechanics, and idiomatic error handling
-- `07-strings-and-text`: String internals (UTF-8 bytes), regex, and buffers
-
-### Phase 2: Core Go (Architecture & Types)
-
-Master Go's approach to Object-Oriented Programming and domain modeling.
-
-- `05-types-and-interfaces`: Custom types, structs, methods (pointer vs value receivers), duck typing
-- `06-composition-and-embedding`: Composition over inheritance
-- `11-encoding`: JSON serialization/deserialization mechanics
-- `15-time-and-scheduling`: `time`, `context` trees, and tickers
-
-### Phase 3: Advanced Patterns
-
-Dive into Go's superpower: Concurrency and low-level I/O.
-
-- `09-concurrency`: Goroutines, channel blocking, WaitGroups, `select` deep-dives, sync primitives (`Mutex`, `Map`)
-- `10-filesystem`: Low-level I/O, `io.Reader`/`io.Writer` patterns, and the `embed` package
-
-### Phase 4: Production Engineering
-
-Learn how to build, test, and deploy Google-grade applications.
-
-- `08-modules-and-dependencies`: `go.mod`, dependency management, versioning
-- `12-databases`: `database/sql`, connection pooling, SQLite, Repository pattern
-- `13-web-masterclass`: Comprehensive Web Development (Routing → Auth → Full App)
-- `14-testing`: Unit testing, structured benchmarks (`testing.B`), memory allocation profiling
-- `16-http-clients-and-mocking`: Calling APIs, dependency injection for testing, `testify/mock`
-
-### Phase 5: Expert Patterns
-
-Master the patterns that distinguish senior Go engineers.
-
-- `17-context`: `context.Context` deep-dive — cancellation, timeouts, request-scoped values
-- `18-package-design`: Naming conventions, visibility, `internal/`, standard project layout
-- `19-cli-tools`: Building command-line tools with `flag`, subcommands, and exit codes
-
-### Phase 7: Senior Engineer Patterns
-
-- `23-structured-logging`: `slog` basics, context-keyed logger, custom `slog.Handler`, zerolog comparison
-- `24-errgroup-and-pools`: `errgroup.Group`, errgroup+context pipelines, `sync.Pool` for zero-allocation buffering
-- `25-profiling`: CPU profiles, memory profiles, live `net/http/pprof` endpoint, `go tool pprof` workflow
-- `26-grpc`: proto3 service definition, unary and streaming RPC, interceptors (middleware for gRPC)
-- `27-graceful-shutdown`: `signal.NotifyContext`, `http.Server.Shutdown`, complete zero-downtime Kubernetes shutdown
-
-### Phase 6: The Production Engineer
-
-Master the tools required to deploy scalable Go services to the cloud.
-
-- `20-docker-and-deployment`: Multi-stage Dockerfiles, layer caching, `docker-compose` orchestration
-- `21-database-migrations`: Schema evolution using `golang-migrate` and `//go:embed` SQL embedding
-- `22-enterprise-capstone`: The ultimate multi-package REST API (PostgreSQL + Middleware + DB Migrations + Docker)
+- `01-core-foundations`: Development environment, syntax basics, constants, variable types.
+- `02-control-flow`: Execution branches, for loops, line-of-sight principle.
+- `03-data-structures`: Deep dives into arrays, slices, maps, pointers, and heap allocations.
+- `04-functions-and-errors`: First-class closures, defer mechanics, and idiomatic error design.
+- `05-types-and-interfaces`: Structs, methods, and duck-typing abstractions.
+- `06-composition`: Achieving flexible architecture through struct embedding.
+- `07-strings-and-text`: UTF-8 internals, regex buffers, and templates.
+- `08-modules-and-packages`: Go modules, versioning, dependency tracking.
+- `09-io-and-cli`: Standard inputs, filesystem traversal, encoding formats (JSON/XML), and flag-driven CLI tools.
+- `10-web-and-database`: SQL migrations, HTTP REST Web Servers, Routing, and raw HTTP Client executions.
+- `11-concurrency`: Goroutine mechanics, waitgroups, channel syncing, time/scheduling logic, context lifetimes.
+- `12-concurrency-patterns`: High efficiency fan-out, errgroup bounds, and zero-allocation sync.Pool.
+- `13-quality-and-performance`: Unit testing arrays, mocking external interfaces, profiling flamegraphs, benchmarking.
+- `14-application-architecture`: Full scale project layers, Docker orchestration, Structured Logging, gRPC protocols.
+- `15-code-generation`: Abstracted tooling via `//go:generate`.
 
 ## Projects & Exercises
 
-Each section culminates in a hands-on project to test your understanding:
+Each module culminates in a hands-on project to test your understanding:
 
-| Section | Exercise | Description |
+| Chapter | Exercise | Description |
 | ------- | -------- | ----------- |
-| **01** Language Basics | `4-application-logger` | Application Logger with severity levels |
+| **01** Core Foundations | `language-basics/4-application-logger` | Application Logger with severity levels |
 | **02** Control Flow | `4-pricing-calculator` | Pricing Calculator engine |
-| **03** Collections | `6-contact-manager` | Slice-based Contact Manager System |
+| **03** Data Structures | `6-contact-manager` | Slice-based Contact Manager System |
 | **04** Functions & Errors | `8-error-handling` | Custom mathematical error handling |
 | **05** Types & Interfaces | `6-payroll-processor` | Polymorphic User Payroll Processor |
 | **06** Composition | `3-bank-account` | Bank Account System with deposits/withdrawals |
 | **07** Strings & Text | `6-log-parser` | Log File Parsing System |
-| **09** Concurrency | `7-downloader` | Concurrent Multi-File Downloader |
-| **10** Filesystem | `7-log-search` | Directory traversal log search tool |
-| **11** Encoding | `6-config-parser` | JSON config file parser with validation |
-| **12** Databases | `6-repository` | CRUD SQLite App using Repository Pattern |
-| **13** Web Masterclass | `1-routing/exercise` | Multi-route Bookstore Web API |
-| **15** Time & Scheduling | `7-reminder` | Console reminder with countdown timer |
-| **16** HTTP Clients | `6-testify-mock` | Mocking an external REST API Data Fetcher |
-| **17** Context | `5-timeout-client` | Timeout-aware HTTP API client |
-| **19** CLI Tools | `4-file-organizer` | CLI file organizer by extension |
-| **22** The Capstone | `cmd/api` | **The Multi-Package Docker Enterprise Backend** |
-| **23** Structured Logging | `2-context-logger` | HTTP middleware that injects request-scoped logger into context |
-| **24** errgroup & sync.Pool | `4-bounded-pipeline-exercise` | Image resizer with bounded concurrency using `errgroup.SetLimit` |
-| **24** errgroup & sync.Pool | `5-url-checker-exercise` | Concurrent URL health checker with bounded concurrency and pooled clients |
-| **25** Profiling | `1-cpu-profile` | Profile slow vs fast log processor, read flame graph in go tool pprof |
-| **26** gRPC | `1-unary` | Type-safe OrderService client + server with status codes and interceptors |
-| **27** Graceful Shutdown | `3-capstone` | Complete shutdown: readiness probe → HTTP drain → worker drain → DB close |
+| **09** IO and CLI | `cli-tools/4-file-organizer` | CLI file organizer by extension |
+| **09** IO and CLI | `filesystem/7-log-search` | Directory traversal log search tool |
+| **09** IO and CLI | `encoding/6-config-parser` | JSON config file parser with validation |
+| **10** Web & Database | `databases/6-repository` | CRUD SQLite App using Repository Pattern |
+| **10** Web & Database | `web-masterclass/1-routing/exercise` | Multi-route Bookstore Web API |
+| **11** Concurrency | `concurrency/7-downloader` | Concurrent Multi-File Downloader |
+| **11** Concurrency | `time-and-scheduling/7-reminder` | Console reminder with countdown timer |
+| **11** Concurrency | `context/5-timeout-client` | Timeout-aware HTTP API client |
+| **12** Concurrency Patterns | `4-bounded-pipeline-exercise` | Image resizer with bounded concurrency via `errgroup` |
+| **12** Concurrency Patterns | `5-url-checker-exercise` | URL health checker with zero-alloc pooled clients |
+| **13** Quality & Performance | `http-client-testing/6-testify-mock` | Mocking an external REST API Data Fetcher |
+| **13** Quality & Performance | `profiling/1-cpu-profile` | Profile slow vs fast log processor |
+| **14** Application Architecture | `enterprise-capstone/cmd/api` | **The Multi-Package Docker Enterprise Backend** |
+| **14** Application Architecture | `structured-logging/2-context-logger` | HTTP middleware request-scoped logger extraction |
+| **14** Application Architecture | `grpc/1-unary` | Type-safe OrderService client/server via Interceptors |
+| **14** Application Architecture | `graceful-shutdown/3-capstone` | Complete readiness → HTTP drain → generic shutdown |
 
 ## How to Use This Repository
 
@@ -146,35 +96,16 @@ The best way to learn is by **reading the inline comments** and **running the co
 
 ```bash
 # Run any lesson
-go run ./SECTION/LESSON
+go run ./CHAPTER/LESSON
 
 # Examples:
-go run ./00-getting-started/2-hello-world
-go run ./01-language-basics/1-variables
-go run ./09-concurrency/3-channels
-go run ./13-web-masterclass/1-routing
+go run ./01-core-foundations/getting-started/2-hello-world
+go run ./01-core-foundations/language-basics/1-variables
+go run ./11-concurrency/concurrency/3-channels
+go run ./10-web-and-database/web-masterclass/1-routing
 
-# Section 23 — Structured Logging
-go run ./23-structured-logging/1-slog-basics
-go run ./23-structured-logging/2-context-logger    # then: curl http://localhost:8080/api/orders/42
-
-# Section 24 — errgroup & sync.Pool
-go run ./24-errgroup-and-pools/1-errgroup
-go run ./24-errgroup-and-pools/5-url-checker-exercise  # Try the exercise
-go run ./24-errgroup-and-pools/5-url-checker-exercise/_starter  # See the solution
-
-# Section 25 — Profiling
-go run ./25-profiling/1-cpu-profile               # then: go tool pprof -http=:8090 cpu.prof
-go run ./25-profiling/3-http-pprof                # then: go tool pprof http://localhost:6060/debug/pprof/profile?seconds=5
-
-# Section 26 — gRPC (two terminals)
-go run ./26-grpc/1-unary/server                   # Terminal 1
-go run ./26-grpc/1-unary/client                   # Terminal 2
-
-# Section 27 — Graceful Shutdown
-go run ./27-graceful-shutdown/1-signal-context     # then: Ctrl+C to test
-go run ./27-graceful-shutdown/2-http-server        # then: curl http://localhost:8080/api/slow & Ctrl+C
-go run ./27-graceful-shutdown/3-capstone           # complete production pattern
+# Chapter 13 — Quality and Testing
+go run ./13-quality-and-performance/profiling/1-cpu-profile
 ```
 
 ### Self-Challenge Mode
@@ -192,14 +123,14 @@ go run ./02-control-flow/4-pricing-calculator
 For the grand finale, boot the entire Enterprise Backend cluster (Database + Migrations + API) using Docker:
 
 ```bash
-# Run the massive Phase 6 Capstone project
-cd 22-enterprise-capstone
+# Run the massive Chapter 14 Capstone project
+cd 14-application-architecture/enterprise-capstone
 docker-compose up -d --build
 ```
 
 ## Running the Tests
 
-To verify your environment is set up correctly, run the full test suite:
+To verify your environment is set up correctly, run the full test suite over the entire domain structure:
 
 ```bash
 # Run all tests
@@ -207,28 +138,16 @@ go test ./...
 
 # Run tests with race detection
 go test -race ./...
-
-# Run benchmarks
-go test -bench=. -benchmem -count=1 ./14-testing/benchmarks/
 ```
 
 ## Windows Users — CGO Note
 
-Sections `12-databases` and `22-enterprise-capstone` use `github.com/mattn/go-sqlite3`,
-which requires CGO and a C compiler. On Windows without WSL:
+Chapter 10 (`databases`) and Chapter 14 (`enterprise-capstone`) use `go-sqlite3`, which requires CGO and a C compiler. On Windows without WSL:
 
 1. Install [TDM-GCC](https://jmeubank.github.io/tdm-gcc/)
-2. Verify: `gcc --version`
-3. Set environment: `$env:CGO_ENABLED = "1"` (PowerShell)
+2. Set environment: `$env:CGO_ENABLED = "1"` (PowerShell)
 
-All other sections (00–11, 13–27) work on Windows without a C compiler.
 We recommend [WSL2](https://docs.microsoft.com/en-us/windows/wsl/) for the best experience.
-
-## Requirements
-
-- **Go 1.26+** (check with `go version`)
-- **Git** (to clone the repository)
-- A text editor (VSCode with Go extension recommended — see Section 00)
 
 ## 📜 License
 
@@ -236,17 +155,3 @@ This project is licensed under the **The Go Engineer License (TGE License) v1.0*
 
 - ✅ Free for personal, educational, and non-commercial use
 - ❌ Commercial use is strictly prohibited without permission
-
-### 🚫 Commercial Use Includes
-
-- Paid courses, bootcamps, or training programs
-- SaaS or product development
-- Company/internal usage
-- Freelance or client work
-- Selling this project or derivatives
-
-### 📧 Commercial License
-
-To use this project commercially, contact:
-
-[raselhossen052@gmail.com](mailto:raselhossen052@gmail.com)

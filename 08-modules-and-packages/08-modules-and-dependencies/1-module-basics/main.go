@@ -72,8 +72,8 @@ func main() {
 	// Demonstrate how import paths map to module structure
 	fmt.Println("Module path: github.com/rasel9t6/the-go-engineer")
 	fmt.Println("This means all packages in this repo are importable as:")
-	fmt.Println("  github.com/rasel9t6/the-go-engineer/12-databases/6-repository/models")
-	fmt.Println("  github.com/rasel9t6/the-go-engineer/12-databases/6-repository/repository")
+	fmt.Println("  github.com/rasel9t6/the-go-engineer/10-web-and-database/databases/6-repository/models")
+	fmt.Println("  github.com/rasel9t6/the-go-engineer/10-web-and-database/databases/6-repository/repository")
 	fmt.Println()
 
 	// Show the essential commands
