@@ -1,4 +1,6 @@
-"""
+package main
+
+/*
 Multi-Stage Dockerfile
 
 This lesson demonstrates the multi-stage build pattern.
@@ -9,7 +11,8 @@ Instead of one large image with compiler tools, we use two stages:
 Result: Final image is  ~15MB instead of ~350MB!
 """
 
-# See the Dockerfile in this directory for implementation
-
-RUN: docker build -t myapp:latest .
-RUN: docker run myapp:latest
+// See the Dockerfile in this directory for implementation
+//
+// RUN: docker build -t myapp:latest .
+// RUN: docker run myapp:latest
+*/

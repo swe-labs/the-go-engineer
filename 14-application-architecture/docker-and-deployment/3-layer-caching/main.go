@@ -1,4 +1,6 @@
-"""
+package main
+
+/*
 Docker Layer Caching Optimization
 
 This lesson demonstrates how to optimize Docker builds using layer caching.
@@ -23,13 +25,13 @@ BENEFIT: 10x faster rebuilds during development!
     - Exclude node_modules/
     - Exclude .env files
     - Exclude test fixtures
-"""
 
-# See the Dockerfile in this directory for the optimized approach
+See the Dockerfile in this directory for the optimized approach.
 
 BUILD WITH LAYER CACHING BENEFITS:
 docker build -t myapp:latest .
 
 First build: Takes ~30 seconds (downloads dependencies)
 Second build (no source change): Takes ~5 seconds (uses cache)
-Third build (fast rebuild after code change): Takes ~10 seconds (reprog, reuses dep cache)
+Third build (fast rebuild after code change): Takes ~10 seconds (recompile, reuses dep cache)
+*/
