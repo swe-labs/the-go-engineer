@@ -42,7 +42,7 @@ import (
 //   3. Use HttpOnly + Secure cookies for sessions
 //   4. Check authentication in middleware, not in each handler
 //
-// RUN: go run ./13-web-masterclass/6-auth
+// RUN: go run ./10-web-and-database/web-masterclass/6-auth
 // ============================================================================
 
 // contextKey is a custom type to avoid context key collisions.
@@ -76,6 +76,10 @@ func main() {
 
 	log.Println("Starting server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.8 posts CRUD")
+	fmt.Println("   Current: WM.6 (authentication)")
+	fmt.Println("---------------------------------------------------")
 }
 
 func handleRegister(w http.ResponseWriter, r *http.Request) {

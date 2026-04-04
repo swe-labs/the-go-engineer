@@ -96,4 +96,8 @@ func main() {
 	// - Braces are mandatory (Go enforces this too)
 	// - "if init; condition { }" keeps variables scoped tightly
 	// - The comma-ok pattern (value, ok := map[key]) is used everywhere in Go
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CF.3 switch")
+	fmt.Println("   Current: CF.2 (if / else)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -41,7 +41,7 @@ import (
 //   Enabled() is a fast pre-check. If it returns false, slog skips all attribute
 //   evaluation — this is why debug logging has near-zero cost when disabled.
 //
-// RUN: go run ./23-structured-logging/3-custom-handler
+// RUN: go run ./14-application-architecture/structured-logging/3-custom-handler
 // ============================================================================
 
 // ============================================================================
@@ -278,4 +278,8 @@ func main() {
 	// - Never mutate h.attrs in WithAttrs — always allocate a new slice
 	// - MultiHandler fans records out to N backends simultaneously
 	// - This is how every slog-compatible library (Datadog, Sentry) is built
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: SL.4 zerolog comparison")
+	fmt.Println("   Current: SL.3 (custom slog.Handler)")
+	fmt.Println("---------------------------------------------------")
 }

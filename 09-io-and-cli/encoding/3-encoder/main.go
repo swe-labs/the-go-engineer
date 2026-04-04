@@ -40,7 +40,7 @@ import (
 //   - Use json.Marshal when you need the []byte (e.g., storing in a database or Redis).
 //   - Use json.NewEncoder when writing directly to an io.Writer (e.g., HTTP ResponseWriter, file).
 //
-// RUN: go run ./11-encoding/3-encoder
+// RUN: go run ./09-io-and-cli/encoding/3-encoder
 // ============================================================================
 
 type DeviceLog struct {
@@ -116,4 +116,8 @@ func main() {
 	fmt.Println("  - Highly memory-efficient for large files or HTTP responses")
 	fmt.Println("  - Use this for APIs (ResponseWriter) instead of json.Marshal")
 	fmt.Println("  - Encode() automatically appends a newline (\n) after the JSON")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: EN.4 JSON decoder (stream)")
+	fmt.Println("   Current: EN.3 (JSON encoder (stream))")
+	fmt.Println("---------------------------------------------------")
 }

@@ -2,7 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./16-http-clients-and-mocking/4-manual-mock-2
+// RUN: go run ./13-quality-and-performance/http-client-testing/4-manual-mock-2
 package main
 
 import (
@@ -47,4 +47,8 @@ func main() {
 	}
 
 	fmt.Println("\n(See client_test.go to see the GetFunc pattern in action!)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: HM.3 table-driven mock")
+	fmt.Println("   Current: HM.2 (function-injection mock)")
+	fmt.Println("---------------------------------------------------")
 }

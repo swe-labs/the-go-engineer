@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Go Engineer — Dependency Graphs</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;background:#f9f8f5;color:#1a1a18}
+a{color:inherit;text-decoration:none}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+nav{background:#fff;border-right:1px solid #e0ded6;padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
+nav h2{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#888;padding:0 18px 10px;border-bottom:1px solid #e0ded6;margin-bottom:10px}
+nav a{display:block;padding:5px 18px;font-size:13px;color:#555;border-left:2px solid transparent;transition:all .15s}
+nav a:hover{color:#1a1a18;background:#f4f3ef}
+nav a.active{color:#1a1a18;border-left-color:#5348b3;font-weight:500}
+main{padding:40px 48px;max-width:860px}
+.section-block{margin-bottom:56px}
+.section-header{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #e0ded6}
+.section-num{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#888;flex-shrink:0}
+.section-title{font-size:20px;font-weight:600;color:#1a1a18}
+.section-desc{font-size:13px;color:#666;margin-bottom:16px}
+.sub-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#888;margin:20px 0 10px;padding-left:2px}
+.graph{background:#fff;border:1px solid #e0ded6;border-radius:10px;overflow:hidden}
+.lesson-row{display:grid;grid-template-columns:90px 1fr 180px;align-items:start;padding:9px 14px;border-bottom:1px solid #f0efe9;gap:10px}
+.lesson-row:last-child{border-bottom:none}
+.lesson-row:hover{background:#faf9f6}
+.lesson-row.exercise{background:#fffdf5}
+.lesson-row.exercise:hover{background:#fef9e8}
+.lid{font-size:12px;font-weight:600;color:#5348b3;font-family:monospace}
+.lesson-row.exercise .lid{color:#a05c00}
+.lname{font-size:13px;color:#1a1a18;font-weight:500}
+.lconcept{font-size:12px;color:#666;margin-top:1px}
+.lpre{font-size:12px;color:#888;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.lpre .arr{color:#ccc;font-size:10px}
+.lpre .tag{background:#f0eff8;color:#5348b3;border-radius:4px;padding:1px 6px;font-family:monospace;font-size:11px}
+.lesson-row.exercise .lpre .tag{background:#fef3dc;color:#a05c00}
+.entry-tag{background:#e8f5e8;color:#2a6a2a;border-radius:4px;padding:1px 6px;font-size:11px;font-family:monospace}
+.legend{display:flex;gap:20px;font-size:12px;color:#666;margin-bottom:24px;align-items:center}
+.legend-item{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:3px}
+.dot.regular{background:#f0eff8;border:1px solid #5348b3}
+.dot.exercise{background:#fef3dc;border:1px solid #a05c00}
+.dot.entry{background:#e8f5e8;border:1px solid #2a6a2a}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+.intro{font-size:14px;color:#555;margin-bottom:40px;line-height:1.7}
+.graph-header{background:#f7f6f2;padding:7px 14px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#888;border-bottom:1px solid #e0ded6;display:grid;grid-template-columns:90px 1fr 180px;gap:10px}
+.ex-badge{font-size:10px;background:#fef3dc;color:#a05c00;border-radius:3px;padding:1px 5px;font-weight:600;margin-left:4px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <h2>Sections</h2>
+  <a href="#s01">§01 Core Foundations</a>
+  <a href="#s02">§02 Control Flow</a>
+  <a href="#s03">§03 Data Structures</a>
+  <a href="#s04">§04 Functions &amp; Errors</a>
+  <a href="#s05">§05 Types &amp; Interfaces</a>
+  <a href="#s06">§06 Composition</a>
+  <a href="#s07">§07 Strings &amp; Text</a>
+  <a href="#s08">§08 Modules &amp; Packages</a>
+  <a href="#s09fs">§09 IO — Filesystem</a>
+  <a href="#s09enc">§09 IO — Encoding</a>
+  <a href="#s09cli">§09 IO — CLI Tools</a>
+  <a href="#s10db">§10 Web — Databases</a>
+  <a href="#s10web">§10 Web — Masterclass</a>
+  <a href="#s10http">§10 Web — HTTP Client</a>
+  <a href="#s11con">§11 Concurrency</a>
+  <a href="#s11ctx">§11 Context</a>
+  <a href="#s11time">§11 Time &amp; Scheduling</a>
+  <a href="#s12">§12 Concurrency Patterns</a>
+  <a href="#s13t">§13 Testing</a>
+  <a href="#s13mock">§13 HTTP Client Testing</a>
+  <a href="#s13prof">§13 Profiling</a>
+  <a href="#s14pkg">§14 Package Design</a>
+  <a href="#s14log">§14 Structured Logging</a>
+  <a href="#s14grpc">§14 gRPC</a>
+  <a href="#s14gs">§14 Graceful Shutdown</a>
+  <a href="#s14cap">§14 Enterprise Capstone</a>
+  <a href="#s15">§15 Code Generation</a>
+</nav>
+<main>
+  <h1>Dependency Graphs</h1>
+  <p class="intro">Every section is self-contained. Each row shows one lesson, the single concept it introduces, and its direct prerequisites <em>within</em> that section. Cross-section dependencies are noted in the prerequisites column when a concept from an earlier section is the entry condition.</p>
+  <div class="legend">
+    <div class="legend-item"><div class="dot entry"></div> Entry point (no within-section prereqs)</div>
+    <div class="legend-item"><div class="dot regular"></div> Regular lesson</div>
+    <div class="legend-item"><div class="dot exercise"></div> Exercise (capstone)</div>
+  </div>
+
+<!-- ═══════════════════════════════════════════════ §01 Getting Started -->
+<div id="s01" class="section-block">
+  <div class="section-header"><span class="section-num">§01</span><span class="section-title">Core Foundations</span></div>
+  <p class="section-desc">Two tracks run in sequence: first get Go running, then learn the language primitives. The exercise synthesises all four language-basics lessons.</p>
+
+  <div class="sub-label">Getting Started</div>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">GS.1</span>
+      <div><div class="lname">installation</div><div class="lconcept">Verify Go binary; inspect GOROOT, GOPATH</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GS.2</span>
+      <div><div class="lname">hello-world</div><div class="lconcept">package main · import · func main · fmt.Println</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GS.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GS.3</span>
+      <div><div class="lname">how-go-works</div><div class="lconcept">Compilation model · packages · exported names</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GS.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GS.4</span>
+      <div><div class="lname">dev-environment</div><div class="lconcept">go fmt · go vet · go build · go test · ./...</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GS.3</span></div>
+    </div>
+  </div>
+
+  <div class="sub-label">Language Basics</div>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">LB.1</span>
+      <div><div class="lname">variables</div><div class="lconcept">var · := · zero values · basic types</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">LB.2</span>
+      <div><div class="lname">constants</div><div class="lconcept">const · compile-time inlining · typed vs untyped</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">LB.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">LB.3</span>
+      <div><div class="lname">enums / iota</div><div class="lconcept">iota · named types on int · const block</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">LB.2</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">LB.4 <span class="ex-badge">★</span></span>
+      <div><div class="lname">app-logger</div><div class="lconcept">Synthesise types + iota + Stringer</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">LB.1</span><span class="tag">LB.2</span><span class="tag">LB.3</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §02 Control Flow -->
+<div id="s02" class="section-block">
+  <div class="section-header"><span class="section-num">§02</span><span class="section-title">Control Flow</span></div>
+  <p class="section-desc">One loop construct, two branching constructs. The exercise requires all three in combination.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">CF.1</span>
+      <div><div class="lname">for loop</div><div class="lconcept">C-style · while-style · infinite · range</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CF.2</span>
+      <div><div class="lname">if / else</div><div class="lconcept">Guard clauses · if-with-init · comma-ok idiom</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CF.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CF.3</span>
+      <div><div class="lname">switch</div><div class="lconcept">No fall-through · type switch · tagless switch</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CF.1</span><span class="tag">CF.2</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">CF.4 <span class="ex-badge">★</span></span>
+      <div><div class="lname">pricing-calculator</div><div class="lconcept">Map lookups · HasSuffix · switch on bool</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CF.1</span><span class="tag">CF.2</span><span class="tag">CF.3</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §03 Data Structures -->
+<div id="s03" class="section-block">
+  <div class="section-header"><span class="section-num">§03</span><span class="section-title">Data Structures</span></div>
+  <p class="section-desc">Fixed arrays establish memory intuition. Slices build on that. Pointers unlock mutation. The advanced-slicing lesson requires both slices and pointers.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">DS.1</span>
+      <div><div class="lname">arrays</div><div class="lconcept">Fixed-size contiguous memory · value-type copy</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">DS.2</span>
+      <div><div class="lname">slices</div><div class="lconcept">Slice header · make · append · capacity growth</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DS.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">DS.3</span>
+      <div><div class="lname">maps</div><div class="lconcept">Hash table · O(1) lookup · comma-ok · delete</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DS.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">DS.4</span>
+      <div><div class="lname">pointers</div><div class="lconcept">&amp; · * · pass-by-value vs reference · nil</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DS.1</span><span class="tag">DS.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">DS.5</span>
+      <div><div class="lname">slices-2</div><div class="lconcept">Sub-slicing · shared backing array · re-allocation trap</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DS.2</span><span class="tag">DS.4</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">DS.6 <span class="ex-badge">★</span></span>
+      <div><div class="lname">contact-manager</div><div class="lconcept">Secondary index · init() · pointer returns for nil-ability</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DS.1</span><span class="tag">DS.2</span><span class="tag">DS.3</span><span class="tag">DS.4</span><span class="tag">DS.5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §04 Functions & Errors -->
+<div id="s04" class="section-block">
+  <div class="section-header"><span class="section-num">§04</span><span class="section-title">Functions &amp; Errors</span></div>
+  <p class="section-desc">Functions first, then closures, then error-as-value, then cleanup. Defer must precede panic/recover. Error-wrapping builds on custom errors.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">FE.1</span>
+      <div><div class="lname">functions</div><div class="lconcept">Parameters · return types · pass-by-value</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FE.2</span>
+      <div><div class="lname">closures &amp; recursion</div><div class="lconcept">Captured variables · anonymous functions · stack frames</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FE.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FE.3</span>
+      <div><div class="lname">variadic functions</div><div class="lconcept">...T syntax · slice internally · spread operator</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FE.1</span><span class="tag">FE.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FE.4</span>
+      <div><div class="lname">multiple return values</div><div class="lconcept">(value, error) convention · named returns · naked return</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FE.1</span><span class="tag">FE.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FE.5</span>
+      <div><div class="lname">custom errors</div><div class="lconcept">error interface · sentinel errors · errors.Is</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FE.4</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FE.6</span>
+      <div><div class="lname">error wrapping</div><div class="lconcept">fmt.Errorf %w · errors.As · errors.Join</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FE.5</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FE.7</span>
+      <div><div class="lname">defer</div><div class="lconcept">LIFO execution · argument evaluation timing · resource cleanup</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FE.1</span><span class="tag">FE.5</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FE.8</span>
+      <div><div class="lname">panic &amp; recover</div><div class="lconcept">Stack unwinding · recover inside defer only</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FE.7</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">FE.9 <span class="ex-badge">★</span></span>
+      <div><div class="lname">error-handling</div><div class="lconcept">Custom struct error · errors.As extraction · defer + return</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FE.4</span><span class="tag">FE.5</span><span class="tag">FE.6</span><span class="tag">FE.7</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §05 Types & Interfaces -->
+<div id="s05" class="section-block">
+  <div class="section-header"><span class="section-num">§05</span><span class="section-title">Types &amp; Interfaces</span></div>
+  <p class="section-desc">Structs carry data; methods attach behaviour; interfaces name contracts. Stringer is the first interface you implement. Generics require understanding constraints, which build on interfaces.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">TI.1</span>
+      <div><div class="lname">structs</div><div class="lconcept">Field layout · constructor pattern · value vs pointer copy</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TI.2</span>
+      <div><div class="lname">methods</div><div class="lconcept">Value receiver vs pointer receiver · method sets</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TI.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TI.3</span>
+      <div><div class="lname">interfaces</div><div class="lconcept">Implicit satisfaction · polymorphism · type assertions</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TI.1</span><span class="tag">TI.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TI.4</span>
+      <div><div class="lname">Stringer</div><div class="lconcept">fmt.Stringer · named type on int · custom Weekday</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TI.2</span><span class="tag">TI.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TI.5</span>
+      <div><div class="lname">generics</div><div class="lconcept">[T constraint] · comparable · union constraints · Map/Filter</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TI.3</span><span class="tag">TI.4</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">TI.6 <span class="ex-badge">★</span></span>
+      <div><div class="lname">payroll-processor</div><div class="lconcept">Polymorphic slice · embedded interface · generic helper</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TI.1</span><span class="tag">TI.2</span><span class="tag">TI.3</span><span class="tag">TI.4</span><span class="tag">TI.5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §06 Composition -->
+<div id="s06" class="section-block">
+  <div class="section-header"><span class="section-num">§06</span><span class="section-title">Composition</span></div>
+  <p class="section-desc">Named fields (composition) must precede anonymous fields (embedding) so the promotion behaviour has contrast. The exercise requires both.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">CO.1</span>
+      <div><div class="lname">composition</div><div class="lconcept">Has-A vs Is-A · named field access · component reuse</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CO.2</span>
+      <div><div class="lname">embedding</div><div class="lconcept">Anonymous fields · method promotion · field shadowing</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CO.1</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">CO.3 <span class="ex-badge">★</span></span>
+      <div><div class="lname">bank-account</div><div class="lconcept">Embedded Account · SavingsAccount · OverdraftAccount shadowing</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CO.1</span><span class="tag">CO.2</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §07 Strings & Text -->
+<div id="s07" class="section-block">
+  <div class="section-header"><span class="section-num">§07</span><span class="section-title">Strings &amp; Text</span></div>
+  <p class="section-desc">String internals first, then formatting verbs, then the byte/rune distinction, then regex, then templates. Each lesson assumes knowledge of the previous.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">ST.1</span>
+      <div><div class="lname">strings</div><div class="lconcept">Immutable byte slice · strings package · strings.Builder</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">ST.2</span>
+      <div><div class="lname">formatting</div><div class="lconcept">fmt verbs · width/precision · Sprintf vs Printf vs Fprintf</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">ST.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">ST.3</span>
+      <div><div class="lname">unicode &amp; runes</div><div class="lconcept">UTF-8 multi-byte · rune · for-range vs byte iteration</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">ST.1</span><span class="tag">ST.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">ST.4</span>
+      <div><div class="lname">regex</div><div class="lconcept">MustCompile · FindAllString · capture groups · ReplaceAllStringFunc</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">ST.1</span><span class="tag">ST.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">ST.5</span>
+      <div><div class="lname">text templates</div><div class="lconcept">text/template · {{range}} · {{if}} · Execute to io.Writer</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">ST.1</span><span class="tag">ST.2</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">ST.6 <span class="ex-badge">★</span></span>
+      <div><div class="lname">log-parser</div><div class="lconcept">Regex outside loop · bufio.Scanner · strings.Builder output</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">ST.1</span><span class="tag">ST.2</span><span class="tag">ST.3</span><span class="tag">ST.4</span><span class="tag">ST.5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §08 Modules -->
+<div id="s08" class="section-block">
+  <div class="section-header"><span class="section-num">§08</span><span class="section-title">Modules &amp; Packages</span></div>
+  <p class="section-desc">Module anatomy first, then add/remove/inspect commands, then semantic versioning and the replace directive. Strictly linear.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">MP.1</span>
+      <div><div class="lname">module basics</div><div class="lconcept">go.mod anatomy · module path · go.sum checksums</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">MP.2</span>
+      <div><div class="lname">managing deps</div><div class="lconcept">go get · go mod tidy · go list · go mod why</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">MP.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">MP.3</span>
+      <div><div class="lname">versioning</div><div class="lconcept">semver · v2 import path rule · replace · exclude · vendoring</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">MP.1</span><span class="tag">MP.2</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §09 Filesystem -->
+<div id="s09fs" class="section-block">
+  <div class="section-header"><span class="section-num">§09 · Filesystem</span><span class="section-title">IO — Filesystem</span></div>
+  <p class="section-desc">Basic file I/O before path manipulation before directories before temp files before embed. The io-patterns lesson depends on all three basic lessons (files, paths, directories). The testing-seam lesson requires embed and io-patterns.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">FS.1</span>
+      <div><div class="lname">files</div><div class="lconcept">os.WriteFile · os.ReadFile · bufio.Scanner · os.OpenFile flags</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FS.2</span>
+      <div><div class="lname">paths</div><div class="lconcept">filepath.Join · Base · Dir · Ext · Abs · Clean · Glob</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FS.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FS.3</span>
+      <div><div class="lname">directories</div><div class="lconcept">MkdirAll · ReadDir · WalkDir · RemoveAll · os.Stat</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FS.1</span><span class="tag">FS.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FS.4</span>
+      <div><div class="lname">temp files</div><div class="lconcept">MkdirTemp · CreateTemp · unique names · immediate defer</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FS.1</span><span class="tag">FS.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FS.5</span>
+      <div><div class="lname">embed</div><div class="lconcept">//go:embed · string/[]byte · embed.FS · single-binary deployment</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FS.3</span><span class="tag">FS.4</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FS.6</span>
+      <div><div class="lname">io.Reader / io.Writer patterns</div><div class="lconcept">strings.Reader · bytes.Buffer · io.Copy · TeeReader · MultiWriter</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FS.1</span><span class="tag">FS.2</span><span class="tag">FS.3</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">FS.7 <span class="ex-badge">★</span></span>
+      <div><div class="lname">log-search</div><div class="lconcept">WalkDir filter by ext · Scanner per file · case-insensitive match</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FS.1</span><span class="tag">FS.2</span><span class="tag">FS.3</span><span class="tag">FS.4</span><span class="tag">FS.5</span><span class="tag">FS.6</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">FS.8</span>
+      <div><div class="lname">fs.FS testing seam</div><div class="lconcept">os.DirFS · fstest.MapFS · zero-disk-IO tests</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">FS.5</span><span class="tag">FS.6</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §09 Encoding -->
+<div id="s09enc" class="section-block">
+  <div class="section-header"><span class="section-num">§09 · Encoding</span><span class="section-title">IO — Encoding</span></div>
+  <p class="section-desc">Marshal before unmarshal. Streaming encoder/decoder build on the batch forms. Base64 is independent of streaming. The config-parser exercise requires all four core lessons.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">EN.1</span>
+      <div><div class="lname">JSON marshalling</div><div class="lconcept">json.Marshal · MarshalIndent · struct tags · omitempty · "-"</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">EN.2</span>
+      <div><div class="lname">JSON unmarshalling</div><div class="lconcept">json.Unmarshal · pointer required · zero values · map[string]any</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">EN.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">EN.3</span>
+      <div><div class="lname">JSON encoder (stream)</div><div class="lconcept">json.NewEncoder · io.Writer · O(1) memory · SetIndent</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">EN.1</span><span class="tag">EN.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">EN.4</span>
+      <div><div class="lname">JSON decoder (stream)</div><div class="lconcept">json.NewDecoder · io.Reader · NDJSON · EOF loop</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">EN.2</span><span class="tag">EN.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">EN.5</span>
+      <div><div class="lname">Base64</div><div class="lconcept">StdEncoding · URLEncoding · transport-safe binary</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">EN.1</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">EN.6 <span class="ex-badge">★</span></span>
+      <div><div class="lname">config-parser</div><div class="lconcept">Decoder from file · validate() · zero-value detection</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">EN.1</span><span class="tag">EN.2</span><span class="tag">EN.3</span><span class="tag">EN.4</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §09 CLI -->
+<div id="s09cli" class="section-block">
+  <div class="section-header"><span class="section-num">§09 · CLI</span><span class="section-title">IO — CLI Tools</span></div>
+  <p class="section-desc">Raw args before typed flags before subcommand routing. The exercise combines all three plus filesystem skills.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">CL.1</span>
+      <div><div class="lname">args</div><div class="lconcept">os.Args · os.Getenv · os.Exit codes · safe index access</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CL.2</span>
+      <div><div class="lname">flags</div><div class="lconcept">flag.String/Int/Bool · flag.Parse() · pointer return · -help</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CL.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CL.3</span>
+      <div><div class="lname">subcommands</div><div class="lconcept">flag.NewFlagSet · os.Args[2:] slicing · switch routing</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CL.1</span><span class="tag">CL.2</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">CL.4 <span class="ex-badge">★</span></span>
+      <div><div class="lname">file-organizer</div><div class="lconcept">--dry-run pattern · os.ReadDir · os.Rename · MkdirAll</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CL.1</span><span class="tag">CL.2</span><span class="tag">CL.3</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §10 Databases -->
+<div id="s10db" class="section-block">
+  <div class="section-header"><span class="section-num">§10 · Databases</span><span class="section-title">Web — Databases</span></div>
+  <p class="section-desc">Connection before queries. Both INSERT and SELECT before prepared statements (which optimise them). Transactions require a working connection and basic queries. Repository pattern wraps everything.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">DB.1</span>
+      <div><div class="lname">connecting</div><div class="lconcept">Blank import · sql.Open lazy · db.Ping · connection pool</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">DB.2</span>
+      <div><div class="lname">query — INSERT</div><div class="lconcept">db.Exec · ? parameterisation · LastInsertId · bcrypt hash</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DB.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">DB.3</span>
+      <div><div class="lname">query — SELECT</div><div class="lconcept">db.QueryRow · rows.Scan · rows.Close · rows.Err</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DB.1</span><span class="tag">DB.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">DB.4</span>
+      <div><div class="lname">prepared statements</div><div class="lconcept">db.Prepare · stmt.ExecContext · when to prepare explicitly</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DB.2</span><span class="tag">DB.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">DB.5</span>
+      <div><div class="lname">transactions</div><div class="lconcept">BeginTx · defer Rollback · Commit · ACID all-or-nothing</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DB.1</span><span class="tag">DB.2</span><span class="tag">DB.3</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">DB.6 <span class="ex-badge">★</span></span>
+      <div><div class="lname">repository</div><div class="lconcept">UserRepository interface · SQLite impl · dependency injection</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">DB.1</span><span class="tag">DB.2</span><span class="tag">DB.3</span><span class="tag">DB.4</span><span class="tag">DB.5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §10 Web -->
+<div id="s10web" class="section-block">
+  <div class="section-header"><span class="section-num">§10 · Web</span><span class="section-title">Web — Masterclass</span></div>
+  <p class="section-desc">Routing is the entry point. DI wraps routing. Templates need a working server. Middleware wraps the full mux. Auth requires sessions. CRUD requires auth + repository. Pagination and comments both require CRUD. Full-app synthesises all eleven lessons.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">WM.1</span>
+      <div><div class="lname">routing</div><div class="lconcept">http.NewServeMux · method patterns · {param} · HandleFunc</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">WM.2</span>
+      <div><div class="lname">dependency injection</div><div class="lconcept">application struct · constructor · handler methods on struct</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">WM.3</span>
+      <div><div class="lname">templates</div><div class="lconcept">html/template · cache once · layout + partials + page</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.1</span><span class="tag">WM.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">WM.4</span>
+      <div><div class="lname">middleware</div><div class="lconcept">func(http.Handler) http.Handler · chain · panic recovery</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.1</span><span class="tag">WM.2</span><span class="tag">WM.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">WM.5</span>
+      <div><div class="lname">sessions</div><div class="lconcept">Cookie-based sessions · flash messages · session store</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.1</span><span class="tag">WM.2</span><span class="tag">WM.3</span><span class="tag">WM.4</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">WM.6</span>
+      <div><div class="lname">authentication</div><div class="lconcept">bcrypt · requireAuth middleware · context.WithValue user ID</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.1</span><span class="tag">WM.2</span><span class="tag">WM.4</span><span class="tag">WM.5</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">WM.7</span>
+      <div><div class="lname">forms</div><div class="lconcept">Form struct · Required · MinLength · MatchesField · Valid()</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.1</span><span class="tag">WM.2</span><span class="tag">WM.4</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">WM.8</span>
+      <div><div class="lname">posts CRUD</div><div class="lconcept">PostRepository interface · ExecContext · pagination offset</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.1</span><span class="tag">WM.2</span><span class="tag">WM.4</span><span class="tag">WM.6</span><span class="tag">WM.7</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">WM.9</span>
+      <div><div class="lname">pagination</div><div class="lconcept">computeMetadata · LIMIT/OFFSET · HasNext/HasPrev · links</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.8</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">WM.10</span>
+      <div><div class="lname">comments</div><div class="lconcept">Adjacency list · 2-pass tree build · sync.RWMutex store</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.8</span><span class="tag">WM.9</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">WM.11 <span class="ex-badge">★</span></span>
+      <div><div class="lname">full-app</div><div class="lconcept">All patterns wired together in one production-ready server</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">WM.1</span>–<span class="tag">WM.10</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §10 HTTP Client -->
+<div id="s10http" class="section-block">
+  <div class="section-header"><span class="section-num">§10 · HTTP</span><span class="section-title">Web — HTTP Client</span></div>
+  <p class="section-desc">The naive client demonstrates the problem; the refactor lesson demonstrates the solution. Strictly sequential.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">HC.1</span>
+      <div><div class="lname">basic GET</div><div class="lconcept">http.Get · resp.Body.Close · DefaultClient no-timeout problem</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">HC.2</span>
+      <div><div class="lname">refactor for testability</div><div class="lconcept">HTTPClient interface · IoTClient struct · NewIoTClient DI</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">HC.1</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §11 Concurrency -->
+<div id="s11con" class="section-block">
+  <div class="section-header"><span class="section-num">§11 · Goroutines</span><span class="section-title">Concurrency — Goroutines &amp; Channels</span></div>
+  <p class="section-desc">Goroutines first. WaitGroups require goroutines. Channels require both. Buffered channels extend unbuffered. Closing extends buffered. Select requires all channel forms. Races and sync primitives are a parallel track that needs goroutines and basic channels. The pipeline project and downloader exercise require channels + closing.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">GC.1</span>
+      <div><div class="lname">goroutines</div><div class="lconcept">go keyword · M:N scheduler · 2KB stack · closure-capture bug</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GC.2</span>
+      <div><div class="lname">WaitGroups</div><div class="lconcept">Add · defer Done · Wait · pass by pointer rule</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GC.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GC.3</span>
+      <div><div class="lname">channels (unbuffered)</div><div class="lconcept">make(chan T) · send · receive · block-until-ready · chan&lt;- / &lt;-chan</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GC.1</span><span class="tag">GC.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GC.4</span>
+      <div><div class="lname">buffered channels</div><div class="lconcept">make(chan T, N) · len vs cap · producer-consumer decoupling</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GC.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GC.5</span>
+      <div><div class="lname">closing channels</div><div class="lconcept">close() · range over channel · comma-ok · broadcast signal</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GC.3</span><span class="tag">GC.4</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GC.6</span>
+      <div><div class="lname">pipeline project</div><div class="lconcept">ping/pong actors · select on done channel · context cancel</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GC.3</span><span class="tag">GC.4</span><span class="tag">GC.5</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">GC.7 <span class="ex-badge">★</span></span>
+      <div><div class="lname">concurrent downloader</div><div class="lconcept">Semaphore pattern · WaitGroup + channel · results aggregation</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GC.1</span><span class="tag">GC.2</span><span class="tag">GC.3</span><span class="tag">GC.4</span><span class="tag">GC.5</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GC.8</span>
+      <div><div class="lname">race conditions</div><div class="lconcept">sync.Mutex · sync.RWMutex · sync/atomic · -race flag</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GC.1</span><span class="tag">GC.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GC.9</span>
+      <div><div class="lname">select deep dive</div><div class="lconcept">Multiplexing · timeout with time.After · non-blocking default · fan-in</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GC.3</span><span class="tag">GC.4</span><span class="tag">GC.5</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GC.10</span>
+      <div><div class="lname">sync primitives</div><div class="lconcept">sync.Once singleton · sync.Map · when to use each</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GC.8</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §11 Context -->
+<div id="s11ctx" class="section-block">
+  <div class="section-header"><span class="section-num">§11 · Context</span><span class="section-title">Concurrency — Context</span></div>
+  <p class="section-desc">Background is the root — all others derive from it. WithCancel adds manual cancellation. WithTimeout builds on that with an automatic deadline. WithValue adds metadata. The exercise requires all four forms.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">CT.1</span>
+      <div><div class="lname">Background &amp; TODO</div><div class="lconcept">Root context · Context interface (Deadline/Done/Err/Value)</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CT.2</span>
+      <div><div class="lname">WithCancel</div><div class="lconcept">cancel func · ctx.Done() · goroutine leak prevention · tree propagation</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CT.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CT.3</span>
+      <div><div class="lname">WithTimeout</div><div class="lconcept">Duration-based auto-cancel · WithDeadline · DeadlineExceeded</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CT.1</span><span class="tag">CT.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CT.4</span>
+      <div><div class="lname">WithValue</div><div class="lconcept">Private key type · request-scoped metadata · O(depth) lookup</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CT.1</span><span class="tag">CT.2</span><span class="tag">CT.3</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">CT.5 <span class="ex-badge">★</span></span>
+      <div><div class="lname">timeout-aware API client</div><div class="lconcept">http.NewRequestWithContext · DeadlineExceeded detection</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CT.1</span><span class="tag">CT.2</span><span class="tag">CT.3</span><span class="tag">CT.4</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §11 Time -->
+<div id="s11time" class="section-block">
+  <div class="section-header"><span class="section-num">§11 · Time</span><span class="section-title">Concurrency — Time &amp; Scheduling</span></div>
+  <p class="section-desc">Time basics before formatting before timers and tickers. Random is independent of scheduling. Timezones require both basics and formatting. The scheduler requires tickers. The reminder exercise requires basics through timers.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">TM.1</span>
+      <div><div class="lname">time basics</div><div class="lconcept">time.Time · Duration · Add · Sub · wall vs monotonic clock</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TM.2</span>
+      <div><div class="lname">formatting</div><div class="lconcept">Reference Time "2006-01-02 15:04:05" · Parse · RFC3339</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TM.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TM.3</span>
+      <div><div class="lname">timers &amp; tickers</div><div class="lconcept">time.NewTimer · time.NewTicker · &lt;-C · ticker.Stop() leak</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TM.1</span><span class="tag">TM.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TM.4</span>
+      <div><div class="lname">random numbers</div><div class="lconcept">rand/v2 · IntN · Shuffle · Perm · seeded PCG</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TM.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TM.5</span>
+      <div><div class="lname">scheduler</div><div class="lconcept">Actor model · ScheduleOnce · ScheduleInterval · StopAll drain</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TM.3</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TM.6</span>
+      <div><div class="lname">timezones</div><div class="lconcept">time.LoadLocation · IANA database · In() · always store UTC</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TM.1</span><span class="tag">TM.2</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">TM.7 <span class="ex-badge">★</span></span>
+      <div><div class="lname">console reminder</div><div class="lconcept">time.AfterFunc · ticker countdown · select on done channel</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TM.1</span><span class="tag">TM.2</span><span class="tag">TM.3</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §12 -->
+<div id="s12" class="section-block">
+  <div class="section-header"><span class="section-num">§12</span><span class="section-title">Concurrency Patterns</span></div>
+  <p class="section-desc">errgroup basics before errgroup-with-context (which adds cancellation). sync.Pool is conceptually independent but must be taught alongside errgroup so the bounded exercise can combine both. Both exercises require all three foundation lessons.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">CP.1</span>
+      <div><div class="lname">errgroup basics</div><div class="lconcept">errgroup.Group · g.Go · g.Wait · first-error semantics</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CP.2</span>
+      <div><div class="lname">errgroup + context</div><div class="lconcept">WithContext · auto-cancel on first error · fan-out pipeline</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CP.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">CP.3</span>
+      <div><div class="lname">sync.Pool</div><div class="lconcept">Get → use → Reset → Put · GC eviction · zero-alloc buffers</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">CP.4 <span class="ex-badge">★</span></span>
+      <div><div class="lname">bounded pipeline</div><div class="lconcept">g.SetLimit · g.TryGo · pooled buffers under bounded concurrency</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CP.1</span><span class="tag">CP.2</span><span class="tag">CP.3</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">CP.5 <span class="ex-badge">★</span></span>
+      <div><div class="lname">URL health checker</div><div class="lconcept">Pooled http.Client · SetLimit(5) · sort by latency</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">CP.1</span><span class="tag">CP.2</span><span class="tag">CP.3</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §13 Testing -->
+<div id="s13t" class="section-block">
+  <div class="section-header"><span class="section-num">§13 · Testing</span><span class="section-title">Quality — Testing</span></div>
+  <p class="section-desc">Unit tests establish the testing.T API. Table-driven extends that with sub-tests. HTTP handler testing requires both plus the httptest package. Benchmarking is independent but builds on table-driven instincts.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">TE.1</span>
+      <div><div class="lname">unit testing</div><div class="lconcept">testing.T · t.Run · testify/assert · assert.NoError</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TE.2</span>
+      <div><div class="lname">table-driven tests</div><div class="lconcept">[]struct table · t.Run per row · data-isolated sub-tests</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TE.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TE.3</span>
+      <div><div class="lname">HTTP handler testing</div><div class="lconcept">httptest.NewRecorder · httptest.NewRequest · no real server</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TE.1</span><span class="tag">TE.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">TE.4</span>
+      <div><div class="lname">benchmarking</div><div class="lconcept">testing.B · b.ResetTimer · b.ReportAllocs · -benchmem</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">TE.1</span><span class="tag">TE.2</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §13 HTTP Mocking -->
+<div id="s13mock" class="section-block">
+  <div class="section-header"><span class="section-num">§13 · Mocking</span><span class="section-title">Quality — HTTP Client Testing</span></div>
+  <p class="section-desc">Manual mock establishes the pattern (interface → fake struct). Function-injection mock extends the fake with a GetFunc field. Table-driven mock applies §13 testing patterns to the function mock. Testify/mock replaces the hand-written mock with a library.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">HM.1</span>
+      <div><div class="lname">manual mock</div><div class="lconcept">MockHTTPClient struct · io.NopCloser · injected interface</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">HM.2</span>
+      <div><div class="lname">function-injection mock</div><div class="lconcept">GetFunc field · GetCalls spy · per-test dynamic behaviour</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">HM.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">HM.3</span>
+      <div><div class="lname">table-driven mock</div><div class="lconcept">[]struct test matrix · sub-tests per case · errContains check</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">HM.1</span><span class="tag">HM.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">HM.4</span>
+      <div><div class="lname">testify/mock</div><div class="lconcept">mock.Mock embed · .On/.Return · AssertNumberOfCalls</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">HM.1</span><span class="tag">HM.2</span><span class="tag">HM.3</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §13 Profiling -->
+<div id="s13prof" class="section-block">
+  <div class="section-header"><span class="section-num">§13 · Profiling</span><span class="section-title">Quality — Profiling</span></div>
+  <p class="section-desc">File-based CPU/memory profiling before live HTTP endpoint profiling. The HTTP endpoint lesson also requires familiarity with HTTP servers.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">PR.1</span>
+      <div><div class="lname">CPU profile</div><div class="lconcept">pprof.StartCPUProfile · StopCPUProfile · go tool pprof · flat vs cum</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">PR.2</span>
+      <div><div class="lname">live pprof endpoint</div><div class="lconcept">net/http/pprof blank import · two-port pattern · goroutine leak</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">PR.1</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §14 Package Design -->
+<div id="s14pkg" class="section-block">
+  <div class="section-header"><span class="section-num">§14 · Packages</span><span class="section-title">Architecture — Package Design</span></div>
+  <p class="section-desc">Naming conventions before export rules (which require understanding what exported means), before project layout (which presupposes both). Strictly linear.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">PD.1</span>
+      <div><div class="lname">naming</div><div class="lconcept">Short lowercase names · no stutter · no utils · name by domain</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">PD.2</span>
+      <div><div class="lname">visibility</div><div class="lconcept">Uppercase = exported · internal/ compiler enforcement · minimal API</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">PD.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">PD.3</span>
+      <div><div class="lname">project layout</div><div class="lconcept">cmd/ · internal/ · pkg/ · start flat · anti-patterns</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">PD.1</span><span class="tag">PD.2</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §14 Structured Logging -->
+<div id="s14log" class="section-block">
+  <div class="section-header"><span class="section-num">§14 · Logging</span><span class="section-title">Architecture — Structured Logging</span></div>
+  <p class="section-desc">slog basics before the context-keyed logger (which requires HTTP middleware knowledge). Custom handler requires both. zerolog comparison requires the custom handler for contrast. The exercise requires basics through custom handler.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">SL.1</span>
+      <div><div class="lname">slog basics</div><div class="lconcept">TextHandler · JSONHandler · levels · typed attrs · With · Groups</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">SL.2</span>
+      <div><div class="lname">context-keyed logger</div><div class="lconcept">Private key type · FromContext · LoggingMiddleware · request_id</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">SL.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">SL.3</span>
+      <div><div class="lname">custom slog.Handler</div><div class="lconcept">Enabled/Handle/WithAttrs/WithGroup · PrettyHandler · MultiHandler</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">SL.1</span><span class="tag">SL.2</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">SL.4</span>
+      <div><div class="lname">zerolog comparison</div><div class="lconcept">0-alloc builder chain · when to choose zerolog vs slog</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">SL.1</span><span class="tag">SL.3</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">SL.5 <span class="ex-badge">★</span></span>
+      <div><div class="lname">PII redactor</div><div class="lconcept">ReplaceAttr · key-based redaction · JSON handler with options</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">SL.1</span><span class="tag">SL.2</span><span class="tag">SL.3</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §14 gRPC -->
+<div id="s14grpc" class="section-block">
+  <div class="section-header"><span class="section-num">§14 · gRPC</span><span class="section-title">Architecture — gRPC</span></div>
+  <p class="section-desc">The proto definition generates code; the server and client lessons consume that generated code. Server must precede client so the service is running when the client lesson is taught.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">GR.1</span>
+      <div><div class="lname">proto definition + gen</div><div class="lconcept">proto3 service/message · protoc · generated Go stubs</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GR.2</span>
+      <div><div class="lname">unary server</div><div class="lconcept">Implement generated interface · status codes · interceptors · metadata</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GR.1</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GR.3</span>
+      <div><div class="lname">unary client</div><div class="lconcept">grpc.NewClient · typed stub · context deadline · status.FromError</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GR.1</span><span class="tag">GR.2</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §14 Graceful Shutdown -->
+<div id="s14gs" class="section-block">
+  <div class="section-header"><span class="section-num">§14 · Shutdown</span><span class="section-title">Architecture — Graceful Shutdown</span></div>
+  <p class="section-desc">OS signal handling is the entry point. HTTP drain builds on that by wiring shutdown into the server. The capstone combines both with a background worker and Kubernetes readiness probe pattern.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">GS.1</span>
+      <div><div class="lname">signal.NotifyContext</div><div class="lconcept">SIGTERM · SIGINT · ctx cancel on signal · second Ctrl+C force-kill</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+    <div class="lesson-row">
+      <span class="lid">GS.2</span>
+      <div><div class="lname">HTTP graceful drain</div><div class="lconcept">http.Server.Shutdown · ErrServerClosed · 30s deadline · readiness 503</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GS.1</span></div>
+    </div>
+    <div class="lesson-row exercise">
+      <span class="lid">GS.3 <span class="ex-badge">★</span></span>
+      <div><div class="lname">shutdown capstone</div><div class="lconcept">Signal → ready=503 → HTTP drain → workers → DB close order</div></div>
+      <div class="lpre"><span class="arr">→</span><span class="tag">GS.1</span><span class="tag">GS.2</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §14 Enterprise Capstone -->
+<div id="s14cap" class="section-block">
+  <div class="section-header"><span class="section-num">§14 · Capstone</span><span class="section-title">Architecture — Enterprise Capstone</span></div>
+  <p class="section-desc">This is the curriculum's culminating project. Every previous section contributes at least one pattern. The Docker Compose boots Postgres, runs embedded migrations, and serves the REST API.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row exercise">
+      <span class="lid">EC.1 <span class="ex-badge">★</span></span>
+      <div><div class="lname">enterprise capstone</div><div class="lconcept">cmd/api · internal/{models,repository,handlers,middleware} · Docker Compose + Postgres + migrations</div></div>
+      <div class="lpre" style="flex-direction:column;align-items:flex-start;gap:3px">
+        <span style="font-size:11px;color:#888">All §10–§14 patterns combined</span>
+        <span style="font-size:11px;color:#888">Multi-stage Dockerfile</span>
+        <span style="font-size:11px;color:#888">Embedded SQL migrations</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ §15 -->
+<div id="s15" class="section-block">
+  <div class="section-header"><span class="section-num">§15</span><span class="section-title">Code Generation</span></div>
+  <p class="section-desc">A single conceptual lesson. The //go:generate directive is the mechanism; mockery, stringer, and sqlc are the three canonical use cases demonstrated through it.</p>
+  <div class="graph">
+    <div class="graph-header"><span>ID</span><span>Lesson · Concept introduced</span><span>Requires</span></div>
+    <div class="lesson-row">
+      <span class="lid">CG.1</span>
+      <div><div class="lname">go:generate</div><div class="lconcept">//go:generate directive · go generate ./... · mockery · stringer · sqlc</div></div>
+      <div class="lpre"><span class="entry-tag">entry</span></div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+<script>
+const links = document.querySelectorAll('nav a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      links.forEach(l => l.classList.remove('active'));
+      const match = document.querySelector('nav a[href="#'+e.target.id+'"]');
+      if(match) match.classList.add('active');
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.section-block[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

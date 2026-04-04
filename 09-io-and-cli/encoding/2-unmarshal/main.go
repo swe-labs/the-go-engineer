@@ -36,7 +36,7 @@ import (
 //   dereference the memory address and directly overwrite the fields of your
 //   allocated struct in the Heap/Stack.
 //
-// RUN: go run ./11-encoding/2-unmarshal
+// RUN: go run ./09-io-and-cli/encoding/2-unmarshal
 // ============================================================================
 
 // APIResponse represents the JSON response from a weather API.
@@ -164,4 +164,8 @@ func main() {
 	fmt.Println("  - Extra JSON fields → silently ignored (no error)")
 	fmt.Println("  - Use map[string]any for unknown/dynamic JSON structures")
 	fmt.Println("  - JSON numbers are ALWAYS float64 in maps (cast if needed)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: EN.3 JSON encoder (stream)")
+	fmt.Println("   Current: EN.2 (JSON unmarshalling)")
+	fmt.Println("---------------------------------------------------")
 }

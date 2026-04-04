@@ -27,7 +27,7 @@ import (
 //   DOWNSIDE: If you need to test 10 different URLs with 10 different responses,
 //   this basic struct becomes very unwieldy.
 //
-// RUN: go run ./16-http-clients-and-mocking/3-manual-mock
+// RUN: go run ./13-quality-and-performance/http-client-testing/3-manual-mock
 // ============================================================================
 
 func main() {
@@ -47,4 +47,8 @@ func main() {
 	}
 
 	fmt.Println("\n(See client_test.go to understand how this is mocked!)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: HM.2 function-injection mock")
+	fmt.Println("   Current: HM.1 (manual mock)")
+	fmt.Println("---------------------------------------------------")
 }

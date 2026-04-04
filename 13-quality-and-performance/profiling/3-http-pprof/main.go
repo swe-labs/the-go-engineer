@@ -51,7 +51,7 @@ import (
 //     go http.ListenAndServe(":6060", nil) // pprof on internal port
 //     http.ListenAndServe(":8080", mux)    // public API on separate mux
 //
-// RUN: go run ./25-profiling/3-http-pprof
+// RUN: go run ./13-quality-and-performance/profiling/3-http-pprof
 // ============================================================================
 
 // simulateWork does CPU-intensive computation to make profiles interesting.
@@ -166,4 +166,8 @@ func main() {
 	// - Goroutine profile detects leaks: /debug/pprof/goroutine?debug=2
 	// - Mutex profile shows lock contention: /debug/pprof/mutex
 	// - Heap profile shows live allocations: /debug/pprof/heap
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: PD.1 naming")
+	fmt.Println("   Current: PR.2 (live pprof endpoint)")
+	fmt.Println("---------------------------------------------------")
 }

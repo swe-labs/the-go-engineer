@@ -2,7 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./08-modules-and-dependencies/1-module-basics
+// RUN: go run ./08-modules-and-packages/08-modules-and-dependencies/1-module-basics
 package main
 
 import "fmt"
@@ -97,4 +97,8 @@ func main() {
 	for _, c := range commands {
 		fmt.Printf("  %-32s — %s\n", c.cmd, c.desc)
 	}
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: MP.2 managing deps")
+	fmt.Println("   Current: MP.1 (module basics)")
+	fmt.Println("---------------------------------------------------")
 }

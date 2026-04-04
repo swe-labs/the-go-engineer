@@ -26,7 +26,7 @@ import "fmt"
 //   overflows). Go explicitly bans Pointer Arithmetic. You get raw memory performance
 //   without the devastating security risks.
 //
-// RUN: go run ./03-collections-and-pointers/4-pointers
+// RUN: go run ./03-data-structures/4-pointers
 // ============================================================================
 
 // modifyValue receives a COPY of the int.
@@ -115,4 +115,8 @@ func main() {
 	// - Go is pass-by-value by default. Use pointers to modify originals.
 	// - Always check for nil before dereferencing.
 	// - Go pointers are safe — no arithmetic, no manual memory management.
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: DS.5 slices-2")
+	fmt.Println("   Current: DS.4 (pointers)")
+	fmt.Println("---------------------------------------------------")
 }

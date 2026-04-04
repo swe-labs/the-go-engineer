@@ -9,7 +9,7 @@ package main
 // Level: Advanced
 // ============================================================================
 //
-// RUN: go run ./09-concurrency/6-project-1
+// RUN: go run ./11-concurrency/concurrency/6-project-1
 // ============================================================================
 
 import (
@@ -87,5 +87,8 @@ func main() {
 
 	<-done
 	fmt.Println("done")
-
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: ⭐ GC.8 race conditions")
+	fmt.Println("   Current: GC.6 (pipeline project)")
+	fmt.Println("---------------------------------------------------")
 }

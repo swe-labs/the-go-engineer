@@ -45,3 +45,12 @@ go run ./19-cli-tools/4-file-organizer --dir=./my-folder           # See the sol
 
 - [Go Package: flag](https://pkg.go.dev/flag)
 - [Go Package: os](https://pkg.go.dev/os)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| CL.1 | [args](./1-args) | os.Args · os.Getenv · os.Exit codes · safe index access | 🟢 entry |
+| CL.2 | [flags](./2-flags) | flag.String/Int/Bool · flag.Parse() · pointer return · -help | CL.1 |
+| CL.3 | [subcommands](./3-subcommands) | flag.NewFlagSet · os.Args[2:] slicing · switch routing | CL.1, CL.2 |

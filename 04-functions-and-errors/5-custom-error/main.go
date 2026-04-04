@@ -119,4 +119,8 @@ func main() {
 	// - Sentinel Errors (`ErrSomething`) are used for simple, expected state checks.
 	// - Custom Error Structs (`OpError`) are used when you need to attach metadata (like HTTP codes).
 	// - ALWAYS use `errors.Is(err, ErrVar)` instead of comparing strings.
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FE.6 error wrapping")
+	fmt.Println("   Current: FE.5 (custom errors)")
+	fmt.Println("---------------------------------------------------")
 }

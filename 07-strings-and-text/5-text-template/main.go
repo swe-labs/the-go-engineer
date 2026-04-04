@@ -92,4 +92,8 @@ You have no messages
 	}
 
 	fmt.Println(strings.ToUpper(output.String()))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: MP.1 module basics")
+	fmt.Println("   Current: ST.5 (text templates)")
+	fmt.Println("---------------------------------------------------")
 }

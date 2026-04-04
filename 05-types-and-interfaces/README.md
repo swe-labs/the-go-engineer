@@ -34,3 +34,14 @@ This capstone requires leveraging Interfaces to build polymorphic systems withou
 3. **Implement methods:** Attach the `CalculatePay()` method to both structs using value receivers (since the calculation shouldn't modify the struct state).
 4. **Process Payroll:** Create a `ProcessPayroll(employees []Employee)` function that iterates the slice, calls the method, and prints a total.
    - *Hint:* Because both structs implement the interface method, the slice can hold mixed types perfectly!
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| TI.1 | [structs](./1-struct) | Field layout · constructor pattern · value vs pointer copy | 🟢 entry |
+| TI.2 | [methods](./2-methods) | Value receiver vs pointer receiver · method sets | TI.1 |
+| TI.3 | [interfaces](./3-interfaces) | Implicit satisfaction · polymorphism · type assertions | TI.1, TI.2 |
+| TI.4 | [Stringer](./4-stringer) | fmt.Stringer · named type on int · custom Weekday | TI.2, TI.3 |
+| TI.5 | [generics](./5-generics) | [T constraint] · comparable · union constraints · Map/Filter | TI.3, TI.4 |

@@ -37,7 +37,7 @@ import (
 //   - Use json.NewDecoder if you are reading from an io.Reader (like an HTTP Request Body or a File).
 //     This avoids loading the entire payload into RAM before parsing.
 //
-// RUN: go run ./11-encoding/4-decode
+// RUN: go run ./09-io-and-cli/encoding/4-decode
 // ============================================================================
 
 type MetricEvent struct {
@@ -119,4 +119,8 @@ func main() {
 	fmt.Println("  - Use it for HTTP Request bodies (req.Body) and very large JSON files")
 	fmt.Println("  - Perfect for processing streams of JSON objects (JSONLines format)")
 	fmt.Println("  - Loop dec.Decode() until it returns io.EOF")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: EN.5 Base64")
+	fmt.Println("   Current: EN.4 (JSON decoder (stream))")
+	fmt.Println("---------------------------------------------------")
 }

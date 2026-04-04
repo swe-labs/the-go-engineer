@@ -39,7 +39,7 @@ import (
 //   Put(). Otherwise the next caller gets stale data — a serious security bug
 //   if the buffer contains HTTP headers or auth tokens.
 //
-// RUN: go run ./24-errgroup-and-pools/3-sync-pool
+// RUN: go run ./12-concurrency-patterns/24-errgroup-and-pools/3-sync-pool
 // ============================================================================
 
 // ============================================================================
@@ -161,4 +161,8 @@ func main() {
 	// - Don't pool oversized objects — they waste pool slots
 	// - Use -benchmem to measure before and after: allocs/op should drop to 0
 	// - Pool objects are evicted on GC — never rely on pool for caching
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: TE.1 unit testing")
+	fmt.Println("   Current: CP.3 (sync.Pool)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -9,7 +9,7 @@ package main
 // Level: Advanced
 // ============================================================================
 //
-// RUN: go run ./09-concurrency/10-sync-primitives
+// RUN: go run ./11-concurrency/concurrency/10-sync-primitives
 // ============================================================================
 
 import (
@@ -141,4 +141,8 @@ func main() {
 
 	fmt.Println("\n  ⚡ Use sync.Map for read-heavy, stable key sets")
 	fmt.Println("  ⚡ Use map + RWMutex for everything else")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CT.1 Background &amp; TODO")
+	fmt.Println("   Current: GC.10 (sync primitives)")
+	fmt.Println("---------------------------------------------------")
 }

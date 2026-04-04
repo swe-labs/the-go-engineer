@@ -69,3 +69,12 @@ go get google.golang.org/protobuf
 - [gRPC Go Quick Start](https://grpc.io/docs/languages/go/quickstart/)
 - [Protocol Buffers Language Guide](https://protobuf.dev/programming-guides/proto3/)
 - [google.golang.org/grpc](https://pkg.go.dev/google.golang.org/grpc)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| GR.1 | [proto definition + gen](./proto) | proto3 service/message · protoc · generated Go stubs | 🟢 entry |
+| GR.2 | [unary server](./server) | Implement generated interface · status codes · interceptors · metadata | GR.1 |
+| GR.3 | [unary client](./client) | grpc.NewClient · typed stub · context deadline · status.FromError | GR.1, GR.2 |

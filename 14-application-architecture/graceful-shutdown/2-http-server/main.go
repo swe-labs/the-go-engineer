@@ -52,7 +52,7 @@ import (
 //   is called. This is the expected "clean" exit — not an error. Always
 //   check for this: if err != nil && !errors.Is(err, http.ErrServerClosed)
 //
-// RUN: go run ./27-graceful-shutdown/2-http-server
+// RUN: go run ./14-application-architecture/graceful-shutdown/2-http-server
 //   Then: curl http://localhost:8080/api/slow   (simulates a slow 3s request)
 //   While the request is in-flight, press Ctrl+C — graceful shutdown waits for it.
 // ============================================================================
@@ -198,4 +198,8 @@ func main() {
 	// - Always set ReadTimeout, WriteTimeout, IdleTimeout on http.Server
 	// - errgroup orchestrates server + signal handler goroutines elegantly
 	// - Kubernetes terminationGracePeriodSeconds = your maximum shutdown window
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: CG.1 go:generate")
+	fmt.Println("   Current: GS.2 (HTTP graceful drain)")
+	fmt.Println("---------------------------------------------------")
 }

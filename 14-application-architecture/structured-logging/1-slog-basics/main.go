@@ -4,6 +4,7 @@
 package main
 
 import (
+	"fmt"
 	"log/slog"
 	"os"
 	"time"
@@ -34,7 +35,7 @@ import (
 //   without changing a single call site. In development, use TextHandler
 //   for readability. In production, use JSONHandler for machine processing.
 //
-// RUN: go run ./23-structured-logging/1-slog-basics
+// RUN: go run ./14-application-architecture/structured-logging/1-slog-basics
 // ============================================================================
 
 func main() {
@@ -129,4 +130,8 @@ func main() {
 	// - slog.Group namespaces related fields
 	// - logger.With() pre-loads shared fields (request IDs, service name)
 	// - slog.SetDefault() makes every slog.Info() call use your handler
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: SL.2 context-keyed logger")
+	fmt.Println("   Current: SL.1 (slog basics)")
+	fmt.Println("---------------------------------------------------")
 }

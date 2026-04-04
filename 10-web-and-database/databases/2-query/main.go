@@ -32,7 +32,7 @@ import (
 //   query structure and the arguments to the database server SEPARATELY. The
 //   database safely escapes all payloads internally before execution.
 //
-// RUN: go run ./12-databases/2-query
+// RUN: go run ./10-web-and-database/databases/2-query
 // ============================================================================
 
 var schema = `
@@ -69,6 +69,10 @@ func main() {
 	}
 
 	fmt.Printf("✅ Inserted user 'Alice' successfully! (ID: %d)\n", userId)
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: DB.3 query — SELECT")
+	fmt.Println("   Current: DB.2 (query — INSERT)")
+	fmt.Println("---------------------------------------------------")
 }
 
 func createTable(db *sql.DB) {

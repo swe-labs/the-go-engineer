@@ -74,4 +74,8 @@ func main() {
 	// - Type declarations always come AFTER the variable name.
 	// - If consecutive parameters share a type, you can omit the type until the last one.
 	// - Functions are pass-by-value (copies are made).
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FE.2 closures &amp; recursion")
+	fmt.Println("   Current: FE.1 (functions)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -9,7 +9,7 @@ package main
 // Level: Advanced
 // ============================================================================
 //
-// RUN: go run ./09-concurrency/9-select-deep-dive
+// RUN: go run ./11-concurrency/concurrency/9-select-deep-dive
 // ============================================================================
 
 import (
@@ -51,6 +51,10 @@ func main() {
 
 	// 5. Fan-in — merging multiple channels into one
 	fanInPattern()
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GC.10 sync primitives")
+	fmt.Println("   Current: GC.9 (select deep dive)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // basicSelect demonstrates waiting on multiple channels.

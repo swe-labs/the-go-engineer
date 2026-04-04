@@ -23,7 +23,7 @@ import (
 //   - How to verify your editor is configured correctly
 //   - The Go workspace model
 //
-// RUN: go run ./00-getting-started/4-dev-environment
+// RUN: go run ./01-core-foundations/getting-started/4-dev-environment
 // ============================================================================
 
 func main() {
@@ -139,4 +139,8 @@ func main() {
 	fmt.Println()
 	fmt.Println("🎉 Section 0 complete! You're ready to learn Go.")
 	fmt.Println("   Next: go run ./01-language-basics/1-variables")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: LB.1 variables")
+	fmt.Println("   Current: GS.4 (dev-environment)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -1,7 +1,7 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
-// RUN: go run ./26-grpc/1-unary/server
+// RUN: go run ./14-application-architecture/grpc/1-unary/server
 package main
 
 import (
@@ -208,4 +208,8 @@ func main() {
 	// - Embed UnimplementedOrderServiceServer — future-proofs against new RPCs
 	// - Chain interceptors for logging, auth, recovery (gRPC middleware)
 	// - metadata.FromIncomingContext reads gRPC headers
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GR.3 unary client")
+	fmt.Println("   Current: GR.2 (unary server)")
+	fmt.Println("---------------------------------------------------")
 }

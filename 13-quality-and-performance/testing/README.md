@@ -14,3 +14,13 @@ Go builds testing directly into the language via the `testing` package rather th
 
 ## References
 1. **[Go Docs]** [Package testing](https://pkg.go.dev/testing)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| TE.1 | [unit testing](./user) | testing.T · t.Run · testify/assert · assert.NoError | 🟢 entry |
+| TE.2 | [table-driven tests](./user) | []struct table · t.Run per row · data-isolated sub-tests | TE.1 |
+| TE.3 | [HTTP handler testing](./user) | httptest.NewRecorder · httptest.NewRequest · no real server | TE.1, TE.2 |
+| TE.4 | [benchmarking](./benchmarks) | testing.B · b.ResetTimer · b.ReportAllocs · -benchmem | TE.1, TE.2 |

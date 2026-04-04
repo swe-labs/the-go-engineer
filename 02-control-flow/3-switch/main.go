@@ -100,4 +100,8 @@ func main() {
 	// - Tagless switch (no expression) works like if/else-if chains
 	// - Type switches reveal the actual type behind an interface — essential
 	//   for working with JSON, databases, and generic data handling
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: DS.1 arrays")
+	fmt.Println("   Current: CF.3 (switch)")
+	fmt.Println("---------------------------------------------------")
 }

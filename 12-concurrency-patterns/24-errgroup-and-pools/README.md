@@ -30,3 +30,12 @@
 - [golang.org/x/sync/errgroup](https://pkg.go.dev/golang.org/x/sync/errgroup)
 - [sync.Pool](https://pkg.go.dev/sync#Pool)
 - [Go Blog: Profiling Go Programs](https://go.dev/blog/pprof)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| CP.1 | [errgroup basics](./1-errgroup) | errgroup.Group · g.Go · g.Wait · first-error semantics | 🟢 entry |
+| CP.2 | [errgroup + context](./2-errgroup-context) | WithContext · auto-cancel on first error · fan-out pipeline | CP.1 |
+| CP.3 | [sync.Pool](./3-sync-pool) | Get → use → Reset → Put · GC eviction · zero-alloc buffers | 🟢 entry |

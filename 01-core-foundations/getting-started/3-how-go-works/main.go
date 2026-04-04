@@ -29,7 +29,7 @@ import (
 //   a Go binary onto an empty Linux server and it will run perfectly without
 //   needing to install Go on that server.
 //
-// RUN: go run ./00-getting-started/3-how-go-works
+// RUN: go run ./01-core-foundations/getting-started/3-how-go-works
 // ============================================================================
 
 // --- THE GO COMPILATION MODEL ---
@@ -151,5 +151,8 @@ func main() {
 	fmt.Println("  3. Uppercase = exported (public), lowercase = unexported (private)")
 	fmt.Println("  4. The standard library is massive — learn it before reaching for external packages")
 	fmt.Println()
-	fmt.Println("   Next step: go run ./00-getting-started/4-dev-environment")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GS.4 dev-environment")
+	fmt.Println("   Current: GS.3 (how-go-works)")
+	fmt.Println("---------------------------------------------------")
 }

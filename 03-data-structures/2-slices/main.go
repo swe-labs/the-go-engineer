@@ -27,7 +27,7 @@ import "fmt"
 //   the underlying shared memory. This is Go's secret to lightning-fast
 //   data processing.
 //
-// RUN: go run ./03-collections-and-pointers/2-slices
+// RUN: go run ./03-data-structures/2-slices
 // ============================================================================
 
 func main() {
@@ -89,4 +89,8 @@ func main() {
 	// - Always reassign when using append: s = append(s, value)
 	// - Pre-allocate with make() when you know the approximate size
 	// - Sub-slices share memory — be careful with mutations
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: DS.3 maps")
+	fmt.Println("   Current: DS.2 (slices)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -2,7 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./08-modules-and-dependencies/3-versioning
+// RUN: go run ./08-modules-and-packages/08-modules-and-dependencies/3-versioning
 package main
 
 import "fmt"
@@ -112,4 +112,8 @@ func main() {
 	fmt.Println()
 	fmt.Println("  import \"github.com/example/pkg\"     ← v0.x or v1.x")
 	fmt.Println("  import \"github.com/example/pkg/v2\"   ← v2.x")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: FS.1 files")
+	fmt.Println("   Current: MP.3 (versioning)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -39,7 +39,7 @@ import (
 //   slower than in languages with macro-based code generation (like Rust's Serde).
 //   For 99% of web APIs, this overhead is utterly negligible.
 //
-// RUN: go run ./11-encoding/1-marshalling
+// RUN: go run ./09-io-and-cli/encoding/1-marshalling
 // ============================================================================
 
 // Product represents an item in an e-commerce catalog.
@@ -164,4 +164,8 @@ func main() {
 	fmt.Println("  - omitempty: skip zero-value fields from output")
 	fmt.Println("  - json:\"-\": never include this field (secrets, internal data)")
 	fmt.Println("  - Only EXPORTED (Uppercase) fields appear in JSON")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: EN.2 JSON unmarshalling")
+	fmt.Println("   Current: EN.1 (JSON marshalling)")
+	fmt.Println("---------------------------------------------------")
 }

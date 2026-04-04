@@ -2,7 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./16-http-clients-and-mocking/6-testify-mock
+// RUN: go run ./13-quality-and-performance/http-client-testing/6-testify-mock
 package main
 
 import (
@@ -46,4 +46,8 @@ func main() {
 	}
 
 	fmt.Println("\n(See client_test.go to see testify/mock in action!)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: PR.1 CPU profile")
+	fmt.Println("   Current: HM.4 (testify/mock)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -36,7 +36,7 @@ import (
 //   4. Closing is optional — only needed when receivers must know "we're done"
 //   5. Closing a nil channel causes a PANIC
 //
-// RUN: go run ./09-concurrency/5-channels-closing
+// RUN: go run ./11-concurrency/concurrency/5-channels-closing
 // ============================================================================
 
 func main() {
@@ -137,4 +137,8 @@ func main() {
 	fmt.Println("  - close() wakes ALL blocked receivers (broadcast signal)")
 	fmt.Println("  - ONLY senders close channels — NEVER receivers")
 	fmt.Println("  - Sending to a closed channel = PANIC (unrecoverable)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GC.6 pipeline project")
+	fmt.Println("   Current: GC.5 (closing channels)")
+	fmt.Println("---------------------------------------------------")
 }

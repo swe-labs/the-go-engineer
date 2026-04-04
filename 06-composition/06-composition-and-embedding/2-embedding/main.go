@@ -26,7 +26,7 @@ import "fmt"
 //   You can call phone.TakePhoto() directly instead of phone.Camera.TakePhoto().
 //   The camera is still there — you just get a shortcut.
 //
-// RUN: go run ./06-composition-and-embedding/2-embedding
+// RUN: go run ./06-composition/06-composition-and-embedding/2-embedding
 // ============================================================================
 
 // --- COMPONENT TYPES ---
@@ -177,4 +177,8 @@ func main() {
 	fmt.Println("  - Embedding is NOT inheritance — it's syntactic sugar for composition")
 	fmt.Println("  - Use embedding when you want the promoted shortcut syntax")
 	fmt.Println("  - Use named fields when you want explicit access (Section 06/1)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: ST.1 strings")
+	fmt.Println("   Current: CO.2 (embedding)")
+	fmt.Println("---------------------------------------------------")
 }

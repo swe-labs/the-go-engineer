@@ -5,6 +5,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -33,7 +34,7 @@ import (
 //   parse them ONCE on server startup and store them in a synchronized Cache map,
 //   rather than parsing the files from disk on every single HTTP request.
 //
-// RUN: go run ./13-web-masterclass/3-templates
+// RUN: go run ./10-web-and-database/web-masterclass/3-templates
 // ============================================================================
 
 // templateCache stores pre-parsed templates keyed by page name.
@@ -144,4 +145,8 @@ func main() {
 
 	log.Println("Starting server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: WM.4 middleware")
+	fmt.Println("   Current: WM.3 (templates)")
+	fmt.Println("---------------------------------------------------")
 }

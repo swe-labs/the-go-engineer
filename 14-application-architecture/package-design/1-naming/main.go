@@ -25,7 +25,7 @@ import "fmt"
 //   `utils.Format()` tells the compiler and the human absolutely nothing about
 //   the domain boundary of the memory it operates on!
 //
-// RUN: go run ./18-package-design/1-naming
+// RUN: go run ./14-application-architecture/package-design/1-naming
 // ============================================================================
 
 func main() {
@@ -113,4 +113,8 @@ func main() {
 	fmt.Println("  3. No stutter: http.Client, NOT http.HTTPClient")
 	fmt.Println("  4. No utils/helpers — name by responsibility")
 	fmt.Println("  5. Name by WHAT it provides, not HOW it works")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: PD.2 visibility")
+	fmt.Println("   Current: PD.1 (naming)")
+	fmt.Println("---------------------------------------------------")
 }

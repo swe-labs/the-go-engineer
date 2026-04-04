@@ -6,6 +6,24 @@ Format: **[Date] — Description**. Sections: `Added`, `Fixed`, `Changed`, `Remo
 
 ---
 
+## [2026-04-06] — Curriculum Dependency Integration
+
+### Added
+
+- **Curriculum Dependency Graph:** Automated granular mapping of 15 sections across 28 sub-graphs using `curriculum.json`.
+- **Premium Console Footers:** Integrated "Next Up" context-aware navigation footers into all 115 `main.go` files.
+- **Visual Breadcrumbs:** Added previous/next/exercise navigation links to all section READMEs.
+- **Root Metadata:** Updated root `README.md` and `ROADMAP.md` with the new ID-based learning path (GS, LB, CF, etc.).
+- **Validation Script:** Created `scripts/validate_curriculum.go` to ensure filesystem integrity for all future additions.
+
+### Fixed
+
+- **ID Collision:** Resolved ID collisions for "Graceful Shutdown" vs "Getting Started" by implementing section-specific context namespaces.
+- **Bulk Refactor Cleanup:** Fixed widespread Go syntax errors and markdown lint issues introduced during the integration phase.
+- **[BUG] Chapter 1 Lesson 1:** Added missing instructions to `1-installation` (GS.1) boilerplate (#4).
+
+---
+
 ## [2026-04-05] — The v1.0 Curriculum Migration
 
 ### Changed

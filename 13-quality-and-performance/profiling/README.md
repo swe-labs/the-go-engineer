@@ -49,3 +49,11 @@ go run ./25-profiling/3-http-pprof
 - [Package pprof](https://pkg.go.dev/net/http/pprof)
 - [Package runtime/pprof](https://pkg.go.dev/runtime/pprof)
 - [Package runtime/trace](https://pkg.go.dev/runtime/trace)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| PR.1 | [CPU profile](./1-cpu-profile) | pprof.StartCPUProfile · StopCPUProfile · go tool pprof · flat vs cum | 🟢 entry |
+| PR.2 | [live pprof endpoint](./3-http-pprof) | net/http/pprof blank import · two-port pattern · goroutine leak | PR.1 |

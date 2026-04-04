@@ -35,7 +35,7 @@ import (
 //   `db.Prepare` is only beneficial if you are executing the EXACT same
 //   statement hundreds of times in a tight `for` loop.
 //
-// RUN: go run ./12-databases/4-prepare
+// RUN: go run ./10-web-and-database/databases/4-prepare
 // ============================================================================
 
 type User struct {
@@ -70,6 +70,10 @@ func main() {
 	} else {
 		fmt.Printf("✅ Inserted user via Prepared Statement! (ID: %d)\n", id)
 	}
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: DB.5 transactions")
+	fmt.Println("   Current: DB.4 (prepared statements)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // createUserWithCtx demonstrates explicit Prepared Statements and Context execution.

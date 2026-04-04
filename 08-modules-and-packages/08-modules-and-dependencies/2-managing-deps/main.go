@@ -9,7 +9,7 @@ package main
 // Level: Intermediate
 // ============================================================================
 //
-// RUN: go run ./08-modules-and-dependencies/2-managing-deps
+// RUN: go run ./08-modules-and-packages/08-modules-and-dependencies/2-managing-deps
 // ============================================================================
 
 import (
@@ -85,4 +85,8 @@ func main() {
 		return
 	}
 	fmt.Println(string(whyOut))
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: MP.3 versioning")
+	fmt.Println("   Current: MP.2 (managing deps)")
+	fmt.Println("---------------------------------------------------")
 }

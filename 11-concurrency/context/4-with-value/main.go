@@ -35,7 +35,7 @@ import (
 //   is why you must NEVER store large amounts of data in Context; the linear lookup
 //   cost at high concurrency will degrade your server's performance.
 //
-// RUN: go run ./17-context/4-with-value
+// RUN: go run ./11-concurrency/context/4-with-value
 // ============================================================================
 
 // --- CUSTOM KEY TYPES ---
@@ -86,6 +86,10 @@ func main() {
 	fmt.Println("  3. Good uses: request ID, user ID, trace ID, auth token")
 	fmt.Println("  4. Bad uses: database connections, loggers, config (use DI instead)")
 	fmt.Println("  5. Values are inherited by child contexts automatically")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: TM.1 time basics")
+	fmt.Println("   Current: CT.4 (WithValue)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // handleRequest demonstrates extracting values from context.

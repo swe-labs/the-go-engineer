@@ -36,3 +36,12 @@ go run ./08-modules-and-dependencies/3-versioning
 - [Using Go Modules](https://go.dev/blog/using-go-modules)
 - [Go Modules Reference](https://go.dev/ref/mod)
 - [Module version numbering](https://go.dev/doc/modules/version-numbers)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| MP.1 | [module basics](./1-module-basics) | go.mod anatomy · module path · go.sum checksums | 🟢 entry |
+| MP.2 | [managing deps](./2-managing-deps) | go get · go mod tidy · go list · go mod why | MP.1 |
+| MP.3 | [versioning](./3-versioning) | semver · v2 import path rule · replace · exclude · vendoring | MP.1, MP.2 |

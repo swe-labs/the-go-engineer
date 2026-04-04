@@ -32,7 +32,7 @@ import (
 //   Go implicitly satisfies interfaces. We can define our own interface
 //   that exactly matches the signature of `(*http.Client).Do` or `(*http.Client).Get`.
 //
-// RUN: go run ./16-http-clients-and-mocking/2-refactor-for-testability
+// RUN: go run ./10-web-and-database/http-client/2-refactor-for-testability
 // ============================================================================
 
 // --- 1. The Interface (The Wall Outlet) ---
@@ -129,4 +129,8 @@ func main() {
 	fmt.Println("  - Interface Injection decouples your code from the real network.")
 	fmt.Println("  - Require an interface (HTTPClient); Pass a concrete struct (&http.Client).")
 	fmt.Println("  - This refactor makes the code 100% unit-testable without mocking servers.")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GC.1 goroutines")
+	fmt.Println("   Current: HC.2 (refactor for testability)")
+	fmt.Println("---------------------------------------------------")
 }

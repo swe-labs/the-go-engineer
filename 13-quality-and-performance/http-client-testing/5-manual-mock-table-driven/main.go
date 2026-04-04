@@ -2,7 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./16-http-clients-and-mocking/5-manual-mock-table-driven
+// RUN: go run ./13-quality-and-performance/http-client-testing/5-manual-mock-table-driven
 package main
 
 import (
@@ -46,4 +46,8 @@ func main() {
 	}
 
 	fmt.Println("\n(See client_test.go to see the ultimate Table-Driven mock pattern!)")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: HM.4 testify/mock")
+	fmt.Println("   Current: HM.3 (table-driven mock)")
+	fmt.Println("---------------------------------------------------")
 }

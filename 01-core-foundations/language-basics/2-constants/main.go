@@ -25,7 +25,7 @@ import "fmt"
 //   instructions. They do not exist at runtime, which makes them inherently faster
 //   and mathematically impossible to mutate by a rogue pointer!
 //
-// RUN: go run ./01-language-basics/2-constants
+// RUN: go run ./01-core-foundations/language-basics/2-constants
 // ============================================================================
 
 // --- PACKAGE-LEVEL CONSTANTS ---
@@ -89,4 +89,8 @@ func main() {
 	// - Use `const` for configuration, mathematical constants, and fixed values.
 	// - Constants can be typed (float64) or untyped (Go infers from usage).
 	// - Group related constants with const ( ... ) blocks.
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: LB.3 enums / iota")
+	fmt.Println("   Current: LB.2 (constants)")
+	fmt.Println("---------------------------------------------------")
 }

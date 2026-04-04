@@ -131,4 +131,8 @@ func main() {
 	fmt.Println("  - fmt.Println, format verbs, and log functions all call String()")
 	fmt.Println("  - Custom types (type X int) create new types with their own methods")
 	fmt.Println("  - Stringer is Go's most commonly implemented interface")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: TI.5 generics")
+	fmt.Println("   Current: TI.4 (Stringer)")
+	fmt.Println("---------------------------------------------------")
 }

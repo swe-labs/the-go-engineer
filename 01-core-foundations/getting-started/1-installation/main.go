@@ -19,7 +19,7 @@ import (
 //   - How to inspect your Go environment
 //   - What GOROOT, GOPATH, and GOOS mean
 //
-// RUN: go run ./00-getting-started/1-installation
+// RUN: go run ./01-core-foundations/getting-started/1-installation
 // ============================================================================
 
 func main() {
@@ -50,5 +50,8 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("🎉 Your Go development environment is ready to hack!")
-	fmt.Println("   Next step: go run ./00-getting-started/2-hello-world")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GS.2 hello-world")
+	fmt.Println("   Current: GS.1 (installation)")
+	fmt.Println("---------------------------------------------------")
 }

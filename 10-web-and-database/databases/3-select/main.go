@@ -34,7 +34,7 @@ import (
 //   this happens often enough, you will exhaust your Database limits and crash
 //   both your server and your Database.
 //
-// RUN: go run ./12-databases/3-select
+// RUN: go run ./10-web-and-database/databases/3-select
 // ============================================================================
 
 type User struct {
@@ -77,6 +77,10 @@ func main() {
 	} else {
 		fmt.Println("⚠️ Database is empty. Run exercise `2-query` first to populate it.")
 	}
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: DB.4 prepared statements")
+	fmt.Println("   Current: DB.3 (query — SELECT)")
+	fmt.Println("---------------------------------------------------")
 }
 
 // GetUserByEmail demonstrates reading a SINGLE row from the database.

@@ -189,3 +189,16 @@ After running the examples in this section, move on to:
 - [Official Go Installation Guide](https://go.dev/doc/install)
 - [A Tour of Go (Interactive)](https://go.dev/tour/)
 - [Go Playground (Run Go in Your Browser)](https://go.dev/play/)
+
+
+## Learning Path
+
+| ID | Lesson | Concept | Requires |
+| --- | --- | --- | --- |
+| GS.1 | [installation](./1-installation) | Verify Go binary; inspect GOROOT, GOPATH | 🟢 entry |
+| GS.2 | [hello-world](./2-hello-world) | package main · import · func main · fmt.Println | GS.1 |
+| GS.3 | [how-go-works](./3-how-go-works) | Compilation model · packages · exported names | GS.2 |
+| GS.4 | [dev-environment](./4-dev-environment) | go fmt · go vet · go build · go test · ./... | GS.3 |
+| LB.1 | [variables](./1-variables) | var · := · zero values · basic types | 🟢 entry |
+| LB.2 | [constants](./2-constants) | const · compile-time inlining · typed vs untyped | LB.1 |
+| LB.3 | [enums / iota](./3-enums-iota) | iota · named types on int · const block | LB.2 |

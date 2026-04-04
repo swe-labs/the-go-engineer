@@ -32,7 +32,7 @@ import (
 //   If you forget to call Done(), the gate never closes (deadlock).
 //   If you call Add() after Wait(), the counter goes negative (panic).
 //
-// RUN: go run ./09-concurrency/2-wait-group
+// RUN: go run ./11-concurrency/concurrency/2-wait-group
 // ============================================================================
 
 // ServiceStatus represents the health of a backend service.
@@ -141,4 +141,8 @@ func main() {
 	fmt.Println("  ❌ Forgetting defer wg.Done()     → counter never reaches 0, deadlock")
 	fmt.Println("  ❌ Calling wg.Add() after Wait()  → panic (negative counter)")
 	fmt.Println("  ✅ ALWAYS: Add() before go, &wg as pointer, defer Done() first line")
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("🚀 NEXT UP: GC.3 channels (unbuffered)")
+	fmt.Println("   Current: GC.2 (WaitGroups)")
+	fmt.Println("---------------------------------------------------")
 }
