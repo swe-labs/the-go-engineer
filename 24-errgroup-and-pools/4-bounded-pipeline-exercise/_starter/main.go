@@ -35,7 +35,7 @@ import (
 //    (HINT: Use errgroup.WithContext, and trigger a context cancellation).
 // 4. Use a `sync.Pool` to recycle the `*bytes.Buffer` used for the payload.
 //
-// RUN: go run ./24-errgroup-and-pools/4-exercise/_starter
+// RUN: go run ./24-errgroup-and-pools/4-bounded-pipeline-exercise/_starter
 // ============================================================================
 
 // TODO 1: Create a sync.Pool for *bytes.Buffer. Ensure you allocate enough capacity (e.g. 2MB).

@@ -2,6 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
+// RUN: go run ./15-time-and-scheduling/7-reminder
 package main
 
 import (

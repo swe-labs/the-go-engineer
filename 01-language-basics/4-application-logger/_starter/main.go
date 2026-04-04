@@ -29,7 +29,7 @@ import "fmt"
 //   - The Stringer interface: type Stringer interface { String() string }
 //   - Use the levelNames slice index to convert a LogLevel to a string
 //
-// RUN: go run ./01-language-basics/4-application-logger
+// RUN: go run ./01-language-basics/4-application-logger/_starter
 // SOLUTION: See the main.go file in this same directory
 // ============================================================================
 

@@ -2,6 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
+// RUN: go run ./19-cli-tools/2-flags
 package main
 
 import (

@@ -1,6 +1,7 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// RUN: go run ./24-errgroup-and-pools/4-bounded-pipeline-exercise
 package main
 
 import (

@@ -2,6 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
+// RUN: go run ./08-modules-and-dependencies/1-module-basics
 package main
 
 import "fmt"

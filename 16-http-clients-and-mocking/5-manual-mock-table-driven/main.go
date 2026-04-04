@@ -2,6 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
+// RUN: go run ./16-http-clients-and-mocking/5-manual-mock-table-driven
 package main
 
 import (
