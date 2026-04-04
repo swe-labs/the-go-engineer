@@ -31,15 +31,15 @@
 
 ```bash
 # CPU profile
-go run ./25-profiling/1-cpu-profile
+go run ./13-quality-and-performance/profiling/1-cpu-profile
 go tool pprof -http=:8090 cpu.prof
 
 # Memory profile
-go run ./25-profiling/2-memory-profile
+go run ./13-quality-and-performance/profiling/2-memory-profile
 go tool pprof -http=:8090 mem.prof
 
 # Live pprof endpoint
-go run ./25-profiling/3-http-pprof
+go run ./13-quality-and-performance/profiling/3-http-pprof
 # Then: go tool pprof http://localhost:8080/debug/pprof/profile?seconds=5
 ```
 

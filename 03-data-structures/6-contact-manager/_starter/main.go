@@ -25,7 +25,7 @@ import "fmt"
 //   - Use `range` to iterate and find by name
 //   - To delete, use append(slice[:i], slice[i+1:]...) to remove index i
 //
-// RUN: go run ./03-collections-and-pointers/6-contact-manager/_starter
+// RUN: go run ./03-data-structures/6-contact-manager/_starter
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 

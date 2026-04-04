@@ -13,7 +13,7 @@ import "testing"
 // These tests verify Deposit, Withdraw, interest, and overdraft logic.
 // They also prove that method shadowing works correctly on embedded structs.
 //
-// RUN: go test -v ./06-composition-and-embedding/3-bank-account
+// RUN: go test -v ./06-composition/06-composition-and-embedding/3-bank-account
 // ============================================================================
 
 func TestDeposit(t *testing.T) {

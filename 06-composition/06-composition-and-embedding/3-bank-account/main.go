@@ -9,7 +9,7 @@ package main
 // Level: Intermediate
 // ============================================================================
 //
-// RUN: go run ./06-composition-and-embedding/3-bank-account
+// RUN: go run ./06-composition/06-composition-and-embedding/3-bank-account
 // ============================================================================
 
 import (

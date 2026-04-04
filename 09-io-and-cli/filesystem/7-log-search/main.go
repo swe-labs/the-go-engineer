@@ -31,7 +31,7 @@ import (
 //   system call to the kernel for each file. On a directory with 100,000 files,
 //   `WalkDir` can be 10x faster because it avoids these redundant stat() syscalls.
 //
-// RUN: go run ./10-filesystem/7-log-search
+// RUN: go run ./09-io-and-cli/filesystem/7-log-search
 // ============================================================================
 
 // SearchResult holds the location and content of a matching line.

@@ -22,7 +22,7 @@ package main
 //   You simply write down what that specific reference time would look like
 //   in your desired format, and the engine tokenizes it underneath.
 //
-// RUN: go run ./11-concurrency/time-and-scheduling/2-formatting
+// RUN: go run ./11-concurrency/concurrency/time-and-scheduling/2-formatting
 // ============================================================================
 
 import (

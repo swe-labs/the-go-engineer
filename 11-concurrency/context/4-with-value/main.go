@@ -35,7 +35,7 @@ import (
 //   is why you must NEVER store large amounts of data in Context; the linear lookup
 //   cost at high concurrency will degrade your server's performance.
 //
-// RUN: go run ./11-concurrency/context/4-with-value
+// RUN: go run ./11-concurrency/concurrency/context/4-with-value
 // ============================================================================
 
 // --- CUSTOM KEY TYPES ---

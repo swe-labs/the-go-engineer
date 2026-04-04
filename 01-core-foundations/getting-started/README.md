@@ -120,7 +120,7 @@ cd the-go-engineer
 ## Step 5: Run Your First Program
 
 ```bash
-go run ./00-getting-started/2-hello-world
+go run ./01-core-foundations/getting-started/2-hello-world
 ```
 
 You should see:
@@ -155,8 +155,8 @@ To run any example:
 ```bash
 go run ./SECTION/LESSON
 # Example:
-go run ./01-language-basics/1-variables
-go run ./09-concurrency/3-channels
+go run ./01-core-foundations/language-basics/1-variables
+go run ./11-concurrency/concurrency/3-channels
 ```
 
 ## Common Beginner Mistakes
@@ -173,7 +173,7 @@ go run ./09-concurrency/3-channels
 
 After running the examples in this section, move on to:
 
-➡️ **[01-language-basics](../01-language-basics/)** — Variables, types, constants, and your first real programs.
+➡️ **[01-language-basics](../language-basics/)** — Variables, types, constants, and your first real programs.
 
 ## Contents
 

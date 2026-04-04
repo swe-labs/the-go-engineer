@@ -28,7 +28,7 @@ import "fmt"
 //   - Capture loop variables correctly in closures: use `url := url`
 //   - Use defer resp.Body.Close() after every http.Get
 //
-// RUN: go run ./09-concurrency/7-downloader/_starter
+// RUN: go run ./11-concurrency/concurrency/7-downloader/_starter
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 

@@ -31,7 +31,7 @@ import (
 //   signal to all children in the array, and then removes itself from the parent
 //   to allow the Garbage Collector to sweep the dead goroutines.
 //
-// RUN: go run ./11-concurrency/context/2-with-cancel
+// RUN: go run ./11-concurrency/concurrency/context/2-with-cancel
 // ============================================================================
 
 func main() {

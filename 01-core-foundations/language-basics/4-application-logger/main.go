@@ -25,7 +25,7 @@ import "fmt"
 //   app instantly rather than silently leaking data. We handle it cleanly here before
 //   the panic can even occur.
 //
-// RUN: go run ./01-language-basics/4-application-logger
+// RUN: go run ./01-core-foundations/language-basics/4-application-logger
 // ============================================================================
 
 // LogLevel is a custom type based on int.

@@ -26,7 +26,7 @@ import (
 //   combined with `testify/mock`.
 //   It allows extreme expressive assertions: `mock.AssertNumberOfCalls(t, "Get", 1)`
 //
-// RUN: go test -v ./16-http-clients-and-mocking/6-testify-mock
+// RUN: go test -v ./13-quality-and-performance/http-client-testing/6-testify-mock
 // ============================================================================
 
 func main() {

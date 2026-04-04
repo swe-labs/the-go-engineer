@@ -20,9 +20,9 @@ By the end of this section, you will understand:
 ## How to Run
 
 ```bash
-go run ./08-modules-and-dependencies/1-module-basics
-go run ./08-modules-and-dependencies/2-managing-deps
-go run ./08-modules-and-dependencies/3-versioning
+go run ./08-modules-and-packages/08-modules-and-dependencies/1-module-basics
+go run ./08-modules-and-packages/08-modules-and-dependencies/2-managing-deps
+go run ./08-modules-and-packages/08-modules-and-dependencies/3-versioning
 ```
 
 ## Exercises

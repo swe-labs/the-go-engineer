@@ -28,7 +28,7 @@ import (
 // 3. DO NOT hardcode the reduction in the slog.Info() calls; it must happen
 //    automatically inside the logger's Handler.
 //
-// RUN: go run ./23-structured-logging/5-exercise/_starter
+// RUN: go run ./14-application-architecture/structured-logging/5-exercise/_starter
 // ============================================================================
 
 func main() {

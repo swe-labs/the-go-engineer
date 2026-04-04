@@ -138,7 +138,7 @@ func main() {
 	fmt.Println("  5. ./... — Means 'everything in this project, recursively'")
 	fmt.Println()
 	fmt.Println("🎉 Section 0 complete! You're ready to learn Go.")
-	fmt.Println("   Next: go run ./01-language-basics/1-variables")
+	fmt.Println("   Next: go run ./01-core-foundations/language-basics/1-variables")
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("🚀 NEXT UP: LB.1 variables")
 	fmt.Println("   Current: GS.4 (dev-environment)")

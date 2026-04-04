@@ -17,7 +17,7 @@ import (
 // These tests verify searchFile and searchDirectory work correctly
 // with real temporary files on disk.
 //
-// RUN: go test -v ./10-filesystem/7-log-search
+// RUN: go test -v ./09-io-and-cli/filesystem/7-log-search
 // ============================================================================
 
 func TestSearchFileFindsMatches(t *testing.T) {

@@ -47,7 +47,7 @@ import (
 //   /healthz/live  — returns 200 as long as the process is responsive.
 //                    Only return 503 if you want Kubernetes to RESTART the pod.
 //
-// RUN: go run ./27-graceful-shutdown/3-capstone
+// RUN: go run ./14-application-architecture/graceful-shutdown/3-capstone
 //   Then send: kill -TERM <pid>   or press Ctrl+C
 // ============================================================================
 

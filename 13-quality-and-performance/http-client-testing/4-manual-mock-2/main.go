@@ -27,7 +27,7 @@ import (
 //   Now, inside the test, you define exactly what `GetFunc` does! This allows
 //   you to write custom logic per-test (e.g., returning errors based on URL).
 //
-// RUN: go test -v ./16-http-clients-and-mocking/4-manual-mock-2
+// RUN: go test -v ./13-quality-and-performance/http-client-testing/4-manual-mock-2
 // ============================================================================
 
 func main() {

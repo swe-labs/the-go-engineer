@@ -48,8 +48,8 @@ import (
 //     codes.DeadlineExceeded — context timed out before completion
 //
 // RUN:
-//   Terminal 1: go run ./26-grpc/1-unary/server
-//   Terminal 2: go run ./26-grpc/1-unary/client
+//   Terminal 1: go run ./14-application-architecture/grpc/1-unary/server
+//   Terminal 2: go run ./14-application-architecture/grpc/1-unary/client
 // ============================================================================
 
 // OrderServer implements the generated pb.OrderServiceServer interface.

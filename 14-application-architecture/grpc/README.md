@@ -45,16 +45,16 @@ protoc --go_out=. --go-grpc_out=. proto/service.proto
 
 ```bash
 # Terminal 1: start the server
-go run ./26-grpc/1-unary/server
+go run ./14-application-architecture/grpc/1-unary/server
 
 # Terminal 2: run the client
-go run ./26-grpc/1-unary/client
+go run ./14-application-architecture/grpc/1-unary/client
 
 # Terminal 1: start the streaming server
-go run ./26-grpc/2-streaming/server
+go run ./14-application-architecture/grpc/2-streaming/server
 
 # Terminal 2: run the streaming client
-go run ./26-grpc/2-streaming/client
+go run ./14-application-architecture/grpc/2-streaming/client
 ```
 
 ## Adding to go.mod

@@ -157,10 +157,10 @@ func main() {
 	}
 
 	// Testing with fstest.MapFS (shown below — run the test file to see it work):
-	// go test -v ./10-filesystem/8-fs-testing-seam
+	// go test -v ./09-io-and-cli/filesystem/8-fs-testing-seam
 	fmt.Print(`
 To see the fs.FS testing seam in action, run:
-  go test -v ./10-filesystem/8-fs-testing-seam
+  go test -v ./09-io-and-cli/filesystem/8-fs-testing-seam
 
 The test uses fstest.MapFS — zero disk I/O, fully in-memory.
 No temp directories. No cleanup. Runs in microseconds.
