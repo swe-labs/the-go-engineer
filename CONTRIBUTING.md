@@ -122,4 +122,5 @@ Before submitting, verify:
 - [ ] Every new Go file has the "NEXT UP" footer
 - [ ] Every concept has inline teaching comments
 - [ ] The section README is updated with the ID-based table
+- [ ] `curriculum.json` and [docs/curriculum/dependency-graphs.html](./docs/curriculum/dependency-graphs.html) are synced
 - [ ] CI pipeline passes on push (GitHub Actions)
