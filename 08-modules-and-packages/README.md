@@ -3,6 +3,7 @@
 ## Learning Objectives
 
 By the end of this section, you will understand:
+
 - How Go modules work and what `go.mod`/`go.sum` contain
 - How to add, update, and remove dependencies
 - Semantic versioning and the major version import rule
@@ -12,7 +13,7 @@ By the end of this section, you will understand:
 ## Contents
 
 | Directory | Topic | Level |
-|-----------|-------|-------|
+| --- | --- | --- |
 | `1-module-basics/` | `go.mod` anatomy, import paths, essential commands | Beginner |
 | `2-managing-deps/` | Adding/removing/inspecting dependencies | Intermediate |
 | `3-versioning/` | Semantic versioning, `replace`, `exclude`, vendoring | Intermediate |
@@ -20,9 +21,9 @@ By the end of this section, you will understand:
 ## How to Run
 
 ```bash
-go run ./08-modules-and-packages/08-modules-and-dependencies/1-module-basics
-go run ./08-modules-and-packages/08-modules-and-dependencies/2-managing-deps
-go run ./08-modules-and-packages/08-modules-and-dependencies/3-versioning
+go run ./08-modules-and-packages/1-module-basics
+go run ./08-modules-and-packages/2-managing-deps
+go run ./08-modules-and-packages/3-versioning
 ```
 
 ## Exercises
@@ -36,7 +37,6 @@ go run ./08-modules-and-packages/08-modules-and-dependencies/3-versioning
 - [Using Go Modules](https://go.dev/blog/using-go-modules)
 - [Go Modules Reference](https://go.dev/ref/mod)
 - [Module version numbering](https://go.dev/doc/modules/version-numbers)
-
 
 ## Learning Path
 

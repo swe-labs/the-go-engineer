@@ -57,7 +57,7 @@ Format: **[Date] — Description**. Sections: `Added`, `Fixed`, `Changed`, `Remo
 ### Fixed
 
 - **Bug:** `23-structured-logging/3-custom-handler` — `slog.DiscardHandler` instantiation type error fixed by removing struct brackets.
-- **Bug:** `24-errgroup-and-pools/3-sync-pool` — duplicate `BenchmarkWithPool` declaration causing compilation failure removed from `main.go`.
+- **Bug:** `12-concurrency-patterns/3-sync-pool` — duplicate `BenchmarkWithPool` declaration causing compilation failure removed from `main.go`.
 - **Bug:** `25-profiling/1-cpu-profile` and `10-filesystem/8-fs-testing-seam` — redundant newline formatting in `fmt.Println` fixed to standard `fmt.Print`.
 - **Bug:** `26-grpc` — missing generated Protocol Buffer Go files added using `protoc` and properly imported into `gen` package.
 - **Bug:** Global repository string literals — fixed widespread compilation errors caused by improper line breaks across several past modules.

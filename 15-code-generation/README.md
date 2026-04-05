@@ -6,7 +6,7 @@ A single conceptual lesson. The //go:generate directive is the mechanism; mocker
 
 | ID | Lesson | Concept | Requires |
 | --- | --- | --- | --- |
-| CG.1 | [go:generate](./28-go-generate) | //go:generate directive · go generate ./... · mockery · stringer · sqlc | 🟢 entry |
+| CG.1 | [go:generate](./1-go-generate) | //go:generate directive · go generate ./... · mockery · stringer · sqlc | 🟢 entry |
 
 ---
-**⬅️ Previous**: [HTTP graceful drain](../2-http-server) (GS.2)
+**⬅️ Previous**: [Enterprise Capstone](../14-application-architecture/enterprise-capstone)

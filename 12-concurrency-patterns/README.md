@@ -1,9 +1,9 @@
-# Section 24: errgroup & sync.Pool
+# Section 12: Concurrency Patterns (errgroup & sync.Pool)
 
 ## Beginner → Expert Mapping
 
 | Topic | Level | Importance | Engineering Concept |
-|-------|-------|------------|---------------------|
+| --- | --- | --- | --- |
 | `errgroup.Group` | Intermediate | **Critical** | Concurrent error collection, idiomatic WaitGroup replacement |
 | `errgroup` + context | Advanced | **Critical** | Automatic cancellation on first error |
 | `sync.Pool` | Advanced | High | Object reuse, GC pressure reduction |
@@ -16,11 +16,13 @@
 `sync.Pool` is the most impactful memory optimization available in Go. A pool holds recycled objects. Instead of `make([]byte, 4096)` on every request (triggering GC), you `Get()` a pre-allocated buffer, use it, and `Put()` it back. The standard library uses pools everywhere: `fmt`, `encoding/json`, `net/http` all have internal pools.
 
 **When to use sync.Pool:**
+
 - Object allocation appears in pprof heap profile hot path
 - Objects are temporary: used briefly, then discarded
 - Object size is non-trivial: byte buffers, structs with multiple fields
 
 **When NOT to use sync.Pool:**
+
 - Objects hold state between requests (race condition)
 - Allocation is not the bottleneck (profile first!)
 - Objects outlive the goroutine that created them
@@ -31,7 +33,6 @@
 - [sync.Pool](https://pkg.go.dev/sync#Pool)
 - [Go Blog: Profiling Go Programs](https://go.dev/blog/pprof)
 
-
 ## Learning Path
 
 | ID | Lesson | Concept | Requires |
@@ -39,3 +40,5 @@
 | CP.1 | [errgroup basics](./1-errgroup) | errgroup.Group · g.Go · g.Wait · first-error semantics | 🟢 entry |
 | CP.2 | [errgroup + context](./2-errgroup-context) | WithContext · auto-cancel on first error · fan-out pipeline | CP.1 |
 | CP.3 | [sync.Pool](./3-sync-pool) | Get → use → Reset → Put · GC eviction · zero-alloc buffers | 🟢 entry |
+| CP.4 | [bounded pipeline](./4-bounded-pipeline-exercise) | Semaphore + errgroup · backpressure · production-grade pipeline | CP.1, CP.2 |
+| CP.5 | [url checker](./5-url-checker-exercise) | Practical exercise combining errgroup and context | CP.1, CP.2 |

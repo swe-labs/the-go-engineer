@@ -86,7 +86,7 @@ Each module culminates in a hands-on project to test your understanding:
 
 | Chapter | ID | Exercise | Description |
 | ------- | --- | -------- | ----------- |
-| **01** | LB.4 | `language-basics/4-app-logger` | Synthesise types + iota + Stringer |
+| **01** | LB.4 | `language-basics/4-app-logger` | Synthesize types + iota + Stringer |
 | **02** | CF.4 | `4-pricing-calculator` | Map lookups · HasSuffix · switch on bool |
 | **03** | DS.6 | `6-contact-manager` | Secondary index · init() · pointer returns |
 | **04** | FE.9 | `8-error-handling` | Custom struct error · errors.As · defer |
