@@ -21,7 +21,7 @@ import (
 //   - How to safely provide default configurations with optional overrides.
 //
 // ENGINEERING DEPTH:
-//   When building APIs or structs with many configurable fields, you generally 
+//   When building APIs or structs with many configurable fields, you generally
 //   have three choices in Go:
 //   1. Pass every parameter to the constructor: `NewServer("127.0.0.1", 8080, 10, true, ...)` // Hard to read, breaks backward compatibility when adding fields.
 //   2. Pass a Config struct: `NewServer(ServerConfig{Port: 8080})` // Better, but distinguishing zero-values (e.g., 0 port vs default port) requires pointers in the struct.
