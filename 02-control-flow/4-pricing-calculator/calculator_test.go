@@ -30,9 +30,9 @@ func TestCalculateItemPrice(t *testing.T) {
 			wantFound: true,
 		},
 		{
-			name:      "sale item applies 10 percent discount",
+			name:      "sale item applies 20 percent discount",
 			itemCode:  "MUG_SALE",
-			wantPrice: 12.50 * 0.90, // 10% off base price
+			wantPrice: 12.50 * 0.80, // 20% off base price
 			wantFound: true,
 		},
 		{

@@ -60,9 +60,9 @@ func calculateItemPrice(itemCode string) (float64, bool) {
 			originalItemCode := strings.TrimSuffix(itemCode, "_SALE")
 			basePrice, found = productPrices[originalItemCode]
 			if found {
-				// Apply a 10% discount for sale items.
-				salePrice := basePrice * 0.90
-				fmt.Printf("  📦 %s (Sale! $%.2f → $%.2f)\n",
+				// Apply a 20% discount for sale items.
+				salePrice := basePrice * 0.80
+				fmt.Printf("  [OK] %s (Sale! $%.2f -> $%.2f)\n",
 					originalItemCode, basePrice, salePrice)
 				return salePrice, true
 			}
@@ -83,7 +83,7 @@ func main() {
 	fmt.Println()
 
 	// Simulate a customer order with a mix of regular and sale items.
-	// Notice "MUG_SALE" — our function will detect the suffix and apply 10% off.
+	// Notice "MUG_SALE" — our function will detect the suffix and apply 20% off.
 	orderItems := []string{
 		"TSHIRT", "MUG_SALE", "HAT", "BOOK", "KEYBOARD",
 	}

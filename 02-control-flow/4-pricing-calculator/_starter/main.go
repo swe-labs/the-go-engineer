@@ -17,7 +17,7 @@ import "fmt"
 //  1. [ ] Create a package-level map `productPrices` with product codes and prices
 //  2. [ ] Implement `calculateItemPrice(itemCode string) (float64, bool)` that:
 //         - Looks up the item in the map
-//         - If it ends with "_SALE", strip the suffix and apply a 10% discount
+//         - If it ends with "_SALE", strip the suffix and apply a 20% discount
 //         - Returns (price, found)
 //  3. [ ] In main(), iterate over a slice of order items and calculate the subtotal
 //
