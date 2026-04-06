@@ -11,7 +11,7 @@ import "fmt"
 // Level: Beginner
 // ============================================================================
 //
-// This is the most important file in the entire Go Mastery.
+// This is the most important file in the entire The Go Engineer curriculum.
 // Every single line is explained. Read every comment carefully.
 //
 // WHAT YOU'LL LEARN:
@@ -88,7 +88,7 @@ func main() {
 	// The text inside the quotes is called a "string literal".
 	// In Go, strings are always enclosed in double quotes "".
 	// Single quotes '' are for individual characters (called "runes" in Go).
-	fmt.Println("Hello, World! Welcome to the Go Mastery.")
+	fmt.Println("Hello, World! Welcome to The Go Engineer.")
 
 	// You can print multiple values separated by commas.
 	// Println automatically adds a space between each value.

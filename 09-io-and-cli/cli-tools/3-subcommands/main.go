@@ -111,7 +111,7 @@ func cmdCalc(args []string) {
 
 // --- SUBCOMMAND: version ---
 func cmdVersion() {
-	fmt.Println("Go Mastery CLI v1.0.0")
+	fmt.Println("The Go Engineer CLI v1.0.0")
 	fmt.Printf("Built with: %s\n", "go1.26")
 }
 
