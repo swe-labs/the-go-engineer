@@ -592,6 +592,18 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "08-modules-and-packages/3-versioning"
+                },
+                {
+                    "id": "MP.4",
+                    "name": "build tags",
+                    "concept": "//go:build \u00b7 conditional compilation \u00b7 OS-specific code \u00b7 test separation",
+                    "prerequisites": [
+                        "MP.1"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "08-modules-and-packages/4-build-tags"
                 }
             ]
         },
@@ -1006,6 +1018,18 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "10-web-and-database/web-masterclass/10-comments"
+                },
+                {
+                    "id": "WM.11",
+                    "name": "websockets",
+                    "concept": "HTTP Upgrade \u00b7 gorilla/websocket \u00b7 message pumping \u00b7 real-time duplex",
+                    "prerequisites": [
+                        "WM.1"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "10-web-and-database/web-masterclass/11-websockets"
                 }
             ]
         },
