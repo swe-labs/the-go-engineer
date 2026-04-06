@@ -1,46 +1,32 @@
 #!/usr/bin/env python3
 """
 GitHub Automation Tool
-Universal script for creating labels, issues, and discussions on ANY GitHub repository
-
-Features:
-- ✅ Create custom labels with colors and descriptions
-- ✅ Create issues with labels, milestones, and assignees
-- ✅ Create discussions (GitHub Discussions API)
-- ✅ Support multiple repositories
-- ✅ Config-driven (JSON or YAML)
-- ✅ Dry-run mode for safety
-- ✅ Works from anywhere with just a token and config file
+Universal script for creating labels, milestones, issues, and discussions.
 
 Usage:
     python3 github-automation.py --config config.json --token ghp_xxxx
     python3 github-automation.py --config config.yaml --token $GH_TOKEN --dry-run
-    python3 github-automation.py --config config.json --token $GH_TOKEN --issues-only
+    python3 github-automation.py --config config.json --token $GH_TOKEN --milestones-only
 
 Requirements:
     pip3 install requests pyyaml
-
-Author: GitHub Automation Tool
-License: MIT
 """
 
 import argparse
 import json
 import os
 import sys
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Any, Dict, List, Optional, Tuple
+
 import requests
-from datetime import datetime
 
 try:
     import yaml
+
     YAML_AVAILABLE = True
 except ImportError:
     YAML_AVAILABLE = False
 
-# ============================================================================
-# CONSTANTS
-# ============================================================================
 
 API_BASE = "https://api.github.com"
 DEFAULT_CONFIG_PATHS = [
@@ -50,106 +36,82 @@ DEFAULT_CONFIG_PATHS = [
     ".github-config.yaml",
 ]
 
-# ============================================================================
-# CONFIGURATION LOADER
-# ============================================================================
 
 class ConfigLoader:
-    """Load configuration from JSON or YAML files"""
+    """Load configuration from JSON or YAML files."""
 
     @staticmethod
     def load(config_path: str) -> Dict[str, Any]:
-        """Load config from file"""
         if not os.path.exists(config_path):
             raise FileNotFoundError(f"Config file not found: {config_path}")
 
-        with open(config_path, 'r') as f:
-            if config_path.endswith('.json'):
+        with open(config_path, "r", encoding="utf-8") as f:
+            if config_path.endswith(".json"):
                 return json.load(f)
-            elif config_path.endswith('.yaml') or config_path.endswith('.yml'):
+            if config_path.endswith(".yaml") or config_path.endswith(".yml"):
                 if not YAML_AVAILABLE:
                     raise ImportError("PyYAML not installed. Install with: pip3 install pyyaml")
                 return yaml.safe_load(f)
-            else:
-                raise ValueError(f"Unsupported config format: {config_path}")
+            raise ValueError(f"Unsupported config format: {config_path}")
 
     @staticmethod
-    def find_default():
-        """Search for default config file"""
+    def find_default() -> Optional[str]:
         for path in DEFAULT_CONFIG_PATHS:
             if os.path.exists(path):
                 return path
         return None
 
-# ============================================================================
-# GITHUB API CLIENT
-# ============================================================================
 
 class GitHubAPI:
-    """Universal GitHub API client"""
+    """Small GitHub REST client for setup automation."""
 
     def __init__(self, token: str, dry_run: bool = False, verbose: bool = True):
-        self.token = token
         self.dry_run = dry_run
         self.verbose = verbose
-        self.headers = {
-            "Authorization": f"token {token}",
-            "Accept": "application/vnd.github.v3+json",
-            "User-Agent": "GitHub-Automation-Tool",
-        }
         self.session = requests.Session()
-        self.session.headers.update(self.headers)
+        self.session.headers.update(
+            {
+                "Authorization": f"token {token}",
+                "Accept": "application/vnd.github.v3+json",
+                "User-Agent": "GitHub-Automation-Tool",
+            }
+        )
 
-    def _log(self, message: str):
-        """Log message if verbose enabled"""
+    def _log(self, message: str) -> None:
         if self.verbose:
             print(message)
 
-    def verify_connection(self, owner: str, repo: str) -> bool:
-        """Verify API connection and repo access"""
-        url = f"{API_BASE}/repos/{owner}/{repo}"
-        try:
-            response = self.session.get(url)
-            if response.status_code == 200:
-                user = response.json()["owner"]["login"]
-                repo_name = response.json()["name"]
-                self._log(f"✓ Authenticated and repo access verified: {user}/{repo_name}")
-                return True
-            else:
-                self._log(f"✗ Repo access denied: {response.status_code}")
-                return False
-        except Exception as e:
-            self._log(f"✗ Connection error: {str(e)}")
-            return False
-
     def verify_user(self) -> Optional[str]:
-        """Verify authentication and return username"""
         url = f"{API_BASE}/user"
         try:
             response = self.session.get(url)
             if response.status_code == 200:
                 user = response.json()["login"]
-                self._log(f"✓ Authenticated as: {user}")
+                self._log(f"OK Authenticated as: {user}")
                 return user
-            else:
-                self._log(f"✗ Authentication failed: {response.status_code}")
-                return None
-        except Exception as e:
-            self._log(f"✗ Connection error: {str(e)}")
+            self._log(f"ERROR Authentication failed: {response.status_code}")
+            return None
+        except Exception as exc:
+            self._log(f"ERROR Connection error: {exc}")
             return None
 
-    # ========================================================================
-    # LABEL OPERATIONS
-    # ========================================================================
+    def verify_connection(self, owner: str, repo: str) -> bool:
+        url = f"{API_BASE}/repos/{owner}/{repo}"
+        try:
+            response = self.session.get(url)
+            if response.status_code == 200:
+                repo_json = response.json()
+                self._log(f"OK Repo access verified: {repo_json['owner']['login']}/{repo_json['name']}")
+                return True
+            self._log(f"ERROR Repo access denied: {response.status_code}")
+            return False
+        except Exception as exc:
+            self._log(f"ERROR Connection error: {exc}")
+            return False
 
-    def create_label(self, owner: str, repo: str, name: str, color: str,
-                    description: str = "") -> Tuple[bool, str]:
-        """Create a label"""
+    def create_label(self, owner: str, repo: str, name: str, color: str, description: str = "") -> Tuple[bool, str]:
         url = f"{API_BASE}/repos/{owner}/{repo}/labels"
-        data = {
-            "name": name,
-            "color": color,
-        }
+        data: Dict[str, Any] = {"name": name, "color": color}
         if description:
             data["description"] = description
 
@@ -159,52 +121,74 @@ class GitHubAPI:
 
         try:
             response = self.session.post(url, json=data)
-
             if response.status_code == 201:
-                return True, f"✓ Label '{name}' created"
-            elif response.status_code == 422:
-                return True, f"⚠ Label '{name}' already exists"
-            else:
-                error = response.json().get("message", "Unknown error")
-                return False, f"✗ Failed to create label '{name}': {error}"
-        except Exception as e:
-            return False, f"✗ Error creating label '{name}': {str(e)}"
+                return True, f"OK Label '{name}' created"
+            if response.status_code == 422:
+                return True, f"WARN Label '{name}' already exists"
+            error = response.json().get("message", "Unknown error")
+            return False, f"ERROR Failed to create label '{name}': {error}"
+        except Exception as exc:
+            return False, f"ERROR Error creating label '{name}': {exc}"
 
-    def get_labels(self, owner: str, repo: str) -> Dict[str, Dict]:
-        """Get all labels from repo"""
-        url = f"{API_BASE}/repos/{owner}/{repo}/labels"
+    def get_milestones(self, owner: str, repo: str) -> Dict[str, int]:
+        url = f"{API_BASE}/repos/{owner}/{repo}/milestones?state=all"
         try:
             response = self.session.get(url)
-            if response.status_code == 200:
-                labels = {}
-                for label in response.json():
-                    labels[label["name"]] = {
-                        "color": label["color"],
-                        "description": label.get("description", "")
-                    }
-                return labels
-            return {}
+            if response.status_code != 200:
+                return {}
+            return {milestone["title"]: milestone["number"] for milestone in response.json()}
         except Exception:
             return {}
 
-    # ========================================================================
-    # ISSUE OPERATIONS
-    # ========================================================================
+    def create_milestone(
+        self,
+        owner: str,
+        repo: str,
+        title: str,
+        description: str = "",
+        due_on: Optional[str] = None,
+        state: str = "open",
+    ) -> Tuple[bool, str, Optional[int]]:
+        url = f"{API_BASE}/repos/{owner}/{repo}/milestones"
+        data: Dict[str, Any] = {"title": title, "state": state}
+        if description:
+            data["description"] = description
+        if due_on:
+            data["due_on"] = due_on
 
-    def create_issue(self, owner: str, repo: str, title: str, body: str = "",
-                    labels: List[str] = None, assignees: List[str] = None,
-                    milestone: Optional[int] = None) -> Tuple[bool, str, Optional[int]]:
-        """Create an issue"""
+        if self.dry_run:
+            self._log(f"  [DRY-RUN] Would create milestone: {title}")
+            return True, f"Milestone '{title}' (dry-run)", None
+
+        try:
+            response = self.session.post(url, json=data)
+            if response.status_code == 201:
+                milestone_num = response.json()["number"]
+                return True, f"OK Milestone '{title}' created", milestone_num
+            if response.status_code == 422:
+                return True, f"WARN Milestone '{title}' already exists", None
+            error = response.json().get("message", "Unknown error")
+            return False, f"ERROR Failed to create milestone '{title}': {error}", None
+        except Exception as exc:
+            return False, f"ERROR Error creating milestone '{title}': {exc}", None
+
+    def create_issue(
+        self,
+        owner: str,
+        repo: str,
+        title: str,
+        body: str = "",
+        labels: Optional[List[str]] = None,
+        assignees: Optional[List[str]] = None,
+        milestone: Optional[int] = None,
+    ) -> Tuple[bool, str, Optional[int]]:
         url = f"{API_BASE}/repos/{owner}/{repo}/issues"
-        data = {
-            "title": title,
-            "body": body or "",
-        }
+        data: Dict[str, Any] = {"title": title, "body": body or ""}
         if labels:
             data["labels"] = labels
         if assignees:
             data["assignees"] = assignees
-        if milestone:
+        if milestone is not None:
             data["milestone"] = milestone
 
         if self.dry_run:
@@ -213,41 +197,27 @@ class GitHubAPI:
 
         try:
             response = self.session.post(url, json=data)
-
             if response.status_code == 201:
                 issue_num = response.json()["number"]
-                return True, f"✓ Issue #{issue_num}: {title}", issue_num
-            else:
-                error = response.json().get("message", "Unknown error")
-                return False, f"✗ Failed to create issue: {error}", None
-        except Exception as e:
-            return False, f"✗ Error creating issue: {str(e)}", None
+                return True, f"OK Issue #{issue_num}: {title}", issue_num
+            error = response.json().get("message", "Unknown error")
+            return False, f"ERROR Failed to create issue: {error}", None
+        except Exception as exc:
+            return False, f"ERROR Error creating issue: {exc}", None
 
-    # ========================================================================
-    # DISCUSSION OPERATIONS
-    # ========================================================================
-
-    def create_discussion(self, owner: str, repo: str, category_id: str,
-                         title: str, body: str = "") -> Tuple[bool, str]:
-        """Create a discussion (requires GraphQL)"""
+    def create_discussion(self, owner: str, repo: str, category_id: str, title: str, body: str = "") -> Tuple[bool, str]:
         url = f"{API_BASE}/graphql"
-
-        # Update headers for GraphQL
-        headers = self.headers.copy()
+        headers = dict(self.session.headers)
         headers["Accept"] = "application/vnd.github.v3+json"
-
         query = """
         mutation($repositoryId:ID!,$categoryId:ID!,$title:String!,$body:String!) {
             createDiscussion(input:{repositoryId:$repositoryId,categoryId:$categoryId,title:$title,body:$body}) {
                 discussion {
-                    id
-                    title
                     url
                 }
             }
         }
         """
-
         variables = {
             "repositoryId": repo,
             "categoryId": category_id,
@@ -260,285 +230,223 @@ class GitHubAPI:
             return True, f"Discussion '{title}' (dry-run)"
 
         try:
-            response = self.session.post(
-                url,
-                json={"query": query, "variables": variables},
-                headers=headers
-            )
-
+            response = self.session.post(url, json={"query": query, "variables": variables}, headers=headers)
             if response.status_code == 200:
                 data = response.json()
                 if "errors" in data:
-                    return False, f"✗ Failed to create discussion: {data['errors'][0]['message']}"
-                else:
-                    disc_url = data["data"]["createDiscussion"]["discussion"]["url"]
-                    return True, f"✓ Discussion created: {disc_url}"
-            else:
-                return False, f"✗ Failed to create discussion: {response.status_code}"
-        except Exception as e:
-            return False, f"✗ Error creating discussion: {str(e)}"
+                    return False, f"ERROR Failed to create discussion: {data['errors'][0]['message']}"
+                discussion_url = data["data"]["createDiscussion"]["discussion"]["url"]
+                return True, f"OK Discussion created: {discussion_url}"
+            return False, f"ERROR Failed to create discussion: {response.status_code}"
+        except Exception as exc:
+            return False, f"ERROR Error creating discussion: {exc}"
 
-# ============================================================================
-# MAIN ORCHESTRATOR
-# ============================================================================
 
 class GitHubAutomation:
-    """Orchestrate GitHub automation tasks"""
+    """Run config-driven GitHub setup tasks."""
 
     def __init__(self, config: Dict[str, Any], token: str, dry_run: bool = False):
         self.config = config
-        self.token = token
         self.dry_run = dry_run
         self.api = GitHubAPI(token, dry_run=dry_run)
 
     def validate_config(self) -> bool:
-        """Validate config structure"""
-        required = ["owner", "repo"]
-        for field in required:
+        for field in ("owner", "repo"):
             if field not in self.config:
-                print(f"✗ Config error: Missing required field '{field}'")
+                print(f"ERROR Config error: Missing required field '{field}'")
                 return False
-
         return True
 
-    def run(self, labels_only: bool = False, issues_only: bool = False,
-           discussions_only: bool = False) -> bool:
-        """Execute automation"""
+    def run(
+        self,
+        labels_only: bool = False,
+        milestones_only: bool = False,
+        issues_only: bool = False,
+        discussions_only: bool = False,
+    ) -> bool:
         owner = self.config["owner"]
         repo = self.config["repo"]
 
-        # Header
-        mode = "[DRY-RUN] " if self.dry_run else ""
-        print(f"\n{'='*70}")
-        print(f"  {mode}GitHub Automation for {owner}/{repo}")
-        print(f"{'='*70}\n")
+        print(f"\n{'=' * 70}")
+        prefix = "[DRY-RUN] " if self.dry_run else ""
+        print(f"  {prefix}GitHub Automation for {owner}/{repo}")
+        print(f"{'=' * 70}\n")
 
-        # Verify connection
         print("Step 1: Verifying GitHub API connection...")
         if not self.api.verify_user():
-            print("\n✗ Authentication failed. Check your token.")
+            print("\nERROR Authentication failed. Check your token.")
             return False
-
         if not self.api.verify_connection(owner, repo):
-            print(f"\n✗ Cannot access repo {owner}/{repo}. Check permissions.")
+            print(f"\nERROR Cannot access repo {owner}/{repo}. Check permissions.")
             return False
         print()
 
-        # Create labels
-        if not issues_only and not discussions_only:
+        if not issues_only and not milestones_only and not discussions_only:
             self._create_labels(owner, repo)
 
-        # Create issues
-        if not labels_only and not discussions_only:
-            self._create_issues(owner, repo)
+        milestone_map: Dict[str, int] = {}
+        if not labels_only and not issues_only and not discussions_only:
+            milestone_map = self._create_milestones(owner, repo)
+        elif issues_only:
+            milestone_map = self.api.get_milestones(owner, repo)
 
-        # Create discussions
-        if not labels_only and not issues_only:
+        if not labels_only and not milestones_only and not discussions_only:
+            self._create_issues(owner, repo, milestone_map)
+
+        if not labels_only and not milestones_only and not issues_only:
             self._create_discussions(owner, repo)
 
-        # Summary
-        print("="*70)
+        print("=" * 70)
         if self.dry_run:
-            print("  ✓ Dry-run completed successfully!")
+            print("  OK Dry-run completed successfully.")
             print("  Run without --dry-run to actually create resources.")
         else:
-            print("  ✓ Automation completed successfully!")
+            print("  OK Automation completed successfully.")
             print(f"  Visit: https://github.com/{owner}/{repo}/issues")
-        print("="*70)
+        print("=" * 70)
         print()
-
         return True
 
-    def _create_labels(self, owner: str, repo: str):
-        """Create labels from config"""
-        if "labels" not in self.config or not self.config["labels"]:
+    def _create_labels(self, owner: str, repo: str) -> None:
+        labels = self.config.get("labels", [])
+        if not labels:
             return
 
-        labels = self.config["labels"]
-        print(f"Step 2: Creating labels...")
+        print("Step 2: Creating labels...")
         print(f"  Total labels to create: {len(labels)}\n")
-
         created = 0
         for label in labels:
             name = label.get("name")
             color = label.get("color")
             description = label.get("description", "")
-
             if not name or not color:
-                print(f"  ⚠ Skipping invalid label (missing name or color)")
+                print("  WARN Skipping invalid label (missing name or color)")
                 continue
-
             success, message = self.api.create_label(owner, repo, name, color, description)
             print(f"  {message}")
             if success:
                 created += 1
-
         print(f"\n  Summary: {created}/{len(labels)} created/verified\n")
 
-    def _create_issues(self, owner: str, repo: str):
-        """Create issues from config"""
-        if "issues" not in self.config or not self.config["issues"]:
+    def _create_milestones(self, owner: str, repo: str) -> Dict[str, int]:
+        milestones = self.config.get("milestones", [])
+        existing = self.api.get_milestones(owner, repo)
+        if not milestones:
+            return existing
+
+        print("Step 3: Creating milestones...")
+        print(f"  Total milestones to create: {len(milestones)}\n")
+        created = 0
+        for milestone in milestones:
+            title = milestone.get("title")
+            description = milestone.get("description", "")
+            due_on = milestone.get("due_on")
+            state = milestone.get("state", "open")
+            if not title:
+                print("  WARN Skipping invalid milestone (missing title)")
+                continue
+            success, message, number = self.api.create_milestone(owner, repo, title, description, due_on, state)
+            print(f"  {message}")
+            if success:
+                created += 1
+                if number is not None:
+                    existing[title] = number
+
+        if not self.dry_run:
+            existing = self.api.get_milestones(owner, repo)
+        print(f"\n  Summary: {created}/{len(milestones)} created/verified\n")
+        return existing
+
+    def _create_issues(self, owner: str, repo: str, milestone_map: Dict[str, int]) -> None:
+        issues = self.config.get("issues", [])
+        if not issues:
             return
 
-        issues = self.config["issues"]
-        print(f"Step 3: Creating issues...")
+        print("Step 4: Creating issues...")
         print(f"  Total issues to create: {len(issues)}\n")
-
         created = 0
-        for i, issue in enumerate(issues, 1):
+        for idx, issue in enumerate(issues, start=1):
             title = issue.get("title")
             body = issue.get("body", "")
             labels = issue.get("labels", [])
             assignees = issue.get("assignees", [])
-            milestone = issue.get("milestone")
+            milestone_value = issue.get("milestone")
+            milestone_number = None
+            if isinstance(milestone_value, int):
+                milestone_number = milestone_value
+            elif isinstance(milestone_value, str) and milestone_value:
+                milestone_number = milestone_map.get(milestone_value)
 
             if not title:
-                print(f"  ⚠ Issue #{i}: Missing title, skipping")
+                print(f"  WARN Issue #{idx}: Missing title, skipping")
                 continue
 
-            print(f"  Creating issue #{i}: {title}")
-            success, message, issue_num = self.api.create_issue(
-                owner, repo, title, body, labels, assignees, milestone
+            print(f"  Creating issue #{idx}: {title}")
+            success, message, _ = self.api.create_issue(
+                owner, repo, title, body, labels, assignees, milestone_number
             )
             print(f"    {message}")
-
             if success:
                 created += 1
-
         print(f"\n  Summary: {created}/{len(issues)} created\n")
 
-    def _create_discussions(self, owner: str, repo: str):
-        """Create discussions from config"""
-        if "discussions" not in self.config or not self.config["discussions"]:
+    def _create_discussions(self, owner: str, repo: str) -> None:
+        discussions = self.config.get("discussions", [])
+        if not discussions:
             return
 
-        discussions = self.config["discussions"]
-        print(f"Step 4: Creating discussions...")
+        print("Step 5: Creating discussions...")
         print(f"  Total discussions to create: {len(discussions)}\n")
-
         created = 0
-        for i, discussion in enumerate(discussions, 1):
+        for idx, discussion in enumerate(discussions, start=1):
             category_id = discussion.get("category_id")
             title = discussion.get("title")
             body = discussion.get("body", "")
-
             if not category_id or not title:
-                print(f"  ⚠ Discussion #{i}: Missing category_id or title, skipping")
+                print(f"  WARN Discussion #{idx}: Missing category_id or title, skipping")
                 continue
-
-            print(f"  Creating discussion #{i}: {title}")
-            success, message = self.api.create_discussion(
-                owner, repo, category_id, title, body
-            )
+            print(f"  Creating discussion #{idx}: {title}")
+            success, message = self.api.create_discussion(owner, repo, category_id, title, body)
             print(f"    {message}")
-
             if success:
                 created += 1
-
         print(f"\n  Summary: {created}/{len(discussions)} created\n")
 
-# ============================================================================
-# CLI
-# ============================================================================
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Universal GitHub Automation Tool",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  python3 github-automation.py --config config.json --token ghp_xxxx
-  python3 github-automation.py --config config.yaml --token $GH_TOKEN --dry-run
-  python3 github-automation.py --token ghp_xxxx  # Auto-detect config
-  python3 github-automation.py --config config.json --token ghp_xxxx --issues-only
-
-Config File Format:
-  {
-    "owner": "rasel9t6",
-    "repo": "the-go-engineer",
-    "labels": [
-      {"name": "epic", "color": "3E1B6F", "description": "Large feature"},
-      ...
-    ],
-    "issues": [
-      {"title": "Issue title", "body": "...", "labels": ["epic"], ...},
-      ...
-    ],
-    "discussions": [
-      {"category_id": "DIC_xxx", "title": "...", "body": "..."},
-      ...
-    ]
-  }
-        """
-    )
-
-    parser.add_argument(
-        "--config",
-        help="Config file path (JSON or YAML). Auto-detected if not provided."
-    )
-
-    parser.add_argument(
-        "--token",
-        required=True,
-        help="GitHub Personal Access Token"
-    )
-
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Preview changes without creating anything"
-    )
-
-    parser.add_argument(
-        "--labels-only",
-        action="store_true",
-        help="Only create labels"
-    )
-
-    parser.add_argument(
-        "--issues-only",
-        action="store_true",
-        help="Only create issues"
-    )
-
-    parser.add_argument(
-        "--discussions-only",
-        action="store_true",
-        help="Only create discussions"
-    )
-
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Universal GitHub Automation Tool")
+    parser.add_argument("--config", help="Config file path (JSON or YAML). Auto-detected if not provided.")
+    parser.add_argument("--token", required=True, help="GitHub Personal Access Token")
+    parser.add_argument("--dry-run", action="store_true", help="Preview changes without creating anything")
+    parser.add_argument("--labels-only", action="store_true", help="Only create labels")
+    parser.add_argument("--milestones-only", action="store_true", help="Only create milestones")
+    parser.add_argument("--issues-only", action="store_true", help="Only create issues")
+    parser.add_argument("--discussions-only", action="store_true", help="Only create discussions")
     args = parser.parse_args()
 
-    # Find config file
-    config_path = args.config
+    config_path = args.config or ConfigLoader.find_default()
     if not config_path:
-        config_path = ConfigLoader.find_default()
-        if config_path:
-            print(f"ℹ Auto-detected config: {config_path}\n")
-        else:
-            print("✗ No config file found. Provide with --config")
-            sys.exit(1)
-
-    # Load config
-    try:
-        config = ConfigLoader.load(config_path)
-    except Exception as e:
-        print(f"✗ Config error: {e}")
+        print("ERROR No config file found. Provide with --config")
         sys.exit(1)
 
-    # Validate config
+    try:
+        config = ConfigLoader.load(config_path)
+    except Exception as exc:
+        print(f"ERROR Config error: {exc}")
+        sys.exit(1)
+
     automation = GitHubAutomation(config, args.token, dry_run=args.dry_run)
     if not automation.validate_config():
         sys.exit(1)
 
-    # Run automation
     success = automation.run(
         labels_only=args.labels_only,
+        milestones_only=args.milestones_only,
         issues_only=args.issues_only,
-        discussions_only=args.discussions_only
+        discussions_only=args.discussions_only,
     )
-
     sys.exit(0 if success else 1)
+
 
 if __name__ == "__main__":
     main()

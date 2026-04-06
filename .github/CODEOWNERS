@@ -1,0 +1,12 @@
+# Default review ownership for The Go Engineer
+# Keep this file minimal until more maintainers are added.
+
+* @rasel9t6
+
+/.github/ @rasel9t6
+/scripts/maintainer-scripts/ @rasel9t6
+/README.md @rasel9t6
+/CONTRIBUTING.md @rasel9t6
+/RELEASE.md @rasel9t6
+/ROADMAP.md @rasel9t6
+/CHANGELOG.md @rasel9t6

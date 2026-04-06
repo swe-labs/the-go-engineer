@@ -1,0 +1,69 @@
+{
+  "owner": "rasel9t6",
+  "repo": "the-go-engineer",
+  "labels": [
+    {
+      "name": "v1-only",
+      "color": "BFD4F2",
+      "description": "Applies only to the stable v1 maintenance branch"
+    },
+    {
+      "name": "v2",
+      "color": "1D76DB",
+      "description": "Applies to active v2 development on main"
+    },
+    {
+      "name": "backport",
+      "color": "FBCA04",
+      "description": "Needs cherry-pick -x to another supported branch"
+    },
+    {
+      "name": "release-blocker",
+      "color": "B60205",
+      "description": "Must be resolved before the next planned release"
+    },
+    {
+      "name": "breaking-change",
+      "color": "D93F0B",
+      "description": "Introduces a major-version behavior or structure change"
+    },
+    {
+      "name": "docs",
+      "color": "0075CA",
+      "description": "Documentation, guides, and workflow updates"
+    },
+    {
+      "name": "good first issue",
+      "color": "7057FF",
+      "description": "Good entry point for new contributors"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "v1 maintenance",
+      "description": "Bug fixes and support work for the stable v1 line on release/v1",
+      "state": "open"
+    },
+    {
+      "title": "v2 alpha",
+      "description": "Incremental v2 development on main before feature freeze",
+      "state": "open"
+    },
+    {
+      "title": "v2 beta",
+      "description": "Feature-complete v2 stabilization after cutting release/v2",
+      "state": "open"
+    },
+    {
+      "title": "v2 rc",
+      "description": "Final release candidate hardening for v2.0.0",
+      "state": "open"
+    },
+    {
+      "title": "v2.0.0",
+      "description": "Final stable v2.0.0 release milestone",
+      "state": "open"
+    }
+  ],
+  "issues": []
+}
