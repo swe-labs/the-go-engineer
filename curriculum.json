@@ -1343,6 +1343,19 @@
                     "is_exercise": true,
                     "sub_graph": "",
                     "path": "12-concurrency-patterns/5-url-checker-exercise"
+                },
+                {
+                    "id": "CP.6",
+                    "name": "robust worker pool",
+                    "concept": "Bounded concurrency \u00b7 graceful shutdown \u00b7 panic recovery \u00b7 job queues",
+                    "prerequisites": [
+                        "CP.1",
+                        "CP.2"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "12-concurrency-patterns/6-worker-pool"
                 }
             ]
         },
