@@ -18,7 +18,7 @@ import (
 )
 
 // ============================================================================
-// Section 12: Databases — Connecting to SQLite
+// Section 10: Databases — Connecting to SQLite
 // Level: Beginner
 // ============================================================================
 //
@@ -100,3 +100,4 @@ func main() {
 	fmt.Println("   Current: DB.1 (connecting)")
 	fmt.Println("---------------------------------------------------")
 }
+

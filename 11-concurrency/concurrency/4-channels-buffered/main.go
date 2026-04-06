@@ -10,7 +10,7 @@ import (
 )
 
 // ============================================================================
-// Section 9: Concurrency — Buffered Channels
+// Section 11: Concurrency — Buffered Channels
 // Level: Intermediate
 // ============================================================================
 //
@@ -127,3 +127,4 @@ func main() {
 	fmt.Println("   Current: GC.4 (buffered channels)")
 	fmt.Println("---------------------------------------------------")
 }
+

@@ -14,7 +14,7 @@ import (
 )
 
 // ============================================================================
-// Section 13: Web Masterclass — HTML Templates
+// Section 10: Web Masterclass — HTML Templates
 // Level: Intermediate
 // ============================================================================
 //
@@ -150,3 +150,4 @@ func main() {
 	fmt.Println("   Current: WM.3 (templates)")
 	fmt.Println("---------------------------------------------------")
 }
+

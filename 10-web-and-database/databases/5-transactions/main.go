@@ -14,7 +14,7 @@ import (
 )
 
 // ============================================================================
-// Section 12: Databases — Transactions
+// Section 10: Databases — Transactions
 // Level: Advanced
 // ============================================================================
 //
@@ -129,3 +129,4 @@ func createUserWithProfile(db *sql.DB, name, email, hashedPassword, avatar strin
 
 	return userID, nil
 }
+

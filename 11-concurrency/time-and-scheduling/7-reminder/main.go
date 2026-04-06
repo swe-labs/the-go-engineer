@@ -13,7 +13,7 @@ import (
 )
 
 // ============================================================================
-// Section 15: Time & Scheduling — Console Reminder (Exercise)
+// Section 11: Time & Scheduling — Console Reminder (Exercise)
 // Level: Intermediate
 // ============================================================================
 //
@@ -102,3 +102,4 @@ func runReminder(seconds int, message string) {
 		}
 	}
 }
+

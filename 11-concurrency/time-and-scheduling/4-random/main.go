@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Section 15: Time & Scheduling — Random Numbers
+// Section 11: Time & Scheduling — Random Numbers
 // Level: Beginner
 // ============================================================================
 //
@@ -76,3 +76,4 @@ func main() {
 	fmt.Println("   Current: TM.4 (random numbers)")
 	fmt.Println("---------------------------------------------------")
 }
+

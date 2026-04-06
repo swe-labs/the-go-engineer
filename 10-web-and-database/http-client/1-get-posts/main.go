@@ -14,7 +14,7 @@ import (
 )
 
 // ============================================================================
-// Section 16: HTTP Clients & Mocking — Basic GET Requests
+// Section 10: HTTP Clients & Mocking — Basic GET Requests
 // Level: Beginner
 // ============================================================================
 //
@@ -131,3 +131,4 @@ func main() {
 	fmt.Println("   Current: HC.1 (basic GET)")
 	fmt.Println("---------------------------------------------------")
 }
+

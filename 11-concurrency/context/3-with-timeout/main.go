@@ -11,7 +11,7 @@ import (
 )
 
 // ============================================================================
-// Section 17: Context — WithTimeout & WithDeadline
+// Section 11: Context — WithTimeout & WithDeadline
 // Level: Intermediate
 // ============================================================================
 //
@@ -138,3 +138,4 @@ func slowOperation(ctx context.Context, duration time.Duration) (string, error) 
 		return "operation completed successfully", nil
 	}
 }
+

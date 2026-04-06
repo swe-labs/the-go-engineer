@@ -11,7 +11,7 @@ import (
 )
 
 // ============================================================================
-// Section 9: Concurrency — Goroutines
+// Section 11: Concurrency — Goroutines
 // Level: Intermediate
 // ============================================================================
 //
@@ -131,3 +131,4 @@ func main() {
 	fmt.Println("   Current: GC.1 (goroutines)")
 	fmt.Println("---------------------------------------------------")
 }
+

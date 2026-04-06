@@ -16,7 +16,7 @@ import (
 )
 
 // ============================================================================
-// Section 13: Web Masterclass — Sessions
+// Section 10: Web Masterclass — Sessions
 // Level: Advanced
 // ============================================================================
 //
@@ -183,3 +183,4 @@ func (app *application) handleFlash(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "No flash messages")
 	}
 }
+

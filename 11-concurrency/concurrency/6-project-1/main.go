@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Section 9: Concurrency — Pipeline Project
+// Section 11: Concurrency — Pipeline Project
 // Level: Advanced
 // ============================================================================
 //
@@ -92,3 +92,4 @@ func main() {
 	fmt.Println("   Current: GC.6 (pipeline project)")
 	fmt.Println("---------------------------------------------------")
 }
+

@@ -11,7 +11,7 @@ import (
 )
 
 // ============================================================================
-// Section 13: Web Masterclass — Routing Exercise
+// Section 10: Web Masterclass — Routing Exercise
 // Level: Beginner
 // ============================================================================
 //
@@ -81,3 +81,4 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 // TODO: Create handleBooks function here
 
 // TODO: Create handleHealth function here
+

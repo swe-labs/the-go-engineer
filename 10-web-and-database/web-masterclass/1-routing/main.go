@@ -11,7 +11,7 @@ import (
 )
 
 // ============================================================================
-// Section 13: Web Masterclass — Routing
+// Section 10: Web Masterclass — Routing
 // Level: Beginner -> Intermediate
 // ============================================================================
 //
@@ -107,3 +107,4 @@ func handleCreatePost(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	fmt.Fprint(w, `{"message":"post created"}`)
 }
+

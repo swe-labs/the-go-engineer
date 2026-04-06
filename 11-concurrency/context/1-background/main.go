@@ -10,7 +10,7 @@ import (
 )
 
 // ============================================================================
-// Section 17: Context — Background & TODO
+// Section 11: Context — Background & TODO
 // Level: Beginner
 // ============================================================================
 //
@@ -122,3 +122,4 @@ func processRequest(ctx context.Context, orderID string) {
 	//   http.NewRequestWithContext(ctx, "GET", url, nil)
 	//   grpcClient.Call(ctx, request)
 }
+

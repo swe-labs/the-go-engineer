@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Section 15: Time & Scheduling — Time Basics
+// Section 11: Time & Scheduling — Time Basics
 // Level: Beginner
 // ============================================================================
 //
@@ -79,3 +79,4 @@ func main() {
 	fmt.Println("   Current: TM.1 (time basics)")
 	fmt.Println("---------------------------------------------------")
 }
+

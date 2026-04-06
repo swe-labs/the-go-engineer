@@ -10,7 +10,7 @@ import (
 )
 
 // ============================================================================
-// Section 17: Context — WithValue
+// Section 11: Context — WithValue
 // Level: Advanced
 // ============================================================================
 //
@@ -122,3 +122,4 @@ func logAction(ctx context.Context, action string) {
 	requestID, _ := ctx.Value(requestIDKey).(string)
 	fmt.Printf("  [%s] Action: %s\n", requestID, action)
 }
+

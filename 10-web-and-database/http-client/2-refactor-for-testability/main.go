@@ -13,7 +13,7 @@ import (
 )
 
 // ============================================================================
-// Section 16: HTTP Clients & Mocking — Refactor for Testability
+// Section 10: HTTP Clients & Mocking — Refactor for Testability
 // Level: Intermediate
 // ============================================================================
 //
@@ -134,3 +134,4 @@ func main() {
 	fmt.Println("   Current: HC.2 (refactor for testability)")
 	fmt.Println("---------------------------------------------------")
 }
+

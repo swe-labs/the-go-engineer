@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Section 9: Concurrency — Select Deep Dive
+// Section 11: Concurrency — Select Deep Dive
 // Level: Advanced
 // ============================================================================
 //
@@ -21,7 +21,7 @@ import (
 )
 
 // ============================================================================
-// Section 9: Select Statement Deep Dive
+// Section 11: Select Statement Deep Dive
 // Level: Advanced
 // ============================================================================
 //
@@ -215,3 +215,4 @@ func fanIn(channels ...<-chan string) <-chan string {
 
 	return out
 }
+

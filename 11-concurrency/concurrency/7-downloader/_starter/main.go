@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 9: Concurrency — Concurrent Downloader (Exercise Starter)
+// Section 11: Concurrency — Concurrent Downloader (Exercise Starter)
 // Level: Advanced
 // ============================================================================
 //
@@ -46,3 +46,4 @@ func main() {
 	fmt.Println()
 	fmt.Println("When finished, compare your solution with ../main.go")
 }
+

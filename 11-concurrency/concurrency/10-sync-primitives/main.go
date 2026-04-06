@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Section 9: Concurrency — Sync Primitives
+// Section 11: Concurrency — Sync Primitives
 // Level: Advanced
 // ============================================================================
 //
@@ -18,7 +18,7 @@ import (
 )
 
 // ============================================================================
-// Section 9: sync.Once and sync.Map
+// Section 11: sync.Once and sync.Map
 // Level: Advanced
 // ============================================================================
 //
@@ -146,3 +146,4 @@ func main() {
 	fmt.Println("   Current: GC.10 (sync primitives)")
 	fmt.Println("---------------------------------------------------")
 }
+

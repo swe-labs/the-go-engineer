@@ -13,7 +13,7 @@ import (
 )
 
 // ============================================================================
-// Section 13: Web Masterclass — Dependency Injection
+// Section 10: Web Masterclass — Dependency Injection
 // Level: Intermediate
 // ============================================================================
 //
@@ -104,3 +104,4 @@ func (app *application) handleHealth(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, `{"status":"ok","env":"%s"}`, app.config.env)
 }
+

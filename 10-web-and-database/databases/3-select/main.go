@@ -15,7 +15,7 @@ import (
 )
 
 // ============================================================================
-// Section 12: Databases — SELECT Queries
+// Section 10: Databases — SELECT Queries
 // Level: Intermediate
 // ============================================================================
 //
@@ -145,3 +145,4 @@ func GetUsers(db *sql.DB) ([]User, error) {
 
 	return users, nil
 }
+

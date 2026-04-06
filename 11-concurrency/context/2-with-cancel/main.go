@@ -11,7 +11,7 @@ import (
 )
 
 // ============================================================================
-// Section 17: Context — WithCancel
+// Section 11: Context — WithCancel
 // Level: Intermediate
 // ============================================================================
 //
@@ -128,3 +128,4 @@ func worker(ctx context.Context, results chan<- string) {
 		}
 	}
 }
+

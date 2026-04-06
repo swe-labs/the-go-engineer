@@ -16,7 +16,7 @@ import (
 )
 
 // ============================================================================
-// Section 12: Databases — Prepared Statements & Context
+// Section 10: Databases — Prepared Statements & Context
 // Level: Intermediate
 // ============================================================================
 //
@@ -106,3 +106,4 @@ func createUserWithCtx(ctx context.Context, db *sql.DB, name, email, hashedPassw
 
 	return result.LastInsertId()
 }
+

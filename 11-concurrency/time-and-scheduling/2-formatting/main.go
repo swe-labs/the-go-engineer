@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Section 15: Time & Scheduling — Time Formatting
+// Section 11: Time & Scheduling — Time Formatting
 // Level: Beginner
 // ============================================================================
 //
@@ -75,3 +75,4 @@ func getOffsetInSeconds(t time.Time) int {
 	_, offset := t.Zone()
 	return offset
 }
+

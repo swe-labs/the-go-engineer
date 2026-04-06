@@ -10,7 +10,7 @@ import (
 )
 
 // ============================================================================
-// Section 9: Concurrency — Channels
+// Section 11: Concurrency — Channels
 // Level: Intermediate
 // ============================================================================
 //
@@ -175,3 +175,4 @@ func main() {
 	fmt.Println("   Current: GC.3 (channels (unbuffered))")
 	fmt.Println("---------------------------------------------------")
 }
+

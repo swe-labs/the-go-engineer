@@ -12,7 +12,7 @@ import (
 )
 
 // ============================================================================
-// Section 9: Concurrency — Race Conditions & sync.Mutex
+// Section 11: Concurrency — Race Conditions & sync.Mutex
 // Level: Advanced
 // ============================================================================
 //
@@ -165,3 +165,4 @@ func main() {
 	fmt.Println("   Current: GC.8 (race conditions)")
 	fmt.Println("---------------------------------------------------")
 }
+

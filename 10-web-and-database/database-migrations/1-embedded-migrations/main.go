@@ -21,7 +21,7 @@ import (
 )
 
 // ============================================================================
-// Section 21: Database Migrations — Embedded Schema Evolution
+// Section 10: Database Migrations — Embedded Schema Evolution
 // Level: Advanced
 // ============================================================================
 //
@@ -115,3 +115,4 @@ func main() {
 		fmt.Println("\n   (Proceed to Section 22 to see this run perfectly under Docker Compose!)")
 	}
 }
+

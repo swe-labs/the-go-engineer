@@ -15,7 +15,7 @@ import (
 )
 
 // ============================================================================
-// Section 13: Web Masterclass — Middleware
+// Section 10: Web Masterclass — Middleware
 // Level: Advanced
 // ============================================================================
 //
@@ -124,3 +124,4 @@ func main() {
 	fmt.Println("   Current: WM.4 (middleware)")
 	fmt.Println("---------------------------------------------------")
 }
+

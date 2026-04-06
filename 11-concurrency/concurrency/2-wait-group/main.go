@@ -12,7 +12,7 @@ import (
 )
 
 // ============================================================================
-// Section 9: Concurrency — WaitGroups
+// Section 11: Concurrency — WaitGroups
 // Level: Intermediate
 // ============================================================================
 //
@@ -146,3 +146,4 @@ func main() {
 	fmt.Println("   Current: GC.2 (WaitGroups)")
 	fmt.Println("---------------------------------------------------")
 }
+

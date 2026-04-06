@@ -16,7 +16,7 @@ import (
 )
 
 // ============================================================================
-// Section 13: Web Masterclass — Authentication
+// Section 10: Web Masterclass — Authentication
 // Level: Advanced
 // ============================================================================
 //
@@ -195,3 +195,4 @@ func handleProfile(w http.ResponseWriter, r *http.Request) {
 		"user_id": userID,
 	})
 }
+

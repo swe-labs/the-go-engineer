@@ -10,7 +10,7 @@ import (
 )
 
 // ============================================================================
-// Section 9: Concurrency — Closing Channels
+// Section 11: Concurrency — Closing Channels
 // Level: Intermediate
 // ============================================================================
 //
@@ -142,3 +142,4 @@ func main() {
 	fmt.Println("   Current: GC.5 (closing channels)")
 	fmt.Println("---------------------------------------------------")
 }
+
