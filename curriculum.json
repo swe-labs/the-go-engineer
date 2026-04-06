@@ -853,6 +853,41 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "10-web-and-database/databases/5-transactions"
+                },
+                {
+                    "id": "DB.6",
+                    "name": "repository pattern",
+                    "concept": "Repository interface \u00b7 implementation separation \u00b7 dependency injection",
+                    "prerequisites": [
+                        "DB.1",
+                        "DB.2",
+                        "DB.3",
+                        "DB.5"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "10-web-and-database/databases/6-repository"
+                }
+            ]
+        },
+        {
+            "id": "s10mig",
+            "num": "\u00a710 \u00b7 Migrations",
+            "title": "Web \u2014 Database Migrations",
+            "description": "Embedded schema evolution and migration execution.",
+            "lessons": [{
+                    "id": "DM.1",
+                    "name": "embedded migrations",
+                    "concept": "go:embed \u00b7 schema execution \u00b7 up/down scripts",
+                    "prerequisites": [
+                        "DB.1",
+                        "DB.2"
+                    ],
+                    "is_entry": true,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "10-web-and-database/database-migrations/1-embedded-migrations"
                 }
             ]
         },
@@ -1104,6 +1139,20 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "11-concurrency/concurrency/6-project-1"
+                },
+                {
+                    "id": "GC.7",
+                    "name": "concurrent downloader",
+                    "concept": "Practical application of pipelines, concurrent downloads, and data processing",
+                    "prerequisites": [
+                        "GC.3",
+                        "GC.4",
+                        "GC.5"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": true,
+                    "sub_graph": "",
+                    "path": "11-concurrency/concurrency/7-downloader"
                 },
                 {
                     "id": "GC.8",
