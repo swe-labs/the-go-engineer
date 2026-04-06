@@ -39,8 +39,8 @@ services:
   api:
     build:
       # Context is the root repo so Docker can access go.mod and parent folders
-      context: .. 
-      dockerfile: 22-enterprise-capstone/Dockerfile
+      context: ../../ 
+      dockerfile: 14-application-architecture/enterprise-capstone/Dockerfile
     ports:
       - "8080:8080"
     environment:
