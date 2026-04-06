@@ -6,14 +6,12 @@ This document describes the complete learning path through The Go Engineer curri
 
 The curriculum follows a **Spiral Learning Model**:
 
-1. **Foundations** (Sections 01-03): Basic syntax and data structures
-2. **Language Patterns** (Sections 04-07): Functions, types, composition
-3. **Practical IO** (Sections 08-09): Real-world input/output
-4. **Full-Stack Development** (Section 10): Web development with databases
-5. **Concurrency** (Sections 11-12): Parallel programming
-6. **Production Quality** (Section 13): Testing and optimization
-7. **Enterprise Architecture** (Section 14): Scalable system design
-8. **Advanced Tools** (Section 15): Code generation and automation
+1. **Phase 1: Foundations** (Chapters 01-04): Core syntax, control flow, data structures, and errors.
+2. **Phase 2: Intermediate** (Chapters 05-08): Abstraction, composition, strings/text, and modules.
+3. **Phase 3: IO & CLI** (Chapter 09): Filesystem, encoding, and building CLI tools.
+4. **Phase 4: Systems** (Chapters 10-12): Web development, databases, and concurrency.
+5. **Phase 5: Architecture** (Chapters 13-14): Quality, performance, logging, gRPC, and production design.
+6. **Phase 6: Professional** (Chapter 15): Code generation and automation.
 
 ## 📚 Learning Tracks
 
@@ -640,6 +638,10 @@ Proto Definition (proto3, code generation)
 Unary Server (implement generated interface)
   ↓
 Unary Client (dial, stub, deadline)
+  ↓
+Server-side Streaming (WatchOrderStatus, pushing data)
+  ↓
+Bidirectional Streaming (ProcessOrderStream, concurrent streams)
 ```
 
 #### Graceful Shutdown
@@ -683,9 +685,9 @@ This is your **capstone project**: a complete, production-ready REST API.
 **Key Concepts Flow**:
 ```
 go:generate Directive (tool invocation, build-time generation)
-  ├── mockery (interface mocking)
-  ├── stringer (enum string conversion)
-  └── sqlc (type-safe SQL)
+  ├── mockery (interface mocking - expert depth)
+  ├── sqlc (type-safe SQL - expert depth)
+  └── stringer (enum string conversion)
 ```
 
 ---

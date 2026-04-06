@@ -49,25 +49,33 @@ Experienced with Go? → **Jump to [§11 Concurrency](./11-concurrency/) or brow
 - **Developers from other languages** — Know Python/JS/Java? Skim the basics, deep-dive into Go-specific patterns.
 - **Go developers leveling up** — Already write Go? Jump to Chapters 09+ for concurrency, testing, and production patterns.
 
-## The Elite 15-Chapter Learning Path
+## The 6-Phase Learning Path
 
-This repository follows a strict **Language → Runtime → IO → Quality → Architecture** progression. Every chapter cleanly decouples concepts by their primary domain.
+The curriculum is structured into 6 logical phases, taking you from **Zero to Senior Engineer** across 15 high-impact chapters.
 
-- `01-core-foundations`: Development environment, syntax basics, constants (GS, LB).
-- `02-control-flow`: Execution branches, for loops (CF).
-- `03-data-structures`: Arrays, slices, maps, pointers (DS).
-- `04-functions-and-errors`: First-class closures, defer, error design (FE).
-- `05-types-and-interfaces`: Structs, methods, interfaces, generics (TI).
-- `06-composition`: Struct embedding (CO).
-- `07-strings-and-text`: UTF-8, regex, templates (ST).
-- `08-modules-and-packages`: Go modules, versioning (MP).
-- `09-io-and-cli`: Filesystem (FS), Encoding (EN), CLI Tools (CL).
-- `10-web-and-database`: Databases (DB), Masterclass (WM), HTTP Client (HC).
-- `11-concurrency`: Goroutines (GC), Context (CT), Time (TM).
-- `12-concurrency-patterns`: errgroup, sync.Pool (CP).
-- `13-quality-and-performance`: Testing (TE), Mocking (HM), Profiling (PR).
-- `14-application-architecture`: Package Design (PD), Logging (SL), gRPC (GR), Shutdown (GS), Capstone (EC).
-- `15-code-generation`: //go:generate (CG).
+### 🟦 Phase 1: Foundations (01–04)
+*Language Basics, Control Flow, Data Structures, Functions & Errors.*
+The bedrock of Go. Master pointers, slices, and Go's unique error handling.
+
+### 🟩 Phase 2: Intermediate (05–08)
+*Types & Interfaces, Composition, Strings & Text, Modules & Packages.*
+Learn "The Go Way" of abstraction. No inheritance—just composition and interfaces.
+
+### 🟧 Phase 3: IO & CLI (09)
+*Filesystem, Encoding (JSON/XML/Base64), CLI Tools.*
+Building tools that interact with the real world.
+
+### 🟥 Phase 4: Systems (10–12)
+*Web Masterclass, Databases, Concurrency, Concurrency Patterns.*
+Building high-performance servers that scale through goroutines and channels.
+
+### 🟪 Phase 5: Architecture (13–14)
+*Testing, Mocking, Profiling, Package Design, Logging, gRPC, Shutdown.*
+Production engineering: observability, type-safe RPCs, and performance tuning.
+
+### ⬛ Phase 6: Professional (15)
+*Code Generation (Mockery, SQLC).*
+Automating the boring parts of development to scale your productivity.
 
 ## Guided Learning Patterns
 
@@ -98,7 +106,7 @@ Each module culminates in a hands-on project to test your understanding:
 | **09** | CL.4 | `cli-tools/4-file-organizer` | --dry-run · ReadDir · Rename |
 | **10** | DB.6  | `databases/6-repository` | SQLite impl · dependency injection |
 | **10** | WM.11 | `enterprise-capstone` | Full production-ready server |
-| **11** | GC.7  | `concurrency/7-downloader` | Semaphore pattern · WaitGroup + channel |
+| **11** | GC.7  | `goroutines/7-downloader` | Semaphore pattern · WaitGroup + channel |
 | **11** | TM.7  | `time-and-scheduling/7-reminder` | AfterFunc · ticker · select |
 | **11** | CT.5  | `context/5-timeout-client` | DeadlineExceeded detection |
 | **12** | CP.4  | `4-bounded-pipeline` | g.SetLimit · g.TryGo · pooled buffers |
@@ -106,8 +114,9 @@ Each module culminates in a hands-on project to test your understanding:
 | **13** | HM.4 | `http-client-testing/6-testify-mock` | .On/.Return · AssertNumberOfCalls |
 | **13** | PR.1 | `profiling/1-cpu-profile` | flat vs cum · go tool pprof |
 | **14** | SL.5 | `structured-logging/5-exercise` | PII redactor · ReplaceAttr · mapping |
-| **14** | GR.2 | `grpc/1-unary` | Generated interface · interceptors |
+| **14** | GR.4 | `grpc/2-streaming` | Bidirectional streams · real-time updates |
 | **14** | GS.3 | `graceful-shutdown/3-capstone` | Signal → ready=503 → drain → order |
+| **15** | CG.3 | `3-sqlc` | Type-safe SQL code generation |
 
 ## How to Use This Repository
 

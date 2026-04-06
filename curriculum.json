@@ -1404,7 +1404,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "12-concurrency-patterns/2-errgroup-context"
+                    "path": "12-concurrency-patterns/advanced-concurrency/2-errgroup-context"
                 },
                 {
                     "id": "CP.3",
@@ -1414,7 +1414,7 @@
                     "is_entry": true,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "12-concurrency-patterns/3-sync-pool"
+                    "path": "12-concurrency-patterns/advanced-concurrency/3-sync-pool"
                 },
                 {
                     "id": "CP.4",
@@ -1427,7 +1427,7 @@
                     "is_entry": false,
                     "is_exercise": true,
                     "sub_graph": "",
-                    "path": "12-concurrency-patterns/4-bounded-pipeline-exercise"
+                    "path": "12-concurrency-patterns/advanced-concurrency/4-bounded-pipeline-exercise"
                 },
                 {
                     "id": "CP.5",
@@ -1440,7 +1440,7 @@
                     "is_entry": false,
                     "is_exercise": true,
                     "sub_graph": "",
-                    "path": "12-concurrency-patterns/5-url-checker-exercise"
+                    "path": "12-concurrency-patterns/advanced-concurrency/5-url-checker-exercise"
                 },
                 {
                     "id": "CP.6",
@@ -1788,6 +1788,32 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "14-application-architecture/grpc/1-unary/client"
+                },
+                {
+                    "id": "GR.4",
+                    "name": "server streaming",
+                    "concept": "stream keyword \u00b7 stream.Send() \u00b7 real-time updates",
+                    "prerequisites": [
+                        "GR.1",
+                        "GR.2"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "14-application-architecture/grpc/2-streaming/server"
+                },
+                {
+                    "id": "GR.5",
+                    "name": "bidirectional streaming",
+                    "concept": "Combined stream \u00b7 stream.Recv() vs stream.Send() concurrency \u00b7 io.EOF handling",
+                    "prerequisites": [
+                        "GR.1",
+                        "GR.4"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "14-application-architecture/grpc/2-streaming/client"
                 }
             ]
         },
@@ -1860,6 +1886,30 @@
                 "is_exercise": false,
                 "sub_graph": "",
                 "path": "15-code-generation/1-go-generate"
+            },
+            {
+                "id": "CG.2",
+                "name": "mockery",
+                "concept": "Automated mock generation \u00b7 testing stubs \u00b7 interface safety",
+                "prerequisites": [
+                    "CG.1"
+                ],
+                "is_entry": false,
+                "is_exercise": false,
+                "sub_graph": "",
+                "path": "15-code-generation/2-mockery"
+            },
+            {
+                "id": "CG.3",
+                "name": "sqlc",
+                "concept": "Type-safe SQL generation \u00b7 schema-driven Go code \u00b7 zero-reflection queries",
+                "prerequisites": [
+                    "CG.1"
+                ],
+                "is_entry": false,
+                "is_exercise": false,
+                "sub_graph": "",
+                "path": "15-code-generation/3-sqlc"
             }]
         }
     ]
