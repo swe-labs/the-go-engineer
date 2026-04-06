@@ -107,7 +107,7 @@ func main() {
 	fmt.Println("  3. os.Getenv for config, with sensible defaults for missing vars")
 	fmt.Println("  4. Exit 0 = success, Exit 1 = error (defers DON'T run after os.Exit)")
 	fmt.Println()
-	fmt.Println("   Next: go run ./19-cli-tools/2-flags -name='Go Mastery' -count=3")
+	fmt.Println("   Next: go run ./19-cli-tools/2-flags -name='The Go Engineer' -count=3")
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("🚀 NEXT UP: CL.2 flags")
 	fmt.Println("   Current: CL.1 (args)")

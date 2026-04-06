@@ -56,10 +56,10 @@ func main() {
 	fmt.Println()
 
 	// --- STRING VERBS ---
-	name := "Go Mastery"
+	name := "The Go Engineer"
 	fmt.Println("--- String Verbs ---")
-	fmt.Printf("  %%s  (string):      %s\n", name) // Go Mastery
-	fmt.Printf("  %%q  (quoted):      %q\n", name) // "Go Mastery"
+	fmt.Printf("  %%s  (string):      %s\n", name) // The Go Engineer
+	fmt.Printf("  %%q  (quoted):      %q\n", name) // "The Go Engineer"
 	fmt.Printf("  %%x  (hex bytes):   %x\n", name) // 476f204d6173746572...
 	fmt.Println()
 

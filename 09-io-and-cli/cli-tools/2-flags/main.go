@@ -33,7 +33,7 @@ import (
 //
 // RUN:
 //   go run ./19-cli-tools/2-flags
-//   go run ./19-cli-tools/2-flags -name="Go Mastery" -count=3 -verbose
+//   go run ./19-cli-tools/2-flags -name="The Go Engineer" -count=3 -verbose
 //   go run ./19-cli-tools/2-flags -help
 // ============================================================================
 

@@ -2,7 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 
 // ============================================================================
-// Section 28 Preview: go:generate
+// Section 15 Preview: go:generate
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:

@@ -26,7 +26,7 @@ Every Go engineer needs to build command-line tools. Go excels at CLI developmen
 
 ```bash
 go run ./19-cli-tools/1-args hello world
-go run ./19-cli-tools/2-flags -name="Go Mastery" -count=3
+go run ./19-cli-tools/2-flags -name="The Go Engineer" -count=3
 go run ./19-cli-tools/3-subcommands greet -name="Gopher"
 ```
 
