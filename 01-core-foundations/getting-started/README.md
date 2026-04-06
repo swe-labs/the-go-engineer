@@ -1,6 +1,6 @@
 # Section 0: Getting Started
 
-Welcome to the **Go Mastery**! This section will get you from zero to running your first Go program. No prior programming experience is required.
+Welcome to **The Go Engineer**! This section will get you from zero to running your first Go program. No prior programming experience is required.
 
 ## What is Go?
 
@@ -126,7 +126,7 @@ go run ./01-core-foundations/getting-started/2-hello-world
 You should see:
 
 ```
-Hello, World! Welcome to the Go Mastery.
+Hello, World! Welcome to The Go Engineer.
 ```
 
 🎉 **Congratulations!** You just compiled and executed your first Go program.

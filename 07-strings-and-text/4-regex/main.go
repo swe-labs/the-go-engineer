@@ -69,7 +69,7 @@ func main() {
 	// 3. FindString / FindAllString: Extract matches
 	// =====================================================================
 	fmt.Println("2️⃣  FindAllString (extract all matches):")
-	text := "Contact us at support@gomastery.dev or sales@gomastery.dev. Invalid: @broken"
+	text := "Contact us at support@thegoengineer.dev or sales@thegoengineer.dev. Invalid: @broken"
 
 	// FindAllString returns all non-overlapping matches.
 	// The second argument limits results (-1 = all matches).
@@ -111,7 +111,7 @@ func main() {
 	fmt.Println("4️⃣  Named capture groups:")
 	urlPattern := regexp.MustCompile(`(?P<protocol>https?)://(?P<host>[^/:]+)(?::(?P<port>\d+))?`)
 
-	url := "https://api.gomastery.dev:8443"
+	url := "https://api.thegoengineer.dev:8443"
 	match := urlPattern.FindStringSubmatch(url)
 	if match != nil {
 		for i, name := range urlPattern.SubexpNames() {
