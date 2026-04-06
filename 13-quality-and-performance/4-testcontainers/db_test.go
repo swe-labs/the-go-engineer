@@ -2,7 +2,9 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-// RUN: go test -v ./13-quality-and-performance/4-testcontainers
+//go:build integration
+
+// RUN: go test -v -tags=integration ./13-quality-and-performance/4-testcontainers
 package testcontainers
 
 import (
