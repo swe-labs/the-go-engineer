@@ -1201,7 +1201,7 @@
                     "is_entry": false,
                     "is_exercise": true,
                     "sub_graph": "",
-                    "path": "11-concurrency/concurrency/7-downloader"
+                    "path": "11-concurrency/goroutines/7-downloader"
                 },
                 {
                     "id": "GC.8",
