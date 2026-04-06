@@ -1,4 +1,4 @@
-1 - Python
-2 - Go
+1 - Go
+2 - Python
 3 - Java
 4 - PHP

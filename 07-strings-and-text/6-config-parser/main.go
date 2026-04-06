@@ -9,7 +9,7 @@ package main
 // Level: Intermediate
 // ============================================================================
 //
-// RUN: go run ./07-strings-and-text/6-log-parser
+// RUN: go run ./07-strings-and-text/6-config-parser
 // ============================================================================
 
 import (

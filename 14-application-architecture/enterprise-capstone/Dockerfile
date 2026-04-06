@@ -16,7 +16,7 @@ RUN go mod download
 COPY . .
 
 # Build the binary explicitly from the capstone api entrypoint
-RUN CGO_ENABLED=0 GOOS=linux go build -o api-binary ./22-enterprise-capstone/cmd/api
+RUN CGO_ENABLED=0 GOOS=linux go build -o api-binary ./14-application-architecture/enterprise-capstone/cmd/api
 
 
 # STAGE 2: Runner

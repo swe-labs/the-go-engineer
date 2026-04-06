@@ -7,13 +7,13 @@ package main
 import "testing"
 
 // ============================================================================
-// Tests for: Log Parser (Strings Exercise)
+// Tests for: Config Parser (Strings Exercise)
 // ============================================================================
 //
 // These tests verify the parseConfig function correctly handles
 // key-value pairs, quoted strings, comments, and edge cases.
 //
-// RUN: go test -v ./07-strings-and-text/6-log-parser
+// RUN: go test -v ./07-strings-and-text/6-config-parser
 // ============================================================================
 
 func TestParseConfigBasic(t *testing.T) {

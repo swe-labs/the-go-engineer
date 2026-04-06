@@ -454,6 +454,18 @@
                     "is_exercise": true,
                     "sub_graph": "",
                     "path": "05-types-and-interfaces/6-payroll-processor"
+                },
+                {
+                    "id": "TI.7",
+                    "name": "advanced generics",
+                    "concept": "Map/Filter patterns \u00b7 constraint interfaces \u00b7 reusable data pipelines",
+                    "prerequisites": [
+                        "TI.5"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "05-types-and-interfaces/7-advanced-generics"
                 }
             ]
         },
@@ -593,6 +605,18 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "08-modules-and-packages/3-versioning"
+                },
+                {
+                    "id": "MP.4",
+                    "name": "build tags",
+                    "concept": "//go:build \u00b7 conditional compilation \u00b7 OS-specific code \u00b7 test separation",
+                    "prerequisites": [
+                        "MP.1"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "08-modules-and-packages/4-build-tags"
                 }
             ]
         },
@@ -866,6 +890,41 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "10-web-and-database/databases/5-transactions"
+                },
+                {
+                    "id": "DB.6",
+                    "name": "repository pattern",
+                    "concept": "Repository interface \u00b7 implementation separation \u00b7 dependency injection",
+                    "prerequisites": [
+                        "DB.1",
+                        "DB.2",
+                        "DB.3",
+                        "DB.5"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "10-web-and-database/databases/6-repository"
+                }
+            ]
+        },
+        {
+            "id": "s10mig",
+            "num": "\u00a710 \u00b7 Migrations",
+            "title": "Web \u2014 Database Migrations",
+            "description": "Embedded schema evolution and migration execution.",
+            "lessons": [{
+                    "id": "DM.1",
+                    "name": "embedded migrations",
+                    "concept": "go:embed \u00b7 schema execution \u00b7 up/down scripts",
+                    "prerequisites": [
+                        "DB.1",
+                        "DB.2"
+                    ],
+                    "is_entry": true,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "10-web-and-database/database-migrations/1-embedded-migrations"
                 }
             ]
         },
@@ -1007,6 +1066,18 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "10-web-and-database/web-masterclass/10-comments"
+                },
+                {
+                    "id": "WM.11",
+                    "name": "websockets",
+                    "concept": "HTTP Upgrade \u00b7 gorilla/websocket \u00b7 message pumping \u00b7 real-time duplex",
+                    "prerequisites": [
+                        "WM.1"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "10-web-and-database/web-masterclass/11-websockets"
                 }
             ]
         },
@@ -1117,6 +1188,20 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "11-concurrency/concurrency/6-project-1"
+                },
+                {
+                    "id": "GC.7",
+                    "name": "concurrent downloader",
+                    "concept": "Practical application of pipelines, concurrent downloads, and data processing",
+                    "prerequisites": [
+                        "GC.3",
+                        "GC.4",
+                        "GC.5"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": true,
+                    "sub_graph": "",
+                    "path": "11-concurrency/concurrency/7-downloader"
                 },
                 {
                     "id": "GC.8",
@@ -1356,6 +1441,19 @@
                     "is_exercise": true,
                     "sub_graph": "",
                     "path": "12-concurrency-patterns/5-url-checker-exercise"
+                },
+                {
+                    "id": "CP.6",
+                    "name": "robust worker pool",
+                    "concept": "Bounded concurrency \u00b7 graceful shutdown \u00b7 panic recovery \u00b7 job queues",
+                    "prerequisites": [
+                        "CP.1",
+                        "CP.2"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "12-concurrency-patterns/6-worker-pool"
                 }
             ]
         },
@@ -1411,6 +1509,19 @@
                     "is_exercise": false,
                     "sub_graph": "",
                     "path": "13-quality-and-performance/testing/benchmarks"
+                },
+                {
+                    "id": "TE.5",
+                    "name": "testcontainers",
+                    "concept": "Spinning up real postgres instances via Docker APIs \u00b7 wait strategies \u00b7 raw SQL vs mocking",
+                    "prerequisites": [
+                        "TE.1",
+                        "DB.1"
+                    ],
+                    "is_entry": false,
+                    "is_exercise": false,
+                    "sub_graph": "",
+                    "path": "13-quality-and-performance/4-testcontainers"
                 }
             ]
         },

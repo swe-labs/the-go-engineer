@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log/slog"
 	"math/rand"
+	"os"
 	"time"
 
 	"golang.org/x/sync/errgroup"
@@ -142,7 +143,7 @@ func resultCollector(ctx context.Context, results <-chan Result) error {
 }
 
 func main() {
-	slog.SetDefault(slog.New(slog.NewTextHandler(nil, &slog.HandlerOptions{Level: slog.LevelInfo})))
+	slog.SetDefault(slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: slog.LevelInfo})))
 
 	fmt.Println("=== Fan-out pipeline with errgroup.WithContext ===")
 	start := time.Now()

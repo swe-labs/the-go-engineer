@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 7: Strings & Text — Log Parser (Exercise Starter)
+// Section 7: Strings & Text — Config Parser (Exercise Starter)
 // Level: Intermediate
 // ============================================================================
 //
@@ -26,7 +26,7 @@ import "fmt"
 //   - Use strings.NewReader to create an io.Reader from a string
 //   - bufio.NewScanner(reader) reads line-by-line
 //
-// RUN: go run ./07-strings-and-text/6-log-parser/_starter
+// RUN: go run ./07-strings-and-text/6-config-parser/_starter
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 
