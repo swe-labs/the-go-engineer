@@ -93,7 +93,7 @@ You have no messages
 
 	fmt.Println(strings.ToUpper(output.String()))
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: MP.1 module basics")
+	fmt.Println("🚀 NEXT UP: ST.6 config parser project")
 	fmt.Println("   Current: ST.5 (text templates)")
 	fmt.Println("---------------------------------------------------")
 }

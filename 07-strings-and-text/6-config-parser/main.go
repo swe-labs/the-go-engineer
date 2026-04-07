@@ -5,11 +5,12 @@
 package main
 
 // ============================================================================
-// Section 7: Strings & Text — Config Parser (Exercise)
+// Section 7: Strings & Text - Config Parser (Exercise)
 // Level: Intermediate
 // ============================================================================
 //
 // RUN: go run ./07-strings-and-text/6-config-parser
+// TEST: go test ./07-strings-and-text/6-config-parser
 // ============================================================================
 
 import (
@@ -17,69 +18,91 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
+	"text/template"
 )
+
+type configEntry struct {
+	Key   string
+	Value string
+}
 
 func parseConfig(content string) (map[string]string, error) {
 	config := make(map[string]string)
 
-	// 1. Regex Compilation
-	// regexp.MustCompile() parses the regex into a state machine byte-code.
-	// The "Must" idiom in Go means: "If this fails, trigger a fatal panic."
-	// We use MustCompile for hardcoded strings that are guaranteed to be valid.
+	// Compile once so every scanned line reuses the same regex.
 	re := regexp.MustCompile(`^\s*([\w.-]+)\s*=\s*(?:'([^']*)'|"([^"]*)"|([^#\s]*))?(?:\s*#.*)?$`)
 
-	// 2. The Scanner
-	// bufio.Scanner wraps an io.Reader. Instead of loading a 10GB log file
-	// directly into RAM (which would crash the server), it streams the bytes
-	// from memory lazily, line by line.
 	scanner := bufio.NewScanner(strings.NewReader(content))
 	lineNo := 0
 
-	// .Scan() reads bytes up to the next \n character and returns true.
 	for scanner.Scan() {
 		lineNo++
 		line := scanner.Text()
-
-		// 3. String Trimming
-		// Strings are immutable, so TrimSpace allocates a fresh string header
-		// pointing to a sliced portion of the underlying byte array.
 		trimmedLine := strings.TrimSpace(line)
 
-		// Skip empty lines or comments
 		if trimmedLine == "" || strings.HasPrefix(trimmedLine, "#") {
-			continue // Skip to next iteration of the loop
-		}
-
-		// 4. Submatch Extraction
-		// FindStringSubmatch returns an array indexing the capture groups `(...)`.
-		matches := re.FindStringSubmatch(trimmedLine)
-		if matches == nil {
-			fmt.Printf("Line %d: '%s' - Is Invalid\n", lineNo, line)
 			continue
 		}
 
-		// matches[0] = the entire matching line
-		// matches[1] = the key capture group
+		matches := re.FindStringSubmatch(trimmedLine)
+		if matches == nil {
+			fmt.Printf("Line %d: %q is invalid\n", lineNo, line)
+			continue
+		}
+
 		key := matches[1]
 		var value string
 
-		if matches[2] != "" {
+		switch {
+		case matches[2] != "":
 			value = matches[2]
-		} else if matches[3] != "" {
+		case matches[3] != "":
 			value = matches[3]
-		} else {
+		default:
 			value = matches[4]
 		}
 
 		config[key] = value
 	}
 
+	if err := scanner.Err(); err != nil {
+		return nil, fmt.Errorf("scan config: %w", err)
+	}
+
 	return config, nil
 }
 
-func main() {
+func renderConfig(config map[string]string) (string, error) {
+	entries := make([]configEntry, 0, len(config))
+	for key, value := range config {
+		entries = append(entries, configEntry{Key: key, Value: value})
+	}
 
+	sort.Slice(entries, func(i, j int) bool {
+		return entries[i].Key < entries[j].Key
+	})
+
+	const tmplSource = `Parsed Config Summary
+{{range . -}}
+- {{.Key}}={{printf "%q" .Value}}
+{{end}}`
+
+	tmpl, err := template.New("config-summary").Parse(tmplSource)
+	if err != nil {
+		return "", fmt.Errorf("parse config template: %w", err)
+	}
+
+	var output strings.Builder
+	if err := tmpl.Execute(&output, entries); err != nil {
+		return "", fmt.Errorf("render config template: %w", err)
+	}
+
+	return output.String(), nil
+}
+
+func main() {
 	envFileContent := `
 # Application Configuration
 APP_NAME="My Cool App"
@@ -102,8 +125,11 @@ ANOTHER_KEY_NO_VALUE =`
 		os.Exit(1)
 	}
 
-	for k, v := range config {
-		fmt.Printf("%s=%q\n", k, v)
+	summary, err := renderConfig(config)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
 
+	fmt.Println(summary)
 }

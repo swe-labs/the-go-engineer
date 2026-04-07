@@ -55,6 +55,25 @@
       "outputs": [
         "CO.3"
       ]
+    },
+    {
+      "id": "s07",
+      "number": "07",
+      "slug": "strings-and-text",
+      "title": "Strings and Text",
+      "phase": "foundations",
+      "summary": "Teach learners how Go handles immutable strings, formatting, Unicode, regex, and template-driven text rendering for real parsing and reporting work.",
+      "status": "pilot",
+      "prerequisites": [
+        "s06"
+      ],
+      "path_prefix": "07-strings-and-text",
+      "entry_points": [
+        "ST.1"
+      ],
+      "outputs": [
+        "ST.6"
+      ]
     }
   ],
   "items": [
@@ -707,6 +726,201 @@
         "composition",
         "embedding",
         "methods"
+      ]
+    },
+    {
+      "id": "ST.1",
+      "section_id": "s07",
+      "slug": "strings",
+      "title": "Strings",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Introduce strings as immutable byte-backed values and show how packages like strings.Builder help build text efficiently.",
+      "objectives": [
+        "Explain why Go strings are immutable and how that affects text manipulation",
+        "Choose standard-library string helpers instead of manual byte-by-byte reinvention"
+      ],
+      "prerequisites": [],
+      "production_relevance": "Text handling sits underneath config files, logs, payloads, and CLI output, so string fundamentals show up everywhere in Go systems.",
+      "path": "07-strings-and-text/1-strings",
+      "run_command": "go run ./07-strings-and-text/1-strings",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ST.2"
+      ],
+      "tags": [
+        "strings",
+        "immutability",
+        "builder"
+      ]
+    },
+    {
+      "id": "ST.2",
+      "section_id": "s07",
+      "slug": "formatting",
+      "title": "Formatting",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Teach fmt verbs, width and precision controls, and when to format into strings versus directly to output.",
+      "objectives": [
+        "Use the right fmt helper for inline formatting, string creation, and writer-based output",
+        "Explain how formatting choices affect readability and downstream text processing"
+      ],
+      "prerequisites": [
+        "ST.1"
+      ],
+      "production_relevance": "Formatting verbs shape logs, CLI output, debug views, and text reports throughout production Go code.",
+      "path": "07-strings-and-text/2-formatting-string",
+      "run_command": "go run ./07-strings-and-text/2-formatting-string",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ST.3"
+      ],
+      "tags": [
+        "fmt",
+        "formatting",
+        "output"
+      ]
+    },
+    {
+      "id": "ST.3",
+      "section_id": "s07",
+      "slug": "unicode-and-runes",
+      "title": "Unicode and Runes",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Show the difference between bytes, runes, and UTF-8 iteration so learners stop assuming one byte always means one character.",
+      "objectives": [
+        "Explain why byte indexing and rune iteration can produce different results",
+        "Use unicode helpers when text logic depends on characters instead of raw bytes"
+      ],
+      "prerequisites": [
+        "ST.1",
+        "ST.2"
+      ],
+      "production_relevance": "Unicode-aware text handling matters in APIs, CLI tools, validation, and internationalized user-facing systems.",
+      "path": "07-strings-and-text/3-unicode",
+      "run_command": "go run ./07-strings-and-text/3-unicode",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ST.4"
+      ],
+      "tags": [
+        "unicode",
+        "runes",
+        "utf-8"
+      ]
+    },
+    {
+      "id": "ST.4",
+      "section_id": "s07",
+      "slug": "regex",
+      "title": "Regex",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Introduce regexp compilation, match extraction, and structured capture groups for practical text parsing.",
+      "objectives": [
+        "Compile and reuse regex patterns instead of rebuilding them inside loops",
+        "Extract structured data from text with capture groups instead of brittle manual slicing"
+      ],
+      "prerequisites": [
+        "ST.1",
+        "ST.3"
+      ],
+      "production_relevance": "Regex is common in parsing, validation, and log processing, but it must be used deliberately to stay readable and performant.",
+      "path": "07-strings-and-text/4-regex",
+      "run_command": "go run ./07-strings-and-text/4-regex",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ST.5"
+      ],
+      "tags": [
+        "regex",
+        "parsing",
+        "patterns"
+      ]
+    },
+    {
+      "id": "ST.5",
+      "section_id": "s07",
+      "slug": "text-templates",
+      "title": "Text Templates",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Teach text/template as a safe way to render structured text output without manual string-concatenation sprawl.",
+      "objectives": [
+        "Render repeated or conditional text layouts with template actions instead of brittle concatenation",
+        "Connect parsed data structures to template-driven output cleanly"
+      ],
+      "prerequisites": [
+        "ST.1",
+        "ST.2"
+      ],
+      "production_relevance": "Template-driven rendering shows up in config generation, emails, reports, and CLI summaries where output structure matters.",
+      "path": "07-strings-and-text/5-text-template",
+      "run_command": "go run ./07-strings-and-text/5-text-template",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ST.6"
+      ],
+      "tags": [
+        "templates",
+        "rendering",
+        "output"
+      ]
+    },
+    {
+      "id": "ST.6",
+      "section_id": "s07",
+      "slug": "config-parser-project",
+      "title": "Config Parser Project",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "estimated_time": 80,
+      "summary": "Combine string handling, regex parsing, scanner-based reading, and template rendering into one config-parser milestone with runnable behavior and tests.",
+      "objectives": [
+        "Parse key-value config data into a structured map using scanner and regex helpers",
+        "Render a stable summary from parsed data instead of printing ad hoc text line by line"
+      ],
+      "prerequisites": [
+        "ST.1",
+        "ST.2",
+        "ST.4",
+        "ST.5"
+      ],
+      "production_relevance": "Config parsing and text reporting are common in CLI tools, deployment helpers, and operational automation where predictable text handling matters.",
+      "path": "07-strings-and-text/6-config-parser",
+      "run_command": "go run ./07-strings-and-text/6-config-parser",
+      "test_command": "go test ./07-strings-and-text/6-config-parser",
+      "starter_path": "07-strings-and-text/6-config-parser/_starter",
+      "next_items": [],
+      "tags": [
+        "exercise",
+        "strings",
+        "regex",
+        "templates"
       ]
     }
   ]

@@ -7,11 +7,11 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 7: Strings & Text — Config Parser (Exercise Starter)
+// Section 7: Strings & Text - Config Parser (Exercise Starter)
 // Level: Intermediate
 // ============================================================================
 //
-// EXERCISE: Build an Application Config (.env) Parser
+// EXERCISE: Build an application config (.env) parser
 //
 // REQUIREMENTS:
 //  1. [ ] Define a `parseConfig` function returning a `map[string]string`
@@ -19,14 +19,18 @@ import "fmt"
 //         APP_NAME="My Cool App"
 //  3. [ ] Ignore empty lines and comments (`#`)
 //  4. [ ] Read a multi-line config string using `bufio.Scanner`
-//  5. [ ] Parse each line, collect matches, and print the resulting map
+//  5. [ ] Parse each line and collect matches into the resulting map
+//  6. [ ] Render a stable summary using `text/template`
+//  7. [ ] Make `go test ./07-strings-and-text/6-config-parser` pass
 //
 // HINTS:
 //   - Use regexp.MustCompile to compile the pattern at startup
 //   - Use strings.NewReader to create an io.Reader from a string
 //   - bufio.NewScanner(reader) reads line-by-line
+//   - Sort keys before rendering so the template output is stable
 //
 // RUN: go run ./07-strings-and-text/6-config-parser/_starter
+// TEST: go test ./07-strings-and-text/6-config-parser
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 
@@ -36,11 +40,13 @@ import "fmt"
 
 // TODO: Implement parseConfig function
 
+// TODO: Render a stable summary with text/template
+
 func main() {
 	fmt.Println("=== Config Parser Exercise ===")
 	fmt.Println()
-	fmt.Println("TODO: Implement your config parser!")
-	fmt.Println("See the REQUIREMENTS above for what to build.")
+	fmt.Println("TODO: Implement the config parser and rendered summary.")
+	fmt.Println("Use the tests to confirm your parsing logic.")
 	fmt.Println()
 	fmt.Println("When finished, compare your solution with ../main.go")
 }
