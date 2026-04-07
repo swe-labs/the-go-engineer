@@ -14,7 +14,8 @@ implementation work is approved.
 - [LESSON-TEMPLATE.md](./LESSON-TEMPLATE.md) - canonical v2 lesson template
 - [EXERCISE-TEMPLATE.md](./EXERCISE-TEMPLATE.md) - canonical v2 guided exercise template
 - [CHECKPOINT-TEMPLATE.md](./CHECKPOINT-TEMPLATE.md) - canonical v2 checkpoint template
+- [MINI-PROJECT-TEMPLATE.md](./MINI-PROJECT-TEMPLATE.md) - canonical v2 mini-project template
 
 ## Planned Templates
 
-- mini-project template
+- capstone template
