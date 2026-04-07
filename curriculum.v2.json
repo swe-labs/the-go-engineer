@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s04",
+      "number": "04",
+      "slug": "functions-and-errors",
+      "title": "Functions and Errors",
+      "phase": "foundations",
+      "summary": "Teach learners to shape behavior with functions, handle failure explicitly, and prepare for more structured project work.",
+      "status": "pilot",
+      "prerequisites": [],
+      "path_prefix": "04-functions-and-errors",
+      "entry_points": [
+        "FE.1"
+      ],
+      "outputs": [
+        "FE.9"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "FE.1",
+      "section_id": "s04",
+      "slug": "functions",
+      "title": "Functions",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Introduce basic function signatures, parameters, and return values.",
+      "objectives": [
+        "Define small functions with clear inputs and outputs",
+        "Read parameter and return contracts without guessing hidden behavior"
+      ],
+      "prerequisites": [],
+      "production_relevance": "Small, explicit function contracts are the foundation for readable Go code and later error-return patterns.",
+      "path": "04-functions-and-errors/1-function",
+      "run_command": "go run ./04-functions-and-errors/1-function",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.2"
+      ],
+      "tags": [
+        "functions",
+        "signatures",
+        "foundations"
+      ]
+    },
+    {
+      "id": "FE.2",
+      "section_id": "s04",
+      "slug": "closures-recursion",
+      "title": "Closures and Recursion",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Show how functions can capture state and call themselves when the problem shape needs it.",
+      "objectives": [
+        "Explain how closures retain access to surrounding variables",
+        "Use recursion deliberately without losing track of the call flow"
+      ],
+      "prerequisites": [
+        "FE.1"
+      ],
+      "production_relevance": "Closures and recursion appear in handlers, callbacks, and traversal logic, but they need disciplined readability to stay maintainable.",
+      "path": "04-functions-and-errors/2-function-2",
+      "run_command": "go run ./04-functions-and-errors/2-function-2",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.3"
+      ],
+      "tags": [
+        "functions",
+        "closures",
+        "recursion"
+      ]
+    },
+    {
+      "id": "FE.3",
+      "section_id": "s04",
+      "slug": "variadic-functions",
+      "title": "Variadic Functions",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Introduce variadic parameters and the spread form for passing slices into function calls.",
+      "objectives": [
+        "Write functions that accept a flexible number of values",
+        "Recognize when variadic APIs improve clarity and when a slice is clearer"
+      ],
+      "prerequisites": [
+        "FE.1",
+        "FE.2"
+      ],
+      "production_relevance": "Variadic APIs are common in formatting, logging, and helpers, but they work best when the call shape stays obvious.",
+      "path": "04-functions-and-errors/3-variadic-func",
+      "run_command": "go run ./04-functions-and-errors/3-variadic-func",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.4"
+      ],
+      "tags": [
+        "functions",
+        "variadic",
+        "api-design"
+      ]
+    },
+    {
+      "id": "FE.4",
+      "section_id": "s04",
+      "slug": "multiple-return-values",
+      "title": "Multiple Return Values",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Teach Go's multi-return style and the path toward returning explicit errors as values.",
+      "objectives": [
+        "Return multiple values from a function intentionally",
+        "Explain why Go pairs useful results with explicit error returns"
+      ],
+      "prerequisites": [
+        "FE.1",
+        "FE.3"
+      ],
+      "production_relevance": "Multiple return values are the base contract for idiomatic Go error handling and explicit control flow.",
+      "path": "04-functions-and-errors/4-function-multi-values",
+      "run_command": "go run ./04-functions-and-errors/4-function-multi-values",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.5"
+      ],
+      "tags": [
+        "functions",
+        "multiple-returns",
+        "errors"
+      ]
+    },
+    {
+      "id": "FE.5",
+      "section_id": "s04",
+      "slug": "custom-errors",
+      "title": "Custom Errors",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Show how to define custom error values that expose stable failure meaning.",
+      "objectives": [
+        "Implement custom error types that carry useful context",
+        "Use stable error identity instead of fragile string matching"
+      ],
+      "prerequisites": [
+        "FE.4"
+      ],
+      "production_relevance": "Stable custom errors make branching, retries, and user-safe handling easier across real Go services and tools.",
+      "path": "04-functions-and-errors/5-custom-error",
+      "run_command": "go run ./04-functions-and-errors/5-custom-error",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.6"
+      ],
+      "tags": [
+        "errors",
+        "custom-errors",
+        "error-identity"
+      ]
+    },
+    {
+      "id": "FE.6",
+      "section_id": "s04",
+      "slug": "error-wrapping",
+      "title": "Error Wrapping",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Teach how to wrap low-level failures with more context while preserving inspectable error chains.",
+      "objectives": [
+        "Wrap errors with contextual information using idiomatic Go patterns",
+        "Inspect wrapped errors safely with the standard library helpers"
+      ],
+      "prerequisites": [
+        "FE.5"
+      ],
+      "production_relevance": "Wrapped errors let logs, callers, and retry logic keep context without destroying the underlying failure identity.",
+      "path": "04-functions-and-errors/5b-error-wrapping",
+      "run_command": "go run ./04-functions-and-errors/5b-error-wrapping",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.7"
+      ],
+      "tags": [
+        "errors",
+        "wrapping",
+        "inspection"
+      ]
+    },
+    {
+      "id": "FE.7",
+      "section_id": "s04",
+      "slug": "defer",
+      "title": "Defer",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Introduce defer as a cleanup and completion tool that keeps function exits disciplined.",
+      "objectives": [
+        "Use defer for cleanup and completion tracking",
+        "Explain when deferred work improves reliability and when it obscures intent"
+      ],
+      "prerequisites": [
+        "FE.1",
+        "FE.5"
+      ],
+      "production_relevance": "Defer is central to cleanup in file, lock, and transaction workflows where correctness depends on predictable exit behavior.",
+      "path": "04-functions-and-errors/6-defer",
+      "run_command": "go run ./04-functions-and-errors/6-defer",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.8"
+      ],
+      "tags": [
+        "defer",
+        "cleanup",
+        "control-flow"
+      ]
+    },
+    {
+      "id": "FE.8",
+      "section_id": "s04",
+      "slug": "panic-recover",
+      "title": "Panic and Recover",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Show where panic belongs, where it does not, and how recover works only at controlled defer boundaries.",
+      "objectives": [
+        "Explain why panic is not a replacement for ordinary error returns",
+        "Recover only at deliberate safety boundaries inside deferred code"
+      ],
+      "prerequisites": [
+        "FE.7"
+      ],
+      "production_relevance": "Reliable Go code treats panic as an exceptional boundary concern rather than everyday flow control, especially in servers and workers.",
+      "path": "04-functions-and-errors/7-panic-recover",
+      "run_command": "go run ./04-functions-and-errors/7-panic-recover",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.9"
+      ],
+      "tags": [
+        "panic",
+        "recover",
+        "failure-boundaries"
+      ]
+    },
+    {
+      "id": "FE.9",
+      "section_id": "s04",
+      "slug": "error-handling-project",
+      "title": "Error Handling Project",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "estimated_time": 60,
+      "summary": "Guide learners through combining custom errors, wrapped failures, and defer-based cleanup in one focused exercise.",
+      "objectives": [
+        "Build a small program that applies the section's explicit error-handling ideas together",
+        "Preserve useful failure context by wrapping low-level errors without hiding the underlying math failure"
+      ],
+      "prerequisites": [
+        "FE.1",
+        "FE.4",
+        "FE.5",
+        "FE.6",
+        "FE.7",
+        "FE.8"
+      ],
+      "production_relevance": "Small tools and services often need to continue handling expected failures while still surfacing enough context for debugging and review.",
+      "path": "04-functions-and-errors/8-error-handling",
+      "run_command": "go run ./04-functions-and-errors/8-error-handling",
+      "test_command": "",
+      "starter_path": "04-functions-and-errors/8-error-handling/_starter",
+      "next_items": [
+        "FE.10"
+      ],
+      "tags": [
+        "exercise",
+        "errors",
+        "wrapping",
+        "defer"
+      ]
+    },
+    {
+      "id": "FE.10",
+      "section_id": "s04",
+      "slug": "functional-options-pattern",
+      "title": "Functional Options Pattern",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "stretch",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Introduce the functional options pattern as a scalable way to configure behavior without constructor explosion.",
+      "objectives": [
+        "Explain how option functions separate defaults from configuration overrides",
+        "Recognize when the pattern helps and when it overcomplicates a small API"
+      ],
+      "prerequisites": [
+        "FE.1",
+        "FE.2"
+      ],
+      "production_relevance": "Functional options appear in many Go libraries where configuration flexibility matters, but they should be used intentionally rather than by habit.",
+      "path": "04-functions-and-errors/9-functional-options",
+      "run_command": "go run ./04-functions-and-errors/9-functional-options",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [],
+      "tags": [
+        "patterns",
+        "configuration",
+        "api-design"
+      ]
+    }
+  ]
+}

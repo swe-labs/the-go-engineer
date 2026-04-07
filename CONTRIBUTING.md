@@ -104,6 +104,24 @@ func main() {
 - Lessons within a section are numbered `1-`, `2-`, etc.
 - Exercises are the LAST numbered item in a section
 
+## Curriculum Metadata During V2 Migration
+
+During the v1 to v2 transition, the repo has two metadata surfaces with different jobs:
+
+- `curriculum.json` remains the legacy lesson graph used for current learner-facing compatibility
+- `curriculum.v2.json` is the additive metadata surface for migrated v2 sections and typed v2 items
+
+Use these rules while both files exist:
+
+1. Keep shared lesson truth aligned across both files when a lesson appears in both places.
+   Shared truth means the stable lesson id, the live repo path, and the lesson-level prerequisite graph.
+2. Put v2-only item types in `curriculum.v2.json`, not in `curriculum.json`.
+   That includes exercises, checkpoints, mini-projects, and later capstones.
+3. Treat `curriculum.v2.json` as optional during migration.
+   The validator will keep supporting `curriculum.json` while v2 coverage grows section by section.
+4. Use current live repo paths in `curriculum.v2.json` until the matching live migration issue changes them.
+   Planning-only prototype ids and paths must not be added to `main` before the real section migration lands.
+
 ## Adding a New Lesson
 
 1. Create a directory: `NN-section-name/N-lesson-name/`

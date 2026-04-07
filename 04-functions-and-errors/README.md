@@ -1,48 +1,107 @@
-# Section 4: Functions & Errors
+# Section 04: Functions and Errors
 
-## Beginner → Expert Mapping
+## Mission
 
-| Topic | Level | Importance | Engineering Concept |
-|-------|-------|------------|---------------------|
-| Functions | Beginner | High | First-class citizens, multi-return |
-| Variadics | Beginner | Medium | `...` spreading arguments |
-| Closures | Intermediate | High | State retention, anonymous functions |
-| Errors | Intermediate | **Critical** | Sentinel errors, idiomatic explicit checking |
-| Defer & Panic | Advanced | High | LIFO execution, stack unwinding |
+This section teaches you to turn functions into explicit contracts and failures into explicit
+values.
 
-## Engineering Depth
-Go handles errors as pure values rather than throwing exceptions. This forces the engineer to trace the exact control flow. You will also learn the mechanics of `defer`, which executes via LIFO (Last-In-First-Out) stack popping, making it ideal for resource cleanup (mutex unlocks, file closures, DB tx rolls).
+By the end of Section 04, you should be comfortable reading and writing:
+
+- small function signatures
+- closures and variadic helpers
+- multi-return functions
+- custom and wrapped errors
+- defer-based cleanup
+- panic and recover boundaries
+
+## Who Should Start Here
+
+### Full Path
+
+Start here after completing Sections 01-03 in order.
+
+### Bridge Path
+
+You can move faster if you already understand:
+
+- basic Go syntax
+- control flow
+- slices and maps
+- pointers at a basic level
+
+Even on the bridge path, do not skip the error-handling lessons.
+They are the hinge of the section.
+
+### Targeted Path
+
+If you are here only for error handling, review these first:
+
+- `FE.1` functions
+- `FE.3` variadic functions
+- `FE.4` multiple return values
+
+## Section Map
+
+| ID | Type | Surface | Why It Matters | Requires |
+| --- | --- | --- | --- | --- |
+| `FE.1` | Lesson | [functions](./1-function) | Builds the basic function contract model: inputs, outputs, and readable behavior. | entry |
+| `FE.2` | Lesson | [closures and recursion](./2-function-2) | Shows how functions can capture state and call themselves when the problem shape needs it. | `FE.1` |
+| `FE.3` | Lesson | [variadic functions](./3-variadic-func) | Introduces flexible call shapes without hiding what the function really accepts. | `FE.1`, `FE.2` |
+| `FE.4` | Lesson | [multiple return values](./4-function-multi-values) | Introduces the `(value, error)` style that drives the rest of the section. | `FE.1`, `FE.3` |
+| `FE.5` | Lesson | [custom errors](./5-custom-error) | Shows how to attach stable meaning to failures instead of relying on fragile strings. | `FE.4` |
+| `FE.6` | Lesson | [error wrapping](./5b-error-wrapping) | Adds context to low-level failures while preserving inspectable error identity. | `FE.5` |
+| `FE.7` | Lesson | [defer](./6-defer) | Teaches disciplined cleanup and "always run this at the end" behavior. | `FE.1`, `FE.5` |
+| `FE.8` | Lesson | [panic and recover](./7-panic-recover) | Shows where panic belongs, where it does not, and how recover works at a boundary. | `FE.7` |
+| `FE.9` | Exercise | [error handling project](./8-error-handling) | Combines custom errors, inspectable failures, and deferred cleanup into one milestone exercise. | `FE.1`, `FE.4`, `FE.5`, `FE.6`, `FE.7`, `FE.8` |
+| `FE.10` | Stretch Lesson | [functional options pattern](./9-functional-options) | A useful configuration pattern once the section fundamentals feel solid. | `FE.1`, `FE.2` |
+
+## Suggested Order
+
+1. Work through `FE.1` to `FE.8` in order.
+2. Complete `FE.9` without copying the finished solution line by line.
+3. Use `FE.10` as a stretch lesson before moving to the next section.
+
+## Section Milestone
+
+`FE.9` is the current live milestone for this pilot section.
+
+If you can complete it and explain:
+
+- why custom errors beat string matching
+- why wrapped errors keep context useful
+- why defer helps cleanup but does not replace ordinary error returns
+
+then you are ready to move into more structured type and interface design in Section 05.
+
+## Pilot Role In V2
+
+This first live v2 pilot keeps the current Section 04 paths and `FE.*` ids stable while adding a
+clearer learner-facing structure:
+
+- `FE.1` through `FE.8` are the core lessons
+- `FE.9` is the milestone exercise
+- `FE.10` is an optional stretch pattern lesson
+
+That keeps the section honest for current learners while the wider v2 migration grows around it.
+
+## Legacy To Pilot Mapping
+
+This pilot intentionally avoids breaking the current Section 04 filesystem layout.
+
+- `FE.1` through `FE.8` keep their existing ids and lesson directories
+- `FE.9` stays at `04-functions-and-errors/8-error-handling`, but now has a dedicated README and a
+  solution/starter pair that match the same exercise contract
+- `FE.10` stays at `04-functions-and-errors/9-functional-options` as an optional stretch lesson
+
+In other words, this first live v2 slice upgrades the section surface before it renames or
+reorders the live lesson paths.
 
 ## References
-1. **[Official Blog]** [Error handling and Go](https://go.dev/blog/error-handling-and-go)
-2. **[Official Blog]** [Defer, Panic, and Recover](https://go.dev/blog/defer-panic-and-recover)
 
----
+1. [Error handling and Go](https://go.dev/blog/error-handling-and-go)
+2. [Defer, Panic, and Recover](https://go.dev/blog/defer-panic-and-recover)
 
-## 🏗 Exercise: Custom Error Handling App (`8-error-handling`)
+## Next Step
 
-This project will force you to implement custom error structs and use `errors.Is`/`errors.As`.
-
-### Step-by-Step Instructions & Hints
-1. **Define the Error State:** Create a struct `MathError` containing details about a failed operation (Inputs, Time, Message).
-2. **Implement the `error` Interface:** Add the `.Error() string` method to your custom struct.
-   - *Hint:* Use a pointer receiver `*MathError` if the struct is large, to avoid copying it across the stack.
-3. **Create the Failing Function:** Write a `Divide(a, b int) (int, error)` function.
-   - *Hint:* If `b == 0`, return your custom `MathError`.
-4. **Inspect the Error:** In `main()`, check the returned error.
-   - *Hint:* **Do not** use `if err != nil { string matching }`. This is an ANTI-PATTERN.
-   - *Hint:* Use `errors.As(err, &myMathErr)` to extract the struct fields safely and idiomatically.
-
-
-## Learning Path
-
-| ID | Lesson | Concept | Requires |
-| --- | --- | --- | --- |
-| FE.1 | [functions](./1-function) | Parameters · return types · pass-by-value | 🟢 entry |
-| FE.2 | [closures &amp; recursion](./2-function-2) | Captured variables · anonymous functions · stack frames | FE.1 |
-| FE.3 | [variadic functions](./3-variadic-func) | ...T syntax · slice internally · spread operator | FE.1, FE.2 |
-| FE.4 | [multiple return values](./4-function-multi-values) | (value, error) convention · named returns · naked return | FE.1, FE.3 |
-| FE.5 | [custom errors](./5-custom-error) | error interface · sentinel errors · errors.Is | FE.4 |
-| FE.6 | [error wrapping](./5b-error-wrapping) | fmt.Errorf %w · errors.As · errors.Join | FE.5 |
-| FE.7 | [defer](./6-defer) | LIFO execution · argument evaluation timing · resource cleanup | FE.1, FE.5 |
-| FE.8 | [panic &amp; recover](./7-panic-recover) | Stack unwinding · recover inside defer only | FE.7 |
+After `FE.9`, continue to [Section 05: Types and Interfaces](../05-types-and-interfaces).
+If you want one more pattern lesson before moving on, finish `FE.10` first.
