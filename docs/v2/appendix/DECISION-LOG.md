@@ -172,3 +172,16 @@ Each decision should capture:
   - use `FEP.3` as a simpler concept lesson
   - use `FEP.4` as a richer pattern lesson with one bounded layered example
 - Follow-up: use `FEP.4` as the reference lesson for `#86` and shape `#87` around its exit ramp
+
+### 2026-04-07: the prototype guided exercise should use `_starter/`, but the prototype checkpoint should not
+
+- Status: Working decision
+- Why it matters: the prototype must prove the difference between supported practice and readiness
+  validation
+- Alternatives:
+  - include scaffolding in both items and blur the boundary
+  - remove scaffolding from both items and make the first synthesis step harsher than intended
+  - use starter scaffolding for `FEP.E1` and require `FEP.C1` to stand on explicit pass criteria
+    instead
+- Follow-up: use this split in `#87` and carry it forward into later exercise and checkpoint
+  templates unless a section has unusual setup burden
