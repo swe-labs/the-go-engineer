@@ -162,3 +162,13 @@ Each decision should capture:
   - prototype a near-full migration of the section
   - use one compact but complete section slice with explicit practice layers
 - Follow-up: use this outline as the container for `#86`, `#87`, and `#88`
+
+### 2026-04-07: `FEP.4 Custom Errors, Wrapping, and Inspection` is the canonical prototype lesson
+
+- Status: Working decision
+- Why it matters: the prototype needs one lesson that best proves the v2 lesson contract in
+  structure, tone, metadata, and production relevance
+- Alternatives:
+  - use `FEP.3` as a simpler concept lesson
+  - use `FEP.4` as a richer pattern lesson with one bounded layered example
+- Follow-up: use `FEP.4` as the reference lesson for `#86` and shape `#87` around its exit ramp

@@ -291,6 +291,6 @@ Issue `#85` should be considered complete when the team agrees that:
 
 After this outline:
 
-1. `#86` should define `FEP.3` or `FEP.4` as the canonical prototype lesson candidate
+1. `#86` should define `FEP.4` as the canonical prototype lesson candidate
 2. `#87` should define `FEP.E1` and `FEP.C1`
 3. `#88` should define `FEP.P1` and the metadata example that ties the section together

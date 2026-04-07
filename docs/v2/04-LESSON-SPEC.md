@@ -58,7 +58,7 @@ Every v2 lesson should define:
 - `production_relevance`
 - `verification_mode`
 - `run_command` or `test_command`
-- `next_step`
+- `next_items`
 
 For lesson records, `type` should always be `lesson`.
 `subtype` then carries the internal lesson shape such as `concept`, `pattern`, or `integration`.
