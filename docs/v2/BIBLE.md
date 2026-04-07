@@ -85,6 +85,7 @@ The v2 Bible is split into focused docs so the planning system stays readable:
 | `docs/v2/00-VISION.md` | Product thesis and non-goals | Draft |
 | `docs/v2/01-CURRICULUM-PHILOSOPHY.md` | Teaching model and instructional rules | Draft |
 | `docs/v2/02-LEARNER-MODEL.md` | Primary learners, pacing, and support rules | Draft |
+| `docs/v2/03-CONTENT-TYPE-SYSTEM.md` | Canonical content roles and boundaries | Draft |
 | `docs/v2/04-LESSON-SPEC.md` | Canonical lesson contract and definition of done | Draft |
 | `docs/v2/05-EXERCISE-BANK-SYSTEM.md` | Exercise architecture and repo layout | Draft |
 | `docs/v2/06-PROJECT-LADDER.md` | Project ladder, capstones, and reuse strategy | Draft |
@@ -97,7 +98,6 @@ The v2 Bible is split into focused docs so the planning system stays readable:
 
 The remaining planned docs can be added after the first review pass:
 
-- `03-CONTENT-TYPE-SYSTEM.md`
 - `07-LEARNING-PATHS.md`
 - `10-DOCS-NAVIGATION-SYSTEM.md`
 - `13-CONTRIBUTOR-WORKFLOW.md`

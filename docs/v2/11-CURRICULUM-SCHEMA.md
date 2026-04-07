@@ -88,7 +88,9 @@ Each content item should include:
 - `slug`
 - `title`
 - `type`
+- `subtype`
 - `level`
+- `verification_mode`
 - `estimated_time`
 - `summary`
 - `objectives`
@@ -112,6 +114,15 @@ At minimum, `type` should support:
 - `mini_project`
 - `capstone`
 - `reference`
+
+`type` is the top-level curriculum role.
+`subtype` is optional and is most useful for lessons.
+
+First prototype convention:
+
+- lesson subtypes: `concept`, `pattern`, `integration`
+- level values: `foundation`, `core`, `stretch`, `production`
+- verification modes: `run`, `test`, `rubric`, `mixed`
 
 ## Learning Path Contract
 
@@ -156,7 +167,9 @@ Each learning path should include:
   "slug": "multiple-returns",
   "title": "Multiple Returns",
   "type": "lesson",
+  "subtype": "concept",
   "level": "core",
+  "verification_mode": "run",
   "estimated_time": 30,
   "summary": "Introduce Go's multi-return pattern and how it leads into error-as-value design.",
   "objectives": [

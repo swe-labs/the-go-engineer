@@ -45,6 +45,7 @@ Each section should follow this structure:
 NN-section-name/
   README.md
   [optional-subgraph/]N-lesson-name/
+  [optional-subgraph/]N-drill-name/
   [optional-subgraph/]N-exercise-name/
   [optional-subgraph/]N-checkpoint-name/
   [optional-subgraph/]N-mini-project-name/
@@ -70,6 +71,17 @@ N-lesson-name/
   README.md        # optional
   main_test.go     # optional
   testdata/        # optional
+```
+
+## Drill Directory Layout
+
+Default drill layout:
+
+```text
+N-drill-name/
+  README.md        # optional
+  main.go          # optional when the drill is prompt-first
+  main_test.go     # optional when quick verification helps
 ```
 
 ## Exercise Directory Layout
@@ -101,6 +113,17 @@ N-project-name/
 ```
 
 Projects should not default to their own module unless that isolation helps teaching or tooling.
+
+## Reference Placement
+
+Reference content usually belongs in:
+
+- `README.md`
+- learner support docs
+- setup or tooling docs
+
+Only place reference content in numbered lesson-style directories when it is explicitly part of the
+canonical learning path.
 
 ## Naming Rules
 

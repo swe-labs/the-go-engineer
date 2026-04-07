@@ -8,6 +8,9 @@ single architecture.
 
 This document defines the first draft of that architecture.
 
+Within the broader v2 content type system, this document focuses on the practice-oriented items:
+drills, exercises, checkpoints, mini-projects, and capstones.
+
 ## Exercise Types
 
 v2 should use five exercise classes:

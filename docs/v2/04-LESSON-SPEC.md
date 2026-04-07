@@ -18,9 +18,9 @@ A good lesson:
 - points to prerequisites and the next step
 - includes production relevance
 
-## Lesson Types
+## Lesson Subtypes
 
-v2 should support four lesson shapes:
+Inside the broader `lesson` content type, v2 should support three lesson subtypes:
 
 ### 1. Concept Lesson
 
@@ -37,10 +37,8 @@ v2 should support four lesson shapes:
 - combines several prior concepts in a controlled example
 - often sits immediately before an exercise or checkpoint
 
-### 4. Reference Lesson
-
-- used sparingly for tooling, commands, or environment setup
-- should still include executable verification where possible
+`reference` is a separate top-level content type in the content type system, not a standard lesson
+subtype.
 
 ## Canonical Lesson Contract
 
@@ -50,15 +48,20 @@ Every v2 lesson should define:
 - `title`
 - `slug`
 - `section`
+- `type`
 - `level`
-- `lesson_type`
+- `subtype`
 - `estimated_time`
 - `prerequisites`
 - `primary_objective`
 - `supporting_objectives`
 - `production_relevance`
+- `verification_mode`
 - `run_command` or `test_command`
 - `next_step`
+
+For lesson records, `type` should always be `lesson`.
+`subtype` then carries the internal lesson shape such as `concept`, `pattern`, or `integration`.
 
 ## Repo Layout
 
