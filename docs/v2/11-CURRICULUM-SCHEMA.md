@@ -30,6 +30,9 @@ The first v2 implementation should use a staged approach:
 - design the richer v2 schema in parallel
 - validate the new schema through the prototype first
 
+The first implementation-ready transition recommendation for that stage is documented in
+`docs/v2/tooling/SCHEMA-TRANSITION-PLAN.md`.
+
 ### Stage 2
 
 - add a dedicated v2 metadata file, likely `curriculum.v2.json`

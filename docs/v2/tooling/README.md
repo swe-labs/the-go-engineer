@@ -12,7 +12,9 @@ repo tooling without bloating the canonical Bible index.
 
 - [VALIDATOR-EXPANSION-PLAN.md](./VALIDATOR-EXPANSION-PLAN.md) - the first implementation-ready
   rule set for extending `scripts/validate_curriculum.go`
+- [SCHEMA-TRANSITION-PLAN.md](./SCHEMA-TRANSITION-PLAN.md) - the first implementation-ready
+  recommendation for introducing v2 metadata without breaking legacy curriculum tooling
 
 ## Planned Docs
 
-- schema-transition implementation notes
+- future validator implementation notes if the tooling split becomes justified
