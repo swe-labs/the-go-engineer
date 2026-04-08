@@ -353,14 +353,7 @@ func TestValidateRejectsMojibakeInV2TextSurface(t *testing.T) {
 }`)
 
 	mustMkdir(t, root, "09-io-and-cli/filesystem/1-files")
-	writeFile(t, root, "09-io-and-cli/filesystem/1-files/main.go", `package main
-
-// Section 09: Filesystem
-
-func main() {
-	println("â€” broken text")
-}
-`)
+	writeFile(t, root, "09-io-and-cli/filesystem/1-files/main.go", "package main\n\n// Section 09: Filesystem\n\nfunc main() {\n\tprintln(\"\u00e2\u0153\u2026 broken text\")\n}\n")
 
 	var reports []string
 	result, err := Validate(root, func(message string) {

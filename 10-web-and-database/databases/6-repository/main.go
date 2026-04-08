@@ -5,23 +5,21 @@
 package main
 
 // ============================================================================
-// Section 10: Databases — Repository Pattern
+// Section 10: Databases - Repository Pattern
 // Level: Advanced
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
 //   - The Repository Design Pattern (Domain-Driven Design)
-//   - Decoupling database logic from business logic via Interfaces
-//   - Dependency Injection in Go
+//   - Decoupling database logic from business logic via interfaces
+//   - Dependency injection in Go
 //
 // ENGINEERING DEPTH:
-//   If you pass `*sql.DB` directly into your business logic (e.g. your HTTP
-//   handlers), you tightly couple your HTTP server to an operational SQLite
-//   database. This makes unit testing impossible without spinning up a real
-//   database. The Repository Pattern solves this by defining an Interface
-//   (`UserRepository`). Your handlers only know about the Interface, never the
-//   database. In production, you inject `SQLUserRepository`. In tests, you
-//   inject a `MockUserRepository` that just returns hardcoded structs instantly.
+//   If you pass `*sql.DB` directly into your business logic (for example HTTP
+//   handlers), you tightly couple your service layer to a live SQLite database.
+//   That makes focused testing much harder. The Repository Pattern solves this
+//   by defining an interface (`UserRepository`). Higher-level code depends on
+//   the interface, not the concrete database implementation.
 //
 // RUN: go run ./10-web-and-database/databases/6-repository
 // ============================================================================
@@ -43,7 +41,7 @@ CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    hashed_password TEXT NOT NULL, 
+    hashed_password TEXT NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS profiles (
@@ -54,39 +52,33 @@ CREATE TABLE IF NOT EXISTS profiles (
 `
 
 func main() {
-
 	// 1. Database Initialization
 	dbName := "users_database.db"
 	_ = os.Remove(dbName)
+
 	db, err := connectToDatabase(dbName)
 	checkErr(err)
 	defer db.Close()
 
-	// (Demo setup: Ensure tables exist)
+	// Demo setup: ensure tables exist so the example is deterministic.
 	_, err = db.Exec(repositorySchema)
 	checkErr(err)
 
-	fmt.Println("✅ Database connection established")
+	fmt.Println("Database connection established")
 
 	// 2. Dependency Injection
-	// We instantiate the concrete SQL repository, passing the *sql.DB dependency.
-	// But notice the return type of NewSQLUserRepository? It returns the Interface!
 	repo := repository.NewSQLUserRepository(db)
 
 	// 3. Application Logic
-	// The application logic now uses the interface (`repo`), oblivious to the
-	// fact that SQLite is powering it under the hood.
 	fmt.Println("\n=== Calling Repository Methods ===")
 
-	// Create a user
 	id, err := repo.CreateUser("Alice Repo", "alice.repo@example.com", "secret", "alice_avatar.png")
 	if err != nil {
-		fmt.Println("⚠️ Insert failed (User might already exist):", err)
+		fmt.Println("Warning: insert failed (user might already exist):", err)
 	} else {
-		fmt.Printf("✅ Created User ID: %d\n", id)
+		fmt.Printf("Created User ID: %d\n", id)
 	}
 
-	// Fetch users
 	printUsers(repo)
 
 	fmt.Println("\n---------------------------------------------------")
@@ -95,11 +87,11 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
-// printUsers ONLY accepts the `repository.UserRepository` interface.
-// It has absolutely no dependency on `database/sql`.
+// printUsers ONLY accepts the repository.UserRepository interface.
 func printUsers(repo repository.UserRepository) {
 	users, err := repo.GetUsers()
 	checkErr(err)
+
 	fmt.Println("\n--- User List ---")
 	for _, user := range users {
 		fmt.Printf("- ID: %d | Email: %s\n", user.ID, user.Email)
@@ -118,8 +110,7 @@ func connectToDatabase(name string) (*sql.DB, error) {
 		return nil, err
 	}
 
-	err = db.Ping()
-	if err != nil {
+	if err := db.Ping(); err != nil {
 		return nil, err
 	}
 

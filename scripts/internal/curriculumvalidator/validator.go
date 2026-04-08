@@ -498,15 +498,18 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 
 var mojibakeMarkers = []string{
 	"\uFFFD",
-	"Ã¢",
-	"Ã°",
-	"Ãƒ",
-	"Ã‚",
-	"ðŸ",
-	"â€”",
-	"â†",
-	"âœ",
-	"â",
+	"\u00c3\u0192\u00c2\u00a2",
+	"\u00c3\u0192\u00c2\u00b0",
+	"\u00c3\u0192\u00c6\u2019",
+	"\u00c3\u0192\u00e2\u20ac\u0161",
+	"\u00c3\u00b0\u00c5\u00b8",
+	"\u00e2\u0153",
+	"\u00e2\u0161",
+	"\u00ef\u00b8",
+	"\u00c3\u00a2\u201a\u00ac\u00e2\u20ac\u009d",
+	"\u00c3\u00a2\u20ac\u00a0",
+	"\u00c3\u00a2\u00c5\u201c",
+	"\u00c3\u00a2\u00c2\u009d",
 }
 
 func validateV2TextEncoding(root string, sections map[string]V2Section, items []V2Item, report func(string)) int {
