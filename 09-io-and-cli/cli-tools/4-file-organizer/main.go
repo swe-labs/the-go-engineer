@@ -14,7 +14,7 @@ import (
 )
 
 // ============================================================================
-// Section 19: CLI Tools â€” File Organizer (Exercise)
+// Section 19: CLI Tools — File Organizer (Exercise)
 // Level: Intermediate
 // ============================================================================
 //
@@ -25,7 +25,7 @@ import (
 //   - The --dry-run pattern for safe testing
 //
 // ENGINEERING DEPTH:
-//   The `flag` package uses a registration pattern â€” you call `flag.String()`
+//   The `flag` package uses a registration pattern — you call `flag.String()`
 //   to register each flag, which returns a *string pointer. The actual parsing
 //   doesn't happen until you call `flag.Parse()`. This two-step approach allows
 //   you to define flags anywhere in your code (even in init() functions across
@@ -37,7 +37,7 @@ import (
 
 func main() {
 	// Define CLI flags using the flag package.
-	// flag.String returns a *string â€” a pointer to the flag's value.
+	// flag.String returns a *string — a pointer to the flag's value.
 	dir := flag.String("dir", "", "Directory to organize (required)")
 	dryRun := flag.Bool("dry-run", false, "Preview changes without moving files")
 
@@ -72,9 +72,9 @@ func main() {
 		*dryRun = true // Demo always runs in dry-run mode
 	}
 
-	fmt.Printf("ðŸ“‚ Organizing: %s\n", *dir)
+	fmt.Printf("📂 Organizing: %s\n", *dir)
 	if *dryRun {
-		fmt.Println("ðŸ” DRY RUN â€” no files will actually be moved")
+		fmt.Println("🔍 DRY RUN — no files will actually be moved")
 	}
 	fmt.Println()
 
@@ -87,7 +87,7 @@ func main() {
 
 	moved := 0
 	for _, entry := range entries {
-		// Skip directories â€” we only organize files.
+		// Skip directories — we only organize files.
 		if entry.IsDir() {
 			continue
 		}
@@ -97,7 +97,7 @@ func main() {
 
 		// Skip files with no extension
 		if ext == "" {
-			fmt.Printf("  â­  Skipping (no extension): %s\n", filename)
+			fmt.Printf("  ⏭ Skipping (no extension): %s\n", filename)
 			continue
 		}
 
@@ -107,21 +107,21 @@ func main() {
 		sourcePath := filepath.Join(*dir, filename)
 
 		if *dryRun {
-			fmt.Printf("  ðŸ“„ %s â†’ %s/\n", filename, ext)
+			fmt.Printf("  📄 %s → %s/\n", filename, ext)
 		} else {
 			// Create the target subdirectory if it doesn't exist.
 			// os.MkdirAll creates all parent directories as needed.
 			if err := os.MkdirAll(targetDir, 0755); err != nil {
-				fmt.Fprintf(os.Stderr, "  âŒ Error creating dir %s: %v\n", targetDir, err)
+				fmt.Fprintf(os.Stderr, "  ❌ Error creating dir %s: %v\n", targetDir, err)
 				continue
 			}
 
 			// Move the file by renaming it to the new path.
 			if err := os.Rename(sourcePath, targetPath); err != nil {
-				fmt.Fprintf(os.Stderr, "  âŒ Error moving %s: %v\n", filename, err)
+				fmt.Fprintf(os.Stderr, "  ❌ Error moving %s: %v\n", filename, err)
 				continue
 			}
-			fmt.Printf("  âœ… %s â†’ %s/\n", filename, ext)
+			fmt.Printf("  ✅ %s → %s/\n", filename, ext)
 		}
 		moved++
 	}

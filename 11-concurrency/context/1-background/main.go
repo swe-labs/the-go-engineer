@@ -10,15 +10,15 @@ import (
 )
 
 // ============================================================================
-// Section 11: Context Ã¢â‚¬â€ Background & TODO
+// Section 11: Context — Background & TODO
 // Level: Beginner
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
 //   - What context.Context IS and why every Go program uses it
-//   - context.Background() Ã¢â‚¬â€ the root of all context trees
-//   - context.TODO() Ã¢â‚¬â€ placeholder when you don't know which context to use
-//   - How context forms a TREE structure (parent Ã¢â€ â€™ child Ã¢â€ â€™ grandchild)
+//   - context.Background() — the root of all context trees
+//   - context.TODO() — placeholder when you don't know which context to use
+//   - How context forms a TREE structure (parent → child → grandchild)
 //
 // ENGINEERING DEPTH:
 //   At its core, `context.Context` is just an interface containing an empty data
@@ -35,7 +35,7 @@ func main() {
 	fmt.Println()
 
 	// --- context.Background() ---
-	// This creates the ROOT context Ã¢â‚¬â€ it's the starting point for all context trees.
+	// This creates the ROOT context — it's the starting point for all context trees.
 	// It is NEVER cancelled, has no deadline, and carries no values.
 	//
 	// Use Background() in:
@@ -47,10 +47,10 @@ func main() {
 	fmt.Printf("Background context: %v\n", ctx)
 
 	// Context is an INTERFACE with 4 methods:
-	//   Deadline() (deadline time.Time, ok bool)  Ã¢â‚¬â€ when this context expires
-	//   Done() <-chan struct{}                      Ã¢â‚¬â€ closed when context is cancelled
-	//   Err() error                                Ã¢â‚¬â€ why the context was cancelled
-	//   Value(key any) any                         Ã¢â‚¬â€ request-scoped values
+	//   Deadline() (deadline time.Time, ok bool)  — when this context expires
+	//   Done() <-chan struct{}                    — closed when context is cancelled
+	//   Err() error                               — why the context was cancelled
+	//   Value(key any) any                        — request-scoped values
 
 	// Background has no deadline
 	deadline, ok := ctx.Deadline()
@@ -64,7 +64,7 @@ func main() {
 	fmt.Println()
 
 	// --- context.TODO() ---
-	// TODO() is identical to Background() in behavior Ã¢â‚¬â€ it never cancels.
+	// TODO() is identical to Background() in behavior — it never cancels.
 	// The difference is SEMANTIC: it signals to other developers that
 	// "I know I need a context here but haven't decided which one yet."
 	//
@@ -82,13 +82,13 @@ func main() {
 	// --- THE CONTEXT TREE ---
 	// Contexts form a tree:
 	//
-	//   Background()  Ã¢â€ Â Root (never cancels)
-	//       Ã¢â€â€š
-	//       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ WithTimeout(parent, 5s)  Ã¢â€ Â Cancels after 5 seconds
-	//       Ã¢â€â€š       Ã¢â€â€š
-	//       Ã¢â€â€š       Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ WithValue(parent, "userID", 42)  Ã¢â€ Â Carries data
-	//       Ã¢â€â€š
-	//       Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ WithCancel(parent)  Ã¢â€ Â Cancels when you call cancel()
+	//   Background()  ← Root (never cancels)
+	//       │
+	//       ├── WithTimeout(parent, 5s)             ← Cancels after 5 seconds
+	//       │   │
+	//       │   └── WithValue(parent, "userID", 42) ← Carries data
+	//       │
+	//       └── WithCancel(parent)                  ← Cancels when you call cancel()
 	//
 	// When a PARENT context is cancelled, ALL CHILDREN are cancelled too.
 	// This is how cancellation propagates through your entire call stack.
@@ -98,20 +98,20 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("KEY TAKEAWAYS:")
-	fmt.Println("  1. context.Background() is the root Ã¢â‚¬â€ use in main() and init")
-	fmt.Println("  2. context.TODO() is a placeholder Ã¢â‚¬â€ replace before shipping")
+	fmt.Println("  1. context.Background() is the root — use in main() and init")
+	fmt.Println("  2. context.TODO() is a placeholder — replace before shipping")
 	fmt.Println("  3. Context is the FIRST parameter: func Do(ctx context.Context, ...)")
 	fmt.Println("  4. Cancelling a parent cancels ALL children automatically")
 	fmt.Println()
 	fmt.Println("   Next: go run ./11-concurrency/context/2-with-cancel")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("Ã°Å¸Å¡â‚¬ NEXT UP: CT.2 WithCancel")
-	fmt.Println("   Current: CT.1 (Background &amp; TODO)")
+	fmt.Println("🚀 NEXT UP: CT.2 WithCancel")
+	fmt.Println("   Current: CT.1 (Background & TODO)")
 	fmt.Println("---------------------------------------------------")
 }
 
 // processRequest demonstrates the Go convention: context is ALWAYS the first parameter.
-// This isn't just a style choice Ã¢â‚¬â€ it's enforced by linters (revive, golangci-lint)
+// This isn't just a style choice — it's enforced by linters (revive, golangci-lint)
 // and is part of Google's Go style guide.
 func processRequest(ctx context.Context, orderID string) {
 	fmt.Printf("Processing order: %s\n", orderID)

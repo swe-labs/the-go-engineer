@@ -11,7 +11,7 @@ import (
 )
 
 // ============================================================================
-// Section 11: Concurrency â€” Goroutines
+// Section 11: Concurrency — Goroutines
 // Level: Intermediate
 // ============================================================================
 //
@@ -30,14 +30,14 @@ import (
 //
 //   Each cook works INDEPENDENTLY and CONCURRENTLY. The head chef doesn't
 //   wait for the salad to finish before starting the steak.
-//   That's exactly what goroutines do â€” concurrent, independent work.
+//   That's exactly what goroutines do — concurrent, independent work.
 //
 // ENGINEERING DEPTH:
 //   - A goroutine starts with only ~2KB of stack (vs 1-8MB for an OS thread)
 //   - Go can run MILLIONS of goroutines on a single machine
 //   - The Go runtime multiplexes goroutines onto a small number of OS threads
 //     using an M:N scheduler (M goroutines on N OS threads)
-//   - Goroutines are NOT parallelism â€” they're concurrency (tasks can interleave)
+//   - Goroutines are NOT parallelism — they're concurrency (tasks can interleave)
 //   - True parallelism requires multiple CPU cores (GOMAXPROCS > 1)
 //
 // RUN: go run ./11-concurrency/goroutines/1-goroutine
@@ -46,9 +46,9 @@ import (
 // processOrder simulates a kitchen worker preparing a dish.
 // Each dish takes a different amount of time.
 func processOrder(dish string, prepTime time.Duration) {
-	fmt.Printf("  ðŸ³ Started preparing: %s\n", dish)
+	fmt.Printf("  🍳 Started preparing: %s\n", dish)
 	time.Sleep(prepTime) // Simulate work (cooking time)
-	fmt.Printf("  âœ… Finished: %s (took %v)\n", dish, prepTime)
+	fmt.Printf("  ✅ Finished: %s (took %v)\n", dish, prepTime)
 }
 
 func main() {
@@ -60,14 +60,14 @@ func main() {
 
 	// --- SEQUENTIAL EXECUTION (Without goroutines) ---
 	// If we called these WITHOUT "go", they'd run one after another:
-	//   processOrder("Salad", 1*time.Second)        â† 1 second
-	//   processOrder("Steak", 2*time.Second)        â† 2 seconds
-	//   processOrder("Pasta", 1500*time.Millisecond) â† 1.5 seconds
+	//   processOrder("Salad", 1*time.Second)         ← 1 second
+	//   processOrder("Steak", 2*time.Second)         ← 2 seconds
+	//   processOrder("Pasta", 1500*time.Millisecond) ← 1.5 seconds
 	//   Total: ~4.5 seconds (serial, one after another)
 
 	// --- CONCURRENT EXECUTION (With goroutines) ---
 	// The "go" keyword starts a function in a NEW goroutine.
-	// The current function continues IMMEDIATELY â€” it doesn't wait.
+	// The current function continues IMMEDIATELY — it doesn't wait.
 	// All three dishes cook AT THE SAME TIME.
 	fmt.Println("Kitchen is open! Starting all orders concurrently...")
 	fmt.Println()
@@ -78,15 +78,15 @@ func main() {
 	//
 	// Pattern:
 	//   var wg sync.WaitGroup
-	//   wg.Add(1)         â† "One more goroutine to wait for"
+	//   wg.Add(1)          ← "One more goroutine to wait for"
 	//   go func() {
-	//       defer wg.Done() â† "This goroutine is done"
+	//       defer wg.Done() ← "This goroutine is done"
 	//       // ... do work ...
 	//   }()
-	//   wg.Wait()         â† "Block until all goroutines call Done()"
+	//   wg.Wait()          ← "Block until all goroutines call Done()"
 	var wg sync.WaitGroup
 
-	// Launch 4 goroutines â€” each prepares a dish concurrently
+	// Launch 4 goroutines — each prepares a dish concurrently
 	dishes := []struct {
 		name string
 		time time.Duration
@@ -110,24 +110,24 @@ func main() {
 	}
 
 	// wg.Wait() blocks until ALL goroutines have called wg.Done().
-	// This is MUCH better than time.Sleep â€” it waits exactly as long as needed.
+	// This is MUCH better than time.Sleep — it waits exactly as long as needed.
 	wg.Wait()
 
 	elapsed := time.Since(start)
 	fmt.Println()
-	fmt.Printf("ðŸŽ‰ All orders complete! Total time: %v\n", elapsed)
-	fmt.Println("   (Sequential would have been ~2.6s â€” goroutines did it concurrently!)")
+	fmt.Printf("🎉 All orders complete! Total time: %v\n", elapsed)
+	fmt.Println("   (Sequential would have been ~2.6s — goroutines did it concurrently!)")
 
 	fmt.Println()
 	fmt.Println("KEY TAKEAWAY:")
 	fmt.Println("  - 'go functionName()' starts a function in a new goroutine")
-	fmt.Println("  - Goroutines are lightweight (~2KB each) â€” launch millions of them")
-	fmt.Println("  - NEVER use time.Sleep to wait â€” use sync.WaitGroup or channels")
+	fmt.Println("  - Goroutines are lightweight (~2KB each) — launch millions of them")
+	fmt.Println("  - NEVER use time.Sleep to wait — use sync.WaitGroup or channels")
 	fmt.Println("  - Pass loop variables as parameters to avoid closure bugs")
 	fmt.Println("  - The main goroutine must wait, or it will exit (killing all goroutines)")
 	fmt.Println("  - Next: go run ./11-concurrency/goroutines/2-wait-group (deeper WaitGroup patterns)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: GC.2 WaitGroups")
+	fmt.Println("🚀 NEXT UP: GC.2 WaitGroups")
 	fmt.Println("   Current: GC.1 (goroutines)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -9,16 +9,16 @@ import "fmt"
 
 // ============================================================================
 // Section 8: Semantic Versioning & Replace Directive
-// Level: Intermediate â†’ Advanced
+// Level: Intermediate → Advanced
 // ============================================================================
 //
 // SEMANTIC VERSIONING IN GO:
 //
 //   v1.2.3
-//   â”‚ â”‚ â”‚
-//   â”‚ â”‚ â””â”€â”€ PATCH: bug fixes (backward compatible)
-//   â”‚ â””â”€â”€â”€â”€ MINOR: new features (backward compatible)
-//   â””â”€â”€â”€â”€â”€â”€ MAJOR: breaking changes (NOT backward compatible)
+//   │ │ │
+//   │ │ └── PATCH: bug fixes (backward compatible)
+//   │ └──── MINOR: new features (backward compatible)
+//   └────── MAJOR: breaking changes (NOT backward compatible)
 //
 // MAJOR VERSION RULE (v2+):
 //   When a module reaches v2, the import path MUST include /v2:
@@ -40,8 +40,8 @@ import "fmt"
 //     exclude github.com/some/pkg v1.2.3
 //
 // VENDORING:
-//   go mod vendor       â€” copy all dependencies into ./vendor/
-//   go build -mod=vendor â€” build using vendored dependencies only
+//   go mod vendor        — copy all dependencies into ./vendor/
+//   go build -mod=vendor — build using vendored dependencies only
 //
 //   Use Cases:
 //   - Air-gapped environments (no internet access)
@@ -97,11 +97,11 @@ func main() {
 		if i > 0 {
 			prev := versions[i-1]
 			compatible := v.IsCompatible(prev)
-			emoji := "âœ…"
+			emoji := "✅"
 			if !compatible {
-				emoji = "âš ï¸  BREAKING"
+				emoji = "⚠️  BREAKING"
 			}
-			fmt.Printf("  %s â†’ %s  %s\n", prev, v, emoji)
+			fmt.Printf("  %s → %s  %s\n", prev, v, emoji)
 		}
 	}
 
@@ -110,10 +110,10 @@ func main() {
 	fmt.Println("  In Go, v2+ modules require a /v2 suffix in the import path.")
 	fmt.Println("  This allows v1 and v2 to coexist in the same binary.")
 	fmt.Println()
-	fmt.Println("  import \"github.com/example/pkg\"     â† v0.x or v1.x")
-	fmt.Println("  import \"github.com/example/pkg/v2\"   â† v2.x")
+	fmt.Println("  import \"github.com/example/pkg\"    ← v0.x or v1.x")
+	fmt.Println("  import \"github.com/example/pkg/v2\" ← v2.x")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: FS.1 files")
+	fmt.Println("🚀 NEXT UP: FS.1 files")
 	fmt.Println("   Current: MP.3 (versioning)")
 	fmt.Println("---------------------------------------------------")
 }
