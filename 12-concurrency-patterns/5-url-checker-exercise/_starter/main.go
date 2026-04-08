@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
 package main
@@ -6,7 +6,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 12: Concurrency Patterns â€” URL Health Checker (Exercise Starter)
+// Section 12: Concurrency Patterns — URL Health Checker (Exercise Starter)
 // Level: Advanced
 // ============================================================================
 //

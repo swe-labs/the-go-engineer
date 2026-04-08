@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -21,7 +21,7 @@ import (
 )
 
 // ============================================================================
-// Section 10: Database Migrations â€” Embedded Schema Evolution
+// Section 10: Database Migrations — Embedded Schema Evolution
 // Level: Advanced
 // ============================================================================
 //
@@ -81,7 +81,7 @@ func RunEmbeddedMigrations(dbUrl string) error {
 	}
 
 	// 5. Execute the UP migrations!
-	fmt.Println("ðŸš€ Executing Pre-flight Database Migrations...")
+	fmt.Println("🚀 Executing Pre-flight Database Migrations...")
 	err = m.Up()
 
 	if err != nil && err != migrate.ErrNoChange {
@@ -90,9 +90,9 @@ func RunEmbeddedMigrations(dbUrl string) error {
 	}
 
 	if err == migrate.ErrNoChange {
-		fmt.Println("âœ… Database schema is up-to-date (no new migrations found).")
+		fmt.Println("✅ Database schema is up-to-date (no new migrations found).")
 	} else {
-		fmt.Println("âœ… Database schema evolution successful!")
+		fmt.Println("✅ Database schema evolution successful!")
 	}
 
 	return nil

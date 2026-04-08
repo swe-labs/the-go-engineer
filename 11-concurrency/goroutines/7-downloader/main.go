@@ -1,11 +1,11 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
 package main
 
 // ============================================================================
-// Section 11: Concurrency â€” Concurrent Downloader (Exercise)
+// Section 11: Concurrency — Concurrent Downloader (Exercise)
 // Level: Advanced
 // ============================================================================
 //

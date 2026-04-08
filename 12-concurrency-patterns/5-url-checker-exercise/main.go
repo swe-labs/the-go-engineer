@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
 package main
@@ -15,7 +15,7 @@ import (
 )
 
 // ============================================================================
-// Section 12: Concurrency Patterns â€” URL Health Checker (Exercise Solution)
+// Section 12: Concurrency Patterns — URL Health Checker (Exercise Solution)
 // Level: Advanced
 // ============================================================================
 //
@@ -31,7 +31,7 @@ type CheckResult struct {
 }
 
 // clientPool reuses HTTP clients to avoid allocating a new one per request.
-// http.Client is safe for concurrent use â€” we pool it to avoid allocation,
+// http.Client is safe for concurrent use — we pool it to avoid allocation,
 // NOT to avoid data races.
 var clientPool = sync.Pool{
 	New: func() any {
@@ -115,9 +115,9 @@ func main() {
 			continue
 		}
 		status := fmt.Sprintf("%d", r.StatusCode)
-		icon := "âœ…"
+		icon := "✅"
 		if r.StatusCode >= 400 {
-			icon = "âŒ"
+			icon = "❌"
 		}
 		fmt.Printf("%s %-43s %-8s %v\n", icon, r.URL, status, r.Latency.Round(time.Millisecond))
 	}

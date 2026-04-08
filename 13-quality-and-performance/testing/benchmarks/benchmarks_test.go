@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -12,7 +12,7 @@ import (
 
 // ============================================================================
 // Section 14: Benchmarking with testing.B
-// Level: Intermediate â†’ Advanced
+// Level: Intermediate → Advanced
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -23,7 +23,7 @@ import (
 //   - Running benchmarks: go test -bench=. -benchmem ./13-quality-and-performance/testing/benchmarks/
 //
 // BENCHMARK NAMING:
-//   func BenchmarkXxx(b *testing.B) â€” must start with Benchmark
+//   func BenchmarkXxx(b *testing.B) — must start with Benchmark
 // ============================================================================
 
 // BenchmarkStringConcat compares three string concatenation strategies.
@@ -35,7 +35,7 @@ func BenchmarkStringConcat(b *testing.B) {
 	}
 
 	// Sub-benchmark: naive += concatenation
-	// This is O(nÂ²) because strings are immutable â€” each += creates a new string.
+	// This is O(n²) because strings are immutable — each += creates a new string.
 	b.Run("Plus", func(b *testing.B) {
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
@@ -48,7 +48,7 @@ func BenchmarkStringConcat(b *testing.B) {
 	})
 
 	// Sub-benchmark: strings.Join
-	// O(n) â€” computes total length first, then copies each string once.
+	// O(n) — computes total length first, then copies each string once.
 	b.Run("Join", func(b *testing.B) {
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
@@ -57,7 +57,7 @@ func BenchmarkStringConcat(b *testing.B) {
 	})
 
 	// Sub-benchmark: strings.Builder
-	// O(n) â€” amortized, grows buffer like a dynamic array.
+	// O(n) — amortized, grows buffer like a dynamic array.
 	// This is the idiomatic way.
 	b.Run("Builder", func(b *testing.B) {
 		b.ReportAllocs()
@@ -72,7 +72,7 @@ func BenchmarkStringConcat(b *testing.B) {
 	})
 
 	// Sub-benchmark: pre-allocated Builder
-	// Best performance â€” no reallocation.
+	// Best performance — no reallocation.
 	b.Run("BuilderPrealloc", func(b *testing.B) {
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {

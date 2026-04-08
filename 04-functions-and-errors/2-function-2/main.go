@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -111,6 +111,6 @@ func main() {
 	// - Anonymous functions are essential for goroutines (Section 09)
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("🚀 NEXT UP: FE.3 variadic functions")
-	fmt.Println("   Current: FE.2 (closures &amp; recursion)")
+	fmt.Println("   Current: FE.2 (closures & recursion)")
 	fmt.Println("---------------------------------------------------")
 }

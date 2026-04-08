@@ -1,11 +1,11 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
 package main
 
 // ============================================================================
-// Section 10: Databases â€” Repository Pattern
+// Section 10: Databases — Repository Pattern
 // Level: Advanced
 // ============================================================================
 //
@@ -63,7 +63,7 @@ func main() {
 	// (Demo setup: Ensure tables exist)
 	_, _ = db.Exec(profileSchema)
 
-	fmt.Println("âœ… Database connection established")
+	fmt.Println("✅ Database connection established")
 
 	// 2. Dependency Injection
 	// We instantiate the concrete SQL repository, passing the *sql.DB dependency.
@@ -78,9 +78,9 @@ func main() {
 	// Create a user
 	id, err := repo.CreateUser("Alice Repo", "alice.repo@example.com", "secret", "alice_avatar.png")
 	if err != nil {
-		fmt.Println("âš ï¸ Insert failed (User might already exist):", err)
+		fmt.Println("⚠️ Insert failed (User might already exist):", err)
 	} else {
-		fmt.Printf("âœ… Created User ID: %d\n", id)
+		fmt.Printf("✅ Created User ID: %d\n", id)
 	}
 
 	// Fetch users

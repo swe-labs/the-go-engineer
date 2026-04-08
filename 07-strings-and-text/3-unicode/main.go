@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -129,6 +129,6 @@ func main() {
 	fmt.Println("  - unicode.IsLetter/IsDigit/IsSpace for character classification")
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("🚀 NEXT UP: ST.4 regex")
-	fmt.Println("   Current: ST.3 (unicode &amp; runes)")
+	fmt.Println("   Current: ST.3 (unicode & runes)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -1,6 +1,6 @@
-# Section 11: Encoding
+﻿# Section 11: Encoding
 
-## Beginner â†’ Expert Mapping
+## Beginner → Expert Mapping
 
 | Topic | Level | Importance | Engineering Concept |
 |-------|-------|------------|---------------------|
@@ -18,7 +18,7 @@ In Go, `json.Marshal()` operates using Reflection (`reflect` package) to map str
 
 ---
 
-## ðŸ— Exercise: Config File Parser (`6-config-parser`)
+## 🏗 Exercise: Config File Parser (`6-config-parser`)
 
 Build a JSON config file parser that reads, decodes, and validates application configuration. Try it yourself with the `_starter/` directory first!
 
@@ -32,8 +32,8 @@ go run ./09-io-and-cli/encoding/6-config-parser            # See the solution
 
 | ID | Lesson | Concept | Requires |
 | --- | --- | --- | --- |
-| EN.1 | [JSON marshalling](./1-marshalling) | json.Marshal Â· MarshalIndent Â· struct tags Â· omitempty Â· "-" | ðŸŸ¢ entry |
-| EN.2 | [JSON unmarshalling](./2-unmarshal) | json.Unmarshal Â· pointer required Â· zero values Â· map[string]any | EN.1 |
-| EN.3 | [JSON encoder (stream)](./3-encoder) | json.NewEncoder Â· io.Writer Â· O(1) memory Â· SetIndent | EN.1, EN.2 |
-| EN.4 | [JSON decoder (stream)](./4-decode) | json.NewDecoder Â· io.Reader Â· NDJSON Â· EOF loop | EN.2, EN.3 |
-| EN.5 | [Base64](./5-base64_encoding) | StdEncoding Â· URLEncoding Â· transport-safe binary | EN.1 |
+| EN.1 | [JSON marshalling](./1-marshalling) | json.Marshal · MarshalIndent · struct tags · omitempty · "-" | 🟢 entry |
+| EN.2 | [JSON unmarshalling](./2-unmarshal) | json.Unmarshal · pointer required · zero values · map[string]any | EN.1 |
+| EN.3 | [JSON encoder (stream)](./3-encoder) | json.NewEncoder · io.Writer · O(1) memory · SetIndent | EN.1, EN.2 |
+| EN.4 | [JSON decoder (stream)](./4-decode) | json.NewDecoder · io.Reader · NDJSON · EOF loop | EN.2, EN.3 |
+| EN.5 | [Base64](./5-base64_encoding) | StdEncoding · URLEncoding · transport-safe binary | EN.1 |

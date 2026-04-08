@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -12,7 +12,7 @@ import (
 )
 
 // ============================================================================
-// Section 11: Concurrency â€” Race Conditions & sync.Mutex
+// Section 11: Concurrency � Race Conditions & sync.Mutex
 // Level: Advanced
 // ============================================================================
 //
@@ -22,12 +22,12 @@ import (
 //   - sync.Mutex: mutual exclusion lock
 //   - sync/atomic: lock-free atomic operations (fastest option)
 //   - The race detector: go run -race (finds races at runtime)
-//   - "Share memory by communicating" â€” channels as the preferred alternative
+//   - "Share memory by communicating" � channels as the preferred alternative
 //
 // ANALOGY:
 //   Imagine two cashiers updating the same cash register at the same time.
-//   Cashier A reads $100, adds $50 â†’ writes $150.
-//   Cashier B reads $100 (before A writes!), adds $30 â†’ writes $130.
+//   Cashier A reads $100, adds $50 ? writes $150.
+//   Cashier B reads $100 (before A writes!), adds $30 ? writes $130.
 //   A's $50 deposit VANISHED. This is a race condition.
 //
 //   A MUTEX is like a lock on the register. Only one cashier can open
@@ -42,13 +42,11 @@ import (
 // RUN: go run ./11-concurrency/goroutines/8-race
 // ============================================================================
 
-// --- EXAMPLE 1: The Race (WITHOUT protection) ---
-
 // unsafeCounter demonstrates what happens WITHOUT synchronization.
 // Multiple goroutines increment the same variable concurrently.
 // The final count will be WRONG because of lost writes.
 func unsafeCounter() int {
-	counter := 0 // SHARED STATE â€” accessed by multiple goroutines
+	counter := 0 // SHARED STATE � accessed by multiple goroutines
 	var wg sync.WaitGroup
 
 	for i := 0; i < 1000; i++ {
@@ -57,111 +55,101 @@ func unsafeCounter() int {
 			defer wg.Done()
 			// THE RACE:
 			// 1. Goroutine A reads counter (100)
-			// 2. Goroutine B reads counter (100) â€” same value!
+			// 2. Goroutine B reads counter (100) � same value!
 			// 3. A writes counter = 101
-			// 4. B writes counter = 101 â† A's write is LOST!
+			// 4. B writes counter = 101 ? A's write is LOST!
 			// This is called a "lost write" or "read-modify-write" race.
-			counter++ // NOT THREAD-SAFE â€” this is THREE operations: read, add, write
+			counter++ // NOT THREAD-SAFE � this is THREE operations: read, add, write
 		}()
 	}
 	wg.Wait()
-	return counter // Expected: 1000. Actual: varies (970-999 typically)
+	return counter
 }
-
-// --- EXAMPLE 2: Mutex (Correct, but with locking overhead) ---
 
 // mutexCounter uses sync.Mutex to protect the shared variable.
 // Only one goroutine can hold the mutex at a time.
 func mutexCounter() int {
 	counter := 0
-	var mu sync.Mutex // Mutex protects the counter
+	var mu sync.Mutex
 	var wg sync.WaitGroup
 
 	for i := 0; i < 1000; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			mu.Lock()   // Acquire the lock (other goroutines WAIT here)
-			counter++   // SAFE â€” only one goroutine can reach this line
-			mu.Unlock() // Release the lock (next waiting goroutine proceeds)
+			mu.Lock()
+			counter++
+			mu.Unlock()
 		}()
 	}
 	wg.Wait()
-	return counter // ALWAYS 1000 â€” guaranteed by the mutex
+	return counter
 }
 
-// --- EXAMPLE 3: Atomic Operations (Fastest, lock-free) ---
-
 // atomicCounter uses sync/atomic for lock-free increment.
-// Atomic operations are implemented with CPU instructions (CAS: Compare-And-Swap).
-// No locks, no goroutine scheduling overhead â€” the fastest option for simple counters.
 func atomicCounter() int64 {
-	var counter int64 // Must be int64 for atomic operations
+	var counter int64
 	var wg sync.WaitGroup
 
 	for i := 0; i < 1000; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			// atomic.AddInt64 is a SINGLE CPU instruction â€” no race possible.
-			// The CPU guarantees that read-modify-write happens atomically.
-			atomic.AddInt64(&counter, 1) // Pass pointer â€” modifies in place
+			atomic.AddInt64(&counter, 1)
 		}()
 	}
 	wg.Wait()
-	return counter // ALWAYS 1000 â€” guaranteed by hardware atomics
+	return counter
 }
 
 func main() {
 	fmt.Println("=== Race Conditions & Synchronization ===")
 	fmt.Println()
 
-	// --- Run all three approaches ---
-	fmt.Println("1ï¸âƒ£  Unsafe (no protection):")
+	fmt.Println("1??  Unsafe (no protection):")
 	for i := 0; i < 3; i++ {
 		result := unsafeCounter()
-		status := "âœ…"
+		status := "?"
 		if result != 1000 {
-			status = "âŒ RACE!"
+			status = "? RACE!"
 		}
 		fmt.Printf("   Run %d: count = %d (expected 1000) %s\n", i+1, result, status)
 	}
 	fmt.Println()
 
-	fmt.Println("2ï¸âƒ£  Mutex (sync.Mutex):")
+	fmt.Println("2??  Mutex (sync.Mutex):")
 	start := time.Now()
 	result := mutexCounter()
 	elapsed := time.Since(start)
-	fmt.Printf("   count = %d âœ… (took %v)\n", result, elapsed)
+	fmt.Printf("   count = %d ? (took %v)\n", result, elapsed)
 	fmt.Println()
 
-	fmt.Println("3ï¸âƒ£  Atomic (sync/atomic):")
+	fmt.Println("3??  Atomic (sync/atomic):")
 	start = time.Now()
 	atomicResult := atomicCounter()
 	elapsed = time.Since(start)
-	fmt.Printf("   count = %d âœ… (took %v)\n", atomicResult, elapsed)
+	fmt.Printf("   count = %d ? (took %v)\n", atomicResult, elapsed)
 	fmt.Println()
 
-	// --- Comparison table ---
 	fmt.Println("=== When to Use Each ===")
-	fmt.Println("  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”")
-	fmt.Println("  â”‚ Approach         â”‚ Use When                               â”‚")
-	fmt.Println("  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤")
-	fmt.Println("  â”‚ sync.Mutex       â”‚ Protecting complex shared state        â”‚")
-	fmt.Println("  â”‚ sync.RWMutex     â”‚ Many readers, few writers              â”‚")
-	fmt.Println("  â”‚ sync/atomic      â”‚ Simple counters, flags, single values  â”‚")
-	fmt.Println("  â”‚ Channels         â”‚ Communicating between goroutines       â”‚")
-	fmt.Println("  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜")
+	fmt.Println("  +-----------------------------------------------------------+")
+	fmt.Println("  � Approach         � Use When                               �")
+	fmt.Println("  +------------------+----------------------------------------�")
+	fmt.Println("  � sync.Mutex       � Protecting complex shared state        �")
+	fmt.Println("  � sync.RWMutex     � Many readers, few writers              �")
+	fmt.Println("  � sync/atomic      � Simple counters, flags, single values  �")
+	fmt.Println("  � Channels         � Communicating between goroutines       �")
+	fmt.Println("  +-----------------------------------------------------------+")
 	fmt.Println()
 
 	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Race condition = concurrent unsynchronized access â†’ data corruption")
+	fmt.Println("  - Race condition = concurrent unsynchronized access ? data corruption")
 	fmt.Println("  - sync.Mutex: Lock/Unlock to protect shared state (most common)")
 	fmt.Println("  - sync/atomic: lock-free CPU operations (fastest for simple values)")
 	fmt.Println("  - ALWAYS test with: go run -race or go test -race")
 	fmt.Println("  - Prefer channels over shared memory when possible")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: GC.10 sync primitives")
+	fmt.Println("?? NEXT UP: GC.10 sync primitives")
 	fmt.Println("   Current: GC.8 (race conditions)")
 	fmt.Println("---------------------------------------------------")
 }

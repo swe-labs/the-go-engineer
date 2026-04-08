@@ -1,10 +1,10 @@
-# Section 18: Package Design
+﻿# Section 18: Package Design
 
 ## Learning Objectives
 
 Good package design is what separates beginner Go code from production-grade software. This section teaches you how to organize a real Go application into clean, testable, reusable packages.
 
-## Beginner â†’ Expert Mapping
+## Beginner → Expert Mapping
 
 | Topic | Level | Importance | Engineering Concept |
 | ----- | ----- | ---------- | ------------------- |
@@ -16,7 +16,7 @@ Good package design is what separates beginner Go code from production-grade sof
 
 ## Engineering Depth
 
-Go packages are not just folders â€” they are the unit of compilation, testing, documentation, and visibility. A well-designed package:
+Go packages are not just folders — they are the unit of compilation, testing, documentation, and visibility. A well-designed package:
 
 1. Has a **clear single responsibility** (e.g., `auth`, `storage`, `email`)
 2. Exports a **small surface area** (few public types/functions)
@@ -51,6 +51,6 @@ go run ./14-application-architecture/package-design/3-project-layout
 
 | ID | Lesson | Concept | Requires |
 | --- | --- | --- | --- |
-| PD.1 | [naming](./1-naming) | Short lowercase names Â· no stutter Â· no utils Â· name by domain | ðŸŸ¢ entry |
-| PD.2 | [visibility](./2-visibility) | Uppercase = exported Â· internal/ compiler enforcement Â· minimal API | PD.1 |
-| PD.3 | [project layout](./3-project-layout) | cmd/ Â· internal/ Â· pkg/ Â· start flat Â· anti-patterns | PD.1, PD.2 |
+| PD.1 | [naming](./1-naming) | Short lowercase names · no stutter · no utils · name by domain | 🟢 entry |
+| PD.2 | [visibility](./2-visibility) | Uppercase = exported · internal/ compiler enforcement · minimal API | PD.1 |
+| PD.3 | [project layout](./3-project-layout) | cmd/ · internal/ · pkg/ · start flat · anti-patterns | PD.1, PD.2 |

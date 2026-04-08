@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
 package main
@@ -14,7 +14,7 @@ import (
 )
 
 // ============================================================================
-// Section 12: Concurrency Patterns â€” Exercise: Image Resizer
+// Section 12: Concurrency Patterns — Exercise: Image Resizer
 // Level: Intermediate/Advanced
 // ============================================================================
 //

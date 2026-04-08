@@ -1,11 +1,11 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
 package main
 
 // ============================================================================
-// Section 11: Time & Scheduling â€” Time Formatting
+// Section 11: Time & Scheduling — Time Formatting
 // Level: Beginner
 // ============================================================================
 //
@@ -66,7 +66,7 @@ func main() {
 		fmt.Printf("Parsed RFC3339 (in UTC): %s\n", parsedTimeRFC.UTC())
 	}
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: TM.3 timers &amp; tickers")
+	fmt.Println("🚀 NEXT UP: TM.3 timers & tickers")
 	fmt.Println("   Current: TM.2 (formatting)")
 	fmt.Println("---------------------------------------------------")
 }

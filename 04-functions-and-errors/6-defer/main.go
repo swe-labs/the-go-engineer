@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -110,7 +110,7 @@ func main() {
 	// - Arguments are evaluated when defer is called, not when it executes
 	// - This is the #1 pattern for preventing resource leaks in Go
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: FE.8 panic &amp; recover")
+	fmt.Println("🚀 NEXT UP: FE.8 panic & recover")
 	fmt.Println("   Current: FE.7 (defer)")
 	fmt.Println("---------------------------------------------------")
 }

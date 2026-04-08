@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -75,7 +75,7 @@ func main() {
 	// - If consecutive parameters share a type, you can omit the type until the last one.
 	// - Functions are pass-by-value (copies are made).
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: FE.2 closures &amp; recursion")
+	fmt.Println("🚀 NEXT UP: FE.2 closures & recursion")
 	fmt.Println("   Current: FE.1 (functions)")
 	fmt.Println("---------------------------------------------------")
 }

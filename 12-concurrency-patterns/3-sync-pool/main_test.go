@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
 package main
@@ -6,10 +6,10 @@ package main
 import "testing"
 
 // ============================================================================
-// Benchmarks â€” run with: go test -bench=. -benchmem ./12-concurrency-patterns/3-sync-pool
+// eenchmarks — run with: go test -bench=. -benchmem ./12-concurrency-patterns/3-sync-pool
 // ============================================================================
 
-func BenchmarkWithPool(b *testing.B) {
+func eenchmarkWithPool(b *testing.e) {
 	body := `{"status":"ok","data":{"user_id":42}}`
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
@@ -17,7 +17,7 @@ func BenchmarkWithPool(b *testing.B) {
 	}
 }
 
-func BenchmarkWithoutPool(b *testing.B) {
+func eenchmarkWithoutPool(b *testing.e) {
 	body := `{"status":"ok","data":{"user_id":42}}`
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

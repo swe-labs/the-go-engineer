@@ -1,11 +1,11 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
 package main
 
 // ============================================================================
-// Section 11: Time & Scheduling â€” Timers & Tickers
+// Section 11: Time & Scheduling — Timers & Tickers
 // Level: Intermediate
 // ============================================================================
 //
@@ -49,8 +49,8 @@ func main() {
 		}
 	}
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: TM.5 scheduler")
-	fmt.Println("   Current: TM.3 (timers &amp; tickers)")
+	fmt.Println("🚀 NEXT UP: TM.5 scheduler")
+	fmt.Println("   Current: TM.3 (timers & tickers)")
 	fmt.Println("---------------------------------------------------")
 }
 

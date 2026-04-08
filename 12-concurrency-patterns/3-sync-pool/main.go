@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
 package main
@@ -10,13 +10,13 @@ import (
 )
 
 // ============================================================================
-// Section 12: Concurrency Patterns â€” sync.Pool
+// Section 12: Concurrency Patterns � sync.Pool
 // Level: Advanced
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
 //   - sync.Pool: reuse temporary objects to reduce GC pressure
-//   - The correct Get() â†’ use â†’ reset â†’ Put() lifecycle
+//   - The correct Get() ? use ? reset ? Put() lifecycle
 //   - Why you MUST reset objects before Put()
 //   - Building a production-grade byte buffer pool (used by fmt, json, http)
 //   - How to benchmark pool impact with testing.B
@@ -32,76 +32,55 @@ import (
 //   Get() returns a recycled object and Put() returns it. During GC, the pool
 //   is cleared (the GC intentionally evicts pools to prevent memory leaks from
 //   objects that should have been freed). Objects MUST therefore be treated as
-//   temporary â€” never assume an object from the pool is clean or that a Put()
+//   temporary � never assume an object from the pool is clean or that a Put()
 //   object will be returned by the next Get().
 //
 //   PRODUCTION RULE: Reset the object (buf.Reset(), clear the struct) before
-//   Put(). Otherwise the next caller gets stale data â€” a serious security bug
+//   Put(). Otherwise the next caller gets stale data � a serious security bug
 //   if the buffer contains HTTP headers or auth tokens.
 //
 // RUN: go run ./12-concurrency-patterns/3-sync-pool
 // ============================================================================
 
-// ============================================================================
-// ByteBufferPool â€” a production-grade pooled buffer
-// ============================================================================
-// This is the same pattern used by encoding/json, net/http, and fmt internally.
-
 var bufPool = sync.Pool{
-	// New is called when the pool is empty. It creates a fresh object.
-	// New should always allocate â€” don't return nil here.
 	New: func() any {
-		// Pre-allocate 4KB: covers most HTTP responses without reallocation.
 		buf := bytes.NewBuffer(make([]byte, 0, 4096))
 		return buf
 	},
 }
 
-// GetBuffer returns a clean buffer from the pool.
 func GetBuffer() *bytes.Buffer {
-	buf := bufPool.Get().(*bytes.Buffer) // Type assertion: pool stores any
-	buf.Reset()                          // CRITICAL: clear previous contents
+	buf := bufPool.Get().(*bytes.Buffer)
+	buf.Reset()
 	return buf
 }
 
-// PutBuffer returns a buffer to the pool after use.
 func PutBuffer(buf *bytes.Buffer) {
-	// Optional: don't pool oversized buffers â€” they waste pool memory.
-	// A 10MB buffer from a single huge response shouldn't block a 4KB slot.
 	if buf.Cap() > 64*1024 {
-		return // Let GC collect it
+		return
 	}
-	buf.Reset() // Belt-and-suspenders reset before returning
+	buf.Reset()
 	bufPool.Put(buf)
 }
 
-// buildHTTPResponse demonstrates the correct pool usage lifecycle.
-// Compare withPool vs withoutPool in the benchmark below.
 func buildHTTPResponseWithPool(status int, body string) string {
-	buf := GetBuffer()   // 1. Get (possibly recycled)
-	defer PutBuffer(buf) // 4. Return to pool when done (ALWAYS defer this)
+	buf := GetBuffer()
+	defer PutBuffer(buf)
 
-	// 2. Use the buffer
 	fmt.Fprintf(buf, "HTTP/1.1 %d OK\r\n", status)
 	fmt.Fprintf(buf, "Content-Length: %d\r\n", len(body))
 	fmt.Fprintf(buf, "\r\n%s", body)
 
-	return buf.String() // 3. Extract result BEFORE defer fires
+	return buf.String()
 }
 
 func buildHTTPResponseWithoutPool(status int, body string) string {
-	var buf bytes.Buffer // New allocation every call
+	var buf bytes.Buffer
 	fmt.Fprintf(&buf, "HTTP/1.1 %d OK\r\n", status)
 	fmt.Fprintf(&buf, "Content-Length: %d\r\n", len(body))
 	fmt.Fprintf(&buf, "\r\n%s", body)
 	return buf.String()
 }
-
-// ============================================================================
-// StructPool â€” pooling custom structs
-// ============================================================================
-// Pooling structs is more error-prone than buffers because you MUST zero out
-// every field. Missing a field means previous request data bleeds into the next.
 
 type RequestContext struct {
 	UserID    string
@@ -113,8 +92,8 @@ type RequestContext struct {
 func (r *RequestContext) Reset() {
 	r.UserID = ""
 	r.RequestID = ""
-	r.Tags = r.Tags[:0]        // Reuse the backing array, reset length to 0
-	for k := range r.Headers { // Clear the map (reuse allocation)
+	r.Tags = r.Tags[:0]
+	for k := range r.Headers {
 		delete(r.Headers, k)
 	}
 }
@@ -140,29 +119,19 @@ func processRequest(userID, requestID string) string {
 	rc.Tags = append(rc.Tags, "api", "v2")
 	rc.Headers["Authorization"] = "Bearer xyz"
 
-	// Simulate processing
 	return fmt.Sprintf("processed request %s for user %s", rc.RequestID, rc.UserID)
 }
 
 func main() {
-	// Demonstrate correct lifecycle
 	resp := buildHTTPResponseWithPool(200, `{"ok":true}`)
 	fmt.Println("Response via pool:")
 	fmt.Println(resp)
 
-	// Demonstrate struct pool
 	fmt.Println("\nProcessed:", processRequest("usr_42", "req_001"))
-	fmt.Println("Processed:", processRequest("usr_99", "req_002")) // Reuses same struct
+	fmt.Println("Processed:", processRequest("usr_99", "req_002"))
 
-	// KEY TAKEAWAY:
-	// - sync.Pool: reuse temporary objects to cut GC pressure
-	// - Get() â†’ use â†’ Reset() â†’ Put() is the complete lifecycle
-	// - ALWAYS reset before Put() â€” stale data is a security bug
-	// - Don't pool oversized objects â€” they waste pool slots
-	// - Use -benchmem to measure before and after: allocs/op should drop to 0
-	// - Pool objects are evicted on GC â€” never rely on pool for caching
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: TE.1 unit testing")
+	fmt.Println("?? NEXT UP: TE.1 unit testing")
 	fmt.Println("   Current: CP.3 (sync.Pool)")
 	fmt.Println("---------------------------------------------------")
 }

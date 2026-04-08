@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -108,6 +108,6 @@ func main() {
 	//   ask: "Can I return an error instead?" The answer is almost always yes.
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("🚀 NEXT UP: FE.9 error handling project")
-	fmt.Println("   Current: FE.8 (panic &amp; recover)")
+	fmt.Println("   Current: FE.8 (panic & recover)")
 	fmt.Println("---------------------------------------------------")
 }

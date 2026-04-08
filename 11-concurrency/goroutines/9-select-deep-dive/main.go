@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Section 11: Concurrency â€” Select Deep Dive
+// Section 11: Concurrency — Select Deep Dive
 // Level: Advanced
 // ============================================================================
 //
@@ -20,45 +20,22 @@ import (
 	"time"
 )
 
-// ============================================================================
-// Section 11: Select Statement Deep Dive
-// Level: Advanced
-// ============================================================================
-//
-// WHAT YOU'LL LEARN:
-//   - select for multiplexing channel operations
-//   - Timeouts with time.After
-//   - Non-blocking channel operations with default
-//   - Context-based cancellation
-//   - Fan-in pattern (merging multiple channels)
-// ============================================================================
-
 func main() {
 	fmt.Println("=== Select Statement Deep Dive ===")
 	fmt.Println()
 
-	// 1. Basic select â€” wait on multiple channels
 	basicSelect()
-
-	// 2. Timeout pattern â€” prevent waiting forever
 	timeoutPattern()
-
-	// 3. Non-blocking operations with default
 	nonBlockingSelect()
-
-	// 4. Context cancellation â€” production-standard cancellation
 	contextCancellation()
-
-	// 5. Fan-in â€” merging multiple channels into one
 	fanInPattern()
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: GC.10 sync primitives")
+	fmt.Println("🚀 NEXT UP: GC.10 sync primitives")
 	fmt.Println("   Current: GC.9 (select deep dive)")
 	fmt.Println("---------------------------------------------------")
 }
 
-// basicSelect demonstrates waiting on multiple channels.
-// select blocks until ONE of the cases can proceed.
 func basicSelect() {
 	fmt.Println("--- 1. Basic Select ---")
 
@@ -75,7 +52,6 @@ func basicSelect() {
 		ch2 <- "from channel 2"
 	}()
 
-	// Receive from whichever channel is ready first
 	for i := 0; i < 2; i++ {
 		select {
 		case msg := <-ch1:
@@ -87,14 +63,12 @@ func basicSelect() {
 	fmt.Println()
 }
 
-// timeoutPattern prevents goroutines from waiting forever.
 func timeoutPattern() {
 	fmt.Println("--- 2. Timeout Pattern ---")
 
 	slowOperation := make(chan string)
-
 	go func() {
-		time.Sleep(2 * time.Second) // Simulates a slow operation
+		time.Sleep(2 * time.Second)
 		slowOperation <- "done"
 	}()
 
@@ -102,51 +76,41 @@ func timeoutPattern() {
 	case result := <-slowOperation:
 		fmt.Printf("  Got result: %s\n", result)
 	case <-time.After(500 * time.Millisecond):
-		// time.After returns a channel that receives after the duration.
-		// This is the standard timeout pattern in Go.
-		fmt.Println("  â° Operation timed out after 500ms")
+		fmt.Println("  ⏰ Operation timed out after 500ms")
 	}
 	fmt.Println()
 }
 
-// nonBlockingSelect uses the default case to avoid blocking.
 func nonBlockingSelect() {
 	fmt.Println("--- 3. Non-blocking Select ---")
 
-	ch := make(chan int, 1) // Buffered channel
+	ch := make(chan int, 1)
 
-	// Try to receive without blocking
 	select {
 	case val := <-ch:
 		fmt.Printf("  Received: %d\n", val)
 	default:
-		fmt.Println("  Channel empty â€” no blocking!")
+		fmt.Println("  Channel empty — no blocking!")
 	}
 
-	// Try to send without blocking
 	ch <- 42
 	select {
-	case ch <- 100: // Buffer is full, this won't execute
+	case ch <- 100:
 		fmt.Println("  Sent 100")
 	default:
-		fmt.Println("  Channel full â€” no blocking!")
+		fmt.Println("  Channel full — no blocking!")
 	}
 	fmt.Println()
 }
 
-// contextCancellation demonstrates production-standard cancellation.
 func contextCancellation() {
 	fmt.Println("--- 4. Context Cancellation ---")
 
-	// context.WithTimeout creates a context that auto-cancels after duration.
-	// This is the PRODUCTION pattern (preferred over time.After for goroutines).
 	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
-	defer cancel() // Always call cancel to release resources
+	defer cancel()
 
 	resultCh := make(chan string)
-
 	go func() {
-		// Simulate work
 		time.Sleep(500 * time.Millisecond)
 		resultCh <- "work complete"
 	}()
@@ -155,27 +119,22 @@ func contextCancellation() {
 	case result := <-resultCh:
 		fmt.Printf("  Result: %s\n", result)
 	case <-ctx.Done():
-		// ctx.Done() returns a channel that closes when the context is cancelled.
-		fmt.Printf("  âŒ Cancelled: %v\n", ctx.Err())
+		fmt.Printf("  ❌ Cancelled: %v\n", ctx.Err())
 	}
 	fmt.Println()
 }
 
-// fanInPattern merges multiple input channels into a single output channel.
 func fanInPattern() {
 	fmt.Println("--- 5. Fan-In Pattern ---")
 
-	// Create 3 producer channels
 	producers := make([]<-chan string, 3)
 	for i := 0; i < 3; i++ {
 		producers[i] = produce(i)
 	}
 
-	// Merge all into one channel
 	merged := fanIn(producers...)
 
-	// Read all results from the merged channel
-	for i := 0; i < 6; i++ { // 3 producers Ã— 2 messages each
+	for i := 0; i < 6; i++ { // 3 producers × 2 messages each
 		fmt.Printf("  %s\n", <-merged)
 	}
 	fmt.Println()
@@ -193,7 +152,6 @@ func produce(id int) <-chan string {
 	return ch
 }
 
-// fanIn merges multiple channels into one using a WaitGroup for cleanup.
 func fanIn(channels ...<-chan string) <-chan string {
 	out := make(chan string)
 	var wg sync.WaitGroup

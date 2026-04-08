@@ -1,6 +1,6 @@
-# Section 3: Collections and Pointers
+﻿# Section 3: Collections and Pointers
 
-## Beginner → Expert Mapping
+## Beginner ? Expert Mapping
 
 | Topic | Level | Importance | Engineering Concept |
 |-------|-------|------------|---------------------|
@@ -20,11 +20,11 @@ Unlike other languages, Go gives you direct control over memory behavior. You wi
 
 ---
 
-## 🏗 Exercise: Contact Manager System (`6-contact-manager`)
+## ?? Exercise: Contact Manager System (`6-contact-manager`)
 
 This section's capstone forces you to manipulate slices and pointers safely.
 
-### Step-by-Step Instructions & Hints
+### Step-by-Step Instructions a Hints
 1. **Define the Data Model:** Create a `Contact` struct.
 2. **Setup the Storage:** Create a slice `[]Contact` to act as your in-memory database.
    - *Hint:* Pre-allocate capacity using `make([]Contact, 0, 10)` to prevent early memory reallocation.
@@ -40,8 +40,8 @@ This section's capstone forces you to manipulate slices and pointers safely.
 
 | ID | Lesson | Concept | Requires |
 | --- | --- | --- | --- |
-| DS.1 | [arrays](./1-array) | Fixed-size contiguous memory · value-type copy | 🟢 entry |
-| DS.2 | [slices](./2-slices) | Slice header · make · append · capacity growth | DS.1 |
-| DS.3 | [maps](./3-maps) | Hash table · O(1) lookup · comma-ok · delete | DS.2 |
-| DS.4 | [pointers](./4-pointers) | &amp; · * · pass-by-value vs reference · nil | DS.1, DS.2 |
-| DS.5 | [slices-2](./5-slices-2) | Sub-slicing · shared backing array · re-allocation trap | DS.2, DS.4 |
+| DS.1 | [arrays](./1-array) | Fixed-size contiguous memory � value-type copy | ?? entry |
+| DS.2 | [slices](./2-slices) | Slice header � make � append � capacity growth | DS.1 |
+| DS.3 | [maps](./3-maps) | Hash table � O(1) lookup � comma-ok � delete | DS.2 |
+| DS.4 | [pointers](./4-pointers) | aamp; � * � pass-by-value vs reference � nil | DS.1, DS.2 |
+| DS.5 | [slices-2](./5-slices-2) | Sub-slicing � shared backing array � re-allocation trap | DS.2, DS.4 |

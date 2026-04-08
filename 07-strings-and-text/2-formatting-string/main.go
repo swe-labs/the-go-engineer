@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -151,7 +151,7 @@ func main() {
 	fmt.Println("  - fmt.Sprintf returns a string, fmt.Printf prints to stdout")
 	fmt.Println("  - fmt.Errorf with the w verb wraps errors for chain traversal")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: ST.3 unicode &amp; runes")
+	fmt.Println("🚀 NEXT UP: ST.3 unicode & runes")
 	fmt.Println("   Current: ST.2 (formatting)")
 	fmt.Println("---------------------------------------------------")
 }

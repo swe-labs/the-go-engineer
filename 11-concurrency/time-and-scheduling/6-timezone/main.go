@@ -1,11 +1,11 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
 package main
 
 // ============================================================================
-// Section 11: Time & Scheduling â€” Timezones
+// Section 11: Time & Scheduling — Timezones
 // Level: Intermediate
 // ============================================================================
 //
@@ -76,7 +76,7 @@ func main() {
 	fmt.Printf("In New York: %s\n", parsedTime.In(newYork))
 	fmt.Printf("In Tokyo: %s\n", parsedTime.In(tokyo))
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: CP.1 errgroup basics")
+	fmt.Println("🚀 NEXT UP: CP.1 errgroup basics")
 	fmt.Println("   Current: TM.6 (timezones)")
 	fmt.Println("---------------------------------------------------")
 }

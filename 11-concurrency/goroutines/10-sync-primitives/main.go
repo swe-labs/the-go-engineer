@@ -1,11 +1,11 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
 package main
 
 // ============================================================================
-// Section 11: Concurrency â€” Sync Primitives
+// Section 11: Concurrency — Sync Primitives
 // Level: Advanced
 // ============================================================================
 //
@@ -66,12 +66,12 @@ func GetDB() *DBConnection {
 // When NOT to use sync.Map:
 //   1. When you need to iterate often (Range is O(n) and holds no lock)
 //   2. When operations on multiple keys must be atomic
-//   3. When key set changes frequently â€” use regular map + RWMutex instead
+//   3. When key set changes frequently — use regular map + RWMutex instead
 
 func main() {
 	fmt.Println("=== sync.Once Demo ===")
 
-	// Call GetDB from multiple goroutines â€” init happens exactly once
+	// Call GetDB from multiple goroutines — init happens exactly once
 	var wg sync.WaitGroup
 	for i := 0; i < 5; i++ {
 		wg.Add(1)
@@ -115,7 +115,7 @@ func main() {
 	// Range: iterate over all entries
 	fmt.Println("\nAll entries:")
 	m.Range(func(key, value any) bool {
-		fmt.Printf("  %v â†’ %v\n", key, value)
+		fmt.Printf("  %v → %v\n", key, value)
 		return true // return false to stop iteration
 	})
 
@@ -139,10 +139,10 @@ func main() {
 	fmt.Printf("  counter = %d\n", sm.m["counter"])
 	sm.mu.RUnlock()
 
-	fmt.Println("\n  âš¡ Use sync.Map for read-heavy, stable key sets")
-	fmt.Println("  âš¡ Use map + RWMutex for everything else")
+	fmt.Println("\n  ⚡ Use sync.Map for read-heavy, stable key sets")
+	fmt.Println("  ⚡ Use map + RWMutex for everything else")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: CT.1 Background &amp; TODO")
+	fmt.Println("🚀 NEXT UP: CT.1 Background & TODO")
 	fmt.Println("   Current: GC.10 (sync primitives)")
 	fmt.Println("---------------------------------------------------")
 }

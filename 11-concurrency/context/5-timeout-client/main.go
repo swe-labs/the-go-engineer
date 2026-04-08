@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -13,7 +13,7 @@ import (
 )
 
 // ============================================================================
-// Section 11: Context â€” Timeout-Aware API Client (Exercise)
+// Section 11: Context — Timeout-Aware API Client (Exercise)
 // Level: Advanced
 // ============================================================================
 //
@@ -28,7 +28,7 @@ import (
 //   HTTP client's internal transport layer monitors `ctx.Done()`. If the context
 //   expires before the TCP connection completes, the transport immediately closes
 //   the underlying socket and returns `context.DeadlineExceeded`. This prevents
-//   your application from hanging indefinitely on a slow or unresponsive server â€”
+//   your application from hanging indefinitely on a slow or unresponsive server —
 //   a critical defense against cascading failures in microservice architectures.
 //
 // RUN: go run ./11-concurrency/context/5-timeout-client
@@ -43,7 +43,7 @@ func fetchWithTimeout(url string, timeout time.Duration) (string, error) {
 	defer cancel() // Always call cancel to release resources!
 
 	// Create the HTTP request WITH the context attached.
-	// This is the critical step â€” linking the context to the HTTP client.
+	// This is the critical step — linking the context to the HTTP client.
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return "", fmt.Errorf("creating request: %w", err)
@@ -74,27 +74,27 @@ func main() {
 	fmt.Println()
 
 	// Example 1: Fast request (should succeed)
-	fmt.Println("1ï¸âƒ£  Fetching httpbin.org with 5s timeout...")
+	fmt.Println("1️⃣  Fetching httpbin.org with 5s timeout...")
 	body, err := fetchWithTimeout("https://httpbin.org/get", 5*time.Second)
 	if err != nil {
-		fmt.Printf("   âŒ Error: %v\n", err)
+		fmt.Printf("   ❌ Error: %v\n", err)
 	} else {
 		// Print just the first 200 chars to keep output clean
 		if len(body) > 200 {
 			body = body[:200] + "..."
 		}
-		fmt.Printf("   âœ… Response (%d bytes): %s\n", len(body), body)
+		fmt.Printf("   ✅ Response (%d bytes): %s\n", len(body), body)
 	}
 
 	fmt.Println()
 
 	// Example 2: Deliberately short timeout (should fail)
-	fmt.Println("2ï¸âƒ£  Fetching with impossibly short timeout (1ms)...")
+	fmt.Println("2️⃣  Fetching with impossibly short timeout (1ms)...")
 	_, err = fetchWithTimeout("https://httpbin.org/delay/3", 1*time.Millisecond)
 	if err != nil {
-		fmt.Printf("   âŒ Expected timeout: %v\n", err)
+		fmt.Printf("   ❌ Expected timeout: %v\n", err)
 	} else {
-		fmt.Println("   âœ… Unexpected success!")
+		fmt.Println("   ✅ Unexpected success!")
 	}
 
 	fmt.Println()
