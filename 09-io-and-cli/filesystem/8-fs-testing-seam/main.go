@@ -1,6 +1,7 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// RUN: go run ./09-io-and-cli/filesystem/8-fs-testing-seam
 package main
 
 import (
@@ -14,44 +15,20 @@ import (
 )
 
 // ============================================================================
-// Section 10 Supplement: io/fs as a Testing Seam
+// Section 09 Stretch: io/fs as a Testing Seam
 // Level: Advanced
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
 //   - Why accepting fs.FS instead of string paths makes code testable
-//   - os.DirFS: wrapping a real directory as an fs.FS
-//   - Using fstest.MapFS as an in-memory filesystem in tests (zero disk I/O)
+//   - os.DirFS for wrapping a real directory as an fs.FS
+//   - fstest.MapFS as an in-memory filesystem in tests
 //   - The "accept interfaces, return structs" principle at the filesystem level
 //
-// THE PROBLEM:
-//   Functions that hardcode os.Open() or os.ReadDir() cannot be tested
-//   without real files on disk. This means:
-//     - Tests need a temp directory (slow, fragile, platform-dependent)
-//     - Tests must clean up after themselves
-//     - Parallel tests may conflict on the same temp path
-//
-// THE SOLUTION:
-//   Accept fs.FS. In production, pass os.DirFS("/path/to/logs").
-//   In tests, pass fstest.MapFS — an in-memory filesystem that lives in RAM.
-//
-//   PRODUCTION:
-//     results, err := SearchLogs(os.DirFS("/var/log/app"), "ERROR")
-//
-//   TEST (zero disk I/O):
-//     fakeFS := fstest.MapFS{
-//         "app.log": &fstest.MapFile{Data: []byte("ERROR: db failed\n")},
-//     }
-//     results, err := SearchLogs(fakeFS, "ERROR")
-//
 // ENGINEERING DEPTH:
-//   fs.FS (added in Go 1.16) is a minimal interface:
-//     type FS interface { Open(name string) (File, error) }
-//   The standard library provides implementations: os.DirFS, embed.FS, fstest.MapFS.
-//   Any code that accepts fs.FS works with ALL of them — real disk, embedded binary,
-//   or in-memory test fixture. This is the io.Reader pattern applied to filesystems.
-//
-// RUN: go run ./09-io-and-cli/filesystem/8-fs-testing-seam
+//   fs.FS applies the same decoupling idea as io.Reader and io.Writer.
+//   Code that accepts fs.FS can work with real disk, embedded assets, or
+//   in-memory test fixtures without changing its core logic.
 // ============================================================================
 
 // SearchResult holds one matching line from the log search.
@@ -63,9 +40,6 @@ type SearchResult struct {
 
 // SearchLogs searches all .log and .txt files under the given filesystem
 // for lines containing the keyword (case-insensitive).
-//
-// KEY DESIGN DECISION: The parameter is fs.FS, NOT a string directory path.
-// This single change makes the function testable with fstest.MapFS.
 func SearchLogs(fsys fs.FS, keyword string) ([]SearchResult, error) {
 	keyword = strings.ToLower(keyword)
 	var results []SearchResult
@@ -109,13 +83,7 @@ func SearchLogs(fsys fs.FS, keyword string) ([]SearchResult, error) {
 	return results, err
 }
 
-// ============================================================================
-// ConfigLoader — another example of fs.FS as a testing seam
-// ============================================================================
-
-// LoadConfig reads a JSON config file from the given filesystem.
-// In production: LoadConfig(os.DirFS("/etc/myapp"), "config.json")
-// In tests:      LoadConfig(fstest.MapFS{"config.json": &fstest.MapFile{...}})
+// LoadConfig reads a key=value config file from the given filesystem.
 func LoadConfig(fsys fs.FS, path string) (map[string]string, error) {
 	f, err := fsys.Open(path)
 	if err != nil {
@@ -130,16 +98,17 @@ func LoadConfig(fsys fs.FS, path string) (map[string]string, error) {
 		if line == "" || strings.HasPrefix(line, "#") {
 			continue
 		}
+
 		parts := strings.SplitN(line, "=", 2)
 		if len(parts) == 2 {
 			config[strings.TrimSpace(parts[0])] = strings.TrimSpace(parts[1])
 		}
 	}
+
 	return config, scanner.Err()
 }
 
 func main() {
-	// Production usage: real files from disk
 	realFS := os.DirFS(".")
 
 	results, err := SearchLogs(realFS, "error")
@@ -156,8 +125,6 @@ func main() {
 		fmt.Printf("%s:%d  %s\n", r.File, r.LineNumber, r.Text)
 	}
 
-	// Testing with fstest.MapFS (shown below — run the test file to see it work):
-	// go test -v ./09-io-and-cli/filesystem/8-fs-testing-seam
 	fmt.Print(`
 To see the fs.FS testing seam in action, run:
   go test -v ./09-io-and-cli/filesystem/8-fs-testing-seam
@@ -170,10 +137,10 @@ KEY TAKEAWAY:
   - os.DirFS("/path") wraps a real directory as fs.FS
   - fstest.MapFS is the in-memory test double — no temp files needed
   - fs.WalkDir, fs.ReadFile, fs.Glob all work with any fs.FS implementation
-  - embed.FS from Section 10/5 also implements fs.FS — reuse the same code
+  - embed.FS from Section 09/FS.5 also implements fs.FS — reuse the same code
 `)
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: EN.1 JSON marshalling")
-	fmt.Println("   Current: FS.8 (fs.FS testing seam)")
+	fmt.Println("NEXT STEP: Continue to Section 10 web and database")
+	fmt.Println("Current: FS.8 (fs.FS testing seam)")
 	fmt.Println("---------------------------------------------------")
 }

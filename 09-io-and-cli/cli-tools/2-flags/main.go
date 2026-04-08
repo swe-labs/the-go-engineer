@@ -67,7 +67,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("?? NEXT UP: CL.3 subcommands")
+	fmt.Println("🚀 NEXT UP: CL.3 subcommands")
 	fmt.Println("   Current: CL.2 (flags)")
 	fmt.Println("---------------------------------------------------")
 }

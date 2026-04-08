@@ -93,6 +93,29 @@
       "outputs": [
         "MP.3"
       ]
+    },
+    {
+      "id": "s09",
+      "number": "09",
+      "slug": "io-and-cli",
+      "title": "I/O and CLI",
+      "phase": "foundations",
+      "summary": "Teach command-line input, JSON encoding and decoding, and filesystem work as one practical I/O section with multiple learner tracks.",
+      "status": "pilot",
+      "prerequisites": [
+        "s08"
+      ],
+      "path_prefix": "09-io-and-cli",
+      "entry_points": [
+        "CL.1",
+        "EN.1",
+        "FS.1"
+      ],
+      "outputs": [
+        "CL.4",
+        "EN.6",
+        "FS.7"
+      ]
     }
   ],
   "items": [
@@ -1065,6 +1088,584 @@
         "build-tags",
         "integration-tests",
         "platforms"
+      ]
+    },
+    {
+      "id": "CL.1",
+      "section_id": "s09",
+      "slug": "args",
+      "title": "Args",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 20,
+      "summary": "Introduce raw command-line arguments, environment variables, and basic exit-code behavior.",
+      "objectives": [
+        "Read os.Args safely without indexing past the available arguments",
+        "Explain when to use environment variables versus command-line arguments"
+      ],
+      "prerequisites": [],
+      "production_relevance": "Small scripts, service entrypoints, and internal tools all need predictable command-line and environment handling.",
+      "path": "09-io-and-cli/cli-tools/1-args",
+      "run_command": "go run ./09-io-and-cli/cli-tools/1-args",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CL.2"
+      ],
+      "tags": [
+        "cli",
+        "os.Args",
+        "env"
+      ]
+    },
+    {
+      "id": "CL.2",
+      "section_id": "s09",
+      "slug": "flags",
+      "title": "Flags",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Teach typed option parsing with the standard flag package.",
+      "objectives": [
+        "Register and parse typed flags with the standard library",
+        "Explain why flags are safer and clearer than ad hoc os.Args slicing for structured input"
+      ],
+      "prerequisites": [
+        "CL.1"
+      ],
+      "production_relevance": "Typed flags are the foundation for internal tools, service bootstraps, and user-facing CLIs that need predictable options.",
+      "path": "09-io-and-cli/cli-tools/2-flags",
+      "run_command": "go run ./09-io-and-cli/cli-tools/2-flags",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CL.3"
+      ],
+      "tags": [
+        "cli",
+        "flags",
+        "parsing"
+      ]
+    },
+    {
+      "id": "CL.3",
+      "section_id": "s09",
+      "slug": "subcommands",
+      "title": "Subcommands",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Build multi-command CLIs with per-command flag sets instead of one giant flat argument surface.",
+      "objectives": [
+        "Route subcommands explicitly through os.Args and switch logic",
+        "Use flag.NewFlagSet to keep command-specific flags isolated"
+      ],
+      "prerequisites": [
+        "CL.1",
+        "CL.2"
+      ],
+      "production_relevance": "Serious CLIs scale through subcommands, isolated flag scopes, and clear usage boundaries.",
+      "path": "09-io-and-cli/cli-tools/3-subcommands",
+      "run_command": "go run ./09-io-and-cli/cli-tools/3-subcommands",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CL.4"
+      ],
+      "tags": [
+        "cli",
+        "subcommands",
+        "flagset"
+      ]
+    },
+    {
+      "id": "CL.4",
+      "section_id": "s09",
+      "slug": "file-organizer",
+      "title": "File Organizer",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 60,
+      "summary": "Combine flags, directory reading, and safe file movement in one CLI milestone with a dry-run mode.",
+      "objectives": [
+        "Build a flag-driven CLI that reads and organizes a directory by file extension",
+        "Use dry-run behavior to separate preview from destructive actions"
+      ],
+      "prerequisites": [
+        "CL.1",
+        "CL.2",
+        "CL.3"
+      ],
+      "production_relevance": "Operational CLIs often combine filesystem work and command-line input, so safety features like dry-run are part of real engineering quality.",
+      "path": "09-io-and-cli/cli-tools/4-file-organizer",
+      "run_command": "go run ./09-io-and-cli/cli-tools/4-file-organizer",
+      "test_command": "",
+      "starter_path": "09-io-and-cli/cli-tools/4-file-organizer/_starter",
+      "next_items": [],
+      "tags": [
+        "exercise",
+        "cli",
+        "filesystem",
+        "dry-run"
+      ]
+    },
+    {
+      "id": "EN.1",
+      "section_id": "s09",
+      "slug": "json-marshalling",
+      "title": "JSON Marshalling",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Introduce struct-to-JSON serialization and the struct tags that shape JSON output.",
+      "objectives": [
+        "Marshal Go structs into JSON output with the standard library",
+        "Explain how struct tags affect field names and omission behavior"
+      ],
+      "prerequisites": [],
+      "production_relevance": "JSON serialization shows up in APIs, config generation, background jobs, and structured data exchange everywhere in Go.",
+      "path": "09-io-and-cli/encoding/1-marshalling",
+      "run_command": "go run ./09-io-and-cli/encoding/1-marshalling",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "EN.2"
+      ],
+      "tags": [
+        "encoding",
+        "json",
+        "marshal"
+      ]
+    },
+    {
+      "id": "EN.2",
+      "section_id": "s09",
+      "slug": "json-unmarshalling",
+      "title": "JSON Unmarshalling",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Show how JSON input becomes Go data and why zero values can hide missing fields.",
+      "objectives": [
+        "Decode JSON into structs and maps safely",
+        "Explain why missing JSON fields can silently become zero values"
+      ],
+      "prerequisites": [
+        "EN.1"
+      ],
+      "production_relevance": "Unmarshal behavior shapes every API client, config loader, and structured-data ingestion path in Go.",
+      "path": "09-io-and-cli/encoding/2-unmarshal",
+      "run_command": "go run ./09-io-and-cli/encoding/2-unmarshal",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "EN.3"
+      ],
+      "tags": [
+        "encoding",
+        "json",
+        "unmarshal"
+      ]
+    },
+    {
+      "id": "EN.3",
+      "section_id": "s09",
+      "slug": "json-encoder",
+      "title": "JSON Encoder",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Teach stream-oriented JSON writing through json.NewEncoder and io.Writer surfaces.",
+      "objectives": [
+        "Write JSON directly to io.Writer implementations with json.NewEncoder",
+        "Explain why streaming output is better than building giant byte slices in many cases"
+      ],
+      "prerequisites": [
+        "EN.1",
+        "EN.2"
+      ],
+      "production_relevance": "Streaming encoders are common in HTTP handlers, file exporters, and data pipelines that should not buffer everything in memory.",
+      "path": "09-io-and-cli/encoding/3-encoder",
+      "run_command": "go run ./09-io-and-cli/encoding/3-encoder",
+      "test_command": "go test ./09-io-and-cli/encoding/3-encoder",
+      "starter_path": "",
+      "next_items": [
+        "EN.4"
+      ],
+      "tags": [
+        "encoding",
+        "json",
+        "streaming"
+      ]
+    },
+    {
+      "id": "EN.4",
+      "section_id": "s09",
+      "slug": "json-decoder",
+      "title": "JSON Decoder",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Teach stream-oriented JSON reading with json.NewDecoder and reader-based workflows.",
+      "objectives": [
+        "Decode JSON directly from io.Reader implementations",
+        "Handle EOF and repeated decode loops correctly for streamed data"
+      ],
+      "prerequisites": [
+        "EN.2",
+        "EN.3"
+      ],
+      "production_relevance": "Reader-based JSON decoding is the default production habit for HTTP bodies, files, and large payload streams.",
+      "path": "09-io-and-cli/encoding/4-decode",
+      "run_command": "go run ./09-io-and-cli/encoding/4-decode",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "EN.5"
+      ],
+      "tags": [
+        "encoding",
+        "json",
+        "decoder"
+      ]
+    },
+    {
+      "id": "EN.5",
+      "section_id": "s09",
+      "slug": "base64",
+      "title": "Base64",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 20,
+      "summary": "Explain binary-to-text encoding through base64 and where it fits relative to JSON.",
+      "objectives": [
+        "Use standard and URL-safe base64 encodings appropriately",
+        "Explain why base64 is not encryption"
+      ],
+      "prerequisites": [
+        "EN.1"
+      ],
+      "production_relevance": "Base64 appears in tokens, transport-safe payloads, inline assets, and protocol boundaries where raw binary is inconvenient.",
+      "path": "09-io-and-cli/encoding/5-base64_encoding",
+      "run_command": "go run ./09-io-and-cli/encoding/5-base64_encoding",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "EN.6"
+      ],
+      "tags": [
+        "encoding",
+        "base64",
+        "transport"
+      ]
+    },
+    {
+      "id": "EN.6",
+      "section_id": "s09",
+      "slug": "config-parser",
+      "title": "Config Parser",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "estimated_time": 70,
+      "summary": "Combine file I/O, JSON decoding, and validation in one config-loading milestone with tests.",
+      "objectives": [
+        "Load JSON config data from disk through json.NewDecoder",
+        "Validate decoded config structures and return useful wrapped errors"
+      ],
+      "prerequisites": [
+        "EN.1",
+        "EN.2",
+        "EN.3",
+        "EN.4"
+      ],
+      "production_relevance": "Configuration loading is one of the most common real-world uses of file I/O and decoding in Go services and tools.",
+      "path": "09-io-and-cli/encoding/6-config-parser",
+      "run_command": "go run ./09-io-and-cli/encoding/6-config-parser",
+      "test_command": "go test ./09-io-and-cli/encoding/6-config-parser",
+      "starter_path": "09-io-and-cli/encoding/6-config-parser/_starter",
+      "next_items": [],
+      "tags": [
+        "exercise",
+        "encoding",
+        "json",
+        "config"
+      ]
+    },
+    {
+      "id": "FS.1",
+      "section_id": "s09",
+      "slug": "files",
+      "title": "Files",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Introduce basic file I/O, buffered reading, and file-handle lifecycle management.",
+      "objectives": [
+        "Use os.ReadFile, os.WriteFile, and os.OpenFile appropriately",
+        "Explain why file handles must be closed promptly"
+      ],
+      "prerequisites": [],
+      "production_relevance": "File operations sit underneath config loaders, export tools, operational scripts, and data-processing jobs.",
+      "path": "09-io-and-cli/filesystem/1-files",
+      "run_command": "go run ./09-io-and-cli/filesystem/1-files",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [],
+      "tags": [
+        "filesystem",
+        "files",
+        "bufio"
+      ]
+    },
+    {
+      "id": "FS.2",
+      "section_id": "s09",
+      "slug": "paths",
+      "title": "Paths",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 20,
+      "summary": "Teach safe cross-platform path handling with the filepath package.",
+      "objectives": [
+        "Use filepath helpers instead of manual path string construction",
+        "Explain why path normalization and absolute paths matter in tooling"
+      ],
+      "prerequisites": [
+        "FS.1"
+      ],
+      "production_relevance": "Cross-platform tools live or die on path correctness, especially in CLIs and build tooling.",
+      "path": "09-io-and-cli/filesystem/2-paths",
+      "run_command": "go run ./09-io-and-cli/filesystem/2-paths",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FS.3"
+      ],
+      "tags": [
+        "filesystem",
+        "paths",
+        "filepath"
+      ]
+    },
+    {
+      "id": "FS.3",
+      "section_id": "s09",
+      "slug": "directories",
+      "title": "Directories",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Add directory creation, listing, traversal, and cleanup operations.",
+      "objectives": [
+        "Create and inspect directories safely",
+        "Choose between single-level reads and recursive traversal intentionally"
+      ],
+      "prerequisites": [
+        "FS.1",
+        "FS.2"
+      ],
+      "production_relevance": "Directory traversal underpins search tools, file importers, deploy helpers, and backup workflows.",
+      "path": "09-io-and-cli/filesystem/3-dir",
+      "run_command": "go run ./09-io-and-cli/filesystem/3-dir",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FS.4"
+      ],
+      "tags": [
+        "filesystem",
+        "directories",
+        "walkdir"
+      ]
+    },
+    {
+      "id": "FS.4",
+      "section_id": "s09",
+      "slug": "temp-files",
+      "title": "Temp Files",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 20,
+      "summary": "Teach temporary files and directories as a disciplined pattern with immediate cleanup.",
+      "objectives": [
+        "Create temporary directories and files safely with unique names",
+        "Clean up temporary resources immediately through defer"
+      ],
+      "prerequisites": [
+        "FS.1",
+        "FS.3"
+      ],
+      "production_relevance": "Temp resources show up in downloads, staging files, tests, and batch-processing pipelines.",
+      "path": "09-io-and-cli/filesystem/4-temp",
+      "run_command": "go run ./09-io-and-cli/filesystem/4-temp",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FS.5"
+      ],
+      "tags": [
+        "filesystem",
+        "temp",
+        "cleanup"
+      ]
+    },
+    {
+      "id": "FS.5",
+      "section_id": "s09",
+      "slug": "embed",
+      "title": "Embed",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Introduce go:embed and embedded filesystem assets for single-binary delivery.",
+      "objectives": [
+        "Embed files and directories directly into a Go binary",
+        "Explain when embedded assets are simpler than external runtime files"
+      ],
+      "prerequisites": [
+        "FS.3",
+        "FS.4"
+      ],
+      "production_relevance": "Embedding is common in CLIs, internal tools, and lightweight services that want one deployable binary.",
+      "path": "09-io-and-cli/filesystem/5-embed",
+      "run_command": "go run ./09-io-and-cli/filesystem/5-embed",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FS.6"
+      ],
+      "tags": [
+        "filesystem",
+        "embed",
+        "assets"
+      ]
+    },
+    {
+      "id": "FS.6",
+      "section_id": "s09",
+      "slug": "io-patterns",
+      "title": "I/O Patterns",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Explain io.Reader and io.Writer as the compositional core of Go I/O design.",
+      "objectives": [
+        "Compose readers and writers with io.Copy and related helpers",
+        "Explain why interface-based I/O decouples code from storage and transport details"
+      ],
+      "prerequisites": [
+        "FS.1",
+        "FS.2",
+        "FS.3"
+      ],
+      "production_relevance": "Nearly every production Go system depends on io.Reader and io.Writer composition across files, networks, and encoders.",
+      "path": "09-io-and-cli/filesystem/6-io-patterns",
+      "run_command": "go run ./09-io-and-cli/filesystem/6-io-patterns",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [],
+      "tags": [
+        "filesystem",
+        "io",
+        "reader-writer"
+      ]
+    },
+    {
+      "id": "FS.7",
+      "section_id": "s09",
+      "slug": "log-search",
+      "title": "Log Search",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "estimated_time": 80,
+      "summary": "Combine traversal, scanning, and filtering in one log-search milestone with tests.",
+      "objectives": [
+        "Walk a directory tree and search matching files line by line",
+        "Keep search behavior resilient when some files cannot be read"
+      ],
+      "prerequisites": [
+        "FS.1",
+        "FS.2",
+        "FS.3",
+        "FS.6"
+      ],
+      "production_relevance": "Operational tooling often needs fast, memory-safe search across large sets of log or text files.",
+      "path": "09-io-and-cli/filesystem/7-log-search",
+      "run_command": "go run ./09-io-and-cli/filesystem/7-log-search",
+      "test_command": "go test ./09-io-and-cli/filesystem/7-log-search",
+      "starter_path": "09-io-and-cli/filesystem/7-log-search/_starter",
+      "next_items": [],
+      "tags": [
+        "exercise",
+        "filesystem",
+        "search",
+        "walkdir"
+      ]
+    },
+    {
+      "id": "FS.8",
+      "section_id": "s09",
+      "slug": "fs-testing-seam",
+      "title": "fs.FS Testing Seam",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "stretch",
+      "verification_mode": "mixed",
+      "estimated_time": 35,
+      "summary": "Use fs.FS as a filesystem abstraction that works across real disk, embedded assets, and in-memory tests.",
+      "objectives": [
+        "Accept fs.FS instead of raw paths when code needs a testable filesystem boundary",
+        "Explain how os.DirFS, embed.FS, and fstest.MapFS fit the same abstraction"
+      ],
+      "prerequisites": [
+        "FS.5",
+        "FS.6"
+      ],
+      "production_relevance": "fs.FS creates cleaner seams for tools and services that need filesystem logic without hard-coding real disk access into tests.",
+      "path": "09-io-and-cli/filesystem/8-fs-testing-seam",
+      "run_command": "go run ./09-io-and-cli/filesystem/8-fs-testing-seam",
+      "test_command": "go test ./09-io-and-cli/filesystem/8-fs-testing-seam",
+      "starter_path": "",
+      "next_items": [],
+      "tags": [
+        "filesystem",
+        "fs.FS",
+        "testing"
       ]
     }
   ]

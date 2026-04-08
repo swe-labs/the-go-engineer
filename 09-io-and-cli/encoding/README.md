@@ -1,39 +1,39 @@
-﻿# Section 11: Encoding
+# Track B: Encoding
 
-## Beginner → Expert Mapping
+## Mission
 
-| Topic | Level | Importance | Engineering Concept |
-|-------|-------|------------|---------------------|
-| JSON Marshal | Beginner | High | Object serialization via reflection |
-| JSON Streams | Intermediate | High | Stream unmarshalling (`json.Decoder`) |
-| Custom Marshal | Advanced | Medium | Overriding byte representation |
+This track teaches you how Go moves structured data into and out of bytes, with special focus on
+JSON and stream-oriented decoding.
 
-## Engineering Depth
-In Go, `json.Marshal()` operates using Reflection (`reflect` package) to map struct keys to byte arrays at runtime. Because reflection bypasses strict compile-time type safety, it is computationally expensive.
-- **Memory Scaling:** `json.Unmarshal(data)` loads the entire `[]byte` representation into memory, allocating massive heap blocks for large arrays. 
-- **Production Pattern:** Always use `json.NewDecoder(io.Reader).Decode()` to stream gigabytes of JSON incrementally with $O(1)$ memory footprints.
+## Track Map
 
-## References
-1. **[Go Blog]** [JSON and Go](https://go.dev/blog/json)
+| ID | Type | Surface | Why It Matters | Requires |
+| --- | --- | --- | --- | --- |
+| `EN.1` | Lesson | [JSON marshalling](./1-marshalling) | Introduces struct-to-JSON serialization and struct tags. | entry |
+| `EN.2` | Lesson | [JSON unmarshalling](./2-unmarshal) | Shows how JSON becomes Go values and where zero values can hide missing fields. | `EN.1` |
+| `EN.3` | Lesson | [JSON encoder](./3-encoder) | Teaches stream-oriented writing with `json.NewEncoder`. | `EN.1`, `EN.2` |
+| `EN.4` | Lesson | [JSON decoder](./4-decode) | Teaches stream-oriented reading with `json.NewDecoder`. | `EN.2`, `EN.3` |
+| `EN.5` | Lesson | [base64](./5-base64_encoding) | Adds binary-to-text transport encoding. | `EN.1` |
+| `EN.6` | Exercise | [config parser](./6-config-parser) | Combines file I/O, JSON decoding, and validation in one milestone. | `EN.1`, `EN.2`, `EN.3`, `EN.4` |
 
----
+## Suggested Order
 
-## 🏗 Exercise: Config File Parser (`6-config-parser`)
+1. Work through `EN.1` to `EN.5` in order.
+2. Complete `EN.6` without copying the finished solution line by line.
 
-Build a JSON config file parser that reads, decodes, and validates application configuration. Try it yourself with the `_starter/` directory first!
+## Track Milestone
 
-```bash
-go run ./09-io-and-cli/encoding/6-config-parser/_starter   # Try the exercise
-go run ./09-io-and-cli/encoding/6-config-parser            # See the solution
-```
+`EN.6` is the current encoding track milestone.
 
+If you can complete it and explain:
 
-## Learning Path
+- why decoding directly from an `io.Reader` is usually the right production habit
+- why zero values make config validation necessary after parsing
+- why JSON and base64 solve different problems even though they both produce text
 
-| ID | Lesson | Concept | Requires |
-| --- | --- | --- | --- |
-| EN.1 | [JSON marshalling](./1-marshalling) | json.Marshal · MarshalIndent · struct tags · omitempty · "-" | 🟢 entry |
-| EN.2 | [JSON unmarshalling](./2-unmarshal) | json.Unmarshal · pointer required · zero values · map[string]any | EN.1 |
-| EN.3 | [JSON encoder (stream)](./3-encoder) | json.NewEncoder · io.Writer · O(1) memory · SetIndent | EN.1, EN.2 |
-| EN.4 | [JSON decoder (stream)](./4-decode) | json.NewDecoder · io.Reader · NDJSON · EOF loop | EN.2, EN.3 |
-| EN.5 | [Base64](./5-base64_encoding) | StdEncoding · URLEncoding · transport-safe binary | EN.1 |
+then the encoding part of Section 09 is doing its job.
+
+## Next Step
+
+After `EN.6`, continue to the [Filesystem track](../filesystem) or back to the
+[Section 09 overview](../README.md).

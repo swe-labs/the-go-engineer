@@ -2,6 +2,7 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
+// RUN: go run ./09-io-and-cli/encoding/5-base64_encoding
 package main
 
 import (
@@ -11,54 +12,33 @@ import (
 )
 
 // ============================================================================
-// Section 11: Encoding — Base64 Encoding
+// Section 09: I/O and CLI — Base64 Encoding
 // Level: Intermediate
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - What Base64 is and why it's used
-//   - base64.StdEncoding (standard base64)
-//   - base64.URLEncoding (URL-safe base64)
-//   - Encoding/Decoding strings and bytes
-//
-// ANALOGY:
-//   Imagine you need to mail an irregularly shaped rock (binary data) in an envelope,
-//   but the post office only accepts flat letters (text).
-//   Base64 is a machine that crushes the rock, turns it into a perfectly flat letter
-//   made of A-Z, a-z, 0-9, +, and /. On the receiving end, another machine
-//   reads the letter and reconstructs the exact same rock.
+//   - What base64 is and why it is used
+//   - base64.StdEncoding for general text-safe transport
+//   - base64.URLEncoding for URL-safe tokens
+//   - Encoding and decoding strings and raw bytes
 //
 // ENGINEERING DEPTH:
-//   Base64 is NOT encryption! It provides zero security.
-//   It takes every 3 bytes (24 bits) of raw data and splits it into 4 chunks
-//   of 6 bits each. Each 6-bit chunk maps to one of 64 printable ASCII characters.
-//   This means Base64 expands payload size by ~33%.
-//
-//   Why use it? Many protocols (HTTP headers, JSON, Email) were designed for text.
-//   Base64 lets you safely transport binary data (images, tokens) over text channels.
-//
-// RUN: go run ./09-io-and-cli/encoding/5-base64_encoding
+//   Base64 is not encryption. It is a text transport format for binary data.
+//   It increases payload size by roughly 33%, but it lets binary values survive
+//   in systems that were designed around printable text.
 // ============================================================================
 
 func main() {
-	fmt.Println("=== Base64 Encoding & Decoding ===")
+	fmt.Println("=== Base64 Encoding and Decoding ===")
 	fmt.Println()
 
-	// =====================================================================
-	// 1. Standard Base64 Encoding
-	// =====================================================================
-	fmt.Println("1️⃣  Standard Base64:")
-
+	fmt.Println("1) Standard Base64:")
 	secretMessage := "This string contains sensitive/raw data?"
-
-	// Encode: Takes []byte, returns string
-	// StdEncoding uses '+' and '/' as the 62nd and 63rd characters
 	encoded := base64.StdEncoding.EncodeToString([]byte(secretMessage))
 
 	fmt.Printf("   Original: %q\n", secretMessage)
-	fmt.Printf("   Encoded:  %s\n", encoded) // Ends with = for padding
+	fmt.Printf("   Encoded:  %s\n", encoded)
 
-	// Decode: Takes string, returns []byte
 	decodedBytes, err := base64.StdEncoding.DecodeString(encoded)
 	if err != nil {
 		log.Fatal("Decode error:", err)
@@ -67,52 +47,36 @@ func main() {
 	fmt.Printf("   Decoded:  %q\n", string(decodedBytes))
 	fmt.Println()
 
-	// =====================================================================
-	// 2. Binary Data Encoding (Images, Tokens, Keys)
-	// =====================================================================
-	fmt.Println("2️⃣  Binary Data Encoding:")
-
-	// Simulated raw cryptographic key or binary data
+	fmt.Println("2) Binary Data Encoding:")
 	rawKey := []byte{0xDE, 0xAD, 0xBE, 0xEF, 0x00, 0xFF}
-
 	fmt.Printf("   Raw Bytes:   %v\n", rawKey)
-
-	encodedKey := base64.StdEncoding.EncodeToString(rawKey)
-	fmt.Printf("   Base64 Key:  %s\n", encodedKey)
+	fmt.Printf("   Base64 Key:  %s\n", base64.StdEncoding.EncodeToString(rawKey))
 	fmt.Println()
 
-	// =====================================================================
-	// 3. URL-Safe Base64
-	// =====================================================================
-	// Standard base64 uses '+' and '/'.
-	// These characters have special meaning in URLs (space and path separator).
-	// URLEncoding replaces '+' with '-' and '/' with '_' so it can be used in URLs.
-	fmt.Println("3️⃣  URL-Safe Base64:")
-
+	fmt.Println("3) URL-Safe Base64:")
 	tokenData := "user:rasel9t6|role:admin|path:/api/v1/update"
-
-	// Standard encoding (creates a string that breaks URLs due to '/')
 	stdToken := base64.StdEncoding.EncodeToString([]byte(tokenData))
-
-	// URL encoding (safe to put in a query parameter)
 	urlToken := base64.URLEncoding.EncodeToString([]byte(tokenData))
 
 	fmt.Printf("   Standard: %s\n", stdToken)
 	fmt.Printf("   URL-Safe: %s\n", urlToken)
 
-	// Decoding URL-safe token
-	decodedToken, _ := base64.URLEncoding.DecodeString(urlToken)
+	decodedToken, err := base64.URLEncoding.DecodeString(urlToken)
+	if err != nil {
+		log.Fatal("URL-safe decode error:", err)
+	}
+
 	fmt.Printf("   Decoded:  %s\n", string(decodedToken))
 
 	fmt.Println()
 	fmt.Println("KEY TAKEAWAY:")
 	fmt.Println("  - Base64 is for transporting binary data over text-only protocols")
 	fmt.Println("  - It is NOT encryption (it is easily decodable by anyone)")
-	fmt.Println("  - base64.StdEncoding for JSON, Headers, General purpose")
-	fmt.Println("  - base64.URLEncoding for tokens inside URLs (swaps +/ for -_)")
-	fmt.Println("  - Base64 increases data size by exactly 33%")
+	fmt.Println("  - base64.StdEncoding works for JSON, headers, and general transport")
+	fmt.Println("  - base64.URLEncoding avoids + and / in URL contexts")
+	fmt.Println("  - Base64 increases data size by about 33%")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CL.1 args")
+	fmt.Println("🚀 NEXT UP: EN.6 config parser")
 	fmt.Println("   Current: EN.5 (Base64)")
 	fmt.Println("---------------------------------------------------")
 }

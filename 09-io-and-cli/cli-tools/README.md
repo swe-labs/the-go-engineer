@@ -1,64 +1,37 @@
-# Section 09: CLI Tools
+# Track A: CLI Tools
 
-## Learning Objectives
+## Mission
 
-Every Go engineer eventually builds command-line tools. Go is especially strong here because the
-standard library already gives you argument parsing, environment access, filesystem support, and a
-simple single-binary deployment model.
+This track teaches you how to build small command-line programs that accept input clearly, expose
+safe options, and scale from one command to multiple subcommands.
 
-By the end of this section, you should understand:
+## Track Map
 
-- raw argument access with `os.Args`
-- reading configuration from environment variables
-- typed flag parsing with the `flag` package
-- exit codes and process behavior
-- how to structure subcommands for larger CLIs
+| ID | Type | Surface | Why It Matters | Requires |
+| --- | --- | --- | --- | --- |
+| `CL.1` | Lesson | [args](./1-args) | Introduces raw command-line arguments, environment variables, and exit codes. | entry |
+| `CL.2` | Lesson | [flags](./2-flags) | Shows typed option parsing with the `flag` package. | `CL.1` |
+| `CL.3` | Lesson | [subcommands](./3-subcommands) | Builds multi-command CLIs without third-party frameworks. | `CL.1`, `CL.2` |
+| `CL.4` | Exercise | [file organizer](./4-file-organizer) | Combines flags, directory reading, and safe filesystem changes in one milestone. | `CL.1`, `CL.2`, `CL.3` |
 
-## Beginner → Expert Mapping
+## Suggested Order
 
-| Topic | Level | Importance | Engineering Concept |
-| --- | --- | --- | --- |
-| `os.Args` | Beginner | Medium | Raw argument access |
-| `flag` package | Intermediate | High | Typed argument parsing |
-| `os.Exit` codes | Intermediate | High | Unix process conventions |
-| Subcommands | Advanced | High | Building multi-command CLIs |
+1. Work through `CL.1` to `CL.3` in order.
+2. Complete `CL.4` without copying the finished solution line by line.
 
-## Contents
+## Track Milestone
 
-| Directory | Topic | Level |
-| --- | --- | --- |
-| `1-args/` | Raw arguments with `os.Args` and environment variables | Beginner |
-| `2-flags/` | Typed arguments with the `flag` package | Intermediate |
-| `3-subcommands/` | Building multi-command CLIs like `git` | Advanced |
-| `4-file-organizer/` | Exercise: organize files by extension | Intermediate |
+`CL.4` is the current CLI track milestone.
 
-## How to Run
+If you can complete it and explain:
 
-```bash
-go run ./09-io-and-cli/cli-tools/1-args hello world
-go run ./09-io-and-cli/cli-tools/2-flags -name="The Go Engineer" -count=3
-go run ./09-io-and-cli/cli-tools/3-subcommands greet -name="Gopher"
-```
+- why `flag.Parse()` gives you safer CLI input than manual `os.Args` slicing
+- why `--dry-run` is a core safety feature for filesystem-changing tools
+- why subcommands are a better scaling pattern than one giant `main()`
 
-## Exercise: File Organizer (`4-file-organizer`)
+then the CLI part of Section 09 is doing its job.
 
-Build a CLI tool that organizes files in a directory by extension, with a `--dry-run` flag so you
-can inspect the plan safely before moving anything.
+## Next Step
 
-```bash
-go run ./09-io-and-cli/cli-tools/4-file-organizer/_starter --dir=./my-folder
-go run ./09-io-and-cli/cli-tools/4-file-organizer --dir=./my-folder
-```
-
-## References
-
-- [Package flag](https://pkg.go.dev/flag)
-- [Package os](https://pkg.go.dev/os)
-
-## Learning Path
-
-| ID | Lesson | Concept | Requires |
-| --- | --- | --- | --- |
-| CL.1 | [args](./1-args) | `os.Args` · `os.Getenv` · `os.Exit` codes · safe index access | entry |
-| CL.2 | [flags](./2-flags) | `flag.String`/`Int`/`Bool` · `flag.Parse()` · pointer return · `-help` | CL.1 |
-| CL.3 | [subcommands](./3-subcommands) | `flag.NewFlagSet` · `os.Args[2:]` slicing · switch routing | CL.1, CL.2 |
+After `CL.4`, continue to the [Encoding track](../encoding) or back to the
+[Section 09 overview](../README.md).
