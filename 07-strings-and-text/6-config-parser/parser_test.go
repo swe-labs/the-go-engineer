@@ -4,7 +4,10 @@
 
 package main
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 // ============================================================================
 // Tests for: Config Parser (Strings Exercise)
@@ -93,5 +96,44 @@ func TestParseConfigEmptyInput(t *testing.T) {
 
 	if len(config) != 0 {
 		t.Errorf("expected 0 keys for empty input, got %d", len(config))
+	}
+}
+
+func TestParseConfigRejectsInvalidLine(t *testing.T) {
+	input := `
+host = localhost
+this is not valid
+`
+
+	_, err := parseConfig(input)
+	if err == nil {
+		t.Fatal("parseConfig should fail on malformed input")
+	}
+
+	if !strings.Contains(err.Error(), `line 3: "this is not valid" is invalid`) {
+		t.Fatalf("unexpected parse error: %v", err)
+	}
+}
+
+func TestRenderConfigStableSummary(t *testing.T) {
+	config := map[string]string{
+		"port": "8080",
+		"host": "localhost",
+		"name": "my-app",
+	}
+
+	got, err := renderConfig(config)
+	if err != nil {
+		t.Fatalf("renderConfig failed: %v", err)
+	}
+
+	want := `Parsed Config Summary
+- host="localhost"
+- name="my-app"
+- port="8080"
+`
+
+	if got != want {
+		t.Fatalf("renderConfig output mismatch\nwant:\n%s\ngot:\n%s", want, got)
 	}
 }
