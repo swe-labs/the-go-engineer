@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Section 7: Strings & Text - Config Parser (Exercise)
+// Section 7: Strings & Text — Config Parser (Exercise)
 // Level: Intermediate
 // ============================================================================
 //
