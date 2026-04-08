@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -7,8 +7,8 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 09: Filesystem - Log Search Tool (Exercise Starter)
-// Level: Intermediate -> Advanced
+// Section 09: Filesystem — Log Search Tool (Exercise Starter)
+// Level: Intermediate → Advanced
 // ============================================================================
 //
 // EXERCISE: Build a Directory Traversal Log Search Tool
@@ -19,7 +19,7 @@ import "fmt"
 //         using bufio.Scanner for line-by-line reading
 //  3. [ ] Implement `searchDirectory(rootDir, keyword string) ([]SearchResult, error)`
 //         using filepath.WalkDir for recursive traversal
-//  4. [ ] Filter by extension Ã¢â‚¬â€ only search .log and .txt files
+//  4. [ ] Filter by extension — only search .log and .txt files
 //  5. [ ] Make the search case-insensitive using strings.ToLower
 //  6. [ ] In main(), create sample log files and search them
 //
@@ -47,3 +47,4 @@ func main() {
 	fmt.Println()
 	fmt.Println("When finished, compare your solution with ../main.go")
 }
+

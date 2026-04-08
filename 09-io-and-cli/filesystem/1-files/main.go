@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -13,17 +13,17 @@ import (
 )
 
 // ============================================================================
-// Section 09: Filesystem - File I/O
-// Level: Beginner -> Intermediate
+// Section 09: Filesystem — File I/O
+// Level: Beginner → Intermediate
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - os.WriteFile / os.ReadFile Ã¢â‚¬â€ simple one-shot file operations
-//   - os.Create / os.Open Ã¢â‚¬â€ file handles for streaming I/O
-//   - bufio.Scanner Ã¢â‚¬â€ reading files line by line (memory efficient)
-//   - os.OpenFile Ã¢â‚¬â€ fine-grained control with flags (append, create, etc.)
-//   - File permissions (0644, 0755) Ã¢â‚¬â€ the Unix permission model
-//   - defer file.Close() Ã¢â‚¬â€ the essential cleanup pattern
+//   - os.WriteFile / os.ReadFile — simple one-shot file operations
+//   - os.Create / os.Open — file handles for streaming I/O
+//   - bufio.Scanner — reading files line by line (memory efficient)
+//   - os.OpenFile — fine-grained control with flags (append, create, etc.)
+//   - File permissions (0644, 0755) — the Unix permission model
+//   - defer file.Close() — the essential cleanup pattern
 //
 // ENGINEERING DEPTH:
 //   When you call `os.Open()`, the Go runtime makes a "syscall" (System Call)
@@ -65,7 +65,7 @@ func main() {
 	fmt.Printf("Working in: %s\n\n", tmpDir)
 
 	// =====================================================================
-	// 1. os.WriteFile Ã¢â‚¬â€ Write an entire file in one call
+	// 1. os.WriteFile — Write an entire file in one call
 	// =====================================================================
 	// os.WriteFile(path, data, permission)
 	//   - path: where to write
@@ -81,10 +81,10 @@ func main() {
 	if err != nil {
 		log.Fatal("WriteFile failed:", err)
 	}
-	fmt.Println("1Ã¯Â¸ÂÃ¢Æ’Â£  Wrote servers.txt with os.WriteFile")
+	fmt.Println("1️⃣  Wrote servers.txt with os.WriteFile")
 
 	// =====================================================================
-	// 2. os.ReadFile Ã¢â‚¬â€ Read an entire file into memory
+	// 2. os.ReadFile — Read an entire file into memory
 	// =====================================================================
 	// os.ReadFile(path) returns ([]byte, error).
 	// The entire file is loaded into RAM as a byte slice.
@@ -97,52 +97,52 @@ func main() {
 	}
 	// Convert []byte to string for printing.
 	// string(data) creates a new string from the byte slice.
-	fmt.Printf("2Ã¯Â¸ÂÃ¢Æ’Â£  Read servers.txt:\n%s\n", string(data))
+	fmt.Printf("2️⃣  Read servers.txt:\n%s\n", string(data))
 
 	// =====================================================================
-	// 3. bufio.Scanner Ã¢â‚¬â€ Read a file LINE BY LINE
+	// 3. bufio.Scanner — Read a file LINE BY LINE
 	// =====================================================================
 	// For large files, reading line-by-line is memory efficient.
 	// bufio.Scanner buffers reads internally (default 64KB buffer).
 	//
 	// Pattern:
 	//   file := os.Open(path)
-	//   defer file.Close()       Ã¢â€ Â Essential cleanup
+	//   defer file.Close()       ← Essential cleanup
 	//   scanner := bufio.NewScanner(file)
-	//   for scanner.Scan() {     Ã¢â€ Â Reads one line per iteration
+	//   for scanner.Scan() {     ← Reads one line per iteration
 	//       line := scanner.Text()
 	//   }
-	fmt.Println("3Ã¯Â¸ÂÃ¢Æ’Â£  Reading line-by-line with bufio.Scanner:")
+	fmt.Println("3️⃣  Reading line-by-line with bufio.Scanner:")
 	readLineByLine(filePath)
 	fmt.Println()
 
 	// =====================================================================
-	// 4. os.OpenFile Ã¢â‚¬â€ Append to a file
+	// 4. os.OpenFile — Append to a file
 	// =====================================================================
 	// os.OpenFile gives you fine-grained control with FLAGS:
-	//   os.O_APPEND Ã¢â‚¬â€ Write at the END of the file (don't overwrite)
-	//   os.O_CREATE Ã¢â‚¬â€ Create the file if it doesn't exist
-	//   os.O_WRONLY Ã¢â‚¬â€ Open for writing only
-	//   os.O_RDONLY Ã¢â‚¬â€ Open for reading only
-	//   os.O_RDWR   Ã¢â‚¬â€ Open for reading AND writing
-	//   os.O_TRUNC  Ã¢â‚¬â€ Truncate (empty) the file when opening
+	//   os.O_APPEND — Write at the END of the file (don't overwrite)
+	//   os.O_CREATE — Create the file if it doesn't exist
+	//   os.O_WRONLY — Open for writing only
+	//   os.O_RDONLY — Open for reading only
+	//   os.O_RDWR   — Open for reading AND writing
+	//   os.O_TRUNC  — Truncate (empty) the file when opening
 	//
 	// Combine flags with | (bitwise OR):
 	//   os.O_APPEND | os.O_CREATE | os.O_WRONLY
 	appendPath := filepath.Join(tmpDir, "deploy-log.txt")
 
-	// First write Ã¢â‚¬â€ creates the file
+	// First write — creates the file
 	appendToFile(appendPath, "Deployed web-01 to us-east-1\n")
 	appendToFile(appendPath, "Deployed db-01 to us-west-2\n")
 	appendToFile(appendPath, "Deployed api-01 to eu-west-1\n")
-	fmt.Println("4Ã¯Â¸ÂÃ¢Æ’Â£  Appended 3 entries to deploy-log.txt")
+	fmt.Println("4️⃣  Appended 3 entries to deploy-log.txt")
 
 	// Read back the appended content
 	logData, _ := os.ReadFile(appendPath)
 	fmt.Printf("    Contents:\n%s\n", string(logData))
 
 	// =====================================================================
-	// 5. os.Create Ã¢â‚¬â€ Create a new file (or truncate existing)
+	// 5. os.Create — Create a new file (or truncate existing)
 	// =====================================================================
 	// os.Create is shorthand for os.OpenFile(path, O_RDWR|O_CREATE|O_TRUNC, 0666).
 	// WARNING: If the file exists, it EMPTIES it first (truncates to 0 bytes).
@@ -160,7 +160,7 @@ func main() {
 	file.WriteString("host = 0.0.0.0\n")
 	file.WriteString("port = 8080\n")
 	file.WriteString("workers = 4\n")
-	fmt.Println("5Ã¯Â¸ÂÃ¢Æ’Â£  Created config.ini with os.Create")
+	fmt.Println("5️⃣  Created config.ini with os.Create")
 	fmt.Println()
 
 	fmt.Println("KEY TAKEAWAY:")
@@ -171,7 +171,7 @@ func main() {
 	fmt.Println("  - ALWAYS defer file.Close() after opening a file")
 	fmt.Println("  - File permissions: 0644 (read-write owner, read others)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("Ã°Å¸Å¡â‚¬ NEXT UP: FS.2 paths")
+	fmt.Println("🚀 NEXT UP: FS.2 paths")
 	fmt.Println("   Current: FS.1 (files)")
 	fmt.Println("---------------------------------------------------")
 }
@@ -222,3 +222,4 @@ func appendToFile(path, text string) {
 		log.Fatal("WriteString failed:", err)
 	}
 }
+

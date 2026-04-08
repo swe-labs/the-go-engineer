@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -12,14 +12,14 @@ import (
 )
 
 // ============================================================================
-// Section 09: CLI Tools - Command-Line Arguments
+// Section 09: CLI Tools — Command-Line Arguments
 // Level: Beginner
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - os.Args â€” raw access to command-line arguments
-//   - os.Getenv â€” reading environment variables
-//   - os.Exit â€” exiting with status codes (0=success, 1=error)
+//   - os.Args — raw access to command-line arguments
+//   - os.Getenv — reading environment variables
+//   - os.Exit — exiting with status codes (0=success, 1=error)
 //   - Building a simple CLI tool from scratch
 //
 // ENGINEERING DEPTH:
@@ -65,7 +65,7 @@ func main() {
 	fmt.Println()
 
 	// --- ENVIRONMENT VARIABLES ---
-	// os.Getenv reads environment variables â€” returns "" if not set.
+	// os.Getenv reads environment variables — returns "" if not set.
 	// Environment variables are the standard way to configure production apps:
 	//   DATABASE_URL, API_KEY, PORT, LOG_LEVEL, etc.
 	fmt.Println("=== Environment Variables ===")
@@ -90,9 +90,9 @@ func main() {
 	// Deferred functions DO NOT RUN after os.Exit.
 	// Use it at the very end, or for fatal errors only.
 	fmt.Println("=== Exit Codes ===")
-	fmt.Println("  os.Exit(0) â€” success")
-	fmt.Println("  os.Exit(1) â€” error")
-	fmt.Println("  os.Exit(2) â€” usage error")
+	fmt.Println("  os.Exit(0) — success")
+	fmt.Println("  os.Exit(1) — error")
+	fmt.Println("  os.Exit(2) — usage error")
 
 	// Example: validate minimum arguments
 	if len(os.Args) > 1 && os.Args[1] == "--fail" {
@@ -109,7 +109,8 @@ func main() {
 	fmt.Println()
 	fmt.Println("   Next: go run ./09-io-and-cli/cli-tools/2-flags -name='The Go Engineer' -count=3")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: CL.2 flags")
+	fmt.Println("🚀 NEXT UP: CL.2 flags")
 	fmt.Println("   Current: CL.1 (args)")
 	fmt.Println("---------------------------------------------------")
 }
+

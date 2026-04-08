@@ -491,8 +491,69 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
 	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
+	errorsFound += validateV2TextEncoding(root, sectionIDs, cur.Items, report)
 
 	return len(cur.Sections), len(cur.Items), errorsFound, true, nil
+}
+
+var mojibakeMarkers = []string{
+	"\uFFFD",
+	"Ã¢",
+	"Ã°",
+	"Ãƒ",
+	"Ã‚",
+	"ðŸ",
+	"â€”",
+	"â†",
+	"âœ",
+	"â",
+}
+
+func validateV2TextEncoding(root string, sections map[string]V2Section, items []V2Item, report func(string)) int {
+	errorsFound := 0
+
+	for _, item := range items {
+		section, exists := sections[item.SectionID]
+		if !exists {
+			continue
+		}
+		if section.Number < "09" {
+			continue
+		}
+
+		candidateFiles := []string{
+			filepath.Join(item.Path, "main.go"),
+			filepath.Join(item.Path, "README.md"),
+		}
+		if item.StarterPath != "" {
+			candidateFiles = append(candidateFiles, filepath.Join(item.StarterPath, "main.go"))
+		}
+
+		for _, rel := range candidateFiles {
+			abs := filepath.Join(root, rel)
+			if _, err := os.Stat(abs); err != nil {
+				continue
+			}
+
+			data, err := os.ReadFile(abs)
+			if err != nil {
+				report(fmt.Sprintf("Failed to read v2 text surface: %s -> %v", filepath.ToSlash(rel), err))
+				errorsFound++
+				continue
+			}
+
+			text := string(data)
+			for _, marker := range mojibakeMarkers {
+				if strings.Contains(text, marker) {
+					report(fmt.Sprintf("Possible mojibake in v2 text surface: %s -> %s", item.ID, filepath.ToSlash(rel)))
+					errorsFound++
+					break
+				}
+			}
+		}
+	}
+
+	return errorsFound
 }
 
 func validateV2SectionLabels(root string, sections map[string]V2Section, items []V2Item, report func(string)) int {
