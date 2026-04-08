@@ -198,7 +198,7 @@
                 {
                     "id": "DS.4",
                     "name": "pointers",
-                    "concept": "&amp; \u00b7 * \u00b7 pass-by-value vs reference \u00b7 nil",
+                    "concept": "& \u00b7 * \u00b7 pass-by-value vs reference \u00b7 nil",
                     "prerequisites": [
                         "DS.1",
                         "DS.2"
@@ -242,7 +242,7 @@
         {
             "id": "s04",
             "num": "\u00a704",
-            "title": "Functions &amp; Errors",
+            "title": "Functions & Errors",
             "description": "Functions first, then closures, then error-as-value, then cleanup. Defer must precede panic/recover. Error-wrapping builds on custom errors.",
             "lessons": [{
                     "id": "FE.1",
@@ -256,7 +256,7 @@
                 },
                 {
                     "id": "FE.2",
-                    "name": "closures &amp; recursion",
+                    "name": "closures & recursion",
                     "concept": "Captured variables \u00b7 anonymous functions \u00b7 stack frames",
                     "prerequisites": [
                         "FE.1"
@@ -331,7 +331,7 @@
                 },
                 {
                     "id": "FE.8",
-                    "name": "panic &amp; recover",
+                    "name": "panic & recover",
                     "concept": "Stack unwinding \u00b7 recover inside defer only",
                     "prerequisites": [
                         "FE.7"
@@ -376,7 +376,7 @@
         {
             "id": "s05",
             "num": "\u00a705",
-            "title": "Types &amp; Interfaces",
+            "title": "Types & Interfaces",
             "description": "Structs carry data; methods attach behaviour; interfaces name contracts. Stringer is the first interface you implement. Generics require understanding constraints, which build on interfaces.",
             "lessons": [{
                     "id": "TI.1",
@@ -501,7 +501,7 @@
         {
             "id": "s07",
             "num": "\u00a707",
-            "title": "Strings &amp; Text",
+            "title": "Strings & Text",
             "description": "String internals first, then formatting verbs, then the byte/rune distinction, then regex, then templates. Each lesson assumes knowledge of the previous.",
             "lessons": [{
                     "id": "ST.1",
@@ -527,7 +527,7 @@
                 },
                 {
                     "id": "ST.3",
-                    "name": "unicode &amp; runes",
+                    "name": "unicode & runes",
                     "concept": "UTF-8 multi-byte \u00b7 rune \u00b7 for-range vs byte iteration",
                     "prerequisites": [
                         "ST.1",
@@ -569,7 +569,7 @@
         {
             "id": "s08",
             "num": "\u00a708",
-            "title": "Modules &amp; Packages",
+            "title": "Modules & Packages",
             "description": "Module anatomy first, then add/remove/inspect commands, then semantic versioning and the replace directive. Strictly linear.",
             "lessons": [{
                     "id": "MP.1",
@@ -1113,7 +1113,7 @@
         {
             "id": "s11con",
             "num": "\u00a711 \u00b7 Goroutines",
-            "title": "Concurrency \u2014 Goroutines &amp; Channels",
+            "title": "Concurrency \u2014 Goroutines & Channels",
             "description": "Goroutines first. WaitGroups require goroutines. Channels require both. Buffered channels extend unbuffered. Closing extends buffered. Select requires all channel forms. Races and sync primitives are a parallel track that needs goroutines and basic channels. The pipeline project and downloader exercise require channels + closing.",
             "lessons": [{
                     "id": "GC.1",
@@ -1140,7 +1140,7 @@
                 {
                     "id": "GC.3",
                     "name": "channels (unbuffered)",
-                    "concept": "make(chan T) \u00b7 send \u00b7 receive \u00b7 block-until-ready \u00b7 chan&lt;- / &lt;-chan",
+                    "concept": "make(chan T) \u00b7 send \u00b7 receive \u00b7 block-until-ready \u00b7 chan<- / <-chan",
                     "prerequisites": [
                         "GC.1",
                         "GC.2"
@@ -1251,7 +1251,7 @@
             "description": "Background is the root \u2014 all others derive from it. WithCancel adds manual cancellation. WithTimeout builds on that with an automatic deadline. WithValue adds metadata. The exercise requires all four forms.",
             "lessons": [{
                     "id": "CT.1",
-                    "name": "Background &amp; TODO",
+                    "name": "Background & TODO",
                     "concept": "Root context \u00b7 Context interface (Deadline/Done/Err/Value)",
                     "prerequisites": [],
                     "is_entry": true,
@@ -1303,7 +1303,7 @@
         {
             "id": "s11time",
             "num": "\u00a711 \u00b7 Time",
-            "title": "Concurrency \u2014 Time &amp; Scheduling",
+            "title": "Concurrency \u2014 Time & Scheduling",
             "description": "Time basics before formatting before timers and tickers. Random is independent of scheduling. Timezones require both basics and formatting. The scheduler requires tickers. The reminder exercise requires basics through timers.",
             "lessons": [{
                     "id": "TM.1",
@@ -1329,8 +1329,8 @@
                 },
                 {
                     "id": "TM.3",
-                    "name": "timers &amp; tickers",
-                    "concept": "time.NewTimer \u00b7 time.NewTicker \u00b7 &lt;-C \u00b7 ticker.Stop() leak",
+                    "name": "timers & tickers",
+                    "concept": "time.NewTimer \u00b7 time.NewTicker \u00b7 <-C \u00b7 ticker.Stop() leak",
                     "prerequisites": [
                         "TM.1",
                         "TM.2"
@@ -1654,8 +1654,8 @@
         },
         {
             "id": "s14docker",
-            "num": "Â§14 Â· Docker",
-            "title": "Architecture â€” Docker & Deployment",
+            "num": "\u00a714 \u00b7 Docker",
+            "title": "Architecture \u2014 Docker & Deployment",
             "description": "Single-stage Dockerfile before multi-stage. Layer caching is fundamental to optimization. Compose orchestrates local development with multiple services.",
             "lessons": [{
                     "id": "DO.1",
