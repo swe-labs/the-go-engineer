@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2026 Rasel Hossen
+// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -47,4 +47,3 @@ func main() {
 	fmt.Println()
 	fmt.Println("When finished, compare your solution with ../main.go")
 }
-

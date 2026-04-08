@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2026 Rasel Hossen
+// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -140,4 +140,3 @@ func main() {
 	fmt.Println("  - filepath.Ext returns the extension (including the dot)")
 	fmt.Println("  - --dry-run is essential for any CLI that modifies the filesystem")
 }
-

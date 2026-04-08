@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2026 Rasel Hossen
+// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -185,4 +185,3 @@ DONE: Deploy v2.1 to staging`,
 	fmt.Println("  - Filter by extension to avoid searching binary files")
 	fmt.Println("  - Always handle errors gracefully — skip files you can't read")
 }
-

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2026 Rasel Hossen
+// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -132,4 +132,3 @@ func main() {
 	fmt.Println("  - Always validate config after parsing — zero values hide missing fields")
 	fmt.Println("  - Use %w in fmt.Errorf to wrap errors for context")
 }
-
