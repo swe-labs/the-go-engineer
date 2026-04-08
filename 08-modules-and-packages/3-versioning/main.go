@@ -8,7 +8,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 8: Semantic Versioning & Replace Directive
+// Section 08: Modules and Packages — Versioning Workshop
 // Level: Intermediate → Advanced
 // ============================================================================
 //
@@ -18,7 +18,7 @@ import "fmt"
 //   │ │ │
 //   │ │ └── PATCH: bug fixes (backward compatible)
 //   │ └──── MINOR: new features (backward compatible)
-//   └────── MAJOR: breaking changes (NOT backward compatible)
+//   └────── MAJOR: breaking changes (not backward compatible)
 //
 // MAJOR VERSION RULE (v2+):
 //   When a module reaches v2, the import path MUST include /v2:
@@ -36,24 +36,15 @@ import "fmt"
 //     replace github.com/original/pkg => github.com/myfork/pkg v1.0.0
 //
 // THE EXCLUDE DIRECTIVE:
-//   Block specific versions (e.g., known buggy releases):
+//   Block specific versions (for example, known buggy releases):
 //     exclude github.com/some/pkg v1.2.3
 //
 // VENDORING:
 //   go mod vendor        — copy all dependencies into ./vendor/
 //   go build -mod=vendor — build using vendored dependencies only
-//
-//   Use Cases:
-//   - Air-gapped environments (no internet access)
-//   - Reproducible builds without relying on module proxy
-//   - Some CI/CD pipelines require vendoring
-//
-// REFERENCES:
-//   - https://go.dev/doc/modules/version-numbers
-//   - https://semver.org/
 // ============================================================================
 
-// Version represents a semantic version
+// Version represents a semantic version.
 type Version struct {
 	Major int
 	Minor int
@@ -64,12 +55,12 @@ func (v Version) String() string {
 	return fmt.Sprintf("v%d.%d.%d", v.Major, v.Minor, v.Patch)
 }
 
-// IsCompatible checks if two versions are compatible (same major version)
+// IsCompatible checks whether two versions share the same major version.
 func (v Version) IsCompatible(other Version) bool {
 	return v.Major == other.Major
 }
 
-// IsNewer checks if v is newer than other
+// IsNewer compares major, then minor, then patch.
 func (v Version) IsNewer(other Version) bool {
 	if v.Major != other.Major {
 		return v.Major > other.Major
@@ -86,23 +77,25 @@ func main() {
 
 	versions := []Version{
 		{1, 0, 0},
-		{1, 1, 0}, // Minor bump: new features, backward compatible
-		{1, 1, 1}, // Patch bump: bug fix
-		{2, 0, 0}, // Major bump: BREAKING CHANGE
+		{1, 1, 0},
+		{1, 1, 1},
+		{2, 0, 0},
 		{2, 1, 0},
 	}
 
 	fmt.Println("Version history:")
 	for i, v := range versions {
-		if i > 0 {
-			prev := versions[i-1]
-			compatible := v.IsCompatible(prev)
-			emoji := "✅"
-			if !compatible {
-				emoji = "⚠️  BREAKING"
-			}
-			fmt.Printf("  %s → %s  %s\n", prev, v, emoji)
+		if i == 0 {
+			continue
 		}
+
+		prev := versions[i-1]
+		status := "✅ compatible"
+		if !v.IsCompatible(prev) {
+			status = "⚠️  BREAKING"
+		}
+
+		fmt.Printf("  %s → %s  %s\n", prev, v, status)
 	}
 
 	fmt.Println()
@@ -112,8 +105,12 @@ func main() {
 	fmt.Println()
 	fmt.Println("  import \"github.com/example/pkg\"    ← v0.x or v1.x")
 	fmt.Println("  import \"github.com/example/pkg/v2\" ← v2.x")
+	fmt.Println()
+	fmt.Println("Replace is most useful during local development or controlled fork testing.")
+	fmt.Println("It should clarify dependency resolution, not hide long-term version problems.")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: FS.1 files")
-	fmt.Println("   Current: MP.3 (versioning)")
+	fmt.Println("NEXT STEP: Optional MP.4 build tags")
+	fmt.Println("Then continue to Section 09 when you're ready.")
+	fmt.Println("Current: MP.3 (versioning workshop)")
 	fmt.Println("---------------------------------------------------")
 }

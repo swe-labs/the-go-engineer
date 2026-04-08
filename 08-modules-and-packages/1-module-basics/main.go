@@ -8,7 +8,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 8: Modules & Dependency Management — Module Basics
+// Section 08: Modules and Packages — Module Basics
 // Level: Beginner → Intermediate
 // ============================================================================
 //
@@ -32,7 +32,7 @@ import "fmt"
 //
 // File: go.mod
 //
-//	module github.com/rasel9t6/the-go-engineer ← Module path: the root import path for ALL packages
+//	module github.com/rasel9t6/the-go-engineer ← Module path: the root import path for all packages
 //	go 1.24                                    ← Minimum Go version required to build
 //
 //	require (
@@ -42,7 +42,7 @@ import "fmt"
 //	)
 //
 //	require (
-//	    github.com/davecgh/go-spew v1.1.1 // indirect ← Transitive dep (pulled by testify)
+//	    github.com/davecgh/go-spew v1.1.1 // indirect ← Transitive dependency
 //	    github.com/stretchr/objx v0.5.2 // indirect   ← Pulled by testify/mock
 //	)
 //
@@ -62,21 +62,19 @@ import "fmt"
 //    - ALWAYS commit go.sum to version control
 //
 // 4. // indirect means YOUR code doesn't import it directly.
-//    - A dependency of one of your dependencies.
+//    - It came from one of your dependencies.
 //    - go mod tidy adds this annotation automatically.
 
 func main() {
 	fmt.Println("=== Go Module Basics ===")
 	fmt.Println()
 
-	// Demonstrate how import paths map to module structure
 	fmt.Println("Module path: github.com/rasel9t6/the-go-engineer")
-	fmt.Println("This means all packages in this repo are importable as:")
+	fmt.Println("This means packages in this repo are importable as:")
 	fmt.Println("  github.com/rasel9t6/the-go-engineer/10-web-and-database/databases/6-repository/models")
 	fmt.Println("  github.com/rasel9t6/the-go-engineer/10-web-and-database/databases/6-repository/repository")
 	fmt.Println()
 
-	// Show the essential commands
 	commands := []struct {
 		cmd  string
 		desc string
@@ -97,6 +95,7 @@ func main() {
 	for _, c := range commands {
 		fmt.Printf("  %-32s — %s\n", c.cmd, c.desc)
 	}
+
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("🚀 NEXT UP: MP.2 managing deps")
 	fmt.Println("   Current: MP.1 (module basics)")

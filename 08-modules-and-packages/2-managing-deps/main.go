@@ -2,15 +2,8 @@
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
-package main
-
-// ============================================================================
-// Section 8: Modules & Dependencies — Managing Dependencies
-// Level: Intermediate
-// ============================================================================
-//
 // RUN: go run ./08-modules-and-packages/2-managing-deps
-// ============================================================================
+package main
 
 import (
 	"fmt"
@@ -19,11 +12,11 @@ import (
 )
 
 // ============================================================================
-// Section 8: Managing Dependencies
+// Section 08: Modules and Packages — Managing Dependencies
 // Level: Intermediate
 // ============================================================================
 //
-// This file demonstrates dependency management workflows.
+// This file demonstrates dependency-management workflows.
 // Run the commands below in a terminal to see them in action.
 //
 // ADDING DEPENDENCIES:
@@ -50,14 +43,13 @@ func main() {
 	fmt.Println("=== Managing Dependencies ===")
 	fmt.Println()
 
-	// Run "go list -m all" to show current dependencies
 	fmt.Println("Current module dependencies:")
 	fmt.Println(strings.Repeat("-", 60))
 
 	out, err := exec.Command("go", "list", "-m", "all").Output()
 	if err != nil {
 		fmt.Printf("Error running 'go list -m all': %v\n", err)
-		fmt.Println("(This is expected if CGO is not available for sqlite3)")
+		fmt.Println("(This can happen if CGO-backed dependencies are unavailable.)")
 		return
 	}
 
@@ -66,24 +58,23 @@ func main() {
 		if line == "" {
 			continue
 		}
-		// Classify as direct or indirect
 		if strings.Contains(line, "the-go-engineer") {
-			fmt.Printf("  [ROOT]     %s\n", line)
-		} else {
-			fmt.Printf("  [DEP]      %s\n", line)
+			fmt.Printf("  [ROOT] %s\n", line)
+			continue
 		}
+		fmt.Printf("  [DEP]  %s\n", line)
 	}
 
 	fmt.Println()
 	fmt.Println(strings.Repeat("-", 60))
-
-	// Show why a specific indirect dependency exists
 	fmt.Println("\nWhy do we have github.com/stretchr/objx?")
+
 	whyOut, err := exec.Command("go", "mod", "why", "github.com/stretchr/objx").Output()
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		return
 	}
+
 	fmt.Println(string(whyOut))
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("🚀 NEXT UP: MP.3 versioning")

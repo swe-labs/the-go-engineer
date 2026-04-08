@@ -74,6 +74,25 @@
       "outputs": [
         "ST.6"
       ]
+    },
+    {
+      "id": "s08",
+      "number": "08",
+      "slug": "modules-and-packages",
+      "title": "Modules and Packages",
+      "phase": "foundations",
+      "summary": "Teach learners how Go modules define package boundaries, dependency resolution, versioned imports, and optional build surfaces.",
+      "status": "pilot",
+      "prerequisites": [
+        "s07"
+      ],
+      "path_prefix": "08-modules-and-packages",
+      "entry_points": [
+        "MP.1"
+      ],
+      "outputs": [
+        "MP.3"
+      ]
     }
   ],
   "items": [
@@ -921,6 +940,131 @@
         "strings",
         "regex",
         "templates"
+      ]
+    },
+    {
+      "id": "MP.1",
+      "section_id": "s08",
+      "slug": "module-basics",
+      "title": "Module Basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Explain what go.mod and go.sum do, how module paths identify code, and which commands keep module metadata healthy.",
+      "objectives": [
+        "Explain the roles of go.mod and go.sum without treating them as mysterious generated files",
+        "Use core module commands like go mod tidy and go list to inspect and maintain dependency state"
+      ],
+      "prerequisites": [],
+      "production_relevance": "Every Go service, library, and CLI depends on module metadata being correct, reproducible, and understandable during local development and CI.",
+      "path": "08-modules-and-packages/1-module-basics",
+      "run_command": "go run ./08-modules-and-packages/1-module-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "MP.2"
+      ],
+      "tags": [
+        "modules",
+        "go.mod",
+        "go.sum"
+      ]
+    },
+    {
+      "id": "MP.2",
+      "section_id": "s08",
+      "slug": "managing-dependencies",
+      "title": "Managing Dependencies",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Show how to add, inspect, trim, and explain dependencies with the Go toolchain instead of editing module files by hand.",
+      "objectives": [
+        "Use go get, go mod tidy, and go list intentionally when dependency state changes",
+        "Explain direct versus indirect dependencies and trace why a package is present"
+      ],
+      "prerequisites": [
+        "MP.1"
+      ],
+      "production_relevance": "Dependency drift, unexpected indirect packages, and confused upgrade paths are normal engineering problems, so teams need repeatable module workflows.",
+      "path": "08-modules-and-packages/2-managing-deps",
+      "run_command": "go run ./08-modules-and-packages/2-managing-deps",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "MP.3"
+      ],
+      "tags": [
+        "dependencies",
+        "go-get",
+        "tidy"
+      ]
+    },
+    {
+      "id": "MP.3",
+      "section_id": "s08",
+      "slug": "versioning-workshop",
+      "title": "Versioning Workshop",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "estimated_time": 75,
+      "summary": "Combine semantic versioning, the v2 import-path rule, and replace-directive reasoning in one runnable milestone with tests.",
+      "objectives": [
+        "Model semantic versions and compare compatibility boundaries using the major-version rule",
+        "Explain why Go treats v2+ modules differently and when replace is useful during local development"
+      ],
+      "prerequisites": [
+        "MP.1",
+        "MP.2"
+      ],
+      "production_relevance": "Version boundaries and local overrides shape library upgrades, internal modules, and release safety in real Go codebases.",
+      "path": "08-modules-and-packages/3-versioning",
+      "run_command": "go run ./08-modules-and-packages/3-versioning",
+      "test_command": "go test ./08-modules-and-packages/3-versioning",
+      "starter_path": "08-modules-and-packages/3-versioning/_starter",
+      "next_items": [],
+      "tags": [
+        "exercise",
+        "versioning",
+        "modules",
+        "replace"
+      ]
+    },
+    {
+      "id": "MP.4",
+      "section_id": "s08",
+      "slug": "build-tags",
+      "title": "Build Tags",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "stretch",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Introduce conditional compilation and tagged tests for platform-specific code and optional integration surfaces.",
+      "objectives": [
+        "Use //go:build constraints to separate platform-specific files cleanly",
+        "Explain why slow integration tests are often hidden behind opt-in tags"
+      ],
+      "prerequisites": [
+        "MP.1",
+        "MP.2"
+      ],
+      "production_relevance": "Build tags show up in cross-platform tools, optional integrations, and test suites that need fast defaults with explicit opt-in for heavy checks.",
+      "path": "08-modules-and-packages/4-build-tags",
+      "run_command": "go run ./08-modules-and-packages/4-build-tags",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [],
+      "tags": [
+        "build-tags",
+        "integration-tests",
+        "platforms"
       ]
     }
   ]
