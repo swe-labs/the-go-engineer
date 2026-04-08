@@ -12,8 +12,8 @@ import (
 )
 
 // ============================================================================
-// Section 11: Encoding — JSON Marshalling (Go → JSON)
-// Level: Beginner → Intermediate
+// Section 09: Encoding - JSON Marshalling (Go -> JSON)
+// Level: Beginner -> Intermediate
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -28,7 +28,7 @@ import (
 //   Marshalling is like translating a Go struct into a language that
 //   every system understands: JSON. Your Go server speaks Go internally,
 //   but when it sends data to a browser, mobile app, or another API,
-//   it translates to JSON — the universal data format of the web.
+//   it translates to JSON Ã¢â‚¬â€ the universal data format of the web.
 //
 // ENGINEERING DEPTH:
 //   Go's `encoding/json` package heavily relies on the `reflect` (Reflection)
@@ -49,10 +49,10 @@ import (
 //
 // Common options:
 //
-//	`json:"name"`          → JSON field name is "name" (not "Name")
-//	`json:"name,omitempty"` → Omit this field if it's the zero value
-//	`json:"-"`             → NEVER include this field in JSON
-//	`json:",string"`       → Encode number/bool as a JSON string
+//	`json:"name"`          Ã¢â€ â€™ JSON field name is "name" (not "Name")
+//	`json:"name,omitempty"` Ã¢â€ â€™ Omit this field if it's the zero value
+//	`json:"-"`             Ã¢â€ â€™ NEVER include this field in JSON
+//	`json:",string"`       Ã¢â€ â€™ Encode number/bool as a JSON string
 type Product struct {
 	// ID will appear as "id" in JSON (lowercase, matching REST API conventions)
 	ID int `json:"id"`
@@ -68,7 +68,7 @@ type Product struct {
 	// by not sending {"description": ""} for products without descriptions.
 	Description string `json:"description,omitempty"`
 
-	// InStock will appear as "in_stock" (snake_case — common in REST APIs)
+	// InStock will appear as "in_stock" (snake_case Ã¢â‚¬â€ common in REST APIs)
 	InStock bool `json:"in_stock"`
 
 	// CreatedAt serializes as ISO 8601 string ("2025-01-15T10:30:00Z").
@@ -85,7 +85,7 @@ type Product struct {
 }
 
 func main() {
-	fmt.Println("=== JSON Marshalling: Go → JSON ===")
+	fmt.Println("=== JSON Marshalling: Go Ã¢â€ â€™ JSON ===")
 	fmt.Println()
 
 	// --- BASIC MARSHALLING ---
@@ -107,7 +107,7 @@ func main() {
 		log.Fatal("Marshal error:", err)
 	}
 
-	fmt.Println("1️⃣  json.Marshal (compact):")
+	fmt.Println("1Ã¯Â¸ÂÃ¢Æ’Â£  json.Marshal (compact):")
 	fmt.Printf("   %s\n\n", string(data))
 
 	// --- PRETTY-PRINTED JSON ---
@@ -120,7 +120,7 @@ func main() {
 		log.Fatal("MarshalIndent error:", err)
 	}
 
-	fmt.Println("2️⃣  json.MarshalIndent (pretty):")
+	fmt.Println("2Ã¯Â¸ÂÃ¢Æ’Â£  json.MarshalIndent (pretty):")
 	fmt.Println(string(prettyData))
 	fmt.Println()
 
@@ -133,12 +133,12 @@ func main() {
 		Price:     49.99,
 		InStock:   false,
 		CreatedAt: time.Now(),
-		// Description is "" → omitted from JSON (omitempty)
-		// Tags is nil → omitted from JSON (omitempty)
+		// Description is "" Ã¢â€ â€™ omitted from JSON (omitempty)
+		// Tags is nil Ã¢â€ â€™ omitted from JSON (omitempty)
 	}
 
 	minimalJSON, _ := json.MarshalIndent(minimal, "", "  ")
-	fmt.Println("3️⃣  omitempty (no description, no tags):")
+	fmt.Println("3Ã¯Â¸ÂÃ¢Æ’Â£  omitempty (no description, no tags):")
 	fmt.Println(string(minimalJSON))
 	fmt.Println()
 
@@ -146,13 +146,13 @@ func main() {
 	// CRITICAL: Only EXPORTED fields (uppercase first letter) are marshalled.
 	// Unexported fields (lowercase) are INVISIBLE to encoding/json.
 	type internal struct {
-		Public  string `json:"public"` // ✅ Will appear in JSON
-		private string // ❌ INVISIBLE to json.Marshal (lowercase)
+		Public  string `json:"public"` // Ã¢Å“â€¦ Will appear in JSON
+		private string // Ã¢ÂÅ’ INVISIBLE to json.Marshal (lowercase)
 	}
 
 	secret := internal{Public: "visible", private: "hidden"}
 	secretJSON, _ := json.Marshal(secret)
-	fmt.Println("4️⃣  Unexported fields are invisible:")
+	fmt.Println("4Ã¯Â¸ÂÃ¢Æ’Â£  Unexported fields are invisible:")
 	fmt.Printf("   %s\n", string(secretJSON)) // Only "public" appears
 	fmt.Println("   (The 'private' field is not in the JSON!)")
 
@@ -165,7 +165,7 @@ func main() {
 	fmt.Println("  - json:\"-\": never include this field (secrets, internal data)")
 	fmt.Println("  - Only EXPORTED (Uppercase) fields appear in JSON")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: EN.2 JSON unmarshalling")
+	fmt.Println("Ã°Å¸Å¡â‚¬ NEXT UP: EN.2 JSON unmarshalling")
 	fmt.Println("   Current: EN.1 (JSON marshalling)")
 	fmt.Println("---------------------------------------------------")
 }

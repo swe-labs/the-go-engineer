@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 11: Encoding — Config File Parser (Exercise Starter)
+// Section 09: Encoding - Config File Parser (Exercise Starter)
 // Level: Intermediate
 // ============================================================================
 //

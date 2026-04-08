@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Section 10: Filesystem — io.Reader/Writer Patterns
+// Section 09: Filesystem - io.Reader/Writer Patterns
 // Level: Advanced
 // ============================================================================
 //
@@ -21,15 +21,15 @@ import (
 )
 
 // ============================================================================
-// Section 10: io.Reader and io.Writer Patterns
-// Level: Intermediate → Advanced
+// Section 09: io.Reader and io.Writer Patterns
+// Level: Intermediate -> Advanced
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - io.Reader and io.Writer — Go's most important interfaces
+//   - io.Reader and io.Writer ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Go's most important interfaces
 //   - Composing readers and writers (pipes, tee, multi)
 //   - Implementing custom readers
-//   - io.Copy — the universal glue
+//   - io.Copy ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the universal glue
 //
 // WHY THIS MATTERS:
 //   Almost everything in Go implements io.Reader or io.Writer:
@@ -56,28 +56,28 @@ func main() {
 	fmt.Println("=== io.Reader and io.Writer Patterns ===")
 	fmt.Println()
 
-	// 1. strings.Reader — turn a string into an io.Reader
+	// 1. strings.Reader ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â turn a string into an io.Reader
 	readerFromString()
 
-	// 2. bytes.Buffer — implements BOTH Reader and Writer
+	// 2. bytes.Buffer ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â implements BOTH Reader and Writer
 	bufferDemo()
 
-	// 3. io.Copy — stream data from Reader to Writer
+	// 3. io.Copy ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â stream data from Reader to Writer
 	copyDemo()
 
-	// 4. io.TeeReader — read and copy simultaneously
+	// 4. io.TeeReader ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â read and copy simultaneously
 	teeReaderDemo()
 
-	// 5. io.MultiReader — concatenate readers
+	// 5. io.MultiReader ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â concatenate readers
 	multiReaderDemo()
 
-	// 6. io.MultiWriter — write to multiple destinations at once
+	// 6. io.MultiWriter ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â write to multiple destinations at once
 	multiWriterDemo()
 
-	// 7. Custom Reader — implement the interface yourself
+	// 7. Custom Reader ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â implement the interface yourself
 	customReaderDemo()
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: ⭐ FS.8 fs.FS testing seam")
+	fmt.Println("NEXT UP: FS.7 log search tool")
 	fmt.Println("   Current: FS.6 (io.Reader / io.Writer patterns)")
 	fmt.Println("---------------------------------------------------")
 }
@@ -133,7 +133,7 @@ func copyDemo() {
 func teeReaderDemo() {
 	fmt.Println("--- 4. io.TeeReader ---")
 	// TeeReader returns a Reader that writes to w what it reads from r.
-	// Like the Unix `tee` command — read and copy simultaneously.
+	// Like the Unix `tee` command ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â read and copy simultaneously.
 	var log bytes.Buffer
 	src := strings.NewReader("This gets logged AND processed")
 
@@ -149,7 +149,7 @@ func teeReaderDemo() {
 func multiReaderDemo() {
 	fmt.Println("--- 5. io.MultiReader ---")
 	// MultiReader concatenates multiple readers into one.
-	// Reads from each in sequence — like cat in Unix.
+	// Reads from each in sequence ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â like cat in Unix.
 	header := strings.NewReader("[HEADER] ")
 	body := strings.NewReader("message body")
 	footer := strings.NewReader(" [END]")

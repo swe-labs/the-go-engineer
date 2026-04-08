@@ -490,8 +490,52 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 	}
 
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
+	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
 
 	return len(cur.Sections), len(cur.Items), errorsFound, true, nil
+}
+
+func validateV2SectionLabels(root string, sections map[string]V2Section, items []V2Item, report func(string)) int {
+	errorsFound := 0
+
+	for _, item := range items {
+		section, exists := sections[item.SectionID]
+		if !exists {
+			continue
+		}
+		if section.Number < "09" {
+			continue
+		}
+
+		expectedLabel := fmt.Sprintf("Section %s", section.Number)
+		candidateFiles := []string{
+			filepath.Join(item.Path, "main.go"),
+		}
+		if item.StarterPath != "" {
+			candidateFiles = append(candidateFiles, filepath.Join(item.StarterPath, "main.go"))
+		}
+
+		for _, rel := range candidateFiles {
+			abs := filepath.Join(root, rel)
+			if _, err := os.Stat(abs); err != nil {
+				continue
+			}
+
+			data, err := os.ReadFile(abs)
+			if err != nil {
+				report(fmt.Sprintf("Failed to read v2 section label surface: %s -> %v", filepath.ToSlash(rel), err))
+				errorsFound++
+				continue
+			}
+
+			if !strings.Contains(string(data), expectedLabel) {
+				report(fmt.Sprintf("Invalid v2 section label: %s -> %s (expected %s)", item.ID, filepath.ToSlash(rel), expectedLabel))
+				errorsFound++
+			}
+		}
+	}
+
+	return errorsFound
 }
 
 func validateV2LessonNavigation(root string, items []V2Item, report func(string)) int {

@@ -1433,7 +1433,9 @@
       "run_command": "go run ./09-io-and-cli/filesystem/1-files",
       "test_command": "",
       "starter_path": "",
-      "next_items": [],
+      "next_items": [
+        "FS.2"
+      ],
       "tags": [
         "filesystem",
         "files",
@@ -1596,7 +1598,9 @@
       "run_command": "go run ./09-io-and-cli/filesystem/6-io-patterns",
       "test_command": "",
       "starter_path": "",
-      "next_items": [],
+      "next_items": [
+        "FS.7"
+      ],
       "tags": [
         "filesystem",
         "io",

@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 19: CLI Tools — File Organizer (Exercise Starter)
+// Section 09: CLI Tools - File Organizer (Exercise Starter)
 // Level: Intermediate
 // ============================================================================
 //

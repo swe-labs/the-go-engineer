@@ -232,6 +232,8 @@ func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
 	mustMkdir(t, root, "06-composition/06-composition-and-embedding/2-embedding")
 	writeFile(t, root, "06-composition/06-composition-and-embedding/1-composition/main.go", `package main
 
+// Section 06: Composition
+
 func main() {
 	println("NEXT UP: ST.1 strings")
 }`)
@@ -248,6 +250,67 @@ func main() {
 	}
 	if !containsReport(reports, "Invalid v2 lesson navigation footer: CO.1 -> ST.1 (expected CO.2)") {
 		t.Fatalf("expected lesson-navigation error in reports: %v", reports)
+	}
+}
+
+func TestValidateRejectsWrongSectionLabelInV2Source(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.json", `{"sections":[]}`)
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s09",
+      "number": "09",
+      "slug": "io-and-cli",
+      "title": "I/O and CLI",
+      "path_prefix": "09-io-and-cli",
+      "entry_points": ["CL.1"],
+      "outputs": ["CL.1"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "CL.1",
+      "section_id": "s09",
+      "slug": "args",
+      "title": "Args",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "09-io-and-cli/cli-tools/1-args",
+      "prerequisites": [],
+      "run_command": "go run ./09-io-and-cli/cli-tools/1-args",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "09-io-and-cli/cli-tools/1-args")
+	writeFile(t, root, "09-io-and-cli/cli-tools/1-args/main.go", `package main
+
+// Section 19: CLI Tools - Command-Line Arguments
+
+func main() {}
+`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 1 {
+		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	}
+	if !containsReport(reports, "Invalid v2 section label: CL.1 -> 09-io-and-cli/cli-tools/1-args/main.go (expected Section 09)") {
+		t.Fatalf("expected section-label error in reports: %v", reports)
 	}
 }
 

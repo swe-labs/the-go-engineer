@@ -11,8 +11,8 @@ import (
 )
 
 // ============================================================================
-// Section 11: Encoding — JSON Unmarshalling (JSON → Go)
-// Level: Beginner → Intermediate
+// Section 09: Encoding - JSON Unmarshalling (JSON -> Go)
+// Level: Beginner -> Intermediate
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -26,7 +26,7 @@ import (
 // ANALOGY:
 //   If Marshalling is translating FROM Go TO JSON (outgoing mail),
 //   then Unmarshalling is translating FROM JSON TO Go (incoming mail).
-//   Your server receives JSON from an API or browser → Unmarshal → Go struct.
+//   Your server receives JSON from an API or browser Ã¢â€ â€™ Unmarshal Ã¢â€ â€™ Go struct.
 //
 // ENGINEERING DEPTH:
 //   When you call `json.Unmarshal(data, &struct)`, you MUST pass a pointer.
@@ -47,7 +47,7 @@ type APIResponse struct {
 	Humidity  int      `json:"humidity"`
 	WindKmH   float64  `json:"wind_kmh"`
 	Condition string   `json:"condition"`
-	Forecast  Forecast `json:"forecast"` // Nested JSON object → nested struct
+	Forecast  Forecast `json:"forecast"` // Nested JSON object Ã¢â€ â€™ nested struct
 }
 
 // Forecast is a nested struct for the "forecast" JSON object.
@@ -59,7 +59,7 @@ type Forecast struct {
 }
 
 // Simulated JSON from a weather API.
-// In real code, this would come from http.Get() → resp.Body.
+// In real code, this would come from http.Get() Ã¢â€ â€™ resp.Body.
 var weatherJSON = `{
   "city": "Dhaka",
   "temp_celsius": 32.5,
@@ -82,7 +82,7 @@ var partialJSON = `{
 }`
 
 func main() {
-	fmt.Println("=== JSON Unmarshalling: JSON → Go ===")
+	fmt.Println("=== JSON Unmarshalling: JSON Ã¢â€ â€™ Go ===")
 	fmt.Println()
 
 	// =====================================================================
@@ -100,13 +100,13 @@ func main() {
 		log.Fatal("Unmarshal error:", err)
 	}
 
-	fmt.Println("1️⃣  Full JSON → Struct:")
+	fmt.Println("1Ã¯Â¸ÂÃ¢Æ’Â£  Full JSON Ã¢â€ â€™ Struct:")
 	fmt.Printf("   City:      %s\n", weather.City)
-	fmt.Printf("   Temp:      %.1f°C\n", weather.TempC)
+	fmt.Printf("   Temp:      %.1fÃ‚Â°C\n", weather.TempC)
 	fmt.Printf("   Humidity:  %d%%\n", weather.Humidity)
 	fmt.Printf("   Wind:      %.1f km/h\n", weather.WindKmH)
 	fmt.Printf("   Condition: %s\n", weather.Condition)
-	fmt.Printf("   Tomorrow:  %.0f°C / %.0f°C (%s)\n",
+	fmt.Printf("   Tomorrow:  %.0fÃ‚Â°C / %.0fÃ‚Â°C (%s)\n",
 		weather.Forecast.TomorrowHigh,
 		weather.Forecast.TomorrowLow,
 		weather.Forecast.Summary)
@@ -115,17 +115,17 @@ func main() {
 	// =====================================================================
 	// 2. Missing & Extra Fields
 	// =====================================================================
-	// MISSING JSON fields → struct field gets its ZERO VALUE
-	// EXTRA JSON fields → silently IGNORED (no error)
+	// MISSING JSON fields Ã¢â€ â€™ struct field gets its ZERO VALUE
+	// EXTRA JSON fields Ã¢â€ â€™ silently IGNORED (no error)
 	// This is a safety feature: your struct only gets what it can handle.
 	var partial APIResponse
 	json.Unmarshal([]byte(partialJSON), &partial)
 
-	fmt.Println("2️⃣  Partial JSON (missing fields → zero values):")
-	fmt.Printf("   City:     %s\n", partial.City)                           // "Tokyo"
-	fmt.Printf("   Temp:     %.1f°C\n", partial.TempC)                      // 18.0
-	fmt.Printf("   Humidity: %d (zero — not in JSON)\n", partial.Humidity)  // 0
-	fmt.Printf("   Wind:     %.1f (zero — not in JSON)\n", partial.WindKmH) // 0.0
+	fmt.Println("2Ã¯Â¸ÂÃ¢Æ’Â£  Partial JSON (missing fields Ã¢â€ â€™ zero values):")
+	fmt.Printf("   City:     %s\n", partial.City)                                  // "Tokyo"
+	fmt.Printf("   Temp:     %.1fÃ‚Â°C\n", partial.TempC)                          // 18.0
+	fmt.Printf("   Humidity: %d (zero Ã¢â‚¬â€ not in JSON)\n", partial.Humidity)  // 0
+	fmt.Printf("   Wind:     %.1f (zero Ã¢â‚¬â€ not in JSON)\n", partial.WindKmH) // 0.0
 	fmt.Println()
 
 	// =====================================================================
@@ -137,35 +137,35 @@ func main() {
 	var dynamic map[string]any
 	json.Unmarshal([]byte(weatherJSON), &dynamic)
 
-	fmt.Println("3️⃣  Dynamic JSON → map[string]any:")
+	fmt.Println("3Ã¯Â¸ÂÃ¢Æ’Â£  Dynamic JSON Ã¢â€ â€™ map[string]any:")
 	fmt.Printf("   city = %v (type: %T)\n", dynamic["city"], dynamic["city"])
 	fmt.Printf("   temp = %v (type: %T)\n", dynamic["temp_celsius"], dynamic["temp_celsius"])
 	// Note: JSON numbers always become float64 in map[string]any
-	fmt.Printf("   humidity = %v (type: %T — float64, not int!)\n",
+	fmt.Printf("   humidity = %v (type: %T Ã¢â‚¬â€ float64, not int!)\n",
 		dynamic["humidity"], dynamic["humidity"])
 	fmt.Println()
 
 	// =====================================================================
-	// 4. Round-trip: Unmarshal → modify → Marshal
+	// 4. Round-trip: Unmarshal Ã¢â€ â€™ modify Ã¢â€ â€™ Marshal
 	// =====================================================================
 	// A common pattern: receive JSON, modify data, send JSON back.
 	weather.TempC = 35.0
 	weather.Condition = "Sunny"
 
 	updatedJSON, _ := json.MarshalIndent(weather, "", "  ")
-	fmt.Println("4️⃣  Modified and re-marshalled:")
+	fmt.Println("4Ã¯Â¸ÂÃ¢Æ’Â£  Modified and re-marshalled:")
 	fmt.Println(string(updatedJSON))
 
 	fmt.Println()
 	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - json.Unmarshal converts JSON bytes → Go structs")
+	fmt.Println("  - json.Unmarshal converts JSON bytes Ã¢â€ â€™ Go structs")
 	fmt.Println("  - ALWAYS pass a pointer: json.Unmarshal(data, &target)")
-	fmt.Println("  - Missing JSON fields → zero value (no error)")
-	fmt.Println("  - Extra JSON fields → silently ignored (no error)")
+	fmt.Println("  - Missing JSON fields Ã¢â€ â€™ zero value (no error)")
+	fmt.Println("  - Extra JSON fields Ã¢â€ â€™ silently ignored (no error)")
 	fmt.Println("  - Use map[string]any for unknown/dynamic JSON structures")
 	fmt.Println("  - JSON numbers are ALWAYS float64 in maps (cast if needed)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: EN.3 JSON encoder (stream)")
+	fmt.Println("Ã°Å¸Å¡â‚¬ NEXT UP: EN.3 JSON encoder (stream)")
 	fmt.Println("   Current: EN.2 (JSON unmarshalling)")
 	fmt.Println("---------------------------------------------------")
 }

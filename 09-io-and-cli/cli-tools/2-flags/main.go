@@ -12,7 +12,7 @@ import (
 )
 
 // ============================================================================
-// Section 19: CLI Tools � Flag Package
+// Section 09: CLI Tools - Flag Package
 // Level: Intermediate
 // ============================================================================
 //
@@ -20,7 +20,7 @@ import (
 //   - The flag package for typed argument parsing
 //   - String, int, bool, and duration flags
 //   - Default values and usage help
-//   - flag.Parse() � MUST call before accessing flag values
+//   - flag.Parse() - MUST call before accessing flag values
 //   - Accessing remaining (non-flag) arguments
 //
 // ENGINEERING DEPTH:
@@ -67,7 +67,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CL.3 subcommands")
+	fmt.Println("Ã°Å¸Å¡â‚¬ NEXT UP: CL.3 subcommands")
 	fmt.Println("   Current: CL.2 (flags)")
 	fmt.Println("---------------------------------------------------")
 }

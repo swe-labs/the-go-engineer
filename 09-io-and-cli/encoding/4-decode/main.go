@@ -13,7 +13,7 @@ import (
 )
 
 // ============================================================================
-// Section 11: Encoding — JSON Decoder (Streaming)
+// Section 09: Encoding - JSON Decoder (Streaming)
 // Level: Intermediate
 // ============================================================================
 //
@@ -53,7 +53,7 @@ func main() {
 	// =====================================================================
 	// 1. Basic Decoder from an io.Reader
 	// =====================================================================
-	fmt.Println("1️⃣  Standard Decoder:")
+	fmt.Println("1ï¸âƒ£  Standard Decoder:")
 
 	singlePayload := `{"app_id": "auth-service", "latency_ms": 125, "success": true}`
 
@@ -76,7 +76,7 @@ func main() {
 	// When reading from a network stream or log file, you might receive
 	// multiple JSON objects separated by whitespace. json.NewDecoder handles
 	// this gracefully, decoding one at a time.
-	fmt.Println("2️⃣  Stream Parsing (Multiple Objects):")
+	fmt.Println("2ï¸âƒ£  Stream Parsing (Multiple Objects):")
 
 	// Notice: these are three separate JSON objects, not a JSON array
 	streamPayload := `
@@ -104,9 +104,9 @@ func main() {
 		}
 
 		count++
-		status := "✅"
+		status := "âœ…"
 		if !e.Success {
-			status = "❌"
+			status = "âŒ"
 		}
 		fmt.Printf("   Event %d: %s (latency: %dms) %s\n", count, e.AppID, e.Latency, status)
 	}
@@ -120,7 +120,7 @@ func main() {
 	fmt.Println("  - Perfect for processing streams of JSON objects (JSONLines format)")
 	fmt.Println("  - Loop dec.Decode() until it returns io.EOF")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: EN.5 Base64")
+	fmt.Println("ðŸš€ NEXT UP: EN.5 Base64")
 	fmt.Println("   Current: EN.4 (JSON decoder (stream))")
 	fmt.Println("---------------------------------------------------")
 }

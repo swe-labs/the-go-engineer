@@ -13,8 +13,8 @@ import (
 )
 
 // ============================================================================
-// Section 10: Filesystem — Log Search Tool (Exercise)
-// Level: Intermediate → Advanced
+// Section 09: Filesystem - Log Search Tool (Exercise)
+// Level: Intermediate -> Advanced
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -26,7 +26,7 @@ import (
 // ENGINEERING DEPTH:
 //   `filepath.WalkDir` (introduced in Go 1.16) is the replacement for the older
 //   `filepath.Walk`. The critical difference is that `WalkDir` uses `fs.DirEntry`
-//   which is a lazy interface — it does NOT call `os.Stat()` on every single file.
+//   which is a lazy interface Ã¢â‚¬â€ it does NOT call `os.Stat()` on every single file.
 //   The old `Walk` function called `os.Stat()` on every file, which triggers a
 //   system call to the kernel for each file. On a directory with 100,000 files,
 //   `WalkDir` can be 10x faster because it avoids these redundant stat() syscalls.
@@ -44,7 +44,7 @@ type SearchResult struct {
 // searchFile opens a single file and scans it line-by-line for the keyword.
 // It returns a slice of all matching results found in that file.
 //
-// `bufio.Scanner` reads the file lazily — it never loads the entire file into
+// `bufio.Scanner` reads the file lazily Ã¢â‚¬â€ it never loads the entire file into
 // memory at once. This is critical for searching large log files (1GB+).
 func searchFile(filePath string, keyword string) ([]SearchResult, error) {
 	file, err := os.Open(filePath)
@@ -91,11 +91,11 @@ func searchDirectory(rootDir string, keyword string) ([]SearchResult, error) {
 	err := filepath.WalkDir(rootDir, func(path string, d os.DirEntry, err error) error {
 		if err != nil {
 			// If we can't access a file/dir, skip it rather than crashing.
-			fmt.Fprintf(os.Stderr, "  ⚠ Cannot access %s: %v\n", path, err)
+			fmt.Fprintf(os.Stderr, "  Ã¢Å¡Â  Cannot access %s: %v\n", path, err)
 			return nil
 		}
 
-		// Skip directories — we only want files.
+		// Skip directories Ã¢â‚¬â€ we only want files.
 		if d.IsDir() {
 			return nil
 		}
@@ -109,7 +109,7 @@ func searchDirectory(rootDir string, keyword string) ([]SearchResult, error) {
 		// Search this file for the keyword.
 		results, err := searchFile(path, keyword)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "  ⚠ Error reading %s: %v\n", path, err)
+			fmt.Fprintf(os.Stderr, "  Ã¢Å¡Â  Error reading %s: %v\n", path, err)
 			return nil
 		}
 
@@ -183,5 +183,5 @@ DONE: Deploy v2.1 to staging`,
 	fmt.Println("  - filepath.WalkDir recursively traverses directories efficiently")
 	fmt.Println("  - bufio.Scanner reads files line-by-line (constant memory)")
 	fmt.Println("  - Filter by extension to avoid searching binary files")
-	fmt.Println("  - Always handle errors gracefully — skip files you can't read")
+	fmt.Println("  - Always handle errors gracefully Ã¢â‚¬â€ skip files you can't read")
 }

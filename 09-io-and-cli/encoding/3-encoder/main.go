@@ -12,7 +12,7 @@ import (
 )
 
 // ============================================================================
-// Section 11: Encoding — JSON Encoder (Streaming)
+// Section 09: Encoding - JSON Encoder (Streaming)
 // Level: Intermediate
 // ============================================================================
 //
@@ -58,7 +58,7 @@ func main() {
 	// --- 1. Streaming directly to Stdout ---
 	// Create an encoder that writes directly to standard output (the terminal).
 	// We don't need to load the JSON into a byte slice first.
-	fmt.Println("1️⃣  Streaming to os.Stdout:")
+	fmt.Println("1ï¸âƒ£  Streaming to os.Stdout:")
 	enc := json.NewEncoder(os.Stdout)
 
 	// SetIndent works just like MarshalIndent
@@ -81,7 +81,7 @@ func main() {
 	// --- 2. Streaming to a File ---
 	// This is where NewEncoder shines. If you have 100,000 logs,
 	// you can stream them directly to disk without loading them all in memory.
-	fmt.Println("2️⃣  Streaming to a file (memory-efficient):")
+	fmt.Println("2ï¸âƒ£  Streaming to a file (memory-efficient):")
 
 	file, err := os.CreateTemp("", "logs-*.jsonl")
 	if err != nil {
@@ -117,7 +117,7 @@ func main() {
 	fmt.Println("  - Use this for APIs (ResponseWriter) instead of json.Marshal")
 	fmt.Println("  - Encode() automatically appends a newline (\n) after the JSON")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: EN.4 JSON decoder (stream)")
+	fmt.Println("ðŸš€ NEXT UP: EN.4 JSON decoder (stream)")
 	fmt.Println("   Current: EN.3 (JSON encoder (stream))")
 	fmt.Println("---------------------------------------------------")
 }
