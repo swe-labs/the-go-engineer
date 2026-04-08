@@ -1,39 +1,62 @@
-# Section 12: Databases
+# Section 10 Track: Databases
 
-## Beginner → Expert Mapping
+## Mission
 
-| Topic | Level | Importance | Engineering Concept |
-|-------|-------|------------|---------------------|
-| SQL Driver Binding | Beginner | High | Blank imports `_ "github.com/..."` |
-| Queries | Intermediate | High | Connection pooling, executing contexts |
-| Transactions | Advanced | Medium | ACID state rollovers |
-| Repository Pattern | Advanced | **Critical** | Interface driven data-access layer |
+This track teaches you how Go talks to relational databases without hiding the core `database/sql`
+contracts.
+
+By the end of the live track, you should be comfortable with:
+
+- blank imports and driver registration
+- the difference between `sql.Open` and `db.Ping`
+- parameterized queries and scanning rows safely
+- prepared statements and context-aware execution
+- transactions for multi-step writes
+- repository boundaries that keep application code decoupled from raw SQL
 
 ## Engineering Depth
-The `database/sql` standard package does not map objects directly (No built-in ORM). Instead, it heavily relies on **Connection Pooling**. When you execute `db.Query()`, Go checks out a connection from its underlying thread-safe connection pool. 
-- Critical bug zone: Every `*sql.Rows` instance returned by `db.Query()` holds a live database connection. If `rows.Close()` is not called (usually via `defer`), you will exhaust the database connection pool, leading to catastrophic thread-locking under load.
 
-## References
-1. **[Go Database]** [Accessing relational databases](https://go.dev/doc/database/)
+The `database/sql` package is not an ORM.
+It is a connection-pool manager plus a set of low-level query contracts.
 
----
+That means the real engineering hazards are not "how do I write SQL in Go?" but:
 
-## 🏗 Exercise: CRUD SQLite Repository (`6-repository`)
-
-### Step-by-Step Instructions & Hints
-1. **Architecture Definition:** Define an entity `User{}` and a `UserRepository{}` interface outlining `Create`, `GetByID`, etc.
-2. **Concrete Implementation:** Build an `SQLiteUserRepository` struct wrapping an initialized `*sql.DB` connection pool.
-3. **Execute Safely:** Inside `GetByID`, use `db.QueryRow()` to pull a single result mapped instantly to the struct pointers.
-   - *Hint:* Distinguish between `sql.ErrNoRows` (Clean empty response) vs global system errors.
-4. **Leverage the Context:** Always use `QueryContext` or `ExecContext` passing a generated `context.Context` to allow application timeout shutdowns to natively kill dangling database requests!
-
+- leaking `rows` and exhausting the connection pool
+- holding transactions open while doing slow non-database work
+- scattering raw `*sql.DB` calls through handlers and business logic
+- confusing a clean "not found" result with an operational failure
 
 ## Learning Path
 
 | ID | Lesson | Concept | Requires |
 | --- | --- | --- | --- |
-| DB.1 | [connecting](./1-connecting-to-db) | Blank import · sql.Open lazy · db.Ping · connection pool | 🟢 entry |
-| DB.2 | [query — INSERT](./2-query) | db.Exec · ? parameterisation · LastInsertId · bcrypt hash | DB.1 |
-| DB.3 | [query — SELECT](./3-select) | db.QueryRow · rows.Scan · rows.Close · rows.Err | DB.1, DB.2 |
-| DB.4 | [prepared statements](./4-prepare) | db.Prepare · stmt.ExecContext · when to prepare explicitly | DB.2, DB.3 |
-| DB.5 | [transactions](./5-transactions) | BeginTx · defer Rollback · Commit · ACID all-or-nothing | DB.1, DB.2, DB.3 |
+| `DB.1` | [connecting](./1-connecting-to-db) | blank imports, `sql.Open`, `db.Ping`, connection pools | entry |
+| `DB.2` | [query - INSERT](./2-query) | `db.Exec`, `?` parameters, `LastInsertId`, bcrypt | `DB.1` |
+| `DB.3` | [query - SELECT](./3-select) | `QueryRow`, `Query`, `rows.Scan`, `rows.Close`, `rows.Err` | `DB.1`, `DB.2` |
+| `DB.4` | [prepared statements](./4-prepare) | `db.Prepare`, `ExecContext`, statement reuse | `DB.2`, `DB.3` |
+| `DB.5` | [transactions](./5-transactions) | `BeginTx`, `defer Rollback`, `Commit`, ACID consistency | `DB.1`, `DB.2`, `DB.3` |
+| `DB.6` | [repository pattern project](./6-repository) | interface-driven data access, transactions, model mapping | `DB.1`, `DB.2`, `DB.3`, `DB.4`, `DB.5` |
+
+## Suggested Order
+
+1. Work through `DB.1` to `DB.5` in order.
+2. Complete `DB.6` as the live milestone.
+3. Return to the Section 10 overview when you are ready to explore the legacy reference surfaces.
+
+## Live Milestone
+
+`DB.6` is the current live milestone for this track.
+
+It is the point where the lower-level lessons stop being isolated mechanics and start looking like
+service-ready data access code.
+
+## References
+
+1. [Accessing relational databases](https://go.dev/doc/database/)
+2. [Executing transactions](https://go.dev/doc/database/execute-transactions)
+3. [Canceling in-progress operations](https://go.dev/doc/database/cancel-operations)
+
+## Next Step
+
+After `DB.6`, continue to the [Section 10 overview](../README.md) or move on to
+[Section 11: Concurrency](../../11-concurrency).

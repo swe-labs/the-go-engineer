@@ -30,14 +30,15 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	_ "github.com/mattn/go-sqlite3"
 
 	"github.com/rasel9t6/the-go-engineer/10-web-and-database/databases/6-repository/repository"
 )
 
-// The startup script creates the DB table so this demo works cleanly
-var profileSchema = `
+// repositorySchema creates the database tables needed by the repository demo.
+var repositorySchema = `
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -56,12 +57,14 @@ func main() {
 
 	// 1. Database Initialization
 	dbName := "users_database.db"
+	_ = os.Remove(dbName)
 	db, err := connectToDatabase(dbName)
 	checkErr(err)
 	defer db.Close()
 
 	// (Demo setup: Ensure tables exist)
-	_, _ = db.Exec(profileSchema)
+	_, err = db.Exec(repositorySchema)
+	checkErr(err)
 
 	fmt.Println("✅ Database connection established")
 
@@ -85,6 +88,11 @@ func main() {
 
 	// Fetch users
 	printUsers(repo)
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("Milestone complete: DB.6 repository pattern")
+	fmt.Println("Next section: Section 11 concurrency")
+	fmt.Println("---------------------------------------------------")
 }
 
 // printUsers ONLY accepts the `repository.UserRepository` interface.

@@ -76,7 +76,7 @@ func main() {
 		fmt.Printf("✅ Transaction Succeeded! Created User %d + Profile\n", userID)
 	}
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: WM.1 routing")
+	fmt.Println("🚀 NEXT UP: DB.6 repository pattern")
 	fmt.Println("   Current: DB.5 (transactions)")
 	fmt.Println("---------------------------------------------------")
 }

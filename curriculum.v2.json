@@ -116,6 +116,25 @@
         "EN.6",
         "FS.7"
       ]
+    },
+    {
+      "id": "s10",
+      "number": "10",
+      "slug": "web-and-database",
+      "title": "Web and Database",
+      "phase": "applications",
+      "summary": "Teach the first production-shaped data-access surfaces through database/sql, transactions, and repository boundaries while keeping the broader web material available as legacy reference.",
+      "status": "pilot",
+      "prerequisites": [
+        "s09"
+      ],
+      "path_prefix": "10-web-and-database",
+      "entry_points": [
+        "DB.1"
+      ],
+      "outputs": [
+        "DB.6"
+      ]
     }
   ],
   "items": [
@@ -1670,6 +1689,205 @@
         "filesystem",
         "fs.FS",
         "testing"
+      ]
+    },
+    {
+      "id": "DB.1",
+      "section_id": "s10",
+      "slug": "connecting-to-sqlite",
+      "title": "Connecting to SQLite",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Introduce blank imports, sql.Open, db.Ping, and the connection-pool model behind database/sql.",
+      "objectives": [
+        "Explain why database drivers use blank imports for registration",
+        "Distinguish sql.Open setup from a real connectivity check with db.Ping"
+      ],
+      "prerequisites": [
+        "FS.7"
+      ],
+      "production_relevance": "Database connectivity bugs often come from misunderstanding lazy connection setup and connection-pool behavior.",
+      "path": "10-web-and-database/databases/1-connecting-to-db",
+      "run_command": "go run ./10-web-and-database/databases/1-connecting-to-db",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DB.2"
+      ],
+      "tags": [
+        "database",
+        "sqlite",
+        "connection-pool"
+      ]
+    },
+    {
+      "id": "DB.2",
+      "section_id": "s10",
+      "slug": "query-insert",
+      "title": "Executing Queries (INSERT)",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Use db.Exec with parameterized SQL and password hashing to write rows safely.",
+      "objectives": [
+        "Insert rows with parameterized SQL instead of string-built queries",
+        "Explain why sensitive values should be transformed before storage"
+      ],
+      "prerequisites": [
+        "DB.1"
+      ],
+      "production_relevance": "Safe write paths depend on parameterized SQL and deliberate data handling before values reach the database.",
+      "path": "10-web-and-database/databases/2-query",
+      "run_command": "go run ./10-web-and-database/databases/2-query",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DB.3"
+      ],
+      "tags": [
+        "database",
+        "insert",
+        "sql-injection"
+      ]
+    },
+    {
+      "id": "DB.3",
+      "section_id": "s10",
+      "slug": "select-queries",
+      "title": "Select Queries",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Read single and multiple rows safely with QueryRow, Query, Scan, Close, and Err.",
+      "objectives": [
+        "Map query results into Go structs with Scan",
+        "Explain why rows.Close and rows.Err are part of the read-side contract"
+      ],
+      "prerequisites": [
+        "DB.1",
+        "DB.2"
+      ],
+      "production_relevance": "Read-heavy services rely on predictable row scanning and resource cleanup to avoid pool exhaustion and subtle data bugs.",
+      "path": "10-web-and-database/databases/3-select",
+      "run_command": "go run ./10-web-and-database/databases/3-select",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DB.4"
+      ],
+      "tags": [
+        "database",
+        "select",
+        "scan"
+      ]
+    },
+    {
+      "id": "DB.4",
+      "section_id": "s10",
+      "slug": "prepared-statements",
+      "title": "Prepared Statements",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Introduce explicit prepared statements and context-aware execution for more controlled database calls.",
+      "objectives": [
+        "Explain when prepared statements are useful and when they add needless complexity",
+        "Use ExecContext to give database work a cancellation boundary"
+      ],
+      "prerequisites": [
+        "DB.2",
+        "DB.3"
+      ],
+      "production_relevance": "Prepared statements and context boundaries matter in services that issue repeated queries under latency and timeout constraints.",
+      "path": "10-web-and-database/databases/4-prepare",
+      "run_command": "go run ./10-web-and-database/databases/4-prepare",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DB.5"
+      ],
+      "tags": [
+        "database",
+        "prepared-statements",
+        "context"
+      ]
+    },
+    {
+      "id": "DB.5",
+      "section_id": "s10",
+      "slug": "transactions",
+      "title": "Transactions",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Show the all-or-nothing transaction pattern for multi-step writes and rollback safety.",
+      "objectives": [
+        "Use BeginTx, Commit, and defer Rollback to keep multi-step writes consistent",
+        "Explain why slow non-database work should stay outside active transactions"
+      ],
+      "prerequisites": [
+        "DB.1",
+        "DB.2",
+        "DB.3"
+      ],
+      "production_relevance": "Transactions protect data integrity, but only when they stay short, intentional, and limited to database work.",
+      "path": "10-web-and-database/databases/5-transactions",
+      "run_command": "go run ./10-web-and-database/databases/5-transactions",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DB.6"
+      ],
+      "tags": [
+        "database",
+        "transactions",
+        "acid"
+      ]
+    },
+    {
+      "id": "DB.6",
+      "section_id": "s10",
+      "slug": "repository-pattern-project",
+      "title": "Repository Pattern Project",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "estimated_time": 90,
+      "summary": "Combine transactions, row mapping, and interface-driven data access in one SQLite-backed repository milestone.",
+      "objectives": [
+        "Create a repository boundary that keeps application logic away from raw SQL details",
+        "Prove multi-table write and read flows through runnable behavior and tests"
+      ],
+      "prerequisites": [
+        "DB.1",
+        "DB.2",
+        "DB.3",
+        "DB.4",
+        "DB.5"
+      ],
+      "production_relevance": "Repository boundaries and transaction-safe writes are common in services that need testable data access without hiding core database behavior.",
+      "path": "10-web-and-database/databases/6-repository",
+      "run_command": "go run ./10-web-and-database/databases/6-repository",
+      "test_command": "go test ./10-web-and-database/databases/6-repository",
+      "starter_path": "10-web-and-database/databases/6-repository/_starter",
+      "next_items": [],
+      "tags": [
+        "exercise",
+        "database",
+        "repository",
+        "transactions"
       ]
     }
   ]
