@@ -222,6 +222,25 @@
         "SL.5",
         "GS.3"
       ]
+    },
+    {
+      "id": "s15",
+      "number": "15",
+      "slug": "code-generation",
+      "title": "Code Generation",
+      "phase": "professional",
+      "summary": "Teach the build-time generation workflows that remove repetitive mocking and database glue while keeping the real code explicit and reviewable.",
+      "status": "pilot",
+      "prerequisites": [
+        "s14"
+      ],
+      "path_prefix": "15-code-generation",
+      "entry_points": [
+        "CG.1"
+      ],
+      "outputs": [
+        "CG.3"
+      ]
     }
   ],
   "items": [
@@ -3197,6 +3216,99 @@
         "shutdown",
         "capstone",
         "operations"
+      ]
+    },
+    {
+      "id": "CG.1",
+      "section_id": "s15",
+      "slug": "go-generate",
+      "title": "go generate Primer",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Introduce the go generate workflow as a build-time tool for repetitive code and schema-driven outputs.",
+      "objectives": [
+        "Explain what go generate does and does not do",
+        "Describe when build-time generation is a better fit than runtime reflection"
+      ],
+      "prerequisites": [],
+      "production_relevance": "Generated code keeps repetitive glue predictable, reviewable, and caught at build time instead of turning into hidden runtime behavior.",
+      "path": "15-code-generation/1-go-generate",
+      "run_command": "go run ./15-code-generation/1-go-generate",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CG.2"
+      ],
+      "tags": [
+        "code-generation",
+        "go-generate",
+        "tooling"
+      ]
+    },
+    {
+      "id": "CG.2",
+      "section_id": "s15",
+      "slug": "mockery",
+      "title": "Mockery Workflow",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Use mockery with go generate to replace repetitive handwritten mocks in larger test suites.",
+      "objectives": [
+        "Explain how interface-driven mock generation improves test maintenance",
+        "Describe how generated mocks fit into the consumer-owned interface pattern"
+      ],
+      "prerequisites": [
+        "CG.1"
+      ],
+      "production_relevance": "Generated mocks reduce repetitive maintenance when interface-heavy codebases evolve under active testing.",
+      "path": "15-code-generation/2-mockery",
+      "run_command": "go run ./15-code-generation/2-mockery",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CG.3"
+      ],
+      "tags": [
+        "code-generation",
+        "mockery",
+        "testing"
+      ]
+    },
+    {
+      "id": "CG.3",
+      "section_id": "s15",
+      "slug": "sqlc",
+      "title": "sqlc Workflow",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Generate typed query code from SQL schema and query files with sqlc.",
+      "objectives": [
+        "Explain how sqlc turns schema and query files into typed Go data-access code",
+        "Describe why generated query code can be safer than reflection-heavy ORM layers"
+      ],
+      "prerequisites": [
+        "CG.1",
+        "CG.2"
+      ],
+      "production_relevance": "Schema-driven query generation keeps SQL explicit while still giving teams typed compile-time checked application code.",
+      "path": "15-code-generation/3-sqlc",
+      "run_command": "go run ./15-code-generation/3-sqlc",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [],
+      "tags": [
+        "code-generation",
+        "sqlc",
+        "database"
       ]
     }
   ]

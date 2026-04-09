@@ -14,15 +14,15 @@ import (
 )
 
 // ============================================================================
-// Section 15: Code Generation — Mockery
-// Level: Expert
+// Section 15: Code Generation - Mockery Workflow
+// Level: Core
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
 //   - How to use mockery for automatic mock generation
 //   - Integrating mockery with //go:generate
-//   - The benefits of "mocking at the consumer's request"
-//   - Improving developer experience (DX) through automated stubs
+//   - The benefits of mocking at the consumer's request
+//   - Improving developer experience through automated test doubles
 //
 // ENGINEERING DEPTH:
 //   Manual mocking (seen in Section 13) is great for small projects, but scales
@@ -56,7 +56,7 @@ func (m *UserManager) WelcomeUser(ctx context.Context, id string) (string, error
 func main() {
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 
-	logger.Info("Mockery Lesson")
+	logger.Info("Mockery Workflow")
 	fmt.Println("\nTo generate a mock for the Storer interface, run:")
 	fmt.Println("  go generate ./15-code-generation/2-mockery/...")
 
@@ -77,7 +77,7 @@ func main() {
     }`)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CG.3 sqlc (restored expert content)")
-	fmt.Println("   Current: CG.2 (mockery)")
+	fmt.Println("🚀 NEXT UP: CG.3 sqlc workflow")
+	fmt.Println("   Current: CG.2 (mockery workflow)")
 	fmt.Println("---------------------------------------------------")
 }
