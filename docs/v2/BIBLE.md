@@ -100,6 +100,7 @@ The v2 Bible is split into focused docs so the planning system stays readable:
 | `docs/v2/15-IMPLEMENTATION-ROADMAP.md` | Workstreams, issues, milestones, rollout | Draft |
 | `docs/v2/16-RELEASE-ROLLOUT.md` | Stage-by-stage public rollout from planning through v2 final | Draft |
 | `docs/v2/17-BETA-ARCHITECTURE-DECISION.md` | Beta-phase architecture freeze and regrouping rules | Draft |
+| `docs/v2/18-BETA-STAGE-MAPPING.md` | Alpha-to-beta stage ownership, splits, and migration groups | Draft |
 | `docs/v2/appendix/DECISION-LOG.md` | Open decisions and review outcomes | Live |
 
 The first-pass Gate 1 planning set is now complete.

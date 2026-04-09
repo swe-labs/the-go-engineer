@@ -27,6 +27,18 @@ Each decision should capture:
 - Follow-up: use `docs/v2/17-BETA-ARCHITECTURE-DECISION.md` as the baseline for beta planning and
   implementation issue design
 
+### 2026-04-09: beta stage mapping may split alpha sections wherever learner-facing boundaries are stronger than current folder boundaries
+
+- Status: Working decision
+- Why it matters: the beta stage model cannot stay honest if alpha sections are treated as
+  indivisible when they already mix beginner setup, architecture, operations, and capstone work
+- Alternatives:
+  - regroup only whole alpha sections and accept fuzzy stage boundaries
+  - allow Section `01` and Section `14` style splits wherever the learner-facing architecture is
+    materially clearer
+- Follow-up: use `docs/v2/18-BETA-STAGE-MAPPING.md` as the concrete authority for `#173` and later
+  beta implementation issue design
+
 ### 2026-04-07: v2 planning is ready to open prototype work
 
 - Status: Working decision
