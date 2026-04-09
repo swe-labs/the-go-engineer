@@ -39,6 +39,17 @@ Each decision should capture:
 - Follow-up: use `docs/v2/18-BETA-STAGE-MAPPING.md` as the concrete authority for `#173` and later
   beta implementation issue design
 
+### 2026-04-09: beta exercise design separates type, difficulty, starter mode, and verification mode
+
+- Status: Working decision
+- Why it matters: exercise systems drift when one label is forced to carry format, challenge,
+  scaffolding, and proof all at once
+- Alternatives:
+  - keep a looser alpha-style exercise model and let sections improvise
+  - use separate axes so beta can scale a real exercise bank without muddy semantics
+- Follow-up: use `docs/v2/19-BETA-EXERCISE-RUBRIC-SYSTEM.md` as the authority for `#174` and later
+  beta practice implementation work
+
 ### 2026-04-07: v2 planning is ready to open prototype work
 
 - Status: Working decision
