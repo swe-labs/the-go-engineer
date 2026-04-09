@@ -1,7 +1,7 @@
 # V2 Beta Architecture Decision
 
-Status: Draft 0.1  
-Audience: Maintainers and curriculum designers  
+Status: Draft 0.1
+Audience: Maintainers and curriculum designers
 Related issues: `#171`, `#172`, `#173`, `#174`, `#175`
 
 ## Purpose
@@ -51,7 +51,7 @@ Alpha did not yet solve the bigger product problem:
 
 In short:
 
-Alpha proved migration discipline.  
+Alpha proved migration discipline.
 Beta must prove learning-system architecture.
 
 ## Beta Target Architecture
