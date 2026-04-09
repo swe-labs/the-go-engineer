@@ -151,6 +151,10 @@ func main() {
 		// Go automatically dereferences pointers when accessing struct fields.
 		// You don't have to write `(*bob).Name` like you do in C.
 		fmt.Printf("✅ Found Bob: ID %d, Phone: %s\n", bob.ID, bob.Phone)
+
+		// Update Bob through the returned pointer so the change persists.
+		bob.Phone = "333-9999"
+		fmt.Printf("✅ Updated Bob's phone to: %s\n", bob.Phone)
 	}
 
 	// Lookup a missing user exactly
@@ -159,9 +163,15 @@ func main() {
 		fmt.Println("❌ Zack not found (expected nil return).")
 	}
 
+	// Re-check Bob to prove the update changed the stored slice entry.
+	updatedBob := findContact("Bob The Builder")
+	if updatedBob != nil {
+		fmt.Printf("✅ Persisted Bob update: ID %d, Phone: %s\n", updatedBob.ID, updatedBob.Phone)
+	}
+
 	// KEY TAKEAWAY:
 	// - `init()` runs automatically before main for setups
 	// - Combining a Slice (data storage) with a Map (index lookup) is incredibly fast
-	// - Returning pointers is the standard Go way to handle "NotFound" (by returning nil)
+	// - Returning pointers lets updates persist without copying the stored value
 	// - Go auto-dereferences pointer structs (e.g. ptr.Field instead of (*ptr).Field)
 }
