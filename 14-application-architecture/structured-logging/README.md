@@ -1,57 +1,38 @@
-# Section 23: Structured Logging
+# Track B: Structured Logging
 
-## Beginner → Expert Mapping
+## Mission
 
-| Topic | Level | Importance | Engineering Concept |
-|-------|-------|------------|---------------------|
-| `slog` basics | Beginner | **Critical** | Key-value pairs, log levels, handlers |
-| Context-keyed logger | Intermediate | **Critical** | Request-scoped logging, middleware |
-| Custom `slog.Handler` | Advanced | High | Adapting output to any sink |
-| `zerolog` comparison | Advanced | Medium | Allocation-free structured logging |
+This track teaches you how to turn logs into queryable operational data instead of leaving them as
+strings that only make sense after a production incident has already happened.
 
-## Engineering Depth
+## Track Map
 
-Before `slog` (added in Go 1.21), every team invented their own logger or reached for `zap`, `zerolog`, or `logrus`. The result was three different APIs across every codebase. `slog` ends that.
+| ID | Type | Surface | Why It Matters | Requires |
+| --- | --- | --- | --- | --- |
+| `SL.1` | Lesson | [slog basics](./1-slog-basics) | Introduces handlers, levels, attributes, and groups. | entry |
+| `SL.2` | Lesson | [context logger](./2-context-logger) | Carries request-scoped fields through a call chain. | `SL.1` |
+| `SL.3` | Lesson | [custom handler](./3-custom-handler) | Explains the extension point behind logging backends. | `SL.1`, `SL.2` |
+| `SL.4` | Lesson | [zerolog comparison](./4-zerolog-comparison) | Shows when performance pressure justifies a different logger. | `SL.1`, `SL.3` |
+| `SL.5` | Exercise | [PII redactor](./5-exercise) | Applies the track by redacting sensitive attributes automatically. | `SL.1`, `SL.2`, `SL.3`, `SL.4` |
 
-The key insight: **structured logs are data, not strings**. A log like `"user 42 logged in from 192.168.1.1"` cannot be queried. A structured log with `user_id=42` and `remote_ip=192.168.1.1` can be indexed and filtered in any observability platform (Datadog, Loki, CloudWatch).
+## Suggested Order
 
-**Performance hierarchy:**
-- `slog.TextHandler` — human readable, ~300 ns/op, ~3 allocs/op
-- `slog.JSONHandler` — machine readable, ~350 ns/op, ~4 allocs/op
-- `zerolog` — allocation-free (uses byte buffers + `sync.Pool`), ~80 ns/op, 0 allocs/op
+1. Work through `SL.1` to `SL.4` in order.
+2. Complete `SL.5` once you can explain the difference between log data and log formatting.
 
-For most services `slog` is sufficient. Reach for `zerolog` only when pprof shows logging in your hot path.
+## Track Milestone
 
-## Contents
+`SL.5` is the current structured-logging output.
 
-| Directory | Topic | Level |
-|-----------|-------|-------|
-| `1-slog-basics/` | Text/JSON handlers, levels, groups, attrs | Beginner |
-| `2-context-logger/` | Context-keyed logger, HTTP middleware | Intermediate |
-| `3-custom-handler/` | Implement `slog.Handler` interface | Advanced |
-| `4-zerolog-comparison/` | zerolog patterns, when to use it | Advanced |
+If you can explain:
 
-## How to Run
+- why `slog` separates records from handlers
+- why request-scoped logging depends on context propagation
+- why redaction belongs inside the logger pipeline instead of inside every call site
 
-```bash
-go run ./14-application-architecture/structured-logging/1-slog-basics
-go run ./14-application-architecture/structured-logging/2-context-logger
-go run ./14-application-architecture/structured-logging/3-custom-handler
-go run ./14-application-architecture/structured-logging/4-zerolog-comparison
-```
+then the structured-logging part of Section 14 is doing its job.
 
-## References
+## Next Step
 
-- [Go Blog: Structured Logging with slog](https://go.dev/blog/slog)
-- [Package slog](https://pkg.go.dev/log/slog)
-- [zerolog](https://github.com/rs/zerolog)
-
-
-## Learning Path
-
-| ID | Lesson | Concept | Requires |
-| --- | --- | --- | --- |
-| SL.1 | [slog basics](./1-slog-basics) | TextHandler · JSONHandler · levels · typed attrs · With · Groups | 🟢 entry |
-| SL.2 | [context-keyed logger](./2-context-logger) | Private key type · FromContext · LoggingMiddleware · request_id | SL.1 |
-| SL.3 | [custom slog.Handler](./3-custom-handler) | Enabled/Handle/WithAttrs/WithGroup · PrettyHandler · MultiHandler | SL.1, SL.2 |
-| SL.4 | [zerolog comparison](./4-zerolog-comparison) | 0-alloc builder chain · when to choose zerolog vs slog | SL.1, SL.3 |
+After `SL.5`, continue to the [Graceful Shutdown track](../graceful-shutdown) or back to the
+[Section 14 overview](../README.md).

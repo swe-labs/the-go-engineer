@@ -11,7 +11,7 @@ import (
 )
 
 // ============================================================================
-// Section 23: Structured Logging — zerolog and the allocation question
+// Section 14: Application Architecture - Structured Logging: zerolog and the Allocation Question
 // Level: Advanced
 // ============================================================================
 //
@@ -152,7 +152,7 @@ func main() {
 	// - Reach for zerolog ONLY after pprof confirms logging is the bottleneck.
 	// - Never add a dependency to solve a problem you haven't measured.
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: GR.1 proto definition + gen")
+	fmt.Println("🚀 NEXT UP: SL.5 PII redactor")
 	fmt.Println("   Current: SL.4 (zerolog comparison)")
 	fmt.Println("---------------------------------------------------")
 }

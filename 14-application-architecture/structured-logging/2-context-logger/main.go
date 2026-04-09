@@ -13,7 +13,7 @@ import (
 )
 
 // ============================================================================
-// Section 23: Structured Logging — Context-Keyed Logger
+// Section 14: Application Architecture - Structured Logging: Context-Keyed Logger
 // Level: Intermediate
 // ============================================================================
 //

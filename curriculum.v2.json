@@ -199,6 +199,29 @@
         "TE.4",
         "PR.2"
       ]
+    },
+    {
+      "id": "s14",
+      "number": "14",
+      "slug": "application-architecture",
+      "title": "Application Architecture",
+      "phase": "systems",
+      "summary": "Teach the package, logging, and shutdown decisions that make Go services maintainable once they grow beyond a single file or a single happy path.",
+      "status": "pilot",
+      "prerequisites": [
+        "s13"
+      ],
+      "path_prefix": "14-application-architecture",
+      "entry_points": [
+        "PD.1",
+        "SL.1",
+        "GS.1"
+      ],
+      "outputs": [
+        "PD.3",
+        "SL.5",
+        "GS.3"
+      ]
     }
   ],
   "items": [
@@ -2823,6 +2846,357 @@
         "profiling",
         "pprof",
         "http"
+      ]
+    },
+    {
+      "id": "PD.1",
+      "section_id": "s14",
+      "slug": "naming",
+      "title": "Naming Conventions",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Teach the package naming rules that keep Go APIs readable and domain-focused.",
+      "objectives": [
+        "Explain how package names compose with exported symbols",
+        "Spot vague package names like utils and helpers before they spread"
+      ],
+      "prerequisites": [],
+      "production_relevance": "Package names become part of every import path and every exported API, so bad names create long-term friction across the codebase.",
+      "path": "14-application-architecture/package-design/1-naming",
+      "run_command": "go run ./14-application-architecture/package-design/1-naming",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "PD.2"
+      ],
+      "tags": [
+        "package-design",
+        "naming",
+        "architecture"
+      ]
+    },
+    {
+      "id": "PD.2",
+      "section_id": "s14",
+      "slug": "visibility",
+      "title": "Visibility and Export Rules",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Use export rules and the internal directory to tighten package boundaries.",
+      "objectives": [
+        "Explain how exported and unexported identifiers shape the public API",
+        "Describe when internal packages are the right boundary tool"
+      ],
+      "prerequisites": [
+        "PD.1"
+      ],
+      "production_relevance": "Visibility discipline keeps internal details from leaking into call sites and lets packages change safely over time.",
+      "path": "14-application-architecture/package-design/2-visibility",
+      "run_command": "go run ./14-application-architecture/package-design/2-visibility",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "PD.3"
+      ],
+      "tags": [
+        "package-design",
+        "visibility",
+        "internal"
+      ]
+    },
+    {
+      "id": "PD.3",
+      "section_id": "s14",
+      "slug": "project-layout",
+      "title": "Project Layout",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Choose a Go project layout that matches the real size and responsibilities of the system.",
+      "objectives": [
+        "Explain when a flat project layout is enough and when cmd or internal are justified",
+        "Call out layout anti-patterns before they turn into long-term structure debt"
+      ],
+      "prerequisites": [
+        "PD.1",
+        "PD.2"
+      ],
+      "production_relevance": "Project layout decisions affect testability, import boundaries, discoverability, and how safely a codebase can grow.",
+      "path": "14-application-architecture/package-design/3-project-layout",
+      "run_command": "go run ./14-application-architecture/package-design/3-project-layout",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SL.1"
+      ],
+      "tags": [
+        "package-design",
+        "layout",
+        "architecture"
+      ]
+    },
+    {
+      "id": "SL.1",
+      "section_id": "s14",
+      "slug": "slog-basics",
+      "title": "slog Basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Introduce Go's structured logging model with handlers, attributes, levels, and groups.",
+      "objectives": [
+        "Explain why structured logs are more useful than ad hoc strings",
+        "Use TextHandler and JSONHandler with typed attributes"
+      ],
+      "prerequisites": [],
+      "production_relevance": "Structured logging is the baseline observability surface for production services and incident response.",
+      "path": "14-application-architecture/structured-logging/1-slog-basics",
+      "run_command": "go run ./14-application-architecture/structured-logging/1-slog-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SL.2"
+      ],
+      "tags": [
+        "logging",
+        "slog",
+        "observability"
+      ]
+    },
+    {
+      "id": "SL.2",
+      "section_id": "s14",
+      "slug": "context-logger",
+      "title": "Context-Keyed Logger",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Carry request-scoped logging fields through handlers and middleware with context.",
+      "objectives": [
+        "Inject loggers into request context safely",
+        "Explain why request correlation depends on context propagation"
+      ],
+      "prerequisites": [
+        "SL.1"
+      ],
+      "production_relevance": "Request-scoped logs are how teams reconstruct what happened inside one request without grepping unrelated traffic.",
+      "path": "14-application-architecture/structured-logging/2-context-logger",
+      "run_command": "go run ./14-application-architecture/structured-logging/2-context-logger",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SL.3"
+      ],
+      "tags": [
+        "logging",
+        "context",
+        "middleware"
+      ]
+    },
+    {
+      "id": "SL.3",
+      "section_id": "s14",
+      "slug": "custom-handler",
+      "title": "Custom slog Handler",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 40,
+      "summary": "Implement the slog.Handler interface to understand how structured logging backends plug in.",
+      "objectives": [
+        "Explain the slog.Handler contract and its concurrency requirements",
+        "Build a custom handler that changes how logs are rendered or routed"
+      ],
+      "prerequisites": [
+        "SL.1",
+        "SL.2"
+      ],
+      "production_relevance": "Handler boundaries are where teams integrate logging with external sinks, formatting rules, and redaction pipelines.",
+      "path": "14-application-architecture/structured-logging/3-custom-handler",
+      "run_command": "go run ./14-application-architecture/structured-logging/3-custom-handler",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SL.4"
+      ],
+      "tags": [
+        "logging",
+        "slog",
+        "handler"
+      ]
+    },
+    {
+      "id": "SL.4",
+      "section_id": "s14",
+      "slug": "zerolog-comparison",
+      "title": "zerolog Comparison",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Compare slog with zerolog to show when performance pressure justifies a different logging stack.",
+      "objectives": [
+        "Explain the allocation trade-offs between slog and zerolog",
+        "Describe when a logging dependency change is justified by measurement"
+      ],
+      "prerequisites": [
+        "SL.1",
+        "SL.3"
+      ],
+      "production_relevance": "Teams should choose logging libraries based on measured hot-path behavior, not on style preferences alone.",
+      "path": "14-application-architecture/structured-logging/4-zerolog-comparison",
+      "run_command": "go run ./14-application-architecture/structured-logging/4-zerolog-comparison",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SL.5"
+      ],
+      "tags": [
+        "logging",
+        "zerolog",
+        "performance"
+      ]
+    },
+    {
+      "id": "SL.5",
+      "section_id": "s14",
+      "slug": "pii-redactor",
+      "title": "PII Redactor",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "estimated_time": 45,
+      "summary": "Apply the track by redacting sensitive fields inside the structured logging pipeline.",
+      "objectives": [
+        "Use ReplaceAttr to centralize redaction logic for sensitive attributes",
+        "Keep redaction out of individual logging call sites"
+      ],
+      "prerequisites": [
+        "SL.1",
+        "SL.2",
+        "SL.3",
+        "SL.4"
+      ],
+      "production_relevance": "Sensitive data should be protected by the logging layer itself so a missed call site does not leak secrets into logs.",
+      "path": "14-application-architecture/structured-logging/5-exercise",
+      "run_command": "go run ./14-application-architecture/structured-logging/5-exercise",
+      "test_command": "",
+      "starter_path": "14-application-architecture/structured-logging/5-exercise/_starter",
+      "next_items": [
+        "GS.1"
+      ],
+      "tags": [
+        "logging",
+        "exercise",
+        "security"
+      ]
+    },
+    {
+      "id": "GS.1",
+      "section_id": "s14",
+      "slug": "signal-context",
+      "title": "signal NotifyContext",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Introduce signal.NotifyContext and signal-aware worker cancellation for production processes.",
+      "objectives": [
+        "Explain how SIGINT and SIGTERM should influence Go process behavior",
+        "Use NotifyContext to coordinate shutdown across goroutines"
+      ],
+      "prerequisites": [],
+      "production_relevance": "Production binaries are expected to react predictably to termination signals during deploys, restarts, and operator actions.",
+      "path": "14-application-architecture/graceful-shutdown/1-signal-context",
+      "run_command": "go run ./14-application-architecture/graceful-shutdown/1-signal-context",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "GS.2"
+      ],
+      "tags": [
+        "shutdown",
+        "signals",
+        "context"
+      ]
+    },
+    {
+      "id": "GS.2",
+      "section_id": "s14",
+      "slug": "http-graceful-drain",
+      "title": "HTTP Graceful Drain",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 40,
+      "summary": "Drain in-flight HTTP requests with server.Shutdown instead of dropping traffic during deploys.",
+      "objectives": [
+        "Explain what http.Server.Shutdown actually does for active and idle connections",
+        "Describe why graceful drain matters during rolling deploys"
+      ],
+      "prerequisites": [
+        "GS.1"
+      ],
+      "production_relevance": "HTTP graceful shutdown prevents deployment-time request loss and turns termination into a controlled part of service behavior.",
+      "path": "14-application-architecture/graceful-shutdown/2-http-server",
+      "run_command": "go run ./14-application-architecture/graceful-shutdown/2-http-server",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "GS.3"
+      ],
+      "tags": [
+        "shutdown",
+        "http",
+        "deployment"
+      ]
+    },
+    {
+      "id": "GS.3",
+      "section_id": "s14",
+      "slug": "shutdown-capstone",
+      "title": "Shutdown Capstone",
+      "type": "capstone",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 50,
+      "summary": "Coordinate readiness, HTTP drain, worker drain, and final cleanup in one production-style shutdown flow.",
+      "objectives": [
+        "Explain the shutdown dependency order across readiness, HTTP, workers, and shared resources",
+        "Use errgroup to coordinate a multi-component shutdown sequence"
+      ],
+      "prerequisites": [
+        "GS.1",
+        "GS.2"
+      ],
+      "production_relevance": "Complex services need one coherent shutdown plan, not a pile of independent cleanup calls that race each other during deploys.",
+      "path": "14-application-architecture/graceful-shutdown/3-capstone",
+      "run_command": "go run ./14-application-architecture/graceful-shutdown/3-capstone",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [],
+      "tags": [
+        "shutdown",
+        "capstone",
+        "operations"
       ]
     }
   ]

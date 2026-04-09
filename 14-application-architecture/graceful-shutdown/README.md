@@ -1,44 +1,37 @@
-# Section 27: Graceful Shutdown
+# Track C: Graceful Shutdown
 
-## Beginner → Expert Mapping
+## Mission
 
-| Topic | Level | Importance | Engineering Concept |
-|-------|-------|------------|---------------------|
-| OS signals | Beginner | **Critical** | SIGTERM, SIGINT, signal.NotifyContext |
-| HTTP graceful drain | Intermediate | **Critical** | server.Shutdown, in-flight request handling |
-| Complete graceful server | Advanced | **Critical** | Signals + HTTP + DB + background workers |
+This track teaches you how to keep services correct during deploys, restarts, and termination
+signals instead of treating shutdown as an afterthought.
 
-## Engineering Depth
+## Track Map
 
-`log.Fatal(http.ListenAndServe(":8080", mux))` is in every tutorial. It is wrong for production. When Kubernetes sends SIGTERM to terminate a pod, this crashes instantly — killing in-flight requests. Users see 502 errors during every deployment.
+| ID | Type | Surface | Why It Matters | Requires |
+| --- | --- | --- | --- | --- |
+| `GS.1` | Lesson | [signal context](./1-signal-context) | Introduces `signal.NotifyContext` and signal-aware workers. | entry |
+| `GS.2` | Lesson | [HTTP graceful drain](./2-http-server) | Uses `http.Server.Shutdown` to drain in-flight requests. | `GS.1` |
+| `GS.3` | Capstone | [shutdown capstone](./3-capstone) | Wires signals, readiness, workers, and drain order together. | `GS.1`, `GS.2` |
 
-**The zero-downtime deployment sequence:**
-1. Kubernetes sets pod to "Terminating" and removes it from load balancer (takes ~2-5 seconds to propagate)
-2. Kubernetes sends SIGTERM
-3. Your server receives SIGTERM and calls `http.Server.Shutdown(ctx)` with a 30-second deadline
-4. `Shutdown()` stops accepting NEW connections
-5. `Shutdown()` waits for existing connections to drain
-6. After drain (or deadline), the process exits cleanly
+## Suggested Order
 
-Without graceful shutdown, step 2 kills all in-flight requests immediately. The result is 500 errors during every rolling deployment — which happens multiple times per day in a busy organisation.
+1. Start with `GS.1` to understand signal delivery and cancellation.
+2. Move into `GS.2` to see how request draining works for HTTP services.
+3. Finish with `GS.3` once you can reason about shutdown order across multiple resources.
 
-**`signal.NotifyContext`** (Go 1.16+) is the idiomatic API:
-```go
-ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
-defer stop()
-<-ctx.Done() // blocks until signal arrives
-```
+## Track Milestone
 
-## References
+`GS.3` is the current graceful-shutdown output.
 
-- [signal.NotifyContext](https://pkg.go.dev/os/signal#NotifyContext)
-- [http.Server.Shutdown](https://pkg.go.dev/net/http#Server.Shutdown)
-- [Go Blog: Graceful Shutdown](https://go.dev/doc/articles/wiki/)
+If you can explain:
 
+- why `signal.NotifyContext` is the right entry point for modern Go shutdown handling
+- why `http.Server.Shutdown` is not the same as killing the server
+- why readiness, HTTP drain, worker drain, and resource close order must be coordinated
 
-## Learning Path
+then the graceful-shutdown part of Section 14 is doing its job.
 
-| ID | Lesson | Concept | Requires |
-| --- | --- | --- | --- |
-| GS.1 | [signal.NotifyContext](./1-signal-context) | SIGTERM · SIGINT · ctx cancel on signal · second Ctrl+C force-kill | 🟢 entry |
-| GS.2 | [HTTP graceful drain](./2-http-server) | http.Server.Shutdown · ErrServerClosed · 30s deadline · readiness 503 | GS.1 |
+## Next Step
+
+After `GS.3`, continue back to the [Section 14 overview](../README.md) or move to
+[Section 15: Code Generation](../../15-code-generation).

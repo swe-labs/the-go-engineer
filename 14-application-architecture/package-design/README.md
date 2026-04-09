@@ -1,56 +1,37 @@
-﻿# Section 18: Package Design
+# Track A: Package Design
 
-## Learning Objectives
+## Mission
 
-Good package design is what separates beginner Go code from production-grade software. This section teaches you how to organize a real Go application into clean, testable, reusable packages.
+This track teaches you how to organize a Go codebase so package boundaries reinforce the design
+instead of hiding problems behind generic folders and global helpers.
 
-## Beginner → Expert Mapping
+## Track Map
 
-| Topic | Level | Importance | Engineering Concept |
-| ----- | ----- | ---------- | ------------------- |
-| Package naming | Beginner | High | Conventions and anti-patterns |
-| Export rules | Beginner | **Critical** | Uppercase = public, lowercase = private |
-| Internal packages | Intermediate | High | `internal/` visibility restriction |
-| Project layout | Intermediate | **Critical** | The standard Go project structure |
-| Dependency Inversion | Advanced | **Critical** | Interfaces at boundaries |
+| ID | Type | Surface | Why It Matters | Requires |
+| --- | --- | --- | --- | --- |
+| `PD.1` | Lesson | [naming](./1-naming) | Keeps package names readable and domain-specific. | entry |
+| `PD.2` | Lesson | [visibility](./2-visibility) | Uses export rules and `internal/` to tighten boundaries. | `PD.1` |
+| `PD.3` | Lesson | [project layout](./3-project-layout) | Chooses a layout that matches the real size of the system. | `PD.1`, `PD.2` |
 
-## Engineering Depth
+## Suggested Order
 
-Go packages are not just folders — they are the unit of compilation, testing, documentation, and visibility. A well-designed package:
+1. Start with `PD.1` so naming rules are clear before structure gets deeper.
+2. Continue to `PD.2` for export discipline and internal boundaries.
+3. Finish with `PD.3` once the naming and visibility rules feel concrete.
 
-1. Has a **clear single responsibility** (e.g., `auth`, `storage`, `email`)
-2. Exports a **small surface area** (few public types/functions)
-3. Defines **interfaces at the consumer**, not the provider
-4. Uses `internal/` to prevent external access to implementation details
-5. Avoids circular dependencies (Go's compiler forbids them)
+## Track Milestone
 
-## Contents
+`PD.3` is the current package-design output.
 
-| Directory | Topic | Level |
-| --------- | ----- | ----- |
-| `1-naming/` | Package naming conventions and anti-patterns | Beginner |
-| `2-visibility/` | Export rules, internal packages | Intermediate |
-| `3-project-layout/` | Standard Go project structure | Intermediate |
+If you can explain:
 
-## How to Run
+- why package names should describe a domain instead of a grab-bag
+- why `internal/` is a compiler-enforced boundary, not just a folder convention
+- why a layout should grow with the codebase instead of being over-designed on day one
 
-```bash
-go run ./14-application-architecture/package-design/1-naming
-go run ./14-application-architecture/package-design/2-visibility
-go run ./14-application-architecture/package-design/3-project-layout
-```
+then the package-design part of Section 14 is doing its job.
 
-## References
+## Next Step
 
-- [Effective Go: Package Names](https://go.dev/doc/effective_go#package-names)
-- [Standard Go Project Layout](https://github.com/golang-standards/project-layout)
-- [Go Blog: Package Names](https://go.dev/blog/package-names)
-
-
-## Learning Path
-
-| ID | Lesson | Concept | Requires |
-| --- | --- | --- | --- |
-| PD.1 | [naming](./1-naming) | Short lowercase names · no stutter · no utils · name by domain | 🟢 entry |
-| PD.2 | [visibility](./2-visibility) | Uppercase = exported · internal/ compiler enforcement · minimal API | PD.1 |
-| PD.3 | [project layout](./3-project-layout) | cmd/ · internal/ · pkg/ · start flat · anti-patterns | PD.1, PD.2 |
+After `PD.3`, continue to the [Structured Logging track](../structured-logging) or back to the
+[Section 14 overview](../README.md).

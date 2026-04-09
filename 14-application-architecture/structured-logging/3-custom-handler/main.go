@@ -14,7 +14,7 @@ import (
 )
 
 // ============================================================================
-// Section 23: Structured Logging — Custom slog.Handler
+// Section 14: Application Architecture - Structured Logging: Custom slog.Handler
 // Level: Advanced
 // ============================================================================
 //

@@ -20,14 +20,14 @@ import (
 )
 
 // ============================================================================
-// Section 27: Graceful Shutdown — Production HTTP Server
+// Section 14: Application Architecture - Graceful Shutdown: Production HTTP Server
 // Level: Advanced
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
 //   - http.Server.Shutdown(): drain in-flight requests without cutting them
 //   - The complete production graceful shutdown pattern:
-//       signal → stop accepting → drain requests → close DB → exit
+//       signal -> stop accepting -> drain requests -> close DB -> exit
 //   - Why log.Fatal(http.ListenAndServe(...)) is wrong for production
 //   - Testing graceful shutdown: how to verify requests aren't dropped
 //
@@ -38,8 +38,8 @@ import (
 //     2. Immediately sends SIGTERM to the process
 //
 //   During that 2-5 second window, traffic is STILL arriving at the pod.
-//   Without Shutdown(), those requests are instantly terminated → 502 errors.
-//   With Shutdown(), the server waits for those requests to complete → 0 errors.
+//   Without Shutdown(), those requests are instantly terminated -> 502 errors.
+//   With Shutdown(), the server waits for those requests to complete -> 0 errors.
 //
 // ENGINEERING DEPTH:
 //   http.Server.Shutdown(ctx) does four things:
@@ -49,12 +49,12 @@ import (
 //     4. Returns when all connections are idle or ctx expires
 //
 //   http.Server.ListenAndServe() returns http.ErrServerClosed when Shutdown
-//   is called. This is the expected "clean" exit — not an error. Always
+//   is called. This is the expected "clean" exit - not an error. Always
 //   check for this: if err != nil && !errors.Is(err, http.ErrServerClosed)
 //
 // RUN: go run ./14-application-architecture/graceful-shutdown/2-http-server
 //   Then: curl http://localhost:8080/api/slow   (simulates a slow 3s request)
-//   While the request is in-flight, press Ctrl+C — graceful shutdown waits for it.
+//   While the request is in-flight, press Ctrl+C - graceful shutdown waits for it.
 // ============================================================================
 
 type Server struct {
@@ -74,7 +74,7 @@ func NewServer(logger *slog.Logger) *Server {
 	s.httpServer = &http.Server{
 		Addr:    ":8080",
 		Handler: mux,
-		// Always set timeouts on http.Server — defaults are infinite.
+		// Always set timeouts on http.Server - defaults are infinite.
 		ReadTimeout:       5 * time.Second,
 		WriteTimeout:      30 * time.Second,
 		IdleTimeout:       120 * time.Second,
@@ -85,7 +85,7 @@ func NewServer(logger *slog.Logger) *Server {
 }
 
 // Start runs the HTTP server and blocks until it is shut down.
-// It returns http.ErrServerClosed on graceful shutdown — callers must handle this.
+// It returns http.ErrServerClosed on graceful shutdown - callers must handle this.
 func (s *Server) Start() error {
 	s.logger.Info("server starting", "addr", s.httpServer.Addr)
 	if err := s.httpServer.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
@@ -105,7 +105,7 @@ func (s *Server) Shutdown(ctx context.Context) error {
 	}
 	s.logger.Info("http server drained")
 
-	// Step 2: Close database (after HTTP — DB queries are used by handlers)
+	// Step 2: Close database (after HTTP - DB queries are used by handlers)
 	if s.db != nil {
 		if err := s.db.Close(); err != nil {
 			return fmt.Errorf("db close: %w", err)
@@ -199,7 +199,7 @@ func main() {
 	// - errgroup orchestrates server + signal handler goroutines elegantly
 	// - Kubernetes terminationGracePeriodSeconds = your maximum shutdown window
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CG.1 go:generate")
+	fmt.Println("🚀 NEXT UP: GS.3 shutdown capstone")
 	fmt.Println("   Current: GS.2 (HTTP graceful drain)")
 	fmt.Println("---------------------------------------------------")
 }

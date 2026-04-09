@@ -11,7 +11,7 @@ import (
 )
 
 // ============================================================================
-// Section 23: Structured Logging — slog Basics
+// Section 14: Application Architecture - Structured Logging: slog Basics
 // Level: Beginner
 // ============================================================================
 //

@@ -19,7 +19,7 @@ import (
 )
 
 // ============================================================================
-// Section 27: Graceful Shutdown — Complete Production Capstone
+// Section 14: Application Architecture - Graceful Shutdown: Complete Production Capstone
 // Level: Advanced
 // ============================================================================
 //
@@ -41,10 +41,10 @@ import (
 //   Reversing steps 2 and 4 would crash in-flight requests with DB errors.
 //
 // KUBERNETES READINESS PROBES:
-//   /healthz/ready — returns 200 when the service is ready to receive traffic.
+//   /healthz/ready - returns 200 when the service is ready to receive traffic.
 //                    Return 503 as soon as SIGTERM arrives.
 //                    Kubernetes will remove the pod from the load balancer.
-//   /healthz/live  — returns 200 as long as the process is responsive.
+//   /healthz/live  - returns 200 as long as the process is responsive.
 //                    Only return 503 if you want Kubernetes to RESTART the pod.
 //
 // RUN: go run ./14-application-architecture/graceful-shutdown/3-capstone
@@ -148,7 +148,7 @@ func (s *ProductionServer) SetNotReady() {
 	s.readyMu.Lock()
 	s.isReady = false
 	s.readyMu.Unlock()
-	s.logger.Info("readiness probe set to NOT READY — Kubernetes will stop routing traffic")
+	s.logger.Info("readiness probe set to NOT READY - Kubernetes will stop routing traffic")
 }
 
 func (s *ProductionServer) handleLive(w http.ResponseWriter, r *http.Request) {
@@ -190,7 +190,7 @@ func (s *ProductionServer) Shutdown(ctx context.Context) error {
 }
 
 // ============================================================================
-// Application wiring — the main entry point
+// Application wiring - the main entry point
 // ============================================================================
 
 func run() error {
@@ -264,9 +264,9 @@ func main() {
 	slog.Info("clean exit")
 
 	// KEY TAKEAWAY:
-	// - Shutdown ORDER matters: ready=503 → HTTP drain → workers → DB → logs
+	// - Shutdown ORDER matters: ready=503 -> HTTP drain -> workers -> DB -> logs
 	// - SetNotReady() before HTTP drain gives K8s time to stop routing traffic
 	// - errgroup wires HTTP server + workers + shutdown orchestrator together
-	// - Any goroutine returning an error cancels gctx → triggers shutdown
+	// - Any goroutine returning an error cancels gctx -> triggers shutdown
 	// - The shutdown goroutine gets its own 30-second deadline context
 }

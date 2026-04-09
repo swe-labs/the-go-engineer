@@ -14,8 +14,8 @@ import (
 )
 
 // ============================================================================
-// Section 27: Graceful Shutdown — signal.NotifyContext
-// Level: Beginner → Intermediate
+// Section 14: Application Architecture - Graceful Shutdown: signal.NotifyContext
+// Level: Beginner -> Intermediate
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -24,15 +24,15 @@ import (
 //   - Why every production binary must handle SIGTERM
 //   - The difference between the old signal.Notify pattern and NotifyContext
 //
-// OS SIGNALS — what you must know:
-//   SIGINT  (Ctrl+C)    — sent when user presses Ctrl+C in terminal
-//   SIGTERM             — sent by Kubernetes, systemd, docker stop, kill <pid>
-//   SIGKILL             — cannot be caught. Immediate termination (last resort).
+// OS SIGNALS - what you must know:
+//   SIGINT  (Ctrl+C)    - sent when user presses Ctrl+C in terminal
+//   SIGTERM             - sent by Kubernetes, systemd, docker stop, kill <pid>
+//   SIGKILL             - cannot be caught. Immediate termination (last resort).
 //
 //   The deployment sequence:
-//     1. docker stop / kubectl delete pod → sends SIGTERM
+//     1. docker stop / kubectl delete pod -> sends SIGTERM
 //     2. Process has 30 seconds to clean up
-//     3. If still running after 30s → SIGKILL (force kill, data loss possible)
+//     3. If still running after 30s -> SIGKILL (force kill, data loss possible)
 //
 // ENGINEERING DEPTH:
 //   Before signal.NotifyContext (Go 1.16), signal handling required:
@@ -47,7 +47,7 @@ import (
 //
 //   signal.NotifyContext wraps all of this in a context that is cancelled when
 //   the signal arrives. This integrates naturally with every context-aware API
-//   (database queries, HTTP clients, gRPC calls) — they all cancel automatically.
+//   (database queries, HTTP clients, gRPC calls) - they all cancel automatically.
 //
 // RUN: go run ./14-application-architecture/graceful-shutdown/1-signal-context
 //   Then press Ctrl+C to see the signal handling in action.
@@ -66,7 +66,7 @@ func BackgroundWorker(ctx context.Context, name string) {
 	for {
 		select {
 		case <-ctx.Done():
-			// Context cancelled — perform cleanup before returning
+			// Context cancelled - perform cleanup before returning
 			slog.Info("worker received shutdown signal", "name", name, "reason", ctx.Err())
 			// Simulate cleanup (flush buffer, close connection, etc.)
 			time.Sleep(200 * time.Millisecond)
@@ -92,10 +92,10 @@ func main() {
 	})))
 
 	// =========================================================================
-	// signal.NotifyContext — the idiomatic modern pattern
+	// signal.NotifyContext - the idiomatic modern pattern
 	// =========================================================================
 	// ctx is cancelled when SIGINT (Ctrl+C) or SIGTERM is received.
-	// stop() stops the signal relay — call it as soon as the context is done
+	// stop() stops the signal relay - call it as soon as the context is done
 	// to allow a second Ctrl+C to force-kill if cleanup hangs.
 	ctx, stop := signal.NotifyContext(context.Background(),
 		os.Interrupt,    // SIGINT (Ctrl+C)
@@ -115,12 +115,12 @@ func main() {
 	// Launch background workers using the signal context
 	// =========================================================================
 	// When SIGTERM arrives, ctx is cancelled, and ALL workers stop automatically.
-	// No manual plumbing required — the context tree propagates the signal.
+	// No manual plumbing required - the context tree propagates the signal.
 	go BackgroundWorker(ctx, "metrics-exporter")
 	go BackgroundWorker(ctx, "cache-refresher")
 	go BackgroundWorker(ctx, "health-broadcaster")
 
-	slog.Info("application started — press Ctrl+C or send SIGTERM to stop")
+	slog.Info("application started - press Ctrl+C or send SIGTERM to stop")
 
 	// =========================================================================
 	// Block until signal arrives
@@ -134,11 +134,11 @@ func main() {
 	// Graceful cleanup with a shutdown deadline
 	// =========================================================================
 	// Give background goroutines time to finish in-progress work.
-	// After the deadline, exit anyway — don't wait forever.
+	// After the deadline, exit anyway - don't wait forever.
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	// Wait for all workers to finish (simplified — in production use errgroup or WaitGroup)
+	// Wait for all workers to finish (simplified - in production use errgroup or WaitGroup)
 	done := make(chan struct{})
 	go func() {
 		// Simulate waiting for all workers
@@ -150,7 +150,7 @@ func main() {
 	case <-done:
 		slog.Info("graceful shutdown complete")
 	case <-shutdownCtx.Done():
-		slog.Warn("shutdown deadline exceeded — forcing exit")
+		slog.Warn("shutdown deadline exceeded - forcing exit")
 		fmt.Fprintln(os.Stderr, "shutdown timeout: some workers may not have finished cleanly")
 		os.Exit(1)
 	}

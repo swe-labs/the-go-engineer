@@ -9,7 +9,7 @@ import (
 )
 
 // ============================================================================
-// Section 23: Structured Logging — Exercise: PII Redactor
+// Section 14: Application Architecture - Structured Logging: Exercise Starter
 // Level: Intermediate
 // ============================================================================
 //

@@ -10,7 +10,7 @@ import (
 )
 
 // ============================================================================
-// Section 23: Structured Logging — Exercise: PII Redactor SOLUTION
+// Section 14: Application Architecture - Structured Logging: Exercise Solution
 // ============================================================================
 
 func main() {
