@@ -205,6 +205,7 @@ Beta must include:
 
 - a real `0 Foundation` layer
 - a public stage-based learner architecture
+- a mandatory mental-model surface in every section or stage
 - a canonical lesson standard
 - a canonical exercise standard
 - starter and solution expectations
@@ -212,6 +213,33 @@ Beta must include:
 - a mini-project ladder
 - a flagship project plan and initial scaffold
 - a production-engineering layer
+
+## Mental-Model Rule
+
+Every beta section or stage must include a mental-model explanation.
+
+That does not mean every section needs a separate `mental-model/` folder.
+
+Use this rule instead:
+
+- simple sections may satisfy the requirement through the stage README, section README, and first
+  lesson
+- complex sections should have a dedicated mental-model sublayer
+
+Complex sections usually include:
+
+- concurrency
+- backend engineering
+- architecture
+- performance and profiling
+- production engineering
+- expert-layer analysis
+
+Practical takeaway:
+
+- mental model is mandatory everywhere
+- a separate mental-model folder is mandatory only where abstraction, failure modes, or systems
+  intuition make it necessary
 
 ## What Beta Does Not Need To Ship Immediately
 
