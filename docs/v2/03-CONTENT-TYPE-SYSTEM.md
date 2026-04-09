@@ -49,6 +49,11 @@ The pacing and ambiguity level:
 - `stretch`
 - `production`
 
+Beta note:
+
+- `docs/v2/19-BETA-EXERCISE-RUBRIC-SYSTEM.md` keeps these same canonical values for beta exercise
+  work; later beta docs refine the contract but do not replace the band set
+
 ### 4. Verification Mode
 
 How the learner or repo verifies the item:

@@ -125,7 +125,7 @@ At minimum, `type` should support:
 `type` is the top-level curriculum role.
 `subtype` is optional and is most useful for lessons.
 
-First prototype convention:
+Current canonical planning convention:
 
 - lesson subtypes: `concept`, `pattern`, `integration`
 - level values: `foundation`, `core`, `stretch`, `production`

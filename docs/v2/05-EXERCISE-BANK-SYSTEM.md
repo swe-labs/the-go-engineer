@@ -80,7 +80,7 @@ Each exercise should eventually carry metadata for:
 - `id`
 - `title`
 - `section`
-- `difficulty`
+- `level`
 - `exercise_type`
 - `prerequisites`
 - `estimated_time`
@@ -99,6 +99,11 @@ Use the same bands across the repo:
 - `core`: standard synthesis
 - `stretch`: more design choice and ambiguity
 - `production`: realistic boundaries and tradeoffs
+
+Beta note:
+
+- `docs/v2/19-BETA-EXERCISE-RUBRIC-SYSTEM.md` is the stricter beta-phase authority for starter
+  mode, verification mode, and rubric expectations, but it keeps these same difficulty bands
 
 ## Definition Of Done
 

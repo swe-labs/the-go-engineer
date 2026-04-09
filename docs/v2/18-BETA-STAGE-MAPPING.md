@@ -294,6 +294,8 @@ Must land together:
 Why:
 
 - flagship work without expert pressure becomes a capstone only, not a real seniority bridge
+- planning may draft flagship scaffolding earlier, but the public learner-facing Group G cutover
+  should land as one connected bundle
 
 ### Group H: Code Generation Re-entry
 

@@ -134,11 +134,13 @@ Current alpha source:
 
 Purpose:
 
-- teach package boundaries, logging, shutdown, and service-level structural thinking
+- teach package boundaries, interface seams, service structure, and system-level structural thinking
 
 Current alpha source:
 
-- the package and service-structure portions of Section `14`
+- `14-application-architecture/package-design`
+- `14-application-architecture/grpc`
+- architectural slices of `14-application-architecture/enterprise-capstone`
 
 ### 8. Production Engineering
 
@@ -149,8 +151,8 @@ Purpose:
 
 Current alpha source:
 
-- the operational tracks already present inside Section `14`, especially structured logging and
-  graceful shutdown
+- the operational tracks already present inside Section `14`, especially structured logging,
+  graceful shutdown, and docker-and-deployment
 - new beta-only production topics such as deployment, config, tracing, and monitoring
 
 ### 9. Expert Layer
@@ -169,9 +171,10 @@ Purpose:
 
 - give the learner one large proof-of-skill project that pulls the curriculum together
 
-Current state:
+Current alpha source:
 
-- new beta layer
+- `14-application-architecture/enterprise-capstone`
+- milestone mini-project patterns already proven across the alpha curriculum
 
 ### 11. Code Generation
 
@@ -202,11 +205,13 @@ Current alpha source:
 | `12-concurrency-patterns` | `5 Concurrency System` | regroup |
 | `13-quality-and-performance` | `6 Quality And Performance` | regroup |
 | `14-application-architecture/package-design` | `7 Architecture` | split and regroup |
+| `14-application-architecture/grpc` | `7 Architecture` | split and regroup |
 | `14-application-architecture/structured-logging` | `8 Production Engineering` | split and regroup |
 | `14-application-architecture/graceful-shutdown` | `8 Production Engineering` | split and regroup |
+| `14-application-architecture/docker-and-deployment` | `8 Production Engineering` | split and regroup |
 | other beta-only production topics | `8 Production Engineering` | add |
 | none | `9 Expert Layer` | add |
-| none | `10 Flagship Project` | add |
+| `14-application-architecture/enterprise-capstone` | `10 Flagship Project` | split and extend |
 | `15-code-generation` | `11 Code Generation` | keep as late-stage specialization |
 
 ## Non-Negotiable Beta Requirements
@@ -257,7 +262,7 @@ Beta does not need:
 
 - a separate LMS or platform
 - automatic scoring infrastructure
-- complete easy-medium-hard-expert exercise coverage for every stage on day one
+- complete foundation-core-stretch-production exercise coverage for every stage on day one
 - a perfect physical folder rename for the entire repo in one massive cutover
 
 Those items are useful, but they are not the gating definition of beta.

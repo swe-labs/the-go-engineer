@@ -208,15 +208,16 @@ The recommended rollout order is:
 
 1. define and ship `0 Foundation`
 2. define and ship `Production Engineering`
-3. define the `Flagship Project` skeleton
-4. layer `Expert Layer` pressure over the later stages and flagship milestones
+3. define the `Flagship Project` skeleton together with the minimum `Expert Layer` pressure model
+4. expand `Expert Layer` pressure across the later stages and flagship milestones
 
 Why this order:
 
 - learners need an honest entry before they need pressure
 - production concepts need a real system context
-- expert pressure is strongest when learners already have something substantial to critique and
-  improve
+- flagship work is strongest when it is not separated from the first real expert-pressure surfaces
+- deeper expert pressure is strongest when learners already have something substantial to critique
+  and improve
 
 ## Definition Of Done For The Layer-Definition Phase
 

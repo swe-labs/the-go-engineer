@@ -19,12 +19,12 @@ This document is the planning authority for `#174`.
 Beta exercise design uses separate axes instead of one overloaded label:
 
 - `exercise_type`
-- `difficulty_band`
+- `level`
 - `starter_mode`
 - `verification_mode`
 
-This separation matters because a guided exercise can be easy or hard, a mini-project can be core
-or expert, and a checkpoint can be rubric-based even when it is not test-heavy.
+This separation matters because a guided exercise can be foundation or stretch, a mini-project can
+be core or production, and a checkpoint can be rubric-based even when it is not test-heavy.
 
 ## Canonical Exercise Types
 
@@ -110,17 +110,17 @@ Starter expectation:
 
 Beta uses four public difficulty bands:
 
-- `easy`
-- `medium`
-- `hard`
-- `expert`
+- `foundation`
+- `core`
+- `stretch`
+- `production`
 
 Use them like this:
 
-- `easy`: direct reinforcement with low ambiguity
-- `medium`: standard synthesis with one or two design choices
-- `hard`: realistic ambiguity, trade-offs, and stronger boundary handling
-- `expert`: review, failure analysis, or design pressure that assumes broad stage mastery
+- `foundation`: direct reinforcement with low ambiguity
+- `core`: standard synthesis with one or two design choices
+- `stretch`: realistic ambiguity, trade-offs, and stronger boundary handling
+- `production`: realistic boundaries, support concerns, and engineering trade-offs
 
 These difficulty bands do not replace exercise type.
 They describe challenge, not format.
@@ -263,7 +263,7 @@ Beta does not need perfect coverage everywhere, but it does need an honest minim
 
 ### Beta may defer
 
-- full easy-medium-hard-expert coverage for every stage
+- full foundation-core-stretch-production coverage for every stage
 - auto-scoring infrastructure
 - hidden test orchestration
 - progress tracking beyond repo-native proof
@@ -273,13 +273,16 @@ Beta does not need perfect coverage everywhere, but it does need an honest minim
 Beta practice metadata should eventually support these fields:
 
 - `exercise_type`
-- `difficulty_band`
+- `level`
 - `starter_mode`
 - `verification_mode`
 - `prerequisites`
 - `skills_validated`
 - `estimated_time`
 - `requires_rubric`
+
+The field name should stay `level`, while the allowed values remain the canonical difficulty bands:
+`foundation`, `core`, `stretch`, and `production`.
 
 When the schema is updated, these fields should be treated as first-class, not ad hoc tags.
 
