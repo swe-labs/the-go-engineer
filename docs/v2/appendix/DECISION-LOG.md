@@ -50,6 +50,17 @@ Each decision should capture:
 - Follow-up: use `docs/v2/19-BETA-EXERCISE-RUBRIC-SYSTEM.md` as the authority for `#174` and later
   beta practice implementation work
 
+### 2026-04-09: beta must treat foundation, production, expert pressure, and flagship work as first-class curriculum layers
+
+- Status: Working decision
+- Why it matters: beta cannot honestly claim zero-to-engineer scope if those layers remain implied
+  or optional
+- Alternatives:
+  - keep those concerns distributed loosely across existing stages
+  - define them explicitly so implementation work has owned outcomes and clearer rollout order
+- Follow-up: use `docs/v2/20-BETA-LAYER-DEFINITIONS.md` as the authority for `#175` and later beta
+  implementation design
+
 ### 2026-04-07: v2 planning is ready to open prototype work
 
 - Status: Working decision
