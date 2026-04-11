@@ -11,6 +11,12 @@ The live v2 slice focuses on three habits:
 - generating mocks from interfaces when hand-written test doubles stop scaling
 - generating typed data-access code from SQL instead of relying on reflection-heavy ORMs
 
+## Beta Stage Ownership
+
+This section belongs to [11 Code Generation](../docs/stages/11-code-generation.md).
+
+Within the beta public shell, it is the complete live source section for that stage.
+
 ## Who Should Start Here
 
 ### Full Path
@@ -66,5 +72,9 @@ then the code-generation part of the curriculum is doing its job.
 ## Next Step
 
 After `CG.3`, you have reached the end of the current public curriculum line.
+
+In the beta shell, that means you have completed
+[11 Code Generation](../docs/stages/11-code-generation.md).
+
 The best next move is to revisit any weak milestone, rebuild a capstone from memory, or apply the
 patterns in your own production-style Go project.
