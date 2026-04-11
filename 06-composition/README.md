@@ -12,6 +12,16 @@ By the end of Section 06, you should be comfortable reading and writing:
 - shadowed methods that change behavior at the outer type boundary
 - small domain models that reuse behavior without class hierarchies
 
+## Beta Stage Ownership
+
+This section belongs to [2 Types and Design](../docs/stages/02-types-and-design.md).
+
+Within the beta public shell, it is the second of three connected parts:
+
+1. Section 05 `types-and-interfaces`
+2. Section 06 `composition`
+3. Section 07 `strings-and-text`
+
 ## Who Should Start Here
 
 ### Full Path
@@ -86,3 +96,5 @@ This pilot intentionally avoids breaking the current Section 06 filesystem layou
 ## Next Step
 
 After `CO.3`, continue to [Section 07: Strings and Text](../07-strings-and-text).
+In the beta shell, that is still part of
+[2 Types and Design](../docs/stages/02-types-and-design.md).

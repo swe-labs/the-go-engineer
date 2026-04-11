@@ -14,6 +14,16 @@ By the end of Section 07, you should be comfortable reading and writing:
 - template-driven text rendering
 - small text-processing tools with runnable behavior and tests
 
+## Beta Stage Ownership
+
+This section belongs to [2 Types and Design](../docs/stages/02-types-and-design.md).
+
+Within the beta public shell, it is the third and final part of that stage:
+
+1. Section 05 `types-and-interfaces`
+2. Section 06 `composition`
+3. Section 07 `strings-and-text`
+
 ## Who Should Start Here
 
 ### Full Path
@@ -92,4 +102,9 @@ This pilot intentionally avoids breaking the current Section 07 filesystem layou
 
 ## Next Step
 
-After `ST.6`, continue to [Section 08: Modules and Packages](../08-modules-and-packages).
+After `ST.6`, you have completed the core milestone path for
+[2 Types and Design](../docs/stages/02-types-and-design.md).
+
+From there, move to [3 Modules and IO](../docs/stages/03-modules-and-io.md).
+The first source section in that next stage is
+[Section 08: Modules and Packages](../08-modules-and-packages).

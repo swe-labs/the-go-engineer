@@ -13,6 +13,16 @@ By the end of Section 05, you should be comfortable reading and writing:
 - small generic helpers built on interface-aware constraints
 - polymorphic code that works across multiple concrete types
 
+## Beta Stage Ownership
+
+This section belongs to [2 Types and Design](../docs/stages/02-types-and-design.md).
+
+Within the beta public shell, it is the first of three connected parts:
+
+1. Section 05 `types-and-interfaces`
+2. Section 06 `composition`
+3. Section 07 `strings-and-text`
+
 ## Who Should Start Here
 
 ### Full Path
@@ -96,4 +106,7 @@ This pilot intentionally avoids breaking the current Section 05 filesystem layou
 ## Next Step
 
 After `TI.6`, continue to [Section 06: Composition](../06-composition).
+In the beta shell, that keeps you inside
+[2 Types and Design](../docs/stages/02-types-and-design.md).
+
 If you want one more stretch lesson before moving on, finish `TI.7` first.
