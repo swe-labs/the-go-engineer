@@ -5,6 +5,9 @@ This guide explains how learners should move through the beta public curriculum.
 The repo is now organized around a beta stage model, even though most source content still lives in
 the current alpha-era section folders.
 
+For the public explanation of how that works, read
+[docs/beta-public-architecture.md](./docs/beta-public-architecture.md).
+
 Start with the stage pages:
 
 - [docs/stages/README.md](./docs/stages/README.md)
@@ -242,6 +245,7 @@ The beta stages regroup the current source sections like this:
 
 - [README.md](./README.md)
 - [docs/stages/README.md](./docs/stages/README.md)
+- [docs/beta-public-architecture.md](./docs/beta-public-architecture.md)
 - [docs/curriculum/README.md](./docs/curriculum/README.md)
 - [COMMON-MISTAKES.md](./COMMON-MISTAKES.md)
 - [CONTRIBUTING.md](./CONTRIBUTING.md)

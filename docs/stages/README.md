@@ -5,6 +5,9 @@ The beta curriculum is organized by engineering stage instead of the alpha-era s
 These stage pages are the public learner-facing entry surfaces for the beta model.
 The source content still lives in the current section folders while the regrouping work continues.
 
+If you want the public explanation of that relationship, read
+[../beta-public-architecture.md](../beta-public-architecture.md).
+
 ## How To Use These Docs
 
 1. Pick the stage that matches your current goal.

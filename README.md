@@ -14,6 +14,9 @@ from zero to production-minded engineering work.
 The beta public architecture is now the main learner-facing direction. The source content still
 lives in the current section folders while the beta shell is rolled out incrementally.
 
+If you want the public explanation of that transition model, read
+[docs/beta-public-architecture.md](./docs/beta-public-architecture.md).
+
 ## Start Here
 
 Pick the release channel that matches what you want:
@@ -98,6 +101,7 @@ These docs are still useful during the beta shell rollout:
 | --- | --- |
 | [LEARNING-PATH.md](./LEARNING-PATH.md) | current learning guide during the beta routing transition |
 | [docs/stages/README.md](./docs/stages/README.md) | beta stage entry index and stage-by-stage public routing |
+| [docs/beta-public-architecture.md](./docs/beta-public-architecture.md) | explanation of alpha source inventory versus beta public architecture |
 | [docs/curriculum/README.md](./docs/curriculum/README.md) | alpha source inventory and section-by-section curriculum map |
 | [COMMON-MISTAKES.md](./COMMON-MISTAKES.md) | common Go bugs and fixes |
 | [ROADMAP.md](./ROADMAP.md) | public roadmap and release direction |
@@ -120,6 +124,9 @@ During the beta rollout:
 
 That means the README now presents the curriculum by beta stage even though the physical folder
 layout is still mostly the alpha-era section structure.
+
+For the full explanation of that relationship, see
+[docs/beta-public-architecture.md](./docs/beta-public-architecture.md).
 
 ## Run Lessons And Exercises
 
