@@ -50,6 +50,15 @@ The stage is intentionally ordered from "how is this code organized and versione
 - [09-io-and-cli/encoding](../../09-io-and-cli/encoding/)
 - [09-io-and-cli/filesystem](../../09-io-and-cli/filesystem/)
 
+## Stage Support Docs
+
+Use these support docs when you want the beta-stage view without digging through Section `08` plus
+the Section `09` track docs:
+
+- [Modules and IO support index](./modules-and-io/README.md)
+- [Stage map](./modules-and-io/stage-map.md)
+- [Milestone guidance](./modules-and-io/milestone-guidance.md)
+
 ## Where This Stage Starts
 
 This stage starts at [08-modules-and-packages](../../08-modules-and-packages/).
