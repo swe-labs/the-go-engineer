@@ -4,6 +4,14 @@
 
 This track teaches the first real Go fundamentals after installation and tooling.
 
+## Beta Stage Ownership
+
+This track is the beginning of the public beta stage
+[1 Language Fundamentals](../../docs/stages/01-language-fundamentals.md).
+
+It is still physically inside Section `01`, but it no longer belongs to the same public learner
+stage as `getting-started`.
+
 By the end of this track, a learner should be able to:
 
 - declare and update variables confidently
@@ -47,3 +55,6 @@ types, constants, formatting, and defensive checks into one coherent program.
 ## Next Step
 
 After `LB.4`, continue to Section 02: Control Flow.
+
+In beta routing terms, this track is the handoff from Section `01` into the wider
+`1 Language Fundamentals` stage.

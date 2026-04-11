@@ -30,6 +30,18 @@ functions and errors create boundaries.
 - [03-data-structures](../../03-data-structures/)
 - [04-functions-and-errors](../../04-functions-and-errors/)
 
+## Where This Stage Starts
+
+This stage starts at [01-core-foundations/language-basics](../../01-core-foundations/language-basics/).
+
+The `getting-started` track from Section `01` belongs to
+[0 Foundation](./00-foundation.md), not to this stage.
+
+Practical split:
+
+- `GT.1` to `GT.4` = `0 Foundation`
+- `LB.1` to `LB.4` = start of `1 Language Fundamentals`
+
 ## Finish This Stage When
 
 - you can read and write small Go programs without copying line by line

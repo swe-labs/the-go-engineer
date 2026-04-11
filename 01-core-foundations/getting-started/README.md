@@ -5,6 +5,12 @@
 This track removes the setup friction that usually blocks beginners before they ever reach real Go
 fundamentals.
 
+## Beta Stage Ownership
+
+This track belongs to the public beta stage [0 Foundation](../../docs/stages/00-foundation.md).
+
+It is the setup and first-run half of Section `01`, not the beginning of `1 Language Fundamentals`.
+
 By the end of this track, a learner should be able to:
 
 - verify a working Go installation
@@ -31,6 +37,11 @@ By the end of this track, a learner should be able to:
 ## Where This Leads
 
 After this track, move into [Language Basics](../language-basics/) and start with `LB.1`.
+
+In beta routing terms:
+
+- this track is the end of `0 Foundation`
+- `LB.1` is the start of [1 Language Fundamentals](../../docs/stages/01-language-fundamentals.md)
 
 If you already know how to install Go and run simple programs, you can use this track as a quick
 tooling refresher instead of a hard gate.
