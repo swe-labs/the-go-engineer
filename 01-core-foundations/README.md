@@ -5,6 +5,16 @@
 This section gets a learner from "Go is installed and I can run programs" to "I can read and
 write small, typed Go programs without guessing."
 
+## Beta Routing Rule
+
+Section `01` is now one source section that feeds two different public beta stages:
+
+- [0 Foundation](../docs/stages/00-foundation.md) owns `getting-started`
+- [1 Language Fundamentals](../docs/stages/01-language-fundamentals.md) begins with `language-basics`
+
+That means this section is still one physical source area in the repo, but it is no longer one
+single learner-facing stage in the beta architecture.
+
 By the end of Section 01, you should be comfortable with:
 
 - running and reading small Go programs
@@ -17,7 +27,8 @@ By the end of Section 01, you should be comfortable with:
 
 ### Full Path
 
-Start with `GT.1` and work through the section in order.
+Start with [0 Foundation](../docs/stages/00-foundation.md), complete `GT.1` to `GT.4`, then move
+into `LB.1` to `LB.4` as the start of [1 Language Fundamentals](../docs/stages/01-language-fundamentals.md).
 
 ### Bridge Path
 
@@ -57,6 +68,11 @@ If you only want the live milestone, review these first:
 2. Work through `LB.1` to `LB.3` in order.
 3. Complete `LB.4` without copying the finished solution line by line.
 
+Public beta interpretation:
+
+- `GT.1` to `GT.4` belong to `0 Foundation`
+- `LB.1` to `LB.4` are the entry into `1 Language Fundamentals`
+
 ## Section Milestone
 
 `LB.4` is the current live milestone for this section.
@@ -71,15 +87,14 @@ then you are ready to move into control flow in Section 02.
 
 ## Pilot Role In V2
 
-This live v2 slice keeps the current `GS.*` and `LB.*` ids and filesystem layout stable while
-finally presenting them as one honest entry section:
+This live v2 slice keeps the current `GT.*` and `LB.*` ids and filesystem layout stable while
+making the beta split explicit:
 
-- `GT.1` to `GT.4` are the setup and first-program track
-- `LB.1` to `LB.3` are the core language-fundamentals track
-- `LB.4` is the first real milestone exercise
+- `GT.1` to `GT.4` are the setup and first-program track for `0 Foundation`
+- `LB.1` to `LB.3` are the opening language-fundamentals track for `1 Language Fundamentals`
+- `LB.4` is the first real language-fundamentals milestone exercise
 
-That keeps the repo usable for current learners while the remaining entry sections finish
-migrating.
+That keeps the repo usable for current learners while making the public beta routing honest.
 
 ## References
 
