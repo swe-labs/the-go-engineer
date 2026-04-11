@@ -16,6 +16,17 @@ By the end of the live v2 slice, you should be comfortable:
 Section 13 still contains additional reference material beyond this live slice. Those surfaces
 remain available while the first public testing and profiling tracks are migrated.
 
+## Beta Stage Ownership
+
+This section belongs to [6 Quality and Performance](../docs/stages/06-quality-and-performance.md).
+
+Within the beta public shell, it is the complete live source section for that stage:
+
+- the Testing track is the primary correctness path
+- the Profiling track is the primary performance investigation path
+- the other Section `13` surfaces remain reference material while the public beta route stays
+  selective
+
 ## Who Should Start Here
 
 ### Full Path
@@ -93,3 +104,8 @@ the main public testing and profiling path:
 
 After you finish the track or milestone you care about here, continue to
 [Section 14: Application Architecture](../14-application-architecture).
+
+In the beta shell, that means you are moving from
+[6 Quality and Performance](../docs/stages/06-quality-and-performance.md)
+to
+[7 Architecture](../docs/stages/07-architecture.md).
