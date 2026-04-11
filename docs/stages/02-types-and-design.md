@@ -51,6 +51,15 @@ transform real data with those types?"
 - [06-composition](../../06-composition/)
 - [07-strings-and-text](../../07-strings-and-text/)
 
+## Stage Support Docs
+
+Use these support docs when you want the beta-stage view without digging through three section
+READMEs:
+
+- [Types and Design support index](./types-and-design/README.md)
+- [Stage map](./types-and-design/stage-map.md)
+- [Milestone guidance](./types-and-design/milestone-guidance.md)
+
 ## Where This Stage Starts
 
 This stage starts at [05-types-and-interfaces](../../05-types-and-interfaces/).
