@@ -13,6 +13,18 @@ By the end of the live v2 slice, you should be comfortable:
 - building bounded concurrent pipelines instead of launching unbounded background work
 - combining concurrency control and operational safety in small real exercises
 
+## Beta Stage Ownership
+
+This section belongs to [5 Concurrency System](../docs/stages/05-concurrency-system.md).
+
+Within the beta public shell, it is the second and pattern-heavy half of that stage:
+
+1. Section 11 `concurrency`
+2. Section 12 `concurrency-patterns`
+
+That means this section should be read as the place where concurrency primitives become
+production-shaped patterns instead of as a completely separate topic.
+
 ## Who Should Start Here
 
 ### Full Path
@@ -77,4 +89,9 @@ main errgroup and pool path into the public curriculum graph:
 
 ## Next Step
 
-After `CP.5`, continue to [Section 13: Quality and Performance](../13-quality-and-performance).
+After `CP.5`, you have completed the current live milestone path for
+[5 Concurrency System](../docs/stages/05-concurrency-system.md).
+
+From there, move to [6 Quality and Performance](../docs/stages/06-quality-and-performance.md).
+The first source section in that next stage is
+[Section 13: Quality and Performance](../13-quality-and-performance).

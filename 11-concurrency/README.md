@@ -16,6 +16,18 @@ By the end of the live v2 slice, you should be comfortable:
 Section 11 still contains additional concurrency material beyond this live slice. Those surfaces
 remain available as legacy reference lessons while the first milestone path is migrated.
 
+## Beta Stage Ownership
+
+This section belongs to [5 Concurrency System](../docs/stages/05-concurrency-system.md).
+
+Within the beta public shell, it is the first and foundation-heavy half of that stage:
+
+1. Section 11 `concurrency`
+2. Section 12 `concurrency-patterns`
+
+That means Section 11 is where learners build the core coordination vocabulary before the stage
+moves into higher-pressure patterns in Section 12.
+
 ## Who Should Start Here
 
 ### Full Path
@@ -111,3 +123,8 @@ That keeps Section 11 useful now without pretending the entire mega-section is f
 
 After you finish the track or milestone you care about here, continue to
 [Section 12: Concurrency Patterns](../12-concurrency-patterns).
+
+In the beta shell, that keeps you inside
+[5 Concurrency System](../docs/stages/05-concurrency-system.md)
+before you move on to
+[6 Quality and Performance](../docs/stages/06-quality-and-performance.md).
