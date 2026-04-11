@@ -5,6 +5,13 @@
 This track teaches you how to keep services correct during deploys, restarts, and termination
 signals instead of treating shutdown as an afterthought.
 
+## Beta Stage Ownership
+
+This track belongs to [8 Production Engineering](../../docs/stages/08-production-engineering.md).
+
+Within the beta public shell, it is the second live learner path for that stage.
+It turns runtime thinking into explicit shutdown and drain behavior.
+
 ## Track Map
 
 | ID | Type | Surface | Why It Matters | Requires |
@@ -35,3 +42,11 @@ then the graceful-shutdown part of Section 14 is doing its job.
 
 After `GS.3`, continue back to the [Section 14 overview](../README.md) or move to
 [Section 15: Code Generation](../../15-code-generation).
+
+In the beta shell, you can also move from
+[8 Production Engineering](../../docs/stages/08-production-engineering.md)
+into either
+[9 Expert Layer](../../docs/stages/09-expert-layer.md)
+or
+[10 Flagship Project](../../docs/stages/10-flagship-project.md),
+depending on whether you want more pressure or a longer integrated build path next.

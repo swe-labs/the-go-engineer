@@ -5,6 +5,14 @@
 This track teaches you how to turn logs into queryable operational data instead of leaving them as
 strings that only make sense after a production incident has already happened.
 
+## Beta Stage Ownership
+
+This track belongs to [8 Production Engineering](../../docs/stages/08-production-engineering.md).
+
+Within the beta public shell, it is the first live learner path for that stage.
+It is where learners build runtime visibility habits before moving into shutdown and deployment
+behavior.
+
 ## Track Map
 
 | ID | Type | Surface | Why It Matters | Requires |
@@ -36,3 +44,6 @@ then the structured-logging part of Section 14 is doing its job.
 
 After `SL.5`, continue to the [Graceful Shutdown track](../graceful-shutdown) or back to the
 [Section 14 overview](../README.md).
+
+In the beta shell, this keeps you inside
+[8 Production Engineering](../../docs/stages/08-production-engineering.md).
