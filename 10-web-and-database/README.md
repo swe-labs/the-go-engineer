@@ -15,6 +15,14 @@ Section 10 also contains additional HTTP and web-application material. Those dir
 available as legacy reference surfaces, but the current live v2 slice focuses on the databases
 track first.
 
+## Beta Stage Ownership
+
+This section belongs to [4 Backend Engineering](../docs/stages/04-backend-engineering.md).
+
+Within the beta public shell, the databases track is the current live learner path.
+The other Section `10` directories remain valuable reference material, but they are not yet the
+main public beta route.
+
 ## Who Should Start Here
 
 ### Full Path
@@ -100,4 +108,10 @@ one pass.
 
 ## Next Step
 
-After `DB.6`, continue to [Section 11: Concurrency](../11-concurrency).
+After `DB.6`, you have completed the current live milestone path for
+[4 Backend Engineering](../docs/stages/04-backend-engineering.md).
+
+From there, move to [5 Concurrency System](../docs/stages/05-concurrency-system.md).
+The first source sections in that next stage are
+[Section 11: Concurrency](../11-concurrency) and
+[Section 12: Concurrency Patterns](../12-concurrency-patterns).
