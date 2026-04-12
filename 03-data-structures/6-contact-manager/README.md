@@ -1,12 +1,13 @@
-# DS.6 Contact Manager
+# DS.6 Contact Directory
 
 ## Mission
 
-Build a small in-memory contact manager that turns the Section 03 data-structure lessons into one
+Build a small in-memory contact directory that turns the Section 03 data-structure lessons into one
 coherent runnable exercise.
 
 This is the Section 03 milestone.
-It is where slices, maps, pointers, and simple struct modeling come together.
+It is where slices, maps, and pointers come together without depending on later-section abstractions
+like helper-function design or struct-heavy modeling.
 
 ## Prerequisites
 
@@ -20,13 +21,13 @@ Complete these first:
 
 ## What You Will Build
 
-Implement a small contact manager that:
+Implement a small contact directory that:
 
-1. defines a `Contact` struct
-2. stores contacts in a slice
-3. uses a map for efficient name lookup
-4. updates contacts through pointers or other mutation-aware logic
-5. prints a small demonstration flow in `main()`
+1. stores names, emails, and phone numbers in parallel slices
+2. uses a map for efficient name lookup
+3. updates stored data through a pointer to a slice element
+4. prints a small demonstration flow in `main()`
+5. stays inside the concepts already taught in Section 03
 
 ## Files
 
@@ -41,7 +42,7 @@ Run the completed solution:
 go run ./03-data-structures/6-contact-manager
 ```
 
-Run the starter:
+Run the starter scaffold:
 
 ```bash
 go run ./03-data-structures/6-contact-manager/_starter
@@ -51,17 +52,17 @@ go run ./03-data-structures/6-contact-manager/_starter
 
 Your finished solution should:
 
-- define a clear contact data model
-- add and retrieve contacts safely
+- add and retrieve contact data safely
 - show at least one update that persists correctly
 - keep the flow simple enough that the data-structure choices are visible
+- avoid hiding the exercise behind helper functions that belong more naturally to Section 04
 
 ## Common Failure Modes
 
-- appending to a slice without returning or reusing the updated slice
-- copying data when the operation really needs mutation
-- using pointers everywhere even when plain values would stay simpler
-- hiding the exercise behind too much package structure
+- appending to a slice without reusing the updated slice value
+- using a pointer before you are sure the lookup index exists
+- letting one contact's slice positions drift out of sync with the others
+- hiding the data-structure lesson under architecture that has not been taught yet
 
 ## Next Step
 
