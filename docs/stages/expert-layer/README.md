@@ -5,6 +5,7 @@ repo for judgment-heavy source seeds.
 
 ## In This Folder
 
+- [Task index](./tasks/README.md)
 - [Source seeds and ownership](./source-seeds.md)
 - [Stage map](./stage-map.md)
 - [Pressure guidance](./pressure-guidance.md)

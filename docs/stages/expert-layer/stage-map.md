@@ -14,6 +14,11 @@ constraints.
 | Redesign tasks | practice trade-off reasoning under constraints |
 | Flagship-linked pressure tasks | prepare learners for the longer integrated project path |
 
+## First Public Task Seeds
+
+- [DB.6 repository boundary review](./tasks/review-db6-repository-boundary.md)
+- [CP.5 health checker diagnosis](./tasks/diagnose-cp5-health-checker-failure.md)
+
 ## Entry Requirement
 
 This stage is for learners who already have meaningful milestone experience from the earlier beta
