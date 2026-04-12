@@ -29,6 +29,23 @@ Implement a small contact directory that:
 4. prints a small demonstration flow in `main()`
 5. stays inside the concepts already taught in Section 03
 
+## Visual Model
+
+```text
+index  name               email                phone
+0      Alice Wonderland  alice@example.com    111-2222
+1      Bob The Builder   bob@example.com      333-4444
+2      Charlie Brown     charlie@example.com  555-6666
+```
+
+```text
+indexByName
+
+"Alice Wonderland" -> 0
+"Bob The Builder"  -> 1
+"Charlie Brown"    -> 2
+```
+
 ## Why This Milestone Avoids Structs
 
 Structs matter, but they belong to a later section.
@@ -54,6 +71,12 @@ Run the starter scaffold:
 
 ```bash
 go run ./03-data-structures/6-contact-manager/_starter
+```
+
+Run the automated verification surface:
+
+```bash
+go test ./03-data-structures/6-contact-manager
 ```
 
 ## Recommended Learning Flow
@@ -149,6 +172,13 @@ That is the exact Section 03 idea chain:
 The final `Zack` check reminds the learner that not every key exists.
 The map lesson still matters here, even inside the milestone.
 
+## Try It
+
+1. Add one more contact and update the map with the new index.
+2. Change the contact you update from Bob to Charlie.
+3. Break the alignment on purpose by skipping one append, then explain why the output becomes wrong.
+4. Change the duplicate check to another name and watch how the guard behaves.
+
 ## Success Criteria
 
 Your finished solution should:
@@ -164,6 +194,17 @@ Your finished solution should:
 - using a pointer before you are sure the lookup index exists
 - letting one contact's slice positions drift out of sync with the others
 - hiding the data-structure lesson under architecture that has not been taught yet
+
+## Verification Surface
+
+Use these three proof surfaces together:
+
+1. `go run ./03-data-structures/6-contact-manager`
+2. `go run ./03-data-structures/6-contact-manager/_starter`
+3. `go test ./03-data-structures/6-contact-manager`
+
+The tests are not the lesson.
+They are a confidence check that the visible milestone behavior still matches the README contract.
 
 ## Questions This Milestone Should Answer
 

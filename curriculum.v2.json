@@ -595,12 +595,12 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
-      "verification_mode": "run",
+      "verification_mode": "mixed",
       "estimated_time": 40,
-      "summary": "Build a small in-memory contact manager that combines slices, maps, pointers, and a simple data model.",
+      "summary": "Build a small in-memory contact directory that combines parallel slices, map lookup, and pointer-based updates without relying on later-section abstractions.",
       "objectives": [
-        "Model contacts with a struct and in-memory collections",
-        "Combine slices, maps, and pointers in one coherent runnable exercise"
+        "Keep parallel slices aligned while storing contact data in memory",
+        "Use a map and a pointer together to locate and persist one contact update"
       ],
       "prerequisites": [
         "DS.1",
@@ -612,7 +612,7 @@
       "production_relevance": "Real applications routinely layer multiple data structures together to balance readability, lookup speed, and mutation behavior.",
       "path": "03-data-structures/6-contact-manager",
       "run_command": "go run ./03-data-structures/6-contact-manager",
-      "test_command": "",
+      "test_command": "go test ./03-data-structures/6-contact-manager",
       "starter_path": "03-data-structures/6-contact-manager/_starter",
       "next_items": [],
       "tags": [

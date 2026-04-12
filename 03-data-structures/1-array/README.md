@@ -20,6 +20,25 @@ That rule helps the learner understand slices by contrast in the next lesson.
 An array is a fixed-size value.
 Its size is part of its type, and copying an array copies all of its elements.
 
+## Visual Model
+
+```text
+numbers := [2]int{1, 2}
+
+index:   0   1
+value:   1   2
+```
+
+```text
+original = [10 20 30]
+copied   = original
+
+change copied[0] -> 99
+
+original = [10 20 30]
+copied   = [99 20 30]
+```
+
 ## Run Instructions
 
 ```bash
@@ -96,6 +115,12 @@ These prove that the original array stayed `[10 20 30]` while the copied array b
 `[99 20 30]`.
 
 That is the real lesson outcome.
+
+## Try It
+
+1. Change `var numbers [2]int` to `var numbers [3]int` and add one more assignment.
+2. Change `copied[0] = 99` to `original[0] = 99` and run the lesson again.
+3. Try declaring `other := [2]int{1, 2}` and compare it mentally with `[3]int{1, 2, 3}`.
 
 ## Common Questions
 

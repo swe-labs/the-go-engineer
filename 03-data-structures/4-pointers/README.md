@@ -15,6 +15,29 @@ change the original stored value rather than only a copy.
 A pointer stores the address of a value.
 You use it when you need to reach the original value and update it directly.
 
+## Visual Model
+
+```text
+score    = 50
+scorePtr = &score
+
+scorePtr --> score
+```
+
+```text
+*scorePtr = 95
+
+pointer follows the address
+and updates the original stored value
+```
+
+```text
+phones := []string{"111-2222", "333-4444", "555-6666"}
+bobPhone := &phones[1]
+
+bobPhone --> phones[1]
+```
+
 ## Run Instructions
 
 ```bash
@@ -90,6 +113,12 @@ This is the safety check.
 Dereferencing a nil pointer would panic, so the lesson shows the right habit first:
 
 - check before dereferencing when nil is possible
+
+## Try It
+
+1. Change `scoreCopy = 95` to another number and confirm that `score` still does not change.
+2. Change `*scorePtr = 95` to a different number and watch the original update again.
+3. Point at a different slice element, like `&phones[0]`, and update that instead.
 
 ## Common Questions
 

@@ -15,6 +15,29 @@ ways that surprise beginners.
 A sub-slice is usually another view over the same backing array.
 That makes slicing cheap, but it also means two slices can still touch the same stored data.
 
+## Visual Model
+
+```text
+original := [0 1 2 3 4 5]
+shared   := original[1:4]
+
+original: 0 1 2 3 4 5
+shared:     1 2 3
+```
+
+```text
+shared[0] = 100
+
+original: 0 100 2 3 4 5
+shared:     100 2 3
+```
+
+```text
+growth := original[2:4]
+append may still write into the original backing array
+if spare capacity exists
+```
+
 ## Run Instructions
 
 ```bash
@@ -75,6 +98,13 @@ This loop copies values one by one into the new independent slice.
 ### `independent[0] = 500`
 
 This final mutation proves the new slice no longer shares storage with the original.
+
+## Try It
+
+1. Change the sub-slice ranges and watch how `len` and `cap` change.
+2. Append more than one value to `growth` and inspect whether the original still changes.
+3. Change the manual copy loop to copy a different slice range and confirm the independent slice
+   stays separate.
 
 ## Common Questions
 

@@ -18,6 +18,32 @@ It tracks:
 - how many elements are currently in the slice
 - how much capacity remains before growth needs a new backing array
 
+## Visual Model
+
+```text
+items := make([]int, 0, 3)
+
+slice header:
+- pointer -> backing array
+- len     -> 0
+- cap     -> 3
+```
+
+```text
+after append 10, 20, 30
+
+backing array: [10 20 30]
+len = 3
+cap = 3
+```
+
+```text
+after append 40
+
+Go may allocate a larger backing array
+so the slice can keep growing
+```
+
 ## Run Instructions
 
 ```bash
@@ -82,6 +108,12 @@ This creates another view, starting from index `2` to the end.
 
 These two lines teach the learner that slicing syntax makes views, not independent new collections
 by default.
+
+## Try It
+
+1. Change the `make` call to `make([]int, 1, 3)` and watch how the starting length changes.
+2. Comment out one `items =` reassignment and see why `append` must be captured.
+3. Change `firstTwo := items[:2]` to `firstThree := items[:3]` and inspect the output again.
 
 ## Common Questions
 
