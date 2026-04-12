@@ -11,7 +11,7 @@ By the end of Section 03, you should be comfortable with:
 - slices as Go's main dynamic collection
 - maps for keyed lookup
 - pointers for mutation and nil-aware references
-- combining those pieces in one small in-memory program
+- combining those pieces in one small in-memory program without leaning on later-section abstractions
 
 ## Beta Stage Ownership
 
@@ -52,8 +52,8 @@ If you only want the live milestone, review these first:
 | `DS.2` | Lesson | [slices](./2-slices) | Teaches Go's primary dynamic collection type and the length/capacity model. | `DS.1` |
 | `DS.3` | Lesson | [maps](./3-maps) | Introduces keyed lookup and the comma-ok pattern for presence checks. | `DS.2` |
 | `DS.4` | Lesson | [pointers](./4-pointers) | Shows how Go models mutation and shared access without pointer arithmetic. | `DS.1`, `DS.2` |
-| `DS.5` | Lesson | [advanced slicing](./5-slices-2) | Explains shared backing arrays and the mutation traps that come with sub-slices. | `DS.2`, `DS.4` |
-| `DS.6` | Exercise | [contact manager](./6-contact-manager) | Combines slices, maps, pointers, and simple struct management in one runnable milestone. | `DS.1`, `DS.2`, `DS.3`, `DS.4`, `DS.5` |
+| `DS.5` | Lesson | [slice sharing and capacity](./5-slices-2) | Explains shared backing arrays and the mutation traps that come with sub-slices. | `DS.2`, `DS.4` |
+| `DS.6` | Exercise | [contact directory](./6-contact-manager) | Combines slices, maps, and pointers in one runnable milestone without jumping ahead to later abstractions. | `DS.1`, `DS.2`, `DS.3`, `DS.4`, `DS.5` |
 
 ## Suggested Order
 
@@ -69,6 +69,7 @@ If you can complete it and explain:
 - why slices and maps serve different jobs
 - why pointers matter when updates must stick
 - why shared backing arrays can surprise you when working with sub-slices
+- why the milestone avoids helper-function and struct-heavy design on purpose at this stage
 
 then you are ready to move into functions and errors in Section 04.
 

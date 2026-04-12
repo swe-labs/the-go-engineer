@@ -7,43 +7,33 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 03: Data Structures — Contact Manager (Exercise Starter)
+// Section 03: Data Structures - Contact Directory (Exercise Starter)
 // Level: Beginner
 // ============================================================================
 //
-// EXERCISE: Build an In-Memory Contact Manager
+// EXERCISE: Build an In-Memory Contact Directory
 //
 // REQUIREMENTS:
-//  1. [ ] Define a `Contact` struct with ID, Name, Email, and Phone fields
-//  2. [ ] Store contacts in a slice and keep a `map[string]int` for name lookup
-//  3. [ ] Implement `addContact(name, email, phone string)`
-//  4. [ ] Implement `findContact(name string) *Contact`
-//  5. [ ] Show at least one update in `main()` that persists through the returned pointer
+//  1. [ ] Create parallel `names`, `emails`, and `phones` slices
+//  2. [ ] Keep a `map[string]int` for name lookup
+//  3. [ ] Add at least three contacts in `main()`
+//  4. [ ] Use the map to find one contact's slice index
+//  5. [ ] Take a pointer to a stored phone number and prove the update persists
 //
 // HINTS:
-//   - Use `append()` to grow the master contact slice
-//   - Store each contact's slice index in a map for fast lookup
-//   - Returning `*Contact` lets you mutate the real stored value
+//   - Use `append()` to grow each slice
+//   - Keep the same index for one contact across all three slices
+//   - `phones[index]` is a real slice element, so `&phones[index]` gives you a pointer
 //
 // RUN: go run ./03-data-structures/6-contact-manager/_starter
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 
-// TODO: Define your Contact struct here
-
-// TODO: Add your contact slice, lookup map, and nextID state here
-
-// TODO: Implement addContact
-
-// TODO: Implement findContact
-
-// TODO: In main(), prove that an update through the returned pointer persists
-
 func main() {
-	fmt.Println("=== Contact Manager Exercise ===")
+	fmt.Println("=== Contact Directory Exercise ===")
 	fmt.Println()
-	fmt.Println("TODO: Implement your contact manager!")
-	fmt.Println("See the REQUIREMENTS above for what to build, including the persistent update step.")
+	fmt.Println("TODO: Build the contact directory using only Section 03 concepts.")
+	fmt.Println("Start with slices plus a map, then prove one pointer-based update persists.")
 	fmt.Println()
 	fmt.Println("When finished, compare your solution with ../main.go")
 }
