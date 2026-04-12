@@ -39,7 +39,7 @@ adding new modeling tools.
 
 ## Files
 
-- [main.go](./main.go): complete solution with teaching comments
+- [main.go](./main.go): complete runnable solution
 - [_starter/main.go](./_starter/main.go): starter file with TODOs
 
 ## Run Instructions
@@ -56,6 +56,99 @@ Run the starter scaffold:
 go run ./03-data-structures/6-contact-manager/_starter
 ```
 
+## Recommended Learning Flow
+
+1. Read this README first.
+2. Open [_starter/main.go](./_starter/main.go) and list the pieces you need.
+3. Try to build the milestone yourself.
+4. Run the starter and your solution often.
+5. Compare your result with [main.go](./main.go) only after you have attempted the design.
+
+## Solution Walkthrough
+
+The solution stays inside Section 03 concepts on purpose.
+
+### 1. Parallel slices set the storage model
+
+The solution starts with:
+
+- `names`
+- `emails`
+- `phones`
+
+Each contact uses the same index in all three slices.
+That is why the first design rule is "keep the indices aligned."
+
+### 2. The map turns a name into an index
+
+`indexByName` is a `map[string]int`.
+
+It does not store the contact data itself.
+It stores the slice position where that contact's data lives.
+
+That lets the solution answer:
+
+- "Where is Bob?"
+
+before it answers:
+
+- "What is Bob's phone number?"
+
+### 3. Each append must keep all slices in sync
+
+When the solution adds Alice, Bob, and Charlie, it appends to:
+
+- `names`
+- `emails`
+- `phones`
+
+Then it stores `len(names) - 1` in the map.
+
+That line matters because the newly added contact always lands at the last valid index.
+
+### 4. The duplicate check uses the map first
+
+The duplicate guard asks:
+
+```go
+if _, exists := indexByName["Alice Wonderland"]; exists {
+```
+
+This uses the comma-ok pattern from the maps lesson.
+It avoids creating a second contact entry with the same name.
+
+### 5. Listing proves the shared index model
+
+The `for i := 0; i < len(names); i++ { ... }` loop is deliberately simple.
+
+It prints:
+
+- `names[i]`
+- `emails[i]`
+- `phones[i]`
+
+side by side so the learner can see that one contact is really "one index across several slices."
+
+### 6. Pointer-based update is the real milestone proof
+
+The important sequence is:
+
+1. use the map to get Bob's index
+2. take `&phones[bobIndex]`
+3. write through that pointer
+4. read the slice again to prove the update persisted
+
+That is the exact Section 03 idea chain:
+
+- maps find the right position
+- slices hold the stored values
+- pointers let the update stick
+
+### 7. Missing lookup still uses comma-ok
+
+The final `Zack` check reminds the learner that not every key exists.
+The map lesson still matters here, even inside the milestone.
+
 ## Success Criteria
 
 Your finished solution should:
@@ -71,6 +164,13 @@ Your finished solution should:
 - using a pointer before you are sure the lookup index exists
 - letting one contact's slice positions drift out of sync with the others
 - hiding the data-structure lesson under architecture that has not been taught yet
+
+## Questions This Milestone Should Answer
+
+- Why use slices and a map together instead of only one of them?
+- Why is the map value an index instead of a phone number?
+- Why does taking `&phones[index]` let the update persist?
+- Why does this milestone stop before structs and helper functions?
 
 ## Next Step
 

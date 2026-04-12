@@ -11,17 +11,6 @@ import "fmt"
 // A pointer stores the address of a value. You use it when you need to update
 // the original stored value instead of a copy.
 //
-// In this lesson:
-// - create a pointer with &
-// - read and write through a pointer with *
-// - compare copy-based updates with pointer-based updates
-// - handle a nil pointer safely
-// - connect pointers to slice elements, which the Section 03 milestone needs
-//
-// Watch for:
-// - dereferencing a nil pointer will panic
-// - pointers are useful, but not every value needs one
-//
 // Run: go run ./03-data-structures/4-pointers
 
 func main() {

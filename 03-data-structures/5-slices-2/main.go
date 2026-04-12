@@ -12,16 +12,6 @@ import "fmt"
 // That keeps slicing cheap, but it also means two slices can still affect the
 // same stored data.
 //
-// In this lesson:
-// - inspect len and cap after slicing
-// - watch a sub-slice mutate the original data
-// - watch append reuse spare capacity
-// - break the shared link by copying into a new slice
-//
-// Watch for:
-// - a small sub-slice can still have a large capacity
-// - if append fits, it can still write into the original array
-//
 // Run: go run ./03-data-structures/5-slices-2
 
 func main() {

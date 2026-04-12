@@ -1,0 +1,110 @@
+# DS.4 Pointers
+
+## Mission
+
+Learn what a pointer is, how dereferencing works, and why pointers matter when an update must
+change the original stored value rather than only a copy.
+
+## Prerequisites
+
+- `DS.1` arrays
+- `DS.2` slices
+
+## Mental Model
+
+A pointer stores the address of a value.
+You use it when you need to reach the original value and update it directly.
+
+## Run Instructions
+
+```bash
+go run ./03-data-structures/4-pointers
+```
+
+## Code Walkthrough
+
+### `score := 50`
+
+This creates the original integer value.
+
+### `scorePtr := &score`
+
+`&score` means "the address of `score`."
+This line creates a pointer that points at the original variable.
+
+### The first `Printf` group
+
+These lines print:
+
+- the value in `score`
+- the address of `score`
+- the pointer value
+- the value reached by dereferencing the pointer
+
+`*scorePtr` means "go to the value stored at this address."
+
+### `scoreCopy := score`
+
+This copies the integer value.
+It does not create another pointer.
+
+### `scoreCopy = 95`
+
+This changes only the copied value.
+That is why the original `score` stays unchanged at that moment.
+
+### `*scorePtr = 95`
+
+This is the key pointer line in the lesson.
+
+It means:
+
+- go to the original value through the pointer
+- change that original value directly
+
+That is why `score` changes after this line.
+
+### `phones := []string{...}`
+
+This creates a slice so the lesson can connect pointers to stored collection elements.
+
+### `bobPhone := &phones[1]`
+
+This takes the address of the second phone number inside the slice.
+
+That matters for the milestone because later the contact-directory exercise updates one stored phone
+value through a pointer.
+
+### `*bobPhone = "333-9999"`
+
+This updates the slice element through the pointer.
+The final print proves the stored slice data changed.
+
+### `var optionalScore *int`
+
+This declares a pointer whose zero value is `nil`.
+
+### `if optionalScore == nil`
+
+This is the safety check.
+Dereferencing a nil pointer would panic, so the lesson shows the right habit first:
+
+- check before dereferencing when nil is possible
+
+## Common Questions
+
+- Why not use pointers everywhere?
+  Because many values do not need shared mutation. Use pointers when the original value must be
+  reached directly.
+
+- Why show a slice element pointer here?
+  Because Section 03 ends with a milestone that updates stored slice data through a pointer.
+
+## Production Relevance
+
+Pointers matter whenever a Go program must mutate stored state intentionally and safely. They also
+help learners stop confusing "copied value" with "original value."
+
+## Next Step
+
+Continue to `DS.5` slice sharing and capacity.

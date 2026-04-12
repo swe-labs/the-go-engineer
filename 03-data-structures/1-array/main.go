@@ -11,16 +11,6 @@ import "fmt"
 // Arrays are fixed-size values. If you copy one array into another, Go copies
 // all of the elements.
 //
-// In this lesson:
-// - declare arrays with an explicit size
-// - compare zero values and literals
-// - iterate with index and range
-// - observe copy-by-value behavior
-//
-// Watch for:
-// - [2]int and [3]int are different types
-// - arrays are mostly useful here as the contrast point for slices
-//
 // Run: go run ./03-data-structures/1-array
 
 func main() {

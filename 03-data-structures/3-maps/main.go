@@ -11,17 +11,6 @@ import "fmt"
 // A map connects keys to values. You use it when lookup by name matters more
 // than keeping items in order.
 //
-// In this lesson:
-// - create map literals
-// - add and update entries
-// - check whether a key exists with comma-ok
-// - remove an entry with delete
-// - build an empty map with make
-//
-// Watch for:
-// - reading a missing key gives the zero value
-// - use comma-ok when you need to know whether the key was really present
-//
 // Run: go run ./03-data-structures/3-maps
 
 func main() {

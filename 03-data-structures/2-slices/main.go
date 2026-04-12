@@ -11,17 +11,6 @@ import "fmt"
 // A slice is a small descriptor that points at an underlying array. It tracks
 // a current length and a capacity for growth.
 //
-// In this lesson:
-// - create slice literals
-// - use len and cap
-// - use make to pre-allocate space
-// - grow a slice with append
-// - take a smaller view with slicing syntax
-//
-// Watch for:
-// - append returns the updated slice value
-// - slicing a slice does not copy the data by default
-//
 // Run: go run ./03-data-structures/2-slices
 
 func main() {

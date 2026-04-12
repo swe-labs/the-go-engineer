@@ -12,15 +12,6 @@ import "fmt"
 // directly before the curriculum moves on to functions, structs, and more
 // layered design.
 //
-// In this lesson:
-// - keep one contact's data aligned across parallel slices
-// - use a map for O(1) lookup of the slice index
-// - update a stored phone number through a pointer
-//
-// Watch for:
-// - all three slices must stay index-aligned
-// - only take the pointer after you know the lookup succeeded
-//
 // Run: go run ./03-data-structures/6-contact-manager
 
 func main() {

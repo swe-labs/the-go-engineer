@@ -66,7 +66,8 @@ If you only want the live milestone, review these first:
 ## Suggested Order
 
 1. Work through `DS.1` to `DS.5` in order.
-2. Complete `DS.6` without copying the finished solution line by line.
+2. For each lesson, read the lesson `README.md` first and then run `main.go`.
+3. Complete `DS.6` without copying the finished solution line by line.
 
 ## Section Milestone
 
