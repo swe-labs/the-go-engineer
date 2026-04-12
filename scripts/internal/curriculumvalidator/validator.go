@@ -670,11 +670,11 @@ func validatePressureDocs(root string, report func(string)) int {
 	}
 
 	requiredLinks := map[string][]string{
-		"docs/stages/expert-layer/README.md":                 {"./tasks/README.md"},
-		"docs/stages/expert-layer/stage-map.md":              {"./tasks/README.md"},
-		"docs/stages/expert-layer/pressure-guidance.md":      {"./tasks/README.md"},
-		"docs/stages/flagship-project/README.md":             {"./checkpoints/README.md", "./slices/README.md"},
-		"docs/stages/flagship-project/stage-map.md":          {"./checkpoints/README.md", "./slices/README.md"},
+		"docs/stages/expert-layer/README.md":                  {"./tasks/README.md"},
+		"docs/stages/expert-layer/stage-map.md":               {"./tasks/README.md"},
+		"docs/stages/expert-layer/pressure-guidance.md":       {"./tasks/README.md"},
+		"docs/stages/flagship-project/README.md":              {"./checkpoints/README.md", "./slices/README.md"},
+		"docs/stages/flagship-project/stage-map.md":           {"./checkpoints/README.md", "./slices/README.md"},
 		"docs/stages/flagship-project/checkpoint-guidance.md": {"./checkpoints/README.md", "./slices/README.md"},
 	}
 
