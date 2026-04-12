@@ -161,6 +161,13 @@ This does **not** mean pattern lessons never need READMEs.
 It means this particular prototype lesson proves that the default v2 lesson can still live in code
 when the scope is well bounded.
 
+Beta note:
+
+- this prototype decision remains valid as a prototype proof
+- later beta implementation may still adopt README-first explanation for learner-facing lessons
+  where line-by-line support and clearer delivery are more important than proving a code-first
+  default
+
 ## Canonical Anatomy
 
 This lesson should prove the five required anatomy layers.
@@ -266,6 +273,11 @@ For this canonical lesson, use:
 This establishes an important v2 default:
 
 - if the code can teach clearly on its own, keep the lesson lightweight
+
+Beta adjustment:
+
+- for learner-facing lessons, the teaching system may still prefer a README-first walkthrough while
+  keeping the source file itself lean and runnable
 
 ## Lesson-Spec Validation Result
 

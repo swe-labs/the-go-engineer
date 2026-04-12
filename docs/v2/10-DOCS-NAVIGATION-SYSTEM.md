@@ -135,8 +135,8 @@ Primary job:
 
 - teach one item and point clearly to the next step
 
-The code file remains the primary teaching surface for most lessons.
-An additional `README.md` exists only when the lesson needs more structured context.
+The lesson README should be the primary explanation surface for learner-facing lessons.
+The runnable code file remains the primary execution surface.
 
 Every lesson should still expose:
 
@@ -144,6 +144,11 @@ Every lesson should still expose:
 - how to run or verify it
 - why it matters
 - what to do next
+
+Practical rule:
+
+- `README.md` should carry the deeper walkthrough first
+- `main.go` should stay readable, runnable, and required
 
 ### 6. Exercise, Checkpoint, And Project README
 
@@ -172,7 +177,7 @@ Use these ownership boundaries to reduce duplication.
 | `LEARNING-PATH.md` or v2 equivalent | route selection, path rules, skip rules, validation floors | full curriculum inventory, contributor internals |
 | `docs/curriculum/README.md` or v2 equivalent | phase and section map, high-level structure | path-selection advice in detail |
 | `NN-section/README.md` | section entry guidance, outputs, section flow | full repo overview |
-| lesson header / lesson README | item-specific teaching and next step | full section map |
+| lesson README + lesson code file | item-specific teaching, walkthrough, and next step | full section map |
 | exercise/checkpoint/project README | requirements, verification, milestone meaning | unrelated section-wide background |
 
 ## Required Section README Contract

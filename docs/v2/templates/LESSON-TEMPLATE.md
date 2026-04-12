@@ -10,7 +10,7 @@ contributors can copy without improvising:
 - lesson metadata
 - code header structure
 - lesson anatomy
-- README decision rules
+- README-first explanation rules
 - validator expectations
 
 This template is derived primarily from:
@@ -47,10 +47,13 @@ Default lesson layout:
 ```text
 N-lesson-name/
   main.go
-  README.md        # optional
+  README.md
   main_test.go     # optional
   testdata/        # optional
 ```
+
+The canonical beta lesson template assumes a learner-facing README exists.
+The explanation depth may change by stage, but the README-first teaching contract stays the same.
 
 Use a larger multi-file layout only when the teaching goal genuinely requires it.
 Lesson complexity should not grow just because the file layout allows it.
@@ -100,68 +103,42 @@ Every v2 lesson should start with a metadata draft like this:
 Every lesson entry file should begin with a header shaped like this:
 
 ```go
-// ============================================================================
+// Copyright (c) 2026 Rasel Hossen
+// See LICENSE for usage terms.
+//
 // Section NN: Section Name - Lesson Title
-// Level: Foundation | Core | Stretch | Production
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
-//   - Primary concept or pattern
-//   - Important supporting concept
-//   - One meaningful tradeoff or habit
+// Mental model:
+// One short sentence naming the learner's framing idea.
 //
-// ENGINEERING DEPTH:
-//   Why this matters in production Go. What failure mode, habit, or workflow
-//   does this lesson prepare the learner for?
-//
-// RUN: go run ./NN-section-name/N-lesson-name
-// ============================================================================
+// Run: go run ./NN-section-name/N-lesson-name
 ```
 
-Keep this header consistent with `CODE-STANDARDS.md`, but prefer v2 field language such as
-`Foundation | Core | Stretch | Production` over the older `Beginner | Intermediate | Advanced`
-labels when drafting new v2 content.
+Keep the header short.
+Do not move the README's deep explanation into the file header.
 
 ## Canonical Lesson Skeleton
 
-Use this as the default code-first lesson shape:
+Use this as the default beta lesson code shape:
 
 ```go
+// Copyright (c) 2026 Rasel Hossen
+// See LICENSE for usage terms.
+
 package main
 
 import "fmt"
 
-// ============================================================================
 // Section NN: Section Name - Lesson Title
-// Level: Core
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
-//   - Primary teaching objective
-//   - Supporting concept
-//
-// ENGINEERING DEPTH:
-//   One practical explanation of where this lesson matters in real Go work.
+// Mental model:
+// One short framing line.
 //
 // RUN: go run ./NN-section-name/N-lesson-name
-// ============================================================================
 
 func main() {
-	// Framing:
-	// Explain what the learner is about to see and why it matters here.
-
-	// Core example:
-	// Show one bounded example that expresses the main idea clearly.
-
-	// Explanation:
-	// Use comments around the example to explain tradeoffs, gotchas, and why
-	// the code is shaped this way.
-
-	// Production relevance:
-	// Connect the example to a real workflow, boundary, or failure mode.
-
-	// Exit ramp:
-	// Point the learner to the next lesson, drill, exercise, or checkpoint.
+	// Use local comments only where they genuinely help the learner understand
+	// a non-obvious mechanic, boundary, or reasoning step.
 
 	fmt.Println("replace with lesson output")
 }
@@ -221,20 +198,35 @@ Default shape:
 - explicit relationship to prior lessons
 - clear warning against overexpansion
 
+## Canonical Lesson README
+
+The beta lesson template requires a learner-facing README.
+
+Use the README to carry the explanation load that would otherwise make the code noisy.
+
+Every lesson README should usually include:
+
+1. mission
+2. prerequisites
+3. mental model
+4. what problem this lesson solves now
+5. run instructions
+6. code walkthrough
+7. common questions or failure points
+8. production relevance
+9. next step
+
+The walkthrough should explain the code line by line or in small logical chunks.
+Group lines only when they belong to one inseparable step.
+
+See `LESSON-README-TEMPLATE.md` for the default shape.
+
 ## README Decision Rules
 
-The default v2 lesson should be:
+Use a full README for learner-facing beta lessons.
 
-- code-first
-
-Add `README.md` only when at least one of these is true:
-
-- runtime setup is non-trivial
-- the lesson uses multiple files or commands
-- a table, diagram, or structured comparison materially helps understanding
-- troubleshooting guidance is necessary beyond inline comments
-
-Do not add a README just to satisfy ceremony.
+README-first does not remove the code requirement.
+The learner should read the explanation first, then run and inspect the code itself.
 
 ## Test Decision Rules
 
@@ -269,7 +261,9 @@ Before calling a lesson draft complete, confirm:
 - the run or test command is real
 - the production relevance is explicit
 - the next step is named clearly in `next_items`
-- README support is intentional, not automatic
+- the README explains the code at the right depth for the intended learner
+- the source file stays readable instead of absorbing the whole explanation burden
+- the code remains a required runnable proof surface after the README
 
 ## Validator Notes
 
@@ -309,6 +303,6 @@ guessing:
 - the metadata shape
 - the file header
 - the lesson anatomy
-- whether a README is needed
+- how the README and code file divide the teaching work
 - what validator expectations the lesson should satisfy
 

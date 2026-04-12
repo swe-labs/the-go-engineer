@@ -12,6 +12,7 @@ implementation work is approved.
 ## Current Templates
 
 - [LESSON-TEMPLATE.md](./LESSON-TEMPLATE.md) - canonical v2 lesson template
+- [LESSON-README-TEMPLATE.md](./LESSON-README-TEMPLATE.md) - canonical learner-facing lesson walkthrough template
 - [EXERCISE-TEMPLATE.md](./EXERCISE-TEMPLATE.md) - canonical v2 guided exercise template
 - [CHECKPOINT-TEMPLATE.md](./CHECKPOINT-TEMPLATE.md) - canonical v2 checkpoint template
 - [MINI-PROJECT-TEMPLATE.md](./MINI-PROJECT-TEMPLATE.md) - canonical v2 mini-project template

@@ -71,7 +71,7 @@ The default lesson layout should be:
 NN-section-name/
   [optional-subgraph/]N-lesson-name/
     main.go
-    README.md        # optional for complex lessons
+    README.md        # required for learner-facing lessons
     main_test.go     # optional when testable behavior adds value
     testdata/        # optional when fixtures matter
 ```
@@ -116,29 +116,71 @@ Tell the learner what to do next:
 - exercise
 - section checkpoint
 
+## Teaching Surface Rule
+
+For beta, the teaching surface should change with learner needs.
+
+Use this rule:
+
+- `main.go` is the runnable and inspectable code surface
+- `README.md` is the primary explanation surface for learner-facing lessons
+- inline comments should explain local mechanics, boundaries, and non-obvious reasoning
+- deep walkthroughs, line-by-line explanation, runtime-model framing, and "why this line exists"
+  guidance should live in the README rather than bloating the source header
+
+This keeps the code readable while still giving beginners enough explanation to answer:
+
+- what is happening
+- why it is happening
+- how the code changes behavior
+- what would break if a line or step changed
+
 ## Code Header Contract
 
-Every lesson entry file should keep the existing project strengths and include:
+Every lesson entry file should stay lean and include:
 
+- copyright line
+- license pointer
 - section and lesson title
-- level
-- "what you'll learn"
-- "engineering depth"
+- one short mental-model or focus note
 - run command
 
-The current code standards are a good baseline. v2 should standardize them rather than replacing
-them with a totally new style.
+Do not use the code header as the main home for:
+
+- long objective lists
+- level labels
+- engineering-depth prose
+- repeated section-level background
+
+Those explanations belong in the learner-facing README and metadata.
 
 ## When A Lesson Needs A README
 
-A lesson should include `README.md` when:
+A lesson must include `README.md` when:
+
+- the lesson is part of the learner-facing curriculum
+- the learner benefits from line-by-line or small-chunk explanation to follow the example
+- the lesson introduces a new mental model, runtime behavior, boundary, or design move that needs
+  more than short inline comments
+
+A lesson should also include `README.md` when:
 
 - runtime setup is non-trivial
 - the lesson has multiple files or commands
 - diagrams, tables, or structured comparisons help understanding
 - the learner needs troubleshooting help beyond inline comments
 
-Otherwise, the code file should remain the primary teaching surface.
+For lessons with a README, the README should usually own:
+
+- mission and prerequisites
+- mental model
+- the walkthrough of the code line by line or in small logical chunks
+- common questions and failure points
+- production relevance and next step
+
+The code file should remain mandatory and runnable after the docs.
+README-first does not mean prose-only. It means the explanation comes first and the code remains the
+required proof surface.
 
 ## When A Lesson Needs Tests
 
@@ -183,4 +225,5 @@ A lesson is ready for v2 when:
 - the metadata matches the lesson reality
 - the next step is obvious
 - the production relevance is explicit
+- the explanation depth matches the intended learner, with README support where needed
 - the lesson is small enough to be teachable and large enough to matter

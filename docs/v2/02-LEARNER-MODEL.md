@@ -30,7 +30,8 @@ Profile:
 Needs:
 
 - careful pacing
-- readable inline comments
+- lesson READMEs that explain code line by line or in very small chunks, with depth adjusted by stage
+- readable inline comments for local mechanics inside the code itself
 - repeated reinforcement
 - small but visible exercises
 - fewer hidden assumptions
@@ -142,6 +143,7 @@ The curriculum should assume extra support is needed at these transitions:
 This learner model implies the following product rules:
 
 - early sections must stay concrete and confidence-building
+- learner-facing lessons should use README-first explanation while keeping runnable code clean
 - advanced sections must clearly state prerequisites
 - projects should grow in complexity gradually
 - fast-track learners should be able to skip repetition without skipping validation

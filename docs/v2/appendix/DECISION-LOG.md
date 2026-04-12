@@ -15,6 +15,18 @@ Each decision should capture:
 
 ## Working Decisions
 
+### 2026-04-12: learner-facing lessons should use README-first explanation with cleaner code files
+
+- Status: Working decision
+- Why it matters: the zero-to-engineer learner promise requires more explanation than source-file
+  headers and scattered inline comments can carry cleanly
+- Alternatives:
+  - keep code-first lessons as the default everywhere and rely on inline comments
+    - make learner-facing READMEs the primary explanation surface while keeping runnable code
+      smaller, clearer, and still mandatory
+- Follow-up: revise the lesson spec and lesson template, add a canonical lesson README template, and
+  retrofit rebuilt sections to the new contract
+
 ### 2026-04-09: beta is a learner-facing architecture redesign, not just alpha plus polish
 
 - Status: Working decision
