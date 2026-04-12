@@ -60,4 +60,6 @@ curl http://localhost:8080/posts
 
 After you understand this seed, return to the
 [Flagship Project stage](../../docs/stages/10-flagship-project.md)
-and use the checkpoint guidance there to decide what kind of work should come next.
+and use the
+[checkpoint set](../../docs/stages/flagship-project/checkpoints/README.md)
+to decide what kind of work should come next.

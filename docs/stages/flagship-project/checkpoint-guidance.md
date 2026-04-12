@@ -15,6 +15,10 @@ when you define new flagship checkpoints.
 
 ## Current Checkpoints
 
+The current public checkpoint set lives here:
+
+- [Checkpoint set index](./checkpoints/README.md)
+
 ### Foundation checkpoint
 
 Run the system, explain the moving parts, and identify the main boundaries before changing code.

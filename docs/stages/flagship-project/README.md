@@ -7,6 +7,7 @@ it from the source tree alone.
 
 - [Stage map](./stage-map.md)
 - [Checkpoint guidance](./checkpoint-guidance.md)
+- [Checkpoint set](./checkpoints/README.md)
 
 ## Current Stage Scope
 

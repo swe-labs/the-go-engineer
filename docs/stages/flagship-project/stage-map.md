@@ -21,6 +21,10 @@ work together.
 | Operations | explain runtime, deployment, and lifecycle behavior |
 | Iteration | add or improve behavior without collapsing the design |
 
+Use the published checkpoint set here:
+
+- [Checkpoint set](./checkpoints/README.md)
+
 ## Handoff
 
 After the flagship path is meaningful, [11 Code Generation](../11-code-generation.md) becomes much
