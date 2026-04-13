@@ -12,9 +12,9 @@ error handling.
    - core job: teach values, variables, constants, and simple program structure
    - milestone: `LB.4` application logger
 2. `control-flow`
-   - source: [02-control-flow](../../../02-control-flow/)
+   - source: [01-foundations/03-control-flow](../../../01-foundations/03-control-flow/)
    - core job: teach loops, branching, and readable decision logic
-   - milestone: `CF.4` pricing calculator
+   - milestone: `CF.5` pricing checkout
 3. `data-structures`
    - source: [03-data-structures](../../../03-data-structures/)
    - core job: teach slices, maps, pointers, and mutation-aware thinking
@@ -46,7 +46,7 @@ This is where the learner starts treating function signatures and errors as expl
 ## Recommended Full-Path Order
 
 1. Finish the `language-basics` track first.
-2. Move through Section `02` and complete `CF.4`.
+2. Move through `01-foundations/03-control-flow` and complete `CF.5`.
 3. Move through Section `03` and complete `DS.6`.
 4. Move through Section `04` and complete `FE.9`.
 
@@ -56,7 +56,7 @@ If Go syntax is already familiar, you can move faster through the early repetiti
 What you should not skip is proof:
 
 - `LB.4`
-- `CF.4`
+- `CF.5`
 - `DS.6`
 - `FE.9`
 

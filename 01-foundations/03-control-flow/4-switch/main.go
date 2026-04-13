@@ -29,4 +29,9 @@ func main() {
 	default:
 		fmt.Println("Needs more work.")
 	}
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: CF.5 pricing-checkout")
+	fmt.Println("Current: CF.4 (switch)")
+	fmt.Println("---------------------------------------------------")
 }

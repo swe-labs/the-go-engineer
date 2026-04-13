@@ -35,7 +35,7 @@ Implement a checkout flow that:
 
 1. loops over a small cart of item codes
 2. uses `switch` to assign a base price
-3. detects `_SALE` items with an `if` check
+3. applies one simple discount rule with `if`
 4. skips unknown items with `continue`
 5. computes a running subtotal
 
@@ -66,16 +66,7 @@ The important idea is that the loop now has several inputs to process.
 
 This repeats the same decision process for each cart entry.
 
-### `isSale := strings.HasSuffix(item, "_SALE")`
-
-This creates a yes/no decision the program can branch on.
-
-### `baseCode := strings.TrimSuffix(item, "_SALE")`
-
-If the item is a sale item, the code strips the suffix before pricing it.
-That keeps the later `switch` focused on the real product code.
-
-### `switch baseCode { ... }`
+### `switch item { ... }`
 
 This is the pricing rule engine.
 Each known code maps to a base price.
@@ -85,9 +76,11 @@ Each known code maps to a base price.
 Unknown items are skipped safely.
 The loop keeps running, but the subtotal is not polluted by invalid entries.
 
-### `if isSale { price = price * 0.80 }`
+### `if item == "BOOK" { price = price * 0.90 }`
 
-This applies the discount only after the base price has been found.
+This is the extra branch rule.
+It proves that `switch` does not replace `if`.
+The two tools solve different decision shapes inside the same program.
 
 ### `subtotal += price`
 
@@ -97,13 +90,12 @@ Each valid item contributes to the final answer.
 ## Try It
 
 1. Add another known item code to the cart.
-2. Add one more `_SALE` item and confirm the discount still applies.
+2. Change the book discount from `10%` to `15%`.
 3. Put an unknown item in the middle of the cart and watch the loop skip it cleanly.
-4. Change the discount from `20%` to `10%`.
+4. Add a second discount rule and explain why it belongs in `if` instead of `switch`.
 
 ## Common Failure Modes
 
-- trying to price the `_SALE` code before stripping the suffix
 - forgetting to skip unknown items
 - applying the discount before a valid base price exists
 - mixing too many future abstractions into a control-flow milestone
@@ -114,7 +106,7 @@ Your program is successful when it:
 
 - processes the whole cart from top to bottom
 - prices known items correctly
-- discounts sale items correctly
+- applies the simple discount rule correctly
 - skips unknown items safely
 - prints a final subtotal
 

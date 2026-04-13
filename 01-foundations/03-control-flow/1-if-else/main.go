@@ -33,4 +33,9 @@ func main() {
 	} else {
 		fmt.Println("Username is present.")
 	}
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: CF.2 for-basics")
+	fmt.Println("Current: CF.1 (if / else)")
+	fmt.Println("---------------------------------------------------")
 }

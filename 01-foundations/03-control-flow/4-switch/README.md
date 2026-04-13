@@ -1,4 +1,4 @@
-# CF.3 Switch
+# CF.4 Switch
 
 ## Mission
 
@@ -13,7 +13,7 @@ When the number of cases grows, `switch` often reads more clearly.
 ## Run Instructions
 
 ```bash
-go run ./01-foundations/03-control-flow/3-switch
+go run ./01-foundations/03-control-flow/4-switch
 ```
 
 ## Code Walkthrough
@@ -70,4 +70,4 @@ It often makes business rules easier to scan than long `if / else if` ladders.
 
 ## Next Step
 
-Continue to `CF.4` break / continue.
+Continue to `CF.5` pricing checkout.

@@ -10,7 +10,7 @@ func main() {
 	// 1. Create a small cart of item codes.
 	// 2. Loop through the cart.
 	// 3. Use switch to assign a base price for known items.
-	// 4. Detect "_SALE" items and apply a 20% discount.
+	// 4. Add one simple discount rule with if.
 	// 5. Skip unknown items safely.
 	// 6. Print the final subtotal.
 

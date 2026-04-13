@@ -22,7 +22,12 @@ func main() {
 	fmt.Println()
 	fmt.Println("Range preview:")
 	words := []string{"go", "learn", "repeat"}
-	for index, word := range words {
-		fmt.Printf("words[%d] = %s\n", index, word)
+	for _, word := range words {
+		fmt.Printf("word = %s\n", word)
 	}
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: CF.3 break-continue")
+	fmt.Println("Current: CF.2 (for basics)")
+	fmt.Println("---------------------------------------------------")
 }

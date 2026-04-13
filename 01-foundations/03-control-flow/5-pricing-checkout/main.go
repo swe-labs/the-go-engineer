@@ -3,25 +3,19 @@
 
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
 func main() {
-	cart := []string{"TSHIRT", "MUG_SALE", "HAT", "BOOK", "KEYBOARD"}
+	cart := []string{"TSHIRT", "MUG", "HAT", "BOOK", "KEYBOARD"}
 
 	var subtotal float64
 
 	fmt.Println("Processing checkout:")
 
 	for _, item := range cart {
-		isSale := strings.HasSuffix(item, "_SALE")
-		baseCode := strings.TrimSuffix(item, "_SALE")
-
 		var price float64
 
-		switch baseCode {
+		switch item {
 		case "TSHIRT":
 			price = 20.00
 		case "MUG":
@@ -37,12 +31,12 @@ func main() {
 			continue
 		}
 
-		if isSale {
+		if item == "BOOK" {
 			originalPrice := price
-			price = price * 0.80
-			fmt.Printf("%s sale: %.2f -> %.2f\n", baseCode, originalPrice, price)
+			price = price * 0.90
+			fmt.Printf("%s promo: %.2f -> %.2f\n", item, originalPrice, price)
 		} else {
-			fmt.Printf("%s: %.2f\n", baseCode, price)
+			fmt.Printf("%s: %.2f\n", item, price)
 		}
 
 		subtotal += price

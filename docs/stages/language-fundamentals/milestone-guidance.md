@@ -10,7 +10,7 @@ Together, they show whether a learner can actually use the stage instead of only
 | ID | Surface | What It Proves |
 | --- | --- | --- |
 | `LB.4` | application logger | you can write a small Go program with named values, simple structure, and readable output |
-| `CF.4` | pricing calculator | you can combine loops, conditionals, maps, and small helpers in one runnable flow |
+| `CF.5` | pricing checkout | you can combine branching, looping, switch-based rules, and safe skipping in one runnable flow |
 | `DS.6` | contact manager | you can use slices, maps, and pointers together without losing track of mutation |
 | `FE.9` | error handling project | you can model failures explicitly and use functions and cleanup in a disciplined way |
 
@@ -32,7 +32,7 @@ If you enter the stage late, choose the milestone that best matches your real ga
 check backward honestly:
 
 - weak on basic Go program shape: start with `LB.4`
-- weak on decision logic and loops: start with `CF.4`
+- weak on decision logic and loops: start with `CF.5`
 - weak on collections and mutation: start with `DS.6`
 - weak on function contracts and failures: start with `FE.9`
 
@@ -52,6 +52,6 @@ That is usually a routing signal, not a failure signal.
 Go back one layer:
 
 - `LB.4` too hard: revisit `language-basics`
-- `CF.4` too hard: revisit `for`, `if`, and `switch`
+- `CF.5` too hard: revisit `if`, `for`, `break / continue`, and `switch`
 - `DS.6` too hard: revisit slices, maps, and pointers
 - `FE.9` too hard: revisit multiple returns, custom errors, wrapping, and `defer`

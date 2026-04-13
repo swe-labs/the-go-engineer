@@ -1,5 +1,14 @@
 # Section 02: Control Flow
 
+## Migration Note
+
+The canonical rebuilt learner-facing implementation for this section now lives at:
+
+[01-foundations/03-control-flow](../01-foundations/03-control-flow/)
+
+This `02-control-flow` folder is retained temporarily as a legacy source surface while the new
+top-level architecture is rolled out.
+
 ## Mission
 
 This section teaches learners how Go expresses decisions and repetition without adding extra

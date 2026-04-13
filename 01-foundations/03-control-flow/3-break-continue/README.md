@@ -1,4 +1,4 @@
-# CF.4 Break / Continue
+# CF.3 Break / Continue
 
 ## Mission
 
@@ -20,7 +20,7 @@ That is the purpose of loop control.
 ## Run Instructions
 
 ```bash
-go run ./01-foundations/03-control-flow/4-break-continue
+go run ./01-foundations/03-control-flow/3-break-continue
 ```
 
 ## Code Walkthrough
@@ -69,4 +69,4 @@ Loop control appears in real programs when you need to:
 
 ## Next Step
 
-Continue to `CF.5` pricing checkout.
+Continue to `CF.4` switch.

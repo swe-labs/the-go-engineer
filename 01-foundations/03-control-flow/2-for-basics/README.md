@@ -5,7 +5,7 @@
 Learn how Go repeats work.
 
 Go has only one loop keyword: `for`.
-That is enough for counted loops, condition-based loops, and lightweight preview iteration.
+That is enough for counted loops, condition-based loops, and a small `range` preview.
 
 ## Why This Lesson Exists Now
 
@@ -53,15 +53,12 @@ For this lesson, all you need to know is:
 - `range` visits them one by one
 
 The data-structures section teaches the collection mechanics properly.
+Here, `range` is only a loop shape preview.
 
-### `for index, word := range words { ... }`
+### `for _, word := range words { ... }`
 
-This loop gives you:
-
-- the position
-- the current value
-
-That makes it useful when you want both "where am I?" and "what value am I on?"
+This preview keeps only the current value because the lesson goal is repetition, not indexed data
+access.
 
 ## Common Mistakes
 
@@ -86,4 +83,4 @@ Loops are how programs:
 
 ## Next Step
 
-Continue to `CF.3` switch.
+Continue to `CF.3` break / continue.

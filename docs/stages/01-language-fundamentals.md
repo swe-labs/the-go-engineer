@@ -49,7 +49,7 @@ The stage is intentionally ordered from "what is a value?" to "what is a functio
 ## Current Source Content
 
 - [01-core-foundations/language-basics](../../01-core-foundations/language-basics/)
-- [02-control-flow](../../02-control-flow/)
+- [01-foundations/03-control-flow](../../01-foundations/03-control-flow/)
 - [03-data-structures](../../03-data-structures/)
 - [04-functions-and-errors](../../04-functions-and-errors/)
 
@@ -79,7 +79,7 @@ Practical split:
 Use this order across the source sections:
 
 1. [01-core-foundations/language-basics](../../01-core-foundations/language-basics/)
-2. [02-control-flow](../../02-control-flow/)
+2. [01-foundations/03-control-flow](../../01-foundations/03-control-flow/)
 3. [03-data-structures](../../03-data-structures/)
 4. [04-functions-and-errors](../../04-functions-and-errors/)
 
@@ -99,7 +99,7 @@ You can move faster through the opening repetition if Go syntax feels familiar a
 skip:
 
 - `LB.4`
-- `CF.4`
+- `CF.5`
 - `DS.6`
 - `FE.9`
 
@@ -121,7 +121,7 @@ Examples:
 The current milestone backbone is:
 
 - `LB.4` application logger
-- `CF.4` pricing calculator
+- `CF.5` pricing checkout
 - `DS.6` contact manager
 - `FE.9` error handling project
 

@@ -58,8 +58,8 @@ Inside the new repo architecture, it lives under `01-foundations`.
 | --- | --- | --- | --- | --- |
 | `CF.1` | Lesson | [if / else](./1-if-else) | Introduces branching and decision-making. | entry |
 | `CF.2` | Lesson | [for basics](./2-for-basics) | Teaches Go's only loop keyword and the idea of repeated work. | `CF.1` |
-| `CF.3` | Lesson | [switch](./3-switch) | Teaches readable multi-branch decision logic. | `CF.1` |
-| `CF.4` | Lesson | [break / continue](./4-break-continue) | Teaches early exit and selective skipping inside loops. | `CF.2` |
+| `CF.3` | Lesson | [break / continue](./3-break-continue) | Teaches early exit and selective skipping inside loops. | `CF.2` |
+| `CF.4` | Lesson | [switch](./4-switch) | Teaches readable multi-branch decision logic after the learner already understands ordinary branching. | `CF.1`, `CF.2`, `CF.3` |
 | `CF.5` | Exercise | [pricing checkout](./5-pricing-checkout) | Combines branching, looping, switching, and light list previews in one runnable milestone. | `CF.1`, `CF.2`, `CF.3`, `CF.4` |
 
 ## Suggested Learning Flow
@@ -80,7 +80,7 @@ You are ready for the next section when you can explain:
 - why Go only needs `for`
 - when `break` stops the whole loop
 - when `continue` skips only the current iteration
-- why this section only previews a small list instead of teaching data structures formally
+- why the small `range` example stays a preview instead of turning into a data-structures lesson
 
 ## Next Step
 

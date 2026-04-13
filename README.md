@@ -48,7 +48,7 @@ Each stage now has a dedicated public entry page under [docs/stages](./docs/stag
 | Beta stage | Focus | Current source content |
 | --- | --- | --- |
 | [0 Foundation](./docs/stages/00-foundation.md) | tools, execution, terminal confidence, first-run mental models | [01-core-foundations/getting-started](./01-core-foundations/getting-started/) |
-| [1 Language Fundamentals](./docs/stages/01-language-fundamentals.md) | syntax, control flow, data structures, functions, errors | [01-core-foundations/language-basics](./01-core-foundations/language-basics/), [02-control-flow](./02-control-flow/), [03-data-structures](./03-data-structures/), [04-functions-and-errors](./04-functions-and-errors/) |
+| [1 Language Fundamentals](./docs/stages/01-language-fundamentals.md) | syntax, control flow, data structures, functions, errors | [01-core-foundations/language-basics](./01-core-foundations/language-basics/), [01-foundations/03-control-flow](./01-foundations/03-control-flow/), [03-data-structures](./03-data-structures/), [04-functions-and-errors](./04-functions-and-errors/) |
 | [2 Types and Design](./docs/stages/02-types-and-design.md) | structs, interfaces, composition, text and data modeling | [05-types-and-interfaces](./05-types-and-interfaces/), [06-composition](./06-composition/), [07-strings-and-text](./07-strings-and-text/) |
 | [3 Modules and IO](./docs/stages/03-modules-and-io.md) | packages, modules, encoding, filesystems, CLI boundaries | [08-modules-and-packages](./08-modules-and-packages/), [09-io-and-cli](./09-io-and-cli/) |
 | [4 Backend Engineering](./docs/stages/04-backend-engineering.md) | HTTP, databases, handlers, application boundaries | [10-web-and-database](./10-web-and-database/) |
