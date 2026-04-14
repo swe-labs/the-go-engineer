@@ -13,7 +13,7 @@ Use these docs when you want a stage-level view of how the current Section `01` 
 Then work through the source sections in order:
 
 1. [01-core-foundations/language-basics](../../../01-core-foundations/language-basics/)
-2. [02-control-flow](../../../02-control-flow/)
+2. [01-foundations/03-control-flow](../../../01-foundations/03-control-flow/)
 3. [03-data-structures](../../../03-data-structures/)
 4. [04-functions-and-errors](../../../04-functions-and-errors/)
 

@@ -30,12 +30,12 @@
       "prerequisites": [
         "s01"
       ],
-      "path_prefix": "02-control-flow",
+      "path_prefix": "01-foundations/03-control-flow",
       "entry_points": [
         "CF.1"
       ],
       "outputs": [
-        "CF.4"
+        "CF.5"
       ]
     },
     {
@@ -303,36 +303,6 @@
     {
       "id": "CF.1",
       "section_id": "s02",
-      "slug": "for-loop",
-      "title": "For Loop",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "estimated_time": 25,
-      "summary": "Introduce Go's single loop keyword and the main forms it can take in real code.",
-      "objectives": [
-        "Use for as a counted loop, condition loop, and range loop",
-        "Explain why Go does not need separate while and do-while keywords"
-      ],
-      "prerequisites": [],
-      "production_relevance": "Loop shape decisions affect readability everywhere from simple scripts to production services.",
-      "path": "02-control-flow/1-for-loop",
-      "run_command": "go run ./02-control-flow/1-for-loop",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "CF.2"
-      ],
-      "tags": [
-        "for",
-        "loops",
-        "control-flow"
-      ]
-    },
-    {
-      "id": "CF.2",
-      "section_id": "s02",
       "slug": "if-else",
       "title": "If / Else",
       "type": "lesson",
@@ -340,30 +310,92 @@
       "level": "foundation",
       "verification_mode": "run",
       "estimated_time": 25,
-      "summary": "Teach ordinary branching, early returns, and the comma-ok pattern with approachable examples.",
+      "summary": "Introduce ordinary branching so learners can make one decision at a time before repeating work.",
       "objectives": [
-        "Use if and else for clear branching decisions",
-        "Explain the comma-ok pattern as a safe way to check map lookup success"
+        "Use if, else if, and else for clear branching decisions",
+        "Explain how branch chains select only one path at a time"
+      ],
+      "prerequisites": [],
+      "production_relevance": "Branching is the basis for validation, access checks, and early decision logic in all production software.",
+      "path": "01-foundations/03-control-flow/1-if-else",
+      "run_command": "go run ./01-foundations/03-control-flow/1-if-else",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CF.2"
+      ],
+      "tags": [
+        "if",
+        "branching",
+        "control-flow"
+      ]
+    },
+    {
+      "id": "CF.2",
+      "section_id": "s02",
+      "slug": "for-basics",
+      "title": "For Basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Teach Go's only loop keyword through counted loops, condition loops, and one carefully labeled range preview.",
+      "objectives": [
+        "Use for as a counted loop and as a condition-based loop",
+        "Recognize range as a loop shape without treating data structures as the main topic yet"
       ],
       "prerequisites": [
         "CF.1"
       ],
-      "production_relevance": "Clear branching and explicit success checks prevent a lot of beginner bugs from turning into maintenance problems later.",
-      "path": "02-control-flow/2-if-else",
-      "run_command": "go run ./02-control-flow/2-if-else",
+      "production_relevance": "Loop shape decisions affect readability everywhere from simple scripts to production services.",
+      "path": "01-foundations/03-control-flow/2-for-basics",
+      "run_command": "go run ./01-foundations/03-control-flow/2-for-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
         "CF.3"
       ],
       "tags": [
-        "if",
-        "branching",
-        "comma-ok"
+        "for",
+        "loops",
+        "range-preview"
       ]
     },
     {
       "id": "CF.3",
+      "section_id": "s02",
+      "slug": "break-continue",
+      "title": "Break / Continue",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Teach early loop exit and selective iteration skipping once learners already understand the basic for forms.",
+      "objectives": [
+        "Use break to stop a loop completely",
+        "Use continue to skip only the current iteration"
+      ],
+      "prerequisites": [
+        "CF.2"
+      ],
+      "production_relevance": "Selective skipping and early termination show up in search loops, validation passes, and stream-like processing.",
+      "path": "01-foundations/03-control-flow/3-break-continue",
+      "run_command": "go run ./01-foundations/03-control-flow/3-break-continue",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CF.4"
+      ],
+      "tags": [
+        "break",
+        "continue",
+        "loops"
+      ]
+    },
+    {
+      "id": "CF.4",
       "section_id": "s02",
       "slug": "switch",
       "title": "Switch",
@@ -372,22 +404,23 @@
       "level": "core",
       "verification_mode": "run",
       "estimated_time": 25,
-      "summary": "Show how switch, tagless switch, and type switch make multi-branch logic more readable.",
+      "summary": "Show how switch makes multi-branch logic easier to scan after learners already know simpler branch and loop forms.",
       "objectives": [
         "Use switch for readable multi-branch logic",
-        "Recognize when a tagless switch or type switch is clearer than a long if chain"
+        "Explain when switch reads more clearly than a long if chain"
       ],
       "prerequisites": [
         "CF.1",
-        "CF.2"
+        "CF.2",
+        "CF.3"
       ],
       "production_relevance": "Switch statements keep branch-heavy code readable in parsers, routers, and state-handling logic.",
-      "path": "02-control-flow/3-switch",
-      "run_command": "go run ./02-control-flow/3-switch",
+      "path": "01-foundations/03-control-flow/4-switch",
+      "run_command": "go run ./01-foundations/03-control-flow/4-switch",
       "test_command": "",
       "starter_path": "",
       "next_items": [
-        "CF.4"
+        "CF.5"
       ],
       "tags": [
         "switch",
@@ -396,35 +429,36 @@
       ]
     },
     {
-      "id": "CF.4",
+      "id": "CF.5",
       "section_id": "s02",
-      "slug": "pricing-calculator",
-      "title": "Pricing Calculator",
+      "slug": "pricing-checkout",
+      "title": "Pricing Checkout",
       "type": "exercise",
       "subtype": "",
       "level": "core",
-      "verification_mode": "mixed",
+      "verification_mode": "run",
       "estimated_time": 35,
-      "summary": "Build a small order processor that combines loops, branching, map lookups, and sale-price handling.",
+      "summary": "Build a small checkout flow that combines loops, branching, switch-based pricing, skipping invalid items, and a running subtotal.",
       "objectives": [
-        "Calculate regular and sale prices safely from a product map",
-        "Use loops and branching together to compute an order subtotal"
+        "Use switch and if together inside one small checkout flow",
+        "Use continue and a running subtotal to process a cart safely"
       ],
       "prerequisites": [
         "CF.1",
         "CF.2",
-        "CF.3"
+        "CF.3",
+        "CF.4"
       ],
-      "production_relevance": "Real business rules often start as simple branch-heavy logic like discounting, validation, and subtotal calculation.",
-      "path": "02-control-flow/4-pricing-calculator",
-      "run_command": "go run ./02-control-flow/4-pricing-calculator",
-      "test_command": "go test ./02-control-flow/4-pricing-calculator",
-      "starter_path": "02-control-flow/4-pricing-calculator/_starter",
+      "production_relevance": "Real business rules often start as simple branch-heavy logic like categorization, skipping bad inputs, and subtotal calculation.",
+      "path": "01-foundations/03-control-flow/5-pricing-checkout",
+      "run_command": "go run ./01-foundations/03-control-flow/5-pricing-checkout",
+      "test_command": "",
+      "starter_path": "01-foundations/03-control-flow/5-pricing-checkout/_starter",
       "next_items": [],
       "tags": [
         "exercise",
         "pricing",
-        "maps"
+        "control-flow"
       ]
     },
     {
