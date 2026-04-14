@@ -15,7 +15,7 @@ Then work through the source sections in order:
 1. [01-core-foundations/language-basics](../../../01-core-foundations/language-basics/)
 2. [01-foundations/03-control-flow](../../../01-foundations/03-control-flow/)
 3. [01-foundations/04-data-structures](../../../01-foundations/04-data-structures/)
-4. [04-functions-and-errors](../../../04-functions-and-errors/)
+4. [01-foundations/05-functions-and-errors](../../../01-foundations/05-functions-and-errors/)
 
 ## What These Docs Are For
 

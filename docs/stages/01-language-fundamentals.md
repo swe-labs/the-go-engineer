@@ -42,7 +42,7 @@ This stage has four connected parts:
 3. `data-structures`
    - arrays, slices, maps, pointers, and mutation-aware thinking
 4. `functions-and-errors`
-   - function boundaries, multiple returns, custom errors, defer, and recover
+   - function boundaries, parameters, multiple returns, validation, orchestration, and explicit failure handling
 
 The stage is intentionally ordered from "what is a value?" to "what is a function boundary?".
 
@@ -51,7 +51,7 @@ The stage is intentionally ordered from "what is a value?" to "what is a functio
 - [01-core-foundations/language-basics](../../01-core-foundations/language-basics/)
 - [01-foundations/03-control-flow](../../01-foundations/03-control-flow/)
 - [01-foundations/04-data-structures](../../01-foundations/04-data-structures/)
-- [04-functions-and-errors](../../04-functions-and-errors/)
+- [01-foundations/05-functions-and-errors](../../01-foundations/05-functions-and-errors/)
 
 ## Stage Support Docs
 
@@ -81,7 +81,7 @@ Use this order across the source sections:
 1. [01-core-foundations/language-basics](../../01-core-foundations/language-basics/)
 2. [01-foundations/03-control-flow](../../01-foundations/03-control-flow/)
 3. [01-foundations/04-data-structures](../../01-foundations/04-data-structures/)
-4. [04-functions-and-errors](../../04-functions-and-errors/)
+4. [01-foundations/05-functions-and-errors](../../01-foundations/05-functions-and-errors/)
 
 Do not skip ahead from `language-basics` into functions and errors too early.
 Control flow and data structures make the later function and error lessons much easier to
@@ -101,7 +101,7 @@ skip:
 - `LB.4`
 - `CF.5`
 - `DS.6`
-- `FE.9`
+- `FE.7`
 
 Those are the main proof surfaces that show you can actually use the stage, not just read it.
 
@@ -123,7 +123,7 @@ The current milestone backbone is:
 - `LB.4` application logger
 - `CF.5` pricing checkout
 - `DS.6` contact manager
-- `FE.9` error handling project
+- `FE.7` order summary
 
 If you can complete those four milestone surfaces honestly, you have the practical foundation for
 the next beta stage.

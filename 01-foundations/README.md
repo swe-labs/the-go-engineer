@@ -56,21 +56,22 @@ clearly and explained later in the proper section.
 
 ## Current Priority
 
-The next real rebuild under this architecture is `04-data-structures`.
+The next real rebuild under this architecture is `05-functions-and-errors`.
 
-That section is where the learner stops treating lists and lookups as tiny preview tools and starts
-working with:
+That section is where the learner stops leaving logic inline in `main()` and starts working with:
 
-- fixed-size values
-- dynamic collections
-- keyed lookup
-- pointer-based mutation
-- one small milestone that proves those ideas together
+- reusable function boundaries
+- clear parameters and return values
+- explicit failure handling
+- validation before work
+- one small milestone that proves logic plus failure together
 
 ## Next Step
 
-After `04-data-structures`, the next foundations section to make real is:
+After `05-functions-and-errors`, the foundations layer is ready for the remaining early-path
+retrofits:
 
-- `05-functions-and-errors`
+- `01-getting-started`
+- `02-language-basics`
 
 Those three sections together are the main bridge from syntax exposure to engineering thinking.

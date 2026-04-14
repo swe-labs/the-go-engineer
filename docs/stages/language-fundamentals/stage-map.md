@@ -20,9 +20,9 @@ error handling.
    - core job: teach slices, maps, pointers, and mutation-aware thinking
    - milestone: `DS.6` contact manager
 4. `functions-and-errors`
-   - source: [04-functions-and-errors](../../../04-functions-and-errors/)
-   - core job: teach function boundaries, explicit failures, wrapping, and cleanup
-   - milestone: `FE.9` error handling project
+   - source: [01-foundations/05-functions-and-errors](../../../01-foundations/05-functions-and-errors/)
+   - core job: teach function boundaries, explicit failures, validation, and orchestration
+   - milestone: `FE.7` order summary
 
 ## What Each Part Adds
 
@@ -49,7 +49,8 @@ This is where the learner starts treating function signatures and errors as expl
 2. Move through `01-foundations/03-control-flow` and complete `CF.5`.
 3. Move through [01-foundations/04-data-structures](../../../01-foundations/04-data-structures/)
    and complete `DS.6`.
-4. Move through Section `04` and complete `FE.9`.
+4. Move through [01-foundations/05-functions-and-errors](../../../01-foundations/05-functions-and-errors/)
+   and complete `FE.7`.
 
 ## Bridge-Path Reminder
 
@@ -59,7 +60,7 @@ What you should not skip is proof:
 - `LB.4`
 - `CF.5`
 - `DS.6`
-- `FE.9`
+- `FE.7`
 
 ## Exit Condition
 

@@ -12,7 +12,7 @@ Together, they show whether a learner can actually use the stage instead of only
 | `LB.4` | application logger | you can write a small Go program with named values, simple structure, and readable output |
 | `CF.5` | pricing checkout | you can combine branching, looping, switch-based rules, and safe skipping in one runnable flow |
 | `DS.6` | contact manager | you can use slices, maps, and pointers together without losing track of mutation |
-| `FE.9` | error handling project | you can model failures explicitly and use functions and cleanup in a disciplined way |
+| `FE.7` | order summary | you can validate input, orchestrate helper functions, and return explicit errors without hiding the flow |
 
 ## How To Use These Milestones
 
@@ -34,7 +34,7 @@ check backward honestly:
 - weak on basic Go program shape: start with `LB.4`
 - weak on decision logic and loops: start with `CF.5`
 - weak on collections and mutation: start with `DS.6`
-- weak on function contracts and failures: start with `FE.9`
+- weak on function contracts and failures: start with `FE.7`
 
 ## Honest Readiness Signals
 
@@ -54,4 +54,4 @@ Go back one layer:
 - `LB.4` too hard: revisit `language-basics`
 - `CF.5` too hard: revisit `if`, `for`, `break / continue`, and `switch`
 - `DS.6` too hard: revisit slices, maps, and pointers
-- `FE.9` too hard: revisit multiple returns, custom errors, wrapping, and `defer`
+- `FE.7` too hard: revisit multiple returns, errors as values, validation, and orchestration

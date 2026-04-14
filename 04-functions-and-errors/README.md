@@ -1,5 +1,10 @@
 # Section 04: Functions and Errors
 
+> Canonical learner-facing content for this section now lives at
+> [01-foundations/05-functions-and-errors](../01-foundations/05-functions-and-errors/).
+> This legacy path remains in the repo during the architecture migration, but it is no longer the
+> primary foundations route.
+
 ## Mission
 
 This section teaches you to turn functions into explicit contracts and failures into explicit
