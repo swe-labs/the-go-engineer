@@ -458,6 +458,303 @@ Use the checkpoint set:
 	}
 }
 
+func TestValidateRejectsBrokenTemplateDocLink(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.json", `{"sections":[]}`)
+	writeValidPressureDocs(t, root)
+	writeFile(t, root, "docs/templates/README.md", `# Templates
+
+- [Roadmap](./ADVANCED_CONTENT_ROADMAP.md)
+`)
+	writeFile(t, root, "docs/templates/ADVANCED_CONTENT_ROADMAP.md", `# Roadmap
+
+- [Missing](./DOES_NOT_EXIST.md)
+`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 1 {
+		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	}
+	if !containsReport(reports, "Broken local doc link: docs/templates/ADVANCED_CONTENT_ROADMAP.md -> ./DOES_NOT_EXIST.md") {
+		t.Fatalf("expected broken-template-link error in reports: %v", reports)
+	}
+}
+
+func TestValidateAcceptsFoundationsReadmeContract(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.json", `{"sections":[]}`)
+	writeValidPressureDocs(t, root)
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s04",
+      "number": "04",
+      "slug": "functions-and-errors",
+      "title": "Functions and Errors",
+      "path_prefix": "01-foundations/05-functions-and-errors",
+      "entry_points": ["FE.1"],
+      "outputs": ["FE.1"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "FE.1",
+      "section_id": "s04",
+      "slug": "functions-basics",
+      "title": "Functions Basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "01-foundations/05-functions-and-errors/1-functions-basics",
+      "prerequisites": [],
+      "run_command": "go run ./01-foundations/05-functions-and-errors/1-functions-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "01-foundations/05-functions-and-errors/1-functions-basics")
+	writeFile(t, root, "01-foundations/05-functions-and-errors/1-functions-basics/README.md", `# FE.1
+
+## Mission
+
+mission
+
+## Prerequisites
+
+- none
+
+## Mental Model
+
+mental model
+
+## Visual Model
+
+diagram
+
+## Machine View
+
+machine view
+
+## Run Instructions
+
+go run ./01-foundations/05-functions-and-errors/1-functions-basics
+
+## Code Walkthrough
+
+walkthrough
+
+## Try It
+
+1. try
+
+## Next Step
+
+next
+`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 0 {
+		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
+	}
+}
+
+func TestValidateRejectsFoundationsReadmeMissingMachineView(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.json", `{"sections":[]}`)
+	writeValidPressureDocs(t, root)
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s04",
+      "number": "04",
+      "slug": "functions-and-errors",
+      "title": "Functions and Errors",
+      "path_prefix": "01-foundations/05-functions-and-errors",
+      "entry_points": ["FE.1"],
+      "outputs": ["FE.1"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "FE.1",
+      "section_id": "s04",
+      "slug": "functions-basics",
+      "title": "Functions Basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "01-foundations/05-functions-and-errors/1-functions-basics",
+      "prerequisites": [],
+      "run_command": "go run ./01-foundations/05-functions-and-errors/1-functions-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "01-foundations/05-functions-and-errors/1-functions-basics")
+	writeFile(t, root, "01-foundations/05-functions-and-errors/1-functions-basics/README.md", `# FE.1
+
+## Mission
+
+mission
+
+## Prerequisites
+
+- none
+
+## Mental Model
+
+mental model
+
+## Visual Model
+
+diagram
+
+## Run Instructions
+
+go run ./01-foundations/05-functions-and-errors/1-functions-basics
+
+## Code Walkthrough
+
+walkthrough
+
+## Try It
+
+1. try
+
+## Next Step
+
+next
+`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 1 {
+		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	}
+	if !containsReport(reports, "Invalid foundations README contract: FE.1 -> 01-foundations/05-functions-and-errors/1-functions-basics/README.md missing ## Machine View") {
+		t.Fatalf("expected missing-machine-view error in reports: %v", reports)
+	}
+}
+
+func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.json", `{"sections":[]}`)
+	writeValidPressureDocs(t, root)
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s04",
+      "number": "04",
+      "slug": "functions-and-errors",
+      "title": "Functions and Errors",
+      "path_prefix": "01-foundations/05-functions-and-errors",
+      "entry_points": ["FE.7"],
+      "outputs": ["FE.7"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "FE.7",
+      "section_id": "s04",
+      "slug": "order-summary",
+      "title": "Order Summary",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "path": "01-foundations/05-functions-and-errors/7-order-summary",
+      "prerequisites": [],
+      "run_command": "go run ./01-foundations/05-functions-and-errors/7-order-summary",
+      "test_command": "go test ./01-foundations/05-functions-and-errors/7-order-summary",
+      "starter_path": "01-foundations/05-functions-and-errors/7-order-summary/_starter",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "01-foundations/05-functions-and-errors/7-order-summary")
+	mustMkdir(t, root, "01-foundations/05-functions-and-errors/7-order-summary/_starter")
+	writeFile(t, root, "01-foundations/05-functions-and-errors/7-order-summary/README.md", `# FE.7
+
+## Mission
+
+mission
+
+## Visual Model
+
+diagram
+
+## Machine View
+
+machine view
+
+## Run Instructions
+
+go run ./01-foundations/05-functions-and-errors/7-order-summary
+
+## Solution Walkthrough
+
+walkthrough
+
+## Try It
+
+1. try
+
+## Next Step
+
+next
+`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 1 {
+		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	}
+	if !containsReport(reports, "Invalid foundations README contract: FE.7 -> 01-foundations/05-functions-and-errors/7-order-summary/README.md missing ## Verification Surface") {
+		t.Fatalf("expected missing-verification-surface error in reports: %v", reports)
+	}
+}
+
 func writeFile(t *testing.T, root, relativePath, contents string) {
 	t.Helper()
 

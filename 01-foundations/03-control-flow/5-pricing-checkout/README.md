@@ -110,6 +110,13 @@ Your program is successful when it:
 - skips unknown items safely
 - prints a final subtotal
 
+## Verification Surface
+
+Use these proof surfaces together:
+
+1. `go run ./01-foundations/03-control-flow/5-pricing-checkout`
+2. `go run ./01-foundations/03-control-flow/5-pricing-checkout/_starter`
+
 ## Next Step
 
 After this milestone, continue to `04-data-structures`.

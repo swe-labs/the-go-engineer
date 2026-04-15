@@ -124,6 +124,7 @@ func Validate(root string, report func(string)) (Result, error) {
 	}
 
 	pressureErrors := validatePressureDocs(root, report)
+	templateErrors := validateTemplateDocs(root, report)
 
 	return Result{
 		LessonCount:    lessonCount,
@@ -131,7 +132,7 @@ func Validate(root string, report func(string)) (Result, error) {
 		V2SectionCount: v2SectionCount,
 		V2ItemCount:    v2ItemCount,
 		HasV2:          hasV2,
-		ErrorCount:     pathErrors + runErrors + v2Errors + pressureErrors,
+		ErrorCount:     pathErrors + runErrors + v2Errors + pressureErrors + templateErrors,
 	}, nil
 }
 
@@ -495,8 +496,107 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
 	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
 	errorsFound += validateV2TextEncoding(root, sectionIDs, cur.Items, report)
+	errorsFound += validateFoundationsReadmeContracts(root, cur.Items, report)
 
 	return len(cur.Sections), len(cur.Items), errorsFound, true, nil
+}
+
+func validateFoundationsReadmeContracts(root string, items []V2Item, report func(string)) int {
+	errorsFound := 0
+
+	for _, item := range items {
+		itemPath := filepath.ToSlash(filepath.Clean(item.Path))
+		if !strings.HasPrefix(itemPath, "01-foundations/") {
+			continue
+		}
+
+		readmePath := filepath.ToSlash(filepath.Join(itemPath, "README.md"))
+		if !pathExists(root, readmePath) {
+			report(fmt.Sprintf("Missing foundations lesson README: %s -> %s", item.ID, readmePath))
+			errorsFound++
+			continue
+		}
+
+		errorsFound += validateMarkdownLocalLinks(root, readmePath, report)
+		errorsFound += validateRequiredHeadingsForItem(root, readmePath, item, report)
+	}
+
+	return errorsFound
+}
+
+func validateRequiredHeadingsForItem(root, readmePath string, item V2Item, report func(string)) int {
+	errorsFound := 0
+
+	requiredHeadings := []string{
+		"## Mission",
+		"## Run Instructions",
+		"## Try It",
+		"## Next Step",
+	}
+
+	itemPath := filepath.ToSlash(filepath.Clean(item.Path))
+	if item.Type == "lesson" {
+		requiredHeadings = append(requiredHeadings, "## Code Walkthrough")
+	} else {
+		errorsFound += validateAtLeastOneHeading(root, readmePath, item.ID, []string{"## Code Walkthrough", "## Solution Walkthrough"}, report)
+	}
+
+	if strings.HasPrefix(itemPath, "01-foundations/04-data-structures/") || strings.HasPrefix(itemPath, "01-foundations/05-functions-and-errors/") {
+		requiredHeadings = append(requiredHeadings, "## Visual Model")
+	}
+
+	if item.Type == "lesson" && (strings.HasPrefix(itemPath, "01-foundations/04-data-structures/") || strings.HasPrefix(itemPath, "01-foundations/05-functions-and-errors/")) {
+		requiredHeadings = append(requiredHeadings, "## Mental Model")
+	}
+
+	if strings.HasPrefix(itemPath, "01-foundations/05-functions-and-errors/") {
+		requiredHeadings = append(requiredHeadings, "## Machine View")
+	}
+
+	if item.StarterPath != "" || strings.TrimSpace(item.TestCommand) != "" || item.VerificationMode == "mixed" || item.VerificationMode == "test" {
+		requiredHeadings = append(requiredHeadings, "## Verification Surface")
+	}
+
+	errorsFound += validateRequiredHeadingsWithID(root, readmePath, item.ID, requiredHeadings, report)
+
+	return errorsFound
+}
+
+func validateAtLeastOneHeading(root, relPath, itemID string, headings []string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read foundations README: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	text := string(data)
+	for _, heading := range headings {
+		if strings.Contains(text, heading) {
+			return 0
+		}
+	}
+
+	report(fmt.Sprintf("Invalid foundations README contract: %s -> %s must include one of %s", itemID, filepath.ToSlash(relPath), strings.Join(headings, ", ")))
+	return 1
+}
+
+func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read foundations README: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	text := string(data)
+	errorsFound := 0
+	for _, heading := range headings {
+		if !strings.Contains(text, heading) {
+			report(fmt.Sprintf("Invalid foundations README contract: %s -> %s missing %s", itemID, filepath.ToSlash(relPath), heading))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
 }
 
 var mojibakeMarkers = []string{
@@ -689,6 +789,28 @@ func validatePressureDocs(root string, report func(string)) int {
 
 	errorsFound += validateRubricSurfaceDirectory(root, "docs/stages/expert-layer/tasks", report)
 	errorsFound += validateRubricSurfaceDirectory(root, "docs/stages/flagship-project/checkpoints", report)
+
+	return errorsFound
+}
+
+func validateTemplateDocs(root string, report func(string)) int {
+	errorsFound := 0
+
+	templateDocs := []string{
+		"docs/templates/README.md",
+		"docs/templates/THINKING_SECTIONS_ADVANCED.md",
+		"docs/templates/PRODUCTION_NOTES_ADVANCED.md",
+		"docs/templates/FAILURE_SCENARIOS_ADVANCED.md",
+		"docs/templates/ADVANCED_CONTENT_ROADMAP.md",
+	}
+
+	for _, relPath := range templateDocs {
+		if !pathExists(root, relPath) {
+			continue
+		}
+
+		errorsFound += validateMarkdownLocalLinks(root, relPath, report)
+	}
 
 	return errorsFound
 }
