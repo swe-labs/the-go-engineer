@@ -173,31 +173,32 @@ func extractCommandTarget(command string) (string, error) {
 }
 
 func validateCurriculumPaths(root string, report func(string)) (int, int, error) {
-	data, err := os.ReadFile(filepath.Join(root, "curriculum.json"))
+	data, err := os.ReadFile(filepath.Join(root, "curriculum.v2.json"))
 	if err != nil {
-		return 0, 0, fmt.Errorf("Failed to read curriculum.json: %v", err)
+		return 0, 0, fmt.Errorf("Failed to read curriculum.v2.json: %v", err)
 	}
 
-	var cur Curriculum
-	if err := json.Unmarshal(data, &cur); err != nil {
-		return 0, 0, fmt.Errorf("Failed to parse curriculum.json: %v", err)
+	var v2 V2Curriculum
+	if err := json.Unmarshal(data, &v2); err != nil {
+		return 0, 0, fmt.Errorf("Failed to parse curriculum.v2.json: %v", err)
 	}
 
 	errorsFound := 0
 	lessonCount := 0
-	for _, s := range cur.Sections {
-		for _, l := range s.Lessons {
-			lessonCount++
-			if l.Path == "" {
-				report(fmt.Sprintf("Unmapped lesson: %s - %s", l.ID, l.Name))
-				errorsFound++
-				continue
-			}
+	for _, item := range v2.Items {
+		if item.Type != "lesson" && item.Type != "exercise" {
+			continue
+		}
+		lessonCount++
+		if item.Path == "" {
+			report(fmt.Sprintf("Unmapped item: %s - %s", item.ID, item.Title))
+			errorsFound++
+			continue
+		}
 
-			if !pathExists(root, l.Path) {
-				report(fmt.Sprintf("Path does not exist: %s (%s - %s)", l.Path, l.ID, l.Name))
-				errorsFound++
-			}
+		if !pathExists(root, item.Path) {
+			report(fmt.Sprintf("Path does not exist: %s (%s - %s)", item.Path, item.ID, item.Title))
+			errorsFound++
 		}
 	}
 

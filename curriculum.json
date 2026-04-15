@@ -58,7 +58,7 @@
                     "is_entry": true,
                     "is_exercise": false,
                     "sub_graph": "Language Basics",
-                    "path": "01-core-foundations/language-basics/1-variables"
+                    "path": "01-foundations/02-language-basics/1-variables"
                 },
                 {
                     "id": "LB.2",
@@ -70,7 +70,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "Language Basics",
-                    "path": "01-core-foundations/language-basics/2-constants"
+                    "path": "01-foundations/02-language-basics/2-constants"
                 },
                 {
                     "id": "LB.3",
@@ -82,7 +82,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "Language Basics",
-                    "path": "01-core-foundations/language-basics/3-enums"
+                    "path": "01-foundations/02-language-basics/3-enums"
                 },
                 {
                     "id": "LB.4",
@@ -96,7 +96,7 @@
                     "is_entry": false,
                     "is_exercise": true,
                     "sub_graph": "Language Basics",
-                    "path": "01-core-foundations/language-basics/4-application-logger"
+                    "path": "01-foundations/02-language-basics/4-application-logger"
                 }
             ]
         },
@@ -113,7 +113,7 @@
                     "is_entry": true,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "02-control-flow/1-for-loop"
+                    "path": "01-foundations/03-control-flow/1-for-loop"
                 },
                 {
                     "id": "CF.2",
@@ -125,7 +125,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "02-control-flow/2-if-else"
+                    "path": "01-foundations/03-control-flow/2-if-else"
                 },
                 {
                     "id": "CF.3",
@@ -138,7 +138,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "02-control-flow/3-switch"
+                    "path": "01-foundations/03-control-flow/3-switch"
                 },
                 {
                     "id": "CF.4",
@@ -152,7 +152,7 @@
                     "is_entry": false,
                     "is_exercise": true,
                     "sub_graph": "",
-                    "path": "02-control-flow/4-pricing-calculator"
+                    "path": "01-foundations/03-control-flow/4-pricing-calculator"
                 }
             ]
         },
@@ -169,7 +169,7 @@
                     "is_entry": true,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "03-data-structures/1-array"
+                    "path": "01-foundations/04-data-structures/1-array"
                 },
                 {
                     "id": "DS.2",
@@ -181,7 +181,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "03-data-structures/2-slices"
+                    "path": "01-foundations/04-data-structures/2-slices"
                 },
                 {
                     "id": "DS.3",
@@ -193,7 +193,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "03-data-structures/3-maps"
+                    "path": "01-foundations/04-data-structures/3-maps"
                 },
                 {
                     "id": "DS.4",
@@ -206,7 +206,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "03-data-structures/4-pointers"
+                    "path": "01-foundations/04-data-structures/4-pointers"
                 },
                 {
                     "id": "DS.5",
@@ -219,7 +219,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "03-data-structures/5-slices-2"
+                    "path": "01-foundations/04-data-structures/5-slices-2"
                 },
                 {
                     "id": "DS.6",
@@ -235,7 +235,7 @@
                     "is_entry": false,
                     "is_exercise": true,
                     "sub_graph": "",
-                    "path": "03-data-structures/6-contact-manager"
+                    "path": "01-foundations/04-data-structures/6-contact-manager"
                 }
             ]
         },
@@ -252,7 +252,7 @@
                     "is_entry": true,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/1-function"
+                    "path": "01-foundations/05-functions-and-errors/1-function"
                 },
                 {
                     "id": "FE.2",
@@ -264,7 +264,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/2-function-2"
+                    "path": "01-foundations/05-functions-and-errors/2-function-2"
                 },
                 {
                     "id": "FE.3",
@@ -277,7 +277,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/3-variadic-func"
+                    "path": "01-foundations/05-functions-and-errors/3-variadic-func"
                 },
                 {
                     "id": "FE.4",
@@ -290,7 +290,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/4-function-multi-values"
+                    "path": "01-foundations/05-functions-and-errors/4-function-multi-values"
                 },
                 {
                     "id": "FE.5",
@@ -302,7 +302,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/5-custom-error"
+                    "path": "01-foundations/05-functions-and-errors/5-custom-error"
                 },
                 {
                     "id": "FE.6",
@@ -314,7 +314,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/5b-error-wrapping"
+                    "path": "01-foundations/05-functions-and-errors/5b-error-wrapping"
                 },
                 {
                     "id": "FE.7",
@@ -327,7 +327,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/6-defer"
+                    "path": "01-foundations/05-functions-and-errors/6-defer"
                 },
                 {
                     "id": "FE.8",
@@ -339,7 +339,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/7-panic-recover"
+                    "path": "01-foundations/05-functions-and-errors/7-panic-recover"
                 },
                 {
                     "id": "FE.9",
@@ -356,7 +356,7 @@
                     "is_entry": false,
                     "is_exercise": true,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/8-error-handling"
+                    "path": "01-foundations/05-functions-and-errors/8-error-handling"
                 },
                 {
                     "id": "FE.10",
@@ -369,7 +369,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "",
-                    "path": "04-functions-and-errors/9-functional-options"
+                    "path": "01-foundations/05-functions-and-errors/9-functional-options"
                 }
             ]
         },
