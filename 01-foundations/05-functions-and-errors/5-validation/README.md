@@ -4,6 +4,14 @@
 
 Learn how a function rejects bad input before the program does the real work.
 
+## Why This Lesson Exists Now
+
+Now you know how to return errors. The next question is: when should you return one?
+
+The answer: when input is clearly wrong. This is called validation. It catches problems early before they cause harder-to-debug issues later.
+
+This lesson builds on FE.4 by showing how to check inputs explicitly.
+
 ## Prerequisites
 
 - `FE.4` errors as values

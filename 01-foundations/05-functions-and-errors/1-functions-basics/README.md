@@ -2,8 +2,15 @@
 
 ## Mission
 
-Learn what a function boundary is and why naming a piece of work is better than leaving everything
-inline in `main()`.
+Learn what a function boundary is and why naming a piece of work is better than leaving everything inline in `main()`.
+
+## Why This Lesson Exists Now
+
+After learning about data structures (arrays, slices, maps, pointers), you have been storing and organizing data. But you still need to organize the code that works with that data.
+
+The next question is: "How do I break my program into reusable pieces?"
+
+That is what functions do. They let you name a block of code and call it from different places.
 
 ## Prerequisites
 
