@@ -4,6 +4,12 @@
 
 Learn how a function receives input and gives a result back to the caller.
 
+## Why This Lesson Exists Now
+
+Now you know how to name a piece of work. But functions are more useful when they can accept input and return output.
+
+That is what parameters and return values do. They let you write flexible, reusable code that works with different data.
+
 ## Prerequisites
 
 - `FE.1` functions basics

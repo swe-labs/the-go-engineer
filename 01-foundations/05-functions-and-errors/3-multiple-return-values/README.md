@@ -2,8 +2,15 @@
 
 ## Mission
 
-Learn how one function can return more than one value and why that matters before errors enter the
-picture.
+Learn how one function can return more than one value and why that matters before errors enter the picture.
+
+## Why This Lesson Exists Now
+
+You now know how to pass data into functions and get a result back. But sometimes you need more than one piece of information.
+
+For example, a function that searches a list might need to return both the result AND whether it was found. Go handles this naturally by allowing multiple return values.
+
+This lesson builds on FE.2 by showing how to return more than one piece of data.
 
 ## Prerequisites
 

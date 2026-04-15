@@ -4,6 +4,14 @@
 
 Learn how one function can coordinate several smaller helpers without losing readability.
 
+## Why This Lesson Exists Now
+
+You now know how to write individual functions that do one job well. But how do you combine them into a larger workflow?
+
+That is orchestration: one function that calls several helpers in the right order. It keeps the main function clean while still doing complex work.
+
+This lesson builds on FE.5 by showing how to coordinate multiple functions.
+
 ## Prerequisites
 
 - `FE.5` validation

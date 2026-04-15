@@ -4,6 +4,14 @@
 
 Learn the core Go rule for ordinary failure: return an error value instead of hiding the failure.
 
+## Why This Lesson Exists Now
+
+You can now return multiple values from functions. But what happens when something goes wrong?
+
+In Go, errors are just values. You return an error alongside your normal result, and the caller decides what to do. This is different from exceptions in other languages.
+
+This lesson builds on FE.3 by showing how to handle failure explicitly.
+
 ## Prerequisites
 
 - `FE.3` multiple return values

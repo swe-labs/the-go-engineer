@@ -2,10 +2,22 @@
 
 ## Mission
 
-Build one small order-summary program that proves the learner can combine functions, validation,
-multiple return values, and explicit errors in one readable flow.
+Build one small order-summary program that proves the learner can combine functions, validation, multiple return values, and explicit errors in one readable flow.
 
 This is the foundations milestone for the section.
+
+## Why This Milestone Exists
+
+The earlier lessons taught each function concept in isolation. Now you combine them all:
+
+- Functions for organization
+- Parameters and returns for input/output
+- Multiple return values for results plus status
+- Errors as values for explicit failure handling
+- Validation for input checking
+- Orchestration for coordinating the workflow
+
+This mirrors real Go code, where you rarely use just one of these concepts.
 
 ## Prerequisites
 
