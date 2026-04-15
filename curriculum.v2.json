@@ -800,8 +800,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Typed values and predictable zero values are the baseline for writing readable Go without hidden state.",
-      "path": "01-core-foundations/language-basics/1-variables",
-      "run_command": "go run ./01-core-foundations/language-basics/1-variables",
+      "path": "01-foundations/02-language-basics/1-variables",
+      "run_command": "go run ./01-foundations/02-language-basics/1-variables",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -832,8 +832,8 @@
         "LB.1"
       ],
       "production_relevance": "Well-named constants make early programs easier to read and later systems easier to maintain.",
-      "path": "01-core-foundations/language-basics/2-constants",
-      "run_command": "go run ./01-core-foundations/language-basics/2-constants",
+      "path": "01-foundations/02-language-basics/2-constants",
+      "run_command": "go run ./01-foundations/02-language-basics/2-constants",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -864,8 +864,8 @@
         "LB.2"
       ],
       "production_relevance": "Named enum-style values show up in logging, configuration, status modeling, and protocol work across real Go systems.",
-      "path": "01-core-foundations/language-basics/3-enums",
-      "run_command": "go run ./01-core-foundations/language-basics/3-enums",
+      "path": "01-foundations/02-language-basics/3-enums",
+      "run_command": "go run ./01-foundations/02-language-basics/3-enums",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -898,10 +898,10 @@
         "LB.3"
       ],
       "production_relevance": "Even simple real-world utilities depend on stable labels, readable output, and safe handling of invalid values.",
-      "path": "01-core-foundations/language-basics/4-application-logger",
-      "run_command": "go run ./01-core-foundations/language-basics/4-application-logger",
+      "path": "01-foundations/02-language-basics/4-application-logger",
+      "run_command": "go run ./01-foundations/02-language-basics/4-application-logger",
       "test_command": "",
-      "starter_path": "01-core-foundations/language-basics/4-application-logger/_starter",
+      "starter_path": "01-foundations/02-language-basics/4-application-logger/_starter",
       "next_items": [],
       "tags": [
         "exercise",

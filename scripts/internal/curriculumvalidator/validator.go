@@ -505,7 +505,7 @@ func allowedPathPrefixesForSection(section V2Section) []string {
 	prefixes := []string{filepath.ToSlash(filepath.Clean(section.PathPrefix))}
 
 	if section.ID == "s01" {
-		prefixes = append(prefixes, "01-foundations/01-getting-started")
+		prefixes = append(prefixes, "01-foundations/01-getting-started", "01-foundations/02-language-basics")
 	}
 
 	return prefixes
@@ -562,6 +562,10 @@ func validateRequiredHeadingsForItem(root, readmePath string, item V2Item, repor
 	}
 
 	if strings.HasPrefix(itemPath, "01-foundations/01-getting-started/") && item.Type == "lesson" {
+		requiredHeadings = append(requiredHeadings, "## Mental Model", "## Visual Model", "## Machine View")
+	}
+
+	if strings.HasPrefix(itemPath, "01-foundations/02-language-basics") && item.Type == "lesson" {
 		requiredHeadings = append(requiredHeadings, "## Mental Model", "## Visual Model", "## Machine View")
 	}
 
