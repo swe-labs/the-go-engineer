@@ -23,7 +23,7 @@ If you are new to programming or terminals, use this order:
 
 1. read [foundation/first-run-checklist.md](./foundation/first-run-checklist.md)
 2. read [foundation/terminal-and-files.md](./foundation/terminal-and-files.md)
-3. run the source track in [01-core-foundations/getting-started](../../01-core-foundations/getting-started/)
+3. run the source track in [01-foundations/01-getting-started](../../01-foundations/01-getting-started/)
 4. use [foundation/workflow-confidence.md](./foundation/workflow-confidence.md) when something feels
    confusing or fragile
 
@@ -40,7 +40,7 @@ sanity pass instead of a long stop.
 
 ## Current Source Content
 
-- [01-core-foundations/getting-started](../../01-core-foundations/getting-started/)
+- [01-foundations/01-getting-started](../../01-foundations/01-getting-started/)
 
 Beta support docs:
 
@@ -53,10 +53,10 @@ Beta support docs:
 
 Use the current source lessons in this order:
 
-1. [GT.1 installation](../../01-core-foundations/getting-started/1-installation/)
-2. [GT.2 hello world](../../01-core-foundations/getting-started/2-hello-world/)
-3. [GT.3 how Go works](../../01-core-foundations/getting-started/3-how-go-works/)
-4. [GT.4 development environment](../../01-core-foundations/getting-started/4-dev-environment/)
+1. [GT.1 installation](../../01-foundations/01-getting-started/1-installation/)
+2. [GT.2 hello world](../../01-foundations/01-getting-started/2-hello-world/)
+3. [GT.3 how Go works](../../01-foundations/01-getting-started/3-how-go-works/)
+4. [GT.4 development environment](../../01-foundations/01-getting-started/4-dev-environment/)
 
 Practical rule:
 
@@ -90,8 +90,8 @@ Before moving on, review:
 
 Then rerun:
 
-- [GT.2 hello world](../../01-core-foundations/getting-started/2-hello-world/)
-- [GT.4 development environment](../../01-core-foundations/getting-started/4-dev-environment/)
+- [GT.2 hello world](../../01-foundations/01-getting-started/2-hello-world/)
+- [GT.4 development environment](../../01-foundations/01-getting-started/4-dev-environment/)
 
 ## Next Stage
 

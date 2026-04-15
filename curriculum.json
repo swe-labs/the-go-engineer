@@ -12,7 +12,7 @@
                     "is_entry": true,
                     "is_exercise": false,
                     "sub_graph": "Getting Started",
-                    "path": "01-core-foundations/getting-started/1-installation"
+          "path": "01-foundations/01-getting-started/1-installation"
                 },
                 {
                     "id": "GS.2",
@@ -24,7 +24,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "Getting Started",
-                    "path": "01-core-foundations/getting-started/2-hello-world"
+          "path": "01-foundations/01-getting-started/2-hello-world"
                 },
                 {
                     "id": "GS.3",
@@ -36,7 +36,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "Getting Started",
-                    "path": "01-core-foundations/getting-started/3-how-go-works"
+          "path": "01-foundations/01-getting-started/3-how-go-works"
                 },
                 {
                     "id": "GS.4",
@@ -48,7 +48,7 @@
                     "is_entry": false,
                     "is_exercise": false,
                     "sub_graph": "Getting Started",
-                    "path": "01-core-foundations/getting-started/4-dev-environment"
+          "path": "01-foundations/01-getting-started/4-dev-environment"
                 },
                 {
                     "id": "LB.1",

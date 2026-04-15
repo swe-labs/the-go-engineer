@@ -7,9 +7,9 @@ write small, typed Go programs without guessing."
 
 ## Beta Routing Rule
 
-Section `01` is now one source section that feeds two different public beta stages:
+Section `01` is now one legacy source section that feeds two different public beta stages:
 
-- [0 Foundation](../docs/stages/00-foundation.md) owns `getting-started`
+- [0 Foundation](../docs/stages/00-foundation.md) owns the canonical [01-foundations/01-getting-started](../01-foundations/01-getting-started/)
 - [1 Language Fundamentals](../docs/stages/01-language-fundamentals.md) begins with `language-basics`
 
 That means this section is still one physical source area in the repo, but it is no longer one
@@ -35,7 +35,7 @@ into `LB.1` to `LB.4` as the start of [1 Language Fundamentals](../docs/stages/0
 If Go is already installed and you can run both:
 
 - `go version`
-- `go run ./01-core-foundations/getting-started/2-hello-world`
+- `go run ./01-foundations/01-getting-started/2-hello-world`
 
 you can skim `GT.1` to `GT.4` and begin the main fundamentals track at `LB.1`.
 

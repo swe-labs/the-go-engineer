@@ -9,7 +9,7 @@ If the terminal still feels mysterious, use this page before you assume you are 
 You type a command like:
 
 ```bash
-go run ./01-core-foundations/getting-started/2-hello-world
+go run ./01-foundations/01-getting-started/2-hello-world
 ```
 
 That tells the system to run the code inside that lesson folder.
@@ -26,7 +26,7 @@ In this repo, lessons live inside folders.
 When you see a path like:
 
 ```text
-01-core-foundations/getting-started/2-hello-world
+01-foundations/01-getting-started/2-hello-world
 ```
 
 that path is pointing you to one lesson surface.

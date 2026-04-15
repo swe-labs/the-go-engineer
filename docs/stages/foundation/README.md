@@ -13,7 +13,7 @@ curriculum.
 
 Then move into the current source track:
 
-- [01-core-foundations/getting-started](../../../01-core-foundations/getting-started/)
+- [01-foundations/01-getting-started](../../../01-foundations/01-getting-started/)
 
 ## What These Docs Are For
 

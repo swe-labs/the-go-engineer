@@ -56,22 +56,23 @@ clearly and explained later in the proper section.
 
 ## Current Priority
 
-The next real rebuild under this architecture is `05-functions-and-errors`.
-
-That section is where the learner stops leaving logic inline in `main()` and starts working with:
-
-- reusable function boundaries
-- clear parameters and return values
-- explicit failure handling
-- validation before work
-- one small milestone that proves logic plus failure together
-
-## Next Step
-
-After `05-functions-and-errors`, the foundations layer is ready for the remaining early-path
-retrofits:
+The current rebuild line is moving backward to finish the front of Foundations:
 
 - `01-getting-started`
 - `02-language-basics`
 
-Those three sections together are the main bridge from syntax exposure to engineering thinking.
+That work matters because the later canonical sections are already in place:
+
+- `03-control-flow`
+- `04-data-structures`
+- `05-functions-and-errors`
+
+## Next Step
+
+Once `01-getting-started` and `02-language-basics` are rebuilt, the whole foundations layer will
+share one learner contract from the very first lesson onward:
+
+- README first
+- clean code second
+- zero-magic sequencing
+- one obvious next step at the end of every lesson

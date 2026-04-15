@@ -391,9 +391,9 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 
 		if section, exists := sectionIDs[item.SectionID]; exists && section.PathPrefix != "" {
 			itemPath := filepath.ToSlash(filepath.Clean(item.Path))
-			sectionPrefix := filepath.ToSlash(filepath.Clean(section.PathPrefix))
-			if itemPath != sectionPrefix && !strings.HasPrefix(itemPath, sectionPrefix+"/") {
-				report(fmt.Sprintf("Invalid v2 section path alignment: %s -> %s (expected prefix %s)", item.ID, item.Path, section.PathPrefix))
+			allowedPrefixes := allowedPathPrefixesForSection(section)
+			if !matchesAnyPrefix(itemPath, allowedPrefixes) {
+				report(fmt.Sprintf("Invalid v2 section path alignment: %s -> %s (expected prefix %s)", item.ID, item.Path, strings.Join(allowedPrefixes, " or ")))
 				errorsFound++
 			}
 		}
@@ -501,6 +501,26 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 	return len(cur.Sections), len(cur.Items), errorsFound, true, nil
 }
 
+func allowedPathPrefixesForSection(section V2Section) []string {
+	prefixes := []string{filepath.ToSlash(filepath.Clean(section.PathPrefix))}
+
+	if section.ID == "s01" {
+		prefixes = append(prefixes, "01-foundations/01-getting-started")
+	}
+
+	return prefixes
+}
+
+func matchesAnyPrefix(itemPath string, prefixes []string) bool {
+	for _, prefix := range prefixes {
+		if itemPath == prefix || strings.HasPrefix(itemPath, prefix+"/") {
+			return true
+		}
+	}
+
+	return false
+}
+
 func validateFoundationsReadmeContracts(root string, items []V2Item, report func(string)) int {
 	errorsFound := 0
 
@@ -539,6 +559,10 @@ func validateRequiredHeadingsForItem(root, readmePath string, item V2Item, repor
 		requiredHeadings = append(requiredHeadings, "## Code Walkthrough")
 	} else {
 		errorsFound += validateAtLeastOneHeading(root, readmePath, item.ID, []string{"## Code Walkthrough", "## Solution Walkthrough"}, report)
+	}
+
+	if strings.HasPrefix(itemPath, "01-foundations/01-getting-started/") && item.Type == "lesson" {
+		requiredHeadings = append(requiredHeadings, "## Mental Model", "## Visual Model", "## Machine View")
 	}
 
 	if strings.HasPrefix(itemPath, "01-foundations/04-data-structures/") || strings.HasPrefix(itemPath, "01-foundations/05-functions-and-errors/") {

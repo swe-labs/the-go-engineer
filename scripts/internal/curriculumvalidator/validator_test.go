@@ -755,6 +755,94 @@ next
 	}
 }
 
+func TestValidateAcceptsGettingStartedReadmeContractAndSplitSectionPrefix(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.json", `{"sections":[]}`)
+	writeValidPressureDocs(t, root)
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s01",
+      "number": "01",
+      "slug": "core-foundations",
+      "title": "Core Foundations",
+      "path_prefix": "01-core-foundations",
+      "entry_points": ["GT.1"],
+      "outputs": ["GT.1"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "GT.1",
+      "section_id": "s01",
+      "slug": "installation",
+      "title": "Installation Verification",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "01-foundations/01-getting-started/1-installation",
+      "prerequisites": [],
+      "run_command": "go run ./01-foundations/01-getting-started/1-installation",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "01-foundations/01-getting-started/1-installation")
+	mustMkdir(t, root, "01-core-foundations")
+	writeFile(t, root, "01-foundations/01-getting-started/1-installation/README.md", `# GT.1
+
+## Mission
+
+mission
+
+## Mental Model
+
+mental model
+
+## Visual Model
+
+diagram
+
+## Machine View
+
+machine view
+
+## Run Instructions
+
+go run ./01-foundations/01-getting-started/1-installation
+
+## Code Walkthrough
+
+walkthrough
+
+## Try It
+
+1. try
+
+## Next Step
+
+next
+`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 0 {
+		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
+	}
+}
+
 func writeFile(t *testing.T, root, relativePath, contents string) {
 	t.Helper()
 

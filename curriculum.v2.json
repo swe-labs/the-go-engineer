@@ -674,8 +674,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "A learner cannot build reliable habits until the local Go toolchain and environment are actually working.",
-      "path": "01-core-foundations/getting-started/1-installation",
-      "run_command": "go run ./01-core-foundations/getting-started/1-installation",
+      "path": "01-foundations/01-getting-started/1-installation",
+      "run_command": "go run ./01-foundations/01-getting-started/1-installation",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -706,8 +706,8 @@
         "GT.1"
       ],
       "production_relevance": "Understanding the minimal shape of a Go program makes later package, tool, and build concepts much easier to absorb.",
-      "path": "01-core-foundations/getting-started/2-hello-world",
-      "run_command": "go run ./01-core-foundations/getting-started/2-hello-world",
+      "path": "01-foundations/01-getting-started/2-hello-world",
+      "run_command": "go run ./01-foundations/01-getting-started/2-hello-world",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -738,8 +738,8 @@
         "GT.2"
       ],
       "production_relevance": "Early package and compilation intuition reduces confusion once the curriculum reaches modules, testing, and architecture.",
-      "path": "01-core-foundations/getting-started/3-how-go-works",
-      "run_command": "go run ./01-core-foundations/getting-started/3-how-go-works",
+      "path": "01-foundations/01-getting-started/3-how-go-works",
+      "run_command": "go run ./01-foundations/01-getting-started/3-how-go-works",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -770,8 +770,8 @@
         "GT.3"
       ],
       "production_relevance": "Teams rely on a repeatable tool loop long before they reach advanced architecture or deployment work.",
-      "path": "01-core-foundations/getting-started/4-dev-environment",
-      "run_command": "go run ./01-core-foundations/getting-started/4-dev-environment",
+      "path": "01-foundations/01-getting-started/4-dev-environment",
+      "run_command": "go run ./01-foundations/01-getting-started/4-dev-environment",
       "test_command": "",
       "starter_path": "",
       "next_items": [

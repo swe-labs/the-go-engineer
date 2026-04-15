@@ -228,7 +228,7 @@ Choose your target stage from the table above and use the Targeted Path honestly
 
 The beta stages regroup the current source sections like this:
 
-- `0 Foundation`: `01-core-foundations/getting-started`
+- `0 Foundation`: `01-foundations/01-getting-started`
 - `1 Language Fundamentals`: `01-core-foundations/language-basics`, `02`, `03`, `04`
 - `2 Types and Design`: `05`, `06`, `07`
 - `3 Modules and IO`: `08`, `09`

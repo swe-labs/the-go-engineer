@@ -37,7 +37,7 @@ git clone https://github.com/rasel9t6/the-go-engineer.git
 cd the-go-engineer
 go mod download
 go version
-go run ./01-core-foundations/getting-started/2-hello-world
+go run ./01-foundations/01-getting-started/2-hello-world
 ```
 
 ## Beta Public Curriculum
@@ -47,7 +47,7 @@ Each stage now has a dedicated public entry page under [docs/stages](./docs/stag
 
 | Beta stage | Focus | Current source content |
 | --- | --- | --- |
-| [0 Foundation](./docs/stages/00-foundation.md) | tools, execution, terminal confidence, first-run mental models | [01-core-foundations/getting-started](./01-core-foundations/getting-started/) |
+| [0 Foundation](./docs/stages/00-foundation.md) | tools, execution, terminal confidence, first-run mental models | [01-foundations/01-getting-started](./01-foundations/01-getting-started/) |
 | [1 Language Fundamentals](./docs/stages/01-language-fundamentals.md) | syntax, control flow, data structures, functions, errors | [01-core-foundations/language-basics](./01-core-foundations/language-basics/), [01-foundations/03-control-flow](./01-foundations/03-control-flow/), [01-foundations/04-data-structures](./01-foundations/04-data-structures/), [01-foundations/05-functions-and-errors](./01-foundations/05-functions-and-errors/) |
 | [2 Types and Design](./docs/stages/02-types-and-design.md) | structs, interfaces, composition, text and data modeling | [05-types-and-interfaces](./05-types-and-interfaces/), [06-composition](./06-composition/), [07-strings-and-text](./07-strings-and-text/) |
 | [3 Modules and IO](./docs/stages/03-modules-and-io.md) | packages, modules, encoding, filesystems, CLI boundaries | [08-modules-and-packages](./08-modules-and-packages/), [09-io-and-cli](./09-io-and-cli/) |
@@ -132,7 +132,7 @@ For the full explanation of that relationship, see
 
 ```bash
 # run a lesson
-go run ./01-core-foundations/getting-started/2-hello-world
+go run ./01-foundations/01-getting-started/2-hello-world
 
 # run a starter exercise
 go run ./01-foundations/05-functions-and-errors/7-order-summary/_starter

@@ -16,15 +16,15 @@ happened."
 
 ```bash
 go version
-go run ./01-core-foundations/getting-started/2-hello-world
+go run ./01-foundations/01-getting-started/2-hello-world
 ```
 
 5. Open and run:
 
-- [GT.1 installation](../../../01-core-foundations/getting-started/1-installation/)
-- [GT.2 hello world](../../../01-core-foundations/getting-started/2-hello-world/)
-- [GT.3 how Go works](../../../01-core-foundations/getting-started/3-how-go-works/)
-- [GT.4 development environment](../../../01-core-foundations/getting-started/4-dev-environment/)
+- [GT.1 installation](../../../01-foundations/01-getting-started/1-installation/)
+- [GT.2 hello world](../../../01-foundations/01-getting-started/2-hello-world/)
+- [GT.3 how Go works](../../../01-foundations/01-getting-started/3-how-go-works/)
+- [GT.4 development environment](../../../01-foundations/01-getting-started/4-dev-environment/)
 
 ## What Success Looks Like
 
