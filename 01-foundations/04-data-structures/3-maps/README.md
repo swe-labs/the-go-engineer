@@ -2,8 +2,15 @@
 
 ## Mission
 
-Learn how Go performs keyed lookup with maps and why the comma-ok pattern matters whenever a missing
-key would otherwise be ambiguous.
+Learn how Go performs keyed lookup with maps and why the comma-ok pattern matters whenever a missing key would otherwise be ambiguous.
+
+## Why This Lesson Exists Now
+
+So far you have learned about sequential data (arrays, slices). But sometimes you need to find things by name or ID, not by position.
+
+Maps solve exactly that problem: fast lookup by key instead of scanning from the start.
+
+This lesson builds on DS.2 by adding the ability to organize data by keys.
 
 ## Prerequisites
 
@@ -30,6 +37,14 @@ lookup rules
 existing key -> value + exists=true
 missing key  -> zero value + exists=false
 ```
+
+## Machine View
+
+A map in Go is a hash table. When you store a key-value pair, Go computes a hash of the key and stores the data at that location.
+
+When you look up a key, Go computes the same hash and retrieves the value.
+
+If a key does not exist, looking it up returns the zero value for the value type (0 for int, "" for string, etc.). This is why the comma-ok pattern exists: to distinguish between a missing key and a key whose value happens to be zero.
 
 ## Run Instructions
 

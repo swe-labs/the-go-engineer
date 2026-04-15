@@ -2,8 +2,15 @@
 
 ## Mission
 
-Learn why sub-slices can still affect the original data and why `append` can reuse spare capacity in
-ways that surprise beginners.
+Learn why sub-slices can still affect the original data and why `append` can reuse spare capacity in ways that surprise beginners.
+
+## Why This Lesson Exists Now
+
+You now know how to create slices and how they work. But there is a subtle trap: when you create a sub-slice, it might still share the same backing array as the original.
+
+This matters because changing data through one slice can unexpectedly change another. This is the "gotcha" that catches many Go learners.
+
+This lesson builds on DS.2 (slices) and DS.4 (pointers) by showing the connection between slice headers and shared backing arrays.
 
 ## Prerequisites
 
@@ -37,6 +44,16 @@ growth := original[2:4]
 append may still write into the original backing array
 if spare capacity exists
 ```
+
+## Machine View
+
+When you create a slice with `original[1:4]`, you are not copying the data. You are creating a new slice header that points to the same backing array.
+
+Both slices share the same underlying array. Modifying one affects the other.
+
+However, when `append` exceeds the original slice's capacity, Go allocates a new backing array and copies the data. After that point, the connection is broken.
+
+This is why understanding capacity matters: if you are working with slices derived from the same source, you might be sharing memory unintentionally.
 
 ## Run Instructions
 

@@ -2,8 +2,15 @@
 
 ## Mission
 
-Learn what a pointer is, how dereferencing works, and why pointers matter when an update must
-change the original stored value rather than only a copy.
+Learn what a pointer is, how dereferencing works, and why pointers matter when an update must change the original stored value rather than only a copy.
+
+## Why This Lesson Exists Now
+
+You have learned about arrays, slices, and maps. But there is still a gap: how do you share data between parts of your program so that updates are visible everywhere?
+
+That is what pointers solve. When you pass a slice to a function, you are passing a reference. But for single values or when you need explicit sharing, pointers are the tool.
+
+This lesson builds on DS.1 (arrays as value types) and DS.2 (slices as references) to complete the picture.
 
 ## Prerequisites
 
@@ -37,6 +44,18 @@ bobPhone := &phones[1]
 
 bobPhone --> phones[1]
 ```
+
+## Machine View
+
+A pointer is a variable that stores a memory address. In Go, the zero value for a pointer is `nil`, meaning it points to nothing.
+
+When you use `&` (address-of operator), you get a pointer to the variable. When you use `*` (dereference operator), you access the value stored at that address.
+
+Unlike some languages, Go does not allow pointer arithmetic. This keeps Go safe and simple. You can only:
+- Take the address of a variable
+- Follow that address to read or write the value
+
+Slices already contain a pointer (to their backing array), which is why they can be passed to functions and have changes visible. This lesson shows you the same pattern for single values.
 
 ## Run Instructions
 

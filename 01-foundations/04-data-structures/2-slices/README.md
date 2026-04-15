@@ -2,8 +2,15 @@
 
 ## Mission
 
-Learn how Go represents dynamic collections through slices, and why `len`, `cap`, `make`, and
-`append` are all part of one connected idea.
+Learn how Go represents dynamic collections through slices, and why `len`, `cap`, `make`, and `append` are all part of one connected idea.
+
+## Why This Lesson Exists Now
+
+Arrays taught you about fixed-size collections and value copying. But real programs need to handle data that grows and shrinks.
+
+That is what slices do. They are Go's primary way to work with dynamic collections.
+
+This lesson builds on DS.1 by showing what happens when you need flexibility.
 
 ## Prerequisites
 
@@ -43,6 +50,19 @@ after append 40
 Go may allocate a larger backing array
 so the slice can keep growing
 ```
+
+## Machine View
+
+A slice is not an array. A slice is a data structure that points to an array.
+
+When you create a slice, Go creates a small "header" with three fields:
+- **pointer**: the address of the first element in the backing array
+- **len**: how many elements are currently accessible
+- **cap**: how many elements can be added before the backing array must be reallocated
+
+When you pass a slice to a function, you are passing this small header, not copying the whole backing array.
+
+When `append` needs more capacity, it allocates a new, larger backing array and copies the old elements over.
 
 ## Run Instructions
 

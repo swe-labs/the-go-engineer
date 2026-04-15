@@ -2,12 +2,21 @@
 
 ## Mission
 
-Build a small in-memory contact directory that turns the `04-data-structures` lessons into one
-coherent runnable exercise.
+Build a small in-memory contact directory that turns the `04-data-structures` lessons into one coherent runnable exercise.
 
 This is the `04-data-structures` milestone.
-It is where slices, maps, and pointers come together without depending on later-section abstractions
-like helper-function design or struct-heavy modeling.
+It is where slices, maps, and pointers come together without depending on later-section abstractions like helper-function design or struct-heavy modeling.
+
+## Why This Milestone Exists
+
+The earlier lessons each taught one data structure in isolation:
+- Arrays for fixed-size collections
+- Slices for dynamic collections
+- Maps for keyed lookup
+- Pointers for direct mutation
+- Slice sharing for understanding capacity
+
+Now you combine them. This mirrors real development: you rarely use just one data structure.
 
 ## Prerequisites
 

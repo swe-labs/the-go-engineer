@@ -2,8 +2,7 @@
 
 ## Mission
 
-Learn what an array is in Go and why arrays matter even though slices become the more common tool
-later.
+Learn what an array is in Go and why arrays matter even though slices become the more common tool later.
 
 This lesson exists because arrays make one important rule visible early:
 
@@ -11,9 +10,18 @@ This lesson exists because arrays make one important rule visible early:
 
 That rule helps the learner understand slices by contrast in the next lesson.
 
+## Why This Lesson Exists Now
+
+After learning control flow (if, for, switch), the next question is: "How do I work with groups of values?"
+
+The learner already knows single values. Now they need to understand what happens when there are multiple values together.
+
+Arrays are the foundation for this. They show that Go has fixed-size collections, which introduces the critical concept: what gets copied and what gets shared.
+
 ## Prerequisites
 
 - Section entry for `01-foundations/04-data-structures`
+- Comfortable with `CF.2` for basics (loops)
 
 ## Mental Model
 
@@ -38,6 +46,16 @@ change copied[0] -> 99
 original = [10 20 30]
 copied   = [99 20 30]
 ```
+
+## Machine View
+
+When you declare an array in Go, the compiler allocates enough memory for all elements.
+
+An array variable contains the actual values, not a reference to them.
+
+When you copy an array with `copied := original`, Go copies every element from the original to the new location in memory.
+
+This is different from languages that use references. Here, two variables mean two independent copies.
 
 ## Run Instructions
 
