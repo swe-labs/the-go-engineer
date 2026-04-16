@@ -10,7 +10,7 @@
       "summary": "Teach learners to install Go, run their first programs, and build confidence with variables, constants, and enum-like values.",
       "status": "pilot",
       "prerequisites": [],
-      "path_prefix": "01-core-foundations",
+      "path_prefix": "01-foundations/01-getting-started",
       "entry_points": [
         "GT.1",
         "LB.1"
