@@ -75,4 +75,4 @@ Type switches are used in serialization (json.Unmarshal), reflection, and handli
 
 ## Next Step
 
-Continue to `TI.6` Stringer.
+Continue to `TI.7` custom errors.

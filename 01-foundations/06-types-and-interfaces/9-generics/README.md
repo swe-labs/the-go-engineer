@@ -74,4 +74,4 @@ Generics are essential for building reusable data structures (maps, slices, tree
 
 ## Next Step
 
-Continue to `TI.6` payroll processor project.
+Continue to `TI.8` payroll processor project.

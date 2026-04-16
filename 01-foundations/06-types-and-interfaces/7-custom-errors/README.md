@@ -11,7 +11,7 @@ Go's built-in error interface is simple: just `Error() string`. But sometimes yo
 ## Prerequisites
 
 - `TI.3` interfaces
-- `TI.6` Stringer
+- `TI.5` Stringer
 
 ## Mental Model
 
@@ -67,4 +67,4 @@ Custom errors are used in real applications for validation errors, API errors wi
 
 ## Next Step
 
-Continue to `TI.11` empty interface.
+Continue to `TI.10` advanced generics (stretch) or move to next section.

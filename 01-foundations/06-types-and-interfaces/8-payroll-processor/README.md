@@ -15,8 +15,8 @@ You have learned all the individual pieces: structs for data, methods for behavi
 - `TI.1` structs
 - `TI.2` methods
 - `TI.3` interfaces
-- `TI.4` Stringer
-- `TI.5` generics
+- `TI.5` Stringer
+- `TI.9` generics
 
 ## What You Will Build
 
