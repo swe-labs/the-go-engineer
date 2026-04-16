@@ -8,14 +8,14 @@ operations that interact with the outside world.
 ## Stage Flow
 
 1. `modules-and-packages`
-   - source: [08-modules-and-packages](../../../08-modules-and-packages/)
+   - source: [07-modules-and-packages](../../../07-modules-and-packages/)
    - core job: teach module boundaries, dependency management, versioning, and build-surface reasoning
    - milestone: `MP.3` versioning workshop
 2. `io-and-cli`
    - source surfaces:
-     - [09-io-and-cli/cli-tools](../../../09-io-and-cli/cli-tools/)
-     - [09-io-and-cli/encoding](../../../09-io-and-cli/encoding/)
-     - [09-io-and-cli/filesystem](../../../09-io-and-cli/filesystem/)
+     - [08-io-and-cli/cli-tools](../../../08-io-and-cli/cli-tools/)
+     - [08-io-and-cli/encoding](../../../08-io-and-cli/encoding/)
+     - [08-io-and-cli/filesystem](../../../08-io-and-cli/filesystem/)
    - core job: teach CLI flows, encoding workflows, and filesystem tooling patterns
    - milestone backbone: `CL.4`, `EN.6`, `FS.7`
 
@@ -51,6 +51,6 @@ What you should not skip is proof:
 
 ## Exit Condition
 
-You are ready for `4 Backend Engineering` when you can finish the four stage milestones honestly
+You are ready for `06 Backend & DB` when you can finish the four stage milestones honestly
 and explain how module boundaries, CLI interfaces, encoded data, and filesystem logic connect in a
 real tool.

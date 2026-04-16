@@ -1,9 +1,9 @@
-# Expert Layer Source Seeds and Ownership
+# Pressure Task Source Seeds and Ownership
 
-## Stage Ownership
+## Ownership
 
-Expert Layer is a beta shell that reuses source seeds from later-stage work.
-It does not claim ownership of an entire alpha section.
+This pressure layer reuses source seeds from later-stage work.
+It does not claim ownership of one dedicated public stage.
 
 ## Current Seed Categories
 
@@ -32,5 +32,5 @@ It does not claim ownership of an entire alpha section.
 
 ## What This Means In Beta
 
-This stage is intentionally assembled from existing stage outputs and later-stage project work
+This pressure layer is intentionally assembled from existing stage outputs and later-stage project work
 instead of from a standalone topic inventory.

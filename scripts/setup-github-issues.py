@@ -152,11 +152,11 @@ Complete implementation of Chapters 13-15 with all lessons, documentation, and c
 - **Total Effort**: 20-25 hours
 
 ## Success Criteria
-✓ All lessons compile and run without errors
-✓ All follow curriculum style (comments, structure, footer)
-✓ Learning paths documented in section READMEs
-✓ All changes merged to main branch
-✓ Curriculum completion: 15/15 chapters done
+âœ“ All lessons compile and run without errors
+âœ“ All follow curriculum style (comments, structure, footer)
+âœ“ Learning paths documented in section READMEs
+âœ“ All changes merged to main branch
+âœ“ Curriculum completion: 15/15 chapters done
 
 ## Related
 Blocks all other issues in this epic.
@@ -169,21 +169,21 @@ Blocks all other issues in this epic.
 Update all documentation files to reflect completion of Chapters 13-15.
 
 ## Tasks
-- [ ] Update ROADMAP.md (mark chapters 13-15 as ✅)
+- [ ] Update ROADMAP.md (mark chapters 13-15 as âœ…)
 - [ ] Update CHANGELOG.md (add 2026-04-15 entry)
 - [ ] Update README.md (add new lessons to projects table)
-- [ ] Create 13-quality-and-performance/README.md
-- [ ] Create 14-application-architecture/README.md
-- [ ] Create 15-code-generation/README.md
+- [ ] Create 12-quality-and-performance/README.md
+- [ ] Create 13-application-architecture/README.md
+- [ ] Create 14-code-generation/README.md
 - [ ] Verify all internal links and paths
 - [ ] Pass CI: make build, make test, make lint
 
 ## Success Criteria
-✓ All section READMEs created with learning paths
-✓ ROADMAP and CHANGELOG updated with new information
-✓ README projects table includes all new lessons (PR.3, GR.4, GR.5, CG.2-4)
-✓ All links are valid (no broken references)
-✓ CI pipeline passes completely
+âœ“ All section READMEs created with learning paths
+âœ“ ROADMAP and CHANGELOG updated with new information
+âœ“ README projects table includes all new lessons (PR.3, GR.4, GR.5, CG.2-4)
+âœ“ All links are valid (no broken references)
+âœ“ CI pipeline passes completely
 
 ## Related
 Depends on: Epic #1
@@ -197,7 +197,7 @@ Blocks: Issues #2, #3, #4, #5, #6 (other improvements reference docs)
 Add memory profiling lesson to Chapter 13 (Profiling subsection).
 
 ## File to Create
-`13-quality-and-performance/profiling/2-memory-profile/main.go`
+`12-quality-and-performance/profiling/2-memory-profile/main.go`
 
 ## Content Requirements
 - [ ] Header with copyright, section/level info
@@ -216,22 +216,22 @@ Add memory profiling lesson to Chapter 13 (Profiling subsection).
   - Before/after statistics
   - Comparison workflow
 - [ ] KEY TAKEAWAY section with key concepts
-- [ ] NEXT UP footer (→ PR.4 or similar)
+- [ ] NEXT UP footer (â†’ PR.4 or similar)
 
 ## Testing
-- [ ] `go run ./13-quality-and-performance/profiling/2-memory-profile` runs without error
-- [ ] `go build ./13-quality-and-performance/profiling/2-memory-profile` compiles
+- [ ] `go run ./12-quality-and-performance/profiling/2-memory-profile` runs without error
+- [ ] `go build ./12-quality-and-performance/profiling/2-memory-profile` compiles
 - [ ] Profiles generated: mem_heap.prof, mem_allocs.prof
 - [ ] `gofmt` passes (use `make fmt`)
 - [ ] `go vet` passes (use `make vet`)
 - [ ] `make build` and `make test` pass
 
 ## Success Criteria
-✓ File compiles and runs successfully
-✓ Follows exact curriculum style
-✓ Generates profile files for inspection
-✓ Demonstrates sync.Pool optimization
-✓ All Go best practices followed
+âœ“ File compiles and runs successfully
+âœ“ Follows exact curriculum style
+âœ“ Generates profile files for inspection
+âœ“ Demonstrates sync.Pool optimization
+âœ“ All Go best practices followed
 
 ## Related
 Depends on: #1 (documentation updates)
@@ -245,9 +245,9 @@ Part of: Epic #1
 Add streaming RPC lesson to Chapter 14 (gRPC subsection).
 
 ## Files to Create
-- `14-application-architecture/grpc/2-streaming/proto/stream.proto`
-- `14-application-architecture/grpc/2-streaming/server/main.go`
-- `14-application-architecture/grpc/2-streaming/client/main.go`
+- `13-application-architecture/grpc/2-streaming/proto/stream.proto`
+- `13-application-architecture/grpc/2-streaming/server/main.go`
+- `13-application-architecture/grpc/2-streaming/client/main.go`
 
 ## Proto Content (stream.proto)
 - [ ] Header comments explaining streaming patterns
@@ -288,11 +288,11 @@ Add streaming RPC lesson to Chapter 14 (gRPC subsection).
 - [ ] Follows curriculum style exactly
 
 ## Success Criteria
-✓ Protobuf compiles successfully
-✓ Server and client work together
-✓ All 3 streaming patterns demonstrated
-✓ io.EOF and context handling shown
-✓ Follows curriculum style guide
+âœ“ Protobuf compiles successfully
+âœ“ Server and client work together
+âœ“ All 3 streaming patterns demonstrated
+âœ“ io.EOF and context handling shown
+âœ“ Follows curriculum style guide
 
 ## Related
 Depends on: #1 (documentation updates)
@@ -307,7 +307,7 @@ Part of: Epic #1
 Add gRPC interceptors lesson to Chapter 14 (gRPC subsection).
 
 ## File to Create
-`14-application-architecture/grpc/3-interceptors/main.go`
+`13-application-architecture/grpc/3-interceptors/main.go`
 
 ## Content Requirements
 
@@ -342,7 +342,7 @@ Add gRPC interceptors lesson to Chapter 14 (gRPC subsection).
 - [ ] Show chaining with grpc.ChainUnaryInterceptors()
 
 ## Testing
-- [ ] `go build ./14-application-architecture/grpc/3-interceptors` compiles
+- [ ] `go build ./13-application-architecture/grpc/3-interceptors` compiles
 - [ ] Server and client run without error
 - [ ] Auth rejection works and shows error
 - [ ] Metrics print correctly at end
@@ -350,11 +350,11 @@ Add gRPC interceptors lesson to Chapter 14 (gRPC subsection).
 - [ ] All CI checks pass
 
 ## Success Criteria
-✓ File compiles successfully
-✓ Server and client work together
-✓ Auth validation demonstrated
-✓ Metrics collection shown
-✓ Follows curriculum style guide
+âœ“ File compiles successfully
+âœ“ Server and client work together
+âœ“ Auth validation demonstrated
+âœ“ Metrics collection shown
+âœ“ Follows curriculum style guide
 
 ## Related
 Depends on: #1 (docs), #3 (GR.4 proto definitions)
@@ -371,9 +371,9 @@ Add three code generation lessons to Chapter 15:
 - CG.4: sqlc (type-safe SQL generation)
 
 ## Files to Create
-1. `15-code-generation/29-mockery/main.go`
-2. `15-code-generation/30-stringer/main.go`
-3. `15-code-generation/31-sqlc/main.go`
+1. `14-code-generation/29-mockery/main.go`
+2. `14-code-generation/30-stringer/main.go`
+3. `14-code-generation/31-sqlc/main.go`
 
 ## CG.2: Mockery
 - [ ] Header with copyright, section info
@@ -421,10 +421,10 @@ Add three code generation lessons to Chapter 15:
 - [ ] All CI checks pass
 
 ## Success Criteria
-✓ All three files compile and run (or explain why)
-✓ Pattern demonstrations are clear
-✓ Teaching flow is logical
-✓ Follows curriculum style exactly
+âœ“ All three files compile and run (or explain why)
+âœ“ Pattern demonstrations are clear
+âœ“ Teaching flow is logical
+âœ“ Follows curriculum style exactly
 
 ## Related
 Depends on: #1 (documentation updates)
@@ -441,46 +441,46 @@ Update curriculum.json to include all new lessons from Chapters 13-15.
 
 ### Chapter 13 Additions
 - [ ] PR.3: memory-profile
-  - Concept: "Heap allocations · sync.Pool · comparative analysis"
+  - Concept: "Heap allocations Â· sync.Pool Â· comparative analysis"
   - Requires: PR.1
-  - Path: 13-quality-and-performance/profiling/2-memory-profile
+  - Path: 12-quality-and-performance/profiling/2-memory-profile
   - is_entry: false
   - is_exercise: false
 
 ### Chapter 14 Additions
 - [ ] GR.4: streaming-rpc
-  - Concept: "Server/client/bidirectional streaming · io.EOF detection"
+  - Concept: "Server/client/bidirectional streaming Â· io.EOF detection"
   - Requires: GR.1, GR.2
-  - Path: 14-application-architecture/grpc/2-streaming
+  - Path: 13-application-architecture/grpc/2-streaming
   - is_entry: false
   - is_exercise: false
 
 - [ ] GR.5: interceptors
-  - Concept: "Auth, logging, metrics middleware · metadata headers"
+  - Concept: "Auth, logging, metrics middleware Â· metadata headers"
   - Requires: GR.2
-  - Path: 14-application-architecture/grpc/3-interceptors
+  - Path: 13-application-architecture/grpc/3-interceptors
   - is_entry: false
   - is_exercise: false
 
 ### Chapter 15 Additions
 - [ ] CG.2: mockery-mocking
-  - Concept: "Interface mocks · mockery tool · dependency injection"
+  - Concept: "Interface mocks Â· mockery tool Â· dependency injection"
   - Requires: CG.1
-  - Path: 15-code-generation/29-mockery
+  - Path: 14-code-generation/29-mockery
   - is_entry: false
   - is_exercise: false
 
 - [ ] CG.3: stringer-enum
-  - Concept: "Enum String() generation · diagnostics · readability"
+  - Concept: "Enum String() generation Â· diagnostics Â· readability"
   - Requires: CG.1
-  - Path: 15-code-generation/30-stringer
+  - Path: 14-code-generation/30-stringer
   - is_entry: false
   - is_exercise: false
 
 - [ ] CG.4: sqlc-type-safety
-  - Concept: "Type-safe SQL · schema-driven generation · zero reflection"
+  - Concept: "Type-safe SQL Â· schema-driven generation Â· zero reflection"
   - Requires: CG.1
-  - Path: 15-code-generation/31-sqlc
+  - Path: 14-code-generation/31-sqlc
   - is_entry: false
   - is_exercise: false
 
@@ -499,10 +499,10 @@ Update curriculum.json to include all new lessons from Chapters 13-15.
 - [ ] `make build` passes
 
 ## Success Criteria
-✓ curriculum.json is valid JSON
-✓ All lessons have correct structure
-✓ Validation script passes
-✓ No path or ID errors
+âœ“ curriculum.json is valid JSON
+âœ“ All lessons have correct structure
+âœ“ Validation script passes
+âœ“ No path or ID errors
 
 ## Related
 Depends on: #1, #2, #3, #4, #5 (all feature branches must be complete)
@@ -547,15 +547,15 @@ class GitHubAPI:
             response = self.session.post(url, json=data)
             
             if response.status_code == 201:
-                return True, f"✓ Label '{name}' created"
+                return True, f"âœ“ Label '{name}' created"
             elif response.status_code == 422:
                 # Label already exists
-                return True, f"⚠ Label '{name}' already exists"
+                return True, f"âš  Label '{name}' already exists"
             else:
                 error = response.json().get("message", "Unknown error")
-                return False, f"✗ Failed to create label '{name}': {error}"
+                return False, f"âœ— Failed to create label '{name}': {error}"
         except Exception as e:
-            return False, f"✗ Error creating label '{name}': {str(e)}"
+            return False, f"âœ— Error creating label '{name}': {str(e)}"
     
     def create_issue(self, title: str, body: str, labels: List[str]) -> Tuple[bool, str, Optional[int]]:
         """Create an issue in the repository"""
@@ -575,12 +575,12 @@ class GitHubAPI:
             
             if response.status_code == 201:
                 issue_num = response.json()["number"]
-                return True, f"✓ Issue '{title}' created (#{issue_num})", issue_num
+                return True, f"âœ“ Issue '{title}' created (#{issue_num})", issue_num
             else:
                 error = response.json().get("message", "Unknown error")
-                return False, f"✗ Failed to create issue: {error}", None
+                return False, f"âœ— Failed to create issue: {error}", None
         except Exception as e:
-            return False, f"✗ Error creating issue: {str(e)}", None
+            return False, f"âœ— Error creating issue: {str(e)}", None
     
     def verify_connection(self) -> bool:
         """Verify API connection and authentication"""
@@ -589,14 +589,14 @@ class GitHubAPI:
             response = self.session.get(url)
             if response.status_code == 200:
                 user = response.json()["login"]
-                print(f"✓ Authenticated as: {user}")
+                print(f"âœ“ Authenticated as: {user}")
                 return True
             else:
-                print(f"✗ Authentication failed: {response.status_code}")
+                print(f"âœ— Authentication failed: {response.status_code}")
                 print(f"  Message: {response.json().get('message', 'Unknown error')}")
                 return False
         except Exception as e:
-            print(f"✗ Connection error: {str(e)}")
+            print(f"âœ— Connection error: {str(e)}")
             return False
 
 # ============================================================================
@@ -652,7 +652,7 @@ Examples:
     # Verify connection
     print("Step 1: Verifying GitHub API connection...")
     if not api.verify_connection():
-        print("\n✗ Failed to authenticate. Check your token and try again.")
+        print("\nâœ— Failed to authenticate. Check your token and try again.")
         sys.exit(1)
     print()
     
@@ -697,10 +697,10 @@ Examples:
     # Summary
     print("="*70)
     if args.dry_run:
-        print("  ✓ Dry-run completed successfully!")
+        print("  âœ“ Dry-run completed successfully!")
         print("  Run without --dry-run to actually create labels and issues.")
     else:
-        print("  ✓ Setup completed successfully!")
+        print("  âœ“ Setup completed successfully!")
         print(f"  Visit: https://github.com/{REPO_FULL}/issues")
     print("="*70)
     print()

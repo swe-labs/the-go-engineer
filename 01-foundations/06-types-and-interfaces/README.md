@@ -49,7 +49,7 @@ This section intentionally stays inside foundations-ready ideas:
 
 ## Beta Stage Ownership
 
-This section belongs to [1 Language Fundamentals](../../docs/stages/01-language-fundamentals.md).
+This section belongs to [04 Types & Design](../../docs/stages/04-types-design.md).
 
 Inside the new repo architecture, it is the sixth foundations section:
 

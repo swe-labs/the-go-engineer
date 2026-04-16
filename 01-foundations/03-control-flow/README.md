@@ -48,7 +48,7 @@ Data structures are taught properly in the next section.
 
 ## Beta Stage Ownership
 
-This section belongs to [1 Language Fundamentals](../../docs/stages/01-language-fundamentals.md).
+This section belongs to [02 Language Basics](../../docs/stages/02-language-basics.md).
 
 Inside the new repo architecture, it lives under `01-foundations`.
 

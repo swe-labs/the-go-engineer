@@ -1,6 +1,6 @@
 # Types and Design Milestone Guidance
 
-The `2 Types and Design` stage has three proof surfaces.
+The `04 Types & Design` stage has three proof surfaces.
 
 These milestones show whether a learner can model and shape data intentionally instead of only
 copying patterns.

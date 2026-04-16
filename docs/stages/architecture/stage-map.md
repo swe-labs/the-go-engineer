@@ -8,9 +8,9 @@ This stage teaches learners how to choose and defend boundaries inside real Go s
 
 | Surface | Role In Stage |
 | --- | --- |
-| [package-design](../../../14-application-architecture/package-design/) | live beta path for package naming, visibility, and project layout |
-| [grpc](../../../14-application-architecture/grpc/) | architecture reference surface for schema-first service boundaries |
-| [enterprise-capstone](../../../14-application-architecture/enterprise-capstone/) | larger-system architecture seed for reading package and service seams |
+| [package-design](../../../13-application-architecture/package-design/) | live beta path for package naming, visibility, and project layout |
+| [grpc](../../../13-application-architecture/grpc/) | architecture reference surface for schema-first service boundaries |
+| [enterprise-capstone](../../../13-application-architecture/enterprise-capstone/) | larger-system architecture seed for reading package and service seams |
 
 ## Live Milestone Backbone
 

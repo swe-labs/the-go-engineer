@@ -1,6 +1,7 @@
-# Language Fundamentals Milestone Guidance
+# Early Foundations Milestone Guidance
 
-The `1 Language Fundamentals` stage has four proof surfaces.
+The early foundations spine across `02 Language Basics` and `03 Functions & Errors` has four proof
+surfaces.
 
 These are not just exercises to check off.
 Together, they show whether a learner can actually use the stage instead of only reading it.

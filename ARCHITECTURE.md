@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Vision
+## ðŸŽ¯ Vision
 
 A progressive engineering learning system that transforms learners from complete beginners to engineers who can:
 
@@ -15,23 +15,23 @@ A progressive engineering learning system that transforms learners from complete
 
 ---
 
-## 📊 Progress Model
+## ðŸ“Š Progress Model
 
 ```
 Phase 1 (0-30%)     Phase 2 (30-60%)     Phase 3 (60-85%)     Phase 4 (85-100%)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
 SYNTAX              ENGINEERING          PRODUCTION           SYSTEM
 FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
 "I can write        "I write code        "I write code        "I think like
  Go code"            that works"          doesn't break"       a senior"
 ```
 
 ---
 
-## 📚 Complete Curriculum Structure
+## ðŸ“š Complete Curriculum Structure
 
-### Phase 1: Syntax Foundation (0% → 30%)
+### Phase 1: Syntax Foundation (0% â†’ 30%)
 
 #### Section 0: How Computers Work
 
@@ -46,10 +46,10 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 
 | Lesson | Focus                   | Milestone            |
 | ------ | ----------------------- | -------------------- |
-| GT.1   | Installation            | ✓ First Go install   |
-| GT.2   | Hello World             | ✓ First program runs |
-| GT.3   | How Go Works            | ✓ Execution model    |
-| GT.4   | Development Environment | ✓ Dev setup          |
+| GT.1   | Installation            | âœ“ First Go install   |
+| GT.2   | Hello World             | âœ“ First program runs |
+| GT.3   | How Go Works            | âœ“ Execution model    |
+| GT.4   | Development Environment | âœ“ Dev setup          |
 
 #### Section 2: Language Basics
 
@@ -58,9 +58,9 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | LB.1   | Variables & Constants | -                |
 | LB.2   | Basic Types           | -                |
 | LB.3   | Operators             | -                |
-| LB.4   | Type Conversions      | ✓ Type converter |
+| LB.4   | Type Conversions      | âœ“ Type converter |
 
-#### Section 3: Control Flow ⭐
+#### Section 3: Control Flow â­
 
 | Lesson | Focus             | Milestone  |
 | ------ | ----------------- | ---------- |
@@ -68,13 +68,13 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | CF.2   | Loops (for)       | Soft intro |
 | CF.3   | Switch Statements | -          |
 | CF.4   | Break/Continue    | -          |
-| CF.5   | Loop Patterns     | ✓ FizzBuzz |
+| CF.5   | Loop Patterns     | âœ“ FizzBuzz |
 
 ---
 
-### Phase 2: Engineering Foundation (30% → 60%)
+### Phase 2: Engineering Foundation (30% â†’ 60%)
 
-#### Section 4: Data Structures ⭐
+#### Section 4: Data Structures â­
 
 | Lesson | Focus             | Milestone                    |
 | ------ | ----------------- | ---------------------------- |
@@ -83,7 +83,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | DS.3   | Maps              | Internals, collisions        |
 | DS.4   | Pointers          | Memory, escape               |
 | DS.5   | Slice Sharing     | Backing array                |
-| DS.6   | Contact Directory | ✓ Combined milestone         |
+| DS.6   | Contact Directory | âœ“ Combined milestone         |
 
 **Production Notes Added:**
 
@@ -91,7 +91,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 - Map nil panics
 - Performance trade-offs
 
-#### Section 5: Functions and Errors ⭐⭐⭐ (TRANSFORMED)
+#### Section 5: Functions and Errors â­â­â­ (TRANSFORMED)
 
 | Lesson | Focus                   | Engineering              |
 | ------ | ----------------------- | ------------------------ |
@@ -101,7 +101,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | FE.4   | Errors as Values        | Wrapping, errors.Is/As   |
 | FE.5   | Validation              | Security, DoS, fail fast |
 | FE.6   | Orchestration           | Failure propagation      |
-| FE.7   | Order Processing        | ✓ Engineering Capstone   |
+| FE.7   | Order Processing        | âœ“ Engineering Capstone   |
 
 **FE.7 Engineering Capstone Includes:**
 
@@ -121,7 +121,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | TI.3   | Value vs Pointer Receivers | When to use which |
 | TI.4   | Interface Basics           | Contracts         |
 | TI.5   | Interface Composition      | -                 |
-| TI.6   | Error Interface            | ✓ Custom errors   |
+| TI.6   | Error Interface            | âœ“ Custom errors   |
 
 #### Section 7: Packages and Modules
 
@@ -136,9 +136,9 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 
 ---
 
-### Phase 3: Production Engineering (60% → 85%)
+### Phase 3: Production Engineering (60% â†’ 85%)
 
-#### Section 8: Concurrency Fundamentals ⭐
+#### Section 8: Concurrency Fundamentals â­
 
 | Lesson | Focus                 | Milestone       |
 | ------ | --------------------- | --------------- |
@@ -147,7 +147,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | GC.3   | Channels              | -               |
 | GC.4   | Buffered Channels     | -               |
 | GC.5   | Channel Closing       | -               |
-| GC.6   | Concurrent Downloader | ✓ With limits   |
+| GC.6   | Concurrent Downloader | âœ“ With limits   |
 | GC.7   | Select Basics         | -               |
 | GC.8   | Race Conditions       | -race detection |
 | GC.9   | Select Deep Dive      | -               |
@@ -167,7 +167,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | CT.2   | With Cancel          | -            |
 | CT.3   | With Timeout         | -            |
 | CT.4   | With Value           | -            |
-| CT.5   | Timeout-Aware Client | ✓ API client |
+| CT.5   | Timeout-Aware Client | âœ“ API client |
 
 #### Section 10: Advanced Concurrency
 
@@ -177,9 +177,9 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | CP.2   | Fan-out, Fan-in   | -            |
 | CP.3   | Pipeline Patterns | -            |
 | CP.4   | Worker Pools      | Backpressure |
-| CP.5   | Health Checker    | ✓ Capstone   |
+| CP.5   | Health Checker    | âœ“ Capstone   |
 
-#### Section 11: Testing Fundamentals ⭐
+#### Section 11: Testing Fundamentals â­
 
 | Lesson | Focus                | Milestone |
 | ------ | -------------------- | --------- |
@@ -197,13 +197,13 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | PR.1   | pprof Basics         | -              |
 | PR.2   | CPU Profiling        | -              |
 | PR.3   | Memory Profiling     | -              |
-| PR.4   | Benchmark-Driven Dev | ✓ Optimization |
+| PR.4   | Benchmark-Driven Dev | âœ“ Optimization |
 
 ---
 
-### Phase 4: System Engineering (85% → 100%)
+### Phase 4: System Engineering (85% â†’ 100%)
 
-#### Section 13: HTTP Servers ⭐
+#### Section 13: HTTP Servers â­
 
 | Lesson | Focus            | Milestone  |
 | ------ | ---------------- | ---------- |
@@ -213,7 +213,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | HS.4   | Request Handling | -          |
 | HS.5   | Response Writing | -          |
 | HS.6   | Error Handling   | -          |
-| HS.7   | Server Timeouts  | ✓ Critical |
+| HS.7   | Server Timeouts  | âœ“ Critical |
 
 **Production Notes:**
 
@@ -230,7 +230,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | DB.3   | Queries and Rows    | -           |
 | DB.4   | Transactions        | -           |
 | DB.5   | Prepared Statements | -           |
-| DB.6   | Error Handling      | ✓ DB errors |
+| DB.6   | Error Handling      | âœ“ DB errors |
 
 #### Section 15: Production Engineering
 
@@ -241,7 +241,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 | SL.3   | Request Tracing    | Correlation IDs |
 | GS.1   | Graceful Shutdown  | -               |
 | GS.2   | Signal Handling    | -               |
-| GS.3   | Drain Pattern      | ✓ Capstone      |
+| GS.3   | Drain Pattern      | âœ“ Capstone      |
 
 #### Section 16: Configuration
 
@@ -264,7 +264,7 @@ FOUNDATION          FOUNDATION           ENGINEERING          ENGINEERING
 
 ---
 
-### Phase 5: Flagship Project (100%) ⭐⭐⭐
+### Phase 5: Flagship Project (100%) â­â­â­
 
 ## GoScale SaaS Backend
 
@@ -340,7 +340,7 @@ A production-grade multi-tenant backend system.
 
 ---
 
-## 🔑 Key Patterns Integrated
+## ðŸ”‘ Key Patterns Integrated
 
 ### 1. Soft Introduction
 
@@ -349,18 +349,18 @@ Use tools before teaching deeply (loops in data structures)
 ### 2. Error Framework
 
 ```
-UserError → Input validation → 400
-SystemError → Infrastructure → 500
-FatalError → Bugs → Log + Exit
+UserError â†’ Input validation â†’ 400
+SystemError â†’ Infrastructure â†’ 500
+FatalError â†’ Bugs â†’ Log + Exit
 ```
 
 ### 3. Production Notes
 
-Every lesson includes "⚠️ In Production" section
+Every lesson includes "âš ï¸ In Production" section
 
 ### 4. Thinking Questions
 
-Every major concept has "🤔 Thinking Questions"
+Every major concept has "ðŸ¤” Thinking Questions"
 
 ### 5. Failure-Based Learning
 
@@ -369,19 +369,19 @@ Bug diagnosis, injection, scale testing
 ### 6. Learning Loop
 
 ```
-Explain → Break → Fix → Scale → Apply → Think → Ship
+Explain â†’ Break â†’ Fix â†’ Scale â†’ Apply â†’ Think â†’ Ship
 ```
 
 ---
 
-## 📈 Milestone Progression
+## ðŸ“ˆ Milestone Progression
 
 | %    | Milestone               | Section     |
 | ---- | ----------------------- | ----------- |
 | 5%   | First program           | GT.2        |
 | 15%  | FizzBuzz                | CF.5        |
 | 20%  | Contact Directory       | DS.6        |
-| 30%  | Order Processing System | FE.7 ⭐⭐⭐ |
+| 30%  | Order Processing System | FE.7 â­â­â­ |
 | 40%  | Custom Errors           | TI.6        |
 | 55%  | Concurrent Downloader   | GC.6        |
 | 65%  | Health Checker          | CP.5        |
@@ -392,7 +392,7 @@ Explain → Break → Fix → Scale → Apply → Think → Ship
 
 ---
 
-## ✅ Success Criteria
+## âœ… Success Criteria
 
 A graduate of The Go Engineer can:
 
@@ -411,25 +411,25 @@ A graduate of The Go Engineer can:
 
 ---
 
-## 📁 Document Structure
+## ðŸ“ Document Structure
 
 ```
 the-go-engineer/
-├── CURRICULUM-BLUEPRINT.md          # Full blueprint v2.0
-├── docs/
-│   ├── PROGRESSION.md              # Visual progression
-│   ├── ENGINEERING_ERROR_FRAMEWORK.md
-│   ├── flagship/
-│   │   └── GOSCALE_SAAS_BACKEND.md # Flagship spec
-│   └── templates/
-│       ├── PRODUCTION_NOTES_TEMPLATE.md
-│       ├── THINKING_SECTIONS.md
-│       └── FAILURE_LEARNING_PATTERNS.md
-├── 01-foundations/                 # Phase 1-2 lessons
-├── 11-concurrency/                 # Phase 3 lessons
-├── 13-quality-and-performance/     # Testing, profiling
-├── 14-application-architecture/   # Phase 4 lessons
-└── docs/stages/                    # Stage documentation
+â”œâ”€â”€ CURRICULUM-BLUEPRINT.md          # Full blueprint v2.0
+â”œâ”€â”€ docs/
+â”‚   â”œâ”€â”€ PROGRESSION.md              # Visual progression
+â”‚   â”œâ”€â”€ ENGINEERING_ERROR_FRAMEWORK.md
+â”‚   â”œâ”€â”€ flagship/
+â”‚   â”‚   â””â”€â”€ GOSCALE_SAAS_BACKEND.md # Flagship spec
+â”‚   â””â”€â”€ templates/
+â”‚       â”œâ”€â”€ PRODUCTION_NOTES_TEMPLATE.md
+â”‚       â”œâ”€â”€ THINKING_SECTIONS.md
+â”‚       â””â”€â”€ FAILURE_LEARNING_PATTERNS.md
+â”œâ”€â”€ 01-foundations/                 # Phase 1-2 lessons
+â”œâ”€â”€ 10-concurrency/                 # Phase 3 lessons
+â”œâ”€â”€ 12-quality-and-performance/     # Testing, profiling
+â”œâ”€â”€ 13-application-architecture/   # Phase 4 lessons
+â””â”€â”€ docs/stages/                    # Stage documentation
 ```
 
 ---

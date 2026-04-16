@@ -1,4 +1,4 @@
-name: CI
+﻿name: CI
 
 on: [push, pull_request]
 
@@ -30,7 +30,7 @@ jobs:
         run: |
           go mod tidy
           if [ -n "$(git diff --name-only)" ]; then
-            echo "❌ go.mod or go.sum needs updating. Run 'go mod tidy' locally."
+            echo "âŒ go.mod or go.sum needs updating. Run 'go mod tidy' locally."
             git diff
             exit 1
           fi
@@ -50,7 +50,7 @@ jobs:
 
       - name: Run Benchmarks
         run: |
-          go test -bench=. -benchmem -count=1 ./13-quality-and-performance/testing/benchmarks/ || true
+          go test -bench=. -benchmem -count=1 ./12-quality-and-performance/testing/benchmarks/ || true
 
       - name: Validate Curriculum
         run: go run ./scripts/validate_curriculum.go

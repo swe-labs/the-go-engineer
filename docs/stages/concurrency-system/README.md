@@ -1,7 +1,7 @@
-# Concurrency System Support Docs
+# 07 Concurrency Support Docs
 
-Use these docs when you want the beta-stage view of concurrency without switching back and forth
-between the Section `11` and Section `12` source inventories.
+Use these docs when you want the public `07 Concurrency` view without switching back and forth
+between the two source inventories that currently feed it.
 
 ## In This Folder
 
@@ -10,9 +10,9 @@ between the Section `11` and Section `12` source inventories.
 
 ## Current Stage Scope
 
-`5 Concurrency System` currently spans:
+`07 Concurrency` currently spans:
 
-- [Section 11: Concurrency](../../../11-concurrency/)
-- [Section 12: Concurrency Patterns](../../../12-concurrency-patterns/)
+- [10-concurrency](../../../10-concurrency/)
+- [11-concurrency-patterns](../../../11-concurrency-patterns/)
 
-The public beta route starts with Section `11` and then moves into Section `12`.
+The public route starts with `10-concurrency` and then moves into `11-concurrency-patterns`.

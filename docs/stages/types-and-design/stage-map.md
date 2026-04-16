@@ -8,15 +8,15 @@ transformation and rendering workflows that depend on those design choices.
 ## Stage Flow
 
 1. `types-and-interfaces`
-   - source: [05-types-and-interfaces](../../../05-types-and-interfaces/)
+   - source: [01-foundations/06-types-and-interfaces](../../../01-foundations/06-types-and-interfaces/)
    - core job: teach structs, methods, interfaces, and small generic helpers
    - milestone: `TI.6` payroll processor project
 2. `composition`
-   - source: [06-composition](../../../06-composition/)
+   - source: [05-composition](../../../05-composition/)
    - core job: teach explicit reuse, embedding, promoted behavior, and shadowing
    - milestone: `CO.3` bank account project
 3. `strings-and-text`
-   - source: [07-strings-and-text](../../../07-strings-and-text/)
+   - source: [06-strings-and-text](../../../06-strings-and-text/)
    - core job: teach parsing, formatting, rendering, and text-driven workflow design
    - milestone: `ST.6` config parser project
 
@@ -39,9 +39,9 @@ instead of ad hoc text handling.
 
 ## Recommended Full-Path Order
 
-1. Finish the Section `05` milestone path first.
-2. Move through Section `06` and complete `CO.3`.
-3. Move through Section `07` and complete `ST.6`.
+1. Finish the `types-and-interfaces` milestone path first.
+2. Move through `composition` and complete `CO.3`.
+3. Move through `strings-and-text` and complete `ST.6`.
 
 ## Bridge-Path Reminder
 
@@ -55,5 +55,5 @@ What you should not skip is proof:
 
 ## Exit Condition
 
-You are ready for `3 Modules and IO` when you can finish the three stage milestones honestly and
+You are ready for `05 Packages & IO` when you can finish the three stage milestones honestly and
 explain how type design, reuse, and text-driven workflows connect together.

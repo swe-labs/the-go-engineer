@@ -9,9 +9,9 @@ workflow as part of engineering correctness.
 
 | Surface | Role In Stage |
 | --- | --- |
-| [structured-logging](../../../14-application-architecture/structured-logging/) | live beta path for operational log shape and redaction |
-| [graceful-shutdown](../../../14-application-architecture/graceful-shutdown/) | live beta path for drain order and lifecycle safety |
-| [docker-and-deployment](../../../14-application-architecture/docker-and-deployment/) | reference surface for packaging and deployment workflow |
+| [structured-logging](../../../13-application-architecture/structured-logging/) | live beta path for operational log shape and redaction |
+| [graceful-shutdown](../../../13-application-architecture/graceful-shutdown/) | live beta path for drain order and lifecycle safety |
+| [docker-and-deployment](../../../13-application-architecture/docker-and-deployment/) | reference surface for packaging and deployment workflow |
 
 ## Live Milestone Backbone
 

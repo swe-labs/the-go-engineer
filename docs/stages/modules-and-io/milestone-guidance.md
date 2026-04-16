@@ -1,6 +1,6 @@
 # Modules and IO Milestone Guidance
 
-The `3 Modules and IO` stage has four proof surfaces.
+The `05 Packages & IO` stage has four proof surfaces.
 
 These milestones show whether a learner can work across module, process, encoding, and filesystem
 boundaries instead of staying inside toy in-memory examples.

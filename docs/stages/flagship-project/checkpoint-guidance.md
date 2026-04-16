@@ -38,5 +38,5 @@ Choose one meaningful improvement and explain why it matters more than the next 
 
 ## Ready To Move On
 
-Move to [11 Code Generation](../11-flagship.md) when the flagship system gives you enough
+Move to [11 Flagship](../11-flagship.md) when the flagship system gives you enough
 context to evaluate generation as leverage instead of magic.

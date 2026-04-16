@@ -1,4 +1,4 @@
-# Language Fundamentals Stage Map
+# Early Foundations Stage Map
 
 This stage is the early programming backbone of the beta curriculum.
 
@@ -8,7 +8,7 @@ error handling.
 ## Stage Flow
 
 1. `language-basics`
-   - source: [01-core-foundations/language-basics](../../../01-core-foundations/language-basics/)
+   - source: [01-foundations/02-language-basics](../../../01-foundations/02-language-basics/)
    - core job: teach values, variables, constants, and simple program structure
    - milestone: `LB.4` application logger
 2. `control-flow`
@@ -64,5 +64,5 @@ What you should not skip is proof:
 
 ## Exit Condition
 
-You are ready for `2 Types and Design` when you can finish the four stage milestones honestly and
+You are ready for `04 Types & Design` when you can finish the four milestone surfaces honestly and
 explain how values, control flow, collections, mutation, functions, and errors connect together.

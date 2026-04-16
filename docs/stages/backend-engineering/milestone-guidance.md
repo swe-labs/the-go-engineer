@@ -1,6 +1,6 @@
 # Backend Engineering Milestone Guidance
 
-The `4 Backend Engineering` stage currently has one promoted live proof surface.
+The `06 Backend & DB` stage currently has one promoted live proof surface.
 
 That narrower scope is intentional for now.
 The beta route is promoting the databases path first instead of pretending the entire Section `10`

@@ -23,7 +23,7 @@ smuggling in ideas from later sections.
 
 ## Beta Stage Ownership
 
-This section belongs to [1 Language Fundamentals](../../docs/stages/01-language-fundamentals.md).
+This section belongs to [02 Language Basics](../../docs/stages/02-language-basics.md).
 
 Inside the new repo architecture, it is the fourth foundations section:
 
@@ -93,4 +93,4 @@ then you are ready to move into `05-functions-and-errors`.
 
 After `DS.6`, continue to [05-functions-and-errors](../05-functions-and-errors/).
 That keeps the new `01-foundations` sequence intact while the broader beta shell still groups both
-sections under [1 Language Fundamentals](../../docs/stages/01-language-fundamentals.md).
+sections under [02 Language Basics](../../docs/stages/02-language-basics.md).

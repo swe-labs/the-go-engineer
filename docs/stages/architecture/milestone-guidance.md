@@ -23,5 +23,5 @@ If you are moving quickly through this stage, make sure you can still explain:
 
 ## Ready To Move On
 
-Move to [8 Production Engineering](../08-production-engineering.md) when package boundaries and
+Move to [10 Production](../10-production.md) when package boundaries and
 service seams feel understandable instead of magical.

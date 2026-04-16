@@ -15,7 +15,7 @@ instead of guesswork.
 
 ## Prerequisites
 
-- [5 Concurrency System](../../07-concurrency.md)
+- [07 Concurrency](../../07-concurrency.md)
 - `CP.5`
 - [rubric and checkpoint template](../../../templates/rubric-checkpoint-template.md)
 
@@ -67,5 +67,5 @@ The learner should explain why the chosen fix is better than a shallow alternati
 ## Next Step
 
 Use this task as a bridge into
-[10 Flagship Project](../../11-flagship.md)
+[11 Flagship](../../11-flagship.md)
 when you want the same judgment pressure applied to a larger system.

@@ -35,5 +35,5 @@ If you are moving quickly through this stage, make sure you can still explain:
 
 ## Ready To Move On
 
-Move to [9 Expert Layer](../09-expert-layer.md) or [10 Flagship Project](../10-flagship-project.md)
+Move to [11 Flagship](../11-flagship.md)
 once the current stage path feels operationally understandable instead of mysterious.

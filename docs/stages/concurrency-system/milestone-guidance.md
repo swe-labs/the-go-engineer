@@ -44,5 +44,5 @@ If you are moving quickly through this stage, make sure you can still explain:
 
 ## Ready To Move On
 
-Move to [6 Quality and Performance](../06-quality-and-performance.md) when you can complete the
+Move to [08 Quality & Test](../08-quality-test.md) when you can complete the
 current path and explain the coordination choices in plain language.

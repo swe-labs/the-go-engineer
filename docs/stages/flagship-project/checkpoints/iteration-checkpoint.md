@@ -68,5 +68,5 @@ The learner should justify why this improvement wins over plausible alternatives
 After this checkpoint, use the
 [First iteration slice](../slices/first-iteration-slice.md),
 then either implement the chosen iteration or return to
-[11 Code Generation](../../11-flagship.md)
+[11 Flagship](../../11-flagship.md)
 once you have enough flagship context to use generation tools deliberately.

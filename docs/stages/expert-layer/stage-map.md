@@ -1,11 +1,11 @@
-# Expert Layer Stage Map
+# Pressure Tasks Stage Map
 
-## Stage Goal
+## Goal
 
 This stage teaches learners how to critique, diagnose, and redesign engineering work under real
 constraints.
 
-## Public Stage Shape
+## Public Shape
 
 | Surface Type | Role In Stage |
 | --- | --- |
@@ -27,10 +27,10 @@ Use the public task index here:
 
 ## Entry Requirement
 
-This stage is for learners who already have meaningful milestone experience from the earlier beta
+This pressure layer is for learners who already have meaningful milestone experience from the earlier beta
 stages.
 
 ## Handoff
 
-The natural handoff from this stage is [10 Flagship Project](../11-flagship.md), where the
-same judgment skills need to hold up over a larger system.
+The natural handoff from this pressure layer is [11 Flagship](../11-flagship.md), where the same
+judgment skills need to hold up over a larger system.

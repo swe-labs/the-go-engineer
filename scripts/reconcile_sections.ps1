@@ -1,5 +1,5 @@
-$dirs10 = "10-web-and-database"
-$dirs11 = "11-concurrency"
+$dirs10 = "09-web-and-database"
+$dirs11 = "10-concurrency"
 
 # Update Section 10 files
 Get-ChildItem -Path $dirs10 -Recurse -Filter "*.go" | ForEach-Object {

@@ -1,6 +1,6 @@
-# 2 Types and Design Support Docs
+# 04 Types & Design Support Docs
 
-This folder supports the beta `2 Types and Design` stage.
+This folder supports the beta `04 Types & Design` stage.
 
 Use these docs when you want a stage-level view of how the current Section `05` through Section
 `07` source content fits together.
@@ -12,9 +12,9 @@ Use these docs when you want a stage-level view of how the current Section `05` 
 
 Then work through the source sections in order:
 
-1. [05-types-and-interfaces](../../../05-types-and-interfaces/)
-2. [06-composition](../../../06-composition/)
-3. [07-strings-and-text](../../../07-strings-and-text/)
+1. [01-foundations/06-types-and-interfaces](../../../01-foundations/06-types-and-interfaces/)
+2. [05-composition](../../../05-composition/)
+3. [06-strings-and-text](../../../06-strings-and-text/)
 
 ## What These Docs Are For
 

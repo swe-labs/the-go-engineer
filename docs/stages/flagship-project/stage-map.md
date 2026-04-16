@@ -9,7 +9,7 @@ work together.
 
 | Surface | Role In Stage |
 | --- | --- |
-| [enterprise-capstone](../../../14-application-architecture/enterprise-capstone/) | current flagship seed and main integrated project spine |
+| [enterprise-capstone](../../../13-application-architecture/enterprise-capstone/) | current flagship seed and main integrated project spine |`n| [14-code-generation](../../../14-code-generation/) | supporting automation and generation surface inside the flagship stage |
 | milestone project patterns from earlier stages | supporting examples for scoped increments and checkpoint discipline |
 
 ## Current Checkpoint Model
