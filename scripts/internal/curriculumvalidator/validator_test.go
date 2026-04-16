@@ -21,7 +21,7 @@ func TestValidateAcceptsValidV2Fixture(t *testing.T) {
       "number": "05",
       "slug": "functions-and-errors",
       "title": "Functions and Errors",
-      "path_prefix": "01-foundations/05-functions-and-errors",
+      "path_prefix": "03-functions-errors",
       "entry_points": [],
       "outputs": [],
       "prerequisites": []
@@ -37,9 +37,9 @@ func TestValidateAcceptsValidV2Fixture(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "01-foundations/05-functions-and-errors/1-functions-basics",
+      "path": "03-functions-errors/1-functions-basics",
       "prerequisites": [],
-      "run_command": "go run ./01-foundations/05-functions-and-errors/1-functions-basics",
+      "run_command": "go run ./03-functions-errors/1-functions-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": ["FE.7"]
@@ -53,20 +53,20 @@ func TestValidateAcceptsValidV2Fixture(t *testing.T) {
       "subtype": "",
       "level": "core",
       "verification_mode": "mixed",
-      "path": "01-foundations/05-functions-and-errors/7-order-summary",
+      "path": "03-functions-errors/7-order-summary",
       "prerequisites": ["FE.1"],
-      "run_command": "go run ./01-foundations/05-functions-and-errors/7-order-summary",
+      "run_command": "go run ./03-functions-errors/7-order-summary",
       "test_command": "",
-      "starter_path": "01-foundations/05-functions-and-errors/7-order-summary/_starter",
+      "starter_path": "03-functions-errors/7-order-summary/_starter",
       "next_items": []
     }
   ]
 }`)
 
-	mustMkdir(t, root, "01-foundations/05-functions-and-errors/1-functions-basics")
-	mustMkdir(t, root, "01-foundations/05-functions-and-errors/7-order-summary")
-	mustMkdir(t, root, "01-foundations/05-functions-and-errors/7-order-summary/_starter")
-	writeFile(t, root, "01-foundations/05-functions-and-errors/1-functions-basics/README.md", `# FE.1 Functions Basics
+	mustMkdir(t, root, "03-functions-errors/1-functions-basics")
+	mustMkdir(t, root, "03-functions-errors/7-order-summary")
+	mustMkdir(t, root, "03-functions-errors/7-order-summary/_starter")
+	writeFile(t, root, "03-functions-errors/1-functions-basics/README.md", `# FE.1 Functions Basics
 
 ## Mission
 
@@ -545,7 +545,7 @@ func TestValidateAcceptsFoundationsReadmeContract(t *testing.T) {
       "number": "04",
       "slug": "functions-and-errors",
       "title": "Functions and Errors",
-      "path_prefix": "01-foundations/05-functions-and-errors",
+      "path_prefix": "03-functions-errors",
       "entry_points": ["FE.1"],
       "outputs": ["FE.1"],
       "prerequisites": []
@@ -561,9 +561,9 @@ func TestValidateAcceptsFoundationsReadmeContract(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "01-foundations/05-functions-and-errors/1-functions-basics",
+      "path": "03-functions-errors/1-functions-basics",
       "prerequisites": [],
-      "run_command": "go run ./01-foundations/05-functions-and-errors/1-functions-basics",
+      "run_command": "go run ./03-functions-errors/1-functions-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -571,8 +571,8 @@ func TestValidateAcceptsFoundationsReadmeContract(t *testing.T) {
   ]
 }`)
 
-	mustMkdir(t, root, "01-foundations/05-functions-and-errors/1-functions-basics")
-	writeFile(t, root, "01-foundations/05-functions-and-errors/1-functions-basics/README.md", `# FE.1
+	mustMkdir(t, root, "03-functions-errors/1-functions-basics")
+	writeFile(t, root, "03-functions-errors/1-functions-basics/README.md", `# FE.1
 
 ## Mission
 
@@ -596,7 +596,7 @@ machine view
 
 ## Run Instructions
 
-go run ./01-foundations/05-functions-and-errors/1-functions-basics
+go run ./03-functions-errors/1-functions-basics
 
 ## Code Walkthrough
 
@@ -636,7 +636,7 @@ func TestValidateRejectsFoundationsReadmeMissingMachineView(t *testing.T) {
       "number": "04",
       "slug": "functions-and-errors",
       "title": "Functions and Errors",
-      "path_prefix": "01-foundations/05-functions-and-errors",
+      "path_prefix": "03-functions-errors",
       "entry_points": ["FE.1"],
       "outputs": ["FE.1"],
       "prerequisites": []
@@ -652,9 +652,9 @@ func TestValidateRejectsFoundationsReadmeMissingMachineView(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "01-foundations/05-functions-and-errors/1-functions-basics",
+      "path": "03-functions-errors/1-functions-basics",
       "prerequisites": [],
-      "run_command": "go run ./01-foundations/05-functions-and-errors/1-functions-basics",
+      "run_command": "go run ./03-functions-errors/1-functions-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -662,8 +662,8 @@ func TestValidateRejectsFoundationsReadmeMissingMachineView(t *testing.T) {
   ]
 }`)
 
-	mustMkdir(t, root, "01-foundations/05-functions-and-errors/1-functions-basics")
-	writeFile(t, root, "01-foundations/05-functions-and-errors/1-functions-basics/README.md", `# FE.1
+	mustMkdir(t, root, "03-functions-errors/1-functions-basics")
+	writeFile(t, root, "03-functions-errors/1-functions-basics/README.md", `# FE.1
 
 ## Mission
 
@@ -683,7 +683,7 @@ diagram
 
 ## Run Instructions
 
-go run ./01-foundations/05-functions-and-errors/1-functions-basics
+go run ./03-functions-errors/1-functions-basics
 
 ## Code Walkthrough
 
@@ -708,7 +708,7 @@ next
 	if result.ErrorCount != 1 {
 		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
 	}
-	if !containsReport(reports, "Invalid foundations README contract: FE.1 -> 01-foundations/05-functions-and-errors/1-functions-basics/README.md missing ## Machine View") {
+	if !containsReport(reports, "Invalid foundations README contract: FE.1 -> 03-functions-errors/1-functions-basics/README.md missing ## Machine View") {
 		t.Fatalf("expected missing-machine-view error in reports: %v", reports)
 	}
 }
@@ -726,7 +726,7 @@ func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing
       "number": "04",
       "slug": "functions-and-errors",
       "title": "Functions and Errors",
-      "path_prefix": "01-foundations/05-functions-and-errors",
+      "path_prefix": "03-functions-errors",
       "entry_points": ["FE.7"],
       "outputs": ["FE.7"],
       "prerequisites": []
@@ -742,19 +742,19 @@ func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing
       "subtype": "",
       "level": "core",
       "verification_mode": "mixed",
-      "path": "01-foundations/05-functions-and-errors/7-order-summary",
+      "path": "03-functions-errors/7-order-summary",
       "prerequisites": [],
-      "run_command": "go run ./01-foundations/05-functions-and-errors/7-order-summary",
-      "test_command": "go test ./01-foundations/05-functions-and-errors/7-order-summary",
-      "starter_path": "01-foundations/05-functions-and-errors/7-order-summary/_starter",
+      "run_command": "go run ./03-functions-errors/7-order-summary",
+      "test_command": "go test ./03-functions-errors/7-order-summary",
+      "starter_path": "03-functions-errors/7-order-summary/_starter",
       "next_items": []
     }
   ]
 }`)
 
-	mustMkdir(t, root, "01-foundations/05-functions-and-errors/7-order-summary")
-	mustMkdir(t, root, "01-foundations/05-functions-and-errors/7-order-summary/_starter")
-	writeFile(t, root, "01-foundations/05-functions-and-errors/7-order-summary/README.md", `# FE.7
+	mustMkdir(t, root, "03-functions-errors/7-order-summary")
+	mustMkdir(t, root, "03-functions-errors/7-order-summary/_starter")
+	writeFile(t, root, "03-functions-errors/7-order-summary/README.md", `# FE.7
 
 ## Mission
 
@@ -770,7 +770,7 @@ machine view
 
 ## Run Instructions
 
-go run ./01-foundations/05-functions-and-errors/7-order-summary
+go run ./03-functions-errors/7-order-summary
 
 ## Solution Walkthrough
 
@@ -830,9 +830,9 @@ func TestValidateAcceptsGettingStartedReadmeContractAndSplitSectionPrefix(t *tes
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "01-foundations/01-getting-started/1-installation",
+      "path": "01-getting-started/1-installation",
       "prerequisites": [],
-      "run_command": "go run ./01-foundations/01-getting-started/1-installation",
+      "run_command": "go run ./01-getting-started/1-installation",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -840,9 +840,9 @@ func TestValidateAcceptsGettingStartedReadmeContractAndSplitSectionPrefix(t *tes
   ]
 }`)
 
-	mustMkdir(t, root, "01-foundations/01-getting-started/1-installation")
+	mustMkdir(t, root, "01-getting-started/1-installation")
 	mustMkdir(t, root, "01-core-foundations")
-	writeFile(t, root, "01-foundations/01-getting-started/1-installation/README.md", `# GT.1
+	writeFile(t, root, "01-getting-started/1-installation/README.md", `# GT.1
 
 ## Mission
 
@@ -862,7 +862,7 @@ machine view
 
 ## Run Instructions
 
-go run ./01-foundations/01-getting-started/1-installation
+go run ./01-getting-started/1-installation
 
 ## Code Walkthrough
 
@@ -902,7 +902,7 @@ func TestValidateAcceptsTypesAndInterfacesReadmeContract(t *testing.T) {
       "number": "05",
       "slug": "types-and-interfaces",
       "title": "Types and Interfaces",
-      "path_prefix": "01-foundations/06-types-and-interfaces",
+      "path_prefix": "04-types-design",
       "entry_points": ["TI.9"],
       "outputs": ["TI.8"],
       "prerequisites": []
@@ -918,9 +918,9 @@ func TestValidateAcceptsTypesAndInterfacesReadmeContract(t *testing.T) {
       "subtype": "pattern",
       "level": "core",
       "verification_mode": "run",
-      "path": "01-foundations/06-types-and-interfaces/9-generics",
+      "path": "04-types-design/9-generics",
       "prerequisites": [],
-      "run_command": "go run ./01-foundations/06-types-and-interfaces/9-generics",
+      "run_command": "go run ./04-types-design/9-generics",
       "test_command": "",
       "starter_path": "",
       "next_items": ["TI.8"]
@@ -934,20 +934,20 @@ func TestValidateAcceptsTypesAndInterfacesReadmeContract(t *testing.T) {
       "subtype": "",
       "level": "core",
       "verification_mode": "mixed",
-      "path": "01-foundations/06-types-and-interfaces/10-payroll-processor",
+      "path": "04-types-design/10-payroll-processor",
       "prerequisites": ["TI.9"],
-      "run_command": "go run ./01-foundations/06-types-and-interfaces/10-payroll-processor",
-      "test_command": "go test ./01-foundations/06-types-and-interfaces/10-payroll-processor",
-      "starter_path": "01-foundations/06-types-and-interfaces/10-payroll-processor/_starter",
+      "run_command": "go run ./04-types-design/10-payroll-processor",
+      "test_command": "go test ./04-types-design/10-payroll-processor",
+      "starter_path": "04-types-design/10-payroll-processor/_starter",
       "next_items": []
     }
   ]
 }`)
 
-	mustMkdir(t, root, "01-foundations/06-types-and-interfaces/9-generics")
-	mustMkdir(t, root, "01-foundations/06-types-and-interfaces/10-payroll-processor")
-	mustMkdir(t, root, "01-foundations/06-types-and-interfaces/10-payroll-processor/_starter")
-	writeFile(t, root, "01-foundations/06-types-and-interfaces/9-generics/README.md", `# TI.9
+	mustMkdir(t, root, "04-types-design/9-generics")
+	mustMkdir(t, root, "04-types-design/10-payroll-processor")
+	mustMkdir(t, root, "04-types-design/10-payroll-processor/_starter")
+	writeFile(t, root, "04-types-design/9-generics/README.md", `# TI.9
 
 ## Mission
 
@@ -967,7 +967,7 @@ machine view
 
 ## Run Instructions
 
-go run ./01-foundations/06-types-and-interfaces/9-generics
+go run ./04-types-design/9-generics
 
 ## Code Walkthrough
 
@@ -981,7 +981,7 @@ walkthrough
 
 next
 `)
-	writeFile(t, root, "01-foundations/06-types-and-interfaces/10-payroll-processor/README.md", `# TI.10
+	writeFile(t, root, "04-types-design/10-payroll-processor/README.md", `# TI.10
 
 ## Mission
 
@@ -997,7 +997,7 @@ machine view
 
 ## Run Instructions
 
-go run ./01-foundations/06-types-and-interfaces/10-payroll-processor
+go run ./04-types-design/10-payroll-processor
 
 ## Solution Walkthrough
 
@@ -1041,7 +1041,7 @@ func TestValidateRejectsTypesAndInterfacesReadmeMissingMachineView(t *testing.T)
       "number": "05",
       "slug": "types-and-interfaces",
       "title": "Types and Interfaces",
-      "path_prefix": "01-foundations/06-types-and-interfaces",
+      "path_prefix": "04-types-design",
       "entry_points": ["TI.10"],
       "outputs": ["TI.10"],
       "prerequisites": []
@@ -1057,9 +1057,9 @@ func TestValidateRejectsTypesAndInterfacesReadmeMissingMachineView(t *testing.T)
       "subtype": "pattern",
       "level": "stretch",
       "verification_mode": "run",
-      "path": "01-foundations/06-types-and-interfaces/10-advanced-generics",
+      "path": "04-types-design/10-advanced-generics",
       "prerequisites": [],
-      "run_command": "go run ./01-foundations/06-types-and-interfaces/10-advanced-generics",
+      "run_command": "go run ./04-types-design/10-advanced-generics",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -1067,8 +1067,8 @@ func TestValidateRejectsTypesAndInterfacesReadmeMissingMachineView(t *testing.T)
   ]
 }`)
 
-	mustMkdir(t, root, "01-foundations/06-types-and-interfaces/10-advanced-generics")
-	writeFile(t, root, "01-foundations/06-types-and-interfaces/10-advanced-generics/README.md", `# TI.10
+	mustMkdir(t, root, "04-types-design/10-advanced-generics")
+	writeFile(t, root, "04-types-design/10-advanced-generics/README.md", `# TI.10
 
 ## Mission
 
@@ -1084,7 +1084,7 @@ diagram
 
 ## Run Instructions
 
-go run ./01-foundations/06-types-and-interfaces/10-advanced-generics
+go run ./04-types-design/10-advanced-generics
 
 ## Code Walkthrough
 
@@ -1109,7 +1109,7 @@ next
 	if result.ErrorCount != 1 {
 		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
 	}
-	if !containsReport(reports, "Invalid foundations README contract: TI.10 -> 01-foundations/06-types-and-interfaces/10-advanced-generics/README.md missing ## Machine View") {
+	if !containsReport(reports, "Invalid foundations README contract: TI.10 -> 04-types-design/10-advanced-generics/README.md missing ## Machine View") {
 		t.Fatalf("expected missing-machine-view error in reports: %v", reports)
 	}
 }
