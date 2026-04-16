@@ -46,10 +46,10 @@ The curriculum is organized into 11 stages. Each stage has a dedicated entry pag
 
 | Stage | Focus | Sections | Source |
 | --- | --- | --- | --- |
-| [01 Getting Started](./docs/stages/01-getting-started.md) | install, hello world, dev setup | s01 | [01-getting-started](./01-getting-started/) |
-| [02 Language Basics]../../docs/stages/02-language-basics.md) | variables, types, control flow, data structures | s02-s03 | [02-language-basics](./02-language-basics/) |
-| [03 Functions & Errors]../../docs/stages/03-functions-errors.md) | functions, params, error handling | s04 | [03-functions-errors](./03-functions-errors/) |
-| [04 Types & Design]../../docs/stages/04-types-design.md) | structs, interfaces, composition, strings | s05-s07 | [04-types-design](./04-types-design/), [06-composition](./06-composition/), [07-strings-and-text](./07-strings-and-text/) |
+<| [01 Getting Started](./docs/stages/01-getting-started.md) | install, hello world, dev setup | s01 | [01-getting-started](./01-getting-started/) |
+| [02 Language Basics](./docs/stages/02-language-basics.md) | variables, types, control flow, data structures | s02-s03 | [02-language-basics](./02-language-basics/) |
+| [03 Functions & Errors](./docs/stages/03-functions-errors.md) | functions, params, error handling | s04 | [03-functions-errors](./03-functions-errors/) |
+| [04 Types & Design](./docs/stages/04-types-design.md) | structs, interfaces, composition, strings | s05-s07 | [04-types-design](./04-types-design/), [06-composition](./06-composition/), [07-strings-and-text](./07-strings-and-text/) |
 | [05 Packages & IO](./docs/stages/05-packages-io.md) | modules, packages, CLI, files | s08-s09 | [08-modules-and-packages](./08-modules-and-packages/), [09-io-and-cli](./09-io-and-cli/) |
 | [06 Backend & DB](./docs/stages/06-backend-db.md) | HTTP, databases, handlers | s10 | [10-web-and-database](./10-web-and-database/) |
 | [07 Concurrency](./docs/stages/07-concurrency.md) | goroutines, channels, patterns | s11-s12 | [11-concurrency](./11-concurrency/), [12-concurrency-patterns](./12-concurrency-patterns/) |
@@ -67,7 +67,7 @@ That stage page points to the current source surface for beginner setup and firs
 
 ### Experienced programmer new to Go
 
-Start at [Stage 02: Language Basics]../../docs/stages/02-language-basics.md).
+Start at [Stage 02: Language Basics](./docs/stages/02-language-basics.md).
 If you want a faster ramp, skim [Stage 01](./docs/stages/01-getting-started.md) first and then use
 the stage page to jump into the current source sections.
 
