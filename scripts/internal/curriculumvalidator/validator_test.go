@@ -889,6 +889,231 @@ next
 	}
 }
 
+func TestValidateAcceptsTypesAndInterfacesReadmeContract(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
+	writeValidPressureDocs(t, root)
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s05",
+      "number": "05",
+      "slug": "types-and-interfaces",
+      "title": "Types and Interfaces",
+      "path_prefix": "01-foundations/06-types-and-interfaces",
+      "entry_points": ["TI.9"],
+      "outputs": ["TI.8"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "TI.9",
+      "section_id": "s05",
+      "slug": "generics",
+      "title": "Generics",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "path": "01-foundations/06-types-and-interfaces/9-generics",
+      "prerequisites": [],
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/9-generics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": ["TI.8"]
+    },
+    {
+      "id": "TI.8",
+      "section_id": "s05",
+      "slug": "payroll",
+      "title": "Payroll",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "path": "01-foundations/06-types-and-interfaces/10-payroll-processor",
+      "prerequisites": ["TI.9"],
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/10-payroll-processor",
+      "test_command": "go test ./01-foundations/06-types-and-interfaces/10-payroll-processor",
+      "starter_path": "01-foundations/06-types-and-interfaces/10-payroll-processor/_starter",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "01-foundations/06-types-and-interfaces/9-generics")
+	mustMkdir(t, root, "01-foundations/06-types-and-interfaces/10-payroll-processor")
+	mustMkdir(t, root, "01-foundations/06-types-and-interfaces/10-payroll-processor/_starter")
+	writeFile(t, root, "01-foundations/06-types-and-interfaces/9-generics/README.md", `# TI.9
+
+## Mission
+
+mission
+
+## Mental Model
+
+mental model
+
+## Visual Model
+
+diagram
+
+## Machine View
+
+machine view
+
+## Run Instructions
+
+go run ./01-foundations/06-types-and-interfaces/9-generics
+
+## Code Walkthrough
+
+walkthrough
+
+## Try It
+
+1. try
+
+## Next Step
+
+next
+`)
+	writeFile(t, root, "01-foundations/06-types-and-interfaces/10-payroll-processor/README.md", `# TI.10
+
+## Mission
+
+mission
+
+## Visual Model
+
+diagram
+
+## Machine View
+
+machine view
+
+## Run Instructions
+
+go run ./01-foundations/06-types-and-interfaces/10-payroll-processor
+
+## Solution Walkthrough
+
+walkthrough
+
+## Try It
+
+1. try
+
+## Verification Surface
+
+verification
+
+## Next Step
+
+next
+`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 0 {
+		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
+	}
+}
+
+func TestValidateRejectsTypesAndInterfacesReadmeMissingMachineView(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
+	writeValidPressureDocs(t, root)
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s05",
+      "number": "05",
+      "slug": "types-and-interfaces",
+      "title": "Types and Interfaces",
+      "path_prefix": "01-foundations/06-types-and-interfaces",
+      "entry_points": ["TI.10"],
+      "outputs": ["TI.10"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "TI.10",
+      "section_id": "s05",
+      "slug": "advanced-generics",
+      "title": "Advanced Generics",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "stretch",
+      "verification_mode": "run",
+      "path": "01-foundations/06-types-and-interfaces/10-advanced-generics",
+      "prerequisites": [],
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/10-advanced-generics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "01-foundations/06-types-and-interfaces/10-advanced-generics")
+	writeFile(t, root, "01-foundations/06-types-and-interfaces/10-advanced-generics/README.md", `# TI.10
+
+## Mission
+
+mission
+
+## Mental Model
+
+mental model
+
+## Visual Model
+
+diagram
+
+## Run Instructions
+
+go run ./01-foundations/06-types-and-interfaces/10-advanced-generics
+
+## Code Walkthrough
+
+walkthrough
+
+## Try It
+
+1. try
+
+## Next Step
+
+next
+`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 1 {
+		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	}
+	if !containsReport(reports, "Invalid foundations README contract: TI.10 -> 01-foundations/06-types-and-interfaces/10-advanced-generics/README.md missing ## Machine View") {
+		t.Fatalf("expected missing-machine-view error in reports: %v", reports)
+	}
+}
+
 func writeFile(t *testing.T, root, relativePath, contents string) {
 	t.Helper()
 

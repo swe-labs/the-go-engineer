@@ -44,4 +44,7 @@ uploads/
 # Logs
 *.log
 
+# OpenCode
+.opencode/
+
 

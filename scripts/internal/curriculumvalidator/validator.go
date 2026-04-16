@@ -108,9 +108,13 @@ func Validate(root string, report func(string)) (Result, error) {
 		report = func(string) {}
 	}
 
-	lessonCount, pathErrors, err := validateCurriculumPaths(root, report)
-	if err != nil {
-		return Result{}, err
+	lessonCount, pathErrors := 0, 0
+	if pathExists(root, "curriculum.json") {
+		var err error
+		lessonCount, pathErrors, err = validateCurriculumPaths(root, report)
+		if err != nil {
+			return Result{}, err
+		}
 	}
 
 	filesScanned, runErrors, err := validateRunPaths(root, report)
@@ -580,6 +584,14 @@ func validateRequiredHeadingsForItem(root, readmePath string, item V2Item, repor
 
 	if strings.HasPrefix(itemPath, "01-foundations/05-functions-and-errors/") {
 		requiredHeadings = append(requiredHeadings, "## Machine View")
+	}
+
+	if strings.HasPrefix(itemPath, "01-foundations/06-types-and-interfaces/") {
+		requiredHeadings = append(requiredHeadings, "## Visual Model", "## Machine View")
+	}
+
+	if item.Type == "lesson" && strings.HasPrefix(itemPath, "01-foundations/06-types-and-interfaces/") {
+		requiredHeadings = append(requiredHeadings, "## Mental Model")
 	}
 
 	if item.StarterPath != "" || strings.TrimSpace(item.TestCommand) != "" || item.VerificationMode == "mixed" || item.VerificationMode == "test" {
