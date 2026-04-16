@@ -34,17 +34,18 @@ Those are types and interfaces questions.
 This section intentionally stays inside foundations-ready ideas:
 
 - struct definition and field access
-- method definition with value/pointer receivers
+- method definition with value/pointer receivers  
 - interface definition and implicit satisfaction
 - basic generics with constraints
 
-It does **not** make later concepts part of the foundations-critical path:
+**Canonical Foundational Path** (TI.1 - TI.9):
+- Core types and interfaces concepts every learner needs
+- Ends with the payroll processor milestone
 
-- custom generic constraints
-- generic map/set data structures
-- type embedding and composition
-
-Those may remain in the repo as legacy or later-stage material, but they are not the primary foundations route.
+**Advanced/Optional Path** (TI.10 - TI.17):
+- Advanced generics, type patterns, data structures
+- Marked as stretch/optional - not required for foundations
+- Can be explored after completing core path or in later stages
 
 ## Beta Stage Ownership
 
@@ -61,7 +62,7 @@ Inside the new repo architecture, it is the sixth foundations section:
 
 ## Section Map
 
-The canonical foundations order for this section is:
+### Canonical Foundational Path (Core - Required)
 
 | ID | Type | Surface | Core Job |
 | --- | --- | --- | --- |
@@ -74,6 +75,11 @@ The canonical foundations order for this section is:
 | `TI.7` | Lesson | [custom errors](./7-custom-errors) | teach custom error type definition |
 | `TI.8` | Exercise | [payroll processor](./8-payroll-processor) | prove structs+methods+interfaces+generics together |
 | `TI.9` | Lesson | [generics](./9-generics) | teach type parameters and constraints |
+
+### Advanced/Optional Path (Stretch)
+
+| ID | Type | Surface | Core Job |
+| --- | --- | --- | --- |
 | `TI.10` | Lesson | [advanced generics](./10-advanced-generics) | push generics further |
 | `TI.11` | Lesson | [empty interface](./11-empty-interface) | teach any/interface{} usage |
 | `TI.12` | Lesson | [type assertions](./12-type-assertions) | teach extracting concrete types from interfaces |
@@ -102,4 +108,6 @@ This section is being rebuilt so that:
 
 ## Next Step
 
-After `TI.11`, the learner should be ready to move into [Composition](../07-strings-and-text/README.md) or [2 Types and Design](../../docs/stages/02-types-and-design.md). That is where composition and embedding become the main topic.
+After completing the canonical path (TI.1 through TI.9), the learner should be ready to move into the next section: **Composition** (s06).
+
+The advanced lessons (TI.10-TI.17) are optional/stretch and can be explored later or in parallel with other sections.
