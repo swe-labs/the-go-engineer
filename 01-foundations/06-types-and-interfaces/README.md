@@ -1,0 +1,105 @@
+# 06 Types and Interfaces
+
+## Mission
+
+This section teaches you to model data with structs, attach behavior with methods, and define behavior contracts with interfaces instead of inheritance.
+
+By the end of this section, a learner should be able to:
+
+- write structs that model real domain data
+- attach methods with clear receiver intent
+- define interfaces that describe behavior boundaries
+- write small generic helpers built on interface-aware constraints
+- write polymorphic code that works across multiple concrete types
+
+## Why This Section Exists Now
+
+The learner already knows:
+
+- functions and multiple return values
+- explicit error handling
+- basic pointer usage
+- slices and maps
+
+That is enough to ask the next engineering questions:
+
+- how do I model a whole thing with multiple related attributes?
+- how do I add behavior to that data?
+- how do I write code that works with multiple types that share behavior?
+
+Those are types and interfaces questions.
+
+## Zero-Magic Boundary
+
+This section intentionally stays inside foundations-ready ideas:
+
+- struct definition and field access
+- method definition with value/pointer receivers
+- interface definition and implicit satisfaction
+- basic generics with constraints
+
+It does **not** make later concepts part of the foundations-critical path:
+
+- custom generic constraints
+- generic map/set data structures
+- type embedding and composition
+
+Those may remain in the repo as legacy or later-stage material, but they are not the primary foundations route.
+
+## Beta Stage Ownership
+
+This section belongs to [1 Language Fundamentals](../../docs/stages/01-language-fundamentals.md).
+
+Inside the new repo architecture, it is the sixth foundations section:
+
+1. `01-getting-started`
+2. `02-language-basics`
+3. `03-control-flow`
+4. `04-data-structures`
+5. `05-functions-and-errors`
+6. `06-types-and-interfaces`
+
+## Section Map
+
+The canonical foundations order for this section is:
+
+| ID | Type | Surface | Core Job |
+| --- | --- | --- | --- |
+| `TI.1` | Lesson | [structs](./1-struct) | teach struct as grouped data |
+| `TI.2` | Lesson | [methods](./2-methods) | teach method attachment and receiver choice |
+| `TI.3` | Lesson | [interfaces](./3-interfaces) | teach implicit contracts and polymorphism |
+| `TI.4` | Lesson | [interface embedding](./4-interface-embedding) | teach embedding interfaces in interfaces |
+| `TI.5` | Lesson | [Stringer](./5-stringer) | teach fmt.Stringer implementation |
+| `TI.6` | Lesson | [type switch](./6-type-switch) | teach handling multiple types from interface |
+| `TI.7` | Lesson | [custom errors](./7-custom-errors) | teach custom error type definition |
+| `TI.8` | Exercise | [payroll processor](./8-payroll-processor) | prove structs+methods+interfaces+generics together |
+| `TI.9` | Lesson | [generics](./9-generics) | teach type parameters and constraints |
+| `TI.10` | Lesson | [advanced generics](./10-advanced-generics) | push generics further |
+| `TI.11` | Lesson | [empty interface](./11-empty-interface) | teach any/interface{} usage |
+| `TI.12` | Lesson | [type assertions](./12-type-assertions) | teach extracting concrete types from interfaces |
+| `TI.13` | Lesson | [nil interfaces](./13-nil-interfaces) | teach nil vs typed-nil interface behavior |
+| `TI.14` | Lesson | [functional options](./14-functional-options) | teach configurable API pattern |
+| `TI.15` | Lesson | [method values](./15-method-values) | teach methods as first-class values |
+| `TI.16` | Lesson | [complex constraints](./16-complex-generics) | teach interface constraints, comparable |
+| `TI.17` | Lesson | [generic structures](./17-generic-structures) | teach Stack, Queue, Set |
+
+## Current Rebuild Goal
+
+This section is being rebuilt so that:
+
+- learner-facing explanation stays in lesson README.md files
+- main.go stays runnable and clean
+- the milestone proves earned foundations concepts only
+- old Section 05 material can be kept as legacy reference without confusing the new primary path
+
+## Suggested Learning Flow
+
+1. Read each lesson README.md first.
+2. Open main.go only after the lesson mission and machine view are clear.
+3. Run the code and compare the output with the walkthrough.
+4. Change one thing at a time using the Try It prompts.
+5. Move to the milestone only after the early lessons stop feeling mechanical.
+
+## Next Step
+
+After `TI.11`, the learner should be ready to move into [Composition](../07-strings-and-text/README.md) or [2 Types and Design](../../docs/stages/02-types-and-design.md). That is where composition and embedding become the main topic.

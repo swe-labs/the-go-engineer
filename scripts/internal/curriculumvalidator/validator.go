@@ -108,9 +108,13 @@ func Validate(root string, report func(string)) (Result, error) {
 		report = func(string) {}
 	}
 
-	lessonCount, pathErrors, err := validateCurriculumPaths(root, report)
-	if err != nil {
-		return Result{}, err
+	lessonCount, pathErrors := 0, 0
+	if pathExists(root, "curriculum.json") {
+		var err error
+		lessonCount, pathErrors, err = validateCurriculumPaths(root, report)
+		if err != nil {
+			return Result{}, err
+		}
 	}
 
 	filesScanned, runErrors, err := validateRunPaths(root, report)

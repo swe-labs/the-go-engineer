@@ -87,12 +87,12 @@
       "prerequisites": [
         "s04"
       ],
-      "path_prefix": "05-types-and-interfaces",
+      "path_prefix": "01-foundations/06-types-and-interfaces",
       "entry_points": [
         "TI.1"
       ],
       "outputs": [
-        "TI.6"
+        "TI.8"
       ]
     },
     {
@@ -1153,8 +1153,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Struct design is the basis for every later Go model, request payload, configuration shape, and domain type.",
-      "path": "05-types-and-interfaces/1-struct",
-      "run_command": "go run ./05-types-and-interfaces/1-struct",
+      "path": "01-foundations/06-types-and-interfaces/1-struct",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/1-struct",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1185,8 +1185,8 @@
         "TI.1"
       ],
       "production_relevance": "Receiver choice affects mutability, method sets, and copy costs in real Go APIs, not just toy examples.",
-      "path": "05-types-and-interfaces/2-methods",
-      "run_command": "go run ./05-types-and-interfaces/2-methods",
+      "path": "01-foundations/06-types-and-interfaces/2-methods",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/2-methods",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1218,8 +1218,8 @@
         "TI.2"
       ],
       "production_relevance": "Interfaces define seams for testing, package boundaries, and flexible architecture in production Go systems.",
-      "path": "05-types-and-interfaces/3-interfaces",
-      "run_command": "go run ./05-types-and-interfaces/3-interfaces",
+      "path": "01-foundations/06-types-and-interfaces/3-interfaces",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/3-interfaces",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1233,6 +1233,38 @@
     },
     {
       "id": "TI.4",
+      "section_id": "s05",
+      "slug": "interface-embedding",
+      "title": "Interface Embedding",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Learn how to embed one interface into another to build larger contracts from smaller pieces.",
+      "objectives": [
+        "Embed interfaces to combine contracts without copying methods",
+        "Explain the io.ReadWriter pattern from the standard library"
+      ],
+      "prerequisites": [
+        "TI.3"
+      ],
+      "production_relevance": "Interface embedding is used throughout the standard library and in real APIs to compose behavior contracts.",
+      "path": "01-foundations/06-types-and-interfaces/4-interface-embedding",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/4-interface-embedding",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "TI.5"
+      ],
+      "tags": [
+        "interfaces",
+        "embedding",
+        "composition"
+      ]
+    },
+    {
+      "id": "TI.5",
       "section_id": "s05",
       "slug": "stringer",
       "title": "Stringer",
@@ -1251,12 +1283,12 @@
         "TI.3"
       ],
       "production_relevance": "Readable String methods improve logs, debug output, and CLI feedback without scattering formatting logic everywhere.",
-      "path": "05-types-and-interfaces/4-stringer",
-      "run_command": "go run ./05-types-and-interfaces/4-stringer",
+      "path": "01-foundations/06-types-and-interfaces/5-stringer",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/5-stringer",
       "test_command": "",
       "starter_path": "",
       "next_items": [
-        "TI.5"
+        "TI.6"
       ],
       "tags": [
         "interfaces",
@@ -1265,40 +1297,72 @@
       ]
     },
     {
-      "id": "TI.5",
+      "id": "TI.6",
       "section_id": "s05",
-      "slug": "generics",
-      "title": "Generics",
+      "slug": "type-switch",
+      "title": "Type Switch",
       "type": "lesson",
-      "subtype": "pattern",
+      "subtype": "concept",
       "level": "core",
       "verification_mode": "run",
-      "estimated_time": 40,
-      "summary": "Introduce type parameters and constraints as a way to write reusable, type-safe helpers without reflection.",
+      "estimated_time": 25,
+      "summary": "Learn how to use type switches to handle different concrete types stored in an interface.",
       "objectives": [
-        "Use type parameters and constraints to generalize helper logic safely",
-        "Recognize when generics improve reuse and when a concrete function is clearer"
+        "Use type switch to handle multiple concrete types from an interface",
+        "Explain when to use type switch vs type assertion"
       ],
       "prerequisites": [
-        "TI.3",
-        "TI.4"
+        "TI.3"
       ],
-      "production_relevance": "Generics help remove duplicate collection helpers and reusable utilities while preserving compile-time type safety.",
-      "path": "05-types-and-interfaces/5-generics",
-      "run_command": "go run ./05-types-and-interfaces/5-generics",
+      "production_relevance": "Type switches are used in serialization, reflection, and handling API responses.",
+      "path": "01-foundations/06-types-and-interfaces/6-type-switch",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/6-type-switch",
       "test_command": "",
       "starter_path": "",
       "next_items": [
-        "TI.6"
+        "TI.7"
       ],
       "tags": [
-        "generics",
-        "constraints",
-        "reuse"
+        "interfaces",
+        "type-switch",
+        "type-assertion"
       ]
     },
     {
-      "id": "TI.6",
+      "id": "TI.7",
+      "section_id": "s05",
+      "slug": "custom-errors",
+      "title": "Custom Error Types",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Learn how to define custom error types that carry structured information for better error handling.",
+      "objectives": [
+        "Define custom error types that implement the error interface",
+        "Use errors.As() to check specific error types"
+      ],
+      "prerequisites": [
+        "TI.3",
+        "TI.5"
+      ],
+      "production_relevance": "Custom errors are used in real applications for validation, API errors, and database errors.",
+      "path": "01-foundations/06-types-and-interfaces/7-custom-errors",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/7-custom-errors",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "TI.8"
+      ],
+      "tags": [
+        "errors",
+        "custom-types",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "TI.8",
       "section_id": "s05",
       "slug": "payroll-processor-project",
       "title": "Payroll Processor Project",
@@ -1317,15 +1381,17 @@
         "TI.2",
         "TI.3",
         "TI.4",
-        "TI.5"
+        "TI.5",
+        "TI.6",
+        "TI.7"
       ],
       "production_relevance": "Real Go services often model multiple concrete types behind shared interfaces, especially in payment, billing, and reporting flows.",
-      "path": "05-types-and-interfaces/6-payroll-processor",
-      "run_command": "go run ./05-types-and-interfaces/6-payroll-processor",
-      "test_command": "go test ./05-types-and-interfaces/6-payroll-processor",
-      "starter_path": "05-types-and-interfaces/6-payroll-processor/_starter",
+      "path": "01-foundations/06-types-and-interfaces/8-payroll-processor",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/8-payroll-processor",
+      "test_command": "go test ./01-foundations/06-types-and-interfaces/8-payroll-processor",
+      "starter_path": "01-foundations/06-types-and-interfaces/8-payroll-processor/_starter",
       "next_items": [
-        "TI.7"
+        "TI.9"
       ],
       "tags": [
         "exercise",
@@ -1335,7 +1401,40 @@
       ]
     },
     {
-      "id": "TI.7",
+      "id": "TI.9",
+      "section_id": "s05",
+      "slug": "generics",
+      "title": "Generics",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 40,
+      "summary": "Introduce type parameters and constraints as a way to write reusable, type-safe helpers without reflection.",
+      "objectives": [
+        "Use type parameters and constraints to generalize helper logic safely",
+        "Recognize when generics improve reuse and when a concrete function is clearer"
+      ],
+      "prerequisites": [
+        "TI.3",
+        "TI.4"
+      ],
+      "production_relevance": "Generics help remove duplicate collection helpers and reusable utilities while preserving compile-time type safety.",
+      "path": "01-foundations/06-types-and-interfaces/9-generics",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/9-generics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "TI.10"
+      ],
+      "tags": [
+        "generics",
+        "constraints",
+        "reuse"
+      ]
+    },
+    {
+      "id": "TI.10",
       "section_id": "s05",
       "slug": "advanced-generics",
       "title": "Advanced Generics",
@@ -1350,18 +1449,239 @@
         "Explain where type inference helps and where generic APIs become too clever"
       ],
       "prerequisites": [
-        "TI.5"
+        "TI.9"
       ],
       "production_relevance": "Advanced generic helpers can reduce repetition in utility layers, but they only help when the resulting API stays readable for teams.",
-      "path": "05-types-and-interfaces/7-advanced-generics",
-      "run_command": "go run ./05-types-and-interfaces/7-advanced-generics",
+      "path": "01-foundations/06-types-and-interfaces/10-advanced-generics",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/10-advanced-generics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "TI.11"
+      ],
+      "tags": [
+        "generics",
+        "advanced",
+        "collections"
+      ]
+    },
+    {
+      "id": "TI.11",
+      "section_id": "s05",
+      "slug": "empty-interface",
+      "title": "Empty Interface",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Learn about the empty interface (any) and when it is appropriate to use it.",
+      "objectives": [
+        "Explain what the empty interface (any/interface{}) is and can hold",
+        "Know when to use empty interface vs generics"
+      ],
+      "prerequisites": [
+        "TI.3"
+      ],
+      "production_relevance": "Empty interface is used in JSON decoding, reflection, and generic logging utilities.",
+      "path": "01-foundations/06-types-and-interfaces/11-empty-interface",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/11-empty-interface",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "TI.12"
+      ],
+      "tags": [
+        "interfaces",
+        "empty-interface",
+        "any"
+      ]
+    },
+    {
+      "id": "TI.12",
+      "section_id": "s05",
+      "slug": "type-assertions",
+      "title": "Type Assertions",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 25,
+      "summary": "Learn how to extract concrete types from interface values using type assertions and the comma-ok pattern.",
+      "objectives": [
+        "Use basic type assertions to extract types",
+        "Use comma-ok pattern to avoid panics"
+      ],
+      "prerequisites": [
+        "TI.3"
+      ],
+      "production_relevance": "Type assertions are used when reading from generic containers, handling dynamic data.",
+      "path": "01-foundations/06-types-and-interfaces/12-type-assertions",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/12-type-assertions",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "TI.13"
+      ],
+      "tags": [
+        "interfaces",
+        "type-assertion"
+      ]
+    },
+    {
+      "id": "TI.13",
+      "section_id": "s05",
+      "slug": "nil-interfaces",
+      "title": "Nil Interfaces",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 20,
+      "summary": "Learn about nil interfaces, how they behave differently from typed nils, and how to handle them correctly.",
+      "objectives": [
+        "Explain the difference between nil interface and interface holding typed nil",
+        "Handle nil interfaces properly in code"
+      ],
+      "prerequisites": [
+        "TI.3"
+      ],
+      "production_relevance": "Nil interface handling is crucial for database results, file operations.",
+      "path": "01-foundations/06-types-and-interfaces/13-nil-interfaces",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/13-nil-interfaces",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "TI.14"
+      ],
+      "tags": [
+        "interfaces",
+        "nil"
+      ]
+    },
+    {
+      "id": "TI.14",
+      "section_id": "s05",
+      "slug": "functional-options",
+      "title": "Functional Options",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 30,
+      "summary": "Learn the functional options pattern for building configurable APIs.",
+      "objectives": [
+        "Implement the functional options pattern",
+        "Use options for flexible configuration"
+      ],
+      "prerequisites": [
+        "TI.2"
+      ],
+      "production_relevance": "Functional options are used throughout Go APIs (gRPC, Cobra, Terraform).",
+      "path": "01-foundations/06-types-and-interfaces/14-functional-options",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/14-functional-options",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "TI.15"
+      ],
+      "tags": [
+        "patterns",
+        "options",
+        "configuration"
+      ]
+    },
+    {
+      "id": "TI.15",
+      "section_id": "s05",
+      "slug": "method-values",
+      "title": "Method Values",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "estimated_time": 20,
+      "summary": "Learn how to treat methods as first-class values.",
+      "objectives": [
+        "Extract methods as values with bound receivers",
+        "Use method values as callbacks"
+      ],
+      "prerequisites": [
+        "TI.2"
+      ],
+      "production_relevance": "Method values are used in HTTP handlers, event systems.",
+      "path": "01-foundations/06-types-and-interfaces/15-method-values",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/15-method-values",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [],
+      "tags": [
+        "methods",
+        "first-class"
+      ]
+    },
+    {
+      "id": "TI.16",
+      "section_id": "s05",
+      "slug": "complex-generics",
+      "title": "Complex Generic Constraints",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "stretch",
+      "verification_mode": "run",
+      "estimated_time": 35,
+      "summary": "Learn advanced constraint patterns including parameterized constraints, using interfaces as constraints, and creating reusable generic utilities.",
+      "objectives": [
+        "Use interfaces as generic constraints",
+        "Apply multiple interface requirements",
+        "Use comparable constraint for equality"
+      ],
+      "prerequisites": [
+        "TI.9"
+      ],
+      "production_relevance": "Complex constraints are used in real Go code for data structures, serialization.",
+      "path": "01-foundations/06-types-and-interfaces/16-complex-generics",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/16-complex-generics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "TI.17"
+      ],
+      "tags": [
+        "generics",
+        "constraints",
+        "advanced"
+      ]
+    },
+    {
+      "id": "TI.17",
+      "section_id": "s05",
+      "slug": "generic-structures",
+      "title": "Generic Data Structures",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "stretch",
+      "verification_mode": "run",
+      "estimated_time": 40,
+      "summary": "Learn to build type-safe generic data structures like Stack, Queue, and Set using Go's generics.",
+      "objectives": [
+        "Implement generic Stack with Push/Pop",
+        "Implement generic Queue with Enqueue/Dequeue",
+        "Implement generic Set for unique elements"
+      ],
+      "prerequisites": [
+        "TI.9",
+        "TI.16"
+      ],
+      "production_relevance": "Generic data structures are used throughout Go codebases.",
+      "path": "01-foundations/06-types-and-interfaces/17-generic-structures",
+      "run_command": "go run ./01-foundations/06-types-and-interfaces/17-generic-structures",
       "test_command": "",
       "starter_path": "",
       "next_items": [],
       "tags": [
         "generics",
-        "advanced",
-        "collections"
+        "data-structures"
       ]
     },
     {
