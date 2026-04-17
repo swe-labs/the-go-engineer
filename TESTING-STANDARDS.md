@@ -146,6 +146,46 @@ func TestDatabaseOperations(t *testing.T) {
 }
 ```
 
+### Level 6: Fuzz Tests (Required for parsing/validation code)
+
+**Purpose**: Test with randomly generated inputs to find edge cases
+
+**File**: `*_test.go`
+
+**Example**:
+```go
+func FuzzParseInt(f *testing.F) {
+    // Add seed corpus
+    f.Add("123")
+    f.Add("-1")
+    f.Add("0")
+    
+    f.Fuzz(func(t *testing.T, s string) {
+        _, err := ParseInt(s)
+        if err == nil {
+            // Ensure no panic occurred and behavior is handled
+        }
+    })
+}
+```
+
+### Level 7: API & gRPC Tests (Required for Section 16 endpoints)
+
+**Purpose**: Test APIs using HTTP clients or gRPC test clients
+
+**File**: `*_test.go`
+
+**Example**:
+```go
+func TestGRPCServer(t *testing.T) {
+    client := setupTestGRPCClient(t)
+    
+    resp, err := client.GetUser(context.Background(), &pb.GetUserRequest{Id: "123"})
+    assert.NoError(t, err)
+    assert.NotNil(t, resp)
+}
+```
+
 ## Error Handling in Tests
 
 ### Consistent Error Patterns
@@ -229,11 +269,11 @@ go tool cover -html=coverage.out -o coverage.html
 
 | Section | Minimum Coverage |
 |---------|-----------------|
-| Core Foundations | 80% |
-| Functions & Errors | 85% |
-| Data Structures | 80% |
-| Web & Database | 75% |
-| Testing (§13) | 95% |
+| Syntax & Engineering Foundations (Phases 1-2) | 80% |
+| Testing & Quality (§12) | 95% |
+| APIs & Communication (§16) | 85% |
+| Security Engineering (§17) | 85% |
+| Flagship GoScale (Phase 5) | 90% |
 
 ## Checklist for Lesson Authors
 

@@ -184,22 +184,22 @@ if err != nil {
 
 Use logging for non-critical errors that shouldn't stop execution.
 
-### Pattern 5: Custom Error Types
+### Pattern 5: The Engineering Error Framework
+
+In v2, we strictly follow the three-tier error framework:
+- **UserError**: Client fault (e.g., validation). Safe to return to client. HTTP 400.
+- **SystemError**: Server fault (e.g., database down). Log internal details, return safe message to client. HTTP 500.
+- **FatalError**: Unrecoverable state. Crash the process gracefully.
 
 ```go
-// Define custom error
-type ValidationError struct {
-    Field   string
-    Message string
-}
-
-func (e ValidationError) Error() string {
-    return fmt.Sprintf("validation error in %s: %s", e.Field, e.Message)
-}
-
-// Use it
+// Example UserError
 if !isValid(email) {
-    return ValidationError{Field: "email", Message: "invalid format"}
+    return errors.NewUserError("invalid_email", "Email format is incorrect", nil)
+}
+
+// Example SystemError
+if err := db.Query(...); err != nil {
+    return errors.NewSystemError("db_query_failed", "Internal server error", err)
 }
 ```
 
@@ -417,6 +417,22 @@ func TestFunction(t *testing.T) {
     }
 }
 ```
+
+## Context Propagation (Section 10)
+
+- **First Parameter**: `ctx context.Context` must ALWAYS be the first parameter of any function doing I/O or taking significant time.
+- **Do not store in structs**: Never store `context.Context` inside a struct (like a handler or service). It must flow through the call stack.
+
+## Generics Guidelines (Section 6)
+
+- **Use cases**: Use generics for data structures (e.g., custom slices, caches) and utility functions that operate identically regardless of type.
+- **Avoid over-engineering**: Do not use generics if standard interfaces (`io.Reader`, `fmt.Stringer`) solve the problem perfectly.
+
+## Security & API Guidelines (Sections 16 & 17)
+
+- **Fail-Fast**: Always validate input at the HTTP boundary before doing any business logic.
+- **Never log secrets**: Raw passwords, tokens, or PII must never be passed to `log.Printf` or `slog.Info`.
+- **Use standard cryptography**: Never write custom crypto. Use `golang.org/x/crypto/bcrypt` for passwords.
 
 ## Vet & Lint
 
