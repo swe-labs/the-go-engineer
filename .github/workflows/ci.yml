@@ -1,4 +1,4 @@
-﻿name: CI
+name: CI
 
 on: [push, pull_request]
 
@@ -30,7 +30,7 @@ jobs:
         run: |
           go mod tidy
           if [ -n "$(git diff --name-only)" ]; then
-            echo "âŒ go.mod or go.sum needs updating. Run 'go mod tidy' locally."
+            echo "go.mod or go.sum needs updating. Run 'go mod tidy' locally."
             git diff
             exit 1
           fi
