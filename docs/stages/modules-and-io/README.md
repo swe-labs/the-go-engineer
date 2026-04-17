@@ -1,6 +1,6 @@
-# 3 Modules and IO Support Docs
+# 05 Packages & IO Support Docs
 
-This folder supports the beta `3 Modules and IO` stage.
+This folder supports the beta `05 Packages & IO` stage.
 
 Use these docs when you want a stage-level view of how the current Section `08` plus the Section
 `09` tracks fit together.
@@ -12,10 +12,10 @@ Use these docs when you want a stage-level view of how the current Section `08` 
 
 Then work through the source surfaces in order:
 
-1. [08-modules-and-packages](../../../08-modules-and-packages/)
-2. [09-io-and-cli/cli-tools](../../../09-io-and-cli/cli-tools/)
-3. [09-io-and-cli/encoding](../../../09-io-and-cli/encoding/)
-4. [09-io-and-cli/filesystem](../../../09-io-and-cli/filesystem/)
+1. [07-modules-and-packages](../../../07-modules-and-packages/)
+2. [08-io-and-cli/cli-tools](../../../08-io-and-cli/cli-tools/)
+3. [08-io-and-cli/encoding](../../../08-io-and-cli/encoding/)
+4. [08-io-and-cli/filesystem](../../../08-io-and-cli/filesystem/)
 
 ## What These Docs Are For
 

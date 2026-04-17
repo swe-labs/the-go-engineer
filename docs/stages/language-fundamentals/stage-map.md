@@ -1,4 +1,4 @@
-# Language Fundamentals Stage Map
+# Early Foundations Stage Map
 
 This stage is the early programming backbone of the beta curriculum.
 
@@ -8,19 +8,19 @@ error handling.
 ## Stage Flow
 
 1. `language-basics`
-   - source: [01-core-foundations/language-basics](../../../01-core-foundations/language-basics/)
+   - source: [02-language-basics](../../../02-language-basics/)
    - core job: teach values, variables, constants, and simple program structure
    - milestone: `LB.4` application logger
 2. `control-flow`
-   - source: [01-foundations/03-control-flow](../../../01-foundations/03-control-flow/)
+   - source: [02-language-basics/03-control-flow](../../../02-language-basics/03-control-flow/)
    - core job: teach loops, branching, and readable decision logic
    - milestone: `CF.5` pricing checkout
 3. `data-structures`
-   - source: [01-foundations/04-data-structures](../../../01-foundations/04-data-structures/)
+   - source: [02-language-basics/04-data-structures](../../../02-language-basics/04-data-structures/)
    - core job: teach slices, maps, pointers, and mutation-aware thinking
    - milestone: `DS.6` contact manager
 4. `functions-and-errors`
-   - source: [01-foundations/05-functions-and-errors](../../../01-foundations/05-functions-and-errors/)
+   - source: [03-functions-errors](../../../03-functions-errors/)
    - core job: teach function boundaries, explicit failures, validation, and orchestration
    - milestone: `FE.7` order summary
 
@@ -46,10 +46,10 @@ This is where the learner starts treating function signatures and errors as expl
 ## Recommended Full-Path Order
 
 1. Finish the `language-basics` track first.
-2. Move through `01-foundations/03-control-flow` and complete `CF.5`.
-3. Move through [01-foundations/04-data-structures](../../../01-foundations/04-data-structures/)
+2. Move through [02-language-basics/03-control-flow](../../../02-language-basics/03-control-flow/) and complete `CF.5`.
+3. Move through [02-language-basics/04-data-structures](../../../02-language-basics/04-data-structures/)
    and complete `DS.6`.
-4. Move through [01-foundations/05-functions-and-errors](../../../01-foundations/05-functions-and-errors/)
+4. Move through [03-functions-errors](../../../03-functions-errors/)
    and complete `FE.7`.
 
 ## Bridge-Path Reminder
@@ -64,5 +64,5 @@ What you should not skip is proof:
 
 ## Exit Condition
 
-You are ready for `2 Types and Design` when you can finish the four stage milestones honestly and
+You are ready for `04 Types & Design` when you can finish the four milestone surfaces honestly and
 explain how values, control flow, collections, mutation, functions, and errors connect together.

@@ -4,7 +4,7 @@ This folder contains reusable curriculum-reference templates.
 
 The key rule is scope:
 
-- `01-foundations` keeps the small README-first lesson contract
+- early learner stages (`01` through `04`) keep the small README-first lesson contract
 - advanced thinking, failure, and production overlays are references for later stages
 - expert and flagship assessment surfaces still use the shared [rubric-checkpoint-template.md](./rubric-checkpoint-template.md)
 
@@ -20,7 +20,7 @@ The key rule is scope:
 
 ## Foundations Rule
 
-For `01-foundations`, use the local lesson contract only:
+For the early learner stages (`01` through `04`), use the local lesson contract only:
 
 - mission
 - mental model where appropriate
@@ -41,7 +41,7 @@ Do not force in:
 ## Quick Decision Guide
 
 ```text
-Is this lesson in 01-foundations?
+Is this lesson in stages 01-04?
   Yes -> keep the basic README-first lesson contract only
   No  -> is the lesson mainly about design trade-offs?
            Yes -> use THINKING_SECTIONS_ADVANCED

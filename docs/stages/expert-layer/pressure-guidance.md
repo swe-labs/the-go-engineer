@@ -31,5 +31,5 @@ when you want the current beta-ready task set instead of the generic pattern onl
 
 ## Ready To Move On
 
-Move to [10 Flagship Project](../11-flagship.md) when review, diagnosis, and redesign work
-feel grounded in evidence instead of instinct alone.
+Move to [11 Flagship](../11-flagship.md) when review, diagnosis, and redesign work feel grounded
+in evidence instead of instinct alone.

@@ -1,6 +1,6 @@
-# Expert Layer Task Index
+# Cross-Stage Pressure Task Index
 
-These are the first public pressure tasks for `9 Expert Layer`.
+These are the first public pressure tasks in the current beta pressure layer.
 
 They are intentionally seeded from real milestone surfaces that already exist in the curriculum.
 

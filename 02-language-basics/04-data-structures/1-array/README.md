@@ -20,7 +20,7 @@ Arrays are the foundation for this. They show that Go has fixed-size collections
 
 ## Prerequisites
 
-- Section entry for `01-foundations/04-data-structures`
+- Section entry for `02-language-basics/04-data-structures`
 - Comfortable with `CF.2` for basics (loops)
 
 ## Mental Model

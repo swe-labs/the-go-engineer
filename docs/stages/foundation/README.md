@@ -1,6 +1,6 @@
-# 0 Foundation Support Docs
+# 01 Getting Started Support Docs
 
-This folder supports the beta `0 Foundation` stage.
+This folder supports the public `01 Getting Started` stage.
 
 Use these docs when you need beginner-first help before moving into the language-heavy parts of the
 curriculum.
@@ -13,7 +13,7 @@ curriculum.
 
 Then move into the current source track:
 
-- [01-foundations/01-getting-started](../../../01-getting-started/)
+- [01-getting-started](../../../01-getting-started/)
 
 ## What These Docs Are For
 

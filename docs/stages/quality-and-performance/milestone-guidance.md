@@ -27,5 +27,5 @@ If you are moving quickly through this stage, make sure you can still explain:
 
 ## Ready To Move On
 
-Move to [7 Architecture](../07-architecture.md) when you can complete the current path and explain
+Move to [09 Architecture](../09-architecture.md) when you can complete the current path and explain
 both the correctness and measurement choices in plain language.

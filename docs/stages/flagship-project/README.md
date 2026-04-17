@@ -12,7 +12,8 @@ it from the source tree alone.
 
 ## Current Stage Scope
 
-`10 Flagship Project` currently draws from:
+`11 Flagship` currently draws from:
 
-- [14-application-architecture/enterprise-capstone](../../../14-application-architecture/enterprise-capstone/)
+- [13-application-architecture/enterprise-capstone](../../../13-application-architecture/enterprise-capstone/)
+- [14-code-generation](../../../14-code-generation/)
 - milestone project patterns already used across the alpha curriculum

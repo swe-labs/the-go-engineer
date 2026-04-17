@@ -46,17 +46,17 @@ The curriculum is organized into 11 stages. Each stage has a dedicated entry pag
 
 | Stage | Focus | Sections | Source |
 | --- | --- | --- | --- |
-<| [01 Getting Started](./docs/stages/01-getting-started.md) | install, hello world, dev setup | s01 | [01-getting-started](./01-getting-started/) |
+| [01 Getting Started](./docs/stages/01-getting-started.md) | install, hello world, dev setup | s01 | [01-getting-started](./01-getting-started/) |
 | [02 Language Basics](./docs/stages/02-language-basics.md) | variables, types, control flow, data structures | s02-s03 | [02-language-basics](./02-language-basics/) |
 | [03 Functions & Errors](./docs/stages/03-functions-errors.md) | functions, params, error handling | s04 | [03-functions-errors](./03-functions-errors/) |
-| [04 Types & Design](./docs/stages/04-types-design.md) | structs, interfaces, composition, strings | s05-s07 | [04-types-design](./04-types-design/), [06-composition](./06-composition/), [07-strings-and-text](./07-strings-and-text/) |
-| [05 Packages & IO](./docs/stages/05-packages-io.md) | modules, packages, CLI, files | s08-s09 | [08-modules-and-packages](./08-modules-and-packages/), [09-io-and-cli](./09-io-and-cli/) |
-| [06 Backend & DB](./docs/stages/06-backend-db.md) | HTTP, databases, handlers | s10 | [10-web-and-database](./10-web-and-database/) |
-| [07 Concurrency](./docs/stages/07-concurrency.md) | goroutines, channels, patterns | s11-s12 | [11-concurrency](./11-concurrency/), [12-concurrency-patterns](./12-concurrency-patterns/) |
-| [08 Quality & Test](./docs/stages/08-quality-test.md) | testing, benchmarking, profiling | s13 | [13-quality-and-performance](./13-quality-and-performance/) |
-| [09 Architecture](./docs/stages/09-architecture.md) | package design, services | s14 | [14-application-architecture/package-design](./14-application-architecture/package-design/), [14-application-architecture/grpc](./14-application-architecture/grpc/) |
-| [10 Production](./docs/stages/10-production.md) | logging, shutdown, deployment | s14b | [14-application-architecture/structured-logging](./14-application-architecture/structured-logging/), [14-application-architecture/graceful-shutdown](./14-application-architecture/graceful-shutdown/), [14-application-architecture/docker-and-deployment](./14-application-architecture/docker-and-deployment/) |
-| [11 Flagship](./docs/stages/11-flagship.md) | full GoScale project | s15-s17 | [14-application-architecture/enterprise-capstone](./14-application-architecture/enterprise-capstone/), [15-code-generation](./15-code-generation/) |
+| [04 Types & Design](./docs/stages/04-types-design.md) | structs, interfaces, composition, strings | s05-s07 | [04-types-design](./04-types-design/), [05-composition](./05-composition/), [06-strings-and-text](./06-strings-and-text/) |
+| [05 Packages & IO](./docs/stages/05-packages-io.md) | modules, packages, CLI, files | s08-s09 | [07-modules-and-packages](./07-modules-and-packages/), [08-io-and-cli](./08-io-and-cli/) |
+| [06 Backend & DB](./docs/stages/06-backend-db.md) | HTTP, databases, handlers | s10 | [09-web-and-database](./09-web-and-database/) |
+| [07 Concurrency](./docs/stages/07-concurrency.md) | goroutines, channels, patterns | s11-s12 | [10-concurrency](./10-concurrency/), [11-concurrency-patterns](./11-concurrency-patterns/) |
+| [08 Quality & Test](./docs/stages/08-quality-test.md) | testing, benchmarking, profiling | s13 | [12-quality-and-performance](./12-quality-and-performance/) |
+| [09 Architecture](./docs/stages/09-architecture.md) | package design, services | s14 | [13-application-architecture/package-design](./13-application-architecture/package-design/), [13-application-architecture/grpc](./13-application-architecture/grpc/) |
+| [10 Production](./docs/stages/10-production.md) | logging, shutdown, deployment | s14b | [13-application-architecture/structured-logging](./13-application-architecture/structured-logging/), [13-application-architecture/graceful-shutdown](./13-application-architecture/graceful-shutdown/), [13-application-architecture/docker-and-deployment](./13-application-architecture/docker-and-deployment/) |
+| [11 Flagship](./docs/stages/11-flagship.md) | full GoScale project | s15-s17 | [13-application-architecture/enterprise-capstone](./13-application-architecture/enterprise-capstone/), [14-code-generation](./14-code-generation/) |
 
 ## Best Entry Point By Learner Type
 

@@ -23,15 +23,9 @@ smuggling in ideas from later sections.
 
 ## Beta Stage Ownership
 
-This section belongs to [1 Language Fundamentals](../../docs/stages/02-language-basics.md).
+This section belongs to [02 Language Basics](../../docs/stages/02-language-basics.md).
 
-Inside the new repo architecture, it is the fourth foundations section:
-
-1. `01-getting-started`
-2. `02-language-basics`
-3. `03-control-flow`
-4. `04-data-structures`
-5. `05-functions-and-errors`
+In the current repo architecture, it lives at `02-language-basics/04-data-structures`.
 
 ## Who Should Start Here
 
@@ -92,5 +86,5 @@ then you are ready to move into `05-functions-and-errors`.
 ## Next Step
 
 After `DS.6`, continue to [05-functions-and-errors](../05-functions-and-errors/).
-That keeps the new `01-foundations` sequence intact while the broader beta shell still groups both
-sections under [1 Language Fundamentals](../../docs/stages/02-language-basics.md).
+That keeps the staged learner path intact while the broader beta shell still groups both sections
+under [02 Language Basics](../../docs/stages/02-language-basics.md).

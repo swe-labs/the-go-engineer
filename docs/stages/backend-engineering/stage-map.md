@@ -8,15 +8,15 @@ tree available as reference material.
 ## Stage Flow
 
 1. `databases`
-   - source: [10-web-and-database/databases](../../../10-web-and-database/databases/)
+   - source: [09-web-and-database/databases](../../../09-web-and-database/databases/)
    - core job: teach `database/sql`, transactions, repository boundaries, and context-aware
      persistence
    - milestone: `DB.6` repository pattern project
 2. `http-client`, `database-migrations`, and `web-masterclass`
    - source surfaces:
-     - [10-web-and-database/http-client](../../../10-web-and-database/http-client/)
-     - [10-web-and-database/database-migrations](../../../10-web-and-database/database-migrations/)
-     - [10-web-and-database/web-masterclass](../../../10-web-and-database/web-masterclass/)
+     - [09-web-and-database/http-client](../../../09-web-and-database/http-client/)
+     - [09-web-and-database/database-migrations](../../../09-web-and-database/database-migrations/)
+     - [09-web-and-database/web-masterclass](../../../09-web-and-database/web-masterclass/)
    - core job: provide broader backend reference material while the live beta route is still
      focused on the databases path first
 
@@ -51,6 +51,6 @@ What you should not skip is proof:
 
 ## Exit Condition
 
-You are ready for `5 Concurrency System` when you can finish the live databases milestone path
+You are ready for `07 Concurrency` when you can finish the live databases milestone path
 honestly and explain how request flow, persistence boundaries, and transaction safety connect in a
 real service-style program.

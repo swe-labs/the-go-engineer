@@ -61,7 +61,7 @@ redesign.
 
 ## Common Weak Answers
 
-- calling a boundary â€œgoodâ€ or â€œbadâ€ without evidence from the current project structure
+- calling a boundary “good” or “bad” without evidence from the current project structure
 - proposing a large rewrite instead of a bounded improvement
 - confusing operational concerns with architectural seams
 

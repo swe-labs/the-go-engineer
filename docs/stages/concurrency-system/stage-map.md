@@ -1,4 +1,4 @@
-# Concurrency System Stage Map
+# Concurrency Stage Map
 
 ## Stage Goal
 
@@ -9,8 +9,8 @@ and stop without turning the program into hidden chaos.
 
 | Part | Source Surface | Role In Stage |
 | --- | --- | --- |
-| Foundations | [Section 11: Concurrency](../../../11-concurrency/) | teaches goroutines, context, timers, and the vocabulary of controlled concurrent work |
-| Patterns | [Section 12: Concurrency Patterns](../../../12-concurrency-patterns/) | teaches `errgroup`, bounded pipelines, and pressure-aware concurrency patterns |
+| Foundations | [10-concurrency](../../../10-concurrency/) | teaches goroutines, context, timers, and the vocabulary of controlled concurrent work |
+| Patterns | [11-concurrency-patterns](../../../11-concurrency-patterns/) | teaches `errgroup`, bounded pipelines, and pressure-aware concurrency patterns |
 
 ## Live Milestone Backbone
 

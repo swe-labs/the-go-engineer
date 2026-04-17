@@ -106,7 +106,7 @@
       "prerequisites": [
         "s05"
       ],
-      "path_prefix": "06-composition",
+      "path_prefix": "05-composition",
       "entry_points": [
         "CO.1"
       ],
@@ -125,7 +125,7 @@
       "prerequisites": [
         "s06"
       ],
-      "path_prefix": "07-strings-and-text",
+      "path_prefix": "06-strings-and-text",
       "entry_points": [
         "ST.1"
       ],
@@ -144,7 +144,7 @@
       "prerequisites": [
         "s07"
       ],
-      "path_prefix": "08-modules-and-packages",
+      "path_prefix": "07-modules-and-packages",
       "entry_points": [
         "MP.1"
       ],
@@ -163,7 +163,7 @@
       "prerequisites": [
         "s08"
       ],
-      "path_prefix": "09-io-and-cli",
+      "path_prefix": "08-io-and-cli",
       "entry_points": [
         "CL.1",
         "EN.1",
@@ -186,7 +186,7 @@
       "prerequisites": [
         "s09"
       ],
-      "path_prefix": "10-web-and-database",
+      "path_prefix": "09-web-and-database",
       "entry_points": [
         "DB.1"
       ],
@@ -205,7 +205,7 @@
       "prerequisites": [
         "s10"
       ],
-      "path_prefix": "11-concurrency",
+      "path_prefix": "10-concurrency",
       "entry_points": [
         "GC.1",
         "CT.1",
@@ -228,7 +228,7 @@
       "prerequisites": [
         "s11"
       ],
-      "path_prefix": "12-concurrency-patterns",
+      "path_prefix": "11-concurrency-patterns",
       "entry_points": [
         "CP.1"
       ],
@@ -248,7 +248,7 @@
       "prerequisites": [
         "s12"
       ],
-      "path_prefix": "13-quality-and-performance",
+      "path_prefix": "12-quality-and-performance",
       "entry_points": [
         "TE.1",
         "PR.1"
@@ -269,7 +269,7 @@
       "prerequisites": [
         "s13"
       ],
-      "path_prefix": "14-application-architecture",
+      "path_prefix": "13-application-architecture",
       "entry_points": [
         "PD.1",
         "SL.1",
@@ -292,7 +292,7 @@
       "prerequisites": [
         "s14"
       ],
-      "path_prefix": "15-code-generation",
+      "path_prefix": "14-code-generation",
       "entry_points": [
         "CG.1"
       ],
@@ -1703,8 +1703,8 @@
         "TI.2"
       ],
       "production_relevance": "Real Go systems rely on composition to keep domain types explicit, reusable, and easier to refactor than inheritance-heavy hierarchies.",
-      "path": "06-composition/06-composition-and-embedding/1-composition",
-      "run_command": "go run ./06-composition/06-composition-and-embedding/1-composition",
+      "path": "05-composition/05-composition-and-embedding/1-composition",
+      "run_command": "go run ./05-composition/05-composition-and-embedding/1-composition",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1735,8 +1735,8 @@
         "CO.1"
       ],
       "production_relevance": "Embedding is common in configuration, logging, and domain wrappers where reuse helps, but teams need to keep promotion readable and deliberate.",
-      "path": "06-composition/06-composition-and-embedding/2-embedding",
-      "run_command": "go run ./06-composition/06-composition-and-embedding/2-embedding",
+      "path": "05-composition/05-composition-and-embedding/2-embedding",
+      "run_command": "go run ./05-composition/05-composition-and-embedding/2-embedding",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1768,10 +1768,10 @@
         "CO.2"
       ],
       "production_relevance": "Banking-style account rules are a compact way to practice reuse boundaries, domain modeling, and method behavior overrides that show up in real service code.",
-      "path": "06-composition/06-composition-and-embedding/3-bank-account",
-      "run_command": "go run ./06-composition/06-composition-and-embedding/3-bank-account",
-      "test_command": "go test ./06-composition/06-composition-and-embedding/3-bank-account",
-      "starter_path": "06-composition/06-composition-and-embedding/3-bank-account/_starter",
+      "path": "05-composition/05-composition-and-embedding/3-bank-account",
+      "run_command": "go run ./05-composition/05-composition-and-embedding/3-bank-account",
+      "test_command": "go test ./05-composition/05-composition-and-embedding/3-bank-account",
+      "starter_path": "05-composition/05-composition-and-embedding/3-bank-account/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -1797,8 +1797,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Text handling sits underneath config files, logs, payloads, and CLI output, so string fundamentals show up everywhere in Go systems.",
-      "path": "07-strings-and-text/1-strings",
-      "run_command": "go run ./07-strings-and-text/1-strings",
+      "path": "06-strings-and-text/1-strings",
+      "run_command": "go run ./06-strings-and-text/1-strings",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1829,8 +1829,8 @@
         "ST.1"
       ],
       "production_relevance": "Formatting verbs shape logs, CLI output, debug views, and text reports throughout production Go code.",
-      "path": "07-strings-and-text/2-formatting-string",
-      "run_command": "go run ./07-strings-and-text/2-formatting-string",
+      "path": "06-strings-and-text/2-formatting-string",
+      "run_command": "go run ./06-strings-and-text/2-formatting-string",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1862,8 +1862,8 @@
         "ST.2"
       ],
       "production_relevance": "Unicode-aware text handling matters in APIs, CLI tools, validation, and internationalized user-facing systems.",
-      "path": "07-strings-and-text/3-unicode",
-      "run_command": "go run ./07-strings-and-text/3-unicode",
+      "path": "06-strings-and-text/3-unicode",
+      "run_command": "go run ./06-strings-and-text/3-unicode",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1895,8 +1895,8 @@
         "ST.3"
       ],
       "production_relevance": "Regex is common in parsing, validation, and log processing, but it must be used deliberately to stay readable and performant.",
-      "path": "07-strings-and-text/4-regex",
-      "run_command": "go run ./07-strings-and-text/4-regex",
+      "path": "06-strings-and-text/4-regex",
+      "run_command": "go run ./06-strings-and-text/4-regex",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1928,8 +1928,8 @@
         "ST.2"
       ],
       "production_relevance": "Template-driven rendering shows up in config generation, emails, reports, and CLI summaries where output structure matters.",
-      "path": "07-strings-and-text/5-text-template",
-      "run_command": "go run ./07-strings-and-text/5-text-template",
+      "path": "06-strings-and-text/5-text-template",
+      "run_command": "go run ./06-strings-and-text/5-text-template",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1963,10 +1963,10 @@
         "ST.5"
       ],
       "production_relevance": "Config parsing and text reporting are common in CLI tools, deployment helpers, and operational automation where predictable text handling matters.",
-      "path": "07-strings-and-text/6-config-parser",
-      "run_command": "go run ./07-strings-and-text/6-config-parser",
-      "test_command": "go test ./07-strings-and-text/6-config-parser",
-      "starter_path": "07-strings-and-text/6-config-parser/_starter",
+      "path": "06-strings-and-text/6-config-parser",
+      "run_command": "go run ./06-strings-and-text/6-config-parser",
+      "test_command": "go test ./06-strings-and-text/6-config-parser",
+      "starter_path": "06-strings-and-text/6-config-parser/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -1992,8 +1992,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Every Go service, library, and CLI depends on module metadata being correct, reproducible, and understandable during local development and CI.",
-      "path": "08-modules-and-packages/1-module-basics",
-      "run_command": "go run ./08-modules-and-packages/1-module-basics",
+      "path": "07-modules-and-packages/1-module-basics",
+      "run_command": "go run ./07-modules-and-packages/1-module-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2024,8 +2024,8 @@
         "MP.1"
       ],
       "production_relevance": "Dependency drift, unexpected indirect packages, and confused upgrade paths are normal engineering problems, so teams need repeatable module workflows.",
-      "path": "08-modules-and-packages/2-managing-deps",
-      "run_command": "go run ./08-modules-and-packages/2-managing-deps",
+      "path": "07-modules-and-packages/2-managing-deps",
+      "run_command": "go run ./07-modules-and-packages/2-managing-deps",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2057,10 +2057,10 @@
         "MP.2"
       ],
       "production_relevance": "Version boundaries and local overrides shape library upgrades, internal modules, and release safety in real Go codebases.",
-      "path": "08-modules-and-packages/3-versioning",
-      "run_command": "go run ./08-modules-and-packages/3-versioning",
-      "test_command": "go test ./08-modules-and-packages/3-versioning",
-      "starter_path": "08-modules-and-packages/3-versioning/_starter",
+      "path": "07-modules-and-packages/3-versioning",
+      "run_command": "go run ./07-modules-and-packages/3-versioning",
+      "test_command": "go test ./07-modules-and-packages/3-versioning",
+      "starter_path": "07-modules-and-packages/3-versioning/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -2089,8 +2089,8 @@
         "MP.2"
       ],
       "production_relevance": "Build tags show up in cross-platform tools, optional integrations, and test suites that need fast defaults with explicit opt-in for heavy checks.",
-      "path": "08-modules-and-packages/4-build-tags",
-      "run_command": "go run ./08-modules-and-packages/4-build-tags",
+      "path": "07-modules-and-packages/4-build-tags",
+      "run_command": "go run ./07-modules-and-packages/4-build-tags",
       "test_command": "",
       "starter_path": "",
       "next_items": [],
@@ -2117,8 +2117,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Small scripts, service entrypoints, and internal tools all need predictable command-line and environment handling.",
-      "path": "09-io-and-cli/cli-tools/1-args",
-      "run_command": "go run ./09-io-and-cli/cli-tools/1-args",
+      "path": "08-io-and-cli/cli-tools/1-args",
+      "run_command": "go run ./08-io-and-cli/cli-tools/1-args",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2149,8 +2149,8 @@
         "CL.1"
       ],
       "production_relevance": "Typed flags are the foundation for internal tools, service bootstraps, and user-facing CLIs that need predictable options.",
-      "path": "09-io-and-cli/cli-tools/2-flags",
-      "run_command": "go run ./09-io-and-cli/cli-tools/2-flags",
+      "path": "08-io-and-cli/cli-tools/2-flags",
+      "run_command": "go run ./08-io-and-cli/cli-tools/2-flags",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2182,8 +2182,8 @@
         "CL.2"
       ],
       "production_relevance": "Serious CLIs scale through subcommands, isolated flag scopes, and clear usage boundaries.",
-      "path": "09-io-and-cli/cli-tools/3-subcommands",
-      "run_command": "go run ./09-io-and-cli/cli-tools/3-subcommands",
+      "path": "08-io-and-cli/cli-tools/3-subcommands",
+      "run_command": "go run ./08-io-and-cli/cli-tools/3-subcommands",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2216,10 +2216,10 @@
         "CL.3"
       ],
       "production_relevance": "Operational CLIs often combine filesystem work and command-line input, so safety features like dry-run are part of real engineering quality.",
-      "path": "09-io-and-cli/cli-tools/4-file-organizer",
-      "run_command": "go run ./09-io-and-cli/cli-tools/4-file-organizer",
+      "path": "08-io-and-cli/cli-tools/4-file-organizer",
+      "run_command": "go run ./08-io-and-cli/cli-tools/4-file-organizer",
       "test_command": "",
-      "starter_path": "09-io-and-cli/cli-tools/4-file-organizer/_starter",
+      "starter_path": "08-io-and-cli/cli-tools/4-file-organizer/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -2245,8 +2245,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "JSON serialization shows up in APIs, config generation, background jobs, and structured data exchange everywhere in Go.",
-      "path": "09-io-and-cli/encoding/1-marshalling",
-      "run_command": "go run ./09-io-and-cli/encoding/1-marshalling",
+      "path": "08-io-and-cli/encoding/1-marshalling",
+      "run_command": "go run ./08-io-and-cli/encoding/1-marshalling",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2277,8 +2277,8 @@
         "EN.1"
       ],
       "production_relevance": "Unmarshal behavior shapes every API client, config loader, and structured-data ingestion path in Go.",
-      "path": "09-io-and-cli/encoding/2-unmarshal",
-      "run_command": "go run ./09-io-and-cli/encoding/2-unmarshal",
+      "path": "08-io-and-cli/encoding/2-unmarshal",
+      "run_command": "go run ./08-io-and-cli/encoding/2-unmarshal",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2310,9 +2310,9 @@
         "EN.2"
       ],
       "production_relevance": "Streaming encoders are common in HTTP handlers, file exporters, and data pipelines that should not buffer everything in memory.",
-      "path": "09-io-and-cli/encoding/3-encoder",
-      "run_command": "go run ./09-io-and-cli/encoding/3-encoder",
-      "test_command": "go test ./09-io-and-cli/encoding/3-encoder",
+      "path": "08-io-and-cli/encoding/3-encoder",
+      "run_command": "go run ./08-io-and-cli/encoding/3-encoder",
+      "test_command": "go test ./08-io-and-cli/encoding/3-encoder",
       "starter_path": "",
       "next_items": [
         "EN.4"
@@ -2343,8 +2343,8 @@
         "EN.3"
       ],
       "production_relevance": "Reader-based JSON decoding is the default production habit for HTTP bodies, files, and large payload streams.",
-      "path": "09-io-and-cli/encoding/4-decode",
-      "run_command": "go run ./09-io-and-cli/encoding/4-decode",
+      "path": "08-io-and-cli/encoding/4-decode",
+      "run_command": "go run ./08-io-and-cli/encoding/4-decode",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2375,8 +2375,8 @@
         "EN.1"
       ],
       "production_relevance": "Base64 appears in tokens, transport-safe payloads, inline assets, and protocol boundaries where raw binary is inconvenient.",
-      "path": "09-io-and-cli/encoding/5-base64_encoding",
-      "run_command": "go run ./09-io-and-cli/encoding/5-base64_encoding",
+      "path": "08-io-and-cli/encoding/5-base64_encoding",
+      "run_command": "go run ./08-io-and-cli/encoding/5-base64_encoding",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2410,10 +2410,10 @@
         "EN.4"
       ],
       "production_relevance": "Configuration loading is one of the most common real-world uses of file I/O and decoding in Go services and tools.",
-      "path": "09-io-and-cli/encoding/6-config-parser",
-      "run_command": "go run ./09-io-and-cli/encoding/6-config-parser",
-      "test_command": "go test ./09-io-and-cli/encoding/6-config-parser",
-      "starter_path": "09-io-and-cli/encoding/6-config-parser/_starter",
+      "path": "08-io-and-cli/encoding/6-config-parser",
+      "run_command": "go run ./08-io-and-cli/encoding/6-config-parser",
+      "test_command": "go test ./08-io-and-cli/encoding/6-config-parser",
+      "starter_path": "08-io-and-cli/encoding/6-config-parser/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -2439,8 +2439,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "File operations sit underneath config loaders, export tools, operational scripts, and data-processing jobs.",
-      "path": "09-io-and-cli/filesystem/1-files",
-      "run_command": "go run ./09-io-and-cli/filesystem/1-files",
+      "path": "08-io-and-cli/filesystem/1-files",
+      "run_command": "go run ./08-io-and-cli/filesystem/1-files",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2471,8 +2471,8 @@
         "FS.1"
       ],
       "production_relevance": "Cross-platform tools live or die on path correctness, especially in CLIs and build tooling.",
-      "path": "09-io-and-cli/filesystem/2-paths",
-      "run_command": "go run ./09-io-and-cli/filesystem/2-paths",
+      "path": "08-io-and-cli/filesystem/2-paths",
+      "run_command": "go run ./08-io-and-cli/filesystem/2-paths",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2504,8 +2504,8 @@
         "FS.2"
       ],
       "production_relevance": "Directory traversal underpins search tools, file importers, deploy helpers, and backup workflows.",
-      "path": "09-io-and-cli/filesystem/3-dir",
-      "run_command": "go run ./09-io-and-cli/filesystem/3-dir",
+      "path": "08-io-and-cli/filesystem/3-dir",
+      "run_command": "go run ./08-io-and-cli/filesystem/3-dir",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2537,8 +2537,8 @@
         "FS.3"
       ],
       "production_relevance": "Temp resources show up in downloads, staging files, tests, and batch-processing pipelines.",
-      "path": "09-io-and-cli/filesystem/4-temp",
-      "run_command": "go run ./09-io-and-cli/filesystem/4-temp",
+      "path": "08-io-and-cli/filesystem/4-temp",
+      "run_command": "go run ./08-io-and-cli/filesystem/4-temp",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2570,8 +2570,8 @@
         "FS.4"
       ],
       "production_relevance": "Embedding is common in CLIs, internal tools, and lightweight services that want one deployable binary.",
-      "path": "09-io-and-cli/filesystem/5-embed",
-      "run_command": "go run ./09-io-and-cli/filesystem/5-embed",
+      "path": "08-io-and-cli/filesystem/5-embed",
+      "run_command": "go run ./08-io-and-cli/filesystem/5-embed",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2604,8 +2604,8 @@
         "FS.3"
       ],
       "production_relevance": "Nearly every production Go system depends on io.Reader and io.Writer composition across files, networks, and encoders.",
-      "path": "09-io-and-cli/filesystem/6-io-patterns",
-      "run_command": "go run ./09-io-and-cli/filesystem/6-io-patterns",
+      "path": "08-io-and-cli/filesystem/6-io-patterns",
+      "run_command": "go run ./08-io-and-cli/filesystem/6-io-patterns",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2639,10 +2639,10 @@
         "FS.6"
       ],
       "production_relevance": "Operational tooling often needs fast, memory-safe search across large sets of log or text files.",
-      "path": "09-io-and-cli/filesystem/7-log-search",
-      "run_command": "go run ./09-io-and-cli/filesystem/7-log-search",
-      "test_command": "go test ./09-io-and-cli/filesystem/7-log-search",
-      "starter_path": "09-io-and-cli/filesystem/7-log-search/_starter",
+      "path": "08-io-and-cli/filesystem/7-log-search",
+      "run_command": "go run ./08-io-and-cli/filesystem/7-log-search",
+      "test_command": "go test ./08-io-and-cli/filesystem/7-log-search",
+      "starter_path": "08-io-and-cli/filesystem/7-log-search/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -2671,9 +2671,9 @@
         "FS.6"
       ],
       "production_relevance": "fs.FS creates cleaner seams for tools and services that need filesystem logic without hard-coding real disk access into tests.",
-      "path": "09-io-and-cli/filesystem/8-fs-testing-seam",
-      "run_command": "go run ./09-io-and-cli/filesystem/8-fs-testing-seam",
-      "test_command": "go test ./09-io-and-cli/filesystem/8-fs-testing-seam",
+      "path": "08-io-and-cli/filesystem/8-fs-testing-seam",
+      "run_command": "go run ./08-io-and-cli/filesystem/8-fs-testing-seam",
+      "test_command": "go test ./08-io-and-cli/filesystem/8-fs-testing-seam",
       "starter_path": "",
       "next_items": [],
       "tags": [
@@ -2699,8 +2699,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Database connectivity bugs often come from misunderstanding lazy connection setup and connection-pool behavior.",
-      "path": "10-web-and-database/databases/1-connecting-to-db",
-      "run_command": "go run ./10-web-and-database/databases/1-connecting-to-db",
+      "path": "09-web-and-database/databases/1-connecting-to-db",
+      "run_command": "go run ./09-web-and-database/databases/1-connecting-to-db",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2731,8 +2731,8 @@
         "DB.1"
       ],
       "production_relevance": "Safe write paths depend on parameterized SQL and deliberate data handling before values reach the database.",
-      "path": "10-web-and-database/databases/2-query",
-      "run_command": "go run ./10-web-and-database/databases/2-query",
+      "path": "09-web-and-database/databases/2-query",
+      "run_command": "go run ./09-web-and-database/databases/2-query",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2764,8 +2764,8 @@
         "DB.2"
       ],
       "production_relevance": "Read-heavy services rely on predictable row scanning and resource cleanup to avoid pool exhaustion and subtle data bugs.",
-      "path": "10-web-and-database/databases/3-select",
-      "run_command": "go run ./10-web-and-database/databases/3-select",
+      "path": "09-web-and-database/databases/3-select",
+      "run_command": "go run ./09-web-and-database/databases/3-select",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2797,8 +2797,8 @@
         "DB.3"
       ],
       "production_relevance": "Prepared statements and context boundaries matter in services that issue repeated queries under latency and timeout constraints.",
-      "path": "10-web-and-database/databases/4-prepare",
-      "run_command": "go run ./10-web-and-database/databases/4-prepare",
+      "path": "09-web-and-database/databases/4-prepare",
+      "run_command": "go run ./09-web-and-database/databases/4-prepare",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2831,8 +2831,8 @@
         "DB.3"
       ],
       "production_relevance": "Transactions protect data integrity, but only when they stay short, intentional, and limited to database work.",
-      "path": "10-web-and-database/databases/5-transactions",
-      "run_command": "go run ./10-web-and-database/databases/5-transactions",
+      "path": "09-web-and-database/databases/5-transactions",
+      "run_command": "go run ./09-web-and-database/databases/5-transactions",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2867,10 +2867,10 @@
         "DB.5"
       ],
       "production_relevance": "Repository boundaries and transaction-safe writes are common in services that need testable data access without hiding core database behavior.",
-      "path": "10-web-and-database/databases/6-repository",
-      "run_command": "go run ./10-web-and-database/databases/6-repository",
-      "test_command": "go test ./10-web-and-database/databases/6-repository",
-      "starter_path": "10-web-and-database/databases/6-repository/_starter",
+      "path": "09-web-and-database/databases/6-repository",
+      "run_command": "go run ./09-web-and-database/databases/6-repository",
+      "test_command": "go test ./09-web-and-database/databases/6-repository",
+      "starter_path": "09-web-and-database/databases/6-repository/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -2896,8 +2896,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Every later Go concurrency pattern starts with goroutine lifecycle awareness and the cost of unmanaged background work.",
-      "path": "11-concurrency/goroutines/1-goroutine",
-      "run_command": "go run ./11-concurrency/goroutines/1-goroutine",
+      "path": "10-concurrency/goroutines/1-goroutine",
+      "run_command": "go run ./10-concurrency/goroutines/1-goroutine",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2928,8 +2928,8 @@
         "GC.1"
       ],
       "production_relevance": "Services often fan out work across goroutines and still need one explicit boundary before the request can finish.",
-      "path": "11-concurrency/goroutines/2-wait-group",
-      "run_command": "go run ./11-concurrency/goroutines/2-wait-group",
+      "path": "10-concurrency/goroutines/2-wait-group",
+      "run_command": "go run ./10-concurrency/goroutines/2-wait-group",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2961,8 +2961,8 @@
         "GC.2"
       ],
       "production_relevance": "Channels are the default coordination tool when goroutines need to hand work or results to each other without shared mutable state.",
-      "path": "11-concurrency/goroutines/3-channels",
-      "run_command": "go run ./11-concurrency/goroutines/3-channels",
+      "path": "10-concurrency/goroutines/3-channels",
+      "run_command": "go run ./10-concurrency/goroutines/3-channels",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2993,8 +2993,8 @@
         "GC.3"
       ],
       "production_relevance": "Bounded channel buffers are a common backpressure tool when one stage of a pipeline is faster than another.",
-      "path": "11-concurrency/goroutines/4-channels-buffered",
-      "run_command": "go run ./11-concurrency/goroutines/4-channels-buffered",
+      "path": "10-concurrency/goroutines/4-channels-buffered",
+      "run_command": "go run ./10-concurrency/goroutines/4-channels-buffered",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3026,8 +3026,8 @@
         "GC.4"
       ],
       "production_relevance": "Producer shutdown, worker drain logic, and broadcast completion all rely on clear channel ownership rules.",
-      "path": "11-concurrency/goroutines/5-channels-closing",
-      "run_command": "go run ./11-concurrency/goroutines/5-channels-closing",
+      "path": "10-concurrency/goroutines/5-channels-closing",
+      "run_command": "go run ./10-concurrency/goroutines/5-channels-closing",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3060,8 +3060,8 @@
         "GC.5"
       ],
       "production_relevance": "Real concurrent systems often look like pipelines with bounded stages, cancellation signals, and explicit hand-off points.",
-      "path": "11-concurrency/goroutines/6-project-1",
-      "run_command": "go run ./11-concurrency/goroutines/6-project-1",
+      "path": "10-concurrency/goroutines/6-project-1",
+      "run_command": "go run ./10-concurrency/goroutines/6-project-1",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3097,10 +3097,10 @@
         "GC.6"
       ],
       "production_relevance": "Network-heavy tools need concurrency limits, explicit result aggregation, and graceful failure handling instead of unlimited fan-out.",
-      "path": "11-concurrency/goroutines/7-downloader",
-      "run_command": "go run ./11-concurrency/goroutines/7-downloader",
+      "path": "10-concurrency/goroutines/7-downloader",
+      "run_command": "go run ./10-concurrency/goroutines/7-downloader",
       "test_command": "",
-      "starter_path": "11-concurrency/goroutines/7-downloader/_starter",
+      "starter_path": "10-concurrency/goroutines/7-downloader/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -3126,8 +3126,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Context is the standard control surface for I/O cancellation and scoped metadata in production Go code.",
-      "path": "11-concurrency/context/1-background",
-      "run_command": "go run ./11-concurrency/context/1-background",
+      "path": "10-concurrency/context/1-background",
+      "run_command": "go run ./10-concurrency/context/1-background",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3158,8 +3158,8 @@
         "CT.1"
       ],
       "production_relevance": "Cancellation propagation prevents leaked goroutines and wasted I/O work after the caller no longer cares about the result.",
-      "path": "11-concurrency/context/2-with-cancel",
-      "run_command": "go run ./11-concurrency/context/2-with-cancel",
+      "path": "10-concurrency/context/2-with-cancel",
+      "run_command": "go run ./10-concurrency/context/2-with-cancel",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3191,8 +3191,8 @@
         "CT.2"
       ],
       "production_relevance": "Timeouts are the production guardrail that keeps one slow downstream dependency from holding everything hostage.",
-      "path": "11-concurrency/context/3-with-timeout",
-      "run_command": "go run ./11-concurrency/context/3-with-timeout",
+      "path": "10-concurrency/context/3-with-timeout",
+      "run_command": "go run ./10-concurrency/context/3-with-timeout",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3225,8 +3225,8 @@
         "CT.3"
       ],
       "production_relevance": "Trace IDs, request IDs, and auth metadata often need to flow with a request without turning function signatures into global bags of state.",
-      "path": "11-concurrency/context/4-with-value",
-      "run_command": "go run ./11-concurrency/context/4-with-value",
+      "path": "10-concurrency/context/4-with-value",
+      "run_command": "go run ./10-concurrency/context/4-with-value",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3260,10 +3260,10 @@
         "CT.4"
       ],
       "production_relevance": "Outbound HTTP clients need cancellation boundaries or they become a common source of stuck goroutines and cascading failures.",
-      "path": "11-concurrency/context/5-timeout-client",
-      "run_command": "go run ./11-concurrency/context/5-timeout-client",
+      "path": "10-concurrency/context/5-timeout-client",
+      "run_command": "go run ./10-concurrency/context/5-timeout-client",
       "test_command": "",
-      "starter_path": "11-concurrency/context/5-timeout-client/_starter",
+      "starter_path": "10-concurrency/context/5-timeout-client/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -3289,8 +3289,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Correct time math underpins retries, deadlines, metrics, and any real program that measures work over time.",
-      "path": "11-concurrency/time-and-scheduling/1-time",
-      "run_command": "go run ./11-concurrency/time-and-scheduling/1-time",
+      "path": "10-concurrency/time-and-scheduling/1-time",
+      "run_command": "go run ./10-concurrency/time-and-scheduling/1-time",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3321,8 +3321,8 @@
         "TM.1"
       ],
       "production_relevance": "APIs, logs, and schedulers all depend on predictable parse and format behavior across systems.",
-      "path": "11-concurrency/time-and-scheduling/2-formatting",
-      "run_command": "go run ./11-concurrency/time-and-scheduling/2-formatting",
+      "path": "10-concurrency/time-and-scheduling/2-formatting",
+      "run_command": "go run ./10-concurrency/time-and-scheduling/2-formatting",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3354,8 +3354,8 @@
         "TM.2"
       ],
       "production_relevance": "Timers and tickers are the foundation for retries, timeouts, reminders, and recurring background work.",
-      "path": "11-concurrency/time-and-scheduling/3-timer-and-ticker",
-      "run_command": "go run ./11-concurrency/time-and-scheduling/3-timer-and-ticker",
+      "path": "10-concurrency/time-and-scheduling/3-timer-and-ticker",
+      "run_command": "go run ./10-concurrency/time-and-scheduling/3-timer-and-ticker",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3388,10 +3388,10 @@
         "TM.3"
       ],
       "production_relevance": "Timer-driven programs need the same lifecycle care as larger services: explicit cleanup, bounded loops, and predictable exit behavior.",
-      "path": "11-concurrency/time-and-scheduling/7-reminder",
-      "run_command": "go run ./11-concurrency/time-and-scheduling/7-reminder",
+      "path": "10-concurrency/time-and-scheduling/7-reminder",
+      "run_command": "go run ./10-concurrency/time-and-scheduling/7-reminder",
       "test_command": "",
-      "starter_path": "11-concurrency/time-and-scheduling/7-reminder/_starter",
+      "starter_path": "10-concurrency/time-and-scheduling/7-reminder/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -3417,8 +3417,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Concurrent service startup and fan-out flows often need one coordination point that can surface failure instead of silently discarding it.",
-      "path": "12-concurrency-patterns/1-errgroup",
-      "run_command": "go run ./12-concurrency-patterns/1-errgroup",
+      "path": "11-concurrency-patterns/1-errgroup",
+      "run_command": "go run ./11-concurrency-patterns/1-errgroup",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3449,8 +3449,8 @@
         "CP.1"
       ],
       "production_relevance": "Service fan-out paths need automatic stop signals or they keep wasting work after a failure already decided the outcome.",
-      "path": "12-concurrency-patterns/2-errgroup-context",
-      "run_command": "go run ./12-concurrency-patterns/2-errgroup-context",
+      "path": "11-concurrency-patterns/2-errgroup-context",
+      "run_command": "go run ./11-concurrency-patterns/2-errgroup-context",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3482,9 +3482,9 @@
         "CP.2"
       ],
       "production_relevance": "Pools help reduce allocation churn in hot paths, but only when used deliberately and reset correctly to avoid stale-data bugs.",
-      "path": "12-concurrency-patterns/3-sync-pool",
-      "run_command": "go run ./12-concurrency-patterns/3-sync-pool",
-      "test_command": "go test ./12-concurrency-patterns/3-sync-pool",
+      "path": "11-concurrency-patterns/3-sync-pool",
+      "run_command": "go run ./11-concurrency-patterns/3-sync-pool",
+      "test_command": "go test ./11-concurrency-patterns/3-sync-pool",
       "starter_path": "",
       "next_items": [
         "CP.4"
@@ -3516,10 +3516,10 @@
         "CP.3"
       ],
       "production_relevance": "Bounded fan-out plus buffer reuse is a common production pattern when throughput matters more than launching unlimited parallel work.",
-      "path": "12-concurrency-patterns/4-bounded-pipeline-exercise",
-      "run_command": "go run ./12-concurrency-patterns/4-bounded-pipeline-exercise",
+      "path": "11-concurrency-patterns/4-bounded-pipeline-exercise",
+      "run_command": "go run ./11-concurrency-patterns/4-bounded-pipeline-exercise",
       "test_command": "",
-      "starter_path": "12-concurrency-patterns/4-bounded-pipeline-exercise/_starter",
+      "starter_path": "11-concurrency-patterns/4-bounded-pipeline-exercise/_starter",
       "next_items": [
         "CP.5"
       ],
@@ -3552,10 +3552,10 @@
         "CP.4"
       ],
       "production_relevance": "Health checks and outbound service probes are a real concurrency workload: they need limits, cancellation, and predictable result handling.",
-      "path": "12-concurrency-patterns/5-url-checker-exercise",
-      "run_command": "go run ./12-concurrency-patterns/5-url-checker-exercise",
+      "path": "11-concurrency-patterns/5-url-checker-exercise",
+      "run_command": "go run ./11-concurrency-patterns/5-url-checker-exercise",
       "test_command": "",
-      "starter_path": "12-concurrency-patterns/5-url-checker-exercise/_starter",
+      "starter_path": "11-concurrency-patterns/5-url-checker-exercise/_starter",
       "next_items": [],
       "tags": [
         "exercise",
@@ -3581,9 +3581,9 @@
       ],
       "prerequisites": [],
       "production_relevance": "Reliable services depend on small fast tests that catch regressions before review and deployment.",
-      "path": "13-quality-and-performance/testing/user",
+      "path": "12-quality-and-performance/testing/user",
       "run_command": "",
-      "test_command": "go test ./13-quality-and-performance/testing/user",
+      "test_command": "go test ./12-quality-and-performance/testing/user",
       "starter_path": "",
       "next_items": [
         "TE.2"
@@ -3613,9 +3613,9 @@
         "TE.1"
       ],
       "production_relevance": "Table-driven tests scale better than one-off assertions when behavior has many input variations.",
-      "path": "13-quality-and-performance/testing/user",
+      "path": "12-quality-and-performance/testing/user",
       "run_command": "",
-      "test_command": "go test ./13-quality-and-performance/testing/user",
+      "test_command": "go test ./12-quality-and-performance/testing/user",
       "starter_path": "",
       "next_items": [
         "TE.3"
@@ -3646,9 +3646,9 @@
         "TE.2"
       ],
       "production_relevance": "Handler tests give fast confidence on status codes, bodies, and method handling without bringing network flakiness into the feedback loop.",
-      "path": "13-quality-and-performance/testing/user",
+      "path": "12-quality-and-performance/testing/user",
       "run_command": "",
-      "test_command": "go test ./13-quality-and-performance/testing/user",
+      "test_command": "go test ./12-quality-and-performance/testing/user",
       "starter_path": "",
       "next_items": [
         "TE.4"
@@ -3679,9 +3679,9 @@
         "TE.2"
       ],
       "production_relevance": "Benchmarks let engineers validate performance claims before and after a change instead of arguing from intuition.",
-      "path": "13-quality-and-performance/testing/benchmarks",
+      "path": "12-quality-and-performance/testing/benchmarks",
       "run_command": "",
-      "test_command": "go test -bench=. -benchmem ./13-quality-and-performance/testing/benchmarks",
+      "test_command": "go test -bench=. -benchmem ./12-quality-and-performance/testing/benchmarks",
       "starter_path": "",
       "next_items": [
         "PR.1"
@@ -3709,8 +3709,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "CPU profiles reveal hot paths and expensive functions that benchmarks alone cannot prioritize in a whole program.",
-      "path": "13-quality-and-performance/profiling/1-cpu-profile",
-      "run_command": "go run ./13-quality-and-performance/profiling/1-cpu-profile",
+      "path": "12-quality-and-performance/profiling/1-cpu-profile",
+      "run_command": "go run ./12-quality-and-performance/profiling/1-cpu-profile",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3741,8 +3741,8 @@
         "PR.1"
       ],
       "production_relevance": "Live pprof is how teams investigate CPU, heap, goroutine, and mutex behavior in production-like conditions without guessing.",
-      "path": "13-quality-and-performance/profiling/3-http-pprof",
-      "run_command": "go run ./13-quality-and-performance/profiling/3-http-pprof",
+      "path": "12-quality-and-performance/profiling/3-http-pprof",
+      "run_command": "go run ./12-quality-and-performance/profiling/3-http-pprof",
       "test_command": "",
       "starter_path": "",
       "next_items": [],
@@ -3769,8 +3769,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Package names become part of every import path and every exported API, so bad names create long-term friction across the codebase.",
-      "path": "14-application-architecture/package-design/1-naming",
-      "run_command": "go run ./14-application-architecture/package-design/1-naming",
+      "path": "13-application-architecture/package-design/1-naming",
+      "run_command": "go run ./13-application-architecture/package-design/1-naming",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3801,8 +3801,8 @@
         "PD.1"
       ],
       "production_relevance": "Visibility discipline keeps internal details from leaking into call sites and lets packages change safely over time.",
-      "path": "14-application-architecture/package-design/2-visibility",
-      "run_command": "go run ./14-application-architecture/package-design/2-visibility",
+      "path": "13-application-architecture/package-design/2-visibility",
+      "run_command": "go run ./13-application-architecture/package-design/2-visibility",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3834,8 +3834,8 @@
         "PD.2"
       ],
       "production_relevance": "Project layout decisions affect testability, import boundaries, discoverability, and how safely a codebase can grow.",
-      "path": "14-application-architecture/package-design/3-project-layout",
-      "run_command": "go run ./14-application-architecture/package-design/3-project-layout",
+      "path": "13-application-architecture/package-design/3-project-layout",
+      "run_command": "go run ./13-application-architecture/package-design/3-project-layout",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3864,8 +3864,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Structured logging is the baseline observability surface for production services and incident response.",
-      "path": "14-application-architecture/structured-logging/1-slog-basics",
-      "run_command": "go run ./14-application-architecture/structured-logging/1-slog-basics",
+      "path": "13-application-architecture/structured-logging/1-slog-basics",
+      "run_command": "go run ./13-application-architecture/structured-logging/1-slog-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3896,8 +3896,8 @@
         "SL.1"
       ],
       "production_relevance": "Request-scoped logs are how teams reconstruct what happened inside one request without grepping unrelated traffic.",
-      "path": "14-application-architecture/structured-logging/2-context-logger",
-      "run_command": "go run ./14-application-architecture/structured-logging/2-context-logger",
+      "path": "13-application-architecture/structured-logging/2-context-logger",
+      "run_command": "go run ./13-application-architecture/structured-logging/2-context-logger",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3929,8 +3929,8 @@
         "SL.2"
       ],
       "production_relevance": "Handler boundaries are where teams integrate logging with external sinks, formatting rules, and redaction pipelines.",
-      "path": "14-application-architecture/structured-logging/3-custom-handler",
-      "run_command": "go run ./14-application-architecture/structured-logging/3-custom-handler",
+      "path": "13-application-architecture/structured-logging/3-custom-handler",
+      "run_command": "go run ./13-application-architecture/structured-logging/3-custom-handler",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3962,8 +3962,8 @@
         "SL.3"
       ],
       "production_relevance": "Teams should choose logging libraries based on measured hot-path behavior, not on style preferences alone.",
-      "path": "14-application-architecture/structured-logging/4-zerolog-comparison",
-      "run_command": "go run ./14-application-architecture/structured-logging/4-zerolog-comparison",
+      "path": "13-application-architecture/structured-logging/4-zerolog-comparison",
+      "run_command": "go run ./13-application-architecture/structured-logging/4-zerolog-comparison",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3997,10 +3997,10 @@
         "SL.4"
       ],
       "production_relevance": "Sensitive data should be protected by the logging layer itself so a missed call site does not leak secrets into logs.",
-      "path": "14-application-architecture/structured-logging/5-exercise",
-      "run_command": "go run ./14-application-architecture/structured-logging/5-exercise",
+      "path": "13-application-architecture/structured-logging/5-exercise",
+      "run_command": "go run ./13-application-architecture/structured-logging/5-exercise",
       "test_command": "",
-      "starter_path": "14-application-architecture/structured-logging/5-exercise/_starter",
+      "starter_path": "13-application-architecture/structured-logging/5-exercise/_starter",
       "next_items": [
         "GS.1"
       ],
@@ -4027,8 +4027,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Production binaries are expected to react predictably to termination signals during deploys, restarts, and operator actions.",
-      "path": "14-application-architecture/graceful-shutdown/1-signal-context",
-      "run_command": "go run ./14-application-architecture/graceful-shutdown/1-signal-context",
+      "path": "13-application-architecture/graceful-shutdown/1-signal-context",
+      "run_command": "go run ./13-application-architecture/graceful-shutdown/1-signal-context",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4059,8 +4059,8 @@
         "GS.1"
       ],
       "production_relevance": "HTTP graceful shutdown prevents deployment-time request loss and turns termination into a controlled part of service behavior.",
-      "path": "14-application-architecture/graceful-shutdown/2-http-server",
-      "run_command": "go run ./14-application-architecture/graceful-shutdown/2-http-server",
+      "path": "13-application-architecture/graceful-shutdown/2-http-server",
+      "run_command": "go run ./13-application-architecture/graceful-shutdown/2-http-server",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4092,8 +4092,8 @@
         "GS.2"
       ],
       "production_relevance": "Complex services need one coherent shutdown plan, not a pile of independent cleanup calls that race each other during deploys.",
-      "path": "14-application-architecture/graceful-shutdown/3-capstone",
-      "run_command": "go run ./14-application-architecture/graceful-shutdown/3-capstone",
+      "path": "13-application-architecture/graceful-shutdown/3-capstone",
+      "run_command": "go run ./13-application-architecture/graceful-shutdown/3-capstone",
       "test_command": "",
       "starter_path": "",
       "next_items": [],
@@ -4120,8 +4120,8 @@
       ],
       "prerequisites": [],
       "production_relevance": "Generated code keeps repetitive glue predictable, reviewable, and caught at build time instead of turning into hidden runtime behavior.",
-      "path": "15-code-generation/1-go-generate",
-      "run_command": "go run ./15-code-generation/1-go-generate",
+      "path": "14-code-generation/1-go-generate",
+      "run_command": "go run ./14-code-generation/1-go-generate",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4152,8 +4152,8 @@
         "CG.1"
       ],
       "production_relevance": "Generated mocks reduce repetitive maintenance when interface-heavy codebases evolve under active testing.",
-      "path": "15-code-generation/2-mockery",
-      "run_command": "go run ./15-code-generation/2-mockery",
+      "path": "14-code-generation/2-mockery",
+      "run_command": "go run ./14-code-generation/2-mockery",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4185,8 +4185,8 @@
         "CG.2"
       ],
       "production_relevance": "Schema-driven query generation keeps SQL explicit while still giving teams typed compile-time checked application code.",
-      "path": "15-code-generation/3-sqlc",
-      "run_command": "go run ./15-code-generation/3-sqlc",
+      "path": "14-code-generation/3-sqlc",
+      "run_command": "go run ./14-code-generation/3-sqlc",
       "test_command": "",
       "starter_path": "",
       "next_items": [],

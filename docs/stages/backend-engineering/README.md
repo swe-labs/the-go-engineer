@@ -1,6 +1,6 @@
-# 4 Backend Engineering Support Docs
+# 06 Backend & DB Support Docs
 
-This folder supports the beta `4 Backend Engineering` stage.
+This folder supports the beta `06 Backend & DB` stage.
 
 Use these docs when you want a stage-level view of how the current Section `10` source content fits
 together.
@@ -12,11 +12,11 @@ together.
 
 Then work through the source surfaces in order:
 
-1. [10-web-and-database/databases](../../../10-web-and-database/databases/)
+1. [09-web-and-database/databases](../../../09-web-and-database/databases/)
 2. optional reference surfaces:
-   - [10-web-and-database/http-client](../../../10-web-and-database/http-client/)
-   - [10-web-and-database/database-migrations](../../../10-web-and-database/database-migrations/)
-   - [10-web-and-database/web-masterclass](../../../10-web-and-database/web-masterclass/)
+   - [09-web-and-database/http-client](../../../09-web-and-database/http-client/)
+   - [09-web-and-database/database-migrations](../../../09-web-and-database/database-migrations/)
+   - [09-web-and-database/web-masterclass](../../../09-web-and-database/web-masterclass/)
 
 ## What These Docs Are For
 

@@ -51,15 +51,9 @@ foundations route.
 
 ## Beta Stage Ownership
 
-This section belongs to [1 Language Fundamentals](../../docs/stages/02-language-basics.md).
+This section belongs to [03 Functions & Errors](../../docs/stages/03-functions-errors.md).
 
-Inside the new repo architecture, it is the fifth foundations section:
-
-1. `01-getting-started`
-2. `02-language-basics`
-3. `03-control-flow`
-4. `04-data-structures`
-5. `05-functions-and-errors`
+In the current repo architecture, it lives at `03-functions-errors`.
 
 ## Section Map
 
@@ -96,5 +90,5 @@ This section is being rebuilt so that:
 ## Next Step
 
 After `FE.7`, the learner should be ready to move into
-[2 Types and Design](../../docs/stages/02-types-and-design.md).
+[04 Types & Design](../../docs/stages/04-types-design.md).
 That is where richer type modeling and design boundaries become the main topic.

@@ -37,8 +37,8 @@ Error-handling design patterns in 9 lessons.
 
 Object-oriented and data-modeling patterns in 11 lessons.
 
-- **§05 — Types & Interfaces** (6 lessons)
-  - structs, methods, interfaces, Stringer, generics, payroll-processor exercise (`TI.1–TI.6`)
+- **§05 — Types & Interfaces** (10 core lessons plus optional stretch lessons)
+  - structs, methods, interfaces, Stringer, receiver sets, generics, payroll-processor exercise (`TI.1–TI.10`)
 - **§06 — Composition** (2 lessons)
   - composition vs inheritance, embedding (`CO.1–CO.2`)
 - **§07 — Strings & Text** (5 core lessons plus the live v2 milestone exercise)

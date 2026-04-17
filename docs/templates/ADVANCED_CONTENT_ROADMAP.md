@@ -6,7 +6,7 @@ This document maps advanced overlays to the current top-level architecture.
 
 | Folder | Scope | Advanced Overlay |
 |--------|-------|------------------|
-| `01-foundations` | zero-magic basics | none beyond the local README-first contract |
+| `01`-`04` learner stages | zero-magic basics | none beyond the local README-first contract |
 | `02-engineering-core` | deeper engineering choices | advanced thinking first |
 | `03-backend-systems` | service and data behavior | advanced thinking, production notes, backend failures |
 | `04-concurrency` | concurrent execution | advanced thinking, failure scenarios, production notes |
@@ -17,7 +17,7 @@ This document maps advanced overlays to the current top-level architecture.
 
 ## Delivery Map
 
-### 01-foundations
+### Stages 01-04
 
 Advanced overlays: none by default.
 

@@ -15,7 +15,7 @@ under operational pressure.
 
 ## Prerequisites
 
-- [8 Production Engineering](../../10-production.md)
+- [10 Production](../../10-production.md)
 - `GS.3`
 - [rubric and checkpoint template](../../../templates/rubric-checkpoint-template.md)
 
@@ -71,5 +71,5 @@ The learner should explain why the chosen redesign is better than a shallow alte
 ## Next Step
 
 Use this task as a bridge into the
-[Flagship Project stage](../../11-flagship.md)
+[11 Flagship stage](../../11-flagship.md)
 when you want the same redesign pressure applied to a larger system.

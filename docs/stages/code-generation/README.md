@@ -10,6 +10,6 @@ section first.
 
 ## Current Stage Scope
 
-`11 Code Generation` currently draws from:
+This supporting surface now feeds 11 Flagship through:
 
-- [15-code-generation](../../../15-code-generation/)
+- [14-code-generation](../../../14-code-generation/)

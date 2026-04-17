@@ -1,104 +1,72 @@
-# Alpha Source Inventory vs Beta Public Architecture
+# Source Inventory vs Public 11-Stage Architecture
 
-The Go Engineer is in a transition period.
+The Go Engineer is in a transition period, but the public navigation rule is now simple:
 
-That means two things are true at the same time:
-
-- the repo still contains the alpha-era section inventory as the main source content
-- the public learner-facing navigation is now moving to the beta stage model
+- **the 11-stage model is the learner-facing truth**
+- **the current source folders are the physical implementation layer**
 
 This document explains how those two layers fit together.
 
 ## The Short Version
 
-Use this rule:
+If you are a learner:
 
-- if you want to know **how to navigate the curriculum as a learner**, follow the beta stage docs
-- if you want to know **where the current source content physically lives**, follow the alpha source
-  inventory
+- start from [README.md](../README.md)
+- then follow [docs/stages/README.md](./stages/README.md)
 
-Beta is the navigation truth.
-Alpha is still the physical source inventory for much of the repo.
+If you are trying to find files:
 
-## What Alpha Means Right Now
+- use the current top-level folders
+- use [docs/curriculum/README.md](./curriculum/README.md)
 
-In this repo, `alpha` refers to the current section-based content inventory:
+The stage model tells learners **where to go next**.
+The folder tree tells contributors **where content lives today**.
 
-- `01-core-foundations`
-- `02-control-flow`
-- `03-data-structures`
-- ...
-- `15-code-generation`
+## The Public 11 Stages
 
-Alpha proved that the curriculum could be migrated, validated, and cleaned up section by section.
+1. `01 Getting Started`
+2. `02 Language Basics`
+3. `03 Functions & Errors`
+4. `04 Types & Design`
+5. `05 Packages & IO`
+6. `06 Backend & DB`
+7. `07 Concurrency`
+8. `08 Quality & Test`
+9. `09 Architecture`
+10. `10 Production`
+11. `11 Flagship`
 
-Alpha is still valuable because it contains the lessons, exercises, milestone projects, and source
-files learners use today.
+These 11 stage pages are the public routing surfaces for the curriculum.
 
-## What Beta Means Right Now
+## How The Current Source Maps
 
-`Beta` means the learner-facing curriculum architecture is being reorganized around engineering
-stages instead of only section numbers.
+The current source inventory feeds the 11-stage model like this:
 
-The beta stages are:
+- `01-getting-started` -> `01 Getting Started`
+- `02-language-basics`, `02-language-basics/03-control-flow`, `02-language-basics/04-data-structures` -> `02 Language Basics`
+- `03-functions-errors` -> `03 Functions & Errors`
+- `04-types-design`, `05-composition`, `06-strings-and-text` -> `04 Types & Design`
+- `07-modules-and-packages`, `08-io-and-cli` -> `05 Packages & IO`
+- `09-web-and-database` -> `06 Backend & DB`
+- `10-concurrency`, `11-concurrency-patterns` -> `07 Concurrency`
+- `12-quality-and-performance` -> `08 Quality & Test`
+- `13-application-architecture/package-design`, `13-application-architecture/grpc` -> `09 Architecture`
+- `13-application-architecture/structured-logging`, `13-application-architecture/graceful-shutdown`, `13-application-architecture/docker-and-deployment` -> `10 Production`
+- `13-application-architecture/enterprise-capstone`, `14-code-generation` -> `11 Flagship`
 
-1. `0 Foundation`
-2. `1 Language Fundamentals`
-3. `2 Types and Design`
-4. `3 Modules and IO`
-5. `4 Backend Engineering`
-6. `5 Concurrency System`
-7. `6 Quality and Performance`
-8. `7 Architecture`
-9. `8 Production Engineering`
-10. `9 Expert Layer`
-11. `10 Flagship Project`
-12. `11 Code Generation`
+## Why We Use Both Layers
 
-These stages are the public learner-routing model.
+We are not rewriting the repo from scratch in one destructive move.
 
-## Why The Repo Uses Both At Once
+Instead, we are doing two things deliberately:
 
-We are not discarding alpha content and rewriting the entire repo from scratch in one destructive
-move.
+1. keeping the learner-facing 11-stage architecture stable
+2. finishing the physical folder migration behind that public surface
 
-Instead, beta does three things:
-
-1. regroup existing alpha content into clearer learner-facing stages
-2. split some alpha sections where the learner-facing boundary is better than the current folder
-   boundary
-3. add a few new beta-only layers where alpha was too thin, especially:
-   - `0 Foundation`
-   - `8 Production Engineering`
-   - `9 Expert Layer`
-   - `10 Flagship Project`
-
-This lets the curriculum improve without pretending the current folder tree has already been
-perfectly rebuilt.
-
-## What A Split Looks Like
-
-Some alpha sections map cleanly to one beta stage.
-Some do not.
-
-Examples:
-
-- `10-web-and-database` mostly feeds `4 Backend Engineering`
-- `15-code-generation` maps directly to `11 Code Generation`
-- `01-core-foundations` splits across:
-  - `0 Foundation`
-  - `1 Language Fundamentals`
-- `14-application-architecture` splits across:
-  - `7 Architecture`
-  - `8 Production Engineering`
-  - `10 Flagship Project`
-
-So if a learner sees one alpha section feeding more than one beta stage, that is intentional.
-It is not duplication by accident.
+That lets the curriculum become clearer for learners without pretending every folder move is already
+finished.
 
 ## What To Trust For What
-
-Use these docs based on the question you are asking:
 
 ### If you are a learner
 
@@ -108,51 +76,31 @@ Use:
 - [LEARNING-PATH.md](../LEARNING-PATH.md)
 - [docs/stages/README.md](./stages/README.md)
 
-These docs tell you how to move through the curriculum now.
-
 ### If you want the physical source layout
 
 Use:
 
 - [docs/curriculum/README.md](./curriculum/README.md)
-- the current top-level section folders
-
-These show where the source content currently lives.
+- the current top-level folders
 
 ### If you are a maintainer or contributor
 
 Use:
 
-- the beta shell docs for public navigation truth
-- the source inventory docs for where files live today
-- `planning/v2` for frozen planning and regrouping direction
+- the stage pages for public routing truth
+- the current folder tree for implementation truth
+- `ARCHITECTURE.md` and `CURRICULUM-BLUEPRINT.md` for the longer-range design
 
 ## What This Does Not Mean
 
 This transition model does **not** mean:
 
-- the repo has two different public curricula
-- learners should ignore the stage model
-- the alpha folder structure is the final learner-facing architecture
-- every section must be physically moved before beta guidance can be honest
-
-It means the public navigation model is changing first, and the physical regrouping work continues
-incrementally.
-
-## Practical Learner Rule
-
-If you are unsure what to do next:
-
-1. start from the beta stage docs
-2. choose the stage that matches your current goal
-3. follow the linked source sections from there
-4. use the alpha inventory only when you need to understand where files live physically
+- learners should navigate by old stage names
+- the repo has competing public architectures
+- every old planning surface is still public truth
+- physical regrouping must finish before the stage model can be honest
 
 ## Bottom Line
 
-The Go Engineer is not trying to keep alpha and beta as competing systems.
-
-The alpha section inventory is still the source content.
-The beta stage model is the public learner-facing architecture.
-
-That is the transition model.
+The 11-stage architecture is the public curriculum.
+The current source tree is the implementation surface that is still being finished underneath it.

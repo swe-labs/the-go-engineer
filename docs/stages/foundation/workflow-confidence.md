@@ -50,7 +50,7 @@ Fix:
 
 - finish `GT.4 development environment`
 - rerun `GT.2 hello world`
-- only then move into `1 Language Fundamentals`
+- only then move into `02 Language Basics`
 
 ## Good Signs
 

@@ -1,6 +1,6 @@
-# Expert Layer Support Docs
+# Pressure Tasks Support Docs
 
-Use these docs when you want the beta-stage view of Expert Layer without searching across the whole
+Use these docs when you want the cross-stage pressure-task view without searching across the whole
 repo for judgment-heavy source seeds.
 
 ## In This Folder
@@ -10,7 +10,6 @@ repo for judgment-heavy source seeds.
 - [Stage map](./stage-map.md)
 - [Pressure guidance](./pressure-guidance.md)
 
-## Current Stage Scope
+## Current Scope
 
-`9 Expert Layer` currently draws from cross-stage source seeds rather than one dedicated section on
-`main`.
+These docs draw from cross-stage source seeds rather than one dedicated public stage on `main`.

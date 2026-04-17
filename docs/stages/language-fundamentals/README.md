@@ -1,9 +1,10 @@
-# 1 Language Fundamentals Support Docs
+# Early Foundations Support Docs
 
-This folder supports the beta `1 Language Fundamentals` stage.
+This folder supports the early foundations spine across `02 Language Basics` and
+`03 Functions & Errors`.
 
-Use these docs when you want a stage-level view of how the current Section `01` through Section
-`04` source content fits together.
+Use these docs when you want a stage-level view of how the current beginner path fits together from
+variables through explicit error handling.
 
 ## Use These In This Order
 
@@ -12,10 +13,10 @@ Use these docs when you want a stage-level view of how the current Section `01` 
 
 Then work through the source sections in order:
 
-1. [01-core-foundations/language-basics](../../../01-core-foundations/language-basics/)
-2. [01-foundations/03-control-flow](../../../02-language-basics/03-control-flow/)
-3. [01-foundations/04-data-structures](../../../02-language-basics/04-data-structures/)
-4. [01-foundations/05-functions-and-errors](../../../03-functions-errors/)
+1. [02-language-basics](../../../02-language-basics/)
+2. [02-language-basics/03-control-flow](../../../02-language-basics/03-control-flow/)
+3. [02-language-basics/04-data-structures](../../../02-language-basics/04-data-structures/)
+4. [03-functions-errors](../../../03-functions-errors/)
 
 ## What These Docs Are For
 

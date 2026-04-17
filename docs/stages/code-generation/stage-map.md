@@ -1,4 +1,4 @@
-# Code Generation Stage Map
+# Code Generation Support Map
 
 ## Stage Goal
 
@@ -9,7 +9,7 @@ already exists.
 
 | Surface | Role In Stage |
 | --- | --- |
-| [15-code-generation](../../../15-code-generation/) | live beta path for `go generate`, generated mocks, and schema-driven SQL generation |
+| [14-code-generation](../../../14-code-generation/) | supporting path for `go generate`, generated mocks, and schema-driven SQL generation |
 
 ## Live Milestone Backbone
 

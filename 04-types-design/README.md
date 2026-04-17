@@ -42,23 +42,16 @@ This section intentionally stays inside foundations-ready ideas:
 - Core types and interfaces concepts every learner needs
 - Ends with the payroll processor milestone
 
-**Advanced/Optional Path** (TI.10 - TI.17):
+**Advanced/Optional Path** (`TI.8`, `TI.11`-`TI.18`):
 - Advanced generics, type patterns, data structures
 - Marked as stretch/optional - not required for foundations
 - Can be explored after completing core path or in later stages
 
 ## Beta Stage Ownership
 
-This section belongs to [1 Language Fundamentals](../../docs/stages/02-language-basics.md).
+This section belongs to [04 Types & Design](../../docs/stages/04-types-design.md).
 
-Inside the new repo architecture, it is the sixth foundations section:
-
-1. `01-getting-started`
-2. `02-language-basics`
-3. `03-control-flow`
-4. `04-data-structures`
-5. `05-functions-and-errors`
-6. `06-types-and-interfaces`
+In the current repo architecture, it lives at `04-types-design`.
 
 ## Section Map
 
@@ -109,6 +102,8 @@ This section is being rebuilt so that:
 
 ## Next Step
 
-After completing the canonical path (`TI.1` through `TI.7`, then `TI.9`, then `TI.8`), the learner should be ready to move into the next section: **Composition** (`s06`).
+After completing the canonical path (`TI.1` through `TI.7`, then `TI.9`, then `TI.10`), the
+learner should be ready to move into the next section: **Composition**.
 
-The advanced lessons (TI.10-TI.17) are optional/stretch and can be explored later or in parallel with other sections.
+The advanced lessons (`TI.8`, `TI.11`-`TI.18`) are optional/stretch and can be explored later or
+in parallel with other sections.
