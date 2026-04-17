@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"log"
 
-	_ "github.com/mattn/go-sqlite3"
 	"golang.org/x/crypto/bcrypt"
+	_ "modernc.org/sqlite"
 )
 
 // ============================================================================
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 func main() {
 	dbName := "users_database.db"
-	db, err := sql.Open("sqlite3", dbName)
+	db, err := sql.Open("sqlite", dbName)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -30,7 +30,7 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 
 	"github.com/rasel9t6/the-go-engineer/06-backend-db/01-web-and-database/databases/6-repository/repository"
 )
@@ -105,7 +105,7 @@ func checkErr(err error) {
 }
 
 func connectToDatabase(name string) (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", name)
+	db, err := sql.Open("sqlite", name)
 	if err != nil {
 		return nil, err
 	}

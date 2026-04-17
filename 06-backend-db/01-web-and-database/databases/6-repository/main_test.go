@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 
 	"github.com/rasel9t6/the-go-engineer/06-backend-db/01-web-and-database/databases/6-repository/repository"
 )
@@ -18,7 +18,7 @@ func openRepositoryTestDB(t *testing.T) *sql.DB {
 	t.Helper()
 
 	dbPath := filepath.Join(t.TempDir(), "users.db")
-	db, err := sql.Open("sqlite3", dbPath)
+	db, err := sql.Open("sqlite", dbPath)
 	if err != nil {
 		t.Fatalf("open test database: %v", err)
 	}

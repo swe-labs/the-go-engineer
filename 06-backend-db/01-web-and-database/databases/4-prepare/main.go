@@ -11,8 +11,8 @@ import (
 	"log"
 	"time"
 
-	_ "github.com/mattn/go-sqlite3"
 	"golang.org/x/crypto/bcrypt"
+	_ "modernc.org/sqlite"
 )
 
 // ============================================================================
@@ -48,7 +48,7 @@ type User struct {
 
 func main() {
 	dbName := "users_database.db"
-	db, err := sql.Open("sqlite3", dbName)
+	db, err := sql.Open("sqlite", dbName)
 	if err != nil {
 		log.Fatal(err)
 	}

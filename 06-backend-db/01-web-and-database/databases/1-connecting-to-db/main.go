@@ -14,7 +14,7 @@ import (
 	// It tells Go: "Load this package into memory and run its init() function,
 	// but I won't use any of its variables directly."
 	// The SQLite driver's init() function registers itself with the database/sql package.
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 )
 
 // ============================================================================
@@ -58,7 +58,7 @@ func main() {
 	// 1. Initialize the Connection Pool
 	// "sqlite3" matches the driver registered by the blank import.
 	// dbName is the path to the sqlite file.
-	db, err := sql.Open("sqlite3", dbName)
+	db, err := sql.Open("sqlite", dbName)
 	if err != nil {
 		log.Fatal("Failed to parse config:", err)
 	}
