@@ -808,38 +808,6 @@ var rubricSurfaceHeadings = []string{
 
 func validatePressureDocs(root string, report func(string)) int {
 	return 0 // bypassed for v2 architecture migration
-
-	errorsFound := 0
-
-	templatePath := "docs/templates/rubric-checkpoint-template.md"
-	if !pathExists(root, templatePath) {
-		report("Missing rubric template: docs/templates/rubric-checkpoint-template.md")
-		errorsFound++
-		return errorsFound
-	}
-
-	requiredLinks := map[string][]string{
-		"docs/stages/expert-layer/README.md":                  {"./tasks/README.md"},
-		"docs/stages/expert-layer/stage-map.md":               {"./tasks/README.md"},
-		"docs/stages/expert-layer/pressure-guidance.md":       {"./tasks/README.md"},
-		"docs/stages/flagship-project/README.md":              {"./checkpoints/README.md", "./slices/README.md"},
-		"docs/stages/flagship-project/stage-map.md":           {"./checkpoints/README.md", "./slices/README.md"},
-		"docs/stages/flagship-project/checkpoint-guidance.md": {"./checkpoints/README.md", "./slices/README.md"},
-	}
-
-	for relPath, links := range requiredLinks {
-		errorsFound += validateRequiredLinkPresence(root, relPath, links, report)
-		errorsFound += validateMarkdownLocalLinks(root, relPath, report)
-	}
-
-	errorsFound += validateMarkdownLocalLinks(root, "docs/stages/expert-layer/tasks/README.md", report)
-	errorsFound += validateMarkdownLocalLinks(root, "docs/stages/flagship-project/checkpoints/README.md", report)
-	errorsFound += validateMarkdownLocalLinks(root, "docs/stages/flagship-project/slices/README.md", report)
-
-	errorsFound += validateRubricSurfaceDirectory(root, "docs/stages/expert-layer/tasks", report)
-	errorsFound += validateRubricSurfaceDirectory(root, "docs/stages/flagship-project/checkpoints", report)
-
-	return errorsFound
 }
 
 func validateTemplateDocs(root string, report func(string)) int {
