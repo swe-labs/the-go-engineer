@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2026 Rasel Hossen
+// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -11,8 +11,8 @@ import (
 	"log"
 	"time"
 
-	_ "modernc.org/sqlite"
 	"golang.org/x/crypto/bcrypt"
+	_ "modernc.org/sqlite"
 )
 
 // ============================================================================
