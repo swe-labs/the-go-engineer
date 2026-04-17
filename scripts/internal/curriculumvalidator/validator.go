@@ -517,6 +517,10 @@ func allowedPathPrefixesForSection(section V2Section) []string {
 		prefixes = append(prefixes, "05-composition", "06-strings-and-text")
 	}
 
+	if section.ID == "s07" {
+		prefixes = append(prefixes, "08-io-and-cli")
+	}
+
 	return prefixes
 }
 

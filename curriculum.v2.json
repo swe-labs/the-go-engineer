@@ -94,7 +94,7 @@
                          "prerequisites":  [
                                                "s04"
                                            ],
-                         "path_prefix":  "05-packages-io",
+"path_prefix": "07-modules-and-packages",
                          "entry_points":  [
                                               "MP.1",
                                               "CL.1",
@@ -1939,7 +1939,7 @@
                   },
                   {
                       "id":  "MP.1",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "module-basics",
                       "title":  "Module Basics",
                       "type":  "lesson",
@@ -1956,8 +1956,8 @@
 
                                         ],
                       "production_relevance":  "Every Go service, library, and CLI depends on module metadata being correct, reproducible, and understandable during local development and CI.",
-                      "path":  "05-packages-io/01-modules-and-packages/1-module-basics",
-                      "run_command":  "go run ./05-packages-io/01-modules-and-packages/1-module-basics",
+                      "path":  "07-modules-and-packages/1-module-basics",
+                      "run_command":  "go run ./07-modules-and-packages/1-module-basics",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -1971,7 +1971,7 @@
                   },
                   {
                       "id":  "MP.2",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "managing-dependencies",
                       "title":  "Managing Dependencies",
                       "type":  "lesson",
@@ -1988,8 +1988,8 @@
                                             "MP.1"
                                         ],
                       "production_relevance":  "Dependency drift, unexpected indirect packages, and confused upgrade paths are normal engineering problems, so teams need repeatable module workflows.",
-                      "path":  "05-packages-io/01-modules-and-packages/2-managing-deps",
-                      "run_command":  "go run ./05-packages-io/01-modules-and-packages/2-managing-deps",
+                      "path":  "07-modules-and-packages/2-managing-deps",
+                      "run_command":  "go run ./07-modules-and-packages/2-managing-deps",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2003,7 +2003,7 @@
                   },
                   {
                       "id":  "MP.3",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "versioning-workshop",
                       "title":  "Versioning Workshop",
                       "type":  "exercise",
@@ -2021,10 +2021,10 @@
                                             "MP.2"
                                         ],
                       "production_relevance":  "Version boundaries and local overrides shape library upgrades, internal modules, and release safety in real Go codebases.",
-                      "path":  "05-packages-io/01-modules-and-packages/3-versioning",
-                      "run_command":  "go run ./05-packages-io/01-modules-and-packages/3-versioning",
-                      "test_command":  "go test ./05-packages-io/01-modules-and-packages/3-versioning",
-                      "starter_path":  "05-packages-io/01-modules-and-packages/3-versioning/_starter",
+                      "path":  "07-modules-and-packages/3-versioning",
+                      "run_command":  "go run ./07-modules-and-packages/3-versioning",
+                      "test_command":  "go test ./07-modules-and-packages/3-versioning",
+                      "starter_path":  "07-modules-and-packages/3-versioning/_starter",
                       "next_items":  [
 
                                      ],
@@ -2037,7 +2037,7 @@
                   },
                   {
                       "id":  "MP.4",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "build-tags",
                       "title":  "Build Tags",
                       "type":  "lesson",
@@ -2055,8 +2055,8 @@
                                             "MP.2"
                                         ],
                       "production_relevance":  "Build tags show up in cross-platform tools, optional integrations, and test suites that need fast defaults with explicit opt-in for heavy checks.",
-                      "path":  "05-packages-io/01-modules-and-packages/4-build-tags",
-                      "run_command":  "go run ./05-packages-io/01-modules-and-packages/4-build-tags",
+                      "path":  "07-modules-and-packages/4-build-tags",
+                      "run_command":  "go run ./07-modules-and-packages/4-build-tags",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2070,7 +2070,7 @@
                   },
                   {
                       "id":  "CL.1",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "args",
                       "title":  "Args",
                       "type":  "lesson",
@@ -2087,8 +2087,8 @@
 
                                         ],
                       "production_relevance":  "Small scripts, service entrypoints, and internal tools all need predictable command-line and environment handling.",
-                      "path":  "05-packages-io/02-io-and-cli/cli-tools/1-args",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/cli-tools/1-args",
+                      "path":  "08-io-and-cli/cli-tools/1-args",
+                      "run_command":  "go run ./08-io-and-cli/cli-tools/1-args",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2102,7 +2102,7 @@
                   },
                   {
                       "id":  "CL.2",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "flags",
                       "title":  "Flags",
                       "type":  "lesson",
@@ -2119,8 +2119,8 @@
                                             "CL.1"
                                         ],
                       "production_relevance":  "Typed flags are the foundation for internal tools, service bootstraps, and user-facing CLIs that need predictable options.",
-                      "path":  "05-packages-io/02-io-and-cli/cli-tools/2-flags",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/cli-tools/2-flags",
+                      "path":  "08-io-and-cli/cli-tools/2-flags",
+                      "run_command":  "go run ./08-io-and-cli/cli-tools/2-flags",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2134,7 +2134,7 @@
                   },
                   {
                       "id":  "CL.3",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "subcommands",
                       "title":  "Subcommands",
                       "type":  "lesson",
@@ -2152,8 +2152,8 @@
                                             "CL.2"
                                         ],
                       "production_relevance":  "Serious CLIs scale through subcommands, isolated flag scopes, and clear usage boundaries.",
-                      "path":  "05-packages-io/02-io-and-cli/cli-tools/3-subcommands",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands",
+                      "path":  "08-io-and-cli/cli-tools/3-subcommands",
+                      "run_command":  "go run ./08-io-and-cli/cli-tools/3-subcommands",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2167,7 +2167,7 @@
                   },
                   {
                       "id":  "CL.4",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "file-organizer",
                       "title":  "File Organizer",
                       "type":  "exercise",
@@ -2186,10 +2186,10 @@
                                             "CL.3"
                                         ],
                       "production_relevance":  "Operational CLIs often combine filesystem work and command-line input, so safety features like dry-run are part of real engineering quality.",
-                      "path":  "05-packages-io/02-io-and-cli/cli-tools/4-file-organizer",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer",
+                      "path":  "08-io-and-cli/cli-tools/4-file-organizer",
+                      "run_command":  "go run ./08-io-and-cli/cli-tools/4-file-organizer",
                       "test_command":  "",
-                      "starter_path":  "05-packages-io/02-io-and-cli/cli-tools/4-file-organizer/_starter",
+                      "starter_path":  "08-io-and-cli/cli-tools/4-file-organizer/_starter",
                       "next_items":  [
 
                                      ],
@@ -2202,7 +2202,7 @@
                   },
                   {
                       "id":  "EN.1",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "json-marshalling",
                       "title":  "JSON Marshalling",
                       "type":  "lesson",
@@ -2219,8 +2219,8 @@
 
                                         ],
                       "production_relevance":  "JSON serialization shows up in APIs, config generation, background jobs, and structured data exchange everywhere in Go.",
-                      "path":  "05-packages-io/02-io-and-cli/encoding/1-marshalling",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/encoding/1-marshalling",
+                      "path":  "08-io-and-cli/encoding/1-marshalling",
+                      "run_command":  "go run ./08-io-and-cli/encoding/1-marshalling",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2234,7 +2234,7 @@
                   },
                   {
                       "id":  "EN.2",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "json-unmarshalling",
                       "title":  "JSON Unmarshalling",
                       "type":  "lesson",
@@ -2251,8 +2251,8 @@
                                             "EN.1"
                                         ],
                       "production_relevance":  "Unmarshal behavior shapes every API client, config loader, and structured-data ingestion path in Go.",
-                      "path":  "05-packages-io/02-io-and-cli/encoding/2-unmarshal",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/encoding/2-unmarshal",
+                      "path":  "08-io-and-cli/encoding/2-unmarshal",
+                      "run_command":  "go run ./08-io-and-cli/encoding/2-unmarshal",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2266,7 +2266,7 @@
                   },
                   {
                       "id":  "EN.3",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "json-encoder",
                       "title":  "JSON Encoder",
                       "type":  "lesson",
@@ -2284,9 +2284,9 @@
                                             "EN.2"
                                         ],
                       "production_relevance":  "Streaming encoders are common in HTTP handlers, file exporters, and data pipelines that should not buffer everything in memory.",
-                      "path":  "05-packages-io/02-io-and-cli/encoding/3-encoder",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/encoding/3-encoder",
-                      "test_command":  "go test ./05-packages-io/02-io-and-cli/encoding/3-encoder",
+                      "path":  "08-io-and-cli/encoding/3-encoder",
+                      "run_command":  "go run ./08-io-and-cli/encoding/3-encoder",
+                      "test_command":  "go test ./08-io-and-cli/encoding/3-encoder",
                       "starter_path":  "",
                       "next_items":  [
                                          "EN.4"
@@ -2299,7 +2299,7 @@
                   },
                   {
                       "id":  "EN.4",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "json-decoder",
                       "title":  "JSON Decoder",
                       "type":  "lesson",
@@ -2317,8 +2317,8 @@
                                             "EN.3"
                                         ],
                       "production_relevance":  "Reader-based JSON decoding is the default production habit for HTTP bodies, files, and large payload streams.",
-                      "path":  "05-packages-io/02-io-and-cli/encoding/4-decode",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/encoding/4-decode",
+                      "path":  "08-io-and-cli/encoding/4-decode",
+                      "run_command":  "go run ./08-io-and-cli/encoding/4-decode",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2332,7 +2332,7 @@
                   },
                   {
                       "id":  "EN.5",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "base64",
                       "title":  "Base64",
                       "type":  "lesson",
@@ -2349,8 +2349,8 @@
                                             "EN.1"
                                         ],
                       "production_relevance":  "Base64 appears in tokens, transport-safe payloads, inline assets, and protocol boundaries where raw binary is inconvenient.",
-                      "path":  "05-packages-io/02-io-and-cli/encoding/5-base64_encoding",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/encoding/5-base64_encoding",
+                      "path":  "08-io-and-cli/encoding/5-base64_encoding",
+                      "run_command":  "go run ./08-io-and-cli/encoding/5-base64_encoding",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2364,7 +2364,7 @@
                   },
                   {
                       "id":  "EN.6",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "config-parser",
                       "title":  "Config Parser",
                       "type":  "exercise",
@@ -2384,10 +2384,10 @@
                                             "EN.4"
                                         ],
                       "production_relevance":  "Configuration loading is one of the most common real-world uses of file I/O and decoding in Go services and tools.",
-                      "path":  "05-packages-io/02-io-and-cli/encoding/6-config-parser",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/encoding/6-config-parser",
-                      "test_command":  "go test ./05-packages-io/02-io-and-cli/encoding/6-config-parser",
-                      "starter_path":  "05-packages-io/02-io-and-cli/encoding/6-config-parser/_starter",
+                      "path":  "08-io-and-cli/encoding/6-config-parser",
+                      "run_command":  "go run ./08-io-and-cli/encoding/6-config-parser",
+                      "test_command":  "go test ./08-io-and-cli/encoding/6-config-parser",
+                      "starter_path":  "08-io-and-cli/encoding/6-config-parser/_starter",
                       "next_items":  [
 
                                      ],
@@ -2400,7 +2400,7 @@
                   },
                   {
                       "id":  "FS.1",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "files",
                       "title":  "Files",
                       "type":  "lesson",
@@ -2417,8 +2417,8 @@
 
                                         ],
                       "production_relevance":  "File operations sit underneath config loaders, export tools, operational scripts, and data-processing jobs.",
-                      "path":  "05-packages-io/02-io-and-cli/filesystem/1-files",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/filesystem/1-files",
+                      "path":  "08-io-and-cli/filesystem/1-files",
+                      "run_command":  "go run ./08-io-and-cli/filesystem/1-files",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2432,7 +2432,7 @@
                   },
                   {
                       "id":  "FS.2",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "paths",
                       "title":  "Paths",
                       "type":  "lesson",
@@ -2449,8 +2449,8 @@
                                             "FS.1"
                                         ],
                       "production_relevance":  "Cross-platform tools live or die on path correctness, especially in CLIs and build tooling.",
-                      "path":  "05-packages-io/02-io-and-cli/filesystem/2-paths",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/filesystem/2-paths",
+                      "path":  "08-io-and-cli/filesystem/2-paths",
+                      "run_command":  "go run ./08-io-and-cli/filesystem/2-paths",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2464,7 +2464,7 @@
                   },
                   {
                       "id":  "FS.3",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "directories",
                       "title":  "Directories",
                       "type":  "lesson",
@@ -2482,8 +2482,8 @@
                                             "FS.2"
                                         ],
                       "production_relevance":  "Directory traversal underpins search tools, file importers, deploy helpers, and backup workflows.",
-                      "path":  "05-packages-io/02-io-and-cli/filesystem/3-dir",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/filesystem/3-dir",
+                      "path":  "08-io-and-cli/filesystem/3-dir",
+                      "run_command":  "go run ./08-io-and-cli/filesystem/3-dir",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2497,7 +2497,7 @@
                   },
                   {
                       "id":  "FS.4",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "temp-files",
                       "title":  "Temp Files",
                       "type":  "lesson",
@@ -2515,8 +2515,8 @@
                                             "FS.3"
                                         ],
                       "production_relevance":  "Temp resources show up in downloads, staging files, tests, and batch-processing pipelines.",
-                      "path":  "05-packages-io/02-io-and-cli/filesystem/4-temp",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/filesystem/4-temp",
+                      "path":  "08-io-and-cli/filesystem/4-temp",
+                      "run_command":  "go run ./08-io-and-cli/filesystem/4-temp",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2530,7 +2530,7 @@
                   },
                   {
                       "id":  "FS.5",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "embed",
                       "title":  "Embed",
                       "type":  "lesson",
@@ -2548,8 +2548,8 @@
                                             "FS.4"
                                         ],
                       "production_relevance":  "Embedding is common in CLIs, internal tools, and lightweight services that want one deployable binary.",
-                      "path":  "05-packages-io/02-io-and-cli/filesystem/5-embed",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/filesystem/5-embed",
+                      "path":  "08-io-and-cli/filesystem/5-embed",
+                      "run_command":  "go run ./08-io-and-cli/filesystem/5-embed",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2563,7 +2563,7 @@
                   },
                   {
                       "id":  "FS.6",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "io-patterns",
                       "title":  "I/O Patterns",
                       "type":  "lesson",
@@ -2582,8 +2582,8 @@
                                             "FS.3"
                                         ],
                       "production_relevance":  "Nearly every production Go system depends on io.Reader and io.Writer composition across files, networks, and encoders.",
-                      "path":  "05-packages-io/02-io-and-cli/filesystem/6-io-patterns",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/filesystem/6-io-patterns",
+                      "path":  "08-io-and-cli/filesystem/6-io-patterns",
+                      "run_command":  "go run ./08-io-and-cli/filesystem/6-io-patterns",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -2597,7 +2597,7 @@
                   },
                   {
                       "id":  "FS.7",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "log-search",
                       "title":  "Log Search",
                       "type":  "exercise",
@@ -2617,10 +2617,10 @@
                                             "FS.6"
                                         ],
                       "production_relevance":  "Operational tooling often needs fast, memory-safe search across large sets of log or text files.",
-                      "path":  "05-packages-io/02-io-and-cli/filesystem/7-log-search",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/filesystem/7-log-search",
-                      "test_command":  "go test ./05-packages-io/02-io-and-cli/filesystem/7-log-search",
-                      "starter_path":  "05-packages-io/02-io-and-cli/filesystem/7-log-search/_starter",
+                      "path":  "08-io-and-cli/filesystem/7-log-search",
+                      "run_command":  "go run ./08-io-and-cli/filesystem/7-log-search",
+                      "test_command":  "go test ./08-io-and-cli/filesystem/7-log-search",
+                      "starter_path":  "08-io-and-cli/filesystem/7-log-search/_starter",
                       "next_items":  [
 
                                      ],
@@ -2633,7 +2633,7 @@
                   },
                   {
                       "id":  "FS.8",
-                      "section_id":  "s05",
+                      "section_id": "s07",
                       "slug":  "fs-testing-seam",
                       "title":  "fs.FS Testing Seam",
                       "type":  "lesson",
@@ -2651,9 +2651,9 @@
                                             "FS.6"
                                         ],
                       "production_relevance":  "fs.FS creates cleaner seams for tools and services that need filesystem logic without hard-coding real disk access into tests.",
-                      "path":  "05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam",
-                      "run_command":  "go run ./05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam",
-                      "test_command":  "go test ./05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam",
+                      "path":  "08-io-and-cli/filesystem/8-fs-testing-seam",
+                      "run_command":  "go run ./08-io-and-cli/filesystem/8-fs-testing-seam",
+                      "test_command":  "go test ./08-io-and-cli/filesystem/8-fs-testing-seam",
                       "starter_path":  "",
                       "next_items":  [
 
