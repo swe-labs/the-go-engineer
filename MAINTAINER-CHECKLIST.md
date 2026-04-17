@@ -4,13 +4,15 @@ Use this checklist to keep the v1/v2 workflow consistent.
 
 ## Daily Triage
 
+- Enforce the **GitHub Workflow**: No PRs should be reviewed unless they link to an approved Issue.
 - Confirm new contributor PRs target `main` unless the work is explicitly `v1-only`.
 - Add labels for `v1-only`, `v2`, `backport`, `release-blocker`, and `breaking-change` as early as possible.
-- Move issues into the correct milestone: `v1 maintenance`, `v2 alpha`, `v2 beta`, `v2 rc`, or `v2.0.0`.
+- Move issues into the correct milestone and add them to the **"The Go Engineer v2"** project board.
 - Watch for PRs opened against `release/v1.0.0` and redirect them to `release/v1`.
 
-## Merge Rules
+## PR Review & Merge Rules
 
+- **Reject** PRs that try to bypass the `README`-first teaching contract or introduce "magic" early in the curriculum.
 - Use **Squash and Merge** for PRs into `main`, `release/v1`, and later `release/v2`.
 - Never develop directly on long-lived branches.
 - If a fix belongs in both supported lines, merge it once into the correct source branch and then `git cherry-pick -x` it to the other branch.

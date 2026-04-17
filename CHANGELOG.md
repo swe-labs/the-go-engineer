@@ -6,6 +6,26 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 
 ---
 
+## [2026-04-17] - V2 Documentation Polish & Blueprint Eradication
+
+### Added
+
+- **Strict GitHub Workflow:** Officially documented and enforced the Antigravity `github-workflow` skill across `CONTRIBUTING.md` and `MAINTAINER-CHECKLIST.md`. All future changes now require approved Issues linked to the v2 project board before drafting PRs.
+
+### Changed
+
+- **Curriculum Architecture Shift:** Fully transitioned all repository documentation from the legacy 11-stage model to the new **5-Phase, 21-Section Blueprint**.
+- **Code Standards:** Added formal guidelines for the v2 three-tier Error Framework (`UserError`, `SystemError`, `FatalError`), Context propagation, Generics, and Security practices.
+- **Testing Standards:** Updated the coverage matrix to map against the 21 sections and explicitly added required Fuzz Testing and API/gRPC testing standards.
+- **Reference Remapping:** Remapped all "Common Mistakes" cross-references to point to the correct sections in the new 21-section blueprint.
+
+### Removed
+
+- Purged the legacy `docs/stages/` and `docs/curriculum/` directories containing obsolete 11-stage and 15-chapter routing metadata.
+- Deleted `beta-public-architecture.md`, `release-notes-v2-beta.md`, and obsolete cleanup scripts.
+
+---
+
 ## [2026-04-07] - Public v2 Planning Kickoff
 
 ### Added

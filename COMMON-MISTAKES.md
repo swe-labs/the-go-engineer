@@ -1,4 +1,4 @@
-# Common Go Mistakes — Reference Guide
+﻿# Common Go Mistakes — Reference Guide
 
 The 15 mistakes every Go engineer makes at least once, with the fix and the section where you learn the correct pattern.
 
@@ -33,7 +33,7 @@ go func(u string) { fmt.Println(u) }(url)
 
 **Note:** Go 1.22+ fixes this automatically for `range` loops over integers. For other range forms, the explicit shadowing is still required.
 
-**Covered in:** Section 09 — Concurrency
+**Covered in:** Section 14 — Concurrency Primitives
 
 ---
 
@@ -60,7 +60,7 @@ go func() {
 wg.Wait() // Blocks until Done() is called
 ```
 
-**Covered in:** Section 09 — WaitGroups
+**Covered in:** Section 14 — Concurrency Primitives
 
 ---
 
@@ -86,7 +86,7 @@ if err := rows.Err(); err != nil {
 }
 ```
 
-**Covered in:** Section 12 — Databases
+**Covered in:** Section 18 — Infrastructure & Databases
 
 ---
 
@@ -111,7 +111,7 @@ if err != nil { return err }
 defer rows.Close() // Immediately after the nil-error check
 ```
 
-**Covered in:** Section 12 — Databases
+**Covered in:** Section 18 — Infrastructure & Databases
 
 ---
 
@@ -138,7 +138,7 @@ for _, line := range lines {
 }
 ```
 
-**Covered in:** Section 07 — Strings & Text, Section 25 — Profiling
+**Covered in:** Section 05 — Standard Library Essentials, Section 15 — Profiling & Performance
 
 ---
 
@@ -166,7 +166,7 @@ for _, word := range words {
 result := sb.String() // One allocation
 ```
 
-**Covered in:** Section 07 — Strings & Text
+**Covered in:** Section 05 — Standard Library Essentials
 
 ---
 
@@ -193,7 +193,7 @@ func doWork(wg *sync.WaitGroup) { // POINTER to the WaitGroup
 go doWork(&wg)
 ```
 
-**Covered in:** Section 09 — WaitGroups
+**Covered in:** Section 14 — Concurrency Primitives
 
 ---
 
@@ -218,7 +218,7 @@ closeOnce := func() { once.Do(func() { close(ch) }) }
 // Or: redesign so only one goroutine sends — close is then trivial.
 ```
 
-**Covered in:** Section 09 — Closing Channels
+**Covered in:** Section 13 — Concurrency Pipelines
 
 ---
 
@@ -242,7 +242,7 @@ return fmt.Errorf("database query failed: %w", err) // %w preserves the chain
 // Caller can now: errors.Is(err, sql.ErrNoRows)
 ```
 
-**Covered in:** Section 04 — Error Wrapping
+**Covered in:** Section 09 — The Error Framework
 
 ---
 
@@ -271,7 +271,7 @@ server := &http.Server{
 server.ListenAndServe()
 ```
 
-**Covered in:** Section 13 — Web Masterclass, Section 27 — Graceful Shutdown
+**Covered in:** Section 16 — Backend & APIs, Section 21 — GoScale Operations
 
 ---
 
@@ -293,7 +293,7 @@ client := &http.Client{Timeout: 10 * time.Second}
 resp, err := client.Get(url)
 ```
 
-**Covered in:** Section 16 — HTTP Clients & Mocking
+**Covered in:** Section 16 — Backend & APIs
 
 ---
 
@@ -319,7 +319,7 @@ defer func() {
 
 **For read paths:** The silent `defer file.Close()` is fine — reads don't buffer data that can be lost on close.
 
-**Covered in:** Section 10 — Filesystem
+**Covered in:** Section 05 — Standard Library Essentials
 
 ---
 
@@ -341,7 +341,7 @@ ctx, cancel := context.WithTimeout(parent, 5*time.Second)
 defer cancel() // Always. Even for timeouts.
 ```
 
-**Covered in:** Section 17 — Context
+**Covered in:** Section 10 — Context Propagation
 
 ---
 
@@ -381,7 +381,7 @@ go test -race ./...
 go run -race main.go
 ```
 
-**Covered in:** Section 09 — Race Conditions
+**Covered in:** Section 14 — Concurrency Primitives
 
 ---
 
@@ -413,7 +413,7 @@ go func() {
 
 Use `log.Fatal` only in `main()` during initialisation (before any deferred cleanup exists).
 
-**Covered in:** Section 27 — Graceful Shutdown
+**Covered in:** Section 21 — GoScale Operations
 
 ---
 
