@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Rasel Hossen
+﻿// Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 // Commercial use is prohibited without permission.
 
@@ -11,7 +11,7 @@ import (
 	"log"
 	"time"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -48,7 +48,7 @@ type User struct {
 
 func main() {
 	dbName := "users_database.db"
-	db, err := sql.Open("sqlite3", dbName)
+	db, err := sql.Open("sqlite", dbName)
 	if err != nil {
 		log.Fatal(err)
 	}
