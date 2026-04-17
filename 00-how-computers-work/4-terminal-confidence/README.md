@@ -31,6 +31,12 @@ flowchart LR
 
 The OS treats these three streams exactly like files. In Linux/Mac, they are literally mapped to file descriptors `0`, `1`, and `2`. Writing to the screen is mechanically identical to writing text to a file on your hard drive.
 
+### The Working Directory
+There is one more crucial concept for the terminal: **The Working Directory**. 
+When you open a terminal, you are "standing" inside a specific folder on your hard drive. This is your Working Directory.
+
+When we tell the terminal to `go run ./00-how-computers-work/...`, the dot (`.`) means "start from where I am standing right now" (the root of the project). This is called a **relative path**. If you are standing in the wrong folder, the terminal will have no idea what you are talking about.
+
 ## Run Instructions
 
 ```bash

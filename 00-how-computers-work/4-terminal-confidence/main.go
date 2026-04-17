@@ -20,5 +20,9 @@ func main() {
 
 	// 3. Write the captured data back out to stdout
 	fmt.Printf("Hello, %s! Your data flowed through the pipes successfully.\n", input)
+
+	// 4. Write to stderr (usually appears on the same screen, but is technically a separate pipe)
+	fmt.Fprintln(os.Stderr, "(This message was secretly sent through the stderr pipe!)")
+
 	fmt.Println("NEXT UP: HC.5 os-processes")
 }

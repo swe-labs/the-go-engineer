@@ -38,11 +38,17 @@ If you type `go build main.go`, Go stops after step 1 and hands you the compiled
 ## Run Instructions
 
 Instead of `go run`, we are going to build the binary manually.
-*(Note: If you are on Windows, the output file will be `program.exe`)*
 
+**Mac / Linux:**
 ```bash
 go build -o program ./00-how-computers-work/2-code-to-execution
 ./program
+```
+
+**Windows:**
+```bash
+go build -o program.exe ./00-how-computers-work/2-code-to-execution
+.\program.exe
 ```
 
 ## Code Walkthrough

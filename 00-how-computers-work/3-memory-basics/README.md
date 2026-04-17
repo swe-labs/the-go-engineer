@@ -47,9 +47,9 @@ go run ./00-how-computers-work/3-memory-basics
 
 In Go, we can ask the computer to show us the actual physical memory address where our data is living by placing an `&` in front of the variable name.
 
-1. We create a piece of data called `score`.
-2. We print out the value of `score` (what it holds).
-3. We print out the address `&score` (where it lives in the machine's RAM).
+1. We create a piece of data called `score`. Because it is small and temporary, Go usually places it on the fast **Stack**.
+2. We create another variable using `new(int)`. This tells Go "I want this data to live on the slow, permanent **Heap**."
+3. We print out both memory addresses. Notice how the addresses look completely different? That's because the Stack and the Heap are located in entirely different regions of RAM!
 
 ## Try It
 
