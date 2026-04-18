@@ -52,7 +52,7 @@ caller chooses what each returned value means
 
 Go lets a function hand multiple values back to the caller directly.
 
-The important machine truth here is not â€œwhere each byte goes.â€
+The important machine truth here is not “where each byte goes.”
 It is that the caller receives more than one result and must decide what to do with each one.
 
 That prepares the learner for the next lesson, where the second value becomes an `error`.

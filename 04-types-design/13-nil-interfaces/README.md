@@ -18,7 +18,7 @@ Think of a pointer to a file. You can have:
 1. A nil pointer (no file opened at all)
 2. A pointer to an open file handle that happens to be closed
 
-With interfaces, it's similarâ€”nil interface vs interface holding a nil pointer.
+With interfaces, it's similar—nil interface vs interface holding a nil pointer.
 
 ## Visual Model
 
