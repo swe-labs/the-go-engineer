@@ -6,6 +6,22 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 
 ---
 
+## [2026-04-18] - The v2.1 12-Section Architecture Optimization
+
+### Changed
+
+- **Curriculum Architecture Consolidation:** Optimized the drafted 21-section blueprint into a highly focused **12-Section (s00–s11)** model to reduce cognitive overhead and improve the learning progression.
+- **Documentation Alignment:** Achieved 100% alignment across all core documentation (`ARCHITECTURE.md`, `ROADMAP.md`, `CODE-STANDARDS.md`, `COMMON-MISTAKES.md`) and satellite documentation (`README.md`, `LEARNING-PATH.md`, `CURRICULUM-BLUEPRINT.md`, `TESTING-STANDARDS.md`, `CONTRIBUTING.md`, `MAINTAINER-CHECKLIST.md`, `docs/PROGRESSION.md`).
+- **Teaching Contract:** Formalized the `README`-first, `main.go`-second pedagogical contract. Every lesson now strictly requires Mission, Prerequisites, Mental Model, Visual Model, Machine View, Try It, In Production, and Thinking Questions.
+- **AI Automation Skills:** Rewrote internal AI skills (`github-workflow` and `migration`) to strictly enforce the v2.1 12-section GitHub workflow and template requirements.
+- **Next Up Navigation:** Upgraded terminal footers to output natively clickable paths (e.g., `Run: go run ./01-getting-started/2-hello-world`) for seamless navigation in VS Code and modern terminals.
+
+### Removed
+
+- **Redundant Scripts:** Cleaned out the `scripts/` directory by deleting duplicated Python, PowerShell, and Shell issue automation scripts, centralizing all GitHub maintainer automation exclusively within `maintainer-scripts/`.
+
+---
+
 ## [2026-04-17] - V2 Documentation Polish & Blueprint Eradication
 
 ### Added

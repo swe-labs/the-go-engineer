@@ -1,19 +1,23 @@
 # The Go Engineer Learning Path
 
-This guide explains how to move through the v2 curriculum.
+> This guide explains how to move through the v2.1 curriculum.
+> The source of truth for all curriculum content is [ARCHITECTURE.md](./ARCHITECTURE.md).
 
-The repo uses a **5-Phase, 21-Section architecture**.
-The central source of truth for all curriculum content is [ARCHITECTURE.md](./ARCHITECTURE.md).
+---
 
 ## The 5 Phases
 
-1. **Phase 1: Syntax Foundation** (Sections 01-06)
-2. **Phase 2: Engineering Foundation** (Sections 07-11)
-3. **Phase 3: Production Engineering** (Sections 12-15)
-4. **Phase 4: Systems Engineering** (Sections 16-19)
-5. **Phase 5: Flagship Project** (Sections 20-21)
+| Phase | Name                  | Sections | Progress  |
+| ----- | --------------------- | -------- | --------- |
+| 0     | Machine Foundation    | s00      | 0% → 5%   |
+| 1     | Language Foundation   | s01–s04  | 5% → 52%  |
+| 2     | Engineering Core      | s05–s08  | 52% → 87% |
+| 3     | Systems Engineering   | s09–s10  | 87% → 96% |
+| 4     | Flagship Project      | s11      | 96% → 100%|
 
-## Three Ways To Move
+---
+
+## Three Ways to Move
 
 ### Full Path
 
@@ -25,7 +29,7 @@ Best for:
 
 Rule:
 
-- follow the 21 sections in order
+- follow the 12 sections in order (s00 → s11)
 - complete the required milestone or proof surface in each section
 - do not skip repetition by default
 
@@ -44,10 +48,11 @@ Rule:
 
 Suggested route:
 
-1. `01-foundations` as a short sanity pass
-2. Skim through Phase 1.
-3. Slow down at Phase 2 (Engineering Foundation) where Go's explicit error handling and interface design become critical.
-4. Continue through the remaining phases in order.
+1. `00-how-computers-work` — skim if you already understand processes, memory, and the terminal
+2. `01-getting-started` as a short sanity pass
+3. Skim Phase 1 (s02–s04) for Go-specific patterns
+4. Slow down at Phase 2 (s05–s08) where Go's error handling, concurrency, and testing discipline become critical
+5. Continue through Phase 3–4 in order
 
 ### Targeted Path
 
@@ -63,30 +68,45 @@ Rule:
 - check its prerequisites honestly
 - complete that section's proof surface before claiming mastery
 
+---
+
 ## Recommended Entry Points
 
-| Goal | Start Here | Before You Start |
-| --- | --- | --- |
-| First Go setup and execution | **Phase 1: 01 Foundations** | None |
-| Strengthen fundamentals and interfaces | **Phase 2: Engineering Foundation** | Skim Phase 1 if tooling or generics still feel shaky |
-| Improve testing, profiling, and concurrency | **Phase 3: Production Engineering** | Be solid on structs, interfaces, and explicit error handling |
-| Build backend APIs, gRPC, and deployment | **Phase 4: Systems Engineering** | Be comfortable with Context, HTTP fundamentals, and Concurrency |
-| Build a portfolio-level integrated system | **Phase 5: Flagship Project** | Have full-stack Go depth across all previous phases |
+| Goal                                          | Start Here                       | Before You Start                                                 |
+| --------------------------------------------- | -------------------------------- | ---------------------------------------------------------------- |
+| First Go setup and execution                  | s01: Getting Started             | None                                                             |
+| Understand how computers work                 | s00: How Computers Work          | None                                                             |
+| Strengthen fundamentals and type design       | s04: Types & Design              | Complete or skim s01–s03                                         |
+| Improve testing, profiling, and concurrency   | s07: Concurrency / s08: Quality  | Be solid on functions, errors, and interfaces (s03–s04)          |
+| Build backend APIs, gRPC, and databases       | s06: Backend, APIs & Databases   | Be comfortable with I/O (s05) and error handling (s03)           |
+| Architecture and security engineering         | s09: Architecture & Security     | Complete Phase 2 (s05–s08)                                       |
+| Deploy and operate Go services                | s10: Production Operations       | Complete s06 (HTTP) and s07 (concurrency)                        |
+| Build a portfolio-level integrated system     | s11: GoScale Flagship            | Complete all capstone exercises in s00–s10                        |
+
+---
 
 ## Validation Floors
 
 Fast paths are allowed. Proof is not optional.
 
-- `Full Path`: complete every required milestone and section proof surface
-- `Bridge Path`: complete the important section proof surfaces even if you skim repetition
-- `Targeted Path`: complete the chosen section's proof surface before claiming mastery
+- **Full Path**: complete every required milestone and section proof surface
+- **Bridge Path**: complete the important section proof surfaces even if you skim repetition
+- **Targeted Path**: complete the chosen section's proof surface before claiming mastery
+
+---
 
 ## Companion Docs
 
-- [README.md](./README.md)
-- [ARCHITECTURE.md](./ARCHITECTURE.md)
-- [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md)
-- [COMMON-MISTAKES.md](./COMMON-MISTAKES.md)
+| Document                                              | Purpose                                |
+| ----------------------------------------------------- | -------------------------------------- |
+| [README.md](./README.md)                              | Project overview and quick start       |
+| [ARCHITECTURE.md](./ARCHITECTURE.md)                  | Curriculum source of truth (v2.1)      |
+| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md)  | Teaching contract and lesson standards  |
+| [CODE-STANDARDS.md](./CODE-STANDARDS.md)              | Code style and engineering standards   |
+| [COMMON-MISTAKES.md](./COMMON-MISTAKES.md)            | 15 common Go bugs and fixes            |
+| [ROADMAP.md](./ROADMAP.md)                            | What is built and what is planned      |
+
+---
 
 ## Bottom Line
 

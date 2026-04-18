@@ -71,7 +71,7 @@ type Result struct {
 }
 
 var runPathPattern = regexp.MustCompile(`\./[A-Za-z0-9._/\-]+`)
-var nextUpIDPattern = regexp.MustCompile(`NEXT UP:\s*([A-Z]{2,3}\.\d+)`)
+var nextUpIDPattern = regexp.MustCompile(`NEXT UP:\s*([A-Z]{2,6}\.\d+)`)
 var markdownLinkPattern = regexp.MustCompile(`\[[^\]]+\]\(([^)]+)\)`)
 
 var (
