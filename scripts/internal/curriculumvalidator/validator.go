@@ -146,6 +146,7 @@ func isPlaceholderPath(path string) bool {
 		"./path/to/",
 		"./my-folder",
 		"./my-messy-folder",
+		"./00-how-computers-work/...",
 	}
 
 	for _, placeholder := range placeholders {
