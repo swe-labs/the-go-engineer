@@ -1,53 +1,51 @@
-# HC.1
+# HC.1 What Is a Program?
 
 ## Mission
-
-Understand what a computer program actually is at a fundamental level.
+Understand that a program is a list of instructions for a machine to follow, and the CPU runs a continuous loop to execute them.
 
 ## Prerequisites
-
 - None
 
 ## Mental Model
-
-A computer only understands electricity: on or off (1s and 0s). A program is simply a structured sequence of these instructions stored on your hard drive. When you run a program, the Operating System loads these instructions into memory and the CPU executes them one by one.
-
-At the end of the day, a program is just data that tells the CPU what to do.
+Imagine a cook reading a recipe card. The recipe is the program, the ingredients are the data, and the cook is the CPU following one instruction at a time.
 
 ## Visual Model
-
 ```mermaid
-flowchart LR
-    A[Hard Drive\n(Program File)] -->|Loaded by OS| B[RAM\n(Memory)]
-    B -->|Fetched by| C[CPU\n(Processor)]
-    C -->|Executes Instructions| D[Action\n(Prints to Screen)]
+graph TD
+   A[Memory] -->|Reads Instruction| B[CPU]
+   B -->|Executes Operation| B
+   B -->|Reads/Writes Data| C[Memory]
 ```
 
 ## Machine View
+Computers only understand binary (1s and 0s). The CPU uses the fetch-decode-execute cycle billions of times per second. It fetches an instruction from memory, decodes it into basic operations (Move, Add, Compare, Jump, Read, Write), and executes it. 
 
-When we write code in Go (which is human-readable), the machine cannot run it directly. It must be translated into raw machine code (1s and 0s) that your specific CPU architecture understands. 
-
-Even this simple text file you are reading is stored as binary data under the hood.
+Your program and your data are both stored in the same memory (Von Neumann architecture).
 
 ## Run Instructions
-
-```bash
-go run ./00-how-computers-work/1-what-is-a-program
-```
+*(This is a conceptual lesson, no code to run)*
 
 ## Code Walkthrough
+```go
+// You write:
+fmt.Println("Hello")
 
-In the code below, we define a small set of human-readable instructions. 
-1. We declare we are making an executable program (`package main`).
-2. We define the starting point (`func main()`).
-3. We instruct the computer to output text to the screen (`println`).
+// CPU executes binary equivalent of:
+// 1. Move pointer to string
+// 2. Call print function
+// 3. Return to next instruction
+```
 
 ## Try It
+1. Think about what happens when your computer runs out of memory. Based on the machine view, why does the entire system slow down or crash?
 
-1. Change the text inside the quotes to your name.
-2. Run the program again.
-3. Observe how the CPU blindly followed your new instruction.
+## ⚠️ In Production
+Because programs are stored in memory just like data, security vulnerabilities often occur when a program is tricked into interpreting malicious data as instructions (e.g., buffer overflows).
+
+## 🤔 Thinking Questions
+1. If the CPU can only do six basic operations, why do some programs run slowly?
+2. You've heard that computers "process" things. Based on what you now know, what is processing actually? What's physically happening?
+3. If your program is stored in memory like data, what happens if you run the same program twice at the same time?
 
 ## Next Step
-
-Now that you know a program is just a set of instructions, how do we get from human-readable text to machine code? Move to [HC.2 Code to Execution](../2-code-to-execution/).
+[HC.2 How Code Becomes Execution](../2-compilation-journey)
