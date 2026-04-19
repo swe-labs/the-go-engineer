@@ -52,7 +52,7 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: LB.1 variables")
+	fmt.Println("NEXT UP: GT.5 go-tools")
 	fmt.Println("Current: GT.4 (dev-environment)")
 	fmt.Println("---------------------------------------------------")
 }
