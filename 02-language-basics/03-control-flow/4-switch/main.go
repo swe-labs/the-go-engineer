@@ -31,7 +31,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CF.5 pricing-checkout")
+	fmt.Println("NEXT UP: CF.5 defer-basics")
 	fmt.Println("Current: CF.4 (switch)")
 	fmt.Println("---------------------------------------------------")
 }

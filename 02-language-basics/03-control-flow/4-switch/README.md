@@ -73,4 +73,4 @@ The default case handles the fallback path when no explicit case matches.
 
 ## Next Step
 
-Continue to `CF.5` pricing checkout.
+Continue to `CF.5` defer-basics.

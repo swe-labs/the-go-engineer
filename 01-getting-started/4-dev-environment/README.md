@@ -56,9 +56,9 @@ This second slice defines the development tools the lesson wants to probe for.
 
 This asks the operating system whether a tool exists on the current `PATH`.
 
-### `fmt.Println("NEXT UP: LB.1 variables")`
+### `fmt.Println("NEXT UP: GT.5 go-tools")`
 
-The footer marks the transition from setup into language fundamentals.
+The footer marks the transition to the essential Go toolchain.
 
 ## Try It
 
@@ -78,4 +78,4 @@ Reliable teams do not guess at their command loop. They use the same format-buil
 
 ## Next Step
 
-Continue to `LB.1` variables.
+Continue to `GT.5` go-tools.

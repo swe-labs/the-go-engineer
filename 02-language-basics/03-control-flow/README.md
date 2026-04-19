@@ -11,6 +11,7 @@ By the end of this section, a learner should be able to:
 - repeat work with `for`
 - choose between multiple cases with `switch`
 - stop or skip loop work with `break` and `continue`
+- schedule cleanup work with `defer`
 - combine those ideas into one small runnable milestone
 
 ## Why This Section Exists Now
@@ -60,7 +61,9 @@ In the current repo architecture, this section lives at `02-language-basics/03-c
 | `CF.2` | Lesson | [for basics](./2-for-basics) | Teaches Go's only loop keyword and the idea of repeated work. | `CF.1` |
 | `CF.3` | Lesson | [break / continue](./3-break-continue) | Teaches early exit and selective skipping inside loops. | `CF.2` |
 | `CF.4` | Lesson | [switch](./4-switch) | Teaches readable multi-branch decision logic after the learner already understands ordinary branching. | `CF.1`, `CF.2`, `CF.3` |
-| `CF.5` | Exercise | [pricing checkout](./5-pricing-checkout) | Combines branching, looping, switching, and light list previews in one runnable milestone. | `CF.1`, `CF.2`, `CF.3`, `CF.4` |
+| `CF.5` | Lesson | [defer basics](./5-defer-basics) | Introduces scheduling cleanup work to ensure resource safety. | `CF.4` |
+| `CF.6` | Lesson | [defer use cases](./6-defer-use-cases) | Shows real-world patterns for defer (file closing, mutex unlocking). | `CF.5` |
+| `CF.7` | Exercise | [pricing checkout](./7-pricing-checkout) | Combines branching, looping, switching, and defer in one runnable milestone. | `CF.1` through `CF.6` |
 
 ## Suggested Learning Flow
 
@@ -72,7 +75,7 @@ In the current repo architecture, this section lives at `02-language-basics/03-c
 
 ## Section Milestone
 
-`CF.5` is the live milestone for this section.
+`CF.7` is the live milestone for this section.
 
 You are ready for the next section when you can explain:
 
@@ -80,9 +83,10 @@ You are ready for the next section when you can explain:
 - why Go only needs `for`
 - when `break` stops the whole loop
 - when `continue` skips only the current iteration
+- why `defer` ensures cleanup regardless of return path
 - why the small `range` example stays a preview instead of turning into a data-structures lesson
 
 ## Next Step
 
-After `CF.5`, continue to `04-data-structures`.
+After `CF.7`, continue to `04-data-structures`.
 That is where list and lookup structures stop being preview tools and become the real topic.

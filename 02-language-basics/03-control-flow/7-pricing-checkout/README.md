@@ -1,4 +1,4 @@
-# CF.5 Pricing Checkout
+# CF.7 Pricing Checkout
 
 ## Mission
 
@@ -10,6 +10,8 @@ Build a small checkout flow that combines branching, loops, `switch`, and `conti
 - `CF.2` for basics
 - `CF.3` break / continue
 - `CF.4` switch
+- `CF.5` defer basics
+- `CF.6` defer use cases
 
 ## Mental Model
 
@@ -40,8 +42,8 @@ The program processes one cart item at a time. Each iteration chooses a base pri
 ## Run Instructions
 
 ```bash
-go run ./02-language-basics/03-control-flow/5-pricing-checkout
-go run ./02-language-basics/03-control-flow/5-pricing-checkout/_starter
+go run ./02-language-basics/03-control-flow/7-pricing-checkout
+go run ./02-language-basics/03-control-flow/7-pricing-checkout/_starter
 ```
 
 ## Solution Walkthrough
@@ -79,8 +81,8 @@ This is the running-total pattern that accumulates the final result.
 ## Verification Surface
 
 ```bash
-go run ./02-language-basics/03-control-flow/5-pricing-checkout
-go run ./02-language-basics/03-control-flow/5-pricing-checkout/_starter
+go run ./02-language-basics/03-control-flow/7-pricing-checkout
+go run ./02-language-basics/03-control-flow/7-pricing-checkout/_starter
 ```
 
 The finished program should process the whole cart, price known items correctly, skip unknown items, and print a final subtotal.

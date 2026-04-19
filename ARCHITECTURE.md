@@ -117,11 +117,11 @@ Teaches the entire Go syntax surface — values, flow, and data — as one zero-
 
 #### Values (LB)
 
-| ID   | Lesson             | Status |
+| ID   | Lesson             | Status | Note       |
 | ---- | ------------------ | ------ | ---------- |
-| LB.1 | Variables & types  | exists |
-| LB.2 | Constants          | exists |
-| LB.3 | Enums with iota    | exists |
+| LB.1 | Variables & types  | exists |            |
+| LB.2 | Constants          | exists |            |
+| LB.3 | Enums with iota    | exists |            |
 | LB.4 | Application Logger | exists | ✓ Exercise |
 
 #### Control Flow (CF)
@@ -134,19 +134,19 @@ Teaches the entire Go syntax surface — values, flow, and data — as one zero-
 | CF.4 | Switch                    | exists  | —                                          |
 | CF.5 | Defer — mechanics & order | **new** | Must precede any lesson using `defer`      |
 | CF.6 | Defer in real use cases   | **new** | File close, mutex unlock, cleanup patterns |
-| CF.7 | Pricing Checkout          | exists  | ✓ Exercise (formerly CF.5)                 |
+| CF.7 | Pricing Checkout          | exists  | ✓ Exercise                                 |
 
 **Critical ordering note:** `defer rows.Close()` appears in DB.3 and `defer file.Close()` appears in FS.1. CF.5 must be completed before a learner reaches either lesson. Until CF.5 is created, FS.1 and DB.3 must carry a cross-reference note: _(Defer is taught in Lesson CF.5. For now, read `defer` as "run this line when the current function returns, no matter what.")_
 
 #### Data Structures (DS)
 
-| ID   | Lesson                   | Status |
+| ID   | Lesson                   | Status | Note       |
 | ---- | ------------------------ | ------ | ---------- |
-| DS.1 | Arrays                   | exists |
-| DS.2 | Slices                   | exists |
-| DS.3 | Maps                     | exists |
-| DS.4 | Pointers                 | exists |
-| DS.5 | Slice sharing & capacity | exists |
+| DS.1 | Arrays                   | exists |            |
+| DS.2 | Slices                   | exists |            |
+| DS.3 | Maps                     | exists |            |
+| DS.4 | Pointers                 | exists |            |
+| DS.5 | Slice sharing & capacity | exists |            |
 | DS.6 | Contact Directory        | exists | ✓ Exercise |
 
 ---
@@ -187,43 +187,43 @@ Teaches Go's type system, composition model, and text handling. Three subsystems
 
 #### Types & Interfaces (TI)
 
-| ID    | Lesson                      | Status |
+| ID    | Lesson                      | Status | Note       |
 | ----- | --------------------------- | ------ | ---------- |
-| TI.1  | Structs                     | exists |
-| TI.2  | Methods                     | exists |
-| TI.3  | Interfaces                  | exists |
-| TI.4  | Interface embedding         | exists |
-| TI.5  | Stringer                    | exists |
-| TI.6  | Type switch                 | exists |
-| TI.7  | Receiver sets               | exists |
-| TI.8  | Custom error types          | exists |
-| TI.9  | Generics introduction       | exists |
+| TI.1  | Structs                     | exists |            |
+| TI.2  | Methods                     | exists |            |
+| TI.3  | Interfaces                  | exists |            |
+| TI.4  | Interface embedding         | exists |            |
+| TI.5  | Stringer                    | exists |            |
+| TI.6  | Type switch                 | exists |            |
+| TI.7  | Receiver sets               | exists |            |
+| TI.8  | Custom error types          | exists |            |
+| TI.9  | Generics introduction       | exists |            |
 | TI.10 | Payroll Processor           | exists | ✓ Exercise |
-| TI.11 | Empty interface & `any`     | exists |
-| TI.12 | Type assertions             | exists |
-| TI.13 | Nil interfaces              | exists |
-| TI.14 | Functional options          | exists |
-| TI.15 | Method values               | exists |
-| TI.16 | Complex generic constraints | exists |
-| TI.17 | Generic data structures     | exists |
+| TI.11 | Empty interface & `any`     | exists |            |
+| TI.12 | Type assertions             | exists |            |
+| TI.13 | Nil interfaces              | exists |            |
+| TI.14 | Functional options          | exists |            |
+| TI.15 | Method values               | exists |            |
+| TI.16 | Complex generic constraints | exists |            |
+| TI.17 | Generic data structures     | exists |            |
 
 #### Composition (CO)
 
-| ID   | Lesson       | Status |
+| ID   | Lesson       | Status | Note       |
 | ---- | ------------ | ------ | ---------- |
-| CO.1 | Composition  | exists |
-| CO.2 | Embedding    | exists |
+| CO.1 | Composition  | exists |            |
+| CO.2 | Embedding    | exists |            |
 | CO.3 | Bank Account | exists | ✓ Exercise |
 
 #### Strings & Text (ST)
 
-| ID   | Lesson          | Status |
+| ID   | Lesson          | Status | Note       |
 | ---- | --------------- | ------ | ---------- |
-| ST.1 | Strings         | exists |
-| ST.2 | Formatting      | exists |
-| ST.3 | Unicode & runes | exists |
-| ST.4 | Regex           | exists |
-| ST.5 | Text templates  | exists |
+| ST.1 | Strings         | exists |            |
+| ST.2 | Formatting      | exists |            |
+| ST.3 | Unicode & runes | exists |            |
+| ST.4 | Regex           | exists |            |
+| ST.5 | Text templates  | exists |            |
 | ST.6 | Config Parser   | exists | ✓ Exercise |
 
 **Note on section size:** Section 04 contains 26 lessons across 3 subsystems. This is appropriate — the type system is the most important design tool in Go and must be thorough. The subsystem labels (TI/CO/ST) provide internal organisation. A learner's progress path flows: TI → CO → ST, then into Phase 2.
@@ -241,45 +241,45 @@ Teaches how Go programs are organised, how they interact with disk and streams, 
 
 #### Modules & Packages (MP)
 
-| ID   | Lesson                | Status |
+| ID   | Lesson                | Status | Note       |
 | ---- | --------------------- | ------ | ---------- |
-| MP.1 | Module basics         | exists |
-| MP.2 | Managing dependencies | exists |
+| MP.1 | Module basics         | exists |            |
+| MP.2 | Managing dependencies | exists |            |
 | MP.3 | Versioning Workshop   | exists | ✓ Exercise |
-| MP.4 | Build tags            | exists |
+| MP.4 | Build tags            | exists |            |
 
 #### CLI Tools (CL)
 
-| ID   | Lesson         | Status |
+| ID   | Lesson         | Status | Note       |
 | ---- | -------------- | ------ | ---------- |
-| CL.1 | Args           | exists |
-| CL.2 | Flags          | exists |
-| CL.3 | Subcommands    | exists |
+| CL.1 | Args           | exists |            |
+| CL.2 | Flags          | exists |            |
+| CL.3 | Subcommands    | exists |            |
 | CL.4 | File Organizer | exists | ✓ Exercise |
 
 #### Encoding (EN)
 
-| ID   | Lesson             | Status |
+| ID   | Lesson             | Status | Note       |
 | ---- | ------------------ | ------ | ---------- |
-| EN.1 | JSON marshalling   | exists |
-| EN.2 | JSON unmarshalling | exists |
-| EN.3 | JSON encoder       | exists |
-| EN.4 | JSON decoder       | exists |
-| EN.5 | Base64             | exists |
+| EN.1 | JSON marshalling   | exists |            |
+| EN.2 | JSON unmarshalling | exists |            |
+| EN.3 | JSON encoder       | exists |            |
+| EN.4 | JSON decoder       | exists |            |
+| EN.5 | Base64             | exists |            |
 | EN.6 | Config Parser      | exists | ✓ Exercise |
 
 #### Filesystem (FS)
 
-| ID   | Lesson             | Status |
+| ID   | Lesson             | Status | Note       |
 | ---- | ------------------ | ------ | ---------- |
-| FS.1 | Files              | exists |
-| FS.2 | Paths              | exists |
-| FS.3 | Directories        | exists |
-| FS.4 | Temp files         | exists |
-| FS.5 | Embed              | exists |
-| FS.6 | I/O patterns       | exists |
+| FS.1 | Files              | exists |            |
+| FS.2 | Paths              | exists |            |
+| FS.3 | Directories        | exists |            |
+| FS.4 | Temp files         | exists |            |
+| FS.5 | Embed              | exists |            |
+| FS.6 | I/O patterns       | exists |            |
 | FS.7 | Log Search         | exists | ✓ Exercise |
-| FS.8 | fs.FS testing seam | exists |
+| FS.8 | fs.FS testing seam | exists |            |
 
 **Cross-reference note for FS.1:** Uses `defer file.Close()`. Until CF.5–CF.6 exist, FS.1 must include: _(We use `defer` here. Defer ensures `file.Close()` runs when the function returns, even if an error occurs earlier. Defer is covered in full in Lesson CF.5.)_
 
@@ -330,16 +330,16 @@ Teaches how Go programs are organised, how they interact with disk and streams, 
 
 #### Databases (DB)
 
-| ID   | Lesson                     | Status  |
+| ID   | Lesson                     | Status  | Note       |
 | ---- | -------------------------- | ------- | ---------- |
-| DB.1 | Connecting to SQLite       | exists  |
-| DB.2 | Executing queries (INSERT) | exists  |
-| DB.3 | Select queries             | exists  |
-| DB.4 | Prepared statements        | exists  |
-| DB.5 | Transactions               | exists  |
+| DB.1 | Connecting to SQLite       | exists  |            |
+| DB.2 | Executing queries (INSERT) | exists  |            |
+| DB.3 | Select queries             | exists  |            |
+| DB.4 | Prepared statements        | exists  |            |
+| DB.5 | Transactions               | exists  |            |
 | DB.6 | Repository Pattern         | exists  | ✓ Exercise |
-| DB.7 | N+1 query detection        | **new** |
-| DB.8 | Query timeouts via context | **new** |
+| DB.7 | N+1 query detection        | **new** |            |
+| DB.8 | Query timeouts via context | **new** |            |
 
 **Cross-reference note for DB.3:** _(This lesson uses `defer rows.Close()`. Defer is taught in CF.5. If you haven't completed CF.5 yet, read `defer` as "run this line when the function returns, regardless of errors.")_
 **Cross-reference note for DB.8:** _(Uses `context.WithTimeout`. Context is covered fully in CT.1–CT.5 in Section 07.)_
@@ -355,14 +355,14 @@ Teaches Go's concurrency model completely — goroutines, channels, synchronisat
 
 #### Goroutines & Channels (GC)
 
-| ID   | Lesson                | Status |
+| ID   | Lesson                | Status | Note       |
 | ---- | --------------------- | ------ | ---------- |
-| GC.1 | Goroutines            | exists |
-| GC.2 | WaitGroups            | exists |
-| GC.3 | Channels              | exists |
-| GC.4 | Buffered channels     | exists |
-| GC.5 | Closing channels      | exists |
-| GC.6 | Pipeline project      | exists |
+| GC.1 | Goroutines            | exists |            |
+| GC.2 | WaitGroups            | exists |            |
+| GC.3 | Channels              | exists |            |
+| GC.4 | Buffered channels     | exists |            |
+| GC.5 | Closing channels      | exists |            |
+| GC.6 | Pipeline project      | exists |            |
 | GC.7 | Concurrent Downloader | exists | ✓ Exercise |
 
 **Cross-reference note for GC.1:** _(Goroutines use closures to capture variables. The closure capture bug covered in COMMON-MISTAKES #1 is explained in Lesson FE.9.)_
@@ -382,32 +382,32 @@ Teaches Go's concurrency model completely — goroutines, channels, synchronisat
 
 #### Context & Cancellation (CT)
 
-| ID   | Lesson                     | Status |
+| ID   | Lesson                     | Status | Note       |
 | ---- | -------------------------- | ------ | ---------- |
-| CT.1 | Background & TODO          | exists |
-| CT.2 | WithCancel                 | exists |
-| CT.3 | WithTimeout & WithDeadline | exists |
-| CT.4 | WithValue                  | exists |
+| CT.1 | Background & TODO          | exists |            |
+| CT.2 | WithCancel                 | exists |            |
+| CT.3 | WithTimeout & WithDeadline | exists |            |
+| CT.4 | WithValue                  | exists |            |
 | CT.5 | Timeout-Aware API Client   | exists | ✓ Exercise |
 
 #### Time & Scheduling (TM)
 
-| ID   | Lesson           | Status |
+| ID   | Lesson           | Status | Note       |
 | ---- | ---------------- | ------ | ---------- |
-| TM.1 | Time basics      | exists |
-| TM.2 | Time formatting  | exists |
-| TM.3 | Timers & tickers | exists |
+| TM.1 | Time basics      | exists |            |
+| TM.2 | Time formatting  | exists |            |
+| TM.3 | Timers & tickers | exists |            |
 | TM.7 | Console Reminder | exists | ✓ Exercise |
 
 **Note on TM placement:** Time belongs in Section 07 (not Section 05) because timers communicate via channels and tickers require goroutine lifecycle management. These are concurrency tools.
 
 #### Advanced Concurrency Patterns (CP)
 
-| ID   | Lesson                | Status |
+| ID   | Lesson                | Status | Note       |
 | ---- | --------------------- | ------ | ---------- |
-| CP.1 | errgroup basics       | exists |
-| CP.2 | errgroup with context | exists |
-| CP.3 | sync.Pool             | exists |
+| CP.1 | errgroup basics       | exists |            |
+| CP.2 | errgroup with context | exists |            |
+| CP.3 | sync.Pool             | exists |            |
 | CP.4 | Bounded Pipeline      | exists | ✓ Exercise |
 | CP.5 | URL Health Checker    | exists | ✓ Exercise |
 
@@ -511,20 +511,20 @@ Teaches everything needed to deploy, observe, and operate a Go service in produc
 
 #### Structured Logging (SL)
 
-| ID   | Lesson               | Status |
+| ID   | Lesson               | Status | Note       |
 | ---- | -------------------- | ------ | ---------- |
-| SL.1 | slog basics          | exists |
-| SL.2 | Context-keyed logger | exists |
-| SL.3 | Custom slog handler  | exists |
-| SL.4 | zerolog comparison   | exists |
+| SL.1 | slog basics          | exists |            |
+| SL.2 | Context-keyed logger | exists |            |
+| SL.3 | Custom slog handler  | exists |            |
+| SL.4 | zerolog comparison   | exists |            |
 | SL.5 | PII Redactor         | exists | ✓ Exercise |
 
 #### Graceful Shutdown (GS)
 
-| ID   | Lesson               | Status |
+| ID   | Lesson               | Status | Note       |
 | ---- | -------------------- | ------ | ---------- |
-| GS.1 | signal.NotifyContext | exists |
-| GS.2 | HTTP graceful drain  | exists |
+| GS.1 | signal.NotifyContext | exists |            |
+| GS.2 | HTTP graceful drain  | exists |            |
 | GS.3 | Shutdown Capstone    | exists | ✓ Capstone |
 
 #### Configuration (CFG) — ENTIRELY NEW
@@ -710,9 +710,9 @@ These are blocking issues that must be resolved before the curriculum is coheren
 | Priority | Fix                                                          | File(s) to change                | Status |
 | -------- | ------------------------------------------------------------ | -------------------------------- | ------ |
 | 1        | Backfill foundations README contracts across `s00`–`s04`     | lesson README files + validator  | ✅     |
-| 2        | Add GT.5, GT.6 to curriculum.v2.json                         | `curriculum.v2.json`             | 📋     |
-| 3        | Create CF.5, CF.6 lessons; add to curriculum.v2.json         | new files + `curriculum.v2.json` | 📋     |
-| 4        | Add cross-reference note to FS.1 and DB.3 for `defer`        | lesson README files              | 📋     |
+| 2        | Add GT.5, GT.6 to curriculum.v2.json                         | `curriculum.v2.json`             | ✅     |
+| 3        | Create CF.5, CF.6 lessons; add to curriculum.v2.json         | new files + `curriculum.v2.json` | ✅     |
+| 4        | Add cross-reference note to FS.1 and DB.3 for `defer`        | lesson README files              | ✅     |
 | 5        | Create HS.1–HS.10; add to curriculum.v2.json                 | new files + `curriculum.v2.json` | 📋     |
 | 6        | Create API.1–API.9; add to curriculum.v2.json                | new files + `curriculum.v2.json` | 📋     |
 | 7        | Create SY.1–SY.6; add to curriculum.v2.json                  | new files + `curriculum.v2.json` | 📋     |
