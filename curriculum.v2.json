@@ -51,7 +51,7 @@
       ],
       "outputs": [
         "LB.4",
-        "CF.5",
+        "CF.7",
         "DS.6"
       ],
       "prerequisites": [
@@ -492,22 +492,64 @@
     {
       "id": "CF.5",
       "section_id": "s02",
+      "slug": "defer-basics",
+      "title": "Defer — mechanics & order",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "verification_mode": "run",
+      "path": "02-language-basics/03-control-flow/5-defer-basics",
+      "prerequisites": [
+        "CF.4"
+      ],
+      "run_command": "go run ./02-language-basics/03-control-flow/5-defer-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CF.6"
+      ]
+    },
+    {
+      "id": "CF.6",
+      "section_id": "s02",
+      "slug": "defer-use-cases",
+      "title": "Defer in real use cases",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "verification_mode": "run",
+      "path": "02-language-basics/03-control-flow/6-defer-use-cases",
+      "prerequisites": [
+        "CF.5"
+      ],
+      "run_command": "go run ./02-language-basics/03-control-flow/6-defer-use-cases",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CF.7"
+      ]
+    },
+    {
+      "id": "CF.7",
+      "section_id": "s02",
       "slug": "pricing-checkout",
       "title": "Pricing Checkout",
       "type": "exercise",
       "subtype": "",
       "level": "core",
       "verification_mode": "run",
-      "path": "02-language-basics/03-control-flow/5-pricing-checkout",
+      "path": "02-language-basics/03-control-flow/7-pricing-checkout",
       "prerequisites": [
         "CF.1",
         "CF.2",
         "CF.3",
-        "CF.4"
+        "CF.4",
+        "CF.5",
+        "CF.6"
       ],
-      "run_command": "go run ./02-language-basics/03-control-flow/5-pricing-checkout",
+      "run_command": "go run ./02-language-basics/03-control-flow/7-pricing-checkout",
       "test_command": "",
-      "starter_path": "02-language-basics/03-control-flow/5-pricing-checkout/_starter",
+      "starter_path": "02-language-basics/03-control-flow/7-pricing-checkout/_starter",
       "next_items": []
     },
     {

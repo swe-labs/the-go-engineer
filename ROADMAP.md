@@ -60,8 +60,8 @@ The 12-section v2.1 architecture is approved. Active structural migration is und
 
 | ID  | Section            | Status | Notes                                                                                   |
 | --- | ------------------ | ------ | --------------------------------------------------------------------------------------- |
-| s01 | Getting Started    | 🚧     | GT.1–GT.4 exist. GT.5–GT.6 not in JSON.                                                 |
-| s02 | Language Basics    | 🚧     | LB, DS exist. CF missing CF.5–CF.6 (defer).                                             |
+| s01 | Getting Started    | ✅     | GT.1–GT.6 exist and are registered in JSON.                                             |
+| s02 | Language Basics    | 🚧     | LB, DS, CF exist. CF.1–CF.7 are registered.                                             |
 | s03 | Functions & Errors | 🚧     | FE.1–FE.7 exist. FE.8–FE.10 not created.                                                |
 | s04 | Types & Design     | ✅     | TI, CO, and ST are registered, and validation now covers their alternate path families. |
 
@@ -73,15 +73,16 @@ The 12-section v2.1 architecture is approved. Active structural migration is und
 | GT.2 | Hello World               | ✅                              |
 | GT.3 | How Go works              | ✅                              |
 | GT.4 | Development environment   | ✅                              |
-| GT.5 | go fmt, go vet, go doc    | 🚧 content written, not in JSON |
-| GT.6 | Reading compiler errors   | 🚧 content written, not in JSON |
+| GT.5 | go fmt, go vet, go doc    | ✅                              |
+| GT.6 | Reading compiler errors   | ✅                              |
 
 ### Lessons (s02) — new items only
 
 | ID   | Lesson                    | Status                               |
 | ---- | ------------------------- | ------------------------------------ |
-| CF.5 | Defer — mechanics & order | ❌ not created; blocks DB.3 and FS.1 |
-| CF.6 | Defer in real use cases   | ❌ not created                       |
+| CF.5 | Defer — mechanics & order | ✅                                    |
+| CF.6 | Defer in real use cases   | ✅                                    |
+| CF.7 | Pricing Checkout          | ✅                                    |
 
 ### Lessons (s03) — new items only
 

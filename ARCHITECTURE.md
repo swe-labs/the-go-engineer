@@ -134,7 +134,7 @@ Teaches the entire Go syntax surface — values, flow, and data — as one zero-
 | CF.4 | Switch                    | exists  | —                                          |
 | CF.5 | Defer — mechanics & order | **new** | Must precede any lesson using `defer`      |
 | CF.6 | Defer in real use cases   | **new** | File close, mutex unlock, cleanup patterns |
-| CF.7 | Pricing Checkout          | exists  | ✓ Exercise (formerly CF.5)                 |
+| CF.7 | Pricing Checkout          | exists  | ✓ Exercise                                 |
 
 **Critical ordering note:** `defer rows.Close()` appears in DB.3 and `defer file.Close()` appears in FS.1. CF.5 must be completed before a learner reaches either lesson. Until CF.5 is created, FS.1 and DB.3 must carry a cross-reference note: _(Defer is taught in Lesson CF.5. For now, read `defer` as "run this line when the current function returns, no matter what.")_
 
@@ -711,8 +711,8 @@ These are blocking issues that must be resolved before the curriculum is coheren
 | -------- | ------------------------------------------------------------ | -------------------------------- | ------ |
 | 1        | Backfill foundations README contracts across `s00`–`s04`     | lesson README files + validator  | ✅     |
 | 2        | Add GT.5, GT.6 to curriculum.v2.json                         | `curriculum.v2.json`             | ✅     |
-| 3        | Create CF.5, CF.6 lessons; add to curriculum.v2.json         | new files + `curriculum.v2.json` | 📋     |
-| 4        | Add cross-reference note to FS.1 and DB.3 for `defer`        | lesson README files              | 📋     |
+| 3        | Create CF.5, CF.6 lessons; add to curriculum.v2.json         | new files + `curriculum.v2.json` | ✅     |
+| 4        | Add cross-reference note to FS.1 and DB.3 for `defer`        | lesson README files              | ✅     |
 | 5        | Create HS.1–HS.10; add to curriculum.v2.json                 | new files + `curriculum.v2.json` | 📋     |
 | 6        | Create API.1–API.9; add to curriculum.v2.json                | new files + `curriculum.v2.json` | 📋     |
 | 7        | Create SY.1–SY.6; add to curriculum.v2.json                  | new files + `curriculum.v2.json` | 📋     |
