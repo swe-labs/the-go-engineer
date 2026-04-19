@@ -31,7 +31,7 @@
         "GT.1"
       ],
       "outputs": [
-        "GT.4"
+        "GT.6"
       ],
       "prerequisites": [
         "s00"
@@ -706,6 +706,46 @@
         "GT.3"
       ],
       "run_command": "go run ./01-getting-started/4-dev-environment",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "GT.5"
+      ]
+    },
+    {
+      "id": "GT.5",
+      "section_id": "s01",
+      "slug": "go-tools",
+      "title": "go fmt, go vet, go doc",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "01-getting-started/5-go-tools",
+      "prerequisites": [
+        "GT.4"
+      ],
+      "run_command": "go run ./01-getting-started/5-go-tools",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "GT.6"
+      ]
+    },
+    {
+      "id": "GT.6",
+      "section_id": "s01",
+      "slug": "reading-compiler-errors",
+      "title": "Reading compiler errors",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "01-getting-started/6-reading-compiler-errors",
+      "prerequisites": [
+        "GT.5"
+      ],
+      "run_command": "go run ./01-getting-started/6-reading-compiler-errors",
       "test_command": "",
       "starter_path": "",
       "next_items": [
