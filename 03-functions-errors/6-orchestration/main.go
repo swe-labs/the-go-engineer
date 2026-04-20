@@ -83,7 +83,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.7 order-summary")
+	fmt.Println("NEXT UP: FE.8")
 	fmt.Println("Current: FE.6 (orchestration)")
 	fmt.Println("---------------------------------------------------")
 }

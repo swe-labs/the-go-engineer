@@ -1,42 +1,28 @@
-# HC.5 How the OS Manages Processes
+# HC.5 How the OS manages processes
 
 ## Mission
 
-Understand that your Go program runs inside an operating-system process with its own memory view, file descriptors, signals, and scheduling.
+Understand that your Go program runs inside an operating-system process and crosses a syscall boundary whenever it needs OS help.
 
 ## Prerequisites
 
-- `HC.4` terminal confidence
+- HC.4
 
 ## Mental Model
 
-A process is a sandbox the OS gives to a running program.
-It feels like the program has its own machine, even though the OS is sharing real hardware with many other processes.
+A process is the OS sandbox for a running program. Syscalls are the doors that let that sandbox ask for files, network access, clocks, and other external work.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["Operating system"] --> B["Process A"]
-    A --> C["Process B"]
-    B --> D["Virtual memory"]
-    B --> E["Threads / goroutines"]
-    B --> F["File descriptors"]
-    A --> G["Signals and scheduling"]
+    A["How the OS manages processes"] --> B["os.Getpid shows that a Go program is just another tracked process."]
+    B --> C["Syscalls connect process code to the operating system and real resources."]
 ```
 
 ## Machine View
 
-An OS process includes more than just your code:
-
-- virtual memory
-- CPU execution state
-- open file descriptors
-- environment variables
-- identity like PID and parent PID
-
-The OS scheduler decides when a process or thread runs.
-Signals like `SIGINT` and `SIGTERM` let the OS or the terminal communicate with that process asynchronously.
+An OS process owns virtual memory, CPU state, descriptors, and identity like PID. Syscalls are how that process asks the kernel to act on its behalf.
 
 ## Run Instructions
 
@@ -46,27 +32,34 @@ go run ./00-how-computers-work/5-os-processes
 
 ## Code Walkthrough
 
-The lesson prints the current process ID.
-That is enough to make one key truth visible: your Go program is not special to the OS.
-It is just another process the OS launched and tracks.
+### os.Getpid shows that a Go program is just another trac
+
+os.Getpid shows that a Go program is just another tracked process.
+
+### os.Getppid reveals the parent-child relationship betwe
+
+os.Getppid reveals the parent-child relationship between processes.
+
+### Syscalls connect process code to the operating system 
+
+Syscalls connect process code to the operating system and real resources.
 
 ## Try It
 
-1. Run the lesson and note the PID it prints.
-2. In another terminal, find that PID with your platform's process tools.
-3. Press `Ctrl+C` on a long-running foreground program and explain which signal the terminal sent.
+1. Run the lesson and compare the PID with your terminal's process tools.
+2. Open another terminal and inspect the parent process relationship.
+3. Name three operations your program cannot perform without the OS helping.
 
 ## ⚠️ In Production
 
-Your deployed service is a process.
-Graceful shutdown, open-connection limits, and signal handling all depend on understanding that fact.
+Every deployed service is a process. Signals, open files, sockets, and syscall costs all matter once the code leaves your laptop.
 
 ## 🤔 Thinking Questions
 
-1. Why does virtual memory make it harder for one buggy process to corrupt another?
-2. What is the difference between an OS thread and a Go goroutine?
-3. What problems appear if a process never closes file descriptors it no longer needs?
+1. Why does the OS isolate one process from another?
+2. What kinds of work require crossing the syscall boundary?
+3. Why are file descriptors and sockets process resources rather than plain language values?
 
 ## Next Step
 
-Continue to [HC.6 CPU Cache and Performance](../6-cpu-cache-and-performance).
+Continue to `GT.1`.

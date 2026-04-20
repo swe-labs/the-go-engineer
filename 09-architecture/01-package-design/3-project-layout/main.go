@@ -119,7 +119,7 @@ func main() {
 	fmt.Println("  4. Tests live next to the code they verify (user.go -> user_test.go)")
 	fmt.Println("  5. Do not cargo-cult a complex layout for a small project")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: SL.1 slog basics")
+	fmt.Println("🚀 NEXT UP: ARCH.1")
 	fmt.Println("   Current: PD.3 (project layout)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -1,0 +1,26 @@
+package main
+
+import "fmt"
+
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// Section 10: Production Operations - Distributed tracing basics
+//
+// Run: go run ./10-production/05-observability/3-distributed-tracing-basics
+
+func main() {
+	fmt.Println("=== OPS.3 Distributed tracing basics ===")
+	fmt.Println("Learn how trace and span IDs follow a request through multiple boundaries so latency can be explained, not guessed.")
+	fmt.Println()
+	fmt.Println("- Traces show one request across many services.")
+	fmt.Println("- Spans explain where latency was spent inside that request.")
+	fmt.Println("- Context propagation is the transport for trace identity.")
+	fmt.Println()
+	fmt.Println("Tracing is expensive enough that you should know which paths matter and how sampling changes what you see.")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: OPS.4")
+	fmt.Println("Current: OPS.3 (distributed tracing basics)")
+	fmt.Println("---------------------------------------------------")
+}

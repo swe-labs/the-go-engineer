@@ -29,5 +29,5 @@ You should be able to:
 
 ## Next Step
 
-After `GS.3`, continue to [Stage 11: Code Generation](../../../11-flagship/02-code-generation) or back to the
+After `GS.3`, continue to the [Code Generation track](../../06-code-generation) or back to the
 [Graceful Shutdown track](../README.md).

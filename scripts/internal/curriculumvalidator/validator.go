@@ -46,6 +46,7 @@ type V2Item struct {
 	Type             string   `json:"type"`
 	Subtype          string   `json:"subtype"`
 	Level            string   `json:"level"`
+	Status           string   `json:"status"`
 	VerificationMode string   `json:"verification_mode"`
 	Path             string   `json:"path"`
 	Prerequisites    []string `json:"prerequisites"`
@@ -62,12 +63,13 @@ type V2Curriculum struct {
 }
 
 type Result struct {
-	LessonCount    int
-	FilesScanned   int
-	V2SectionCount int
-	V2ItemCount    int
-	HasV2          bool
-	ErrorCount     int
+	LessonCount      int
+	FilesScanned     int
+	V2SectionCount   int
+	V2ItemCount      int
+	PlaceholderCount int
+	HasV2            bool
+	ErrorCount       int
 }
 
 var runPathPattern = regexp.MustCompile(`\./[A-Za-z0-9._/\-]+`)
@@ -122,7 +124,7 @@ func Validate(root string, report func(string)) (Result, error) {
 		return Result{}, err
 	}
 
-	v2SectionCount, v2ItemCount, v2Errors, hasV2, err := validateV2Curriculum(root, report)
+	v2SectionCount, v2ItemCount, v2PlaceholderCount, v2Errors, hasV2, err := validateV2Curriculum(root, report)
 	if err != nil {
 		return Result{}, err
 	}
@@ -131,12 +133,13 @@ func Validate(root string, report func(string)) (Result, error) {
 	templateErrors := validateTemplateDocs(root, report)
 
 	return Result{
-		LessonCount:    lessonCount,
-		FilesScanned:   filesScanned,
-		V2SectionCount: v2SectionCount,
-		V2ItemCount:    v2ItemCount,
-		HasV2:          hasV2,
-		ErrorCount:     pathErrors + runErrors + v2Errors + pressureErrors + templateErrors,
+		LessonCount:      lessonCount,
+		FilesScanned:     filesScanned,
+		V2SectionCount:   v2SectionCount,
+		V2ItemCount:      v2ItemCount,
+		PlaceholderCount: v2PlaceholderCount,
+		HasV2:            hasV2,
+		ErrorCount:       pathErrors + runErrors + v2Errors + pressureErrors + templateErrors,
 	}, nil
 }
 
@@ -156,6 +159,15 @@ func isPlaceholderPath(path string) bool {
 	}
 
 	return false
+}
+
+func isPlaceholderItem(item V2Item) bool {
+	return strings.EqualFold(strings.TrimSpace(item.Status), "placeholder")
+}
+
+func isImplementedItem(item V2Item) bool {
+	status := strings.TrimSpace(item.Status)
+	return status == "" || strings.EqualFold(status, "implemented")
 }
 
 func pathExists(root, path string) bool {
@@ -297,22 +309,23 @@ func validateRunPaths(root string, report func(string)) (int, int, error) {
 	return filesScanned, errorsFound, nil
 }
 
-func validateV2Curriculum(root string, report func(string)) (int, int, int, bool, error) {
+func validateV2Curriculum(root string, report func(string)) (int, int, int, int, bool, error) {
 	if _, err := os.Stat(filepath.Join(root, "curriculum.v2.json")); os.IsNotExist(err) {
-		return 0, 0, 0, false, nil
+		return 0, 0, 0, 0, false, nil
 	}
 
 	data, err := os.ReadFile(filepath.Join(root, "curriculum.v2.json"))
 	if err != nil {
-		return 0, 0, 0, false, fmt.Errorf("Failed to read curriculum.v2.json: %v", err)
+		return 0, 0, 0, 0, false, fmt.Errorf("Failed to read curriculum.v2.json: %v", err)
 	}
 
 	var cur V2Curriculum
 	if err := json.Unmarshal(data, &cur); err != nil {
-		return 0, 0, 0, false, fmt.Errorf("Failed to parse curriculum.v2.json: %v", err)
+		return 0, 0, 0, 0, false, fmt.Errorf("Failed to parse curriculum.v2.json: %v", err)
 	}
 
 	errorsFound := 0
+	placeholderCount := 0
 	sectionIDs := make(map[string]V2Section, len(cur.Sections))
 	itemIDs := make(map[string]V2Item, len(cur.Items))
 
@@ -388,6 +401,26 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 		if !allowedVerificationModes[item.VerificationMode] {
 			report(fmt.Sprintf("Invalid v2 verification mode: %s -> %s", item.ID, item.VerificationMode))
 			errorsFound++
+		}
+
+		if !isImplementedItem(item) && !isPlaceholderItem(item) {
+			report(fmt.Sprintf("Invalid v2 item status: %s -> %s", item.ID, item.Status))
+			errorsFound++
+		}
+
+		// Placeholder items: skip deep validation (path, run commands, etc.)
+		if isPlaceholderItem(item) {
+			if !pathExists(root, item.Path) {
+				report(fmt.Sprintf("Invalid v2 placeholder path: %s -> %s", item.ID, item.Path))
+				errorsFound++
+				itemIDs[item.ID] = item
+				continue
+			}
+
+			placeholderCount++
+			report(fmt.Sprintf("Warning: placeholder item: %s (%s) - not yet implemented", item.ID, item.Title))
+			itemIDs[item.ID] = item
+			continue
 		}
 
 		if !pathExists(root, item.Path) {
@@ -504,7 +537,7 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 	errorsFound += validateV2TextEncoding(root, sectionIDs, cur.Items, report)
 	errorsFound += validateFoundationsReadmeContracts(root, cur.Items, report)
 
-	return len(cur.Sections), len(cur.Items), errorsFound, true, nil
+	return len(cur.Sections), len(cur.Items), placeholderCount, errorsFound, true, nil
 }
 
 func allowedPathPrefixesForSection(section V2Section) []string {
@@ -515,7 +548,7 @@ func allowedPathPrefixesForSection(section V2Section) []string {
 	}
 
 	if section.ID == "s04" {
-		prefixes = append(prefixes, "05-composition", "06-strings-and-text")
+		prefixes = append(prefixes, "04-types-design/composition", "04-types-design/strings-and-text")
 	}
 
 	return prefixes
@@ -545,6 +578,9 @@ func validateFoundationsReadmeContracts(root string, items []V2Item, report func
 
 	for _, item := range items {
 		if !isFoundationsSection(item.SectionID) {
+			continue
+		}
+		if isPlaceholderItem(item) {
 			continue
 		}
 
@@ -776,6 +812,9 @@ func validateV2LessonNavigation(root string, items []V2Item, report func(string)
 
 	for _, item := range items {
 		if item.Type != "lesson" || len(item.NextItems) == 0 {
+			continue
+		}
+		if isPlaceholderItem(item) {
 			continue
 		}
 

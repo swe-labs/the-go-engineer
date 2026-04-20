@@ -34,6 +34,7 @@ graph LR
     A["input"] --> B["function boundary"]
     B --> C["value or error"]
 ```
+
 ```text
 processCart(name, prices)
    |
@@ -138,6 +139,7 @@ The caller does not need to know every internal helper step.
   Not exactly. This lesson is about ordering helper steps clearly.
 
 ## ⚠️ In Production
+
 Real application code often becomes readable because one function coordinates smaller helpers
 instead of doing everything in one place.
 
@@ -146,6 +148,7 @@ instead of doing everything in one place.
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
 ## Next Step
 
 Continue to `FE.7` order summary.
