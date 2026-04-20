@@ -142,5 +142,10 @@ func main() {
 		slog.Info("load generation complete")
 	}()
 
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: PR.3")
+	fmt.Println("Current: PR.2 (live pprof endpoint)")
+	fmt.Println("---------------------------------------------------")
+
 	log.Fatal(http.ListenAndServe(":8080", apiMux))
 }

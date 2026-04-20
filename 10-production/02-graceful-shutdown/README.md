@@ -40,15 +40,7 @@ then the graceful-shutdown part of Stage 10 is doing its job.
 
 ## Next Step
 
-After `GS.3`, continue back to the [Stage 10 overview](../README.md) or move to
-[Stage 11: Code Generation](../../11-flagship/02-code-generation).
-
-In the beta shell, you can also move from
-[10 Production](../../docs/stages/10-production.md)
-into either
-[11 Flagship](../../docs/stages/11-flagship.md)
-or
-[11 Flagship](../../docs/stages/11-flagship.md),
-depending on whether you want more pressure or a longer integrated build path next.
+After `GS.3`, continue back to the [Stage 10 overview](../README.md) or move into the
+[Code Generation track](../06-code-generation).
 
 

@@ -50,4 +50,6 @@ uploads/
 
 .cache/
 
+# Temporary files
+temp/
 

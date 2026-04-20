@@ -13,8 +13,11 @@ By the end of this section, the learner should be able to explain:
 - how memory is divided and managed
 - how the terminal launches programs
 - how the OS manages processes
-- why cache and I/O shape performance
-- why syscalls are the boundary between code and hardware
+Later sections return to performance and concurrency details:
+
+- `PR.6` covers why memory layout matters
+- `GC.0` explains why concurrency exists
+- syscall boundaries are folded into the machine-view discussion in `HC.5`
 
 ## Section Map
 
@@ -25,9 +28,6 @@ By the end of this section, the learner should be able to explain:
 | `HC.3` | Lesson | [memory-basics](./3-memory-basics) | stack, heap, GC, and escape analysis |
 | `HC.4` | Lesson | [terminal-confidence](./4-terminal-confidence) | shell, stdout/stderr, and command flow |
 | `HC.5` | Lesson | [os-processes](./5-os-processes) | processes, signals, threads, and file descriptors |
-| `HC.6` | Lesson | [cpu-cache-and-performance](./6-cpu-cache-and-performance) | cache hierarchy, locality, and latency |
-| `HC.7` | Lesson | [syscalls](./7-syscalls) | user space vs kernel space |
-| `HC.8` | Lesson | [blocking-vs-non-blocking-io](./8-blocking-vs-non-blocking-io) | waiting, concurrency, and I/O behavior |
 
 ## How To Use This Section
 
@@ -56,14 +56,6 @@ Before moving to Section 01, you should be able to answer these without looking 
 - [ ] What is a process, and how is it different from a program?
 - [ ] What are the three default file descriptors?
 - [ ] What signal does `Ctrl+C` send?
-
-**Performance and reality:**
-
-- [ ] Why are some programs slow even on fast CPUs?
-- [ ] What is the cache hierarchy?
-- [ ] Why do cache misses hurt performance?
-- [ ] What is a syscall?
-- [ ] Why are blocking programs often slow because they wait, not because they compute?
 
 **Terminal fluency:**
 

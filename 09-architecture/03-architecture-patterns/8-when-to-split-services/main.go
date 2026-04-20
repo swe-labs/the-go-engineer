@@ -1,0 +1,26 @@
+package main
+
+import "fmt"
+
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// Section 09: Architecture & Security - When to split services
+//
+// Run: go run ./09-architecture/03-architecture-patterns/8-when-to-split-services
+
+func main() {
+	fmt.Println("=== ARCH.8 When to split services ===")
+	fmt.Println("Learn the signals that justify service boundaries and the anti-signals that only imitate architecture maturity.")
+	fmt.Println()
+	fmt.Println("- Split when the current boundary is the problem, not when the word 'microservice' sounds appealing.")
+	fmt.Println("- Look for sustained pressure in deploy cadence, ownership, or scaling needs.")
+	fmt.Println("- Every split creates new network and operational cost immediately.")
+	fmt.Println()
+	fmt.Println("The best split is one backed by clear pressure: team autonomy, scaling profile, fault isolation, or compliance.")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: ARCH.9")
+	fmt.Println("Current: ARCH.8 (when to split services)")
+	fmt.Println("---------------------------------------------------")
+}

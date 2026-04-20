@@ -239,7 +239,7 @@ func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
       "number": "06",
       "slug": "composition",
       "title": "Composition",
-      "path_prefix": "05-composition",
+      "path_prefix": "04-types-design",
       "entry_points": ["CO.1"],
       "outputs": ["CO.2"],
       "prerequisites": []
@@ -255,9 +255,9 @@ func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "05-composition/05-composition-and-embedding/1-composition",
+      "path": "04-types-design/composition/1-composition",
       "prerequisites": [],
-      "run_command": "go run ./05-composition/05-composition-and-embedding/1-composition",
+      "run_command": "go run ./04-types-design/composition/1-composition",
       "test_command": "",
       "starter_path": "",
       "next_items": ["CO.2"]
@@ -271,9 +271,9 @@ func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
       "subtype": "integration",
       "level": "core",
       "verification_mode": "run",
-      "path": "05-composition/05-composition-and-embedding/2-embedding",
+      "path": "04-types-design/composition/2-embedding",
       "prerequisites": ["CO.1"],
-      "run_command": "go run ./05-composition/05-composition-and-embedding/2-embedding",
+      "run_command": "go run ./04-types-design/composition/2-embedding",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -281,9 +281,9 @@ func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
   ]
 }`)
 
-	mustMkdir(t, root, "05-composition/05-composition-and-embedding/1-composition")
-	mustMkdir(t, root, "05-composition/05-composition-and-embedding/2-embedding")
-	writeFile(t, root, "05-composition/05-composition-and-embedding/1-composition/main.go", `package main
+	mustMkdir(t, root, "04-types-design/composition/1-composition")
+	mustMkdir(t, root, "04-types-design/composition/2-embedding")
+	writeFile(t, root, "04-types-design/composition/1-composition/main.go", `package main
 
 // Section 06: Composition
 
@@ -506,9 +506,9 @@ func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "05-composition/05-composition-and-embedding/1-composition",
+      "path": "04-types-design/composition/1-composition",
       "prerequisites": [],
-      "run_command": "go run ./05-composition/05-composition-and-embedding/1-composition",
+      "run_command": "go run ./04-types-design/composition/1-composition",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -518,9 +518,9 @@ func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
 
 	writeValidPressureDocs(t, root)
 	mustMkdir(t, root, "04-types-design")
-	mustMkdir(t, root, "05-composition/05-composition-and-embedding/1-composition")
-	writeFile(t, root, "05-composition/05-composition-and-embedding/1-composition/README.md", validFoundationsLessonReadme("go run ./05-composition/05-composition-and-embedding/1-composition"))
-	writeFile(t, root, "05-composition/05-composition-and-embedding/1-composition/main.go", validFoundationsMainGo("CO.2"))
+	mustMkdir(t, root, "04-types-design/composition/1-composition")
+	writeFile(t, root, "04-types-design/composition/1-composition/README.md", validFoundationsLessonReadme("go run ./04-types-design/composition/1-composition"))
+	writeFile(t, root, "04-types-design/composition/1-composition/main.go", validFoundationsMainGo("CO.2"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -561,9 +561,9 @@ func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "06-strings-and-text/1-strings",
+      "path": "04-types-design/strings-and-text/1-strings",
       "prerequisites": [],
-      "run_command": "go run ./06-strings-and-text/1-strings",
+      "run_command": "go run ./04-types-design/strings-and-text/1-strings",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -573,8 +573,8 @@ func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
 
 	writeValidPressureDocs(t, root)
 	mustMkdir(t, root, "04-types-design")
-	mustMkdir(t, root, "06-strings-and-text/1-strings")
-	writeFile(t, root, "06-strings-and-text/1-strings/main.go", validFoundationsMainGo("ST.2"))
+	mustMkdir(t, root, "04-types-design/strings-and-text/1-strings")
+	writeFile(t, root, "04-types-design/strings-and-text/1-strings/main.go", validFoundationsMainGo("ST.2"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -586,7 +586,7 @@ func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
 	if result.ErrorCount != 1 {
 		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
 	}
-	if !containsReport(reports, "Missing foundations README: ST.1 -> 06-strings-and-text/1-strings/README.md") {
+	if !containsReport(reports, "Missing foundations README: ST.1 -> 04-types-design/strings-and-text/1-strings/README.md") {
 		t.Fatalf("expected missing README error in reports: %v", reports)
 	}
 }

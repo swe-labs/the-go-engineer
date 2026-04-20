@@ -6,27 +6,26 @@
       "number": "00",
       "slug": "how-computers-work",
       "title": "How Computers Work",
+      "path_prefix": "00-how-computers-work",
       "phase": "foundations",
       "summary": "Understand the machine before you write the code.",
       "status": "pilot",
-      "path_prefix": "00-how-computers-work",
       "entry_points": [
         "HC.1"
       ],
       "outputs": [
-        "HC.8"
-      ],
-      "prerequisites": []
+        "HC.5"
+      ]
     },
     {
       "id": "s01",
       "number": "01",
       "slug": "getting-started",
       "title": "Getting Started",
+      "path_prefix": "01-getting-started",
       "phase": "foundations",
       "summary": "Build environment confidence, run the first programs, and make the terminal and editor feel safe.",
       "status": "pilot",
-      "path_prefix": "01-getting-started",
       "entry_points": [
         "GT.1"
       ],
@@ -42,10 +41,10 @@
       "number": "02",
       "slug": "language-basics",
       "title": "Language Basics",
+      "path_prefix": "02-language-basics",
       "phase": "foundations",
       "summary": "Teach values, control flow, and data structures as one zero-magic builder path.",
       "status": "pilot",
-      "path_prefix": "02-language-basics",
       "entry_points": [
         "LB.1"
       ],
@@ -63,15 +62,15 @@
       "number": "03",
       "slug": "functions-errors",
       "title": "Functions and Errors",
+      "path_prefix": "03-functions-errors",
       "phase": "foundations",
       "summary": "Turn inline logic into reusable function boundaries and make failure explicit.",
       "status": "pilot",
-      "path_prefix": "03-functions-errors",
       "entry_points": [
         "FE.1"
       ],
       "outputs": [
-        "FE.7"
+        "FE.10"
       ],
       "prerequisites": [
         "s02"
@@ -82,17 +81,17 @@
       "number": "04",
       "slug": "types-design",
       "title": "Types and Design",
+      "path_prefix": "04-types-design",
       "phase": "foundations",
       "summary": "Shape programs with types, interfaces, composition, and text-heavy workflows.",
       "status": "pilot",
-      "path_prefix": "04-types-design",
       "entry_points": [
         "TI.1",
         "CO.1",
         "ST.1"
       ],
       "outputs": [
-        "TI.10",
+        "TI.15",
         "CO.3",
         "ST.6"
       ],
@@ -105,10 +104,10 @@
       "number": "05",
       "slug": "packages-io",
       "title": "Packages and I/O",
+      "path_prefix": "05-packages-io",
       "phase": "engineering-core",
       "summary": "Teach module boundaries, package identity, CLI workflows, encoding, and filesystem work.",
       "status": "pilot",
-      "path_prefix": "05-packages-io",
       "entry_points": [
         "MP.1",
         "CL.1",
@@ -129,16 +128,20 @@
       "id": "s06",
       "number": "06",
       "slug": "backend-db",
-      "title": "Backend and DB",
-      "phase": "engineering-core",
-      "summary": "Teach the first application-shaped backend flows with HTTP and database work.",
-      "status": "pilot",
+      "title": "Backend, APIs \u0026 Databases",
       "path_prefix": "06-backend-db",
+      "phase": "engineering-core",
+      "summary": "Teach HTTP services, API design, and database workflows as one application-shaped backend path.",
+      "status": "pilot",
       "entry_points": [
+        "HS.1",
+        "API.1",
         "DB.1"
       ],
       "outputs": [
-        "DB.6"
+        "HS.10",
+        "API.9",
+        "DB.8"
       ],
       "prerequisites": [
         "s05"
@@ -149,18 +152,20 @@
       "number": "07",
       "slug": "concurrency",
       "title": "Concurrency",
+      "path_prefix": "07-concurrency",
       "phase": "engineering-core",
       "summary": "Teach goroutines, channels, context, scheduling, and bounded concurrency patterns.",
       "status": "pilot",
-      "path_prefix": "07-concurrency",
       "entry_points": [
-        "GC.1",
+        "GC.0",
+        "SY.1",
         "CT.1",
         "TM.1",
         "CP.1"
       ],
       "outputs": [
         "GC.7",
+        "SY.6",
         "CT.5",
         "TM.7",
         "CP.5"
@@ -173,18 +178,18 @@
       "id": "s08",
       "number": "08",
       "slug": "quality-test",
-      "title": "Quality and Test",
-      "phase": "engineering-core",
-      "summary": "Teach verification, benchmarks, and profiling so learners can prove behavior and inspect cost.",
-      "status": "pilot",
+      "title": "Quality \u0026 Testing",
       "path_prefix": "08-quality-test",
+      "phase": "engineering-core",
+      "summary": "Teach testing, benchmarks, and profiling so learners can prove behavior and inspect cost.",
+      "status": "pilot",
       "entry_points": [
         "TE.1",
         "PR.1"
       ],
       "outputs": [
-        "TE.4",
-        "PR.2"
+        "TE.10",
+        "PR.6"
       ],
       "prerequisites": [
         "s07"
@@ -194,16 +199,20 @@
       "id": "s09",
       "number": "09",
       "slug": "architecture",
-      "title": "Architecture",
-      "phase": "systems",
-      "summary": "Teach package design, boundary thinking, and service-shape reasoning.",
-      "status": "pilot",
+      "title": "Architecture \u0026 Security",
       "path_prefix": "09-architecture",
+      "phase": "systems",
+      "summary": "Teach package design, architecture patterns, and security engineering as one systems-thinking stage.",
+      "status": "pilot",
       "entry_points": [
-        "PD.1"
+        "PD.1",
+        "ARCH.1",
+        "SEC.1"
       ],
       "outputs": [
-        "PD.3"
+        "PD.3",
+        "ARCH.9",
+        "SEC.11"
       ],
       "prerequisites": [
         "s08"
@@ -213,18 +222,25 @@
       "id": "s10",
       "number": "10",
       "slug": "production",
-      "title": "Production",
-      "phase": "systems",
-      "summary": "Teach runtime behavior, logging, shutdown, and deployment-aware thinking.",
-      "status": "pilot",
+      "title": "Production Operations",
       "path_prefix": "10-production",
+      "phase": "systems",
+      "summary": "Teach runtime behavior, configuration, observability, deployment-aware thinking, and build-time automation.",
+      "status": "pilot",
       "entry_points": [
         "SL.1",
-        "GS.1"
+        "GS.1",
+        "CFG.1",
+        "OPS.1",
+        "DOCKER.1"
       ],
       "outputs": [
         "SL.5",
-        "GS.3"
+        "GS.3",
+        "CFG.5",
+        "OPS.5",
+        "DEPLOY.3",
+        "CG.3"
       ],
       "prerequisites": [
         "s09"
@@ -235,15 +251,15 @@
       "number": "11",
       "slug": "flagship",
       "title": "Flagship",
-      "phase": "systems",
-      "summary": "Integrate larger project work and generation-assisted tooling into one final proof stage.",
-      "status": "pilot",
       "path_prefix": "11-flagship",
+      "phase": "systems",
+      "summary": "Integrate larger project work into one final proof stage after the production tooling path is already established.",
+      "status": "pilot",
       "entry_points": [
-        "CG.1"
+        "FG.1"
       ],
       "outputs": [
-        "CG.3"
+        "FG.1"
       ],
       "prerequisites": [
         "s10"
@@ -259,6 +275,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "00-how-computers-work/1-what-is-a-program",
       "prerequisites": [],
@@ -277,6 +294,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "00-how-computers-work/2-code-to-execution",
       "prerequisites": [
@@ -297,6 +315,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "00-how-computers-work/3-memory-basics",
       "prerequisites": [
@@ -317,6 +336,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "00-how-computers-work/4-terminal-confidence",
       "prerequisites": [
@@ -337,6 +357,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "00-how-computers-work/5-os-processes",
       "prerequisites": [
@@ -346,68 +367,216 @@
       "test_command": "",
       "starter_path": "",
       "next_items": [
-        "HC.6"
+        "GT.1"
       ]
     },
     {
-      "id": "HC.6",
-      "section_id": "s00",
-      "slug": "cpu-cache-and-performance",
-      "title": "CPU cache and performance",
+      "id": "GT.1",
+      "section_id": "s01",
+      "slug": "installation",
+      "title": "Installation Verification",
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "00-how-computers-work/6-cpu-cache-and-performance",
+      "path": "01-getting-started/1-installation",
       "prerequisites": [
         "HC.5"
       ],
-      "run_command": "go run ./00-how-computers-work/6-cpu-cache-and-performance",
+      "run_command": "go run ./01-getting-started/1-installation",
       "test_command": "",
       "starter_path": "",
       "next_items": [
-        "HC.7"
+        "GT.2"
       ]
     },
     {
-      "id": "HC.7",
-      "section_id": "s00",
-      "slug": "syscalls",
-      "title": "Syscalls",
+      "id": "GT.2",
+      "section_id": "s01",
+      "slug": "hello-world",
+      "title": "Hello World",
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "00-how-computers-work/7-syscalls",
+      "path": "01-getting-started/2-hello-world",
       "prerequisites": [
-        "HC.6"
-      ],
-      "run_command": "go run ./00-how-computers-work/7-syscalls",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "HC.8"
-      ]
-    },
-    {
-      "id": "HC.8",
-      "section_id": "s00",
-      "slug": "blocking-vs-non-blocking-io",
-      "title": "Blocking vs non-blocking I/O",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "00-how-computers-work/8-blocking-vs-non-blocking-io",
-      "prerequisites": [
-        "HC.7"
-      ],
-      "run_command": "go run ./00-how-computers-work/8-blocking-vs-non-blocking-io",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
         "GT.1"
+      ],
+      "run_command": "go run ./01-getting-started/2-hello-world",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "GT.3"
       ]
+    },
+    {
+      "id": "GT.3",
+      "section_id": "s01",
+      "slug": "how-go-works",
+      "title": "How Go Works",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "01-getting-started/3-how-go-works",
+      "prerequisites": [
+        "GT.2"
+      ],
+      "run_command": "go run ./01-getting-started/3-how-go-works",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "GT.4"
+      ]
+    },
+    {
+      "id": "GT.4",
+      "section_id": "s01",
+      "slug": "dev-environment",
+      "title": "Development Environment",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "foundation",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "01-getting-started/4-dev-environment",
+      "prerequisites": [
+        "GT.3"
+      ],
+      "run_command": "go run ./01-getting-started/4-dev-environment",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "GT.5"
+      ]
+    },
+    {
+      "id": "GT.5",
+      "section_id": "s01",
+      "slug": "go-tools",
+      "title": "go fmt, go vet, go doc",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "01-getting-started/5-go-tools",
+      "prerequisites": [
+        "GT.4"
+      ],
+      "run_command": "go run ./01-getting-started/5-go-tools",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "GT.6"
+      ]
+    },
+    {
+      "id": "GT.6",
+      "section_id": "s01",
+      "slug": "reading-compiler-errors",
+      "title": "Reading compiler errors",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "01-getting-started/6-reading-compiler-errors",
+      "prerequisites": [
+        "GT.5"
+      ],
+      "run_command": "go run ./01-getting-started/6-reading-compiler-errors",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "LB.1"
+      ]
+    },
+    {
+      "id": "LB.1",
+      "section_id": "s02",
+      "slug": "variables",
+      "title": "Variables and Types",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "02-language-basics/1-variables",
+      "prerequisites": [],
+      "run_command": "go run ./02-language-basics/1-variables",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "LB.2"
+      ]
+    },
+    {
+      "id": "LB.2",
+      "section_id": "s02",
+      "slug": "constants",
+      "title": "Constants",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "02-language-basics/2-constants",
+      "prerequisites": [
+        "LB.1"
+      ],
+      "run_command": "go run ./02-language-basics/2-constants",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "LB.3"
+      ]
+    },
+    {
+      "id": "LB.3",
+      "section_id": "s02",
+      "slug": "enums",
+      "title": "Enums with iota",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "02-language-basics/3-enums",
+      "prerequisites": [
+        "LB.2"
+      ],
+      "run_command": "go run ./02-language-basics/3-enums",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "LB.4"
+      ]
+    },
+    {
+      "id": "LB.4",
+      "section_id": "s02",
+      "slug": "application-logger",
+      "title": "Application Logger",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "02-language-basics/4-application-logger",
+      "prerequisites": [
+        "LB.1",
+        "LB.2",
+        "LB.3"
+      ],
+      "run_command": "go run ./02-language-basics/4-application-logger",
+      "test_command": "",
+      "starter_path": "02-language-basics/4-application-logger/_starter",
+      "next_items": []
     },
     {
       "id": "CF.1",
@@ -417,6 +586,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/03-control-flow/1-if-else",
       "prerequisites": [],
@@ -435,6 +605,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/03-control-flow/2-for-basics",
       "prerequisites": [
@@ -455,6 +626,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/03-control-flow/3-break-continue",
       "prerequisites": [
@@ -475,6 +647,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/03-control-flow/4-switch",
       "prerequisites": [
@@ -493,10 +666,11 @@
       "id": "CF.5",
       "section_id": "s02",
       "slug": "defer-basics",
-      "title": "Defer — mechanics & order",
+      "title": "Defer — mechanics \u0026 order",
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/03-control-flow/5-defer-basics",
       "prerequisites": [
@@ -517,6 +691,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/03-control-flow/6-defer-use-cases",
       "prerequisites": [
@@ -537,6 +712,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/03-control-flow/7-pricing-checkout",
       "prerequisites": [
@@ -560,6 +736,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/04-data-structures/1-array",
       "prerequisites": [],
@@ -578,6 +755,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/04-data-structures/2-slices",
       "prerequisites": [
@@ -598,6 +776,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/04-data-structures/3-maps",
       "prerequisites": [
@@ -618,6 +797,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/04-data-structures/4-pointers",
       "prerequisites": [
@@ -639,6 +819,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "02-language-basics/04-data-structures/5-slices-2",
       "prerequisites": [
@@ -660,6 +841,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "02-language-basics/04-data-structures/6-contact-manager",
       "prerequisites": [
@@ -675,204 +857,6 @@
       "next_items": []
     },
     {
-      "id": "GT.1",
-      "section_id": "s01",
-      "slug": "installation",
-      "title": "Installation Verification",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "01-getting-started/1-installation",
-      "prerequisites": [
-        "HC.5"
-      ],
-      "run_command": "go run ./01-getting-started/1-installation",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "GT.2"
-      ]
-    },
-    {
-      "id": "GT.2",
-      "section_id": "s01",
-      "slug": "hello-world",
-      "title": "Hello World",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "01-getting-started/2-hello-world",
-      "prerequisites": [
-        "GT.1"
-      ],
-      "run_command": "go run ./01-getting-started/2-hello-world",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "GT.3"
-      ]
-    },
-    {
-      "id": "GT.3",
-      "section_id": "s01",
-      "slug": "how-go-works",
-      "title": "How Go Works",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "01-getting-started/3-how-go-works",
-      "prerequisites": [
-        "GT.2"
-      ],
-      "run_command": "go run ./01-getting-started/3-how-go-works",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "GT.4"
-      ]
-    },
-    {
-      "id": "GT.4",
-      "section_id": "s01",
-      "slug": "dev-environment",
-      "title": "Development Environment",
-      "type": "lesson",
-      "subtype": "integration",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "01-getting-started/4-dev-environment",
-      "prerequisites": [
-        "GT.3"
-      ],
-      "run_command": "go run ./01-getting-started/4-dev-environment",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "GT.5"
-      ]
-    },
-    {
-      "id": "GT.5",
-      "section_id": "s01",
-      "slug": "go-tools",
-      "title": "go fmt, go vet, go doc",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "01-getting-started/5-go-tools",
-      "prerequisites": [
-        "GT.4"
-      ],
-      "run_command": "go run ./01-getting-started/5-go-tools",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "GT.6"
-      ]
-    },
-    {
-      "id": "GT.6",
-      "section_id": "s01",
-      "slug": "reading-compiler-errors",
-      "title": "Reading compiler errors",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "01-getting-started/6-reading-compiler-errors",
-      "prerequisites": [
-        "GT.5"
-      ],
-      "run_command": "go run ./01-getting-started/6-reading-compiler-errors",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "LB.1"
-      ]
-    },
-    {
-      "id": "LB.1",
-      "section_id": "s02",
-      "slug": "variables",
-      "title": "Variables and Types",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "02-language-basics/1-variables",
-      "prerequisites": [],
-      "run_command": "go run ./02-language-basics/1-variables",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "LB.2"
-      ]
-    },
-    {
-      "id": "LB.2",
-      "section_id": "s02",
-      "slug": "constants",
-      "title": "Constants",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "02-language-basics/2-constants",
-      "prerequisites": [
-        "LB.1"
-      ],
-      "run_command": "go run ./02-language-basics/2-constants",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "LB.3"
-      ]
-    },
-    {
-      "id": "LB.3",
-      "section_id": "s02",
-      "slug": "enums",
-      "title": "Enums with iota",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "core",
-      "verification_mode": "run",
-      "path": "02-language-basics/3-enums",
-      "prerequisites": [
-        "LB.2"
-      ],
-      "run_command": "go run ./02-language-basics/3-enums",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "LB.4"
-      ]
-    },
-    {
-      "id": "LB.4",
-      "section_id": "s02",
-      "slug": "application-logger",
-      "title": "Application Logger",
-      "type": "exercise",
-      "subtype": "",
-      "level": "core",
-      "verification_mode": "run",
-      "path": "02-language-basics/4-application-logger",
-      "prerequisites": [
-        "LB.1",
-        "LB.2",
-        "LB.3"
-      ],
-      "run_command": "go run ./02-language-basics/4-application-logger",
-      "test_command": "",
-      "starter_path": "02-language-basics/4-application-logger/_starter",
-      "next_items": []
-    },
-    {
       "id": "FE.1",
       "section_id": "s03",
       "slug": "functions-basics",
@@ -880,6 +864,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "03-functions-errors/1-functions-basics",
       "prerequisites": [],
@@ -898,6 +883,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "03-functions-errors/2-parameters-and-returns",
       "prerequisites": [
@@ -918,6 +904,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "03-functions-errors/3-multiple-return-values",
       "prerequisites": [
@@ -938,6 +925,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "03-functions-errors/4-errors-as-values",
       "prerequisites": [
@@ -958,6 +946,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "03-functions-errors/5-validation",
       "prerequisites": [
@@ -978,6 +967,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "03-functions-errors/6-orchestration",
       "prerequisites": [
@@ -987,7 +977,7 @@
       "test_command": "",
       "starter_path": "",
       "next_items": [
-        "FE.7"
+        "FE.8"
       ]
     },
     {
@@ -998,6 +988,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "03-functions-errors/7-order-summary",
       "prerequisites": [
@@ -1006,12 +997,75 @@
         "FE.3",
         "FE.4",
         "FE.5",
-        "FE.6"
+        "FE.6",
+        "FE.8",
+        "FE.9"
       ],
       "run_command": "go run ./03-functions-errors/7-order-summary",
       "test_command": "go test ./03-functions-errors/7-order-summary",
       "starter_path": "03-functions-errors/7-order-summary/_starter",
-      "next_items": []
+      "next_items": [
+        "FE.10"
+      ]
+    },
+    {
+      "id": "FE.8",
+      "section_id": "s03",
+      "slug": "first-class-functions",
+      "title": "First-class functions",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "03-functions-errors/8-first-class-functions",
+      "prerequisites": null,
+      "run_command": "go run ./03-functions-errors/8-first-class-functions",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.9"
+      ]
+    },
+    {
+      "id": "FE.9",
+      "section_id": "s03",
+      "slug": "closures--mechanics",
+      "title": "Closures - mechanics",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "03-functions-errors/9-closures-mechanics",
+      "prerequisites": [
+        "FE.8"
+      ],
+      "run_command": "go run ./03-functions-errors/9-closures-mechanics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FE.10"
+      ]
+    },
+    {
+      "id": "FE.10",
+      "section_id": "s03",
+      "slug": "panic-and-recover",
+      "title": "panic and recover",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "03-functions-errors/10-panic-and-recover",
+      "prerequisites": [
+        "FE.9"
+      ],
+      "run_command": "go run ./03-functions-errors/10-panic-and-recover",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": null
     },
     {
       "id": "TI.1",
@@ -1021,6 +1075,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "04-types-design/1-struct",
       "prerequisites": [],
@@ -1039,6 +1094,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "04-types-design/2-methods",
       "prerequisites": [
@@ -1059,6 +1115,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "04-types-design/3-interfaces",
       "prerequisites": [
@@ -1080,6 +1137,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "04-types-design/4-interface-embedding",
       "prerequisites": [
@@ -1100,6 +1158,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "04-types-design/5-stringer",
       "prerequisites": [
@@ -1121,6 +1180,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "04-types-design/6-type-switch",
       "prerequisites": [
@@ -1141,6 +1201,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "04-types-design/7-receiver-sets",
       "prerequisites": [
@@ -1162,6 +1223,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "04-types-design/8-custom-errors",
       "prerequisites": [
@@ -1183,6 +1245,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "04-types-design/9-generics",
       "prerequisites": [
@@ -1204,6 +1267,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "04-types-design/10-payroll-processor",
       "prerequisites": [
@@ -1221,17 +1285,18 @@
     {
       "id": "TI.11",
       "section_id": "s04",
-      "slug": "empty-interface",
-      "title": "Empty Interface",
+      "slug": "dynamic-typing-with-any",
+      "title": "Empty interface, assertions, and nil interfaces",
       "type": "lesson",
-      "subtype": "concept",
-      "level": "stretch",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/11-empty-interface",
+      "path": "04-types-design/11-dynamic-typing-with-any",
       "prerequisites": [
         "TI.3"
       ],
-      "run_command": "go run ./04-types-design/11-empty-interface",
+      "run_command": "go run ./04-types-design/11-dynamic-typing-with-any",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1241,17 +1306,18 @@
     {
       "id": "TI.12",
       "section_id": "s04",
-      "slug": "type-assertions",
-      "title": "Type Assertions",
+      "slug": "functional-options",
+      "title": "Functional Options",
       "type": "lesson",
-      "subtype": "concept",
-      "level": "stretch",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/12-type-assertions",
+      "path": "04-types-design/12-functional-options",
       "prerequisites": [
-        "TI.3"
+        "TI.2"
       ],
-      "run_command": "go run ./04-types-design/12-type-assertions",
+      "run_command": "go run ./04-types-design/12-functional-options",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1261,17 +1327,19 @@
     {
       "id": "TI.13",
       "section_id": "s04",
-      "slug": "nil-interfaces",
-      "title": "Nil Interfaces",
+      "slug": "method-values",
+      "title": "Method Values",
       "type": "lesson",
-      "subtype": "concept",
-      "level": "stretch",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/13-nil-interfaces",
+      "path": "04-types-design/13-method-values",
       "prerequisites": [
-        "TI.3"
+        "TI.2",
+        "FE.8"
       ],
-      "run_command": "go run ./04-types-design/13-nil-interfaces",
+      "run_command": "go run ./04-types-design/13-method-values",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1281,17 +1349,18 @@
     {
       "id": "TI.14",
       "section_id": "s04",
-      "slug": "functional-options",
-      "title": "Functional Options",
+      "slug": "complex-generic-constraints",
+      "title": "Complex Generic Constraints",
       "type": "lesson",
       "subtype": "pattern",
       "level": "stretch",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/14-functional-options",
+      "path": "04-types-design/14-complex-generic-constraints",
       "prerequisites": [
-        "TI.2"
+        "TI.9"
       ],
-      "run_command": "go run ./04-types-design/14-functional-options",
+      "run_command": "go run ./04-types-design/14-complex-generic-constraints",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1301,61 +1370,24 @@
     {
       "id": "TI.15",
       "section_id": "s04",
-      "slug": "method-values",
-      "title": "Method Values",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "stretch",
-      "verification_mode": "run",
-      "path": "04-types-design/15-method-values",
-      "prerequisites": [
-        "TI.2"
-      ],
-      "run_command": "go run ./04-types-design/15-method-values",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "TI.16"
-      ]
-    },
-    {
-      "id": "TI.16",
-      "section_id": "s04",
-      "slug": "complex-generics",
-      "title": "Complex Generic Constraints",
-      "type": "lesson",
-      "subtype": "pattern",
-      "level": "stretch",
-      "verification_mode": "run",
-      "path": "04-types-design/16-complex-generics",
-      "prerequisites": [
-        "TI.9"
-      ],
-      "run_command": "go run ./04-types-design/16-complex-generics",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": [
-        "TI.17"
-      ]
-    },
-    {
-      "id": "TI.17",
-      "section_id": "s04",
-      "slug": "generic-structures",
+      "slug": "generic-data-structures",
       "title": "Generic Data Structures",
       "type": "lesson",
       "subtype": "pattern",
       "level": "stretch",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/17-generic-structures",
+      "path": "04-types-design/15-generic-data-structures",
       "prerequisites": [
         "TI.9",
-        "TI.16"
+        "TI.14"
       ],
-      "run_command": "go run ./04-types-design/17-generic-structures",
+      "run_command": "go run ./04-types-design/15-generic-data-structures",
       "test_command": "",
       "starter_path": "",
-      "next_items": []
+      "next_items": [
+        "CO.1"
+      ]
     },
     {
       "id": "CO.1",
@@ -1365,13 +1397,14 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "05-composition/05-composition-and-embedding/1-composition",
+      "path": "04-types-design/composition/1-composition",
       "prerequisites": [
         "TI.1",
         "TI.2"
       ],
-      "run_command": "go run ./05-composition/05-composition-and-embedding/1-composition",
+      "run_command": "go run ./04-types-design/composition/1-composition",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1386,12 +1419,13 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "05-composition/05-composition-and-embedding/2-embedding",
+      "path": "04-types-design/composition/2-embedding",
       "prerequisites": [
         "CO.1"
       ],
-      "run_command": "go run ./05-composition/05-composition-and-embedding/2-embedding",
+      "run_command": "go run ./04-types-design/composition/2-embedding",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1406,15 +1440,16 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
-      "path": "05-composition/05-composition-and-embedding/3-bank-account",
+      "path": "04-types-design/composition/3-bank-account",
       "prerequisites": [
         "CO.1",
         "CO.2"
       ],
-      "run_command": "go run ./05-composition/05-composition-and-embedding/3-bank-account",
-      "test_command": "go test ./05-composition/05-composition-and-embedding/3-bank-account",
-      "starter_path": "05-composition/05-composition-and-embedding/3-bank-account/_starter",
+      "run_command": "go run ./04-types-design/composition/3-bank-account",
+      "test_command": "go test ./04-types-design/composition/3-bank-account",
+      "starter_path": "04-types-design/composition/3-bank-account/_starter",
       "next_items": []
     },
     {
@@ -1425,10 +1460,11 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "06-strings-and-text/1-strings",
+      "path": "04-types-design/strings-and-text/1-strings",
       "prerequisites": [],
-      "run_command": "go run ./06-strings-and-text/1-strings",
+      "run_command": "go run ./04-types-design/strings-and-text/1-strings",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1443,12 +1479,13 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "06-strings-and-text/2-formatting-string",
+      "path": "04-types-design/strings-and-text/2-formatting-string",
       "prerequisites": [
         "ST.1"
       ],
-      "run_command": "go run ./06-strings-and-text/2-formatting-string",
+      "run_command": "go run ./04-types-design/strings-and-text/2-formatting-string",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1463,13 +1500,14 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "06-strings-and-text/3-unicode",
+      "path": "04-types-design/strings-and-text/3-unicode",
       "prerequisites": [
         "ST.1",
         "ST.2"
       ],
-      "run_command": "go run ./06-strings-and-text/3-unicode",
+      "run_command": "go run ./04-types-design/strings-and-text/3-unicode",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1484,13 +1522,14 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "06-strings-and-text/4-regex",
+      "path": "04-types-design/strings-and-text/4-regex",
       "prerequisites": [
         "ST.1",
         "ST.3"
       ],
-      "run_command": "go run ./06-strings-and-text/4-regex",
+      "run_command": "go run ./04-types-design/strings-and-text/4-regex",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1505,13 +1544,14 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "06-strings-and-text/5-text-template",
+      "path": "04-types-design/strings-and-text/5-text-template",
       "prerequisites": [
         "ST.1",
         "ST.2"
       ],
-      "run_command": "go run ./06-strings-and-text/5-text-template",
+      "run_command": "go run ./04-types-design/strings-and-text/5-text-template",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1526,17 +1566,18 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
-      "path": "06-strings-and-text/6-config-parser",
+      "path": "04-types-design/strings-and-text/6-config-parser",
       "prerequisites": [
         "ST.1",
         "ST.2",
         "ST.4",
         "ST.5"
       ],
-      "run_command": "go run ./06-strings-and-text/6-config-parser",
-      "test_command": "go test ./06-strings-and-text/6-config-parser",
-      "starter_path": "06-strings-and-text/6-config-parser/_starter",
+      "run_command": "go run ./04-types-design/strings-and-text/6-config-parser",
+      "test_command": "go test ./04-types-design/strings-and-text/6-config-parser",
+      "starter_path": "04-types-design/strings-and-text/6-config-parser/_starter",
       "next_items": []
     },
     {
@@ -1547,6 +1588,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/01-modules-and-packages/1-module-basics",
       "prerequisites": [],
@@ -1565,6 +1607,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/01-modules-and-packages/2-managing-deps",
       "prerequisites": [
@@ -1585,6 +1628,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "05-packages-io/01-modules-and-packages/3-versioning",
       "prerequisites": [
@@ -1604,6 +1648,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "stretch",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/01-modules-and-packages/4-build-tags",
       "prerequisites": [
@@ -1623,6 +1668,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/cli-tools/1-args",
       "prerequisites": [],
@@ -1641,6 +1687,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/cli-tools/2-flags",
       "prerequisites": [
@@ -1661,6 +1708,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/cli-tools/3-subcommands",
       "prerequisites": [
@@ -1682,6 +1730,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/cli-tools/4-file-organizer",
       "prerequisites": [
@@ -1702,6 +1751,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/encoding/1-marshalling",
       "prerequisites": [],
@@ -1720,6 +1770,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/encoding/2-unmarshal",
       "prerequisites": [
@@ -1740,6 +1791,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/encoding/3-encoder",
       "prerequisites": [
@@ -1761,6 +1813,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/encoding/4-decode",
       "prerequisites": [
@@ -1782,6 +1835,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/encoding/5-base64_encoding",
       "prerequisites": [
@@ -1802,6 +1856,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "05-packages-io/02-io-and-cli/encoding/6-config-parser",
       "prerequisites": [
@@ -1823,6 +1878,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/filesystem/1-files",
       "prerequisites": [],
@@ -1841,6 +1897,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/filesystem/2-paths",
       "prerequisites": [
@@ -1861,6 +1918,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/filesystem/3-dir",
       "prerequisites": [
@@ -1882,6 +1940,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/filesystem/4-temp",
       "prerequisites": [
@@ -1903,6 +1962,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/filesystem/5-embed",
       "prerequisites": [
@@ -1924,6 +1984,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "05-packages-io/02-io-and-cli/filesystem/6-io-patterns",
       "prerequisites": [
@@ -1946,6 +2007,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "05-packages-io/02-io-and-cli/filesystem/7-log-search",
       "prerequisites": [
@@ -1967,6 +2029,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "stretch",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam",
       "prerequisites": [
@@ -1979,6 +2042,412 @@
       "next_items": []
     },
     {
+      "id": "HS.1",
+      "section_id": "s06",
+      "slug": "net-http-basics",
+      "title": "net/http basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/1-net-http-basics",
+      "prerequisites": null,
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/1-net-http-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HS.2"
+      ]
+    },
+    {
+      "id": "HS.2",
+      "section_id": "s06",
+      "slug": "routing-patterns",
+      "title": "Routing patterns",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/2-routing-patterns",
+      "prerequisites": [
+        "HS.1"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/2-routing-patterns",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HS.3"
+      ]
+    },
+    {
+      "id": "HS.3",
+      "section_id": "s06",
+      "slug": "middleware--the-pattern",
+      "title": "Middleware - the pattern",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/3-middleware-pattern",
+      "prerequisites": [
+        "HS.2"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/3-middleware-pattern",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HS.4"
+      ]
+    },
+    {
+      "id": "HS.4",
+      "section_id": "s06",
+      "slug": "request-parsing-and-validation",
+      "title": "Request parsing and validation",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/4-request-parsing-and-validation",
+      "prerequisites": [
+        "HS.3"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/4-request-parsing-and-validation",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HS.5"
+      ]
+    },
+    {
+      "id": "HS.5",
+      "section_id": "s06",
+      "slug": "response-writing-patterns",
+      "title": "Response writing patterns",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/5-response-writing-patterns",
+      "prerequisites": [
+        "HS.4"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/5-response-writing-patterns",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HS.6"
+      ]
+    },
+    {
+      "id": "HS.6",
+      "section_id": "s06",
+      "slug": "error-handling-middleware",
+      "title": "Error handling middleware",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/6-error-handling-middleware",
+      "prerequisites": [
+        "HS.5"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/6-error-handling-middleware",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HS.7"
+      ]
+    },
+    {
+      "id": "HS.7",
+      "section_id": "s06",
+      "slug": "server-timeouts",
+      "title": "Server timeouts",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/7-server-timeouts",
+      "prerequisites": [
+        "HS.6"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/7-server-timeouts",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HS.8"
+      ]
+    },
+    {
+      "id": "HS.8",
+      "section_id": "s06",
+      "slug": "graceful-http-shutdown",
+      "title": "Graceful HTTP shutdown",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/8-graceful-http-shutdown",
+      "prerequisites": [
+        "HS.7"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/8-graceful-http-shutdown",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HS.9"
+      ]
+    },
+    {
+      "id": "HS.9",
+      "section_id": "s06",
+      "slug": "health-and-readiness-probes",
+      "title": "Health and readiness probes",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/9-health-and-readiness-probes",
+      "prerequisites": [
+        "HS.8"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/9-health-and-readiness-probes",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HS.10"
+      ]
+    },
+    {
+      "id": "HS.10",
+      "section_id": "s06",
+      "slug": "rest-api",
+      "title": "REST API",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise",
+      "prerequisites": [
+        "HS.1",
+        "HS.2",
+        "HS.3",
+        "HS.4",
+        "HS.5",
+        "HS.6",
+        "HS.7",
+        "HS.8",
+        "HS.9"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise",
+      "test_command": "",
+      "starter_path": "06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise/_starter",
+      "next_items": null
+    },
+    {
+      "id": "API.1",
+      "section_id": "s06",
+      "slug": "rest-design-principles",
+      "title": "REST design principles",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/apis/1-rest-design-principles",
+      "prerequisites": null,
+      "run_command": "go run ./06-backend-db/01-web-and-database/apis/1-rest-design-principles",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "API.2"
+      ]
+    },
+    {
+      "id": "API.2",
+      "section_id": "s06",
+      "slug": "api-versioning-strategies",
+      "title": "API versioning strategies",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/apis/2-api-versioning-strategies",
+      "prerequisites": [
+        "API.1"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/apis/2-api-versioning-strategies",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "API.3"
+      ]
+    },
+    {
+      "id": "API.3",
+      "section_id": "s06",
+      "slug": "pagination-and-filtering",
+      "title": "Pagination and filtering",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/apis/3-pagination-and-filtering",
+      "prerequisites": [
+        "API.2"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/apis/3-pagination-and-filtering",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "API.4"
+      ]
+    },
+    {
+      "id": "API.4",
+      "section_id": "s06",
+      "slug": "protobuf-basics",
+      "title": "Protobuf basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/apis/4-protobuf-basics",
+      "prerequisites": [
+        "API.3"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/apis/4-protobuf-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "API.5"
+      ]
+    },
+    {
+      "id": "API.5",
+      "section_id": "s06",
+      "slug": "grpc-fundamentals",
+      "title": "gRPC fundamentals",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/apis/5-grpc-fundamentals",
+      "prerequisites": [
+        "API.4"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/apis/5-grpc-fundamentals",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "API.6"
+      ]
+    },
+    {
+      "id": "API.6",
+      "section_id": "s06",
+      "slug": "grpc-streaming",
+      "title": "gRPC streaming",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/apis/6-grpc-streaming",
+      "prerequisites": [
+        "API.5"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/apis/6-grpc-streaming",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "API.7"
+      ]
+    },
+    {
+      "id": "API.7",
+      "section_id": "s06",
+      "slug": "grpc-interceptors",
+      "title": "gRPC interceptors",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/apis/7-grpc-interceptors",
+      "prerequisites": [
+        "API.6"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/apis/7-grpc-interceptors",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "API.8"
+      ]
+    },
+    {
+      "id": "API.8",
+      "section_id": "s06",
+      "slug": "rest-vs-grpc--the-trade-off",
+      "title": "REST vs gRPC - the trade-off",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/apis/8-rest-vs-grpc",
+      "prerequisites": [
+        "API.7"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/apis/8-rest-vs-grpc",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "API.9"
+      ]
+    },
+    {
+      "id": "API.9",
+      "section_id": "s06",
+      "slug": "grpc-service",
+      "title": "gRPC Service",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/apis/9-grpc-service-exercise",
+      "prerequisites": [
+        "API.1",
+        "API.2",
+        "API.3",
+        "API.4",
+        "API.5",
+        "API.6",
+        "API.7",
+        "API.8"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/apis/9-grpc-service-exercise",
+      "test_command": "",
+      "starter_path": "06-backend-db/01-web-and-database/apis/9-grpc-service-exercise/_starter",
+      "next_items": null
+    },
+    {
       "id": "DB.1",
       "section_id": "s06",
       "slug": "connecting-to-sqlite",
@@ -1986,6 +2455,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "06-backend-db/01-web-and-database/databases/1-connecting-to-db",
       "prerequisites": [],
@@ -2004,6 +2474,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "06-backend-db/01-web-and-database/databases/2-query",
       "prerequisites": [
@@ -2024,6 +2495,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "06-backend-db/01-web-and-database/databases/3-select",
       "prerequisites": [
@@ -2045,6 +2517,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "06-backend-db/01-web-and-database/databases/4-prepare",
       "prerequisites": [
@@ -2066,6 +2539,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "06-backend-db/01-web-and-database/databases/5-transactions",
       "prerequisites": [
@@ -2088,6 +2562,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "06-backend-db/01-web-and-database/databases/6-repository",
       "prerequisites": [
@@ -2100,7 +2575,68 @@
       "run_command": "go run ./06-backend-db/01-web-and-database/databases/6-repository",
       "test_command": "go test ./06-backend-db/01-web-and-database/databases/6-repository",
       "starter_path": "06-backend-db/01-web-and-database/databases/6-repository/_starter",
-      "next_items": []
+      "next_items": [
+        "DB.7"
+      ]
+    },
+    {
+      "id": "DB.7",
+      "section_id": "s06",
+      "slug": "n+1-query-detection",
+      "title": "N+1 query detection",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/databases/7-n-plus-one-query-detection",
+      "prerequisites": null,
+      "run_command": "go run ./06-backend-db/01-web-and-database/databases/7-n-plus-one-query-detection",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DB.8"
+      ]
+    },
+    {
+      "id": "DB.8",
+      "section_id": "s06",
+      "slug": "query-timeouts-via-context",
+      "title": "Query timeouts via context",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "06-backend-db/01-web-and-database/databases/8-query-timeouts-via-context",
+      "prerequisites": [
+        "DB.7"
+      ],
+      "run_command": "go run ./06-backend-db/01-web-and-database/databases/8-query-timeouts-via-context",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": null
+    },
+    {
+      "id": "GC.0",
+      "section_id": "s07",
+      "slug": "why-concurrency-exists",
+      "title": "Why concurrency exists",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "07-concurrency/01-concurrency/goroutines/0-why-concurrency-exists",
+      "prerequisites": [
+        "s06"
+      ],
+      "run_command": "go run ./07-concurrency/01-concurrency/goroutines/0-why-concurrency-exists",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "GC.1"
+      ]
     },
     {
       "id": "GC.1",
@@ -2110,9 +2646,12 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/goroutines/1-goroutine",
-      "prerequisites": [],
+      "prerequisites": [
+        "GC.0"
+      ],
       "run_command": "go run ./07-concurrency/01-concurrency/goroutines/1-goroutine",
       "test_command": "",
       "starter_path": "",
@@ -2128,6 +2667,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/goroutines/2-wait-group",
       "prerequisites": [
@@ -2148,6 +2688,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/goroutines/3-channels",
       "prerequisites": [
@@ -2169,6 +2710,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/goroutines/4-channels-buffered",
       "prerequisites": [
@@ -2189,6 +2731,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/goroutines/5-channels-closing",
       "prerequisites": [
@@ -2210,6 +2753,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/goroutines/6-project-1",
       "prerequisites": [
@@ -2232,6 +2776,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/goroutines/7-downloader",
       "prerequisites": [
@@ -2248,6 +2793,128 @@
       "next_items": []
     },
     {
+      "id": "SY.1",
+      "section_id": "s07",
+      "slug": "syncmutex-and-rwmutex",
+      "title": "sync.Mutex and RWMutex",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "07-concurrency/01-concurrency/sync-primitives/1-mutex-and-rwmutex",
+      "prerequisites": null,
+      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/1-mutex-and-rwmutex",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SY.2"
+      ]
+    },
+    {
+      "id": "SY.2",
+      "section_id": "s07",
+      "slug": "synconce-and-syncmap",
+      "title": "sync.Once and sync.Map",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "07-concurrency/01-concurrency/sync-primitives/2-once-and-sync-map",
+      "prerequisites": [
+        "SY.1"
+      ],
+      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/2-once-and-sync-map",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SY.3"
+      ]
+    },
+    {
+      "id": "SY.3",
+      "section_id": "s07",
+      "slug": "atomic-operations",
+      "title": "Atomic operations",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "07-concurrency/01-concurrency/sync-primitives/3-atomic-operations",
+      "prerequisites": [
+        "SY.2"
+      ],
+      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/3-atomic-operations",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SY.4"
+      ]
+    },
+    {
+      "id": "SY.4",
+      "section_id": "s07",
+      "slug": "race-conditions",
+      "title": "Race conditions",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "07-concurrency/01-concurrency/sync-primitives/4-race-conditions",
+      "prerequisites": [
+        "SY.3"
+      ],
+      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/4-race-conditions",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SY.5"
+      ]
+    },
+    {
+      "id": "SY.5",
+      "section_id": "s07",
+      "slug": "goroutine-leaks",
+      "title": "Goroutine leaks",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "07-concurrency/01-concurrency/sync-primitives/5-goroutine-leaks",
+      "prerequisites": [
+        "SY.4"
+      ],
+      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/5-goroutine-leaks",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SY.6"
+      ]
+    },
+    {
+      "id": "SY.6",
+      "section_id": "s07",
+      "slug": "deadlocks",
+      "title": "Deadlocks",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "07-concurrency/01-concurrency/sync-primitives/6-deadlocks",
+      "prerequisites": [
+        "SY.5"
+      ],
+      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/6-deadlocks",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": null
+    },
+    {
       "id": "CT.1",
       "section_id": "s07",
       "slug": "background-and-todo",
@@ -2255,6 +2922,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/context/1-background",
       "prerequisites": [],
@@ -2273,6 +2941,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/context/2-with-cancel",
       "prerequisites": [
@@ -2293,6 +2962,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/context/3-with-timeout",
       "prerequisites": [
@@ -2314,6 +2984,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/context/4-with-value",
       "prerequisites": [
@@ -2336,6 +3007,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/context/5-timeout-client",
       "prerequisites": [
@@ -2357,6 +3029,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/time-and-scheduling/1-time",
       "prerequisites": [],
@@ -2375,6 +3048,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/time-and-scheduling/2-formatting",
       "prerequisites": [
@@ -2395,6 +3069,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker",
       "prerequisites": [
@@ -2416,6 +3091,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/01-concurrency/time-and-scheduling/7-reminder",
       "prerequisites": [
@@ -2436,6 +3112,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/02-concurrency-patterns/1-errgroup",
       "prerequisites": [],
@@ -2454,6 +3131,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/02-concurrency-patterns/2-errgroup-context",
       "prerequisites": [
@@ -2474,6 +3152,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "07-concurrency/02-concurrency-patterns/3-sync-pool",
       "prerequisites": [
@@ -2495,6 +3174,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise",
       "prerequisites": [
@@ -2517,6 +3197,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "07-concurrency/02-concurrency-patterns/5-url-checker-exercise",
       "prerequisites": [
@@ -2538,6 +3219,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "test",
       "path": "08-quality-test/01-quality-and-performance/testing/user",
       "prerequisites": [],
@@ -2556,6 +3238,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "test",
       "path": "08-quality-test/01-quality-and-performance/testing/user",
       "prerequisites": [
@@ -2576,6 +3259,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "test",
       "path": "08-quality-test/01-quality-and-performance/testing/user",
       "prerequisites": [
@@ -2597,6 +3281,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "test",
       "path": "08-quality-test/01-quality-and-performance/testing/benchmarks",
       "prerequisites": [
@@ -2607,8 +3292,130 @@
       "test_command": "go test -bench=. -benchmem ./08-quality-test/01-quality-and-performance/testing/benchmarks",
       "starter_path": "",
       "next_items": [
-        "PR.1"
+        "TE.5"
       ]
+    },
+    {
+      "id": "TE.5",
+      "section_id": "s08",
+      "slug": "sub-tests-and-tcleanup",
+      "title": "Sub-tests and t.Cleanup",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/testing/5-sub-tests-and-cleanup",
+      "prerequisites": null,
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/5-sub-tests-and-cleanup",
+      "starter_path": "",
+      "next_items": [
+        "TE.6"
+      ]
+    },
+    {
+      "id": "TE.6",
+      "section_id": "s08",
+      "slug": "fuzz-testing",
+      "title": "Fuzz testing",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/testing/6-fuzz-testing",
+      "prerequisites": [
+        "TE.5"
+      ],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/6-fuzz-testing",
+      "starter_path": "",
+      "next_items": [
+        "TE.7"
+      ]
+    },
+    {
+      "id": "TE.7",
+      "section_id": "s08",
+      "slug": "interfaces-for-testability",
+      "title": "Interfaces for testability",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/testing/7-interfaces-for-testability",
+      "prerequisites": [
+        "TE.6"
+      ],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/7-interfaces-for-testability",
+      "starter_path": "",
+      "next_items": [
+        "TE.8"
+      ]
+    },
+    {
+      "id": "TE.8",
+      "section_id": "s08",
+      "slug": "mocking-with-interfaces",
+      "title": "Mocking with interfaces",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/testing/8-mocking-with-interfaces",
+      "prerequisites": [
+        "TE.7"
+      ],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/8-mocking-with-interfaces",
+      "starter_path": "",
+      "next_items": [
+        "TE.9"
+      ]
+    },
+    {
+      "id": "TE.9",
+      "section_id": "s08",
+      "slug": "integration-tests",
+      "title": "Integration tests",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/testing/9-integration-tests",
+      "prerequisites": [
+        "TE.8"
+      ],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/9-integration-tests",
+      "starter_path": "",
+      "next_items": [
+        "TE.10"
+      ]
+    },
+    {
+      "id": "TE.10",
+      "section_id": "s08",
+      "slug": "golden-files",
+      "title": "Golden files",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/testing/10-golden-files",
+      "prerequisites": [
+        "TE.9"
+      ],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/10-golden-files",
+      "starter_path": "",
+      "next_items": null
     },
     {
       "id": "PR.1",
@@ -2618,6 +3425,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "08-quality-test/01-quality-and-performance/profiling/1-cpu-profile",
       "prerequisites": [],
@@ -2636,6 +3444,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "08-quality-test/01-quality-and-performance/profiling/3-http-pprof",
       "prerequisites": [
@@ -2644,7 +3453,89 @@
       "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/3-http-pprof",
       "test_command": "",
       "starter_path": "",
-      "next_items": []
+      "next_items": [
+        "PR.3"
+      ]
+    },
+    {
+      "id": "PR.3",
+      "section_id": "s08",
+      "slug": "memory-profiling",
+      "title": "Memory profiling",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "08-quality-test/01-quality-and-performance/profiling/3-memory-profiling",
+      "prerequisites": null,
+      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/3-memory-profiling",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "PR.4"
+      ]
+    },
+    {
+      "id": "PR.4",
+      "section_id": "s08",
+      "slug": "escape-analysis",
+      "title": "Escape analysis",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "08-quality-test/01-quality-and-performance/profiling/4-escape-analysis",
+      "prerequisites": [
+        "PR.3"
+      ],
+      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/4-escape-analysis",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "PR.5"
+      ]
+    },
+    {
+      "id": "PR.5",
+      "section_id": "s08",
+      "slug": "benchmark-driven-development",
+      "title": "Benchmark-driven development",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/profiling/5-benchmark-driven-development",
+      "prerequisites": [
+        "PR.4"
+      ],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/profiling/5-benchmark-driven-development",
+      "starter_path": "",
+      "next_items": [
+        "PR.6"
+      ]
+    },
+    {
+      "id": "PR.6",
+      "section_id": "s08",
+      "slug": "why-memory-layout-matters",
+      "title": "Why memory layout matters",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "08-quality-test/01-quality-and-performance/profiling/6-memory-layout",
+      "prerequisites": [
+        "PR.5"
+      ],
+      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/6-memory-layout",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": null
     },
     {
       "id": "PD.1",
@@ -2654,6 +3545,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "09-architecture/01-package-design/1-naming",
       "prerequisites": [],
@@ -2672,6 +3564,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "09-architecture/01-package-design/2-visibility",
       "prerequisites": [
@@ -2692,6 +3585,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "09-architecture/01-package-design/3-project-layout",
       "prerequisites": [
@@ -2702,8 +3596,436 @@
       "test_command": "",
       "starter_path": "",
       "next_items": [
-        "SL.1"
+        "ARCH.1"
       ]
+    },
+    {
+      "id": "ARCH.1",
+      "section_id": "s09",
+      "slug": "monolith-vs-modular-monolith-vs-microservices",
+      "title": "Monolith vs Modular Monolith vs Microservices",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/03-architecture-patterns/1-architecture-trade-offs",
+      "prerequisites": null,
+      "run_command": "go run ./09-architecture/03-architecture-patterns/1-architecture-trade-offs",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ARCH.2"
+      ]
+    },
+    {
+      "id": "ARCH.2",
+      "section_id": "s09",
+      "slug": "domain-driven-design-basics",
+      "title": "Domain-Driven Design basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/03-architecture-patterns/2-ddd-basics",
+      "prerequisites": [
+        "ARCH.1"
+      ],
+      "run_command": "go run ./09-architecture/03-architecture-patterns/2-ddd-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ARCH.3"
+      ]
+    },
+    {
+      "id": "ARCH.3",
+      "section_id": "s09",
+      "slug": "hexagonal-architecture-in-go",
+      "title": "Hexagonal architecture in Go",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go",
+      "prerequisites": [
+        "ARCH.2"
+      ],
+      "run_command": "go run ./09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ARCH.4"
+      ]
+    },
+    {
+      "id": "ARCH.4",
+      "section_id": "s09",
+      "slug": "repository-pattern--deep-dive",
+      "title": "Repository pattern - deep dive",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/03-architecture-patterns/4-repository-pattern-deep-dive",
+      "prerequisites": [
+        "ARCH.3"
+      ],
+      "run_command": "go run ./09-architecture/03-architecture-patterns/4-repository-pattern-deep-dive",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ARCH.5"
+      ]
+    },
+    {
+      "id": "ARCH.5",
+      "section_id": "s09",
+      "slug": "service-layer-pattern",
+      "title": "Service layer pattern",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/03-architecture-patterns/5-service-layer-pattern",
+      "prerequisites": [
+        "ARCH.4"
+      ],
+      "run_command": "go run ./09-architecture/03-architecture-patterns/5-service-layer-pattern",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ARCH.6"
+      ]
+    },
+    {
+      "id": "ARCH.6",
+      "section_id": "s09",
+      "slug": "event-driven-architecture",
+      "title": "Event-driven architecture",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/03-architecture-patterns/6-event-driven-architecture",
+      "prerequisites": [
+        "ARCH.5"
+      ],
+      "run_command": "go run ./09-architecture/03-architecture-patterns/6-event-driven-architecture",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ARCH.7"
+      ]
+    },
+    {
+      "id": "ARCH.7",
+      "section_id": "s09",
+      "slug": "cqrs-basics",
+      "title": "CQRS basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/03-architecture-patterns/7-cqrs-basics",
+      "prerequisites": [
+        "ARCH.6"
+      ],
+      "run_command": "go run ./09-architecture/03-architecture-patterns/7-cqrs-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ARCH.8"
+      ]
+    },
+    {
+      "id": "ARCH.8",
+      "section_id": "s09",
+      "slug": "when-to-split-services",
+      "title": "When to split services",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/03-architecture-patterns/8-when-to-split-services",
+      "prerequisites": [
+        "ARCH.7"
+      ],
+      "run_command": "go run ./09-architecture/03-architecture-patterns/8-when-to-split-services",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "ARCH.9"
+      ]
+    },
+    {
+      "id": "ARCH.9",
+      "section_id": "s09",
+      "slug": "modular-refactor",
+      "title": "Modular Refactor",
+      "type": "exercise",
+      "subtype": "",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/03-architecture-patterns/9-modular-refactor-exercise",
+      "prerequisites": [
+        "ARCH.1",
+        "ARCH.2",
+        "ARCH.3",
+        "ARCH.4",
+        "ARCH.5",
+        "ARCH.6",
+        "ARCH.7",
+        "ARCH.8"
+      ],
+      "run_command": "go run ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise",
+      "test_command": "",
+      "starter_path": "09-architecture/03-architecture-patterns/9-modular-refactor-exercise/_starter",
+      "next_items": null
+    },
+    {
+      "id": "SEC.1",
+      "section_id": "s09",
+      "slug": "input-validation-patterns",
+      "title": "Input validation patterns",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/1-input-validation-patterns",
+      "prerequisites": null,
+      "run_command": "go run ./09-architecture/04-security/1-input-validation-patterns",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.2"
+      ]
+    },
+    {
+      "id": "SEC.2",
+      "section_id": "s09",
+      "slug": "sql-injection-prevention",
+      "title": "SQL injection prevention",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/2-sql-injection-prevention",
+      "prerequisites": [
+        "SEC.1"
+      ],
+      "run_command": "go run ./09-architecture/04-security/2-sql-injection-prevention",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.3"
+      ]
+    },
+    {
+      "id": "SEC.3",
+      "section_id": "s09",
+      "slug": "xss-and-csrf",
+      "title": "XSS and CSRF",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/3-xss-and-csrf",
+      "prerequisites": [
+        "SEC.2"
+      ],
+      "run_command": "go run ./09-architecture/04-security/3-xss-and-csrf",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.4"
+      ]
+    },
+    {
+      "id": "SEC.4",
+      "section_id": "s09",
+      "slug": "authentication-basics",
+      "title": "Authentication basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/4-authentication-basics",
+      "prerequisites": [
+        "SEC.3"
+      ],
+      "run_command": "go run ./09-architecture/04-security/4-authentication-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.5"
+      ]
+    },
+    {
+      "id": "SEC.5",
+      "section_id": "s09",
+      "slug": "jwt--implementation-and-risks",
+      "title": "JWT - implementation and risks",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/5-jwt-implementation-and-risks",
+      "prerequisites": [
+        "SEC.4"
+      ],
+      "run_command": "go run ./09-architecture/04-security/5-jwt-implementation-and-risks",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.6"
+      ]
+    },
+    {
+      "id": "SEC.6",
+      "section_id": "s09",
+      "slug": "password-hashing",
+      "title": "Password hashing",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/6-password-hashing",
+      "prerequisites": [
+        "SEC.5"
+      ],
+      "run_command": "go run ./09-architecture/04-security/6-password-hashing",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.7"
+      ]
+    },
+    {
+      "id": "SEC.7",
+      "section_id": "s09",
+      "slug": "rate-limiting-patterns",
+      "title": "Rate limiting patterns",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/7-rate-limiting-patterns",
+      "prerequisites": [
+        "SEC.6"
+      ],
+      "run_command": "go run ./09-architecture/04-security/7-rate-limiting-patterns",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.8"
+      ]
+    },
+    {
+      "id": "SEC.8",
+      "section_id": "s09",
+      "slug": "tls-and-https-in-go",
+      "title": "TLS and HTTPS in Go",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/8-tls-and-https-in-go",
+      "prerequisites": [
+        "SEC.7"
+      ],
+      "run_command": "go run ./09-architecture/04-security/8-tls-and-https-in-go",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.9"
+      ]
+    },
+    {
+      "id": "SEC.9",
+      "section_id": "s09",
+      "slug": "secrets-management",
+      "title": "Secrets management",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/9-secrets-management",
+      "prerequisites": [
+        "SEC.8"
+      ],
+      "run_command": "go run ./09-architecture/04-security/9-secrets-management",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.10"
+      ]
+    },
+    {
+      "id": "SEC.10",
+      "section_id": "s09",
+      "slug": "owasp-top-10-for-go",
+      "title": "OWASP Top 10 for Go",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/10-owasp-top-10-for-go",
+      "prerequisites": [
+        "SEC.9"
+      ],
+      "run_command": "go run ./09-architecture/04-security/10-owasp-top-10-for-go",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "SEC.11"
+      ]
+    },
+    {
+      "id": "SEC.11",
+      "section_id": "s09",
+      "slug": "secure-api",
+      "title": "Secure API",
+      "type": "exercise",
+      "subtype": "",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "09-architecture/04-security/11-secure-api-exercise",
+      "prerequisites": [
+        "SEC.1",
+        "SEC.2",
+        "SEC.3",
+        "SEC.4",
+        "SEC.5",
+        "SEC.6",
+        "SEC.7",
+        "SEC.8",
+        "SEC.9",
+        "SEC.10"
+      ],
+      "run_command": "go run ./09-architecture/04-security/11-secure-api-exercise",
+      "test_command": "",
+      "starter_path": "09-architecture/04-security/11-secure-api-exercise/_starter",
+      "next_items": null
     },
     {
       "id": "SL.1",
@@ -2713,6 +4035,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "10-production/01-structured-logging/1-slog-basics",
       "prerequisites": [],
@@ -2731,6 +4054,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "10-production/01-structured-logging/2-context-logger",
       "prerequisites": [
@@ -2751,6 +4075,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "10-production/01-structured-logging/3-custom-handler",
       "prerequisites": [
@@ -2772,6 +4097,7 @@
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "10-production/01-structured-logging/4-zerolog-comparison",
       "prerequisites": [
@@ -2793,6 +4119,7 @@
       "type": "exercise",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "mixed",
       "path": "10-production/01-structured-logging/5-exercise",
       "prerequisites": [
@@ -2816,6 +4143,7 @@
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "10-production/02-graceful-shutdown/1-signal-context",
       "prerequisites": [],
@@ -2834,6 +4162,7 @@
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "10-production/02-graceful-shutdown/2-http-server",
       "prerequisites": [
@@ -2854,6 +4183,7 @@
       "type": "capstone",
       "subtype": "",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
       "path": "10-production/02-graceful-shutdown/3-capstone",
       "prerequisites": [
@@ -2863,20 +4193,353 @@
       "run_command": "go run ./10-production/02-graceful-shutdown/3-capstone",
       "test_command": "",
       "starter_path": "",
-      "next_items": []
+      "next_items": [
+        "CFG.1"
+      ]
+    },
+    {
+      "id": "CFG.1",
+      "section_id": "s10",
+      "slug": "environment-variables",
+      "title": "Environment variables",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/04-configuration/1-environment-variables",
+      "prerequisites": null,
+      "run_command": "go run ./10-production/04-configuration/1-environment-variables",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CFG.2"
+      ]
+    },
+    {
+      "id": "CFG.2",
+      "section_id": "s10",
+      "slug": "configuration-files",
+      "title": "Configuration files",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/04-configuration/2-configuration-files",
+      "prerequisites": [
+        "CFG.1"
+      ],
+      "run_command": "go run ./10-production/04-configuration/2-configuration-files",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CFG.3"
+      ]
+    },
+    {
+      "id": "CFG.3",
+      "section_id": "s10",
+      "slug": "flag-parsing",
+      "title": "Flag parsing",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/04-configuration/3-flag-parsing",
+      "prerequisites": [
+        "CFG.2"
+      ],
+      "run_command": "go run ./10-production/04-configuration/3-flag-parsing",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CFG.4"
+      ]
+    },
+    {
+      "id": "CFG.4",
+      "section_id": "s10",
+      "slug": "12-factor-app-principles",
+      "title": "12-Factor App principles",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/04-configuration/4-twelve-factor-principles",
+      "prerequisites": [
+        "CFG.3"
+      ],
+      "run_command": "go run ./10-production/04-configuration/4-twelve-factor-principles",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "CFG.5"
+      ]
+    },
+    {
+      "id": "CFG.5",
+      "section_id": "s10",
+      "slug": "config-validation-on-boot",
+      "title": "Config validation on boot",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/04-configuration/5-config-validation-on-boot",
+      "prerequisites": [
+        "CFG.4"
+      ],
+      "run_command": "go run ./10-production/04-configuration/5-config-validation-on-boot",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": null
+    },
+    {
+      "id": "OPS.1",
+      "section_id": "s10",
+      "slug": "metrics-basics",
+      "title": "Metrics basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/05-observability/1-metrics-basics",
+      "prerequisites": null,
+      "run_command": "go run ./10-production/05-observability/1-metrics-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "OPS.2"
+      ]
+    },
+    {
+      "id": "OPS.2",
+      "section_id": "s10",
+      "slug": "prometheus-integration",
+      "title": "Prometheus integration",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/05-observability/2-prometheus-integration",
+      "prerequisites": [
+        "OPS.1"
+      ],
+      "run_command": "go run ./10-production/05-observability/2-prometheus-integration",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "OPS.3"
+      ]
+    },
+    {
+      "id": "OPS.3",
+      "section_id": "s10",
+      "slug": "distributed-tracing-basics",
+      "title": "Distributed tracing basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/05-observability/3-distributed-tracing-basics",
+      "prerequisites": [
+        "OPS.2"
+      ],
+      "run_command": "go run ./10-production/05-observability/3-distributed-tracing-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "OPS.4"
+      ]
+    },
+    {
+      "id": "OPS.4",
+      "section_id": "s10",
+      "slug": "feature-flags",
+      "title": "Feature flags",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/05-observability/4-feature-flags",
+      "prerequisites": [
+        "OPS.3"
+      ],
+      "run_command": "go run ./10-production/05-observability/4-feature-flags",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "OPS.5"
+      ]
+    },
+    {
+      "id": "OPS.5",
+      "section_id": "s10",
+      "slug": "alerting-mindset",
+      "title": "Alerting mindset",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/05-observability/5-alerting-mindset",
+      "prerequisites": [
+        "OPS.4"
+      ],
+      "run_command": "go run ./10-production/05-observability/5-alerting-mindset",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": null
+    },
+    {
+      "id": "DOCKER.1",
+      "section_id": "s10",
+      "slug": "docker-basics",
+      "title": "Docker basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/03-docker-and-deployment/1-docker-basics",
+      "prerequisites": null,
+      "run_command": "go run ./10-production/03-docker-and-deployment/1-docker-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DOCKER.2"
+      ]
+    },
+    {
+      "id": "DOCKER.2",
+      "section_id": "s10",
+      "slug": "multi-stage-builds",
+      "title": "Multi-stage builds",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/03-docker-and-deployment/2-multi-stage-builds",
+      "prerequisites": [
+        "DOCKER.1"
+      ],
+      "run_command": "go run ./10-production/03-docker-and-deployment/2-multi-stage-builds",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DOCKER.3"
+      ]
+    },
+    {
+      "id": "DOCKER.3",
+      "section_id": "s10",
+      "slug": "docker-compose",
+      "title": "Docker Compose",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/03-docker-and-deployment/3-docker-compose",
+      "prerequisites": [
+        "DOCKER.2"
+      ],
+      "run_command": "go run ./10-production/03-docker-and-deployment/3-docker-compose",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DEPLOY.1"
+      ]
+    },
+    {
+      "id": "DEPLOY.1",
+      "section_id": "s10",
+      "slug": "ci-cd-pipelines",
+      "title": "CI/CD pipelines",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/03-docker-and-deployment/4-cicd-pipelines",
+      "prerequisites": [
+        "DOCKER.3"
+      ],
+      "run_command": "go run ./10-production/03-docker-and-deployment/4-cicd-pipelines",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DEPLOY.2"
+      ]
+    },
+    {
+      "id": "DEPLOY.2",
+      "section_id": "s10",
+      "slug": "blue-green-and-rollback",
+      "title": "Blue/green and rollback",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/03-docker-and-deployment/5-blue-green-and-rollback",
+      "prerequisites": [
+        "DEPLOY.1"
+      ],
+      "run_command": "go run ./10-production/03-docker-and-deployment/5-blue-green-and-rollback",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DEPLOY.3"
+      ]
+    },
+    {
+      "id": "DEPLOY.3",
+      "section_id": "s10",
+      "slug": "dockerised-service",
+      "title": "Dockerised Service",
+      "type": "exercise",
+      "subtype": "",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "10-production/03-docker-and-deployment/6-dockerised-service",
+      "prerequisites": [
+        "DOCKER.1",
+        "DOCKER.2",
+        "DOCKER.3",
+        "DEPLOY.1",
+        "DEPLOY.2"
+      ],
+      "run_command": "go run ./10-production/03-docker-and-deployment/6-dockerised-service",
+      "test_command": "",
+      "starter_path": "10-production/03-docker-and-deployment/6-dockerised-service/_starter",
+      "next_items": [
+        "CG.1"
+      ]
     },
     {
       "id": "CG.1",
-      "section_id": "s11",
+      "section_id": "s10",
       "slug": "go-generate",
       "title": "go generate Primer",
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "11-flagship/02-code-generation/1-go-generate",
+      "path": "10-production/06-code-generation/1-go-generate",
       "prerequisites": [],
-      "run_command": "go run ./11-flagship/02-code-generation/1-go-generate",
+      "run_command": "go run ./10-production/06-code-generation/1-go-generate",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2885,18 +4548,19 @@
     },
     {
       "id": "CG.2",
-      "section_id": "s11",
+      "section_id": "s10",
       "slug": "mockery",
       "title": "Mockery Workflow",
       "type": "lesson",
       "subtype": "pattern",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "11-flagship/02-code-generation/2-mockery",
+      "path": "10-production/06-code-generation/2-mockery",
       "prerequisites": [
         "CG.1"
       ],
-      "run_command": "go run ./11-flagship/02-code-generation/2-mockery",
+      "run_command": "go run ./10-production/06-code-generation/2-mockery",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2905,19 +4569,41 @@
     },
     {
       "id": "CG.3",
-      "section_id": "s11",
+      "section_id": "s10",
       "slug": "sqlc",
       "title": "sqlc Workflow",
       "type": "lesson",
       "subtype": "integration",
       "level": "core",
+      "status": "implemented",
       "verification_mode": "run",
-      "path": "11-flagship/02-code-generation/3-sqlc",
+      "path": "10-production/06-code-generation/3-sqlc",
       "prerequisites": [
         "CG.1",
         "CG.2"
       ],
-      "run_command": "go run ./11-flagship/02-code-generation/3-sqlc",
+      "run_command": "go run ./10-production/06-code-generation/3-sqlc",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "FG.1"
+      ]
+    },
+    {
+      "id": "FG.1",
+      "section_id": "s11",
+      "slug": "enterprise-capstone",
+      "title": "Enterprise Capstone",
+      "type": "capstone",
+      "subtype": "",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "rubric",
+      "path": "11-flagship/01-enterprise-capstone",
+      "prerequisites": [
+        "CG.3"
+      ],
+      "run_command": "",
       "test_command": "",
       "starter_path": "",
       "next_items": []

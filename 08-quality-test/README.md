@@ -1,28 +1,15 @@
-# 08 Quality & Test
+# 08 Quality and Testing
 
 ## Mission
 
-This stage teaches how to prove behavior, measure performance, and investigate runtime cost instead
-of guessing.
-
-By the end of this stage, a learner should be able to:
-
-- write and run tests as part of normal engineering work
-- understand the role of benchmarks and profiling
-- use quality tooling to support decisions, not just to satisfy a checklist
-
-## Stage Map
-
-| Track | Surface | Core Job |
-| --- | --- | --- |
-| `QT.1` | [quality and performance](./01-quality-and-performance) | teach testing, benchmarks, profiling, and adjacent quality references |
+This stage now extends both testing and profiling so learners can prove behavior and inspect runtime cost with more than one tool.
 
 ## Suggested Learning Flow
 
-1. Start with [testing](./01-quality-and-performance/testing).
-2. Continue into [profiling](./01-quality-and-performance/profiling).
-3. Use the reference surfaces only when they deepen the current problem.
+1. TE.1-TE.10 cover unit tests, fuzzing, seams, mocks, integration tests, and golden files.
+2. PR.1-PR.6 now cover CPU, memory, escape analysis, benchmark discipline, and memory layout.
+3. The stage ends with proof surfaces for both correctness and cost-awareness.
 
 ## Next Step
 
-After this stage, move to [09 Architecture](../09-architecture).
+After this section, continue to `09-architecture`.
