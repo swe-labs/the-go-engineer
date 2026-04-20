@@ -2,7 +2,7 @@
 
 ## Mission
 
-Build a small order-summary program that combines validation, helper functions, multiple return values, and explicit errors into one readable flow.
+Build a small order-summary program that combines validation, helper functions, first-class functions, closures, multiple return values, and explicit errors into one readable flow.
 
 ## Prerequisites
 
@@ -12,6 +12,8 @@ Build a small order-summary program that combines validation, helper functions, 
 - `FE.4` errors as values
 - `FE.5` validation
 - `FE.6` orchestration
+- `FE.8` first-class functions
+- `FE.9` closures - mechanics
 
 ## Mental Model
 
@@ -20,6 +22,7 @@ This milestone is a pipeline of small functions:
 - validate inputs
 - stop early on error
 - calculate totals
+- apply pricing rules passed in as callbacks
 - build the final summary
 
 The goal is not cleverness. It is honest flow control with clear responsibilities.
@@ -32,15 +35,16 @@ graph TD
     B --> C["validate prices"]
     C --> D["validate shipping"]
     D --> E["sum prices"]
-    E --> F["build summary"]
-    B --> G["return error early"]
-    C --> G
-    D --> G
+    E --> F["apply pricing rules"]
+    F --> G["build summary"]
+    B --> H["return error early"]
+    C --> H
+    D --> H
 ```
 
 ## Machine View
 
-Each helper returns control to `processOrder`. If a helper returns an error, `processOrder` immediately returns that error to its caller. Only the success path reaches the calculation and summary steps.
+Each helper returns control to `processOrder`. Pricing rules are passed in as function values, and the closure-built discount rule keeps its own threshold and amount alive after the factory function returns. If any validator fails, `processOrder` returns early before the pricing pipeline runs.
 
 ## Run Instructions
 
@@ -60,13 +64,21 @@ go test ./03-functions-errors/7-order-summary
 
 This helper performs one job only: calculate the subtotal.
 
+### `applyPricingRules(subtotal int, rules ...pricingRule) int`
+
+This helper shows FE.8 directly: callers pass behavior in as function values, and the order flow applies them without knowing their internals.
+
+### `makeMinimumSubtotalDiscount(...)`
+
+This helper shows FE.9 directly: it returns a closure that captures the discount threshold and amount so the rule can be reused later.
+
 ### `buildSummary(...)`
 
-Formatting lives in its own helper so it does not get mixed into validation logic.
+Formatting lives in its own helper so it does not get mixed into validation logic, and it makes the rule-adjusted subtotal visible.
 
 ### `processOrder(...) (string, error)`
 
-This function orchestrates the whole flow and makes the contract explicit: summary on success, error on failure.
+This function orchestrates the whole flow and makes the contract explicit: summary on success, error on failure. It also shows that orchestration can accept behavior from FE.8 without losing readability.
 
 ### `return "", err`
 
@@ -75,8 +87,8 @@ Early returns keep failure handling honest and stop the flow before invalid data
 ## Try It
 
 1. Add another item price to the success case.
-2. Make shipping negative and trace the failure path.
-3. Replace the order name with only spaces and verify validation stops the flow.
+2. Change the discount threshold so the closure no longer applies to the starter order.
+3. Add a second pricing rule and trace how the adjusted subtotal changes step by step.
 
 ## Verification Surface
 
@@ -88,14 +100,14 @@ go test ./03-functions-errors/7-order-summary
 
 ## ⚠️ In Production
 
-This is the everyday shape of backend Go code: validate, return errors explicitly, keep helpers small, and make orchestration readable. Systems become fragile when these concerns collapse into one giant function.
+This is the everyday shape of backend Go code: validate, return errors explicitly, keep helpers small, and pass policy in as narrow callbacks. Closure-based configuration is common in pricing, retries, middleware, and feature-flag evaluation.
 
 ## 🤔 Thinking Questions
 
 1. Why is returning an explicit error better than hiding failure inside printed output?
-2. What gets clearer when validation, calculation, and formatting are separate helpers?
-3. Why is `processOrder` a better owner of sequence than `main()`?
+2. What gets clearer when pricing policy is passed in as a function instead of hard-coded into `processOrder`?
+3. Why is a closure a better fit for discount configuration than global variables?
 
 ## Next Step
 
-Continue to `TI.1` structs.
+Continue to `FE.10`.

@@ -12,10 +12,12 @@ import (
 // 05 Functions and Errors - Order Summary (Exercise)
 //
 // Mental model:
-// Smaller helpers validate and calculate, and one orchestration function keeps
-// the whole flow readable.
+// Smaller helpers validate and calculate, one orchestration function owns the
+// sequence, and pricing rules are passed in as function values.
 //
 // Run: go run ./03-functions-errors/7-order-summary
+
+type pricingRule func(int) int
 
 func validateOrderName(name string) error {
 	if strings.TrimSpace(name) == "" {
@@ -57,12 +59,47 @@ func sumPrices(prices []int) int {
 	return total
 }
 
-func buildSummary(name string, subtotal int, shipping int) string {
-	total := subtotal + shipping
-	return fmt.Sprintf("%s -> subtotal: %d, shipping: %d, total: %d", name, subtotal, shipping, total)
+func applyPricingRules(subtotal int, rules ...pricingRule) int {
+	adjusted := subtotal
+
+	for _, rule := range rules {
+		adjusted = rule(adjusted)
+		if adjusted < 0 {
+			adjusted = 0
+		}
+	}
+
+	return adjusted
 }
 
-func processOrder(name string, prices []int, shipping int) (string, error) {
+func makeMinimumSubtotalDiscount(threshold int, amount int) pricingRule {
+	return func(subtotal int) int {
+		if subtotal < threshold {
+			return subtotal
+		}
+
+		adjusted := subtotal - amount
+		if adjusted < 0 {
+			return 0
+		}
+
+		return adjusted
+	}
+}
+
+func buildSummary(name string, subtotal int, adjustedSubtotal int, shipping int) string {
+	total := adjustedSubtotal + shipping
+	return fmt.Sprintf(
+		"%s -> subtotal: %d, adjusted subtotal: %d, shipping: %d, total: %d",
+		name,
+		subtotal,
+		adjustedSubtotal,
+		shipping,
+		total,
+	)
+}
+
+func processOrder(name string, prices []int, shipping int, rules ...pricingRule) (string, error) {
 	if err := validateOrderName(name); err != nil {
 		return "", err
 	}
@@ -76,27 +113,31 @@ func processOrder(name string, prices []int, shipping int) (string, error) {
 	}
 
 	subtotal := sumPrices(prices)
-	return buildSummary(name, subtotal, shipping), nil
+	adjustedSubtotal := applyPricingRules(subtotal, rules...)
+
+	return buildSummary(name, subtotal, adjustedSubtotal, shipping), nil
 }
 
 func main() {
 	fmt.Println("=== Order Summary ===")
 
-	summary, err := processOrder("starter cart", []int{12, 18, 25}, 10)
+	vipDiscount := makeMinimumSubtotalDiscount(50, 5)
+
+	summary, err := processOrder("starter cart", []int{12, 18, 25}, 10, vipDiscount)
 	if err != nil {
 		fmt.Println("error:", err)
 	} else {
 		fmt.Println(summary)
 	}
 
-	summary, err = processOrder(" ", []int{12, 18, 25}, 10)
+	summary, err = processOrder("small cart", []int{12, 8}, 5, vipDiscount)
 	if err != nil {
 		fmt.Println("error:", err)
 	} else {
 		fmt.Println(summary)
 	}
 
-	summary, err = processOrder("starter cart", []int{12, -3, 25}, 10)
+	summary, err = processOrder(" ", []int{12, 18, 25}, 10, vipDiscount)
 	if err != nil {
 		fmt.Println("error:", err)
 	} else {
@@ -104,7 +145,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("SECTION COMPLETE: FE.7 order-summary")
-	fmt.Println("NEXT UP: 02-engineering-core")
+	fmt.Println("NEXT UP: FE.10")
+	fmt.Println("Current: FE.7 (order summary)")
 	fmt.Println("---------------------------------------------------")
 }
