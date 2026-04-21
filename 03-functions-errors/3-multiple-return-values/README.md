@@ -8,7 +8,7 @@ Learn how one function can return more than one value and why that matters befor
 
 You now know how to pass data into functions and get a result back. But sometimes you need more than one piece of information.
 
-For example, a function that searches a list might need to return both the result AND whether it was found. Go handles this naturally by allowing multiple return values.
+For example, a function that searches a list might need to return both the result and whether it was found. Go handles this naturally by allowing multiple return values.
 
 This lesson builds on FE.2 by showing how to return more than one piece of data.
 
@@ -32,6 +32,7 @@ graph LR
     A["input"] --> B["function boundary"]
     B --> C["value or error"]
 ```
+
 ```text
 findItem(items, "tea")
         |
@@ -52,7 +53,7 @@ caller chooses what each returned value means
 
 Go lets a function hand multiple values back to the caller directly.
 
-The important machine truth here is not “where each byte goes.”
+The important machine truth here is not "where each byte goes."
 It is that the caller receives more than one result and must decide what to do with each one.
 
 That prepares the learner for the next lesson, where the second value becomes an `error`.
@@ -102,7 +103,7 @@ The function still returns two values, but they now mean:
 
 This second function returns two related values without using a boolean.
 
-That proves multiple return values are broader than only â€œsuccess or failure.â€
+That proves multiple return values are broader than only "success or failure."
 
 ### `parts := strings.SplitN(fullName, " ", 2)`
 
@@ -147,15 +148,17 @@ This line shows the same pattern again with a different meaning.
 - Is this already the same as `(value, error)`?
   Not yet, but it prepares you for that pattern.
 
-## ⚠️ In Production
+## In Production
+
 Multiple return values let Go functions communicate more honestly.
 They make success, failure, and extra context visible to the caller.
 
-## 🤔 Thinking Questions
+## Thinking Questions
 
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
 ## Next Step
 
 Continue to `FE.4` errors as values.
