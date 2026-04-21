@@ -62,5 +62,5 @@ solution.
 ## Next Step
 
 After you complete this exercise, continue to the [Stage 07 overview](../README.md) or move to
-[Stage 08: Quality and Performance](../../08-quality-test/01-quality-and-performance).
+[Stage 08: Quality and Performance](../../../08-quality-test/01-quality-and-performance).
 

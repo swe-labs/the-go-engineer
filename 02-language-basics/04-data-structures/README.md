@@ -2,89 +2,68 @@
 
 ## Mission
 
-This section teaches learners how Go stores and moves collections of data in memory, then shows how
-that affects mutation and performance.
+This section teaches the data structures that turn basic control flow into problem solving.
 
-By the end of this section, you should be comfortable with:
+By the end of this section, a learner should be able to:
 
-- arrays as fixed-size value types
-- slices as Go's main dynamic collection
-- maps for keyed lookup
-- pointers for mutation and nil-aware references
-- combining those pieces in one small in-memory program without leaning on later-section abstractions
+- explain when arrays, slices, maps, and pointers are the right tool
+- reason about copy behavior versus shared state
+- follow the machine-level consequences of mutation and addressing
+- combine slices, maps, and pointers in a small milestone project
 
-## Zero-Magic Rule
+## Why This Section Exists Now
 
-This section intentionally stops before later-section abstractions like helper-function design,
-struct-heavy modeling, methods, and package layering.
+The learner already knows values, branching, loops, and cleanup.
 
-That means the section milestone should prove slices, maps, and pointers directly rather than
-smuggling in ideas from later sections.
+That is enough to ask stronger questions:
 
-## Beta Stage Ownership
+- how should a program store ordered data?
+- when is key-based lookup better than scanning?
+- what changes when two variables share access to the same underlying state?
 
-This section belongs to [02 Language Basics](../../docs/stages/02-language-basics.md).
+Those are data-structure questions.
 
-In the current repo architecture, it lives at `02-language-basics/04-data-structures`.
+## Zero-Magic Boundary
 
-## Who Should Start Here
+This section teaches:
 
-### Full Path
+- arrays
+- slices
+- maps
+- pointers
+- slice sharing and mutation
 
-Start here after completing [03-control-flow](../03-control-flow/).
+It does **not** jump ahead into:
 
-### Bridge Path
+- package-level architecture
+- concurrency safety
+- profiling strategy
+- advanced memory tuning
 
-If loops, branching, and multiple return values already feel comfortable, begin at `DS.1`.
+Those topics come later, after the learner has earned stronger system context.
 
-### Targeted Path
+## Section Ownership
 
-If you only want the live milestone, review these first:
+This section belongs to [02 Language Basics](../README.md).
 
-- `DS.1` arrays
-- `DS.2` slices
-- `DS.3` maps
-- `DS.4` pointers
-- `DS.5` slice sharing and capacity
+## Suggested Learning Flow
 
-## Section Map
-
-| ID | Type | Surface | Why It Matters | Requires |
-| --- | --- | --- | --- | --- |
-| `DS.1` | Lesson | [arrays](./1-array) | Introduces fixed-size collections and value-copy behavior. | entry |
-| `DS.2` | Lesson | [slices](./2-slices) | Teaches Go's primary dynamic collection type and the length/capacity model. | `DS.1` |
-| `DS.3` | Lesson | [maps](./3-maps) | Introduces keyed lookup and the comma-ok pattern for presence checks. | `DS.2` |
-| `DS.4` | Lesson | [pointers](./4-pointers) | Shows how Go models mutation and shared access without pointer arithmetic. | `DS.1`, `DS.2` |
-| `DS.5` | Lesson | [slice sharing and capacity](./5-slices-2) | Explains shared backing arrays and the mutation traps that come with sub-slices. | `DS.2`, `DS.4` |
-| `DS.6` | Exercise | [contact directory](./6-contact-manager) | Combines slices, maps, and pointers in one runnable milestone without jumping ahead to later abstractions. | `DS.1`, `DS.2`, `DS.3`, `DS.4`, `DS.5` |
-
-## Suggested Order
-
-1. Work through `DS.1` to `DS.5` in order.
-2. For each lesson, read the lesson `README.md` first and then run `main.go`.
-3. Complete `DS.6` without copying the finished solution line by line.
+1. Start with arrays and slices so ordered data feels concrete.
+2. Move into maps when lookup by key becomes the better mental model.
+3. Use pointers after you can already describe the value being changed.
+4. Finish with the contact-manager milestone before moving on.
 
 ## Section Milestone
 
-`DS.6` is the current live milestone for this section.
+`DS.6` is the milestone for this section.
 
-If you can complete it and explain:
+You are ready for the next section when you can explain:
 
-- why slices and maps serve different jobs
-- why pointers matter when updates must stick
-- why shared backing arrays can surprise you when working with sub-slices
-- why the milestone avoids helper-function and struct-heavy design on purpose at this stage
-
-then you are ready to move into `05-functions-and-errors`.
-
-## References
-
-1. [Go Blog: Go Slices - usage and internals](https://go.dev/blog/slices-intro)
-2. [Go Blog: Go Maps in Action](https://go.dev/blog/maps)
-3. [Effective Go: Data](https://go.dev/doc/effective_go#data)
+- why slices are usually the real ordered-data tool in Go
+- why maps trade order for lookup speed
+- why pointers let you update the original value instead of a copy
+- how these concepts combine in one small directory-style program
 
 ## Next Step
 
-After `DS.6`, continue to [05-functions-and-errors](../05-functions-and-errors/).
-That keeps the staged learner path intact while the broader beta shell still groups both sections
-under [02 Language Basics](../../docs/stages/02-language-basics.md).
+After `DS.6`, continue to [03 Functions & Errors](../../03-functions-errors).

@@ -129,8 +129,7 @@ func Validate(root string, report func(string)) (Result, error) {
 		return Result{}, err
 	}
 
-	pressureErrors := validatePressureDocs(root, report)
-	templateErrors := validateTemplateDocs(root, report)
+	markdownErrors := validateMarkdownSurfaces(root, report)
 
 	return Result{
 		LessonCount:      lessonCount,
@@ -139,7 +138,7 @@ func Validate(root string, report func(string)) (Result, error) {
 		V2ItemCount:      v2ItemCount,
 		PlaceholderCount: v2PlaceholderCount,
 		HasV2:            hasV2,
-		ErrorCount:       pathErrors + runErrors + v2Errors + pressureErrors + templateErrors,
+		ErrorCount:       pathErrors + runErrors + v2Errors + markdownErrors,
 	}, nil
 }
 
@@ -633,8 +632,8 @@ func validateRequiredHeadingsForItem(root, readmePath string, item V2Item, repor
 	}
 
 	requiredHeadings = append(requiredHeadings,
-		"## ⚠️ In Production",
-		"## 🤔 Thinking Questions",
+		"## In Production",
+		"## Thinking Questions",
 		"## Next Step",
 	)
 
@@ -649,6 +648,7 @@ func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []str
 	}
 
 	text := strings.ReplaceAll(string(data), "\r\n", "\n")
+	text = normalizeFoundationsHeadingAliases(text)
 	errorsFound := 0
 	lastOffset := 0
 	for _, heading := range headings {
@@ -671,6 +671,22 @@ func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []str
 	}
 
 	return errorsFound
+}
+func normalizeFoundationsHeadingAliases(text string) string {
+	replacements := map[string]string{
+		"## In Production":                 "## In Production",
+		"## \u26a0\ufe0f In Production":    "## In Production",
+		"## âš ï¸ In Production":          "## In Production",
+		"## Thinking Questions":            "## Thinking Questions",
+		"## \U0001F914 Thinking Questions": "## Thinking Questions",
+		"## ðŸ¤” Thinking Questions":       "## Thinking Questions",
+	}
+
+	for from, to := range replacements {
+		text = strings.ReplaceAll(text, from, to)
+	}
+
+	return text
 }
 
 func validateFoundationsVisualModelUsesMermaid(root, relPath, itemID string, report func(string)) int {
@@ -865,7 +881,7 @@ var rubricSurfaceHeadings = []string{
 }
 
 func validatePressureDocs(root string, report func(string)) int {
-	return 0 // bypassed for v2 architecture migration
+	return 0
 }
 
 func validateTemplateDocs(root string, report func(string)) int {
@@ -885,6 +901,66 @@ func validateTemplateDocs(root string, report func(string)) int {
 		}
 
 		errorsFound += validateMarkdownLocalLinks(root, relPath, report)
+	}
+
+	return errorsFound
+}
+func validateMarkdownSurfaces(root string, report func(string)) int {
+	errorsFound := 0
+
+	walkErr := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if d.IsDir() {
+			switch d.Name() {
+			case ".git", "vendor", ".agents", ".cache", ".github", ".opencode", "temp":
+				return filepath.SkipDir
+			default:
+				return nil
+			}
+		}
+
+		if filepath.Ext(path) != ".md" {
+			return nil
+		}
+
+		relPath, err := filepath.Rel(root, path)
+		if err != nil {
+			return err
+		}
+
+		cleanPath := filepath.ToSlash(filepath.Clean(relPath))
+		errorsFound += validateMarkdownLocalLinks(root, cleanPath, report)
+		errorsFound += validateMarkdownTextHealth(root, cleanPath, report)
+
+		return nil
+	})
+	if walkErr != nil {
+		report(fmt.Sprintf("Failed to scan markdown surfaces: %v", walkErr))
+		return errorsFound + 1
+	}
+
+	return errorsFound
+}
+
+func validateMarkdownTextHealth(root, relPath string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read markdown surface: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	text := string(data)
+	errorsFound := 0
+
+	for _, marker := range mojibakeMarkers {
+		if strings.Contains(text, marker) {
+			report(fmt.Sprintf("Possible mojibake in markdown surface: %s", filepath.ToSlash(relPath)))
+			errorsFound++
+			break
+		}
 	}
 
 	return errorsFound

@@ -32,4 +32,4 @@ then the profiling part of Stage 08 is doing its job.
 ## Next Step
 
 After `PR.2`, continue back to the [Stage 08 overview](../README.md) or move on to
-[Stage 09: Application Architecture](../../09-architecture).
+[Stage 09: Application Architecture](../../../09-architecture).

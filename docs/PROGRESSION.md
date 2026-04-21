@@ -1,163 +1,77 @@
-# The Go Engineer — Visual Progression
+# The Go Engineer Visual Progression
 
-> This document visualises the learning journey through the v2.1 curriculum.
-> Section IDs and milestones must match `ARCHITECTURE.md`. If they conflict, `ARCHITECTURE.md` wins.
+> This document visualizes the learner journey through the v2.1 curriculum.
+> Section IDs and milestones here must match [ARCHITECTURE.md](../ARCHITECTURE.md).
 
----
+## Phase Progression
 
-## Overall Progress Model
-
-```text
-Phase 0       Phase 1              Phase 2                Phase 3            Phase 4
-(0–5%)        (5–52%)              (52–87%)               (87–96%)           (96–100%)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MACHINE       LANGUAGE             ENGINEERING            SYSTEMS            FLAGSHIP
-FOUNDATION    FOUNDATION           CORE                   ENGINEERING        PROJECT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-"I understand "I write Go          "I build systems       "I design and      "I build and
- the machine"  fluently"            that work at scale"    operate systems"   ship it"
+```mermaid
+flowchart LR
+    P0["Phase 0\nMachine Foundation\ns00\n0% -> 5%"] --> P1["Phase 1\nLanguage Foundation\ns01-s04\n5% -> 52%"]
+    P1 --> P2["Phase 2\nEngineering Core\ns05-s08\n52% -> 87%"]
+    P2 --> P3["Phase 3\nSystems Engineering\ns09-s10\n87% -> 96%"]
+    P3 --> P4["Phase 4\nFlagship Project\ns11\n96% -> 100%"]
 ```
 
----
+## Beginner to Senior Path
 
-## Learning Path: Zero to Senior
-
-### Path A: Complete Beginner
-
-```text
-START
-  │
-  ▼
-[s00] How Computers Work ──→ [s01] Getting Started ──→ [s02] Language Basics ──→ [s03] Functions & Errors
-  (0%)                        (5%)                      (12%)                     (28%)
-  │
-  ▼
-[s04] Types & Design ──→ [s05] Packages, I/O & CLI ──→ [s06] Backend, APIs & DB ──→ [s07] Concurrency
-  (38%)                    (52%)                          (62%)                       (75%)
-  │
-  ▼
-[s08] Quality & Testing ──→ [s09] Architecture & Security ──→ [s10] Production Ops ──→ [s11] GoScale
-  (83%)                       (87%)                            (92%)                    (96% → 100%)
+```mermaid
+flowchart LR
+    S00["s00\nHow Computers Work"] --> S01["s01\nGetting Started"]
+    S01 --> S02["s02\nLanguage Basics"]
+    S02 --> S03["s03\nFunctions & Errors"]
+    S03 --> S04["s04\nTypes & Design"]
+    S04 --> S05["s05\nPackages, I/O & CLI"]
+    S05 --> S06["s06\nBackend, APIs & Databases"]
+    S06 --> S07["s07\nConcurrency"]
+    S07 --> S08["s08\nQuality & Testing"]
+    S08 --> S09["s09\nArchitecture & Security"]
+    S09 --> S10["s10\nProduction Operations"]
+    S10 --> S11["s11\nGoScale Flagship"]
 ```
-
----
 
 ## Engineering Context Growth
 
-```text
-Engineering Context %
-
-100% ┤
-     │                                                          ████ GoScale ████
- 90% ┤                                                    ████
-     │                                              ████
- 80% ┤                                        ████
-     │                                  █████
- 70% ┤                           █████
-     │                     █████
- 60% ┤               █████                    ●●●● Phase 2: Engineering Core
-     │          █████                         ●●●●
- 50% ┤     ●●●●                          ●●●●
-     │     ●●●●                       ●●●●
- 40% ┤     ●●●●                 ●●●●
-     │     ●●●●           ●●●●
- 30% ┤     ●●●●      ●●●●
-     │     ●●●●●●●●●●●●
- 20% ┤     ●●●●●●●●●●●●●●  ●●●● Phase 0–1: Foundation
-     │                      ●●●●
- 10% ┤
-     │
-  0% └──────────────────────────────────────────────────────────────
-         s00–s02       s03–s04       s05–s08        s09–s10       s11
-
-     ● = Syntax + Basic Why
-     █ = Full Engineering Context
-```
-
----
+| Phase | Learner Shift | Engineering Weight |
+| --- | --- | --- |
+| Phase 0 | "I understand what the machine is doing." | low but concrete |
+| Phase 1 | "I can read and write Go intentionally." | growing |
+| Phase 2 | "I can build systems that behave predictably." | high |
+| Phase 3 | "I can design, secure, and operate systems." | very high |
+| Phase 4 | "I can integrate everything into one production-shaped system." | full |
 
 ## Key Milestones
 
-These milestones match the Milestone Progression table in `ARCHITECTURE.md`:
+| Progress | Milestone | Surface | Proof |
+| --- | --- | --- | --- |
+| 5% | Machine model checkpoint | `HC.5` | explain process, memory, and execution basics |
+| 10% | First program | `GT.2` | run and modify Hello World |
+| 18% | Pricing Checkout | `CF.7` | reason through branches, loops, and cleanup |
+| 24% | Contact Directory | `DS.6` | use slices, maps, and pointers together |
+| 30% | Order Summary | `FE.7` | validate, orchestrate, and return errors cleanly |
+| 44% | Payroll Processor | `TI.10` | model types, interfaces, and generics together |
+| 58% | Log Search CLI | `FS.7` | build a practical I/O-heavy CLI tool |
+| 66% | REST API | `HS.10` | build a timeout-aware HTTP service |
+| 70% | gRPC Service | `API.9` | define and serve a gRPC contract |
+| 74% | Repository Pattern Project | `DB.6` | manage database access through clear boundaries |
+| 77% | Concurrent Downloader | `GC.7` | coordinate goroutines and channels safely |
+| 81% | URL Health Checker | `CP.5` | debug concurrent failure and cancellation paths |
+| 85% | Benchmark Optimization | `PR.5` | profile and improve performance with evidence |
+| 88% | Modular Refactor | `ARCH.9` | reorganize a service around stronger architecture |
+| 91% | Secure API | `SEC.11` | apply practical security safeguards |
+| 96% | Shutdown Capstone | `GS.3` | coordinate graceful drain and shutdown |
+| 100% | GoScale Complete | `s11` | integrate the whole system end to end |
 
-| %    | Milestone                 | Lesson   | Engineering Checkpoint                          |
-| ---- | ------------------------- | -------- | ----------------------------------------------- |
-| 5%   | Machine model checkpoint  | HC.5     | Explain CPU, memory, processes, signals          |
-| 10%  | First program             | GT.2     | Run and modify Hello World                       |
-| 13%  | Toolchain confident       | GT.6     | Read and fix compiler errors                     |
-| 18%  | Pricing Checkout          | CF.7     | Handle all control flow cases cleanly            |
-| 24%  | Contact Directory         | DS.6     | Use slices + maps + pointers together            |
-| 30%  | Order Summary             | FE.7     | Handle validation, propagation, orchestration    |
-| 44%  | Payroll Processor         | TI.10    | Implement interfaces, type switches, generics    |
-| 51%  | Config Parser (strings)   | ST.6     | Parse text with templates and regex              |
-| 58%  | Log Search CLI            | FS.7     | Build a CLI tool with filesystem I/O             |
-| 66%  | REST API with timeouts    | HS.10    | Full HTTP middleware stack with timeouts          |
-| 70%  | gRPC Service              | API.9    | Build a gRPC service with interceptors           |
-| 74%  | Repository Pattern        | DB.6     | Database CRUD with transactions                  |
-| 77%  | Concurrent Downloader     | GC.7     | Handle race conditions and goroutine lifecycle    |
-| 81%  | URL Health Checker        | CP.5     | Debug concurrent failures                        |
-| 85%  | Benchmark optimisation    | PR.5     | Profile and optimise with before/after evidence   |
-| 88%  | Modular Refactor Capstone | ARCH.9   | Refactor to hexagonal architecture               |
-| 91%  | Secure API                | SEC.11   | Apply OWASP Top 10 checklist                     |
-| 94%  | Dockerised Service        | DEPLOY.3 | Deploy to container with CI/CD                   |
-| 96%  | Shutdown Capstone         | GS.3     | Graceful shutdown with zero-downtime              |
-| 100% | GoScale Complete          | s11      | Full production-grade SaaS backend               |
+## Promise
 
----
+By completing this curriculum, the learner should be able to:
 
-## Core Engineering Principles Per Phase
-
-### Phase 0: Machine Foundation
-
-- **Core Idea**: Code is instructions for a computer
-- **Key Insight**: Programs, memory, processes, and signals
-- **Engineering Mind**: "What does the computer actually do?"
-
-### Phase 1: Language Foundation
-
-- **Core Idea**: Variables, types, control flow, functions, errors
-- **Key Insight**: Fail fast, validate early, handle errors explicitly
-- **Engineering Mind**: "What happens when things go wrong?"
-
-### Phase 2: Engineering Core
-
-- **Core Idea**: Concurrency is about coordination, not parallelism
-- **Key Insight**: Race conditions, deadlocks, goroutine leaks, context cancellation
-- **Engineering Mind**: "What breaks when 1000 users use this?"
-
-### Phase 3: Systems Engineering
-
-- **Core Idea**: Systems are observed, not guessed
-- **Key Insight**: Architecture trade-offs, security hardening, deployment
-- **Engineering Mind**: "How do I debug at 3 AM?"
-
-### Phase 4: Flagship Project
-
-- **Core Idea**: Everything comes together
-- **Key Insight**: Real-world complexity, trade-offs, decisions under pressure
-- **Engineering Mind**: "What would a senior engineer do?"
-
----
-
-## The Promise
-
-```text
-By completing this curriculum, you will be able to:
-
-  ✓ Explain how a computer executes your code
-  ✓ Write Go code from scratch
-  ✓ Structure code for maintainability
-  ✓ Handle errors properly with the three-tier framework
-  ✓ Write concurrent code safely
-  ✓ Test code comprehensively
-  ✓ Profile and optimise performance
-  ✓ Build production HTTP and gRPC services
-  ✓ Work with databases reliably
-  ✓ Secure your applications against common vulnerabilities
-  ✓ Deploy and operate systems
-  ✓ Think like a senior engineer
-```
-
----
-
-_This document is maintained alongside ARCHITECTURE.md. The curriculum will evolve as sections are completed._
+- explain how a computer executes code
+- write Go code from scratch
+- structure code for maintainability
+- handle errors explicitly and predictably
+- write concurrent code with safer coordination
+- test and profile code with evidence
+- build production HTTP, gRPC, and database-backed services
+- secure, deploy, and operate systems
+- think like an engineer instead of copying isolated patterns

@@ -29,5 +29,5 @@ You should be able to:
 
 ## Next Step
 
-After `SL.5`, continue to [GS.1 signal context](../../graceful-shutdown) or back to the
+After `SL.5`, continue to [GS.1 signal context](../../02-graceful-shutdown) or back to the
 [Structured Logging track](../README.md).

@@ -50,4 +50,4 @@ For each lesson:
 
 ## Next Step
 
-Continue to [03-control-flow](../03-control-flow/) after this section.
+Continue to [03 Control Flow](./03-control-flow/) after this section.

@@ -41,4 +41,4 @@ You should be able to:
 ## Next Step
 
 After `PR.2`, continue to the [Stage 08 overview](../README.md) or move to
-[Stage 09: Application Architecture](../../../09-architecture).
+[Stage 09: Application Architecture](../../../../09-architecture).

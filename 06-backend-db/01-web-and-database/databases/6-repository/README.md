@@ -80,5 +80,5 @@ Your finished solution should:
 
 ## Next Step
 
-After you complete this milestone, continue to [Stage 07: Concurrency](../../07-concurrency/01-concurrency) or
+After you complete this milestone, continue to [Stage 07: Concurrency](../../../../07-concurrency/01-concurrency) or
 explore the other Stage 06 legacy reference surfaces if you need more web/database examples first.

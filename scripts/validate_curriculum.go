@@ -21,11 +21,21 @@ func main() {
 	if result.ErrorCount == 0 {
 		if result.HasV2 {
 			if result.PlaceholderCount > 0 {
-				fmt.Printf("Success! %d v2 sections, %d v2 items checked (%d placeholder warnings). %d lessons mapped, %d files scanned.\n",
-					result.V2SectionCount, result.V2ItemCount, result.PlaceholderCount, result.LessonCount, result.FilesScanned)
+				if result.LessonCount > 0 {
+					fmt.Printf("Success! %d legacy lessons mapped, %d files with run commands validated, and %d v2 sections plus %d v2 items checked (%d placeholder warnings).\n",
+						result.LessonCount, result.FilesScanned, result.V2SectionCount, result.V2ItemCount, result.PlaceholderCount)
+				} else {
+					fmt.Printf("Success! %d files with run commands validated, and %d v2 sections plus %d v2 items checked (%d placeholder warnings).\n",
+						result.FilesScanned, result.V2SectionCount, result.V2ItemCount, result.PlaceholderCount)
+				}
 			} else {
-				fmt.Printf("Success! All %d lessons mapped, %d files with run commands validated, and %d v2 sections plus %d v2 items checked.\n",
-					result.LessonCount, result.FilesScanned, result.V2SectionCount, result.V2ItemCount)
+				if result.LessonCount > 0 {
+					fmt.Printf("Success! %d legacy lessons mapped, %d files with run commands validated, and %d v2 sections plus %d v2 items checked.\n",
+						result.LessonCount, result.FilesScanned, result.V2SectionCount, result.V2ItemCount)
+				} else {
+					fmt.Printf("Success! %d files with run commands validated, and %d v2 sections plus %d v2 items checked.\n",
+						result.FilesScanned, result.V2SectionCount, result.V2ItemCount)
+				}
 			}
 			return
 		}

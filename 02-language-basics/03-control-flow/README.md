@@ -2,8 +2,7 @@
 
 ## Mission
 
-This section teaches learners how a Go program decides what to do next and how it repeats work
-without turning into a wall of duplicated code.
+This section teaches learners how a Go program chooses what to do next and how it repeats work without turning into duplicated code.
 
 By the end of this section, a learner should be able to:
 
@@ -47,23 +46,21 @@ You may see a tiny list preview inside a loop example.
 That is a tool, not the topic.
 Data structures are taught properly in the next section.
 
-## Beta Stage Ownership
+## Section Ownership
 
-This section belongs to [02 Language Basics](../../docs/stages/02-language-basics.md).
-
-In the current repo architecture, this section lives at `02-language-basics/03-control-flow`.
+This section belongs to [02 Language Basics](../README.md).
 
 ## Section Map
 
 | ID | Type | Surface | Why It Matters | Requires |
 | --- | --- | --- | --- | --- |
 | `CF.1` | Lesson | [if / else](./1-if-else) | Introduces branching and decision-making. | entry |
-| `CF.2` | Lesson | [for basics](./2-for-basics) | Teaches Go's only loop keyword and the idea of repeated work. | `CF.1` |
+| `CF.2` | Lesson | [for basics](./2-for-basics) | Teaches Go's only loop keyword and repeated work. | `CF.1` |
 | `CF.3` | Lesson | [break / continue](./3-break-continue) | Teaches early exit and selective skipping inside loops. | `CF.2` |
-| `CF.4` | Lesson | [switch](./4-switch) | Teaches readable multi-branch decision logic after the learner already understands ordinary branching. | `CF.1`, `CF.2`, `CF.3` |
-| `CF.5` | Lesson | [defer basics](./5-defer-basics) | Introduces scheduling cleanup work to ensure resource safety. | `CF.4` |
-| `CF.6` | Lesson | [defer use cases](./6-defer-use-cases) | Shows real-world patterns for defer (file closing, mutex unlocking). | `CF.5` |
-| `CF.7` | Exercise | [pricing checkout](./7-pricing-checkout) | Combines branching, looping, switching, and defer in one runnable milestone. | `CF.1` through `CF.6` |
+| `CF.4` | Lesson | [switch](./4-switch) | Teaches readable multi-branch decision logic. | `CF.1`, `CF.2`, `CF.3` |
+| `CF.5` | Lesson | [defer basics](./5-defer-basics) | Introduces cleanup scheduling and return-path safety. | `CF.4` |
+| `CF.6` | Lesson | [defer use cases](./6-defer-use-cases) | Shows file, mutex, and cleanup-shaped defer patterns. | `CF.5` |
+| `CF.7` | Exercise | [pricing checkout](./7-pricing-checkout) | Combines branching, looping, switching, and defer in one milestone. | `CF.1` through `CF.6` |
 
 ## Suggested Learning Flow
 
@@ -88,5 +85,4 @@ You are ready for the next section when you can explain:
 
 ## Next Step
 
-After `CF.7`, continue to `04-data-structures`.
-That is where list and lookup structures stop being preview tools and become the real topic.
+After `CF.7`, continue to [04 Data Structures](../04-data-structures).

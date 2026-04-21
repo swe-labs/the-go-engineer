@@ -69,5 +69,5 @@ The README explains what to look for before the learner stares at code.
 
 ## Next Step
 
-Move to [02-language-basics](../02-language-basics/) after this section is rebuilt, or continue to
-[03-control-flow](../03-control-flow/) if you are following the currently available canonical path.
+Move to [02 Language Basics](../02-language-basics/) after this section.
+If you want the next concrete sub-section immediately, start with [03 Control Flow](../02-language-basics/03-control-flow/).

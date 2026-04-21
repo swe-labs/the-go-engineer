@@ -13,7 +13,7 @@ This surface is the Stage 10 code-generation milestone output.
 - [schema/schema.sql](./schema/schema.sql): schema input
 - [queries/query.sql](./queries/query.sql): query definitions
 - [sqlc.yaml](./sqlc.yaml): generation config
-- [internal/db](./internal/db): generated output target
+- `internal/db`: generated output target configured in `sqlc.yaml`
 
 ## Run Instructions
 
@@ -31,5 +31,5 @@ You should be able to:
 
 ## Next Step
 
-After `CG.3`, continue to [11 Flagship](../../11-flagship) and use the enterprise capstone to
+After `CG.3`, continue to [11 Flagship](../../../11-flagship) and use the enterprise capstone to
 apply the tooling you now understand inside a larger integrated service.

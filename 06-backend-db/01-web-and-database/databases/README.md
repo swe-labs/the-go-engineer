@@ -59,4 +59,4 @@ service-ready data access code.
 ## Next Step
 
 After `DB.6`, continue to the [Stage 06 overview](../README.md) or move on to
-[Stage 07: Concurrency](../../07-concurrency/01-concurrency).
+[Stage 07: Concurrency](../../../07-concurrency/01-concurrency).

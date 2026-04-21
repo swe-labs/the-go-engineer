@@ -2,18 +2,13 @@
 
 ## Mission
 
-This surface shows how Go applications move from local execution into containerized deployment
-workflows.
+This surface shows how Go applications move from local execution into containerized deployment workflows.
 
-It is intentionally treated as a production-engineering reference surface in beta, not as the main
-proof path for the stage.
+It remains a production-oriented reference track inside Stage 10, not the first milestone path for the section.
 
-## Beta Stage Ownership
+## Stage Ownership
 
-This track belongs to [10 Production](../../docs/stages/10-production.md).
-
-Within the beta public shell, it is a reference surface for packaging, image design, and
-deployment-oriented workflow after the logging and shutdown tracks are already clear.
+This track belongs to [10 Production Operations](../README.md).
 
 ## Why This Surface Matters
 
@@ -27,29 +22,13 @@ Deployment changes the shape of a system:
 
 | Area | Focus |
 | --- | --- |
-| `1-dockerfile/` | basic Dockerfile structure |
-| `2-multi-stage/` | builder/runtime separation for Go binaries |
-| `3-layer-caching/` | cache-aware image construction and rebuild speed |
-
-## How To Use It In Beta
-
-1. complete the live structured-logging and graceful-shutdown paths first
-2. read this surface when you want stronger packaging and deployment intuition
-3. treat it as production reinforcement, not as a required public milestone before continuing
-
-## Best-Practice Themes
-
-- use multi-stage builds when shipping Go services
-- separate stable dependency layers from fast-changing source layers
-- keep images small, understandable, and intentional
-- connect container packaging decisions back to runtime operations
+| `1-docker-basics/` | basic Dockerfile structure |
+| `2-multi-stage-builds/` | builder/runtime separation for Go binaries |
+| `3-docker-compose/` | multi-service development setup |
+| `4-cicd-pipelines/` | delivery workflow |
+| `5-blue-green-and-rollback/` | rollout and recovery patterns |
+| `6-dockerised-service/` | integrated deployment proof surface |
 
 ## Next Step
 
-After you use this surface, return to the
-[Production Engineering stage](../../docs/stages/10-production.md)
-or continue into
-[11 Flagship](../../docs/stages/11-flagship.md)
-if you want to apply deployment thinking inside a larger system.
-
-
+After you use this surface, return to the [10 Production Operations overview](../README.md) or continue into [11 Flagship](../../11-flagship).

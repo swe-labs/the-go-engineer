@@ -72,6 +72,6 @@ Your finished solution should:
 
 ## Next Step
 
-After you complete this exercise, continue to [Stage 05](../../05-packages-io/02-io-and-cli) if you are ready
+After you complete this exercise, continue to [Stage 05](../../02-io-and-cli) if you are ready
 to move on.
 If you want one more stretch lesson first, visit [`MP.4` build tags](../4-build-tags).

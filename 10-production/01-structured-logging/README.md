@@ -2,16 +2,11 @@
 
 ## Mission
 
-This track teaches you how to turn logs into queryable operational data instead of leaving them as
-strings that only make sense after a production incident has already happened.
+This track teaches how to turn logs into queryable operational data instead of leaving them as strings that only make sense after a production incident.
 
-## Beta Stage Ownership
+## Stage Ownership
 
-This track belongs to [10 Production](../../docs/stages/10-production.md).
-
-Within the beta public shell, it is the first live learner path for that stage.
-It is where learners build runtime visibility habits before moving into shutdown and deployment
-behavior.
+This track belongs to [10 Production Operations](../README.md).
 
 ## Track Map
 
@@ -23,29 +18,6 @@ behavior.
 | `SL.4` | Lesson | [zerolog comparison](./4-zerolog-comparison) | Shows when performance pressure justifies a different logger. | `SL.1`, `SL.3` |
 | `SL.5` | Exercise | [PII redactor](./5-exercise) | Applies the track by redacting sensitive attributes automatically. | `SL.1`, `SL.2`, `SL.3`, `SL.4` |
 
-## Suggested Order
-
-1. Work through `SL.1` to `SL.4` in order.
-2. Complete `SL.5` once you can explain the difference between log data and log formatting.
-
-## Track Milestone
-
-`SL.5` is the current structured-logging output.
-
-If you can explain:
-
-- why `slog` separates records from handlers
-- why request-scoped logging depends on context propagation
-- why redaction belongs inside the logger pipeline instead of inside every call site
-
-then the structured-logging part of Stage 10 is doing its job.
-
 ## Next Step
 
-After `SL.5`, continue to the [Graceful Shutdown track](../graceful-shutdown) or back to the
-[Stage 10 overview](../README.md).
-
-In the beta shell, this keeps you inside
-[10 Production](../../docs/stages/10-production.md).
-
-
+After `SL.5`, continue to the [Graceful Shutdown track](../02-graceful-shutdown) or return to the [10 Production Operations overview](../README.md).

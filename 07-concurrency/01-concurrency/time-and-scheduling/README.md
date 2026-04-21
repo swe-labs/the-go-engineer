@@ -43,5 +43,5 @@ These lessons remain available, but they are not part of the live v2 track map y
 ## Next Step
 
 After `TM.7`, continue to the [Stage 07 overview](../README.md) or move on to
-[Stage 07: Concurrency Patterns](../../07-concurrency/02-concurrency-patterns).
+[Stage 07: Concurrency Patterns](../../02-concurrency-patterns).
 

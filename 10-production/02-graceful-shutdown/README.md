@@ -2,15 +2,11 @@
 
 ## Mission
 
-This track teaches you how to keep services correct during deploys, restarts, and termination
-signals instead of treating shutdown as an afterthought.
+This track teaches how to keep services correct during deploys, restarts, and termination signals instead of treating shutdown as an afterthought.
 
-## Beta Stage Ownership
+## Stage Ownership
 
-This track belongs to [10 Production](../../docs/stages/10-production.md).
-
-Within the beta public shell, it is the second live learner path for that stage.
-It turns runtime thinking into explicit shutdown and drain behavior.
+This track belongs to [10 Production Operations](../README.md).
 
 ## Track Map
 
@@ -20,27 +16,6 @@ It turns runtime thinking into explicit shutdown and drain behavior.
 | `GS.2` | Lesson | [HTTP graceful drain](./2-http-server) | Uses `http.Server.Shutdown` to drain in-flight requests. | `GS.1` |
 | `GS.3` | Capstone | [shutdown capstone](./3-capstone) | Wires signals, readiness, workers, and drain order together. | `GS.1`, `GS.2` |
 
-## Suggested Order
-
-1. Start with `GS.1` to understand signal delivery and cancellation.
-2. Move into `GS.2` to see how request draining works for HTTP services.
-3. Finish with `GS.3` once you can reason about shutdown order across multiple resources.
-
-## Track Milestone
-
-`GS.3` is the current graceful-shutdown output.
-
-If you can explain:
-
-- why `signal.NotifyContext` is the right entry point for modern Go shutdown handling
-- why `http.Server.Shutdown` is not the same as killing the server
-- why readiness, HTTP drain, worker drain, and resource close order must be coordinated
-
-then the graceful-shutdown part of Stage 10 is doing its job.
-
 ## Next Step
 
-After `GS.3`, continue back to the [Stage 10 overview](../README.md) or move into the
-[Code Generation track](../06-code-generation).
-
-
+After `GS.3`, return to the [10 Production Operations overview](../README.md) or continue to [Code Generation](../06-code-generation).

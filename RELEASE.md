@@ -31,7 +31,7 @@ Topic branches stay short-lived and always branch from the line they should ship
 ### Step 1: Plan the Release
 
 1. Identify issues/PRs to include in the release
-2. Update [CHANGELOG.md](../CHANGELOG.md) with:
+2. Update [CHANGELOG.md](./CHANGELOG.md) with:
    - Date and version number
    - Major changes in sections: `Added`, `Fixed`, `Changed`, `Removed`
    - Link to detailed changes (PR numbers)

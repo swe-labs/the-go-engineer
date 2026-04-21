@@ -2,132 +2,45 @@
 
 ## Mission
 
-This section teaches you how Go coordinates work across goroutines, channels, contexts, and
-timers without hiding the costs and failure modes behind "just add concurrency" magic.
+This track teaches how Go coordinates work across goroutines, channels, contexts, sync primitives, and timers without hiding the cost of background work.
 
-By the end of the live v2 slice, you should be comfortable:
+By the end of this track, you should be comfortable:
 
 - starting goroutines deliberately instead of sprinkling `go` blindly
-- coordinating work with `sync.WaitGroup` and channels
+- coordinating work with `sync.WaitGroup`, channels, and synchronization primitives
 - applying cancellation and deadlines with `context.Context`
 - using timers and tickers without leaking background work
 - building small concurrent tools that stay readable under load
 
-Stage 07 still contains additional concurrency material beyond this live slice. Those surfaces
-remain available as legacy reference lessons while the first milestone path is migrated.
+## Stage Ownership
 
-## Beta Stage Ownership
+This track belongs to [07 Concurrency](../README.md).
 
-This section belongs to [07 Concurrency](../docs/stages/07-concurrency.md).
-
-Within the beta public shell, it is the first and foundation-heavy half of that stage:
-
-1. Stage 07 `concurrency`
-2. Stage 07 `concurrency-patterns`
-
-That means Stage 07 is where learners build the core coordination vocabulary before the stage
-moves into higher-pressure patterns in Stage 07.
-
-## Who Should Start Here
-
-### Full Path
-
-Start here after completing Stage 06 in order.
-
-### Bridge Path
-
-You can move faster if you already understand:
-
-- explicit error handling
-- methods, interfaces, and small packages
-- I/O surfaces like HTTP requests and file operations
-- why cleanup matters around resources and long-running work
-
-Even on the bridge path, do not skip the first lesson in any track.
-Those entry points establish the vocabulary the later exercises assume.
-
-### Targeted Path
-
-This section is the second multi-track pilot in v2.
-You can choose the track that matches your immediate goal:
-
-- Goroutines track for worker coordination and channel flow
-- Context track for cancellation and timeout control
-- Time track for timers, tickers, and reminder-style scheduling
-
-## Section Map
+## Track Map
 
 | Track | Entry | Milestone | Focus |
 | --- | --- | --- | --- |
 | Goroutines | [GC.1 goroutines](./goroutines) | `GC.7` | goroutines, WaitGroups, channels, and a bounded downloader |
 | Context | [CT.1 background](./context) | `CT.5` | context roots, cancellation, timeouts, and timeout-aware HTTP calls |
-| Time & Scheduling | [TM.1 time basics](./time-and-scheduling) | `TM.7` | time values, formatting, timers, tickers, and a console reminder |
+| Sync Primitives | [SY.1 mutex and rwmutex](./sync-primitives) | `SY.6` | mutexes, `sync.Map`, atomics, race boundaries, and deadlocks |
+| Time & Scheduling | [TM.1 time basics](./time-and-scheduling) | `TM.7` | time values, formatting, timers, tickers, and reminder scheduling |
 
 ## Suggested Order
 
-1. Complete the Goroutines track if you want the strongest concurrency foundations first.
-2. Complete the Context track if you work with HTTP, APIs, or long-running I/O.
-3. Complete the Time track if you want stronger deadline and scheduling intuition.
-4. Use the legacy reference lessons after the milestone path if you want deeper coverage in the same section.
+1. Start with the Goroutines track.
+2. Add Context once goroutine lifecycles feel concrete.
+3. Learn Sync Primitives once shared-state bugs make sense.
+4. Use Time & Scheduling to round out deadline and timer intuition.
 
-## Section Milestones
+## Track Milestones
 
-This live v2 slice has three milestone surfaces:
+The promoted outputs in this track are:
 
 - `GC.7` concurrent downloader
 - `CT.5` timeout-aware API client
+- `SY.6` deadlocks
 - `TM.7` console reminder
-
-The following lessons remain available as legacy reference surfaces for later alpha work:
-
-- `GC.8` race conditions
-- `GC.9` select deep dive
-- `GC.10` sync primitives
-- `TM.4` random numbers
-- `TM.5` scheduler
-- `TM.6` timezones
-
-If you can complete the three milestone exercises and explain:
-
-- why goroutine fan-out still needs coordination boundaries
-- why request-scoped cancellation should reach the HTTP client layer
-- why timers and tickers need explicit lifecycle management
-
-then you are ready to move into the higher-order concurrency patterns in Stage 07.
-
-## Pilot Role In V2
-
-This live v2 slice keeps the current `07-concurrency/01-concurrency` layout intact while upgrading the learner-facing flow:
-
-- the section now has one top-level guide
-- each track has a clearer milestone path
-- the milestone exercises have explicit README contracts
-- only the first practical slice of each track is promoted into `curriculum.v2.json`
-
-That keeps Stage 07 useful now without pretending the entire mega-section is fully migrated in one wave.
-
-## Legacy To Pilot Mapping
-
-- `GC.1` through `GC.7` stay in `07-concurrency/01-concurrency/goroutines/*`
-- `CT.1` through `CT.5` stay in `07-concurrency/01-concurrency/context/*`
-- `TM.1`, `TM.2`, `TM.3`, and `TM.7` stay in `07-concurrency/01-concurrency/time-and-scheduling/*`
-- later goroutine and time lessons remain available, but they are not yet promoted into the live v2 graph
-
-## References
-
-1. [Effective Go: Concurrency](https://go.dev/doc/effective_go#concurrency)
-2. [Go Concurrency Patterns: Context](https://go.dev/blog/context)
-3. [Package time](https://pkg.go.dev/time)
 
 ## Next Step
 
-After you finish the track or milestone you care about here, continue to
-[Stage 07: Concurrency Patterns](../07-concurrency/02-concurrency-patterns).
-
-In the beta shell, that keeps you inside
-[07 Concurrency](../docs/stages/07-concurrency.md)
-before you move on to
-[08 Quality & Test](../docs/stages/08-quality-test.md).
-
-
-
+After the core concurrency tracks, continue to [Stage 07: Concurrency Patterns](../02-concurrency-patterns), then move on to [08 Quality & Testing](../../08-quality-test).

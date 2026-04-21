@@ -7,19 +7,19 @@
 
 Learn Go by building, testing, and operating real software.
 
-The Go Engineer is a repo-first Go software engineering learning system built around a progressive **5-Phase, 12-Section architecture** (v2.1).
+The Go Engineer is a repo-first Go software engineering learning system built around a progressive **5-phase, 12-section architecture** (v2.1).
 
-It takes you from absolute beginner (how computers work) to building, testing, and deploying a production-grade SaaS backend ("GoScale").
+It takes a learner from machine fundamentals and first execution all the way to a production-shaped Go backend capstone.
 
-For the full curriculum architecture, read [ARCHITECTURE.md](./ARCHITECTURE.md).
+For the full curriculum source of truth, read [ARCHITECTURE.md](./ARCHITECTURE.md).
 
-## Start Here
+## Current Status
 
-Pick the release channel that matches what you want:
+The v2 beta migration is complete on `main`.
 
-- `release/v1`: the stable v1 line for learners who want the current supported experience
-- `release/v2`: the current public beta checkpoint for the v2 line
-- `main`: the active v2 implementation branch — fastest-moving line
+- `release/v1`: stable v1 line for current learners
+- `main`: completed v2 beta implementation line
+- `release/v2`: reserved for v2 RC and stabilization once feature freeze begins
 
 ## Quick Start
 
@@ -31,24 +31,39 @@ go version
 go run ./00-how-computers-work/1-what-is-a-program
 ```
 
-## Curriculum Overview (5 Phases, 12 Sections)
-
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for the exact lesson breakdowns.
+## Curriculum Overview
 
 ```text
-Phase 0: Machine Foundation     s00  How Computers Work         (0% → 5%)
-Phase 1: Language Foundation    s01  Getting Started             (5% → 12%)
-                                s02  Language Basics             (12% → 28%)
-                                s03  Functions & Errors          (28% → 38%)
-                                s04  Types & Design              (38% → 52%)
-Phase 2: Engineering Core       s05  Packages, I/O & CLI        (52% → 62%)
-                                s06  Backend, APIs & Databases   (62% → 75%)
-                                s07  Concurrency                 (75% → 83%)
-                                s08  Quality & Testing           (83% → 87%)
-Phase 3: Systems Engineering    s09  Architecture & Security     (87% → 92%)
-                                s10  Production Operations       (92% → 96%)
-Phase 4: Flagship Project       s11  GoScale SaaS Backend        (96% → 100%)
+Phase 0: Machine Foundation     s00  How Computers Work          (0% -> 5%)
+Phase 1: Language Foundation    s01  Getting Started             (5% -> 12%)
+                                s02  Language Basics             (12% -> 28%)
+                                s03  Functions & Errors          (28% -> 38%)
+                                s04  Types & Design              (38% -> 52%)
+Phase 2: Engineering Core       s05  Packages, I/O & CLI         (52% -> 62%)
+                                s06  Backend, APIs & Databases   (62% -> 75%)
+                                s07  Concurrency                 (75% -> 83%)
+                                s08  Quality & Testing           (83% -> 87%)
+Phase 3: Systems Engineering    s09  Architecture & Security     (87% -> 92%)
+                                s10  Production Operations       (92% -> 96%)
+Phase 4: Flagship Project       s11  GoScale SaaS Backend        (96% -> 100%)
 ```
+
+## Source Sections
+
+| Section | Folder | Focus |
+| --- | --- | --- |
+| s00 | [00-how-computers-work](./00-how-computers-work) | execution, memory, terminal, processes |
+| s01 | [01-getting-started](./01-getting-started) | install, first run, toolchain basics |
+| s02 | [02-language-basics](./02-language-basics) | values, control flow, data structures |
+| s03 | [03-functions-errors](./03-functions-errors) | reusable logic and explicit failure handling |
+| s04 | [04-types-design](./04-types-design) | structs, interfaces, composition, strings and text |
+| s05 | [05-packages-io](./05-packages-io) | modules, packages, CLI, encoding, filesystem |
+| s06 | [06-backend-db](./06-backend-db) | HTTP servers, API design, gRPC, databases |
+| s07 | [07-concurrency](./07-concurrency) | goroutines, context, sync, pipelines |
+| s08 | [08-quality-test](./08-quality-test) | tests, profiling, benchmarks |
+| s09 | [09-architecture](./09-architecture) | package design, architecture patterns, security |
+| s10 | [10-production](./10-production) | logging, shutdown, config, observability, deployment |
+| s11 | [11-flagship](./11-flagship) | integrated capstone system |
 
 ## What You Will Build
 
@@ -59,40 +74,29 @@ You will work through:
 - HTTP services and database-backed applications
 - concurrency pipelines, worker pools, and timeout-aware clients
 - profiling, testing, and benchmark-driven improvements
-- structured logging, graceful shutdown, gRPC, and deployment-ready workflows
-- **GoScale**: A full production-grade SaaS backend (flagship capstone)
+- structured logging, graceful shutdown, configuration, observability, and deployment workflows
+- **GoScale**: a production-shaped SaaS backend capstone
 
-## Current Docs
+## Core Docs
 
-These docs guide you through the learning system:
-
-| Document                                              | Purpose                                      |
-| ----------------------------------------------------- | -------------------------------------------- |
-| [ARCHITECTURE.md](./ARCHITECTURE.md)                  | Curriculum source of truth (v2.1)            |
-| [ROADMAP.md](./ROADMAP.md)                            | What is built, in progress, and planned      |
-| [LEARNING-PATH.md](./LEARNING-PATH.md)                | Learning guide and entry points              |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md)  | Teaching contract and lesson delivery rules   |
-| [CODE-STANDARDS.md](./CODE-STANDARDS.md)              | Engineering and code style standards         |
-| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md)        | Testing coverage and patterns                |
-| [COMMON-MISTAKES.md](./COMMON-MISTAKES.md)            | 15 common Go bugs and fixes                  |
-| [CONTRIBUTING.md](./CONTRIBUTING.md)                  | Contribution workflow                        |
-
-## Run Lessons and Exercises
-
-```bash
-# Run a lesson
-go run ./00-how-computers-work/1-what-is-a-program
-
-# Run tests
-go test ./...
-```
+| Document | Purpose |
+| --- | --- |
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | curriculum source of truth |
+| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | lesson and milestone teaching contract |
+| [LEARNING-PATH.md](./LEARNING-PATH.md) | entry points and path guidance |
+| [ROADMAP.md](./ROADMAP.md) | beta completion status and RC focus |
+| [docs/PROGRESSION.md](./docs/PROGRESSION.md) | visual progression through phases and milestones |
+| [CODE-STANDARDS.md](./CODE-STANDARDS.md) | code and explanation standards |
+| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | testing patterns and verification expectations |
+| [COMMON-MISTAKES.md](./COMMON-MISTAKES.md) | common Go bugs and fixes |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | contribution workflow |
+| [RELEASE.md](./RELEASE.md) | release and stabilization process |
 
 ## Validate the Repo
 
 ```bash
 go run ./scripts/validate_curriculum.go
-make test
-make lint
+go test ./...
 ```
 
 ## Windows Note

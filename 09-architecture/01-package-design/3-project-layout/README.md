@@ -27,5 +27,5 @@ You should be able to:
 
 ## Next Step
 
-After `PD.3`, continue to [SL.1 slog basics](../../structured-logging) or back to the
-[Package Design track](../README.md).
+After `PD.3`, continue to [Stage 09 overview](../README.md) or move into
+[Stage 10 Production Operations](../../../10-production).

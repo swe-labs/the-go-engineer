@@ -2,119 +2,58 @@
 
 ## Mission
 
-This section introduces the first production-shaped data and HTTP surfaces in the curriculum.
+This section teaches the full backend shape for Stage 06: HTTP servers, API contracts, and database-backed application code.
 
-By the end of the live v2 slice, you should be comfortable reading and writing:
+By the end of this section, you should be comfortable reading and writing:
 
-- `database/sql` code that opens databases, executes queries, and manages transactions
+- `net/http` handlers, middleware, request parsing, timeouts, and readiness surfaces
+- REST and gRPC APIs with explicit transport and contract choices
+- `database/sql` code that opens databases, executes queries, manages transactions, and respects context
 - repository-style boundaries that keep application logic away from raw SQL details
-- context-aware database workflows that are safer under real service load
-- small data-access code you can test and reason about without hiding the underlying mechanics
 
-Stage 06 also contains additional HTTP and web-application material. Those directories remain
-available as legacy reference surfaces, but the current live v2 slice focuses on the databases
-track first.
+## Stage Ownership
 
-## Beta Stage Ownership
+This section belongs to [06 Backend, APIs & Databases](../README.md).
 
-This section belongs to [06 Backend & DB](../docs/stages/06-backend-db.md).
+## Stage Map
 
-Within the beta public shell, the databases track is the current live learner path.
-The other Section `10` directories remain valuable reference material, but they are not yet the
-main public beta route.
+| Track | Entry | Milestone | Focus |
+| --- | --- | --- | --- |
+| HTTP Servers | [HS.1 net/http basics](./http-servers/1-net-http-basics) | `HS.10` | handler flow, middleware, validation, timeouts, shutdown, probes |
+| APIs | [API.1 REST design principles](./apis/1-rest-design-principles) | `API.9` | REST design, versioning, protobuf, gRPC, interceptors, trade-offs |
+| Databases | [DB.1 connecting to SQLite](./databases/1-connecting-to-db) | `DB.8` | SQL access, transactions, repositories, query safety, context timeouts |
 
-## Who Should Start Here
+## Supporting Reference Surfaces
 
-### Full Path
+The stage also includes supporting reference directories that deepen the backend story:
 
-Start here after completing Stage 05 in order.
+- [`http-client`](./http-client) for outbound HTTP dependency patterns
+- [`database-migrations`](./database-migrations) for schema evolution workflows
+- [`web-masterclass`](./web-masterclass) for larger application-shaped references
 
-### Bridge Path
-
-You can move faster if you already understand:
-
-- explicit error handling
-- structs and interfaces
-- basic file I/O and config work
-- why context and cleanup matter in operational code
-
-Even on the bridge path, do not skip `DB.1` and `DB.3`.
-They establish the `database/sql` mental model the rest of the slice depends on.
-
-### Targeted Path
-
-If you are here mainly for data access and repository design, the live path for this section is:
-
-- `DB.1` connecting to SQLite
-- `DB.2` executing parameterized inserts
-- `DB.3` scanning query results safely
-- `DB.4` prepared statements with context
-- `DB.5` transactions
-- `DB.6` repository pattern project
-
-## Current Section Map
-
-| Surface | Status | Entry | Milestone | Focus |
-| --- | --- | --- | --- | --- |
-| Databases | Live v2 slice | `DB.1` | `DB.6` | `database/sql`, transactions, and repository boundaries |
-| HTTP Client | Legacy reference | `http-client/` | `HC.2` | outbound HTTP calls and dependency injection |
-| Database Migrations | Legacy reference | `database-migrations/` | `1-embedded-migrations` | schema evolution and embedded migrations |
-| Web Masterclass | Legacy reference | `web-masterclass/` | `11-websockets` | routing, templates, auth, CRUD, and live updates |
+These are part of the stage inventory, but the canonical promoted path is the `HS`, `API`, and `DB` track set in `curriculum.v2.json`.
 
 ## Suggested Order
 
-1. Work through the databases track from `DB.1` to `DB.6`.
-2. Use the other Stage 06 directories as optional reference material while they remain outside
-   the live v2 track.
-3. After `DB.6`, continue to Stage 07 for concurrency.
+1. Start with the HTTP Servers track so request boundaries feel concrete.
+2. Move through the Databases track so persistence and transactions stay explicit.
+3. Use the APIs track to compare REST and gRPC after the HTTP and data layers are clear.
+4. Use the supporting reference surfaces when you want broader backend context or extra drills.
 
-## Section Milestone
+## Stage Milestones
 
-`DB.6` is the current live milestone for this pilot section.
+This section has three promoted proof surfaces:
 
-If you can complete it and explain:
+- `HS.10` REST API
+- `API.9` gRPC Service
+- `DB.8` query timeouts via context, with `DB.6` remaining the repository milestone that proves data-boundary discipline
 
-- why `database/sql` should stay behind a repository boundary in application code
-- why transactions are the safe way to keep multi-step writes consistent
-- why parameterized queries and context-aware execution matter in real services
+You are ready for Stage 07 when you can explain:
 
-then you are ready to move into concurrent workflows in Stage 07.
-
-## Pilot Role In V2
-
-This live v2 slice keeps the current `06-backend-db/01-web-and-database` filesystem layout intact while
-promoting the databases track into the public v2 map:
-
-- `DB.1` through `DB.5` are the core lessons
-- `DB.6` is the milestone project
-- `http-client`, `database-migrations`, and `web-masterclass` remain legacy reference surfaces
-  until later alpha waves
-
-That keeps Stage 06 useful now without pretending the entire mega-section is fully migrated in
-one pass.
-
-## Legacy To Pilot Mapping
-
-- `DB.1` through `DB.6` stay in `06-backend-db/01-web-and-database/databases/*`
-- the databases track is the only live v2-mapped surface in this wave
-- the other Stage 06 directories remain available, but they are not yet promoted into
-  `curriculum.v2.json`
-
-## References
-
-1. [Accessing relational databases](https://go.dev/doc/database/)
-2. [Executing transactions](https://go.dev/doc/database/execute-transactions)
-3. [Canceling in-progress operations](https://go.dev/doc/database/cancel-operations)
+- why handlers, middleware, and timeouts belong together in real services
+- why REST and gRPC are transport choices with trade-offs, not competing fashions
+- why transactions, prepared statements, and context-aware database access matter under real load
 
 ## Next Step
 
-After `DB.6`, you have completed the current live milestone path for
-[06 Backend & DB](../docs/stages/06-backend-db.md).
-
-From there, move to [07 Concurrency](../docs/stages/07-concurrency.md).
-The first source sections in that next stage are
-[Stage 07: Concurrency](../07-concurrency/01-concurrency) and
-[Stage 07: Concurrency Patterns](../07-concurrency/02-concurrency-patterns).
-
-
-
+After Stage 06, continue to [07 Concurrency](../../07-concurrency).

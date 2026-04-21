@@ -2,16 +2,11 @@
 
 ## Mission
 
-This track teaches you how to organize a Go codebase so package boundaries reinforce the design
-instead of hiding problems behind generic folders and global helpers.
+This track teaches how to organize a Go codebase so package boundaries reinforce the design instead of hiding problems behind generic folders and global helpers.
 
-## Beta Stage Ownership
+## Stage Ownership
 
-This track belongs to [09 Architecture](../../docs/stages/09-architecture.md).
-
-Within the beta public shell, it is the current live learner path for that stage.
-The other architecture-owned Section `14` surfaces remain valuable, but this track is where the
-beta proof path starts.
+This track belongs to [09 Architecture & Security](../README.md).
 
 ## Track Map
 
@@ -27,24 +22,6 @@ beta proof path starts.
 2. Continue to `PD.2` for export discipline and internal boundaries.
 3. Finish with `PD.3` once the naming and visibility rules feel concrete.
 
-## Track Milestone
-
-`PD.3` is the current package-design output.
-
-If you can explain:
-
-- why package names should describe a domain instead of a grab-bag
-- why `internal/` is a compiler-enforced boundary, not just a folder convention
-- why a layout should grow with the codebase instead of being over-designed on day one
-
-then the package-design part of Stage 09 is doing its job.
-
 ## Next Step
 
-After `PD.3`, continue to the [Structured Logging track](../structured-logging) or back to the
-[Stage 09 overview](../README.md).
-
-In the beta shell, the next public stage after Architecture is
-[10 Production](../../docs/stages/10-production.md).
-
-
+After `PD.3`, continue to [Architecture Patterns](../03-architecture-patterns/1-architecture-trade-offs) or return to the [09 Architecture & Security overview](../README.md).
