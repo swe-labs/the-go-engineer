@@ -14,7 +14,7 @@ You have learned that interfaces define contracts. Sometimes you want to combine
 
 ## Mental Model
 
-Think of a universal remote. It does not have buttons for every function directlyâ€”it embeds the capabilities of a TV remote, a DVD remote, and a sound system remote into one. The universal remote "has-a" TV control, "has-a" DVD control, etc.
+Think of a universal remote. It does not have buttons for every function directly - it embeds the capabilities of a TV remote, a DVD remote, and a sound system remote into one. The universal remote "has-a" TV control, "has-a" DVD control, and so on.
 
 ## Visual Model
 
@@ -23,6 +23,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```text
 // Embedded interfaces combine contracts
 type Reader interface {
@@ -35,14 +36,14 @@ type Writer interface {
 
 // ReadWriter embeds both Reader and Writer
 type ReadWriter interface {
-    Reader  // embedded
-    Writer  // embedded
+    Reader
+    Writer
 }
 ```
 
 ## Machine View
 
-When interface A embeds interface B, the resulting interface has all methods from both. The embedding is staticâ€”the compiler checks at compile time that the embedded contracts are satisfied.
+When interface A embeds interface B, the resulting interface has all methods from both. The embedding is static - the compiler checks at compile time that the embedded contracts are satisfied.
 
 ## Run Instructions
 
@@ -54,7 +55,7 @@ go run ./04-types-design/4-interface-embedding
 
 ### Embedding individual interfaces
 
-When you embed interfaces, you get all their methods. No need to list them explicitly.
+When you embed interfaces, you get all their methods. There is no need to list them explicitly.
 
 ### Embedding multiple interfaces
 
@@ -62,7 +63,7 @@ One interface can embed multiple interfaces, combining their contracts.
 
 ### Use case: io.ReadWriter
 
-The standard library's io.ReadWriter is a classic exampleâ€”embedding io.Reader and io.Writer.
+The standard library's io.ReadWriter is a classic example - embedding io.Reader and io.Writer.
 
 ## Try It
 
@@ -70,14 +71,16 @@ The standard library's io.ReadWriter is a classic exampleâ€”embedding io.Re
 2. Implement your combined interface with a struct.
 3. Verify that satisfying the embedded interfaces automatically satisfies the combined one.
 
-## ⚠️ In Production
-Interface embedding is used throughout the standard library (io.ReadWriter, io.ReadCloser, etc.) and in real APIs to compose behavior contracts.
+## In Production
 
-## 🤔 Thinking Questions
+Interface embedding is used throughout the standard library (`io.ReadWriter`, `io.ReadCloser`, and more) and in real APIs to compose behavior contracts.
+
+## Thinking Questions
 
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
 ## Next Step
 
 Continue to `TI.5` Stringer.

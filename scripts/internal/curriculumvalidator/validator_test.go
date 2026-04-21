@@ -168,6 +168,44 @@ func TestValidateRejectsUnknownSectionPrerequisite(t *testing.T) {
 	}
 }
 
+func TestValidateRejectsInvalidSectionStatus(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s00",
+      "number": "00",
+      "slug": "how-computers-work",
+      "title": "How Computers Work",
+      "path_prefix": "00-how-computers-work",
+      "status": "pilot",
+      "entry_points": [],
+      "outputs": [],
+      "prerequisites": []
+    }
+  ],
+  "items": []
+}`)
+	writeValidPressureDocs(t, root)
+	mustMkdir(t, root, "00-how-computers-work")
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 1 {
+		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	}
+	if !containsReport(reports, "Invalid v2 section status: s00 -> pilot") {
+		t.Fatalf("expected section-status error in reports: %v", reports)
+	}
+}
+
 func TestValidateRejectsMixedContractWithoutCommands(t *testing.T) {
 	root := t.TempDir()
 

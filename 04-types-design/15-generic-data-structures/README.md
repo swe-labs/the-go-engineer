@@ -2,20 +2,20 @@
 
 ## Mission
 
-Learn to build type-safe generic data structures like Stack, Queue, and Set using Go's generics.
+Learn to build type-safe generic data structures like `Stack`, `Queue`, and `Set` using Go's generics.
 
 ## Why This Lesson Exists Now
 
-You've learned generic functions. Now learn to build generic data structures that are type-safe at compile timeâ€”no runtime type assertions needed.
+You've learned generic functions. Now learn to build generic data structures that are type-safe at compile time - no runtime type assertions needed.
 
 ## Prerequisites
 
 - `TI.9` generics
-- `TI.16` complex constraints
+- `TI.14` complex constraints
 
 ## Mental Model
 
-Think of a reusable storage box. Without generics, you'd need separate boxes for books, clothes, and electronics. With generics, one "Box<T>" works for allâ€”type-safe and efficient.
+Think of a reusable storage box. Without generics, you'd need separate boxes for books, clothes, and electronics. With generics, one `Box[T]` works for all - type-safe and efficient.
 
 ## Visual Model
 
@@ -24,6 +24,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```go
 type Stack[T any] struct {
     items []T
@@ -47,7 +48,7 @@ go run ./04-types-design/15-generic-data-structures
 
 ### Stack implementation
 
-LIFO data structure with type-safe push/pop.
+LIFO data structure with type-safe push and pop behavior.
 
 ### Queue implementation
 
@@ -55,22 +56,24 @@ FIFO data structure.
 
 ### Set implementation
 
-Unique element collection using map.
+Unique element collection using a map.
 
 ## Try It
 
-1. Add a Peek method to Stack that returns top element without removing.
-2. Implement a generic LinkedList.
-3. Add Remove method to Set.
+1. Add a `Peek` method to `Stack` that returns the top element without removing it.
+2. Implement a generic linked list.
+3. Add a `Remove` method to `Set`.
 
-## ⚠️ In Production
+## In Production
+
 Generic data structures are used throughout Go codebases for type-safe collections without runtime overhead.
 
-## 🤔 Thinking Questions
+## Thinking Questions
 
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
 ## Next Step
 
-The optional stretch path is complete. Move to **Composition** next, or return to the Section 06 map whenever you want to review the core path again.
+The optional stretch path is complete. Move to **Composition** next, or return to the Section 04 map whenever you want to review the core path again.

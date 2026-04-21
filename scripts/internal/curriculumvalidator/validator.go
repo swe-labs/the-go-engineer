@@ -36,6 +36,7 @@ type V2Section struct {
 	EntryPoints   []string `json:"entry_points"`
 	Outputs       []string `json:"outputs"`
 	Prerequisites []string `json:"prerequisites"`
+	Status        string   `json:"status"`
 }
 
 type V2Item struct {
@@ -102,6 +103,11 @@ var (
 		"test":   true,
 		"rubric": true,
 		"mixed":  true,
+	}
+	allowedSectionStatuses = map[string]bool{
+		"":            true,
+		"implemented": true,
+		"placeholder": true,
 	}
 )
 
@@ -343,6 +349,11 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 
 		if s.Number == "" || s.Slug == "" || s.Title == "" || s.PathPrefix == "" {
 			report(fmt.Sprintf("Invalid v2 section metadata: %s requires number, slug, title, and path_prefix", s.ID))
+			errorsFound++
+		}
+
+		if !allowedSectionStatuses[strings.TrimSpace(s.Status)] {
+			report(fmt.Sprintf("Invalid v2 section status: %s -> %s", s.ID, s.Status))
 			errorsFound++
 		}
 
@@ -729,6 +740,12 @@ var mojibakeMarkers = []string{
 	"\u00c3\u00a2\u20ac\u00a0",
 	"\u00c3\u00a2\u00c5\u201c",
 	"\u00c3\u00a2\u00c2\u009d",
+	"\u00e2\u20ac\u0153",
+	"\u00e2\u20ac\u009d",
+	"\u00e2\u20ac\u201d",
+	"\u00e2\u0080\u0094",
+	"\u00e2\u2020\u2019",
+	"\u00e2\u20ac\u00a2",
 }
 
 func validateV2TextEncoding(root string, sections map[string]V2Section, items []V2Item, report func(string)) int {
@@ -915,14 +932,14 @@ func validateMarkdownSurfaces(root string, report func(string)) int {
 
 		if d.IsDir() {
 			switch d.Name() {
-			case ".git", "vendor", ".agents", ".cache", ".github", ".opencode", "temp":
+			case ".git", "vendor", ".agents", ".cache", ".gocache", ".github", ".opencode", "temp":
 				return filepath.SkipDir
 			default:
 				return nil
 			}
 		}
 
-		if filepath.Ext(path) != ".md" {
+		if filepath.Ext(path) != ".md" && filepath.Base(path) != "Makefile" {
 			return nil
 		}
 
