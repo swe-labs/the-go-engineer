@@ -11,17 +11,24 @@ The Go Engineer follows **semantic versioning** for stable releases:
 
 **Release Format**: `v1.0.0`, `v1.1.0`, `v1.0.1`
 
+Current v2.1 state:
+
+- published prerelease: `v2.1.0-beta.1`
+- active stabilization branch: `release/v2`
+- next planned milestone: `v2.1.0-rc.1`
+
 ## Branch Roles
 
 The project uses long-lived branches for supported major versions:
 
 - `main`: active v2 development and prerelease integration branch
 - `release/v1`: stable v1 maintenance branch for current users
-- `release/v2`: created from `main` when v2 reaches feature freeze
+- `release/v2`: active v2.1 stabilization and RC branch
 
 Topic branches stay short-lived and always branch from the line they should ship to.
 
 - `feat/...` and `fix/...` branch from `main` for v2 work
+- `docs/...`, `chore/...`, and `release-prep/...` branch from `release/v2` for RC hardening work
 - `fix/v1-...` or `hotfix/v1-...` branch from `release/v1` for stable v1 fixes
 
 `v1.0.0` remains an immutable release tag. It is not the permanent maintenance branch name.
@@ -68,28 +75,22 @@ make deps-check
 
 - For v1 patch or minor releases, work from `release/v1`
 - For ongoing v2 development and alpha prereleases, work from `main`
-- For v2 beta, release candidate, and final stabilization, cut `release/v2` from `main`
+- For v2 beta snapshots already cut for stabilization, release candidates, and final release, work from `release/v2`
 
 Do not open sync PRs from `main` into `release/v1` just to keep the branches identical. Once v2 begins, those branches are expected to diverge.
 
 ### Step 4: Create the Release Branch or Topic Branch
 
 ```bash
-# One-time step: cut the long-lived v2 stabilization branch
-git switch main
-git pull origin main
-git switch -c release/v2
-git push -u origin release/v2
-
 # Example: prepare a v1 patch release from the stable line
 git switch release/v1
 git pull origin release/v1
 git switch -c release-prep/v1.X.Y
 
-# Example: prepare a v2 stabilization update after release/v2 exists
+# Example: prepare a v2 stabilization update from the active RC line
 git switch release/v2
 git pull origin release/v2
-git switch -c release-prep/v2.0.0-rc.N
+git switch -c release-prep/v2.1.0-rc.N
 
 # Commit version/changelog updates
 git add CHANGELOG.md README.md ROADMAP.md
@@ -103,8 +104,8 @@ git push origin HEAD
 
 1. Open PR into the long-lived target branch:
    - `release-prep/v1.X.Y` -> `release/v1`
-   - `release-prep/v2.0.0-rc.N` -> `release/v2`
-2. Title: `Release: v1.X.Y` or `Release: v2.0.0-rc.N`
+   - `release-prep/v2.1.0-rc.N` -> `release/v2`
+2. Title: `Release: v1.X.Y` or `Release: v2.1.0-rc.N`
 3. Description:
    ```markdown
    ## Release v1.X.Y
@@ -156,9 +157,9 @@ Maintainers should use **Squash and Merge** for release pull requests. If the sa
 
 Use prerelease tags during the v2 rollout:
 
-- `v2.0.0-alpha.N` from `main`
-- `v2.0.0-beta.N` from `release/v2`
-- `v2.0.0-rc.N` from `release/v2`
+- `v2.1.0-alpha.N` from `main`
+- `v2.1.0-beta.N` from `release/v2` once the stabilization line exists
+- `v2.1.0-rc.N` from `release/v2`
 
 Mark alpha, beta, and RC builds as prereleases on GitHub so stable v1 users are not silently moved early.
 

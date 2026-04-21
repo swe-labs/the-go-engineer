@@ -5,12 +5,13 @@
 
 ## Current Status
 
-The v2 beta migration is complete on `main`.
+The v2.1 beta migration is complete, and RC hardening is active on `release/v2`.
 
 - the 12-section architecture is live
 - root-stage source folders are aligned to the public section map
 - `curriculum.v2.json` is the active curriculum source
 - the single validator is the required repo health check
+- `v2.1.0-beta.1` is the published beta-complete prerelease snapshot
 
 The next release step is **RC hardening**, not more beta migration.
 
@@ -18,7 +19,7 @@ The next release step is **RC hardening**, not more beta migration.
 
 - `main`: active v2 development and prerelease integration
 - `release/v1`: stable v1 maintenance line
-- `release/v2`: created when v2 RC stabilization begins
+- `release/v2`: active v2.1 stabilization and RC line
 
 ## Beta Completion Snapshot
 
@@ -59,7 +60,7 @@ RC work should now concentrate on:
 
 ## RC Exit Criteria
 
-Before cutting `release/v2`, we should be able to say:
+Before cutting `v2.1.0-rc.1` from `release/v2`, we should be able to say:
 
 - the public docs, metadata, and validator agree
 - section navigation has no dead internal links
@@ -71,6 +72,6 @@ Before cutting `release/v2`, we should be able to say:
 
 | Version | Target | Criteria |
 | --- | --- | --- |
-| v2.1-beta | current on `main` | beta migration complete and validator green |
-| v2.1-rc | next | stabilization, polish, and release prep on `release/v2` |
+| v2.1.0-beta.1 | published | beta migration complete and validator green |
+| v2.1.0-rc.1 | next | stabilization, polish, and release prep on `release/v2` |
 | v2.1 | release | RC passes and release docs are complete |

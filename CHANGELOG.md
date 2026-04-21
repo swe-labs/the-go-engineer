@@ -6,15 +6,37 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 
 ---
 
+## [2026-04-22] - v2.1.0-beta.1 Beta-Complete Snapshot
+
+### Added
+
+- Published the `v2.1.0-beta.1` prerelease and public announcement as the beta-complete checkpoint for the v2.1 curriculum.
+- Promoted `release/v2` into the active RC stabilization line for the next hardening phase.
+
+### Changed
+
+- Completed the public 12-section learner-path migration across root stage folders, learner-facing docs, and `curriculum.v2.json`.
+- Tightened the single Go validator so release-facing docs, curriculum metadata, and repo health checks reflect the same source of truth more honestly.
+- Aligned public docs and stage navigation with the current root-stage architecture, including the promoted backend, concurrency, quality, architecture, production, and flagship surfaces.
+- Cleaned release-facing documentation so the beta-complete snapshot and RC branch model are explicit.
+
+### Fixed
+
+- Rewrote stale learner-facing links that still pointed to intentionally deleted `docs/stages/...` paths.
+- Resolved Stage 06 wording drift so the README matches the promoted `HS`, `API`, and `DB` metadata path.
+- Cleaned visible mojibake and release-state drift from the public docs used for learner orientation.
+
+---
+
 ## [2026-04-18] - The v2.1 12-Section Architecture Optimization
 
 ### Changed
 
-- **Curriculum Architecture Consolidation:** Optimized the drafted 21-section blueprint into a highly focused **12-Section (s00–s11)** model to reduce cognitive overhead and improve the learning progression.
+- **Curriculum Architecture Consolidation:** Optimized the drafted 21-section blueprint into a highly focused **12-Section (s00-s11)** model to reduce cognitive overhead and improve the learning progression.
 - **Documentation Alignment:** Achieved 100% alignment across all core documentation (`ARCHITECTURE.md`, `ROADMAP.md`, `CODE-STANDARDS.md`, `COMMON-MISTAKES.md`) and satellite documentation (`README.md`, `LEARNING-PATH.md`, `CURRICULUM-BLUEPRINT.md`, `TESTING-STANDARDS.md`, `CONTRIBUTING.md`, `MAINTAINER-CHECKLIST.md`, `docs/PROGRESSION.md`).
 - **Teaching Contract:** Formalized the `README`-first, `main.go`-second pedagogical contract. Every lesson now strictly requires Mission, Prerequisites, Mental Model, Visual Model, Machine View, Try It, In Production, and Thinking Questions.
 - **AI Automation Skills:** Rewrote internal AI skills (`github-workflow` and `migration`) to strictly enforce the v2.1 12-section GitHub workflow and template requirements.
-- **Next Up Navigation:** Upgraded terminal footers to output natively clickable paths (e.g., `Run: go run ./01-getting-started/2-hello-world`) for seamless navigation in VS Code and modern terminals.
+- **Next Up Navigation:** Upgraded terminal footers to output natively clickable paths (for example, `Run: go run ./01-getting-started/2-hello-world`) for seamless navigation in VS Code and modern terminals.
 
 ### Removed
 
@@ -26,13 +48,13 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 
 ### Added
 
-- **Strict GitHub Workflow:** Officially documented and enforced the Antigravity `github-workflow` skill across `CONTRIBUTING.md` and `MAINTAINER-CHECKLIST.md`. All future changes now require approved Issues linked to the v2 project board before drafting PRs.
+- **Strict GitHub Workflow:** Officially documented and enforced the Antigravity `github-workflow` skill across `CONTRIBUTING.md` and `MAINTAINER-CHECKLIST.md`. All future changes now require approved issues linked to the v2 project board before drafting PRs.
 
 ### Changed
 
 - **Curriculum Architecture Shift:** Fully transitioned all repository documentation from the legacy 11-stage model to the new **5-Phase, 21-Section Blueprint**.
-- **Code Standards:** Added formal guidelines for the v2 three-tier Error Framework (`UserError`, `SystemError`, `FatalError`), Context propagation, Generics, and Security practices.
-- **Testing Standards:** Updated the coverage matrix to map against the 21 sections and explicitly added required Fuzz Testing and API/gRPC testing standards.
+- **Code Standards:** Added formal guidelines for the v2 three-tier Error Framework (`UserError`, `SystemError`, `FatalError`), context propagation, generics, and security practices.
+- **Testing Standards:** Updated the coverage matrix to map against the 21 sections and explicitly added required fuzz testing and API/gRPC testing standards.
 - **Reference Remapping:** Remapped all "Common Mistakes" cross-references to point to the correct sections in the new 21-section blueprint.
 
 ### Removed
@@ -75,14 +97,14 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 - **Curriculum Dependency Graph:** Automated granular mapping of 15 sections across 28 sub-graphs using `curriculum.json`.
 - **Premium Console Footers:** Integrated "Next Up" context-aware navigation footers into all 115 `main.go` files.
 - **Visual Breadcrumbs:** Added previous/next/exercise navigation links to all section READMEs.
-- **Root Metadata:** Updated root `README.md` and `ROADMAP.md` with the new ID-based learning path (GS, LB, CF, etc.).
+- **Root Metadata:** Updated root `README.md` and `ROADMAP.md` with the new ID-based learning path (`GS`, `LB`, `CF`, and related section IDs).
 - **Validation Script:** Created `scripts/validate_curriculum.go` to ensure filesystem integrity for all future additions.
 
 ### Fixed
 
 - **ID Collision:** Resolved ID collisions for "Graceful Shutdown" vs "Getting Started" by implementing section-specific context namespaces.
 - **Bulk Refactor Cleanup:** Fixed widespread Go syntax errors and markdown lint issues introduced during the integration phase.
-- **[BUG] Chapter 1 Lesson 1:** Added missing instructions to `1-installation` (GS.1) boilerplate (#4).
+- **[BUG] Chapter 1 Lesson 1:** Added missing instructions to `1-installation` (`GS.1`) boilerplate (#4).
 
 ---
 
@@ -92,25 +114,25 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 
 - **Curriculum Architecture:** Completely refactored the legacy 28 flat-folder structure into an elite, chronologically ordered 15-chapter book format.
 - **Cross-Domain Separation:** Decoupled concepts by their primary domain, cleanly separating runtime operations (`11-concurrency/time-and-scheduling`) and external operations (`09-io-and-cli/encoding`).
-- **HTTP Domain Split:** Amputated the HTTP Clients/Mocking directory exactly down the middle, separating true HTTP networking (`10-web-and-database/http-client`) from test abstraction limits (`13-quality-and-performance/http-client-testing`).
+- **HTTP Domain Split:** Amputated the HTTP clients/mocking directory exactly down the middle, separating true HTTP networking (`10-web-and-database/http-client`) from test abstraction limits (`13-quality-and-performance/http-client-testing`).
 - **Internal Imports:** Ran a mass-migration script converting all legacy `internal/` pointers uniformly.
-- **Docs Update:** Rewrote README tables, ROADMAP tracking lists, and CONTRIBUTING guides natively reflecting the elite `v1` path routing.
+- **Docs Update:** Rewrote README tables, ROADMAP tracking lists, and CONTRIBUTING guides to reflect the elite `v1` path routing.
 
 ### Removed
 
-- DELETED the legacy compatibility `symlinks` from the repository root entirely!
+- Deleted the legacy compatibility symlinks from the repository root entirely.
 
 ---
 
-## [2026-04-04] - Phase 7 additions + bug fixes
+## [2026-04-04] - Phase 7 additions and bug fixes
 
 ### Added
 
 - **Section 23: Structured Logging** - slog basics, context-keyed logger, custom Handler, zerolog comparison
 - **Section 24: errgroup & sync.Pool** - errgroup, errgroup+context pipeline, sync.Pool, bounded pipeline resizer exercise, URL checker exercise
-- **Section 25: Profiling** - CPU profile, live `net/http/pprof` endpoint, go tool pprof workflow
+- **Section 25: Profiling** - CPU profile, live `net/http/pprof` endpoint, `go tool pprof` workflow
 - **Section 26: gRPC** - proto3 definition, unary server with interceptors, typed client stub
-- **Section 27: Graceful Shutdown** - signal.NotifyContext, http.Server.Shutdown, complete production capstone
+- **Section 27: Graceful Shutdown** - `signal.NotifyContext`, `http.Server.Shutdown`, complete production capstone
 - **Section 10 supplement** - `io/fs` as a testing seam with `fstest.MapFS`
 - **`COMMON-MISTAKES.md`** - 15 most common Go bugs with fixes and section cross-references
 - **`ROADMAP.md`** - tracks current progress and planned future sections
@@ -121,14 +143,14 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 - **Bug:** `23-structured-logging/3-custom-handler` - `slog.DiscardHandler` instantiation type error fixed by removing struct brackets.
 - **Bug:** `12-concurrency-patterns/3-sync-pool` - duplicate `BenchmarkWithPool` declaration causing compilation failure removed from `main.go`.
 - **Bug:** `25-profiling/1-cpu-profile` and `10-filesystem/8-fs-testing-seam` - redundant newline formatting in `fmt.Println` fixed to standard `fmt.Print`.
-- **Bug:** `26-grpc` - missing generated Protocol Buffer Go files added using `protoc` and properly imported into `gen` package.
-- **Bug:** Global repository string literals - fixed widespread compilation errors caused by improper line breaks across several past modules.
+- **Bug:** `26-grpc` - missing generated Protocol Buffer Go files added using `protoc` and properly imported into the `gen` package.
+- **Bug:** global repository string literals - fixed widespread compilation errors caused by improper line breaks across several past modules.
 
 ### Changed
 
-- `go.mod` and Dockerfiles now correctly declare `go 1.26` (was previously correct - this entry confirms it intentionally targets Go 1.26 stable)
-- README exercise table updated to include all new sections 23-27
-- README Windows CGO note added for `go-sqlite3` dependency
+- `go.mod` and Dockerfiles now correctly declare `go 1.26`.
+- README exercise table updated to include all new sections 23-27.
+- README Windows CGO note added for the `go-sqlite3` dependency.
 
 ---
 
@@ -158,4 +180,4 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 - Sections 00-19: complete Beginner -> Expert learning path
 - 17 exercises with `_starter/` stubs and full solutions
 - GitHub Actions CI pipeline
-- CONTRIBUTING.md with file templates and quality checklist
+- `CONTRIBUTING.md` with file templates and quality checklist
