@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package order.v1;
+option go_package = "github.com/rasel9t6/the-go-engineer/09-architecture/02-grpc/gen";
+
+// ============================================================================
+// Section 26: gRPC — Service Definition
+// ============================================================================
+//
+// This .proto file IS the API contract. Both the Go server and every client
+// (Go, Python, Rust, JavaScript) are generated from this single source of truth.
+//
+// GENERATE Go code:
+//   protoc --go_out=. --go-grpc_out=. \
+//          --go_opt=paths=source_relative \
+//          --go-grpc_opt=paths=source_relative \
+//          proto/order.proto
+//
+// The generated files (gen/*.go) are committed so you can run the examples
+// without installing protoc. In a real project, you would regenerate them
+// in CI and check them into git or use a buf.build setup.
+// ============================================================================
+
+// OrderService manages customer orders in our system.
+service OrderService {
+  // Unary: one request, one response (like a normal HTTP call)
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
+  rpc GetOrder    (GetOrderRequest)    returns (GetOrderResponse);
+
+  // Server streaming: one request, stream of responses
+  // Use this for: live updates, progress, paginated results
+  rpc WatchOrderStatus (WatchOrderStatusRequest) returns (stream OrderStatusUpdate);
+
+  // Bidirectional streaming: both sides send multiple messages
+  // Use this for: chat, collaborative editing, real-time dashboards
+  rpc ProcessOrderStream (stream OrderItem) returns (stream ProcessResult);
+}
+
+// ============================================================================
+// Messages — the data types exchanged over the wire
+// ============================================================================
+
+message CreateOrderRequest {
+  string customer_id = 1;
+  string product_id  = 2;
+  int32  quantity    = 3;
+}
+
+message CreateOrderResponse {
+  string order_id   = 1;
+  string status     = 2;
+  double total_cost = 3;
+}
+
+message GetOrderRequest {
+  string order_id = 1;
+}
+
+message GetOrderResponse {
+  string order_id    = 1;
+  string customer_id = 2;
+  string product_id  = 3;
+  int32  quantity    = 4;
+  string status      = 5;
+  int64  created_at  = 6; // Unix timestamp
+}
+
+message WatchOrderStatusRequest {
+  string order_id = 1;
+}
+
+message OrderStatusUpdate {
+  string order_id  = 1;
+  string status    = 2;
+  string message   = 3;
+  int64  timestamp = 4;
+}
+
+message OrderItem {
+  string product_id = 1;
+  int32  quantity   = 2;
+}
+
+message ProcessResult {
+  string product_id  = 1;
+  bool   accepted    = 2;
+  string reason      = 3;
+}
+

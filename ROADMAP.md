@@ -1,138 +1,76 @@
 # Roadmap
 
-This document tracks what is built, what is in progress, and what is planned.
+> This document tracks the current release state of the v2.1 curriculum.
+> If this file and [ARCHITECTURE.md](./ARCHITECTURE.md) disagree on structure, `ARCHITECTURE.md` wins.
+
+## Current Status
+
+The v2 beta migration is complete on `main`.
+
+- the 12-section architecture is live
+- root-stage source folders are aligned to the public section map
+- `curriculum.v2.json` is the active curriculum source
+- the single validator is the required repo health check
+
+The next release step is **RC hardening**, not more beta migration.
 
 ## Branch Model
 
-- `main` tracks active v2 development and prereleases.
-- `release/v1` tracks stable v1 maintenance for current users.
-- `release/v2` will be cut from `main` when v2 reaches beta and feature freeze.
+- `main`: active v2 development and prerelease integration
+- `release/v1`: stable v1 maintenance line
+- `release/v2`: created when v2 RC stabilization begins
 
-## Current V2 Focus
+## Beta Completion Snapshot
 
-As of April 7, 2026, the v2 transition is in the public planning and prototype-design phase.
+| Area | Status | Notes |
+| --- | --- | --- |
+| Public architecture | Complete | 12 sections aligned across root folders and metadata |
+| Curriculum metadata | Complete | `curriculum.v2.json` is current and validated |
+| Learner-facing section roots | Complete | section entry points exist from `s00` to `s11` |
+| Validator | Complete | single Go validator is the required repo health check |
+| Beta migration work | Complete | no remaining beta-architecture migration blocker |
 
-- Stable learners should keep using `release/v1`.
-- Public v2 planning now lives on [`planning/v2`](https://github.com/rasel9t6/the-go-engineer/tree/planning/v2).
-- Design work is tracked in the [V2 project board](https://github.com/users/rasel9t6/projects/2).
-- Initial public planning issues are [#79](https://github.com/rasel9t6/the-go-engineer/issues/79) through [#88](https://github.com/rasel9t6/the-go-engineer/issues/88).
-- Broad content migration will not begin until the structural prototype is approved.
+## RC Focus
 
-## Status Legend
+RC work should now concentrate on:
 
-| Symbol | Meaning |
-|--------|---------|
-| ✅ | Complete and tested |
-| 🚧 | In progress |
-| 📋 | Planned |
-| 💡 | Under consideration |
+1. learner-path polish and consistency
+2. validator strictness and repo hygiene
+3. missing test surfaces where behavior should be provable
+4. documentation cleanup and release metadata
+5. flagship depth and integration confidence
 
----
+## Section Status
 
-## 01 — Core Foundations ✅
+| Section | Status | RC Focus |
+| --- | --- | --- |
+| s00 How Computers Work | Beta-ready | polish diagrams and machine explanations where useful |
+| s01 Getting Started | Beta-ready | keep setup surfaces crisp and trustworthy |
+| s02 Language Basics | Beta-ready | preserve zero-magic flow across language, control flow, and data structures |
+| s03 Functions & Errors | Beta-ready | continue tightening proof surfaces and orchestration clarity |
+| s04 Types & Design | Beta-ready | keep canonical path coherent while stretch content stays clearly optional |
+| s05 Packages, I/O & CLI | Beta-ready | strengthen milestone polish and cross-track navigation |
+| s06 Backend, APIs & Databases | Beta-ready | keep HTTP, API, and DB tracks aligned and explicit |
+| s07 Concurrency | Beta-ready | preserve clear path from fundamentals to patterns |
+| s08 Quality & Testing | Beta-ready | keep testing and profiling proof surfaces honest |
+| s09 Architecture & Security | Beta-ready | sharpen trade-off teaching and security progression |
+| s10 Production Operations | Beta-ready | keep config, observability, deployment, and code generation coherent |
+| s11 GoScale Flagship | Beta-ready | deepen integrated proof and release-readiness |
 
-- `getting-started`: installation, hello world, compilation model, dev tools (GS.1–4)
-- `language-basics`: variables, types, zero values, constants, iota (LB.1–4)
+## RC Exit Criteria
 
-## 02 — Control Flow ✅
+Before cutting `release/v2`, we should be able to say:
 
-- `control-flow`: for, if/else, switch, line-of-sight principle (CF.1–4)
+- the public docs, metadata, and validator agree
+- section navigation has no dead internal links
+- the repo validates cleanly with one command
+- the release-facing docs reflect the real state of the curriculum
+- the beta learner path is coherent enough to stabilize instead of restructure
 
-## 03 — Data Structures ✅
+## Version Plan
 
-- `data-structures`: arrays, slices, maps, pointers, escape analysis (DS.1–6)
-
-## 04 — Functions and Errors ✅
-
-- `functions-and-errors`: multi-return, closures, defer, panic/recover, error wrapping (FE.1–9)
-
-## 05 — Types and Interfaces ✅
-
-- `types-and-interfaces`: structs, methods, interfaces, generics (TI.1–6)
-
-## 06 — Composition ✅
-
-- `composition`: composition vs inheritance (CO.1–3)
-
-## 07 — Strings and Text ✅
-
-- `strings-and-text`: string internals, regex, templates, Builder (ST.1–6)
-
-## 08 — Modules and Packages ✅
-
-- `modules-and-packages`: go.mod, versioning, replace (MP.1–3)
-
-## 09 — IO and CLI ✅
-
-- `filesystem`: file I/O, paths, directories, embed, io.Reader/Writer patterns (FS.1–8)
-- `cli-tools`: os.Args, flag, subcommands, file organiser (CL.1–4)
-- `encoding`: JSON marshal/unmarshal, streaming, base64 (EN.1–6)
-
-## 10 — Web and Database ✅
-
-- `databases`: sql.DB, connection pooling, transactions, repository pattern (DB.1–6)
-- `database-migrations`: golang-migrate, embed, schema evolution
-- `web-masterclass`: routing, DI, templates, middleware, sessions, auth, forms, CRUD, pagination, comments (WM.1–11)
-- `http-client`: http.Client configuration, calling APIs (HC.1–2)
-
-## 11 — Concurrency ✅
-
-- `concurrency`: goroutines, WaitGroup, channels, select, race conditions, sync primitives (GC.1–10)
-- `context`: Background, WithCancel, WithTimeout, WithValue (CT.1–5)
-- `time-and-scheduling`: time, scheduling, timers, tickers (TM.1–7)
-
-## 12 — Concurrency Patterns ✅
-
-- `concurrency-patterns`: errgroup.Group, fan-out pipelines, sync.Pool zero-allocation (CP.1–5)
-
-## 13 — Quality and Performance ✅
-
-- `testing`: unit tests, table-driven, HTTP handler tests, benchmarking (TE.1–4)
-- `http-client-testing`: manual mocks, testify/mocking abstractions (HM.1–4)
-- `profiling`: CPU profiles, memory profiles, flame graphs, pprof (PR.1–2)
-
-## 14 — Application Architecture ✅
-
-- `package-design`: naming, visibility, internal/, project layout (PD.1–3)
-- `docker-and-deployment`: single-stage Dockerfile, multi-stage builds, layer caching (DO.1–3)
-- `enterprise-capstone`: full REST API, PostgreSQL, Docker Compose (EC.1)
-- `structured-logging`: slog basics, context-keyed logger, custom handlers (SL.1–4)
-- `grpc`: proto3 service definition, unary and streaming RPC (GR.1–3)
-- `graceful-shutdown`: signal.NotifyContext, HTTP graceful drain (GS.1–2)
-
-## 15 — Code Generation 📋
-
-- `go-generate`: //go:generate directive, tools as part of build (CG.1)
-- `mockery` & `stringer` automation
-
----
-
-## 29 — Cloud Native 💡
-
-- OpenTelemetry traces and metrics
-- Kubernetes health probes (liveness vs readiness)
-- Graceful shutdown for gRPC servers
-- Config management with environment variables and Viper
-
-## 30 — Performance Patterns 💡
-
-- `atomic.Value` for lock-free config hot-reload
-- SIMD-friendly data layout patterns
-
----
-
-## Windows Setup Note
-
-The `10-web-and-database/databases` and `14-application-architecture/enterprise-capstone` sections depend on `github.com/mattn/go-sqlite3` which requires CGO and a C compiler. On Windows without WSL:
-
-1. Install [TDM-GCC](https://jmeubank.github.io/tdm-gcc/) or [MinGW-w64](https://www.mingw-w64.org/)
-2. Ensure `gcc` is in your PATH: `gcc --version`
-3. Set `CGO_ENABLED=1` in your environment
-
-Alternatively, use WSL2 (recommended). All other sections work on Windows without a C compiler.
-
----
-
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to add new lessons, exercises, and sections.
+| Version | Target | Criteria |
+| --- | --- | --- |
+| v2.1-beta | current on `main` | beta migration complete and validator green |
+| v2.1-rc | next | stabilization, polish, and release prep on `release/v2` |
+| v2.1 | release | RC passes and release docs are complete |

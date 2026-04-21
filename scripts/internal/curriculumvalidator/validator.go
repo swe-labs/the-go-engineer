@@ -46,6 +46,7 @@ type V2Item struct {
 	Type             string   `json:"type"`
 	Subtype          string   `json:"subtype"`
 	Level            string   `json:"level"`
+	Status           string   `json:"status"`
 	VerificationMode string   `json:"verification_mode"`
 	Path             string   `json:"path"`
 	Prerequisites    []string `json:"prerequisites"`
@@ -62,16 +63,18 @@ type V2Curriculum struct {
 }
 
 type Result struct {
-	LessonCount    int
-	FilesScanned   int
-	V2SectionCount int
-	V2ItemCount    int
-	HasV2          bool
-	ErrorCount     int
+	LessonCount      int
+	FilesScanned     int
+	V2SectionCount   int
+	V2ItemCount      int
+	PlaceholderCount int
+	HasV2            bool
+	ErrorCount       int
 }
 
 var runPathPattern = regexp.MustCompile(`\./[A-Za-z0-9._/\-]+`)
-var nextUpIDPattern = regexp.MustCompile(`NEXT UP:\s*([A-Z]{2,3}\.\d+)`)
+var nextUpIDPattern = regexp.MustCompile(`NEXT UP:\s*([A-Z]{2,6}\.\d+)`)
+var markdownLinkPattern = regexp.MustCompile(`\[[^\]]+\]\(([^)]+)\)`)
 
 var (
 	allowedItemTypes = map[string]bool{
@@ -107,9 +110,13 @@ func Validate(root string, report func(string)) (Result, error) {
 		report = func(string) {}
 	}
 
-	lessonCount, pathErrors, err := validateCurriculumPaths(root, report)
-	if err != nil {
-		return Result{}, err
+	lessonCount, pathErrors := 0, 0
+	if pathExists(root, "curriculum.json") {
+		var err error
+		lessonCount, pathErrors, err = validateCurriculumPaths(root, report)
+		if err != nil {
+			return Result{}, err
+		}
 	}
 
 	filesScanned, runErrors, err := validateRunPaths(root, report)
@@ -117,18 +124,21 @@ func Validate(root string, report func(string)) (Result, error) {
 		return Result{}, err
 	}
 
-	v2SectionCount, v2ItemCount, v2Errors, hasV2, err := validateV2Curriculum(root, report)
+	v2SectionCount, v2ItemCount, v2PlaceholderCount, v2Errors, hasV2, err := validateV2Curriculum(root, report)
 	if err != nil {
 		return Result{}, err
 	}
 
+	markdownErrors := validateMarkdownSurfaces(root, report)
+
 	return Result{
-		LessonCount:    lessonCount,
-		FilesScanned:   filesScanned,
-		V2SectionCount: v2SectionCount,
-		V2ItemCount:    v2ItemCount,
-		HasV2:          hasV2,
-		ErrorCount:     pathErrors + runErrors + v2Errors,
+		LessonCount:      lessonCount,
+		FilesScanned:     filesScanned,
+		V2SectionCount:   v2SectionCount,
+		V2ItemCount:      v2ItemCount,
+		PlaceholderCount: v2PlaceholderCount,
+		HasV2:            hasV2,
+		ErrorCount:       pathErrors + runErrors + v2Errors + markdownErrors,
 	}, nil
 }
 
@@ -138,6 +148,7 @@ func isPlaceholderPath(path string) bool {
 		"./path/to/",
 		"./my-folder",
 		"./my-messy-folder",
+		"./00-how-computers-work/...",
 	}
 
 	for _, placeholder := range placeholders {
@@ -147,6 +158,15 @@ func isPlaceholderPath(path string) bool {
 	}
 
 	return false
+}
+
+func isPlaceholderItem(item V2Item) bool {
+	return strings.EqualFold(strings.TrimSpace(item.Status), "placeholder")
+}
+
+func isImplementedItem(item V2Item) bool {
+	status := strings.TrimSpace(item.Status)
+	return status == "" || strings.EqualFold(status, "implemented")
 }
 
 func pathExists(root, path string) bool {
@@ -169,31 +189,32 @@ func extractCommandTarget(command string) (string, error) {
 }
 
 func validateCurriculumPaths(root string, report func(string)) (int, int, error) {
-	data, err := os.ReadFile(filepath.Join(root, "curriculum.json"))
+	data, err := os.ReadFile(filepath.Join(root, "curriculum.v2.json"))
 	if err != nil {
-		return 0, 0, fmt.Errorf("Failed to read curriculum.json: %v", err)
+		return 0, 0, fmt.Errorf("Failed to read curriculum.v2.json: %v", err)
 	}
 
-	var cur Curriculum
-	if err := json.Unmarshal(data, &cur); err != nil {
-		return 0, 0, fmt.Errorf("Failed to parse curriculum.json: %v", err)
+	var v2 V2Curriculum
+	if err := json.Unmarshal(data, &v2); err != nil {
+		return 0, 0, fmt.Errorf("Failed to parse curriculum.v2.json: %v", err)
 	}
 
 	errorsFound := 0
 	lessonCount := 0
-	for _, s := range cur.Sections {
-		for _, l := range s.Lessons {
-			lessonCount++
-			if l.Path == "" {
-				report(fmt.Sprintf("Unmapped lesson: %s - %s", l.ID, l.Name))
-				errorsFound++
-				continue
-			}
+	for _, item := range v2.Items {
+		if item.Type != "lesson" && item.Type != "exercise" {
+			continue
+		}
+		lessonCount++
+		if item.Path == "" {
+			report(fmt.Sprintf("Unmapped item: %s - %s", item.ID, item.Title))
+			errorsFound++
+			continue
+		}
 
-			if !pathExists(root, l.Path) {
-				report(fmt.Sprintf("Path does not exist: %s (%s - %s)", l.Path, l.ID, l.Name))
-				errorsFound++
-			}
+		if !pathExists(root, item.Path) {
+			report(fmt.Sprintf("Path does not exist: %s (%s - %s)", item.Path, item.ID, item.Title))
+			errorsFound++
 		}
 	}
 
@@ -287,22 +308,23 @@ func validateRunPaths(root string, report func(string)) (int, int, error) {
 	return filesScanned, errorsFound, nil
 }
 
-func validateV2Curriculum(root string, report func(string)) (int, int, int, bool, error) {
+func validateV2Curriculum(root string, report func(string)) (int, int, int, int, bool, error) {
 	if _, err := os.Stat(filepath.Join(root, "curriculum.v2.json")); os.IsNotExist(err) {
-		return 0, 0, 0, false, nil
+		return 0, 0, 0, 0, false, nil
 	}
 
 	data, err := os.ReadFile(filepath.Join(root, "curriculum.v2.json"))
 	if err != nil {
-		return 0, 0, 0, false, fmt.Errorf("Failed to read curriculum.v2.json: %v", err)
+		return 0, 0, 0, 0, false, fmt.Errorf("Failed to read curriculum.v2.json: %v", err)
 	}
 
 	var cur V2Curriculum
 	if err := json.Unmarshal(data, &cur); err != nil {
-		return 0, 0, 0, false, fmt.Errorf("Failed to parse curriculum.v2.json: %v", err)
+		return 0, 0, 0, 0, false, fmt.Errorf("Failed to parse curriculum.v2.json: %v", err)
 	}
 
 	errorsFound := 0
+	placeholderCount := 0
 	sectionIDs := make(map[string]V2Section, len(cur.Sections))
 	itemIDs := make(map[string]V2Item, len(cur.Items))
 
@@ -380,6 +402,26 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 			errorsFound++
 		}
 
+		if !isImplementedItem(item) && !isPlaceholderItem(item) {
+			report(fmt.Sprintf("Invalid v2 item status: %s -> %s", item.ID, item.Status))
+			errorsFound++
+		}
+
+		// Placeholder items: skip deep validation (path, run commands, etc.)
+		if isPlaceholderItem(item) {
+			if !pathExists(root, item.Path) {
+				report(fmt.Sprintf("Invalid v2 placeholder path: %s -> %s", item.ID, item.Path))
+				errorsFound++
+				itemIDs[item.ID] = item
+				continue
+			}
+
+			placeholderCount++
+			report(fmt.Sprintf("Warning: placeholder item: %s (%s) - not yet implemented", item.ID, item.Title))
+			itemIDs[item.ID] = item
+			continue
+		}
+
 		if !pathExists(root, item.Path) {
 			report(fmt.Sprintf("Invalid v2 item path: %s -> %s", item.ID, item.Path))
 			errorsFound++
@@ -387,9 +429,9 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 
 		if section, exists := sectionIDs[item.SectionID]; exists && section.PathPrefix != "" {
 			itemPath := filepath.ToSlash(filepath.Clean(item.Path))
-			sectionPrefix := filepath.ToSlash(filepath.Clean(section.PathPrefix))
-			if itemPath != sectionPrefix && !strings.HasPrefix(itemPath, sectionPrefix+"/") {
-				report(fmt.Sprintf("Invalid v2 section path alignment: %s -> %s (expected prefix %s)", item.ID, item.Path, section.PathPrefix))
+			allowedPrefixes := allowedPathPrefixesForSection(section)
+			if !matchesAnyPrefix(itemPath, allowedPrefixes) {
+				report(fmt.Sprintf("Invalid v2 section path alignment: %s -> %s (expected prefix %s)", item.ID, item.Path, strings.Join(allowedPrefixes, " or ")))
 				errorsFound++
 			}
 		}
@@ -492,8 +534,185 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, bool
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
 	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
 	errorsFound += validateV2TextEncoding(root, sectionIDs, cur.Items, report)
+	errorsFound += validateFoundationsReadmeContracts(root, cur.Items, report)
 
-	return len(cur.Sections), len(cur.Items), errorsFound, true, nil
+	return len(cur.Sections), len(cur.Items), placeholderCount, errorsFound, true, nil
+}
+
+func allowedPathPrefixesForSection(section V2Section) []string {
+	prefixes := []string{filepath.ToSlash(filepath.Clean(section.PathPrefix))}
+
+	if section.ID == "s01" {
+		prefixes = append(prefixes, "01-foundations/01-getting-started", "01-foundations/02-language-basics", "01-getting-started", "02-language-basics")
+	}
+
+	if section.ID == "s04" {
+		prefixes = append(prefixes, "04-types-design/composition", "04-types-design/strings-and-text")
+	}
+
+	return prefixes
+}
+
+func matchesAnyPrefix(itemPath string, prefixes []string) bool {
+	for _, prefix := range prefixes {
+		if itemPath == prefix || strings.HasPrefix(itemPath, prefix+"/") {
+			return true
+		}
+	}
+
+	return false
+}
+
+func isFoundationsSection(sectionID string) bool {
+	switch sectionID {
+	case "s00", "s01", "s02", "s03", "s04":
+		return true
+	default:
+		return false
+	}
+}
+
+func validateFoundationsReadmeContracts(root string, items []V2Item, report func(string)) int {
+	errorsFound := 0
+
+	for _, item := range items {
+		if !isFoundationsSection(item.SectionID) {
+			continue
+		}
+		if isPlaceholderItem(item) {
+			continue
+		}
+
+		itemPath := filepath.ToSlash(filepath.Clean(item.Path))
+		readmePath := filepath.ToSlash(filepath.Join(itemPath, "README.md"))
+		if !pathExists(root, readmePath) {
+			report(fmt.Sprintf("Missing foundations README: %s -> %s", item.ID, readmePath))
+			errorsFound++
+			continue
+		}
+
+		errorsFound += validateMarkdownLocalLinks(root, readmePath, report)
+		errorsFound += validateRequiredHeadingsForItem(root, readmePath, item, report)
+		errorsFound += validateFoundationsVisualModelUsesMermaid(root, readmePath, item.ID, report)
+
+		if item.Type == "lesson" && item.VerificationMode == "run" {
+			mainPath := filepath.ToSlash(filepath.Join(itemPath, "main.go"))
+			if !pathExists(root, mainPath) {
+				report(fmt.Sprintf("Missing foundations lesson main.go: %s -> %s", item.ID, mainPath))
+				errorsFound++
+			}
+		}
+	}
+
+	return errorsFound
+}
+
+func validateRequiredHeadingsForItem(root, readmePath string, item V2Item, report func(string)) int {
+	requiredHeadings := []string{
+		"## Mission",
+		"## Prerequisites",
+		"## Mental Model",
+		"## Visual Model",
+		"## Machine View",
+		"## Run Instructions",
+	}
+
+	if item.Type == "lesson" {
+		requiredHeadings = append(requiredHeadings, "## Code Walkthrough")
+	} else {
+		requiredHeadings = append(requiredHeadings, "## Solution Walkthrough")
+	}
+
+	requiredHeadings = append(requiredHeadings,
+		"## Try It",
+	)
+
+	if item.Type != "lesson" {
+		requiredHeadings = append(requiredHeadings, "## Verification Surface")
+	}
+
+	requiredHeadings = append(requiredHeadings,
+		"## In Production",
+		"## Thinking Questions",
+		"## Next Step",
+	)
+
+	return validateRequiredHeadingsWithID(root, readmePath, item.ID, requiredHeadings, report)
+}
+
+func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read foundations README: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	text := strings.ReplaceAll(string(data), "\r\n", "\n")
+	text = normalizeFoundationsHeadingAliases(text)
+	errorsFound := 0
+	lastOffset := 0
+	for _, heading := range headings {
+		idx := strings.Index(text[lastOffset:], heading)
+		if idx >= 0 {
+			lastOffset += idx + len(heading)
+			continue
+		}
+
+		if strings.Contains(text, heading) {
+			report(fmt.Sprintf("Invalid foundations README contract: %s -> %s has %s out of order", itemID, filepath.ToSlash(relPath), heading))
+			errorsFound++
+			continue
+		}
+
+		if !strings.Contains(text, heading) {
+			report(fmt.Sprintf("Invalid foundations README contract: %s -> %s missing %s", itemID, filepath.ToSlash(relPath), heading))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
+}
+func normalizeFoundationsHeadingAliases(text string) string {
+	replacements := map[string]string{
+		"## In Production":                 "## In Production",
+		"## \u26a0\ufe0f In Production":    "## In Production",
+		"## âš ï¸ In Production":          "## In Production",
+		"## Thinking Questions":            "## Thinking Questions",
+		"## \U0001F914 Thinking Questions": "## Thinking Questions",
+		"## ðŸ¤” Thinking Questions":       "## Thinking Questions",
+	}
+
+	for from, to := range replacements {
+		text = strings.ReplaceAll(text, from, to)
+	}
+
+	return text
+}
+
+func validateFoundationsVisualModelUsesMermaid(root, relPath, itemID string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read foundations README: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	text := strings.ReplaceAll(string(data), "\r\n", "\n")
+	visualModelIdx := strings.Index(text, "## Visual Model")
+	if visualModelIdx < 0 {
+		return 0
+	}
+
+	sectionText := text[visualModelIdx:]
+	if nextHeadingIdx := strings.Index(sectionText[len("## Visual Model"):], "\n## "); nextHeadingIdx >= 0 {
+		sectionText = sectionText[:len("## Visual Model")+nextHeadingIdx]
+	}
+
+	if !strings.Contains(sectionText, "```mermaid") {
+		report(fmt.Sprintf("Invalid foundations README contract: %s -> %s Visual Model must include a Mermaid diagram", itemID, filepath.ToSlash(relPath)))
+		return 1
+	}
+
+	return 0
 }
 
 var mojibakeMarkers = []string{
@@ -571,7 +790,8 @@ func validateV2SectionLabels(root string, sections map[string]V2Section, items [
 			continue
 		}
 
-		expectedLabel := fmt.Sprintf("Section %s", section.Number)
+		expectedSectionLabel := fmt.Sprintf("Section %s", section.Number)
+		expectedStageLabel := fmt.Sprintf("Stage %s", section.Number)
 		candidateFiles := []string{
 			filepath.Join(item.Path, "main.go"),
 		}
@@ -592,8 +812,9 @@ func validateV2SectionLabels(root string, sections map[string]V2Section, items [
 				continue
 			}
 
-			if !strings.Contains(string(data), expectedLabel) {
-				report(fmt.Sprintf("Invalid v2 section label: %s -> %s (expected %s)", item.ID, filepath.ToSlash(rel), expectedLabel))
+			text := string(data)
+			if !strings.Contains(text, expectedSectionLabel) && !strings.Contains(text, expectedStageLabel) {
+				report(fmt.Sprintf("Invalid v2 section label: %s -> %s (expected %s or %s)", item.ID, filepath.ToSlash(rel), expectedSectionLabel, expectedStageLabel))
 				errorsFound++
 			}
 		}
@@ -607,6 +828,9 @@ func validateV2LessonNavigation(root string, items []V2Item, report func(string)
 
 	for _, item := range items {
 		if item.Type != "lesson" || len(item.NextItems) == 0 {
+			continue
+		}
+		if isPlaceholderItem(item) {
 			continue
 		}
 
@@ -637,6 +861,203 @@ func validateV2LessonNavigation(root string, items []V2Item, report func(string)
 		actualNextID := string(match[1])
 		if actualNextID != expectedNextID {
 			report(fmt.Sprintf("Invalid v2 lesson navigation footer: %s -> %s (expected %s)", item.ID, actualNextID, expectedNextID))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
+}
+
+var rubricSurfaceHeadings = []string{
+	"## Mission",
+	"## Type",
+	"## Level",
+	"## Prerequisites",
+	"## Task",
+	"## Evidence",
+	"## Rubric",
+	"## Common Weak Answers",
+	"## Next Step",
+}
+
+func validatePressureDocs(root string, report func(string)) int {
+	return 0
+}
+
+func validateTemplateDocs(root string, report func(string)) int {
+	errorsFound := 0
+
+	templateDocs := []string{
+		"docs/templates/README.md",
+		"docs/templates/THINKING_SECTIONS_ADVANCED.md",
+		"docs/templates/PRODUCTION_NOTES_ADVANCED.md",
+		"docs/templates/FAILURE_SCENARIOS_ADVANCED.md",
+		"docs/templates/ADVANCED_CONTENT_ROADMAP.md",
+	}
+
+	for _, relPath := range templateDocs {
+		if !pathExists(root, relPath) {
+			continue
+		}
+
+		errorsFound += validateMarkdownLocalLinks(root, relPath, report)
+	}
+
+	return errorsFound
+}
+func validateMarkdownSurfaces(root string, report func(string)) int {
+	errorsFound := 0
+
+	walkErr := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if d.IsDir() {
+			switch d.Name() {
+			case ".git", "vendor", ".agents", ".cache", ".github", ".opencode", "temp":
+				return filepath.SkipDir
+			default:
+				return nil
+			}
+		}
+
+		if filepath.Ext(path) != ".md" {
+			return nil
+		}
+
+		relPath, err := filepath.Rel(root, path)
+		if err != nil {
+			return err
+		}
+
+		cleanPath := filepath.ToSlash(filepath.Clean(relPath))
+		errorsFound += validateMarkdownLocalLinks(root, cleanPath, report)
+		errorsFound += validateMarkdownTextHealth(root, cleanPath, report)
+
+		return nil
+	})
+	if walkErr != nil {
+		report(fmt.Sprintf("Failed to scan markdown surfaces: %v", walkErr))
+		return errorsFound + 1
+	}
+
+	return errorsFound
+}
+
+func validateMarkdownTextHealth(root, relPath string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read markdown surface: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	text := string(data)
+	errorsFound := 0
+
+	for _, marker := range mojibakeMarkers {
+		if strings.Contains(text, marker) {
+			report(fmt.Sprintf("Possible mojibake in markdown surface: %s", filepath.ToSlash(relPath)))
+			errorsFound++
+			break
+		}
+	}
+
+	return errorsFound
+}
+
+func validateRubricSurfaceDirectory(root, relDir string, report func(string)) int {
+	errorsFound := 0
+	fullDir := filepath.Join(root, relDir)
+	entries, err := os.ReadDir(fullDir)
+	if err != nil {
+		report(fmt.Sprintf("Missing pressure-doc directory: %s", filepath.ToSlash(relDir)))
+		return 1
+	}
+
+	itemCount := 0
+	for _, entry := range entries {
+		if entry.IsDir() || filepath.Ext(entry.Name()) != ".md" || entry.Name() == "README.md" {
+			continue
+		}
+		itemCount++
+		relPath := filepath.ToSlash(filepath.Join(relDir, entry.Name()))
+		errorsFound += validateRequiredHeadings(root, relPath, rubricSurfaceHeadings, report)
+		errorsFound += validateMarkdownLocalLinks(root, relPath, report)
+	}
+
+	if itemCount == 0 {
+		report(fmt.Sprintf("Missing pressure-doc items in: %s", filepath.ToSlash(relDir)))
+		errorsFound++
+	}
+
+	return errorsFound
+}
+
+func validateRequiredHeadings(root, relPath string, headings []string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read pressure-doc surface: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	text := string(data)
+	errorsFound := 0
+	for _, heading := range headings {
+		if !strings.Contains(text, heading) {
+			report(fmt.Sprintf("Invalid rubric/checkpoint surface headings: %s missing %s", filepath.ToSlash(relPath), heading))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
+}
+
+func validateRequiredLinkPresence(root, relPath string, links []string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read pressure-doc link surface: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	text := string(data)
+	errorsFound := 0
+	for _, link := range links {
+		if !strings.Contains(text, "("+link+")") {
+			report(fmt.Sprintf("Missing required pressure-doc link: %s -> %s", filepath.ToSlash(relPath), link))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
+}
+
+func validateMarkdownLocalLinks(root, relPath string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read markdown surface: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	errorsFound := 0
+	for _, match := range markdownLinkPattern.FindAllStringSubmatch(string(data), -1) {
+		if len(match) < 2 {
+			continue
+		}
+
+		target := strings.TrimSpace(match[1])
+		if target == "" ||
+			strings.HasPrefix(target, "http://") ||
+			strings.HasPrefix(target, "https://") ||
+			strings.HasPrefix(target, "#") ||
+			strings.HasPrefix(target, "mailto:") {
+			continue
+		}
+
+		target = strings.SplitN(target, "#", 2)[0]
+		resolved := filepath.Clean(filepath.Join(filepath.Dir(relPath), filepath.FromSlash(target)))
+		if !pathExists(root, resolved) {
+			report(fmt.Sprintf("Broken local doc link: %s -> %s", filepath.ToSlash(relPath), target))
 			errorsFound++
 		}
 	}

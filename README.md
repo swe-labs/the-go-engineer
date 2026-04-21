@@ -1,207 +1,112 @@
-# The Go Engineer: Learn Go by Building Real Projects
+# The Go Engineer
 
 [![CI](https://github.com/rasel9t6/the-go-engineer/actions/workflows/ci.yml/badge.svg)](https://github.com/rasel9t6/the-go-engineer/actions)
-[![License: TGE License v1.0 (Non-Commercial)](https://img.shields.io/badge/License-TGE_v1.0-red.svg?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xNCAySDZhMiAyIDAgMCAwLTIgMnYxNmEyIDIgMCAwIDAgMiAyaDEyYTIgMiAwIDAgMCAyLTJWOGwtNi02em0tMSAxLjVMMTguNSA5SDEzVjMuNXpNNiAyMFY0aDV2Nmg2djEwSDZ6bTItOGg4djJIOHYtMnptMCA0aDh2Mkg4di0yeiIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4%3D)](#-license)
-[![GitHub Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/rasel9t6)
+[![License: TGE License v1.0 (Non-Commercial)](https://img.shields.io/badge/License-TGE_v1.0-red.svg?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xNCAySDZhMiAyIDAgMCAwLTIgMnYxNmEyIDIgMCAwIDAgMiAyaDEyYTIgMiAwIDAgMCAyLTJWOGwtNi02em0tMSAxLjVMMTguNSA5SDEzVjMuNXpNNiAyMFY0aDV2Nmg2djEwSDZ6bTItOGg4djJIOHYtMnptMCA0aDh2Mkg4di0yeiIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4%3D)](#license)
+[![GitHub Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=%23EA4AAA)](https://github.com/sponsors/rasel9t6)
 [![Patreon](https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://patreon.com/rasel9t6)
 
-Welcome to **The Go Engineer** — the definitive open-source Go curriculum. Every section teaches through **practical examples, real-world projects, and hands-on exercises** — not just syntax. You'll build servers, CLI tools, concurrent pipelines, REST APIs, and production-grade applications while learning the engineering depth behind every concept.
+Learn Go by building, testing, and operating real software.
+
+The Go Engineer is a repo-first Go software engineering learning system built around a progressive **5-phase, 12-section architecture** (v2.1).
+
+It takes a learner from machine fundamentals and first execution all the way to a production-shaped Go backend capstone.
+
+For the full curriculum source of truth, read [ARCHITECTURE.md](./ARCHITECTURE.md).
+
+## Current Status
+
+The v2 beta migration is complete on `main`.
+
+- `release/v1`: stable v1 line for current learners
+- `main`: completed v2 beta implementation line
+- `release/v2`: reserved for v2 RC and stabilization once feature freeze begins
 
 ## Quick Start
 
 ```bash
-# 1. Install Go: https://go.dev/dl/  (see 01-core-foundations/getting-started)
-# 2. Clone this repository
 git clone https://github.com/rasel9t6/the-go-engineer.git
 cd the-go-engineer
-
-# 3. Download dependencies
 go mod download
-
-# 4. Verify Go is working
 go version
-
-# 5. Run your first program
-go run ./01-core-foundations/getting-started/2-hello-world
+go run ./00-how-computers-work/1-what-is-a-program
 ```
 
-## Release Channels
+## Curriculum Overview
 
-The repository now uses a long-lived branch model for the v1 to v2 transition:
+```text
+Phase 0: Machine Foundation     s00  How Computers Work          (0% -> 5%)
+Phase 1: Language Foundation    s01  Getting Started             (5% -> 12%)
+                                s02  Language Basics             (12% -> 28%)
+                                s03  Functions & Errors          (28% -> 38%)
+                                s04  Types & Design              (38% -> 52%)
+Phase 2: Engineering Core       s05  Packages, I/O & CLI         (52% -> 62%)
+                                s06  Backend, APIs & Databases   (62% -> 75%)
+                                s07  Concurrency                 (75% -> 83%)
+                                s08  Quality & Testing           (83% -> 87%)
+Phase 3: Systems Engineering    s09  Architecture & Security     (87% -> 92%)
+                                s10  Production Operations       (92% -> 96%)
+Phase 4: Flagship Project       s11  GoScale SaaS Backend        (96% -> 100%)
+```
 
-- `main` is the active v2 development branch and the default target for new sections, lessons, and features.
-- `release/v1` is the stable v1 support branch for existing users who want the current curriculum line.
-- `release/v2` will be created later from `main` when v2 enters beta and feature freeze.
-- `v1.0.0` stays as an immutable release tag. It is not the long-term maintenance branch name.
+## Source Sections
 
-If you want the stable v1 curriculum, check out `release/v1` or a stable `v1.x.y` tag. If you want the newest v2 work as it lands section by section, stay on `main`.
+| Section | Folder | Focus |
+| --- | --- | --- |
+| s00 | [00-how-computers-work](./00-how-computers-work) | execution, memory, terminal, processes |
+| s01 | [01-getting-started](./01-getting-started) | install, first run, toolchain basics |
+| s02 | [02-language-basics](./02-language-basics) | values, control flow, data structures |
+| s03 | [03-functions-errors](./03-functions-errors) | reusable logic and explicit failure handling |
+| s04 | [04-types-design](./04-types-design) | structs, interfaces, composition, strings and text |
+| s05 | [05-packages-io](./05-packages-io) | modules, packages, CLI, encoding, filesystem |
+| s06 | [06-backend-db](./06-backend-db) | HTTP servers, API design, gRPC, databases |
+| s07 | [07-concurrency](./07-concurrency) | goroutines, context, sync, pipelines |
+| s08 | [08-quality-test](./08-quality-test) | tests, profiling, benchmarks |
+| s09 | [09-architecture](./09-architecture) | package design, architecture patterns, security |
+| s10 | [10-production](./10-production) | logging, shutdown, config, observability, deployment |
+| s11 | [11-flagship](./11-flagship) | integrated capstone system |
 
-## V2 Update
+## What You Will Build
 
-v2 planning is now happening in public.
+You will work through:
 
-- If you want the most stable learner experience today, use `release/v1`.
-- If you want to follow the v2 redesign as it is being planned, see the [V2 Bible on `planning/v2`](https://github.com/rasel9t6/the-go-engineer/blob/planning/v2/docs/v2/BIBLE.md).
-- Public v2 planning work is tracked in the [V2 project board](https://github.com/users/rasel9t6/projects/2) and the initial planning issues [#79](https://github.com/rasel9t6/the-go-engineer/issues/79) through [#88](https://github.com/rasel9t6/the-go-engineer/issues/88).
-- No learner migration is required today. v1 remains supported while v2 is designed and rolled out incrementally.
+- beginner-friendly exercises and starter projects
+- parsers, filesystem tools, and CLI utilities
+- HTTP services and database-backed applications
+- concurrency pipelines, worker pools, and timeout-aware clients
+- profiling, testing, and benchmark-driven improvements
+- structured logging, graceful shutdown, configuration, observability, and deployment workflows
+- **GoScale**: a production-shaped SaaS backend capstone
 
-The short version: learn on `release/v1` if you want stability today, and watch `main` plus `planning/v2` if you want to follow the next version as it takes shape.
-
-## Choose Your Learning Path
-
-New to Go? → **Start at [01-core-foundations](./01-core-foundations/)**  
-Know another language? → **See [LEARNING-PATH.md](./LEARNING-PATH.md) for your track**  
-Experienced with Go? → **Jump to [§11 Concurrency](./11-concurrency/) or browse [curriculum map](./docs/curriculum/README.md)**
-
-## Reference Documents
+## Core Docs
 
 | Document | Purpose |
-| -------- | ------- |
-| [LEARNING-PATH.md](./LEARNING-PATH.md) | **Complete learning guide** with prerequisites and recommended tracks |
-| [docs/curriculum/README.md](./docs/curriculum/README.md) | **Curriculum map** showing all 80+ lessons and dependencies |
-| [COMMON-MISTAKES.md](./COMMON-MISTAKES.md) | 15 most common Go bugs with fixes and section cross-references |
-| [ROADMAP.md](./ROADMAP.md) | What is built, in progress, and planned |
-| [CHANGELOG.md](./CHANGELOG.md) | History of additions and bug fixes |
-| [CONTRIBUTING.md](./CONTRIBUTING.md) | How to add lessons, exercises, and sections |
-| [RELEASE.md](./RELEASE.md) | Release planning and process guide |
+| --- | --- |
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | curriculum source of truth |
+| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | lesson and milestone teaching contract |
+| [LEARNING-PATH.md](./LEARNING-PATH.md) | entry points and path guidance |
+| [ROADMAP.md](./ROADMAP.md) | beta completion status and RC focus |
+| [docs/PROGRESSION.md](./docs/PROGRESSION.md) | visual progression through phases and milestones |
+| [CODE-STANDARDS.md](./CODE-STANDARDS.md) | code and explanation standards |
+| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | testing patterns and verification expectations |
+| [COMMON-MISTAKES.md](./COMMON-MISTAKES.md) | common Go bugs and fixes |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | contribution workflow |
+| [RELEASE.md](./RELEASE.md) | release and stabilization process |
 
-## Who is This For?
-
-- **Complete beginners** — Never programmed before? Start at Section 01. Every line is explained.
-- **Developers from other languages** — Know Python/JS/Java? Skim the basics, deep-dive into Go-specific patterns.
-- **Go developers leveling up** — Already write Go? Jump to Chapters 09+ for concurrency, testing, and production patterns.
-
-## The 6-Phase Learning Path
-
-The curriculum is structured into 6 logical phases, taking you from **Zero to Senior Engineer** across 15 high-impact chapters.
-
-### 🟦 Phase 1: Foundations (01–04)
-*Language Basics, Control Flow, Data Structures, Functions & Errors.*
-The bedrock of Go. Master pointers, slices, and Go's unique error handling.
-
-### 🟩 Phase 2: Intermediate (05–08)
-*Types & Interfaces, Composition, Strings & Text, Modules & Packages.*
-Learn "The Go Way" of abstraction. No inheritance—just composition and interfaces.
-
-### 🟧 Phase 3: IO & CLI (09)
-*Filesystem, Encoding (JSON/XML/Base64), CLI Tools.*
-Building tools that interact with the real world.
-
-### 🟥 Phase 4: Systems (10–12)
-*Web Masterclass, Databases, Concurrency, Concurrency Patterns.*
-Building high-performance servers that scale through goroutines and channels.
-
-### 🟪 Phase 5: Architecture (13–14)
-*Testing, Mocking, Profiling, Package Design, Logging, gRPC, Shutdown.*
-Production engineering: observability, type-safe RPCs, and performance tuning.
-
-### ⬛ Phase 6: Professional (15)
-*Code Generation (Mockery, SQLC).*
-Automating the boring parts of development to scale your productivity.
-
-## Guided Learning Patterns
-
-This curriculum is not just a linear list. It follows specific architectural decisions:
-
-| Pattern | Behavior | Examples |
-| ------- | -------- | -------- |
-| **Linear** | Strictly A → B → C | Control Flow, Composition, gRPC |
-| **Fork/Rejoin** | Independent paths that merge | DS.4 (Pointers) needed by DS.5 only |
-| **Deep Exercise** | Synthesis of all previous prereqs | DS.6, FE.9, TI.6, GC.7 |
-| **Parallel Track** | Non-blocking concurrent subjects | Race conditions run alongside channels |
-
-## Projects & Exercises
-
-Each module culminates in a hands-on project to test your understanding:
-
-| Chapter | ID | Exercise | Description |
-| ------- | --- | -------- | ----------- |
-| **01** | LB.4 | `language-basics/4-app-logger` | Synthesize types + iota + Stringer |
-| **02** | CF.4 | `4-pricing-calculator` | Map lookups · HasSuffix · switch on bool |
-| **03** | DS.6 | `6-contact-manager` | Secondary index · init() · pointer returns |
-| **04** | FE.9 | `8-error-handling` | Custom struct error · errors.As · defer |
-| **05** | TI.6 | `6-payroll-processor` | Polymorphic slice · embedded interface |
-| **06** | CO.3 | `3-bank-account` | Embedded shadowing |
-| **07** | ST.6 | `6-log-parser` | Regex · scanner · strings.Builder |
-| **09** | FS.7 | `filesystem/7-log-search` | WalkDir filter · Scanner per file |
-| **09** | EN.6 | `encoding/6-config-parser` | Decoder · validate() · zero-value detection |
-| **09** | CL.4 | `cli-tools/4-file-organizer` | --dry-run · ReadDir · Rename |
-| **10** | DB.6  | `databases/6-repository` | SQLite impl · dependency injection |
-| **10** | WM.11 | `enterprise-capstone` | Full production-ready server |
-| **11** | GC.7  | `goroutines/7-downloader` | Semaphore pattern · WaitGroup + channel |
-| **11** | TM.7  | `time-and-scheduling/7-reminder` | AfterFunc · ticker · select |
-| **11** | CT.5  | `context/5-timeout-client` | DeadlineExceeded detection |
-| **12** | CP.4  | `4-bounded-pipeline` | g.SetLimit · g.TryGo · pooled buffers |
-| **12** | CP.5 | `5-url-checker` | Pooled client · sorting by latency |
-| **13** | HM.4 | `http-client-testing/6-testify-mock` | .On/.Return · AssertNumberOfCalls |
-| **13** | PR.1 | `profiling/1-cpu-profile` | flat vs cum · go tool pprof |
-| **14** | SL.5 | `structured-logging/5-exercise` | PII redactor · ReplaceAttr · mapping |
-| **14** | GR.4 | `grpc/2-streaming` | Bidirectional streams · real-time updates |
-| **14** | GS.3 | `graceful-shutdown/3-capstone` | Signal → ready=503 → drain → order |
-| **15** | CG.3 | `3-sqlc` | Type-safe SQL code generation |
-
-## How to Use This Repository
-
-The best way to learn is by **reading the inline comments** and **running the code**.
+## Validate the Repo
 
 ```bash
-# Run any lesson
-go run ./CHAPTER/LESSON
-
-# Examples:
-go run ./01-core-foundations/getting-started/2-hello-world
-go run ./01-core-foundations/language-basics/1-variables
-go run ./11-concurrency/goroutines/3-channels
-go run ./10-web-and-database/web-masterclass/1-routing
-
-# Chapter 13 — Quality and Testing
-go run ./13-quality-and-performance/profiling/1-cpu-profile
-```
-
-### Self-Challenge Mode
-
-Most exercises include a `_starter/` directory with TODO stubs:
-
-```bash
-# Try the exercise yourself first:
-go run ./02-control-flow/4-pricing-calculator/_starter
-
-# Then compare with the solution:
-go run ./02-control-flow/4-pricing-calculator
-```
-
-For the grand finale, boot the entire Enterprise Backend cluster (Database + Migrations + API) using Docker:
-
-```bash
-# Run the massive Chapter 14 Capstone project
-cd 14-application-architecture/enterprise-capstone
-docker-compose up -d --build
-```
-
-## Running the Tests
-
-To verify your environment is set up correctly, run the full test suite over the entire domain structure:
-
-```bash
-# Run all tests
+go run ./scripts/validate_curriculum.go
 go test ./...
-
-# Run tests with race detection
-go test -race ./...
 ```
 
-## Windows Users — CGO Note
+## Windows Note
 
-Chapter 10 (`databases`) and Chapter 14 (`enterprise-capstone`) use `go-sqlite3`, which requires CGO and a C compiler. On Windows without WSL:
+Some database and capstone paths use `go-sqlite3`, which requires CGO and a C compiler.
+If you are on Windows, WSL2 is the smoothest setup for those paths.
 
-1. Install [TDM-GCC](https://jmeubank.github.io/tdm-gcc/)
-2. Set environment: `$env:CGO_ENABLED = "1"` (PowerShell)
-
-We recommend [WSL2](https://docs.microsoft.com/en-us/windows/wsl/) for the best experience.
-
-## 📜 License
+## License
 
 This project is licensed under the **The Go Engineer License (TGE License) v1.0**.
 
-- ✅ Free for personal, educational, and non-commercial use
-- ❌ Commercial use is strictly prohibited without permission
+- Free for personal, educational, and non-commercial use
+- Commercial use requires permission

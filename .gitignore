@@ -18,6 +18,7 @@ vendor/
 
 # Go workspace file
 go.work
+.gocache/
 
 # Environment variables
 .env
@@ -44,4 +45,11 @@ uploads/
 # Logs
 *.log
 
+# OpenCode
+.opencode/
+
+.cache/
+
+# Temporary files
+temp/
 

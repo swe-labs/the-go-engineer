@@ -1,0 +1,58 @@
+version: '3.8'
+
+# ============================================================================
+# Section 22: Enterprise Capstone — Docker Compose
+# Level: Advanced
+# ============================================================================
+#
+# WHAT YOU'LL LEARN:
+#   - Orchestrating multi-container environments
+#   - Connecting a Go Backend to a PostgreSQL Database flawlessly
+#   - Using `depends_on` to sequence startup logic
+# ============================================================================
+
+services:
+  # --------------------------------------------------------------------------
+  # Service 1: PostgreSQL Database
+  # --------------------------------------------------------------------------
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: capstone_db
+    ports:
+      - "5432:5432" # Map container port to host, so we can use GUI tools like DBeaver
+    volumes:
+      # Data persistence across container restarts (crucial!)
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # We ping the database before allowing the Go app to start connecting
+      test: ["CMD-SHELL", "pg_isready -U root -d capstone_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --------------------------------------------------------------------------
+  # Service 2: The Go Engineer Backend Application
+  # --------------------------------------------------------------------------
+  api:
+    build:
+      # Context is the root repo so Docker can access go.mod and parent folders
+      context: ../../ 
+      dockerfile: 11-flagship/01-enterprise-capstone/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      # We inject the DB URL straight into the compiled binary via env variable
+      # Notice the URL host is `db`, which matches the service name above automatically!
+      DATABASE_URL: "postgres://root:secretpassword@db:5432/capstone_db?sslmode=disable"
+    depends_on:
+      db:
+        # Don't boot the Go app until the Database is fully accepting connections
+        condition: service_healthy
+
+# Define the persistent volume
+volumes:
+  pgdata:
+

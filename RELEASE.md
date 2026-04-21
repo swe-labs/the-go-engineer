@@ -1,4 +1,4 @@
-# Release Guide
+﻿# Release Guide
 
 This document describes how to plan, prepare, and publish releases of The Go Engineer curriculum.
 
@@ -31,14 +31,13 @@ Topic branches stay short-lived and always branch from the line they should ship
 ### Step 1: Plan the Release
 
 1. Identify issues/PRs to include in the release
-2. Update [CHANGELOG.md](../CHANGELOG.md) with:
+2. Update [CHANGELOG.md](./CHANGELOG.md) with:
    - Date and version number
    - Major changes in sections: `Added`, `Fixed`, `Changed`, `Removed`
    - Link to detailed changes (PR numbers)
 
 3. Update version references:
    - In documentation (README.md, ROADMAP.md)
-   - In curriculum metadata if applicable
 
 ### Step 2: Pre-Release Verification
 
@@ -150,7 +149,7 @@ Maintainers should use **Squash and Merge** for release pull requests. If the sa
    - **Tag**: `v1.X.Y`
    - **Release title**: `The Go Engineer v1.X.Y`
    - **Description**: Copy from CHANGELOG.md
-   - **Attachments** (optional): Curriculum PDF, dependency graph
+   - **Attachments** (optional): Curriculum PDF
 
 4. Choose "Set as latest release"
 5. Publish release
