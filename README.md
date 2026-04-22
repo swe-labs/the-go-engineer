@@ -15,15 +15,15 @@ For the full curriculum source of truth, read [ARCHITECTURE.md](./ARCHITECTURE.m
 
 ## Current Status
 
-The v2.1 beta migration is complete, and RC hardening is now active on `release/v2`.
+The v2.1 beta migration is complete, and **`v2.1.0-rc.1` is now live** on `release/v2`.
 
 - `release/v1`: stable v1 line for current learners
 - `main`: active v2 development and integration line
-- `release/v2`: active v2.1 stabilization and RC line
+- `release/v2`: active v2.1 RC validation and stabilization line
 
 Latest prerelease:
 
-- `v2.1.0-beta.1`: beta-complete snapshot published before RC hardening
+- `v2.1.0-rc.1`: first release candidate published from `release/v2`
 
 ## Quick Start
 

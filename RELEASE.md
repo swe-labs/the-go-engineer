@@ -13,9 +13,9 @@ The Go Engineer follows **semantic versioning** for stable releases:
 
 Current v2.1 state:
 
-- published prerelease: `v2.1.0-beta.1`
+- published prerelease: `v2.1.0-rc.1`
 - active stabilization branch: `release/v2`
-- next planned milestone: `v2.1.0-rc.1`
+- next planned milestone: `v2.1.0`
 
 ## Branch Roles
 
