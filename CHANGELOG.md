@@ -6,6 +6,20 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 
 ---
 
+## [2026-04-23] - v2.1.0-rc.1 Published
+
+### Added
+
+- Published the `v2.1.0-rc.1` prerelease from `release/v2`.
+- Opened the public RC validation window with a release page and maintainer announcement.
+
+### Changed
+
+- Updated the public release-facing docs so the repo advertises the live release candidate instead of the beta snapshot.
+- Shifted roadmap and release wording from "RC is next" to "stable validation is active."
+
+---
+
 ## [2026-04-23] - v2.1.0-rc.1 Release Gate
 
 ### Changed

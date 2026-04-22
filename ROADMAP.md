@@ -5,15 +5,15 @@
 
 ## Current Status
 
-The v2.1 beta migration is complete, and RC hardening is active on `release/v2`.
+The v2.1 beta migration is complete, and the **v2.1.0-rc.1 validation window is active** on `release/v2`.
 
 - the 12-section architecture is live
 - root-stage source folders are aligned to the public section map
 - `curriculum.v2.json` is the active curriculum source
 - the single validator is the required repo health check
-- `v2.1.0-beta.1` is the published beta-complete prerelease snapshot
+- `v2.1.0-rc.1` is the published release candidate snapshot
 
-The next release step is **RC hardening**, not more beta migration.
+The next release step is **stable release validation**, not more migration or architecture work.
 
 ## Branch Model
 
@@ -31,9 +31,9 @@ The next release step is **RC hardening**, not more beta migration.
 | Validator | Complete | single Go validator is the required repo health check |
 | Beta migration work | Complete | no remaining beta-architecture migration blocker |
 
-## RC Focus
+## Stable Release Focus
 
-RC work should now concentrate on:
+RC validation should now concentrate on:
 
 1. learner-path polish and consistency
 2. validator strictness and repo hygiene
@@ -58,9 +58,9 @@ RC work should now concentrate on:
 | s10 Production Operations | Beta-ready | keep config, observability, deployment, and code generation coherent |
 | s11 GoScale Flagship | Beta-ready | deepen integrated proof and release-readiness |
 
-## RC Exit Criteria
+## v2.1 Stable Exit Criteria
 
-Before cutting `v2.1.0-rc.1` from `release/v2`, we should be able to say:
+Before cutting `v2.1.0` from `release/v2`, we should be able to say:
 
 - the public docs, metadata, and validator agree
 - section navigation has no dead internal links
@@ -73,5 +73,5 @@ Before cutting `v2.1.0-rc.1` from `release/v2`, we should be able to say:
 | Version | Target | Criteria |
 | --- | --- | --- |
 | v2.1.0-beta.1 | published | beta migration complete and validator green |
-| v2.1.0-rc.1 | next | stabilization, polish, and release prep on `release/v2` |
-| v2.1 | release | RC passes and release docs are complete |
+| v2.1.0-rc.1 | published | RC gate passed and validation window is open on `release/v2` |
+| v2.1.0 | next | RC validation passes and release blockers are closed |
