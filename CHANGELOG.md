@@ -6,6 +6,15 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 
 ---
 
+## [2026-04-23] - v2.1.0 Stable Release Prep
+
+### Changed
+
+- Defined the explicit final `v2.1.0` stable release gate on `release/v2`, including the stable release-prep branch and PR flow.
+- Extended maintainer release guidance so the stable tag is only cut after `rc.1` feedback review and release-blocker closure.
+
+---
+
 ## [2026-04-23] - v2.1.0-rc.1 Published
 
 ### Added

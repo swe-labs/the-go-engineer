@@ -23,7 +23,7 @@ The project uses long-lived branches for supported major versions:
 
 - `main`: active v2 development and prerelease integration branch
 - `release/v1`: stable v1 maintenance branch for current users
-- `release/v2`: active v2.1 stabilization and RC branch
+- `release/v2`: active v2.1 release-candidate and stable-release branch
 
 Topic branches stay short-lived and always branch from the line they should ship to.
 
@@ -118,6 +118,47 @@ For the `test-race` part of the gate:
 - prefer a local `go test -race ./...` pass when the maintainer environment has CGO plus a working C toolchain
 - if the local environment does not provide that toolchain (for example, Windows without `gcc`), require the CI race job on the release-prep PR to pass before tagging
 
+### Step 2B: Stable v2.1.0 Release Gate
+
+Before tagging `v2.1.0` from `release/v2`, treat the following as the minimum stable gate:
+
+```bash
+make build
+make test
+make test-race
+make bench
+make run-hello
+make run-env
+go run ./scripts/validate_curriculum.go
+git status
+```
+
+If GNU Make is not installed in the current maintainer environment, run the documented direct equivalents instead:
+
+```bash
+go build ./...
+go test ./...
+go test -race ./...
+go test ./08-quality-test/01-quality-and-performance/testing/benchmarks -bench="." -benchmem -count=1
+go run ./01-getting-started/2-hello-world
+go run ./01-getting-started/4-dev-environment
+go run ./scripts/validate_curriculum.go
+git status
+```
+
+The stable tag should only be cut after:
+
+- the `release-prep/v2.1.0` PR into `release/v2` is merged
+- required GitHub Actions checks are green on that PR
+- open `release-blocker` issues in the `v2 rc` milestone are closed or explicitly deferred
+- `v2.1.0-rc.1` validation feedback has been reviewed and any true blockers resolved
+- the working tree on `release/v2` is clean immediately before tagging
+
+For the `test-race` part of the stable gate:
+
+- prefer a local `go test -race ./...` pass when the maintainer environment has CGO plus a working C toolchain
+- if the local environment does not provide that toolchain, require the CI race job on the stable release-prep PR to pass before tagging
+
 ### Step 3: Choose the Correct Release Line
 
 - For v1 patch or minor releases, work from `release/v1`
@@ -139,6 +180,11 @@ git switch release/v2
 git pull origin release/v2
 git switch -c release-prep/v2.1.0-rc.N
 
+# Example: prepare the final v2.1.0 stable release from the RC line
+git switch release/v2
+git pull origin release/v2
+git switch -c release-prep/v2.1.0
+
 # Commit version/changelog updates
 git add CHANGELOG.md README.md ROADMAP.md
 git commit -m "chore: prepare release metadata"
@@ -152,7 +198,8 @@ git push origin HEAD
 1. Open PR into the long-lived target branch:
    - `release-prep/v1.X.Y` -> `release/v1`
    - `release-prep/v2.1.0-rc.N` -> `release/v2`
-2. Title: `Release: v1.X.Y` or `Release: v2.1.0-rc.N`
+   - `release-prep/v2.1.0` -> `release/v2`
+2. Title: `Release: v1.X.Y`, `Release: v2.1.0-rc.N`, or `Release: v2.1.0`
 3. Description:
    ```markdown
    ## Release v1.X.Y
@@ -208,6 +255,10 @@ Use prerelease tags during the v2 rollout:
 - `v2.1.0-beta.N` from `release/v2` once the stabilization line exists
 - `v2.1.0-rc.N` from `release/v2`
 
+Cut the final stable tag from `release/v2` only after the stable gate passes:
+
+- `v2.1.0` from `release/v2`
+
 Mark alpha, beta, and RC builds as prereleases on GitHub so stable v1 users are not silently moved early.
 
 ### Step 8: Clean Up
@@ -245,6 +296,13 @@ For `v2.1.0-rc.1` and later v2 RC/final releases, also verify:
 - [ ] Maintained convenience targets still work (`make bench`, `make run-hello`, `make run-env`)
 - [ ] If GNU Make is unavailable, the documented direct-command fallback has also been verified
 - [ ] Race detection is green either locally with a supported CGO toolchain or in CI on the release-prep PR
+
+For `v2.1.0` stable release preparation, also verify:
+
+- [ ] `v2.1.0-rc.1` feedback has been reviewed
+- [ ] Open `release-blocker` issues in the `v2 rc` milestone are closed or explicitly deferred
+- [ ] The stable release-prep PR targets `release/v2`
+- [ ] Final release notes and announcement copy are ready before tagging
 
 ## Rollback Procedure
 
