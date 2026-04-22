@@ -228,13 +228,9 @@ Before releasing, verify:
 
 - [ ] All issues in the milestone are closed
 - [ ] All PRs in the release are merged
-- [ ] The explicit RC smoke matrix has passed on `release/v2`
 - [ ] CHANGELOG.md is updated with all changes
 - [ ] ROADMAP.md status indicators are accurate
 - [ ] All CI checks pass (`build`, `test`, `vet`, `fmt`)
-- [ ] Maintained convenience targets still work (`make bench`, `make run-hello`, `make run-env`)
-- [ ] If GNU Make is unavailable, the documented direct-command fallback has also been verified
-- [ ] Race detection is green either locally with a supported CGO toolchain or in CI on the release-prep PR
 - [ ] Test coverage is maintained (> 75%)
 - [ ] No security vulnerabilities in dependencies
 - [ ] Documentation is up to date
@@ -242,6 +238,13 @@ Before releasing, verify:
 - [ ] Version numbers updated in appropriate files
 - [ ] PR target matches the release line (`release/v1` or `release/v2`)
 - [ ] Any cross-line fix has a planned `cherry-pick -x` follow-up
+
+For `v2.1.0-rc.1` and later v2 RC/final releases, also verify:
+
+- [ ] The explicit RC smoke matrix has passed on `release/v2`
+- [ ] Maintained convenience targets still work (`make bench`, `make run-hello`, `make run-env`)
+- [ ] If GNU Make is unavailable, the documented direct-command fallback has also been verified
+- [ ] Race detection is green either locally with a supported CGO toolchain or in CI on the release-prep PR
 
 ## Rollback Procedure
 
