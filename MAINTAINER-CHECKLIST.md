@@ -44,6 +44,25 @@ git push origin <target-branch>
 - Tag final `v2.1.0` from `release/v2`.
 - Keep `release/v1` for v1 patch support until you formally end support.
 
+### RC.1 Gate
+
+Before tagging `v2.1.0-rc.1`, verify all of the following on `release/v2`:
+
+- `make build`
+- `make test`
+- `make test-race`
+- `make bench`
+- `make run-hello`
+- `make run-env`
+- `go run ./scripts/validate_curriculum.go`
+- the release-prep PR is green and approved
+- all `release-blocker` issues in the `v2 rc` milestone are closed or explicitly accepted for deferment
+- the release branch is clean immediately before tagging
+
+If GNU Make is not available in the maintainer environment, run the documented direct Go-command equivalents from `RELEASE.md` instead of skipping the gate.
+
+If `go test -race ./...` cannot run locally because the environment lacks a supported CGO toolchain or C compiler, do not silently waive it. Use the CI race check on the release-prep PR as the release gate for that item.
+
 ## Branch Hygiene
 
 - Keep `main` as the default branch.
