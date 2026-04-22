@@ -63,6 +63,13 @@ If GNU Make is not available in the maintainer environment, run the documented d
 
 If `go test -race ./...` cannot run locally because the environment lacks a supported CGO toolchain or C compiler, do not silently waive it. Use the CI race check on the release-prep PR as the release gate for that item.
 
+### After `v2.1.0-rc.1` Is Published
+
+- Keep `release/v2` focused on release blockers, validation findings, and release-facing polish only.
+- Open all RC findings in the `v2 rc` milestone and keep them on the **The Go Engineer v2** project board.
+- Do not resume beta migration or broad architecture work on `release/v2`.
+- Tag final `v2.1.0` only after RC blockers are closed or explicitly deferred.
+
 ## Branch Hygiene
 
 - Keep `main` as the default branch.
