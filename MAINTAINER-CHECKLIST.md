@@ -70,6 +70,26 @@ If `go test -race ./...` cannot run locally because the environment lacks a supp
 - Do not resume beta migration or broad architecture work on `release/v2`.
 - Tag final `v2.1.0` only after RC blockers are closed or explicitly deferred.
 
+### Stable `v2.1.0` Gate
+
+Before tagging `v2.1.0`, verify all of the following on `release/v2`:
+
+- `make build`
+- `make test`
+- `make test-race`
+- `make bench`
+- `make run-hello`
+- `make run-env`
+- `go run ./scripts/validate_curriculum.go`
+- the `release-prep/v2.1.0` PR is green and approved
+- `v2.1.0-rc.1` feedback has been reviewed and true blockers are fixed or explicitly deferred
+- all remaining `release-blocker` issues in the `v2 rc` milestone are closed or intentionally deferred
+- the release branch is clean immediately before tagging
+
+If GNU Make is not available in the maintainer environment, run the documented direct Go-command equivalents from `RELEASE.md`.
+
+If local `go test -race ./...` is still blocked by the maintainer environment, require the CI race check on the stable release-prep PR before tagging.
+
 ## Branch Hygiene
 
 - Keep `main` as the default branch.
