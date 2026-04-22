@@ -6,6 +6,15 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 
 ---
 
+## [2026-04-23] - v2.1.0-rc.1 Release Gate
+
+### Changed
+
+- Defined the explicit `v2.1.0-rc.1` smoke matrix for `release/v2`, including build, tests, race detection, benchmarks, example run targets, and curriculum validation.
+- Tightened maintainer release guidance so the RC tag is only cut after the release-prep PR is merged, GitHub checks are green, and `release-blocker` issues are closed.
+
+---
+
 ## [2026-04-22] - v2.1.0-beta.1 Beta-Complete Snapshot
 
 ### Added

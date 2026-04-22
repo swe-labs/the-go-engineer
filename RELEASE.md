@@ -58,6 +58,13 @@ make test
 # Run with race detection
 make test-race
 
+# Run the maintained benchmark target
+make bench
+
+# Verify the maintained example run targets
+make run-hello
+make run-env
+
 # Generate coverage
 make cover
 
@@ -70,6 +77,46 @@ git status
 # Check for dependencies that need updating
 make deps-check
 ```
+
+### Step 2A: RC.1 Release Gate
+
+For `v2.1.0-rc.1`, treat the following as the minimum release gate on `release/v2`:
+
+```bash
+make build
+make test
+make test-race
+make bench
+make run-hello
+make run-env
+go run ./scripts/validate_curriculum.go
+git status
+```
+
+If GNU Make is not installed in the current maintainer environment, run the direct equivalents instead:
+
+```bash
+go build ./...
+go test ./...
+go test -race ./...
+go test ./08-quality-test/01-quality-and-performance/testing/benchmarks -bench="." -benchmem -count=1
+go run ./01-getting-started/2-hello-world
+go run ./01-getting-started/4-dev-environment
+go run ./scripts/validate_curriculum.go
+git status
+```
+
+The RC tag should only be cut after:
+
+- the `release-prep/v2.1.0-rc.1` PR into `release/v2` is merged
+- required GitHub Actions checks are green on that PR
+- all `release-blocker` issues in the `v2 rc` milestone are closed or explicitly deferred
+- the working tree on the release line is clean before tagging
+
+For the `test-race` part of the gate:
+
+- prefer a local `go test -race ./...` pass when the maintainer environment has CGO plus a working C toolchain
+- if the local environment does not provide that toolchain (for example, Windows without `gcc`), require the CI race job on the release-prep PR to pass before tagging
 
 ### Step 3: Choose the Correct Release Line
 
@@ -191,6 +238,13 @@ Before releasing, verify:
 - [ ] Version numbers updated in appropriate files
 - [ ] PR target matches the release line (`release/v1` or `release/v2`)
 - [ ] Any cross-line fix has a planned `cherry-pick -x` follow-up
+
+For `v2.1.0-rc.1` and later v2 RC/final releases, also verify:
+
+- [ ] The explicit RC smoke matrix has passed on `release/v2`
+- [ ] Maintained convenience targets still work (`make bench`, `make run-hello`, `make run-env`)
+- [ ] If GNU Make is unavailable, the documented direct-command fallback has also been verified
+- [ ] Race detection is green either locally with a supported CGO toolchain or in CI on the release-prep PR
 
 ## Rollback Procedure
 
