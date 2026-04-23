@@ -284,7 +284,7 @@ go tool cover -html=coverage.out -o coverage.html
 | s08: Quality & Testing                    | 95%              |
 | s06: Backend, APIs & Databases            | 85%              |
 | s09: Architecture & Security              | 85%              |
-| s11: GoScale Flagship                     | 90%              |
+| s11: Opslane Flagship                     | 90%              |
 
 ---
 

@@ -15,11 +15,11 @@ For the full curriculum source of truth, read [ARCHITECTURE.md](./ARCHITECTURE.m
 
 ## Current Status
 
-The v2 beta migration is complete on `main`.
+The v2.1 stable release is shipped.
 
-- `release/v1`: stable v1 line for current learners
-- `main`: completed v2 beta implementation line
-- `release/v2`: reserved for v2 RC and stabilization once feature freeze begins
+- `release/v1`: stable v1 maintenance line
+- `main`: post-v2.1 implementation line
+- `release/v2`: reserved for v2.1.x fixes and stable-line maintenance
 
 ## Quick Start
 
@@ -45,7 +45,7 @@ Phase 2: Engineering Core       s05  Packages, I/O & CLI         (52% -> 62%)
                                 s08  Quality & Testing           (83% -> 87%)
 Phase 3: Systems Engineering    s09  Architecture & Security     (87% -> 92%)
                                 s10  Production Operations       (92% -> 96%)
-Phase 4: Flagship Project       s11  GoScale SaaS Backend        (96% -> 100%)
+Phase 4: Flagship Project       s11  Opslane SaaS Backend        (96% -> 100%)
 ```
 
 ## Source Sections
@@ -75,7 +75,7 @@ You will work through:
 - concurrency pipelines, worker pools, and timeout-aware clients
 - profiling, testing, and benchmark-driven improvements
 - structured logging, graceful shutdown, configuration, observability, and deployment workflows
-- **GoScale**: a production-shaped SaaS backend capstone
+- **Opslane**: a production-shaped SaaS backend capstone
 
 ## Core Docs
 

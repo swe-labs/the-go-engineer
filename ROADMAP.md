@@ -5,22 +5,23 @@
 
 ## Current Status
 
-The v2 beta migration is complete on `main`.
+The v2.1 stable release is shipped.
 
 - the 12-section architecture is live
 - root-stage source folders are aligned to the public section map
 - `curriculum.v2.json` is the active curriculum source
 - the single validator is the required repo health check
 
-The next release step is **RC hardening**, not more beta migration.
+The next major stream is **post-release implementation work on `main`**, starting with the
+Opslane flagship build.
 
 ## Branch Model
 
-- `main`: active v2 development and prerelease integration
+- `main`: active post-v2.1 development line
 - `release/v1`: stable v1 maintenance line
-- `release/v2`: created when v2 RC stabilization begins
+- `release/v2`: stable v2.1.x maintenance line
 
-## Beta Completion Snapshot
+## Stable Snapshot
 
 | Area | Status | Notes |
 | --- | --- | --- |
@@ -55,22 +56,21 @@ RC work should now concentrate on:
 | s08 Quality & Testing | Beta-ready | keep testing and profiling proof surfaces honest |
 | s09 Architecture & Security | Beta-ready | sharpen trade-off teaching and security progression |
 | s10 Production Operations | Beta-ready | keep config, observability, deployment, and code generation coherent |
-| s11 GoScale Flagship | Beta-ready | deepen integrated proof and release-readiness |
+| s11 Opslane Flagship | Stable-ready | begin post-release flagship implementation |
 
-## RC Exit Criteria
+## Post-Release Focus
 
-Before cutting `release/v2`, we should be able to say:
+After shipping `v2.1.0`, we should be able to say:
 
-- the public docs, metadata, and validator agree
-- section navigation has no dead internal links
-- the repo validates cleanly with one command
-- the release-facing docs reflect the real state of the curriculum
-- the beta learner path is coherent enough to stabilize instead of restructure
+- the public docs, metadata, and validator still agree
+- stable maintenance stays bounded and low-noise
+- flagship implementation work advances on `main` without destabilizing the release line
+- the next major engineering gains come from integrated system work, not architecture churn
 
 ## Version Plan
 
 | Version | Target | Criteria |
 | --- | --- | --- |
-| v2.1-beta | current on `main` | beta migration complete and validator green |
-| v2.1-rc | next | stabilization, polish, and release prep on `release/v2` |
-| v2.1 | release | RC passes and release docs are complete |
+| v2.1.0 | released | stable curriculum release is published |
+| v2.1.x | maintenance | stable fixes and low-risk corrections on `release/v2` |
+| post-v2.1 | current on `main` | flagship implementation and deeper engineering content |

@@ -75,7 +75,7 @@ Rule:
 | Improve concurrency and testing | `s07` Concurrency / `s08` Quality & Testing | Be solid on functions, errors, packages, and interfaces |
 | Focus on architecture and security | `s09` Architecture & Security | Complete Phase 2 |
 | Focus on deployment and operations | `s10` Production Operations | Complete `s06` and `s07` first |
-| Build an integrated system | `s11` GoScale Flagship | Complete all earlier section milestones |
+| Build an integrated system | `s11` Opslane Flagship | Complete all earlier section milestones |
 
 ## Validation Floors
 

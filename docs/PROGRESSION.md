@@ -27,7 +27,7 @@ flowchart LR
     S07 --> S08["s08\nQuality & Testing"]
     S08 --> S09["s09\nArchitecture & Security"]
     S09 --> S10["s10\nProduction Operations"]
-    S10 --> S11["s11\nGoScale Flagship"]
+    S10 --> S11["s11\nOpslane Flagship"]
 ```
 
 ## Engineering Context Growth
@@ -60,7 +60,7 @@ flowchart LR
 | 88% | Modular Refactor | `ARCH.9` | reorganize a service around stronger architecture |
 | 91% | Secure API | `SEC.11` | apply practical security safeguards |
 | 96% | Shutdown Capstone | `GS.3` | coordinate graceful drain and shutdown |
-| 100% | GoScale Complete | `s11` | integrate the whole system end to end |
+| 100% | Opslane Complete | `s11` | integrate the whole system end to end |
 
 ## Promise
 
