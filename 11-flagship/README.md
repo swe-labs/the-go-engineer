@@ -15,11 +15,11 @@ By the end of this stage, a learner should be able to:
 
 | Track | Surface | Core Job |
 | --- | --- | --- |
-| `FG.1` | [enterprise capstone](./01-enterprise-capstone) | integrated application proof surface |
+| `FG.1` | [Opslane](./01-opslane) | integrated flagship SaaS backend proof surface |
 
 ## Suggested Learning Flow
 
-1. Start with the [enterprise capstone](./01-enterprise-capstone).
+1. Start with [Opslane](./01-opslane).
 2. Bring Section 10's code-generation lessons with you as supporting tooling, not new flagship scope.
 
 ## Finish This Stage When

@@ -4592,14 +4592,14 @@
     {
       "id": "FG.1",
       "section_id": "s11",
-      "slug": "enterprise-capstone",
-      "title": "Enterprise Capstone",
+      "slug": "opslane",
+      "title": "Opslane",
       "type": "capstone",
       "subtype": "",
       "level": "production",
       "status": "implemented",
       "verification_mode": "rubric",
-      "path": "11-flagship/01-enterprise-capstone",
+      "path": "11-flagship/01-opslane",
       "prerequisites": [
         "CG.3"
       ],

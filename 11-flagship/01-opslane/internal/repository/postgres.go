@@ -1,6 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
+// See LICENSE for usage terms.
 
 package repository
 
@@ -9,7 +8,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/rasel9t6/the-go-engineer/11-flagship/01-enterprise-capstone/internal/models"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
 
 // ============================================================================

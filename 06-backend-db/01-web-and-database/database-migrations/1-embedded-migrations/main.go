@@ -103,7 +103,7 @@ func main() {
 	fmt.Println("=== Automatic Embedded Migrations Boot Sequence ===")
 
 	// We intentionally leave the DB URL broken here because this is just an example script.
-	// In Section 22 (Enterprise Capstone), we will use this exact function
+	// In the Opslane flagship project, we will use this exact function
 	// connected to a live Dockerized PostgreSQL instance!
 	dbUrl := "postgres://user:pass@localhost:5432/dbname?sslmode=disable"
 
@@ -112,6 +112,6 @@ func main() {
 	err := RunEmbeddedMigrations(dbUrl)
 	if err != nil {
 		fmt.Printf("   Caught expected error: %v\n", err)
-		fmt.Println("\n   (Proceed to Section 22 to see this run perfectly under Docker Compose!)")
+		fmt.Println("\n   (Proceed to Opslane to see this run against a live Dockerized PostgreSQL instance.)")
 	}
 }

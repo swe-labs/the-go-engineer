@@ -72,7 +72,7 @@ then the code-generation part of the curriculum is doing its job.
 
 ## Next Step
 
-After `CG.3`, continue into [11 Flagship](../../11-flagship) and use the enterprise capstone as
+After `CG.3`, continue into [11 Flagship](../../11-flagship) and use Opslane as
 the place where these build-time tools become supporting leverage instead of brand-new concepts.
 
 

@@ -132,11 +132,11 @@ Format: **[Date] - Description**. Sections: `Added`, `Fixed`, `Changed`, `Remove
 
 ---
 
-## [2026-01-15] - Enterprise Capstone
+## [2026-01-15] - Opslane Seed
 
 ### Added
 
-- Section 22: Enterprise Capstone - multi-package PostgreSQL REST API with Docker Compose
+- Section 22: initial flagship seed - multi-package PostgreSQL REST API with Docker Compose
 - Section 21: Database Migrations - golang-migrate with embedded SQL files
 - Section 20: Docker & Deployment - multi-stage Dockerfiles
 

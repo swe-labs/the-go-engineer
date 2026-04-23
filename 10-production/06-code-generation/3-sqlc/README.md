@@ -31,5 +31,5 @@ You should be able to:
 
 ## Next Step
 
-After `CG.3`, continue to [11 Flagship](../../../11-flagship) and use the enterprise capstone to
+After `CG.3`, continue to [11 Flagship](../../../11-flagship) and use Opslane to
 apply the tooling you now understand inside a larger integrated service.

@@ -1,6 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
+// See LICENSE for usage terms.
 
 package middleware
 
