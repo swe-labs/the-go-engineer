@@ -24,6 +24,7 @@ var schemaStatements = []string{
 		password_hash TEXT NOT NULL,
 		role TEXT NOT NULL,
 		created_at TIMESTAMPTZ NOT NULL,
+		UNIQUE (tenant_id, id),
 		UNIQUE (tenant_id, email),
 		FOREIGN KEY (tenant_id) REFERENCES tenants(id) ON DELETE CASCADE
 	);`,
@@ -37,9 +38,10 @@ var schemaStatements = []string{
 		idempotency_key TEXT NOT NULL,
 		created_at TIMESTAMPTZ NOT NULL,
 		updated_at TIMESTAMPTZ NOT NULL,
+		UNIQUE (tenant_id, id),
 		UNIQUE (tenant_id, idempotency_key),
 		FOREIGN KEY (tenant_id) REFERENCES tenants(id) ON DELETE CASCADE,
-		FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT
+		FOREIGN KEY (tenant_id, user_id) REFERENCES users(tenant_id, id) ON DELETE RESTRICT
 	);`,
 	`CREATE TABLE IF NOT EXISTS payments (
 		id BIGSERIAL PRIMARY KEY,
@@ -53,7 +55,7 @@ var schemaStatements = []string{
 		updated_at TIMESTAMPTZ NOT NULL,
 		UNIQUE (tenant_id, provider_reference),
 		FOREIGN KEY (tenant_id) REFERENCES tenants(id) ON DELETE CASCADE,
-		FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+		FOREIGN KEY (tenant_id, order_id) REFERENCES orders(tenant_id, id) ON DELETE CASCADE
 	);`,
 	`CREATE INDEX IF NOT EXISTS idx_tenants_slug ON tenants(slug);`,
 	`CREATE INDEX IF NOT EXISTS idx_users_tenant_email ON users(tenant_id, email);`,

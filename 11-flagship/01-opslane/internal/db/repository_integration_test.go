@@ -5,17 +5,30 @@ package db
 import (
 	"context"
 	"database/sql"
+	"fmt"
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/config"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
+	"github.com/testcontainers/testcontainers-go"
 	tcpostgres "github.com/testcontainers/testcontainers-go/modules/postgres"
 	"github.com/testcontainers/testcontainers-go/wait"
 )
 
 func TestStoreSupportsTenantScopedRecords(t *testing.T) {
 	t.Parallel()
+
+	defer func() {
+		if r := recover(); r != nil {
+			message := fmt.Sprint(r)
+			if strings.Contains(strings.ToLower(message), "docker") || strings.Contains(strings.ToLower(message), "rootless") {
+				t.Skipf("skip postgres integration test: %v", r)
+			}
+			panic(r)
+		}
+	}()
 
 	ctx := context.Background()
 	database := openPostgresTestDatabase(t, ctx)
@@ -81,6 +94,18 @@ func TestStoreSupportsTenantScopedRecords(t *testing.T) {
 		t.Fatalf("CreateOrder failed: %v", err)
 	}
 
+	crossTenantOrder := &models.Order{
+		TenantID:       tenantB.ID,
+		UserID:         userA.ID,
+		Status:         models.OrderStatusPending,
+		TotalCents:     209900,
+		Currency:       "USD",
+		IdempotencyKey: "order-beta-invalid-user",
+	}
+	if err := store.CreateOrder(ctx, crossTenantOrder); err == nil {
+		t.Fatal("CreateOrder allowed cross-tenant user reference")
+	}
+
 	payment := &models.Payment{
 		TenantID:          tenantA.ID,
 		OrderID:           order.ID,
@@ -90,6 +115,17 @@ func TestStoreSupportsTenantScopedRecords(t *testing.T) {
 	}
 	if err := store.CreatePayment(ctx, payment); err != nil {
 		t.Fatalf("CreatePayment failed: %v", err)
+	}
+
+	crossTenantPayment := &models.Payment{
+		TenantID:          tenantB.ID,
+		OrderID:           order.ID,
+		Status:            models.PaymentStatusPending,
+		ProviderReference: "pay-beta-invalid-order",
+		AmountCents:       order.TotalCents,
+	}
+	if err := store.CreatePayment(ctx, crossTenantPayment); err == nil {
+		t.Fatal("CreatePayment allowed cross-tenant order reference")
 	}
 
 	orders, err := store.ListOrdersByTenant(ctx, tenantA.ID)
@@ -117,7 +153,9 @@ func openPostgresTestDatabase(t *testing.T, ctx context.Context) *sql.DB {
 		tcpostgres.WithDatabase("opslane_test"),
 		tcpostgres.WithUsername("opslane"),
 		tcpostgres.WithPassword("secretpassword"),
-		wait.ForLog("database system is ready to accept connections").WithOccurrence(2).WithStartupTimeout(10*time.Second),
+		testcontainers.WithWaitStrategy(
+			wait.ForLog("database system is ready to accept connections").WithOccurrence(2).WithStartupTimeout(10*time.Second),
+		),
 	)
 	if err != nil {
 		t.Skipf("skip postgres integration test: %v", err)
