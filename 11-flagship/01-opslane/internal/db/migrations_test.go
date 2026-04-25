@@ -17,6 +17,7 @@ func TestSchemaStatementsCoverCoreOpslaneTables(t *testing.T) {
 		"FOREIGN KEY (tenant_id, user_id) REFERENCES users(tenant_id, id) ON DELETE NO ACTION",
 		"FOREIGN KEY (tenant_id, order_id) REFERENCES orders(tenant_id, id)",
 		"idx_orders_tenant_status",
+		"idx_orders_tenant_user",
 		"idx_payments_tenant_order",
 	}
 	redundantSnippets := []string{
