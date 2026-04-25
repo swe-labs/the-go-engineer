@@ -55,7 +55,7 @@ flowchart TD
     PaymentWorkers["Worker Pool<br/>(Payments)"]
     NotificationWorkers["Worker Pool<br/>(Notifications)"]
 
-    DB["Database<br/>(SQLite)<br/>+ Redis-style Cache"]
+    DB["Database<br/>(PostgreSQL)<br/>+ Redis-style Cache"]
 
     LB --> APIPrimary
     LB --> APIAdmin
@@ -145,6 +145,7 @@ flowchart TD
 - pool exhaustion becomes a whole-system outage
 - use parameterized queries only
 - multi-step state changes need transactions
+- prefer PostgreSQL as the system-of-record database for the flagship path
 
 ### Module 3: Authentication and Tenant Isolation
 

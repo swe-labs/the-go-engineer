@@ -3,7 +3,10 @@
 
 package config
 
-import "time"
+import (
+	"strconv"
+	"time"
+)
 
 type LookupFunc func(string) (string, bool)
 
@@ -22,6 +25,20 @@ func durationFromEnv(lookup LookupFunc, key string, fallback time.Duration) (tim
 	}
 
 	value, err := time.ParseDuration(raw)
+	if err != nil {
+		return 0, err
+	}
+
+	return value, nil
+}
+
+func intFromEnv(lookup LookupFunc, key string, fallback int) (int, error) {
+	raw, ok := lookup(key)
+	if !ok || raw == "" {
+		return fallback, nil
+	}
+
+	value, err := strconv.Atoi(raw)
 	if err != nil {
 		return 0, err
 	}

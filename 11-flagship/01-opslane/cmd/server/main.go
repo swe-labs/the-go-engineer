@@ -4,20 +4,19 @@
 package main
 
 import (
-	"encoding/json"
+	"context"
 	"errors"
 	"log/slog"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/config"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/handlers"
 )
 
-type healthResponse struct {
-	Service string `json:"service"`
-	Env     string `json:"env"`
-	Status  string `json:"status"`
-}
+const startupDatabaseTimeout = 10 * time.Second
 
 func main() {
 	cfg, err := config.Load()
@@ -30,25 +29,32 @@ func main() {
 		Level: cfg.App.LogLevel,
 	}))
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		writeJSON(w, http.StatusOK, map[string]string{
-			"service": cfg.App.Name,
-			"env":     cfg.App.Env,
-			"message": "Opslane foundation shell is running",
-		})
-	})
-	mux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
-		writeJSON(w, http.StatusOK, healthResponse{
-			Service: cfg.App.Name,
-			Env:     cfg.App.Env,
-			Status:  "ok",
-		})
-	})
+	startupCtx, cancelStartup := context.WithTimeout(context.Background(), startupDatabaseTimeout)
+	defer cancelStartup()
+
+	database, err := db.Open(startupCtx, cfg.Database)
+	if err != nil {
+		logger.Error("failed to open database", slog.Any("error", err))
+		os.Exit(1)
+	}
+	defer database.Close()
+
+	if err := db.Migrate(startupCtx, database); err != nil {
+		logger.Error("failed to apply database migrations", slog.Any("error", err))
+		os.Exit(1)
+	}
+
+	store := db.NewStore(database)
+	app := &handlers.Application{
+		Logger:      logger,
+		Store:       store,
+		ServiceName: cfg.App.Name,
+		Environment: cfg.App.Env,
+	}
 
 	server := &http.Server{
 		Addr:              cfg.HTTP.Address,
-		Handler:           mux,
+		Handler:           app.Routes(),
 		ReadHeaderTimeout: cfg.HTTP.ReadHeaderTimeout,
 		ReadTimeout:       cfg.HTTP.ReadTimeout,
 		WriteTimeout:      cfg.HTTP.WriteTimeout,
@@ -58,16 +64,11 @@ func main() {
 	logger.Info("starting opslane server",
 		slog.String("env", cfg.App.Env),
 		slog.String("addr", cfg.HTTP.Address),
+		slog.String("database", "postgresql"),
 	)
 
 	if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		logger.Error("server stopped unexpectedly", slog.Any("error", err))
 		os.Exit(1)
 	}
-}
-
-func writeJSON(w http.ResponseWriter, status int, payload any) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(status)
-	_ = json.NewEncoder(w).Encode(payload)
 }

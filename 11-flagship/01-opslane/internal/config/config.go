@@ -12,8 +12,9 @@ import (
 )
 
 type Config struct {
-	App  AppConfig
-	HTTP HTTPConfig
+	App      AppConfig
+	HTTP     HTTPConfig
+	Database DatabaseConfig
 }
 
 type AppConfig struct {
@@ -29,6 +30,14 @@ type HTTPConfig struct {
 	WriteTimeout      time.Duration
 	IdleTimeout       time.Duration
 	ShutdownTimeout   time.Duration
+}
+
+type DatabaseConfig struct {
+	DSN             string
+	MaxOpenConns    int
+	MaxIdleConns    int
+	ConnMaxIdleTime time.Duration
+	ConnMaxLifetime time.Duration
 }
 
 func Load() (Config, error) {
@@ -61,6 +70,26 @@ func LoadFromLookup(lookup LookupFunc) (Config, error) {
 		return Config{}, fmt.Errorf("parse OPSLANE_HTTP_SHUTDOWN_TIMEOUT: %w", err)
 	}
 
+	maxOpenConns, err := intFromEnv(lookup, "OPSLANE_DB_MAX_OPEN_CONNS", 4)
+	if err != nil {
+		return Config{}, fmt.Errorf("parse OPSLANE_DB_MAX_OPEN_CONNS: %w", err)
+	}
+
+	maxIdleConns, err := intFromEnv(lookup, "OPSLANE_DB_MAX_IDLE_CONNS", 2)
+	if err != nil {
+		return Config{}, fmt.Errorf("parse OPSLANE_DB_MAX_IDLE_CONNS: %w", err)
+	}
+
+	connMaxIdleTime, err := durationFromEnv(lookup, "OPSLANE_DB_CONN_MAX_IDLE_TIME", 5*time.Minute)
+	if err != nil {
+		return Config{}, fmt.Errorf("parse OPSLANE_DB_CONN_MAX_IDLE_TIME: %w", err)
+	}
+
+	connMaxLifetime, err := durationFromEnv(lookup, "OPSLANE_DB_CONN_MAX_LIFETIME", 30*time.Minute)
+	if err != nil {
+		return Config{}, fmt.Errorf("parse OPSLANE_DB_CONN_MAX_LIFETIME: %w", err)
+	}
+
 	logLevel, err := parseLogLevel(stringFromEnv(lookup, "OPSLANE_LOG_LEVEL", "info"))
 	if err != nil {
 		return Config{}, err
@@ -79,6 +108,13 @@ func LoadFromLookup(lookup LookupFunc) (Config, error) {
 			WriteTimeout:      writeTimeout,
 			IdleTimeout:       idleTimeout,
 			ShutdownTimeout:   shutdownTimeout,
+		},
+		Database: DatabaseConfig{
+			DSN:             stringFromEnv(lookup, "OPSLANE_DB_DSN", "postgres://opslane:secretpassword@localhost:5432/opslane?sslmode=disable"),
+			MaxOpenConns:    maxOpenConns,
+			MaxIdleConns:    maxIdleConns,
+			ConnMaxIdleTime: connMaxIdleTime,
+			ConnMaxLifetime: connMaxLifetime,
 		},
 	}
 
@@ -118,6 +154,30 @@ func (c Config) Validate() error {
 
 	if c.HTTP.ShutdownTimeout <= 0 {
 		return fmt.Errorf("OPSLANE_HTTP_SHUTDOWN_TIMEOUT must be positive")
+	}
+
+	if strings.TrimSpace(c.Database.DSN) == "" {
+		return fmt.Errorf("OPSLANE_DB_DSN must not be empty")
+	}
+
+	if c.Database.MaxOpenConns <= 0 {
+		return fmt.Errorf("OPSLANE_DB_MAX_OPEN_CONNS must be positive")
+	}
+
+	if c.Database.MaxIdleConns < 0 {
+		return fmt.Errorf("OPSLANE_DB_MAX_IDLE_CONNS must be zero or positive")
+	}
+
+	if c.Database.MaxIdleConns > c.Database.MaxOpenConns {
+		return fmt.Errorf("OPSLANE_DB_MAX_IDLE_CONNS must not exceed OPSLANE_DB_MAX_OPEN_CONNS")
+	}
+
+	if c.Database.ConnMaxIdleTime <= 0 {
+		return fmt.Errorf("OPSLANE_DB_CONN_MAX_IDLE_TIME must be positive")
+	}
+
+	if c.Database.ConnMaxLifetime <= 0 {
+		return fmt.Errorf("OPSLANE_DB_CONN_MAX_LIFETIME must be positive")
 	}
 
 	return nil
