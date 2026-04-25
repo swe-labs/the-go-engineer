@@ -26,6 +26,7 @@ This project exists so the curriculum has one integrated system where earlier st
 | Area | Role |
 | --- | --- |
 | `cmd/server` | runnable flagship server entrypoint |
+| `internal/auth` | password hashing, signed tokens, auth context, and tenant identity middleware |
 | `internal/config` | validated configuration loading and startup contract |
 | `internal/db` | PostgreSQL setup, migrations, repository contracts, and transaction seams |
 | `internal/models` | tenant-aware domain records for users, orders, and payments |
@@ -33,18 +34,19 @@ This project exists so the curriculum has one integrated system where earlier st
 | `docker-compose.yml` | runs the application with PostgreSQL and the flagship API |
 | `internal/` | holds the application boundaries that later modules will deepen |
 
-## Module 2 Focus
+## Module 3 Focus
 
-Module 2 establishes:
+Module 3 establishes:
 
-- tenant-aware core models
-- PostgreSQL startup and migration flow
-- explicit repository contracts and transaction seams
-- conservative pool settings and local persistence defaults
+- password policy and bcrypt hashing
+- signed token issuance and verification
+- tenant-aware authenticated request identity
+- middleware that rejects anonymous requests before protected handlers run
 
-We now move beyond a bootable shell.
-This slice gives Opslane a real persistence boundary so later modules can add auth, order flow, and
-async processing on top of a coherent data model instead of placeholders.
+This slice turns the persistence foundation into a request-level security boundary.
+The important rule is simple: protected application code should not guess tenant identity from
+untrusted request data. Auth middleware verifies the token once, then stores the tenant-scoped
+identity in the request context for downstream handlers and services.
 
 ## Run the Project
 
@@ -62,6 +64,7 @@ $env:OPSLANE_ENV="development"
 $env:OPSLANE_HTTP_ADDR=":8080"
 $env:OPSLANE_LOG_LEVEL="debug"
 $env:OPSLANE_DB_DSN="postgres://opslane:secretpassword@localhost:5432/opslane?sslmode=disable"
+$env:OPSLANE_AUTH_TOKEN_SECRET="development-only-opslane-secret-change-me"
 go run ./11-flagship/01-opslane/cmd/server
 ```
 
@@ -85,11 +88,14 @@ reusing incompatible data.
 ```bash
 curl http://localhost:8080/
 curl http://localhost:8080/health
+curl http://localhost:8080/me
 ```
 
 The health endpoint now checks the live PostgreSQL connection before reporting the service as ready.
+The `/me` endpoint is intentionally protected. It returns `401 Unauthorized` without a bearer token
+and returns the tenant-scoped identity when a valid Opslane token is supplied.
 
 ## Next Step
 
-After Module 2 is in place, the next build slice is authentication and tenant isolation so Opslane
-can turn this persistence foundation into an actual multi-tenant request flow.
+After Module 3 is in place, the next build slice is the HTTP API layer so Opslane can expose user,
+order, and payment operations through stable request and error contracts.

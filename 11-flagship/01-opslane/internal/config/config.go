@@ -15,6 +15,7 @@ type Config struct {
 	App      AppConfig
 	HTTP     HTTPConfig
 	Database DatabaseConfig
+	Auth     AuthConfig
 }
 
 type AppConfig struct {
@@ -39,6 +40,14 @@ type DatabaseConfig struct {
 	ConnMaxIdleTime time.Duration
 	ConnMaxLifetime time.Duration
 }
+
+type AuthConfig struct {
+	TokenSecret string
+	TokenIssuer string
+	TokenTTL    time.Duration
+}
+
+const defaultDevelopmentTokenSecret = "development-only-opslane-secret-change-me"
 
 func Load() (Config, error) {
 	return LoadFromLookup(os.LookupEnv)
@@ -90,6 +99,11 @@ func LoadFromLookup(lookup LookupFunc) (Config, error) {
 		return Config{}, fmt.Errorf("parse OPSLANE_DB_CONN_MAX_LIFETIME: %w", err)
 	}
 
+	tokenTTL, err := durationFromEnv(lookup, "OPSLANE_AUTH_TOKEN_TTL", time.Hour)
+	if err != nil {
+		return Config{}, fmt.Errorf("parse OPSLANE_AUTH_TOKEN_TTL: %w", err)
+	}
+
 	logLevel, err := parseLogLevel(stringFromEnv(lookup, "OPSLANE_LOG_LEVEL", "info"))
 	if err != nil {
 		return Config{}, err
@@ -115,6 +129,11 @@ func LoadFromLookup(lookup LookupFunc) (Config, error) {
 			MaxIdleConns:    maxIdleConns,
 			ConnMaxIdleTime: connMaxIdleTime,
 			ConnMaxLifetime: connMaxLifetime,
+		},
+		Auth: AuthConfig{
+			TokenSecret: stringFromEnv(lookup, "OPSLANE_AUTH_TOKEN_SECRET", defaultDevelopmentTokenSecret),
+			TokenIssuer: stringFromEnv(lookup, "OPSLANE_AUTH_TOKEN_ISSUER", "opslane"),
+			TokenTTL:    tokenTTL,
 		},
 	}
 
@@ -178,6 +197,26 @@ func (c Config) Validate() error {
 
 	if c.Database.ConnMaxLifetime <= 0 {
 		return fmt.Errorf("OPSLANE_DB_CONN_MAX_LIFETIME must be positive")
+	}
+
+	if strings.TrimSpace(c.Auth.TokenSecret) == "" {
+		return fmt.Errorf("OPSLANE_AUTH_TOKEN_SECRET must not be empty")
+	}
+
+	if len(c.Auth.TokenSecret) < 32 {
+		return fmt.Errorf("OPSLANE_AUTH_TOKEN_SECRET must be at least 32 characters")
+	}
+
+	if c.App.Env == "production" && c.Auth.TokenSecret == defaultDevelopmentTokenSecret {
+		return fmt.Errorf("OPSLANE_AUTH_TOKEN_SECRET must be changed in production")
+	}
+
+	if strings.TrimSpace(c.Auth.TokenIssuer) == "" {
+		return fmt.Errorf("OPSLANE_AUTH_TOKEN_ISSUER must not be empty")
+	}
+
+	if c.Auth.TokenTTL <= 0 {
+		return fmt.Errorf("OPSLANE_AUTH_TOKEN_TTL must be positive")
 	}
 
 	return nil
