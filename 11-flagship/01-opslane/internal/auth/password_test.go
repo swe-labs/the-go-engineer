@@ -46,6 +46,7 @@ func TestValidatePasswordRejectsWeakPassword(t *testing.T) {
 		{name: "too short", password: "short7"},
 		{name: "missing number", password: "correcthorsebattery"},
 		{name: "missing letter", password: "123456789012"},
+		{name: "unicode bytes are not characters", password: "密码密码密码1"},
 	}
 
 	for _, tt := range tests {

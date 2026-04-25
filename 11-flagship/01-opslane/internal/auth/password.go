@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"strings"
 	"unicode"
+	"unicode/utf8"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -23,7 +24,7 @@ const minimumPasswordLength = 12
 
 // ValidatePassword enforces the minimum local password policy before hashing.
 func ValidatePassword(password string) error {
-	if len(password) < minimumPasswordLength {
+	if utf8.RuneCountInString(password) < minimumPasswordLength {
 		return fmt.Errorf("%w: must be at least %d characters", ErrWeakPassword, minimumPasswordLength)
 	}
 
