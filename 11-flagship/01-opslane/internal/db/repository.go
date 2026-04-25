@@ -81,19 +81,32 @@ func (s *Store) WithTx(ctx context.Context, fn func(*Store) error) error {
 		return fmt.Errorf("begin transaction: %w", err)
 	}
 
+	committed := false
+	defer func() {
+		if !committed {
+			_ = tx.Rollback()
+		}
+	}()
+
+	defer func() {
+		if recovered := recover(); recovered != nil {
+			panic(recovered)
+		}
+	}()
+
 	txStore := &Store{
 		db: s.db,
 		q:  tx,
 	}
 
 	if err := fn(txStore); err != nil {
-		tx.Rollback()
 		return err
 	}
 
 	if err := tx.Commit(); err != nil {
 		return fmt.Errorf("commit transaction: %w", err)
 	}
+	committed = true
 
 	return nil
 }

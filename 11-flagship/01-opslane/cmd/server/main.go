@@ -9,11 +9,14 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/config"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/handlers"
 )
+
+const startupDatabaseTimeout = 10 * time.Second
 
 func main() {
 	cfg, err := config.Load()
@@ -26,15 +29,17 @@ func main() {
 		Level: cfg.App.LogLevel,
 	}))
 
-	ctx := context.Background()
-	database, err := db.Open(ctx, cfg.Database)
+	startupCtx, cancelStartup := context.WithTimeout(context.Background(), startupDatabaseTimeout)
+	defer cancelStartup()
+
+	database, err := db.Open(startupCtx, cfg.Database)
 	if err != nil {
 		logger.Error("failed to open database", slog.Any("error", err))
 		os.Exit(1)
 	}
 	defer database.Close()
 
-	if err := db.Migrate(ctx, database); err != nil {
+	if err := db.Migrate(startupCtx, database); err != nil {
 		logger.Error("failed to apply database migrations", slog.Any("error", err))
 		os.Exit(1)
 	}

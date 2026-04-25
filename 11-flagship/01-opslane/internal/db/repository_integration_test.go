@@ -20,16 +20,6 @@ import (
 func TestStoreSupportsTenantScopedRecords(t *testing.T) {
 	t.Parallel()
 
-	defer func() {
-		if r := recover(); r != nil {
-			message := fmt.Sprint(r)
-			if strings.Contains(strings.ToLower(message), "docker") || strings.Contains(strings.ToLower(message), "rootless") {
-				t.Skipf("skip postgres integration test: %v", r)
-			}
-			panic(r)
-		}
-	}()
-
 	ctx := context.Background()
 	database := openPostgresTestDatabase(t, ctx)
 	store := NewStore(database)
@@ -145,8 +135,59 @@ func TestStoreSupportsTenantScopedRecords(t *testing.T) {
 	}
 }
 
+func TestWithTxRollsBackOnPanic(t *testing.T) {
+	t.Parallel()
+
+	ctx := context.Background()
+	database := openPostgresTestDatabase(t, ctx)
+	store := NewStore(database)
+
+	panicValue := "boom"
+	func() {
+		defer func() {
+			if recovered := recover(); recovered != panicValue {
+				t.Fatalf("panic = %v, want %q", recovered, panicValue)
+			}
+		}()
+
+		_ = store.WithTx(ctx, func(txStore *Store) error {
+			_, err := txStore.q.ExecContext(
+				ctx,
+				`INSERT INTO tenants (name, slug, created_at) VALUES ($1, $2, $3)`,
+				"Panic Tenant",
+				"panic-tenant",
+				time.Now().UTC(),
+			)
+			if err != nil {
+				t.Fatalf("insert tenant inside transaction: %v", err)
+			}
+
+			panic(panicValue)
+		})
+	}()
+
+	var count int
+	err := database.QueryRowContext(ctx, `SELECT COUNT(*) FROM tenants WHERE slug = $1`, "panic-tenant").Scan(&count)
+	if err != nil {
+		t.Fatalf("count rolled back tenant: %v", err)
+	}
+	if count != 0 {
+		t.Fatalf("tenant count after panic = %d, want 0", count)
+	}
+}
+
 func openPostgresTestDatabase(t *testing.T, ctx context.Context) *sql.DB {
 	t.Helper()
+
+	defer func() {
+		if r := recover(); r != nil {
+			message := strings.ToLower(fmt.Sprint(r))
+			if strings.Contains(message, "docker") || strings.Contains(message, "rootless") {
+				t.Skipf("skip postgres integration test: %v", r)
+			}
+			panic(r)
+		}
+	}()
 
 	container, err := tcpostgres.Run(ctx,
 		"postgres:16-alpine",
