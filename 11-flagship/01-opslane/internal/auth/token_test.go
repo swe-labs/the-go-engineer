@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"encoding/base64"
 	"errors"
 	"strings"
 	"testing"
@@ -59,11 +60,18 @@ func TestTokenManagerRejectsTamperedToken(t *testing.T) {
 		t.Fatalf("Issue returned error: %v", err)
 	}
 
-	replacement := "x"
-	if strings.HasSuffix(token, replacement) {
-		replacement = "y"
+	parts := strings.Split(token, ".")
+	if len(parts) != 3 {
+		t.Fatalf("token has %d parts, want 3", len(parts))
 	}
-	tampered := token[:len(token)-1] + replacement
+
+	signature, err := base64.RawURLEncoding.DecodeString(parts[2])
+	if err != nil {
+		t.Fatalf("decode signature: %v", err)
+	}
+	signature[0] ^= 0xff
+
+	tampered := parts[0] + "." + parts[1] + "." + base64.RawURLEncoding.EncodeToString(signature)
 	_, err = tokens.Verify(tampered)
 	if !errors.Is(err, ErrInvalidToken) {
 		t.Fatalf("Verify error = %v, want ErrInvalidToken", err)
