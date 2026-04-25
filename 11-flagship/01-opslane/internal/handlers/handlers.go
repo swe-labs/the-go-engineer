@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/middleware"
 )
@@ -19,6 +20,7 @@ const healthDatabaseTimeout = 2 * time.Second
 type Application struct {
 	Logger      *slog.Logger
 	Store       *db.Store
+	Tokens      *auth.TokenManager
 	ServiceName string
 	Environment string
 }
@@ -27,6 +29,7 @@ func (app *Application) Routes() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /", app.handleIndex)
 	mux.HandleFunc("GET /health", app.handleHealth)
+	mux.Handle("GET /me", auth.RequireAuth(app.Tokens)(http.HandlerFunc(app.handleMe)))
 
 	handler := middleware.SecureHeaders(
 		middleware.LogRequest(app.Logger)(
@@ -64,6 +67,22 @@ func (app *Application) handleHealth(w http.ResponseWriter, r *http.Request) {
 		"env":      app.Environment,
 		"status":   serviceStatus,
 		"database": databaseStatus,
+	})
+}
+
+func (app *Application) handleMe(w http.ResponseWriter, r *http.Request) {
+	identity, err := auth.RequireIdentity(r.Context())
+	if err != nil {
+		http.Error(w, "missing authenticated identity", http.StatusInternalServerError)
+		return
+	}
+
+	writeJSON(w, http.StatusOK, map[string]any{
+		"user_id":    identity.UserID,
+		"tenant_id":  identity.TenantID,
+		"email":      identity.Email,
+		"role":       identity.Role,
+		"expires_at": identity.ExpiresAt,
 	})
 }
 

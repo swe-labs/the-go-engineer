@@ -35,6 +35,9 @@ services:
       OPSLANE_DB_MAX_IDLE_CONNS: "2"
       OPSLANE_DB_CONN_MAX_IDLE_TIME: "5m"
       OPSLANE_DB_CONN_MAX_LIFETIME: "30m"
+      OPSLANE_AUTH_TOKEN_SECRET: "development-only-opslane-secret-change-me"
+      OPSLANE_AUTH_TOKEN_ISSUER: "opslane"
+      OPSLANE_AUTH_TOKEN_TTL: "1h"
     depends_on:
       db:
         condition: service_healthy

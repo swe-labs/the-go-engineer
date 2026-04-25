@@ -11,6 +11,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/config"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/handlers"
@@ -44,10 +45,17 @@ func main() {
 		os.Exit(1)
 	}
 
+	tokens, err := auth.NewTokenManager(cfg.Auth.TokenSecret, cfg.Auth.TokenIssuer, cfg.Auth.TokenTTL)
+	if err != nil {
+		logger.Error("failed to initialize auth tokens", slog.Any("error", err))
+		os.Exit(1)
+	}
+
 	store := db.NewStore(database)
 	app := &handlers.Application{
 		Logger:      logger,
 		Store:       store,
+		Tokens:      tokens,
 		ServiceName: cfg.App.Name,
 		Environment: cfg.App.Env,
 	}

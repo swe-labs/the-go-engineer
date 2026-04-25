@@ -43,6 +43,14 @@ func TestLoadFromLookupDefaults(t *testing.T) {
 	if cfg.Database.MaxIdleConns != 2 {
 		t.Fatalf("max idle conns = %d, want 2", cfg.Database.MaxIdleConns)
 	}
+
+	if cfg.Auth.TokenIssuer != "opslane" {
+		t.Fatalf("token issuer = %q, want opslane", cfg.Auth.TokenIssuer)
+	}
+
+	if cfg.Auth.TokenTTL != time.Hour {
+		t.Fatalf("token ttl = %v, want %v", cfg.Auth.TokenTTL, time.Hour)
+	}
 }
 
 func TestLoadFromLookupOverrides(t *testing.T) {
@@ -62,6 +70,9 @@ func TestLoadFromLookupOverrides(t *testing.T) {
 		"OPSLANE_DB_MAX_IDLE_CONNS":        "2",
 		"OPSLANE_DB_CONN_MAX_IDLE_TIME":    "45s",
 		"OPSLANE_DB_CONN_MAX_LIFETIME":     "2m",
+		"OPSLANE_AUTH_TOKEN_SECRET":        "staging-secret-with-at-least-thirty-two-chars",
+		"OPSLANE_AUTH_TOKEN_ISSUER":        "opslane-staging",
+		"OPSLANE_AUTH_TOKEN_TTL":           "30m",
 	}
 
 	cfg, err := LoadFromLookup(func(key string) (string, bool) {
@@ -98,6 +109,14 @@ func TestLoadFromLookupOverrides(t *testing.T) {
 
 	if cfg.Database.MaxIdleConns != 2 {
 		t.Fatalf("max idle conns = %d, want 2", cfg.Database.MaxIdleConns)
+	}
+
+	if cfg.Auth.TokenIssuer != "opslane-staging" {
+		t.Fatalf("token issuer = %q, want opslane-staging", cfg.Auth.TokenIssuer)
+	}
+
+	if cfg.Auth.TokenTTL != 30*time.Minute {
+		t.Fatalf("token ttl = %v, want %v", cfg.Auth.TokenTTL, 30*time.Minute)
 	}
 }
 
@@ -172,5 +191,33 @@ func TestLoadFromLookupRejectsIdleConnsAboveOpenConns(t *testing.T) {
 	})
 	if err == nil {
 		t.Fatal("expected error for idle conns above open conns")
+	}
+}
+
+func TestLoadFromLookupRejectsShortAuthSecret(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_AUTH_TOKEN_SECRET" {
+			return "too-short", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for short auth secret")
+	}
+}
+
+func TestLoadFromLookupRejectsDefaultAuthSecretInProduction(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_ENV" {
+			return "production", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for default production auth secret")
 	}
 }
