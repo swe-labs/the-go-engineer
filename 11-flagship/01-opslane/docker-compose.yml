@@ -1,5 +1,3 @@
-version: '3.8'
-
 # Opslane local stack
 # - PostgreSQL as the primary system-of-record database
 # - the flagship API container
@@ -15,7 +13,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - opslane_pg16_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U opslane -d opslane"]
       interval: 5s
@@ -42,4 +40,5 @@ services:
         condition: service_healthy
 
 volumes:
-  pgdata:
+  opslane_pg16_data:
+    name: opslane_pg16_data

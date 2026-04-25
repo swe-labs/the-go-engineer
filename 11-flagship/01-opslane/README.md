@@ -71,6 +71,15 @@ Make sure Docker is available, then run from this directory:
 docker-compose up -d --build
 ```
 
+## Local Data Volume
+
+The Compose stack uses the versioned volume `opslane_pg16_data` for PostgreSQL 16 data.
+
+That name is intentional. It avoids reusing older local `pgdata` volumes that may contain a
+previous PostgreSQL major version or older bootstrap credentials. If you previously ran an older
+Opslane compose stack, the new stack starts from its own database volume instead of silently
+reusing incompatible data.
+
 ## Current HTTP Surface
 
 ```bash
