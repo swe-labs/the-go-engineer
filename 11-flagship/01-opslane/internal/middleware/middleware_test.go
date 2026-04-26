@@ -55,3 +55,23 @@ func TestRateLimitRejectsRequestsOverLimit(t *testing.T) {
 		t.Fatalf("body = %q, want %q", second.Body.String(), wantBody)
 	}
 }
+
+func TestPruneExpiredClientWindows(t *testing.T) {
+	t.Parallel()
+
+	now := time.Now()
+	clients := map[string]clientWindow{
+		"expired": {count: 1, resetAt: now.Add(-time.Second)},
+		"active":  {count: 1, resetAt: now.Add(time.Second)},
+	}
+
+	pruneExpiredClientWindows(clients, now)
+
+	if _, ok := clients["expired"]; ok {
+		t.Fatal("expired client window should be evicted")
+	}
+
+	if _, ok := clients["active"]; !ok {
+		t.Fatal("active client window should remain")
+	}
+}

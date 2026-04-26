@@ -211,6 +211,15 @@ func TestListOrdersRejectsAnonymousRequest(t *testing.T) {
 	if res.Code != http.StatusUnauthorized {
 		t.Fatalf("status = %d, want %d", res.Code, http.StatusUnauthorized)
 	}
+
+	var payload map[string]map[string]string
+	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload["error"]["code"] != "unauthorized" {
+		t.Fatalf("error code = %q, want unauthorized", payload["error"]["code"])
+	}
 }
 
 func TestCreatePaymentUsesAuthenticatedTenant(t *testing.T) {

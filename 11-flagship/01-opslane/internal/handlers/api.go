@@ -145,6 +145,18 @@ func (app *Application) handleLogin(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func (app *Application) requireAPIAuth(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		identity, err := auth.IdentityFromRequest(app.Tokens, r)
+		if err != nil {
+			app.writeError(w, r, http.StatusUnauthorized, "unauthorized", "missing or invalid bearer token")
+			return
+		}
+
+		next.ServeHTTP(w, r.WithContext(auth.WithIdentity(r.Context(), identity)))
+	})
+}
+
 func (app *Application) handleListOrders(w http.ResponseWriter, r *http.Request) {
 	identity, err := auth.RequireIdentity(r.Context())
 	if err != nil {

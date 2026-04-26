@@ -81,15 +81,16 @@ func CORS(next http.Handler) http.Handler {
 	})
 }
 
+type clientWindow struct {
+	count   int
+	resetAt time.Time
+}
+
 // RateLimit bounds how many requests one client IP can make inside a fixed window.
 func RateLimit(maxRequests int, window time.Duration) func(http.Handler) http.Handler {
-	type clientWindow struct {
-		count   int
-		resetAt time.Time
-	}
-
 	var mu sync.Mutex
 	clients := make(map[string]clientWindow)
+	nextCleanup := time.Now().Add(window)
 
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -102,6 +103,11 @@ func RateLimit(maxRequests int, window time.Duration) func(http.Handler) http.Ha
 			now := time.Now()
 
 			mu.Lock()
+			if !now.Before(nextCleanup) {
+				pruneExpiredClientWindows(clients, now)
+				nextCleanup = now.Add(window)
+			}
+
 			state := clients[clientIP]
 			if state.resetAt.IsZero() || now.After(state.resetAt) {
 				state = clientWindow{resetAt: now.Add(window)}
@@ -120,6 +126,14 @@ func RateLimit(maxRequests int, window time.Duration) func(http.Handler) http.Ha
 
 			next.ServeHTTP(w, r)
 		})
+	}
+}
+
+func pruneExpiredClientWindows(clients map[string]clientWindow, now time.Time) {
+	for clientIP, state := range clients {
+		if !now.Before(state.resetAt) {
+			delete(clients, clientIP)
+		}
 	}
 }
 

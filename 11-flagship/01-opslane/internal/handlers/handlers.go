@@ -47,7 +47,7 @@ func (app *Application) Routes() http.Handler {
 	mux.HandleFunc("POST /api/v1/users", app.handleCreateUser)
 	mux.HandleFunc("POST /api/v1/auth/login", app.handleLogin)
 
-	protected := auth.RequireAuth(app.Tokens)
+	protected := app.requireAPIAuth
 	mux.Handle("GET /api/v1/me", protected(http.HandlerFunc(app.handleMe)))
 	mux.Handle("GET /api/v1/orders", protected(http.HandlerFunc(app.handleListOrders)))
 	mux.Handle("POST /api/v1/orders", protected(http.HandlerFunc(app.handleCreateOrder)))
