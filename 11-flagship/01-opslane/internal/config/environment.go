@@ -4,7 +4,9 @@
 package config
 
 import (
+	"net/netip"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -44,4 +46,29 @@ func intFromEnv(lookup LookupFunc, key string, fallback int) (int, error) {
 	}
 
 	return value, nil
+}
+
+func cidrPrefixesFromEnv(lookup LookupFunc, key string) ([]netip.Prefix, error) {
+	raw, ok := lookup(key)
+	if !ok || strings.TrimSpace(raw) == "" {
+		return nil, nil
+	}
+
+	parts := strings.Split(raw, ",")
+	prefixes := make([]netip.Prefix, 0, len(parts))
+	for _, part := range parts {
+		value := strings.TrimSpace(part)
+		if value == "" {
+			continue
+		}
+
+		prefix, err := netip.ParsePrefix(value)
+		if err != nil {
+			return nil, err
+		}
+
+		prefixes = append(prefixes, prefix)
+	}
+
+	return prefixes, nil
 }

@@ -6,6 +6,7 @@ package config
 import (
 	"fmt"
 	"log/slog"
+	"net/netip"
 	"os"
 	"strings"
 	"time"
@@ -31,6 +32,7 @@ type HTTPConfig struct {
 	WriteTimeout      time.Duration
 	IdleTimeout       time.Duration
 	ShutdownTimeout   time.Duration
+	TrustedProxyCIDRs []netip.Prefix
 }
 
 type DatabaseConfig struct {
@@ -79,6 +81,11 @@ func LoadFromLookup(lookup LookupFunc) (Config, error) {
 		return Config{}, fmt.Errorf("parse OPSLANE_HTTP_SHUTDOWN_TIMEOUT: %w", err)
 	}
 
+	trustedProxyCIDRs, err := cidrPrefixesFromEnv(lookup, "OPSLANE_HTTP_TRUSTED_PROXY_CIDRS")
+	if err != nil {
+		return Config{}, fmt.Errorf("parse OPSLANE_HTTP_TRUSTED_PROXY_CIDRS: %w", err)
+	}
+
 	maxOpenConns, err := intFromEnv(lookup, "OPSLANE_DB_MAX_OPEN_CONNS", 4)
 	if err != nil {
 		return Config{}, fmt.Errorf("parse OPSLANE_DB_MAX_OPEN_CONNS: %w", err)
@@ -122,6 +129,7 @@ func LoadFromLookup(lookup LookupFunc) (Config, error) {
 			WriteTimeout:      writeTimeout,
 			IdleTimeout:       idleTimeout,
 			ShutdownTimeout:   shutdownTimeout,
+			TrustedProxyCIDRs: trustedProxyCIDRs,
 		},
 		Database: DatabaseConfig{
 			DSN:             stringFromEnv(lookup, "OPSLANE_DB_DSN", "postgres://opslane:secretpassword@localhost:5432/opslane?sslmode=disable"),
@@ -173,6 +181,12 @@ func (c Config) Validate() error {
 
 	if c.HTTP.ShutdownTimeout <= 0 {
 		return fmt.Errorf("OPSLANE_HTTP_SHUTDOWN_TIMEOUT must be positive")
+	}
+
+	for _, prefix := range c.HTTP.TrustedProxyCIDRs {
+		if !prefix.IsValid() {
+			return fmt.Errorf("OPSLANE_HTTP_TRUSTED_PROXY_CIDRS contains an invalid prefix")
+		}
 	}
 
 	if strings.TrimSpace(c.Database.DSN) == "" {

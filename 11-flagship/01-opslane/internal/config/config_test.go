@@ -2,6 +2,7 @@ package config
 
 import (
 	"log/slog"
+	"net/netip"
 	"testing"
 	"time"
 )
@@ -51,6 +52,10 @@ func TestLoadFromLookupDefaults(t *testing.T) {
 	if cfg.Auth.TokenTTL != time.Hour {
 		t.Fatalf("token ttl = %v, want %v", cfg.Auth.TokenTTL, time.Hour)
 	}
+
+	if len(cfg.HTTP.TrustedProxyCIDRs) != 0 {
+		t.Fatalf("trusted proxy cidrs = %v, want none by default", cfg.HTTP.TrustedProxyCIDRs)
+	}
 }
 
 func TestLoadFromLookupOverrides(t *testing.T) {
@@ -65,6 +70,7 @@ func TestLoadFromLookupOverrides(t *testing.T) {
 		"OPSLANE_HTTP_WRITE_TIMEOUT":       "18s",
 		"OPSLANE_HTTP_IDLE_TIMEOUT":        "90s",
 		"OPSLANE_HTTP_SHUTDOWN_TIMEOUT":    "25s",
+		"OPSLANE_HTTP_TRUSTED_PROXY_CIDRS": "127.0.0.1/32,10.0.0.0/8",
 		"OPSLANE_DB_DSN":                   "postgres://opslane:secretpassword@db:5432/opslane?sslmode=disable",
 		"OPSLANE_DB_MAX_OPEN_CONNS":        "4",
 		"OPSLANE_DB_MAX_IDLE_CONNS":        "2",
@@ -97,6 +103,20 @@ func TestLoadFromLookupOverrides(t *testing.T) {
 
 	if cfg.HTTP.ReadHeaderTimeout != 7*time.Second {
 		t.Fatalf("read header timeout = %v, want %v", cfg.HTTP.ReadHeaderTimeout, 7*time.Second)
+	}
+
+	wantPrefixes := []netip.Prefix{
+		netip.MustParsePrefix("127.0.0.1/32"),
+		netip.MustParsePrefix("10.0.0.0/8"),
+	}
+	if len(cfg.HTTP.TrustedProxyCIDRs) != len(wantPrefixes) {
+		t.Fatalf("trusted proxy cidrs length = %d, want %d", len(cfg.HTTP.TrustedProxyCIDRs), len(wantPrefixes))
+	}
+
+	for i, want := range wantPrefixes {
+		if cfg.HTTP.TrustedProxyCIDRs[i] != want {
+			t.Fatalf("trusted proxy cidr[%d] = %v, want %v", i, cfg.HTTP.TrustedProxyCIDRs[i], want)
+		}
 	}
 
 	if cfg.Database.DSN != "postgres://opslane:secretpassword@db:5432/opslane?sslmode=disable" {
@@ -159,6 +179,20 @@ func TestLoadFromLookupRejectsInvalidDuration(t *testing.T) {
 	})
 	if err == nil {
 		t.Fatal("expected error for invalid duration")
+	}
+}
+
+func TestLoadFromLookupRejectsInvalidTrustedProxyCIDR(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_HTTP_TRUSTED_PROXY_CIDRS" {
+			return "not-a-cidr", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for invalid trusted proxy cidr")
 	}
 }
 
