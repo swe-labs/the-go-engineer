@@ -174,7 +174,9 @@ func (s *OrderService) TransitionOrder(ctx context.Context, req TransitionOrderR
 	updated, err := s.orders.UpdateOrderStatus(ctx, req.TenantID, req.OrderID, req.Status)
 	if err != nil {
 		if shouldReserveForTransition(current.Status, req.Status) {
-			_ = s.inventory.Release(ctx, reservation)
+			if releaseErr := s.inventory.Release(ctx, reservation); releaseErr != nil {
+				return models.Order{}, fmt.Errorf("update order status: %w; rollback inventory reservation: %w: %v", err, ErrInventoryUnavailable, releaseErr)
+			}
 		}
 		if errors.Is(err, sql.ErrNoRows) {
 			return models.Order{}, ErrOrderNotFound
