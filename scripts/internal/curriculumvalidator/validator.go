@@ -74,7 +74,7 @@ type Result struct {
 	ErrorCount       int
 }
 
-var runPathPattern = regexp.MustCompile(`\./[A-Za-z0-9._/\-]+`)
+var runPathPattern = regexp.MustCompile(`\./[A-Za-z0-9._/\-]+(?:/\.\.\.)?`)
 var nextUpIDPattern = regexp.MustCompile(`NEXT UP:\s*([A-Z]{2,6}\.\d+)`)
 var markdownLinkPattern = regexp.MustCompile(`\[[^\]]+\]\(([^)]+)\)`)
 var flagshipPrefixPattern = regexp.MustCompile(`^[A-Z]{3,6}$`)
@@ -177,18 +177,31 @@ func pathExists(root, path string) bool {
 	return err == nil
 }
 
-func extractCommandTarget(command string) (string, error) {
+func extractCommandTargets(command string) ([]string, error) {
 	command = strings.TrimSpace(command)
 	if command == "" {
-		return "", errors.New("command is empty")
+		return nil, errors.New("command is empty")
 	}
 
-	match := runPathPattern.FindString(command)
-	if match == "" || match == "./..." || isPlaceholderPath(match) {
-		return "", fmt.Errorf("command does not contain a concrete ./path target: %q", command)
+	matches := runPathPattern.FindAllString(command, -1)
+	if len(matches) == 0 {
+		return nil, fmt.Errorf("command does not contain a concrete ./path target: %q", command)
 	}
 
-	return filepath.Clean(strings.TrimPrefix(match, "./")), nil
+	targets := make([]string, 0, len(matches))
+	for _, match := range matches {
+		if match == "./..." || isPlaceholderPath(match) {
+			continue
+		}
+		target := strings.TrimSuffix(match, "/...")
+		targets = append(targets, filepath.Clean(strings.TrimPrefix(target, "./")))
+	}
+
+	if len(targets) == 0 {
+		return nil, fmt.Errorf("command does not contain a concrete ./path target: %q", command)
+	}
+
+	return targets, nil
 }
 
 func validateCurriculumPaths(root string, report func(string)) (int, int, error) {
@@ -443,24 +456,34 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 		}
 
 		if item.RunCommand != "" {
-			target, err := extractCommandTarget(item.RunCommand)
+			targets, err := extractCommandTargets(item.RunCommand)
 			if err != nil {
 				report(fmt.Sprintf("Invalid v2 run command: %s -> %v", item.ID, err))
 				errorsFound++
-			} else if !pathExists(root, target) {
-				report(fmt.Sprintf("Invalid v2 run command target: %s -> %s", item.ID, item.RunCommand))
-				errorsFound++
+			} else {
+				for _, target := range targets {
+					if !pathExists(root, target) {
+						report(fmt.Sprintf("Invalid v2 run command target: %s -> %s", item.ID, item.RunCommand))
+						errorsFound++
+						break
+					}
+				}
 			}
 		}
 
 		if item.TestCommand != "" {
-			target, err := extractCommandTarget(item.TestCommand)
+			targets, err := extractCommandTargets(item.TestCommand)
 			if err != nil {
 				report(fmt.Sprintf("Invalid v2 test command: %s -> %v", item.ID, err))
 				errorsFound++
-			} else if !pathExists(root, target) {
-				report(fmt.Sprintf("Invalid v2 test command target: %s -> %s", item.ID, item.TestCommand))
-				errorsFound++
+			} else {
+				for _, target := range targets {
+					if !pathExists(root, target) {
+						report(fmt.Sprintf("Invalid v2 test command target: %s -> %s", item.ID, item.TestCommand))
+						errorsFound++
+						break
+					}
+				}
 			}
 		}
 

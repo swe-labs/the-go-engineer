@@ -31,6 +31,8 @@ go test ./11-flagship/01-opslane/internal/auth/...
 - `internal/auth/middleware.go`
 - `internal/auth/context.go`
 
+Implemented code surface: [SURFACE.md](./SURFACE.md)
+
 Identity becomes trusted only after middleware verification. Repository calls should receive that trusted identity, not raw request claims.
 
 ## Engineering Questions

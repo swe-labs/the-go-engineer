@@ -33,6 +33,8 @@ go run ./11-flagship/01-opslane/cmd/server
 - `Dockerfile`
 - `docker-compose.yml`
 
+Implemented code surface: [SURFACE.md](./SURFACE.md)
+
 Do not move tenant, auth, or business logic into the config package.
 
 ## Engineering Questions

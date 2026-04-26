@@ -42,6 +42,8 @@ The final request above must return `401` without a bearer token.
 - `internal/handlers/api.go`
 - `internal/middleware/middleware.go`
 
+Implemented code surface: [SURFACE.md](./SURFACE.md)
+
 Handlers parse and shape HTTP traffic. They should not become the order-processing engine.
 
 ## Engineering Questions

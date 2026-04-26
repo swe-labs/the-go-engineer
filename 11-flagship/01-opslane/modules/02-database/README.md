@@ -32,6 +32,8 @@ go test ./11-flagship/01-opslane/internal/db/...
 - `internal/models/order.go`
 - `internal/models/payment.go`
 
+Implemented code surface: [SURFACE.md](./SURFACE.md)
+
 The repository layer owns persistence concerns. It should not absorb auth rules or HTTP parsing.
 
 ## Engineering Questions
