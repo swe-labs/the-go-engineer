@@ -212,6 +212,36 @@ func TestCreateUserReturnsConflictForDuplicateEmail(t *testing.T) {
 	}
 }
 
+func TestCreateUserValidatesRequiredFieldsBeforePasswordHashing(t *testing.T) {
+	t.Parallel()
+
+	store := &fakeStore{}
+	app := newTestApplication(t, store)
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/users", bytes.NewBufferString(`{
+		"tenant_id": 0,
+		"email": "",
+		"display_name": "",
+		"password": "short",
+		"role": "admin"
+	}`))
+	res := httptest.NewRecorder()
+
+	app.Routes().ServeHTTP(res, req)
+
+	if res.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want %d", res.Code, http.StatusBadRequest)
+	}
+
+	var payload map[string]map[string]string
+	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload["error"]["code"] != "invalid_user" {
+		t.Fatalf("error code = %q, want invalid_user", payload["error"]["code"])
+	}
+}
+
 func TestLoginReturnsAccessToken(t *testing.T) {
 	t.Parallel()
 
@@ -342,6 +372,23 @@ func TestListOrdersRejectsAnonymousRequest(t *testing.T) {
 
 	if payload["error"]["code"] != "unauthorized" {
 		t.Fatalf("error code = %q, want unauthorized", payload["error"]["code"])
+	}
+}
+
+func TestHealthRouteBypassesRateLimit(t *testing.T) {
+	t.Parallel()
+
+	app := newTestApplication(t, &fakeStore{})
+
+	for i := 0; i < apiRateLimitMaxRequests+5; i++ {
+		res := httptest.NewRecorder()
+		req := httptest.NewRequest(http.MethodGet, "/health", nil)
+
+		app.Routes().ServeHTTP(res, req)
+
+		if res.Code != http.StatusOK {
+			t.Fatalf("iteration %d status = %d, want %d", i, res.Code, http.StatusOK)
+		}
 	}
 }
 

@@ -56,13 +56,22 @@ func (app *Application) Routes() http.Handler {
 	mux.Handle("POST /api/v1/payments", protected(http.HandlerFunc(app.handleCreatePayment)))
 	mux.Handle("GET /api/v1/orders/{orderID}/payments", protected(http.HandlerFunc(app.handleListPaymentsByOrder)))
 
+	baseHandler := middleware.LogRequest(app.Logger)(
+		middleware.RecoverPanic(app.Logger)(mux),
+	)
+	rateLimitedHandler := middleware.RateLimit(apiRateLimitMaxRequests, apiRateLimitWindow, app.TrustedProxyCIDRs)(baseHandler)
+	httpSurface := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/health" {
+			baseHandler.ServeHTTP(w, r)
+			return
+		}
+
+		rateLimitedHandler.ServeHTTP(w, r)
+	})
+
 	handler := middleware.SecureHeaders(
 		middleware.CORS(
-			middleware.RateLimit(apiRateLimitMaxRequests, apiRateLimitWindow, app.TrustedProxyCIDRs)(
-				middleware.LogRequest(app.Logger)(
-					middleware.RecoverPanic(app.Logger)(mux),
-				),
-			),
+			httpSurface,
 		),
 	)
 

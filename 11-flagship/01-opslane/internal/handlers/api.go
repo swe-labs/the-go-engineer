@@ -98,6 +98,13 @@ func (app *Application) handleCreateUser(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	email := strings.ToLower(strings.TrimSpace(req.Email))
+	displayName := strings.TrimSpace(req.DisplayName)
+	if req.TenantID <= 0 || email == "" || displayName == "" {
+		app.writeError(w, r, http.StatusBadRequest, "invalid_user", "tenant_id, email, and display_name are required")
+		return
+	}
+
 	passwordHash, err := auth.HashPassword(req.Password)
 	if err != nil {
 		app.writeError(w, r, http.StatusBadRequest, "weak_password", "password does not meet policy")
@@ -106,14 +113,10 @@ func (app *Application) handleCreateUser(w http.ResponseWriter, r *http.Request)
 
 	user := models.User{
 		TenantID:     req.TenantID,
-		Email:        strings.ToLower(strings.TrimSpace(req.Email)),
-		DisplayName:  strings.TrimSpace(req.DisplayName),
+		Email:        email,
+		DisplayName:  displayName,
 		PasswordHash: passwordHash,
 		Role:         role,
-	}
-	if user.TenantID <= 0 || user.Email == "" || user.DisplayName == "" {
-		app.writeError(w, r, http.StatusBadRequest, "invalid_user", "tenant_id, email, and display_name are required")
-		return
 	}
 
 	if err := app.Store.CreateUser(r.Context(), &user); err != nil {
