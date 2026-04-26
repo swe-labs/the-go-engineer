@@ -15,6 +15,7 @@ import (
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
 const maxJSONBodySize = 1 << 20
@@ -202,30 +203,36 @@ func (app *Application) handleCreateOrder(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	currency := strings.ToUpper(strings.TrimSpace(req.Currency))
-	if req.TotalCents <= 0 || currency == "" || strings.TrimSpace(req.IdempotencyKey) == "" {
-		app.writeError(w, r, http.StatusBadRequest, "invalid_order", "total_cents, currency, and idempotency_key are required")
+	if app.Orders == nil {
+		app.writeError(w, r, http.StatusInternalServerError, "order_service_unavailable", "order service is not configured")
 		return
 	}
 
-	order := models.Order{
+	result, err := app.Orders.CreateOrder(r.Context(), services.CreateOrderInput{
 		TenantID:       identity.TenantID,
 		UserID:         identity.UserID,
-		Status:         models.OrderStatusPending,
 		TotalCents:     req.TotalCents,
-		Currency:       currency,
-		IdempotencyKey: strings.TrimSpace(req.IdempotencyKey),
-	}
-	if err := app.Store.CreateOrder(r.Context(), &order); err != nil {
-		if errors.Is(err, db.ErrDuplicateValue) {
-			app.writeError(w, r, http.StatusConflict, "duplicate_idempotency_key", "an order with this idempotency_key already exists for this tenant")
-			return
+		Currency:       req.Currency,
+		IdempotencyKey: req.IdempotencyKey,
+	})
+	if err != nil {
+		switch {
+		case errors.Is(err, services.ErrInvalidOrder):
+			app.writeError(w, r, http.StatusBadRequest, "invalid_order", "total_cents, currency, and idempotency_key are required")
+		case errors.Is(err, services.ErrInventoryUnavailable):
+			app.writeError(w, r, http.StatusConflict, "inventory_unavailable", "inventory could not be reserved for this order")
+		default:
+			app.writeError(w, r, http.StatusInternalServerError, "order_create_failed", "failed to create order")
 		}
-		app.writeError(w, r, http.StatusInternalServerError, "order_create_failed", "failed to create order")
 		return
 	}
 
-	writeJSON(w, http.StatusCreated, order)
+	statusCode := http.StatusCreated
+	if !result.Created {
+		statusCode = http.StatusOK
+	}
+
+	writeJSON(w, statusCode, result.Order)
 }
 
 func (app *Application) handleCreatePayment(w http.ResponseWriter, r *http.Request) {

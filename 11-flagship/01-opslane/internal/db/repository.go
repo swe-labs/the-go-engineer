@@ -34,6 +34,9 @@ type UserRepository interface {
 
 type OrderRepository interface {
 	CreateOrder(ctx context.Context, order *models.Order) error
+	GetOrderByID(ctx context.Context, tenantID, orderID int64) (models.Order, error)
+	GetOrderByIdempotencyKey(ctx context.Context, tenantID int64, idempotencyKey string) (models.Order, error)
+	UpdateOrderStatus(ctx context.Context, tenantID, orderID int64, status models.OrderStatus) (models.Order, error)
 	ListOrdersByTenant(ctx context.Context, tenantID int64) ([]models.Order, error)
 }
 
@@ -283,6 +286,94 @@ func (s *Store) ListOrdersByTenant(ctx context.Context, tenantID int64) ([]model
 	}
 
 	return orders, nil
+}
+
+func (s *Store) GetOrderByID(ctx context.Context, tenantID, orderID int64) (models.Order, error) {
+	var order models.Order
+
+	err := s.q.QueryRowContext(
+		ctx,
+		`SELECT id, tenant_id, user_id, status, total_cents, currency, idempotency_key, created_at, updated_at
+		 FROM orders
+		 WHERE tenant_id = $1 AND id = $2`,
+		tenantID,
+		orderID,
+	).Scan(
+		&order.ID,
+		&order.TenantID,
+		&order.UserID,
+		&order.Status,
+		&order.TotalCents,
+		&order.Currency,
+		&order.IdempotencyKey,
+		&order.CreatedAt,
+		&order.UpdatedAt,
+	)
+	if err != nil {
+		return models.Order{}, fmt.Errorf("get order by id: %w", err)
+	}
+
+	return order, nil
+}
+
+func (s *Store) GetOrderByIdempotencyKey(ctx context.Context, tenantID int64, idempotencyKey string) (models.Order, error) {
+	var order models.Order
+
+	err := s.q.QueryRowContext(
+		ctx,
+		`SELECT id, tenant_id, user_id, status, total_cents, currency, idempotency_key, created_at, updated_at
+		 FROM orders
+		 WHERE tenant_id = $1 AND idempotency_key = $2`,
+		tenantID,
+		idempotencyKey,
+	).Scan(
+		&order.ID,
+		&order.TenantID,
+		&order.UserID,
+		&order.Status,
+		&order.TotalCents,
+		&order.Currency,
+		&order.IdempotencyKey,
+		&order.CreatedAt,
+		&order.UpdatedAt,
+	)
+	if err != nil {
+		return models.Order{}, fmt.Errorf("get order by idempotency key: %w", err)
+	}
+
+	return order, nil
+}
+
+func (s *Store) UpdateOrderStatus(ctx context.Context, tenantID, orderID int64, status models.OrderStatus) (models.Order, error) {
+	var order models.Order
+	updatedAt := time.Now().UTC()
+
+	err := s.q.QueryRowContext(
+		ctx,
+		`UPDATE orders
+		 SET status = $3, updated_at = $4
+		 WHERE tenant_id = $1 AND id = $2
+		 RETURNING id, tenant_id, user_id, status, total_cents, currency, idempotency_key, created_at, updated_at`,
+		tenantID,
+		orderID,
+		status,
+		updatedAt,
+	).Scan(
+		&order.ID,
+		&order.TenantID,
+		&order.UserID,
+		&order.Status,
+		&order.TotalCents,
+		&order.Currency,
+		&order.IdempotencyKey,
+		&order.CreatedAt,
+		&order.UpdatedAt,
+	)
+	if err != nil {
+		return models.Order{}, fmt.Errorf("update order status: %w", err)
+	}
+
+	return order, nil
 }
 
 func (s *Store) CreatePayment(ctx context.Context, payment *models.Payment) error {

@@ -26,8 +26,8 @@ This file explains what each module means, what proof looks like, and what comes
 | `OPSL.2` | Database and Models | complete |
 | `OPSL.3` | Authentication and Tenant Isolation | complete |
 | `OPSL.4` | HTTP API Layer | complete |
-| `OPSL.5` | Order Processing | next |
-| `OPSL.6` | Payment Pipeline | locked |
+| `OPSL.5` | Order Processing | complete |
+| `OPSL.6` | Payment Pipeline | next |
 | `OPSL.7` | Event Bus and Worker Pools | locked |
 | `OPSL.8` | Caching Layer | locked |
 | `OPSL.9` | Observability | locked |
@@ -126,11 +126,17 @@ Module spec: [modules/04-http-api/README.md](./modules/04-http-api/README.md)
 
 What you build: the order state machine, validation rules, inventory coordination, and idempotent workflow entry.
 
-Target proof surface once this module is implemented:
+Proof surface:
 
-- `go test` passes for the future `11-flagship/01-opslane/internal/services` package
+```bash
+go test ./11-flagship/01-opslane/internal/services/...
+go test ./11-flagship/01-opslane/internal/handlers/...
+```
+
+Behavior proof:
+
 - order state transition tests prove valid and invalid transitions
-- idempotent order creation does not duplicate work on retries
+- idempotent order creation returns the original order instead of creating duplicates
 
 Required files:
 
@@ -138,9 +144,10 @@ Required files:
 - `internal/services/inventory.go`
 - `internal/services/validation.go`
 
-Read this before starting:
+Read this module:
 
 - [modules/05-order-processing/README.md](./modules/05-order-processing/README.md)
+- [modules/05-order-processing/SURFACE.md](./modules/05-order-processing/SURFACE.md)
 
 ## OPSL.6 Payment Pipeline
 
