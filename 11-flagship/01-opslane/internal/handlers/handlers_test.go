@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
 
@@ -256,6 +257,41 @@ func TestCreatePaymentUsesAuthenticatedTenant(t *testing.T) {
 	}
 }
 
+func TestCreatePaymentReturnsNotFoundForInvalidOrder(t *testing.T) {
+	t.Parallel()
+
+	store := &fakeStore{createPaymentErr: db.ErrInvalidReference}
+	app := newTestApplication(t, store)
+	token := issueHandlerTestToken(t, app.Tokens, auth.Identity{
+		UserID:   42,
+		TenantID: 7,
+		Email:    "admin@example.com",
+		Role:     models.UserRoleAdmin,
+	})
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/payments", bytes.NewBufferString(`{
+		"order_id": 404,
+		"provider_reference": "pay_missing",
+		"amount_cents": 2500
+	}`))
+	req.Header.Set("Authorization", "Bearer "+token)
+	res := httptest.NewRecorder()
+
+	app.Routes().ServeHTTP(res, req)
+
+	if res.Code != http.StatusNotFound {
+		t.Fatalf("status = %d, want %d", res.Code, http.StatusNotFound)
+	}
+
+	var payload map[string]map[string]string
+	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload["error"]["code"] != "order_not_found" {
+		t.Fatalf("error code = %q, want order_not_found", payload["error"]["code"])
+	}
+}
+
 func TestListPaymentsByOrderUsesAuthenticatedTenant(t *testing.T) {
 	t.Parallel()
 
@@ -333,6 +369,7 @@ type fakeStore struct {
 	userByEmail          models.User
 	createdOrder         models.Order
 	createdPayment       models.Payment
+	createPaymentErr     error
 	listPaymentsTenantID int64
 	listPaymentsOrderID  int64
 }
@@ -372,6 +409,10 @@ func (s *fakeStore) ListOrdersByTenant(context.Context, int64) ([]models.Order, 
 }
 
 func (s *fakeStore) CreatePayment(_ context.Context, payment *models.Payment) error {
+	if s.createPaymentErr != nil {
+		return s.createPaymentErr
+	}
+
 	payment.ID = 501
 	payment.CreatedAt = time.Now().UTC()
 	payment.UpdatedAt = payment.CreatedAt

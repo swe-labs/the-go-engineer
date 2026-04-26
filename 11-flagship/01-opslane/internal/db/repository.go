@@ -6,13 +6,19 @@ package db
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
 	"time"
 
-	_ "github.com/lib/pq"
+	"github.com/lib/pq"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/config"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
+
+// ErrInvalidReference means a tenant-scoped row points at a parent row that does not exist.
+var ErrInvalidReference = errors.New("invalid tenant-scoped reference")
+
+const postgresForeignKeyViolation = "23503"
 
 type TenantRepository interface {
 	CreateTenant(ctx context.Context, tenant *models.Tenant) error
@@ -289,6 +295,9 @@ func (s *Store) CreatePayment(ctx context.Context, payment *models.Payment) erro
 		payment.UpdatedAt,
 	).Scan(&payment.ID)
 	if err != nil {
+		if isForeignKeyViolation(err) {
+			return fmt.Errorf("insert payment: %w", ErrInvalidReference)
+		}
 		return fmt.Errorf("insert payment: %w", err)
 	}
 
@@ -334,4 +343,9 @@ func (s *Store) ListPaymentsByOrder(ctx context.Context, tenantID, orderID int64
 	}
 
 	return payments, nil
+}
+
+func isForeignKeyViolation(err error) bool {
+	var pqErr *pq.Error
+	return errors.As(err, &pqErr) && string(pqErr.Code) == postgresForeignKeyViolation
 }

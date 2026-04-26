@@ -13,6 +13,7 @@ import (
 	"strings"
 
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
 
@@ -239,6 +240,10 @@ func (app *Application) handleCreatePayment(w http.ResponseWriter, r *http.Reque
 		FailureReason:     strings.TrimSpace(req.FailureReason),
 	}
 	if err := app.Store.CreatePayment(r.Context(), &payment); err != nil {
+		if errors.Is(err, db.ErrInvalidReference) {
+			app.writeError(w, r, http.StatusNotFound, "order_not_found", "order does not exist for this tenant")
+			return
+		}
 		app.writeError(w, r, http.StatusInternalServerError, "payment_create_failed", "failed to create payment")
 		return
 	}
