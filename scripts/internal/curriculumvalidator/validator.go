@@ -306,8 +306,9 @@ func validateRunPaths(root string, report func(string)) (int, int, error) {
 					continue
 				}
 
-				target := filepath.Clean(strings.TrimPrefix(match, "./"))
-				alternateTarget := filepath.Clean(filepath.Join(filepath.Dir(cleanPath), strings.TrimPrefix(match, "./")))
+				trimmedMatch := strings.TrimSuffix(match, "/...")
+				target := filepath.Clean(strings.TrimPrefix(trimmedMatch, "./"))
+				alternateTarget := filepath.Clean(filepath.Join(filepath.Dir(cleanPath), strings.TrimPrefix(trimmedMatch, "./")))
 
 				if pathExists(root, target) || pathExists(root, alternateTarget) {
 					continue
