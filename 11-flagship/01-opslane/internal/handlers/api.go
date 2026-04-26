@@ -71,6 +71,10 @@ func (app *Application) handleCreateTenant(w http.ResponseWriter, r *http.Reques
 		Slug: req.Slug,
 	}
 	if err := app.Store.CreateTenant(r.Context(), &tenant); err != nil {
+		if errors.Is(err, db.ErrDuplicateValue) {
+			app.writeError(w, r, http.StatusConflict, "duplicate_slug", "tenant slug already exists")
+			return
+		}
 		app.writeError(w, r, http.StatusInternalServerError, "tenant_create_failed", "failed to create tenant")
 		return
 	}
@@ -254,6 +258,10 @@ func (app *Application) handleCreatePayment(w http.ResponseWriter, r *http.Reque
 	if err := app.Store.CreatePayment(r.Context(), &payment); err != nil {
 		if errors.Is(err, db.ErrInvalidReference) {
 			app.writeError(w, r, http.StatusNotFound, "order_not_found", "order does not exist for this tenant")
+			return
+		}
+		if errors.Is(err, db.ErrDuplicateValue) {
+			app.writeError(w, r, http.StatusConflict, "duplicate_provider_reference", "provider_reference already exists for this tenant")
 			return
 		}
 		app.writeError(w, r, http.StatusInternalServerError, "payment_create_failed", "failed to create payment")

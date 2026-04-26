@@ -132,6 +132,9 @@ func (s *Store) CreateTenant(ctx context.Context, tenant *models.Tenant) error {
 		tenant.CreatedAt,
 	).Scan(&tenant.ID)
 	if err != nil {
+		if isUniqueViolation(err) {
+			return fmt.Errorf("insert tenant: %w", ErrDuplicateValue)
+		}
 		return fmt.Errorf("insert tenant: %w", err)
 	}
 
@@ -308,6 +311,9 @@ func (s *Store) CreatePayment(ctx context.Context, payment *models.Payment) erro
 	if err != nil {
 		if isForeignKeyViolation(err) {
 			return fmt.Errorf("insert payment: %w", ErrInvalidReference)
+		}
+		if isUniqueViolation(err) {
+			return fmt.Errorf("insert payment: %w", ErrDuplicateValue)
 		}
 		return fmt.Errorf("insert payment: %w", err)
 	}

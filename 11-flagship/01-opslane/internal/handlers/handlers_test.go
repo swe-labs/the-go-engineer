@@ -96,6 +96,33 @@ func TestCreateTenantReturnsCreatedTenant(t *testing.T) {
 	}
 }
 
+func TestCreateTenantReturnsConflictForDuplicateSlug(t *testing.T) {
+	t.Parallel()
+
+	store := &fakeStore{createTenantErr: db.ErrDuplicateValue}
+	app := newTestApplication(t, store)
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/tenants", bytes.NewBufferString(`{
+		"name": "Acme Inc",
+		"slug": "acme"
+	}`))
+	res := httptest.NewRecorder()
+
+	app.Routes().ServeHTTP(res, req)
+
+	if res.Code != http.StatusConflict {
+		t.Fatalf("status = %d, want %d", res.Code, http.StatusConflict)
+	}
+
+	var payload map[string]map[string]string
+	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload["error"]["code"] != "duplicate_slug" {
+		t.Fatalf("error code = %q, want duplicate_slug", payload["error"]["code"])
+	}
+}
+
 func TestCreateUserHashesPasswordBeforePersisting(t *testing.T) {
 	t.Parallel()
 
@@ -387,6 +414,41 @@ func TestCreatePaymentReturnsNotFoundForInvalidOrder(t *testing.T) {
 	}
 }
 
+func TestCreatePaymentReturnsConflictForDuplicateProviderReference(t *testing.T) {
+	t.Parallel()
+
+	store := &fakeStore{createPaymentErr: db.ErrDuplicateValue}
+	app := newTestApplication(t, store)
+	token := issueHandlerTestToken(t, app.Tokens, auth.Identity{
+		UserID:   42,
+		TenantID: 7,
+		Email:    "admin@example.com",
+		Role:     models.UserRoleAdmin,
+	})
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/payments", bytes.NewBufferString(`{
+		"order_id": 101,
+		"provider_reference": "pay_123",
+		"amount_cents": 2500
+	}`))
+	req.Header.Set("Authorization", "Bearer "+token)
+	res := httptest.NewRecorder()
+
+	app.Routes().ServeHTTP(res, req)
+
+	if res.Code != http.StatusConflict {
+		t.Fatalf("status = %d, want %d", res.Code, http.StatusConflict)
+	}
+
+	var payload map[string]map[string]string
+	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload["error"]["code"] != "duplicate_provider_reference" {
+		t.Fatalf("error code = %q, want duplicate_provider_reference", payload["error"]["code"])
+	}
+}
+
 func TestListPaymentsByOrderUsesAuthenticatedTenant(t *testing.T) {
 	t.Parallel()
 
@@ -460,6 +522,7 @@ func issueHandlerTestToken(t *testing.T, tokens *auth.TokenManager, identity aut
 
 type fakeStore struct {
 	createdTenant        models.Tenant
+	createTenantErr      error
 	createdUser          models.User
 	createUserErr        error
 	userByEmail          models.User
@@ -476,6 +539,10 @@ func (s *fakeStore) Ping(context.Context) error {
 }
 
 func (s *fakeStore) CreateTenant(_ context.Context, tenant *models.Tenant) error {
+	if s.createTenantErr != nil {
+		return s.createTenantErr
+	}
+
 	tenant.ID = 7
 	tenant.CreatedAt = time.Now().UTC()
 	s.createdTenant = *tenant
