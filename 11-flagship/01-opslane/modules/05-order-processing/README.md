@@ -19,15 +19,15 @@ Move Opslane from CRUD-shaped handlers into a real business workflow with explic
 
 ## Proof Surface
 
-This module is not implemented in the current tree yet.
+- `go test ./11-flagship/01-opslane/internal/services/...`
+- state transition tests cover valid and invalid order movement
+- idempotency tests prove retries do not create duplicate orders
 
-When it is complete:
+Implemented code surface:
 
-- `go test` must pass for the future `11-flagship/01-opslane/internal/services` package
-- state transition tests must cover valid and invalid order movement
-- idempotency tests must prove retries do not create duplicate orders
+- [SURFACE.md](./SURFACE.md)
 
-Expected new files:
+Primary files:
 
 - `internal/services/order.go`
 - `internal/services/inventory.go`

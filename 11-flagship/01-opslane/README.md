@@ -44,7 +44,8 @@ The current repository state is:
 - `OPSL.2` complete: database and models
 - `OPSL.3` complete: authentication and tenant isolation
 - `OPSL.4` complete: HTTP API layer
-- `OPSL.5` next: order processing
+- `OPSL.5` complete: order processing
+- `OPSL.6` next: payment pipeline
 
 Use the progress surface instead of guessing:
 
@@ -59,19 +60,20 @@ Then use the learner map:
 - [OPSL.2 module spec](./modules/02-database/README.md)
 - [OPSL.3 module spec](./modules/03-auth/README.md)
 - [OPSL.4 module spec](./modules/04-http-api/README.md)
+- [OPSL.5 module spec](./modules/05-order-processing/README.md)
 
-## Module 4 Snapshot
+## Module 5 Snapshot
 
-`OPSL.4` establishes:
+`OPSL.5` establishes:
 
-- public JSON API routes for tenant setup, user setup, and login
-- protected order and payment routes that use authenticated tenant identity
-- consistent JSON error responses
-- CORS and simple in-process rate limiting middleware
+- an explicit order service layer instead of direct handler-to-store writes
+- state transition rules for `pending`, `processing`, `paid`, `failed`, and `cancelled`
+- idempotent order entry that returns the existing order on retry
+- an inventory coordination seam that future payment and worker modules can deepen
 
-This slice turns the auth and persistence foundation into a runnable HTTP contract.
-Protected handlers do not accept tenant IDs from request bodies. They read tenant and user identity
-from verified auth context, then pass that trusted identity into repository calls.
+This slice turns order creation into workflow code.
+The HTTP handler now parses the request and trusted identity, then hands business rules to the
+order service instead of writing straight through to persistence.
 
 ## Run the Project
 
@@ -159,6 +161,5 @@ curl http://localhost:8080/api/v1/orders/1/payments \
 
 ## Next Step
 
-After `OPSL.4`, continue to [OPSL.5](./modules/05-order-processing/README.md).
-That module moves Opslane from CRUD surfaces into explicit business state transitions and
-failure-aware workflows.
+After `OPSL.5`, continue to [OPSL.6](./modules/06-payment-pipeline/README.md).
+That module moves payment handling behind its own reliability-focused workflow boundary.

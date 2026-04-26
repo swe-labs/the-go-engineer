@@ -3,6 +3,7 @@ package handlers
 import (
 	"bytes"
 	"context"
+	"database/sql"
 	"encoding/json"
 	"log/slog"
 	"net/http"
@@ -13,6 +14,7 @@ import (
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
 func TestProtectedMeRouteReturnsAuthenticatedTenantIdentity(t *testing.T) {
@@ -318,10 +320,22 @@ func TestCreateOrderUsesAuthenticatedTenantAndUser(t *testing.T) {
 	}
 }
 
-func TestCreateOrderReturnsConflictForDuplicateIdempotencyKey(t *testing.T) {
+func TestCreateOrderReturnsExistingOrderForIdempotentRetry(t *testing.T) {
 	t.Parallel()
 
-	store := &fakeStore{createOrderErr: db.ErrDuplicateValue}
+	store := &fakeStore{
+		orderByIdempotencyKey: models.Order{
+			ID:             101,
+			TenantID:       7,
+			UserID:         42,
+			Status:         models.OrderStatusPending,
+			TotalCents:     2500,
+			Currency:       "USD",
+			IdempotencyKey: "checkout-123",
+			CreatedAt:      time.Now().UTC(),
+			UpdatedAt:      time.Now().UTC(),
+		},
+	}
 	app := newTestApplication(t, store)
 	token := issueHandlerTestToken(t, app.Tokens, auth.Identity{
 		UserID:   42,
@@ -339,17 +353,20 @@ func TestCreateOrderReturnsConflictForDuplicateIdempotencyKey(t *testing.T) {
 
 	app.Routes().ServeHTTP(res, req)
 
-	if res.Code != http.StatusConflict {
-		t.Fatalf("status = %d, want %d", res.Code, http.StatusConflict)
+	if res.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", res.Code, http.StatusOK)
 	}
 
-	var payload map[string]map[string]string
+	var payload models.Order
 	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
 		t.Fatalf("decode response: %v", err)
 	}
 
-	if payload["error"]["code"] != "duplicate_idempotency_key" {
-		t.Fatalf("error code = %q, want duplicate_idempotency_key", payload["error"]["code"])
+	if payload.ID != 101 {
+		t.Fatalf("order id = %d, want 101", payload.ID)
+	}
+	if store.createOrderCalls != 0 {
+		t.Fatalf("createOrderCalls = %d, want 0", store.createOrderCalls)
 	}
 }
 
@@ -550,6 +567,7 @@ func newTestApplication(t *testing.T, store Store) *Application {
 	return &Application{
 		Logger:      slog.Default(),
 		Store:       store,
+		Orders:      services.NewOrderService(store, services.NewNoopInventoryCoordinator()),
 		Tokens:      newHandlerTestTokenManager(t),
 		ServiceName: "opslane",
 		Environment: "test",
@@ -568,17 +586,24 @@ func issueHandlerTestToken(t *testing.T, tokens *auth.TokenManager, identity aut
 }
 
 type fakeStore struct {
-	createdTenant        models.Tenant
-	createTenantErr      error
-	createdUser          models.User
-	createUserErr        error
-	userByEmail          models.User
-	createdOrder         models.Order
-	createOrderErr       error
-	createdPayment       models.Payment
-	createPaymentErr     error
-	listPaymentsTenantID int64
-	listPaymentsOrderID  int64
+	createdTenant         models.Tenant
+	createTenantErr       error
+	createdUser           models.User
+	createUserErr         error
+	userByEmail           models.User
+	orderByID             models.Order
+	orderByIDErr          error
+	orderByIdempotencyKey models.Order
+	orderByIdempotencyErr error
+	createdOrder          models.Order
+	createOrderCalls      int
+	createOrderErr        error
+	updatedOrder          models.Order
+	updateOrderStatusErr  error
+	createdPayment        models.Payment
+	createPaymentErr      error
+	listPaymentsTenantID  int64
+	listPaymentsOrderID   int64
 }
 
 func (s *fakeStore) Ping(context.Context) error {
@@ -612,6 +637,7 @@ func (s *fakeStore) GetUserByEmail(context.Context, int64, string) (models.User,
 }
 
 func (s *fakeStore) CreateOrder(_ context.Context, order *models.Order) error {
+	s.createOrderCalls++
 	if s.createOrderErr != nil {
 		return s.createOrderErr
 	}
@@ -621,6 +647,39 @@ func (s *fakeStore) CreateOrder(_ context.Context, order *models.Order) error {
 	order.UpdatedAt = order.CreatedAt
 	s.createdOrder = *order
 	return nil
+}
+
+func (s *fakeStore) GetOrderByID(context.Context, int64, int64) (models.Order, error) {
+	if s.orderByIDErr != nil {
+		return models.Order{}, s.orderByIDErr
+	}
+	if s.orderByID.ID == 0 {
+		return models.Order{}, sql.ErrNoRows
+	}
+
+	return s.orderByID, nil
+}
+
+func (s *fakeStore) GetOrderByIdempotencyKey(context.Context, int64, string) (models.Order, error) {
+	if s.orderByIdempotencyErr != nil {
+		return models.Order{}, s.orderByIdempotencyErr
+	}
+	if s.orderByIdempotencyKey.ID == 0 {
+		return models.Order{}, sql.ErrNoRows
+	}
+
+	return s.orderByIdempotencyKey, nil
+}
+
+func (s *fakeStore) UpdateOrderStatus(_ context.Context, _ int64, _ int64, status models.OrderStatus) (models.Order, error) {
+	if s.updateOrderStatusErr != nil {
+		return models.Order{}, s.updateOrderStatusErr
+	}
+
+	s.updatedOrder = s.orderByID
+	s.updatedOrder.Status = status
+	s.updatedOrder.UpdatedAt = time.Now().UTC()
+	return s.updatedOrder, nil
 }
 
 func (s *fakeStore) ListOrdersByTenant(context.Context, int64) ([]models.Order, error) {

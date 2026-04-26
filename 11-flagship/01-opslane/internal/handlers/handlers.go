@@ -14,6 +14,7 @@ import (
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/middleware"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
 const healthDatabaseTimeout = 2 * time.Second
@@ -23,10 +24,15 @@ const apiRateLimitMaxRequests = 120
 type Application struct {
 	Logger            *slog.Logger
 	Store             Store
+	Orders            OrderWorkflow
 	Tokens            *auth.TokenManager
 	ServiceName       string
 	Environment       string
 	TrustedProxyCIDRs []netip.Prefix
+}
+
+type OrderWorkflow interface {
+	CreateOrder(ctx context.Context, input services.CreateOrderInput) (services.CreateOrderResult, error)
 }
 
 type Store interface {
@@ -35,6 +41,9 @@ type Store interface {
 	CreateUser(ctx context.Context, user *models.User) error
 	GetUserByEmail(ctx context.Context, tenantID int64, email string) (models.User, error)
 	CreateOrder(ctx context.Context, order *models.Order) error
+	GetOrderByID(ctx context.Context, tenantID, orderID int64) (models.Order, error)
+	GetOrderByIdempotencyKey(ctx context.Context, tenantID int64, idempotencyKey string) (models.Order, error)
+	UpdateOrderStatus(ctx context.Context, tenantID, orderID int64, status models.OrderStatus) (models.Order, error)
 	ListOrdersByTenant(ctx context.Context, tenantID int64) ([]models.Order, error)
 	CreatePayment(ctx context.Context, payment *models.Payment) error
 	ListPaymentsByOrder(ctx context.Context, tenantID, orderID int64) ([]models.Payment, error)

@@ -15,6 +15,7 @@ import (
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/config"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/handlers"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
 const startupDatabaseTimeout = 10 * time.Second
@@ -55,6 +56,7 @@ func main() {
 	app := &handlers.Application{
 		Logger:            logger,
 		Store:             store,
+		Orders:            services.NewOrderService(store, services.NewNoopInventoryCoordinator()),
 		Tokens:            tokens,
 		ServiceName:       cfg.App.Name,
 		Environment:       cfg.App.Env,
