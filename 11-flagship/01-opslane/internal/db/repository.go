@@ -171,6 +171,12 @@ func (s *Store) CreateUser(ctx context.Context, user *models.User) error {
 		user.CreatedAt,
 	).Scan(&user.ID)
 	if err != nil {
+		if isForeignKeyViolation(err) {
+			return fmt.Errorf("insert user: %w", ErrInvalidReference)
+		}
+		if isUniqueViolation(err) {
+			return fmt.Errorf("insert user: %w", ErrDuplicateValue)
+		}
 		return fmt.Errorf("insert user: %w", err)
 	}
 

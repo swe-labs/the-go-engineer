@@ -125,6 +125,66 @@ func TestCreateUserHashesPasswordBeforePersisting(t *testing.T) {
 	}
 }
 
+func TestCreateUserReturnsNotFoundForUnknownTenant(t *testing.T) {
+	t.Parallel()
+
+	store := &fakeStore{createUserErr: db.ErrInvalidReference}
+	app := newTestApplication(t, store)
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/users", bytes.NewBufferString(`{
+		"tenant_id": 999,
+		"email": "admin@example.com",
+		"display_name": "Admin User",
+		"password": "CorrectHorse7Battery",
+		"role": "admin"
+	}`))
+	res := httptest.NewRecorder()
+
+	app.Routes().ServeHTTP(res, req)
+
+	if res.Code != http.StatusNotFound {
+		t.Fatalf("status = %d, want %d", res.Code, http.StatusNotFound)
+	}
+
+	var payload map[string]map[string]string
+	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload["error"]["code"] != "tenant_not_found" {
+		t.Fatalf("error code = %q, want tenant_not_found", payload["error"]["code"])
+	}
+}
+
+func TestCreateUserReturnsConflictForDuplicateEmail(t *testing.T) {
+	t.Parallel()
+
+	store := &fakeStore{createUserErr: db.ErrDuplicateValue}
+	app := newTestApplication(t, store)
+	req := httptest.NewRequest(http.MethodPost, "/api/v1/users", bytes.NewBufferString(`{
+		"tenant_id": 7,
+		"email": "admin@example.com",
+		"display_name": "Admin User",
+		"password": "CorrectHorse7Battery",
+		"role": "admin"
+	}`))
+	res := httptest.NewRecorder()
+
+	app.Routes().ServeHTTP(res, req)
+
+	if res.Code != http.StatusConflict {
+		t.Fatalf("status = %d, want %d", res.Code, http.StatusConflict)
+	}
+
+	var payload map[string]map[string]string
+	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+
+	if payload["error"]["code"] != "duplicate_email" {
+		t.Fatalf("error code = %q, want duplicate_email", payload["error"]["code"])
+	}
+}
+
 func TestLoginReturnsAccessToken(t *testing.T) {
 	t.Parallel()
 
@@ -401,6 +461,7 @@ func issueHandlerTestToken(t *testing.T, tokens *auth.TokenManager, identity aut
 type fakeStore struct {
 	createdTenant        models.Tenant
 	createdUser          models.User
+	createUserErr        error
 	userByEmail          models.User
 	createdOrder         models.Order
 	createOrderErr       error
@@ -422,6 +483,10 @@ func (s *fakeStore) CreateTenant(_ context.Context, tenant *models.Tenant) error
 }
 
 func (s *fakeStore) CreateUser(_ context.Context, user *models.User) error {
+	if s.createUserErr != nil {
+		return s.createUserErr
+	}
+
 	user.ID = 42
 	user.CreatedAt = time.Now().UTC()
 	s.createdUser = *user

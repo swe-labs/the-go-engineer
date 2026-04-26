@@ -113,6 +113,14 @@ func (app *Application) handleCreateUser(w http.ResponseWriter, r *http.Request)
 	}
 
 	if err := app.Store.CreateUser(r.Context(), &user); err != nil {
+		if errors.Is(err, db.ErrInvalidReference) {
+			app.writeError(w, r, http.StatusNotFound, "tenant_not_found", "tenant does not exist")
+			return
+		}
+		if errors.Is(err, db.ErrDuplicateValue) {
+			app.writeError(w, r, http.StatusConflict, "duplicate_email", "email already exists for this tenant")
+			return
+		}
 		app.writeError(w, r, http.StatusInternalServerError, "user_create_failed", "failed to create user")
 		return
 	}

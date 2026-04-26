@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net"
 	"net/http"
+	"net/netip"
 	"runtime/debug"
 	"strings"
 	"sync"
@@ -88,7 +89,7 @@ type clientWindow struct {
 }
 
 // RateLimit bounds how many requests one client IP can make inside a fixed window.
-func RateLimit(maxRequests int, window time.Duration) func(http.Handler) http.Handler {
+func RateLimit(maxRequests int, window time.Duration, trustedProxyCIDRs []netip.Prefix) func(http.Handler) http.Handler {
 	var mu sync.Mutex
 	clients := make(map[string]clientWindow)
 	nextCleanup := time.Now().Add(window)
@@ -100,7 +101,7 @@ func RateLimit(maxRequests int, window time.Duration) func(http.Handler) http.Ha
 				return
 			}
 
-			clientIP := clientAddress(r)
+			clientIP := clientAddress(r, trustedProxyCIDRs)
 			now := time.Now()
 
 			mu.Lock()
@@ -152,24 +153,60 @@ func SecureHeaders(next http.Handler) http.Handler {
 	})
 }
 
-func clientAddress(r *http.Request) string {
+func clientAddress(r *http.Request, trustedProxyCIDRs []netip.Prefix) string {
+	peerIP := remotePeerIP(r.RemoteAddr)
+	if peerIP.IsValid() && isTrustedProxy(peerIP, trustedProxyCIDRs) {
+		if forwardedIP, ok := forwardedClientIP(r); ok {
+			return forwardedIP.String()
+		}
+	}
+
+	if peerIP.IsValid() {
+		return peerIP.String()
+	}
+
+	return r.RemoteAddr
+}
+
+func remotePeerIP(remoteAddr string) netip.Addr {
+	host, _, err := net.SplitHostPort(remoteAddr)
+	if err == nil {
+		if ip, parseErr := netip.ParseAddr(host); parseErr == nil {
+			return ip.Unmap()
+		}
+	}
+
+	ip, err := netip.ParseAddr(remoteAddr)
+	if err != nil {
+		return netip.Addr{}
+	}
+
+	return ip.Unmap()
+}
+
+func forwardedClientIP(r *http.Request) (netip.Addr, bool) {
 	if forwardedFor := strings.TrimSpace(r.Header.Get("X-Forwarded-For")); forwardedFor != "" {
 		firstHop := strings.TrimSpace(strings.Split(forwardedFor, ",")[0])
-		if ip := net.ParseIP(firstHop); ip != nil {
-			return ip.String()
+		if ip, err := netip.ParseAddr(firstHop); err == nil {
+			return ip.Unmap(), true
 		}
 	}
 
 	if realIP := strings.TrimSpace(r.Header.Get("X-Real-Ip")); realIP != "" {
-		if ip := net.ParseIP(realIP); ip != nil {
-			return ip.String()
+		if ip, err := netip.ParseAddr(realIP); err == nil {
+			return ip.Unmap(), true
 		}
 	}
 
-	host, _, err := net.SplitHostPort(r.RemoteAddr)
-	if err == nil {
-		return host
+	return netip.Addr{}, false
+}
+
+func isTrustedProxy(ip netip.Addr, trustedProxyCIDRs []netip.Prefix) bool {
+	for _, prefix := range trustedProxyCIDRs {
+		if prefix.Contains(ip) {
+			return true
+		}
 	}
 
-	return r.RemoteAddr
+	return false
 }

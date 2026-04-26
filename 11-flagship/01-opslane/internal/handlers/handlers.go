@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"log/slog"
 	"net/http"
+	"net/netip"
 	"time"
 
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
@@ -20,11 +21,12 @@ const apiRateLimitWindow = time.Minute
 const apiRateLimitMaxRequests = 120
 
 type Application struct {
-	Logger      *slog.Logger
-	Store       Store
-	Tokens      *auth.TokenManager
-	ServiceName string
-	Environment string
+	Logger            *slog.Logger
+	Store             Store
+	Tokens            *auth.TokenManager
+	ServiceName       string
+	Environment       string
+	TrustedProxyCIDRs []netip.Prefix
 }
 
 type Store interface {
@@ -56,7 +58,7 @@ func (app *Application) Routes() http.Handler {
 
 	handler := middleware.SecureHeaders(
 		middleware.CORS(
-			middleware.RateLimit(apiRateLimitMaxRequests, apiRateLimitWindow)(
+			middleware.RateLimit(apiRateLimitMaxRequests, apiRateLimitWindow, app.TrustedProxyCIDRs)(
 				middleware.LogRequest(app.Logger)(
 					middleware.RecoverPanic(app.Logger)(mux),
 				),

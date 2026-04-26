@@ -53,11 +53,12 @@ func main() {
 
 	store := db.NewStore(database)
 	app := &handlers.Application{
-		Logger:      logger,
-		Store:       store,
-		Tokens:      tokens,
-		ServiceName: cfg.App.Name,
-		Environment: cfg.App.Env,
+		Logger:            logger,
+		Store:             store,
+		Tokens:            tokens,
+		ServiceName:       cfg.App.Name,
+		Environment:       cfg.App.Env,
+		TrustedProxyCIDRs: cfg.HTTP.TrustedProxyCIDRs,
 	}
 
 	server := &http.Server{
