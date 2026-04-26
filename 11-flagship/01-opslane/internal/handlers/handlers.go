@@ -11,18 +11,31 @@ import (
 	"time"
 
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
-	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/middleware"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
 
 const healthDatabaseTimeout = 2 * time.Second
+const apiRateLimitWindow = time.Minute
+const apiRateLimitMaxRequests = 120
 
 type Application struct {
 	Logger      *slog.Logger
-	Store       *db.Store
+	Store       Store
 	Tokens      *auth.TokenManager
 	ServiceName string
 	Environment string
+}
+
+type Store interface {
+	Ping(ctx context.Context) error
+	CreateTenant(ctx context.Context, tenant *models.Tenant) error
+	CreateUser(ctx context.Context, user *models.User) error
+	GetUserByEmail(ctx context.Context, tenantID int64, email string) (models.User, error)
+	CreateOrder(ctx context.Context, order *models.Order) error
+	ListOrdersByTenant(ctx context.Context, tenantID int64) ([]models.Order, error)
+	CreatePayment(ctx context.Context, payment *models.Payment) error
+	ListPaymentsByOrder(ctx context.Context, tenantID, orderID int64) ([]models.Payment, error)
 }
 
 func (app *Application) Routes() http.Handler {
@@ -30,10 +43,24 @@ func (app *Application) Routes() http.Handler {
 	mux.HandleFunc("GET /", app.handleIndex)
 	mux.HandleFunc("GET /health", app.handleHealth)
 	mux.Handle("GET /me", auth.RequireAuth(app.Tokens)(http.HandlerFunc(app.handleMe)))
+	mux.HandleFunc("POST /api/v1/tenants", app.handleCreateTenant)
+	mux.HandleFunc("POST /api/v1/users", app.handleCreateUser)
+	mux.HandleFunc("POST /api/v1/auth/login", app.handleLogin)
+
+	protected := auth.RequireAuth(app.Tokens)
+	mux.Handle("GET /api/v1/me", protected(http.HandlerFunc(app.handleMe)))
+	mux.Handle("GET /api/v1/orders", protected(http.HandlerFunc(app.handleListOrders)))
+	mux.Handle("POST /api/v1/orders", protected(http.HandlerFunc(app.handleCreateOrder)))
+	mux.Handle("POST /api/v1/payments", protected(http.HandlerFunc(app.handleCreatePayment)))
+	mux.Handle("GET /api/v1/orders/{orderID}/payments", protected(http.HandlerFunc(app.handleListPaymentsByOrder)))
 
 	handler := middleware.SecureHeaders(
-		middleware.LogRequest(app.Logger)(
-			middleware.RecoverPanic(app.Logger)(mux),
+		middleware.CORS(
+			middleware.RateLimit(apiRateLimitMaxRequests, apiRateLimitWindow)(
+				middleware.LogRequest(app.Logger)(
+					middleware.RecoverPanic(app.Logger)(mux),
+				),
+			),
 		),
 	)
 

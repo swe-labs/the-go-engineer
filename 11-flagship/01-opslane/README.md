@@ -34,19 +34,19 @@ This project exists so the curriculum has one integrated system where earlier st
 | `docker-compose.yml` | runs the application with PostgreSQL and the flagship API |
 | `internal/` | holds the application boundaries that later modules will deepen |
 
-## Module 3 Focus
+## Module 4 Focus
 
-Module 3 establishes:
+Module 4 establishes:
 
-- password policy and bcrypt hashing
-- signed token issuance and verification
-- tenant-aware authenticated request identity
-- middleware that rejects anonymous requests before protected handlers run
+- public JSON API routes for tenant setup, user setup, and login
+- protected order and payment routes that use authenticated tenant identity
+- consistent JSON error responses
+- CORS and simple in-process rate limiting middleware
 
-This slice turns the persistence foundation into a request-level security boundary.
-The important rule is simple: protected application code should not guess tenant identity from
-untrusted request data. Auth middleware verifies the token once, then stores the tenant-scoped
-identity in the request context for downstream handlers and services.
+This slice turns the auth and persistence foundation into a runnable HTTP contract.
+The important rule is still zero magic: protected handlers do not accept tenant IDs from request
+bodies. They read tenant and user identity from verified auth context, then pass that trusted
+identity into repository calls.
 
 ## Run the Project
 
@@ -89,13 +89,50 @@ reusing incompatible data.
 curl http://localhost:8080/
 curl http://localhost:8080/health
 curl http://localhost:8080/me
+curl http://localhost:8080/api/v1/me
 ```
 
 The health endpoint now checks the live PostgreSQL connection before reporting the service as ready.
-The `/me` endpoint is intentionally protected. It returns `401 Unauthorized` without a bearer token
-and returns the tenant-scoped identity when a valid Opslane token is supplied.
+The `/me` and `/api/v1/me` endpoints are intentionally protected. They return `401 Unauthorized`
+without a bearer token and return the tenant-scoped identity when a valid Opslane token is supplied.
+
+### Setup and Login
+
+```bash
+curl -X POST http://localhost:8080/api/v1/tenants \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Acme Inc","slug":"acme"}'
+
+curl -X POST http://localhost:8080/api/v1/users \
+  -H "Content-Type: application/json" \
+  -d '{"tenant_id":1,"email":"admin@example.com","display_name":"Admin","password":"CorrectHorse7Battery","role":"admin"}'
+
+curl -X POST http://localhost:8080/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"tenant_id":1,"email":"admin@example.com","password":"CorrectHorse7Battery"}'
+```
+
+### Protected API
+
+```bash
+curl http://localhost:8080/api/v1/orders \
+  -H "Authorization: Bearer <token>"
+
+curl -X POST http://localhost:8080/api/v1/orders \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"total_cents":2500,"currency":"USD","idempotency_key":"checkout-123"}'
+
+curl -X POST http://localhost:8080/api/v1/payments \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"order_id":1,"provider_reference":"pay_123","amount_cents":2500}'
+
+curl http://localhost:8080/api/v1/orders/1/payments \
+  -H "Authorization: Bearer <token>"
+```
 
 ## Next Step
 
-After Module 3 is in place, the next build slice is the HTTP API layer so Opslane can expose user,
-order, and payment operations through stable request and error contracts.
+After Module 4 is in place, the next build slice is order processing so Opslane can move from CRUD
+surfaces into explicit business state transitions and failure-aware workflows.
