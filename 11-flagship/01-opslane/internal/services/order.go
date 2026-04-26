@@ -74,6 +74,9 @@ func (s *OrderService) CreateOrder(ctx context.Context, input CreateOrderInput) 
 	existingOrder, err := s.orders.GetOrderByIdempotencyKey(ctx, normalized.TenantID, normalized.IdempotencyKey)
 	switch {
 	case err == nil:
+		if releaseErr := s.inventory.Release(ctx, inventoryReservationFromOrder(existingOrder)); releaseErr != nil {
+			return CreateOrderResult{}, fmt.Errorf("release inventory on idempotent create retry: %w: %v", ErrInventoryUnavailable, releaseErr)
+		}
 		return CreateOrderResult{Order: existingOrder, Created: false}, nil
 	case !errors.Is(err, sql.ErrNoRows):
 		return CreateOrderResult{}, fmt.Errorf("lookup order by idempotency key: %w", err)
@@ -192,4 +195,15 @@ func (s *OrderService) TransitionOrder(ctx context.Context, req TransitionOrderR
 	}
 
 	return updated, nil
+}
+
+func inventoryReservationFromOrder(order models.Order) InventoryReservation {
+	return InventoryReservation{
+		TenantID:       order.TenantID,
+		UserID:         order.UserID,
+		OrderID:        order.ID,
+		TotalCents:     order.TotalCents,
+		Currency:       order.Currency,
+		IdempotencyKey: order.IdempotencyKey,
+	}
 }

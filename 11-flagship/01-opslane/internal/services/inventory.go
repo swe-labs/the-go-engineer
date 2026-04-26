@@ -18,6 +18,9 @@ type InventoryReservation struct {
 // InventoryCoordinator is the seam between the order workflow and stock reservation behavior.
 type InventoryCoordinator interface {
 	Reserve(ctx context.Context, reservation InventoryReservation) error
+	// Release must be safe for cleanup retries on duplicate or idempotent order creation flows.
+	// Future implementations should treat repeat calls for the same reservation identity as
+	// reconciliation, not as a signal to drop the canonical order hold.
 	Release(ctx context.Context, reservation InventoryReservation) error
 }
 

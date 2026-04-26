@@ -86,8 +86,53 @@ func TestOrderServiceCreateOrderReturnsExistingOrderForIdempotentRetry(t *testin
 	if len(inventory.reserveCalls) != 0 {
 		t.Fatalf("reserve calls = %d, want 0", len(inventory.reserveCalls))
 	}
+	if len(inventory.releaseCalls) != 1 {
+		t.Fatalf("release calls = %d, want 1", len(inventory.releaseCalls))
+	}
 	if repo.createCalls != 0 {
 		t.Fatalf("create calls = %d, want 0", repo.createCalls)
+	}
+}
+
+func TestOrderServiceCreateOrderSurfacesReleaseFailureOnIdempotentRetry(t *testing.T) {
+	t.Parallel()
+
+	repo := newStubOrderRepository()
+	repo.ordersByKey[repo.makeKey(7, "checkout-123")] = models.Order{
+		ID:             101,
+		TenantID:       7,
+		UserID:         42,
+		Status:         models.OrderStatusPending,
+		TotalCents:     2500,
+		Currency:       "USD",
+		IdempotencyKey: "checkout-123",
+		CreatedAt:      time.Now().UTC(),
+		UpdatedAt:      time.Now().UTC(),
+	}
+
+	inventory := &stubInventoryCoordinator{
+		releaseErr: errors.New("release failed"),
+	}
+	service := NewOrderService(repo, inventory)
+
+	_, err := service.CreateOrder(context.Background(), CreateOrderInput{
+		TenantID:       7,
+		UserID:         42,
+		TotalCents:     2500,
+		Currency:       "USD",
+		IdempotencyKey: "checkout-123",
+	})
+	if err == nil {
+		t.Fatal("CreateOrder error = nil, want failure")
+	}
+	if !errors.Is(err, ErrInventoryUnavailable) {
+		t.Fatalf("CreateOrder error = %v, want ErrInventoryUnavailable", err)
+	}
+	if len(inventory.reserveCalls) != 0 {
+		t.Fatalf("reserve calls = %d, want 0", len(inventory.reserveCalls))
+	}
+	if len(inventory.releaseCalls) != 1 {
+		t.Fatalf("release calls = %d, want 1", len(inventory.releaseCalls))
 	}
 }
 
