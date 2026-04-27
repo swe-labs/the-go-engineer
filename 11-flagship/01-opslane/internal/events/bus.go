@@ -82,19 +82,18 @@ func (b *Bus) Publish(ctx context.Context, event Event) error {
 	}
 
 	b.mu.RLock()
-	defer b.mu.RUnlock()
-
 	if b.closed {
+		b.mu.RUnlock()
 		return ErrBusClosed
 	}
 
 	select {
 	case b.events <- event:
+		b.mu.RUnlock()
 		return nil
-	case <-ctx.Done():
-		return ctx.Err()
 	default:
 	}
+	b.mu.RUnlock()
 
 	select {
 	case b.events <- event:

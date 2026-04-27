@@ -96,19 +96,18 @@ func (p *Pool) Submit(ctx context.Context, event events.Event) error {
 	}
 
 	p.mu.RLock()
-	defer p.mu.RUnlock()
-
 	if p.stopped {
+		p.mu.RUnlock()
 		return ErrPoolStopped
 	}
 
 	select {
 	case p.jobs <- event:
+		p.mu.RUnlock()
 		return nil
-	case <-ctx.Done():
-		return ctx.Err()
 	default:
 	}
+	p.mu.RUnlock()
 
 	select {
 	case p.jobs <- event:
