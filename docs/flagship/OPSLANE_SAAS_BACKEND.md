@@ -59,7 +59,7 @@ flowchart TD
     PaymentWorkers["Worker Pool<br/>(Payments)"]
     NotificationWorkers["Worker Pool<br/>(Notifications)"]
 
-    DB["Database<br/>(PostgreSQL)<br/>+ Redis-style Cache"]
+    DB["Database<br/>(PostgreSQL)<br/>+ In-memory Cache"]
 
     LB --> APIPrimary
     LB --> APIAdmin
@@ -172,10 +172,11 @@ Any PR touching Opslane must be checked for:
 
 **Key surfaces**:
 
-- `internal/auth/jwt.go`
+- `internal/auth/token.go`
 - `internal/auth/password.go`
+- `internal/auth/service.go`
+- `internal/auth/context.go`
 - `internal/auth/middleware.go`
-- `internal/models/user.go`
 
 **Engineering focus**:
 
@@ -198,13 +199,9 @@ Any PR touching Opslane must be checked for:
 
 **Key surfaces**:
 
-- `internal/handlers/user.go`
-- `internal/handlers/order.go`
-- `internal/handlers/payment.go`
-- `internal/middleware/auth.go`
-- `internal/middleware/ratelimit.go`
-- `internal/middleware/logging.go`
-- `internal/middleware/cors.go`
+- `internal/handlers/handlers.go`
+- `internal/handlers/api.go`
+- `internal/middleware/middleware.go`
 
 **Engineering focus**:
 

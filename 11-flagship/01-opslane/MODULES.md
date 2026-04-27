@@ -29,8 +29,8 @@ This file explains what each module means, what proof looks like, and what comes
 | `OPSL.5` | Order Processing | complete |
 | `OPSL.6` | Payment Pipeline | complete |
 | `OPSL.7` | Event Bus and Worker Pools | complete |
-| `OPSL.8` | Caching Layer | next |
-| `OPSL.9` | Observability | locked |
+| `OPSL.8` | Caching Layer | complete |
+| `OPSL.9` | Observability | next |
 | `OPSL.10` | Graceful Shutdown and Deployment | locked |
 
 ## OPSL.1 Foundation and Configuration
@@ -245,21 +245,39 @@ Read the implementation details:
 
 What you build: structured logs, correlation IDs, metrics, and trace-friendly request flow.
 
-Target proof surface once this module is implemented:
+Proof surface:
 
-- `go test` passes for the future `internal/logging` and `internal/metrics` packages
-- request correlation tests prove one order can be traced across layers
+```bash
+go test ./11-flagship/01-opslane/internal/logging/...
+go test ./11-flagship/01-opslane/internal/metrics/...
+go test ./11-flagship/01-opslane/internal/tracing/...
+go run ./11-flagship/01-opslane/scripts/progress.go
+```
 
-Required files:
+The proof surface covers:
 
+- structured logger factory with JSON and text formats
+- correlation ID context propagation from HTTP entry through all layers
+- HTTP middleware with correlation ID, status capture, and structured request logging
+- atomic counters and fixed-bucket histograms for application metrics
+- pre-registered HTTP, cache, and worker metrics
+- HTTP metrics middleware for request counting and latency
+- span tracking with correlation ID linkage
+- cross-service correlation header injection and extraction
+
+Implemented files:
+
+- `internal/logging/context.go`
 - `internal/logging/logger.go`
 - `internal/logging/middleware.go`
 - `internal/metrics/metrics.go`
+- `internal/metrics/middleware.go`
 - `internal/tracing/tracing.go`
 
-Read this before starting:
+Read this module:
 
 - [modules/09-observability/README.md](./modules/09-observability/README.md)
+- [modules/09-observability/SURFACE.md](./modules/09-observability/SURFACE.md)
 
 ## OPSL.10 Graceful Shutdown and Deployment
 
