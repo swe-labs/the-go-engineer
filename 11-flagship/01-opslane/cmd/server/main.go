@@ -15,10 +15,10 @@ import (
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/config"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/events"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/handlers"
 	paymentflow "github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
-	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/events"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/workers"
 )
 
