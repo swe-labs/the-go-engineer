@@ -184,6 +184,10 @@ func (s *PaymentService) ReconcilePayment(ctx context.Context, input ReconcilePa
 		return models.Payment{}, fmt.Errorf("cannot downgrade payment from %s to %s", currentPayment.Status, input.Status)
 	}
 
+	if isFinalPaymentStatus(currentPayment.Status) && isFinalPaymentStatus(input.Status) && currentPayment.Status != input.Status {
+		return models.Payment{}, fmt.Errorf("cannot change payment from %s to %s; payment is already in final state", currentPayment.Status, input.Status)
+	}
+
 	updated, err := s.payments.UpdatePaymentStatus(ctx, input.TenantID, input.ProviderReference, input.Status, input.FailureReason)
 	if err != nil {
 		return models.Payment{}, fmt.Errorf("update payment status: %w", err)
