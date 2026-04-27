@@ -29,8 +29,8 @@ This file explains what each module means, what proof looks like, and what comes
 | `OPSL.5` | Order Processing | complete |
 | `OPSL.6` | Payment Pipeline | complete |
 | `OPSL.7` | Event Bus and Worker Pools | complete |
-| `OPSL.8` | Caching Layer | next |
-| `OPSL.9` | Observability | locked |
+| `OPSL.8` | Caching Layer | complete |
+| `OPSL.9` | Observability | next |
 | `OPSL.10` | Graceful Shutdown and Deployment | locked |
 
 ## OPSL.1 Foundation and Configuration
