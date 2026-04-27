@@ -17,13 +17,20 @@ var (
 	ErrBusClosed    = errors.New("event bus closed")
 )
 
+// Bus is a single-channel event bus. Publish/TryPublish write events into a
+// buffered channel; subscribers read from that same channel via Subscribe.
+//
+// Thread-safety: all exported methods are safe for concurrent use.
+// Close is idempotent — calling it multiple times is safe.
+//
+// Design note: the closed signal is carried solely by the `closed` channel.
+// A non-blocking select on a closed channel is O(1) and allocation-free, so
+// a separate boolean flag + mutex fast-path is unnecessary overhead.
 type Bus struct {
-	events     chan Event
-	closed     chan struct{}
-	once       sync.Once
-	now        func() time.Time
-	mu         sync.RWMutex
-	closedFlag bool
+	events chan Event
+	closed chan struct{}
+	once   sync.Once
+	now    func() time.Time
 }
 
 func NewBus(capacity int) *Bus {
@@ -38,6 +45,9 @@ func NewBus(capacity int) *Bus {
 	}
 }
 
+// Subscribe returns the read-only event channel. All published events are
+// delivered in order. The channel is never closed by the bus; callers should
+// also select on a done/context signal to know when to stop reading.
 func (b *Bus) Subscribe() <-chan Event {
 	if b == nil {
 		return nil
@@ -46,20 +56,15 @@ func (b *Bus) Subscribe() <-chan Event {
 	return b.events
 }
 
+// TryPublish attempts a non-blocking publish. Returns ErrQueueFull immediately
+// if the buffer is at capacity, or ErrBusClosed if Close has been called.
 func (b *Bus) TryPublish(event Event) error {
 	if b == nil {
 		return fmt.Errorf("event bus is not configured")
 	}
 
-	// Fast-path: if the bus is already closed, reject immediately
-	b.mu.RLock()
-	if b.closedFlag {
-		b.mu.RUnlock()
-		return ErrBusClosed
-	}
-	b.mu.RUnlock()
-
-	// Check closed signal before attempting send
+	// Fast closed check — a receive on a closed channel is non-blocking and
+	// allocation-free, so no mutex is needed.
 	select {
 	case <-b.closed:
 		return ErrBusClosed
@@ -81,6 +86,8 @@ func (b *Bus) TryPublish(event Event) error {
 	}
 }
 
+// Publish enqueues an event, blocking until it is accepted, the bus is
+// closed, or the context is cancelled.
 func (b *Bus) Publish(ctx context.Context, event Event) error {
 	if b == nil {
 		return fmt.Errorf("event bus is not configured")
@@ -89,62 +96,45 @@ func (b *Bus) Publish(ctx context.Context, event Event) error {
 		ctx = context.Background()
 	}
 
-	// Fast-path: reject if bus is already closed
-	b.mu.RLock()
-	if b.closedFlag {
-		b.mu.RUnlock()
+	// Fast closed check before the more expensive prepare call.
+	select {
+	case <-b.closed:
 		return ErrBusClosed
+	default:
 	}
-	b.mu.RUnlock()
 
 	prepared, err := b.prepare(event)
 	if err != nil {
 		return err
 	}
 
-	// Check if bus is closed first to avoid race with Close
 	select {
+	case b.events <- prepared:
+		return nil
 	case <-b.closed:
 		return ErrBusClosed
 	case <-ctx.Done():
 		return ctx.Err()
-	default:
-		// Proceed to try sending with context
-	}
-
-	// Try to send the event with context, prioritizing closed signal and context cancellation
-	for {
-		select {
-		case <-b.closed:
-			return ErrBusClosed
-		case <-ctx.Done():
-			return ctx.Err()
-		default:
-		}
-
-		select {
-		case b.events <- prepared:
-			return nil
-		case <-b.closed:
-			return ErrBusClosed
-		case <-ctx.Done():
-			return ctx.Err()
-		}
 	}
 }
 
+// Close permanently shuts the bus. After Close returns, all subsequent
+// Publish and TryPublish calls will return ErrBusClosed immediately.
+// Close is idempotent; calling it more than once is safe.
+//
+// Note: b.events is intentionally NOT closed here. The bus does not own the
+// consumer side of the channel, so closing it would risk a panic in any
+// subscriber that attempts a receive after a hypothetical re-open, and would
+// also race with in-flight sends from Publish. Subscribers should stop reading
+// by watching their own done/context signal alongside the Subscribe channel.
 func (b *Bus) Close() {
 	if b == nil {
 		return
 	}
+	// sync.Once guarantees close(b.closed) is called exactly once, making
+	// Close safe to call concurrently from multiple goroutines.
 	b.once.Do(func() {
-		// Mark closed in a thread-safe way and signal close to waiters
-		b.mu.Lock()
-		if !b.closedFlag {
-			b.closedFlag = true
-			close(b.closed)
-		}
-		b.mu.Unlock()
+		close(b.closed)
 	})
 }
 

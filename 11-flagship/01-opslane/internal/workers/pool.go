@@ -92,6 +92,12 @@ func (p *Pool) Start(ctx context.Context) error {
 	return nil
 }
 
+// Submit enqueues an event for processing. It blocks until the event is
+// accepted, the pool is stopped, or the context is cancelled.
+//
+// Note: p.jobs is never closed while the pool is running, so there is no
+// risk of a "send on closed channel" panic here. Workers exit by watching
+// stopCh, not by channel closure.
 func (p *Pool) Submit(ctx context.Context, event events.Event) error {
 	if p == nil {
 		return fmt.Errorf("worker pool is not configured")
@@ -100,37 +106,34 @@ func (p *Pool) Submit(ctx context.Context, event events.Event) error {
 		ctx = context.Background()
 	}
 
-	// Check if pool is stopped first to avoid race with Stop
+	// Fast-path: reject if pool is already stopped. Without this check, a
+	// stopped pool with remaining buffer capacity would non-deterministically
+	// accept the send in the select below (Go selects randomly among ready
+	// cases). The pre-check makes rejection deterministic.
 	select {
+	case <-p.stopCh:
+		return ErrPoolStopped
+	default:
+	}
+
+	select {
+	case p.jobs <- event:
+		return nil
 	case <-p.stopCh:
 		return ErrPoolStopped
 	case <-ctx.Done():
 		return ctx.Err()
-	default:
-		// Proceed to try submitting with context
-	}
-
-	// Try to submit the event with context, prioritizing stop signal and context cancellation
-	for {
-		select {
-		case <-p.stopCh:
-			return ErrPoolStopped
-		case <-ctx.Done():
-			return ctx.Err()
-		default:
-		}
-
-		select {
-		case p.jobs <- event:
-			return nil
-		case <-p.stopCh:
-			return ErrPoolStopped
-		case <-ctx.Done():
-			return ctx.Err()
-		}
 	}
 }
 
+// TrySubmit attempts a non-blocking enqueue. Returns ErrQueueFull immediately
+// if the job channel has no capacity, or ErrPoolStopped if the pool has been
+// shut down.
+//
+// The stopped check and the channel send are both guarded by the read-lock so
+// that Stop (which holds the write-lock when it sets p.stopped) cannot sneak
+// in between the two operations. Because p.jobs is never closed while the pool
+// is running, the non-blocking send is safe.
 func (p *Pool) TrySubmit(event events.Event) error {
 	if p == nil {
 		return fmt.Errorf("worker pool is not configured")
@@ -151,6 +154,11 @@ func (p *Pool) TrySubmit(event events.Event) error {
 	}
 }
 
+// Stop signals all workers to exit and waits for them to finish.
+//
+// Crucially, p.jobs is NOT closed here. Closing a channel that other
+// goroutines may still be sending to causes a panic. Instead workers
+// watch stopCh and drain any remaining buffered events before returning.
 func (p *Pool) Stop() {
 	if p == nil {
 		return
@@ -163,7 +171,6 @@ func (p *Pool) Stop() {
 	}
 	p.stopped = true
 	close(p.stopCh)
-	close(p.jobs)
 	p.mu.Unlock()
 
 	p.wg.Wait()
@@ -185,30 +192,43 @@ func (p *Pool) Name() string {
 	return p.name
 }
 
+// runWorker is the per-goroutine event loop. It exits when either:
+//   - stopCh is closed (graceful shutdown): remaining buffered events are drained
+//     so that no accepted work is silently dropped.
+//   - ctx is cancelled: the worker stops immediately without draining, because
+//     the caller's context signals an abort, not a graceful stop.
 func (p *Pool) runWorker(ctx context.Context) {
 	defer p.wg.Done()
 
 	for {
 		select {
 		case <-ctx.Done():
+			// Caller context cancelled — stop immediately, do not drain.
+			return
+
+		case <-p.stopCh:
+			// Graceful shutdown: drain any already-buffered events before exiting
+			// so that work that was accepted prior to Stop() was not lost.
+			// A fresh background context is used because the original ctx may
+			// already be cancelled, which would make every handler call fail.
+			drainCtx := context.Background()
+			for {
+				select {
+				case event, ok := <-p.jobs:
+					if !ok {
+						return
+					}
+					p.doHandle(drainCtx, event)
+				default:
+					return
+				}
+			}
+
 		case event, ok := <-p.jobs:
 			if !ok {
 				return
 			}
 			p.doHandle(ctx, event)
-			continue
-		}
-
-		for {
-			select {
-			case event, ok := <-p.jobs:
-				if !ok {
-					return
-				}
-				p.doHandle(ctx, event)
-			default:
-				return
-			}
 		}
 	}
 }
