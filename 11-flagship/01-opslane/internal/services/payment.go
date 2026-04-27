@@ -117,12 +117,15 @@ func (s *PaymentService) ProcessPayment(ctx context.Context, job paymentflow.Job
 		if !samePaymentTarget(existing, normalized) {
 			return ProcessPaymentResult{}, ErrInvalidPayment
 		}
+		if err := s.syncPaymentToOrder(ctx, existing, order); err != nil {
+			return ProcessPaymentResult{Payment: existing, Created: false}, err
+		}
 		return ProcessPaymentResult{Payment: existing, Created: false}, nil
 	case !errors.Is(err, sql.ErrNoRows):
 		return ProcessPaymentResult{}, fmt.Errorf("lookup payment by provider reference: %w", err)
 	}
 
-	if order.Status != models.OrderStatusPending {
+	if order.Status != models.OrderStatusPending && order.Status != models.OrderStatusFailed {
 		return ProcessPaymentResult{}, fmt.Errorf("order is not in a state that accepts new payments: current status %s", order.Status)
 	}
 
@@ -256,6 +259,46 @@ func (s *PaymentService) applyPaymentStatusToOrder(ctx context.Context, payment 
 	})
 	if err != nil {
 		return fmt.Errorf("apply payment status to order: %w", err)
+	}
+
+	return nil
+}
+
+func (s *PaymentService) syncPaymentToOrder(ctx context.Context, payment models.Payment, order models.Order) error {
+	if payment.Status == models.PaymentStatusPending {
+		return nil
+	}
+
+	desiredOrderStatus := func() models.OrderStatus {
+		switch payment.Status {
+		case models.PaymentStatusSettled:
+			return models.OrderStatusPaid
+		case models.PaymentStatusFailed:
+			return models.OrderStatusFailed
+		default:
+			return ""
+		}
+	}()
+
+	if desiredOrderStatus == "" {
+		return nil
+	}
+
+	if order.Status == desiredOrderStatus {
+		return nil
+	}
+
+	if order.Status != models.OrderStatusProcessing {
+		return nil
+	}
+
+	_, err := s.orderWorkflow.TransitionOrder(ctx, TransitionOrderRequest{
+		TenantID: payment.TenantID,
+		OrderID:  payment.OrderID,
+		Status:   desiredOrderStatus,
+	})
+	if err != nil {
+		return fmt.Errorf("sync payment to order: %w", err)
 	}
 
 	return nil
