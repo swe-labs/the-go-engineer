@@ -17,8 +17,9 @@ import (
 )
 
 var (
-	ErrInvalidPayment  = errors.New("invalid payment")
-	ErrPaymentNotFound = errors.New("payment not found")
+	ErrInvalidPayment    = errors.New("invalid payment")
+	ErrPaymentNotFound   = errors.New("payment not found")
+	ErrOrderNotPayable   = errors.New("order not in a payable state")
 )
 
 const defaultPaymentGatewayTimeout = 2 * time.Second
@@ -126,7 +127,7 @@ func (s *PaymentService) ProcessPayment(ctx context.Context, job paymentflow.Job
 	}
 
 	if order.Status != models.OrderStatusPending && order.Status != models.OrderStatusFailed {
-		return ProcessPaymentResult{}, fmt.Errorf("order is not in a state that accepts new payments: current status %s", order.Status)
+		return ProcessPaymentResult{}, fmt.Errorf("%w: current status %s", ErrOrderNotPayable, order.Status)
 	}
 
 	payment := models.Payment{
@@ -148,6 +149,9 @@ func (s *PaymentService) ProcessPayment(ctx context.Context, job paymentflow.Job
 			}
 			if !samePaymentTarget(existing, normalized) {
 				return ProcessPaymentResult{}, ErrInvalidPayment
+			}
+			if err := s.syncPaymentToOrder(ctx, existing, order); err != nil {
+				return ProcessPaymentResult{Payment: existing, Created: false}, err
 			}
 			return ProcessPaymentResult{Payment: existing, Created: false}, nil
 		}

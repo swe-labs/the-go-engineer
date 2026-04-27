@@ -271,6 +271,8 @@ func (app *Application) handleCreatePayment(w http.ResponseWriter, r *http.Reque
 			app.writeError(w, r, http.StatusBadRequest, "invalid_payment", "payment does not match the tenant-scoped order")
 		case errors.Is(err, services.ErrOrderNotFound):
 			app.writeError(w, r, http.StatusNotFound, "order_not_found", "order does not exist for this tenant")
+		case errors.Is(err, services.ErrOrderNotPayable):
+			app.writeError(w, r, http.StatusConflict, "order_not_payable", "order is not in a payable state")
 		case errors.Is(err, paymentflow.ErrGatewayTimeout), errors.Is(err, paymentflow.ErrGatewayUnavailable):
 			writeJSON(w, http.StatusAccepted, result.Payment)
 		default:
