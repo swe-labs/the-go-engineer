@@ -151,7 +151,7 @@ type call struct {
 // Do executes fn once per key. Concurrent callers with the same key
 // block until the first caller's fn returns, then receive the same
 // result.
-func (sf *Singleflight) Do(key string, fn func() ([]byte, error)) ([]byte, error) {
+func (sf *Singleflight) Do(key string, fn func() ([]byte, error)) (val []byte, err error) {
 	sf.mu.Lock()
 	if sf.calls == nil {
 		sf.calls = make(map[string]*call)
@@ -168,8 +168,15 @@ func (sf *Singleflight) Do(key string, fn func() ([]byte, error)) ([]byte, error
 	sf.calls[key] = c
 	sf.mu.Unlock()
 
-	// Ensure cleanup runs even if fn() panics
+	// Ensure cleanup runs even if fn() panics.
+	// If a panic occurs, set c.err so that waiters receive an error
+	// instead of nil, nil — which would look like a successful empty result.
+	// Named returns ensure the leader also receives the error.
 	defer func() {
+		if r := recover(); r != nil {
+			c.err = fmt.Errorf("cache: singleflight panic: %v", r)
+			err = c.err
+		}
 		c.wg.Done()
 		sf.mu.Lock()
 		delete(sf.calls, key)
@@ -177,6 +184,7 @@ func (sf *Singleflight) Do(key string, fn func() ([]byte, error)) ([]byte, error
 	}()
 
 	c.val, c.err = fn()
-
-	return c.val, c.err
+	val = c.val
+	err = c.err
+	return
 }

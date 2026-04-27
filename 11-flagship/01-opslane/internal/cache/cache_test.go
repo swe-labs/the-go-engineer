@@ -285,27 +285,31 @@ func TestSingleflightPanicRecovery(t *testing.T) {
 	var sf Singleflight
 	key := "panic-key"
 
-	// First call panics
-	func() {
-		defer func() {
-			_ = recover()
-		}()
-		_, _ = sf.Do(key, func() ([]byte, error) {
-			panic("simulated panic")
-		})
-	}()
+	// First call panics — but Do should recover and return an error.
+	val, err := sf.Do(key, func() ([]byte, error) {
+		panic("simulated panic")
+	})
+	if err == nil {
+		t.Fatal("expected error from panic, got nil")
+	}
+	if val != nil {
+		t.Fatalf("expected nil value from panic, got %q", val)
+	}
+	if got := err.Error(); got != "cache: singleflight panic: simulated panic" {
+		t.Fatalf("unexpected error message: %s", got)
+	}
 
-	// Second call should not block, meaning the key was cleaned up and wg was released
+	// Second call should not block, meaning the key was cleaned up.
 	done := make(chan struct{})
 	go func() {
-		val, err := sf.Do(key, func() ([]byte, error) {
+		v, e := sf.Do(key, func() ([]byte, error) {
 			return []byte("recovered"), nil
 		})
-		if err != nil {
-			t.Errorf("Do returned error: %v", err)
+		if e != nil {
+			t.Errorf("Do returned error: %v", e)
 		}
-		if string(val) != "recovered" {
-			t.Errorf("Do = %q, want %q", val, "recovered")
+		if string(v) != "recovered" {
+			t.Errorf("Do = %q, want %q", v, "recovered")
 		}
 		close(done)
 	}()
