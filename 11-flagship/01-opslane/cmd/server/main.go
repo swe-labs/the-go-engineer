@@ -15,6 +15,7 @@ import (
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/config"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/handlers"
+	paymentflow "github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
@@ -53,10 +54,12 @@ func main() {
 	}
 
 	store := db.NewStore(database)
+	orders := services.NewOrderService(store, services.NewNoopInventoryCoordinator())
 	app := &handlers.Application{
 		Logger:            logger,
 		Store:             store,
-		Orders:            services.NewOrderService(store, services.NewNoopInventoryCoordinator()),
+		Orders:            orders,
+		Payments:          services.NewPaymentService(store, store, orders, paymentflow.NewSimulatedGateway(), services.PaymentServiceOptions{}),
 		Tokens:            tokens,
 		ServiceName:       cfg.App.Name,
 		Environment:       cfg.App.Env,

@@ -42,6 +42,8 @@ type OrderRepository interface {
 
 type PaymentRepository interface {
 	CreatePayment(ctx context.Context, payment *models.Payment) error
+	GetPaymentByProviderReference(ctx context.Context, tenantID int64, providerReference string) (models.Payment, error)
+	UpdatePaymentStatus(ctx context.Context, tenantID int64, providerReference string, status models.PaymentStatus, failureReason string) (models.Payment, error)
 	ListPaymentsByOrder(ctx context.Context, tenantID, orderID int64) ([]models.Payment, error)
 }
 
@@ -410,6 +412,67 @@ func (s *Store) CreatePayment(ctx context.Context, payment *models.Payment) erro
 	}
 
 	return nil
+}
+
+func (s *Store) GetPaymentByProviderReference(ctx context.Context, tenantID int64, providerReference string) (models.Payment, error) {
+	var payment models.Payment
+
+	err := s.q.QueryRowContext(
+		ctx,
+		`SELECT id, tenant_id, order_id, status, provider_reference, amount_cents, failure_reason, created_at, updated_at
+		 FROM payments
+		 WHERE tenant_id = $1 AND provider_reference = $2`,
+		tenantID,
+		providerReference,
+	).Scan(
+		&payment.ID,
+		&payment.TenantID,
+		&payment.OrderID,
+		&payment.Status,
+		&payment.ProviderReference,
+		&payment.AmountCents,
+		&payment.FailureReason,
+		&payment.CreatedAt,
+		&payment.UpdatedAt,
+	)
+	if err != nil {
+		return models.Payment{}, fmt.Errorf("get payment by provider reference: %w", err)
+	}
+
+	return payment, nil
+}
+
+func (s *Store) UpdatePaymentStatus(ctx context.Context, tenantID int64, providerReference string, status models.PaymentStatus, failureReason string) (models.Payment, error) {
+	var payment models.Payment
+	updatedAt := time.Now().UTC()
+
+	err := s.q.QueryRowContext(
+		ctx,
+		`UPDATE payments
+		 SET status = $3, failure_reason = $4, updated_at = $5
+		 WHERE tenant_id = $1 AND provider_reference = $2
+		 RETURNING id, tenant_id, order_id, status, provider_reference, amount_cents, failure_reason, created_at, updated_at`,
+		tenantID,
+		providerReference,
+		status,
+		failureReason,
+		updatedAt,
+	).Scan(
+		&payment.ID,
+		&payment.TenantID,
+		&payment.OrderID,
+		&payment.Status,
+		&payment.ProviderReference,
+		&payment.AmountCents,
+		&payment.FailureReason,
+		&payment.CreatedAt,
+		&payment.UpdatedAt,
+	)
+	if err != nil {
+		return models.Payment{}, fmt.Errorf("update payment status: %w", err)
+	}
+
+	return payment, nil
 }
 
 func (s *Store) ListPaymentsByOrder(ctx context.Context, tenantID, orderID int64) ([]models.Payment, error) {

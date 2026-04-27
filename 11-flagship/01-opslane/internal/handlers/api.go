@@ -15,6 +15,7 @@ import (
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
+	paymentflow "github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
@@ -248,37 +249,42 @@ func (app *Application) handleCreatePayment(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	status := req.Status
-	if status == "" {
-		status = models.PaymentStatusPending
-	}
-	if !isAllowedPaymentStatus(status) || req.OrderID <= 0 || req.AmountCents <= 0 || strings.TrimSpace(req.ProviderReference) == "" {
-		app.writeError(w, r, http.StatusBadRequest, "invalid_payment", "order_id, amount_cents, provider_reference, and valid status are required")
+	if req.OrderID <= 0 || req.AmountCents <= 0 || strings.TrimSpace(req.ProviderReference) == "" {
+		app.writeError(w, r, http.StatusBadRequest, "invalid_payment", "order_id, amount_cents, and provider_reference are required")
 		return
 	}
 
-	payment := models.Payment{
+	if app.Payments == nil {
+		app.writeError(w, r, http.StatusInternalServerError, "payment_service_unavailable", "payment service is not configured")
+		return
+	}
+
+	result, err := app.Payments.ProcessPayment(r.Context(), paymentflow.Job{
 		TenantID:          identity.TenantID,
 		OrderID:           req.OrderID,
-		Status:            status,
 		ProviderReference: strings.TrimSpace(req.ProviderReference),
 		AmountCents:       req.AmountCents,
-		FailureReason:     strings.TrimSpace(req.FailureReason),
-	}
-	if err := app.Store.CreatePayment(r.Context(), &payment); err != nil {
-		if errors.Is(err, db.ErrInvalidReference) {
+	})
+	if err != nil {
+		switch {
+		case errors.Is(err, services.ErrInvalidPayment):
+			app.writeError(w, r, http.StatusBadRequest, "invalid_payment", "payment does not match the tenant-scoped order")
+		case errors.Is(err, services.ErrOrderNotFound):
 			app.writeError(w, r, http.StatusNotFound, "order_not_found", "order does not exist for this tenant")
-			return
+		case errors.Is(err, paymentflow.ErrGatewayTimeout), errors.Is(err, paymentflow.ErrGatewayUnavailable):
+			writeJSON(w, http.StatusAccepted, result.Payment)
+		default:
+			app.writeError(w, r, http.StatusInternalServerError, "payment_create_failed", "failed to create payment")
 		}
-		if errors.Is(err, db.ErrDuplicateValue) {
-			app.writeError(w, r, http.StatusConflict, "duplicate_provider_reference", "provider_reference already exists for this tenant")
-			return
-		}
-		app.writeError(w, r, http.StatusInternalServerError, "payment_create_failed", "failed to create payment")
 		return
 	}
 
-	writeJSON(w, http.StatusCreated, payment)
+	statusCode := http.StatusCreated
+	if !result.Created {
+		statusCode = http.StatusOK
+	}
+
+	writeJSON(w, statusCode, result.Payment)
 }
 
 func (app *Application) handleListPaymentsByOrder(w http.ResponseWriter, r *http.Request) {
