@@ -109,6 +109,8 @@ var modules = []moduleSpec{
 		title: "Payment Pipeline",
 		testPkgs: []string{
 			"./internal/payment/...",
+			"./internal/services/...",
+			"./internal/handlers/...",
 		},
 		requiredFiles: []string{
 			"internal/payment/gateway.go",
@@ -116,7 +118,7 @@ var modules = []moduleSpec{
 			"internal/services/payment.go",
 		},
 		readmeDir: "modules/06-payment-pipeline",
-		nextStep:  "Add payment workflow boundaries after OPSL.5 is provable.",
+		nextStep:  "Continue into OPSL.7 after payment retries and reconciliation are provable.",
 	},
 	{
 		id:    "OPSL.7",

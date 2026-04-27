@@ -45,7 +45,8 @@ The current repository state is:
 - `OPSL.3` complete: authentication and tenant isolation
 - `OPSL.4` complete: HTTP API layer
 - `OPSL.5` complete: order processing
-- `OPSL.6` next: payment pipeline
+- `OPSL.6` complete: payment pipeline
+- `OPSL.7` next: event bus and worker pools
 
 Use the progress surface instead of guessing:
 
@@ -61,6 +62,7 @@ Then use the learner map:
 - [OPSL.3 module spec](./modules/03-auth/README.md)
 - [OPSL.4 module spec](./modules/04-http-api/README.md)
 - [OPSL.5 module spec](./modules/05-order-processing/README.md)
+- [OPSL.6 module spec](./modules/06-payment-pipeline/README.md)
 
 ## Module 5 Snapshot
 
@@ -74,6 +76,20 @@ Then use the learner map:
 This slice turns order creation into workflow code.
 The HTTP handler now parses the request and trusted identity, then hands business rules to the
 order service instead of writing straight through to persistence.
+
+## Module 6 Snapshot
+
+`OPSL.6` establishes:
+
+- an explicit payment gateway interface
+- a payment worker boundary for queued payment jobs
+- payment service logic for duplicate provider references, retries, and timeouts
+- reconciliation-safe pending payments when the gateway outcome is unknown
+- order workflow integration so settled payments mark orders paid and failed payments mark orders failed
+
+This slice turns payment creation into reliability-focused workflow code.
+The HTTP handler now creates a tenant-scoped payment job and lets the payment service decide how the
+database, gateway, and order state machine should cooperate.
 
 ## Run the Project
 
@@ -161,5 +177,5 @@ curl http://localhost:8080/api/v1/orders/1/payments \
 
 ## Next Step
 
-After `OPSL.5`, continue to [OPSL.6](./modules/06-payment-pipeline/README.md).
-That module moves payment handling behind its own reliability-focused workflow boundary.
+After `OPSL.6`, continue to [OPSL.7](./modules/07-event-workers/README.md).
+That module moves the payment and order workflow work into bounded asynchronous processing.

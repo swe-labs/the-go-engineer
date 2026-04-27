@@ -27,8 +27,8 @@ This file explains what each module means, what proof looks like, and what comes
 | `OPSL.3` | Authentication and Tenant Isolation | complete |
 | `OPSL.4` | HTTP API Layer | complete |
 | `OPSL.5` | Order Processing | complete |
-| `OPSL.6` | Payment Pipeline | next |
-| `OPSL.7` | Event Bus and Worker Pools | locked |
+| `OPSL.6` | Payment Pipeline | complete |
+| `OPSL.7` | Event Bus and Worker Pools | next |
 | `OPSL.8` | Caching Layer | locked |
 | `OPSL.9` | Observability | locked |
 | `OPSL.10` | Graceful Shutdown and Deployment | locked |
@@ -153,11 +153,19 @@ Read this module:
 
 What you build: payment retries, duplicate protection, and reconciliation-safe gateway flow.
 
-Target proof surface once this module is implemented:
+Proof surface:
 
-- `go test` passes for the future `11-flagship/01-opslane/internal/payment` package
-- retry and reconciliation tests prove duplicate protection
-- timeout handling is explicit and bounded
+```bash
+go test ./11-flagship/01-opslane/internal/payment/...
+go test ./11-flagship/01-opslane/internal/services/...
+go test ./11-flagship/01-opslane/internal/handlers/...
+```
+
+Behavior proof:
+
+- gateway timeout tests prove pending payments stay reconciliation-safe
+- duplicate provider references return existing payments instead of creating duplicate charges
+- reconciliation tests prove a delayed success can settle an existing pending payment
 
 Required files:
 
@@ -165,9 +173,10 @@ Required files:
 - `internal/payment/worker.go`
 - `internal/services/payment.go`
 
-Read this before starting:
+Read this module:
 
 - [modules/06-payment-pipeline/README.md](./modules/06-payment-pipeline/README.md)
+- [modules/06-payment-pipeline/SURFACE.md](./modules/06-payment-pipeline/SURFACE.md)
 
 ## OPSL.7 Event Bus and Worker Pools
 

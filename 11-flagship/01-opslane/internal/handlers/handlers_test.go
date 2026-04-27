@@ -14,6 +14,7 @@ import (
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
+	paymentflow "github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
@@ -412,7 +413,7 @@ func TestHealthRouteBypassesRateLimit(t *testing.T) {
 func TestCreatePaymentUsesAuthenticatedTenant(t *testing.T) {
 	t.Parallel()
 
-	store := &fakeStore{}
+	store := &fakeStore{orderByID: paymentTestOrder()}
 	app := newTestApplication(t, store)
 	token := issueHandlerTestToken(t, app.Tokens, auth.Identity{
 		UserID:   42,
@@ -438,15 +439,15 @@ func TestCreatePaymentUsesAuthenticatedTenant(t *testing.T) {
 		t.Fatalf("payment tenant = %d, want 7", store.createdPayment.TenantID)
 	}
 
-	if store.createdPayment.Status != models.PaymentStatusPending {
-		t.Fatalf("payment status = %q, want pending", store.createdPayment.Status)
+	if store.updatedPayment.Status != models.PaymentStatusSettled {
+		t.Fatalf("payment status = %q, want settled", store.updatedPayment.Status)
 	}
 }
 
 func TestCreatePaymentReturnsNotFoundForInvalidOrder(t *testing.T) {
 	t.Parallel()
 
-	store := &fakeStore{createPaymentErr: db.ErrInvalidReference}
+	store := &fakeStore{}
 	app := newTestApplication(t, store)
 	token := issueHandlerTestToken(t, app.Tokens, auth.Identity{
 		UserID:   42,
@@ -478,10 +479,22 @@ func TestCreatePaymentReturnsNotFoundForInvalidOrder(t *testing.T) {
 	}
 }
 
-func TestCreatePaymentReturnsConflictForDuplicateProviderReference(t *testing.T) {
+func TestCreatePaymentReturnsExistingPaymentForDuplicateProviderReference(t *testing.T) {
 	t.Parallel()
 
-	store := &fakeStore{createPaymentErr: db.ErrDuplicateValue}
+	store := &fakeStore{
+		orderByID: paymentTestOrder(),
+		paymentByReference: models.Payment{
+			ID:                501,
+			TenantID:          7,
+			OrderID:           101,
+			Status:            models.PaymentStatusSettled,
+			ProviderReference: "pay_123",
+			AmountCents:       2500,
+			CreatedAt:         time.Now().UTC(),
+			UpdatedAt:         time.Now().UTC(),
+		},
+	}
 	app := newTestApplication(t, store)
 	token := issueHandlerTestToken(t, app.Tokens, auth.Identity{
 		UserID:   42,
@@ -499,17 +512,17 @@ func TestCreatePaymentReturnsConflictForDuplicateProviderReference(t *testing.T)
 
 	app.Routes().ServeHTTP(res, req)
 
-	if res.Code != http.StatusConflict {
-		t.Fatalf("status = %d, want %d", res.Code, http.StatusConflict)
+	if res.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", res.Code, http.StatusOK)
 	}
 
-	var payload map[string]map[string]string
+	var payload models.Payment
 	if err := json.NewDecoder(res.Body).Decode(&payload); err != nil {
 		t.Fatalf("decode response: %v", err)
 	}
 
-	if payload["error"]["code"] != "duplicate_provider_reference" {
-		t.Fatalf("error code = %q, want duplicate_provider_reference", payload["error"]["code"])
+	if payload.ID != 501 {
+		t.Fatalf("payment id = %d, want existing payment 501", payload.ID)
 	}
 }
 
@@ -564,10 +577,12 @@ func newHandlerTestTokenManager(t *testing.T) *auth.TokenManager {
 func newTestApplication(t *testing.T, store Store) *Application {
 	t.Helper()
 
+	orders := services.NewOrderService(store, services.NewNoopInventoryCoordinator())
 	return &Application{
 		Logger:      slog.Default(),
 		Store:       store,
-		Orders:      services.NewOrderService(store, services.NewNoopInventoryCoordinator()),
+		Orders:      orders,
+		Payments:    services.NewPaymentService(store, store, orders, paymentflow.NewSimulatedGateway(), services.PaymentServiceOptions{GatewayTimeout: time.Second, MaxAttempts: 1}),
 		Tokens:      newHandlerTestTokenManager(t),
 		ServiceName: "opslane",
 		Environment: "test",
@@ -586,24 +601,28 @@ func issueHandlerTestToken(t *testing.T, tokens *auth.TokenManager, identity aut
 }
 
 type fakeStore struct {
-	createdTenant         models.Tenant
-	createTenantErr       error
-	createdUser           models.User
-	createUserErr         error
-	userByEmail           models.User
-	orderByID             models.Order
-	orderByIDErr          error
-	orderByIdempotencyKey models.Order
-	orderByIdempotencyErr error
-	createdOrder          models.Order
-	createOrderCalls      int
-	createOrderErr        error
-	updatedOrder          models.Order
-	updateOrderStatusErr  error
-	createdPayment        models.Payment
-	createPaymentErr      error
-	listPaymentsTenantID  int64
-	listPaymentsOrderID   int64
+	createdTenant          models.Tenant
+	createTenantErr        error
+	createdUser            models.User
+	createUserErr          error
+	userByEmail            models.User
+	orderByID              models.Order
+	orderByIDErr           error
+	orderByIdempotencyKey  models.Order
+	orderByIdempotencyErr  error
+	createdOrder           models.Order
+	createOrderCalls       int
+	createOrderErr         error
+	updatedOrder           models.Order
+	updateOrderStatusErr   error
+	createdPayment         models.Payment
+	createPaymentErr       error
+	paymentByReference     models.Payment
+	paymentByReferenceErr  error
+	updatedPayment         models.Payment
+	updatePaymentStatusErr error
+	listPaymentsTenantID   int64
+	listPaymentsOrderID    int64
 }
 
 func (s *fakeStore) Ping(context.Context) error {
@@ -679,6 +698,7 @@ func (s *fakeStore) UpdateOrderStatus(_ context.Context, _ int64, _ int64, statu
 	s.updatedOrder = s.orderByID
 	s.updatedOrder.Status = status
 	s.updatedOrder.UpdatedAt = time.Now().UTC()
+	s.orderByID = s.updatedOrder
 	return s.updatedOrder, nil
 }
 
@@ -698,8 +718,55 @@ func (s *fakeStore) CreatePayment(_ context.Context, payment *models.Payment) er
 	return nil
 }
 
+func (s *fakeStore) GetPaymentByProviderReference(context.Context, int64, string) (models.Payment, error) {
+	if s.paymentByReferenceErr != nil {
+		return models.Payment{}, s.paymentByReferenceErr
+	}
+	if s.paymentByReference.ID == 0 {
+		return models.Payment{}, sql.ErrNoRows
+	}
+
+	return s.paymentByReference, nil
+}
+
+func (s *fakeStore) UpdatePaymentStatus(_ context.Context, tenantID int64, providerReference string, status models.PaymentStatus, failureReason string) (models.Payment, error) {
+	if s.updatePaymentStatusErr != nil {
+		return models.Payment{}, s.updatePaymentStatusErr
+	}
+
+	payment := s.createdPayment
+	if payment.ID == 0 || payment.TenantID != tenantID || payment.ProviderReference != providerReference {
+		payment = s.paymentByReference
+	}
+	if payment.ID == 0 {
+		return models.Payment{}, sql.ErrNoRows
+	}
+
+	payment.Status = status
+	payment.FailureReason = failureReason
+	payment.UpdatedAt = time.Now().UTC()
+	s.updatedPayment = payment
+	s.paymentByReference = payment
+	return payment, nil
+}
+
 func (s *fakeStore) ListPaymentsByOrder(_ context.Context, tenantID, orderID int64) ([]models.Payment, error) {
 	s.listPaymentsTenantID = tenantID
 	s.listPaymentsOrderID = orderID
 	return []models.Payment{s.createdPayment}, nil
+}
+
+func paymentTestOrder() models.Order {
+	now := time.Now().UTC()
+	return models.Order{
+		ID:             101,
+		TenantID:       7,
+		UserID:         42,
+		Status:         models.OrderStatusPending,
+		TotalCents:     2500,
+		Currency:       "USD",
+		IdempotencyKey: "checkout-123",
+		CreatedAt:      now,
+		UpdatedAt:      now,
+	}
 }

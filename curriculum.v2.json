@@ -4702,14 +4702,14 @@
       "type": "checkpoint",
       "subtype": "",
       "level": "production",
-      "status": "placeholder",
+      "status": "implemented",
       "verification_mode": "test",
       "path": "11-flagship/01-opslane/modules/06-payment-pipeline",
       "prerequisites": [
         "OPSL.5"
       ],
       "run_command": "",
-      "test_command": "go test ./11-flagship/01-opslane/internal/payment/...",
+      "test_command": "go test ./11-flagship/01-opslane/internal/payment/... ./11-flagship/01-opslane/internal/services/... ./11-flagship/01-opslane/internal/handlers/...",
       "starter_path": "",
       "next_items": [
         "OPSL.7"

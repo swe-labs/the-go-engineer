@@ -14,6 +14,7 @@ import (
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/middleware"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/models"
+	paymentflow "github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
@@ -25,6 +26,7 @@ type Application struct {
 	Logger            *slog.Logger
 	Store             Store
 	Orders            OrderWorkflow
+	Payments          PaymentWorkflow
 	Tokens            *auth.TokenManager
 	ServiceName       string
 	Environment       string
@@ -33,6 +35,10 @@ type Application struct {
 
 type OrderWorkflow interface {
 	CreateOrder(ctx context.Context, input services.CreateOrderInput) (services.CreateOrderResult, error)
+}
+
+type PaymentWorkflow interface {
+	ProcessPayment(ctx context.Context, job paymentflow.Job) (services.ProcessPaymentResult, error)
 }
 
 type Store interface {
@@ -46,6 +52,8 @@ type Store interface {
 	UpdateOrderStatus(ctx context.Context, tenantID, orderID int64, status models.OrderStatus) (models.Order, error)
 	ListOrdersByTenant(ctx context.Context, tenantID int64) ([]models.Order, error)
 	CreatePayment(ctx context.Context, payment *models.Payment) error
+	GetPaymentByProviderReference(ctx context.Context, tenantID int64, providerReference string) (models.Payment, error)
+	UpdatePaymentStatus(ctx context.Context, tenantID int64, providerReference string, status models.PaymentStatus, failureReason string) (models.Payment, error)
 	ListPaymentsByOrder(ctx context.Context, tenantID, orderID int64) ([]models.Payment, error)
 }
 
