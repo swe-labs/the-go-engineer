@@ -188,11 +188,11 @@ type AppMetrics struct {
 	Registry *Registry
 
 	// HTTP
-	HTTPRequestsTotal    *Counter
-	HTTPRequestDuration  *Histogram
-	HTTPResponses2xx     *Counter
-	HTTPResponses4xx     *Counter
-	HTTPResponses5xx     *Counter
+	HTTPRequestsTotal   *Counter
+	HTTPRequestDuration *Histogram
+	HTTPResponses2xx    *Counter
+	HTTPResponses4xx    *Counter
+	HTTPResponses5xx    *Counter
 
 	// Cache
 	CacheHits   *Counter

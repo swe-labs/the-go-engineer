@@ -48,11 +48,11 @@ func TestHistogramBucketDistribution(t *testing.T) {
 
 	h := NewHistogram([]float64{1, 5, 10})
 
-	h.Observe(0.5)  // bucket 0 (<=1)
-	h.Observe(3)    // bucket 1 (<=5)
-	h.Observe(7)    // bucket 2 (<=10)
-	h.Observe(15)   // overflow bucket
-	h.Observe(1)    // bucket 0 (<=1)
+	h.Observe(0.5) // bucket 0 (<=1)
+	h.Observe(3)   // bucket 1 (<=5)
+	h.Observe(7)   // bucket 2 (<=10)
+	h.Observe(15)  // overflow bucket
+	h.Observe(1)   // bucket 0 (<=1)
 
 	snap := h.Snapshot()
 
