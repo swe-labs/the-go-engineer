@@ -9,14 +9,17 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"sync/atomic"
 	"time"
 
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/config"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/db"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/events"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/handlers"
 	paymentflow "github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/services"
+	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/workers"
 )
 
 const startupDatabaseTimeout = 10 * time.Second
@@ -55,15 +58,47 @@ func main() {
 
 	store := db.NewStore(database)
 	orders := services.NewOrderService(store, services.NewNoopInventoryCoordinator())
+	payments := services.NewPaymentService(store, store, orders, paymentflow.NewSimulatedGateway(), services.PaymentServiceOptions{})
+
+	// Initialize background systems
+	bus := events.NewBus(1000)
+
+	orderPool, err := workers.NewPool(workers.PoolConfig{
+		Name:      "orders",
+		Workers:   3,
+		QueueSize: 500,
+		Handler:   workers.OrderProcessor{Workflow: orders}.Handle,
+	})
+	if err != nil {
+		logger.Error("failed to create order worker pool", slog.Any("error", err))
+		os.Exit(1)
+	}
+	_ = orderPool.Start(context.Background())
+
+	paymentPool, err := workers.NewPool(workers.PoolConfig{
+		Name:      "payments",
+		Workers:   3,
+		QueueSize: 500,
+		Handler:   workers.PaymentProcessor{Workflow: payments}.Handle,
+	})
+	if err != nil {
+		logger.Error("failed to create payment worker pool", slog.Any("error", err))
+		os.Exit(1)
+	}
+	_ = paymentPool.Start(context.Background())
+
+	isDraining := &atomic.Bool{}
+
 	app := &handlers.Application{
 		Logger:            logger,
 		Store:             store,
 		Orders:            orders,
-		Payments:          services.NewPaymentService(store, store, orders, paymentflow.NewSimulatedGateway(), services.PaymentServiceOptions{}),
+		Payments:          payments,
 		Tokens:            tokens,
 		ServiceName:       cfg.App.Name,
 		Environment:       cfg.App.Env,
 		TrustedProxyCIDRs: cfg.HTTP.TrustedProxyCIDRs,
+		IsDraining:        isDraining,
 	}
 
 	server := &http.Server{
@@ -81,8 +116,15 @@ func main() {
 		slog.String("database", "postgresql"),
 	)
 
+	idleConnsClosed := setupGracefulShutdown(server, logger, isDraining, bus, orderPool, paymentPool)
+
 	if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		logger.Error("server stopped unexpectedly", slog.Any("error", err))
 		os.Exit(1)
 	}
+
+	// Wait for graceful shutdown sequence to complete before returning and dropping
+	// the database connection (via defer database.Close()).
+	<-idleConnsClosed
+	logger.Info("opslane server gracefully stopped")
 }

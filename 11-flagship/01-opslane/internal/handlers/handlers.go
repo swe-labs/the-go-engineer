@@ -9,6 +9,7 @@ import (
 	"log/slog"
 	"net/http"
 	"net/netip"
+	"sync/atomic"
 	"time"
 
 	"github.com/rasel9t6/the-go-engineer/11-flagship/01-opslane/internal/auth"
@@ -31,6 +32,7 @@ type Application struct {
 	ServiceName       string
 	Environment       string
 	TrustedProxyCIDRs []netip.Prefix
+	IsDraining        *atomic.Bool
 }
 
 type OrderWorkflow interface {
@@ -115,6 +117,11 @@ func (app *Application) handleHealth(w http.ResponseWriter, r *http.Request) {
 		statusCode = http.StatusServiceUnavailable
 		databaseStatus = "degraded"
 		serviceStatus = "degraded"
+	}
+
+	if app.IsDraining != nil && app.IsDraining.Load() {
+		statusCode = http.StatusServiceUnavailable
+		serviceStatus = "draining"
 	}
 
 	writeJSON(w, statusCode, map[string]string{

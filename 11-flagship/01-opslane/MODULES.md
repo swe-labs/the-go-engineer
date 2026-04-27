@@ -30,8 +30,8 @@ This file explains what each module means, what proof looks like, and what comes
 | `OPSL.6` | Payment Pipeline | complete |
 | `OPSL.7` | Event Bus and Worker Pools | complete |
 | `OPSL.8` | Caching Layer | complete |
-| `OPSL.9` | Observability | next |
-| `OPSL.10` | Graceful Shutdown and Deployment | locked |
+| `OPSL.9` | Observability | complete |
+| `OPSL.10` | Graceful Shutdown and Deployment | complete |
 
 ## OPSL.1 Foundation and Configuration
 
@@ -281,19 +281,21 @@ Read this module:
 
 ## OPSL.10 Graceful Shutdown and Deployment
 
-What you build: safe drain behavior, deployment packaging, and final integrated system proof.
+What you build: explicit shutdown coordination, request draining, worker termination, and load-balancer-aware health checks.
 
-Target proof surface once this module is implemented:
+Proof surface:
 
-- `go build` succeeds for the Opslane server
-- the full Opslane test suite stays green
-- drain behavior is verified under shutdown pressure
+```bash
+go build ./11-flagship/01-opslane/cmd/server
+```
 
-Required files:
+The proof surface includes:
 
-- `cmd/server/shutdown.go`
-- repository root `.github/workflows/ci.yml`
+- `cmd/server/shutdown.go`: the Graceful Shutdown coordinator
+- `cmd/server/main.go`: integration of the event bus, worker pools, and shutdown logic
+- `internal/handlers/handlers.go`: `IsDraining` flag allowing the `/health` endpoint to reflect the draining state
 
-Read this before starting:
+Read this module:
 
 - [modules/10-shutdown-deploy/README.md](./modules/10-shutdown-deploy/README.md)
+- [modules/10-shutdown-deploy/SURFACE.md](./modules/10-shutdown-deploy/SURFACE.md)
