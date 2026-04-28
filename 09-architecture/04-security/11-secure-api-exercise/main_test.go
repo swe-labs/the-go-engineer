@@ -1,12 +1,20 @@
 package main
 
 import (
+	"os/exec"
+	"strings"
 	"testing"
 )
 
-// TestExercise acts as a structural test to ensure the package builds
-// and to fulfill the curriculum testing requirement for main packages
-// that demonstrate structural or build-time concepts.
-func TestExercise(t *testing.T) {
-	// If the package compiles, the structural test passes.
+func TestExerciseOutput(t *testing.T) {
+	cmd := exec.Command("go", "run", "main.go")
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		t.Logf("Process exited with error (this might be expected): %v", err)
+	}
+
+	outStr := string(output)
+	if !strings.Contains(outStr, "=== SEC.11 Secure API ===") {
+		t.Errorf("Expected output to contain '%s', got:\n%s", "=== SEC.11 Secure API ===", outStr)
+	}
 }
