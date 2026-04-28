@@ -8,16 +8,19 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Coordinate readiness, HTTP draining, worker draining, and final cleanup in one production-style shutdown flow. This surface is the graceful-shutdow...
+//   - Coordinate: readiness, HTTP draining, worker draining, and cleanup in one flow
+//   - Shutdown dependency order: listener -> requests -> workers -> DB -> logs -> exit
+//   - Health endpoint: 503 "Shutting Down" during drain window
+//   - Kubernetes readiness vs liveness probes
 //
 // WHY THIS MATTERS:
-//   - [TODO: Missing Mental Model in README]
-//
-// RUN:
-//   go run ./10-production/02-graceful-shutdown/3-capstone
+//   - Order matters: closing DB before requests finish = crash.
+//   - Readiness probe returns 503 when SIGTERM arrives -> removes pod from LB.
+//   - Liveness probe returns 503 only if you want Kubernetes to RESTART.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Signal -> stop HTTP -> drain requests -> stop workers -> close DB -> flush logs.
+//   - 503 during drain window protects the load balancer.
 // ============================================================================
 
 package main

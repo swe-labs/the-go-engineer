@@ -8,16 +8,17 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - The slog.Handler interface: the 4 methods
+//   - Building a pretty-print terminal handler
+//   - Thread-safety: mutex pattern for concurrent writes
+//   - Fan out to multiple handlers
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
-//
-// RUN:
-//   go run ./10-production/01-structured-logging/3-custom-handler
+//   - slog.Handler is the extension point for the entire logging ecosystem.
+//   - Every backend (Datadog, Sentry, OpenTelemetry) plugs in via this interface.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Implement the 4-method interface to create custom logging backends.
 // ============================================================================
 
 package main

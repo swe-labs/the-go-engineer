@@ -8,16 +8,18 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - What the //go:generate directive actually does
+//   - Why code generation is a build-time workflow, not runtime reflection
+//   - When to generate code vs keep things handwritten
+//   - How mockery, stringer, sqlc fit into the same workflow
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
-//
-// RUN:
-//   go run ./10-production/06-code-generation/1-go-generate
+//   - Reflection: flexible but fails at runtime.
+//   - Generation: heavier build but fails early.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Go scans for //go:generate, runs tool, writes generated files.
+//   - You review and commit generated output intentionally.
 // ============================================================================
 
 package main

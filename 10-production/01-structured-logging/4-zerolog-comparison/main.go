@@ -8,16 +8,19 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - Why zerolog exists: allocation-free logging via builder chain
+//   - How zerolog's API compares to slog's API
+//   - When to choose zerolog over slog (and when NOT to)
+//   - What "allocation-free" actually means
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
-//
-// RUN:
-//   go run ./10-production/01-structured-logging/4-zerolog-comparison
+//   - slog allocates per log call: Attr struct, Value union, Record.
+//   - At 10,000 req/s this creates significant GC pressure.
+//   - zerolog writes directly to sync.Pool buffer — zero allocations.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Use zerolog only when performance pressure justifies it.
+//   - Benchmark: slog ~340ns/op (4 alloc), zerolog ~82ns/op (0 alloc).
 // ============================================================================
 
 package main

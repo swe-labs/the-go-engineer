@@ -17,7 +17,8 @@
 //   go run ./10-production/03-docker-and-deployment/4-cicd-pipelines
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Pipeline stages: build -> test -> package -> deploy.
+//   - Each stage must be repeatable and automatable.
 // ============================================================================
 
 package main

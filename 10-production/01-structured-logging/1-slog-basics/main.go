@@ -8,16 +8,19 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - Why structured logging beats fmt.Printf for production systems
+//   - slog.TextHandler vs slog.JSONHandler
+//   - Log levels: Debug, Info, Warn, Error
+//   - Attributes: typed key-value pairs attached to log records
+//   - Groups: namespacing related attributes together
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
-//
-// RUN:
-//   go run ./10-production/01-structured-logging/1-slog-basics
+//   - Every log statement is a contract with your future self at 3am.
+//   - fmt.Println gives you one string to grep; slog gives you queryable fields.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - slog separates RECORD (what happened) from HANDLER (where it goes).
+//   - Swap output formats without changing call sites.
 // ============================================================================
 
 package main

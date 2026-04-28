@@ -8,16 +8,20 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - http.Server.Shutdown(): drain in-flight requests without cutting them
+//   - The production graceful shutdown pattern:
+//     signal -> stop accepting -> drain requests -> close DB -> exit
+//   - Why log.Fatal(http.ListenAndServe(...)) is wrong for production
+//   - Testing graceful shutdown
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
-//
-// RUN:
-//   go run ./10-production/02-graceful-shutdown/2-http-server
+//   - Rolling deployments: Kubernetes sends SIGTERM while traffic still arrives.
+//   - Without Shutdown(): 502 errors during deploy.
+//   - With Shutdown(): waits for requests to complete -> 0 errors.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - http.Server.Shutdown() closes listener, waits for active requests to complete.
+//   - Check for http.ErrServerClosed to distinguish clean exit from errors.
 // ============================================================================
 
 package main

@@ -17,7 +17,9 @@
 //   go run ./10-production/04-configuration/3-flag-parsing
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Flags are explicit one-start overrides.
+//   - Do not hide critical startup behavior behind undocumented flags.
+//   - Define precedence clearly across flags, files, and environment.
 // ============================================================================
 
 package main

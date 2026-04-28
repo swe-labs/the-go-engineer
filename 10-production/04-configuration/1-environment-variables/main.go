@@ -17,7 +17,9 @@
 //   go run ./10-production/04-configuration/1-environment-variables
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Environment variables are late-bound process configuration.
+//   - Missing or malformed values should fail fast.
+//   - Keep names stable and documented.
 // ============================================================================
 
 package main

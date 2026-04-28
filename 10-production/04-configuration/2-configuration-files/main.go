@@ -17,7 +17,9 @@
 //   go run ./10-production/04-configuration/2-configuration-files
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Structured files help when config has nested shape.
+//   - Parsing is not validation; do both.
+//   - Document precedence between file values and environment overrides.
 // ============================================================================
 
 package main

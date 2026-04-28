@@ -17,7 +17,8 @@
 //   go run ./10-production/03-docker-and-deployment/2-multi-stage-builds
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - One stage builds the binary; a later stage runs only the binary.
+//   - Multi-stage builds keep images small and build tools out of runtime.
 // ============================================================================
 
 package main

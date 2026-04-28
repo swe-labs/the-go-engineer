@@ -17,7 +17,9 @@
 //   go run ./10-production/03-docker-and-deployment/1-docker-basics
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Images are build outputs; containers are running instances.
+//   - Dockerfiles describe how the image is assembled.
+//   - Layer order influences rebuild speed and image cleanliness.
 // ============================================================================
 
 package main

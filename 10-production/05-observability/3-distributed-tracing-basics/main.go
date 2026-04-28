@@ -17,7 +17,9 @@
 //   go run ./10-production/05-observability/3-distributed-tracing-basics
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Trace shows one request across many services.
+//   - Span explains where latency was spent inside that request.
+//   - Context propagation carries trace ID through boundaries.
 // ============================================================================
 
 package main

@@ -17,7 +17,8 @@
 //   go run ./10-production/03-docker-and-deployment/3-docker-compose
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Compose coordinates multiple services and shared networks locally.
+//   - Define environment defaults in docker-compose.yaml for development teams.
 // ============================================================================
 
 package main

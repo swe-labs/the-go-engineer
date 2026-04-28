@@ -8,16 +8,14 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Use `slog.HandlerOptions.ReplaceAttr` to build a logger that automatically redacts sensitive attributes before they reach the output handler. This ...
+//   - Use slog.HandlerOptions.ReplaceAttr to build a logger that automatically redacts sensitive attributes before they reach the output handler.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Missing Mental Model in README]
-//
-// RUN:
-//   go run ./10-production/01-structured-logging/5-exercise
+//   - GDPR, PCI-DSS, and HIPAA require specific handling of PII.
+//   - ReplaceAttr is the hook to centrally enforce redaction.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - One ReplaceAttr function protects all downstream handlers.
 // ============================================================================
 
 package main

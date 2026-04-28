@@ -8,16 +8,17 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - How to use mockery for automatic mock generation
+//   - Integrating mockery with //go:generate
+//   - Benefits of mocking at the consumer's request
+//   - Improving developer experience through automated test doubles
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
-//
-// RUN:
-//   go run ./10-production/06-code-generation/2-mockery
+//   - Manual mocking scales poorly; interface changes require manual mock updates.
+//   - Mockery parses code and generates type-safe mock structs.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Define interface -> add directive -> run go generate -> use generated mock.
 // ============================================================================
 
 package main

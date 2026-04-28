@@ -17,7 +17,9 @@
 //   go run ./10-production/04-configuration/5-config-validation-on-boot
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Validate required config before serving traffic.
+//   - Collect configuration into one typed structure before deeper initialization.
+//   - Make startup errors specific enough that an operator can fix them quickly.
 // ============================================================================
 
 package main

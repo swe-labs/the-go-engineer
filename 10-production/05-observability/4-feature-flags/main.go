@@ -17,7 +17,9 @@
 //   go run ./10-production/05-observability/4-feature-flags
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Flags separate rollout from deployment.
+//   - Targeting rules should be simple and inspectable.
+//   - Remove flags once rollout decision is finished.
 // ============================================================================
 
 package main

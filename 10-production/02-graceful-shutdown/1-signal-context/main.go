@@ -8,16 +8,18 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - How OS signals work: SIGTERM (graceful stop) vs SIGKILL (force kill)
+//   - signal.NotifyContext: idiomatic Go 1.16+ signal handling API
+//   - Why every production binary must handle SIGTERM
+//   - Difference between NotifyContext and old signal.Notify pattern
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
-//
-// RUN:
-//   go run ./10-production/02-graceful-shutdown/1-signal-context
+//   - Deployment sequence: docker stop -> SIGTERM -> 30s to clean up -> SIGKILL.
+//   - Before NotifyContext: manual goroutine, potential panics, ignored errors.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - signal.NotifyContext integrates with context-aware APIs (DB, HTTP, gRPC).
+//   - Every production binary must handle SIGTERM to avoid data loss.
 // ============================================================================
 
 package main

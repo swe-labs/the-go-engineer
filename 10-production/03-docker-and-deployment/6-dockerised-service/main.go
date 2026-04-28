@@ -17,7 +17,8 @@
 //   go run ./10-production/03-docker-and-deployment/6-dockerised-service
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - A deployment exercise proves code, container, and ops assumptions work together.
+//   - Package config, build, and rollout into one coherent surface.
 // ============================================================================
 
 package main

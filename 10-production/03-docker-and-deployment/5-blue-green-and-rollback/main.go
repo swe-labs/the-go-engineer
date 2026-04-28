@@ -17,7 +17,8 @@
 //   go run ./10-production/03-docker-and-deployment/5-blue-green-and-rollback
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Blue/green: run two versions, switch traffic atomically.
+//   - Rollback: switch back to previous version when release is bad.
 // ============================================================================
 
 package main

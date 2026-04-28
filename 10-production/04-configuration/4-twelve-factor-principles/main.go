@@ -17,7 +17,9 @@
 //   go run ./10-production/04-configuration/4-twelve-factor-principles
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Store config in the environment, not in code.
+//   - Keep build, release, and run concerns separate.
+//   - Treat logs and backing services as platform concerns.
 // ============================================================================
 
 package main

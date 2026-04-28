@@ -17,7 +17,9 @@
 //   go run ./10-production/05-observability/2-prometheus-integration
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Prometheus pulls metrics on a regular interval (scrape model).
+//   - Expose a scrape-friendly /metrics endpoint.
+//   - Label discipline keeps data bounded.
 // ============================================================================
 
 package main

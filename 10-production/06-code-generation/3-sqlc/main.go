@@ -8,16 +8,18 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Generate typed Go query code from real SQL schema and query files so the database layer stays explicit, reviewable, and checked at build time. This...
+//   - Generate typed Go query code from SQL schema and query files
+//   - Using sqlc.yaml for configuration
+//   - Schema-driven development vs ORMs
+//   - Interface generation for easier testing
 //
 // WHY THIS MATTERS:
-//   - [TODO: Missing Mental Model in README]
-//
-// RUN:
-//   go run ./10-production/06-code-generation/3-sqlc
+//   - ORMs reflect at runtime (flexible but slow, magic errors).
+//   - sqlc generates at compile time: zero runtime overhead, fails fast.
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Write SQL first, sqlc generates type-safe Go at build time.
+//   - Column rename fails at build, not in production.
 // ============================================================================
 
 package main

@@ -8,16 +8,19 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - Storing a logger in context for request-scoped fields
+//   - HTTP middleware that injects logger into request context
+//   - Extracting logger from context in handler functions
+//   - Why context-based logging beats global singletons
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
-//
-// RUN:
-//   go run ./10-production/01-structured-logging/2-context-logger
+//   - Connect all log lines from a single HTTP request using request_id.
+//   - Options: global logger (bad, thread-unsafe), pass as param (verbose),
+//     or store in context (idiomatic, Google-mandated).
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Every function in a request chain carries the same request_id via context.
+//   - One middleware line wires it up; works everywhere.
 // ============================================================================
 
 package main

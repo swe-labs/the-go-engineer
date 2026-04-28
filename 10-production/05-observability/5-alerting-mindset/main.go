@@ -17,7 +17,9 @@
 //   go run ./10-production/05-observability/5-alerting-mindset
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Alert on symptoms that matter to users or service health.
+//   - Tie alerts to runbooks or clear first actions.
+//   - Use service objectives to decide what deserves a page.
 // ============================================================================
 
 package main
