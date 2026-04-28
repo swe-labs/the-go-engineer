@@ -49,6 +49,8 @@ type OrderService struct {
 	inventory InventoryCoordinator
 }
 
+// NewOrderService initializes the core business logic for order management.
+// If no inventory coordinator is provided, it defaults to a no-op implementation.
 func NewOrderService(orders OrderRepository, inventory InventoryCoordinator) *OrderService {
 	if inventory == nil {
 		noop := NewNoopInventoryCoordinator()
@@ -61,6 +63,9 @@ func NewOrderService(orders OrderRepository, inventory InventoryCoordinator) *Or
 	}
 }
 
+// CreateOrder handles the business logic of initiating a new purchase.
+// It reserves inventory synchronously before writing to the database, ensuring
+// that stock cannot be oversold even under high concurrency.
 func (s *OrderService) CreateOrder(ctx context.Context, input CreateOrderInput) (CreateOrderResult, error) {
 	if s == nil || s.orders == nil || s.inventory == nil {
 		return CreateOrderResult{}, fmt.Errorf("order service is not configured")
@@ -127,6 +132,9 @@ func (s *OrderService) CreateOrder(ctx context.Context, input CreateOrderInput) 
 	}, nil
 }
 
+// TransitionOrder safely moves an order from one state to another (e.g. Pending -> Paid).
+// It coordinates state-specific side effects, such as releasing inventory holds
+// when an order is cancelled or marked as failed.
 func (s *OrderService) TransitionOrder(ctx context.Context, req TransitionOrderRequest) (models.Order, error) {
 	if s == nil || s.orders == nil || s.inventory == nil {
 		return models.Order{}, fmt.Errorf("order service is not configured")

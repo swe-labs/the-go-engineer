@@ -17,8 +17,11 @@ import (
 )
 
 var (
-	ErrInvalidPayment  = errors.New("invalid payment")
+	// ErrInvalidPayment is returned when a payment request lacks required data or attempts an illegal state transition.
+	ErrInvalidPayment = errors.New("invalid payment")
+	// ErrPaymentNotFound is returned when a specific provider reference cannot be located in the database.
 	ErrPaymentNotFound = errors.New("payment not found")
+	// ErrOrderNotPayable is returned when attempting to pay for an order that is already paid, cancelled, or in an invalid state.
 	ErrOrderNotPayable = errors.New("order not in a payable state")
 )
 
@@ -42,16 +45,20 @@ type PaymentOrderWorkflow interface {
 	TransitionOrder(ctx context.Context, req TransitionOrderRequest) (models.Order, error)
 }
 
+// PaymentServiceOptions allows configuring retries and timeouts for the payment gateway.
 type PaymentServiceOptions struct {
 	GatewayTimeout time.Duration
 	MaxAttempts    int
 }
 
+// ProcessPaymentResult differentiates a brand-new payment attempt from an idempotent replay.
 type ProcessPaymentResult struct {
 	Payment models.Payment
 	Created bool
 }
 
+// ReconcilePaymentInput carries data from external webhooks (e.g., Stripe) to update
+// the status of an asynchronous payment.
 type ReconcilePaymentInput struct {
 	TenantID          int64
 	ProviderReference string
@@ -68,6 +75,8 @@ type PaymentService struct {
 	options       PaymentServiceOptions
 }
 
+// NewPaymentService initializes the core business logic for payment processing.
+// It orchestrates the order state machine, database persistence, and external gateway calls.
 func NewPaymentService(
 	payments PaymentRepository,
 	orders PaymentOrderReader,
@@ -91,6 +100,9 @@ func NewPaymentService(
 	}
 }
 
+// ProcessPayment is the primary entry point for charging a customer.
+// It verifies the order is payable, records a pending payment attempt in the DB,
+// calls the external gateway, and safely handles idempotent retries.
 func (s *PaymentService) ProcessPayment(ctx context.Context, job paymentflow.Job) (ProcessPaymentResult, error) {
 	if s == nil || s.payments == nil || s.orders == nil || s.orderWorkflow == nil || s.gateway == nil {
 		return ProcessPaymentResult{}, fmt.Errorf("payment service is not configured")
@@ -161,6 +173,8 @@ func (s *PaymentService) ProcessPayment(ctx context.Context, job paymentflow.Job
 	return s.chargeGateway(ctx, payment, true)
 }
 
+// ReconcilePayment handles asynchronous updates from payment gateways (like Webhooks).
+// It updates the payment status and immediately propagates that status back to the parent order.
 func (s *PaymentService) ReconcilePayment(ctx context.Context, input ReconcilePaymentInput) (models.Payment, error) {
 	if s == nil || s.payments == nil || s.orderWorkflow == nil {
 		return models.Payment{}, fmt.Errorf("payment service is not configured")

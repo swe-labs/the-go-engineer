@@ -53,6 +53,8 @@ func RecoverPanic(logger *slog.Logger) func(http.Handler) http.Handler {
 	}
 }
 
+// LogRequest wraps the HTTP handler to log the HTTP method, path, and total request duration.
+// It acts as a lightweight access log for the server.
 func LogRequest(logger *slog.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

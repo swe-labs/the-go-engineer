@@ -19,6 +19,7 @@ type statusRecorder struct {
 	wroteHeader bool
 }
 
+// WriteHeader captures the HTTP status code before delegating to the underlying response writer.
 func (sr *statusRecorder) WriteHeader(code int) {
 	if !sr.wroteHeader {
 		sr.status = code
@@ -27,6 +28,7 @@ func (sr *statusRecorder) WriteHeader(code int) {
 	sr.ResponseWriter.WriteHeader(code)
 }
 
+// Write captures the default 200 OK status if WriteHeader wasn't explicitly called first.
 func (sr *statusRecorder) Write(b []byte) (int, error) {
 	if !sr.wroteHeader {
 		sr.status = http.StatusOK

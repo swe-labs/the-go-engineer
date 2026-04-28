@@ -17,6 +17,8 @@ type Worker struct {
 	jobs    <-chan Job
 }
 
+// NewWorker instantiates a consumer that reads payment jobs from a channel
+// and processes them sequentially using the provided handler.
 func NewWorker(jobs <-chan Job, handler Handler) Worker {
 	return Worker{
 		jobs:    jobs,
@@ -24,6 +26,8 @@ func NewWorker(jobs <-chan Job, handler Handler) Worker {
 	}
 }
 
+// Run blocks until the context is cancelled or the jobs channel is closed.
+// It executes the handler for each job received.
 func (w Worker) Run(ctx context.Context) error {
 	if w.handler == nil {
 		return fmt.Errorf("payment worker handler is not configured")

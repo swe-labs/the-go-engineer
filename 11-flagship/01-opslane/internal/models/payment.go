@@ -5,16 +5,24 @@ package models
 
 import "time"
 
+// PaymentStatus represents the lifecycle state of a payment attempt.
 type PaymentStatus string
 
 const (
-	PaymentStatusPending    PaymentStatus = "pending"
+	// PaymentStatusPending means the payment intent is recorded but not yet sent to the gateway.
+	PaymentStatusPending PaymentStatus = "pending"
+	// PaymentStatusAuthorized means the gateway placed a hold on the funds.
 	PaymentStatusAuthorized PaymentStatus = "authorized"
-	PaymentStatusSettled    PaymentStatus = "settled"
-	PaymentStatusFailed     PaymentStatus = "failed"
-	PaymentStatusRefunded   PaymentStatus = "refunded"
+	// PaymentStatusSettled means the funds have been successfully captured.
+	PaymentStatusSettled PaymentStatus = "settled"
+	// PaymentStatusFailed means the gateway declined the transaction.
+	PaymentStatusFailed PaymentStatus = "failed"
+	// PaymentStatusRefunded means the payment was returned to the customer.
+	PaymentStatusRefunded PaymentStatus = "refunded"
 )
 
+// Payment records a financial transaction attempt against an order.
+// Orders may have multiple payments if previous attempts failed.
 type Payment struct {
 	ID                int64         `json:"id"`
 	TenantID          int64         `json:"tenant_id"`

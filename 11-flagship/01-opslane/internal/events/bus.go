@@ -12,9 +12,12 @@ import (
 )
 
 var (
+	// ErrInvalidEvent is returned when an event is missing required routing fields (like Type or TenantID).
 	ErrInvalidEvent = errors.New("invalid event")
-	ErrQueueFull    = errors.New("event queue full")
-	ErrBusClosed    = errors.New("event bus closed")
+	// ErrQueueFull is returned by TryPublish when the bus buffer is completely saturated.
+	ErrQueueFull = errors.New("event queue full")
+	// ErrBusClosed is returned when attempting to publish to a bus that has been permanently shut down.
+	ErrBusClosed = errors.New("event bus closed")
 )
 
 // Bus is a single-channel event bus. Publish/TryPublish write events into a
@@ -33,6 +36,8 @@ type Bus struct {
 	now    func() time.Time
 }
 
+// NewBus initializes a new thread-safe Event Bus. The capacity determines the
+// channel buffer size. If capacity is <= 0, it defaults to an unbuffered channel size of 1.
 func NewBus(capacity int) *Bus {
 	if capacity <= 0 {
 		capacity = 1

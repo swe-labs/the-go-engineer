@@ -23,6 +23,8 @@ const healthDatabaseTimeout = 2 * time.Second
 const apiRateLimitWindow = time.Minute
 const apiRateLimitMaxRequests = 120
 
+// Application holds the dependencies for the HTTP server. It acts as the
+// central composition root for all incoming web requests.
 type Application struct {
 	Logger            *slog.Logger
 	Store             Store
@@ -35,14 +37,20 @@ type Application struct {
 	IsDraining        *atomic.Bool
 }
 
+// OrderWorkflow defines the subset of the Order Service required by HTTP handlers.
+// Using narrow interfaces here makes testing handlers much easier.
 type OrderWorkflow interface {
 	CreateOrder(ctx context.Context, input services.CreateOrderInput) (services.CreateOrderResult, error)
 }
 
+// PaymentWorkflow defines the subset of the Payment Service required by handlers.
 type PaymentWorkflow interface {
 	ProcessPayment(ctx context.Context, job paymentflow.Job) (services.ProcessPaymentResult, error)
 }
 
+// Store defines the data access methods required by the HTTP handlers.
+// By depending on this interface rather than the concrete db.Store, the handlers
+// remain decoupled from PostgreSQL.
 type Store interface {
 	Ping(ctx context.Context) error
 	CreateTenant(ctx context.Context, tenant *models.Tenant) error
@@ -59,6 +67,8 @@ type Store interface {
 	ListPaymentsByOrder(ctx context.Context, tenantID, orderID int64) ([]models.Payment, error)
 }
 
+// Routes configures all the HTTP endpoints for the application, attaching
+// necessary middleware (CORS, Rate Limiting, Authentication) to specific paths.
 func (app *Application) Routes() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /", app.handleIndex)

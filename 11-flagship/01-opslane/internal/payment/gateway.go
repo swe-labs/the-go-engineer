@@ -12,7 +12,9 @@ import (
 )
 
 var (
-	ErrGatewayTimeout     = errors.New("payment gateway timeout")
+	// ErrGatewayTimeout is returned when the external payment provider does not respond within the deadline.
+	ErrGatewayTimeout = errors.New("payment gateway timeout")
+	// ErrGatewayUnavailable is returned when the external provider is experiencing an outage.
 	ErrGatewayUnavailable = errors.New("payment gateway unavailable")
 )
 
@@ -24,6 +26,8 @@ type Job struct {
 	AmountCents       int64
 }
 
+// GatewayRequest contains the minimal tenant-scoped information required to process a charge
+// against an external provider (e.g., Stripe or Adyen).
 type GatewayRequest struct {
 	TenantID          int64
 	OrderID           int64
@@ -31,11 +35,15 @@ type GatewayRequest struct {
 	AmountCents       int64
 }
 
+// GatewayResult normalizes the response from an external payment provider into
+// internal Opslane statuses.
 type GatewayResult struct {
 	Status        models.PaymentStatus
 	FailureReason string
 }
 
+// Gateway defines the contract for communicating with external payment processors.
+// In a real application, implementations of this interface would wrap the Stripe or Adyen SDKs.
 type Gateway interface {
 	Charge(ctx context.Context, req GatewayRequest) (GatewayResult, error)
 }
@@ -48,12 +56,14 @@ type SimulatedGateway struct {
 	Err           error
 }
 
+// NewSimulatedGateway creates a test-friendly Gateway that always succeeds immediately.
 func NewSimulatedGateway() SimulatedGateway {
 	return SimulatedGateway{
 		Status: models.PaymentStatusSettled,
 	}
 }
 
+// Charge simulates an external network call, applying the configured delay and returning the mock status.
 func (g SimulatedGateway) Charge(ctx context.Context, _ GatewayRequest) (GatewayResult, error) {
 	if g.Delay > 0 {
 		timer := time.NewTimer(g.Delay)

@@ -15,6 +15,7 @@ type statusRecorder struct {
 	wroteHeader bool
 }
 
+// WriteHeader intercepts the status code for metric recording before passing it to the client.
 func (sr *statusRecorder) WriteHeader(code int) {
 	if !sr.wroteHeader {
 		sr.status = code
@@ -23,6 +24,7 @@ func (sr *statusRecorder) WriteHeader(code int) {
 	sr.ResponseWriter.WriteHeader(code)
 }
 
+// Write assumes a 200 OK status for metrics if WriteHeader was not explicitly called.
 func (sr *statusRecorder) Write(b []byte) (int, error) {
 	if !sr.wroteHeader {
 		sr.status = http.StatusOK

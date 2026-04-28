@@ -27,14 +27,17 @@ type InventoryCoordinator interface {
 // NoopInventoryCoordinator keeps Module 5 focused on the workflow boundary before real stock logic exists.
 type NoopInventoryCoordinator struct{}
 
+// NewNoopInventoryCoordinator creates an inventory stub that always succeeds.
 func NewNoopInventoryCoordinator() NoopInventoryCoordinator {
 	return NoopInventoryCoordinator{}
 }
 
+// Reserve simulates successfully acquiring stock for an order.
 func (NoopInventoryCoordinator) Reserve(context.Context, InventoryReservation) error {
 	return nil
 }
 
+// Release simulates successfully dropping a hold on stock after an order fails or cancels.
 func (NoopInventoryCoordinator) Release(context.Context, InventoryReservation) error {
 	return nil
 }
