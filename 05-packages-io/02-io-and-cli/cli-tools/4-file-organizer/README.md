@@ -61,6 +61,31 @@ Your finished solution should:
 - forgetting to skip directories
 - forgetting that `filepath.Ext` returns the leading dot
 
+
+## Mental Model
+
+Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
+
+## Visual Model
+
+Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
+
+## Machine View
+
+At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
+
+## Solution Walkthrough
+
+The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+
+## Try It
+
+Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+
+## Verification Surface
+
+The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+
 ## In Production
 
 Dry-run modes are a critical safety pattern in production CLI tools. Tools like `terraform plan`, `kubectl diff`, and database migration runners all implement preview-before-mutate behavior because filesystem and infrastructure mutations are difficult or impossible to reverse. In production environments, a file-organizing tool would need to handle concurrent access (another process writing to the same directory), permission errors on restricted directories, symlink loops that cause infinite recursion, and atomic moves across filesystem boundaries where `os.Rename` silently fails. The pattern of separating the "decide what to do" logic from the "do it" logic — which this exercise teaches through the dry-run flag — is the foundation of safe operational tooling. Teams that skip dry-run behavior in internal tools learn the hard way when a script reorganizes a production asset directory and breaks serving paths.
@@ -76,3 +101,4 @@ Dry-run modes are a critical safety pattern in production CLI tools. Tools like 
 
 After you complete this exercise, continue to the [Encoding track](../../encoding) or back to the
 [Stage 05 overview](../../README.md).
+

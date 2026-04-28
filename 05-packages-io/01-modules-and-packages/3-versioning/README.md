@@ -70,6 +70,56 @@ Your finished solution should:
 - forgetting that a v2 module needs `/v2` in the import path
 - using `replace` as a permanent escape hatch instead of a deliberate local-development tool
 
+
+## 
+
+
+
+## 
+
+
+
+## 
+
+
+
+## 
+
+
+
+## 
+
+
+
+## 
+
+
+
+
+## Mental Model
+
+Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
+
+## Visual Model
+
+Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
+
+## Machine View
+
+At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
+
+## Solution Walkthrough
+
+The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+
+## Try It
+
+Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+
+## Verification Surface
+
+The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+
 ## In Production
 
 Version management is one of the most common sources of production incidents in Go services. When a team bumps a dependency's major version without updating import paths, the build breaks at the worst possible time — usually right before a release. In large organizations with hundreds of internal modules, a single breaking change in a shared library can cascade through dozens of services. Go's module system forces these decisions to be explicit: a `/v2` import path is a loud signal that the API contract changed, and `go.sum` ensures that no dependency changes silently between builds. Teams that treat `replace` directives as permanent fixtures instead of local-development tools often discover that CI builds diverge from local builds, because `replace` only works in the main module. Understanding semantic versioning deeply — not just as a naming convention but as a compatibility contract — prevents entire categories of deployment failures.
@@ -86,3 +136,5 @@ Version management is one of the most common sources of production incidents in 
 After you complete this exercise, continue to [Stage 05](../../02-io-and-cli) if you are ready
 to move on.
 If you want one more stretch lesson first, visit [`MP.4` build tags](../4-build-tags).
+
+

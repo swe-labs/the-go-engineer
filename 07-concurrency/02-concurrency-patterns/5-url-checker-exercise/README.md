@@ -59,6 +59,31 @@ Your finished solution should:
 The current example uses live HTTP endpoints, so it expects network access when you run the full
 solution.
 
+
+## Mental Model
+
+Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
+
+## Visual Model
+
+Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
+
+## Machine View
+
+At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
+
+## Solution Walkthrough
+
+The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+
+## Try It
+
+Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+
+## Verification Surface
+
+The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+
 ## In Production
 
 Health checking is a fundamental production operations pattern. Every load balancer, service mesh, and container orchestrator uses health checks to decide whether to route traffic to a given instance. The concurrent fan-out pattern this exercise teaches — bounded HTTP checks with result aggregation — is exactly how production monitoring systems like Prometheus blackbox exporter, uptime robots, and internal SLA monitors work. Sorting results by latency is not cosmetic: it reveals which endpoints are degrading before they fail completely, giving operations teams early warning. In production, health checkers run continuously on intervals and feed alerting systems. The `sync.Pool` for HTTP clients matters at scale because creating a new `http.Client` per check means establishing a new TCP connection (and TLS handshake) every time, adding hundreds of milliseconds of latency and wasting system resources. Reusing clients allows connection pooling via `http.Transport`, which keeps established connections warm.
@@ -74,4 +99,5 @@ Health checking is a fundamental production operations pattern. Every load balan
 
 After you complete this exercise, continue to the [Stage 07 overview](../README.md) or move to
 [Stage 08: Quality and Performance](../../../08-quality-test/01-quality-and-performance).
+
 

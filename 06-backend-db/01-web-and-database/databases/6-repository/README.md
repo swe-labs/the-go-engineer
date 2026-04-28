@@ -78,6 +78,31 @@ Your finished solution should:
 - splitting multi-table writes into separate non-transactional calls
 - treating the repository pattern as an excuse to hide all SQL behavior instead of explaining it
 
+
+## Mental Model
+
+Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
+
+## Visual Model
+
+Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
+
+## Machine View
+
+At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
+
+## Solution Walkthrough
+
+The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+
+## Try It
+
+Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+
+## Verification Surface
+
+The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+
 ## In Production
 
 The repository pattern is the standard database access boundary in production Go services. Without it, SQL queries leak into HTTP handlers, business logic becomes untestable without a running database, and schema changes ripple through every layer of the application. In production, the repository interface enables teams to swap database implementations (SQLite in tests, PostgreSQL in production), add caching layers transparently, and mock database behavior in unit tests without touching real infrastructure. The transaction pattern shown in this exercise — grouping related writes into a single atomic operation — prevents data inconsistencies that are nearly impossible to debug in production. A common production failure mode is forgetting to call `rows.Close()`, which leaks database connections from the pool until the service runs out and every request starts timing out. Teams that treat the repository as a first-class boundary — not just a convenience wrapper — gain the ability to reason about database behavior independently from business logic, which is critical when debugging production incidents under pressure.
@@ -93,3 +118,4 @@ The repository pattern is the standard database access boundary in production Go
 
 After you complete this milestone, continue to [Stage 07: Concurrency](../../../../07-concurrency/01-concurrency) or
 explore the other Stage 06 legacy reference surfaces if you need more web/database examples first.
+

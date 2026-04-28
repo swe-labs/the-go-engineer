@@ -58,6 +58,56 @@ Your finished solution should:
 The current example makes live HTTP requests, so it expects network access when you run the full
 solution.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Mental Model
+
+Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
+
+## Visual Model
+
+Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
+
+## Machine View
+
+At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
+
+## Solution Walkthrough
+
+The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+
+## Try It
+
+Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+
+## Verification Surface
+
+The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+
 ## In Production
 
 Every outbound HTTP call in a production service must have a timeout. Without one, a single slow upstream dependency can exhaust all available goroutines and connection pool slots, causing the entire service to hang — a failure mode known as cascading failure or "grey failure." The `context.WithTimeout` pattern this exercise teaches is the standard way Go services enforce request deadlines. In production, timeouts are typically configured per-endpoint rather than globally, because a health check that should complete in 100ms has very different timeout requirements than a batch data export that legitimately takes 30 seconds. Teams that do not distinguish between timeout errors and other request failures end up retrying requests that will never succeed, amplifying load on an already-struggling upstream. The pattern of attaching the context to the request itself — not just checking it in the outer function — ensures that the HTTP client, DNS resolver, TLS handshake, and response body read all respect the same deadline.
@@ -73,3 +123,5 @@ Every outbound HTTP call in a production service must have a timeout. Without on
 
 After you complete this exercise, continue back to the [Context track](../README.md) or the
 [Stage 07 overview](../../README.md).
+
+

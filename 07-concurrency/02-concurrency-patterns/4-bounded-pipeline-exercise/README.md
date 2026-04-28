@@ -52,6 +52,31 @@ Your finished solution should:
 - stop sibling work quickly when one image fails
 - return pooled buffers cleanly without leaking stale data
 
+
+## Mental Model
+
+Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
+
+## Visual Model
+
+Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
+
+## Machine View
+
+At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
+
+## Solution Walkthrough
+
+The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+
+## Try It
+
+Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+
+## Verification Surface
+
+The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+
 ## In Production
 
 Bounded pipelines with early cancellation are the backbone of batch processing in production Go services. Image processors, data transformation jobs, and ETL pipelines all need to limit concurrent work to avoid overwhelming downstream systems (databases, object storage, external APIs). The `errgroup.SetLimit` pattern ensures that a batch of 100,000 items does not launch 100,000 goroutines — it processes them in controlled waves. Early cancellation via `errgroup.WithContext` is equally critical: if item 50 out of 10,000 reveals a corrupt input, there is no value in processing the remaining 9,950 items. The `sync.Pool` pattern prevents allocation pressure that would otherwise trigger frequent garbage collection pauses under high throughput. In production, teams measure the difference: a pipeline that allocates a fresh 64 KB buffer per item generates gigabytes of garbage per minute at scale, while one that reuses pooled buffers keeps GC pause times under a millisecond.
@@ -67,4 +92,5 @@ Bounded pipelines with early cancellation are the backbone of batch processing i
 
 After you complete this exercise, continue to [CP.5 URL Health Checker](../5-url-checker-exercise)
 or back to the [Stage 07 overview](../README.md).
+
 

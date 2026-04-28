@@ -62,6 +62,56 @@ Your finished solution should:
 The current example uses real HTTP downloads, so it expects network access when you run the full
 solution.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Mental Model
+
+Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
+
+## Visual Model
+
+Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
+
+## Machine View
+
+At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
+
+## Solution Walkthrough
+
+The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+
+## Try It
+
+Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+
+## Verification Surface
+
+The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+
 ## In Production
 
 Bounded concurrency is one of the most important production patterns in Go. Without a semaphore limiting active downloads, a service that receives a burst of 10,000 URLs to fetch would launch 10,000 goroutines simultaneously, exhausting file descriptors, overwhelming the network stack, and likely getting rate-limited or blocked by upstream servers. The semaphore channel pattern this exercise teaches — `sem := make(chan struct{}, maxConcurrency)` — is the idiomatic Go approach used in production crawlers, asset pipelines, and batch processing systems. The result channel pattern is equally critical: sending results through a channel instead of writing to a shared slice eliminates data races that only manifest under production load. Real download systems also need to handle partial file cleanup (as this exercise requires), retry logic with exponential backoff, content-length validation to detect truncated downloads, and context cancellation so that a shutdown signal stops all in-flight downloads instead of leaving orphaned goroutines writing to disk.
@@ -77,3 +127,5 @@ Bounded concurrency is one of the most important production patterns in Go. With
 
 After you complete this exercise, continue back to the [Goroutines track](../README.md) or the
 [Stage 07 overview](../../README.md).
+
+

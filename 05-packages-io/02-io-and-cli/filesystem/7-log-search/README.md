@@ -62,6 +62,56 @@ Your finished solution should:
 - keep unreadable files from crashing the full search
 - pass the provided tests
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Mental Model
+
+Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
+
+## Visual Model
+
+Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
+
+## Machine View
+
+At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
+
+## Solution Walkthrough
+
+The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+
+## Try It
+
+Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+
+## Verification Surface
+
+The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+
 ## In Production
 
 Log searching is a daily operational activity. When a production incident occurs at 3 AM, the first response is almost always "search the logs." Tools like `grep`, `ripgrep`, and centralized log platforms (Elasticsearch, Loki, CloudWatch) all implement the same core pattern this exercise teaches: walk a directory, filter by file type, scan line by line, and report matches with context. The line-by-line streaming approach matters because production log files can be gigabytes in size — loading an entire file into memory with `os.ReadFile` would crash the search tool or the host machine. The `bufio.Scanner` pattern keeps memory usage constant regardless of file size. In real systems, you would also need to handle rotated logs (`.log.1`, `.log.gz`), binary files that should be skipped, and encoding issues in logs written by different services. The ability to build a reliable file-scanning tool from standard library primitives — without external dependencies — is a skill that transfers directly to production debugging.
@@ -77,3 +127,5 @@ Log searching is a daily operational activity. When a production incident occurs
 
 After you complete this exercise, continue to [`FS.8` fs.FS testing seam](../8-fs-testing-seam)
 or back to the [Stage 05 overview](../../README.md).
+
+
