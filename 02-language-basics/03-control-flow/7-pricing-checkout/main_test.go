@@ -14,7 +14,7 @@ func TestPricingCheckoutOutput(t *testing.T) {
 	}
 
 	outStr := string(output)
-	
+
 	expectedLines := []string{
 		"Processing checkout:",
 		"TSHIRT: 20.00",

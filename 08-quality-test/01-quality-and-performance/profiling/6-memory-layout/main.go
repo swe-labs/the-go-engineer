@@ -37,8 +37,6 @@ func main() {
 	fmt.Println("Layout tuning is a hot-path tool, not a replacement for good algorithms.")
 }
 
-
 // ---------------------------------------------------
 // NEXT UP: PD.1
 // ---------------------------------------------------
-

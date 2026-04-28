@@ -38,8 +38,6 @@ func main() {
 	fmt.Println("summary:", te_10Summary("  Golden File Expectations  "))
 }
 
-
 // ---------------------------------------------------
 // NEXT UP: PR.1
 // ---------------------------------------------------
-

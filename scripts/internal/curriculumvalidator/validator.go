@@ -852,6 +852,7 @@ func validateEngineeringReadmeContracts(root string, items []V2Item, report func
 		itemPath := filepath.ToSlash(filepath.Clean(item.Path))
 		readmePath := filepath.ToSlash(filepath.Join(itemPath, "README.md"))
 		if !pathExists(root, readmePath) {
+			report(fmt.Sprintf("Warning: engineering README contract: %s -> %s missing entirely", item.ID, filepath.ToSlash(readmePath)))
 			continue
 		}
 
