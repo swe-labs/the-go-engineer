@@ -890,6 +890,7 @@ func warnMissingEngineeringHeadings(root, readmePath string, item V2Item, report
 
 	data, err := os.ReadFile(filepath.Join(root, readmePath))
 	if err != nil {
+		report(fmt.Sprintf("Warning: engineering README contract: %s -> %s read failure: %v", item.ID, filepath.ToSlash(readmePath), err))
 		return
 	}
 
