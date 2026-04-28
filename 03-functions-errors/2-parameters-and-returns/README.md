@@ -10,6 +10,8 @@ Now you know how to name a piece of work. But functions are more useful when the
 
 That is what parameters and return values do. They let you write flexible, reusable code that works with different data.
 
+> **Backward Reference:** In [Lesson 1: Functions Basics](../1-functions-basics/README.md), you created simple functions that took no inputs and returned nothing. Now you will learn how to pass data across that function boundary.
+
 ## Prerequisites
 
 - `FE.1` functions basics
@@ -151,6 +153,9 @@ Clear parameters and return values are the first step toward dependable business
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** You just learned how to return a single value (`int` or `string`). But what if your function needs to return a result *and* an indication of success or failure? Go solves this uniquely by returning multiple values at once. You will learn this next in [Lesson 3: Multiple Return Values](../3-multiple-return-values/README.md).
+
 ## Next Step
 
 Continue to `FE.3` multiple return values.

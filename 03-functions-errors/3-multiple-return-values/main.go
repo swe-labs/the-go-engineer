@@ -64,5 +64,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.4 errors-as-values")
 	fmt.Println("Current: FE.3 (multiple return values)")
+	fmt.Println("Previous: FE.2 (parameters-and-returns)")
 	fmt.Println("---------------------------------------------------")
 }

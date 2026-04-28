@@ -12,6 +12,8 @@ The next question is: "How do I break my program into reusable pieces?"
 
 That is what functions do. They let you name a block of code and call it from different places.
 
+> **Backward Reference:** In the previous module, [Data Structures](../../02-language-basics/04-data-structures/README.md), you learned how to organize data into slices and maps. Now, you will learn how to organize the logic that operates on that data into discrete, named functions.
+
 ## Prerequisites
 
 - `DS.6` contact directory
@@ -154,6 +156,9 @@ Small named functions are the first step toward readable application flow.
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** This lesson taught you how to move a block of code into a named function, but the functions didn't take any data or return any answers. In the next lesson, [Lesson 2: Parameters and Returns](../2-parameters-and-returns/README.md), you will learn how to pass data across the function boundary.
+
 ## Next Step
 
 Continue to `FE.2` parameters and returns.

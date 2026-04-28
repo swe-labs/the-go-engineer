@@ -52,5 +52,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.2 parameters-and-returns")
 	fmt.Println("Current: FE.1 (functions basics)")
+	fmt.Println("Previous: DS.6 (contact-manager)")
 	fmt.Println("---------------------------------------------------")
 }
