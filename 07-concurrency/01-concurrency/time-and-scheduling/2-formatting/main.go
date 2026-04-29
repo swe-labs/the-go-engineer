@@ -1,15 +1,31 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 07: Concurrency
+// Title: Time Formatting
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Time Formatting fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - Time Formatting provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/01-concurrency/time-and-scheduling/2-formatting
+//
+// KEY TAKEAWAY:
+//   - Time Formatting fundamentals and practical application in Go.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
 
-// ============================================================================
-// Stage 07: Time & Scheduling — Time Formatting
-// Level: Beginner
-// ============================================================================
+// Stage 07: Time & Scheduling - Time Formatting
 //
-// WHAT YOU'LL LEARN:
 //   - The unique Go standard Time Layout string: "2006-01-02 15:04:05"
 //   - Built-in constants like `time.RFC3339`
 //   - Parsing strings back into `time.Time` structs
@@ -22,8 +38,6 @@ package main
 //   You simply write down what that specific reference time would look like
 //   in your desired format, and the engine tokenizes it underneath.
 //
-// RUN: go run ./07-concurrency/01-concurrency/time-and-scheduling/2-formatting
-// ============================================================================
 
 import (
 	"fmt"
@@ -66,7 +80,7 @@ func main() {
 		fmt.Printf("Parsed RFC3339 (in UTC): %s\n", parsedTimeRFC.UTC())
 	}
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: TM.3 timers & tickers")
+	fmt.Println("NEXT UP: TM.3 timers & tickers")
 	fmt.Println("   Current: TM.2 (formatting)")
 	fmt.Println("---------------------------------------------------")
 }

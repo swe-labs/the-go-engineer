@@ -2,21 +2,26 @@
 // Licensed under The Go Engineer License v1.0
 
 // ============================================================================
-// Section 00: How Computers Work — What Is a Program?
+// Section 00: How Computers Work
+// Title: What is a program?
 // Level: Foundation
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - A program is a list of instructions
-//   - The CPU runs instructions through a fetch-decode-execute loop
-//   - Printed output is just the visible effect of machine instructions running
+//   - Understand that a program is a list of instructions for a machine to follow, and that the CPU runs a continuous fetch-decode-execute loop to carry ...
 //
 // WHY THIS MATTERS:
+//   - Imagine a cook reading a recipe card. - the recipe card is the program - the ingredients are the data - the cook is the CPU The cook does not under...
+//
+// RUN:
+//   go run ./00-how-computers-work/1-what-is-a-program
+//
+// KEY TAKEAWAY:
+//   - Understand that a program is a list of instructions for a machine to follow, and that the CPU runs a continuous fetch-decode-execute loop to carry ...
+// ============================================================================
+
 //   Engineers write better code when they can reason about what the machine is
 //   doing instead of treating execution like magic.
-//
-// RUN: go run ./00-how-computers-work/1-what-is-a-program
-// ============================================================================
 
 package main
 
@@ -27,7 +32,6 @@ func main() {
 	fmt.Println("The CPU keeps fetching, decoding, and executing those instructions.")
 	fmt.Println("Even this printed text is just the visible effect of that loop.")
 
-	// KEY TAKEAWAY:
 	// - High-level Go code eventually becomes machine instructions.
 	// - The CPU executes those instructions one step at a time.
 	fmt.Println("\n---------------------------------------------------")

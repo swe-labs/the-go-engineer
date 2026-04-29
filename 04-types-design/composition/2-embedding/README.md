@@ -4,6 +4,8 @@
 
 Learn how embedding promotes inner fields and methods to the outer type.
 
+> **Backward Reference:** In [Lesson 1: Composition](../1-composition/README.md), you learned how to combine types using explicit, named fields. Now we will see how "anonymous" fields create Embedding, which provides a cleaner syntax by promoting inner methods and fields directly to the parent type.
+
 ## Prerequisites
 
 - `CO.1` composition
@@ -66,15 +68,15 @@ This example demonstrates shadowing when the outer type defines a name that coll
 2. Add another method to `Battery` and call it through `Laptop`.
 3. Create another shadowed field and inspect which one wins.
 
-## ⚠️ In Production
-
+## In Production
 Embedding is useful for wrappers, adapters, and reusable building blocks, but it is easy to overuse. Teams need to remember that promotion is convenience syntax, not inheritance magic.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What stays the same between composition and embedding?
 2. What changes when promotion is available?
 3. Why can shadowing be useful and dangerous at the same time?
+
+> **Forward Reference:** You have learned the two ways to combine types: Composition and Embedding. Now it is time to put them into practice. In [Lesson 3: Bank Account Project](../3-bank-account/README.md), you will build a multi-layered system that uses these patterns to model a realistic banking application.
 
 ## Next Step
 

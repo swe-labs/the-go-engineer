@@ -1,6 +1,28 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
+
+// ============================================================================
+// Section 06: Backend, APIs & Databases
+// Title: Web Masterclass - Dependency Injection
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to use the "Application Struct" pattern to share dependencies.
+//   - Why global variables are an anti-pattern in Go web services.
+//   - How to use methods as HTTP handlers.
+//
+// WHY THIS MATTERS:
+//   - As your application grows, your handlers will need access to database
+//     pools, loggers, and configuration settings. Dependency Injection (DI)
+//     ensures your code remains clean, modular, and easy to unit test.
+//
+// RUN:
+//   go run ./06-backend-db/01-web-and-database/web-masterclass/2-dependency-injection
+//
+// KEY TAKEAWAY:
+//   - Explicit is better than implicit. No magic, just clean wiring.
+// ============================================================================
 
 package main
 
@@ -12,95 +34,65 @@ import (
 	"os"
 )
 
-// ============================================================================
-// Stage 06: Web Masterclass — Dependency Injection
-// Level: Intermediate
-// ============================================================================
+// Stage 06: Web Masterclass - Dependency Injection
 //
-// WHAT YOU'LL LEARN:
-//   - The "application struct" pattern — Go's standard DI approach
-//   - Why globals are bad and how to avoid them
-//   - Handler methods on a struct vs standalone functions
-//   - Constructor functions for wiring dependencies
+//   - The App Struct: Container for shared resources
+//   - Method Handlers: Giving functions context
+//   - Logger Injection: Centralized observability
 //
 // ENGINEERING DEPTH:
-//   Many frameworks in Java, Python, and TS use "Global Magic" where they scan
-//   your code using heavy Reflection to inject Singletons automatically on boot.
-//   This causes massive startup latency and hides control flow. Go strongly
-//   rejects "Magic". Instead, we explicitly bind dependencies directly to an
-//   `application` struct. Because Go statically compiles your binary, if you
-//   misconfigure your dependencies, it won't even compile. You catch
-//   infrastructure failures during `go build` rather than mid-flight at runtime.
-//
-// RUN: go run ./06-backend-db/01-web-and-database/web-masterclass/2-dependency-injection
-// ============================================================================
+//   In Go, we avoid "Magic" DI frameworks that use reflection.
+//   Instead, we manually "wire" our application by creating a
+//   struct (often called `application` or `server`) that holds
+//   pointers to our dependencies. Because our handlers are methods
+//   on this struct, they have direct, type-safe access to everything
+//   they need without resorting to global variables.
 
-// config holds application configuration
-type config struct {
-	port string
-	env  string
-}
-
-// application holds all dependencies shared across handlers.
-// This is the standard Go pattern for dependency injection in web apps.
-// Instead of global variables, dependencies are explicit and testable.
+// application holds all shared dependencies.
 type application struct {
-	config config
 	logger *slog.Logger
-}
-
-// newApplication is a constructor that wires all dependencies together.
-// In production, this would also accept repositories, cache clients, etc.
-func newApplication() *application {
-	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelDebug,
-	}))
-
-	cfg := config{
-		port: ":8080",
-		env:  "development",
-	}
-
-	return &application{
-		config: cfg,
-		logger: logger,
-	}
+	env    string
 }
 
 func main() {
-	app := newApplication()
+	// 1. Initialize dependencies
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+
+	app := &application{
+		logger: logger,
+		env:    "development",
+	}
 
 	mux := http.NewServeMux()
 
-	// Handlers are methods on *application — they have access to
-	// app.logger, app.config, and any other injected dependencies.
+	// 2. Register handlers as methods
+	// This is the "Magic Sauce". Because handleHome is a method on 'app',
+	// it can access app.logger and app.env!
 	mux.HandleFunc("GET /", app.handleHome)
 	mux.HandleFunc("GET /health", app.handleHealth)
 
-	app.logger.Info("server starting",
-		slog.String("port", app.config.port),
-		slog.String("env", app.config.env),
-	)
+	fmt.Println("=== Web Masterclass: Dependency Injection ===")
+	fmt.Println("  🚀 Server starting on http://localhost:8081")
+	fmt.Println()
 
-	log.Fatal(http.ListenAndServe(app.config.port, mux))
+	// 3. Start the server
+	log.Fatal(http.ListenAndServe(":8081", mux))
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: WM.3 templates")
-	fmt.Println("   Current: WM.2 (dependency injection)")
+	fmt.Println("NEXT UP: MC.3 templates")
+	fmt.Println("Current: MC.2 (dependency-injection)")
+	fmt.Println("Previous: MC.1 (routing)")
 	fmt.Println("---------------------------------------------------")
 }
 
-// handleHome is a method on *application, NOT a standalone function.
-// This gives it access to all injected dependencies via `app`.
+// handleHome is a method on the *application struct.
 func (app *application) handleHome(w http.ResponseWriter, r *http.Request) {
-	app.logger.Info("home page requested",
-		slog.String("method", r.Method),
-		slog.String("path", r.URL.Path),
-	)
-	fmt.Fprintf(w, "Hello from %s environment!", app.config.env)
+	app.logger.Info("home page requested", "path", r.URL.Path)
+	fmt.Fprintf(w, "Hello! You are running in the %s environment.", app.env)
 }
 
 func (app *application) handleHealth(w http.ResponseWriter, r *http.Request) {
-	app.logger.Debug("health check")
+	app.logger.Debug("health check pinged")
 	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, `{"status":"ok","env":"%s"}`, app.config.env)
+	fmt.Fprint(w, `{"status":"ok"}`)
 }

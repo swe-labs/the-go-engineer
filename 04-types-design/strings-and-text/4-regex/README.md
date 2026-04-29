@@ -4,6 +4,8 @@
 
 Learn how Go compiles, matches, extracts, and replaces text patterns with regular expressions.
 
+> **Backward Reference:** In [Lesson 3: Unicode and Runes](../3-unicode/README.md), you learned about the nature of text in Go. Now we move from single-character analysis to pattern analysis, allowing you to validate and extract data from complex text strings.
+
 ## Prerequisites
 
 - `ST.1` strings
@@ -66,15 +68,15 @@ These make regex useful for sanitizing and transforming text, not only matching 
 2. Add another log line for the capture-group example.
 3. Replace a different sensitive pattern with a masked value.
 
-## ⚠️ In Production
-
+## In Production
 Regex is powerful but easy to misuse. Precompiling patterns, keeping expressions readable, and understanding the engine's guarantees are what keep parsing code fast and maintainable.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is `MustCompile` appropriate for hardcoded patterns?
 2. When do capture groups matter more than plain matching?
 3. Why is Go's RE2 choice operationally important?
+
+> **Forward Reference:** You have learned how to analyze and manipulate text with Regex. Now we look at how to generate it. In [Lesson 5: Text Template](../5-text-template/README.md), you will learn how to use Go's powerful templating engine to generate dynamic text and HTML output.
 
 ## Next Step
 

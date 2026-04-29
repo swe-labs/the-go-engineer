@@ -4,6 +4,8 @@
 
 Learn how `any` works, how to extract concrete types safely, and why typed nil values can still make an interface non-nil.
 
+> **Backward Reference:** In [Lesson 10: Payroll Processor](../10-payroll-processor/README.md), you saw how interfaces create safe, predictable behavior contracts. Now we will look at the ultimate flexibility in Go: the `any` interface, which carries no behavioral promises but allows for complete dynamic typing.
+
 ## Prerequisites
 
 - TI.3
@@ -50,16 +52,16 @@ A typed nil inside an interface is not the same as a nil interface.
 2. Change one assertion to the unsafe form and predict where it would panic.
 3. Return a typed nil pointer from a function and compare it with a nil interface.
 
-## ⚠️ In Production
-
+## In Production
 Dynamic values are useful at boundaries like logging, decoding, and plugin-style APIs, but they demand careful guards around assertions and nil checks.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why does an interface need both type and value information?
 2. When should you prefer generics over `any`?
 3. Why can `value == nil` be misleading for interface values?
 
+> **Forward Reference:** Now that you understand the mechanics of Go's type system, it is time to look at common design patterns. In [Lesson 12: Functional Options](../12-functional-options/README.md), you will learn a powerful pattern for creating flexible and readable constructors for your custom types.
+
 ## Next Step
 
-Continue to `TI.12`.
+Continue to `TI.12` functional-options.

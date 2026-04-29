@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 08: Quality & Testing
+// Title: CPU Profile
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - CPU Profile fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - CPU Profile provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./08-quality-test/01-quality-and-performance/profiling/1-cpu-profile
+//
+// KEY TAKEAWAY:
+//   - CPU Profile fundamentals and practical application in Go.
+// ============================================================================
+
 package main
 
 import (
@@ -13,12 +32,8 @@ import (
 	"strings"
 )
 
-// ============================================================================
 // Stage 08: Quality and Performance - CPU Profile
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - runtime/pprof: writing CPU and memory profiles to files
 //   - go tool pprof: reading profiles in the terminal and as a web UI
 //   - Identifying hot functions and optimizing them
@@ -44,8 +59,6 @@ import (
 //   "flat" time: time spent executing this function (not its callees)
 //   "cum" (cumulative) time: time in this function plus everything it calls
 //
-// RUN: go run ./08-quality-test/01-quality-and-performance/profiling/1-cpu-profile
-// ============================================================================
 
 // slowLogProcessor compiles a regex and concatenates strings inside a hot loop.
 // Both are classic Go performance anti-patterns.

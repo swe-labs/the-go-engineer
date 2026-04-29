@@ -1,5 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 07: Concurrency
+// Title: WaitGroups
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - WaitGroups fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - WaitGroups provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/01-concurrency/goroutines/2-wait-group
+//
+// KEY TAKEAWAY:
+//   - WaitGroups fundamentals and practical application in Go.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -11,12 +31,8 @@ import (
 	"time"
 )
 
-// ============================================================================
 // Stage 07: Concurrency - WaitGroups
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - sync.WaitGroup: the standard tool for waiting on goroutines
 //   - The 3-step pattern: Add -> go func { defer Done() } -> Wait
 //   - Why you must pass WaitGroup by pointer (never by value)
@@ -29,8 +45,6 @@ import (
 //     wg.Done() = "One passenger has boarded"
 //     wg.Wait() = "Do not close the gate until all passengers are aboard"
 //
-// RUN: go run ./07-concurrency/01-concurrency/goroutines/2-wait-group
-// ============================================================================
 
 type ServiceStatus struct {
 	Name    string

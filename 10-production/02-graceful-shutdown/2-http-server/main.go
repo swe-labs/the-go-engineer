@@ -1,6 +1,29 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 10: Production Operations
+// Title: HTTP Graceful Drain
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - http.Server.Shutdown(): drain in-flight requests without cutting them
+//   - The production graceful shutdown pattern:
+//     signal -> stop accepting -> drain requests -> close DB -> exit
+//   - Why log.Fatal(http.ListenAndServe(...)) is wrong for production
+//   - Testing graceful shutdown
+//
+// WHY THIS MATTERS:
+//   - Rolling deployments: Kubernetes sends SIGTERM while traffic still arrives.
+//   - Without Shutdown(): 502 errors during deploy.
+//   - With Shutdown(): waits for requests to complete -> 0 errors.
+//
+// KEY TAKEAWAY:
+//   - http.Server.Shutdown() closes listener, waits for active requests to complete.
+//   - Check for http.ErrServerClosed to distinguish clean exit from errors.
+// ============================================================================
+
 package main
 
 import (
@@ -19,12 +42,8 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-// ============================================================================
 // Stage 10: Application Architecture - Graceful Shutdown: Production HTTP Server
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - http.Server.Shutdown(): drain in-flight requests without cutting them
 //   - The complete production graceful shutdown pattern:
 //       signal -> stop accepting -> drain requests -> close DB -> exit
@@ -52,10 +71,8 @@ import (
 //   is called. This is the expected "clean" exit - not an error. Always
 //   check for this: if err != nil && !errors.Is(err, http.ErrServerClosed)
 //
-// RUN: go run ./10-production/02-graceful-shutdown/2-http-server
 //   Then: curl http://localhost:8080/api/slow   (simulates a slow 3s request)
 //   While the request is in-flight, press Ctrl+C - graceful shutdown waits for it.
-// ============================================================================
 
 type Server struct {
 	httpServer *http.Server
@@ -116,9 +133,7 @@ func (s *Server) Shutdown(ctx context.Context) error {
 	return nil
 }
 
-// ============================================================================
 // Handlers
-// ============================================================================
 
 func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -156,9 +171,7 @@ func main() {
 
 	srv := NewServer(logger)
 
-	// =========================================================================
 	// The complete graceful shutdown pattern using errgroup
-	// =========================================================================
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
@@ -192,14 +205,13 @@ func main() {
 
 	logger.Info("graceful shutdown complete")
 
-	// KEY TAKEAWAY:
 	// - http.Server.Shutdown(ctx): drains in-flight requests cleanly
 	// - ListenAndServe returns http.ErrServerClosed on graceful shutdown (not an error)
 	// - Always set ReadTimeout, WriteTimeout, IdleTimeout on http.Server
 	// - errgroup orchestrates server + signal handler goroutines elegantly
 	// - Kubernetes terminationGracePeriodSeconds = your maximum shutdown window
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: GS.3 shutdown capstone")
+	fmt.Println("NEXT UP: GS.3 shutdown capstone")
 	fmt.Println("   Current: GS.2 (HTTP graceful drain)")
 	fmt.Println("---------------------------------------------------")
 }

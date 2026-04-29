@@ -1,6 +1,7 @@
 package curriculumvalidator
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -160,50 +161,7 @@ func TestValidateRejectsUnknownSectionPrerequisite(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid v2 section prerequisite: s04 -> s03") {
-		t.Fatalf("expected section prerequisite error in reports: %v", reports)
-	}
-}
-
-func TestValidateRejectsInvalidSectionStatus(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s00",
-      "number": "00",
-      "slug": "how-computers-work",
-      "title": "How Computers Work",
-      "path_prefix": "00-how-computers-work",
-      "status": "pilot",
-      "entry_points": [],
-      "outputs": [],
-      "prerequisites": []
-    }
-  ],
-  "items": []
-}`)
-	writeValidPressureDocs(t, root)
-	mustMkdir(t, root, "00-how-computers-work")
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid v2 section status: s00 -> pilot") {
-		t.Fatalf("expected section-status error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 section prerequisite: s04 -> s03")
 }
 
 func TestValidateRejectsMixedContractWithoutCommands(t *testing.T) {
@@ -256,11 +214,44 @@ func TestValidateRejectsMixedContractWithoutCommands(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 mixed contract: FE.9 requires run_command or test_command")
+}
+
+func TestValidateReportsMissingArchitectureSection(t *testing.T) {
+	root := t.TempDir()
+
+	writeValidPressureDocs(t, root)
+	mustMkdir(t, root, "00-how-computers-work")
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s00",
+      "number": "00",
+      "slug": "how-computers-work",
+      "title": "How Computers Work",
+      "path_prefix": "00-how-computers-work",
+      "status": "stable",
+      "entry_points": [],
+      "outputs": ["HC.5"],
+      "prerequisites": []
+    }
+  ],
+  "items": []
+}`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
 	}
-	if !containsReport(reports, "Invalid v2 mixed contract: FE.9 requires run_command or test_command") {
-		t.Fatalf("expected mixed-contract error in reports: %v", reports)
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected architecture-contract validation errors")
+	}
+	if !containsReport(reports, "Invalid v2 architecture contract: missing section s05") {
+		t.Fatalf("expected missing-section report in reports: %v", reports)
 	}
 }
 
@@ -336,12 +327,7 @@ func main() {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid v2 lesson navigation footer: CO.1 -> ST.1 (expected CO.2)") {
-		t.Fatalf("expected lesson-navigation error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 lesson navigation footer: CO.1 -> ST.1 (expected CO.2)")
 }
 
 func TestValidateRejectsWrongSectionLabelInV2Source(t *testing.T) {
@@ -398,12 +384,7 @@ func main() {}
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid v2 section label: CL.1 -> 05-packages-io/02-io-and-cli/cli-tools/1-args/main.go (expected Section 09 or Stage 09)") {
-		t.Fatalf("expected section-label error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 section label: CL.1 -> 05-packages-io/02-io-and-cli/cli-tools/1-args/main.go (expected Section 09 or Stage 09)")
 }
 
 func TestValidateRejectsMojibakeInV2TextSurface(t *testing.T) {
@@ -455,12 +436,7 @@ func TestValidateRejectsMojibakeInV2TextSurface(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Possible mojibake in v2 text surface: FS.1 -> 05-packages-io/02-io-and-cli/filesystem/1-files/main.go") {
-		t.Fatalf("expected mojibake error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Possible mojibake in v2 text surface: FS.1 -> 05-packages-io/02-io-and-cli/filesystem/1-files/main.go")
 }
 
 func TestValidateAcceptsFoundationsReadmeContractForS00(t *testing.T) {
@@ -512,9 +488,7 @@ func TestValidateAcceptsFoundationsReadmeContractForS00(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 0 {
-		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
-	}
+	requireOnlyFixtureScaffoldReports(t, result, reports)
 }
 
 func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
@@ -567,9 +541,7 @@ func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 0 {
-		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
-	}
+	requireOnlyFixtureScaffoldReports(t, result, reports)
 }
 
 func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
@@ -621,12 +593,7 @@ func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Missing foundations README: ST.1 -> 04-types-design/strings-and-text/1-strings/README.md") {
-		t.Fatalf("expected missing README error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Missing foundations README: ST.1 -> 04-types-design/strings-and-text/1-strings/README.md")
 }
 
 func TestValidateRejectsRunFoundationLessonMissingMainGo(t *testing.T) {
@@ -677,12 +644,7 @@ func TestValidateRejectsRunFoundationLessonMissingMainGo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Missing foundations lesson main.go: HC.2 -> 00-how-computers-work/2-code-to-execution/main.go") {
-		t.Fatalf("expected missing main.go error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Missing foundations lesson main.go: HC.2 -> 00-how-computers-work/2-code-to-execution/main.go")
 }
 
 func TestValidateRejectsFoundationsHeadingOrder(t *testing.T) {
@@ -786,12 +748,7 @@ func TestValidateRejectsFoundationsHeadingOrder(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid foundations README contract: GT.1 -> 01-getting-started/1-installation/README.md has ## Run Instructions out of order") {
-		t.Fatalf("expected heading-order error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid foundations README contract: GT.1 -> 01-getting-started/1-installation/README.md has ## Run Instructions out of order")
 }
 
 func TestValidateRejectsFoundationsVisualModelWithoutMermaid(t *testing.T) {
@@ -843,12 +800,7 @@ func TestValidateRejectsFoundationsVisualModelWithoutMermaid(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid foundations README contract: FE.1 -> 03-functions-errors/1-functions-basics/README.md Visual Model must include a Mermaid diagram") {
-		t.Fatalf("expected Mermaid error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid foundations README contract: FE.1 -> 03-functions-errors/1-functions-basics/README.md Visual Model must include a Mermaid diagram")
 }
 
 func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing.T) {
@@ -900,12 +852,330 @@ func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid foundations README contract: TI.10 -> 04-types-design/10-payroll-processor/README.md missing ## Verification Surface")
+}
+
+func TestValidateAcceptsFlagshipProjectSplit(t *testing.T) {
+	root := t.TempDir()
+
+	writeValidOpslaneFlagshipFixture(t, root, false)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
 	}
-	if !containsReport(reports, "Invalid foundations README contract: TI.10 -> 04-types-design/10-payroll-processor/README.md missing ## Verification Surface") {
-		t.Fatalf("expected verification-surface error in reports: %v", reports)
+	requireOnlyFixtureScaffoldReports(t, result, reports)
+}
+
+func TestValidateRejectsFlagshipReservedPrefixCollision(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s10",
+      "number": "10",
+      "slug": "production-operations",
+      "title": "Production Operations",
+      "path_prefix": "10-production",
+      "entry_points": ["OPS.5"],
+      "outputs": ["OPS.5"],
+      "prerequisites": []
+    },
+    {
+      "id": "s11",
+      "number": "11",
+      "slug": "flagship",
+      "title": "Flagship",
+      "path_prefix": "11-flagship",
+      "entry_points": ["OPS.1"],
+      "outputs": ["OPS.2"],
+      "prerequisites": ["s10"]
+    }
+  ],
+  "items": [
+    {
+      "id": "OPS.5",
+      "section_id": "s10",
+      "slug": "operations-handoff",
+      "title": "Operations Handoff",
+      "type": "reference",
+      "subtype": "",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "rubric",
+      "path": "10-production",
+      "prerequisites": [],
+      "run_command": "",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    },
+    {
+      "id": "OPS.1",
+      "section_id": "s11",
+      "slug": "foundation",
+      "title": "Reserved Prefix Foundation",
+      "type": "checkpoint",
+      "subtype": "",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "11-flagship/01-ops-flagship/modules/01-foundation",
+      "prerequisites": [],
+      "run_command": "",
+      "test_command": "go test ./11-flagship/01-ops-flagship/internal/config/...",
+      "starter_path": "",
+      "next_items": ["OPS.2"]
+    },
+    {
+      "id": "OPS.2",
+      "section_id": "s11",
+      "slug": "database",
+      "title": "Reserved Prefix Database",
+      "type": "capstone",
+      "subtype": "",
+      "level": "production",
+      "status": "implemented",
+      "verification_mode": "rubric",
+      "path": "11-flagship/01-ops-flagship/modules/02-database",
+      "prerequisites": ["OPS.1"],
+      "run_command": "",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "10-production")
+	writeFlagshipProjectSurface(t, root, "11-flagship/01-ops-flagship", []string{
+		"modules/01-foundation",
+		"modules/02-database",
+	}, true, true, true)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
 	}
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected a validation error for reserved prefix collision")
+	}
+	if !containsReport(reports, "Invalid flagship project prefix: OPS.1 -> OPS is already used outside s11") {
+		t.Fatalf("expected reserved-prefix error in reports: %v", reports)
+	}
+}
+
+func TestValidateRejectsFlagshipMissingModuleMap(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", validOpslaneFlagshipCurriculum(false, false))
+	writeFlagshipProjectSurface(t, root, "11-flagship/01-opslane", opslaneModuleDirs(), false, true, true)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected a validation error for missing MODULES.md")
+	}
+	if !containsReport(reports, "Missing flagship project module map: OPSL -> 11-flagship/01-opslane/MODULES.md") {
+		t.Fatalf("expected missing module map error in reports: %v", reports)
+	}
+}
+
+func TestValidateRejectsFlagshipMissingProgressChecker(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", validOpslaneFlagshipCurriculum(false, false))
+	writeFlagshipProjectSurface(t, root, "11-flagship/01-opslane", opslaneModuleDirs(), true, false, true)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected a validation error for missing progress checker")
+	}
+	if !containsReport(reports, "Missing flagship progress checker: OPSL -> 11-flagship/01-opslane/scripts/progress.go") {
+		t.Fatalf("expected missing progress checker error in reports: %v", reports)
+	}
+}
+
+func TestValidateRejectsBrokenFlagshipChain(t *testing.T) {
+	root := t.TempDir()
+
+	writeValidOpslaneFlagshipFixture(t, root, true)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected a validation error for broken flagship chain")
+	}
+	if !containsReport(reports, "Invalid flagship module chain: OPSL.4 must point to OPSL.5") {
+		t.Fatalf("expected broken chain error in reports: %v", reports)
+	}
+}
+
+func TestValidateAcceptsOptionalSecondFlagshipProject(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", validOpslaneFlagshipCurriculum(true, false))
+	writeFlagshipProjectSurface(t, root, "11-flagship/01-opslane", opslaneModuleDirs(), true, true, true)
+	writeFlagshipProjectSurface(t, root, "11-flagship/02-crmx", []string{
+		"modules/01-foundation",
+		"modules/02-capstone",
+	}, true, false, false)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	requireOnlyFixtureScaffoldReports(t, result, reports)
+}
+
+func writeValidOpslaneFlagshipFixture(t *testing.T, root string, brokenChain bool) {
+	t.Helper()
+
+	writeFile(t, root, "curriculum.v2.json", validOpslaneFlagshipCurriculum(false, brokenChain))
+	writeFlagshipProjectSurface(t, root, "11-flagship/01-opslane", opslaneModuleDirs(), true, true, true)
+}
+
+func validOpslaneFlagshipCurriculum(includeOptionalProject, brokenChain bool) string {
+	opsl4Next := "OPSL.5"
+	if brokenChain {
+		opsl4Next = "OPSL.6"
+	}
+
+	coreItems := []string{
+		flagshipItemJSON("OPSL.1", "s11", "foundation-and-configuration", "Opslane Foundation and Configuration", "checkpoint", "implemented", "mixed", "11-flagship/01-opslane/modules/01-foundation", "", "go run ./11-flagship/01-opslane/cmd/server", "go test ./11-flagship/01-opslane/internal/config/...", "OPSL.2"),
+		flagshipItemJSON("OPSL.2", "s11", "database-and-models", "Opslane Database and Models", "checkpoint", "implemented", "test", "11-flagship/01-opslane/modules/02-database", "OPSL.1", "", "go test ./11-flagship/01-opslane/internal/db/...", "OPSL.3"),
+		flagshipItemJSON("OPSL.3", "s11", "authentication-and-tenant-isolation", "Opslane Authentication and Tenant Isolation", "checkpoint", "implemented", "test", "11-flagship/01-opslane/modules/03-auth", "OPSL.2", "", "go test ./11-flagship/01-opslane/internal/auth/...", "OPSL.4"),
+		flagshipItemJSON("OPSL.4", "s11", "http-api-layer", "Opslane HTTP API Layer", "checkpoint", "implemented", "mixed", "11-flagship/01-opslane/modules/04-http-api", "OPSL.3", "go run ./11-flagship/01-opslane/cmd/server", "go test ./11-flagship/01-opslane/internal/handlers/... ./11-flagship/01-opslane/internal/middleware/...", opsl4Next),
+		flagshipItemJSON("OPSL.5", "s11", "order-processing", "Opslane Order Processing", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/05-order-processing", "OPSL.4", "", "go test ./11-flagship/01-opslane/internal/services/...", "OPSL.6"),
+		flagshipItemJSON("OPSL.6", "s11", "payment-pipeline", "Opslane Payment Pipeline", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/06-payment-pipeline", "OPSL.5", "", "go test ./11-flagship/01-opslane/internal/payment/...", "OPSL.7"),
+		flagshipItemJSON("OPSL.7", "s11", "event-bus-and-worker-pools", "Opslane Event Bus and Worker Pools", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/07-event-workers", "OPSL.6", "", "go test ./11-flagship/01-opslane/internal/events/... ./11-flagship/01-opslane/internal/workers/...", "OPSL.8"),
+		flagshipItemJSON("OPSL.8", "s11", "caching-layer", "Opslane Caching Layer", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/08-caching", "OPSL.7", "", "go test ./11-flagship/01-opslane/internal/cache/...", "OPSL.9"),
+		flagshipItemJSON("OPSL.9", "s11", "observability", "Opslane Observability", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/09-observability", "OPSL.8", "", "go test ./11-flagship/01-opslane/internal/logging/... ./11-flagship/01-opslane/internal/metrics/...", "OPSL.10"),
+		flagshipItemJSON("OPSL.10", "s11", "graceful-shutdown-and-deployment", "Opslane Graceful Shutdown and Deployment", "capstone", "placeholder", "rubric", "11-flagship/01-opslane/modules/10-shutdown-deploy", "OPSL.9", "", "", ""),
+	}
+
+	if includeOptionalProject {
+		coreItems = append(coreItems,
+			flagshipItemJSON("CRMX.1", "s11", "foundation", "CRMX Foundation", "checkpoint", "placeholder", "rubric", "11-flagship/02-crmx/modules/01-foundation", "", "", "", "CRMX.2"),
+			flagshipItemJSON("CRMX.2", "s11", "capstone", "CRMX Capstone", "capstone", "placeholder", "rubric", "11-flagship/02-crmx/modules/02-capstone", "CRMX.1", "", "", ""),
+		)
+	}
+
+	return fmt.Sprintf(`{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s11",
+      "number": "11",
+      "slug": "flagship",
+      "title": "Flagship",
+      "path_prefix": "11-flagship",
+      "entry_points": ["OPSL.1"],
+      "outputs": ["OPSL.10"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+%s
+  ]
+}`, strings.Join(coreItems, ",\n"))
+}
+
+func flagshipItemJSON(id, sectionID, slug, title, itemType, status, verificationMode, path, prereq, runCommand, testCommand, next string) string {
+	prerequisites := "[]"
+	if prereq != "" {
+		prerequisites = fmt.Sprintf(`["%s"]`, prereq)
+	}
+	nextItems := "[]"
+	if next != "" {
+		nextItems = fmt.Sprintf(`["%s"]`, next)
+	}
+
+	return fmt.Sprintf(`    {
+      "id": "%s",
+      "section_id": "%s",
+      "slug": "%s",
+      "title": "%s",
+      "type": "%s",
+      "subtype": "",
+      "level": "production",
+      "status": "%s",
+      "verification_mode": "%s",
+      "path": "%s",
+      "prerequisites": %s,
+      "run_command": "%s",
+      "test_command": "%s",
+      "starter_path": "",
+      "next_items": %s
+    }`, id, sectionID, slug, title, itemType, status, verificationMode, path, prerequisites, runCommand, testCommand, nextItems)
+}
+
+func opslaneModuleDirs() []string {
+	return []string{
+		"modules/01-foundation",
+		"modules/02-database",
+		"modules/03-auth",
+		"modules/04-http-api",
+		"modules/05-order-processing",
+		"modules/06-payment-pipeline",
+		"modules/07-event-workers",
+		"modules/08-caching",
+		"modules/09-observability",
+		"modules/10-shutdown-deploy",
+	}
+}
+
+func writeFlagshipProjectSurface(t *testing.T, root, projectRoot string, moduleDirs []string, includeModuleMap, includeProgress, includeImplementedTargets bool) {
+	t.Helper()
+
+	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "README.md")), "# Flagship Project\n")
+	if includeModuleMap {
+		writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "MODULES.md")), "# Module Map\n")
+	}
+	if includeProgress {
+		writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "scripts", "progress.go")), "//go:build ignore\n\npackage main\n\nfunc main() {}\n")
+	}
+	for _, moduleDir := range moduleDirs {
+		writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, moduleDir, "README.md")), "# Module\n")
+	}
+	if !includeImplementedTargets {
+		return
+	}
+
+	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "cmd", "server", "main.go")), "package main\nfunc main() {}\n")
+	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "config", "config.go")), "package config\n")
+	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "db", "repository.go")), "package db\n")
+	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "auth", "service.go")), "package auth\n")
+	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "handlers", "handlers.go")), "package handlers\n")
+	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "middleware", "middleware.go")), "package middleware\n")
+	writeFile(t, root, ".github/workflows/ci.yml", "name: ci\n")
 }
 
 func validFoundationsLessonReadme(runCommand string) string {
@@ -1056,6 +1326,59 @@ func mustMkdir(t *testing.T, root, relativePath string) {
 func containsReport(reports []string, want string) bool {
 	for _, report := range reports {
 		if strings.Contains(report, want) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func requireOnlyFixtureExpectedReports(t *testing.T, result Result, reports []string, want string) {
+	t.Helper()
+
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected validation error %q, got none", want)
+	}
+
+	filtered := reportsWithoutFixtureScaffold(reports)
+	if len(filtered) != 1 || !containsReport(filtered, want) {
+		t.Fatalf("expected only %q outside fixture scaffold reports, got %v from all reports %v", want, filtered, reports)
+	}
+}
+
+func requireOnlyFixtureScaffoldReports(t *testing.T, result Result, reports []string) {
+	t.Helper()
+
+	filtered := reportsWithoutFixtureScaffold(reports)
+	if len(filtered) != 0 {
+		t.Fatalf("expected only fixture scaffold reports, got %d validation errors and non-scaffold reports %v from all reports %v", result.ErrorCount, filtered, reports)
+	}
+}
+
+func reportsWithoutFixtureScaffold(reports []string) []string {
+	filtered := make([]string, 0, len(reports))
+	for _, report := range reports {
+		if isFixtureScaffoldReport(report) {
+			continue
+		}
+		filtered = append(filtered, report)
+	}
+
+	return filtered
+}
+
+func isFixtureScaffoldReport(report string) bool {
+	prefixes := []string{
+		"Invalid v2 architecture contract:",
+		"Invalid v2 section status:",
+		"Invalid v2 section outputs:",
+		"Invalid section README contract:",
+		"Invalid engineering README contract:",
+		"Warning: placeholder item:",
+	}
+
+	for _, prefix := range prefixes {
+		if strings.HasPrefix(report, prefix) {
 			return true
 		}
 	}

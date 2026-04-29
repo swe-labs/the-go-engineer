@@ -52,12 +52,10 @@ In this lesson, we look at common error shapes:
 2. Declare a new variable `x := 10` but don't use it. Observe the compiler error.
 3. Try to call a function that doesn't exist, like `fmt.Printlnz("hi")`.
 
-## ⚠️ In Production
-
+## In Production
 Reading compiler errors quickly is the difference between a 30-second fix and a 10-minute frustration. In production, CI systems will reject any code that doesn't compile, ensuring that "broken" code never reaches the user.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is a compiler error better than a runtime crash?
 2. What does the "line number" in an error message actually represent?
 3. Why does Go refuse to compile code with unused variables?

@@ -1,5 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Formatting
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how `fmt` formats values into readable strings, aligned output, and wrapped errors.
+//
+// WHY THIS MATTERS:
+//   - Formatting is template-driven output. You give `fmt`: - a format string - some values and `fmt` turns those values into text according to the verbs...
+//
+// RUN:
+//   go run ./04-types-design/strings-and-text/2-formatting-string
+//
+// KEY TAKEAWAY:
+//   - Learn how `fmt` formats values into readable strings, aligned output, and wrapped errors.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -12,12 +32,7 @@ import (
 	"time"
 )
 
-// ============================================================================
-// Section 7: Strings & Text — Formatting with fmt
-// Level: Beginner
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - All fmt verbs: %v, %+v, %#v, %T, %d, %f, %s, %q, %t, %p, %b, %x
 //   - fmt.Printf vs fmt.Sprintf vs fmt.Fprintf
 //   - Width and precision formatting (alignment, decimal places)
@@ -26,12 +41,10 @@ import (
 //
 // ANALOGY:
 //   Format verbs are like fill-in-the-blank templates:
-//     "Hello %s, you are %d years old" ← template with placeholders
-//     fmt.Printf(template, "Rasel", 25) → "Hello Rasel, you are 25 years old"
+//     "Hello %s, you are %d years old" <- template with placeholders
+//     fmt.Printf(template, "Rasel", 25) -> "Hello Rasel, you are 25 years old"
 //   Each % placeholder specifies HOW to format that argument.
 //
-// RUN: go run ./04-types-design/strings-and-text/2-formatting-string
-// ============================================================================
 
 // ServerConfig demonstrates struct formatting with different verbs.
 type ServerConfig struct {
@@ -120,7 +133,7 @@ func main() {
 	}
 
 	fmt.Printf("  %-15s %-8s %s\n", "SERVICE", "PORT", "STATUS")
-	fmt.Printf("  %s\n", strings.Repeat("─", 35))
+	fmt.Printf("  %s\n", strings.Repeat("-", 35))
 	for _, svc := range services {
 		fmt.Printf("  %-15s %-8d %s\n", svc.name, svc.port, svc.status)
 	}
@@ -135,7 +148,7 @@ func main() {
 	fmt.Printf("  Sprintf result: %s\n", logMsg)
 	fmt.Println()
 
-	// --- fmt.Errorf — Error wrapping ---
+	// --- fmt.Errorf - Error wrapping ---
 	// The %w verb wraps an existing error with additional context.
 	// errors.Is() and errors.As() can traverse the wrapped chain.
 	originalErr := errors.New("connection refused")
@@ -151,7 +164,8 @@ func main() {
 	fmt.Println("  - fmt.Sprintf returns a string, fmt.Printf prints to stdout")
 	fmt.Println("  - fmt.Errorf with the w verb wraps errors for chain traversal")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: ST.3 unicode & runes")
-	fmt.Println("   Current: ST.2 (formatting)")
+	fmt.Println("NEXT UP: ST.3 unicode")
+	fmt.Println("   Current: ST.2 (formatting-string)")
+	fmt.Println("   Previous: ST.1 (strings)")
 	fmt.Println("---------------------------------------------------")
 }

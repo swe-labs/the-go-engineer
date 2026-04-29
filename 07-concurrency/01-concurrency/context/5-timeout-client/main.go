@@ -1,5 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 07: Concurrency
+// Title: Timeout-Aware API Client
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Build a small HTTP client that uses `context.WithTimeout` to enforce deadlines and fails clearly when a request takes too long. This exercise is th...
+//
+// WHY THIS MATTERS:
+//   - Build a small HTTP client that uses `context.WithTimeout` to enforce deadlines and fails clearly when a request takes too long. This exercise is th...
+//
+// RUN:
+//   go run ./07-concurrency/01-concurrency/context/5-timeout-client
+//
+// KEY TAKEAWAY:
+//   - Build a small HTTP client that uses `context.WithTimeout` to enforce deadlines and fails clearly when a request takes too long. This exercise is th...
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -12,12 +32,8 @@ import (
 	"time"
 )
 
-// ============================================================================
-// Stage 07: Context — Timeout-Aware API Client (Exercise)
-// Level: Advanced
-// ============================================================================
+// Stage 07: Context - Timeout-Aware API Client (Exercise)
 //
-// WHAT YOU'LL LEARN:
 //   - Attaching context.WithTimeout to HTTP requests
 //   - How context cancellation propagates to the HTTP transport layer
 //   - The production pattern: NEVER make I/O calls without a timeout
@@ -28,11 +44,9 @@ import (
 //   HTTP client's internal transport layer monitors `ctx.Done()`. If the context
 //   expires before the TCP connection completes, the transport immediately closes
 //   the underlying socket and returns `context.DeadlineExceeded`. This prevents
-//   your application from hanging indefinitely on a slow or unresponsive server —
+//   your application from hanging indefinitely on a slow or unresponsive server -
 //   a critical defense against cascading failures in microservice architectures.
 //
-// RUN: go run ./07-concurrency/01-concurrency/context/5-timeout-client
-// ============================================================================
 
 // fetchWithTimeout makes an HTTP GET request with a timeout context.
 // If the request doesn't complete within the timeout, it's automatically cancelled.
@@ -43,7 +57,7 @@ func fetchWithTimeout(url string, timeout time.Duration) (string, error) {
 	defer cancel() // Always call cancel to release resources!
 
 	// Create the HTTP request WITH the context attached.
-	// This is the critical step — linking the context to the HTTP client.
+	// This is the critical step - linking the context to the HTTP client.
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return "", fmt.Errorf("creating request: %w", err)
@@ -74,27 +88,27 @@ func main() {
 	fmt.Println()
 
 	// Example 1: Fast request (should succeed)
-	fmt.Println("1️⃣  Fetching httpbin.org with 5s timeout...")
+	fmt.Println("1.  Fetching httpbin.org with 5s timeout...")
 	body, err := fetchWithTimeout("https://httpbin.org/get", 5*time.Second)
 	if err != nil {
-		fmt.Printf("   ❌ Error: %v\n", err)
+		fmt.Printf("   [ERROR] Error: %v\n", err)
 	} else {
 		// Print just the first 200 chars to keep output clean
 		if len(body) > 200 {
 			body = body[:200] + "..."
 		}
-		fmt.Printf("   ✅ Response (%d bytes): %s\n", len(body), body)
+		fmt.Printf("   [OK] Response (%d bytes): %s\n", len(body), body)
 	}
 
 	fmt.Println()
 
 	// Example 2: Deliberately short timeout (should fail)
-	fmt.Println("2️⃣  Fetching with impossibly short timeout (1ms)...")
+	fmt.Println("2.  Fetching with impossibly short timeout (1ms)...")
 	_, err = fetchWithTimeout("https://httpbin.org/delay/3", 1*time.Millisecond)
 	if err != nil {
-		fmt.Printf("   ❌ Expected timeout: %v\n", err)
+		fmt.Printf("   [ERROR] Expected timeout: %v\n", err)
 	} else {
-		fmt.Println("   ✅ Unexpected success!")
+		fmt.Println("   [OK] Unexpected success!")
 	}
 
 	fmt.Println()

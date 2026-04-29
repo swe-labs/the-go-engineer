@@ -1,30 +1,93 @@
 # Maintainer Checklist
 
-> Use this checklist to keep the v1/v2 workflow consistent.
-> All section references follow the v2.1 12-section architecture from `ARCHITECTURE.md`.
+Use this checklist to keep repository workflow, branch maintenance, documentation, and releases consistent.
+
+All section references follow the locked v2.1 12-section architecture from `ARCHITECTURE.md`.
 
 ## Daily Triage
 
-- Enforce the **GitHub Workflow**: no PRs should be reviewed unless they link to an approved issue.
-- Confirm new contributor PRs target `main` unless the work is explicitly `v1-only`.
-- Add labels for `v1-only`, `v2`, `backport`, `release-blocker`, and `breaking-change` as early as possible.
-- Move issues into the correct milestone and add them to the **"The Go Engineer v2"** project board.
-- Watch for PRs opened against `release/v1.0.0` and redirect them to `release/v1`.
+- Enforce issue-first workflow.
+- Confirm new contributor PRs target the correct branch.
+- Add labels early.
+- Move issues into the correct milestone and the GitHub Project: `The Go Engineer v2`.
+- Redirect stable-line work to the correct release branch.
+- Reject architecture changes unless they are explicitly approved.
 
-## PR Review & Merge Rules
+## Project and milestone tracking
 
-- **Reject** PRs that try to bypass the `README`-first teaching contract or introduce "magic" early in the curriculum (see `CURRICULUM-BLUEPRINT.md`).
-- Use **Squash and Merge** for PRs into `main`, `release/v1`, and `release/v2`.
+For every issue and PR:
+
+- assign the owner when appropriate
+- apply relevant labels
+- attach the active milestone when one exists
+- add the issue or PR to `The Go Engineer v2`
+- update tracking metadata when scope changes
+
+## Required Issue Title Format
+
+```text
+[TYPE] short description
+```
+
+Allowed types:
+
+```text
+[FEAT] [FIX] [DOCS] [TEST] [CHORE] [REFACTOR] [SECURITY] [RELEASE]
+```
+
+## Closed-Loop PR Maintenance
+
+Before a PR is ready for final maintainer review:
+
+- findings-first self-review must be complete
+- P0/P1/P2 findings must be fixed or explicitly documented
+- CI failures must be fixed or explained with evidence
+- top-level PR comments must be answered
+- inline review threads must be fixed, explained, or marked outdated when the diff no longer applies
+- addressed threads should be resolved when permitted
+- a final readiness comment should summarize changes, handled findings, validation, and remaining risks
+
+The final squash-merge remains maintainer-only.
+
+## PR Review Rules
+
+- Reject PRs that bypass the README-first teaching contract.
+- Reject PRs that introduce "magic" early in the curriculum.
+- Reject public architecture drift unless explicitly approved.
+- Require linked issues.
+- Require validation evidence.
+- Use **Squash and Merge**.
 - Never develop directly on long-lived branches.
-- If a fix belongs in both supported lines, merge it once into the correct source branch and then `git cherry-pick -x` it to the other branch.
-- Add the `backport` label before merge when that follow-up is required.
-- Verify that new lessons are registered in `curriculum.v2.json` and pass `go run ./scripts/validate_curriculum.go`.
+- Do not self-merge unless explicitly approved for that PR.
+
+## Merge Commit Format
+
+Final squash commits should use:
+
+```text
+[TYPE] short imperative description
+```
+
+Examples:
+
+```text
+[FEAT] add SY.1 sync.Mutex lesson
+[FIX] correct DB.3 tenant-scoping example
+[DOCS] align release docs with v2.1.x maintenance
+```
+
+## Branch Roles
+
+- `main`: post-v2.1 implementation line
+- `release/v1`: stable v1 maintenance line
+- `release/v2`: stable v2.1.x maintenance line
 
 ## Backports
 
-- For a stable-user bug, fix it on `release/v1` first.
-- For a v2-only bug, fix it on `main`.
-- After merge, cherry-pick with:
+- For a stable v1 bug, fix on `release/v1` first.
+- For a v2.1.x stable bug, fix on `release/v2` first.
+- For post-v2.1 implementation, work on `main`.
+- If a fix belongs in multiple supported lines, use `git cherry-pick -x`.
 
 ```bash
 git switch <target-branch>
@@ -33,79 +96,69 @@ git cherry-pick -x <merged-commit-sha>
 git push origin <target-branch>
 ```
 
-- Open a follow-up PR if the destination branch is protected.
-- Remove the `backport` label only after the second branch has the fix.
-
 ## Release Flow
 
-- Tag v2 prereleases from `main` as `v2.1.0-alpha.N` while the stabilization line is still open.
-- Keep `release/v2` as the active RC stabilization branch once beta-complete work is cut there.
-- Tag beta and RC builds from `release/v2`.
-- Tag final `v2.1.0` from `release/v2`.
-- Keep `release/v1` for v1 patch support until you formally end support.
+For v2.1.x maintenance releases:
 
-### RC.1 Gate
+1. Branch from `release/v2`.
+2. Update `CHANGELOG.md`, release notes, and any required metadata.
+3. Run local verification.
+4. Open a release PR into `release/v2`.
+5. Squash and merge after green CI and approval.
+6. Tag from `release/v2`.
 
-Before tagging `v2.1.0-rc.1`, verify all of the following on `release/v2`:
+## Local Verification
 
-- `make build`
-- `make test`
-- `make test-race`
-- `make bench`
-- `make run-hello`
-- `make run-env`
-- `go run ./scripts/validate_curriculum.go`
-- the release-prep PR is green and approved
-- all `release-blocker` issues in the `v2 rc` milestone are closed or explicitly accepted for deferment
-- the release branch is clean immediately before tagging
+```bash
+go build ./...
+go vet ./...
+unformatted=$(gofmt -l .); test -z "$unformatted" || (echo "$unformatted" && exit 1)
+go mod tidy
+git diff --exit-code -- go.mod go.sum
+go test ./...
+go test -race ./...
+go test -coverprofile coverage.out ./...
+go run ./scripts/validate_curriculum.go
+```
 
-If GNU Make is not available in the maintainer environment, run the documented direct Go-command equivalents from `RELEASE.md` instead of skipping the gate.
+## Documentation Alignment Check
 
-If `go test -race ./...` cannot run locally because the environment lacks a supported CGO toolchain or C compiler, do not silently waive it. Use the CI race check on the release-prep PR as the release gate for that item.
+Before release or workflow changes, verify these documents agree with `ARCHITECTURE.md` and each other:
 
-### After `v2.1.0-rc.1` Is Published
+- `README.md`
+- `ARCHITECTURE.md`
+- `ROADMAP.md`
+- `LEARNING-PATH.md`
+- `CURRICULUM-BLUEPRINT.md`
+- `CODE-STANDARDS.md`
+- `TESTING-STANDARDS.md`
+- `COMMON-MISTAKES.md`
+- `docs/PROGRESSION.md`
+- `docs/ENGINEERING_ERROR_FRAMEWORK.md`
+- `docs/flagship/OPSLANE_SAAS_BACKEND.md`
+- `CONTRIBUTING.md`
+- `RELEASE.md`
+- `MAINTAINER-CHECKLIST.md`
+- `AGENTS.md`
+- `.github/pull_request_template.md`
+- `.github/ISSUE_TEMPLATE/*`
+- `.agents/skills/*/SKILL.md`
 
-- Keep `release/v2` focused on release blockers, validation findings, and release-facing polish only.
-- Open all RC findings in the `v2 rc` milestone and keep them on the **The Go Engineer v2** project board.
-- Do not resume beta migration or broad architecture work on `release/v2`.
-- Tag final `v2.1.0` only after RC blockers are closed or explicitly deferred.
+## Architecture Checklist
 
-### Stable `v2.1.0` Gate
+- [ ] Public section count remains 12.
+- [ ] Section IDs remain `s00` through `s11`.
+- [ ] Canonical folder names remain unchanged.
+- [ ] Lesson IDs belong to the correct section.
+- [ ] `curriculum.v2.json` matches filesystem paths.
+- [ ] Validator passes.
 
-Before tagging `v2.1.0`, verify all of the following on `release/v2`:
+## Lesson Checklist
 
-- `make build`
-- `make test`
-- `make test-race`
-- `make bench`
-- `make run-hello`
-- `make run-env`
-- `go run ./scripts/validate_curriculum.go`
-- the `release-prep/v2.1.0` PR is green and approved
-- `v2.1.0-rc.1` feedback has been reviewed and true blockers are fixed or explicitly deferred
-- all remaining `release-blocker` issues in the `v2 rc` milestone are closed or intentionally deferred
-- the release branch is clean immediately before tagging
-
-If GNU Make is not available in the maintainer environment, run the documented direct Go-command equivalents from `RELEASE.md`.
-
-If local `go test -race ./...` is still blocked by the maintainer environment, require the CI race check on the stable release-prep PR before tagging.
-
-## Branch Hygiene
-
-- Keep `main` as the default branch.
-- Keep branch protections on `main`, `release/v1`, and `release/v2`.
-- Retire `release/v1.0.0` only after all external references and protections are moved to `release/v1`.
-- Auto-delete short-lived branches after merge.
-
-## Doc Alignment Check
-
-Before any release, verify these documents are aligned with `ARCHITECTURE.md`:
-
-- `ROADMAP.md` - section statuses match reality
-- `LEARNING-PATH.md` - phases and section boundaries correct
-- `CURRICULUM-BLUEPRINT.md` - teaching contract matches README contract
-- `CODE-STANDARDS.md` - NEXT UP regex and templates current
-- `TESTING-STANDARDS.md` - coverage targets match section IDs
-- `COMMON-MISTAKES.md` - all "Taught in" references use correct lesson IDs
-- `docs/PROGRESSION.md` - milestone table matches `ARCHITECTURE.md` milestones
-- `CONTRIBUTING.md` - section numbering and workflow current
+- [ ] README follows the required section order.
+- [ ] `main.go` follows the standard header and footer.
+- [ ] `NEXT UP:` matches `curriculum.v2.json`.
+- [ ] Section README is updated.
+- [ ] Starter code compiles.
+- [ ] Tests prove behavior.
+- [ ] Run command works exactly as printed.

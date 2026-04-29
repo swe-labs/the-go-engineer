@@ -1,6 +1,28 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 10: Production Operations
+// Title: zerolog Comparison
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Why zerolog exists: allocation-free logging via builder chain
+//   - How zerolog's API compares to slog's API
+//   - When to choose zerolog over slog (and when NOT to)
+//   - What "allocation-free" actually means
+//
+// WHY THIS MATTERS:
+//   - slog allocates per log call: Attr struct, Value union, Record.
+//   - At 10,000 req/s this creates significant GC pressure.
+//   - zerolog writes directly to sync.Pool buffer - zero allocations.
+//
+// KEY TAKEAWAY:
+//   - Use zerolog only when performance pressure justifies it.
+//   - Benchmark: slog ~340ns/op (4 alloc), zerolog ~82ns/op (0 alloc).
+// ============================================================================
+
 package main
 
 import (
@@ -10,12 +32,8 @@ import (
 	"time"
 )
 
-// ============================================================================
 // Stage 10: Application Architecture - Structured Logging: zerolog and the Allocation Question
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Why zerolog exists: allocation-free logging via a builder chain
 //   - How zerolog's API compares to slog's API
 //   - When to choose zerolog over slog (and when NOT to)
@@ -51,8 +69,6 @@ import (
 //       To use zerolog for real, add: go get github.com/rs/zerolog
 //       Then change the import and use the chain API shown in comments below.
 //
-// RUN: go run ./10-production/01-structured-logging/4-zerolog-comparison
-// ============================================================================
 
 // zeroLogEquivalent shows zerolog patterns alongside their slog equivalents.
 // Uncomment the zerolog lines and add the import to see the real API.
@@ -76,18 +92,18 @@ func zeroLogPatterns() {
 	// reqLog := log.With().Str("request_id", "req_001").Logger()
 	// reqLog.Info().Int("status", 200).Msg("request completed")
 
-	// Error with stack trace (slog — no built-in stack):
+	// Error with stack trace (slog - no built-in stack):
 	logger.Error("panic recovered", slog.Any("error", "index out of range"))
 
 	// zerolog equivalent (has built-in stack support):
 	// log.Error().Err(err).Stack().Msg("panic recovered")
 
-	// Conditional logging — slog (attributes are always evaluated):
+	// Conditional logging - slog (attributes are always evaluated):
 	if logger.Enabled(nil, slog.LevelDebug) {
 		logger.Debug("expensive debug", slog.Any("payload", buildExpensivePayload()))
 	}
 
-	// zerolog equivalent (builder chain is lazy — no evaluation if disabled):
+	// zerolog equivalent (builder chain is lazy - no evaluation if disabled):
 	// log.Debug().Interface("payload", buildExpensivePayload()).Msg("expensive debug")
 	// zerolog's chain evaluates lazily ONLY if the level is enabled.
 	// This is safer than the slog.Enabled() guard because you cannot forget it.
@@ -102,7 +118,7 @@ func buildExpensivePayload() map[string]any {
 // zeroAllocPattern demonstrates the core reason zerolog outperforms slog.
 // The pattern is a method chain that all operates on one stack-allocated value.
 func zeroAllocPattern() {
-	// SLOG PATTERN — each call creates slog.Attr on the heap:
+	// SLOG PATTERN - each call creates slog.Attr on the heap:
 	//   slog.Info("msg",
 	//       slog.String("a", "1"),  // alloc: slog.Attr + slog.Value
 	//       slog.String("b", "2"),  // alloc: slog.Attr + slog.Value
@@ -110,7 +126,7 @@ func zeroAllocPattern() {
 	//   )
 	//   Total: ~4 allocs
 
-	// ZEROLOG PATTERN — single pointer, all written to pooled buffer:
+	// ZEROLOG PATTERN - single pointer, all written to pooled buffer:
 	//   log.Info().
 	//       Str("a", "1").  // writes bytes to buffer, no alloc
 	//       Str("b", "2").  // writes bytes to buffer, no alloc
@@ -137,22 +153,21 @@ func levelComparison() {
 	// log.Info().Msg("info message")
 	// log.Warn().Msg("warn message")
 	// log.Error().Msg("error message")
-	// log.Fatal().Msg("fatal — calls os.Exit(1)")
-	// log.Panic().Msg("panic — calls panic()")
+	// log.Fatal().Msg("fatal - calls os.Exit(1)")
+	// log.Panic().Msg("panic - calls panic()")
 }
 
 func main() {
 	zeroLogPatterns()
 	levelComparison()
 
-	// KEY TAKEAWAY:
 	// - zerolog: 0 allocs, builder chain, requires external dependency
 	// - slog: 4+ allocs, function args, standard library, slog.Handler ecosystem
 	// - Default choice: slog. It is fast enough for 99% of services.
 	// - Reach for zerolog ONLY after pprof confirms logging is the bottleneck.
 	// - Never add a dependency to solve a problem you haven't measured.
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: SL.5 PII redactor")
+	fmt.Println("NEXT UP: SL.5 PII redactor")
 	fmt.Println("   Current: SL.4 (zerolog comparison)")
 	fmt.Println("---------------------------------------------------")
 }

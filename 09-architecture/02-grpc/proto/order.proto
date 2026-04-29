@@ -4,7 +4,7 @@ package order.v1;
 option go_package = "github.com/rasel9t6/the-go-engineer/09-architecture/02-grpc/gen";
 
 // ============================================================================
-// Section 26: gRPC — Service Definition
+// Section 26: gRPC - Service Definition
 // ============================================================================
 //
 // This .proto file IS the API contract. Both the Go server and every client
@@ -37,7 +37,7 @@ service OrderService {
 }
 
 // ============================================================================
-// Messages — the data types exchanged over the wire
+// Messages - the data types exchanged over the wire
 // ============================================================================
 
 message CreateOrderRequest {

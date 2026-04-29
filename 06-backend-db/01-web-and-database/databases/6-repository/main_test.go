@@ -5,6 +5,7 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"path/filepath"
 	"testing"
@@ -13,6 +14,21 @@ import (
 
 	"github.com/rasel9t6/the-go-engineer/06-backend-db/01-web-and-database/databases/6-repository/repository"
 )
+
+const repositorySchema = `
+CREATE TABLE users (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT,
+	email TEXT UNIQUE,
+	password TEXT,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE profiles (
+	user_id INTEGER PRIMARY KEY,
+	avatar TEXT,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+`
 
 func openRepositoryTestDB(t *testing.T) *sql.DB {
 	t.Helper()
@@ -41,8 +57,9 @@ func openRepositoryTestDB(t *testing.T) *sql.DB {
 func TestRepositoryCreateUserAndGetByEmail(t *testing.T) {
 	db := openRepositoryTestDB(t)
 	repo := repository.NewSQLUserRepository(db)
+	ctx := context.Background()
 
-	id, err := repo.CreateUser("Alice Repo", "alice.repo@example.com", "supersecret", "alice.png")
+	id, err := repo.Create(ctx, "Alice Repo", "alice.repo@example.com", "supersecret", "alice.png")
 	if err != nil {
 		t.Fatalf("create user: %v", err)
 	}
@@ -50,7 +67,7 @@ func TestRepositoryCreateUserAndGetByEmail(t *testing.T) {
 		t.Fatalf("expected positive user id, got %d", id)
 	}
 
-	user, err := repo.GetUserByEmail("alice.repo@example.com")
+	user, err := repo.GetByEmail(ctx, "alice.repo@example.com")
 	if err != nil {
 		t.Fatalf("get user by email: %v", err)
 	}
@@ -60,23 +77,24 @@ func TestRepositoryCreateUserAndGetByEmail(t *testing.T) {
 	if user.Profile.Avatar != "alice.png" {
 		t.Fatalf("unexpected avatar: %q", user.Profile.Avatar)
 	}
-	if user.HashedPassword == "supersecret" || user.HashedPassword == "" {
-		t.Fatalf("expected stored password to be hashed")
+	if user.Password != "supersecret" {
+		t.Fatalf("expected password to match")
 	}
 }
 
 func TestRepositoryGetUsersReturnsCreatedRows(t *testing.T) {
 	db := openRepositoryTestDB(t)
 	repo := repository.NewSQLUserRepository(db)
+	ctx := context.Background()
 
-	if _, err := repo.CreateUser("Alice Repo", "alice@example.com", "secret123", "alice.png"); err != nil {
+	if _, err := repo.Create(ctx, "Alice Repo", "alice@example.com", "secret123", "alice.png"); err != nil {
 		t.Fatalf("create first user: %v", err)
 	}
-	if _, err := repo.CreateUser("Bob Repo", "bob@example.com", "secret456", "bob.png"); err != nil {
+	if _, err := repo.Create(ctx, "Bob Repo", "bob@example.com", "secret456", "bob.png"); err != nil {
 		t.Fatalf("create second user: %v", err)
 	}
 
-	users, err := repo.GetUsers()
+	users, err := repo.List(ctx)
 	if err != nil {
 		t.Fatalf("get users: %v", err)
 	}

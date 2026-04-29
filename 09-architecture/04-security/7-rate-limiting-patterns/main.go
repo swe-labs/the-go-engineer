@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Rate limiting patterns
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how token bucket and similar controls protect shared resources from abuse and accidental overload.
+//
+// WHY THIS MATTERS:
+//   - Rate limiting is resource budgeting for shared systems.
+//
+// RUN:
+//   go run ./09-architecture/04-security/7-rate-limiting-patterns
+//
+// KEY TAKEAWAY:
+//   - Learn how token bucket and similar controls protect shared resources from abuse and accidental overload.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - Rate limiting patterns
 //
-// Run: go run ./09-architecture/04-security/7-rate-limiting-patterns
 
 func main() {
 	fmt.Println("=== SEC.7 Rate limiting patterns ===")

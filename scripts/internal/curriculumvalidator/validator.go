@@ -8,6 +8,8 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -33,10 +35,10 @@ type V2Section struct {
 	Slug          string   `json:"slug"`
 	Title         string   `json:"title"`
 	PathPrefix    string   `json:"path_prefix"`
+	Status        string   `json:"status"`
 	EntryPoints   []string `json:"entry_points"`
 	Outputs       []string `json:"outputs"`
 	Prerequisites []string `json:"prerequisites"`
-	Status        string   `json:"status"`
 }
 
 type V2Item struct {
@@ -73,9 +75,10 @@ type Result struct {
 	ErrorCount       int
 }
 
-var runPathPattern = regexp.MustCompile(`\./[A-Za-z0-9._/\-]+`)
+var runPathPattern = regexp.MustCompile(`\./[A-Za-z0-9._/\-]+(?:/\.\.\.)?`)
 var nextUpIDPattern = regexp.MustCompile(`NEXT UP:\s*([A-Z]{2,6}\.\d+)`)
 var markdownLinkPattern = regexp.MustCompile(`\[[^\]]+\]\(([^)]+)\)`)
+var flagshipPrefixPattern = regexp.MustCompile(`^[A-Z]{3,6}$`)
 
 var (
 	allowedItemTypes = map[string]bool{
@@ -105,9 +108,32 @@ var (
 		"mixed":  true,
 	}
 	allowedSectionStatuses = map[string]bool{
-		"":            true,
-		"implemented": true,
-		"placeholder": true,
+		"stable": true,
+	}
+	expectedV2SectionOutputs = map[string][]string{
+		"s00": {"HC.5"},
+		"s01": {"GT.6"},
+		"s02": {"LB.4", "CF.7", "DS.6"},
+		"s03": {"FE.10"},
+		"s04": {"TI.15", "CO.3", "ST.6"},
+		"s05": {"MP.4", "CL.4", "EN.6", "FS.8"},
+		"s06": {"HS.10", "API.9", "DB.8"},
+		"s07": {"GC.7", "SY.6", "CT.5", "TM.7", "CP.5"},
+		"s08": {"TE.10", "PR.6"},
+		"s09": {"PD.3", "ARCH.9", "SEC.11"},
+		"s10": {"SL.5", "GS.3", "CFG.5", "OPS.5", "DOCKER.3", "DEPLOY.3", "CG.3"},
+		"s11": {"OPSL.10"},
+	}
+	canonicalSectionReadmeTracks = map[string][]string{
+		"s05": {"MP.1-MP.4", "CL.1-CL.4", "EN.1-EN.6", "FS.1-FS.8"},
+		"s08": {"TE.1-TE.10", "PR.1-PR.6"},
+		"s09": {"PD.1-PD.3", "ARCH.1-ARCH.9", "SEC.1-SEC.11"},
+		"s10": {"SL.1-SL.5", "GS.1-GS.3", "CFG.1-CFG.5", "OPS.1-OPS.5", "DOCKER.1-DOCKER.3", "DEPLOY.1-DEPLOY.3", "CG.1-CG.3"},
+	}
+	forbiddenSectionReadmeLabels = map[string][]string{
+		"s05": {"PKG.1", "IO.1"},
+		"s08": {"Track A", "Track B"},
+		"s09": {"Track GR"},
 	}
 )
 
@@ -180,18 +206,31 @@ func pathExists(root, path string) bool {
 	return err == nil
 }
 
-func extractCommandTarget(command string) (string, error) {
+func extractCommandTargets(command string) ([]string, error) {
 	command = strings.TrimSpace(command)
 	if command == "" {
-		return "", errors.New("command is empty")
+		return nil, errors.New("command is empty")
 	}
 
-	match := runPathPattern.FindString(command)
-	if match == "" || match == "./..." || isPlaceholderPath(match) {
-		return "", fmt.Errorf("command does not contain a concrete ./path target: %q", command)
+	matches := runPathPattern.FindAllString(command, -1)
+	if len(matches) == 0 {
+		return nil, fmt.Errorf("command does not contain a concrete ./path target: %q", command)
 	}
 
-	return filepath.Clean(strings.TrimPrefix(match, "./")), nil
+	targets := make([]string, 0, len(matches))
+	for _, match := range matches {
+		if match == "./..." || isPlaceholderPath(match) {
+			continue
+		}
+		target := strings.TrimSuffix(match, "/...")
+		targets = append(targets, filepath.Clean(strings.TrimPrefix(target, "./")))
+	}
+
+	if len(targets) == 0 {
+		return nil, fmt.Errorf("command does not contain a concrete ./path target: %q", command)
+	}
+
+	return targets, nil
 }
 
 func validateCurriculumPaths(root string, report func(string)) (int, int, error) {
@@ -229,6 +268,9 @@ func validateCurriculumPaths(root string, report func(string)) (int, int, error)
 
 func shouldScanRunPaths(path string) bool {
 	if filepath.Ext(path) == ".go" {
+		if strings.HasSuffix(filepath.Base(path), "_test.go") {
+			return false
+		}
 		return true
 	}
 
@@ -293,8 +335,9 @@ func validateRunPaths(root string, report func(string)) (int, int, error) {
 					continue
 				}
 
-				target := filepath.Clean(strings.TrimPrefix(match, "./"))
-				alternateTarget := filepath.Clean(filepath.Join(filepath.Dir(cleanPath), strings.TrimPrefix(match, "./")))
+				trimmedMatch := strings.TrimSuffix(match, "/...")
+				target := filepath.Clean(strings.TrimPrefix(trimmedMatch, "./"))
+				alternateTarget := filepath.Clean(filepath.Join(filepath.Dir(cleanPath), strings.TrimPrefix(trimmedMatch, "./")))
 
 				if pathExists(root, target) || pathExists(root, alternateTarget) {
 					continue
@@ -352,13 +395,13 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 			errorsFound++
 		}
 
-		if !allowedSectionStatuses[strings.TrimSpace(s.Status)] {
-			report(fmt.Sprintf("Invalid v2 section status: %s -> %s", s.ID, s.Status))
+		if s.PathPrefix != "" && !pathExists(root, s.PathPrefix) {
+			report(fmt.Sprintf("Invalid v2 section path_prefix: %s -> %s", s.ID, s.PathPrefix))
 			errorsFound++
 		}
 
-		if s.PathPrefix != "" && !pathExists(root, s.PathPrefix) {
-			report(fmt.Sprintf("Invalid v2 section path_prefix: %s -> %s", s.ID, s.PathPrefix))
+		if strings.TrimSpace(s.Status) != "" && !allowedSectionStatuses[s.Status] {
+			report(fmt.Sprintf("Invalid v2 section status: %s -> %s", s.ID, s.Status))
 			errorsFound++
 		}
 
@@ -448,24 +491,34 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 		}
 
 		if item.RunCommand != "" {
-			target, err := extractCommandTarget(item.RunCommand)
+			targets, err := extractCommandTargets(item.RunCommand)
 			if err != nil {
 				report(fmt.Sprintf("Invalid v2 run command: %s -> %v", item.ID, err))
 				errorsFound++
-			} else if !pathExists(root, target) {
-				report(fmt.Sprintf("Invalid v2 run command target: %s -> %s", item.ID, item.RunCommand))
-				errorsFound++
+			} else {
+				for _, target := range targets {
+					if !pathExists(root, target) {
+						report(fmt.Sprintf("Invalid v2 run command target: %s -> %s", item.ID, item.RunCommand))
+						errorsFound++
+						break
+					}
+				}
 			}
 		}
 
 		if item.TestCommand != "" {
-			target, err := extractCommandTarget(item.TestCommand)
+			targets, err := extractCommandTargets(item.TestCommand)
 			if err != nil {
 				report(fmt.Sprintf("Invalid v2 test command: %s -> %v", item.ID, err))
 				errorsFound++
-			} else if !pathExists(root, target) {
-				report(fmt.Sprintf("Invalid v2 test command target: %s -> %s", item.ID, item.TestCommand))
-				errorsFound++
+			} else {
+				for _, target := range targets {
+					if !pathExists(root, target) {
+						report(fmt.Sprintf("Invalid v2 test command target: %s -> %s", item.ID, item.TestCommand))
+						errorsFound++
+						break
+					}
+				}
 			}
 		}
 
@@ -494,6 +547,8 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 
 		itemIDs[item.ID] = item
 	}
+
+	errorsFound += validateExpectedSectionOutputs(sectionIDs, report)
 
 	for _, s := range cur.Sections {
 		for _, prereqID := range s.Prerequisites {
@@ -543,11 +598,248 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 	}
 
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
+	errorsFound += validateFlagshipProjects(root, sectionIDs, cur.Items, report)
 	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
+	errorsFound += validateSectionReadmeTrackLabels(root, sectionIDs, report)
 	errorsFound += validateV2TextEncoding(root, sectionIDs, cur.Items, report)
 	errorsFound += validateFoundationsReadmeContracts(root, cur.Items, report)
+	errorsFound += validateEngineeringReadmeContracts(root, cur.Items, report)
 
 	return len(cur.Sections), len(cur.Items), placeholderCount, errorsFound, true, nil
+}
+
+func sameStringSlice(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+
+	return true
+}
+
+func validateExpectedSectionOutputs(sections map[string]V2Section, report func(string)) int {
+	errorsFound := 0
+
+	for sectionID := range sections {
+		if _, expected := expectedV2SectionOutputs[sectionID]; !expected {
+			report(fmt.Sprintf("Invalid v2 architecture contract: unexpected section %s", sectionID))
+			errorsFound++
+		}
+	}
+
+	for sectionID, expectedOutputs := range expectedV2SectionOutputs {
+		section, exists := sections[sectionID]
+		if !exists {
+			report(fmt.Sprintf("Invalid v2 architecture contract: missing section %s", sectionID))
+			errorsFound++
+			continue
+		}
+
+		if strings.TrimSpace(section.Status) == "" {
+			report(fmt.Sprintf("Invalid v2 section status: %s requires stable status", section.ID))
+			errorsFound++
+		}
+
+		if !sameStringSlice(section.Outputs, expectedOutputs) {
+			report(fmt.Sprintf("Invalid v2 section outputs: %s -> %s (expected %s)", section.ID, strings.Join(section.Outputs, ", "), strings.Join(expectedOutputs, ", ")))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
+}
+
+func validateFlagshipProjects(root string, sections map[string]V2Section, items []V2Item, report func(string)) int {
+	stage, exists := sections["s11"]
+	if !exists {
+		return 0
+	}
+
+	errorsFound := 0
+	reservedPrefixes := make(map[string]bool)
+	type groupedItem struct {
+		item   V2Item
+		number int
+	}
+
+	projectItems := make(map[string][]groupedItem)
+	projectRoots := make(map[string]string)
+	rootOwners := make(map[string]string)
+
+	for _, item := range items {
+		prefix, _, ok := splitCurriculumID(item.ID)
+		if !ok {
+			continue
+		}
+
+		if item.SectionID != "s11" {
+			reservedPrefixes[prefix] = true
+		}
+	}
+
+	for _, item := range items {
+		prefix, number, ok := splitCurriculumID(item.ID)
+		if !ok || item.SectionID != "s11" {
+			continue
+		}
+
+		if reservedPrefixes[prefix] {
+			report(fmt.Sprintf("Invalid flagship project prefix: %s -> %s is already used outside s11", item.ID, prefix))
+			errorsFound++
+		}
+
+		projectItems[prefix] = append(projectItems[prefix], groupedItem{item: item, number: number})
+
+		projectRoot, ok := flagshipProjectRoot(item.Path)
+		if !ok {
+			report(fmt.Sprintf("Invalid flagship project path: %s -> %s", item.ID, item.Path))
+			errorsFound++
+			continue
+		}
+
+		if existingRoot, exists := projectRoots[prefix]; exists && existingRoot != projectRoot {
+			report(fmt.Sprintf("Invalid flagship project root alignment: %s -> %s and %s", prefix, existingRoot, projectRoot))
+			errorsFound++
+		} else {
+			projectRoots[prefix] = projectRoot
+		}
+
+		if existingPrefix, exists := rootOwners[projectRoot]; exists && existingPrefix != prefix {
+			report(fmt.Sprintf("Invalid flagship project root reuse: %s and %s both map to %s", existingPrefix, prefix, projectRoot))
+			errorsFound++
+		} else {
+			rootOwners[projectRoot] = prefix
+		}
+	}
+
+	if len(stage.EntryPoints) != 1 {
+		report(fmt.Sprintf("Invalid flagship stage contract: s11 requires exactly 1 entry point, found %d", len(stage.EntryPoints)))
+		errorsFound++
+	}
+	if len(stage.Outputs) != 1 {
+		report(fmt.Sprintf("Invalid flagship stage contract: s11 requires exactly 1 output, found %d", len(stage.Outputs)))
+		errorsFound++
+	}
+
+	canonicalPrefix := ""
+	if len(stage.EntryPoints) == 1 {
+		prefix, number, ok := splitCurriculumID(stage.EntryPoints[0])
+		if !ok || number != 1 {
+			report(fmt.Sprintf("Invalid flagship stage entry point: s11 -> %s", stage.EntryPoints[0]))
+			errorsFound++
+		} else {
+			canonicalPrefix = prefix
+		}
+	}
+	if len(stage.Outputs) == 1 {
+		outputPrefix, _, ok := splitCurriculumID(stage.Outputs[0])
+		if !ok {
+			report(fmt.Sprintf("Invalid flagship stage output: s11 -> %s", stage.Outputs[0]))
+			errorsFound++
+		} else if canonicalPrefix != "" && outputPrefix != canonicalPrefix {
+			report(fmt.Sprintf("Invalid flagship stage contract: s11 entry prefix %s does not match output prefix %s", canonicalPrefix, outputPrefix))
+			errorsFound++
+		}
+	}
+
+	for prefix, grouped := range projectItems {
+		if !flagshipPrefixPattern.MatchString(prefix) {
+			report(fmt.Sprintf("Invalid flagship project prefix: %s must be 3-6 uppercase letters", prefix))
+			errorsFound++
+		}
+
+		sort.Slice(grouped, func(i, j int) bool {
+			return grouped[i].number < grouped[j].number
+		})
+
+		for idx, entry := range grouped {
+			expectedNumber := idx + 1
+			if entry.number != expectedNumber {
+				report(fmt.Sprintf("Invalid flagship module numbering: %s expected %s.%d", entry.item.ID, prefix, expectedNumber))
+				errorsFound++
+			}
+		}
+
+		for idx, entry := range grouped {
+			if idx == len(grouped)-1 {
+				if len(entry.item.NextItems) != 0 {
+					report(fmt.Sprintf("Invalid flagship module chain: %s must terminate the project chain", entry.item.ID))
+					errorsFound++
+				}
+				continue
+			}
+
+			expectedNext := grouped[idx+1].item.ID
+			if len(entry.item.NextItems) != 1 || entry.item.NextItems[0] != expectedNext {
+				report(fmt.Sprintf("Invalid flagship module chain: %s must point to %s", entry.item.ID, expectedNext))
+				errorsFound++
+			}
+		}
+
+		projectRoot := projectRoots[prefix]
+		if projectRoot == "" {
+			continue
+		}
+
+		if !pathExists(root, filepath.ToSlash(filepath.Join(projectRoot, "README.md"))) {
+			report(fmt.Sprintf("Missing flagship project README: %s -> %s/README.md", prefix, filepath.ToSlash(projectRoot)))
+			errorsFound++
+		}
+		if !pathExists(root, filepath.ToSlash(filepath.Join(projectRoot, "MODULES.md"))) {
+			report(fmt.Sprintf("Missing flagship project module map: %s -> %s/MODULES.md", prefix, filepath.ToSlash(projectRoot)))
+			errorsFound++
+		}
+
+		implementedProject := false
+		for _, entry := range grouped {
+			if isImplementedItem(entry.item) {
+				implementedProject = true
+				break
+			}
+		}
+		if implementedProject && !pathExists(root, filepath.ToSlash(filepath.Join(projectRoot, "scripts", "progress.go"))) {
+			report(fmt.Sprintf("Missing flagship progress checker: %s -> %s/scripts/progress.go", prefix, filepath.ToSlash(projectRoot)))
+			errorsFound++
+		}
+
+		if canonicalPrefix == prefix && len(stage.Outputs) == 1 {
+			expectedFinal := grouped[len(grouped)-1].item.ID
+			if stage.Outputs[0] != expectedFinal {
+				report(fmt.Sprintf("Invalid flagship stage output: s11 -> %s (expected %s)", stage.Outputs[0], expectedFinal))
+				errorsFound++
+			}
+		}
+	}
+
+	return errorsFound
+}
+
+func splitCurriculumID(id string) (string, int, bool) {
+	prefix, suffix, found := strings.Cut(id, ".")
+	if !found || prefix == "" || suffix == "" {
+		return "", 0, false
+	}
+
+	number, err := strconv.Atoi(suffix)
+	if err != nil {
+		return "", 0, false
+	}
+
+	return prefix, number, true
+}
+
+func flagshipProjectRoot(itemPath string) (string, bool) {
+	parts := strings.Split(filepath.ToSlash(filepath.Clean(itemPath)), "/")
+	if len(parts) < 2 || parts[0] != "11-flagship" {
+		return "", false
+	}
+
+	return filepath.ToSlash(filepath.Join(parts[0], parts[1])), true
 }
 
 func allowedPathPrefixesForSection(section V2Section) []string {
@@ -583,6 +875,15 @@ func isFoundationsSection(sectionID string) bool {
 	}
 }
 
+func isEngineeringSection(sectionID string) bool {
+	switch sectionID {
+	case "s05", "s06", "s07", "s08", "s09", "s10":
+		return true
+	default:
+		return false
+	}
+}
+
 func validateFoundationsReadmeContracts(root string, items []V2Item, report func(string)) int {
 	errorsFound := 0
 
@@ -612,6 +913,91 @@ func validateFoundationsReadmeContracts(root string, items []V2Item, report func
 				report(fmt.Sprintf("Missing foundations lesson main.go: %s -> %s", item.ID, mainPath))
 				errorsFound++
 			}
+		}
+	}
+
+	return errorsFound
+}
+
+func validateEngineeringReadmeContracts(root string, items []V2Item, report func(string)) int {
+	errorsFound := 0
+
+	for _, item := range items {
+		if !isEngineeringSection(item.SectionID) {
+			continue
+		}
+		if isPlaceholderItem(item) {
+			continue
+		}
+
+		itemPath := filepath.ToSlash(filepath.Clean(item.Path))
+		readmePath := filepath.ToSlash(filepath.Join(itemPath, "README.md"))
+		if !pathExists(root, readmePath) {
+			report(fmt.Sprintf("Invalid engineering README contract: %s -> %s missing entirely", item.ID, filepath.ToSlash(readmePath)))
+			errorsFound++
+			continue
+		}
+
+		errorsFound += validateEngineeringHeadings(root, readmePath, item, report)
+	}
+
+	return errorsFound
+}
+
+func validateEngineeringHeadings(root, readmePath string, item V2Item, report func(string)) int {
+	requiredHeadings := []string{
+		"## Mission",
+		"## Prerequisites",
+		"## Mental Model",
+		"## Visual Model",
+		"## Machine View",
+		"## Run Instructions",
+	}
+
+	if item.Type == "lesson" {
+		requiredHeadings = append(requiredHeadings, "## Code Walkthrough")
+	} else {
+		requiredHeadings = append(requiredHeadings, "## Solution Walkthrough")
+	}
+
+	requiredHeadings = append(requiredHeadings, "## Try It")
+
+	if item.Type != "lesson" {
+		requiredHeadings = append(requiredHeadings, "## Verification Surface")
+	}
+
+	requiredHeadings = append(requiredHeadings,
+		"## In Production",
+		"## Thinking Questions",
+		"## Next Step",
+	)
+
+	data, err := os.ReadFile(filepath.Join(root, readmePath))
+	if err != nil {
+		report(fmt.Sprintf("Invalid engineering README contract: %s -> %s read failure: %v", item.ID, filepath.ToSlash(readmePath), err))
+		return 1
+	}
+
+	text := strings.ReplaceAll(string(data), "\r\n", "\n")
+	errorsFound := 0
+	lastOffset := 0
+
+	for _, heading := range requiredHeadings {
+		idx := strings.Index(text[lastOffset:], heading)
+		if idx >= 0 {
+			lastOffset += idx + len(heading)
+			continue
+		}
+
+		if strings.Contains(text, heading) {
+			report(fmt.Sprintf("Invalid engineering README contract: %s -> %s has %s out of order", item.ID, filepath.ToSlash(readmePath), heading))
+			errorsFound++
+			continue
+		}
+
+		if !strings.Contains(text, heading) {
+			report(fmt.Sprintf("Invalid engineering README contract: %s -> %s missing %s", item.ID, filepath.ToSlash(readmePath), heading))
+			errorsFound++
 		}
 	}
 
@@ -659,7 +1045,6 @@ func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []str
 	}
 
 	text := strings.ReplaceAll(string(data), "\r\n", "\n")
-	text = normalizeFoundationsHeadingAliases(text)
 	errorsFound := 0
 	lastOffset := 0
 	for _, heading := range headings {
@@ -683,23 +1068,6 @@ func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []str
 
 	return errorsFound
 }
-func normalizeFoundationsHeadingAliases(text string) string {
-	replacements := map[string]string{
-		"## In Production":                 "## In Production",
-		"## \u26a0\ufe0f In Production":    "## In Production",
-		"## âš ï¸ In Production":          "## In Production",
-		"## Thinking Questions":            "## Thinking Questions",
-		"## \U0001F914 Thinking Questions": "## Thinking Questions",
-		"## ðŸ¤” Thinking Questions":       "## Thinking Questions",
-	}
-
-	for from, to := range replacements {
-		text = strings.ReplaceAll(text, from, to)
-	}
-
-	return text
-}
-
 func validateFoundationsVisualModelUsesMermaid(root, relPath, itemID string, report func(string)) int {
 	data, err := os.ReadFile(filepath.Join(root, relPath))
 	if err != nil {
@@ -740,12 +1108,6 @@ var mojibakeMarkers = []string{
 	"\u00c3\u00a2\u20ac\u00a0",
 	"\u00c3\u00a2\u00c5\u201c",
 	"\u00c3\u00a2\u00c2\u009d",
-	"\u00e2\u20ac\u0153",
-	"\u00e2\u20ac\u009d",
-	"\u00e2\u20ac\u201d",
-	"\u00e2\u0080\u0094",
-	"\u00e2\u2020\u2019",
-	"\u00e2\u20ac\u00a2",
 }
 
 func validateV2TextEncoding(root string, sections map[string]V2Section, items []V2Item, report func(string)) int {
@@ -832,6 +1194,42 @@ func validateV2SectionLabels(root string, sections map[string]V2Section, items [
 			text := string(data)
 			if !strings.Contains(text, expectedSectionLabel) && !strings.Contains(text, expectedStageLabel) {
 				report(fmt.Sprintf("Invalid v2 section label: %s -> %s (expected %s or %s)", item.ID, filepath.ToSlash(rel), expectedSectionLabel, expectedStageLabel))
+				errorsFound++
+			}
+		}
+	}
+
+	return errorsFound
+}
+
+func validateSectionReadmeTrackLabels(root string, sections map[string]V2Section, report func(string)) int {
+	errorsFound := 0
+
+	for sectionID, expectedLabels := range canonicalSectionReadmeTracks {
+		section, exists := sections[sectionID]
+		if !exists || section.PathPrefix == "" {
+			continue
+		}
+
+		readmePath := filepath.ToSlash(filepath.Join(section.PathPrefix, "README.md"))
+		data, err := os.ReadFile(filepath.Join(root, readmePath))
+		if err != nil {
+			report(fmt.Sprintf("Invalid section README contract: %s -> %s read failure: %v", sectionID, readmePath, err))
+			errorsFound++
+			continue
+		}
+
+		text := string(data)
+		for _, label := range expectedLabels {
+			if !strings.Contains(text, label) {
+				report(fmt.Sprintf("Invalid section README contract: %s -> %s missing canonical track label %s", sectionID, readmePath, label))
+				errorsFound++
+			}
+		}
+
+		for _, label := range forbiddenSectionReadmeLabels[sectionID] {
+			if strings.Contains(text, label) {
+				report(fmt.Sprintf("Invalid section README contract: %s -> %s contains non-canonical track label %s", sectionID, readmePath, label))
 				errorsFound++
 			}
 		}
@@ -932,14 +1330,14 @@ func validateMarkdownSurfaces(root string, report func(string)) int {
 
 		if d.IsDir() {
 			switch d.Name() {
-			case ".git", "vendor", ".agents", ".cache", ".gocache", ".github", ".opencode", "temp":
+			case ".git", "vendor", ".agents", ".cache", ".github", ".opencode", "temp":
 				return filepath.SkipDir
 			default:
 				return nil
 			}
 		}
 
-		if filepath.Ext(path) != ".md" && filepath.Base(path) != "Makefile" {
+		if filepath.Ext(path) != ".md" {
 			return nil
 		}
 

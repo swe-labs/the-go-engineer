@@ -1,36 +1,39 @@
-# HS.10 REST API
+# HS.10 REST API Exercise
 
 ## Mission
 
-Build a small REST-shaped surface that combines routing, middleware, validation, and consistent responses.
+Combine everything you have learned about HTTP servers into a single, functional Task Management API. You will implement CRUD operations, persistent (in-memory) state, middleware, and graceful shutdown in one cohesive project.
 
 ## Prerequisites
 
-- HS.1
-- HS.2
-- HS.3
-- HS.4
-- HS.5
-- HS.6
-- HS.7
-- HS.8
-- HS.9
+- `HS.1` through `HS.9`
 
 ## Mental Model
 
-A real API is the composition of many smaller rules: routing, parsing, error handling, and stable payload contracts.
+Think of this project as **Building a Complete Digital Library**.
+
+1. **The Building (`http.Server`)**: The physical structure with security and rules.
+2. **The Front Desk (`ServeMux`)**: Where people go to ask for specific things.
+3. **The Librarian (`TaskAPI`)**: The professional who knows how to handle books (tasks).
+4. **The Catalog (`TaskStore`)**: The list of all books, carefully protected from multiple librarians working at once (`sync.RWMutex`).
+5. **The Records (`Middleware`)**: A log of everyone who enters and leaves.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["REST API"] --> B["Combine middleware, validation, and JSON responses in one small service."]
-    B --> C["Treat the exercise as a proof that each earlier lesson solved part of the final shape."]
+    A["Client (curl/Browser)"] --> B["Logger Middleware"]
+    B --> C["ServeMux Router"]
+    C -- "GET /tasks" --> D["ListHandler"]
+    C -- "POST /tasks" --> E["CreateHandler"]
+    D --> G["TaskStore (Thread-Safe)"]
+    E --> G
+    G --> H["JSON Response"]
 ```
 
 ## Machine View
 
-The final shape matters less than the discipline of keeping transport concerns explicit and reusable.
+This exercise demonstrates **Composition over Inheritance**. We don't use a "Base Server" class. Instead, we compose a `Server` from a `Mux`, compose the `Mux` from handlers, and protect our in-memory data using Go's `sync` primitives. The `TaskStore` keeps ID creation and map writes behind one mutex so concurrent HTTP requests cannot corrupt the task list.
 
 ## Run Instructions
 
@@ -38,33 +41,58 @@ The final shape matters less than the discipline of keeping transport concerns e
 go run ./06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise
 ```
 
+**Testing the CRUD Flow:**
+
+1. **List Tasks**: `curl http://localhost:8080/tasks`
+2. **Create Task**: `curl -X POST -d '{"title": "Complete Go Section"}' http://localhost:8080/tasks`
+3. **Get Specific Task**: `curl http://localhost:8080/tasks/1`
+4. **Delete Task**: `curl -X DELETE http://localhost:8080/tasks/1`
+
 ## Solution Walkthrough
 
-- Combine middleware, validation, and JSON responses in one small service.
-- Use consistent status codes for create, read, and failure paths.
-- Treat the exercise as a proof that each earlier lesson solved part of the final shape.
+### The `TaskStore`
+Notice the use of `sync.RWMutex`. This is critical because HTTP handlers run concurrently. If two requests try to write to the `tasks` map at the same time, the program will crash with a "concurrent map write" error. The `RWMutex` allows multiple readers to look at the list but only one writer to modify it.
 
-## Verification Surface
+### `TaskAPI` Struct
+We group our handlers onto a struct. This allows them to share access to the `TaskStore` without using global variables, making the code easier to test and maintain.
 
-- Use `go run ./06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise`.
-- Starter path: `06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise/_starter`.
+### Helper Functions
+`respondJSON` and `respondError` reduce boilerplate. In a real project, these might be moved to a shared `internal/api` package.
+
+### Graceful Shutdown
+We include the full signal-handling logic from `HS.8` to ensure that even a complex API like this can exit cleanly without losing data that might be in the middle of being processed.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply HS.10 in a small service or tool.
+1. Add a `PUT /tasks/{id}` route to allow updating a task's title or completion status.
+2. Add a `/search?title=...` query parameter to the List handler to filter tasks.
+3. Implement a "Soft Delete" by adding a `DeletedAt` field to the `Task` struct instead of removing it from the map.
 
-## ⚠️ In Production
+## Verification Surface
 
-Exercise surfaces are where transport choices become habits that carry into real service work.
+When you run this exercise, the process starts a real HTTP server and waits for a shutdown signal:
 
-## 🤔 Thinking Questions
+```text
+=== Task Management REST API ===
 
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+  Server starting on http://localhost:8080
+  Use curl to interact with the API:
+    - GET /tasks
+    - POST /tasks -d '{"title": "Learn Go"}'
+```
+
+The automated test suite uses `httptest` to cover the handlers directly. That keeps `go test ./...` fast and deterministic instead of launching a long-running server process.
+
+## In Production
+In a real production environment, you would never store your data in an in-memory map. If the server restarts, all data is lost! In the following modules (Section 06 / Databases), you will learn how to replace this `TaskStore` with a real SQLite or PostgreSQL database.
+
+## Thinking Questions
+1. Why is `sync.RWMutex` better than a regular `sync.Mutex` for a task list?
+2. How would you handle a situation where two people try to update the same task at the same time? (Optimistic Locking).
+3. What are the benefits of grouping handlers on a struct instead of using top-level functions?
+
+> **Forward Reference:** You have mastered the "how" of building HTTP servers. Now, let's focus on the "why" and "how best" of API design. In [Section 06: APIs / Lesson 1: REST Design Principles](../../apis/1-rest-design-principles/README.md), you will learn the theory behind building truly professional, scalable web interfaces.
 
 ## Next Step
 
-Use this lesson as a reference surface before moving to the next track in the section.
+Continue to `API.1` rest-design-principles.

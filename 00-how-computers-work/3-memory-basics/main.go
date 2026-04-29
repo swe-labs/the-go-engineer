@@ -2,21 +2,26 @@
 // Licensed under The Go Engineer License v1.0
 
 // ============================================================================
-// Section 00: How Computers Work — Memory Basics: Stack and Heap
+// Section 00: How Computers Work
+// Title: Memory basics - stack vs heap
 // Level: Foundation
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Stack-managed values are short-lived and cheap to reclaim
-//   - Heap objects live longer and are cleaned up by the garbage collector
-//   - Escape analysis decides when values must outlive a function frame
+//   - Understand how memory is allocated and managed during execution, especially the difference between stack and heap memory in Go.
 //
 // WHY THIS MATTERS:
+//   - The stack is like a neat stack of plates: fast, ordered, and easy to clean up. The heap is like a shared storage room: flexible and useful, but it ...
+//
+// RUN:
+//   go run ./00-how-computers-work/3-memory-basics
+//
+// KEY TAKEAWAY:
+//   - Understand how memory is allocated and managed during execution, especially the difference between stack and heap memory in Go.
+// ============================================================================
+
 //   Memory behavior shapes performance, correctness, and the kind of bugs a
 //   Go program can have under load.
-//
-// RUN: go run ./00-how-computers-work/3-memory-basics
-// ============================================================================
 
 package main
 
@@ -40,7 +45,6 @@ func main() {
 	fmt.Printf("Pointer-returning function result: %d (address %p)\n", *pointer, pointer)
 	fmt.Println("Returning a pointer means the pointed-to value must outlive the function call.")
 
-	// KEY TAKEAWAY:
 	// - Stack and heap serve different lifetime needs.
 	// - Escape analysis helps Go decide which one a value needs.
 	fmt.Println("\n---------------------------------------------------")

@@ -1,24 +1,41 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 05: Packages and I/O
+// Title: Versioning Workshop
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Semantic Versioning (SemVer) rules and how Go implements them.
+//
+// WHY THIS MATTERS:
+//   - Understanding major version boundaries and the /v2 import rule prevents
+//     dependency hell and broken builds in large projects.
+//
+// RUN:
+//   go run ./05-packages-io/01-modules-and-packages/3-versioning
+//
+// KEY TAKEAWAY:
+//   - Major versions denote breaking changes; Go enforces this via import path suffixes.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./05-packages-io/01-modules-and-packages/3-versioning
 package main
 
 import "fmt"
 
-// ============================================================================
-// Stage 05: Modules and Packages — Versioning Workshop
-// Level: Intermediate → Advanced
-// ============================================================================
+// Stage 05: Modules and Packages - Versioning Workshop
 //
 // SEMANTIC VERSIONING IN GO:
 //
 //   v1.2.3
-//   │ │ │
-//   │ │ └── PATCH: bug fixes (backward compatible)
-//   │ └──── MINOR: new features (backward compatible)
-//   └────── MAJOR: breaking changes (not backward compatible)
+//   | | |
+//   | | +-- PATCH: bug fixes (backward compatible)
+//   | +---- MINOR: new features (backward compatible)
+//   +------ MAJOR: breaking changes (not backward compatible)
 //
 // MAJOR VERSION RULE (v2+):
 //   When a module reaches v2, the import path MUST include /v2:
@@ -40,9 +57,8 @@ import "fmt"
 //     exclude github.com/some/pkg v1.2.3
 //
 // VENDORING:
-//   go mod vendor        — copy all dependencies into ./vendor/
-//   go build -mod=vendor — build using vendored dependencies only
-// ============================================================================
+//   go mod vendor        - copy all dependencies into ./vendor/
+//   go build -mod=vendor - build using vendored dependencies only
 
 // Version represents a semantic version.
 type Version struct {
@@ -90,12 +106,12 @@ func main() {
 		}
 
 		prev := versions[i-1]
-		status := "✅ compatible"
+		status := "ok: compatible"
 		if !v.IsCompatible(prev) {
-			status = "⚠️  BREAKING"
+			status = "WARN: BREAKING CHANGE"
 		}
 
-		fmt.Printf("  %s → %s  %s\n", prev, v, status)
+		fmt.Printf("  %s -> %s  %s\n", prev, v, status)
 	}
 
 	fmt.Println()
@@ -103,14 +119,14 @@ func main() {
 	fmt.Println("  In Go, v2+ modules require a /v2 suffix in the import path.")
 	fmt.Println("  This allows v1 and v2 to coexist in the same binary.")
 	fmt.Println()
-	fmt.Println("  import \"github.com/example/pkg\"    ← v0.x or v1.x")
-	fmt.Println("  import \"github.com/example/pkg/v2\" ← v2.x")
+	fmt.Println("  import \"github.com/example/pkg\"    <- v0.x or v1.x")
+	fmt.Println("  import \"github.com/example/pkg/v2\" <- v2.x")
 	fmt.Println()
 	fmt.Println("Replace is most useful during local development or controlled fork testing.")
 	fmt.Println("It should clarify dependency resolution, not hide long-term version problems.")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT STEP: Optional MP.4 build tags")
-	fmt.Println("Then continue to Stage 05 when you're ready.")
-	fmt.Println("Current: MP.3 (versioning workshop)")
+	fmt.Println("NEXT UP: MP.4 build-tags")
+	fmt.Println("Current: MP.3 (versioning-workshop)")
+	fmt.Println("Previous: MP.2 (managing-deps)")
 	fmt.Println("---------------------------------------------------")
 }

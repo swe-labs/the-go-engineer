@@ -18,6 +18,8 @@ Go does not have an `enum` keyword. Instead, it combines:
 
 That gives you fixed related values with type safety.
 
+> **Backward Reference:** In [Lesson 2: Constants](../2-constants/README.md), we learned how grouped constants group related static values. Here we combine that with named types to simulate the missing enum structure.
+
 ## Visual Model
 
 ```mermaid
@@ -56,18 +58,18 @@ This pattern is useful when `0` should mean "unset" or "invalid" instead of a re
 
 The method converts numeric enum values into readable text for output and debugging.
 
+> **Forward Reference:** We will put this precise pattern into practice in the next exercise, [Lesson 4: Application Logger](../4-application-logger/README.md), where we will use our `LogLevel` enum to control what gets printed.
+
 ## Try It
 
 1. Add another enum value and watch `iota` keep counting.
 2. Create a second named type with its own `const` block.
 3. Print an invalid enum value and inspect the fallback text.
 
-## ⚠️ In Production
-
+## In Production
 Named enum-like values show up everywhere in Go code: log levels, modes, categories, states, and protocol values. The combination of `iota`, named types, and string conversion keeps those values readable and hard to misuse.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is a named type safer than using raw integers for categories?
 2. When is `iota + 1` a better choice than plain `iota`?
 3. Why is a `String()` method helpful even though the underlying value is still numeric?

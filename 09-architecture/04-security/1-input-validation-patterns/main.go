@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Input validation patterns
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how allow-lists, normalization, and fail-fast checks turn raw input into trustworthy domain values.
+//
+// WHY THIS MATTERS:
+//   - Validation is boundary work that decides whether input is acceptable before business logic depends on it.
+//
+// RUN:
+//   go run ./09-architecture/04-security/1-input-validation-patterns
+//
+// KEY TAKEAWAY:
+//   - Learn how allow-lists, normalization, and fail-fast checks turn raw input into trustworthy domain values.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - Input validation patterns
 //
-// Run: go run ./09-architecture/04-security/1-input-validation-patterns
 
 func main() {
 	fmt.Println("=== SEC.1 Input validation patterns ===")

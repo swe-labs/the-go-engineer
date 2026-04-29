@@ -1,6 +1,27 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 10: Production Operations
+// Title: signal NotifyContext
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How OS signals work: SIGTERM (graceful stop) vs SIGKILL (force kill)
+//   - signal.NotifyContext: idiomatic Go 1.16+ signal handling API
+//   - Why every production binary must handle SIGTERM
+//   - Difference between NotifyContext and old signal.Notify pattern
+//
+// WHY THIS MATTERS:
+//   - Deployment sequence: docker stop -> SIGTERM -> 30s to clean up -> SIGKILL.
+//   - Before NotifyContext: manual goroutine, potential panics, ignored errors.
+//
+// KEY TAKEAWAY:
+//   - signal.NotifyContext integrates with context-aware APIs (DB, HTTP, gRPC).
+//   - Every production binary must handle SIGTERM to avoid data loss.
+// ============================================================================
+
 package main
 
 import (
@@ -13,12 +34,8 @@ import (
 	"time"
 )
 
-// ============================================================================
 // Stage 10: Application Architecture - Graceful Shutdown: signal.NotifyContext
-// Level: Beginner -> Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - How OS signals work: SIGTERM (graceful stop) vs SIGKILL (force kill)
 //   - signal.NotifyContext: the idiomatic Go 1.16+ signal handling API
 //   - Why every production binary must handle SIGTERM
@@ -49,10 +66,8 @@ import (
 //   the signal arrives. This integrates naturally with every context-aware API
 //   (database queries, HTTP clients, gRPC calls) - they all cancel automatically.
 //
-// RUN: go run ./10-production/02-graceful-shutdown/1-signal-context
 //   Then press Ctrl+C to see the signal handling in action.
 //   Or send: kill -TERM <pid>
-// ============================================================================
 
 // BackgroundWorker simulates a long-running background task (metrics exporter,
 // message queue consumer, cache refresher, etc.)
@@ -91,9 +106,7 @@ func main() {
 		Level: slog.LevelDebug,
 	})))
 
-	// =========================================================================
 	// signal.NotifyContext - the idiomatic modern pattern
-	// =========================================================================
 	// ctx is cancelled when SIGINT (Ctrl+C) or SIGTERM is received.
 	// stop() stops the signal relay - call it as soon as the context is done
 	// to allow a second Ctrl+C to force-kill if cleanup hangs.
@@ -111,9 +124,7 @@ func main() {
 		}
 	}()
 
-	// =========================================================================
 	// Launch background workers using the signal context
-	// =========================================================================
 	// When SIGTERM arrives, ctx is cancelled, and ALL workers stop automatically.
 	// No manual plumbing required - the context tree propagates the signal.
 	go BackgroundWorker(ctx, "metrics-exporter")
@@ -122,17 +133,13 @@ func main() {
 
 	slog.Info("application started - press Ctrl+C or send SIGTERM to stop")
 
-	// =========================================================================
 	// Block until signal arrives
-	// =========================================================================
 	<-ctx.Done()
 	stop() // Call stop() early so a second Ctrl+C force-kills immediately
 
 	slog.Info("shutdown signal received", "reason", ctx.Err())
 
-	// =========================================================================
 	// Graceful cleanup with a shutdown deadline
-	// =========================================================================
 	// Give background goroutines time to finish in-progress work.
 	// After the deadline, exit anyway - don't wait forever.
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -155,14 +162,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	// KEY TAKEAWAY:
 	// - signal.NotifyContext: ctx cancelled on SIGINT or SIGTERM
 	// - All context-aware goroutines stop automatically when ctx.Done() closes
 	// - Call stop() after ctx.Done() so a 2nd Ctrl+C force-kills the process
 	// - Use a separate context with a deadline for the cleanup phase itself
 	// - defer db.Close() runs even when the process receives a signal
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: GS.2 HTTP graceful drain")
+	fmt.Println("NEXT UP: GS.2 HTTP graceful drain")
 	fmt.Println("   Current: GS.1 (signal.NotifyContext)")
 	fmt.Println("---------------------------------------------------")
 }

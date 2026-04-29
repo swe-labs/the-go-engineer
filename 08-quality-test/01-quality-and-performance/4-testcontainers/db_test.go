@@ -22,7 +22,7 @@ import (
 )
 
 // ============================================================================
-// Stage 08: Quality & Performance — Integration Testing with Testcontainers
+// Stage 08: Quality & Performance - Integration Testing with Testcontainers
 // Level: Advanced
 // ============================================================================
 //

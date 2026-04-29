@@ -1,6 +1,28 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 10: Production Operations
+// Title: Shutdown Capstone
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Coordinate: readiness, HTTP draining, worker draining, and cleanup in one flow
+//   - Shutdown dependency order: listener -> requests -> workers -> DB -> logs -> exit
+//   - Health endpoint: 503 "Shutting Down" during drain window
+//   - Kubernetes readiness vs liveness probes
+//
+// WHY THIS MATTERS:
+//   - Order matters: closing DB before requests finish = crash.
+//   - Readiness probe returns 503 when SIGTERM arrives -> removes pod from LB.
+//   - Liveness probe returns 503 only if you want Kubernetes to RESTART.
+//
+// KEY TAKEAWAY:
+//   - Signal -> stop HTTP -> drain requests -> stop workers -> close DB -> flush logs.
+//   - 503 during drain window protects the load balancer.
+// ============================================================================
+
 package main
 
 import (
@@ -18,12 +40,8 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-// ============================================================================
 // Stage 10: Application Architecture - Graceful Shutdown: Complete Production Capstone
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Wiring together: signal handling + HTTP drain + DB close + background workers
 //   - Coordinating multiple resources that must shut down in dependency order
 //   - Health endpoint responding "503 Shutting Down" during drain window
@@ -47,14 +65,10 @@ import (
 //   /healthz/live  - returns 200 as long as the process is responsive.
 //                    Only return 503 if you want Kubernetes to RESTART the pod.
 //
-// RUN: go run ./10-production/02-graceful-shutdown/3-capstone
 //   Then send: kill -TERM <pid>   or press Ctrl+C
-// ============================================================================
 
-// ============================================================================
 // Component: MessageQueueConsumer
 // A background worker that must drain its queue before shutdown.
-// ============================================================================
 
 type MessageQueueConsumer struct {
 	name     string
@@ -110,10 +124,8 @@ func (c *MessageQueueConsumer) Run(ctx context.Context) error {
 	}
 }
 
-// ============================================================================
 // Component: ProductionServer
 // HTTP server with health endpoints and shutdown awareness.
-// ============================================================================
 
 type ProductionServer struct {
 	http    *http.Server
@@ -189,9 +201,7 @@ func (s *ProductionServer) Shutdown(ctx context.Context) error {
 	return s.http.Shutdown(ctx)
 }
 
-// ============================================================================
 // Application wiring - the main entry point
-// ============================================================================
 
 func run() error {
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
@@ -263,7 +273,6 @@ func main() {
 	}
 	slog.Info("clean exit")
 
-	// KEY TAKEAWAY:
 	// - Shutdown ORDER matters: ready=503 -> HTTP drain -> workers -> DB -> logs
 	// - SetNotReady() before HTTP drain gives K8s time to stop routing traffic
 	// - errgroup wires HTTP server + workers + shutdown orchestrator together

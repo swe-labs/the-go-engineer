@@ -1,126 +1,116 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
+
+// ============================================================================
+// Section 06: Backend, APIs & Databases
+// Title: Web Masterclass - Middleware
+// Level: Advanced
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to implement the Middleware pattern in Go.
+//   - The standard signature: func(http.Handler) http.Handler.
+//   - How to chain multiple middleware together (The Onion Pattern).
+//   - Essential production middleware: Logging, Recovery, and Security Headers.
+//
+// WHY THIS MATTERS:
+//   - Middleware allows you to handle "Cross-Cutting Concerns"-tasks that
+//     apply to every request-in a single, reusable location. This keeps
+//     your main handler logic focused purely on business goals.
+//
+// RUN:
+//   go run ./06-backend-db/01-web-and-database/web-masterclass/4-middleware
+//
+// KEY TAKEAWAY:
+//   - Middleware is just a function that wraps another function.
+// ============================================================================
 
 package main
 
 import (
 	"fmt"
 	"log"
-	"log/slog"
 	"net/http"
-	"os"
-	"runtime/debug"
 	"time"
 )
 
-// ============================================================================
-// Stage 06: Web Masterclass — Middleware
-// Level: Advanced
-// ============================================================================
+// Stage 06: Web Masterclass - Middleware
 //
-// WHAT YOU'LL LEARN:
-//   - The middleware signature: func(http.Handler) http.Handler
-//   - Middleware chaining (wrapping handlers like layers of an onion)
-//   - Common middleware: logging, security headers, panic recovery
-//   - How to compose middleware in a clean, readable way
+//   - The HandlerFunc type: Casting logic to interfaces
+//   - next.ServeHTTP: Passing control down the chain
+//   - Panic Recovery: Ensuring server uptime
 //
 // ENGINEERING DEPTH:
-//   A Middleware chain is natively just an execution Call Stack. When a request
-//   comes in, the outermost middleware executes until it hits `next.ServeHTTP(w,r)`.
-//   At that exact moment, the current function pauses, pushes its state onto the
-//   Call Stack, and jumps execution into the next nested middleware. It keeps
-//   drilling down until it hits the final route handler. As the final handler
-//   returns, the Call Stack legally unwinds back "up" the chain layer by layer.
-//   This means code BEFORE `next` runs on the inbound request, and code AFTER
-//   `next` runs exactly on the outbound response.
-//
-// RUN: go run ./06-backend-db/01-web-and-database/web-masterclass/4-middleware
-// ============================================================================
+//   In Go, a middleware chain is literally just a series of nested
+//   function calls. When the innermost handler finishes, execution
+//   "unwinds" back through the middleware. This allows you to perform
+//   actions both BEFORE a request (like authentication) and AFTER a
+//   request (like measuring latency or logging the status code).
 
-// secureHeaders adds security-related HTTP headers to every response.
-// This is a MUST for production web applications.
-func secureHeaders(next http.Handler) http.Handler {
+func main() {
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("GET /", handleHome)
+	mux.HandleFunc("GET /panic", handlePanic)
+
+	// CHAINING MIDDLEWARE
+	// We wrap our router (the 'mux') in multiple layers.
+	// Order: Logger -> Recovery -> SecureHeaders -> Router
+	handler := loggerMiddleware(recoveryMiddleware(secureHeadersMiddleware(mux)))
+
+	fmt.Println("=== Web Masterclass: Middleware ===")
+	fmt.Println("  🚀 Server starting on http://localhost:8083")
+	fmt.Println()
+
+	log.Fatal(http.ListenAndServe(":8083", handler))
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: MC.5 sessions")
+	fmt.Println("Current: MC.4 (middleware)")
+	fmt.Println("Previous: MC.3 (templates)")
+	fmt.Println("---------------------------------------------------")
+}
+
+// 1. Logger Middleware
+func loggerMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Prevent clickjacking
-		w.Header().Set("X-Frame-Options", "deny")
-		// Prevent MIME type sniffing
-		w.Header().Set("X-Content-Type-Options", "nosniff")
-		// Enable XSS protection
-		w.Header().Set("X-XSS-Protection", "1; mode=block")
-		// Control referrer information
-		w.Header().Set("Referrer-Policy", "origin-when-cross-origin")
+		start := time.Now()
 
-		// Call the next handler in the chain
+		// Pass the request to the next handler
+		next.ServeHTTP(w, r)
+
+		// Log the result
+		log.Printf("  [LOG] %s %s took %v", r.Method, r.URL.Path, time.Since(start))
+	})
+}
+
+// 2. Recovery Middleware
+func recoveryMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Use defer to catch panics
+		defer func() {
+			if err := recover(); err != nil {
+				log.Printf("  [RECOVERY] Caught panic: %v", err)
+				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			}
+		}()
 		next.ServeHTTP(w, r)
 	})
 }
 
-// logRequest logs every incoming HTTP request with structured logging.
-func logRequest(logger *slog.Logger) func(http.Handler) http.Handler {
-	return func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			start := time.Now()
-
-			// Call the next handler
-			next.ServeHTTP(w, r)
-
-			// Log after the request completes
-			logger.Info("request",
-				slog.String("method", r.Method),
-				slog.String("path", r.URL.Path),
-				slog.String("remote", r.RemoteAddr),
-				slog.Duration("latency", time.Since(start)),
-			)
-		})
-	}
+// 3. Security Headers Middleware
+func secureHeadersMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.Header().Set("X-Frame-Options", "deny")
+		next.ServeHTTP(w, r)
+	})
 }
 
-// recoverPanic recovers from panics inside handlers and returns a 500.
-// Without this, a panic would crash the entire server.
-func recoverPanic(logger *slog.Logger) func(http.Handler) http.Handler {
-	return func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			// Deferred function runs even if panic occurs
-			defer func() {
-				if err := recover(); err != nil {
-					// Set Connection: close to tell client to stop sending
-					w.Header().Set("Connection", "close")
-					logger.Error("panic recovered",
-						slog.Any("error", err),
-						slog.String("stack", string(debug.Stack())),
-					)
-					http.Error(w, http.StatusText(http.StatusInternalServerError),
-						http.StatusInternalServerError)
-				}
-			}()
-			next.ServeHTTP(w, r)
-		})
-	}
+func handleHome(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "Welcome to the secure, logged, and safe homepage!")
 }
 
-func main() {
-	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
-
-	mux := http.NewServeMux()
-
-	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "Hello from a middleware-protected handler!")
-	})
-
-	mux.HandleFunc("GET /panic", func(w http.ResponseWriter, r *http.Request) {
-		// This panic will be caught by recoverPanic middleware
-		panic("something went terribly wrong!")
-	})
-
-	// Chain middleware: outermost runs first
-	// Request flow: recoverPanic → secureHeaders → logRequest → handler
-	handler := recoverPanic(logger)(secureHeaders(logRequest(logger)(mux)))
-
-	log.Println("Starting server with middleware on :8080")
-	log.Fatal(http.ListenAndServe(":8080", handler))
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: WM.5 sessions")
-	fmt.Println("   Current: WM.4 (middleware)")
-	fmt.Println("---------------------------------------------------")
+func handlePanic(w http.ResponseWriter, r *http.Request) {
+	panic("Oops! Something went wrong.")
 }

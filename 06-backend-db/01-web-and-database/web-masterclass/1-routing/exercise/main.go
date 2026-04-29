@@ -11,7 +11,7 @@ import (
 )
 
 // ============================================================================
-// Stage 06: Web Masterclass — Routing Exercise
+// Stage 06: Web Masterclass - Routing Exercise
 // Level: Beginner
 // ============================================================================
 //

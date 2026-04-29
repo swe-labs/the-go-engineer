@@ -24,7 +24,7 @@ Later sections return to performance and concurrency details:
 | ID | Type | Surface | Core Job |
 | --- | --- | --- | --- |
 | `HC.1` | Lesson | [what-is-a-program](./1-what-is-a-program) | fetch-decode-execute cycle and instruction model |
-| `HC.2` | Lesson | [code-to-execution](./2-code-to-execution) | source → tokens → AST → IR → binary |
+| `HC.2` | Lesson | [code-to-execution](./2-code-to-execution) | source -> tokens -> AST -> IR -> binary |
 | `HC.3` | Lesson | [memory-basics](./3-memory-basics) | stack, heap, GC, and escape analysis |
 | `HC.4` | Lesson | [terminal-confidence](./4-terminal-confidence) | shell, stdout/stderr, and command flow |
 | `HC.5` | Lesson | [os-processes](./5-os-processes) | processes, signals, threads, and file descriptors |

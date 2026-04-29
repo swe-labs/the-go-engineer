@@ -2,19 +2,24 @@
 // Licensed under The Go Engineer License v1.0
 
 // ============================================================================
-// Section 02: Language Basics — Lesson CF.6: Defer in Real Use Cases
+// Section 02: Language Basics
+// Title: Defer in real use cases
 // Level: Core
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - How to use defer for resource cleanup (simulated)
-//   - The pattern of deferring immediately after success
-//   - Why defer reduces boilerplate in error handling
+//   - See how `defer` is used in production for file cleanup, mutex unlocking, and logging.
 //
 // WHY THIS MATTERS:
-//   Proper resource management is critical for production stability.
+//   - Think of `defer` as a "safety harness". Before you start a dangerous task (like opening a file), you put on the harness (`defer file.Close()`) so t...
 //
-// RUN: go run ./02-language-basics/03-control-flow/6-defer-use-cases
+// RUN:
+//   go run ./02-language-basics/03-control-flow/6-defer-use-cases
+//
+// KEY TAKEAWAY:
+//   - 'defer' is the idiomatic way to manage resource cleanup in Go. Always
+//     defer the cleanup operation (like Close() or Unlock()) immediately after
+//     successfully acquiring the resource.
 // ============================================================================
 
 package main
@@ -27,16 +32,20 @@ func main() {
 	fmt.Println("CF.6: Real-World Defer Patterns")
 	fmt.Println("--------------------------------")
 
+	// Backward reference:
+	// We learned about LIFO order in the previous lesson: ../5-defer-basics/README.md
+	// Here we apply it practically to simulate safe file handling.
 	simulateFileOperation()
 
-	// KEY TAKEAWAY:
-	// - Defer cleanup immediately after a resource is successfully acquired.
-	// - This ensures that even if subsequent logic fails, resources are released.
-
+	// Forward reference:
+	// Let's combine if-else, loops, switch, and defer together into a real
+	// business logic challenge next.
+	// See: ../7-pricing-checkout/README.md
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: CF.7 pricing-checkout")
 	fmt.Println("Current: CF.6 (defer-use-cases)")
+	fmt.Println("Previous: CF.5 (defer-basics)")
 	fmt.Println("---------------------------------------------------")
 }
 

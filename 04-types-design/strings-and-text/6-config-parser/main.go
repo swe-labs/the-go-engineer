@@ -1,17 +1,31 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Config Parser Project
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Build a small config parser that turns `.env`-style text into structured data and renders a stable summary from that data.
+//
+// WHY THIS MATTERS:
+//   - This milestone is a text-processing pipeline: - read input line by line - parse valid key-value lines - ignore comments and blanks - store structur...
+//
+// RUN:
+//   go run ./04-types-design/strings-and-text/6-config-parser
+//
+// KEY TAKEAWAY:
+//   - Build a small config parser that turns `.env`-style text into structured data and renders a stable summary from that data.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
 
-// ============================================================================
-// Section 7: Strings & Text — Config Parser (Exercise)
-// Level: Intermediate
-// ============================================================================
 //
-// RUN: go run ./04-types-design/strings-and-text/6-config-parser
 // TEST: go test ./04-types-design/strings-and-text/6-config-parser
-// ============================================================================
 
 import (
 	"bufio"
@@ -131,4 +145,10 @@ ANOTHER_KEY_NO_VALUE =`
 	}
 
 	fmt.Println(summary)
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: s05-packages-io")
+	fmt.Println("Current: ST.6 (config-parser-project)")
+	fmt.Println("Previous: ST.5 (text-template)")
+	fmt.Println("---------------------------------------------------")
 }

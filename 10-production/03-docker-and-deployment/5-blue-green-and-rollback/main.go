@@ -1,13 +1,31 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 10: Production Operations
+// Title: Blue/green and rollback
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn rollout strategies that reduce downtime and give operators a clear path back when a release is bad.
+//
+// WHY THIS MATTERS:
+//   - A deployment strategy is really a risk-management strategy for switching traffic between application versions.
+//
+// RUN:
+//   go run ./10-production/03-docker-and-deployment/5-blue-green-and-rollback
+//
+// KEY TAKEAWAY:
+//   - Blue/green: run two versions, switch traffic atomically.
+//   - Rollback: switch back to previous version when release is bad.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 10: Production Operations - Blue/green and rollback
 //
-// Run: go run ./10-production/03-docker-and-deployment/5-blue-green-and-rollback
 
 func main() {
 	fmt.Println("=== DEPLOY.2 Blue/green and rollback ===")

@@ -1,17 +1,32 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Embedding
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how embedding promotes inner fields and methods to the outer type.
+//
+// WHY THIS MATTERS:
+//   - Embedding is still composition, but with anonymous fields. That means: - the outer type still contains the inner type - fields and methods from the...
+//
+// RUN:
+//   go run ./04-types-design/composition/2-embedding
+//
+// KEY TAKEAWAY:
+//   - Learn how embedding promotes inner fields and methods to the outer type.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
 
 import "fmt"
 
-// ============================================================================
-// Section 6: Composition & Embedding - Struct Embedding
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - What embedding is: composition with promoted methods and fields
 //   - The difference between composition (named field) and embedding (anonymous field)
 //   - How promoted fields work: access embedded fields directly
@@ -26,8 +41,6 @@ import "fmt"
 //   You can call phone.TakePhoto() directly instead of phone.Camera.TakePhoto().
 //   The camera is still there - you just get a shortcut.
 //
-// RUN: go run ./04-types-design/composition/2-embedding
-// ============================================================================
 
 // --- COMPONENT TYPES ---
 
@@ -178,7 +191,8 @@ func main() {
 	fmt.Println("  - Use embedding when you want the promoted shortcut syntax")
 	fmt.Println("  - Use named fields when you want explicit access (Section 06/1)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CO.3 bank account project")
-	fmt.Println("   Current: CO.2 (embedding)")
+	fmt.Println("NEXT UP: CO.3 bank-account-project")
+	fmt.Println("Current: CO.2 (embedding)")
+	fmt.Println("Previous: CO.1 (composition)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -1,16 +1,33 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 10: Production Operations
+// Title: go generate Primer
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - What the //go:generate directive actually does
+//   - Why code generation is a build-time workflow, not runtime reflection
+//   - When to generate code vs keep things handwritten
+//   - How mockery, stringer, sqlc fit into the same workflow
+//
+// WHY THIS MATTERS:
+//   - Reflection: flexible but fails at runtime.
+//   - Generation: heavier build but fails early.
+//
+// KEY TAKEAWAY:
+//   - Go scans for //go:generate, runs tool, writes generated files.
+//   - You review and commit generated output intentionally.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// ============================================================================
 // Stage 10: Code Generation - go generate Primer
-// Level: Core
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - What the //go:generate directive actually does
 //   - Why code generation is a build-time workflow, not runtime reflection
 //   - When to generate code and when to keep things handwritten
@@ -26,8 +43,6 @@ import "fmt"
 //   - reflection keeps flexibility at runtime but hides failures until runtime
 //   - generation makes the build step a little heavier but keeps failures early
 //
-// RUN: go run ./10-production/06-code-generation/1-go-generate
-// ============================================================================
 
 func main() {
 	fmt.Println("=== go generate Primer ===")
@@ -84,7 +99,7 @@ func main() {
 	fmt.Println("  4. Mockery, stringer, and sqlc are different tools with the same build-time philosophy")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CG.2 mockery workflow")
+	fmt.Println("NEXT UP: CG.2 mockery workflow")
 	fmt.Println("   Current: CG.1 (go generate primer)")
 	fmt.Println("---------------------------------------------------")
 }

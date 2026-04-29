@@ -4,6 +4,8 @@
 
 Learn how `fmt` formats values into readable strings, aligned output, and wrapped errors.
 
+> **Backward Reference:** In [Lesson 1: Strings](../1-strings/README.md), you learned about the immutable nature of strings and basic manipulation. Now, you will learn how to go beyond simple text by using templates and verbs to format any Go value for clear and professional output.
+
 ## Prerequisites
 
 - `ST.1` strings
@@ -65,16 +67,16 @@ This wraps one error with additional context while preserving the underlying cau
 2. Add another struct field and print it with several verbs.
 3. Wrap a different error with `fmt.Errorf`.
 
-## ⚠️ In Production
-
+## In Production
 Readable output is operationally important. Logs, CLI tools, diagnostics, and user-facing errors all depend on deliberate formatting choices. Small formatting improvements often make debugging dramatically easier.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is `%+v` often more useful than `%v` while debugging structs?
 2. When do you want `Sprintf` instead of `Printf`?
 3. Why is error wrapping better than replacing the original error text entirely?
 
+> **Forward Reference:** You have mastered basic text and formatting. Now, we will look "under the hood" at how Go handles international text. In [Lesson 3: Unicode](../3-unicode/README.md), you will learn the difference between bytes, runes, and characters, and why it matters for global applications.
+
 ## Next Step
 
-Continue to `ST.3` unicode and runes.
+Continue to `ST.3` unicode.

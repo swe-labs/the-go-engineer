@@ -1,5 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 07: Concurrency
+// Title: WithTimeout and WithDeadline
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - WithTimeout and WithDeadline fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - WithTimeout and WithDeadline provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/01-concurrency/context/3-with-timeout
+//
+// KEY TAKEAWAY:
+//   - WithTimeout and WithDeadline fundamentals and practical application in Go.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -10,14 +30,10 @@ import (
 	"time"
 )
 
-// ============================================================================
-// Stage 07: Context — WithTimeout & WithDeadline
-// Level: Intermediate
-// ============================================================================
+// Stage 07: Context - WithTimeout & WithDeadline
 //
-// WHAT YOU'LL LEARN:
-//   - context.WithTimeout — auto-cancel after a duration
-//   - context.WithDeadline — auto-cancel at a specific time
+//   - context.WithTimeout - auto-cancel after a duration
+//   - context.WithDeadline - auto-cancel at a specific time
 //   - How to use timeouts for database queries, API calls, etc.
 //   - Detecting timeout vs manual cancellation
 //   - The production pattern: always set timeouts on I/O operations
@@ -30,8 +46,6 @@ import (
 //   deadline arrives, the runtime's timer goroutine fires the context's internal
 //   `cancel()` function, closing the Done() channel and unblocking all waiters.
 //
-// RUN: go run ./07-concurrency/01-concurrency/context/3-with-timeout
-// ============================================================================
 
 func main() {
 	fmt.Println("=== Context: WithTimeout ===")
@@ -53,17 +67,17 @@ func main() {
 
 	// Simulate a slow operation
 	fmt.Println("  Starting slow operation (timeout: 200ms)...")
-	result, err := slowOperation(ctx, 500*time.Millisecond) // Takes 500ms — will timeout!
+	result, err := slowOperation(ctx, 500*time.Millisecond) // Takes 500ms - will timeout!
 	if err != nil {
-		fmt.Printf("  ❌ Operation failed: %v\n", err)
+		fmt.Printf("  [ERROR] Operation failed: %v\n", err)
 		// Check WHICH type of error occurred
 		if ctx.Err() == context.DeadlineExceeded {
-			fmt.Println("  Reason: Timeout — deadline exceeded")
+			fmt.Println("  Reason: Timeout - deadline exceeded")
 		} else if ctx.Err() == context.Canceled {
 			fmt.Println("  Reason: Manually cancelled")
 		}
 	} else {
-		fmt.Printf("  ✅ Result: %s\n", result)
+		fmt.Printf("  [OK] Result: %s\n", result)
 	}
 
 	fmt.Println()
@@ -73,11 +87,11 @@ func main() {
 	defer cancel2()
 
 	fmt.Println("  Starting fast operation (timeout: 500ms)...")
-	result, err = slowOperation(ctx2, 100*time.Millisecond) // Takes 100ms — will succeed!
+	result, err = slowOperation(ctx2, 100*time.Millisecond) // Takes 100ms - will succeed!
 	if err != nil {
-		fmt.Printf("  ❌ Failed: %v\n", err)
+		fmt.Printf("  [ERROR] Failed: %v\n", err)
 	} else {
-		fmt.Printf("  ✅ Result: %s\n", result)
+		fmt.Printf("  [OK] Result: %s\n", result)
 	}
 
 	fmt.Println()
@@ -100,26 +114,26 @@ func main() {
 
 	result, err = slowOperation(ctx3, 300*time.Millisecond)
 	if err != nil {
-		fmt.Printf("  ❌ Failed: %v\n", err)
+		fmt.Printf("  [ERROR] Failed: %v\n", err)
 	} else {
-		fmt.Printf("  ✅ Result: %s\n", result)
+		fmt.Printf("  [OK] Result: %s\n", result)
 	}
 
 	fmt.Println()
 	fmt.Println("KEY TAKEAWAYS:")
-	fmt.Println("  1. WithTimeout auto-cancels after a duration — use for I/O timeouts")
+	fmt.Println("  1. WithTimeout auto-cancels after a duration - use for I/O timeouts")
 	fmt.Println("  2. WithDeadline auto-cancels at an absolute time")
-	fmt.Println("  3. ALWAYS defer cancel() — even with auto-cancellation")
+	fmt.Println("  3. ALWAYS defer cancel() - even with auto-cancellation")
 	fmt.Println("  4. Check ctx.Err() to distinguish DeadlineExceeded vs Canceled")
 	fmt.Println("  5. PRODUCTION RULE: Never call a DB or API without a timeout context")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CT.4 WithValue")
+	fmt.Println("NEXT UP: CT.4 WithValue")
 	fmt.Println("   Current: CT.3 (WithTimeout)")
 	fmt.Println("---------------------------------------------------")
 }
 
 // slowOperation simulates an operation that takes the specified duration.
-// It respects context cancellation — if the context expires before the
+// It respects context cancellation - if the context expires before the
 // operation completes, it returns immediately with an error.
 //
 // This is the STANDARD PATTERN for any cancellation-aware function:
@@ -131,7 +145,7 @@ func main() {
 func slowOperation(ctx context.Context, duration time.Duration) (string, error) {
 	select {
 	case <-ctx.Done():
-		// Context expired — return the cancellation error
+		// Context expired - return the cancellation error
 		return "", ctx.Err()
 	case <-time.After(duration):
 		// Operation completed before timeout

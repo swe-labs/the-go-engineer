@@ -1,7 +1,29 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
-// RUN: go run ./05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam
+// ============================================================================
+// Section 05: Packages and I/O
+// Title: fs.FS Testing Seam
+// Level: Stretch
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to use the 'io/fs' package to decouple your code from the physical disk.
+//   - How to use 'os.DirFS' for real files and 'fstest.MapFS' for in-memory testing.
+//
+// WHY THIS MATTERS:
+//   - Testing code that interacts with the filesystem is notoriously slow and
+//     brittle. Using 'fs.FS' allows you to write tests that run in memory
+//     without creating or deleting any real files.
+//
+// RUN:
+//   go run ./05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam
+//
+// KEY TAKEAWAY:
+//   - "Accept interfaces, return structs" applies to the filesystem too.
+//     Always accept 'fs.FS' for maximum testability.
+// ============================================================================
+
 package main
 
 import (
@@ -14,12 +36,8 @@ import (
 	"strings"
 )
 
-// ============================================================================
 // Stage 05 Stretch: io/fs as a Testing Seam
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Why accepting fs.FS instead of string paths makes code testable
 //   - os.DirFS for wrapping a real directory as an fs.FS
 //   - fstest.MapFS as an in-memory filesystem in tests
@@ -29,7 +47,6 @@ import (
 //   fs.FS applies the same decoupling idea as io.Reader and io.Writer.
 //   Code that accepts fs.FS can work with real disk, embedded assets, or
 //   in-memory test fixtures without changing its core logic.
-// ============================================================================
 
 // SearchResult holds one matching line from the log search.
 type SearchResult struct {
@@ -129,18 +146,20 @@ func main() {
 To see the fs.FS testing seam in action, run:
   go test -v ./05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam
 
-The test uses fstest.MapFS — zero disk I/O, fully in-memory.
+The test uses fstest.MapFS - zero disk I/O, fully in-memory.
 No temp directories. No cleanup. Runs in microseconds.
 
-KEY TAKEAWAY:
+KEY TAKEAWAYS:
   - Accept fs.FS instead of string paths for testable filesystem code
   - os.DirFS("/path") wraps a real directory as fs.FS
-  - fstest.MapFS is the in-memory test double — no temp files needed
+  - fstest.MapFS is the in-memory test double - no temp files needed
   - fs.WalkDir, fs.ReadFile, fs.Glob all work with any fs.FS implementation
-  - embed.FS from Stage 05/FS.5 also implements fs.FS — reuse the same code
+  - embed.FS from Stage 05/FS.5 also implements fs.FS - reuse the same code
 `)
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT STEP: Continue to Stage 06 web and database")
-	fmt.Println("Current: FS.8 (fs.FS testing seam)")
+	fmt.Println("NEXT UP: HS.1 http-server")
+	fmt.Println("Current: FS.8 (fs-testing-seam)")
+	fmt.Println("Previous: FS.7 (log-search)")
 	fmt.Println("---------------------------------------------------")
 }

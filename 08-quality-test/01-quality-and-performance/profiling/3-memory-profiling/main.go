@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 08: Quality & Testing
+// Title: Memory profiling
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how heap profiles reveal where memory is retained and where allocation pressure is coming from.
+//
+// WHY THIS MATTERS:
+//   - A memory profile is a map of where bytes are being kept or allocated, not just a count of total memory used.
+//
+// RUN:
+//   go run ./08-quality-test/01-quality-and-performance/profiling/3-memory-profiling
+//
+// KEY TAKEAWAY:
+//   - Learn how heap profiles reveal where memory is retained and where allocation pressure is coming from.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 08: Quality & Testing - Memory profiling
 //
-// Run: go run ./08-quality-test/01-quality-and-performance/profiling/3-memory-profiling
 
 func main() {
 	fmt.Println("=== PR.3 Memory profiling ===")

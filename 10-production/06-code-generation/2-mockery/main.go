@@ -1,7 +1,26 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
-// RUN: go run ./10-production/06-code-generation/2-mockery
+// ============================================================================
+// Section 10: Production Operations
+// Title: Mockery Workflow
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to use mockery for automatic mock generation
+//   - Integrating mockery with //go:generate
+//   - Benefits of mocking at the consumer's request
+//   - Improving developer experience through automated test doubles
+//
+// WHY THIS MATTERS:
+//   - Manual mocking scales poorly; interface changes require manual mock updates.
+//   - Mockery parses code and generates type-safe mock structs.
+//
+// KEY TAKEAWAY:
+//   - Define interface -> add directive -> run go generate -> use generated mock.
+// ============================================================================
+
 package main
 
 import (
@@ -13,12 +32,8 @@ import (
 	"github.com/rasel9t6/the-go-engineer/10-production/06-code-generation/2-mockery/internal/storage"
 )
 
-// ============================================================================
 // Stage 10: Code Generation - Mockery Workflow
-// Level: Core
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - How to use mockery for automatic mock generation
 //   - Integrating mockery with //go:generate
 //   - The benefits of mocking at the consumer's request
@@ -36,8 +51,6 @@ import (
 //     3. Run the generator: `go generate ./...`
 //     4. Use the mock: `m := new(mocks.Storer)`
 //
-// RUN: go run ./10-production/06-code-generation/2-mockery
-// ============================================================================
 
 // UserManager uses a Storer to manage users.
 type UserManager struct {
@@ -77,7 +90,7 @@ func main() {
     }`)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CG.3 sqlc workflow")
+	fmt.Println("NEXT UP: CG.3 sqlc workflow")
 	fmt.Println("   Current: CG.2 (mockery workflow)")
 	fmt.Println("---------------------------------------------------")
 }

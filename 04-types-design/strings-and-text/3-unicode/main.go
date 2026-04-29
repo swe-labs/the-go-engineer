@@ -1,5 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Unicode and Runes
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn the difference between bytes, runes, and UTF-8 text in Go.
+//
+// WHY THIS MATTERS:
+//   - In Go, a string is a sequence of bytes, but text is often made of Unicode code points called runes. That means: - `len(s)` counts bytes - `for rang...
+//
+// RUN:
+//   go run ./04-types-design/strings-and-text/3-unicode
+//
+// KEY TAKEAWAY:
+//   - Strings are UTF-8 byte sequences; use runes and the unicode package for correct multi-byte text processing.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -11,12 +31,7 @@ import (
 	"unicode/utf8"
 )
 
-// ============================================================================
-// Section 7: Strings & Text — Unicode & Runes
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - bytes vs runes: why len("café") is 5, not 4
 //   - What a rune is: an alias for int32, representing a Unicode code point
 //   - How Go stores strings as UTF-8 bytes (variable-width encoding)
@@ -35,8 +50,6 @@ import (
 //   This is why len("café") returns 5 (4 letters + 1 extra byte for 'é').
 //   Use utf8.RuneCountInString() for the actual character count.
 //
-// RUN: go run ./04-types-design/strings-and-text/3-unicode
-// ============================================================================
 
 func main() {
 	fmt.Println("=== Unicode & Runes ===")
@@ -56,9 +69,9 @@ func main() {
 	for i, b := range []byte(text) {
 		fmt.Printf("    byte[%d] = %d (0x%02x)", i, b, b)
 		if b < 128 {
-			fmt.Printf(" → '%c' (ASCII)\n", b)
+			fmt.Printf(" -> '%c' (ASCII)\n", b)
 		} else {
-			fmt.Printf(" → part of multi-byte character\n")
+			fmt.Printf(" -> part of multi-byte character\n")
 		}
 	}
 	fmt.Println()
@@ -69,14 +82,14 @@ func main() {
 	fmt.Println("--- Rune Examples ---")
 	examples := []rune{'G', 'o', 'é', '中', '🚀'}
 	for _, r := range examples {
-		fmt.Printf("  '%c' → Unicode: U+%04X, Bytes: %d\n",
+		fmt.Printf("  '%c' -> Unicode: U+%04X, Bytes: %d\n",
 			r, r, utf8.RuneLen(r))
 	}
 	fmt.Println()
 
 	// --- FOR RANGE iterates by RUNE (correct) ---
-	// A regular for loop (i=0; i<len; i++) iterates by BYTE — breaks on multi-byte chars.
-	// for range iterates by RUNE — the correct way for text processing.
+	// A regular for loop (i=0; i<len; i++) iterates by BYTE - breaks on multi-byte chars.
+	// for range iterates by RUNE - the correct way for text processing.
 	greeting := "Hello, 世界! 🌍"
 	fmt.Println("--- for range (iterates by rune) ---")
 	fmt.Printf("  Text: %q\n", greeting)
@@ -128,7 +141,8 @@ func main() {
 	fmt.Println("  - rune = int32 alias for a Unicode code point")
 	fmt.Println("  - unicode.IsLetter/IsDigit/IsSpace for character classification")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: ST.4 regex")
-	fmt.Println("   Current: ST.3 (unicode & runes)")
+	fmt.Println("NEXT UP: ST.4 regex")
+	fmt.Println("Current: ST.3 (unicode-and-runes)")
+	fmt.Println("Previous: ST.2 (formatting-string)")
 	fmt.Println("---------------------------------------------------")
 }

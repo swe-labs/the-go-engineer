@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: TLS and HTTPS in Go
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn the transport-level rules that turn plain HTTP into encrypted, identity-checked HTTPS.
+//
+// WHY THIS MATTERS:
+//   - TLS protects the channel by encrypting traffic and authenticating the server identity with certificates.
+//
+// RUN:
+//   go run ./09-architecture/04-security/8-tls-and-https-in-go
+//
+// KEY TAKEAWAY:
+//   - Learn the transport-level rules that turn plain HTTP into encrypted, identity-checked HTTPS.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - TLS and HTTPS in Go
 //
-// Run: go run ./09-architecture/04-security/8-tls-and-https-in-go
 
 func main() {
 	fmt.Println("=== SEC.8 TLS and HTTPS in Go ===")

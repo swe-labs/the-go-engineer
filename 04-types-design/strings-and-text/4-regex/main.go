@@ -1,5 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Regex
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how Go compiles, matches, extracts, and replaces text patterns with regular expressions.
+//
+// WHY THIS MATTERS:
+//   - A regular expression is a compact matching rule. In Go, the usual workflow is: 1. compile the pattern 2. apply it to input text 3. inspect matches,...
+//
+// RUN:
+//   go run ./04-types-design/strings-and-text/4-regex
+//
+// KEY TAKEAWAY:
+//   - Learn how Go compiles, matches, extracts, and replaces text patterns with regular expressions.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -9,12 +29,7 @@ import (
 	"regexp"
 )
 
-// ============================================================================
-// Section 7: Strings & Text — Regular Expressions
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - regexp.Compile vs regexp.MustCompile (compile-time vs runtime safety)
 //   - MatchString: does the text match the pattern?
 //   - FindString / FindAllString: extracting matches
@@ -25,30 +40,24 @@ import (
 // ENGINEERING DEPTH:
 //   Go's regex engine uses RE2 (linear time, guaranteed no backtracking).
 //   This means some features from Perl/Python regex DON'T exist in Go:
-//     ❌ Lookaheads/lookbehinds (?=...) (?<=...)
-//     ❌ Backreferences \1
-//   But RE2 guarantees O(n) performance — no catastrophic backtracking.
+//     X Lookaheads/lookbehinds (?=...) (?<=...)
+//     X Backreferences \1
+//   But RE2 guarantees O(n) performance - no catastrophic backtracking.
 //   Always prefer MustCompile for compile-time-known patterns (panics on bad regex).
 //
-// RUN: go run ./04-types-design/strings-and-text/4-regex
-// ============================================================================
 
 func main() {
 	fmt.Println("=== Regular Expressions ===")
 	fmt.Println()
 
-	// =====================================================================
 	// 1. MustCompile vs Compile
-	// =====================================================================
-	// MustCompile PANICS if the regex is invalid — use for hardcoded patterns.
-	// Compile returns an ERROR — use for user-provided patterns.
+	// MustCompile PANICS if the regex is invalid - use for hardcoded patterns.
+	// Compile returns an ERROR - use for user-provided patterns.
 	emailPattern := regexp.MustCompile(`[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}`)
 	// The ` ` (backtick) string avoids escaping issues. Prefer backticks for regex.
 
-	// =====================================================================
 	// 2. MatchString: Does text contain a match?
-	// =====================================================================
-	fmt.Println("1️⃣  MatchString (true/false check):")
+	fmt.Println("1. MatchString (true/false check):")
 	testEmails := []string{
 		"rasel@devops.io",
 		"not-an-email",
@@ -57,18 +66,16 @@ func main() {
 	}
 	for _, e := range testEmails {
 		match := emailPattern.MatchString(e)
-		icon := "❌"
+		icon := "[X]"
 		if match {
-			icon = "✅"
+			icon = "[V]"
 		}
 		fmt.Printf("   %s %q\n", icon, e)
 	}
 	fmt.Println()
 
-	// =====================================================================
 	// 3. FindString / FindAllString: Extract matches
-	// =====================================================================
-	fmt.Println("2️⃣  FindAllString (extract all matches):")
+	fmt.Println("2. FindAllString (extract all matches):")
 	text := "Contact us at support@thegoengineer.dev or sales@thegoengineer.dev. Invalid: @broken"
 
 	// FindAllString returns all non-overlapping matches.
@@ -79,12 +86,10 @@ func main() {
 	}
 	fmt.Println()
 
-	// =====================================================================
 	// 4. FindStringSubmatch: Capturing groups (data extraction)
-	// =====================================================================
 	// Parentheses in regex create CAPTURE GROUPS.
 	// FindStringSubmatch returns: [fullMatch, group1, group2, ...]
-	fmt.Println("3️⃣  Capture groups (extract structured data):")
+	fmt.Println("3. Capture groups (extract structured data):")
 
 	// Pattern to extract parts of a log line:
 	//   2025-06-15 INFO Server started on port 8080
@@ -104,11 +109,9 @@ func main() {
 	}
 	fmt.Println()
 
-	// =====================================================================
 	// 5. Named capture groups
-	// =====================================================================
 	// (?P<name>pattern) creates a named group accessible by name.
-	fmt.Println("4️⃣  Named capture groups:")
+	fmt.Println("4. Named capture groups:")
 	urlPattern := regexp.MustCompile(`(?P<protocol>https?)://(?P<host>[^/:]+)(?::(?P<port>\d+))?`)
 
 	url := "https://api.thegoengineer.dev:8443"
@@ -122,10 +125,8 @@ func main() {
 	}
 	fmt.Println()
 
-	// =====================================================================
 	// 6. ReplaceAllString: Search and replace
-	// =====================================================================
-	fmt.Println("5️⃣  ReplaceAllString:")
+	fmt.Println("5. ReplaceAllString:")
 	// Redact all email addresses in text
 	redacted := emailPattern.ReplaceAllString(text, "[REDACTED]")
 	fmt.Printf("   Original: %s\n", text)
@@ -147,7 +148,8 @@ func main() {
 	fmt.Println("  - Capture groups ( ) extract structured data from text")
 	fmt.Println("  - Named groups (?P<name>) improve readability")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: ST.5 text templates")
-	fmt.Println("   Current: ST.4 (regex)")
+	fmt.Println("NEXT UP: ST.5 text-template")
+	fmt.Println("Current: ST.4 (regex)")
+	fmt.Println("Previous: ST.3 (unicode-and-runes)")
 	fmt.Println("---------------------------------------------------")
 }

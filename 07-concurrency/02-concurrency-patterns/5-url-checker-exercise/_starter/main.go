@@ -6,7 +6,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Stage 07: Concurrency Patterns — URL Health Checker (Exercise Starter)
+// Stage 07: Concurrency Patterns - URL Health Checker (Exercise Starter)
 // Level: Advanced
 // ============================================================================
 //

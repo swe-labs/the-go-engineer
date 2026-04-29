@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 02: Language Basics
+// Title: Pointers
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn what a pointer is, how dereferencing works, and why pointers matter when an update must change the original stored value rather than only a c...
+//
+// WHY THIS MATTERS:
+//   - A pointer stores the address of a value. You use it when you need to reach the original value and update it directly.
+//
+// RUN:
+//   go run ./02-language-basics/04-data-structures/4-pointers
+//
+// KEY TAKEAWAY:
+//   - Learn what a pointer is, how dereferencing works, and why pointers matter when an update must change the original stored value rather than only a c...
+// ============================================================================
+
 package main
 
 import "fmt"
@@ -11,7 +30,6 @@ import "fmt"
 // A pointer stores the address of a value. You use it when you need to update
 // the original stored value instead of a copy.
 //
-// Run: go run ./02-language-basics/04-data-structures/4-pointers
 
 func main() {
 	fmt.Println("=== Pointers ===")
@@ -47,5 +65,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: DS.5 slice-sharing")
 	fmt.Println("Current: DS.4 (pointers)")
+	fmt.Println("Previous: DS.3 (maps)")
 	fmt.Println("---------------------------------------------------")
 }

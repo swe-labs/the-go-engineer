@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 07: Concurrency
+// Title: sync.Pool
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - sync.Pool fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - sync.Pool provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/02-concurrency-patterns/3-sync-pool
+//
+// KEY TAKEAWAY:
+//   - sync.Pool fundamentals and practical application in Go.
+// ============================================================================
+
 package main
 
 import (
@@ -9,12 +28,8 @@ import (
 	"sync"
 )
 
-// ============================================================================
 // Stage 07: Concurrency Patterns - sync.Pool
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - sync.Pool: reuse temporary objects to reduce GC pressure
 //   - The correct Get -> use -> Reset -> Put lifecycle
 //   - Why you must reset objects before Put
@@ -32,8 +47,6 @@ import (
 //   as temporary. Never assume the next Get returns your previous Put, and
 //   always reset the object before handing it back.
 //
-// RUN: go run ./07-concurrency/02-concurrency-patterns/3-sync-pool
-// ============================================================================
 
 var bufPool = sync.Pool{
 	New: func() any {

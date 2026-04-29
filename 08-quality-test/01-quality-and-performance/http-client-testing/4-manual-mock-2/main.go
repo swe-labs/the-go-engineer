@@ -12,7 +12,7 @@ import (
 )
 
 // ============================================================================
-// Section 16: HTTP Clients & Mocking — Function Injection Mocking
+// Section 16: HTTP Clients & Mocking - Function Injection Mocking
 // Level: Advanced
 // ============================================================================
 //
@@ -48,7 +48,7 @@ func main() {
 
 	fmt.Println("\n(See client_test.go to see the GetFunc pattern in action!)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: HM.3 table-driven mock")
+	fmt.Println("NEXT UP: HM.3 table-driven mock")
 	fmt.Println("   Current: HM.2 (function-injection mock)")
 	fmt.Println("---------------------------------------------------")
 }

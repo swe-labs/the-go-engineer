@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: XSS and CSRF
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn the difference between output-encoding bugs and cross-site request trust bugs in web systems.
+//
+// WHY THIS MATTERS:
+//   - XSS is an output encoding problem. CSRF is a trust and request-origin problem.
+//
+// RUN:
+//   go run ./09-architecture/04-security/3-xss-and-csrf
+//
+// KEY TAKEAWAY:
+//   - Learn the difference between output-encoding bugs and cross-site request trust bugs in web systems.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - XSS and CSRF
 //
-// Run: go run ./09-architecture/04-security/3-xss-and-csrf
 
 func main() {
 	fmt.Println("=== SEC.3 XSS and CSRF ===")

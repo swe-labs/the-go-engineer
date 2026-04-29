@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 01: Getting Started
+// Title: Development Environment
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn the small command loop that makes day-to-day Go work predictable.
+//
+// WHY THIS MATTERS:
+//   - The Go toolchain is a workflow, not a single command: 1. Edit code. 2. Format it. 3. Build or run it. 4. Test it when tests exist. That loop repeat...
+//
+// RUN:
+//   go run ./01-getting-started/4-dev-environment
+//
+// KEY TAKEAWAY:
+//   - Learn the small command loop that makes day-to-day Go work predictable.
+// ============================================================================
+
 package main
 
 import (

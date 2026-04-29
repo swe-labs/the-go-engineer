@@ -1,77 +1,95 @@
-# Roadmap
+# Project Status and Maintenance Plan
 
-> This document tracks the current release state of the v2.1 curriculum.
-> If this file and [ARCHITECTURE.md](./ARCHITECTURE.md) disagree on structure, `ARCHITECTURE.md` wins.
+This document describes the stable v2.1 project state and the maintenance plan for future work.
 
-## Current Status
+If this document and [ARCHITECTURE.md](./ARCHITECTURE.md) disagree on public curriculum structure, `ARCHITECTURE.md` is authoritative.
 
-The v2.1 beta migration is complete, and the **v2.1.0-rc.1 validation window is active** on `release/v2`.
+## Current State
 
-- the 12-section architecture is live
-- root-stage source folders are aligned to the public section map
-- `curriculum.v2.json` is the active curriculum source
-- the single validator is the required repo health check
-- `v2.1.0-rc.1` is the published release candidate snapshot
+The v2.1 architecture is stable and locked.
 
-The next release step is **stable release validation**, not more migration or architecture work.
+Current stable release: `v2.1.1`
+
+The repository now has:
+
+- 5 public learning phases
+- 12 public sections, `s00` through `s11`
+- 215 registered curriculum items in `curriculum.v2.json`
+- strict curriculum validation through `go run ./scripts/validate_curriculum.go`
+- CI-equivalent local verification, including race tests
+- an integrated flagship backend path in `s11`
 
 ## Branch Model
 
-- `main`: active v2 development and prerelease integration
-- `release/v1`: stable v1 maintenance line
-- `release/v2`: active v2.1 stabilization and RC line
+| Branch | Role |
+| --- | --- |
+| `main` | active post-v2.1 implementation and integration line |
+| `release/v2` | stable v2.1.x maintenance line |
+| `release/v1` | stable v1 maintenance line |
 
-## Beta Completion Snapshot
+Work that should affect stable v2.1 users must land on or be backported to `release/v2`. Work that expands future depth without changing the stable release line belongs on `main`.
 
-| Area | Status | Notes |
+## Stable Snapshot
+
+| Area | Status | Standard |
 | --- | --- | --- |
-| Public architecture | Complete | 12 sections aligned across root folders and metadata |
-| Curriculum metadata | Complete | `curriculum.v2.json` is current and validated |
-| Learner-facing section roots | Complete | section entry points exist from `s00` to `s11` |
-| Validator | Complete | single Go validator is the required repo health check |
-| Beta migration work | Complete | no remaining beta-architecture migration blocker |
-
-## Stable Release Focus
-
-RC validation should now concentrate on:
-
-1. learner-path polish and consistency
-2. validator strictness and repo hygiene
-3. missing test surfaces where behavior should be provable
-4. documentation cleanup and release metadata
-5. flagship depth and integration confidence
-
-## Section Status
-
-| Section | Status | RC Focus |
-| --- | --- | --- |
-| s00 How Computers Work | Beta-ready | polish diagrams and machine explanations where useful |
-| s01 Getting Started | Beta-ready | keep setup surfaces crisp and trustworthy |
-| s02 Language Basics | Beta-ready | preserve zero-magic flow across language, control flow, and data structures |
-| s03 Functions & Errors | Beta-ready | continue tightening proof surfaces and orchestration clarity |
-| s04 Types & Design | Beta-ready | keep canonical path coherent while stretch content stays clearly optional |
-| s05 Packages, I/O & CLI | Beta-ready | strengthen milestone polish and cross-track navigation |
-| s06 Backend, APIs & Databases | Beta-ready | keep HTTP, API, and DB tracks aligned and explicit |
-| s07 Concurrency | Beta-ready | preserve clear path from fundamentals to patterns |
-| s08 Quality & Testing | Beta-ready | keep testing and profiling proof surfaces honest |
-| s09 Architecture & Security | Beta-ready | sharpen trade-off teaching and security progression |
-| s10 Production Operations | Beta-ready | keep config, observability, deployment, and code generation coherent |
-| s11 GoScale Flagship | Beta-ready | deepen integrated proof and release-readiness |
-
-## v2.1 Stable Exit Criteria
-
-Before cutting `v2.1.0` from `release/v2`, we should be able to say:
-
-- the public docs, metadata, and validator agree
-- section navigation has no dead internal links
-- the repo validates cleanly with one command
-- the release-facing docs reflect the real state of the curriculum
-- the beta learner path is coherent enough to stabilize instead of restructure
+| Public architecture | Stable | 12 sections locked by `ARCHITECTURE.md` |
+| Curriculum registry | Stable | 12 sections and 215 items validated |
+| Lesson structure | Stable | README-first contract enforced by validator |
+| Section READMEs | Stable | section maps align with architecture and curriculum metadata |
+| Validator | Stable | strict checks fail on structural drift |
+| Tests | Stable | build, vet, unit tests, race tests, and coverage generation pass locally |
+| Opslane flagship | Stable baseline | integrated backend capstone remains open for future depth on `main` |
+| Workflow docs | Stable | issue, PR, review, and release workflow documented |
 
 ## Version Plan
 
-| Version | Target | Criteria |
+| Version | Line | Purpose |
 | --- | --- | --- |
-| v2.1.0-beta.1 | published | beta migration complete and validator green |
-| v2.1.0-rc.1 | published | RC gate passed and validation window is open on `release/v2` |
-| v2.1.0 | next | RC validation passes and release blockers are closed |
+| `v2.1.1` | `release/v2` | stable curriculum completion and public documentation alignment |
+| `v2.1.x` | `release/v2` | low-risk fixes, docs corrections, validator fixes, dependency/security updates |
+| post-v2.1 | `main` | future lesson depth, flagship expansion, and tooling improvements |
+
+## Maintenance Rules
+
+Normal maintenance may:
+
+- correct lesson explanations, tests, or examples
+- improve public documentation
+- strengthen validators and CI
+- fix learner navigation, metadata, or README/source mismatches
+- deepen Opslane without changing the public 12-section spine
+
+Normal maintenance must not:
+
+- add a new public root section
+- rename canonical section folders
+- move a lesson prefix to another section without explicit architecture approval
+- weaken validator checks to hide drift
+- publish a release without a clean verification record
+
+## Release Readiness
+
+A stable release is ready only when:
+
+- public docs, `ARCHITECTURE.md`, and `curriculum.v2.json` agree
+- `go build ./...` passes
+- `go vet ./...` passes
+- gofmt check passes
+- `go mod tidy` produces no `go.mod` or `go.sum` diff
+- `go test ./...` passes
+- `go test -race ./...` passes
+- `go test -coverprofile coverage.out ./...` passes
+- `go run ./scripts/validate_curriculum.go` reports success
+- GitHub CI is green
+- the release branch and tag are created from the verified commit
+
+## Current Focus
+
+After `v2.1.1`, development should stay bounded:
+
+1. maintain the stable v2.1.x line with small, auditable fixes
+2. improve Opslane depth on `main`
+3. keep validator coverage strict
+4. preserve public documentation as the accurate project mirror
+5. avoid architecture churn unless a future major version is explicitly planned

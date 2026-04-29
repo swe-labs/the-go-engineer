@@ -1,16 +1,30 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Text Templates
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how Go separates presentation from data with `text/template`.
+//
+// WHY THIS MATTERS:
+//   - Templates let you describe output structure separately from the data that fills it in. The flow is: 1. define a template 2. parse it 3. execute it ...
+//
+// RUN:
+//   go run ./04-types-design/strings-and-text/5-text-template
+//
+// KEY TAKEAWAY:
+//   - Learn how Go separates presentation from data with `text/template`.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
 
-// ============================================================================
-// Section 7: Strings & Text — Text Templates
-// Level: Intermediate
-// ============================================================================
 //
-// RUN: go run ./04-types-design/strings-and-text/5-text-template
-// ============================================================================
 
 import (
 	"fmt"
@@ -93,7 +107,8 @@ You have no messages
 
 	fmt.Println(strings.ToUpper(output.String()))
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: ST.6 config parser project")
-	fmt.Println("   Current: ST.5 (text templates)")
+	fmt.Println("NEXT UP: ST.6 config-parser-project")
+	fmt.Println("Current: ST.5 (text-template)")
+	fmt.Println("Previous: ST.4 (regex)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 03: Functions and Errors
+// Title: Orchestration
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how one function can coordinate several smaller helpers without losing readability.
+//
+// WHY THIS MATTERS:
+//   - Orchestration means one function controls the order of several smaller jobs. It does not do every detail itself. It decides: - what should happen f...
+//
+// RUN:
+//   go run ./03-functions-errors/6-orchestration
+//
+// KEY TAKEAWAY:
+//   - Learn how one function can coordinate several smaller helpers without losing readability.
+// ============================================================================
+
 package main
 
 import (
@@ -14,7 +33,6 @@ import (
 // Mental model:
 // One function can coordinate several helpers and stop early when a step fails.
 //
-// Run: go run ./03-functions-errors/6-orchestration
 
 func validateCartName(name string) error {
 	if strings.TrimSpace(name) == "" {

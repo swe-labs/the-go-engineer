@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 08: Quality & Testing
+// Title: Live pprof Endpoint
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Expose live profiling endpoints on an internal-only server so you can inspect CPU, heap, mutex, and goroutine behavior while a service is under loa...
+//
+// WHY THIS MATTERS:
+//   - Expose live profiling endpoints on an internal-only server so you can inspect CPU, heap, mutex, and goroutine behavior while a service is under loa...
+//
+// RUN:
+//   go run ./08-quality-test/01-quality-and-performance/profiling/3-http-pprof
+//
+// KEY TAKEAWAY:
+//   - Expose live profiling endpoints on an internal-only server so you can inspect CPU, heap, mutex, and goroutine behavior while a service is under loa...
+// ============================================================================
+
 package main
 
 import (
@@ -14,12 +33,8 @@ import (
 	"time"
 )
 
-// ============================================================================
 // Stage 08: Quality and Performance - Live pprof HTTP Endpoint
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - net/http/pprof: exposing live profiling endpoints on a running server
 //   - How to take a CPU profile from a production-like server under load
 //   - Security considerations: never expose pprof on a public-facing port
@@ -51,8 +66,6 @@ import (
 //     go http.ListenAndServe(":6060", nil) // pprof on internal port
 //     http.ListenAndServe(":8080", mux)    // public API on separate mux
 //
-// RUN: go run ./08-quality-test/01-quality-and-performance/profiling/3-http-pprof
-// ============================================================================
 
 // simulateWork does CPU-intensive computation to make profiles interesting.
 func simulateWork(intensity int) {

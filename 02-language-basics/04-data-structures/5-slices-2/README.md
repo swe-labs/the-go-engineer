@@ -12,6 +12,8 @@ This matters because changing data through one slice can unexpectedly change ano
 
 This lesson builds on DS.2 (slices) and DS.4 (pointers) by showing the connection between slice headers and shared backing arrays.
 
+> **Backward Reference:** In [Lesson 2: Slices](../2-slices/README.md), you learned the basics of slice creation and appending. In [Lesson 4: Pointers](../4-pointers/README.md), you learned how multiple variables can reference the same memory. Now we combine these concepts to show how sub-slices can unintentionally share underlying arrays.
+
 ## Prerequisites
 
 - `DS.2` slices
@@ -113,9 +115,10 @@ The next print proves that the original slice changed.
 This line starts the safe copy approach.
 Instead of sharing, the code allocates a new slice with its own backing storage.
 
-### `for i, value := range original[2:4]`
+### `copy(independent, original[2:4])`
 
-This loop copies values one by one into the new independent slice.
+This built-in function copies elements from the source slice into the destination slice.
+Because it is a new independent backing array, changes to one will not affect the other.
 
 ### `independent[0] = 500`
 
@@ -136,15 +139,17 @@ This final mutation proves the new slice no longer shares storage with the origi
 - How do I avoid accidental sharing?
   Copy the values into a new slice before making independent changes.
 
-## ⚠️ In Production
+## In Production
 This lesson prevents one of the most common slice bugs in Go: changing shared data accidentally
 because two slices still point at the same backing array.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** Now that you understand the mechanics and edge cases of arrays, slices, maps, and pointers, it's time to put them together. In the final lesson of this section, [Lesson 6: Contact Manager](../6-contact-manager/README.md), you will use all of these structures to build a working, composite data model.
+
 ## Next Step
 
 Continue to `DS.6` contact directory.

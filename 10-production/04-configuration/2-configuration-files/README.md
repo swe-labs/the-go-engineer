@@ -1,65 +1,77 @@
-# CFG.2 Configuration files
+# CFG.2 Configuration Files
 
 ## Mission
 
-Learn how file-based config complements environment variables when the shape grows beyond a handful of keys.
+Master hierarchical configuration. Learn how to use **YAML** or **JSON** files to manage complex application settings that are too large or nested for environment variables. Understand the pattern of **Precedence**: how to combine file-based defaults with environment variable overrides to create a flexible, production-ready configuration system.
 
 ## Prerequisites
 
-- CFG.1
+- CFG.1 Environment Variables
+- Section 05: Packages and I/O (Basic file reading and JSON encoding)
 
 ## Mental Model
 
-Config files trade simple key/value injection for richer structured data.
+Think of Configuration Files as **The Owner's Manual**.
+
+1. **Environment Variables**: Simple "Switches" (On/Off, Port Number).
+2. **Configuration Files**: Detailed "Schematics" (Database Connection Pool settings, Retry Policies, Feature Flags).
+3. **The Hybrid**: You use a file for the 50 settings that stay the same in every production cluster, and you use environment variables to override the 2 settings that are unique to *this* cluster (like the Database Password).
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["Configuration files"] --> B["Structured files help when config has nested shape."]
-    B --> C["Document precedence between file values and environment overrides."]
+    File[config.yaml] -->|Load Defaults| App[Go Binary]
+    Env[Environment Vars] -->|Override| App
+    App -->|Final Result| ValidatedConfig[In-Memory Config Struct]
+
+    subgraph "Precedence Rule"
+    Env > File
+    end
 ```
 
 ## Machine View
 
-The application still needs one parsing and validation boundary before the config can be trusted.
+- **`yaml.Unmarshal` / `json.Unmarshal`**: The primary tools for turning a file on disk into a Go struct.
+- **Precedence**: A common pattern is:
+  1. Load hardcoded defaults.
+  2. Overwrite with values from a config file.
+  3. Overwrite with values from environment variables.
+  4. Overwrite with command-line flags.
+- **Immutability**: Once the configuration is loaded and validated on startup, it should be treated as **Read-Only** throughout the life of the application.
 
 ## Run Instructions
 
 ```bash
+# Run the example to see how YAML is parsed into a Go struct
 go run ./10-production/04-configuration/2-configuration-files
 ```
 
 ## Code Walkthrough
 
-### Structured files help when config has nested shape.
+### The Config Struct
+Shows how to define a Go struct with tags (`yaml:"port"`, `json:"port"`) that match the file format.
 
-Structured files help when config has nested shape.
+### Parsing Logic
+Demonstrates reading a file from the disk and unmarshaling it into the struct.
 
-### Parsing is not validation; do both.
-
-Parsing is not validation; do both.
-
-### Document precedence between file values and environmen
-
-Document precedence between file values and environment overrides.
+### The Override Pattern
+Shows how to manually check for an environment variable and overwrite a field in the struct if it exists.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply CFG.2 in a small service or tool.
+1. Look at `main.go`. Create a new `config.yaml` file and change the port number. Run the code.
+2. Add a nested section `database` to the YAML and update the Go struct to support it.
+3. Discuss: Why should you never commit a `config.yaml` that contains a real production password to Git? (See SEC.9).
 
-## ⚠️ In Production
+## In Production
+**Beware of hidden defaults.** If your YAML parser ignores missing fields, your application might start up with a `0` or `""` value without you realizing it. Use a library that supports **Required Fields** or perform manual validation (CFG.5) immediately after parsing. Always provide an `example.config.yaml` in your repository so other developers know what keys are available.
 
-Config files become liabilities when the precedence rules are unclear or when production secrets sneak into checked-in defaults.
-
-## 🤔 Thinking Questions
-
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## Thinking Questions
+1. When is a config file better than an environment variable?
+2. What is "Precedence," and why does it matter?
+3. Why is YAML more common than JSON for configuration files?
 
 ## Next Step
 
-Continue to `CFG.3`.
+Files and Environment variables handle most cases, but sometimes you need to override a setting quickly from the command line. Continue to [CFG.3 Flag Parsing](../3-flag-parsing).

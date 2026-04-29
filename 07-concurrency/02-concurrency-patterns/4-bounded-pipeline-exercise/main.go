@@ -1,7 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
-// RUN: go run ./07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise
+// ============================================================================
+// Section 07: Concurrency
+// Title: Bounded Pipeline Exercise
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Build a bounded concurrent pipeline that stops on the first failure and reuses large temporary buffers instead of allocating a fresh one for every ...
+//
+// WHY THIS MATTERS:
+//   - Build a bounded concurrent pipeline that stops on the first failure and reuses large temporary buffers instead of allocating a fresh one for every ...
+//
+// RUN:
+//   go run ./07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise
+//
+// KEY TAKEAWAY:
+//   - Build a bounded concurrent pipeline that stops on the first failure and reuses large temporary buffers instead of allocating a fresh one for every ...
+// ============================================================================
+
 package main
 
 import (
@@ -15,9 +33,7 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-// ============================================================================
 // Stage 07: Concurrency Patterns - Exercise: Image Resizer Solution
-// ============================================================================
 
 var bufPool = sync.Pool{
 	New: func() any {

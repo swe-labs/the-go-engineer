@@ -1,65 +1,75 @@
-# OPS.2 Prometheus integration
+# OPS.2 Prometheus Integration
 
 ## Mission
 
-Learn the scrape-based model behind Prometheus and how application metrics become time series.
+Master the "Pull-Based" monitoring model. Learn how to use the **Prometheus client library** for Go to expose an HTTP endpoint (usually `/metrics`) that allows a Prometheus server to "scrape" your application's internal metrics. Understand how to register custom metrics and how they are transformed into **Time Series** data for visualization in Grafana.
 
 ## Prerequisites
 
-- OPS.1
+- OPS.1 Metrics Basics
+- Section 06: Backend & APIs (Basic HTTP server knowledge)
 
 ## Mental Model
 
-Prometheus pulls metrics from your service on a regular interval instead of waiting for the service to push them.
+Think of Prometheus Integration as **An Open Guest Book**.
+
+1. **The Push Model (Traditional)**: Every time something happens, you pick up the phone and call the monitoring server. If you have 10,000 servers, the monitoring server gets overwhelmed by phone calls.
+2. **The Pull Model (Prometheus)**: You keep a guest book on your front porch (The `/metrics` endpoint). You update it internally whenever you want.
+3. **The Scrape**: Once a minute, the Prometheus server walks by, reads your guest book, and writes down the numbers in its own notebook.
+4. **The Advantage**: Your application doesn't care if the monitoring server is slow or down; it just keeps writing in its own book.
 
 ## Visual Model
 
 ```mermaid
-graph TD
-    A["Prometheus integration"] --> B["Expose a scrape-friendly metrics endpoint."]
-    B --> C["Metric names should describe both unit and domain."]
+graph LR
+    App[Go App] -->|Internal Update| Register[Metric Registry]
+    Register -->|Serve HTTP| Endpoint[/metrics]
+    Prom[Prometheus Server] -->|Scrape / Pull| Endpoint
+    Prom -->|Query| Grafana[Grafana Dashboard]
 ```
 
 ## Machine View
 
-Metric names, labels, and buckets become the long-term contract your dashboards and alerts depend on.
+- **`promhttp.Handler()`**: The standard HTTP handler provided by Prometheus that converts your Go metric objects into the Prometheus text exposition format.
+- **`prometheus.MustRegister()`**: The global registry where you "Check in" your metrics so the handler knows about them.
+- **Scrape Interval**: The frequency at which Prometheus pulls data (e.g., every 15s). This determines the resolution of your graphs.
 
 ## Run Instructions
 
 ```bash
+# Start the service
 go run ./10-production/05-observability/2-prometheus-integration
+
+# In another terminal, view the raw metrics format:
+# curl http://localhost:8080/metrics
 ```
 
 ## Code Walkthrough
 
-### Expose a scrape-friendly metrics endpoint.
+### Defining the Registry
+Shows how to create a custom registry instead of using the global one (recommended for testing).
 
-Expose a scrape-friendly metrics endpoint.
+### The Metrics Endpoint
+Demonstrates attaching the `promhttp` handler to your HTTP mux.
 
-### Choose labels that stay bounded over time.
-
-Choose labels that stay bounded over time.
-
-### Metric names should describe both unit and domain.
-
-Metric names should describe both unit and domain.
+### Practical Instrumenting
+Shows how to wrap an existing HTTP handler with a middleware that automatically tracks request counts and latencies.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply OPS.2 in a small service or tool.
+1. Run the service and `curl` the `/metrics` endpoint. Can you find the `http_requests_total` metric?
+2. Refresh the browser a few times and `curl` again. Does the number increase?
+3. Add a `HELP` and `TYPE` comment to a custom metric using the `prometheus.Opts` struct.
+4. Discuss: Why is the Prometheus format simple plain text instead of JSON?
 
-## ⚠️ In Production
+## In Production
+**Don't put the metrics endpoint on the public internet.** Anyone who can access `/metrics` can see internal details about your system's performance and usage. Always put your metrics on a **Private Port** (e.g., `9090`) or protect them with internal network rules (IP allow-listing) or basic authentication.
 
-Prometheus is simple to adopt, but label discipline and bucket design matter far more than whether the scrape endpoint exists.
-
-## 🤔 Thinking Questions
-
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## Thinking Questions
+1. What are the benefits of a Pull model over a Push model?
+2. How does Prometheus handle a target that is temporarily offline?
+3. Why should you avoid using the "Global" registry in a large, modular application?
 
 ## Next Step
 
-Continue to `OPS.3`.
+Metrics tell you *what* is happening. Tracing tells you *where* it's happening. Continue to [OPS.3 Distributed Tracing Basics](../3-distributed-tracing-basics).

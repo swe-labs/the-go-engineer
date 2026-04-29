@@ -1,4 +1,24 @@
 // Copyright (c) 2026 Rasel Hossen
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Generics
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how to write functions and types that work with multiple types using type parameters and constraints.
+//
+// WHY THIS MATTERS:
+//   - Think of a vending machine. It does not care if it dispenses sodas, snacks, or toys-the mechanism is the same. The "type parameter" is what it is dispensing.
+//
+// RUN:
+//   go run ./04-types-design/9-generics
+//
+// KEY TAKEAWAY:
+//   - Learn how to write functions and types that work with multiple types using type parameters and constraints.
+// ============================================================================
+
 // See LICENSE for usage terms.
 
 package main
@@ -8,12 +28,7 @@ import (
 	"strings"
 )
 
-// ============================================================================
-// Section 6: Types & Interfaces — Generics
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - What generics are: functions/types that work with MULTIPLE types
 //   - Type parameters: the [T constraint] syntax
 //   - Type constraints: limiting what types T can be
@@ -21,8 +36,6 @@ import (
 //   - Custom constraints with interface unions (int | float64 | ...)
 //   - When to use generics vs interfaces
 //
-// RUN: go run ./04-types-design/9-generics
-// ============================================================================
 
 type Numeric interface {
 	int | int8 | int16 | int32 | int64 |
@@ -112,7 +125,8 @@ func main() {
 	fmt.Println("  - Use generics for data structures, algorithms, utilities")
 	fmt.Println("  - Use interfaces for behavior abstraction (polymorphism)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.10 payroll processor")
-	fmt.Println("   Current: TI.9 (generics)")
+	fmt.Println("NEXT UP: TI.10 payroll-processor")
+	fmt.Println("Current: TI.9 (generics)")
+	fmt.Println("Previous: TI.8 (custom-errors)")
 	fmt.Println("---------------------------------------------------")
 }

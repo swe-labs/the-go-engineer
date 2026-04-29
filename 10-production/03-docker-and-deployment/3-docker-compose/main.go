@@ -1,13 +1,31 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 10: Production Operations
+// Title: Docker Compose
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how Compose coordinates multiple services, shared networks, and local environment defaults for development.
+//
+// WHY THIS MATTERS:
+//   - Compose is a local orchestration description for how related containers should run together.
+//
+// RUN:
+//   go run ./10-production/03-docker-and-deployment/3-docker-compose
+//
+// KEY TAKEAWAY:
+//   - Compose coordinates multiple services and shared networks locally.
+//   - Define environment defaults in docker-compose.yaml for development teams.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 10: Production Operations - Docker Compose
 //
-// Run: go run ./10-production/03-docker-and-deployment/3-docker-compose
 
 func main() {
 	fmt.Println("=== DOCKER.3 Docker Compose ===")

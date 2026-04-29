@@ -1,65 +1,74 @@
-# SEC.2 SQL injection prevention
+# SEC.2 SQL Injection Prevention
 
 ## Mission
 
-Learn why parameterized queries are the baseline defense against SQL injection in Go.
+Master the defense against SQL Injection (SQLi), one of the oldest and most dangerous web vulnerabilities. Learn why you should **Never Concatenate SQL Strings** and how to use **Parameterized Queries** in Go to ensure that user input is always treated as data, never as executable code.
 
 ## Prerequisites
 
-- SEC.1
+- SEC.1 Input Validation Patterns
+- Section 05: Data Persistence (Basics of `database/sql`)
 
 ## Mental Model
 
-SQL injection happens when untrusted input is treated as part of the query syntax instead of as data.
+Think of SQL Injection as **A Malicious Form Entry**.
+
+1. **The Scenario**: A form asks for your "First Name."
+2. **The Honest User**: Enters "Alice." The query becomes: `SELECT * FROM users WHERE name = 'Alice'`.
+3. **The Malicious User**: Enters `Alice'; DROP TABLE users; --`.
+4. **The Disaster (Concatenation)**: If you use string formatting (`fmt.Sprintf`), the query becomes: `SELECT * FROM users WHERE name = 'Alice'; DROP TABLE users; --'`. The database executes *both* commands.
+5. **The Defense (Parameterization)**: If you use parameters (`?` or `$1`), the database treats the entire string `Alice'; DROP TABLE users; --` as a single, harmless name. It searches for a user with that literal name and finds nothing.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["SQL injection prevention"] --> B["Never concatenate untrusted values into SQL strings."]
-    B --> C["Validate input shape even when the query is parameterized."]
+    subgraph "Vulnerable: String Formatting"
+    Input1[User Input] -->|Concat| Query1["SQL: '... WHERE id = ' + input"]
+    Query1 -->|Exec| DB1[(Malicious Code Runs)]
+    end
+
+    subgraph "Secure: Parameterized"
+    Input2[User Input] -->|Bind| Query2["SQL: '... WHERE id = ?'"]
+    Query2 -->|Exec| DB2[(Input treated as Data)]
+    end
 ```
 
 ## Machine View
 
-Prepared statements and query parameters keep structure and untrusted values separate at the driver boundary.
+- **Placeholders**: Go's `database/sql` package uses placeholders like `?` (MySQL/SQLite) or `$1, $2` (PostgreSQL).
+- **Prepared Statements**: Under the hood, the driver sends the query structure to the database first, then sends the data separately. The database "pre-compiles" the query, so it knows exactly where the data ends and the commands begin.
+- **ORM Safety**: ORMs like GORM are generally safe, but only if you use their built-in query builders. Using `db.Raw("... " + input)` is just as dangerous as plain SQL.
 
 ## Run Instructions
 
 ```bash
+# Run the demo to see how SQLi is attempted and blocked
 go run ./09-architecture/04-security/2-sql-injection-prevention
 ```
 
 ## Code Walkthrough
 
-### Never concatenate untrusted values into SQL strings.
+### The Vulnerable Query
+Demonstrates a "Login" bypass where an attacker enters `' OR '1'='1` as a password to log in as the first user in the database.
 
-Never concatenate untrusted values into SQL strings.
-
-### Use parameter placeholders and argument binding.
-
-Use parameter placeholders and argument binding.
-
-### Validate input shape even when the query is parameteri
-
-Validate input shape even when the query is parameterized.
+### The Secure Query
+Shows the exact same logic using `db.QueryRow("SELECT ... WHERE pass = ?", input)`. The attack fails because the database looks for the literal string `' OR '1'='1`.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply SEC.2 in a small service or tool.
+1. Look at `main.go`. Try to use the `' OR '1'='1` trick to bypass the login in the "Vulnerable" example.
+2. Fix the vulnerable query using a parameter placeholder.
+3. Discuss: Is it safe to use a variable for a Table Name (e.g., `SELECT * FROM ` + tableName)? Why/Why not?
 
-## ⚠️ In Production
+## In Production
+**No Exceptions.** Even for internal tools or "safe" inputs, always use parameterized queries. SQLi can lead to total data loss, identity theft, and full server compromise. If you need dynamic queries (e.g., optional filters), use a query builder library rather than building strings manually.
 
-String-building SQL with user input is a security bug even when it looks harmless in tests.
-
-## 🤔 Thinking Questions
-
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## Thinking Questions
+1. Why can't the database "detect" an injection attack automatically?
+2. What is a "Blind SQL Injection"?
+3. How does input validation (SEC.1) provide a "defense-in-depth" layer against SQLi?
 
 ## Next Step
 
-Continue to `SEC.3`.
+Protecting the database is Step 1. Protecting the user's browser is Step 2. Learn how to prevent malicious scripts from running in your UI. Continue to [SEC.3 XSS and CSRF](../3-xss-and-csrf).

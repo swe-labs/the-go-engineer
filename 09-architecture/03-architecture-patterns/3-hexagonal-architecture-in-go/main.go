@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Hexagonal architecture in Go
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how ports and adapters keep domain rules independent of transport and storage details.
+//
+// WHY THIS MATTERS:
+//   - Hexagonal architecture isolates the core from delivery and persistence concerns through explicit ports.
+//
+// RUN:
+//   go run ./09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go
+//
+// KEY TAKEAWAY:
+//   - Learn how ports and adapters keep domain rules independent of transport and storage details.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - Hexagonal architecture in Go
 //
-// Run: go run ./09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go
 
 func main() {
 	fmt.Println("=== ARCH.3 Hexagonal architecture in Go ===")

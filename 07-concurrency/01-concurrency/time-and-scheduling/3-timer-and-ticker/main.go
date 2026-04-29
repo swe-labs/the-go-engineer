@@ -1,15 +1,31 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 07: Concurrency
+// Title: Timers and Tickers
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Timers and Tickers fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - Timers and Tickers provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker
+//
+// KEY TAKEAWAY:
+//   - Timers and Tickers fundamentals and practical application in Go.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
 
-// ============================================================================
 // Stage 07: Time & Scheduling - Timers & Tickers
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - `time.Timer` for one-off scheduled operations
 //   - `time.Ticker` for repeating background intervals
 //   - Listening to timer channels with `<-timer.C`
@@ -21,8 +37,6 @@ package main
 //   channel and unblocks your goroutine. Always `defer ticker.Stop()`, or the
 //   runtime will keep the timer alive longer than necessary.
 //
-// RUN: go run ./07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker
-// ============================================================================
 
 import (
 	"fmt"

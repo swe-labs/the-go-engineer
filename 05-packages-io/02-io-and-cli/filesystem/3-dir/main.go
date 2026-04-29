@@ -1,5 +1,27 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 05: Packages and I/O
+// Title: Directories
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to create, list, and recursively traverse directory structures.
+//   - How to check for the existence of files and directories.
+//
+// WHY THIS MATTERS:
+//   - Managing folders and navigating complex directory trees is essential
+//     for tools like file indexers, build systems, and data organizers.
+//
+// RUN:
+//   go run ./05-packages-io/02-io-and-cli/filesystem/3-dir
+//
+// KEY TAKEAWAY:
+//   - Use filepath.WalkDir() for recursive traversal and os.MkdirAll() for nested creation.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -12,12 +34,8 @@ import (
 	"path/filepath"
 )
 
-// ============================================================================
-// Stage 05: Filesystem — Directory Operations
-// Level: Intermediate
-// ============================================================================
+// Stage 05: Filesystem - Directory Operations
 //
-// WHAT YOU'LL LEARN:
 //   - os.Mkdir / os.MkdirAll: creating directories
 //   - os.ReadDir: listing directory contents
 //   - filepath.WalkDir: recursively walking a directory tree
@@ -27,7 +45,7 @@ import (
 // ANALOGY:
 //   os.Mkdir is like creating a single folder.
 //   os.MkdirAll is like creating an entire folder path (mkdir -p).
-//   filepath.WalkDir is like the `find` command — it visits every file
+//   filepath.WalkDir is like the `find` command - it visits every file
 //   in a directory tree recursively.
 //
 // ENGINEERING DEPTH:
@@ -35,11 +53,8 @@ import (
 //   file! Instead of containing text, a directory file contains a list of "inodes"
 //   (Index Nodes) pointing to the physical disk sectors of the files inside it.
 //   Because directories are just strings mapping to inodes, moving a 100GB file
-//   to a different folder on the same disk is instantaneous—the OS just rewrites
+//   to a different folder on the same disk is instantaneous-the OS just rewrites
 //   a 16-byte inode pointer; it doesn't move any actual data!
-//
-// RUN: go run ./05-packages-io/02-io-and-cli/filesystem/3-dir
-// ============================================================================
 
 func main() {
 	fmt.Println("=== Directory Operations ===")
@@ -53,9 +68,7 @@ func main() {
 	defer os.RemoveAll(tmpDir) // Cleanup everything when done
 	fmt.Printf("  Working in: %s\n\n", tmpDir)
 
-	// =====================================================================
-	// 1. os.MkdirAll — Create nested directory structure
-	// =====================================================================
+	// 1. os.MkdirAll - Create nested directory structure
 	// os.MkdirAll creates the directory AND all parent directories.
 	// It's like `mkdir -p` in the shell. If the directory already exists, it does nothing.
 	// Permission 0755 = owner: rwx, group: r-x, others: r-x
@@ -66,14 +79,14 @@ func main() {
 		filepath.Join(tmpDir, "project", "docs"),
 	}
 
-	fmt.Println("  1️⃣  Creating directory structure:")
+	fmt.Println("  1. Creating directory structure:")
 	for _, dir := range dirs {
 		if err := os.MkdirAll(dir, 0755); err != nil {
 			log.Fatal("MkdirAll failed:", err)
 		}
 		// Print relative path for readability
 		rel, _ := filepath.Rel(tmpDir, dir)
-		fmt.Printf("     📁 %s\n", rel)
+		fmt.Printf("     [DIR] %s\n", rel)
 	}
 	fmt.Println()
 
@@ -90,12 +103,10 @@ func main() {
 		os.WriteFile(f, []byte("// placeholder"), 0644)
 	}
 
-	// =====================================================================
-	// 2. os.ReadDir — List directory contents (non-recursive)
-	// =====================================================================
+	// 2. os.ReadDir - List directory contents (non-recursive)
 	// os.ReadDir returns a sorted list of directory entries.
 	// Each entry has Name(), IsDir(), and Type() info.
-	fmt.Println("  2️⃣  os.ReadDir (list one level):")
+	fmt.Println("  2. os.ReadDir (list one level):")
 	projectDir := filepath.Join(tmpDir, "project")
 	entries, err := os.ReadDir(projectDir)
 	if err != nil {
@@ -103,21 +114,19 @@ func main() {
 	}
 
 	for _, entry := range entries {
-		icon := "📄"
+		icon := "[FILE]"
 		if entry.IsDir() {
-			icon = "📁"
+			icon = "[DIR] "
 		}
 		fmt.Printf("     %s %s\n", icon, entry.Name())
 	}
 	fmt.Println()
 
-	// =====================================================================
-	// 3. filepath.WalkDir — Recursive directory traversal
-	// =====================================================================
+	// 3. filepath.WalkDir - Recursive directory traversal
 	// WalkDir visits EVERY file and directory in the tree.
 	// The callback receives: path, directory entry info, and any error.
 	// This is Go's equivalent of the Unix `find` command.
-	fmt.Println("  3️⃣  filepath.WalkDir (recursive tree):")
+	fmt.Println("  3. filepath.WalkDir (recursive tree):")
 	filepath.WalkDir(projectDir, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err // Skip entries with errors
@@ -130,9 +139,9 @@ func main() {
 			return nil // Skip root
 		}
 
-		icon := "📄"
+		icon := "[FILE]"
 		if d.IsDir() {
-			icon = "📁"
+			icon = "[DIR] "
 		}
 		indent := ""
 		for i := 0; i < depth; i++ {
@@ -143,12 +152,10 @@ func main() {
 	})
 	fmt.Println()
 
-	// =====================================================================
-	// 4. os.Stat — Check if file/directory exists
-	// =====================================================================
+	// 4. os.Stat - Check if file/directory exists
 	// os.Stat returns file info. If the file doesn't exist, err != nil.
 	// Use os.IsNotExist(err) to check specifically for "not found".
-	fmt.Println("  4️⃣  Check existence:")
+	fmt.Println("  4. Check existence:")
 	checkPaths := []string{
 		filepath.Join(tmpDir, "project", "main.go"),
 		filepath.Join(tmpDir, "project", "missing.go"),
@@ -156,21 +163,23 @@ func main() {
 	for _, p := range checkPaths {
 		rel, _ := filepath.Rel(tmpDir, p)
 		if _, err := os.Stat(p); os.IsNotExist(err) {
-			fmt.Printf("     ❌ %s — does NOT exist\n", rel)
+			fmt.Printf("     [-] %s - does NOT exist\n", rel)
 		} else {
-			fmt.Printf("     ✅ %s — exists\n", rel)
+			fmt.Printf("     [+] %s - exists\n", rel)
 		}
 	}
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
+	fmt.Println("KEY TAKEAWAYS:")
 	fmt.Println("  - os.MkdirAll creates nested dirs (like mkdir -p)")
 	fmt.Println("  - os.ReadDir lists one level, filepath.WalkDir walks recursively")
 	fmt.Println("  - os.Stat + os.IsNotExist checks if path exists")
 	fmt.Println("  - os.RemoveAll recursively deletes directory and all contents")
 	fmt.Println("  - Always use filepath.Join for cross-platform paths")
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: FS.4 temp files")
-	fmt.Println("   Current: FS.3 (directories)")
+	fmt.Println("NEXT UP: FS.4 temp")
+	fmt.Println("Current: FS.3 (dir)")
+	fmt.Println("Previous: FS.2 (paths)")
 	fmt.Println("---------------------------------------------------")
 }

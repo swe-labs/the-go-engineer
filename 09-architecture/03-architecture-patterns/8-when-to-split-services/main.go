@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: When to split services
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn the signals that justify service boundaries and the anti-signals that only imitate architecture maturity.
+//
+// WHY THIS MATTERS:
+//   - Split services because one boundary is costing too much, not because distributed systems sound advanced.
+//
+// RUN:
+//   go run ./09-architecture/03-architecture-patterns/8-when-to-split-services
+//
+// KEY TAKEAWAY:
+//   - Learn the signals that justify service boundaries and the anti-signals that only imitate architecture maturity.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - When to split services
 //
-// Run: go run ./09-architecture/03-architecture-patterns/8-when-to-split-services
 
 func main() {
 	fmt.Println("=== ARCH.8 When to split services ===")

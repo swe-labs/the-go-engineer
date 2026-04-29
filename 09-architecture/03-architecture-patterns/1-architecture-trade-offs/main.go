@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Monolith vs Modular Monolith vs Microservices
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Compare the default service shapes teams choose as systems and organizations grow.
+//
+// WHY THIS MATTERS:
+//   - Architecture is a cost allocation decision. Every boundary buys one kind of freedom by adding another kind of overhead.
+//
+// RUN:
+//   go run ./09-architecture/03-architecture-patterns/1-architecture-trade-offs
+//
+// KEY TAKEAWAY:
+//   - Compare the default service shapes teams choose as systems and organizations grow.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - Monolith vs Modular Monolith vs Microservices
 //
-// Run: go run ./09-architecture/03-architecture-patterns/1-architecture-trade-offs
 
 func main() {
 	fmt.Println("=== ARCH.1 Monolith vs Modular Monolith vs Microservices ===")

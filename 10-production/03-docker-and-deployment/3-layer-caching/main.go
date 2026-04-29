@@ -8,15 +8,15 @@ This lesson demonstrates how to optimize Docker builds using layer caching.
 KEY INSIGHT: Docker caches layers. If a layer hasn't changed, it reuses the cached result.
 
 WRONG ORDER (forces rebuild on every source change):
-    COPY . .                    ← Copies everything, invalidates cache
-    RUN go mod download         ← Dependencies downloaded again!
+    COPY . .                    <- Copies everything, invalidates cache
+    RUN go mod download         <- Dependencies downloaded again!
     RUN go build -o app main.go
 
 RIGHT ORDER (caches dependencies):
-    COPY go.mod go.sum ./       ← Only copies dependency files
-    RUN go mod download         ← Cached if go.mod unchanged
-    COPY . .                    ← Only invalidates if source changes
-    RUN go build -o app main.go ← Uses cached dependencies
+    COPY go.mod go.sum ./       <- Only copies dependency files
+    RUN go mod download         <- Cached if go.mod unchanged
+    COPY . .                    <- Only invalidates if source changes
+    RUN go build -o app main.go <- Uses cached dependencies
 
 BENEFIT: 10x faster rebuilds during development!
 

@@ -9,10 +9,10 @@ import (
 )
 
 // ============================================================================
-// Stage 06 Supplement: fs.FS Testing — Test File
+// Stage 06 Supplement: fs.FS Testing - Test File
 // ============================================================================
 //
-// These tests use fstest.MapFS — an in-memory filesystem.
+// These tests use fstest.MapFS - an in-memory filesystem.
 // Zero disk I/O. No temp directories. No cleanup. Runs in microseconds.
 //
 // This is the definitive demonstration of why accepting fs.FS is superior
@@ -22,7 +22,7 @@ import (
 // ============================================================================
 
 func TestSearchLogs_FindsMatches(t *testing.T) {
-	// fstest.MapFS is an in-memory filesystem — no real files needed.
+	// fstest.MapFS is an in-memory filesystem - no real files needed.
 	fakeFS := fstest.MapFS{
 		"app.log":    {Data: []byte("INFO: server started\nERROR: connection failed\nINFO: retry ok\n")},
 		"access.log": {Data: []byte("GET /api/v1 200\nPOST /api/v1 500 error\n")},

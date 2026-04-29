@@ -1,139 +1,82 @@
 # The Go Engineer Curriculum Blueprint
 
-> This document defines how the 12-section v2.1 architecture should behave as a learning system.
-> If this file and [ARCHITECTURE.md](./ARCHITECTURE.md) ever disagree on structure, `ARCHITECTURE.md` wins.
+This document defines how the locked v2.1 architecture behaves as a learning system.
+
+If this file and [ARCHITECTURE.md](./ARCHITECTURE.md) disagree on public structure, `ARCHITECTURE.md` wins.
 
 ## Core Promise
 
-The Go Engineer should help a learner move from:
+The curriculum should help a learner move from copying code to understanding, changing, testing, and operating Go software with clear reasoning.
 
-- "I can copy code"
+The expected progression is:
 
-to:
+- understand what a line of Go does
+- explain why that design exists
+- predict what can break
+- prove behavior with tests or validation
+- connect isolated lessons into a production-shaped backend system
 
-- "I understand what this line does"
-- "I can explain why this design exists"
-- "I can predict what breaks"
-- "I can build and operate a real system"
+## Architecture Lock
 
-## Non-Negotiable Teaching Rules
+The public curriculum spine is locked at 12 sections, `s00` through `s11`.
 
-### 1. README first, code second
+Do not solve content growth by adding a new public root section. Add depth inside existing sections unless a maintainer explicitly approves architecture work.
 
-Every learner-facing lesson teaches through `README.md` first.
-The learner should understand the mission before opening `main.go`.
+## Teaching Rules
 
-### 2. Code is never skipped
+### README first, code second
 
-We do not replace code with prose.
-We explain the code, then run the code, then modify the code.
+Every learner-facing lesson teaches through `README.md` before source code.
 
-### 3. Zero magic
+The learner should understand the mission, prerequisites, mental model, and machine view before reading `main.go`.
+
+### Code is never skipped
+
+Do not replace code with prose. Explain the code, run the code, then modify the code.
+
+### Zero magic
 
 Each section teaches only what has been earned.
-If a concept depends on later ideas, it belongs later or must include a clearly labeled forward reference.
 
-### 4. Explanation must answer how, why, and what changes
+If a concept depends on later ideas, either move it later or add a clear forward reference.
+
+### Explanations answer how, why, and what changes
 
 Good teaching surfaces explain:
 
-- what this line or block does
+- what the line or block does
 - why it exists
-- what would change if we changed it
-- what mistake a learner is likely to make here
+- what would change if the design changed
+- what mistake a learner is likely to make
 
-### 5. Engineering depth must be stage-aware
+### Engineering depth is stage-aware
 
-We do want:
+Beginner sections stay concrete. Later sections add design trade-offs, failure modes, security, operations, and reliability reasoning.
 
-- design thinking
-- failure thinking
-- production relevance
-- debugging instincts
+## Phase Blueprint
 
-But we add them at the right layer.
-We do not dump senior-level pressure framing into beginner lessons just to sound impressive.
-
-## Phase-Level Blueprint
-
-The curriculum is split into 5 phases across 12 sections (`s00` through `s11`).
-
-### Phase 0: Machine Foundation (`s00`)
-
-This phase explains why code works at all before writing any Go.
-It should feel safe, explicit, and visual.
-
-Required elements:
-
-- mission and mental model
-- visual diagrams
-- plain-language analogies
-- runnable demonstrations
-
-### Phase 1: Language Foundation (`s01` through `s04`)
-
-These sections must feel safe, explicit, and zero-magic.
-The learner is building Go fluency.
-
-Required elements:
-
-- mission
-- mental model
-- literal or near-literal walkthroughs
-- clean runnable code
-
-Avoid:
-
-- premature scale pressure
-- advanced security catalogs
-- abstract design jargon before the learner has concrete examples
-
-### Phase 2: Engineering Core (`s05` through `s08`)
-
-These sections start increasing engineering judgment.
-The learner is building systems.
-
-Add more of:
-
-- trade-off explanations
-- failure cases
-- safer defaults
-- tests and verification surfaces
-- performance and maintainability reasoning
-- In Production notes with real-world consequences
-
-### Phase 3: Systems Engineering (`s09` through `s10`)
-
-These sections carry full engineering weight: architecture, security, runtime operations, and deployment.
-
-Add more of:
-
-- architecture trade-offs
-- production notes
-- security implications
-- deployment patterns
-
-### Phase 4: Flagship Project (`s11`)
-
-This phase carries the heaviest engineering pressure:
-
-- integrated project proof
-- production deployment
-- operational pressure
-- all prior concepts applied together
+| Phase | Sections | Required emphasis |
+| --- | --- | --- |
+| 0 | s00 | machine model, terminal confidence, execution basics |
+| 1 | s01-s04 | syntax, control flow, data structures, functions, errors, types |
+| 2 | s05-s08 | packages, I/O, APIs, databases, concurrency, tests, profiling |
+| 3 | s09-s10 | architecture, security, production operations |
+| 4 | s11 | integrated system design through Opslane |
 
 ## Canonical Lesson Contract
 
-For learner-facing lessons, the default shape is:
+Default lesson shape:
 
 ```text
 lesson-name/
-├── README.md
-├── main.go
-├── main_test.go
-└── _starter/
-    └── main.go
+|-- README.md
+|-- main.go
+|-- main_test.go
+`-- _starter/
+    `-- main.go
 ```
+
+Not every lesson needs tests or starter code. Exercises and behavior-heavy lessons do.
 
 ### Required README Sections
 
@@ -151,58 +94,65 @@ Each lesson README must include these sections in this order:
 10. `## Thinking Questions`
 11. `## Next Step`
 
-For exercises: replace `## Code Walkthrough` with `## Solution Walkthrough`, and add `## Verification Surface`.
+For exercises:
 
-### Required Source-File Behavior
+- replace `## Code Walkthrough` with `## Solution Walkthrough`
+- include `## Verification Surface`
+
+### Required Source Behavior
 
 Source files should stay readable and runnable.
-They should not become giant essays.
 
 Use inline comments for:
 
 - non-obvious behavior
 - mutation or boundary traps
-- subtle runtime implications
+- runtime implications
+- forward and backward lesson references
 
-Do not use code headers as the main teaching surface.
-
-Every `main()` should still end with a clear takeaway and next-step footer in the source comments where that lesson family uses one.
-
-## Canonical Milestone Contract
-
-Every section needs proof, not just lessons.
-
-A milestone should usually provide:
-
-- clear README instructions
-- a runnable completed solution
-- a starter surface when the learner is expected to implement
-- tests when the behavior should be provable
+Do not turn source headers into the main teaching surface. The README is primary.
 
 ## Cross-Reference Rules
 
 When a lesson uses a concept not yet formally taught:
 
-- **Forward reference**: explain the borrowed concept briefly and point to the later lesson
-- **Backward reference**: name the earlier lesson that established the current idea
-- **Sibling reference**: point to the neighboring track when the learner is using, not introducing, the concept
+- introduce the borrowed idea in one or two sentences
+- name the future lesson or section where it is taught in detail
+- keep the explanation local to the paragraph where the concept appears
 
-## How To Add New Lessons Without Breaking The Architecture
+When a lesson reuses a concept taught earlier:
 
-If the curriculum needs more depth:
+- name the earlier lesson ID or section
+- remind the learner why that earlier idea matters here
+- do not repeat the full earlier lesson
 
-1. Add the lesson inside an existing section.
-2. Keep the learner-facing section count at exactly 12 (`s00` through `s11`).
-3. Update [ARCHITECTURE.md](./ARCHITECTURE.md) if the scope of the section expands.
-4. Register the lesson in `curriculum.v2.json`.
-5. Make sure `go run ./scripts/validate_curriculum.go` still passes.
+When neighboring tracks use the same idea:
 
-Do not solve content growth by inventing a new root-level section unless the public architecture is being intentionally reworked.
+- point to the sibling lesson only when it improves navigation
+- avoid detached "forward/backward reference" sections that interrupt reading flow
+
+## Milestone Contract
+
+Every section needs proof, not only explanations.
+
+A milestone should usually provide:
+
+- clear README instructions
+- a runnable completed solution
+- starter code when the learner is expected to implement
+- tests when behavior should be provable
+
+## Revision Checklist
+
+When adding or revising lessons:
+
+1. work inside an existing section
+2. keep the public section count at exactly 12
+3. update `curriculum.v2.json`
+4. update the section README
+5. keep README, source, tests, starter code, and metadata aligned
+6. run `go run ./scripts/validate_curriculum.go`
 
 ## Bottom Line
 
-The Go Engineer should feel like one coherent engineering learning system.
-
-The 12 sections give us the public spine.
-The README-first teaching contract gives us the delivery standard.
-Future expansion should deepen the sections we have, not fragment the learner path again.
+The Go Engineer should read as one coherent engineering learning system. The 12 sections are the public spine; README-first teaching, runnable code, strict validation, and clear cross-references are the delivery standard.

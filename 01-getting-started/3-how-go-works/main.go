@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 01: Getting Started
+// Title: How Go Works
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Build a beginner-safe mental model for packages, imports, exported names, and the `go run` workflow.
+//
+// WHY THIS MATTERS:
+//   - Go organizes code into packages. A file imports packages when it wants to use capabilities it does not define itself. This lesson uses several pack...
+//
+// RUN:
+//   go run ./01-getting-started/3-how-go-works
+//
+// KEY TAKEAWAY:
+//   - Build a beginner-safe mental model for packages, imports, exported names, and the `go run` workflow.
+// ============================================================================
+
 package main
 
 import (

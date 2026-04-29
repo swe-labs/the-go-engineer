@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: SQL injection prevention
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn why parameterized queries are the baseline defense against SQL injection in Go.
+//
+// WHY THIS MATTERS:
+//   - SQL injection happens when untrusted input is treated as part of the query syntax instead of as data.
+//
+// RUN:
+//   go run ./09-architecture/04-security/2-sql-injection-prevention
+//
+// KEY TAKEAWAY:
+//   - Learn why parameterized queries are the baseline defense against SQL injection in Go.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - SQL injection prevention
 //
-// Run: go run ./09-architecture/04-security/2-sql-injection-prevention
 
 func main() {
 	fmt.Println("=== SEC.2 SQL injection prevention ===")

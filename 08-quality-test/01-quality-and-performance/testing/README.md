@@ -2,36 +2,39 @@
 
 ## Mission
 
-This track teaches you how to prove behavior in Go with small, explicit tests instead of treating
-tests as a separate framework or a giant afterthought.
+Master the tools and patterns required to build a reliable Go codebase. This track moves from basic unit tests to advanced patterns like fuzzing and golden files, ensuring your systems are resilient to edge cases and regressions.
 
 ## Track Map
 
-| ID | Type | Surface | Why It Matters | Requires |
-| --- | --- | --- | --- | --- |
-| `TE.1` | Lesson | [unit testing](./user) | Introduces `testing.T`, basic assertions, and test file structure. | entry |
-| `TE.2` | Lesson | [table-driven tests](./user) | Shows the idiomatic Go pattern for structured test cases and sub-tests. | `TE.1` |
-| `TE.3` | Lesson | [HTTP handler testing](./user) | Tests handlers with `httptest` instead of a real server. | `TE.1`, `TE.2` |
-| `TE.4` | Lesson | [benchmarking](./benchmarks) | Uses `testing.B` and `-benchmem` to compare performance choices. | `TE.1`, `TE.2` |
+| ID | Topic | Surface | Why It Matters |
+| --- | --- | --- | --- |
+| `TE.1` | **Unit Testing** | [`./user`](./user) | Basic `testing.T` and test file structure. |
+| `TE.2` | **Table-Driven Tests** | [`./user`](./user) | The idiomatic Go pattern for scaling test cases. |
+| `TE.3` | **HTTP Testing** | [`./user`](./user) | Testing handlers with `httptest`. |
+| `TE.4` | **Benchmarking** | [`./benchmarks`](./benchmarks) | Measuring `ns/op` and `allocs/op`. |
+| `TE.5` | **Sub-tests & Cleanup** | [`./5-sub-tests-and-cleanup`](./5-sub-tests-and-cleanup) | Granular reporting and reliable teardown. |
+| `TE.6` | **Fuzz Testing** | [`./6-fuzz-testing`](./6-fuzz-testing) | Automating edge-case discovery. |
+| `TE.7` | **Interfaces for Testability**| [`./7-interfaces-for-testability`](./7-interfaces-for-testability) | Creating seams for isolation. |
+| `TE.8` | **Mocking Patterns** | [`./8-mocking-with-interfaces`](./8-mocking-with-interfaces) | Controlling dependency behavior. |
+| `TE.9` | **Integration Testing** | [`./9-integration-tests`](./9-integration-tests) | Verifying real component boundaries. |
+| `TE.10`| **Golden Files** | [`./10-golden-files`](./10-golden-files) | Managing large test outputs. |
 
 ## Suggested Order
 
-1. Work through `TE.1`, `TE.2`, and `TE.3` in order.
-2. Complete `TE.4` once the test-design mindset feels natural.
+1. **Foundations**: `TE.1` -> `TE.3` (Basic logic and HTTP).
+2. **Performance**: `TE.4` (Benchmarks).
+3. **Advanced Flow**: `TE.5` -> `TE.6` (Lifecycle and Fuzzing).
+4. **Architecture**: `TE.7` -> `TE.8` (Decoupling and Mocking).
+5. **System Quality**: `TE.9` -> `TE.10` (Integration and Goldens).
 
 ## Track Milestone
 
-`TE.4` is the current testing-track output.
+You have mastered this track when you can:
+- Explain why table-driven tests are preferred over multiple test functions.
+- Use `httptest.NewRecorder` to verify handler outputs.
+- Write a Fuzz test that finds a crashing input.
+- Create a mock that allows testing a service without a database.
 
-If you can explain:
+## Next Up
 
-- why table-driven tests are the default Go testing pattern
-- why `httptest` is better than spinning up a real server for unit-level handler tests
-- why `b.ReportAllocs()` matters when reading benchmark output
-
-then the testing part of Stage 08 is doing its job.
-
-## Next Step
-
-After `TE.4`, continue to the [Profiling track](../profiling) or back to the
-[Stage 08 overview](../README.md).
+Continue to the [Profiling track](../profiling) to measure what your code costs.

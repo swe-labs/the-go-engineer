@@ -6,7 +6,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 6: Types & Interfaces — Payroll Processor (Exercise Starter)
+// Section 6: Types & Interfaces - Payroll Processor (Exercise Starter)
 // Level: Intermediate
 // ============================================================================
 //
@@ -14,9 +14,9 @@ import "fmt"
 //
 // REQUIREMENTS:
 //  1. [ ] Define a `Payable` interface with `CalculatePay() float64` and `String() string`
-//  2. [ ] Implement `SalariedEmployee` — pay = AnnualSalary / 12
-//  3. [ ] Implement `HourlyEmployee` — pay = HourlyRate * HoursWorked
-//  4. [ ] Implement `CommissionEmployee` — pay = BaseSalary + (CommissionRate * SalesAmount)
+//  2. [ ] Implement `SalariedEmployee` - pay = AnnualSalary / 12
+//  3. [ ] Implement `HourlyEmployee` - pay = HourlyRate * HoursWorked
+//  4. [ ] Implement `CommissionEmployee` - pay = BaseSalary + (CommissionRate * SalesAmount)
 //  5. [ ] Create a `ProcessPayroll(employees []Payable)` function that prints each
 //         employee's info, monthly pay, and calculates the total payroll cost
 //  6. [ ] Add one small generic helper for reusable employee summary output

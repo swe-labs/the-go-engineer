@@ -1,5 +1,27 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 05: Packages and I/O
+// Title: JSON Marshalling
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to convert Go structs into JSON byte slices (Marshalling).
+//   - How to use struct tags to control JSON field names and formatting.
+//
+// WHY THIS MATTERS:
+//   - JSON is the universal language of the web. Translating Go data into
+//     JSON is required for APIs, web communication, and data storage.
+//
+// RUN:
+//   go run ./05-packages-io/02-io-and-cli/encoding/1-marshalling
+//
+// KEY TAKEAWAY:
+//   - Struct tags and exported fields are the keys to controlling JSON output in Go.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -11,12 +33,8 @@ import (
 	"time"
 )
 
-// ============================================================================
-// Stage 05: Encoding — JSON Marshalling (Go → JSON)
-// Level: Beginner → Intermediate
-// ============================================================================
+// Stage 05: Encoding - JSON Marshalling (Go -> JSON)
 //
-// WHAT YOU'LL LEARN:
 //   - json.Marshal: converting Go structs to JSON byte slices
 //   - json.MarshalIndent: pretty-printed JSON output
 //   - Struct tags: controlling JSON field names (`json:"name"`)
@@ -28,7 +46,7 @@ import (
 //   Marshalling is like translating a Go struct into a language that
 //   every system understands: JSON. Your Go server speaks Go internally,
 //   but when it sends data to a browser, mobile app, or another API,
-//   it translates to JSON — the universal data format of the web.
+//   it translates to JSON - the universal data format of the web.
 //
 // ENGINEERING DEPTH:
 //   Go's `encoding/json` package heavily relies on the `reflect` (Reflection)
@@ -38,9 +56,6 @@ import (
 //   than strictly at compile time, JSON encoding in standard Go is slightly
 //   slower than in languages with macro-based code generation (like Rust's Serde).
 //   For 99% of web APIs, this overhead is utterly negligible.
-//
-// RUN: go run ./05-packages-io/02-io-and-cli/encoding/1-marshalling
-// ============================================================================
 
 // Product represents an item in an e-commerce catalog.
 // STRUCT TAGS control how each field is serialized to JSON.
@@ -49,10 +64,10 @@ import (
 //
 // Common options:
 //
-//	`json:"name"`          → JSON field name is "name" (not "Name")
-//	`json:"name,omitempty"` → Omit this field if it's the zero value
-//	`json:"-"`             → NEVER include this field in JSON
-//	`json:",string"`       → Encode number/bool as a JSON string
+//	`json:"name"`          -> JSON field name is "name" (not "Name")
+//	`json:"name,omitempty"` -> Omit this field if it's the zero value
+//	`json:"-"`             -> NEVER include this field in JSON
+//	`json:",string"`       -> Encode number/bool as a JSON string
 type Product struct {
 	// ID will appear as "id" in JSON (lowercase, matching REST API conventions)
 	ID int `json:"id"`
@@ -68,7 +83,7 @@ type Product struct {
 	// by not sending {"description": ""} for products without descriptions.
 	Description string `json:"description,omitempty"`
 
-	// InStock will appear as "in_stock" (snake_case — common in REST APIs)
+	// InStock will appear as "in_stock" (snake_case - common in REST APIs)
 	InStock bool `json:"in_stock"`
 
 	// CreatedAt serializes as ISO 8601 string ("2025-01-15T10:30:00Z").
@@ -85,7 +100,7 @@ type Product struct {
 }
 
 func main() {
-	fmt.Println("=== JSON Marshalling: Go → JSON ===")
+	fmt.Println("=== JSON Marshalling: Go -> JSON ===")
 	fmt.Println()
 
 	// --- BASIC MARSHALLING ---
@@ -107,20 +122,20 @@ func main() {
 		log.Fatal("Marshal error:", err)
 	}
 
-	fmt.Println("1️⃣  json.Marshal (compact):")
+	fmt.Println("1. json.Marshal (compact):")
 	fmt.Printf("   %s\n\n", string(data))
 
 	// --- PRETTY-PRINTED JSON ---
 	// json.MarshalIndent adds newlines and indentation for readability.
 	// Arguments: (value, prefix, indent)
 	//   prefix: string prepended to each line (usually "")
-	//   indent: string used for each indentation level (usually "  " or "	")
+	//   indent: string used for each indentation level (usually "  " or "\t")
 	prettyData, err := json.MarshalIndent(laptop, "", "  ")
 	if err != nil {
 		log.Fatal("MarshalIndent error:", err)
 	}
 
-	fmt.Println("2️⃣  json.MarshalIndent (pretty):")
+	fmt.Println("2. json.MarshalIndent (pretty):")
 	fmt.Println(string(prettyData))
 	fmt.Println()
 
@@ -133,12 +148,12 @@ func main() {
 		Price:     49.99,
 		InStock:   false,
 		CreatedAt: time.Now(),
-		// Description is "" → omitted from JSON (omitempty)
-		// Tags is nil → omitted from JSON (omitempty)
+		// Description is "" -> omitted from JSON (omitempty)
+		// Tags is nil -> omitted from JSON (omitempty)
 	}
 
 	minimalJSON, _ := json.MarshalIndent(minimal, "", "  ")
-	fmt.Println("3️⃣  omitempty (no description, no tags):")
+	fmt.Println("3. omitempty (no description, no tags):")
 	fmt.Println(string(minimalJSON))
 	fmt.Println()
 
@@ -146,26 +161,28 @@ func main() {
 	// CRITICAL: Only EXPORTED fields (uppercase first letter) are marshalled.
 	// Unexported fields (lowercase) are INVISIBLE to encoding/json.
 	type internal struct {
-		Public  string `json:"public"` // ✅ Will appear in JSON
-		private string // ❌ INVISIBLE to json.Marshal (lowercase)
+		Public  string `json:"public"` // OK: Will appear in JSON
+		private string // HIDDEN: INVISIBLE to json.Marshal (lowercase)
 	}
 
 	secret := internal{Public: "visible", private: "hidden"}
 	secretJSON, _ := json.Marshal(secret)
-	fmt.Println("4️⃣  Unexported fields are invisible:")
+	fmt.Println("4. Unexported fields are invisible:")
 	fmt.Printf("   %s\n", string(secretJSON)) // Only "public" appears
 	fmt.Println("   (The 'private' field is not in the JSON!)")
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
+	fmt.Println("KEY TAKEAWAYS:")
 	fmt.Println("  - json.Marshal converts Go structs to JSON []byte")
 	fmt.Println("  - json.MarshalIndent for readable output (debugging, APIs)")
 	fmt.Println("  - Struct tags control field names: `json:\"my_name\"`")
 	fmt.Println("  - omitempty: skip zero-value fields from output")
 	fmt.Println("  - json:\"-\": never include this field (secrets, internal data)")
 	fmt.Println("  - Only EXPORTED (Uppercase) fields appear in JSON")
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: EN.2 JSON unmarshalling")
-	fmt.Println("   Current: EN.1 (JSON marshalling)")
+	fmt.Println("NEXT UP: EN.2 unmarshal")
+	fmt.Println("Current: EN.1 (marshalling)")
+	fmt.Println("Previous: CL.4 (file-organizer)")
 	fmt.Println("---------------------------------------------------")
 }

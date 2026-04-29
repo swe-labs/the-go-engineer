@@ -1,185 +1,136 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
+
+// ============================================================================
+// Section 06: Backend, APIs & Databases
+// Title: Web Masterclass - Sessions
+// Level: Advanced
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to manage state across requests using Cookies and Sessions.
+//   - How to set secure, HttpOnly cookies in Go.
+//   - How to implement a simple in-memory session store.
+//   - The difference between "Stateful Sessions" and "Stateless Tokens".
+//
+// WHY THIS MATTERS:
+//   - HTTP is a stateless protocol. To build features like login, shopping
+//     carts, or user preferences, you need a way to "remember" who a user
+//     is from one request to the next. Sessions are the standard way to
+//     bridge this gap safely.
+//
+// RUN:
+//   go run ./06-backend-db/01-web-and-database/web-masterclass/5-sessions
+//
+// KEY TAKEAWAY:
+//   - Never store sensitive data directly in a cookie. Store a random ID
+//     and keep the real data on the server.
+// ============================================================================
 
 package main
 
 import (
 	"crypto/rand"
 	"encoding/hex"
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"sync"
-	"time"
 )
 
-// ============================================================================
-// Stage 06: Web Masterclass — Sessions
-// Level: Advanced
-// ============================================================================
+// Stage 06: Web Masterclass - Sessions
 //
-// WHAT YOU'LL LEARN:
-//   - Cookie-based session management
-//   - Secure session tokens
-//   - Session data storage (in-memory for learning)
-//   - Flash messages pattern
+//   - Cookie Security: HttpOnly, Secure, SameSite
+//   - Session Storage: In-memory map (Thread-safe)
+//   - Authentication Flow: Login -> Session -> Access
 //
 // ENGINEERING DEPTH:
-//   A massive architectural debate in backend engineering is "Stateful Sessions"
-//   vs "Stateless JWTs". Because HTTP is inherently stateless, the server must
-//   remember who you are. JWTs (Stateless) offload the memory to the client's
-//   browser, requiring zero database lookups, but they CANNOT be instantly
-//   revoked if a hacker steals the token. Stateful Sessions (like this file)
-//   store a random string in the cookie and keep the actual data in Redis/Memory
-//   on the server. This requires a fast database lookup on every single request,
-//   but allows the server to instantly kill a session (logout) with zero latency.
-//
-// IMPORTANT: This uses a simple in-memory store for learning.
-// In production, use a library like gorilla/sessions or scs.
-//
-// RUN: go run ./06-backend-db/01-web-and-database/web-masterclass/5-sessions
-// ============================================================================
+//   A session cookie should never contain actual user data (like
+//   their email or balance). Instead, it should contain a long,
+//   randomly generated string (a "Session ID"). The server uses
+//   this ID as a key to look up the user's data in its own memory
+//   or a database like Redis. This prevents users from "tampering"
+//   with their session data in the browser.
 
-// Session stores data for a single user session.
-type Session struct {
-	Data      map[string]any
-	CreatedAt time.Time
-	ExpiresAt time.Time
-}
-
-// SessionStore manages all active sessions in memory.
-// In production, use Redis, PostgreSQL, or another persistent store.
-type SessionStore struct {
-	mu       sync.RWMutex
-	sessions map[string]*Session
-}
-
-func NewSessionStore() *SessionStore {
-	return &SessionStore{
-		sessions: make(map[string]*Session),
-	}
-}
-
-// Create generates a new session and returns its ID.
-func (s *SessionStore) Create() (string, *Session) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
-	// In production, use crypto/rand for secure token generation.
-	b := make([]byte, 16)
-	rand.Read(b)
-	id := hex.EncodeToString(b)
-	sess := &Session{
-		Data:      make(map[string]any),
-		CreatedAt: time.Now(),
-		ExpiresAt: time.Now().Add(24 * time.Hour),
-	}
-	s.sessions[id] = sess
-	return id, sess
-}
-
-// Get retrieves a session by ID.
-func (s *SessionStore) Get(id string) (*Session, bool) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-
-	sess, ok := s.sessions[id]
-	if !ok || time.Now().After(sess.ExpiresAt) {
-		return nil, false
-	}
-	return sess, true
-}
-
+// application holds our in-memory session store.
 type application struct {
-	sessions *SessionStore
+	sessionStore map[string]string
+	mu           sync.RWMutex
 }
 
 func main() {
 	app := &application{
-		sessions: NewSessionStore(),
+		sessionStore: make(map[string]string),
 	}
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /", app.handleHome)
-	mux.HandleFunc("POST /login", app.handleLogin)
-	mux.HandleFunc("GET /dashboard", app.handleDashboard)
-	mux.HandleFunc("GET /flash", app.handleFlash)
+	mux.HandleFunc("GET /login", app.handleLogin)
+	mux.HandleFunc("GET /secret", app.handleSecret)
 
-	log.Println("Starting server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("=== Web Masterclass: Sessions ===")
+	fmt.Println("  🚀 Server starting on http://localhost:8084")
+	fmt.Println()
+	fmt.Println("  1. Visit http://localhost:8084/secret (Access Denied)")
+	fmt.Println("  2. Visit http://localhost:8084/login (Login)")
+	fmt.Println("  3. Visit http://localhost:8084/secret (Access Granted)")
+
+	log.Fatal(http.ListenAndServe(":8084", mux))
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: WM.6 authentication")
-	fmt.Println("   Current: WM.5 (sessions)")
+	fmt.Println("NEXT UP: MC.6 authentication")
+	fmt.Println("Current: MC.5 (sessions)")
+	fmt.Println("Previous: MC.4 (middleware)")
 	fmt.Println("---------------------------------------------------")
 }
 
 func (app *application) handleHome(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Visit POST /login to create a session")
+	fmt.Fprintln(w, "Welcome to the Session Masterclass.")
 }
 
 func (app *application) handleLogin(w http.ResponseWriter, r *http.Request) {
-	// Create a new session
-	id, sess := app.sessions.Create()
-	sess.Data["username"] = "gopher"
-	sess.Data["flash"] = "Welcome back, gopher!"
+	// 1. Generate a secure, random Session ID
+	b := make([]byte, 16)
+	rand.Read(b)
+	sessionID := hex.EncodeToString(b)
 
-	// Set the session cookie
-	http.SetCookie(w, &http.Cookie{
-		Name:     "session_id",
-		Value:    id,
+	// 2. Store it in our server-side map
+	app.mu.Lock()
+	app.sessionStore[sessionID] = "Alice" // We "remember" this ID belongs to Alice
+	app.mu.Unlock()
+
+	// 3. Set a secure cookie in the response
+	cookie := &http.Cookie{
+		Name:     "session_token",
+		Value:    sessionID,
 		Path:     "/",
-		HttpOnly: true,                 // JavaScript can't access this cookie
-		Secure:   false,                // Set true in production (HTTPS only)
+		HttpOnly: true,                 // Important: Prevent JavaScript access (XSS)
+		Secure:   false,                // Set to true in production (HTTPS only)
 		SameSite: http.SameSiteLaxMode, // CSRF protection
-		MaxAge:   86400,                // 24 hours
-	})
+	}
+	http.SetCookie(w, cookie)
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{
-		"message":    "Login successful",
-		"session_id": id,
-	})
+	fmt.Fprintln(w, "Successfully logged in! A session cookie has been set.")
 }
 
-func (app *application) handleDashboard(w http.ResponseWriter, r *http.Request) {
-	cookie, err := r.Cookie("session_id")
+func (app *application) handleSecret(w http.ResponseWriter, r *http.Request) {
+	// 1. Read the cookie from the request
+	cookie, err := r.Cookie("session_token")
 	if err != nil {
-		http.Error(w, "Not logged in", http.StatusUnauthorized)
+		http.Error(w, "Unauthorized: No session cookie found.", http.StatusUnauthorized)
 		return
 	}
 
-	sess, ok := app.sessions.Get(cookie.Value)
+	// 2. Look up the Session ID in our store
+	app.mu.RLock()
+	username, ok := app.sessionStore[cookie.Value]
+	app.mu.RUnlock()
+
 	if !ok {
-		http.Error(w, "Session expired", http.StatusUnauthorized)
+		http.Error(w, "Unauthorized: Invalid session.", http.StatusUnauthorized)
 		return
 	}
 
-	username := sess.Data["username"]
-	fmt.Fprintf(w, "Welcome to your dashboard, %s!\n", username)
-}
-
-// handleFlash demonstrates the flash message pattern.
-// Flash messages are shown once and then deleted from the session.
-func (app *application) handleFlash(w http.ResponseWriter, r *http.Request) {
-	cookie, err := r.Cookie("session_id")
-	if err != nil {
-		http.Error(w, "No session", http.StatusUnauthorized)
-		return
-	}
-
-	sess, ok := app.sessions.Get(cookie.Value)
-	if !ok {
-		http.Error(w, "Session expired", http.StatusUnauthorized)
-		return
-	}
-
-	// Read and delete flash message (one-time display)
-	if flash, exists := sess.Data["flash"]; exists {
-		fmt.Fprintf(w, "Flash message: %s\n", flash)
-		delete(sess.Data, "flash") // Remove after reading
-	} else {
-		fmt.Fprintln(w, "No flash messages")
-	}
+	// 3. Access granted!
+	fmt.Fprintf(w, "Welcome to the Secret Dashboard, %s!", username)
 }

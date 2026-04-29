@@ -1,78 +1,30 @@
-# Stage 10: Code Generation
+# Track CG: Code Generation
 
 ## Mission
 
-This section teaches you how to use generation tools to remove repetitive work without hiding the
-real code behind runtime magic.
-
-The live v2 slice focuses on three habits:
-
-- treating `go generate` as a build-time workflow instead of a runtime trick
-- generating mocks from interfaces when hand-written test doubles stop scaling
-- generating typed data-access code from SQL instead of relying on reflection-heavy ORMs
+Master the "Automated Hands." Learn how to use code generation tools to eliminate repetitive "Boilerplate" code while maintaining type safety and performance. Understand the `go generate` workflow and how to use industry-standard tools like **Mockery** (for testing) and **sqlc** (for database access) to make your development faster and less error-prone.
 
 ## Stage Ownership
 
-This track belongs to [10 Production](../README.md).
+This track belongs to [10 Production Operations](../README.md).
 
-It sits after Docker and deployment because teams usually discover code generation inside CI,
-Makefiles, and build pipelines rather than for the first time in a flagship capstone.
+## Track Map
 
-## Who Should Start Here
+| ID | Type | Surface | Mission | Requires |
+| --- | --- | --- | --- | --- |
+| `CG.1` | Lesson | [go generate Primer](./1-go-generate) | Master the built-in `go:generate` directive. | entry |
+| `CG.2` | Lesson | [Mockery Workflow](./2-mockery) | Generate clean, type-safe mocks for testing. | `CG.1` |
+| `CG.3` | Lesson | [sqlc Workflow](./3-sqlc) | Generate typed Go code from raw SQL queries. | `CG.2` |
 
-### Full Path
+## Why This Track Matters
 
-Start here after finishing the deployment track in Stage 10.
+In Go, we prefer "Explicit" over "Implicit." However, being explicit often requires writing a lot of repetitive code (e.g., implementing an interface for testing or mapping SQL rows to structs).
 
-### Bridge Path
-
-You can move faster if you already understand:
-
-- interfaces and test doubles from the testing sections
-- package boundaries and code ownership
-- basic SQL and repository-style data access
-
-Even on the bridge path, do not skip `CG.1`.
-It explains the build-time mental model the rest of the section depends on.
-
-### Targeted Path
-
-This section is a single focused track.
-Follow the lessons in order:
-
-- `CG.1` for the `go generate` workflow
-- `CG.2` for generated mocks in test-heavy codebases
-- `CG.3` for schema-driven SQL code generation
-
-## Section Map
-
-| ID | Type | Surface | Why It Matters |
-| --- | --- | --- | --- |
-| `CG.1` | Lesson | [go generate primer](./1-go-generate) | Explains how generation tools fit into normal Go builds. |
-| `CG.2` | Lesson | [mockery workflow](./2-mockery) | Replaces repetitive manual mocks with generated test doubles. |
-| `CG.3` | Lesson | [sqlc workflow](./3-sqlc) | Generates typed query code from real SQL schemas and queries. |
-
-## Suggested Order
-
-1. Start with `CG.1` so the generation model is clear before any tool-specific workflow.
-2. Continue to `CG.2` to see code generation improve testing ergonomics.
-3. Finish with `CG.3` to see code generation applied to production data access.
-
-## Section Milestone
-
-`CG.3` is the current code-generation output for Stage 10.
-
-If you can explain:
-
-- why code generation is a compile-time productivity tool instead of runtime magic
-- why generated mocks and generated query layers are safer than repetitive handwritten glue
-- why generated code should still be readable, reviewable, and committed intentionally
-
-then the code-generation part of the curriculum is doing its job.
+1. **Productivity**: Code generation tools can write hundreds of lines of code for you in seconds.
+2. **Reliability**: Tools don't make typos. If your interface changes, your mocks can be updated instantly with one command.
+3. **Type Safety**: Unlike reflection-heavy ORMs, code generation produces standard Go code that is checked by the compiler.
+4. **No Magic**: The generated code is just Go code. You can read it, debug it, and commit it to your repository.
 
 ## Next Step
 
-After `CG.3`, continue into [11 Flagship](../../11-flagship) and use the enterprise capstone as
-the place where these build-time tools become supporting leverage instead of brand-new concepts.
-
-
+Congratulations! You have completed Section 10. You are now ready to apply everything you've learned to a real-world, high-scale application. Continue to [11 Flagship](../../11-flagship).

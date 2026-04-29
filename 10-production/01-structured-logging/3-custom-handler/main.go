@@ -1,6 +1,26 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 10: Production Operations
+// Title: Custom slog Handler
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - The slog.Handler interface: the 4 methods
+//   - Building a pretty-print terminal handler
+//   - Thread-safety: mutex pattern for concurrent writes
+//   - Fan out to multiple handlers
+//
+// WHY THIS MATTERS:
+//   - slog.Handler is the extension point for the entire logging ecosystem.
+//   - Every backend (Datadog, Sentry, OpenTelemetry) plugs in via this interface.
+//
+// KEY TAKEAWAY:
+//   - Implement the 4-method interface to create custom logging backends.
+// ============================================================================
+
 package main
 
 import (
@@ -13,12 +33,8 @@ import (
 	"sync"
 )
 
-// ============================================================================
 // Stage 10: Application Architecture - Structured Logging: Custom slog.Handler
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - The slog.Handler interface: the 4 methods you must implement
 //   - Building a pretty-print terminal handler for development
 //   - Thread-safety requirements: the mutex pattern for concurrent writes
@@ -39,14 +55,10 @@ import (
 //     }
 //
 //   Enabled() is a fast pre-check. If it returns false, slog skips all attribute
-//   evaluation — this is why debug logging has near-zero cost when disabled.
+//   evaluation - this is why debug logging has near-zero cost when disabled.
 //
-// RUN: go run ./10-production/01-structured-logging/3-custom-handler
-// ============================================================================
 
-// ============================================================================
-// PrettyHandler — colorised terminal output for local development
-// ============================================================================
+// PrettyHandler - colorised terminal output for local development
 // In production you use JSONHandler. In development, this handler renders logs
 // as human-readable colored lines:
 //   10:32:11 INFO  server started addr=:8080 env=dev
@@ -62,7 +74,7 @@ const (
 )
 
 type PrettyHandler struct {
-	mu    sync.Mutex // Protects w — multiple goroutines may log concurrently
+	mu    sync.Mutex // Protects w - multiple goroutines may log concurrently
 	out   *os.File
 	level slog.Level
 	attrs []slog.Attr // Pre-loaded attrs from .With()
@@ -163,10 +175,8 @@ func (h *PrettyHandler) WithGroup(name string) slog.Handler {
 	return &PrettyHandler{out: h.out, level: h.level, attrs: h.attrs, group: group}
 }
 
-// ============================================================================
-// MultiHandler — fan-out to N handlers simultaneously
-// ============================================================================
-// Send DEBUG to a file, INFO+ to stdout, ERROR+ to Sentry — all from one logger.
+// MultiHandler - fan-out to N handlers simultaneously
+// Send DEBUG to a file, INFO+ to stdout, ERROR+ to Sentry - all from one logger.
 
 type MultiHandler struct {
 	handlers []slog.Handler
@@ -212,9 +222,7 @@ func (m *MultiHandler) WithGroup(name string) slog.Handler {
 	return &MultiHandler{handlers: handlers}
 }
 
-// ============================================================================
-// ErrorOnlyHandler — captures only errors for alert pipelines
-// ============================================================================
+// ErrorOnlyHandler - captures only errors for alert pipelines
 
 type ErrorOnlyHandler struct {
 	Alerts []map[string]any // In production: send to PagerDuty / Sentry
@@ -239,9 +247,7 @@ func (e *ErrorOnlyHandler) Handle(ctx context.Context, r slog.Record) error {
 }
 
 func main() {
-	// =========================================================================
 	// Demo 1: PrettyHandler for local development
-	// =========================================================================
 	pretty := slog.New(NewPrettyHandler(os.Stdout, slog.LevelDebug))
 	pretty.Debug("cache miss", slog.String("key", "user:42"))
 	pretty.Info("server started", slog.String("addr", ":8080"))
@@ -255,9 +261,7 @@ func main() {
 
 	fmt.Println()
 
-	// =========================================================================
-	// Demo 2: MultiHandler — stdout + error capture
-	// =========================================================================
+	// Demo 2: MultiHandler - stdout + error capture
 	errCapture := &ErrorOnlyHandler{Handler: slog.DiscardHandler}
 	jsonHandler := slog.NewJSONHandler(os.Stdout, nil)
 	multi := slog.New(NewMultiHandler(jsonHandler, errCapture))
@@ -272,14 +276,13 @@ func main() {
 		fmt.Println(" ", string(b))
 	}
 
-	// KEY TAKEAWAY:
 	// - Implement 4 methods: Enabled, Handle, WithAttrs, WithGroup
-	// - Enabled() is the hot path — return false quickly when below min level
-	// - Never mutate h.attrs in WithAttrs — always allocate a new slice
+	// - Enabled() is the hot path - return false quickly when below min level
+	// - Never mutate h.attrs in WithAttrs - always allocate a new slice
 	// - MultiHandler fans records out to N backends simultaneously
 	// - This is how every slog-compatible library (Datadog, Sentry) is built
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: SL.4 zerolog comparison")
+	fmt.Println("NEXT UP: SL.4 zerolog comparison")
 	fmt.Println("   Current: SL.3 (custom slog.Handler)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -13,7 +13,7 @@ import (
 // This client.go is INTENTIONALLY IDENTICAL to sections 3 and 4.
 // The progression here is in the TEST FILE (client_test.go).
 // In section 5, we refactor the individual test functions from section 4
-// into TABLE-DRIVEN TESTS — Go's standard pattern for testing multiple
+// into TABLE-DRIVEN TESTS - Go's standard pattern for testing multiple
 // scenarios with a single test function using a []struct loop.
 //
 // 1. The Mocking Interface

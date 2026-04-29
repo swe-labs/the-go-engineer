@@ -1,23 +1,36 @@
 // Copyright (c) 2026 Rasel Hossen
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Stringer
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how to control how your types are displayed by implementing the fmt.Stringer interface.
+//
+// WHY THIS MATTERS:
+//   - When you hand someone a business card, the card shows a carefully formatted summary-not raw data. The String() method is your type's business card to the outside world.
+//
+// RUN:
+//   go run ./04-types-design/5-stringer
+//
+// KEY TAKEAWAY:
+//   - Learn how to control how your types are displayed by implementing the fmt.Stringer interface.
+// ============================================================================
+
 // See LICENSE for usage terms.
 
 package main
 
 import "fmt"
 
-// ============================================================================
-// Section 6: Types & Interfaces — The Stringer Interface
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - The fmt.Stringer interface: the most commonly implemented interface
 //   - How fmt.Println automatically calls String() on your types
 //   - Adding custom types to int, string, etc. with type definitions
 //   - Why Stringer matters for logging, debugging, and user-facing output
 //
-// RUN: go run ./04-types-design/5-stringer
-// ============================================================================
 
 type HTTPStatus struct {
 	Code    int
@@ -94,7 +107,8 @@ func main() {
 	fmt.Println("  - Custom types (type X int) create new types with their own methods")
 	fmt.Println("  - Stringer is Go's most commonly implemented interface")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.6 type switch")
-	fmt.Println("   Current: TI.5 (Stringer)")
+	fmt.Println("NEXT UP: TI.6 type-switch")
+	fmt.Println("Current: TI.5 (stringer)")
+	fmt.Println("Previous: TI.4 (interface-embedding)")
 	fmt.Println("---------------------------------------------------")
 }

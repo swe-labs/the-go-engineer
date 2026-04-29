@@ -4,6 +4,8 @@
 
 Build a small payroll processor that proves different employee types can share one behavior contract through interfaces instead of inheritance.
 
+> **Backward Reference:** In [Lesson 9: Generics](../9-generics/README.md), you learned how to write code that is generic across types. Now, you will combine everything you have learned about structs, methods, interfaces, and generics to build a complete, realistic system.
+
 ## Prerequisites
 
 - `TI.1` structs
@@ -76,16 +78,16 @@ go run ./04-types-design/10-payroll-processor/_starter
 go test ./04-types-design/10-payroll-processor
 ```
 
-## ⚠️ In Production
-
+## In Production
 Interface-driven processing is how Go code stays flexible without inheritance trees. Payment systems, storage layers, transports, and workers all benefit when callers depend on behavior contracts instead of concrete implementations.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is the payroll processor better off depending on `Payable` than on one employee struct?
 2. What changes when a value is stored behind an interface?
 3. Why is the generic helper useful here but not the main point of the exercise?
 
+> **Forward Reference:** You have seen how interfaces allow for safe polymorphism. Sometimes, however, you need to work with values where the type is truly unknown. In [Lesson 11: Dynamic Typing with any](../11-dynamic-typing-with-any/README.md), you will explore the "empty interface" and the risks and rewards of dynamic typing in Go.
+
 ## Next Step
 
-Continue to `CO.1` composition.
+Continue to `TI.11` dynamic-typing-with-any.

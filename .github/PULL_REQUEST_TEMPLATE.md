@@ -1,99 +1,63 @@
-## Description
+Closes #
 
-<!-- Please include a summary of the change and which issue is fixed (if applicable). -->
-<!-- Include relevant motivation and context. -->
-<!-- Target `main` for v2 work by default. Use `release/v1` only for v1-only fixes/support updates. -->
-<!-- If this change should ship in both supported lines, call out the cherry-pick/backport plan below. -->
+## Scope
 
-Fixes # (issue)
+- Section:
+- Lesson IDs:
+- Files:
 
-## Type of change
+## Type
 
-- [ ] 🐛 Bug fix (typo, inaccurate comment, broken code)
-- [ ] ✨ New feature (new exercise, new section)
-- [ ] 📝 Documentation update (README or CONTRIBUTING)
-- [ ] ♻️ Refactoring (improving existing code without changing behavior)
-- [ ] 🔧 Build system or CI/CD improvement
-- [ ] 🧪 Test improvements
+- [ ] [FEAT]
+- [ ] [FIX]
+- [ ] [DOCS]
+- [ ] [TEST]
+- [ ] [CHORE]
+- [ ] [REFACTOR]
+- [ ] [SECURITY]
+- [ ] [RELEASE]
 
-## Pre-Submission Checklist
+## Summary
 
-### Code Quality
-- [ ] Code formatted with `gofmt` (run `make fmt`)
-- [ ] Passes `go vet` checks (run `make vet`)
-- [ ] Builds without errors (run `make build`)
-- [ ] All tests pass (run `make test`)
-- [ ] Race condition check passes (run `make test-race`)
+-
 
-### Documentation
-- [ ] File has proper header comment (if applicable)
-- [ ] Complex logic is documented with inline comments
-- [ ] Exported functions have doc comments
-- [ ] No TODO comments without tracking issues
+## Validation
 
-### Tests
-- [ ] New code includes tests
-- [ ] Tests use table-driven pattern (when appropriate)
-- [ ] Coverage is appropriate (aim for > 75%)
-- [ ] Tests are named descriptively
+- [ ] `go build ./...`
+- [ ] `go vet ./...`
+- [ ] gofmt check
+- [ ] `go mod tidy` no-diff check
+- [ ] `go test ./...`
+- [ ] `go test -race ./...`
+- [ ] `go test -coverprofile coverage.out ./...`
+- [ ] `go run ./scripts/validate_curriculum.go`
 
-### For Lesson Additions
-- [ ] Follows the standard file template from [CODE-STANDARDS.md](../../CODE-STANDARDS.md)
-- [ ] Includes learning objectives in header
-- [ ] Includes "ENGINEERING DEPTH" section explaining production relevance
-- [ ] Includes a `_starter/` stub if exercise
-- [ ] Curriculum mapping added to `curriculum.json`
-- [ ] Navigation footer added (next lesson reference)
+## Curriculum Checklist
 
-### Repository Maintenance
-- [ ] `go.mod` and `go.sum` are updated (`go mod tidy`)
-- [ ] No unnecessary dependencies added
-- [ ] No large files (> 10MB) committed
-- [ ] No credentials or sensitive data committed
-- [ ] Changelog updated if user-facing change
+- [ ] Architecture v2.1 remains intact.
+- [ ] `curriculum.v2.json` updated if needed.
+- [ ] Section README updated if needed.
+- [ ] Lesson README follows required section order if applicable.
+- [ ] `NEXT UP:` footer matches curriculum metadata if applicable.
+- [ ] Starter code compiles if applicable.
 
-## Testing Instructions
+## Tracking
 
-<!-- Describe how to test this change. Include specific commands if applicable. -->
+- [ ] Linked issue has assignee when appropriate.
+- [ ] Labels are applied.
+- [ ] Milestone is attached when available.
+- [ ] Issue or PR is added to `The Go Engineer v2`.
 
-```bash
-# For bug fixes
-go test -run TestName ./path/to/package
+## Review Loop
 
-# For new lessons
-go run ./path/to/lesson
+- [ ] findings-first self-review completed before commit
+- [ ] P0/P1/P2 findings fixed or documented
+- [ ] PR conversation reviewed
+- [ ] inline review threads answered
+- [ ] addressed threads resolved
+- [ ] stale threads marked outdated or explained
+- [ ] final readiness comment posted
 
-# For curriculum changes
-go run ./scripts/validate_curriculum.go
-```
+## Risk
 
-## Performance Impact
-
-<!-- For changes that might affect performance, include benchmarks. -->
-
-- [ ] No performance impact
-- [ ] Improvement: [describe]
-- [ ] Regression: [justify]
-
-If applicable, run benchmarks:
-```bash
-make bench
-```
-
-## Reviewer Guidance
-
-<!-- Add any specific things you want the reviewer to look at, concerns, or questions. -->
-<!-- Also mention if this PR needs a follow-up cherry-pick to another supported branch. -->
-
-## Screenshots/Output
-
-<!-- If visual changes, include screenshots. If code output, show terminal output. -->
-
----
-
-**Note**: Maintainers will verify:
-- All CI checks pass
-- Code style compliance
-- Test coverage
-- Curriculum consistency
-
+-

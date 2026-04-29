@@ -1,7 +1,23 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
-// RUN: go run ./10-production/01-structured-logging/5-exercise
+// ============================================================================
+// Section 10: Production Operations
+// Title: PII Redactor
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Use slog.HandlerOptions.ReplaceAttr to build a logger that automatically redacts sensitive attributes before they reach the output handler.
+//
+// WHY THIS MATTERS:
+//   - GDPR, PCI-DSS, and HIPAA require specific handling of PII.
+//   - ReplaceAttr is the hook to centrally enforce redaction.
+//
+// KEY TAKEAWAY:
+//   - One ReplaceAttr function protects all downstream handlers.
+// ============================================================================
+
 package main
 
 import (
@@ -9,9 +25,7 @@ import (
 	"os"
 )
 
-// ============================================================================
 // Stage 10: Application Architecture - Structured Logging: Exercise Solution
-// ============================================================================
 
 func main() {
 	opts := &slog.HandlerOptions{

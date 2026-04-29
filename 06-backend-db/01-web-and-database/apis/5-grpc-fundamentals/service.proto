@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package user;
+
+// The UserService defines the available actions we can perform.
+service UserService {
+  // A simple Unary RPC: One request, one response.
+  // This is the most common type of gRPC call.
+  rpc GetUser(GetUserRequest) returns (UserResponse);
+
+  // Create a new user
+  rpc CreateUser(CreateUserRequest) returns (UserResponse);
+}
+
+message GetUserRequest {
+  int32 user_id = 1;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+}
+
+message UserResponse {
+  int32 id = 1;
+  string username = 2;
+  string email = 3;
+}

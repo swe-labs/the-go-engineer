@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Stage 07: Time & Scheduling — Random Numbers
+// Stage 07: Time & Scheduling - Random Numbers
 // Level: Beginner
 // ============================================================================
 //
@@ -72,7 +72,7 @@ func main() {
 		fmt.Printf("  IntN(100): %d, Float64: %.4f\n", rng3.IntN(100), rng3.Float64())
 	}
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: TM.5 scheduler")
+	fmt.Println("NEXT UP: TM.5 scheduler")
 	fmt.Println("   Current: TM.4 (random numbers)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -12,6 +12,8 @@ Maps solve exactly that problem: fast lookup by key instead of scanning from the
 
 This lesson builds on DS.2 by adding the ability to organize data by keys.
 
+> **Backward Reference:** In [Lesson 2: Slices](../2-slices/README.md), you learned how to store dynamic sequences of items accessed by numeric index. Maps complement slices by allowing you to store and retrieve data using semantic keys (like strings).
+
 ## Prerequisites
 
 - `DS.2` slices
@@ -122,15 +124,17 @@ Use `make` when the map should start empty and grow step by step.
 - Why is comma-ok important?
   Because a missing key returns the zero value, and that can look like a real stored value.
 
-## ⚠️ In Production
+## In Production
 Maps appear constantly in Go for configuration, lookup tables, indexing, request classification,
 and in-memory caches. The comma-ok habit prevents subtle bugs around missing data.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** Data structures store values, but to share those values efficiently across your program without constantly copying them, you need to understand memory addresses. In the next lesson, [Lesson 4: Pointers](../4-pointers/README.md), you will learn how to reference memory directly.
+
 ## Next Step
 
 Continue to `DS.4` pointers.

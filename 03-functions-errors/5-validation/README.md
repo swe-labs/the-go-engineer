@@ -8,9 +8,9 @@ Learn how a function rejects bad input before the program does the real work.
 
 Now you know how to return errors. The next question is: when should you return one?
 
-The answer: when input is clearly wrong. This is called validation. It catches problems early before they cause harder-to-debug issues later.
+This is called validation. It catches problems early before they cause harder-to-debug issues later.
 
-This lesson builds on FE.4 by showing how to check inputs explicitly.
+> **Backward Reference:** In [Lesson 4: Errors as Values](../4-errors-as-values/README.md), you learned the mechanics of returning an error. Validation is one of the most common applications of this pattern: inspecting input and returning an error if it fails the rules.
 
 ## Prerequisites
 
@@ -30,7 +30,6 @@ graph LR
     A["input"] --> B["function boundary"]
     B --> C["value or error"]
 ```
-
 ```text
 cart name -----------+
 prices --------------+--> validation gate --> ok --> continue
@@ -52,7 +51,7 @@ The important machine truth is:
 - if the rule fails, the function returns immediately with an error value
 - later lines in that function do not run on the failure path
 
-That "return early" behavior is the real engineering habit this lesson is building.
+That "return early" behavior is the real engineering habit this lesson is building.
 
 ## Run Instructions
 
@@ -69,7 +68,7 @@ This function takes one input and returns one `error`.
 That alone teaches a useful shape:
 
 - some functions do not return business data
-- some functions return only "did this pass or fail?"
+- some functions return only "did this pass or fail?"
 
 ### `strings.TrimSpace(name) == ""`
 
@@ -84,7 +83,7 @@ The function does not continue because the input is not valid enough.
 ### `return nil`
 
 This is the success path.
-`nil` means "no validation error."
+`nil` means "no validation error."
 
 ### `func validatePrices(prices []int) error {`
 
@@ -100,7 +99,7 @@ This line checks each input value one by one.
 
 ### `if price < 0 {`
 
-This is the specific rule for "bad price data."
+This is the specific rule for "bad price data."
 
 ### `return fmt.Errorf("price at index %d cannot be negative", i)`
 
@@ -129,15 +128,15 @@ This shows the caller-side pattern again:
   Because the caller needs a reason, not only a yes/no signal.
 
 ## In Production
-
 Validation is one of the earliest places where engineering discipline shows up.
 It protects the rest of the program from clearly broken input.
 
 ## Thinking Questions
-
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** You now have the tools to validate data and return errors. But what happens when you have a complex process that requires multiple validation steps, a computation, and formatting a final result? In [Lesson 6: Orchestration](../6-orchestration/README.md), you will learn how to coordinate multiple smaller functions from one central "orchestrator" function.
 
 ## Next Step
 

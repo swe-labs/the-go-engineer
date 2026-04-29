@@ -1,17 +1,33 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Naming Conventions
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - [TODO: Extract from README Mission]
+//
+// WHY THIS MATTERS:
+//   - [TODO: Extract from README Mental Model]
+//
+// RUN:
+//   go run ./09-architecture/01-package-design/1-naming
+//
+// KEY TAKEAWAY:
+//   - [TODO: Summarize the core takeaway]
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
 
 import "fmt"
 
-// ============================================================================
 // Stage 09: Application Architecture - Package Design: Naming Conventions
-// Level: Beginner
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Go's package naming conventions
 //   - How names compose: package.Function reads as natural English
 //   - Common naming mistakes and how to avoid them
@@ -25,8 +41,6 @@ import "fmt"
 //   `utils.Format()` tells the compiler and the human nothing about the domain
 //   boundary of the code it operates on.
 //
-// RUN: go run ./09-architecture/01-package-design/1-naming
-// ============================================================================
 
 func main() {
 	fmt.Println("=== Package Naming Conventions ===")
@@ -103,7 +117,7 @@ func main() {
 	fmt.Println("  4. No utils/helpers - name by responsibility")
 	fmt.Println("  5. Name by what it provides, not how it works")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: PD.2 visibility")
+	fmt.Println("NEXT UP: PD.2 visibility")
 	fmt.Println("   Current: PD.1 (naming)")
 	fmt.Println("---------------------------------------------------")
 }

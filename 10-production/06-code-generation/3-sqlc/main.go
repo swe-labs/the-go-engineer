@@ -1,7 +1,27 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
-// RUN: go run ./10-production/06-code-generation/3-sqlc
+// ============================================================================
+// Section 10: Production Operations
+// Title: sqlc Workflow
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Generate typed Go query code from SQL schema and query files
+//   - Using sqlc.yaml for configuration
+//   - Schema-driven development vs ORMs
+//   - Interface generation for easier testing
+//
+// WHY THIS MATTERS:
+//   - ORMs reflect at runtime (flexible but slow, magic errors).
+//   - sqlc generates at compile time: zero runtime overhead, fails fast.
+//
+// KEY TAKEAWAY:
+//   - Write SQL first, sqlc generates type-safe Go at build time.
+//   - Column rename fails at build, not in production.
+// ============================================================================
+
 package main
 
 import (
@@ -10,12 +30,8 @@ import (
 	"os"
 )
 
-// ============================================================================
 // Stage 10: Code Generation - sqlc Workflow
-// Level: Core
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Generating type-safe Go code from raw SQL queries
 //   - Using sqlc.yaml for configuration
 //   - Schema-driven development vs. ORMs
@@ -32,8 +48,6 @@ import (
 //     2. Type Safety: If you rename a column in SQL, sqlc fails at build time.
 //     3. Full SQL Power: No need to learn a DSL; just write standard SQL.
 //
-// RUN: go run ./10-production/06-code-generation/3-sqlc
-// ============================================================================
 
 func main() {
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
@@ -59,7 +73,7 @@ func main() {
     }`)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FG.1")
+	fmt.Println("NEXT UP: OPSL.1")
 	fmt.Println("   Current: CG.3 (sqlc workflow)")
 	fmt.Println("---------------------------------------------------")
 }

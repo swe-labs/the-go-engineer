@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Password hashing
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn why passwords need one-way hashing with slow work factors instead of reversible encryption.
+//
+// WHY THIS MATTERS:
+//   - Passwords should be verified, not decrypted.
+//
+// RUN:
+//   go run ./09-architecture/04-security/6-password-hashing
+//
+// KEY TAKEAWAY:
+//   - Learn why passwords need one-way hashing with slow work factors instead of reversible encryption.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - Password hashing
 //
-// Run: go run ./09-architecture/04-security/6-password-hashing
 
 func main() {
 	fmt.Println("=== SEC.6 Password hashing ===")

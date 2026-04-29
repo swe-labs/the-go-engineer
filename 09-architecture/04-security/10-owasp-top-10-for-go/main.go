@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: OWASP Top 10 for Go
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Turn the OWASP Top 10 into a practical checklist for Go services and review conversations.
+//
+// WHY THIS MATTERS:
+//   - The OWASP list is a prioritization aid, not a complete security strategy.
+//
+// RUN:
+//   go run ./09-architecture/04-security/10-owasp-top-10-for-go
+//
+// KEY TAKEAWAY:
+//   - Turn the OWASP Top 10 into a practical checklist for Go services and review conversations.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - OWASP Top 10 for Go
 //
-// Run: go run ./09-architecture/04-security/10-owasp-top-10-for-go
 
 func main() {
 	fmt.Println("=== SEC.10 OWASP Top 10 for Go ===")

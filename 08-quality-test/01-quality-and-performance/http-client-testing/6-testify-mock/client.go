@@ -12,7 +12,7 @@ import (
 
 // This client.go is INTENTIONALLY IDENTICAL to sections 3, 4, and 5.
 // The progression here is in the TEST FILE (client_test.go).
-// In section 6, we replace our hand-written mock struct with testify/mock —
+// In section 6, we replace our hand-written mock struct with testify/mock -
 // a library that auto-generates mock behavior using reflection. The client
 // code never changed because that's the power of interface-based design:
 // you swap implementations WITHOUT modifying the production code.

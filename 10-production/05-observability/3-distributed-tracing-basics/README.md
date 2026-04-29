@@ -1,65 +1,74 @@
-# OPS.3 Distributed tracing basics
+# OPS.3 Distributed Tracing Basics
 
 ## Mission
 
-Learn how trace and span IDs follow a request through multiple boundaries so latency can be explained, not guessed.
+Master request storytelling. Learn how **Trace IDs** and **Span IDs** follow a single request across multiple functions and service boundaries. Understand how to use OpenTelemetry (OTel) concepts to explain latency, identify bottlenecks, and visualize the relationship between your Go code and external dependencies like databases or APIs.
 
 ## Prerequisites
 
-- OPS.2
+- OPS.2 Prometheus Integration
+- Section 07: Concurrency (Mastery of `context.Context`)
 
 ## Mental Model
 
-Tracing is request storytelling with timestamps and parent-child relationships.
+Think of Distributed Tracing as **A GPS Tracker for a Delivery**.
+
+1. **The Trip (The Trace)**: The entire journey of a package from the warehouse to the customer's door.
+2. **The Leg (The Span)**: A specific part of the journey (e.g., Warehouse -> Truck, Truck -> Sort Center).
+3. **The ID (Trace ID)**: A unique number printed on the package that stays the same throughout the entire trip.
+4. **The Parent-Child Relationship**: The "Sort Center" span knows it is a child of the "Truck" leg.
+5. **The Advantage**: If the package is late, you don't just know "It's late" (Metrics); you know exactly which leg of the journey took too long.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["Distributed tracing basics"] --> B["Traces show one request across many services."]
-    B --> C["Context propagation is the transport for trace identity."]
+    Req[Incoming Request] -->|Start Trace| RootSpan[Root: HandleHTTP]
+    RootSpan -->|Start Span| DB[Leg 1: QueryDB]
+    RootSpan -->|Start Span| API[Leg 2: CallExternalAPI]
+    API -->|Propagate ID| Remote[Remote Service]
+
+    style RootSpan fill:#f9f,stroke:#333
 ```
 
 ## Machine View
 
-Trace context travels alongside the request so each boundary can attach timing and metadata to the same end-to-end path.
+- **Context Propagation**: In Go, the `context.Context` is the only way to carry trace information across function boundaries.
+- **OTel SDK**: The standard library doesn't include tracing. You must use the OpenTelemetry Go SDK to create and export spans.
+- **Sampling**: Tracing every single request is computationally expensive and generates massive amounts of data. In production, we often only trace a small percentage (e.g., 1%) of requests.
 
 ## Run Instructions
 
 ```bash
+# Run the demo to see how spans are created and nested
 go run ./10-production/05-observability/3-distributed-tracing-basics
 ```
 
 ## Code Walkthrough
 
-### Traces show one request across many services.
+### Starting a Span
+Shows how to use a `Tracer` to create a new span from a context and defer the `span.End()` call.
 
-Traces show one request across many services.
+### Adding Metadata (Attributes)
+Demonstrates attaching useful information like `user_id` or `http.status_code` to a span for better debugging.
 
-### Spans explain where latency was spent inside that requ
-
-Spans explain where latency was spent inside that request.
-
-### Context propagation is the transport for trace identit
-
-Context propagation is the transport for trace identity.
+### Context Hand-off
+Shows the pattern of passing the `ctx` through every function so that child spans can correctly identify their parent.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply OPS.3 in a small service or tool.
+1. Run the code. Observe the log output showing the Trace IDs and Span IDs.
+2. Add a `time.Sleep` to one of the functions. Notice how the span duration increases in the output.
+3. Discuss: Why should you never use `context.Background()` inside a traced function? (Hint: It breaks the trace chain).
 
-## ⚠️ In Production
+## In Production
+**Don't trace everything.** High-volume services can generate terabytes of trace data per day. Use **Probability Sampling** to keep costs down. If a specific request fails or is exceptionally slow, you can use "Tail-based sampling" to ensure that those specific traces are kept, even if the "Happy Path" traces are discarded.
 
-Tracing is expensive enough that you should know which paths matter and how sampling changes what you see.
-
-## 🤔 Thinking Questions
-
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## Thinking Questions
+1. What is the difference between a Trace and a Span?
+2. How does a remote service know to continue the same trace started by your app?
+3. Why is `context` essential for distributed tracing in Go?
 
 ## Next Step
 
-Continue to `OPS.4`.
+Metrics and Tracing help you see what's wrong. Feature flags help you fix it without a redeploy. Continue to [OPS.4 Feature Flags](../4-feature-flags).

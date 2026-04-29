@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 07: Concurrency
+// Title: URL Health Checker
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Build a concurrent URL checker that caps request fan-out, keeps request latency visible, and reuses HTTP clients safely. This exercise is the live ...
+//
+// WHY THIS MATTERS:
+//   - Build a concurrent URL checker that caps request fan-out, keeps request latency visible, and reuses HTTP clients safely. This exercise is the live ...
+//
+// RUN:
+//   go run ./07-concurrency/02-concurrency-patterns/5-url-checker-exercise
+//
+// KEY TAKEAWAY:
+//   - Build a concurrent URL checker that caps request fan-out, keeps request latency visible, and reuses HTTP clients safely. This exercise is the live ...
+// ============================================================================
+
 package main
 
 import (
@@ -14,13 +33,8 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-// ============================================================================
 // Stage 07: Concurrency Patterns - URL Health Checker (Exercise Solution)
-// Level: Advanced
-// ============================================================================
 //
-// RUN: go run ./07-concurrency/02-concurrency-patterns/5-url-checker-exercise
-// ============================================================================
 
 type CheckResult struct {
 	URL        string

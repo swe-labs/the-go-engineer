@@ -1,5 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Strings
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how Go strings behave and how the `strings` package helps transform text safely and efficiently.
+//
+// WHY THIS MATTERS:
+//   - A Go string is immutable text data. That means: - you can read it freely - helper functions return new strings instead of changing the original - r...
+//
+// RUN:
+//   go run ./04-types-design/strings-and-text/1-strings
+//
+// KEY TAKEAWAY:
+//   - Learn how Go strings behave and how the `strings` package helps transform text safely and efficiently.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -9,12 +29,7 @@ import (
 	"strings"
 )
 
-// ============================================================================
-// Section 7: Strings & Text — String Operations
-// Level: Beginner
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Go strings are IMMUTABLE sequences of bytes (usually UTF-8)
 //   - The strings package: your Swiss Army knife for text manipulation
 //   - strings.Builder: efficient string concatenation
@@ -25,11 +40,9 @@ import (
 //   In Go, a string is internally a 2-word struct:
 //     Word 1: pointer to the underlying byte array
 //     Word 2: length of the string (number of bytes)
-//   Strings are IMMUTABLE — every modification creates a NEW string.
-//   That's why s = s + "x" in a loop is O(n²) — use strings.Builder instead.
+//   Strings are IMMUTABLE - every modification creates a NEW string.
+//   That's why s = s + "x" in a loop is O(n^2) - use strings.Builder instead.
 //
-// RUN: go run ./04-types-design/strings-and-text/1-strings
-// ============================================================================
 
 func main() {
 	fmt.Println("=== String Operations ===")
@@ -39,8 +52,8 @@ func main() {
 	// strings.ToUpper / ToLower convert all characters.
 	// These are Unicode-aware (work with non-English text too).
 	domain := "GitHub.COM"
-	fmt.Printf("  ToLower: %q → %q\n", domain, strings.ToLower(domain))
-	fmt.Printf("  ToUpper: %q → %q\n", domain, strings.ToUpper(domain))
+	fmt.Printf("  ToLower: %q -> %q\n", domain, strings.ToLower(domain))
+	fmt.Printf("  ToUpper: %q -> %q\n", domain, strings.ToUpper(domain))
 	fmt.Println()
 
 	// --- TRIMMING WHITESPACE ---
@@ -48,13 +61,13 @@ func main() {
 	// Essential for user input: users often add accidental spaces.
 	rawInput := "   rasel9t6@github.com   "
 	cleaned := strings.TrimSpace(rawInput)
-	fmt.Printf("  TrimSpace: %q → %q (len %d → %d)\n",
+	fmt.Printf("  TrimSpace: %q -> %q (len %d -> %d)\n",
 		rawInput, cleaned, len(rawInput), len(cleaned))
 	fmt.Println()
 
 	// --- SEARCHING ---
 	// Contains, HasPrefix, HasSuffix check for substrings.
-	// These are O(n) — the string library scans character by character.
+	// These are O(n) - the string library scans character by character.
 	email := "rasel@devops.engineering"
 	fmt.Println("  --- Searching ---")
 	fmt.Printf("  Contains 'devops': %t\n", strings.Contains(email, "devops"))
@@ -70,7 +83,7 @@ func main() {
 	path := "/home/rasel/projects/go-bible"
 	parts := strings.Split(path, "/")
 	fmt.Printf("  Split %q by '/': %v\n", path, parts)
-	// Note: Split("/home/...") produces ["", "home", "rasel", ...] — first element is empty
+	// Note: Split("/home/...") produces ["", "home", "rasel", ...] - first element is empty
 
 	// Fields splits by ANY whitespace (better than Split for words)
 	logLine := "2025-06-15  INFO   server started on port 8080"
@@ -91,15 +104,15 @@ func main() {
 
 	// --- REPEAT ---
 	// strings.Repeat repeats a string n times.
-	separator := strings.Repeat("═", 40)
+	separator := strings.Repeat("-", 40)
 	fmt.Printf("  Repeat: %s\n", separator)
 	fmt.Println()
 
 	// --- strings.Builder: EFFICIENT CONCATENATION ---
-	// Using + in a loop is O(n²) because strings are immutable.
+	// Using + in a loop is O(n^2) because strings are immutable.
 	// Each += creates a new string and copies all previous content.
 	//
-	// strings.Builder allocates a growing buffer internally —
+	// strings.Builder allocates a growing buffer internally -
 	// similar to how append() works for slices. It's O(n).
 	//
 	// RULE: For building strings in loops, ALWAYS use strings.Builder.
@@ -127,7 +140,8 @@ func main() {
 	fmt.Println("  - strings.Contains/HasPrefix/HasSuffix for searching")
 	fmt.Println("  - strings.ReplaceAll for template-like substitutions")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: ST.2 formatting")
-	fmt.Println("   Current: ST.1 (strings)")
+	fmt.Println("NEXT UP: ST.2 formatting-string")
+	fmt.Println("Current: ST.1 (strings)")
+	fmt.Println("Previous: CO.3 (bank-account-project)")
 	fmt.Println("---------------------------------------------------")
 }

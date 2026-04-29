@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 01: Getting Started
+// Title: Hello World
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn the smallest useful shape of an executable Go program.
+//
+// WHY THIS MATTERS:
+//   - A minimal Go executable has a stable shape: 1. Declare the package. 2. Import what the file needs. 3. Define `main`. 4. Execute statements inside `...
+//
+// RUN:
+//   go run ./01-getting-started/2-hello-world
+//
+// KEY TAKEAWAY:
+//   - Learn the smallest useful shape of an executable Go program.
+// ============================================================================
+
 package main
 
 import "fmt"

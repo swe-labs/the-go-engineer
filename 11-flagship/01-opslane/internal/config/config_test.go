@@ -1,0 +1,257 @@
+package config
+
+import (
+	"log/slog"
+	"net/netip"
+	"testing"
+	"time"
+)
+
+func TestLoadFromLookupDefaults(t *testing.T) {
+	t.Parallel()
+
+	cfg, err := LoadFromLookup(func(string) (string, bool) {
+		return "", false
+	})
+	if err != nil {
+		t.Fatalf("LoadFromLookup returned error: %v", err)
+	}
+
+	if cfg.App.Name != "opslane" {
+		t.Fatalf("name = %q, want %q", cfg.App.Name, "opslane")
+	}
+
+	if cfg.App.Env != "development" {
+		t.Fatalf("env = %q, want %q", cfg.App.Env, "development")
+	}
+
+	if cfg.App.LogLevel != slog.LevelInfo {
+		t.Fatalf("log level = %v, want %v", cfg.App.LogLevel, slog.LevelInfo)
+	}
+
+	if cfg.HTTP.Address != ":8080" {
+		t.Fatalf("address = %q, want %q", cfg.HTTP.Address, ":8080")
+	}
+
+	if cfg.Database.DSN == "" {
+		t.Fatal("database dsn should not be empty")
+	}
+
+	if cfg.Database.MaxOpenConns != 4 {
+		t.Fatalf("max open conns = %d, want 4", cfg.Database.MaxOpenConns)
+	}
+
+	if cfg.Database.MaxIdleConns != 2 {
+		t.Fatalf("max idle conns = %d, want 2", cfg.Database.MaxIdleConns)
+	}
+
+	if cfg.Auth.TokenIssuer != "opslane" {
+		t.Fatalf("token issuer = %q, want opslane", cfg.Auth.TokenIssuer)
+	}
+
+	if cfg.Auth.TokenTTL != time.Hour {
+		t.Fatalf("token ttl = %v, want %v", cfg.Auth.TokenTTL, time.Hour)
+	}
+
+	if len(cfg.HTTP.TrustedProxyCIDRs) != 0 {
+		t.Fatalf("trusted proxy cidrs = %v, want none by default", cfg.HTTP.TrustedProxyCIDRs)
+	}
+}
+
+func TestLoadFromLookupOverrides(t *testing.T) {
+	t.Parallel()
+
+	values := map[string]string{
+		"OPSLANE_ENV":                      "staging",
+		"OPSLANE_HTTP_ADDR":                ":9090",
+		"OPSLANE_LOG_LEVEL":                "debug",
+		"OPSLANE_HTTP_READ_HEADER_TIMEOUT": "7s",
+		"OPSLANE_HTTP_READ_TIMEOUT":        "12s",
+		"OPSLANE_HTTP_WRITE_TIMEOUT":       "18s",
+		"OPSLANE_HTTP_IDLE_TIMEOUT":        "90s",
+		"OPSLANE_HTTP_SHUTDOWN_TIMEOUT":    "25s",
+		"OPSLANE_HTTP_TRUSTED_PROXY_CIDRS": "127.0.0.1/32,10.0.0.0/8",
+		"OPSLANE_DB_DSN":                   "postgres://opslane:secretpassword@db:5432/opslane?sslmode=disable",
+		"OPSLANE_DB_MAX_OPEN_CONNS":        "4",
+		"OPSLANE_DB_MAX_IDLE_CONNS":        "2",
+		"OPSLANE_DB_CONN_MAX_IDLE_TIME":    "45s",
+		"OPSLANE_DB_CONN_MAX_LIFETIME":     "2m",
+		"OPSLANE_AUTH_TOKEN_SECRET":        "staging-secret-with-at-least-thirty-two-chars",
+		"OPSLANE_AUTH_TOKEN_ISSUER":        "opslane-staging",
+		"OPSLANE_AUTH_TOKEN_TTL":           "30m",
+	}
+
+	cfg, err := LoadFromLookup(func(key string) (string, bool) {
+		value, ok := values[key]
+		return value, ok
+	})
+	if err != nil {
+		t.Fatalf("LoadFromLookup returned error: %v", err)
+	}
+
+	if cfg.App.Env != "staging" {
+		t.Fatalf("env = %q, want %q", cfg.App.Env, "staging")
+	}
+
+	if cfg.HTTP.Address != ":9090" {
+		t.Fatalf("address = %q, want %q", cfg.HTTP.Address, ":9090")
+	}
+
+	if cfg.App.LogLevel != slog.LevelDebug {
+		t.Fatalf("log level = %v, want %v", cfg.App.LogLevel, slog.LevelDebug)
+	}
+
+	if cfg.HTTP.ReadHeaderTimeout != 7*time.Second {
+		t.Fatalf("read header timeout = %v, want %v", cfg.HTTP.ReadHeaderTimeout, 7*time.Second)
+	}
+
+	wantPrefixes := []netip.Prefix{
+		netip.MustParsePrefix("127.0.0.1/32"),
+		netip.MustParsePrefix("10.0.0.0/8"),
+	}
+	if len(cfg.HTTP.TrustedProxyCIDRs) != len(wantPrefixes) {
+		t.Fatalf("trusted proxy cidrs length = %d, want %d", len(cfg.HTTP.TrustedProxyCIDRs), len(wantPrefixes))
+	}
+
+	for i, want := range wantPrefixes {
+		if cfg.HTTP.TrustedProxyCIDRs[i] != want {
+			t.Fatalf("trusted proxy cidr[%d] = %v, want %v", i, cfg.HTTP.TrustedProxyCIDRs[i], want)
+		}
+	}
+
+	if cfg.Database.DSN != "postgres://opslane:secretpassword@db:5432/opslane?sslmode=disable" {
+		t.Fatalf("dsn = %q, want override", cfg.Database.DSN)
+	}
+
+	if cfg.Database.MaxOpenConns != 4 {
+		t.Fatalf("max open conns = %d, want 4", cfg.Database.MaxOpenConns)
+	}
+
+	if cfg.Database.MaxIdleConns != 2 {
+		t.Fatalf("max idle conns = %d, want 2", cfg.Database.MaxIdleConns)
+	}
+
+	if cfg.Auth.TokenIssuer != "opslane-staging" {
+		t.Fatalf("token issuer = %q, want opslane-staging", cfg.Auth.TokenIssuer)
+	}
+
+	if cfg.Auth.TokenTTL != 30*time.Minute {
+		t.Fatalf("token ttl = %v, want %v", cfg.Auth.TokenTTL, 30*time.Minute)
+	}
+}
+
+func TestLoadFromLookupRejectsInvalidLogLevel(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_LOG_LEVEL" {
+			return "loud", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for invalid log level")
+	}
+}
+
+func TestLoadFromLookupRejectsInvalidEnv(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_ENV" {
+			return "preview", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for invalid env")
+	}
+}
+
+func TestLoadFromLookupRejectsInvalidDuration(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_HTTP_READ_TIMEOUT" {
+			return "soon", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for invalid duration")
+	}
+}
+
+func TestLoadFromLookupRejectsInvalidTrustedProxyCIDR(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_HTTP_TRUSTED_PROXY_CIDRS" {
+			return "not-a-cidr", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for invalid trusted proxy cidr")
+	}
+}
+
+func TestLoadFromLookupRejectsInvalidInt(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_DB_MAX_OPEN_CONNS" {
+			return "many", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for invalid int")
+	}
+}
+
+func TestLoadFromLookupRejectsIdleConnsAboveOpenConns(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		switch key {
+		case "OPSLANE_DB_MAX_OPEN_CONNS":
+			return "1", true
+		case "OPSLANE_DB_MAX_IDLE_CONNS":
+			return "2", true
+		default:
+			return "", false
+		}
+	})
+	if err == nil {
+		t.Fatal("expected error for idle conns above open conns")
+	}
+}
+
+func TestLoadFromLookupRejectsShortAuthSecret(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_AUTH_TOKEN_SECRET" {
+			return "too-short", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for short auth secret")
+	}
+}
+
+func TestLoadFromLookupRejectsDefaultAuthSecretInProduction(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_ENV" {
+			return "production", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for default production auth secret")
+	}
+}

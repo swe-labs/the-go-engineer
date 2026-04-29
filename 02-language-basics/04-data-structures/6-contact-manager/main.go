@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 02: Language Basics
+// Title: Contact Directory
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Build a small in-memory contact directory that combines slices, maps, and pointers in one runnable milestone.
+//
+// WHY THIS MATTERS:
+//   - This exercise uses three data-structure roles together: - slices store ordered contact data - a map turns names into positions - a pointer updates ...
+//
+// RUN:
+//   go run ./02-language-basics/04-data-structures/6-contact-manager
+//
+// KEY TAKEAWAY:
+//   - Build a small in-memory contact directory that combines slices, maps, and pointers in one runnable milestone.
+// ============================================================================
+
 package main
 
 import "fmt"
@@ -12,7 +31,6 @@ import "fmt"
 // directly before the curriculum moves on to functions, structs, and more
 // layered design.
 //
-// Run: go run ./02-language-basics/04-data-structures/6-contact-manager
 
 func main() {
 	fmt.Println("=== Contact Directory ===")
@@ -80,5 +98,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("SECTION COMPLETE: DS.6 contact-directory")
 	fmt.Println("NEXT UP: FE.1 functions")
+	fmt.Println("Previous: DS.5 (slices-2)")
 	fmt.Println("---------------------------------------------------")
 }

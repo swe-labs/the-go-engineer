@@ -1,5 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 07: Concurrency
+// Title: Buffered Channels
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Buffered Channels fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - Buffered Channels provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/01-concurrency/goroutines/4-channels-buffered
+//
+// KEY TAKEAWAY:
+//   - Buffered Channels fundamentals and practical application in Go.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
@@ -9,12 +29,8 @@ import (
 	"time"
 )
 
-// ============================================================================
 // Stage 07: Concurrency - Buffered Channels
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Buffered vs unbuffered channels: the critical distinction
 //   - make(chan T, capacity): creating a channel with buffer space
 //   - When buffered channels block (only when full or empty)
@@ -36,8 +52,6 @@ import (
 //   - cap(ch) returns the buffer capacity
 //   - len(ch) returns the number of items currently in the buffer
 //
-// RUN: go run ./07-concurrency/01-concurrency/goroutines/4-channels-buffered
-// ============================================================================
 
 type logEvent struct {
 	Level   string

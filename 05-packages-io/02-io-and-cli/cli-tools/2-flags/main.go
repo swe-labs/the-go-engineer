@@ -1,8 +1,28 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 05: Packages and I/O
+// Title: Flags
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to use the 'flag' package to parse typed command-line options.
+//
+// WHY THIS MATTERS:
+//   - The 'flag' package provides a standard way to handle configuration via
+//     named parameters, defaults, and auto-generated help documentation.
+//
+// RUN:
+//   go run ./05-packages-io/02-io-and-cli/cli-tools/2-flags
+//
+// KEY TAKEAWAY:
+//   - flag.Parse() must be called before accessing any flag pointers.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./05-packages-io/02-io-and-cli/cli-tools/2-flags
 package main
 
 import (
@@ -11,16 +31,12 @@ import (
 	"strings"
 )
 
-// ============================================================================
-// Stage 05: CLI Tools — Flag Package
-// Level: Intermediate
-// ============================================================================
+// Stage 05: CLI Tools - Flag Package
 //
-// WHAT YOU'LL LEARN:
 //   - The flag package for typed argument parsing
 //   - String, int, bool, and duration flags
 //   - Default values and usage help
-//   - flag.Parse() — MUST call before accessing flag values
+//   - flag.Parse() - MUST call before accessing flag values
 //   - Accessing remaining (non-flag) arguments
 //
 // ENGINEERING DEPTH:
@@ -30,11 +46,9 @@ import (
 //   the destination memory immediately, then overwrite that data later when you
 //   invoke `flag.Parse()`.
 //
-// RUN:
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/2-flags
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/2-flags -name="The Go Engineer" -count=3 -verbose
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/2-flags -help
-// ============================================================================
 
 func main() {
 	name := flag.String("name", "World", "Name to greet")
@@ -67,7 +81,8 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CL.3 subcommands")
-	fmt.Println("   Current: CL.2 (flags)")
+	fmt.Println("NEXT UP: CL.3 subcommands")
+	fmt.Println("Current: CL.2 (flags)")
+	fmt.Println("Previous: CL.1 (args)")
 	fmt.Println("---------------------------------------------------")
 }

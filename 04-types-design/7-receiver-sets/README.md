@@ -8,6 +8,8 @@ Learn the difference between value and pointer receivers and understand how meth
 
 After learning methods in TI.2, you need to understand how receiver choice affects what methods your type actually provides. This matters when your type needs to satisfy an interface.
 
+> **Backward Reference:** In [Lesson 6: Type Switch](../6-type-switch/README.md), you learned how to inspect concrete types inside an interface. Now, we will look at the rules that determine which types are even allowed into an interface in the first place based on their "Method Set."
+
 ## Prerequisites
 
 - `TI.2` methods
@@ -15,7 +17,7 @@ After learning methods in TI.2, you need to understand how receiver choice affec
 
 ## Mental Model
 
-Think of a type's method set like a menu. A Counter value has only the Get() menu item. A \*Counter pointer has the full menu: Get(), Inc(), Reset(). The pointer version inherits the value receiver methods but adds its own.
+Think of a type's method set like a menu. A Counter value has only the Get() menu item. A *Counter pointer has the full menu: Get(), Inc(), Reset(). The pointer version inherits the value receiver methods but adds its own.
 
 ## Visual Model
 
@@ -27,9 +29,9 @@ graph TD
 
 | Method      | `Counter` (value type) | `*Counter` (pointer type) |
 | ----------- | ---------------------- | ------------------------- |
-| `Get() int` | ✅ (value receiver)    | ✅ (inherited)            |
-| `Inc()`     | ❌ (pointer receiver)  | ✅ (pointer receiver)     |
-| `Reset()`   | ❌ (pointer receiver)  | ✅ (pointer receiver)     |
+| `Get() int` | [x] (value receiver)   | [x] (inherited)           |
+| `Inc()`     | [ ] (pointer receiver) | [x] (pointer receiver)    |
+| `Reset()`   | [ ] (pointer receiver) | [x] (pointer receiver)    |
 
 ## Machine View
 
@@ -49,11 +51,11 @@ A simple struct with an integer field.
 
 ### Value receiver methods
 
-Get() uses a value receiver—it works on both Counter and \*Counter.
+Get() uses a value receiver-it works on both Counter and \*Counter.
 
 ### Pointer receiver methods
 
-Inc() and Reset() use pointer receivers—they only work on \*Counter.
+Inc() and Reset() use pointer receivers-they only work on \*Counter.
 
 ### Interface satisfaction
 
@@ -61,20 +63,20 @@ The Reader interface requires Get(). Counter value satisfies it because Get() ha
 
 ## Try It
 
-1. Try assigning a Counter value to a variable that needs Inc()—it fails because the value doesn't have that method.
-2. Pass &Counter to the same variable—it works because the pointer has Inc().
+1. Try assigning a Counter value to a variable that needs Inc()-it fails because the value doesn't have that method.
+2. Pass &Counter to the same variable-it works because the pointer has Inc().
 3. Add a new method with a pointer receiver and see if the interface still accepts the value type.
 
-## ⚠️ In Production
-
+## In Production
 Method sets affect API design. If you export a type that only has pointer receiver methods, callers must pass pointers. If you mix receiver types, document which interface they satisfy.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
 
+> **Forward Reference:** One of the most powerful uses of custom types and method sets is creating domain-specific error types. In [Lesson 8: Custom Errors](../8-custom-errors/README.md), you will learn how to implement the standard `error` interface with your own structs to carry rich diagnostic data.
+
 ## Next Step
 
-Continue to `TI.8` (custom errors) in the stretch path, or move to `TI.9` generics, then tackle the payroll milestone at `TI.10`.
+Continue to `TI.8` custom-errors.

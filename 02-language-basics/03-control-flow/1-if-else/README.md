@@ -18,6 +18,8 @@ With `if`, `else if`, and `else`:
 - one branch runs
 - the other branches are skipped
 
+> **Backward Reference:** In the previous section, you learned about evaluating boolean state like `true` and `false` in [Lesson 1: Variables](../../1-variables/README.md). Branching relies entirely on boolean evaluations to choose a path.
+
 ## Visual Model
 
 ```mermaid
@@ -55,18 +57,18 @@ Branching is not only for numbers. Programs also branch on text, flags, and miss
 
 Even when several branches exist, the program executes only the first matching branch.
 
+> **Forward Reference:** We will soon learn about the `switch` statement in [Lesson 4: Switch](../4-switch/README.md), which offers an even cleaner way to handle branching when you need to check a single variable against many possible discrete values.
+
 ## Try It
 
 1. Change the temperature so the first branch flips.
 2. Change the score so a different grade branch runs.
 3. Set `username` to your own name and inspect the final output.
 
-## ⚠️ In Production
-
+## In Production
 Branching is how services validate input, enforce authorization, choose business rules, and decide how to handle failures. Clean branch logic makes systems easier to trust.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is "only one branch runs" an important mental model?
 2. When is an `else if` chain clearer than nested `if` blocks?
 3. What kinds of real-world state besides numbers can drive branching?

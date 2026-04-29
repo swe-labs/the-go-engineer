@@ -53,13 +53,11 @@ That small demo makes the terminal's two most common output channels visible.
 2. Run `go run ./00-how-computers-work/4-terminal-confidence > output.txt` and notice which line stays in the terminal.
 3. Run a failing command and inspect its exit code in your shell.
 
-## ⚠️ In Production
-
+## In Production
 When production systems fail, you often have a shell, logs, and process output before you have anything else.
 Terminal confidence becomes operational confidence.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why does redirecting stdout not automatically redirect stderr?
 2. Why do shells care about exit codes instead of reading the English words in program output?
 3. What would break if the shell could not resolve programs through `PATH`?

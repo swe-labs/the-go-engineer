@@ -1,4 +1,24 @@
 // Copyright (c) 2026 Rasel Hossen
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Interfaces
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how to define behavior contracts using interfaces and achieve polymorphism without inheritance.
+//
+// WHY THIS MATTERS:
+//   - Think of a power outlet. The outlet defines a contract: "I accept anything with two prongs and a ground pin." A lamp, a phone charger, and a refrig...
+//
+// RUN:
+//   go run ./04-types-design/3-interfaces
+//
+// KEY TAKEAWAY:
+//   - Learn how to define behavior contracts using interfaces and achieve polymorphism without inheritance.
+// ============================================================================
+
 // See LICENSE for usage terms.
 
 package main
@@ -8,12 +28,7 @@ import (
 	"math"
 )
 
-// ============================================================================
-// Section 6: Types & Interfaces — Interfaces
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - What interfaces are: contracts that define behavior
 //   - Implicit interface satisfaction (no "implements" keyword)
 //   - Polymorphism: one function, many types
@@ -21,8 +36,6 @@ import (
 //   - Interface internals: the 2-word struct (type + data pointers)
 //   - Real-world design: "Accept interfaces, return structs"
 //
-// RUN: go run ./04-types-design/3-interfaces
-// ============================================================================
 
 type Shape interface {
 	Area() float64
@@ -43,7 +56,7 @@ func (r Rectangle) Perimeter() float64 {
 }
 
 func (r Rectangle) String() string {
-	return fmt.Sprintf("Rectangle(%.1f × %.1f)", r.Width, r.Height)
+	return fmt.Sprintf("Rectangle(%.1f x %.1f)", r.Width, r.Height)
 }
 
 type Circle struct {
@@ -125,7 +138,7 @@ func main() {
 	for _, shape := range allShapes {
 		switch v := shape.(type) {
 		case Rectangle:
-			fmt.Printf("  Rectangle: %.1f × %.1f\n", v.Width, v.Height)
+			fmt.Printf("  Rectangle: %.1f x %.1f\n", v.Width, v.Height)
 		case Circle:
 			fmt.Printf("  Circle: radius = %.1f\n", v.Radius)
 		case Triangle:
@@ -142,7 +155,8 @@ func main() {
 	fmt.Println("  - Use type assertions (value, ok) to extract concrete types")
 	fmt.Println("  - Interfaces are Go's primary tool for abstraction and testing")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.4 interface embedding")
-	fmt.Println("   Current: TI.3 (interfaces)")
+	fmt.Println("NEXT UP: TI.4 interface-embedding")
+	fmt.Println("Current: TI.3 (interfaces)")
+	fmt.Println("Previous: TI.2 (methods)")
 	fmt.Println("---------------------------------------------------")
 }

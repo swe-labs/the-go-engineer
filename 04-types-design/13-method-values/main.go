@@ -1,22 +1,35 @@
 // Copyright (c) 2026 Rasel Hossen
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Method Values
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how to treat methods as first-class values-assigning methods to variables and passing them as function arguments.
+//
+// WHY THIS MATTERS:
+//   - Think of a button on a remote. You can press the button (call the method), or you can program the button to trigger something else (use the method ...
+//
+// RUN:
+//   go run ./04-types-design/13-method-values
+//
+// KEY TAKEAWAY:
+//   - Learn how to treat methods as first-class values-assigning methods to variables and passing them as function arguments.
+// ============================================================================
+
 // See LICENSE for usage terms.
 
 package main
 
 import "fmt"
 
-// ============================================================================
-// Section 6: Types & Interfaces — Method Values
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Extracting methods as values
 //   - Binding receiver to method
 //   - Using method values as callbacks
 //
-// RUN: go run ./04-types-design/13-method-values
-// ============================================================================
 
 type Counter struct {
 	Value int
@@ -102,7 +115,8 @@ func main() {
 	fmt.Println("  - Use method values as callbacks and event handlers")
 	fmt.Println("  - Each instance's method value is independent")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.14 complex generic constraints")
-	fmt.Println("   Current: TI.13 (method values)")
+	fmt.Println("NEXT UP: TI.14 complex-generic-constraints")
+	fmt.Println("Current: TI.13 (method-values)")
+	fmt.Println("Previous: TI.12 (functional-options)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -1,17 +1,33 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Visibility and Export Rules
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Visibility and Export Rules fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - Visibility and Export Rules provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./09-architecture/01-package-design/2-visibility
+//
+// KEY TAKEAWAY:
+//   - Visibility and Export Rules fundamentals and practical application in Go.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
 
 import "fmt"
 
-// ============================================================================
 // Stage 09: Application Architecture - Package Design: Visibility and Export Rules
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Uppercase = exported (public), lowercase = unexported (private)
 //   - The internal/ directory: compiler-enforced visibility boundaries
 //   - Designing minimal public APIs
@@ -22,8 +38,6 @@ import "fmt"
 //   other languages, the compiler can decide exported vs unexported by checking
 //   the first letter of an identifier.
 //
-// RUN: go run ./09-architecture/01-package-design/2-visibility
-// ============================================================================
 
 // User is an exported type - other packages can use it.
 // The struct fields follow the same rule:
@@ -81,7 +95,7 @@ func main() {
 	fmt.Println("  4. Use getters for controlled access to internal state")
 	fmt.Println("  5. Once exported, it is part of your API - removing it is a breaking change")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: PD.3 project layout")
+	fmt.Println("NEXT UP: PD.3 project layout")
 	fmt.Println("   Current: PD.2 (visibility)")
 	fmt.Println("---------------------------------------------------")
 }

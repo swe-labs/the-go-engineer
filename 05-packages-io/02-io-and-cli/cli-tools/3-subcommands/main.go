@@ -1,8 +1,28 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 05: Packages and I/O
+// Title: Subcommands
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to build multi-command CLI tools (like git or docker) using FlagSets.
+//
+// WHY THIS MATTERS:
+//   - Subcommands allow you to group related but distinct functionalities into
+//     a single executable, providing a clean and discoverable interface for users.
+//
+// RUN:
+//   go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands
+//
+// KEY TAKEAWAY:
+//   - Use flag.NewFlagSet() to isolate flags and help messages for each subcommand.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
-// RUN: go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands
 package main
 
 import (
@@ -11,12 +31,8 @@ import (
 	"os"
 )
 
-// ============================================================================
-// Stage 05: I/O and CLI — Subcommands
-// Level: Advanced
-// ============================================================================
+// Stage 05: I/O and CLI - Subcommands
 //
-// WHAT YOU'LL LEARN:
 //   - Building multi-command CLIs like git, docker, and kubectl
 //   - flag.NewFlagSet for independent flag sets per subcommand
 //   - Routing subcommands with switch on os.Args[1]
@@ -28,11 +44,9 @@ import (
 //   That keeps each command's options isolated and avoids accidental flag-name
 //   collisions across the whole tool.
 //
-// RUN:
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands greet -name="Gopher"
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands version
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands calc -a=10 -b=20
-// ============================================================================
 
 func main() {
 	if len(os.Args) < 2 {
@@ -54,8 +68,9 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CL.4 file organizer")
-	fmt.Println("   Current: CL.3 (subcommands)")
+	fmt.Println("NEXT UP: CL.4 file-organizer")
+	fmt.Println("Current: CL.3 (subcommands)")
+	fmt.Println("Previous: CL.2 (flags)")
 	fmt.Println("---------------------------------------------------")
 }
 

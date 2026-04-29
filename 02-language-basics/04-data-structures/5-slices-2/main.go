@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 02: Language Basics
+// Title: Slice Sharing and Capacity
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn why sub-slices can still affect the original data and why `append` can reuse spare capacity in ways that surprise beginners.
+//
+// WHY THIS MATTERS:
+//   - A sub-slice is usually another view over the same backing array. That makes slicing cheap, but it also means two slices can still touch the same st...
+//
+// RUN:
+//   go run ./02-language-basics/04-data-structures/5-slices-2
+//
+// KEY TAKEAWAY:
+//   - Learn why sub-slices can still affect the original data and why `append` can reuse spare capacity in ways that surprise beginners.
+// ============================================================================
+
 package main
 
 import "fmt"
@@ -12,7 +31,6 @@ import "fmt"
 // That keeps slicing cheap, but it also means two slices can still affect the
 // same stored data.
 //
-// Run: go run ./02-language-basics/04-data-structures/5-slices-2
 
 func main() {
 	fmt.Println("=== Slice Sharing and Capacity ===")
@@ -49,7 +67,8 @@ func main() {
 	fmt.Printf("Original after copy change:     %v\n", original)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DS.6 contact-directory")
-	fmt.Println("Current: DS.5 (slice sharing and capacity)")
+	fmt.Println("NEXT UP: DS.6 contact-manager")
+	fmt.Println("Current: DS.5 (slices-2)")
+	fmt.Println("Previous: DS.4 (pointers)")
 	fmt.Println("---------------------------------------------------")
 }

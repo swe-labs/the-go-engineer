@@ -1,65 +1,77 @@
-# SEC.5 JWT - implementation and risks
+# SEC.5 JWT (JSON Web Tokens) Implementation and Risks
 
 ## Mission
 
-Learn what a JWT contains, how signing works, and why tokens still create real operational risk when used carelessly.
+Master the use of JSON Web Tokens (JWT) for stateless authentication. Learn how to securely **Sign**, **Verify**, and **Parse** tokens in Go, and understand the critical security risks (like "None" algorithm attacks and key management) that can compromise your entire system.
 
 ## Prerequisites
 
-- SEC.4
+- SEC.4 Authentication Basics
 
 ## Mental Model
 
-A JWT is a signed claim set, not a trust system by itself.
+Think of a JWT as **A Notarized Document**.
+
+1. **The Header (The Envelope)**: Tells the world what kind of document it is and what pen (Algorithm) was used to sign it.
+2. **The Payload (The Claims)**: The actual information: "The bearer is User #123 and they are an Admin. This document expires in 1 hour."
+3. **The Signature (The Notary Stamp)**: A cryptographic hash of the Header and Payload, created using a secret key.
+4. **The Verification**: Anyone with the public key (or secret key) can check the stamp. If a single character in the Payload was changed, the stamp will no longer match.
 
 ## Visual Model
 
 ```mermaid
-graph TD
-    A["JWT - implementation and risks"] --> B["Signing proves integrity, not that every claim is safe to trust blindly."]
-    B --> C["Treat tokens as credentials and logs as hostile to secret material."]
+graph LR
+    H[Header] --> Dot1[.]
+    P[Payload] --> Dot2[.]
+    S[Signature]
+
+    subgraph "The JWT"
+    H --- Dot1 --- P --- Dot2 --- S
+    end
+
+    SignatureCheck{Verify Signature}
+    SignatureCheck -->|Valid| Trust[Trust Claims]
+    SignatureCheck -->|Invalid| Reject[401 Unauthorized]
 ```
 
 ## Machine View
 
-JWTs carry claims and signatures in one portable token, so correctness depends on key handling, expiry, and claim validation.
+- **Base64URL Encoding**: JWTs are NOT encrypted. They are just Base64URL encoded. Anyone can decode the token and read the claims. **Never put sensitive data (like passwords) in a JWT payload.**
+- **Signing Algorithms**: Use `HS256` (Symmetric - Shared Secret) or `RS256` (Asymmetric - Public/Private Key).
+- **Statelessness**: The server doesn't need to store anything. It just needs the key to verify the signature. This makes JWTs perfect for scaling across multiple microservices.
 
 ## Run Instructions
 
 ```bash
+# Run the demo to see JWT generation and validation
 go run ./09-architecture/04-security/5-jwt-implementation-and-risks
 ```
 
 ## Code Walkthrough
 
-### Signing proves integrity, not that every claim is safe
+### Generating a Token
+Shows how to use the `golang-jwt/jwt` library to create a token with custom claims (UserID, ExpireTime) and sign it with a secret key.
 
-Signing proves integrity, not that every claim is safe to trust blindly.
+### Validating a Token
+Demonstrates the correct way to parse and verify a token. It covers checking the `exp` (expiry) claim and ensuring the algorithm used matches what the server expects.
 
-### Validate issuer, audience, expiry, and algorithm polic
-
-Validate issuer, audience, expiry, and algorithm policy.
-
-### Treat tokens as credentials and logs as hostile to sec
-
-Treat tokens as credentials and logs as hostile to secret material.
+### The "None" Algorithm Attack
+Shows a vulnerable parser that accepts tokens with `alg: none`. An attacker can modify their claims (e.g., set `admin: true`) and the server will accept it. We show how to fix this by explicitly requiring a specific algorithm.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply SEC.5 in a small service or tool.
+1. Look at `main.go`. Copy the generated token and paste it into [jwt.io](https://jwt.io). Can you see your claims?
+2. Modify the "Secret Key" on the server. Try to validate an old token. What happens?
+3. Discuss: How do you "Revoke" a JWT if a user's account is compromised?
 
-## ⚠️ In Production
+## In Production
+**Keep your secret keys secret.** Use an environment variable or a secret manager (SEC.9). Always set a short expiration time (`exp`). If you need long sessions, use "Refresh Tokens." Always use a reputable library and **never write your own JWT parser**.
 
-JWT mistakes are rarely library mistakes. They are usually trust-boundary mistakes like weak key policy, bad expiry handling, or missing audience checks.
-
-## 🤔 Thinking Questions
-
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## Thinking Questions
+1. Why shouldn't you store a JWT in `localStorage`?
+2. What is the benefit of using Asymmetric (RS256) signing in a microservice architecture?
+3. How does the "JTI" (JWT ID) claim help prevent Replay Attacks?
 
 ## Next Step
 
-Continue to `SEC.6`.
+Authentication is only as strong as the passwords behind it. Learn how to store them safely. Continue to [SEC.6 Password hashing](../6-password-hashing).

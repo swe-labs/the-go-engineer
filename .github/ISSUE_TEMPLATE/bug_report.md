@@ -1,30 +1,40 @@
 ---
-name: Bug report
-about: Create a report to help us improve the codebase or correct inaccuracies
-title: '[BUG] '
+name: Bug
+about: Report incorrect behavior, broken code, broken docs, or validation failure
+title: "[FIX] "
 labels: bug
-assignees: ''
-
+assignees: ""
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is. Is it a code issue? A typo in the comments? An inaccurate technical explanation?
+## Problem
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Run command '...'
-3. See error
+What is broken?
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## Location
 
-**Screenshots / Code Snippets**
-If applicable, add screenshots or code snippets to help explain your problem.
+- Section:
+- Lesson IDs:
+- Files:
 
-**Environment (please complete the following information):**
- - OS: [e.g. Linux, macOS, Windows]
- - Go version: [e.g. 1.22.x]
+## Expected Behavior
 
-**Additional context**
-Add any other context about the problem here.
+-
+
+## Actual Behavior
+
+-
+
+## Reproduction
+
+```bash
+
+```
+
+## Validation Plan
+
+- [ ] `go test ./...`
+- [ ] `go run ./scripts/validate_curriculum.go`
+
+## Risk Notes
+
+-

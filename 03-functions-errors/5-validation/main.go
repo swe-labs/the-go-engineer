@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 03: Functions and Errors
+// Title: Validation
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how a function rejects bad input before the program does the real work.
+//
+// WHY THIS MATTERS:
+//   - Validation is the first gate before useful work begins. If the input is clearly wrong, the function should say so immediately instead of pretending...
+//
+// RUN:
+//   go run ./03-functions-errors/5-validation
+//
+// KEY TAKEAWAY:
+//   - Learn how a function rejects bad input before the program does the real work.
+// ============================================================================
+
 package main
 
 import (
@@ -14,7 +33,6 @@ import (
 // Mental model:
 // Validation rejects bad input early so the rest of the program can stay honest.
 //
-// Run: go run ./03-functions-errors/5-validation
 
 func validateCartName(name string) error {
 	if strings.TrimSpace(name) == "" {
@@ -54,5 +72,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.6 orchestration")
 	fmt.Println("Current: FE.5 (validation)")
+	fmt.Println("Previous: FE.4 (errors-as-values)")
 	fmt.Println("---------------------------------------------------")
 }

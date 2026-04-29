@@ -1,15 +1,31 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 07: Concurrency
+// Title: Time Basics
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Time Basics fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - Time Basics provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/01-concurrency/time-and-scheduling/1-time
+//
+// KEY TAKEAWAY:
+//   - Time Basics fundamentals and practical application in Go.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
 
-// ============================================================================
-// Stage 07: Time & Scheduling — Time Basics
-// Level: Beginner
-// ============================================================================
+// Stage 07: Time & Scheduling - Time Basics
 //
-// WHAT YOU'LL LEARN:
 //   - The `time.Time` struct and how it stores moments in time
 //   - Durations (`time.Duration`) representing intervals
 //   - Parsing and formatting standard dates
@@ -23,8 +39,6 @@ package main
 //   intelligently uses the Monotonic clock to guarantee the Duration is perfectly
 //   accurate, even if the OS suddenly synced its Wall Clock backward by an hour!
 //
-// RUN: go run ./07-concurrency/01-concurrency/time-and-scheduling/1-time
-// ============================================================================
 
 import (
 	"fmt"
@@ -75,7 +89,7 @@ func main() {
 
 	fmt.Println("Awake after sleep!")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: TM.2 formatting")
+	fmt.Println("NEXT UP: TM.2 formatting")
 	fmt.Println("   Current: TM.1 (time basics)")
 	fmt.Println("---------------------------------------------------")
 }

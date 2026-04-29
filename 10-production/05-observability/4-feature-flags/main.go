@@ -1,13 +1,32 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 10: Production Operations
+// Title: Feature flags
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how flag-controlled rollout changes the deployment story by separating shipping from activating behavior.
+//
+// WHY THIS MATTERS:
+//   - A feature flag is a runtime decision point that can turn behavior on or off without rebuilding the binary.
+//
+// RUN:
+//   go run ./10-production/05-observability/4-feature-flags
+//
+// KEY TAKEAWAY:
+//   - Flags separate rollout from deployment.
+//   - Targeting rules should be simple and inspectable.
+//   - Remove flags once rollout decision is finished.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 10: Production Operations - Feature flags
 //
-// Run: go run ./10-production/05-observability/4-feature-flags
 
 func main() {
 	fmt.Println("=== OPS.4 Feature flags ===")

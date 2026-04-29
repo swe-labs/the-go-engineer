@@ -21,13 +21,13 @@ import (
 )
 
 // ============================================================================
-// Section 26: gRPC — Unary Client
+// Section 26: gRPC - Unary Client
 // Level: Beginner
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
 //   - Creating a gRPC connection and client stub
-//   - Using context timeouts with gRPC (essential — no default timeout)
+//   - Using context timeouts with gRPC (essential - no default timeout)
 //   - Sending metadata (headers) with a request
 //   - Inspecting gRPC errors: extracting status codes
 //   - The generated client stub: one method per RPC
@@ -142,13 +142,13 @@ func main() {
 	})
 	handleGRPCError(logger, "CreateOrder (invalid)", err)
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: GS.1 signal.NotifyContext")
+	fmt.Println("NEXT UP: GS.1 signal.NotifyContext")
 	fmt.Println("   Current: GR.3 (unary client)")
 	fmt.Println("---------------------------------------------------")
 }
 
 // handleGRPCError extracts the gRPC status code and message from an error.
-// Use status.FromError() — never switch on the error string.
+// Use status.FromError() - never switch on the error string.
 func handleGRPCError(logger *slog.Logger, method string, err error) {
 	if err == nil {
 		return
@@ -156,7 +156,7 @@ func handleGRPCError(logger *slog.Logger, method string, err error) {
 
 	s, ok := status.FromError(err)
 	if !ok {
-		// Not a gRPC error — could be a network failure
+		// Not a gRPC error - could be a network failure
 		logger.Error("non-gRPC error", "method", method, "error", err)
 		return
 	}
@@ -169,14 +169,14 @@ func handleGRPCError(logger *slog.Logger, method string, err error) {
 	case codes.DeadlineExceeded:
 		logger.Error("request timed out", "method", method)
 	case codes.Unavailable:
-		logger.Error("service unavailable — retry later", "method", method)
+		logger.Error("service unavailable - retry later", "method", method)
 	default:
 		logger.Error("rpc failed", "method", method, "code", s.Code(), "message", s.Message())
 	}
 
 	// KEY TAKEAWAY:
 	// - grpc.NewClient() creates the connection; pb.NewXxxServiceClient(conn) creates the stub
-	// - ALWAYS use context.WithTimeout() — gRPC has no default deadline
+	// - ALWAYS use context.WithTimeout() - gRPC has no default deadline
 	// - metadata.AppendToOutgoingContext adds headers to the outgoing request
 	// - status.FromError(err) extracts the gRPC status code safely
 	// - Switch on status.Code(), never on the error message string

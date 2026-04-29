@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Service layer pattern
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how service layers coordinate domain operations, error handling, and side effects above repositories.
+//
+// WHY THIS MATTERS:
+//   - A service layer owns use-case orchestration across multiple dependencies.
+//
+// RUN:
+//   go run ./09-architecture/03-architecture-patterns/5-service-layer-pattern
+//
+// KEY TAKEAWAY:
+//   - Learn how service layers coordinate domain operations, error handling, and side effects above repositories.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - Service layer pattern
 //
-// Run: go run ./09-architecture/03-architecture-patterns/5-service-layer-pattern
 
 func main() {
 	fmt.Println("=== ARCH.5 Service layer pattern ===")

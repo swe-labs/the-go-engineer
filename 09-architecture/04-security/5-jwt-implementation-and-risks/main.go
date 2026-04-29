@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: JWT - implementation and risks
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn what a JWT contains, how signing works, and why tokens still create real operational risk when used carelessly.
+//
+// WHY THIS MATTERS:
+//   - A JWT is a signed claim set, not a trust system by itself.
+//
+// RUN:
+//   go run ./09-architecture/04-security/5-jwt-implementation-and-risks
+//
+// KEY TAKEAWAY:
+//   - Learn what a JWT contains, how signing works, and why tokens still create real operational risk when used carelessly.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - JWT - implementation and risks
 //
-// Run: go run ./09-architecture/04-security/5-jwt-implementation-and-risks
 
 func main() {
 	fmt.Println("=== SEC.5 JWT - implementation and risks ===")

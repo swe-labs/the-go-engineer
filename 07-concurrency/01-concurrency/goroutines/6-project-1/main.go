@@ -1,16 +1,31 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 07: Concurrency
+// Title: Pipeline Project
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Pipeline Project fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - Pipeline Project provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/01-concurrency/goroutines/6-project-1
+//
+// KEY TAKEAWAY:
+//   - Pipeline Project fundamentals and practical application in Go.
+// ============================================================================
+
 // Commercial use is prohibited without permission.
 
 package main
 
-// ============================================================================
 // Stage 07: Concurrency - Pipeline Project
-// Level: Advanced
-// ============================================================================
 //
-// RUN: go run ./07-concurrency/01-concurrency/goroutines/6-project-1
-// ============================================================================
 
 import (
 	"context"

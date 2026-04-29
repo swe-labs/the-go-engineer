@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Modular Refactor
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Refactor a tangled application shape into clearer modules with explicit boundaries and collaboration points.
+//
+// WHY THIS MATTERS:
+//   - Refactoring architecture means tightening ownership and dependency direction, not just moving files around.
+//
+// RUN:
+//   go run ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise
+//
+// KEY TAKEAWAY:
+//   - Refactor a tangled application shape into clearer modules with explicit boundaries and collaboration points.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - Modular Refactor
 //
-// Run: go run ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise
 
 func main() {
 	fmt.Println("=== ARCH.9 Modular Refactor ===")

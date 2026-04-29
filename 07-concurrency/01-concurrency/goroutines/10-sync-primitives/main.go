@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Stage 07: Concurrency — Sync Primitives
+// Stage 07: Concurrency - Sync Primitives
 // Level: Advanced
 // ============================================================================
 //
@@ -66,12 +66,12 @@ func GetDB() *DBConnection {
 // When NOT to use sync.Map:
 //   1. When you need to iterate often (Range is O(n) and holds no lock)
 //   2. When operations on multiple keys must be atomic
-//   3. When key set changes frequently — use regular map + RWMutex instead
+//   3. When key set changes frequently - use regular map + RWMutex instead
 
 func main() {
 	fmt.Println("=== sync.Once Demo ===")
 
-	// Call GetDB from multiple goroutines — init happens exactly once
+	// Call GetDB from multiple goroutines - init happens exactly once
 	var wg sync.WaitGroup
 	for i := 0; i < 5; i++ {
 		wg.Add(1)
@@ -115,7 +115,7 @@ func main() {
 	// Range: iterate over all entries
 	fmt.Println("\nAll entries:")
 	m.Range(func(key, value any) bool {
-		fmt.Printf("  %v → %v\n", key, value)
+		fmt.Printf("  %v -> %v\n", key, value)
 		return true // return false to stop iteration
 	})
 
@@ -142,7 +142,7 @@ func main() {
 	fmt.Println("\n  ⚡ Use sync.Map for read-heavy, stable key sets")
 	fmt.Println("  ⚡ Use map + RWMutex for everything else")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CT.1 Background & TODO")
+	fmt.Println("NEXT UP: CT.1 Background & TODO")
 	fmt.Println("   Current: GC.10 (sync primitives)")
 	fmt.Println("---------------------------------------------------")
 }

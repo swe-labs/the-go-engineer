@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Event-driven architecture
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn the benefits and failure modes of publishing domain events instead of wiring every side effect inline.
+//
+// WHY THIS MATTERS:
+//   - Events decouple producers from consumers by letting one change be observed by many subscribers later.
+//
+// RUN:
+//   go run ./09-architecture/03-architecture-patterns/6-event-driven-architecture
+//
+// KEY TAKEAWAY:
+//   - Learn the benefits and failure modes of publishing domain events instead of wiring every side effect inline.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - Event-driven architecture
 //
-// Run: go run ./09-architecture/03-architecture-patterns/6-event-driven-architecture
 
 func main() {
 	fmt.Println("=== ARCH.6 Event-driven architecture ===")

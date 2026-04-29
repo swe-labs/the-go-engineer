@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 03: Functions and Errors
+// Title: Multiple Return Values
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how one function can return more than one value and why that matters before errors enter the picture.
+//
+// WHY THIS MATTERS:
+//   - Sometimes one result is not enough. A function may need to return: - a value and a success signal - two related values - a result and some extra co...
+//
+// RUN:
+//   go run ./03-functions-errors/3-multiple-return-values
+//
+// KEY TAKEAWAY:
+//   - Learn how one function can return more than one value and why that matters before errors enter the picture.
+// ============================================================================
+
 package main
 
 import (
@@ -13,7 +32,6 @@ import (
 // Mental model:
 // A function can return more than one value when one result is not enough.
 //
-// Run: go run ./03-functions-errors/3-multiple-return-values
 
 func findItem(items []string, target string) (int, bool) {
 	for i, item := range items {
@@ -46,5 +64,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.4 errors-as-values")
 	fmt.Println("Current: FE.3 (multiple return values)")
+	fmt.Println("Previous: FE.2 (parameters-and-returns)")
 	fmt.Println("---------------------------------------------------")
 }

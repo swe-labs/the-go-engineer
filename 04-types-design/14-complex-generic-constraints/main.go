@@ -1,4 +1,24 @@
 // Copyright (c) 2026 Rasel Hossen
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Complex Generic Constraints
+// Level: Stretch
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn advanced constraint patterns including parameterized constraints, using interfaces as constraints, and creating reusable generic utilities.
+//
+// WHY THIS MATTERS:
+//   - Think of a vending machine that accepts only certain payment methods. The constraint is not just "some type"-it's "anything with a Pay() method." Complex constraints allow you to define these nuanced rules.
+//
+// RUN:
+//   go run ./04-types-design/14-complex-generic-constraints
+//
+// KEY TAKEAWAY:
+//   - Learn advanced constraint patterns including parameterized constraints, using interfaces as constraints, and creating reusable generic utilities.
+// ============================================================================
+
 // See LICENSE for usage terms.
 
 package main
@@ -7,19 +27,12 @@ import (
 	"fmt"
 )
 
-// ============================================================================
-// Section 6: Types & Interfaces — Complex Generic Constraints
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Interface constraints
 //   - Multiple interface requirements
 //   - Comparable constraint
 //   - Parameterized constraints
 //
-// RUN: go run ./04-types-design/14-complex-generic-constraints
-// ============================================================================
 
 type Numeric interface {
 	Add(other int) int
@@ -130,7 +143,8 @@ func main() {
 	fmt.Println("  - comparable constraint allows == and !=")
 	fmt.Println("  - Type must implement all methods in constraint")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.15 generic data structures")
-	fmt.Println("   Current: TI.14 (complex generic constraints)")
+	fmt.Println("NEXT UP: TI.15 generic-data-structures")
+	fmt.Println("Current: TI.14 (complex-generic-constraints)")
+	fmt.Println("Previous: TI.13 (method-values)")
 	fmt.Println("---------------------------------------------------")
 }

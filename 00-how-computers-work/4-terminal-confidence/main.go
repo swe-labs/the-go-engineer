@@ -2,20 +2,26 @@
 // Licensed under The Go Engineer License v1.0
 
 // ============================================================================
-// Section 00: How Computers Work — Terminal Confidence
+// Section 00: How Computers Work
+// Title: Terminal confidence
 // Level: Foundation
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - How to output to stdout vs stderr
-//   - How programs interact with the terminal
+//   - Build confidence with the terminal as the text-based environment that launches programs, passes arguments, and handles output streams.
 //
 // WHY THIS MATTERS:
+//   - The terminal is not "where scary commands live." It is a process-launching and output-reading interface for the operating system.
+//
+// RUN:
+//   go run ./00-how-computers-work/4-terminal-confidence
+//
+// KEY TAKEAWAY:
+//   - Build confidence with the terminal as the text-based environment that launches programs, passes arguments, and handles output streams.
+// ============================================================================
+
 //   Production logs often split standard output and errors. Understanding how to
 //   write to them is critical for observability.
-//
-// RUN: go run ./00-how-computers-work/4-terminal-confidence
-// ============================================================================
 
 package main
 
@@ -31,7 +37,6 @@ func main() {
 	// Standard Error (stderr)
 	fmt.Fprintln(os.Stderr, "This goes to standard error (stderr)")
 
-	// KEY TAKEAWAY:
 	// - Programs can write to multiple output streams
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: HC.5 5-os-processes")

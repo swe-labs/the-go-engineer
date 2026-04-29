@@ -1,6 +1,28 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 10: Production Operations
+// Title: Context-Keyed Logger
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Storing a logger in context for request-scoped fields
+//   - HTTP middleware that injects logger into request context
+//   - Extracting logger from context in handler functions
+//   - Why context-based logging beats global singletons
+//
+// WHY THIS MATTERS:
+//   - Connect all log lines from a single HTTP request using request_id.
+//   - Options: global logger (bad, thread-unsafe), pass as param (verbose),
+//     or store in context (idiomatic, Google-mandated).
+//
+// KEY TAKEAWAY:
+//   - Every function in a request chain carries the same request_id via context.
+//   - One middleware line wires it up; works everywhere.
+// ============================================================================
+
 package main
 
 import (
@@ -12,12 +34,8 @@ import (
 	"time"
 )
 
-// ============================================================================
 // Stage 10: Application Architecture - Structured Logging: Context-Keyed Logger
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Storing a logger in context so every function in a request chain can log
 //     with request-scoped fields (request_id, user_id, trace_id)
 //   - Writing HTTP middleware that injects the logger into the request context
@@ -25,9 +43,9 @@ import (
 //   - Why this pattern is superior to a global logger singleton
 //
 // ENGINEERING DEPTH:
-//   The biggest production logging problem is correlation — connecting all the
+//   The biggest production logging problem is correlation - connecting all the
 //   log lines from a single HTTP request so you can replay what happened.
-//   This requires every log line in the chain (handler → service → repository)
+//   This requires every log line in the chain (handler -> service -> repository)
 //   to carry the same request_id. The options are:
 //     1. Global logger (bad): no per-request fields, thread-unsafe
 //     2. Pass logger as function parameter (verbose): every function signature changes
@@ -36,19 +54,17 @@ import (
 //   Google's internal style guide mandates option 3. It integrates naturally
 //   with the context-first pattern every I/O function already follows.
 //
-// RUN: go run ./10-production/01-structured-logging/2-context-logger
 //   Then: curl http://localhost:8080/api/orders/42
-// ============================================================================
 
 // loggerKey is a private type to prevent key collisions in context.
-// Using a plain string like "logger" is a bug — any package can write
+// Using a plain string like "logger" is a bug - any package can write
 // context.WithValue(ctx, "logger", something_else).
 type loggerKey struct{}
 
 // FromContext extracts the logger from context.
 // If no logger was stored, it returns the global default logger.
 // This safe fallback means functions can always call FromContext without
-// checking for nil — the program never panics due to a missing logger.
+// checking for nil - the program never panics due to a missing logger.
 func FromContext(ctx context.Context) *slog.Logger {
 	if logger, ok := ctx.Value(loggerKey{}).(*slog.Logger); ok {
 		return logger
@@ -57,7 +73,7 @@ func FromContext(ctx context.Context) *slog.Logger {
 }
 
 // WithLogger stores a logger in context.
-// Always returns a new context — context values are immutable.
+// Always returns a new context - context values are immutable.
 func WithLogger(ctx context.Context, logger *slog.Logger) context.Context {
 	return context.WithValue(ctx, loggerKey{}, logger)
 }
@@ -88,7 +104,7 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 		rw := &statusRecorder{ResponseWriter: w, status: http.StatusOK}
 		next.ServeHTTP(rw, r)
 
-		// Log AFTER the handler returns — we now know the final status.
+		// Log AFTER the handler returns - we now know the final status.
 		requestLogger.Info("request completed",
 			slog.Int("status", rw.status),
 			slog.Duration("latency", time.Since(start)),
@@ -114,9 +130,7 @@ func generateRequestID() string {
 	return fmt.Sprintf("req_%06d", counter)
 }
 
-// ============================================================================
-// Handler functions — they receive the logger from context
-// ============================================================================
+// Handler functions - they receive the logger from context
 
 func handleGetOrder(w http.ResponseWriter, r *http.Request) {
 	// Extract the logger anywhere in the call chain.
@@ -140,7 +154,7 @@ func handleGetOrder(w http.ResponseWriter, r *http.Request) {
 
 // fetchOrderFromDB is a downstream function that also uses the context logger.
 // Notice it receives ctx (not the logger directly). This is the idiomatic way:
-// functions never take *slog.Logger as a parameter — they use FromContext.
+// functions never take *slog.Logger as a parameter - they use FromContext.
 func fetchOrderFromDB(ctx context.Context, id string) (string, error) {
 	log := FromContext(ctx) // Gets the same request-scoped logger
 	log.Debug("executing SQL query",
@@ -166,14 +180,13 @@ func main() {
 	slog.Info("server starting", slog.String("addr", ":8080"))
 	http.ListenAndServe(":8080", handler)
 
-	// KEY TAKEAWAY:
 	// - Use a private context key type to prevent collisions
-	// - FromContext() has a safe fallback — callers never need nil checks
+	// - FromContext() has a safe fallback - callers never need nil checks
 	// - Middleware injects the request-scoped logger into context ONCE
-	// - All downstream functions use FromContext — no logger parameters needed
+	// - All downstream functions use FromContext - no logger parameters needed
 	// - This pattern gives every log line the same request_id automatically
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: SL.3 custom slog.Handler")
+	fmt.Println("NEXT UP: SL.3 custom slog.Handler")
 	fmt.Println("   Current: SL.2 (context-keyed logger)")
 	fmt.Println("---------------------------------------------------")
 }

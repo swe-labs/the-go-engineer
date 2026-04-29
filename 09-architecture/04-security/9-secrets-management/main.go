@@ -1,13 +1,30 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Secrets management
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how to keep credentials, keys, and tokens out of source control, logs, and casual developer workflows.
+//
+// WHY THIS MATTERS:
+//   - A secret is any value that grants access or trust if an attacker obtains it.
+//
+// RUN:
+//   go run ./09-architecture/04-security/9-secrets-management
+//
+// KEY TAKEAWAY:
+//   - Learn how to keep credentials, keys, and tokens out of source control, logs, and casual developer workflows.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 09: Architecture & Security - Secrets management
 //
-// Run: go run ./09-architecture/04-security/9-secrets-management
 
 func main() {
 	fmt.Println("=== SEC.9 Secrets management ===")

@@ -1,69 +1,83 @@
-# ARCH.9 Modular Refactor
+# ARCH.9 Modular Refactor Exercise
 
 ## Mission
 
-Refactor a tangled application shape into clearer modules with explicit boundaries and collaboration points.
+Put your architecture knowledge into practice. Take a "Tangled Monolith" (Big Ball of Mud) and refactor it into a **Modular Monolith**. You will identify domain boundaries, extract logic into services and repositories, and use interfaces to decouple components.
 
 ## Prerequisites
 
-- ARCH.1
-- ARCH.2
-- ARCH.3
-- ARCH.4
-- ARCH.5
-- ARCH.6
-- ARCH.7
-- ARCH.8
+- Complete ARCH.1 through ARCH.8.
 
 ## Mental Model
 
-Refactoring architecture means tightening ownership and dependency direction, not just moving files around.
+Think of this refactor as **Untangling Headphone Wires**.
+
+1. **The Knot**: Right now, the code is a mess. The database logic is mixed with HTTP logic, and every part of the app knows about every other part.
+2. **The Identification**: You find the ends of the wires (The Domain Boundaries).
+3. **The Extraction**: You carefully pull one wire out at a time, making sure it only connects to the things it *needs* to (The Interfaces).
+4. **The Result**: You have a clean, organized set of modules that can be moved or changed without tangling the others.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["Modular Refactor"] --> B["Identify one module boundary that owns a clear responsibility."]
-    B --> C["Use the refactor to reduce coupling, not just rename packages."]
+    subgraph "Before: Big Ball of Mud"
+    M[Main] -->|Calls| All[Everything]
+    All -->|Calls| All
+    end
+
+    subgraph "After: Modular Design"
+    Main[Main] --> Service[Service Layer]
+    Service --> Domain[Domain Core]
+    Service --> Repo[Repository]
+    Repo --> DB[(Database)]
+    end
 ```
 
 ## Machine View
 
-The exercise proves whether earlier design ideas can survive contact with a realistic module boundary change.
+- **Code Structure**: You will move code from a single `main.go` into multiple packages like `internal/user`, `internal/billing`, and `internal/db`.
+- **Interface Seams**: You will replace direct struct dependencies with interfaces to allow for mocking and independent testing.
 
 ## Run Instructions
 
 ```bash
-go run ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise
+# Run the starter code (it works, but it's messy)
+go run ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise/_starter
+
+# Run the tests to verify your refactored code
+go test ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise
 ```
 
 ## Solution Walkthrough
 
-- Identify one module boundary that owns a clear responsibility.
-- Make dependency direction explicit between modules.
-- Use the refactor to reduce coupling, not just rename packages.
-
-## Verification Surface
-
-- Use `go run ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise`.
-- Starter path: `09-architecture/03-architecture-patterns/9-modular-refactor-exercise/_starter`.
+1. **Analyze**: Open `_starter/main.go`. Identify the business logic, the database calls, and the HTTP handlers.
+2. **Extract Domain**: Create a `domain.go` (or a sub-package) for the core entities and their business rules.
+3. **Extract Repository**: Create a `repository.go` for the database logic. Use an interface.
+4. **Extract Service**: Create a `service.go` to coordinate the logic.
+5. **Clean the Handler**: Update the HTTP handlers to only call the Service.
+6. **Verify**: Ensure the code still runs and passes the provided tests.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply ARCH.9 in a small service or tool.
+1. Can you refactor the code so that the `Billing` logic doesn't know about the `User` database table?
+2. Introduce a "Mock" repository in your test file and prove that the service works without a real database.
+3. (Challenge) Add an "Event" that is published when a user is refactored, and subscribe to it from a separate module.
 
-## ⚠️ In Production
+## Verification Surface
 
-Architecture work matters only when the resulting system is easier to change, reason about, and test.
+- Use `go test ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise/...`.
+- Starter path: `09-architecture/03-architecture-patterns/9-modular-refactor-exercise/_starter`.
 
-## 🤔 Thinking Questions
 
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## In Production
+**Refactor with a goal.** Don't refactor just for "Clean Code." Refactor because you need to add a new feature that is currently too hard to implement, or because your tests are too slow and brittle. Refactoring without a goal is "Gold Plating" and can introduce bugs without delivering value.
+
+## Thinking Questions
+1. What was the hardest part of untangling the dependencies?
+2. How did using interfaces change the way you wrote your tests?
+3. If you had to split this app into microservices tomorrow, how much work would it be now vs. before the refactor?
 
 ## Next Step
 
-Use this lesson as a reference surface before moving to the next track in the section.
+Architecture is nothing without security. Learn how to protect your modular masterpiece. Continue to [SEC.1 Input validation patterns](../../04-security/1-input-validation-patterns).

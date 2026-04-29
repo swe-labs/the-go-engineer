@@ -13,7 +13,7 @@ import (
 // This client.go is INTENTIONALLY IDENTICAL to section 3-manual-mock.
 // The progression in this section is in the TEST FILE (client_test.go).
 // In section 3, we wrote a basic mock. Here in section 4, the test file
-// adds ERROR CASE testing — verifying how FetchPosts handles network failures
+// adds ERROR CASE testing - verifying how FetchPosts handles network failures
 // and non-200 status codes. The client code doesn't change; the tests evolve.
 //
 // 1. The Mocking Interface

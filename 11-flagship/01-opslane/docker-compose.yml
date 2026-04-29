@@ -1,0 +1,47 @@
+# Opslane local stack
+# - PostgreSQL as the primary system-of-record database
+# - the flagship API container
+# - health-gated startup ordering
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: opslane
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: opslane
+    ports:
+      - "5432:5432"
+    volumes:
+      - opslane_pg16_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U opslane -d opslane"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ../../
+      dockerfile: 11-flagship/01-opslane/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      OPSLANE_ENV: "development"
+      OPSLANE_HTTP_ADDR: ":8080"
+      OPSLANE_LOG_LEVEL: "info"
+      OPSLANE_DB_DSN: "postgres://opslane:secretpassword@db:5432/opslane?sslmode=disable"
+      OPSLANE_DB_MAX_OPEN_CONNS: "4"
+      OPSLANE_DB_MAX_IDLE_CONNS: "2"
+      OPSLANE_DB_CONN_MAX_IDLE_TIME: "5m"
+      OPSLANE_DB_CONN_MAX_LIFETIME: "30m"
+      OPSLANE_AUTH_TOKEN_SECRET: "development-only-opslane-secret-change-me"
+      OPSLANE_AUTH_TOKEN_ISSUER: "opslane"
+      OPSLANE_AUTH_TOKEN_TTL: "1h"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  opslane_pg16_data:
+    name: opslane_pg16_data

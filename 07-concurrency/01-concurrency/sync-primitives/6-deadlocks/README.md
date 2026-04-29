@@ -1,28 +1,36 @@
-# SY.6 Deadlocks
+# SY.6 Deadlocks: The Frozen State
 
 ## Mission
 
-Learn how circular waits and unbalanced channel or lock usage can freeze a concurrent program.
+Understand the anatomy of a **Deadlock** and learn the "Four Coffman Conditions" that cause them. Master the discipline of **Lock Ordering** and learn how to interpret Go's runtime deadlock detection.
 
 ## Prerequisites
 
-- SY.5
+- `SY.5` goroutine-leaks
 
 ## Mental Model
 
-Deadlocks happen when each waiting actor needs another waiting actor to move first.
+Think of a Deadlock as **Two People in a Narrow Hallway**.
+
+1. **The Conflict**: Person A is walking East, Person B is walking West.
+2. **The Standoff**: They meet in the middle. Person A won't step aside until Person B moves. Person B won't step aside until Person A moves.
+3. **The Result**: Both stand there forever. Neither can make progress.
 
 ## Visual Model
 
 ```mermaid
-graph TD
-    A["Deadlocks"] --> B["Keep lock ordering consistent."]
-    B --> C["Prefer simple coordination patterns before stacking multiple synchronization tools together."]
+graph LR
+    G1[Goroutine 1] -- "Holds" --> RA[Resource A]
+    G2[Goroutine 2] -- "Holds" --> RB[Resource B]
+    G1 -- "Wants" --> RB
+    G2 -- "Wants" --> RA
 ```
 
 ## Machine View
 
-Locks, channels, and wait groups can all deadlock when the coordination graph has no possible next step.
+A deadlock occurs when there is a **Circular Wait**.
+1. **The Panic**: If Go's runtime scheduler detects that **all** goroutines are blocked (none are ready to run), it will crash the program with: `fatal error: all goroutines are asleep - deadlock!`.
+2. **Partial Deadlocks**: If even *one* goroutine is still able to run (like a background logger or a monitoring loop), the Go runtime **cannot** detect the deadlock. Your program will simply hang silently while memory and CPU usage stay flat.
 
 ## Run Instructions
 
@@ -32,34 +40,52 @@ go run ./07-concurrency/01-concurrency/sync-primitives/6-deadlocks
 
 ## Code Walkthrough
 
-### Keep lock ordering consistent.
+### The Setup
+We have two resources, each with its own Mutex.
 
-Keep lock ordering consistent.
+### The Circular Wait
+- Worker 1 locks A, then tries to lock B.
+- Worker 2 locks B, then tries to lock A.
+- If Worker 2 locks B *after* Worker 1 has already locked A, both workers will be blocked waiting for a lock held by the other.
 
-### Match every send with a reachable receiver and every w
-
-Match every send with a reachable receiver and every wait with a reachable done path.
-
-### Prefer simple coordination patterns before stacking mu
-
-Prefer simple coordination patterns before stacking multiple synchronization tools together.
+### The Fix (Consistent Ordering)
+The solution is simple: **Always lock in the same order.** If both workers were programmed to lock A then B, Worker 2 would simply wait at the "Lock A" step until Worker 1 was completely finished with both, and no deadlock would occur.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply SY.6 in a small service or tool.
+1. Fix the deadlock: change Worker 2 to lock `resA` before `resB`.
+2. Remove the `time.Sleep` in the workers. Does the deadlock still happen every time? (Hint: No, it becomes a "Race Condition" where it only happens sometimes).
+3. Comment out the "Monitor" goroutine in `main.go`. Watch the Go runtime crash the program with a fatal error.
 
-## ⚠️ In Production
+## Verification Surface
 
-Deadlocks are design bugs. They disappear when ownership, lock ordering, and channel direction are made explicit.
+Observe how the two workers get stuck and the program never reaches the "Success" lines:
 
-## 🤔 Thinking Questions
+```text
+=== SY.6 Deadlocks ===
 
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+Scenario: Circular Wait Deadlock
+  [Worker 1] Locking A...
+  [Worker 2] Locking B...
+  [Worker 1] Trying to lock B...
+  [Worker 2] Trying to lock A...
+  [Main] Waiting for workers (expecting hang)...
+
+  !!! SYSTEM DETECTED HANG !!!
+```
+
+## In Production
+**Deadlocks are design failures.**
+To avoid them:
+- **Lock Ordering**: Document and enforce the order in which locks must be acquired.
+- **Avoid Nested Locks**: Try to never hold two locks at the same time.
+- **Use Channels**: Channels are much harder to deadlock than Mutexes because they naturally encourage a "Flow" of data rather than a "Gridlock" of state.
+
+## Thinking Questions
+1. Why can't the Go compiler catch deadlocks at compile time?
+2. What is the difference between a Deadlock and a Livelock?
+3. How can you use `select` with a timeout to "break" a potential deadlock?
 
 ## Next Step
 
-Use this lesson as a reference surface before moving to the next track in the section.
+We've finished the Synchronization Primitives track! Now let's explore the "Contract" that coordinates them across the whole system. Continue to [CT.1 Context](../../context/README.md).

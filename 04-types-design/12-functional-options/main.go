@@ -1,22 +1,35 @@
 // Copyright (c) 2026 Rasel Hossen
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Functional Options
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn the functional options pattern-a common Go pattern for building configurable APIs without requiring many constructor parameters.
+//
+// WHY THIS MATTERS:
+//   - Think of ordering a pizza. You could have a constructor with 20 parameters (crust, sauce, cheese, toppings, size, etc.). Or you could have `WithExt...
+//
+// RUN:
+//   go run ./04-types-design/12-functional-options
+//
+// KEY TAKEAWAY:
+//   - Learn the functional options pattern-a common Go pattern for building configurable APIs without requiring many constructor parameters.
+// ============================================================================
+
 // See LICENSE for usage terms.
 
 package main
 
 import "fmt"
 
-// ============================================================================
-// Section 6: Types & Interfaces — Functional Options
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - The functional options pattern
 //   - Defining Option type and functions
 //   - Building clean, extensible APIs
 //
-// RUN: go run ./04-types-design/12-functional-options
-// ============================================================================
 
 type Server struct {
 	Name     string
@@ -124,7 +137,8 @@ func main() {
 	fmt.Println("  - Options are composable and reusable")
 	fmt.Println("  - Standard Go pattern for extensible APIs")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.13 method values")
-	fmt.Println("   Current: TI.12 (functional options)")
+	fmt.Println("NEXT UP: TI.13 method-values")
+	fmt.Println("Current: TI.12 (functional-options)")
+	fmt.Println("Previous: TI.11 (dynamic-typing-with-any)")
 	fmt.Println("---------------------------------------------------")
 }

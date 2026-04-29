@@ -1,3 +1,25 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 00: How Computers Work
+// Title: How the OS manages processes
+// Level: Foundation
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Understand that your Go program runs inside an operating-system process and crosses a syscall boundary whenever it needs OS help.
+//
+// WHY THIS MATTERS:
+//   - A process is the OS sandbox for a running program. Syscalls are the doors that let that sandbox ask for files, network access, clocks, and other ex...
+//
+// RUN:
+//   go run ./00-how-computers-work/5-os-processes
+//
+// KEY TAKEAWAY:
+//   - Understand that your Go program runs inside an operating-system process and crosses a syscall boundary whenever it needs OS help.
+// ============================================================================
+
 package main
 
 import (
@@ -6,12 +28,7 @@ import (
 	"runtime"
 )
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 00: How Computers Work - How the OS manages processes
 //
-// Run: go run ./00-how-computers-work/5-os-processes
 
 func main() {
 	fmt.Println("=== OS Processes and Syscalls ===")

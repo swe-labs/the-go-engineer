@@ -1,13 +1,32 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 10: Production Operations
+// Title: Distributed tracing basics
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how trace and span IDs follow a request through multiple boundaries so latency can be explained, not guessed.
+//
+// WHY THIS MATTERS:
+//   - Tracing is request storytelling with timestamps and parent-child relationships.
+//
+// RUN:
+//   go run ./10-production/05-observability/3-distributed-tracing-basics
+//
+// KEY TAKEAWAY:
+//   - Trace shows one request across many services.
+//   - Span explains where latency was spent inside that request.
+//   - Context propagation carries trace ID through boundaries.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// Section 10: Production Operations - Distributed tracing basics
 //
-// Run: go run ./10-production/05-observability/3-distributed-tracing-basics
 
 func main() {
 	fmt.Println("=== OPS.3 Distributed tracing basics ===")

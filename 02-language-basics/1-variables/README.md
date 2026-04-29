@@ -61,18 +61,18 @@ Short declaration creates local variables and lets the compiler infer their type
 
 Go refuses to compile code with unused local variables. That catches mistakes early.
 
+> **Forward Reference:** You will learn more about how the compiler strictly enforces code quality in [Lesson 08: Quality and Test](../../08-quality-test/README.md).
+
 ## Try It
 
 1. Change one assigned value and rerun the lesson.
 2. Add a new variable using short declaration.
 3. Declare a variable and leave it unused to see the compiler error.
 
-## ⚠️ In Production
-
+## In Production
 Predictable variable initialization is one of the reasons Go code is easier to reason about under pressure. Zero values, explicit types, and compile-time unused-variable errors reduce hidden state and dead code.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is a guaranteed zero value safer than leaving memory uninitialized?
 2. When might explicit `var` be clearer than `:=`?
 3. Why would the compiler reject unused local variables?

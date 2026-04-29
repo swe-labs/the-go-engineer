@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 07: Concurrency
+// Title: errgroup Basics
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - errgroup Basics fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - errgroup Basics provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/02-concurrency-patterns/1-errgroup
+//
+// KEY TAKEAWAY:
+//   - errgroup Basics fundamentals and practical application in Go.
+// ============================================================================
+
 package main
 
 import (
@@ -11,12 +30,8 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-// ============================================================================
 // Stage 07: Concurrency Patterns - errgroup Basics
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - errgroup.Group: the idiomatic replacement for sync.WaitGroup when goroutines can fail
 //   - How errgroup collects errors without extra channels or mutexes
 //   - The difference between WaitGroup and errgroup
@@ -28,8 +43,6 @@ import (
 //   because returning every error is rarely useful once one failed dependency
 //   already explains the cascade of failures that follows it.
 //
-// RUN: go run ./07-concurrency/02-concurrency-patterns/1-errgroup
-// ============================================================================
 
 type Service struct {
 	Name    string

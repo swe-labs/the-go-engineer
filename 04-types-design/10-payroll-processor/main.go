@@ -1,15 +1,29 @@
 // Copyright (c) 2026 Rasel Hossen
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Payroll Processor Project
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Build a small payroll processor that proves different employee types can share one behavior contract through interfaces instead of inheritance.
+//
+// WHY THIS MATTERS:
+//   - Different employee types may store different data, but they can still satisfy the same interface if they promise the same behavior. The payroll pro...
+//
+// RUN:
+//   go run ./04-types-design/10-payroll-processor
+//
+// KEY TAKEAWAY:
+//   - Build a small payroll processor that proves different employee types can share one behavior contract through interfaces instead of inheritance.
+// ============================================================================
+
 // See LICENSE for usage terms.
 
 package main
 
-// ============================================================================
-// Section 6: Types & Interfaces — Payroll Processor (Exercise)
-// Level: Intermediate
-// ============================================================================
 //
-// RUN: go run ./04-types-design/10-payroll-processor
-// ============================================================================
 
 import "fmt"
 
@@ -93,4 +107,10 @@ func main() {
 	}
 
 	ProcessPayroll(payrollList)
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: TI.11 dynamic-typing-with-any")
+	fmt.Println("Current: TI.10 (payroll-processor)")
+	fmt.Println("Previous: TI.9 (generics)")
+	fmt.Println("---------------------------------------------------")
 }

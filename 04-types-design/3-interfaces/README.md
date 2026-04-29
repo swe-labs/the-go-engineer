@@ -8,7 +8,9 @@ Learn how to define behavior contracts using interfaces and achieve polymorphism
 
 You have structs (data) and methods (behavior). The next question is: "How do I write code that works with multiple types that share the same behavior?"
 
-In other languages, you might use inheritance. In Go, you use interfaces - a type that defines what a type can do, not what it is.
+In other languages, you might use inheritance. In Go, you use interfaces-a type that defines what a type can do, not what it is.
+
+> **Backward Reference:** In [Lesson 2: Methods](../2-methods/README.md), you learned how to attach behavior to types. Interfaces allow you to abstract that behavior, creating contracts that multiple types can satisfy.
 
 ## Prerequisites
 
@@ -17,7 +19,7 @@ In other languages, you might use inheritance. In Go, you use interfaces - a typ
 
 ## Mental Model
 
-Think of a power outlet. The outlet defines a contract: "I accept anything with two prongs and a ground pin." A lamp, a phone charger, and a refrigerator all satisfy this contract differently, but the outlet does not care how they work internally - only that they have the right shape (methods).
+Think of a power outlet. The outlet defines a contract: "I accept anything with two prongs and a ground pin." A lamp, a phone charger, and a refrigerator all satisfy this contract differently, but the outlet does not care how they work internally-only that they have the right shape (methods).
 
 ## Visual Model
 
@@ -26,15 +28,20 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
-
 ```text
-Shape interface
-  - Area() float64
-  - Perimeter() float64
-
-Types that implement Shape
-  - Rectangle
-  - Circle
++-----------------------+
+| Shape interface       |
++-----------------------+
+| Area() float64        |
+| Perimeter() float64   |
++-----------------------+
+         ^
+         | implements
+    +----+----+
+    |         |
++---+---+ +---+---+
+| Rect  | | Circle|
++-------+ +-------+
 ```
 
 ## Machine View
@@ -43,7 +50,7 @@ An interface value is internally a 2-word struct:
 - Word 1: pointer to the type descriptor (what concrete type is stored)
 - Word 2: pointer to the data (the actual struct value)
 
-This is why interface calls are slightly slower than direct calls - the runtime must look up the method through the type descriptor. This is called "dynamic dispatch."
+This is why interface calls are slightly slower than direct calls-the runtime must look up the method through the type descriptor. This is called "dynamic dispatch."
 
 ## Run Instructions
 
@@ -73,7 +80,7 @@ Sometimes you need to extract the concrete type from an interface. Use the comma
 
 1. Add a new shape type (e.g., Square) and see if it works with `printShapeInfo` without any changes.
 2. Try a type assertion that fails and observe the ok value.
-3. Add a method to one shape type that others do not have - does it still satisfy Shape?
+3. Add a method to one shape type that others do not have-does it still satisfy Shape?
 
 ## Common Questions
 
@@ -84,14 +91,14 @@ Sometimes you need to extract the concrete type from an interface. Use the comma
   Use interfaces when you need polymorphism. Use concrete types when you need specificity.
 
 ## In Production
-
 Interfaces are Go's primary tool for abstraction and testing. They let you write code that depends on behavior, not concrete types. This is essential for dependency injection, mocking, and flexible API design.
 
 ## Thinking Questions
-
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** Interfaces can be combined to build more complex contracts. In [Lesson 4: Interface Embedding](../4-interface-embedding/README.md), you will learn how to compose small interfaces into larger ones, promoting reuse and modularity.
 
 ## Next Step
 

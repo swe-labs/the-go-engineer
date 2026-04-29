@@ -1,65 +1,75 @@
-# CFG.1 Environment variables
+# CFG.1 Environment Variables
 
 ## Mission
 
-Learn how environment variables shape runtime configuration without rebuilding the binary.
+Master the fundamental tool of cloud-native configuration. Learn how to use environment variables to inject settings into your Go applications without rebuilding the binary. Understand how to use the `os` package to fetch values and how to handle missing or malformed inputs to ensure a stable startup.
 
 ## Prerequisites
 
-- none
+- None.
 
 ## Mental Model
 
-Environment variables are process-level inputs provided by the runtime environment, not by the source code itself.
+Think of Environment Variables as **The Labels on a Control Panel**.
+
+1. **The Machine (The Binary)**: The machine is identical for every customer. It has buttons and dials but no values pre-set.
+2. **The Control Panel (The Environment)**: When you install the machine in a specific factory (Staging or Production), you set the dials to specific values (e.g., `PORT=8080`, `DB_URL=...`).
+3. **The Result**: The machine reads the dials when it starts up and knows exactly how to behave in that specific factory.
 
 ## Visual Model
 
 ```mermaid
-graph TD
-    A["Environment variables"] --> B["Environment variables are late-bound process configuration."]
-    B --> C["Keep names stable and documented."]
+graph LR
+    OS[Operating System] -->|export PORT=8080| App[Go Binary]
+    App -->|os.Getenv| Logic[Application Logic]
+
+    subgraph "Late Binding"
+    OS
+    App
+    end
 ```
 
 ## Machine View
 
-The process inherits environment data from the launcher, which makes config injection flexible but also easy to misuse silently.
+- **`os.Getenv(key)`**: Returns the value of the environment variable. If the variable isn't present, it returns an empty string.
+- **`os.LookupEnv(key)`**: Returns the value AND a boolean indicating if the variable was actually set. This is critical for distinguishing between an empty value and a missing value.
+- **Inheritance**: A child process (your Go app) inherits the environment variables of its parent (the shell or orchestrator).
 
 ## Run Instructions
 
 ```bash
-go run ./10-production/04-configuration/1-environment-variables
+# Run with a custom environment variable
+# Windows (PowerShell):
+# $env:APP_PORT=9000; go run ./10-production/04-configuration/1-environment-variables
+# Linux/macOS:
+# APP_PORT=9000 go run ./10-production/04-configuration/1-environment-variables
 ```
 
 ## Code Walkthrough
 
-### Environment variables are late-bound process configura
+### Fetching Values
+Shows the basic usage of `os.Getenv` for simple string values.
 
-Environment variables are late-bound process configuration.
+### Handling Defaults
+Demonstrates the pattern of checking if a value is empty and assigning a safe default if it is.
 
-### Missing or malformed values should fail fast.
-
-Missing or malformed values should fail fast.
-
-### Keep names stable and documented.
-
-Keep names stable and documented.
+### Lookup vs Getenv
+Shows when to use `LookupEnv` to verify that a required configuration was explicitly provided by the user.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply CFG.1 in a small service or tool.
+1. Run the code. Observe the default values.
+2. Set a new environment variable `DB_TIMEOUT=30s` and update the code to read it.
+3. Discuss: Why are environment variables preferred over hardcoded strings for database passwords?
 
-## ⚠️ In Production
+## In Production
+**Document your variables.** Every environment variable your application uses should be listed in a `README.md` or an `.env.example` file. Use **Fail-Fast** logic: if a critical variable like `DATABASE_URL` is missing, the application should call `log.Fatal` immediately on startup. Never assume a "default" for a production database.
 
-Environment variables are simple and ubiquitous, but they need documentation and validation to stay reliable.
-
-## 🤔 Thinking Questions
-
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## Thinking Questions
+1. What is the difference between `os.Getenv` and `os.LookupEnv`?
+2. Why are environment variables better than command-line flags for secrets?
+3. How do you handle environment variables that contain structured data (like a list of IDs)?
 
 ## Next Step
 
-Continue to `CFG.2`.
+Environment variables are great for single values, but what if you have a complex hierarchy of settings? Continue to [CFG.2 Configuration Files](../2-configuration-files).

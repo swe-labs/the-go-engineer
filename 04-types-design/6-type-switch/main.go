@@ -1,22 +1,35 @@
 // Copyright (c) 2026 Rasel Hossen
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Type Switch
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how to use type switches to handle different concrete types stored in an interface.
+//
+// WHY THIS MATTERS:
+//   - Think of a sorting machine. Items come down the belt, and different items need different handling-fragile items go to one bin, heavy items to another. A type switch is Go's sorting machine for interface values.
+//
+// RUN:
+//   go run ./04-types-design/6-type-switch
+//
+// KEY TAKEAWAY:
+//   - Learn how to use type switches to handle different concrete types stored in an interface.
+// ============================================================================
+
 // See LICENSE for usage terms.
 
 package main
 
 import "fmt"
 
-// ============================================================================
-// Section 6: Types & Interfaces — Type Switch
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Type switch syntax and usage
 //   - Handling multiple concrete types from an interface
 //   - The comma-ok pattern in type switches
 //
-// RUN: go run ./04-types-design/6-type-switch
-// ============================================================================
 
 type Shape interface{}
 
@@ -93,7 +106,8 @@ func main() {
 	fmt.Println("  - value.(type) extracts the concrete type")
 	fmt.Println("  - Default case handles unknown types")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.7 custom errors")
-	fmt.Println("   Current: TI.6 (type switch)")
+	fmt.Println("NEXT UP: TI.7 receiver-sets")
+	fmt.Println("Current: TI.6 (type-switch)")
+	fmt.Println("Previous: TI.5 (stringer)")
 	fmt.Println("---------------------------------------------------")
 }

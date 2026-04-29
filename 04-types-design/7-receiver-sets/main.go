@@ -1,22 +1,34 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 04: Types and Design
+// Title: Receiver Sets
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn the difference between value and pointer receivers and understand how method sets determine interface satisfaction.
+//
+// WHY THIS MATTERS:
+//   - Think of a type's method set like a menu. A Counter value has only the Get() menu item. A *Counter pointer has the full menu: Get(), Inc(), Reset(). Interface satisfaction depends on which menu is visible.
+//
+// RUN:
+//   go run ./04-types-design/7-receiver-sets
+//
+// KEY TAKEAWAY:
+//   - Learn the difference between value and pointer receivers and understand how method sets determine interface satisfaction.
+// ============================================================================
+
 package main
 
 import "fmt"
 
-// ============================================================================
-// Section 6: Types & Interfaces — Receiver Sets Drill
-// Level: Beginner
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Value vs pointer receivers
 //   - Method sets: what methods a type actually provides
 //   - How receiver type affects interface satisfaction
 //
-// RUN: go run ./04-types-design/7-receiver-sets
-// ============================================================================
 
 type Counter struct {
 	Value int
@@ -92,7 +104,8 @@ func main() {
 	fmt.Println("  - A type's method set depends on whether you use value or pointer")
 	fmt.Println("  - Interface satisfaction requires the method to exist on the type you pass")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: TI.8 custom errors")
-	fmt.Println("   Current: TI.7 (receiver sets)")
+	fmt.Println("NEXT UP: TI.8 custom-errors")
+	fmt.Println("Current: TI.7 (receiver-sets)")
+	fmt.Println("Previous: TI.6 (type-switch)")
 	fmt.Println("---------------------------------------------------")
 }

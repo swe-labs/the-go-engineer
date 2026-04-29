@@ -1,4 +1,24 @@
 // Copyright (c) 2026 Rasel Hossen
+
+// ============================================================================
+// Section 04: Types and Design
+// Title: Interface Embedding
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how to embed one interface into another to build larger contracts from smaller pieces.
+//
+// WHY THIS MATTERS:
+//   - Think of a universal remote. It does not have buttons for every function directly-it embeds the capabilities of a TV remote, a DVD remote, and a soundbar remote.
+//
+// RUN:
+//   go run ./04-types-design/4-interface-embedding
+//
+// KEY TAKEAWAY:
+//   - Learn how to embed one interface into another to build larger contracts from smaller pieces.
+// ============================================================================
+
 // See LICENSE for usage terms.
 
 package main
@@ -8,18 +28,11 @@ import (
 	"fmt"
 )
 
-// ============================================================================
-// Section 6: Types & Interfaces — Interface Embedding
-// Level: Intermediate
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - Embedding one interface inside another
 //   - How embedded interfaces combine contracts
 //   - The io.ReadWriter pattern from the standard library
 //
-// RUN: go run ./04-types-design/4-interface-embedding
-// ============================================================================
 
 type Reader interface {
 	Read(p []byte) (n int, err error)
@@ -75,7 +88,8 @@ func main() {
 	fmt.Println("  - io.ReadWriter = io.Reader + io.Writer")
 	fmt.Println("  - Embedding is static: compiler verifies all methods exist")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.5 Stringer")
-	fmt.Println("   Current: TI.4 (interface embedding)")
+	fmt.Println("NEXT UP: TI.5 stringer")
+	fmt.Println("Current: TI.4 (interface-embedding)")
+	fmt.Println("Previous: TI.3 (interfaces)")
 	fmt.Println("---------------------------------------------------")
 }

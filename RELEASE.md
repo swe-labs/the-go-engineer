@@ -1,482 +1,203 @@
-﻿# Release Guide
+# Release Guide
 
-This document describes how to plan, prepare, and publish releases of The Go Engineer curriculum.
+This document defines the release process for The Go Engineer.
 
-## Overview
+## Release Lines
 
-The Go Engineer follows **semantic versioning** for stable releases:
-- **Major**: Significant restructuring (e.g., adding entire sections)
-- **Minor**: New lessons/features without breaking changes
-- **Patch**: Bug fixes and documentation updates
+| Line | Branch | Purpose |
+| --- | --- | --- |
+| v2.1.x | `release/v2` | stable v2.1 maintenance |
+| v1.x | `release/v1` | stable v1 maintenance |
+| post-v2.1 | `main` | future implementation and integration work |
 
-**Release Format**: `v1.0.0`, `v1.1.0`, `v1.0.1`
+The current stable release is `v2.1.1`.
 
-Current v2.1 state:
+## Versioning
 
-- published prerelease: `v2.1.0-rc.1`
-- active stabilization branch: `release/v2`
-- next planned milestone: `v2.1.0`
+The project uses semantic versioning for stable releases:
 
-## Branch Roles
+- major: public architecture changes or incompatible curriculum restructuring
+- minor: new stable content inside the locked architecture
+- patch: bug fixes, documentation corrections, validator fixes, CI changes, and low-risk curriculum repairs
 
-The project uses long-lived branches for supported major versions:
+Do not reuse an existing tag. If `v2.1.0` already exists, the next stable patch is `v2.1.1`.
 
-- `main`: active v2 development and prerelease integration branch
-- `release/v1`: stable v1 maintenance branch for current users
-- `release/v2`: active v2.1 release-candidate and stable-release branch
+## Release Preconditions
 
-Topic branches stay short-lived and always branch from the line they should ship to.
+Before preparing a release:
 
-- `feat/...` and `fix/...` branch from `main` for v2 work
-- `docs/...`, `chore/...`, and `release-prep/...` branch from `release/v2` for RC hardening work
-- `fix/v1-...` or `hotfix/v1-...` branch from `release/v1` for stable v1 fixes
+- the release issue is linked
+- the target branch is identified
+- public docs match `ARCHITECTURE.md` and `curriculum.v2.json`
+- all P0/P1/P2 review findings are fixed or explicitly accepted by the maintainer
+- GitHub CI is passing
+- local verification evidence is available
 
-`v1.0.0` remains an immutable release tag. It is not the permanent maintenance branch name.
+## Release Preparation
 
-## Release Process
-
-### Step 1: Plan the Release
-
-1. Identify issues/PRs to include in the release
-2. Update [CHANGELOG.md](./CHANGELOG.md) with:
-   - Date and version number
-   - Major changes in sections: `Added`, `Fixed`, `Changed`, `Removed`
-   - Link to detailed changes (PR numbers)
-
-3. Update version references:
-   - In documentation (README.md, ROADMAP.md)
-
-### Step 2: Pre-Release Verification
+For a v2.1.x release:
 
 ```bash
-# Verify build
-make build
-
-# Run all tests
-make test
-
-# Run with race detection
-make test-race
-
-# Run the maintained benchmark target
-make bench
-
-# Verify the maintained example run targets
-make run-hello
-make run-env
-
-# Generate coverage
-make cover
-
-# Validate curriculum
-go run ./scripts/validate_curriculum.go
-
-# Check for uncommitted changes
-git status
-
-# Check for dependencies that need updating
-make deps-check
+git switch release/v2
+git pull --ff-only origin release/v2
+git switch -c release/v2.1.x-prep
 ```
 
-### Step 2A: RC.1 Release Gate
+Update:
 
-For `v2.1.0-rc.1`, treat the following as the minimum release gate on `release/v2`:
+- [CHANGELOG.md](./CHANGELOG.md)
+- [README.md](./README.md)
+- [ROADMAP.md](./ROADMAP.md)
+- release notes for the target version
+- any public workflow document that changed
+
+Commit release metadata with:
 
 ```bash
-make build
-make test
-make test-race
-make bench
-make run-hello
-make run-env
-go run ./scripts/validate_curriculum.go
-git status
+git commit -m "[RELEASE] prepare v2.1.x"
 ```
 
-If GNU Make is not installed in the current maintainer environment, run the direct equivalents instead:
+## Required Verification
+
+Run the CI-equivalent bundle:
 
 ```bash
 go build ./...
+go vet ./...
+unformatted=$(gofmt -l .); test -z "$unformatted" || (echo "$unformatted" && exit 1)
+go mod tidy
+git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test ./08-quality-test/01-quality-and-performance/testing/benchmarks -bench="." -benchmem -count=1
-go run ./01-getting-started/2-hello-world
-go run ./01-getting-started/4-dev-environment
+go test -coverprofile coverage.out ./...
 go run ./scripts/validate_curriculum.go
-git status
 ```
 
-The RC tag should only be cut after:
-
-- the `release-prep/v2.1.0-rc.1` PR into `release/v2` is merged
-- required GitHub Actions checks are green on that PR
-- all `release-blocker` issues in the `v2 rc` milestone are closed or explicitly deferred
-- the working tree on the release line is clean before tagging
-
-For the `test-race` part of the gate:
-
-- prefer a local `go test -race ./...` pass when the maintainer environment has CGO plus a working C toolchain
-- if the local environment does not provide that toolchain (for example, Windows without `gcc`), require the CI race job on the release-prep PR to pass before tagging
-
-### Step 2B: Stable v2.1.0 Release Gate
-
-Before tagging `v2.1.0` from `release/v2`, treat the following as the minimum stable gate:
+For benchmark-related releases:
 
 ```bash
-make build
-make test
-make test-race
-make bench
-make run-hello
-make run-env
-go run ./scripts/validate_curriculum.go
-git status
+go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
 ```
 
-If GNU Make is not installed in the current maintainer environment, run the documented direct equivalents instead:
+Remove generated local artifacts such as `coverage.out` unless they are intentionally tracked.
 
-```bash
-go build ./...
-go test ./...
-go test -race ./...
-go test ./08-quality-test/01-quality-and-performance/testing/benchmarks -bench="." -benchmem -count=1
-go run ./01-getting-started/2-hello-world
-go run ./01-getting-started/4-dev-environment
-go run ./scripts/validate_curriculum.go
-git status
+## Release PR
+
+Open a PR into the release branch.
+
+PR title:
+
+```text
+[RELEASE] prepare v2.1.x
 ```
 
-The stable tag should only be cut after:
+PR body:
 
-- the `release-prep/v2.1.0` PR into `release/v2` is merged
-- required GitHub Actions checks are green on that PR
-- open `release-blocker` issues in the `v2 rc` milestone are closed or explicitly deferred
-- `v2.1.0-rc.1` validation feedback has been reviewed and any true blockers resolved
-- the working tree on `release/v2` is clean immediately before tagging
+```markdown
+Closes #<issue>
 
-For the `test-race` part of the stable gate:
+## Release
 
-- prefer a local `go test -race ./...` pass when the maintainer environment has CGO plus a working C toolchain
-- if the local environment does not provide that toolchain, require the CI race job on the stable release-prep PR to pass before tagging
+- Version: v2.1.x
+- Target branch: release/v2
 
-### Step 3: Choose the Correct Release Line
+## Scope
 
-- For v1 patch or minor releases, work from `release/v1`
-- For ongoing v2 development and alpha prereleases, work from `main`
-- For v2 beta snapshots already cut for stabilization, release candidates, and final release, work from `release/v2`
+-
 
-Do not open sync PRs from `main` into `release/v1` just to keep the branches identical. Once v2 begins, those branches are expected to diverge.
+## Validation
 
-### Step 4: Create the Release Branch or Topic Branch
+- [ ] go build ./...
+- [ ] go vet ./...
+- [ ] gofmt check
+- [ ] go mod tidy no-diff check
+- [ ] go test ./...
+- [ ] go test -race ./...
+- [ ] go test -coverprofile coverage.out ./...
+- [ ] go run ./scripts/validate_curriculum.go
+
+## Risk
+
+-
+```
+
+Keep the PR open until CI is green and review findings are handled.
+
+## Merge and Tag
+
+After approval and green CI:
 
 ```bash
-# Example: prepare a v1 patch release from the stable line
-git switch release/v1
-git pull origin release/v1
-git switch -c release-prep/v1.X.Y
-
-# Example: prepare a v2 stabilization update from the active RC line
 git switch release/v2
-git pull origin release/v2
-git switch -c release-prep/v2.1.0-rc.N
+git pull --ff-only origin release/v2
+git tag v2.1.x
+git push origin v2.1.x
+```
 
-# Example: prepare the final v2.1.0 stable release from the RC line
-git switch release/v2
-git pull origin release/v2
-git switch -c release-prep/v2.1.0
+Do not force-update stable tags.
 
-# Commit version/changelog updates
-git add CHANGELOG.md README.md ROADMAP.md
-git commit -m "chore: prepare release metadata"
+## GitHub Release
 
-# Push to GitHub
+Create the GitHub release from the stable tag:
+
+```bash
+gh release create v2.1.x --target release/v2 --title "The Go Engineer v2.1.x" --notes-file RELEASE-NOTES-v2.1.x.md
+```
+
+The release notes should include:
+
+- release purpose
+- major fixes and documentation changes
+- validation evidence
+- branch and tag references
+- known risks, if any
+
+## Backports
+
+If a fix must ship to more than one supported line:
+
+1. merge the fix into the source branch
+2. cherry-pick with provenance
+3. open a follow-up PR if branch protection requires it
+
+```bash
+git switch <target-branch>
+git pull --ff-only origin <target-branch>
+git cherry-pick -x <merged-commit-sha>
 git push origin HEAD
 ```
 
-### Step 5: Create Pull Request
+## Security Releases
 
-1. Open PR into the long-lived target branch:
-   - `release-prep/v1.X.Y` -> `release/v1`
-   - `release-prep/v2.1.0-rc.N` -> `release/v2`
-   - `release-prep/v2.1.0` -> `release/v2`
-2. Title: `Release: v1.X.Y`, `Release: v2.1.0-rc.N`, or `Release: v2.1.0`
-3. Description:
-   ```markdown
-   ## Release v1.X.Y
-   
-   **Date**: YYYY-MM-DD
-   
-   ### Summary
-   [Brief description of changes]
-   
-   ### New Lessons
-   - Lesson ID: Description
-   
-   ### Bug Fixes
-   - Description
-   
-   ### Documentation
-   - Description
-   
-   ### Breaking Changes
-   - Description (if any)
-   ```
+For security fixes:
 
-4. Wait for all CI checks to pass
-5. Get approval from maintainers
+1. use `[SECURITY]` in the issue, PR, and commit title
+2. make the smallest safe fix
+3. add tests where possible
+4. avoid exposing secrets or exploit details in public discussion
+5. publish a patch release
+6. document user-facing impact in the changelog
 
-### Step 6: Merge Release
+## Rollback
+
+If a tag was pushed incorrectly before release publication:
 
 ```bash
-# After the PR is approved, merge it in GitHub using Squash and Merge.
-# Then update your local long-lived branch.
-git switch release/v1
-git pull origin release/v1
+git tag -d v2.1.x
+git push origin --delete v2.1.x
 ```
 
-Maintainers should use **Squash and Merge** for release pull requests. If the same fix also belongs in another supported branch, propagate it with `git cherry-pick -x` instead of a branch sync merge.
-
-### Step 7: Create GitHub Release
-
-1. Go to [Releases](https://github.com/rasel9t6/the-go-engineer/releases)
-2. Click "Draft a new release"
-3. Fill in:
-   - **Tag**: `v1.X.Y`
-   - **Release title**: `The Go Engineer v1.X.Y`
-   - **Description**: Copy from CHANGELOG.md
-   - **Attachments** (optional): Curriculum PDF
-
-4. Choose "Set as latest release"
-5. Publish release
-
-Use prerelease tags during the v2 rollout:
-
-- `v2.1.0-alpha.N` from `main`
-- `v2.1.0-beta.N` from `release/v2` once the stabilization line exists
-- `v2.1.0-rc.N` from `release/v2`
-
-Cut the final stable tag from `release/v2` only after the stable gate passes:
-
-- `v2.1.0` from `release/v2`
-
-Mark alpha, beta, and RC builds as prereleases on GitHub so stable v1 users are not silently moved early.
-
-### Step 8: Clean Up
-
-```bash
-# Delete the short-lived topic branch locally
-git branch -d release-prep/v1.X.Y
-
-# Delete the short-lived topic branch on GitHub
-git push origin --delete release-prep/v1.X.Y
-```
-
-Keep `release/v1` and later `release/v2` as permanent branches while those lines are supported.
-
-## Release Checklist
-
-Before releasing, verify:
-
-- [ ] All issues in the milestone are closed
-- [ ] All PRs in the release are merged
-- [ ] CHANGELOG.md is updated with all changes
-- [ ] ROADMAP.md status indicators are accurate
-- [ ] All CI checks pass (`build`, `test`, `vet`, `fmt`)
-- [ ] Test coverage is maintained (> 75%)
-- [ ] No security vulnerabilities in dependencies
-- [ ] Documentation is up to date
-- [ ] No breaking changes without major version bump
-- [ ] Version numbers updated in appropriate files
-- [ ] PR target matches the release line (`release/v1` or `release/v2`)
-- [ ] Any cross-line fix has a planned `cherry-pick -x` follow-up
-
-For `v2.1.0-rc.1` and later v2 RC/final releases, also verify:
-
-- [ ] The explicit RC smoke matrix has passed on `release/v2`
-- [ ] Maintained convenience targets still work (`make bench`, `make run-hello`, `make run-env`)
-- [ ] If GNU Make is unavailable, the documented direct-command fallback has also been verified
-- [ ] Race detection is green either locally with a supported CGO toolchain or in CI on the release-prep PR
-
-For `v2.1.0` stable release preparation, also verify:
-
-- [ ] `v2.1.0-rc.1` feedback has been reviewed
-- [ ] Open `release-blocker` issues in the `v2 rc` milestone are closed or explicitly deferred
-- [ ] The stable release-prep PR targets `release/v2`
-- [ ] Final release notes and announcement copy are ready before tagging
-
-## Rollback Procedure
-
-If issues are discovered after release:
-
-```bash
-# If release is not yet widely deployed
-git tag -d v1.X.Y                          # Delete local tag
-git push origin --delete v1.X.Y             # Delete remote tag
-git push origin --delete refs/tags/v1.X.Y   # Delete tag reference
-
-# Revert commit if already merged
-git revert <commit-hash>
-git push origin <release-branch>
-
-# Create patch release when ready
-# e.g., v1.X.1 for security fix on v1.X.0
-```
-
-## Version Numbering Guidelines
-
-### When to bump MAJOR (v2.0.0)
-
-- Significant curriculum restructuring
-- Changing core learning path
-- Removing entire sections (breaking change for learners)
-
-### When to bump MINOR (v1.1.0)
-
-- Adding new sections
-- Adding new lessons
-- Adding exercises
-- Significant documentation improvements
-
-### When to bump PATCH (v1.0.1)
-
-- Bug fixes (typos, incorrect code)
-- Documentation corrections
-- CI/build improvements
-- Dependency updates
-
-## Maintenance Releases
-
-For maintaining older releases (security fixes, critical bugs):
-
-```bash
-# If fixing a critical bug in the stable v1 line
-git switch release/v1
-git pull origin release/v1
-git switch -c hotfix/v1.X.Z
-
-# Make fixes
-git commit -m "fix: critical security issue"
-
-# Push and create PR against release/v1
-git push origin hotfix/v1.X.Z
-
-# After merge and testing
-git tag v1.X.(Z+1)
-git push origin v1.X.(Z+1)
-```
-
-If the same fix is also needed on `main`, cherry-pick it forward with `git cherry-pick -x`.
-
-## Dependency Updates
-
-### Regular Updates
-
-```bash
-# Check for newer versions
-make deps-check
-
-# Update to latest patch versions
-make deps-update
-
-# Test thoroughly
-make test-race
-make cover
-
-# Commit if all tests pass
-git commit -m "chore: update dependencies"
-```
-
-### Security Updates
-
-If a security vulnerability is discovered:
-
-1. **Immediate patch release**:
-   - Apply the security fix
-   - Create v1.X.(Z+1) release
-   - Document in CHANGELOG with `[SECURITY]` prefix
-   - Notify users/contributors
-
-2. **Example**:
-   ```markdown
-   ## [1.0.1] - 2024-04-15 [SECURITY]
-   
-   ### Security
-   - Fixed SQL injection vulnerability in database lesson (CVE-2024-XXXXX)
-   - Updated all dependencies to patched versions
-   
-   ### Recommendation
-   Users are urged to update immediately.
-   ```
-
-## Release Announcements
-
-For major releases, announce via:
-
-1. **GitHub Releases page** (automatic)
-2. **README.md** (update featured changes)
-3. **CHANGELOG.md** (already done)
-4. **Contributors** - Thank those who contributed
-5. **Social media** (optional): Share on Twitter/X, LinkedIn, etc.
-
-### Example Announcement
-
-```
-🎉 The Go Engineer v1.2.0 is released!
-
-New in this release:
-✨ 8 new lessons on Concurrency Patterns
-✨ Enhanced Docker & deployment section
-🐛 Fixed curriculum mapping issues
-📚 Comprehensive testing standards guide
-
-📖 Full changelog: [link]
-🚀 Get started: [link]
-
-Thank you to all contributors! @mention @mention @mention
-```
-
-## Post-Release
-
-### Monitoring
-
-- Monitor issues for any problems reported with new release
-- Check CI status of dependent projects
-- Respond quickly to security reports
-
-### Next Steps
-
-1. **Create milestone** for next version
-2. **Triage** all open issues and PRs
-3. **Plan** next release content based on community feedback
-4. **Update** contributor discussions/roadmap as needed
-
-## GitHub Repository Settings
-
-Recommended repository settings for this workflow:
-
-- protect `main`, `release/v1`, and later `release/v2`
-- require pull requests, status checks, and at least one maintainer review
-- disable direct pushes to protected branches
-- prefer **Squash and Merge** for pull requests
-- enable automatic deletion of head branches after merge
-
-Ahead/behind counts between `main` and `release/v1` are normal once v2 work starts. The goal is not identical histories across major versions; the goal is intentional propagation of the fixes that should exist in both lines.
-
-## Release Schedule
-
-The Go Engineer follows an irregular release schedule based on:
-- Completion of curriculum sections
-- Community feedback and requests
-- Bug/security fixes requiring immediate release
-
-**No minimum interval** between releases, but typically:
-- Major releases: Once per year (after 2-3 new sections)
-- Minor releases: 2-4 times per year
-- Patch releases: As needed (1-2 weeks when issues discovered)
-
-## Tools & Resources
-
-- **GitHub Release Notes**: https://github.com/rasel9t6/the-go-engineer/releases
-- **Changelog Format**: https://keepachangelog.com/
-- **Semantic Versioning**: https://semver.org/
-- **Commit Conventions**: Conventional Commits (feat:, fix:, docs:, etc.)
+If the release was already published, prefer a revert followed by a patch release.
+
+## Checklist
+
+- [ ] Release issue is linked.
+- [ ] Target branch is correct.
+- [ ] Public docs are current.
+- [ ] `CHANGELOG.md` is updated.
+- [ ] Release notes are ready.
+- [ ] Local verification passes.
+- [ ] GitHub CI passes.
+- [ ] No architecture drift.
+- [ ] Tag is created from the verified release branch.
+- [ ] GitHub release is published.

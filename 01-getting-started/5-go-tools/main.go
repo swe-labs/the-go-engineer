@@ -2,20 +2,25 @@
 // Licensed under The Go Engineer License v1.0
 
 // ============================================================================
-// Section 01: Getting Started — Lesson GT.5: Go Tools
+// Section 01: Getting Started
+// Title: go fmt, go vet, go doc
 // Level: Foundation
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - How to use go fmt to standardize code style
-//   - How to use go vet to find common mistakes
-//   - How to use go doc to read documentation
+//   - Master the three essential tools that keep Go code clean, safe, and documented: `fmt`, `vet`, and `doc`.
 //
 // WHY THIS MATTERS:
-//   Standardized tools ensure that all Go codebases look and feel the same.
+//   - Think of these tools as your "automated senior engineer": 1. `go fmt`: Fixes your style. 2. `go vet`: Catches suspicious logic. 3. `go doc`: Explai...
 //
-// RUN: go run ./01-getting-started/5-go-tools
+// RUN:
+//   go run ./01-getting-started/5-go-tools
+//
+// KEY TAKEAWAY:
+//   - Master the three essential tools that keep Go code clean, safe, and documented: `fmt`, `vet`, and `doc`.
 // ============================================================================
+
+//   Standardized tools ensure that all Go codebases look and feel the same.
 
 package main
 
@@ -31,7 +36,6 @@ func main() {
 	fmt.Println("2. go vet: Examines source code and reports suspicious constructs.")
 	fmt.Println("3. go doc: Prints documentation for symbols.")
 
-	// KEY TAKEAWAY:
 	// - Use go fmt to keep code clean and readable.
 	// - Use go vet to catch bugs before they run.
 	// - Use go doc to understand the tools you use.

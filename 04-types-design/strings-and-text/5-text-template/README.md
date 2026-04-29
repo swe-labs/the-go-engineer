@@ -4,6 +4,8 @@
 
 Learn how Go separates presentation from data with `text/template`.
 
+> **Backward Reference:** In [Lesson 4: Regex](../4-regex/README.md), you learned how to pull data OUT of text. Now we look at the reverse: how to put data INTO text using Go's powerful templating engine to generate dynamic and well-structured output.
+
 ## Prerequisites
 
 - `ST.1` strings
@@ -68,15 +70,15 @@ Execution walks the parsed template and fills in the placeholders from the provi
 2. Change the `if` branch by adjusting `UnreadCount`.
 3. Add another item to the `Items` slice and inspect the `range` output.
 
-## ⚠️ In Production
-
+## In Production
 Templates are how teams generate emails, config files, reports, and stable text output without mixing presentation logic into business logic. The separation pays off quickly as systems grow.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is parsing once and executing many times a good design?
 2. Why must template-visible struct fields be exported?
 3. When is a template clearer than a long chain of manual string concatenation?
+
+> **Forward Reference:** You have learned the core text processing tools: manipulation, formatting, Unicode, Regex, and Templating. Now it is time to build a real-world tool. In [Lesson 6: Config Parser Project](../6-config-parser/README.md), you will build a configuration parser that uses everything you have learned to process complex text files.
 
 ## Next Step
 

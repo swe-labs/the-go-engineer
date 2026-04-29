@@ -1,6 +1,28 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
+
+// ============================================================================
+// Section 06: Backend, APIs & Databases
+// Title: Executing Queries (INSERT)
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to insert data into a table using 'db.Exec'.
+//   - How to use parameterized queries ('?') to prevent SQL Injection.
+//   - How to retrieve the ID of the newly inserted row.
+//
+// WHY THIS MATTERS:
+//   - SQL Injection is one of the most common security vulnerabilities.
+//     Learning how to safely handle user input in your queries is
+//     essential for every backend engineer.
+//
+// RUN:
+//   go run ./06-backend-db/01-web-and-database/databases/2-query
+//
+// KEY TAKEAWAY:
+//   - NEVER concatenate strings to build SQL. Always use placeholders.
+// ============================================================================
 
 package main
 
@@ -9,99 +31,66 @@ import (
 	"fmt"
 	"log"
 
-	"golang.org/x/crypto/bcrypt"
 	_ "modernc.org/sqlite"
 )
 
-// ============================================================================
-// Stage 06: Databases — Executing Queries (INSERT)
-// Level: Beginner
-// ============================================================================
+// Stage 06: Databases - Executing Queries (INSERT)
 //
-// WHAT YOU'LL LEARN:
-//   - Executing INSERT queries using db.Exec
-//   - SQL Parameterization (`?`) to prevent SQL Injection
-//   - Safely hashing passwords before storage
-//   - Retrieving the LastInsertId
+//   - SQL Parameterization (?)
+//   - db.Exec for mutations
+//   - LastInsertId()
 //
 // ENGINEERING DEPTH:
-//   NEVER use string concatenation (`"SELECT * FROM users WHERE name = " + user`)
-//   to build SQL queries. This leaves you instantly vulnerable to SQL Injection.
-//   Go's `database/sql` driver uses "Parameterized Queries" (the `?` symbol).
-//   When you pass arguments to `db.Exec("query ?", arg)`, the Go driver sends the
-//   query structure and the arguments to the database server SEPARATELY. The
-//   database safely escapes all payloads internally before execution.
-//
-// RUN: go run ./06-backend-db/01-web-and-database/databases/2-query
-// ============================================================================
-
-var schema = `
-CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    hashed_password TEXT NOT NULL, 
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-`
+//   When you use `db.Exec("INSERT ... VALUES (?)", value)`, the Go
+//   database driver sends the query and the data to the database
+//   separately. This means the database treats the data as a literal
+//   value, not as part of the SQL command. This is the primary defense
+//   against SQL Injection attacks.
 
 func main() {
-	dbName := "users_database.db"
-	db, err := sql.Open("sqlite", dbName)
+	dbPath := "example.db"
+
+	db, err := sql.Open("sqlite", dbPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	if err = db.Ping(); err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("✅ Database connection established")
+	fmt.Println("=== Executing INSERT Queries ===")
+	fmt.Println()
 
-	// 1. Create the table
-	createTable(db)
-	fmt.Println("✅ Users table ensured")
-
-	// 2. Insert a secure user
-	userId, err := createUser(db, "Alice", "alice@example.com", "supersecret123")
+	// 1. Ensure the table exists (from Lesson 1)
+	schema := `CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT UNIQUE);`
+	_, err = db.Exec(schema)
 	if err != nil {
-		log.Fatal("Failed to insert user:", err)
+		log.Fatalf("  Failed to create table: %v", err)
 	}
 
-	fmt.Printf("✅ Inserted user 'Alice' successfully! (ID: %d)\n", userId)
+	// 2. Insert a new user safely using placeholders
+	name := "Rasel Hossen"
+	email := "rasel@example.com"
+
+	// The '?' is a placeholder for a single value.
+	query := `INSERT INTO users (name, email) VALUES (?, ?)`
+
+	// db.Exec returns a Result object and an error.
+	result, err := db.Exec(query, name, email)
+	if err != nil {
+		// Handle specific errors like unique constraint violations
+		log.Fatalf("  Failed to insert user: %v", err)
+	}
+
+	// 3. Get the auto-incremented ID
+	id, _ := result.LastInsertId()
+	// Get the number of rows affected (should be 1)
+	rows, _ := result.RowsAffected()
+
+	fmt.Printf("  ✔ Inserted user: %s (ID: %d)\n", name, id)
+	fmt.Printf("  ✔ Rows affected: %d\n", rows)
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: DB.3 query — SELECT")
-	fmt.Println("   Current: DB.2 (query — INSERT)")
+	fmt.Println("NEXT UP: DB.3 select-queries")
+	fmt.Println("Current: DB.2 (query-insert)")
+	fmt.Println("Previous: DB.1 (connecting-to-sqlite)")
 	fmt.Println("---------------------------------------------------")
-}
-
-func createTable(db *sql.DB) {
-	_, err := db.Exec(schema)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-// createUser demonstrates safe insertion using bcrypt and parameterized queries.
-func createUser(db *sql.DB, name, email, rawPassword string) (int64, error) {
-
-	// PREPARE THE DATA: Hash the password using bcrypt.
-	// bcrypt.DefaultCost introduces intentional CPU delay to prevent brute-force attacks.
-	hp, err := bcrypt.GenerateFromPassword([]byte(rawPassword), bcrypt.DefaultCost)
-	if err != nil {
-		return 0, fmt.Errorf("hashing password failed: %w", err)
-	}
-
-	// EXECUTE THE QUERY:
-	// Notice the `?` symbols. These are positional placeholders.
-	stmt := `INSERT INTO users (name, email, hashed_password) VALUES (?, ?, ?)`
-
-	// Pass the arguments IN ORDER to replace the `?` parameters safely.
-	result, err := db.Exec(stmt, name, email, string(hp))
-	if err != nil {
-		return 0, fmt.Errorf("insert failed: %w", err)
-	}
-
-	// result object contains useful metadata like the auto-incremented ID
-	return result.LastInsertId()
 }

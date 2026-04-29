@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 03: Functions and Errors
+// Title: Order Summary
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Build a small order-summary program that combines validation, helper functions, first-class functions, closures, multiple return values, and explic...
+//
+// WHY THIS MATTERS:
+//   - This milestone is a pipeline of small functions: - validate inputs - stop early on error - calculate totals - apply pricing rules passed in as call...
+//
+// RUN:
+//   go run ./03-functions-errors/7-order-summary
+//
+// KEY TAKEAWAY:
+//   - Build a small order-summary program that combines validation, helper functions, first-class functions, closures, multiple return values, and explic...
+// ============================================================================
+
 package main
 
 import (
@@ -15,7 +34,6 @@ import (
 // Smaller helpers validate and calculate, one orchestration function owns the
 // sequence, and pricing rules are passed in as function values.
 //
-// Run: go run ./03-functions-errors/7-order-summary
 
 type pricingRule func(int) int
 
@@ -145,7 +163,8 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.10")
+	fmt.Println("NEXT UP: FE.10 panic-and-recover")
 	fmt.Println("Current: FE.7 (order summary)")
+	fmt.Println("Previous: FE.9 (closures-mechanics)")
 	fmt.Println("---------------------------------------------------")
 }

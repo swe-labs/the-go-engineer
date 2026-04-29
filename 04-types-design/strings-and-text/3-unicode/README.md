@@ -4,6 +4,8 @@
 
 Learn the difference between bytes, runes, and UTF-8 text in Go.
 
+> **Backward Reference:** In [Lesson 2: Formatting String](../2-formatting-string/README.md), you learned how to display text. Now we look at the bytes and runes that make up that text, ensuring you can handle international characters and symbols safely.
+
 ## Prerequisites
 
 - `ST.1` strings
@@ -65,15 +67,15 @@ The `unicode` package helps classify characters during validation and parsing.
 2. Compare byte length and rune count for an emoji-containing string.
 3. Add another `unicode` classification check.
 
-## ⚠️ In Production
-
+## In Production
 Unicode bugs are real production bugs. Counting bytes when you meant characters, slicing inside a multi-byte character, or iterating text incorrectly leads to broken validation, mangled UI text, and corrupted logs.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is `len(s)` not enough for many text problems?
 2. Why is `for range` a safer default than indexing byte-by-byte?
 3. What kinds of systems fail when they confuse bytes with characters?
+
+> **Forward Reference:** You now understand the basic building blocks of text in Go. For the next level of text processing, we look at pattern matching. In [Lesson 4: Regex](../4-regex/README.md), you will learn how to use regular expressions to find, validate, and extract complex data from strings.
 
 ## Next Step
 

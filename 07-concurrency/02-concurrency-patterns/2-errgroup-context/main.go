@@ -1,6 +1,25 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
 
+// ============================================================================
+// Section 07: Concurrency
+// Title: errgroup with Context Cancellation
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - errgroup with Context Cancellation fundamentals and practical application in Go.
+//
+// WHY THIS MATTERS:
+//   - errgroup with Context Cancellation provides a structured approach to writing clean Go code.
+//
+// RUN:
+//   go run ./07-concurrency/02-concurrency-patterns/2-errgroup-context
+//
+// KEY TAKEAWAY:
+//   - errgroup with Context Cancellation fundamentals and practical application in Go.
+// ============================================================================
+
 package main
 
 import (
@@ -14,12 +33,8 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-// ============================================================================
 // Stage 07: Concurrency Patterns - errgroup with Context Cancellation
-// Level: Advanced
-// ============================================================================
 //
-// WHAT YOU'LL LEARN:
 //   - errgroup.WithContext: automatic cancellation on first error
 //   - How to implement a fan-out/fan-in pipeline with errgroup
 //   - Producer plus multiple consumers as a bounded processing pattern
@@ -29,8 +44,6 @@ import (
 //   the moment any goroutine returns a non-nil error. This is the answer to
 //   "I launched 10 goroutines but one failed - how do I stop the other 9?"
 //
-// RUN: go run ./07-concurrency/02-concurrency-patterns/2-errgroup-context
-// ============================================================================
 
 type WorkItem struct {
 	URL      string

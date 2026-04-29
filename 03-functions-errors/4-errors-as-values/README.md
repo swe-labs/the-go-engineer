@@ -10,7 +10,7 @@ You can now return multiple values from functions. But what happens when somethi
 
 In Go, errors are just values. You return an error alongside your normal result, and the caller decides what to do. This is different from exceptions in other languages.
 
-This lesson builds on FE.3 by showing how to handle failure explicitly.
+> **Backward Reference:** In [Lesson 3: Multiple Return Values](../3-multiple-return-values/README.md), you learned how to return more than one result from a single function. Returning an error is simply the most common and important application of that feature.
 
 ## Prerequisites
 
@@ -148,15 +148,17 @@ toy function.
 - Why not use panic here?
   Because ordinary failure should stay in the normal return path.
 
-## ⚠️ In Production
+## In Production
 Go services rely on visible error handling.
 Returning errors as values keeps the success path and failure path readable.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** Now you know how to return errors when an operation fails. But how do you prevent bad data from causing operations to fail in the first place? In [Lesson 5: Validation](../5-validation/README.md), you will learn how to check inputs at the function boundary before performing expensive or dangerous work.
+
 ## Next Step
 
 Continue to `FE.5` validation.
