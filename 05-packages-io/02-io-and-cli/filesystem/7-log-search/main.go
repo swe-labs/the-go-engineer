@@ -8,16 +8,20 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Build a small log-search tool that walks directories, scans files line by line, and reports matching results without loading everything into memory...
+//   - How to build a high-performance log searching tool using recursive
+//     directory traversal and line-by-line scanning.
 //
 // WHY THIS MATTERS:
-//   - Build a small log-search tool that walks directories, scans files line by line, and reports matching results without loading everything into memory...
+//   - Searching through gigabytes of logs is a common task. Building your
+//     own tool ensures you understand how to do it without crashing the
+//     system due to high memory usage.
 //
 // RUN:
 //   go run ./05-packages-io/02-io-and-cli/filesystem/7-log-search
 //
 // KEY TAKEAWAY:
-//   - Build a small log-search tool that walks directories, scans files line by line, and reports matching results without loading everything into memory...
+//   - Always use streaming I/O (WalkDir and Scanner) for filesystem tools
+//     to keep memory usage low and constant.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -32,7 +36,7 @@ import (
 	"strings"
 )
 
-// Stage 05: Filesystem â€” Log Search Tool (Exercise)
+// Stage 05: Filesystem - Log Search Tool (Exercise)
 //
 //   - Recursive directory traversal with filepath.WalkDir
 //   - Line-by-line file reading with bufio.Scanner
@@ -42,11 +46,10 @@ import (
 // ENGINEERING DEPTH:
 //   `filepath.WalkDir` (introduced in Go 1.16) is the replacement for the older
 //   `filepath.Walk`. The critical difference is that `WalkDir` uses `fs.DirEntry`
-//   which is a lazy interface â€” it does NOT call `os.Stat()` on every single file.
+//   which is a lazy interface - it does NOT call `os.Stat()` on every single file.
 //   The old `Walk` function called `os.Stat()` on every file, which triggers a
 //   system call to the kernel for each file. On a directory with 100,000 files,
 //   `WalkDir` can be 10x faster because it avoids these redundant stat() syscalls.
-//
 
 // SearchResult holds the location and content of a matching line.
 type SearchResult struct {
@@ -58,7 +61,7 @@ type SearchResult struct {
 // searchFile opens a single file and scans it line-by-line for the keyword.
 // It returns a slice of all matching results found in that file.
 //
-// `bufio.Scanner` reads the file lazily â€” it never loads the entire file into
+// `bufio.Scanner` reads the file lazily - it never loads the entire file into
 // memory at once. This is critical for searching large log files (1GB+).
 func searchFile(filePath string, keyword string) ([]SearchResult, error) {
 	file, err := os.Open(filePath)
@@ -105,11 +108,11 @@ func searchDirectory(rootDir string, keyword string) ([]SearchResult, error) {
 	err := filepath.WalkDir(rootDir, func(path string, d os.DirEntry, err error) error {
 		if err != nil {
 			// If we can't access a file/dir, skip it rather than crashing.
-			fmt.Fprintf(os.Stderr, "  âš  Cannot access %s: %v\n", path, err)
+			fmt.Fprintf(os.Stderr, "  [WARN] Cannot access %s: %v\n", path, err)
 			return nil
 		}
 
-		// Skip directories â€” we only want files.
+		// Skip directories - we only want files.
 		if d.IsDir() {
 			return nil
 		}
@@ -123,7 +126,7 @@ func searchDirectory(rootDir string, keyword string) ([]SearchResult, error) {
 		// Search this file for the keyword.
 		results, err := searchFile(path, keyword)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "  âš  Error reading %s: %v\n", path, err)
+			fmt.Fprintf(os.Stderr, "  [WARN] Error reading %s: %v\n", path, err)
 			return nil
 		}
 
@@ -193,9 +196,15 @@ DONE: Deploy v2.1 to staging`,
 	}
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
+	fmt.Println("KEY TAKEAWAYS:")
 	fmt.Println("  - filepath.WalkDir recursively traverses directories efficiently")
 	fmt.Println("  - bufio.Scanner reads files line-by-line (constant memory)")
 	fmt.Println("  - Filter by extension to avoid searching binary files")
-	fmt.Println("  - Always handle errors gracefully â€” skip files you can't read")
+	fmt.Println("  - Always handle errors gracefully - skip files you can't read")
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: FS.8 fs-testing-seam")
+	fmt.Println("Current: FS.7 (log-search)")
+	fmt.Println("Previous: FS.6 (io-patterns)")
+	fmt.Println("---------------------------------------------------")
 }

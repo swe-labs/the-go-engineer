@@ -24,7 +24,7 @@
 
 package main
 
-// Stage 07: Concurrency â€” Concurrent Downloader (Exercise)
+// Stage 07: Concurrency - Concurrent Downloader (Exercise)
 //
 
 import (

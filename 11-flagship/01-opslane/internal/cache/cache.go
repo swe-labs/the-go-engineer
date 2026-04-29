@@ -170,7 +170,7 @@ func (sf *Singleflight) Do(key string, fn func() ([]byte, error)) (val []byte, e
 
 	// Ensure cleanup runs even if fn() panics.
 	// If a panic occurs, set c.err so that waiters receive an error
-	// instead of nil, nil — which would look like a successful empty result.
+	// instead of nil, nil - which would look like a successful empty result.
 	// Named returns ensure the leader also receives the error.
 	defer func() {
 		if r := recover(); r != nil {

@@ -81,12 +81,10 @@ go run ./02-language-basics/4-application-logger/_starter
 
 Expected output should show readable level names and a safe fallback for invalid input.
 
-## ⚠️ In Production
-
+## In Production
 Enum-like log levels are everywhere in services and tooling. Good logging systems depend on stable internal values and readable external text, especially when alerts and dashboards consume those levels downstream.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is it useful to separate the stored level value from the displayed level name?
 2. What bug does the bounds check inside `String()` prevent?
 3. Why is this exercise a better milestone than printing raw integers?

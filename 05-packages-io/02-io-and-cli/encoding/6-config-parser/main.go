@@ -8,16 +8,19 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Build a small JSON config loader that reads from disk, decodes from a stream, and validates required fields after parsing. This exercise is the Enc...
+//   - How to combine filesystem I/O and JSON decoding to load application configs.
+//   - Why and how to validate configuration objects after they are parsed.
 //
 // WHY THIS MATTERS:
-//   - Build a small JSON config loader that reads from disk, decodes from a stream, and validates required fields after parsing. This exercise is the Enc...
+//   - Real-world applications almost always use configuration files. A robust
+//     loader ensures the program starts with the correct, valid state.
 //
 // RUN:
 //   go run ./05-packages-io/02-io-and-cli/encoding/6-config-parser
 //
 // KEY TAKEAWAY:
-//   - Build a small JSON config loader that reads from disk, decodes from a stream, and validates required fields after parsing. This exercise is the Enc...
+//   - Post-parse validation is essential because missing JSON fields default
+//     silently to zero values.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -31,7 +34,7 @@ import (
 	"path/filepath"
 )
 
-// Stage 05: Encoding â€” Config File Parser (Exercise)
+// Stage 05: Encoding - Config File Parser (Exercise)
 //
 //   - Reading a JSON file from disk and decoding it into a struct
 //   - Validating required fields after parsing
@@ -45,7 +48,6 @@ import (
 //   the need to load the entire file into a `[]byte` first. For a 10KB config
 //   file this doesn't matter, but it establishes the correct habit for when
 //   you're processing 100MB JSON API responses in production.
-//
 
 // AppConfig represents the application configuration structure.
 // Each field's `json` tag maps it to a key in the JSON config file.
@@ -127,11 +129,11 @@ func main() {
 	// Load and display the config
 	config, err := loadConfig(configPath)
 	if err != nil {
-		fmt.Printf("âŒ Failed to load config: %v\n", err)
+		fmt.Printf("[ERROR] Failed to load config: %v\n", err)
 		os.Exit(1)
 	}
 
-	fmt.Println("âœ… Config loaded successfully!")
+	fmt.Println("[OK] Config loaded successfully!")
 	fmt.Println()
 	fmt.Printf("  App Name:      %s\n", config.AppName)
 	fmt.Printf("  Port:          %d\n", config.Port)
@@ -141,8 +143,14 @@ func main() {
 	fmt.Printf("  Allowed Hosts: %v\n", config.AllowedHosts)
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - json.NewDecoder streams from io.Reader â€” use for files & HTTP")
-	fmt.Println("  - Always validate config after parsing â€” zero values hide missing fields")
+	fmt.Println("KEY TAKEAWAYS:")
+	fmt.Println("  - json.NewDecoder streams from io.Reader - use for files & HTTP")
+	fmt.Println("  - Always validate config after parsing - zero values hide missing fields")
 	fmt.Println("  - Use %w in fmt.Errorf to wrap errors for context")
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: FS.1 files")
+	fmt.Println("Current: EN.6 (config-parser)")
+	fmt.Println("Previous: EN.5 (base64_encoding)")
+	fmt.Println("---------------------------------------------------")
 }

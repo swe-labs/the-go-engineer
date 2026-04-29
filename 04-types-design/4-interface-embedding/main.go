@@ -10,7 +10,7 @@
 //   - Learn how to embed one interface into another to build larger contracts from smaller pieces.
 //
 // WHY THIS MATTERS:
-//   - Think of a universal remote. It does not have buttons for every function directlyÃ¢â‚¬â€it embeds the capabilities of a TV remote, a DVD remote, a...
+//   - Think of a universal remote. It does not have buttons for every function directly-it embeds the capabilities of a TV remote, a DVD remote, and a soundbar remote.
 //
 // RUN:
 //   go run ./04-types-design/4-interface-embedding
@@ -88,7 +88,8 @@ func main() {
 	fmt.Println("  - io.ReadWriter = io.Reader + io.Writer")
 	fmt.Println("  - Embedding is static: compiler verifies all methods exist")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.5 Stringer")
-	fmt.Println("   Current: TI.4 (interface embedding)")
+	fmt.Println("NEXT UP: TI.5 stringer")
+	fmt.Println("Current: TI.4 (interface-embedding)")
+	fmt.Println("Previous: TI.3 (interfaces)")
 	fmt.Println("---------------------------------------------------")
 }

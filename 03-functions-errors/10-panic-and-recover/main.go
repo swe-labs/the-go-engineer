@@ -39,7 +39,7 @@ func accessDatabase(connected bool) {
 	}()
 
 	fmt.Println("Accessing database...")
-	
+
 	if !connected {
 		// Panic is used when the program reaches a state it cannot handle
 		panic("database connection lost during operation")

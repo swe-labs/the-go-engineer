@@ -1,127 +1,89 @@
-# CT.5 Timeout-Aware API Client
+# CT.5 Project: Timeout-Aware API Client
 
 ## Mission
 
-Build a small HTTP client that uses `context.WithTimeout` to enforce deadlines and fails clearly
-when a request takes too long.
-
-This exercise is the Context track milestone for Stage 07.
+Put your context knowledge into practice by building a robust HTTP client. Learn how to protect your application from "Stall" attacks and slow dependencies by enforcing strict timeouts on every outgoing network request.
 
 ## Prerequisites
 
-Complete these first:
+- `CT.4` with-value
 
-- `CT.1` background
-- `CT.2` with cancel
-- `CT.3` with timeout
-- `CT.4` with value
+## Mental Model
 
-## What You Will Build
+Think of this project as **The Stopwatch at the Bank**.
 
-Implement a client that:
+1. **The Request**: You go to the bank to ask for your balance.
+2. **The Stopwatch**: You tell yourself, "If I'm not back in my car in 10 minutes, I'm giving up and leaving."
+3. **The Connection**: The bank teller is slow. 10 minutes pass.
+4. **The Departure**: Because you had your stopwatch (`context.WithTimeout`), you leave the bank immediately. You are now free to go do other things (like checking another bank) instead of being stuck in line forever.
 
-1. creates a timeout-bound context for each outbound request
-2. attaches that context to the request with `http.NewRequestWithContext`
-3. returns a useful wrapped error when the deadline expires
-4. demonstrates both a successful request and a deliberately timed-out request
+## Visual Model
 
-## Files
+```mermaid
+graph LR
+    A[App] -- "http.NewRequestWithContext" --> C[HTTP Client]
+    C -- "TCP / TLS" --> S[Slow Server]
+    S -- "No Response" --> C
+    T[Timer] -- "Timeout Reached" --> C
+    C -- "Cancel Request" --> S
+    C -- "DeadlineExceeded" --> A
+```
 
-- [main.go](./main.go): complete solution with teaching comments
-- [_starter/main.go](./_starter/main.go): starter file with TODOs and requirements
+## Machine View
+
+When you use `http.NewRequestWithContext(ctx, ...)`:
+- The `http.DefaultClient` checks the context at every stage: DNS lookup, TCP dial, TLS handshake, and reading the response body.
+- If the context expires at **any** of these stages, the client immediately closes the underlying socket and returns an error.
+- This is significantly better than `http.Client.Timeout`, because it allows you to dynamically adjust the timeout based on the specific request or propagate a deadline from an incoming RPC call.
 
 ## Run Instructions
-
-Run the completed solution:
 
 ```bash
 go run ./07-concurrency/01-concurrency/context/5-timeout-client
 ```
 
-Run the starter:
-
-```bash
-go run ./07-concurrency/01-concurrency/context/5-timeout-client/_starter
-```
-
-## Success Criteria
-
-Your finished solution should:
-
-- use `context.WithTimeout` instead of making an unbounded HTTP call
-- attach the context to the request itself, not just the outer function
-- distinguish timeout failures from other request errors
-- keep the timeout behavior visible in runnable output
-
-## Note
-
-The current example makes live HTTP requests, so it expects network access when you run the full
-solution.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Mental Model
-
-Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
-
-## Visual Model
-
-Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
-
-## Machine View
-
-At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
-
 ## Solution Walkthrough
 
-The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+- **http.NewRequestWithContext**: This is the modern replacement for `http.NewRequest`. It permanently links the request's lifetime to the context. If you use the older method, the context is ignored, and your request can hang forever.
+- **ctx.Err() == context.DeadlineExceeded**: We use this check to provide a helpful error message. It's important to distinguish between "The server is down" (Connection Refused) and "The server is too slow" (Timeout).
+- **Resource Cleanup**: Even though the context times out, you must still call `cancel()` via `defer`. This ensures that the context's internal timer is stopped immediately, freeing up CPU resources.
+
 
 ## Try It
 
-Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+1. Change the second example's timeout to `10 seconds`. Watch it succeed after a 3-second delay (httpbin.org/delay/3).
+2. Point the client to a URL that doesn't exist. Observe the difference between a "No such host" error and a "Deadline Exceeded" error.
+3. Try to fetch a massive file (e.g., 100MB). Set the timeout to `1 second`. Notice how the request is cancelled **while reading the body**.
 
 ## Verification Surface
 
-The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+Observe the two outcomes (Success vs. Forced Timeout):
+
+```text
+=== Timeout-Aware API Client ===
+
+1️⃣  Fetching httpbin.org with 5s timeout...
+   ✅ Response (200 bytes): { "args": {}, ... }
+
+2️⃣  Fetching with impossibly short timeout (1ms)...
+   ❌ Expected timeout: request timed out after 1ms: Get "https://httpbin.org/delay/3": context deadline exceeded
+```
 
 ## In Production
-
-Every outbound HTTP call in a production service must have a timeout. Without one, a single slow upstream dependency can exhaust all available goroutines and connection pool slots, causing the entire service to hang — a failure mode known as cascading failure or "grey failure." The `context.WithTimeout` pattern this exercise teaches is the standard way Go services enforce request deadlines. In production, timeouts are typically configured per-endpoint rather than globally, because a health check that should complete in 100ms has very different timeout requirements than a batch data export that legitimately takes 30 seconds. Teams that do not distinguish between timeout errors and other request failures end up retrying requests that will never succeed, amplifying load on an already-struggling upstream. The pattern of attaching the context to the request itself — not just checking it in the outer function — ensures that the HTTP client, DNS resolver, TLS handshake, and response body read all respect the same deadline.
+**Set defaults at the Client level too.**
+While using a Context per request is best, you should also configure your `http.Client` with a global `Timeout` as a "Last Resort" safety net.
+```go
+client := &http.Client{
+    Timeout: 30 * time.Second,
+}
+```
+In a high-scale microservice architecture, a single service without timeouts can cause a "Deadly Embrace" where every service in the chain gets stuck waiting for each other, leading to a total system blackout.
 
 ## Thinking Questions
-
-1. Why should the context be attached to the HTTP request with `http.NewRequestWithContext` instead of checking `ctx.Done()` in a separate goroutine?
-2. If an upstream service is consistently slow, should your client retry with the same timeout, retry with a longer timeout, or stop retrying entirely? What factors determine the right strategy?
-3. What happens to the TCP connection when a context timeout fires while the server is still writing the response body?
-4. How would you set different timeouts for different API endpoints in the same service without duplicating client code?
+1. If the server receives the request but the client times out while waiting for the response, does the server know to stop working? (Hint: Only if the server also uses the request context!).
+2. Why is `NewRequestWithContext` better than setting `client.Timeout`?
+3. How can you use `context.WithValue` to track which requests timed out in your logs?
 
 ## Next Step
 
-After you complete this exercise, continue back to the [Context track](../README.md) or the
-[Stage 07 overview](../../README.md).
-
-
+We've mastered Context. Now let's explore how Go handles time itself-timers, tickers, and scheduling. Continue to [TM.1 Sleeping & Timeouts](../../time-and-scheduling/README.md).

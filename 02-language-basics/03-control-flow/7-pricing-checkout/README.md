@@ -91,12 +91,10 @@ go run ./02-language-basics/03-control-flow/7-pricing-checkout/_starter
 
 The finished program should process the whole cart, price known items correctly, skip unknown items, and print a final subtotal.
 
-## ⚠️ In Production
-
+## In Production
 Checkout logic is exactly where control-flow mistakes become money mistakes. Clear rule ordering, safe skipping, and explicit subtotal updates matter in carts, billing systems, and batch pricing jobs.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is `continue` a good fit for unknown items here?
 2. Why does the discount belong in an `if` instead of inside the `switch` alone?
 3. What kinds of bugs happen when the subtotal update is placed in the wrong spot?

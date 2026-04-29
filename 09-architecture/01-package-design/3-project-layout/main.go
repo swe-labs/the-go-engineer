@@ -8,16 +8,19 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Decide when a Go project should stay flat, when it needs `internal/`, and when `cmd/` or other top-level directories actually earn their place. Thi...
+//   - Decide when a Go project should stay flat, when `internal/` is useful,
+//     and when `cmd/` or `pkg/` have earned their place.
 //
 // WHY THIS MATTERS:
-//   - Decide when a Go project should stay flat, when it needs `internal/`, and when `cmd/` or other top-level directories actually earn their place. Thi...
+//   - Project layout communicates ownership, import boundaries, and build
+//     intent before a reader opens the first source file.
 //
 // RUN:
 //   go run ./09-architecture/01-package-design/3-project-layout
 //
 // KEY TAKEAWAY:
-//   - Decide when a Go project should stay flat, when it needs `internal/`, and when `cmd/` or other top-level directories actually earn their place. Thi...
+//   - Start simple, add structure when it protects boundaries, and avoid
+//     copying large layouts before the project needs them.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -43,59 +46,59 @@ func main() {
 	fmt.Println("=== Standard Go Project Layout ===")
 	fmt.Println()
 
-	fmt.Println("ðŸ“ SIMPLE PROJECT (library or small app)")
+	fmt.Println("SIMPLE PROJECT (library or small app)")
 	fmt.Println("   Perfect for: libraries, small tools, learning")
 	fmt.Println()
 	fmt.Println("   mylib/")
-	fmt.Println("   â”œâ”€â”€ go.mod")
-	fmt.Println("   â”œâ”€â”€ go.sum")
-	fmt.Println("   â”œâ”€â”€ mylib.go          <- main package code")
-	fmt.Println("   â”œâ”€â”€ mylib_test.go     <- tests alongside code")
-	fmt.Println("   â””â”€â”€ README.md")
+	fmt.Println("   |-- go.mod")
+	fmt.Println("   |-- go.sum")
+	fmt.Println("   |-- mylib.go          <- main package code")
+	fmt.Println("   |-- mylib_test.go     <- tests alongside code")
+	fmt.Println("   `-- README.md")
 	fmt.Println()
 
-	fmt.Println("ðŸ“ MEDIUM PROJECT (single binary + some packages)")
+	fmt.Println("MEDIUM PROJECT (single binary plus packages)")
 	fmt.Println("   Perfect for: web servers, CLI tools, microservices")
 	fmt.Println()
 	fmt.Println("   myapp/")
-	fmt.Println("   â”œâ”€â”€ go.mod")
-	fmt.Println("   â”œâ”€â”€ main.go           <- entry point (package main)")
-	fmt.Println("   â”œâ”€â”€ internal/         <- private packages (compiler-enforced)")
-	fmt.Println("   â”‚   â”œâ”€â”€ auth/")
-	fmt.Println("   â”‚   â”‚   â”œâ”€â”€ auth.go")
-	fmt.Println("   â”‚   â”‚   â””â”€â”€ auth_test.go")
-	fmt.Println("   â”‚   â”œâ”€â”€ store/")
-	fmt.Println("   â”‚   â”‚   â”œâ”€â”€ store.go")
-	fmt.Println("   â”‚   â”‚   â””â”€â”€ store_test.go")
-	fmt.Println("   â”‚   â””â”€â”€ handler/")
-	fmt.Println("   â”‚       â”œâ”€â”€ handler.go")
-	fmt.Println("   â”‚       â””â”€â”€ handler_test.go")
-	fmt.Println("   â”œâ”€â”€ Makefile")
-	fmt.Println("   â””â”€â”€ README.md")
+	fmt.Println("   |-- go.mod")
+	fmt.Println("   |-- main.go           <- entry point (package main)")
+	fmt.Println("   |-- internal/         <- private packages (compiler-enforced)")
+	fmt.Println("   |   |-- auth/")
+	fmt.Println("   |   |   |-- auth.go")
+	fmt.Println("   |   |   `-- auth_test.go")
+	fmt.Println("   |   |-- store/")
+	fmt.Println("   |   |   |-- store.go")
+	fmt.Println("   |   |   `-- store_test.go")
+	fmt.Println("   |   `-- handler/")
+	fmt.Println("   |       |-- handler.go")
+	fmt.Println("   |       `-- handler_test.go")
+	fmt.Println("   |-- Makefile")
+	fmt.Println("   `-- README.md")
 	fmt.Println()
 
-	fmt.Println("ðŸ“ LARGE PROJECT (multiple binaries, shared code)")
+	fmt.Println("LARGE PROJECT (multiple binaries, shared code)")
 	fmt.Println("   Perfect for: monorepos, complex systems, multi-service apps")
 	fmt.Println()
 	fmt.Println("   platform/")
-	fmt.Println("   â”œâ”€â”€ go.mod")
-	fmt.Println("   â”œâ”€â”€ cmd/              <- each subdirectory is a binary")
-	fmt.Println("   â”‚   â”œâ”€â”€ api/")
-	fmt.Println("   â”‚   â”‚   â””â”€â”€ main.go   <- go build ./cmd/api")
-	fmt.Println("   â”‚   â”œâ”€â”€ worker/")
-	fmt.Println("   â”‚   â”‚   â””â”€â”€ main.go   <- go build ./cmd/worker")
-	fmt.Println("   â”‚   â””â”€â”€ migrate/")
-	fmt.Println("   â”‚       â””â”€â”€ main.go   <- go build ./cmd/migrate")
-	fmt.Println("   â”œâ”€â”€ internal/         <- private shared packages")
-	fmt.Println("   â”‚   â”œâ”€â”€ auth/")
-	fmt.Println("   â”‚   â”œâ”€â”€ store/")
-	fmt.Println("   â”‚   â””â”€â”€ email/")
-	fmt.Println("   â”œâ”€â”€ pkg/              <- public shared packages")
-	fmt.Println("   â”‚   â””â”€â”€ middleware/")
-	fmt.Println("   â”œâ”€â”€ migrations/       <- SQL migration files")
-	fmt.Println("   â”œâ”€â”€ Makefile")
-	fmt.Println("   â”œâ”€â”€ Dockerfile")
-	fmt.Println("   â””â”€â”€ README.md")
+	fmt.Println("   |-- go.mod")
+	fmt.Println("   |-- cmd/              <- each subdirectory is a binary")
+	fmt.Println("   |   |-- api/")
+	fmt.Println("   |   |   `-- main.go   <- go build ./cmd/api")
+	fmt.Println("   |   |-- worker/")
+	fmt.Println("   |   |   `-- main.go   <- go build ./cmd/worker")
+	fmt.Println("   |   `-- migrate/")
+	fmt.Println("   |       `-- main.go   <- go build ./cmd/migrate")
+	fmt.Println("   |-- internal/         <- private shared packages")
+	fmt.Println("   |   |-- auth/")
+	fmt.Println("   |   |-- store/")
+	fmt.Println("   |   `-- email/")
+	fmt.Println("   |-- pkg/              <- public shared packages")
+	fmt.Println("   |   `-- middleware/")
+	fmt.Println("   |-- migrations/       <- SQL migration files")
+	fmt.Println("   |-- Makefile")
+	fmt.Println("   |-- Dockerfile")
+	fmt.Println("   `-- README.md")
 	fmt.Println()
 
 	fmt.Println("=== Directory Purpose Guide ===")
@@ -120,20 +123,21 @@ func main() {
 	}
 
 	fmt.Println("=== Anti-Patterns (Avoid These) ===")
-	fmt.Println("  âŒ src/                - Go does not use src/ the way Java does")
-	fmt.Println("  âŒ models/             - Too vague. Name by domain: user/, order/")
-	fmt.Println("  âŒ utils/ or helpers/  - Junk drawer. Split by responsibility")
-	fmt.Println("  âŒ Over-engineering    - Do not use cmd/internal/pkg/ for a 200-line app")
+	fmt.Println("  [avoid] src/                - Go does not use src/ the way Java does")
+	fmt.Println("  [avoid] models/             - Too vague. Name by domain: user/, order/")
+	fmt.Println("  [avoid] utils/ or helpers/  - Junk drawer. Split by responsibility")
+	fmt.Println("  [avoid] Over-engineering    - Do not use cmd/internal/pkg/ for a 200-line app")
 	fmt.Println()
 
 	fmt.Println("KEY TAKEAWAYS:")
 	fmt.Println("  1. Start simple and add structure as the project grows")
-	fmt.Println("  2. cmd/ is for multiple binaries, internal/ is for private packages")
+	fmt.Println("  2. cmd/ is for multiple binaries; internal/ is for private packages")
 	fmt.Println("  3. pkg/ is optional - use it only for code meant to be shared publicly")
 	fmt.Println("  4. Tests live next to the code they verify (user.go -> user_test.go)")
-	fmt.Println("  5. Do not cargo-cult a complex layout for a small project")
+	fmt.Println("  5. Do not copy a complex layout for a small project")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: ARCH.1")
-	fmt.Println("   Current: PD.3 (project layout)")
+	fmt.Println("NEXT UP: ARCH.1")
+	fmt.Println("Current: PD.3 (project layout)")
+	fmt.Println("Previous: PD.2 (visibility)")
 	fmt.Println("---------------------------------------------------")
 }

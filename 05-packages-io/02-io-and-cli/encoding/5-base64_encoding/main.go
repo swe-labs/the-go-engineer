@@ -8,16 +8,18 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Base64 fundamentals and practical application in Go.
+//   - How to encode binary data into text-safe Base64 strings.
+//   - The difference between Standard and URL-safe Base64 encodings.
 //
 // WHY THIS MATTERS:
-//   - Base64 provides a structured approach to writing clean Go code.
+//   - Base64 allows binary data (images, keys, certificates) to be safely
+//     transmitted over protocols designed for text (HTTP headers, JSON, URLs).
 //
 // RUN:
 //   go run ./05-packages-io/02-io-and-cli/encoding/5-base64_encoding
 //
 // KEY TAKEAWAY:
-//   - Base64 fundamentals and practical application in Go.
+//   - Base64 is a transport format, NOT encryption. It makes binary data text-safe.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -30,7 +32,7 @@ import (
 	"log"
 )
 
-// Stage 05: I/O and CLI â€” Base64 Encoding
+// Stage 05: I/O and CLI - Base64 Encoding
 //
 //   - What base64 is and why it is used
 //   - base64.StdEncoding for general text-safe transport
@@ -83,14 +85,16 @@ func main() {
 	fmt.Printf("   Decoded:  %s\n", string(decodedToken))
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
+	fmt.Println("KEY TAKEAWAYS:")
 	fmt.Println("  - Base64 is for transporting binary data over text-only protocols")
 	fmt.Println("  - It is NOT encryption (it is easily decodable by anyone)")
 	fmt.Println("  - base64.StdEncoding works for JSON, headers, and general transport")
 	fmt.Println("  - base64.URLEncoding avoids + and / in URL contexts")
 	fmt.Println("  - Base64 increases data size by about 33%")
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: EN.6 config parser")
-	fmt.Println("   Current: EN.5 (Base64)")
+	fmt.Println("NEXT UP: EN.6 config-parser")
+	fmt.Println("Current: EN.5 (base64_encoding)")
+	fmt.Println("Previous: EN.4 (decode)")
 	fmt.Println("---------------------------------------------------")
 }

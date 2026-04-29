@@ -1,103 +1,87 @@
-# CP.5 URL Health Checker
+# CP.5 Project: URL Health Checker
 
 ## Mission
 
-Build a concurrent URL checker that caps request fan-out, keeps request latency visible, and
-reuses HTTP clients safely.
-
-This exercise is the live capstone surface for Stage 07.
+Build a high-performance URL Health Checker that can scan hundreds of endpoints simultaneously without overwhelming the network or your own system. Learn how to combine `errgroup` for fan-out, `sync.Pool` for client reuse, and `sort` for presentation.
 
 ## Prerequisites
 
-Complete these first:
+- `CP.4` bounded-pipeline
 
-- `CP.1` errgroup basics
-- `CP.2` errgroup with context cancellation
-- `CP.3` sync.Pool
-- `CP.4` bounded pipeline exercise
+## Mental Model
 
-## What You Will Build
+Think of this project as **A Team of Mystery Shoppers**.
 
-Implement a health checker that:
+1. **The List (`urls`)**: You have a list of 50 stores to check.
+2. **The Shoppers (`Workers`)**: You hire 5 shoppers (`SetLimit: 5`).
+3. **The Script (`http.MethodHead`)**: You tell them, "Don't buy anything; just check if the door is open and the lights are on." (HEAD request is faster than GET).
+4. **The Report (`Results Slice`)**: Each shopper reports back with how long it took to get there and if the store was open.
+5. **The Summary**: You sort the reports by speed to see which stores are the most responsive.
 
-1. issues concurrent HTTP HEAD requests with `errgroup.WithContext`
-2. caps active checks with `SetLimit`
-3. collects the result for each URL, including status and latency
-4. sorts results by latency for a stable final report
-5. reuses HTTP clients through a `sync.Pool`
+## Visual Model
 
-## Files
+```mermaid
+graph TD
+    M[Main] --> EG[errgroup]
+    EG -- "Limit: 5" --> W[Workers]
+    W --> |HEAD| URL1[go.dev]
+    W --> |HEAD| URL2[github.com]
+    W --> |HEAD| URL3[...]
+    W --> R[Results Slice]
+    R --> S[Sort by Latency]
+    S --> P[Print Table]
+```
 
-- [main.go](./main.go): complete solution with teaching comments
-- [_starter/main.go](./_starter/main.go): starter file with TODOs and requirements
+## Machine View
+
+- **HEAD Request**: Using `http.MethodHead` tells the server to only send the headers, not the entire HTML body. This saves bandwidth and reduces latency for both you and the server.
+- **Client Reuse**: `http.Client` objects are thread-safe and designed for reuse. By pooling them (or simply using a single shared client), you benefit from **Keep-Alive** connections. This means Go doesn't have to re-negotiate the TCP/TLS handshake for every request to the same host.
+- **Wait vs Results**: Note that we return `nil` from `g.Go`. This is because we want the checker to continue even if one URL is down. We capture the error inside our `CheckResult` struct instead of failing the whole group.
 
 ## Run Instructions
-
-Run the completed solution:
 
 ```bash
 go run ./07-concurrency/02-concurrency-patterns/5-url-checker-exercise
 ```
 
-Run the starter:
-
-```bash
-go run ./07-concurrency/02-concurrency-patterns/5-url-checker-exercise/_starter
-```
-
-## Success Criteria
-
-Your finished solution should:
-
-- bound concurrent HTTP checks instead of launching them without limits
-- keep request construction context-aware
-- sort output by latency instead of emitting random goroutine order
-- reuse pooled clients safely without carrying stale state between checks
-
-## Note
-
-The current example uses live HTTP endpoints, so it expects network access when you run the full
-solution.
-
-
-## Mental Model
-
-Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
-
-## Visual Model
-
-Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
-
-## Machine View
-
-At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
-
 ## Solution Walkthrough
 
-The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+- **http.Client Pooling**: We use `sync.Pool` to manage our HTTP clients. Each client has a 5-second timeout. This prevents one "zombie" server from blocking our entire checker forever.
+- **The results Slice**: We pre-allocate a slice of exactly the right size: `make([]CheckResult, len(urls))`. Because each goroutine writes to its own specific index `i`, we don't need a Mutex to protect this slice! This is a high-performance "Disjoint Write" pattern.
+- **sort.Slice**: After `g.Wait()` returns, we know the slice is full. We use the standard library's sort package to re-order the results based on latency before printing them.
+
 
 ## Try It
 
-Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+1. Add a URL that doesn't exist (e.g., `https://this-is-not-a-real-site.com`). Observe how the checker handles the network error gracefully.
+2. Change the limit to `1`. Observe that the "Total Time" now matches the "Sequential Time."
+3. Instead of a HEAD request, change it to a GET request and read the `Content-Length` header.
 
 ## Verification Surface
 
-The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+Observe the table of results sorted by speed:
+
+```text
+=== URL Health Checker ===
+
+RESULT  URL                                           STATUS   LATENCY
+------  ---                                           ------   -------
+OK      https://go.dev                                200      120ms
+OK      https://github.com                            200      150ms
+OK      https://httpbin.org/status/200                200      250ms
+
+Total time: 260ms (would be 850ms sequential)
+```
 
 ## In Production
-
-Health checking is a fundamental production operations pattern. Every load balancer, service mesh, and container orchestrator uses health checks to decide whether to route traffic to a given instance. The concurrent fan-out pattern this exercise teaches — bounded HTTP checks with result aggregation — is exactly how production monitoring systems like Prometheus blackbox exporter, uptime robots, and internal SLA monitors work. Sorting results by latency is not cosmetic: it reveals which endpoints are degrading before they fail completely, giving operations teams early warning. In production, health checkers run continuously on intervals and feed alerting systems. The `sync.Pool` for HTTP clients matters at scale because creating a new `http.Client` per check means establishing a new TCP connection (and TLS handshake) every time, adding hundreds of milliseconds of latency and wasting system resources. Reusing clients allows connection pooling via `http.Transport`, which keeps established connections warm.
+**Don't use `http.DefaultClient`.**
+The default client has no timeout. If a server accepts a connection but never sends data, your goroutine will hang forever. Always create your own `http.Client` with a strict `Timeout` (as seen in the `New` function of our pool).
 
 ## Thinking Questions
-
-1. Why does this exercise use HTTP HEAD requests instead of GET requests for health checking, and what information do you lose by using HEAD?
-2. If one of the checked URLs has a DNS resolution failure that takes 30 seconds to timeout, how does that affect the other concurrent checks?
-3. How would you modify this tool to run as a continuous background service that checks URLs every 60 seconds and alerts when latency exceeds a threshold?
-4. What is the difference between reusing an `http.Client` via `sync.Pool` and simply sharing a single global `http.Client` across all goroutines?
+1. Why is a HEAD request better than a GET request for a health checker?
+2. If we have 1,000 URLs to check, what is a reasonable `SetLimit`?
+3. How can we modify this to stop as soon as we find **one** failing URL? (Hint: Return an error from `g.Go`).
 
 ## Next Step
 
-After you complete this exercise, continue to the [Stage 07 overview](../README.md) or move to
-[Stage 08: Quality and Performance](../../../08-quality-test/01-quality-and-performance).
-
-
+We've mastered the pipeline. Now let's explore the most flexible concurrency pattern: the long-running Worker Pool. Continue to [CP.6 Worker Pool](../6-worker-pool/README.md).

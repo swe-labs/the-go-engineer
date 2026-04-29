@@ -8,16 +8,18 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Build Tags fundamentals and practical application in Go.
+//   - How to use build constraints to conditionally compile code and separate
+//     platform-specific or environment-specific logic.
 //
 // WHY THIS MATTERS:
-//   - Build Tags provides a structured approach to writing clean Go code.
+//   - Build tags allow you to manage platform-specific code (Windows vs Linux)
+//     or isolate slow integration tests from the fast unit-test suite.
 //
 // RUN:
 //   go run ./05-packages-io/01-modules-and-packages/4-build-tags
 //
 // KEY TAKEAWAY:
-//   - Build Tags fundamentals and practical application in Go.
+//   - Use '//go:build' to control which files are included in your binary.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -30,7 +32,7 @@ import (
 	"runtime"
 )
 
-// Stage 05: Modules & Packages â€” Build Tags
+// Stage 05: Modules & Packages - Build Tags
 //
 //   - How `//go:build` constraints conditionally compile code.
 //   - How to separate platform-specific logic (Windows vs Linux).
@@ -54,8 +56,10 @@ func main() {
 	// Look at os_windows.go and os_unix.go. The compiler automatically
 	// selects the correct file based on the implicit build tags of the target OS.
 	fmt.Println(GetSystemDetails())
-}
 
-// ---------------------------------------------------
-// NEXT UP: CL.1
-// ---------------------------------------------------
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: CL.1 args")
+	fmt.Println("Current: MP.4 (build-tags)")
+	fmt.Println("Previous: MP.3 (versioning-workshop)")
+	fmt.Println("---------------------------------------------------")
+}

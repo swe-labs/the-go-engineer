@@ -11,7 +11,7 @@
 //   - Build confidence with the terminal as the text-based environment that launches programs, passes arguments, and handles output streams.
 //
 // WHY THIS MATTERS:
-//   - The terminal is not â€œwhere scary commands live.â€ It is a process-launching and output-reading interface for the operating system.
+//   - The terminal is not "where scary commands live." It is a process-launching and output-reading interface for the operating system.
 //
 // RUN:
 //   go run ./00-how-computers-work/4-terminal-confidence

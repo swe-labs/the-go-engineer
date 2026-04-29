@@ -30,7 +30,7 @@ import (
 
 //
 //   - What methods are: functions attached to a type
-//   - VALUE receivers vs POINTER receivers â€” the most critical distinction
+//   - VALUE receivers vs POINTER receivers - the most critical distinction
 //   - When to use each receiver type (the golden rule)
 //   - Why methods exist: they enable interfaces
 //   - Method sets and how they affect interface satisfaction
@@ -63,20 +63,20 @@ type BankAccount struct {
 
 func (a *BankAccount) Deposit(amount float64) {
 	if amount <= 0 {
-		fmt.Println("  âŒ Deposit amount must be positive")
+		fmt.Println("  ❌ Deposit amount must be positive")
 		return
 	}
 	a.Balance += amount
-	fmt.Printf("  ðŸ’° Deposited $%.2f â†’ Balance: $%.2f\n", amount, a.Balance)
+	fmt.Printf("  💰 Deposited $%.2f -> Balance: $%.2f\n", amount, a.Balance)
 }
 
 func (a *BankAccount) Withdraw(amount float64) bool {
 	if amount > a.Balance {
-		fmt.Printf("  âŒ Insufficient funds: need $%.2f, have $%.2f\n", amount, a.Balance)
+		fmt.Printf("  ❌ Insufficient funds: need $%.2f, have $%.2f\n", amount, a.Balance)
 		return false
 	}
 	a.Balance -= amount
-	fmt.Printf("  ðŸ’¸ Withdrew $%.2f â†’ Balance: $%.2f\n", amount, a.Balance)
+	fmt.Printf("  💸 Withdrew $%.2f -> Balance: $%.2f\n", amount, a.Balance)
 	return true
 }
 
@@ -117,12 +117,13 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Value receiver (c Circle):  works on a COPY â€” for read-only methods")
-	fmt.Println("  - Pointer receiver (c *Circle): works on ORIGINAL â€” for mutation")
+	fmt.Println("  - Value receiver (c Circle):  works on a COPY - for read-only methods")
+	fmt.Println("  - Pointer receiver (c *Circle): works on ORIGINAL - for mutation")
 	fmt.Println("  - THE GOLDEN RULE: If ANY method needs a pointer, make ALL methods pointers")
 	fmt.Println("  - Go auto-dereferences: c.Scale() works even if c is not a pointer")
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: TI.3 interfaces")
-	fmt.Println("   Current: TI.2 (methods)")
+	fmt.Println("Current: TI.2 (methods)")
+	fmt.Println("Previous: TI.1 (structs)")
 	fmt.Println("---------------------------------------------------")
 }

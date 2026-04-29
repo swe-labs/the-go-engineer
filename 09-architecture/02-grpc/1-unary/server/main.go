@@ -21,8 +21,8 @@ import (
 )
 
 // ============================================================================
-// Section 26: gRPC — Unary Server
-// Level: Beginner → Intermediate
+// Section 26: gRPC - Unary Server
+// Level: Beginner -> Intermediate
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -33,19 +33,19 @@ import (
 //
 // ENGINEERING DEPTH:
 //   The generated OrderServiceServer interface mandates that every RPC method
-//   you defined in the .proto file is implemented. The compiler enforces this —
+//   you defined in the .proto file is implemented. The compiler enforces this -
 //   forget a method and your build breaks. This is exactly the "interfaces as
 //   contracts" pattern from Section 05, applied at the network boundary.
 //
-//   gRPC STATUS CODES — the most important ones:
-//     codes.OK           — success
-//     codes.NotFound     — resource doesn't exist
-//     codes.InvalidArgument — bad request (wrong data type, missing field)
-//     codes.Unauthenticated — missing/invalid credentials
-//     codes.PermissionDenied — valid credentials, insufficient permissions
-//     codes.Internal     — server-side error (like HTTP 500)
-//     codes.Unavailable  — service is temporarily down (retry-able)
-//     codes.DeadlineExceeded — context timed out before completion
+//   gRPC STATUS CODES - the most important ones:
+//     codes.OK           - success
+//     codes.NotFound     - resource doesn't exist
+//     codes.InvalidArgument - bad request (wrong data type, missing field)
+//     codes.Unauthenticated - missing/invalid credentials
+//     codes.PermissionDenied - valid credentials, insufficient permissions
+//     codes.Internal     - server-side error (like HTTP 500)
+//     codes.Unavailable  - service is temporarily down (retry-able)
+//     codes.DeadlineExceeded - context timed out before completion
 //
 // RUN:
 //   Terminal 1: go run ./09-architecture/02-grpc/1-unary/server
@@ -60,7 +60,7 @@ type OrderServer struct {
 	logger                             *slog.Logger
 }
 
-// CreateOrder handles unary RPC: one request → one response.
+// CreateOrder handles unary RPC: one request -> one response.
 func (s *OrderServer) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*pb.CreateOrderResponse, error) {
 	// Read incoming metadata (equivalent to HTTP request headers)
 	if md, ok := metadata.FromIncomingContext(ctx); ok {
@@ -69,7 +69,7 @@ func (s *OrderServer) CreateOrder(ctx context.Context, req *pb.CreateOrderReques
 		}
 	}
 
-	// Input validation — return codes.InvalidArgument for bad inputs
+	// Input validation - return codes.InvalidArgument for bad inputs
 	if req.CustomerId == "" {
 		return nil, status.Error(codes.InvalidArgument, "customer_id is required")
 	}
@@ -119,7 +119,7 @@ func (s *OrderServer) GetOrder(ctx context.Context, req *pb.GetOrderRequest) (*p
 }
 
 // ============================================================================
-// Interceptors — gRPC middleware
+// Interceptors - gRPC middleware
 // ============================================================================
 // Interceptors wrap every RPC call with cross-cutting concerns:
 // authentication, logging, metrics, rate limiting, panic recovery.
@@ -203,13 +203,13 @@ func main() {
 	}
 
 	// KEY TAKEAWAY:
-	// - Implement the generated Server interface — one method per RPC
+	// - Implement the generated Server interface - one method per RPC
 	// - Use status.Error(code, msg) not errors.New() for gRPC errors
-	// - Embed UnimplementedOrderServiceServer — future-proofs against new RPCs
+	// - Embed UnimplementedOrderServiceServer - future-proofs against new RPCs
 	// - Chain interceptors for logging, auth, recovery (gRPC middleware)
 	// - metadata.FromIncomingContext reads gRPC headers
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: GR.3 unary client")
+	fmt.Println("NEXT UP: GR.3 unary client")
 	fmt.Println("   Current: GR.2 (unary server)")
 	fmt.Println("---------------------------------------------------")
 }

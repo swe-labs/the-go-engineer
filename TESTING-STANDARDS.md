@@ -126,7 +126,7 @@ func setupTestDB(t *testing.T) *sql.DB {
 | Area | Target |
 | --- | --- |
 | General minimum where no stricter section target exists | 75% |
-| Phase 0–1 foundation lessons with testable behavior | 80% |
+| Phase 0-1 foundation lessons with testable behavior | 80% |
 | s06 Backend, APIs & Databases | 85% |
 | s08 Quality & Testing | 95% |
 | s09 Architecture & Security | 85% |

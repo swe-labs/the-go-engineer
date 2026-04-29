@@ -139,12 +139,11 @@ This final mutation proves the new slice no longer shares storage with the origi
 - How do I avoid accidental sharing?
   Copy the values into a new slice before making independent changes.
 
-## ⚠️ In Production
+## In Production
 This lesson prevents one of the most common slice bugs in Go: changing shared data accidentally
 because two slices still point at the same backing array.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

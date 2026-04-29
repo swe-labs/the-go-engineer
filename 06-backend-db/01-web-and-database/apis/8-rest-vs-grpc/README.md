@@ -2,27 +2,36 @@
 
 ## Mission
 
-Compare when REST is a better fit and when gRPC earns its extra contract machinery.
+Examine the technical and architectural trade-offs between REST/JSON and gRPC/Protobuf, and learn how to make an informed decision on which transport to use for a given project.
 
 ## Prerequisites
 
-- API.7
+- `API.7` grpc-interceptors
 
 ## Mental Model
 
-No transport is universally best. The right choice depends on clients, tooling, latency, and discoverability requirements.
+Think of the choice between REST and gRPC as **Choosing a Vehicle**.
+
+1. **REST (The Family Sedan)**: It's comfortable, everyone knows how to drive it, and it can go almost anywhere (any browser, any language). It's not the fastest car on the track, but it's the most versatile.
+2. **gRPC (The Formula 1 Race Car)**: It's incredibly fast, custom-built for performance, and uses advanced tech (HTTP/2, Binary framing). However, you need a specialized driver and a specific track (Protobuf compiler, HTTP/2 infrastructure) to use it. You wouldn't use an F1 car to go to the grocery store (build a public web API).
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["REST vs gRPC - the trade-off"] --> B["REST is simpler for browsers and public integration."]
-    B --> C["Pick the transport that matches clients and operational constraints."]
+    A["Need an API?"] --> B{"Who is the client?"}
+    B -- "Public / Web Browser" --> C["REST / JSON"]
+    B -- "Internal Microservice" --> D{"High Performance?"}
+    D -- "Yes" --> E["gRPC / Protobuf"]
+    D -- "No" --> C
 ```
 
 ## Machine View
 
-Transport choice changes payload encoding, client generation, debugging ergonomics, and where compatibility pressure lands.
+The machine view is a battle of **Serialization** and **Protocol**.
+- **Serialization**: JSON is text. The CPU must scan every character, handle quotes, and escape sequences. Protobuf is a stream of bytes with fixed-length headers. It is fundamentally faster to process.
+- **Protocol**: HTTP/1.1 is "Half-Duplex" (Wait for a response before sending the next request). HTTP/2 is "Full-Duplex" (Send many things at once). gRPC requires HTTP/2, while REST can run on either.
+- **Contract**: gRPC is "Design-First." You cannot write a line of code without a `.proto` file. REST is often "Code-First," which can lead to undocumented "drift" in the API over time.
 
 ## Run Instructions
 
@@ -30,36 +39,61 @@ Transport choice changes payload encoding, client generation, debugging ergonomi
 go run ./06-backend-db/01-web-and-database/apis/8-rest-vs-grpc
 ```
 
+This is a summary lesson. Review the decision matrix in the console output.
+
 ## Code Walkthrough
 
-### REST is simpler for browsers and public integration.
+### Decision Matrix
+The code demonstrates a direct comparison of the two technologies. Notice how we use a structured format to output the differences.
 
-REST is simpler for browsers and public integration.
+### Comparison Points
 
-### gRPC is strong for typed internal service-to-service c
+### Debugging
+- **REST**: Open your browser dev tools or use `curl`. The data is human-readable.
+- **gRPC**: You need a special tool like `grpcurl` or `Postman` with the `.proto` file imported to see what's happening.
 
-gRPC is strong for typed internal service-to-service communication.
+### Schema
+- **REST**: Often documented with OpenAPI/Swagger. It's an "opt-in" discipline.
+- **gRPC**: The schema is the code. If you don't have the `.proto`, you don't have an API.
 
-### Pick the transport that matches clients and operationa
-
-Pick the transport that matches clients and operational constraints.
+### Speed
+- gRPC is typically 5-10x faster than REST for large payloads and high-concurrency environments.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply API.8 in a small service or tool.
+1. Research "gRPC-Web"-how does it allow browsers to talk to gRPC services?
+2. Find an example of a "Streaming" REST API (like the Twitter/X firehose). Compare it to gRPC streaming.
+3. If you had to build a simple "Todo List" for yourself, which one would you choose and why?
 
-## ⚠️ In Production
+## Verification Surface
 
-Teams waste time when they choose gRPC for public human-facing APIs or JSON over HTTP for every high-volume internal service without thinking.
+Run the comparison lesson to see the decision matrix:
 
-## 🤔 Thinking Questions
+```text
+=== REST vs gRPC Decision Matrix ===
 
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+   FEATURE         REST/JSON           gRPC/Protobuf
+   -------         ---------           -------------
+   Payload         Text (Large)        Binary (Small)
+   Browser         Native Support      Requires Proxy
+   Contract        Optional (OpenAPI)  Strict (Protobuf)
+   Performance     Medium              Ultra High
+   Streaming       Limited             First-class
+```
+
+## In Production
+Many large organizations (like Google, Netflix, and Uber) use a **Hybrid Approach**:
+- **REST** for the "Edge" (External traffic from mobile apps and web).
+- **gRPC** for the "Interior" (Service-to-service calls inside the private network).
+There are even tools (like `grpc-gateway`) that can automatically generate a REST API from your gRPC service definition!
+
+## Thinking Questions
+1. Why is gRPC considered more "Type-Safe" than REST?
+2. What happens to a REST client if you change a field from an integer to a string?
+3. How does the use of HTTP/2 headers in gRPC help with performance?
+
+> **Forward Reference:** You have the knowledge. Now it's time for the proof. In [Lesson 9: gRPC Service Exercise](../9-grpc-service-exercise/README.md), you will build a complete gRPC service that handles both Unary and Streaming calls.
 
 ## Next Step
 
-Continue to `API.9`.
+Continue to `API.9` grpc-service-exercise.

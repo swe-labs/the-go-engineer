@@ -67,12 +67,10 @@ Printing lives in the `fmt` package, so the file must import it explicitly.
 2. Change the year value and inspect the formatted output.
 3. Add one more `fmt.Println(...)` call below the existing lines.
 
-## ⚠️ In Production
-
+## In Production
 Almost every service, CLI, job, and test binary still starts with this same shape: executable package, imports, entry point, side effects. The files get bigger, but the contract does not change.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why does Go make `package main` and `func main()` explicit instead of assuming them?
 2. What would break if the file tried to print without importing `fmt`?
 3. Why might a language prefer a very small executable shape for beginners?

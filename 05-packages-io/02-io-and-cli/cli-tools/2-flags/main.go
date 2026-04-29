@@ -8,16 +8,17 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Flags fundamentals and practical application in Go.
+//   - How to use the 'flag' package to parse typed command-line options.
 //
 // WHY THIS MATTERS:
-//   - Flags provides a structured approach to writing clean Go code.
+//   - The 'flag' package provides a standard way to handle configuration via
+//     named parameters, defaults, and auto-generated help documentation.
 //
 // RUN:
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/2-flags
 //
 // KEY TAKEAWAY:
-//   - Flags fundamentals and practical application in Go.
+//   - flag.Parse() must be called before accessing any flag pointers.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -30,12 +31,12 @@ import (
 	"strings"
 )
 
-// Stage 05: CLI Tools â€” Flag Package
+// Stage 05: CLI Tools - Flag Package
 //
 //   - The flag package for typed argument parsing
 //   - String, int, bool, and duration flags
 //   - Default values and usage help
-//   - flag.Parse() â€” MUST call before accessing flag values
+//   - flag.Parse() - MUST call before accessing flag values
 //   - Accessing remaining (non-flag) arguments
 //
 // ENGINEERING DEPTH:
@@ -80,7 +81,8 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: CL.3 subcommands")
-	fmt.Println("   Current: CL.2 (flags)")
+	fmt.Println("NEXT UP: CL.3 subcommands")
+	fmt.Println("Current: CL.2 (flags)")
+	fmt.Println("Previous: CL.1 (args)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -67,12 +67,10 @@ The same code block can run zero times, once, or many times depending on the con
 2. Increase the countdown start value.
 3. Add another word to the `range` example.
 
-## ⚠️ In Production
-
+## In Production
 Loops are everywhere in real systems: processing requests, scanning files, walking query results, aggregating metrics, and retrying work. Small loop mistakes often become large runtime problems.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why does Go use one `for` keyword instead of separate loop keywords?
 2. What is the difference between a counted loop and a condition-only loop?
 3. Why can a loop validly run zero times?

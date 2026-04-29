@@ -182,7 +182,8 @@ func main() {
 	fmt.Println("  - Queue: FIFO - Enqueue/Dequeue")
 	fmt.Println("  - Set: unique values using map[T]struct{}")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CO.1")
-	fmt.Println("   Current: TI.15 (generic data structures)")
+	fmt.Println("NEXT UP: CO.1 composition")
+	fmt.Println("Current: TI.15 (generic-data-structures)")
+	fmt.Println("Previous: TI.14 (complex-generic-constraints)")
 	fmt.Println("---------------------------------------------------")
 }

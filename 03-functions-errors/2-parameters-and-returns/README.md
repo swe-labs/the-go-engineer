@@ -144,12 +144,11 @@ That is the full parameter-and-return contract in one readable line.
 - Does passing a slice mean Go copies the whole slice data?
   No. It copies the slice header, which still points to the same underlying data.
 
-## ⚠️ In Production
+## In Production
 Most useful code is "input in, result out."
 Clear parameters and return values are the first step toward dependable business logic.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

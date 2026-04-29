@@ -150,13 +150,12 @@ by default.
 - Does `items[:2]` copy the first two values?
   No. It usually creates another view over the same underlying data.
 
-## ⚠️ In Production
+## In Production
 Slices are everywhere in Go.
 Understanding `len`, `cap`, `make`, and `append` prevents a huge amount of confusion later in file
 processing, HTTP work, concurrency, and general application code.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

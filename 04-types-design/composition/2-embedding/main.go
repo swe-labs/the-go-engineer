@@ -191,7 +191,8 @@ func main() {
 	fmt.Println("  - Use embedding when you want the promoted shortcut syntax")
 	fmt.Println("  - Use named fields when you want explicit access (Section 06/1)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CO.3 bank account project")
-	fmt.Println("   Current: CO.2 (embedding)")
+	fmt.Println("NEXT UP: CO.3 bank-account-project")
+	fmt.Println("Current: CO.2 (embedding)")
+	fmt.Println("Previous: CO.1 (composition)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -31,7 +31,7 @@ import (
 	"time"
 )
 
-// Stage 07: Time & Scheduling â€” Console Reminder (Exercise)
+// Stage 07: Time & Scheduling - Console Reminder (Exercise)
 //
 //   - Using time.NewTicker for repeating interval events
 //   - Using time.AfterFunc for one-shot delayed execution
@@ -41,7 +41,7 @@ import (
 // ENGINEERING DEPTH:
 //   `time.NewTicker` creates a channel-based timer that fires at regular intervals.
 //   Internally, the Go runtime inserts the ticker into its per-P timer heap. Unlike
-//   `time.Sleep` (which blocks the goroutine), a Ticker is non-blocking â€” you receive
+//   `time.Sleep` (which blocks the goroutine), a Ticker is non-blocking - you receive
 //   tick events on a channel, allowing you to `select` between the tick and other
 //   signals (like cancellation). Always call `ticker.Stop()` when done, or the
 //   runtime will keep the timer alive, leaking a small amount of memory.
@@ -76,7 +76,7 @@ func main() {
 
 func runReminder(seconds int, message string) {
 	duration := time.Duration(seconds) * time.Second
-	fmt.Printf("â° Reminder set for %v from now.\n\n", duration)
+	fmt.Printf("[timer] Reminder set for %v from now.\n\n", duration)
 
 	// Create a done channel to signal when the reminder fires.
 	done := make(chan struct{})
@@ -85,7 +85,7 @@ func runReminder(seconds int, message string) {
 	// It runs the function in its own goroutine.
 	// The returned Timer can be used to cancel the reminder if needed.
 	time.AfterFunc(duration, func() {
-		fmt.Printf("\nðŸ”” REMINDER: %s\n", message)
+		fmt.Printf("\nREMINDER: %s\n", message)
 		close(done)
 	})
 
@@ -98,14 +98,14 @@ func runReminder(seconds int, message string) {
 	for {
 		select {
 		case <-ticker.C:
-			// Ticker fired â€” update the countdown.
+			// Ticker fired - update the countdown.
 			elapsed++
 			remaining := seconds - elapsed
 			if remaining > 0 {
-				fmt.Printf("  â³ %d seconds remaining...\n", remaining)
+				fmt.Printf("  [wait] %d seconds remaining...\n", remaining)
 			}
 		case <-done:
-			// Reminder fired â€” exit the loop.
+			// Reminder fired - exit the loop.
 			fmt.Println()
 			fmt.Println("KEY TAKEAWAY:")
 			fmt.Println("  - time.AfterFunc schedules a one-shot delayed function")

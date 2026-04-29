@@ -32,7 +32,7 @@ import (
 	"time"
 )
 
-// Stage 07: Context â€” Timeout-Aware API Client (Exercise)
+// Stage 07: Context - Timeout-Aware API Client (Exercise)
 //
 //   - Attaching context.WithTimeout to HTTP requests
 //   - How context cancellation propagates to the HTTP transport layer
@@ -44,7 +44,7 @@ import (
 //   HTTP client's internal transport layer monitors `ctx.Done()`. If the context
 //   expires before the TCP connection completes, the transport immediately closes
 //   the underlying socket and returns `context.DeadlineExceeded`. This prevents
-//   your application from hanging indefinitely on a slow or unresponsive server â€”
+//   your application from hanging indefinitely on a slow or unresponsive server -
 //   a critical defense against cascading failures in microservice architectures.
 //
 
@@ -57,7 +57,7 @@ func fetchWithTimeout(url string, timeout time.Duration) (string, error) {
 	defer cancel() // Always call cancel to release resources!
 
 	// Create the HTTP request WITH the context attached.
-	// This is the critical step â€” linking the context to the HTTP client.
+	// This is the critical step - linking the context to the HTTP client.
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return "", fmt.Errorf("creating request: %w", err)
@@ -88,27 +88,27 @@ func main() {
 	fmt.Println()
 
 	// Example 1: Fast request (should succeed)
-	fmt.Println("1ï¸âƒ£  Fetching httpbin.org with 5s timeout...")
+	fmt.Println("1.  Fetching httpbin.org with 5s timeout...")
 	body, err := fetchWithTimeout("https://httpbin.org/get", 5*time.Second)
 	if err != nil {
-		fmt.Printf("   âŒ Error: %v\n", err)
+		fmt.Printf("   [ERROR] Error: %v\n", err)
 	} else {
 		// Print just the first 200 chars to keep output clean
 		if len(body) > 200 {
 			body = body[:200] + "..."
 		}
-		fmt.Printf("   âœ… Response (%d bytes): %s\n", len(body), body)
+		fmt.Printf("   [OK] Response (%d bytes): %s\n", len(body), body)
 	}
 
 	fmt.Println()
 
 	// Example 2: Deliberately short timeout (should fail)
-	fmt.Println("2ï¸âƒ£  Fetching with impossibly short timeout (1ms)...")
+	fmt.Println("2.  Fetching with impossibly short timeout (1ms)...")
 	_, err = fetchWithTimeout("https://httpbin.org/delay/3", 1*time.Millisecond)
 	if err != nil {
-		fmt.Printf("   âŒ Expected timeout: %v\n", err)
+		fmt.Printf("   [ERROR] Expected timeout: %v\n", err)
 	} else {
-		fmt.Println("   âœ… Unexpected success!")
+		fmt.Println("   [OK] Unexpected success!")
 	}
 
 	fmt.Println()

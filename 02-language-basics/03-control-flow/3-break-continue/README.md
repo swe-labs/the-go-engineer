@@ -65,12 +65,10 @@ These statements do not just choose code paths. They also change whether the loo
 2. Change the stop value from `7` to another number.
 3. Remove `continue` and inspect how the output changes.
 
-## ⚠️ In Production
-
+## In Production
 Search loops, filters, validators, and batch processors often depend on early exit and selective skipping. Used well, these tools make code faster and clearer. Used poorly, they hide control flow.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. When would `break` be the wrong tool if you only want to skip one bad item?
 2. Why does the order of loop-control checks matter?
 3. What kinds of workloads benefit from stopping early?

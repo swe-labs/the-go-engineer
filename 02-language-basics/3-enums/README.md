@@ -66,12 +66,10 @@ The method converts numeric enum values into readable text for output and debugg
 2. Create a second named type with its own `const` block.
 3. Print an invalid enum value and inspect the fallback text.
 
-## ⚠️ In Production
-
+## In Production
 Named enum-like values show up everywhere in Go code: log levels, modes, categories, states, and protocol values. The combination of `iota`, named types, and string conversion keeps those values readable and hard to misuse.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is a named type safer than using raw integers for categories?
 2. When is `iota + 1` a better choice than plain `iota`?
 3. Why is a `String()` method helpful even though the underlying value is still numeric?

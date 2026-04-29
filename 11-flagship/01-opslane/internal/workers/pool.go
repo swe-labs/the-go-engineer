@@ -203,7 +203,7 @@ func (p *Pool) runWorker(ctx context.Context) {
 	for {
 		select {
 		case <-ctx.Done():
-			// Caller context cancelled — stop immediately, do not drain.
+			// Caller context cancelled - stop immediately, do not drain.
 			return
 
 		case <-p.stopCh:

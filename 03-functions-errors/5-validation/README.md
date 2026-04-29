@@ -127,12 +127,11 @@ This shows the caller-side pattern again:
 - Why return `error` instead of `bool`?
   Because the caller needs a reason, not only a yes/no signal.
 
-## ⚠️ In Production
+## In Production
 Validation is one of the earliest places where engineering discipline shows up.
 It protects the rest of the program from clearly broken input.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

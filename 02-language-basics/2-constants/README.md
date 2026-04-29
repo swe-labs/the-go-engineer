@@ -63,12 +63,10 @@ If you try to change a constant, the compiler stops you before the program can r
 2. Add another constant inside the grouped block.
 3. Try to reassign a constant and read the compiler error.
 
-## ⚠️ In Production
-
+## In Production
 Constants are where teams encode stable facts: protocol values, configuration keys, fixed messages, and sentinel sizes. Making those values immutable prevents accidental runtime drift.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is "should never change" worth expressing in the type system and compiler rules?
 2. When is a constant clearer than a package-level variable?
 3. What bugs become harder to write when fixed values are immutable?

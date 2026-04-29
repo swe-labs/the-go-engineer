@@ -12,7 +12,7 @@ import (
 )
 
 // ============================================================================
-// Section 16: HTTP Clients & Mocking — Table-Driven Mocks
+// Section 16: HTTP Clients & Mocking - Table-Driven Mocks
 // Level: Advanced
 // ============================================================================
 //
@@ -47,7 +47,7 @@ func main() {
 
 	fmt.Println("\n(See client_test.go to see the ultimate Table-Driven mock pattern!)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: HM.4 testify/mock")
+	fmt.Println("NEXT UP: HM.4 testify/mock")
 	fmt.Println("   Current: HM.3 (table-driven mock)")
 	fmt.Println("---------------------------------------------------")
 }

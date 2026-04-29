@@ -3,7 +3,7 @@
 
 // ============================================================================
 // Section 00: How Computers Work
-// Title: Memory basics â€” stack vs heap
+// Title: Memory basics - stack vs heap
 // Level: Foundation
 // ============================================================================
 //

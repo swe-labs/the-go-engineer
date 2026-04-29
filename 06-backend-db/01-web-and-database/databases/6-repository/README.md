@@ -1,121 +1,90 @@
-# DB.6 Repository Pattern Project
+# DB.6 Repository pattern
 
 ## Mission
 
-Build a small SQLite-backed user repository that proves application logic can depend on behavior
-contracts instead of raw database calls.
-
-This exercise is the live Stage 06 milestone.
-It is where connections, queries, scans, prepared statements, transactions, and interfaces come
-together in one runnable artifact.
+Learn how to organize your database logic into a clean, testable boundary using the Repository Pattern, ensuring your application logic remains decoupled from specific SQL implementations.
 
 ## Prerequisites
 
-Complete these first:
-
-- `DB.1` connecting to SQLite
-- `DB.2` queries and parameterization
-- `DB.3` select queries
-- `DB.4` prepared statements with context
 - `DB.5` transactions
 
-## What You Will Build
+## Mental Model
 
-Implement a repository-driven user flow that:
+Think of the Repository Pattern as **A Personal Assistant for Data**.
 
-1. defines a `UserRepository` interface
-2. backs that interface with a SQLite implementation
-3. creates a user and profile inside one transaction
-4. queries users back into domain models
-5. keeps SQL details away from the calling application code
-6. proves core behavior with tests
+1. **The Request**: You say to your assistant: "Get me the information for the user with email 'alice@example.com'."
+2. **The Magic**: You don't care if the assistant goes to the filing cabinet (SQLite), calls another office (Microservice), or looks at their own notebook (Cache).
+3. **The Result**: The assistant returns exactly what you asked for in a folder (The User Struct).
+4. **The Interface**: Your relationship with the assistant is defined by what you can ask them to do, not by how they do it. This means you can replace your assistant with a new one (PostgreSQL) and your daily routine doesn't have to change at all.
 
-## Files
+## Visual Model
 
-- [main.go](./main.go): complete runnable solution
-- [main_test.go](./main_test.go): tests for the repository contract
-- [repository/user.go](./repository/user.go): concrete repository implementation
-- [models/user.go](./models/user.go): domain models used by the repository
-- [_starter/main.go](./_starter/main.go): starter surface with requirements and TODOs
+```mermaid
+graph TD
+    A["Application Logic (Handler/Service)"] -- "Depends on" --> B["UserRepository Interface"]
+    B -- "Implemented by" --> C["SQLiteUserRepository"]
+    B -- "Implemented by" --> D["PostgresUserRepository"]
+    B -- "Implemented by" --> E["MockUserRepository (Tests)"]
+```
+
+## Machine View
+
+The Repository pattern uses **Dependency Injection (DI)**. Instead of your logic creating a database connection, the connection is passed (injected) into the repository struct. This allows you to:
+- **Test in Isolation**: You can pass a "Mock" repository to your business logic tests that returns hardcoded data without ever touching a real database.
+- **Switch Drivers**: You can swap your SQLite implementation for a high-performance PostgreSQL implementation just by changing the injection point in `main.go`.
+- **Centralize SQL**: All SQL strings are contained in a single directory (`repository/`), making it easy to find and optimize slow queries.
 
 ## Run Instructions
-
-Run the completed solution:
 
 ```bash
 go run ./06-backend-db/01-web-and-database/databases/6-repository
 ```
 
-Run the tests:
-
-```bash
-go test ./06-backend-db/01-web-and-database/databases/6-repository
-```
-
-Run the starter:
-
-```bash
-go run ./06-backend-db/01-web-and-database/databases/6-repository/_starter
-```
-
-Note: the current repository lesson uses `github.com/mattn/go-sqlite3`, so local run/test commands
-need a CGO-enabled Go toolchain.
-
-## Success Criteria
-
-Your finished solution should:
-
-- keep write operations transactional when multiple tables are involved
-- use parameterized SQL instead of string-built queries
-- map rows into Go models predictably
-- expose a repository interface instead of leaking `*sql.DB` into higher-level logic
-- pass the provided tests
-
-## Common Failure Modes
-
-- letting application code talk directly to `*sql.DB` instead of the repository contract
-- forgetting that `rows.Close()` is part of the resource-management contract
-- splitting multi-table writes into separate non-transactional calls
-- treating the repository pattern as an excuse to hide all SQL behavior instead of explaining it
-
-
-## Mental Model
-
-Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
-
-## Visual Model
-
-Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
-
-## Machine View
-
-At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
+The example demonstrates a split structure with `models`, `repository`, and `main.go` working together to manage users and profiles.
 
 ## Solution Walkthrough
 
-The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+### `UserRepository` Interface
+Defined in the `repository` package. It describes the **Intent** of our data access layer (Create, Get, List) without mentioning SQL or SQLite.
+
+### `SQLUserRepository` Struct
+The concrete implementation. It holds a pointer to `*sql.DB` and implements every method in the interface. Note that the methods use `context.Context` to support timeouts and cancellations.
+
+### `models` Package
+Contains our "Domain Models". These are simple structs that describe our data. Both the repository and the application logic use these shared models to communicate.
+
+### Dependency Injection in `main.go`
+In `main()`, we initialize the `*sql.DB` and then "Inject" it into the repository: `repo := repository.NewSQLUserRepository(db)`.
 
 ## Try It
 
-Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+1. Add a `Delete` method to the `UserRepository` interface and implement it in `SQLUserRepository`.
+2. Try to create a second implementation called `MemoryUserRepository` that stores users in a simple Go `map` instead of a database.
+3. Observe how easy it is to switch between the two implementations in `main.go`.
 
 ## Verification Surface
 
-The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+Running the repository project should show clean data management:
+
+```text
+=== Repository Pattern Project ===
+   [DB] Connecting to SQLite...
+   [REPO] Saving User: Alice
+   [REPO] Saving Profile for User 1
+   [APP] Fetching User 1 with Profile...
+   [RESULT] User: Alice, Bio: Go Engineer
+```
 
 ## In Production
-
-The repository pattern is the standard database access boundary in production Go services. Without it, SQL queries leak into HTTP handlers, business logic becomes untestable without a running database, and schema changes ripple through every layer of the application. In production, the repository interface enables teams to swap database implementations (SQLite in tests, PostgreSQL in production), add caching layers transparently, and mock database behavior in unit tests without touching real infrastructure. The transaction pattern shown in this exercise — grouping related writes into a single atomic operation — prevents data inconsistencies that are nearly impossible to debug in production. A common production failure mode is forgetting to call `rows.Close()`, which leaks database connections from the pool until the service runs out and every request starts timing out. Teams that treat the repository as a first-class boundary — not just a convenience wrapper — gain the ability to reason about database behavior independently from business logic, which is critical when debugging production incidents under pressure.
+While the Repository pattern is great, avoid the **"Generic Repository"** trap (trying to build one repository that handles all types of data). Each major domain (Users, Orders, Products) should have its own specific repository interface that reflects its unique business needs.
 
 ## Thinking Questions
+1. Why is it better to return an interface from the repository constructor instead of a concrete struct?
+2. How does the Repository pattern help with writing unit tests for your HTTP handlers?
+3. What is the downside of having too many layers (Models -> Repository -> Service -> Handler)?
 
-1. Why is it important to keep SQL inside the repository layer instead of letting handlers build queries directly?
-2. If a transaction commits the user but fails on the profile insert, what state does the database end up in, and why does wrapping both in one transaction prevent this?
-3. How would you test repository behavior without requiring a real database connection in CI?
-4. What happens to in-flight queries when the database connection pool is exhausted, and how would you detect this in production?
+> **Forward Reference:** Your code is clean and organized. But as your data grows, you might accidentally write inefficient queries that perform thousands of small calls to the database. In [Lesson 7: N+1 Query Detection](../7-n-plus-one-query-detection/README.md), you will learn how to identify and fix one of the most common performance killers in backend engineering.
 
 ## Next Step
 
-After you complete this milestone, continue to [Stage 07: Concurrency](../../../../07-concurrency/01-concurrency) or
-explore the other Stage 06 legacy reference surfaces if you need more web/database examples first.
-
+Continue to `DB.7` n-plus-one-query-detection.

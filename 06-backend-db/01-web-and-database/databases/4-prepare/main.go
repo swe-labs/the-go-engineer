@@ -8,115 +8,89 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Prepared Statements fundamentals and practical application in Go.
+//   - How to 'pre-compile' SQL queries using 'db.Prepare'.
+//   - The performance benefits of reusing prepared statements.
+//   - How to manage the lifecycle of a statement with 'stmt.Close'.
 //
 // WHY THIS MATTERS:
-//   - Prepared Statements provides a structured approach to writing clean Go code.
+//   - Prepared statements improve performance by allowing the database to
+//     parse and plan a query once, then execute it many times with
+//     different data. They also provide an extra layer of protection
+//     against SQL injection.
 //
 // RUN:
 //   go run ./06-backend-db/01-web-and-database/databases/4-prepare
 //
 // KEY TAKEAWAY:
-//   - Prepared Statements fundamentals and practical application in Go.
+//   - Prepare once, execute many. Always close your statements.
 // ============================================================================
-
-// Commercial use is prohibited without permission.
 
 package main
 
 import (
-	"context"
 	"database/sql"
 	"fmt"
 	"log"
-	"time"
 
-	"golang.org/x/crypto/bcrypt"
 	_ "modernc.org/sqlite"
 )
 
-// Stage 06: Databases â€” Prepared Statements & Context
+// Stage 06: Databases - Prepared Statements
 //
-//   - Prepared Statements (`db.Prepare()`)
-//   - Passing Context to queries (`ExecContext`) for cancellations
-//   - When to actually use Prepared Statements (and when to avoid them)
+//   - db.Prepare: Compiling the SQL template
+//   - stmt.Exec: Running the compiled template with data
+//   - Resource Management: Closing statements
 //
 // ENGINEERING DEPTH:
-//   When you run `db.Query()`, the database parses, compiles, and optimizes
-//   the SQL string from scratch every single time. A "Prepared Statement"
-//   compiles the SQL layout ONCE and stores it in the database's cache. You
-//   then execute it repeatedly just by passing arguments to the cache reference.
-//   HOWEVER, Go implicitly prepares and caches standard `db.Query()` queries
-//   for you under the hood automatically anyway! In Go, manually calling
-//   `db.Prepare` is only beneficial if you are executing the EXACT same
-//   statement hundreds of times in a tight `for` loop.
-//
-
-type User struct {
-	ID             int       `json:"id"`
-	Name           string    `json:"name"`
-	Email          string    `json:"email"`
-	HashedPassword string    `json:"-"`
-	CreatedAt      time.Time `json:"created_at"`
-}
+//   When you call `db.Query()`, the database must parse the SQL string,
+//   validate the table names, check permissions, and create an execution
+//   plan. By using `db.Prepare()`, you move all that work to a single
+//   "Preparation" step. Subsequent calls only send the raw data values
+//   and the ID of the prepared statement. This reduces CPU load on the
+//   database and decreases network overhead.
 
 func main() {
-	dbName := "users_database.db"
-	db, err := sql.Open("sqlite", dbName)
+	dbPath := "example.db"
+
+	db, err := sql.Open("sqlite", dbPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	// Create context with a timeout.
-	// We mandate that this database operation MUST complete within 2 seconds.
-	// If the database is locked or slow, it will abort early rather than
-	// hanging the server indefinitely.
-	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
-	defer cancel() // Release the context resources when done
+	fmt.Println("=== Prepared Statements ===")
+	fmt.Println()
 
-	fmt.Println("=== Executing Prepared Statement with Context ===")
+	// 1. Setup table
+	db.Exec(`CREATE TABLE IF NOT EXISTS inventory (id INTEGER PRIMARY KEY, item TEXT, quantity INTEGER);`)
 
-	// Executing the prepared statement
-	id, err := createUserWithCtx(ctx, db, "Context User", "ctx@go.dev", "hunter2")
+	// 2. PREPARE the statement (The "Compilation" step)
+	// We define the structure with '?' placeholders.
+	stmt, err := db.Prepare(`INSERT INTO inventory (item, quantity) VALUES (?, ?)`)
 	if err != nil {
-		log.Println("âŒ Failed:", err)
-	} else {
-		fmt.Printf("âœ… Inserted user via Prepared Statement! (ID: %d)\n", id)
+		log.Fatalf("  Failed to prepare statement: %v", err)
 	}
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: DB.5 transactions")
-	fmt.Println("   Current: DB.4 (prepared statements)")
-	fmt.Println("---------------------------------------------------")
-}
-
-// createUserWithCtx demonstrates explicit Prepared Statements and Context execution.
-func createUserWithCtx(ctx context.Context, db *sql.DB, name, email, hashedPassword string) (int64, error) {
-
-	// PREPARE: The database parses and compiles this structure ONCE.
-	// In a real application, you would prepare this statement ONCE globally on
-	// startup, and reuse the `stmt` variable across millions of requests.
-	// In this demo, since we are inside a function, we have to close it.
-	stmt, err := db.Prepare(`INSERT INTO users (name, email, hashed_password) VALUES (?, ?, ?)`)
-	if err != nil {
-		return 0, err
-	}
-	// A prepared statement consumes a connection pool socket. It MUST be closed.
+	// CRITICAL: A prepared statement holds a resource. You must close it!
 	defer stmt.Close()
 
-	hp, err := bcrypt.GenerateFromPassword([]byte(hashedPassword), bcrypt.DefaultCost)
-	if err != nil {
-		return 0, err
+	fmt.Println("  Statement prepared. Executing in a loop...")
+
+	// 3. EXECUTE the statement multiple times
+	items := []string{"Apples", "Bananas", "Cherries"}
+	for i, name := range items {
+		_, err := stmt.Exec(name, (i+1)*10)
+		if err != nil {
+			log.Printf("  Error inserting %s: %v", name, err)
+			continue
+		}
+		fmt.Printf("  ✔ Inserted %s\n", name)
 	}
 
-	// EXECUTE WITH CONTEXT:
-	// We pass the context to `ExecContext`. If the context timeout expires
-	// before the operation finishes, the Go driver automatically severs the
-	// database socket and returns a `context deadline exceeded` error.
-	result, err := stmt.ExecContext(ctx, name, email, string(hp))
-	if err != nil {
-		return 0, err
-	}
+	fmt.Println("\n  Batch insertion complete.")
 
-	return result.LastInsertId()
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: DB.5 transactions")
+	fmt.Println("Current: DB.4 (prepare-statements)")
+	fmt.Println("Previous: DB.3 (select-queries)")
+	fmt.Println("---------------------------------------------------")
 }

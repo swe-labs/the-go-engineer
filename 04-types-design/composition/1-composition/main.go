@@ -55,7 +55,7 @@ import "fmt"
 // --- COMPONENT TYPES (small, focused, reusable) ---
 
 // GPSLocation represents a geographic coordinate.
-// This is a self-contained component â€” it knows nothing about who uses it.
+// This is a self-contained component - it knows nothing about who uses it.
 type GPSLocation struct {
 	Latitude  float64 // Degrees north (+) or south (-)
 	Longitude float64 // Degrees east (+) or west (-)
@@ -76,7 +76,7 @@ func (g GPSLocation) DistanceLabel() string {
 }
 
 // ContactInfo holds communication details.
-// This is another self-contained component â€” reusable across many types.
+// This is another self-contained component - reusable across many types.
 type ContactInfo struct {
 	Phone string // Primary phone number
 	Email string // Primary email address
@@ -84,13 +84,13 @@ type ContactInfo struct {
 
 // Summary formats contact info for display.
 func (c ContactInfo) Summary() string {
-	return fmt.Sprintf("ðŸ“ž %s | ðŸ“§ %s", c.Phone, c.Email)
+	return fmt.Sprintf("phone: %s | email: %s", c.Phone, c.Email)
 }
 
 // --- COMPOSED TYPES (built from components) ---
 
 // Warehouse is COMPOSED OF GPSLocation and ContactInfo.
-// "Composed of" means it HAS these types as fields â€” not that it IS them.
+// "Composed of" means it HAS these types as fields - not that it IS them.
 // To access GPS methods: warehouse.Location.DistanceLabel()
 // To access Contact methods: warehouse.Contact.Summary()
 type Warehouse struct {
@@ -104,17 +104,17 @@ type Warehouse struct {
 // PrintDetails displays all warehouse information.
 // Notice how we access composed type methods with dot notation:
 //
-//	w.Location.String()  â€” calling GPSLocation's method
-//	w.Contact.Summary()  â€” calling ContactInfo's method
+//	w.Location.String()  - calling GPSLocation's method
+//	w.Contact.Summary()  - calling ContactInfo's method
 func (w Warehouse) PrintDetails() {
-	fmt.Printf("  ðŸ­ Warehouse #%d: %s\n", w.ID, w.Name)
+	fmt.Printf("  Warehouse #%d: %s\n", w.ID, w.Name)
 	fmt.Printf("     Capacity: %d items\n", w.Capacity)
 	fmt.Printf("     Location: %s (%s)\n", w.Location, w.Location.DistanceLabel())
 	fmt.Printf("     Contact:  %s\n", w.Contact.Summary())
 }
 
 // DeliveryRoute uses composition to link two warehouses.
-// A route has an Origin and a Destination â€” both are GPSLocation.
+// A route has an Origin and a Destination - both are GPSLocation.
 // This shows the REUSABILITY of composed types.
 type DeliveryRoute struct {
 	RouteID     string      // Route identifier (e.g., "RT-001")
@@ -124,7 +124,7 @@ type DeliveryRoute struct {
 
 // Describe prints a summary of the delivery route.
 func (r DeliveryRoute) Describe() {
-	fmt.Printf("  ðŸš› Route %s: %s â†’ %s\n", r.RouteID, r.Origin.Label, r.Destination.Label)
+	fmt.Printf("  Route %s: %s -> %s\n", r.RouteID, r.Origin.Label, r.Destination.Label)
 }
 
 func main() {
@@ -184,14 +184,15 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Composition = 'Has-A' â†’ Warehouse HAS a GPSLocation")
-	fmt.Println("  - Inheritance = 'Is-A' â†’ Go does NOT have this")
+	fmt.Println("  - Composition = 'Has-A' -> Warehouse HAS a GPSLocation")
+	fmt.Println("  - Inheritance = 'Is-A' -> Go does NOT have this")
 	fmt.Println("  - Components are small, focused types with their own methods")
 	fmt.Println("  - Composed types access component methods via dot: w.Location.String()")
 	fmt.Println("  - Components are reusable across many different parent types")
 	fmt.Println("  - Next lesson: Embedding (promoted methods for cleaner syntax)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: CO.2 embedding")
-	fmt.Println("   Current: CO.1 (composition)")
+	fmt.Println("NEXT UP: CO.2 embedding")
+	fmt.Println("Current: CO.1 (composition)")
+	fmt.Println("Previous: TI.15 (generic-data-structures)")
 	fmt.Println("---------------------------------------------------")
 }

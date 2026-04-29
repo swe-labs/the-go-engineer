@@ -47,7 +47,7 @@ func calculate(a int, b int, operation func(int, int) int) int {
 func main() {
 	// A function can be assigned to a variable without calling it (no parentheses)
 	var mathFunc func(int, int) int
-	
+
 	mathFunc = add
 	result1 := mathFunc(5, 3)
 	fmt.Printf("Using add: 5 + 3 = %d\n", result1)

@@ -13,9 +13,9 @@ Every lesson `main.go` file must start with this header:
 // Licensed under The Go Engineer License v1.0
 
 // ============================================================================
-// Section NN: Section Name — Lesson Title
+// Section NN: Section Name - Lesson Title
 // Level: Foundation | Core | Stretch
-// Foundation = Phase 0–1, Core = Phase 2–3, Stretch = Phase 4
+// Foundation = Phase 0-1, Core = Phase 2-3, Stretch = Phase 4
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -259,11 +259,11 @@ Preferred order:
 
 ```text
 lesson-name/
-├── README.md
-├── main.go
-├── main_test.go
-└── _starter/
-    └── main.go
+|-- README.md
+|-- main.go
+|-- main_test.go
+`-- _starter/
+    `-- main.go
 ```
 
 `main_test.go` and `_starter/` are required for exercises and strongly recommended where behavior should be proven.

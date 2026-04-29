@@ -145,4 +145,10 @@ ANOTHER_KEY_NO_VALUE =`
 	}
 
 	fmt.Println(summary)
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: s05-packages-io")
+	fmt.Println("Current: ST.6 (config-parser-project)")
+	fmt.Println("Previous: ST.5 (text-template)")
+	fmt.Println("---------------------------------------------------")
 }

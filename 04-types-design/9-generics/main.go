@@ -10,7 +10,7 @@
 //   - Learn how to write functions and types that work with multiple types using type parameters and constraints.
 //
 // WHY THIS MATTERS:
-//   - Think of a vending machine. It does not care if it dispenses sodas, snacks, or toysÃ¢â‚¬â€the mechanism is the same. The "type parameter" is what ...
+//   - Think of a vending machine. It does not care if it dispenses sodas, snacks, or toys-the mechanism is the same. The "type parameter" is what it is dispensing.
 //
 // RUN:
 //   go run ./04-types-design/9-generics
@@ -125,7 +125,8 @@ func main() {
 	fmt.Println("  - Use generics for data structures, algorithms, utilities")
 	fmt.Println("  - Use interfaces for behavior abstraction (polymorphism)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.10 payroll processor")
-	fmt.Println("   Current: TI.9 (generics)")
+	fmt.Println("NEXT UP: TI.10 payroll-processor")
+	fmt.Println("Current: TI.9 (generics)")
+	fmt.Println("Previous: TI.8 (custom-errors)")
 	fmt.Println("---------------------------------------------------")
 }

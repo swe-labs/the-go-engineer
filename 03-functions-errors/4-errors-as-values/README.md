@@ -148,12 +148,11 @@ toy function.
 - Why not use panic here?
   Because ordinary failure should stay in the normal return path.
 
-## ⚠️ In Production
+## In Production
 Go services rely on visible error handling.
 Returning errors as values keeps the success path and failure path readable.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

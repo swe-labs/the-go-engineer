@@ -50,12 +50,10 @@ Syscalls connect process code to the operating system and real resources.
 2. Open another terminal and inspect the parent process relationship.
 3. Name three operations your program cannot perform without the OS helping.
 
-## ⚠️ In Production
-
+## In Production
 Every deployed service is a process. Signals, open files, sockets, and syscall costs all matter once the code leaves your laptop.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why does the OS isolate one process from another?
 2. What kinds of work require crossing the syscall boundary?
 3. Why are file descriptors and sockets process resources rather than plain language values?

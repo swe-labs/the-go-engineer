@@ -157,12 +157,11 @@ That is the real lesson outcome.
 - Why are `[2]int` and `[3]int` different?
   Because array size is part of the type in Go.
 
-## ⚠️ In Production
+## In Production
 You will not model most dynamic collections with arrays, but the value-copy rule matters whenever
 you reason about what gets copied and what stays shared.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

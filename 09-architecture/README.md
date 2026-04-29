@@ -2,43 +2,32 @@
 
 ## Mission
 
-This stage expands package design into architecture patterns and security engineering so system shape and trust boundaries are taught together. It focuses on how to structure large Go applications.
+Learn the engineering of large-scale Go systems. This section turns correct code into maintainable architecture by applying naming discipline, visibility rules, package boundaries, architecture patterns, and security controls.
 
-By the end of this stage, a learner should be able to:
+## Section Map
 
-- design sensible package layouts using `cmd`, `internal`, and `pkg`
-- implement clean architecture patterns like dependency injection and adapters
-- identify and mitigate common web vulnerabilities
-- secure APIs with proper authentication, authorization, and TLS
-- understand how trust boundaries shape code structure
-
-## Stage Map
-
-| Track | Surface | Core Job |
+| Track | Surface | Mission |
 | --- | --- | --- |
-| `PD.1-3` | Package Design | Introduce package boundaries, naming conventions, and project layouts. |
-| `ARCH.1-9` | Architecture Patterns | Cover the major service-shape and layering decisions teams face. |
-| `SEC.1-11` | Security | Turn boundary safety into a concrete engineering track. |
+| `PD.1-PD.3` | [Package Design](./01-package-design) | teach naming, visibility, and layout rules |
+| `ARCH.1-ARCH.9` | [Architecture Patterns](./03-architecture-patterns) | teach service layering, DDD, CQRS, and decoupling |
+| `SEC.1-SEC.11` | [Security](./04-security) | teach input validation, cryptographic safety, identity, and trust boundaries |
 
-## Why This Stage Exists Now
+[gRPC Reference](./02-grpc) is supporting reference material for contract-first service boundaries. It is not a canonical public track in Section 09.
 
-The learner already knows:
+## Why This Section Matters
 
-- how to write correct, concurrent, and tested Go code
-- how to profile for performance
+You now know how to write Go code that is fast and correct. In a team environment, the shape of the codebase matters as much as the logic inside each function.
 
-That is enough to start asking engineering questions like:
-
-- how do we organize a codebase with 100,000 lines of code?
-- how do we keep business logic separate from HTTP routing?
-- how do we ensure attackers cannot manipulate our database or access private data?
+1. **Maintainability**: Package design makes ownership, dependencies, and import boundaries visible.
+2. **Evolution**: Architecture patterns keep business rules separate from transport, persistence, and infrastructure details.
+3. **Trust**: Security controls protect user data and make failure modes explicit at system boundaries.
 
 ## Suggested Learning Flow
 
-1. `PD.1-PD.3` establish the foundational rules of Go package design.
-2. `ARCH.1-ARCH.9` expand those rules into application-wide architecture.
-3. `SEC.1-SEC.11` add the necessary security boundaries to that architecture.
+1. **Start with Track PD**: Learn how Go packages work before you design larger systems.
+2. **Continue to Track ARCH**: Apply those package rules to service boundaries and application architecture.
+3. **Finish with Track SEC**: Integrate security into validation, authentication, authorization, transport, and secret-handling boundaries.
 
 ## Next Step
 
-After this section, continue to [10 Production Operations](../10-production).
+After learning architecture and security, continue to [Section 10 Production Operations](../10-production) or return to the [Curriculum Overview](../README.md).

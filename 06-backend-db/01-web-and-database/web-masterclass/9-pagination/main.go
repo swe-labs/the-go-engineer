@@ -1,10 +1,32 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
-
-package main
 
 // ============================================================================
+// Section 06: Backend, APIs & Databases
+// Title: Web Masterclass - Pagination
+// Level: Advanced
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to slice large datasets using SQL LIMIT and OFFSET.
+//   - How to calculate pagination metadata (Current Page, Total Pages).
+//   - How to build a standard JSON response for paginated data.
+//   - The performance trade-offs of offset-based pagination.
+//
+// WHY THIS MATTERS:
+//   - No production system should ever return thousands of records in
+//     a single request. Pagination keeps your application fast, reduces
+//     memory usage, and provides a better experience for your users.
+//     Mastering this pattern is essential for building scalable APIs.
+//
+// RUN:
+//   go run ./06-backend-db/01-web-and-database/web-masterclass/9-pagination
+//
+// KEY TAKEAWAY:
+//   - Divide and conquer. Never load more data than you need to display.
+// ============================================================================
+
+package main
 
 import (
 	"encoding/json"
@@ -15,134 +37,91 @@ import (
 	"strconv"
 )
 
-// ============================================================================
-// Stage 06: Pagination
-// Level: Advanced
-// ============================================================================
+// Stage 06: Web Masterclass - Pagination
 //
-// WHAT YOU'LL LEARN:
-//   - Computing pagination metadata (total pages, has next/prev)
-//   - SQL LIMIT/OFFSET queries for paginated data
-//   - Building dynamic pagination links
-//   - API response structure for paginated data
+//   - Limit: The number of items per page
+//   - Offset: The number of items to skip
+//   - Metadata: Info about the overall collection
 //
 // ENGINEERING DEPTH:
-//   While `LIMIT ? OFFSET ?` is standard, you must understand its algorithmic cost.
-//   `OFFSET 50000 LIMIT 10` forces the database engine to locate, load, and scan
-//   50,010 sequential rows off the disk, just to discard the first 50,000 and
-//   return the final 10. For massive Google-scale systems, this O(n) scan creates
-//   deadly latency ("The Offset Penalty"). In those scenarios, engineers abandon
-//   Offsets entirely and use "Cursor Pagination" (`WHERE id > ? LIMIT 10`), taking
-//   advantage of sub-millisecond O(log N) B-Tree Primary Key index seeks!
-//
-// RUN: go run ./06-backend-db/01-web-and-database/web-masterclass/9-pagination
-// ============================================================================
+//   While `LIMIT ? OFFSET ?` is simple to implement, it has a
+//   "Scaling Penalty." To calculate `OFFSET 10000`, the database must
+//   physically scan through the first 10,000 rows just to find where
+//   to start. For extremely large datasets, engineers use "Cursor
+//   Pagination" (e.g., `WHERE id > ? LIMIT 20`), which uses database
+//   indexes to jump directly to the next page in O(log N) time.
 
-// Metadata holds pagination information for API responses.
+// Metadata holds information about the paginated response.
 type Metadata struct {
 	CurrentPage  int  `json:"current_page"`
 	PageSize     int  `json:"page_size"`
-	TotalRecords int  `json:"total_records"`
-	TotalPages   int  `json:"total_pages"`
-	HasNext      bool `json:"has_next"`
-	HasPrev      bool `json:"has_prev"`
 	FirstPage    int  `json:"first_page"`
 	LastPage     int  `json:"last_page"`
-}
-
-// computeMetadata calculates all pagination fields from the total record count.
-func computeMetadata(totalRecords, page, pageSize int) Metadata {
-	if totalRecords == 0 {
-		return Metadata{}
-	}
-
-	totalPages := int(math.Ceil(float64(totalRecords) / float64(pageSize)))
-
-	return Metadata{
-		CurrentPage:  page,
-		PageSize:     pageSize,
-		TotalRecords: totalRecords,
-		TotalPages:   totalPages,
-		HasNext:      page < totalPages,
-		HasPrev:      page > 1,
-		FirstPage:    1,
-		LastPage:     totalPages,
-	}
-}
-
-// PaginatedResponse is a generic API response wrapper for paginated data.
-type PaginatedResponse struct {
-	Data     any      `json:"data"`
-	Metadata Metadata `json:"metadata"`
-}
-
-// generatePageLinks builds navigation links for an API response.
-func generatePageLinks(baseURL string, meta Metadata) map[string]string {
-	links := map[string]string{
-		"self": fmt.Sprintf("%s?page=%d&page_size=%d", baseURL, meta.CurrentPage, meta.PageSize),
-	}
-
-	if meta.HasNext {
-		links["next"] = fmt.Sprintf("%s?page=%d&page_size=%d", baseURL, meta.CurrentPage+1, meta.PageSize)
-	}
-	if meta.HasPrev {
-		links["prev"] = fmt.Sprintf("%s?page=%d&page_size=%d", baseURL, meta.CurrentPage-1, meta.PageSize)
-	}
-
-	links["first"] = fmt.Sprintf("%s?page=%d&page_size=%d", baseURL, meta.FirstPage, meta.PageSize)
-	links["last"] = fmt.Sprintf("%s?page=%d&page_size=%d", baseURL, meta.LastPage, meta.PageSize)
-
-	return links
+	TotalRecords int  `json:"total_records"`
+	HasNext      bool `json:"has_next"`
 }
 
 func main() {
-	// Simulate 95 total items
-	totalItems := 95
+	// 1. Simulate a large collection of items
+	const totalItems = 105
 
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /api/items", func(w http.ResponseWriter, r *http.Request) {
+		// 2. Extract pagination parameters from the query string
 		page, _ := strconv.Atoi(r.URL.Query().Get("page"))
-		pageSize, _ := strconv.Atoi(r.URL.Query().Get("page_size"))
-
 		if page < 1 {
 			page = 1
 		}
-		if pageSize < 1 || pageSize > 100 {
-			pageSize = 10
+
+		pageSize := 10 // Hardcoded for simplicity
+
+		// 3. Calculate offset and metadata
+		offset := (page - 1) * pageSize
+		totalPages := int(math.Ceil(float64(totalItems) / float64(pageSize)))
+
+		meta := Metadata{
+			CurrentPage:  page,
+			PageSize:     pageSize,
+			FirstPage:    1,
+			LastPage:     totalPages,
+			TotalRecords: totalItems,
+			HasNext:      page < totalPages,
 		}
 
-		// Compute pagination metadata
-		meta := computeMetadata(totalItems, page, pageSize)
-		links := generatePageLinks("/api/items", meta)
-
-		// Generate fake items for this page
-		start := (page - 1) * pageSize
-		end := start + pageSize
+		// 4. Generate dummy items for the current "page"
+		items := []string{}
+		start := offset
+		end := offset + pageSize
 		if end > totalItems {
 			end = totalItems
 		}
 
-		items := make([]map[string]any, 0, end-start)
 		for i := start; i < end; i++ {
-			items = append(items, map[string]any{
-				"id":   i + 1,
-				"name": fmt.Sprintf("Item #%d", i+1),
-			})
+			items = append(items, fmt.Sprintf("Item %d", i+1))
 		}
 
+		// 5. Send paginated JSON response
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]any{
-			"data":     items,
 			"metadata": meta,
-			"links":    links,
+			"items":    items,
 		})
 	})
 
-	fmt.Println("Pagination demo: http://localhost:8080/api/items?page=1&page_size=10")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("=== Web Masterclass: Pagination ===")
+	fmt.Println("  🚀 Server starting on http://localhost:8088")
+	fmt.Println()
+	fmt.Println("  Try these links:")
+	fmt.Println("    - http://localhost:8088/api/items?page=1")
+	fmt.Println("    - http://localhost:8088/api/items?page=2")
+	fmt.Println("    - http://localhost:8088/api/items?page=11 (Last page)")
+
+	log.Fatal(http.ListenAndServe(":8088", mux))
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: WM.10 comments")
-	fmt.Println("   Current: WM.9 (pagination)")
+	fmt.Println("NEXT UP: MC.10 comments")
+	fmt.Println("Current: MC.9 (pagination)")
+	fmt.Println("Previous: MC.8 (posts-crud)")
 	fmt.Println("---------------------------------------------------")
 }

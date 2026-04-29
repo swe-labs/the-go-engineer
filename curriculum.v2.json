@@ -9,7 +9,7 @@
                          "path_prefix":  "00-how-computers-work",
                          "phase":  "foundations",
                          "summary":  "Understand the machine before you write the code.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "HC.1"
                                           ],
@@ -25,7 +25,7 @@
                          "path_prefix":  "01-getting-started",
                          "phase":  "foundations",
                          "summary":  "Build environment confidence, run the first programs, and make the terminal and editor feel safe.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "GT.1"
                                           ],
@@ -44,7 +44,7 @@
                          "path_prefix":  "02-language-basics",
                          "phase":  "foundations",
                          "summary":  "Teach values, control flow, and data structures as one zero-magic builder path.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "LB.1"
                                           ],
@@ -65,7 +65,7 @@
                          "path_prefix":  "03-functions-errors",
                          "phase":  "foundations",
                          "summary":  "Turn inline logic into reusable function boundaries and make failure explicit.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "FE.1"
                                           ],
@@ -84,7 +84,7 @@
                          "path_prefix":  "04-types-design",
                          "phase":  "foundations",
                          "summary":  "Shape programs with types, interfaces, composition, and text-heavy workflows.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "TI.1",
                                               "CO.1",
@@ -107,7 +107,7 @@
                          "path_prefix":  "05-packages-io",
                          "phase":  "engineering-core",
                          "summary":  "Teach module boundaries, package identity, CLI workflows, encoding, and filesystem work.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "MP.1",
                                               "CL.1",
@@ -115,10 +115,10 @@
                                               "FS.1"
                                           ],
                          "outputs":  [
-                                         "MP.3",
+                                         "MP.4",
                                          "CL.4",
                                          "EN.6",
-                                         "FS.7"
+                                         "FS.8"
                                      ],
                          "prerequisites":  [
                                                "s04"
@@ -132,7 +132,7 @@
                          "path_prefix":  "06-backend-db",
                          "phase":  "engineering-core",
                          "summary":  "Teach HTTP services, API design, and database workflows as one application-shaped backend path.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "HS.1",
                                               "API.1",
@@ -155,7 +155,7 @@
                          "path_prefix":  "07-concurrency",
                          "phase":  "engineering-core",
                          "summary":  "Teach goroutines, channels, context, scheduling, and bounded concurrency patterns.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "GC.0",
                                               "SY.1",
@@ -182,7 +182,7 @@
                          "path_prefix":  "08-quality-test",
                          "phase":  "engineering-core",
                          "summary":  "Teach testing, benchmarks, and profiling so learners can prove behavior and inspect cost.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "TE.1",
                                               "PR.1"
@@ -203,7 +203,7 @@
                          "path_prefix":  "09-architecture",
                          "phase":  "systems",
                          "summary":  "Teach package design, architecture patterns, and security engineering as one systems-thinking stage.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "PD.1",
                                               "ARCH.1",
@@ -226,7 +226,7 @@
                          "path_prefix":  "10-production",
                          "phase":  "systems",
                          "summary":  "Teach runtime behavior, configuration, observability, deployment-aware thinking, and build-time automation.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "SL.1",
                                               "GS.1",
@@ -239,6 +239,7 @@
                                          "GS.3",
                                          "CFG.5",
                                          "OPS.5",
+                                         "DOCKER.3",
                                          "DEPLOY.3",
                                          "CG.3"
                                      ],
@@ -254,7 +255,7 @@
                          "path_prefix":  "11-flagship",
                          "phase":  "systems",
                          "summary":  "Integrate larger project work into one final proof stage after the production tooling path is already established.",
-                         "status":  "pilot",
+                         "status":  "stable",
                          "entry_points":  [
                                               "OPSL.1"
                                           ],
@@ -313,7 +314,7 @@
                       "id":  "HC.3",
                       "section_id":  "s00",
                       "slug":  "memory-basics",
-                      "title":  "Memory basics — stack vs heap",
+                      "title":  "Memory basics - stack vs heap",
                       "type":  "lesson",
                       "subtype":  "concept",
                       "level":  "foundation",
@@ -674,7 +675,7 @@
                       "id":  "CF.5",
                       "section_id":  "s02",
                       "slug":  "defer-basics",
-                      "title":  "Defer — mechanics \u0026 order",
+                      "title":  "Defer - mechanics \u0026 order",
                       "type":  "lesson",
                       "subtype":  "concept",
                       "level":  "core",

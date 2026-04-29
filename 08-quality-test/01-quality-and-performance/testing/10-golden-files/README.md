@@ -1,65 +1,67 @@
-# TE.10 Golden files
+# TE.10 Golden Files
 
 ## Mission
 
-Learn how golden files keep large textual outputs reviewable without hard-coding long strings inside tests.
+Master the "Golden File" pattern to test functions that produce large or complex outputs (like JSON, HTML, or large structs). Learn how to avoid hard-coding massive strings in your test files and how to manage snapshots of "correct" behavior that can be easily reviewed and updated.
 
 ## Prerequisites
 
-- TE.9
+- TE.9 Integration Testing
 
 ## Mental Model
 
-A golden file is a checked-in expected output that the test compares against generated output.
+Think of Golden Files as **A Reference Photo**.
+
+1. **The Painting**: Your code produces a complex masterpiece (a 1,000-line JSON response).
+2. **The Photo**: Instead of describing every pixel in your test code, you take a "Golden Photo" of the masterpiece and save it to a file (`response.json.golden`).
+3. **The Comparison**: Every time you run the test, you paint a new version and compare it to the photo.
+4. **The Update**: If you intentionally change the style of the painting, you just take a new photo (`go test -update`).
 
 ## Visual Model
 
 ```mermaid
-graph TD
-    A["Golden files"] --> B["Golden files make large outputs easier to diff."]
-    B --> C["Keep the compared surface stable and reviewable."]
+graph LR
+    A[Generate Output] --> B{Compare}
+    B -- Match --> C[Pass]
+    B -- Mismatch --> D[Fail & Show Diff]
+    E[testdata/*.golden] --> B
 ```
 
 ## Machine View
 
-The test becomes about stable output shape rather than line-noise in the test source.
+- **`testdata/` folder**: Go's testing tool ignores this folder, making it the perfect place to store golden files.
+- **Flags**: Often, Go engineers add a custom flag (like `-update`) to their tests to overwrite the golden files with the current output when behavior intentionally changes.
+- **Bytes comparison**: Most golden file tests use `bytes.Equal` or a string diff tool to show exactly what changed.
 
 ## Run Instructions
 
 ```bash
-go test ./08-quality-test/01-quality-and-performance/testing/10-golden-files
+# Run tests and compare output to goldens
+go test -v ./08-quality-test/01-quality-and-performance/testing/10-golden-files
 ```
 
 ## Code Walkthrough
 
-### Golden files make large outputs easier to diff.
+### The `testdata` Pattern
+Shows how to read a file from the `testdata` directory and compare its contents against the actual result of a function.
 
-Golden files make large outputs easier to diff.
-
-### Update goldens intentionally, not automatically by def
-
-Update goldens intentionally, not automatically by default.
-
-### Keep the compared surface stable and reviewable.
-
-Keep the compared surface stable and reviewable.
+### Handling Diffs
+Demonstrates how to provide a human-readable diff (using a library or simple logic) when the output doesn't match the golden file, making it easy to see what broke.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply TE.10 in a small service or tool.
+1. Modify the `main.go` code to change one field in the output. Run the test and watch it fail.
+2. Read the error message. Does it clearly show what changed?
+3. (Advanced) Implement an `-update` flag in the test to automatically refresh the golden file.
 
-## ⚠️ In Production
+## In Production
+Golden files are a double-edged sword. They are very easy to write, but they can lead to "Lazy Testing" where developers just update the golden file without actually checking if the new output is correct. **Always review the diff** before updating a golden file. They are best suited for stable outputs where any change is significant.
 
-Golden files are useful when the output is human-reviewed and small output changes should be deliberate.
-
-## 🤔 Thinking Questions
-
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## Thinking Questions
+1. Why are golden files better than hard-coded strings for large outputs?
+2. How do you handle "Non-deterministic" data (like timestamps or random IDs) in a golden file?
+3. Should golden files be checked into Version Control (Git)?
 
 ## Next Step
 
-Use this lesson as a reference surface before moving to the next track in the section.
+You've mastered the Testing Track! Now, let's look at the "What" and "How" of performance. Move to the [Profiling Track](../../profiling).

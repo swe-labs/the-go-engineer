@@ -24,7 +24,7 @@
 
 package main
 
-// Stage 07: Time & Scheduling â€” Time Basics
+// Stage 07: Time & Scheduling - Time Basics
 //
 //   - The `time.Time` struct and how it stores moments in time
 //   - Durations (`time.Duration`) representing intervals
@@ -89,7 +89,7 @@ func main() {
 
 	fmt.Println("Awake after sleep!")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: TM.2 formatting")
+	fmt.Println("NEXT UP: TM.2 formatting")
 	fmt.Println("   Current: TM.1 (time basics)")
 	fmt.Println("---------------------------------------------------")
 }

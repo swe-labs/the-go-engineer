@@ -136,7 +136,8 @@ func main() {
 	fmt.Println("  - Add fields to carry structured error information")
 	fmt.Println("  - Use errors.As() to check specific error types")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: TI.9 generics")
-	fmt.Println("   Current: TI.8 (custom errors)")
+	fmt.Println("NEXT UP: TI.9 generics")
+	fmt.Println("Current: TI.8 (custom-errors)")
+	fmt.Println("Previous: TI.7 (receiver-sets)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -94,13 +94,13 @@ func main() {
 
 	dbServer.IsOnline = false
 	dbServer.MemoryGB = 128
-	fmt.Printf("After upgrade: %s â€” Online: %t, RAM: %dGB\n",
+	fmt.Printf("After upgrade: %s - Online: %t, RAM: %dGB\n",
 		dbServer.Hostname, dbServer.IsOnline, dbServer.MemoryGB)
 	fmt.Println()
 
 	serverPtr := &dbServer
 	serverPtr.IsOnline = true
-	fmt.Printf("Via pointer: %s â€” Online: %t (original modified!)\n",
+	fmt.Printf("Via pointer: %s - Online: %t (original modified!)\n",
 		dbServer.Hostname, dbServer.IsOnline)
 	fmt.Println()
 
@@ -111,6 +111,7 @@ func main() {
 
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: TI.2 methods")
-	fmt.Println("   Current: TI.1 (structs)")
+	fmt.Println("Current: TI.1 (structs)")
+	fmt.Println("Previous: FE.10 (panic-and-recover)")
 	fmt.Println("---------------------------------------------------")
 }

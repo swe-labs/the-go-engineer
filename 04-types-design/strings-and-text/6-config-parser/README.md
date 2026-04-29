@@ -4,6 +4,8 @@
 
 Build a small config parser that turns `.env`-style text into structured data and renders a stable summary from that data.
 
+> **Backward Reference:** In [Lesson 5: Text Template](../5-text-template/README.md), you learned how to generate text from data. Now you will combine everything you have learned about strings, formatting, Unicode, Regex, and Templating to build a complete text-processing pipeline.
+
 ## Prerequisites
 
 - `ST.1` strings
@@ -81,16 +83,16 @@ go run ./04-types-design/strings-and-text/6-config-parser/_starter
 go test ./04-types-design/strings-and-text/6-config-parser
 ```
 
-## ⚠️ In Production
-
+## In Production
 Config parsing is exactly where text bugs become system bugs. Poor parsing rules, unstable output, and ad hoc string handling lead to silent misconfiguration and painful incident debugging.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is compiling the regex once better than compiling it inside the scan loop?
 2. What advantage does a map provide after parsing?
 3. Why is template-based rendering safer than manual scattered output?
 
+> **Forward Reference:** You have completed the section on Types and Design, as well as the deep dive into Text. Now it is time to look at how Go programs are organized and how they interact with the outside world. In [Section 05: Packages and I/O](../../../05-packages-io/README.md), you will learn about module boundaries, file systems, and network communication.
+
 ## Next Step
 
-Continue to the next package and I/O section after strings and text.
+Continue to [Section 05: Packages and I/O](../../../05-packages-io/README.md).

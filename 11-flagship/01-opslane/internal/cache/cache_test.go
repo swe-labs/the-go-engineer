@@ -285,7 +285,7 @@ func TestSingleflightPanicRecovery(t *testing.T) {
 	var sf Singleflight
 	key := "panic-key"
 
-	// First call panics — but Do should recover and return an error.
+	// First call panics - but Do should recover and return an error.
 	val, err := sf.Do(key, func() ([]byte, error) {
 		panic("simulated panic")
 	})
@@ -345,7 +345,7 @@ func TestUpdateExistingKeyDoesNotChangeCapacity(t *testing.T) {
 	_ = store.Set(ctx, "a", []byte("1"), time.Minute)
 	_ = store.Set(ctx, "b", []byte("2"), time.Minute)
 
-	// Update "a" — should NOT evict "b".
+	// Update "a" - should NOT evict "b".
 	_ = store.Set(ctx, "a", []byte("updated"), time.Minute)
 
 	if store.Len() != 2 {

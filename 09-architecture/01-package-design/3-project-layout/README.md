@@ -2,93 +2,76 @@
 
 ## Mission
 
-Decide when a Go project should stay flat, when it needs `internal/`, and when `cmd/` or other
-top-level directories actually earn their place.
+Master the standard Go project structure. Learn when to keep a project flat, when to use `cmd/` for multiple binaries, and how to use `internal/` and `pkg/` to organize complex systems while maintaining clean boundaries.
 
-This surface is the package-design track output for Stage 09.
+## Prerequisites
 
-## Files
+- PD.1 Naming Conventions
+- PD.2 Visibility and Export Rules
 
-- [main.go](./main.go): layout guide with small, medium, and large project examples
+## Mental Model
+
+Think of Project Layout as **Organizing a Workshop**.
+
+1. **The Workbench (Flat Layout)**: For a small project, you just put everything on the table. It's fast and easy.
+2. **The Tool Chest (`internal/`)**: As you get more tools, you put the specialty ones in a drawer that only you use.
+3. **The Display Window (`pkg/`)**: Some tools you want to share with neighbors. You put them on a shelf that's accessible from the outside.
+4. **The Instruction Manuals (`cmd/`)**: If you build several different machines (a server, a CLI, a cron job) that use the same parts, you put their individual "Start" buttons in separate folders.
+
+## Visual Model
+
+```mermaid
+graph TD
+    Root[my-project/] --> CMD[cmd/]
+    Root --> INT[internal/]
+    Root --> PKG[pkg/]
+    Root --> MOD[go.mod]
+
+    CMD --> SVR[server/main.go]
+    CMD --> CLI[cli/main.go]
+
+    INT --> LOGIC[logic/]
+    INT --> DB[database/]
+
+    PKG --> API[public-api/]
+```
+
+## Machine View
+
+- **`cmd/`**: Each subdirectory here is a `package main`. This is where the application starts.
+- **`internal/`**: Code that is private to this project. The compiler prevents other modules from importing it.
+- **`pkg/`**: (Optional) Code that is intended to be used by other projects. Many modern Go projects skip `pkg/` and put shared code in the root or in a separate module.
+- **Root**: Contains `go.mod`, `go.sum`, and often the most important domain logic if the project is small.
 
 ## Run Instructions
 
 ```bash
+# Run the layout demo
 go run ./09-architecture/01-package-design/3-project-layout
 ```
 
-## Success Criteria
-
-You should be able to:
-
-- explain when a flat layout is enough
-- describe what `cmd/`, `internal/`, and `pkg/` are for
-- call out common layout anti-patterns like `utils/`, `helpers/`, and premature folder sprawl
-
-
-## 
-
-
-
-## 
-
-
-
-## 
-
-
-
-## 
-
-
-
-## 
-
-
-
-## 
-
-
-
-
-## Prerequisites
-
-You should be comfortable with Go syntax, basic data structures, and the control flow mechanics covered in earlier sections.
-
-## Mental Model
-
-Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
-
-## Visual Model
-
-Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
-
-## Machine View
-
-At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
-
 ## Code Walkthrough
 
-We step through the code sequentially, examining how the interfaces are satisfied, where the errors are checked, and how the core loop manages control flow.
+### Small Project (Flat)
+Everything in the root. Perfect for libraries or simple tools.
+
+### Large Project (Structured)
+Uses `cmd/` for binaries and `internal/` for core logic. Prevents "Folder Sprawl" and circular dependencies.
 
 ## Try It
 
-Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+1. Look at the directory structure of this repository. Is it Flat or Structured?
+2. Move a package from the root into `internal/`. Try to import it from another project on your machine.
+3. Add a new command to the `cmd/` folder (e.g., `cmd/cleanup/main.go`) that imports logic from `internal/`.
 
 ## In Production
-
-Project layout directly impacts team velocity and code maintainability. A common mistake in Go is importing directory structures from other languages (like Java's deep nesting or Rails' strict MVC separation) instead of following idiomatic Go patterns. In production, the `cmd/` directory cleanly separates multiple executable binaries (e.g., a server, a CLI tool, a worker) that share the same core logic. The `internal/` directory is a crucial compiler-enforced boundary that prevents other repositories from importing your private packages, allowing you to refactor without breaking external consumers. Flat structures are preferred until complexity demands separation, because every package boundary introduces cognitive overhead and potential import cycles. Teams that embrace `internal/` and avoid grab-bag folders like `utils/` build codebases that remain navigable even as they scale to hundreds of thousands of lines.
+**Don't over-engineer your layout.** Start flat. Only create a new folder when you have a clear reason (e.g., you need to hide private code, or you need to build two different binaries). Go is not Java; deep folder hierarchies like `src/main/java/com/company/project/module` are an anti-pattern.
 
 ## Thinking Questions
-
-1. Why does the Go compiler enforce the `internal/` directory boundary, and what problem does it solve for large organizations with many repositories?
-2. If you put common helper functions in a package named `utils`, why does that eventually lead to cyclic import errors as the project grows?
-3. When transitioning a project from a single flat package to a structured layout, what is the most reliable indicator that it is time to split a package?
-4. How does separating the `main.go` file in `cmd/` from the business logic in `internal/` make testing the application easier?
+1. Why is the `cmd/` directory useful for large teams?
+2. If a project has only one binary, do you still need a `cmd/` folder?
+3. What happens if you try to import a package from another project's `internal/` directory?
 
 ## Next Step
 
-After `PD.3`, continue to [Stage 09 overview](../README.md) or move into
-[Stage 10 Production Operations](../../../10-production).
-
-
+Now that you can structure a project, learn about the high-level patterns that shape your code. Continue to [ARCH.1 Architecture Trade-offs](../../03-architecture-patterns/1-architecture-trade-offs).

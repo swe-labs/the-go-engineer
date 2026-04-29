@@ -6,7 +6,9 @@ Learn how to define custom error types that carry structured information for bet
 
 ## Why This Lesson Exists Now
 
-Go's built-in error interface is simple: just `Error() string`. But sometimes you need more informationâ€”what went wrong, where, and additional context. Custom error types let you do this.
+Go's built-in error interface is simple: just `Error() string`. But sometimes you need more information-what went wrong, where, and additional context. Custom error types let you do this.
+
+> **Backward Reference:** In [Lesson 7: Receiver Sets](../7-receiver-sets/README.md), you learned how receiver types affect interface satisfaction. Now, we will apply that knowledge to implement the built-in `error` interface using our own custom structs.
 
 ## Prerequisites
 
@@ -66,14 +68,16 @@ Use errors.As() to check specific error types and handle them differently.
 2. Use errors.As() to check for your custom error and access its fields.
 3. Wrap multiple error types and handle each differently.
 
-## ⚠️ In Production
+## In Production
 Custom errors are used in real applications for validation errors, API errors with codes, and database errors with retry information.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** We have explored how to make types more specific. Now, we will look at how to make them more general. In [Lesson 9: Generics](../9-generics/README.md), you will learn how to write code that works with many different types while still maintaining type safety.
+
 ## Next Step
 
-Continue to `TI.9` generics, then tackle the payroll milestone at `TI.10`.
+Continue to `TI.9` generics.

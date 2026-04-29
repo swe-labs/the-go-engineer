@@ -91,12 +91,10 @@ This is the classic loop capture pattern. In Go 1.22 and newer, loop variables a
 - Why didn't `add` or `multiply` in the last lesson capture state?
   They didn't reference any variables from outside their own bodies.
 
-## ⚠️ In Production
-
+## In Production
 Closure bugs are usually state bugs. The most common one is reusing the same loop variable across multiple callbacks or goroutines. Always be mindful of *what* your closure is capturing.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem does this topic solve?
 2. What breaks if this boundary is handled implicitly instead of explicitly?
 3. Where would you expect to use this topic in production Go code?

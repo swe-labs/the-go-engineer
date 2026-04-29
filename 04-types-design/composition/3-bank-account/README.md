@@ -4,6 +4,8 @@
 
 Build a small bank-account model that proves the difference between named-field composition, embedding, promoted methods, and method shadowing.
 
+> **Backward Reference:** In [Lesson 2: Embedding](../2-embedding/README.md), you learned the mechanics of promoted methods and fields. Now you will apply those mechanics to build a realistic system that requires careful use of both composition and method shadowing to handle different business rules.
+
 ## Prerequisites
 
 - `CO.1` composition
@@ -76,15 +78,15 @@ go run ./04-types-design/composition/3-bank-account/_starter
 go test ./04-types-design/composition/3-bank-account
 ```
 
-## ⚠️ In Production
-
+## In Production
 Composition and embedding show up in data models, adapters, wrappers, and reusable components. Teams get into trouble when they describe embedding as inheritance and stop reasoning about the actual field and method behavior.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is shadowing different from inheritance-based overriding?
 2. When is embedding clearer than a named field, and when is it less clear?
 3. What behavior belongs in the shared `Account` type, and what behavior should stay in outer types?
+
+> **Forward Reference:** You have learned how to build complex structures. Now we will focus on one of the most common types in any program: text. In [Lesson 1: Strings](../../strings-and-text/1-strings/README.md), you will go beyond basic text and learn how Go handles UTF-8, runes, and memory-efficient string manipulation.
 
 ## Next Step
 

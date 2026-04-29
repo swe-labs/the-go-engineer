@@ -24,7 +24,7 @@
 
 package main
 
-// Stage 07: Time & Scheduling â€” Time Formatting
+// Stage 07: Time & Scheduling - Time Formatting
 //
 //   - The unique Go standard Time Layout string: "2006-01-02 15:04:05"
 //   - Built-in constants like `time.RFC3339`
@@ -80,7 +80,7 @@ func main() {
 		fmt.Printf("Parsed RFC3339 (in UTC): %s\n", parsedTimeRFC.UTC())
 	}
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: TM.3 timers & tickers")
+	fmt.Println("NEXT UP: TM.3 timers & tickers")
 	fmt.Println("   Current: TM.2 (formatting)")
 	fmt.Println("---------------------------------------------------")
 }

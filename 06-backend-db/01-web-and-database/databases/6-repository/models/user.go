@@ -1,28 +1,23 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
 
 package models
 
 import "time"
 
-// User represent a customer in the database with a backing table of users
+// User represents the domain model for a user in our system.
 type User struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
-	// 1. Reflection Ignore Tags
-	// The `json:"-"` struct tag explicitly tells the `encoding/json` package to
-	// NEVER serialize this field. This is critical for security to guarantee we
-	// don't accidentally leak password hashes in API responses.
-	HashedPassword string    `json:"-"`
-	CreatedAt      time.Time `json:"created_at"`
-	Profile        Profile   `json:"profile"`
+	ID        int       `json:"id"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	Password  string    `json:"-"` // Omit from JSON for security
+	CreatedAt time.Time `json:"created_at"`
+	Profile   Profile   `json:"profile"`
 }
 
-// Profile belongs to a user
+// Profile represents the extended user information.
 type Profile struct {
-	UserID  int       `json:"user_id"`
-	Avatar  string    `json:"avatar"`
-	Created time.Time `json:"created"`
+	UserID    int       `json:"user_id"`
+	Avatar    string    `json:"avatar"`
+	CreatedAt time.Time `json:"created_at"`
 }

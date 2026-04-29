@@ -1,101 +1,94 @@
 # The Go Engineer Learning Path
 
-This guide explains how to move through the v2.1 curriculum.
+This guide explains how to move through the stable v2.1 curriculum.
 
-The source of truth for structure and section ownership is [ARCHITECTURE.md](./ARCHITECTURE.md).
+The source of truth for section ownership is [ARCHITECTURE.md](./ARCHITECTURE.md).
 
-## The 5 Phases
+## Phase Overview
 
-| Phase | Name | Sections | Progress |
+| Phase | Sections | Focus | Progress |
 | --- | --- | --- | --- |
-| 0 | Machine Foundation | s00 | 0% -> 5% |
-| 1 | Language Foundation | s01-s04 | 5% -> 52% |
-| 2 | Engineering Core | s05-s08 | 52% -> 87% |
-| 3 | Systems Engineering | s09-s10 | 87% -> 96% |
-| 4 | Flagship Project | s11 | 96% -> 100% |
+| 0 | s00 | machine foundation | 0% to 5% |
+| 1 | s01-s04 | language foundation | 5% to 52% |
+| 2 | s05-s08 | engineering core | 52% to 87% |
+| 3 | s09-s10 | systems engineering | 87% to 96% |
+| 4 | s11 | flagship integration | 96% to 100% |
 
-## Three Ways to Move
+## Recommended Paths
 
 ### Full Path
 
-Best for:
+Use this path if you are new to programming or want the complete curriculum.
 
-- complete beginners
-- learners new to programming
-- learners new to Go who want the most support
+Rules:
 
-Rule:
-
-- follow the 12 sections in order (`s00` -> `s11`)
-- complete each section proof surface
-- do not skip repetition by default
+- start at `s00`
+- follow sections in order through `s11`
+- run each lesson command
+- complete section proof surfaces before moving on
 
 ### Bridge Path
 
-Best for:
+Use this path if you already program but are new to Go.
 
-- experienced programmers who are new to Go
-- learners who know programming already but need Go-specific instincts
+Rules:
 
-Rule:
-
-- keep the same section order
-- skim setup repetition where appropriate
-- do not skip proof surfaces just because syntax feels familiar
-
-Suggested route:
-
-1. Skim [`00-how-computers-work`](./00-how-computers-work) if you already understand processes, memory, and the terminal.
-2. Use [`01-getting-started`](./01-getting-started) as a short sanity pass.
-3. Move carefully through Phase 1 (`s02` to `s04`) to absorb Go-specific patterns.
-4. Slow down at Phase 2 (`s05` to `s08`) where packages, I/O, concurrency, and testing habits matter more.
-5. Continue through Phase 3 and Phase 4 in order.
+- skim `s00` if you already understand process, memory, terminal, and OS basics
+- complete `s01` as a Go toolchain check
+- move carefully through `s02` to `s04`; these establish Go-specific habits
+- do not skip proof surfaces in `s05` through `s08`
+- complete `s09` through `s11` in order
 
 ### Targeted Path
 
-Best for:
+Use this path if you are returning to strengthen a specific area.
 
-- working Go developers
-- learners strengthening one weak area
-- learners returning to improve a specific skill
+Rules:
 
-Rule:
-
-- choose one phase or section intentionally
+- choose one section deliberately
+- read that section README first
 - check prerequisites honestly
-- complete that section proof surface before claiming mastery
+- complete that section proof surface before claiming the skill
 
-## Recommended Entry Points
+## Entry Points
 
-| Goal | Start Here | Before You Start |
+| Goal | Start here | Prerequisite |
 | --- | --- | --- |
-| First Go setup and execution | `s01` Getting Started | None |
-| Understand how computers work | `s00` How Computers Work | None |
-| Strengthen fundamentals and type design | `s04` Types & Design | Complete or skim `s01` to `s03` |
-| Improve backend, API, and database fluency | `s06` Backend, APIs & Databases | Be comfortable with `s05` and explicit errors from `s03` |
-| Improve concurrency and testing | `s07` Concurrency / `s08` Quality & Testing | Be solid on functions, errors, packages, and interfaces |
-| Focus on architecture and security | `s09` Architecture & Security | Complete Phase 2 |
-| Focus on deployment and operations | `s10` Production Operations | Complete `s06` and `s07` first |
-| Build an integrated system | `s11` Opslane Flagship | Complete all earlier section milestones |
+| First Go setup and execution | `s01` Getting Started | none |
+| Understand the machine model | `s00` How Computers Work | none |
+| Strengthen language fundamentals | `s02` Language Basics | `s01` |
+| Improve function and error design | `s03` Functions and Errors | `s02` |
+| Improve type design | `s04` Types and Design | `s02`, `s03` |
+| Build CLI and filesystem tools | `s05` Packages, I/O and CLI | `s03`, `s04` |
+| Build backend and database code | `s06` Backend, APIs and Databases | `s05`, explicit error handling |
+| Improve concurrency | `s07` Concurrency | functions, errors, packages, interfaces |
+| Improve testing and profiling | `s08` Quality and Testing | `s05`, `s06`, `s07` |
+| Study architecture and security | `s09` Architecture and Security | Phase 2 |
+| Study production operations | `s10` Production Operations | `s06`, `s07`, `s08` |
+| Integrate the whole system | `s11` Opslane Flagship | all earlier phases |
 
-## Validation Floors
+## Proof Expectations
 
 Fast paths are allowed. Proof is not optional.
 
-- **Full Path**: complete every required milestone and section proof surface
-- **Bridge Path**: complete important proof surfaces even if you skim repetition
-- **Targeted Path**: complete the chosen section proof surface before claiming mastery
+- Full Path: complete every required milestone and proof surface.
+- Bridge Path: complete proof surfaces even when syntax is familiar.
+- Targeted Path: complete the chosen section's proof surface before moving on.
+
+## Navigation Rule
+
+When a lesson mentions a concept that is introduced elsewhere, follow the inline reference:
+
+- forward references name the later section or lesson that teaches the topic in detail
+- backward references name the earlier lesson that established the idea
+- sibling references point to nearby tracks that reuse the concept
 
 ## Companion Docs
 
 | Document | Purpose |
 | --- | --- |
 | [README.md](./README.md) | project overview and quick start |
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | curriculum source of truth |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | teaching contract and README-first standard |
-| [ROADMAP.md](./ROADMAP.md) | post-v2.1 focus, maintenance status, and implementation priorities |
-| [docs/PROGRESSION.md](./docs/PROGRESSION.md) | milestone progression and stage overview |
-
-## Bottom Line
-
-Choose the phase that matches your real background, read the section `README.md` first, run the linked code, and complete the proof surfaces.
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | locked curriculum structure |
+| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | teaching contract |
+| [docs/PROGRESSION.md](./docs/PROGRESSION.md) | phase and milestone visualization |
+| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | verification expectations |

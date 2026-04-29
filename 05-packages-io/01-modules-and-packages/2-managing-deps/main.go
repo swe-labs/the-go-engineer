@@ -8,16 +8,17 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Managing Dependencies fundamentals and practical application in Go.
+//   - How to add, update, and remove external dependencies using Go modules.
 //
 // WHY THIS MATTERS:
-//   - Managing Dependencies provides a structured approach to writing clean Go code.
+//   - Dependency management is a core engineering task. Choosing the right
+//     versions and cleaning up unused code keeps projects fast and secure.
 //
 // RUN:
 //   go run ./05-packages-io/01-modules-and-packages/2-managing-deps
 //
 // KEY TAKEAWAY:
-//   - Managing Dependencies fundamentals and practical application in Go.
+//   - Use 'go get' to change versions and 'go mod tidy' to sync your project state.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -30,29 +31,29 @@ import (
 	"strings"
 )
 
-// Stage 05: Modules and Packages â€” Managing Dependencies
+// Stage 05: Modules and Packages - Managing Dependencies
 //
 // This file demonstrates dependency-management workflows.
 // Run the commands below in a terminal to see them in action.
 //
 // ADDING DEPENDENCIES:
-//   go get github.com/stretchr/testify@latest        â€” latest version
-//   go get github.com/stretchr/testify@v1.11.1       â€” specific version
-//   go get github.com/stretchr/testify@v1.10.0       â€” downgrade
+//   go get github.com/stretchr/testify@latest        - latest version
+//   go get github.com/stretchr/testify@v1.11.1       - specific version
+//   go get github.com/stretchr/testify@v1.10.0       - downgrade
 //
 // REMOVING DEPENDENCIES:
-//   go get github.com/some/pkg@none                  â€” remove from go.mod
-//   go mod tidy                                      â€” clean up unused
+//   go get github.com/some/pkg@none                  - remove from go.mod
+//   go mod tidy                                      - clean up unused
 //
 // INSPECTING DEPENDENCIES:
-//   go list -m all                                   â€” all modules
-//   go list -m -versions github.com/stretchr/testify â€” available versions
-//   go mod why github.com/stretchr/objx              â€” why is this needed?
-//   go mod graph                                     â€” full dependency tree
+//   go list -m all                                   - all modules
+//   go list -m -versions github.com/stretchr/testify - available versions
+//   go mod why github.com/stretchr/objx              - why is this needed?
+//   go mod graph                                     - full dependency tree
 //
 // SECURITY:
 //   go install golang.org/x/vuln/cmd/govulncheck@latest
-//   govulncheck ./...                                â€” scan for known vulnerabilities
+//   govulncheck ./...                                - scan for known vulnerabilities
 
 func main() {
 	fmt.Println("=== Managing Dependencies ===")
@@ -92,7 +93,8 @@ func main() {
 
 	fmt.Println(string(whyOut))
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("ðŸš€ NEXT UP: MP.3 versioning")
-	fmt.Println("   Current: MP.2 (managing deps)")
+	fmt.Println("NEXT UP: MP.3 versioning")
+	fmt.Println("Current: MP.2 (managing-deps)")
+	fmt.Println("Previous: MP.1 (module-basics)")
 	fmt.Println("---------------------------------------------------")
 }

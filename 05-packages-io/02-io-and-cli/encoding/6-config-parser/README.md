@@ -1,131 +1,76 @@
-# EN.6 Config Parser
+# EN.6 Config Parser Project
 
 ## Mission
 
-Build a small JSON config loader that reads from disk, decodes from a stream, and validates
-required fields after parsing.
-
-This exercise is the Encoding track milestone for Stage 05.
+Build a robust application configuration loader that reads from disk, decodes from a JSON stream, and performs post-parse validation to ensure the program has all necessary settings to start.
 
 ## Prerequisites
 
-Complete these first:
+- `EN.1` marshalling
+- `EN.2` unmarshal
+- `EN.4` decode
 
-- `EN.1` JSON marshalling
-- `EN.2` JSON unmarshalling
-- `EN.3` JSON encoder
-- `EN.4` JSON decoder
+## Mental Model
 
-## What You Will Build
+Think of a Config Parser as the **Pre-Flight Checklist** for a pilot.
 
-Implement a config loader that:
+Before the plane (your application) takes off, you must check that:
+1. The **Flight Plan** (the config file) is readable.
+2. The **Instructions** (the JSON) are formatted correctly.
+3. All **Critical Systems** (required fields like `Port` and `DatabaseURL`) have been initialized.
 
-1. opens a JSON file from disk
-2. decodes it with `json.NewDecoder`
-3. stores the data in a typed `AppConfig` struct
-4. validates required fields after decoding
-5. returns useful wrapped errors on failure
+If any of these checks fail, the plane should never leave the ground.
 
-## Files
+## Visual Model
 
-- [main.go](./main.go): complete solution with teaching comments
-- [config_test.go](./config_test.go): tests for parsing and validation behavior
-- [_starter/main.go](./_starter/main.go): starter file with TODOs and requirements
+```mermaid
+graph TD
+    A["config.json"] --> B["os.Open"]
+    B --> C["json.NewDecoder"]
+    C --> D["Decode into Struct"]
+    D --> E{"Validate Fields"}
+    E -- "Missing" --> F["Return Error / Exit"]
+    E -- "Valid" --> G["Start Application"]
+```
+
+## Machine View
+
+This project brings together filesystem I/O and JSON streaming. By using `json.NewDecoder(file)`, we pipe the file contents directly into the JSON parser. This is more efficient than loading the whole file into memory first. Crucially, we implement a `validate()` method because Go's `json` package silently ignores missing fields (assigning them their zero values). Without validation, your app might try to connect to an empty database URL or start on port 0, leading to confusing runtime errors.
 
 ## Run Instructions
-
-Run the completed solution:
 
 ```bash
 go run ./05-packages-io/02-io-and-cli/encoding/6-config-parser
 ```
 
-Run the tests:
-
-```bash
-go test ./05-packages-io/02-io-and-cli/encoding/6-config-parser
-```
-
-Run the starter:
-
-```bash
-go run ./05-packages-io/02-io-and-cli/encoding/6-config-parser/_starter
-```
-
-## Success Criteria
-
-Your finished solution should:
-
-- decode directly from an open file with `json.NewDecoder`
-- validate required fields after parsing
-- distinguish missing files from invalid JSON and invalid config data
-- use `%w` when wrapping lower-level errors
-- pass the provided tests
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Mental Model
-
-Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
-
-## Visual Model
-
-Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
-
-## Machine View
-
-At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
-
 ## Solution Walkthrough
 
-The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+- **AppConfig Struct**: Defines the schema of our configuration. We use struct tags to match JSON keys like `app_name` to Go fields like `AppName`.
+- **loadConfig Function**: Handles the "Boilerplate" of file management: opening the file, ensuring it's closed (`defer`), creating the decoder, and finally triggering the validation.
+- **validate() Method**: This is a "Sanity Check". It inspects each critical field in the populated struct. If a field like `AppName` is still its zero value (`""`), it means the field was either missing from the JSON or was explicitly set to an empty string-both of which are invalid for our app.
 
 ## Try It
 
-Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+1. Change the sample JSON to remove a required field like `port` and observe the validation error.
+2. Add a new required field `Environment` (e.g., "production", "staging") and update the validation logic.
+3. Modify `loadConfig` to allow an optional environment variable to override the config file path.
 
 ## Verification Surface
 
-The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+- Use `go run ./05-packages-io/02-io-and-cli/encoding/6-config-parser`.
+- Starter path: `05-packages-io/02-io-and-cli/encoding/6-config-parser/_starter`.
+
 
 ## In Production
-
-Configuration parsing is one of the first things that runs when a production service starts, and it is one of the most common sources of startup failures. A misconfigured JSON file — a missing comma, a wrong type, or an absent required field — can prevent an entire fleet of servers from booting after a deploy. Production config loaders validate aggressively on startup so that bad configuration fails fast and loudly, rather than silently producing wrong behavior at runtime. The distinction between "file not found," "invalid JSON syntax," and "valid JSON but missing required fields" matters because each failure points to a different operational fix: a missing file means a deployment packaging error, invalid JSON means a human editing mistake, and missing fields mean the config schema changed without updating all environments. Teams that wrap errors properly at each layer — as this exercise teaches with `%w` — can trace the root cause from a single log line instead of guessing.
+In real-world applications, you might want to support multiple formats like YAML or TOML. Libraries like **Viper** are industry standard for this, as they handle file loading, environment variable overrides, and default values in a single package. However, understanding the manual process with the standard library is essential for debugging and building simpler, low-dependency tools.
 
 ## Thinking Questions
+1. Why is validation done *after* decoding rather than *during* decoding?
+2. What are the benefits of using `json.NewDecoder` over `os.ReadFile` for configuration?
+3. How would you handle a configuration where some fields are only required if `Debug` is set to `false`?
 
-1. Why is it important to validate config fields after parsing rather than relying on zero values to signal "not set"?
-2. If your service reads config from both a file and environment variables, which source should take precedence and why?
-3. How would you handle config changes that need to take effect without restarting the service?
-4. What risks does `json.NewDecoder` introduce compared to `json.Unmarshal` when reading from an untrusted source?
+> **Forward Reference:** You have mastered how data is structured and transported. Now we will look deeper into how data is actually stored and managed on the disk. In [Lesson 1: Files](../../filesystem/1-files/README.md), you will learn the core concepts of file descriptors and I/O modes.
 
 ## Next Step
 
-After you complete this exercise, continue to the [Filesystem track](../../filesystem) or back to
-the [Stage 05 overview](../../README.md).
-
-
+Continue to `FS.1` files.

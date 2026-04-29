@@ -1,104 +1,89 @@
-# CL.4 File Organizer
+# CL.4 File Organizer Project
 
 ## Mission
 
-Build a small CLI that groups files by extension and can preview its work safely before moving
-anything.
-
-This exercise is the CLI track milestone for Stage 05.
+Build a professional CLI tool that cleans up messy directories by grouping files into subfolders based on their file extensions.
 
 ## Prerequisites
-
-Complete these first:
 
 - `CL.1` args
 - `CL.2` flags
 - `CL.3` subcommands
 
-## What You Will Build
+## Mental Model
 
-Implement a CLI tool that:
+Think of this tool as a **Sorting Machine**.
 
-1. accepts `--dir` and `--dry-run` flags
-2. reads a directory with `os.ReadDir`
-3. groups files into subdirectories by extension
-4. skips files without extensions cleanly
-5. previews moves without mutating the filesystem in dry-run mode
+1. **Input**: A messy directory full of files.
+2. **Analysis**: The tool checks each file's "Label" (extension).
+3. **Logistics**: The tool ensures a "Bin" (subdirectory) exists for that label.
+4. **Action**: The tool moves the file into the correct bin.
 
-## Files
+## Visual Model
 
-- [main.go](./main.go): complete solution with teaching comments
-- [_starter/main.go](./_starter/main.go): starter file with TODOs and requirements
+```mermaid
+graph LR
+    A["Main Dir"] --> B["file1.pdf"]
+    A --> C["file2.jpg"]
+    A --> D["file3.pdf"]
+    B -- "organize" --> E["pdf/file1.pdf"]
+    C -- "organize" --> F["jpg/file2.jpg"]
+    D -- "organize" --> G["pdf/file3.pdf"]
+```
+
+## Machine View
+
+This tool uses several low-level OS operations:
+- `os.ReadDir`: Reads the directory index from the filesystem.
+- `os.MkdirAll`: Checks for directory existence and creates it if missing (idempotent operation).
+- `os.Rename`: A highly efficient OS operation that updates the directory entry pointers in the filesystem rather than copying the actual file data (when moving within the same partition).
+- `filepath`: Ensures the tool works correctly on both Windows (using `\`) and Unix (using `/`).
 
 ## Run Instructions
 
-Run the completed solution:
+```bash
+go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer
+```
 
+Run on a specific directory:
 ```bash
 go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer --dir=./my-folder
 ```
 
-Run the starter:
-
+Perform a safe preview (Dry Run):
 ```bash
-go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer/_starter --dir=./my-folder
+go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer --dir=./my-folder --dry-run
 ```
-
-## Success Criteria
-
-Your finished solution should:
-
-- parse flags with the standard `flag` package
-- fail safely when `--dir` is missing
-- keep `--dry-run` non-destructive
-- create extension directories only when needed
-- move or preview each file clearly
-
-## Common Failure Modes
-
-- using `os.Args` manually when typed flags would be clearer
-- moving files immediately without a dry-run path
-- forgetting to skip directories
-- forgetting that `filepath.Ext` returns the leading dot
-
-
-## Mental Model
-
-Think of this as the conceptual blueprint. The components interact by exchanging state, defining clear boundaries between what is requested and what is provided.
-
-## Visual Model
-
-Visualizing this process involves tracing the execution path from the input entry point, through the processing layers, and out to the final output or side effect.
-
-## Machine View
-
-At the hardware level, this translates into specific memory allocations, CPU instruction cycles, and OS-level system calls to manage resources efficiently.
 
 ## Solution Walkthrough
 
-The solution demonstrates a complete implementation, proving the concept by bridging the individual requirements into a single, cohesive executable.
+- **--dry-run Flag**: A standard safety pattern in CLI engineering. It allows the tool to log exactly what it *would* do without actually performing the destructive `os.Rename` or `os.MkdirAll` operations.
+- **os.ReadDir**: Returns a slice of `DirEntry` objects. We iterate over these, skipping anything that is already a directory to avoid recursive messiness.
+- **filepath.Ext**: Extracts the extension from the filename. We then clean it up (removing the dot) to use it as the subdirectory name.
+- **os.MkdirAll and os.Rename**: The "Engine" of the tool. `MkdirAll` is called for every file to ensure the target folder exists, and `Rename` moves the file to its new home.
 
 ## Try It
 
-Run the code locally. Modify the inputs, toggle the conditions, and observe how the output shifts. Experimentation is the fastest way to cement your understanding.
+1. Add an `--exclude` flag that takes a comma-separated list of extensions to skip.
+2. Modify the tool to count how many files of each type were moved and print a summary at the end.
+3. Add a `--verbose` flag that prints the full path of every file being moved.
 
 ## Verification Surface
 
-The correctness of this component is proven by its associated test suite. We verify boundaries, handle edge cases, and ensure performance constraints are met.
+- Use `go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer`.
+- Starter path: `05-packages-io/02-io-and-cli/cli-tools/4-file-organizer/_starter`.
+
 
 ## In Production
-
-Dry-run modes are a critical safety pattern in production CLI tools. Tools like `terraform plan`, `kubectl diff`, and database migration runners all implement preview-before-mutate behavior because filesystem and infrastructure mutations are difficult or impossible to reverse. In production environments, a file-organizing tool would need to handle concurrent access (another process writing to the same directory), permission errors on restricted directories, symlink loops that cause infinite recursion, and atomic moves across filesystem boundaries where `os.Rename` silently fails. The pattern of separating the "decide what to do" logic from the "do it" logic — which this exercise teaches through the dry-run flag — is the foundation of safe operational tooling. Teams that skip dry-run behavior in internal tools learn the hard way when a script reorganizes a production asset directory and breaks serving paths.
+Any tool that moves or deletes files must be treated with extreme caution. Always test with `--dry-run` first. In a production environment, you should also check if the target file already exists before renaming, to prevent accidental data loss from overwriting files with the same name in different source locations.
 
 ## Thinking Questions
+1. Why is `os.Rename` faster than copying a file and then deleting the original?
+2. What happens if the program crashes halfway through organizing a directory with 1,000 files?
+3. How would you modify this tool to handle subdirectories recursively?
 
-1. Why is `os.Rename` not guaranteed to work when source and destination are on different filesystems, and what would you do instead?
-2. If two instances of this tool run concurrently on the same directory, what race conditions could occur and how would you prevent them?
-3. How would you extend this tool to support an "undo" operation that reverses the last organize run?
-4. Why does `filepath.Ext` include the leading dot, and what edge cases does that create for files like `.gitignore` or `archive.tar.gz`?
+> **Forward Reference:** You have mastered the art of CLI interaction and basic file manipulation. Now we need to look at how to handle more complex data formats. In [Lesson 1: Marshalling](../../encoding/1-marshalling/README.md), you will learn how to turn Go structs into JSON and XML strings.
 
 ## Next Step
 
-After you complete this exercise, continue to the [Encoding track](../../encoding) or back to the
-[Stage 05 overview](../../README.md).
-
+Continue to `EN.1` marshalling.

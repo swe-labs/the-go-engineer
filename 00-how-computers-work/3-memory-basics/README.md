@@ -62,13 +62,11 @@ The goal is to make the stack/heap distinction explainable before later performa
 2. Add another helper that returns a slice and explain why its backing storage may outlive the function.
 3. Run `go build -gcflags='-m' ./00-how-computers-work/3-memory-basics` and read the compiler's escape-analysis hints.
 
-## ⚠️ In Production
-
+## In Production
 Heavy heap allocation creates garbage-collector pressure.
 That is one reason hot paths often avoid unnecessary temporary objects.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why does the heap need a garbage collector while the stack usually does not?
 2. Can a garbage-collected language still leak memory? If so, how?
 3. Why do goroutine stacks start small and grow instead of reserving a huge stack up front?

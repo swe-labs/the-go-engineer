@@ -88,12 +88,10 @@ go run ./02-language-basics/04-data-structures/6-contact-manager/_starter
 go test ./02-language-basics/04-data-structures/6-contact-manager
 ```
 
-## ⚠️ In Production
-
+## In Production
 Real systems constantly combine indexed storage, keyed lookup, and in-place mutation. Understanding how those pieces interact is what keeps updates correct and shared state understandable.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why does the map store indexes instead of the phone numbers directly?
 2. What invariant must stay true for the parallel slices to remain correct?
 3. Why does updating through a pointer change the stored slice value?

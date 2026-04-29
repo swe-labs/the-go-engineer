@@ -1,65 +1,69 @@
-# ARCH.7 CQRS basics
+# ARCH.7 CQRS Basics
 
 ## Mission
 
-Learn when separating write models from read models improves a system and when it is needless complexity.
+Master the Command Query Responsibility Segregation (CQRS) pattern. Learn how to separate your "Write" logic (Commands) from your "Read" logic (Queries) to build systems that can scale these two different workloads independently.
 
 ## Prerequisites
 
-- ARCH.6
+- ARCH.6 Event-Driven Architecture
 
 ## Mental Model
 
-CQRS separates commands from queries when one model cannot serve both jobs well.
+Think of CQRS as **A Restaurant's Menu vs. The Chef's Recipe**.
+
+1. **The Command (The Chef's Recipe)**: This is the Write side. It's complex, highly detailed, and designed for *action*. It has all the ingredients and precise instructions to make the food. (The Database Aggregate).
+2. **The Query (The Menu)**: This is the Read side. It's simple, formatted for the customer, and designed for *speed*. It doesn't tell you how the food is made; it just shows the name, price, and a photo. (A Read Model).
+3. **The Segregation**: You don't hand the customer a 20-page technical recipe. You hand them a 1-page menu. They are two different models of the same data.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["CQRS basics"] --> B["One model does not always fit both commands and queries."]
-    B --> C["CQRS raises consistency and synchronization questions that simpler systems avoid."]
+    Client[Client] -->|Command| WriteAPI[Write Service]
+    Client -->|Query| ReadAPI[Read Service]
+
+    WriteAPI -->|Write| WriteDB[(Primary DB: Relational)]
+    WriteDB -->|Sync/Event| ReadDB[(Read DB: Cache/Search)]
+
+    ReadAPI -->|Read| ReadDB
 ```
 
 ## Machine View
 
-Different read and write shapes can make heavy reporting or write-heavy domains easier to evolve.
+- **Command**: Changes the state of the system. Returns nothing (or just a success/fail ID).
+- **Query**: Returns data. Does *not* change the state of the system.
+- **Eventual Consistency**: When the Write side changes, it might take a few milliseconds (or seconds) for the Read side to update. This is the trade-off for high read performance.
 
 ## Run Instructions
 
 ```bash
+# Run the demo to see how Read and Write models differ
 go run ./09-architecture/03-architecture-patterns/7-cqrs-basics
 ```
 
 ## Code Walkthrough
 
-### One model does not always fit both commands and querie
+### The Write Model (Command)
+A struct with complex validation rules and business logic for processing an "Order." It is optimized for correctness.
 
-One model does not always fit both commands and queries.
-
-### Read models often optimize different access patterns t
-
-Read models often optimize different access patterns than write models.
-
-### CQRS raises consistency and synchronization questions 
-
-CQRS raises consistency and synchronization questions that simpler systems avoid.
+### The Read Model (Query)
+A flat, simple struct optimized for a "Recent Orders" dashboard. It doesn't have any validation logic; it's just a view of the data.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply ARCH.7 in a small service or tool.
+1. Look at `main.go`. Identify the "Command" handler and the "Query" handler.
+2. Add a new field `Status` to the Write model. Observe how you have to manually update the Read model to reflect this change.
+3. Discuss: Why might you use a different database (e.g., Elasticsearch) for the Read side while keeping the Write side in Postgres?
 
-## ⚠️ In Production
+## In Production
+**Don't use CQRS for everything.** It adds significant complexity because you have to keep the two models in sync. Start with a single model. Only introduce CQRS when your read queries are getting too slow/complex (e.g., huge SQL Joins) or when your read and write scaling needs are vastly different.
 
-CQRS is a useful tool only when the read/write mismatch is real enough to justify the extra moving parts.
-
-## 🤔 Thinking Questions
-
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## Thinking Questions
+1. Why does CQRS often go hand-in-hand with Event-Driven Architecture?
+2. What is "Task-Based UI," and how does it relate to Commands?
+3. Can you have CQRS *without* having two separate databases?
 
 ## Next Step
 
-Continue to `ARCH.8`.
+Now that you can scale your data, learn when it's time to scale your services. Continue to [ARCH.8 When to split services](../8-when-to-split-services).

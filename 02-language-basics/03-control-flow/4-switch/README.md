@@ -65,12 +65,10 @@ The default case handles the fallback path when no explicit case matches.
 2. Change the `score` value in the tagless `switch`.
 3. Reorder the score cases and notice how case order affects behavior.
 
-## ⚠️ In Production
-
+## In Production
 `switch` often makes state machines, command routers, mode handlers, and category-based rules easier to read than long `if / else if` ladders.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. When is `switch` clearer than `if / else if`?
 2. Why is Go's "no fallthrough by default" behavior safer for beginners?
 3. What is the difference between a tagged and tagless `switch`?

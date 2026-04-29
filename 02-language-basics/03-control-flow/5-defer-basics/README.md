@@ -1,4 +1,4 @@
-# CF.5 Defer — Mechanics & Order
+# CF.5 Defer - Mechanics & Order
 
 ## Mission
 
@@ -59,12 +59,10 @@ If you have multiple defers, they run in reverse order (LIFO). This is important
 2. Put a `defer` inside an `if` block and see if it runs when the condition is false.
 3. Try to use `defer` to print a variable that you change later in the function. (Note: the arguments are evaluated when the `defer` is called, not when it runs!)
 
-## ⚠️ In Production
-
+## In Production
 `defer` is idiomatic Go. It is used in almost every production codebase to handle resource management. It is much safer than manually calling cleanup functions at every return point.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is Last-In-First-Out (LIFO) the correct order for cleanup?
 2. What happens if a function panics? Does `defer` still run?
 3. When should you NOT use `defer`?

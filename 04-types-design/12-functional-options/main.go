@@ -7,7 +7,7 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn the functional options patternÃ¢â‚¬â€a common Go pattern for building configurable APIs without requiring many constructor parameters.
+//   - Learn the functional options pattern-a common Go pattern for building configurable APIs without requiring many constructor parameters.
 //
 // WHY THIS MATTERS:
 //   - Think of ordering a pizza. You could have a constructor with 20 parameters (crust, sauce, cheese, toppings, size, etc.). Or you could have `WithExt...
@@ -16,7 +16,7 @@
 //   go run ./04-types-design/12-functional-options
 //
 // KEY TAKEAWAY:
-//   - Learn the functional options patternÃ¢â‚¬â€a common Go pattern for building configurable APIs without requiring many constructor parameters.
+//   - Learn the functional options pattern-a common Go pattern for building configurable APIs without requiring many constructor parameters.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -137,7 +137,8 @@ func main() {
 	fmt.Println("  - Options are composable and reusable")
 	fmt.Println("  - Standard Go pattern for extensible APIs")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.13 method values")
-	fmt.Println("   Current: TI.12 (functional options)")
+	fmt.Println("NEXT UP: TI.13 method-values")
+	fmt.Println("Current: TI.12 (functional-options)")
+	fmt.Println("Previous: TI.11 (dynamic-typing-with-any)")
 	fmt.Println("---------------------------------------------------")
 }

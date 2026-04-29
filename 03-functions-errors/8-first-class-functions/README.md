@@ -89,12 +89,10 @@ This is an **anonymous function**. We define a function without a name directly 
 - Why not just use an `if` statement to choose the operation?
   Passing functions makes your code much more flexible. A library author can write `calculate` and let *you* provide the custom math operations.
 
-## ⚠️ In Production
-
+## In Production
 Callback-driven APIs stay readable only when function signatures are narrow and the names reveal the job each callback performs. Use first-class functions to make your code flexible, but don't overcomplicate simple branching logic.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem does this topic solve?
 2. What breaks if this boundary is handled implicitly instead of explicitly?
 3. Where would you expect to use this topic in production Go code?

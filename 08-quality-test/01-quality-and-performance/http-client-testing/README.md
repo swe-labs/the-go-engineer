@@ -1,6 +1,6 @@
-# Quality — HTTP Client Testing
+# Quality - HTTP Client Testing
 
-Manual mock establishes the pattern (interface → fake struct). Function-injection mock extends the fake with a GetFunc field. Table-driven mock applies §13 testing patterns to the function mock. Testify/mock replaces the hand-written mock with a library.
+Manual mock establishes the pattern (interface -> fake struct). Function-injection mock extends the fake with a GetFunc field. Table-driven mock applies §13 testing patterns to the function mock. Testify/mock replaces the hand-written mock with a library.
 
 ## Learning Path
 
