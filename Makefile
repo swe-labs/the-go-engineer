@@ -38,9 +38,9 @@ bench: ## Run benchmark suite
 
 cover: ## Run tests with coverage report
 	@echo "Generating coverage report..."
-	go test -coverprofile=coverage.out ./...
-	go tool cover -func=coverage.out
-	@echo "HTML report: go tool cover -html=coverage.out -o coverage.html"
+	go test -coverprofile coverage.out ./...
+	go tool cover -func coverage.out
+	@echo "HTML report: go tool cover -html coverage.out -o coverage.html"
 
 ## Code Quality
 vet: ## Run go vet

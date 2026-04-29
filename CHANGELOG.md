@@ -38,7 +38,7 @@ Format: `Version - Date`.
 - `git diff --exit-code -- go.mod go.sum`
 - `go test ./...`
 - `go test -race ./...`
-- `go test -coverprofile=coverage.out ./...`
+- `go test -coverprofile coverage.out ./...`
 - `go run ./scripts/validate_curriculum.go`
 
 The curriculum validator reports:

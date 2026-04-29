@@ -548,10 +548,7 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 		itemIDs[item.ID] = item
 	}
 
-	enforceArchitectureContract := isFullArchitectureCurriculum(sectionIDs)
-	if enforceArchitectureContract {
-		errorsFound += validateExpectedSectionOutputs(sectionIDs, report)
-	}
+	errorsFound += validateExpectedSectionOutputs(sectionIDs, report)
 
 	for _, s := range cur.Sections {
 		for _, prereqID := range s.Prerequisites {
@@ -603,14 +600,10 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
 	errorsFound += validateFlagshipProjects(root, sectionIDs, cur.Items, report)
 	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
-	if enforceArchitectureContract {
-		errorsFound += validateSectionReadmeTrackLabels(root, sectionIDs, report)
-	}
+	errorsFound += validateSectionReadmeTrackLabels(root, sectionIDs, report)
 	errorsFound += validateV2TextEncoding(root, sectionIDs, cur.Items, report)
 	errorsFound += validateFoundationsReadmeContracts(root, cur.Items, report)
-	if enforceArchitectureContract {
-		errorsFound += validateEngineeringReadmeContracts(root, cur.Items, report)
-	}
+	errorsFound += validateEngineeringReadmeContracts(root, cur.Items, report)
 
 	return len(cur.Sections), len(cur.Items), placeholderCount, errorsFound, true, nil
 }
@@ -622,16 +615,6 @@ func sameStringSlice(a, b []string) bool {
 
 	for i := range a {
 		if a[i] != b[i] {
-			return false
-		}
-	}
-
-	return true
-}
-
-func isFullArchitectureCurriculum(sections map[string]V2Section) bool {
-	for sectionID := range expectedV2SectionOutputs {
-		if _, exists := sections[sectionID]; !exists {
 			return false
 		}
 	}

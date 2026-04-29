@@ -43,9 +43,9 @@ jobs:
 
       - name: Coverage Report
         run: |
-          go test -coverprofile=coverage.out ./...
-          go tool cover -html=coverage.out -o coverage.html
-          COVERAGE=$(go tool cover -func=coverage.out | grep total | awk '{print $3}')
+          go test -coverprofile coverage.out ./...
+          go tool cover -html coverage.out -o coverage.html
+          COVERAGE=$(go tool cover -func coverage.out | grep total | awk '{print $3}')
           echo "## Code Coverage: $COVERAGE" >> $GITHUB_STEP_SUMMARY
 
       - name: Run Benchmarks
