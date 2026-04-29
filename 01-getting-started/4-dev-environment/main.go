@@ -17,7 +17,7 @@
 //   go run ./01-getting-started/4-dev-environment
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the small command loop that makes day-to-day Go work predictable.
 // ============================================================================
 
 package main

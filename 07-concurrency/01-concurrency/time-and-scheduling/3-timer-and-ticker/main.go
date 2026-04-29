@@ -8,16 +8,16 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - Timers and Tickers fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Timers and Tickers provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Timers and Tickers fundamentals and practical application in Go.
 // ============================================================================
 
 // Commercial use is prohibited without permission.

@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Stage 07: Concurrency — Select Deep Dive
+// Stage 07: Concurrency - Select Deep Dive
 // Level: Advanced
 // ============================================================================
 //
@@ -31,7 +31,7 @@ func main() {
 	fanInPattern()
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: GC.10 sync primitives")
+	fmt.Println("NEXT UP: GC.10 sync primitives")
 	fmt.Println("   Current: GC.9 (select deep dive)")
 	fmt.Println("---------------------------------------------------")
 }
@@ -90,7 +90,7 @@ func nonBlockingSelect() {
 	case val := <-ch:
 		fmt.Printf("  Received: %d\n", val)
 	default:
-		fmt.Println("  Channel empty — no blocking!")
+		fmt.Println("  Channel empty - no blocking!")
 	}
 
 	ch <- 42
@@ -98,7 +98,7 @@ func nonBlockingSelect() {
 	case ch <- 100:
 		fmt.Println("  Sent 100")
 	default:
-		fmt.Println("  Channel full — no blocking!")
+		fmt.Println("  Channel full - no blocking!")
 	}
 	fmt.Println()
 }
@@ -134,7 +134,7 @@ func fanInPattern() {
 
 	merged := fanIn(producers...)
 
-	for i := 0; i < 6; i++ { // 3 producers × 2 messages each
+	for i := 0; i < 6; i++ { // 3 producers x 2 messages each
 		fmt.Printf("  %s\n", <-merged)
 	}
 	fmt.Println()

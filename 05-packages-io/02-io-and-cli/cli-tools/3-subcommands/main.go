@@ -8,16 +8,17 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - How to build multi-command CLI tools (like git or docker) using FlagSets.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Subcommands allow you to group related but distinct functionalities into
+//     a single executable, providing a clean and discoverable interface for users.
 //
 // RUN:
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Use flag.NewFlagSet() to isolate flags and help messages for each subcommand.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -30,7 +31,7 @@ import (
 	"os"
 )
 
-// Stage 05: I/O and CLI — Subcommands
+// Stage 05: I/O and CLI - Subcommands
 //
 //   - Building multi-command CLIs like git, docker, and kubectl
 //   - flag.NewFlagSet for independent flag sets per subcommand
@@ -67,8 +68,9 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CL.4 file organizer")
-	fmt.Println("   Current: CL.3 (subcommands)")
+	fmt.Println("NEXT UP: CL.4 file-organizer")
+	fmt.Println("Current: CL.3 (subcommands)")
+	fmt.Println("Previous: CL.2 (flags)")
 	fmt.Println("---------------------------------------------------")
 }
 

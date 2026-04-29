@@ -1,65 +1,73 @@
-# PR.3 Memory profiling
+# PR.3 Memory Profiling
 
 ## Mission
 
-Learn how heap profiles reveal where memory is retained and where allocation pressure is coming from.
+Master the use of Heap Profiling to understand how your program uses memory. Learn to distinguish between "In-Use" memory (leaks) and "Allocated" memory (GC pressure), and identify exactly which lines of code are responsible for memory consumption.
 
 ## Prerequisites
 
-- none
+- PR.1 CPU Profiling
 
 ## Mental Model
 
-A memory profile is a map of where bytes are being kept or allocated, not just a count of total memory used.
+Think of Memory Profiling as **A Waste Audit**.
+
+1. **The Bin**: Your program's memory is a bin.
+2. **The Contents**: Some items in the bin are useful (live objects). Some are trash (garbage).
+3. **The Audit**: `pprof --heap` looks at the bin and tells you: "This specific function threw away 10GB of paper today" (High Allocation Rate) and "This function is still holding onto a 1GB lead block" (Live Memory/Leak).
+4. **The Goal**: Reduce the trash to keep the CPU from working too hard (GC pressure) and reduce the weight to keep the program from running out of memory (OOM).
 
 ## Visual Model
 
 ```mermaid
-graph TD
-    A["Memory profiling"] --> B["Profiles show where memory is retained."]
-    B --> C["Measure before changing data structures or allocation patterns."]
+graph LR
+    A[Allocation Site] --> B{Heap?}
+    B -- No --> C[Stack: Fast, Auto-cleanup]
+    B -- Yes --> D[Heap: Slower, Needs GC]
+    D --> E[pprof Heap Profile]
 ```
 
 ## Machine View
 
-Heap profiling samples allocation sites so you can trace memory cost back to code paths.
+- **`alloc_objects`**: Total number of objects allocated since the program started. Useful for finding "Garbage Generators."
+- **`inuse_objects`**: Number of objects currently in memory. Useful for finding "Memory Leaks."
+- **Sampling**: Like CPU profiling, heap profiling is sampled (default is 1 sample per 512KB of allocation) to keep overhead low.
 
 ## Run Instructions
 
 ```bash
+# Run the program to generate a 'mem.prof' file
 go run ./08-quality-test/01-quality-and-performance/profiling/3-memory-profiling
+
+# Analyze the memory profile
+go tool pprof mem.prof
 ```
+
+Inside pprof:
+- `top`: See which functions own the most memory.
+- `list`: See line-by-line allocations.
+- `sample_index=alloc_space`: Switch to seeing total allocations (GC pressure).
+- `sample_index=inuse_space`: Switch to seeing currently held memory (Leaks).
 
 ## Code Walkthrough
 
-### Profiles show where memory is retained.
-
-Profiles show where memory is retained.
-
-### Allocation rate and live heap are related but differen
-
-Allocation rate and live heap are related but different signals.
-
-### Measure before changing data structures or allocation 
-
-Measure before changing data structures or allocation patterns.
+### The "Leaky" Loop
+The code creates a scenario where memory is allocated but not released (e.g., appending to a global slice). The profile will highlight the `append` line as the source of growth.
 
 ## Try It
 
-1. Change one of the example inputs and rerun the lesson.
-2. Explain which boundary the lesson is trying to make explicit.
-3. Describe how you would apply PR.3 in a small service or tool.
+1. Run the code and use `top` in `pprof`. Which function has the most `inuse_space`?
+2. Switch to `sample_index=alloc_space`. Does the "Top" function change?
+3. Modify the code to clear the slice at the end of each iteration and see how the profile changes.
 
-## ⚠️ In Production
+## In Production
+**Memory is the #1 cause of production crashes (OOM - Out of Memory).** A slow program is annoying; a crashed program is an outage. Regularly check heap profiles of your production services to ensure your memory usage is stable over time.
 
-Memory tuning starts with visibility. Without a profile, you are usually guessing at the wrong thing.
-
-## 🤔 Thinking Questions
-
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
+## Thinking Questions
+1. Why does high memory allocation (even without a leak) slow down a Go program?
+2. How can a small "Buffer" accidentally cause a large memory leak in Go? (Hint: Slicing a large array).
+3. What is the default sampling rate for the Go heap profiler?
 
 ## Next Step
 
-Continue to `PR.4`.
+Now that you can see the memory, let's understand how Go decides where to put it. Continue to [PR.4 Escape Analysis](../4-escape-analysis).

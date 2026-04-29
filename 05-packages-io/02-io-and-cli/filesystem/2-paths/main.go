@@ -8,16 +8,18 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - How to manipulate file paths in an OS-independent way using 'path/filepath'.
+//   - How to extract filenames, directories, and extensions from full paths.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Hardcoding path separators like "/" or "\" is a recipe for broken code
+//     when your app moves between Linux and Windows. 'path/filepath' solves this.
 //
 // RUN:
 //   go run ./05-packages-io/02-io-and-cli/filesystem/2-paths
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Never hardcode path separators; always use filepath.Join() to build paths.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -30,7 +32,7 @@ import (
 	"path/filepath"
 )
 
-// Stage 05: Filesystem — File Paths
+// Stage 05: Filesystem - File Paths
 //
 //   - filepath.Join: building cross-platform paths (never use "/" or "\" manually)
 //   - filepath.Base: extracting the filename from a path
@@ -52,8 +54,7 @@ import (
 //   On Linux/macOS, paths use "/" (forward slash)
 //   On Windows, paths use "\" (backslash)
 //   filepath.Join automatically uses the correct separator for the OS.
-//   NEVER hardcode "/" or "\" in path strings — your code will break on other OSes.
-//
+//   NEVER hardcode "/" or "\" in path strings - your code will break on other OSes.
 
 func main() {
 	fmt.Println("=== File Paths: Cross-Platform Path Handling ===")
@@ -115,7 +116,7 @@ func main() {
 	fmt.Println("  --- Clean (normalize paths) ---")
 	for _, dp := range dirtyPaths {
 		fmt.Printf("    %s\n", dp)
-		fmt.Printf("    → %s\n\n", filepath.Clean(dp))
+		fmt.Printf("    -> %s\n\n", filepath.Clean(dp))
 	}
 
 	// --- filepath.Glob: Find files matching a pattern ---
@@ -129,14 +130,16 @@ func main() {
 
 	// Match all Go files recursively would need filepath.WalkDir (FS.3)
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - ALWAYS use filepath.Join — never hardcode / or \\")
+	fmt.Println("KEY TAKEAWAYS:")
+	fmt.Println("  - ALWAYS use filepath.Join - never hardcode / or \\")
 	fmt.Println("  - filepath.Base extracts filename, Dir extracts directory, Ext extracts extension")
 	fmt.Println("  - filepath.Clean normalizes messy paths (resolves . and ..)")
 	fmt.Println("  - filepath.Abs converts relative to absolute path")
-	fmt.Println("  - filepath is cross-platform — works on Linux, macOS, AND Windows")
+	fmt.Println("  - filepath is cross-platform - works on Linux, macOS, AND Windows")
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: FS.3 directories")
-	fmt.Println("   Current: FS.2 (paths)")
+	fmt.Println("NEXT UP: FS.3 directories")
+	fmt.Println("Current: FS.2 (paths)")
+	fmt.Println("Previous: FS.1 (files)")
 	fmt.Println("---------------------------------------------------")
 }

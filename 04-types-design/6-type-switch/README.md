@@ -8,13 +8,15 @@ Learn how to use type switches to handle different concrete types stored in an i
 
 You have learned about type assertions (checking one type). Sometimes you need to check against multiple possible types. Type switches let you handle many types in one clean syntax.
 
+> **Backward Reference:** In [Lesson 5: Stringer](../5-stringer/README.md), you learned how to implement a specific, standard interface. Now we will learn how to "look inside" an interface value to see what concrete type it actually holds.
+
 ## Prerequisites
 
 - `TI.3` interfaces
 
 ## Mental Model
 
-Think of a sorting machine. Items come down the belt, and different items need different handlingâ€”fragile items go to one bin, heavy items to another, documents to a third. The machine "switches" on the type of item to decide where it goes.
+Think of a sorting machine. Items come down the belt, and different items need different handling-fragile items go to one bin, heavy items to another, documents to a third. The machine "switches" on the type of item to decide where it goes.
 
 ## Visual Model
 
@@ -74,14 +76,16 @@ The default case handles types you have not explicitly handled.
 - When should I use type switches?
   When you have an interface that can hold multiple concrete types and you need different logic for each.
 
-## ⚠️ In Production
+## In Production
 Type switches are used in serialization (json.Unmarshal), reflection, and handling API responses that return different types.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** Now that you know how to work with interfaces, it is time to understand a subtle but critical rule about how Go decides if a type satisfies an interface based on its methods. In [Lesson 7: Receiver Sets](../7-receiver-sets/README.md), we will dive into the "method set" rules.
+
 ## Next Step
 
-Continue to `TI.7` custom errors.
+Continue to `TI.7` receiver-sets.

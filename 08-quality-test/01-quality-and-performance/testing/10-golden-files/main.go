@@ -17,7 +17,7 @@
 //
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how golden files keep large textual outputs reviewable without hard-coding long strings inside tests.
 // ============================================================================
 
 package main
@@ -37,3 +37,7 @@ func te_10Summary(input string) string {
 func main() {
 	fmt.Println("summary:", te_10Summary("  Golden File Expectations  "))
 }
+
+// ---------------------------------------------------
+// NEXT UP: PR.1
+// ---------------------------------------------------

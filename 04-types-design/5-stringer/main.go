@@ -10,13 +10,13 @@
 //   - Learn how to control how your types are displayed by implementing the fmt.Stringer interface.
 //
 // WHY THIS MATTERS:
-//   - When you hand someone a business card, the card shows a carefully formatted summaryâ€”not raw data. The String() method is your type's busines...
+//   - When you hand someone a business card, the card shows a carefully formatted summary-not raw data. The String() method is your type's business card to the outside world.
 //
 // RUN:
 //   go run ./04-types-design/5-stringer
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how to control how your types are displayed by implementing the fmt.Stringer interface.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -107,7 +107,8 @@ func main() {
 	fmt.Println("  - Custom types (type X int) create new types with their own methods")
 	fmt.Println("  - Stringer is Go's most commonly implemented interface")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.6 type switch")
-	fmt.Println("   Current: TI.5 (Stringer)")
+	fmt.Println("NEXT UP: TI.6 type-switch")
+	fmt.Println("Current: TI.5 (stringer)")
+	fmt.Println("Previous: TI.4 (interface-embedding)")
 	fmt.Println("---------------------------------------------------")
 }

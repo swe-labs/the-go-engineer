@@ -8,16 +8,16 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - WithCancel fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - WithCancel provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./07-concurrency/01-concurrency/context/2-with-cancel
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - WithCancel fundamentals and practical application in Go.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -30,7 +30,7 @@ import (
 	"time"
 )
 
-// Stage 07: Context — WithCancel
+// Stage 07: Context - WithCancel
 //
 //   - context.WithCancel creates a cancellable context
 //   - The cancel function: how and when to call it
@@ -54,14 +54,14 @@ func main() {
 
 	// --- CREATING A CANCELLABLE CONTEXT ---
 	// WithCancel returns two values:
-	//   1. ctx — a new context that can be cancelled
-	//   2. cancel — a function that triggers the cancellation
+	//   1. ctx - a new context that can be cancelled
+	//   2. cancel - a function that triggers the cancellation
 	//
 	// CRITICAL RULE: You MUST call cancel() when you're done with the context.
 	// If you don't, the context's resources (goroutines) are never freed.
 	// Use defer cancel() immediately after creation.
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel() // Always defer cancel — even if you call it explicitly later
+	defer cancel() // Always defer cancel - even if you call it explicitly later
 
 	// Start a background worker that listens for cancellation
 	results := make(chan string)
@@ -72,7 +72,7 @@ func main() {
 		fmt.Printf("  Received: %s\n", <-results)
 	}
 
-	// Now cancel the context — this signals the worker to stop
+	// Now cancel the context - this signals the worker to stop
 	fmt.Println("\n  Calling cancel()...")
 	cancel()
 
@@ -96,18 +96,18 @@ func main() {
 	defer childCancel1()
 	defer childCancel2()
 
-	fmt.Printf("  Before cancel — parent err: %v, child1 err: %v, child2 err: %v\n",
+	fmt.Printf("  Before cancel - parent err: %v, child1 err: %v, child2 err: %v\n",
 		parentCtx.Err(), childCtx1.Err(), childCtx2.Err())
 
-	// Cancel the PARENT — both children are cancelled automatically
+	// Cancel the PARENT - both children are cancelled automatically
 	parentCancel()
 
-	fmt.Printf("  After parent cancel — parent err: %v, child1 err: %v, child2 err: %v\n",
+	fmt.Printf("  After parent cancel - parent err: %v, child1 err: %v, child2 err: %v\n",
 		parentCtx.Err(), childCtx1.Err(), childCtx2.Err())
 
 	fmt.Println()
 	fmt.Println("KEY TAKEAWAYS:")
-	fmt.Println("  1. WithCancel returns (ctx, cancel) — ALWAYS defer cancel()")
+	fmt.Println("  1. WithCancel returns (ctx, cancel) - ALWAYS defer cancel()")
 	fmt.Println("  2. Listen for cancellation with <-ctx.Done() in a select")
 	fmt.Println("  3. After cancellation, ctx.Err() returns context.Canceled")
 	fmt.Println("  4. Cancelling a parent cancels ALL children automatically")
@@ -115,7 +115,7 @@ func main() {
 	fmt.Println()
 	fmt.Println("   Next: go run ./07-concurrency/01-concurrency/context/3-with-timeout")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CT.3 WithTimeout")
+	fmt.Println("NEXT UP: CT.3 WithTimeout")
 	fmt.Println("   Current: CT.2 (WithCancel)")
 	fmt.Println("---------------------------------------------------")
 }
@@ -124,18 +124,18 @@ func main() {
 // This is the standard pattern for cancellation-aware goroutines.
 //
 // The select statement waits for EITHER:
-//   - ctx.Done() — the context was cancelled (stop working)
-//   - default/time — normal work continues
+//   - ctx.Done() - the context was cancelled (stop working)
+//   - default/time - normal work continues
 func worker(ctx context.Context, results chan<- string) {
 	i := 0
 	for {
 		select {
 		case <-ctx.Done():
-			// The context was cancelled — clean up and return
+			// The context was cancelled - clean up and return
 			fmt.Printf("  Worker stopped: %v\n", ctx.Err())
 			return
 		default:
-			// Context is still active — do work
+			// Context is still active - do work
 			i++
 			results <- fmt.Sprintf("result-%d", i)
 			time.Sleep(50 * time.Millisecond) // Simulate work

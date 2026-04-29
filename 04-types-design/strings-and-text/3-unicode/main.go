@@ -17,7 +17,7 @@
 //   go run ./04-types-design/strings-and-text/3-unicode
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Strings are UTF-8 byte sequences; use runes and the unicode package for correct multi-byte text processing.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -69,9 +69,9 @@ func main() {
 	for i, b := range []byte(text) {
 		fmt.Printf("    byte[%d] = %d (0x%02x)", i, b, b)
 		if b < 128 {
-			fmt.Printf(" → '%c' (ASCII)\n", b)
+			fmt.Printf(" -> '%c' (ASCII)\n", b)
 		} else {
-			fmt.Printf(" → part of multi-byte character\n")
+			fmt.Printf(" -> part of multi-byte character\n")
 		}
 	}
 	fmt.Println()
@@ -82,14 +82,14 @@ func main() {
 	fmt.Println("--- Rune Examples ---")
 	examples := []rune{'G', 'o', 'é', '中', '🚀'}
 	for _, r := range examples {
-		fmt.Printf("  '%c' → Unicode: U+%04X, Bytes: %d\n",
+		fmt.Printf("  '%c' -> Unicode: U+%04X, Bytes: %d\n",
 			r, r, utf8.RuneLen(r))
 	}
 	fmt.Println()
 
 	// --- FOR RANGE iterates by RUNE (correct) ---
-	// A regular for loop (i=0; i<len; i++) iterates by BYTE — breaks on multi-byte chars.
-	// for range iterates by RUNE — the correct way for text processing.
+	// A regular for loop (i=0; i<len; i++) iterates by BYTE - breaks on multi-byte chars.
+	// for range iterates by RUNE - the correct way for text processing.
 	greeting := "Hello, 世界! 🌍"
 	fmt.Println("--- for range (iterates by rune) ---")
 	fmt.Printf("  Text: %q\n", greeting)
@@ -141,7 +141,8 @@ func main() {
 	fmt.Println("  - rune = int32 alias for a Unicode code point")
 	fmt.Println("  - unicode.IsLetter/IsDigit/IsSpace for character classification")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: ST.4 regex")
-	fmt.Println("   Current: ST.3 (unicode & runes)")
+	fmt.Println("NEXT UP: ST.4 regex")
+	fmt.Println("Current: ST.3 (unicode-and-runes)")
+	fmt.Println("Previous: ST.2 (formatting-string)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -38,3 +38,7 @@ func main() {
 	fmt.Println()
 	fmt.Println("Fail-fast startup is kinder to operators because the error appears when the service launches, not minutes later under production load.")
 }
+
+// ---------------------------------------------------
+// NEXT UP: OPS.1
+// ---------------------------------------------------

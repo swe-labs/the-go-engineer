@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Section 7: Strings & Text — Config Parser (Exercise Starter)
+// Section 7: Strings & Text - Config Parser (Exercise Starter)
 // Level: Intermediate
 // ============================================================================
 //

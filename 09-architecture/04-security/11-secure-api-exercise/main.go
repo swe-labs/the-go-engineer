@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/11-secure-api-exercise
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Build a small API surface that applies validation, auth boundaries, secret-safe behavior, and rate limiting ideas together.
 // ============================================================================
 
 package main

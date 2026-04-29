@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/3-xss-and-csrf
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the difference between output-encoding bugs and cross-site request trust bugs in web systems.
 // ============================================================================
 
 package main

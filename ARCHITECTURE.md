@@ -1,8 +1,8 @@
-# The Go Engineer - Architecture v2.1-final (locked)
+# The Go Engineer - Architecture v2.1 Final (Locked)
 
 ## Locked Structure
 
-This file is the curriculum shape after the restructure plan has been applied.
+This file defines the stable public curriculum structure for the v2.1 line.
 
 Architecture v2.1 is final and locked. Normal post-release work should improve lesson depth, proof surfaces, docs, tests, validation, and the Opslane implementation without changing the public 12-section spine.
 
@@ -26,7 +26,7 @@ The only exception is an explicit maintainer-approved architecture change. Witho
 | s07 | Concurrency | GC, SY, CT, TM, CP | GC.7, SY.6, CT.5, TM.7, CP.5 |
 | s08 | Quality & Testing | TE, PR | TE.10, PR.6 |
 | s09 | Architecture & Security | PD, ARCH, SEC | PD.3, ARCH.9, SEC.11 |
-| s10 | Production Operations | SL, GS, CFG, OPS, DOCKER, DEPLOY, CG | SL.5, GS.3, CFG.5, OPS.5, DEPLOY.3, CG.3 |
+| s10 | Production Operations | SL, GS, CFG, OPS, DOCKER, DEPLOY, CG | SL.5, GS.3, CFG.5, OPS.5, DOCKER.3, DEPLOY.3, CG.3 |
 | s11 | Flagship | OPSL (+ future flagship prefixes) | OPSL.10 |
 
 ## Canonical Root Folders
@@ -56,7 +56,7 @@ The only exception is an explicit maintainer-approved architecture change. Witho
 - Section 09 includes both architecture-pattern and security tracks.
 - Section 10 includes configuration, observability, deployment, and code-generation tracks alongside logging and shutdown.
 - Code generation is locked into Section 10 because learners usually first meet `go generate` inside Docker and CI workflows before applying it inside the flagship capstone.
-- `FG` is a human-facing umbrella for Stage 11, while individual flagship projects use their own prefixes such as `OPSL`.
+- `FG` is a human-facing umbrella for Section 11, while individual flagship projects use their own prefixes such as `OPSL`.
 
 ## Change Guardrails
 

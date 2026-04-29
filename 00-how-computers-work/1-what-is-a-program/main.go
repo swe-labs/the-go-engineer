@@ -17,7 +17,7 @@
 //   go run ./00-how-computers-work/1-what-is-a-program
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Understand that a program is a list of instructions for a machine to follow, and that the CPU runs a continuous fetch-decode-execute loop to carry ...
 // ============================================================================
 
 //   Engineers write better code when they can reason about what the machine is

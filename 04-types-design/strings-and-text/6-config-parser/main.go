@@ -17,7 +17,7 @@
 //   go run ./04-types-design/strings-and-text/6-config-parser
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Build a small config parser that turns `.env`-style text into structured data and renders a stable summary from that data.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -145,4 +145,10 @@ ANOTHER_KEY_NO_VALUE =`
 	}
 
 	fmt.Println(summary)
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: s05-packages-io")
+	fmt.Println("Current: ST.6 (config-parser-project)")
+	fmt.Println("Previous: ST.5 (text-template)")
+	fmt.Println("---------------------------------------------------")
 }

@@ -17,7 +17,7 @@
 //   go run ./02-language-basics/04-data-structures/6-contact-manager
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Build a small in-memory contact directory that combines slices, maps, and pointers in one runnable milestone.
 // ============================================================================
 
 package main
@@ -98,5 +98,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("SECTION COMPLETE: DS.6 contact-directory")
 	fmt.Println("NEXT UP: FE.1 functions")
+	fmt.Println("Previous: DS.5 (slices-2)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -11,13 +11,13 @@
 //   - Learn the difference between value and pointer receivers and understand how method sets determine interface satisfaction.
 //
 // WHY THIS MATTERS:
-//   - Think of a type's method set like a menu. A Counter value has only the Get() menu item. A \*Counter pointer has the full menu: Get(), Inc(), Reset(...
+//   - Think of a type's method set like a menu. A Counter value has only the Get() menu item. A *Counter pointer has the full menu: Get(), Inc(), Reset(). Interface satisfaction depends on which menu is visible.
 //
 // RUN:
 //   go run ./04-types-design/7-receiver-sets
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the difference between value and pointer receivers and understand how method sets determine interface satisfaction.
 // ============================================================================
 
 package main
@@ -104,7 +104,8 @@ func main() {
 	fmt.Println("  - A type's method set depends on whether you use value or pointer")
 	fmt.Println("  - Interface satisfaction requires the method to exist on the type you pass")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: TI.8 custom errors")
-	fmt.Println("   Current: TI.7 (receiver sets)")
+	fmt.Println("NEXT UP: TI.8 custom-errors")
+	fmt.Println("Current: TI.7 (receiver-sets)")
+	fmt.Println("Previous: TI.6 (type-switch)")
 	fmt.Println("---------------------------------------------------")
 }

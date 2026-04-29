@@ -17,7 +17,7 @@
 //   go run ./04-types-design/8-custom-errors
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how to define custom error types that carry structured information for better error handling.
 // ============================================================================
 
 package main
@@ -136,7 +136,8 @@ func main() {
 	fmt.Println("  - Add fields to carry structured error information")
 	fmt.Println("  - Use errors.As() to check specific error types")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: TI.9 generics")
-	fmt.Println("   Current: TI.8 (custom errors)")
+	fmt.Println("NEXT UP: TI.9 generics")
+	fmt.Println("Current: TI.8 (custom-errors)")
+	fmt.Println("Previous: TI.7 (receiver-sets)")
 	fmt.Println("---------------------------------------------------")
 }

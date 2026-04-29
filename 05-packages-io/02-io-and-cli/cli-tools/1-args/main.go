@@ -8,16 +8,17 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - How to read raw command-line arguments and environment variables.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Command-line arguments and environment variables are the standard way
+//     to configure and control processes in UNIX-like environments.
 //
 // RUN:
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/1-args
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - os.Args provides raw access to CLI inputs; os.Getenv reads the environment.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -30,11 +31,11 @@ import (
 	"strings"
 )
 
-// Stage 05: CLI Tools — Command-Line Arguments
+// Stage 05: CLI Tools - Command-Line Arguments
 //
-//   - os.Args — raw access to command-line arguments
-//   - os.Getenv — reading environment variables
-//   - os.Exit — exiting with status codes (0=success, 1=error)
+//   - os.Args - raw access to command-line arguments
+//   - os.Getenv - reading environment variables
+//   - os.Exit - exiting with status codes (0=success, 1=error)
 //   - Building a simple CLI tool from scratch
 //
 // ENGINEERING DEPTH:
@@ -78,7 +79,7 @@ func main() {
 	fmt.Println()
 
 	// --- ENVIRONMENT VARIABLES ---
-	// os.Getenv reads environment variables — returns "" if not set.
+	// os.Getenv reads environment variables - returns "" if not set.
 	// Environment variables are the standard way to configure production apps:
 	//   DATABASE_URL, API_KEY, PORT, LOG_LEVEL, etc.
 	fmt.Println("=== Environment Variables ===")
@@ -103,9 +104,9 @@ func main() {
 	// Deferred functions DO NOT RUN after os.Exit.
 	// Use it at the very end, or for fatal errors only.
 	fmt.Println("=== Exit Codes ===")
-	fmt.Println("  os.Exit(0) — success")
-	fmt.Println("  os.Exit(1) — error")
-	fmt.Println("  os.Exit(2) — usage error")
+	fmt.Println("  os.Exit(0) - success")
+	fmt.Println("  os.Exit(1) - error")
+	fmt.Println("  os.Exit(2) - usage error")
 
 	// Example: validate minimum arguments
 	if len(os.Args) > 1 && os.Args[1] == "--fail" {
@@ -120,9 +121,9 @@ func main() {
 	fmt.Println("  3. os.Getenv for config, with sensible defaults for missing vars")
 	fmt.Println("  4. Exit 0 = success, Exit 1 = error (defers DON'T run after os.Exit)")
 	fmt.Println()
-	fmt.Println("   Next: go run ./05-packages-io/02-io-and-cli/cli-tools/2-flags -name='The Go Engineer' -count=3")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CL.2 flags")
-	fmt.Println("   Current: CL.1 (args)")
+	fmt.Println("NEXT UP: CL.2 flags")
+	fmt.Println("Current: CL.1 (args)")
+	fmt.Println("Previous: MP.4 (build-tags)")
 	fmt.Println("---------------------------------------------------")
 }

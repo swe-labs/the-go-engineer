@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/7-rate-limiting-patterns
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how token bucket and similar controls protect shared resources from abuse and accidental overload.
 // ============================================================================
 
 package main

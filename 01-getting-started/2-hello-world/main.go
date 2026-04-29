@@ -17,7 +17,7 @@
 //   go run ./01-getting-started/2-hello-world
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the smallest useful shape of an executable Go program.
 // ============================================================================
 
 package main

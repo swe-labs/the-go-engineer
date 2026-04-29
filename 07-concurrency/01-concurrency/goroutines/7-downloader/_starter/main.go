@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Stage 07: Concurrency — Concurrent Downloader (Exercise Starter)
+// Stage 07: Concurrency - Concurrent Downloader (Exercise Starter)
 // Level: Advanced
 // ============================================================================
 //
@@ -23,7 +23,7 @@ import "fmt"
 //  6. [ ] Print progress for each download (started, completed, failed)
 //
 // HINTS:
-//   - Semaphore pattern: sem := make(chan struct{}, 3) — acquire: sem <- struct{}{}
+//   - Semaphore pattern: sem := make(chan struct{}, 3) - acquire: sem <- struct{}{}
 //   - Always defer wg.Done() and <-sem inside the goroutine
 //   - Capture loop variables correctly in closures: use `url := url`
 //   - Use defer resp.Body.Close() after every http.Get

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package user;
+
+// The User message defines a single user in our system.
+// Note the field numbers (1, 2, 3). These are the binary identifiers
+// and must NOT be changed once the message is in use!
+message User {
+  int32 id = 1;
+  string username = 2;
+  string email = 3;
+  bool is_verified = 4;
+
+  // Enums allow for strictly defined categories
+  enum UserType {
+    UNKNOWN = 0;
+    REGULAR = 1;
+    ADMIN = 2;
+  }
+  UserType type = 5;
+}
+
+// A request to fetch multiple users
+message ListUsersRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+// A response containing a list of users
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total_count = 2;
+}

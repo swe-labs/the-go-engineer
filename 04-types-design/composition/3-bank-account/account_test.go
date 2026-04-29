@@ -82,7 +82,7 @@ func TestOverdraftWithinLimit(t *testing.T) {
 		OverdraftLimit: 200.0,
 	}
 
-	// Withdraw 250 — within limit (100 balance + 200 overdraft = 300 available)
+	// Withdraw 250 - within limit (100 balance + 200 overdraft = 300 available)
 	err := oa.Withdraw(250.0)
 	if err != nil {
 		t.Fatalf("Withdraw(250) within overdraft limit returned error: %v", err)
@@ -98,7 +98,7 @@ func TestOverdraftExceedsLimit(t *testing.T) {
 		OverdraftLimit: 200.0,
 	}
 
-	// Withdraw 400 — exceeds limit (100 + 200 = 300 available)
+	// Withdraw 400 - exceeds limit (100 + 200 = 300 available)
 	err := oa.Withdraw(400.0)
 	if err == nil {
 		t.Error("Withdraw(400) exceeding overdraft limit should have returned an error")

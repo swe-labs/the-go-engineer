@@ -17,7 +17,7 @@
 //   go run ./09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how ports and adapters keep domain rules independent of transport and storage details.
 // ============================================================================
 
 package main

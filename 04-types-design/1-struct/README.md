@@ -8,17 +8,17 @@ Learn what a struct is and how to use it to group related data together into a s
 
 You have been working with individual values (numbers, text, booleans) and collections (slices, maps). But real-world data is often structured. A server has an ID, hostname, IP, region, CPU cores, memory, status, and boot time. Scattering these across separate variables is messy and error-prone.
 
-The next question is: "How do I model a whole thing with multiple related attributes?"
-
 That is what structs do.
+
+> **Backward Reference:** In [Lesson 10: Panic and Recover](../../03-functions-errors/10-panic-and-recover/README.md), you learned how to handle catastrophic failures. Now that you can safely manage the execution flow of your functions, you are ready to learn how to design the data structures those functions operate on.
 
 ## Prerequisites
 
-- `DS.6` contact directory
+- `FE.10` panic and recover
 
 ## Mental Model
 
-Think of a struct like a passport. A passport groups related data about one person: name, nationality, date of birth, photo, passport number. You would not scatter this data across 6 separate variables—you would put it in one structured document. That is exactly what a struct does in code.
+Think of a struct like a passport. A passport groups related data about one person: name, nationality, date of birth, photo, passport number. You would not scatter this data across 6 separate variables-you would put it in one structured document. That is exactly what a struct does in code.
 
 ## Visual Model
 
@@ -79,15 +79,15 @@ Access fields with dot notation: structVar.FieldName.
 2. Create a second Server instance and compare them.
 3. Try accessing a field that was not initialized and observe the zero value.
 
-## ⚠️ In Production
-
+## In Production
 Structs are the foundation of data modeling in Go. Every API request, database record, and configuration object is modeled as a struct. Understanding how to design structs is essential for writing real applications.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** Structs group data, but they don't yet have behavior. In [Lesson 2: Methods](../2-methods/README.md), you will learn how to attach functions directly to structs, turning your data models into active components.
 
 ## Next Step
 

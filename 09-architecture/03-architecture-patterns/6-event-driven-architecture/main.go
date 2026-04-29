@@ -17,7 +17,7 @@
 //   go run ./09-architecture/03-architecture-patterns/6-event-driven-architecture
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the benefits and failure modes of publishing domain events instead of wiring every side effect inline.
 // ============================================================================
 
 package main

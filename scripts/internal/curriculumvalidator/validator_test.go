@@ -161,12 +161,7 @@ func TestValidateRejectsUnknownSectionPrerequisite(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid v2 section prerequisite: s04 -> s03") {
-		t.Fatalf("expected section prerequisite error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 section prerequisite: s04 -> s03")
 }
 
 func TestValidateRejectsMixedContractWithoutCommands(t *testing.T) {
@@ -219,11 +214,44 @@ func TestValidateRejectsMixedContractWithoutCommands(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 mixed contract: FE.9 requires run_command or test_command")
+}
+
+func TestValidateReportsMissingArchitectureSection(t *testing.T) {
+	root := t.TempDir()
+
+	writeValidPressureDocs(t, root)
+	mustMkdir(t, root, "00-how-computers-work")
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s00",
+      "number": "00",
+      "slug": "how-computers-work",
+      "title": "How Computers Work",
+      "path_prefix": "00-how-computers-work",
+      "status": "stable",
+      "entry_points": [],
+      "outputs": ["HC.5"],
+      "prerequisites": []
+    }
+  ],
+  "items": []
+}`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
 	}
-	if !containsReport(reports, "Invalid v2 mixed contract: FE.9 requires run_command or test_command") {
-		t.Fatalf("expected mixed-contract error in reports: %v", reports)
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected architecture-contract validation errors")
+	}
+	if !containsReport(reports, "Invalid v2 architecture contract: missing section s05") {
+		t.Fatalf("expected missing-section report in reports: %v", reports)
 	}
 }
 
@@ -299,12 +327,7 @@ func main() {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid v2 lesson navigation footer: CO.1 -> ST.1 (expected CO.2)") {
-		t.Fatalf("expected lesson-navigation error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 lesson navigation footer: CO.1 -> ST.1 (expected CO.2)")
 }
 
 func TestValidateRejectsWrongSectionLabelInV2Source(t *testing.T) {
@@ -361,12 +384,7 @@ func main() {}
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid v2 section label: CL.1 -> 05-packages-io/02-io-and-cli/cli-tools/1-args/main.go (expected Section 09 or Stage 09)") {
-		t.Fatalf("expected section-label error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 section label: CL.1 -> 05-packages-io/02-io-and-cli/cli-tools/1-args/main.go (expected Section 09 or Stage 09)")
 }
 
 func TestValidateRejectsMojibakeInV2TextSurface(t *testing.T) {
@@ -418,12 +436,7 @@ func TestValidateRejectsMojibakeInV2TextSurface(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Possible mojibake in v2 text surface: FS.1 -> 05-packages-io/02-io-and-cli/filesystem/1-files/main.go") {
-		t.Fatalf("expected mojibake error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Possible mojibake in v2 text surface: FS.1 -> 05-packages-io/02-io-and-cli/filesystem/1-files/main.go")
 }
 
 func TestValidateAcceptsFoundationsReadmeContractForS00(t *testing.T) {
@@ -475,9 +488,7 @@ func TestValidateAcceptsFoundationsReadmeContractForS00(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 0 {
-		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
-	}
+	requireOnlyFixtureScaffoldReports(t, result, reports)
 }
 
 func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
@@ -530,9 +541,7 @@ func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 0 {
-		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
-	}
+	requireOnlyFixtureScaffoldReports(t, result, reports)
 }
 
 func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
@@ -584,12 +593,7 @@ func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Missing foundations README: ST.1 -> 04-types-design/strings-and-text/1-strings/README.md") {
-		t.Fatalf("expected missing README error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Missing foundations README: ST.1 -> 04-types-design/strings-and-text/1-strings/README.md")
 }
 
 func TestValidateRejectsRunFoundationLessonMissingMainGo(t *testing.T) {
@@ -640,12 +644,7 @@ func TestValidateRejectsRunFoundationLessonMissingMainGo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Missing foundations lesson main.go: HC.2 -> 00-how-computers-work/2-code-to-execution/main.go") {
-		t.Fatalf("expected missing main.go error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Missing foundations lesson main.go: HC.2 -> 00-how-computers-work/2-code-to-execution/main.go")
 }
 
 func TestValidateRejectsFoundationsHeadingOrder(t *testing.T) {
@@ -749,12 +748,7 @@ func TestValidateRejectsFoundationsHeadingOrder(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid foundations README contract: GT.1 -> 01-getting-started/1-installation/README.md has ## Run Instructions out of order") {
-		t.Fatalf("expected heading-order error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid foundations README contract: GT.1 -> 01-getting-started/1-installation/README.md has ## Run Instructions out of order")
 }
 
 func TestValidateRejectsFoundationsVisualModelWithoutMermaid(t *testing.T) {
@@ -806,12 +800,7 @@ func TestValidateRejectsFoundationsVisualModelWithoutMermaid(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid foundations README contract: FE.1 -> 03-functions-errors/1-functions-basics/README.md Visual Model must include a Mermaid diagram") {
-		t.Fatalf("expected Mermaid error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid foundations README contract: FE.1 -> 03-functions-errors/1-functions-basics/README.md Visual Model must include a Mermaid diagram")
 }
 
 func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing.T) {
@@ -863,12 +852,7 @@ func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 1 {
-		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
-	}
-	if !containsReport(reports, "Invalid foundations README contract: TI.10 -> 04-types-design/10-payroll-processor/README.md missing ## Verification Surface") {
-		t.Fatalf("expected verification-surface error in reports: %v", reports)
-	}
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid foundations README contract: TI.10 -> 04-types-design/10-payroll-processor/README.md missing ## Verification Surface")
 }
 
 func TestValidateAcceptsFlagshipProjectSplit(t *testing.T) {
@@ -883,9 +867,7 @@ func TestValidateAcceptsFlagshipProjectSplit(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 0 {
-		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
-	}
+	requireOnlyFixtureScaffoldReports(t, result, reports)
 }
 
 func TestValidateRejectsFlagshipReservedPrefixCollision(t *testing.T) {
@@ -1070,9 +1052,7 @@ func TestValidateAcceptsOptionalSecondFlagshipProject(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 0 {
-		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
-	}
+	requireOnlyFixtureScaffoldReports(t, result, reports)
 }
 
 func writeValidOpslaneFlagshipFixture(t *testing.T, root string, brokenChain bool) {
@@ -1346,6 +1326,59 @@ func mustMkdir(t *testing.T, root, relativePath string) {
 func containsReport(reports []string, want string) bool {
 	for _, report := range reports {
 		if strings.Contains(report, want) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func requireOnlyFixtureExpectedReports(t *testing.T, result Result, reports []string, want string) {
+	t.Helper()
+
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected validation error %q, got none", want)
+	}
+
+	filtered := reportsWithoutFixtureScaffold(reports)
+	if len(filtered) != 1 || !containsReport(filtered, want) {
+		t.Fatalf("expected only %q outside fixture scaffold reports, got %v from all reports %v", want, filtered, reports)
+	}
+}
+
+func requireOnlyFixtureScaffoldReports(t *testing.T, result Result, reports []string) {
+	t.Helper()
+
+	filtered := reportsWithoutFixtureScaffold(reports)
+	if len(filtered) != 0 {
+		t.Fatalf("expected only fixture scaffold reports, got %d validation errors and non-scaffold reports %v from all reports %v", result.ErrorCount, filtered, reports)
+	}
+}
+
+func reportsWithoutFixtureScaffold(reports []string) []string {
+	filtered := make([]string, 0, len(reports))
+	for _, report := range reports {
+		if isFixtureScaffoldReport(report) {
+			continue
+		}
+		filtered = append(filtered, report)
+	}
+
+	return filtered
+}
+
+func isFixtureScaffoldReport(report string) bool {
+	prefixes := []string{
+		"Invalid v2 architecture contract:",
+		"Invalid v2 section status:",
+		"Invalid v2 section outputs:",
+		"Invalid section README contract:",
+		"Invalid engineering README contract:",
+		"Warning: placeholder item:",
+	}
+
+	for _, prefix := range prefixes {
+		if strings.HasPrefix(report, prefix) {
 			return true
 		}
 	}

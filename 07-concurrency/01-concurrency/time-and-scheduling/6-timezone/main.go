@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Stage 07: Time & Scheduling — Timezones
+// Stage 07: Time & Scheduling - Timezones
 // Level: Intermediate
 // ============================================================================
 //
@@ -76,7 +76,7 @@ func main() {
 	fmt.Printf("In New York: %s\n", parsedTime.In(newYork))
 	fmt.Printf("In Tokyo: %s\n", parsedTime.In(tokyo))
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: CP.1 errgroup basics")
+	fmt.Println("NEXT UP: CP.1 errgroup basics")
 	fmt.Println("   Current: TM.6 (timezones)")
 	fmt.Println("---------------------------------------------------")
 }

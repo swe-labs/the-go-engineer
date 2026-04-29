@@ -12,6 +12,8 @@ For example, a function that searches a list might need to return both the resul
 
 This lesson builds on FE.2 by showing how to return more than one piece of data.
 
+> **Backward Reference:** In [Lesson 2: Parameters and Returns](../2-parameters-and-returns/README.md), you learned how to return a single computed result. Multiple return values simply extend that syntax, allowing functions to remain explicit and honest about all facets of an outcome.
+
 ## Prerequisites
 
 - `FE.2` parameters and returns
@@ -102,7 +104,7 @@ The function still returns two values, but they now mean:
 
 This second function returns two related values without using a boolean.
 
-That proves multiple return values are broader than only â€œsuccess or failure.â€
+That proves multiple return values are broader than only "success or failure."
 
 ### `parts := strings.SplitN(fullName, " ", 2)`
 
@@ -147,15 +149,17 @@ This line shows the same pattern again with a different meaning.
 - Is this already the same as `(value, error)`?
   Not yet, but it prepares you for that pattern.
 
-## ⚠️ In Production
+## In Production
 Multiple return values let Go functions communicate more honestly.
 They make success, failure, and extra context visible to the caller.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** You now know how to return two values. The most common use case for this in Go is returning a result *and* an error object. In the very next lesson, [Lesson 4: Errors As Values](../4-errors-as-values/README.md), you will learn how Go handles failures without using exceptions.
+
 ## Next Step
 
 Continue to `FE.4` errors as values.

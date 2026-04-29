@@ -17,7 +17,7 @@
 //   go run ./03-functions-errors/4-errors-as-values
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the core Go rule for ordinary failure: return an error value instead of hiding the failure.
 // ============================================================================
 
 package main
@@ -73,5 +73,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.5 validation")
 	fmt.Println("Current: FE.4 (errors as values)")
+	fmt.Println("Previous: FE.3 (multiple-return-values)")
 	fmt.Println("---------------------------------------------------")
 }

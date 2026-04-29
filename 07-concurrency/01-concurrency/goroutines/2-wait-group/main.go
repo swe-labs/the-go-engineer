@@ -8,16 +8,16 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - WaitGroups fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - WaitGroups provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./07-concurrency/01-concurrency/goroutines/2-wait-group
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - WaitGroups fundamentals and practical application in Go.
 // ============================================================================
 
 // Commercial use is prohibited without permission.

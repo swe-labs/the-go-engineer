@@ -11,13 +11,13 @@
 //   - Build a concurrent URL checker that caps request fan-out, keeps request latency visible, and reuses HTTP clients safely. This exercise is the live ...
 //
 // WHY THIS MATTERS:
-//   - [TODO: Missing Mental Model in README]
+//   - Build a concurrent URL checker that caps request fan-out, keeps request latency visible, and reuses HTTP clients safely. This exercise is the live ...
 //
 // RUN:
 //   go run ./07-concurrency/02-concurrency-patterns/5-url-checker-exercise
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Build a concurrent URL checker that caps request fan-out, keeps request latency visible, and reuses HTTP clients safely. This exercise is the live ...
 // ============================================================================
 
 package main

@@ -17,7 +17,7 @@
 //   go run ./02-language-basics/04-data-structures/3-maps
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how Go performs keyed lookup with maps and why the comma-ok pattern matters whenever a missing key would otherwise be ambiguous.
 // ============================================================================
 
 package main
@@ -65,5 +65,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: DS.4 pointers")
 	fmt.Println("Current: DS.3 (maps)")
+	fmt.Println("Previous: DS.2 (slices)")
 	fmt.Println("---------------------------------------------------")
 }

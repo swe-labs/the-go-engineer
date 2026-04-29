@@ -11,13 +11,13 @@
 //   - Build a bounded concurrent pipeline that stops on the first failure and reuses large temporary buffers instead of allocating a fresh one for every ...
 //
 // WHY THIS MATTERS:
-//   - [TODO: Missing Mental Model in README]
+//   - Build a bounded concurrent pipeline that stops on the first failure and reuses large temporary buffers instead of allocating a fresh one for every ...
 //
 // RUN:
 //   go run ./07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Build a bounded concurrent pipeline that stops on the first failure and reuses large temporary buffers instead of allocating a fresh one for every ...
 // ============================================================================
 
 package main

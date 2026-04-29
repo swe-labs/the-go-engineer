@@ -8,16 +8,16 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - errgroup Basics fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - errgroup Basics provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./07-concurrency/02-concurrency-patterns/1-errgroup
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - errgroup Basics fundamentals and practical application in Go.
 // ============================================================================
 
 package main

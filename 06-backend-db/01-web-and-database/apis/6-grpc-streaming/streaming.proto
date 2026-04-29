@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package streaming;
+
+// The StreamingService demonstrates all four gRPC communication patterns.
+service StreamingService {
+  // 1. Unary (Classic)
+  rpc SimpleCall(Request) returns (Response);
+
+  // 2. Server Streaming (One request -> many responses)
+  // The server sends a sequence of messages.
+  rpc GetNotifications(UserRequest) returns (stream Notification);
+
+  // 3. Client Streaming (Many requests -> one response)
+  // The client sends a sequence of messages.
+  rpc UploadSensorData(stream SensorData) returns (UploadSummary);
+
+  // 4. Bidirectional Streaming (Many requests <-> many responses)
+  // Both sides can send messages whenever they want.
+  rpc RealTimeChat(stream Message) returns (stream Message);
+}
+
+message Request {}
+message Response {}
+message UserRequest { int32 user_id = 1; }
+message Notification { string content = 1; }
+message SensorData { float reading = 1; }
+message UploadSummary { int32 count = 1; }
+message Message { string text = 1; }

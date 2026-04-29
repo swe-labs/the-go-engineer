@@ -10,13 +10,13 @@
 //   - Learn how to use type switches to handle different concrete types stored in an interface.
 //
 // WHY THIS MATTERS:
-//   - Think of a sorting machine. Items come down the belt, and different items need different handlingâ€”fragile items go to one bin, heavy items t...
+//   - Think of a sorting machine. Items come down the belt, and different items need different handling-fragile items go to one bin, heavy items to another. A type switch is Go's sorting machine for interface values.
 //
 // RUN:
 //   go run ./04-types-design/6-type-switch
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how to use type switches to handle different concrete types stored in an interface.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -106,7 +106,8 @@ func main() {
 	fmt.Println("  - value.(type) extracts the concrete type")
 	fmt.Println("  - Default case handles unknown types")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.7 custom errors")
-	fmt.Println("   Current: TI.6 (type switch)")
+	fmt.Println("NEXT UP: TI.7 receiver-sets")
+	fmt.Println("Current: TI.6 (type-switch)")
+	fmt.Println("Previous: TI.5 (stringer)")
 	fmt.Println("---------------------------------------------------")
 }

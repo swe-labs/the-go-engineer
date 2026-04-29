@@ -17,7 +17,7 @@
 //   go run ./04-types-design/strings-and-text/5-text-template
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how Go separates presentation from data with `text/template`.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -107,7 +107,8 @@ You have no messages
 
 	fmt.Println(strings.ToUpper(output.String()))
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: ST.6 config parser project")
-	fmt.Println("   Current: ST.5 (text templates)")
+	fmt.Println("NEXT UP: ST.6 config-parser-project")
+	fmt.Println("Current: ST.5 (text-template)")
+	fmt.Println("Previous: ST.4 (regex)")
 	fmt.Println("---------------------------------------------------")
 }

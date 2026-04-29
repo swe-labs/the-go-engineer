@@ -17,7 +17,7 @@
 //   go run ./01-getting-started/1-installation
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Confirm that Go is installed and that this machine can run a real Go program from this repo.
 // ============================================================================
 
 package main

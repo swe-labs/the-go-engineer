@@ -17,7 +17,7 @@
 //   go run ./00-how-computers-work/2-code-to-execution
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Understand the journey from Go source code to a running program: tokens, AST, type checking, IR, optimization, code generation, and linking.
 // ============================================================================
 
 //   Compile-time reasoning explains why Go catches type errors early and why

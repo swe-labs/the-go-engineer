@@ -8,16 +8,16 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - Module Basics fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Module Basics provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./05-packages-io/01-modules-and-packages/1-module-basics
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Modules provide a stable identity and dependency management for Go projects.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -26,17 +26,17 @@ package main
 
 import "fmt"
 
-// Stage 05: Modules and Packages — Module Basics
+// Stage 05: Modules and Packages - Module Basics
 //
 //   - What go.mod is and why it exists
 //   - How Go resolves import paths
 //   - The anatomy of go.mod and go.sum
 //
 // KEY COMMANDS:
-//   go mod init <module-path>    — Create a new module
-//   go mod tidy                  — Remove unused, add missing dependencies
-//   go list -m all               — List all direct + indirect dependencies
-//   go mod why <module>          — Explain why a dependency is needed
+//   go mod init <module-path>    - Create a new module
+//   go mod tidy                  - Remove unused, add missing dependencies
+//   go list -m all               - List all direct + indirect dependencies
+//   go mod why <module>          - Explain why a dependency is needed
 //
 // REFERENCES:
 //   - https://go.dev/blog/using-go-modules
@@ -46,18 +46,18 @@ import "fmt"
 //
 // File: go.mod
 //
-//	module github.com/rasel9t6/the-go-engineer ← Module path: the root import path for all packages
-//	go 1.24                                    ← Minimum Go version required to build
+//	module github.com/rasel9t6/the-go-engineer <- Module path: the root import path for all packages
+//	go 1.24                                    <- Minimum Go version required to build
 //
 //	require (
-//	    github.com/mattn/go-sqlite3 v1.14.28  ← Direct dependency
-//	    github.com/stretchr/testify v1.11.1   ← Direct dependency
-//	    golang.org/x/crypto v0.39.0           ← Direct dependency
+//	    github.com/mattn/go-sqlite3 v1.14.28  <- Direct dependency
+//	    github.com/stretchr/testify v1.11.1   <- Direct dependency
+//	    golang.org/x/crypto v0.39.0           <- Direct dependency
 //	)
 //
 //	require (
-//	    github.com/davecgh/go-spew v1.1.1 // indirect ← Transitive dependency
-//	    github.com/stretchr/objx v0.5.2 // indirect   ← Pulled by testify/mock
+//	    github.com/davecgh/go-spew v1.1.1 // indirect <- Transitive dependency
+//	    github.com/stretchr/objx v0.5.2 // indirect   <- Pulled by testify/mock
 //	)
 //
 // IMPORTANT CONCEPTS:
@@ -72,7 +72,7 @@ import "fmt"
 //    - PATCH: bug fixes only
 //
 // 3. go.sum contains checksums for reproducible builds.
-//    - NEVER edit go.sum manually — it's auto-generated
+//    - NEVER edit go.sum manually - it's auto-generated
 //    - ALWAYS commit go.sum to version control
 //
 // 4. // indirect means YOUR code doesn't import it directly.
@@ -107,11 +107,12 @@ func main() {
 
 	fmt.Println("Essential Module Commands:")
 	for _, c := range commands {
-		fmt.Printf("  %-32s — %s\n", c.cmd, c.desc)
+		fmt.Printf("  %-32s - %s\n", c.cmd, c.desc)
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: MP.2 managing deps")
-	fmt.Println("   Current: MP.1 (module basics)")
+	fmt.Println("NEXT UP: MP.2 managing-deps")
+	fmt.Println("Current: MP.1 (module-basics)")
+	fmt.Println("Previous: ST.6 (config-parser-project)")
 	fmt.Println("---------------------------------------------------")
 }

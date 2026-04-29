@@ -20,12 +20,12 @@ import (
 )
 
 // ============================================================================
-// Section 26: gRPC — Streaming (Server & Bidirectional)
+// Section 26: gRPC - Streaming (Server & Bidirectional)
 // Level: Expert
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Server-side streaming: one request → many responses
+//   - Server-side streaming: one request -> many responses
 //   - Bidirectional streaming: many requests ↔ many responses
 //   - Handling stream closures and EOF (End Of File)
 //   - Concurrency patterns with gRPC streams

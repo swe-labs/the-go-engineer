@@ -17,7 +17,7 @@
 //   go run ./02-language-basics/04-data-structures/1-array
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn what an array is in Go and why arrays matter even though slices become the more common tool later. This lesson exists because arrays make one...
 // ============================================================================
 
 package main
@@ -60,5 +60,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: DS.2 slices")
 	fmt.Println("Current: DS.1 (arrays)")
+	fmt.Println("Previous: CF.7 (pricing-checkout)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -17,7 +17,7 @@
 //   go run ./02-language-basics/04-data-structures/5-slices-2
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn why sub-slices can still affect the original data and why `append` can reuse spare capacity in ways that surprise beginners.
 // ============================================================================
 
 package main
@@ -67,7 +67,8 @@ func main() {
 	fmt.Printf("Original after copy change:     %v\n", original)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DS.6 contact-directory")
-	fmt.Println("Current: DS.5 (slice sharing and capacity)")
+	fmt.Println("NEXT UP: DS.6 contact-manager")
+	fmt.Println("Current: DS.5 (slices-2)")
+	fmt.Println("Previous: DS.4 (pointers)")
 	fmt.Println("---------------------------------------------------")
 }

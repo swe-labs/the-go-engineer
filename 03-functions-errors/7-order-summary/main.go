@@ -17,7 +17,7 @@
 //   go run ./03-functions-errors/7-order-summary
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Build a small order-summary program that combines validation, helper functions, first-class functions, closures, multiple return values, and explic...
 // ============================================================================
 
 package main
@@ -163,7 +163,8 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.10")
+	fmt.Println("NEXT UP: FE.10 panic-and-recover")
 	fmt.Println("Current: FE.7 (order summary)")
+	fmt.Println("Previous: FE.9 (closures-mechanics)")
 	fmt.Println("---------------------------------------------------")
 }

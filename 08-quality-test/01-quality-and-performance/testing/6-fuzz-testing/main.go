@@ -17,7 +17,7 @@
 //
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how fuzzing explores unexpected inputs and captures crashing or misbehaving cases automatically.
 // ============================================================================
 
 package main

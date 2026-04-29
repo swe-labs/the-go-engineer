@@ -17,7 +17,7 @@
 //   go run ./02-language-basics/04-data-structures/2-slices
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how Go represents dynamic collections through slices, and why `len`, `cap`, `make`, and `append` are all part of one connected idea.
 // ============================================================================
 
 package main
@@ -61,5 +61,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: DS.3 maps")
 	fmt.Println("Current: DS.2 (slices)")
+	fmt.Println("Previous: DS.1 (arrays)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -70,12 +70,10 @@ The footer keeps the learning path explicit so the learner never has to guess wh
 2. Change one printed message and rerun the lesson.
 3. Add another `fmt.Println(...)` line and confirm the program still runs.
 
-## ⚠️ In Production
-
+## In Production
 Environment verification is not a beginner-only concern. CI runners, build agents, containers, and production hosts all fail in predictable ways when the toolchain, architecture, or path setup is wrong. Small health checks save time.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is "can the machine run this code?" a different question from "is Go installed?"
 2. What information here comes from the source file, and what information comes from the running environment?
 3. Why is it useful that a program can inspect its own runtime details?

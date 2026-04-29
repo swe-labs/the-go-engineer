@@ -45,7 +45,7 @@ import (
 //   Every log statement you write is a contract with your future self at 3am.
 //   `fmt.Println("user logged in: alice")` gives you exactly one string to grep.
 //   `logger.Info("user logged in", slog.String("user", "alice"))` gives you a
-//   queryable field in Datadog, Loki, or CloudWatch — you can filter a million
+//   queryable field in Datadog, Loki, or CloudWatch - you can filter a million
 //   events down to `user=alice` in milliseconds.
 //
 //   Internally, slog separates the RECORD (what happened) from the HANDLER
@@ -55,7 +55,7 @@ import (
 //
 
 func main() {
-	// 1. Text Handler — human-readable output
+	// 1. Text Handler - human-readable output
 	// slog.NewTextHandler writes: time=... level=INFO msg="..." key=value
 	// The first arg is the destination (os.Stdout, a file, bytes.Buffer).
 	// The second arg is options: set minimum level, add source location, etc.
@@ -68,7 +68,7 @@ func main() {
 	textLogger.Warn("high memory usage", slog.Int("mb", 3814))
 	textLogger.Error("database timeout", slog.Duration("elapsed", 5*time.Second))
 
-	// 2. JSON Handler — machine-readable output
+	// 2. JSON Handler - machine-readable output
 	// slog.NewJSONHandler writes one JSON object per line (NDJSON format).
 	// This is the format your observability platform expects in production.
 	jsonLogger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
@@ -93,7 +93,7 @@ func main() {
 		slog.Duration("gateway_latency", 88*time.Millisecond), // duration
 	)
 
-	// 4. Groups — namespace related attributes
+	// 4. Groups - namespace related attributes
 	// slog.Group("request", ...) produces: request.method=GET request.path=/api/v1
 	// This prevents key collisions when logging from multiple subsystems.
 	jsonLogger.Info("http request",
@@ -108,7 +108,7 @@ func main() {
 		),
 	)
 
-	// 5. With — pre-loading common fields (logger.With)
+	// 5. With - pre-loading common fields (logger.With)
 	// Use With() to create a child logger that includes shared fields on every
 	// subsequent log call. This is how you attach request IDs, service names,
 	// and user IDs without repeating them on every line.
@@ -121,7 +121,7 @@ func main() {
 	requestLogger.Info("order created", slog.String("order_id", "ord_001"))
 	requestLogger.Info("inventory reserved", slog.Int("units", 3))
 
-	// 6. slog.Default — the package-level logger
+	// 6. slog.Default - the package-level logger
 	// Replace the default logger so all slog.Info() calls use your handler.
 	// This is useful when libraries use slog.Default() internally.
 	slog.SetDefault(jsonLogger.With(slog.String("service", "api-gateway")))
@@ -134,7 +134,7 @@ func main() {
 	// - logger.With() pre-loads shared fields (request IDs, service name)
 	// - slog.SetDefault() makes every slog.Info() call use your handler
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: SL.2 context-keyed logger")
+	fmt.Println("NEXT UP: SL.2 context-keyed logger")
 	fmt.Println("   Current: SL.1 (slog basics)")
 	fmt.Println("---------------------------------------------------")
 }

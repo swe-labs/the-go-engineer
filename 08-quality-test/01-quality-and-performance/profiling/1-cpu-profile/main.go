@@ -8,16 +8,16 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - CPU Profile fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - CPU Profile provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./08-quality-test/01-quality-and-performance/profiling/1-cpu-profile
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - CPU Profile fundamentals and practical application in Go.
 // ============================================================================
 
 package main

@@ -8,23 +8,23 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - Time Formatting fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Time Formatting provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./07-concurrency/01-concurrency/time-and-scheduling/2-formatting
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Time Formatting fundamentals and practical application in Go.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
 
 package main
 
-// Stage 07: Time & Scheduling — Time Formatting
+// Stage 07: Time & Scheduling - Time Formatting
 //
 //   - The unique Go standard Time Layout string: "2006-01-02 15:04:05"
 //   - Built-in constants like `time.RFC3339`
@@ -80,7 +80,7 @@ func main() {
 		fmt.Printf("Parsed RFC3339 (in UTC): %s\n", parsedTimeRFC.UTC())
 	}
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: TM.3 timers & tickers")
+	fmt.Println("NEXT UP: TM.3 timers & tickers")
 	fmt.Println("   Current: TM.2 (formatting)")
 	fmt.Println("---------------------------------------------------")
 }

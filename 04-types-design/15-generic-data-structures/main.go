@@ -16,7 +16,7 @@
 //   go run ./04-types-design/15-generic-data-structures
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn to build type-safe generic data structures like Stack, Queue, and Set using Go's generics.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -182,7 +182,8 @@ func main() {
 	fmt.Println("  - Queue: FIFO - Enqueue/Dequeue")
 	fmt.Println("  - Set: unique values using map[T]struct{}")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CO.1")
-	fmt.Println("   Current: TI.15 (generic data structures)")
+	fmt.Println("NEXT UP: CO.1 composition")
+	fmt.Println("Current: TI.15 (generic-data-structures)")
+	fmt.Println("Previous: TI.14 (complex-generic-constraints)")
 	fmt.Println("---------------------------------------------------")
 }

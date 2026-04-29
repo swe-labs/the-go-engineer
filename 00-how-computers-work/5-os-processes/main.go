@@ -17,7 +17,7 @@
 //   go run ./00-how-computers-work/5-os-processes
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Understand that your Go program runs inside an operating-system process and crosses a syscall boundary whenever it needs OS help.
 // ============================================================================
 
 package main

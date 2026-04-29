@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/8-tls-and-https-in-go
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the transport-level rules that turn plain HTTP into encrypted, identity-checked HTTPS.
 // ============================================================================
 
 package main

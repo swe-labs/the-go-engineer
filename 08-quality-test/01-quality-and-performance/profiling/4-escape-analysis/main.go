@@ -17,7 +17,7 @@
 //   go run ./08-quality-test/01-quality-and-performance/profiling/4-escape-analysis
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how the compiler decides whether values stay on the stack or escape to the heap.
 // ============================================================================
 
 package main

@@ -8,16 +8,16 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - Pipeline Project fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Pipeline Project provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./07-concurrency/01-concurrency/goroutines/6-project-1
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Pipeline Project fundamentals and practical application in Go.
 // ============================================================================
 
 // Commercial use is prohibited without permission.

@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/5-jwt-implementation-and-risks
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn what a JWT contains, how signing works, and why tokens still create real operational risk when used carelessly.
 // ============================================================================
 
 package main

@@ -17,7 +17,7 @@
 //   go run ./01-getting-started/6-reading-compiler-errors
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn to treat the compiler as a helpful partner instead of an obstacle by decoding its error messages.
 // ============================================================================
 
 //   The compiler is your first line of defense against bugs.

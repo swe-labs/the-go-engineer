@@ -17,7 +17,7 @@
 //
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how sub-tests scope assertions and how t.Cleanup keeps test teardown tied to the test that created the resource.
 // ============================================================================
 
 package main

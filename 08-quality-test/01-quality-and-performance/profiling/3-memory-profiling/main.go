@@ -17,7 +17,7 @@
 //   go run ./08-quality-test/01-quality-and-performance/profiling/3-memory-profiling
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how heap profiles reveal where memory is retained and where allocation pressure is coming from.
 // ============================================================================
 
 package main

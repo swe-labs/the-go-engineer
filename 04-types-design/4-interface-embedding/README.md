@@ -8,13 +8,15 @@ Learn how to embed one interface into another to build larger contracts from sma
 
 You have learned that interfaces define contracts. Sometimes you want to combine multiple small contracts into one larger contract. Interface embedding lets you do this without copying method signatures.
 
+> **Backward Reference:** In [Lesson 3: Interfaces](../3-interfaces/README.md), you learned the basics of behavior contracts. Now, we will see how to compose those contracts to create more sophisticated and reusable abstractions.
+
 ## Prerequisites
 
 - `TI.3` interfaces
 
 ## Mental Model
 
-Think of a universal remote. It does not have buttons for every function directlyâ€”it embeds the capabilities of a TV remote, a DVD remote, and a sound system remote into one. The universal remote "has-a" TV control, "has-a" DVD control, etc.
+Think of a universal remote. It does not have buttons for every function directly-it embeds the capabilities of a TV remote, a DVD remote, and a sound system remote into one. The universal remote "has-a" TV control, "has-a" DVD control, etc.
 
 ## Visual Model
 
@@ -42,7 +44,7 @@ type ReadWriter interface {
 
 ## Machine View
 
-When interface A embeds interface B, the resulting interface has all methods from both. The embedding is staticâ€”the compiler checks at compile time that the embedded contracts are satisfied.
+When interface A embeds interface B, the resulting interface has all methods from both. The embedding is static-the compiler checks at compile time that the embedded contracts are satisfied.
 
 ## Run Instructions
 
@@ -62,7 +64,7 @@ One interface can embed multiple interfaces, combining their contracts.
 
 ### Use case: io.ReadWriter
 
-The standard library's io.ReadWriter is a classic exampleâ€”embedding io.Reader and io.Writer.
+The standard library's io.ReadWriter is a classic example-embedding io.Reader and io.Writer.
 
 ## Try It
 
@@ -70,14 +72,16 @@ The standard library's io.ReadWriter is a classic exampleâ€”embedding io.Re
 2. Implement your combined interface with a struct.
 3. Verify that satisfying the embedded interfaces automatically satisfies the combined one.
 
-## ⚠️ In Production
+## In Production
 Interface embedding is used throughout the standard library (io.ReadWriter, io.ReadCloser, etc.) and in real APIs to compose behavior contracts.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** One of the most common interfaces in Go is `fmt.Stringer`. In [Lesson 5: Stringer](../5-stringer/README.md), you will learn how to implement this interface to control how your types are represented as text.
+
 ## Next Step
 
 Continue to `TI.5` Stringer.

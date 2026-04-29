@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/10-owasp-top-10-for-go
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Turn the OWASP Top 10 into a practical checklist for Go services and review conversations.
 // ============================================================================
 
 package main

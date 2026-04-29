@@ -17,7 +17,7 @@
 //   go run ./08-quality-test/01-quality-and-performance/profiling/6-memory-layout
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Understand why field order and access pattern influence cache behavior and practical cost.
 // ============================================================================
 
 package main
@@ -36,3 +36,7 @@ func main() {
 	fmt.Println()
 	fmt.Println("Layout tuning is a hot-path tool, not a replacement for good algorithms.")
 }
+
+// ---------------------------------------------------
+// NEXT UP: PD.1
+// ---------------------------------------------------

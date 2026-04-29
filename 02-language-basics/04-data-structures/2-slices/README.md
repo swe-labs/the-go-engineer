@@ -12,6 +12,8 @@ That is what slices do. They are Go's primary way to work with dynamic collectio
 
 This lesson builds on DS.1 by showing what happens when you need flexibility.
 
+> **Backward Reference:** In [Lesson 1: Arrays](../1-array/README.md), you learned that arrays are rigid, fixed-size structures that copy entirely by value. Slices solve this rigidity by acting as dynamic descriptors over those underlying fixed-size arrays.
+
 ## Prerequisites
 
 - `DS.1` arrays
@@ -148,16 +150,18 @@ by default.
 - Does `items[:2]` copy the first two values?
   No. It usually creates another view over the same underlying data.
 
-## ⚠️ In Production
+## In Production
 Slices are everywhere in Go.
 Understanding `len`, `cap`, `make`, and `append` prevents a huge amount of confusion later in file
 processing, HTTP work, concurrency, and general application code.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** Slices are the primary sequential data structure in Go, but what if you need to look things up by a key rather than an index? In [Lesson 3: Maps](../3-maps/README.md), you will learn how Go handles key-value dictionaries.
+
 ## Next Step
 
 Continue to `DS.3` maps.

@@ -17,7 +17,7 @@
 //   go run ./02-language-basics/04-data-structures/4-pointers
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn what a pointer is, how dereferencing works, and why pointers matter when an update must change the original stored value rather than only a c...
 // ============================================================================
 
 package main
@@ -65,5 +65,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: DS.5 slice-sharing")
 	fmt.Println("Current: DS.4 (pointers)")
+	fmt.Println("Previous: DS.3 (maps)")
 	fmt.Println("---------------------------------------------------")
 }

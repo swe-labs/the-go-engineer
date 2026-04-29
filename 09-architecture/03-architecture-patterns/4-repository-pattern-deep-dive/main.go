@@ -17,7 +17,7 @@
 //   go run ./09-architecture/03-architecture-patterns/4-repository-pattern-deep-dive
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn what the repository pattern is for and where it becomes over-abstraction instead of useful design.
 // ============================================================================
 
 package main

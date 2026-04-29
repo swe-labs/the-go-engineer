@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/9-secrets-management
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how to keep credentials, keys, and tokens out of source control, logs, and casual developer workflows.
 // ============================================================================
 
 package main

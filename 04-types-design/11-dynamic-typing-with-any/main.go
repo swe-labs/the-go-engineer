@@ -17,7 +17,7 @@
 //   go run ./04-types-design/11-dynamic-typing-with-any
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how `any` works, how to extract concrete types safely, and why typed nil values can still make an interface non-nil.
 // ============================================================================
 
 package main
@@ -64,7 +64,8 @@ func main() {
 	fmt.Println("The interface keeps type information even when the pointer payload is nil.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.12 functional options")
-	fmt.Println("Current: TI.11 (dynamic typing with any)")
+	fmt.Println("NEXT UP: TI.12 functional-options")
+	fmt.Println("Current: TI.11 (dynamic-typing-with-any)")
+	fmt.Println("Previous: TI.10 (payroll-processor)")
 	fmt.Println("---------------------------------------------------")
 }

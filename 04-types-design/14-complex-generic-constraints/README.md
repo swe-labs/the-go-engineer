@@ -6,7 +6,9 @@ Learn advanced constraint patterns including parameterized constraints, using in
 
 ## Why This Lesson Exists Now
 
-You know basic generics with simple constraints like `int | float64`. But real-world code often needs more sophisticated constraintsâ€”constraints that require methods, parameterized types, or multiple interface requirements.
+You know basic generics with simple constraints like `int | float64`. But real-world code often needs more sophisticated constraints-constraints that require methods, parameterized types, or multiple interface requirements.
+
+> **Backward Reference:** In [Lesson 13: Method Values](../13-method-values/README.md), you learned how to treat behavior as data. Now, we will combine that with Generics to create constraints that require specific behaviors from the types passed to them.
 
 ## Prerequisites
 
@@ -14,7 +16,7 @@ You know basic generics with simple constraints like `int | float64`. But real-w
 
 ## Mental Model
 
-Think of a vending machine that accepts only certain payment methods. The constraint is not just "some type"â€”it's "anything with Pay() method that returns error." Similarly, generic constraints can require methods, not just type identity.
+Think of a vending machine that accepts only certain payment methods. The constraint is not just "some type"-it's "anything with Pay() method that returns error." Similarly, generic constraints can require methods, not just type identity.
 
 ## Visual Model
 
@@ -50,7 +52,7 @@ go run ./04-types-design/14-complex-generic-constraints
 
 ### Interface as constraint
 
-Interfaces can be constraintsâ€”anything implementing the interface works.
+Interfaces can be constraints-anything implementing the interface works.
 
 ### Multiple interface constraints
 
@@ -66,14 +68,16 @@ The built-in `comparable` constraint allows equality operators.
 2. Use the comparable constraint to create a generic key-value pair.
 3. Build a constraint for numeric types with multiple operations.
 
-## ⚠️ In Production
+## In Production
 Complex constraints are used in real Go code for data structures, serialization, and anywhere you need type-safe generic utilities.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** We have reached the end of the Foundations of Go's type system. In [Lesson 15: Generic Data Structures](../15-generic-data-structures/README.md), we will bring everything together to build a reusable, type-safe data structure from scratch.
+
 ## Next Step
 
-Continue to `TI.15` generic data structures.
+Continue to `TI.15` generic-data-structures.

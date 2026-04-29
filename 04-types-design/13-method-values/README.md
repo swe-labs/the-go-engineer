@@ -2,7 +2,9 @@
 
 ## Mission
 
-Learn how to treat methods as first-class valuesâ€”assigning methods to variables and passing them as function arguments.
+Learn how to treat methods as first-class values-assigning methods to variables and passing them as function arguments.
+
+> **Backward Reference:** In [Lesson 12: Functional Options](../12-functional-options/README.md), you learned a pattern for configuring types. Now we will see how methods themselves can be detached from their types and passed around as configuration or callbacks.
 
 ## Why This Lesson Exists Now
 
@@ -67,14 +69,16 @@ Method values capture the receiver; closures capture variables.
 2. Pass a method value to a defer statement.
 3. Compare method values with closures capturing the same receiver.
 
-## ⚠️ In Production
+## In Production
 Method values are used in HTTP handlers, event systems, and anywhere you need to pass a method as a callback.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** We have explored many ways to design types and behavior. To wrap up the core type system, we will return to Generics to see how to handle complex constraints. In [Lesson 14: Complex Generic Constraints](../14-complex-generic-constraints/README.md), you will learn how to create your own reusable constraints using interface composition.
+
 ## Next Step
 
-Continue to `TI.14` complex generic constraints if you want to finish the optional stretch path.
+Continue to `TI.14` complex-generic-constraints.

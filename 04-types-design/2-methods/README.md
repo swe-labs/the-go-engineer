@@ -8,7 +8,9 @@ Learn how to attach functions to types using methods, and understand the critica
 
 Now that you can group data with structs, the next question is: "How do I add behavior to that data?"
 
-In other languages, you might use classes. In Go, you use methodsâ€”functions that are attached to a specific type. The key decision is whether to use a value receiver (works on a copy) or a pointer receiver (works on the original).
+In other languages, you might use classes. In Go, you use methods-functions that are attached to a specific type. The key decision is whether to use a value receiver (works on a copy) or a pointer receiver (works on the original).
+
+> **Backward Reference:** In [Lesson 1: Structs](../1-struct/README.md), you learned how to group related data. Methods take that one step further by allowing you to define behavior that is physically attached to those data groups.
 
 ## Prerequisites
 
@@ -26,15 +28,15 @@ graph TD
     B --> C["methods or interface behavior"]
 ```
 ```text
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚ Circle struct                           â”‚
-â”‚   Radius float64                        â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚ Methods:                                â”‚
-â”‚   Area()      â†’ value receiver (read)   â”‚
-â”‚   Perimeter() â†’ value receiver (read)  â”‚
-â”‚   Scale()     â†’ pointer receiver (write)â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
++-------------------------------------------+
+| Circle struct                             |
+|   Radius float64                          |
++-------------------------------------------+
+| Methods:                                  |
+|   Area()      -> value receiver (read)    |
+|   Perimeter() -> value receiver (read)    |
+|   Scale()     -> pointer receiver (write) |
++-------------------------------------------+
 ```
 
 ## Machine View
@@ -83,14 +85,16 @@ If any method on a type needs a pointer receiver, make all methods on that type 
 - Why does Go allow calling pointer methods on values?
   Go automatically takes the address when needed. It is syntactic sugar.
 
-## ⚠️ In Production
+## In Production
 Methods are how Go achieves encapsulation. The receiver type determines whether callers get a copy or share the original. This affects performance and mutation behavior.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** Methods are the "behavior" of a type. When multiple types share the same method signatures, they can be treated as the same type through an **Interface**. In [Lesson 3: Interfaces](../3-interfaces/README.md), you will learn how to write generic code that works across any type that implements a specific method set.
+
 ## Next Step
 
 Continue to `TI.3` interfaces.

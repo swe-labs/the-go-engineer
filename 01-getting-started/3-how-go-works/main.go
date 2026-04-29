@@ -17,7 +17,7 @@
 //   go run ./01-getting-started/3-how-go-works
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Build a beginner-safe mental model for packages, imports, exported names, and the `go run` workflow.
 // ============================================================================
 
 package main

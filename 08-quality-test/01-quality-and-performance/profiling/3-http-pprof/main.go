@@ -11,13 +11,13 @@
 //   - Expose live profiling endpoints on an internal-only server so you can inspect CPU, heap, mutex, and goroutine behavior while a service is under loa...
 //
 // WHY THIS MATTERS:
-//   - [TODO: Missing Mental Model in README]
+//   - Expose live profiling endpoints on an internal-only server so you can inspect CPU, heap, mutex, and goroutine behavior while a service is under loa...
 //
 // RUN:
 //   go run ./08-quality-test/01-quality-and-performance/profiling/3-http-pprof
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Expose live profiling endpoints on an internal-only server so you can inspect CPU, heap, mutex, and goroutine behavior while a service is under loa...
 // ============================================================================
 
 package main

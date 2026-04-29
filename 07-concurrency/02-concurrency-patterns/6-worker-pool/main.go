@@ -17,7 +17,7 @@ import (
 )
 
 // ============================================================================
-// Stage 07: Concurrency Patterns — Robust Worker Pool
+// Stage 07: Concurrency Patterns - Robust Worker Pool
 // Level: Advanced
 // ============================================================================
 //

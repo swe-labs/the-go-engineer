@@ -20,6 +20,8 @@ This exercise turns separate language pieces into one compact system:
 
 That is the first taste of composing simple ideas into one useful artifact.
 
+> **Backward Reference:** This exercise directly combines the core language components from [Lesson 1: Variables](../1-variables/README.md), [Lesson 2: Constants](../2-constants/README.md), and [Lesson 3: Enums](../3-enums/README.md).
+
 ## Visual Model
 
 ```mermaid
@@ -62,6 +64,8 @@ The method checks bounds first, then returns the matching human-friendly name.
 
 This helper centralizes how a level is shown in output, keeping `main()` simple.
 
+> **Forward Reference:** Now that we have established a foundation of types and variables, we will use them to build branching logic. Proceed to the next section to learn control flow structures in [Control Flow: if-else](../03-control-flow/1-if-else/README.md).
+
 ## Try It
 
 1. Add another log level and its display name.
@@ -77,12 +81,10 @@ go run ./02-language-basics/4-application-logger/_starter
 
 Expected output should show readable level names and a safe fallback for invalid input.
 
-## ⚠️ In Production
-
+## In Production
 Enum-like log levels are everywhere in services and tooling. Good logging systems depend on stable internal values and readable external text, especially when alerts and dashboards consume those levels downstream.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is it useful to separate the stored level value from the displayed level name?
 2. What bug does the bounds check inside `String()` prevent?
 3. Why is this exercise a better milestone than printing raw integers?

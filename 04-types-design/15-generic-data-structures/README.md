@@ -6,16 +6,18 @@ Learn to build type-safe generic data structures like Stack, Queue, and Set usin
 
 ## Why This Lesson Exists Now
 
-You've learned generic functions. Now learn to build generic data structures that are type-safe at compile timeâ€”no runtime type assertions needed.
+You've learned generic functions. Now learn to build generic data structures that are type-safe at compile time-no runtime type assertions needed.
+
+> **Backward Reference:** In [Lesson 14: Complex Generic Constraints](../14-complex-generic-constraints/README.md), you learned how to define sophisticated rules for your generic types. Now, we will apply those rules to build reusable, type-safe data structures that can hold any type satisfying your requirements.
 
 ## Prerequisites
 
 - `TI.9` generics
-- `TI.16` complex constraints
+- `TI.14` complex-generic-constraints
 
 ## Mental Model
 
-Think of a reusable storage box. Without generics, you'd need separate boxes for books, clothes, and electronics. With generics, one "Box<T>" works for allâ€”type-safe and efficient.
+Think of a reusable storage box. Without generics, you'd need separate boxes for books, clothes, and electronics. With generics, one "Box<T>" works for all-type-safe and efficient.
 
 ## Visual Model
 
@@ -63,14 +65,16 @@ Unique element collection using map.
 2. Implement a generic LinkedList.
 3. Add Remove method to Set.
 
-## ⚠️ In Production
+## In Production
 Generic data structures are used throughout Go codebases for type-safe collections without runtime overhead.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** You have mastered the fundamentals of types, interfaces, and generics. Now, we will look at how to build larger systems by combining these types through Composition instead of Inheritance. In [Lesson 1: Composition](../composition/1-composition/README.md), you will learn how to embed structs to reuse data and behavior.
+
 ## Next Step
 
-The optional stretch path is complete. Move to **Composition** next, or return to the Section 06 map whenever you want to review the core path again.
+Continue to `CO.1` composition, which explores how to build complex systems by embedding types.

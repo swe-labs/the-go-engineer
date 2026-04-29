@@ -17,10 +17,10 @@
 //   go run ./02-language-basics/03-control-flow/6-defer-use-cases
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - 'defer' is the idiomatic way to manage resource cleanup in Go. Always
+//     defer the cleanup operation (like Close() or Unlock()) immediately after
+//     successfully acquiring the resource.
 // ============================================================================
-
-//   Proper resource management is critical for production stability.
 
 package main
 
@@ -32,15 +32,20 @@ func main() {
 	fmt.Println("CF.6: Real-World Defer Patterns")
 	fmt.Println("--------------------------------")
 
+	// Backward reference:
+	// We learned about LIFO order in the previous lesson: ../5-defer-basics/README.md
+	// Here we apply it practically to simulate safe file handling.
 	simulateFileOperation()
 
-	// - Defer cleanup immediately after a resource is successfully acquired.
-	// - This ensures that even if subsequent logic fails, resources are released.
-
+	// Forward reference:
+	// Let's combine if-else, loops, switch, and defer together into a real
+	// business logic challenge next.
+	// See: ../7-pricing-checkout/README.md
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: CF.7 pricing-checkout")
 	fmt.Println("Current: CF.6 (defer-use-cases)")
+	fmt.Println("Previous: CF.5 (defer-basics)")
 	fmt.Println("---------------------------------------------------")
 }
 

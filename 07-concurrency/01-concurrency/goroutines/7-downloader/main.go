@@ -11,20 +11,20 @@
 //   - Build a downloader that launches work concurrently, limits the number of active downloads, and reports results without sharing mutable state betwee...
 //
 // WHY THIS MATTERS:
-//   - [TODO: Missing Mental Model in README]
+//   - Build a downloader that launches work concurrently, limits the number of active downloads, and reports results without sharing mutable state betwee...
 //
 // RUN:
 //   go run ./07-concurrency/01-concurrency/goroutines/7-downloader
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Build a downloader that launches work concurrently, limits the number of active downloads, and reports results without sharing mutable state betwee...
 // ============================================================================
 
 // Commercial use is prohibited without permission.
 
 package main
 
-// Stage 07: Concurrency — Concurrent Downloader (Exercise)
+// Stage 07: Concurrency - Concurrent Downloader (Exercise)
 //
 
 import (

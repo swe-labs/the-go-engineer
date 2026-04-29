@@ -8,23 +8,23 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - Time Basics fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Time Basics provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./07-concurrency/01-concurrency/time-and-scheduling/1-time
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Time Basics fundamentals and practical application in Go.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
 
 package main
 
-// Stage 07: Time & Scheduling — Time Basics
+// Stage 07: Time & Scheduling - Time Basics
 //
 //   - The `time.Time` struct and how it stores moments in time
 //   - Durations (`time.Duration`) representing intervals
@@ -89,7 +89,7 @@ func main() {
 
 	fmt.Println("Awake after sleep!")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: TM.2 formatting")
+	fmt.Println("NEXT UP: TM.2 formatting")
 	fmt.Println("   Current: TM.1 (time basics)")
 	fmt.Println("---------------------------------------------------")
 }

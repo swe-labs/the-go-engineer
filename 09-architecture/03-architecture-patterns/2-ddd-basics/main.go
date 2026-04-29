@@ -17,7 +17,7 @@
 //   go run ./09-architecture/03-architecture-patterns/2-ddd-basics
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the boundary language behind domains, aggregates, and bounded contexts.
 // ============================================================================
 
 package main

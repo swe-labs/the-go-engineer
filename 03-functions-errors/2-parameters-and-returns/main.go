@@ -17,7 +17,7 @@
 //   go run ./03-functions-errors/2-parameters-and-returns
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how a function receives input and gives a result back to the caller.
 // ============================================================================
 
 package main
@@ -61,5 +61,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.3 multiple-return-values")
 	fmt.Println("Current: FE.2 (parameters and returns)")
+	fmt.Println("Previous: FE.1 (functions-basics)")
 	fmt.Println("---------------------------------------------------")
 }

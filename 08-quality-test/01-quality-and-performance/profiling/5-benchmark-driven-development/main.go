@@ -17,7 +17,7 @@
 //
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how benchmarks protect performance discussions from guesswork by measuring before and after changes.
 // ============================================================================
 
 package main

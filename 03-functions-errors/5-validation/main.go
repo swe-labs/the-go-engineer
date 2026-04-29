@@ -17,7 +17,7 @@
 //   go run ./03-functions-errors/5-validation
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how a function rejects bad input before the program does the real work.
 // ============================================================================
 
 package main
@@ -72,5 +72,6 @@ func main() {
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.6 orchestration")
 	fmt.Println("Current: FE.5 (validation)")
+	fmt.Println("Previous: FE.4 (errors-as-values)")
 	fmt.Println("---------------------------------------------------")
 }

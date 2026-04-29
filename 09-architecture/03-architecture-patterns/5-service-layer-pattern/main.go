@@ -17,7 +17,7 @@
 //   go run ./09-architecture/03-architecture-patterns/5-service-layer-pattern
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how service layers coordinate domain operations, error handling, and side effects above repositories.
 // ============================================================================
 
 package main

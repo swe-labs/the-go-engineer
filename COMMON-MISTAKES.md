@@ -1,4 +1,4 @@
-# Common Go Mistakes — Reference Guide
+# Common Go Mistakes - Reference Guide
 
 This guide lists common Go mistakes, why they happen, and where the correct pattern is taught.
 

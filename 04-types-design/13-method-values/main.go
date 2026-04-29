@@ -7,7 +7,7 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how to treat methods as first-class valuesâ€”assigning methods to variables and passing them as function arguments.
+//   - Learn how to treat methods as first-class values-assigning methods to variables and passing them as function arguments.
 //
 // WHY THIS MATTERS:
 //   - Think of a button on a remote. You can press the button (call the method), or you can program the button to trigger something else (use the method ...
@@ -16,7 +16,7 @@
 //   go run ./04-types-design/13-method-values
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how to treat methods as first-class values-assigning methods to variables and passing them as function arguments.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -115,7 +115,8 @@ func main() {
 	fmt.Println("  - Use method values as callbacks and event handlers")
 	fmt.Println("  - Each instance's method value is independent")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.14 complex generic constraints")
-	fmt.Println("   Current: TI.13 (method values)")
+	fmt.Println("NEXT UP: TI.14 complex-generic-constraints")
+	fmt.Println("Current: TI.13 (method-values)")
+	fmt.Println("Previous: TI.12 (functional-options)")
 	fmt.Println("---------------------------------------------------")
 }

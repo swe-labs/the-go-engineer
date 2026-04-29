@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/4-authentication-basics
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the core differences between proving identity with sessions, tokens, and surrounding account rules.
 // ============================================================================
 
 package main

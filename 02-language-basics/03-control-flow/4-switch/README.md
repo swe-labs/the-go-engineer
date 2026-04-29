@@ -18,6 +18,8 @@ It is useful when:
 - one value may match several known cases
 - several conditions need a clean top-to-bottom table shape
 
+> **Backward Reference:** In [Lesson 3: Break / Continue](../3-break-continue/README.md), you learned how to interrupt flow. `switch` gives us a built-in "interrupt" automatically: when a case matches, it executes and then implicitly breaks out of the switch block.
+
 ## Visual Model
 
 ```mermaid
@@ -55,18 +57,18 @@ The tagless form evaluates each case as a boolean condition, which is useful for
 
 The default case handles the fallback path when no explicit case matches.
 
+> **Forward Reference:** While `switch` simplifies synchronous logic, soon we will learn about `defer` in [Lesson 5: Defer Basics](../5-defer-basics/README.md) to handle cleanup tasks that run at the end of the current scope, regardless of how control flowed through `if`s and `switch`es.
+
 ## Try It
 
 1. Change the `day` value and rerun the lesson.
 2. Change the `score` value in the tagless `switch`.
 3. Reorder the score cases and notice how case order affects behavior.
 
-## ⚠️ In Production
-
+## In Production
 `switch` often makes state machines, command routers, mode handlers, and category-based rules easier to read than long `if / else if` ladders.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. When is `switch` clearer than `if / else if`?
 2. Why is Go's "no fallthrough by default" behavior safer for beginners?
 3. What is the difference between a tagged and tagless `switch`?

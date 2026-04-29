@@ -17,7 +17,7 @@
 //
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how narrow interfaces create seams that let code be tested without real dependencies.
 // ============================================================================
 
 package main

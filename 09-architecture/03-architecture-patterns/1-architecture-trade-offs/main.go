@@ -17,7 +17,7 @@
 //   go run ./09-architecture/03-architecture-patterns/1-architecture-trade-offs
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Compare the default service shapes teams choose as systems and organizations grow.
 // ============================================================================
 
 package main

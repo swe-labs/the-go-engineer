@@ -17,7 +17,7 @@
 //   go run ./01-getting-started/5-go-tools
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Master the three essential tools that keep Go code clean, safe, and documented: `fmt`, `vet`, and `doc`.
 // ============================================================================
 
 //   Standardized tools ensure that all Go codebases look and feel the same.

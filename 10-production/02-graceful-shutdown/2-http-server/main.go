@@ -211,7 +211,7 @@ func main() {
 	// - errgroup orchestrates server + signal handler goroutines elegantly
 	// - Kubernetes terminationGracePeriodSeconds = your maximum shutdown window
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: GS.3 shutdown capstone")
+	fmt.Println("NEXT UP: GS.3 shutdown capstone")
 	fmt.Println("   Current: GS.2 (HTTP graceful drain)")
 	fmt.Println("---------------------------------------------------")
 }

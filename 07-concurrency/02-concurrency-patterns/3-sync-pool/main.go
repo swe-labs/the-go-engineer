@@ -8,16 +8,16 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - sync.Pool fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - sync.Pool provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./07-concurrency/02-concurrency-patterns/3-sync-pool
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - sync.Pool fundamentals and practical application in Go.
 // ============================================================================
 
 package main

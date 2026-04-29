@@ -126,7 +126,7 @@ func setupTestDB(t *testing.T) *sql.DB {
 | Area | Target |
 | --- | --- |
 | General minimum where no stricter section target exists | 75% |
-| Phase 0–1 foundation lessons with testable behavior | 80% |
+| Phase 0-1 foundation lessons with testable behavior | 80% |
 | s06 Backend, APIs & Databases | 85% |
 | s08 Quality & Testing | 95% |
 | s09 Architecture & Security | 85% |
@@ -139,8 +139,8 @@ Coverage is a signal, not a substitute for meaningful assertions.
 ```bash
 go test ./...
 go test -race ./...
-go test -coverprofile=coverage.out ./...
-go tool cover -func=coverage.out
+go test -coverprofile coverage.out ./...
+go tool cover -func coverage.out
 go run ./scripts/validate_curriculum.go
 ```
 

@@ -12,6 +12,8 @@ That is what pointers solve. When you pass a slice to a function, you are passin
 
 This lesson builds on DS.1 (arrays as value types) and DS.2 (slices as references) to complete the picture.
 
+> **Backward Reference:** In [Lesson 3: Maps](../3-maps/README.md), you learned how to use a built-in reference type (map) to look up values by key. Now we will look under the hood at how you can create your own references to any value using pointers.
+
 ## Prerequisites
 
 - `DS.1` arrays
@@ -154,15 +156,17 @@ Dereferencing a nil pointer would panic, so the lesson shows the right habit fir
 Because `04-data-structures` ends with a milestone that updates stored slice data through a
 pointer.
 
-## ⚠️ In Production
+## In Production
 Pointers matter whenever a Go program must mutate stored state intentionally and safely. They also
 help learners stop confusing "copied value" with "original value."
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
+> **Forward Reference:** You've now seen arrays, slices, maps, and pointers. In the next lesson, [Lesson 5: Slices 2](../5-slices-2/README.md), we will combine these concepts to show what happens when multiple slices share the same underlying memory via pointers.
+
 ## Next Step
 
 Continue to `DS.5` slice sharing and capacity.

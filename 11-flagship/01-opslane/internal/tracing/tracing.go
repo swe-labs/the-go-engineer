@@ -13,7 +13,7 @@ import (
 )
 
 // SpanContext holds timing and identity data for a named operation.
-// This is a lightweight teaching implementation — production systems
+// This is a lightweight teaching implementation - production systems
 // would use OpenTelemetry spans with trace/span IDs and sampling.
 type SpanContext struct {
 	Name          string

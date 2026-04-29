@@ -17,7 +17,7 @@
 //   go run ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Refactor a tangled application shape into clearer modules with explicit boundaries and collaboration points.
 // ============================================================================
 
 package main

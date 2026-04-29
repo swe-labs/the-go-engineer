@@ -8,16 +8,16 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - Visibility and Export Rules fundamentals and practical application in Go.
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Visibility and Export Rules provides a structured approach to writing clean Go code.
 //
 // RUN:
 //   go run ./09-architecture/01-package-design/2-visibility
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Visibility and Export Rules fundamentals and practical application in Go.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -95,7 +95,7 @@ func main() {
 	fmt.Println("  4. Use getters for controlled access to internal state")
 	fmt.Println("  5. Once exported, it is part of your API - removing it is a breaking change")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: PD.3 project layout")
+	fmt.Println("NEXT UP: PD.3 project layout")
 	fmt.Println("   Current: PD.2 (visibility)")
 	fmt.Println("---------------------------------------------------")
 }

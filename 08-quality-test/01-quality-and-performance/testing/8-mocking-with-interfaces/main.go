@@ -17,7 +17,7 @@
 //
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how manual mocks and stubs turn interface seams into precise behavior tests.
 // ============================================================================
 
 package main

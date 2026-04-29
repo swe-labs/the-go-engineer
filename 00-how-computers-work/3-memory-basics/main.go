@@ -3,7 +3,7 @@
 
 // ============================================================================
 // Section 00: How Computers Work
-// Title: Memory basics — stack vs heap
+// Title: Memory basics - stack vs heap
 // Level: Foundation
 // ============================================================================
 //
@@ -17,7 +17,7 @@
 //   go run ./00-how-computers-work/3-memory-basics
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Understand how memory is allocated and managed during execution, especially the difference between stack and heap memory in Go.
 // ============================================================================
 
 //   Memory behavior shapes performance, correctness, and the kind of bugs a

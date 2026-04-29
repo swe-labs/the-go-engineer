@@ -1,114 +1,65 @@
 # Release Guide
 
-This document describes how to plan, prepare, and publish releases of The Go Engineer.
-
-## Overview
-
-The Go Engineer follows semantic versioning for stable releases:
-
-- **Major**: significant curriculum restructuring
-- **Minor**: new lessons, features, or substantial improvements without breaking the locked architecture
-- **Patch**: bug fixes, documentation corrections, CI improvements, and dependency updates
-
-Current stable line:
-
-```text
-v2.1.x
-```
-
-## Branch Roles
-
-- `main`: post-v2.1 implementation line
-- `release/v1`: stable v1 maintenance line
-- `release/v2`: stable v2.1.x maintenance line
-
-Topic branches stay short-lived and branch from the line they should ship to.
-
-## Commit Convention
-
-Use the bracketed commit format:
-
-```text
-[TYPE] short imperative description
-```
-
-Allowed types:
-
-```text
-[FEAT] [FIX] [DOCS] [TEST] [CHORE] [REFACTOR] [SECURITY] [RELEASE]
-```
-
-Examples:
-
-```text
-[RELEASE] prepare v2.1.1 metadata
-[FIX] correct DB.3 tenant-scoping example
-[DOCS] update release guide for v2.1.x maintenance
-```
+This document defines the release process for The Go Engineer.
 
 ## Release Lines
 
-### v2.1.x maintenance
+| Line | Branch | Purpose |
+| --- | --- | --- |
+| v2.1.x | `release/v2` | stable v2.1 maintenance |
+| v1.x | `release/v1` | stable v1 maintenance |
+| post-v2.1 | `main` | future implementation and integration work |
 
-Use `release/v2`.
+The current stable release is `v2.1.1`.
 
-Typical work:
+## Versioning
 
-- bug fixes
-- documentation corrections
-- low-risk lesson corrections
-- CI and validator fixes
-- dependency and security updates
+The project uses semantic versioning for stable releases:
 
-### Post-v2.1 implementation
+- major: public architecture changes or incompatible curriculum restructuring
+- minor: new stable content inside the locked architecture
+- patch: bug fixes, documentation corrections, validator fixes, CI changes, and low-risk curriculum repairs
 
-Use `main`.
+Do not reuse an existing tag. If `v2.1.0` already exists, the next stable patch is `v2.1.1`.
 
-Typical work:
+## Release Preconditions
 
-- Opslane flagship implementation
-- deeper engineering content
-- validator improvements
-- new proof surfaces inside existing sections
+Before preparing a release:
 
-Do not use `main` as a replacement for stable-line maintenance when the fix should ship to v2.1.x users.
+- the release issue is linked
+- the target branch is identified
+- public docs match `ARCHITECTURE.md` and `curriculum.v2.json`
+- all P0/P1/P2 review findings are fixed or explicitly accepted by the maintainer
+- GitHub CI is passing
+- local verification evidence is available
 
-## Release Process
-
-### Step 1: Plan the release
-
-1. Identify issues and PRs to include.
-2. Confirm target branch: `release/v1`, `release/v2`, or `main`.
-3. Update [CHANGELOG.md](./CHANGELOG.md).
-4. Update version references in docs if needed.
-
-### Step 2: Create release-prep branch
+## Release Preparation
 
 For a v2.1.x release:
 
 ```bash
 git switch release/v2
-git pull origin release/v2
+git pull --ff-only origin release/v2
 git switch -c release/v2.1.x-prep
 ```
 
-### Step 3: Update release metadata
-
 Update:
 
-- `CHANGELOG.md`
-- `README.md` if the featured status changes
-- `ROADMAP.md` if maintenance or implementation priorities change
+- [CHANGELOG.md](./CHANGELOG.md)
+- [README.md](./README.md)
+- [ROADMAP.md](./ROADMAP.md)
+- release notes for the target version
+- any public workflow document that changed
 
-Commit with:
+Commit release metadata with:
 
 ```bash
-git commit -m "[RELEASE] prepare v2.1.x metadata"
+git commit -m "[RELEASE] prepare v2.1.x"
 ```
 
-### Step 4: Verify locally
+## Required Verification
 
-Run:
+Run the CI-equivalent bundle:
 
 ```bash
 go build ./...
@@ -118,7 +69,7 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test -coverprofile=coverage.out ./...
+go test -coverprofile coverage.out ./...
 go run ./scripts/validate_curriculum.go
 ```
 
@@ -128,9 +79,11 @@ For benchmark-related releases:
 go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
 ```
 
-### Step 5: Open release PR
+Remove generated local artifacts such as `coverage.out` unless they are intentionally tracked.
 
-Open a PR into the target long-lived branch.
+## Release PR
+
+Open a PR into the release branch.
 
 PR title:
 
@@ -141,16 +94,14 @@ PR title:
 PR body:
 
 ```markdown
+Closes #<issue>
+
 ## Release
 
-Version: v2.1.x
-Target branch: release/v2
+- Version: v2.1.x
+- Target branch: release/v2
 
-## Summary
-
--
-
-## Included changes
+## Scope
 
 -
 
@@ -159,9 +110,10 @@ Target branch: release/v2
 - [ ] go build ./...
 - [ ] go vet ./...
 - [ ] gofmt check
-- [ ] go mod tidy check
+- [ ] go mod tidy no-diff check
 - [ ] go test ./...
 - [ ] go test -race ./...
+- [ ] go test -coverprofile coverage.out ./...
 - [ ] go run ./scripts/validate_curriculum.go
 
 ## Risk
@@ -169,71 +121,83 @@ Target branch: release/v2
 -
 ```
 
-### Step 6: Merge release PR
+Keep the PR open until CI is green and review findings are handled.
 
-Use **Squash and Merge** after approval and green CI.
+## Merge and Tag
 
-### Step 7: Tag the release
+After approval and green CI:
 
 ```bash
 git switch release/v2
-git pull origin release/v2
+git pull --ff-only origin release/v2
 git tag v2.1.x
 git push origin v2.1.x
 ```
 
-### Step 8: Create GitHub release
+Do not force-update stable tags.
 
-Create a GitHub release with:
+## GitHub Release
 
-- tag: `v2.1.x`
-- title: `The Go Engineer v2.1.x`
-- description copied from `CHANGELOG.md`
+Create the GitHub release from the stable tag:
+
+```bash
+gh release create v2.1.x --target release/v2 --title "The Go Engineer v2.1.x" --notes-file RELEASE-NOTES-v2.1.x.md
+```
+
+The release notes should include:
+
+- release purpose
+- major fixes and documentation changes
+- validation evidence
+- branch and tag references
+- known risks, if any
 
 ## Backports
 
-If a fix belongs in multiple supported lines:
+If a fix must ship to more than one supported line:
 
-1. Merge once into the correct source branch.
-2. Use `git cherry-pick -x` to propagate it.
-3. Open a follow-up PR if branch protection requires it.
+1. merge the fix into the source branch
+2. cherry-pick with provenance
+3. open a follow-up PR if branch protection requires it
 
 ```bash
 git switch <target-branch>
-git pull origin <target-branch>
+git pull --ff-only origin <target-branch>
 git cherry-pick -x <merged-commit-sha>
 git push origin HEAD
 ```
 
-## Security Updates
+## Security Releases
 
-For security issues:
+For security fixes:
 
-1. Use `[SECURITY]` in the issue and commit title.
-2. Apply the smallest safe fix.
-3. Add tests where possible.
-4. Release a patch version.
-5. Document the change in `CHANGELOG.md`.
+1. use `[SECURITY]` in the issue, PR, and commit title
+2. make the smallest safe fix
+3. add tests where possible
+4. avoid exposing secrets or exploit details in public discussion
+5. publish a patch release
+6. document user-facing impact in the changelog
 
-## Rollback Procedure
+## Rollback
 
-If a release needs to be withdrawn before broad use:
+If a tag was pushed incorrectly before release publication:
 
 ```bash
 git tag -d v2.1.x
 git push origin --delete v2.1.x
 ```
 
-If already merged and published, prefer a revert followed by a patch release.
+If the release was already published, prefer a revert followed by a patch release.
 
-## Release Checklist
+## Checklist
 
-- [ ] All included issues are closed or linked.
-- [ ] All included PRs are merged.
+- [ ] Release issue is linked.
+- [ ] Target branch is correct.
+- [ ] Public docs are current.
 - [ ] `CHANGELOG.md` is updated.
-- [ ] `ROADMAP.md` is accurate.
-- [ ] CI passes.
-- [ ] No release-line mismatch.
+- [ ] Release notes are ready.
+- [ ] Local verification passes.
+- [ ] GitHub CI passes.
 - [ ] No architecture drift.
-- [ ] Any backport need is labeled and tracked.
-- [ ] GitHub release notes are published.
+- [ ] Tag is created from the verified release branch.
+- [ ] GitHub release is published.

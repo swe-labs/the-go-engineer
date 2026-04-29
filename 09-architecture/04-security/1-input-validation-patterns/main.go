@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/1-input-validation-patterns
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how allow-lists, normalization, and fail-fast checks turn raw input into trustworthy domain values.
 // ============================================================================
 
 package main

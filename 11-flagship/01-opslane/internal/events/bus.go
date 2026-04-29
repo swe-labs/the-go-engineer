@@ -24,7 +24,7 @@ var (
 // buffered channel; subscribers read from that same channel via Subscribe.
 //
 // Thread-safety: all exported methods are safe for concurrent use.
-// Close is idempotent — calling it multiple times is safe.
+// Close is idempotent - calling it multiple times is safe.
 //
 // Design note: the closed signal is carried solely by the `closed` channel.
 // A non-blocking select on a closed channel is O(1) and allocation-free, so
@@ -68,7 +68,7 @@ func (b *Bus) TryPublish(event Event) error {
 		return fmt.Errorf("event bus is not configured")
 	}
 
-	// Fast closed check — a receive on a closed channel is non-blocking and
+	// Fast closed check - a receive on a closed channel is non-blocking and
 	// allocation-free, so no mutex is needed.
 	select {
 	case <-b.closed:

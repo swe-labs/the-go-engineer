@@ -1,37 +1,40 @@
 # Contributing to The Go Engineer
 
-Thank you for your interest in contributing. This guide explains the required workflow and quality bar.
+This guide defines the required workflow for contributions to the stable v2.1 repository.
 
-## Quick Links
+## Source of Truth
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — the locked v2.1 12-section source of truth
-- [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) — teaching and lesson contract
-- [CODE-STANDARDS.md](./CODE-STANDARDS.md) — Go style, headers, comments, and review standards
-- [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) — test and verification expectations
+Read these documents before changing curriculum, code, validation, or release surfaces:
+
+| Document | Purpose |
+| --- | --- |
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | locked v2.1 public structure |
+| [curriculum.v2.json](./curriculum.v2.json) | machine-readable curriculum registry |
+| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | README-first teaching contract |
+| [CODE-STANDARDS.md](./CODE-STANDARDS.md) | Go and teaching-code standards |
+| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | verification expectations |
+| [RELEASE.md](./RELEASE.md) | release and branch process |
+
+If documents disagree on public curriculum structure, `ARCHITECTURE.md` wins.
 
 ## Architecture Rule
 
-The v2.1 architecture is locked. Contributions should deepen the existing 12 sections, not redesign the public structure.
+The public architecture is locked at 12 sections, `s00` through `s11`.
 
-Do not add, remove, rename, or reorder public root sections unless the maintainer explicitly approves reopening architecture.
+Do not add, remove, rename, or reorder public root sections unless a maintainer explicitly approves architecture work.
 
-## Strict GitHub Workflow
+Allowed work includes:
 
-All contributors and maintainers follow the same workflow.
+- lesson corrections and depth improvements
+- tests and proof surfaces
+- README/source/curriculum metadata alignment
+- validator and CI improvements
+- Opslane flagship depth inside `s11`
+- public documentation cleanup
 
-The workflow is closed-loop: implementation is not complete until review findings, CI failures, and PR conversation threads are handled. The final squash-merge remains maintainer-only.
+## Issue First
 
-### 1. Create or confirm an issue first
-
-Never start implementation work without an approved issue.
-
-The issue must include:
-
-- affected section: `s00` through `s11`, if applicable
-- affected lesson IDs, if applicable
-- expected files or folders
-- validation plan
-- risk notes
+Every non-trivial change needs an issue before implementation.
 
 Issue title format:
 
@@ -39,62 +42,59 @@ Issue title format:
 [TYPE] short description
 ```
 
-Allowed issue types:
+Allowed types:
 
 ```text
 [FEAT] [FIX] [DOCS] [TEST] [CHORE] [REFACTOR] [SECURITY] [RELEASE]
 ```
 
+Issue body should include:
+
+- affected section, if applicable
+- affected lesson IDs, if applicable
+- expected files or folders
+- validation plan
+- risk notes
+
+## Branches
+
+| Branch | Purpose |
+| --- | --- |
+| `main` | active post-v2.1 implementation and integration line |
+| `release/v2` | stable v2.1.x maintenance line |
+| `release/v1` | stable v1 maintenance line |
+
+Branch from the line that should receive the change.
+
 Examples:
-
-```text
-[FEAT] add SY.1 sync.Mutex lesson
-[FIX] correct SQL injection example in DB.3
-[DOCS] align ROADMAP.md with v2.1 final status
-[TEST] add TE.4 benchmark coverage
-[CHORE] tighten curriculum validator
-```
-
-### 2. Branch from the correct line
-
-Long-lived branches:
-
-- `main`: post-v2.1 implementation line
-- `release/v1`: stable v1 maintenance line
-- `release/v2`: stable v2.1.x maintenance line
-
-For normal v2.1 work:
 
 ```bash
 git switch main
-git pull origin main
-git switch -c <branch-name>
+git pull --ff-only origin main
+git switch -c docs/public-release-readiness
 ```
 
-Branch naming:
+```bash
+git switch release/v2
+git pull --ff-only origin release/v2
+git switch -c release/v2.1.x-prep
+```
 
-| Pattern | Use |
-| --- | --- |
-| `feat/sNN-lesson-slug` | new lesson or lesson expansion |
-| `fix/sNN-description` | bug fix in a section |
-| `docs/document-or-section` | documentation-only change |
-| `test/sNN-description` | test-only improvement |
-| `chore/tooling-description` | tooling, CI, dependencies |
-| `release/vX.Y.Z-prep` | release metadata work |
+## Pull Requests
 
-### 3. Open a draft PR early
-
-Open a draft PR after the first push. Link the issue with `Closes #<issue>`.
+Open a draft PR early and link the issue with `Closes #<issue>`.
 
 The PR should include:
 
 - scope
-- affected section and lesson IDs
+- affected sections or lessons
 - validation commands run
 - risk notes
-- screenshots or output when useful
+- tracking metadata
 
-### 4. Keep commits logical
+Keep the PR in draft until local validation, self-review, and obvious fixes are complete.
+
+## Commits
 
 Use bracketed commit messages:
 
@@ -105,18 +105,54 @@ Use bracketed commit messages:
 Examples:
 
 ```text
-[FEAT] add SY.1 sync.Mutex lesson
-[TEST] add SY.1 race-focused tests
-[DOCS] update s07 section map
-[FIX] scope DB.3 example query by tenant id
-[CHORE] align local verification with CI
+[DOCS] align README with v2.1.1 stable release
+[FIX] replace blocking REST API test with httptest
+[TEST] add repository behavior coverage
+[CHORE] tighten curriculum validator
 ```
 
-Keep unrelated formatting changes out of feature commits.
+Keep commits logical. Do not mix unrelated formatting, docs, and behavior changes unless the PR is explicitly a repository-wide cleanup.
 
-### 5. Verify locally before review
+## Lesson Contract
 
-Run the CI-equivalent checks:
+Every learner-facing lesson README must include these sections in order:
+
+1. `## Mission`
+2. `## Prerequisites`
+3. `## Mental Model`
+4. `## Visual Model`
+5. `## Machine View`
+6. `## Run Instructions`
+7. `## Code Walkthrough`
+8. `## Try It`
+9. `## In Production`
+10. `## Thinking Questions`
+11. `## Next Step`
+
+Exercises replace `## Code Walkthrough` with `## Solution Walkthrough` and include `## Verification Surface`.
+
+Every lesson `main.go` should include:
+
+- copyright and license header
+- section, lesson title, and level
+- `WHAT YOU'LL LEARN`
+- `WHY THIS MATTERS`
+- exact `RUN:` command
+- readable teaching comments
+- `KEY TAKEAWAY`
+- `NEXT UP:` footer matching `curriculum.v2.json`
+
+## Cross-References
+
+When a lesson uses a concept from another point in the curriculum:
+
+- forward reference later concepts briefly and name the future lesson or section
+- backward reference previously established ideas when they are reused
+- keep cross-references inline with the explanation rather than as detached navigation blocks
+
+## Validation
+
+Run the CI-equivalent bundle before final review:
 
 ```bash
 go build ./...
@@ -126,7 +162,7 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test -coverprofile=coverage.out ./...
+go test -coverprofile coverage.out ./...
 go run ./scripts/validate_curriculum.go
 ```
 
@@ -136,114 +172,17 @@ For benchmark-related changes:
 go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
 ```
 
-### 6. Final review and merge
-
-When ready:
-
-- mark the PR ready for review
-- wait for maintainer review
-- use **Squash and Merge**
-- do not self-merge unless the maintainer explicitly approves it for that PR
-
-The final squash commit should also use the bracketed format.
-
-## Lesson File Template
-
-Every Go lesson file must follow the standard header and footer contract.
-
-```go
-// Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
-
-// ============================================================================
-// Section NN: Section Name — Lesson Title
-// Level: Foundation | Core | Stretch
-// ============================================================================
-//
-// WHAT YOU'LL LEARN:
-//   - Concept one
-//   - Concept two
-//
-// WHY THIS MATTERS:
-//   One sentence on why this exists in a real production Go codebase.
-//
-// RUN: go run ./NN-section-slug/N-lesson-slug
-// ============================================================================
-
-package main
-
-import "fmt"
-
-func main() {
-	// Your code with inline comments explaining every concept.
-	fmt.Println("Hello")
-
-	// KEY TAKEAWAY:
-	// - Summary point 1
-	// - Summary point 2
-	fmt.Println()
-	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: XY.N next-lesson-slug")
-	fmt.Println("Run    : go run ./NN-section-slug/N-next-lesson-slug")
-	fmt.Println("Current: XY.N current-lesson-slug")
-	fmt.Println("---------------------------------------------------")
-}
-```
-
-`NEXT UP:` must use this exact text with no emoji. It must match `curriculum.v2.json`.
-
-## Comment Guidelines
-
-1. Explain why, not obvious what.
-2. Use comments to teach non-obvious behavior, traps, and runtime implications.
-3. Cross-reference lessons with lesson IDs where helpful.
-4. Keep source files readable; the README remains the primary teaching surface.
-5. End `main()` with a `KEY TAKEAWAY` and the standard footer where applicable.
-
-## Adding a Lesson
-
-1. Confirm an approved issue.
-2. Create the lesson directory inside the existing section.
-3. Write `README.md` first using the lesson contract.
-4. Write `main.go` using the standard source contract.
-5. Add tests and starter code when the item is an exercise.
-6. Register the item in `curriculum.v2.json`.
-7. Update the section README.
-8. Run validation.
-
-## Adding an Exercise
-
-Exercises usually include:
-
-```text
-NN-section-slug/
-└── N-exercise-name/
-    ├── README.md
-    ├── main.go
-    ├── main_test.go
-    └── _starter/
-        └── main.go
-```
-
-The `_starter/main.go` file must compile successfully and contain clear TODO markers.
-
-## Quality Checklist
+## Review Standard
 
 Before final review:
 
-- [ ] Architecture v2.1 remains intact.
-- [ ] `curriculum.v2.json` is updated for lesson changes.
-- [ ] Section README is updated when needed.
-- [ ] Lesson README follows the required section order.
-- [ ] Run commands work exactly as printed.
-- [ ] Tests prove behavior where behavior should be provable.
-- [ ] Starter code compiles.
-- [ ] `NEXT UP:` footer matches curriculum metadata.
-- [ ] `go build ./...` passes.
-- [ ] `go vet ./...` passes.
-- [ ] gofmt check passes.
-- [ ] `go mod tidy` produces no `go.mod` or `go.sum` diff.
-- [ ] `go test ./...` passes.
-- [ ] `go test -race ./...` passes.
-- [ ] `go run ./scripts/validate_curriculum.go` passes.
-- [ ] CI passes on GitHub.
+- architecture v2.1 remains intact
+- `curriculum.v2.json` matches files and lesson metadata
+- README, source, tests, and section maps agree
+- `NEXT UP:` footers match curriculum metadata
+- Go code is formatted and idiomatic
+- tests prove behavior where behavior should be provable
+- CI-equivalent validation passes locally
+- P0/P1/P2 findings are fixed or explicitly documented
+
+Final squash merge is maintainer-controlled.

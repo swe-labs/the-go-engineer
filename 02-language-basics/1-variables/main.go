@@ -17,7 +17,8 @@
 //   go run ./02-language-basics/1-variables
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Go enforces explicit type safety and guarantees predictable zero-values
+//     upon allocation, eliminating undefined memory bugs by default.
 // ============================================================================
 
 package main
@@ -25,8 +26,13 @@ package main
 import "fmt"
 
 func main() {
+	// Explicit declaration using 'var'.
+	// Go guarantees 'greeting' starts with the zero value for a string (""),
+	// rather than pointing to random, uninitialized memory.
 	var greeting string
 	fmt.Printf("Initial zero value: '%s'\n", greeting)
+
+	// Assignment updates the value of the already declared variable.
 	greeting = "Hello, world!"
 	fmt.Println(greeting)
 
@@ -35,11 +41,14 @@ func main() {
 	count = 10
 	fmt.Println(count)
 
+	// The zero value depends on the type. For 'bool', it is 'false'.
 	var isActive bool
 	fmt.Printf("Initial zero value: %t\n", isActive)
 	isActive = true
 	fmt.Println(isActive)
 
+	// Short variable declaration (:=) infers the type and declares the variable in one step.
+	// This is the most common way to declare local variables in Go.
 	firstName, lastName := "John", "Doe"
 	fmt.Println(firstName, lastName)
 
@@ -52,8 +61,13 @@ func main() {
 	var year = 2025
 	fmt.Println(year)
 
+	// Forward reference:
+	// We are printing to the console using the 'fmt' package.
+	// You will learn how the 'fmt' package formats text in detail in:
+	// ../../05-packages-io/02-io-and-cli/cli-tools/1-args/README.md
 	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: LB.2 constants")
 	fmt.Println("Current: LB.1 (variables)")
+	fmt.Println("Previous: none")
 	fmt.Println("---------------------------------------------------")
 }

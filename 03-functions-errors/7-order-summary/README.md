@@ -4,6 +4,8 @@
 
 Build a small order-summary program that combines validation, helper functions, first-class functions, closures, multiple return values, and explicit errors into one readable flow.
 
+> **Backward Reference:** This is the capstone exercise for the Functions and Errors section. It brings together everything you've learned from [Lesson 1: Functions Basics](../1-functions-basics/README.md) through [Lesson 9: Closures - mechanics](../9-closures-mechanics/README.md). You will see how these independent concepts cooperate to build a professional business logic pipeline.
+
 ## Prerequisites
 
 - `FE.1` functions basics
@@ -98,15 +100,15 @@ go run ./03-functions-errors/7-order-summary/_starter
 go test ./03-functions-errors/7-order-summary
 ```
 
-## ⚠️ In Production
-
+## In Production
 This is the everyday shape of backend Go code: validate, return errors explicitly, keep helpers small, and pass policy in as narrow callbacks. Closure-based configuration is common in pricing, retries, middleware, and feature-flag evaluation.
 
-## 🤔 Thinking Questions
-
+## Thinking Questions
 1. Why is returning an explicit error better than hiding failure inside printed output?
 2. What gets clearer when pricing policy is passed in as a function instead of hard-coded into `processOrder`?
 3. Why is a closure a better fit for discount configuration than global variables?
+
+> **Forward Reference:** You have mastered the "happy path" and the "ordinary failure path" using errors. But what happens when the program encounters a truly unrecoverable state? In the final lesson of this section, [Lesson 10: Panic and Recover](../10-panic-and-recover/README.md), you will learn about Go's emergency stop mechanism.
 
 ## Next Step
 

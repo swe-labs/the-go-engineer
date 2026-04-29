@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/6-password-hashing
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn why passwords need one-way hashing with slow work factors instead of reversible encryption.
 // ============================================================================
 
 package main

@@ -12,7 +12,7 @@ import (
 )
 
 // ============================================================================
-// Section 16: HTTP Clients & Mocking — Testify Mock Module
+// Section 16: HTTP Clients & Mocking - Testify Mock Module
 // Level: Advanced
 // ============================================================================
 //
@@ -47,7 +47,7 @@ func main() {
 
 	fmt.Println("\n(See client_test.go to see testify/mock in action!)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: PR.1 CPU profile")
+	fmt.Println("NEXT UP: PR.1 CPU profile")
 	fmt.Println("   Current: HM.4 (testify/mock)")
 	fmt.Println("---------------------------------------------------")
 }

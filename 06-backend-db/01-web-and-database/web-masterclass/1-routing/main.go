@@ -1,6 +1,28 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
+
+// ============================================================================
+// Section 06: Backend, APIs & Databases
+// Title: Web Masterclass - Routing
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to use the Go 1.22+ 'http.ServeMux' for advanced routing.
+//   - How to define method-based routes (GET, POST).
+//   - How to extract path parameters using the {param} syntax.
+//
+// WHY THIS MATTERS:
+//   - Routing is the entry point for every web request. Understanding the
+//     native Go routing capabilities allows you to build clean, efficient
+//     APIs without the need for external frameworks.
+//
+// RUN:
+//   go run ./06-backend-db/01-web-and-database/web-masterclass/1-routing
+//
+// KEY TAKEAWAY:
+//   - Pattern matching is now a first-class citizen in the Go standard library.
+// ============================================================================
 
 package main
 
@@ -10,74 +32,53 @@ import (
 	"net/http"
 )
 
-// ============================================================================
-// Stage 06: Web Masterclass — Routing
-// Level: Beginner -> Intermediate
-// ============================================================================
+// Stage 06: Web Masterclass - Routing
 //
-// WHAT YOU'LL LEARN:
-//   - Creating an HTTP server with net/http
-//   - Registering route handlers with http.NewServeMux
-//   - Method-based routing (Go 1.22+)
-//   - Path parameters with {param} syntax
-//   - The difference between HandleFunc and Handle
+//   - Method-based routing: GET /about
+//   - Path parameters: /posts/{id}
+//   - Multiplexing with http.NewServeMux
 //
 // ENGINEERING DEPTH:
-//   Prior to Go 1.22, `http.ServeMux` was a naive map that just matched exact
-//   strings, forcing the entire industry to use 3rd-party routers like `chi`
-//   and `gorilla/mux`. With Go 1.22, the core team completely rewrote `ServeMux`
-//   using an advanced algorithmic Radix Tree that supports pattern matching
-//   (`GET /posts/{id}`) directly in the standard library! This parses millions of
-//   incoming URLs per second with almost zero memory allocations.
-//
-// RUN: go run ./06-backend-db/01-web-and-database/web-masterclass/1-routing
-// VISIT: http://localhost:8080
-// ============================================================================
+//   Prior to Go 1.22, developers had to use third-party libraries for
+//   even basic path parameter support. The new ServeMux implementation
+//   is highly optimized and supports complex pattern matching while
+//   maintaining the "Zero-Allocation" philosophy of the Go standard
+//   library's network stack.
 
 func main() {
-	// http.NewServeMux is the standard library's HTTP request multiplexer (router).
-	// It matches incoming requests to registered patterns and calls handlers.
+	// 1. Create a new multiplexer
 	mux := http.NewServeMux()
 
-	// Basic route — handles ALL HTTP methods on "/"
-	mux.HandleFunc("/", handleHome)
-
-	// Go 1.22+ method-based routing: "METHOD /path"
-	// Only GET requests will match this route
+	// 2. Define routes
+	mux.HandleFunc("GET /", handleHome)
 	mux.HandleFunc("GET /about", handleAbout)
 
-	// Path parameters with {param} syntax (Go 1.22+)
-	// The parameter is extracted with r.PathValue("id")
+	// {id} is a wildcard parameter
 	mux.HandleFunc("GET /posts/{id}", handleGetPost)
 
-	// Separate handlers for different methods on the same path
 	mux.HandleFunc("GET /api/health", handleHealth)
 	mux.HandleFunc("POST /api/posts", handleCreatePost)
 
-	// Static file serving
-	fileServer := http.FileServer(http.Dir("./static"))
-	mux.Handle("GET /static/", http.StripPrefix("/static/", fileServer))
+	fmt.Println("=== Web Masterclass: Routing ===")
+	fmt.Println("  🚀 Server starting on http://localhost:8080")
+	fmt.Println()
+	fmt.Println("  Try these routes:")
+	fmt.Println("    - http://localhost:8080/")
+	fmt.Println("    - http://localhost:8080/about")
+	fmt.Println("    - http://localhost:8080/posts/42")
 
-	fmt.Println("🚀 Server starting on http://localhost:8080")
-	fmt.Println("   Routes:")
-	fmt.Println("   GET  /            — Home page")
-	fmt.Println("   GET  /about       — About page")
-	fmt.Println("   GET  /posts/{id}  — Get post by ID")
-	fmt.Println("   GET  /api/health  — Health check (JSON)")
-	fmt.Println("   POST /api/posts   — Create a post (JSON)")
-
-	// ListenAndServe starts an HTTP server on the given address.
-	// It blocks until the server shuts down or encounters an error.
+	// 3. Start the server
 	log.Fatal(http.ListenAndServe(":8080", mux))
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: WM.2 dependency injection")
-	fmt.Println("   Current: WM.1 (routing)")
+	fmt.Println("NEXT UP: MC.2 dependency-injection")
+	fmt.Println("Current: MC.1 (routing)")
+	fmt.Println("Previous: DM.1 (embedded-migrations)")
 	fmt.Println("---------------------------------------------------")
 }
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
-	// "/" matches everything without a more specific handler,
-	// so we explicitly check for exact match to avoid catch-all behavior.
+	// "/" matches everything, so we check for exact match for the home page
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
 		return
@@ -86,19 +87,17 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleAbout(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "About: Learning Go Web Development")
+	fmt.Fprintln(w, "About: Building production-grade Go backends.")
 }
 
 func handleGetPost(w http.ResponseWriter, r *http.Request) {
-	// r.PathValue extracts named parameters from the URL pattern.
-	// Pattern "GET /posts/{id}" with URL "/posts/42" → id = "42"
+	// Extract the {id} parameter using PathValue
 	id := r.PathValue("id")
 	fmt.Fprintf(w, "Viewing post with ID: %s\n", id)
 }
 
 func handleHealth(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, `{"status":"ok"}`)
 }
 

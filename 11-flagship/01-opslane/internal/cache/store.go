@@ -16,7 +16,7 @@ import (
 //   - sync.RWMutex protects the map; reads take the read-lock, writes take
 //     the write-lock. This keeps contention low under read-heavy workloads.
 //   - When the cache reaches MaxEntries, the oldest entry is evicted. This
-//     is not true LRU (no access-time tracking) — it is insert-order eviction.
+//     is not true LRU (no access-time tracking) - it is insert-order eviction.
 //     For a teaching codebase this is an acceptable simplification; real
 //     production caches use probabilistic LRU or slab allocators.
 //   - Expired entries are cleaned lazily on Get and periodically by a

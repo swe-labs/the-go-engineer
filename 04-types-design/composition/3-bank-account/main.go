@@ -17,7 +17,7 @@
 //   go run ./04-types-design/composition/3-bank-account
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Build a small bank-account model that proves the difference between named-field composition, embedding, promoted methods, and method shadowing.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -170,4 +170,10 @@ func main() {
 	}
 
 	fmt.Println("Final Overdraft Details:", ovdAcc.Account.String())
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: ST.1 strings")
+	fmt.Println("Current: CO.3 (bank-account-project)")
+	fmt.Println("Previous: CO.2 (embedding)")
+	fmt.Println("---------------------------------------------------")
 }

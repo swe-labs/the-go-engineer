@@ -17,7 +17,7 @@
 //   go run ./09-architecture/04-security/2-sql-injection-prevention
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn why parameterized queries are the baseline defense against SQL injection in Go.
 // ============================================================================
 
 package main

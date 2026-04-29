@@ -17,7 +17,7 @@
 //   go run ./09-architecture/03-architecture-patterns/7-cqrs-basics
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn when separating write models from read models improves a system and when it is needless complexity.
 // ============================================================================
 
 package main

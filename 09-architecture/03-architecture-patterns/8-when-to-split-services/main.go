@@ -17,7 +17,7 @@
 //   go run ./09-architecture/03-architecture-patterns/8-when-to-split-services
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn the signals that justify service boundaries and the anti-signals that only imitate architecture maturity.
 // ============================================================================
 
 package main

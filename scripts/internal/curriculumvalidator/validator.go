@@ -35,6 +35,7 @@ type V2Section struct {
 	Slug          string   `json:"slug"`
 	Title         string   `json:"title"`
 	PathPrefix    string   `json:"path_prefix"`
+	Status        string   `json:"status"`
 	EntryPoints   []string `json:"entry_points"`
 	Outputs       []string `json:"outputs"`
 	Prerequisites []string `json:"prerequisites"`
@@ -105,6 +106,34 @@ var (
 		"test":   true,
 		"rubric": true,
 		"mixed":  true,
+	}
+	allowedSectionStatuses = map[string]bool{
+		"stable": true,
+	}
+	expectedV2SectionOutputs = map[string][]string{
+		"s00": {"HC.5"},
+		"s01": {"GT.6"},
+		"s02": {"LB.4", "CF.7", "DS.6"},
+		"s03": {"FE.10"},
+		"s04": {"TI.15", "CO.3", "ST.6"},
+		"s05": {"MP.4", "CL.4", "EN.6", "FS.8"},
+		"s06": {"HS.10", "API.9", "DB.8"},
+		"s07": {"GC.7", "SY.6", "CT.5", "TM.7", "CP.5"},
+		"s08": {"TE.10", "PR.6"},
+		"s09": {"PD.3", "ARCH.9", "SEC.11"},
+		"s10": {"SL.5", "GS.3", "CFG.5", "OPS.5", "DOCKER.3", "DEPLOY.3", "CG.3"},
+		"s11": {"OPSL.10"},
+	}
+	canonicalSectionReadmeTracks = map[string][]string{
+		"s05": {"MP.1-MP.4", "CL.1-CL.4", "EN.1-EN.6", "FS.1-FS.8"},
+		"s08": {"TE.1-TE.10", "PR.1-PR.6"},
+		"s09": {"PD.1-PD.3", "ARCH.1-ARCH.9", "SEC.1-SEC.11"},
+		"s10": {"SL.1-SL.5", "GS.1-GS.3", "CFG.1-CFG.5", "OPS.1-OPS.5", "DOCKER.1-DOCKER.3", "DEPLOY.1-DEPLOY.3", "CG.1-CG.3"},
+	}
+	forbiddenSectionReadmeLabels = map[string][]string{
+		"s05": {"PKG.1", "IO.1"},
+		"s08": {"Track A", "Track B"},
+		"s09": {"Track GR"},
 	}
 )
 
@@ -371,6 +400,11 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 			errorsFound++
 		}
 
+		if strings.TrimSpace(s.Status) != "" && !allowedSectionStatuses[s.Status] {
+			report(fmt.Sprintf("Invalid v2 section status: %s -> %s", s.ID, s.Status))
+			errorsFound++
+		}
+
 		sectionIDs[s.ID] = s
 	}
 
@@ -514,6 +548,8 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 		itemIDs[item.ID] = item
 	}
 
+	errorsFound += validateExpectedSectionOutputs(sectionIDs, report)
+
 	for _, s := range cur.Sections {
 		for _, prereqID := range s.Prerequisites {
 			if _, exists := sectionIDs[prereqID]; !exists {
@@ -564,10 +600,58 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
 	errorsFound += validateFlagshipProjects(root, sectionIDs, cur.Items, report)
 	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
+	errorsFound += validateSectionReadmeTrackLabels(root, sectionIDs, report)
 	errorsFound += validateV2TextEncoding(root, sectionIDs, cur.Items, report)
 	errorsFound += validateFoundationsReadmeContracts(root, cur.Items, report)
+	errorsFound += validateEngineeringReadmeContracts(root, cur.Items, report)
 
 	return len(cur.Sections), len(cur.Items), placeholderCount, errorsFound, true, nil
+}
+
+func sameStringSlice(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+
+	return true
+}
+
+func validateExpectedSectionOutputs(sections map[string]V2Section, report func(string)) int {
+	errorsFound := 0
+
+	for sectionID := range sections {
+		if _, expected := expectedV2SectionOutputs[sectionID]; !expected {
+			report(fmt.Sprintf("Invalid v2 architecture contract: unexpected section %s", sectionID))
+			errorsFound++
+		}
+	}
+
+	for sectionID, expectedOutputs := range expectedV2SectionOutputs {
+		section, exists := sections[sectionID]
+		if !exists {
+			report(fmt.Sprintf("Invalid v2 architecture contract: missing section %s", sectionID))
+			errorsFound++
+			continue
+		}
+
+		if strings.TrimSpace(section.Status) == "" {
+			report(fmt.Sprintf("Invalid v2 section status: %s requires stable status", section.ID))
+			errorsFound++
+		}
+
+		if !sameStringSlice(section.Outputs, expectedOutputs) {
+			report(fmt.Sprintf("Invalid v2 section outputs: %s -> %s (expected %s)", section.ID, strings.Join(section.Outputs, ", "), strings.Join(expectedOutputs, ", ")))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
 }
 
 func validateFlagshipProjects(root string, sections map[string]V2Section, items []V2Item, report func(string)) int {
@@ -791,6 +875,15 @@ func isFoundationsSection(sectionID string) bool {
 	}
 }
 
+func isEngineeringSection(sectionID string) bool {
+	switch sectionID {
+	case "s05", "s06", "s07", "s08", "s09", "s10":
+		return true
+	default:
+		return false
+	}
+}
+
 func validateFoundationsReadmeContracts(root string, items []V2Item, report func(string)) int {
 	errorsFound := 0
 
@@ -820,6 +913,91 @@ func validateFoundationsReadmeContracts(root string, items []V2Item, report func
 				report(fmt.Sprintf("Missing foundations lesson main.go: %s -> %s", item.ID, mainPath))
 				errorsFound++
 			}
+		}
+	}
+
+	return errorsFound
+}
+
+func validateEngineeringReadmeContracts(root string, items []V2Item, report func(string)) int {
+	errorsFound := 0
+
+	for _, item := range items {
+		if !isEngineeringSection(item.SectionID) {
+			continue
+		}
+		if isPlaceholderItem(item) {
+			continue
+		}
+
+		itemPath := filepath.ToSlash(filepath.Clean(item.Path))
+		readmePath := filepath.ToSlash(filepath.Join(itemPath, "README.md"))
+		if !pathExists(root, readmePath) {
+			report(fmt.Sprintf("Invalid engineering README contract: %s -> %s missing entirely", item.ID, filepath.ToSlash(readmePath)))
+			errorsFound++
+			continue
+		}
+
+		errorsFound += validateEngineeringHeadings(root, readmePath, item, report)
+	}
+
+	return errorsFound
+}
+
+func validateEngineeringHeadings(root, readmePath string, item V2Item, report func(string)) int {
+	requiredHeadings := []string{
+		"## Mission",
+		"## Prerequisites",
+		"## Mental Model",
+		"## Visual Model",
+		"## Machine View",
+		"## Run Instructions",
+	}
+
+	if item.Type == "lesson" {
+		requiredHeadings = append(requiredHeadings, "## Code Walkthrough")
+	} else {
+		requiredHeadings = append(requiredHeadings, "## Solution Walkthrough")
+	}
+
+	requiredHeadings = append(requiredHeadings, "## Try It")
+
+	if item.Type != "lesson" {
+		requiredHeadings = append(requiredHeadings, "## Verification Surface")
+	}
+
+	requiredHeadings = append(requiredHeadings,
+		"## In Production",
+		"## Thinking Questions",
+		"## Next Step",
+	)
+
+	data, err := os.ReadFile(filepath.Join(root, readmePath))
+	if err != nil {
+		report(fmt.Sprintf("Invalid engineering README contract: %s -> %s read failure: %v", item.ID, filepath.ToSlash(readmePath), err))
+		return 1
+	}
+
+	text := strings.ReplaceAll(string(data), "\r\n", "\n")
+	errorsFound := 0
+	lastOffset := 0
+
+	for _, heading := range requiredHeadings {
+		idx := strings.Index(text[lastOffset:], heading)
+		if idx >= 0 {
+			lastOffset += idx + len(heading)
+			continue
+		}
+
+		if strings.Contains(text, heading) {
+			report(fmt.Sprintf("Invalid engineering README contract: %s -> %s has %s out of order", item.ID, filepath.ToSlash(readmePath), heading))
+			errorsFound++
+			continue
+		}
+
+		if !strings.Contains(text, heading) {
+			report(fmt.Sprintf("Invalid engineering README contract: %s -> %s missing %s", item.ID, filepath.ToSlash(readmePath), heading))
+			errorsFound++
 		}
 	}
 
@@ -867,7 +1045,6 @@ func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []str
 	}
 
 	text := strings.ReplaceAll(string(data), "\r\n", "\n")
-	text = normalizeFoundationsHeadingAliases(text)
 	errorsFound := 0
 	lastOffset := 0
 	for _, heading := range headings {
@@ -891,23 +1068,6 @@ func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []str
 
 	return errorsFound
 }
-func normalizeFoundationsHeadingAliases(text string) string {
-	replacements := map[string]string{
-		"## In Production":                 "## In Production",
-		"## \u26a0\ufe0f In Production":    "## In Production",
-		"## âš ï¸ In Production":          "## In Production",
-		"## Thinking Questions":            "## Thinking Questions",
-		"## \U0001F914 Thinking Questions": "## Thinking Questions",
-		"## ðŸ¤” Thinking Questions":       "## Thinking Questions",
-	}
-
-	for from, to := range replacements {
-		text = strings.ReplaceAll(text, from, to)
-	}
-
-	return text
-}
-
 func validateFoundationsVisualModelUsesMermaid(root, relPath, itemID string, report func(string)) int {
 	data, err := os.ReadFile(filepath.Join(root, relPath))
 	if err != nil {
@@ -1034,6 +1194,42 @@ func validateV2SectionLabels(root string, sections map[string]V2Section, items [
 			text := string(data)
 			if !strings.Contains(text, expectedSectionLabel) && !strings.Contains(text, expectedStageLabel) {
 				report(fmt.Sprintf("Invalid v2 section label: %s -> %s (expected %s or %s)", item.ID, filepath.ToSlash(rel), expectedSectionLabel, expectedStageLabel))
+				errorsFound++
+			}
+		}
+	}
+
+	return errorsFound
+}
+
+func validateSectionReadmeTrackLabels(root string, sections map[string]V2Section, report func(string)) int {
+	errorsFound := 0
+
+	for sectionID, expectedLabels := range canonicalSectionReadmeTracks {
+		section, exists := sections[sectionID]
+		if !exists || section.PathPrefix == "" {
+			continue
+		}
+
+		readmePath := filepath.ToSlash(filepath.Join(section.PathPrefix, "README.md"))
+		data, err := os.ReadFile(filepath.Join(root, readmePath))
+		if err != nil {
+			report(fmt.Sprintf("Invalid section README contract: %s -> %s read failure: %v", sectionID, readmePath, err))
+			errorsFound++
+			continue
+		}
+
+		text := string(data)
+		for _, label := range expectedLabels {
+			if !strings.Contains(text, label) {
+				report(fmt.Sprintf("Invalid section README contract: %s -> %s missing canonical track label %s", sectionID, readmePath, label))
+				errorsFound++
+			}
+		}
+
+		for _, label := range forbiddenSectionReadmeLabels[sectionID] {
+			if strings.Contains(text, label) {
+				report(fmt.Sprintf("Invalid section README contract: %s -> %s contains non-canonical track label %s", sectionID, readmePath, label))
 				errorsFound++
 			}
 		}

@@ -48,11 +48,9 @@ Go is a statically typed, compiled language.
 1. Run `go run main.go` on any Go file. Realize that it is silently compiling and running a binary in the background.
 
 ## In Production
-
 **Build artifacts matter.** When you deploy Go to production, you're deploying the *compiled binary*, not source code. This means the binary must be compiled for the target OS and CPU architecture (`GOOS=linux GOARCH=amd64 go build`). Different machines may need different binaries.
 
 ## Thinking Questions
-
 1. Python catches type errors when the code runs. Go catches them at compile time. If you were building a payment service, which would you prefer? Why?
 2. Go produces a single static binary. What operational advantage does this give you when deploying to 1,000 servers?
 3. The AST represents the meaning of your code, not the exact characters. Can you think of a case where two different-looking programs have identical ASTs?

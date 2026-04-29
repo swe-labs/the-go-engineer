@@ -17,7 +17,7 @@
 //   go run ./03-functions-errors/10-panic-and-recover
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn when panic is appropriate, when it is not, and how recover turns a crash into an explicit boundary decision.
 // ============================================================================
 
 package main
@@ -25,14 +25,42 @@ package main
 import "fmt"
 
 //
+// Mental model:
+// Panic is for "impossible" errors. Recover is the safety net at the boundary.
+//
+
+func accessDatabase(connected bool) {
+	// defer recover must be at the very top of the function you want to protect
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Printf("Recovered from panic: %v\n", r)
+			fmt.Println("Attempting to close connections safely...")
+		}
+	}()
+
+	fmt.Println("Accessing database...")
+
+	if !connected {
+		// Panic is used when the program reaches a state it cannot handle
+		panic("database connection lost during operation")
+	}
+
+	fmt.Println("Database operation successful.")
+}
 
 func main() {
-	fmt.Println("=== FE.10 panic and recover ===")
-	fmt.Println("Learn when panic is appropriate, when it is not, and how recover turns a crash into an explicit boundary decision.")
-	fmt.Println()
-	fmt.Println("- Reserve panic for broken invariants, not validation errors.")
-	fmt.Println("- Recover works only from a deferred function on the panicking goroutine.")
-	fmt.Println("- Middleware-style recovery keeps one bad request from crashing the whole server.")
-	fmt.Println()
-	fmt.Println("Use panic sparingly for programmer bugs or impossible states, then recover only at boundaries where you can translate the crash into logging and containment.")
+	fmt.Println("--- Normal Operation ---")
+	accessDatabase(true)
+
+	fmt.Println("\n--- Crisis Operation ---")
+	// This call will panic, but accessDatabase will recover
+	accessDatabase(false)
+
+	fmt.Println("\nProgram continued running after the recovered panic.")
+
+	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("NEXT UP: TI.1 structs")
+	fmt.Println("Current: FE.10 (panic and recover)")
+	fmt.Println("Previous: FE.7 (order-summary)")
+	fmt.Println("---------------------------------------------------")
 }

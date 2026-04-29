@@ -52,7 +52,7 @@ The final squash-merge remains maintainer-only.
 ## PR Review Rules
 
 - Reject PRs that bypass the README-first teaching contract.
-- Reject PRs that introduce “magic” early in the curriculum.
+- Reject PRs that introduce "magic" early in the curriculum.
 - Reject public architecture drift unless explicitly approved.
 - Require linked issues.
 - Require validation evidence.
@@ -117,7 +117,7 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test -coverprofile=coverage.out ./...
+go test -coverprofile coverage.out ./...
 go run ./scripts/validate_curriculum.go
 ```
 

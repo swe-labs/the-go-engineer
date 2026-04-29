@@ -7,7 +7,7 @@ package main
 import "fmt"
 
 // ============================================================================
-// Stage 07: Time & Scheduling — Console Reminder (Exercise Starter)
+// Stage 07: Time & Scheduling - Console Reminder (Exercise Starter)
 // Level: Intermediate
 // ============================================================================
 //

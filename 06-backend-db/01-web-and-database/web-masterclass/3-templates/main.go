@@ -1,6 +1,30 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
+
+// ============================================================================
+// Section 06: Backend, APIs & Databases
+// Title: Web Masterclass - HTML Templates
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - How to use the 'html/template' package for safe HTML rendering.
+//   - How to define layouts and partials for reusable UI components.
+//   - The importance of template caching for production performance.
+//   - How Go protects you from Cross-Site Scripting (XSS) automatically.
+//
+// WHY THIS MATTERS:
+//   - While APIs are great, many applications still need to render
+//     dynamic HTML on the server. Go's template engine is fast,
+//     secure, and built directly into the standard library.
+//
+// RUN:
+//   go run ./06-backend-db/01-web-and-database/web-masterclass/3-templates
+//
+// KEY TAKEAWAY:
+//   - Context-aware escaping makes Go templates one of the most secure
+//     engines in the industry.
+// ============================================================================
 
 package main
 
@@ -9,144 +33,87 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"path/filepath"
-	"sync"
 )
 
-// ============================================================================
-// Stage 06: Web Masterclass — HTML Templates
-// Level: Intermediate
-// ============================================================================
+// Stage 06: Web Masterclass - HTML Templates
 //
-// WHAT YOU'LL LEARN:
-//   - html/template for safe HTML rendering (auto-escapes XSS)
-//   - Template caching — parse once, execute many times
-//   - Template composition — base layout + page content + partials
-//   - Passing dynamic data to templates via structs
+//   - html/template: Context-aware security
+//   - Template Caching: Parse once, execute many
+//   - Template Execution: Merging data with UI
 //
 // ENGINEERING DEPTH:
-//   The `html/template` package does not just do dumb string replacement `{{.Data}}`.
-//   It fully parses your HTML into an Abstract Syntax Tree (AST) to understand
-//   the DOM context. If you inject data inside a `<script>` tag, it automatically
-//   JSON-encodes it. If you inject it inside an `href`, it URL-encodes it. This
-//   makes Go templates completely immune to Cross-Site Scripting (XSS) by default.
-//   However, parsing this AST is incredibly CPU-expensive. This is why you MUST
-//   parse them ONCE on server startup and store them in a synchronized Cache map,
-//   rather than parsing the files from disk on every single HTTP request.
-//
-// RUN: go run ./06-backend-db/01-web-and-database/web-masterclass/3-templates
-// ============================================================================
+//   The `html/template` package is not just a string replacer.
+//   It understands HTML, CSS, and JavaScript. If you try to inject
+//   a malicious `<script>` tag into a user's name field, Go will
+//   automatically escape it (e.g., `&lt;script&gt;`) so the browser
+//   treats it as plain text. This "Context-Aware Escaping" is a
+//   powerful defense against the most common web vulnerability: XSS.
 
-// templateCache stores pre-parsed templates keyed by page name.
-// Parsing on every request is expensive — we parse ONCE at startup.
-type templateCache map[string]*template.Template
-
-// newTemplateCache parses all template files and returns a cache.
-// Each page template is composed of: base layout + partials + page content.
-func newTemplateCache(dir string) (templateCache, error) {
-	cache := templateCache{}
-
-	// Find all page templates
-	pages, err := filepath.Glob(filepath.Join(dir, "pages", "*.html"))
-	if err != nil {
-		return nil, err
-	}
-
-	for _, page := range pages {
-		// Extract the page filename (e.g., "home.html")
-		name := filepath.Base(page)
-
-		// Parse template files in order: base → partials → page
-		// The first template parsed defines the root template name.
-		ts, err := template.New(name).ParseFiles(
-			filepath.Join(dir, "base.html"), // Layout wrapper
-		)
-		if err != nil {
-			return nil, err
-		}
-
-		// Add partials (nav, footer, etc.)
-		ts, err = ts.ParseGlob(filepath.Join(dir, "partials", "*.html"))
-		if err != nil {
-			return nil, err
-		}
-
-		// Add the specific page content
-		ts, err = ts.ParseFiles(page)
-		if err != nil {
-			return nil, err
-		}
-
-		cache[name] = ts
-	}
-
-	return cache, nil
-}
-
-// templateData holds all data passed to a template.
-// Every handler creates a templateData and passes it to render().
-type templateData struct {
-	Title   string
-	Content string
-	Year    int
-	Items   []string
-}
-
+// application holds the pre-parsed templates.
 type application struct {
-	templates templateCache
-	mu        sync.RWMutex // protects template cache in dev mode
-}
-
-// render executes a named template with the given data.
-// It writes the result to the http.ResponseWriter.
-func (app *application) render(w http.ResponseWriter, name string, data templateData) {
-	app.mu.RLock()
-	ts, ok := app.templates[name]
-	app.mu.RUnlock()
-
-	if !ok {
-		http.Error(w, "Template not found: "+name, http.StatusInternalServerError)
-		return
-	}
-
-	// Execute the "base" template (defined in base.html).
-	// This renders the full page: layout + nav + page content.
-	err := ts.ExecuteTemplate(w, "base", data)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	templates *template.Template
 }
 
 func main() {
-	cache, err := newTemplateCache("./06-backend-db/01-web-and-database/web-masterclass/3-templates/templates")
+	// 1. Parse templates on startup (The "Parse Once" pattern)
+	// In a real app, you would load these from files or use //go:embed.
+	// For this demo, we use a string-based template.
+	tmpl, err := template.New("index").Parse(`
+		<!DOCTYPE html>
+		<html>
+		<head><title>{{.Title}}</title></head>
+		<body>
+			<h1>{{.Header}}</h1>
+			<ul>
+				{{range .Items}}
+					<li>{{.}}</li>
+				{{end}}
+			</ul>
+			<p>Environment: {{.Env}}</p>
+		</body>
+		</html>
+	`)
 	if err != nil {
-		log.Fatalf("Failed to create template cache: %v", err)
+		log.Fatalf("Failed to parse templates: %v", err)
 	}
 
-	app := &application{templates: cache}
+	app := &application{templates: tmpl}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		app.render(w, "home.html", templateData{
-			Title:   "Home",
-			Content: "Welcome to the Go Web Masterclass!",
-			Year:    2025,
-			Items:   []string{"Routing", "Templates", "Middleware", "Auth"},
-		})
-	})
+	mux.HandleFunc("GET /", app.handleHome)
 
-	mux.HandleFunc("GET /about", func(w http.ResponseWriter, r *http.Request) {
-		app.render(w, "about.html", templateData{
-			Title:   "About",
-			Content: "Learning Go web development step by step.",
-			Year:    2025,
-		})
-	})
+	fmt.Println("=== Web Masterclass: HTML Templates ===")
+	fmt.Println("  🚀 Server starting on http://localhost:8082")
+	fmt.Println()
 
-	log.Println("Starting server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	// 2. Start the server
+	log.Fatal(http.ListenAndServe(":8082", mux))
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: WM.4 middleware")
-	fmt.Println("   Current: WM.3 (templates)")
+	fmt.Println("NEXT UP: MC.4 middleware")
+	fmt.Println("Current: MC.3 (templates)")
+	fmt.Println("Previous: MC.2 (dependency-injection)")
 	fmt.Println("---------------------------------------------------")
+}
+
+func (app *application) handleHome(w http.ResponseWriter, r *http.Request) {
+	// 3. Define the data for the template
+	data := struct {
+		Title  string
+		Header string
+		Items  []string
+		Env    string
+	}{
+		Title:  "Learning Templates",
+		Header: "Welcome to the Template Masterclass",
+		Items:  []string{"Safe Escaping", "Loops & Ranges", "Conditionals"},
+		Env:    "Go 1.22+",
+	}
+
+	// 4. Execute the template with the data
+	// Note: html/template automatically handles escaping 'data'!
+	err := app.templates.Execute(w, data)
+	if err != nil {
+		http.Error(w, "Failed to render template", http.StatusInternalServerError)
+	}
 }

@@ -8,16 +8,18 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - [TODO: Extract from README Mission]
+//   - How to use the streaming JSON Decoder to read data directly from an io.Reader.
+//   - How to handle streams of multiple JSON objects (JSONL/NDJSON).
 //
 // WHY THIS MATTERS:
-//   - [TODO: Extract from README Mental Model]
+//   - Decoding directly from a reader is safer and more memory-efficient than
+//     reading an entire payload into memory before unmarshalling.
 //
 // RUN:
 //   go run ./05-packages-io/02-io-and-cli/encoding/4-decode
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Use json.NewDecoder for large inputs or network streams to avoid OOM crashes.
 // ============================================================================
 
 // Commercial use is prohibited without permission.
@@ -32,7 +34,7 @@ import (
 	"strings"
 )
 
-// Stage 05: Encoding — JSON Decoder (Streaming)
+// Stage 05: Encoding - JSON Decoder (Streaming)
 //
 //   - json.NewDecoder: streaming JSON directly from an io.Reader
 //   - Decoder vs Unmarshal: when to use which
@@ -52,7 +54,6 @@ import (
 //   - Use json.Unmarshal if you already have the data in memory (a []byte)
 //   - Use json.NewDecoder if you are reading from an io.Reader (like an HTTP Request Body or a File).
 //     This avoids loading the entire payload into RAM before parsing.
-//
 
 type MetricEvent struct {
 	AppID   string `json:"app_id"`
@@ -65,7 +66,7 @@ func main() {
 	fmt.Println()
 
 	// 1. Basic Decoder from an io.Reader
-	fmt.Println("1️⃣  Standard Decoder:")
+	fmt.Println("1. Standard Decoder:")
 
 	singlePayload := `{"app_id": "auth-service", "latency_ms": 125, "success": true}`
 
@@ -86,7 +87,7 @@ func main() {
 	// When reading from a network stream or log file, you might receive
 	// multiple JSON objects separated by whitespace. json.NewDecoder handles
 	// this gracefully, decoding one at a time.
-	fmt.Println("2️⃣  Stream Parsing (Multiple Objects):")
+	fmt.Println("2. Stream Parsing (Multiple Objects):")
 
 	// Notice: these are three separate JSON objects, not a JSON array
 	streamPayload := `
@@ -114,23 +115,25 @@ func main() {
 		}
 
 		count++
-		status := "✅"
+		status := "OK"
 		if !e.Success {
-			status = "❌"
+			status = "FAIL"
 		}
-		fmt.Printf("   Event %d: %s (latency: %dms) %s\n", count, e.AppID, e.Latency, status)
+		fmt.Printf("   Event %d: %s (latency: %dms) [%s]\n", count, e.AppID, e.Latency, status)
 	}
 
 	fmt.Printf("\n   Finished parsing %d objects from stream\n", count)
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
+	fmt.Println("KEY TAKEAWAYS:")
 	fmt.Println("  - json.NewDecoder(r io.Reader) streams data without loading it all to memory")
 	fmt.Println("  - Use it for HTTP Request bodies (req.Body) and very large JSON files")
 	fmt.Println("  - Perfect for processing streams of JSON objects (JSONLines format)")
 	fmt.Println("  - Loop dec.Decode() until it returns io.EOF")
+
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: EN.5 Base64")
-	fmt.Println("   Current: EN.4 (JSON decoder (stream))")
+	fmt.Println("NEXT UP: EN.5 base64_encoding")
+	fmt.Println("Current: EN.4 (decode)")
+	fmt.Println("Previous: EN.3 (encoder)")
 	fmt.Println("---------------------------------------------------")
 }

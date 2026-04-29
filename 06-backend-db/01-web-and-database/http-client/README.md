@@ -1,4 +1,4 @@
-# Web — HTTP Client
+# Web - HTTP Client
 
 The naive client demonstrates the problem; the refactor lesson demonstrates the solution. Strictly sequential.
 
@@ -6,5 +6,5 @@ The naive client demonstrates the problem; the refactor lesson demonstrates the 
 
 | ID | Lesson | Concept | Requires |
 | --- | --- | --- | --- |
-| HC.1 | [basic GET](./1-get-posts) | http.Get · resp.Body.Close · DefaultClient no-timeout problem | 🟢 entry |
-| HC.2 | [refactor for testability](./2-refactor-for-testability) | HTTPClient interface · IoTClient struct · NewIoTClient DI | HC.1 |
+| HCL.1 | [basic GET](./1-get-posts) | http.Get · resp.Body.Close · DefaultClient no-timeout problem | 🟢 entry |
+| HCL.2 | [refactor for testability](./2-refactor-for-testability) | HTTPClient interface · IoTClient struct · NewIoTClient DI | HCL.1 |

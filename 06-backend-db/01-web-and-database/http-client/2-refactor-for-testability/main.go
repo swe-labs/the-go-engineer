@@ -13,7 +13,7 @@ import (
 )
 
 // ============================================================================
-// Stage 06: HTTP Clients & Mocking — Refactor for Testability
+// Stage 06: HTTP Clients & Mocking - Refactor for Testability
 // Level: Intermediate
 // ============================================================================
 //
@@ -130,7 +130,7 @@ func main() {
 	fmt.Println("  - Require an interface (HTTPClient); Pass a concrete struct (&http.Client).")
 	fmt.Println("  - This refactor makes the code 100% unit-testable without mocking servers.")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("🚀 NEXT UP: GC.1 goroutines")
+	fmt.Println("NEXT UP: GC.1 goroutines")
 	fmt.Println("   Current: HC.2 (refactor for testability)")
 	fmt.Println("---------------------------------------------------")
 }

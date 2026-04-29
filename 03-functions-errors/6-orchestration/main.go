@@ -17,7 +17,7 @@
 //   go run ./03-functions-errors/6-orchestration
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn how one function can coordinate several smaller helpers without losing readability.
 // ============================================================================
 
 package main

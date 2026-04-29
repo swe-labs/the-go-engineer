@@ -17,7 +17,7 @@
 //
 //
 // KEY TAKEAWAY:
-//   - [TODO: Summarize the core takeaway]
+//   - Learn where integration tests sit between unit tests and end-to-end tests and what they should actually prove.
 // ============================================================================
 
 package main
