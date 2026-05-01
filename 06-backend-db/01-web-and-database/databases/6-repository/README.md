@@ -87,4 +87,6 @@ While the Repository pattern is great, avoid the **"Generic Repository"** trap (
 
 ## Next Step
 
-Continue to `DB.7` n-plus-one-query-detection.
+Next: `DB.7` -> `06-backend-db/01-web-and-database/databases/7-n-plus-one-query-detection`
+
+Open `06-backend-db/01-web-and-database/databases/7-n-plus-one-query-detection/README.md` to continue.

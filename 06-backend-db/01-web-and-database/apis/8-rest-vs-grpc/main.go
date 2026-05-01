@@ -67,7 +67,7 @@ func main() {
 	fmt.Println("     - You have a large team and need strict type safety across languages.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: API.9 grpc-service-exercise")
+	fmt.Println("NEXT UP: API.9 -> 06-backend-db/01-web-and-database/apis/9-grpc-service-exercise")
 	fmt.Println("Current: API.8 (rest-vs-grpc)")
 	fmt.Println("Previous: API.7 (grpc-interceptors)")
 	fmt.Println("---------------------------------------------------")

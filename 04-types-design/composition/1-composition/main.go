@@ -191,7 +191,7 @@ func main() {
 	fmt.Println("  - Components are reusable across many different parent types")
 	fmt.Println("  - Next lesson: Embedding (promoted methods for cleaner syntax)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CO.2 embedding")
+	fmt.Println("NEXT UP: CO.2 -> 04-types-design/composition/2-embedding")
 	fmt.Println("Current: CO.1 (composition)")
 	fmt.Println("Previous: TI.15 (generic-data-structures)")
 	fmt.Println("---------------------------------------------------")

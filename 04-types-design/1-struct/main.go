@@ -110,7 +110,7 @@ func main() {
 	fmt.Printf("Copy:     %s (independent)\n", serverCopy.Hostname)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.2 methods")
+	fmt.Println("NEXT UP: TI.2 -> 04-types-design/2-methods")
 	fmt.Println("Current: TI.1 (structs)")
 	fmt.Println("Previous: FE.10 (panic-and-recover)")
 	fmt.Println("---------------------------------------------------")

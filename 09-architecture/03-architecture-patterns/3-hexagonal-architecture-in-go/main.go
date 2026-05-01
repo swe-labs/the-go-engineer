@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("The value of hexagonal design is not the shape of the diagram. It is the ability to change boundaries without rewriting domain logic.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: ARCH.4")
+	fmt.Println("NEXT UP: ARCH.4 -> 09-architecture/03-architecture-patterns/4-repository-pattern-deep-dive")
 	fmt.Println("Current: ARCH.3 (hexagonal architecture in go)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -83,4 +83,6 @@ Streaming is powerful but **Expensive**. Each active stream keeps a TCP connecti
 
 ## Next Step
 
-Continue to `API.7` grpc-interceptors.
+Next: `API.7` -> `06-backend-db/01-web-and-database/apis/7-grpc-interceptors`
+
+Open `06-backend-db/01-web-and-database/apis/7-grpc-interceptors/README.md` to continue.

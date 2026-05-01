@@ -28,7 +28,7 @@ import (
 )
 
 //
-// NEXT UP: PR.6
+// NEXT UP: PR.6 -> 08-quality-test/01-quality-and-performance/profiling/6-memory-layout
 
 func pr_5Summary(input string) string {
 	return strings.TrimSpace(strings.ToLower(input))

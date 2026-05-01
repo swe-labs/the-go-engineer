@@ -89,4 +89,6 @@ The Go team specifically warns that `sync.Map` is only for very narrow use cases
 
 ## Next Step
 
-We've mastered the standard-library helpers. Now let's explore the lower-level hardware primitives that power these tools. Continue to [SY.3 Atomic Operations](../3-atomic-operations/README.md).
+Next: `SY.3` -> `07-concurrency/01-concurrency/sync-primitives/3-atomic-operations`
+
+Open `07-concurrency/01-concurrency/sync-primitives/3-atomic-operations/README.md` to continue.

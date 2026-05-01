@@ -158,7 +158,7 @@ KEY TAKEAWAYS:
 `)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HS.1 http-server")
+	fmt.Println("NEXT UP: HS.1 -> 06-backend-db/01-web-and-database/http-servers/1-net-http-basics")
 	fmt.Println("Current: FS.8 (fs-testing-seam)")
 	fmt.Println("Previous: FS.7 (log-search)")
 	fmt.Println("---------------------------------------------------")

@@ -44,6 +44,8 @@ Handlers should call into it, and repositories should stay focused on persistenc
 - What happens when inventory is reserved but payment fails?
 - What happens when work stops halfway through a transition?
 
-## Next Module
+## Next Step
 
-Continue to [OPSL.6 Payment Pipeline](../06-payment-pipeline/README.md) after the order state machine is provable.
+Next: `OPSL.6` -> `11-flagship/01-opslane/modules/06-payment-pipeline`
+
+Open `11-flagship/01-opslane/modules/06-payment-pipeline/README.md` to continue.

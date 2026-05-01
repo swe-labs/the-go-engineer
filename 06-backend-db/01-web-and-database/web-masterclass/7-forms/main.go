@@ -61,7 +61,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8086", mux))
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: MC.8 posts-crud")
+	fmt.Println("NEXT UP: MC.8 -> 06-backend-db/01-web-and-database/web-masterclass/8-posts-crud")
 	fmt.Println("Current: MC.7 (forms)")
 	fmt.Println("Previous: MC.6 (authentication)")
 	fmt.Println("---------------------------------------------------")

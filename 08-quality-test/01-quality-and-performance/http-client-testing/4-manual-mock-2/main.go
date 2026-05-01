@@ -48,7 +48,7 @@ func main() {
 
 	fmt.Println("\n(See client_test.go to see the GetFunc pattern in action!)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HM.3 table-driven mock")
+	fmt.Println("NEXT UP: HM.3 -> 08-quality-test/01-quality-and-performance/http-client-testing/5-manual-mock-table-driven")
 	fmt.Println("   Current: HM.2 (function-injection mock)")
 	fmt.Println("---------------------------------------------------")
 }

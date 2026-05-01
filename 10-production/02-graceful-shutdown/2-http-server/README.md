@@ -77,4 +77,6 @@ Shows how to create a 5-second timeout context and pass it to `server.Shutdown()
 
 ## Next Step
 
-It's time to coordinate the shutdown of multiple resources at once. Continue to [GS.3 Resource Cleanup Exercise](../3-capstone).
+Next: `GS.3` -> `10-production/02-graceful-shutdown/3-capstone`
+
+Open `10-production/02-graceful-shutdown/3-capstone/README.md` to continue.

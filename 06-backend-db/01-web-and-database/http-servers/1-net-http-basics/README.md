@@ -73,4 +73,6 @@ While `http.ListenAndServe` is great for learning, in production you should use 
 
 ## Next Step
 
-Continue to `HS.2` routing-patterns.
+Next: `HS.2` -> `06-backend-db/01-web-and-database/http-servers/2-routing-patterns`
+
+Open `06-backend-db/01-web-and-database/http-servers/2-routing-patterns/README.md` to continue.

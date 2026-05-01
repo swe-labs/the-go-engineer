@@ -157,4 +157,6 @@ Clear parameters and return values are the first step toward dependable business
 
 ## Next Step
 
-Continue to `FE.3` multiple return values.
+Next: `FE.3` -> `03-functions-errors/3-multiple-return-values`
+
+Open `03-functions-errors/3-multiple-return-values/README.md` to continue.

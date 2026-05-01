@@ -73,7 +73,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HS.4 request-parsing-and-validation")
+	fmt.Println("NEXT UP: HS.4 -> 06-backend-db/01-web-and-database/http-servers/4-request-parsing-and-validation")
 	fmt.Println("Current: HS.3 (middleware-pattern)")
 	fmt.Println("Previous: HS.2 (routing-patterns)")
 	fmt.Println("---------------------------------------------------")

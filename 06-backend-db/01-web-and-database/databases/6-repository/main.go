@@ -94,7 +94,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DB.7 n-plus-one-query-detection")
+	fmt.Println("NEXT UP: DB.7 -> 06-backend-db/01-web-and-database/databases/7-n-plus-one-query-detection")
 	fmt.Println("Current: DB.6 (repository-pattern)")
 	fmt.Println("Previous: DB.5 (transactions)")
 	fmt.Println("---------------------------------------------------")

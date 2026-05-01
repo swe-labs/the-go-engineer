@@ -64,7 +64,7 @@ func main() {
 	// variable against many distinct values, a 'switch' statement is often
 	// cleaner. See: ../4-switch/README.md
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CF.2 for-basics")
+	fmt.Println("NEXT UP: CF.2 -> 02-language-basics/03-control-flow/2-for-basics")
 	fmt.Println("Current: CF.1 (if / else)")
 	fmt.Println("Previous: LB.4 (application-logger)")
 	fmt.Println("---------------------------------------------------")

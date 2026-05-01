@@ -59,7 +59,7 @@ func main() {
 	fmt.Println("     Use Case: Multiplayer games, Collaborative editing.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: API.7 grpc-interceptors")
+	fmt.Println("NEXT UP: API.7 -> 06-backend-db/01-web-and-database/apis/7-grpc-interceptors")
 	fmt.Println("Current: API.6 (grpc-streaming)")
 	fmt.Println("Previous: API.5 (grpc-fundamentals)")
 	fmt.Println("---------------------------------------------------")

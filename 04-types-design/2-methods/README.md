@@ -97,4 +97,6 @@ Methods are how Go achieves encapsulation. The receiver type determines whether 
 
 ## Next Step
 
-Continue to `TI.3` interfaces.
+Next: `TI.3` -> `04-types-design/3-interfaces`
+
+Open `04-types-design/3-interfaces/README.md` to continue.

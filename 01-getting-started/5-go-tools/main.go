@@ -42,7 +42,7 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: GT.6 reading-compiler-errors")
+	fmt.Println("NEXT UP: GT.6 -> 01-getting-started/6-reading-compiler-errors")
 	fmt.Println("Current: GT.5 (go-tools)")
 	fmt.Println("---------------------------------------------------")
 }

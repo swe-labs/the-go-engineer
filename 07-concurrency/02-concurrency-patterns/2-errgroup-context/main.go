@@ -156,7 +156,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CP.3 sync.Pool")
+	fmt.Println("NEXT UP: CP.3 -> 07-concurrency/02-concurrency-patterns/3-sync-pool")
 	fmt.Println("   Current: CP.2 (errgroup + context)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -76,4 +76,6 @@ Simulates a network call between two components, demonstrating how you have to h
 
 ## Next Step
 
-Once you've chosen your high-level shape, learn how to organize the logic inside it. Continue to [ARCH.2 Domain-Driven Design basics](../2-ddd-basics).
+Next: `ARCH.2` -> `09-architecture/03-architecture-patterns/2-ddd-basics`
+
+Open `09-architecture/03-architecture-patterns/2-ddd-basics/README.md` to continue.

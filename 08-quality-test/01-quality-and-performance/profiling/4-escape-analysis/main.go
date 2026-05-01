@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Escape analysis explains many allocation surprises, especially in helper-heavy code or tight loops.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: PR.5")
+	fmt.Println("NEXT UP: PR.5 -> 08-quality-test/01-quality-and-performance/profiling/5-benchmark-driven-development")
 	fmt.Println("Current: PR.4 (escape analysis)")
 	fmt.Println("---------------------------------------------------")
 }

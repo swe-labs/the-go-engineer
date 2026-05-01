@@ -73,4 +73,6 @@ In real-world applications, you might want to support multiple formats like YAML
 
 ## Next Step
 
-Continue to `FS.1` files.
+Next: `FS.1` -> `05-packages-io/02-io-and-cli/filesystem/1-files`
+
+Open `05-packages-io/02-io-and-cli/filesystem/1-files/README.md` to continue.

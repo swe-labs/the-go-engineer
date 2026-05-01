@@ -38,7 +38,7 @@ func main() {
 	fmt.Println("Compose is helpful when a service is only meaningful next to its database, cache, or queue and local startup should be boring.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: DEPLOY.1")
+	fmt.Println("NEXT UP: DEPLOY.1 -> 10-production/03-docker-and-deployment/4-cicd-pipelines")
 	fmt.Println("Current: DOCKER.3 (docker compose)")
 	fmt.Println("---------------------------------------------------")
 }

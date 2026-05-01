@@ -87,4 +87,6 @@ Kitchen is open! Starting all orders concurrently...
 
 ## Next Step
 
-We used a `WaitGroup` here to survive the main exit. Let's master the patterns and avoid the pitfalls of WaitGroups in [GC.2 WaitGroups](../2-wait-group/README.md).
+Next: `GC.2` -> `07-concurrency/01-concurrency/goroutines/2-wait-group`
+
+Open `07-concurrency/01-concurrency/goroutines/2-wait-group/README.md` to continue.

@@ -84,4 +84,6 @@ Use it when you know how many tasks you are starting and you just need to wait f
 
 ## Next Step
 
-We've mastered waiting. Now let's learn how to talk. Continue to [GC.3 Unbuffered Channels](../3-channels/README.md).
+Next: `GC.3` -> `07-concurrency/01-concurrency/goroutines/3-channels`
+
+Open `07-concurrency/01-concurrency/goroutines/3-channels/README.md` to continue.

@@ -93,4 +93,6 @@ Whether it's a database query, an HTTP request to another service, or a disk rea
 
 ## Next Step
 
-We've mastered cancellation and time. Now let's learn how to carry data along with the signal. Continue to [CT.4 Context Values](../4-with-value/README.md).
+Next: `CT.4` -> `07-concurrency/01-concurrency/context/4-with-value`
+
+Open `07-concurrency/01-concurrency/context/4-with-value/README.md` to continue.

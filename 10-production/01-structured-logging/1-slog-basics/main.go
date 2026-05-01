@@ -134,7 +134,7 @@ func main() {
 	// - logger.With() pre-loads shared fields (request IDs, service name)
 	// - slog.SetDefault() makes every slog.Info() call use your handler
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: SL.2 context-keyed logger")
+	fmt.Println("NEXT UP: SL.2 -> 10-production/01-structured-logging/2-context-logger")
 	fmt.Println("   Current: SL.1 (slog basics)")
 	fmt.Println("---------------------------------------------------")
 }

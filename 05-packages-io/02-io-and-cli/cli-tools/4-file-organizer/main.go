@@ -150,7 +150,7 @@ func main() {
 	fmt.Printf("Done! %d files %s.\n", moved, action)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: EN.1 marshalling")
+	fmt.Println("NEXT UP: EN.1 -> 05-packages-io/02-io-and-cli/encoding/1-marshalling")
 	fmt.Println("Current: CL.4 (file-organizer)")
 	fmt.Println("Previous: CL.3 (subcommands)")
 	fmt.Println("---------------------------------------------------")

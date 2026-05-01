@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Security bugs at the browser boundary depend on precise rules about output escaping, cookie scope, and request intent.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: SEC.4")
+	fmt.Println("NEXT UP: SEC.4 -> 09-architecture/04-security/4-authentication-basics")
 	fmt.Println("Current: SEC.3 (xss and csrf)")
 	fmt.Println("---------------------------------------------------")
 }

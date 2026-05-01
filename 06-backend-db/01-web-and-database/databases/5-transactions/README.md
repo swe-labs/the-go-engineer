@@ -80,4 +80,6 @@ Hogging a database connection while waiting for a slow network call is a recipe 
 
 ## Next Step
 
-Continue to `DB.6` repository.
+Next: `DB.6` -> `06-backend-db/01-web-and-database/databases/6-repository`
+
+Open `06-backend-db/01-web-and-database/databases/6-repository/README.md` to continue.

@@ -87,7 +87,7 @@ func main() {
 	customReaderDemo()
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FS.7 log-search")
+	fmt.Println("NEXT UP: FS.7 -> 05-packages-io/02-io-and-cli/filesystem/7-log-search")
 	fmt.Println("Current: FS.6 (io-patterns)")
 	fmt.Println("Previous: FS.5 (embed)")
 	fmt.Println("---------------------------------------------------")

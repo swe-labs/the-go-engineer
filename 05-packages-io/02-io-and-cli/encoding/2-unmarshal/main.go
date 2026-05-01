@@ -173,7 +173,7 @@ func main() {
 	fmt.Println("  - JSON numbers are ALWAYS float64 in maps (cast if needed)")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: EN.3 encoder")
+	fmt.Println("NEXT UP: EN.3 -> 05-packages-io/02-io-and-cli/encoding/3-encoder")
 	fmt.Println("Current: EN.2 (unmarshal)")
 	fmt.Println("Previous: EN.1 (marshalling)")
 	fmt.Println("---------------------------------------------------")

@@ -94,4 +94,6 @@ Also, remember that `errgroup` only captures the **first** error. If you need a 
 
 ## Next Step
 
-We've learned the basics. Now let's see how to combine `errgroup` with `context` to cancel the whole group as soon as one fails. Continue to [CP.2 errgroup with Context](../2-errgroup-context/README.md).
+Next: `CP.2` -> `07-concurrency/02-concurrency-patterns/2-errgroup-context`
+
+Open `07-concurrency/02-concurrency-patterns/2-errgroup-context/README.md` to continue.

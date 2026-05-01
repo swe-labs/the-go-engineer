@@ -68,7 +68,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CL.4 file-organizer")
+	fmt.Println("NEXT UP: CL.4 -> 05-packages-io/02-io-and-cli/cli-tools/4-file-organizer")
 	fmt.Println("Current: CL.3 (subcommands)")
 	fmt.Println("Previous: CL.2 (flags)")
 	fmt.Println("---------------------------------------------------")

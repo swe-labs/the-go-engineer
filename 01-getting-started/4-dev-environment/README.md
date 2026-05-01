@@ -56,7 +56,7 @@ This second slice defines the development tools the lesson wants to probe for.
 
 This asks the operating system whether a tool exists on the current `PATH`.
 
-### `fmt.Println("NEXT UP: GT.5 go-tools")`
+### `fmt.Println("NEXT UP: GT.5 -> 01-getting-started/5-go-tools")`
 
 The footer marks the transition to the essential Go toolchain.
 
@@ -76,4 +76,6 @@ Reliable teams do not guess at their command loop. They use the same format-buil
 
 ## Next Step
 
-Continue to `GT.5` go-tools.
+Next: `GT.5` -> `01-getting-started/5-go-tools`
+
+Open `01-getting-started/5-go-tools/README.md` to continue.

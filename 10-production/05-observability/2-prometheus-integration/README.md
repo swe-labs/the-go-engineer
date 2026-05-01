@@ -72,4 +72,6 @@ Shows how to wrap an existing HTTP handler with a middleware that automatically 
 
 ## Next Step
 
-Metrics tell you *what* is happening. Tracing tells you *where* it's happening. Continue to [OPS.3 Distributed Tracing Basics](../3-distributed-tracing-basics).
+Next: `OPS.3` -> `10-production/05-observability/3-distributed-tracing-basics`
+
+Open `10-production/05-observability/3-distributed-tracing-basics/README.md` to continue.

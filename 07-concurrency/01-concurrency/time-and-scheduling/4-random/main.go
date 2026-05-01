@@ -72,7 +72,7 @@ func main() {
 		fmt.Printf("  IntN(100): %d, Float64: %.4f\n", rng3.IntN(100), rng3.Float64())
 	}
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TM.5 scheduler")
+	fmt.Println("NEXT UP: TM.5 -> 07-concurrency/01-concurrency/time-and-scheduling/5-schedule")
 	fmt.Println("   Current: TM.4 (random numbers)")
 	fmt.Println("---------------------------------------------------")
 }

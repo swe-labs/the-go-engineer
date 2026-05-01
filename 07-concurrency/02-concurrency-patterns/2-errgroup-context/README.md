@@ -88,4 +88,6 @@ Always pass the context down to the lowest-level I/O operations (like `sql.Query
 
 ## Next Step
 
-We've learned how to coordinate work. Now let's learn how to optimize high-performance systems by reusing memory. Continue to [CP.3 sync.Pool](../3-sync-pool/README.md).
+Next: `CP.3` -> `07-concurrency/02-concurrency-patterns/3-sync-pool`
+
+Open `07-concurrency/02-concurrency-patterns/3-sync-pool/README.md` to continue.

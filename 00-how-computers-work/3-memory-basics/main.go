@@ -48,7 +48,7 @@ func main() {
 	// - Stack and heap serve different lifetime needs.
 	// - Escape analysis helps Go decide which one a value needs.
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HC.4 terminal-confidence")
+	fmt.Println("NEXT UP: HC.4 -> 00-how-computers-work/4-terminal-confidence")
 	fmt.Println("Run    : go run ./00-how-computers-work/4-terminal-confidence")
 	fmt.Println("Current: HC.3 (memory-basics)")
 	fmt.Println("---------------------------------------------------")

@@ -77,4 +77,6 @@ Generic data structures are used throughout Go codebases for type-safe collectio
 
 ## Next Step
 
-Continue to `CO.1` composition, which explores how to build complex systems by embedding types.
+Next: `CO.1` -> `04-types-design/composition/1-composition`
+
+Open `04-types-design/composition/1-composition/README.md` to continue.

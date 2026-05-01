@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("DDD becomes useful when the domain is complex enough that language mismatches create real implementation mistakes.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: ARCH.3")
+	fmt.Println("NEXT UP: ARCH.3 -> 09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go")
 	fmt.Println("Current: ARCH.2 (domain-driven design basics)")
 	fmt.Println("---------------------------------------------------")
 }

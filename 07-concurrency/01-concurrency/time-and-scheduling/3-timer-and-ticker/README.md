@@ -93,4 +93,6 @@ stopped
 
 ## Next Step
 
-We've mastered the passage of time. Now let's explore its unpredictable cousin: randomness. Continue to [TM.4 Randomness](../4-random/README.md).
+Next: `TM.7` -> `07-concurrency/01-concurrency/time-and-scheduling/7-reminder`
+
+Open `07-concurrency/01-concurrency/time-and-scheduling/7-reminder/README.md` to continue.

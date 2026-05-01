@@ -125,7 +125,7 @@ func main() {
 	fmt.Println("Replace is most useful during local development or controlled fork testing.")
 	fmt.Println("It should clarify dependency resolution, not hide long-term version problems.")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: MP.4 build-tags")
+	fmt.Println("NEXT UP: MP.4 -> 05-packages-io/01-modules-and-packages/4-build-tags")
 	fmt.Println("Current: MP.3 (versioning-workshop)")
 	fmt.Println("Previous: MP.2 (managing-deps)")
 	fmt.Println("---------------------------------------------------")

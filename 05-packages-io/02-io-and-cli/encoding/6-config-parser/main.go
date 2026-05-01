@@ -149,7 +149,7 @@ func main() {
 	fmt.Println("  - Use %w in fmt.Errorf to wrap errors for context")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FS.1 files")
+	fmt.Println("NEXT UP: FS.1 -> 05-packages-io/02-io-and-cli/filesystem/1-files")
 	fmt.Println("Current: EN.6 (config-parser)")
 	fmt.Println("Previous: EN.5 (base64_encoding)")
 	fmt.Println("---------------------------------------------------")

@@ -64,4 +64,6 @@ Terminal confidence becomes operational confidence.
 
 ## Next Step
 
-Continue to [HC.5 How the OS Manages Processes](../5-os-processes).
+Next: `HC.5` -> `00-how-computers-work/5-os-processes`
+
+Open `00-how-computers-work/5-os-processes/README.md` to continue.

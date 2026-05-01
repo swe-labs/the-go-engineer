@@ -91,4 +91,6 @@ Structs are the foundation of data modeling in Go. Every API request, database r
 
 ## Next Step
 
-Continue to `TI.2` methods.
+Next: `TI.2` -> `04-types-design/2-methods`
+
+Open `04-types-design/2-methods/README.md` to continue.

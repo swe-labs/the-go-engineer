@@ -142,7 +142,7 @@ func main() {
 	})
 	handleGRPCError(logger, "CreateOrder (invalid)", err)
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GS.1 signal.NotifyContext")
+	fmt.Println("NEXT UP: GR.4 -> 09-architecture/02-grpc/2-streaming/server")
 	fmt.Println("   Current: GR.3 (unary client)")
 	fmt.Println("---------------------------------------------------")
 }

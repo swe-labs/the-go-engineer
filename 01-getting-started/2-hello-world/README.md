@@ -77,4 +77,6 @@ Almost every service, CLI, job, and test binary still starts with this same shap
 
 ## Next Step
 
-Continue to `GT.3` how Go works.
+Next: `GT.3` -> `01-getting-started/3-how-go-works`
+
+Open `01-getting-started/3-how-go-works/README.md` to continue.

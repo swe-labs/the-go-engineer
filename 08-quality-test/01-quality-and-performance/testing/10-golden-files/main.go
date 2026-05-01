@@ -27,9 +27,6 @@ import (
 	"strings"
 )
 
-//
-// NEXT UP:
-
 func te_10Summary(input string) string {
 	return strings.TrimSpace(strings.ToLower(input))
 }
@@ -39,5 +36,5 @@ func main() {
 }
 
 // ---------------------------------------------------
-// NEXT UP: PR.1
+// NEXT UP: PR.1 -> 08-quality-test/01-quality-and-performance/profiling/1-cpu-profile
 // ---------------------------------------------------

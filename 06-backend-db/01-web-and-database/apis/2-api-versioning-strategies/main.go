@@ -87,7 +87,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: API.3 pagination-and-filtering")
+	fmt.Println("NEXT UP: API.3 -> 06-backend-db/01-web-and-database/apis/3-pagination-and-filtering")
 	fmt.Println("Current: API.2 (api-versioning-strategies)")
 	fmt.Println("Previous: API.1 (rest-design-principles)")
 	fmt.Println("---------------------------------------------------")

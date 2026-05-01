@@ -59,7 +59,7 @@ func main() {
 	fmt.Println(summary)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.3 multiple-return-values")
+	fmt.Println("NEXT UP: FE.3 -> 03-functions-errors/3-multiple-return-values")
 	fmt.Println("Current: FE.2 (parameters and returns)")
 	fmt.Println("Previous: FE.1 (functions-basics)")
 	fmt.Println("---------------------------------------------------")

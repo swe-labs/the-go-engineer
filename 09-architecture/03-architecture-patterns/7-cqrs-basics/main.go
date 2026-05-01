@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("CQRS is a useful tool only when the read/write mismatch is real enough to justify the extra moving parts.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: ARCH.8")
+	fmt.Println("NEXT UP: ARCH.8 -> 09-architecture/03-architecture-patterns/8-when-to-split-services")
 	fmt.Println("Current: ARCH.7 (cqrs basics)")
 	fmt.Println("---------------------------------------------------")
 }

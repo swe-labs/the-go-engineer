@@ -65,7 +65,7 @@ func main() {
 	fmt.Println("     - Treat your API as a UI for other developers.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: API.2 api-versioning-strategies")
+	fmt.Println("NEXT UP: API.2 -> 06-backend-db/01-web-and-database/apis/2-api-versioning-strategies")
 	fmt.Println("Current: API.1 (rest-design-principles)")
 	fmt.Println("Previous: HS.10 (rest-api-exercise)")
 	fmt.Println("---------------------------------------------------")

@@ -91,4 +91,6 @@ If you find yourself passing locks between packages or holding them for long per
 
 ## Next Step
 
-We've mastered the basic locks. Now let's look at specialized helpers for one-time setup and high-concurrency maps. Continue to [SY.2 sync.Once and sync.Map](../2-once-and-sync-map/README.md).
+Next: `SY.2` -> `07-concurrency/01-concurrency/sync-primitives/2-once-and-sync-map`
+
+Open `07-concurrency/01-concurrency/sync-primitives/2-once-and-sync-map/README.md` to continue.

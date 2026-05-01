@@ -149,7 +149,7 @@ func main() {
 	fmt.Println("  - ALWAYS test with: go run -race or go test -race")
 	fmt.Println("  - Prefer channels over shared memory when possible")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: SY.5 goroutine-leaks")
+	fmt.Println("NEXT UP: SY.5 -> 07-concurrency/01-concurrency/sync-primitives/5-goroutine-leaks")
 	fmt.Println("   Current: SY.4 (race conditions)")
 	fmt.Println("---------------------------------------------------")
 }

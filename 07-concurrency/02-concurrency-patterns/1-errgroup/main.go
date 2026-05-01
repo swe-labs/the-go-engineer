@@ -142,7 +142,7 @@ func main() {
 	g3.Wait()
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CP.2 errgroup + context")
+	fmt.Println("NEXT UP: CP.2 -> 07-concurrency/02-concurrency-patterns/2-errgroup-context")
 	fmt.Println("   Current: CP.1 (errgroup basics)")
 	fmt.Println("---------------------------------------------------")
 }

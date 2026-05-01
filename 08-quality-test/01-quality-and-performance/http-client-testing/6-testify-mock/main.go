@@ -47,7 +47,7 @@ func main() {
 
 	fmt.Println("\n(See client_test.go to see testify/mock in action!)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: PR.1 CPU profile")
+	fmt.Println("NEXT UP: PR.1 -> 08-quality-test/01-quality-and-performance/profiling/1-cpu-profile")
 	fmt.Println("   Current: HM.4 (testify/mock)")
 	fmt.Println("---------------------------------------------------")
 }

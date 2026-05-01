@@ -178,7 +178,7 @@ func main() {
 	fmt.Println("  - File permissions: 0644 (read-write owner, read others)")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FS.2 paths")
+	fmt.Println("NEXT UP: FS.2 -> 05-packages-io/02-io-and-cli/filesystem/2-paths")
 	fmt.Println("Current: FS.1 (files)")
 	fmt.Println("Previous: EN.6 (config-parser)")
 	fmt.Println("---------------------------------------------------")

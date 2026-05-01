@@ -94,7 +94,7 @@ func main() {
 	fmt.Println("  - Embedding avoids missing-runtime-asset problems")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FS.6 io-patterns")
+	fmt.Println("NEXT UP: FS.6 -> 05-packages-io/02-io-and-cli/filesystem/6-io-patterns")
 	fmt.Println("Current: FS.5 (embed)")
 	fmt.Println("Previous: FS.4 (temp)")
 	fmt.Println("---------------------------------------------------")

@@ -38,7 +38,7 @@ func main() {
 	fmt.Println("Zero-downtime claims are only meaningful when rollback, health checks, and drain behavior are planned together.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: DEPLOY.3")
+	fmt.Println("NEXT UP: DEPLOY.3 -> 10-production/03-docker-and-deployment/6-dockerised-service")
 	fmt.Println("Current: DEPLOY.2 (blue/green and rollback)")
 	fmt.Println("---------------------------------------------------")
 }

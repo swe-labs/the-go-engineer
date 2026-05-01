@@ -67,7 +67,7 @@ func main() {
 	fmt.Printf("calculate with anonymous subtract: %d\n", calculate(10, 4, subtract))
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.9 closures-mechanics")
+	fmt.Println("NEXT UP: FE.9 -> 03-functions-errors/9-closures-mechanics")
 	fmt.Println("Current: FE.8 (first-class functions)")
 	fmt.Println("Previous: FE.6 (orchestration)")
 	fmt.Println("---------------------------------------------------")

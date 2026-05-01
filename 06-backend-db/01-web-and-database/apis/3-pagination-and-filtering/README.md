@@ -84,4 +84,6 @@ Choose one and stick to it across your entire API!
 
 ## Next Step
 
-Continue to `API.4` protobuf-basics.
+Next: `API.4` -> `06-backend-db/01-web-and-database/apis/4-protobuf-basics`
+
+Open `06-backend-db/01-web-and-database/apis/4-protobuf-basics/README.md` to continue.

@@ -68,4 +68,6 @@ Shows how passing a concrete type to an `interface{}` argument (like `fmt.Printl
 
 ## Next Step
 
-Now that you understand the machine's decisions, learn how to use benchmarks to prove your optimizations. Continue to [PR.5 Benchmark-Driven Development](../5-benchmark-driven-development).
+Next: `PR.5` -> `08-quality-test/01-quality-and-performance/profiling/5-benchmark-driven-development`
+
+Open `08-quality-test/01-quality-and-performance/profiling/5-benchmark-driven-development/README.md` to continue.

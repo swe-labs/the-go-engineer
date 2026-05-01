@@ -110,7 +110,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DB.1 connecting-to-db")
+	fmt.Println("NEXT UP: DB.1 -> 06-backend-db/01-web-and-database/databases/1-connecting-to-db")
 	fmt.Println("Current: API.9 (grpc-service-exercise)")
 	fmt.Println("Previous: API.8 (rest-vs-grpc)")
 	fmt.Println("---------------------------------------------------")

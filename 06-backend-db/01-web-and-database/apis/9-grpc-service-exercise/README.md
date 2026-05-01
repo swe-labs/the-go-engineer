@@ -92,4 +92,6 @@ For production gRPC services, you should always:
 
 ## Next Step
 
-Continue to `DB.1` connecting-to-db.
+Next: `DB.1` -> `06-backend-db/01-web-and-database/databases/1-connecting-to-db`
+
+Open `06-backend-db/01-web-and-database/databases/1-connecting-to-db/README.md` to continue.

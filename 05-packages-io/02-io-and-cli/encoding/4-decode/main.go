@@ -132,7 +132,7 @@ func main() {
 	fmt.Println("  - Loop dec.Decode() until it returns io.EOF")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: EN.5 base64_encoding")
+	fmt.Println("NEXT UP: EN.5 -> 05-packages-io/02-io-and-cli/encoding/5-base64_encoding")
 	fmt.Println("Current: EN.4 (decode)")
 	fmt.Println("Previous: EN.3 (encoder)")
 	fmt.Println("---------------------------------------------------")

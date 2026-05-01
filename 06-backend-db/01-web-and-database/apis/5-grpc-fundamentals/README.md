@@ -78,4 +78,6 @@ gRPC is incredible for **Service-to-Service** communication (Microservices). How
 
 ## Next Step
 
-Continue to `API.6` grpc-streaming.
+Next: `API.6` -> `06-backend-db/01-web-and-database/apis/6-grpc-streaming`
+
+Open `06-backend-db/01-web-and-database/apis/6-grpc-streaming/README.md` to continue.

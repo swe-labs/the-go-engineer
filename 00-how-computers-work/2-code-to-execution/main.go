@@ -38,7 +38,7 @@ func main() {
 	// - Go source code is transformed through several compiler stages.
 	// - The thing that runs is the final binary, not the original text file.
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HC.3 memory-basics")
+	fmt.Println("NEXT UP: HC.3 -> 00-how-computers-work/3-memory-basics")
 	fmt.Println("Run    : go run ./00-how-computers-work/3-memory-basics")
 	fmt.Println("Current: HC.2 (code-to-execution)")
 	fmt.Println("---------------------------------------------------")

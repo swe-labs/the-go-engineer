@@ -76,7 +76,7 @@ type Result struct {
 }
 
 var runPathPattern = regexp.MustCompile(`\./[A-Za-z0-9._/\-]+(?:/\.\.\.)?`)
-var nextUpIDPattern = regexp.MustCompile(`NEXT UP:\s*([A-Z]{2,6}\.\d+)`)
+var nextUpFooterPattern = regexp.MustCompile(`NEXT UP:\s*([A-Z]{2,6}\.\d+)\s*->\s*([A-Za-z0-9._/\-]+)`)
 var markdownLinkPattern = regexp.MustCompile(`\[[^\]]+\]\(([^)]+)\)`)
 var flagshipPrefixPattern = regexp.MustCompile(`^[A-Z]{3,6}$`)
 
@@ -598,6 +598,7 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 	}
 
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
+	errorsFound += validateV2ReadmeNavigation(root, cur.Items, report)
 	errorsFound += validateFlagshipProjects(root, sectionIDs, cur.Items, report)
 	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
 	errorsFound += validateSectionReadmeTrackLabels(root, sectionIDs, report)
@@ -1240,9 +1241,13 @@ func validateSectionReadmeTrackLabels(root string, sections map[string]V2Section
 
 func validateV2LessonNavigation(root string, items []V2Item, report func(string)) int {
 	errorsFound := 0
+	itemIDs := make(map[string]V2Item, len(items))
+	for _, item := range items {
+		itemIDs[item.ID] = item
+	}
 
 	for _, item := range items {
-		if item.Type != "lesson" || len(item.NextItems) == 0 {
+		if len(item.NextItems) == 0 {
 			continue
 		}
 		if isPlaceholderItem(item) {
@@ -1251,6 +1256,10 @@ func validateV2LessonNavigation(root string, items []V2Item, report func(string)
 
 		expectedNextID := item.NextItems[0]
 		if strings.HasPrefix(expectedNextID, "s") {
+			continue
+		}
+		expectedNextItem, ok := itemIDs[expectedNextID]
+		if !ok {
 			continue
 		}
 
@@ -1266,9 +1275,11 @@ func validateV2LessonNavigation(root string, items []V2Item, report func(string)
 			continue
 		}
 
-		match := nextUpIDPattern.FindSubmatch(data)
-		if len(match) < 2 {
-			report(fmt.Sprintf("Missing v2 lesson navigation footer: %s -> %s", item.ID, filepath.ToSlash(filepath.Join(item.Path, "main.go"))))
+		expectedNextPath := filepath.ToSlash(expectedNextItem.Path)
+		expectedFooter := fmt.Sprintf("NEXT UP: %s -> %s", expectedNextID, expectedNextPath)
+		match := nextUpFooterPattern.FindSubmatch(data)
+		if len(match) < 3 {
+			report(fmt.Sprintf("Missing v2 lesson navigation footer: %s -> %s (expected %q)", item.ID, filepath.ToSlash(filepath.Join(item.Path, "main.go")), expectedFooter))
 			errorsFound++
 			continue
 		}
@@ -1276,6 +1287,68 @@ func validateV2LessonNavigation(root string, items []V2Item, report func(string)
 		actualNextID := string(match[1])
 		if actualNextID != expectedNextID {
 			report(fmt.Sprintf("Invalid v2 lesson navigation footer: %s -> %s (expected %s)", item.ID, actualNextID, expectedNextID))
+			errorsFound++
+			continue
+		}
+		actualNextPath := string(match[2])
+		if actualNextPath != expectedNextPath {
+			report(fmt.Sprintf("Invalid v2 lesson navigation footer path: %s -> %s (expected %s)", item.ID, actualNextPath, expectedNextPath))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
+}
+
+func validateV2ReadmeNavigation(root string, items []V2Item, report func(string)) int {
+	errorsFound := 0
+	itemIDs := make(map[string]V2Item, len(items))
+	pathCounts := make(map[string]int, len(items))
+	for _, item := range items {
+		itemIDs[item.ID] = item
+		if !isPlaceholderItem(item) {
+			pathCounts[filepath.ToSlash(filepath.Clean(item.Path))]++
+		}
+	}
+
+	for _, item := range items {
+		if len(item.NextItems) == 0 {
+			continue
+		}
+		if isPlaceholderItem(item) {
+			continue
+		}
+		if pathCounts[filepath.ToSlash(filepath.Clean(item.Path))] > 1 {
+			continue
+		}
+
+		expectedNextID := item.NextItems[0]
+		if strings.HasPrefix(expectedNextID, "s") {
+			continue
+		}
+		expectedNextItem, ok := itemIDs[expectedNextID]
+		if !ok {
+			continue
+		}
+
+		readmePath := filepath.Join(root, item.Path, "README.md")
+		if _, err := os.Stat(readmePath); err != nil {
+			continue
+		}
+
+		data, err := os.ReadFile(readmePath)
+		if err != nil {
+			report(fmt.Sprintf("Failed to read v2 README navigation: %s -> %v", item.ID, err))
+			errorsFound++
+			continue
+		}
+
+		text := string(data)
+		expectedNextPath := filepath.ToSlash(expectedNextItem.Path)
+		expectedLine := fmt.Sprintf("Next: `%s` -> `%s`", expectedNextID, expectedNextPath)
+		expectedOpenLine := fmt.Sprintf("Open `%s/README.md` to continue.", expectedNextPath)
+		if !strings.Contains(text, expectedLine) || !strings.Contains(text, expectedOpenLine) {
+			report(fmt.Sprintf("Invalid v2 README navigation footer: %s -> %s (expected %q and %q)", item.ID, filepath.ToSlash(filepath.Join(item.Path, "README.md")), expectedLine, expectedOpenLine))
 			errorsFound++
 		}
 	}

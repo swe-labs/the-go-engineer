@@ -46,7 +46,7 @@ func main() {
 	fmt.Println("When it needs files, clocks, or network access, it crosses the syscall boundary to ask the OS for help.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: GT.1 installation")
+	fmt.Println("NEXT UP: GT.1 -> 01-getting-started/1-installation")
 	fmt.Println("Current: HC.5 (os processes)")
 	fmt.Println("---------------------------------------------------")
 }

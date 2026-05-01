@@ -67,4 +67,6 @@ Demonstrates an attempt to import a package from an `internal` folder. You will 
 
 ## Next Step
 
-After defining your boundaries, learn how to organize them into a standard project structure. Continue to [PD.3 Project Layout](../3-project-layout).
+Next: `PD.3` -> `09-architecture/01-package-design/3-project-layout`
+
+Open `09-architecture/01-package-design/3-project-layout/README.md` to continue.

@@ -62,4 +62,6 @@ Don't over-interface. Only create an interface when you have a **Real Boundary**
 
 ## Next Step
 
-Now that you have a seam, learn how to precisely control it. Continue to [TE.8 Mocking Patterns](../8-mocking-with-interfaces).
+Next: `TE.8` -> `08-quality-test/01-quality-and-performance/testing/8-mocking-with-interfaces`
+
+Open `08-quality-test/01-quality-and-performance/testing/8-mocking-with-interfaces/README.md` to continue.

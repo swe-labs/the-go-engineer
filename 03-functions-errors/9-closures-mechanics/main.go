@@ -84,7 +84,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.10 panic-and-recover")
+	fmt.Println("NEXT UP: FE.10 -> 03-functions-errors/10-panic-and-recover")
 	fmt.Println("Current: FE.9 (closures - mechanics)")
 	fmt.Println("Previous: FE.8 (first-class-functions)")
 	fmt.Println("---------------------------------------------------")

@@ -79,4 +79,6 @@ go test ./09-architecture/04-security/11-secure-api-exercise
 
 ## Next Step
 
-Congratulations! You've mastered the architectural and security foundations of Go. You're ready to build production-grade systems. Return to the [09 Architecture & Security overview](../README.md) or continue to [Stage 10 Production Operations](../../../10-production).
+Next: `SL.1` -> `10-production/01-structured-logging/1-slog-basics`
+
+Open `10-production/01-structured-logging/1-slog-basics/README.md` to continue.

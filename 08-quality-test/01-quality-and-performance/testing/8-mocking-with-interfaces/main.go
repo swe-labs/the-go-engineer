@@ -28,7 +28,7 @@ import (
 )
 
 //
-// NEXT UP: TE.9
+// NEXT UP: TE.9 -> 08-quality-test/01-quality-and-performance/testing/9-integration-tests
 
 func te_8Summary(input string) string {
 	return strings.TrimSpace(strings.ToLower(input))

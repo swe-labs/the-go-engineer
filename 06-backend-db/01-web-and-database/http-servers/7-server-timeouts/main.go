@@ -91,7 +91,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HS.8 graceful-http-shutdown")
+	fmt.Println("NEXT UP: HS.8 -> 06-backend-db/01-web-and-database/http-servers/8-graceful-http-shutdown")
 	fmt.Println("Current: HS.7 (server-timeouts)")
 	fmt.Println("Previous: HS.6 (error-handling-middleware)")
 	fmt.Println("---------------------------------------------------")

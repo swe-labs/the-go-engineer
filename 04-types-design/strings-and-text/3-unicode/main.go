@@ -141,7 +141,7 @@ func main() {
 	fmt.Println("  - rune = int32 alias for a Unicode code point")
 	fmt.Println("  - unicode.IsLetter/IsDigit/IsSpace for character classification")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: ST.4 regex")
+	fmt.Println("NEXT UP: ST.4 -> 04-types-design/strings-and-text/4-regex")
 	fmt.Println("Current: ST.3 (unicode-and-runes)")
 	fmt.Println("Previous: ST.2 (formatting-string)")
 	fmt.Println("---------------------------------------------------")

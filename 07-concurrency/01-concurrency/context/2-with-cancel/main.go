@@ -115,7 +115,7 @@ func main() {
 	fmt.Println()
 	fmt.Println("   Next: go run ./07-concurrency/01-concurrency/context/3-with-timeout")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CT.3 WithTimeout")
+	fmt.Println("NEXT UP: CT.3 -> 07-concurrency/01-concurrency/context/3-with-timeout")
 	fmt.Println("   Current: CT.2 (WithCancel)")
 	fmt.Println("---------------------------------------------------")
 }

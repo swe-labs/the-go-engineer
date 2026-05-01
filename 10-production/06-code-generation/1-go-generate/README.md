@@ -74,4 +74,6 @@ Shows the idiomatic way to track your tool dependencies in your `go.mod` file so
 
 ## Next Step
 
-Now that you know *how* to trigger generation, let's look at one of the most common use cases: creating test doubles. Continue to [CG.2 Mockery Workflow](../2-mockery).
+Next: `CG.2` -> `10-production/06-code-generation/2-mockery`
+
+Open `10-production/06-code-generation/2-mockery/README.md` to continue.

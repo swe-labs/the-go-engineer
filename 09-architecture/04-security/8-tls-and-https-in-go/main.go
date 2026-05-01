@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Transport security is not optional on hostile networks, and misconfiguration can silently remove the safety you thought you had.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: SEC.9")
+	fmt.Println("NEXT UP: SEC.9 -> 09-architecture/04-security/9-secrets-management")
 	fmt.Println("Current: SEC.8 (tls and https in go)")
 	fmt.Println("---------------------------------------------------")
 }

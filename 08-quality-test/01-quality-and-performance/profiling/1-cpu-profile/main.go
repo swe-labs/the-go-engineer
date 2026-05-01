@@ -163,7 +163,7 @@ KEY TAKEAWAY:
   - Top anti-patterns found via pprof: regex-in-loop, string +, json on large structs
 `)
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: PR.2 live pprof endpoint")
+	fmt.Println("NEXT UP: PR.2 -> 08-quality-test/01-quality-and-performance/profiling/3-http-pprof")
 	fmt.Println("   Current: PR.1 (CPU profile)")
 	fmt.Println("---------------------------------------------------")
 }

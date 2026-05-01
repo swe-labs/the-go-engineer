@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Event-driven designs help when many downstream reactions exist, but they demand discipline around idempotency and debugging.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: ARCH.7")
+	fmt.Println("NEXT UP: ARCH.7 -> 09-architecture/03-architecture-patterns/7-cqrs-basics")
 	fmt.Println("Current: ARCH.6 (event-driven architecture)")
 	fmt.Println("---------------------------------------------------")
 }

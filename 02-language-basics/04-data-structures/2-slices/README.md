@@ -164,4 +164,6 @@ processing, HTTP work, concurrency, and general application code.
 
 ## Next Step
 
-Continue to `DS.3` maps.
+Next: `DS.3` -> `02-language-basics/04-data-structures/3-maps`
+
+Open `02-language-basics/04-data-structures/3-maps/README.md` to continue.

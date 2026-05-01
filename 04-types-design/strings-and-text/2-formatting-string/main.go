@@ -164,7 +164,7 @@ func main() {
 	fmt.Println("  - fmt.Sprintf returns a string, fmt.Printf prints to stdout")
 	fmt.Println("  - fmt.Errorf with the w verb wraps errors for chain traversal")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: ST.3 unicode")
+	fmt.Println("NEXT UP: ST.3 -> 04-types-design/strings-and-text/3-unicode")
 	fmt.Println("   Current: ST.2 (formatting-string)")
 	fmt.Println("   Previous: ST.1 (strings)")
 	fmt.Println("---------------------------------------------------")

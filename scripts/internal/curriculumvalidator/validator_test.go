@@ -317,7 +317,7 @@ func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
 // Section 06: Composition
 
 func main() {
-	println("NEXT UP: ST.1 strings")
+	println("NEXT UP: ST.1 -> 04-types-design/strings-and-text/1-strings")
 }`)
 
 	var reports []string
@@ -328,6 +328,153 @@ func main() {
 		t.Fatalf("Validate returned error: %v", err)
 	}
 	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 lesson navigation footer: CO.1 -> ST.1 (expected CO.2)")
+}
+
+func TestValidateRejectsStaticLessonNavigationFooterWithoutPath(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
+	writeValidPressureDocs(t, root)
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s06",
+      "number": "06",
+      "slug": "composition",
+      "title": "Composition",
+      "path_prefix": "04-types-design",
+      "entry_points": ["CO.1"],
+      "outputs": ["CO.2"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "CO.1",
+      "section_id": "s06",
+      "slug": "composition",
+      "title": "Composition",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "04-types-design/composition/1-composition",
+      "prerequisites": [],
+      "run_command": "go run ./04-types-design/composition/1-composition",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": ["CO.2"]
+    },
+    {
+      "id": "CO.2",
+      "section_id": "s06",
+      "slug": "embedding",
+      "title": "Embedding",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "verification_mode": "run",
+      "path": "04-types-design/composition/2-embedding",
+      "prerequisites": ["CO.1"],
+      "run_command": "go run ./04-types-design/composition/2-embedding",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "04-types-design/composition/1-composition")
+	mustMkdir(t, root, "04-types-design/composition/2-embedding")
+	writeFile(t, root, "04-types-design/composition/1-composition/main.go", `package main
+
+// Section 06: Composition
+
+func main() {
+	println("NEXT UP: CO.2 embedding")
+}`)
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	requireOnlyFixtureExpectedReports(t, result, reports, `Missing v2 lesson navigation footer: CO.1 -> 04-types-design/composition/1-composition/main.go (expected "NEXT UP: CO.2 -> 04-types-design/composition/2-embedding")`)
+}
+
+func TestValidateRejectsStaticReadmeNavigationFooterWithoutPath(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
+	writeValidPressureDocs(t, root)
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s00",
+      "number": "00",
+      "slug": "how-computers-work",
+      "title": "How Computers Work",
+      "path_prefix": "00-how-computers-work",
+      "entry_points": ["HC.1"],
+      "outputs": ["HC.2"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "HC.1",
+      "section_id": "s00",
+      "slug": "what-is-a-program",
+      "title": "What is a program?",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "00-how-computers-work/1-what-is-a-program",
+      "prerequisites": [],
+      "run_command": "go run ./00-how-computers-work/1-what-is-a-program",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": ["HC.2"]
+    },
+    {
+      "id": "HC.2",
+      "section_id": "s00",
+      "slug": "code-to-execution",
+      "title": "How code becomes execution",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "status": "placeholder",
+      "verification_mode": "run",
+      "path": "00-how-computers-work/2-code-to-execution",
+      "prerequisites": ["HC.1"],
+      "run_command": "go run ./00-how-computers-work/2-code-to-execution",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
+
+	mustMkdir(t, root, "00-how-computers-work/1-what-is-a-program")
+	mustMkdir(t, root, "00-how-computers-work/2-code-to-execution")
+	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/README.md", validFoundationsLessonReadme("go run ./00-how-computers-work/1-what-is-a-program"))
+	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/main.go", validFoundationsMainGo("HC.2", "00-how-computers-work/2-code-to-execution"))
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	expected := "Invalid v2 README navigation footer: HC.1 -> 00-how-computers-work/1-what-is-a-program/README.md (expected \"Next: `HC.2` -> `00-how-computers-work/2-code-to-execution`\" and \"Open `00-how-computers-work/2-code-to-execution/README.md` to continue.\")"
+	requireOnlyFixtureExpectedReports(t, result, reports, expected)
 }
 
 func TestValidateRejectsWrongSectionLabelInV2Source(t *testing.T) {
@@ -479,7 +626,7 @@ func TestValidateAcceptsFoundationsReadmeContractForS00(t *testing.T) {
 	writeValidPressureDocs(t, root)
 	mustMkdir(t, root, "00-how-computers-work/1-what-is-a-program")
 	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/README.md", validFoundationsLessonReadme("go run ./00-how-computers-work/1-what-is-a-program"))
-	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/main.go", validFoundationsMainGo("HC.2"))
+	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/main.go", validFoundationsMainGo("HC.2", "00-how-computers-work/2-code-to-execution"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -532,7 +679,7 @@ func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
 	mustMkdir(t, root, "04-types-design")
 	mustMkdir(t, root, "04-types-design/composition/1-composition")
 	writeFile(t, root, "04-types-design/composition/1-composition/README.md", validFoundationsLessonReadme("go run ./04-types-design/composition/1-composition"))
-	writeFile(t, root, "04-types-design/composition/1-composition/main.go", validFoundationsMainGo("CO.2"))
+	writeFile(t, root, "04-types-design/composition/1-composition/main.go", validFoundationsMainGo("CO.2", "04-types-design/composition/2-embedding"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -584,7 +731,7 @@ func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
 	writeValidPressureDocs(t, root)
 	mustMkdir(t, root, "04-types-design")
 	mustMkdir(t, root, "04-types-design/strings-and-text/1-strings")
-	writeFile(t, root, "04-types-design/strings-and-text/1-strings/main.go", validFoundationsMainGo("ST.2"))
+	writeFile(t, root, "04-types-design/strings-and-text/1-strings/main.go", validFoundationsMainGo("ST.2", "04-types-design/strings-and-text/2-formatting-string"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -739,7 +886,7 @@ func TestValidateRejectsFoundationsHeadingOrder(t *testing.T) {
 		"next",
 		"",
 	}, "\n"))
-	writeFile(t, root, "01-getting-started/1-installation/main.go", validFoundationsMainGo("GT.2"))
+	writeFile(t, root, "01-getting-started/1-installation/main.go", validFoundationsMainGo("GT.2", "01-getting-started/2-hello-world"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -791,7 +938,7 @@ func TestValidateRejectsFoundationsVisualModelWithoutMermaid(t *testing.T) {
 	writeValidPressureDocs(t, root)
 	mustMkdir(t, root, "03-functions-errors/1-functions-basics")
 	writeFile(t, root, "03-functions-errors/1-functions-basics/README.md", strings.Replace(validFoundationsLessonReadme("go run ./03-functions-errors/1-functions-basics"), "```mermaid\ngraph TD\n    A[\"input\"] --> B[\"program\"]\n    B --> C[\"output\"]\n```", "diagram", 1))
-	writeFile(t, root, "03-functions-errors/1-functions-basics/main.go", validFoundationsMainGo("FE.2"))
+	writeFile(t, root, "03-functions-errors/1-functions-basics/main.go", validFoundationsMainGo("FE.2", "03-functions-errors/2-parameters-and-returns"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -1162,8 +1309,15 @@ func writeFlagshipProjectSurface(t *testing.T, root, projectRoot string, moduleD
 	if includeProgress {
 		writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "scripts", "progress.go")), "//go:build ignore\n\npackage main\n\nfunc main() {}\n")
 	}
-	for _, moduleDir := range moduleDirs {
-		writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, moduleDir, "README.md")), "# Module\n")
+	prefix := flagshipFixturePrefix(projectRoot)
+	for index, moduleDir := range moduleDirs {
+		readme := "# Module\n\n## Next Step\n\nThis path is complete. Return to the section README or continue with the next project milestone.\n"
+		if index < len(moduleDirs)-1 {
+			nextID := fmt.Sprintf("%s.%d", prefix, index+2)
+			nextPath := filepath.ToSlash(filepath.Join(projectRoot, moduleDirs[index+1]))
+			readme = fmt.Sprintf("# Module\n\n## Next Step\n\nNext: `%s` -> `%s`\n\nOpen `%s/README.md` to continue.\n", nextID, nextPath, nextPath)
+		}
+		writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, moduleDir, "README.md")), readme)
 	}
 	if !includeImplementedTargets {
 		return
@@ -1176,6 +1330,19 @@ func writeFlagshipProjectSurface(t *testing.T, root, projectRoot string, moduleD
 	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "handlers", "handlers.go")), "package handlers\n")
 	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "middleware", "middleware.go")), "package middleware\n")
 	writeFile(t, root, ".github/workflows/ci.yml", "name: ci\n")
+}
+
+func flagshipFixturePrefix(projectRoot string) string {
+	switch {
+	case strings.Contains(projectRoot, "01-opslane"):
+		return "OPSL"
+	case strings.Contains(projectRoot, "01-ops-flagship"):
+		return "OPS"
+	case strings.Contains(projectRoot, "02-crmx"):
+		return "CRMX"
+	default:
+		return "MOD"
+	}
 }
 
 func validFoundationsLessonReadme(runCommand string) string {
@@ -1299,8 +1466,8 @@ func validFoundationsExerciseReadme(runCommand string) string {
 	}, "\n")
 }
 
-func validFoundationsMainGo(nextID string) string {
-	return "package main\n\nfunc main() {\n\tprintln(\"NEXT UP: " + nextID + "\")\n}\n"
+func validFoundationsMainGo(nextID, nextPath string) string {
+	return "package main\n\nfunc main() {\n\tprintln(\"NEXT UP: " + nextID + " -> " + nextPath + "\")\n}\n"
 }
 
 func writeFile(t *testing.T, root, relativePath, contents string) {

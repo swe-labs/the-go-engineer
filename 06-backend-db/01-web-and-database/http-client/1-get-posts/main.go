@@ -129,7 +129,7 @@ func main() {
 	fmt.Println("  - Use json.NewDecoder(resp.Body) for memory-efficient parsing")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HC.2 refactor-for-testability")
+	fmt.Println("NEXT UP: HC.2 -> 06-backend-db/01-web-and-database/http-client/2-refactor-for-testability")
 	fmt.Println("Current: HC.1 (get-posts)")
 	fmt.Println("Previous: HS.10 (rest-api-exercise)")
 	fmt.Println("---------------------------------------------------")

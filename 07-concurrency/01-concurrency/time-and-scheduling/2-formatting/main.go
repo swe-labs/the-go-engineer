@@ -80,7 +80,7 @@ func main() {
 		fmt.Printf("Parsed RFC3339 (in UTC): %s\n", parsedTimeRFC.UTC())
 	}
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TM.3 timers & tickers")
+	fmt.Println("NEXT UP: TM.3 -> 07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker")
 	fmt.Println("   Current: TM.2 (formatting)")
 	fmt.Println("---------------------------------------------------")
 }

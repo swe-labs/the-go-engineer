@@ -117,7 +117,7 @@ func main() {
 	fmt.Println("  4. No utils/helpers - name by responsibility")
 	fmt.Println("  5. Name by what it provides, not how it works")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: PD.2 visibility")
+	fmt.Println("NEXT UP: PD.2 -> 09-architecture/01-package-design/2-visibility")
 	fmt.Println("   Current: PD.1 (naming)")
 	fmt.Println("---------------------------------------------------")
 }

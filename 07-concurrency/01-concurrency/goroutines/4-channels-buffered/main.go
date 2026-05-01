@@ -108,7 +108,7 @@ func main() {
 	fmt.Println("  - Buffer size should be tuned based on throughput needs")
 	fmt.Println("  - When in doubt, start unbuffered -> add buffer only for performance")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.5 closing channels")
+	fmt.Println("NEXT UP: GC.5 -> 07-concurrency/01-concurrency/goroutines/5-channels-closing")
 	fmt.Println("   Current: GC.4 (buffered channels)")
 	fmt.Println("---------------------------------------------------")
 }

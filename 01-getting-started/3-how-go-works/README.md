@@ -77,4 +77,6 @@ Real Go systems are mostly package boundaries. Teams rely on imports, exported n
 
 ## Next Step
 
-Continue to `GT.4` development environment.
+Next: `GT.4` -> `01-getting-started/4-dev-environment`
+
+Open `01-getting-started/4-dev-environment/README.md` to continue.

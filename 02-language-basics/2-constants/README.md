@@ -73,4 +73,6 @@ Constants are where teams encode stable facts: protocol values, configuration ke
 
 ## Next Step
 
-Continue to `LB.3` enums with iota.
+Next: `LB.3` -> `02-language-basics/3-enums`
+
+Open `02-language-basics/3-enums/README.md` to continue.

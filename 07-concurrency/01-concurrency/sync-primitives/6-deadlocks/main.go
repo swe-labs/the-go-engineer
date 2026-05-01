@@ -95,7 +95,7 @@ func main() {
 
 	time.Sleep(3 * time.Second)
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CT.1 context-background")
+	fmt.Println("NEXT UP: CT.1 -> 07-concurrency/01-concurrency/context/1-background")
 	fmt.Println("Current: SY.6 (deadlocks)")
 	fmt.Println("Previous: SY.5 (goroutine-leaks)")
 	fmt.Println("---------------------------------------------------")

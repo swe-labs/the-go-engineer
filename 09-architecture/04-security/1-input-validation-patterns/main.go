@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Treat validation as a first-class engineering concern because every public boundary is a security boundary.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: SEC.2")
+	fmt.Println("NEXT UP: SEC.2 -> 09-architecture/04-security/2-sql-injection-prevention")
 	fmt.Println("Current: SEC.1 (input validation patterns)")
 	fmt.Println("---------------------------------------------------")
 }

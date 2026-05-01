@@ -68,4 +68,6 @@ Shows how to return a `429 Too Many Requests` status code and a `Retry-After` he
 
 ## Next Step
 
-Protecting your server's capacity is important, but protecting the data in transit is critical. Learn how to secure the connection. Continue to [SEC.8 TLS and HTTPS in Go](../8-tls-and-https-in-go).
+Next: `SEC.8` -> `09-architecture/04-security/8-tls-and-https-in-go`
+
+Open `09-architecture/04-security/8-tls-and-https-in-go/README.md` to continue.

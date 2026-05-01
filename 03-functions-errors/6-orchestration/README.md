@@ -151,4 +151,6 @@ instead of doing everything in one place.
 
 ## Next Step
 
-Continue to `FE.8` first-class functions.
+Next: `FE.8` -> `03-functions-errors/8-first-class-functions`
+
+Open `03-functions-errors/8-first-class-functions/README.md` to continue.

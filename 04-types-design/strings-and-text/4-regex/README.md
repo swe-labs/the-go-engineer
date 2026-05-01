@@ -80,4 +80,6 @@ Regex is powerful but easy to misuse. Precompiling patterns, keeping expressions
 
 ## Next Step
 
-Continue to `ST.5` text templates.
+Next: `ST.5` -> `04-types-design/strings-and-text/5-text-template`
+
+Open `04-types-design/strings-and-text/5-text-template/README.md` to continue.

@@ -101,7 +101,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.8")
+	fmt.Println("NEXT UP: FE.8 -> 03-functions-errors/8-first-class-functions")
 	fmt.Println("Current: FE.6 (orchestration)")
 	fmt.Println("---------------------------------------------------")
 }

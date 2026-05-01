@@ -38,7 +38,7 @@ func main() {
 	fmt.Println("CI/CD is valuable because it removes hidden release steps and makes quality gates visible before production.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: DEPLOY.2")
+	fmt.Println("NEXT UP: DEPLOY.2 -> 10-production/03-docker-and-deployment/5-blue-green-and-rollback")
 	fmt.Println("Current: DEPLOY.1 (ci/cd pipelines)")
 	fmt.Println("---------------------------------------------------")
 }

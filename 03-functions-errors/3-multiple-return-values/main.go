@@ -62,7 +62,7 @@ func main() {
 	fmt.Printf("first=%s last=%s\n", firstName, lastName)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.4 errors-as-values")
+	fmt.Println("NEXT UP: FE.4 -> 03-functions-errors/4-errors-as-values")
 	fmt.Println("Current: FE.3 (multiple return values)")
 	fmt.Println("Previous: FE.2 (parameters-and-returns)")
 	fmt.Println("---------------------------------------------------")

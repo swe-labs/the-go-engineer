@@ -81,4 +81,6 @@ While the standard library router is now very capable, it does not support **Reg
 
 ## Next Step
 
-Continue to `HS.3` middleware-pattern.
+Next: `HS.3` -> `06-backend-db/01-web-and-database/http-servers/3-middleware-pattern`
+
+Open `06-backend-db/01-web-and-database/http-servers/3-middleware-pattern/README.md` to continue.

@@ -186,7 +186,7 @@ func main() {
 	// - All downstream functions use FromContext - no logger parameters needed
 	// - This pattern gives every log line the same request_id automatically
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: SL.3 custom slog.Handler")
+	fmt.Println("NEXT UP: SL.3 -> 10-production/01-structured-logging/3-custom-handler")
 	fmt.Println("   Current: SL.2 (context-keyed logger)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -65,4 +65,6 @@ Use `t.Cleanup` for any resource that needs to be released (ports, temp files, m
 
 ## Next Step
 
-After mastering test structure, learn how to find bugs you didn't even know were possible. Continue to [TE.6 Fuzz Testing](../6-fuzz-testing).
+Next: `TE.6` -> `08-quality-test/01-quality-and-performance/testing/6-fuzz-testing`
+
+Open `08-quality-test/01-quality-and-performance/testing/6-fuzz-testing/README.md` to continue.

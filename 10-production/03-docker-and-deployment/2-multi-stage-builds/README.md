@@ -74,4 +74,6 @@ Shows why you should run your application as a **Non-root User** inside the cont
 
 ## Next Step
 
-Now that you can package a single service, learn how to manage multiple services and databases together. Continue to [DOCKER.3 Docker Compose](../3-docker-compose).
+Next: `DOCKER.3` -> `10-production/03-docker-and-deployment/3-docker-compose`
+
+Open `10-production/03-docker-and-deployment/3-docker-compose/README.md` to continue.

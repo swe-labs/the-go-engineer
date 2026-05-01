@@ -129,7 +129,7 @@ func main() {
 	fmt.Println("  - ALWAYS defer os.RemoveAll(dir) or os.Remove(file) immediately after creation")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FS.5 embed")
+	fmt.Println("NEXT UP: FS.5 -> 05-packages-io/02-io-and-cli/filesystem/5-embed")
 	fmt.Println("Current: FS.4 (temp)")
 	fmt.Println("Previous: FS.3 (dir)")
 	fmt.Println("---------------------------------------------------")

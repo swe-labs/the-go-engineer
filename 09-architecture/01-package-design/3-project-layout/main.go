@@ -136,7 +136,7 @@ func main() {
 	fmt.Println("  4. Tests live next to the code they verify (user.go -> user_test.go)")
 	fmt.Println("  5. Do not copy a complex layout for a small project")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: ARCH.1")
+	fmt.Println("NEXT UP: ARCH.1 -> 09-architecture/03-architecture-patterns/1-architecture-trade-offs")
 	fmt.Println("Current: PD.3 (project layout)")
 	fmt.Println("Previous: PD.2 (visibility)")
 	fmt.Println("---------------------------------------------------")

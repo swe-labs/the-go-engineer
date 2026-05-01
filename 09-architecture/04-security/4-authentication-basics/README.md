@@ -68,4 +68,6 @@ Shows how to use Go's `http.Handler` middleware to intercept requests, check for
 
 ## Next Step
 
-Tokens are powerful but dangerous if misused. Learn how to implement them correctly. Continue to [SEC.5 JWT - implementation and risks](../5-jwt-implementation-and-risks).
+Next: `SEC.5` -> `09-architecture/04-security/5-jwt-implementation-and-risks`
+
+Open `09-architecture/04-security/5-jwt-implementation-and-risks/README.md` to continue.

@@ -122,7 +122,7 @@ func main() {
 	fmt.Println("  4. Exit 0 = success, Exit 1 = error (defers DON'T run after os.Exit)")
 	fmt.Println()
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CL.2 flags")
+	fmt.Println("NEXT UP: CL.2 -> 05-packages-io/02-io-and-cli/cli-tools/2-flags")
 	fmt.Println("Current: CL.1 (args)")
 	fmt.Println("Previous: MP.4 (build-tags)")
 	fmt.Println("---------------------------------------------------")

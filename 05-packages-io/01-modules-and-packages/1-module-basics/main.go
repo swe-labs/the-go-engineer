@@ -111,7 +111,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: MP.2 managing-deps")
+	fmt.Println("NEXT UP: MP.2 -> 05-packages-io/01-modules-and-packages/2-managing-deps")
 	fmt.Println("Current: MP.1 (module-basics)")
 	fmt.Println("Previous: ST.6 (config-parser-project)")
 	fmt.Println("---------------------------------------------------")

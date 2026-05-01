@@ -88,4 +88,6 @@ To avoid them:
 
 ## Next Step
 
-We've finished the Synchronization Primitives track! Now let's explore the "Contract" that coordinates them across the whole system. Continue to [CT.1 Context](../../context/README.md).
+Next: `CT.1` -> `07-concurrency/01-concurrency/context/1-background`
+
+Open `07-concurrency/01-concurrency/context/1-background/README.md` to continue.

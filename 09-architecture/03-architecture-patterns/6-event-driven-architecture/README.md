@@ -67,4 +67,6 @@ Shows an `OrderService` that publishes an event. A `BillingService` and a `Shipp
 
 ## Next Step
 
-Once you've mastered events, learn how to split your data models for even more performance. Continue to [ARCH.7 CQRS basics](../7-cqrs-basics).
+Next: `ARCH.7` -> `09-architecture/03-architecture-patterns/7-cqrs-basics`
+
+Open `09-architecture/03-architecture-patterns/7-cqrs-basics/README.md` to continue.

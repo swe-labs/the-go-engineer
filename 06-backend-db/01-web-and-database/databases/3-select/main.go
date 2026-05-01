@@ -92,7 +92,7 @@ func main() {
 	fmt.Printf("  ✔ Found: %s\n", user.Name)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DB.4 prepare-statements")
+	fmt.Println("NEXT UP: DB.4 -> 06-backend-db/01-web-and-database/databases/4-prepare")
 	fmt.Println("Current: DB.3 (select-queries)")
 	fmt.Println("Previous: DB.2 (query-insert)")
 	fmt.Println("---------------------------------------------------")

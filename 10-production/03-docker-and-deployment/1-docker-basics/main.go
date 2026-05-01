@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("Container basics matter because deployment packaging changes startup, debugging, and runtime assumptions.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: DOCKER.2")
+	fmt.Println("NEXT UP: DOCKER.2 -> 10-production/03-docker-and-deployment/2-multi-stage-builds")
 	fmt.Println("Current: DOCKER.1 (docker basics)")
 	fmt.Println("---------------------------------------------------")
 }

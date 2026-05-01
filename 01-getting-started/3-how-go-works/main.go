@@ -43,7 +43,7 @@ func main() {
 	fmt.Printf("2^10:       %.0f\n", math.Pow(2, 10))
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: GT.4 dev-environment")
+	fmt.Println("NEXT UP: GT.4 -> 01-getting-started/4-dev-environment")
 	fmt.Println("Current: GT.3 (how-go-works)")
 	fmt.Println("---------------------------------------------------")
 }

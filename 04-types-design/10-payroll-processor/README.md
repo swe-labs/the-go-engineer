@@ -90,4 +90,6 @@ Interface-driven processing is how Go code stays flexible without inheritance tr
 
 ## Next Step
 
-Continue to `TI.11` dynamic-typing-with-any.
+Next: `TI.11` -> `04-types-design/11-dynamic-typing-with-any`
+
+Open `04-types-design/11-dynamic-typing-with-any/README.md` to continue.

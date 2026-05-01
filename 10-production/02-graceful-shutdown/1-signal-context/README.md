@@ -74,4 +74,6 @@ Shows the logic that runs *after* the signal is received but *before* the progra
 
 ## Next Step
 
-A canceled context tells workers to stop, but an HTTP server needs special handling to stop accepting new requests while finishing old ones. Continue to [GS.2 HTTP Server Shutdown](../2-http-server).
+Next: `GS.2` -> `10-production/02-graceful-shutdown/2-http-server`
+
+Open `10-production/02-graceful-shutdown/2-http-server/README.md` to continue.

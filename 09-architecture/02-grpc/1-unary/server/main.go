@@ -209,7 +209,7 @@ func main() {
 	// - Chain interceptors for logging, auth, recovery (gRPC middleware)
 	// - metadata.FromIncomingContext reads gRPC headers
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GR.3 unary client")
+	fmt.Println("NEXT UP: GR.3 -> 09-architecture/02-grpc/1-unary/client")
 	fmt.Println("   Current: GR.2 (unary server)")
 	fmt.Println("---------------------------------------------------")
 }

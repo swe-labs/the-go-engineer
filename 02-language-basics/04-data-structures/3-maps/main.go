@@ -63,7 +63,7 @@ func main() {
 	fmt.Printf("settings: %v\n", settings)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DS.4 pointers")
+	fmt.Println("NEXT UP: DS.4 -> 02-language-basics/04-data-structures/4-pointers")
 	fmt.Println("Current: DS.3 (maps)")
 	fmt.Println("Previous: DS.2 (slices)")
 	fmt.Println("---------------------------------------------------")

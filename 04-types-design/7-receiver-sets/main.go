@@ -104,7 +104,7 @@ func main() {
 	fmt.Println("  - A type's method set depends on whether you use value or pointer")
 	fmt.Println("  - Interface satisfaction requires the method to exist on the type you pass")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.8 custom-errors")
+	fmt.Println("NEXT UP: TI.8 -> 04-types-design/8-custom-errors")
 	fmt.Println("Current: TI.7 (receiver-sets)")
 	fmt.Println("Previous: TI.6 (type-switch)")
 	fmt.Println("---------------------------------------------------")

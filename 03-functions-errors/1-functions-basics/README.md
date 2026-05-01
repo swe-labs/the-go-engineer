@@ -160,4 +160,6 @@ Small named functions are the first step toward readable application flow.
 
 ## Next Step
 
-Continue to `FE.2` parameters and returns.
+Next: `FE.2` -> `03-functions-errors/2-parameters-and-returns`
+
+Open `03-functions-errors/2-parameters-and-returns/README.md` to continue.

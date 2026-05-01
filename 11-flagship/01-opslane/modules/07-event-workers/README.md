@@ -134,6 +134,8 @@ The test should still pass, but work drains with less parallel capacity.
 - When should the system reject work instead of buffering more?
 - How do you inspect or drain a stuck worker safely?
 
-## Next Module
+## Next Step
 
-Continue to [OPSL.8 Caching Layer](../08-caching/README.md).
+Next: `OPSL.8` -> `11-flagship/01-opslane/modules/08-caching`
+
+Open `11-flagship/01-opslane/modules/08-caching/README.md` to continue.

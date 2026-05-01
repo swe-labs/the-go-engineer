@@ -111,7 +111,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8089", mux))
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: MC.11 websockets")
+	fmt.Println("NEXT UP: MC.11 -> 06-backend-db/01-web-and-database/web-masterclass/11-websockets")
 	fmt.Println("Current: MC.10 (comments)")
 	fmt.Println("Previous: MC.9 (pagination)")
 	fmt.Println("---------------------------------------------------")

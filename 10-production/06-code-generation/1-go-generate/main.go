@@ -99,7 +99,7 @@ func main() {
 	fmt.Println("  4. Mockery, stringer, and sqlc are different tools with the same build-time philosophy")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: CG.2 mockery workflow")
+	fmt.Println("NEXT UP: CG.2 -> 10-production/06-code-generation/2-mockery")
 	fmt.Println("   Current: CG.1 (go generate primer)")
 	fmt.Println("---------------------------------------------------")
 }

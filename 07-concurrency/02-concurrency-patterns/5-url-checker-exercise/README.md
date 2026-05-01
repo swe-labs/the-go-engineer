@@ -84,4 +84,6 @@ The default client has no timeout. If a server accepts a connection but never se
 
 ## Next Step
 
-We've mastered the pipeline. Now let's explore the most flexible concurrency pattern: the long-running Worker Pool. Continue to [CP.6 Worker Pool](../6-worker-pool/README.md).
+Next: `TE.1` -> `08-quality-test/01-quality-and-performance/testing/user`
+
+Open `08-quality-test/01-quality-and-performance/testing/user/README.md` to continue.

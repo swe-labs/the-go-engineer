@@ -64,7 +64,7 @@ func main() {
 	fmt.Println("     - Streaming: Supports real-time data out of the box.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: API.6 grpc-streaming")
+	fmt.Println("NEXT UP: API.6 -> 06-backend-db/01-web-and-database/apis/6-grpc-streaming")
 	fmt.Println("Current: API.5 (grpc-fundamentals)")
 	fmt.Println("Previous: API.4 (protobuf-basics)")
 	fmt.Println("---------------------------------------------------")

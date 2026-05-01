@@ -112,4 +112,6 @@ This is the everyday shape of backend Go code: validate, return errors explicitl
 
 ## Next Step
 
-Continue to `FE.10`.
+Next: `FE.10` -> `03-functions-errors/10-panic-and-recover`
+
+Open `03-functions-errors/10-panic-and-recover/README.md` to continue.

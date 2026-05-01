@@ -106,7 +106,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HS.7 server-timeouts")
+	fmt.Println("NEXT UP: HS.7 -> 06-backend-db/01-web-and-database/http-servers/7-server-timeouts")
 	fmt.Println("Current: HS.6 (error-handling-middleware)")
 	fmt.Println("Previous: HS.5 (response-writing-patterns)")
 	fmt.Println("---------------------------------------------------")

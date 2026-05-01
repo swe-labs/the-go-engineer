@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("Config files become liabilities when the precedence rules are unclear or when production secrets sneak into checked-in defaults.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: CFG.3")
+	fmt.Println("NEXT UP: CFG.3 -> 10-production/04-configuration/3-flag-parsing")
 	fmt.Println("Current: CFG.2 (configuration files)")
 	fmt.Println("---------------------------------------------------")
 }

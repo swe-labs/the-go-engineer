@@ -70,4 +70,6 @@ Shows how to record the duration of a function call and see the distribution of 
 
 ## Next Step
 
-Raw numbers in memory aren't useful if you can't see them. Learn how to expose these metrics to the world. Continue to [OPS.2 Prometheus Integration](../2-prometheus-integration).
+Next: `OPS.2` -> `10-production/05-observability/2-prometheus-integration`
+
+Open `10-production/05-observability/2-prometheus-integration/README.md` to continue.

@@ -78,4 +78,6 @@ Explains how to map a port on your local machine to a port inside the container 
 
 ## Next Step
 
-A single-stage Dockerfile is easy to write but produces massive, insecure images. Learn how to fix this. Continue to [DOCKER.2 Multi-stage Builds](../2-multi-stage-builds).
+Next: `DOCKER.2` -> `10-production/03-docker-and-deployment/2-multi-stage-builds`
+
+Open `10-production/03-docker-and-deployment/2-multi-stage-builds/README.md` to continue.

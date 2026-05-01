@@ -84,4 +84,6 @@ Never start a goroutine in a production service without knowing exactly how it w
 
 ## Next Step
 
-We've built a simple coordinator. Now let's build something useful: a concurrent file downloader. Continue to [GC.7 Concurrent Downloader](../7-downloader/README.md).
+Next: `GC.7` -> `07-concurrency/01-concurrency/goroutines/7-downloader`
+
+Open `07-concurrency/01-concurrency/goroutines/7-downloader/README.md` to continue.

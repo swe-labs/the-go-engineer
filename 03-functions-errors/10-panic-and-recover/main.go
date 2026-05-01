@@ -59,7 +59,7 @@ func main() {
 	fmt.Println("\nProgram continued running after the recovered panic.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.1 structs")
+	fmt.Println("NEXT UP: TI.1 -> 04-types-design/1-struct")
 	fmt.Println("Current: FE.10 (panic and recover)")
 	fmt.Println("Previous: FE.7 (order-summary)")
 	fmt.Println("---------------------------------------------------")

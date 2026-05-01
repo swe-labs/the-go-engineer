@@ -89,4 +89,6 @@ A concurrency limit of `4` might be too low for a 64-core server, and too high f
 
 ## Next Step
 
-We've mastered the bounded pipeline. Now let's apply it to a real-world network problem: building a high-speed URL status checker. Continue to [CP.5 URL Checker](../5-url-checker-exercise/README.md).
+Next: `CP.5` -> `07-concurrency/02-concurrency-patterns/5-url-checker-exercise`
+
+Open `07-concurrency/02-concurrency-patterns/5-url-checker-exercise/README.md` to continue.

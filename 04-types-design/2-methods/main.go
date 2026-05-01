@@ -122,7 +122,7 @@ func main() {
 	fmt.Println("  - THE GOLDEN RULE: If ANY method needs a pointer, make ALL methods pointers")
 	fmt.Println("  - Go auto-dereferences: c.Scale() works even if c is not a pointer")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.3 interfaces")
+	fmt.Println("NEXT UP: TI.3 -> 04-types-design/3-interfaces")
 	fmt.Println("Current: TI.2 (methods)")
 	fmt.Println("Previous: TI.1 (structs)")
 	fmt.Println("---------------------------------------------------")

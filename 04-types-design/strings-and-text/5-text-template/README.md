@@ -82,4 +82,6 @@ Templates are how teams generate emails, config files, reports, and stable text 
 
 ## Next Step
 
-Continue to `ST.6` config parser project.
+Next: `ST.6` -> `04-types-design/strings-and-text/6-config-parser`
+
+Open `04-types-design/strings-and-text/6-config-parser/README.md` to continue.

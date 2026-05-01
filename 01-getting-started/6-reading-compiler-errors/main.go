@@ -42,7 +42,7 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: LB.1 variables")
+	fmt.Println("NEXT UP: LB.1 -> 02-language-basics/1-variables")
 	fmt.Println("Current: GT.6 (reading-compiler-errors)")
 	fmt.Println("-----------------------------------")
 }

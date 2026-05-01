@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("The most useful part of 12-Factor for Go teams is the config and deployment discipline, not ritual compliance with every slogan.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: CFG.5")
+	fmt.Println("NEXT UP: CFG.5 -> 10-production/04-configuration/5-config-validation-on-boot")
 	fmt.Println("Current: CFG.4 (12-factor app principles)")
 	fmt.Println("---------------------------------------------------")
 }

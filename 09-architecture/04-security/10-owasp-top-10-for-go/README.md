@@ -69,4 +69,6 @@ Demonstrates a "URL Preview" feature. An attacker can use it to scan your intern
 
 ## Next Step
 
-It's time for the final challenge. Build a secure API that incorporates everything you've learned. Continue to [SEC.11 Secure API Exercise](../11-secure-api-exercise).
+Next: `SEC.11` -> `09-architecture/04-security/11-secure-api-exercise`
+
+Open `09-architecture/04-security/11-secure-api-exercise/README.md` to continue.

@@ -112,7 +112,7 @@ func main() {
 	fmt.Printf("  >> Total Queries Executed: %d\n", queryCount)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DB.8 query-timeouts-via-context")
+	fmt.Println("NEXT UP: DB.8 -> 06-backend-db/01-web-and-database/databases/8-query-timeouts-via-context")
 	fmt.Println("Current: DB.7 (n-plus-one-query-detection)")
 	fmt.Println("Previous: DB.6 (repository-pattern)")
 	fmt.Println("---------------------------------------------------")

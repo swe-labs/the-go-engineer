@@ -31,7 +31,7 @@ func main() {
 	fanInPattern()
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.10 sync primitives")
+	fmt.Println("NEXT UP: GC.10 -> 07-concurrency/01-concurrency/goroutines/10-sync-primitives")
 	fmt.Println("   Current: GC.9 (select deep dive)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -35,7 +35,7 @@ func main() {
 	// - High-level Go code eventually becomes machine instructions.
 	// - The CPU executes those instructions one step at a time.
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HC.2 code-to-execution")
+	fmt.Println("NEXT UP: HC.2 -> 00-how-computers-work/2-code-to-execution")
 	fmt.Println("Run    : go run ./00-how-computers-work/2-code-to-execution")
 	fmt.Println("Current: HC.1 (what-is-a-program)")
 	fmt.Println("---------------------------------------------------")

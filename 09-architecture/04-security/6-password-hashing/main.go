@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Hashing policy is security policy: weak parameters make a correct library call functionally useless.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: SEC.7")
+	fmt.Println("NEXT UP: SEC.7 -> 09-architecture/04-security/7-rate-limiting-patterns")
 	fmt.Println("Current: SEC.6 (password hashing)")
 	fmt.Println("---------------------------------------------------")
 }

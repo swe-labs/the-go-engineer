@@ -71,4 +71,6 @@ The same task performed using more efficient techniques discovered in earlier le
 
 ## Next Step
 
-Efficiency isn't just about logic; it's about how data sits in the machine. Continue to [PR.6 Memory Layout](../6-memory-layout).
+Next: `PR.6` -> `08-quality-test/01-quality-and-performance/profiling/6-memory-layout`
+
+Open `08-quality-test/01-quality-and-performance/profiling/6-memory-layout/README.md` to continue.

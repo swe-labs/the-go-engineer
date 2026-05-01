@@ -117,7 +117,7 @@ func main() {
 	fmt.Println("  - Calling wg.Add() after Wait()  -> panic (negative counter)")
 	fmt.Println("  - Always: Add() before go, pass &wg, and defer Done() first")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.3 channels (unbuffered)")
+	fmt.Println("NEXT UP: GC.3 -> 07-concurrency/01-concurrency/goroutines/3-channels")
 	fmt.Println("   Current: GC.2 (WaitGroups)")
 	fmt.Println("---------------------------------------------------")
 }

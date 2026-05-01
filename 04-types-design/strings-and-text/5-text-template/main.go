@@ -107,7 +107,7 @@ You have no messages
 
 	fmt.Println(strings.ToUpper(output.String()))
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: ST.6 config-parser-project")
+	fmt.Println("NEXT UP: ST.6 -> 04-types-design/strings-and-text/6-config-parser")
 	fmt.Println("Current: ST.5 (text-template)")
 	fmt.Println("Previous: ST.4 (regex)")
 	fmt.Println("---------------------------------------------------")

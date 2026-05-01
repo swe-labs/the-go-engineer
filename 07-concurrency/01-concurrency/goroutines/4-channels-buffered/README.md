@@ -95,4 +95,6 @@ A buffer of size 10,000 might prevent your producer from blocking, but it just d
 
 ## Next Step
 
-We've learned how to send data. Now let's learn how to tell the receiver that the show is over. Continue to [GC.5 Closing Channels](../5-channels-closing/README.md).
+Next: `GC.5` -> `07-concurrency/01-concurrency/goroutines/5-channels-closing`
+
+Open `07-concurrency/01-concurrency/goroutines/5-channels-closing/README.md` to continue.

@@ -76,4 +76,6 @@ Demonstrates a simple script that can revert the Load Balancer to the previous v
 
 ## Next Step
 
-You have the tools and the strategies. Now put it all together in a final containerization challenge. Continue to [DEPLOY.3 Dockerised Service](../6-dockerised-service).
+Next: `DEPLOY.3` -> `10-production/03-docker-and-deployment/6-dockerised-service`
+
+Open `10-production/03-docker-and-deployment/6-dockerised-service/README.md` to continue.

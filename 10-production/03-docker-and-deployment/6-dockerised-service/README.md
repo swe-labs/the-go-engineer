@@ -79,4 +79,6 @@ cd 10-production/03-docker-and-deployment/6-dockerised-service/_starter
 
 ## Next Step
 
-Congratulations! You have mastered the operational side of Go development. Now learn how to automate the code itself. Continue to [Track CG: Code Generation](../../06-code-generation).
+Next: `CG.1` -> `10-production/06-code-generation/1-go-generate`
+
+Open `10-production/06-code-generation/1-go-generate/README.md` to continue.

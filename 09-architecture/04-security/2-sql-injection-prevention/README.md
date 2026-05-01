@@ -71,4 +71,6 @@ Shows the exact same logic using `db.QueryRow("SELECT ... WHERE pass = ?", input
 
 ## Next Step
 
-Protecting the database is Step 1. Protecting the user's browser is Step 2. Learn how to prevent malicious scripts from running in your UI. Continue to [SEC.3 XSS and CSRF](../3-xss-and-csrf).
+Next: `SEC.3` -> `09-architecture/04-security/3-xss-and-csrf`
+
+Open `09-architecture/04-security/3-xss-and-csrf/README.md` to continue.

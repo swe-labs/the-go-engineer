@@ -76,4 +76,6 @@ Directory traversal can be slow if the tree is very deep or stored on a network 
 
 ## Next Step
 
-Continue to `FS.4` temp.
+Next: `FS.4` -> `05-packages-io/02-io-and-cli/filesystem/4-temp`
+
+Open `05-packages-io/02-io-and-cli/filesystem/4-temp/README.md` to continue.

@@ -63,4 +63,6 @@ A benchmark that compares how many SHA-256 hashes a computer can do per second v
 
 ## Next Step
 
-Protecting user accounts is one thing; protecting your server from being overwhelmed is another. Learn how to limit the noise. Continue to [SEC.7 Rate limiting patterns](../7-rate-limiting-patterns).
+Next: `SEC.7` -> `09-architecture/04-security/7-rate-limiting-patterns`
+
+Open `09-architecture/04-security/7-rate-limiting-patterns/README.md` to continue.

@@ -66,4 +66,6 @@ Never optimize based on a "feeling." Always write a benchmark first. Micro-bench
 
 ## Next Step
 
-After measuring micro-performance, learn how to keep your test code clean and isolated. Continue to [TE.5 Sub-tests and Cleanup](../5-sub-tests-and-cleanup).
+Next: `TE.5` -> `08-quality-test/01-quality-and-performance/testing/5-sub-tests-and-cleanup`
+
+Open `08-quality-test/01-quality-and-performance/testing/5-sub-tests-and-cleanup/README.md` to continue.

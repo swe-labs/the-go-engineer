@@ -110,4 +110,6 @@ Don't just test the "Happy Path" (success). Most bugs live in the error handling
 
 ## Next Step
 
-Testing individual functions is step one. Now let's see how to measure performance. Continue to [TE.4 Benchmarking](../benchmarks/README.md).
+Next: `TE.4` -> `08-quality-test/01-quality-and-performance/testing/benchmarks`
+
+Open `08-quality-test/01-quality-and-performance/testing/benchmarks/README.md` to continue.

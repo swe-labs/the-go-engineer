@@ -62,7 +62,7 @@ func main() {
 	// a unique keyword called 'defer' to schedule cleanup work. We will cover
 	// that next: ../5-defer-basics/README.md
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CF.5 defer-basics")
+	fmt.Println("NEXT UP: CF.5 -> 02-language-basics/03-control-flow/5-defer-basics")
 	fmt.Println("Current: CF.4 (switch)")
 	fmt.Println("Previous: CF.3 (break-continue)")
 	fmt.Println("---------------------------------------------------")

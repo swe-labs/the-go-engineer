@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Repositories earn their keep when storage choices or complex mapping concerns would otherwise leak everywhere.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: ARCH.5")
+	fmt.Println("NEXT UP: ARCH.5 -> 09-architecture/03-architecture-patterns/5-service-layer-pattern")
 	fmt.Println("Current: ARCH.4 (repository pattern - deep dive)")
 	fmt.Println("---------------------------------------------------")
 }

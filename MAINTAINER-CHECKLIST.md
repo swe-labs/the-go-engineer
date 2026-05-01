@@ -157,7 +157,7 @@ Before release or workflow changes, verify these documents agree with `ARCHITECT
 
 - [ ] README follows the required section order.
 - [ ] `main.go` follows the standard header and footer.
-- [ ] `NEXT UP:` matches `curriculum.v2.json`.
+- [ ] `NEXT UP:` matches the next item ID and path in `curriculum.v2.json`.
 - [ ] Section README is updated.
 - [ ] Starter code compiles.
 - [ ] Tests prove behavior.

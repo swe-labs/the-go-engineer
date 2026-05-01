@@ -73,4 +73,6 @@ go run ./10-production/02-graceful-shutdown/3-capstone
 
 ## Next Step
 
-Congratulations! You've mastered the runtime operations of a Go service. Now learn how to configure it for different environments. Continue to [Track CFG: Configuration](../../04-configuration).
+Next: `CFG.1` -> `10-production/04-configuration/1-environment-variables`
+
+Open `10-production/04-configuration/1-environment-variables/README.md` to continue.

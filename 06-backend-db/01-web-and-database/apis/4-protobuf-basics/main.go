@@ -65,7 +65,7 @@ func main() {
 	fmt.Println("     - Code Generation: Generate Go, Java, Python, and TS from one file.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: API.5 grpc-fundamentals")
+	fmt.Println("NEXT UP: API.5 -> 06-backend-db/01-web-and-database/apis/5-grpc-fundamentals")
 	fmt.Println("Current: API.4 (protobuf-basics)")
 	fmt.Println("Previous: API.3 (pagination-and-filtering)")
 	fmt.Println("---------------------------------------------------")

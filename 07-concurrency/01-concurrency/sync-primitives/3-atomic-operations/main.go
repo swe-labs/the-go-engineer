@@ -82,7 +82,7 @@ func main() {
 	wg.Wait()
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: SY.4 race-conditions")
+	fmt.Println("NEXT UP: SY.4 -> 07-concurrency/01-concurrency/sync-primitives/4-race-conditions")
 	fmt.Println("Current: SY.3 (atomic operations)")
 	fmt.Println("Previous: SY.2 (sync.once and sync.map)")
 	fmt.Println("---------------------------------------------------")

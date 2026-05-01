@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("Prometheus is simple to adopt, but label discipline and bucket design matter far more than whether the scrape endpoint exists.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: OPS.3")
+	fmt.Println("NEXT UP: OPS.3 -> 10-production/05-observability/3-distributed-tracing-basics")
 	fmt.Println("Current: OPS.2 (prometheus integration)")
 	fmt.Println("---------------------------------------------------")
 }

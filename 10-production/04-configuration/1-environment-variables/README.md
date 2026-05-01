@@ -72,4 +72,6 @@ Shows when to use `LookupEnv` to verify that a required configuration was explic
 
 ## Next Step
 
-Environment variables are great for single values, but what if you have a complex hierarchy of settings? Continue to [CFG.2 Configuration Files](../2-configuration-files).
+Next: `CFG.2` -> `10-production/04-configuration/2-configuration-files`
+
+Open `10-production/04-configuration/2-configuration-files/README.md` to continue.

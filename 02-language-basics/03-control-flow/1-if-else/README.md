@@ -75,4 +75,6 @@ Branching is how services validate input, enforce authorization, choose business
 
 ## Next Step
 
-Continue to `CF.2` for basics.
+Next: `CF.2` -> `02-language-basics/03-control-flow/2-for-basics`
+
+Open `02-language-basics/03-control-flow/2-for-basics/README.md` to continue.

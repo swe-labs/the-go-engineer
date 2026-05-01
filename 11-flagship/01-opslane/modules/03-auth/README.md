@@ -41,6 +41,8 @@ Identity becomes trusted only after middleware verification. Repository calls sh
 - What error shape should a tampered token produce?
 - Which auth behavior belongs in middleware and which belongs in business services?
 
-## Next Module
+## Next Step
 
-Continue to [OPSL.4 HTTP API Layer](../04-http-api/README.md).
+Next: `OPSL.4` -> `11-flagship/01-opslane/modules/04-http-api`
+
+Open `11-flagship/01-opslane/modules/04-http-api/README.md` to continue.

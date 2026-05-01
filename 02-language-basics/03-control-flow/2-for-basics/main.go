@@ -58,7 +58,7 @@ func main() {
 	// Loops often need to stop early or skip an iteration. We will learn how to
 	// control loop execution precisely in: ../3-break-continue/README.md
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CF.3 break-continue")
+	fmt.Println("NEXT UP: CF.3 -> 02-language-basics/03-control-flow/3-break-continue")
 	fmt.Println("Current: CF.2 (for basics)")
 	fmt.Println("Previous: CF.1 (if / else)")
 	fmt.Println("---------------------------------------------------")

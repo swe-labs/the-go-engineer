@@ -106,7 +106,7 @@ func main() {
 	fmt.Println("  - value.(type) extracts the concrete type")
 	fmt.Println("  - Default case handles unknown types")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.7 receiver-sets")
+	fmt.Println("NEXT UP: TI.7 -> 04-types-design/7-receiver-sets")
 	fmt.Println("Current: TI.6 (type-switch)")
 	fmt.Println("Previous: TI.5 (stringer)")
 	fmt.Println("---------------------------------------------------")

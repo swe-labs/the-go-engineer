@@ -167,4 +167,6 @@ you reason about what gets copied and what stays shared.
 3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
-Continue to `DS.2` slices.
+Next: `DS.2` -> `02-language-basics/04-data-structures/2-slices`
+
+Open `02-language-basics/04-data-structures/2-slices/README.md` to continue.

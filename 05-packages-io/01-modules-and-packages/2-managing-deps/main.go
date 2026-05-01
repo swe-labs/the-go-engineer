@@ -93,7 +93,7 @@ func main() {
 
 	fmt.Println(string(whyOut))
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: MP.3 versioning")
+	fmt.Println("NEXT UP: MP.3 -> 05-packages-io/01-modules-and-packages/3-versioning")
 	fmt.Println("Current: MP.2 (managing-deps)")
 	fmt.Println("Previous: MP.1 (module-basics)")
 	fmt.Println("---------------------------------------------------")

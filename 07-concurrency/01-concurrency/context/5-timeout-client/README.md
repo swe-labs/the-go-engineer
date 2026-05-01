@@ -86,4 +86,6 @@ In a high-scale microservice architecture, a single service without timeouts can
 
 ## Next Step
 
-We've mastered Context. Now let's explore how Go handles time itself-timers, tickers, and scheduling. Continue to [TM.1 Sleeping & Timeouts](../../time-and-scheduling/README.md).
+Next: `TM.1` -> `07-concurrency/01-concurrency/time-and-scheduling/1-time`
+
+Open `07-concurrency/01-concurrency/time-and-scheduling/1-time/README.md` to continue.

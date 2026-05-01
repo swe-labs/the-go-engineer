@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Memory tuning starts with visibility. Without a profile, you are usually guessing at the wrong thing.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: PR.4")
+	fmt.Println("NEXT UP: PR.4 -> 08-quality-test/01-quality-and-performance/profiling/4-escape-analysis")
 	fmt.Println("Current: PR.3 (memory profiling)")
 	fmt.Println("---------------------------------------------------")
 }

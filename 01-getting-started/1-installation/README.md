@@ -60,7 +60,7 @@ These expose the target operating system and CPU architecture for the running bi
 
 This shows how many logical CPUs the program can see. It is an early example that a running program can inspect its environment.
 
-### `fmt.Println("NEXT UP: GT.2 hello-world")`
+### `fmt.Println("NEXT UP: GT.2 -> 01-getting-started/2-hello-world")`
 
 The footer keeps the learning path explicit so the learner never has to guess where to go next.
 
@@ -80,4 +80,6 @@ Environment verification is not a beginner-only concern. CI runners, build agent
 
 ## Next Step
 
-Continue to `GT.2` hello world.
+Next: `GT.2` -> `01-getting-started/2-hello-world`
+
+Open `01-getting-started/2-hello-world/README.md` to continue.

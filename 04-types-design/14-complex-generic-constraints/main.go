@@ -143,7 +143,7 @@ func main() {
 	fmt.Println("  - comparable constraint allows == and !=")
 	fmt.Println("  - Type must implement all methods in constraint")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.15 generic-data-structures")
+	fmt.Println("NEXT UP: TI.15 -> 04-types-design/15-generic-data-structures")
 	fmt.Println("Current: TI.14 (complex-generic-constraints)")
 	fmt.Println("Previous: TI.13 (method-values)")
 	fmt.Println("---------------------------------------------------")

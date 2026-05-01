@@ -203,7 +203,7 @@ DONE: Deploy v2.1 to staging`,
 	fmt.Println("  - Always handle errors gracefully - skip files you can't read")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FS.8 fs-testing-seam")
+	fmt.Println("NEXT UP: FS.8 -> 05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam")
 	fmt.Println("Current: FS.7 (log-search)")
 	fmt.Println("Previous: FS.6 (io-patterns)")
 	fmt.Println("---------------------------------------------------")

@@ -34,7 +34,7 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: GT.3 how-go-works")
+	fmt.Println("NEXT UP: GT.3 -> 01-getting-started/3-how-go-works")
 	fmt.Println("Current: GT.2 (hello-world)")
 	fmt.Println("---------------------------------------------------")
 }

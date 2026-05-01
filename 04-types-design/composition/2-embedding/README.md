@@ -80,4 +80,6 @@ Embedding is useful for wrappers, adapters, and reusable building blocks, but it
 
 ## Next Step
 
-Continue to `CO.3` bank account project.
+Next: `CO.3` -> `04-types-design/composition/3-bank-account`
+
+Open `04-types-design/composition/3-bank-account/README.md` to continue.

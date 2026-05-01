@@ -95,4 +95,6 @@ In a real production environment, you would never store your data in an in-memor
 
 ## Next Step
 
-Continue to `API.1` rest-design-principles.
+Next: `API.1` -> `06-backend-db/01-web-and-database/apis/1-rest-design-principles`
+
+Open `06-backend-db/01-web-and-database/apis/1-rest-design-principles/README.md` to continue.

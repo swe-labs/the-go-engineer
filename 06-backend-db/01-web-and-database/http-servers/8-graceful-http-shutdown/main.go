@@ -107,7 +107,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HS.9 health-and-readiness-probes")
+	fmt.Println("NEXT UP: HS.9 -> 06-backend-db/01-web-and-database/http-servers/9-health-and-readiness-probes")
 	fmt.Println("Current: HS.8 (graceful-http-shutdown)")
 	fmt.Println("Previous: HS.7 (server-timeouts)")
 	fmt.Println("---------------------------------------------------")

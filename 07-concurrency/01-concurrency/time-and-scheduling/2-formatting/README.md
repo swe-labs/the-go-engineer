@@ -88,4 +88,6 @@ Parsed RFC3339 (in UTC): 2025-12-25 09:00:00 +0000 UTC
 
 ## Next Step
 
-We've learned how to describe moments in time. Now let's learn how to trigger actions based on those moments. Continue to [TM.3 Timers & Tickers](../3-timer-and-ticker/README.md).
+Next: `TM.3` -> `07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker`
+
+Open `07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker/README.md` to continue.

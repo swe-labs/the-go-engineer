@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("JWT mistakes are rarely library mistakes. They are usually trust-boundary mistakes like weak key policy, bad expiry handling, or missing audience checks.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: SEC.6")
+	fmt.Println("NEXT UP: SEC.6 -> 09-architecture/04-security/6-password-hashing")
 	fmt.Println("Current: SEC.5 (jwt - implementation and risks)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -133,7 +133,7 @@ func main() {
 	fmt.Println("  - Encode() automatically appends a newline (\\n) after the JSON")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: EN.4 decode")
+	fmt.Println("NEXT UP: EN.4 -> 05-packages-io/02-io-and-cli/encoding/4-decode")
 	fmt.Println("Current: EN.3 (encoder)")
 	fmt.Println("Previous: EN.2 (unmarshal)")
 	fmt.Println("---------------------------------------------------")

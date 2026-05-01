@@ -127,7 +127,7 @@ func main() {
 	fmt.Println("  - Only senders close channels - never receivers")
 	fmt.Println("  - Sending to a closed channel = panic (unrecoverable)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.6 pipeline project")
+	fmt.Println("NEXT UP: GC.6 -> 07-concurrency/01-concurrency/goroutines/6-project-1")
 	fmt.Println("   Current: GC.5 (closing channels)")
 	fmt.Println("---------------------------------------------------")
 }

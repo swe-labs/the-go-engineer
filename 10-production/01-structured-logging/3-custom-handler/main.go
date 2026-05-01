@@ -282,7 +282,7 @@ func main() {
 	// - MultiHandler fans records out to N backends simultaneously
 	// - This is how every slog-compatible library (Datadog, Sentry) is built
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: SL.4 zerolog comparison")
+	fmt.Println("NEXT UP: SL.4 -> 10-production/01-structured-logging/4-zerolog-comparison")
 	fmt.Println("   Current: SL.3 (custom slog.Handler)")
 	fmt.Println("---------------------------------------------------")
 }

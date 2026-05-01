@@ -69,4 +69,6 @@ Allows you to specify exactly how the file should be opened. Common flags includ
 
 ## Next Step
 
-Continue to `FS.2` paths.
+Next: `FS.2` -> `05-packages-io/02-io-and-cli/filesystem/2-paths`
+
+Open `05-packages-io/02-io-and-cli/filesystem/2-paths/README.md` to continue.

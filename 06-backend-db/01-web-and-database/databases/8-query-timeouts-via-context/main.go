@@ -96,7 +96,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.0 why-concurrency-exists")
+	fmt.Println("NEXT UP: GC.0 -> 07-concurrency/01-concurrency/goroutines/0-why-concurrency-exists")
 	fmt.Println("   Current: DB.8 (query timeouts via context)")
 	fmt.Println("Previous: DB.7 (n-plus-one-query-detection)")
 	fmt.Println("---------------------------------------------------")

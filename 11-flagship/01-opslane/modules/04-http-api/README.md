@@ -52,6 +52,8 @@ Handlers parse and shape HTTP traffic. They should not become the order-processi
 - How do you keep duplicate database conflicts from leaking raw driver errors to clients?
 - Which timeouts and cleanup rules belong at the HTTP boundary?
 
-## Next Module
+## Next Step
 
-Continue to [OPSL.5 Order Processing](../05-order-processing/README.md).
+Next: `OPSL.5` -> `11-flagship/01-opslane/modules/05-order-processing`
+
+Open `11-flagship/01-opslane/modules/05-order-processing/README.md` to continue.

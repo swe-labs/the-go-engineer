@@ -94,4 +94,6 @@ Contexts are meant to be passed down the **Call Stack** as parameters. Storing t
 
 ## Next Step
 
-We have our root. Now let's learn how to pull the plug on a whole tree of work. Continue to [CT.2 Context Cancellation](../2-with-cancel/README.md).
+Next: `CT.2` -> `07-concurrency/01-concurrency/context/2-with-cancel`
+
+Open `07-concurrency/01-concurrency/context/2-with-cancel/README.md` to continue.

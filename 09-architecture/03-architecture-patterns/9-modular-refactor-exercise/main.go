@@ -35,4 +35,5 @@ func main() {
 	fmt.Println("- Use the refactor to reduce coupling, not just rename packages.")
 	fmt.Println()
 	fmt.Println("Architecture work matters only when the resulting system is easier to change, reason about, and test.")
+	fmt.Println("NEXT UP: SEC.1 -> 09-architecture/04-security/1-input-validation-patterns")
 }

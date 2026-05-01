@@ -89,7 +89,7 @@ func main() {
 	fmt.Printf("  ✔ Rows affected: %d\n", rows)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DB.3 select-queries")
+	fmt.Println("NEXT UP: DB.3 -> 06-backend-db/01-web-and-database/databases/3-select")
 	fmt.Println("Current: DB.2 (query-insert)")
 	fmt.Println("Previous: DB.1 (connecting-to-sqlite)")
 	fmt.Println("---------------------------------------------------")

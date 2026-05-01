@@ -73,4 +73,6 @@ Explores the `internal/db` package and shows how to use the generated `Queries` 
 
 ## Next Step
 
-Congratulations! You have completed the Production Operations section. You now have the skills to build, package, observe, and automate production-grade Go services. You are ready for the final stage. Continue to [11 Flagship](../../../11-flagship).
+Next: `OPSL.1` -> `11-flagship/01-opslane/modules/01-foundation`
+
+Open `11-flagship/01-opslane/modules/01-foundation/README.md` to continue.

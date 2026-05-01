@@ -40,7 +40,7 @@ func main() {
 	fmt.Println("Observability starts with choosing stable dimensions. Cardinality explosions make a correct metrics program operationally useless.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: OPS.2")
+	fmt.Println("NEXT UP: OPS.2 -> 10-production/05-observability/2-prometheus-integration")
 	fmt.Println("Current: OPS.1 (metrics basics)")
 	fmt.Println("---------------------------------------------------")
 }

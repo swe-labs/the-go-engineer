@@ -90,4 +90,6 @@ Composition and embedding show up in data models, adapters, wrappers, and reusab
 
 ## Next Step
 
-Continue to `ST.1` strings.
+Next: `ST.1` -> `04-types-design/strings-and-text/1-strings`
+
+Open `04-types-design/strings-and-text/1-strings/README.md` to continue.

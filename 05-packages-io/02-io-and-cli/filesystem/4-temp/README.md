@@ -70,4 +70,6 @@ Never hardcode paths like `/tmp/my-app-lock`. This is a major security risk (all
 
 ## Next Step
 
-Continue to `FS.5` embed.
+Next: `FS.5` -> `05-packages-io/02-io-and-cli/filesystem/5-embed`
+
+Open `05-packages-io/02-io-and-cli/filesystem/5-embed/README.md` to continue.

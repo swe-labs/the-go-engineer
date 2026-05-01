@@ -84,4 +84,6 @@ If your server restarts, all scheduled `AfterFunc` tasks are lost forever. For p
 
 ## Next Step
 
-We've finished the Time and Scheduling track! Now let's explore advanced patterns for error handling and pooling in concurrent systems. Continue to [CP.1 errgroup Basics](../../../02-concurrency-patterns/README.md).
+Next: `CP.1` -> `07-concurrency/02-concurrency-patterns/1-errgroup`
+
+Open `07-concurrency/02-concurrency-patterns/1-errgroup/README.md` to continue.

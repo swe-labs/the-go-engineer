@@ -78,4 +78,6 @@ While it might not be noticeable on your laptop with 5 users, it becomes catastr
 
 ## Next Step
 
-Continue to `DB.8` query-timeouts-via-context.
+Next: `DB.8` -> `06-backend-db/01-web-and-database/databases/8-query-timeouts-via-context`
+
+Open `06-backend-db/01-web-and-database/databases/8-query-timeouts-via-context/README.md` to continue.

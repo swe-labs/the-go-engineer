@@ -82,7 +82,7 @@ func main() {
 	fmt.Printf("Final Goroutines: %d (Leaked remains, safe exited)\n", runtime.NumGoroutine())
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: SY.6 deadlocks")
+	fmt.Println("NEXT UP: SY.6 -> 07-concurrency/01-concurrency/sync-primitives/6-deadlocks")
 	fmt.Println("Current: SY.5 (goroutine leaks)")
 	fmt.Println("Previous: SY.4 (race conditions)")
 	fmt.Println("---------------------------------------------------")

@@ -152,4 +152,6 @@ because two slices still point at the same backing array.
 
 ## Next Step
 
-Continue to `DS.6` contact directory.
+Next: `DS.6` -> `02-language-basics/04-data-structures/6-contact-manager`
+
+Open `02-language-basics/04-data-structures/6-contact-manager/README.md` to continue.

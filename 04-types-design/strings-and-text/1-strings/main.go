@@ -140,7 +140,7 @@ func main() {
 	fmt.Println("  - strings.Contains/HasPrefix/HasSuffix for searching")
 	fmt.Println("  - strings.ReplaceAll for template-like substitutions")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: ST.2 formatting-string")
+	fmt.Println("NEXT UP: ST.2 -> 04-types-design/strings-and-text/2-formatting-string")
 	fmt.Println("Current: ST.1 (strings)")
 	fmt.Println("Previous: CO.3 (bank-account-project)")
 	fmt.Println("---------------------------------------------------")

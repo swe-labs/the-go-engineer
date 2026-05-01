@@ -69,4 +69,6 @@ If you have multiple defers, they run in reverse order (LIFO). This is important
 
 ## Next Step
 
-Continue to `CF.6` defer-use-cases.
+Next: `CF.6` -> `02-language-basics/03-control-flow/6-defer-use-cases`
+
+Open `02-language-basics/03-control-flow/6-defer-use-cases/README.md` to continue.

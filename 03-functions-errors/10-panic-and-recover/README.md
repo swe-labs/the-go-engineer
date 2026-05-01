@@ -99,4 +99,6 @@ Use panic sparingly for programmer bugs or impossible states, then recover only 
 
 ## Next Step
 
-Continue to [Section 04: Types and Design](../../04-types-design/README.md) and start with [Lesson 1: Structs](../../04-types-design/1-struct/README.md).
+Next: `TI.1` -> `04-types-design/1-struct`
+
+Open `04-types-design/1-struct/README.md` to continue.

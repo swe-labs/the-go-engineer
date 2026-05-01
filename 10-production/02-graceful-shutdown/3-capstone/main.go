@@ -278,4 +278,5 @@ func main() {
 	// - errgroup wires HTTP server + workers + shutdown orchestrator together
 	// - Any goroutine returning an error cancels gctx -> triggers shutdown
 	// - The shutdown goroutine gets its own 30-second deadline context
+	fmt.Println("NEXT UP: CFG.1 -> 10-production/04-configuration/1-environment-variables")
 }

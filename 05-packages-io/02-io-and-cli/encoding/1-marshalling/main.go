@@ -181,7 +181,7 @@ func main() {
 	fmt.Println("  - Only EXPORTED (Uppercase) fields appear in JSON")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: EN.2 unmarshal")
+	fmt.Println("NEXT UP: EN.2 -> 05-packages-io/02-io-and-cli/encoding/2-unmarshal")
 	fmt.Println("Current: EN.1 (marshalling)")
 	fmt.Println("Previous: CL.4 (file-organizer)")
 	fmt.Println("---------------------------------------------------")

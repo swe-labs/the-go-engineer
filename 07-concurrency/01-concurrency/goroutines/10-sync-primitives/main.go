@@ -142,7 +142,7 @@ func main() {
 	fmt.Println("\n  ⚡ Use sync.Map for read-heavy, stable key sets")
 	fmt.Println("  ⚡ Use map + RWMutex for everything else")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CT.1 Background & TODO")
+	fmt.Println("NEXT UP: CT.1 -> 07-concurrency/01-concurrency/context/1-background")
 	fmt.Println("   Current: GC.10 (sync primitives)")
 	fmt.Println("---------------------------------------------------")
 }

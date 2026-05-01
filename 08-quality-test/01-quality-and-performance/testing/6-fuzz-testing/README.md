@@ -68,4 +68,6 @@ Fuzzing is critical for **Security Boundaries**. Any function that parses data f
 
 ## Next Step
 
-After fuzzing your logic, learn how to design your code so it's easier to test in the first place. Continue to [TE.7 Interfaces for Testability](../7-interfaces-for-testability).
+Next: `TE.7` -> `08-quality-test/01-quality-and-performance/testing/7-interfaces-for-testability`
+
+Open `08-quality-test/01-quality-and-performance/testing/7-interfaces-for-testability/README.md` to continue.

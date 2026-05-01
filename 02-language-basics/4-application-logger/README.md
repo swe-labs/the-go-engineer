@@ -91,4 +91,6 @@ Enum-like log levels are everywhere in services and tooling. Good logging system
 
 ## Next Step
 
-Continue to `CF.1` if / else.
+Next: `CF.1` -> `02-language-basics/03-control-flow/1-if-else`
+
+Open `02-language-basics/03-control-flow/1-if-else/README.md` to continue.

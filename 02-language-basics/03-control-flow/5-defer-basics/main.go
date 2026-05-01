@@ -52,7 +52,7 @@ func main() {
 	// See: ../6-defer-use-cases/README.md
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: CF.6 defer-use-cases")
+	fmt.Println("NEXT UP: CF.6 -> 02-language-basics/03-control-flow/6-defer-use-cases")
 	fmt.Println("Current: CF.5 (defer-basics)")
 	fmt.Println("Previous: CF.4 (switch)")
 	fmt.Println("---------------------------------------------------")

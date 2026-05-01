@@ -68,4 +68,6 @@ Demonstrates trimming whitespace and converting to lowercase before processing, 
 
 ## Next Step
 
-Validation stops bad data, but it doesn't stop malicious queries. Learn how to protect your database from the most common web attack. Continue to [SEC.2 SQL injection prevention](../2-sql-injection-prevention).
+Next: `SEC.2` -> `09-architecture/04-security/2-sql-injection-prevention`
+
+Open `09-architecture/04-security/2-sql-injection-prevention/README.md` to continue.

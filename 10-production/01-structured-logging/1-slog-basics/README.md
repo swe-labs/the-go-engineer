@@ -74,4 +74,6 @@ Shows the difference between `slog.Info("msg", "key", val)` and the more perform
 
 ## Next Step
 
-A log line is only useful if you know which request it belongs to. Learn how to tie logs together. Continue to [SL.2 Context Logging](../2-context-logger).
+Next: `SL.2` -> `10-production/01-structured-logging/2-context-logger`
+
+Open `10-production/01-structured-logging/2-context-logger/README.md` to continue.

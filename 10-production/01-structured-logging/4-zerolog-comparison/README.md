@@ -71,4 +71,6 @@ Discusses the internal mechanics of how Zerolog avoids memory allocations during
 
 ## Next Step
 
-It's time to put your skills to the test. Standardize the logging for a complete service. Continue to [SL.5 Exercise](../5-exercise).
+Next: `SL.5` -> `10-production/01-structured-logging/5-exercise`
+
+Open `10-production/01-structured-logging/5-exercise/README.md` to continue.

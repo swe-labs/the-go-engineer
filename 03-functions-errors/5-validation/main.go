@@ -70,7 +70,7 @@ func main() {
 	fmt.Println("negative price check:", err)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.6 orchestration")
+	fmt.Println("NEXT UP: FE.6 -> 03-functions-errors/6-orchestration")
 	fmt.Println("Current: FE.5 (validation)")
 	fmt.Println("Previous: FE.4 (errors-as-values)")
 	fmt.Println("---------------------------------------------------")

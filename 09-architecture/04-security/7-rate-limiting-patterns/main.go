@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Rate limits protect both your service and the dependencies behind it, especially on auth, search, and write-heavy endpoints.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: SEC.8")
+	fmt.Println("NEXT UP: SEC.8 -> 09-architecture/04-security/8-tls-and-https-in-go")
 	fmt.Println("Current: SEC.7 (rate limiting patterns)")
 	fmt.Println("---------------------------------------------------")
 }

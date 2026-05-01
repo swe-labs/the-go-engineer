@@ -71,4 +71,6 @@ Shows the pattern of passing the `ctx` through every function so that child span
 
 ## Next Step
 
-Metrics and Tracing help you see what's wrong. Feature flags help you fix it without a redeploy. Continue to [OPS.4 Feature Flags](../4-feature-flags).
+Next: `OPS.4` -> `10-production/05-observability/4-feature-flags`
+
+Open `10-production/05-observability/4-feature-flags/README.md` to continue.

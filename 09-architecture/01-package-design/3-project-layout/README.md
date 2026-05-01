@@ -74,4 +74,6 @@ Uses `cmd/` for binaries and `internal/` for core logic. Prevents "Folder Sprawl
 
 ## Next Step
 
-Now that you can structure a project, learn about the high-level patterns that shape your code. Continue to [ARCH.1 Architecture Trade-offs](../../03-architecture-patterns/1-architecture-trade-offs).
+Next: `ARCH.1` -> `09-architecture/03-architecture-patterns/1-architecture-trade-offs`
+
+Open `09-architecture/03-architecture-patterns/1-architecture-trade-offs/README.md` to continue.

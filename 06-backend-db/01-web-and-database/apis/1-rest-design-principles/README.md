@@ -92,4 +92,6 @@ While "Pure REST" (HATEOAS) is a popular academic topic, most production APIs fo
 
 ## Next Step
 
-Continue to `API.2` api-versioning-strategies.
+Next: `API.2` -> `06-backend-db/01-web-and-database/apis/2-api-versioning-strategies`
+
+Open `06-backend-db/01-web-and-database/apis/2-api-versioning-strategies/README.md` to continue.

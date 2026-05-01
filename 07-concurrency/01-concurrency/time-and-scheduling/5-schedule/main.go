@@ -218,7 +218,7 @@ func main() {
 
 	scheduler.globalWg.Wait()
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TM.6 timezones")
+	fmt.Println("NEXT UP: TM.6 -> 07-concurrency/01-concurrency/time-and-scheduling/6-timezone")
 	fmt.Println("   Current: TM.5 (scheduler)")
 	fmt.Println("---------------------------------------------------")
 }

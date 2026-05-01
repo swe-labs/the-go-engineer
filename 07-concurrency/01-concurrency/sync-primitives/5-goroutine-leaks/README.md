@@ -88,4 +88,6 @@ The #1 rule of Go concurrency is: **Know when a goroutine will stop.** If you ca
 
 ## Next Step
 
-We've seen goroutines that stay alive too long. Now let's look at the opposite: goroutines that get stuck waiting for each other, bringing the whole system to a halt. Continue to [SY.6 Deadlocks](../6-deadlocks/README.md).
+Next: `SY.6` -> `07-concurrency/01-concurrency/sync-primitives/6-deadlocks`
+
+Open `07-concurrency/01-concurrency/sync-primitives/6-deadlocks/README.md` to continue.

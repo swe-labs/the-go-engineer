@@ -79,4 +79,6 @@ Predictable variable initialization is one of the reasons Go code is easier to r
 
 ## Next Step
 
-Continue to `LB.2` constants.
+Next: `LB.2` -> `02-language-basics/2-constants`
+
+Open `02-language-basics/2-constants/README.md` to continue.

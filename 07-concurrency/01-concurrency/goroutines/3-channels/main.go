@@ -135,7 +135,7 @@ func main() {
 	fmt.Println("  - close(ch) signals all receivers that no more values are coming")
 	fmt.Println("  - Channels replace shared memory + mutexes for many coordination cases")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.4 buffered channels")
+	fmt.Println("NEXT UP: GC.4 -> 07-concurrency/01-concurrency/goroutines/4-channels-buffered")
 	fmt.Println("   Current: GC.3 (channels (unbuffered))")
 	fmt.Println("---------------------------------------------------")
 }

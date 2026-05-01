@@ -21,6 +21,7 @@
 package main
 
 import (
+	"fmt"
 	"log/slog"
 	"os"
 )
@@ -59,4 +60,5 @@ func main() {
 		slog.String("credit_card", "4111-1111-1111-1111"),
 		slog.String("error", "insufficient funds"),
 	)
+	fmt.Println("NEXT UP: GS.1 -> 10-production/02-graceful-shutdown/1-signal-context")
 }

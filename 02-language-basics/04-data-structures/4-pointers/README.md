@@ -169,4 +169,6 @@ help learners stop confusing "copied value" with "original value."
 
 ## Next Step
 
-Continue to `DS.5` slice sharing and capacity.
+Next: `DS.5` -> `02-language-basics/04-data-structures/5-slices-2`
+
+Open `02-language-basics/04-data-structures/5-slices-2/README.md` to continue.

@@ -95,7 +95,7 @@ func main() {
 	fmt.Println("  4. Use getters for controlled access to internal state")
 	fmt.Println("  5. Once exported, it is part of your API - removing it is a breaking change")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: PD.3 project layout")
+	fmt.Println("NEXT UP: PD.3 -> 09-architecture/01-package-design/3-project-layout")
 	fmt.Println("   Current: PD.2 (visibility)")
 	fmt.Println("---------------------------------------------------")
 }

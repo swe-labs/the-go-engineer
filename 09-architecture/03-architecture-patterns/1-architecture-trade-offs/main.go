@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("The right default is the one that keeps change cheap for your current team and system size.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: ARCH.2")
+	fmt.Println("NEXT UP: ARCH.2 -> 09-architecture/03-architecture-patterns/2-ddd-basics")
 	fmt.Println("Current: ARCH.1 (monolith vs modular monolith vs microservices)")
 	fmt.Println("---------------------------------------------------")
 }

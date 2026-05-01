@@ -38,7 +38,7 @@ Every lesson `main()` should end with a clear takeaway and terminal footer:
 // - Summary point 2
 fmt.Println()
 fmt.Println("---------------------------------------------------")
-fmt.Println("NEXT UP: XY.N next-lesson-slug")
+fmt.Println("NEXT UP: XY.N -> NN-section-slug/N-next-lesson-slug")
 fmt.Println("Run    : go run ./NN-section-slug/N-next-lesson-slug")
 fmt.Println("Current: XY.N current-lesson-slug")
 fmt.Println("---------------------------------------------------")
@@ -48,12 +48,12 @@ fmt.Println("---------------------------------------------------")
 
 The footer must use `NEXT UP:` exactly, without emoji.
 
-The next item ID and slug must match `curriculum.v2.json`.
+The next item ID and path must match `curriculum.v2.json`.
 
 The validator checks this pattern:
 
 ```text
-NEXT UP:\s*([A-Z]{2,6}\.\d+)
+NEXT UP:\s*([A-Z]{2,6}\.\d+)\s*->\s*([A-Za-z0-9._/\-]+)
 ```
 
 ## Formatting Standards

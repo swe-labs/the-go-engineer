@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("The best split is one backed by clear pressure: team autonomy, scaling profile, fault isolation, or compliance.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: ARCH.9")
+	fmt.Println("NEXT UP: ARCH.9 -> 09-architecture/03-architecture-patterns/9-modular-refactor-exercise")
 	fmt.Println("Current: ARCH.8 (when to split services)")
 	fmt.Println("---------------------------------------------------")
 }

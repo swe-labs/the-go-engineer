@@ -71,7 +71,7 @@ func main() {
 	// See: ../03-control-flow/1-if-else/README.md
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: CF.1 if-else")
+	fmt.Println("NEXT UP: CF.1 -> 02-language-basics/03-control-flow/1-if-else")
 	fmt.Println("Current: LB.4 (application-logger)")
 	fmt.Println("Previous: LB.3 (enums)")
 	fmt.Println("---------------------------------------------------")

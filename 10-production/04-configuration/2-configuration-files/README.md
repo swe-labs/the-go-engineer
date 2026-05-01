@@ -74,4 +74,6 @@ Shows how to manually check for an environment variable and overwrite a field in
 
 ## Next Step
 
-Files and Environment variables handle most cases, but sometimes you need to override a setting quickly from the command line. Continue to [CFG.3 Flag Parsing](../3-flag-parsing).
+Next: `CFG.3` -> `10-production/04-configuration/3-flag-parsing`
+
+Open `10-production/04-configuration/3-flag-parsing/README.md` to continue.

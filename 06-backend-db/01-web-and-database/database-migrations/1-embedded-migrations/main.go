@@ -127,7 +127,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: MC.1 web-masterclass")
+	fmt.Println("NEXT UP: MC.1 -> 06-backend-db/01-web-and-database/web-masterclass/1-routing")
 	fmt.Println("Current: DM.1 (embedded-migrations)")
 	fmt.Println("Previous: DB.8 (query-timeouts-via-context)")
 	fmt.Println("---------------------------------------------------")

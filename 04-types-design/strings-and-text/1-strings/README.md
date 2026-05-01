@@ -80,4 +80,6 @@ Text handling shows up everywhere: logs, config, CLI output, HTTP headers, and u
 
 ## Next Step
 
-Continue to `ST.2` formatting-string.
+Next: `ST.2` -> `04-types-design/strings-and-text/2-formatting-string`
+
+Open `04-types-design/strings-and-text/2-formatting-string/README.md` to continue.

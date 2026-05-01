@@ -62,6 +62,7 @@ func main() {
 	} else {
 		fmt.Printf("[OK] Batch job completed successfully in %v\n", time.Since(start))
 	}
+	fmt.Println("NEXT UP: CP.5 -> 07-concurrency/02-concurrency-patterns/5-url-checker-exercise")
 }
 
 func processImage(ctx context.Context, id string) error {

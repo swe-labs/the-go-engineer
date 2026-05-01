@@ -69,4 +69,6 @@ Demonstrates a `BankAccount` aggregate that prevents a withdrawal if the balance
 
 ## Next Step
 
-Now that you've organized your domain, learn how to protect it from outside influences. Continue to [ARCH.3 Hexagonal architecture in Go](../3-hexagonal-architecture-in-go).
+Next: `ARCH.3` -> `09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go`
+
+Open `09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go/README.md` to continue.

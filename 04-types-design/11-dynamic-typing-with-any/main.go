@@ -64,7 +64,7 @@ func main() {
 	fmt.Println("The interface keeps type information even when the pointer payload is nil.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.12 functional-options")
+	fmt.Println("NEXT UP: TI.12 -> 04-types-design/12-functional-options")
 	fmt.Println("Current: TI.11 (dynamic-typing-with-any)")
 	fmt.Println("Previous: TI.10 (payroll-processor)")
 	fmt.Println("---------------------------------------------------")

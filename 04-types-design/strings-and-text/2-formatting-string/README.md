@@ -79,4 +79,6 @@ Readable output is operationally important. Logs, CLI tools, diagnostics, and us
 
 ## Next Step
 
-Continue to `ST.3` unicode.
+Next: `ST.3` -> `04-types-design/strings-and-text/3-unicode`
+
+Open `04-types-design/strings-and-text/3-unicode/README.md` to continue.

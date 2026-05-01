@@ -61,7 +61,7 @@ func main() {
 	fmt.Println("Wait time is overlapping: max(100ms, 100ms, 100ms) = 100ms")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.1 goroutines")
+	fmt.Println("NEXT UP: GC.1 -> 07-concurrency/01-concurrency/goroutines/1-goroutine")
 	fmt.Println("Current: GC.0 (why concurrency exists)")
 	fmt.Println("Previous: DB.8 (query-timeouts-via-context)")
 	fmt.Println("---------------------------------------------------")

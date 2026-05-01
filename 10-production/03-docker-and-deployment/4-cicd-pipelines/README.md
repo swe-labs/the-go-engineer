@@ -77,4 +77,6 @@ Explains how to deploy to "Staging" automatically but require a manual approval 
 
 ## Next Step
 
-Automation makes deployment fast. Now learn how to make it safe. Continue to [DEPLOY.2 Blue/Green & Rollback](../5-blue-green-and-rollback).
+Next: `DEPLOY.2` -> `10-production/03-docker-and-deployment/5-blue-green-and-rollback`
+
+Open `10-production/03-docker-and-deployment/5-blue-green-and-rollback/README.md` to continue.

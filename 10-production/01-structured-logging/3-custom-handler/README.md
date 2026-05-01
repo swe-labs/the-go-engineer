@@ -70,4 +70,6 @@ Demonstrates how to manually iterate over the attributes in a `slog.Record` and 
 
 ## Next Step
 
-`slog` is the new standard, but older libraries still dominate many projects. Learn how they compare. Continue to [SL.4 Zerolog Comparison](../4-zerolog-comparison).
+Next: `SL.4` -> `10-production/01-structured-logging/4-zerolog-comparison`
+
+Open `10-production/01-structured-logging/4-zerolog-comparison/README.md` to continue.

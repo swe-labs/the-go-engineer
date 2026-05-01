@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("Tracing is expensive enough that you should know which paths matter and how sampling changes what you see.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: OPS.4")
+	fmt.Println("NEXT UP: OPS.4 -> 10-production/05-observability/4-feature-flags")
 	fmt.Println("Current: OPS.3 (distributed tracing basics)")
 	fmt.Println("---------------------------------------------------")
 }

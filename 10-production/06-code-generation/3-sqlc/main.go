@@ -73,7 +73,7 @@ func main() {
     }`)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: OPSL.1")
+	fmt.Println("NEXT UP: OPSL.1 -> 11-flagship/01-opslane/modules/01-foundation")
 	fmt.Println("   Current: CG.3 (sqlc workflow)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -100,7 +100,7 @@ func main() {
 	fmt.Println("  ✔ Table 'users' created successfully.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DB.2 query-insert")
+	fmt.Println("NEXT UP: DB.2 -> 06-backend-db/01-web-and-database/databases/2-query")
 	fmt.Println("Current: DB.1 (connecting-to-sqlite)")
 	fmt.Println("Previous: API.9 (grpc-service-exercise)")
 	fmt.Println("---------------------------------------------------")

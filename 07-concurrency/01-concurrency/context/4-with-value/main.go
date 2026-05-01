@@ -83,7 +83,7 @@ func main() {
 	fmt.Println("  4. Bad uses: database connections, loggers, config (use DI instead)")
 	fmt.Println("  5. Values are inherited by child contexts automatically")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CT.5 timeout-aware API client")
+	fmt.Println("NEXT UP: CT.5 -> 07-concurrency/01-concurrency/context/5-timeout-client")
 	fmt.Println("   Current: CT.4 (WithValue)")
 	fmt.Println("---------------------------------------------------")
 }

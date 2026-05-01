@@ -140,7 +140,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: API.4 protobuf-basics")
+	fmt.Println("NEXT UP: API.4 -> 06-backend-db/01-web-and-database/apis/4-protobuf-basics")
 	fmt.Println("Current: API.3 (pagination-and-filtering)")
 	fmt.Println("Previous: API.2 (api-versioning-strategies)")
 	fmt.Println("---------------------------------------------------")

@@ -112,6 +112,8 @@ func runReminder(seconds int, message string) {
 			fmt.Println("  - time.NewTicker fires at regular intervals on a channel")
 			fmt.Println("  - Always defer ticker.Stop() to prevent memory leaks")
 			fmt.Println("  - Use select to multiplex between ticker and done signals")
+			fmt.Println()
+			fmt.Println("NEXT UP: CP.1 -> 07-concurrency/02-concurrency-patterns/1-errgroup")
 			return
 		}
 	}

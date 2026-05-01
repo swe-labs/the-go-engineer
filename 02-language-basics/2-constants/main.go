@@ -61,7 +61,7 @@ func main() {
 	// along with the 'iota' keyword to create robust enumerations.
 	// See: ../3-enums/README.md
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: LB.3 enums")
+	fmt.Println("NEXT UP: LB.3 -> 02-language-basics/3-enums")
 	fmt.Println("Current: LB.2 (constants)")
 	fmt.Println("Previous: LB.1 (variables)")
 	fmt.Println("---------------------------------------------------")

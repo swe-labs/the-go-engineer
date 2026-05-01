@@ -156,7 +156,7 @@ func main() {
 	}()
 
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: PR.3")
+	fmt.Println("NEXT UP: PR.3 -> 08-quality-test/01-quality-and-performance/profiling/3-memory-profiling")
 	fmt.Println("Current: PR.2 (live pprof endpoint)")
 	fmt.Println("---------------------------------------------------")
 

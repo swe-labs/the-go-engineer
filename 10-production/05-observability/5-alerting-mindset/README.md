@@ -72,4 +72,6 @@ Shows how to include a URL to a runbook in the metadata of your prometheus alert
 
 ## Next Step
 
-Congratulations! You've completed the Observability track. Now learn how to package your application so it can be deployed to the cloud. Continue to [Track DOCKER: Containerization](../../03-docker-and-deployment).
+Next: `DOCKER.1` -> `10-production/03-docker-and-deployment/1-docker-basics`
+
+Open `10-production/03-docker-and-deployment/1-docker-basics/README.md` to continue.

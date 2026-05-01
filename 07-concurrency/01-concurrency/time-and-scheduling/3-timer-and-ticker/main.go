@@ -62,7 +62,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TM.7 console reminder")
+	fmt.Println("NEXT UP: TM.7 -> 07-concurrency/01-concurrency/time-and-scheduling/7-reminder")
 	fmt.Println("   Current: TM.3 (timers & tickers)")
 	fmt.Println("---------------------------------------------------")
 }

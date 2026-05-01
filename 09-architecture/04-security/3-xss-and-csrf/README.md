@@ -72,4 +72,6 @@ Demonstrates a form with and without a hidden `_csrf` token. You will see how th
 
 ## Next Step
 
-Protecting the browser is essential, but you also need to know *who* is making the request. Learn the basics of identity. Continue to [SEC.4 Authentication basics](../4-authentication-basics).
+Next: `SEC.4` -> `09-architecture/04-security/4-authentication-basics`
+
+Open `09-architecture/04-security/4-authentication-basics/README.md` to continue.

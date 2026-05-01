@@ -168,7 +168,7 @@ func main() {
 	// - Use a separate context with a deadline for the cleanup phase itself
 	// - defer db.Close() runs even when the process receives a signal
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GS.2 HTTP graceful drain")
+	fmt.Println("NEXT UP: GS.2 -> 10-production/02-graceful-shutdown/2-http-server")
 	fmt.Println("   Current: GS.1 (signal.NotifyContext)")
 	fmt.Println("---------------------------------------------------")
 }

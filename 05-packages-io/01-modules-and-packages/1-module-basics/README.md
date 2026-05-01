@@ -65,4 +65,6 @@ Never manually edit `go.sum`. If you have a checksum mismatch, it usually means 
 
 ## Next Step
 
-Continue to `MP.2` managing-deps.
+Next: `MP.2` -> `05-packages-io/01-modules-and-packages/2-managing-deps`
+
+Open `05-packages-io/01-modules-and-packages/2-managing-deps/README.md` to continue.

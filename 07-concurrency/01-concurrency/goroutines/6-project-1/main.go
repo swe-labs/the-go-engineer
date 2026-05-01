@@ -99,7 +99,7 @@ func main() {
 	<-done
 	fmt.Println("done")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.7 concurrent downloader")
+	fmt.Println("NEXT UP: GC.7 -> 07-concurrency/01-concurrency/goroutines/7-downloader")
 	fmt.Println("   Current: GC.6 (pipeline project)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -98,4 +98,4 @@ INFO opslane server gracefully stopped
 
 ## Next Step
 
-Congratulations! This completes the Opslane flagship architecture path.
+This path is complete. Return to the section README or continue with the next project milestone.

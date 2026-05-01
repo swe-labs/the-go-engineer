@@ -67,7 +67,7 @@ func main() {
 	fmt.Printf("Original after copy change:     %v\n", original)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DS.6 contact-manager")
+	fmt.Println("NEXT UP: DS.6 -> 02-language-basics/04-data-structures/6-contact-manager")
 	fmt.Println("Current: DS.5 (slices-2)")
 	fmt.Println("Previous: DS.4 (pointers)")
 	fmt.Println("---------------------------------------------------")

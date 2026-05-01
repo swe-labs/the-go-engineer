@@ -117,4 +117,6 @@ func main() {
 	fmt.Println("  - Use http.NewRequestWithContext to attach the context")
 	fmt.Println("  - Check ctx.Err() == context.DeadlineExceeded for timeout detection")
 	fmt.Println("  - Production default: 5-30 seconds for API calls, 1-5 seconds for health checks")
+	fmt.Println()
+	fmt.Println("NEXT UP: TM.1 -> 07-concurrency/01-concurrency/time-and-scheduling/1-time")
 }

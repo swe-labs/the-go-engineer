@@ -76,7 +76,7 @@ func main() {
 	fmt.Printf("In New York: %s\n", parsedTime.In(newYork))
 	fmt.Printf("In Tokyo: %s\n", parsedTime.In(tokyo))
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CP.1 errgroup basics")
+	fmt.Println("NEXT UP: CP.1 -> 07-concurrency/02-concurrency-patterns/1-errgroup")
 	fmt.Println("   Current: TM.6 (timezones)")
 	fmt.Println("---------------------------------------------------")
 }

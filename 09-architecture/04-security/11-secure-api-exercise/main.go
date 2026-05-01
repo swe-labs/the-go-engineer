@@ -35,4 +35,5 @@ func main() {
 	fmt.Println("- Treat the exercise as proof that security design is an engineering concern, not a checklist afterthought.")
 	fmt.Println()
 	fmt.Println("Secure systems are built from layered controls that keep working even when one layer is stressed or misused.")
+	fmt.Println("NEXT UP: SL.1 -> 10-production/01-structured-logging/1-slog-basics")
 }

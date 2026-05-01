@@ -72,4 +72,6 @@ Discusses why the binary should never be modified once it is compiled (Build -> 
 
 ## Next Step
 
-Config is only useful if it's correct. Learn how to validate your application settings before the first user request arrives. Continue to [CFG.5 Validation on Boot](../5-config-validation-on-boot).
+Next: `CFG.5` -> `10-production/04-configuration/5-config-validation-on-boot`
+
+Open `10-production/04-configuration/5-config-validation-on-boot/README.md` to continue.

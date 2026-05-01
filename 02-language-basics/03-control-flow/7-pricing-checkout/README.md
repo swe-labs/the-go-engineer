@@ -101,4 +101,6 @@ Checkout logic is exactly where control-flow mistakes become money mistakes. Cle
 
 ## Next Step
 
-Continue to `DS.1` arrays.
+Next: `DS.1` -> `02-language-basics/04-data-structures/1-array`
+
+Open `02-language-basics/04-data-structures/1-array/README.md` to continue.

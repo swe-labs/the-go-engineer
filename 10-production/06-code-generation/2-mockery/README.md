@@ -75,4 +75,6 @@ Shows how to use the generated mock in a real unit test, including setting up re
 
 ## Next Step
 
-Mocks solve the testing problem. Now let's solve the data-access problem. Continue to [CG.3 sqlc Workflow](../3-sqlc).
+Next: `CG.3` -> `10-production/06-code-generation/3-sqlc`
+
+Open `10-production/06-code-generation/3-sqlc/README.md` to continue.

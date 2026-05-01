@@ -42,6 +42,8 @@ The repository layer owns persistence concerns. It should not absorb auth rules 
 - Where do transactions belong when multiple rows must change together?
 - What query patterns deserve indexes now versus later?
 
-## Next Module
+## Next Step
 
-Continue to [OPSL.3 Authentication and Tenant Isolation](../03-auth/README.md).
+Next: `OPSL.3` -> `11-flagship/01-opslane/modules/03-auth`
+
+Open `11-flagship/01-opslane/modules/03-auth/README.md` to continue.

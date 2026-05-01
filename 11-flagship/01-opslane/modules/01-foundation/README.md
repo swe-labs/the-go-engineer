@@ -43,6 +43,8 @@ Do not move tenant, auth, or business logic into the config package.
 - Which secrets should never have production defaults?
 - How do you keep local overrides explicit without hard-coding environment behavior in handlers?
 
-## Next Module
+## Next Step
 
-Continue to [OPSL.2 Database and Models](../02-database/README.md).
+Next: `OPSL.2` -> `11-flagship/01-opslane/modules/02-database`
+
+Open `11-flagship/01-opslane/modules/02-database/README.md` to continue.

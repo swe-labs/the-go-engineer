@@ -62,4 +62,6 @@ Reading compiler errors quickly is the difference between a 30-second fix and a 
 
 ## Next Step
 
-Continue to `LB.1` variables.
+Next: `LB.1` -> `02-language-basics/1-variables`
+
+Open `02-language-basics/1-variables/README.md` to continue.

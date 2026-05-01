@@ -71,7 +71,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", mux))
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: MC.2 dependency-injection")
+	fmt.Println("NEXT UP: MC.2 -> 06-backend-db/01-web-and-database/web-masterclass/2-dependency-injection")
 	fmt.Println("Current: MC.1 (routing)")
 	fmt.Println("Previous: DM.1 (embedded-migrations)")
 	fmt.Println("---------------------------------------------------")

@@ -70,4 +70,6 @@ go test -v ./10-production/01-structured-logging/5-exercise
 
 ## Next Step
 
-Congratulations! You've mastered Structured Logging. Now learn how to shut down your system without dropping any of these logs. Continue to [GS.1 Signal Handling](../../02-graceful-shutdown/1-signal-context).
+Next: `GS.1` -> `10-production/02-graceful-shutdown/1-signal-context`
+
+Open `10-production/02-graceful-shutdown/1-signal-context/README.md` to continue.

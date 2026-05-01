@@ -58,7 +58,7 @@ func main() {
 	fmt.Printf("Copy:     %v\n", copied)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DS.2 slices")
+	fmt.Println("NEXT UP: DS.2 -> 02-language-basics/04-data-structures/2-slices")
 	fmt.Println("Current: DS.1 (arrays)")
 	fmt.Println("Previous: CF.7 (pricing-checkout)")
 	fmt.Println("---------------------------------------------------")

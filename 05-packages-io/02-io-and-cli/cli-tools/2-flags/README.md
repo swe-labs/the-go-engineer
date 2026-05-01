@@ -77,4 +77,6 @@ The standard `flag` package uses the single-dash format (`-flag`) which is sligh
 
 ## Next Step
 
-Continue to `CL.3` subcommands.
+Next: `CL.3` -> `05-packages-io/02-io-and-cli/cli-tools/3-subcommands`
+
+Open `05-packages-io/02-io-and-cli/cli-tools/3-subcommands/README.md` to continue.

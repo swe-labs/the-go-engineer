@@ -72,4 +72,6 @@ Returns the number of rows changed by the query. For an `INSERT`, this should al
 
 ## Next Step
 
-Continue to `DB.3` select.
+Next: `DB.3` -> `06-backend-db/01-web-and-database/databases/3-select`
+
+Open `06-backend-db/01-web-and-database/databases/3-select/README.md` to continue.

@@ -38,7 +38,7 @@ func main() {
 	fmt.Println("Multi-stage builds reduce both artifact size and the number of unnecessary tools shipped into production.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: DOCKER.3")
+	fmt.Println("NEXT UP: DOCKER.3 -> 10-production/03-docker-and-deployment/3-docker-compose")
 	fmt.Println("Current: DOCKER.2 (multi-stage builds)")
 	fmt.Println("---------------------------------------------------")
 }

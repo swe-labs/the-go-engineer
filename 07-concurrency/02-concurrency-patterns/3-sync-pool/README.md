@@ -92,4 +92,6 @@ Pooling adds complexity and can lead to subtle bugs (like data leaking between r
 
 ## Next Step
 
-We've mastered the building blocks. Now let's combine them into a high-performance architecture. Continue to [CP.4 Bounded Pipeline](../4-bounded-pipeline-exercise/README.md).
+Next: `CP.4` -> `07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise`
+
+Open `07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise/README.md` to continue.

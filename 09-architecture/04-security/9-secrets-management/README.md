@@ -67,4 +67,6 @@ Shows how a simple `fmt.Printf("%+v", config)` can accidentally leak an API key 
 
 ## Next Step
 
-Secrets protect your access, but you also need to protect against the broader landscape of web attacks. Learn the industry standard list of risks. Continue to [SEC.10 OWASP Top 10 for Go](../10-owasp-top-10-for-go).
+Next: `SEC.10` -> `09-architecture/04-security/10-owasp-top-10-for-go`
+
+Open `09-architecture/04-security/10-owasp-top-10-for-go/README.md` to continue.

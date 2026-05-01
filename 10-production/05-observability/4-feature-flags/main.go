@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("Flags should have owners, expiry expectations, and observability. Permanent forgotten flags become dead architecture.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: OPS.5")
+	fmt.Println("NEXT UP: OPS.5 -> 10-production/05-observability/5-alerting-mindset")
 	fmt.Println("Current: OPS.4 (feature flags)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -70,4 +70,6 @@ go tool pprof http://localhost:6060/debug/pprof/heap
 
 ## Next Step
 
-CPU is only half the story. Learn how to track down memory usage. Continue to [PR.3 Memory Profiling](../3-memory-profiling).
+Next: `PR.3` -> `08-quality-test/01-quality-and-performance/profiling/3-memory-profiling`
+
+Open `08-quality-test/01-quality-and-performance/profiling/3-memory-profiling/README.md` to continue.

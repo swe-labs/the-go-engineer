@@ -137,7 +137,7 @@ func main() {
 	fmt.Println("Processed:", processRequest("usr_99", "req_002"))
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CP.4 bounded pipeline exercise")
+	fmt.Println("NEXT UP: CP.4 -> 07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise")
 	fmt.Println("   Current: CP.3 (sync.Pool)")
 	fmt.Println("---------------------------------------------------")
 }

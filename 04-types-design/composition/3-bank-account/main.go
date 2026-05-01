@@ -172,7 +172,7 @@ func main() {
 	fmt.Println("Final Overdraft Details:", ovdAcc.Account.String())
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: ST.1 strings")
+	fmt.Println("NEXT UP: ST.1 -> 04-types-design/strings-and-text/1-strings")
 	fmt.Println("Current: CO.3 (bank-account-project)")
 	fmt.Println("Previous: CO.2 (embedding)")
 	fmt.Println("---------------------------------------------------")

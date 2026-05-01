@@ -51,7 +51,7 @@ func main() {
 	// use 'switch' to evaluate multiple discrete branches cleanly.
 	// See: ../4-switch/README.md
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CF.4 switch")
+	fmt.Println("NEXT UP: CF.4 -> 02-language-basics/03-control-flow/4-switch")
 	fmt.Println("Current: CF.3 (break / continue)")
 	fmt.Println("Previous: CF.2 (for basics)")
 	fmt.Println("---------------------------------------------------")

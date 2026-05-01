@@ -109,7 +109,7 @@ func main() {
 	ProcessPayroll(payrollList)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.11 dynamic-typing-with-any")
+	fmt.Println("NEXT UP: TI.11 -> 04-types-design/11-dynamic-typing-with-any")
 	fmt.Println("Current: TI.10 (payroll-processor)")
 	fmt.Println("Previous: TI.9 (generics)")
 	fmt.Println("---------------------------------------------------")

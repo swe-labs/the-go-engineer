@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("Flags are best when the operator should see and choose the value at launch time instead of through ambient environment state.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: CFG.4")
+	fmt.Println("NEXT UP: CFG.4 -> 10-production/04-configuration/4-twelve-factor-principles")
 	fmt.Println("Current: CFG.3 (flag parsing)")
 	fmt.Println("---------------------------------------------------")
 }

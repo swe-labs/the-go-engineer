@@ -77,4 +77,6 @@ Shows how to use `healthcheck` in Compose to ensure the database is actually rea
 
 ## Next Step
 
-Packaging is done. Now learn how to automate the path from "Code Push" to "Live Service." Continue to [DEPLOY.1 CI/CD Pipelines](../4-cicd-pipelines).
+Next: `DEPLOY.1` -> `10-production/03-docker-and-deployment/4-cicd-pipelines`
+
+Open `10-production/03-docker-and-deployment/4-cicd-pipelines/README.md` to continue.

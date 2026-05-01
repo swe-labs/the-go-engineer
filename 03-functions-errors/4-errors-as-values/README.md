@@ -161,4 +161,6 @@ Returning errors as values keeps the success path and failure path readable.
 
 ## Next Step
 
-Continue to `FE.5` validation.
+Next: `FE.5` -> `03-functions-errors/5-validation`
+
+Open `03-functions-errors/5-validation/README.md` to continue.

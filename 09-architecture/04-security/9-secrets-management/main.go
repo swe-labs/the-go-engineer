@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Most secret leaks are boring process failures, not cryptographic failures: committed files, copied logs, and reused credentials.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: SEC.10")
+	fmt.Println("NEXT UP: SEC.10 -> 09-architecture/04-security/10-owasp-top-10-for-go")
 	fmt.Println("Current: SEC.9 (secrets management)")
 	fmt.Println("---------------------------------------------------")
 }

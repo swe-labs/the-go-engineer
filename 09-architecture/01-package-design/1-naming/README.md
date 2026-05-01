@@ -61,4 +61,6 @@ Shows how a `util` package becomes a "junk drawer" that makes dependency managem
 
 ## Next Step
 
-After naming your boxes, learn how to lock them. Continue to [PD.2 Visibility and Export Rules](../2-visibility).
+Next: `PD.2` -> `09-architecture/01-package-design/2-visibility`
+
+Open `09-architecture/01-package-design/2-visibility/README.md` to continue.

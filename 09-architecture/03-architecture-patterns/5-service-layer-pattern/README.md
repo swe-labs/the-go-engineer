@@ -65,4 +65,6 @@ Shows how the same logic is moved into a `UserService` struct. This service can 
 
 ## Next Step
 
-Sometimes, coordination needs to happen *after* a task is finished. Learn how to decouple components even further. Continue to [ARCH.6 Event-driven architecture](../6-event-driven-architecture).
+Next: `ARCH.6` -> `09-architecture/03-architecture-patterns/6-event-driven-architecture`
+
+Open `09-architecture/03-architecture-patterns/6-event-driven-architecture/README.md` to continue.

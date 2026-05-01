@@ -93,7 +93,7 @@ func main() {
 	// We will use these exact logging enum techniques to build a real
 	// application logger in the next exercise: ../4-application-logger/README.md
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: LB.4 application-logger")
+	fmt.Println("NEXT UP: LB.4 -> 02-language-basics/4-application-logger")
 	fmt.Println("Current: LB.3 (enums)")
 	fmt.Println("Previous: LB.2 (constants)")
 	fmt.Println("---------------------------------------------------")

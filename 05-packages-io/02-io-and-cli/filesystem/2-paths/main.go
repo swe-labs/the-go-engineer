@@ -138,7 +138,7 @@ func main() {
 	fmt.Println("  - filepath is cross-platform - works on Linux, macOS, AND Windows")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FS.3 directories")
+	fmt.Println("NEXT UP: FS.3 -> 05-packages-io/02-io-and-cli/filesystem/3-dir")
 	fmt.Println("Current: FS.2 (paths)")
 	fmt.Println("Previous: FS.1 (files)")
 	fmt.Println("---------------------------------------------------")

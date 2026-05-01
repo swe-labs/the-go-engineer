@@ -127,7 +127,7 @@ func main() {
 	fmt.Println("  4. Check ctx.Err() to distinguish DeadlineExceeded vs Canceled")
 	fmt.Println("  5. PRODUCTION RULE: Never call a DB or API without a timeout context")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CT.4 WithValue")
+	fmt.Println("NEXT UP: CT.4 -> 07-concurrency/01-concurrency/context/4-with-value")
 	fmt.Println("   Current: CT.3 (WithTimeout)")
 	fmt.Println("---------------------------------------------------")
 }

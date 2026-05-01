@@ -115,7 +115,7 @@ func main() {
 	fmt.Println("  - Use method values as callbacks and event handlers")
 	fmt.Println("  - Each instance's method value is independent")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.14 complex-generic-constraints")
+	fmt.Println("NEXT UP: TI.14 -> 04-types-design/14-complex-generic-constraints")
 	fmt.Println("Current: TI.13 (method-values)")
 	fmt.Println("Previous: TI.12 (functional-options)")
 	fmt.Println("---------------------------------------------------")

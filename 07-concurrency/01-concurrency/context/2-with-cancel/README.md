@@ -93,4 +93,6 @@ Even if your logic is correct, the Go runtime keeps the context in memory (and i
 
 ## Next Step
 
-We've learned to cancel manually. Now let's learn how to set a "Self-Destruct" timer. Continue to [CT.3 Context Timeouts](../3-with-timeout/README.md).
+Next: `CT.3` -> `07-concurrency/01-concurrency/context/3-with-timeout`
+
+Open `07-concurrency/01-concurrency/context/3-with-timeout/README.md` to continue.

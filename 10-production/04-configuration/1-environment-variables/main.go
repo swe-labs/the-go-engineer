@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("Environment variables are simple and ubiquitous, but they need documentation and validation to stay reliable.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: CFG.2")
+	fmt.Println("NEXT UP: CFG.2 -> 10-production/04-configuration/2-configuration-files")
 	fmt.Println("Current: CFG.1 (environment variables)")
 	fmt.Println("---------------------------------------------------")
 }

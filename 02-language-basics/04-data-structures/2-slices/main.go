@@ -59,7 +59,7 @@ func main() {
 	fmt.Printf("lastTwo := items[2:] -> %v\n", lastTwo)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DS.3 maps")
+	fmt.Println("NEXT UP: DS.3 -> 02-language-basics/04-data-structures/3-maps")
 	fmt.Println("Current: DS.2 (slices)")
 	fmt.Println("Previous: DS.1 (arrays)")
 	fmt.Println("---------------------------------------------------")

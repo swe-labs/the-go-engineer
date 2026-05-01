@@ -102,4 +102,6 @@ They might not show up on your local machine, but they will crash your productio
 
 ## Next Step
 
-We've learned how to fix shared state. Now let's look at bugs that cause our programs to grow in memory until they crash. Continue to [SY.5 Goroutine Leaks](../5-goroutine-leaks/README.md).
+Next: `SY.5` -> `07-concurrency/01-concurrency/sync-primitives/5-goroutine-leaks`
+
+Open `07-concurrency/01-concurrency/sync-primitives/5-goroutine-leaks/README.md` to continue.

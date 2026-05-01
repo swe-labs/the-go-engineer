@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Auth systems fail when identity, session storage, and permission checks blur together without clear ownership.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: SEC.5")
+	fmt.Println("NEXT UP: SEC.5 -> 09-architecture/04-security/5-jwt-implementation-and-risks")
 	fmt.Println("Current: SEC.4 (authentication basics)")
 	fmt.Println("---------------------------------------------------")
 }

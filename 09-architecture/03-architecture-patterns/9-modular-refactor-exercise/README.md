@@ -80,4 +80,6 @@ go test ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise
 
 ## Next Step
 
-Architecture is nothing without security. Learn how to protect your modular masterpiece. Continue to [SEC.1 Input validation patterns](../../04-security/1-input-validation-patterns).
+Next: `SEC.1` -> `09-architecture/04-security/1-input-validation-patterns`
+
+Open `09-architecture/04-security/1-input-validation-patterns/README.md` to continue.

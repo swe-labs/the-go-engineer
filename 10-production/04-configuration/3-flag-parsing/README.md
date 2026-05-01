@@ -73,4 +73,6 @@ Shows a production pattern: loading a config file first, then checking if the fl
 
 ## Next Step
 
-Now that you know the "How," learn the "Why" of modern configuration. Continue to [CFG.4 12-Factor Principles](../4-twelve-factor-principles).
+Next: `CFG.4` -> `10-production/04-configuration/4-twelve-factor-principles`
+
+Open `10-production/04-configuration/4-twelve-factor-principles/README.md` to continue.

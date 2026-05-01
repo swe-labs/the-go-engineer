@@ -92,4 +92,6 @@ Atomics are harder to read and reason about than Mutexes. Only reach for `sync/a
 
 ## Next Step
 
-We've mastered the tools. Now let's dive deep into the most common bug that forces us to use them. Continue to [SY.4 Race Conditions](../4-race-conditions/README.md).
+Next: `SY.4` -> `07-concurrency/01-concurrency/sync-primitives/4-race-conditions`
+
+Open `07-concurrency/01-concurrency/sync-primitives/4-race-conditions/README.md` to continue.

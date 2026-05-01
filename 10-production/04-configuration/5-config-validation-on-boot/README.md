@@ -76,4 +76,6 @@ Shows why you should return "Missing DATABASE_URL" instead of a generic "Invalid
 
 ## Next Step
 
-Congratulations! You've mastered application configuration. Now learn how to watch your application's health and performance in real-time. Continue to [Track OPS: Observability](../../05-observability).
+Next: `OPS.1` -> `10-production/05-observability/1-metrics-basics`
+
+Open `10-production/05-observability/1-metrics-basics/README.md` to continue.

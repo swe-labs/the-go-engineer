@@ -89,7 +89,7 @@ func main() {
 	fmt.Println("\n  Batch insertion complete.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DB.5 transactions")
+	fmt.Println("NEXT UP: DB.5 -> 06-backend-db/01-web-and-database/databases/5-transactions")
 	fmt.Println("Current: DB.4 (prepare-statements)")
 	fmt.Println("Previous: DB.3 (select-queries)")
 	fmt.Println("---------------------------------------------------")

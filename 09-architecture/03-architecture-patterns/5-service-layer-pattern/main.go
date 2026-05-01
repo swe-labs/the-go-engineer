@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Service layers are where cross-entity rules, retries, and error classification often belong.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: ARCH.6")
+	fmt.Println("NEXT UP: ARCH.6 -> 09-architecture/03-architecture-patterns/6-event-driven-architecture")
 	fmt.Println("Current: ARCH.5 (service layer pattern)")
 	fmt.Println("---------------------------------------------------")
 }

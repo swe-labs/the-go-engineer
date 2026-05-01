@@ -94,4 +94,6 @@ If you are measuring how long a database query took, always use `time.Since(star
 
 ## Next Step
 
-We've mastered the basics. Now let's learn how to present time to humans in different formats. Continue to [TM.2 Formatting](../2-formatting/README.md).
+Next: `TM.2` -> `07-concurrency/01-concurrency/time-and-scheduling/2-formatting`
+
+Open `07-concurrency/01-concurrency/time-and-scheduling/2-formatting/README.md` to continue.

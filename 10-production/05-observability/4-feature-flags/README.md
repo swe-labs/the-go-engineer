@@ -69,4 +69,6 @@ Discusses why flags should be short-lived and how to track their usage with metr
 
 ## Next Step
 
-Monitoring is a tool, but "Alerting" is a culture. Learn how to respond when the numbers look bad. Continue to [OPS.5 Alerting Mindset](../5-alerting-mindset).
+Next: `OPS.5` -> `10-production/05-observability/5-alerting-mindset`
+
+Open `10-production/05-observability/5-alerting-mindset/README.md` to continue.

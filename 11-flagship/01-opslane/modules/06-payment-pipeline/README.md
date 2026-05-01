@@ -116,6 +116,8 @@ not know whether the external provider eventually charged the customer.
 - How do you stop duplicate payment attempts from becoming duplicate charges?
 - What should happen when success is observed locally but the follow-up callback never arrives?
 
-## Next Module
+## Next Step
 
-Continue to [OPSL.7 Event Bus and Worker Pools](../07-event-workers/README.md).
+Next: `OPSL.7` -> `11-flagship/01-opslane/modules/07-event-workers`
+
+Open `11-flagship/01-opslane/modules/07-event-workers/README.md` to continue.

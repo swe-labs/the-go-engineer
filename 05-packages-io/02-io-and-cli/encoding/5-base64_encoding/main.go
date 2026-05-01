@@ -93,7 +93,7 @@ func main() {
 	fmt.Println("  - Base64 increases data size by about 33%")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: EN.6 config-parser")
+	fmt.Println("NEXT UP: EN.6 -> 05-packages-io/02-io-and-cli/encoding/6-config-parser")
 	fmt.Println("Current: EN.5 (base64_encoding)")
 	fmt.Println("Previous: EN.4 (decode)")
 	fmt.Println("---------------------------------------------------")

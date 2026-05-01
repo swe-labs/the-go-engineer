@@ -86,4 +86,6 @@ Any tool that moves or deletes files must be treated with extreme caution. Alway
 
 ## Next Step
 
-Continue to `EN.1` marshalling.
+Next: `EN.1` -> `05-packages-io/02-io-and-cli/encoding/1-marshalling`
+
+Open `05-packages-io/02-io-and-cli/encoding/1-marshalling/README.md` to continue.

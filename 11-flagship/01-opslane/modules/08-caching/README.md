@@ -112,6 +112,8 @@ before the next `Get` call.
 - What should invalidate cached order or payment data?
 - How will you prevent stampedes when hot keys expire?
 
-## Next Module
+## Next Step
 
-Continue to [OPSL.9 Observability](../09-observability/README.md).
+Next: `OPSL.9` -> `11-flagship/01-opslane/modules/09-observability`
+
+Open `11-flagship/01-opslane/modules/09-observability/README.md` to continue.

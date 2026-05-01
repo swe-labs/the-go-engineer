@@ -78,7 +78,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HS.3 middleware-pattern")
+	fmt.Println("NEXT UP: HS.3 -> 06-backend-db/01-web-and-database/http-servers/3-middleware-pattern")
 	fmt.Println("Current: HS.2 (routing-patterns)")
 	fmt.Println("Previous: HS.1 (net/http-basics)")
 	fmt.Println("---------------------------------------------------")

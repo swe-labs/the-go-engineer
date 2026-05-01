@@ -92,4 +92,6 @@ If you have multiple senders, closing is more complex (you might need a `sync.On
 
 ## Next Step
 
-We've mastered the basics. Now let's put it all together into a real concurrency project. Continue to [GC.6 Pipeline Project](../6-project-1/README.md).
+Next: `GC.6` -> `07-concurrency/01-concurrency/goroutines/6-project-1`
+
+Open `07-concurrency/01-concurrency/goroutines/6-project-1/README.md` to continue.

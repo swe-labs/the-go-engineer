@@ -81,7 +81,7 @@ func main() {
 	// See: ../../04-data-structures/1-array/README.md
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: DS.1 arrays")
+	fmt.Println("NEXT UP: DS.1 -> 02-language-basics/04-data-structures/1-array")
 	fmt.Println("Current: CF.7 (pricing-checkout)")
 	fmt.Println("Previous: CF.6 (defer-use-cases)")
 	fmt.Println("---------------------------------------------------")

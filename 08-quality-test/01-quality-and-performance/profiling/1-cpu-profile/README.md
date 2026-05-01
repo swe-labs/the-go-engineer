@@ -68,4 +68,6 @@ The code includes a "Heavy Workload" (e.g., intensive string manipulation or mat
 
 ## Next Step
 
-Profiling a running server requires a different approach. Continue to [PR.2 Live pprof](../3-http-pprof).
+Next: `PR.2` -> `08-quality-test/01-quality-and-performance/profiling/3-http-pprof`
+
+Open `08-quality-test/01-quality-and-performance/profiling/3-http-pprof/README.md` to continue.

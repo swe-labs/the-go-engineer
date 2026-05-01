@@ -68,4 +68,6 @@ Resource leaks (unclosed files or database connections) are a major source of pr
 
 ## Next Step
 
-Continue to `CF.7` pricing checkout.
+Next: `CF.7` -> `02-language-basics/03-control-flow/7-pricing-checkout`
+
+Open `02-language-basics/03-control-flow/7-pricing-checkout/README.md` to continue.

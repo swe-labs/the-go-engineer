@@ -38,7 +38,7 @@ func main() {
 	fmt.Println("Production readiness is a property of the whole delivery path, not just the application source.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: CG.1")
+	fmt.Println("NEXT UP: CG.1 -> 10-production/06-code-generation/1-go-generate")
 	fmt.Println("   Current: DEPLOY.3 (dockerised service)")
 	fmt.Println("---------------------------------------------------")
 }

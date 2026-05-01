@@ -89,7 +89,7 @@ func main() {
 
 	fmt.Println("Awake after sleep!")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TM.2 formatting")
+	fmt.Println("NEXT UP: TM.2 -> 07-concurrency/01-concurrency/time-and-scheduling/2-formatting")
 	fmt.Println("   Current: TM.1 (time basics)")
 	fmt.Println("---------------------------------------------------")
 }

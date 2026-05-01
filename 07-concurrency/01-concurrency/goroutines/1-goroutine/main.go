@@ -141,7 +141,7 @@ func main() {
 	fmt.Println("  - The main goroutine must wait, or it will exit (killing all goroutines)")
 	fmt.Println("  - Next: go run ./07-concurrency/01-concurrency/goroutines/2-wait-group (deeper WaitGroup patterns)")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.2 WaitGroups")
+	fmt.Println("NEXT UP: GC.2 -> 07-concurrency/01-concurrency/goroutines/2-wait-group")
 	fmt.Println("   Current: GC.1 (goroutines)")
 	fmt.Println("---------------------------------------------------")
 }

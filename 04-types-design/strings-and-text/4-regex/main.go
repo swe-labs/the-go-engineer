@@ -148,7 +148,7 @@ func main() {
 	fmt.Println("  - Capture groups ( ) extract structured data from text")
 	fmt.Println("  - Named groups (?P<name>) improve readability")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: ST.5 text-template")
+	fmt.Println("NEXT UP: ST.5 -> 04-types-design/strings-and-text/5-text-template")
 	fmt.Println("Current: ST.4 (regex)")
 	fmt.Println("Previous: ST.3 (unicode-and-runes)")
 	fmt.Println("---------------------------------------------------")

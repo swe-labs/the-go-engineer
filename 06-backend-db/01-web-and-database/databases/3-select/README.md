@@ -77,4 +77,6 @@ For very large result sets (e.g., 1,000,000 rows), do not load them all into a s
 
 ## Next Step
 
-Continue to `DB.4 prepare-statements.
+Next: `DB.4` -> `06-backend-db/01-web-and-database/databases/4-prepare`
+
+Open `06-backend-db/01-web-and-database/databases/4-prepare/README.md` to continue.

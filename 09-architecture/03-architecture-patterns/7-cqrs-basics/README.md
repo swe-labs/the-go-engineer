@@ -66,4 +66,6 @@ A flat, simple struct optimized for a "Recent Orders" dashboard. It doesn't have
 
 ## Next Step
 
-Now that you can scale your data, learn when it's time to scale your services. Continue to [ARCH.8 When to split services](../8-when-to-split-services).
+Next: `ARCH.8` -> `09-architecture/03-architecture-patterns/8-when-to-split-services`
+
+Open `09-architecture/03-architecture-patterns/8-when-to-split-services/README.md` to continue.

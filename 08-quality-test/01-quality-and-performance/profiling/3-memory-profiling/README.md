@@ -70,4 +70,6 @@ The code creates a scenario where memory is allocated but not released (e.g., ap
 
 ## Next Step
 
-Now that you can see the memory, let's understand how Go decides where to put it. Continue to [PR.4 Escape Analysis](../4-escape-analysis).
+Next: `PR.4` -> `08-quality-test/01-quality-and-performance/profiling/4-escape-analysis`
+
+Open `08-quality-test/01-quality-and-performance/profiling/4-escape-analysis/README.md` to continue.

@@ -79,4 +79,6 @@ Method sets affect API design. If you export a type that only has pointer receiv
 
 ## Next Step
 
-Continue to `TI.8` custom-errors.
+Next: `TI.8` -> `04-types-design/8-custom-errors`
+
+Open `04-types-design/8-custom-errors/README.md` to continue.

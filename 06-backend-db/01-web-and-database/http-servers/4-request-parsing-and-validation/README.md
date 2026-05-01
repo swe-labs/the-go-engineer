@@ -83,4 +83,6 @@ For complex validation, most Go teams use a validation library like **Go-Playgro
 
 ## Next Step
 
-Continue to `HS.5` response-writing-patterns.
+Next: `HS.5` -> `06-backend-db/01-web-and-database/http-servers/5-response-writing-patterns`
+
+Open `06-backend-db/01-web-and-database/http-servers/5-response-writing-patterns/README.md` to continue.

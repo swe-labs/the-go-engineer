@@ -43,7 +43,7 @@ func main() {
 	// See: ../7-pricing-checkout/README.md
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: CF.7 pricing-checkout")
+	fmt.Println("NEXT UP: CF.7 -> 02-language-basics/03-control-flow/7-pricing-checkout")
 	fmt.Println("Current: CF.6 (defer-use-cases)")
 	fmt.Println("Previous: CF.5 (defer-basics)")
 	fmt.Println("---------------------------------------------------")

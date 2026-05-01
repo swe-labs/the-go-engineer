@@ -102,4 +102,6 @@ Interfaces are Go's primary tool for abstraction and testing. They let you write
 
 ## Next Step
 
-Continue to `TI.4` interface embedding.
+Next: `TI.4` -> `04-types-design/4-interface-embedding`
+
+Open `04-types-design/4-interface-embedding/README.md` to continue.

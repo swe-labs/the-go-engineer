@@ -79,7 +79,7 @@ func main() {
 	}
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: DB.6 repository")
+	fmt.Println("NEXT UP: DB.6 -> 06-backend-db/01-web-and-database/databases/6-repository")
 	fmt.Println("Current: DB.5 (transactions)")
 	fmt.Println("Previous: DB.4 (prepare-statements)")
 	fmt.Println("---------------------------------------------------")

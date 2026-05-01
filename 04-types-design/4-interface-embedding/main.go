@@ -88,7 +88,7 @@ func main() {
 	fmt.Println("  - io.ReadWriter = io.Reader + io.Writer")
 	fmt.Println("  - Embedding is static: compiler verifies all methods exist")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.5 stringer")
+	fmt.Println("NEXT UP: TI.5 -> 04-types-design/5-stringer")
 	fmt.Println("Current: TI.4 (interface-embedding)")
 	fmt.Println("Previous: TI.3 (interfaces)")
 	fmt.Println("---------------------------------------------------")

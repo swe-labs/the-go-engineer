@@ -66,7 +66,7 @@ func main() {
 	// You will learn how the 'fmt' package formats text in detail in:
 	// ../../05-packages-io/02-io-and-cli/cli-tools/1-args/README.md
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: LB.2 constants")
+	fmt.Println("NEXT UP: LB.2 -> 02-language-basics/2-constants")
 	fmt.Println("Current: LB.1 (variables)")
 	fmt.Println("Previous: none")
 	fmt.Println("---------------------------------------------------")

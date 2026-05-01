@@ -63,4 +63,6 @@ Shows how to "Script" the mock to return an error, proving that the business log
 
 ## Next Step
 
-Now that you've tested in isolation, it's time to test the real thing. Continue to [TE.9 Integration Testing](../9-integration-tests).
+Next: `TE.9` -> `08-quality-test/01-quality-and-performance/testing/9-integration-tests`
+
+Open `08-quality-test/01-quality-and-performance/testing/9-integration-tests/README.md` to continue.

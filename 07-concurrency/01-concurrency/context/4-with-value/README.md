@@ -88,4 +88,6 @@ If a function requires a `UserID` to work, it's usually better to pass it as an 
 
 ## Next Step
 
-We've mastered all the parts of the Context. Now let's put it to work in a real-world scenario: making an HTTP client that never hangs. Continue to [CT.5 Timeout HTTP Client](../5-timeout-client/README.md).
+Next: `CT.5` -> `07-concurrency/01-concurrency/context/5-timeout-client`
+
+Open `07-concurrency/01-concurrency/context/5-timeout-client/README.md` to continue.

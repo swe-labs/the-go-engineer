@@ -58,7 +58,7 @@ func main() {
 	fmt.Println(GetSystemDetails())
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CL.1 args")
+	fmt.Println("NEXT UP: CL.1 -> 05-packages-io/02-io-and-cli/cli-tools/1-args")
 	fmt.Println("Current: MP.4 (build-tags)")
 	fmt.Println("Previous: MP.3 (versioning-workshop)")
 	fmt.Println("---------------------------------------------------")

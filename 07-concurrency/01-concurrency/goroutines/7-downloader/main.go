@@ -206,5 +206,6 @@ func main() {
 	}
 
 	log.Println("Done")
+	fmt.Println("NEXT UP: SY.1 -> 07-concurrency/01-concurrency/sync-primitives/1-mutex-and-rwmutex")
 
 }

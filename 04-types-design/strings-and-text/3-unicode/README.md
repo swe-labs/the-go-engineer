@@ -79,4 +79,6 @@ Unicode bugs are real production bugs. Counting bytes when you meant characters,
 
 ## Next Step
 
-Continue to `ST.4` regex.
+Next: `ST.4` -> `04-types-design/strings-and-text/4-regex`
+
+Open `04-types-design/strings-and-text/4-regex/README.md` to continue.

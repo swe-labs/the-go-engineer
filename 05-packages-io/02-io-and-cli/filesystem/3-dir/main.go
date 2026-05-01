@@ -178,7 +178,7 @@ func main() {
 	fmt.Println("  - Always use filepath.Join for cross-platform paths")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FS.4 temp")
+	fmt.Println("NEXT UP: FS.4 -> 05-packages-io/02-io-and-cli/filesystem/4-temp")
 	fmt.Println("Current: FS.3 (dir)")
 	fmt.Println("Previous: FS.2 (paths)")
 	fmt.Println("---------------------------------------------------")

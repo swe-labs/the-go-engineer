@@ -69,4 +69,6 @@ Shows a common pattern where a server listens on port 80 (HTTP) only to redirect
 
 ## Next Step
 
-Encryption protects the data in transit, but you still have to manage the keys that make it work. Learn how to keep your secrets secret. Continue to [SEC.9 Secrets management](../9-secrets-management).
+Next: `SEC.9` -> `09-architecture/04-security/9-secrets-management`
+
+Open `09-architecture/04-security/9-secrets-management/README.md` to continue.

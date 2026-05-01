@@ -39,7 +39,7 @@ func main() {
 
 	// - Programs can write to multiple output streams
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: HC.5 5-os-processes")
+	fmt.Println("NEXT UP: HC.5 -> 00-how-computers-work/5-os-processes")
 	fmt.Println("Run    : go run ./00-how-computers-work/5-os-processes")
 	fmt.Println("Current: HC.4 (4-terminal-confidence)")
 	fmt.Println("---------------------------------------------------")

@@ -90,7 +90,7 @@ func main() {
     }`)
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: CG.3 sqlc workflow")
+	fmt.Println("NEXT UP: CG.3 -> 10-production/06-code-generation/3-sqlc")
 	fmt.Println("   Current: CG.2 (mockery workflow)")
 	fmt.Println("---------------------------------------------------")
 }

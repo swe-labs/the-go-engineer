@@ -132,6 +132,7 @@ func main() {
 	fmt.Printf("\nTotal time: %v (would be %v sequential)\n",
 		time.Since(start).Round(time.Millisecond),
 		sumLatencies(results).Round(time.Millisecond))
+	fmt.Println("NEXT UP: TE.1 -> 08-quality-test/01-quality-and-performance/testing/user")
 }
 
 func sumLatencies(results []CheckResult) time.Duration {

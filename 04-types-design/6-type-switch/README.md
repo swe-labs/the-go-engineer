@@ -88,4 +88,6 @@ Type switches are used in serialization (json.Unmarshal), reflection, and handli
 
 ## Next Step
 
-Continue to `TI.7` receiver-sets.
+Next: `TI.7` -> `04-types-design/7-receiver-sets`
+
+Open `04-types-design/7-receiver-sets/README.md` to continue.

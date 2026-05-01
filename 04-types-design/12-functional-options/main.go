@@ -137,7 +137,7 @@ func main() {
 	fmt.Println("  - Options are composable and reusable")
 	fmt.Println("  - Standard Go pattern for extensible APIs")
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.13 method-values")
+	fmt.Println("NEXT UP: TI.13 -> 04-types-design/13-method-values")
 	fmt.Println("Current: TI.12 (functional-options)")
 	fmt.Println("Previous: TI.11 (dynamic-typing-with-any)")
 	fmt.Println("---------------------------------------------------")

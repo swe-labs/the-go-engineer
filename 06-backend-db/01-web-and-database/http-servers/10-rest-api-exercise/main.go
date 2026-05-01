@@ -254,7 +254,7 @@ func main() {
 	fmt.Println("  Server stopped.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: API.1 rest-design-principles")
+	fmt.Println("NEXT UP: API.1 -> 06-backend-db/01-web-and-database/apis/1-rest-design-principles")
 	fmt.Println("Current: HS.10 (rest-api-exercise)")
 	fmt.Println("Previous: HS.9 (health-and-readiness-probes)")
 	fmt.Println("---------------------------------------------------")

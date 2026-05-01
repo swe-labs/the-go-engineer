@@ -167,7 +167,7 @@ func main() {
 	// - Reach for zerolog ONLY after pprof confirms logging is the bottleneck.
 	// - Never add a dependency to solve a problem you haven't measured.
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: SL.5 PII redactor")
+	fmt.Println("NEXT UP: SL.5 -> 10-production/01-structured-logging/5-exercise")
 	fmt.Println("   Current: SL.4 (zerolog comparison)")
 	fmt.Println("---------------------------------------------------")
 }

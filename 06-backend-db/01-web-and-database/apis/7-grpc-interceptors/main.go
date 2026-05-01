@@ -68,7 +68,7 @@ func main() {
 	fmt.Println("     - Rate Limiting.")
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: API.8 rest-vs-grpc")
+	fmt.Println("NEXT UP: API.8 -> 06-backend-db/01-web-and-database/apis/8-rest-vs-grpc")
 	fmt.Println("Current: API.7 (grpc-interceptors)")
 	fmt.Println("Previous: API.6 (grpc-streaming)")
 	fmt.Println("---------------------------------------------------")

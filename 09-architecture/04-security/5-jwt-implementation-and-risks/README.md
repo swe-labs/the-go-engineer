@@ -74,4 +74,6 @@ Shows a vulnerable parser that accepts tokens with `alg: none`. An attacker can 
 
 ## Next Step
 
-Authentication is only as strong as the passwords behind it. Learn how to store them safely. Continue to [SEC.6 Password hashing](../6-password-hashing).
+Next: `SEC.6` -> `09-architecture/04-security/6-password-hashing`
+
+Open `09-architecture/04-security/6-password-hashing/README.md` to continue.

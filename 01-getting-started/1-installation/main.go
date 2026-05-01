@@ -34,7 +34,7 @@ func main() {
 	fmt.Printf("Logical CPUs: %d\n", runtime.NumCPU())
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: GT.2 hello-world")
+	fmt.Println("NEXT UP: GT.2 -> 01-getting-started/2-hello-world")
 	fmt.Println("Current: GT.1 (installation)")
 	fmt.Println("---------------------------------------------------")
 }

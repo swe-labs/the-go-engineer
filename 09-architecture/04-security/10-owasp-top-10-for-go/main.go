@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Security checklists matter most when they are embedded into normal engineering work instead of living in a forgotten audit document.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: SEC.11")
+	fmt.Println("NEXT UP: SEC.11 -> 09-architecture/04-security/11-secure-api-exercise")
 	fmt.Println("Current: SEC.10 (owasp top 10 for go)")
 	fmt.Println("---------------------------------------------------")
 }

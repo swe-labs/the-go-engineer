@@ -113,7 +113,7 @@ func main() {
 	fmt.Printf("  Final Theme: %s (took %v)\n", cache.Get("theme"), time.Since(start))
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: SY.2 sync.once and sync.map")
+	fmt.Println("NEXT UP: SY.2 -> 07-concurrency/01-concurrency/sync-primitives/2-once-and-sync-map")
 	fmt.Println("Current: SY.1 (sync.mutex and rwmutex)")
 	fmt.Println("Previous: GC.7 (concurrent-downloader)")
 	fmt.Println("---------------------------------------------------")

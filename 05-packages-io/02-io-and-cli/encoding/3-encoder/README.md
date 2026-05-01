@@ -61,4 +61,6 @@ For production APIs, `json.NewEncoder(w).Encode(v)` is the standard way to retur
 
 ## Next Step
 
-Continue to `EN.4` decode.
+Next: `EN.4` -> `05-packages-io/02-io-and-cli/encoding/4-decode`
+
+Open `05-packages-io/02-io-and-cli/encoding/4-decode/README.md` to continue.
