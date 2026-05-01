@@ -14,9 +14,9 @@
 //   - Creating sub-views using slicing syntax `[:]`.
 //
 // WHY THIS MATTERS:
-//   - Slices are the "bread and butter" of Go data processing. Most performance 
-//     issues in Go arise from inefficient slice growth (reallocations). 
-//     Mastering the slice header (pointer, len, cap) is critical for writing 
+//   - Slices are the "bread and butter" of Go data processing. Most performance
+//     issues in Go arise from inefficient slice growth (reallocations).
+//     Mastering the slice header (pointer, len, cap) is critical for writing
 //     engineering-grade code.
 //
 // RUN:

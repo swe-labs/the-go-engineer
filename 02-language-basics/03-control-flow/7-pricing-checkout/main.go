@@ -13,9 +13,9 @@
 //   - Accumulating state (subtotal) across multiple iterations.
 //
 // WHY THIS MATTERS:
-//   - Business logic is rarely a single `if` statement. It is a sequence of 
-//     decisions: identifying an item, checking its validity, applying 
-//     discounts, and totaling the results. Mastering this composition is 
+//   - Business logic is rarely a single `if` statement. It is a sequence of
+//     decisions: identifying an item, checking its validity, applying
+//     discounts, and totaling the results. Mastering this composition is
 //     how you build real applications.
 //
 // RUN:

@@ -13,15 +13,15 @@
 //   - The difference between compile-time constants and runtime variables.
 //
 // WHY THIS MATTERS:
-//   - Encoding stable facts (like ports, mathematical constants, or limits) into 
-//     constants prevents accidental runtime drift and allows the compiler to 
+//   - Encoding stable facts (like ports, mathematical constants, or limits) into
+//     constants prevents accidental runtime drift and allows the compiler to
 //     optimize the binary by inlining values.
 //
 // RUN:
 //   go run ./02-language-basics/2-constants
 //
 // KEY TAKEAWAY:
-//   - Use constants for stability; use variables for state. Immutability is a 
+//   - Use constants for stability; use variables for state. Immutability is a
 //     powerful tool for reducing system complexity.
 // ============================================================================
 

@@ -14,9 +14,9 @@
 //   - Reasoning about capacity-triggered reallocations.
 //
 // WHY THIS MATTERS:
-//   - Shared state is the #1 source of "mysterious" bugs in Go. A sub-slice 
-//     that modifies its data might unintentionally corrupt the original 
-//     collection. Engineering-grade Go requires constant awareness of whether 
+//   - Shared state is the #1 source of "mysterious" bugs in Go. A sub-slice
+//     that modifies its data might unintentionally corrupt the original
+//     collection. Engineering-grade Go requires constant awareness of whether
 //     your slice is a "view" or an "independent copy."
 //
 // RUN:

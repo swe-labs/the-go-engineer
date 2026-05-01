@@ -14,9 +14,9 @@
 //   - Why the zero value of a pointer is `nil`.
 //
 // WHY THIS MATTERS:
-//   - Pointers are how Go allows different parts of a program to work on the 
-//     exact same data without making expensive copies. Understanding pointers 
-//     is the bridge between simple "Foundation" code and "Engineering-Grade" 
+//   - Pointers are how Go allows different parts of a program to work on the
+//     exact same data without making expensive copies. Understanding pointers
+//     is the bridge between simple "Foundation" code and "Engineering-Grade"
 //     software that manages memory efficiently.
 //
 // RUN:

@@ -14,9 +14,9 @@
 //   - Using `make` vs. literals for map initialization.
 //
 // WHY THIS MATTERS:
-//   - While slices are great for order, maps are unbeatable for speed. A map 
-//     allows you to find a single item among millions in almost constant time 
-//     (O(1)). In production, maps are used for caches, registries, and 
+//   - While slices are great for order, maps are unbeatable for speed. A map
+//     allows you to find a single item among millions in almost constant time
+//     (O(1)). In production, maps are used for caches, registries, and
 //     configuration lookup tables.
 //
 // RUN:

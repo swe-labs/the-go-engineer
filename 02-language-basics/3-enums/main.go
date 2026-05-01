@@ -13,8 +13,8 @@
 //   - Creating a `String()` method for numeric constants.
 //
 // WHY THIS MATTERS:
-//   - Go doesn't have a built-in `enum` type. By combining named types with 
-//     `iota`, we get the same benefits: group identity, readability, and 
+//   - Go doesn't have a built-in `enum` type. By combining named types with
+//     `iota`, we get the same benefits: group identity, readability, and
 //     prevention of "magic numbers" in our business logic.
 //
 // RUN:

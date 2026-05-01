@@ -13,15 +13,15 @@
 //   - Basic bounds checking for lookup safety.
 //
 // WHY THIS MATTERS:
-//   - Production logging is more than just printing text; it requires a stable 
-//     foundation of levels (Trace, Debug, Info, etc.) that can be parsed by 
+//   - Production logging is more than just printing text; it requires a stable
+//     foundation of levels (Trace, Debug, Info, etc.) that can be parsed by
 //     machines and read by humans.
 //
 // RUN:
 //   go run ./02-language-basics/4-application-logger
 //
 // KEY TAKEAWAY:
-//   - Meaningful code composition starts with choosing the right types and 
+//   - Meaningful code composition starts with choosing the right types and
 //     providing clear ways to inspect the system's state.
 // ============================================================================
 

@@ -13,9 +13,9 @@
 //   - Why the order of control statements inside a loop matters.
 //
 // WHY THIS MATTERS:
-//   - Real-world loops often encounter "special cases"—invalid data, a 
-//     successful search result, or an error. `break` and `continue` allow you 
-//     to handle these cases efficiently without over-complicating the 
+//   - Real-world loops often encounter "special cases"—invalid data, a
+//     successful search result, or an error. `break` and `continue` allow you
+//     to handle these cases efficiently without over-complicating the
 //     main loop condition.
 //
 // RUN:

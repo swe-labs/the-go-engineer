@@ -13,8 +13,8 @@
 //   - How `defer` handles early returns and errors safely.
 //
 // WHY THIS MATTERS:
-//   - Resource leaks (unclosed files or database connections) are a primary 
-//     cause of system instability and crashes. In Go, the `defer` keyword is 
+//   - Resource leaks (unclosed files or database connections) are a primary
+//     cause of system instability and crashes. In Go, the `defer` keyword is
 //     your primary defense against these "leaks" in production.
 //
 // RUN:

@@ -13,15 +13,15 @@
 //   - Why Go requires curly braces even for single-line branches.
 //
 // WHY THIS MATTERS:
-//   - Branching is the fundamental tool for decision-making in code. From 
-//     validating inputs to choosing business rules, `if/else` is the primary 
+//   - Branching is the fundamental tool for decision-making in code. From
+//     validating inputs to choosing business rules, `if/else` is the primary
 //     way programs handle multiple scenarios.
 //
 // RUN:
 //   go run ./02-language-basics/03-control-flow/1-if-else
 //
 // KEY TAKEAWAY:
-//   - Go's `if` statements are concise (no parentheses required) but strict 
+//   - Go's `if` statements are concise (no parentheses required) but strict
 //     (curly braces are mandatory), enforcing a consistent and readable style.
 // ============================================================================
 

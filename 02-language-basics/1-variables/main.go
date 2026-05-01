@@ -13,15 +13,15 @@
 //   - How the compiler enforces code quality via unused variable checks.
 //
 // WHY THIS MATTERS:
-//   - In many languages, uninitialized variables contain "garbage" data from previous 
-//     memory usage. Go eliminates this entire class of bugs by guaranteeing a 
+//   - In many languages, uninitialized variables contain "garbage" data from previous
+//     memory usage. Go eliminates this entire class of bugs by guaranteeing a
 //     predictable zero state for every allocated variable.
 //
 // RUN:
 //   go run ./02-language-basics/1-variables
 //
 // KEY TAKEAWAY:
-//   - Predictable zero-values and strict unused-variable checks make Go code 
+//   - Predictable zero-values and strict unused-variable checks make Go code
 //     stable and easier to audit under pressure.
 // ============================================================================
 

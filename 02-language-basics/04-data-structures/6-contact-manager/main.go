@@ -14,9 +14,9 @@
 //   - Basic duplicate prevention using the "comma-ok" pattern.
 //
 // WHY THIS MATTERS:
-//   - Software engineering is about managing complex relationships between 
-//     data. This milestone forces you to think about where data "lives" 
-//     (slices), how to "find" it (maps), and how to "share" or "change" it 
+//   - Software engineering is about managing complex relationships between
+//     data. This milestone forces you to think about where data "lives"
+//     (slices), how to "find" it (maps), and how to "share" or "change" it
 //     (pointers).
 //
 // RUN:

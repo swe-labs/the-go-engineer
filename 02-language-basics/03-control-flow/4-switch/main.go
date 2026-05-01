@@ -13,15 +13,15 @@
 //   - "Tagless" switch for complex conditional chains.
 //
 // WHY THIS MATTERS:
-//   - Deeply nested `if/else` ladders are difficult to read and audit. `switch` 
-//     provides a tabular format that is easier for humans to scan and for the 
+//   - Deeply nested `if/else` ladders are difficult to read and audit. `switch`
+//     provides a tabular format that is easier for humans to scan and for the
 //     compiler to optimize.
 //
 // RUN:
 //   go run ./02-language-basics/03-control-flow/4-switch
 //
 // KEY TAKEAWAY:
-//   - Go's `switch` does not require explicit `break` at the end of every case; 
+//   - Go's `switch` does not require explicit `break` at the end of every case;
 //     it stops by default, eliminating a major source of bugs.
 // ============================================================================
 

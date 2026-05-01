@@ -13,8 +13,8 @@
 //   - Array "value-copy" behavior (pass-by-value).
 //
 // WHY THIS MATTERS:
-//   - Arrays are the low-level foundation for memory storage in Go. Even 
-//     though you'll use slices more often, understanding arrays is key to 
+//   - Arrays are the low-level foundation for memory storage in Go. Even
+//     though you'll use slices more often, understanding arrays is key to
 //     mastering memory layout and avoiding accidental data duplication.
 //
 // RUN:

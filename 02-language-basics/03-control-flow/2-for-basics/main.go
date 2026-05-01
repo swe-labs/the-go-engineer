@@ -14,15 +14,15 @@
 //   - A preview of `range` for collection iteration.
 //
 // WHY THIS MATTERS:
-//   - Automation is the core of software engineering. Loops allow us to process 
-//     thousands of items (requests, logs, users) using the same logic without 
+//   - Automation is the core of software engineering. Loops allow us to process
+//     thousands of items (requests, logs, users) using the same logic without
 //     duplicating code.
 //
 // RUN:
 //   go run ./02-language-basics/03-control-flow/2-for-basics
 //
 // KEY TAKEAWAY:
-//   - Go has exactly one looping keyword: `for`. Its simplicity reduces 
+//   - Go has exactly one looping keyword: `for`. Its simplicity reduces
 //     syntactic overhead and forces consistency across the entire ecosystem.
 // ============================================================================
 

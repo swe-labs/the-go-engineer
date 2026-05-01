@@ -13,9 +13,9 @@
 //   - When deferred arguments are evaluated.
 //
 // WHY THIS MATTERS:
-//   - Real programs open files, connections, and locks. If a function returns 
-//     early due to an error, these resources might remain open forever (a "leak"). 
-//     `defer` guarantees that cleanup code runs regardless of which path the 
+//   - Real programs open files, connections, and locks. If a function returns
+//     early due to an error, these resources might remain open forever (a "leak").
+//     `defer` guarantees that cleanup code runs regardless of which path the
 //     function takes to exit.
 //
 // RUN:
@@ -34,7 +34,6 @@ import (
 func main() {
 	fmt.Println("CF.5: Defer Mechanics")
 	fmt.Println("--------------------------------")
-
 
 	// Defer 1 is scheduled first, so it runs last (LIFO order).
 	defer fmt.Println("  (Defer 1) This runs LAST")
