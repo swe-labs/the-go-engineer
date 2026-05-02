@@ -52,8 +52,7 @@ import "fmt"
 
 // --- COMPONENT TYPES (small, focused, reusable) ---
 
-// GPSLocation (Struct) encapsulates geographic coordinates and metadata as a reusable value type.
-// GPSLocation (Struct): (Struct) encapsulates geographic coordinates and metadata as a reusable value type.
+// GPSLocation (Struct): encapsulates geographic coordinates and metadata as a reusable value type.
 type GPSLocation struct {
 	Latitude  float64
 	Longitude float64
@@ -61,13 +60,13 @@ type GPSLocation struct {
 }
 
 // String (Method) implements the fmt.Stringer interface for formatted coordinate output.
-// GPSLocation.String (Method): (Method) implements the fmt.Stringer interface for formatted coordinate output.
+// GPSLocation.String (Method): implements the fmt.Stringer interface for formatted coordinate output.
 func (g GPSLocation) String() string {
 	return fmt.Sprintf("%s (%.4f, %.4f)", g.Label, g.Latitude, g.Longitude)
 }
 
 // DistanceLabel (Method) provides domain-specific hemispheric classification based on latitude.
-// GPSLocation.DistanceLabel (Method): (Method) provides domain-specific hemispheric classification based on latitude.
+// GPSLocation.DistanceLabel (Method): provides domain-specific hemispheric classification based on latitude.
 func (g GPSLocation) DistanceLabel() string {
 	if g.Latitude > 0 {
 		return "Northern Hemisphere"
@@ -75,21 +74,19 @@ func (g GPSLocation) DistanceLabel() string {
 	return "Southern Hemisphere"
 }
 
-// ContactInfo (Struct) encapsulates communication metadata into a reusable component.
-// ContactInfo (Struct): (Struct) encapsulates communication metadata into a reusable component.
+// ContactInfo (Struct): encapsulates communication metadata into a reusable component.
 type ContactInfo struct {
 	Phone string
 	Email string
 }
 
 // Summary (Method) generates a single-line string representation of contact details.
-// ContactInfo.Summary (Method): (Method) generates a single-line string representation of contact details.
+// ContactInfo.Summary (Method): generates a single-line string representation of contact details.
 func (c ContactInfo) Summary() string {
 	return fmt.Sprintf("phone: %s | email: %s", c.Phone, c.Email)
 }
 
-// Warehouse (Struct) demonstrates named-field composition by aggregating location and contact components.
-// Warehouse (Struct): (Struct) demonstrates named-field composition by aggregating location and contact components.
+// Warehouse (Struct): demonstrates named-field composition by aggregating location and contact components.
 type Warehouse struct {
 	ID       int
 	Name     string
@@ -99,7 +96,7 @@ type Warehouse struct {
 }
 
 // PrintDetails (Method) orchestrates component methods to output a full entity summary.
-// Warehouse.PrintDetails (Method): (Method) orchestrates component methods to output a full entity summary.
+// Warehouse.PrintDetails (Method): orchestrates component methods to output a full entity summary.
 func (w Warehouse) PrintDetails() {
 	fmt.Printf("  Warehouse #%d: %s\n", w.ID, w.Name)
 	fmt.Printf("     Capacity: %d items\n", w.Capacity)
@@ -108,8 +105,7 @@ func (w Warehouse) PrintDetails() {
 	fmt.Printf("     Contact:  %s\n", w.Contact.Summary())
 }
 
-// DeliveryRoute (Struct) demonstrates structural reuse of the GPSLocation component across different domains.
-// DeliveryRoute (Struct): (Struct) demonstrates structural reuse of the GPSLocation component across different domains.
+// DeliveryRoute (Struct): demonstrates structural reuse of the GPSLocation component across different domains.
 type DeliveryRoute struct {
 	RouteID     string
 	Origin      GPSLocation
@@ -117,7 +113,7 @@ type DeliveryRoute struct {
 }
 
 // Describe (Method) provides a text-based summary of the route's path.
-// DeliveryRoute.Describe (Method): (Method) provides a text-based summary of the route's path.
+// DeliveryRoute.Describe (Method): provides a text-based summary of the route's path.
 func (r DeliveryRoute) Describe() {
 	fmt.Printf("  Route %s: %s -> %s\n", r.RouteID, r.Origin.Label, r.Destination.Label)
 }

@@ -14,7 +14,7 @@ You have interfaces for behavior abstraction. But sometimes you need to write ut
 ## Prerequisites
 
 - `TI.3` Interfaces
-- `TI.11` Dynamic Typing with any
+- `TI.4` Interface Embedding
 
 ## Mental Model
 
@@ -26,15 +26,18 @@ Think of a vending machine. It does not care if it dispenses sodas, snacks, or t
 graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
+    B --> D["type parameter"]
+    D --> E["constraint"]
 ```
-This diagram shows the generic function signature:
+
+Generic signatures add a type parameter to the usual function shape:
 
 - `Sum` is the function name
 - `[T Numeric]` declares a type parameter T constrained to numeric types
 - `numbers []T` is the parameter (a slice of type T)
 - `T` is the return type
 
-## Visual Model
+The type parameter is filled by the concrete type used at the call site:
 
 ```mermaid
 graph TD
@@ -89,12 +92,13 @@ The syntax `[T Numeric]` declares a type parameter T with constraint Numeric.
 Generics are essential for building reusable data structures (maps, slices, trees) and utility functions without code duplication.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
 
 > [!TIP]
-> We have now covered the core of Go's type system. It is time to put everything together-structs, methods, interfaces, and custom errors-in a realistic scenario. In [Lesson 10: Payroll Processor](../10-payroll-processor/README.md), you will build a system that handles multiple employee types and payment rules.
+> You have the first generics model now. Next, [TI.14 Complex Generic Constraints](../14-complex-generic-constraints/README.md) shows how to make constraints precise enough for production-shaped reusable code.
 
 ## Next Step
 

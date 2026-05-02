@@ -1,13 +1,13 @@
 // Copyright (c) 2026 Rasel Hossen
-// See LICENSE for usage terms.
+// Licensed under The Go Engineer License v1.0
 
 package main
 
 import "fmt"
 
 // ============================================================================
-// Section 6: Types & Interfaces - Payroll Processor (Exercise Starter)
-// Level: Intermediate
+// Section 04: Types and Design - Payroll Processor (Exercise Starter)
+// Level: Core
 // ============================================================================
 //
 // EXERCISE: Build a Polymorphic Payroll Processor
@@ -31,18 +31,18 @@ import "fmt"
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 
-// TODO: Define the Payable interface
+// Learner task: define the Payable interface.
 
-// TODO: Define SalariedEmployee, HourlyEmployee, CommissionEmployee structs
+// Learner task: define SalariedEmployee, HourlyEmployee, and CommissionEmployee structs.
 
-// TODO: Implement CalculatePay() and String() for each type
+// Learner task: implement CalculatePay() and String() for each employee type.
 
-// TODO: Implement ProcessPayroll(employees []Payable)
+// Learner task: implement ProcessPayroll(employees []Payable).
 
 func main() {
 	fmt.Println("=== Payroll Processor Exercise ===")
 	fmt.Println()
-	fmt.Println("TODO: Implement your payroll system!")
+	fmt.Println("Implement your payroll system.")
 	fmt.Println("See the REQUIREMENTS above for what to build.")
 	fmt.Println()
 	fmt.Println("When finished, compare your solution with ../main.go")

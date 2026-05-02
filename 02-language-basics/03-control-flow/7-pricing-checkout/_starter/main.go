@@ -6,7 +6,7 @@ package main
 import "fmt"
 
 func main() {
-	// TODO:
+	// Learner task:
 	// 1. Create a small cart of item codes.
 	// 2. Loop through the cart.
 	// 3. Use switch to assign a base price for known items.

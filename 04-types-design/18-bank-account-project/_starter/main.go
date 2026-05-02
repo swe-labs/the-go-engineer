@@ -1,14 +1,13 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
 
 package main
 
 import "fmt"
 
 // ============================================================================
-// Section 6: Composition and Embedding - Bank Account (Exercise Starter)
-// Level: Intermediate
+// Section 04: Types and Design - Bank Account (Exercise Starter)
+// Level: Core
 // ============================================================================
 //
 // EXERCISE: Build a bank account model with embedded types
@@ -35,16 +34,16 @@ import "fmt"
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 
-// TODO: Define Account with Deposit, Withdraw, GetBalance, and String methods
+// Learner task: define Account with Deposit, Withdraw, GetBalance, and String methods.
 
-// TODO: Define SavingsAccount with embedded Account and AddInterest
+// Learner task: define SavingsAccount with embedded Account and AddInterest.
 
-// TODO: Define OverdraftAccount with embedded Account and a shadowed Withdraw
+// Learner task: define OverdraftAccount with embedded Account and a shadowed Withdraw.
 
 func main() {
 	fmt.Println("=== Bank Account Exercise ===")
 	fmt.Println()
-	fmt.Println("TODO: Implement the bank account model described above.")
+	fmt.Println("Implement the bank account model described above.")
 	fmt.Println("Use the tests to confirm your embedding and shadowing behavior.")
 	fmt.Println()
 	fmt.Println("When finished, compare your solution with ../main.go")

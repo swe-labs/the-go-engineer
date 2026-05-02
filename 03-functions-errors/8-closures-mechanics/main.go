@@ -72,7 +72,7 @@ func main() {
 	fmt.Printf("another counter first call: %d\n", anotherCounter()) // 1
 
 	// 3. Loop variables must be rebound when each closure needs its own copy
-	// Note: Go 1.22+ changed loop variable scoping to capture per-iteration,
+	// Version boundary: Go 1.22+ changed loop variable scoping to capture per-iteration,
 	// making the classic "loop variable capture bug" far less common,
 	// but it is still important to understand the boundary.
 	funcs := []func(){}

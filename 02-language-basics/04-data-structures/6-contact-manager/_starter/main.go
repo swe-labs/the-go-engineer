@@ -16,7 +16,7 @@ import "fmt"
 func main() {
 	fmt.Println("=== Contact Directory Exercise ===")
 	fmt.Println()
-	fmt.Println("TODO: Build the contact directory using only 04-data-structures concepts.")
+	fmt.Println("Build the contact directory using only 04-data-structures concepts.")
 	fmt.Println("Start with slices plus a map, then prove one pointer-based update persists.")
 	fmt.Println()
 	fmt.Println("When finished, compare your solution with ../main.go")

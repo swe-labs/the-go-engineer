@@ -1,14 +1,13 @@
 // Copyright (c) 2026 Rasel Hossen
 // Licensed under The Go Engineer License v1.0
-// Commercial use is prohibited without permission.
 
 package main
 
 import "fmt"
 
 // ============================================================================
-// Section 7: Strings & Text - Config Parser (Exercise Starter)
-// Level: Intermediate
+// Section 04: Types and Design - Config Parser (Exercise Starter)
+// Level: Core
 // ============================================================================
 //
 // EXERCISE: Build an application config (.env) parser
@@ -34,18 +33,18 @@ import "fmt"
 // SOLUTION: See the main.go file in the parent directory
 // ============================================================================
 
-// TODO: Prepare your mock .env file string
+// Learner task: prepare your mock .env file string.
 
-// TODO: Compile your regex pattern
+// Learner task: compile your regex pattern.
 
-// TODO: Implement parseConfig function
+// Learner task: implement the parseConfig function.
 
-// TODO: Render a stable summary with text/template
+// Learner task: render a stable summary with text/template.
 
 func main() {
 	fmt.Println("=== Config Parser Exercise ===")
 	fmt.Println()
-	fmt.Println("TODO: Implement the config parser and rendered summary.")
+	fmt.Println("Implement the config parser and rendered summary.")
 	fmt.Println("Use the tests to confirm your parsing logic.")
 	fmt.Println()
 	fmt.Println("When finished, compare your solution with ../main.go")

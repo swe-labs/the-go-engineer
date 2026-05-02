@@ -54,8 +54,7 @@ import "fmt"
 
 // --- COMPONENT TYPES ---
 
-// Dimensions (Struct) provides physical measurement state as a component for embedding.
-// Dimensions (Struct): (Struct) provides physical measurement state as a component for embedding.
+// Dimensions (Struct): provides physical measurement state as a component for embedding.
 type Dimensions struct {
 	Width  float64
 	Height float64
@@ -63,13 +62,13 @@ type Dimensions struct {
 }
 
 // IsPortable (Method) implements portability logic based on the weight field.
-// Dimensions.IsPortable (Method): (Method) implements portability logic based on the weight field.
+// Dimensions.IsPortable (Method): implements portability logic based on the weight field.
 func (d Dimensions) IsPortable() bool {
 	return d.Weight < 2000
 }
 
 // FormFactor (Method) classifies structural size based on surface area calculation.
-// Dimensions.FormFactor (Method): (Method) classifies structural size based on surface area calculation.
+// Dimensions.FormFactor (Method): classifies structural size based on surface area calculation.
 func (d Dimensions) FormFactor() string {
 	area := d.Width * d.Height
 	switch {
@@ -82,21 +81,20 @@ func (d Dimensions) FormFactor() string {
 	}
 }
 
-// Battery (Struct) models power state as a component for structural promotion.
-// Battery (Struct): (Struct) models power state as a component for structural promotion.
+// Battery (Struct): models power state as a component for structural promotion.
 type Battery struct {
 	CapacityMAh int
 	ChargeLevel int
 }
 
 // IsLow (Method) determines if the charge level requires immediate attention.
-// Battery.IsLow (Method): (Method) determines if the charge level requires immediate attention.
+// Battery.IsLow (Method): determines if the charge level requires immediate attention.
 func (b Battery) IsLow() bool {
 	return b.ChargeLevel < 20
 }
 
 // Status (Method) returns a human-readable summary of battery health.
-// Battery.Status (Method): (Method) returns a human-readable summary of battery health.
+// Battery.Status (Method): returns a human-readable summary of battery health.
 func (b Battery) Status() string {
 	if b.IsLow() {
 		return fmt.Sprintf("LOW %d%% (charge soon!)", b.ChargeLevel)
@@ -104,8 +102,7 @@ func (b Battery) Status() string {
 	return fmt.Sprintf("OK %d%%", b.ChargeLevel)
 }
 
-// Laptop (Struct) demonstrates method and field promotion through struct embedding.
-// Laptop (Struct): (Struct) demonstrates method and field promotion through struct embedding.
+// Laptop (Struct): demonstrates method and field promotion through struct embedding.
 type Laptop struct {
 	Brand string
 	Model string
@@ -114,7 +111,7 @@ type Laptop struct {
 }
 
 // Describe (Method) generates a system summary by accessing both local and promoted fields.
-// Laptop.Describe (Method): (Method) generates a system summary by accessing both local and promoted fields.
+// Laptop.Describe (Method): generates a system summary by accessing both local and promoted fields.
 func (l Laptop) Describe() {
 	fmt.Printf("  Laptop: %s %s\n", l.Brand, l.Model)
 	// Width, FormFactor(), and Status() are all promoted.
@@ -124,8 +121,7 @@ func (l Laptop) Describe() {
 	fmt.Printf("     Battery: %s\n", l.Status())
 }
 
-// Tablet (Struct) demonstrates field shadowing where outer fields hide embedded fields of the same name.
-// Tablet (Struct): (Struct) demonstrates field shadowing where outer fields hide embedded fields of the same name.
+// Tablet (Struct): demonstrates field shadowing where outer fields hide embedded fields of the same name.
 type Tablet struct {
 	Battery
 	ChargeLevel string // Shadows Battery.ChargeLevel
