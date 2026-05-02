@@ -8,16 +8,21 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how one function can coordinate several smaller helpers without losing readability.
+//   - How to combine multiple specialized functions into a single workflow.
+//   - Delegating small responsibilities to helpers.
+//   - Managing "Short-Circuit" logic to stop execution on the first error.
 //
 // WHY THIS MATTERS:
-//   - Orchestration means one function controls the order of several smaller jobs. It does not do every detail itself. It decides: - what should happen f...
+//   - In production, a single "Request" often triggers a chain of actions
+//     (Validate -> Auth -> DB Lookup -> Calc -> Log). Orchestration is the
+//     art of linking these steps without turning your code into a messy
+//     "God Function" that does everything.
 //
 // RUN:
 //   go run ./03-functions-errors/6-orchestration
 //
 // KEY TAKEAWAY:
-//   - Learn how one function can coordinate several smaller helpers without losing readability.
+//   - High-level orchestrators delegate details to low-level helpers.
 // ============================================================================
 
 package main
@@ -28,7 +33,7 @@ import (
 	"strings"
 )
 
-// 05 Functions and Errors - Orchestration
+// Section 03: Functions & Errors - Orchestration
 //
 // Mental model:
 // One function can coordinate several helpers and stop early when a step fails.
@@ -100,8 +105,10 @@ func main() {
 		fmt.Println(summary)
 	}
 
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.8 -> 03-functions-errors/8-first-class-functions")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: FE.8 -> 03-functions-errors/7-first-class-functions")
+	fmt.Println("Run    : go run ./03-functions-errors/7-first-class-functions")
 	fmt.Println("Current: FE.6 (orchestration)")
 	fmt.Println("---------------------------------------------------")
 }

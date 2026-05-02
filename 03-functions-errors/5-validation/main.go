@@ -8,16 +8,20 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how a function rejects bad input before the program does the real work.
+//   - Implementing "Guard Clauses" to reject bad data early.
+//   - Using `nil` as the success signal for validation functions.
+//   - Returning descriptive error messages with index context.
 //
 // WHY THIS MATTERS:
-//   - Validation is the first gate before useful work begins. If the input is clearly wrong, the function should say so immediately instead of pretending...
+//   - Software engineering is about building "Defensive" code. By validating
+//     inputs at the boundary, you prevent bad data from "poisoning" your
+//     database or causing crashes in the core logic of your application.
 //
 // RUN:
 //   go run ./03-functions-errors/5-validation
 //
 // KEY TAKEAWAY:
-//   - Learn how a function rejects bad input before the program does the real work.
+//   - Validate at the boundary; fail fast and explicitly.
 // ============================================================================
 
 package main
@@ -28,7 +32,7 @@ import (
 	"strings"
 )
 
-// 05 Functions and Errors - Validation
+// Section 03: Functions & Errors - Validation
 //
 // Mental model:
 // Validation rejects bad input early so the rest of the program can stay honest.
@@ -69,9 +73,10 @@ func main() {
 	err = validatePrices([]int{12, -3, 25})
 	fmt.Println("negative price check:", err)
 
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.6 -> 03-functions-errors/6-orchestration")
+	fmt.Println("Run    : go run ./03-functions-errors/6-orchestration")
 	fmt.Println("Current: FE.5 (validation)")
-	fmt.Println("Previous: FE.4 (errors-as-values)")
 	fmt.Println("---------------------------------------------------")
 }

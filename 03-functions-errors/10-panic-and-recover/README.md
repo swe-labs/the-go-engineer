@@ -1,53 +1,44 @@
-# FE.10 panic and recover
+# FE.10 Panic and Recover
 
 ## Mission
 
 Learn when panic is appropriate, when it is not, and how recover turns a crash into an explicit boundary decision.
 
-## Why This Lesson Exists Now
-
-You have learned how to handle ordinary, expected failures using the `error` interface. But sometimes, a program encounters a state that is fundamentally "wrong" or "impossible"-like trying to access a database that *must* be connected, or discovering a corrupted configuration.
-
-In these rare cases, Go provides `panic`. It stops the normal execution of the program and starts "unwinding" the stack. `recover` is the mechanism to catch that panic and stop the program from crashing entirely.
-
-> **Backward Reference:** In [Lesson 7: Order Summary](../7-order-summary/README.md), you handled validation errors gracefully. `panic` is the opposite of that: it is the nuclear option for when things have gone so wrong that the program cannot reasonably continue its current job.
-
 ## Prerequisites
 
 - `FE.7` order summary
-- `FE.9` closures - mechanics (for understanding how `defer` with an anonymous function works)
+- `FE.9` closures mechanics (for understanding `defer` with anonymous functions)
 
 ## Mental Model
 
-Errors describe expected failure. Panic describes broken assumptions. Recover belongs at process or request boundaries, not in ordinary business flow.
+Think of **Panic** as the "Nuclear Option" for impossible system states.
+- **Errors** are for expected failures (e.g., "File not found").
+- **Panic** is for broken assumptions (e.g., "Configuration is corrupted", "Critical dependency missing").
+
+**Recover** is the safety net that catches a falling program before it hits the ground (crashes). It belongs at **Boundaries** (like a request handler), not inside business logic.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["Normal Flow"] --> B["panic('boom')"]
-    B --> C["Unwind Stack"]
-    C --> D["Run Deferred Functions"]
-    D --> E{recover() called?}
-    E -- Yes --> F["Stop Unwinding, Continue Program"]
-    E -- No --> G["Crash Process"]
-```
-
-```text
-defer func() {
-    if r := recover(); r != nil {
-        // Safe again!
-    }
-}()
-
-panic("something impossible happened")
+    A["Normal Execution"] --> B{"Broken Assumption?"}
+    B -- No --> A
+    B -- Yes --> C["panic() triggered"]
+    C --> D["Stack Unwinding Starts"]
+    D --> E["Execute Deferred Functions"]
+    E --> F{"recover() called?"}
+    F -- Yes --> G["Stop Unwinding / Resume Flow"]
+    F -- No --> H["Process Crashes"]
 ```
 
 ## Machine View
 
-A `panic` starts stack unwinding. Go stops running the normal lines of your code and immediately starts running all `defer` statements in the current function, then the caller's `defer` statements, and so on up the stack.
-
-The `recover` function only works inside a `defer` call on the same goroutine. If `recover` is called while the program is panicking, it returns the value that was passed to `panic` and stops the unwinding process.
+A `panic` event triggers a process called **Stack Unwinding**.
+1. The CPU stops executing the current line of code.
+2. The runtime starts popping stack frames one by one.
+3. For each frame, any `defer`red functions are executed.
+4. If a deferred function calls `recover()`, the unwinding stops, the panic value is returned, and normal execution resumes from the point after the defer.
+5. If the stack unwinds all the way to `main` without a recovery, the OS terminates the process and prints a stack trace.
 
 ## Run Instructions
 
@@ -57,45 +48,29 @@ go run ./03-functions-errors/10-panic-and-recover
 
 ## Code Walkthrough
 
-### `defer func() { if r := recover(); r != nil { ... } }()`
+- **`panic()`**: Triggers the emergency stop. It takes an interface value (usually a string or error) to explain why the program failed.
+- **`recover()`**: A built-in function that returns the panic value and stops the crash. It **MUST** be called inside a `defer`red function to be effective.
+- **Resiliency**: Notice that `main` continues to run even after `accessDatabase` panics. This is how Go servers stay alive even when a specific request handler fails.
 
-This is the recovery pattern. It must be `defer`red at the very start of the function you want to protect. If a panic happens anywhere in `accessDatabase`, this function will run during the stack unwind and catch the panic value.
-
-### `panic("database connection lost...")`
-
-This line triggers the panic. Normal execution stops here. Go skips the `fmt.Println` below it and jumps straight to the deferred recovery function.
-
-### `if !connected { ... }`
-
-Notice that we only panic when the state is truly unrecoverable. For ordinary problems (like a missing user), you should still use `error`.
-
-### `Program continued running...`
-
-Because we recovered, the `main` function continues to run after `accessDatabase` finishes. If we hadn't recovered, the whole program would have crashed.
+> [!TIP]
+> You have completed the Functions and Errors section! You are now ready to move into data modeling and system design. In [Section 04: Type Design](../../04-types-design/README.md), you will learn how to group data together using **Structs**.
 
 ## Try It
 
-1. Comment out the `defer` block in `accessDatabase` and run the program. Observe the crash and the stack trace.
-2. Change the panic message and see it reflected in the recovery output.
-3. Add a second `panic` after the recovery and see if it is caught (hint: you'd need another `defer` for the second one).
-
-## Common Questions
-
-- Should I use `panic` for validation?
-  No. Use `error` for anything that is expected to happen (like bad user input). Use `panic` only for programmer errors or "impossible" system states.
-  
-- Can I recover from a panic in a different goroutine?
-  No. `recover` only works on the goroutine where the panic started.
+1. Comment out the `defer` block in `accessDatabase` and run the program. Observe the process crash and the detailed stack trace provided by the Go runtime.
+2. Add a second `accessDatabase(true)` call after the crisis operation in `main`. Observe how recovery allows the program to continue its work.
+3. Change the panic value to a custom error type instead of a string and see how `recover()` captures it.
 
 ## In Production
-Use panic sparingly for programmer bugs or impossible states, then recover only at boundaries (like a web server's request handler) where you can translate the crash into a log entry and a "500 Internal Server Error" response instead of letting the whole server die.
+
+In production Go code, you should almost never write `panic()`. Instead, you handle everything as an `error`.
+However, you should almost always use `recover()` at your top-level entry points (like an HTTP middleware) to prevent a single buggy request from crashing your entire server for everyone else.
 
 ## Thinking Questions
-1. What problem does this topic solve?
-2. What breaks if this boundary is handled implicitly instead of explicitly?
-3. Where would you expect to use this topic in production Go code?
 
-> **Forward Reference:** You have completed the Functions and Errors section! You are now ready to move into data modeling and system design. In the next section, [Section 04: Types and Design](../../04-types-design/README.md), you will learn how to group data together using **Structs**.
+1. Why does Go require `recover()` to be called inside a `defer`red function?
+2. When is a panic more honest than returning a "silent" error?
+3. What is the danger of recovering from every single panic without logging it?
 
 ## Next Step
 

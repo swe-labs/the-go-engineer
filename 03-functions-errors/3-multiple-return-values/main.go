@@ -8,16 +8,21 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how one function can return more than one value and why that matters before errors enter the picture.
+//   - Defining multiple return types in parentheses `(int, bool)`.
+//   - Returning multiple values separated by commas.
+//   - How the caller must receive all returned values (or use the blank identifier).
 //
 // WHY THIS MATTERS:
-//   - Sometimes one result is not enough. A function may need to return: - a value and a success signal - two related values - a result and some extra co...
+//   - Go doesn't use "sentinel" values (like returning -1 for error) because
+//     that can be ambiguous. Multiple return values allow a function to be
+//     honest: "Here is the data, AND here is a flag saying if it's valid."
+//     This is the foundation of Go's explicit error handling.
 //
 // RUN:
 //   go run ./03-functions-errors/3-multiple-return-values
 //
 // KEY TAKEAWAY:
-//   - Learn how one function can return more than one value and why that matters before errors enter the picture.
+//   - Multiple returns replace ambiguous sentinel values.
 // ============================================================================
 
 package main
@@ -27,7 +32,7 @@ import (
 	"strings"
 )
 
-// 05 Functions and Errors - Multiple Return Values
+// Section 03: Functions & Errors - Multiple Return Values
 //
 // Mental model:
 // A function can return more than one value when one result is not enough.
@@ -61,9 +66,10 @@ func main() {
 	firstName, lastName := splitName("Ava Stone")
 	fmt.Printf("first=%s last=%s\n", firstName, lastName)
 
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.4 -> 03-functions-errors/4-errors-as-values")
-	fmt.Println("Current: FE.3 (multiple return values)")
-	fmt.Println("Previous: FE.2 (parameters-and-returns)")
+	fmt.Println("Run    : go run ./03-functions-errors/4-errors-as-values")
+	fmt.Println("Current: FE.3 (multiple-return-values)")
 	fmt.Println("---------------------------------------------------")
 }

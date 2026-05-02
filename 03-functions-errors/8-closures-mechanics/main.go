@@ -8,22 +8,27 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how closures capture variables, why that extends lifetimes, and where the loop-variable trap comes from.
+//   - How closures "capture" variables from their surrounding scope.
+//   - The difference between capturing by reference vs. capturing by value.
+//   - How the Go compiler moves captured variables to the heap.
 //
 // WHY THIS MATTERS:
-//   - A closure remembers variables from the scope where it was created, not just the values you expected in that moment.
+//   - Closures allow you to "carry" state with a function. This is how
+//     middleware keeps configuration data, how observers keep track of
+//     subject state, and how factories generate specialized helpers.
 //
 // RUN:
-//   go run ./03-functions-errors/9-closures-mechanics
+//   go run ./03-functions-errors/8-closures-mechanics
 //
 // KEY TAKEAWAY:
-//   - Learn how closures capture variables, why that extends lifetimes, and where the loop-variable trap comes from.
+//   - A closure is a function paired with its surrounding environment.
 // ============================================================================
 
 package main
 
 import "fmt"
 
+// Section 03: Functions & Errors - Closures Mechanics
 //
 // Mental model:
 // A closure remembers variables from the scope where it was created.
@@ -83,9 +88,10 @@ func main() {
 		f()
 	}
 
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.10 -> 03-functions-errors/10-panic-and-recover")
-	fmt.Println("Current: FE.9 (closures - mechanics)")
-	fmt.Println("Previous: FE.8 (first-class-functions)")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: FE.7 -> 03-functions-errors/9-order-summary")
+	fmt.Println("Run    : go run ./03-functions-errors/9-order-summary")
+	fmt.Println("Current: FE.9 (closures-mechanics)")
 	fmt.Println("---------------------------------------------------")
 }

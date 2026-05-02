@@ -8,16 +8,22 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn the core Go rule for ordinary failure: return an error value instead of hiding the failure.
+//   - Why Go returns errors as values instead of using exceptions.
+//   - Using `errors.New` and `fmt.Errorf` to create error values.
+//   - The `if err != nil` idiom for checking failures.
+//   - Why the result is unreliable when an error is present.
 //
 // WHY THIS MATTERS:
-//   - In Go, an error is a value returned to the caller. That means: - the function does not hide failure - the caller sees the failure directly - the ca...
+//   - In many languages, a failure "blows up" the stack with an exception.
+//     In Go, a failure is just data. This forces engineers to handle
+//     problems explicitly, leading to more robust systems that don't
+//     crash unexpectedly in production.
 //
 // RUN:
 //   go run ./03-functions-errors/4-errors-as-values
 //
 // KEY TAKEAWAY:
-//   - Learn the core Go rule for ordinary failure: return an error value instead of hiding the failure.
+//   - Errors are data, not magic. Handle them explicitly.
 // ============================================================================
 
 package main
@@ -27,7 +33,7 @@ import (
 	"fmt"
 )
 
-// 05 Functions and Errors - Errors as Values
+// Section 03: Functions & Errors - Errors as Values
 //
 // Mental model:
 // An error is a returned value that tells the caller the work did not succeed.
@@ -70,9 +76,10 @@ func main() {
 		fmt.Println("tea price:", teaPrice)
 	}
 
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.5 -> 03-functions-errors/5-validation")
-	fmt.Println("Current: FE.4 (errors as values)")
-	fmt.Println("Previous: FE.3 (multiple-return-values)")
+	fmt.Println("Run    : go run ./03-functions-errors/5-validation")
+	fmt.Println("Current: FE.4 (errors-as-values)")
 	fmt.Println("---------------------------------------------------")
 }

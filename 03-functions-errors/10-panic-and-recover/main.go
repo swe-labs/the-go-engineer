@@ -8,22 +8,28 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn when panic is appropriate, when it is not, and how recover turns a crash into an explicit boundary decision.
+//   - Using panic for unrecoverable "Impossible" states.
+//   - Catching panics with recover inside a deferred function.
+//   - Understanding stack unwinding during a panic event.
 //
 // WHY THIS MATTERS:
-//   - Errors describe expected failure. Panic describes broken assumptions. Recover belongs at process or request boundaries, not in ordinary business flow.
+//   - Errors are for expected failures; Panic is for broken assumptions.
+//     Mastering the recovery boundary allows you to build resilient
+//     systems (like web servers) that can survive a crash in a single
+//     request handler without bringing down the entire service.
 //
 // RUN:
 //   go run ./03-functions-errors/10-panic-and-recover
 //
 // KEY TAKEAWAY:
-//   - Learn when panic is appropriate, when it is not, and how recover turns a crash into an explicit boundary decision.
+//   - Use panic only for system-level or programmer errors.
 // ============================================================================
 
 package main
 
 import "fmt"
 
+// Section 03: Functions & Errors - Panic and Recover
 //
 // Mental model:
 // Panic is for "impossible" errors. Recover is the safety net at the boundary.
@@ -58,9 +64,10 @@ func main() {
 
 	fmt.Println("\nProgram continued running after the recovered panic.")
 
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: TI.1 -> 04-types-design/1-struct")
-	fmt.Println("Current: FE.10 (panic and recover)")
-	fmt.Println("Previous: FE.7 (order-summary)")
+	fmt.Println("Run    : go run ./04-types-design/1-struct")
+	fmt.Println("Current: FE.10 (panic-and-recover)")
 	fmt.Println("---------------------------------------------------")
 }

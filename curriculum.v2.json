@@ -1007,7 +1007,7 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "mixed",
-                      "path":  "03-functions-errors/7-order-summary",
+                      "path":  "03-functions-errors/9-order-summary",
                       "prerequisites":  [
                                             "FE.1",
                                             "FE.2",
@@ -1018,9 +1018,9 @@
                                             "FE.8",
                                             "FE.9"
                                         ],
-                      "run_command":  "go run ./03-functions-errors/7-order-summary",
-                      "test_command":  "go test ./03-functions-errors/7-order-summary",
-                      "starter_path":  "03-functions-errors/7-order-summary/_starter",
+                      "run_command":  "go run ./03-functions-errors/9-order-summary",
+                      "test_command":  "go test ./03-functions-errors/9-order-summary",
+                      "starter_path":  "03-functions-errors/9-order-summary/_starter",
                       "next_items":  [
                                          "FE.10"
                                      ]
@@ -1035,9 +1035,9 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "run",
-                      "path":  "03-functions-errors/8-first-class-functions",
+                      "path":  "03-functions-errors/7-first-class-functions",
                       "prerequisites":  null,
-                      "run_command":  "go run ./03-functions-errors/8-first-class-functions",
+                      "run_command":  "go run ./03-functions-errors/7-first-class-functions",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -1054,15 +1054,15 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "run",
-                      "path":  "03-functions-errors/9-closures-mechanics",
+                      "path":  "03-functions-errors/8-closures-mechanics",
                       "prerequisites":  [
                                             "FE.8"
                                         ],
-                      "run_command":  "go run ./03-functions-errors/9-closures-mechanics",
+                      "run_command":  "go run ./03-functions-errors/8-closures-mechanics",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
-                                         "FE.10"
+                                         "FE.7"
                                      ]
                   },
                   {

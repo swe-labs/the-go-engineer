@@ -12,7 +12,7 @@ import "fmt"
 // Pricing rules are function values, and the discount helper is a closure that
 // captures threshold and amount.
 //
-// Run: go run ./03-functions-errors/7-order-summary/_starter
+// Run: go run ./03-functions-errors/9-order-summary/_starter
 
 type pricingRule func(int) int
 

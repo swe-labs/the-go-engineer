@@ -8,23 +8,27 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how a function receives input and gives a result back to the caller.
+//   - Declaring function parameters (input) and return types (output).
+//   - How `int` values are passed by copy.
+//   - How slice headers are copied into function boundaries.
 //
 // WHY THIS MATTERS:
-//   - Parameters are the values a function needs to do its job. Return values are the results it gives back.
+//   - Functions are more than just named blocks; they are data processors.
+//     Understanding how data moves in and out of a function is the key to
+//     building reusable logic that doesn't rely on global state.
 //
 // RUN:
 //   go run ./03-functions-errors/2-parameters-and-returns
 //
 // KEY TAKEAWAY:
-//   - Learn how a function receives input and gives a result back to the caller.
+//   - Parameters = Input; Return values = Output.
 // ============================================================================
 
 package main
 
 import "fmt"
 
-// 05 Functions and Errors - Parameters and Returns
+// Section 03: Functions & Errors - Parameters and Returns
 //
 // Mental model:
 // Parameters bring values into a function, and return values send results back.
@@ -58,9 +62,10 @@ func main() {
 
 	fmt.Println(summary)
 
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.3 -> 03-functions-errors/3-multiple-return-values")
-	fmt.Println("Current: FE.2 (parameters and returns)")
-	fmt.Println("Previous: FE.1 (functions-basics)")
+	fmt.Println("Run    : go run ./03-functions-errors/3-multiple-return-values")
+	fmt.Println("Current: FE.2 (parameters-and-returns)")
 	fmt.Println("---------------------------------------------------")
 }

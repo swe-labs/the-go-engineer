@@ -8,23 +8,27 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn what a function boundary is and why naming a piece of work is better than leaving everything inline in `main()`.
+//   - Defining function boundaries using the `func` keyword.
+//   - Naming blocks of code to improve readability.
+//   - How the program execution jumps between `main` and other functions.
 //
 // WHY THIS MATTERS:
-//   - A function gives a piece of work a name. Instead of keeping every step directly in `main()`, you move one small responsibility into a separate func...
+//   - Real-world programs are too complex to stay inside a single `main()`
+//     function. Functions are the primary tool Go engineers use to break
+//     large problems into small, manageable, and testable pieces.
 //
 // RUN:
 //   go run ./03-functions-errors/1-functions-basics
 //
 // KEY TAKEAWAY:
-//   - Learn what a function boundary is and why naming a piece of work is better than leaving everything inline in `main()`.
+//   - A function encapsulates one recognizable responsibility.
 // ============================================================================
 
 package main
 
 import "fmt"
 
-// 05 Functions and Errors - Functions Basics
+// Section 03: Functions & Errors - Functions Basics
 //
 // Mental model:
 // A function gives one piece of work a name so main() can stay readable.
@@ -49,9 +53,10 @@ func main() {
 	printGoal()
 	printChecklist()
 
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.2 -> 03-functions-errors/2-parameters-and-returns")
-	fmt.Println("Current: FE.1 (functions basics)")
-	fmt.Println("Previous: DS.6 (contact-manager)")
+	fmt.Println("Run    : go run ./03-functions-errors/2-parameters-and-returns")
+	fmt.Println("Current: FE.1 (functions-basics)")
 	fmt.Println("---------------------------------------------------")
 }

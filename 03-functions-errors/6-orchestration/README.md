@@ -2,15 +2,7 @@
 
 ## Mission
 
-Learn how one function can coordinate several smaller helpers without losing readability.
-
-## Why This Lesson Exists Now
-
-You now know how to write individual functions that do one job well. But how do you combine them into a larger workflow?
-
-That is orchestration: one function that calls several helpers in the right order. It keeps the main function clean while still doing complex work.
-
-> **Backward Reference:** In [Lesson 5: Validation](../5-validation/README.md), you learned how to write early guard clauses. Here, you will use those validators as the first steps in a larger orchestration function, guaranteeing that bad data never reaches the core logic.
+Learn how one function can coordinate several smaller "Specialist" functions to build a complex workflow.
 
 ## Prerequisites
 
@@ -18,55 +10,39 @@ That is orchestration: one function that calls several helpers in the right orde
 
 ## Mental Model
 
-Orchestration means one function controls the order of several smaller jobs.
+Orchestration is like being a **Project Manager**.
+A Project Manager doesn't do the design, writing, or coding themselves. Instead, they:
+1. Define the order of operations.
+2. Call the right specialists at the right time.
+3. Stop the project if a critical step fails.
 
-It does not do every detail itself.
-It decides:
+This keeps your code "modular". If the validation logic needs to change, you only change the validator function—the orchestrator stays the same.
 
-- what should happen first
-- what should happen next
-- when the whole flow should stop early
+> [!NOTE]
+> In [FE.5 Validation](../5-validation/README.md), you learned how to write early guard clauses. Here, you will use those validators as the first steps in a larger orchestration function, guaranteeing that bad data never reaches the core logic.
 
 ## Visual Model
 
 ```mermaid
-graph LR
-    A["input"] --> B["function boundary"]
-    B --> C["value or error"]
-```
-
-```text
-processCart(name, prices)
-   |
-   +--> validateCartName(name)
-   |
-   +--> validatePrices(prices)
-   |
-   +--> sumPrices(prices)
-   |
-   +--> buildSummary(name, total)
-   |
-   +--> return summary
-```
-
-```text
-if any validation step returns an error
-processCart stops immediately
-and returns that error to the caller
+graph TD
+    A["processCart(name, prices)"] --> B["validateCartName(name)"]
+    B -- "Error" --> B1["Return early"]
+    B -- "OK" --> C["validatePrices(prices)"]
+    C -- "Error" --> C1["Return early"]
+    C -- "OK" --> D["sumPrices(prices)"]
+    D --> E["buildSummary(name, total)"]
+    E --> F["Return (summary, nil)"]
 ```
 
 ## Machine View
 
-Orchestration is mostly about control flow between functions.
-
-The important machine truth is:
-
-- the caller enters one top-level function
-- that function calls helpers one at a time
-- each helper returns control to the orchestrator
-- the orchestrator decides whether to continue or return early
-
-This is how programs start growing without becoming one giant `main()`.
+Orchestration is about managing the **Call Stack**.
+1. `main` calls `processCart`.
+2. `processCart` calls `validateCartName`.
+3. Control returns to `processCart`.
+4. `processCart` checks the error.
+5. If clean, `processCart` calls the next helper.
+This creates a "layered" execution where the orchestrator maintains the state (like the `total` variable) while helpers do the math or formatting.
 
 ## Run Instructions
 
@@ -76,79 +52,31 @@ go run ./03-functions-errors/6-orchestration
 
 ## Code Walkthrough
 
-### `func processCart(name string, prices []int) (string, error) {`
+- **`processCart`**: The Orchestrator. It coordinates the helpers.
+- **Short-Circuiting**: If any validator returns a non-nil `err`, `processCart` immediately returns that error to `main`.
+- **Delegation**: `processCart` doesn't know *how* to sum prices or format a string; it just knows which functions to call to get those results.
 
-This is the orchestration function.
-It does not own every small detail.
-It owns the order of the work.
-
-### `if err := validateCartName(name); err != nil {`
-
-This line says:
-
-- run the validation helper
-- if it failed, stop immediately
-- return the error to the caller
-
-That is the cleanest early example of short-circuit control flow across functions.
-
-### `if err := validatePrices(prices); err != nil {`
-
-This repeats the same pattern for the second validation rule.
-
-The repetition is useful because it teaches a readable contract:
-
-- validate
-- stop if invalid
-- continue only if safe
-
-### `total := sumPrices(prices)`
-
-Only after validation succeeds does the orchestrator continue to the real work.
-
-### `summary := buildSummary(name, total)`
-
-This delegates the formatting step to another helper instead of mixing it into the control logic.
-
-### `return summary, nil`
-
-This returns a successful result only after every earlier step passed.
-
-### `summary, err := processCart("starter cart", []int{12, 18, 25})`
-
-This is the caller-side pattern:
-
-- one function call
-- one summary result
-- one error result
-
-The caller does not need to know every internal helper step.
+> [!TIP]
+> You have now learned how to validate data, handle errors, and orchestrate complex flows. It's time to put all of these skills to the test. In [FE.7 Order Summary](../9-order-summary/README.md), you will build a complete pricing and tax engine from scratch.
 
 ## Try It
 
-1. Change the cart name to an empty string and watch the early return path.
-2. Add a negative price and confirm that `sumPrices` is no longer reached.
-3. Add one more price and see how the summary changes on the success path.
-
-## Common Questions
-
-- Why not call `sumPrices` directly from `main()`?
-  Because `processCart` is teaching how one function can own the whole flow.
-
-- Is orchestration the same as abstraction?
-  Not exactly. This lesson is about ordering helper steps clearly.
+1. In `main.go`, add a new helper function `func calculateTax(total int) int` and add it to the `processCart` flow.
+2. Modify the summary to include the tax amount.
+3. What happens if you call `sumPrices` *before* `validatePrices`? Why is the order important?
 
 ## In Production
-Real application code often becomes readable because one function coordinates smaller helpers
-instead of doing everything in one place.
+
+Real-world Go services (like an API endpoint) are almost entirely orchestration.
+`HandleRequest` -> `ValidateInput` -> `CheckAuth` -> `QueryDatabase` -> `FormatResponse`.
+Keeping these steps separated into helpers is what allows teams to maintain massive codebases for years.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** Up to this point, all your functions have been rigidly defined at compile time. In [Lesson 8: First-Class Functions](../8-first-class-functions/README.md), you will discover that functions themselves can be treated as data-assigned to variables and passed as arguments.
+1. Why does `processCart` return `(string, error)` instead of just `string`?
+2. How does orchestration help you write unit tests for your code?
+3. What is the danger of an orchestrator that "knows too much" about the inner workings of its helpers?
 
 ## Next Step
 
-Next: `FE.8` -> [`03-functions-errors/8-first-class-functions`](../8-first-class-functions/README.md)
+Next: `FE.8` -> [`03-functions-errors/7-first-class-functions`](../7-first-class-functions/README.md)

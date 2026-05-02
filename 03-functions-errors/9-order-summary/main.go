@@ -8,16 +8,20 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Build a small order-summary program that combines validation, helper functions, first-class functions, closures, multiple return values, and explic...
+//   - Combining validation, orchestration, and advanced functions.
+//   - Passing behavior via first-class function slices (pricing rules).
+//   - Using closure factories to generate configurable logic.
 //
 // WHY THIS MATTERS:
-//   - This milestone is a pipeline of small functions: - validate inputs - stop early on error - calculate totals - apply pricing rules passed in as call...
+//   - This is the capstone for Section 03. It demonstrates how a
+//     production-grade pipeline is built using small, focused boundaries
+//     that coordinate through explicit errors and flexible callbacks.
 //
 // RUN:
-//   go run ./03-functions-errors/7-order-summary
+//   go run ./03-functions-errors/9-order-summary
 //
 // KEY TAKEAWAY:
-//   - Build a small order-summary program that combines validation, helper functions, first-class functions, closures, multiple return values, and explic...
+//   - Focused functions compose into powerful, readable systems.
 // ============================================================================
 
 package main
@@ -28,7 +32,7 @@ import (
 	"strings"
 )
 
-// 05 Functions and Errors - Order Summary (Exercise)
+// Section 03: Functions & Errors - Order Summary (Milestone)
 //
 // Mental model:
 // Smaller helpers validate and calculate, one orchestration function owns the
@@ -162,9 +166,10 @@ func main() {
 		fmt.Println(summary)
 	}
 
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: FE.10 -> 03-functions-errors/10-panic-and-recover")
-	fmt.Println("Current: FE.7 (order summary)")
-	fmt.Println("Previous: FE.9 (closures-mechanics)")
+	fmt.Println("Run    : go run ./03-functions-errors/10-panic-and-recover")
+	fmt.Println("Current: FE.7 (order-summary)")
 	fmt.Println("---------------------------------------------------")
 }

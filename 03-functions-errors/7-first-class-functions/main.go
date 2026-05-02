@@ -8,22 +8,28 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn that functions are ordinary values in Go, which makes callbacks and higher-order helpers possible.
+//   - Treating functions as data using function signatures.
+//   - Assigning functions to variables and passing them as arguments.
+//   - Defining and using "Anonymous Functions" (lambda functions).
 //
 // WHY THIS MATTERS:
-//   - A function value is just another tool you can store, pass, and call later.
+//   - First-class functions are the foundation of "Higher-Order"
+//     programming. Instead of hardcoding behavior, you can design systems
+//     where the caller decides *how* a task is performed by passing in a
+//     callback. This is common in middleware, retries, and data processing.
 //
 // RUN:
-//   go run ./03-functions-errors/8-first-class-functions
+//   go run ./03-functions-errors/7-first-class-functions
 //
 // KEY TAKEAWAY:
-//   - Learn that functions are ordinary values in Go, which makes callbacks and higher-order helpers possible.
+//   - Functions are values that hold behavior.
 // ============================================================================
 
 package main
 
 import "fmt"
 
+// Section 03: Functions & Errors - First-Class Functions
 //
 // Mental model:
 // A function is just a value. You can assign it to a variable or pass it to another function.
@@ -66,9 +72,10 @@ func main() {
 	}
 	fmt.Printf("calculate with anonymous subtract: %d\n", calculate(10, 4, subtract))
 
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: FE.9 -> 03-functions-errors/9-closures-mechanics")
-	fmt.Println("Current: FE.8 (first-class functions)")
-	fmt.Println("Previous: FE.6 (orchestration)")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: FE.9 -> 03-functions-errors/8-closures-mechanics")
+	fmt.Println("Run    : go run ./03-functions-errors/8-closures-mechanics")
+	fmt.Println("Current: FE.8 (first-class-functions)")
 	fmt.Println("---------------------------------------------------")
 }

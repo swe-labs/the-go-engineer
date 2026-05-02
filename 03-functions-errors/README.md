@@ -1,46 +1,47 @@
-# 03 Functions & Errors
+# Section 03: Functions & Errors
 
 ## Mission
 
-This stage teaches how to model behavior boundaries and failure states. It moves beyond basic control flow to treat both functions and errors as explicit, manageable values.
+Learn how to model behavior boundaries and failure states by treating both functions and errors as first-class, manageable values in Go.
 
-By the end of this stage, a learner should be able to:
+By the end of this section, a learner should be able to:
+- Define function signatures with multiple returns and named return values.
+- Handle errors explicitly as values instead of using exceptions.
+- Use `defer` for deterministic resource cleanup.
+- Implement first-class functions and state-capturing closures.
+- Understand the mechanics of panic and recover boundaries.
 
-- define function signatures with multiple returns
-- handle errors explicitly as values instead of exceptions
-- use defer for safe resource cleanup
-- implement first-class functions and closures
-- understand panic and recover boundaries
+## Section Map
 
-## Stage Map
-
-| Track | Surface | Core Job |
+### Track 1: Function Basics (FE)
+| ID | Lesson | What It Unlocks |
 | --- | --- | --- |
-| `FE.1-6` | Core Functions | Teach basic signatures, multiple returns, named returns, and defer. |
-| `FE.7` | Order Summary | Capstone exercise combining function basics. |
-| `FE.8-9` | Advanced Functions | Teach first-class functions, callbacks, and closure state capture. |
-| `FE.10` | Panic & Recover | Teach the final boundary for unrecoverable errors. |
+| `FE.1` | [Functions Basics](./1-functions-basics/) | Encapsulating logic into reusable boundaries. |
+| `FE.2` | [Parameters and Returns](./2-parameters-and-returns/) | Passing data in and getting results out. |
+| `FE.3` | [Multiple Return Values](./3-multiple-return-values/) | Go's idiomatic way to return data and error simultaneously. |
+| `FE.4` | [Errors as Values](./4-errors-as-values/) | Why Go doesn't use try/catch and how to handle errors. |
+| `FE.5` | [Validation](./5-validation/) | Guard clauses and defensive programming. |
+| `FE.6` | [Orchestration](./6-orchestration/) | Coordinating multiple functions to solve a workflow. |
 
-## Why This Stage Exists Now
+### Track 2: Advanced Functions (FE)
+| ID | Lesson | What It Unlocks |
+| --- | --- | --- |
+| `FE.8` | [First-Class Functions](./7-first-class-functions/) | Treating functions as data and callbacks. |
+| `FE.9` | [Closures Mechanics](./8-closures-mechanics/) | Functions that "carry" their environment with them. |
+| `FE.7` | [Order Summary](./9-order-summary/) | **Milestone**: Building a multi-step pricing and tax engine. |
+| `FE.10` | [Panic and Recover](./10-panic-and-recover/) | Handling unrecoverable failures and stopping crashes. |
 
-The learner already knows:
+## Zero-Magic Boundary
 
-- variables, types, and basic operators
-- control flow (if, for, switch)
-- basic data structures (arrays, slices, maps)
+This section focuses on **Logical Boundaries**.
+It does **not** formally teach:
+- Struct methods or Receivers (covered in Section 04).
+- Interface-based polymorphism (covered in Section 04).
+- Package-level visibility and internal/external boundaries (covered in Section 05).
 
-That is enough to start asking engineering questions like:
-
-- how do we group logic into reusable blocks?
-- how do we signal failure back to the caller safely?
-- how do we ensure resources are closed when a function exits?
-
-## Suggested Learning Flow
-
-1. Follow the numeric sequence from `FE.1` to `FE.6`.
-2. Complete the `FE.7` exercise to prove your understanding.
-3. Finish the advanced topics in `FE.8` to `FE.10`.
+> [!NOTE]
+> Functions are the fundamental unit of work in Go. Mastering them is a prerequisite for [Section 04: Type Design](../04-types-design/README.md), where you will learn to attach this behavior to custom data types.
 
 ## Next Step
 
-After this section, continue to [04 Types & Design](../04-types-design).
+After completing this section, continue to [Section 04: Type Design](../04-types-design/README.md).

@@ -2,15 +2,7 @@
 
 ## Mission
 
-Learn how a function rejects bad input before the program does the real work.
-
-## Why This Lesson Exists Now
-
-Now you know how to return errors. The next question is: when should you return one?
-
-This is called validation. It catches problems early before they cause harder-to-debug issues later.
-
-> **Backward Reference:** In [Lesson 4: Errors as Values](../4-errors-as-values/README.md), you learned the mechanics of returning an error. Validation is one of the most common applications of this pattern: inspecting input and returning an error if it fails the rules.
+Learn how a function rejects bad input before the program does the real work using "Guard Clauses".
 
 ## Prerequisites
 
@@ -18,40 +10,29 @@ This is called validation. It catches problems early before they cause harder-to
 
 ## Mental Model
 
-Validation is the first gate before useful work begins.
+Validation is the **Security Guard** at the entrance of your function.
+If the data looks suspicious (empty strings, negative prices, etc.), the guard stops the execution immediately and sends back an error.
 
-If the input is clearly wrong, the function should say so immediately instead of pretending the work
-can continue safely.
+By rejecting bad data early, you keep the "Happy Path" (the core logic of your function) clean and safe from edge-case bugs.
+
+> [!NOTE]
+> In [FE.4 Errors as Values](../4-errors-as-values/README.md), you learned the mechanics of returning an error. Validation is one of the most common applications of this pattern: inspecting input and returning an error if it fails the rules.
 
 ## Visual Model
 
 ```mermaid
 graph LR
-    A["input"] --> B["function boundary"]
-    B --> C["value or error"]
-```
-```text
-cart name -----------+
-prices --------------+--> validation gate --> ok --> continue
-```
-
-```text
-cart name -----------+
-prices --------------+--> validation gate --> error --> stop early
+    A["Input Data"] --> B{{"Validation Gate"}}
+    B -- "Fail" --> C["Return Error (Stop)"]
+    B -- "Pass" --> D["Core Logic (Proceed)"]
 ```
 
 ## Machine View
 
-Validation changes control flow very early.
-
-The important machine truth is:
-
-- the function reads the input
-- it checks the input against a rule
-- if the rule fails, the function returns immediately with an error value
-- later lines in that function do not run on the failure path
-
-That "return early" behavior is the real engineering habit this lesson is building.
+The "Guard Clause" pattern optimizes for the success path while minimizing nesting.
+- Instead of using `else` blocks, we `return` early on failure.
+- This keeps the function's memory usage low (fewer stack frames for nested logic).
+- It makes the code easier for the CPU branch predictor to handle because the failure paths are short-circuited.
 
 ## Run Instructions
 
@@ -61,82 +42,29 @@ go run ./03-functions-errors/5-validation
 
 ## Code Walkthrough
 
-### `func validateCartName(name string) error {`
+- **`validateCartName`**: Checks if the string is empty or just whitespace.
+- **`strings.TrimSpace(name)`**: Ensures "   " is treated as empty.
+- **`validatePrices`**: Checks if the slice is empty AND if any individual price is negative.
+- **Return early**: The moment a negative price is found, the function exits. It doesn't keep checking the rest of the slice.
 
-This function takes one input and returns one `error`.
-
-That alone teaches a useful shape:
-
-- some functions do not return business data
-- some functions return only "did this pass or fail?"
-
-### `strings.TrimSpace(name) == ""`
-
-This line treats blank spaces as empty input too.
-That makes the validation rule more honest than checking only `name == ""`.
-
-### `return errors.New("cart name is required")`
-
-This is the failure path.
-The function does not continue because the input is not valid enough.
-
-### `return nil`
-
-This is the success path.
-`nil` means "no validation error."
-
-### `func validatePrices(prices []int) error {`
-
-This second validator shows that one section can have several input checks, each with one clear job.
-
-### `if len(prices) == 0 {`
-
-This rejects an empty slice before any loop begins.
-
-### `for i, price := range prices {`
-
-This line checks each input value one by one.
-
-### `if price < 0 {`
-
-This is the specific rule for "bad price data."
-
-### `return fmt.Errorf("price at index %d cannot be negative", i)`
-
-This builds an error that tells the caller exactly which input failed.
-
-### `err := validateCartName("starter cart")`
-
-This shows the caller-side pattern again:
-
-- call the validator
-- receive the error
-- inspect the error before moving on
+> [!TIP]
+> You now have the tools to validate data and return errors. But what happens when you have a complex process that requires multiple validation steps, a computation, and formatting a final result? In [FE.6 Orchestration](../6-orchestration/README.md), you will learn how to coordinate multiple smaller functions from one central "orchestrator" function.
 
 ## Try It
 
-1. Change the first cart name to an empty string and watch the failure path.
-2. Change one of the prices to a negative number and observe the returned error.
-3. Replace `"starter cart"` with `"   "` and confirm that whitespace-only input still fails.
-
-## Common Questions
-
-- Why validate before the real work starts?
-  Because bad input should stop the flow before it can create a misleading result.
-
-- Why return `error` instead of `bool`?
-  Because the caller needs a reason, not only a yes/no signal.
+1. In `main.go`, try validating a cart name with only symbols (e.g., `"$#%"`). Does it pass current validation?
+2. Add a new rule to `validatePrices`: no price should be greater than `1000`.
+3. Try passing a `nil` slice to `validatePrices`. What happens to the `len(prices)` check?
 
 ## In Production
-Validation is one of the earliest places where engineering discipline shows up.
-It protects the rest of the program from clearly broken input.
+
+Validation is not just about catching errors—it's about defining the **Contract** of your function. When you validate inputs, you are telling other developers (and your future self) exactly what kind of data your logic is designed to handle.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** You now have the tools to validate data and return errors. But what happens when you have a complex process that requires multiple validation steps, a computation, and formatting a final result? In [Lesson 6: Orchestration](../6-orchestration/README.md), you will learn how to coordinate multiple smaller functions from one central "orchestrator" function.
+1. Why is it better to return an error than to silently fix the bad data (like changing a negative price to 0)?
+2. How does the "Return Early" pattern make code easier to read compared to nested `if/else` blocks?
+3. What is the difference between a validation error and a program crash (panic)?
 
 ## Next Step
 
