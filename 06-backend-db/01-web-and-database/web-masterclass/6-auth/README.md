@@ -75,7 +75,8 @@ SHA-256 is too fast. Modern computers can calculate billions of SHA-256 hashes p
 2. How does using a `Salt` protect against Rainbow Tables?
 3. What is the difference between "Authentication" and "Authorization"?
 
-> **Forward Reference:** You can identify users. Now let's learn how to interact with them through data. In [Lesson 7: Working with Forms](../7-forms/README.md), you will learn how to safely parse and validate user input from HTML forms.
+> [!TIP]
+> You can identify users. Now let's learn how to interact with them through data. In [Lesson 7: Working with Forms](../7-forms/README.md), you will learn how to safely parse and validate user input from HTML forms.
 
 ## Next Step
 

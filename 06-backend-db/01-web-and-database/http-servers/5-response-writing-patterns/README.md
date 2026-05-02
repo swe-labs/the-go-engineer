@@ -72,7 +72,8 @@ Always handle encoding errors. While rare, `json.NewEncoder.Encode` can fail (e.
 2. What is the benefit of the `omitempty` tag in the `APIResponse` struct?
 3. How would you handle responding with different formats (JSON vs XML) based on the client's `Accept` header?
 
-> **Forward Reference:** You can now send beautiful responses. But what happens when something goes wrong deep inside your code? You don't want to manually handle every possible error in every handler. In [Lesson 6: Error Handling Middleware](../6-error-handling-middleware/README.md), you will learn how to centralize your error logic for a cleaner, more robust server.
+> [!TIP]
+> You can now send beautiful responses. But what happens when something goes wrong deep inside your code? You don't want to manually handle every possible error in every handler. In [Lesson 6: Error Handling Middleware](../6-error-handling-middleware/README.md), you will learn how to centralize your error logic for a cleaner, more robust server.
 
 ## Next Step
 

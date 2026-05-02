@@ -64,7 +64,8 @@ Breaking the major version boundary without updating the import path is a "contr
 2. How does the `/v2` rule help resolve conflicts where two of your dependencies require different major versions of a third library?
 3. When should you use the `replace` directive in a production `go.mod` file?
 
-> **Forward Reference:** You now understand how versions are managed and enforced. But how do you handle different versions of your own code for different environments (e.g., Windows vs Linux)? In [Lesson 4: Build Tags](../4-build-tags/README.md), you will learn how to control which files are included in your binary.
+> [!TIP]
+> You now understand how versions are managed and enforced. But how do you handle different versions of your own code for different environments (e.g., Windows vs Linux)? In [Lesson 4: Build Tags](../4-build-tags/README.md), you will learn how to control which files are included in your binary.
 
 ## Next Step
 

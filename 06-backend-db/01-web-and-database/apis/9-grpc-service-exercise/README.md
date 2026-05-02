@@ -88,7 +88,8 @@ For production gRPC services, you should always:
 2. What are the benefits of having the server interface generated for you?
 3. How would you handle a "Breaking Change" in this service implementation?
 
-> **Forward Reference:** You have mastered the "Web" side of Backend Engineering. Now, it's time to learn about the "Database" side. In [Section 06: Databases / Lesson 1: Connecting to SQLite](../../databases/1-connecting-to-db/README.md), you will begin your journey into persistent data storage.
+> [!TIP]
+> You have mastered the "Web" side of Backend Engineering. Now, it's time to learn about the "Database" side. In [Section 06: Databases / Lesson 1: Connecting to SQLite](../../databases/1-connecting-to-db/README.md), you will begin your journey into persistent data storage.
 
 ## Next Step
 

@@ -88,7 +88,8 @@ While "Pure REST" (HATEOAS) is a popular academic topic, most production APIs fo
 2. When should you use `PUT` vs `PATCH`?
 3. Is it okay to use `GET` to delete a resource if it's easier to implement? (Hint: No! Think about web crawlers).
 
-> **Forward Reference:** Your API is well-designed, but what happens when you need to change the data structure without breaking existing mobile apps? In [Lesson 2: API Versioning Strategies](../2-api-versioning-strategies/README.md), you will learn how to evolve your API safely.
+> [!TIP]
+> Your API is well-designed, but what happens when you need to change the data structure without breaking existing mobile apps? In [Lesson 2: API Versioning Strategies](../2-api-versioning-strategies/README.md), you will learn how to evolve your API safely.
 
 ## Next Step
 

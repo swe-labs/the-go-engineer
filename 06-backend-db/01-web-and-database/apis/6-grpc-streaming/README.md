@@ -79,7 +79,8 @@ Streaming is powerful but **Expensive**. Each active stream keeps a TCP connecti
 2. How would you implement a "Heartbeat" inside a bidirectional stream?
 3. When should you use a stream instead of a simple array in a Unary response? (Hint: Think about memory usage).
 
-> **Forward Reference:** Now that you can send data in every possible way, how do you handle security, logging, and metrics for all these calls? In [Lesson 7: gRPC Interceptors](../7-grpc-interceptors/README.md), you will learn how to wrap gRPC calls with middleware logic.
+> [!TIP]
+> Now that you can send data in every possible way, how do you handle security, logging, and metrics for all these calls? In [Lesson 7: gRPC Interceptors](../7-grpc-interceptors/README.md), you will learn how to wrap gRPC calls with middleware logic.
 
 ## Next Step
 

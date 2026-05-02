@@ -77,7 +77,8 @@ In a real app, the `isReady` flag would be set to `true` only after successful d
 2. What is the benefit of using the `503` status code specifically?
 3. How would you implement a "Deep" health check for a human operator to see detailed system status?
 
-> **Forward Reference:** You have learned all the pieces of a professional Go HTTP server: routing, middleware, parsing, responding, error handling, timeouts, shutdown, and health checks. It's time to put it all together. In [Lesson 10: REST API Exercise](../10-rest-api-exercise/README.md), you will build a complete, production-ready API from scratch.
+> [!TIP]
+> You have learned all the pieces of a professional Go HTTP server: routing, middleware, parsing, responding, error handling, timeouts, shutdown, and health checks. It's time to put it all together. In [Lesson 10: REST API Exercise](../10-rest-api-exercise/README.md), you will build a complete, production-ready API from scratch.
 
 ## Next Step
 

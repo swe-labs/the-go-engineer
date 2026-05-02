@@ -91,7 +91,8 @@ In a real production environment, you would never store your data in an in-memor
 2. How would you handle a situation where two people try to update the same task at the same time? (Optimistic Locking).
 3. What are the benefits of grouping handlers on a struct instead of using top-level functions?
 
-> **Forward Reference:** You have mastered the "how" of building HTTP servers. Now, let's focus on the "why" and "how best" of API design. In [Section 06: APIs / Lesson 1: REST Design Principles](../../apis/1-rest-design-principles/README.md), you will learn the theory behind building truly professional, scalable web interfaces.
+> [!TIP]
+> You have mastered the "how" of building HTTP servers. Now, let's focus on the "why" and "how best" of API design. In [Section 06: APIs / Lesson 1: REST Design Principles](../../apis/1-rest-design-principles/README.md), you will learn the theory behind building truly professional, scalable web interfaces.
 
 ## Next Step
 

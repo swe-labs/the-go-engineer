@@ -100,6 +100,12 @@ var (
 		"stretch":    true,
 		"production": true,
 	}
+	levelDisplayLabels = map[string]string{
+		"foundation": "Foundation",
+		"core":       "Core",
+		"production": "Production",
+		"stretch":    "Stretch",
+	}
 	allowedVerificationModes = map[string]bool{
 		"run":    true,
 		"test":   true,
@@ -636,6 +642,7 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 	}
 
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
+	errorsFound += validateV2LessonSourceHeaders(root, cur.Items, report)
 	errorsFound += validateV2ReadmeNavigation(root, cur.Items, report)
 	errorsFound += validateFlagshipProjects(root, sectionIDs, cur.Items, report)
 	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
@@ -1378,6 +1385,110 @@ func validateV2LessonNavigation(root string, items []V2Item, report func(string)
 	return errorsFound
 }
 
+func validateV2LessonSourceHeaders(root string, items []V2Item, report func(string)) int {
+	errorsFound := 0
+
+	for _, item := range items {
+		if isPlaceholderItem(item) {
+			continue
+		}
+
+		expectedLevel, ok := levelDisplayLabels[item.Level]
+		if !ok {
+			continue
+		}
+
+		mainPath := filepath.ToSlash(filepath.Join(item.Path, "main.go"))
+		if !pathExists(root, mainPath) {
+			continue
+		}
+
+		data, cleanPath, err := readRepoFile(root, mainPath)
+		if err != nil {
+			report(fmt.Sprintf("Failed to read v2 lesson source header: %s -> %v", item.ID, err))
+			errorsFound++
+			continue
+		}
+
+		actualLevel, found := lessonCommentHeaderValue(data, "Level:")
+		if !found {
+			report(fmt.Sprintf("Missing v2 lesson level header: %s -> %s (expected Level: %s)", item.ID, cleanPath, expectedLevel))
+			errorsFound++
+			continue
+		}
+
+		if actualLevel != expectedLevel {
+			report(fmt.Sprintf("Invalid v2 lesson level header: %s -> %s has Level: %s (expected Level: %s)", item.ID, cleanPath, actualLevel, expectedLevel))
+			errorsFound++
+		}
+
+		expectedRun := strings.TrimSpace(item.RunCommand)
+		if expectedRun == "" {
+			continue
+		}
+
+		actualRun, found := lessonRunHeader(data)
+		if !found {
+			report(fmt.Sprintf("Missing v2 lesson run header: %s -> %s (expected RUN: %s)", item.ID, cleanPath, expectedRun))
+			errorsFound++
+			continue
+		}
+
+		if actualRun != expectedRun {
+			report(fmt.Sprintf("Invalid v2 lesson run header: %s -> %s has RUN: %s (expected RUN: %s)", item.ID, cleanPath, actualRun, expectedRun))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
+}
+
+func lessonCommentHeaderValue(data []byte, prefix string) (string, bool) {
+	scanner := bufio.NewScanner(strings.NewReader(string(data)))
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		value, ok := strings.CutPrefix(line, "// "+prefix)
+		if !ok {
+			continue
+		}
+		return strings.TrimSpace(value), true
+	}
+
+	return "", false
+}
+
+func lessonRunHeader(data []byte) (string, bool) {
+	scanner := bufio.NewScanner(strings.NewReader(string(data)))
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		run, ok := strings.CutPrefix(line, "// RUN:")
+		if !ok {
+			continue
+		}
+
+		run = strings.TrimSpace(run)
+		if run != "" {
+			return run, true
+		}
+
+		for scanner.Scan() {
+			next := strings.TrimSpace(scanner.Text())
+			if next == "//" || next == "" {
+				continue
+			}
+			value, ok := strings.CutPrefix(next, "//")
+			if !ok {
+				return "", true
+			}
+			return strings.TrimSpace(value), true
+		}
+
+		return "", true
+	}
+
+	return "", false
+}
+
 func validateV2ReadmeNavigation(root string, items []V2Item, report func(string)) int {
 	errorsFound := 0
 	itemIDs := make(map[string]V2Item, len(items))
@@ -1491,6 +1602,7 @@ func validateMarkdownSurfaces(root string, report func(string)) int {
 		cleanPath := filepath.ToSlash(filepath.Clean(relPath))
 		errorsFound += validateMarkdownLocalLinks(root, cleanPath, report)
 		errorsFound += validateMarkdownTextHealth(root, cleanPath, report)
+		errorsFound += validateMarkdownReferenceAlerts(root, cleanPath, report)
 
 		return nil
 	})
@@ -1518,6 +1630,36 @@ func validateMarkdownTextHealth(root, relPath string, report func(string)) int {
 			errorsFound++
 			break
 		}
+	}
+
+	return errorsFound
+}
+
+func validateMarkdownReferenceAlerts(root, relPath string, report func(string)) int {
+	data, cleanPath, err := readRepoFile(root, relPath)
+	if err != nil {
+		report(fmt.Sprintf("Failed to read markdown surface: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	errorsFound := 0
+	scanner := bufio.NewScanner(strings.NewReader(string(data)))
+	lineNo := 0
+	for scanner.Scan() {
+		lineNo++
+		line := strings.TrimSpace(scanner.Text())
+		switch {
+		case strings.HasPrefix(line, "> **Forward Reference:**"):
+			report(fmt.Sprintf("Invalid markdown cross-reference alert: %s:%d uses Forward Reference label; use [!TIP] or [!NOTE]", cleanPath, lineNo))
+			errorsFound++
+		case strings.HasPrefix(line, "> **Backward Reference:**"):
+			report(fmt.Sprintf("Invalid markdown cross-reference alert: %s:%d uses Backward Reference label; use [!NOTE]", cleanPath, lineNo))
+			errorsFound++
+		}
+	}
+	if err := scanner.Err(); err != nil {
+		report(fmt.Sprintf("Failed to scan markdown surface: %s -> %v", cleanPath, err))
+		return errorsFound + 1
 	}
 
 	return errorsFound

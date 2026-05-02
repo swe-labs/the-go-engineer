@@ -68,7 +68,8 @@ The example uses Go's built-in `log/slog` package. It allows you to log data in 
 2. How does this pattern make it easier to write unit tests for a single handler?
 3. What happens if you forget to initialize a field in the `application` struct before the server starts?
 
-> **Forward Reference:** You have the logic and the tools. Now you need a way to present data to your users. In [Lesson 3: HTML Templates](../3-templates/README.md), you will learn how to use Go's powerful `html/template` package to generate dynamic web pages.
+> [!TIP]
+> You have the logic and the tools. Now you need a way to present data to your users. In [Lesson 3: HTML Templates](../3-templates/README.md), you will learn how to use Go's powerful `html/template` package to generate dynamic web pages.
 
 ## Next Step
 

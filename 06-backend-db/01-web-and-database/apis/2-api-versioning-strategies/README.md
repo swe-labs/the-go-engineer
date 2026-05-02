@@ -76,7 +76,8 @@ Supporting many versions forever is expensive. Most professional APIs have a **D
 2. How would you handle a bug fix that needs to be applied to all versions simultaneously?
 3. What is the danger of having too many active versions (e.g., v1 through v15)?
 
-> **Forward Reference:** You can now version your API. But as your data grows, you can't return all 1,000,000 users in a single request. In [Lesson 3: Pagination and Filtering](../3-pagination-and-filtering/README.md), you will learn how to handle large datasets efficiently.
+> [!TIP]
+> You can now version your API. But as your data grows, you can't return all 1,000,000 users in a single request. In [Lesson 3: Pagination and Filtering](../3-pagination-and-filtering/README.md), you will learn how to handle large datasets efficiently.
 
 ## Next Step
 

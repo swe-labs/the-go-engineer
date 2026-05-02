@@ -139,6 +139,7 @@ Every lesson `main.go` should include:
 - `WHY THIS MATTERS`
 - exact `RUN:` command
 - readable teaching comments
+- Machine Role comments for major constructs
 - `KEY TAKEAWAY`
 - `NEXT UP:` footer matching `curriculum.v2.json`
 
@@ -146,9 +147,9 @@ Every lesson `main.go` should include:
 
 When a lesson uses a concept from another point in the curriculum:
 
-- forward reference later concepts briefly and name the future lesson or section
-- backward reference previously established ideas when they are reused
-- use GitHub-style alerts (`[!NOTE]` or `[!TIP]`) to keep cross-references inline rather than as detached navigation blocks
+- use `[!NOTE]` for prerequisite context, backward references, and gentle forward references
+- use `[!TIP]` for actionable navigation, rerun suggestions, or learner practice advice
+- keep cross-references inline rather than as detached navigation blocks
 
 ## Validation
 
@@ -162,8 +163,14 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test -coverprofile coverage.out ./...
+go test -coverprofile=coverage.out ./...
 go run ./scripts/validate_curriculum.go
+```
+
+On PowerShell, quote the coverage flag if needed:
+
+```powershell
+go test "-coverprofile=coverage.out" ./...
 ```
 
 For benchmark-related changes:

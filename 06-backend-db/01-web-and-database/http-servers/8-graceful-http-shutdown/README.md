@@ -73,7 +73,8 @@ Graceful shutdown is mandatory for **Zero-Downtime Deployments**. In a environme
 2. What happens to new requests that arrive *after* `Shutdown` has been called but before the process exits?
 3. How does graceful shutdown help prevent data corruption in systems that write to a database?
 
-> **Forward Reference:** You've built a professional server that knows how to start and stop correctly. But how do external systems (like Load Balancers) know if your server is healthy? In [Lesson 9: Health and Readiness Probes](../9-health-and-readiness-probes/README.md), you will learn how to expose your server's internal state to the world.
+> [!TIP]
+> You've built a professional server that knows how to start and stop correctly. But how do external systems (like Load Balancers) know if your server is healthy? In [Lesson 9: Health and Readiness Probes](../9-health-and-readiness-probes/README.md), you will learn how to expose your server's internal state to the world.
 
 ## Next Step
 

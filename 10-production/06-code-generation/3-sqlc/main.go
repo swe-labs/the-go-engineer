@@ -17,6 +17,8 @@
 //   - ORMs reflect at runtime (flexible but slow, magic errors).
 //   - sqlc generates at compile time: zero runtime overhead, fails fast.
 //
+// RUN:
+//   go run ./10-production/06-code-generation/3-sqlc
 // KEY TAKEAWAY:
 //   - Write SQL first, sqlc generates type-safe Go at build time.
 //   - Column rename fails at build, not in production.

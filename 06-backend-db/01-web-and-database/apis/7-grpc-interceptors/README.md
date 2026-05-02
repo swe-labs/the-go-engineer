@@ -71,7 +71,8 @@ Interceptors often use `metadata.FromIncomingContext(ctx)` to read headers sent 
 2. What is the difference between an interceptor on the Client vs. the Server?
 3. How would you implement rate limiting using an interceptor?
 
-> **Forward Reference:** You've mastered both REST and gRPC. Which one should you use for your next project? In [Lesson 8: REST vs gRPC - The Trade-off](../8-rest-vs-grpc/README.md), we will compare these two giants head-to-head.
+> [!TIP]
+> You've mastered both REST and gRPC. Which one should you use for your next project? In [Lesson 8: REST vs gRPC - The Trade-off](../8-rest-vs-grpc/README.md), we will compare these two giants head-to-head.
 
 ## Next Step
 

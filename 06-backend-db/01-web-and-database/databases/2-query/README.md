@@ -68,7 +68,8 @@ Returns the number of rows changed by the query. For an `INSERT`, this should al
 2. What happens if you provide more placeholders than arguments?
 3. How would you handle a bulk insert of 1,000 rows at once? (Hint: Think about `sql.Tx` which we will cover later).
 
-> **Forward Reference:** You've learned how to insert data. Now let's learn how to retrieve it. In [Lesson 3: SELECTing Data](../3-select/README.md), you will learn how to query rows and scan them into Go structs.
+> [!TIP]
+> You've learned how to insert data. Now let's learn how to retrieve it. In [Lesson 3: SELECTing Data](../3-select/README.md), you will learn how to query rows and scan them into Go structs.
 
 ## Next Step
 

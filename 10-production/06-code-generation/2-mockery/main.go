@@ -17,6 +17,8 @@
 //   - Manual mocking scales poorly; interface changes require manual mock updates.
 //   - Mockery parses code and generates type-safe mock structs.
 //
+// RUN:
+//   go run ./10-production/06-code-generation/2-mockery
 // KEY TAKEAWAY:
 //   - Define interface -> add directive -> run go generate -> use generated mock.
 // ============================================================================

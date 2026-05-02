@@ -72,7 +72,8 @@ Directory traversal can be slow if the tree is very deep or stored on a network 
 2. What is the difference between `os.ReadDir` and `filepath.WalkDir`?
 3. How would you stop a `WalkDir` traversal as soon as you find the file you're looking for?
 
-> **Forward Reference:** You've learned how to manage permanent files and folders. But what about data that only needs to exist for a few minutes? In [Lesson 4: Temp Files](../4-temp/README.md), you will learn how to create and manage temporary files and directories that clean themselves up.
+> [!TIP]
+> You've learned how to manage permanent files and folders. But what about data that only needs to exist for a few minutes? In [Lesson 4: Temp Files](../4-temp/README.md), you will learn how to create and manage temporary files and directories that clean themselves up.
 
 ## Next Step
 

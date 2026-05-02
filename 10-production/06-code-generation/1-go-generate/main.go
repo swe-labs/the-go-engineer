@@ -17,6 +17,8 @@
 //   - Reflection: flexible but fails at runtime.
 //   - Generation: heavier build but fails early.
 //
+// RUN:
+//   go run ./10-production/06-code-generation/1-go-generate
 // KEY TAKEAWAY:
 //   - Go scans for //go:generate, runs tool, writes generated files.
 //   - You review and commit generated output intentionally.

@@ -71,7 +71,8 @@ For complex CLI tools, raw `os.Args` can become difficult to manage. For simple 
 2. What are the security implications of reading sensitive data from command-line arguments (which might show up in process lists like `ps`)?
 3. When should you use an environment variable instead of a command-line argument?
 
-> **Forward Reference:** Raw arguments are great for simple scripts, but as your tool grows, you will need a more structured way to handle options. In [Lesson 2: Flags](../2-flags/README.md), you will learn how to use the standard library `flag` package to parse named options and typed values.
+> [!TIP]
+> Raw arguments are great for simple scripts, but as your tool grows, you will need a more structured way to handle options. In [Lesson 2: Flags](../2-flags/README.md), you will learn how to use the standard library `flag` package to parse named options and typed values.
 
 ## Next Step
 

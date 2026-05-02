@@ -291,6 +291,85 @@ func TestValidateRejectsFakeHeadingsInCodeFence(t *testing.T) {
 	requireReportContains(t, reports, "missing ## Mission")
 }
 
+func TestValidateRejectsLessonSourceHeaderLevelDrift(t *testing.T) {
+	t.Run("missing level header", func(t *testing.T) {
+		root := t.TempDir()
+		cur := writeValidV2Fixture(t, root)
+		item := requireItem(t, cur, "HC.1")
+		writeFile(t, root, filepath.Join(item.Path, "main.go"), "package main\n\nfunc main() {}\n")
+
+		result, reports := runValidate(t, root)
+		if result.ErrorCount == 0 {
+			t.Fatalf("expected missing lesson level header report")
+		}
+		requireReportContains(t, reports, "Missing v2 lesson level header: HC.1")
+	})
+
+	t.Run("wrong level header", func(t *testing.T) {
+		root := t.TempDir()
+		cur := writeValidV2Fixture(t, root)
+		item := requireItem(t, cur, "PD.1")
+		writeFile(t, root, filepath.Join(item.Path, "main.go"), mainGoForItemWithLevel(item, "Core"))
+
+		result, reports := runValidate(t, root)
+		if result.ErrorCount == 0 {
+			t.Fatalf("expected invalid lesson level header report")
+		}
+		requireReportContains(t, reports, "Invalid v2 lesson level header: PD.1")
+		requireReportContains(t, reports, "expected Level: Production")
+	})
+
+	t.Run("wrong run header", func(t *testing.T) {
+		root := t.TempDir()
+		cur := writeValidV2Fixture(t, root)
+		item := requireItem(t, cur, "HC.1")
+		source := strings.Replace(mainGoForItem(item), "// RUN: "+item.RunCommand, "// RUN: go run ./wrong/path", 1)
+		writeFile(t, root, filepath.Join(item.Path, "main.go"), source)
+
+		result, reports := runValidate(t, root)
+		if result.ErrorCount == 0 {
+			t.Fatalf("expected invalid lesson run header report")
+		}
+		requireReportContains(t, reports, "Invalid v2 lesson run header: HC.1")
+		requireReportContains(t, reports, "expected RUN: "+item.RunCommand)
+	})
+}
+
+func TestValidateRejectsLegacyReferenceLabels(t *testing.T) {
+	tests := []struct {
+		name   string
+		label  string
+		report string
+	}{
+		{
+			name:   "forward reference label",
+			label:  "> **Forward Reference:** Continue with the next lesson.",
+			report: "uses Forward Reference label",
+		},
+		{
+			name:   "backward reference label",
+			label:  "> **Backward Reference:** Remember the previous lesson.",
+			report: "uses Backward Reference label",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := t.TempDir()
+			cur := writeValidV2Fixture(t, root)
+			item := requireItem(t, cur, "HC.1")
+			writeFile(t, root, filepath.Join(item.Path, "README.md"), validLessonReadme(item.RunCommand)+"\n"+tt.label+"\n")
+
+			result, reports := runValidate(t, root)
+			if result.ErrorCount == 0 {
+				t.Fatalf("expected legacy reference label report")
+			}
+			requireReportContains(t, reports, "Invalid markdown cross-reference alert:")
+			requireReportContains(t, reports, tt.report)
+		})
+	}
+}
+
 func TestValidateReportsBrokenLocalLinkOnlyOnce(t *testing.T) {
 	root := t.TempDir()
 	cur := writeValidV2Fixture(t, root)
@@ -548,6 +627,15 @@ func flagshipReadme(item V2Item) string {
 }
 
 func mainGoForItem(item V2Item) string {
+	level, ok := levelDisplayLabels[item.Level]
+	if !ok {
+		level = item.Level
+	}
+
+	return mainGoForItemWithLevel(item, level)
+}
+
+func mainGoForItemWithLevel(item V2Item, level string) string {
 	label := ""
 	switch item.SectionID {
 	case "s09":
@@ -556,7 +644,16 @@ func mainGoForItem(item V2Item) string {
 		label = "// Section 10 fixture\n"
 	}
 
-	return "package main\n\n" + label + "func main() {}\n"
+	return strings.Join([]string{
+		"// Section " + canonicalV2Sections[sectionIndex(item.SectionID)].Number + ": Fixture - " + item.Title,
+		"// Level: " + level,
+		"// RUN: " + item.RunCommand,
+		"",
+		"package main",
+		"",
+		label + "func main() {}",
+		"",
+	}, "\n")
 }
 
 func sectionReadme(sectionID string) string {

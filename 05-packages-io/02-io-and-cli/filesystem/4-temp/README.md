@@ -66,7 +66,8 @@ Never hardcode paths like `/tmp/my-app-lock`. This is a major security risk (all
 2. What is the difference between `os.Remove` and `os.RemoveAll` when cleaning up a temp directory?
 3. When would you want to create a temp file in a specific directory instead of the system default?
 
-> **Forward Reference:** You've learned how to handle files on the disk. But what if you want to include files *inside* your compiled binary? In [Lesson 5: Embed](../5-embed/README.md), you will learn how to use Go's `embed` package to bundle assets directly into your application.
+> [!TIP]
+> You've learned how to handle files on the disk. But what if you want to include files *inside* your compiled binary? In [Lesson 5: Embed](../5-embed/README.md), you will learn how to use Go's `embed` package to bundle assets directly into your application.
 
 ## Next Step
 

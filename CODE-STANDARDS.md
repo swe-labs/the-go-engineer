@@ -4,9 +4,11 @@ This document establishes code quality and style standards for The Go Engineer c
 
 All standards follow official Go conventions from Effective Go and Go Code Review Comments, with additional teaching requirements for this repository.
 
+Architecture and curriculum metadata remain governed by `ARCHITECTURE.md`, `curriculum.v2.json`, and `CURRICULUM-BLUEPRINT.md`.
+
 ## File Header Template
 
-Every lesson `main.go` file must start with this header:
+Every learner-facing completed lesson `main.go` file must start with this header:
 
 ```go
 // Copyright (c) 2026 Rasel Hossen
@@ -14,8 +16,9 @@ Every lesson `main.go` file must start with this header:
 
 // ============================================================================
 // Section NN: Section Name - Lesson Title
-// Level: Foundation | Core | Stretch
-// Foundation = Phase 0-1, Core = Phase 2-3, Stretch = Phase 4
+// Level: Foundation | Core | Production | Stretch
+// Use the exact item level from curriculum.v2.json.
+// Do not infer level from section alone; section phase is separate metadata.
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -29,6 +32,10 @@ Every lesson `main.go` file must start with this header:
 // RUN: go run ./NN-section-slug/N-lesson-slug
 // ============================================================================
 ```
+
+Starter files may use a smaller exercise-focused header when the learner is expected to fill in the implementation. Any completed runnable lesson surface should use the full header unless the lesson intentionally teaches a minimal file shape.
+
+`Level` is item-level difficulty and proof depth. It is different from section `phase`, which is defined in `curriculum.v2.json` as `foundations`, `engineering-core`, or `systems`.
 
 Every lesson `main()` should end with a clear takeaway and terminal footer:
 
@@ -147,8 +154,8 @@ Go constants do not use `SCREAMING_SNAKE_CASE`.
 Good:
 
 ```go
-const MaxTimeout = 30 * time.Second
-const DefaultPageSize = 50
+const maxTimeout = 30 * time.Second
+const defaultPageSize = 50
 const httpStatusOK = 200
 ```
 
@@ -161,12 +168,14 @@ const DEFAULT_PAGE_SIZE = 50
 
 ### Error Codes
 
-For public or production-shaped error codes, use stable uppercase machine codes:
+For public or production-shaped error codes, use stable uppercase machine-code values, not `SCREAMING_SNAKE_CASE` Go identifiers:
 
 ```go
-INVALID_EMAIL
-DB_QUERY_FAILED
-INTERNAL_ERROR
+const (
+	errorCodeInvalidEmail   = "INVALID_EMAIL"
+	errorCodeDBQueryFailed  = "DB_QUERY_FAILED"
+	errorCodeInternalError  = "INTERNAL_ERROR"
+)
 ```
 
 For local lesson-only examples, keep the convention consistent inside that lesson.
@@ -236,26 +245,44 @@ i++ // Increment i
 
 For every major type, complex data structure, or core function used in a lesson, add a comment that explicitly defines its **Machine Role** or technical purpose. This links Go's syntax to its functional behavior.
 
-Format: `// [SymbolName] ([Tool Type]) [Direct description of purpose/role]`
+Format: `// [SymbolName] ([Tool Type]): [direct technical role]`
+
+Use this for:
+
+- major structs, interfaces, functions, methods, and error types
+- non-obvious slices, maps, channels, mutexes, contexts, goroutines, or pipelines
+- test helpers that hide setup or cleanup complexity
+
+Do not use it for every temporary variable or obvious operation. The comment should explain the runtime or design role, not restate the identifier.
 
 Good:
 
 ```go
-// ServerConfig (Struct) aggregates configuration state into a contiguous memory block for reflection-based formatting.
+// ServerConfig (Struct): aggregates configuration state into one validated runtime boundary.
 type ServerConfig struct { ... }
 
-// parseConfig (Function) implements a text-processing pipeline to transform raw strings into validated key-value pairs.
+// parseConfig (Function): transforms raw file text into validated key-value settings.
 func parseConfig(content string) (map[string]string, error) { ... }
 
-// entries (Slice) provides an indexable, sortable container for map data to ensure stable iteration order.
+// entries (Slice): provides a sortable view of map data so output order stays deterministic.
 entries := make([]configEntry, 0, len(config))
+```
+
+Avoid:
+
+```go
+// ServerConfig is a server config.
+type ServerConfig struct { ... }
+
+// Increment i.
+i++
 ```
 
 This pattern is required for all new and refactored lessons to ensure a "Zero-Magic" learning experience.
 
 ### Cross-reference comments
 
-When a lesson uses a concept taught elsewhere, reference the lesson ID:
+When source code uses a concept taught elsewhere, reference the lesson ID and explain why the borrowed idea appears here:
 
 ```go
 // context.WithTimeout is covered in CT.3. Here we use it to prevent the query
@@ -264,9 +291,19 @@ When a lesson uses a concept taught elsewhere, reference the lesson ID:
 
 In `README.md` files, use GitHub-style alerts for cross-references:
 
+- use `[!NOTE]` for prerequisite context, backward references, and gentle forward references
+- use `[!TIP]` for actionable navigation, rerun suggestions, or learner practice advice
+- keep the alert inside the relevant README section instead of creating a detached heading
+- do not put `[!NOTE]` or `[!TIP]` syntax inside Go source comments
+
 ```markdown
 > [!NOTE]
 > This concept is covered in depth in [HC.1 What is a Program?](./00-how-computers-work/1-what-is-a-program/README.md).
+```
+
+```markdown
+> [!TIP]
+> If the terminal output feels surprising, rerun [GT.2 Hello World](./01-getting-started/2-hello-world/README.md) before continuing.
 ```
 
 Avoid detached, standalone "Forward/Backward Reference" headlines.
@@ -341,7 +378,22 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
+go test -coverprofile=coverage.out ./...
 go run ./scripts/validate_curriculum.go
+```
+
+On PowerShell, quote the coverage flag if needed:
+
+```powershell
+go test "-coverprofile=coverage.out" ./...
+```
+
+Do not commit generated `coverage.out` or `coverage.html` artifacts.
+
+For benchmark-related changes:
+
+```bash
+go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
 ```
 
 Recommended when installed:
@@ -363,7 +415,10 @@ Staticcheck is recommended locally. It should only be described as required if C
 - [ ] Concurrency avoids leaks and races.
 - [ ] Exported symbols have doc comments.
 - [ ] Lesson files have standard headers.
+- [ ] Machine Role comments explain major constructs without restating syntax.
 - [ ] `NEXT UP:` footers match curriculum metadata.
+- [ ] README cross-references use `[!NOTE]` or `[!TIP]` alerts.
 - [ ] README `Next Step` entries use clickable links to the next `README.md`.
 - [ ] Tests exist for exercises and behavior changes.
+- [ ] Full PR-readiness checks pass, including coverage generation.
 - [ ] No secrets or sensitive data are logged.

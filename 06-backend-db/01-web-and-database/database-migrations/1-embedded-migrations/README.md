@@ -70,7 +70,8 @@ This is a "Happy Error." It means the database is already at the latest version 
 2. What happens if two developers create a migration with the same version number?
 3. How would you handle a data migration (moving data from one column to another) vs. a schema migration?
 
-> **Forward Reference:** You have mastered the components of a backend service. Now, it's time to see how they all fit together in a real-world application. In [Lesson 1: Web Masterclass](../../web-masterclass/README.md), you will explore a larger codebase that integrates everything you've learned.
+> [!TIP]
+> You have mastered the components of a backend service. Now, it's time to see how they all fit together in a real-world application. In [Lesson 1: Web Masterclass](../../web-masterclass/README.md), you will explore a larger codebase that integrates everything you've learned.
 
 ## Next Step
 

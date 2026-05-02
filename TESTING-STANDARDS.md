@@ -126,7 +126,7 @@ func setupTestDB(t *testing.T) *sql.DB {
 | Area | Target |
 | --- | --- |
 | General minimum where no stricter section target exists | 75% |
-| Phase 0-1 foundation lessons with testable behavior | 80% |
+| Foundation-level lesson items with testable behavior | 80% |
 | s06 Backend, APIs & Databases | 85% |
 | s08 Quality & Testing | 95% |
 | s09 Architecture & Security | 85% |
@@ -136,13 +136,28 @@ Coverage is a signal, not a substitute for meaningful assertions.
 
 ## Required Local Verification
 
+For full PR readiness, use the same CI-equivalent bundle as `CODE-STANDARDS.md`:
+
 ```bash
+go build ./...
+go vet ./...
+unformatted=$(gofmt -l .); test -z "$unformatted" || (echo "$unformatted" && exit 1)
+go mod tidy
+git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test -coverprofile coverage.out ./...
+go test -coverprofile=coverage.out ./...
 go tool cover -func coverage.out
 go run ./scripts/validate_curriculum.go
 ```
+
+On PowerShell, quote the coverage flag if needed:
+
+```powershell
+go test "-coverprofile=coverage.out" ./...
+```
+
+Do not commit generated `coverage.out` or `coverage.html` artifacts.
 
 For benchmark changes:
 

@@ -75,7 +75,8 @@ resp, err := client.Get(url)
 2. What happens if you forget to call `resp.Body.Close()`?
 3. How would you handle an API that returns a large list of 100,000 items?
 
-> **Forward Reference:** You can now fetch data from the web. But how do you write tests for this? You don't want your unit tests to actually hit the internet! In [Lesson 2: Refactor for Testability](../2-refactor-for-testability/README.md), you will learn how to use interfaces and `httptest` to mock external APIs.
+> [!TIP]
+> You can now fetch data from the web. But how do you write tests for this? You don't want your unit tests to actually hit the internet! In [Lesson 2: Refactor for Testability](../2-refactor-for-testability/README.md), you will learn how to use interfaces and `httptest` to mock external APIs.
 
 ## Next Step
 

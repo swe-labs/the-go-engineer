@@ -72,7 +72,8 @@ A safe default for simple database queries is often between 500ms and 5 seconds.
 2. How does a database timeout help prevent "Cascading Failures" in a system with many microservices?
 3. If a query times out, does it definitely stop running on the database server? (Hint: It depends on the driver and the database!).
 
-> **Forward Reference:** You have completed the Backend and Database section! You are now equipped to build production-grade, reliable, and efficient services. In [Section 07: Concurrency](../../../../07-concurrency/README.md), you will learn how to take your performance to the next level by running multiple operations in parallel.
+> [!TIP]
+> You have completed the Backend and Database section! You are now equipped to build production-grade, reliable, and efficient services. In [Section 07: Concurrency](../../../../07-concurrency/README.md), you will learn how to take your performance to the next level by running multiple operations in parallel.
 
 ## Next Step
 

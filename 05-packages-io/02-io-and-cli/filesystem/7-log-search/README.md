@@ -71,7 +71,8 @@ Searching large filesystems can put significant pressure on disk I/O. In a produ
 2. How does `bufio.Scanner` help prevent Out-Of-Memory (OOM) errors?
 3. What are the pros and cons of implementing a case-insensitive search by converting everything to lowercase?
 
-> **Forward Reference:** You've built a powerful tool that interacts with the real filesystem. But how do you test such a tool without actually creating and deleting files on your hard drive every time? In [Lesson 8: FS Testing Seam](../8-fs-testing-seam/README.md), you will learn how to use interfaces to create "Mock" filesystems for testing.
+> [!TIP]
+> You've built a powerful tool that interacts with the real filesystem. But how do you test such a tool without actually creating and deleting files on your hard drive every time? In [Lesson 8: FS Testing Seam](../8-fs-testing-seam/README.md), you will learn how to use interfaces to create "Mock" filesystems for testing.
 
 ## Next Step
 

@@ -69,7 +69,8 @@ While `http.ListenAndServe` is great for learning, in production you should use 
 2. What happens if two routes overlap (e.g., `/` and `/health`)?
 3. How does `http.ResponseWriter` handle cases where you forget to set a status code?
 
-> **Forward Reference:** You've built a basic server, but what happens when you have dozens of complex routes with variables in the path? In [Lesson 2: Routing Patterns](../2-routing-patterns/README.md), we will dive into advanced routing techniques and RESTful design.
+> [!TIP]
+> You've built a basic server, but what happens when you have dozens of complex routes with variables in the path? In [Lesson 2: Routing Patterns](../2-routing-patterns/README.md), we will dive into advanced routing techniques and RESTful design.
 
 ## Next Step
 

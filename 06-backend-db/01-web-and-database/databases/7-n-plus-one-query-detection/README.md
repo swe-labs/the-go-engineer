@@ -74,7 +74,8 @@ While it might not be noticeable on your laptop with 5 users, it becomes catastr
 2. Is it ever okay to have an N+1 query pattern? (Hint: Think about extremely small datasets).
 3. How does the Repository pattern sometimes encourage N+1 if you aren't careful?
 
-> **Forward Reference:** You've optimized your queries. But what happens if the database is still slow or locked? You can't let your server wait forever. In [Lesson 8: Query Timeouts via Context](../8-query-timeouts-via-context/README.md), you will learn how to use `context.Context` to set strict time limits on every database operation.
+> [!TIP]
+> You've optimized your queries. But what happens if the database is still slow or locked? You can't let your server wait forever. In [Lesson 8: Query Timeouts via Context](../8-query-timeouts-via-context/README.md), you will learn how to use `context.Context` to set strict time limits on every database operation.
 
 ## Next Step
 

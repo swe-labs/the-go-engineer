@@ -72,7 +72,8 @@ Never let a user specify their own page size without a limit (e.g., `page_size=1
 2. What are the downsides of `OFFSET` pagination for very large datasets?
 3. How would you handle pagination if your items were being added to the database every second (like a Twitter feed)?
 
-> **Forward Reference:** You've mastered the data. Now let's add some social features! In [Lesson 10: Comments & Nesting](../10-comments/README.md), you will learn how to handle hierarchical data relationships in your web application.
+> [!TIP]
+> You've mastered the data. Now let's add some social features! In [Lesson 10: Comments & Nesting](../10-comments/README.md), you will learn how to handle hierarchical data relationships in your web application.
 
 ## Next Step
 

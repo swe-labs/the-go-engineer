@@ -70,7 +70,8 @@ While `net/http` is now very powerful, some teams still prefer third-party route
 2. What is the difference between `mux.Handle` and `mux.HandleFunc`?
 3. How would you handle a route that has multiple parameters, like `/users/{userID}/posts/{postID}`?
 
-> **Forward Reference:** You have the entry point. But as your handlers grow, they will need access to databases, loggers, and configuration. In [Lesson 2: Dependency Injection](../2-dependency-injection/README.md), you will learn how to pass these resources to your handlers without using messy global variables.
+> [!TIP]
+> You have the entry point. But as your handlers grow, they will need access to databases, loggers, and configuration. In [Lesson 2: Dependency Injection](../2-dependency-injection/README.md), you will learn how to pass these resources to your handlers without using messy global variables.
 
 ## Next Step
 

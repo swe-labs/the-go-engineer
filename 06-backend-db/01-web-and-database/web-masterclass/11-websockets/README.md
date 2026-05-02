@@ -72,7 +72,8 @@ Users on mobile devices will constantly lose their internet connection. Your ser
 2. What happens to a WebSocket connection if your server restarts?
 3. When would you use WebSockets instead of a standard REST API?
 
-> **Forward Reference:** You have mastered the web! You can build servers, APIs, databases, and real-time systems. Now it's time to dive into the engine that makes Go so powerful. In [Section 07: Concurrency](../../../../07-concurrency/README.md), you will learn how to master Goroutines, Channels, and the secrets of high-performance parallel programming.
+> [!TIP]
+> You have mastered the web! You can build servers, APIs, databases, and real-time systems. Now it's time to dive into the engine that makes Go so powerful. In [Section 07: Concurrency](../../../../07-concurrency/README.md), you will learn how to master Goroutines, Channels, and the secrets of high-performance parallel programming.
 
 ## Next Step
 

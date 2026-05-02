@@ -80,7 +80,8 @@ Choose one and stick to it across your entire API!
 2. How would you handle filtering by multiple categories at once? (`?category=books&category=tools`)
 3. What is the benefit of returning the `limit` and `offset` back to the client in the response body?
 
-> **Forward Reference:** You have mastered RESTful API design. But what if you need something faster, more efficient, and type-safe? In [Lesson 4: Protobuf Basics](../4-protobuf-basics/README.md), you will learn about the binary format that powers gRPC and high-performance microservices.
+> [!TIP]
+> You have mastered RESTful API design. But what if you need something faster, more efficient, and type-safe? In [Lesson 4: Protobuf Basics](../4-protobuf-basics/README.md), you will learn about the binary format that powers gRPC and high-performance microservices.
 
 ## Next Step
 

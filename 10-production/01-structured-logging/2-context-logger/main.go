@@ -18,6 +18,8 @@
 //   - Options: global logger (bad, thread-unsafe), pass as param (verbose),
 //     or store in context (idiomatic, Google-mandated).
 //
+// RUN:
+//   go run ./10-production/01-structured-logging/2-context-logger
 // KEY TAKEAWAY:
 //   - Every function in a request chain carries the same request_id via context.
 //   - One middleware line wires it up; works everywhere.

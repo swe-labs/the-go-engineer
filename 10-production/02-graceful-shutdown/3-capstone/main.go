@@ -18,6 +18,8 @@
 //   - Readiness probe returns 503 when SIGTERM arrives -> removes pod from LB.
 //   - Liveness probe returns 503 only if you want Kubernetes to RESTART.
 //
+// RUN:
+//   go run ./10-production/02-graceful-shutdown/3-capstone
 // KEY TAKEAWAY:
 //   - Signal -> stop HTTP -> drain requests -> stop workers -> close DB -> flush logs.
 //   - 503 during drain window protects the load balancer.

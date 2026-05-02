@@ -17,6 +17,8 @@
 //   - slog.Handler is the extension point for the entire logging ecosystem.
 //   - Every backend (Datadog, Sentry, OpenTelemetry) plugs in via this interface.
 //
+// RUN:
+//   go run ./10-production/01-structured-logging/3-custom-handler
 // KEY TAKEAWAY:
 //   - Implement the 4-method interface to create custom logging backends.
 // ============================================================================

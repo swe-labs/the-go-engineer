@@ -57,7 +57,8 @@ For production APIs, `json.NewEncoder(w).Encode(v)` is the standard way to retur
 2. What is "JSON Lines" (JSONL) format, and why is it useful for logging?
 3. How does the Encoder handle large slices of data?
 
-> **Forward Reference:** You have learned how to stream data OUT. Now we will look at the reverse: how to efficiently read a continuous stream of JSON data IN. In [Lesson 4: Decode](../4-decode/README.md), you will learn about the `json.Decoder`.
+> [!TIP]
+> You have learned how to stream data OUT. Now we will look at the reverse: how to efficiently read a continuous stream of JSON data IN. In [Lesson 4: Decode](../4-decode/README.md), you will learn about the `json.Decoder`.
 
 ## Next Step
 

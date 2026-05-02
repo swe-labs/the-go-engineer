@@ -75,7 +75,8 @@ If your server restarts, every single user will be logged out. Instead, use a pe
 2. What is the benefit of the `HttpOnly` flag?
 3. What happens to your in-memory sessions if you have two copies of your server running?
 
-> **Forward Reference:** You can now keep users logged in. But how do you verify who they are in the first place? In [Lesson 6: Authentication](../6-auth/README.md), you will learn how to securely handle passwords and protect your routes.
+> [!TIP]
+> You can now keep users logged in. But how do you verify who they are in the first place? In [Lesson 6: Authentication](../6-auth/README.md), you will learn how to securely handle passwords and protect your routes.
 
 ## Next Step
 

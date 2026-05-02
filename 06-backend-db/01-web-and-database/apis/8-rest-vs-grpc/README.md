@@ -92,7 +92,8 @@ There are even tools (like `grpc-gateway`) that can automatically generate a RES
 2. What happens to a REST client if you change a field from an integer to a string?
 3. How does the use of HTTP/2 headers in gRPC help with performance?
 
-> **Forward Reference:** You have the knowledge. Now it's time for the proof. In [Lesson 9: gRPC Service Exercise](../9-grpc-service-exercise/README.md), you will build a complete gRPC service that handles both Unary and Streaming calls.
+> [!TIP]
+> You have the knowledge. Now it's time for the proof. In [Lesson 9: gRPC Service Exercise](../9-grpc-service-exercise/README.md), you will build a complete gRPC service that handles both Unary and Streaming calls.
 
 ## Next Step
 

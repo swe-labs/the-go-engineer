@@ -83,7 +83,8 @@ While the Repository pattern is great, avoid the **"Generic Repository"** trap (
 2. How does the Repository pattern help with writing unit tests for your HTTP handlers?
 3. What is the downside of having too many layers (Models -> Repository -> Service -> Handler)?
 
-> **Forward Reference:** Your code is clean and organized. But as your data grows, you might accidentally write inefficient queries that perform thousands of small calls to the database. In [Lesson 7: N+1 Query Detection](../7-n-plus-one-query-detection/README.md), you will learn how to identify and fix one of the most common performance killers in backend engineering.
+> [!TIP]
+> Your code is clean and organized. But as your data grows, you might accidentally write inefficient queries that perform thousands of small calls to the database. In [Lesson 7: N+1 Query Detection](../7-n-plus-one-query-detection/README.md), you will learn how to identify and fix one of the most common performance killers in backend engineering.
 
 ## Next Step
 

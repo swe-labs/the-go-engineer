@@ -75,7 +75,8 @@ While Protobuf is great for internal microservices, it is harder to use for publ
 2. What happens if you delete a field tag and then reuse that same number for a different field later?
 3. How does Protobuf help prevent bugs in large teams with many different microservices?
 
-> **Forward Reference:** You have the data format. Now you need a transport protocol to move that data between servers. In [Lesson 5: gRPC Fundamentals](../5-grpc-fundamentals/README.md), you will learn how to use Protobuf to build high-performance Remote Procedure Calls.
+> [!TIP]
+> You have the data format. Now you need a transport protocol to move that data between servers. In [Lesson 5: gRPC Fundamentals](../5-grpc-fundamentals/README.md), you will learn how to use Protobuf to build high-performance Remote Procedure Calls.
 
 ## Next Step
 

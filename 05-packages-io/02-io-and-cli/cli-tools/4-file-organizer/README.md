@@ -82,7 +82,8 @@ Any tool that moves or deletes files must be treated with extreme caution. Alway
 2. What happens if the program crashes halfway through organizing a directory with 1,000 files?
 3. How would you modify this tool to handle subdirectories recursively?
 
-> **Forward Reference:** You have mastered the art of CLI interaction and basic file manipulation. Now we need to look at how to handle more complex data formats. In [Lesson 1: Marshalling](../../encoding/1-marshalling/README.md), you will learn how to turn Go structs into JSON and XML strings.
+> [!TIP]
+> You have mastered the art of CLI interaction and basic file manipulation. Now we need to look at how to handle more complex data formats. In [Lesson 1: Marshalling](../../encoding/1-marshalling/README.md), you will learn how to turn Go structs into JSON and XML strings.
 
 ## Next Step
 

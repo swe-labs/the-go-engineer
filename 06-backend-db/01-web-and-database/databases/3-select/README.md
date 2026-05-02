@@ -73,7 +73,8 @@ For very large result sets (e.g., 1,000,000 rows), do not load them all into a s
 2. What happens to the database connection if you forget to call `rows.Close()`?
 3. Why is it necessary to check `rows.Err()` after the loop finishes?
 
-> **Forward Reference:** You're reading and writing data. But repeating the same SQL string over and over is inefficient for the database. In [Lesson 4: Prepared Statements](../4-prepare/README.md), you will learn how to "pre-compile" your SQL to make it faster and safer.
+> [!TIP]
+> You're reading and writing data. But repeating the same SQL string over and over is inefficient for the database. In [Lesson 4: Prepared Statements](../4-prepare/README.md), you will learn how to "pre-compile" your SQL to make it faster and safer.
 
 ## Next Step
 

@@ -17,6 +17,8 @@
 //   - Deployment sequence: docker stop -> SIGTERM -> 30s to clean up -> SIGKILL.
 //   - Before NotifyContext: manual goroutine, potential panics, ignored errors.
 //
+// RUN:
+//   go run ./10-production/02-graceful-shutdown/1-signal-context
 // KEY TAKEAWAY:
 //   - signal.NotifyContext integrates with context-aware APIs (DB, HTTP, gRPC).
 //   - Every production binary must handle SIGTERM to avoid data loss.

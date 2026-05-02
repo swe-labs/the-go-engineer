@@ -60,7 +60,8 @@ For web servers, always use `json.NewDecoder(r.Body).Decode(&v)` instead of read
 2. What happens if a stream contains a JSON array instead of separate JSON objects?
 3. How does the Decoder know where one JSON object ends and the next one begins?
 
-> **Forward Reference:** You have mastered JSON, the standard for text-based data exchange. But sometimes you need to handle binary data or pass non-text values through text-only systems. In [Lesson 5: Base64](../../encoding/5-base64_encoding/README.md), you will learn how to encode and decode binary data using Base64.
+> [!TIP]
+> You have mastered JSON, the standard for text-based data exchange. But sometimes you need to handle binary data or pass non-text values through text-only systems. In [Lesson 5: Base64](../../encoding/5-base64_encoding/README.md), you will learn how to encode and decode binary data using Base64.
 
 ## Next Step
 

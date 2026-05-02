@@ -73,7 +73,8 @@ Deeply nested trees can be difficult for users to read on mobile devices and can
 2. What is the alternative to the Adjacency List pattern? (Hint: Look up "Path Enumeration" or "Nested Sets").
 3. How would you handle deleting a comment that has 50 replies?
 
-> **Forward Reference:** You can handle complex data relationships. Now let's move from static responses to real-time communication! In [Lesson 11: WebSockets](../11-websockets/README.md), you will learn how to build interactive, live features like chat and notifications.
+> [!TIP]
+> You can handle complex data relationships. Now let's move from static responses to real-time communication! In [Lesson 11: WebSockets](../11-websockets/README.md), you will learn how to build interactive, live features like chat and notifications.
 
 ## Next Step
 

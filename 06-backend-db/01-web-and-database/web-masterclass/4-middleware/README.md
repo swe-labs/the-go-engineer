@@ -76,7 +76,8 @@ While writing your own middleware is a great way to learn, for production you sh
 2. How can you pass data from a middleware down to a handler? (Hint: Look up `context.WithValue`).
 3. What is the performance cost of having 50 layers of middleware?
 
-> **Forward Reference:** You've secured and monitored your server. But how do you remember a user across multiple requests? In [Lesson 5: Sessions](../5-sessions/README.md), you will learn how to use cookies and session stores to build stateful web applications.
+> [!TIP]
+> You've secured and monitored your server. But how do you remember a user across multiple requests? In [Lesson 5: Sessions](../5-sessions/README.md), you will learn how to use cookies and session stores to build stateful web applications.
 
 ## Next Step
 

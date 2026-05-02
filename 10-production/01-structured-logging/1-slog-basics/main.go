@@ -18,6 +18,8 @@
 //   - Every log statement is a contract with your future self at 3am.
 //   - fmt.Println gives you one string to grep; slog gives you queryable fields.
 //
+// RUN:
+//   go run ./10-production/01-structured-logging/1-slog-basics
 // KEY TAKEAWAY:
 //   - slog separates RECORD (what happened) from HANDLER (where it goes).
 //   - Swap output formats without changing call sites.

@@ -73,7 +73,8 @@ The standard `flag` package uses the single-dash format (`-flag`) which is sligh
 2. What happens if you define two flags with the same name?
 3. How would you handle a flag that is required (no sensible default)?
 
-> **Forward Reference:** Flags are great for single-purpose tools. But what if your app has multiple distinct modes (like `git add` and `git commit`)? In [Lesson 3: Subcommands](../3-subcommands/README.md), you will learn how to build multi-command CLI applications.
+> [!TIP]
+> Flags are great for single-purpose tools. But what if your app has multiple distinct modes (like `git add` and `git commit`)? In [Lesson 3: Subcommands](../3-subcommands/README.md), you will learn how to build multi-command CLI applications.
 
 ## Next Step
 

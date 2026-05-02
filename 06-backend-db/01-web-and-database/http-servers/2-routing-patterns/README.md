@@ -77,7 +77,8 @@ While the standard library router is now very capable, it does not support **Reg
 2. What is the difference between `/path/` (trailing slash) and `/path` in Go routing?
 3. How would you handle a request where a required path parameter is missing?
 
-> **Forward Reference:** Now that you can route requests to the right handlers, how do you handle cross-cutting concerns like logging every request or checking for authentication? In [Lesson 3: Middleware Pattern](../3-middleware-pattern/README.md), you will learn how to wrap your handlers with reusable logic.
+> [!TIP]
+> Now that you can route requests to the right handlers, how do you handle cross-cutting concerns like logging every request or checking for authentication? In [Lesson 3: Middleware Pattern](../3-middleware-pattern/README.md), you will learn how to wrap your handlers with reusable logic.
 
 ## Next Step
 

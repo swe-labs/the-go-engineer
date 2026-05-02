@@ -14,6 +14,8 @@
 //   - GDPR, PCI-DSS, and HIPAA require specific handling of PII.
 //   - ReplaceAttr is the hook to centrally enforce redaction.
 //
+// RUN:
+//   go run ./10-production/01-structured-logging/5-exercise
 // KEY TAKEAWAY:
 //   - One ReplaceAttr function protects all downstream handlers.
 // ============================================================================

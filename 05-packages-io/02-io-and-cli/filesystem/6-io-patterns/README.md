@@ -67,7 +67,8 @@ I/O operations are almost always the slowest part of your application (compared 
 2. What happens if you try to `Read` from a reader that has already reached the end of its data?
 3. How can you use `io.MultiWriter` to implement a "Debug Log" that only writes to the console if a flag is set?
 
-> **Forward Reference:** You have mastered the building blocks of Go I/O. It's time to build a real-world tool that uses these patterns to solve a practical problem. In [Lesson 7: Log Search Project](../7-log-search/README.md), you will build a high-performance log searching tool using optimized I/O patterns.
+> [!TIP]
+> You have mastered the building blocks of Go I/O. It's time to build a real-world tool that uses these patterns to solve a practical problem. In [Lesson 7: Log Search Project](../7-log-search/README.md), you will build a high-performance log searching tool using optimized I/O patterns.
 
 ## Next Step
 

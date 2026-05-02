@@ -79,7 +79,8 @@ For complex validation, most Go teams use a validation library like **Go-Playgro
 2. What happens if a client sends a JSON field that isn't in your struct?
 3. How would you handle a request that is too large (e.g., a 1GB JSON file)?
 
-> **Forward Reference:** You've mastered getting data into your server. Now, how do you send it back in a way that clients can understand? In [Lesson 5: Response Writing Patterns](../5-response-writing-patterns/README.md), you will learn how to send JSON, set headers, and handle different response types professionally.
+> [!TIP]
+> You've mastered getting data into your server. Now, how do you send it back in a way that clients can understand? In [Lesson 5: Response Writing Patterns](../5-response-writing-patterns/README.md), you will learn how to send JSON, set headers, and handle different response types professionally.
 
 ## Next Step
 

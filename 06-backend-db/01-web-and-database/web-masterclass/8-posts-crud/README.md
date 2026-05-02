@@ -81,7 +81,8 @@ As your blog grows to thousands of posts, a simple `SELECT * FROM posts` will be
 2. What is the benefit of returning a `201 Created` status code instead of a simple `200 OK`?
 3. How would you handle a scenario where two users try to update the same post at the exact same time?
 
-> **Forward Reference:** You've built a solid CRUD system. But how do you handle thousands of records without slowing down? In [Lesson 9: Pagination](../9-pagination/README.md), you will learn the standard patterns for slicing and dicing large datasets for the web.
+> [!TIP]
+> You've built a solid CRUD system. But how do you handle thousands of records without slowing down? In [Lesson 9: Pagination](../9-pagination/README.md), you will learn the standard patterns for slicing and dicing large datasets for the web.
 
 ## Next Step
 

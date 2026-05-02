@@ -70,7 +70,8 @@ While prepared statements are great, they can be tricky with **Load Balancers**.
 2. Is a prepared statement useful if you only plan to run the query once?
 3. How does a prepared statement offer even better security than a simple parameterized query?
 
-> **Forward Reference:** Prepared statements make individual queries faster. But what if you need a group of queries to succeed or fail as a single unit (like a bank transfer)? In [Lesson 5: Transactions](../5-transactions/README.md), you will learn how to use `db.Begin` to ensure data integrity.
+> [!TIP]
+> Prepared statements make individual queries faster. But what if you need a group of queries to succeed or fail as a single unit (like a bank transfer)? In [Lesson 5: Transactions](../5-transactions/README.md), you will learn how to use `db.Begin` to ensure data integrity.
 
 ## Next Step
 

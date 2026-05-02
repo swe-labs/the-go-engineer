@@ -70,7 +70,8 @@ The built-in loop construct for templates. It iterates over a slice or map and s
 2. What is the difference between `{{.}}` and `{{.Name}}` inside a template?
 3. How would you handle a global layout (Header/Footer) that is shared across 50 different pages? (Hint: Look up "Template Composition").
 
-> **Forward Reference:** You can now present data. But how do you handle cross-cutting concerns like logging every request, recovering from panics, or adding security headers? In [Lesson 4: Middleware](../4-middleware/README.md), you will learn the "Decorator" pattern for HTTP handlers.
+> [!TIP]
+> You can now present data. But how do you handle cross-cutting concerns like logging every request, recovering from panics, or adding security headers? In [Lesson 4: Middleware](../4-middleware/README.md), you will learn the "Decorator" pattern for HTTP handlers.
 
 ## Next Step
 

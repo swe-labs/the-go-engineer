@@ -73,7 +73,8 @@ If you display a user's input back to them (e.g., "Registration successful for <
 2. What happens if a form has two inputs with the same name? How do you access both values?
 3. How would you handle a file upload (like a profile picture) in a form? (Hint: Look up `multipart/form-data`).
 
-> **Forward Reference:** You can now handle user input safely. Now let's build something real! In [Lesson 8: Posts CRUD](../8-posts-crud/README.md), you will combine everything you've learned-routing, templates, databases, and forms-to build a complete Create, Read, Update, Delete feature.
+> [!TIP]
+> You can now handle user input safely. Now let's build something real! In [Lesson 8: Posts CRUD](../8-posts-crud/README.md), you will combine everything you've learned-routing, templates, databases, and forms-to build a complete Create, Read, Update, Delete feature.
 
 ## Next Step
 

@@ -65,7 +65,8 @@ The `fs.FS` interface is **read-only**. It is perfect for reading configurations
 2. What are the advantages of using `fstest.MapFS` over `os.MkdirTemp` for unit tests?
 3. How does the "Accept interfaces, return structs" rule apply to the design of `SearchLogs`?
 
-> **Forward Reference:** You have mastered Section 05: Packages and I/O. You now know how to build modules, handle CLI arguments, encode data, and manage filesystems with professional patterns. You are ready to move on to the next major pillar of Go engineering. In [Section 06: Backend & DB](../../../../06-backend-db/README.md), you will learn how to build high-performance web servers and interact with SQL databases.
+> [!TIP]
+> You have mastered Section 05: Packages and I/O. You now know how to build modules, handle CLI arguments, encode data, and manage filesystems with professional patterns. You are ready to move on to the next major pillar of Go engineering. In [Section 06: Backend & DB](../../../../06-backend-db/README.md), you will learn how to build high-performance web servers and interact with SQL databases.
 
 ## Next Step
 

@@ -58,7 +58,8 @@ Embedding increases the size of your binary. If you embed a 100MB video file, yo
 2. What are the limitations of what can be embedded (e.g., can you embed files from a parent directory)?
 3. How would you use `embed.FS` to serve a static website from a single Go binary?
 
-> **Forward Reference:** You've learned the mechanics of files and directories. Now we will look at the higher-level design patterns used to move data between them. In [Lesson 6: IO Patterns](../6-io-patterns/README.md), you will learn about the powerful `io.Reader` and `io.Writer` interfaces.
+> [!TIP]
+> You've learned the mechanics of files and directories. Now we will look at the higher-level design patterns used to move data between them. In [Lesson 6: IO Patterns](../6-io-patterns/README.md), you will learn about the powerful `io.Reader` and `io.Writer` interfaces.
 
 ## Next Step
 

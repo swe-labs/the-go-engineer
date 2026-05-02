@@ -70,7 +70,8 @@ Even when injecting a client, make sure the one you inject has a `Timeout` set. 
 2. How does dependency injection help with "Seams" in your architecture?
 3. Can you think of other external dependencies (besides HTTP) that should be hidden behind interfaces?
 
-> **Forward Reference:** You can now build and test HTTP clients. Now it's time to learn how to build the APIs they talk to! In [Lesson 1: REST Design Principles](../../apis/1-rest-design-principles/README.md), you will learn the theory behind building truly professional, scalable web interfaces.
+> [!TIP]
+> You can now build and test HTTP clients. Now it's time to learn how to build the APIs they talk to! In [Lesson 1: REST Design Principles](../../apis/1-rest-design-principles/README.md), you will learn the theory behind building truly professional, scalable web interfaces.
 
 ## Next Step
 

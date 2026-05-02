@@ -64,7 +64,8 @@ Always validate the error returned by `Unmarshal`. In production systems, you sh
 2. What happens to Go fields that don't have a matching key in the incoming JSON?
 3. When should you use a `map[string]any` instead of a typed `struct`?
 
-> **Forward Reference:** For small JSON payloads, `Marshal` and `Unmarshal` are perfect. But what if you are reading a 1GB JSON file or a continuous stream of JSON objects from a network? In [Lesson 3: Encoder](../3-encoder/README.md), you will learn how to use the streaming `Encoder` and `Decoder` for high-performance I/O.
+> [!TIP]
+> For small JSON payloads, `Marshal` and `Unmarshal` are perfect. But what if you are reading a 1GB JSON file or a continuous stream of JSON objects from a network? In [Lesson 3: Encoder](../3-encoder/README.md), you will learn how to use the streaming `Encoder` and `Decoder` for high-performance I/O.
 
 ## Next Step
 

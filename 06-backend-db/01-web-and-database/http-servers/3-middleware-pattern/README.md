@@ -74,7 +74,8 @@ Be careful with **State** in middleware. Since handlers run in concurrent gorout
 2. What happens if a middleware doesn't call `next.ServeHTTP`? (This is called "Short-Circuiting").
 3. How can you share data between middleware (e.g., passing a UserID from an Auth middleware to the final handler)?
 
-> **Forward Reference:** You can now wrap your logic with powerful infrastructure layers. But eventually, your handler needs to look inside the request to find data. In [Lesson 4: Request Parsing and Validation](../4-request-parsing-and-validation/README.md), you will learn how to safely extract and validate JSON, Query Params, and Form data.
+> [!TIP]
+> You can now wrap your logic with powerful infrastructure layers. But eventually, your handler needs to look inside the request to find data. In [Lesson 4: Request Parsing and Validation](../4-request-parsing-and-validation/README.md), you will learn how to safely extract and validate JSON, Query Params, and Form data.
 
 ## Next Step
 

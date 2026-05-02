@@ -74,7 +74,8 @@ gRPC is incredible for **Service-to-Service** communication (Microservices). How
 2. What are the downsides of having a strictly defined contract between services?
 3. How does gRPC handle cases where the client and server are written in different languages?
 
-> **Forward Reference:** Unary calls are great, but gRPC's real "superpower" is its ability to stream data. In [Lesson 6: gRPC Streaming](../6-grpc-streaming/README.md), you will learn how to build real-time APIs that can send thousands of messages over a single connection.
+> [!TIP]
+> Unary calls are great, but gRPC's real "superpower" is its ability to stream data. In [Lesson 6: gRPC Streaming](../6-grpc-streaming/README.md), you will learn how to build real-time APIs that can send thousands of messages over a single connection.
 
 ## Next Step
 

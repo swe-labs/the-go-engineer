@@ -4,14 +4,16 @@ This document visualizes the stable v2.1 learner journey.
 
 Section IDs and milestones must match [ARCHITECTURE.md](../ARCHITECTURE.md) and [curriculum.v2.json](../curriculum.v2.json).
 
-## Phase Progression
+## Learner Stage Progression
+
+These learner stages are presentation milestones. The canonical section `phase` values in `curriculum.v2.json` remain `foundations`, `engineering-core`, and `systems`.
 
 ```mermaid
 flowchart LR
-    P0["Phase 0\nMachine Foundation\ns00\n0% to 5%"] --> P1["Phase 1\nLanguage Foundation\ns01-s04\n5% to 52%"]
-    P1 --> P2["Phase 2\nEngineering Core\ns05-s08\n52% to 87%"]
-    P2 --> P3["Phase 3\nSystems Engineering\ns09-s10\n87% to 96%"]
-    P3 --> P4["Phase 4\nFlagship Project\ns11\n96% to 100%"]
+    P0["Stage 0\nMachine Foundation\ns00\n0% to 5%"] --> P1["Stage 1\nLanguage Foundation\ns01-s04\n5% to 52%"]
+    P1 --> P2["Stage 2\nEngineering Core\ns05-s08\n52% to 87%"]
+    P2 --> P3["Stage 3\nSystems Engineering\ns09-s10\n87% to 96%"]
+    P3 --> P4["Stage 4\nFlagship Project\ns11\n96% to 100%"]
 ```
 
 ## Section Flow
@@ -33,13 +35,13 @@ flowchart LR
 
 ## Engineering Context Growth
 
-| Phase | Learner shift | Engineering weight |
+| Stage | Learner shift | Engineering weight |
 | --- | --- | --- |
-| Phase 0 | understand what the machine is doing | low, concrete |
-| Phase 1 | read and write Go intentionally | growing |
-| Phase 2 | build systems that behave predictably | high |
-| Phase 3 | design, secure, and operate systems | very high |
-| Phase 4 | integrate the curriculum into one backend system | full |
+| Stage 0 | understand what the machine is doing | low, concrete |
+| Stage 1 | read and write Go intentionally | growing |
+| Stage 2 | build systems that behave predictably | high |
+| Stage 3 | design, secure, and operate systems | very high |
+| Stage 4 | integrate the curriculum into one backend system | full |
 
 ## Key Milestones
 

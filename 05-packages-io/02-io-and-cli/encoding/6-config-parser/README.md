@@ -69,7 +69,8 @@ In real-world applications, you might want to support multiple formats like YAML
 2. What are the benefits of using `json.NewDecoder` over `os.ReadFile` for configuration?
 3. How would you handle a configuration where some fields are only required if `Debug` is set to `false`?
 
-> **Forward Reference:** You have mastered how data is structured and transported. Now we will look deeper into how data is actually stored and managed on the disk. In [Lesson 1: Files](../../filesystem/1-files/README.md), you will learn the core concepts of file descriptors and I/O modes.
+> [!TIP]
+> You have mastered how data is structured and transported. Now we will look deeper into how data is actually stored and managed on the disk. In [Lesson 1: Files](../../filesystem/1-files/README.md), you will learn the core concepts of file descriptors and I/O modes.
 
 ## Next Step
 

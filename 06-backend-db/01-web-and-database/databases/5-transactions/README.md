@@ -76,7 +76,8 @@ Hogging a database connection while waiting for a slow network call is a recipe 
 2. What is the danger of using `db.Exec` inside a transaction block?
 3. How does a transaction protect your data if the server crashes in the middle of a complex update?
 
-> **Forward Reference:** You've mastered the raw SQL tools. But in a large application, having SQL strings scattered everywhere is a maintenance nightmare. In [Lesson 6: Repository Pattern](../6-repository/README.md), you will learn how to organize your database logic into clean, testable boundaries.
+> [!TIP]
+> You've mastered the raw SQL tools. But in a large application, having SQL strings scattered everywhere is a maintenance nightmare. In [Lesson 6: Repository Pattern](../6-repository/README.md), you will learn how to organize your database logic into clean, testable boundaries.
 
 ## Next Step
 

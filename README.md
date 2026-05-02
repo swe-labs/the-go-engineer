@@ -130,7 +130,7 @@ go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance
 
 ## Contribution Workflow
 
-Contributions use the repository operating contract:
+Contributions follow [CONTRIBUTING.md](./CONTRIBUTING.md):
 
 1. Create or confirm an issue.
 2. Branch from the correct long-lived line.

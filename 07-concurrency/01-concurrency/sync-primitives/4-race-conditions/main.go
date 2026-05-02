@@ -12,8 +12,8 @@ import (
 )
 
 // ============================================================================
-// Stage 07: Concurrency � Race Conditions & sync.Mutex
-// Level: Advanced
+// Stage 07: Concurrency - Race Conditions & sync.Mutex
+// Level: Core
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -22,7 +22,7 @@ import (
 //   - sync.Mutex: mutual exclusion lock
 //   - sync/atomic: lock-free atomic operations (fastest option)
 //   - The race detector: go run -race (finds races at runtime)
-//   - "Share memory by communicating" � channels as the preferred alternative
+//   - "Share memory by communicating" - channels as the preferred alternative
 //
 // ANALOGY:
 //   Imagine two cashiers updating the same cash register at the same time.
@@ -39,14 +39,14 @@ import (
 //   - Run with: go run -race ./... or go test -race ./...
 //   - ALWAYS test with -race in CI/CD pipelines
 //
-// RUN: go run ./07-concurrency/01-concurrency/goroutines/8-race
+// RUN: go run ./07-concurrency/01-concurrency/sync-primitives/4-race-conditions
 // ============================================================================
 
 // unsafeCounter demonstrates what happens WITHOUT synchronization.
 // Multiple goroutines increment the same variable concurrently.
 // The final count will be WRONG because of lost writes.
 func unsafeCounter() int {
-	counter := 0 // SHARED STATE � accessed by multiple goroutines
+	counter := 0 // SHARED STATE - accessed by multiple goroutines
 	var wg sync.WaitGroup
 
 	for i := 0; i < 1000; i++ {
@@ -55,11 +55,11 @@ func unsafeCounter() int {
 			defer wg.Done()
 			// THE RACE:
 			// 1. Goroutine A reads counter (100)
-			// 2. Goroutine B reads counter (100) � same value!
+			// 2. Goroutine B reads counter (100) - same value!
 			// 3. A writes counter = 101
 			// 4. B writes counter = 101 ? A's write is LOST!
 			// This is called a "lost write" or "read-modify-write" race.
-			counter++ // NOT THREAD-SAFE � this is THREE operations: read, add, write
+			counter++ // NOT THREAD-SAFE - this is THREE operations: read, add, write
 		}()
 	}
 	wg.Wait()
@@ -133,12 +133,12 @@ func main() {
 
 	fmt.Println("=== When to Use Each ===")
 	fmt.Println("  +-----------------------------------------------------------+")
-	fmt.Println("  � Approach         � Use When                               �")
-	fmt.Println("  +------------------+----------------------------------------�")
-	fmt.Println("  � sync.Mutex       � Protecting complex shared state        �")
-	fmt.Println("  � sync.RWMutex     � Many readers, few writers              �")
-	fmt.Println("  � sync/atomic      � Simple counters, flags, single values  �")
-	fmt.Println("  � Channels         � Communicating between goroutines       �")
+	fmt.Println("  | Approach         | Use When                               |")
+	fmt.Println("  +------------------+----------------------------------------+")
+	fmt.Println("  | sync.Mutex       | Protecting complex shared state        |")
+	fmt.Println("  | sync.RWMutex     | Many readers, few writers              |")
+	fmt.Println("  | sync/atomic      | Simple counters, flags, single values  |")
+	fmt.Println("  | Channels         | Communicating between goroutines       |")
 	fmt.Println("  +-----------------------------------------------------------+")
 	fmt.Println()
 

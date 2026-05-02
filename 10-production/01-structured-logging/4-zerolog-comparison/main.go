@@ -18,6 +18,8 @@
 //   - At 10,000 req/s this creates significant GC pressure.
 //   - zerolog writes directly to sync.Pool buffer - zero allocations.
 //
+// RUN:
+//   go run ./10-production/01-structured-logging/4-zerolog-comparison
 // KEY TAKEAWAY:
 //   - Use zerolog only when performance pressure justifies it.
 //   - Benchmark: slog ~340ns/op (4 alloc), zerolog ~82ns/op (0 alloc).

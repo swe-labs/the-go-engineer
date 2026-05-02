@@ -6,10 +6,10 @@ package main
 
 // ============================================================================
 // Stage 07: Concurrency - Sync Primitives
-// Level: Advanced
+// Level: Core
 // ============================================================================
 //
-// RUN: go run ./07-concurrency/01-concurrency/goroutines/10-sync-primitives
+// RUN: go run ./07-concurrency/01-concurrency/sync-primitives/2-once-and-sync-map
 // ============================================================================
 
 import (
@@ -19,7 +19,7 @@ import (
 
 // ============================================================================
 // Stage 07: sync.Once and sync.Map
-// Level: Advanced
+// Level: Core
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:

@@ -69,7 +69,8 @@ Overusing build tags can make code difficult to navigate for IDEs and static ana
 2. What is the difference between an implicit build tag in a filename and an explicit `//go:build` comment?
 3. How would you handle a feature that is only available on Go version 1.21 or higher?
 
-> **Forward Reference:** You have mastered how Go code is organized and compiled. Now we will look at how to interact with the outside world through the command line. In [Lesson 1: Args](../../02-io-and-cli/cli-tools/1-args/README.md), you will learn how to read raw command-line arguments.
+> [!TIP]
+> You have mastered how Go code is organized and compiled. Now we will look at how to interact with the outside world through the command line. In [Lesson 1: Args](../../02-io-and-cli/cli-tools/1-args/README.md), you will learn how to read raw command-line arguments.
 
 ## Next Step
 

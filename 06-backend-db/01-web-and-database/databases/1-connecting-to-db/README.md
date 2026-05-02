@@ -73,7 +73,8 @@ Without these limits, your app might try to open thousands of connections during
 2. What is the benefit of a "Blank Import" over a regular import?
 3. Why is `db.Close()` deferred? What happens if you forget it in a long-running server?
 
-> **Forward Reference:** You have a connection. Now let's put some data in it. In [Lesson 2: Executing Queries (INSERT)](../2-query/README.md), you will learn how to safely insert data using prepared statements to prevent SQL injection.
+> [!TIP]
+> You have a connection. Now let's put some data in it. In [Lesson 2: Executing Queries (INSERT)](../2-query/README.md), you will learn how to safely insert data using prepared statements to prevent SQL injection.
 
 ## Next Step
 

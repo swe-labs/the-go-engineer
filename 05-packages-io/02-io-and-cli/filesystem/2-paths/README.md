@@ -64,7 +64,8 @@ Normalizes a path by removing redundant elements like `.` (current dir) and reso
 2. What is the difference between a relative path and an absolute path?
 3. How does `filepath.Clean` help improve the security of your application?
 
-> **Forward Reference:** You now know how to describe where files are. But how do you manage the "Containers" (directories) themselves, or find every file in a giant folder tree? In [Lesson 3: Directories](../3-dir/README.md), you will learn how to create, list, and walk through directory structures.
+> [!TIP]
+> You now know how to describe where files are. But how do you manage the "Containers" (directories) themselves, or find every file in a giant folder tree? In [Lesson 3: Directories](../3-dir/README.md), you will learn how to create, list, and walk through directory structures.
 
 ## Next Step
 

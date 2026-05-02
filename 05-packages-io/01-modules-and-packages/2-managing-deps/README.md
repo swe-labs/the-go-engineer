@@ -63,7 +63,8 @@ Dependency bloat is a security risk. Every library you add increases your "attac
 2. What happens if two different dependencies require two different versions of the same library?
 3. Why does Go favor "Minimal Version Selection" over always using the absolute latest version?
 
-> **Forward Reference:** You can now manage external code. But how do you decide which version number to use? In [Lesson 3: Versioning](../3-versioning/README.md), you will learn about Semantic Versioning (SemVer) and Go's unique compatibility rules.
+> [!TIP]
+> You can now manage external code. But how do you decide which version number to use? In [Lesson 3: Versioning](../3-versioning/README.md), you will learn about Semantic Versioning (SemVer) and Go's unique compatibility rules.
 
 ## Next Step
 

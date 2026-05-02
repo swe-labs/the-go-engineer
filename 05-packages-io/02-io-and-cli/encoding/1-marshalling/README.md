@@ -60,7 +60,8 @@ JSON marshalling using the standard library is powerful but uses reflection, whi
 2. When would you use `json.Marshal` versus `json.MarshalIndent`?
 3. How do you handle sensitive data (like passwords) using struct tags?
 
-> **Forward Reference:** You have learned how to turn Go data into JSON. But what about the reverse? In [Lesson 2: Unmarshal](../2-unmarshal/README.md), you will learn how to take a JSON string and turn it back into a Go struct.
+> [!TIP]
+> You have learned how to turn Go data into JSON. But what about the reverse? In [Lesson 2: Unmarshal](../2-unmarshal/README.md), you will learn how to take a JSON string and turn it back into a Go struct.
 
 ## Next Step
 

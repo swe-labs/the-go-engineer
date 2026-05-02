@@ -61,7 +61,8 @@ Never manually edit `go.sum`. If you have a checksum mismatch, it usually means 
 2. What is the difference between a direct and an indirect dependency?
 3. Why should the module path usually match the repository URL?
 
-> **Forward Reference:** Now that you understand how modules identify themselves and their needs, we will look at how to actually add, update, and remove external libraries. In [Lesson 2: Managing Dependencies](../2-managing-deps/README.md), you will learn the `go get` workflow.
+> [!TIP]
+> Now that you understand how modules identify themselves and their needs, we will look at how to actually add, update, and remove external libraries. In [Lesson 2: Managing Dependencies](../2-managing-deps/README.md), you will learn the `go get` workflow.
 
 ## Next Step
 

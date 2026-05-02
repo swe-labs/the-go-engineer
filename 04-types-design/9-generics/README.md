@@ -8,7 +8,8 @@ Learn how to write functions and types that work with multiple types using type 
 
 You have interfaces for behavior abstraction. But sometimes you need to write utility functions that work with any type while maintaining type safety. Before generics, you had to write duplicate code or use interface{} and lose type safety.
 
-> **Backward Reference:** In [Lesson 8: Custom Errors](../8-custom-errors/README.md), you learned how to make types more specific to your domain. Now, we will learn how to make functions and types more general, allowing them to handle many different types while remaining type-safe.
+> [!NOTE]
+> In [Lesson 8: Custom Errors](../8-custom-errors/README.md), you learned how to make types more specific to your domain. Now, we will learn how to make functions and types more general, allowing them to handle many different types while remaining type-safe.
 
 ## Prerequisites
 
@@ -92,7 +93,8 @@ Generics are essential for building reusable data structures (maps, slices, tree
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** We have now covered the core of Go's type system. It is time to put everything together-structs, methods, interfaces, and custom errors-in a realistic scenario. In [Lesson 10: Payroll Processor](../10-payroll-processor/README.md), you will build a system that handles multiple employee types and payment rules.
+> [!TIP]
+> We have now covered the core of Go's type system. It is time to put everything together-structs, methods, interfaces, and custom errors-in a realistic scenario. In [Lesson 10: Payroll Processor](../10-payroll-processor/README.md), you will build a system that handles multiple employee types and payment rules.
 
 ## Next Step
 

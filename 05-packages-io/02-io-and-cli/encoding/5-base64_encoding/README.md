@@ -57,7 +57,8 @@ Helper functions that handle the conversion between `[]byte` and `string` automa
 2. When would using `URLEncoding` be mandatory instead of `StdEncoding`?
 3. How can you tell if a string is likely Base64 encoded just by looking at it?
 
-> **Forward Reference:** You now know how to handle text, JSON, and binary data transport. It's time to build a more complex system that uses these skills. In [Lesson 6: Config Parser Project](../6-config-parser/README.md), you will build a robust configuration parser that handles multiple formats and complex mapping.
+> [!TIP]
+> You now know how to handle text, JSON, and binary data transport. It's time to build a more complex system that uses these skills. In [Lesson 6: Config Parser Project](../6-config-parser/README.md), you will build a robust configuration parser that handles multiple formats and complex mapping.
 
 ## Next Step
 

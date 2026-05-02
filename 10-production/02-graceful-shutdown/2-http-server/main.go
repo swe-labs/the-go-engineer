@@ -19,6 +19,8 @@
 //   - Without Shutdown(): 502 errors during deploy.
 //   - With Shutdown(): waits for requests to complete -> 0 errors.
 //
+// RUN:
+//   go run ./10-production/02-graceful-shutdown/2-http-server
 // KEY TAKEAWAY:
 //   - http.Server.Shutdown() closes listener, waits for active requests to complete.
 //   - Check for http.ErrServerClosed to distinguish clean exit from errors.

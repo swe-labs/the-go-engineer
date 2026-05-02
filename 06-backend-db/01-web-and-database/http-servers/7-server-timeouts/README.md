@@ -75,7 +75,8 @@ Timeouts are not "One Size Fits All". A file upload service might need a 10-minu
 2. How can a single hanging request cause a "Cascading Failure" in a microservice architecture?
 3. Why does Go's `http.ListenAndServe` not include default timeouts?
 
-> **Forward Reference:** You've secured your server's resources. Now, how do you shut it down without cutting off active users? In [Lesson 8: Graceful HTTP Shutdown](../8-graceful-http-shutdown/README.md), you will learn how to exit cleanly and finish pending work.
+> [!TIP]
+> You've secured your server's resources. Now, how do you shut it down without cutting off active users? In [Lesson 8: Graceful HTTP Shutdown](../8-graceful-http-shutdown/README.md), you will learn how to exit cleanly and finish pending work.
 
 ## Next Step
 

@@ -65,7 +65,8 @@ Allows you to specify exactly how the file should be opened. Common flags includ
 2. What is a "File Descriptor," and why is it a finite resource?
 3. What happens if you try to write to a file opened with `os.O_RDONLY`?
 
-> **Forward Reference:** You now know how to work with the contents of files. But how do you find those files and manage their names across different operating systems? In [Lesson 2: Paths](../2-paths/README.md), you will learn how to use the `path/filepath` package to handle file paths portably.
+> [!TIP]
+> You now know how to work with the contents of files. But how do you find those files and manage their names across different operating systems? In [Lesson 2: Paths](../2-paths/README.md), you will learn how to use the `path/filepath` package to handle file paths portably.
 
 ## Next Step
 

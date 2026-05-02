@@ -77,7 +77,8 @@ While `recover()` saves your server from crashing, a panic is still a sign of a 
 2. What are the risks of using `recover()` to "hide" bugs instead of fixing them?
 3. How would you modify the `AppHandler` to handle different response types (e.g., XML vs JSON errors)?
 
-> **Forward Reference:** Your server is now stable and handles errors like a pro. But in the real world, requests can hang forever. In [Lesson 7: Server Timeouts](../7-server-timeouts/README.md), you will learn how to protect your server's resources from slow clients and hanging dependencies.
+> [!TIP]
+> Your server is now stable and handles errors like a pro. But in the real world, requests can hang forever. In [Lesson 7: Server Timeouts](../7-server-timeouts/README.md), you will learn how to protect your server's resources from slow clients and hanging dependencies.
 
 ## Next Step
 

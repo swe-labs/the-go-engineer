@@ -71,7 +71,8 @@ While `FlagSet` is powerful, complex tools with many nested subcommands (e.g., `
 2. What happens if a user types a subcommand that doesn't exist?
 3. How can you provide a "global" flag that works across all subcommands (e.g., `--verbose`)?
 
-> **Forward Reference:** You now know how to build a sophisticated CLI interface. It's time to put these skills to work. In [Lesson 4: File Organizer Project](../4-file-organizer/README.md), you will build a real-world tool that organizes files into directories based on their extensions.
+> [!TIP]
+> You now know how to build a sophisticated CLI interface. It's time to put these skills to work. In [Lesson 4: File Organizer Project](../4-file-organizer/README.md), you will build a real-world tool that organizes files into directories based on their extensions.
 
 ## Next Step
 

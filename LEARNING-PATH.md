@@ -82,6 +82,7 @@ When a lesson mentions a concept that is introduced elsewhere, follow the inline
 - forward references name the later section or lesson that teaches the topic in detail
 - backward references name the earlier lesson that established the idea
 - sibling references point to nearby tracks that reuse the concept
+- README cross-references use `[!NOTE]` or `[!TIP]` alerts instead of detached navigation blocks
 
 ## Companion Docs
 
