@@ -21,26 +21,16 @@ func main() {
 	if result.ErrorCount == 0 {
 		if result.HasV2 {
 			if result.PlaceholderCount > 0 {
-				if result.LessonCount > 0 {
-					fmt.Printf("Success! %d legacy lessons mapped, %d files with run commands validated, and %d v2 sections plus %d v2 items checked (%d placeholder warnings).\n",
-						result.LessonCount, result.FilesScanned, result.V2SectionCount, result.V2ItemCount, result.PlaceholderCount)
-				} else {
-					fmt.Printf("Success! %d files with run commands validated, and %d v2 sections plus %d v2 items checked (%d placeholder warnings).\n",
-						result.FilesScanned, result.V2SectionCount, result.V2ItemCount, result.PlaceholderCount)
-				}
+				fmt.Printf("Success! %d files with run commands validated, and %d v2 sections plus %d v2 items checked (%d placeholder warnings).\n",
+					result.FilesScanned, result.V2SectionCount, result.V2ItemCount, result.PlaceholderCount)
 			} else {
-				if result.LessonCount > 0 {
-					fmt.Printf("Success! %d legacy lessons mapped, %d files with run commands validated, and %d v2 sections plus %d v2 items checked.\n",
-						result.LessonCount, result.FilesScanned, result.V2SectionCount, result.V2ItemCount)
-				} else {
-					fmt.Printf("Success! %d files with run commands validated, and %d v2 sections plus %d v2 items checked.\n",
-						result.FilesScanned, result.V2SectionCount, result.V2ItemCount)
-				}
+				fmt.Printf("Success! %d files with run commands validated, and %d v2 sections plus %d v2 items checked.\n",
+					result.FilesScanned, result.V2SectionCount, result.V2ItemCount)
 			}
 			return
 		}
 
-		fmt.Printf("Success! All %d lessons mapped and %d files with run commands validated.\n", result.LessonCount, result.FilesScanned)
+		fmt.Printf("Success! %d files with run commands validated. No v2 curriculum registry found.\n", result.FilesScanned)
 		return
 	}
 

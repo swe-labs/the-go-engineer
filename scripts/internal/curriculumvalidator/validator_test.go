@@ -1,6 +1,7 @@
 package curriculumvalidator
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -9,1473 +10,621 @@ import (
 )
 
 func TestValidateAcceptsValidV2Fixture(t *testing.T) {
-	t.Skip("Skipping complex fixture test - real curriculum validation covers this")
 	root := t.TempDir()
+	cur := writeValidV2Fixture(t, root)
 
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s05",
-      "number": "05",
-      "slug": "functions-and-errors",
-      "title": "Functions and Errors",
-      "path_prefix": "03-functions-errors",
-      "entry_points": [],
-      "outputs": [],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "FE.1",
-      "section_id": "s05",
-      "slug": "functions-basics",
-      "title": "Functions Basics",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "03-functions-errors/1-functions-basics",
-      "prerequisites": [],
-      "run_command": "go run ./03-functions-errors/1-functions-basics",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": ["FE.7"]
-    },
-    {
-      "id": "FE.7",
-      "section_id": "s05",
-      "slug": "order-summary",
-      "title": "Order Summary",
-      "type": "exercise",
-      "subtype": "",
-      "level": "core",
-      "verification_mode": "mixed",
-      "path": "03-functions-errors/7-order-summary",
-      "prerequisites": ["FE.1"],
-      "run_command": "go run ./03-functions-errors/7-order-summary",
-      "test_command": "",
-      "starter_path": "03-functions-errors/7-order-summary/_starter",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "03-functions-errors/1-functions-basics")
-	mustMkdir(t, root, "03-functions-errors/7-order-summary")
-	mustMkdir(t, root, "03-functions-errors/7-order-summary/_starter")
-	writeFile(t, root, "03-functions-errors/1-functions-basics/README.md", `# FE.1 Functions Basics
-
-## Mission
-
-Learn what a function is.
-
-## Why This Lesson Exists Now
-
-Functions organize code.
-
-## Production Relevance
-
-Used everywhere.
-
-## Mental Model
-
-Functions are reusable blocks.
-
-## Visual Model
-
-Diagram here.
-
-## Machine View
-
-How it works.
-
-## Run Instructions
-
-go run .
-
-## Code Walkthrough
-
-Walkthrough here.
-
-## Try It
-
-Try something.
-
-## Common Questions
-
-FAQ here.
-
-## Next Step
-
-Next lesson.
-
-`)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
+	result, reports := runValidate(t, root)
 	if result.ErrorCount != 0 {
 		t.Fatalf("Validate returned %d errors, reports: %v", result.ErrorCount, reports)
 	}
 	if !result.HasV2 {
-		t.Fatalf("expected v2 metadata to be detected")
+		t.Fatalf("Validate did not detect curriculum.v2.json")
+	}
+	if result.V2SectionCount != len(canonicalV2Sections) {
+		t.Fatalf("V2SectionCount = %d, want %d", result.V2SectionCount, len(canonicalV2Sections))
+	}
+	if result.V2ItemCount != len(cur.Items) {
+		t.Fatalf("V2ItemCount = %d, want %d", result.V2ItemCount, len(cur.Items))
+	}
+	if result.PlaceholderCount != 0 {
+		t.Fatalf("PlaceholderCount = %d, want 0", result.PlaceholderCount)
+	}
+	if result.FilesScanned == 0 {
+		t.Fatalf("FilesScanned = 0, want validator to scan fixture run surfaces")
 	}
 }
 
-func TestValidateRejectsUnknownSectionPrerequisite(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s04",
-      "number": "04",
-      "slug": "functions-and-errors",
-      "title": "Functions and Errors",
-      "path_prefix": "04-functions-and-errors",
-      "entry_points": [],
-      "outputs": [],
-      "prerequisites": ["s03"]
-    }
-  ],
-  "items": []
-}`)
-
-	mustMkdir(t, root, "04-functions-and-errors")
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 section prerequisite: s04 -> s03")
-}
-
-func TestValidateRejectsMixedContractWithoutCommands(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s04",
-      "number": "04",
-      "slug": "functions-and-errors",
-      "title": "Functions and Errors",
-      "path_prefix": "03-functions-errors",
-      "entry_points": ["FE.9"],
-      "outputs": ["FE.9"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "FE.9",
-      "section_id": "s04",
-      "slug": "error-handling-project",
-      "title": "Error Handling Project",
-      "type": "exercise",
-      "subtype": "",
-      "level": "core",
-      "verification_mode": "mixed",
-      "path": "03-functions-errors/7-order-summary",
-      "prerequisites": [],
-      "run_command": "",
-      "test_command": "",
-      "starter_path": "03-functions-errors/7-order-summary/_starter",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "03-functions-errors/7-order-summary")
-	mustMkdir(t, root, "03-functions-errors/7-order-summary/_starter")
-	writeFile(t, root, "03-functions-errors/7-order-summary/README.md", validFoundationsExerciseReadme("go run ./03-functions-errors/7-order-summary"))
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 mixed contract: FE.9 requires run_command or test_command")
-}
-
-func TestValidateReportsMissingArchitectureSection(t *testing.T) {
-	root := t.TempDir()
-
-	writeValidPressureDocs(t, root)
-	mustMkdir(t, root, "00-how-computers-work")
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s00",
-      "number": "00",
-      "slug": "how-computers-work",
-      "title": "How Computers Work",
-      "path_prefix": "00-how-computers-work",
-      "status": "stable",
-      "entry_points": [],
-      "outputs": ["HC.5"],
-      "prerequisites": []
-    }
-  ],
-  "items": []
-}`)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	if result.ErrorCount == 0 {
-		t.Fatalf("expected architecture-contract validation errors")
-	}
-	if !containsReport(reports, "Invalid v2 architecture contract: missing section s05") {
-		t.Fatalf("expected missing-section report in reports: %v", reports)
-	}
-}
-
-func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s06",
-      "number": "06",
-      "slug": "composition",
-      "title": "Composition",
-      "path_prefix": "04-types-design",
-      "entry_points": ["CO.1"],
-      "outputs": ["CO.2"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "CO.1",
-      "section_id": "s06",
-      "slug": "composition",
-      "title": "Composition",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "04-types-design/16-composition",
-      "prerequisites": [],
-      "run_command": "go run ./04-types-design/16-composition",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": ["CO.2"]
-    },
-    {
-      "id": "CO.2",
-      "section_id": "s06",
-      "slug": "embedding",
-      "title": "Embedding",
-      "type": "lesson",
-      "subtype": "integration",
-      "level": "core",
-      "verification_mode": "run",
-      "path": "04-types-design/17-embedding",
-      "prerequisites": ["CO.1"],
-      "run_command": "go run ./04-types-design/17-embedding",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "04-types-design/16-composition")
-	mustMkdir(t, root, "04-types-design/17-embedding")
-	writeFile(t, root, "04-types-design/16-composition/main.go", `package main
-
-// Section 06: Composition
-
-func main() {
-	println("NEXT UP: ST.1 -> 04-types-design/20-formatting")
-}`)
-	writeFile(t, root, "04-types-design/16-composition/README.md", "## Mission\n## Prerequisites\n## Mental Model\n## Visual Model\n## Machine View\n## Run Instructions\n## Code Walkthrough\n## Try It\n## In Production\n## Thinking Questions\n## Next Step\n")
-	writeFile(t, root, "04-types-design/17-embedding/README.md", "## Mission\n## Prerequisites\n## Mental Model\n## Visual Model\n## Machine View\n## Run Instructions\n## Code Walkthrough\n## Try It\n## In Production\n## Thinking Questions\n## Next Step\n")
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 lesson navigation footer: CO.1 -> ST.1 (expected CO.2)", "Invalid v2 README navigation footer: CO.1 -> 04-types-design/16-composition/README.md (expected \"Next: `CO.2` -> [`04-types-design/17-embedding`](../17-embedding/README.md)\")")
-}
-
-func TestValidateRejectsStaticLessonNavigationFooterWithoutPath(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s06",
-      "number": "06",
-      "slug": "composition",
-      "title": "Composition",
-      "path_prefix": "04-types-design",
-      "entry_points": ["CO.1"],
-      "outputs": ["CO.2"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "CO.1",
-      "section_id": "s06",
-      "slug": "composition",
-      "title": "Composition",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "04-types-design/16-composition",
-      "prerequisites": [],
-      "run_command": "go run ./04-types-design/16-composition",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": ["CO.2"]
-    },
-    {
-      "id": "CO.2",
-      "section_id": "s06",
-      "slug": "embedding",
-      "title": "Embedding",
-      "type": "lesson",
-      "subtype": "integration",
-      "level": "core",
-      "verification_mode": "run",
-      "path": "04-types-design/17-embedding",
-      "prerequisites": ["CO.1"],
-      "run_command": "go run ./04-types-design/17-embedding",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "04-types-design/16-composition")
-	mustMkdir(t, root, "04-types-design/17-embedding")
-	writeFile(t, root, "04-types-design/16-composition/main.go", `package main
-
-// Section 06: Composition
-
-func main() {
-	println("NEXT UP: CO.2 embedding")
-}`)
-	writeFile(t, root, "04-types-design/16-composition/README.md", "## Mission\n## Prerequisites\n## Mental Model\n## Visual Model\n## Machine View\n## Run Instructions\n## Code Walkthrough\n## Try It\n## In Production\n## Thinking Questions\n## Next Step\n")
-	writeFile(t, root, "04-types-design/17-embedding/README.md", "## Mission\n## Prerequisites\n## Mental Model\n## Visual Model\n## Machine View\n## Run Instructions\n## Code Walkthrough\n## Try It\n## In Production\n## Thinking Questions\n## Next Step\n")
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, `Missing v2 lesson navigation footer: CO.1 -> 04-types-design/16-composition/main.go (expected "NEXT UP: CO.2 -> 04-types-design/17-embedding")`, "Invalid v2 README navigation footer: CO.1 -> 04-types-design/16-composition/README.md (expected \"Next: `CO.2` -> [`04-types-design/17-embedding`](../17-embedding/README.md)\")")
-}
-
-func TestValidateRejectsStaticReadmeNavigationFooterWithoutPath(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s00",
-      "number": "00",
-      "slug": "how-computers-work",
-      "title": "How Computers Work",
-      "path_prefix": "00-how-computers-work",
-      "entry_points": ["HC.1"],
-      "outputs": ["HC.2"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "HC.1",
-      "section_id": "s00",
-      "slug": "what-is-a-program",
-      "title": "What is a program?",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "00-how-computers-work/1-what-is-a-program",
-      "prerequisites": [],
-      "run_command": "go run ./00-how-computers-work/1-what-is-a-program",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": ["HC.2"]
-    },
-    {
-      "id": "HC.2",
-      "section_id": "s00",
-      "slug": "code-to-execution",
-      "title": "How code becomes execution",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "status": "placeholder",
-      "verification_mode": "run",
-      "path": "00-how-computers-work/2-code-to-execution",
-      "prerequisites": ["HC.1"],
-      "run_command": "go run ./00-how-computers-work/2-code-to-execution",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "00-how-computers-work/1-what-is-a-program")
-	mustMkdir(t, root, "00-how-computers-work/2-code-to-execution")
-	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/README.md", validFoundationsLessonReadme("go run ./00-how-computers-work/1-what-is-a-program"))
-	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/main.go", validFoundationsMainGo("HC.2", "00-how-computers-work/2-code-to-execution"))
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	expected := "Invalid v2 README navigation footer: HC.1 -> 00-how-computers-work/1-what-is-a-program/README.md (expected \"Next: `HC.2` -> [`00-how-computers-work/2-code-to-execution`](../2-code-to-execution/README.md)\")"
-	requireOnlyFixtureExpectedReports(t, result, reports, expected)
-}
-
-func TestValidateRejectsWrongSectionLabelInV2Source(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s09",
-      "number": "09",
-      "slug": "io-and-cli",
-      "title": "I/O and CLI",
-      "path_prefix": "05-packages-io/02-io-and-cli",
-      "entry_points": ["CL.1"],
-      "outputs": ["CL.1"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "CL.1",
-      "section_id": "s09",
-      "slug": "args",
-      "title": "Args",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/cli-tools/1-args",
-      "prerequisites": [],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/cli-tools/1-args",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "05-packages-io/02-io-and-cli/cli-tools/1-args")
-	writeFile(t, root, "05-packages-io/02-io-and-cli/cli-tools/1-args/main.go", `package main
-
-// Section 19: CLI Tools - Command-Line Arguments
-
-func main() {}
-`)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 section label: CL.1 -> 05-packages-io/02-io-and-cli/cli-tools/1-args/main.go (expected Section 09 or Stage 09)")
-}
-
-func TestValidateRejectsMojibakeInV2TextSurface(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s09",
-      "number": "09",
-      "slug": "io-and-cli",
-      "title": "I/O and CLI",
-      "path_prefix": "05-packages-io/02-io-and-cli",
-      "entry_points": ["FS.1"],
-      "outputs": ["FS.1"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "FS.1",
-      "section_id": "s09",
-      "slug": "files",
-      "title": "Files",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/filesystem/1-files",
-      "prerequisites": [],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/filesystem/1-files",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "05-packages-io/02-io-and-cli/filesystem/1-files")
-	writeFile(t, root, "05-packages-io/02-io-and-cli/filesystem/1-files/main.go", "package main\n\n// Section 09: Filesystem\n\nfunc main() {\n\tprintln(\"\u00e2\u0153\u2026 broken text\")\n}\n")
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Possible mojibake in v2 text surface: FS.1 -> 05-packages-io/02-io-and-cli/filesystem/1-files/main.go")
-}
-
-func TestValidateAcceptsFoundationsReadmeContractForS00(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s00",
-      "number": "00",
-      "slug": "how-computers-work",
-      "title": "How Computers Work",
-      "path_prefix": "00-how-computers-work",
-      "entry_points": ["HC.1"],
-      "outputs": ["HC.1"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "HC.1",
-      "section_id": "s00",
-      "slug": "what-is-a-program",
-      "title": "What is a program?",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "00-how-computers-work/1-what-is-a-program",
-      "prerequisites": [],
-      "run_command": "go run ./00-how-computers-work/1-what-is-a-program",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	writeValidPressureDocs(t, root)
-	mustMkdir(t, root, "00-how-computers-work/1-what-is-a-program")
-	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/README.md", validFoundationsLessonReadme("go run ./00-how-computers-work/1-what-is-a-program"))
-	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/main.go", validFoundationsMainGo("HC.2", "00-how-computers-work/2-code-to-execution"))
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureScaffoldReports(t, result, reports)
-}
-
-func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s04",
-      "number": "04",
-      "slug": "types-design",
-      "title": "Types and Design",
-      "path_prefix": "04-types-design",
-      "entry_points": ["CO.1"],
-      "outputs": ["CO.1"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "CO.1",
-      "section_id": "s04",
-      "slug": "composition",
-      "title": "Composition",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "04-types-design/16-composition",
-      "prerequisites": [],
-      "run_command": "go run ./04-types-design/16-composition",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	writeValidPressureDocs(t, root)
-	mustMkdir(t, root, "04-types-design")
-	mustMkdir(t, root, "04-types-design/16-composition")
-	writeFile(t, root, "04-types-design/16-composition/README.md", validFoundationsLessonReadme("go run ./04-types-design/16-composition"))
-	writeFile(t, root, "04-types-design/16-composition/main.go", validFoundationsMainGo("CO.2", "04-types-design/17-embedding"))
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureScaffoldReports(t, result, reports)
-}
-
-func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s04",
-      "number": "04",
-      "slug": "types-design",
-      "title": "Types and Design",
-      "path_prefix": "04-types-design",
-      "entry_points": ["ST.1"],
-      "outputs": ["ST.1"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "ST.1",
-      "section_id": "s04",
-      "slug": "strings",
-      "title": "Strings",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "04-types-design/19-strings",
-      "prerequisites": [],
-      "run_command": "go run ./04-types-design/19-strings",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	writeValidPressureDocs(t, root)
-	mustMkdir(t, root, "04-types-design")
-	mustMkdir(t, root, "04-types-design/19-strings")
-	writeFile(t, root, "04-types-design/19-strings/main.go", validFoundationsMainGo("ST.2", "04-types-design/20-formatting"))
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Missing foundations README: ST.1 -> 04-types-design/19-strings/README.md")
-}
-
-func TestValidateRejectsRunFoundationLessonMissingMainGo(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s00",
-      "number": "00",
-      "slug": "how-computers-work",
-      "title": "How Computers Work",
-      "path_prefix": "00-how-computers-work",
-      "entry_points": ["HC.2"],
-      "outputs": ["HC.2"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "HC.2",
-      "section_id": "s00",
-      "slug": "code-to-execution",
-      "title": "How code becomes execution",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "00-how-computers-work/2-code-to-execution",
-      "prerequisites": [],
-      "run_command": "go run ./00-how-computers-work/2-code-to-execution",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	writeValidPressureDocs(t, root)
-	mustMkdir(t, root, "00-how-computers-work/2-code-to-execution")
-	writeFile(t, root, "00-how-computers-work/2-code-to-execution/README.md", validFoundationsLessonReadme("go run ./00-how-computers-work/2-code-to-execution"))
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Missing foundations lesson main.go: HC.2 -> 00-how-computers-work/2-code-to-execution/main.go")
-}
-
-func TestValidateRejectsFoundationsHeadingOrder(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s01",
-      "number": "01",
-      "slug": "getting-started",
-      "title": "Getting Started",
-      "path_prefix": "01-getting-started",
-      "entry_points": ["GT.1"],
-      "outputs": ["GT.1"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "GT.1",
-      "section_id": "s01",
-      "slug": "installation",
-      "title": "Installation",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "01-getting-started/1-installation",
-      "prerequisites": [],
-      "run_command": "go run ./01-getting-started/1-installation",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	writeValidPressureDocs(t, root)
-	mustMkdir(t, root, "01-getting-started/1-installation")
-	writeFile(t, root, "01-getting-started/1-installation/README.md", strings.Join([]string{
-		"# GT.1",
-		"",
-		"## Mission",
-		"",
-		"mission",
-		"",
-		"## Prerequisites",
-		"",
-		"- none",
-		"",
-		"## Mental Model",
-		"",
-		"mental model",
-		"",
-		"## Visual Model",
-		"",
-		"```mermaid",
-		"graph TD",
-		"    A[\"start\"] --> B[\"run\"]",
-		"```",
-		"",
-		"## Run Instructions",
-		"",
-		"go run ./01-getting-started/1-installation",
-		"",
-		"## Machine View",
-		"",
-		"machine view",
-		"",
-		"## Code Walkthrough",
-		"",
-		"walkthrough",
-		"",
-		"## Try It",
-		"",
-		"1. try",
-		"",
-		"## In Production",
-		"",
-		"production note",
-		"",
-		"## Thinking Questions",
-		"",
-		"1. one",
-		"2. two",
-		"3. three",
-		"",
-		"## Next Step",
-		"",
-		"next",
-		"",
-	}, "\n"))
-	writeFile(t, root, "01-getting-started/1-installation/main.go", validFoundationsMainGo("GT.2", "01-getting-started/2-hello-world"))
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid foundations README contract: GT.1 -> 01-getting-started/1-installation/README.md has ## Run Instructions out of order")
-}
-
-func TestValidateRejectsFoundationsVisualModelWithoutMermaid(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s03",
-      "number": "03",
-      "slug": "functions-errors",
-      "title": "Functions and Errors",
-      "path_prefix": "03-functions-errors",
-      "entry_points": ["FE.1"],
-      "outputs": ["FE.1"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "FE.1",
-      "section_id": "s03",
-      "slug": "functions-basics",
-      "title": "Functions Basics",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "verification_mode": "run",
-      "path": "03-functions-errors/1-functions-basics",
-      "prerequisites": [],
-      "run_command": "go run ./03-functions-errors/1-functions-basics",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	writeValidPressureDocs(t, root)
-	mustMkdir(t, root, "03-functions-errors/1-functions-basics")
-	writeFile(t, root, "03-functions-errors/1-functions-basics/README.md", strings.Replace(validFoundationsLessonReadme("go run ./03-functions-errors/1-functions-basics"), "```mermaid\ngraph TD\n    A[\"input\"] --> B[\"program\"]\n    B --> C[\"output\"]\n```", "diagram", 1))
-	writeFile(t, root, "03-functions-errors/1-functions-basics/main.go", validFoundationsMainGo("FE.2", "03-functions-errors/2-parameters-and-returns"))
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid foundations README contract: FE.1 -> 03-functions-errors/1-functions-basics/README.md Visual Model must include a Mermaid diagram")
-}
-
-func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s04",
-      "number": "04",
-      "slug": "types-design",
-      "title": "Types and Design",
-      "path_prefix": "04-types-design",
-      "entry_points": ["TI.10"],
-      "outputs": ["TI.10"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "TI.10",
-      "section_id": "s04",
-      "slug": "payroll-processor-project",
-      "title": "Payroll Processor Project",
-      "type": "exercise",
-      "subtype": "",
-      "level": "core",
-      "verification_mode": "mixed",
-      "path": "04-types-design/10-payroll-processor",
-      "prerequisites": [],
-      "run_command": "go run ./04-types-design/10-payroll-processor",
-      "test_command": "go test ./04-types-design/10-payroll-processor",
-      "starter_path": "04-types-design/10-payroll-processor/_starter",
-      "next_items": []
-    }
-  ]
-}`)
-
-	writeValidPressureDocs(t, root)
-	mustMkdir(t, root, "04-types-design/10-payroll-processor")
-	mustMkdir(t, root, "04-types-design/10-payroll-processor/_starter")
-	writeFile(t, root, "04-types-design/10-payroll-processor/README.md", strings.Replace(validFoundationsExerciseReadme("go run ./04-types-design/10-payroll-processor"), "\n## Verification Surface\n\n1. go run ./04-types-design/10-payroll-processor\n2. go test ./04-types-design/10-payroll-processor\n", "", 1))
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid foundations README contract: TI.10 -> 04-types-design/10-payroll-processor/README.md missing ## Verification Surface")
-}
-
-func TestValidateAcceptsFlagshipProjectSplit(t *testing.T) {
-	root := t.TempDir()
-
-	writeValidOpslaneFlagshipFixture(t, root, false)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureScaffoldReports(t, result, reports)
-}
-
-func TestValidateRejectsFlagshipReservedPrefixCollision(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s10",
-      "number": "10",
-      "slug": "production-operations",
-      "title": "Production Operations",
-      "path_prefix": "10-production",
-      "entry_points": ["OPS.5"],
-      "outputs": ["OPS.5"],
-      "prerequisites": []
-    },
-    {
-      "id": "s11",
-      "number": "11",
-      "slug": "flagship",
-      "title": "Flagship",
-      "path_prefix": "11-flagship",
-      "entry_points": ["OPS.1"],
-      "outputs": ["OPS.2"],
-      "prerequisites": ["s10"]
-    }
-  ],
-  "items": [
-    {
-      "id": "OPS.5",
-      "section_id": "s10",
-      "slug": "operations-handoff",
-      "title": "Operations Handoff",
-      "type": "reference",
-      "subtype": "",
-      "level": "production",
-      "status": "implemented",
-      "verification_mode": "rubric",
-      "path": "10-production",
-      "prerequisites": [],
-      "run_command": "",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    },
-    {
-      "id": "OPS.1",
-      "section_id": "s11",
-      "slug": "foundation",
-      "title": "Reserved Prefix Foundation",
-      "type": "checkpoint",
-      "subtype": "",
-      "level": "production",
-      "status": "implemented",
-      "verification_mode": "test",
-      "path": "11-flagship/01-ops-flagship/modules/01-foundation",
-      "prerequisites": [],
-      "run_command": "",
-      "test_command": "go test ./11-flagship/01-ops-flagship/internal/config/...",
-      "starter_path": "",
-      "next_items": ["OPS.2"]
-    },
-    {
-      "id": "OPS.2",
-      "section_id": "s11",
-      "slug": "database",
-      "title": "Reserved Prefix Database",
-      "type": "capstone",
-      "subtype": "",
-      "level": "production",
-      "status": "implemented",
-      "verification_mode": "rubric",
-      "path": "11-flagship/01-ops-flagship/modules/02-database",
-      "prerequisites": ["OPS.1"],
-      "run_command": "",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "10-production")
-	writeFlagshipProjectSurface(t, root, "11-flagship/01-ops-flagship", []string{
-		"modules/01-foundation",
-		"modules/02-database",
-	}, true, true, true)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	if result.ErrorCount == 0 {
-		t.Fatalf("expected a validation error for reserved prefix collision")
-	}
-	if !containsReport(reports, "Invalid flagship project prefix: OPS.1 -> OPS is already used outside s11") {
-		t.Fatalf("expected reserved-prefix error in reports: %v", reports)
-	}
-}
-
-func TestValidateRejectsFlagshipMissingModuleMap(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", validOpslaneFlagshipCurriculum(false, false))
-	writeFlagshipProjectSurface(t, root, "11-flagship/01-opslane", opslaneModuleDirs(), false, true, true)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	if result.ErrorCount == 0 {
-		t.Fatalf("expected a validation error for missing MODULES.md")
-	}
-	if !containsReport(reports, "Missing flagship project module map: OPSL -> 11-flagship/01-opslane/MODULES.md") {
-		t.Fatalf("expected missing module map error in reports: %v", reports)
-	}
-}
-
-func TestValidateRejectsFlagshipMissingProgressChecker(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", validOpslaneFlagshipCurriculum(false, false))
-	writeFlagshipProjectSurface(t, root, "11-flagship/01-opslane", opslaneModuleDirs(), true, false, true)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	if result.ErrorCount == 0 {
-		t.Fatalf("expected a validation error for missing progress checker")
-	}
-	if !containsReport(reports, "Missing flagship progress checker: OPSL -> 11-flagship/01-opslane/scripts/progress.go") {
-		t.Fatalf("expected missing progress checker error in reports: %v", reports)
-	}
-}
-
-func TestValidateRejectsBrokenFlagshipChain(t *testing.T) {
-	root := t.TempDir()
-
-	writeValidOpslaneFlagshipFixture(t, root, true)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	if result.ErrorCount == 0 {
-		t.Fatalf("expected a validation error for broken flagship chain")
-	}
-	if !containsReport(reports, "Invalid flagship module chain: OPSL.4 must point to OPSL.5") {
-		t.Fatalf("expected broken chain error in reports: %v", reports)
-	}
-}
-
-func TestValidateAcceptsOptionalSecondFlagshipProject(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", validOpslaneFlagshipCurriculum(true, false))
-	writeFlagshipProjectSurface(t, root, "11-flagship/01-opslane", opslaneModuleDirs(), true, true, true)
-	writeFlagshipProjectSurface(t, root, "11-flagship/02-crmx", []string{
-		"modules/01-foundation",
-		"modules/02-capstone",
-	}, true, false, false)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	requireOnlyFixtureScaffoldReports(t, result, reports)
-}
-
-func writeValidOpslaneFlagshipFixture(t *testing.T, root string, brokenChain bool) {
-	t.Helper()
-
-	writeFile(t, root, "curriculum.v2.json", validOpslaneFlagshipCurriculum(false, brokenChain))
-	writeFlagshipProjectSurface(t, root, "11-flagship/01-opslane", opslaneModuleDirs(), true, true, true)
-}
-
-func validOpslaneFlagshipCurriculum(includeOptionalProject, brokenChain bool) string {
-	opsl4Next := "OPSL.5"
-	if brokenChain {
-		opsl4Next = "OPSL.6"
+func TestValidateRejectsArchitectureDrift(t *testing.T) {
+	tests := []struct {
+		name   string
+		mutate func(*V2Curriculum)
+		want   string
+	}{
+		{
+			name: "wrong section order",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0], cur.Sections[1] = cur.Sections[1], cur.Sections[0]
+			},
+			want: "Invalid v2 architecture contract: section position 0 -> s01 (expected s00)",
+		},
+		{
+			name: "wrong section number",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].Number = "99"
+			},
+			want: "Invalid v2 section number: s00 -> 99 (expected 00)",
+		},
+		{
+			name: "wrong section slug",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].Slug = "machine-basics"
+			},
+			want: "Invalid v2 section slug: s00 -> machine-basics (expected how-computers-work)",
+		},
+		{
+			name: "wrong section title",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].Title = "Machines"
+			},
+			want: "Invalid v2 section title: s00 -> Machines (expected How Computers Work)",
+		},
+		{
+			name: "wrong path prefix",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].PathPrefix = "00-machines"
+			},
+			want: "Invalid v2 section path_prefix: s00 -> 00-machines (expected 00-how-computers-work)",
+		},
+		{
+			name: "wrong status",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].Status = "draft"
+			},
+			want: "Invalid v2 section status: s00 -> draft",
+		},
+		{
+			name: "wrong phase",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].Phase = "legacy"
+			},
+			want: "Invalid v2 section phase: s00 -> legacy",
+		},
+		{
+			name: "missing summary",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].Summary = ""
+			},
+			want: "Invalid v2 section metadata: s00 requires number, slug, title, path_prefix, phase, and summary",
+		},
+		{
+			name: "wrong entry points",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].EntryPoints = []string{"HC.2"}
+			},
+			want: "Invalid v2 section entry points: s00 -> HC.2 (expected HC.1)",
+		},
+		{
+			name: "wrong outputs",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].Outputs = []string{"HC.4"}
+			},
+			want: "Invalid v2 section outputs: s00 -> HC.4 (expected HC.5)",
+		},
 	}
 
-	coreItems := []string{
-		flagshipItemJSON("OPSL.1", "s11", "foundation-and-configuration", "Opslane Foundation and Configuration", "checkpoint", "implemented", "mixed", "11-flagship/01-opslane/modules/01-foundation", "", "go run ./11-flagship/01-opslane/cmd/server", "go test ./11-flagship/01-opslane/internal/config/...", "OPSL.2"),
-		flagshipItemJSON("OPSL.2", "s11", "database-and-models", "Opslane Database and Models", "checkpoint", "implemented", "test", "11-flagship/01-opslane/modules/02-database", "OPSL.1", "", "go test ./11-flagship/01-opslane/internal/db/...", "OPSL.3"),
-		flagshipItemJSON("OPSL.3", "s11", "authentication-and-tenant-isolation", "Opslane Authentication and Tenant Isolation", "checkpoint", "implemented", "test", "11-flagship/01-opslane/modules/03-auth", "OPSL.2", "", "go test ./11-flagship/01-opslane/internal/auth/...", "OPSL.4"),
-		flagshipItemJSON("OPSL.4", "s11", "http-api-layer", "Opslane HTTP API Layer", "checkpoint", "implemented", "mixed", "11-flagship/01-opslane/modules/04-http-api", "OPSL.3", "go run ./11-flagship/01-opslane/cmd/server", "go test ./11-flagship/01-opslane/internal/handlers/... ./11-flagship/01-opslane/internal/middleware/...", opsl4Next),
-		flagshipItemJSON("OPSL.5", "s11", "order-processing", "Opslane Order Processing", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/05-order-processing", "OPSL.4", "", "go test ./11-flagship/01-opslane/internal/services/...", "OPSL.6"),
-		flagshipItemJSON("OPSL.6", "s11", "payment-pipeline", "Opslane Payment Pipeline", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/06-payment-pipeline", "OPSL.5", "", "go test ./11-flagship/01-opslane/internal/payment/...", "OPSL.7"),
-		flagshipItemJSON("OPSL.7", "s11", "event-bus-and-worker-pools", "Opslane Event Bus and Worker Pools", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/07-event-workers", "OPSL.6", "", "go test ./11-flagship/01-opslane/internal/events/... ./11-flagship/01-opslane/internal/workers/...", "OPSL.8"),
-		flagshipItemJSON("OPSL.8", "s11", "caching-layer", "Opslane Caching Layer", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/08-caching", "OPSL.7", "", "go test ./11-flagship/01-opslane/internal/cache/...", "OPSL.9"),
-		flagshipItemJSON("OPSL.9", "s11", "observability", "Opslane Observability", "checkpoint", "placeholder", "test", "11-flagship/01-opslane/modules/09-observability", "OPSL.8", "", "go test ./11-flagship/01-opslane/internal/logging/... ./11-flagship/01-opslane/internal/metrics/...", "OPSL.10"),
-		flagshipItemJSON("OPSL.10", "s11", "graceful-shutdown-and-deployment", "Opslane Graceful Shutdown and Deployment", "capstone", "placeholder", "rubric", "11-flagship/01-opslane/modules/10-shutdown-deploy", "OPSL.9", "", "", ""),
-	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := t.TempDir()
+			cur := writeValidV2Fixture(t, root)
+			tt.mutate(&cur)
+			writeCurriculum(t, root, cur)
 
-	if includeOptionalProject {
-		coreItems = append(coreItems,
-			flagshipItemJSON("CRMX.1", "s11", "foundation", "CRMX Foundation", "checkpoint", "placeholder", "rubric", "11-flagship/02-crmx/modules/01-foundation", "", "", "", "CRMX.2"),
-			flagshipItemJSON("CRMX.2", "s11", "capstone", "CRMX Capstone", "capstone", "placeholder", "rubric", "11-flagship/02-crmx/modules/02-capstone", "CRMX.1", "", "", ""),
-		)
-	}
-
-	return fmt.Sprintf(`{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s11",
-      "number": "11",
-      "slug": "flagship",
-      "title": "Flagship",
-      "path_prefix": "11-flagship",
-      "entry_points": ["OPSL.1"],
-      "outputs": ["OPSL.10"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-%s
-  ]
-}`, strings.Join(coreItems, ",\n"))
-}
-
-func flagshipItemJSON(id, sectionID, slug, title, itemType, status, verificationMode, path, prereq, runCommand, testCommand, next string) string {
-	prerequisites := "[]"
-	if prereq != "" {
-		prerequisites = fmt.Sprintf(`["%s"]`, prereq)
-	}
-	nextItems := "[]"
-	if next != "" {
-		nextItems = fmt.Sprintf(`["%s"]`, next)
-	}
-
-	return fmt.Sprintf(`    {
-      "id": "%s",
-      "section_id": "%s",
-      "slug": "%s",
-      "title": "%s",
-      "type": "%s",
-      "subtype": "",
-      "level": "production",
-      "status": "%s",
-      "verification_mode": "%s",
-      "path": "%s",
-      "prerequisites": %s,
-      "run_command": "%s",
-      "test_command": "%s",
-      "starter_path": "",
-      "next_items": %s
-    }`, id, sectionID, slug, title, itemType, status, verificationMode, path, prerequisites, runCommand, testCommand, nextItems)
-}
-
-func opslaneModuleDirs() []string {
-	return []string{
-		"modules/01-foundation",
-		"modules/02-database",
-		"modules/03-auth",
-		"modules/04-http-api",
-		"modules/05-order-processing",
-		"modules/06-payment-pipeline",
-		"modules/07-event-workers",
-		"modules/08-caching",
-		"modules/09-observability",
-		"modules/10-shutdown-deploy",
-	}
-}
-
-func writeFlagshipProjectSurface(t *testing.T, root, projectRoot string, moduleDirs []string, includeModuleMap, includeProgress, includeImplementedTargets bool) {
-	t.Helper()
-
-	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "README.md")), "# Flagship Project\n")
-	if includeModuleMap {
-		writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "MODULES.md")), "# Module Map\n")
-	}
-	if includeProgress {
-		writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "scripts", "progress.go")), "//go:build ignore\n\npackage main\n\nfunc main() {}\n")
-	}
-	prefix := flagshipFixturePrefix(projectRoot)
-	for index, moduleDir := range moduleDirs {
-		readme := "# Module\n\n## Next Step\n\nThis path is complete. Return to the section README or continue with the next project milestone.\n"
-		if index < len(moduleDirs)-1 {
-			nextID := fmt.Sprintf("%s.%d", prefix, index+2)
-			nextPath := filepath.ToSlash(filepath.Join(projectRoot, moduleDirs[index+1]))
-			linkTarget, err := filepath.Rel(filepath.Join(projectRoot, moduleDir), filepath.Join(nextPath, "README.md"))
-			if err != nil {
-				t.Fatalf("failed to resolve fixture README link: %v", err)
+			result, reports := runValidate(t, root)
+			if result.ErrorCount == 0 {
+				t.Fatalf("expected validation error containing %q", tt.want)
 			}
-			readme = fmt.Sprintf("# Module\n\n## Next Step\n\nNext: `%s` -> [`%s`](%s)\n", nextID, nextPath, filepath.ToSlash(linkTarget))
-		}
-		writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, moduleDir, "README.md")), readme)
+			requireReportContains(t, reports, tt.want)
+		})
 	}
-	if !includeImplementedTargets {
+}
+
+func TestValidateRejectsSchemaAndMetadataDrift(t *testing.T) {
+	tests := []struct {
+		name   string
+		mutate func(*V2Curriculum)
+		want   string
+	}{
+		{
+			name: "invalid schema version",
+			mutate: func(cur *V2Curriculum) {
+				cur.SchemaVersion = 2
+			},
+			want: "Invalid v2 schema_version: 2 (expected 1)",
+		},
+		{
+			name: "duplicate section id",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[1].ID = cur.Sections[0].ID
+			},
+			want: "Duplicate v2 section id: s00",
+		},
+		{
+			name: "duplicate item id",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[1].ID = cur.Items[0].ID
+			},
+			want: "Duplicate v2 item id: HC.1",
+		},
+		{
+			name: "invalid item type",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].Type = "lessen"
+			},
+			want: "Invalid v2 item type: HC.1 -> lessen",
+		},
+		{
+			name: "invalid item level",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].Level = "advanced"
+			},
+			want: "Invalid v2 item level: HC.1 -> advanced",
+		},
+		{
+			name: "invalid verification mode",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].VerificationMode = "manual"
+			},
+			want: "Invalid v2 verification mode: HC.1 -> manual",
+		},
+		{
+			name: "invalid lesson subtype",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].Subtype = "syntax"
+			},
+			want: "Invalid v2 lesson subtype: HC.1 -> syntax",
+		},
+		{
+			name: "unexpected non-lesson subtype",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].Type = "exercise"
+				cur.Items[0].Subtype = "concept"
+			},
+			want: "Unexpected v2 subtype for non-lesson item: HC.1 -> concept",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := t.TempDir()
+			cur := writeValidV2Fixture(t, root)
+			tt.mutate(&cur)
+			writeCurriculum(t, root, cur)
+
+			result, reports := runValidate(t, root)
+			if result.ErrorCount == 0 {
+				t.Fatalf("expected validation error containing %q", tt.want)
+			}
+			requireReportContains(t, reports, tt.want)
+		})
+	}
+}
+
+func TestValidateRejectsRootEscapingPaths(t *testing.T) {
+	tests := []struct {
+		name   string
+		mutate func(t *testing.T, root string, cur *V2Curriculum)
+		want   string
+	}{
+		{
+			name: "item path escapes root",
+			mutate: func(t *testing.T, root string, cur *V2Curriculum) {
+				cur.Items[0].Path = "../outside"
+			},
+			want: "Invalid v2 item path: HC.1 -> ../outside",
+		},
+		{
+			name: "starter path escapes root",
+			mutate: func(t *testing.T, root string, cur *V2Curriculum) {
+				cur.Items[0].StarterPath = "../starter"
+			},
+			want: "Invalid v2 starter path: HC.1 -> ../starter",
+		},
+		{
+			name: "run command target escapes root",
+			mutate: func(t *testing.T, root string, cur *V2Curriculum) {
+				cur.Items[0].RunCommand = "go run ./../outside"
+			},
+			want: "Invalid v2 run command target: HC.1 -> go run ./../outside",
+		},
+		{
+			name: "markdown link escapes root",
+			mutate: func(t *testing.T, root string, cur *V2Curriculum) {
+				writeFile(t, root, filepath.Join(cur.Items[0].Path, "README.md"), validLessonReadme(cur.Items[0].RunCommand)+"\n[escape](../../../outside.md)\n")
+			},
+			want: "Broken local doc link:",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := t.TempDir()
+			cur := writeValidV2Fixture(t, root)
+			tt.mutate(t, root, &cur)
+			writeCurriculum(t, root, cur)
+
+			result, reports := runValidate(t, root)
+			if result.ErrorCount == 0 {
+				t.Fatalf("expected validation error containing %q", tt.want)
+			}
+			requireReportContains(t, reports, tt.want)
+		})
+	}
+}
+
+func TestValidateRejectsFakeHeadingsInCodeFence(t *testing.T) {
+	root := t.TempDir()
+	cur := writeValidV2Fixture(t, root)
+	readme := strings.Join([]string{
+		"# Fake headings",
+		"",
+		"```markdown",
+		"## Mission",
+		"## Prerequisites",
+		"## Mental Model",
+		"## Visual Model",
+		"## Machine View",
+		"## Run Instructions",
+		"## Code Walkthrough",
+		"## Try It",
+		"## In Production",
+		"## Thinking Questions",
+		"## Next Step",
+		"```",
+	}, "\n")
+	writeFile(t, root, filepath.Join(cur.Items[0].Path, "README.md"), readme)
+
+	result, reports := runValidate(t, root)
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected README contract errors")
+	}
+	requireReportContains(t, reports, "Invalid foundations README contract: HC.1")
+	requireReportContains(t, reports, "missing ## Mission")
+}
+
+func TestValidateReportsBrokenLocalLinkOnlyOnce(t *testing.T) {
+	root := t.TempDir()
+	cur := writeValidV2Fixture(t, root)
+	writeFile(t, root, filepath.Join(cur.Items[0].Path, "README.md"), validLessonReadme(cur.Items[0].RunCommand)+"\n[missing](./missing.md)\n")
+
+	result, reports := runValidate(t, root)
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected broken local link report")
+	}
+
+	count := countReportsContaining(reports, "Broken local doc link:")
+	if count != 1 {
+		t.Fatalf("broken local link reports = %d, want 1; reports: %v", count, reports)
+	}
+}
+
+func TestValidateHandlesRubricModeExplicitly(t *testing.T) {
+	t.Run("accepts rubric with no commands when README exists", func(t *testing.T) {
+		root := t.TempDir()
+		cur := writeValidV2Fixture(t, root)
+
+		result, reports := runValidate(t, root)
+		if result.ErrorCount != 0 {
+			t.Fatalf("Validate returned %d errors, reports: %v", result.ErrorCount, reports)
+		}
+		requireItem(t, cur, "OPSL.10")
+	})
+
+	t.Run("rejects rubric with no README", func(t *testing.T) {
+		root := t.TempDir()
+		cur := writeValidV2Fixture(t, root)
+		item := requireItem(t, cur, "OPSL.10")
+		if err := os.Remove(filepath.Join(root, item.Path, "README.md")); err != nil {
+			t.Fatalf("remove README: %v", err)
+		}
+
+		result, reports := runValidate(t, root)
+		if result.ErrorCount == 0 {
+			t.Fatalf("expected rubric README proof-surface error")
+		}
+		requireReportContains(t, reports, "Invalid v2 rubric contract: OPSL.10 requires README proof surface")
+	})
+}
+
+func TestValidateRunPathScanStillReportsInvalidCommand(t *testing.T) {
+	root := t.TempDir()
+	cur := writeValidV2Fixture(t, root)
+	writeFile(t, root, filepath.Join(cur.Items[0].Path, "main.go"), "package main\n\nfunc main() {\n\tprintln(\"go run ./missing/path\")\n}\n")
+
+	result, reports := runValidate(t, root)
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected invalid run path report")
+	}
+	requireReportContains(t, reports, "Invalid run path:")
+}
+
+func TestValidateRejectsFlagshipChainBreak(t *testing.T) {
+	root := t.TempDir()
+	cur := writeValidV2Fixture(t, root)
+	for i := range cur.Items {
+		if cur.Items[i].ID == "OPSL.2" {
+			cur.Items[i].NextItems = []string{"OPSL.4"}
+			break
+		}
+	}
+	writeCurriculum(t, root, cur)
+
+	result, reports := runValidate(t, root)
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected flagship chain error")
+	}
+	requireReportContains(t, reports, "Invalid flagship module chain: OPSL.2 must point to OPSL.3")
+}
+
+func writeValidV2Fixture(t *testing.T, root string) V2Curriculum {
+	t.Helper()
+
+	cur := V2Curriculum{
+		SchemaVersion: expectedSchemaVersion,
+		Sections:      make([]V2Section, 0, len(canonicalV2Sections)),
+	}
+
+	for idx, section := range canonicalV2Sections {
+		cur.Sections = append(cur.Sections, V2Section{
+			ID:            section.ID,
+			Number:        section.Number,
+			Slug:          section.Slug,
+			Title:         section.Title,
+			PathPrefix:    section.PathPrefix,
+			Phase:         section.Phase,
+			Summary:       "Summary for " + section.ID,
+			Status:        section.Status,
+			EntryPoints:   append([]string(nil), section.EntryPoints...),
+			Outputs:       append([]string(nil), section.Outputs...),
+			Prerequisites: sectionPrerequisites(idx),
+		})
+		mustMkdir(t, root, section.PathPrefix)
+		writeFile(t, root, filepath.Join(section.PathPrefix, "README.md"), sectionReadme(section.ID))
+	}
+
+	itemIDs := orderedFixtureItemIDs()
+	for _, id := range itemIDs {
+		item := fixtureItem(id)
+		cur.Items = append(cur.Items, item)
+		writeItemSurface(t, root, item)
+	}
+
+	writeFile(t, root, "11-flagship/01-opslane/README.md", "# Opslane\n")
+	writeFile(t, root, "11-flagship/01-opslane/MODULES.md", "# Modules\n")
+	writeFile(t, root, "11-flagship/01-opslane/scripts/progress.go", "package main\n\nfunc main() {}\n")
+
+	writeCurriculum(t, root, cur)
+	return cur
+}
+
+func orderedFixtureItemIDs() []string {
+	seen := map[string]bool{}
+	var ids []string
+	add := func(id string) {
+		if !seen[id] {
+			seen[id] = true
+			ids = append(ids, id)
+		}
+	}
+
+	for _, section := range canonicalV2Sections {
+		for _, id := range section.EntryPoints {
+			add(id)
+		}
+		for _, id := range section.Outputs {
+			add(id)
+		}
+	}
+	for i := 1; i <= 10; i++ {
+		add(fmt.Sprintf("OPSL.%d", i))
+	}
+
+	return ids
+}
+
+func fixtureItem(id string) V2Item {
+	sectionID := sectionIDForItemID(id)
+	path := fixtureItemPath(sectionID, id)
+	item := V2Item{
+		ID:               id,
+		SectionID:        sectionID,
+		Slug:             strings.ToLower(strings.ReplaceAll(id, ".", "-")),
+		Title:            id + " Fixture",
+		Type:             "lesson",
+		Subtype:          "concept",
+		Level:            "core",
+		Status:           "implemented",
+		VerificationMode: "run",
+		Path:             path,
+		Prerequisites:    []string{},
+		RunCommand:       "go run ./" + path,
+		NextItems:        []string{},
+	}
+
+	if isFoundationsSection(sectionID) {
+		item.Level = "foundation"
+	}
+	if sectionID == "s09" || sectionID == "s10" {
+		item.Level = "production"
+	}
+	if sectionID == "s11" {
+		item.Type = "checkpoint"
+		item.Subtype = ""
+		item.Level = "stretch"
+		item.VerificationMode = "rubric"
+		item.RunCommand = ""
+		item.TestCommand = ""
+		number := itemNumber(id)
+		if number < 10 {
+			item.NextItems = []string{fmt.Sprintf("OPSL.%d", number+1)}
+		} else {
+			item.Type = "capstone"
+		}
+	}
+
+	return item
+}
+
+func writeItemSurface(t *testing.T, root string, item V2Item) {
+	t.Helper()
+
+	mustMkdir(t, root, item.Path)
+	if item.SectionID == "s11" {
+		writeFile(t, root, filepath.Join(item.Path, "README.md"), flagshipReadme(item))
 		return
 	}
 
-	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "cmd", "server", "main.go")), "package main\nfunc main() {}\n")
-	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "config", "config.go")), "package config\n")
-	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "db", "repository.go")), "package db\n")
-	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "auth", "service.go")), "package auth\n")
-	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "handlers", "handlers.go")), "package handlers\n")
-	writeFile(t, root, filepath.ToSlash(filepath.Join(projectRoot, "internal", "middleware", "middleware.go")), "package middleware\n")
-	writeFile(t, root, ".github/workflows/ci.yml", "name: ci\n")
+	writeFile(t, root, filepath.Join(item.Path, "README.md"), validLessonReadme(item.RunCommand))
+	writeFile(t, root, filepath.Join(item.Path, "main.go"), mainGoForItem(item))
 }
 
-func flagshipFixturePrefix(projectRoot string) string {
-	switch {
-	case strings.Contains(projectRoot, "01-opslane"):
-		return "OPSL"
-	case strings.Contains(projectRoot, "01-ops-flagship"):
-		return "OPS"
-	case strings.Contains(projectRoot, "02-crmx"):
-		return "CRMX"
-	default:
-		return "MOD"
-	}
-}
-
-func validFoundationsLessonReadme(runCommand string) string {
+func validLessonReadme(runCommand string) string {
 	return strings.Join([]string{
 		"# Lesson",
 		"",
 		"## Mission",
-		"",
-		"mission",
+		"Mission text.",
 		"",
 		"## Prerequisites",
-		"",
-		"- none",
+		"None.",
 		"",
 		"## Mental Model",
-		"",
-		"mental model",
+		"Model.",
 		"",
 		"## Visual Model",
-		"",
 		"```mermaid",
 		"graph TD",
 		"    A[\"input\"] --> B[\"program\"]",
-		"    B --> C[\"output\"]",
 		"```",
 		"",
 		"## Machine View",
-		"",
-		"machine view",
+		"Machine.",
 		"",
 		"## Run Instructions",
-		"",
+		"```bash",
 		runCommand,
+		"```",
 		"",
 		"## Code Walkthrough",
-		"",
-		"walkthrough",
+		"Walkthrough.",
 		"",
 		"## Try It",
-		"",
-		"1. try",
+		"Try it.",
 		"",
 		"## In Production",
-		"",
-		"production note",
+		"Production.",
 		"",
 		"## Thinking Questions",
-		"",
-		"1. one",
-		"2. two",
-		"3. three",
+		"Questions.",
 		"",
 		"## Next Step",
-		"",
-		"next",
+		"This fixture has no next item.",
 		"",
 	}, "\n")
 }
 
-func validFoundationsExerciseReadme(runCommand string) string {
-	testCommand := strings.Replace(runCommand, "go run", "go test", 1)
+func flagshipReadme(item V2Item) string {
+	if len(item.NextItems) == 0 {
+		return "# Flagship\n\n## Next Step\n\nThis path is complete. Return to the section README or continue with the next project milestone.\n"
+	}
 
-	return strings.Join([]string{
-		"# Exercise",
-		"",
-		"## Mission",
-		"",
-		"mission",
-		"",
-		"## Prerequisites",
-		"",
-		"- none",
-		"",
-		"## Mental Model",
-		"",
-		"mental model",
-		"",
-		"## Visual Model",
-		"",
-		"```mermaid",
-		"graph TD",
-		"    A[\"input\"] --> B[\"solution\"]",
-		"    B --> C[\"verified output\"]",
-		"```",
-		"",
-		"## Machine View",
-		"",
-		"machine view",
-		"",
-		"## Run Instructions",
-		"",
-		runCommand,
-		"",
-		"## Solution Walkthrough",
-		"",
-		"walkthrough",
-		"",
-		"## Try It",
-		"",
-		"1. try",
-		"",
-		"## Verification Surface",
-		"",
-		"1. " + runCommand,
-		"2. " + testCommand,
-		"",
-		"## In Production",
-		"",
-		"production note",
-		"",
-		"## Thinking Questions",
-		"",
-		"1. one",
-		"2. two",
-		"3. three",
-		"",
-		"## Next Step",
-		"",
-		"next",
-		"",
-	}, "\n")
+	nextID := item.NextItems[0]
+	nextPath := fixtureItemPath("s11", nextID)
+	linkTarget, err := filepath.Rel(filepath.FromSlash(item.Path), filepath.Join(filepath.FromSlash(nextPath), "README.md"))
+	if err != nil {
+		panic(err)
+	}
+
+	return fmt.Sprintf("# Flagship\n\n## Next Step\n\nNext: `%s` -> [`%s`](%s)\n", nextID, nextPath, filepath.ToSlash(linkTarget))
 }
 
-func validFoundationsMainGo(nextID, nextPath string) string {
-	return "package main\n\nfunc main() {\n\tprintln(\"NEXT UP: " + nextID + " -> " + nextPath + "\")\n}\n"
+func mainGoForItem(item V2Item) string {
+	label := ""
+	switch item.SectionID {
+	case "s09":
+		label = "// Section 09 fixture\n"
+	case "s10":
+		label = "// Section 10 fixture\n"
+	}
+
+	return "package main\n\n" + label + "func main() {}\n"
+}
+
+func sectionReadme(sectionID string) string {
+	labels := canonicalSectionReadmeTracks[sectionID]
+	if len(labels) == 0 {
+		return "# Section\n"
+	}
+
+	return "# Section\n\n" + strings.Join(labels, "\n") + "\n"
+}
+
+func sectionPrerequisites(index int) []string {
+	if index == 0 {
+		return []string{}
+	}
+	return []string{canonicalV2Sections[index-1].ID}
+}
+
+func sectionIDForItemID(id string) string {
+	if strings.HasPrefix(id, "OPSL.") {
+		return "s11"
+	}
+
+	for _, section := range canonicalV2Sections {
+		for _, candidate := range append(append([]string{}, section.EntryPoints...), section.Outputs...) {
+			if candidate == id {
+				return section.ID
+			}
+		}
+	}
+
+	panic("unknown fixture item id: " + id)
+}
+
+func fixtureItemPath(sectionID, id string) string {
+	if sectionID == "s11" {
+		return fmt.Sprintf("11-flagship/01-opslane/modules/%02d-%s", itemNumber(id), strings.ToLower(strings.ReplaceAll(id, ".", "-")))
+	}
+
+	section := canonicalV2Sections[sectionIndex(sectionID)]
+	return filepath.ToSlash(filepath.Join(section.PathPrefix, "fixture-"+strings.ToLower(strings.ReplaceAll(id, ".", "-"))))
+}
+
+func sectionIndex(sectionID string) int {
+	for idx, section := range canonicalV2Sections {
+		if section.ID == sectionID {
+			return idx
+		}
+	}
+	panic("unknown fixture section id: " + sectionID)
+}
+
+func itemNumber(id string) int {
+	_, number, ok := splitCurriculumID(id)
+	if !ok {
+		panic("invalid fixture item id: " + id)
+	}
+	return number
+}
+
+func writeCurriculum(t *testing.T, root string, cur V2Curriculum) {
+	t.Helper()
+
+	data, err := json.MarshalIndent(cur, "", "  ")
+	if err != nil {
+		t.Fatalf("marshal curriculum fixture: %v", err)
+	}
+	writeFile(t, root, "curriculum.v2.json", string(data)+"\n")
 }
 
 func writeFile(t *testing.T, root, relativePath, contents string) {
@@ -1483,10 +632,10 @@ func writeFile(t *testing.T, root, relativePath, contents string) {
 
 	fullPath := filepath.Join(root, relativePath)
 	if err := os.MkdirAll(filepath.Dir(fullPath), 0o755); err != nil {
-		t.Fatalf("failed to create parent directory for %s: %v", relativePath, err)
+		t.Fatalf("mkdir %s: %v", filepath.Dir(fullPath), err)
 	}
 	if err := os.WriteFile(fullPath, []byte(contents), 0o644); err != nil {
-		t.Fatalf("failed to write %s: %v", relativePath, err)
+		t.Fatalf("write %s: %v", relativePath, err)
 	}
 }
 
@@ -1494,167 +643,53 @@ func mustMkdir(t *testing.T, root, relativePath string) {
 	t.Helper()
 
 	if err := os.MkdirAll(filepath.Join(root, relativePath), 0o755); err != nil {
-		t.Fatalf("failed to create directory %s: %v", relativePath, err)
+		t.Fatalf("mkdir %s: %v", relativePath, err)
 	}
 }
 
-func containsReport(reports []string, want string) bool {
+func runValidate(t *testing.T, root string) (Result, []string) {
+	t.Helper()
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+
+	return result, reports
+}
+
+func requireReportContains(t *testing.T, reports []string, want string) {
+	t.Helper()
+
 	for _, report := range reports {
 		if strings.Contains(report, want) {
-			return true
+			return
 		}
 	}
-
-	return false
+	t.Fatalf("expected report containing %q not found in %v", want, reports)
 }
 
-func requireOnlyFixtureExpectedReports(t *testing.T, result Result, reports []string, wants ...string) {
-	t.Helper()
-
-	if result.ErrorCount == 0 {
-		t.Fatalf("expected validation errors %v, got none", wants)
-	}
-
-	filtered := reportsWithoutFixtureScaffold(reports)
-	if len(filtered) != len(wants) {
-		t.Fatalf("expected exactly %d reports outside fixture scaffold, got %v from all reports %v", len(wants), filtered, reports)
-	}
-
-	for _, want := range wants {
-		if !containsReport(filtered, want) {
-			t.Fatalf("expected report %q not found in %v", want, filtered)
-		}
-	}
-}
-
-func requireOnlyFixtureScaffoldReports(t *testing.T, result Result, reports []string) {
-	t.Helper()
-
-	filtered := reportsWithoutFixtureScaffold(reports)
-	if len(filtered) != 0 {
-		t.Fatalf("expected only fixture scaffold reports, got %d validation errors and non-scaffold reports %v from all reports %v", result.ErrorCount, filtered, reports)
-	}
-}
-
-func reportsWithoutFixtureScaffold(reports []string) []string {
-	filtered := make([]string, 0, len(reports))
+func countReportsContaining(reports []string, want string) int {
+	count := 0
 	for _, report := range reports {
-		if isFixtureScaffoldReport(report) {
-			continue
-		}
-		filtered = append(filtered, report)
-	}
-
-	return filtered
-}
-
-func isFixtureScaffoldReport(report string) bool {
-	prefixes := []string{
-		"Invalid v2 architecture contract:",
-		"Invalid v2 section status:",
-		"Invalid v2 section outputs:",
-		"Invalid section README contract:",
-		"Invalid engineering README contract:",
-		"Warning: placeholder item:",
-	}
-
-	for _, prefix := range prefixes {
-		if strings.HasPrefix(report, prefix) {
-			return true
+		if strings.Contains(report, want) {
+			count++
 		}
 	}
-
-	return false
+	return count
 }
 
-func writeValidPressureDocs(t *testing.T, root string) {
+func requireItem(t *testing.T, cur V2Curriculum, id string) V2Item {
 	t.Helper()
 
-	writeFile(t, root, "docs/templates/rubric-checkpoint-template.md", "# Template\n")
-	writeFile(t, root, "docs/stages/expert-layer/README.md", "# Expert\n\n[Task index](./tasks/README.md)\n")
-	writeFile(t, root, "docs/stages/expert-layer/stage-map.md", "# Stage Map\n\n[Task index](./tasks/README.md)\n")
-	writeFile(t, root, "docs/stages/expert-layer/pressure-guidance.md", "# Guidance\n\n[Task index](./tasks/README.md)\n")
-	writeFile(t, root, "docs/stages/expert-layer/tasks/README.md", "# Tasks\n\n- [Task](./review-db6-repository-boundary.md)\n")
-	writeFile(t, root, "docs/stages/expert-layer/tasks/review-db6-repository-boundary.md", `# Review
-
-## Mission
-
-mission
-
-## Type
-
-- review task
-
-## Level
-
-- core
-
-## Prerequisites
-
-- item
-
-## Task
-
-1. task
-
-## Evidence
-
-- evidence
-
-## Rubric
-
-rubric
-
-## Common Weak Answers
-
-- weak
-
-## Next Step
-
-next
-`)
-	writeFile(t, root, "docs/stages/flagship-project/README.md", "# Flagship\n\n[Checkpoint set](./checkpoints/README.md)\n[Implementation slices](./slices/README.md)\n")
-	writeFile(t, root, "docs/stages/flagship-project/stage-map.md", "# Stage Map\n\n[Checkpoint set](./checkpoints/README.md)\n[Implementation slices](./slices/README.md)\n")
-	writeFile(t, root, "docs/stages/flagship-project/checkpoint-guidance.md", "# Guidance\n\n[Checkpoint set index](./checkpoints/README.md)\n[Implementation slices](./slices/README.md)\n")
-	writeFile(t, root, "docs/stages/flagship-project/checkpoints/README.md", "# Checkpoints\n\n- [Foundation](./foundation-checkpoint.md)\n")
-	writeFile(t, root, "docs/stages/flagship-project/checkpoints/foundation-checkpoint.md", `# Foundation
-
-## Mission
-
-mission
-
-## Type
-
-- flagship checkpoint
-
-## Level
-
-- foundation
-
-## Prerequisites
-
-- item
-
-## Task
-
-1. task
-
-## Evidence
-
-- evidence
-
-## Rubric
-
-rubric
-
-## Common Weak Answers
-
-- weak
-
-## Next Step
-
-[Implementation slice](../slices/foundation-slice.md)
-`)
-	writeFile(t, root, "docs/stages/flagship-project/slices/README.md", "# Slices\n\n- [Foundation](./foundation-slice.md)\n")
-	writeFile(t, root, "docs/stages/flagship-project/slices/foundation-slice.md", "# Slice\n")
+	for _, item := range cur.Items {
+		if item.ID == id {
+			return item
+		}
+	}
+	t.Fatalf("fixture item %s not found", id)
+	return V2Item{}
 }
