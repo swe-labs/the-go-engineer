@@ -61,12 +61,14 @@ import (
 // loggerKey is a private type to prevent key collisions in context.
 // Using a plain string like "logger" is a bug - any package can write
 // context.WithValue(ctx, "logger", something_else).
+// loggerKey (Struct): is a private type to prevent key collisions in context.
 type loggerKey struct{}
 
 // FromContext extracts the logger from context.
 // If no logger was stored, it returns the global default logger.
 // This safe fallback means functions can always call FromContext without
 // checking for nil - the program never panics due to a missing logger.
+// FromContext (Function): extracts the logger from context.
 func FromContext(ctx context.Context) *slog.Logger {
 	if logger, ok := ctx.Value(loggerKey{}).(*slog.Logger); ok {
 		return logger
@@ -76,6 +78,7 @@ func FromContext(ctx context.Context) *slog.Logger {
 
 // WithLogger stores a logger in context.
 // Always returns a new context - context values are immutable.
+// WithLogger (Function): stores a logger in context.
 func WithLogger(ctx context.Context, logger *slog.Logger) context.Context {
 	return context.WithValue(ctx, loggerKey{}, logger)
 }
@@ -83,6 +86,7 @@ func WithLogger(ctx context.Context, logger *slog.Logger) context.Context {
 // LoggingMiddleware is the HTTP middleware that wires the pattern together.
 // It runs before every request handler, creating a child logger loaded with
 // request-scoped fields and injecting it into the request context.
+// LoggingMiddleware (Function): is the HTTP middleware that wires the pattern together.
 func LoggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
@@ -115,11 +119,13 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 }
 
 // statusRecorder captures the HTTP status code set by the handler.
+// statusRecorder (Struct): captures the HTTP status code set by the handler.
 type statusRecorder struct {
 	http.ResponseWriter
 	status int
 }
 
+// statusRecorder.WriteHeader (Method): applies the write header operation to receiver state at a visible boundary.
 func (r *statusRecorder) WriteHeader(code int) {
 	r.status = code
 	r.ResponseWriter.WriteHeader(code)
@@ -127,6 +133,7 @@ func (r *statusRecorder) WriteHeader(code int) {
 
 var counter int
 
+// generateRequestID (Function): runs the generate request id step and keeps its inputs, outputs, or errors visible.
 func generateRequestID() string {
 	counter++
 	return fmt.Sprintf("req_%06d", counter)
@@ -134,6 +141,7 @@ func generateRequestID() string {
 
 // Handler functions - they receive the logger from context
 
+// handleGetOrder (Function): runs the handle get order step and keeps its inputs, outputs, or errors visible.
 func handleGetOrder(w http.ResponseWriter, r *http.Request) {
 	// Extract the logger anywhere in the call chain.
 	// It already has request_id, method, and path pre-loaded.
@@ -157,6 +165,7 @@ func handleGetOrder(w http.ResponseWriter, r *http.Request) {
 // fetchOrderFromDB is a downstream function that also uses the context logger.
 // Notice it receives ctx (not the logger directly). This is the idiomatic way:
 // functions never take *slog.Logger as a parameter - they use FromContext.
+// fetchOrderFromDB (Function): is a downstream function that also uses the context logger.
 func fetchOrderFromDB(ctx context.Context, id string) (string, error) {
 	log := FromContext(ctx) // Gets the same request-scoped logger
 	log.Debug("executing SQL query",

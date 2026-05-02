@@ -29,7 +29,7 @@ Closes #
 - [ ] `go mod tidy` no-diff check
 - [ ] `go test ./...`
 - [ ] `go test -race ./...`
-- [ ] `go test -coverprofile coverage.out ./...`
+- [ ] `go test -coverprofile=coverage.out ./...`
 - [ ] `go run ./scripts/validate_curriculum.go`
 
 ## Curriculum Checklist
@@ -38,6 +38,9 @@ Closes #
 - [ ] `curriculum.v2.json` updated if needed.
 - [ ] Section README updated if needed.
 - [ ] Lesson README follows required section order if applicable.
+- [ ] `Level` and `RUN:` headers match `curriculum.v2.json` if applicable.
+- [ ] Machine Role comments explain role, boundary, invariant, or failure mode if applicable.
+- [ ] README cross-references use `[!NOTE]` or `[!TIP]` alerts if applicable.
 - [ ] `NEXT UP:` footer matches curriculum metadata if applicable.
 - [ ] Starter code compiles if applicable.
 

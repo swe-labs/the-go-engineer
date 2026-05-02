@@ -84,20 +84,24 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// listItemsHandler (Function): runs the list items handler step and keeps its inputs, outputs, or errors visible.
 func listItemsHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Listing all items...")
 }
 
+// createItemHandler (Function): runs the create item handler step and keeps its inputs, outputs, or errors visible.
 func createItemHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Item created!")
 }
 
+// getItemHandler (Function): runs the get item handler step and keeps its inputs, outputs, or errors visible.
 func getItemHandler(w http.ResponseWriter, r *http.Request) {
 	// Retrieve the {id} parameter from the URL path.
 	id := r.PathValue("id")
 	fmt.Fprintf(w, "Fetching details for item ID: %s\n", id)
 }
 
+// serveFileHandler (Function): runs the serve file handler step and keeps its inputs, outputs, or errors visible.
 func serveFileHandler(w http.ResponseWriter, r *http.Request) {
 	// Retrieve the full tail path.
 	path := r.PathValue("path")

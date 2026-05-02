@@ -67,6 +67,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// performTask (Function): runs the perform task step and keeps its inputs, outputs, or errors visible.
 func performTask(name string, duration time.Duration) {
 	fmt.Printf("  [Wait] Starting %s...\n", name)
 	time.Sleep(duration) // Simulating a network/disk wait

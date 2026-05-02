@@ -53,6 +53,7 @@ import (
 //   - len(ch) returns the number of items currently in the buffer
 //
 
+// logEvent (Struct): groups the state used by the log event example boundary.
 type logEvent struct {
 	Level   string
 	Message string

@@ -50,6 +50,7 @@ import (
 
 // fetchWithTimeout makes an HTTP GET request with a timeout context.
 // If the request doesn't complete within the timeout, it's automatically cancelled.
+// fetchWithTimeout (Function): makes an HTTP GET request with a timeout context.
 func fetchWithTimeout(url string, timeout time.Duration) (string, error) {
 	// Create a context with a timeout.
 	// After `timeout` duration, the context automatically calls cancel().

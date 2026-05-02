@@ -93,6 +93,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// readerFromString (Function): runs the reader from string step and keeps its inputs, outputs, or errors visible.
 func readerFromString() {
 	fmt.Println("--- 1. strings.Reader ---")
 	// strings.NewReader creates an io.Reader from a string.
@@ -113,6 +114,7 @@ func readerFromString() {
 	fmt.Println()
 }
 
+// bufferDemo (Function): runs the buffer demo step and keeps its inputs, outputs, or errors visible.
 func bufferDemo() {
 	fmt.Println("--- 2. bytes.Buffer ---")
 	// bytes.Buffer implements io.Reader, io.Writer, and io.ByteReader.
@@ -132,6 +134,7 @@ func bufferDemo() {
 	fmt.Println()
 }
 
+// copyDemo (Function): runs the copy demo step and keeps its inputs, outputs, or errors visible.
 func copyDemo() {
 	fmt.Println("--- 3. io.Copy ---")
 	// io.Copy streams data from any Reader to any Writer.
@@ -141,6 +144,7 @@ func copyDemo() {
 	fmt.Printf("\n  Copied %d bytes (err=%v)\n\n", n, err)
 }
 
+// teeReaderDemo (Function): runs the tee reader demo step and keeps its inputs, outputs, or errors visible.
 func teeReaderDemo() {
 	fmt.Println("--- 4. io.TeeReader ---")
 	// TeeReader returns a Reader that writes to w what it reads from r.
@@ -157,6 +161,7 @@ func teeReaderDemo() {
 	fmt.Println()
 }
 
+// multiReaderDemo (Function): runs the multi reader demo step and keeps its inputs, outputs, or errors visible.
 func multiReaderDemo() {
 	fmt.Println("--- 5. io.MultiReader ---")
 	// MultiReader concatenates multiple readers into one.
@@ -170,6 +175,7 @@ func multiReaderDemo() {
 	fmt.Printf("  Combined: %q\n\n", result)
 }
 
+// multiWriterDemo (Function): runs the multi writer demo step and keeps its inputs, outputs, or errors visible.
 func multiWriterDemo() {
 	fmt.Println("--- 6. io.MultiWriter ---")
 	// MultiWriter creates a writer that duplicates writes to all provided writers.
@@ -181,6 +187,7 @@ func multiWriterDemo() {
 	fmt.Printf("\n  Buffer captured: %q\n\n", logBuf.String())
 }
 
+// customReaderDemo (Function): runs the custom reader demo step and keeps its inputs, outputs, or errors visible.
 func customReaderDemo() {
 	fmt.Println("--- 7. Custom Reader ---")
 	// Implementing io.Reader: just implement Read(p []byte) (n int, err error)
@@ -192,11 +199,13 @@ func customReaderDemo() {
 
 // CountingReader is a custom io.Reader that produces ascending integers.
 // This demonstrates how simple it is to implement the io.Reader interface.
+// CountingReader (Struct): is a custom io.Reader that produces ascending integers.
 type CountingReader struct {
 	current int
 	limit   int
 }
 
+// CountingReader.Read (Method): applies the read operation to receiver state at a visible boundary.
 func (r *CountingReader) Read(p []byte) (int, error) {
 	if r.current >= r.limit {
 		return 0, io.EOF // Signal end of data

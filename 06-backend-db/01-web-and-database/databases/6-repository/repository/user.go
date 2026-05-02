@@ -13,6 +13,7 @@ import (
 // UserRepository defines the contract for user data access.
 // By depending on this interface, our business logic stays decoupled
 // from the underlying database implementation.
+// UserRepository (Interface): defines the contract for user data access.
 type UserRepository interface {
 	Create(ctx context.Context, name, email, password, avatar string) (int64, error)
 	GetByEmail(ctx context.Context, email string) (*models.User, error)
@@ -20,15 +21,18 @@ type UserRepository interface {
 }
 
 // SQLUserRepository implements the UserRepository interface using a SQL database.
+// SQLUserRepository (Struct): implements the UserRepository interface using a SQL database.
 type SQLUserRepository struct {
 	db *sql.DB
 }
 
 // NewSQLUserRepository creates a new SQL-backed repository.
+// NewSQLUserRepository (Function): creates a new SQL-backed repository.
 func NewSQLUserRepository(db *sql.DB) *SQLUserRepository {
 	return &SQLUserRepository{db: db}
 }
 
+// SQLUserRepository.Create (Method): applies the create operation to receiver state at a visible boundary.
 func (r *SQLUserRepository) Create(ctx context.Context, name, email, password, avatar string) (int64, error) {
 	// Start a transaction since we are writing to two tables
 	tx, err := r.db.BeginTx(ctx, nil)
@@ -59,6 +63,7 @@ func (r *SQLUserRepository) Create(ctx context.Context, name, email, password, a
 	return userID, nil
 }
 
+// SQLUserRepository.GetByEmail (Method): applies the get by email operation to receiver state at a visible boundary.
 func (r *SQLUserRepository) GetByEmail(ctx context.Context, email string) (*models.User, error) {
 	query := `
 		SELECT u.id, u.name, u.email, u.password, u.created_at, p.avatar, p.created_at
@@ -78,6 +83,7 @@ func (r *SQLUserRepository) GetByEmail(ctx context.Context, email string) (*mode
 	return &u, nil
 }
 
+// SQLUserRepository.List (Method): applies the list operation to receiver state at a visible boundary.
 func (r *SQLUserRepository) List(ctx context.Context) ([]models.User, error) {
 	query := `SELECT id, name, email, created_at FROM users`
 	rows, err := r.db.QueryContext(ctx, query)

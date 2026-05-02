@@ -32,6 +32,7 @@ import (
 	"time"
 )
 
+// Metrics (Struct): groups the state used by the metrics example boundary.
 type Metrics struct {
 	requests int64
 	errors   int64

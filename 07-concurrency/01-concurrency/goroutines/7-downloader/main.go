@@ -38,6 +38,7 @@ import (
 	"time"
 )
 
+// DownloadFile (Function): runs the download file step and keeps its inputs, outputs, or errors visible.
 func DownloadFile(url, destDir string) error {
 	filename := filepath.Base(url)
 	filePath := filepath.Join(destDir, filename)
@@ -72,6 +73,7 @@ func DownloadFile(url, destDir string) error {
 	return nil
 }
 
+// SequentialDownloader (Function): runs the sequential downloader step and keeps its inputs, outputs, or errors visible.
 func SequentialDownloader(urls []string, destDir string) error {
 	if err := os.MkdirAll(destDir, 0755); err != nil {
 		return err
@@ -89,6 +91,7 @@ func SequentialDownloader(urls []string, destDir string) error {
 	return nil
 }
 
+// Result (Struct): groups the state used by the result example boundary.
 type Result struct {
 	URL      string
 	Filename string
@@ -97,6 +100,7 @@ type Result struct {
 	Error    error
 }
 
+// ConcurrentDownloader (Function): runs the concurrent downloader step and keeps its inputs, outputs, or errors visible.
 func ConcurrentDownloader(urls []string, destDir string, maxConcurrent int) error {
 	if err := os.MkdirAll(destDir, 0755); err != nil {
 		return err

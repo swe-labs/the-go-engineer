@@ -51,6 +51,7 @@ import (
 
 // AppConfig represents the application configuration structure.
 // Each field's `json` tag maps it to a key in the JSON config file.
+// AppConfig (Struct): represents the application configuration structure.
 type AppConfig struct {
 	AppName      string   `json:"app_name"`
 	Port         int      `json:"port"`
@@ -63,6 +64,7 @@ type AppConfig struct {
 // validate checks that all required fields are non-zero.
 // In Go, a missing JSON field is set to its zero value (empty string, 0, false).
 // We use this knowledge to detect incomplete configurations.
+// AppConfig.validate (Method): checks that all required fields are non-zero.
 func (c *AppConfig) validate() error {
 	if c.AppName == "" {
 		return fmt.Errorf("config validation: 'app_name' is required")
@@ -80,6 +82,7 @@ func (c *AppConfig) validate() error {
 }
 
 // loadConfig reads and parses a JSON config file from disk.
+// loadConfig (Function): reads and parses a JSON config file from disk.
 func loadConfig(path string) (*AppConfig, error) {
 	file, err := os.Open(path)
 	if err != nil {

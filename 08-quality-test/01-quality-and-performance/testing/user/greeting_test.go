@@ -34,6 +34,7 @@ import (
 // ============================================================================
 
 // GreetingHardcoded prints directly to the terminal.
+// GreetingHardcoded (Function): prints directly to the terminal.
 func GreetingHardcoded(prefix, name string) {
 	fmt.Printf("Hello, %s %s!\n", prefix, name)
 }
@@ -63,6 +64,7 @@ func TestGreetingHardcoded(t *testing.T) {
 }
 
 // GreetingTestable accepts any io.Writer (a file, a network connection, stdout, or a buffer).
+// GreetingTestable (Function): accepts any io.Writer (a file, a network connection, stdout, or a buffer).
 func GreetingTestable(out io.Writer, prefix, name string) {
 	fmt.Fprintf(out, "Hello, %s %s!\n", prefix, name)
 }

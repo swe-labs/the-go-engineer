@@ -47,21 +47,25 @@ import (
 //   preserves Go's "errors are values" philosophy while reducing repetition.
 
 // AppError represents a business error with an associated HTTP status code.
+// AppError (Struct): represents a business error with an associated HTTP status code.
 type AppError struct {
 	Code    int
 	Message string
 	Err     error
 }
 
+// AppError.Error (Method): applies the error operation to receiver state at a visible boundary.
 func (ae AppError) Error() string {
 	return ae.Message
 }
 
 // AppHandler is a custom handler type that returns an error.
+// AppHandler (Type): is a custom handler type that returns an error.
 type AppHandler func(w http.ResponseWriter, r *http.Request) error
 
 // ServeHTTP makes AppHandler satisfy the http.Handler interface.
 // This is where we centralize our error responding logic!
+// AppHandler.ServeHTTP (Method): makes AppHandler satisfy the http.Handler interface.
 func (fn AppHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if err := fn(w, r); err != nil {
 		var appErr AppError
@@ -112,11 +116,13 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// okHandler (Function): runs the ok handler step and keeps its inputs, outputs, or errors visible.
 func okHandler(w http.ResponseWriter, r *http.Request) error {
 	fmt.Fprintln(w, "Everything is fine.")
 	return nil
 }
 
+// failHandler (Function): runs the fail handler step and keeps its inputs, outputs, or errors visible.
 func failHandler(w http.ResponseWriter, r *http.Request) error {
 	// Return a structured business error
 	return AppError{
@@ -126,12 +132,14 @@ func failHandler(w http.ResponseWriter, r *http.Request) error {
 	}
 }
 
+// panicHandler (Function): runs the panic handler step and keeps its inputs, outputs, or errors visible.
 func panicHandler(w http.ResponseWriter, r *http.Request) error {
 	// Simulate an unexpected crash
 	panic("something went horribly wrong!")
 }
 
 // Recovery is a middleware that recovers from panics and logs them.
+// Recovery (Function): is a middleware that recovers from panics and logs them.
 func Recovery(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		defer func() {

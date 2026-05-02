@@ -142,6 +142,8 @@ func main() {
 //	case <-ctx.Done(): return ctx.Err()   // Cancelled!
 //	case result := <-work: return result  // Completed!
 //	}
+//
+// slowOperation (Function): simulates an operation that takes the specified duration.
 func slowOperation(ctx context.Context, duration time.Duration) (string, error) {
 	select {
 	case <-ctx.Done():

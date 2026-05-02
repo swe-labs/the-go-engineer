@@ -30,11 +30,13 @@ import (
 	"runtime"
 )
 
+// commandInfo (Struct): groups the state used by the command info example boundary.
 type commandInfo struct {
 	name        string
 	description string
 }
 
+// toolInfo (Struct): groups the state used by the tool info example boundary.
 type toolInfo struct {
 	name string
 }

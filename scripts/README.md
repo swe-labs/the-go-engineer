@@ -35,9 +35,17 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test -coverprofile coverage.out ./...
+go test -coverprofile=coverage.out ./...
 go run ./scripts/validate_curriculum.go
 ```
+
+On PowerShell, quote the coverage flag if needed:
+
+```powershell
+go test "-coverprofile=coverage.out" ./...
+```
+
+Do not commit generated `coverage.out` or `coverage.html` artifacts.
 
 For benchmark-related changes:
 

@@ -53,6 +53,7 @@ import (
 //
 
 // EmailData (Struct) aggregates domain data into exported fields for reflection-based template hydration.
+// EmailData (Struct): (Struct) aggregates domain data into exported fields for reflection-based template hydration.
 type EmailData struct {
 	RecipientName string
 	SenderName    string

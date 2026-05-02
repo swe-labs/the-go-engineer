@@ -27,6 +27,7 @@ import (
 	"strings"
 )
 
+// te_10Summary (Function): runs the te 10 summary step and keeps its inputs, outputs, or errors visible.
 func te_10Summary(input string) string {
 	return strings.TrimSpace(strings.ToLower(input))
 }

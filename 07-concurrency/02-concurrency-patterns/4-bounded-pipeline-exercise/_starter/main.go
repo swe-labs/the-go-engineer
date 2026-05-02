@@ -69,6 +69,7 @@ func main() {
 	}
 }
 
+// processImage (Function): runs the process image step and keeps its inputs, outputs, or errors visible.
 func processImage(ctx context.Context, id string) error {
 	select {
 	case <-ctx.Done():

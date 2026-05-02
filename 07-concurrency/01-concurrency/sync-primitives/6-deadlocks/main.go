@@ -31,6 +31,7 @@ import (
 	"time"
 )
 
+// Resource (Struct): groups the state used by the resource example boundary.
 type Resource struct {
 	Name string
 	mu   sync.Mutex

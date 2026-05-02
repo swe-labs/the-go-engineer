@@ -75,6 +75,7 @@ import (
 // zeroLogEquivalent shows zerolog patterns alongside their slog equivalents.
 // Uncomment the zerolog lines and add the import to see the real API.
 
+// zeroLogPatterns (Function): runs the zero log patterns step and keeps its inputs, outputs, or errors visible.
 func zeroLogPatterns() {
 	// --- slog (standard library) ---
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
@@ -111,6 +112,7 @@ func zeroLogPatterns() {
 	// This is safer than the slog.Enabled() guard because you cannot forget it.
 }
 
+// buildExpensivePayload (Function): runs the build expensive payload step and keeps its inputs, outputs, or errors visible.
 func buildExpensivePayload() map[string]any {
 	// Simulate expensive computation (database query, serialization, etc.)
 	time.Sleep(time.Microsecond)
@@ -119,6 +121,7 @@ func buildExpensivePayload() map[string]any {
 
 // zeroAllocPattern demonstrates the core reason zerolog outperforms slog.
 // The pattern is a method chain that all operates on one stack-allocated value.
+// zeroAllocPattern (Function): demonstrates the core reason zerolog outperforms slog.
 func zeroAllocPattern() {
 	// SLOG PATTERN - each call creates slog.Attr on the heap:
 	//   slog.Info("msg",
@@ -139,6 +142,7 @@ func zeroAllocPattern() {
 }
 
 // levelComparison shows both APIs side by side.
+// levelComparison (Function): shows both APIs side by side.
 func levelComparison() {
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
 		Level: slog.LevelDebug,

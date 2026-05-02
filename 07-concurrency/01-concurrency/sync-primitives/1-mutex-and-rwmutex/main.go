@@ -33,11 +33,13 @@ import (
 
 // BankAccount uses a Mutex because every operation (Deposit/Withdraw)
 // is a Write operation that must be exclusive.
+// BankAccount (Struct): uses a Mutex because every operation (Deposit/Withdraw).
 type BankAccount struct {
 	mu      sync.Mutex
 	balance int
 }
 
+// BankAccount.Deposit (Method): applies the deposit operation to receiver state at a visible boundary.
 func (a *BankAccount) Deposit(amount int) {
 	a.mu.Lock()
 	defer a.mu.Unlock()
@@ -46,17 +48,20 @@ func (a *BankAccount) Deposit(amount int) {
 
 // ConfigCache uses an RWMutex because we expect many readers
 // but very few writers (updates to config).
+// ConfigCache (Struct): uses an RWMutex because we expect many readers.
 type ConfigCache struct {
 	mu     sync.RWMutex
 	values map[string]string
 }
 
+// ConfigCache.Get (Method): applies the get operation to receiver state at a visible boundary.
 func (c *ConfigCache) Get(key string) string {
 	c.mu.RLock() // Multiple readers can hold this at once!
 	defer c.mu.RUnlock()
 	return c.values[key]
 }
 
+// ConfigCache.Set (Method): applies the set operation to receiver state at a visible boundary.
 func (c *ConfigCache) Set(key, value string) {
 	c.mu.Lock() // Only ONE writer can hold this. Blocks all readers.
 	defer c.mu.Unlock()

@@ -33,6 +33,7 @@ import (
 )
 
 // UserRequest represents the expected payload for creating a user.
+// UserRequest (Struct): represents the expected payload for creating a user.
 type UserRequest struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
@@ -40,6 +41,7 @@ type UserRequest struct {
 }
 
 // Validate checks if the request data meets our business rules.
+// UserRequest.Validate (Method): checks if the request data meets our business rules.
 func (u *UserRequest) Validate() error {
 	if u.Username == "" {
 		return fmt.Errorf("username is required")
@@ -84,6 +86,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// createUserHandler (Function): runs the create user handler step and keeps its inputs, outputs, or errors visible.
 func createUserHandler(w http.ResponseWriter, r *http.Request) {
 	var req UserRequest
 
@@ -105,6 +108,7 @@ func createUserHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "User %q created successfully!\n", req.Username)
 }
 
+// searchHandler (Function): runs the search handler step and keeps its inputs, outputs, or errors visible.
 func searchHandler(w http.ResponseWriter, r *http.Request) {
 	// r.URL.Query() returns a url.Values map containing the query parameters.
 	query := r.URL.Query()

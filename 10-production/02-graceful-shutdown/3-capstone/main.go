@@ -72,6 +72,7 @@ import (
 // Component: MessageQueueConsumer
 // A background worker that must drain its queue before shutdown.
 
+// MessageQueueConsumer (Struct): groups the state used by the message queue consumer example boundary.
 type MessageQueueConsumer struct {
 	name     string
 	logger   *slog.Logger
@@ -79,6 +80,7 @@ type MessageQueueConsumer struct {
 	inFlight sync.WaitGroup
 }
 
+// NewConsumer (Function): runs the new consumer step and keeps its inputs, outputs, or errors visible.
 func NewConsumer(name string, logger *slog.Logger) *MessageQueueConsumer {
 	c := &MessageQueueConsumer{
 		name:   name,
@@ -92,6 +94,7 @@ func NewConsumer(name string, logger *slog.Logger) *MessageQueueConsumer {
 	return c
 }
 
+// MessageQueueConsumer.Run (Method): applies the run operation to receiver state at a visible boundary.
 func (c *MessageQueueConsumer) Run(ctx context.Context) error {
 	c.logger.Info("consumer started", "name", c.name)
 	defer c.logger.Info("consumer stopped", "name", c.name)
@@ -129,6 +132,7 @@ func (c *MessageQueueConsumer) Run(ctx context.Context) error {
 // Component: ProductionServer
 // HTTP server with health endpoints and shutdown awareness.
 
+// ProductionServer (Struct): groups the state used by the production server example boundary.
 type ProductionServer struct {
 	http    *http.Server
 	logger  *slog.Logger
@@ -136,6 +140,7 @@ type ProductionServer struct {
 	readyMu sync.RWMutex
 }
 
+// NewProductionServer (Function): runs the new production server step and keeps its inputs, outputs, or errors visible.
 func NewProductionServer(logger *slog.Logger) *ProductionServer {
 	s := &ProductionServer{logger: logger, isReady: true}
 
@@ -158,6 +163,7 @@ func NewProductionServer(logger *slog.Logger) *ProductionServer {
 
 // SetNotReady flips the readiness probe to 503.
 // Call this BEFORE initiating HTTP drain so Kubernetes stops routing traffic.
+// ProductionServer.SetNotReady (Method): flips the readiness probe to 503.
 func (s *ProductionServer) SetNotReady() {
 	s.readyMu.Lock()
 	s.isReady = false
@@ -165,12 +171,14 @@ func (s *ProductionServer) SetNotReady() {
 	s.logger.Info("readiness probe set to NOT READY - Kubernetes will stop routing traffic")
 }
 
+// ProductionServer.handleLive (Method): applies the handle live operation to receiver state at a visible boundary.
 func (s *ProductionServer) handleLive(w http.ResponseWriter, r *http.Request) {
 	// Liveness: always 200 unless the process is deadlocked
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, `{"status":"alive"}`)
 }
 
+// ProductionServer.handleReady (Method): applies the handle ready operation to receiver state at a visible boundary.
 func (s *ProductionServer) handleReady(w http.ResponseWriter, r *http.Request) {
 	s.readyMu.RLock()
 	ready := s.isReady
@@ -185,11 +193,13 @@ func (s *ProductionServer) handleReady(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, `{"status":"ready"}`)
 }
 
+// ProductionServer.handleOrders (Method): applies the handle orders operation to receiver state at a visible boundary.
 func (s *ProductionServer) handleOrders(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(100 * time.Millisecond) // Simulate DB query
 	fmt.Fprint(w, `{"orders":[]}`)
 }
 
+// ProductionServer.ListenAndServe (Method): applies the listen and serve operation to receiver state at a visible boundary.
 func (s *ProductionServer) ListenAndServe() error {
 	s.logger.Info("http server starting", "addr", s.http.Addr)
 	if err := s.http.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
@@ -198,6 +208,7 @@ func (s *ProductionServer) ListenAndServe() error {
 	return nil
 }
 
+// ProductionServer.Shutdown (Method): applies the shutdown operation to receiver state at a visible boundary.
 func (s *ProductionServer) Shutdown(ctx context.Context) error {
 	s.logger.Info("draining http connections")
 	return s.http.Shutdown(ctx)
@@ -205,6 +216,7 @@ func (s *ProductionServer) Shutdown(ctx context.Context) error {
 
 // Application wiring - the main entry point
 
+// run (Function): runs the run step and keeps its inputs, outputs, or errors visible.
 func run() error {
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
 	slog.SetDefault(logger)

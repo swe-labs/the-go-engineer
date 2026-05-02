@@ -44,12 +44,14 @@ import (
 //   already explains the cascade of failures that follows it.
 //
 
+// Service (Struct): groups the state used by the service example boundary.
 type Service struct {
 	Name    string
 	Healthy bool
 	Latency time.Duration
 }
 
+// checkService (Function): runs the check service step and keeps its inputs, outputs, or errors visible.
 func checkService(name string) (*Service, error) {
 	latency := time.Duration(len(name)*50) * time.Millisecond
 	time.Sleep(latency)

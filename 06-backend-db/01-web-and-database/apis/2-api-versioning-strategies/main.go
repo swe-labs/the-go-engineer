@@ -46,10 +46,12 @@ import (
 //   A non-breaking change includes: adding a new optional field or
 //   adding a new endpoint.
 
+// UserV1 (Struct): groups the state used by the user v1 example boundary.
 type UserV1 struct {
 	Name string `json:"full_name"`
 }
 
+// UserV2 (Struct): groups the state used by the user v2 example boundary.
 type UserV2 struct {
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`

@@ -19,20 +19,24 @@ import "fmt"
 // 5. Keep the printed guidance about /v2 imports and replace clear and accurate.
 // ============================================================================
 
+// Version (Struct): groups the state used by the version example boundary.
 type Version struct {
 	Major int
 	Minor int
 	Patch int
 }
 
+// Version.String (Method): applies the string operation to receiver state at a visible boundary.
 func (v Version) String() string {
 	return "TODO"
 }
 
+// Version.IsCompatible (Method): applies the is compatible operation to receiver state at a visible boundary.
 func (v Version) IsCompatible(other Version) bool {
 	return false
 }
 
+// Version.IsNewer (Method): applies the is newer operation to receiver state at a visible boundary.
 func (v Version) IsNewer(other Version) bool {
 	return false
 }

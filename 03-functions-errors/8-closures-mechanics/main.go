@@ -35,6 +35,7 @@ import "fmt"
 //
 
 // counter returns a function that holds onto its own internal state.
+// counter (Function): returns a function that holds onto its own internal state.
 func counter() func() int {
 	// 'count' is defined outside the returned function
 	count := 0

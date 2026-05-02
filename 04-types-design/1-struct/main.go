@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -43,6 +44,7 @@ import (
 //
 
 // Server represents a system server with associated metadata.
+// Server (Struct): represents a system server with associated metadata.
 type Server struct {
 	ID       int       // Unique identifier for this server
 	Hostname string    // DNS hostname (e.g., "api-prod-01.internal")
@@ -55,6 +57,7 @@ type Server struct {
 }
 
 // NewServer initializes a Server with validated defaults and current boot time.
+// NewServer (Function): initializes a Server with validated defaults and current boot time.
 func NewServer(id int, hostname, ip, region string, cpuCores, memoryGB int) Server {
 	return Server{
 		ID:       id,

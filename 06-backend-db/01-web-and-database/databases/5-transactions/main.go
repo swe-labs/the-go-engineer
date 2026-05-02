@@ -85,6 +85,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// createUserWithProfile (Function): runs the create user with profile step and keeps its inputs, outputs, or errors visible.
 func createUserWithProfile(db *sql.DB, name, email, avatar string) error {
 	// A. START THE TRANSACTION
 	tx, err := db.Begin()
@@ -118,6 +119,7 @@ func createUserWithProfile(db *sql.DB, name, email, avatar string) error {
 	return tx.Commit()
 }
 
+// setup (Function): runs the setup step and keeps its inputs, outputs, or errors visible.
 func setup(db *sql.DB) {
 	db.Exec(`CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT UNIQUE);`)
 	db.Exec(`CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, user_id INTEGER, avatar TEXT);`)

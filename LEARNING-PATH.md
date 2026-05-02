@@ -79,10 +79,11 @@ Fast paths are allowed. Proof is not optional.
 
 When a lesson mentions a concept that is introduced elsewhere, follow the inline reference:
 
-- forward references name the later section or lesson that teaches the topic in detail
-- backward references name the earlier lesson that established the idea
+- future-topic references name the later section or lesson that teaches the topic in detail
+- prerequisite references name the earlier lesson that established the idea
 - sibling references point to nearby tracks that reuse the concept
 - README cross-references use `[!NOTE]` or `[!TIP]` alerts instead of detached navigation blocks
+- specific lesson references include the lesson ID and a clickable local `README.md` link
 
 ## Companion Docs
 
@@ -91,5 +92,6 @@ When a lesson mentions a concept that is introduced elsewhere, follow the inline
 | [README.md](./README.md) | project overview and quick start |
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | locked curriculum structure |
 | [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | teaching contract |
+| [CODE-STANDARDS.md](./CODE-STANDARDS.md) | code, comments, headers, cross-references, and proof-surface standards |
 | [docs/PROGRESSION.md](./docs/PROGRESSION.md) | phase and milestone visualization |
 | [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | verification expectations |

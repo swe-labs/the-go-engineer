@@ -59,6 +59,7 @@ import (
 
 // processOrder simulates a kitchen worker preparing a dish.
 // Each dish takes a different amount of time.
+// processOrder (Function): simulates a kitchen worker preparing a dish.
 func processOrder(dish string, prepTime time.Duration) {
 	fmt.Printf("  Started preparing: %s\n", dish)
 	time.Sleep(prepTime) // Simulate work (cooking time)

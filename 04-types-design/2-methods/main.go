@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -43,35 +44,42 @@ import (
 //
 
 // Circle represents a circular geometry in 2D space.
+// Circle (Struct): represents a circular geometry in 2D space.
 type Circle struct {
 	Radius float64
 }
 
 // Area calculates the area of the circle using its radius.
+// Circle.Area (Method): calculates the area of the circle using its radius.
 func (c Circle) Area() float64 {
 	return math.Pi * c.Radius * c.Radius
 }
 
 // Perimeter calculates the circumference of the circle.
+// Circle.Perimeter (Method): calculates the circumference of the circle.
 func (c Circle) Perimeter() float64 {
 	return 2 * math.Pi * c.Radius
 }
 
 // String returns a human-readable representation of the circle.
+// Circle.String (Method): returns a human-readable representation of the circle.
 func (c Circle) String() string {
 	return fmt.Sprintf("Circle(radius=%.2f)", c.Radius)
 }
 
 // Scale resizes the circle by a given factor. It requires a pointer receiver to modify the original struct.
+// Circle.Scale (Method): resizes the circle by a given factor. It requires a pointer receiver to modify the original struct.
 func (c *Circle) Scale(factor float64) {
 	c.Radius *= factor
 }
 
+// BankAccount (Struct): groups the state used by the bank account example boundary.
 type BankAccount struct {
 	Owner   string
 	Balance float64
 }
 
+// BankAccount.Deposit (Method): applies the deposit operation to receiver state at a visible boundary.
 func (a *BankAccount) Deposit(amount float64) {
 	if amount <= 0 {
 		fmt.Println("  ❌ Deposit amount must be positive")
@@ -81,6 +89,7 @@ func (a *BankAccount) Deposit(amount float64) {
 	fmt.Printf("  💰 Deposited $%.2f -> Balance: $%.2f\n", amount, a.Balance)
 }
 
+// BankAccount.Withdraw (Method): applies the withdraw operation to receiver state at a visible boundary.
 func (a *BankAccount) Withdraw(amount float64) bool {
 	if amount > a.Balance {
 		fmt.Printf("  ❌ Insufficient funds: need $%.2f, have $%.2f\n", amount, a.Balance)
@@ -91,6 +100,7 @@ func (a *BankAccount) Withdraw(amount float64) bool {
 	return true
 }
 
+// BankAccount.Summary (Method): applies the summary operation to receiver state at a visible boundary.
 func (a BankAccount) Summary() string {
 	return fmt.Sprintf("Account(%s, $%.2f)", a.Owner, a.Balance)
 }

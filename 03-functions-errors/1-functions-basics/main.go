@@ -33,16 +33,19 @@ import "fmt"
 // executable blocks.
 
 // printBanner outputs the lesson header to stdout.
+// printBanner (Function): outputs the lesson header to stdout.
 func printBanner() {
 	fmt.Println("=== Functions Basics: Named Logic Units ===")
 }
 
 // printGoal summarizes the technical objective of functional decomposition.
+// printGoal (Function): summarizes the technical objective of functional decomposition.
 func printGoal() {
 	fmt.Println("Functions provide encapsulation and nameable boundaries for logic.")
 }
 
 // printChecklist enumerates the architectural benefits of functions.
+// printChecklist (Function): enumerates the architectural benefits of functions.
 func printChecklist() {
 	fmt.Println("- Logic isolation for testing")
 	fmt.Println("- Reduced cognitive load through naming")

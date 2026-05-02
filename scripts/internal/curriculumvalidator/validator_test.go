@@ -156,6 +156,20 @@ func TestValidateRejectsSchemaAndMetadataDrift(t *testing.T) {
 			want: "Duplicate v2 item id: HC.1",
 		},
 		{
+			name: "invalid section id format",
+			mutate: func(cur *V2Curriculum) {
+				cur.Sections[0].ID = "section-00"
+			},
+			want: "Invalid v2 section id format: section-00",
+		},
+		{
+			name: "invalid item id format",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].ID = "HC-one"
+			},
+			want: "Invalid v2 item id format: HC-one",
+		},
+		{
 			name: "invalid item type",
 			mutate: func(cur *V2Curriculum) {
 				cur.Items[0].Type = "lessen"
@@ -209,6 +223,145 @@ func TestValidateRejectsSchemaAndMetadataDrift(t *testing.T) {
 	}
 }
 
+func TestValidateRejectsCurriculumJSONContractDrift(t *testing.T) {
+	tests := []struct {
+		name string
+		edit func(t *testing.T, root string)
+		want string
+	}{
+		{
+			name: "non canonical formatting",
+			edit: func(t *testing.T, root string) {
+				t.Helper()
+				path := filepath.Join(root, "curriculum.v2.json")
+				data, err := os.ReadFile(path)
+				if err != nil {
+					t.Fatalf("read curriculum fixture: %v", err)
+				}
+				edited := strings.Replace(string(data), "  \"schema_version\"", "    \"schema_version\"", 1)
+				writeFile(t, root, "curriculum.v2.json", edited)
+			},
+			want: "Invalid v2 curriculum JSON formatting:",
+		},
+		{
+			name: "duplicate object key",
+			edit: func(t *testing.T, root string) {
+				t.Helper()
+				path := filepath.Join(root, "curriculum.v2.json")
+				data, err := os.ReadFile(path)
+				if err != nil {
+					t.Fatalf("read curriculum fixture: %v", err)
+				}
+				edited := strings.Replace(string(data), "\"schema_version\": 1,", "\"schema_version\": 1,\n  \"schema_version\": 1,", 1)
+				writeFile(t, root, "curriculum.v2.json", edited)
+			},
+			want: "Duplicate JSON key in curriculum.v2.json: $.schema_version",
+		},
+		{
+			name: "unknown field",
+			edit: func(t *testing.T, root string) {
+				t.Helper()
+				path := filepath.Join(root, "curriculum.v2.json")
+				data, err := os.ReadFile(path)
+				if err != nil {
+					t.Fatalf("read curriculum fixture: %v", err)
+				}
+				edited := strings.Replace(string(data), "\"schema_version\": 1,", "\"schema_version\": 1,\n  \"legacy\": true,", 1)
+				writeFile(t, root, "curriculum.v2.json", edited)
+			},
+			want: "Invalid v2 curriculum JSON object: $ has unknown field legacy",
+		},
+		{
+			name: "null array",
+			edit: func(t *testing.T, root string) {
+				t.Helper()
+				path := filepath.Join(root, "curriculum.v2.json")
+				data, err := os.ReadFile(path)
+				if err != nil {
+					t.Fatalf("read curriculum fixture: %v", err)
+				}
+				edited := strings.Replace(string(data), "\"prerequisites\": [],", "\"prerequisites\": null,", 1)
+				writeFile(t, root, "curriculum.v2.json", edited)
+			},
+			want: "Invalid v2 curriculum JSON array: $.items[0].prerequisites must be [] instead of null",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := t.TempDir()
+			writeValidV2Fixture(t, root)
+			tt.edit(t, root)
+
+			result, reports := runValidate(t, root)
+			if result.ErrorCount == 0 {
+				t.Fatalf("expected curriculum JSON contract report containing %q", tt.want)
+			}
+			requireReportContains(t, reports, tt.want)
+		})
+	}
+}
+
+func TestValidateRejectsCurriculumOrderingAndReferenceDrift(t *testing.T) {
+	tests := []struct {
+		name   string
+		mutate func(*V2Curriculum)
+		want   string
+	}{
+		{
+			name: "out of order items",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0], cur.Items[1] = cur.Items[1], cur.Items[0]
+			},
+			want: "Invalid v2 item order:",
+		},
+		{
+			name: "duplicate next item",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].NextItems = []string{"HC.5", "HC.5"}
+			},
+			want: "Invalid v2 item HC.1 next_items: duplicate value HC.5",
+		},
+		{
+			name: "self prerequisite",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].Prerequisites = []string{"HC.1"}
+			},
+			want: "Invalid v2 prerequisite: HC.1 cannot reference itself",
+		},
+		{
+			name: "invalid slug format",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].Slug = "What Is A Program"
+			},
+			want: "Invalid v2 item slug format: HC.1 -> What Is A Program",
+		},
+		{
+			name: "path outside section prefix",
+			mutate: func(cur *V2Curriculum) {
+				cur.Items[0].Path = "01-getting-started/001-hc-1"
+				cur.Items[0].RunCommand = "go run ./01-getting-started/001-hc-1"
+			},
+			want: "Invalid v2 section path alignment: HC.1",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := t.TempDir()
+			cur := writeValidV2Fixture(t, root)
+			tt.mutate(&cur)
+			writeCurriculum(t, root, cur)
+
+			result, reports := runValidate(t, root)
+			if result.ErrorCount == 0 {
+				t.Fatalf("expected curriculum ordering/reference report containing %q", tt.want)
+			}
+			requireReportContains(t, reports, tt.want)
+		})
+	}
+}
+
 func TestValidateRejectsRootEscapingPaths(t *testing.T) {
 	tests := []struct {
 		name   string
@@ -221,6 +374,20 @@ func TestValidateRejectsRootEscapingPaths(t *testing.T) {
 				cur.Items[0].Path = "../outside"
 			},
 			want: "Invalid v2 item path: HC.1 -> ../outside",
+		},
+		{
+			name: "windows absolute item path is rejected cross platform",
+			mutate: func(t *testing.T, root string, cur *V2Curriculum) {
+				cur.Items[0].Path = "C:/outside"
+			},
+			want: "Invalid v2 item path: HC.1 -> C:/outside",
+		},
+		{
+			name: "backslash item path is rejected cross platform",
+			mutate: func(t *testing.T, root string, cur *V2Curriculum) {
+				cur.Items[0].Path = `00-how-computers-work\001-hc-1`
+			},
+			want: `Invalid v2 item path: HC.1 -> 00-how-computers-work\001-hc-1`,
 		},
 		{
 			name: "starter path escapes root",
@@ -370,6 +537,124 @@ func TestValidateRejectsLegacyReferenceLabels(t *testing.T) {
 	}
 }
 
+func TestValidateRejectsStandardsDrift(t *testing.T) {
+	tests := []struct {
+		name string
+		edit func(string) string
+		want string
+	}{
+		{
+			name: "code standards level taxonomy omits production",
+			edit: func(text string) string {
+				return strings.Replace(text, "Level: Foundation | Core | Production | Stretch", "Level: Foundation | Core | Stretch", 1)
+			},
+			want: "Invalid level taxonomy:",
+		},
+		{
+			name: "verification command uses stale coverage flag spelling",
+			edit: func(text string) string {
+				return strings.Replace(text, "go test -coverprofile=coverage.out ./...", "go test -coverprofile coverage.out ./...", 1)
+			},
+			want: "Invalid verification command:",
+		},
+		{
+			name: "public code standards reference maintainer-only agents doc",
+			edit: func(text string) string {
+				return text + "\nSee AGENTS.md for details.\n"
+			},
+			want: "references maintainer-only AGENTS.md",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := t.TempDir()
+			writeValidV2Fixture(t, root)
+			writeFile(t, root, "CODE-STANDARDS.md", tt.edit(validCodeStandards()))
+
+			result, reports := runValidate(t, root)
+			if result.ErrorCount == 0 {
+				t.Fatalf("expected standards drift report containing %q", tt.want)
+			}
+			requireReportContains(t, reports, tt.want)
+		})
+	}
+}
+
+func TestValidateRejectsMarkdownCrossReferenceContractDrift(t *testing.T) {
+	tests := []struct {
+		name  string
+		block string
+		want  string
+	}{
+		{
+			name: "curriculum reference uses unsupported alert type",
+			block: strings.Join([]string{
+				"> [!WARNING]",
+				"> Review [HC.1 What is a Program?](./README.md) before continuing.",
+			}, "\n"),
+			want: "uses [!WARNING] for curriculum reference",
+		},
+		{
+			name: "curriculum reference lacks README link",
+			block: strings.Join([]string{
+				"> [!NOTE]",
+				"> HC.1 introduces this idea.",
+			}, "\n"),
+			want: "references a curriculum ID without a clickable README.md link",
+		},
+		{
+			name:  "legacy cross-reference heading",
+			block: "## Forward Reference\n\nContinue later.",
+			want:  "Invalid markdown cross-reference heading:",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := t.TempDir()
+			cur := writeValidV2Fixture(t, root)
+			item := requireItem(t, cur, "HC.1")
+			writeFile(t, root, filepath.Join(item.Path, "README.md"), validLessonReadme(item.RunCommand)+"\n"+tt.block+"\n")
+
+			result, reports := runValidate(t, root)
+			if result.ErrorCount == 0 {
+				t.Fatalf("expected cross-reference contract report containing %q", tt.want)
+			}
+			requireReportContains(t, reports, tt.want)
+		})
+	}
+}
+
+func TestValidateRejectsGoSourceMarkdownAlertSyntax(t *testing.T) {
+	root := t.TempDir()
+	cur := writeValidV2Fixture(t, root)
+	item := requireItem(t, cur, "HC.1")
+	source := mainGoForItem(item) + "\n// [!NOTE] Markdown alerts belong in README files.\n"
+	writeFile(t, root, filepath.Join(item.Path, "main.go"), source)
+
+	result, reports := runValidate(t, root)
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected Go source markdown alert report")
+	}
+	requireReportContains(t, reports, "Invalid Go source cross-reference comment: ")
+}
+
+func TestValidateRejectsMissingMachineRoleComment(t *testing.T) {
+	root := t.TempDir()
+	cur := writeValidV2Fixture(t, root)
+	item := requireItem(t, cur, "HC.1")
+	source := mainGoForItem(item) + "\nfunc helper() {}\n"
+	writeFile(t, root, filepath.Join(item.Path, "main.go"), source)
+
+	result, reports := runValidate(t, root)
+	if result.ErrorCount == 0 {
+		t.Fatalf("expected missing Machine Role comment report")
+	}
+	requireReportContains(t, reports, "Missing Machine Role comment:")
+	requireReportContains(t, reports, "helper")
+}
+
 func TestValidateReportsBrokenLocalLinkOnlyOnce(t *testing.T) {
 	root := t.TempDir()
 	cur := writeValidV2Fixture(t, root)
@@ -447,6 +732,8 @@ func TestValidateRejectsFlagshipChainBreak(t *testing.T) {
 func writeValidV2Fixture(t *testing.T, root string) V2Curriculum {
 	t.Helper()
 
+	writeFile(t, root, "CODE-STANDARDS.md", validCodeStandards())
+
 	cur := V2Curriculum{
 		SchemaVersion: expectedSchemaVersion,
 		Sections:      make([]V2Section, 0, len(canonicalV2Sections)),
@@ -496,6 +783,9 @@ func orderedFixtureItemIDs() []string {
 	}
 
 	for _, section := range canonicalV2Sections {
+		if section.ID == "s11" {
+			continue
+		}
 		for _, id := range section.EntryPoints {
 			add(id)
 		}
@@ -611,6 +901,39 @@ func validLessonReadme(runCommand string) string {
 	}, "\n")
 }
 
+func validCodeStandards() string {
+	return strings.Join([]string{
+		"# Code Quality & Style Standards",
+		"",
+		"## Standard Layers",
+		"",
+		"Machine-enforced and review-enforced rules.",
+		"",
+		"// Level: Foundation | Core | Production | Stretch",
+		"",
+		"Machine Role comments can satisfy this requirement for exported symbols.",
+		"",
+		"do not use legacy `Forward Reference` or `Backward Reference` labels",
+		"",
+		"## Curriculum Registry Standard",
+		"",
+		"curriculum.v2.json stays canonical.",
+		"",
+		"## Lesson Proof Surface",
+		"",
+		"One coherent proof surface.",
+		"",
+		"## Production-Shaped Code",
+		"",
+		"Production-shaped examples.",
+		"",
+		"```bash",
+		"go test -coverprofile=coverage.out ./...",
+		"```",
+		"",
+	}, "\n")
+}
+
 func flagshipReadme(item V2Item) string {
 	if len(item.NextItems) == 0 {
 		return "# Flagship\n\n## Next Step\n\nThis path is complete. Return to the section README or continue with the next project milestone.\n"
@@ -645,13 +968,28 @@ func mainGoForItemWithLevel(item V2Item, level string) string {
 	}
 
 	return strings.Join([]string{
+		"// Copyright (c) 2026 Rasel Hossen",
+		"// Licensed under The Go Engineer License v1.0",
+		"",
+		"// ============================================================================",
 		"// Section " + canonicalV2Sections[sectionIndex(item.SectionID)].Number + ": Fixture - " + item.Title,
 		"// Level: " + level,
+		"// ============================================================================",
+		"//",
+		"// WHAT YOU'LL LEARN:",
+		"//   - How the fixture proves validator behavior.",
+		"//",
+		"// WHY THIS MATTERS:",
+		"//   Validator fixtures need the same source contract as learner lessons.",
 		"// RUN: " + item.RunCommand,
+		"// ============================================================================",
 		"",
 		"package main",
 		"",
-		label + "func main() {}",
+		label + "func main() {",
+		"\t// KEY TAKEAWAY:",
+		"\t// - Fixture code follows the public lesson source contract.",
+		"}",
 		"",
 	}, "\n")
 }
@@ -694,7 +1032,16 @@ func fixtureItemPath(sectionID, id string) string {
 	}
 
 	section := canonicalV2Sections[sectionIndex(sectionID)]
-	return filepath.ToSlash(filepath.Join(section.PathPrefix, "fixture-"+strings.ToLower(strings.ReplaceAll(id, ".", "-"))))
+	return filepath.ToSlash(filepath.Join(section.PathPrefix, fmt.Sprintf("%03d-%s", fixtureOrderNumber(id), strings.ToLower(strings.ReplaceAll(id, ".", "-")))))
+}
+
+func fixtureOrderNumber(id string) int {
+	for idx, candidate := range orderedFixtureItemIDs() {
+		if candidate == id {
+			return idx + 1
+		}
+	}
+	panic("unknown fixture item id: " + id)
 }
 
 func sectionIndex(sectionID string) int {
@@ -717,11 +1064,26 @@ func itemNumber(id string) int {
 func writeCurriculum(t *testing.T, root string, cur V2Curriculum) {
 	t.Helper()
 
-	data, err := json.MarshalIndent(cur, "", "  ")
+	data, err := canonicalV2CurriculumJSON(cur)
 	if err != nil {
 		t.Fatalf("marshal curriculum fixture: %v", err)
 	}
-	writeFile(t, root, "curriculum.v2.json", string(data)+"\n")
+	writeFile(t, root, "curriculum.v2.json", string(data))
+}
+
+func readCurriculum(t *testing.T, root string) V2Curriculum {
+	t.Helper()
+
+	data, err := os.ReadFile(filepath.Join(root, "curriculum.v2.json"))
+	if err != nil {
+		t.Fatalf("read curriculum fixture: %v", err)
+	}
+
+	var cur V2Curriculum
+	if err := json.Unmarshal(data, &cur); err != nil {
+		t.Fatalf("parse curriculum fixture: %v", err)
+	}
+	return cur
 }
 
 func writeFile(t *testing.T, root, relativePath, contents string) {

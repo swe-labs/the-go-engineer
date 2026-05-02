@@ -74,6 +74,7 @@ func main() {
 	runReminder(seconds, message)
 }
 
+// runReminder (Function): runs the run reminder step and keeps its inputs, outputs, or errors visible.
 func runReminder(seconds int, message string) {
 	duration := time.Duration(seconds) * time.Second
 	fmt.Printf("[timer] Reminder set for %v from now.\n\n", duration)

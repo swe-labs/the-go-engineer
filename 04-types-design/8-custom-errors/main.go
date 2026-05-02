@@ -35,6 +35,7 @@ import (
 // Section 04: Types & Design - Custom Error Types
 
 // ValidationError is returned when input data fails domain-specific rules.
+// ValidationError (Struct): is returned when input data fails domain-specific rules.
 type ValidationError struct {
 	Field   string
 	Value   interface{}
@@ -42,21 +43,25 @@ type ValidationError struct {
 }
 
 // Error implements the built-in error interface for ValidationError.
+// ValidationError.Error (Method): implements the built-in error interface for ValidationError.
 func (e ValidationError) Error() string {
 	return fmt.Sprintf("validation error: %s=%v - %s", e.Field, e.Value, e.Message)
 }
 
 // NotFoundError is returned when a requested resource does not exist.
+// NotFoundError (Struct): is returned when a requested resource does not exist.
 type NotFoundError struct {
 	Resource string
 	ID       string
 }
 
 // Error implements the built-in error interface for NotFoundError.
+// NotFoundError.Error (Method): implements the built-in error interface for NotFoundError.
 func (e NotFoundError) Error() string {
 	return fmt.Sprintf("%s with ID %s not found", e.Resource, e.ID)
 }
 
+// validate (Function): runs the validate step and keeps its inputs, outputs, or errors visible.
 func validate(name string, age int) error {
 	if name == "" {
 		return ValidationError{Field: "name", Value: name, Message: "cannot be empty"}
@@ -70,6 +75,7 @@ func validate(name string, age int) error {
 	return nil
 }
 
+// findUser (Function): runs the find user step and keeps its inputs, outputs, or errors visible.
 func findUser(id string) error {
 	if id == "" {
 		return ValidationError{Field: "id", Value: id, Message: "cannot be empty"}
@@ -80,6 +86,7 @@ func findUser(id string) error {
 	return nil
 }
 
+// handleError (Function): runs the handle error step and keeps its inputs, outputs, or errors visible.
 func handleError(err error) {
 	if err == nil {
 		fmt.Println("  No error")

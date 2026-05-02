@@ -134,12 +134,12 @@ Exercises replace `## Code Walkthrough` with `## Solution Walkthrough` and inclu
 Every lesson `main.go` should include:
 
 - copyright and license header
-- section, lesson title, and level
+- section, lesson title, and level matching `curriculum.v2.json`
 - `WHAT YOU'LL LEARN`
 - `WHY THIS MATTERS`
-- exact `RUN:` command
+- exact `RUN:` command matching `curriculum.v2.json`
 - readable teaching comments
-- Machine Role comments for major constructs
+- Machine Role comments for major constructs that explain role, boundary, invariant, or failure mode
 - `KEY TAKEAWAY`
 - `NEXT UP:` footer matching `curriculum.v2.json`
 
@@ -150,6 +150,8 @@ When a lesson uses a concept from another point in the curriculum:
 - use `[!NOTE]` for prerequisite context, backward references, and gentle forward references
 - use `[!TIP]` for actionable navigation, rerun suggestions, or learner practice advice
 - keep cross-references inline rather than as detached navigation blocks
+- include the lesson ID and a clickable local `README.md` link when referencing a specific lesson
+- avoid legacy `Forward Reference` or `Backward Reference` labels
 
 ## Validation
 

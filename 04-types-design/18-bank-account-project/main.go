@@ -8,7 +8,6 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-// WHAT YOU'LL LEARN:
 //   - Combining named-field composition and embedding in a domain model.
 //   - Promoting method sets from base types to specialized variants.
 //   - Implementing method shadowing to override behavior (Overdraft vs Standard).
@@ -43,6 +42,7 @@ import (
 )
 
 // Account (Struct) encapsulates the base state and logic for any financial account.
+// Account (Struct): (Struct) encapsulates the base state and logic for any financial account.
 type Account struct {
 	AccountNumber string
 	Balance       float64
@@ -50,6 +50,7 @@ type Account struct {
 }
 
 // Deposit (Method) modifies account state by adding funds; uses a pointer receiver for persistence.
+// Account.Deposit (Method): (Method) modifies account state by adding funds; uses a pointer receiver for persistence.
 func (acc *Account) Deposit(amount float64) error {
 	if amount <= 0 {
 		return errors.New("deposit amount must be positive")
@@ -59,6 +60,7 @@ func (acc *Account) Deposit(amount float64) error {
 }
 
 // Withdraw (Method) implements standard fund removal with strict balance checks.
+// Account.Withdraw (Method): (Method) implements standard fund removal with strict balance checks.
 func (acc *Account) Withdraw(amount float64) error {
 	if amount <= 0 {
 		return errors.New("withdrawal amount must be positive")
@@ -71,23 +73,27 @@ func (acc *Account) Withdraw(amount float64) error {
 }
 
 // GetBalance (Method) provides read-only access to the internal balance state.
+// Account.GetBalance (Method): (Method) provides read-only access to the internal balance state.
 func (acc *Account) GetBalance() float64 {
 	return acc.Balance
 }
 
 // String (Method) implements the fmt.Stringer interface for domain-specific summary output.
+// Account.String (Method): (Method) implements the fmt.Stringer interface for domain-specific summary output.
 func (acc *Account) String() string {
 	return fmt.Sprintf("Account [%s] Owner: %s, Balance: $%.2f",
 		acc.AccountNumber, acc.OwnerName, acc.Balance)
 }
 
 // SavingsAccount (Struct) specializes the Account type by embedding it to promote base financial behavior.
+// SavingsAccount (Struct): (Struct) specializes the Account type by embedding it to promote base financial behavior.
 type SavingsAccount struct {
 	Account
 	InterestRate float64
 }
 
 // AddInterest (Method) implements interest calculation logic and utilizes the promoted Deposit method.
+// SavingsAccount.AddInterest (Method): (Method) implements interest calculation logic and utilizes the promoted Deposit method.
 func (sa *SavingsAccount) AddInterest() {
 	interest := sa.Balance * sa.InterestRate
 	fmt.Printf("Processing interest: $%.2f (rate: %.1f%%)\n", interest, sa.InterestRate*100)
@@ -95,12 +101,14 @@ func (sa *SavingsAccount) AddInterest() {
 }
 
 // OverdraftAccount (Struct) specializes the Account type and provides custom withdrawal behavior.
+// OverdraftAccount (Struct): (Struct) specializes the Account type and provides custom withdrawal behavior.
 type OverdraftAccount struct {
 	Account
 	OverdraftLimit float64
 }
 
 // Withdraw (Method) shadows the base Account.Withdraw method to implement specialized overdraft logic.
+// OverdraftAccount.Withdraw (Method): (Method) shadows the base Account.Withdraw method to implement specialized overdraft logic.
 func (oa *OverdraftAccount) Withdraw(amount float64) error {
 	if amount <= 0 {
 		return errors.New("withdrawal amount must be positive")

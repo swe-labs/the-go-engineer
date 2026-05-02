@@ -39,8 +39,10 @@ import (
 // sequence, and pricing rules are passed in as function values.
 //
 
+// pricingRule (Type): names the pricing rule concept so the lesson can pass it as a first-class value.
 type pricingRule func(int) int
 
+// validateOrderName (Function): runs the validate order name step and keeps its inputs, outputs, or errors visible.
 func validateOrderName(name string) error {
 	if strings.TrimSpace(name) == "" {
 		return errors.New("order name is required")
@@ -49,6 +51,7 @@ func validateOrderName(name string) error {
 	return nil
 }
 
+// validatePrices (Function): runs the validate prices step and keeps its inputs, outputs, or errors visible.
 func validatePrices(prices []int) error {
 	if len(prices) == 0 {
 		return errors.New("at least one price is required")
@@ -63,6 +66,7 @@ func validatePrices(prices []int) error {
 	return nil
 }
 
+// validateShipping (Function): runs the validate shipping step and keeps its inputs, outputs, or errors visible.
 func validateShipping(shipping int) error {
 	if shipping < 0 {
 		return errors.New("shipping cannot be negative")
@@ -71,6 +75,7 @@ func validateShipping(shipping int) error {
 	return nil
 }
 
+// sumPrices (Function): runs the sum prices step and keeps its inputs, outputs, or errors visible.
 func sumPrices(prices []int) int {
 	total := 0
 
@@ -81,6 +86,7 @@ func sumPrices(prices []int) int {
 	return total
 }
 
+// applyPricingRules (Function): runs the apply pricing rules step and keeps its inputs, outputs, or errors visible.
 func applyPricingRules(subtotal int, rules ...pricingRule) int {
 	adjusted := subtotal
 
@@ -94,6 +100,7 @@ func applyPricingRules(subtotal int, rules ...pricingRule) int {
 	return adjusted
 }
 
+// makeMinimumSubtotalDiscount (Function): runs the make minimum subtotal discount step and keeps its inputs, outputs, or errors visible.
 func makeMinimumSubtotalDiscount(threshold int, amount int) pricingRule {
 	return func(subtotal int) int {
 		if subtotal < threshold {
@@ -109,6 +116,7 @@ func makeMinimumSubtotalDiscount(threshold int, amount int) pricingRule {
 	}
 }
 
+// buildSummary (Function): runs the build summary step and keeps its inputs, outputs, or errors visible.
 func buildSummary(name string, subtotal int, adjustedSubtotal int, shipping int) string {
 	total := adjustedSubtotal + shipping
 	return fmt.Sprintf(
@@ -121,6 +129,7 @@ func buildSummary(name string, subtotal int, adjustedSubtotal int, shipping int)
 	)
 }
 
+// processOrder (Function): runs the process order step and keeps its inputs, outputs, or errors visible.
 func processOrder(name string, prices []int, shipping int, rules ...pricingRule) (string, error) {
 	if err := validateOrderName(name); err != nil {
 		return "", err

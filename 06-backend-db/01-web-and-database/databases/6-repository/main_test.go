@@ -30,6 +30,7 @@ CREATE TABLE profiles (
 );
 `
 
+// openRepositoryTestDB (Function): runs the open repository test db step and keeps its inputs, outputs, or errors visible.
 func openRepositoryTestDB(t *testing.T) *sql.DB {
 	t.Helper()
 

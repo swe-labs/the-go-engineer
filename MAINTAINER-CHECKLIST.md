@@ -117,7 +117,7 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test -coverprofile coverage.out ./...
+go test -coverprofile=coverage.out ./...
 go run ./scripts/validate_curriculum.go
 ```
 
@@ -140,7 +140,7 @@ Before release or workflow changes, verify these documents agree with `ARCHITECT
 - `RELEASE.md`
 - `MAINTAINER-CHECKLIST.md`
 - `AGENTS.md`
-- `.github/pull_request_template.md`
+- `.github/PULL_REQUEST_TEMPLATE.md`
 - `.github/ISSUE_TEMPLATE/*`
 - `.agents/skills/*/SKILL.md`
 
@@ -157,8 +157,12 @@ Before release or workflow changes, verify these documents agree with `ARCHITECT
 
 - [ ] README follows the required section order.
 - [ ] `main.go` follows the standard header and footer.
+- [ ] Source `Level` and `RUN:` headers match `curriculum.v2.json`.
 - [ ] `NEXT UP:` matches the next item ID and path in `curriculum.v2.json`.
 - [ ] README `Next Step` uses a clickable link to the next `README.md`.
+- [ ] Machine Role comments explain role, boundary, invariant, or failure mode.
+- [ ] README cross-references use `[!NOTE]` or `[!TIP]` alerts and link specific lesson references.
+- [ ] Curriculum metadata, source header/footer, README run instructions, and tests describe one proof surface.
 - [ ] Section README is updated.
 - [ ] Starter code compiles.
 - [ ] Tests prove behavior.

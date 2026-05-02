@@ -46,12 +46,14 @@ import (
 //     wg.Wait() = "Do not close the gate until all passengers are aboard"
 //
 
+// ServiceStatus (Struct): groups the state used by the service status example boundary.
 type ServiceStatus struct {
 	Name    string
 	Healthy bool
 	Latency time.Duration
 }
 
+// checkService (Function): runs the check service step and keeps its inputs, outputs, or errors visible.
 func checkService(name string, wg *sync.WaitGroup, results chan<- ServiceStatus) {
 	defer wg.Done()
 

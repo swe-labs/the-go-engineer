@@ -80,6 +80,7 @@ func main() {
 }
 
 // Logger is a middleware that logs the details of every request.
+// Logger (Function): is a middleware that logs the details of every request.
 func Logger(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
@@ -96,6 +97,7 @@ func Logger(next http.Handler) http.Handler {
 }
 
 // SetJSONHeader is a middleware that sets the Content-Type to application/json.
+// SetJSONHeader (Function): is a middleware that sets the Content-Type to application/json.
 func SetJSONHeader(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

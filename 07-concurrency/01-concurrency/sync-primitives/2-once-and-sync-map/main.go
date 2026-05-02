@@ -5,7 +5,7 @@
 package main
 
 // ============================================================================
-// Stage 07: Concurrency - Sync Primitives
+// Section 07: Concurrency - Sync Primitives
 // Level: Core
 // ============================================================================
 //
@@ -18,7 +18,7 @@ import (
 )
 
 // ============================================================================
-// Stage 07: sync.Once and sync.Map
+// Section 07: sync.Once and sync.Map
 // Level: Core
 // ============================================================================
 //
@@ -26,6 +26,9 @@ import (
 //   - sync.Once for one-time initialization (singletons)
 //   - sync.Map for concurrent map access without explicit locking
 //   - When to use sync.Map vs regular map + sync.RWMutex
+//
+// WHY THIS MATTERS:
+//   Production services often need safe one-time initialization and shared read-heavy state.
 // ============================================================================
 
 // --- sync.Once ---
@@ -33,6 +36,7 @@ import (
 // called from multiple goroutines simultaneously.
 // Use cases: database connection init, config loading, logger setup.
 
+// DBConnection (Struct): groups the state used by the db connection example boundary.
 type DBConnection struct {
 	Host string
 	Port int
@@ -45,6 +49,7 @@ var (
 
 // GetDB returns a singleton database connection.
 // No matter how many goroutines call this, the connection is created exactly once.
+// GetDB (Function): returns a singleton database connection.
 func GetDB() *DBConnection {
 	dbOnce.Do(func() {
 		fmt.Println("  Initializing database connection (only once!)")
@@ -141,6 +146,10 @@ func main() {
 
 	fmt.Println("\n  ⚡ Use sync.Map for read-heavy, stable key sets")
 	fmt.Println("  ⚡ Use map + RWMutex for everything else")
+	fmt.Println()
+	fmt.Println("KEY TAKEAWAY:")
+	fmt.Println("  - sync.Once protects one-time initialization across goroutines.")
+	fmt.Println("  - sync.Map is specialized for read-heavy, stable-key concurrent access.")
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: SY.3 -> 07-concurrency/01-concurrency/sync-primitives/3-atomic-operations")
 	fmt.Println("   Current: SY.2 (sync.once and sync.map)")

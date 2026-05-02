@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -36,12 +37,14 @@ import (
 // Section 04: Types & Design - Generics
 
 // Numeric defines a type constraint for all standard integer and floating-point types.
+// Numeric (Interface): defines a type constraint for all standard integer and floating-point types.
 type Numeric interface {
 	int | int8 | int16 | int32 | int64 |
 		float32 | float64
 }
 
 // Sum calculates the arithmetic total of a slice of numeric values.
+// Sum (Function): calculates the arithmetic total of a slice of numeric values.
 func Sum[T Numeric](numbers []T) T {
 	var total T
 	for _, n := range numbers {
@@ -51,6 +54,7 @@ func Sum[T Numeric](numbers []T) T {
 }
 
 // Filter returns a new slice containing only elements that satisfy the predicate.
+// Filter (Function): returns a new slice containing only elements that satisfy the predicate.
 func Filter[T any](items []T, predicate func(T) bool) []T {
 	result := make([]T, 0)
 	for _, item := range items {
@@ -62,6 +66,7 @@ func Filter[T any](items []T, predicate func(T) bool) []T {
 }
 
 // Map transforms a slice of type T into a slice of type U using the transform function.
+// Map (Function): transforms a slice of type T into a slice of type U using the transform function.
 func Map[T any, U any](items []T, transform func(T) U) []U {
 	result := make([]U, len(items))
 	for i, item := range items {
@@ -72,6 +77,7 @@ func Map[T any, U any](items []T, transform func(T) U) []U {
 
 // Contains returns true if the target element exists within the slice.
 // It requires T to be comparable (supports == and !=).
+// Contains (Function): returns true if the target element exists within the slice.
 func Contains[T comparable](items []T, target T) bool {
 	for _, item := range items {
 		if item == target {

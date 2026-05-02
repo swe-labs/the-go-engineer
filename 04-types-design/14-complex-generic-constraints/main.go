@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -36,35 +37,42 @@ import (
 // Section 04: Types & Design - Complex Generic Constraints
 
 // Numeric defines a requirement for types that support addition and multiplication.
+// Numeric (Interface): defines a requirement for types that support addition and multiplication.
 type Numeric interface {
 	Add(other int) int
 	Multiply(other int) int
 }
 
 // ScaleAll uses a generic type T constrained by the Numeric interface.
+// ScaleAll (Function): uses a generic type T constrained by the Numeric interface.
 func ScaleAll[T Numeric](item T, factor int) int {
 	return item.Multiply(factor)
 }
 
 // CustomInt satisfies the Numeric constraint by providing Add and Multiply.
+// CustomInt (Type): satisfies the Numeric constraint by providing Add and Multiply.
 type CustomInt int
 
 // Add returns the sum of the CustomInt and another integer.
+// CustomInt.Add (Method): returns the sum of the CustomInt and another integer.
 func (c CustomInt) Add(other int) int {
 	return int(c) + other
 }
 
 // Multiply returns the product of the CustomInt and another integer.
+// CustomInt.Multiply (Method): returns the product of the CustomInt and another integer.
 func (c CustomInt) Multiply(other int) int {
 	return int(c) * other
 }
 
 // Stringable defines a requirement for types that provide a textual view.
+// Stringable (Interface): defines a requirement for types that provide a textual view.
 type Stringable interface {
 	ToString() string
 }
 
 // PrintAll processes a slice of any type T that satisfies the Stringable constraint.
+// PrintAll (Function): processes a slice of any type T that satisfies the Stringable constraint.
 func PrintAll[T Stringable](items []T) {
 	for _, item := range items {
 		fmt.Println("  ", item.ToString())
@@ -72,17 +80,20 @@ func PrintAll[T Stringable](items []T) {
 }
 
 // User represents a system entity that implements Stringable.
+// User (Struct): represents a system entity that implements Stringable.
 type User struct {
 	Name string
 	Age  int
 }
 
 // ToString provides a formatted string representation of the User.
+// User.ToString (Method): provides a formatted string representation of the User.
 func (u User) ToString() string {
 	return fmt.Sprintf("%s (%d)", u.Name, u.Age)
 }
 
 // GetOrSet retrieves a value from a map or initializes it with a default if missing.
+// GetOrSet (Function): retrieves a value from a map or initializes it with a default if missing.
 func GetOrSet[K comparable, V any](m map[K]V, key K, defaultVal V) V {
 	if val, ok := m[key]; ok {
 		return val
@@ -91,18 +102,22 @@ func GetOrSet[K comparable, V any](m map[K]V, key K, defaultVal V) V {
 	return defaultVal
 }
 
+// JSONMarshaler (Interface): captures the behavior boundary the json marshaler example depends on.
 type JSONMarshaler interface {
 	MarshalJSON() ([]byte, error)
 }
 
+// Data (Struct): groups the state used by the data example boundary.
 type Data struct {
 	Value int
 }
 
+// Data.MarshalJSON (Method): applies the marshal json operation to receiver state at a visible boundary.
 func (d Data) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`{"value":%d}`, d.Value)), nil
 }
 
+// MarshalAll (Function): runs the marshal all step and keeps its inputs, outputs, or errors visible.
 func MarshalAll[T JSONMarshaler](items []T) [][]byte {
 	results := make([][]byte, len(items))
 	for i, item := range items {

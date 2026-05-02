@@ -6,6 +6,7 @@ package storage
 import "context"
 
 // User represents a system user.
+// User (Struct): represents a system user.
 type User struct {
 	ID    string
 	Email string
@@ -14,6 +15,8 @@ type User struct {
 // Storer is the interface that Mockery will generate a mock for.
 // In Go, we mock at the consumer's request. By using //go:generate
 // we ensure the mock is always up to date with the interface.
+//
+// Storer (Interface): is the interface that Mockery will generate a mock for.
 //
 //go:generate mockery --name=Storer --output=../../mocks --case=underscore
 type Storer interface {

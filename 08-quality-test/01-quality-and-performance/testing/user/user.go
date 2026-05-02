@@ -30,6 +30,7 @@ import (
 
 // CheckUsername validates if a username meets our platform requirements.
 // A valid username must be at least 6 characters and cannot contain "admin".
+// CheckUsername (Function): validates if a username meets our platform requirements.
 func CheckUsername(username string) bool {
 	if len(username) < 6 {
 		return false
@@ -44,6 +45,7 @@ func CheckUsername(username string) bool {
 
 // Login attempts to authenticate a user.
 // Returns a boolean success flag, and an error if validation fails.
+// Login (Function): attempts to authenticate a user.
 func Login(username string) (bool, error) {
 	if !CheckUsername(username) {
 		return false, errors.New("invalid username: must be 6+ chars and not contain admin")

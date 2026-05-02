@@ -36,6 +36,7 @@ import (
 // Stage 07: Concurrency Patterns - URL Health Checker (Exercise Solution)
 //
 
+// CheckResult (Struct): groups the state used by the check result example boundary.
 type CheckResult struct {
 	URL        string
 	StatusCode int
@@ -43,6 +44,7 @@ type CheckResult struct {
 	Error      error
 }
 
+// clientPool (Pool): reuses HTTP clients so concurrent checks share bounded transport setup.
 var clientPool = sync.Pool{
 	New: func() any {
 		return &http.Client{
@@ -54,6 +56,7 @@ var clientPool = sync.Pool{
 	},
 }
 
+// checkURL (Function): runs the check url step and keeps its inputs, outputs, or errors visible.
 func checkURL(ctx context.Context, url string) CheckResult {
 	start := time.Now()
 
@@ -78,6 +81,7 @@ func checkURL(ctx context.Context, url string) CheckResult {
 	}
 }
 
+// urls (Slice): keeps ordered lesson state visible for iteration and comparison.
 var urls = []string{
 	"https://go.dev",
 	"https://pkg.go.dev",
@@ -135,6 +139,7 @@ func main() {
 	fmt.Println("NEXT UP: TE.1 -> 08-quality-test/01-quality-and-performance/testing/user")
 }
 
+// sumLatencies (Function): runs the sum latencies step and keeps its inputs, outputs, or errors visible.
 func sumLatencies(results []CheckResult) time.Duration {
 	var total time.Duration
 	for _, r := range results {

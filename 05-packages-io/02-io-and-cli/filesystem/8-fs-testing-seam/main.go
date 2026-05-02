@@ -49,6 +49,7 @@ import (
 //   in-memory test fixtures without changing its core logic.
 
 // SearchResult holds one matching line from the log search.
+// SearchResult (Struct): holds one matching line from the log search.
 type SearchResult struct {
 	File       string
 	LineNumber int
@@ -57,6 +58,7 @@ type SearchResult struct {
 
 // SearchLogs searches all .log and .txt files under the given filesystem
 // for lines containing the keyword (case-insensitive).
+// SearchLogs (Function): searches all .log and .txt files under the given filesystem.
 func SearchLogs(fsys fs.FS, keyword string) ([]SearchResult, error) {
 	keyword = strings.ToLower(keyword)
 	var results []SearchResult
@@ -101,6 +103,7 @@ func SearchLogs(fsys fs.FS, keyword string) ([]SearchResult, error) {
 }
 
 // LoadConfig reads a key=value config file from the given filesystem.
+// LoadConfig (Function): reads a key=value config file from the given filesystem.
 func LoadConfig(fsys fs.FS, path string) (map[string]string, error) {
 	f, err := fsys.Open(path)
 	if err != nil {

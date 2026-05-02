@@ -32,6 +32,7 @@ import (
 )
 
 // User represents a domain model.
+// User (Struct): represents a domain model.
 type User struct {
 	ID       int    `json:"id"`
 	Username string `json:"username"`
@@ -39,6 +40,7 @@ type User struct {
 }
 
 // APIResponse is a standard wrapper for all our API responses.
+// APIResponse (Struct): is a standard wrapper for all our API responses.
 type APIResponse struct {
 	Data    any    `json:"data,omitempty"`
 	Message string `json:"message,omitempty"`
@@ -76,6 +78,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// getUserHandler (Function): runs the get user handler step and keeps its inputs, outputs, or errors visible.
 func getUserHandler(w http.ResponseWriter, r *http.Request) {
 	user := User{ID: 1, Username: "gopher", Email: "gopher@golang.org"}
 
@@ -93,6 +96,7 @@ func getUserHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// errorHandler (Function): runs the error handler step and keeps its inputs, outputs, or errors visible.
 func errorHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 

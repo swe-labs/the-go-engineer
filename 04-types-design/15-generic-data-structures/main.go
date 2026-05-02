@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -35,17 +36,20 @@ import "fmt"
 // Section 04: Types & Design - Generic Data Structures
 
 // Stack implements a Last-In-First-Out (LIFO) collection for any type T.
+// Stack (Type): implements a Last-In-First-Out (LIFO) collection for any type T.
 type Stack[T any] struct {
 	items []T
 }
 
 // Push adds an item to the top of the stack.
+// Stack.Push (Method): adds an item to the top of the stack.
 func (s *Stack[T]) Push(item T) {
 	s.items = append(s.items, item)
 }
 
 // Pop removes and returns the top item from the stack.
 // Returns the zero value and false if the stack is empty.
+// Stack.Pop (Method): removes and returns the top item from the stack.
 func (s *Stack[T]) Pop() (T, bool) {
 	if len(s.items) == 0 {
 		var zero T
@@ -57,27 +61,32 @@ func (s *Stack[T]) Pop() (T, bool) {
 }
 
 // IsEmpty returns true if the stack contains no elements.
+// Stack.IsEmpty (Method): returns true if the stack contains no elements.
 func (s *Stack[T]) IsEmpty() bool {
 	return len(s.items) == 0
 }
 
 // Size returns the total number of elements in the stack.
+// Stack.Size (Method): returns the total number of elements in the stack.
 func (s *Stack[T]) Size() int {
 	return len(s.items)
 }
 
 // Queue implements a First-In-First-Out (FIFO) collection for any type T.
+// Queue (Type): implements a First-In-First-Out (FIFO) collection for any type T.
 type Queue[T any] struct {
 	items []T
 }
 
 // Enqueue adds an item to the end of the queue.
+// Queue.Enqueue (Method): adds an item to the end of the queue.
 func (q *Queue[T]) Enqueue(item T) {
 	q.items = append(q.items, item)
 }
 
 // Dequeue removes and returns the front item from the queue.
 // Returns the zero value and false if the queue is empty.
+// Queue.Dequeue (Method): removes and returns the front item from the queue.
 func (q *Queue[T]) Dequeue() (T, bool) {
 	if len(q.items) == 0 {
 		var zero T
@@ -89,45 +98,54 @@ func (q *Queue[T]) Dequeue() (T, bool) {
 }
 
 // IsEmpty returns true if the queue contains no elements.
+// Queue.IsEmpty (Method): returns true if the queue contains no elements.
 func (q *Queue[T]) IsEmpty() bool {
 	return len(q.items) == 0
 }
 
 // Size returns the total number of elements in the queue.
+// Queue.Size (Method): returns the total number of elements in the queue.
 func (q *Queue[T]) Size() int {
 	return len(q.items)
 }
 
 // Set implements a unique collection of elements for any comparable type T.
+// Set (Type): implements a unique collection of elements for any comparable type T.
 type Set[T comparable] map[T]struct{}
 
 // NewSet initializes a new empty set.
+// NewSet (Function): initializes a new empty set.
 func NewSet[T comparable]() Set[T] {
 	return make(Set[T])
 }
 
 // Add inserts an item into the set.
+// Set.Add (Method): inserts an item into the set.
 func (s Set[T]) Add(item T) {
 	s[item] = struct{}{}
 }
 
 // Contains returns true if the item exists in the set.
+// Set.Contains (Method): returns true if the item exists in the set.
 func (s Set[T]) Contains(item T) bool {
 	_, ok := s[item]
 	return ok
 }
 
 // Remove deletes an item from the set.
+// Set.Remove (Method): deletes an item from the set.
 func (s Set[T]) Remove(item T) {
 	delete(s, item)
 }
 
 // Size returns the number of elements in the set.
+// Set.Size (Method): returns the number of elements in the set.
 func (s Set[T]) Size() int {
 	return len(s)
 }
 
 // Items returns all elements in the set as a slice.
+// Set.Items (Method): returns all elements in the set as a slice.
 func (s Set[T]) Items() []T {
 	result := make([]T, 0, len(s))
 	for item := range s {

@@ -39,6 +39,7 @@ import (
 // An error is a returned value that tells the caller the work did not succeed.
 //
 
+// divide (Function): runs the divide step and keeps its inputs, outputs, or errors visible.
 func divide(total int, parts int) (int, error) {
 	if parts == 0 {
 		return 0, errors.New("cannot divide by zero")
@@ -47,6 +48,7 @@ func divide(total int, parts int) (int, error) {
 	return total / parts, nil
 }
 
+// lookupPrice (Function): runs the lookup price step and keeps its inputs, outputs, or errors visible.
 func lookupPrice(catalog map[string]int, item string) (int, error) {
 	price, exists := catalog[item]
 	if !exists {

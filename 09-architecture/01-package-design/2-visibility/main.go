@@ -44,12 +44,15 @@ import "fmt"
 //
 //	Name  -> exported
 //	email -> unexported
+//
+// User (Struct): is an exported type - other packages can use it.
 type User struct {
 	Name  string
 	email string
 }
 
 // NewUser is an exported constructor function.
+// NewUser (Function): is an exported constructor function.
 func NewUser(name, email string) User {
 	return User{
 		Name:  name,
@@ -58,11 +61,13 @@ func NewUser(name, email string) User {
 }
 
 // Email is an exported accessor for the unexported email field.
+// User.Email (Method): is an exported accessor for the unexported email field.
 func (u User) Email() string {
 	return u.email
 }
 
 // sanitizeEmail is an unexported helper.
+// sanitizeEmail (Function): is an unexported helper.
 func sanitizeEmail(email string) string {
 	return email
 }

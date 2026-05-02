@@ -38,6 +38,7 @@ import (
 // Validation rejects bad input early so the rest of the program can stay honest.
 //
 
+// validateCartName (Function): runs the validate cart name step and keeps its inputs, outputs, or errors visible.
 func validateCartName(name string) error {
 	if strings.TrimSpace(name) == "" {
 		return errors.New("cart name is required")
@@ -46,6 +47,7 @@ func validateCartName(name string) error {
 	return nil
 }
 
+// validatePrices (Function): runs the validate prices step and keeps its inputs, outputs, or errors visible.
 func validatePrices(prices []int) error {
 	if len(prices) == 0 {
 		return errors.New("at least one price is required")

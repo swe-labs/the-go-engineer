@@ -48,6 +48,7 @@ import (
 //   always reset the object before handing it back.
 //
 
+// bufPool (Pool): reuses response buffers so allocation pressure stays visible in the lesson.
 var bufPool = sync.Pool{
 	New: func() any {
 		buf := bytes.NewBuffer(make([]byte, 0, 4096))
@@ -55,12 +56,14 @@ var bufPool = sync.Pool{
 	},
 }
 
+// GetBuffer (Function): runs the get buffer step and keeps its inputs, outputs, or errors visible.
 func GetBuffer() *bytes.Buffer {
 	buf := bufPool.Get().(*bytes.Buffer)
 	buf.Reset()
 	return buf
 }
 
+// PutBuffer (Function): runs the put buffer step and keeps its inputs, outputs, or errors visible.
 func PutBuffer(buf *bytes.Buffer) {
 	if buf.Cap() > 64*1024 {
 		return
@@ -69,6 +72,7 @@ func PutBuffer(buf *bytes.Buffer) {
 	bufPool.Put(buf)
 }
 
+// buildHTTPResponseWithPool (Function): runs the build http response with pool step and keeps its inputs, outputs, or errors visible.
 func buildHTTPResponseWithPool(status int, body string) string {
 	buf := GetBuffer()
 	defer PutBuffer(buf)
@@ -80,6 +84,7 @@ func buildHTTPResponseWithPool(status int, body string) string {
 	return buf.String()
 }
 
+// buildHTTPResponseWithoutPool (Function): runs the build http response without pool step and keeps its inputs, outputs, or errors visible.
 func buildHTTPResponseWithoutPool(status int, body string) string {
 	var buf bytes.Buffer
 	fmt.Fprintf(&buf, "HTTP/1.1 %d OK\r\n", status)
@@ -88,6 +93,7 @@ func buildHTTPResponseWithoutPool(status int, body string) string {
 	return buf.String()
 }
 
+// RequestContext (Struct): groups the state used by the request context example boundary.
 type RequestContext struct {
 	UserID    string
 	RequestID string
@@ -95,6 +101,7 @@ type RequestContext struct {
 	Headers   map[string]string
 }
 
+// RequestContext.Reset (Method): applies the reset operation to receiver state at a visible boundary.
 func (r *RequestContext) Reset() {
 	r.UserID = ""
 	r.RequestID = ""
@@ -104,6 +111,7 @@ func (r *RequestContext) Reset() {
 	}
 }
 
+// ctxPool (Pool): reuses request contexts while preserving an explicit reset boundary.
 var ctxPool = sync.Pool{
 	New: func() any {
 		return &RequestContext{
@@ -113,6 +121,7 @@ var ctxPool = sync.Pool{
 	},
 }
 
+// processRequest (Function): runs the process request step and keeps its inputs, outputs, or errors visible.
 func processRequest(userID, requestID string) string {
 	rc := ctxPool.Get().(*RequestContext)
 	defer func() {

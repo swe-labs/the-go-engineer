@@ -50,6 +50,7 @@ import (
 //   by other parts of your app. In a high-traffic system, this can
 //   exhaust the connection pool in seconds, causing your app to hang.
 
+// User (Struct): groups the state used by the user example boundary.
 type User struct {
 	ID        int
 	Name      string
@@ -98,6 +99,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// getAllUsers (Function): runs the get all users step and keeps its inputs, outputs, or errors visible.
 func getAllUsers(db *sql.DB) ([]User, error) {
 	query := `SELECT id, name, email, created_at FROM users`
 
@@ -130,6 +132,7 @@ func getAllUsers(db *sql.DB) ([]User, error) {
 	return users, nil
 }
 
+// getUserByID (Function): runs the get user by id step and keeps its inputs, outputs, or errors visible.
 func getUserByID(db *sql.DB, id int) (*User, error) {
 	query := `SELECT id, name, email, created_at FROM users WHERE id = ?`
 
@@ -148,6 +151,7 @@ func getUserByID(db *sql.DB, id int) (*User, error) {
 	return &u, nil
 }
 
+// setup (Function): runs the setup step and keeps its inputs, outputs, or errors visible.
 func setup(db *sql.DB) {
 	schema := `CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT UNIQUE, created_at DATETIME DEFAULT CURRENT_TIMESTAMP);`
 	db.Exec(schema)

@@ -45,12 +45,14 @@ import (
 //   (using an ID or timestamp) is more performant and avoids issues
 //   when records are added/deleted while a user is scrolling.
 
+// Product (Struct): groups the state used by the product example boundary.
 type Product struct {
 	ID       int    `json:"id"`
 	Name     string `json:"name"`
 	Category string `json:"category"`
 }
 
+// allProducts (Slice): keeps ordered lesson state visible for iteration and comparison.
 var allProducts []Product
 
 func init() {

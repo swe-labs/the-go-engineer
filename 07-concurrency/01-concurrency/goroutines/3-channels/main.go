@@ -59,12 +59,14 @@ import (
 //   full OS-thread handoff.
 //
 
+// ScanResult (Struct): groups the state used by the scan result example boundary.
 type ScanResult struct {
 	Host   string
 	Port   int
 	IsOpen bool
 }
 
+// scanPort (Function): runs the scan port step and keeps its inputs, outputs, or errors visible.
 func scanPort(host string, port int, results chan<- ScanResult) {
 	delay := time.Duration(port%3+1) * 100 * time.Millisecond
 	time.Sleep(delay)

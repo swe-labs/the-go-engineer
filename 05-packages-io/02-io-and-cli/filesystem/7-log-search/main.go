@@ -52,6 +52,7 @@ import (
 //   `WalkDir` can be 10x faster because it avoids these redundant stat() syscalls.
 
 // SearchResult holds the location and content of a matching line.
+// SearchResult (Struct): holds the location and content of a matching line.
 type SearchResult struct {
 	FilePath   string // Full path to the file containing the match
 	LineNumber int    // 1-indexed line number
@@ -63,6 +64,7 @@ type SearchResult struct {
 //
 // `bufio.Scanner` reads the file lazily - it never loads the entire file into
 // memory at once. This is critical for searching large log files (1GB+).
+// searchFile (Function): opens a single file and scans it line-by-line for the keyword.
 func searchFile(filePath string, keyword string) ([]SearchResult, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -96,6 +98,7 @@ func searchFile(filePath string, keyword string) ([]SearchResult, error) {
 //
 // `filepath.WalkDir` calls our function for every file and directory
 // it encounters. We filter by extension to only search relevant files.
+// searchDirectory (Function): walks a directory tree recursively and searches all.
 func searchDirectory(rootDir string, keyword string) ([]SearchResult, error) {
 	var allResults []SearchResult
 

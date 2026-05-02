@@ -6,6 +6,7 @@ package models
 import "time"
 
 // User represents the domain model for a user in our system.
+// User (Struct): represents the domain model for a user in our system.
 type User struct {
 	ID        int       `json:"id"`
 	Name      string    `json:"name"`
@@ -16,6 +17,7 @@ type User struct {
 }
 
 // Profile represents the extended user information.
+// Profile (Struct): represents the extended user information.
 type Profile struct {
 	UserID    int       `json:"user_id"`
 	Avatar    string    `json:"avatar"`

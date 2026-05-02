@@ -85,6 +85,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// getOffsetInSeconds (Function): runs the get offset in seconds step and keeps its inputs, outputs, or errors visible.
 func getOffsetInSeconds(t time.Time) int {
 	_, offset := t.Zone()
 	return offset

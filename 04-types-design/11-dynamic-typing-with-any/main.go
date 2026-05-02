@@ -32,20 +32,24 @@ import "fmt"
 // Section 04: Types & Design - Dynamic Typing with Any
 
 // notifier defines a simple notification behavior.
+// notifier (Interface): defines a simple notification behavior.
 type notifier interface {
 	Notify()
 }
 
 // emailNotifier implements the notifier interface for email delivery.
+// emailNotifier (Struct): implements the notifier interface for email delivery.
 type emailNotifier struct {
 	address string
 }
 
 // Notify prints a notification message to stdout.
+// emailNotifier.Notify (Method): prints a notification message to stdout.
 func (e *emailNotifier) Notify() {
 	fmt.Printf("notifying %s\n", e.address)
 }
 
+// inspect (Function): runs the inspect step and keeps its inputs, outputs, or errors visible.
 func inspect(v any) {
 	switch value := v.(type) {
 	case string:

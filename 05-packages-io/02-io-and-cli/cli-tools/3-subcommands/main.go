@@ -74,6 +74,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// cmdGreet (Function): runs the cmd greet step and keeps its inputs, outputs, or errors visible.
 func cmdGreet(args []string) {
 	fs := flag.NewFlagSet("greet", flag.ExitOnError)
 	name := fs.String("name", "World", "Name to greet")
@@ -89,6 +90,7 @@ func cmdGreet(args []string) {
 	fmt.Println(greeting)
 }
 
+// cmdCalc (Function): runs the cmd calc step and keeps its inputs, outputs, or errors visible.
 func cmdCalc(args []string) {
 	fs := flag.NewFlagSet("calc", flag.ExitOnError)
 	a := fs.Int("a", 0, "First number")
@@ -113,11 +115,13 @@ func cmdCalc(args []string) {
 	fmt.Printf("%d %s %d = %d\n", *a, *op, *b, result)
 }
 
+// cmdVersion (Function): runs the cmd version step and keeps its inputs, outputs, or errors visible.
 func cmdVersion() {
 	fmt.Println("The Go Engineer CLI v1.0.0")
 	fmt.Printf("Built with: %s\n", "go1.26")
 }
 
+// printUsage (Function): runs the print usage step and keeps its inputs, outputs, or errors visible.
 func printUsage() {
 	fmt.Println("Usage: program <subcommand> [flags]")
 	fmt.Println()

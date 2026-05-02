@@ -30,6 +30,7 @@ assignees: ""
 - [ ] `go mod tidy` no-diff check
 - [ ] `go test ./...`
 - [ ] `go test -race ./...`
+- [ ] `go test -coverprofile=coverage.out ./...`
 - [ ] `go run ./scripts/validate_curriculum.go`
 
 ## Risk Notes

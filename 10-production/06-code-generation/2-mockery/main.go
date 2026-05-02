@@ -55,10 +55,12 @@ import (
 //
 
 // UserManager uses a Storer to manage users.
+// UserManager (Struct): uses a Storer to manage users.
 type UserManager struct {
 	store storage.Storer
 }
 
+// UserManager.WelcomeUser (Method): applies the welcome user operation to receiver state at a visible boundary.
 func (m *UserManager) WelcomeUser(ctx context.Context, id string) (string, error) {
 	u, err := m.store.GetUser(ctx, id)
 	if err != nil {

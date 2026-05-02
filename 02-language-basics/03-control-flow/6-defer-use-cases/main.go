@@ -44,6 +44,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// simulateFileOperation (Function): runs the simulate file operation step and keeps its inputs, outputs, or errors visible.
 func simulateFileOperation() {
 	fmt.Println("[Step 1] Opening simulated file 'data.txt'...")
 

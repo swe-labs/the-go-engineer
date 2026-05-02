@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -36,6 +37,7 @@ import "fmt"
 // Section 04: Types & Design - Functional Options
 
 // Server represents a configurable compute resource.
+// Server (Struct): represents a configurable compute resource.
 type Server struct {
 	Name     string
 	Region   string
@@ -46,9 +48,11 @@ type Server struct {
 }
 
 // Option defines the signature for functions that configure a Server.
+// Option (Type): defines the signature for functions that configure a Server.
 type Option func(*Server)
 
 // WithName configures the identifier of the server.
+// WithName (Function): configures the identifier of the server.
 func WithName(name string) Option {
 	return func(s *Server) {
 		s.Name = name
@@ -56,6 +60,7 @@ func WithName(name string) Option {
 }
 
 // WithRegion configures the geographical location of the server.
+// WithRegion (Function): configures the geographical location of the server.
 func WithRegion(region string) Option {
 	return func(s *Server) {
 		s.Region = region
@@ -63,6 +68,7 @@ func WithRegion(region string) Option {
 }
 
 // WithCPUs configures the number of CPU cores allocated to the server.
+// WithCPUs (Function): configures the number of CPU cores allocated to the server.
 func WithCPUs(cpus int) Option {
 	return func(s *Server) {
 		s.CPUs = cpus
@@ -70,6 +76,7 @@ func WithCPUs(cpus int) Option {
 }
 
 // WithRAM configures the amount of memory in Gigabytes.
+// WithRAM (Function): configures the amount of memory in Gigabytes.
 func WithRAM(gb int) Option {
 	return func(s *Server) {
 		s.RAMGB = gb
@@ -77,6 +84,7 @@ func WithRAM(gb int) Option {
 }
 
 // WithFirewall enables or disables the network firewall.
+// WithFirewall (Function): enables or disables the network firewall.
 func WithFirewall(enabled bool) Option {
 	return func(s *Server) {
 		s.Firewall = enabled
@@ -84,6 +92,7 @@ func WithFirewall(enabled bool) Option {
 }
 
 // WithSSL enables or disables SSL encryption for the server.
+// WithSSL (Function): enables or disables SSL encryption for the server.
 func WithSSL(enabled bool) Option {
 	return func(s *Server) {
 		s.SSL = enabled
@@ -91,6 +100,7 @@ func WithSSL(enabled bool) Option {
 }
 
 // NewServer initializes a Server with default settings and applies the provided options.
+// NewServer (Function): initializes a Server with default settings and applies the provided options.
 func NewServer(opts ...Option) *Server {
 	s := &Server{
 		Name:     "default",

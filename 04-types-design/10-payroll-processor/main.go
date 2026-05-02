@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -6,7 +7,6 @@
 // Level: Core
 // ============================================================================
 //
-// WHAT YOU'LL LEARN:
 // WHAT YOU'LL LEARN:
 //   - Designing behavioral contracts using Go interfaces.
 //   - Implementing polymorphic processing logic for heterogeneous types.
@@ -39,27 +39,32 @@ import "fmt"
 
 // Payable defines the behavioral contract for any entity that requires a payroll calculation.
 // It embeds fmt.Stringer to ensure all payable entities can be logged/printed.
+// Payable (Interface): defines the behavioral contract for any entity that requires a payroll calculation.
 type Payable interface {
 	fmt.Stringer
 	CalculatePay() float64
 }
 
 // SalariedEmployee represents an employee with a fixed annual salary.
+// SalariedEmployee (Struct): represents an employee with a fixed annual salary.
 type SalariedEmployee struct {
 	Name         string
 	AnnualSalary float64
 }
 
 // CalculatePay computes the monthly salary.
+// SalariedEmployee.CalculatePay (Method): computes the monthly salary.
 func (se SalariedEmployee) CalculatePay() float64 {
 	return se.AnnualSalary / 12.0
 }
 
+// SalariedEmployee.String (Method): applies the string operation to receiver state at a visible boundary.
 func (se SalariedEmployee) String() string {
 	return fmt.Sprintf("Salaried: %s (Annual: $%.2f)", se.Name, se.AnnualSalary)
 }
 
 // HourlyEmployee represents an employee paid by the hour.
+// HourlyEmployee (Struct): represents an employee paid by the hour.
 type HourlyEmployee struct {
 	Name        string
 	HourlyRate  float64
@@ -67,15 +72,18 @@ type HourlyEmployee struct {
 }
 
 // CalculatePay computes pay based on hours worked.
+// HourlyEmployee.CalculatePay (Method): computes pay based on hours worked.
 func (he HourlyEmployee) CalculatePay() float64 {
 	return he.HourlyRate * he.HoursWorked
 }
 
+// HourlyEmployee.String (Method): applies the string operation to receiver state at a visible boundary.
 func (he HourlyEmployee) String() string {
 	return fmt.Sprintf("Hourly: %s (Rate: $%.2f/hr, Hours: %.1f)", he.Name, he.HourlyRate, he.HoursWorked)
 }
 
 // CommissionEmployee represents an employee with a base salary plus sales commission.
+// CommissionEmployee (Struct): represents an employee with a base salary plus sales commission.
 type CommissionEmployee struct {
 	Name           string
 	BaseSalary     float64
@@ -84,21 +92,25 @@ type CommissionEmployee struct {
 }
 
 // CalculatePay computes total pay including base salary and commission.
+// CommissionEmployee.CalculatePay (Method): computes total pay including base salary and commission.
 func (ce CommissionEmployee) CalculatePay() float64 {
 	return ce.BaseSalary + (ce.CommissionRate * ce.SalesAmount)
 }
 
+// CommissionEmployee.String (Method): applies the string operation to receiver state at a visible boundary.
 func (ce CommissionEmployee) String() string {
 	return fmt.Sprintf("Commission: %s (Base: $%.2f, CommRate: %.2f%%, Sales: $%.2f)",
 		ce.Name, ce.BaseSalary, ce.CommissionRate*100, ce.SalesAmount)
 }
 
 // PrintEmployeeSummary outputs the textual representation of any Stringer.
+// PrintEmployeeSummary (Function): outputs the textual representation of any Stringer.
 func PrintEmployeeSummary[P fmt.Stringer](employee P) {
 	fmt.Printf("  - Processing: %s\n", employee)
 }
 
 // ProcessPayroll iterates over a list of Payable entities and prints the payroll summary.
+// ProcessPayroll (Function): iterates over a list of Payable entities and prints the payroll summary.
 func ProcessPayroll(employees []Payable) {
 	fmt.Println("--- Generating Payroll Summary ---")
 	totalPayroll := 0.0

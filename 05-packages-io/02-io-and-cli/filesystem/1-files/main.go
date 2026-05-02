@@ -186,6 +186,7 @@ func main() {
 
 // readLineByLine demonstrates the bufio.Scanner pattern.
 // This is the standard way to process large files in Go.
+// readLineByLine (Function): demonstrates the bufio.Scanner pattern.
 func readLineByLine(path string) {
 	// os.Open opens for reading only (O_RDONLY).
 	// It returns a *os.File handle and an error.
@@ -217,6 +218,7 @@ func readLineByLine(path string) {
 }
 
 // appendToFile adds text to the end of a file (creates it if needed).
+// appendToFile (Function): adds text to the end of a file (creates it if needed).
 func appendToFile(path, text string) {
 	// Open with append + create + write-only flags
 	f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)

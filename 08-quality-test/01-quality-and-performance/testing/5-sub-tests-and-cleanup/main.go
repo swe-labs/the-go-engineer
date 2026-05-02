@@ -30,6 +30,7 @@ import (
 //
 // NEXT UP: TE.6 -> 08-quality-test/01-quality-and-performance/testing/6-fuzz-testing
 
+// te_5Summary (Function): runs the te 5 summary step and keeps its inputs, outputs, or errors visible.
 func te_5Summary(input string) string {
 	return strings.TrimSpace(strings.ToLower(input))
 }

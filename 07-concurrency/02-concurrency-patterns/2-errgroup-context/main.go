@@ -45,17 +45,20 @@ import (
 //   "I launched 10 goroutines but one failed - how do I stop the other 9?"
 //
 
+// WorkItem (Struct): groups the state used by the work item example boundary.
 type WorkItem struct {
 	URL      string
 	Priority int
 }
 
+// Result (Struct): groups the state used by the result example boundary.
 type Result struct {
 	URL      string
 	StatusOK bool
 	Latency  time.Duration
 }
 
+// producer (Function): runs the producer step and keeps its inputs, outputs, or errors visible.
 func producer(ctx context.Context, jobs chan<- WorkItem) error {
 	defer close(jobs)
 
@@ -82,6 +85,7 @@ func producer(ctx context.Context, jobs chan<- WorkItem) error {
 	return nil
 }
 
+// consumer (Function): runs the consumer step and keeps its inputs, outputs, or errors visible.
 func consumer(ctx context.Context, id int, jobs <-chan WorkItem, results chan<- Result) error {
 	for {
 		select {

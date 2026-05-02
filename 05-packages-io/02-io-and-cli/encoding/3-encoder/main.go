@@ -58,6 +58,7 @@ import (
 //   - Use json.Marshal when you need the []byte (e.g., storing in a database or Redis).
 //   - Use json.NewEncoder when writing directly to an io.Writer (e.g., HTTP ResponseWriter, file).
 
+// DeviceLog (Struct): groups the state used by the device log example boundary.
 type DeviceLog struct {
 	DeviceID  string  `json:"device_id"`
 	Timestamp int64   `json:"timestamp"`

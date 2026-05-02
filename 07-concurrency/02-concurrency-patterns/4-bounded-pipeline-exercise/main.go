@@ -35,6 +35,7 @@ import (
 
 // Stage 07: Concurrency Patterns - Exercise: Image Resizer Solution
 
+// bufPool (Pool): reuses image buffers so the bounded pipeline can show allocation control.
 var bufPool = sync.Pool{
 	New: func() any {
 		return bytes.NewBuffer(make([]byte, 0, 2*1024*1024))
@@ -65,6 +66,7 @@ func main() {
 	fmt.Println("NEXT UP: CP.5 -> 07-concurrency/02-concurrency-patterns/5-url-checker-exercise")
 }
 
+// processImage (Function): runs the process image step and keeps its inputs, outputs, or errors visible.
 func processImage(ctx context.Context, id string) error {
 	select {
 	case <-ctx.Done():

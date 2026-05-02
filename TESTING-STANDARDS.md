@@ -136,7 +136,7 @@ Coverage is a signal, not a substitute for meaningful assertions.
 
 ## Required Local Verification
 
-For full PR readiness, use the same CI-equivalent bundle as `CODE-STANDARDS.md`:
+For full PR readiness, use the same CI-equivalent bundle as `CODE-STANDARDS.md`, plus the coverage summary command below:
 
 ```bash
 go build ./...

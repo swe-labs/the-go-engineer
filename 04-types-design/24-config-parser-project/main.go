@@ -56,12 +56,14 @@ import (
 //
 
 // configEntry (Struct) models a single key-value pair for stable, sortable template rendering.
+// configEntry (Struct): (Struct) models a single key-value pair for stable, sortable template rendering.
 type configEntry struct {
 	Key   string
 	Value string
 }
 
 // parseConfig (Function) implements an ingestion pipeline to transform unstructured text into a validated map of configuration values.
+// parseConfig (Function): (Function) implements an ingestion pipeline to transform unstructured text into a validated map of configuration values.
 func parseConfig(content string) (map[string]string, error) {
 	config := make(map[string]string)
 
@@ -108,6 +110,7 @@ func parseConfig(content string) (map[string]string, error) {
 }
 
 // renderConfig (Function) orchestrates sorting and template execution to generate a stable, human-readable summary of configuration data.
+// renderConfig (Function): (Function) orchestrates sorting and template execution to generate a stable, human-readable summary of configuration data.
 func renderConfig(config map[string]string) (string, error) {
 	entries := make([]configEntry, 0, len(config))
 	for key, value := range config {

@@ -12,7 +12,7 @@ import (
 )
 
 // ============================================================================
-// Stage 07: Concurrency - Race Conditions & sync.Mutex
+// Section 07: Concurrency - Race Conditions & sync.Mutex
 // Level: Core
 // ============================================================================
 //
@@ -23,6 +23,9 @@ import (
 //   - sync/atomic: lock-free atomic operations (fastest option)
 //   - The race detector: go run -race (finds races at runtime)
 //   - "Share memory by communicating" - channels as the preferred alternative
+//
+// WHY THIS MATTERS:
+//   Data races corrupt production state and must be prevented or detected before release.
 //
 // ANALOGY:
 //   Imagine two cashiers updating the same cash register at the same time.
@@ -45,6 +48,7 @@ import (
 // unsafeCounter demonstrates what happens WITHOUT synchronization.
 // Multiple goroutines increment the same variable concurrently.
 // The final count will be WRONG because of lost writes.
+// unsafeCounter (Function): demonstrates what happens WITHOUT synchronization.
 func unsafeCounter() int {
 	counter := 0 // SHARED STATE - accessed by multiple goroutines
 	var wg sync.WaitGroup
@@ -68,6 +72,7 @@ func unsafeCounter() int {
 
 // mutexCounter uses sync.Mutex to protect the shared variable.
 // Only one goroutine can hold the mutex at a time.
+// mutexCounter (Function): uses sync.Mutex to protect the shared variable.
 func mutexCounter() int {
 	counter := 0
 	var mu sync.Mutex
@@ -87,6 +92,7 @@ func mutexCounter() int {
 }
 
 // atomicCounter uses sync/atomic for lock-free increment.
+// atomicCounter (Function): uses sync/atomic for lock-free increment.
 func atomicCounter() int64 {
 	var counter int64
 	var wg sync.WaitGroup

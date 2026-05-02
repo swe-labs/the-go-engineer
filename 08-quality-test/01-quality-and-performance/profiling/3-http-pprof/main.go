@@ -68,6 +68,7 @@ import (
 //
 
 // simulateWork does CPU-intensive computation to make profiles interesting.
+// simulateWork (Function): does CPU-intensive computation to make profiles interesting.
 func simulateWork(intensity int) {
 	var sum float64
 	for i := 0; i < intensity*1000; i++ {
@@ -82,6 +83,7 @@ var sharedCache struct {
 	data map[string]string
 }
 
+// initCache (Function): runs the init cache step and keeps its inputs, outputs, or errors visible.
 func initCache() {
 	sharedCache.data = make(map[string]string, 1000)
 	for i := 0; i < 1000; i++ {
@@ -89,6 +91,7 @@ func initCache() {
 	}
 }
 
+// handleAPIRequest (Function): runs the handle api request step and keeps its inputs, outputs, or errors visible.
 func handleAPIRequest(w http.ResponseWriter, r *http.Request) {
 	simulateWork(10)
 
@@ -106,10 +109,12 @@ func handleAPIRequest(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, `{"status":"ok","result":"%s"}`, val)
 }
 
+// handleHealthz (Function): runs the handle healthz step and keeps its inputs, outputs, or errors visible.
 func handleHealthz(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, `{"status":"healthy"}`)
 }
 
+// generateLoad (Function): runs the generate load step and keeps its inputs, outputs, or errors visible.
 func generateLoad(duration time.Duration) {
 	client := &http.Client{Timeout: 2 * time.Second}
 	deadline := time.Now().Add(duration)

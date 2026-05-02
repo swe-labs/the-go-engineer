@@ -126,6 +126,8 @@ func main() {
 // The select statement waits for EITHER:
 //   - ctx.Done() - the context was cancelled (stop working)
 //   - default/time - normal work continues
+//
+// worker (Function): simulates a long-running task that checks for cancellation.
 func worker(ctx context.Context, results chan<- string) {
 	i := 0
 	for {

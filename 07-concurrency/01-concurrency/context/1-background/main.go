@@ -127,6 +127,7 @@ func main() {
 // processRequest demonstrates the Go convention: context is ALWAYS the first parameter.
 // This isn't just a style choice - it's enforced by linters (revive, golangci-lint)
 // and is part of Google's Go style guide.
+// processRequest (Function): demonstrates the Go convention: context is ALWAYS the first parameter.
 func processRequest(ctx context.Context, orderID string) {
 	fmt.Printf("Processing order: %s\n", orderID)
 	fmt.Printf("  Context error: %v (nil = still active)\n", ctx.Err())

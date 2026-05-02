@@ -76,12 +76,14 @@ import (
 //   Then: curl http://localhost:8080/api/slow   (simulates a slow 3s request)
 //   While the request is in-flight, press Ctrl+C - graceful shutdown waits for it.
 
+// Server (Struct): groups the state used by the server example boundary.
 type Server struct {
 	httpServer *http.Server
 	db         *sql.DB // In real use: an actual *sql.DB
 	logger     *slog.Logger
 }
 
+// NewServer (Function): runs the new server step and keeps its inputs, outputs, or errors visible.
 func NewServer(logger *slog.Logger) *Server {
 	mux := http.NewServeMux()
 	s := &Server{logger: logger}
@@ -105,6 +107,7 @@ func NewServer(logger *slog.Logger) *Server {
 
 // Start runs the HTTP server and blocks until it is shut down.
 // It returns http.ErrServerClosed on graceful shutdown - callers must handle this.
+// Server.Start (Method): runs the HTTP server and blocks until it is shut down.
 func (s *Server) Start() error {
 	s.logger.Info("server starting", "addr", s.httpServer.Addr)
 	if err := s.httpServer.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
@@ -115,6 +118,7 @@ func (s *Server) Start() error {
 
 // Shutdown gracefully drains the server and closes resources.
 // The ctx deadline is the MAXIMUM time we wait for in-flight requests.
+// Server.Shutdown (Method): gracefully drains the server and closes resources.
 func (s *Server) Shutdown(ctx context.Context) error {
 	s.logger.Info("initiating graceful shutdown")
 
@@ -137,11 +141,13 @@ func (s *Server) Shutdown(ctx context.Context) error {
 
 // Handlers
 
+// Server.handleHealth (Method): applies the handle health operation to receiver state at a visible boundary.
 func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 }
 
+// Server.handleListOrders (Method): applies the handle list orders operation to receiver state at a visible boundary.
 func (s *Server) handleListOrders(w http.ResponseWriter, r *http.Request) {
 	// Simulate a quick database query
 	time.Sleep(10 * time.Millisecond)
@@ -154,6 +160,7 @@ func (s *Server) handleListOrders(w http.ResponseWriter, r *http.Request) {
 
 // handleSlow simulates a long-running request (3 seconds).
 // Use this to test that graceful shutdown waits for it to complete.
+// Server.handleSlow (Method): simulates a long-running request (3 seconds).
 func (s *Server) handleSlow(w http.ResponseWriter, r *http.Request) {
 	s.logger.Info("slow request started")
 	select {

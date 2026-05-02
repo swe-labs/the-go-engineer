@@ -79,7 +79,7 @@ A stable release is ready only when:
 - `go mod tidy` produces no `go.mod` or `go.sum` diff
 - `go test ./...` passes
 - `go test -race ./...` passes
-- `go test -coverprofile coverage.out ./...` passes
+- `go test -coverprofile=coverage.out ./...` passes
 - `go run ./scripts/validate_curriculum.go` reports success
 - GitHub CI is green
 - the release branch and tag are created from the verified commit

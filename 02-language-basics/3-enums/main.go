@@ -41,6 +41,7 @@ const (
 	Saturday
 )
 
+// LogLevel (Type): names the log level concept so the lesson can pass it as a first-class value.
 type LogLevel int
 
 // Using our custom type 'LogLevel' along with 'iota' enforces type safety.
@@ -53,6 +54,7 @@ const (
 	LogFatal
 )
 
+// LogLevel.String (Method): applies the string operation to receiver state at a visible boundary.
 func (l LogLevel) String() string {
 	switch l {
 	case LogError:

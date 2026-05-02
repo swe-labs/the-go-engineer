@@ -67,6 +67,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// timerExample (Function): runs the timer example step and keeps its inputs, outputs, or errors visible.
 func timerExample() {
 	timer := time.NewTimer(5 * time.Second)
 

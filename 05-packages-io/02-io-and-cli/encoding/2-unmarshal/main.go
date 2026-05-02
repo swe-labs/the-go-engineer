@@ -56,6 +56,7 @@ import (
 
 // APIResponse represents the JSON response from a weather API.
 // The struct tags tell json.Unmarshal which JSON field maps to which Go field.
+// APIResponse (Struct): represents the JSON response from a weather API.
 type APIResponse struct {
 	City      string   `json:"city"`
 	TempC     float64  `json:"temp_celsius"`
@@ -67,6 +68,7 @@ type APIResponse struct {
 
 // Forecast is a nested struct for the "forecast" JSON object.
 // Nested JSON: {"forecast": {"tomorrow_high": 28, "tomorrow_low": 19}}
+// Forecast (Struct): is a nested struct for the "forecast" JSON object.
 type Forecast struct {
 	TomorrowHigh float64 `json:"tomorrow_high"`
 	TomorrowLow  float64 `json:"tomorrow_low"`

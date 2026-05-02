@@ -80,6 +80,7 @@ func main() {
 }
 
 // helloHandler responds with a simple greeting.
+// helloHandler (Function): responds with a simple greeting.
 func helloHandler(w http.ResponseWriter, r *http.Request) {
 	// ResponseWriter is used to construct the HTTP response.
 	fmt.Fprintln(w, "Hello, Go Engineer!")
@@ -87,6 +88,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // healthHandler is a common pattern for monitoring.
+// healthHandler (Function): is a common pattern for monitoring.
 func healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("OK"))

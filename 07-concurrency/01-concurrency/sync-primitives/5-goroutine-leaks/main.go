@@ -33,6 +33,7 @@ import (
 )
 
 // leakGenerator creates a goroutine that blocks forever on a channel send.
+// leakGenerator (Function): creates a goroutine that blocks forever on a channel send.
 func leakGenerator() {
 	ch := make(chan int)
 	go func() {
@@ -43,6 +44,7 @@ func leakGenerator() {
 }
 
 // safeWorker creates a goroutine that respects context cancellation.
+// safeWorker (Function): creates a goroutine that respects context cancellation.
 func safeWorker(ctx context.Context) {
 	go func() {
 		fmt.Println("  [Safe] Goroutine started, waiting for work or cancel...")

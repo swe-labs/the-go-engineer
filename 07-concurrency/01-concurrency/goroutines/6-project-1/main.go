@@ -35,6 +35,7 @@ import (
 
 // ping acts as a goroutine "actor" in an infinite loop.
 // It shares the `ch` channel memory reference with the `pong` actor.
+// ping (Function): acts as a goroutine "actor" in an infinite loop.
 func ping(ctx context.Context, ch chan string) {
 	for {
 		// 1. The select multiplexer
@@ -56,6 +57,7 @@ func ping(ctx context.Context, ch chan string) {
 	}
 }
 
+// pong (Function): runs the pong step and keeps its inputs, outputs, or errors visible.
 func pong(ctx context.Context, ch chan string) {
 	for {
 		select {

@@ -2,15 +2,20 @@ package curriculumvalidator
 
 import (
 	"bufio"
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"go/ast"
+	"go/parser"
+	"go/token"
 	"os"
 	"path/filepath"
 	"regexp"
 	"sort"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 type V2Section struct {
@@ -64,8 +69,25 @@ var runPathPattern = regexp.MustCompile(`\./[A-Za-z0-9._/\-]+(?:/\.\.\.)?`)
 var nextUpFooterPattern = regexp.MustCompile(`NEXT UP:\s*([A-Z]{2,6}\.\d+)\s*->\s*([A-Za-z0-9._/\-]+)`)
 var markdownLinkPattern = regexp.MustCompile(`\[[^\]]+\]\(([^)]+)\)`)
 var flagshipPrefixPattern = regexp.MustCompile(`^[A-Z]{3,6}$`)
+var curriculumPrefixPattern = regexp.MustCompile(`^[A-Z]{2,6}$`)
+var sectionIDPattern = regexp.MustCompile(`^s\d{2}$`)
+var curriculumReferencePattern = regexp.MustCompile(`\b[A-Z]{2,6}\.\d+\b`)
+var markdownAlertPattern = regexp.MustCompile(`^>\s*\[!([A-Z]+)\]`)
+var markdownReadmeLinkPattern = regexp.MustCompile(`\[[^\]]+\]\([^)]*README\.md(?:#[^)]*)?\)`)
+var legacyReferenceHeadingPattern = regexp.MustCompile(`^#{1,6}\s+.*\b(?:Forward|Backward) Reference\b`)
+var staleCoverageCommandPattern = regexp.MustCompile(`go test\s+-coverprofile\s+coverage\.out\s+\./\.\.\.`)
+var kebabSlugPattern = regexp.MustCompile(`^[a-z0-9]+(?:-[a-z0-9]+)*$`)
+var windowsAbsolutePathPattern = regexp.MustCompile(`^[A-Za-z]:[\\/]`)
 
 const expectedSchemaVersion = 1
+
+var (
+	curriculumTopLevelFields = []string{"schema_version", "sections", "items"}
+	curriculumSectionFields  = []string{"id", "number", "slug", "title", "path_prefix", "phase", "summary", "status", "entry_points", "outputs", "prerequisites"}
+	curriculumItemFields     = []string{"id", "section_id", "slug", "title", "type", "subtype", "level", "status", "verification_mode", "path", "prerequisites", "run_command", "test_command", "starter_path", "next_items"}
+	curriculumSectionArrays  = []string{"entry_points", "outputs", "prerequisites"}
+	curriculumItemArrays     = []string{"prerequisites", "next_items"}
+)
 
 type canonicalSectionContract struct {
 	ID          string
@@ -177,6 +199,7 @@ func Validate(root string, report func(string)) (Result, error) {
 	}
 
 	markdownErrors := validateMarkdownSurfaces(root, report)
+	standardsErrors := validateRepositoryStandards(root, report)
 
 	return Result{
 		FilesScanned:     filesScanned,
@@ -184,7 +207,7 @@ func Validate(root string, report func(string)) (Result, error) {
 		V2ItemCount:      v2ItemCount,
 		PlaceholderCount: v2PlaceholderCount,
 		HasV2:            hasV2,
-		ErrorCount:       runErrors + v2Errors + markdownErrors,
+		ErrorCount:       runErrors + v2Errors + markdownErrors + standardsErrors,
 	}, nil
 }
 
@@ -218,6 +241,9 @@ func isImplementedItem(item V2Item) bool {
 func cleanRepoPath(path string) (string, bool) {
 	path = strings.TrimSpace(path)
 	if path == "" {
+		return "", false
+	}
+	if strings.Contains(path, "\\") || strings.HasPrefix(path, "//") || windowsAbsolutePathPattern.MatchString(path) {
 		return "", false
 	}
 
@@ -280,7 +306,7 @@ func extractCommandTargets(command string) ([]string, error) {
 			continue
 		}
 		target := strings.TrimSuffix(match, "/...")
-		targets = append(targets, filepath.Clean(strings.TrimPrefix(target, "./")))
+		targets = append(targets, filepath.ToSlash(filepath.Clean(strings.TrimPrefix(target, "./"))))
 	}
 
 	if len(targets) == 0 {
@@ -333,7 +359,7 @@ func validateRunPaths(root string, report func(string)) (int, int, error) {
 			return err
 		}
 
-		cleanPath := filepath.Clean(relPath)
+		cleanPath := filepath.ToSlash(filepath.Clean(relPath))
 		if !shouldScanRunPaths(cleanPath) {
 			return nil
 		}
@@ -359,8 +385,8 @@ func validateRunPaths(root string, report func(string)) (int, int, error) {
 				}
 
 				trimmedMatch := strings.TrimSuffix(match, "/...")
-				target := filepath.Clean(strings.TrimPrefix(trimmedMatch, "./"))
-				alternateTarget := filepath.Clean(filepath.Join(filepath.Dir(cleanPath), strings.TrimPrefix(trimmedMatch, "./")))
+				target := filepath.ToSlash(filepath.Clean(strings.TrimPrefix(trimmedMatch, "./")))
+				alternateTarget := filepath.ToSlash(filepath.Clean(filepath.Join(filepath.Dir(cleanPath), strings.TrimPrefix(trimmedMatch, "./"))))
 
 				if pathExists(root, target) || pathExists(root, alternateTarget) {
 					continue
@@ -400,10 +426,11 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 		return 0, 0, 0, 0, false, fmt.Errorf("Failed to parse curriculum.v2.json: %v", err)
 	}
 
-	errorsFound := 0
+	errorsFound := validateV2CurriculumJSONContract(data, cur, report)
 	placeholderCount := 0
 	sectionIDs := make(map[string]V2Section, len(cur.Sections))
 	itemIDs := make(map[string]V2Item, len(cur.Items))
+	prefixOwners := make(map[string]string)
 
 	if cur.SchemaVersion != expectedSchemaVersion {
 		report(fmt.Sprintf("Invalid v2 schema_version: %d (expected %d)", cur.SchemaVersion, expectedSchemaVersion))
@@ -415,6 +442,22 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 			report("Invalid v2 section: missing id")
 			errorsFound++
 			continue
+		}
+		if !sectionIDPattern.MatchString(s.ID) {
+			report(fmt.Sprintf("Invalid v2 section id format: %s", s.ID))
+			errorsFound++
+		}
+		if s.Number != "" && sectionNumberFromID(s.ID) != "" && s.Number != sectionNumberFromID(s.ID) {
+			report(fmt.Sprintf("Invalid v2 section number alignment: %s -> %s", s.ID, s.Number))
+			errorsFound++
+		}
+		if s.Slug != "" && !kebabSlugPattern.MatchString(s.Slug) {
+			report(fmt.Sprintf("Invalid v2 section slug format: %s -> %s", s.ID, s.Slug))
+			errorsFound++
+		}
+		if s.PathPrefix != "" && s.Number != "" && s.Slug != "" && s.PathPrefix != s.Number+"-"+s.Slug {
+			report(fmt.Sprintf("Invalid v2 section path_prefix alignment: %s -> %s (expected %s-%s)", s.ID, s.PathPrefix, s.Number, s.Slug))
+			errorsFound++
 		}
 
 		if _, exists := sectionIDs[s.ID]; exists {
@@ -443,6 +486,10 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 			errorsFound++
 		}
 
+		errorsFound += validateNoDuplicateStrings(fmt.Sprintf("v2 section %s entry_points", s.ID), s.EntryPoints, report)
+		errorsFound += validateNoDuplicateStrings(fmt.Sprintf("v2 section %s outputs", s.ID), s.Outputs, report)
+		errorsFound += validateNoDuplicateStrings(fmt.Sprintf("v2 section %s prerequisites", s.ID), s.Prerequisites, report)
+
 		sectionIDs[s.ID] = s
 	}
 
@@ -451,6 +498,19 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 			report("Invalid v2 item: missing id")
 			errorsFound++
 			continue
+		}
+		if !isValidCurriculumItemID(item.ID) {
+			report(fmt.Sprintf("Invalid v2 item id format: %s", item.ID))
+			errorsFound++
+		}
+		prefix, _, ok := splitCurriculumID(item.ID)
+		if ok {
+			if owner, exists := prefixOwners[prefix]; exists && owner != item.SectionID {
+				report(fmt.Sprintf("Invalid v2 item prefix ownership: %s is used in %s and %s", prefix, owner, item.SectionID))
+				errorsFound++
+			} else if !exists {
+				prefixOwners[prefix] = item.SectionID
+			}
 		}
 
 		if _, exists := itemIDs[item.ID]; exists {
@@ -461,6 +521,10 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 
 		if item.SectionID == "" || item.Slug == "" || item.Title == "" || item.Type == "" || item.Level == "" || item.VerificationMode == "" || item.Path == "" {
 			report(fmt.Sprintf("Invalid v2 item metadata: %s requires section_id, slug, title, type, level, verification_mode, and path", item.ID))
+			errorsFound++
+		}
+		if item.Slug != "" && !kebabSlugPattern.MatchString(item.Slug) {
+			report(fmt.Sprintf("Invalid v2 item slug format: %s -> %s", item.ID, item.Slug))
 			errorsFound++
 		}
 
@@ -589,10 +653,14 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 			errorsFound++
 		}
 
+		errorsFound += validateNoDuplicateStrings(fmt.Sprintf("v2 item %s prerequisites", item.ID), item.Prerequisites, report)
+		errorsFound += validateNoDuplicateStrings(fmt.Sprintf("v2 item %s next_items", item.ID), item.NextItems, report)
+
 		itemIDs[item.ID] = item
 	}
 
 	errorsFound += validateV2ArchitectureContract(cur.Sections, report)
+	errorsFound += validateV2ItemOrdering(cur.Items, sectionIDs, report)
 
 	for _, s := range cur.Sections {
 		for _, prereqID := range s.Prerequisites {
@@ -619,6 +687,11 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 
 	for _, item := range cur.Items {
 		for _, prereqID := range item.Prerequisites {
+			if prereqID == item.ID {
+				report(fmt.Sprintf("Invalid v2 prerequisite: %s cannot reference itself", item.ID))
+				errorsFound++
+				continue
+			}
 			if _, itemExists := itemIDs[prereqID]; itemExists {
 				continue
 			}
@@ -630,6 +703,11 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 		}
 
 		for _, nextID := range item.NextItems {
+			if nextID == item.ID {
+				report(fmt.Sprintf("Invalid v2 next item: %s cannot reference itself", item.ID))
+				errorsFound++
+				continue
+			}
 			if _, itemExists := itemIDs[nextID]; itemExists {
 				continue
 			}
@@ -643,6 +721,7 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 
 	errorsFound += validateV2LessonNavigation(root, cur.Items, report)
 	errorsFound += validateV2LessonSourceHeaders(root, cur.Items, report)
+	errorsFound += validateV2LessonSourceStandards(root, cur.Items, report)
 	errorsFound += validateV2ReadmeNavigation(root, cur.Items, report)
 	errorsFound += validateFlagshipProjects(root, sectionIDs, cur.Items, report)
 	errorsFound += validateV2SectionLabels(root, sectionIDs, cur.Items, report)
@@ -652,6 +731,227 @@ func validateV2Curriculum(root string, report func(string)) (int, int, int, int,
 	errorsFound += validateEngineeringReadmeContracts(root, cur.Items, report)
 
 	return len(cur.Sections), len(cur.Items), placeholderCount, errorsFound, true, nil
+}
+
+func validateV2CurriculumJSONContract(data []byte, cur V2Curriculum, report func(string)) int {
+	errorsFound := 0
+	errorsFound += validateDuplicateJSONKeys(data, report)
+	errorsFound += validateV2CurriculumRawShape(data, report)
+
+	canonical, err := canonicalV2CurriculumJSON(cur)
+	if err != nil {
+		report(fmt.Sprintf("Invalid v2 curriculum JSON contract: failed to render canonical curriculum.v2.json -> %v", err))
+		return errorsFound + 1
+	}
+	if !bytes.Equal(data, canonical) {
+		report("Invalid v2 curriculum JSON formatting: curriculum.v2.json must use canonical field order, two-space indentation, [] arrays, and one trailing newline")
+		errorsFound++
+	}
+
+	return errorsFound
+}
+
+func validateDuplicateJSONKeys(data []byte, report func(string)) int {
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	errorsFound, err := scanJSONValueForDuplicateKeys(decoder, "$", report)
+	if err != nil {
+		report(fmt.Sprintf("Invalid v2 curriculum JSON structure: %v", err))
+		return errorsFound + 1
+	}
+
+	if decoder.More() {
+		report("Invalid v2 curriculum JSON structure: trailing JSON data")
+		return errorsFound + 1
+	}
+
+	return errorsFound
+}
+
+func scanJSONValueForDuplicateKeys(decoder *json.Decoder, path string, report func(string)) (int, error) {
+	token, err := decoder.Token()
+	if err != nil {
+		return 0, err
+	}
+
+	delim, ok := token.(json.Delim)
+	if !ok {
+		return 0, nil
+	}
+
+	errorsFound := 0
+	switch delim {
+	case '{':
+		seen := map[string]bool{}
+		for decoder.More() {
+			keyToken, err := decoder.Token()
+			if err != nil {
+				return errorsFound, err
+			}
+			key, ok := keyToken.(string)
+			if !ok {
+				return errorsFound, fmt.Errorf("%s object key is not a string", path)
+			}
+
+			childPath := path + "." + key
+			if seen[key] {
+				report(fmt.Sprintf("Duplicate JSON key in curriculum.v2.json: %s", childPath))
+				errorsFound++
+			}
+			seen[key] = true
+
+			childErrors, err := scanJSONValueForDuplicateKeys(decoder, childPath, report)
+			errorsFound += childErrors
+			if err != nil {
+				return errorsFound, err
+			}
+		}
+
+		if _, err := decoder.Token(); err != nil {
+			return errorsFound, err
+		}
+	case '[':
+		idx := 0
+		for decoder.More() {
+			childErrors, err := scanJSONValueForDuplicateKeys(decoder, fmt.Sprintf("%s[%d]", path, idx), report)
+			errorsFound += childErrors
+			if err != nil {
+				return errorsFound, err
+			}
+			idx++
+		}
+
+		if _, err := decoder.Token(); err != nil {
+			return errorsFound, err
+		}
+	default:
+		return errorsFound, fmt.Errorf("%s has unexpected delimiter %q", path, delim)
+	}
+
+	return errorsFound, nil
+}
+
+func validateV2CurriculumRawShape(data []byte, report func(string)) int {
+	var top map[string]json.RawMessage
+	if err := json.Unmarshal(data, &top); err != nil {
+		report(fmt.Sprintf("Invalid v2 curriculum JSON structure: %v", err))
+		return 1
+	}
+
+	errorsFound := validateJSONObjectFields("$", top, curriculumTopLevelFields, report)
+	errorsFound += validateJSONArrayRawField("$", top, "sections", report)
+	errorsFound += validateJSONArrayRawField("$", top, "items", report)
+
+	var sections []map[string]json.RawMessage
+	if raw, ok := top["sections"]; ok {
+		if err := json.Unmarshal(raw, &sections); err != nil {
+			report(fmt.Sprintf("Invalid v2 curriculum JSON structure: $.sections must be an array of objects -> %v", err))
+			errorsFound++
+		}
+	}
+	for idx, section := range sections {
+		path := fmt.Sprintf("$.sections[%d]", idx)
+		errorsFound += validateJSONObjectFields(path, section, curriculumSectionFields, report)
+		for _, field := range curriculumSectionArrays {
+			errorsFound += validateJSONArrayRawField(path, section, field, report)
+		}
+	}
+
+	var items []map[string]json.RawMessage
+	if raw, ok := top["items"]; ok {
+		if err := json.Unmarshal(raw, &items); err != nil {
+			report(fmt.Sprintf("Invalid v2 curriculum JSON structure: $.items must be an array of objects -> %v", err))
+			errorsFound++
+		}
+	}
+	for idx, item := range items {
+		path := fmt.Sprintf("$.items[%d]", idx)
+		errorsFound += validateJSONObjectFields(path, item, curriculumItemFields, report)
+		for _, field := range curriculumItemArrays {
+			errorsFound += validateJSONArrayRawField(path, item, field, report)
+		}
+	}
+
+	return errorsFound
+}
+
+func validateJSONObjectFields(path string, object map[string]json.RawMessage, expected []string, report func(string)) int {
+	errorsFound := 0
+	expectedSet := make(map[string]bool, len(expected))
+	for _, field := range expected {
+		expectedSet[field] = true
+		if _, exists := object[field]; !exists {
+			report(fmt.Sprintf("Invalid v2 curriculum JSON object: %s missing field %s", path, field))
+			errorsFound++
+		}
+	}
+
+	for field := range object {
+		if expectedSet[field] {
+			continue
+		}
+		report(fmt.Sprintf("Invalid v2 curriculum JSON object: %s has unknown field %s", path, field))
+		errorsFound++
+	}
+
+	return errorsFound
+}
+
+func validateJSONArrayRawField(path string, object map[string]json.RawMessage, field string, report func(string)) int {
+	raw, exists := object[field]
+	if !exists {
+		return 0
+	}
+
+	trimmed := bytes.TrimSpace(raw)
+	if bytes.Equal(trimmed, []byte("null")) {
+		report(fmt.Sprintf("Invalid v2 curriculum JSON array: %s.%s must be [] instead of null", path, field))
+		return 1
+	}
+	if len(trimmed) == 0 || trimmed[0] != '[' {
+		report(fmt.Sprintf("Invalid v2 curriculum JSON array: %s.%s must be an array", path, field))
+		return 1
+	}
+
+	return 0
+}
+
+func canonicalV2CurriculumJSON(cur V2Curriculum) ([]byte, error) {
+	normalized := normalizeV2Curriculum(cur)
+	var output bytes.Buffer
+	encoder := json.NewEncoder(&output)
+	encoder.SetEscapeHTML(false)
+	encoder.SetIndent("", "  ")
+	if err := encoder.Encode(normalized); err != nil {
+		return nil, err
+	}
+	return output.Bytes(), nil
+}
+
+func normalizeV2Curriculum(cur V2Curriculum) V2Curriculum {
+	normalized := cur
+	normalized.Sections = make([]V2Section, len(cur.Sections))
+	for idx, section := range cur.Sections {
+		normalized.Sections[idx] = section
+		normalized.Sections[idx].EntryPoints = normalizeStringSlice(section.EntryPoints)
+		normalized.Sections[idx].Outputs = normalizeStringSlice(section.Outputs)
+		normalized.Sections[idx].Prerequisites = normalizeStringSlice(section.Prerequisites)
+	}
+
+	normalized.Items = make([]V2Item, len(cur.Items))
+	for idx, item := range cur.Items {
+		normalized.Items[idx] = item
+		normalized.Items[idx].Prerequisites = normalizeStringSlice(item.Prerequisites)
+		normalized.Items[idx].NextItems = normalizeStringSlice(item.NextItems)
+	}
+
+	return normalized
+}
+
+func normalizeStringSlice(values []string) []string {
+	if values == nil {
+		return []string{}
+	}
+	return values
 }
 
 func sameStringSlice(a, b []string) bool {
@@ -666,6 +966,164 @@ func sameStringSlice(a, b []string) bool {
 	}
 
 	return true
+}
+
+func isValidCurriculumItemID(id string) bool {
+	prefix, _, ok := splitCurriculumID(id)
+	return ok && curriculumPrefixPattern.MatchString(prefix)
+}
+
+func sectionNumberFromID(id string) string {
+	if !sectionIDPattern.MatchString(id) {
+		return ""
+	}
+	return strings.TrimPrefix(id, "s")
+}
+
+func validateNoDuplicateStrings(label string, values []string, report func(string)) int {
+	errorsFound := 0
+	seen := make(map[string]bool, len(values))
+	for _, value := range values {
+		if value == "" {
+			report(fmt.Sprintf("Invalid %s: empty value", label))
+			errorsFound++
+			continue
+		}
+		if seen[value] {
+			report(fmt.Sprintf("Invalid %s: duplicate value %s", label, value))
+			errorsFound++
+			continue
+		}
+		seen[value] = true
+	}
+	return errorsFound
+}
+
+func validateV2ItemOrdering(items []V2Item, sections map[string]V2Section, report func(string)) int {
+	errorsFound := 0
+	sectionOrder := canonicalSectionOrder()
+	lastSectionIndex := -1
+	var lastItem V2Item
+	hasLastItem := false
+
+	for _, item := range items {
+		sectionIndex, ok := sectionOrder[item.SectionID]
+		if !ok {
+			continue
+		}
+
+		if sectionIndex < lastSectionIndex {
+			report(fmt.Sprintf("Invalid v2 item order: %s appears after a later section item", item.ID))
+			errorsFound++
+		}
+
+		if hasLastItem && sectionIndex == lastSectionIndex && compareCurriculumItemOrder(lastItem, item) > 0 {
+			report(fmt.Sprintf("Invalid v2 item order: %s should appear before %s by path and ID order", item.ID, lastItem.ID))
+			errorsFound++
+		}
+
+		if section, exists := sections[item.SectionID]; exists {
+			cleanItemPath := filepath.ToSlash(filepath.Clean(item.Path))
+			cleanSectionPath := filepath.ToSlash(filepath.Clean(section.PathPrefix))
+			if cleanItemPath != cleanSectionPath && !strings.HasPrefix(cleanItemPath, cleanSectionPath+"/") {
+				report(fmt.Sprintf("Invalid v2 item path prefix: %s -> %s (expected under %s)", item.ID, item.Path, section.PathPrefix))
+				errorsFound++
+			}
+		}
+
+		lastSectionIndex = sectionIndex
+		lastItem = item
+		hasLastItem = true
+	}
+
+	return errorsFound
+}
+
+func canonicalSectionOrder() map[string]int {
+	order := make(map[string]int, len(canonicalV2Sections))
+	for idx, section := range canonicalV2Sections {
+		order[section.ID] = idx
+	}
+	return order
+}
+
+func compareCurriculumItemOrder(a, b V2Item) int {
+	if pathCompare := compareNaturalPath(a.Path, b.Path); pathCompare != 0 {
+		return pathCompare
+	}
+	return compareCurriculumID(a.ID, b.ID)
+}
+
+func compareCurriculumID(a, b string) int {
+	aPrefix, aNumber, aOK := splitCurriculumID(a)
+	bPrefix, bNumber, bOK := splitCurriculumID(b)
+	if aOK && bOK {
+		if aPrefix != bPrefix {
+			return strings.Compare(aPrefix, bPrefix)
+		}
+		switch {
+		case aNumber < bNumber:
+			return -1
+		case aNumber > bNumber:
+			return 1
+		default:
+			return 0
+		}
+	}
+	return strings.Compare(a, b)
+}
+
+func compareNaturalPath(a, b string) int {
+	aParts := strings.Split(filepath.ToSlash(filepath.Clean(a)), "/")
+	bParts := strings.Split(filepath.ToSlash(filepath.Clean(b)), "/")
+	for idx := 0; idx < len(aParts) && idx < len(bParts); idx++ {
+		if partCompare := compareNaturalPart(aParts[idx], bParts[idx]); partCompare != 0 {
+			return partCompare
+		}
+	}
+
+	switch {
+	case len(aParts) < len(bParts):
+		return -1
+	case len(aParts) > len(bParts):
+		return 1
+	default:
+		return 0
+	}
+}
+
+func compareNaturalPart(a, b string) int {
+	aNumber, aRest, aHasNumber := leadingNumber(a)
+	bNumber, bRest, bHasNumber := leadingNumber(b)
+	if aHasNumber && bHasNumber && aNumber != bNumber {
+		if aNumber < bNumber {
+			return -1
+		}
+		return 1
+	}
+	if aHasNumber && bHasNumber {
+		return strings.Compare(aRest, bRest)
+	}
+	return strings.Compare(a, b)
+}
+
+func leadingNumber(value string) (int, string, bool) {
+	idx := 0
+	for idx < len(value) {
+		r := rune(value[idx])
+		if !unicode.IsDigit(r) {
+			break
+		}
+		idx++
+	}
+	if idx == 0 {
+		return 0, value, false
+	}
+	number, err := strconv.Atoi(value[:idx])
+	if err != nil {
+		return 0, value, false
+	}
+	return number, value[idx:], true
 }
 
 func validateV2ArchitectureContract(sections []V2Section, report func(string)) int {
@@ -1443,6 +1901,335 @@ func validateV2LessonSourceHeaders(root string, items []V2Item, report func(stri
 	return errorsFound
 }
 
+func validateV2LessonSourceStandards(root string, items []V2Item, report func(string)) int {
+	errorsFound := 0
+	seen := map[string]bool{}
+
+	for _, item := range items {
+		if isPlaceholderItem(item) {
+			continue
+		}
+
+		paths := curriculumGoSurfacePaths(root, item)
+		for _, relPath := range paths {
+			if seen[relPath] {
+				continue
+			}
+			seen[relPath] = true
+
+			data, cleanPath, err := readRepoFile(root, relPath)
+			if err != nil {
+				report(fmt.Sprintf("Failed to read v2 source standards surface: %s -> %v", filepath.ToSlash(relPath), err))
+				errorsFound++
+				continue
+			}
+
+			mainPath := filepath.ToSlash(filepath.Join(item.Path, "main.go"))
+			if cleanPath == filepath.ToSlash(filepath.Clean(mainPath)) {
+				errorsFound += validateCompletedLessonMainHeader(data, cleanPath, item, report)
+			}
+			errorsFound += validateMachineRoleComments(data, cleanPath, report)
+		}
+	}
+
+	return errorsFound
+}
+
+func curriculumGoSurfacePaths(root string, item V2Item) []string {
+	roots := []string{item.Path}
+	if strings.TrimSpace(item.StarterPath) != "" {
+		roots = append(roots, item.StarterPath)
+	}
+
+	seen := map[string]bool{}
+	var paths []string
+	for _, relRoot := range roots {
+		absRoot, cleanRoot, ok := repoPath(root, relRoot)
+		if !ok {
+			continue
+		}
+		info, err := os.Stat(absRoot)
+		if err != nil {
+			continue
+		}
+		if !info.IsDir() {
+			if filepath.Ext(cleanRoot) == ".go" {
+				paths = append(paths, cleanRoot)
+			}
+			continue
+		}
+
+		_ = filepath.WalkDir(absRoot, func(path string, d os.DirEntry, err error) error {
+			if err != nil {
+				return nil
+			}
+			if d.IsDir() {
+				if shouldSkipStandardsDir(d.Name()) {
+					return filepath.SkipDir
+				}
+				return nil
+			}
+			if filepath.Ext(path) != ".go" {
+				return nil
+			}
+
+			relPath, err := filepath.Rel(root, path)
+			if err != nil {
+				return nil
+			}
+			cleanPath := filepath.ToSlash(filepath.Clean(relPath))
+			if seen[cleanPath] {
+				return nil
+			}
+			seen[cleanPath] = true
+			paths = append(paths, cleanPath)
+			return nil
+		})
+	}
+
+	sort.Strings(paths)
+	return paths
+}
+
+func validateCompletedLessonMainHeader(data []byte, cleanPath string, item V2Item, report func(string)) int {
+	text := strings.ReplaceAll(string(data), "\r\n", "\n")
+	errorsFound := 0
+
+	if !strings.HasPrefix(text, "// Copyright (c) 2026 Rasel Hossen\n// Licensed under The Go Engineer License v1.0\n") {
+		report(fmt.Sprintf("Invalid v2 lesson source header: %s -> %s must start with copyright and license lines", item.ID, cleanPath))
+		errorsFound++
+	}
+
+	if sectionNumber := canonicalSectionNumber(item.SectionID); sectionNumber != "" {
+		sectionLabel := "Section " + sectionNumber + ":"
+		if !strings.Contains(text, sectionLabel) {
+			report(fmt.Sprintf("Invalid v2 lesson source header: %s -> %s missing %s", item.ID, cleanPath, sectionLabel))
+			errorsFound++
+		}
+	}
+	if !strings.Contains(text, "WHAT YOU'LL LEARN:") {
+		report(fmt.Sprintf("Invalid v2 lesson source header: %s -> %s missing WHAT YOU'LL LEARN", item.ID, cleanPath))
+		errorsFound++
+	}
+	if !strings.Contains(text, "WHY THIS MATTERS:") {
+		report(fmt.Sprintf("Invalid v2 lesson source header: %s -> %s missing WHY THIS MATTERS", item.ID, cleanPath))
+		errorsFound++
+	}
+	if strings.TrimSpace(item.RunCommand) != "" {
+		runCount := countLessonRunHeaders(data)
+		if runCount != 1 {
+			report(fmt.Sprintf("Invalid v2 lesson run header count: %s -> %s has %d RUN headers (expected 1)", item.ID, cleanPath, runCount))
+			errorsFound++
+		}
+	}
+	if !strings.Contains(text, "KEY TAKEAWAY:") {
+		report(fmt.Sprintf("Invalid v2 lesson source footer: %s -> %s missing KEY TAKEAWAY", item.ID, cleanPath))
+		errorsFound++
+	}
+	if len(item.NextItems) > 0 && !strings.HasPrefix(item.NextItems[0], "s") && !strings.Contains(text, "NEXT UP:") {
+		report(fmt.Sprintf("Invalid v2 lesson source footer: %s -> %s missing NEXT UP", item.ID, cleanPath))
+		errorsFound++
+	}
+
+	return errorsFound
+}
+
+func canonicalSectionNumber(sectionID string) string {
+	for _, section := range canonicalV2Sections {
+		if section.ID == sectionID {
+			return section.Number
+		}
+	}
+	return ""
+}
+
+func countLessonRunHeaders(data []byte) int {
+	scanner := bufio.NewScanner(strings.NewReader(string(data)))
+	count := 0
+	for scanner.Scan() {
+		if strings.HasPrefix(strings.TrimSpace(scanner.Text()), "// RUN:") {
+			count++
+		}
+	}
+	return count
+}
+
+func validateMachineRoleComments(data []byte, cleanPath string, report func(string)) int {
+	fileSet := token.NewFileSet()
+	parsed, err := parser.ParseFile(fileSet, cleanPath, data, parser.ParseComments)
+	if err != nil {
+		report(fmt.Sprintf("Invalid Go source syntax in v2 source standards surface: %s -> %v", cleanPath, err))
+		return 1
+	}
+
+	errorsFound := 0
+	for _, decl := range parsed.Decls {
+		switch typed := decl.(type) {
+		case *ast.FuncDecl:
+			if shouldSkipMachineRoleFunction(typed.Name.Name) {
+				continue
+			}
+			symbols := []string{typed.Name.Name}
+			if receiver := receiverTypeName(typed.Recv); receiver != "" {
+				symbols = append([]string{receiver + "." + typed.Name.Name}, symbols...)
+			}
+			if hasMachineRoleComment(typed.Doc, symbols) {
+				continue
+			}
+			line := fileSet.Position(typed.Pos()).Line
+			report(fmt.Sprintf("Missing Machine Role comment: %s:%d -> %s", cleanPath, line, symbols[0]))
+			errorsFound++
+		case *ast.GenDecl:
+			if typed.Tok == token.IMPORT {
+				continue
+			}
+			for _, spec := range typed.Specs {
+				switch spec := spec.(type) {
+				case *ast.TypeSpec:
+					if hasMachineRoleComment(preferredDoc(spec.Doc, typed.Doc), []string{spec.Name.Name}) {
+						continue
+					}
+					line := fileSet.Position(spec.Pos()).Line
+					report(fmt.Sprintf("Missing Machine Role comment: %s:%d -> %s", cleanPath, line, spec.Name.Name))
+					errorsFound++
+				case *ast.ValueSpec:
+					if !shouldRequireMachineRoleValueSpec(typed.Tok, spec) {
+						continue
+					}
+					for _, name := range spec.Names {
+						if hasMachineRoleComment(preferredDoc(spec.Doc, typed.Doc), []string{name.Name}) {
+							continue
+						}
+						line := fileSet.Position(name.Pos()).Line
+						report(fmt.Sprintf("Missing Machine Role comment: %s:%d -> %s", cleanPath, line, name.Name))
+						errorsFound++
+					}
+				}
+			}
+		}
+	}
+
+	return errorsFound
+}
+
+func shouldRequireMachineRoleValueSpec(tokenType token.Token, spec *ast.ValueSpec) bool {
+	if tokenType == token.CONST {
+		return false
+	}
+
+	for _, name := range spec.Names {
+		if ast.IsExported(name.Name) {
+			return true
+		}
+	}
+	if isMachineRoleValueType(spec.Type) {
+		return true
+	}
+	for _, value := range spec.Values {
+		if isMachineRoleValueType(value) {
+			return true
+		}
+	}
+	return false
+}
+
+func isMachineRoleValueType(expr ast.Expr) bool {
+	switch typed := expr.(type) {
+	case *ast.ArrayType, *ast.MapType, *ast.ChanType, *ast.FuncType:
+		return true
+	case *ast.UnaryExpr:
+		return isMachineRoleValueType(typed.X)
+	case *ast.CompositeLit:
+		return isMachineRoleValueType(typed.Type)
+	case *ast.CallExpr:
+		return isMachineRoleValueType(typed.Fun)
+	case *ast.SelectorExpr:
+		return typed.Sel.Name == "Mutex" ||
+			typed.Sel.Name == "RWMutex" ||
+			typed.Sel.Name == "WaitGroup" ||
+			typed.Sel.Name == "Pool" ||
+			typed.Sel.Name == "Map" ||
+			typed.Sel.Name == "Context"
+	case *ast.Ident:
+		return typed.Name == "Mutex" ||
+			typed.Name == "RWMutex" ||
+			typed.Name == "WaitGroup" ||
+			typed.Name == "Pool" ||
+			typed.Name == "Map" ||
+			typed.Name == "Context"
+	default:
+		return false
+	}
+}
+
+func shouldSkipMachineRoleFunction(name string) bool {
+	if name == "main" || name == "init" {
+		return true
+	}
+	for _, prefix := range []string{"Test", "Benchmark", "Example", "Fuzz"} {
+		if strings.HasPrefix(name, prefix) {
+			return true
+		}
+	}
+	return false
+}
+
+func receiverTypeName(receiver *ast.FieldList) string {
+	if receiver == nil || len(receiver.List) == 0 {
+		return ""
+	}
+	return exprTypeName(receiver.List[0].Type)
+}
+
+func exprTypeName(expr ast.Expr) string {
+	switch typed := expr.(type) {
+	case *ast.Ident:
+		return typed.Name
+	case *ast.StarExpr:
+		return exprTypeName(typed.X)
+	case *ast.SelectorExpr:
+		return typed.Sel.Name
+	case *ast.IndexExpr:
+		return exprTypeName(typed.X)
+	case *ast.IndexListExpr:
+		return exprTypeName(typed.X)
+	default:
+		return ""
+	}
+}
+
+func preferredDoc(primary, fallback *ast.CommentGroup) *ast.CommentGroup {
+	if primary != nil {
+		return primary
+	}
+	return fallback
+}
+
+func hasMachineRoleComment(group *ast.CommentGroup, symbols []string) bool {
+	if group == nil {
+		return false
+	}
+
+	for _, comment := range group.List {
+		line := strings.TrimSpace(comment.Text)
+		line = strings.TrimPrefix(line, "//")
+		line = strings.TrimPrefix(line, "/*")
+		line = strings.TrimSuffix(line, "*/")
+		line = strings.TrimSpace(line)
+		for _, symbol := range symbols {
+			if !strings.HasPrefix(line, symbol+" (") {
+				continue
+			}
+			_, role, ok := strings.Cut(line, "):")
+			if ok && strings.TrimSpace(role) != "" {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
 func lessonCommentHeaderValue(data []byte, prefix string) (string, bool) {
 	scanner := bufio.NewScanner(strings.NewReader(string(data)))
 	for scanner.Scan() {
@@ -1688,7 +2475,7 @@ func validateMarkdownLocalLinks(root, relPath string, report func(string)) int {
 		}
 
 		target = strings.SplitN(target, "#", 2)[0]
-		resolved := filepath.Clean(filepath.Join(filepath.Dir(cleanPath), filepath.FromSlash(target)))
+		resolved := filepath.ToSlash(filepath.Clean(filepath.Join(filepath.Dir(cleanPath), filepath.FromSlash(target))))
 		if !pathExists(root, resolved) {
 			report(fmt.Sprintf("Broken local doc link: %s -> %s", cleanPath, target))
 			errorsFound++
@@ -1696,4 +2483,222 @@ func validateMarkdownLocalLinks(root, relPath string, report func(string)) int {
 	}
 
 	return errorsFound
+}
+
+func validateRepositoryStandards(root string, report func(string)) int {
+	errorsFound := 0
+	errorsFound += validateCodeStandardsContract(root, report)
+	errorsFound += validateMarkdownStandards(root, report)
+	errorsFound += validateGoSourceCommentStandards(root, report)
+	return errorsFound
+}
+
+func validateCodeStandardsContract(root string, report func(string)) int {
+	data, cleanPath, err := readRepoFile(root, "CODE-STANDARDS.md")
+	if err != nil {
+		report(fmt.Sprintf("Invalid code standards contract: CODE-STANDARDS.md is required -> %v", err))
+		return 1
+	}
+
+	text := string(data)
+	errorsFound := 0
+	requiredSnippets := []struct {
+		name    string
+		snippet string
+	}{
+		{"standard layers", "## Standard Layers"},
+		{"production level taxonomy", "Level: Foundation | Core | Production | Stretch"},
+		{"canonical coverage command", "go test -coverprofile=coverage.out ./..."},
+		{"machine role doc-comment compatibility", "Machine Role comments can satisfy this requirement"},
+		{"cross-reference alert rules", "do not use legacy `Forward Reference` or `Backward Reference` labels"},
+		{"curriculum registry standard", "## Curriculum Registry Standard"},
+		{"lesson proof surface", "## Lesson Proof Surface"},
+		{"production-shaped code", "## Production-Shaped Code"},
+	}
+
+	for _, required := range requiredSnippets {
+		if strings.Contains(text, required.snippet) {
+			continue
+		}
+		report(fmt.Sprintf("Invalid code standards contract: %s missing %s", cleanPath, required.name))
+		errorsFound++
+	}
+
+	if strings.Contains(text, "AGENTS.md") {
+		report(fmt.Sprintf("Invalid code standards contract: %s references maintainer-only AGENTS.md", cleanPath))
+		errorsFound++
+	}
+
+	return errorsFound
+}
+
+func validateMarkdownStandards(root string, report func(string)) int {
+	errorsFound := 0
+
+	walkErr := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if d.IsDir() {
+			if shouldSkipStandardsDir(d.Name()) {
+				return filepath.SkipDir
+			}
+			return nil
+		}
+
+		if filepath.Ext(path) != ".md" {
+			return nil
+		}
+
+		relPath, err := filepath.Rel(root, path)
+		if err != nil {
+			return err
+		}
+
+		cleanPath := filepath.ToSlash(filepath.Clean(relPath))
+		errorsFound += validateMarkdownStandardsFile(root, cleanPath, report)
+		return nil
+	})
+	if walkErr != nil {
+		report(fmt.Sprintf("Failed to scan repository standards: %v", walkErr))
+		return errorsFound + 1
+	}
+
+	return errorsFound
+}
+
+func validateMarkdownStandardsFile(root, relPath string, report func(string)) int {
+	data, cleanPath, err := readRepoFile(root, relPath)
+	if err != nil {
+		report(fmt.Sprintf("Failed to read markdown standards surface: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	lines := strings.Split(strings.ReplaceAll(string(data), "\r\n", "\n"), "\n")
+	errorsFound := 0
+	for idx := 0; idx < len(lines); idx++ {
+		lineNo := idx + 1
+		line := strings.TrimSpace(lines[idx])
+
+		if staleCoverageCommandPattern.MatchString(line) {
+			report(fmt.Sprintf("Invalid verification command: %s:%d uses coverprofile without '='; use go test -coverprofile=coverage.out ./...", cleanPath, lineNo))
+			errorsFound++
+		}
+
+		if strings.Contains(line, "Foundation | Core | Stretch") && !strings.Contains(line, "Production") {
+			report(fmt.Sprintf("Invalid level taxonomy: %s:%d omits Production", cleanPath, lineNo))
+			errorsFound++
+		}
+
+		if legacyReferenceHeadingPattern.MatchString(line) {
+			report(fmt.Sprintf("Invalid markdown cross-reference heading: %s:%d uses Forward/Backward Reference heading; use [!TIP] or [!NOTE]", cleanPath, lineNo))
+			errorsFound++
+		}
+
+		matches := markdownAlertPattern.FindStringSubmatch(line)
+		if len(matches) != 2 {
+			continue
+		}
+
+		blockText := line + "\n"
+		for next := idx + 1; next < len(lines); next++ {
+			nextLine := strings.TrimSpace(lines[next])
+			if !strings.HasPrefix(nextLine, ">") {
+				break
+			}
+			blockText += nextLine + "\n"
+		}
+
+		errorsFound += validateMarkdownAlertBlock(cleanPath, lineNo, matches[1], blockText, report)
+	}
+
+	return errorsFound
+}
+
+func validateMarkdownAlertBlock(cleanPath string, lineNo int, alertType, blockText string, report func(string)) int {
+	if !curriculumReferencePattern.MatchString(blockText) {
+		return 0
+	}
+
+	errorsFound := 0
+	if alertType != "NOTE" && alertType != "TIP" {
+		report(fmt.Sprintf("Invalid markdown cross-reference alert: %s:%d uses [!%s] for curriculum reference; use [!NOTE] or [!TIP]", cleanPath, lineNo, alertType))
+		errorsFound++
+	}
+
+	if !markdownReadmeLinkPattern.MatchString(blockText) {
+		report(fmt.Sprintf("Invalid markdown cross-reference link: %s:%d references a curriculum ID without a clickable README.md link", cleanPath, lineNo))
+		errorsFound++
+	}
+
+	return errorsFound
+}
+
+func validateGoSourceCommentStandards(root string, report func(string)) int {
+	errorsFound := 0
+
+	walkErr := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if d.IsDir() {
+			if shouldSkipStandardsDir(d.Name()) {
+				return filepath.SkipDir
+			}
+			return nil
+		}
+
+		if filepath.Ext(path) != ".go" {
+			return nil
+		}
+
+		relPath, err := filepath.Rel(root, path)
+		if err != nil {
+			return err
+		}
+
+		cleanPath := filepath.ToSlash(filepath.Clean(relPath))
+		data, _, err := readRepoFile(root, cleanPath)
+		if err != nil {
+			report(fmt.Sprintf("Failed to read Go source standards surface: %s -> %v", cleanPath, err))
+			return nil
+		}
+
+		scanner := bufio.NewScanner(strings.NewReader(string(data)))
+		lineNo := 0
+		for scanner.Scan() {
+			lineNo++
+			line := strings.TrimSpace(scanner.Text())
+			if !strings.HasPrefix(line, "//") {
+				continue
+			}
+			if strings.Contains(line, "[!NOTE]") || strings.Contains(line, "[!TIP]") {
+				report(fmt.Sprintf("Invalid Go source cross-reference comment: %s:%d uses markdown alert syntax", cleanPath, lineNo))
+				errorsFound++
+			}
+		}
+		if err := scanner.Err(); err != nil {
+			report(fmt.Sprintf("Failed to scan Go source standards surface: %s -> %v", cleanPath, err))
+			errorsFound++
+		}
+
+		return nil
+	})
+	if walkErr != nil {
+		report(fmt.Sprintf("Failed to scan Go source standards: %v", walkErr))
+		return errorsFound + 1
+	}
+
+	return errorsFound
+}
+
+func shouldSkipStandardsDir(name string) bool {
+	switch name {
+	case ".git", "vendor", ".agents", ".cache", ".opencode", "temp":
+		return true
+	default:
+		return false
+	}
 }

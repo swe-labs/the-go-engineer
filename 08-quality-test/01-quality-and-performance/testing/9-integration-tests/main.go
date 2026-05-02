@@ -30,6 +30,7 @@ import (
 //
 // NEXT UP: TE.10 -> 08-quality-test/01-quality-and-performance/testing/10-golden-files
 
+// te_9Summary (Function): runs the te 9 summary step and keeps its inputs, outputs, or errors visible.
 func te_9Summary(input string) string {
 	return strings.TrimSpace(strings.ToLower(input))
 }

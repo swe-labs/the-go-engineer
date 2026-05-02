@@ -32,12 +32,14 @@ import (
 // ============================================================================
 
 // HelloWorldHandler simply returns a static greeting.
+// HelloWorldHandler (Function): simply returns a static greeting.
 func HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Hello World!"))
 }
 
 // EchoHandler reads the request POST body and sends it right back.
+// EchoHandler (Function): reads the request POST body and sends it right back.
 func EchoHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)

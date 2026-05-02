@@ -62,6 +62,7 @@ import (
 
 // slowLogProcessor compiles a regex and concatenates strings inside a hot loop.
 // Both are classic Go performance anti-patterns.
+// slowLogProcessor (Function): compiles a regex and concatenates strings inside a hot loop.
 func slowLogProcessor(lines []string) []string {
 	var results []string
 	for _, line := range lines {
@@ -79,6 +80,7 @@ func slowLogProcessor(lines []string) []string {
 // fastLogProcessor fixes both anti-patterns discovered via profiling.
 var alertPattern = regexp.MustCompile(`ERROR|WARN|FATAL`)
 
+// fastLogProcessor (Function): runs the fast log processor step and keeps its inputs, outputs, or errors visible.
 func fastLogProcessor(lines []string) []string {
 	results := make([]string, 0, len(lines)/10)
 	var sb strings.Builder
@@ -94,6 +96,7 @@ func fastLogProcessor(lines []string) []string {
 }
 
 // generateLogs creates a large synthetic log dataset for profiling.
+// generateLogs (Function): creates a large synthetic log dataset for profiling.
 func generateLogs(n int) []string {
 	templates := []string{
 		"INFO: user %d logged in",

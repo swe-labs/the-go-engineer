@@ -56,6 +56,7 @@ import (
 //
 
 // ServerConfig (Struct) aggregates configuration state for demonstration of reflection-based formatting verbs.
+// ServerConfig (Struct): (Struct) aggregates configuration state for demonstration of reflection-based formatting verbs.
 type ServerConfig struct {
 	Host     string
 	Port     int

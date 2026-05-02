@@ -35,6 +35,7 @@ import "fmt"
 // Panic is for "impossible" errors. Recover is the safety net at the boundary.
 //
 
+// accessDatabase (Function): runs the access database step and keeps its inputs, outputs, or errors visible.
 func accessDatabase(connected bool) {
 	// defer recover must be at the very top of the function you want to protect
 	defer func() {

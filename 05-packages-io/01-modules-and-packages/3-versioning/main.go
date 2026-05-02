@@ -61,22 +61,26 @@ import "fmt"
 //   go build -mod=vendor - build using vendored dependencies only
 
 // Version represents a semantic version.
+// Version (Struct): represents a semantic version.
 type Version struct {
 	Major int
 	Minor int
 	Patch int
 }
 
+// Version.String (Method): applies the string operation to receiver state at a visible boundary.
 func (v Version) String() string {
 	return fmt.Sprintf("v%d.%d.%d", v.Major, v.Minor, v.Patch)
 }
 
 // IsCompatible checks whether two versions share the same major version.
+// Version.IsCompatible (Method): checks whether two versions share the same major version.
 func (v Version) IsCompatible(other Version) bool {
 	return v.Major == other.Major
 }
 
 // IsNewer compares major, then minor, then patch.
+// Version.IsNewer (Method): compares major, then minor, then patch.
 func (v Version) IsNewer(other Version) bool {
 	if v.Major != other.Major {
 		return v.Major > other.Major

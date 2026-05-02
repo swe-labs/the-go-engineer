@@ -8,6 +8,7 @@ import (
 	"testing"
 )
 
+// newTestTaskAPI (Function): runs the new test task api step and keeps its inputs, outputs, or errors visible.
 func newTestTaskAPI() http.Handler {
 	store := NewTaskStore()
 	api := &TaskAPI{store: store}
@@ -95,6 +96,7 @@ func TestRESTAPIValidation(t *testing.T) {
 	}
 }
 
+// serveRequest (Function): runs the serve request step and keeps its inputs, outputs, or errors visible.
 func serveRequest(handler http.Handler, method, path, body string) *httptest.ResponseRecorder {
 	req := httptest.NewRequest(method, path, strings.NewReader(body))
 	if body != "" {

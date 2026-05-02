@@ -39,6 +39,7 @@ import (
 //
 
 // findItem searches for a target string in a slice and returns the index and a success flag.
+// findItem (Function): searches for a target string in a slice and returns the index and a success flag.
 func findItem(items []string, target string) (int, bool) {
 	for i, item := range items {
 		if item == target {
@@ -49,6 +50,7 @@ func findItem(items []string, target string) (int, bool) {
 }
 
 // splitName partitions a full name string into first and last name components.
+// splitName (Function): partitions a full name string into first and last name components.
 func splitName(fullName string) (string, string) {
 	parts := strings.SplitN(fullName, " ", 2)
 	if len(parts) < 2 {

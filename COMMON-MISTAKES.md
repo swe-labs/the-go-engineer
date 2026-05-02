@@ -309,9 +309,19 @@ go func() {
 ```bash
 go build ./...
 go vet ./...
+unformatted=$(gofmt -l .); test -z "$unformatted" || (echo "$unformatted" && exit 1)
+go mod tidy
+git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
+go test -coverprofile=coverage.out ./...
 go run ./scripts/validate_curriculum.go
+```
+
+On PowerShell, quote the coverage flag if needed:
+
+```powershell
+go test "-coverprofile=coverage.out" ./...
 ```
 
 Recommended when installed:

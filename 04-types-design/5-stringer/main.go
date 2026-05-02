@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -34,17 +35,20 @@ import "fmt"
 // Section 04: Types & Design - Stringer
 
 // HTTPStatus represents a network response status code and message.
+// HTTPStatus (Struct): represents a network response status code and message.
 type HTTPStatus struct {
 	Code    int
 	Message string
 }
 
 // String implements the fmt.Stringer interface for HTTPStatus.
+// HTTPStatus.String (Method): implements the fmt.Stringer interface for HTTPStatus.
 func (s HTTPStatus) String() string {
 	return fmt.Sprintf("HTTP %d: %s", s.Code, s.Message)
 }
 
 // Weekday represents a day of the week as an enumerated integer.
+// Weekday (Type): represents a day of the week as an enumerated integer.
 type Weekday int
 
 const (
@@ -58,6 +62,7 @@ const (
 )
 
 // String implements the fmt.Stringer interface for Weekday.
+// Weekday.String (Method): implements the fmt.Stringer interface for Weekday.
 func (d Weekday) String() string {
 	names := [...]string{
 		"Sunday", "Monday", "Tuesday", "Wednesday",
@@ -69,6 +74,7 @@ func (d Weekday) String() string {
 	return names[d]
 }
 
+// Weekday.IsWeekend (Method): applies the is weekend operation to receiver state at a visible boundary.
 func (d Weekday) IsWeekend() bool {
 	return d == Saturday || d == Sunday
 }

@@ -42,6 +42,7 @@ import (
 
 // --- Domain Model ---
 
+// Task (Struct): groups the state used by the task example boundary.
 type Task struct {
 	ID        int       `json:"id"`
 	Title     string    `json:"title"`
@@ -51,12 +52,14 @@ type Task struct {
 
 // --- In-Memory Database ---
 
+// TaskStore (Struct): groups the state used by the task store example boundary.
 type TaskStore struct {
 	mu     sync.RWMutex
 	tasks  map[int]Task
 	nextID int
 }
 
+// NewTaskStore (Function): runs the new task store step and keeps its inputs, outputs, or errors visible.
 func NewTaskStore() *TaskStore {
 	return &TaskStore{
 		tasks:  make(map[int]Task),
@@ -64,6 +67,7 @@ func NewTaskStore() *TaskStore {
 	}
 }
 
+// TaskStore.Create (Method): applies the create operation to receiver state at a visible boundary.
 func (s *TaskStore) Create(title string) Task {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -79,6 +83,7 @@ func (s *TaskStore) Create(title string) Task {
 	return task
 }
 
+// TaskStore.List (Method): applies the list operation to receiver state at a visible boundary.
 func (s *TaskStore) List() []Task {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -90,6 +95,7 @@ func (s *TaskStore) List() []Task {
 	return list
 }
 
+// TaskStore.Get (Method): applies the get operation to receiver state at a visible boundary.
 func (s *TaskStore) Get(id int) (Task, bool) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -97,6 +103,7 @@ func (s *TaskStore) Get(id int) (Task, bool) {
 	return t, ok
 }
 
+// TaskStore.Delete (Method): applies the delete operation to receiver state at a visible boundary.
 func (s *TaskStore) Delete(id int) bool {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -109,6 +116,7 @@ func (s *TaskStore) Delete(id int) bool {
 
 // --- Middleware ---
 
+// Logger (Function): runs the logger step and keeps its inputs, outputs, or errors visible.
 func Logger(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
@@ -119,10 +127,12 @@ func Logger(next http.Handler) http.Handler {
 
 // --- Handlers ---
 
+// TaskAPI (Struct): groups the state used by the task api example boundary.
 type TaskAPI struct {
 	store *TaskStore
 }
 
+// TaskAPI.RegisterRoutes (Method): applies the register routes operation to receiver state at a visible boundary.
 func (api *TaskAPI) RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("GET /tasks", api.listTasks)
 	mux.HandleFunc("POST /tasks", api.createTask)
@@ -130,11 +140,13 @@ func (api *TaskAPI) RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("DELETE /tasks/{id}", api.deleteTask)
 }
 
+// TaskAPI.listTasks (Method): applies the list tasks operation to receiver state at a visible boundary.
 func (api *TaskAPI) listTasks(w http.ResponseWriter, r *http.Request) {
 	tasks := api.store.List()
 	respondJSON(w, http.StatusOK, tasks)
 }
 
+// TaskAPI.createTask (Method): applies the create task operation to receiver state at a visible boundary.
 func (api *TaskAPI) createTask(w http.ResponseWriter, r *http.Request) {
 	var input struct {
 		Title string `json:"title"`
@@ -152,6 +164,7 @@ func (api *TaskAPI) createTask(w http.ResponseWriter, r *http.Request) {
 	respondJSON(w, http.StatusCreated, task)
 }
 
+// TaskAPI.getTask (Method): applies the get task operation to receiver state at a visible boundary.
 func (api *TaskAPI) getTask(w http.ResponseWriter, r *http.Request) {
 	id, ok := parseTaskID(w, r)
 	if !ok {
@@ -166,6 +179,7 @@ func (api *TaskAPI) getTask(w http.ResponseWriter, r *http.Request) {
 	respondJSON(w, http.StatusOK, task)
 }
 
+// TaskAPI.deleteTask (Method): applies the delete task operation to receiver state at a visible boundary.
 func (api *TaskAPI) deleteTask(w http.ResponseWriter, r *http.Request) {
 	id, ok := parseTaskID(w, r)
 	if !ok {
@@ -181,6 +195,7 @@ func (api *TaskAPI) deleteTask(w http.ResponseWriter, r *http.Request) {
 
 // --- Helpers ---
 
+// parseTaskID (Function): runs the parse task id step and keeps its inputs, outputs, or errors visible.
 func parseTaskID(w http.ResponseWriter, r *http.Request) (int, bool) {
 	id, err := strconv.Atoi(r.PathValue("id"))
 	if err != nil || id <= 0 {
@@ -191,6 +206,7 @@ func parseTaskID(w http.ResponseWriter, r *http.Request) (int, bool) {
 	return id, true
 }
 
+// respondJSON (Function): runs the respond json step and keeps its inputs, outputs, or errors visible.
 func respondJSON(w http.ResponseWriter, code int, data any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
@@ -199,6 +215,7 @@ func respondJSON(w http.ResponseWriter, code int, data any) {
 	}
 }
 
+// respondError (Function): runs the respond error step and keeps its inputs, outputs, or errors visible.
 func respondError(w http.ResponseWriter, code int, message string) {
 	respondJSON(w, code, map[string]string{"error": message})
 }

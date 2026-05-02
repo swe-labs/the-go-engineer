@@ -39,6 +39,7 @@ import (
 // One function can coordinate several helpers and stop early when a step fails.
 //
 
+// validateCartName (Function): runs the validate cart name step and keeps its inputs, outputs, or errors visible.
 func validateCartName(name string) error {
 	if strings.TrimSpace(name) == "" {
 		return errors.New("cart name is required")
@@ -47,6 +48,7 @@ func validateCartName(name string) error {
 	return nil
 }
 
+// validatePrices (Function): runs the validate prices step and keeps its inputs, outputs, or errors visible.
 func validatePrices(prices []int) error {
 	if len(prices) == 0 {
 		return errors.New("at least one price is required")
@@ -61,6 +63,7 @@ func validatePrices(prices []int) error {
 	return nil
 }
 
+// sumPrices (Function): runs the sum prices step and keeps its inputs, outputs, or errors visible.
 func sumPrices(prices []int) int {
 	total := 0
 
@@ -71,10 +74,12 @@ func sumPrices(prices []int) int {
 	return total
 }
 
+// buildSummary (Function): runs the build summary step and keeps its inputs, outputs, or errors visible.
 func buildSummary(name string, total int) string {
 	return fmt.Sprintf("%s total: %d", name, total)
 }
 
+// processCart (Function): runs the process cart step and keeps its inputs, outputs, or errors visible.
 func processCart(name string, prices []int) (string, error) {
 	if err := validateCartName(name); err != nil {
 		return "", err

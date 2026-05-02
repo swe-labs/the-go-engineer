@@ -30,6 +30,7 @@ import (
 //
 // NEXT UP: PR.6 -> 08-quality-test/01-quality-and-performance/profiling/6-memory-layout
 
+// pr_5Summary (Function): runs the pr 5 summary step and keeps its inputs, outputs, or errors visible.
 func pr_5Summary(input string) string {
 	return strings.TrimSpace(strings.ToLower(input))
 }

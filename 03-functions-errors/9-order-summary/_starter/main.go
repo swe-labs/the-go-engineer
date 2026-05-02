@@ -14,6 +14,7 @@ import "fmt"
 //
 // Run: go run ./03-functions-errors/9-order-summary/_starter
 
+// pricingRule (Type): names the pricing rule concept so the lesson can pass it as a first-class value.
 type pricingRule func(int) int
 
 // TODO: Implement validateOrderName(name string) error

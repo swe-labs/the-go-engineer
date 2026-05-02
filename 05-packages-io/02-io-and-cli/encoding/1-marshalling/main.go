@@ -68,6 +68,8 @@ import (
 //	`json:"name,omitempty"` -> Omit this field if it's the zero value
 //	`json:"-"`             -> NEVER include this field in JSON
 //	`json:",string"`       -> Encode number/bool as a JSON string
+//
+// Product (Struct): represents an item in an e-commerce catalog.
 type Product struct {
 	// ID will appear as "id" in JSON (lowercase, matching REST API conventions)
 	ID int `json:"id"`

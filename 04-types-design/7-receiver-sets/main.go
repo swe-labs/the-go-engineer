@@ -36,30 +36,36 @@ import "fmt"
 //
 
 // Counter represents a simple stateful integer.
+// Counter (Struct): represents a simple stateful integer.
 type Counter struct {
 	Value int
 }
 
 // Get returns the current counter value. It uses a value receiver.
+// Counter.Get (Method): returns the current counter value. It uses a value receiver.
 func (c Counter) Get() int {
 	return c.Value
 }
 
 // Inc increments the counter. It requires a pointer receiver to modify the state.
+// Counter.Inc (Method): increments the counter. It requires a pointer receiver to modify the state.
 func (c *Counter) Inc() {
 	c.Value++
 }
 
 // Reset clears the counter. It requires a pointer receiver.
+// Counter.Reset (Method): clears the counter. It requires a pointer receiver.
 func (c *Counter) Reset() {
 	c.Value = 0
 }
 
 // Reader defines the behavioral contract for reading a value.
+// Reader (Interface): defines the behavioral contract for reading a value.
 type Reader interface {
 	Get() int
 }
 
+// printValue (Function): runs the print value step and keeps its inputs, outputs, or errors visible.
 func printValue(r Reader) {
 	fmt.Printf("  Value: %d\n", r.Get())
 }

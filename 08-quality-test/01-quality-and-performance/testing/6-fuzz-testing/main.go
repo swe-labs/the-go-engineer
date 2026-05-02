@@ -30,6 +30,7 @@ import (
 //
 // NEXT UP: TE.7 -> 08-quality-test/01-quality-and-performance/testing/7-interfaces-for-testability
 
+// te_6Summary (Function): runs the te 6 summary step and keeps its inputs, outputs, or errors visible.
 func te_6Summary(input string) string {
 	return strings.TrimSpace(strings.ToLower(input))
 }

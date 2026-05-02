@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -40,33 +41,40 @@ import (
 //
 
 // Reader defines a basic data retrieval contract.
+// Reader (Interface): defines a basic data retrieval contract.
 type Reader interface {
 	Read(p []byte) (n int, err error)
 }
 
 // Writer defines a basic data persistence contract.
+// Writer (Interface): defines a basic data persistence contract.
 type Writer interface {
 	Write(p []byte) (n int, err error)
 }
 
 // ReadWriter embeds both Reader and Writer to create a composite behavioral contract.
+// ReadWriter (Interface): embeds both Reader and Writer to create a composite behavioral contract.
 type ReadWriter interface {
 	Reader
 	Writer
 }
 
+// Buffer (Struct): groups the state used by the buffer example boundary.
 type Buffer struct {
 	buf bytes.Buffer
 }
 
+// Buffer.Read (Method): applies the read operation to receiver state at a visible boundary.
 func (b *Buffer) Read(p []byte) (n int, err error) {
 	return b.buf.Read(p)
 }
 
+// Buffer.Write (Method): applies the write operation to receiver state at a visible boundary.
 func (b *Buffer) Write(p []byte) (n int, err error) {
 	return b.buf.Write(p)
 }
 
+// processReadWrite (Function): runs the process read write step and keeps its inputs, outputs, or errors visible.
 func processReadWrite(rw ReadWriter) {
 	buf := make([]byte, 10)
 	rw.Write([]byte("Hello"))

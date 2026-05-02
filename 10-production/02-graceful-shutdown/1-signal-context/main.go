@@ -73,6 +73,7 @@ import (
 
 // BackgroundWorker simulates a long-running background task (metrics exporter,
 // message queue consumer, cache refresher, etc.)
+// BackgroundWorker (Function): simulates a long-running background task (metrics exporter,.
 func BackgroundWorker(ctx context.Context, name string) {
 	ticker := time.NewTicker(500 * time.Millisecond)
 	defer ticker.Stop()
@@ -95,8 +96,10 @@ func BackgroundWorker(ctx context.Context, name string) {
 }
 
 // Database simulates a database connection that must be closed gracefully.
+// Database (Struct): simulates a database connection that must be closed gracefully.
 type Database struct{ name string }
 
+// Database.Close (Method): applies the close operation to receiver state at a visible boundary.
 func (db *Database) Close() error {
 	slog.Info("closing database connection", "db", db.name)
 	time.Sleep(100 * time.Millisecond) // Simulate connection drain

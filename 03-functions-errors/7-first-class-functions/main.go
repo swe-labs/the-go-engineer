@@ -36,16 +36,19 @@ import "fmt"
 //
 
 // 1. Assigning functions to variables
+// add (Function): 1. Assigning functions to variables.
 func add(a, b int) int {
 	return a + b
 }
 
+// multiply (Function): runs the multiply step and keeps its inputs, outputs, or errors visible.
 func multiply(a, b int) int {
 	return a * b
 }
 
 // 2. Passing behavior into other functions (callbacks)
 // The parameter 'operation' is a function that takes two ints and returns one int.
+// calculate (Function): 2. Passing behavior into other functions (callbacks).
 func calculate(a int, b int, operation func(int, int) int) int {
 	return operation(a, b)
 }

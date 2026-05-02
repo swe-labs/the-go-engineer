@@ -55,6 +55,7 @@ import (
 //   - Use json.NewDecoder if you are reading from an io.Reader (like an HTTP Request Body or a File).
 //     This avoids loading the entire payload into RAM before parsing.
 
+// MetricEvent (Struct): groups the state used by the metric event example boundary.
 type MetricEvent struct {
 	AppID   string `json:"app_id"`
 	Latency int    `json:"latency_ms"`

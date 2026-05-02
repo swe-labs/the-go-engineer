@@ -29,6 +29,7 @@ package main
 
 import "fmt"
 
+// LogLevel (Type): names the log level concept so the lesson can pass it as a first-class value.
 type LogLevel int
 
 const (
@@ -41,10 +42,12 @@ const (
 
 // A package-level slice of strings. Slices are covered later, but here
 // it acts as a simple lookup table to map our integer enum to a string.
+// levelNames (Slice): keeps ordered lesson state visible for iteration and comparison.
 var levelNames = []string{"Trace", "Debug", "Info", "Warning", "Error"}
 
 // String() is a special method signature. When you print a LogLevel, Go will
 // automatically call this method to get the string representation.
+// LogLevel.String (Method): () is a special method signature. When you print a LogLevel, Go will.
 func (l LogLevel) String() string {
 	// Simple bounds checking to prevent index-out-of-range errors on our slice.
 	if l < LevelTrace || l > LevelError {
@@ -53,6 +56,7 @@ func (l LogLevel) String() string {
 	return levelNames[l]
 }
 
+// printLogLevel (Function): runs the print log level step and keeps its inputs, outputs, or errors visible.
 func printLogLevel(level LogLevel) {
 	fmt.Printf("Log level: %d %s\n", level, level.String())
 }

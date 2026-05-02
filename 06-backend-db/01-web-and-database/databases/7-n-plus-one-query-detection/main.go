@@ -118,6 +118,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// setup (Function): runs the setup step and keeps its inputs, outputs, or errors visible.
 func setup(db *sql.DB) {
 	db.Exec("CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);")
 	db.Exec("CREATE TABLE profiles (user_id INTEGER, avatar TEXT);")

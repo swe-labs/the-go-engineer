@@ -47,6 +47,8 @@ import (
 //go:embed public/data.txt
 var greeting string
 
+// rawData (Slice): keeps ordered lesson state visible for iteration and comparison.
+//
 //go:embed public/data.txt
 var rawData []byte
 

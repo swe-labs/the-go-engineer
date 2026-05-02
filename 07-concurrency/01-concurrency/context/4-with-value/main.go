@@ -50,6 +50,7 @@ import (
 //   the root. This is O(depth) - proportional to how many values were added.
 //
 
+// contextKey (Type): names the context key concept so the lesson can pass it as a first-class value.
 type contextKey string
 
 const (
@@ -88,6 +89,7 @@ func main() {
 	fmt.Println("---------------------------------------------------")
 }
 
+// handleRequest (Function): runs the handle request step and keeps its inputs, outputs, or errors visible.
 func handleRequest(ctx context.Context) {
 	requestID, ok := ctx.Value(requestIDKey).(string)
 	if !ok {
@@ -103,6 +105,7 @@ func handleRequest(ctx context.Context) {
 	logAction(ctx, "processing order")
 }
 
+// logAction (Function): runs the log action step and keeps its inputs, outputs, or errors visible.
 func logAction(ctx context.Context, action string) {
 	requestID, _ := ctx.Value(requestIDKey).(string)
 	fmt.Printf("  [%s] Action: %s\n", requestID, action)

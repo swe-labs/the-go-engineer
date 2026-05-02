@@ -5,6 +5,7 @@ package main
 
 import "fmt"
 
+// LogLevel (Type): names the log level concept so the lesson can pass it as a first-class value.
 type LogLevel int
 
 const (
@@ -15,8 +16,10 @@ const (
 	LevelError
 )
 
+// levelNames (Slice): keeps ordered lesson state visible for iteration and comparison.
 var levelNames = []string{"Trace", "Debug", "Info", "Warning", "Error"}
 
+// LogLevel.String (Method): applies the string operation to receiver state at a visible boundary.
 func (l LogLevel) String() string {
 	if l < LevelTrace || l > LevelError {
 		return "Unknown"
@@ -24,6 +27,7 @@ func (l LogLevel) String() string {
 	return levelNames[l]
 }
 
+// printLogLevel (Function): runs the print log level step and keeps its inputs, outputs, or errors visible.
 func printLogLevel(level LogLevel) {
 	fmt.Printf("Log level: %d %s\n", level, level.String())
 }

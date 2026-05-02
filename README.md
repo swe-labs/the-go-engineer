@@ -83,9 +83,9 @@ Each lesson is designed around four surfaces:
 - a README-first explanation with prerequisites, mental model, machine view, and production notes
 - runnable Go code that demonstrates the concept directly
 - tests or verification surfaces where behavior should be provable
-- forward and backward references when a concept depends on another lesson
+- inline cross-references when a concept depends on another lesson
 
-The curriculum avoids unexplained jumps. If a later idea appears early, the lesson must name it as a forward reference. If a current idea depends on previous work, the lesson must point back to the lesson that established it.
+The curriculum avoids unexplained jumps. If a later idea appears early, the lesson names the future lesson or section that teaches it in detail. If a current idea depends on previous work, the lesson points back to the earlier lesson that established it. README cross-references use `[!NOTE]` or `[!TIP]` alerts, include lesson IDs, and link to the target `README.md` when naming a specific lesson.
 
 ## Validation
 
@@ -99,7 +99,7 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test -coverprofile coverage.out ./...
+go test -coverprofile=coverage.out ./...
 go run ./scripts/validate_curriculum.go
 ```
 

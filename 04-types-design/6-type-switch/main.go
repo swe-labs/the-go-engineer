@@ -1,4 +1,5 @@
 // Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
 
 // ============================================================================
 // Section 04: Types and Design
@@ -33,17 +34,22 @@ import "fmt"
 // Section 04: Types & Design - Type Switch
 
 // Shape is an empty interface representing any geometric shape.
+// Shape (Interface): is an empty interface representing any geometric shape.
 type Shape interface{}
 
 // Circle represents a circular geometry.
+// Circle (Struct): represents a circular geometry.
 type Circle struct{ Radius float64 }
 
 // Rectangle represents a four-sided polygon.
+// Rectangle (Struct): represents a four-sided polygon.
 type Rectangle struct{ Width, Height float64 }
 
 // Triangle represents a three-sided polygon.
+// Triangle (Struct): represents a three-sided polygon.
 type Triangle struct{ A, B, C float64 }
 
+// describeShape (Function): runs the describe shape step and keeps its inputs, outputs, or errors visible.
 func describeShape(s Shape) string {
 	switch v := s.(type) {
 	case Circle:
@@ -57,6 +63,7 @@ func describeShape(s Shape) string {
 	}
 }
 
+// getArea (Function): runs the get area step and keeps its inputs, outputs, or errors visible.
 func getArea(s Shape) interface{} {
 	switch v := s.(type) {
 	case Circle:

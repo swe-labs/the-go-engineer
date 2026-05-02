@@ -38,7 +38,7 @@ Do not replace code with prose. Explain the code, run the code, then modify the 
 
 Each section teaches only what has been earned.
 
-If a concept depends on later ideas, either move it later or add a clear forward reference.
+If a concept depends on later ideas, either move it later or add a local source comment or README alert that names the future lesson or section.
 
 ### Explanations answer how, why, and what changes
 
@@ -111,9 +111,10 @@ Use inline comments for:
 - non-obvious behavior
 - mutation or boundary traps
 - runtime implications
-- forward and backward lesson references
+- local cross-references that explain why another lesson's concept appears here
 
 Do not turn source headers into the main teaching surface. The README is primary.
+Follow `CODE-STANDARDS.md` for Machine Role comments, source header fields, `RUN:` command format, `NEXT UP:` footers, and proof-surface consistency.
 
 ## Cross-Reference Rules
 
@@ -133,6 +134,7 @@ When neighboring tracks use the same idea:
 
 - point to the sibling lesson only when it improves navigation.
 - Use GitHub-style alerts (`[!NOTE]` or `[!TIP]`) to integrate references without interrupting the narrative flow.
+- Include the lesson ID and a clickable local `README.md` link when referencing a specific lesson.
 - Avoid detached, standalone "Forward/Backward Reference" headlines.
 
 ## Milestone Contract
@@ -145,6 +147,7 @@ A milestone should usually provide:
 - a runnable completed solution
 - starter code when the learner is expected to implement
 - tests when behavior should be provable
+- matching curriculum metadata, source `Level`/`RUN:` headers, source `NEXT UP:` footer, README run instructions, and README next-step link
 
 ## Revision Checklist
 

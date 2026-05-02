@@ -35,11 +35,13 @@ import "fmt"
 //
 
 // announceCart prints a notification for the current processing target.
+// announceCart (Function): prints a notification for the current processing target.
 func announceCart(name string) {
 	fmt.Printf("Processing Cart: %s\n", name)
 }
 
 // sumPrices calculates the arithmetic sum of a slice of integers.
+// sumPrices (Function): calculates the arithmetic sum of a slice of integers.
 func sumPrices(prices []int) int {
 	total := 0
 	for _, price := range prices {
@@ -49,6 +51,7 @@ func sumPrices(prices []int) int {
 }
 
 // labelPrice formats a descriptive string combining a label and a total value.
+// labelPrice (Function): formats a descriptive string combining a label and a total value.
 func labelPrice(name string, total int) string {
 	return fmt.Sprintf("Summary -> %s: $%d", name, total)
 }
