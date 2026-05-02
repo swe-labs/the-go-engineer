@@ -13,9 +13,9 @@
 //   - How the caller must receive all returned values (or use the blank identifier).
 //
 // WHY THIS MATTERS:
-//   - Go doesn't use "sentinel" values (like returning -1 for error) because 
-//     that can be ambiguous. Multiple return values allow a function to be 
-//     honest: "Here is the data, AND here is a flag saying if it's valid." 
+//   - Go doesn't use "sentinel" values (like returning -1 for error) because
+//     that can be ambiguous. Multiple return values allow a function to be
+//     honest: "Here is the data, AND here is a flag saying if it's valid."
 //     This is the foundation of Go's explicit error handling.
 //
 // RUN:

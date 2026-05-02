@@ -13,9 +13,9 @@
 //   - Understanding stack unwinding during a panic event.
 //
 // WHY THIS MATTERS:
-//   - Errors are for expected failures; Panic is for broken assumptions. 
-//     Mastering the recovery boundary allows you to build resilient 
-//     systems (like web servers) that can survive a crash in a single 
+//   - Errors are for expected failures; Panic is for broken assumptions.
+//     Mastering the recovery boundary allows you to build resilient
+//     systems (like web servers) that can survive a crash in a single
 //     request handler without bringing down the entire service.
 //
 // RUN:

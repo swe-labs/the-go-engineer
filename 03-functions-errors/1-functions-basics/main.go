@@ -13,8 +13,8 @@
 //   - How the program execution jumps between `main` and other functions.
 //
 // WHY THIS MATTERS:
-//   - Real-world programs are too complex to stay inside a single `main()` 
-//     function. Functions are the primary tool Go engineers use to break 
+//   - Real-world programs are too complex to stay inside a single `main()`
+//     function. Functions are the primary tool Go engineers use to break
 //     large problems into small, manageable, and testable pieces.
 //
 // RUN:

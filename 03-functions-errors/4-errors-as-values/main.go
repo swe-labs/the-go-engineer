@@ -14,9 +14,9 @@
 //   - Why the result is unreliable when an error is present.
 //
 // WHY THIS MATTERS:
-//   - In many languages, a failure "blows up" the stack with an exception. 
-//     In Go, a failure is just data. This forces engineers to handle 
-//     problems explicitly, leading to more robust systems that don't 
+//   - In many languages, a failure "blows up" the stack with an exception.
+//     In Go, a failure is just data. This forces engineers to handle
+//     problems explicitly, leading to more robust systems that don't
 //     crash unexpectedly in production.
 //
 // RUN:

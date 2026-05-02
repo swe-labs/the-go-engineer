@@ -13,9 +13,9 @@
 //   - Defining and using "Anonymous Functions" (lambda functions).
 //
 // WHY THIS MATTERS:
-//   - First-class functions are the foundation of "Higher-Order" 
-//     programming. Instead of hardcoding behavior, you can design systems 
-//     where the caller decides *how* a task is performed by passing in a 
+//   - First-class functions are the foundation of "Higher-Order"
+//     programming. Instead of hardcoding behavior, you can design systems
+//     where the caller decides *how* a task is performed by passing in a
 //     callback. This is common in middleware, retries, and data processing.
 //
 // RUN:

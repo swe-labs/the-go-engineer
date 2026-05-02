@@ -13,8 +13,8 @@
 //   - How the Go compiler moves captured variables to the heap.
 //
 // WHY THIS MATTERS:
-//   - Closures allow you to "carry" state with a function. This is how 
-//     middleware keeps configuration data, how observers keep track of 
+//   - Closures allow you to "carry" state with a function. This is how
+//     middleware keeps configuration data, how observers keep track of
 //     subject state, and how factories generate specialized helpers.
 //
 // RUN:

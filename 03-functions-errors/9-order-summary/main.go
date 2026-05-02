@@ -13,8 +13,8 @@
 //   - Using closure factories to generate configurable logic.
 //
 // WHY THIS MATTERS:
-//   - This is the capstone for Section 03. It demonstrates how a 
-//     production-grade pipeline is built using small, focused boundaries 
+//   - This is the capstone for Section 03. It demonstrates how a
+//     production-grade pipeline is built using small, focused boundaries
 //     that coordinate through explicit errors and flexible callbacks.
 //
 // RUN:

@@ -13,8 +13,8 @@
 //   - How slice headers are copied into function boundaries.
 //
 // WHY THIS MATTERS:
-//   - Functions are more than just named blocks; they are data processors. 
-//     Understanding how data moves in and out of a function is the key to 
+//   - Functions are more than just named blocks; they are data processors.
+//     Understanding how data moves in and out of a function is the key to
 //     building reusable logic that doesn't rely on global state.
 //
 // RUN:

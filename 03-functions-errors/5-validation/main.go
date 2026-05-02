@@ -13,8 +13,8 @@
 //   - Returning descriptive error messages with index context.
 //
 // WHY THIS MATTERS:
-//   - Software engineering is about building "Defensive" code. By validating 
-//     inputs at the boundary, you prevent bad data from "poisoning" your 
+//   - Software engineering is about building "Defensive" code. By validating
+//     inputs at the boundary, you prevent bad data from "poisoning" your
 //     database or causing crashes in the core logic of your application.
 //
 // RUN:

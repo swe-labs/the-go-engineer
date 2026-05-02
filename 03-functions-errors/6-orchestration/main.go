@@ -13,9 +13,9 @@
 //   - Managing "Short-Circuit" logic to stop execution on the first error.
 //
 // WHY THIS MATTERS:
-//   - In production, a single "Request" often triggers a chain of actions 
-//     (Validate -> Auth -> DB Lookup -> Calc -> Log). Orchestration is the 
-//     art of linking these steps without turning your code into a messy 
+//   - In production, a single "Request" often triggers a chain of actions
+//     (Validate -> Auth -> DB Lookup -> Calc -> Log). Orchestration is the
+//     art of linking these steps without turning your code into a messy
 //     "God Function" that does everything.
 //
 // RUN:
