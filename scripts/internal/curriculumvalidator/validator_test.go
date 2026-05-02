@@ -284,9 +284,9 @@ func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "04-types-design/composition/1-composition",
+      "path": "04-types-design/16-composition",
       "prerequisites": [],
-      "run_command": "go run ./04-types-design/composition/1-composition",
+      "run_command": "go run ./04-types-design/16-composition",
       "test_command": "",
       "starter_path": "",
       "next_items": ["CO.2"]
@@ -300,9 +300,9 @@ func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
       "subtype": "integration",
       "level": "core",
       "verification_mode": "run",
-      "path": "04-types-design/composition/2-embedding",
+      "path": "04-types-design/17-embedding",
       "prerequisites": ["CO.1"],
-      "run_command": "go run ./04-types-design/composition/2-embedding",
+      "run_command": "go run ./04-types-design/17-embedding",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -310,15 +310,17 @@ func TestValidateRejectsLessonNavigationFooterMismatch(t *testing.T) {
   ]
 }`)
 
-	mustMkdir(t, root, "04-types-design/composition/1-composition")
-	mustMkdir(t, root, "04-types-design/composition/2-embedding")
-	writeFile(t, root, "04-types-design/composition/1-composition/main.go", `package main
+	mustMkdir(t, root, "04-types-design/16-composition")
+	mustMkdir(t, root, "04-types-design/17-embedding")
+	writeFile(t, root, "04-types-design/16-composition/main.go", `package main
 
 // Section 06: Composition
 
 func main() {
-	println("NEXT UP: ST.1 -> 04-types-design/strings-and-text/1-strings")
+	println("NEXT UP: ST.1 -> 04-types-design/20-formatting")
 }`)
+	writeFile(t, root, "04-types-design/16-composition/README.md", "## Mission\n## Prerequisites\n## Mental Model\n## Visual Model\n## Machine View\n## Run Instructions\n## Code Walkthrough\n## Try It\n## In Production\n## Thinking Questions\n## Next Step\n")
+	writeFile(t, root, "04-types-design/17-embedding/README.md", "## Mission\n## Prerequisites\n## Mental Model\n## Visual Model\n## Machine View\n## Run Instructions\n## Code Walkthrough\n## Try It\n## In Production\n## Thinking Questions\n## Next Step\n")
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -327,7 +329,7 @@ func main() {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 lesson navigation footer: CO.1 -> ST.1 (expected CO.2)")
+	requireOnlyFixtureExpectedReports(t, result, reports, "Invalid v2 lesson navigation footer: CO.1 -> ST.1 (expected CO.2)", "Invalid v2 README navigation footer: CO.1 -> 04-types-design/16-composition/README.md (expected \"Next: `CO.2` -> [`04-types-design/17-embedding`](../17-embedding/README.md)\")")
 }
 
 func TestValidateRejectsStaticLessonNavigationFooterWithoutPath(t *testing.T) {
@@ -359,9 +361,9 @@ func TestValidateRejectsStaticLessonNavigationFooterWithoutPath(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "04-types-design/composition/1-composition",
+      "path": "04-types-design/16-composition",
       "prerequisites": [],
-      "run_command": "go run ./04-types-design/composition/1-composition",
+      "run_command": "go run ./04-types-design/16-composition",
       "test_command": "",
       "starter_path": "",
       "next_items": ["CO.2"]
@@ -375,9 +377,9 @@ func TestValidateRejectsStaticLessonNavigationFooterWithoutPath(t *testing.T) {
       "subtype": "integration",
       "level": "core",
       "verification_mode": "run",
-      "path": "04-types-design/composition/2-embedding",
+      "path": "04-types-design/17-embedding",
       "prerequisites": ["CO.1"],
-      "run_command": "go run ./04-types-design/composition/2-embedding",
+      "run_command": "go run ./04-types-design/17-embedding",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -385,15 +387,17 @@ func TestValidateRejectsStaticLessonNavigationFooterWithoutPath(t *testing.T) {
   ]
 }`)
 
-	mustMkdir(t, root, "04-types-design/composition/1-composition")
-	mustMkdir(t, root, "04-types-design/composition/2-embedding")
-	writeFile(t, root, "04-types-design/composition/1-composition/main.go", `package main
+	mustMkdir(t, root, "04-types-design/16-composition")
+	mustMkdir(t, root, "04-types-design/17-embedding")
+	writeFile(t, root, "04-types-design/16-composition/main.go", `package main
 
 // Section 06: Composition
 
 func main() {
 	println("NEXT UP: CO.2 embedding")
 }`)
+	writeFile(t, root, "04-types-design/16-composition/README.md", "## Mission\n## Prerequisites\n## Mental Model\n## Visual Model\n## Machine View\n## Run Instructions\n## Code Walkthrough\n## Try It\n## In Production\n## Thinking Questions\n## Next Step\n")
+	writeFile(t, root, "04-types-design/17-embedding/README.md", "## Mission\n## Prerequisites\n## Mental Model\n## Visual Model\n## Machine View\n## Run Instructions\n## Code Walkthrough\n## Try It\n## In Production\n## Thinking Questions\n## Next Step\n")
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -402,7 +406,7 @@ func main() {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	requireOnlyFixtureExpectedReports(t, result, reports, `Missing v2 lesson navigation footer: CO.1 -> 04-types-design/composition/1-composition/main.go (expected "NEXT UP: CO.2 -> 04-types-design/composition/2-embedding")`)
+	requireOnlyFixtureExpectedReports(t, result, reports, `Missing v2 lesson navigation footer: CO.1 -> 04-types-design/16-composition/main.go (expected "NEXT UP: CO.2 -> 04-types-design/17-embedding")`, "Invalid v2 README navigation footer: CO.1 -> 04-types-design/16-composition/README.md (expected \"Next: `CO.2` -> [`04-types-design/17-embedding`](../17-embedding/README.md)\")")
 }
 
 func TestValidateRejectsStaticReadmeNavigationFooterWithoutPath(t *testing.T) {
@@ -665,9 +669,9 @@ func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "04-types-design/composition/1-composition",
+      "path": "04-types-design/16-composition",
       "prerequisites": [],
-      "run_command": "go run ./04-types-design/composition/1-composition",
+      "run_command": "go run ./04-types-design/16-composition",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -677,9 +681,9 @@ func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
 
 	writeValidPressureDocs(t, root)
 	mustMkdir(t, root, "04-types-design")
-	mustMkdir(t, root, "04-types-design/composition/1-composition")
-	writeFile(t, root, "04-types-design/composition/1-composition/README.md", validFoundationsLessonReadme("go run ./04-types-design/composition/1-composition"))
-	writeFile(t, root, "04-types-design/composition/1-composition/main.go", validFoundationsMainGo("CO.2", "04-types-design/composition/2-embedding"))
+	mustMkdir(t, root, "04-types-design/16-composition")
+	writeFile(t, root, "04-types-design/16-composition/README.md", validFoundationsLessonReadme("go run ./04-types-design/16-composition"))
+	writeFile(t, root, "04-types-design/16-composition/main.go", validFoundationsMainGo("CO.2", "04-types-design/17-embedding"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -718,9 +722,9 @@ func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "04-types-design/strings-and-text/1-strings",
+      "path": "04-types-design/19-strings",
       "prerequisites": [],
-      "run_command": "go run ./04-types-design/strings-and-text/1-strings",
+      "run_command": "go run ./04-types-design/19-strings",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -730,8 +734,8 @@ func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
 
 	writeValidPressureDocs(t, root)
 	mustMkdir(t, root, "04-types-design")
-	mustMkdir(t, root, "04-types-design/strings-and-text/1-strings")
-	writeFile(t, root, "04-types-design/strings-and-text/1-strings/main.go", validFoundationsMainGo("ST.2", "04-types-design/strings-and-text/2-formatting-string"))
+	mustMkdir(t, root, "04-types-design/19-strings")
+	writeFile(t, root, "04-types-design/19-strings/main.go", validFoundationsMainGo("ST.2", "04-types-design/20-formatting"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -740,7 +744,7 @@ func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	requireOnlyFixtureExpectedReports(t, result, reports, "Missing foundations README: ST.1 -> 04-types-design/strings-and-text/1-strings/README.md")
+	requireOnlyFixtureExpectedReports(t, result, reports, "Missing foundations README: ST.1 -> 04-types-design/19-strings/README.md")
 }
 
 func TestValidateRejectsRunFoundationLessonMissingMainGo(t *testing.T) {
@@ -1504,16 +1508,22 @@ func containsReport(reports []string, want string) bool {
 	return false
 }
 
-func requireOnlyFixtureExpectedReports(t *testing.T, result Result, reports []string, want string) {
+func requireOnlyFixtureExpectedReports(t *testing.T, result Result, reports []string, wants ...string) {
 	t.Helper()
 
 	if result.ErrorCount == 0 {
-		t.Fatalf("expected validation error %q, got none", want)
+		t.Fatalf("expected validation errors %v, got none", wants)
 	}
 
 	filtered := reportsWithoutFixtureScaffold(reports)
-	if len(filtered) != 1 || !containsReport(filtered, want) {
-		t.Fatalf("expected only %q outside fixture scaffold reports, got %v from all reports %v", want, filtered, reports)
+	if len(filtered) != len(wants) {
+		t.Fatalf("expected exactly %d reports outside fixture scaffold, got %v from all reports %v", len(wants), filtered, reports)
+	}
+
+	for _, want := range wants {
+		if !containsReport(filtered, want) {
+			t.Fatalf("expected report %q not found in %v", want, filtered)
+		}
 	}
 }
 

@@ -2,44 +2,32 @@
 
 ## Mission
 
-Learn the functional options pattern-a common Go pattern for building configurable APIs without requiring many constructor parameters.
-
-> **Backward Reference:** In [Lesson 11: Dynamic Typing with any](../11-dynamic-typing-with-any/README.md), you learned about the flexibility of the `any` type. Functional options provide another kind of flexibility-designing APIs that are easy to use, extend, and maintain without sacrificing type safety.
-
-## Why This Lesson Exists Now
-
-When a type has many optional fields, passing all of them to a constructor becomes unwieldy. The functional options pattern lets callers customize only what they need using small, composable functions.
+- Implement the functional options pattern for flexible, type-safe constructors.
+- Manage default states in complex data structures.
+- Utilize variadic functions and closures for declarative configuration logic.
+- Build extensible APIs that maintain backward compatibility as new options are added.
 
 ## Prerequisites
 
-- `TI.2` methods
+- `TI.2` Methods
 
 ## Mental Model
 
-Think of ordering a pizza. You could have a constructor with 20 parameters (crust, sauce, cheese, toppings, size, etc.). Or you could have `WithExtraCheese()`, `WithPepperoni()`, `LargeSize()` functions that you chain together. Much cleaner!
+As types grow in complexity, traditional constructors (e.g., `NewServer(name, cpu, ram, ...)`) become fragile and difficult to maintain. Adding a new configuration field requires breaking the signature for all existing callers. The **functional options pattern** solves this by using variadic functions that modify a target configuration struct. Callers specify only the options they need, while the constructor applies sensible defaults for the rest.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["data"] --> B["type definition"]
-    B --> C["methods or interface behavior"]
-```
-```go
-// Without options: too many parameters
-NewServer("web", "us-east", 4, 16, true, false, "linux", "10.0.0.1", ...)
-
-// With functional options
-NewServer(
-    WithName("web"),
-    WithRegion("us-east"),
-    WithCPUs(4),
-)
+    A[Constructor] --> B[Option 1]
+    A --> C[Option 2]
+    B --> D[Target Instance]
+    C --> D
 ```
 
 ## Machine View
 
-Each option is just a function that mutates or configures one target value. The pattern feels higher-level, but underneath it is still ordinary function calls applied one by one.
+A functional option is simply a function with the signature `func(*Target)`. When `NewServer` is invoked with multiple options, the Go runtime executes each function in sequence, passing a pointer to the newly allocated instance. This pattern utilizes **closures** to capture the configuration values (like `name` or `cpu` count) and apply them to the target instance at instantiation time.
 
 ## Run Instructions
 
@@ -49,35 +37,68 @@ go run ./04-types-design/12-functional-options
 
 ## Code Walkthrough
 
-### Option type
+### The Option Type
 
-Define a function type that modifies a config struct.
+We define a function type that acts as the contract for all configuration options.
 
-### Option function
+```go
+type Option func(*Server)
+```
 
-Each option function returns an Option that gets applied.
+### Option Constructors
 
-### WithDefault pattern
+Each option is a higher-order function that returns a closure.
 
-Use functional composition to build up configuration.
+```go
+func WithCPUs(n int) Option {
+    return func(s *Server) {
+        s.CPUs = n
+    }
+}
+```
+
+### Variadic Instantiation
+
+The constructor accepts a variadic slice of options and applies them after setting defaults.
+
+```go
+func NewServer(opts ...Option) *Server {
+    s := &Server{ /* defaults */ }
+    for _, opt := range opts {
+        opt(s)
+    }
+    return s
+}
+```
 
 ## Try It
 
-1. Add a new option function for a missing field.
-2. Create a server with multiple options chained together.
-3. Make some options have default values.
+### Automated Tests
+
+```bash
+go test ./...
+```
+
+### Manual Verification
+
+- Instantiate a `Server` with no options and verify it has the expected default CPU and RAM values.
+- Chain multiple options together and verify the resulting struct matches the declarative intent.
 
 ## In Production
-Functional options are used throughout Go APIs-gRPC, Terraform provider, Cobra CLI, etc. Essential for building clean, extensible libraries.
-Functional options are used throughout Go APIs-gRPC, Terraform provider, Cobra CLI, etc. Essential for building clean, extensible libraries.
+
+- **gRPC Server Configuration**: Setting timeouts, interceptors, and security credentials.
+- **HTTP Clients**: Configuring retry policies, headers, and connection pooling.
+- **CLI Tools**: Initializing complex command structures with optional flags.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** We have seen how to attach behavior to types and how to configure them. Now, we will look at how to treat that behavior itself as a first-class value. In [Lesson 13: Method Values](../13-method-values/README.md), you will learn how to extract and pass around a method as if it were a regular function.
+1. Why is the functional options pattern better for backward compatibility than a configuration struct?
+2. How do closures enable the "capture" of configuration data in this pattern?
+3. What are the performance trade-offs of using function calls for configuration vs. direct struct field assignment?
+
+---
 
 ## Next Step
 
 Next: `TI.13` -> [`04-types-design/13-method-values`](../13-method-values/README.md)
+**PREVIOUS:** TI.11 -> [Dynamic Typing with any](../11-dynamic-typing-with-any/README.md)

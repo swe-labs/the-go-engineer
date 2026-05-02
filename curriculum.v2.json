@@ -1125,7 +1125,7 @@
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
-                                         "TI.3"
+                                         "TI.7"
                                      ]
                   },
                   {
@@ -1168,7 +1168,7 @@
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
-                                         "TI.5"
+                                         "TI.6"
                                      ]
                   },
                   {
@@ -1211,7 +1211,7 @@
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
-                                         "TI.7"
+                                         "TI.11"
                                      ]
                   },
                   {
@@ -1226,14 +1226,13 @@
                       "verification_mode":  "run",
                       "path":  "04-types-design/7-receiver-sets",
                       "prerequisites":  [
-                                            "TI.2",
-                                            "TI.3"
+                                            "TI.2"
                                         ],
                       "run_command":  "go run ./04-types-design/7-receiver-sets",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
-                                         "TI.8"
+                                         "TI.3"
                                      ]
                   },
                   {
@@ -1277,7 +1276,7 @@
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
-                                         "TI.10"
+                                         "TI.14"
                                      ]
                   },
                   {
@@ -1302,7 +1301,7 @@
                       "test_command":  "go test ./04-types-design/10-payroll-processor",
                       "starter_path":  "04-types-design/10-payroll-processor/_starter",
                       "next_items":  [
-                                         "TI.11"
+                                         "CO.1"
                                      ]
                   },
                   {
@@ -1366,7 +1365,7 @@
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
-                                         "TI.14"
+                                         "TI.10"
                                      ]
                   },
                   {
@@ -1409,7 +1408,7 @@
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
-                                         "CO.1"
+                                         "TI.12"
                                      ]
                   },
                   {
@@ -1422,12 +1421,12 @@
                       "level":  "foundation",
                       "status":  "implemented",
                       "verification_mode":  "run",
-                      "path":  "04-types-design/composition/1-composition",
+                      "path":  "04-types-design/16-composition",
                       "prerequisites":  [
                                             "TI.1",
                                             "TI.2"
                                         ],
-                      "run_command":  "go run ./04-types-design/composition/1-composition",
+                      "run_command":  "go run ./04-types-design/16-composition",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -1444,11 +1443,11 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "run",
-                      "path":  "04-types-design/composition/2-embedding",
+                      "path":  "04-types-design/17-embedding",
                       "prerequisites":  [
                                             "CO.1"
                                         ],
-                      "run_command":  "go run ./04-types-design/composition/2-embedding",
+                      "run_command":  "go run ./04-types-design/17-embedding",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -1465,14 +1464,14 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "mixed",
-                      "path":  "04-types-design/composition/3-bank-account",
+                      "path":  "04-types-design/18-bank-account-project",
                       "prerequisites":  [
                                             "CO.1",
                                             "CO.2"
                                         ],
-                      "run_command":  "go run ./04-types-design/composition/3-bank-account",
-                      "test_command":  "go test ./04-types-design/composition/3-bank-account",
-                      "starter_path":  "04-types-design/composition/3-bank-account/_starter",
+                      "run_command":  "go run ./04-types-design/18-bank-account-project",
+                      "test_command":  "go test ./04-types-design/18-bank-account-project",
+                      "starter_path":  "04-types-design/18-bank-account-project/_starter",
                       "next_items":  [
                                          "ST.1"
                                      ]
@@ -1487,11 +1486,11 @@
                       "level":  "foundation",
                       "status":  "implemented",
                       "verification_mode":  "run",
-                      "path":  "04-types-design/strings-and-text/1-strings",
+                      "path":  "04-types-design/19-strings",
                       "prerequisites":  [
 
                                         ],
-                      "run_command":  "go run ./04-types-design/strings-and-text/1-strings",
+                      "run_command":  "go run ./04-types-design/19-strings",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -1508,11 +1507,11 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "run",
-                      "path":  "04-types-design/strings-and-text/2-formatting-string",
+                      "path":  "04-types-design/20-formatting",
                       "prerequisites":  [
                                             "ST.1"
                                         ],
-                      "run_command":  "go run ./04-types-design/strings-and-text/2-formatting-string",
+                      "run_command":  "go run ./04-types-design/20-formatting",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -1529,12 +1528,12 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "run",
-                      "path":  "04-types-design/strings-and-text/3-unicode",
+                      "path":  "04-types-design/21-unicode",
                       "prerequisites":  [
                                             "ST.1",
                                             "ST.2"
                                         ],
-                      "run_command":  "go run ./04-types-design/strings-and-text/3-unicode",
+                      "run_command":  "go run ./04-types-design/21-unicode",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -1551,12 +1550,12 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "run",
-                      "path":  "04-types-design/strings-and-text/4-regex",
+                      "path":  "04-types-design/22-regex",
                       "prerequisites":  [
                                             "ST.1",
                                             "ST.3"
                                         ],
-                      "run_command":  "go run ./04-types-design/strings-and-text/4-regex",
+                      "run_command":  "go run ./04-types-design/22-regex",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -1573,12 +1572,12 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "run",
-                      "path":  "04-types-design/strings-and-text/5-text-template",
+                      "path":  "04-types-design/23-text-template",
                       "prerequisites":  [
                                             "ST.1",
                                             "ST.2"
                                         ],
-                      "run_command":  "go run ./04-types-design/strings-and-text/5-text-template",
+                      "run_command":  "go run ./04-types-design/23-text-template",
                       "test_command":  "",
                       "starter_path":  "",
                       "next_items":  [
@@ -1595,16 +1594,16 @@
                       "level":  "core",
                       "status":  "implemented",
                       "verification_mode":  "mixed",
-                      "path":  "04-types-design/strings-and-text/6-config-parser",
+                      "path":  "04-types-design/24-config-parser-project",
                       "prerequisites":  [
                                             "ST.1",
                                             "ST.2",
                                             "ST.4",
                                             "ST.5"
                                         ],
-                      "run_command":  "go run ./04-types-design/strings-and-text/6-config-parser",
-                      "test_command":  "go test ./04-types-design/strings-and-text/6-config-parser",
-                      "starter_path":  "04-types-design/strings-and-text/6-config-parser/_starter",
+                      "run_command":  "go run ./04-types-design/24-config-parser-project",
+                      "test_command":  "go test ./04-types-design/24-config-parser-project",
+                      "starter_path":  "04-types-design/24-config-parser-project/_starter",
                       "next_items":  [
                                          "MP.1"
                                      ]

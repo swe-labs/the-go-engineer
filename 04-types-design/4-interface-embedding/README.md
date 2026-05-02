@@ -2,49 +2,33 @@
 
 ## Mission
 
-Learn how to embed one interface into another to build larger contracts from smaller pieces.
-
-## Why This Lesson Exists Now
-
-You have learned that interfaces define contracts. Sometimes you want to combine multiple small contracts into one larger contract. Interface embedding lets you do this without copying method signatures.
-
-> **Backward Reference:** In [Lesson 3: Interfaces](../3-interfaces/README.md), you learned the basics of behavior contracts. Now, we will see how to compose those contracts to create more sophisticated and reusable abstractions.
+- Compose complex behavioral contracts from simpler, atomic interfaces.
+- Eliminate method signature duplication through embedding.
+- Understand the Interface Segregation Principle in the context of Go.
 
 ## Prerequisites
 
-- `TI.3` interfaces
+- `TI.3` Interfaces
 
 ## Mental Model
 
-Think of a universal remote. It does not have buttons for every function directly-it embeds the capabilities of a TV remote, a DVD remote, and a sound system remote into one. The universal remote "has-a" TV control, "has-a" DVD control, etc.
+**Interface Embedding** allows one interface to include the method set of another. This is the primary mechanism for behavioral composition in Go. Instead of defining large, monolithic interfaces, Go developers create small, focused interfaces and combine them as needed to build more specific requirements.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["data"] --> B["type definition"]
-    B --> C["methods or interface behavior"]
-```
-```text
-// Embedded interfaces combine contracts
-type Reader interface {
-    Read(p []byte) (n int, err error)
-}
-
-type Writer interface {
-    Write(p []byte) (n int, err error)
-}
-
-// ReadWriter embeds both Reader and Writer
-type ReadWriter interface {
-    Reader  // embedded
-    Writer  // embedded
-}
+    A[Composite Interface] --> B[Interface 1]
+    A --> C[Interface 2]
 ```
 
 ## Machine View
 
-When interface A embeds interface B, the resulting interface has all methods from both. The embedding is static-the compiler checks at compile time that the embedded contracts are satisfied.
+Interface embedding is a **Compile-Time Operation**. When an interface is embedded into another, the Go compiler performs **Method Set Aggregation**:
+
+- The resulting interface's method set is the union of all embedded method sets plus any locally defined methods.
+- There is no runtime delegation or performance penalty; calling a method on an embedded interface is identical to calling it on an interface where the method was explicitly listed.
+- The compiler enforces method signature consistency; if two embedded interfaces define the same method with different signatures, a compile-time error occurs.
 
 ## Run Instructions
 
@@ -54,34 +38,28 @@ go run ./04-types-design/4-interface-embedding
 
 ## Code Walkthrough
 
-### Embedding individual interfaces
-
-When you embed interfaces, you get all their methods. No need to list them explicitly.
-
-### Embedding multiple interfaces
-
-One interface can embed multiple interfaces, combining their contracts.
-
-### Use case: io.ReadWriter
-
-The standard library's io.ReadWriter is a classic example-embedding io.Reader and io.Writer.
+- **Composition over Inheritance**: Embedding provides a way to reuse behavioral definitions without the rigid hierarchy of traditional object-oriented inheritance.
+- **Granularity**: Maintaining small interfaces (often 1-2 methods) ensures that types only need to implement the specific logic required for a given operation.
+- **Standard Library Patterns**: The `io` package extensively uses embedding (e.g., `io.ReadCloser` embeds `io.Reader` and `io.Closer`).
 
 ## Try It
 
-1. Create an interface that embeds io.Reader and add one more method of your own.
-2. Implement your combined interface with a struct.
-3. Verify that satisfying the embedded interfaces automatically satisfies the combined one.
+1. In `main.go`, define a new interface `ReadWriteCloser` that embeds the existing `ReadWriter` and adds a `Close() error` method.
+2. Add a `Close()` method to the `Buffer` struct to satisfy the new interface.
+3. Verify that the compiler allows the `Buffer` instance to be used where a `ReadWriteCloser` is expected.
 
 ## In Production
-Interface embedding is used throughout the standard library (io.ReadWriter, io.ReadCloser, etc.) and in real APIs to compose behavior contracts.
+
+- **Service Definitions**: Composing a `Storage` interface from `Reader` and `Writer` components.
+- **Middleware Integration**: Building a `Context` interface that embeds standard `context.Context` plus custom logging or tracing methods.
+- **Resource Management**: Using `ReadCloser` or `WriteCloser` to ensure that I/O operations are followed by proper resource disposal.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** One of the most common interfaces in Go is `fmt.Stringer`. In [Lesson 5: Stringer](../5-stringer/README.md), you will learn how to implement this interface to control how your types are represented as text.
+1. Why is interface embedding considered more flexible than class-based inheritance?
+2. What happens if two embedded interfaces both define an identical method signature? Is this an error?
+3. How does interface embedding support the "Interface Segregation Principle"?
 
 ## Next Step
 
-Next: `TI.5` -> [`04-types-design/5-stringer`](../5-stringer/README.md)
+Next: `TI.6` -> [`04-types-design/6-type-switch`](../6-type-switch/README.md)

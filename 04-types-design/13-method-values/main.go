@@ -7,16 +7,23 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how to treat methods as first-class values-assigning methods to variables and passing them as function arguments.
+//   - Extracting methods from receivers to create first-class function values.
+//   - The mechanics of receiver binding in method values.
+//   - Using method values as callbacks and event handlers.
+//   - Storing method-bound behaviors in maps and slices.
 //
 // WHY THIS MATTERS:
-//   - Think of a button on a remote. You can press the button (call the method), or you can program the button to trigger something else (use the method ...
+//   - In Go, a method can be "detached" from its object and used as a
+//     standalone function value while still retaining a reference to
+//     its original receiver. This is the primary mechanism for
+//     implementing flexible event systems and clean callbacks
+//     without manually wrapping methods in closures.
 //
 // RUN:
 //   go run ./04-types-design/13-method-values
 //
 // KEY TAKEAWAY:
-//   - Learn how to treat methods as first-class values-assigning methods to variables and passing them as function arguments.
+//   - Method values are functions with a permanently bound receiver.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -25,74 +32,76 @@ package main
 
 import "fmt"
 
-//
-//   - Extracting methods as values
-//   - Binding receiver to method
-//   - Using method values as callbacks
-//
+// Section 04: Types & Design - Method Values
 
+// Counter represents a simple integer state with mutation methods.
 type Counter struct {
 	Value int
 }
 
+// Increment increases the counter value by 1.
 func (c *Counter) Increment() {
 	c.Value++
 }
 
+// Decrement decreases the counter value by 1.
 func (c *Counter) Decrement() {
 	c.Value--
 }
 
+// GetValue returns the current state of the counter.
 func (c *Counter) GetValue() int {
 	return c.Value
 }
 
+// Handler represents an event target with specific callbacks.
 type Handler struct {
 	Name string
 }
 
+// OnClick simulates a button click event.
 func (h *Handler) OnClick() {
-	fmt.Printf("  %s clicked!\n", h.Name)
+	fmt.Printf("  [Event] %s triggered click logic\n", h.Name)
 }
 
+// OnHover simulates a mouse hover event.
 func (h *Handler) OnHover() {
-	fmt.Printf("  %s hovered!\n", h.Name)
+	fmt.Printf("  [Event] %s triggered hover logic\n", h.Name)
 }
 
+// runHandler accepts a generic callback function and executes it.
 func runHandler(name string, handler func()) {
-	fmt.Printf("Running handler for %s\n", name)
+	fmt.Printf("Executing Handler: %s\n", name)
 	handler()
 }
 
 func main() {
-	fmt.Println("=== Method Values ===")
+	fmt.Println("=== Method Values: First-Class Behavior ===")
 	fmt.Println()
 
-	fmt.Println("--- Basic Method Value ---")
+	// 1. Basic Method Extraction.
+	// Assigning 'counter.Increment' to a variable captures the '*Counter'
+	// receiver 'counter' and stores it inside the function value.
+	fmt.Println("--- Receiver Binding ---")
 	counter := &Counter{Value: 10}
 	inc := counter.Increment
 	inc()
 	inc()
-	fmt.Printf("  After two increments: %d\n", counter.Value)
-
+	fmt.Printf("  Counter value after detached calls: %d\n", counter.Value)
 	fmt.Println()
-	fmt.Println("--- Method Value as Callback ---")
+
+	// 2. Methods as Callbacks.
+	// Any method matching the signature 'func()' can be passed where
+	// a plain function is expected.
+	fmt.Println("--- Event Delegation ---")
 	handler := &Handler{Name: "SubmitButton"}
-	clickHandler := handler.OnClick
-	runHandler("button", clickHandler)
-
+	runHandler("click_event", handler.OnClick)
 	fmt.Println()
-	fmt.Println("--- Storing Method Values in Map ---")
-	handlers := map[string]func(){
-		"click": handler.OnClick,
-		"hover": handler.OnHover,
-	}
-	for _, fn := range handlers {
-		fn()
-	}
 
-	fmt.Println()
-	fmt.Println("--- Method Values with Different Receivers ---")
+	// 3. Instance Independence.
+	// Method values are tied to specific instances. Calling fn1 increments
+	// c1, while calling fn2 increments c2.
+	fmt.Println("--- Instance Independence ---")
 	c1 := &Counter{Value: 100}
 	c2 := &Counter{Value: 200}
 	fn1 := c1.Increment
@@ -102,21 +111,9 @@ func main() {
 	fmt.Printf("  c1: %d, c2: %d\n", c1.Value, c2.Value)
 
 	fmt.Println()
-	fmt.Println("--- Method Value Preserves Receiver ---")
-	original := &Counter{Value: 5}
-	methodFn := original.Increment
-	methodFn()
-	methodFn()
-	fmt.Printf("  Original after method value calls: %d\n", original.Value)
-
-	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Method values capture their receiver")
-	fmt.Println("  - Use method values as callbacks and event handlers")
-	fmt.Println("  - Each instance's method value is independent")
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.14 -> 04-types-design/14-complex-generic-constraints")
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: TI.10 -> 04-types-design/10-payroll-processor")
+	fmt.Println("Run    : go run ./04-types-design/10-payroll-processor")
 	fmt.Println("Current: TI.13 (method-values)")
-	fmt.Println("Previous: TI.12 (functional-options)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -851,7 +851,7 @@ func allowedPathPrefixesForSection(section V2Section) []string {
 	}
 
 	if section.ID == "s04" {
-		prefixes = append(prefixes, "04-types-design/composition", "04-types-design/strings-and-text")
+		// Section 04 is now flat in the root of 04-types-design.
 	}
 
 	return prefixes

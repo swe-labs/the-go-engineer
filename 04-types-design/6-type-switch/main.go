@@ -7,16 +7,21 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how to use type switches to handle different concrete types stored in an interface.
+//   - Using type switches to branch logic based on concrete types.
+//   - Extracting concrete values from interfaces using the `value.(type)` syntax.
+//   - Handling multiple types and default cases in a single block.
 //
 // WHY THIS MATTERS:
-//   - Think of a sorting machine. Items come down the belt, and different items need different handling-fragile items go to one bin, heavy items to another. A type switch is Go's sorting machine for interface values.
+//   - Interfaces abstract behavior, but sometimes a specific operation
+//     requires access to the underlying concrete type. Type switches
+//     provide a type-safe, readable mechanism for inspecting interface
+//     contents at runtime.
 //
 // RUN:
 //   go run ./04-types-design/6-type-switch
 //
 // KEY TAKEAWAY:
-//   - Learn how to use type switches to handle different concrete types stored in an interface.
+//   - Type switches facilitate runtime type discovery and branching.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -25,16 +30,18 @@ package main
 
 import "fmt"
 
-//
-//   - Type switch syntax and usage
-//   - Handling multiple concrete types from an interface
-//   - The comma-ok pattern in type switches
-//
+// Section 04: Types & Design - Type Switch
 
+// Shape is an empty interface representing any geometric shape.
 type Shape interface{}
 
+// Circle represents a circular geometry.
 type Circle struct{ Radius float64 }
+
+// Rectangle represents a four-sided polygon.
 type Rectangle struct{ Width, Height float64 }
+
+// Triangle represents a three-sided polygon.
 type Triangle struct{ A, B, C float64 }
 
 func describeShape(s Shape) string {
@@ -65,7 +72,7 @@ func getArea(s Shape) interface{} {
 }
 
 func main() {
-	fmt.Println("=== Type Switch ===")
+	fmt.Println("=== Type Switch: Runtime Type Discovery ===")
 	fmt.Println()
 
 	shapes := []Shape{
@@ -74,40 +81,44 @@ func main() {
 		Triangle{A: 3, B: 4, C: 5},
 	}
 
+	// 1. Differentiated behavior based on concrete types.
+	// We use the type switch to generate descriptive text for each specific implementation.
 	fmt.Println("--- Describing Shapes ---")
 	for _, s := range shapes {
 		fmt.Printf("  %s\n", describeShape(s))
 	}
 
+	// 2. State-dependent logic.
+	// Type switches allow for type-safe access to fields (like Radius or Width)
+	// that are not part of the common interface.
 	fmt.Println()
-	fmt.Println("--- Getting Areas ---")
+	fmt.Println("--- Area Calculation ---")
 	for _, s := range shapes {
 		area := getArea(s)
 		fmt.Printf("  Area: %v\n", area)
 	}
 
+	// 3. Handling primitive types in empty interfaces.
+	// Type switches are commonly used to process untyped 'any' data from
+	// external sources (JSON, DB, etc.).
 	fmt.Println()
-	fmt.Println("--- Type Switch with Interface{} ---")
-	var anything interface{} = "hello"
+	fmt.Println("--- Processing 'any' Data ---")
+	var anything any = "dynamic content"
 	switch v := anything.(type) {
 	case string:
-		fmt.Printf("  String: %s (len=%d)\n", v, len(v))
+		fmt.Printf("  Found String: %q (len=%d)\n", v, len(v))
 	case int:
-		fmt.Printf("  Int: %d\n", v)
+		fmt.Printf("  Found Int: %d\n", v)
 	case bool:
-		fmt.Printf("  Bool: %t\n", v)
+		fmt.Printf("  Found Bool: %t\n", v)
 	default:
-		fmt.Printf("  Unknown type: %T\n", v)
+		fmt.Printf("  Unknown Type: %T\n", v)
 	}
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Type switch checks multiple types in one statement")
-	fmt.Println("  - value.(type) extracts the concrete type")
-	fmt.Println("  - Default case handles unknown types")
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.7 -> 04-types-design/7-receiver-sets")
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: TI.11 -> 04-types-design/11-dynamic-typing-with-any")
+	fmt.Println("Run    : go run ./04-types-design/11-dynamic-typing-with-any")
 	fmt.Println("Current: TI.6 (type-switch)")
-	fmt.Println("Previous: TI.5 (stringer)")
 	fmt.Println("---------------------------------------------------")
 }

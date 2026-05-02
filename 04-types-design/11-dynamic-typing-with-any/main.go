@@ -8,32 +8,40 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how `any` works, how to extract concrete types safely, and why typed nil values can still make an interface non-nil.
+//   - Using the `any` keyword to handle untyped data.
+//   - Recovering concrete types safely using assertions.
+//   - The "Typed Nil" pitfall: why non-nil interfaces can contain nil values.
 //
 // WHY THIS MATTERS:
-//   - An interface value carries both a dynamic type and a dynamic value. Bugs appear when you forget that it needs both pieces.
+//   - The empty interface (`any`) is Go's tool for extreme flexibility.
+//     However, misuse leads to runtime panics and subtle nil-checking
+//     bugs. Understanding its internal representation is critical for
+//     building robust generic-like systems and handling dynamic data.
 //
 // RUN:
 //   go run ./04-types-design/11-dynamic-typing-with-any
 //
 // KEY TAKEAWAY:
-//   - Learn how `any` works, how to extract concrete types safely, and why typed nil values can still make an interface non-nil.
+//   - An interface value is only nil if BOTH its type and data are nil.
 // ============================================================================
 
 package main
 
 import "fmt"
 
-//
+// Section 04: Types & Design - Dynamic Typing with Any
 
+// notifier defines a simple notification behavior.
 type notifier interface {
 	Notify()
 }
 
+// emailNotifier implements the notifier interface for email delivery.
 type emailNotifier struct {
 	address string
 }
 
+// Notify prints a notification message to stdout.
 func (e *emailNotifier) Notify() {
 	fmt.Printf("notifying %s\n", e.address)
 }
@@ -53,19 +61,33 @@ func inspect(v any) {
 }
 
 func main() {
-	fmt.Println("=== Dynamic Typing with any ===")
-	inspect("orders")
-	inspect(3)
-	inspect(&emailNotifier{address: "ops@example.com"})
+	fmt.Println("=== Dynamic Typing: Working with the 'any' Interface ===")
+	fmt.Println()
 
-	var typedNil *emailNotifier
-	var value any = typedNil
-	fmt.Printf("typed nil inside any == nil? %t\n", value == nil)
-	fmt.Println("The interface keeps type information even when the pointer payload is nil.")
+	// 1. Heterogeneous data.
+	// 'any' allows us to pass values of any type into a single processing point.
+	fmt.Println("--- Inspecting Varied Types ---")
+	inspect("production-logs")
+	inspect(500)
+	inspect(&emailNotifier{address: "admin@systems.net"})
+	fmt.Println()
+
+	// 2. The 'Typed Nil' pitfall.
+	// An interface variable stores a pair: (Type, Value).
+	// If the Type is non-nil, the interface ITSELF is non-nil, even if the
+	// underlying Value pointer is nil.
+	fmt.Println("--- The Interface Nil Pitfall ---")
+	var typedNil *emailNotifier = nil
+	var interfaceValue any = typedNil
+
+	fmt.Printf("  Concrete Pointer is nil: %t\n", typedNil == nil)
+	fmt.Printf("  Interface variable is nil: %t\n", interfaceValue == nil)
+	fmt.Println("  RESULT: Interface is NOT nil because it carries the '*emailNotifier' type info.")
+
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: TI.12 -> 04-types-design/12-functional-options")
+	fmt.Println("Run    : go run ./04-types-design/12-functional-options")
 	fmt.Println("Current: TI.11 (dynamic-typing-with-any)")
-	fmt.Println("Previous: TI.10 (payroll-processor)")
 	fmt.Println("---------------------------------------------------")
 }

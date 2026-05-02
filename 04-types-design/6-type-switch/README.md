@@ -2,45 +2,34 @@
 
 ## Mission
 
-Learn how to use type switches to handle different concrete types stored in an interface.
-
-## Why This Lesson Exists Now
-
-You have learned about type assertions (checking one type). Sometimes you need to check against multiple possible types. Type switches let you handle many types in one clean syntax.
-
-> **Backward Reference:** In [Lesson 5: Stringer](../5-stringer/README.md), you learned how to implement a specific, standard interface. Now we will learn how to "look inside" an interface value to see what concrete type it actually holds.
+- Utilize type switches to branch program logic based on concrete types.
+- Extract concrete values from interface variables using the `value.(type)` syntax.
+- Implement comprehensive type handling including multiple cases and default branches.
 
 ## Prerequisites
 
-- `TI.3` interfaces
+- `TI.3` Interfaces
 
 ## Mental Model
 
-Think of a sorting machine. Items come down the belt, and different items need different handling-fragile items go to one bin, heavy items to another, documents to a third. The machine "switches" on the type of item to decide where it goes.
+While interfaces abstract behavior, there are scenarios where a program must differentiate between concrete implementations to perform type-specific operations. A **Type Switch** is a control structure that allows for this runtime inspection in a safe and readable manner. It compares the dynamic type of an interface value against multiple specific type cases.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["data"] --> B["type definition"]
-    B --> C["methods or interface behavior"]
-```
-```text
-switch v := value.(type) {
-case string:
-    // v is string
-case int:
-    // v is int
-case *MyStruct:
-    // v is pointer to MyStruct
-default:
-    // unknown type
-}
+    A[Interface Value] --> B{Type Switch}
+    B --> C[Case Type A]
+    B --> D[Case Type B]
 ```
 
 ## Machine View
 
-A type switch is like a regular switch, but instead of comparing values, it compares types. The `value.(type)` syntax extracts the concrete type from the interface.
+Internally, a type switch leverages the **ITab** (Interface Table) of an interface value. When `value.(type)` is called:
+
+1.  Go accesses the type descriptor pointer within the interface's internal 2-word structure.
+2.  The runtime compares this descriptor against the type descriptors listed in each `case`.
+3.  If a match is found, the variable in the assignment (`v := value.(type)`) is redeclared as the concrete type for that specific case block, allowing for direct field and method access without further casting.
 
 ## Run Instructions
 
@@ -50,42 +39,29 @@ go run ./04-types-design/6-type-switch
 
 ## Code Walkthrough
 
-### Basic type switch
-
-Use `value.(type)` inside a switch to get the concrete type.
-
-### Multiple type handling
-
-Different cases can handle different types, with different logic for each.
-
-### Default case
-
-The default case handles types you have not explicitly handled.
+- **Syntax**: `switch v := i.(type) { ... }`. The variable `v` takes on the concrete type and value of `i` within each case.
+- **Fallthrough**: Unlike value switches, type switches do **not** support the `fallthrough` keyword.
+- **Multiple Types**: A single case can handle multiple types (e.g., `case int, int64:`), in which case the variable `v` remains the interface type because it cannot be narrowed to a single concrete type.
+- **Default Case**: Always recommended to handle unexpected types and maintain system robustness.
 
 ## Try It
 
-1. Add a new type to the shape example and handle it in the type switch.
-2. Use a type switch inside a function that accepts interface{}.
-3. Try calling a method that only exists on one specific type using type switch.
-
-## Common Questions
-
-- What is the difference between type assertion and type switch?
-  Type assertion checks one type. Type switch checks multiple types in one statement.
-
-- When should I use type switches?
-  When you have an interface that can hold multiple concrete types and you need different logic for each.
+1. In `main.go`, add a new struct type `Square` and include it in the `shapes` slice.
+2. Update the `describeShape` and `getArea` functions to handle the `Square` type within their respective type switches.
+3. Verify that the output correctly reflects the new type.
 
 ## In Production
-Type switches are used in serialization (json.Unmarshal), reflection, and handling API responses that return different types.
+
+- **Serialization/Deserialization**: Handling diverse data types during JSON or binary encoding.
+- **Generic Handling**: Processing data from an `any` (empty interface) source where the incoming shape is not guaranteed.
+- **Error Handling**: Discriminating between different custom error types to apply specific recovery logic.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** Now that you know how to work with interfaces, it is time to understand a subtle but critical rule about how Go decides if a type satisfies an interface based on its methods. In [Lesson 7: Receiver Sets](../7-receiver-sets/README.md), we will dive into the "method set" rules.
+1. Why does Go use a specific switch syntax for types instead of allowing standard equality checks (e.g., `if typeOf(i) == Circle`)?
+2. What are the safety benefits of using a type switch over multiple individual type assertions?
+3. In what situations would you consider a type switch a "code smell," and how could you refactor it using interface methods?
 
 ## Next Step
 
-Next: `TI.7` -> [`04-types-design/7-receiver-sets`](../7-receiver-sets/README.md)
+Next: `TI.11` -> [`04-types-design/11-dynamic-typing-with-any`](../11-dynamic-typing-with-any/README.md)

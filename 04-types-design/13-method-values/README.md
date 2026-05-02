@@ -2,46 +2,32 @@
 
 ## Mission
 
-Learn how to treat methods as first-class values-assigning methods to variables and passing them as function arguments.
-
-> **Backward Reference:** In [Lesson 12: Functional Options](../12-functional-options/README.md), you learned a pattern for configuring types. Now we will see how methods themselves can be detached from their types and passed around as configuration or callbacks.
-
-## Why This Lesson Exists Now
-
-In Go, methods can be extracted from their receiver and used as values. This is useful for callbacks, event handlers, and deferred function calls.
+- Extract methods from receivers to create first-class function values.
+- Understand the internal mechanics of receiver binding in method values.
+- Utilize method values as decoupled callbacks and event handlers.
+- Manage instance-specific behaviors using bound function variables.
 
 ## Prerequisites
 
-- `TI.2` methods
+- `TI.2` Methods
+- `FE.8` Functions and Closures
 
 ## Mental Model
 
-Think of a button on a remote. You can press the button (call the method), or you can program the button to trigger something else (use the method as a value). Method values let you treat the button itself as a thing you can store and use later.
+In Go, methods are not merely functions attached to types; they are first-class citizens that can be "extracted" from their receiver instances. When a method is assigned to a variable (e.g., `fn := obj.Method`), Go creates a **method value**. This value is a function that carries a permanent reference to the original receiver instance, allowing the method to be executed later without the caller needing to know about the underlying object.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["data"] --> B["type definition"]
-    B --> C["methods or interface behavior"]
-```
-```go
-type Counter struct{ Value int }
-
-func (c *Counter) Increment() { c.Value++ }
-
-// Method as value - the receiver is bound
-counter := &Counter{}
-incFunc := counter.Increment // This is a func()
-// Calling it later
-incFunc()
-incFunc()
-fmt.Println(counter.Value) // 2
+    A[Receiver Instance] --> B[Method Capture]
+    B --> C[Function Value]
+    C --> D[Bound Execution]
 ```
 
 ## Machine View
 
-When you capture a method value, Go binds the receiver to that function value. Calling the stored function later is like calling the original method with the same receiver already attached.
+A method value is internally represented as a small structure that contains two pointers: one to the function's executable code and one to the receiver instance. When the function value is invoked, the Go runtime automatically passes the stored receiver pointer as the first argument (the receiver) to the function, effectively "binding" the state to the behavior.
 
 ## Run Instructions
 
@@ -51,34 +37,56 @@ go run ./04-types-design/13-method-values
 
 ## Code Walkthrough
 
-### Extracting a method
+### Basic Binding
 
-`obj.Method` returns a function value with the receiver bound.
+When you capture a method value, the receiver's state is preserved. If the method has a pointer receiver, the function value points to the original object.
 
-### Using method values
+```go
+counter := &Counter{Value: 10}
+incFunc := counter.Increment // incFunc is now func()
+incFunc()                    // Increments counter.Value to 11
+```
 
-Pass method values to functions that expect func().
+### Methods as Callbacks
 
-### Method values vs closures
+Method values satisfy function signatures, making them ideal for injection into higher-order functions or event loops.
 
-Method values capture the receiver; closures capture variables.
+```go
+func runHandler(fn func()) {
+    fn()
+}
+
+// Pass the method value directly
+runHandler(button.OnClick)
+```
 
 ## Try It
 
-1. Store a method in a map of event handlers.
-2. Pass a method value to a defer statement.
-3. Compare method values with closures capturing the same receiver.
+### Automated Tests
+
+```bash
+go test ./...
+```
+
+### Manual Verification
+
+- Create two instances of a struct, capture the same method from both into different variables, and verify that calling each variable only affects its respective instance.
+- Pass a method value to a `defer` statement and confirm it executes with the correct receiver state at the end of the function.
 
 ## In Production
-Method values are used in HTTP handlers, event systems, and anywhere you need to pass a method as a callback.
+
+- **HTTP Middleware**: Binding database or logger instances to handler methods.
+- **UI Frameworks**: Connecting widget events (OnClick, OnHover) to specific controller methods.
+- **Task Orchestration**: Passing specific worker methods to a generic execution pool.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** We have explored many ways to design types and behavior. To wrap up the core type system, we will return to Generics to see how to handle complex constraints. In [Lesson 14: Complex Generic Constraints](../14-complex-generic-constraints/README.md), you will learn how to create your own reusable constraints using interface composition.
+1. How does a method value differ from a closure that wraps a method call?
+2. What happens to a method value if the underlying receiver instance is garbage collected? (Hint: The method value holds a reference).
+3. Why might you choose a method value over an interface for a simple callback?
+
+---
 
 ## Next Step
 
-Next: `TI.14` -> [`04-types-design/14-complex-generic-constraints`](../14-complex-generic-constraints/README.md)
+Next: `TI.10` -> [`04-types-design/10-payroll-processor`](../10-payroll-processor/README.md)

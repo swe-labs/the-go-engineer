@@ -2,45 +2,31 @@
 
 ## Mission
 
-Learn advanced constraint patterns including parameterized constraints, using interfaces as constraints, and creating reusable generic utilities.
-
-## Why This Lesson Exists Now
-
-You know basic generics with simple constraints like `int | float64`. But real-world code often needs more sophisticated constraints-constraints that require methods, parameterized types, or multiple interface requirements.
-
-> **Backward Reference:** In [Lesson 13: Method Values](../13-method-values/README.md), you learned how to treat behavior as data. Now, we will combine that with Generics to create constraints that require specific behaviors from the types passed to them.
+- Define complex type constraints using method-based interfaces.
+- Compose multiple behaviors into a single generic requirement.
+- Utilize the `comparable` constraint for map-key operations.
+- Understand the distinction between static satisfaction and dynamic dispatch.
 
 ## Prerequisites
 
-- `TI.9` generics
+- `TI.9` Generics
 
 ## Mental Model
 
-Think of a vending machine that accepts only certain payment methods. The constraint is not just "some type"-it's "anything with Pay() method that returns error." Similarly, generic constraints can require methods, not just type identity.
+In basic generics, constraints are often simple type unions (e.g., `int | float64`). However, production-grade generic logic frequently requires specific **behavioral contracts**. Complex constraints allow engineers to define these contracts using interfaces, ensuring that any type parameter `T` possesses the necessary methods to execute the generic logic safely.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["data"] --> B["type definition"]
-    B --> C["methods or interface behavior"]
-```
-```go
-// Constraint requiring methods
-type Adder interface {
-    Add(other int) int
-}
-
-// Constraint requiring multiple interfaces  
-type Serializer interface {
-    fmt.Stringer
-    json.Marshaler
-}
+    A[Type Constraint] --> B[Type Set]
+    B --> C[int]
+    B --> D[int64]
 ```
 
 ## Machine View
 
-Constraints are checked by the compiler before the program runs. They do not add dynamic type checks at each call site. They define which concrete types are allowed when the generic code is instantiated.
+Generic constraints are enforced at **compile-time**. When a generic function is called, the Go compiler verifies that the concrete type provided satisfies all requirements defined by the constraint interface. This results in type-safe, monomorphized machine code where behavioral requirements are baked into the executable, eliminating the overhead of runtime type assertions.
 
 ## Run Instructions
 
@@ -50,33 +36,51 @@ go run ./04-types-design/14-complex-generic-constraints
 
 ## Code Walkthrough
 
-### Interface as constraint
+### Method-Based Constraints
 
-Interfaces can be constraints-anything implementing the interface works.
+Interfaces used as constraints can require one or more methods. Any type `T` that implements these methods can be used as a type parameter.
 
-### Multiple interface constraints
+```go
+type Numeric interface {
+    Add(other int) int
+    Multiply(other int) int
+}
+```
 
-Use embedded interfaces to require multiple behaviors.
+### The `comparable` Constraint
 
-### Comparable constraint
+The built-in `comparable` constraint is a special interface satisfied by all types that support equality operators (`==` and `!=`). This is mandatory for types used as map keys.
 
-The built-in `comparable` constraint allows equality operators.
+```go
+func GetOrSet[K comparable, V any] (m map[K]V, key K, defaultVal V) V
+```
 
 ## Try It
 
-1. Create a constraint that requires both String() and a custom method.
-2. Use the comparable constraint to create a generic key-value pair.
-3. Build a constraint for numeric types with multiple operations.
+### Automated Tests
+
+```bash
+go test ./...
+```
+
+### Manual Verification
+
+- Instantiate `ScaleAll` with a type that does *not* satisfy the `Numeric` interface and observe the compile-time error.
+- Use `GetOrSet` with a non-comparable type (like a slice) as a key and observe the compiler rejection.
 
 ## In Production
-Complex constraints are used in real Go code for data structures, serialization, and anywhere you need type-safe generic utilities.
+
+- **Generic Cache Layers**: Using `comparable` for flexible key types.
+- **Serialization Utilities**: Constraining types to those that implement `json.Marshaler` or `proto.Message`.
+- **Mathematical Libraries**: Requiring specific arithmetic operations on custom numeric types.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** We have reached the end of the Foundations of Go's type system. In [Lesson 15: Generic Data Structures](../15-generic-data-structures/README.md), we will bring everything together to build a reusable, type-safe data structure from scratch.
+1. Why are constraints checked at compile-time rather than runtime?
+2. What are the limitations of the `comparable` constraint?
+3. How does interface embedding simplify complex generic requirements?
+
+---
 
 ## Next Step
 

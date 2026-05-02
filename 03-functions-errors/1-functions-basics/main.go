@@ -8,20 +8,20 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Defining function boundaries using the `func` keyword.
-//   - Naming blocks of code to improve readability.
-//   - How the program execution jumps between `main` and other functions.
+//   - Defining logical boundaries using the `func` keyword.
+//   - Improving maintainability by partitioning code into named blocks.
+//   - The mechanics of program execution jumping between functions.
 //
 // WHY THIS MATTERS:
-//   - Real-world programs are too complex to stay inside a single `main()`
-//     function. Functions are the primary tool Go engineers use to break
-//     large problems into small, manageable, and testable pieces.
+//   - Functions are the primary tool for complexity management. They allow
+//     engineers to break large problems into small, manageable, and
+//     testable units of work, facilitating parallel development and reuse.
 //
 // RUN:
 //   go run ./03-functions-errors/1-functions-basics
 //
 // KEY TAKEAWAY:
-//   - A function encapsulates one recognizable responsibility.
+//   - Functions encapsulate discrete responsibilities into named units.
 // ============================================================================
 
 package main
@@ -29,26 +29,30 @@ package main
 import "fmt"
 
 // Section 03: Functions & Errors - Functions Basics
-//
-// Mental model:
-// A function gives one piece of work a name so main() can stay readable.
-//
+// Functions provide a mechanism for logic reuse and documentation by naming
+// executable blocks.
 
+// printBanner outputs the lesson header to stdout.
 func printBanner() {
-	fmt.Println("=== Functions Basics ===")
+	fmt.Println("=== Functions Basics: Named Logic Units ===")
 }
 
+// printGoal summarizes the technical objective of functional decomposition.
 func printGoal() {
-	fmt.Println("A function gives a piece of work a name.")
+	fmt.Println("Functions provide encapsulation and nameable boundaries for logic.")
 }
 
+// printChecklist enumerates the architectural benefits of functions.
 func printChecklist() {
-	fmt.Println("- main() can call other functions")
-	fmt.Println("- each function can do one small job")
-	fmt.Println("- named steps are easier to read than one long inline block")
+	fmt.Println("- Logic isolation for testing")
+	fmt.Println("- Reduced cognitive load through naming")
+	fmt.Println("- Reusable execution paths")
 }
 
 func main() {
+	// 1. Procedural Execution.
+	// The main function serves as the entry point and orchestrates calls
+	// to specialized sub-routines.
 	printBanner()
 	printGoal()
 	printChecklist()

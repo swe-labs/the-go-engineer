@@ -38,33 +38,38 @@ import (
 // A function can return more than one value when one result is not enough.
 //
 
+// findItem searches for a target string in a slice and returns the index and a success flag.
 func findItem(items []string, target string) (int, bool) {
 	for i, item := range items {
 		if item == target {
 			return i, true
 		}
 	}
-
 	return -1, false
 }
 
+// splitName partitions a full name string into first and last name components.
 func splitName(fullName string) (string, string) {
 	parts := strings.SplitN(fullName, " ", 2)
 	if len(parts) < 2 {
 		return fullName, ""
 	}
-
 	return parts[0], parts[1]
 }
 
 func main() {
+	// 1. Multiple assignments.
+	// Go functions can return multiple values, eliminating the need for
+	// out-parameters or sentinel values.
 	items := []string{"bread", "tea", "rice"}
-
 	index, found := findItem(items, "tea")
-	fmt.Printf("tea found? %t at index %d\n", found, index)
+	fmt.Printf("Search result: found=%t at index=%d\n", found, index)
 
+	// 2. Structural returns.
+	// Returning multiple strings allows for easy destructuring of complex
+	// data without intermediate objects.
 	firstName, lastName := splitName("Ava Stone")
-	fmt.Printf("first=%s last=%s\n", firstName, lastName)
+	fmt.Printf("Parsed name: first=%s last=%s\n", firstName, lastName)
 
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")

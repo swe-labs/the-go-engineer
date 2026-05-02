@@ -7,16 +7,21 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how to define behavior contracts using interfaces and achieve polymorphism without inheritance.
+//   - Defining behavioral contracts using the `interface` keyword.
+//   - Implicit interface satisfaction (structural typing).
+//   - Achieving polymorphism without class inheritance.
+//   - The internal memory representation of interface values (itab).
 //
 // WHY THIS MATTERS:
-//   - Think of a power outlet. The outlet defines a contract: "I accept anything with two prongs and a ground pin." A lamp, a phone charger, and a refrig...
+//   - Interfaces are Go's primary tool for abstraction and decoupling.
+//     They enable the creation of interchangeable components and
+//     facilitate rigorous testing through dependency injection.
 //
 // RUN:
 //   go run ./04-types-design/3-interfaces
 //
 // KEY TAKEAWAY:
-//   - Learn how to define behavior contracts using interfaces and achieve polymorphism without inheritance.
+//   - Interfaces decouple requirements from concrete implementations.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -28,7 +33,7 @@ import (
 	"math"
 )
 
-//
+// Section 04: Types & Design - Interfaces
 //   - What interfaces are: contracts that define behavior
 //   - Implicit interface satisfaction (no "implements" keyword)
 //   - Polymorphism: one function, many types
@@ -37,20 +42,24 @@ import (
 //   - Real-world design: "Accept interfaces, return structs"
 //
 
+// Shape defines the behavioral contract for geometry calculations.
 type Shape interface {
 	Area() float64
 	Perimeter() float64
 }
 
+// Rectangle represents a four-sided polygon with right angles.
 type Rectangle struct {
 	Width  float64
 	Height float64
 }
 
+// Area calculates the surface area of the rectangle.
 func (r Rectangle) Area() float64 {
 	return r.Width * r.Height
 }
 
+// Perimeter calculates the distance around the rectangle.
 func (r Rectangle) Perimeter() float64 {
 	return 2 * (r.Width + r.Height)
 }
@@ -105,58 +114,54 @@ func totalArea(shapes []Shape) float64 {
 }
 
 func main() {
-	fmt.Println("=== Interfaces: Contracts for Behavior ===")
+	fmt.Println("=== Interfaces: Decoupling Logic from Implementation ===")
 	fmt.Println()
 
+	// 1. Concrete implementations.
+	// Different types provide their own specific logic for the same behavior.
 	rect := Rectangle{Width: 10, Height: 5}
 	circle := Circle{Radius: 7}
 	tri := Triangle{A: 3, B: 4, C: 5}
 
-	fmt.Println("Individual shapes:")
+	fmt.Println("--- Individual Implementation Details ---")
 	printShapeInfo(rect)
 	printShapeInfo(circle)
 	printShapeInfo(tri)
 	fmt.Println()
 
+	// 2. Polymorphic behavior.
+	// Any type that implements the required methods can be treated as a 'Shape'.
+	// This allows writing functions like totalArea that operate on the abstraction.
 	allShapes := []Shape{rect, circle, tri}
 	fmt.Printf("Total area of %d shapes: %.2f\n", len(allShapes), totalArea(allShapes))
 	fmt.Println()
 
-	fmt.Println("=== Type Assertions ===")
+	// 3. Type Discovery.
+	// Interfaces carry dynamic type information. Use assertions to recover concrete types.
+	fmt.Println("--- Runtime Type Discovery ---")
 	var s Shape = circle
 
+	// Safe type assertion with comma-ok idiom.
 	if c, ok := s.(Circle); ok {
-		fmt.Printf("  It's a Circle! Radius = %.1f\n", c.Radius)
+		fmt.Printf("  Identity confirmed: Circle with radius %.1f\n", c.Radius)
 	}
 
-	if _, ok := s.(Rectangle); !ok {
-		fmt.Println("  Not a Rectangle")
-	}
-	fmt.Println()
-
-	fmt.Println("=== Type Switch ===")
+	// Type switch for branching based on multiple implementations.
 	for _, shape := range allShapes {
 		switch v := shape.(type) {
 		case Rectangle:
-			fmt.Printf("  Rectangle: %.1f x %.1f\n", v.Width, v.Height)
+			fmt.Printf("  Processing Rectangle: %.1fx%.1f\n", v.Width, v.Height)
 		case Circle:
-			fmt.Printf("  Circle: radius = %.1f\n", v.Radius)
+			fmt.Printf("  Processing Circle: radius %.1f\n", v.Radius)
 		case Triangle:
-			fmt.Printf("  Triangle: sides = %.1f, %.1f, %.1f\n", v.A, v.B, v.C)
+			fmt.Printf("  Processing Triangle: sides %.1f, %.1f, %.1f\n", v.A, v.B, v.C)
 		}
 	}
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Interfaces define WHAT a type can do (contract)")
-	fmt.Println("  - Types satisfy interfaces IMPLICITLY (no 'implements' keyword)")
-	fmt.Println("  - Polymorphism: one function, many types")
-	fmt.Println("  - Accept interfaces, return structs (design principle)")
-	fmt.Println("  - Use type assertions (value, ok) to extract concrete types")
-	fmt.Println("  - Interfaces are Go's primary tool for abstraction and testing")
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: TI.4 -> 04-types-design/4-interface-embedding")
+	fmt.Println("Run    : go run ./04-types-design/4-interface-embedding")
 	fmt.Println("Current: TI.3 (interfaces)")
-	fmt.Println("Previous: TI.2 (methods)")
 	fmt.Println("---------------------------------------------------")
 }

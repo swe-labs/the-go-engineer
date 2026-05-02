@@ -7,16 +7,22 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how to attach functions to types using methods, and understand the critical difference between value receivers and pointer receivers.
+//   - Associating functions with named types using method receivers.
+//   - Differentiating between Value Receivers and Pointer Receivers.
+//   - Understanding automatic pointer conversion (syntactic sugar).
+//   - Applying the consistency rule for receiver design.
 //
 // WHY THIS MATTERS:
-//   - Think of a TV remote. The remote (struct) has state: volume level, current channel, power status. The buttons on the remote are methods. Some butto...
+//   - Methods enable encapsulation and high cohesion by grouping logic
+//     with the data it operates on. This is the foundation of
+//     object-oriented patterns in Go and the mechanism used to satisfy
+//     interfaces.
 //
 // RUN:
 //   go run ./04-types-design/2-methods
 //
 // KEY TAKEAWAY:
-//   - Learn how to attach functions to types using methods, and understand the critical difference between value receivers and pointer receivers.
+//   - Methods define the behavioral interface of a data structure.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -28,7 +34,7 @@ import (
 	"math"
 )
 
-//
+// Section 04: Types & Design - Methods
 //   - What methods are: functions attached to a type
 //   - VALUE receivers vs POINTER receivers - the most critical distinction
 //   - When to use each receiver type (the golden rule)
@@ -36,22 +42,27 @@ import (
 //   - Method sets and how they affect interface satisfaction
 //
 
+// Circle represents a circular geometry in 2D space.
 type Circle struct {
 	Radius float64
 }
 
+// Area calculates the area of the circle using its radius.
 func (c Circle) Area() float64 {
 	return math.Pi * c.Radius * c.Radius
 }
 
+// Perimeter calculates the circumference of the circle.
 func (c Circle) Perimeter() float64 {
 	return 2 * math.Pi * c.Radius
 }
 
+// String returns a human-readable representation of the circle.
 func (c Circle) String() string {
 	return fmt.Sprintf("Circle(radius=%.2f)", c.Radius)
 }
 
+// Scale resizes the circle by a given factor. It requires a pointer receiver to modify the original struct.
 func (c *Circle) Scale(factor float64) {
 	c.Radius *= factor
 }
@@ -85,24 +96,29 @@ func (a BankAccount) Summary() string {
 }
 
 func main() {
-	fmt.Println("=== Methods: Functions Attached to Types ===")
+	fmt.Println("=== Methods: Associating Behavior with Types ===")
 	fmt.Println()
 
+	// 1. Value receivers operate on a copy of the data.
+	// Methods defined on 'T' can be called on both values and pointers.
 	fmt.Println("--- Value Receiver Methods ---")
 	c := Circle{Radius: 5.0}
 	fmt.Printf("  %s\n", c)
-
 	fmt.Printf("  Area:      %.2f\n", c.Area())
 	fmt.Printf("  Perimeter: %.2f\n", c.Perimeter())
 	fmt.Printf("  Radius:    %.2f (unchanged)\n", c.Radius)
 	fmt.Println()
 
+	// 2. Pointer receivers operate on the original memory address.
+	// Go automatically takes the address of 'c' (&c) to satisfy the *Circle receiver.
 	fmt.Println("--- Pointer Receiver Methods ---")
 	c.Scale(2.0)
 	fmt.Printf("  After Scale(2.0): radius = %.2f\n", c.Radius)
 	fmt.Printf("  New area: %.2f\n", c.Area())
 	fmt.Println()
 
+	// 3. Encapsulation and state mutation.
+	// Grouping logic (Deposit/Withdraw) with data (Balance) ensures consistency.
 	fmt.Println("--- Bank Account (Pointer Receivers) ---")
 	account := BankAccount{Owner: "Rasel", Balance: 1000.00}
 	fmt.Printf("  %s\n", account.Summary())
@@ -116,14 +132,9 @@ func main() {
 	fmt.Printf("  Final: %s\n", account.Summary())
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Value receiver (c Circle):  works on a COPY - for read-only methods")
-	fmt.Println("  - Pointer receiver (c *Circle): works on ORIGINAL - for mutation")
-	fmt.Println("  - THE GOLDEN RULE: If ANY method needs a pointer, make ALL methods pointers")
-	fmt.Println("  - Go auto-dereferences: c.Scale() works even if c is not a pointer")
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.3 -> 04-types-design/3-interfaces")
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: TI.7 -> 04-types-design/7-receiver-sets")
+	fmt.Println("Run    : go run ./04-types-design/7-receiver-sets")
 	fmt.Println("Current: TI.2 (methods)")
-	fmt.Println("Previous: TI.1 (structs)")
 	fmt.Println("---------------------------------------------------")
 }

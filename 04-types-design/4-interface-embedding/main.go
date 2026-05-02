@@ -7,16 +7,21 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how to embed one interface into another to build larger contracts from smaller pieces.
+//   - Composing complex behavioral contracts from simpler interfaces.
+//   - The mechanics of method set aggregation during embedding.
+//   - Analyzing standard library patterns like `io.ReadWriter`.
 //
 // WHY THIS MATTERS:
-//   - Think of a universal remote. It does not have buttons for every function directly-it embeds the capabilities of a TV remote, a DVD remote, and a soundbar remote.
+//   - Go promotes the use of small, focused interfaces. Embedding
+//     allows you to combine these atomic behaviors into sophisticated
+//     contracts without duplicating method signatures, adhering to the
+//     Interface Segregation Principle.
 //
 // RUN:
 //   go run ./04-types-design/4-interface-embedding
 //
 // KEY TAKEAWAY:
-//   - Learn how to embed one interface into another to build larger contracts from smaller pieces.
+//   - Interface embedding is the primary tool for behavioral composition.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -28,20 +33,23 @@ import (
 	"fmt"
 )
 
-//
+// Section 04: Types & Design - Interface Embedding
 //   - Embedding one interface inside another
 //   - How embedded interfaces combine contracts
 //   - The io.ReadWriter pattern from the standard library
 //
 
+// Reader defines a basic data retrieval contract.
 type Reader interface {
 	Read(p []byte) (n int, err error)
 }
 
+// Writer defines a basic data persistence contract.
 type Writer interface {
 	Write(p []byte) (n int, err error)
 }
 
+// ReadWriter embeds both Reader and Writer to create a composite behavioral contract.
 type ReadWriter interface {
 	Reader
 	Writer
@@ -67,29 +75,30 @@ func processReadWrite(rw ReadWriter) {
 }
 
 func main() {
-	fmt.Println("=== Interface Embedding ===")
+	fmt.Println("=== Interface Embedding: Behavioral Composition ===")
 	fmt.Println()
 
-	fmt.Println("--- Embedded Interfaces ---")
+	// 1. Implementation of embedded behaviors.
+	// Buffer satisfies Reader and Writer individually.
+	fmt.Println("--- Satisfying Embedded Contracts ---")
 	b := &Buffer{}
 	processReadWrite(b)
 
+	// 2. Composed Interfaces (Standard Library Pattern).
+	// Types like bytes.Buffer satisfy io.ReadWriter by implementing the individual
+	// methods of io.Reader and io.Writer.
 	fmt.Println()
-	fmt.Println("--- io.ReadWriter Pattern ---")
+	fmt.Println("--- io.ReadWriter Composition Pattern ---")
 	rb := &bytes.Buffer{}
-	rb.WriteString("Testing ReadWriter")
-	data := make([]byte, 7)
+	rb.WriteString("Composed behavior")
+	data := make([]byte, 8)
 	n, _ := rb.Read(data)
-	fmt.Printf("Read %d bytes: %s\n", n, string(data))
+	fmt.Printf("  Read %d bytes: %s\n", n, string(data))
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Interface embedding combines contracts without copying methods")
-	fmt.Println("  - io.ReadWriter = io.Reader + io.Writer")
-	fmt.Println("  - Embedding is static: compiler verifies all methods exist")
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.5 -> 04-types-design/5-stringer")
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: TI.6 -> 04-types-design/6-type-switch")
+	fmt.Println("Run    : go run ./04-types-design/6-type-switch")
 	fmt.Println("Current: TI.4 (interface-embedding)")
-	fmt.Println("Previous: TI.3 (interfaces)")
 	fmt.Println("---------------------------------------------------")
 }

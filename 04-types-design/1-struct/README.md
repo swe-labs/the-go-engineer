@@ -2,48 +2,37 @@
 
 ## Mission
 
-Learn what a struct is and how to use it to group related data together into a single type.
-
-## Why This Lesson Exists Now
-
-You have been working with individual values (numbers, text, booleans) and collections (slices, maps). But real-world data is often structured. A server has an ID, hostname, IP, region, CPU cores, memory, status, and boot time. Scattering these across separate variables is messy and error-prone.
-
-That is what structs do.
-
-> **Backward Reference:** In [Lesson 10: Panic and Recover](../../03-functions-errors/10-panic-and-recover/README.md), you learned how to handle catastrophic failures. Now that you can safely manage the execution flow of your functions, you are ready to learn how to design the data structures those functions operate on.
+- Define composite types using the `struct` keyword.
+- Initialize and access struct fields using various patterns.
+- Analyze the memory layout and alignment of structs.
 
 ## Prerequisites
 
-- `FE.10` panic and recover
+- `FE.4` Variables and Constants
 
 ## Mental Model
 
-Think of a struct like a passport. A passport groups related data about one person: name, nationality, date of birth, photo, passport number. You would not scatter this data across 6 separate variables-you would put it in one structured document. That is exactly what a struct does in code.
+A **Struct** is a typed collection of fields. It allows you to group different data types into a single named unit. Unlike an array (where all elements must be the same type), a struct can hold heterogeneous data.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["data"] --> B["type definition"]
-    B --> C["methods or interface behavior"]
+    A[Struct] --> B[Field 1]
+    A --> C[Field 2]
+    A --> D[Field 3]
 ```
-
-| Field Name | Type        |
-| ---------- | ----------- |
-| `ID`       | `int`       |
-| `Hostname` | `string`    |
-| `IP`       | `string`    |
-| `Region`   | `string`    |
-| `CPUCores` | `int`       |
-| `MemoryGB` | `int`       |
-| `IsOnline` | `bool`      |
-| `BootedAt` | `time.Time` |
 
 ## Machine View
 
-Go lays out struct fields contiguously in memory. The compiler may add "padding" bytes between fields for alignment. Ordering fields from largest to smallest can reduce memory usage.
+In memory, a struct is a contiguous block. The size of the struct is the sum of its field sizes plus any **Padding** inserted by the compiler to ensure fields are aligned to their natural boundaries (e.g., an 8-byte `int64` should start at an 8-byte boundary).
 
-At this stage, you do not need to think about exact memory layout. What matters is understanding that a struct is a composite type that groups multiple values together.
+```text
+Memory Layout of Server struct:
+[ ID (8b) ][ Hostname (16b) ][ IP (16b) ][ Region (16b) ][ CPU (8b) ][ RAM (8b) ][ Online (1b) ][ Padding (7b) ][ BootedAt (24b) ]
+```
+
+Field order matters. Placing small types between large types can increase the overall size of the struct due to padding.
 
 ## Run Instructions
 
@@ -53,41 +42,31 @@ go run ./04-types-design/1-struct
 
 ## Code Walkthrough
 
-### `type Server struct {`
+- **Field Access**: Uses dot notation (`s.ID`).
+- **Zero Values**: When a struct is declared without initialization, all fields are set to their respective zero values.
+- **Constructors**: By convention, Go uses functions named `New[Type]` to return initialized and validated struct instances.
+- **Pointers**: Structs are often passed by pointer (`*Server`) to avoid copying large amounts of data on the stack and to allow mutation.
 
-This defines a new type named `Server`. The struct keyword means we are defining a composite type with multiple named fields.
-
-### `ID int`
-
-Each line inside the struct defines one field: a name, a type, and an optional comment. Order matters for memory layout, but for now, just list fields logically.
-
-### `NewServer(...)`
-
-Go does not have classes or constructors. Instead, by convention, functions that create types are named `New<Type>`. They validate inputs and set sensible defaults.
-
-### `webServer := Server{...}`
-
-This creates a struct instance with named fields. The order does not matter. Any field you omit gets its zero value.
-
-### `webServer.Hostname`
-
-Access fields with dot notation: structVar.FieldName.
+> [!NOTE]
+> This concept builds on the basic memory principles introduced in [Section 00](../../00-how-computers-work/README.md).
 
 ## Try It
 
-1. Add a new field to the Server struct (e.g., `Port int`) and update the initialization.
-2. Create a second Server instance and compare them.
-3. Try accessing a field that was not initialized and observe the zero value.
+1. In `main.go`, add a new field `Environment` (string) to the `Server` struct.
+2. Update the `NewServer` constructor to accept and set this new field.
+3. Observe how the zero-value output changes for the `emptyServer` variable.
 
 ## In Production
-Structs are the foundation of data modeling in Go. Every API request, database record, and configuration object is modeled as a struct. Understanding how to design structs is essential for writing real applications.
+
+- **Configuration**: Mapping environment variables or JSON files to internal structures.
+- **Domain Models**: Representing entities like Users, Accounts, or Products in a database.
+- **API Responses**: Defining the shape of data sent over the network.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** Structs group data, but they don't yet have behavior. In [Lesson 2: Methods](../2-methods/README.md), you will learn how to attach functions directly to structs, turning your data models into active components.
+1. How does Go's zero-value initialization improve system safety compared to languages with uninitialized memory?
+2. Why does the compiler insert padding into a struct instead of packing the data as tightly as possible?
+3. In what scenario would you prefer passing a struct by value instead of by pointer?
 
 ## Next Step
 

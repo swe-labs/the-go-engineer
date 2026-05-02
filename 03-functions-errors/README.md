@@ -1,47 +1,47 @@
-# Section 03: Functions & Errors
+# Section 03: Functions and Errors
 
-## Mission
+This section defines the mechanisms for behavioral encapsulation and failure handling in Go. Learners will master function signatures, explicit error management as a control flow value, and the lifecycle of resource management through `defer`.
 
-Learn how to model behavior boundaries and failure states by treating both functions and errors as first-class, manageable values in Go.
+## Technical Objectives
 
-By the end of this section, a learner should be able to:
-- Define function signatures with multiple returns and named return values.
-- Handle errors explicitly as values instead of using exceptions.
-- Use `defer` for deterministic resource cleanup.
-- Implement first-class functions and state-capturing closures.
-- Understand the mechanics of panic and recover boundaries.
+- **Encapsulation**: Defining logical boundaries using the `func` keyword.
+- **Data Flow**: Implementing precise input (parameters) and output (return values) contracts.
+- **Error Management**: Adhering to Go's "errors as values" philosophy to create resilient systems.
+- **Resource Lifecycle**: Using `defer` for deterministic cleanup of file handles, sockets, and memory.
+- **Functional Programming**: Utilizing first-class functions and closures for advanced logic capturing.
 
-## Section Map
+## Zero-Magic Machine Boundary
+
+In Section 03, we establish the following technical constraints:
+
+- **Functions** are discrete blocks of code located at fixed memory addresses.
+- **Errors** are standard interface values; handling them is a branch in the execution path, not a stack-unwinding exception.
+- **The Stack**: Return values and parameters are passed via the stack (or registers, depending on the compiler's ABI).
+- **Control Flow**: `panic` is reserved for unrecoverable state violations; `recover` provides a mechanism for localizing the impact of such violations.
+
+## Curriculum Map
 
 ### Track 1: Function Basics (FE)
-| ID | Lesson | What It Unlocks |
-| --- | --- | --- |
-| `FE.1` | [Functions Basics](./1-functions-basics/) | Encapsulating logic into reusable boundaries. |
-| `FE.2` | [Parameters and Returns](./2-parameters-and-returns/) | Passing data in and getting results out. |
-| `FE.3` | [Multiple Return Values](./3-multiple-return-values/) | Go's idiomatic way to return data and error simultaneously. |
-| `FE.4` | [Errors as Values](./4-errors-as-values/) | Why Go doesn't use try/catch and how to handle errors. |
-| `FE.5` | [Validation](./5-validation/) | Guard clauses and defensive programming. |
-| `FE.6` | [Orchestration](./6-orchestration/) | Coordinating multiple functions to solve a workflow. |
+Foundational lessons on signature definition and error handling.
+- [FE.1] `1-functions-basics`: Logic encapsulation and execution jumping.
+- [FE.2] `2-parameters-and-returns`: Defining precise data inputs and outputs.
+- [FE.3] `3-multiple-return-values`: Idiomatic return patterns for data and errors.
+- [FE.4] `4-errors-as-values`: The mechanics of explicit error handling.
+- [FE.5] `5-validation`: Guard clauses and input sanitization.
+- [FE.6] `6-orchestration`: Coordinating multiple functional units.
 
 ### Track 2: Advanced Functions (FE)
-| ID | Lesson | What It Unlocks |
-| --- | --- | --- |
-| `FE.8` | [First-Class Functions](./7-first-class-functions/) | Treating functions as data and callbacks. |
-| `FE.9` | [Closures Mechanics](./8-closures-mechanics/) | Functions that "carry" their environment with them. |
-| `FE.7` | [Order Summary](./9-order-summary/) | **Milestone**: Building a multi-step pricing and tax engine. |
-| `FE.10` | [Panic and Recover](./10-panic-and-recover/) | Handling unrecoverable failures and stopping crashes. |
+Functional patterns and unrecoverable error handling.
+- [FE.8] `7-first-class-functions`: Treating functions as data and arguments.
+- [FE.9] `8-closures-mechanics`: Capture-by-reference and stateful functions.
+- [FE.7] `9-order-summary`: **Milestone**: Building a domain-specific calculation engine.
+- [FE.10] `10-panic-and-recover`: Managing unrecoverable failure boundaries.
 
-## Zero-Magic Boundary
+## Prerequisites
 
-This section focuses on **Logical Boundaries**.
-It does **not** formally teach:
-- Struct methods or Receivers (covered in Section 04).
-- Interface-based polymorphism (covered in Section 04).
-- Package-level visibility and internal/external boundaries (covered in Section 05).
-
-> [!NOTE]
-> Functions are the fundamental unit of work in Go. Mastering them is a prerequisite for [Section 04: Type Design](../04-types-design/README.md), where you will learn to attach this behavior to custom data types.
+- `LB.1-4` Language Basics.
+- `CF.1-7` Control Flow.
 
 ## Next Step
 
-After completing this section, continue to [Section 04: Type Design](../04-types-design/README.md).
+After completing this section, proceed to [Section 04: Types and Design](../04-types-design/README.md) to attach behavior to custom data structures.

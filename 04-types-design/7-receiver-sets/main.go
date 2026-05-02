@@ -8,44 +8,54 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn the difference between value and pointer receivers and understand how method sets determine interface satisfaction.
+//   - Defining method sets for value types vs. pointer types.
+//   - How receiver choice determines interface implementation.
+//   - The mechanics of method inheritance for pointer types.
 //
 // WHY THIS MATTERS:
-//   - Think of a type's method set like a menu. A Counter value has only the Get() menu item. A *Counter pointer has the full menu: Get(), Inc(), Reset(). Interface satisfaction depends on which menu is visible.
+//   - Method sets are the strict rules the compiler uses to verify
+//     interface satisfaction. Understanding these rules prevents common
+//     "type does not implement interface" errors during system
+//     integration.
 //
 // RUN:
 //   go run ./04-types-design/7-receiver-sets
 //
 // KEY TAKEAWAY:
-//   - Learn the difference between value and pointer receivers and understand how method sets determine interface satisfaction.
+//   - Pointer types possess a superset of the methods available to value types.
 // ============================================================================
 
 package main
 
 import "fmt"
 
-//
+// Section 04: Types & Design - Receiver Sets
 //   - Value vs pointer receivers
 //   - Method sets: what methods a type actually provides
 //   - How receiver type affects interface satisfaction
 //
 
+// Counter represents a simple stateful integer.
 type Counter struct {
 	Value int
 }
 
+// Get returns the current counter value. It uses a value receiver.
 func (c Counter) Get() int {
 	return c.Value
 }
 
+// Inc increments the counter. It requires a pointer receiver to modify the state.
 func (c *Counter) Inc() {
 	c.Value++
 }
 
+// Reset clears the counter. It requires a pointer receiver.
 func (c *Counter) Reset() {
 	c.Value = 0
 }
 
+// Reader defines the behavioral contract for reading a value.
 type Reader interface {
 	Get() int
 }
@@ -55,57 +65,40 @@ func printValue(r Reader) {
 }
 
 func main() {
-	fmt.Println("=== Receiver Sets Drill ===")
+	fmt.Println("=== Receiver Sets: Interface Satisfaction Rules ===")
 	fmt.Println()
 
-	fmt.Println("--- Counter Value (value receiver only) ---")
-	c := Counter{Value: 42}
-	fmt.Printf("  Counter value: %d\n", c.Get())
+	// 1. Counter using a value receiver.
+	// Both Counter and *Counter satisfy Reader because Get() has a value receiver.
+	var c Counter
+	var r Reader = c
+	fmt.Printf("Reader (value): %d\n", r.Get())
+
+	r = &c
+	fmt.Printf("Reader (pointer): %d\n", r.Get())
+	fmt.Println()
+
+	// 2. Counter using a pointer receiver.
+	// A value type (T) does NOT satisfy an interface if the method uses a pointer receiver (*T).
+	// UNCOMMENTING the line below will cause a compile-time error:
+	// "Counter does not implement Writer (Inc method has pointer receiver)"
+	// var w Writer = c
+
+	var ptr *Counter = &c
+	ptr.Inc()
+	fmt.Printf("After Inc() via pointer: %d\n", c.Get())
+	fmt.Println()
+
+	// 3. Automatic address-taking (Syntactic Sugar).
+	// Go allows calling a pointer method on a value variable if it is addressable.
+	// The compiler implicitly transforms 'c.Reset()' into '(&c).Reset()'.
+	c.Reset()
+	fmt.Printf("After Reset() via value: %d\n", c.Get())
 
 	fmt.Println()
-	fmt.Println("--- Counter Pointer (pointer receivers) ---")
-	c2 := &Counter{Value: 100}
-	c2.Inc()
-	c2.Inc()
-	fmt.Printf("  After two Inc(): %d\n", c2.Get())
-	c2.Reset()
-	fmt.Printf("  After Reset(): %d\n", c2.Get())
-
-	fmt.Println()
-	fmt.Println("--- Method Set: Counter vs *Counter ---")
-	counter := Counter{Value: 0}
-
-	fmt.Println("  Counter (value type):")
-	fmt.Printf("    Has Get(): YES\n")
-	fmt.Printf("    Has Inc(): NO (pointer receiver)\n")
-
-	fmt.Println()
-	fmt.Println("  *Counter (pointer type):")
-	fmt.Printf("    Has Get(): YES (inherited from value)\n")
-	fmt.Printf("    Has Inc(): YES\n")
-	fmt.Printf("    Has Reset(): YES\n")
-
-	fmt.Println()
-	fmt.Println("--- Interface Satisfaction ---")
-	var r Reader = Counter{Value: 10}
-	printValue(r)
-
-	var r2 Reader = &Counter{Value: 20}
-	printValue(r2)
-
-	fmt.Println()
-	fmt.Println("--- Important: Can't pass value where pointer needed ---")
-	counter = Counter{Value: 50}
-	counter.Inc()
-
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Value receiver methods work on copies")
-	fmt.Println("  - Pointer receiver methods need the original")
-	fmt.Println("  - A type's method set depends on whether you use value or pointer")
-	fmt.Println("  - Interface satisfaction requires the method to exist on the type you pass")
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.8 -> 04-types-design/8-custom-errors")
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: TI.3 -> 04-types-design/3-interfaces")
+	fmt.Println("Run    : go run ./04-types-design/3-interfaces")
 	fmt.Println("Current: TI.7 (receiver-sets)")
-	fmt.Println("Previous: TI.6 (type-switch)")
 	fmt.Println("---------------------------------------------------")
 }

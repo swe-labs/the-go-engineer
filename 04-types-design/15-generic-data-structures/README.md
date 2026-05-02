@@ -2,42 +2,31 @@
 
 ## Mission
 
-Learn to build type-safe generic data structures like Stack, Queue, and Set using Go's generics.
-
-## Why This Lesson Exists Now
-
-You've learned generic functions. Now learn to build generic data structures that are type-safe at compile time-no runtime type assertions needed.
-
-> **Backward Reference:** In [Lesson 14: Complex Generic Constraints](../14-complex-generic-constraints/README.md), you learned how to define sophisticated rules for your generic types. Now, we will apply those rules to build reusable, type-safe data structures that can hold any type satisfying your requirements.
+- Build type-safe collections (Stack, Queue, Set) using Go generics.
+- Understand the internal mechanics of LIFO and FIFO data management.
+- Implement unique sets using `map[T]struct{}` with `comparable` constraints.
+- Manage generic state within receiver-based data structures.
 
 ## Prerequisites
 
-- `TI.9` generics
-- `TI.14` complex-generic-constraints
+- `TI.9` Generics
 
 ## Mental Model
 
-Think of a reusable storage box. Without generics, you'd need separate boxes for books, clothes, and electronics. With generics, one "Box<T>" works for all-type-safe and efficient.
+In high-performance systems, reusable data structures are essential. Prior to generics, Go developers often relied on `interface{}` (now `any`) which required runtime type assertions and introduced potential performance bottlenecks. By utilizing type parameters, we can build specialized collections that are checked at compile-time, ensuring that a `Stack[int]` can only ever contain integers, with no runtime overhead.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["data"] --> B["type definition"]
-    B --> C["methods or interface behavior"]
-```
-```go
-type Stack[T any] struct {
-    items []T
-}
-
-func (s *Stack[T]) Push(item T)
-func (s *Stack[T]) Pop() (T, bool)
+    A[Generic Stack] --> B[Element T]
+    B --> C[int]
+    B --> D[string]
 ```
 
 ## Machine View
 
-These generic structures are still built from the same tools you already know: slices, maps, methods, and type parameters. Generics remove type duplication, but the underlying storage behavior is still slice growth and map lookup.
+Generic data structures in Go are implemented through **monomorphization**. When you instantiate a `Stack[int]`, the compiler generates a specialized version of the struct and its methods specifically for the `int` type. This means the underlying slice operations (`append`, indexing) are as efficient as if they were written manually for `int`, avoiding the pointer chasing and interface boxing common in other languages.
 
 ## Run Instructions
 
@@ -47,34 +36,51 @@ go run ./04-types-design/15-generic-data-structures
 
 ## Code Walkthrough
 
-### Stack implementation
+### Generic Stack (LIFO)
 
-LIFO data structure with type-safe push/pop.
+A Stack manages items in a "Last-In-First-Out" order. The generic implementation ensures that the `Pop` method returns the correct type `T` without casting.
 
-### Queue implementation
+```go
+type Stack[T any] struct {
+    items []T
+}
+```
 
-FIFO data structure.
+### Generic Set (comparable)
 
-### Set implementation
+A Set requires the `comparable` constraint because it uses the internal map hashing mechanism to ensure uniqueness.
 
-Unique element collection using map.
+```go
+type Set[T comparable] map[T]struct{}
+```
 
 ## Try It
 
-1. Add a Peek method to Stack that returns top element without removing.
-2. Implement a generic LinkedList.
-3. Add Remove method to Set.
+### Automated Tests
+
+```bash
+go test ./...
+```
+
+### Manual Verification
+
+- Add a `Peek()` method to the `Stack` struct that returns the top element without removing it.
+- Instantiate a `Queue` for a custom struct type (e.g., `Task`) and verify that it maintains FIFO order.
 
 ## In Production
-Generic data structures are used throughout Go codebases for type-safe collections without runtime overhead.
+
+- **Task Orchestrators**: Using generic queues to manage background work items.
+- **Undo/Redo Systems**: Using generic stacks to store state history.
+- **Deduplication Engines**: Using generic sets to filter unique identifiers or IPs.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** You have mastered the fundamentals of types, interfaces, and generics. Now, we will look at how to build larger systems by combining these types through Composition instead of Inheritance. In [Lesson 1: Composition](../composition/1-composition/README.md), you will learn how to embed structs to reuse data and behavior.
+1. Why does the `Set` implementation require the `comparable` constraint?
+2. What are the memory implications of using `struct{}` as a map value in a `Set`?
+3. How does a generic data structure improve the "Zero-Magic" debugging experience compared to `any`?
+
+---
 
 ## Next Step
 
-Next: `CO.1` -> [`04-types-design/composition/1-composition`](../composition/1-composition/README.md)
+Next: `TI.12` -> [`04-types-design/12-functional-options`](../12-functional-options/README.md)

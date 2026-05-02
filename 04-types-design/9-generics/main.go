@@ -7,16 +7,22 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn how to write functions and types that work with multiple types using type parameters and constraints.
+//   - Defining generic functions using type parameters and constraints.
+//   - Using built-in constraints: `any` and `comparable`.
+//   - Implementing custom type constraints using interface unions.
+//   - The mechanics of monomorphization and compile-time type safety.
 //
 // WHY THIS MATTERS:
-//   - Think of a vending machine. It does not care if it dispenses sodas, snacks, or toys-the mechanism is the same. The "type parameter" is what it is dispensing.
+//   - Generics solve the "duplicate code" problem for data structures and
+//     algorithms. They allow you to write reusable logic that operates
+//     on multiple types without sacrificing the performance or safety of
+//     static typing.
 //
 // RUN:
 //   go run ./04-types-design/9-generics
 //
 // KEY TAKEAWAY:
-//   - Learn how to write functions and types that work with multiple types using type parameters and constraints.
+//   - Generics enable type-safe logic reuse across different data types.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -25,23 +31,17 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
-//
-//   - What generics are: functions/types that work with MULTIPLE types
-//   - Type parameters: the [T constraint] syntax
-//   - Type constraints: limiting what types T can be
-//   - Built-in constraints: comparable, any
-//   - Custom constraints with interface unions (int | float64 | ...)
-//   - When to use generics vs interfaces
-//
+// Section 04: Types & Design - Generics
 
+// Numeric defines a type constraint for all standard integer and floating-point types.
 type Numeric interface {
 	int | int8 | int16 | int32 | int64 |
 		float32 | float64
 }
 
+// Sum calculates the arithmetic total of a slice of numeric values.
 func Sum[T Numeric](numbers []T) T {
 	var total T
 	for _, n := range numbers {
@@ -50,6 +50,7 @@ func Sum[T Numeric](numbers []T) T {
 	return total
 }
 
+// Filter returns a new slice containing only elements that satisfy the predicate.
 func Filter[T any](items []T, predicate func(T) bool) []T {
 	result := make([]T, 0)
 	for _, item := range items {
@@ -60,6 +61,7 @@ func Filter[T any](items []T, predicate func(T) bool) []T {
 	return result
 }
 
+// Map transforms a slice of type T into a slice of type U using the transform function.
 func Map[T any, U any](items []T, transform func(T) U) []U {
 	result := make([]U, len(items))
 	for i, item := range items {
@@ -68,6 +70,8 @@ func Map[T any, U any](items []T, transform func(T) U) []U {
 	return result
 }
 
+// Contains returns true if the target element exists within the slice.
+// It requires T to be comparable (supports == and !=).
 func Contains[T comparable](items []T, target T) bool {
 	for _, item := range items {
 		if item == target {
@@ -78,55 +82,42 @@ func Contains[T comparable](items []T, target T) bool {
 }
 
 func main() {
-	fmt.Println("=== Generics: One Function, Many Types ===")
+	fmt.Println("=== Generics: Type-Safe Logic Reuse ===")
 	fmt.Println()
 
-	fmt.Println("--- Sum (Numeric constraint) ---")
-	intSum := Sum([]int{10, 20, 30, 40})
-	floatSum := Sum([]float64{1.5, 2.5, 3.0})
-	fmt.Printf("  Sum[int]:     %d\n", intSum)
-	fmt.Printf("  Sum[float64]: %.1f\n", floatSum)
+	// 1. Numeric Constraints.
+	// The Sum function works on any type satisfying the Numeric interface union.
+	// The compiler generates specific machine code for each concrete type used.
+	fmt.Println("--- Arithmetic Sums (int vs float64) ---")
+	fmt.Printf("  Sum[int]:     %d\n", Sum([]int{10, 20, 30}))
+	fmt.Printf("  Sum[float64]: %.2f\n", Sum([]float64{1.5, 2.7, 3.3}))
 	fmt.Println()
 
-	fmt.Println("--- Filter (any constraint) ---")
-	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-
+	// 2. Functional Programming with 'any'.
+	// Filter and Map operate on slices of any type. The type T is narrowed
+	// based on the input slice at the call site.
+	fmt.Println("--- Functional Utilities (Filter/Map) ---")
+	numbers := []int{1, 2, 3, 4, 5, 6}
 	evens := Filter(numbers, func(n int) bool { return n%2 == 0 })
 	fmt.Printf("  Evens: %v\n", evens)
 
-	words := []string{"go", "rust", "python", "java", "c", "typescript"}
-	longWords := Filter(words, func(w string) bool { return len(w) > 3 })
-	fmt.Printf("  Long words: %v\n", longWords)
-	fmt.Println()
-
-	fmt.Println("--- Map (two type parameters) ---")
-	labels := Map(numbers, func(n int) string {
-		return fmt.Sprintf("#%d", n)
-	})
-	fmt.Printf("  Labels: %v\n", labels)
-
+	words := []string{"go", "rust", "python"}
 	lengths := Map(words, func(w string) int { return len(w) })
-	fmt.Printf("  Word lengths: %v\n", lengths)
+	fmt.Printf("  Word Lengths: %v\n", lengths)
 	fmt.Println()
 
-	fmt.Println("--- Contains (comparable constraint) ---")
-	upper := Map(words, func(w string) string { return strings.ToUpper(w) })
-	fmt.Printf("  Has 'GO': %t\n", Contains(upper, "GO"))
-	fmt.Printf("  Has 'RUBY': %t\n", Contains(upper, "RUBY"))
-	fmt.Printf("  Has 5: %t\n", Contains(numbers, 5))
-	fmt.Printf("  Has 99: %t\n", Contains(numbers, 99))
+	// 3. Comparable types.
+	// The Contains function requires T to support equality checks (==).
+	// This prevents using it with types that cannot be compared (like slices or maps).
+	fmt.Println("--- Set Membership (comparable) ---")
+	fmt.Printf("  Has 'go':   %t\n", Contains(words, "go"))
+	fmt.Printf("  Has 5:      %t\n", Contains(numbers, 5))
+	fmt.Printf("  Has 'ruby': %t\n", Contains(words, "ruby"))
 
 	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Generics eliminate duplicate code for different types")
-	fmt.Println("  - [T constraint] declares a type parameter with limits")
-	fmt.Println("  - 'any' = accepts all types, 'comparable' = supports ==")
-	fmt.Println("  - Custom constraints (int | float64) restrict to specific types")
-	fmt.Println("  - Use generics for data structures, algorithms, utilities")
-	fmt.Println("  - Use interfaces for behavior abstraction (polymorphism)")
-	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.10 -> 04-types-design/10-payroll-processor")
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: TI.14 -> 04-types-design/14-complex-generic-constraints")
+	fmt.Println("Run    : go run ./04-types-design/14-complex-generic-constraints")
 	fmt.Println("Current: TI.9 (generics)")
-	fmt.Println("Previous: TI.8 (custom-errors)")
 	fmt.Println("---------------------------------------------------")
 }

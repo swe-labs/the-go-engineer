@@ -2,45 +2,35 @@
 
 ## Mission
 
-Learn how to define custom error types that carry structured information for better error handling.
-
-## Why This Lesson Exists Now
-
-Go's built-in error interface is simple: just `Error() string`. But sometimes you need more information-what went wrong, where, and additional context. Custom error types let you do this.
-
-> **Backward Reference:** In [Lesson 7: Receiver Sets](../7-receiver-sets/README.md), you learned how receiver types affect interface satisfaction. Now, we will apply that knowledge to implement the built-in `error` interface using our own custom structs.
+- Define custom struct types that satisfy the built-in `error` interface.
+- Enrich error instances with structured metadata for better troubleshooting.
+- Utilize `errors.As` and `errors.Is` to safely inspect and handle specific error types.
 
 ## Prerequisites
 
-- `TI.3` interfaces
-- `TI.5` Stringer
+- `TI.2` Methods
+- `TI.3` Interfaces
 
 ## Mental Model
 
-Think of a boarding pass. A simple "flight delayed" message is not enough. A good error includes: flight number, original time, new time, reason, and gate. Custom errors are like detailed boarding passes for your program.
+In Go, an **Error** is any type that implements the single-method `error` interface: `Error() string`. While simple string-based errors are useful for basic reporting, production systems often require structured data to differentiate between failure modes (e.g., a "Validation Error" vs. a "Connection Timeout"). By creating custom error structs, we can carry machine-readable context that allows calling code to make informed decisions about recovery or reporting.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["data"] --> B["type definition"]
-    B --> C["methods or interface behavior"]
-```
-```text
-type ValidationError struct {
-    Field   string
-    Value   interface{}
-    Message string
-}
-
-func (e ValidationError) Error() string {
-    return fmt.Sprintf("%s: %v - %s", e.Field, e.Value, e.Message)
-}
+    A[error Interface] --> B[Custom Error Struct]
+    B --> C[Error() string]
 ```
 
 ## Machine View
 
-Custom errors implement the error interface by providing an Error() method. You can add any fields and use errors.As() to check specific error types.
+When a custom struct is returned as an `error`, the runtime packs it into the standard 2-word interface structure:
+
+1.  **ITab**: Points to the concrete type's method set (including the `Error()` method).
+2.  **Data**: Points to the instance of the custom struct containing its metadata fields.
+
+Functions like `errors.As(err, &target)` use reflection to verify if the dynamic type stored in the interface can be assigned to the target pointer, allowing you to "unwrap" the structured data safely.
 
 ## Run Instructions
 
@@ -50,33 +40,28 @@ go run ./04-types-design/8-custom-errors
 
 ## Code Walkthrough
 
-### Basic custom error
-
-Define a struct and implement the Error() method.
-
-### Error with fields
-
-Add fields to carry structured information.
-
-### Type assertions for errors
-
-Use errors.As() to check specific error types and handle them differently.
+- **Field Selection**: Add fields that provide actionable context (e.g., `StatusCode`, `RetryAfter`, `FieldID`).
+- **Standard Satisfaction**: Always implement the `Error() string` method on the custom struct (or a pointer to it).
+- **Type Checking**: Use `errors.As` instead of raw type assertions (`err.(MyError)`) to support wrapped errors in modern Go.
 
 ## Try It
 
-1. Create a custom error type with multiple fields.
-2. Use errors.As() to check for your custom error and access its fields.
-3. Wrap multiple error types and handle each differently.
+1. In `main.go`, add a `TimeoutError` struct that includes a `Duration` field.
+2. Implement the `Error()` method for `TimeoutError`.
+3. Create a function that randomly returns a `TimeoutError` or a `ValidationError`.
+4. Update the `handleError` function to detect and log the specific duration of a `TimeoutError` using `errors.As`.
 
 ## In Production
-Custom errors are used in real applications for validation errors, API errors with codes, and database errors with retry information.
+
+- **API Gateways**: Returning specific status codes and user-friendly messages for different failure modes.
+- **Form Validation**: Carrying a map of field names to specific validation messages.
+- **Database Drivers**: Distinguishing between constraint violations (which are client errors) and connection losses (which are system errors).
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** We have explored how to make types more specific. Now, we will look at how to make them more general. In [Lesson 9: Generics](../9-generics/README.md), you will learn how to write code that works with many different types while still maintaining type safety.
+1. Why is it generally safer to use `errors.As` than a direct type assertion on an error value?
+2. How does structured error data improve the observability of a system compared to parsing error strings?
+3. Should custom error types use value receivers or pointer receivers for their `Error()` method? Does it matter?
 
 ## Next Step
 

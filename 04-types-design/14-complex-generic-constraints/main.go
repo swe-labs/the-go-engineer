@@ -7,16 +7,22 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn advanced constraint patterns including parameterized constraints, using interfaces as constraints, and creating reusable generic utilities.
+//   - Defining complex type constraints using method-based interfaces.
+//   - Composing multiple behaviors into a single generic requirement.
+//   - Utilizing the `comparable` constraint for map-based utilities.
+//   - The mechanics of static satisfaction vs dynamic dispatch.
 //
 // WHY THIS MATTERS:
-//   - Think of a vending machine that accepts only certain payment methods. The constraint is not just "some type"-it's "anything with a Pay() method." Complex constraints allow you to define these nuanced rules.
+//   - Simple type unions are often insufficient for library authors.
+//     Complex constraints allow you to enforce behavioral requirements
+//     on generic types, ensuring that any T passed to your logic
+//     possesses the necessary methods to execute correctly and safely.
 //
 // RUN:
 //   go run ./04-types-design/14-complex-generic-constraints
 //
 // KEY TAKEAWAY:
-//   - Learn advanced constraint patterns including parameterized constraints, using interfaces as constraints, and creating reusable generic utilities.
+//   - Generic constraints define the behavioral contract for type parameters.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -27,53 +33,56 @@ import (
 	"fmt"
 )
 
-//
-//   - Interface constraints
-//   - Multiple interface requirements
-//   - Comparable constraint
-//   - Parameterized constraints
-//
+// Section 04: Types & Design - Complex Generic Constraints
 
+// Numeric defines a requirement for types that support addition and multiplication.
 type Numeric interface {
 	Add(other int) int
 	Multiply(other int) int
 }
 
+// ScaleAll uses a generic type T constrained by the Numeric interface.
 func ScaleAll[T Numeric](item T, factor int) int {
 	return item.Multiply(factor)
 }
 
+// CustomInt satisfies the Numeric constraint by providing Add and Multiply.
 type CustomInt int
 
+// Add returns the sum of the CustomInt and another integer.
 func (c CustomInt) Add(other int) int {
 	return int(c) + other
 }
 
+// Multiply returns the product of the CustomInt and another integer.
 func (c CustomInt) Multiply(other int) int {
 	return int(c) * other
 }
 
+// Stringable defines a requirement for types that provide a textual view.
 type Stringable interface {
 	ToString() string
 }
 
+// PrintAll processes a slice of any type T that satisfies the Stringable constraint.
 func PrintAll[T Stringable](items []T) {
 	for _, item := range items {
 		fmt.Println("  ", item.ToString())
 	}
 }
 
+// User represents a system entity that implements Stringable.
 type User struct {
 	Name string
 	Age  int
 }
 
+// ToString provides a formatted string representation of the User.
 func (u User) ToString() string {
 	return fmt.Sprintf("%s (%d)", u.Name, u.Age)
 }
 
-type CacheKey comparable
-
+// GetOrSet retrieves a value from a map or initializes it with a default if missing.
 func GetOrSet[K comparable, V any](m map[K]V, key K, defaultVal V) V {
 	if val, ok := m[key]; ok {
 		return val
@@ -103,48 +112,39 @@ func MarshalAll[T JSONMarshaler](items []T) [][]byte {
 }
 
 func main() {
-	fmt.Println("=== Complex Generic Constraints ===")
+	fmt.Println("=== Complex Generic Constraints: Behavioral Requirements ===")
 	fmt.Println()
 
-	fmt.Println("--- Interface Constraint with Custom Type ---")
+	// 1. Method-based constraints.
+	// The Numeric interface requires Add and Multiply methods. CustomInt satisfies this.
+	fmt.Println("--- Arithmetic Behavior (CustomInt) ---")
 	ci := CustomInt(5)
-	fmt.Printf("  CustomInt 5 * 3 = %d\n", ci.Multiply(3))
-	fmt.Printf("  CustomInt 5 + 2 = %d\n", ci.Add(2))
 	result := ScaleAll(ci, 4)
-	fmt.Printf("  ScaleAll(5, 4) = %d\n", result)
-
+	fmt.Printf("  Scaled CustomInt: %d\n", result)
 	fmt.Println()
-	fmt.Println("--- Multiple Interface Requirements ---")
+
+	// 2. Behavioral abstraction.
+	// PrintAll requires any type that provides a ToString() method.
+	fmt.Println("--- Behavioral Abstraction (ToString) ---")
 	users := []User{
 		{Name: "Alice", Age: 30},
 		{Name: "Bob", Age: 25},
 	}
-	fmt.Println("  All users:")
 	PrintAll(users)
+	fmt.Println()
+
+	// 3. Built-in constraints (comparable).
+	// The 'comparable' keyword allows generic logic to use equality operators (==, !=),
+	// making it essential for map-key operations.
+	fmt.Println("--- Utility Logic (comparable map keys) ---")
+	cache := map[string]int{"active": 1}
+	val := GetOrSet(cache, "init", 42)
+	fmt.Printf("  Cache Result: %d -> Store: %v\n", val, cache)
 
 	fmt.Println()
-	fmt.Println("--- Comparable Constraint ---")
-	cache := map[string]int{"cached": 100}
-	val := GetOrSet(cache, "missing", 42)
-	fmt.Printf("  Got value: %d (cache now: %v)\n", val, cache)
-
-	fmt.Println()
-	fmt.Println("--- JSON Marshaler Constraint ---")
-	data := []Data{{Value: 1}, {Value: 2}}
-	jsons := MarshalAll(data)
-	for i, j := range jsons {
-		fmt.Printf("  JSON %d: %s\n", i, string(j))
-	}
-
-	fmt.Println()
-	fmt.Println("KEY TAKEAWAY:")
-	fmt.Println("  - Interfaces can be generic constraints")
-	fmt.Println("  - Embed multiple interfaces for complex requirements")
-	fmt.Println("  - comparable constraint allows == and !=")
-	fmt.Println("  - Type must implement all methods in constraint")
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: TI.15 -> 04-types-design/15-generic-data-structures")
+	fmt.Println("Run    : go run ./04-types-design/15-generic-data-structures")
 	fmt.Println("Current: TI.14 (complex-generic-constraints)")
-	fmt.Println("Previous: TI.13 (method-values)")
 	fmt.Println("---------------------------------------------------")
 }

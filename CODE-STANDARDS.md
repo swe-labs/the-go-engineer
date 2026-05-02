@@ -232,6 +232,27 @@ Avoid:
 i++ // Increment i
 ```
 
+### Machine Role Comments
+
+For every major type, complex data structure, or core function used in a lesson, add a comment that explicitly defines its **Machine Role** or technical purpose. This links Go's syntax to its functional behavior.
+
+Format: `// [SymbolName] ([Tool Type]) [Direct description of purpose/role]`
+
+Good:
+
+```go
+// ServerConfig (Struct) aggregates configuration state into a contiguous memory block for reflection-based formatting.
+type ServerConfig struct { ... }
+
+// parseConfig (Function) implements a text-processing pipeline to transform raw strings into validated key-value pairs.
+func parseConfig(content string) (map[string]string, error) { ... }
+
+// entries (Slice) provides an indexable, sortable container for map data to ensure stable iteration order.
+entries := make([]configEntry, 0, len(config))
+```
+
+This pattern is required for all new and refactored lessons to ensure a "Zero-Magic" learning experience.
+
 ### Cross-reference comments
 
 When a lesson uses a concept taught elsewhere, reference the lesson ID:

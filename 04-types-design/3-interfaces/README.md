@@ -2,55 +2,34 @@
 
 ## Mission
 
-Learn how to define behavior contracts using interfaces and achieve polymorphism without inheritance.
-
-## Why This Lesson Exists Now
-
-You have structs (data) and methods (behavior). The next question is: "How do I write code that works with multiple types that share the same behavior?"
-
-In other languages, you might use inheritance. In Go, you use interfaces-a type that defines what a type can do, not what it is.
-
-> **Backward Reference:** In [Lesson 2: Methods](../2-methods/README.md), you learned how to attach behavior to types. Interfaces allow you to abstract that behavior, creating contracts that multiple types can satisfy.
+- Define behavioral contracts using the `interface` keyword.
+- Implement implicit interface satisfaction (structural typing).
+- Achieve polymorphism through interface abstraction.
 
 ## Prerequisites
 
-- `TI.1` structs
-- `TI.2` methods
+- `TI.2` Methods
 
 ## Mental Model
 
-Think of a power outlet. The outlet defines a contract: "I accept anything with two prongs and a ground pin." A lamp, a phone charger, and a refrigerator all satisfy this contract differently, but the outlet does not care how they work internally-only that they have the right shape (methods).
+An **Interface** is a type that defines a set of method signatures. Unlike concrete types (structs), an interface does not contain data or implementation logic. Instead, it specifies **what** a type must be able to do, rather than **how** it is structured. This enables decoupled system design where functions can operate on any type that satisfies a given behavioral contract.
 
 ## Visual Model
 
 ```mermaid
 graph TD
-    A["data"] --> B["type definition"]
-    B --> C["methods or interface behavior"]
-```
-```text
-+-----------------------+
-| Shape interface       |
-+-----------------------+
-| Area() float64        |
-| Perimeter() float64   |
-+-----------------------+
-         ^
-         | implements
-    +----+----+
-    |         |
-+---+---+ +---+---+
-| Rect  | | Circle|
-+-------+ +-------+
+    A[Interface] --> B[Implementation 1]
+    A --> C[Implementation 2]
 ```
 
 ## Machine View
 
-An interface value is internally a 2-word struct:
-- Word 1: pointer to the type descriptor (what concrete type is stored)
-- Word 2: pointer to the data (the actual struct value)
+An interface variable is internally represented as a **Two-Word Data Structure**:
 
-This is why interface calls are slightly slower than direct calls-the runtime must look up the method through the type descriptor. This is called "dynamic dispatch."
+1.  **ITab Pointer**: Points to an "Interface Table" containing the concrete type's runtime information and the function pointers for its methods.
+2.  **Data Pointer**: Points to the concrete instance (the struct) in memory.
+
+When a method is called on an interface variable, Go performs **Dynamic Dispatch**: it looks up the correct function pointer in the ITab and executes it using the data pointer as the receiver.
 
 ## Run Instructions
 
@@ -60,45 +39,28 @@ go run ./04-types-design/3-interfaces
 
 ## Code Walkthrough
 
-### `type Shape interface { ... }`
-
-This defines an interface. Any type that has both `Area()` and `Perimeter()` methods automatically satisfies this interface.
-
-### Implicit satisfaction
-
-Go has no "implements" keyword. If your type has the right methods, it satisfies the interface. This is called structural typing or duck typing: "if it quacks like a duck, it is a duck."
-
-### `printShapeInfo(s Shape)`
-
-This function accepts any type that satisfies Shape. One function works with Rectangle, Circle, Triangle, and any future type.
-
-### Type assertions
-
-Sometimes you need to extract the concrete type from an interface. Use the comma-ok pattern: `value, ok := s.(Circle)`.
+- **Implicit Satisfaction**: Go has no `implements` keyword. A type satisfies an interface automatically if it possesses all the required methods. This is often referred to as **Structural Typing**.
+- **The Empty Interface (`any`)**: An interface with no methods is satisfied by every type.
+- **Composition**: Small, single-method interfaces (like `io.Reader`) are the building blocks of Go APIs.
+- **Accept Interfaces, Return Structs**: A common Go design pattern that maximizes flexibility for callers while keeping return types explicit.
 
 ## Try It
 
-1. Add a new shape type (e.g., Square) and see if it works with `printShapeInfo` without any changes.
-2. Try a type assertion that fails and observe the ok value.
-3. Add a method to one shape type that others do not have-does it still satisfy Shape?
-
-## Common Questions
-
-- Why no "implements" keyword?
-  Go uses structural typing. If the methods match, the contract is satisfied.
-
-- When to use interfaces vs concrete types?
-  Use interfaces when you need polymorphism. Use concrete types when you need specificity.
+1. In `main.go`, add a new struct type `Square` with a `Side` field.
+2. Implement the `Area()` and `Perimeter()` methods for `Square`.
+3. Verify that the `printShapeInfo` function accepts a `Square` instance without modification.
 
 ## In Production
-Interfaces are Go's primary tool for abstraction and testing. They let you write code that depends on behavior, not concrete types. This is essential for dependency injection, mocking, and flexible API design.
+
+- **Dependency Injection**: Passing mock database interfaces into services for unit testing.
+- **Pluggable Architecture**: Allowing users of a library to provide custom implementations of standard behaviors (e.g., custom HTTP handlers).
+- **Generic Data Handling**: Processing various data types through common interfaces like `fmt.Stringer` or `error`.
 
 ## Thinking Questions
-1. What problem is this lesson trying to solve?
-2. What would change if you removed this idea from the program?
-3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** Interfaces can be combined to build more complex contracts. In [Lesson 4: Interface Embedding](../4-interface-embedding/README.md), you will learn how to compose small interfaces into larger ones, promoting reuse and modularity.
+1. How does implicit interface satisfaction differ from the explicit "implements" contract in Java or C#?
+2. What are the performance implications of the "2-word struct" and dynamic dispatch compared to direct method calls?
+3. Why is it generally better to define small interfaces (1-3 methods) rather than large, comprehensive ones?
 
 ## Next Step
 

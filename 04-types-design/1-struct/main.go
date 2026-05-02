@@ -7,16 +7,21 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn what a struct is and how to use it to group related data together into a single type.
+//   - Defining named types using the `struct` keyword.
+//   - Field access, zero-value initialization, and literal syntax.
+//   - Memory layout: field alignment and padding on the stack.
 //
 // WHY THIS MATTERS:
-//   - Think of a struct like a passport. A passport groups related data about one person: name, nationality, date of birth, photo, passport number. You w...
+//   - Structs are the primary mechanism for data grouping in Go.
+//     Understanding their memory layout is essential for writing
+//     memory-efficient code and correctly interfacing with low-level
+//     systems or binary protocols.
 //
 // RUN:
 //   go run ./04-types-design/1-struct
 //
 // KEY TAKEAWAY:
-//   - Learn what a struct is and how to use it to group related data together into a single type.
+//   - Structs represent contiguous memory blocks for heterogeneous data.
 // ============================================================================
 
 // See LICENSE for usage terms.
@@ -28,7 +33,7 @@ import (
 	"time"
 )
 
-//
+// Section 04: Types & Design - Structs
 //   - What a struct is and why it exists (grouping related data)
 //   - How to define, create, and access struct fields
 //   - Zero values for structs (every field gets its type's zero value)
@@ -37,6 +42,7 @@ import (
 //   - Struct comparison and copying rules
 //
 
+// Server represents a system server with associated metadata.
 type Server struct {
 	ID       int       // Unique identifier for this server
 	Hostname string    // DNS hostname (e.g., "api-prod-01.internal")
@@ -48,6 +54,7 @@ type Server struct {
 	BootedAt time.Time // When the server was last started
 }
 
+// NewServer initializes a Server with validated defaults and current boot time.
 func NewServer(id int, hostname, ip, region string, cpuCores, memoryGB int) Server {
 	return Server{
 		ID:       id,
@@ -62,9 +69,8 @@ func NewServer(id int, hostname, ip, region string, cpuCores, memoryGB int) Serv
 }
 
 func main() {
-	fmt.Println("=== Structs: Grouping Related Data ===")
-	fmt.Println()
-
+	// 1. Instantiate a struct using literal syntax.
+	// Field names are optional but recommended for clarity and forward compatibility.
 	webServer := Server{
 		ID:       1,
 		Hostname: "web-prod-01",
@@ -76,6 +82,9 @@ func main() {
 		BootedAt: time.Now(),
 	}
 
+	fmt.Println("=== Structs: Grouping Related Data ===")
+	fmt.Println()
+
 	fmt.Printf("Server: %s (%s)\n", webServer.Hostname, webServer.IP)
 	fmt.Printf("Region: %s, CPUs: %d, RAM: %dGB\n",
 		webServer.Region, webServer.CPUCores, webServer.MemoryGB)
@@ -83,10 +92,14 @@ func main() {
 		webServer.IsOnline, webServer.BootedAt.Format("15:04:05"))
 	fmt.Println()
 
+	// 2. Zero-value initialization.
+	// Declaring a variable without a literal sets all fields to their zero values.
 	var emptyServer Server
 	fmt.Printf("Zero value server: %+v\n", emptyServer)
 	fmt.Println()
 
+	// 3. Constructor pattern.
+	// Using NewServer ensures the object is created in a consistent, valid state.
 	dbServer := NewServer(2, "db-prod-01", "10.0.2.20", "us-west-2", 8, 64)
 	fmt.Printf("New server: %s (%d cores, %dGB RAM)\n",
 		dbServer.Hostname, dbServer.CPUCores, dbServer.MemoryGB)
@@ -109,9 +122,10 @@ func main() {
 	fmt.Printf("Original: %s (unchanged)\n", webServer.Hostname)
 	fmt.Printf("Copy:     %s (independent)\n", serverCopy.Hostname)
 
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: TI.2 -> 04-types-design/2-methods")
+	fmt.Println("Run    : go run ./04-types-design/2-methods")
 	fmt.Println("Current: TI.1 (structs)")
-	fmt.Println("Previous: FE.10 (panic-and-recover)")
 	fmt.Println("---------------------------------------------------")
 }

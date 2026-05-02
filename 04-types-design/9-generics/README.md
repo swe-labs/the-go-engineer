@@ -12,8 +12,8 @@ You have interfaces for behavior abstraction. But sometimes you need to write ut
 
 ## Prerequisites
 
-- `TI.3` interfaces
-- `TI.5` Stringer
+- `TI.3` Interfaces
+- `TI.11` Dynamic Typing with any
 
 ## Mental Model
 
@@ -32,6 +32,15 @@ This diagram shows the generic function signature:
 - `[T Numeric]` declares a type parameter T constrained to numeric types
 - `numbers []T` is the parameter (a slice of type T)
 - `T` is the return type
+
+## Visual Model
+
+```mermaid
+graph TD
+    A[Generic Function] --> B[Type Parameter T]
+    B --> C[Concrete Type int]
+    B --> D[Concrete Type string]
+```
 
 ## Machine View
 
@@ -87,4 +96,4 @@ Generics are essential for building reusable data structures (maps, slices, tree
 
 ## Next Step
 
-Next: `TI.10` -> [`04-types-design/10-payroll-processor`](../10-payroll-processor/README.md)
+Next: `TI.14` -> [`04-types-design/14-complex-generic-constraints`](../14-complex-generic-constraints/README.md)
