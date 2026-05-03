@@ -35,7 +35,7 @@ Go uses a strict visibility rule: **Capitalization**.
 The compiler enforces this. You cannot use a private function from another package.
 
 > [!NOTE]
-> This simple rule—Capitalization—is the foundation for package design in Go. You will see how this enables clear module boundaries in [MP.1 Module Basics](../../05-packages-io/01-modules-and-packages/1-module-basics/README.md).
+> This simple rule - capitalization - is the foundation for package design in Go. You will see how this enables clear module boundaries in [MP.1 Module Basics](../../05-packages-io/01-modules-and-packages/1-module-basics/README.md).
 
 > [!TIP]
 > While we use strings and numbers here, Go allows you to create your own complex types, which we dive into during [Section 04: Types and Design](../../04-types-design/README.md).

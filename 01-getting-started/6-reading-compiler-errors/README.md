@@ -11,7 +11,7 @@ Learn to treat the compiler as a helpful partner instead of an obstacle by decod
 ## Mental Model
 
 Think of the compiler as a **Spell Checker for Logic**.
-It doesn't care about your feelings; it only cares about the rules of the language. If you break a rule, it stops you *before* you ship broken code to a user.
+It applies the rules of the language consistently. If you break a rule, it stops you *before* broken code reaches a user.
 
 ## Visual Model
 
@@ -55,7 +55,7 @@ go run ./01-getting-started/6-reading-compiler-errors
 
 ## In Production
 
-In large systems, we want our errors to happen at **Compile Time**, not **Runtime**. A compile-time error costs a few seconds of a developer's time. A runtime error in production can cost a company millions of dollars. The compiler is the first and most important line of defense.
+In large systems, we want many mistakes to fail at **Compile Time**, not **Runtime**. A compile-time error costs a few seconds of developer attention. A runtime error in production can create customer impact, data loss, or an incident. The compiler is the first line of defense.
 
 ## Thinking Questions
 

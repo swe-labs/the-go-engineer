@@ -28,13 +28,13 @@ package main
 
 import "fmt"
 
-// noEscape (Function): runs the no escape step and keeps its inputs, outputs, or errors visible.
+// noEscape (Function): returns a plain value whose lifetime stays inside the caller boundary.
 func noEscape() int {
 	x := 42
 	return x
 }
 
-// escapes (Function): runs the escapes step and keeps its inputs, outputs, or errors visible.
+// escapes (Function): returns an address, forcing the local value to outlive its stack frame.
 func escapes() *int {
 	x := 99
 	return &x

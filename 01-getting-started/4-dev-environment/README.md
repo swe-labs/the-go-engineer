@@ -10,7 +10,7 @@ Learn the small command loop that makes day-to-day Go work predictable.
 
 ## Mental Model
 
-The Go toolchain is a **workflow**, not a single command. 
+The Go toolchain is a **workflow**, not a single command.
 Think of it like a craft:
 1. **Write**: The act of typing code.
 2. **Format**: `go fmt` makes it professional and readable.
@@ -55,7 +55,7 @@ go run ./01-getting-started/4-dev-environment
 
 ## In Production
 
-In a professional environment, we use **CI (Continuous Integration)** to run these commands automatically. If a developer forgets to format their code or breaks a test, the CI system will reject their changes. This ensures the master codebase always stays healthy.
+In a professional environment, we use **CI (Continuous Integration)** to run these commands automatically. If a developer forgets to format their code or breaks a test, the CI system rejects the change before it reaches the main branch.
 
 ## Thinking Questions
 
