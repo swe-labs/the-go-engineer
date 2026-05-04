@@ -48,7 +48,8 @@ The current repository state is:
 - `OPSL.6` complete: payment pipeline
 - `OPSL.7` complete: event bus and worker pools
 - `OPSL.8` complete: caching layer
-- `OPSL.9` next: observability
+- `OPSL.9` complete: observability
+- `OPSL.10` complete: graceful shutdown and deployment
 
 Use the progress surface instead of guessing:
 
@@ -206,8 +207,51 @@ curl http://localhost:8080/api/v1/orders/1/payments \
   -H "Authorization: Bearer <token>"
 ```
 
+## Database Migrations
+
+The project uses formal SQL migrations in the `migrations/` directory:
+
+```bash
+# Run migrations
+go run ./scripts/migrate.go
+
+# Rollback last migration
+go run ./scripts/migrate.go -direction down
+
+# Check migration status
+go run ./scripts/migrate.go -direction status
+```
+
+Migrations are numbered (001-005) and include:
+- `001_create_tenants` - tenant registry
+- `002_create_users` - tenant-scoped users
+- `003_create_orders` - order workflow
+- `004_create_payments` - payment tracking
+- `005_seed_data` - development demo data
+
+## Database Backup & Restore
+
+```bash
+# Create backup
+./scripts/backup.sh
+
+# Restore from backup (interactive)
+./scripts/restore.sh <backup_file>
+```
+
+## Seed Data
+
+Load demo data for development:
+
+```bash
+go run ./scripts/seed.go
+
+# Reset and re-seed
+go run ./scripts/seed.go -reset
+```
+
+Demo credentials: `admin@demo.com` / `password123`
+
 ## Next Step
 
-After `OPSL.8`, continue to [OPSL.9](./modules/09-observability/README.md).
-That module introduces structured logging, metrics, and trace propagation on top of the
-now-cached service layer.
+All modules are now complete. The repository provides a fully integrated flagship backend demonstrating configuration, database, auth, workflow, async workers, cache, observability, and graceful shutdown.

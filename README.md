@@ -46,7 +46,7 @@ go run ./scripts/validate_curriculum.go
 Expected stable output:
 
 ```text
-Success! 597 files with run commands validated, and 12 v2 sections plus 215 v2 items checked.
+Success! 601 files with run commands validated, and 12 v2 sections plus 215 v2 items checked.
 ```
 
 ## Curriculum Map

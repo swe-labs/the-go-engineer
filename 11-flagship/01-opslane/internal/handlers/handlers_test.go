@@ -13,6 +13,7 @@ import (
 
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/db"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
 	paymentflow "github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/services"
@@ -34,6 +35,7 @@ func TestProtectedMeRouteReturnsAuthenticatedTenantIdentity(t *testing.T) {
 
 	app := &Application{
 		Logger:      slog.Default(),
+		Metrics:     metrics.NewAppMetrics(),
 		Tokens:      tokens,
 		ServiceName: "opslane",
 		Environment: "test",
@@ -64,6 +66,7 @@ func TestProtectedMeRouteRejectsAnonymousRequest(t *testing.T) {
 
 	app := &Application{
 		Logger:      slog.Default(),
+		Metrics:     metrics.NewAppMetrics(),
 		Tokens:      newHandlerTestTokenManager(t),
 		ServiceName: "opslane",
 		Environment: "test",
@@ -580,6 +583,7 @@ func newTestApplication(t *testing.T, store Store) *Application {
 	orders := services.NewOrderService(store, services.NewNoopInventoryCoordinator())
 	return &Application{
 		Logger:      slog.Default(),
+		Metrics:     metrics.NewAppMetrics(),
 		Store:       store,
 		Orders:      orders,
 		Payments:    services.NewPaymentService(store, store, orders, paymentflow.NewSimulatedGateway(), services.PaymentServiceOptions{GatewayTimeout: time.Second, MaxAttempts: 1}),

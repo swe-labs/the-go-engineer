@@ -17,6 +17,7 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/events"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/handlers"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
 	paymentflow "github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/services"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/workers"
@@ -63,6 +64,10 @@ func main() {
 	// Initialize background systems
 	bus := events.NewBus(1000)
 
+	// Create root application context for workers
+	ctx, cancelApp := context.WithCancel(context.Background())
+	defer cancelApp()
+
 	orderPool, err := workers.NewPool(workers.PoolConfig{
 		Name:      "orders",
 		Workers:   3,
@@ -73,7 +78,10 @@ func main() {
 		logger.Error("failed to create order worker pool", slog.Any("error", err))
 		os.Exit(1)
 	}
-	_ = orderPool.Start(context.Background())
+	if err := orderPool.Start(ctx); err != nil {
+		logger.Error("failed to start order worker pool", slog.Any("error", err))
+		os.Exit(1)
+	}
 
 	paymentPool, err := workers.NewPool(workers.PoolConfig{
 		Name:      "payments",
@@ -85,12 +93,17 @@ func main() {
 		logger.Error("failed to create payment worker pool", slog.Any("error", err))
 		os.Exit(1)
 	}
-	_ = paymentPool.Start(context.Background())
+	if err := paymentPool.Start(ctx); err != nil {
+		logger.Error("failed to start payment worker pool", slog.Any("error", err))
+		os.Exit(1)
+	}
 
 	isDraining := &atomic.Bool{}
+	appMetrics := metrics.NewAppMetrics()
 
 	app := &handlers.Application{
 		Logger:            logger,
+		Metrics:           appMetrics,
 		Store:             store,
 		Orders:            orders,
 		Payments:          payments,
@@ -116,7 +129,7 @@ func main() {
 		slog.String("database", "postgresql"),
 	)
 
-	idleConnsClosed := setupGracefulShutdown(server, logger, isDraining, bus, orderPool, paymentPool)
+	idleConnsClosed := setupGracefulShutdown(server, cfg.HTTP.ShutdownTimeout, logger, isDraining, bus, cancelApp, orderPool, paymentPool)
 
 	if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		logger.Error("server stopped unexpectedly", slog.Any("error", err))
