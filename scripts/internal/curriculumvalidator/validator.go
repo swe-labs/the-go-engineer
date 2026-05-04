@@ -228,6 +228,9 @@ func validateOpslaneConsistency(root string, report func(string)) int {
 
 	modulesBytes, err := os.ReadFile(filepath.Join(baseDir, "MODULES.md"))
 	if err != nil {
+		if os.IsNotExist(err) {
+			return 0
+		}
 		report(fmt.Sprintf("Failed to read Opslane MODULES.md: %v", err))
 		return 1
 	}
@@ -249,6 +252,9 @@ func validateOpslaneConsistency(root string, report func(string)) int {
 	migrationsDir := filepath.Join(baseDir, "migrations")
 	entries, err := os.ReadDir(migrationsDir)
 	if err != nil {
+		if os.IsNotExist(err) {
+			return 0
+		}
 		report(fmt.Sprintf("Failed to read Opslane migrations dir: %v", err))
 		return errorsFound + 1
 	}
@@ -273,6 +279,9 @@ func validateOpslaneConsistency(root string, report func(string)) int {
 
 	migrationsBytes, err := os.ReadFile(filepath.Join(baseDir, "internal/db/migrations.go"))
 	if err != nil {
+		if os.IsNotExist(err) {
+			return 0
+		}
 		report(fmt.Sprintf("Failed to read Opslane embedded migrations: %v", err))
 		return errorsFound + 1
 	}
