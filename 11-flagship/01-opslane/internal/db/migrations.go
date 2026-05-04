@@ -57,6 +57,14 @@ var schemaStatements = []string{
 		FOREIGN KEY (tenant_id) REFERENCES tenants(id) ON DELETE CASCADE,
 		FOREIGN KEY (tenant_id, order_id) REFERENCES orders(tenant_id, id) ON DELETE CASCADE
 	);`,
+	`CREATE TABLE IF NOT EXISTS rate_limits (
+		key TEXT NOT NULL,
+		window TIMESTAMPTZ NOT NULL,
+		count BIGINT NOT NULL DEFAULT 1,
+		expires_at TIMESTAMPTZ NOT NULL,
+		PRIMARY KEY (key, window)
+	);`,
+	`CREATE INDEX IF NOT EXISTS idx_rate_limits_expires ON rate_limits(expires_at);`,
 	`CREATE INDEX IF NOT EXISTS idx_orders_tenant_status ON orders(tenant_id, status);`,
 	`CREATE INDEX IF NOT EXISTS idx_orders_tenant_user ON orders(tenant_id, user_id);`,
 	`CREATE INDEX IF NOT EXISTS idx_orders_tenant_created_at ON orders(tenant_id, created_at DESC);`,

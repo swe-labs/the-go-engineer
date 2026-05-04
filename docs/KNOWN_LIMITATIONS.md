@@ -38,11 +38,11 @@ The `internal/events/bus.go` implementation is an in-memory channel router.
 
 ## Distributed Tracing
 
-The `internal/tracing/tracing.go` file implements a lightweight span context.
+The `internal/otel` package contains the foundation for OpenTelemetry distributed tracing and is wired into the application. However, the OTLP `Export` method is currently a teaching stub.
 
-**Why we built it this way:** To teach the concept of span propagation and how correlation IDs move across boundaries, without importing heavy external SDKs.
+**Why we built it this way:** To teach the concept of span propagation and how correlation IDs move across boundaries, without requiring a live Jaeger or Datadog backend or heavy external SDKs during local development.
 
-**Production Reality:** A production system would use OpenTelemetry (`go.opentelemetry.io/otel/trace`) with real trace and span IDs, sampling rules, and context propagation headers (like W3C Trace Context) to export telemetry to backends like Jaeger or Datadog.
+**Production Reality:** A production system would use OpenTelemetry (`go.opentelemetry.io/otel/trace`) with real trace and span IDs, sampling rules, and context propagation headers (like W3C Trace Context) to export telemetry via a fully implemented network exporter to backends like Jaeger or Datadog.
 
 ## Summary
 

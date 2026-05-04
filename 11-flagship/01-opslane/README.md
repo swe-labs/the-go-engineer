@@ -222,12 +222,13 @@ go run ./scripts/migrate.go -direction down
 go run ./scripts/migrate.go -direction status
 ```
 
-Migrations are numbered (001-005) and include:
+Migrations are numbered (001-006) and include:
 - `001_create_tenants` - tenant registry
 - `002_create_users` - tenant-scoped users
 - `003_create_orders` - order workflow
 - `004_create_payments` - payment tracking
 - `005_seed_data` - development demo data
+- `006_create_rate_limits` - distributed rate limiting
 
 ## Database Backup & Restore
 
