@@ -10,7 +10,7 @@ RUN go mod download
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o opslane cmd/server
+RUN CGO_ENABLED=0 GOOS=linux go build -o opslane ./11-flagship/01-opslane/cmd/server
 
 
 # STAGE 2: Runner
