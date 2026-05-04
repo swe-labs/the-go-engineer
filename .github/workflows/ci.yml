@@ -55,6 +55,11 @@ jobs:
       - name: Validate Curriculum
         run: go run ./scripts/validate_curriculum.go
 
+      - name: Docker Build Validation
+        run: |
+          cp go.mod go.sum 11-flagship/01-opslane/
+          docker build -f 11-flagship/01-opslane/Dockerfile 11-flagship/01-opslane/
+
       - name: Upload Coverage
         uses: actions/upload-artifact@v7
         if: always()
