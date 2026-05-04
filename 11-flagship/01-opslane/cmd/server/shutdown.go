@@ -26,16 +26,32 @@ import (
 // (like the database) and exit.
 func setupGracefulShutdown(
 	server *http.Server,
+	shutdownTimeout time.Duration,
 	logger *slog.Logger,
 	isDraining *atomic.Bool,
 	bus *events.Bus,
+	cancelApp context.CancelFunc,
+	workerPools ...*workers.Pool,
+) <-chan struct{} {
+	sigint := make(chan os.Signal, 1)
+	signal.Notify(sigint, os.Interrupt, syscall.SIGTERM)
+	
+	return drainOnSignal(sigint, server, shutdownTimeout, logger, isDraining, bus, cancelApp, workerPools...)
+}
+
+func drainOnSignal(
+	sigint <-chan os.Signal,
+	server *http.Server,
+	shutdownTimeout time.Duration,
+	logger *slog.Logger,
+	isDraining *atomic.Bool,
+	bus *events.Bus,
+	cancelApp context.CancelFunc,
 	workerPools ...*workers.Pool,
 ) <-chan struct{} {
 	idleConnsClosed := make(chan struct{})
 
 	go func() {
-		sigint := make(chan os.Signal, 1)
-		signal.Notify(sigint, os.Interrupt, syscall.SIGTERM)
 		<-sigint
 
 		logger.Info("shutdown signal received, initiating graceful drain")
@@ -46,7 +62,7 @@ func setupGracefulShutdown(
 
 		// 2. Shut down the HTTP server. This stops accepting new connections
 		// and waits for in-flight requests to finish, up to the deadline.
-		ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), shutdownTimeout)
 		defer cancel()
 
 		if err := server.Shutdown(ctx); err != nil {
@@ -62,7 +78,13 @@ func setupGracefulShutdown(
 			logger.Info("event bus closed to new publications")
 		}
 
-		// 4. Stop all background worker pools. This signals workers to stop
+		// 4. Cancel the root application context, signaling all background
+		// systems that a graceful exit is underway.
+		if cancelApp != nil {
+			cancelApp()
+		}
+
+		// 5. Stop all background worker pools. This signals workers to stop
 		// accepting new jobs, drain their internal buffers, and exit.
 		// Wait blocks until all workers in the pool have returned.
 		for _, pool := range workerPools {
@@ -72,7 +94,7 @@ func setupGracefulShutdown(
 			}
 		}
 
-		// 5. Signal the main goroutine that the shutdown sequence is complete.
+		// 6. Signal the main goroutine that the shutdown sequence is complete.
 		close(idleConnsClosed)
 	}()
 

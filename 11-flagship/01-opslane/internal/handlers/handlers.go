@@ -13,6 +13,8 @@ import (
 	"time"
 
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/auth"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/logging"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/middleware"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
 	paymentflow "github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/payment"
@@ -27,6 +29,7 @@ const apiRateLimitMaxRequests = 120
 // central composition root for all incoming web requests.
 type Application struct {
 	Logger            *slog.Logger
+	Metrics           *metrics.AppMetrics
 	Store             Store
 	Orders            OrderWorkflow
 	Payments          PaymentWorkflow
@@ -73,6 +76,7 @@ func (app *Application) Routes() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /", app.handleIndex)
 	mux.HandleFunc("GET /health", app.handleHealth)
+	mux.HandleFunc("GET /metrics", app.handleMetrics)
 	mux.Handle("GET /me", auth.RequireAuth(app.Tokens)(http.HandlerFunc(app.handleMe)))
 	mux.HandleFunc("POST /api/v1/tenants", app.handleCreateTenant)
 	mux.HandleFunc("POST /api/v1/users", app.handleCreateUser)
@@ -85,8 +89,10 @@ func (app *Application) Routes() http.Handler {
 	mux.Handle("POST /api/v1/payments", protected(http.HandlerFunc(app.handleCreatePayment)))
 	mux.Handle("GET /api/v1/orders/{orderID}/payments", protected(http.HandlerFunc(app.handleListPaymentsByOrder)))
 
-	baseHandler := middleware.LogRequest(app.Logger)(
-		middleware.RecoverPanic(app.Logger)(mux),
+	baseHandler := logging.RequestLogger(app.Logger)(
+		metrics.HTTPMetrics(app.Metrics)(
+			middleware.RecoverPanic(app.Logger)(mux),
+		),
 	)
 	rateLimitedHandler := middleware.RateLimit(apiRateLimitMaxRequests, apiRateLimitWindow, app.TrustedProxyCIDRs)(baseHandler)
 	httpSurface := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -156,6 +162,14 @@ func (app *Application) handleMe(w http.ResponseWriter, r *http.Request) {
 		"role":       identity.Role,
 		"expires_at": identity.ExpiresAt,
 	})
+}
+
+func (app *Application) handleMetrics(w http.ResponseWriter, r *http.Request) {
+	if app.Metrics == nil || app.Metrics.Registry == nil {
+		http.Error(w, "metrics not configured", http.StatusNotImplemented)
+		return
+	}
+	writeJSON(w, http.StatusOK, app.Metrics.Registry.Snapshot())
 }
 
 func writeJSON(w http.ResponseWriter, status int, payload any) {

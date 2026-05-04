@@ -36,6 +36,11 @@ type Identity struct {
 }
 
 // TokenManager issues and verifies HMAC-signed JWT-compatible access tokens.
+//
+// NOTE: This is a teaching JWT implementation to demonstrate cryptographic
+// signatures and identity extraction without external dependencies.
+// Production systems should usually use mature libraries or managed identity
+// infrastructure.
 type TokenManager struct {
 	secret []byte
 	issuer string

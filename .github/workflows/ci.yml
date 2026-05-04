@@ -41,19 +41,28 @@ jobs:
       - name: Test with Race Detector
         run: go test -race ./...
 
-      - name: Coverage Report
+      - name: Coverage Report and Threshold Check
         run: |
           go test -coverprofile coverage.out ./...
           go tool cover -html coverage.out -o coverage.html
           COVERAGE=$(go tool cover -func coverage.out | grep total | awk '{print $3}')
           echo "## Code Coverage: $COVERAGE" >> $GITHUB_STEP_SUMMARY
+          awk -v cov="${COVERAGE%\%}" 'BEGIN { if (cov < 15.0) { print "Coverage " cov "% is below threshold"; exit 1 } }'
 
       - name: Run Benchmarks
         run: |
-          go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/ || true
+          go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
 
       - name: Validate Curriculum
         run: go run ./scripts/validate_curriculum.go
+
+      - name: Run govulncheck
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          govulncheck ./...
+
+      - name: Docker Build Validation
+        run: docker build -f 11-flagship/01-opslane/Dockerfile 11-flagship/01-opslane/
 
       - name: Upload Coverage
         uses: actions/upload-artifact@v7

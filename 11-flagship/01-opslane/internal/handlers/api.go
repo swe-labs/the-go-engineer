@@ -11,9 +11,11 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"log/slog"
 
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/db"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/logging"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
 	paymentflow "github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/services"
@@ -345,7 +347,16 @@ func isAllowedPaymentStatus(status models.PaymentStatus) bool {
 	}
 }
 
-func (app *Application) writeError(w http.ResponseWriter, _ *http.Request, status int, code, message string) {
+func (app *Application) writeError(w http.ResponseWriter, r *http.Request, status int, code, message string) {
+	if status >= 500 {
+		app.Logger.Error("internal server error",
+			slog.String("error_code", code),
+			slog.String("error_message", message),
+			slog.String("path", r.URL.Path),
+			slog.String("correlation_id", logging.CorrelationID(r.Context())),
+		)
+	}
+
 	writeJSON(w, status, map[string]any{
 		"error": map[string]string{
 			"code":    code,

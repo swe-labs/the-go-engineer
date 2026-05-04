@@ -4,7 +4,8 @@ This module is already implemented in the current tree.
 
 ## Primary Code Files
 
-- [`internal/db/migrations.go`](../../internal/db/migrations.go)
+- [`internal/db/migrations.go`](../../internal/db/migrations.go) (embedded)
+- [`migrations/`](../../migrations/) (formal SQL migrations)
 - [`internal/db/repository.go`](../../internal/db/repository.go)
 - [`internal/models/tenant.go`](../../internal/models/tenant.go)
 - [`internal/models/user.go`](../../internal/models/user.go)

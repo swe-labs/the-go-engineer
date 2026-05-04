@@ -148,8 +148,6 @@ func SecureHeaders(next http.Handler) http.Handler {
 		w.Header().Set("X-Frame-Options", "deny")
 		// Prevent MIME-sniffing bypasses
 		w.Header().Set("X-Content-Type-Options", "nosniff")
-		// Stop execution if an XSS attack is detected by the browser natively
-		w.Header().Set("X-XSS-Protection", "1; mode=block")
 
 		next.ServeHTTP(w, r)
 	})
