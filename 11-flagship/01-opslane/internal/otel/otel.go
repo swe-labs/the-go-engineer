@@ -19,10 +19,10 @@ import (
 )
 
 type Config struct {
-	Endpoint  string
-	Insecure  bool
-	Timeout   time.Duration
-	Enabled   bool
+	Endpoint string
+	Insecure bool
+	Timeout  time.Duration
+	Enabled  bool
 }
 
 func (c *Config) FromEnv() {
@@ -51,14 +51,14 @@ type Tracer struct {
 }
 
 type Span struct {
-	TraceID      string
-	SpanID       string
-	ParentID     string
-	Name         string
-	StartTime    time.Time
-	EndTime      time.Time
-	Attributes   map[string]string
-	Status       string
+	TraceID       string
+	SpanID        string
+	ParentID      string
+	Name          string
+	StartTime     time.Time
+	EndTime       time.Time
+	Attributes    map[string]string
+	Status        string
 	StatusMessage string
 }
 
@@ -120,10 +120,10 @@ func (t *Tracer) StartSpan(ctx context.Context, name string, attrs ...string) (c
 	traceID := getOrCreateTraceID(ctx)
 
 	span := Span{
-		TraceID:   traceID,
-		SpanID:    spanID,
-		Name:      name,
-		StartTime: time.Now(),
+		TraceID:    traceID,
+		SpanID:     spanID,
+		Name:       name,
+		StartTime:  time.Now(),
 		Attributes: attrsToMap(attrs),
 	}
 

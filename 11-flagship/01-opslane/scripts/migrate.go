@@ -31,10 +31,10 @@ var (
 )
 
 type migration struct {
-	version   int
-	name      string
-	upFile    string
-	downFile  string
+	version  int
+	name     string
+	upFile   string
+	downFile string
 }
 
 func main() {
@@ -327,6 +327,6 @@ func printMigrationStatus(migs []migration, applied []int) {
 	}
 
 	fmt.Println(strings.Repeat("-", 50))
-	fmt.Printf("Total: %d migrations, %d applied, %d pending\n", 
+	fmt.Printf("Total: %d migrations, %d applied, %d pending\n",
 		len(migs), len(applied), len(migs)-len(applied))
 }

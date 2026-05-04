@@ -35,7 +35,7 @@ func setupGracefulShutdown(
 ) <-chan struct{} {
 	sigint := make(chan os.Signal, 1)
 	signal.Notify(sigint, os.Interrupt, syscall.SIGTERM)
-	
+
 	return drainOnSignal(sigint, server, shutdownTimeout, logger, isDraining, bus, cancelApp, workerPools...)
 }
 

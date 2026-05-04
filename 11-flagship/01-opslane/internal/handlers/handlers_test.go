@@ -13,10 +13,10 @@ import (
 
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/db"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
 	paymentflow "github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/services"
-	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
 )
 
 func TestProtectedMeRouteReturnsAuthenticatedTenantIdentity(t *testing.T) {

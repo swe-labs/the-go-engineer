@@ -20,9 +20,9 @@ import (
 
 type Config struct {
 	RequestsPerSecond int
-	BurstSize        int
-	WindowSeconds    int
-	DB               *sql.DB
+	BurstSize         int
+	WindowSeconds     int
+	DB                *sql.DB
 }
 
 type Limiter struct {

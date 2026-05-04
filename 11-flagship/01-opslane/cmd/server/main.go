@@ -17,10 +17,10 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/events"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/handlers"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
 	paymentflow "github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/payment"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/services"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/workers"
-	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
 )
 
 const startupDatabaseTimeout = 10 * time.Second
@@ -63,7 +63,7 @@ func main() {
 
 	// Initialize background systems
 	bus := events.NewBus(1000)
-	
+
 	// Create root application context for workers
 	ctx, cancelApp := context.WithCancel(context.Background())
 	defer cancelApp()

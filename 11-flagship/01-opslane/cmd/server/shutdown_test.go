@@ -25,7 +25,7 @@ func TestGracefulShutdownCoordination(t *testing.T) {
 	logger := slog.New(slog.NewTextHandler(&buf, nil))
 	isDraining := &atomic.Bool{}
 	bus := events.NewBus(10)
-	
+
 	ctx, cancelApp := context.WithCancel(context.Background())
 	defer cancelApp()
 

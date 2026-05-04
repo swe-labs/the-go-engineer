@@ -8,10 +8,10 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"strconv"
 	"strings"
-	"log/slog"
 
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/auth"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/db"
