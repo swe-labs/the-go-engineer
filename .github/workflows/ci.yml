@@ -41,6 +41,11 @@ jobs:
       - name: Test with Race Detector
         run: go test -race ./...
 
+      - name: Vulnerability Check
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          govulncheck ./...
+
       - name: Coverage Report
         run: |
           go test -coverprofile coverage.out ./...
@@ -48,9 +53,10 @@ jobs:
           COVERAGE=$(go tool cover -func coverage.out | grep total | awk '{print $3}')
           echo "## Code Coverage: $COVERAGE" >> $GITHUB_STEP_SUMMARY
 
-      - name: Run Benchmarks
+      - name: Coverage Threshold Check
         run: |
-          go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/ || true
+          COVERAGE_PERCENT=$(go tool cover -func coverage.out | grep total | awk '{print substr($3, 1, length($3)-1)}')
+          awk -v cov="$COVERAGE_PERCENT" -v thresh="70.0" 'BEGIN { if (cov < thresh) { print "Coverage "cov"% is below threshold of "thresh"%"; exit 1 } else { print "Coverage "cov"% is above threshold of "thresh"%" } }'
 
       - name: Validate Curriculum
         run: go run ./scripts/validate_curriculum.go
