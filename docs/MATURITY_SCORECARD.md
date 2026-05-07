@@ -26,27 +26,27 @@
 
 ## Operations
 
-- [ ] Docker build validation passes
-- [ ] health/readiness/liveness semantics documented
-- [ ] migration policy and checksums enforced
-- [ ] observability export path tested
+- [x] Docker build validation passes
+- [x] health/readiness/liveness semantics documented
+- [x] migration policy and checksums enforced
+- [x] observability export path tested
 
 ## Education
 
 - [ ] learner checkpoints documented
-- [ ] lesson feedback path visible
+- [x] lesson feedback path visible
 - [ ] proof surfaces executable from docs
 
 ## Consistency
 
-- [ ] curriculum validator passes
-- [ ] `go mod tidy` produces no diff
-- [ ] formatting gate clean
-- [ ] OpenAPI surface aligns with handler routes
+- [x] curriculum validator passes
+- [x] `go mod tidy` produces no diff
+- [x] formatting gate clean
+- [x] OpenAPI surface aligns with handler routes
 
 ## Community
 
-- [ ] issue templates and PR template available
-- [ ] code of conduct and contributing guide visible
-- [ ] label taxonomy documented
-- [ ] CODEOWNERS in place
+- [x] issue templates and PR template available
+- [x] code of conduct and contributing guide visible
+- [x] label taxonomy documented
+- [x] CODEOWNERS in place
