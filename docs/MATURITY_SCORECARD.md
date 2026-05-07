@@ -1,5 +1,7 @@
 # The Go Engineer Maturity Scorecard
 
+> **Note:** This scorecard is a living maturity checklist. Checked items represent currently verified surfaces; unchecked items represent deliberate next hardening targets.
+
 ## Correctness
 
 - [ ] `go build ./...`

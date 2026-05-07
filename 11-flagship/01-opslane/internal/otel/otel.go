@@ -259,7 +259,37 @@ func ParseTraceParent(traceParent string) (traceID, parentID string, ok bool) {
 	if parts[0] != "00" || len(parts[1]) != 32 || len(parts[2]) != 16 || len(parts[3]) != 2 {
 		return "", "", false
 	}
-	return parts[1], parts[2], true
+
+	traceID, parentID = parts[1], parts[2]
+	flags := parts[3]
+
+	if !isValidHex(traceID) || !isValidHex(parentID) || !isValidHex(flags) {
+		return "", "", false
+	}
+
+	if isAllZero(traceID) || isAllZero(parentID) {
+		return "", "", false
+	}
+
+	return traceID, parentID, true
+}
+
+func isValidHex(s string) bool {
+	for _, r := range s {
+		if !((r >= '0' && r <= '9') || (r >= 'a' && r <= 'f') || (r >= 'A' && r <= 'F')) {
+			return false
+		}
+	}
+	return len(s) > 0
+}
+
+func isAllZero(s string) bool {
+	for _, r := range s {
+		if r != '0' {
+			return false
+		}
+	}
+	return true
 }
 
 func FormatTraceParent(traceID, spanID string) string {

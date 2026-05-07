@@ -247,16 +247,22 @@ func runUpMigrations(ctx context.Context, db *sql.DB, migs []migration, applied 
 			return fmt.Errorf("failed to begin transaction: %w", err)
 		}
 
+		_, err = tx.ExecContext(ctx, "INSERT INTO schema_migrations (version, name, checksum, dirty) VALUES ($1, $2, $3, TRUE) ON CONFLICT (version) DO UPDATE SET dirty = TRUE", m.version, m.name, m.checksum)
+		if err != nil {
+			tx.Rollback()
+			return fmt.Errorf("failed to set dirty state for migration %d: %w", m.version, err)
+		}
+
 		_, err = tx.ExecContext(ctx, string(content))
 		if err != nil {
 			tx.Rollback()
 			return fmt.Errorf("failed to apply migration %d: %w", m.version, err)
 		}
 
-		_, err = tx.ExecContext(ctx, "INSERT INTO schema_migrations (version, name, checksum, dirty) VALUES ($1, $2, $3, FALSE)", m.version, m.name, m.checksum)
+		_, err = tx.ExecContext(ctx, "UPDATE schema_migrations SET dirty = FALSE WHERE version = $1", m.version)
 		if err != nil {
 			tx.Rollback()
-			return fmt.Errorf("failed to record migration %d: %w", m.version, err)
+			return fmt.Errorf("failed to clear dirty state for migration %d: %w", m.version, err)
 		}
 
 		if err := tx.Commit(); err != nil {
