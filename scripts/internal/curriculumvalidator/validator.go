@@ -200,6 +200,7 @@ func Validate(root string, report func(string)) (Result, error) {
 
 	markdownErrors := validateMarkdownSurfaces(root, report)
 	standardsErrors := validateRepositoryStandards(root, report)
+	opslaneErrors := validateOpslaneConsistency(root, report)
 
 	return Result{
 		FilesScanned:     filesScanned,
@@ -207,8 +208,110 @@ func Validate(root string, report func(string)) (Result, error) {
 		V2ItemCount:      v2ItemCount,
 		PlaceholderCount: v2PlaceholderCount,
 		HasV2:            hasV2,
-		ErrorCount:       runErrors + v2Errors + markdownErrors + standardsErrors,
+		ErrorCount:       runErrors + v2Errors + markdownErrors + standardsErrors + opslaneErrors,
 	}, nil
+}
+
+func validateOpslaneConsistency(root string, report func(string)) int {
+	errorsFound := 0
+	baseDir := filepath.Join(root, "11-flagship/01-opslane")
+
+	readmeBytes, err := os.ReadFile(filepath.Join(baseDir, "README.md"))
+	if err != nil {
+		if !os.IsNotExist(err) {
+			report(fmt.Sprintf("Failed to read Opslane README: %v", err))
+			return 1
+		}
+		return 0 // Opslane not present
+	}
+	readmeStr := string(readmeBytes)
+
+	modulesBytes, err := os.ReadFile(filepath.Join(baseDir, "MODULES.md"))
+	if err != nil {
+		if os.IsNotExist(err) {
+			return 0
+		}
+		report(fmt.Sprintf("Failed to read Opslane MODULES.md: %v", err))
+		return 1
+	}
+	modulesStr := string(modulesBytes)
+
+	for i := 1; i <= 10; i++ {
+		readmeKey := fmt.Sprintf("`OPSL.%d` complete:", i)
+		if !strings.Contains(readmeStr, readmeKey) {
+			report(fmt.Sprintf("Opslane README.md missing progress line: %s", readmeKey))
+			errorsFound++
+		}
+		moduleKey := fmt.Sprintf("`OPSL.%d` |", i)
+		if !strings.Contains(modulesStr, moduleKey) {
+			report(fmt.Sprintf("Opslane MODULES.md missing module: %s", moduleKey))
+			errorsFound++
+		}
+	}
+
+	migrationsDir := filepath.Join(baseDir, "migrations")
+	entries, err := os.ReadDir(migrationsDir)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return 0
+		}
+		report(fmt.Sprintf("Failed to read Opslane migrations dir: %v", err))
+		return errorsFound + 1
+	}
+
+	var upCount int
+	for _, entry := range entries {
+		if strings.HasSuffix(entry.Name(), ".up.sql") {
+			upCount++
+			base := strings.TrimSuffix(entry.Name(), ".up.sql")
+			if !strings.Contains(readmeStr, base) {
+				report(fmt.Sprintf("Opslane README.md missing migration file mention: %s", base))
+				errorsFound++
+			}
+		}
+	}
+
+	rangeStr := fmt.Sprintf("(001-%03d)", upCount)
+	if !strings.Contains(readmeStr, rangeStr) {
+		report(fmt.Sprintf("Opslane README.md missing correct migration range: %s", rangeStr))
+		errorsFound++
+	}
+
+	migrationsBytes, err := os.ReadFile(filepath.Join(baseDir, "internal/db/migrations.go"))
+	if err != nil {
+		if os.IsNotExist(err) {
+			return 0
+		}
+		report(fmt.Sprintf("Failed to read Opslane embedded migrations: %v", err))
+		return errorsFound + 1
+	}
+	migrationsStr := string(migrationsBytes)
+
+	tableRegex := regexp.MustCompile(`(?i)CREATE TABLE IF NOT EXISTS (\w+)`)
+	embeddedTables := tableRegex.FindAllStringSubmatch(migrationsStr, -1)
+
+	for _, tMatch := range embeddedTables {
+		tableName := tMatch[1]
+		foundInSQL := false
+		for _, entry := range entries {
+			if strings.HasSuffix(entry.Name(), ".up.sql") {
+				content, err := os.ReadFile(filepath.Join(migrationsDir, entry.Name()))
+				if err != nil {
+					continue
+				}
+				if strings.Contains(strings.ToLower(string(content)), strings.ToLower(tableName)) {
+					foundInSQL = true
+					break
+				}
+			}
+		}
+		if !foundInSQL {
+			report(fmt.Sprintf("Opslane migration drift: table %s found in embedded migrations but not in .up.sql files", tableName))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
 }
 
 func isPlaceholderPath(path string) bool {
