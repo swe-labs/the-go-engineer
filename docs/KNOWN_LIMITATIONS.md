@@ -38,11 +38,11 @@ The `internal/events/bus.go` implementation is an in-memory channel router.
 
 ## Distributed Tracing
 
-The `internal/tracing/tracing.go` file implements a lightweight span context.
+The `internal/otel` package now exports OTLP-compatible JSON payloads, supports trace context parsing (`traceparent`), random trace/span identifiers, and configurable sampling.
 
-**Why we built it this way:** To teach the concept of span propagation and how correlation IDs move across boundaries, without importing heavy external SDKs.
+**Why we built it this way:** To keep tracing mechanics visible and teach propagation/export behavior without hiding all internals behind a full SDK wrapper.
 
-**Production Reality:** A production system would use OpenTelemetry (`go.opentelemetry.io/otel/trace`) with real trace and span IDs, sampling rules, and context propagation headers (like W3C Trace Context) to export telemetry to backends like Jaeger or Datadog.
+**Production Reality:** Teams should still evaluate migration to the official OpenTelemetry SDK for richer semantics, ecosystem tooling, and standards coverage.
 
 ## Summary
 

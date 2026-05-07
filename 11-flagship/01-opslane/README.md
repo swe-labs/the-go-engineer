@@ -222,12 +222,19 @@ go run ./scripts/migrate.go -direction down
 go run ./scripts/migrate.go -direction status
 ```
 
-Migrations are numbered (001-005) and include:
+Migrations are numbered (001-006) and include:
 - `001_create_tenants` - tenant registry
 - `002_create_users` - tenant-scoped users
 - `003_create_orders` - order workflow
 - `004_create_payments` - payment tracking
 - `005_seed_data` - development demo data
+- `006_create_rate_limits` - distributed rate limiting
+
+Migration governance details:
+
+- policy: [`./docs/MIGRATION_POLICY.md`](./docs/MIGRATION_POLICY.md)
+- production semantics: [`./docs/PRODUCTION_SEMANTICS.md`](./docs/PRODUCTION_SEMANTICS.md)
+- OpenAPI spec: [`./docs/openapi.yaml`](./docs/openapi.yaml)
 
 ## Database Backup & Restore
 
@@ -255,3 +262,11 @@ Demo credentials: `admin@demo.com` / `password123`
 ## Next Step
 
 All modules are now complete. The repository provides a fully integrated flagship backend demonstrating configuration, database, auth, workflow, async workers, cache, observability, and graceful shutdown.
+
+## Security Notes
+
+Opslane is production-shaped and intentionally educational. For security boundaries and reporting:
+
+- threat model: [`../../../docs/security/OPSLANE_THREAT_MODEL.md`](../../../docs/security/OPSLANE_THREAT_MODEL.md)
+- repository security policy: [`../../../SECURITY.md`](../../../SECURITY.md)
+- known limitations: [`../../../docs/KNOWN_LIMITATIONS.md`](../../../docs/KNOWN_LIMITATIONS.md)
