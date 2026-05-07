@@ -124,6 +124,10 @@ go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance
 | [docs/ENGINEERING_ERROR_FRAMEWORK.md](./docs/ENGINEERING_ERROR_FRAMEWORK.md) | backend and production error model |
 | [docs/flagship/OPSLANE_SAAS_BACKEND.md](./docs/flagship/OPSLANE_SAAS_BACKEND.md) | Opslane flagship specification |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | contribution and pull request workflow |
+| [SECURITY.md](./SECURITY.md) | vulnerability reporting and disclosure policy |
+| [docs/security/OPSLANE_THREAT_MODEL.md](./docs/security/OPSLANE_THREAT_MODEL.md) | Opslane threat model and abuse-case checklist |
+| [docs/KNOWN_LIMITATIONS.md](./docs/KNOWN_LIMITATIONS.md) | intentional educational boundaries and tradeoffs |
+| [docs/MATURITY_SCORECARD.md](./docs/MATURITY_SCORECARD.md) | public maturity criteria and verification checklist |
 | [RELEASE.md](./RELEASE.md) | release and branch maintenance process |
 | [MAINTAINER-CHECKLIST.md](./MAINTAINER-CHECKLIST.md) | maintainer review and release checklist |
 | [CHANGELOG.md](./CHANGELOG.md) | release history |

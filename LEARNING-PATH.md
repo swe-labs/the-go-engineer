@@ -94,4 +94,7 @@ When a lesson mentions a concept that is introduced elsewhere, follow the inline
 | [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | teaching contract |
 | [CODE-STANDARDS.md](./CODE-STANDARDS.md) | code, comments, headers, cross-references, and proof-surface standards |
 | [docs/PROGRESSION.md](./docs/PROGRESSION.md) | phase and milestone visualization |
+| [docs/glossary.md](./docs/glossary.md) | shared engineering and curriculum terminology |
+| [docs/LEARNER_FEEDBACK.md](./docs/LEARNER_FEEDBACK.md) | learner feedback workflow and checkpoint prompts |
+| [docs/KNOWN_LIMITATIONS.md](./docs/KNOWN_LIMITATIONS.md) | teaching boundaries vs production expectations |
 | [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | verification expectations |

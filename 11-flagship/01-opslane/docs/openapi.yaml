@@ -1,0 +1,117 @@
+openapi: 3.0.3
+info:
+  title: Opslane API
+  version: 0.1.0
+  description: Production-shaped flagship API surface.
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      summary: Health and readiness probe
+      responses:
+        "200":
+          description: Service healthy
+  /readyz:
+    get:
+      summary: Readiness probe
+      responses:
+        "200":
+          description: Service ready
+  /livez:
+    get:
+      summary: Liveness probe
+      responses:
+        "200":
+          description: Process alive
+  /metrics:
+    get:
+      summary: Prometheus metrics endpoint
+      responses:
+        "200":
+          description: Metrics in Prometheus format
+  /me:
+    get:
+      summary: Current user identity
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current user info
+  /api/v1/tenants:
+    post:
+      summary: Create tenant
+      responses:
+        "201":
+          description: Tenant created
+  /api/v1/users:
+    post:
+      summary: Create user
+      responses:
+        "201":
+          description: User created
+  /api/v1/me:
+    get:
+      summary: Current user identity (API)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current user info
+  /api/v1/auth/login:
+    post:
+      summary: Login and issue access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Auth token response
+  /api/v1/orders:
+    get:
+      summary: List tenant orders
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Order list
+    post:
+      summary: Create order
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Order created
+        "200":
+          description: Existing idempotent order returned
+  /api/v1/payments:
+    post:
+      summary: Create payment workflow request
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Payment created
+  /api/v1/orders/{orderID}/payments:
+    get:
+      summary: List payments for an order
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: orderID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Payment list for order
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -78,3 +78,10 @@ By completing the curriculum, a learner should be able to:
 - build HTTP, gRPC, and database-backed services
 - secure, deploy, and operate production-shaped systems
 - connect isolated Go techniques into one integrated backend
+
+## Companion Surfaces
+
+- [Known limitations](./KNOWN_LIMITATIONS.md)
+- [Learner feedback loop](./LEARNER_FEEDBACK.md)
+- [Glossary](./glossary.md)
+- [Architecture decisions](./adr/README.md)
