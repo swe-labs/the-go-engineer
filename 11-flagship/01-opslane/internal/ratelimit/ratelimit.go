@@ -32,6 +32,13 @@ type Limiter struct {
 	counters map[string]*windowCounter
 }
 
+type Decision struct {
+	Allowed   bool
+	Limit     int
+	Remaining int
+	ResetAt   time.Time
+}
+
 type windowCounter struct {
 	count     int64
 	windowEnd time.Time
@@ -55,17 +62,23 @@ func New(cfg Config) *Limiter {
 }
 
 func (l *Limiter) Allow(key string) (bool, error) {
-	return l.AllowContext(context.Background(), key)
+	d, err := l.AllowWithDecision(context.Background(), key)
+	return d.Allowed, err
 }
 
 func (l *Limiter) AllowContext(ctx context.Context, key string) (bool, error) {
+	d, err := l.AllowWithDecision(ctx, key)
+	return d.Allowed, err
+}
+
+func (l *Limiter) AllowWithDecision(ctx context.Context, key string) (Decision, error) {
 	if l.cfg.DB == nil {
 		return l.localAllow(key), nil
 	}
 	return l.dbAllow(ctx, key)
 }
 
-func (l *Limiter) localAllow(key string) bool {
+func (l *Limiter) localAllow(key string) Decision {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
@@ -77,18 +90,37 @@ func (l *Limiter) localAllow(key string) bool {
 			count:     1,
 			windowEnd: now.Add(time.Duration(l.cfg.WindowSeconds) * time.Second),
 		}
-		return true
+		return Decision{
+			Allowed:   true,
+			Limit:     l.cfg.BurstSize,
+			Remaining: l.cfg.BurstSize - 1,
+			ResetAt:   l.counters[key].windowEnd,
+		}
 	}
 
 	if counter.count >= int64(l.cfg.BurstSize) {
-		return false
+		return Decision{
+			Allowed:   false,
+			Limit:     l.cfg.BurstSize,
+			Remaining: 0,
+			ResetAt:   counter.windowEnd,
+		}
 	}
 
 	counter.count++
-	return true
+	remaining := l.cfg.BurstSize - int(counter.count)
+	if remaining < 0 {
+		remaining = 0
+	}
+	return Decision{
+		Allowed:   true,
+		Limit:     l.cfg.BurstSize,
+		Remaining: remaining,
+		ResetAt:   counter.windowEnd,
+	}
 }
 
-func (l *Limiter) dbAllow(ctx context.Context, key string) (bool, error) {
+func (l *Limiter) dbAllow(ctx context.Context, key string) (Decision, error) {
 	now := time.Now()
 	window := now.Truncate(time.Duration(l.cfg.WindowSeconds) * time.Second)
 	windowEnd := window.Add(time.Duration(l.cfg.WindowSeconds) * time.Second)
@@ -107,12 +139,31 @@ func (l *Limiter) dbAllow(ctx context.Context, key string) (bool, error) {
 
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return true, nil
+			return Decision{
+				Allowed:   true,
+				Limit:     l.cfg.BurstSize,
+				Remaining: l.cfg.BurstSize - 1,
+				ResetAt:   windowEnd,
+			}, nil
 		}
-		return true, err
+		return Decision{
+			Allowed:   true,
+			Limit:     l.cfg.BurstSize,
+			Remaining: l.cfg.BurstSize,
+			ResetAt:   windowEnd,
+		}, err
 	}
 
-	return count <= int64(l.cfg.BurstSize), nil
+	remaining := l.cfg.BurstSize - int(count)
+	if remaining < 0 {
+		remaining = 0
+	}
+	return Decision{
+		Allowed:   count <= int64(l.cfg.BurstSize),
+		Limit:     l.cfg.BurstSize,
+		Remaining: remaining,
+		ResetAt:   windowEnd,
+	}, nil
 }
 
 func (l *Limiter) Reset(key string) error {

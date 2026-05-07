@@ -9,8 +9,10 @@
 package main
 
 import (
+	"crypto/sha256"
 	"context"
 	"database/sql"
+	"encoding/hex"
 	"flag"
 	"fmt"
 	"log"
@@ -35,6 +37,7 @@ type migration struct {
 	name     string
 	upFile   string
 	downFile string
+	checksum string
 }
 
 func main() {
@@ -80,6 +83,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to get applied migrations: %v", err)
 	}
+	if err := validateAppliedChecksums(ctx, db, migs); err != nil {
+		log.Fatalf("Migration checksum validation failed: %v", err)
+	}
 
 	switch *direction {
 	case "up":
@@ -106,10 +112,17 @@ func ensureMigrationsTable(ctx context.Context, db *sql.DB) error {
 		CREATE TABLE IF NOT EXISTS schema_migrations (
 			version INTEGER PRIMARY KEY,
 			name TEXT NOT NULL,
+			checksum TEXT NOT NULL DEFAULT '',
+			dirty BOOLEAN NOT NULL DEFAULT FALSE,
 			applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 		);
 	`
 	_, err := db.ExecContext(ctx, query)
+	if err != nil {
+		return err
+	}
+	_, _ = db.ExecContext(ctx, `ALTER TABLE schema_migrations ADD COLUMN IF NOT EXISTS checksum TEXT NOT NULL DEFAULT ''`)
+	_, _ = db.ExecContext(ctx, `ALTER TABLE schema_migrations ADD COLUMN IF NOT EXISTS dirty BOOLEAN NOT NULL DEFAULT FALSE`)
 	return err
 }
 
@@ -161,6 +174,7 @@ func loadMigrations(path string) ([]migration, error) {
 			name:     strings.TrimSuffix(name, ".up.sql"),
 			upFile:   filepath.Join(path, name),
 			downFile: downPath,
+			checksum: "",
 		})
 	}
 
@@ -168,10 +182,26 @@ func loadMigrations(path string) ([]migration, error) {
 		return migs[i].version < migs[j].version
 	})
 
+	for i := range migs {
+		sum, err := computeFileChecksum(migs[i].upFile)
+		if err != nil {
+			return nil, fmt.Errorf("checksum failed for %s: %w", migs[i].upFile, err)
+		}
+		migs[i].checksum = sum
+	}
+	if err := validateStrictOrder(migs); err != nil {
+		return nil, err
+	}
+
 	return migs, nil
 }
 
 func getAppliedMigrations(ctx context.Context, db *sql.DB) ([]int, error) {
+	var dirtyCount int
+	if err := db.QueryRowContext(ctx, "SELECT COUNT(*) FROM schema_migrations WHERE dirty = TRUE").Scan(&dirtyCount); err == nil && dirtyCount > 0 {
+		return nil, fmt.Errorf("database has dirty migration state; resolve before continuing")
+	}
+
 	rows, err := db.QueryContext(ctx, "SELECT version FROM schema_migrations ORDER BY version")
 	if err != nil {
 		return nil, err
@@ -220,7 +250,7 @@ func runUpMigrations(ctx context.Context, db *sql.DB, migs []migration, applied 
 			return fmt.Errorf("failed to apply migration %d: %w", m.version, err)
 		}
 
-		_, err = tx.ExecContext(ctx, "INSERT INTO schema_migrations (version, name) VALUES ($1, $2)", m.version, m.name)
+		_, err = tx.ExecContext(ctx, "INSERT INTO schema_migrations (version, name, checksum, dirty) VALUES ($1, $2, $3, FALSE)", m.version, m.name, m.checksum)
 		if err != nil {
 			tx.Rollback()
 			return fmt.Errorf("failed to record migration %d: %w", m.version, err)
@@ -329,4 +359,54 @@ func printMigrationStatus(migs []migration, applied []int) {
 	fmt.Println(strings.Repeat("-", 50))
 	fmt.Printf("Total: %d migrations, %d applied, %d pending\n",
 		len(migs), len(applied), len(migs)-len(applied))
+}
+
+func computeFileChecksum(path string) (string, error) {
+	content, err := os.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+	hash := sha256.Sum256(content)
+	return hex.EncodeToString(hash[:]), nil
+}
+
+func validateStrictOrder(migs []migration) error {
+	if len(migs) == 0 {
+		return nil
+	}
+	for i := 1; i < len(migs); i++ {
+		if migs[i].version != migs[i-1].version+1 {
+			return fmt.Errorf("migration order gap: expected version %d but found %d", migs[i-1].version+1, migs[i].version)
+		}
+	}
+	return nil
+}
+
+func validateAppliedChecksums(ctx context.Context, db *sql.DB, migs []migration) error {
+	rows, err := db.QueryContext(ctx, "SELECT version, checksum FROM schema_migrations ORDER BY version")
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
+
+	byVersion := make(map[int]string, len(migs))
+	for _, m := range migs {
+		byVersion[m.version] = m.checksum
+	}
+
+	for rows.Next() {
+		var version int
+		var checksum string
+		if err := rows.Scan(&version, &checksum); err != nil {
+			return err
+		}
+		expected, ok := byVersion[version]
+		if !ok {
+			return fmt.Errorf("applied migration version %d has no corresponding migration file", version)
+		}
+		if checksum != "" && checksum != expected {
+			return fmt.Errorf("checksum mismatch for version %d", version)
+		}
+	}
+	return rows.Err()
 }
