@@ -323,13 +323,26 @@ func (c *otlpClient) Export(ctx context.Context, spans []Span) error {
 		return nil
 	}
 
+	serviceName := t.config.ServiceName
+	if serviceName == "" {
+		serviceName = "opslane"
+	}
+
+	attrs := []map[string]any{
+		{"key": "service.name", "value": map[string]string{"stringValue": serviceName}},
+	}
+	if t.config.Environment != "" {
+		attrs = append(attrs, map[string]any{
+			"key":   "deployment.environment",
+			"value": map[string]string{"stringValue": t.config.Environment},
+		})
+	}
+
 	payload := map[string]any{
 		"resourceSpans": []map[string]any{
 			{
 				"resource": map[string]any{
-					"attributes": []map[string]any{
-						{"key": "service.name", "value": map[string]string{"stringValue": "opslane"}},
-					},
+					"attributes": attrs,
 				},
 				"scopeSpans": []map[string]any{
 					{

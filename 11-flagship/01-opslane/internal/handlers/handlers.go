@@ -109,7 +109,8 @@ func (app *Application) Routes() http.Handler {
 		rateLimitedHandler = middleware.RateLimit(apiRateLimitMaxRequests, apiRateLimitWindow, app.TrustedProxyCIDRs)(baseHandler)
 	}
 	httpSurface := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/health" {
+		switch r.URL.Path {
+		case "/health", "/readyz", "/livez":
 			baseHandler.ServeHTTP(w, r)
 			return
 		}

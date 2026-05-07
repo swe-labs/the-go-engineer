@@ -5,6 +5,9 @@
 
 // Migration runner for Opslane
 // Usage: go run ./11-flagship/01-opslane/scripts/migrate.go [up|down|redo|status]
+//
+// Note: Run from repository root or specify -migrations flag:
+//   go run ./11-flagship/01-opslane/scripts/migrate.go -migrations ./11-flagship/01-opslane/migrations
 
 package main
 
@@ -28,7 +31,7 @@ import (
 
 var (
 	dbDsn      = flag.String("dsn", "", "Database connection string (or use OPSLANE_DB_DSN)")
-	migrations = flag.String("migrations", "./migrations", "Path to migrations directory")
+	migrations = flag.String("migrations", "./11-flagship/01-opslane/migrations", "Path to migrations directory")
 	direction  = flag.String("direction", "up", "Migration direction: up, down, or redo")
 )
 
