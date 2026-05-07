@@ -92,7 +92,7 @@ func New(cfg Config, logger *slog.Logger) *Tracer {
 	}
 
 	if cfg.Endpoint != "" {
-		t.client = newOTLPClient(cfg.Endpoint, cfg.Insecure, cfg.Timeout)
+		t.client = newOTLPClient(cfg.Endpoint, cfg.Insecure, cfg.Timeout, cfg.ServiceName, cfg.Environment)
 		t.wg.Add(1)
 		go t.exportLoop()
 	}
@@ -293,22 +293,30 @@ func randomHex(n int) string {
 }
 
 type otlpClient struct {
-	endpoint string
-	insecure bool
-	timeout  time.Duration
-	client   *http.Client
+	endpoint     string
+	insecure     bool
+	timeout      time.Duration
+	client       *http.Client
+	serviceName  string
+	environment  string
 }
 
-func newOTLPClient(endpoint string, insecure bool, timeout time.Duration) *otlpClient {
+func newOTLPClient(endpoint string, insecure bool, timeout time.Duration, serviceName, environment string) *otlpClient {
 	scheme := "https"
 	if insecure {
 		scheme = "http"
 	}
 
+	if serviceName == "" {
+		serviceName = "opslane"
+	}
+
 	return &otlpClient{
-		endpoint: fmt.Sprintf("%s://%s/v1/traces", scheme, endpoint),
-		insecure: insecure,
-		timeout:  timeout,
+		endpoint:    fmt.Sprintf("%s://%s/v1/traces", scheme, endpoint),
+		insecure:    insecure,
+		timeout:     timeout,
+		serviceName: serviceName,
+		environment: environment,
 		client: &http.Client{
 			Timeout: timeout,
 			Transport: &http.Transport{
@@ -323,18 +331,13 @@ func (c *otlpClient) Export(ctx context.Context, spans []Span) error {
 		return nil
 	}
 
-	serviceName := t.config.ServiceName
-	if serviceName == "" {
-		serviceName = "opslane"
-	}
-
 	attrs := []map[string]any{
-		{"key": "service.name", "value": map[string]string{"stringValue": serviceName}},
+		{"key": "service.name", "value": map[string]string{"stringValue": c.serviceName}},
 	}
-	if t.config.Environment != "" {
+	if c.environment != "" {
 		attrs = append(attrs, map[string]any{
 			"key":   "deployment.environment",
-			"value": map[string]string{"stringValue": t.config.Environment},
+			"value": map[string]string{"stringValue": c.environment},
 		})
 	}
 
