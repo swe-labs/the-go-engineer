@@ -267,6 +267,6 @@ All modules are now complete. The repository provides a fully integrated flagshi
 
 Opslane is production-shaped and intentionally educational. For security boundaries and reporting:
 
-- threat model: [`../../../docs/security/OPSLANE_THREAT_MODEL.md`](../../../docs/security/OPSLANE_THREAT_MODEL.md)
-- repository security policy: [`../../../SECURITY.md`](../../../SECURITY.md)
-- known limitations: [`../../../docs/KNOWN_LIMITATIONS.md`](../../../docs/KNOWN_LIMITATIONS.md)
+- threat model: [`docs/security/OPSLANE_THREAT_MODEL.md`](docs/security/OPSLANE_THREAT_MODEL.md)
+- repository security policy: [`SECURITY.md`](SECURITY.md)
+- known limitations: [`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md)
