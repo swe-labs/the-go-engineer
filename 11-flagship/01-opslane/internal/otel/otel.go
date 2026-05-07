@@ -293,12 +293,12 @@ func randomHex(n int) string {
 }
 
 type otlpClient struct {
-	endpoint     string
-	insecure     bool
-	timeout      time.Duration
-	client       *http.Client
-	serviceName  string
-	environment  string
+	endpoint    string
+	insecure    bool
+	timeout     time.Duration
+	client      *http.Client
+	serviceName string
+	environment string
 }
 
 func newOTLPClient(endpoint string, insecure bool, timeout time.Duration, serviceName, environment string) *otlpClient {
