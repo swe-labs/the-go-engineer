@@ -103,7 +103,7 @@ func RateLimit(maxRequests int, window time.Duration, trustedProxyCIDRs []netip.
 				return
 			}
 
-			clientIP := clientAddress(r, trustedProxyCIDRs)
+			clientIP := ClientAddress(r, trustedProxyCIDRs)
 			now := time.Now()
 
 			mu.Lock()
@@ -153,7 +153,7 @@ func SecureHeaders(next http.Handler) http.Handler {
 	})
 }
 
-func clientAddress(r *http.Request, trustedProxyCIDRs []netip.Prefix) string {
+func ClientAddress(r *http.Request, trustedProxyCIDRs []netip.Prefix) string {
 	peerIP := remotePeerIP(r.RemoteAddr)
 	if peerIP.IsValid() && isTrustedProxy(peerIP, trustedProxyCIDRs) {
 		if forwardedIP, ok := forwardedClientIP(r); ok {

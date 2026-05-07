@@ -18,7 +18,9 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/events"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/handlers"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/otel"
 	paymentflow "github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/payment"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/ratelimit"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/services"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/workers"
 )
@@ -50,6 +52,18 @@ func main() {
 		logger.Error("failed to apply database migrations", slog.Any("error", err))
 		os.Exit(1)
 	}
+
+	var otelCfg otel.Config
+	otelCfg.FromEnv()
+	tracer := otel.New(otelCfg, logger)
+	defer tracer.Stop()
+
+	rateLimiter := ratelimit.New(ratelimit.Config{
+		RequestsPerSecond: 2,
+		BurstSize:         120,
+		WindowSeconds:     60,
+		DB:                database,
+	})
 
 	tokens, err := auth.NewTokenManager(cfg.Auth.TokenSecret, cfg.Auth.TokenIssuer, cfg.Auth.TokenTTL)
 	if err != nil {
@@ -112,6 +126,8 @@ func main() {
 		Environment:       cfg.App.Env,
 		TrustedProxyCIDRs: cfg.HTTP.TrustedProxyCIDRs,
 		IsDraining:        isDraining,
+		RateLimiter:       rateLimiter,
+		Tracer:            tracer,
 	}
 
 	server := &http.Server{

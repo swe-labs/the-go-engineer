@@ -218,3 +218,33 @@ func TestPublishToClosedBusWithContext(t *testing.T) {
 		t.Fatalf("Publish error = %v, want ErrBusClosed", err)
 	}
 }
+
+func TestPoolDefaultsDurabilityMode(t *testing.T) {
+	t.Parallel()
+	pool, err := NewPool(PoolConfig{
+		Name:      "mode-default",
+		Workers:   1,
+		QueueSize: 1,
+		Handler:   func(context.Context, events.Event) error { return nil },
+	})
+	if err != nil {
+		t.Fatalf("NewPool error: %v", err)
+	}
+	if got := pool.DurabilityMode(); got != DurabilityInMemory {
+		t.Fatalf("durability mode=%q want=%q", got, DurabilityInMemory)
+	}
+}
+
+func TestPoolRejectsInvalidDurabilityMode(t *testing.T) {
+	t.Parallel()
+	_, err := NewPool(PoolConfig{
+		Name:           "mode-invalid",
+		Workers:        1,
+		QueueSize:      1,
+		Handler:        func(context.Context, events.Event) error { return nil },
+		DurabilityMode: DurabilityMode("bad"),
+	})
+	if !errors.Is(err, ErrInvalidPoolConfig) {
+		t.Fatalf("NewPool error=%v want ErrInvalidPoolConfig", err)
+	}
+}

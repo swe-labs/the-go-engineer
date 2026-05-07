@@ -17,7 +17,9 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/middleware"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/otel"
 	paymentflow "github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/payment"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/ratelimit"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
@@ -38,6 +40,8 @@ type Application struct {
 	Environment       string
 	TrustedProxyCIDRs []netip.Prefix
 	IsDraining        *atomic.Bool
+	RateLimiter       *ratelimit.Limiter
+	Tracer            *otel.Tracer
 }
 
 // OrderWorkflow defines the subset of the Order Service required by HTTP handlers.
@@ -76,7 +80,9 @@ func (app *Application) Routes() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /", app.handleIndex)
 	mux.HandleFunc("GET /health", app.handleHealth)
-	mux.HandleFunc("GET /metrics", app.handleMetrics)
+	mux.HandleFunc("GET /readyz", app.handleHealth)
+	mux.HandleFunc("GET /livez", app.handleLiveness)
+	mux.Handle("GET /metrics", metrics.PrometheusHandler(app.Metrics))
 	mux.Handle("GET /me", auth.RequireAuth(app.Tokens)(http.HandlerFunc(app.handleMe)))
 	mux.HandleFunc("POST /api/v1/tenants", app.handleCreateTenant)
 	mux.HandleFunc("POST /api/v1/users", app.handleCreateUser)
@@ -89,12 +95,19 @@ func (app *Application) Routes() http.Handler {
 	mux.Handle("POST /api/v1/payments", protected(http.HandlerFunc(app.handleCreatePayment)))
 	mux.Handle("GET /api/v1/orders/{orderID}/payments", protected(http.HandlerFunc(app.handleListPaymentsByOrder)))
 
+	rootHandler := middleware.RecoverPanic(app.Logger)(mux)
+	if app.Tracer != nil && app.Tracer.Enabled() {
+		rootHandler = otel.HTTPMiddleware(app.Tracer)(rootHandler)
+	}
 	baseHandler := logging.RequestLogger(app.Logger)(
-		metrics.HTTPMetrics(app.Metrics)(
-			middleware.RecoverPanic(app.Logger)(mux),
-		),
+		metrics.HTTPMetrics(app.Metrics)(rootHandler),
 	)
-	rateLimitedHandler := middleware.RateLimit(apiRateLimitMaxRequests, apiRateLimitWindow, app.TrustedProxyCIDRs)(baseHandler)
+	var rateLimitedHandler http.Handler
+	if app.RateLimiter != nil {
+		rateLimitedHandler = ratelimit.PerIPMiddleware(app.RateLimiter, app.TrustedProxyCIDRs, app.Logger)(baseHandler)
+	} else {
+		rateLimitedHandler = middleware.RateLimit(apiRateLimitMaxRequests, apiRateLimitWindow, app.TrustedProxyCIDRs)(baseHandler)
+	}
 	httpSurface := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/health" {
 			baseHandler.ServeHTTP(w, r)
@@ -164,12 +177,12 @@ func (app *Application) handleMe(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func (app *Application) handleMetrics(w http.ResponseWriter, r *http.Request) {
-	if app.Metrics == nil || app.Metrics.Registry == nil {
-		http.Error(w, "metrics not configured", http.StatusNotImplemented)
-		return
-	}
-	writeJSON(w, http.StatusOK, app.Metrics.Registry.Snapshot())
+func (app *Application) handleLiveness(w http.ResponseWriter, _ *http.Request) {
+	writeJSON(w, http.StatusOK, map[string]string{
+		"service": app.ServiceName,
+		"env":     app.Environment,
+		"status":  "alive",
+	})
 }
 
 func writeJSON(w http.ResponseWriter, status int, payload any) {
