@@ -25,13 +25,13 @@ import (
 )
 
 type Config struct {
-	Endpoint     string
-	Insecure     bool
-	Timeout      time.Duration
-	Enabled      bool
-	SampleRate   float64
-	ServiceName  string
-	Environment  string
+	Endpoint    string
+	Insecure    bool
+	Timeout     time.Duration
+	Enabled     bool
+	SampleRate  float64
+	ServiceName string
+	Environment string
 }
 
 func (c *Config) FromEnv() {

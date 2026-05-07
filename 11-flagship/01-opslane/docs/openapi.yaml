@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: Opslane API
+  version: 0.1.0
+  description: Production-shaped flagship API surface.
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      summary: Health and readiness probe
+      responses:
+        "200":
+          description: Service healthy
+  /livez:
+    get:
+      summary: Liveness probe
+      responses:
+        "200":
+          description: Process alive
+  /api/v1/auth/login:
+    post:
+      summary: Login and issue access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Auth token response
+  /api/v1/orders:
+    get:
+      summary: List tenant orders
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Order list
+    post:
+      summary: Create order
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Order created
+        "200":
+          description: Existing idempotent order returned
+  /api/v1/payments:
+    post:
+      summary: Create payment workflow request
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Payment created
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
