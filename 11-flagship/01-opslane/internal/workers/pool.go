@@ -21,12 +21,20 @@ var (
 type Handler func(context.Context, events.Event) error
 type ErrorHandler func(events.Event, error)
 
+type DurabilityMode string
+
+const (
+	DurabilityInMemory DurabilityMode = "in_memory"
+	DurabilityDurable  DurabilityMode = "durable"
+)
+
 type PoolConfig struct {
-	Name      string
-	Workers   int
-	QueueSize int
-	Handler   Handler
-	OnError   ErrorHandler
+	Name           string
+	Workers        int
+	QueueSize      int
+	Handler        Handler
+	OnError        ErrorHandler
+	DurabilityMode DurabilityMode
 }
 
 type Pool struct {
@@ -35,6 +43,7 @@ type Pool struct {
 	jobs    chan events.Event
 	handler Handler
 	onError ErrorHandler
+	mode    DurabilityMode
 
 	mu      sync.RWMutex
 	started bool
@@ -50,6 +59,12 @@ func NewPool(config PoolConfig) (*Pool, error) {
 	if config.Name == "" {
 		config.Name = "worker-pool"
 	}
+	if config.DurabilityMode == "" {
+		config.DurabilityMode = DurabilityInMemory
+	}
+	if config.DurabilityMode != DurabilityInMemory && config.DurabilityMode != DurabilityDurable {
+		return nil, ErrInvalidPoolConfig
+	}
 
 	return &Pool{
 		name:    config.Name,
@@ -57,6 +72,7 @@ func NewPool(config PoolConfig) (*Pool, error) {
 		jobs:    make(chan events.Event, config.QueueSize),
 		handler: config.Handler,
 		onError: config.OnError,
+		mode:    config.DurabilityMode,
 		stopCh:  make(chan struct{}),
 	}, nil
 }
@@ -190,6 +206,13 @@ func (p *Pool) Name() string {
 	}
 
 	return p.name
+}
+
+func (p *Pool) DurabilityMode() DurabilityMode {
+	if p == nil {
+		return DurabilityInMemory
+	}
+	return p.mode
 }
 
 // runWorker is the per-goroutine event loop. It exits when either:

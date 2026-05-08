@@ -7,6 +7,8 @@ import (
 	"log/slog"
 	"net/http"
 	"time"
+
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/otel"
 )
 
 // statusRecorder wraps http.ResponseWriter to capture the status code
@@ -56,6 +58,7 @@ func RequestLogger(logger *slog.Logger) func(http.Handler) http.Handler {
 			// Extract or generate correlation ID.
 			correlationID := CorrelationIDFromRequest(r)
 			ctx := WithCorrelationID(r.Context(), correlationID)
+			ctx = otel.WithTraceParent(ctx, r.Header.Get("traceparent"))
 
 			// Echo the correlation ID back to the client.
 			w.Header().Set("X-Correlation-ID", correlationID)

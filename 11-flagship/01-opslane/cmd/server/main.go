@@ -127,6 +127,7 @@ func main() {
 		TrustedProxyCIDRs: cfg.HTTP.TrustedProxyCIDRs,
 		IsDraining:        isDraining,
 		RateLimiter:       rateLimiter,
+		Tracer:            tracer,
 	}
 
 	server := &http.Server{

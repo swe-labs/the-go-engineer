@@ -230,6 +230,12 @@ Migrations are numbered (001-006) and include:
 - `005_seed_data` - development demo data
 - `006_create_rate_limits` - distributed rate limiting
 
+Migration governance details:
+
+- policy: [`./docs/MIGRATION_POLICY.md`](./docs/MIGRATION_POLICY.md)
+- production semantics: [`./docs/PRODUCTION_SEMANTICS.md`](./docs/PRODUCTION_SEMANTICS.md)
+- OpenAPI spec: [`./docs/openapi.yaml`](./docs/openapi.yaml)
+
 ## Database Backup & Restore
 
 ```bash
@@ -256,3 +262,7 @@ Demo credentials: `admin@demo.com` / `password123`
 ## Next Step
 
 All modules are now complete. The repository provides a fully integrated flagship backend demonstrating configuration, database, auth, workflow, async workers, cache, observability, and graceful shutdown.
+
+## Security Notes
+
+Opslane is production-shaped and intentionally educational. For security boundaries and reporting, see the docs folder for threat model, security policy, and known limitations.
