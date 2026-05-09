@@ -46,6 +46,20 @@ Check subcommand-specific help:
 go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands greet -help
 ```
 
+## Verification Surface
+
+When you run the `version` subcommand, you should see your current operating system:
+
+```bash
+go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands version
+```
+
+**Expected Output:**
+```text
+Cortex Version: 1.0.0
+OS: [your_os]
+```
+
 ## Code Walkthrough
 
 ### `switch os.Args[1]`
