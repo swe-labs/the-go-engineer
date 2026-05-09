@@ -1,3 +1,6 @@
+// Package curriculumvalidator provides validation for The Go Engineer curriculum.
+// It checks source file headers, lesson RUN commands, NEXT UP footers, README links,
+// and curriculum.v2.json metadata consistency across all sections and lessons.
 package curriculumvalidator
 
 import (
@@ -18,6 +21,8 @@ import (
 	"unicode"
 )
 
+// V2Section (Struct): represents a curriculum section from curriculum.v2.json.
+// It defines the section metadata including ID, number, slug, title, and phase.
 type V2Section struct {
 	ID            string   `json:"id"`
 	Number        string   `json:"number"`
@@ -32,6 +37,8 @@ type V2Section struct {
 	Prerequisites []string `json:"prerequisites"`
 }
 
+// V2Item (Struct): represents a curriculum item (lesson/exercise) from curriculum.v2.json.
+// Each item has a path, run command, level, and connects to other items via next_items.
 type V2Item struct {
 	ID               string   `json:"id"`
 	SectionID        string   `json:"section_id"`
@@ -50,12 +57,16 @@ type V2Item struct {
 	NextItems        []string `json:"next_items"`
 }
 
+// V2Curriculum (Struct): the root structure of the curriculum registry.
+// It contains the schema version, all sections, and all curriculum items.
 type V2Curriculum struct {
 	SchemaVersion int         `json:"schema_version"`
 	Sections      []V2Section `json:"sections"`
 	Items         []V2Item    `json:"items"`
 }
 
+// Result (Struct): aggregates validation results including counts of files scanned,
+// sections, items, and any errors found during validation.
 type Result struct {
 	FilesScanned     int
 	V2SectionCount   int
@@ -183,6 +194,10 @@ func canonicalSection(id, number, slug, title, pathPrefix, phase string, entryPo
 	}
 }
 
+// Validate (Function): scans the curriculum starting from root directory.
+// It validates source file headers, RUN commands, NEXT UP footers, README links,
+// and curriculum.v2.json metadata. The report function is called with validation
+// messages for each issue found.
 func Validate(root string, report func(string)) (Result, error) {
 	if report == nil {
 		report = func(string) {}
