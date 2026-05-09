@@ -1,6 +1,9 @@
 // Copyright (c) 2026 Rasel Hossen
 // See LICENSE for usage terms.
 
+// Package cache provides an in-memory caching layer for the Opslane backend.
+// It includes a Cache interface, TTL-based expiration, tenant-scoped key generation,
+// write-through invalidation, and singleflight deduplication to prevent thundering herd.
 package cache
 
 import (

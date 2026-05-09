@@ -5,7 +5,11 @@ package models
 
 import "time"
 
-// UserRole defines the RBAC (Role-Based Access Control) level for a user within a tenant.
+// Package models provides the core domain entity types for the Opslane backend.
+// All entities are tenant-scoped to ensure multi-tenant isolation.
+
+// UserRole (Type): defines the RBAC (Role-Based Access Control) level for a user within a tenant.
+// It controls what resources a user can access and what operations they can perform.
 type UserRole string
 
 const (
@@ -17,8 +21,10 @@ const (
 	UserRoleBilling UserRole = "billing"
 )
 
-// User represents a human identity that has been granted access to a specific Tenant.
-// Users are strictly tenant-scoped.
+// User (Struct): represents a human identity that has been granted access to a specific Tenant.
+// Users are strictly tenant-scoped - they cannot access resources outside their TenantID.
+//
+// Invariant: Every User must have a valid TenantID; the database enforces this via foreign key.
 type User struct {
 	ID           int64     `json:"id"`
 	TenantID     int64     `json:"tenant_id"`

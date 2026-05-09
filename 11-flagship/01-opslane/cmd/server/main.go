@@ -1,6 +1,9 @@
 // Copyright (c) 2026 Rasel Hossen
 // See LICENSE for usage terms.
 
+// Package main provides the Opslane backend server entry point.
+// It initializes all dependencies (database, auth, workers, HTTP server)
+// and coordinates the graceful shutdown sequence.
 package main
 
 import (

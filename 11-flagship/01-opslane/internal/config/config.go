@@ -1,6 +1,9 @@
 // Copyright (c) 2026 Rasel Hossen
 // See LICENSE for usage terms.
 
+// Package config provides configuration loading and validation for the Opslane server.
+// It reads configuration from environment variables with sensible defaults and validates
+// all settings before returning to ensure safe startup.
 package config
 
 import (
@@ -12,6 +15,8 @@ import (
 	"time"
 )
 
+// Config (Struct): aggregates all configuration sub-sections needed to run the server.
+// It is loaded via Load() which validates all settings before returning.
 type Config struct {
 	App      AppConfig
 	HTTP     HTTPConfig
@@ -19,12 +24,16 @@ type Config struct {
 	Auth     AuthConfig
 }
 
+// AppConfig (Struct): defines application-level settings including service identity,
+// runtime environment, and logging verbosity.
 type AppConfig struct {
 	Name     string
 	Env      string
 	LogLevel slog.Level
 }
 
+// HTTPConfig (Struct): defines HTTP server parameters including address, timeouts,
+// and trusted proxy CIDRs for proper remote IP detection behind load balancers.
 type HTTPConfig struct {
 	Address           string
 	ReadHeaderTimeout time.Duration
@@ -35,6 +44,8 @@ type HTTPConfig struct {
 	TrustedProxyCIDRs []netip.Prefix
 }
 
+// DatabaseConfig (Struct): defines PostgreSQL connection parameters including DSN,
+// connection pool sizing, and connection lifetime settings.
 type DatabaseConfig struct {
 	DSN             string
 	MaxOpenConns    int
@@ -43,6 +54,8 @@ type DatabaseConfig struct {
 	ConnMaxLifetime time.Duration
 }
 
+// AuthConfig (Struct): defines authentication token settings including secret key,
+// issuer identifier, and token time-to-live duration.
 type AuthConfig struct {
 	TokenSecret string
 	TokenIssuer string
@@ -51,10 +64,14 @@ type AuthConfig struct {
 
 const defaultDevelopmentTokenSecret = "development-only-opslane-secret-change-me"
 
+// Load (Function): reads configuration from environment variables using os.LookupEnv.
+// It is a convenience wrapper around LoadFromLookup for standard usage.
 func Load() (Config, error) {
 	return LoadFromLookup(os.LookupEnv)
 }
 
+// LoadFromLookup (Function): reads configuration from the provided lookup function,
+// allowing dependency injection for testing. It validates all settings before returning.
 func LoadFromLookup(lookup LookupFunc) (Config, error) {
 	readHeaderTimeout, err := durationFromEnv(lookup, "OPSLANE_HTTP_READ_HEADER_TIMEOUT", 5*time.Second)
 	if err != nil {
@@ -152,6 +169,9 @@ func LoadFromLookup(lookup LookupFunc) (Config, error) {
 	return cfg, nil
 }
 
+// Validate (Method): checks that all configuration values are within acceptable ranges
+// and meet security requirements (e.g., production token secret must be different from
+// the default development secret). Returns an error if any validation fails.
 func (c Config) Validate() error {
 	switch c.App.Env {
 	case "development", "staging", "production", "test":
@@ -236,6 +256,8 @@ func (c Config) Validate() error {
 	return nil
 }
 
+// parseLogLevel (Function): converts a string log level (debug, info, warn, error)
+// into an slog.Level value. It is an unexported helper used by LoadFromLookup.
 func parseLogLevel(value string) (slog.Level, error) {
 	switch strings.ToLower(strings.TrimSpace(value)) {
 	case "debug":

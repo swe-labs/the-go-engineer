@@ -1,6 +1,9 @@
 // Copyright (c) 2026 Rasel Hossen
 // See LICENSE for usage terms.
 
+// Package metrics provides in-memory metrics collection for the Opslane backend.
+// It includes thread-safe counters and histograms for HTTP requests, cache hits/misses,
+// and worker job processing.
 package metrics
 
 import (

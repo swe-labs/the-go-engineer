@@ -1,6 +1,8 @@
 // Copyright (c) 2026 Rasel Hossen
 // See LICENSE for usage terms.
 
+// Package middleware provides HTTP middleware components for the Opslane server.
+// It includes panic recovery, request logging, CORS, rate limiting, and security headers.
 package middleware
 
 import (
@@ -153,6 +155,10 @@ func SecureHeaders(next http.Handler) http.Handler {
 	})
 }
 
+// ClientAddress (Function): extracts the client IP address from the request.
+// If trustedProxyCIDRs is configured and the request comes from a trusted proxy,
+// it extracts the client IP from X-Forwarded-For or X-Real-IP headers.
+// Otherwise, it uses the direct remote address.
 func ClientAddress(r *http.Request, trustedProxyCIDRs []netip.Prefix) string {
 	peerIP := remotePeerIP(r.RemoteAddr)
 	if peerIP.IsValid() && isTrustedProxy(peerIP, trustedProxyCIDRs) {

@@ -10,6 +10,8 @@ import (
 	"time"
 )
 
+// LookupFunc (Type): abstracts environment variable lookup to enable testing.
+// It matches the signature of os.LookupEnv.
 type LookupFunc func(string) (string, bool)
 
 func stringFromEnv(lookup LookupFunc, key, fallback string) string {
