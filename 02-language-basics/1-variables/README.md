@@ -50,7 +50,19 @@ go run ./02-language-basics/1-variables
 -   **`var isRunning bool`**: Zero value is `false`.
 -   **`firstName, lastName := "John", "Doe"`**: Short declaration creates and initializes multiple variables at once.
 
-> [!TIP]
+## Common Mistakes
+
+### Unused Variables
+Unlike Python or JavaScript, Go will **not** let you keep unused local variables. This is a common source of frustration for beginners, but it's designed to keep production code clean.
+- **Error:** `name declared and not used`
+- **Solution:** Either use the variable or delete it.
+
+### Short Declaration vs. Package Level
+The `:=` syntax is for **local** variables (inside functions) only. If you try to use it at the package level (outside of any function), the compiler will complain.
+- **Error:** `non-declaration statement outside function body`
+- **Solution:** Use `var` for package-level variables.
+
+## Try It
 > The compiler strictly enforces code quality. If you declare a local variable but never use it, the compiler will refuse to build the program. This was introduced in [GT.6 Reading Compiler Errors](../../01-getting-started/6-reading-compiler-errors/README.md).
 
 ## Try It
