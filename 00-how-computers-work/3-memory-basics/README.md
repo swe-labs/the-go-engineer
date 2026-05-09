@@ -70,6 +70,18 @@ go run ./00-how-computers-work/3-memory-basics
 - **noEscape()**: Returns a value directly. The compiler can keep `x` on the stack because no one outside the function needs a reference to its specific memory address.
 - **escapes()**: Returns a *pointer*. Because the caller needs to access the memory address of `x` after the function is gone, the compiler moves `x` to the heap.
 
+## Common Mistakes
+
+### Over-using Pointers for Small Values
+Many beginners think using pointers (`*int`, `*string`) is always faster because it "avoids copying."
+- **The Bug:** Passing pointers to small, local variables that don't need to be shared.
+- **The Consequence:** You force the variable to "escape" to the heap, which is actually **slower** than a fast stack copy because it creates work for the Garbage Collector.
+
+### Thinking the Stack is Shared
+Unlike the heap, the stack is private to each goroutine.
+- **The Mistake:** Expecting that a pointer to a stack-local variable can be safely shared across goroutines without it escaping.
+- **The Reality:** As soon as you share that address with another goroutine, the compiler sees that the variable "outlives" the current function and moves it to the heap anyway.
+
 ## Try It
 
 1. Run the lesson and compare the value-returning function with the pointer-returning one.
