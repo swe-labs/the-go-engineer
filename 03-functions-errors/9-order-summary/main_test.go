@@ -59,12 +59,8 @@ func TestProcessOrderRejectsNegativeShipping(t *testing.T) {
 }
 
 func TestProcessOrderEmptyPrices(t *testing.T) {
-	summary, err := processOrder("empty cart", []int{}, 10)
-	if err != nil {
-		t.Fatalf("expected success for empty prices, got error: %v", err)
-	}
-
-	if !strings.Contains(summary, "total: 10") {
-		t.Fatalf("expected total 10 for empty cart, got %q", summary)
+	_, err := processOrder("empty cart", []int{}, 10)
+	if err == nil {
+		t.Fatal("expected error for empty prices, got success")
 	}
 }
