@@ -58,6 +58,16 @@ The fetch-decode-execute cycle is the "heartbeat" of the machine:
 go run ./00-how-computers-work/1-what-is-a-program
 ```
 
+## Verification Surface
+
+When you run the command above, you should see the following output on your screen:
+
+```text
+A program is a list of instructions for the machine.
+The CPU keeps fetching, decoding, and executing those instructions.
+Even this printed text is just the visible effect of that loop.
+```
+
 ## Code Walkthrough
 
 - **Instruction Sequence**: Notice how the `fmt.Println` calls execute in the exact order they are written. This represents the linear fetching of instructions by the CPU's Instruction Pointer.
