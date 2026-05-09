@@ -32,3 +32,30 @@ func TestContactDirectoryOutput(t *testing.T) {
 		}
 	}
 }
+
+func TestFindContactIndexTable(t *testing.T) {
+	contacts := []Contact{
+		{Name: "Alice"},
+		{Name: "Bob"},
+	}
+
+	tests := []struct {
+		name      string
+		search    string
+		wantIndex int
+	}{
+		{"exact match first", "Alice", 0},
+		{"exact match second", "Bob", 1},
+		{"not found", "Charlie", -1},
+		{"case sensitive", "alice", -1},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := findContactIndex(contacts, tt.search)
+			if got != tt.wantIndex {
+				t.Errorf("findContactIndex() = %v, want %v", got, tt.wantIndex)
+			}
+		})
+	}
+}
