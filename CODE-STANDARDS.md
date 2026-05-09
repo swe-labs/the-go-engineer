@@ -112,11 +112,23 @@ The footer must use `NEXT UP:` exactly, without emoji.
 
 The next item ID and path must match `curriculum.v2.json`.
 
-The validator checks this pattern:
+The validator accepts two formats:
+
+```go
+// Simple format (recommended for main.go):
+fmt.Println("NEXT UP: XY.N -> path/to/next-lesson")
+
+// Comment format (also valid):
+// NEXT UP: XY.N -> path/to/next-lesson
+```
+
+The validator regex:
 
 ```text
 NEXT UP:\s*([A-Z]{2,6}\.\d+)\s*->\s*([A-Za-z0-9._/\-]+)
 ```
+
+Both formats satisfy the validator. Use `fmt.Println("NEXT UP: ...")` for main lesson files.
 
 ## Formatting Standards
 
