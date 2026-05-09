@@ -55,6 +55,20 @@ This is what you use to send data back to the client. You can set status codes w
 ### `http.ListenAndServe`
 The function that starts the engine. It blocks the main goroutine and keeps the program running until the server is shut down or an error occurs.
 
+## HTTP Status Glossary
+
+When using `w.WriteHeader(code)`, you are telling the client (usually a browser) the outcome of their request. Here are the "Big Three" categories you'll use most:
+
+| Code | Name | Meaning |
+| :--- | :--- | :--- |
+| **200** | `OK` | Success! Everything went exactly as planned. |
+| **400** | `Bad Request` | The client sent something wrong (e.g., bad JSON). |
+| **404** | `Not Found` | The requested URL does not exist on this server. |
+| **500** | `Internal Error` | The server crashed or had an unhandled error. |
+
+> [!TIP]
+> In Go, always prefer using constants like `http.StatusOK` instead of the raw number `200`. It makes your code more readable and prevents typos.
+
 ## Try It
 
 1. Add a new route `/time` that responds with the current server time.

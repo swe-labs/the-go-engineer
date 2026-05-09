@@ -43,6 +43,23 @@ go run ./04-types-design/11-dynamic-typing-with-any
 - **Dynamic Switches**: Type switches provide a clean way to branch logic based on the dynamic type stored in `any`.
 - **Constraint-Free**: Unlike specific interfaces, `any` provides no behavioral guarantees. You must always verify the underlying type before performing operations.
 
+## The Nil Interface Pitfall
+
+This is perhaps the most famous "gotcha" in Go. An interface is only truly `nil` if both its **type** and **value** are `nil`.
+
+If you store a `nil` pointer of a specific type (like `*User`) into an interface, the interface is **not** nil.
+
+```go
+var user *User = nil
+var val any = user
+
+if val == nil {
+    fmt.Println("This will NOT print!")
+}
+```
+
+**Rule of Thumb:** Never return a nil concrete pointer as an interface type. Always return the explicit `nil` literal instead.
+
 ## Try It
 
 1. In `main.go`, observe the output of the "Typed Nil" comparison.
