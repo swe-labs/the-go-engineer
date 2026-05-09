@@ -56,8 +56,8 @@ go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands version
 
 **Expected Output:**
 ```text
-Cortex Version: 1.0.0
-OS: [your_os]
+The Go Engineer CLI v1.0.0
+Built with: go1.26
 ```
 
 ## Code Walkthrough
