@@ -1,5 +1,8 @@
 //go:build ignore
 
+// Package main provides the command-line entry point for curriculum validation.
+// Run with: go run ./scripts/validate_curriculum.go
+// It invokes the curriculumvalidator package to check all lesson files and metadata.
 package main
 
 import (
