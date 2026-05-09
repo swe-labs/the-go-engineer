@@ -96,6 +96,27 @@ func TestRESTAPIValidation(t *testing.T) {
 	}
 }
 
+func TestRESTAPIGetTaskInvalidIDTable(t *testing.T) {
+	handler := newTestTaskAPI()
+
+	tests := []struct {
+		name string
+		path string
+	}{
+		{name: "alpha id", path: "/tasks/abc"},
+		{name: "mixed id", path: "/tasks/12x"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			resp := serveRequest(handler, http.MethodGet, tt.path, "")
+			if resp.Code != http.StatusBadRequest {
+				t.Fatalf("status = %d, want %d", resp.Code, http.StatusBadRequest)
+			}
+		})
+	}
+}
+
 // serveRequest (Function): runs the serve request step and keeps its inputs, outputs, or errors visible.
 func serveRequest(handler http.Handler, method, path, body string) *httptest.ResponseRecorder {
 	req := httptest.NewRequest(method, path, strings.NewReader(body))
