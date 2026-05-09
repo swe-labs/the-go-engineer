@@ -50,7 +50,9 @@ import (
 
 func main() {
 	args := os.Args[1:]
-	if len(args) > 0 && args[0] == os.Args[0] { args = args[1:] }
+	if len(args) > 0 && args[0] == os.Args[0] {
+		args = args[1:]
+	}
 	if len(args) < 1 {
 		printUsage()
 		os.Exit(1)
