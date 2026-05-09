@@ -29,6 +29,7 @@ package main
 
 import (
 	"fmt"
+	"html"
 	"log"
 	"net/http"
 	"strings"
@@ -113,5 +114,6 @@ func handleSignup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 5. Success!
-	fmt.Fprintf(w, "Registration successful for %s!", email)
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprintf(w, "Registration successful for %s!", html.EscapeString(email))
 }
