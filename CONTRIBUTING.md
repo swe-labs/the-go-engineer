@@ -17,6 +17,24 @@ Read these documents before changing curriculum, code, validation, or release su
 
 If documents disagree on public curriculum structure, `ARCHITECTURE.md` wins.
 
+## First-Time Contributor Path
+
+New here? Start small.
+
+1. Pick an open issue labeled `good first issue`, `help wanted`, documentation, tests, or lesson-polish.
+2. Comment on the issue before starting so duplicated work is avoided.
+3. Keep the first PR narrow: one README improvement, one test improvement, one small example correction, or one contributor-facing doc fix.
+4. Run the minimum local checks:
+
+```bash
+go test ./...
+go run ./scripts/validate_curriculum.go
+```
+
+5. Open a draft PR and link the issue with `Closes #<issue>`.
+
+Maintainers will help new contributors through stricter validation, review comments, and final PR readiness. Larger curriculum, validator, CI, release, or Opslane changes must still follow the full workflow below.
+
 ## Architecture Rule
 
 The public architecture is locked at 12 sections, `s00` through `s11`.
