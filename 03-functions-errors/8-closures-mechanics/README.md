@@ -46,6 +46,9 @@ go run ./03-functions-errors/8-closures-mechanics
 - **Variable Capture**: `sayHello` captures the `message` string. If `message` is reassigned in the outer scope, `sayHello` prints the new value.
 - **Loop Capture**: Demonstrates how to safely capture loop indices by rebinding them to a local block variable (`val := i`), which prevents all closures from sharing the final index value (a common pre-Go 1.22 bug).
 
+> [!IMPORTANT]
+> **Capture by Reference:** Go closures capture variables by **reference**, not by value. If you modify a captured variable *after* creating the closure but *before* calling it, the closure will see the updated value. This is why re-binding inside a loop was historically necessary to "freeze" a value for each closure.
+
 > [!TIP]
 > You have now learned the most advanced mechanics of Go functions. It's time to apply them in a real-world scenario. In [FE.7 Order Summary](../9-order-summary/README.md), you will use closures to create dynamic, configurable pricing rules.
 
