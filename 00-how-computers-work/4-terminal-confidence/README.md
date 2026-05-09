@@ -54,9 +54,20 @@ go run ./00-how-computers-work/4-terminal-confidence
 
 ## Try It
 
-1. Run the lesson normally and read both lines.
-2. Run `go run ./00-how-computers-work/4-terminal-confidence > output.txt`. Only the error message stays on your screen.
-3. Run `go run ./00-how-computers-work/4-terminal-confidence 2> errors.txt`. Now the error is trapped in the file.
+1. Run the lesson normally and read both lines on your screen.
+2. **Redirect stdout (Descriptor 1):** Run `go run ./00-how-computers-work/4-terminal-confidence > output.txt`. The `>` symbol is shorthand for `1>`. Only the error message stays on your screen because standard output is now "piped" into the file.
+3. **Redirect stderr (Descriptor 2):** Run `go run ./00-how-computers-work/4-terminal-confidence 2> errors.txt`. Now standard output prints to the screen, but the error message is trapped in `errors.txt`.
+4. **Capture Both:** Run `go run ./00-how-computers-work/4-terminal-confidence > all.log 2>&1`. This tells the shell to redirect stdout to a file, and then "copy" stderr (2) to the same place as stdout (1).
+
+## What the Shell is Doing
+
+When you use redirection (`>` or `2>`), the shell performs "plumbing" **before** your program even starts:
+1. It sees the redirection token in your command.
+2. It opens the target file on your disk.
+3. It uses a system call (like `dup2`) to swap the default terminal connection of File Descriptor 1 (or 2) with the newly opened file.
+4. Only then does it execute (`exec`) your program.
+
+Because this happens at the OS level, your Go code doesn't even know it's writing to a file—it just keeps writing to "stdout" as usual!
 
 ## In Production
 
