@@ -56,6 +56,19 @@ This is the "Ear to the Ground." Inside a `select` statement, this case will tri
 ### Propagation
 The second half of the demo shows that cancelling a single "Parent" context automatically cancels all its "Children." This is how you can shut down a complex web service with a single signal.
 
+## Common Mistakes
+
+### Forgetting the `cancel()` Call
+A common pitfall is ignoring the `cancel` function returned by `WithCancel`. 
+- **The Bug:** You create a context but never call `cancel()`.
+- **The Consequence:** The context and its associated resources remain in memory until the **parent** context expires. If the parent is `context.Background()`, those resources are effectively leaked until the entire program terminates.
+- **The Fix:** Always `defer cancel()` immediately after creation.
+
+### Misunderstanding Propagation Direction
+Cancellation only flows **down** the tree, never up.
+- **The Mistake:** Expecting that cancelling a child context will stop the parent operation.
+- **The Reality:** A parent is blissfully unaware of its child's cancellation. This allows you to stop specific sub-tasks (like an individual database query) without killing the entire request handler.
+
 ## Try It
 
 1. Remove the `cancel()` call in the first example. What happens to the worker? (Hint: It keeps running until the program exits, which in a real server would be a memory leak).
