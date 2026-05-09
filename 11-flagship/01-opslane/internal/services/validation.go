@@ -10,11 +10,16 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
 
+// Package-level error definitions for the services package.
 var (
-	ErrInvalidOrder            = errors.New("invalid order")
-	ErrOrderNotFound           = errors.New("order not found")
+	// ErrInvalidOrder is returned when order input validation fails.
+	ErrInvalidOrder = errors.New("invalid order")
+	// ErrOrderNotFound is returned when a requested order does not exist.
+	ErrOrderNotFound = errors.New("order not found")
+	// ErrInvalidStatusTransition is returned when an order status change is not allowed.
 	ErrInvalidStatusTransition = errors.New("invalid order status transition")
-	ErrInventoryUnavailable    = errors.New("inventory unavailable")
+	// ErrInventoryUnavailable is returned when inventory reservation fails.
+	ErrInventoryUnavailable = errors.New("inventory unavailable")
 )
 
 func normalizeCreateOrderInput(input CreateOrderInput) (CreateOrderInput, error) {

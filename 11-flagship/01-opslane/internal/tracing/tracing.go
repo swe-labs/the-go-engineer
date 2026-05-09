@@ -1,6 +1,9 @@
 // Copyright (c) 2026 Rasel Hossen
 // See LICENSE for usage terms.
 
+// Package tracing provides lightweight distributed tracing for the Opslane backend.
+// It implements a simple span-based pattern for tracking operation duration and
+// correlation IDs across service boundaries.
 package tracing
 
 import (

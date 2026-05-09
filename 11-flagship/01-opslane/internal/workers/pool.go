@@ -13,21 +13,32 @@ import (
 )
 
 var (
+	// ErrInvalidPoolConfig is returned when PoolConfig validation fails.
 	ErrInvalidPoolConfig = errors.New("invalid worker pool config")
-	ErrPoolStopped       = errors.New("worker pool stopped")
-	ErrQueueFull         = errors.New("worker queue full")
+	// ErrPoolStopped is returned when attempting to submit to a stopped pool.
+	ErrPoolStopped = errors.New("worker pool stopped")
+	// ErrQueueFull is returned by TrySubmit when the job channel has no capacity.
+	ErrQueueFull = errors.New("worker queue full")
 )
 
+// Handler (Function): processes a single event. It should return an error
+// if processing fails, which will be passed to the ErrorHandler.
 type Handler func(context.Context, events.Event) error
+
+// ErrorHandler (Function): is called when a handler returns an error or panics.
 type ErrorHandler func(events.Event, error)
 
+// DurabilityMode (Type): defines the persistence strategy for the worker queue.
 type DurabilityMode string
 
 const (
+	// DurabilityInMemory stores events in an in-memory channel (default).
 	DurabilityInMemory DurabilityMode = "in_memory"
-	DurabilityDurable  DurabilityMode = "durable"
+	// DurabilityDurable indicates events should be persisted to survive restarts.
+	DurabilityDurable DurabilityMode = "durable"
 )
 
+// PoolConfig (Struct): configures a new worker pool instance.
 type PoolConfig struct {
 	Name           string
 	Workers        int
@@ -37,6 +48,12 @@ type PoolConfig struct {
 	DurabilityMode DurabilityMode
 }
 
+// Pool (Struct): manages a fixed-size set of concurrent workers that process
+// events from a shared channel. It provides bounded queuing, graceful shutdown
+// with drain support, and non-blocking submission options.
+//
+// Boundary: Workers coordinate through channels; stopCh signals shutdown.
+// Failure mode: Panics in handlers are recovered and passed to OnError.
 type Pool struct {
 	name    string
 	workers int
@@ -52,6 +69,9 @@ type Pool struct {
 	stopCh  chan struct{}
 }
 
+// NewPool (Function): creates a new worker pool with the given configuration.
+// It validates that Workers > 0, QueueSize > 0, and Handler is not nil.
+// Returns ErrInvalidPoolConfig if validation fails.
 func NewPool(config PoolConfig) (*Pool, error) {
 	if config.Workers <= 0 || config.QueueSize <= 0 || config.Handler == nil {
 		return nil, ErrInvalidPoolConfig

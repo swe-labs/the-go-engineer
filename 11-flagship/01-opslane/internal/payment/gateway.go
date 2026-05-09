@@ -1,6 +1,9 @@
 // Copyright (c) 2026 Rasel Hossen
 // See LICENSE for usage terms.
 
+// Package payment provides the payment gateway abstraction for the Opslane backend.
+// It defines the Gateway interface for external payment providers and includes
+// a simulated gateway for testing and development.
 package payment
 
 import (

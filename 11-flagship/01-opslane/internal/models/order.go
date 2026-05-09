@@ -5,7 +5,11 @@ package models
 
 import "time"
 
-// OrderStatus defines the state machine states for a customer order.
+// Package models provides the core domain entity types for the Opslane backend.
+// All entities are tenant-scoped to ensure multi-tenant isolation.
+
+// OrderStatus (Type): defines the state machine states for a customer order.
+// Valid transitions: pending -> processing -> paid, or pending -> failed/cancelled.
 type OrderStatus string
 
 const (
@@ -21,8 +25,11 @@ const (
 	OrderStatusCancelled OrderStatus = "cancelled"
 )
 
-// Order represents a customer's purchase intent. It acts as the aggregate root
+// Order (Struct): represents a customer's purchase intent. It acts as the aggregate root
 // for Payments and Inventory reservations.
+//
+// Invariant: IdempotencyKey must be unique per tenant to prevent duplicate orders.
+// Boundary: All operations on Order must include TenantID for multi-tenant isolation.
 type Order struct {
 	ID             int64       `json:"id"`
 	TenantID       int64       `json:"tenant_id"`

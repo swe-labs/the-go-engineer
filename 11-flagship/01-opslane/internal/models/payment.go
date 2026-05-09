@@ -5,7 +5,9 @@ package models
 
 import "time"
 
-// PaymentStatus represents the lifecycle state of a payment attempt.
+// PaymentStatus (Type): represents the lifecycle state of a payment attempt.
+// It follows the typical payment gateway state machine: pending -> authorized -> settled.
+// Terminal states include failed and refunded.
 type PaymentStatus string
 
 const (
@@ -21,8 +23,11 @@ const (
 	PaymentStatusRefunded PaymentStatus = "refunded"
 )
 
-// Payment records a financial transaction attempt against an order.
+// Payment (Struct): records a financial transaction attempt against an order.
 // Orders may have multiple payments if previous attempts failed.
+//
+// Boundary: Each Payment is tied to exactly one Order via OrderID.
+// Failure mode: If ProviderReference is empty on a settled payment, reconciliation becomes impossible.
 type Payment struct {
 	ID                int64         `json:"id"`
 	TenantID          int64         `json:"tenant_id"`

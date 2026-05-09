@@ -18,6 +18,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// Config (Struct): configures a rate limiter instance.
 type Config struct {
 	RequestsPerSecond int
 	BurstSize         int
@@ -25,6 +26,8 @@ type Config struct {
 	DB                *sql.DB
 }
 
+// Limiter (Struct): provides rate limiting using a sliding window algorithm.
+// It can operate in local in-memory mode or distributed mode using PostgreSQL.
 type Limiter struct {
 	cfg Config
 
@@ -32,6 +35,7 @@ type Limiter struct {
 	counters map[string]*windowCounter
 }
 
+// Decision (Struct): represents the result of a rate limit check.
 type Decision struct {
 	Allowed   bool
 	Limit     int

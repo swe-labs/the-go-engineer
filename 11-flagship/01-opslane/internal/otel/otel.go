@@ -24,6 +24,7 @@ import (
 	"time"
 )
 
+// Config (Struct): configures the OpenTelemetry tracer.
 type Config struct {
 	Endpoint    string
 	Insecure    bool
@@ -58,6 +59,8 @@ func (c *Config) FromEnv() {
 	}
 }
 
+// Tracer (Struct): provides OpenTelemetry tracing for the Opslane backend.
+// It implements span creation, sampling, and async OTLP export.
 type Tracer struct {
 	config  Config
 	client  *otlpClient
@@ -67,6 +70,7 @@ type Tracer struct {
 	logger  *slog.Logger
 }
 
+// Span (Struct): represents a single trace span with timing and attribute data.
 type Span struct {
 	TraceID       string
 	SpanID        string
