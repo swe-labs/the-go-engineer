@@ -84,6 +84,8 @@ func TestRESTAPIValidation(t *testing.T) {
 		{name: "missing title", method: http.MethodPost, path: "/tasks", body: `{}`, wantStatus: http.StatusUnprocessableEntity},
 		{name: "invalid get id", method: http.MethodGet, path: "/tasks/not-a-number", wantStatus: http.StatusBadRequest},
 		{name: "invalid delete id", method: http.MethodDelete, path: "/tasks/not-a-number", wantStatus: http.StatusBadRequest},
+		{name: "method not allowed (delete on list)", method: http.MethodDelete, path: "/tasks", body: "", wantStatus: http.StatusMethodNotAllowed},
+		{name: "method not allowed (post on detail)", method: http.MethodPost, path: "/tasks/1", body: `{"title":"no"}`, wantStatus: http.StatusMethodNotAllowed},
 	}
 
 	for _, tt := range tests {
