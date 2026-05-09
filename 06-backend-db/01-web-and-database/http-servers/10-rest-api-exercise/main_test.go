@@ -84,6 +84,8 @@ func TestRESTAPIValidation(t *testing.T) {
 		{name: "missing title", method: http.MethodPost, path: "/tasks", body: `{}`, wantStatus: http.StatusUnprocessableEntity},
 		{name: "invalid get id", method: http.MethodGet, path: "/tasks/not-a-number", wantStatus: http.StatusBadRequest},
 		{name: "invalid delete id", method: http.MethodDelete, path: "/tasks/not-a-number", wantStatus: http.StatusBadRequest},
+		{name: "method not allowed (delete on list)", method: http.MethodDelete, path: "/tasks", body: "", wantStatus: http.StatusMethodNotAllowed},
+		{name: "method not allowed (post on detail)", method: http.MethodPost, path: "/tasks/1", body: `{"title":"no"}`, wantStatus: http.StatusMethodNotAllowed},
 	}
 
 	for _, tt := range tests {
@@ -91,6 +93,27 @@ func TestRESTAPIValidation(t *testing.T) {
 			resp := serveRequest(handler, tt.method, tt.path, tt.body)
 			if resp.Code != tt.wantStatus {
 				t.Fatalf("status = %d, want %d; body = %s", resp.Code, tt.wantStatus, resp.Body.String())
+			}
+		})
+	}
+}
+
+func TestRESTAPIGetTaskInvalidIDTable(t *testing.T) {
+	handler := newTestTaskAPI()
+
+	tests := []struct {
+		name string
+		path string
+	}{
+		{name: "alpha id", path: "/tasks/abc"},
+		{name: "mixed id", path: "/tasks/12x"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			resp := serveRequest(handler, http.MethodGet, tt.path, "")
+			if resp.Code != http.StatusBadRequest {
+				t.Fatalf("status = %d, want %d", resp.Code, http.StatusBadRequest)
 			}
 		})
 	}
