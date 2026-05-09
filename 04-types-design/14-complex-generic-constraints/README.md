@@ -59,7 +59,7 @@ func GetOrSet[K comparable, V any] (m map[K]V, key K, defaultVal V) V
 
 ### Overly Broad Constraints (`any`)
 A common mistake is using `any` when your generic logic actually requires specific methods.
-- **The Bug:** Defining a function as `func Save[T any](val T)` but then trying to call `val.Serialize()` inside.
+- **The Bug:** Defining a generic function with `any` (e.g., `func Save[T any] { ... }`) but then trying to call `val.Serialize()` inside.
 - **The Result:** Compile-time error because `any` doesn't guarantee the `Serialize` method exists.
 - **The Fix:** Define a constraint interface that includes the `Serialize()` method.
 
