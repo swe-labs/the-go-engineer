@@ -49,16 +49,18 @@ import (
 //   go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands calc -a=10 -b=20
 
 func main() {
-	if len(os.Args) < 2 {
+	args := os.Args[1:]
+	if len(args) > 0 && args[0] == os.Args[0] { args = args[1:] }
+	if len(args) < 1 {
 		printUsage()
 		os.Exit(1)
 	}
 
-	switch os.Args[1] {
+	switch args[0] {
 	case "greet":
-		cmdGreet(os.Args[2:])
+		cmdGreet(args[1:])
 	case "calc":
-		cmdCalc(os.Args[2:])
+		cmdCalc(args[1:])
 	case "version":
 		cmdVersion()
 	default:
