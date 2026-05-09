@@ -531,99 +531,78 @@ func matchesAnyPrefix(itemPath string, prefixes []string) bool {
 	return false
 }
 
+func isFoundationsSection(sectionID string) bool {
+	switch sectionID {
+	case "s00", "s01", "s02", "s03", "s04":
+		return true
+	default:
+		return false
+	}
+}
+
 func validateFoundationsReadmeContracts(root string, items []V2Item, report func(string)) int {
 	errorsFound := 0
 
 	for _, item := range items {
-		itemPath := filepath.ToSlash(filepath.Clean(item.Path))
-		if !strings.HasPrefix(itemPath, "01-getting-started/") && !strings.HasPrefix(itemPath, "02-language-basics/") && !strings.HasPrefix(itemPath, "03-functions-errors/") && !strings.HasPrefix(itemPath, "04-types-design/") {
+		if !isFoundationsSection(item.SectionID) {
 			continue
 		}
 
+		itemPath := filepath.ToSlash(filepath.Clean(item.Path))
 		readmePath := filepath.ToSlash(filepath.Join(itemPath, "README.md"))
 		if !pathExists(root, readmePath) {
-			report(fmt.Sprintf("Missing foundations lesson README: %s -> %s", item.ID, readmePath))
+			report(fmt.Sprintf("Missing foundations README: %s -> %s", item.ID, readmePath))
 			errorsFound++
 			continue
 		}
 
 		errorsFound += validateMarkdownLocalLinks(root, readmePath, report)
 		errorsFound += validateRequiredHeadingsForItem(root, readmePath, item, report)
+		errorsFound += validateFoundationsVisualModelUsesMermaid(root, readmePath, item.ID, report)
+
+		if item.Type == "lesson" && item.VerificationMode == "run" {
+			mainPath := filepath.ToSlash(filepath.Join(itemPath, "main.go"))
+			if !pathExists(root, mainPath) {
+				report(fmt.Sprintf("Missing foundations lesson main.go: %s -> %s", item.ID, mainPath))
+				errorsFound++
+			}
+		}
 	}
 
 	return errorsFound
 }
 
 func validateRequiredHeadingsForItem(root, readmePath string, item V2Item, report func(string)) int {
-	errorsFound := 0
-
 	requiredHeadings := []string{
 		"## Mission",
+		"## Prerequisites",
+		"## Mental Model",
+		"## Visual Model",
+		"## Machine View",
 		"## Run Instructions",
-		"## Try It",
-		"## Next Step",
 	}
 
-	itemPath := filepath.ToSlash(filepath.Clean(item.Path))
 	if item.Type == "lesson" {
 		requiredHeadings = append(requiredHeadings, "## Code Walkthrough")
 	} else {
-		errorsFound += validateAtLeastOneHeading(root, readmePath, item.ID, []string{"## Code Walkthrough", "## Solution Walkthrough"}, report)
+		requiredHeadings = append(requiredHeadings, "## Solution Walkthrough")
 	}
 
-	if strings.HasPrefix(itemPath, "01-getting-started/") && item.Type == "lesson" {
-		requiredHeadings = append(requiredHeadings, "## Mental Model", "## Visual Model", "## Machine View")
-	}
+	requiredHeadings = append(requiredHeadings,
+		"## Try It",
+	)
 
-	if strings.HasPrefix(itemPath, "02-language-basics") && item.Type == "lesson" {
-		requiredHeadings = append(requiredHeadings, "## Mental Model", "## Visual Model", "## Machine View")
-	}
-
-	if strings.HasPrefix(itemPath, "02-language-basics/04-data-structures/") || strings.HasPrefix(itemPath, "03-functions-errors/") {
-		requiredHeadings = append(requiredHeadings, "## Visual Model")
-	}
-
-	if item.Type == "lesson" && (strings.HasPrefix(itemPath, "02-language-basics/04-data-structures/") || strings.HasPrefix(itemPath, "03-functions-errors/")) {
-		requiredHeadings = append(requiredHeadings, "## Mental Model")
-	}
-
-	if strings.HasPrefix(itemPath, "03-functions-errors/") {
-		requiredHeadings = append(requiredHeadings, "## Machine View")
-	}
-
-	if strings.HasPrefix(itemPath, "04-types-design/") {
-		requiredHeadings = append(requiredHeadings, "## Visual Model", "## Machine View")
-	}
-
-	if item.Type == "lesson" && strings.HasPrefix(itemPath, "04-types-design/") {
-		requiredHeadings = append(requiredHeadings, "## Mental Model")
-	}
-
-	if item.StarterPath != "" || strings.TrimSpace(item.TestCommand) != "" || item.VerificationMode == "mixed" || item.VerificationMode == "test" {
+	if item.Type != "lesson" {
 		requiredHeadings = append(requiredHeadings, "## Verification Surface")
 	}
 
-	errorsFound += validateRequiredHeadingsWithID(root, readmePath, item.ID, requiredHeadings, report)
+	requiredHeadings = append(requiredHeadings,
+		"## ⚠️ In Production",
+		"## 🤔 Thinking Questions",
+		"## Next Step",
+	)
 
-	return errorsFound
-}
-
-func validateAtLeastOneHeading(root, relPath, itemID string, headings []string, report func(string)) int {
-	data, err := os.ReadFile(filepath.Join(root, relPath))
-	if err != nil {
-		report(fmt.Sprintf("Failed to read foundations README: %s -> %v", filepath.ToSlash(relPath), err))
-		return 1
-	}
-
-	text := string(data)
-	for _, heading := range headings {
-		if strings.Contains(text, heading) {
-			return 0
-		}
-	}
-
-	report(fmt.Sprintf("Invalid foundations README contract: %s -> %s must include one of %s", itemID, filepath.ToSlash(relPath), strings.Join(headings, ", ")))
-	return 1
+	return validateRequiredHeadingsWithID(root, readmePath, item.ID, requiredHeadings, report)
 }
 
 func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []string, report func(string)) int {
@@ -633,9 +612,22 @@ func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []str
 		return 1
 	}
 
-	text := string(data)
+	text := strings.ReplaceAll(string(data), "\r\n", "\n")
 	errorsFound := 0
+	lastOffset := 0
 	for _, heading := range headings {
+		idx := strings.Index(text[lastOffset:], heading)
+		if idx >= 0 {
+			lastOffset += idx + len(heading)
+			continue
+		}
+
+		if strings.Contains(text, heading) {
+			report(fmt.Sprintf("Invalid foundations README contract: %s -> %s has %s out of order", itemID, filepath.ToSlash(relPath), heading))
+			errorsFound++
+			continue
+		}
+
 		if !strings.Contains(text, heading) {
 			report(fmt.Sprintf("Invalid foundations README contract: %s -> %s missing %s", itemID, filepath.ToSlash(relPath), heading))
 			errorsFound++
@@ -643,6 +635,32 @@ func validateRequiredHeadingsWithID(root, relPath, itemID string, headings []str
 	}
 
 	return errorsFound
+}
+
+func validateFoundationsVisualModelUsesMermaid(root, relPath, itemID string, report func(string)) int {
+	data, err := os.ReadFile(filepath.Join(root, relPath))
+	if err != nil {
+		report(fmt.Sprintf("Failed to read foundations README: %s -> %v", filepath.ToSlash(relPath), err))
+		return 1
+	}
+
+	text := strings.ReplaceAll(string(data), "\r\n", "\n")
+	visualModelIdx := strings.Index(text, "## Visual Model")
+	if visualModelIdx < 0 {
+		return 0
+	}
+
+	sectionText := text[visualModelIdx:]
+	if nextHeadingIdx := strings.Index(sectionText[len("## Visual Model"):], "\n## "); nextHeadingIdx >= 0 {
+		sectionText = sectionText[:len("## Visual Model")+nextHeadingIdx]
+	}
+
+	if !strings.Contains(sectionText, "```mermaid") {
+		report(fmt.Sprintf("Invalid foundations README contract: %s -> %s Visual Model must include a Mermaid diagram", itemID, filepath.ToSlash(relPath)))
+		return 1
+	}
+
+	return 0
 }
 
 var mojibakeMarkers = []string{

@@ -1,14 +1,8 @@
-# TI.8 Payroll Processor Project
+# TI.10 Payroll Processor Project
 
 ## Mission
 
-Build a small payroll system that proves multiple concrete employee types can share one behavior contract through interfaces instead of inheritance.
-
-This exercise is the Section 06 milestone. It is where structs, methods, interfaces, and a small generic helper come together in one runnable artifact with tests.
-
-## Why This Lesson Exists Now
-
-You have learned all the individual pieces: structs for data, methods for behavior, interfaces for contracts, and generics for reusable helpers. Now it is time to put them together in one realistic application.
+Build a small payroll processor that proves different employee types can share one behavior contract through interfaces instead of inheritance.
 
 ## Prerequisites
 
@@ -20,128 +14,78 @@ You have learned all the individual pieces: structs for data, methods for behavi
 
 ## Mental Model
 
-Think of this project like one payroll desk processing different employee records through one shared checklist. The desk does not need separate code paths for salaried, hourly, and commission employees. It just needs a shared contract for "something that can describe itself and calculate pay."
-
-## What You Will Build
-
-Implement a small payroll processor that:
-
-1. defines a `Payable` interface with behavior contracts
-2. models multiple concrete employee types with structs
-3. attaches pay-calculation behavior through methods
-4. processes a mixed `[]Payable` collection polymorphically
-5. includes one small generic helper for reusable summary/report output
-6. verifies core pay calculations with tests
+Different employee types may store different data, but they can still satisfy the same interface if they promise the same behavior. The payroll processor depends on the contract, not on one concrete type.
 
 ## Visual Model
 
-```text
-┌─────────────────────────┐
-│ Payable interface       │
-├─────────────────────────┤
-│ CalculatePay() float64 │
-│ String() string         │
-└─────────────────────────┘
-         ▲
-         │ implements
-    ┌────┴────────┬──────────┐
-    │             │          │
-┌───┴───┐   ┌────┴────┐  ┌──┴─────────┐
-│Salaried│   │ Hourly  │  │Commission  │
-└───────┘   └─────────┘  └────────────┘
+```mermaid
+graph TD
+    A["Payable interface"] --> B["SalariedEmployee"]
+    A --> C["HourlyEmployee"]
+    A --> D["CommissionEmployee"]
+    B --> E["ProcessPayroll([]Payable)"]
+    C --> E
+    D --> E
 ```
 
 ## Machine View
 
-The payroll processor uses polymorphism to process different employee types through a common interface. At runtime, Go uses dynamic dispatch (iTables) to look up which concrete type's CalculatePay method to execute.
-
-## Files
-
-- [main.go](./main.go): complete solution with teaching comments
-- [payroll_test.go](./payroll_test.go): tests for the pay-calculation contract
-- [_starter/main.go](./_starter/main.go): starter file with TODOs and requirements
+When a concrete employee value is stored behind an interface, Go keeps both type information and a value reference. Method calls on the interface dispatch to the correct concrete implementation at runtime.
 
 ## Run Instructions
 
-Run the completed solution:
-
 ```bash
 go run ./04-types-design/10-payroll-processor
-```
-
-Run the tests:
-
-```bash
+go run ./04-types-design/10-payroll-processor/_starter
 go test ./04-types-design/10-payroll-processor
 ```
 
-Run the starter:
-
-```bash
-go run ./04-types-design/10-payroll-processor/_starter
-```
-
-## Code Walkthrough
+## Solution Walkthrough
 
 ### `type Payable interface { ... }`
 
-This interface defines the contract: any type with `CalculatePay()` and `String()` methods satisfies Payable. Go checks this implicitly—no "implements" keyword needed.
+The interface defines the shared behavior the payroll processor needs.
 
-### `type SalariedEmployee struct { ... }`
+### Concrete employee structs
 
-A salaried employee has an annual salary. CalculatePay divides by 12 for monthly pay.
+Each employee type stores different fields but implements the same pay-calculation contract.
 
-### `type HourlyEmployee struct { ... }`
+### Receiver methods
 
-An hourly employee has an hourly rate and hours worked. CalculatePay multiplies them.
+Each concrete type calculates pay in its own way while still satisfying the same interface.
 
-### `type CommissionEmployee struct { ... }`
+### Generic helper
 
-A commission employee has a base salary plus commission on sales. CalculatePay adds base + (rate × sales).
+The small generic helper demonstrates reuse without turning the exercise into a generics lesson.
 
-### `PrintEmployeeSummary` function
+### `ProcessPayroll(employees []Payable)`
 
-This is a generic function with type parameter P constrained to `fmt.Stringer`. The employee parameter P can be any type that implements String().
-
-### `func ProcessPayroll(employees []Payable)`
-
-This function accepts a slice of any types that satisfy Payable. It iterates and calls CalculatePay polymorphically—one function handles all employee types.
+This function loops over mixed employee types and treats them uniformly through the interface.
 
 ## Try It
 
-1. Add a new employee type (e.g., Contractor) and see if ProcessPayroll handles it without changes.
-2. Change one CalculatePay to use a pointer receiver and verify it still works.
-3. Add a new field to one employee type and update its String() method.
-
-## Success Criteria
-
-Your finished solution should:
-
-- use interfaces to describe the payroll behavior boundary
-- allow multiple employee types to satisfy the same contract cleanly
-- keep receiver choices intentional and easy to explain
-- include one small generic helper without turning the exercise into a generics showcase
-- pass the provided tests
-
-## Common Failure Modes
-
-- building separate payroll logic for each employee type instead of using one interface
-- using pointer receivers or value receivers without being able to explain why
-- treating generics as the main point of the exercise instead of a small reuse helper
-- tightly coupling `ProcessPayroll` to one concrete employee struct
+1. Add another employee type and see if `ProcessPayroll` still works without changes.
+2. Change one receiver type and confirm the behavior still makes sense.
+3. Add another field to one employee type and update its `String()` output.
 
 ## Verification Surface
 
-Use these proof surfaces together:
+```bash
+go run ./04-types-design/10-payroll-processor
+go run ./04-types-design/10-payroll-processor/_starter
+go test ./04-types-design/10-payroll-processor
+```
 
-1. `go run ./04-types-design/10-payroll-processor`
-2. `go run ./04-types-design/10-payroll-processor/_starter`
-3. `go test ./04-types-design/10-payroll-processor`
+## ⚠️ In Production
 
-## Production Relevance
+Interface-driven processing is how Go code stays flexible without inheritance trees. Payment systems, storage layers, transports, and workers all benefit when callers depend on behavior contracts instead of concrete implementations.
 
-This exercise simulates real-world scenarios where different employee types (hourly, salaried, contractors) all need to be processed through a common payroll system. The interface-based approach is how real Go applications handle polymorphic scenarios.
+## 🤔 Thinking Questions
+
+1. Why is the payroll processor better off depending on `Payable` than on one employee struct?
+2. What changes when a value is stored behind an interface?
+3. Why is the generic helper useful here but not the main point of the exercise?
 
 ## Next Step
 
-After you complete this exercise, the canonical Section 06 path is complete. Move to **Composition** next, or explore `TI.10` through `TI.17` as optional stretch lessons.
+Continue to `CO.1` composition.

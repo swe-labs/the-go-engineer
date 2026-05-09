@@ -2,65 +2,35 @@
 
 ## Mission
 
-Confirm that Go is installed and that this machine can actually run a Go program.
+Confirm that Go is installed and that this machine can run a real Go program from this repo.
 
-This lesson is intentionally simple.
-The point is not to impress the learner.
-The point is to prove that the environment is real.
+## Prerequisites
 
-## Why This Lesson Exists Now
-
-Beginners often lose confidence before programming even starts.
-They are not stuck on logic yet.
-They are stuck on setup.
-
-So the first lesson should answer one clear question:
-
-Can this computer run Go code successfully?
+- None.
 
 ## Mental Model
 
-Running a Go lesson means:
+`go run` is a short pipeline:
 
-1. the `go` tool reads the source files
-2. Go compiles them
-3. the compiled program runs
-4. the terminal shows the output
+1. Read the source files.
+2. Compile them into a runnable program.
+3. Execute that program.
+4. Show the output in the terminal.
 
-If this lesson runs, the whole learning loop becomes much more trustworthy.
+If this lesson runs, the basic toolchain is healthy.
 
 ## Visual Model
 
-```text
-you type:
-go run ./01-getting-started/1-installation
-```
-
-```text
-Go tool:
-source code -> compile -> execute -> terminal output
-```
-
-```text
-successful output means:
-- Go is installed
-- the repo path is correct
-- the terminal can run the toolchain
+```mermaid
+graph LR
+    A["go run ./01-getting-started/1-installation"] --> B["Go toolchain"]
+    B --> C["compiled program"]
+    C --> D["terminal output"]
 ```
 
 ## Machine View
 
-This lesson calls values from Go's `runtime` package.
-That package exposes information about the program that is currently running.
-
-When the lesson prints:
-
-- Go version
-- operating system
-- architecture
-- CPU count
-
-it is reading facts from the running binary and the current machine environment.
+This lesson reads values from Go's `runtime` package. The running binary asks the current process what Go version, OS, architecture, and CPU count it sees, then prints those facts to standard output.
 
 ## Run Instructions
 
@@ -72,61 +42,43 @@ go run ./01-getting-started/1-installation
 
 ### `package main`
 
-This file belongs to the special `main` package.
-That tells Go this code should build into an executable program, not a reusable library.
+This file belongs to the executable package, so `go run` can build and launch it.
 
 ### `import ("fmt" "runtime")`
 
-The program needs two standard-library packages:
-
-- `fmt` to print output
-- `runtime` to inspect the running program and machine details
-
-### `fmt.Println("Go installation looks healthy.")`
-
-This prints the first human-facing success message.
-It gives the learner a fast confidence signal before any detail lines appear.
+`fmt` prints human-readable output. `runtime` exposes facts about the running program and machine.
 
 ### `runtime.Version()`
 
-This returns the Go version that built the running program.
-It answers: "Which Go toolchain is active right now?"
+This reports which Go toolchain built the program you are currently executing.
 
 ### `runtime.GOOS` and `runtime.GOARCH`
 
-These identify the operating system and processor architecture.
-
-Examples:
-
-- `windows/amd64`
-- `linux/amd64`
-- `darwin/arm64`
+These expose the target operating system and CPU architecture for the running binary.
 
 ### `runtime.NumCPU()`
 
-This shows how many logical CPUs the program can see.
-The beginner does not need concurrency yet.
-They only need to see that a running program can inspect its environment.
+This shows how many logical CPUs the program can see. It is an early example that a running program can inspect its environment.
 
 ### `fmt.Println("NEXT UP: GT.2 hello-world")`
 
-The footer keeps the lesson path explicit.
-A beginner should never have to guess where to go next.
+The footer keeps the learning path explicit so the learner never has to guess where to go next.
 
 ## Try It
 
-1. Run `go version` in the terminal before or after this lesson and compare it to the program output.
-2. Change the first message text and rerun the lesson.
-3. Add one more `fmt.Println(...)` line and confirm the program still runs.
+1. Run `go version` in the terminal and compare it to the lesson output.
+2. Change one printed message and rerun the lesson.
+3. Add another `fmt.Println(...)` line and confirm the program still runs.
 
-## Common Questions
+## ⚠️ In Production
 
-- Why does a setup lesson need code?
-  Because the goal is not only to install Go. The goal is to prove the machine can run a real Go
-  program from this repo.
+Environment verification is not a beginner-only concern. CI runners, build agents, containers, and production hosts all fail in predictable ways when the toolchain, architecture, or path setup is wrong. Small health checks save time.
 
-- Why print system facts this early?
-  Because it helps the learner connect "program output" with "real machine state."
+## 🤔 Thinking Questions
+
+1. Why is "can the machine run this code?" a different question from "is Go installed?"
+2. What information here comes from the source file, and what information comes from the running environment?
+3. Why is it useful that a program can inspect its own runtime details?
 
 ## Next Step
 

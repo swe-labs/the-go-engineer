@@ -181,7 +181,7 @@ func TestValidateRejectsMixedContractWithoutCommands(t *testing.T) {
       "number": "04",
       "slug": "functions-and-errors",
       "title": "Functions and Errors",
-      "path_prefix": "04-functions-and-errors",
+      "path_prefix": "03-functions-errors",
       "entry_points": ["FE.9"],
       "outputs": ["FE.9"],
       "prerequisites": []
@@ -197,18 +197,19 @@ func TestValidateRejectsMixedContractWithoutCommands(t *testing.T) {
       "subtype": "",
       "level": "core",
       "verification_mode": "mixed",
-      "path": "04-functions-and-errors/8-error-handling",
+      "path": "03-functions-errors/7-order-summary",
       "prerequisites": [],
       "run_command": "",
       "test_command": "",
-      "starter_path": "04-functions-and-errors/8-error-handling/_starter",
+      "starter_path": "03-functions-errors/7-order-summary/_starter",
       "next_items": []
     }
   ]
 }`)
 
-	mustMkdir(t, root, "04-functions-and-errors/8-error-handling")
-	mustMkdir(t, root, "04-functions-and-errors/8-error-handling/_starter")
+	mustMkdir(t, root, "03-functions-errors/7-order-summary")
+	mustMkdir(t, root, "03-functions-errors/7-order-summary/_starter")
+	writeFile(t, root, "03-functions-errors/7-order-summary/README.md", validFoundationsExerciseReadme("go run ./03-functions-errors/7-order-summary"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -424,38 +425,36 @@ func TestValidateRejectsMojibakeInV2TextSurface(t *testing.T) {
 	}
 }
 
-func TestValidateAcceptsFoundationsReadmeContract(t *testing.T) {
+func TestValidateAcceptsFoundationsReadmeContractForS00(t *testing.T) {
 	root := t.TempDir()
 
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
 	writeFile(t, root, "curriculum.v2.json", `{
   "schema_version": 1,
   "sections": [
     {
-      "id": "s04",
-      "number": "04",
-      "slug": "functions-and-errors",
-      "title": "Functions and Errors",
-      "path_prefix": "03-functions-errors",
-      "entry_points": ["FE.1"],
-      "outputs": ["FE.1"],
+      "id": "s00",
+      "number": "00",
+      "slug": "how-computers-work",
+      "title": "How Computers Work",
+      "path_prefix": "00-how-computers-work",
+      "entry_points": ["HC.1"],
+      "outputs": ["HC.1"],
       "prerequisites": []
     }
   ],
   "items": [
     {
-      "id": "FE.1",
-      "section_id": "s04",
-      "slug": "functions-basics",
-      "title": "Functions Basics",
+      "id": "HC.1",
+      "section_id": "s00",
+      "slug": "what-is-a-program",
+      "title": "What is a program?",
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "03-functions-errors/1-functions-basics",
+      "path": "00-how-computers-work/1-what-is-a-program",
       "prerequisites": [],
-      "run_command": "go run ./03-functions-errors/1-functions-basics",
+      "run_command": "go run ./00-how-computers-work/1-what-is-a-program",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -463,45 +462,10 @@ func TestValidateAcceptsFoundationsReadmeContract(t *testing.T) {
   ]
 }`)
 
-	mustMkdir(t, root, "03-functions-errors/1-functions-basics")
-	writeFile(t, root, "03-functions-errors/1-functions-basics/README.md", `# FE.1
-
-## Mission
-
-mission
-
-## Prerequisites
-
-- none
-
-## Mental Model
-
-mental model
-
-## Visual Model
-
-diagram
-
-## Machine View
-
-machine view
-
-## Run Instructions
-
-go run ./03-functions-errors/1-functions-basics
-
-## Code Walkthrough
-
-walkthrough
-
-## Try It
-
-1. try
-
-## Next Step
-
-next
-`)
+	writeValidPressureDocs(t, root)
+	mustMkdir(t, root, "00-how-computers-work/1-what-is-a-program")
+	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/README.md", validFoundationsLessonReadme("go run ./00-how-computers-work/1-what-is-a-program"))
+	writeFile(t, root, "00-how-computers-work/1-what-is-a-program/main.go", validFoundationsMainGo("HC.2"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -515,38 +479,36 @@ next
 	}
 }
 
-func TestValidateRejectsFoundationsReadmeMissingMachineView(t *testing.T) {
+func TestValidateAcceptsFoundationsAlternatePathFamilyForS04(t *testing.T) {
 	root := t.TempDir()
 
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
 	writeFile(t, root, "curriculum.v2.json", `{
   "schema_version": 1,
   "sections": [
     {
       "id": "s04",
       "number": "04",
-      "slug": "functions-and-errors",
-      "title": "Functions and Errors",
-      "path_prefix": "03-functions-errors",
-      "entry_points": ["FE.1"],
-      "outputs": ["FE.1"],
+      "slug": "types-design",
+      "title": "Types and Design",
+      "path_prefix": "04-types-design",
+      "entry_points": ["CO.1"],
+      "outputs": ["CO.1"],
       "prerequisites": []
     }
   ],
   "items": [
     {
-      "id": "FE.1",
+      "id": "CO.1",
       "section_id": "s04",
-      "slug": "functions-basics",
-      "title": "Functions Basics",
+      "slug": "composition",
+      "title": "Composition",
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
       "verification_mode": "run",
-      "path": "03-functions-errors/1-functions-basics",
+      "path": "05-composition/05-composition-and-embedding/1-composition",
       "prerequisites": [],
-      "run_command": "go run ./03-functions-errors/1-functions-basics",
+      "run_command": "go run ./05-composition/05-composition-and-embedding/1-composition",
       "test_command": "",
       "starter_path": "",
       "next_items": []
@@ -554,41 +516,65 @@ func TestValidateRejectsFoundationsReadmeMissingMachineView(t *testing.T) {
   ]
 }`)
 
-	mustMkdir(t, root, "03-functions-errors/1-functions-basics")
-	writeFile(t, root, "03-functions-errors/1-functions-basics/README.md", `# FE.1
+	writeValidPressureDocs(t, root)
+	mustMkdir(t, root, "04-types-design")
+	mustMkdir(t, root, "05-composition/05-composition-and-embedding/1-composition")
+	writeFile(t, root, "05-composition/05-composition-and-embedding/1-composition/README.md", validFoundationsLessonReadme("go run ./05-composition/05-composition-and-embedding/1-composition"))
+	writeFile(t, root, "05-composition/05-composition-and-embedding/1-composition/main.go", validFoundationsMainGo("CO.2"))
 
-## Mission
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 0 {
+		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
+	}
+}
 
-mission
+func TestValidateRejectsFoundationsReadmeMissing(t *testing.T) {
+	root := t.TempDir()
 
-## Prerequisites
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s04",
+      "number": "04",
+      "slug": "types-design",
+      "title": "Types and Design",
+      "path_prefix": "04-types-design",
+      "entry_points": ["ST.1"],
+      "outputs": ["ST.1"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "ST.1",
+      "section_id": "s04",
+      "slug": "strings",
+      "title": "Strings",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "06-strings-and-text/1-strings",
+      "prerequisites": [],
+      "run_command": "go run ./06-strings-and-text/1-strings",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
 
-- none
-
-## Mental Model
-
-mental model
-
-## Visual Model
-
-diagram
-
-## Run Instructions
-
-go run ./03-functions-errors/1-functions-basics
-
-## Code Walkthrough
-
-walkthrough
-
-## Try It
-
-1. try
-
-## Next Step
-
-next
-`)
+	writeValidPressureDocs(t, root)
+	mustMkdir(t, root, "04-types-design")
+	mustMkdir(t, root, "06-strings-and-text/1-strings")
+	writeFile(t, root, "06-strings-and-text/1-strings/main.go", validFoundationsMainGo("ST.2"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -600,86 +586,51 @@ next
 	if result.ErrorCount != 1 {
 		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
 	}
-	if !containsReport(reports, "Invalid foundations README contract: FE.1 -> 03-functions-errors/1-functions-basics/README.md missing ## Machine View") {
-		t.Fatalf("expected missing-machine-view error in reports: %v", reports)
+	if !containsReport(reports, "Missing foundations README: ST.1 -> 06-strings-and-text/1-strings/README.md") {
+		t.Fatalf("expected missing README error in reports: %v", reports)
 	}
 }
 
-func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing.T) {
+func TestValidateRejectsRunFoundationLessonMissingMainGo(t *testing.T) {
 	root := t.TempDir()
 
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
 	writeFile(t, root, "curriculum.v2.json", `{
   "schema_version": 1,
   "sections": [
     {
-      "id": "s04",
-      "number": "04",
-      "slug": "functions-and-errors",
-      "title": "Functions and Errors",
-      "path_prefix": "03-functions-errors",
-      "entry_points": ["FE.7"],
-      "outputs": ["FE.7"],
+      "id": "s00",
+      "number": "00",
+      "slug": "how-computers-work",
+      "title": "How Computers Work",
+      "path_prefix": "00-how-computers-work",
+      "entry_points": ["HC.2"],
+      "outputs": ["HC.2"],
       "prerequisites": []
     }
   ],
   "items": [
     {
-      "id": "FE.7",
-      "section_id": "s04",
-      "slug": "order-summary",
-      "title": "Order Summary",
-      "type": "exercise",
-      "subtype": "",
-      "level": "core",
-      "verification_mode": "mixed",
-      "path": "03-functions-errors/7-order-summary",
+      "id": "HC.2",
+      "section_id": "s00",
+      "slug": "code-to-execution",
+      "title": "How code becomes execution",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "00-how-computers-work/2-code-to-execution",
       "prerequisites": [],
-      "run_command": "go run ./03-functions-errors/7-order-summary",
-      "test_command": "go test ./03-functions-errors/7-order-summary",
-      "starter_path": "03-functions-errors/7-order-summary/_starter",
+      "run_command": "go run ./00-how-computers-work/2-code-to-execution",
+      "test_command": "",
+      "starter_path": "",
       "next_items": []
     }
   ]
 }`)
 
-	mustMkdir(t, root, "03-functions-errors/7-order-summary")
-	mustMkdir(t, root, "03-functions-errors/7-order-summary/_starter")
-	writeFile(t, root, "03-functions-errors/7-order-summary/README.md", `# FE.7
-
-## Mission
-
-mission
-
-## Visual Model
-
-diagram
-
-## Machine View
-
-machine view
-
-## Run Instructions
-
-go run ./03-functions-errors/7-order-summary
-
-## Solution Walkthrough
-
-walkthrough
-
-## Try It
-
-1. try
-
-## Verification Surface
-
-verification commands
-
-## Next Step
-
-next
-`)
+	writeValidPressureDocs(t, root)
+	mustMkdir(t, root, "00-how-computers-work/2-code-to-execution")
+	writeFile(t, root, "00-how-computers-work/2-code-to-execution/README.md", validFoundationsLessonReadme("go run ./00-how-computers-work/2-code-to-execution"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -688,25 +639,26 @@ next
 	if err != nil {
 		t.Fatalf("Validate returned error: %v", err)
 	}
-	if result.ErrorCount != 0 {
-		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
+	if result.ErrorCount != 1 {
+		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	}
+	if !containsReport(reports, "Missing foundations lesson main.go: HC.2 -> 00-how-computers-work/2-code-to-execution/main.go") {
+		t.Fatalf("expected missing main.go error in reports: %v", reports)
 	}
 }
 
-func TestValidateAcceptsGettingStartedReadmeContractAndSplitSectionPrefix(t *testing.T) {
+func TestValidateRejectsFoundationsHeadingOrder(t *testing.T) {
 	root := t.TempDir()
 
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
 	writeFile(t, root, "curriculum.v2.json", `{
   "schema_version": 1,
   "sections": [
     {
       "id": "s01",
       "number": "01",
-      "slug": "core-foundations",
-      "title": "Core Foundations",
-      "path_prefix": "01-core-foundations",
+      "slug": "getting-started",
+      "title": "Getting Started",
+      "path_prefix": "01-getting-started",
       "entry_points": ["GT.1"],
       "outputs": ["GT.1"],
       "prerequisites": []
@@ -717,7 +669,7 @@ func TestValidateAcceptsGettingStartedReadmeContractAndSplitSectionPrefix(t *tes
       "id": "GT.1",
       "section_id": "s01",
       "slug": "installation",
-      "title": "Installation Verification",
+      "title": "Installation",
       "type": "lesson",
       "subtype": "concept",
       "level": "foundation",
@@ -732,264 +684,62 @@ func TestValidateAcceptsGettingStartedReadmeContractAndSplitSectionPrefix(t *tes
   ]
 }`)
 
+	writeValidPressureDocs(t, root)
 	mustMkdir(t, root, "01-getting-started/1-installation")
-	mustMkdir(t, root, "01-core-foundations")
-	writeFile(t, root, "01-getting-started/1-installation/README.md", `# GT.1
-
-## Mission
-
-mission
-
-## Mental Model
-
-mental model
-
-## Visual Model
-
-diagram
-
-## Machine View
-
-machine view
-
-## Run Instructions
-
-go run ./01-getting-started/1-installation
-
-## Code Walkthrough
-
-walkthrough
-
-## Try It
-
-1. try
-
-## Next Step
-
-next
-`)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	if result.ErrorCount != 0 {
-		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
-	}
-}
-
-func TestValidateAcceptsTypesAndInterfacesReadmeContract(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s05",
-      "number": "05",
-      "slug": "types-and-interfaces",
-      "title": "Types and Interfaces",
-      "path_prefix": "04-types-design",
-      "entry_points": ["TI.9"],
-      "outputs": ["TI.8"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "TI.9",
-      "section_id": "s05",
-      "slug": "generics",
-      "title": "Generics",
-      "type": "lesson",
-      "subtype": "pattern",
-      "level": "core",
-      "verification_mode": "run",
-      "path": "04-types-design/9-generics",
-      "prerequisites": [],
-      "run_command": "go run ./04-types-design/9-generics",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": ["TI.8"]
-    },
-    {
-      "id": "TI.8",
-      "section_id": "s05",
-      "slug": "payroll",
-      "title": "Payroll",
-      "type": "exercise",
-      "subtype": "",
-      "level": "core",
-      "verification_mode": "mixed",
-      "path": "04-types-design/10-payroll-processor",
-      "prerequisites": ["TI.9"],
-      "run_command": "go run ./04-types-design/10-payroll-processor",
-      "test_command": "go test ./04-types-design/10-payroll-processor",
-      "starter_path": "04-types-design/10-payroll-processor/_starter",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "04-types-design/9-generics")
-	mustMkdir(t, root, "04-types-design/10-payroll-processor")
-	mustMkdir(t, root, "04-types-design/10-payroll-processor/_starter")
-	writeFile(t, root, "04-types-design/9-generics/README.md", `# TI.9
-
-## Mission
-
-mission
-
-## Mental Model
-
-mental model
-
-## Visual Model
-
-diagram
-
-## Machine View
-
-machine view
-
-## Run Instructions
-
-go run ./04-types-design/9-generics
-
-## Code Walkthrough
-
-walkthrough
-
-## Try It
-
-1. try
-
-## Next Step
-
-next
-`)
-	writeFile(t, root, "04-types-design/10-payroll-processor/README.md", `# TI.10
-
-## Mission
-
-mission
-
-## Visual Model
-
-diagram
-
-## Machine View
-
-machine view
-
-## Run Instructions
-
-go run ./04-types-design/10-payroll-processor
-
-## Solution Walkthrough
-
-walkthrough
-
-## Try It
-
-1. try
-
-## Verification Surface
-
-verification
-
-## Next Step
-
-next
-`)
-
-	var reports []string
-	result, err := Validate(root, func(message string) {
-		reports = append(reports, message)
-	})
-	if err != nil {
-		t.Fatalf("Validate returned error: %v", err)
-	}
-	if result.ErrorCount != 0 {
-		t.Fatalf("expected 0 validation errors, got %d with reports %v", result.ErrorCount, reports)
-	}
-}
-
-func TestValidateRejectsTypesAndInterfacesReadmeMissingMachineView(t *testing.T) {
-	root := t.TempDir()
-
-	writeFile(t, root, "curriculum.v2.json", `{"schema_version":1,"sections":[],"items":[]}`)
-	writeValidPressureDocs(t, root)
-	writeFile(t, root, "curriculum.v2.json", `{
-  "schema_version": 1,
-  "sections": [
-    {
-      "id": "s05",
-      "number": "05",
-      "slug": "types-and-interfaces",
-      "title": "Types and Interfaces",
-      "path_prefix": "04-types-design",
-      "entry_points": ["TI.10"],
-      "outputs": ["TI.10"],
-      "prerequisites": []
-    }
-  ],
-  "items": [
-    {
-      "id": "TI.10",
-      "section_id": "s05",
-      "slug": "advanced-generics",
-      "title": "Advanced Generics",
-      "type": "lesson",
-      "subtype": "pattern",
-      "level": "stretch",
-      "verification_mode": "run",
-      "path": "04-types-design/10-advanced-generics",
-      "prerequisites": [],
-      "run_command": "go run ./04-types-design/10-advanced-generics",
-      "test_command": "",
-      "starter_path": "",
-      "next_items": []
-    }
-  ]
-}`)
-
-	mustMkdir(t, root, "04-types-design/10-advanced-generics")
-	writeFile(t, root, "04-types-design/10-advanced-generics/README.md", `# TI.10
-
-## Mission
-
-mission
-
-## Mental Model
-
-mental model
-
-## Visual Model
-
-diagram
-
-## Run Instructions
-
-go run ./04-types-design/10-advanced-generics
-
-## Code Walkthrough
-
-walkthrough
-
-## Try It
-
-1. try
-
-## Next Step
-
-next
-`)
+	writeFile(t, root, "01-getting-started/1-installation/README.md", strings.Join([]string{
+		"# GT.1",
+		"",
+		"## Mission",
+		"",
+		"mission",
+		"",
+		"## Prerequisites",
+		"",
+		"- none",
+		"",
+		"## Mental Model",
+		"",
+		"mental model",
+		"",
+		"## Visual Model",
+		"",
+		"```mermaid",
+		"graph TD",
+		"    A[\"start\"] --> B[\"run\"]",
+		"```",
+		"",
+		"## Run Instructions",
+		"",
+		"go run ./01-getting-started/1-installation",
+		"",
+		"## Machine View",
+		"",
+		"machine view",
+		"",
+		"## Code Walkthrough",
+		"",
+		"walkthrough",
+		"",
+		"## Try It",
+		"",
+		"1. try",
+		"",
+		"## ⚠️ In Production",
+		"",
+		"production note",
+		"",
+		"## 🤔 Thinking Questions",
+		"",
+		"1. one",
+		"2. two",
+		"3. three",
+		"",
+		"## Next Step",
+		"",
+		"next",
+		"",
+	}, "\n"))
+	writeFile(t, root, "01-getting-started/1-installation/main.go", validFoundationsMainGo("GT.2"))
 
 	var reports []string
 	result, err := Validate(root, func(message string) {
@@ -1001,9 +751,248 @@ next
 	if result.ErrorCount != 1 {
 		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
 	}
-	if !containsReport(reports, "Invalid foundations README contract: TI.10 -> 04-types-design/10-advanced-generics/README.md missing ## Machine View") {
-		t.Fatalf("expected missing-machine-view error in reports: %v", reports)
+	if !containsReport(reports, "Invalid foundations README contract: GT.1 -> 01-getting-started/1-installation/README.md has ## Run Instructions out of order") {
+		t.Fatalf("expected heading-order error in reports: %v", reports)
 	}
+}
+
+func TestValidateRejectsFoundationsVisualModelWithoutMermaid(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s03",
+      "number": "03",
+      "slug": "functions-errors",
+      "title": "Functions and Errors",
+      "path_prefix": "03-functions-errors",
+      "entry_points": ["FE.1"],
+      "outputs": ["FE.1"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "FE.1",
+      "section_id": "s03",
+      "slug": "functions-basics",
+      "title": "Functions Basics",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "03-functions-errors/1-functions-basics",
+      "prerequisites": [],
+      "run_command": "go run ./03-functions-errors/1-functions-basics",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": []
+    }
+  ]
+}`)
+
+	writeValidPressureDocs(t, root)
+	mustMkdir(t, root, "03-functions-errors/1-functions-basics")
+	writeFile(t, root, "03-functions-errors/1-functions-basics/README.md", strings.Replace(validFoundationsLessonReadme("go run ./03-functions-errors/1-functions-basics"), "```mermaid\ngraph TD\n    A[\"input\"] --> B[\"program\"]\n    B --> C[\"output\"]\n```", "diagram", 1))
+	writeFile(t, root, "03-functions-errors/1-functions-basics/main.go", validFoundationsMainGo("FE.2"))
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 1 {
+		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	}
+	if !containsReport(reports, "Invalid foundations README contract: FE.1 -> 03-functions-errors/1-functions-basics/README.md Visual Model must include a Mermaid diagram") {
+		t.Fatalf("expected Mermaid error in reports: %v", reports)
+	}
+}
+
+func TestValidateRejectsFoundationsExerciseMissingVerificationSurface(t *testing.T) {
+	root := t.TempDir()
+
+	writeFile(t, root, "curriculum.v2.json", `{
+  "schema_version": 1,
+  "sections": [
+    {
+      "id": "s04",
+      "number": "04",
+      "slug": "types-design",
+      "title": "Types and Design",
+      "path_prefix": "04-types-design",
+      "entry_points": ["TI.10"],
+      "outputs": ["TI.10"],
+      "prerequisites": []
+    }
+  ],
+  "items": [
+    {
+      "id": "TI.10",
+      "section_id": "s04",
+      "slug": "payroll-processor-project",
+      "title": "Payroll Processor Project",
+      "type": "exercise",
+      "subtype": "",
+      "level": "core",
+      "verification_mode": "mixed",
+      "path": "04-types-design/10-payroll-processor",
+      "prerequisites": [],
+      "run_command": "go run ./04-types-design/10-payroll-processor",
+      "test_command": "go test ./04-types-design/10-payroll-processor",
+      "starter_path": "04-types-design/10-payroll-processor/_starter",
+      "next_items": []
+    }
+  ]
+}`)
+
+	writeValidPressureDocs(t, root)
+	mustMkdir(t, root, "04-types-design/10-payroll-processor")
+	mustMkdir(t, root, "04-types-design/10-payroll-processor/_starter")
+	writeFile(t, root, "04-types-design/10-payroll-processor/README.md", strings.Replace(validFoundationsExerciseReadme("go run ./04-types-design/10-payroll-processor"), "\n## Verification Surface\n\n1. go run ./04-types-design/10-payroll-processor\n2. go test ./04-types-design/10-payroll-processor\n", "", 1))
+
+	var reports []string
+	result, err := Validate(root, func(message string) {
+		reports = append(reports, message)
+	})
+	if err != nil {
+		t.Fatalf("Validate returned error: %v", err)
+	}
+	if result.ErrorCount != 1 {
+		t.Fatalf("expected 1 validation error, got %d with reports %v", result.ErrorCount, reports)
+	}
+	if !containsReport(reports, "Invalid foundations README contract: TI.10 -> 04-types-design/10-payroll-processor/README.md missing ## Verification Surface") {
+		t.Fatalf("expected verification-surface error in reports: %v", reports)
+	}
+}
+
+func validFoundationsLessonReadme(runCommand string) string {
+	return strings.Join([]string{
+		"# Lesson",
+		"",
+		"## Mission",
+		"",
+		"mission",
+		"",
+		"## Prerequisites",
+		"",
+		"- none",
+		"",
+		"## Mental Model",
+		"",
+		"mental model",
+		"",
+		"## Visual Model",
+		"",
+		"```mermaid",
+		"graph TD",
+		"    A[\"input\"] --> B[\"program\"]",
+		"    B --> C[\"output\"]",
+		"```",
+		"",
+		"## Machine View",
+		"",
+		"machine view",
+		"",
+		"## Run Instructions",
+		"",
+		runCommand,
+		"",
+		"## Code Walkthrough",
+		"",
+		"walkthrough",
+		"",
+		"## Try It",
+		"",
+		"1. try",
+		"",
+		"## ⚠️ In Production",
+		"",
+		"production note",
+		"",
+		"## 🤔 Thinking Questions",
+		"",
+		"1. one",
+		"2. two",
+		"3. three",
+		"",
+		"## Next Step",
+		"",
+		"next",
+		"",
+	}, "\n")
+}
+
+func validFoundationsExerciseReadme(runCommand string) string {
+	testCommand := strings.Replace(runCommand, "go run", "go test", 1)
+
+	return strings.Join([]string{
+		"# Exercise",
+		"",
+		"## Mission",
+		"",
+		"mission",
+		"",
+		"## Prerequisites",
+		"",
+		"- none",
+		"",
+		"## Mental Model",
+		"",
+		"mental model",
+		"",
+		"## Visual Model",
+		"",
+		"```mermaid",
+		"graph TD",
+		"    A[\"input\"] --> B[\"solution\"]",
+		"    B --> C[\"verified output\"]",
+		"```",
+		"",
+		"## Machine View",
+		"",
+		"machine view",
+		"",
+		"## Run Instructions",
+		"",
+		runCommand,
+		"",
+		"## Solution Walkthrough",
+		"",
+		"walkthrough",
+		"",
+		"## Try It",
+		"",
+		"1. try",
+		"",
+		"## Verification Surface",
+		"",
+		"1. " + runCommand,
+		"2. " + testCommand,
+		"",
+		"## ⚠️ In Production",
+		"",
+		"production note",
+		"",
+		"## 🤔 Thinking Questions",
+		"",
+		"1. one",
+		"2. two",
+		"3. three",
+		"",
+		"## Next Step",
+		"",
+		"next",
+		"",
+	}, "\n")
+}
+
+func validFoundationsMainGo(nextID string) string {
+	return "package main\n\nfunc main() {\n\tprintln(\"NEXT UP: " + nextID + "\")\n}\n"
 }
 
 func writeFile(t *testing.T, root, relativePath, contents string) {

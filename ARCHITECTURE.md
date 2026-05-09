@@ -74,10 +74,13 @@ Before writing code, learners need a mental model of the machine. This section e
 | HC.3 | Memory basics — stack vs heap | lesson |
 | HC.4 | Terminal confidence           | lesson |
 | HC.5 | How the OS manages processes  | lesson |
+| HC.6 | CPU cache and performance     | lesson |
+| HC.7 | Syscalls                      | lesson |
+| HC.8 | Blocking vs non-blocking I/O  | lesson |
 
-**Section checkpoint:** Learner can explain in plain language: what the CPU does, how memory is divided, what a process is, and how signals work.
+**Section checkpoint:** Learner can explain in plain language: what the CPU does, how memory is divided, what a process is, why cache matters, what a syscall is, and why waiting on I/O changes performance.
 
-**All 5 lessons exist on disk. None are registered in curriculum.v2.json. This must be fixed.**
+**HC.1-HC.8 must remain registered in curriculum.v2.json and backed by runnable lesson surfaces.**
 
 ---
 
@@ -604,7 +607,7 @@ A production-grade, multi-tenant SaaS backend that integrates every concept from
 
 | %    | Milestone                 | Lesson   |
 | ---- | ------------------------- | -------- |
-| 5%   | Machine model checkpoint  | HC.5     |
+| 5%   | Machine model checkpoint  | HC.8     |
 | 10%  | First program             | GT.2     |
 | 13%  | Toolchain confident       | GT.6     |
 | 18%  | Pricing Checkout          | CF.7     |
@@ -706,7 +709,7 @@ These are blocking issues that must be resolved before the curriculum is coheren
 
 | Priority | Fix                                                          | File(s) to change                | Status |
 | -------- | ------------------------------------------------------------ | -------------------------------- | ------ |
-| 1        | Add s00 + HC items to curriculum.v2.json                     | `curriculum.v2.json`             | 📋     |
+| 1        | Backfill foundations README contracts across `s00`–`s04`     | lesson README files + validator  | ✅     |
 | 2        | Add GT.5, GT.6 to curriculum.v2.json                         | `curriculum.v2.json`             | 📋     |
 | 3        | Create CF.5, CF.6 lessons; add to curriculum.v2.json         | new files + `curriculum.v2.json` | 📋     |
 | 4        | Add cross-reference note to FS.1 and DB.3 for `defer`        | lesson README files              | 📋     |

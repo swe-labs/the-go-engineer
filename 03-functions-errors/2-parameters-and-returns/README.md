@@ -21,6 +21,11 @@ Return values are the results it gives back.
 
 ## Visual Model
 
+```mermaid
+graph LR
+    A["input"] --> B["function boundary"]
+    B --> C["value or error"]
+```
 ```text
 prices ----------------------+
                              |
@@ -137,11 +142,15 @@ That is the full parameter-and-return contract in one readable line.
 - Does passing a slice mean Go copies the whole slice data?
   No. It copies the slice header, which still points to the same underlying data.
 
-## Production Relevance
-
+## ⚠️ In Production
 Most useful code is "input in, result out."
 Clear parameters and return values are the first step toward dependable business logic.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `FE.3` multiple return values.

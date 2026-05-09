@@ -24,6 +24,11 @@ You use it when you need to reach the original value and update it directly.
 
 ## Visual Model
 
+```mermaid
+graph TD
+    A["many values"] --> B["one collection type"]
+    B --> C["read or update by position or key"]
+```
 ```text
 score    = 50
 scorePtr = &score
@@ -149,11 +154,15 @@ Dereferencing a nil pointer would panic, so the lesson shows the right habit fir
 Because `04-data-structures` ends with a milestone that updates stored slice data through a
 pointer.
 
-## Production Relevance
-
+## ⚠️ In Production
 Pointers matter whenever a Go program must mutate stored state intentionally and safely. They also
 help learners stop confusing "copied value" with "original value."
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `DS.5` slice sharing and capacity.

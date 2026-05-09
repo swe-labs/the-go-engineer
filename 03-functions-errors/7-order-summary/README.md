@@ -1,27 +1,10 @@
-﻿# FE.7 Order Summary
+# FE.7 Order Summary
 
 ## Mission
 
-Build one small order-summary program that proves the learner can combine functions, validation, multiple return values, and explicit errors in one readable flow.
-
-This is the foundations milestone for the section.
-
-## Why This Milestone Exists
-
-The earlier lessons taught each function concept in isolation. Now you combine them all:
-
-- Functions for organization
-- Parameters and returns for input/output
-- Multiple return values for results plus status
-- Errors as values for explicit failure handling
-- Validation for input checking
-- Orchestration for coordinating the workflow
-
-This mirrors real Go code, where you rarely use just one of these concepts.
+Build a small order-summary program that combines validation, helper functions, multiple return values, and explicit errors into one readable flow.
 
 ## Prerequisites
-
-Complete these first:
 
 - `FE.1` functions basics
 - `FE.2` parameters and returns
@@ -30,178 +13,89 @@ Complete these first:
 - `FE.5` validation
 - `FE.6` orchestration
 
-## What You Will Build
+## Mental Model
 
-Implement a small order-summary program that:
+This milestone is a pipeline of small functions:
 
-1. validates an order name
-2. validates a slice of item prices
-3. validates a shipping value
-4. sums the prices with one helper
-5. orchestrates the whole flow with `processOrder`
-6. returns either a readable summary or an explicit error
+- validate inputs
+- stop early on error
+- calculate totals
+- build the final summary
+
+The goal is not cleverness. It is honest flow control with clear responsibilities.
 
 ## Visual Model
 
-```text
-order name ---+
-prices -------+--> processOrder(...)
-shipping -----+
-```
-
-```text
-processOrder
-   |
-   +--> validateOrderName
-   +--> validatePrices
-   +--> validateShipping
-   +--> sumPrices
-   +--> buildSummary
-   +--> return (summary, nil)
-```
-
-```text
-failure path:
-one validation fails
-processOrder returns ("", error)
+```mermaid
+graph TD
+    A["processOrder(...)"] --> B["validate name"]
+    B --> C["validate prices"]
+    C --> D["validate shipping"]
+    D --> E["sum prices"]
+    E --> F["build summary"]
+    B --> G["return error early"]
+    C --> G
+    D --> G
 ```
 
 ## Machine View
 
-This milestone is about function coordination more than low-level memory detail.
-
-The important machine truth is:
-
-- `main()` calls one top-level function
-- `processOrder` calls helpers in order
-- each helper either returns success or returns an error
-- the first error stops the flow
-- only the success path reaches the summary builder
-
-That is how a readable application flow grows out of smaller functions.
-
-## Files
-
-- [main.go](./main.go): complete runnable solution
-- [_starter/main.go](./_starter/main.go): starter scaffold with TODOs
-- [main_test.go](./main_test.go): automated proof surface for the milestone
+Each helper returns control to `processOrder`. If a helper returns an error, `processOrder` immediately returns that error to its caller. Only the success path reaches the calculation and summary steps.
 
 ## Run Instructions
 
-Run the completed solution:
-
 ```bash
 go run ./03-functions-errors/7-order-summary
-```
-
-Run the starter scaffold:
-
-```bash
 go run ./03-functions-errors/7-order-summary/_starter
-```
-
-Run the automated verification surface:
-
-```bash
 go test ./03-functions-errors/7-order-summary
 ```
 
-## Recommended Learning Flow
+## Solution Walkthrough
 
-1. Read this README first.
-2. Open [_starter/main.go](./_starter/main.go) and list the functions you need.
-3. Build the validators first.
-4. Add `sumPrices`, `buildSummary`, and `processOrder` after that.
-5. Compare with [main.go](./main.go) only after your own attempt.
+### Validation helpers
 
-## Code Walkthrough
+`validateOrderName`, `validatePrices`, and `validateShipping` each check one focused rule and return an error when the input is invalid.
 
-### `func validateOrderName(name string) error {`
+### `sumPrices(prices []int) int`
 
-This first validator checks whether the order name is meaningful enough to continue.
+This helper performs one job only: calculate the subtotal.
 
-### `func validatePrices(prices []int) error {`
+### `buildSummary(...)`
 
-This validator rejects:
+Formatting lives in its own helper so it does not get mixed into validation logic.
 
-- an empty slice
-- any negative price
+### `processOrder(...) (string, error)`
 
-That keeps the later math honest.
-
-### `func validateShipping(shipping int) error {`
-
-This validator is intentionally small.
-It teaches that not every helper needs to be complex to be useful.
-
-### `func sumPrices(prices []int) int {`
-
-This helper does one job only:
-add all prices together.
-
-### `func buildSummary(name string, subtotal int, shipping int) string {`
-
-This helper keeps formatting separate from validation and calculation.
-
-### `func processOrder(name string, prices []int, shipping int) (string, error) {`
-
-This is the milestone's most important function.
-It owns the sequence of the work:
-
-1. validate the name
-2. validate the prices
-3. validate shipping
-4. calculate subtotal
-5. build the final summary
+This function orchestrates the whole flow and makes the contract explicit: summary on success, error on failure.
 
 ### `return "", err`
 
-Whenever validation fails, the function returns immediately with:
-
-- an empty summary
-- the real error
-
-That is the foundations version of honest failure handling.
-
-### `return buildSummary(name, subtotal, shipping), nil`
-
-This success line makes the final contract clear:
-
-- summary on success
-- `nil` error on success
+Early returns keep failure handling honest and stop the flow before invalid data can produce misleading output.
 
 ## Try It
 
-1. Add one more price to the success case and observe the total.
-2. Change shipping to a negative number and follow the failure path.
-3. Replace the order name with only spaces and confirm the name validation still fails.
-
-## Success Criteria
-
-Your finished solution should:
-
-- reject empty or invalid input before calculating
-- keep validation, calculation, and formatting in separate helpers
-- return explicit errors instead of hiding failure
-- keep `main()` readable by delegating to `processOrder`
-- pass the supplied tests
-
-## Common Failure Modes
-
-- trying to calculate totals before validating the inputs
-- returning a misleading summary when an error should stop the flow
-- mixing formatting and validation into one giant function
-- forgetting to check `err` before using the returned summary
+1. Add another item price to the success case.
+2. Make shipping negative and trace the failure path.
+3. Replace the order name with only spaces and verify validation stops the flow.
 
 ## Verification Surface
 
-Use these three proof surfaces together:
+```bash
+go run ./03-functions-errors/7-order-summary
+go run ./03-functions-errors/7-order-summary/_starter
+go test ./03-functions-errors/7-order-summary
+```
 
-1. `go run ./03-functions-errors/7-order-summary`
-2. `go run ./03-functions-errors/7-order-summary/_starter`
-3. `go test ./03-functions-errors/7-order-summary`
+## ⚠️ In Production
+
+This is the everyday shape of backend Go code: validate, return errors explicitly, keep helpers small, and make orchestration readable. Systems become fragile when these concerns collapse into one giant function.
+
+## 🤔 Thinking Questions
+
+1. Why is returning an explicit error better than hiding failure inside printed output?
+2. What gets clearer when validation, calculation, and formatting are separate helpers?
+3. Why is `processOrder` a better owner of sequence than `main()`?
 
 ## Next Step
 
-After this milestone, move to
-[4 Types & Design](../../ARCHITECTURE.md).
+Continue to `TI.1` structs.

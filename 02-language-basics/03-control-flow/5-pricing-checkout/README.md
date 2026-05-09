@@ -2,64 +2,45 @@
 
 ## Mission
 
-Build one small checkout flow that turns the earlier control-flow lessons into a single readable, runnable program.
+Build a small checkout flow that combines branching, loops, `switch`, and `continue` into one runnable program.
 
-This is the section milestone.
+## Prerequisites
 
-## Why This Milestone Exists
+- `CF.1` if / else
+- `CF.2` for basics
+- `CF.3` break / continue
+- `CF.4` switch
 
-The earlier lessons each taught one control-flow idea in isolation.
+## Mental Model
 
-This milestone asks the learner to combine them:
+This milestone is a miniature rule engine:
 
-- `if` for ordinary decisions
-- `for` repeated work
-- `switch` for readable multi-branch rules
-- `continue` for skipping invalid items
+- loop over each cart item
+- classify the item with `switch`
+- apply extra rules with `if`
+- skip bad data with `continue`
+- accumulate a subtotal
 
-## Production Relevance
+It proves that control flow becomes useful when several decisions interact.
 
-In production Go code, combining control flow matters because:
+## Visual Model
 
-- **Order processing**: Apply pricing rules, discounts, and validation
-- **Batch jobs**: Process multiple items with different handling rules
-- **Rule engines**: Execute different logic based on conditions
+```mermaid
+graph TD
+    A["cart items"] --> B["for loop"]
+    B --> C["switch chooses base price"]
+    C --> D["if applies discount or skip rule"]
+    D --> E["subtotal += price"]
+```
 
-Real services build pricing engines, shopping carts, and checkout flows using exactly these patterns.
+## Machine View
 
-## Zero-Magic Boundary
-
-This milestone uses a small list of item codes as a preview tool so the learner has something to
-process in a loop.
-
-That list is not the topic here.
-Formal collection mechanics belong to the next section.
-
-This milestone also avoids helper functions on purpose.
-Section 05 is where reusable logic is taught properly.
-
-## What You Will Build
-
-Implement a checkout flow that:
-
-1. loops over a small cart of item codes
-2. uses `switch` to assign a base price
-3. applies one simple discount rule with `if`
-4. skips unknown items with `continue`
-5. computes a running subtotal
-
-## Files
-
-- [main.go](./main.go): complete runnable solution
-- [_starter/main.go](./_starter/main.go): starter file with TODOs
+The program processes one cart item at a time. Each iteration chooses a base price, optionally changes it, may skip invalid items, and then mutates the running subtotal. The loop carries state from one iteration to the next.
 
 ## Run Instructions
 
 ```bash
 go run ./02-language-basics/03-control-flow/5-pricing-checkout
-```
-
-```bash
 go run ./02-language-basics/03-control-flow/5-pricing-checkout/_starter
 ```
 
@@ -67,66 +48,53 @@ go run ./02-language-basics/03-control-flow/5-pricing-checkout/_starter
 
 ### `cart := []string{ ... }`
 
-The cart is a small preview list of item codes.
-The important control-flow idea is not the list itself.
-The important idea is that the loop now has several inputs to process.
+The cart provides several inputs so the loop has real work to perform.
 
 ### `for _, item := range cart`
 
-This repeats the same decision process for each cart entry.
+The loop applies the same pricing logic to each item code in turn.
 
 ### `switch item { ... }`
 
-This is the pricing rule engine.
-Each known code maps to a base price.
+This assigns a base price for known item codes.
 
 ### `if price == 0 { ... continue }`
 
-Unknown items are skipped safely.
-The loop keeps running, but the subtotal is not polluted by invalid entries.
+Unknown items are skipped safely without ending the whole checkout flow.
 
 ### `if item == "BOOK" { price = price * 0.90 }`
 
-This is the extra branch rule.
-It proves that `switch` does not replace `if`.
-The two tools solve different decision shapes inside the same program.
+This extra rule shows that `switch` and `if` solve different kinds of decisions and often work together.
 
 ### `subtotal += price`
 
-This is the running-total pattern.
-Each valid item contributes to the final answer.
+This is the running-total pattern that accumulates the final result.
 
 ## Try It
 
-1. Add another known item code to the cart.
-2. Change the book discount from `10%` to `15%`.
-3. Put an unknown item in the middle of the cart and watch the loop skip it cleanly.
-4. Add a second discount rule and explain why it belongs in `if` instead of `switch`.
-
-## Common Failure Modes
-
-- forgetting to skip unknown items
-- applying the discount before a valid base price exists
-- mixing too many future abstractions into a control-flow milestone
-
-## Success Criteria
-
-Your program is successful when it:
-
-- processes the whole cart from top to bottom
-- prices known items correctly
-- applies the simple discount rule correctly
-- skips unknown items safely
-- prints a final subtotal
+1. Add another known item code and price rule.
+2. Change the book discount and rerun the exercise.
+3. Put an unknown item in the middle of the cart and verify it is skipped.
 
 ## Verification Surface
 
-Use these proof surfaces together:
+```bash
+go run ./02-language-basics/03-control-flow/5-pricing-checkout
+go run ./02-language-basics/03-control-flow/5-pricing-checkout/_starter
+```
 
-1. `go run ./02-language-basics/03-control-flow/5-pricing-checkout`
-2. `go run ./02-language-basics/03-control-flow/5-pricing-checkout/_starter`
+The finished program should process the whole cart, price known items correctly, skip unknown items, and print a final subtotal.
+
+## ⚠️ In Production
+
+Checkout logic is exactly where control-flow mistakes become money mistakes. Clear rule ordering, safe skipping, and explicit subtotal updates matter in carts, billing systems, and batch pricing jobs.
+
+## 🤔 Thinking Questions
+
+1. Why is `continue` a good fit for unknown items here?
+2. Why does the discount belong in an `if` instead of inside the `switch` alone?
+3. What kinds of bugs happen when the subtotal update is placed in the wrong spot?
 
 ## Next Step
 
-After this milestone, continue to `04-data-structures`.
-That is where list and lookup behavior become the real topic instead of a preview tool.
+Continue to `DS.1` arrays.

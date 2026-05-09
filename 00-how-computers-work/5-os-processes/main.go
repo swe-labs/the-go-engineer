@@ -2,16 +2,18 @@
 // Licensed under The Go Engineer License v1.0
 
 // ============================================================================
-// Section 00: How Computers Work — OS Processes
+// Section 00: How Computers Work — How the OS Manages Processes
 // Level: Foundation
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - How to get the Process ID (PID)
-//   - The program is running as an OS process
+//   - A Go program runs inside a normal OS process
+//   - The OS assigns process identity like a PID
+//   - Signals, scheduling, and file descriptors belong to process reality
 //
 // WHY THIS MATTERS:
-//   Production systems track services by their PIDs.
+//   Production behavior is shaped by process boundaries, not only by business
+//   logic written in the source code.
 //
 // RUN: go run ./00-how-computers-work/5-os-processes
 // ============================================================================
@@ -24,15 +26,16 @@ import (
 )
 
 func main() {
-	// The OS gives every running process a unique ID
 	pid := os.Getpid()
-	fmt.Printf("This Go program is running as Process ID: %d\n", pid)
+	fmt.Printf("This Go program is running as process ID %d.\n", pid)
+	fmt.Println("The OS tracks this process separately from every other running program.")
 
 	// KEY TAKEAWAY:
-	// - Go programs run as standard OS processes
+	// - A running program becomes an OS process with identity and resources.
+	// - Signals and scheduling act on the process, not on abstract source code.
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GT.1 1-installation")
-	fmt.Println("Run    : go run ./01-getting-started/1-installation")
-	fmt.Println("Current: HC.5 (5-os-processes)")
+	fmt.Println("NEXT UP: HC.6 cpu-cache-and-performance")
+	fmt.Println("Run    : go run ./00-how-computers-work/6-cpu-cache-and-performance")
+	fmt.Println("Current: HC.5 (os-processes)")
 	fmt.Println("---------------------------------------------------")
 }

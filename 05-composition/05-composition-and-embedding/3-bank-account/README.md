@@ -2,79 +2,90 @@
 
 ## Mission
 
-Build a small bank-account model that proves the difference between ordinary composition,
-embedding, promoted methods, and method shadowing.
-
-This exercise is the Section 06 milestone.
-It is where named-field composition and embedding come together in one runnable artifact with
-tests.
+Build a small bank-account model that proves the difference between named-field composition, embedding, promoted methods, and method shadowing.
 
 ## Prerequisites
-
-Complete these first:
 
 - `CO.1` composition
 - `CO.2` embedding
 
-## What You Will Build
+## Mental Model
 
-Implement a small bank-account model that:
+This milestone combines two ideas:
 
-1. defines a reusable `Account` type with shared deposit and withdrawal behavior
-2. embeds `Account` inside `SavingsAccount`
-3. adds interest through promoted fields and methods on `SavingsAccount`
-4. embeds `Account` inside `OverdraftAccount`
-5. shadows `Withdraw` on `OverdraftAccount` to allow overdraft behavior
-6. demonstrates the final behavior in `main()`
-7. passes the provided tests
+- composition lets one type contain another
+- embedding promotes inner fields and methods to the outer type
 
-## Files
+The important question is not "what can I inherit?" It is "what behavior should I reuse, and where should I override it?"
 
-- [main.go](./main.go): complete solution with teaching comments
-- [account_test.go](./account_test.go): tests for deposit, withdraw, interest, and overdraft rules
-- [_starter/main.go](./_starter/main.go): starter file with TODOs and requirements
+## Visual Model
+
+```mermaid
+graph TD
+    A["Account"] --> B["SavingsAccount embeds Account"]
+    A --> C["OverdraftAccount embeds Account"]
+    B --> D["promoted Deposit / Withdraw"]
+    C --> E["shadowed Withdraw"]
+```
+
+## Machine View
+
+Embedded fields are still ordinary fields inside the outer struct. Promotion is a syntax shortcut that lets the outer type access inner methods and fields directly. When the outer type defines a method with the same name, that outer method wins.
 
 ## Run Instructions
 
-Run the completed solution:
-
 ```bash
 go run ./05-composition/05-composition-and-embedding/3-bank-account
-```
-
-Run the tests:
-
-```bash
+go run ./05-composition/05-composition-and-embedding/3-bank-account/_starter
 go test ./05-composition/05-composition-and-embedding/3-bank-account
 ```
 
-Run the starter:
+## Solution Walkthrough
+
+### Shared `Account` type
+
+The reusable account type owns the common balance-changing behavior.
+
+### `SavingsAccount`
+
+This type embeds `Account` and adds interest behavior without copying the base methods.
+
+### `OverdraftAccount`
+
+This type also embeds `Account`, but it shadows `Withdraw` because overdraft rules differ from the base behavior.
+
+### Promoted methods
+
+Embedding allows callers to use base behavior directly on the outer type without verbose field access.
+
+### Tests
+
+The tests prove that ordinary withdraw, interest behavior, and overdraft behavior all still match the intended contract.
+
+## Try It
+
+1. Add another account type with different rules.
+2. Change the overdraft limit and rerun the tests.
+3. Call a promoted method through the embedded field explicitly and compare it to the promoted form.
+
+## Verification Surface
 
 ```bash
+go run ./05-composition/05-composition-and-embedding/3-bank-account
 go run ./05-composition/05-composition-and-embedding/3-bank-account/_starter
+go test ./05-composition/05-composition-and-embedding/3-bank-account
 ```
 
-## Success Criteria
+## ⚠️ In Production
 
-Your finished solution should:
+Composition and embedding show up in data models, adapters, wrappers, and reusable components. Teams get into trouble when they describe embedding as inheritance and stop reasoning about the actual field and method behavior.
 
-- keep the shared account behavior in one reusable embedded type
-- use promotion intentionally instead of copying fields or methods around
-- shadow `Withdraw` only where the overdraft rule actually changes behavior
-- keep the data model easy to explain without inheritance language
-- pass the provided tests
+## 🤔 Thinking Questions
 
-## Common Failure Modes
-
-- copying `Deposit` and `Withdraw` into every account type instead of reusing `Account`
-- describing embedding as inheritance instead of promoted access to a composed type
-- shadowing methods without being able to explain why the outer behavior differs
-- mutating balances with value receivers so updates silently affect copies
+1. Why is shadowing different from inheritance-based overriding?
+2. When is embedding clearer than a named field, and when is it less clear?
+3. What behavior belongs in the shared `Account` type, and what behavior should stay in outer types?
 
 ## Next Step
 
-After you complete this exercise, continue to [Section 07](../../../06-strings-and-text) if you
-are ready to move on.
-
-
-
+Continue to `ST.1` strings.

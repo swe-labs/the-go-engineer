@@ -4,71 +4,32 @@
 
 Learn how a Go program chooses one path or another based on a condition.
 
-This is the first control-flow building block.
-Without it, a program can only run in a straight line.
+## Prerequisites
 
-## Why This Lesson Exists Now
-
-You already know values like numbers and strings.
-Now you need to decide what happens when those values mean different things.
-
-That is what `if`, `else if`, and `else` do.
-
-## Production Relevance
-
-In production Go code, branching matters because:
-
-- **Validation**: Check if input is valid before processing
-- **Authorization**: Verify permissions before allowing actions
-- **Error handling**: Decide what to do when something fails
-- **State machines**: Transition between different program states
-
-Real services use branching for every request validation, error response, and business rule.
+- `LB.4` application logger
 
 ## Mental Model
 
-Branching is about questions that have limited answers.
+Branching is the ability to ask a question and choose a path.
 
-A program asks a yes/no question (or a which-one question) and picks exactly one path to follow.
+With `if`, `else if`, and `else`:
 
-The key insight is: only ONE branch runs. The others are skipped.
+- one condition is checked
+- one branch runs
+- the other branches are skipped
 
 ## Visual Model
 
-```text
-condition: temperature > 30?
-    |
-    +--> true  --> print "hot"
-    |
-    +--> false --> print "okay"
-```
-
-```text
-condition: score >= 90?
-    |
-    +--> true  --> "A"
-    +--> false --> check score >= 80
-                       |
-                       +--> true --> "B"
-                       +--> false --> check score >= 70
-                                          |
-                                          +--> true --> "C"
-                                          +--> false --> "F"
+```mermaid
+graph TD
+    A["evaluate condition"] --> B{"true?"}
+    B -->|yes| C["run first branch"]
+    B -->|no| D["check next branch or else"]
 ```
 
 ## Machine View
 
-When an `if` statement runs, the Go runtime evaluates the condition expression.
-
-If the result is true, it executes the first block and skips all `else if` and `else` blocks.
-If false, it checks each `else if` in order.
-If none match, it runs the `else` block (if it exists).
-
-Only the selected block's code runs. The other code never executes.
-
-## Prerequisites
-
-- `LB.4` application logger (or equivalent: variables, constants, iota)
+The program evaluates the condition expression to a boolean value. Based on that result, execution jumps into one branch block and skips the others.
 
 ## Run Instructions
 
@@ -78,69 +39,37 @@ go run ./02-language-basics/03-control-flow/1-if-else
 
 ## Code Walkthrough
 
-### `temperature := 25`
-
-The program starts with a value it can reason about.
-That value is not special.
-It is simply something the program can compare.
-
 ### `if temperature > 30 { ... } else { ... }`
 
-This is the simplest branch shape:
-
-- if the condition is true, run the first block
-- otherwise, run the `else` block
-
-Only one branch runs.
-
-### `score := 85`
-
-Now the program makes a second decision using a different kind of rule.
-Instead of a yes/no check, it compares several ranges.
+This is the simplest branch shape: one true path and one fallback path.
 
 ### `if score >= 90`, `else if score >= 80`, `else`
 
-This chain means:
-
-- test the first condition
-- if it fails, test the next one
-- keep going until one matches
-- if none match, fall back to `else`
-
-### `username := ""`
-
-This line shows that branching is not only about numbers.
-Programs also branch on text, flags, and general state.
+This chain checks conditions in order until one matches.
 
 ### `if username == "" { ... }`
 
-This branch treats the empty string as a missing value.
-That idea appears everywhere in real programs:
+Branching is not only for numbers. Programs also branch on text, flags, and missing state.
 
-- missing input
-- incomplete configuration
-- invalid request data
+### Only one branch runs
 
-## Common Mistakes
-
-- forgetting that braces are required in Go
-- writing complex nested conditions before the simple case is clear
-- thinking every branch chain needs `else`
+Even when several branches exist, the program executes only the first matching branch.
 
 ## Try It
 
-1. Change `temperature` to `35` and rerun the lesson.
-2. Change `score` to `71` and see which branch runs.
-3. Set `username` to your own name and inspect the final branch output.
+1. Change the temperature so the first branch flips.
+2. Change the score so a different grade branch runs.
+3. Set `username` to your own name and inspect the final output.
 
-## Why This Matters In Real Software
+## ⚠️ In Production
 
-Branching is how software decides:
+Branching is how services validate input, enforce authorization, choose business rules, and decide how to handle failures. Clean branch logic makes systems easier to trust.
 
-- whether input is valid
-- whether access is allowed
-- whether an order should continue
-- whether a request should fail fast
+## 🤔 Thinking Questions
+
+1. Why is "only one branch runs" an important mental model?
+2. When is an `else if` chain clearer than nested `if` blocks?
+3. What kinds of real-world state besides numbers can drive branching?
 
 ## Next Step
 

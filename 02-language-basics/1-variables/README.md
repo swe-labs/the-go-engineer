@@ -2,55 +2,36 @@
 
 ## Mission
 
-Learn how to declare and use variables in Go, and understand Go's zero value system.
+Learn how Go declares variables and why every type has a predictable zero value.
 
-This lesson teaches the three ways to create variables in Go.
+## Prerequisites
 
-## Why This Lesson Exists Now
-
-Variables are the foundation of every program. Before a learner can store user input, calculate values, or make decisions, they need to understand how Go holds and updates data.
-
-This lesson builds on `GT.4` where the learner first ran a program. Now they learn how the program remembers values.
-
-## Production Relevance
-
-In production Go code, variables and zero values matter because:
-
-- **Predictability**: Every type has a known zero value, so you never wonder "what's in this variable before I assign it?"
-- **Safety**: Go's compiler catches unused variables, preventing dead code from hiding bugs
-- **Clarity**: The three declaration styles (`var`, `:=`, `var =`) communicate intent: explicit type, quick local, or inferred
-
-Real services use variables for configuration, counters, state machines, and user data.
+- `GT.4` development environment
 
 ## Mental Model
 
-In Go, every variable has a type, and every type has a predictable zero value.
+A variable is a named slot that holds a value while the program runs.
 
-The three declaration styles are:
+Go gives you three common declaration shapes:
 
-1. `var name string` — explicit type, starts with zero value
-2. `name := "value"` — short declaration, type inferred
-3. `var name = "value"` — var with inference
+1. `var name string`
+2. `var name = "value"`
+3. `name := "value"`
+
+Every declared variable also starts in a known zero state.
 
 ## Visual Model
 
-```text
-var greeting string   →  ""      (empty string)
-var count int         →  0
-var isActive bool     →  false
-var price float64     →  0.0
-```
-
-```text
-greeting := "hello"   →  inferred as string
-age := 25             →  inferred as int
+```mermaid
+graph TD
+    A["variable name"] --> B["type"]
+    B --> C["current value"]
+    C --> D["program state"]
 ```
 
 ## Machine View
 
-When a variable is declared but not assigned a value, Go automatically initializes it to its type's zero value.
-
-This is a safety feature. In some languages, uninitialized memory contains random garbage data. Go guarantees every variable starts in a known, safe state.
+When a variable is declared, Go reserves space for a value of that type and initializes it to the type's zero value. That guarantee prevents the undefined garbage-state behavior seen in lower-level languages.
 
 ## Run Instructions
 
@@ -62,47 +43,39 @@ go run ./02-language-basics/1-variables
 
 ### `var greeting string`
 
-This declares a variable with an explicit type. The value starts as an empty string `""`.
+This declares a string variable explicitly. Its initial value is the zero value, `""`.
 
 ### `greeting = "Hello, world!"`
 
-This assigns a value to the variable. Now the variable holds meaningful data.
+This assignment changes the stored value after declaration.
 
-### `var count int`
+### `var count int` and `var isRunning bool`
 
-This declares an integer variable. Its zero value is `0`.
-
-### `var isRunning bool`
-
-This declares a boolean variable. Its zero value is `false`.
+These lines show that zero values depend on type: `0` for `int`, `false` for `bool`.
 
 ### `firstName, lastName := "John", "Doe"`
 
-This uses short declaration to create two variables at once. Go infers both are strings.
-
-### `var year = 2025`
-
-This uses `var` with inference. The type is inferred from the value.
+Short declaration creates local variables and lets the compiler infer their types.
 
 ### Unused variable rule
 
-Go refuses to compile programs with unused variables. This catches mistakes early.
+Go refuses to compile code with unused local variables. That catches mistakes early.
 
 ## Try It
 
-1. Change `count = 10` to a different number and rerun.
+1. Change one assigned value and rerun the lesson.
 2. Add a new variable using short declaration.
-3. Declare a variable but never use it — observe the compile error.
+3. Declare a variable and leave it unused to see the compiler error.
 
-## Common Questions
+## ⚠️ In Production
 
-- Why does Go have three ways to declare variables?
-  - `var` for explicit control and zero values
-  - `:=` for quick local declarations
-  - `var` with inference when you want clarity with inference
+Predictable variable initialization is one of the reasons Go code is easier to reason about under pressure. Zero values, explicit types, and compile-time unused-variable errors reduce hidden state and dead code.
 
-- What happens if I don't assign a value?
-  - The variable gets its type's zero value automatically.
+## 🤔 Thinking Questions
+
+1. Why is a guaranteed zero value safer than leaving memory uninitialized?
+2. When might explicit `var` be clearer than `:=`?
+3. Why would the compiler reject unused local variables?
 
 ## Next Step
 

@@ -2,124 +2,91 @@
 
 ## Mission
 
-Build a small application logger that combines variables, constants, iota, and custom types into one readable, runnable program.
-
-This is the milestone exercise for the language basics section.
-
-## Why This Lesson Exists Now
-
-This is the first real integration exercise. So far, each lesson taught one concept in isolation. Now the learner combines everything they've learned:
-
-- Variables for storing data
-- Constants for fixed values
-- iota for ordered enums
-- Named types for type safety
-- Methods for behavior
-
-This mirrors real development: you don't use one concept in isolation, you compose them.
+Build a small logger that combines variables, constants, `iota`, and methods into one readable program.
 
 ## Prerequisites
 
-- `GT.4` development environment
 - `LB.1` variables
 - `LB.2` constants
-- `LB.3` enums with iota
+- `LB.3` enums with `iota`
 
-## What You Will Build
+## Mental Model
 
-Implement a logger that:
+This exercise turns separate language pieces into one compact system:
 
-1. Defines a `LogLevel` type based on `int`
-2. Creates level constants with `iota`
-3. Maps each level to a readable name
-4. Implements a `String()` method with bounds checking
-5. Prints readable log level output through a helper function
+- a named type models the log level
+- `iota` creates ordered constants
+- a method converts internal numeric values into readable output
+
+That is the first taste of composing simple ideas into one useful artifact.
+
+## Visual Model
+
+```mermaid
+graph LR
+    A["LogLevel type"] --> B["iota constants"]
+    B --> C["String() method"]
+    C --> D["readable log output"]
+```
+
+## Machine View
+
+At runtime, the program stores log levels as small integers. The `String()` method translates those integers into human-readable names before printing, and the bounds check prevents invalid indexes from crashing the program.
 
 ## Run Instructions
 
-Run the completed solution:
-
 ```bash
 go run ./02-language-basics/4-application-logger
-```
-
-Run the starter file:
-
-```bash
 go run ./02-language-basics/4-application-logger/_starter
 ```
 
 ## Solution Walkthrough
 
-### Define LogLevel type
+### `type LogLevel int`
 
-```go
-type LogLevel int
-```
+The solution creates a named type so log levels are more meaningful than raw integers.
 
-This creates a named type based on int for type-safe enums.
+### `const ( ... LogLevel = iota )`
 
-### Create iota constants
+This block assigns stable numeric values to each log level in order.
 
-```go
-const (
-    LevelTrace   LogLevel = iota
-    LevelDebug
-    LevelInfo
-    LevelWarning
-    LevelError
-)
-```
+### `var levelNames = []string{...}`
 
-iota auto-increments: 0, 1, 2, 3, 4.
+The slice maps each numeric level to the text the program wants to display.
 
-### Map levels to names
+### `func (l LogLevel) String() string`
 
-```go
-var levelNames = []string{"Trace", "Debug", "Info", "Warning", "Error"}
-```
+The method checks bounds first, then returns the matching human-friendly name.
 
-Parallel array indexing matches constant values to readable names.
+### `printLogLevel(...)`
 
-### Implement String() method
-
-```go
-func (l LogLevel) String() string {
-    if l < LevelTrace || l > LevelError {
-        return "Unknown"
-    }
-    return levelNames[l]
-}
-```
-
-Bounds checking prevents crashes on invalid values.
+This helper centralizes how a level is shown in output, keeping `main()` simple.
 
 ## Try It
 
-1. Add a new log level constant and its name.
-2. Test with an invalid level like 99.
-3. Change the output format in `printLogLevel`.
+1. Add another log level and its display name.
+2. Print an invalid log level like `99` and inspect the fallback.
+3. Change the output format inside `printLogLevel`.
 
 ## Verification Surface
 
-Run the solution:
-
 ```bash
 go run ./02-language-basics/4-application-logger
+go run ./02-language-basics/4-application-logger/_starter
 ```
 
-Expected output includes all log levels and "Unknown" for invalid input.
+Expected output should show readable level names and a safe fallback for invalid input.
 
-## Success Criteria
+## ⚠️ In Production
 
-Your finished solution should:
+Enum-like log levels are everywhere in services and tooling. Good logging systems depend on stable internal values and readable external text, especially when alerts and dashboards consume those levels downstream.
 
-- Define a named `LogLevel` type
-- Use `iota` for ordered log level constants
-- Convert levels into readable text safely
-- Avoid crashing on invalid levels
-- Print a few example log levels in `main()`
+## 🤔 Thinking Questions
+
+1. Why is it useful to separate the stored level value from the displayed level name?
+2. What bug does the bounds check inside `String()` prevent?
+3. Why is this exercise a better milestone than printing raw integers?
 
 ## Next Step
 
-Continue to `03-control-flow` after this milestone.
+Continue to `CF.1` if / else.

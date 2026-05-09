@@ -2,67 +2,34 @@
 
 ## Mission
 
-Learn how to choose between several possible paths without writing long, hard-to-read branch chains.
+Learn how to choose among several possible paths without building long, hard-to-scan branch chains.
 
-## Why This Lesson Exists Now
+## Prerequisites
 
-`if / else if / else` works well for a small number of branches.
-When the number of cases grows, `switch` often reads more clearly.
-
-## Production Relevance
-
-In production Go code, switch matters because:
-
-- **State handling**: Map request states or HTTP status codes
-- **Command processing**: Handle different user commands or operations
-- **Mode selection**: Choose behavior based on configuration or environment
-- **Type handling**: Differentiate between categories or kinds
-
-Real services use switch for routing, status codes, and business rule engines.
+- `CF.1` if / else
+- `CF.2` for basics
 
 ## Mental Model
 
-Switch is like a multi-way if-else but organized as a table of cases.
+`switch` is a multi-way branch.
 
-Instead of checking each condition one by one, you check one value against many possibilities.
+It is useful when:
 
-The key: only ONE case runs, and you can group multiple values in one case.
+- one value may match several known cases
+- several conditions need a clean top-to-bottom table shape
 
 ## Visual Model
 
-```text
-switch day {
-case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday":
-    print "weekday"
-case "Saturday", "Sunday":
-    print "weekend"
-}
-```
-
-```text
-switch {
-case score >= 90:
-    print "A"
-case score >= 80:
-    print "B"
-default:
-    print "other"
-}
+```mermaid
+graph TD
+    A["inspect value or conditions"] --> B{"which case matches?"}
+    B --> C["run matching case"]
+    B --> D["or run default"]
 ```
 
 ## Machine View
 
-A switch evaluates one expression and compares it against each case in order.
-
-Unlike some languages, Go does not fall through by default.
-Once a case matches and runs, the switch ends.
-
-The `default` case runs when no other case matches.
-
-## Prerequisites
-
-- `CF.1` if/else
-- `CF.2` for basics
+A `switch` evaluates the tag expression or each case condition in order. In Go, once one case matches and runs, the switch ends unless you deliberately use `fallthrough`.
 
 ## Run Instructions
 
@@ -72,55 +39,37 @@ go run ./02-language-basics/03-control-flow/4-switch
 
 ## Code Walkthrough
 
-### `day := "Monday"`
-
-The first example starts with a simple text value.
-The program wants different output depending on that value.
-
 ### `switch day { ... }`
 
-This form compares one value against several cases.
-
-It reads like:
-
-- inspect `day`
-- match the first fitting case
-- run only that case
+This form compares one value against several candidate cases.
 
 ### `case "Saturday", "Sunday":`
 
-One case can match more than one value.
-That helps group related outcomes without duplicating code.
+One case can match multiple values when they share the same outcome.
 
-### `score := 82` and `switch { ... }`
+### `switch { ... }`
 
-This is the tagless form of `switch`.
+The tagless form evaluates each case as a boolean condition, which is useful for ranges and guard-like logic.
 
-Instead of comparing one named value, each case is a condition.
-That makes it useful for ranges and guard-like logic.
+### `default`
 
-## Common Mistakes
-
-- reaching for `switch` when a single `if` would be clearer
-- assuming Go falls through to the next case automatically
-- forgetting that tagless `switch` cases are still checked from top to bottom
+The default case handles the fallback path when no explicit case matches.
 
 ## Try It
 
-1. Change `day` to `Sunday`.
-2. Change `score` to `95`.
-3. Reorder the score cases and see how that changes the result.
+1. Change the `day` value and rerun the lesson.
+2. Change the `score` value in the tagless `switch`.
+3. Reorder the score cases and notice how case order affects behavior.
 
-## Why This Matters In Real Software
+## ⚠️ In Production
 
-`switch` is useful when code needs to react to:
+`switch` often makes state machines, command routers, mode handlers, and category-based rules easier to read than long `if / else if` ladders.
 
-- modes
-- states
-- commands
-- categories
+## 🤔 Thinking Questions
 
-It often makes business rules easier to scan than long `if / else if` ladders.
+1. When is `switch` clearer than `if / else if`?
+2. Why is Go's "no fallthrough by default" behavior safer for beginners?
+3. What is the difference between a tagged and tagless `switch`?
 
 ## Next Step
 

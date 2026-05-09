@@ -27,6 +27,11 @@ A function may need to return:
 
 ## Visual Model
 
+```mermaid
+graph LR
+    A["input"] --> B["function boundary"]
+    B --> C["value or error"]
+```
 ```text
 findItem(items, "tea")
         |
@@ -97,7 +102,7 @@ The function still returns two values, but they now mean:
 
 This second function returns two related values without using a boolean.
 
-That proves multiple return values are broader than only “success or failure.”
+That proves multiple return values are broader than only â€œsuccess or failure.â€
 
 ### `parts := strings.SplitN(fullName, " ", 2)`
 
@@ -142,11 +147,15 @@ This line shows the same pattern again with a different meaning.
 - Is this already the same as `(value, error)`?
   Not yet, but it prepares you for that pattern.
 
-## Production Relevance
-
+## ⚠️ In Production
 Multiple return values let Go functions communicate more honestly.
 They make success, failure, and extra context visible to the caller.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `FE.4` errors as values.

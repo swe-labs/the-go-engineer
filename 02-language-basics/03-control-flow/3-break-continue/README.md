@@ -2,59 +2,34 @@
 
 ## Mission
 
-Learn how to control a loop after it has already started.
-
-Sometimes a loop should stop completely.
-Sometimes it should skip only the current item.
-
-That is what `break` and `continue` are for.
-
-## Why This Lesson Exists Now
-
-Once a learner can write a loop, the next question is:
-
-"What if I do not want every iteration to behave the same way?"
-
-That is the purpose of loop control.
-
-## Production Relevance
-
-In production Go code, break and continue matter because:
-
-- **Search**: Stop processing once the target is found
-- **Validation**: Skip invalid records while processing a batch
-- **Optimization**: Exit early when further work is pointless
-- **Filtering**: Selectively process only relevant items
-
-Real services use these for search results, data validation, and early termination.
-
-## Mental Model
-
-- `break` means "stop the loop NOW and move on"
-- `continue` means "skip THIS iteration but keep looping"
-
-## Visual Model
-
-```text
-for i := 1; i <= 10; i++ {
-    if i == 7 { break }      --> stop here, exit loop
-    if i is even { continue } --> skip print, next i
-    print i
-}
-```
-
-Output: 1, 3, 5 (stops at 7)
-
-## Machine View
-
-When `break` executes, the Go runtime jumps to the first statement after the loop.
-When `continue` executes, the runtime jumps to the loop's post statement (like `i++`).
-
-Both are control-flow changes that alter the normal sequential execution.
+Learn how to change a loop's behavior after the loop has already started.
 
 ## Prerequisites
 
 - `CF.2` for basics
+
+## Mental Model
+
+Loop control gives you two important tools:
+
+- `continue` skips the rest of the current iteration
+- `break` stops the loop completely
+
+That lets one loop treat different iterations differently.
+
+## Visual Model
+
+```mermaid
+graph TD
+    A["loop iteration"] --> B{"special case?"}
+    B -->|skip only this item| C["continue"]
+    B -->|stop all remaining work| D["break"]
+    B -->|normal path| E["finish iteration"]
+```
+
+## Machine View
+
+`continue` jumps to the loop's next iteration step. `break` jumps to the first statement after the loop. Both change normal sequential flow inside the loop body.
 
 ## Run Instructions
 
@@ -64,47 +39,37 @@ go run ./02-language-basics/03-control-flow/3-break-continue
 
 ## Code Walkthrough
 
-### `for i := 1; i <= 10; i++ { ... }`
-
-The loop counts from `1` to `10`.
-Inside the loop, we add two control rules.
-
 ### `if i%2 == 0 { continue }`
 
-`continue` skips the rest of the current iteration.
-
-That means:
-
-- even numbers are seen
-- but they are not printed as part of the main result
-
-The loop then moves forward to the next value.
+This skips even numbers without stopping the overall loop.
 
 ### `if i == 7 { break }`
 
-`break` stops the loop completely.
+This stops the loop entirely once the target condition is met.
 
-Once this line runs, the program does not continue to `8`, `9`, or `10`.
+### Order matters
 
-## Common Mistakes
+The position of `continue` and `break` checks affects which code can still run during an iteration.
 
-- using `break` when you only meant to skip one value
-- using `continue` and then wondering why later code inside the same loop never runs
-- putting loop-control checks in an order that hides the intended behavior
+### Loop control is not branching alone
+
+These statements do not just choose code paths. They also change whether the loop keeps going.
 
 ## Try It
 
-1. Move the `break` check before the `continue` check and compare the output.
-2. Change the stop number from `7` to `9`.
-3. Remove `continue` and rerun the lesson.
+1. Move the `break` check before the `continue` check.
+2. Change the stop value from `7` to another number.
+3. Remove `continue` and inspect how the output changes.
 
-## Why This Matters In Real Software
+## ⚠️ In Production
 
-Loop control appears in real programs when you need to:
+Search loops, filters, validators, and batch processors often depend on early exit and selective skipping. Used well, these tools make code faster and clearer. Used poorly, they hide control flow.
 
-- stop once the target is found
-- skip invalid records
-- stop early when further work is pointless
+## 🤔 Thinking Questions
+
+1. When would `break` be the wrong tool if you only want to skip one bad item?
+2. Why does the order of loop-control checks matter?
+3. What kinds of workloads benefit from stopping early?
 
 ## Next Step
 

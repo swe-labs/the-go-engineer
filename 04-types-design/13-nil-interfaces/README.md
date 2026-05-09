@@ -22,6 +22,11 @@ With interfaces, it's similar—nil interface vs interface holding a nil pointer
 
 ## Visual Model
 
+```mermaid
+graph TD
+    A["data"] --> B["type definition"]
+    B --> C["methods or interface behavior"]
+```
 ```go
 var i1 interface{} = nil        // truly nil interface
 var i2 interface{} = (*int)(nil) // interface holding typed nil
@@ -29,7 +34,7 @@ var i2 interface{} = (*int)(nil) // interface holding typed nil
 
 ## Machine View
 
-An interface has two fields: type and value. When both are nil, the interface is nil. When type is set but value is nil, the interface is NOT nil—it contains a typed nil.
+An interface has two fields: type and value. When both are nil, the interface is nil. When type is set but value is nil, the interface is NOT nilâ€”it contains a typed nil.
 
 ## Run Instructions
 
@@ -45,7 +50,7 @@ Both type and value are nil.
 
 ### Interface holding typed nil
 
-Type is set, but value is nil—this is not equal to nil!
+Type is set, but value is nilâ€”this is not equal to nil!
 
 ### Checking for nil
 
@@ -61,10 +66,14 @@ If an interface may contain a typed nil pointer, a plain `value == nil` check is
 2. Pass a nil pointer to an interface parameter and observe behavior.
 3. Write a guard clause that checks for both nil interface and typed nil.
 
-## Production Relevance
-
+## ⚠️ In Production
 Nil interface handling is crucial when working with database results, file operations, and any function that may return nothing or error.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `TI.14` functional options.

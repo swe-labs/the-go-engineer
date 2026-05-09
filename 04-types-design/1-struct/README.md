@@ -22,20 +22,22 @@ Think of a struct like a passport. A passport groups related data about one pers
 
 ## Visual Model
 
-```text
-┌─────────────────────────────────────────────┐
-│  Server struct                              │
-├─────────────────────────────────────────────┤
-│  ID       int                               │
-│  Hostname string                            │
-│  IP       string                            │
-│  Region   string                            │
-│  CPUCores int                               │
-│  MemoryGB int                              │
-│  IsOnline bool                              │
-│  BootedAt time.Time                        │
-└─────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A["data"] --> B["type definition"]
+    B --> C["methods or interface behavior"]
 ```
+
+| Field Name | Type        |
+| ---------- | ----------- |
+| `ID`       | `int`       |
+| `Hostname` | `string`    |
+| `IP`       | `string`    |
+| `Region`   | `string`    |
+| `CPUCores` | `int`       |
+| `MemoryGB` | `int`       |
+| `IsOnline` | `bool`      |
+| `BootedAt` | `time.Time` |
 
 ## Machine View
 
@@ -77,9 +79,15 @@ Access fields with dot notation: structVar.FieldName.
 2. Create a second Server instance and compare them.
 3. Try accessing a field that was not initialized and observe the zero value.
 
-## Production Relevance
+## ⚠️ In Production
 
 Structs are the foundation of data modeling in Go. Every API request, database record, and configuration object is modeled as a struct. Understanding how to design structs is essential for writing real applications.
+
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 
 ## Next Step
 

@@ -14,10 +14,15 @@ You have learned about type assertions (checking one type). Sometimes you need t
 
 ## Mental Model
 
-Think of a sorting machine. Items come down the belt, and different items need different handling—fragile items go to one bin, heavy items to another, documents to a third. The machine "switches" on the type of item to decide where it goes.
+Think of a sorting machine. Items come down the belt, and different items need different handlingâ€”fragile items go to one bin, heavy items to another, documents to a third. The machine "switches" on the type of item to decide where it goes.
 
 ## Visual Model
 
+```mermaid
+graph TD
+    A["data"] --> B["type definition"]
+    B --> C["methods or interface behavior"]
+```
 ```text
 switch v := value.(type) {
 case string:
@@ -69,10 +74,14 @@ The default case handles types you have not explicitly handled.
 - When should I use type switches?
   When you have an interface that can hold multiple concrete types and you need different logic for each.
 
-## Production Relevance
-
+## ⚠️ In Production
 Type switches are used in serialization (json.Unmarshal), reflection, and handling API responses that return different types.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `TI.7` custom errors.

@@ -25,6 +25,11 @@ separate function and let `main()` ask for that work when it needs it.
 
 ## Visual Model
 
+```mermaid
+graph LR
+    A["input"] --> B["function boundary"]
+    B --> C["value or error"]
+```
 ```text
 main()
   |
@@ -140,11 +145,15 @@ The important thing is that `main()` now reads like a short list of jobs.
 - Does a function always need input?
   No. Some functions only perform one fixed action.
 
-## Production Relevance
-
+## ⚠️ In Production
 Real programs become hard to read when every action stays inline.
 Small named functions are the first step toward readable application flow.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `FE.2` parameters and returns.

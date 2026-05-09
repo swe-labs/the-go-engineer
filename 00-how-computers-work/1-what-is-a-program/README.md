@@ -1,51 +1,92 @@
 # HC.1 What Is a Program?
 
 ## Mission
-Understand that a program is a list of instructions for a machine to follow, and the CPU runs a continuous loop to execute them.
+
+Understand that a program is a list of instructions for a machine to follow, and that the CPU runs a continuous fetch-decode-execute loop to carry those instructions out.
 
 ## Prerequisites
+
 - None
 
 ## Mental Model
-Imagine a cook reading a recipe card. The recipe is the program, the ingredients are the data, and the cook is the CPU following one instruction at a time.
+
+Imagine a cook reading a recipe card.
+
+- the recipe card is the program
+- the ingredients are the data
+- the cook is the CPU
+
+The cook does not understand your intent.
+The cook only follows one instruction at a time.
 
 ## Visual Model
+
 ```mermaid
 graph TD
-   A[Memory] -->|Reads Instruction| B[CPU]
-   B -->|Executes Operation| B
-   B -->|Reads/Writes Data| C[Memory]
+    A["Program in memory"] --> B["CPU fetches next instruction"]
+    B --> C["CPU decodes the instruction"]
+    C --> D["CPU executes the operation"]
+    D --> A
+    E["Program data in memory"] --> C
 ```
 
 ## Machine View
-Computers only understand binary (1s and 0s). The CPU uses the fetch-decode-execute cycle billions of times per second. It fetches an instruction from memory, decodes it into basic operations (Move, Add, Compare, Jump, Read, Write), and executes it. 
 
-Your program and your data are both stored in the same memory (Von Neumann architecture).
+Computers only understand one language: binary.
+That is why we need layers between Go code and the hardware.
+
+At a high level, every program eventually decomposes into a small set of instruction families:
+
+| Operation | What it means                          |
+| --------- | -------------------------------------- |
+| Move      | Copy a value from one place to another |
+| Add       | Combine numeric values                 |
+| Compare   | Check whether values match or differ   |
+| Jump      | Change which instruction runs next     |
+| Read      | Load a value from memory               |
+| Write     | Store a value back into memory         |
+
+Your program is also data.
+The CPU reads instructions from memory, then reads and writes the data those instructions operate on.
+
+That is why the fetch-decode-execute cycle matters:
+
+1. fetch the next instruction from memory
+2. decode what that instruction means
+3. execute it
+4. move to the next instruction
 
 ## Run Instructions
-*(This is a conceptual lesson, no code to run)*
 
-## Code Walkthrough
-```go
-// You write:
-fmt.Println("Hello")
-
-// CPU executes binary equivalent of:
-// 1. Move pointer to string
-// 2. Call print function
-// 3. Return to next instruction
+```bash
+go run ./00-how-computers-work/1-what-is-a-program
 ```
 
+## Code Walkthrough
+
+In `main.go`, the demo prints a few simple statements, but the important part is what those prints represent:
+
+- the compiled program is already a list of machine instructions
+- the CPU fetches those instructions in order
+- each `fmt.Println(...)` call only appears because the CPU repeatedly executes that loop
+
 ## Try It
-1. Think about what happens when your computer runs out of memory. Based on the machine view, why does the entire system slow down or crash?
+
+1. Run the lesson once and read the output as a machine model, not just a greeting.
+2. Add one more `fmt.Println(...)` line and rerun it.
+3. Explain why the new line appears only after the earlier instructions finish.
 
 ## ⚠️ In Production
-Because programs are stored in memory just like data, security vulnerabilities often occur when a program is tricked into interpreting malicious data as instructions (e.g., buffer overflows).
+
+Programs are stored in memory just like data.
+That is one reason memory corruption bugs and instruction/data confusion can become security problems.
 
 ## 🤔 Thinking Questions
-1. If the CPU can only do six basic operations, why do some programs run slowly?
-2. You've heard that computers "process" things. Based on what you now know, what is processing actually? What's physically happening?
-3. If your program is stored in memory like data, what happens if you run the same program twice at the same time?
+
+1. If the CPU can only do a few primitive instruction types, why do some programs still run slowly?
+2. What does “the computer is processing data” physically mean now that you know about the CPU loop?
+3. If you run the same program twice at the same time, what do you think the OS duplicates and what does it share?
 
 ## Next Step
-[HC.2 How Code Becomes Execution](../2-code-to-execution)
+
+Continue to [HC.2 How Code Becomes Execution](../2-code-to-execution).

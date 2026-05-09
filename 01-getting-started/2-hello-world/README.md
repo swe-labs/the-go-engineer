@@ -4,61 +4,34 @@
 
 Learn the smallest useful shape of an executable Go program.
 
-This lesson teaches the learner what a Go program must have in order to run at all.
+## Prerequisites
 
-## Why This Lesson Exists Now
-
-After installation works, the learner needs to see a complete program that still feels small enough
-to understand line by line.
-
-That means learning:
-
-- why `package main` exists
-- why `func main()` matters
-- how `import` gives access to standard-library code
-- how printed output reaches the terminal
+- `GT.1` installation verification
 
 ## Mental Model
 
-A minimal Go program has a clear shape:
+A minimal Go executable has a stable shape:
 
-1. declare the package
-2. import what the file needs
-3. define `main`
-4. run statements inside `main`
+1. Declare the package.
+2. Import what the file needs.
+3. Define `main`.
+4. Execute statements inside `main`.
 
-That shape repeats through the whole curriculum.
+That shape repeats across the whole curriculum.
 
 ## Visual Model
 
-```text
-package main
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, World!")
-}
-```
-
-```text
-program shape:
-
-package -> imports -> main function -> output
+```mermaid
+graph TD
+    A["package main"] --> B["import fmt"]
+    B --> C["func main()"]
+    C --> D["fmt.Println(...)"]
+    D --> E["terminal output"]
 ```
 
 ## Machine View
 
-When you run this lesson, Go does not read one line and immediately print it the way a shell
-script might feel.
-
-Instead, the `go` tool:
-
-1. compiles the source file into a runnable program
-2. starts execution at `main`
-3. executes each statement inside `main`
-4. writes output to standard output, which the terminal displays
-
-That is why Go can catch many mistakes before the program ever starts.
+When you run this lesson, the Go toolchain compiles the source file first. Execution then begins at `main`, and `fmt.Println` writes bytes to standard output for the terminal to display.
 
 ## Run Instructions
 
@@ -70,62 +43,39 @@ go run ./01-getting-started/2-hello-world
 
 ### `package main`
 
-This line tells Go the file belongs to the executable package.
-Without `package main`, the `go run` flow would not know to build a runnable program from this
-file.
+This marks the file as part of a runnable program instead of a reusable library package.
 
 ### `import "fmt"`
 
-The file needs Go's formatting package so it can print output.
-Imports are how one package gains access to code from another package.
+Printing lives in the `fmt` package, so the file must import it explicitly.
 
-### `func main() {`
+### `func main()`
 
-This is the program entry point.
-Execution begins here.
-If the file has helper code but no `main` function, the program cannot start as an executable.
+`main` is the program entry point. Executable Go programs start there.
 
-### `fmt.Println("Hello, World! Welcome to The Go Engineer.")`
+### `fmt.Println(...)`
 
-This prints a full line of text.
-`Println` adds a newline at the end, so the next output starts on a new line.
+`Println` prints one or more values and ends the line with a newline character.
 
-### `fmt.Println("Go was created at", "Google", "in", 2009)`
+### `fmt.Printf(...)`
 
-This shows that `Println` can print more than one value.
-It inserts spaces between the values automatically.
-
-### `language := "Go"` and `year := 2009`
-
-These two lines store small values in variables.
-The section is not formally teaching variables yet.
-It is only showing that printed output can come from named values as well as direct text.
-
-### `fmt.Printf("%s was created in %d\n", language, year)`
-
-`Printf` gives more control than `Println`.
-
-This line says:
-
-- `%s` should be replaced by a string
-- `%d` should be replaced by an integer
-- `\n` should end the line
-
-That helps the learner see that output can be shaped, not only dumped.
+`Printf` formats values into a template. It is an early preview that output can be shaped, not only dumped.
 
 ## Try It
 
-1. Change the welcome message text and rerun the lesson.
-2. Change `year := 2009` to another number and inspect the final line.
-3. Add one more `fmt.Println(...)` line below the existing output.
+1. Change the welcome message and rerun the program.
+2. Change the year value and inspect the formatted output.
+3. Add one more `fmt.Println(...)` call below the existing lines.
 
-## Common Questions
+## ⚠️ In Production
 
-- Why is `main` special?
-  Because executable Go programs start there.
+Almost every service, CLI, job, and test binary still starts with this same shape: executable package, imports, entry point, side effects. The files get bigger, but the contract does not change.
 
-- Why do we need `fmt` just to print?
-  Because printing functionality lives in a package, and Go makes package use explicit.
+## 🤔 Thinking Questions
+
+1. Why does Go make `package main` and `func main()` explicit instead of assuming them?
+2. What would break if the file tried to print without importing `fmt`?
+3. Why might a language prefer a very small executable shape for beginners?
 
 ## Next Step
 

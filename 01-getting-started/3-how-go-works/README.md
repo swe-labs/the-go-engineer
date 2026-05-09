@@ -2,68 +2,36 @@
 
 ## Mission
 
-Build a beginner-safe mental model for packages, imports, compilation, and exported names.
+Build a beginner-safe mental model for packages, imports, exported names, and the `go run` workflow.
 
-This lesson is not trying to teach every compiler detail.
-It is trying to make the basic workflow feel explainable.
+## Prerequisites
 
-## Why This Lesson Exists Now
-
-After `hello world`, beginners often know that the code runs but not why it runs.
-
-This lesson answers a few important "behind the scenes" questions:
-
-- What is a package?
-- What does `import` really do?
-- Why can one file call `strings.ToUpper(...)`?
-- What happens when `go run` is executed?
+- `GT.2` hello world
 
 ## Mental Model
 
-Go organizes code into packages.
-A package groups related code and gives it a name.
+Go organizes code into packages. A file imports packages when it wants to use capabilities it does not define itself.
 
-This file uses several packages:
+This lesson uses several packages to show that one program can combine:
 
-- `fmt` for printing
-- `strings` for string operations
-- `math` for mathematical functions
-
-The program does not own those tools.
-It borrows them through imports.
+- printing
+- text processing
+- math helpers
 
 ## Visual Model
 
-```text
-this file
-  |
-  +--> fmt.Println(...)
-  +--> strings.ToUpper(...)
-  +--> strings.Split(...)
-  +--> math.Sqrt(...)
-```
-
-```text
-go run
-  |
-  +--> read source
-  +--> compile program
-  +--> run executable
-  +--> show terminal output
+```mermaid
+graph LR
+    A["this file"] --> B["fmt"]
+    A --> C["strings"]
+    A --> D["math"]
+    E["go run"] --> F["compile program"]
+    F --> G["run executable"]
 ```
 
 ## Machine View
 
-The Go toolchain builds this program before it runs.
-
-That means:
-
-- imported package code is resolved during the build
-- function calls are type-checked before execution
-- the final program starts only after compilation succeeds
-
-So when the learner sees printed output, they are seeing the result of a compiled executable, not a
-line-by-line interpreter loop.
+The Go toolchain resolves imports and type-checks package calls before execution begins. Only after compilation succeeds does the binary start at `main` and call into imported package code.
 
 ## Run Instructions
 
@@ -75,55 +43,39 @@ go run ./01-getting-started/3-how-go-works
 
 ### `import ("fmt" "math" "strings")`
 
-This lesson imports more than one package because it wants to show that one program can use several
-different tools at once.
+This file depends on three different standard-library packages, each responsible for a different kind of work.
 
-### `greeting := "hello, go developer!"`
+### `strings.ToUpper(...)`
 
-The program begins with a plain string value.
-That gives the `strings` package something to work on.
+This shows how package functions transform data without printing directly.
 
-### `strings.ToUpper(greeting)`
+### `strings.Split(...)`
 
-This calls a function named `ToUpper` from the `strings` package.
+This turns one string into multiple pieces, which previews that package code can reshape data structures.
 
-The capital `T` matters.
-In Go, names that start with an uppercase letter are exported, which means other packages may use
-them.
+### `math.Pi`, `math.Sqrt(...)`, and `math.Pow(...)`
 
-### `strings.Contains(greeting, "go")`
+These lines show that packages can export both values and functions.
 
-This asks a yes-or-no question about the string and returns a boolean answer.
-The learner does not need full boolean theory yet.
-They only need to see that package functions can return useful results, not only print text.
+### Exported names
 
-### `strings.Split("one,two,three", ",")`
-
-This turns one string into multiple parts.
-It is an early preview that packages can transform data, not just display it.
-
-### `math.Pi`, `math.Sqrt(144)`, and `math.Pow(2, 10)`
-
-These lines show two things:
-
-- packages can expose values like `Pi`
-- packages can expose functions like `Sqrt` and `Pow`
-
-That helps the learner see imports as access to organized capabilities.
+`ToUpper` and `Sqrt` begin with uppercase letters because Go uses capitalization to mark names that other packages may access.
 
 ## Try It
 
-1. Change `greeting` and see how `ToUpper` and `Contains` react.
-2. Change `"one,two,three"` to another comma-separated string.
-3. Replace `math.Sqrt(144)` with `math.Sqrt(81)` and rerun.
+1. Change the `greeting` value and rerun the lesson.
+2. Replace `math.Sqrt(144)` with another value and inspect the result.
+3. Add one more call from the `strings` package.
 
-## Common Questions
+## ⚠️ In Production
 
-- Why do package functions use `packageName.FunctionName(...)`?
-  Because Go makes package ownership explicit at the call site.
+Real Go systems are mostly package boundaries. Teams rely on imports, exported names, and clear package ownership to keep codebases understandable and deployable.
 
-- Why are some names uppercase?
-  In Go, uppercase names are exported for use from other packages.
+## 🤔 Thinking Questions
+
+1. Why might Go prefer explicit package ownership at the call site?
+2. What does the capital letter rule communicate to the reader?
+3. Why is it useful that import resolution happens before the program starts running?
 
 ## Next Step
 

@@ -2,7 +2,7 @@
 
 ## Mission
 
-Learn how to treat methods as first-class values—assigning methods to variables and passing them as function arguments.
+Learn how to treat methods as first-class valuesâ€”assigning methods to variables and passing them as function arguments.
 
 ## Why This Lesson Exists Now
 
@@ -18,6 +18,11 @@ Think of a button on a remote. You can press the button (call the method), or yo
 
 ## Visual Model
 
+```mermaid
+graph TD
+    A["data"] --> B["type definition"]
+    B --> C["methods or interface behavior"]
+```
 ```go
 type Counter struct{ Value int }
 
@@ -62,10 +67,14 @@ Method values capture the receiver; closures capture variables.
 2. Pass a method value to a defer statement.
 3. Compare method values with closures capturing the same receiver.
 
-## Production Relevance
-
+## ⚠️ In Production
 Method values are used in HTTP handlers, event systems, and anywhere you need to pass a method as a callback.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `TI.16` complex generic constraints if you want to finish the optional stretch path.

@@ -48,4 +48,6 @@ uploads/
 # OpenCode
 .opencode/
 
+.cache/
+
 

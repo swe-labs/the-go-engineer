@@ -1,66 +1,86 @@
-# HC.2
+# HC.2 How Code Becomes Execution
 
 ## Mission
 
-Understand the difference between source code (text) and machine code (binary), and how compiling bridges the gap.
+Understand the journey from Go source code to a running program: tokens, AST, type checking, IR, optimization, code generation, and linking.
 
 ## Prerequisites
 
-- `HC.1`
+- `HC.1` what is a program
 
 ## Mental Model
 
-CPUs do not understand English. They do not understand the word `println`. A CPU only understands electrical pulses, represented as numbers (machine code).
+Think of the compiler as a translation pipeline.
 
-To run human-readable code, we need a **Compiler**. The compiler is itself a program that reads your text file and translates it into a binary file containing raw CPU instructions. 
-
-- **Source Code:** For humans to read and write.
-- **Compiler:** The translator.
-- **Binary / Executable:** For the CPU to run.
+You write text for humans.
+The compiler progressively turns that text into representations that are easier for machines to reason about, optimize, and finally execute.
 
 ## Visual Model
 
 ```mermaid
-flowchart LR
-    A[main.go\n(Human Text)] -->|go build| B(Go Compiler)
-    B -->|Translates| C[main.exe\n(Machine Binary)]
-    C -->|OS Runs It| D[CPU Executes]
+graph LR
+    A["Source code"] --> B["Tokens"]
+    B --> C["AST"]
+    C --> D["Type-checked program"]
+    D --> E["IR"]
+    E --> F["Optimized IR"]
+    F --> G["Machine code + linked binary"]
+    G --> H["Running process"]
 ```
 
 ## Machine View
 
-When you type `go run main.go`, Go is secretly doing two things:
-1. Compiling the code into a temporary binary file.
-2. Immediately executing that temporary binary.
+The CPU does not run `.go` files.
+It runs machine instructions.
 
-If you type `go build main.go`, Go stops after step 1 and hands you the compiled binary file to run yourself.
+Between those two things, Go performs a build pipeline:
+
+1. **Lexing** breaks text into tokens.
+2. **Parsing** builds an Abstract Syntax Tree (AST).
+3. **Type checking** verifies operations and types are compatible.
+4. **IR generation** creates an intermediate representation that is easier to optimize.
+5. **Optimization** improves the generated program before final code generation.
+6. **Code generation** emits machine instructions for the target CPU.
+7. **Linking** combines your code with the compiled packages it depends on.
+
+That is why Go catches many mistakes before the program ever starts.
 
 ## Run Instructions
 
-Instead of `go run`, we are going to build the binary manually.
-
-**Mac / Linux:**
 ```bash
-go build -o program ./00-how-computers-work/2-code-to-execution
-./program
-```
-
-**Windows:**
-```bash
-go build -o program.exe ./00-how-computers-work/2-code-to-execution
-.\program.exe
+go run ./00-how-computers-work/2-code-to-execution
 ```
 
 ## Code Walkthrough
 
-This code is identical to the last lesson. The difference is not in the code itself, but in *how* we ask the computer to process it. By using `go build`, we ask the computer to generate a permanent binary translation that we can run without needing the Go compiler ever again.
+The lesson program prints one tiny example through each stage:
+
+- original source text
+- tokenized representation
+- AST shape
+- IR-style operation sequence
+- final machine-oriented result
+
+It is not a real compiler.
+It is a guided mental model of what the real compiler is doing.
 
 ## Try It
 
-1. Build the program.
-2. Notice the new file created in your folder. Try to open it in your text editor. What does it look like? (Hint: It will look like gibberish because text editors expect text, not raw CPU numbers).
-3. Delete the binary file when you are done.
+1. Run the lesson and read each stage as a transformation, not as decoration.
+2. Change the example expression in `main.go` and update the printed stages to match.
+3. Compare `go run` with `go build` and explain what extra thing `go build` leaves behind.
+
+## ⚠️ In Production
+
+Build artifacts matter.
+When you deploy Go, you deploy the compiled binary for the target OS and CPU architecture, not the source files.
+
+## 🤔 Thinking Questions
+
+1. Why is IR useful instead of compiling source text directly into machine instructions in one step?
+2. Why does compile-time type checking remove whole categories of runtime failures?
+3. If two source files produce the same AST, what differences between the files stop mattering to the compiler?
 
 ## Next Step
 
-Now that we have instructions running on the CPU, where do we store the data those instructions use? Move to [HC.3 Memory Basics](../3-memory-basics/).
+Continue to [HC.3 Memory Basics](../3-memory-basics).

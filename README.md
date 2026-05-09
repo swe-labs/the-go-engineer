@@ -28,7 +28,7 @@ git clone https://github.com/rasel9t6/the-go-engineer.git
 cd the-go-engineer
 go mod download
 go version
-go run ./01-getting-started/1-installation/
+go run ./00-how-computers-work/1-what-is-a-program
 ```
 
 ## Curriculum Overview (5 Phases, 12 Sections)
@@ -81,7 +81,7 @@ These docs guide you through the learning system:
 
 ```bash
 # Run a lesson
-go run ./01-getting-started/1-installation/
+go run ./00-how-computers-work/1-what-is-a-program
 
 # Run tests
 go test ./...

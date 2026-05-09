@@ -2,63 +2,35 @@
 
 ## Mission
 
-Learn the basic command loop that makes day-to-day Go work predictable.
+Learn the small command loop that makes day-to-day Go work predictable.
 
-This lesson is the bridge between "I can run one program" and "I know the basic tools I will keep
-using across the repo."
+## Prerequisites
 
-## Why This Lesson Exists Now
-
-A beginner who can run one lesson still needs one more confidence layer:
-
-- how to format code
-- how to compile code
-- how to run tests
-- how to recognize whether editor support is installed
-
-That is what this lesson establishes.
+- `GT.3` how Go works
 
 ## Mental Model
 
-The Go toolchain is a working loop, not a single command.
+The Go toolchain is a workflow, not a single command:
 
-The beginner-safe version of that loop is:
+1. Edit code.
+2. Format it.
+3. Build or run it.
+4. Test it when tests exist.
 
-1. write or change code
-2. run `go fmt`
-3. run `go build` or `go run`
-4. run `go test` when tests exist
-
-That loop repeats through the whole curriculum.
+That loop repeats across the entire repo.
 
 ## Visual Model
 
-```text
-edit code
-   |
-   +--> go fmt
-   +--> go build or go run
-   +--> go test
-```
-
-```text
-editor support:
-
-gopls -> code intelligence
-gofmt -> standard formatting
+```mermaid
+graph LR
+    A["edit code"] --> B["go fmt"]
+    B --> C["go build / go run"]
+    C --> D["go test"]
 ```
 
 ## Machine View
 
-These commands do different jobs:
-
-- `go fmt` rewrites source files into Go's standard style
-- `go build` compiles packages to verify they are valid
-- `go run` compiles and executes in one step
-- `go test` builds and runs tests
-
-This lesson also checks whether some tools can be found on the machine path.
-That is why it uses `exec.LookPath(...)`.
+`go fmt` rewrites source files into Go's standard format. `go build` compiles packages. `go run` compiles and executes. `go test` builds test binaries and runs them. This lesson also asks the OS whether tools like `gopls` exist on the command path.
 
 ## Run Instructions
 
@@ -70,47 +42,40 @@ go run ./01-getting-started/4-dev-environment
 
 ### `commands := []commandInfo{ ... }`
 
-The lesson stores the important Go commands in a small slice of labeled records.
-That keeps the output readable without repeating nearly identical `fmt.Printf(...)` blocks.
+The lesson stores the important Go commands as structured data so it can print them consistently.
 
 ### `for _, command := range commands { ... }`
 
-This loop prints the command list in a consistent format.
-The learner does not need to master loops here.
-They only need to recognize that repetition can print structured output cleanly.
+This loop renders the command list without repeating the same formatting code over and over.
 
 ### `tools := []toolInfo{ ... }`
 
-This second list describes the editor-support tools the lesson wants to check.
+This second slice defines the development tools the lesson wants to probe for.
 
-### `exec.LookPath(tool.name)`
+### `exec.LookPath(...)`
 
-This asks the operating system whether a tool is available on the command path.
-
-If the tool is found, the lesson prints where it lives.
-If it is missing, the lesson prints a helpful note instead.
+This asks the operating system whether a tool exists on the current `PATH`.
 
 ### `fmt.Println("NEXT UP: LB.1 variables")`
 
-The footer connects this section to the next learning surface.
-It tells the learner they are leaving setup and moving toward language fundamentals.
+The footer marks the transition from setup into language fundamentals.
 
 ## Try It
 
-1. Run `go fmt ./...` in the repo root after reading this lesson.
-2. Run `go build ./...` in the repo root and see whether the command finishes quietly.
-3. Temporarily add a fake tool name to the tool list and inspect the "not found" branch.
+1. Run `go fmt ./...` from the repo root.
+2. Run `go build ./...` and notice that success is usually quiet.
+3. Add a fake tool name to the list and inspect the "not found" branch.
 
-## Common Questions
+## ⚠️ In Production
 
-- Why is `go fmt` such a big deal in Go?
-  Because Go intentionally uses one standard formatting style so teams do not waste energy arguing
-  about formatting rules.
+Reliable teams do not guess at their command loop. They use the same format-build-test rhythm locally, in CI, and in release pipelines so surprises show up early instead of late.
 
-- Why can `go build` finish with no output?
-  In Go, a successful build often says nothing. Silence usually means success.
+## 🤔 Thinking Questions
+
+1. Why does Go treat formatting as a command instead of a personal style choice?
+2. What different problems do `go build` and `go test` solve?
+3. Why is checking the `PATH` part of environment confidence?
 
 ## Next Step
 
-Continue to `LB.1` variables once `02-language-basics` is rebuilt, or move through the currently
-available canonical foundations path from `03-control-flow` onward.
+Continue to `LB.1` variables.

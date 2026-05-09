@@ -18,6 +18,11 @@ Think of a vending machine that returns items in generic boxes. You know it migh
 
 ## Visual Model
 
+```mermaid
+graph TD
+    A["data"] --> B["type definition"]
+    B --> C["methods or interface behavior"]
+```
 ```go
 // Basic type assertion
 var i interface{} = "hello"
@@ -57,10 +62,14 @@ Use `value.(type)` inside a switch to handle multiple types.
 2. Use comma-ok to safely handle failed assertions.
 3. Combine type assertions with type switches.
 
-## Production Relevance
-
+## ⚠️ In Production
 Type assertions are used when reading from generic containers, handling dynamic data, and working with interface types from external sources.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `TI.13` nil interfaces.

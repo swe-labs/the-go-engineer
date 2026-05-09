@@ -24,6 +24,11 @@ That makes slicing cheap, but it also means two slices can still touch the same 
 
 ## Visual Model
 
+```mermaid
+graph TD
+    A["many values"] --> B["one collection type"]
+    B --> C["read or update by position or key"]
+```
 ```text
 original := [0 1 2 3 4 5]
 shared   := original[1:4]
@@ -131,11 +136,15 @@ This final mutation proves the new slice no longer shares storage with the origi
 - How do I avoid accidental sharing?
   Copy the values into a new slice before making independent changes.
 
-## Production Relevance
-
+## ⚠️ In Production
 This lesson prevents one of the most common slice bugs in Go: changing shared data accidentally
 because two slices still point at the same backing array.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `DS.6` contact directory.

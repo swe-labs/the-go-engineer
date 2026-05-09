@@ -14,7 +14,7 @@
         "HC.1"
       ],
       "outputs": [
-        "HC.5"
+        "HC.8"
       ],
       "prerequisites": []
     },
@@ -343,6 +343,66 @@
         "HC.4"
       ],
       "run_command": "go run ./00-how-computers-work/5-os-processes",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HC.6"
+      ]
+    },
+    {
+      "id": "HC.6",
+      "section_id": "s00",
+      "slug": "cpu-cache-and-performance",
+      "title": "CPU cache and performance",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "00-how-computers-work/6-cpu-cache-and-performance",
+      "prerequisites": [
+        "HC.5"
+      ],
+      "run_command": "go run ./00-how-computers-work/6-cpu-cache-and-performance",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HC.7"
+      ]
+    },
+    {
+      "id": "HC.7",
+      "section_id": "s00",
+      "slug": "syscalls",
+      "title": "Syscalls",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "00-how-computers-work/7-syscalls",
+      "prerequisites": [
+        "HC.6"
+      ],
+      "run_command": "go run ./00-how-computers-work/7-syscalls",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "HC.8"
+      ]
+    },
+    {
+      "id": "HC.8",
+      "section_id": "s00",
+      "slug": "blocking-vs-non-blocking-io",
+      "title": "Blocking vs non-blocking I/O",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "verification_mode": "run",
+      "path": "00-how-computers-work/8-blocking-vs-non-blocking-io",
+      "prerequisites": [
+        "HC.7"
+      ],
+      "run_command": "go run ./00-how-computers-work/8-blocking-vs-non-blocking-io",
       "test_command": "",
       "starter_path": "",
       "next_items": [

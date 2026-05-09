@@ -14,10 +14,15 @@ You have learned about interfaces with specific methods. But sometimes you need 
 
 ## Mental Model
 
-Think of a moving box. A specialized box might only hold books, or only clothes. But a "any" box can hold anything—dishes, clothes, books, toys. The empty interface is like that flexible box.
+Think of a moving box. A specialized box might only hold books, or only clothes. But a "any" box can hold anythingâ€”dishes, clothes, books, toys. The empty interface is like that flexible box.
 
 ## Visual Model
 
+```mermaid
+graph TD
+    A["data"] --> B["type definition"]
+    B --> C["methods or interface behavior"]
+```
 ```text
 // These are equivalent:
 interface{}
@@ -68,10 +73,14 @@ JSON decoding, printing debug info, logging any value.
 - Is interface{} the same as any?
   Yes, in Go 1.18+, `any` is an alias for `interface{}`.
 
-## Production Relevance
-
+## ⚠️ In Production
 Empty interface is used in JSON decoding (encoding/json), reflection, and generic logging utilities.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `TI.12` type assertions.

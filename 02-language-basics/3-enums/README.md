@@ -2,27 +2,7 @@
 
 ## Mission
 
-Learn how Go creates enum-like values using iota, and understand type-safe enums.
-
-Go does not have an `enum` keyword. Instead, it uses constants with iota for enum-like behavior.
-
-## Why This Lesson Exists Now
-
-After variables and constants, the next question is: "How do I represent a fixed set of related values?"
-
-Real programs need to model things like log levels (debug, info, error), HTTP status categories, or user roles. In other languages, you might use enums. Go uses `iota` with named types.
-
-This lesson builds on `LB.2` by showing how to create ordered, related constants that are type-safe.
-
-## Production Relevance
-
-In production Go code, iota and type-safe enums matter because:
-
-- **Type safety**: A named type like `LogLevel` prevents passing random integers where a log level is expected
-- **Organization**: iota auto-increments, so adding new values is easy and error-free
-- **Readability**: String() methods make debug output human-readable
-
-Real services use enums for log levels, HTTP methods, status codes, and configuration modes.
+Learn how Go models enum-like values with named types and `iota`.
 
 ## Prerequisites
 
@@ -30,38 +10,27 @@ Real services use enums for log levels, HTTP methods, status codes, and configur
 
 ## Mental Model
 
-`iota` is a special constant generator that produces sequential integers.
+Go does not have an `enum` keyword. Instead, it combines:
 
-Inside a `const` block:
-- First constant gets iota = 0
-- Each subsequent constant gets iota + 1
-- iota resets to 0 at each new const block
+- a named type
+- a `const` block
+- `iota` for ordered values
+
+That gives you fixed related values with type safety.
 
 ## Visual Model
 
-```text
-const (
-    Red   = iota  // 0
-    Blue           // 1
-    Green          // 2
-)
-```
-
-```text
-type LogLevel int
-
-const (
-    LogError = iota  // 0
-    LogWarn          // 1
-    LogInfo          // 2
-)
+```mermaid
+graph TD
+    A["type LogLevel int"] --> B["const block with iota"]
+    B --> C["LogError = 0"]
+    B --> D["LogWarn = 1"]
+    B --> E["LogInfo = 2"]
 ```
 
 ## Machine View
 
-iota generates numeric constants automatically. For production code, wrap them in a named type for type safety.
-
-When you create a custom type like `type LogLevel int`, the compiler prevents passing random integers where a LogLevel is expected.
+`iota` generates sequential constant values during compilation. Wrapping those values in a named type lets the compiler distinguish a `LogLevel` from an ordinary `int`.
 
 ## Run Instructions
 
@@ -71,36 +40,38 @@ go run ./02-language-basics/3-enums
 
 ## Code Walkthrough
 
-### `const ( Sunday = iota + 1 ... )`
-
-This starts iota at 1 instead of 0. Useful when 0 should mean "unset".
-
 ### `type LogLevel int`
 
-This creates a named type. It provides type safety over raw integers.
+This creates a distinct named type backed by `int`.
 
-### `const ( LogError LogLevel = iota ... )`
+### `const ( ... = iota )`
 
-This attaches iota constants to the named type. Now you have type-safe enums.
+Inside the block, `iota` starts at `0` and increments by one for each new constant line.
+
+### `iota + 1`
+
+This pattern is useful when `0` should mean "unset" or "invalid" instead of a real value.
 
 ### `func (l LogLevel) String() string`
 
-This implements the stringer interface so fmt.Println prints readable names like "ERROR" instead of "0".
+The method converts numeric enum values into readable text for output and debugging.
 
 ## Try It
 
-1. Add a new log level to the enum and see the value auto-increment.
-2. Create a custom type for a different enum.
-3. Print an invalid enum value and see the default case.
+1. Add another enum value and watch `iota` keep counting.
+2. Create a second named type with its own `const` block.
+3. Print an invalid enum value and inspect the fallback text.
 
-## Common Questions
+## ⚠️ In Production
 
-- Why doesn't Go have enums?
-  - Go prefers simplicity. iota with named types achieves the same goal with less syntax.
+Named enum-like values show up everywhere in Go code: log levels, modes, categories, states, and protocol values. The combination of `iota`, named types, and string conversion keeps those values readable and hard to misuse.
 
-- When should I use iota+1 instead of iota?
-  - When 0 should represent "unset" or "invalid" rather than a valid enum value.
+## 🤔 Thinking Questions
+
+1. Why is a named type safer than using raw integers for categories?
+2. When is `iota + 1` a better choice than plain `iota`?
+3. Why is a `String()` method helpful even though the underlying value is still numeric?
 
 ## Next Step
 
-Continue to `LB.4` application logger exercise.
+Continue to `LB.4` application logger.

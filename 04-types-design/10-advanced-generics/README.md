@@ -18,6 +18,11 @@ Think of this lesson as the "extra tools" drawer after you already know how to u
 
 ## Visual Model
 
+```mermaid
+graph TD
+    A["data"] --> B["type definition"]
+    B --> C["methods or interface behavior"]
+```
 ```text
 []User --Filter--> []User
 []User --Map-----> []string
@@ -62,10 +67,14 @@ The User struct demonstrates how generic functions work with custom types, not j
 2. Add a new Map transform (e.g., extract email addresses).
 3. Create a different struct type and use Filter/Map with it.
 
-## Production Relevance
-
+## ⚠️ In Production
 Generic utilities like Filter and Map are common in real Go codebases. Understanding how to write and use them improves code reusability.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `TI.11` empty interface if you want to keep exploring the optional stretch path.

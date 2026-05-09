@@ -2,78 +2,95 @@
 
 ## Mission
 
-Build a small config parser that turns `.env`-style text into structured data and then renders a
-stable summary from that data.
-
-This exercise is the Section 07 milestone.
-It is where string helpers, regex parsing, scanner-based reading, and template-driven output come
-together in one runnable artifact with tests.
+Build a small config parser that turns `.env`-style text into structured data and renders a stable summary from that data.
 
 ## Prerequisites
-
-Complete these first:
 
 - `ST.1` strings
 - `ST.2` formatting
 - `ST.4` regex
 - `ST.5` text templates
 
-## What You Will Build
+## Mental Model
 
-Implement a small config parser that:
+This milestone is a text-processing pipeline:
 
-1. reads multi-line config content with `bufio.Scanner`
-2. uses one compiled regex to parse key-value lines
-3. ignores blank lines and comments
-4. stores parsed values in a `map[string]string`
-5. renders a stable summary using `text/template`
-6. passes the provided parsing tests
+- read input line by line
+- parse valid key-value lines
+- ignore comments and blanks
+- store structured data
+- render predictable output
 
-## Files
+It turns the earlier string tools into one end-to-end flow.
 
-- [main.go](./main.go): complete solution with teaching comments
-- [parser_test.go](./parser_test.go): tests for the parsing contract
-- [_starter/main.go](./_starter/main.go): starter file with TODOs and requirements
+## Visual Model
+
+```mermaid
+graph LR
+    A["raw config text"] --> B["Scanner"]
+    B --> C["regex parse"]
+    C --> D["map[string]string"]
+    D --> E["text/template output"]
+```
+
+## Machine View
+
+The parser scans bytes into lines, applies one compiled regular expression to each candidate line, stores results in a map, and then executes a template to produce output. The regex should be compiled once, not rebuilt during each loop iteration.
 
 ## Run Instructions
 
-Run the completed solution:
-
 ```bash
 go run ./06-strings-and-text/6-config-parser
-```
-
-Run the tests:
-
-```bash
+go run ./06-strings-and-text/6-config-parser/_starter
 go test ./06-strings-and-text/6-config-parser
 ```
 
-Run the starter:
+## Solution Walkthrough
+
+### `bufio.Scanner`
+
+The scanner turns one multi-line input string into a sequence of lines the parser can process incrementally.
+
+### Compiled regex
+
+The regex captures valid key-value lines and keeps the parsing rule centralized.
+
+### Skip comments and blanks
+
+Ignoring non-data lines keeps the parser focused and predictable.
+
+### `map[string]string`
+
+The parsed config values are stored in a lookup-friendly structure.
+
+### `text/template`
+
+Template rendering keeps the final output stable and easier to maintain than scattered print statements.
+
+## Try It
+
+1. Add another valid config line and inspect the rendered output.
+2. Add a malformed line and verify the parser reports an error.
+3. Change the template and rerun the program.
+
+## Verification Surface
 
 ```bash
+go run ./06-strings-and-text/6-config-parser
 go run ./06-strings-and-text/6-config-parser/_starter
+go test ./06-strings-and-text/6-config-parser
 ```
 
-## Success Criteria
+## ⚠️ In Production
 
-Your finished solution should:
+Config parsing is exactly where text bugs become system bugs. Poor parsing rules, unstable output, and ad hoc string handling lead to silent misconfiguration and painful incident debugging.
 
-- compile the regex once instead of rebuilding it inside the scan loop
-- parse quoted and unquoted values into a map cleanly
-- skip comments and empty lines without special-case chaos
-- return malformed config lines as errors instead of printing from the parser
-- render output through a template instead of scattered print statements
-- pass the provided tests
+## 🤔 Thinking Questions
 
-## Common Failure Modes
-
-- compiling the regex on every line
-- splitting on `=` blindly and breaking quoted values
-- treating the map output order as stable without sorting before rendering
-- printing ad hoc output instead of using a template for the final summary
+1. Why is compiling the regex once better than compiling it inside the scan loop?
+2. What advantage does a map provide after parsing?
+3. Why is template-based rendering safer than manual scattered output?
 
 ## Next Step
 
-After you complete this exercise, continue to [Section 08](../../05-packages-io/01-modules-and-packages) if you
-are ready to move on.
+Continue to the next package and I/O section after strings and text.

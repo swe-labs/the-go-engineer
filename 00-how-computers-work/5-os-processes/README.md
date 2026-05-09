@@ -1,46 +1,72 @@
 # HC.5 How the OS Manages Processes
 
 ## Mission
-Understand that your Go program runs inside an OS process, interacting with the system through signals, file descriptors, and isolated memory.
+
+Understand that your Go program runs inside an operating-system process with its own memory view, file descriptors, signals, and scheduling.
 
 ## Prerequisites
-- `HC.4` Terminal Confidence
+
+- `HC.4` terminal confidence
 
 ## Mental Model
-A process is a sandbox given to your program by the OS. It has its own private memory (virtual memory), its own file descriptors (ways to talk to the outside world), and it can receive messages (signals) from the OS.
+
+A process is a sandbox the OS gives to a running program.
+It feels like the program has its own machine, even though the OS is sharing real hardware with many other processes.
 
 ## Visual Model
+
 ```mermaid
 graph TD
-    A[Operating System] -->|Schedules| B[Process A - Go Server]
-    A -->|Schedules| C[Process B - Database]
-    B -->|Contains| D[Goroutines]
-    B -->|Receives| E[Signals like SIGTERM]
-    B -->|Uses| F[File Descriptors]
+    A["Operating system"] --> B["Process A"]
+    A --> C["Process B"]
+    B --> D["Virtual memory"]
+    B --> E["Threads / goroutines"]
+    B --> F["File descriptors"]
+    A --> G["Signals and scheduling"]
 ```
 
 ## Machine View
-The OS translates virtual memory addresses to physical memory, ensuring processes cannot corrupt each other. It uses preemptive multitasking to share CPU cores. It communicates with processes using signals (e.g., SIGTERM to shut down, SIGINT for Ctrl+C).
+
+An OS process includes more than just your code:
+
+- virtual memory
+- CPU execution state
+- open file descriptors
+- environment variables
+- identity like PID and parent PID
+
+The OS scheduler decides when a process or thread runs.
+Signals like `SIGINT` and `SIGTERM` let the OS or the terminal communicate with that process asynchronously.
 
 ## Run Instructions
+
 ```bash
 go run ./00-how-computers-work/5-os-processes
 ```
 
 ## Code Walkthrough
-In `main.go`, we print the Process ID (PID) of the current program. This demonstrates that the Go runtime is just executing within a standard OS process.
+
+The lesson prints the current process ID.
+That is enough to make one key truth visible: your Go program is not special to the OS.
+It is just another process the OS launched and tracks.
 
 ## Try It
-1. Run the program and note the PID it prints.
-2. In another terminal, try to find that process using `ps aux | grep <PID>` (you have to be quick!).
+
+1. Run the lesson and note the PID it prints.
+2. In another terminal, find that PID with your platform's process tools.
+3. Press `Ctrl+C` on a long-running foreground program and explain which signal the terminal sent.
 
 ## ⚠️ In Production
-**Your deployed Go service is a process.** When Kubernetes wants to restart your service, it sends `SIGTERM`. If your service doesn't gracefully shut down within the timeout, it gets `SIGKILL` — which can corrupt in-flight requests. File descriptor limits (e.g., too many open network connections) can also crash production servers.
+
+Your deployed service is a process.
+Graceful shutdown, open-connection limits, and signal handling all depend on understanding that fact.
 
 ## 🤔 Thinking Questions
-1. Your Go HTTP server receives `SIGKILL` in the middle of processing a payment. The money was debited but the order wasn't created. What's the consequence? How might you design against this?
-2. Every goroutine has its own stack but shares the heap. What does this mean for data safety? What kinds of bugs become possible?
-3. If the OS can preempt your process at any time (even in the middle of a statement), what implications does this have for concurrent code that modifies shared data?
+
+1. Why does virtual memory make it harder for one buggy process to corrupt another?
+2. What is the difference between an OS thread and a Go goroutine?
+3. What problems appear if a process never closes file descriptors it no longer needs?
 
 ## Next Step
-[GT.1 Installation](../../01-getting-started/1-installation)
+
+Continue to [HC.6 CPU Cache and Performance](../6-cpu-cache-and-performance).

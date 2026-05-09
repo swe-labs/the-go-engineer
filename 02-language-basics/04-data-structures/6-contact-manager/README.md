@@ -2,25 +2,9 @@
 
 ## Mission
 
-Build a small in-memory contact directory that turns the `04-data-structures` lessons into one coherent runnable exercise.
-
-This is the `04-data-structures` milestone.
-It is where slices, maps, and pointers come together without depending on later-section abstractions like helper-function design or struct-heavy modeling.
-
-## Why This Milestone Exists
-
-The earlier lessons each taught one data structure in isolation:
-- Arrays for fixed-size collections
-- Slices for dynamic collections
-- Maps for keyed lookup
-- Pointers for direct mutation
-- Slice sharing for understanding capacity
-
-Now you combine them. This mirrors real development: you rarely use just one data structure.
+Build a small in-memory contact directory that combines slices, maps, and pointers in one runnable milestone.
 
 ## Prerequisites
-
-Complete these first:
 
 - `DS.1` arrays
 - `DS.2` slices
@@ -28,201 +12,84 @@ Complete these first:
 - `DS.4` pointers
 - `DS.5` slice sharing and capacity
 
-## What You Will Build
+## Mental Model
 
-Implement a small contact directory that:
+This exercise uses three data-structure roles together:
 
-1. stores names, emails, and phone numbers in parallel slices
-2. uses a map for efficient name lookup
-3. updates stored data through a pointer to a slice element
-4. prints a small demonstration flow in `main()`
-5. stays inside the concepts already taught in `04-data-structures`
+- slices store ordered contact data
+- a map turns names into positions
+- a pointer updates a stored value in place
+
+The point is not realistic app architecture yet. The point is understanding how these structures cooperate.
 
 ## Visual Model
 
-```text
-index  name               email                phone
-0      Alice Wonderland  alice@example.com    111-2222
-1      Bob The Builder   bob@example.com      333-4444
-2      Charlie Brown     charlie@example.com  555-6666
+```mermaid
+graph LR
+    A["name"] --> B["map lookup"]
+    B --> C["index"]
+    C --> D["parallel slices"]
+    D --> E["pointer update persists"]
 ```
 
-```text
-indexByName
+## Machine View
 
-"Alice Wonderland" -> 0
-"Bob The Builder"  -> 1
-"Charlie Brown"    -> 2
-```
-
-## Why This Milestone Avoids Structs
-
-Structs matter, but they belong to a later section.
-
-This milestone is intentionally simpler than a real application because the goal here is to prove
-that the learner understands slices, maps, pointers, shared indexing, and persistent updates before
-adding new modeling tools.
-
-## Files
-
-- [main.go](./main.go): complete runnable solution
-- [_starter/main.go](./_starter/main.go): starter file with TODOs
+Slices hold backing arrays plus length and capacity metadata. The map stores indexes into those slices. When the code takes `&phones[index]`, it gets a direct reference to an element in the slice's underlying storage and mutates it in place.
 
 ## Run Instructions
 
-Run the completed solution:
-
 ```bash
 go run ./02-language-basics/04-data-structures/6-contact-manager
-```
-
-Run the starter scaffold:
-
-```bash
 go run ./02-language-basics/04-data-structures/6-contact-manager/_starter
-```
-
-Run the automated verification surface:
-
-```bash
 go test ./02-language-basics/04-data-structures/6-contact-manager
 ```
 
-## Recommended Learning Flow
-
-1. Read this README first.
-2. Open [_starter/main.go](./_starter/main.go) and list the pieces you need.
-3. Try to build the milestone yourself.
-4. Run the starter and your solution often.
-5. Compare your result with [main.go](./main.go) only after you have attempted the design.
-
 ## Solution Walkthrough
 
-The solution stays inside `04-data-structures` concepts on purpose.
+### Parallel slices
 
-### 1. Parallel slices set the storage model
+The solution stores names, emails, and phone numbers in separate slices that must stay index-aligned.
 
-The solution starts with:
+### `indexByName map[string]int`
 
-- `names`
-- `emails`
-- `phones`
+The map answers "where is this contact?" quickly by storing the slice index for each name.
 
-Each contact uses the same index in all three slices.
-That is why the first design rule is "keep the indices aligned."
+### Appending new contacts
 
-### 2. The map turns a name into an index
+Each new contact appends to all slices, then stores the new last index in the map.
 
-`indexByName` is a `map[string]int`.
+### Duplicate protection
 
-It does not store the contact data itself.
-It stores the slice position where that contact's data lives.
+The comma-ok map lookup guards against accidentally creating the same contact twice.
 
-That lets the solution answer:
+### Pointer-based update
 
-- "Where is Bob?"
-
-before it answers:
-
-- "What is Bob's phone number?"
-
-### 3. Each append must keep all slices in sync
-
-When the solution adds Alice, Bob, and Charlie, it appends to:
-
-- `names`
-- `emails`
-- `phones`
-
-Then it stores `len(names) - 1` in the map.
-
-That line matters because the newly added contact always lands at the last valid index.
-
-### 4. The duplicate check uses the map first
-
-The duplicate guard asks:
-
-```go
-if _, exists := indexByName["Alice Wonderland"]; exists {
-```
-
-This uses the comma-ok pattern from the maps lesson.
-It avoids creating a second contact entry with the same name.
-
-### 5. Listing proves the shared index model
-
-The `for i := 0; i < len(names); i++ { ... }` loop is deliberately simple.
-
-It prints:
-
-- `names[i]`
-- `emails[i]`
-- `phones[i]`
-
-side by side so the learner can see that one contact is really "one index across several slices."
-
-### 6. Pointer-based update is the real milestone proof
-
-The important sequence is:
-
-1. use the map to get Bob's index
-2. take `&phones[bobIndex]`
-3. write through that pointer
-4. read the slice again to prove the update persisted
-
-That is the exact `04-data-structures` idea chain:
-
-- maps find the right position
-- slices hold the stored values
-- pointers let the update stick
-
-### 7. Missing lookup still uses comma-ok
-
-The final `Zack` check reminds the learner that not every key exists.
-The map lesson still matters here, even inside the milestone.
+The important milestone step is taking a pointer to a slice element and proving that the update persists after the write.
 
 ## Try It
 
-1. Add one more contact and update the map with the new index.
-2. Change the contact you update from Bob to Charlie.
-3. Break the alignment on purpose by skipping one append, then explain why the output becomes wrong.
-4. Change the duplicate check to another name and watch how the guard behaves.
-
-## Success Criteria
-
-Your finished solution should:
-
-- add and retrieve contact data safely
-- show at least one update that persists correctly
-- keep the flow simple enough that the data-structure choices are visible
-- avoid hiding the exercise behind helper functions that belong more naturally to
-  `05-functions-and-errors`
-
-## Common Failure Modes
-
-- appending to a slice without reusing the updated slice value
-- using a pointer before you are sure the lookup index exists
-- letting one contact's slice positions drift out of sync with the others
-- hiding the data-structure lesson under architecture that has not been taught yet
+1. Add another contact and update the map with the correct index.
+2. Change the pointer-based update from Bob to another contact.
+3. Intentionally break slice alignment and explain why the output becomes wrong.
 
 ## Verification Surface
 
-Use these three proof surfaces together:
+```bash
+go run ./02-language-basics/04-data-structures/6-contact-manager
+go run ./02-language-basics/04-data-structures/6-contact-manager/_starter
+go test ./02-language-basics/04-data-structures/6-contact-manager
+```
 
-1. `go run ./02-language-basics/04-data-structures/6-contact-manager`
-2. `go run ./02-language-basics/04-data-structures/6-contact-manager/_starter`
-3. `go test ./02-language-basics/04-data-structures/6-contact-manager`
+## ⚠️ In Production
 
-The tests are not the lesson.
-They are a confidence check that the visible milestone behavior still matches the README contract.
+Real systems constantly combine indexed storage, keyed lookup, and in-place mutation. Understanding how those pieces interact is what keeps updates correct and shared state understandable.
 
-## Questions This Milestone Should Answer
+## 🤔 Thinking Questions
 
-- Why use slices and a map together instead of only one of them?
-- Why is the map value an index instead of a phone number?
-- Why does taking `&phones[index]` let the update persist?
-- Why does this milestone stop before structs and helper functions?
+1. Why does the map store indexes instead of the phone numbers directly?
+2. What invariant must stay true for the parallel slices to remain correct?
+3. Why does updating through a pointer change the stored slice value?
 
 ## Next Step
 
-After this milestone, continue to `05-functions-and-errors`.
+Continue to `FE.1` functions basics.

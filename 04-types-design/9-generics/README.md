@@ -15,10 +15,15 @@ You have interfaces for behavior abstraction. But sometimes you need to write ut
 
 ## Mental Model
 
-Think of a vending machine. It does not care if it dispenses sodas, snacks, or toys—the mechanism is the same. The "type parameter" is what is in each slot. The "constraint" says "must fit in the slot."
+Think of a vending machine. It does not care if it dispenses sodas, snacks, or toysâ€”the mechanism is the same. The "type parameter" is what is in each slot. The "constraint" says "must fit in the slot."
 
 ## Visual Model
 
+```mermaid
+graph TD
+    A["data"] --> B["type definition"]
+    B --> C["methods or interface behavior"]
+```
 This diagram shows the generic function signature:
 
 - `Sum` is the function name
@@ -28,7 +33,7 @@ This diagram shows the generic function signature:
 
 ## Machine View
 
-When you call `Sum([]int{1, 2, 3})`, the compiler replaces T with int everywhere in the function. This is called monomorphization—the generic code is compiled into specific versions for each type used.
+When you call `Sum([]int{1, 2, 3})`, the compiler replaces T with int everywhere in the function. This is called monomorphizationâ€”the generic code is compiled into specific versions for each type used.
 
 ## Run Instructions
 
@@ -66,12 +71,16 @@ The syntax `[T Numeric]` declares a type parameter T with constraint Numeric.
   Use generics for data structures and algorithms that work with multiple types. Use interfaces for behavior abstraction and polymorphism.
 
 - What is the performance impact?
-  Generics are monomorphized at compile time—no runtime overhead.
+  Generics are monomorphized at compile timeâ€”no runtime overhead.
 
-## Production Relevance
-
+## ⚠️ In Production
 Generics are essential for building reusable data structures (maps, slices, trees) and utility functions without code duplication.
 
+## 🤔 Thinking Questions
+
+1. What problem is this lesson trying to solve?
+2. What would change if you removed this idea from the program?
+3. Where do you expect to see this pattern again in real Go code?
 ## Next Step
 
 Continue to `TI.10` payroll processor project to use one small generic helper inside a larger interface-based exercise.
