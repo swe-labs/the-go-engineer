@@ -54,7 +54,9 @@ func TestFindIndexLogic(t *testing.T) {
 				indexByName[n] = i
 			}
 			got, ok := indexByName[tt.search]
-			if !ok { got = -1 }
+			if !ok {
+				got = -1
+			}
 			if got != tt.wantIndex {
 				t.Errorf("lookup = %v, want %v", got, tt.wantIndex)
 			}
