@@ -263,6 +263,19 @@ Demo credentials: `admin@demo.com` / `password123`
 
 All modules are now complete. The repository provides a fully integrated flagship backend demonstrating configuration, database, auth, workflow, async workers, cache, observability, and graceful shutdown.
 
+## Local Run Troubleshooting
+
+### Database Connection Refused
+If the server fails to start with a database connection error, ensure the PostgreSQL container is fully ready. Sometimes the server starts faster than the DB.
+- **Fix:** Wait 5-10 seconds and try again, or check logs with `docker-compose logs db`.
+
+### Missing Environment Variables
+Opslane requires a set of base configuration values to start. If you see "missing configuration" errors:
+- **Fix:** Use the `$env:` overrides listed in the **Run the Project** section, or ensure your local `.env` file is loaded.
+
+### Docker Desktop Issues (Mac/Windows)
+If `localhost:8080` is unreachable, ensure Docker Desktop is running and the ports are not being used by another application.
+
 ## Security Notes
 
 Opslane is production-shaped and intentionally educational. For security boundaries and reporting, see the docs folder for threat model, security policy, and known limitations.
