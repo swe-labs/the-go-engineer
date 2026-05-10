@@ -55,6 +55,14 @@ The built-in `comparable` constraint is a special interface satisfied by all typ
 func GetOrSet[K comparable, V any] (m map[K]V, key K, defaultVal V) V
 ```
 
+## Common Mistakes
+
+### Overly Broad Constraints (`any`)
+A common mistake is using `any` when your generic logic actually requires specific methods.
+- **The Bug:** Defining a function like `Save[T any]` with parameter `v T` but then trying to call `val.Serialize()` inside.
+- **The Result:** Compile-time error because `any` doesn't guarantee the `Serialize` method exists.
+- **The Fix:** Define a constraint interface that includes the `Serialize()` method.
+
 ## Try It
 
 ### Automated Tests
