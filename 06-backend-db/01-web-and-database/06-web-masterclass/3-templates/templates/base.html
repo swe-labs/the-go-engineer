@@ -1,0 +1,23 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}} — Go Web Masterclass</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2 { margin-bottom: 10px; }
+        .content { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    {{template "nav" .}}
+    <div class="content">
+        {{template "page" .}}
+    </div>
+    <footer><p>&copy; {{.Year}} Go Web Masterclass</p></footer>
+</body>
+</html>
+{{end}}

@@ -1,4 +1,4 @@
-# SY.4 Race Conditions: The Dark Side
+# GC.8 Race Conditions: The Dark Side
 
 ## Mission
 
@@ -6,7 +6,7 @@ Visualize the invisible: **Race Conditions**. Learn why concurrent access to sha
 
 ## Prerequisites
 
-- `SY.3` atomic-operations
+- `GC.0` through `GC.7`
 
 ## Mental Model
 
@@ -102,4 +102,4 @@ They might not show up on your local machine, but they will crash your productio
 
 ## Next Step
 
-Next: `SY.5` -> [`07-concurrency/01-concurrency/03-sync-primitives/05-goroutine-leaks`](../05-goroutine-leaks/README.md)
+We've seen the basics of Mutex and Atomic. Now let's dive deep into the full toolbox of synchronization primitives. Continue to [GC.9 Select Deep Dive](../09-select-deep-dive/README.md).

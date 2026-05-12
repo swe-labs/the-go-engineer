@@ -61,8 +61,8 @@ For web servers, always use `json.NewDecoder(r.Body).Decode(&v)` instead of read
 3. How does the Decoder know where one JSON object ends and the next one begins?
 
 > [!TIP]
-> You have mastered JSON, the standard for text-based data exchange. But sometimes you need to handle binary data or pass non-text values through text-only systems. In [Lesson 5: Base64](../../02-encoding/05-base64_encoding/README.md), you will learn how to encode and decode binary data using Base64.
+> You have mastered JSON, the standard for text-based data exchange. But sometimes you need to handle binary data or pass non-text values through text-only systems. In [Lesson 5: Base64](../../02-encoding/05-base64/README.md), you will learn how to encode and decode binary data using Base64.
 
 ## Next Step
 
-Next: `EN.5` -> [`05-packages-io/02-io-and-cli/02-encoding/05-base64_encoding`](../05-base64_encoding/README.md)
+Next: `EN.5` -> [`05-packages-io/02-io-and-cli/02-encoding/05-base64`](../05-base64/README.md)

@@ -13,7 +13,7 @@ JSON and stream-oriented decoding.
 | `EN.2` | Lesson | [JSON unmarshalling](./02-unmarshal) | Shows how JSON becomes Go values and where zero values can hide missing fields. | `EN.1` |
 | `EN.3` | Lesson | [JSON encoder](./03-encoder) | Teaches stream-oriented writing with `json.NewEncoder`. | `EN.1`, `EN.2` |
 | `EN.4` | Lesson | [JSON decoder](./04-decode) | Teaches stream-oriented reading with `json.NewDecoder`. | `EN.2`, `EN.3` |
-| `EN.5` | Lesson | [base64](./05-base64_encoding) | Adds binary-to-text transport encoding. | `EN.1` |
+| `EN.5` | Lesson | [base64](./05-base64) | Adds binary-to-text transport encoding. | `EN.1` |
 | `EN.6` | Exercise | [config parser](./06-config-parser) | Combines file I/O, JSON decoding, and validation in one milestone. | `EN.1`, `EN.2`, `EN.3`, `EN.4` |
 
 ## Suggested Order
