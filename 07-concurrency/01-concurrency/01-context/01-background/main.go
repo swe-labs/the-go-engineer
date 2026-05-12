@@ -8,7 +8,9 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Background and TODO fundamentals and practical application in Go.
+//   - Use context.Background() as the root of every context tree.
+//   - Use context.TODO() as a placeholder during migration.
+//   - Understand the four methods on the context.Context interface.
 //
 // WHY THIS MATTERS:
 //   - Background and TODO provides a structured approach to writing clean Go code.

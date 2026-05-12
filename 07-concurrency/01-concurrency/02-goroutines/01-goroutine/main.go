@@ -8,7 +8,9 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Goroutines fundamentals and practical application in Go.
+//   - Launch concurrent work using the go keyword.
+//   - Use sync.WaitGroup to coordinate goroutine completion.
+//   - Understand closure capture and why loop variables need copying.
 //
 // WHY THIS MATTERS:
 //   - Goroutines provides a structured approach to writing clean Go code.

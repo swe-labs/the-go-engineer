@@ -8,7 +8,9 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - CPU Profile fundamentals and practical application in Go.
+//   - Profile CPU usage using runtime/pprof to identify hot spots.
+//   - Compare slow and optimized implementations with before/after profiles.
+//   - Interpret pprof output to guide performance improvements.
 //
 // WHY THIS MATTERS:
 //   - CPU Profile provides a structured approach to writing clean Go code.

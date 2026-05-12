@@ -8,7 +8,9 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - WithTimeout and WithDeadline fundamentals and practical application in Go.
+//   - Set time limits on operations using context.WithTimeout() and context.WithDeadline().
+//   - Distinguish between DeadlineExceeded and Canceled errors.
+//   - Use timeouts to prevent unbounded blocking in production code.
 //
 // WHY THIS MATTERS:
 //   - WithTimeout and WithDeadline provides a structured approach to writing clean Go code.
