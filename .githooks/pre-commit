@@ -1,0 +1,26 @@
+#!/bin/sh
+# pre-commit hook: prevents commits with unformatted Go files.
+#
+# Runs gofmt on all staged .go files and rejects the commit if any
+# are unformatted.
+#
+# Install: git config core.hooksPath .githooks
+
+STAGED_GO=$(git diff --cached --name-only --diff-filter=ACMR | grep '\.go$' || true)
+
+if [ -z "$STAGED_GO" ]; then
+	exit 0
+fi
+
+UNFORMATTED=$(gofmt -l $STAGED_GO)
+
+if [ -n "$UNFORMATTED" ]; then
+	echo ""
+	echo "  ERROR: Unformatted Go files (run gofmt -w)"
+	echo ""
+	echo "$UNFORMATTED" | sed 's/^/    /'
+	echo ""
+	exit 1
+fi
+
+exit 0

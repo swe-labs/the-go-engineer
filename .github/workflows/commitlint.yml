@@ -1,0 +1,48 @@
+name: Commit Lint
+
+on:
+  pull_request:
+    branches: [main, release/v2]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  commitlint:
+    name: Check commit message format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Lint commit messages
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pattern = /^\[(FEAT|FIX|DOCS|TEST|CHORE|REFACTOR|SECURITY|RELEASE)\] .+/;
+            const { data: commits } = await github.rest.pulls.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            let failed = false;
+            for (const commit of commits) {
+              const msg = commit.commit.message.split('\n')[0];
+              if (msg.startsWith('Merge ')) continue;
+              if (!pattern.test(msg)) {
+                core.error(`Invalid commit message: ${commit.sha.slice(0, 7)} — ${msg}`);
+                core.info(`Expected: [TYPE] short description`);
+                core.info(`Allowed types: FEAT | FIX | DOCS | TEST | CHORE | REFACTOR | SECURITY | RELEASE`);
+                failed = true;
+              }
+            }
+
+            if (failed) {
+              core.setFailed('One or more commits have invalid message format.');
+            } else {
+              core.info('All commit messages match the required format.');
+            }
