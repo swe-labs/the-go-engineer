@@ -91,6 +91,13 @@ stopped
 2. What is the difference between `time.Sleep(1s)` and `<-time.After(1s)`?
 3. How can you use a `select` statement to listen to both a Ticker and a Cancellation Context?
 
+> [!NOTE]
+> Lessons TM.4 (random), TM.5 (scheduling), and TM.6 (timezone) exist as
+> exploratory content but are not part of the required curriculum path.
+> The mandatory sequence continues at
+> [TM.7](../7-reminder/README.md) which exercises the timer and ticker
+> concepts from this lesson.
+
 ## Next Step
 
 Next: `TM.7` -> [`07-concurrency/01-concurrency/time-and-scheduling/7-reminder`](../7-reminder/README.md)
