@@ -1,6 +1,10 @@
 # Opslane Makefile
 # Common development and operations commands
-
+#
+# Compatibility: This Makefile uses bash syntax ([[ ]], read -p, $( )).
+# On Windows, run with Git Bash, WSL, or MSYS2. PowerShell users may need
+# to run individual docker compose commands directly or use `wsl make <target>`.
+#
 # Colors for output
 RED = \033[0;31m
 GREEN = \033[0;32m
