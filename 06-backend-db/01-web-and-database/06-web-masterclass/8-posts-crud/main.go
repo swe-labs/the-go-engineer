@@ -139,13 +139,13 @@ func main() {
 	fmt.Println("  🚀 Server starting on http://localhost:8087")
 	fmt.Println()
 
-	log.Fatal(http.ListenAndServe(":8087", mux))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.9 -> 06-backend-db/01-web-and-database/06-web-masterclass/9-pagination")
 	fmt.Println("Current: MC.8 (posts-crud)")
 	fmt.Println("Previous: MC.7 (forms)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8087", mux))
 }
 
 func (app *application) handleCreate(w http.ResponseWriter, r *http.Request) {

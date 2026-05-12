@@ -59,13 +59,13 @@ func main() {
 	fmt.Println("  🚀 Server starting on http://localhost:8086")
 	fmt.Println()
 
-	log.Fatal(http.ListenAndServe(":8086", mux))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.8 -> 06-backend-db/01-web-and-database/06-web-masterclass/8-posts-crud")
 	fmt.Println("Current: MC.7 (forms)")
 	fmt.Println("Previous: MC.6 (authentication)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8086", mux))
 }
 
 func handleHome(w http.ResponseWriter, r *http.Request) {

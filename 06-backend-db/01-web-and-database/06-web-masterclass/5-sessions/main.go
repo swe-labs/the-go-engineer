@@ -75,13 +75,13 @@ func main() {
 	fmt.Println("  2. Visit http://localhost:8084/login (Login)")
 	fmt.Println("  3. Visit http://localhost:8084/secret (Access Granted)")
 
-	log.Fatal(http.ListenAndServe(":8084", mux))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.6 -> 06-backend-db/01-web-and-database/06-web-masterclass/6-auth")
 	fmt.Println("Current: MC.5 (sessions)")
 	fmt.Println("Previous: MC.4 (middleware)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8084", mux))
 }
 
 func (app *application) handleHome(w http.ResponseWriter, r *http.Request) {

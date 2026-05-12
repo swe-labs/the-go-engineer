@@ -98,13 +98,13 @@ func main() {
 	fmt.Println("  2. Type a message and hit Send.")
 	fmt.Println("  3. Watch the server echo it back instantly!")
 
-	log.Fatal(http.ListenAndServe(":8090", mux))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: GC.0 -> 07-concurrency/01-concurrency/02-goroutines/00-why-concurrency-exists")
 	fmt.Println("Current: MC.11 (websockets)")
 	fmt.Println("Previous: MC.10 (comments)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8090", mux))
 }
 
 func handleWebSocket(w http.ResponseWriter, r *http.Request) {

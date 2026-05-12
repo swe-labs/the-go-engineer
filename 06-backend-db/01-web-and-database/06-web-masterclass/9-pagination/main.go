@@ -117,11 +117,11 @@ func main() {
 	fmt.Println("    - http://localhost:8088/api/items?page=2")
 	fmt.Println("    - http://localhost:8088/api/items?page=11 (Last page)")
 
-	log.Fatal(http.ListenAndServe(":8088", mux))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.10 -> 06-backend-db/01-web-and-database/06-web-masterclass/10-comments")
 	fmt.Println("Current: MC.9 (pagination)")
 	fmt.Println("Previous: MC.8 (posts-crud)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8088", mux))
 }

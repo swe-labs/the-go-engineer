@@ -108,11 +108,11 @@ func main() {
 	fmt.Println()
 	fmt.Println("  Visit http://localhost:8089/api/comments to see the tree.")
 
-	log.Fatal(http.ListenAndServe(":8089", mux))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.11 -> 06-backend-db/01-web-and-database/06-web-masterclass/11-websockets")
 	fmt.Println("Current: MC.10 (comments)")
 	fmt.Println("Previous: MC.9 (pagination)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8089", mux))
 }

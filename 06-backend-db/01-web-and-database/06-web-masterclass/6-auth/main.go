@@ -86,13 +86,13 @@ func main() {
 	fmt.Println("  🚀 Server starting on http://localhost:8085")
 	fmt.Println()
 
-	log.Fatal(http.ListenAndServe(":8085", mux))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.7 -> 06-backend-db/01-web-and-database/06-web-masterclass/7-forms")
 	fmt.Println("Current: MC.6 (authentication)")
 	fmt.Println("Previous: MC.5 (sessions)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8085", mux))
 }
 
 func (app *application) handleRegister(w http.ResponseWriter, r *http.Request) {

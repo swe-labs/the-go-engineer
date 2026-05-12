@@ -76,13 +76,13 @@ func main() {
 	fmt.Println()
 
 	// 3. Start the server
-	log.Fatal(http.ListenAndServe(":8081", mux))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.3 -> 06-backend-db/01-web-and-database/06-web-masterclass/3-templates")
 	fmt.Println("Current: MC.2 (dependency-injection)")
 	fmt.Println("Previous: MC.1 (routing)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8081", mux))
 }
 
 // handleHome is a method on the *application struct.

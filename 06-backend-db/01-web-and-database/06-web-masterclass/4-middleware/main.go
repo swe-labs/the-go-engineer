@@ -62,13 +62,13 @@ func main() {
 	fmt.Println("  🚀 Server starting on http://localhost:8083")
 	fmt.Println()
 
-	log.Fatal(http.ListenAndServe(":8083", handler))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.5 -> 06-backend-db/01-web-and-database/06-web-masterclass/5-sessions")
 	fmt.Println("Current: MC.4 (middleware)")
 	fmt.Println("Previous: MC.3 (templates)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8083", handler))
 }
 
 // 1. Logger Middleware

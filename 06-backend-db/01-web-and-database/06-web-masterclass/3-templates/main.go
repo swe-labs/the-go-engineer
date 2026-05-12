@@ -87,13 +87,13 @@ func main() {
 	fmt.Println()
 
 	// 2. Start the server
-	log.Fatal(http.ListenAndServe(":8082", mux))
-
 	fmt.Println("\n---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.4 -> 06-backend-db/01-web-and-database/06-web-masterclass/4-middleware")
 	fmt.Println("Current: MC.3 (templates)")
 	fmt.Println("Previous: MC.2 (dependency-injection)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(":8082", mux))
 }
 
 func (app *application) handleHome(w http.ResponseWriter, r *http.Request) {
