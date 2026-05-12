@@ -12,9 +12,9 @@ This track belongs to [09 Architecture & Security](../README.md).
 
 | ID | Type | Surface | Why It Matters | Requires |
 | --- | --- | --- | --- | --- |
-| `PD.1` | Lesson | [naming](./1-naming) | Keeps package names readable and domain-specific. | entry |
-| `PD.2` | Lesson | [visibility](./2-visibility) | Uses export rules and `internal/` to tighten boundaries. | `PD.1` |
-| `PD.3` | Lesson | [project layout](./3-project-layout) | Chooses a layout that matches the real size of the system. | `PD.1`, `PD.2` |
+| `PD.1` | Lesson | [naming](./01-naming) | Keeps package names readable and domain-specific. | entry |
+| `PD.2` | Lesson | [visibility](./02-visibility) | Uses export rules and `internal/` to tighten boundaries. | `PD.1` |
+| `PD.3` | Lesson | [project layout](./03-project-layout) | Chooses a layout that matches the real size of the system. | `PD.1`, `PD.2` |
 
 ## Suggested Order
 
@@ -24,4 +24,4 @@ This track belongs to [09 Architecture & Security](../README.md).
 
 ## Next Step
 
-After `PD.3`, continue to [Architecture Patterns](../03-architecture-patterns/1-architecture-trade-offs) or return to the [09 Architecture & Security overview](../README.md).
+After `PD.3`, continue to [Architecture Patterns](../03-architecture-patterns/01-architecture-trade-offs) or return to the [09 Architecture & Security overview](../README.md).

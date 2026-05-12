@@ -15,8 +15,8 @@ By the end of this section, you will be able to:
 
 | Track | Path | Core Job |
 | --- | --- | --- |
-| `TE.1-TE.10` | [`./01-quality-and-performance/testing`](./01-quality-and-performance/testing) | unit tests, table-driven patterns, fuzzing, mocking, and integration tests |
-| `PR.1-PR.6` | [`./01-quality-and-performance/profiling`](./01-quality-and-performance/profiling) | benchmarks, CPU and memory profiling, trace reading, and escape analysis |
+| `TE.1-TE.10` | [`./01-quality-and-performance/02-testing`](./01-quality-and-performance/02-testing) | unit tests, table-driven patterns, fuzzing, mocking, and integration tests |
+| `PR.1-PR.6` | [`./01-quality-and-performance/01-profiling`](./01-quality-and-performance/01-profiling) | benchmarks, CPU and memory profiling, trace reading, and escape analysis |
 
 ## Why This Section Exists
 

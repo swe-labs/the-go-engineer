@@ -279,9 +279,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "00-how-computers-work/1-what-is-a-program",
+      "path": "00-how-computers-work/01-what-is-a-program",
       "prerequisites": [],
-      "run_command": "go run ./00-how-computers-work/1-what-is-a-program",
+      "run_command": "go run ./00-how-computers-work/01-what-is-a-program",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -298,11 +298,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "00-how-computers-work/2-code-to-execution",
+      "path": "00-how-computers-work/02-code-to-execution",
       "prerequisites": [
         "HC.1"
       ],
-      "run_command": "go run ./00-how-computers-work/2-code-to-execution",
+      "run_command": "go run ./00-how-computers-work/02-code-to-execution",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -319,11 +319,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "00-how-computers-work/3-memory-basics",
+      "path": "00-how-computers-work/03-memory-basics",
       "prerequisites": [
         "HC.2"
       ],
-      "run_command": "go run ./00-how-computers-work/3-memory-basics",
+      "run_command": "go run ./00-how-computers-work/03-memory-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -340,11 +340,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "00-how-computers-work/4-terminal-confidence",
+      "path": "00-how-computers-work/04-terminal-confidence",
       "prerequisites": [
         "HC.3"
       ],
-      "run_command": "go run ./00-how-computers-work/4-terminal-confidence",
+      "run_command": "go run ./00-how-computers-work/04-terminal-confidence",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -361,11 +361,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "00-how-computers-work/5-os-processes",
+      "path": "00-how-computers-work/05-os-processes",
       "prerequisites": [
         "HC.4"
       ],
-      "run_command": "go run ./00-how-computers-work/5-os-processes",
+      "run_command": "go run ./00-how-computers-work/05-os-processes",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -382,11 +382,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "01-getting-started/1-installation",
+      "path": "01-getting-started/01-installation",
       "prerequisites": [
         "HC.5"
       ],
-      "run_command": "go run ./01-getting-started/1-installation",
+      "run_command": "go run ./01-getting-started/01-installation",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -403,11 +403,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "01-getting-started/2-hello-world",
+      "path": "01-getting-started/02-hello-world",
       "prerequisites": [
         "GT.1"
       ],
-      "run_command": "go run ./01-getting-started/2-hello-world",
+      "run_command": "go run ./01-getting-started/02-hello-world",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -424,11 +424,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "01-getting-started/3-how-go-works",
+      "path": "01-getting-started/03-how-go-works",
       "prerequisites": [
         "GT.2"
       ],
-      "run_command": "go run ./01-getting-started/3-how-go-works",
+      "run_command": "go run ./01-getting-started/03-how-go-works",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -445,11 +445,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "01-getting-started/4-dev-environment",
+      "path": "01-getting-started/04-dev-environment",
       "prerequisites": [
         "GT.3"
       ],
-      "run_command": "go run ./01-getting-started/4-dev-environment",
+      "run_command": "go run ./01-getting-started/04-dev-environment",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -466,11 +466,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "01-getting-started/5-go-tools",
+      "path": "01-getting-started/05-go-tools",
       "prerequisites": [
         "GT.4"
       ],
-      "run_command": "go run ./01-getting-started/5-go-tools",
+      "run_command": "go run ./01-getting-started/05-go-tools",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -487,11 +487,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "01-getting-started/6-reading-compiler-errors",
+      "path": "01-getting-started/06-reading-compiler-errors",
       "prerequisites": [
         "GT.5"
       ],
-      "run_command": "go run ./01-getting-started/6-reading-compiler-errors",
+      "run_command": "go run ./01-getting-started/06-reading-compiler-errors",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -508,9 +508,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/1-variables",
+      "path": "02-language-basics/01-variables",
       "prerequisites": [],
-      "run_command": "go run ./02-language-basics/1-variables",
+      "run_command": "go run ./02-language-basics/01-variables",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -527,11 +527,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/2-constants",
+      "path": "02-language-basics/02-constants",
       "prerequisites": [
         "LB.1"
       ],
-      "run_command": "go run ./02-language-basics/2-constants",
+      "run_command": "go run ./02-language-basics/02-constants",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -548,9 +548,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/03-control-flow/1-if-else",
+      "path": "02-language-basics/03-control-flow/01-if-else",
       "prerequisites": [],
-      "run_command": "go run ./02-language-basics/03-control-flow/1-if-else",
+      "run_command": "go run ./02-language-basics/03-control-flow/01-if-else",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -567,11 +567,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/03-control-flow/2-for-basics",
+      "path": "02-language-basics/03-control-flow/02-for-basics",
       "prerequisites": [
         "CF.1"
       ],
-      "run_command": "go run ./02-language-basics/03-control-flow/2-for-basics",
+      "run_command": "go run ./02-language-basics/03-control-flow/02-for-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -588,11 +588,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/03-control-flow/3-break-continue",
+      "path": "02-language-basics/03-control-flow/03-break-continue",
       "prerequisites": [
         "CF.2"
       ],
-      "run_command": "go run ./02-language-basics/03-control-flow/3-break-continue",
+      "run_command": "go run ./02-language-basics/03-control-flow/03-break-continue",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -609,13 +609,13 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/03-control-flow/4-switch",
+      "path": "02-language-basics/03-control-flow/04-switch",
       "prerequisites": [
         "CF.1",
         "CF.2",
         "CF.3"
       ],
-      "run_command": "go run ./02-language-basics/03-control-flow/4-switch",
+      "run_command": "go run ./02-language-basics/03-control-flow/04-switch",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -632,11 +632,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/03-control-flow/5-defer-basics",
+      "path": "02-language-basics/03-control-flow/05-defer-basics",
       "prerequisites": [
         "CF.4"
       ],
-      "run_command": "go run ./02-language-basics/03-control-flow/5-defer-basics",
+      "run_command": "go run ./02-language-basics/03-control-flow/05-defer-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -653,11 +653,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/03-control-flow/6-defer-use-cases",
+      "path": "02-language-basics/03-control-flow/06-defer-use-cases",
       "prerequisites": [
         "CF.5"
       ],
-      "run_command": "go run ./02-language-basics/03-control-flow/6-defer-use-cases",
+      "run_command": "go run ./02-language-basics/03-control-flow/06-defer-use-cases",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -674,7 +674,7 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/03-control-flow/7-pricing-checkout",
+      "path": "02-language-basics/03-control-flow/07-pricing-checkout",
       "prerequisites": [
         "CF.1",
         "CF.2",
@@ -683,9 +683,9 @@
         "CF.5",
         "CF.6"
       ],
-      "run_command": "go run ./02-language-basics/03-control-flow/7-pricing-checkout",
-      "test_command": "go test ./02-language-basics/03-control-flow/7-pricing-checkout",
-      "starter_path": "02-language-basics/03-control-flow/7-pricing-checkout/_starter",
+      "run_command": "go run ./02-language-basics/03-control-flow/07-pricing-checkout",
+      "test_command": "go test ./02-language-basics/03-control-flow/07-pricing-checkout",
+      "starter_path": "02-language-basics/03-control-flow/07-pricing-checkout/_starter",
       "next_items": [
         "DS.1"
       ]
@@ -700,11 +700,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/3-enums",
+      "path": "02-language-basics/03-enums",
       "prerequisites": [
         "LB.2"
       ],
-      "run_command": "go run ./02-language-basics/3-enums",
+      "run_command": "go run ./02-language-basics/03-enums",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -721,15 +721,15 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/4-application-logger",
+      "path": "02-language-basics/04-application-logger",
       "prerequisites": [
         "LB.1",
         "LB.2",
         "LB.3"
       ],
-      "run_command": "go run ./02-language-basics/4-application-logger",
-      "test_command": "go test ./02-language-basics/4-application-logger",
-      "starter_path": "02-language-basics/4-application-logger/_starter",
+      "run_command": "go run ./02-language-basics/04-application-logger",
+      "test_command": "go test ./02-language-basics/04-application-logger",
+      "starter_path": "02-language-basics/04-application-logger/_starter",
       "next_items": [
         "CF.1"
       ]
@@ -744,9 +744,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/04-data-structures/1-array",
+      "path": "02-language-basics/04-data-structures/01-array",
       "prerequisites": [],
-      "run_command": "go run ./02-language-basics/04-data-structures/1-array",
+      "run_command": "go run ./02-language-basics/04-data-structures/01-array",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -763,11 +763,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/04-data-structures/2-slices",
+      "path": "02-language-basics/04-data-structures/02-slices",
       "prerequisites": [
         "DS.1"
       ],
-      "run_command": "go run ./02-language-basics/04-data-structures/2-slices",
+      "run_command": "go run ./02-language-basics/04-data-structures/02-slices",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -784,11 +784,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/04-data-structures/3-maps",
+      "path": "02-language-basics/04-data-structures/03-maps",
       "prerequisites": [
         "DS.2"
       ],
-      "run_command": "go run ./02-language-basics/04-data-structures/3-maps",
+      "run_command": "go run ./02-language-basics/04-data-structures/03-maps",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -805,12 +805,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/04-data-structures/4-pointers",
+      "path": "02-language-basics/04-data-structures/04-pointers",
       "prerequisites": [
         "DS.1",
         "DS.2"
       ],
-      "run_command": "go run ./02-language-basics/04-data-structures/4-pointers",
+      "run_command": "go run ./02-language-basics/04-data-structures/04-pointers",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -827,12 +827,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "02-language-basics/04-data-structures/5-slices-2",
+      "path": "02-language-basics/04-data-structures/05-slices-2",
       "prerequisites": [
         "DS.2",
         "DS.4"
       ],
-      "run_command": "go run ./02-language-basics/04-data-structures/5-slices-2",
+      "run_command": "go run ./02-language-basics/04-data-structures/05-slices-2",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -849,7 +849,7 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "mixed",
-      "path": "02-language-basics/04-data-structures/6-contact-manager",
+      "path": "02-language-basics/04-data-structures/06-contact-manager",
       "prerequisites": [
         "DS.1",
         "DS.2",
@@ -857,9 +857,9 @@
         "DS.4",
         "DS.5"
       ],
-      "run_command": "go run ./02-language-basics/04-data-structures/6-contact-manager",
-      "test_command": "go test ./02-language-basics/04-data-structures/6-contact-manager",
-      "starter_path": "02-language-basics/04-data-structures/6-contact-manager/_starter",
+      "run_command": "go run ./02-language-basics/04-data-structures/06-contact-manager",
+      "test_command": "go test ./02-language-basics/04-data-structures/06-contact-manager",
+      "starter_path": "02-language-basics/04-data-structures/06-contact-manager/_starter",
       "next_items": [
         "FE.1"
       ]
@@ -874,9 +874,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "03-functions-errors/1-functions-basics",
+      "path": "03-functions-errors/01-functions-basics",
       "prerequisites": [],
-      "run_command": "go run ./03-functions-errors/1-functions-basics",
+      "run_command": "go run ./03-functions-errors/01-functions-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -893,11 +893,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "03-functions-errors/2-parameters-and-returns",
+      "path": "03-functions-errors/02-parameters-and-returns",
       "prerequisites": [
         "FE.1"
       ],
-      "run_command": "go run ./03-functions-errors/2-parameters-and-returns",
+      "run_command": "go run ./03-functions-errors/02-parameters-and-returns",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -914,11 +914,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "03-functions-errors/3-multiple-return-values",
+      "path": "03-functions-errors/03-multiple-return-values",
       "prerequisites": [
         "FE.2"
       ],
-      "run_command": "go run ./03-functions-errors/3-multiple-return-values",
+      "run_command": "go run ./03-functions-errors/03-multiple-return-values",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -935,11 +935,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "03-functions-errors/4-errors-as-values",
+      "path": "03-functions-errors/04-errors-as-values",
       "prerequisites": [
         "FE.3"
       ],
-      "run_command": "go run ./03-functions-errors/4-errors-as-values",
+      "run_command": "go run ./03-functions-errors/04-errors-as-values",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -956,11 +956,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "03-functions-errors/5-validation",
+      "path": "03-functions-errors/05-validation",
       "prerequisites": [
         "FE.4"
       ],
-      "run_command": "go run ./03-functions-errors/5-validation",
+      "run_command": "go run ./03-functions-errors/05-validation",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -977,11 +977,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "03-functions-errors/6-orchestration",
+      "path": "03-functions-errors/06-orchestration",
       "prerequisites": [
         "FE.5"
       ],
-      "run_command": "go run ./03-functions-errors/6-orchestration",
+      "run_command": "go run ./03-functions-errors/06-orchestration",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -998,9 +998,9 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "03-functions-errors/7-first-class-functions",
+      "path": "03-functions-errors/07-first-class-functions",
       "prerequisites": [],
-      "run_command": "go run ./03-functions-errors/7-first-class-functions",
+      "run_command": "go run ./03-functions-errors/07-first-class-functions",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1017,11 +1017,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "03-functions-errors/8-closures-mechanics",
+      "path": "03-functions-errors/08-closures-mechanics",
       "prerequisites": [
         "FE.8"
       ],
-      "run_command": "go run ./03-functions-errors/8-closures-mechanics",
+      "run_command": "go run ./03-functions-errors/08-closures-mechanics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1038,7 +1038,7 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "mixed",
-      "path": "03-functions-errors/9-order-summary",
+      "path": "03-functions-errors/09-order-summary",
       "prerequisites": [
         "FE.1",
         "FE.2",
@@ -1049,9 +1049,9 @@
         "FE.8",
         "FE.9"
       ],
-      "run_command": "go run ./03-functions-errors/9-order-summary",
-      "test_command": "go test ./03-functions-errors/9-order-summary",
-      "starter_path": "03-functions-errors/9-order-summary/_starter",
+      "run_command": "go run ./03-functions-errors/09-order-summary",
+      "test_command": "go test ./03-functions-errors/09-order-summary",
+      "starter_path": "03-functions-errors/09-order-summary/_starter",
       "next_items": [
         "FE.10"
       ]
@@ -1087,9 +1087,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/1-struct",
+      "path": "04-types-design/01-struct",
       "prerequisites": [],
-      "run_command": "go run ./04-types-design/1-struct",
+      "run_command": "go run ./04-types-design/01-struct",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1106,11 +1106,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/2-methods",
+      "path": "04-types-design/02-methods",
       "prerequisites": [
         "TI.1"
       ],
-      "run_command": "go run ./04-types-design/2-methods",
+      "run_command": "go run ./04-types-design/02-methods",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1127,12 +1127,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/3-interfaces",
+      "path": "04-types-design/03-interfaces",
       "prerequisites": [
         "TI.1",
         "TI.2"
       ],
-      "run_command": "go run ./04-types-design/3-interfaces",
+      "run_command": "go run ./04-types-design/03-interfaces",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1149,11 +1149,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/4-interface-embedding",
+      "path": "04-types-design/04-interface-embedding",
       "prerequisites": [
         "TI.3"
       ],
-      "run_command": "go run ./04-types-design/4-interface-embedding",
+      "run_command": "go run ./04-types-design/04-interface-embedding",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1170,12 +1170,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/5-stringer",
+      "path": "04-types-design/05-stringer",
       "prerequisites": [
         "TI.2",
         "TI.3"
       ],
-      "run_command": "go run ./04-types-design/5-stringer",
+      "run_command": "go run ./04-types-design/05-stringer",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1192,11 +1192,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/6-type-switch",
+      "path": "04-types-design/06-type-switch",
       "prerequisites": [
         "TI.3"
       ],
-      "run_command": "go run ./04-types-design/6-type-switch",
+      "run_command": "go run ./04-types-design/06-type-switch",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1213,11 +1213,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/7-receiver-sets",
+      "path": "04-types-design/07-receiver-sets",
       "prerequisites": [
         "TI.2"
       ],
-      "run_command": "go run ./04-types-design/7-receiver-sets",
+      "run_command": "go run ./04-types-design/07-receiver-sets",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1234,12 +1234,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/8-custom-errors",
+      "path": "04-types-design/08-custom-errors",
       "prerequisites": [
         "TI.3",
         "TI.5"
       ],
-      "run_command": "go run ./04-types-design/8-custom-errors",
+      "run_command": "go run ./04-types-design/08-custom-errors",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1256,12 +1256,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "04-types-design/9-generics",
+      "path": "04-types-design/09-generics",
       "prerequisites": [
         "TI.3",
         "TI.4"
       ],
-      "run_command": "go run ./04-types-design/9-generics",
+      "run_command": "go run ./04-types-design/09-generics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1605,9 +1605,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/01-modules-and-packages/1-module-basics",
+      "path": "05-packages-io/01-modules-and-packages/01-module-basics",
       "prerequisites": [],
-      "run_command": "go run ./05-packages-io/01-modules-and-packages/1-module-basics",
+      "run_command": "go run ./05-packages-io/01-modules-and-packages/01-module-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1624,11 +1624,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/01-modules-and-packages/2-managing-deps",
+      "path": "05-packages-io/01-modules-and-packages/02-managing-deps",
       "prerequisites": [
         "MP.1"
       ],
-      "run_command": "go run ./05-packages-io/01-modules-and-packages/2-managing-deps",
+      "run_command": "go run ./05-packages-io/01-modules-and-packages/02-managing-deps",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1645,14 +1645,14 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "mixed",
-      "path": "05-packages-io/01-modules-and-packages/3-versioning",
+      "path": "05-packages-io/01-modules-and-packages/03-versioning",
       "prerequisites": [
         "MP.1",
         "MP.2"
       ],
-      "run_command": "go run ./05-packages-io/01-modules-and-packages/3-versioning",
-      "test_command": "go test ./05-packages-io/01-modules-and-packages/3-versioning",
-      "starter_path": "05-packages-io/01-modules-and-packages/3-versioning/_starter",
+      "run_command": "go run ./05-packages-io/01-modules-and-packages/03-versioning",
+      "test_command": "go test ./05-packages-io/01-modules-and-packages/03-versioning",
+      "starter_path": "05-packages-io/01-modules-and-packages/03-versioning/_starter",
       "next_items": [
         "MP.4"
       ]
@@ -1667,12 +1667,12 @@
       "level": "stretch",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/01-modules-and-packages/4-build-tags",
+      "path": "05-packages-io/01-modules-and-packages/04-build-tags",
       "prerequisites": [
         "MP.1",
         "MP.2"
       ],
-      "run_command": "go run ./05-packages-io/01-modules-and-packages/4-build-tags",
+      "run_command": "go run ./05-packages-io/01-modules-and-packages/04-build-tags",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1689,9 +1689,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/cli-tools/1-args",
+      "path": "05-packages-io/02-io-and-cli/01-cli-tools/01-args",
       "prerequisites": [],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/cli-tools/1-args",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/01-cli-tools/01-args",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1708,11 +1708,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/cli-tools/2-flags",
+      "path": "05-packages-io/02-io-and-cli/01-cli-tools/02-flags",
       "prerequisites": [
         "CL.1"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/cli-tools/2-flags",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/01-cli-tools/02-flags",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1729,12 +1729,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/cli-tools/3-subcommands",
+      "path": "05-packages-io/02-io-and-cli/01-cli-tools/03-subcommands",
       "prerequisites": [
         "CL.1",
         "CL.2"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/01-cli-tools/03-subcommands",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1751,15 +1751,15 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/cli-tools/4-file-organizer",
+      "path": "05-packages-io/02-io-and-cli/01-cli-tools/04-file-organizer",
       "prerequisites": [
         "CL.1",
         "CL.2",
         "CL.3"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer",
-      "test_command": "go test ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer",
-      "starter_path": "05-packages-io/02-io-and-cli/cli-tools/4-file-organizer/_starter",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/01-cli-tools/04-file-organizer",
+      "test_command": "go test ./05-packages-io/02-io-and-cli/01-cli-tools/04-file-organizer",
+      "starter_path": "05-packages-io/02-io-and-cli/01-cli-tools/04-file-organizer/_starter",
       "next_items": [
         "EN.1"
       ]
@@ -1774,9 +1774,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/encoding/1-marshalling",
+      "path": "05-packages-io/02-io-and-cli/02-encoding/01-marshalling",
       "prerequisites": [],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/encoding/1-marshalling",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/02-encoding/01-marshalling",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1793,11 +1793,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/encoding/2-unmarshal",
+      "path": "05-packages-io/02-io-and-cli/02-encoding/02-unmarshal",
       "prerequisites": [
         "EN.1"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/encoding/2-unmarshal",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/02-encoding/02-unmarshal",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1814,13 +1814,13 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/encoding/3-encoder",
+      "path": "05-packages-io/02-io-and-cli/02-encoding/03-encoder",
       "prerequisites": [
         "EN.1",
         "EN.2"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/encoding/3-encoder",
-      "test_command": "go test ./05-packages-io/02-io-and-cli/encoding/3-encoder",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/02-encoding/03-encoder",
+      "test_command": "go test ./05-packages-io/02-io-and-cli/02-encoding/03-encoder",
       "starter_path": "",
       "next_items": [
         "EN.4"
@@ -1836,12 +1836,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/encoding/4-decode",
+      "path": "05-packages-io/02-io-and-cli/02-encoding/04-decode",
       "prerequisites": [
         "EN.2",
         "EN.3"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/encoding/4-decode",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/02-encoding/04-decode",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1858,11 +1858,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/encoding/5-base64_encoding",
+      "path": "05-packages-io/02-io-and-cli/02-encoding/05-base64_encoding",
       "prerequisites": [
         "EN.1"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/encoding/5-base64_encoding",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/02-encoding/05-base64_encoding",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1879,16 +1879,16 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "mixed",
-      "path": "05-packages-io/02-io-and-cli/encoding/6-config-parser",
+      "path": "05-packages-io/02-io-and-cli/02-encoding/06-config-parser",
       "prerequisites": [
         "EN.1",
         "EN.2",
         "EN.3",
         "EN.4"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/encoding/6-config-parser",
-      "test_command": "go test ./05-packages-io/02-io-and-cli/encoding/6-config-parser",
-      "starter_path": "05-packages-io/02-io-and-cli/encoding/6-config-parser/_starter",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/02-encoding/06-config-parser",
+      "test_command": "go test ./05-packages-io/02-io-and-cli/02-encoding/06-config-parser",
+      "starter_path": "05-packages-io/02-io-and-cli/02-encoding/06-config-parser/_starter",
       "next_items": [
         "FS.1"
       ]
@@ -1903,9 +1903,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/filesystem/1-files",
+      "path": "05-packages-io/02-io-and-cli/03-filesystem/01-files",
       "prerequisites": [],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/filesystem/1-files",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/03-filesystem/01-files",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1922,11 +1922,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/filesystem/2-paths",
+      "path": "05-packages-io/02-io-and-cli/03-filesystem/02-paths",
       "prerequisites": [
         "FS.1"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/filesystem/2-paths",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/03-filesystem/02-paths",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1943,12 +1943,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/filesystem/3-dir",
+      "path": "05-packages-io/02-io-and-cli/03-filesystem/03-dir",
       "prerequisites": [
         "FS.1",
         "FS.2"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/filesystem/3-dir",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/03-filesystem/03-dir",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1965,12 +1965,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/filesystem/4-temp",
+      "path": "05-packages-io/02-io-and-cli/03-filesystem/04-temp",
       "prerequisites": [
         "FS.1",
         "FS.3"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/filesystem/4-temp",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/03-filesystem/04-temp",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -1987,12 +1987,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/filesystem/5-embed",
+      "path": "05-packages-io/02-io-and-cli/03-filesystem/05-embed",
       "prerequisites": [
         "FS.3",
         "FS.4"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/filesystem/5-embed",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/03-filesystem/05-embed",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2009,13 +2009,13 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/filesystem/6-io-patterns",
+      "path": "05-packages-io/02-io-and-cli/03-filesystem/06-io-patterns",
       "prerequisites": [
         "FS.1",
         "FS.2",
         "FS.3"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/filesystem/6-io-patterns",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/03-filesystem/06-io-patterns",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2032,16 +2032,16 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "mixed",
-      "path": "05-packages-io/02-io-and-cli/filesystem/7-log-search",
+      "path": "05-packages-io/02-io-and-cli/03-filesystem/07-log-search",
       "prerequisites": [
         "FS.1",
         "FS.2",
         "FS.3",
         "FS.6"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/filesystem/7-log-search",
-      "test_command": "go test ./05-packages-io/02-io-and-cli/filesystem/7-log-search",
-      "starter_path": "05-packages-io/02-io-and-cli/filesystem/7-log-search/_starter",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/03-filesystem/07-log-search",
+      "test_command": "go test ./05-packages-io/02-io-and-cli/03-filesystem/07-log-search",
+      "starter_path": "05-packages-io/02-io-and-cli/03-filesystem/07-log-search/_starter",
       "next_items": [
         "FS.8"
       ]
@@ -2056,13 +2056,13 @@
       "level": "stretch",
       "status": "implemented",
       "verification_mode": "mixed",
-      "path": "05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam",
+      "path": "05-packages-io/02-io-and-cli/03-filesystem/08-fs-testing-seam",
       "prerequisites": [
         "FS.5",
         "FS.6"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam",
-      "test_command": "go test ./05-packages-io/02-io-and-cli/filesystem/8-fs-testing-seam",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/03-filesystem/08-fs-testing-seam",
+      "test_command": "go test ./05-packages-io/02-io-and-cli/03-filesystem/08-fs-testing-seam",
       "starter_path": "",
       "next_items": [
         "HS.1"
@@ -2078,9 +2078,9 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/apis/1-rest-design-principles",
+      "path": "06-backend-db/01-web-and-database/01-apis/01-rest-design-principles",
       "prerequisites": [],
-      "run_command": "go run ./06-backend-db/01-web-and-database/apis/1-rest-design-principles",
+      "run_command": "go run ./06-backend-db/01-web-and-database/01-apis/01-rest-design-principles",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2097,11 +2097,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/apis/2-api-versioning-strategies",
+      "path": "06-backend-db/01-web-and-database/01-apis/02-api-versioning-strategies",
       "prerequisites": [
         "API.1"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/apis/2-api-versioning-strategies",
+      "run_command": "go run ./06-backend-db/01-web-and-database/01-apis/02-api-versioning-strategies",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2118,11 +2118,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/apis/3-pagination-and-filtering",
+      "path": "06-backend-db/01-web-and-database/01-apis/03-pagination-and-filtering",
       "prerequisites": [
         "API.2"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/apis/3-pagination-and-filtering",
+      "run_command": "go run ./06-backend-db/01-web-and-database/01-apis/03-pagination-and-filtering",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2139,11 +2139,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/apis/4-protobuf-basics",
+      "path": "06-backend-db/01-web-and-database/01-apis/04-protobuf-basics",
       "prerequisites": [
         "API.3"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/apis/4-protobuf-basics",
+      "run_command": "go run ./06-backend-db/01-web-and-database/01-apis/04-protobuf-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2160,11 +2160,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/apis/5-grpc-fundamentals",
+      "path": "06-backend-db/01-web-and-database/01-apis/05-grpc-fundamentals",
       "prerequisites": [
         "API.4"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/apis/5-grpc-fundamentals",
+      "run_command": "go run ./06-backend-db/01-web-and-database/01-apis/05-grpc-fundamentals",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2181,11 +2181,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/apis/6-grpc-streaming",
+      "path": "06-backend-db/01-web-and-database/01-apis/06-grpc-streaming",
       "prerequisites": [
         "API.5"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/apis/6-grpc-streaming",
+      "run_command": "go run ./06-backend-db/01-web-and-database/01-apis/06-grpc-streaming",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2202,11 +2202,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/apis/7-grpc-interceptors",
+      "path": "06-backend-db/01-web-and-database/01-apis/07-grpc-interceptors",
       "prerequisites": [
         "API.6"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/apis/7-grpc-interceptors",
+      "run_command": "go run ./06-backend-db/01-web-and-database/01-apis/07-grpc-interceptors",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2223,11 +2223,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/apis/8-rest-vs-grpc",
+      "path": "06-backend-db/01-web-and-database/01-apis/08-rest-vs-grpc",
       "prerequisites": [
         "API.7"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/apis/8-rest-vs-grpc",
+      "run_command": "go run ./06-backend-db/01-web-and-database/01-apis/08-rest-vs-grpc",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2244,7 +2244,7 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/apis/9-grpc-service-exercise",
+      "path": "06-backend-db/01-web-and-database/01-apis/09-grpc-service-exercise",
       "prerequisites": [
         "API.1",
         "API.2",
@@ -2255,9 +2255,9 @@
         "API.7",
         "API.8"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/apis/9-grpc-service-exercise",
-      "test_command": "go test ./06-backend-db/01-web-and-database/apis/9-grpc-service-exercise",
-      "starter_path": "06-backend-db/01-web-and-database/apis/9-grpc-service-exercise/_starter",
+      "run_command": "go run ./06-backend-db/01-web-and-database/01-apis/09-grpc-service-exercise",
+      "test_command": "go test ./06-backend-db/01-web-and-database/01-apis/09-grpc-service-exercise",
+      "starter_path": "06-backend-db/01-web-and-database/01-apis/09-grpc-service-exercise/_starter",
       "next_items": [
         "DB.1"
       ]
@@ -2272,9 +2272,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/databases/1-connecting-to-db",
+      "path": "06-backend-db/01-web-and-database/03-databases/01-connecting-to-db",
       "prerequisites": [],
-      "run_command": "go run ./06-backend-db/01-web-and-database/databases/1-connecting-to-db",
+      "run_command": "go run ./06-backend-db/01-web-and-database/03-databases/01-connecting-to-db",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2291,11 +2291,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/databases/2-query",
+      "path": "06-backend-db/01-web-and-database/03-databases/02-query",
       "prerequisites": [
         "DB.1"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/databases/2-query",
+      "run_command": "go run ./06-backend-db/01-web-and-database/03-databases/02-query",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2312,12 +2312,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/databases/3-select",
+      "path": "06-backend-db/01-web-and-database/03-databases/03-select",
       "prerequisites": [
         "DB.1",
         "DB.2"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/databases/3-select",
+      "run_command": "go run ./06-backend-db/01-web-and-database/03-databases/03-select",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2334,12 +2334,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/databases/4-prepare",
+      "path": "06-backend-db/01-web-and-database/03-databases/04-prepare",
       "prerequisites": [
         "DB.2",
         "DB.3"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/databases/4-prepare",
+      "run_command": "go run ./06-backend-db/01-web-and-database/03-databases/04-prepare",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2356,13 +2356,13 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/databases/5-transactions",
+      "path": "06-backend-db/01-web-and-database/03-databases/05-transactions",
       "prerequisites": [
         "DB.1",
         "DB.2",
         "DB.3"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/databases/5-transactions",
+      "run_command": "go run ./06-backend-db/01-web-and-database/03-databases/05-transactions",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2379,7 +2379,7 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "mixed",
-      "path": "06-backend-db/01-web-and-database/databases/6-repository",
+      "path": "06-backend-db/01-web-and-database/03-databases/06-repository",
       "prerequisites": [
         "DB.1",
         "DB.2",
@@ -2387,9 +2387,9 @@
         "DB.4",
         "DB.5"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/databases/6-repository",
-      "test_command": "go test ./06-backend-db/01-web-and-database/databases/6-repository",
-      "starter_path": "06-backend-db/01-web-and-database/databases/6-repository/_starter",
+      "run_command": "go run ./06-backend-db/01-web-and-database/03-databases/06-repository",
+      "test_command": "go test ./06-backend-db/01-web-and-database/03-databases/06-repository",
+      "starter_path": "06-backend-db/01-web-and-database/03-databases/06-repository/_starter",
       "next_items": [
         "DB.7"
       ]
@@ -2404,9 +2404,9 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/databases/7-n-plus-one-query-detection",
+      "path": "06-backend-db/01-web-and-database/03-databases/07-n-plus-one-query-detection",
       "prerequisites": [],
-      "run_command": "go run ./06-backend-db/01-web-and-database/databases/7-n-plus-one-query-detection",
+      "run_command": "go run ./06-backend-db/01-web-and-database/03-databases/07-n-plus-one-query-detection",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2423,11 +2423,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/databases/8-query-timeouts-via-context",
+      "path": "06-backend-db/01-web-and-database/03-databases/08-query-timeouts-via-context",
       "prerequisites": [
         "DB.7"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/databases/8-query-timeouts-via-context",
+      "run_command": "go run ./06-backend-db/01-web-and-database/03-databases/08-query-timeouts-via-context",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2444,9 +2444,9 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/1-net-http-basics",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/01-net-http-basics",
       "prerequisites": [],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/1-net-http-basics",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/01-net-http-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2463,11 +2463,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/2-routing-patterns",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/02-routing-patterns",
       "prerequisites": [
         "HS.1"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/2-routing-patterns",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/02-routing-patterns",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2484,11 +2484,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/3-middleware-pattern",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/03-middleware-pattern",
       "prerequisites": [
         "HS.2"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/3-middleware-pattern",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/03-middleware-pattern",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2505,11 +2505,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/4-request-parsing-and-validation",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/04-request-parsing-and-validation",
       "prerequisites": [
         "HS.3"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/4-request-parsing-and-validation",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/04-request-parsing-and-validation",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2526,11 +2526,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/5-response-writing-patterns",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/05-response-writing-patterns",
       "prerequisites": [
         "HS.4"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/5-response-writing-patterns",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/05-response-writing-patterns",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2547,11 +2547,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/6-error-handling-middleware",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/06-error-handling-middleware",
       "prerequisites": [
         "HS.5"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/6-error-handling-middleware",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/06-error-handling-middleware",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2568,11 +2568,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/7-server-timeouts",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/07-server-timeouts",
       "prerequisites": [
         "HS.6"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/7-server-timeouts",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/07-server-timeouts",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2589,11 +2589,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/8-graceful-http-shutdown",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/08-graceful-http-shutdown",
       "prerequisites": [
         "HS.7"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/8-graceful-http-shutdown",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/08-graceful-http-shutdown",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2610,11 +2610,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/9-health-and-readiness-probes",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/09-health-and-readiness-probes",
       "prerequisites": [
         "HS.8"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/9-health-and-readiness-probes",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/09-health-and-readiness-probes",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2631,7 +2631,7 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise",
+      "path": "06-backend-db/01-web-and-database/05-http-servers/10-rest-api-exercise",
       "prerequisites": [
         "HS.1",
         "HS.2",
@@ -2643,9 +2643,9 @@
         "HS.8",
         "HS.9"
       ],
-      "run_command": "go run ./06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise",
-      "test_command": "go test ./06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise",
-      "starter_path": "06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise/_starter",
+      "run_command": "go run ./06-backend-db/01-web-and-database/05-http-servers/10-rest-api-exercise",
+      "test_command": "go test ./06-backend-db/01-web-and-database/05-http-servers/10-rest-api-exercise",
+      "starter_path": "06-backend-db/01-web-and-database/05-http-servers/10-rest-api-exercise/_starter",
       "next_items": [
         "API.1"
       ]
@@ -2660,9 +2660,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/context/1-background",
+      "path": "07-concurrency/01-concurrency/01-context/01-background",
       "prerequisites": [],
-      "run_command": "go run ./07-concurrency/01-concurrency/context/1-background",
+      "run_command": "go run ./07-concurrency/01-concurrency/01-context/01-background",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2679,11 +2679,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/context/2-with-cancel",
+      "path": "07-concurrency/01-concurrency/01-context/02-with-cancel",
       "prerequisites": [
         "CT.1"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/context/2-with-cancel",
+      "run_command": "go run ./07-concurrency/01-concurrency/01-context/02-with-cancel",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2700,12 +2700,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/context/3-with-timeout",
+      "path": "07-concurrency/01-concurrency/01-context/03-with-timeout",
       "prerequisites": [
         "CT.1",
         "CT.2"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/context/3-with-timeout",
+      "run_command": "go run ./07-concurrency/01-concurrency/01-context/03-with-timeout",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2722,13 +2722,13 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/context/4-with-value",
+      "path": "07-concurrency/01-concurrency/01-context/04-with-value",
       "prerequisites": [
         "CT.1",
         "CT.2",
         "CT.3"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/context/4-with-value",
+      "run_command": "go run ./07-concurrency/01-concurrency/01-context/04-with-value",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2745,16 +2745,16 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/context/5-timeout-client",
+      "path": "07-concurrency/01-concurrency/01-context/05-timeout-client",
       "prerequisites": [
         "CT.1",
         "CT.2",
         "CT.3",
         "CT.4"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/context/5-timeout-client",
-      "test_command": "go test ./07-concurrency/01-concurrency/context/5-timeout-client",
-      "starter_path": "07-concurrency/01-concurrency/context/5-timeout-client/_starter",
+      "run_command": "go run ./07-concurrency/01-concurrency/01-context/05-timeout-client",
+      "test_command": "go test ./07-concurrency/01-concurrency/01-context/05-timeout-client",
+      "starter_path": "07-concurrency/01-concurrency/01-context/05-timeout-client/_starter",
       "next_items": [
         "TM.1"
       ]
@@ -2769,11 +2769,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/goroutines/0-why-concurrency-exists",
+      "path": "07-concurrency/01-concurrency/02-goroutines/00-why-concurrency-exists",
       "prerequisites": [
         "s06"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/goroutines/0-why-concurrency-exists",
+      "run_command": "go run ./07-concurrency/01-concurrency/02-goroutines/00-why-concurrency-exists",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2790,11 +2790,11 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/goroutines/1-goroutine",
+      "path": "07-concurrency/01-concurrency/02-goroutines/01-goroutine",
       "prerequisites": [
         "GC.0"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/goroutines/1-goroutine",
+      "run_command": "go run ./07-concurrency/01-concurrency/02-goroutines/01-goroutine",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2811,11 +2811,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/goroutines/2-wait-group",
+      "path": "07-concurrency/01-concurrency/02-goroutines/02-wait-group",
       "prerequisites": [
         "GC.1"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/goroutines/2-wait-group",
+      "run_command": "go run ./07-concurrency/01-concurrency/02-goroutines/02-wait-group",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2832,12 +2832,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/goroutines/3-channels",
+      "path": "07-concurrency/01-concurrency/02-goroutines/03-channels",
       "prerequisites": [
         "GC.1",
         "GC.2"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/goroutines/3-channels",
+      "run_command": "go run ./07-concurrency/01-concurrency/02-goroutines/03-channels",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2854,11 +2854,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/goroutines/4-channels-buffered",
+      "path": "07-concurrency/01-concurrency/02-goroutines/04-channels-buffered",
       "prerequisites": [
         "GC.3"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/goroutines/4-channels-buffered",
+      "run_command": "go run ./07-concurrency/01-concurrency/02-goroutines/04-channels-buffered",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2875,12 +2875,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/goroutines/5-channels-closing",
+      "path": "07-concurrency/01-concurrency/02-goroutines/05-channels-closing",
       "prerequisites": [
         "GC.3",
         "GC.4"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/goroutines/5-channels-closing",
+      "run_command": "go run ./07-concurrency/01-concurrency/02-goroutines/05-channels-closing",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2897,13 +2897,13 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/goroutines/6-project-1",
+      "path": "07-concurrency/01-concurrency/02-goroutines/06-project-1",
       "prerequisites": [
         "GC.3",
         "GC.4",
         "GC.5"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/goroutines/6-project-1",
+      "run_command": "go run ./07-concurrency/01-concurrency/02-goroutines/06-project-1",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2920,7 +2920,7 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/goroutines/7-downloader",
+      "path": "07-concurrency/01-concurrency/02-goroutines/07-downloader",
       "prerequisites": [
         "GC.1",
         "GC.2",
@@ -2929,9 +2929,9 @@
         "GC.5",
         "GC.6"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/goroutines/7-downloader",
-      "test_command": "go test ./07-concurrency/01-concurrency/goroutines/7-downloader",
-      "starter_path": "07-concurrency/01-concurrency/goroutines/7-downloader/_starter",
+      "run_command": "go run ./07-concurrency/01-concurrency/02-goroutines/07-downloader",
+      "test_command": "go test ./07-concurrency/01-concurrency/02-goroutines/07-downloader",
+      "starter_path": "07-concurrency/01-concurrency/02-goroutines/07-downloader/_starter",
       "next_items": [
         "SY.1"
       ]
@@ -2946,9 +2946,9 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/sync-primitives/1-mutex-and-rwmutex",
+      "path": "07-concurrency/01-concurrency/03-sync-primitives/01-mutex-and-rwmutex",
       "prerequisites": [],
-      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/1-mutex-and-rwmutex",
+      "run_command": "go run ./07-concurrency/01-concurrency/03-sync-primitives/01-mutex-and-rwmutex",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2965,11 +2965,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/sync-primitives/2-once-and-sync-map",
+      "path": "07-concurrency/01-concurrency/03-sync-primitives/02-once-and-sync-map",
       "prerequisites": [
         "SY.1"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/2-once-and-sync-map",
+      "run_command": "go run ./07-concurrency/01-concurrency/03-sync-primitives/02-once-and-sync-map",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -2986,11 +2986,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/sync-primitives/3-atomic-operations",
+      "path": "07-concurrency/01-concurrency/03-sync-primitives/03-atomic-operations",
       "prerequisites": [
         "SY.2"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/3-atomic-operations",
+      "run_command": "go run ./07-concurrency/01-concurrency/03-sync-primitives/03-atomic-operations",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3007,11 +3007,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/sync-primitives/4-race-conditions",
+      "path": "07-concurrency/01-concurrency/03-sync-primitives/04-race-conditions",
       "prerequisites": [
         "SY.3"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/4-race-conditions",
+      "run_command": "go run ./07-concurrency/01-concurrency/03-sync-primitives/04-race-conditions",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3028,11 +3028,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/sync-primitives/5-goroutine-leaks",
+      "path": "07-concurrency/01-concurrency/03-sync-primitives/05-goroutine-leaks",
       "prerequisites": [
         "SY.4"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/5-goroutine-leaks",
+      "run_command": "go run ./07-concurrency/01-concurrency/03-sync-primitives/05-goroutine-leaks",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3049,11 +3049,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/sync-primitives/6-deadlocks",
+      "path": "07-concurrency/01-concurrency/03-sync-primitives/06-deadlocks",
       "prerequisites": [
         "SY.5"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/sync-primitives/6-deadlocks",
+      "run_command": "go run ./07-concurrency/01-concurrency/03-sync-primitives/06-deadlocks",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3070,9 +3070,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/time-and-scheduling/1-time",
+      "path": "07-concurrency/01-concurrency/04-time-and-scheduling/01-time",
       "prerequisites": [],
-      "run_command": "go run ./07-concurrency/01-concurrency/time-and-scheduling/1-time",
+      "run_command": "go run ./07-concurrency/01-concurrency/04-time-and-scheduling/01-time",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3089,11 +3089,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/time-and-scheduling/2-formatting",
+      "path": "07-concurrency/01-concurrency/04-time-and-scheduling/02-formatting",
       "prerequisites": [
         "TM.1"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/time-and-scheduling/2-formatting",
+      "run_command": "go run ./07-concurrency/01-concurrency/04-time-and-scheduling/02-formatting",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3110,12 +3110,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker",
+      "path": "07-concurrency/01-concurrency/04-time-and-scheduling/03-timer-and-ticker",
       "prerequisites": [
         "TM.1",
         "TM.2"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker",
+      "run_command": "go run ./07-concurrency/01-concurrency/04-time-and-scheduling/03-timer-and-ticker",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3132,15 +3132,15 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/01-concurrency/time-and-scheduling/7-reminder",
+      "path": "07-concurrency/01-concurrency/04-time-and-scheduling/07-reminder",
       "prerequisites": [
         "TM.1",
         "TM.2",
         "TM.3"
       ],
-      "run_command": "go run ./07-concurrency/01-concurrency/time-and-scheduling/7-reminder",
-      "test_command": "go test ./07-concurrency/01-concurrency/time-and-scheduling/7-reminder",
-      "starter_path": "07-concurrency/01-concurrency/time-and-scheduling/7-reminder/_starter",
+      "run_command": "go run ./07-concurrency/01-concurrency/04-time-and-scheduling/07-reminder",
+      "test_command": "go test ./07-concurrency/01-concurrency/04-time-and-scheduling/07-reminder",
+      "starter_path": "07-concurrency/01-concurrency/04-time-and-scheduling/07-reminder/_starter",
       "next_items": [
         "CP.1"
       ]
@@ -3155,9 +3155,9 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/02-concurrency-patterns/1-errgroup",
+      "path": "07-concurrency/02-concurrency-patterns/01-errgroup",
       "prerequisites": [],
-      "run_command": "go run ./07-concurrency/02-concurrency-patterns/1-errgroup",
+      "run_command": "go run ./07-concurrency/02-concurrency-patterns/01-errgroup",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3174,11 +3174,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/02-concurrency-patterns/2-errgroup-context",
+      "path": "07-concurrency/02-concurrency-patterns/02-errgroup-context",
       "prerequisites": [
         "CP.1"
       ],
-      "run_command": "go run ./07-concurrency/02-concurrency-patterns/2-errgroup-context",
+      "run_command": "go run ./07-concurrency/02-concurrency-patterns/02-errgroup-context",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3195,13 +3195,13 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "mixed",
-      "path": "07-concurrency/02-concurrency-patterns/3-sync-pool",
+      "path": "07-concurrency/02-concurrency-patterns/03-sync-pool",
       "prerequisites": [
         "CP.1",
         "CP.2"
       ],
-      "run_command": "go run ./07-concurrency/02-concurrency-patterns/3-sync-pool",
-      "test_command": "go test ./07-concurrency/02-concurrency-patterns/3-sync-pool",
+      "run_command": "go run ./07-concurrency/02-concurrency-patterns/03-sync-pool",
+      "test_command": "go test ./07-concurrency/02-concurrency-patterns/03-sync-pool",
       "starter_path": "",
       "next_items": [
         "CP.4"
@@ -3217,15 +3217,15 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise",
+      "path": "07-concurrency/02-concurrency-patterns/04-bounded-pipeline-exercise",
       "prerequisites": [
         "CP.1",
         "CP.2",
         "CP.3"
       ],
-      "run_command": "go run ./07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise",
-      "test_command": "go test ./07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise",
-      "starter_path": "07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise/_starter",
+      "run_command": "go run ./07-concurrency/02-concurrency-patterns/04-bounded-pipeline-exercise",
+      "test_command": "go test ./07-concurrency/02-concurrency-patterns/04-bounded-pipeline-exercise",
+      "starter_path": "07-concurrency/02-concurrency-patterns/04-bounded-pipeline-exercise/_starter",
       "next_items": [
         "CP.5"
       ]
@@ -3240,16 +3240,16 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "07-concurrency/02-concurrency-patterns/5-url-checker-exercise",
+      "path": "07-concurrency/02-concurrency-patterns/05-url-checker-exercise",
       "prerequisites": [
         "CP.1",
         "CP.2",
         "CP.3",
         "CP.4"
       ],
-      "run_command": "go run ./07-concurrency/02-concurrency-patterns/5-url-checker-exercise",
-      "test_command": "go test ./07-concurrency/02-concurrency-patterns/5-url-checker-exercise",
-      "starter_path": "07-concurrency/02-concurrency-patterns/5-url-checker-exercise/_starter",
+      "run_command": "go run ./07-concurrency/02-concurrency-patterns/05-url-checker-exercise",
+      "test_command": "go test ./07-concurrency/02-concurrency-patterns/05-url-checker-exercise",
+      "starter_path": "07-concurrency/02-concurrency-patterns/05-url-checker-exercise/_starter",
       "next_items": [
         "TE.1"
       ]
@@ -3264,9 +3264,9 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "08-quality-test/01-quality-and-performance/profiling/1-cpu-profile",
+      "path": "08-quality-test/01-quality-and-performance/01-profiling/01-cpu-profile",
       "prerequisites": [],
-      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/1-cpu-profile",
+      "run_command": "go run ./08-quality-test/01-quality-and-performance/01-profiling/01-cpu-profile",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3283,11 +3283,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "08-quality-test/01-quality-and-performance/profiling/2-http-pprof",
+      "path": "08-quality-test/01-quality-and-performance/01-profiling/02-http-pprof",
       "prerequisites": [
         "PR.1"
       ],
-      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/2-http-pprof",
+      "run_command": "go run ./08-quality-test/01-quality-and-performance/01-profiling/02-http-pprof",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3304,9 +3304,9 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "08-quality-test/01-quality-and-performance/profiling/3-memory-profiling",
+      "path": "08-quality-test/01-quality-and-performance/01-profiling/03-memory-profiling",
       "prerequisites": [],
-      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/3-memory-profiling",
+      "run_command": "go run ./08-quality-test/01-quality-and-performance/01-profiling/03-memory-profiling",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3323,11 +3323,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "08-quality-test/01-quality-and-performance/profiling/4-escape-analysis",
+      "path": "08-quality-test/01-quality-and-performance/01-profiling/04-escape-analysis",
       "prerequisites": [
         "PR.3"
       ],
-      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/4-escape-analysis",
+      "run_command": "go run ./08-quality-test/01-quality-and-performance/01-profiling/04-escape-analysis",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3344,12 +3344,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/profiling/5-benchmark-driven-development",
+      "path": "08-quality-test/01-quality-and-performance/01-profiling/05-benchmark-driven-development",
       "prerequisites": [
         "PR.4"
       ],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/profiling/5-benchmark-driven-development",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/01-profiling/05-benchmark-driven-development",
       "starter_path": "",
       "next_items": [
         "PR.6"
@@ -3365,11 +3365,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "08-quality-test/01-quality-and-performance/profiling/6-memory-layout",
+      "path": "08-quality-test/01-quality-and-performance/01-profiling/06-memory-layout",
       "prerequisites": [
         "PR.5"
       ],
-      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/6-memory-layout",
+      "run_command": "go run ./08-quality-test/01-quality-and-performance/01-profiling/06-memory-layout",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3386,10 +3386,10 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/01-unit-testing",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/01-unit-testing",
       "prerequisites": [],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/01-unit-testing",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/01-unit-testing",
       "starter_path": "",
       "next_items": [
         "TE.2"
@@ -3405,12 +3405,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/02-table-driven-tests",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/02-table-driven-tests",
       "prerequisites": [
         "TE.1"
       ],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/02-table-driven-tests",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/02-table-driven-tests",
       "starter_path": "",
       "next_items": [
         "TE.3"
@@ -3426,16 +3426,38 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/03-http-handler-testing",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/03-http-handler-testing",
       "prerequisites": [
         "TE.1",
         "TE.2"
       ],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/03-http-handler-testing",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/03-http-handler-testing",
       "starter_path": "",
       "next_items": [
         "TE.4"
+      ]
+    },
+    {
+      "id": "TE.4",
+      "section_id": "s08",
+      "slug": "benchmarking",
+      "title": "Benchmarking",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/04-benchmarks",
+      "prerequisites": [
+        "TE.1",
+        "TE.2"
+      ],
+      "run_command": "",
+      "test_command": "go test -bench=. -benchmem ./08-quality-test/01-quality-and-performance/02-testing/04-benchmarks",
+      "starter_path": "",
+      "next_items": [
+        "TE.5"
       ]
     },
     {
@@ -3448,10 +3470,10 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/5-sub-tests-and-cleanup",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/05-sub-tests-and-cleanup",
       "prerequisites": [],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/5-sub-tests-and-cleanup",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/05-sub-tests-and-cleanup",
       "starter_path": "",
       "next_items": [
         "TE.6"
@@ -3467,12 +3489,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/6-fuzz-testing",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/06-fuzz-testing",
       "prerequisites": [
         "TE.5"
       ],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/6-fuzz-testing",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/06-fuzz-testing",
       "starter_path": "",
       "next_items": [
         "TE.7"
@@ -3488,12 +3510,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/7-interfaces-for-testability",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/07-interfaces-for-testability",
       "prerequisites": [
         "TE.6"
       ],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/7-interfaces-for-testability",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/07-interfaces-for-testability",
       "starter_path": "",
       "next_items": [
         "TE.8"
@@ -3509,12 +3531,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/8-mocking-with-interfaces",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/08-mocking-with-interfaces",
       "prerequisites": [
         "TE.7"
       ],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/8-mocking-with-interfaces",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/08-mocking-with-interfaces",
       "starter_path": "",
       "next_items": [
         "TE.9"
@@ -3530,12 +3552,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/9-integration-tests",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/09-integration-tests",
       "prerequisites": [
         "TE.8"
       ],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/9-integration-tests",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/09-integration-tests",
       "starter_path": "",
       "next_items": [
         "TE.10"
@@ -3551,37 +3573,15 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/10-golden-files",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/10-golden-files",
       "prerequisites": [
         "TE.9"
       ],
       "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/10-golden-files",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/10-golden-files",
       "starter_path": "",
       "next_items": [
         "PR.1"
-      ]
-    },
-    {
-      "id": "TE.4",
-      "section_id": "s08",
-      "slug": "benchmarking",
-      "title": "Benchmarking",
-      "type": "lesson",
-      "subtype": "pattern",
-      "level": "core",
-      "status": "implemented",
-      "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/benchmarks",
-      "prerequisites": [
-        "TE.1",
-        "TE.2"
-      ],
-      "run_command": "",
-      "test_command": "go test -bench=. -benchmem ./08-quality-test/01-quality-and-performance/testing/benchmarks",
-      "starter_path": "",
-      "next_items": [
-        "TE.5"
       ]
     },
     {
@@ -3594,9 +3594,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/01-package-design/1-naming",
+      "path": "09-architecture/01-package-design/01-naming",
       "prerequisites": [],
-      "run_command": "go run ./09-architecture/01-package-design/1-naming",
+      "run_command": "go run ./09-architecture/01-package-design/01-naming",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3613,11 +3613,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/01-package-design/2-visibility",
+      "path": "09-architecture/01-package-design/02-visibility",
       "prerequisites": [
         "PD.1"
       ],
-      "run_command": "go run ./09-architecture/01-package-design/2-visibility",
+      "run_command": "go run ./09-architecture/01-package-design/02-visibility",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3634,12 +3634,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/01-package-design/3-project-layout",
+      "path": "09-architecture/01-package-design/03-project-layout",
       "prerequisites": [
         "PD.1",
         "PD.2"
       ],
-      "run_command": "go run ./09-architecture/01-package-design/3-project-layout",
+      "run_command": "go run ./09-architecture/01-package-design/03-project-layout",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3656,9 +3656,9 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/03-architecture-patterns/1-architecture-trade-offs",
+      "path": "09-architecture/03-architecture-patterns/01-architecture-trade-offs",
       "prerequisites": [],
-      "run_command": "go run ./09-architecture/03-architecture-patterns/1-architecture-trade-offs",
+      "run_command": "go run ./09-architecture/03-architecture-patterns/01-architecture-trade-offs",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3675,11 +3675,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/03-architecture-patterns/2-ddd-basics",
+      "path": "09-architecture/03-architecture-patterns/02-ddd-basics",
       "prerequisites": [
         "ARCH.1"
       ],
-      "run_command": "go run ./09-architecture/03-architecture-patterns/2-ddd-basics",
+      "run_command": "go run ./09-architecture/03-architecture-patterns/02-ddd-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3696,11 +3696,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go",
+      "path": "09-architecture/03-architecture-patterns/03-hexagonal-architecture-in-go",
       "prerequisites": [
         "ARCH.2"
       ],
-      "run_command": "go run ./09-architecture/03-architecture-patterns/3-hexagonal-architecture-in-go",
+      "run_command": "go run ./09-architecture/03-architecture-patterns/03-hexagonal-architecture-in-go",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3717,11 +3717,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/03-architecture-patterns/4-repository-pattern-deep-dive",
+      "path": "09-architecture/03-architecture-patterns/04-repository-pattern-deep-dive",
       "prerequisites": [
         "ARCH.3"
       ],
-      "run_command": "go run ./09-architecture/03-architecture-patterns/4-repository-pattern-deep-dive",
+      "run_command": "go run ./09-architecture/03-architecture-patterns/04-repository-pattern-deep-dive",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3738,11 +3738,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/03-architecture-patterns/5-service-layer-pattern",
+      "path": "09-architecture/03-architecture-patterns/05-service-layer-pattern",
       "prerequisites": [
         "ARCH.4"
       ],
-      "run_command": "go run ./09-architecture/03-architecture-patterns/5-service-layer-pattern",
+      "run_command": "go run ./09-architecture/03-architecture-patterns/05-service-layer-pattern",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3759,11 +3759,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/03-architecture-patterns/6-event-driven-architecture",
+      "path": "09-architecture/03-architecture-patterns/06-event-driven-architecture",
       "prerequisites": [
         "ARCH.5"
       ],
-      "run_command": "go run ./09-architecture/03-architecture-patterns/6-event-driven-architecture",
+      "run_command": "go run ./09-architecture/03-architecture-patterns/06-event-driven-architecture",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3780,11 +3780,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/03-architecture-patterns/7-cqrs-basics",
+      "path": "09-architecture/03-architecture-patterns/07-cqrs-basics",
       "prerequisites": [
         "ARCH.6"
       ],
-      "run_command": "go run ./09-architecture/03-architecture-patterns/7-cqrs-basics",
+      "run_command": "go run ./09-architecture/03-architecture-patterns/07-cqrs-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3801,11 +3801,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/03-architecture-patterns/8-when-to-split-services",
+      "path": "09-architecture/03-architecture-patterns/08-when-to-split-services",
       "prerequisites": [
         "ARCH.7"
       ],
-      "run_command": "go run ./09-architecture/03-architecture-patterns/8-when-to-split-services",
+      "run_command": "go run ./09-architecture/03-architecture-patterns/08-when-to-split-services",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3822,7 +3822,7 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/03-architecture-patterns/9-modular-refactor-exercise",
+      "path": "09-architecture/03-architecture-patterns/09-modular-refactor-exercise",
       "prerequisites": [
         "ARCH.1",
         "ARCH.2",
@@ -3833,9 +3833,9 @@
         "ARCH.7",
         "ARCH.8"
       ],
-      "run_command": "go run ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise",
-      "test_command": "go test ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise",
-      "starter_path": "09-architecture/03-architecture-patterns/9-modular-refactor-exercise/_starter",
+      "run_command": "go run ./09-architecture/03-architecture-patterns/09-modular-refactor-exercise",
+      "test_command": "go test ./09-architecture/03-architecture-patterns/09-modular-refactor-exercise",
+      "starter_path": "09-architecture/03-architecture-patterns/09-modular-refactor-exercise/_starter",
       "next_items": [
         "SEC.1"
       ]
@@ -3850,9 +3850,9 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/04-security/1-input-validation-patterns",
+      "path": "09-architecture/04-security/01-input-validation-patterns",
       "prerequisites": [],
-      "run_command": "go run ./09-architecture/04-security/1-input-validation-patterns",
+      "run_command": "go run ./09-architecture/04-security/01-input-validation-patterns",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3869,11 +3869,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/04-security/2-sql-injection-prevention",
+      "path": "09-architecture/04-security/02-sql-injection-prevention",
       "prerequisites": [
         "SEC.1"
       ],
-      "run_command": "go run ./09-architecture/04-security/2-sql-injection-prevention",
+      "run_command": "go run ./09-architecture/04-security/02-sql-injection-prevention",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3890,11 +3890,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/04-security/3-xss-and-csrf",
+      "path": "09-architecture/04-security/03-xss-and-csrf",
       "prerequisites": [
         "SEC.2"
       ],
-      "run_command": "go run ./09-architecture/04-security/3-xss-and-csrf",
+      "run_command": "go run ./09-architecture/04-security/03-xss-and-csrf",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3911,11 +3911,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/04-security/4-authentication-basics",
+      "path": "09-architecture/04-security/04-authentication-basics",
       "prerequisites": [
         "SEC.3"
       ],
-      "run_command": "go run ./09-architecture/04-security/4-authentication-basics",
+      "run_command": "go run ./09-architecture/04-security/04-authentication-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3932,11 +3932,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/04-security/5-jwt-implementation-and-risks",
+      "path": "09-architecture/04-security/05-jwt-implementation-and-risks",
       "prerequisites": [
         "SEC.4"
       ],
-      "run_command": "go run ./09-architecture/04-security/5-jwt-implementation-and-risks",
+      "run_command": "go run ./09-architecture/04-security/05-jwt-implementation-and-risks",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3953,11 +3953,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/04-security/6-password-hashing",
+      "path": "09-architecture/04-security/06-password-hashing",
       "prerequisites": [
         "SEC.5"
       ],
-      "run_command": "go run ./09-architecture/04-security/6-password-hashing",
+      "run_command": "go run ./09-architecture/04-security/06-password-hashing",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3974,11 +3974,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/04-security/7-rate-limiting-patterns",
+      "path": "09-architecture/04-security/07-rate-limiting-patterns",
       "prerequisites": [
         "SEC.6"
       ],
-      "run_command": "go run ./09-architecture/04-security/7-rate-limiting-patterns",
+      "run_command": "go run ./09-architecture/04-security/07-rate-limiting-patterns",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3995,11 +3995,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/04-security/8-tls-and-https-in-go",
+      "path": "09-architecture/04-security/08-tls-and-https-in-go",
       "prerequisites": [
         "SEC.7"
       ],
-      "run_command": "go run ./09-architecture/04-security/8-tls-and-https-in-go",
+      "run_command": "go run ./09-architecture/04-security/08-tls-and-https-in-go",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4016,11 +4016,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "09-architecture/04-security/9-secrets-management",
+      "path": "09-architecture/04-security/09-secrets-management",
       "prerequisites": [
         "SEC.8"
       ],
-      "run_command": "go run ./09-architecture/04-security/9-secrets-management",
+      "run_command": "go run ./09-architecture/04-security/09-secrets-management",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4088,9 +4088,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/01-structured-logging/1-slog-basics",
+      "path": "10-production/01-structured-logging/01-slog-basics",
       "prerequisites": [],
-      "run_command": "go run ./10-production/01-structured-logging/1-slog-basics",
+      "run_command": "go run ./10-production/01-structured-logging/01-slog-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4107,11 +4107,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/01-structured-logging/2-context-logger",
+      "path": "10-production/01-structured-logging/02-context-logger",
       "prerequisites": [
         "SL.1"
       ],
-      "run_command": "go run ./10-production/01-structured-logging/2-context-logger",
+      "run_command": "go run ./10-production/01-structured-logging/02-context-logger",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4128,12 +4128,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/01-structured-logging/3-custom-handler",
+      "path": "10-production/01-structured-logging/03-custom-handler",
       "prerequisites": [
         "SL.1",
         "SL.2"
       ],
-      "run_command": "go run ./10-production/01-structured-logging/3-custom-handler",
+      "run_command": "go run ./10-production/01-structured-logging/03-custom-handler",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4150,12 +4150,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/01-structured-logging/4-zerolog-comparison",
+      "path": "10-production/01-structured-logging/04-zerolog-comparison",
       "prerequisites": [
         "SL.1",
         "SL.3"
       ],
-      "run_command": "go run ./10-production/01-structured-logging/4-zerolog-comparison",
+      "run_command": "go run ./10-production/01-structured-logging/04-zerolog-comparison",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4172,16 +4172,16 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "mixed",
-      "path": "10-production/01-structured-logging/5-exercise",
+      "path": "10-production/01-structured-logging/05-exercise",
       "prerequisites": [
         "SL.1",
         "SL.2",
         "SL.3",
         "SL.4"
       ],
-      "run_command": "go run ./10-production/01-structured-logging/5-exercise",
-      "test_command": "go test ./10-production/01-structured-logging/5-exercise",
-      "starter_path": "10-production/01-structured-logging/5-exercise/_starter",
+      "run_command": "go run ./10-production/01-structured-logging/05-exercise",
+      "test_command": "go test ./10-production/01-structured-logging/05-exercise",
+      "starter_path": "10-production/01-structured-logging/05-exercise/_starter",
       "next_items": [
         "GS.1"
       ]
@@ -4196,9 +4196,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/02-graceful-shutdown/1-signal-context",
+      "path": "10-production/02-graceful-shutdown/01-signal-context",
       "prerequisites": [],
-      "run_command": "go run ./10-production/02-graceful-shutdown/1-signal-context",
+      "run_command": "go run ./10-production/02-graceful-shutdown/01-signal-context",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4215,11 +4215,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/02-graceful-shutdown/2-http-server",
+      "path": "10-production/02-graceful-shutdown/02-http-server",
       "prerequisites": [
         "GS.1"
       ],
-      "run_command": "go run ./10-production/02-graceful-shutdown/2-http-server",
+      "run_command": "go run ./10-production/02-graceful-shutdown/02-http-server",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4236,12 +4236,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/02-graceful-shutdown/3-capstone",
+      "path": "10-production/02-graceful-shutdown/03-capstone",
       "prerequisites": [
         "GS.1",
         "GS.2"
       ],
-      "run_command": "go run ./10-production/02-graceful-shutdown/3-capstone",
+      "run_command": "go run ./10-production/02-graceful-shutdown/03-capstone",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4258,9 +4258,9 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/03-docker-and-deployment/1-docker-basics",
+      "path": "10-production/03-docker-and-deployment/01-docker-basics",
       "prerequisites": [],
-      "run_command": "go run ./10-production/03-docker-and-deployment/1-docker-basics",
+      "run_command": "go run ./10-production/03-docker-and-deployment/01-docker-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4277,11 +4277,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/03-docker-and-deployment/2-multi-stage-builds",
+      "path": "10-production/03-docker-and-deployment/02-multi-stage-builds",
       "prerequisites": [
         "DOCKER.1"
       ],
-      "run_command": "go run ./10-production/03-docker-and-deployment/2-multi-stage-builds",
+      "run_command": "go run ./10-production/03-docker-and-deployment/02-multi-stage-builds",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4298,11 +4298,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/03-docker-and-deployment/3-docker-compose",
+      "path": "10-production/03-docker-and-deployment/03-docker-compose",
       "prerequisites": [
         "DOCKER.2"
       ],
-      "run_command": "go run ./10-production/03-docker-and-deployment/3-docker-compose",
+      "run_command": "go run ./10-production/03-docker-and-deployment/03-docker-compose",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4319,11 +4319,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/03-docker-and-deployment/4-cicd-pipelines",
+      "path": "10-production/03-docker-and-deployment/04-cicd-pipelines",
       "prerequisites": [
         "DOCKER.3"
       ],
-      "run_command": "go run ./10-production/03-docker-and-deployment/4-cicd-pipelines",
+      "run_command": "go run ./10-production/03-docker-and-deployment/04-cicd-pipelines",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4340,11 +4340,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/03-docker-and-deployment/5-blue-green-and-rollback",
+      "path": "10-production/03-docker-and-deployment/05-blue-green-and-rollback",
       "prerequisites": [
         "DEPLOY.1"
       ],
-      "run_command": "go run ./10-production/03-docker-and-deployment/5-blue-green-and-rollback",
+      "run_command": "go run ./10-production/03-docker-and-deployment/05-blue-green-and-rollback",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4361,7 +4361,7 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/03-docker-and-deployment/6-dockerised-service",
+      "path": "10-production/03-docker-and-deployment/06-dockerised-service",
       "prerequisites": [
         "DOCKER.1",
         "DOCKER.2",
@@ -4369,9 +4369,9 @@
         "DEPLOY.1",
         "DEPLOY.2"
       ],
-      "run_command": "go run ./10-production/03-docker-and-deployment/6-dockerised-service",
-      "test_command": "go test ./10-production/03-docker-and-deployment/6-dockerised-service",
-      "starter_path": "10-production/03-docker-and-deployment/6-dockerised-service/_starter",
+      "run_command": "go run ./10-production/03-docker-and-deployment/06-dockerised-service",
+      "test_command": "go test ./10-production/03-docker-and-deployment/06-dockerised-service",
+      "starter_path": "10-production/03-docker-and-deployment/06-dockerised-service/_starter",
       "next_items": [
         "CG.1"
       ]
@@ -4386,9 +4386,9 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/04-configuration/1-environment-variables",
+      "path": "10-production/04-configuration/01-environment-variables",
       "prerequisites": [],
-      "run_command": "go run ./10-production/04-configuration/1-environment-variables",
+      "run_command": "go run ./10-production/04-configuration/01-environment-variables",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4405,11 +4405,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/04-configuration/2-configuration-files",
+      "path": "10-production/04-configuration/02-configuration-files",
       "prerequisites": [
         "CFG.1"
       ],
-      "run_command": "go run ./10-production/04-configuration/2-configuration-files",
+      "run_command": "go run ./10-production/04-configuration/02-configuration-files",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4426,11 +4426,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/04-configuration/3-flag-parsing",
+      "path": "10-production/04-configuration/03-flag-parsing",
       "prerequisites": [
         "CFG.2"
       ],
-      "run_command": "go run ./10-production/04-configuration/3-flag-parsing",
+      "run_command": "go run ./10-production/04-configuration/03-flag-parsing",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4447,11 +4447,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/04-configuration/4-twelve-factor-principles",
+      "path": "10-production/04-configuration/04-twelve-factor-principles",
       "prerequisites": [
         "CFG.3"
       ],
-      "run_command": "go run ./10-production/04-configuration/4-twelve-factor-principles",
+      "run_command": "go run ./10-production/04-configuration/04-twelve-factor-principles",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4468,11 +4468,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/04-configuration/5-config-validation-on-boot",
+      "path": "10-production/04-configuration/05-config-validation-on-boot",
       "prerequisites": [
         "CFG.4"
       ],
-      "run_command": "go run ./10-production/04-configuration/5-config-validation-on-boot",
+      "run_command": "go run ./10-production/04-configuration/05-config-validation-on-boot",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4489,9 +4489,9 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/05-observability/1-metrics-basics",
+      "path": "10-production/05-observability/01-metrics-basics",
       "prerequisites": [],
-      "run_command": "go run ./10-production/05-observability/1-metrics-basics",
+      "run_command": "go run ./10-production/05-observability/01-metrics-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4508,11 +4508,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/05-observability/2-prometheus-integration",
+      "path": "10-production/05-observability/02-prometheus-integration",
       "prerequisites": [
         "OPS.1"
       ],
-      "run_command": "go run ./10-production/05-observability/2-prometheus-integration",
+      "run_command": "go run ./10-production/05-observability/02-prometheus-integration",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4529,11 +4529,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/05-observability/3-distributed-tracing-basics",
+      "path": "10-production/05-observability/03-distributed-tracing-basics",
       "prerequisites": [
         "OPS.2"
       ],
-      "run_command": "go run ./10-production/05-observability/3-distributed-tracing-basics",
+      "run_command": "go run ./10-production/05-observability/03-distributed-tracing-basics",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4550,11 +4550,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/05-observability/4-feature-flags",
+      "path": "10-production/05-observability/04-feature-flags",
       "prerequisites": [
         "OPS.3"
       ],
-      "run_command": "go run ./10-production/05-observability/4-feature-flags",
+      "run_command": "go run ./10-production/05-observability/04-feature-flags",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4571,11 +4571,11 @@
       "level": "production",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/05-observability/5-alerting-mindset",
+      "path": "10-production/05-observability/05-alerting-mindset",
       "prerequisites": [
         "OPS.4"
       ],
-      "run_command": "go run ./10-production/05-observability/5-alerting-mindset",
+      "run_command": "go run ./10-production/05-observability/05-alerting-mindset",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4592,9 +4592,9 @@
       "level": "foundation",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/06-code-generation/1-go-generate",
+      "path": "10-production/06-code-generation/01-go-generate",
       "prerequisites": [],
-      "run_command": "go run ./10-production/06-code-generation/1-go-generate",
+      "run_command": "go run ./10-production/06-code-generation/01-go-generate",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4611,11 +4611,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/06-code-generation/2-mockery",
+      "path": "10-production/06-code-generation/02-mockery",
       "prerequisites": [
         "CG.1"
       ],
-      "run_command": "go run ./10-production/06-code-generation/2-mockery",
+      "run_command": "go run ./10-production/06-code-generation/02-mockery",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -4632,12 +4632,12 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "10-production/06-code-generation/3-sqlc",
+      "path": "10-production/06-code-generation/03-sqlc",
       "prerequisites": [
         "CG.1",
         "CG.2"
       ],
-      "run_command": "go run ./10-production/06-code-generation/3-sqlc",
+      "run_command": "go run ./10-production/06-code-generation/03-sqlc",
       "test_command": "",
       "starter_path": "",
       "next_items": [

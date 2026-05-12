@@ -101,7 +101,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8090", mux))
 
 	fmt.Println("\n---------------------------------------------------")
-	fmt.Println("NEXT UP: GC.0 -> 07-concurrency/01-concurrency/goroutines/0-why-concurrency-exists")
+	fmt.Println("NEXT UP: GC.0 -> 07-concurrency/01-concurrency/02-goroutines/00-why-concurrency-exists")
 	fmt.Println("Current: MC.11 (websockets)")
 	fmt.Println("Previous: MC.10 (comments)")
 	fmt.Println("---------------------------------------------------")
