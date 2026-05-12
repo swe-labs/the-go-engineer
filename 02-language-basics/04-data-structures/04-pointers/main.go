@@ -49,7 +49,7 @@ func main() {
 	fmt.Printf("*scorePtr:     %d\n", *scorePtr)
 
 	// Changing a copied value does not affect the original.
-	scoreCopy := score
+	var scoreCopy int
 	scoreCopy = 95
 	fmt.Printf("\nAfter changing the copy: score=%d scoreCopy=%d\n", score, scoreCopy)
 

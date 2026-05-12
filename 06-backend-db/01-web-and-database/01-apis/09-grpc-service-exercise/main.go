@@ -110,7 +110,7 @@ func main() {
 
 	// 3. Simulate a missing user
 	fmt.Println("\n  [RPC] Calling GetUser(ID=99)...")
-	resp, err = impl.GetUser(ctx, &GetUserRequest{ID: 99})
+	_, err = impl.GetUser(ctx, &GetUserRequest{ID: 99})
 	if err != nil {
 		fmt.Printf("  [ERROR]: %v\n", err)
 	}

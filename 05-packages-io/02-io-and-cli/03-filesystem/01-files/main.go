@@ -225,7 +225,11 @@ func appendToFile(path, text string) {
 	if err != nil {
 		log.Fatal("OpenFile failed:", err)
 	}
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			log.Fatal("Close failed:", err)
+		}
+	}()
 
 	// WriteString writes the string and returns (bytesWritten, error)
 	if _, err := f.WriteString(text); err != nil {
