@@ -79,4 +79,4 @@ go test ./09-architecture/04-security/11-secure-api-exercise
 
 ## Next Step
 
-Next: `SL.1` -> [`10-production/01-structured-logging/1-slog-basics`](../../../10-production/01-structured-logging/1-slog-basics/README.md)
+Next: `SL.1` -> [`10-production/01-structured-logging/01-slog-basics`](../../../10-production/01-structured-logging/01-slog-basics/README.md)

@@ -74,4 +74,4 @@ However, you should almost always use `recover()` at your top-level entry points
 
 ## Next Step
 
-Next: `TI.1` -> [`04-types-design/1-struct`](../../04-types-design/1-struct/README.md)
+Next: `TI.1` -> [`04-types-design/01-struct`](../../04-types-design/01-struct/README.md)

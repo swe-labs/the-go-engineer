@@ -32,7 +32,7 @@ Requirements:
 git clone https://github.com/swe-labs/the-go-engineer.git
 cd the-go-engineer
 go mod download
-go run ./00-how-computers-work/1-what-is-a-program
+go run ./00-how-computers-work/01-what-is-a-program
 ```
 
 Run the curriculum validator:
@@ -159,7 +159,7 @@ go run ./scripts/validate_curriculum.go
 For benchmark-related changes:
 
 ```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
+go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/02-testing/04-benchmarks/
 ```
 
 ## Documentation

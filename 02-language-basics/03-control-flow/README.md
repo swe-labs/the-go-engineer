@@ -26,13 +26,13 @@ It does **not** formally teach:
 
 | ID | Lesson | What It Unlocks |
 | --- | --- | --- |
-| `CF.1` | [If / Else](./1-if-else/) | Introduces branching and decision-making. |
-| `CF.2` | [For Basics](./2-for-basics/) | Teaches Go's only loop keyword and repeated work. |
-| `CF.3` | [Break / Continue](./3-break-continue/) | Early exit and selective skipping inside loops. |
-| `CF.4` | [Switch](./4-switch/) | Readable multi-branch decision logic. |
-| `CF.5` | [Defer Basics](./5-defer-basics/) | Cleanup scheduling and LIFO (Last-In, First-Out) order. |
-| `CF.6` | [Defer Use Cases](./6-defer-use-cases/) | Real-world patterns for resource management. |
-| `CF.7` | [Pricing Checkout](./7-pricing-checkout/) | **Milestone**: Logic-heavy exercise for state transitions. |
+| `CF.1` | [If / Else](./01-if-else/) | Introduces branching and decision-making. |
+| `CF.2` | [For Basics](./02-for-basics/) | Teaches Go's only loop keyword and repeated work. |
+| `CF.3` | [Break / Continue](./03-break-continue/) | Early exit and selective skipping inside loops. |
+| `CF.4` | [Switch](./04-switch/) | Readable multi-branch decision logic. |
+| `CF.5` | [Defer Basics](./05-defer-basics/) | Cleanup scheduling and LIFO (Last-In, First-Out) order. |
+| `CF.6` | [Defer Use Cases](./06-defer-use-cases/) | Real-world patterns for resource management. |
+| `CF.7` | [Pricing Checkout](./07-pricing-checkout/) | **Milestone**: Logic-heavy exercise for state transitions. |
 
 ## Next Step
 

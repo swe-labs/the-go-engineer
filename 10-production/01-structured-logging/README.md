@@ -12,11 +12,11 @@ This track belongs to [10 Production Operations](../README.md).
 
 | ID | Type | Surface | Mission | Requires |
 | --- | --- | --- | --- | --- |
-| `SL.1` | Lesson | [slog Basics](./1-slog-basics) | Learn the core `log/slog` API and key-value pairs. | entry |
-| `SL.2` | Lesson | [Context Logging](./2-context-logger) | Propagate Request IDs and attributes via `context`. | `SL.1` |
-| `SL.3` | Lesson | [Custom Handlers](./3-custom-handler) | Build a handler for Slack, ELK, or specialized JSON. | `SL.2` |
-| `SL.4` | Lesson | [Zerolog Comparison](./4-zerolog-comparison) | Understand when to use third-party libraries. | `SL.3` |
-| `SL.5` | Exercise | [Telemetry Integration](./5-exercise) | Build a unified logging strategy for a service. | `SL.1-4` |
+| `SL.1` | Lesson | [slog Basics](./01-slog-basics) | Learn the core `log/slog` API and key-value pairs. | entry |
+| `SL.2` | Lesson | [Context Logging](./02-context-logger) | Propagate Request IDs and attributes via `context`. | `SL.1` |
+| `SL.3` | Lesson | [Custom Handlers](./03-custom-handler) | Build a handler for Slack, ELK, or specialized JSON. | `SL.2` |
+| `SL.4` | Lesson | [Zerolog Comparison](./04-zerolog-comparison) | Understand when to use third-party libraries. | `SL.3` |
+| `SL.5` | Exercise | [Telemetry Integration](./05-exercise) | Build a unified logging strategy for a service. | `SL.1-4` |
 
 ## Why This Track Matters
 

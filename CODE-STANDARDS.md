@@ -408,12 +408,12 @@ In `README.md` files, use GitHub-style alerts for cross-references:
 
 ```markdown
 > [!NOTE]
-> This concept is covered in depth in [HC.1 What is a Program?](./00-how-computers-work/1-what-is-a-program/README.md).
+> This concept is covered in depth in [HC.1 What is a Program?](./00-how-computers-work/01-what-is-a-program/README.md).
 ```
 
 ```markdown
 > [!TIP]
-> If the terminal output feels surprising, rerun [GT.2 Hello World](./01-getting-started/2-hello-world/README.md) before continuing.
+> If the terminal output feels surprising, rerun [GT.2 Hello World](./01-getting-started/02-hello-world/README.md) before continuing.
 ```
 
 Avoid detached, standalone "Forward/Backward Reference" headlines.
@@ -526,7 +526,7 @@ Do not commit generated `coverage.out` or `coverage.html` artifacts.
 For benchmark-related changes:
 
 ```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
+go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/02-testing/04-benchmarks/
 ```
 
 Recommended when installed:

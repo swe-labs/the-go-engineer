@@ -20,10 +20,10 @@ This track belongs to [07 Concurrency](../README.md).
 
 | Track | Entry | Milestone | Focus |
 | --- | --- | --- | --- |
-| Goroutines | [GC.1 goroutines](./goroutines) | `GC.7` | goroutines, WaitGroups, channels, and a bounded downloader |
-| Context | [CT.1 background](./context) | `CT.5` | context roots, cancellation, timeouts, and timeout-aware HTTP calls |
-| Sync Primitives | [SY.1 mutex and rwmutex](./sync-primitives) | `SY.6` | mutexes, `sync.Map`, atomics, race boundaries, and deadlocks |
-| Time & Scheduling | [TM.1 time basics](./time-and-scheduling) | `TM.7` | time values, formatting, timers, tickers, and reminder scheduling |
+| Goroutines | [GC.1 goroutines](./02-goroutines) | `GC.7` | goroutines, WaitGroups, channels, and a bounded downloader |
+| Context | [CT.1 background](./01-context) | `CT.5` | context roots, cancellation, timeouts, and timeout-aware HTTP calls |
+| Sync Primitives | [SY.1 mutex and rwmutex](./03-sync-primitives) | `SY.6` | mutexes, `sync.Map`, atomics, race boundaries, and deadlocks |
+| Time & Scheduling | [TM.1 time basics](./04-time-and-scheduling) | `TM.7` | time values, formatting, timers, tickers, and reminder scheduling |
 
 ## Suggested Order
 

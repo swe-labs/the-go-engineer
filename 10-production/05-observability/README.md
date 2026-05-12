@@ -12,11 +12,11 @@ This track belongs to [10 Production Operations](../README.md).
 
 | ID | Type | Surface | Mission | Requires |
 | --- | --- | --- | --- | --- |
-| `OPS.1` | Lesson | [Metrics Basics](./1-metrics-basics) | Master Counters, Gauges, and Histograms. | entry |
-| `OPS.2` | Lesson | [Prometheus Integration](./2-prometheus-integration) | Expose a `/metrics` endpoint for scraping. | `OPS.1` |
-| `OPS.3` | Lesson | [Tracing Basics](./3-distributed-tracing-basics) | Learn how to trace a request across services. | `OPS.2` |
-| `OPS.4` | Lesson | [Feature Flags](./4-feature-flags) | Decouple "Deployment" from "Release." | `OPS.3` |
-| `OPS.5` | Exercise | [Alerting Mindset](./5-alerting-mindset) | Design a monitoring strategy for a real service. | `OPS.1-4` |
+| `OPS.1` | Lesson | [Metrics Basics](./01-metrics-basics) | Master Counters, Gauges, and Histograms. | entry |
+| `OPS.2` | Lesson | [Prometheus Integration](./02-prometheus-integration) | Expose a `/metrics` endpoint for scraping. | `OPS.1` |
+| `OPS.3` | Lesson | [Tracing Basics](./03-distributed-tracing-basics) | Learn how to trace a request across services. | `OPS.2` |
+| `OPS.4` | Lesson | [Feature Flags](./04-feature-flags) | Decouple "Deployment" from "Release." | `OPS.3` |
+| `OPS.5` | Exercise | [Alerting Mindset](./05-alerting-mindset) | Design a monitoring strategy for a real service. | `OPS.1-4` |
 
 ## Why This Track Matters
 

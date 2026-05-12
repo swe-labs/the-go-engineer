@@ -1,0 +1,43 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 09: Architecture & Security
+// Title: Input validation patterns
+// Level: Production
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Learn how allow-lists, normalization, and fail-fast checks turn raw input into trustworthy domain values.
+//
+// WHY THIS MATTERS:
+//   - Validation is boundary work that decides whether input is acceptable before business logic depends on it.
+//
+// RUN:
+//   go run ./09-architecture/04-security/01-input-validation-patterns
+//
+// KEY TAKEAWAY:
+//   - Learn how allow-lists, normalization, and fail-fast checks turn raw input into trustworthy domain values.
+// ============================================================================
+
+package main
+
+import "fmt"
+
+//
+
+func main() {
+	fmt.Println("=== SEC.1 Input validation patterns ===")
+	fmt.Println("Learn how allow-lists, normalization, and fail-fast checks turn raw input into trustworthy domain values.")
+	fmt.Println()
+	fmt.Println("- Validate early and explicitly.")
+	fmt.Println("- Normalize data before deeper rules depend on it.")
+	fmt.Println("- Prefer allow-lists to deny-lists when the acceptable shape is known.")
+	fmt.Println()
+	fmt.Println("Treat validation as a first-class engineering concern because every public boundary is a security boundary.")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: SEC.2 -> 09-architecture/04-security/02-sql-injection-prevention")
+	fmt.Println("Current: SEC.1 (input validation patterns)")
+	fmt.Println("---------------------------------------------------")
+}

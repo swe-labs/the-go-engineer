@@ -50,7 +50,7 @@ Do not commit generated `coverage.out` or `coverage.html` artifacts.
 For benchmark-related changes:
 
 ```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
+go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/02-testing/04-benchmarks/
 ```
 
 ## Maintainer Automation Scripts

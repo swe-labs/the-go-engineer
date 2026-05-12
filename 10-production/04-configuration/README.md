@@ -12,11 +12,11 @@ This track belongs to [10 Production Operations](../README.md).
 
 | ID | Type | Surface | Mission | Requires |
 | --- | --- | --- | --- | --- |
-| `CFG.1` | Lesson | [Environment Variables](./1-environment-variables) | Master the `os.Getenv` and "Dotenv" patterns. | entry |
-| `CFG.2` | Lesson | [Config Files](./2-configuration-files) | Use YAML/JSON for complex hierarchical settings. | `CFG.1` |
-| `CFG.3` | Lesson | [Flag Parsing](./3-flag-parsing) | Master the standard library `flag` package. | `CFG.2` |
-| `CFG.4` | Lesson | [12-Factor Principles](./4-twelve-factor-principles) | Learn the industry standard for cloud-native config. | `CFG.3` |
-| `CFG.5` | Exercise | [Validation on Boot](./5-config-validation-on-boot) | Fail fast if the configuration is invalid. | `CFG.4` |
+| `CFG.1` | Lesson | [Environment Variables](./01-environment-variables) | Master the `os.Getenv` and "Dotenv" patterns. | entry |
+| `CFG.2` | Lesson | [Config Files](./02-configuration-files) | Use YAML/JSON for complex hierarchical settings. | `CFG.1` |
+| `CFG.3` | Lesson | [Flag Parsing](./03-flag-parsing) | Master the standard library `flag` package. | `CFG.2` |
+| `CFG.4` | Lesson | [12-Factor Principles](./04-twelve-factor-principles) | Learn the industry standard for cloud-native config. | `CFG.3` |
+| `CFG.5` | Exercise | [Validation on Boot](./05-config-validation-on-boot) | Fail fast if the configuration is invalid. | `CFG.4` |
 
 ## Why This Track Matters
 

@@ -25,12 +25,12 @@ It does **not** formally teach:
 
 | ID | Lesson | What It Unlocks |
 | --- | --- | --- |
-| `DS.1` | [Arrays](./1-array/) | Foundation for contiguous memory storage. |
-| `DS.2` | [Slices](./2-slices/) | Go's most powerful tool for dynamic sequences. |
-| `DS.3` | [Maps](./3-maps/) | Fast lookup and associative data storage. |
-| `DS.4` | [Pointers](./4-pointers/) | Direct memory access and shared state control. |
-| `DS.5` | [Slices in Depth](./5-slices-2/) | Length, capacity, and the underlying backing array. |
-| `DS.6` | [Contact Manager](./6-contact-manager/) | **Milestone**: Building a searchable data registry. |
+| `DS.1` | [Arrays](./01-array/) | Foundation for contiguous memory storage. |
+| `DS.2` | [Slices](./02-slices/) | Go's most powerful tool for dynamic sequences. |
+| `DS.3` | [Maps](./03-maps/) | Fast lookup and associative data storage. |
+| `DS.4` | [Pointers](./04-pointers/) | Direct memory access and shared state control. |
+| `DS.5` | [Slices in Depth](./05-slices-2/) | Length, capacity, and the underlying backing array. |
+| `DS.6` | [Contact Manager](./06-contact-manager/) | **Milestone**: Building a searchable data registry. |
 
 ## Next Step
 

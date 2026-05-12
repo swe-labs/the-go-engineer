@@ -76,7 +76,7 @@ go run ./scripts/validate_curriculum.go
 For benchmark-related releases:
 
 ```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
+go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/02-testing/04-benchmarks/
 ```
 
 Remove generated local artifacts such as `coverage.out` unless they are intentionally tracked.

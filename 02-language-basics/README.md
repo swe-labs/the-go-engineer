@@ -17,31 +17,31 @@ By the end of this section, a learner should be able to:
 ### Track 1: Values and Types (LB)
 | ID | Lesson | What It Unlocks |
 | --- | --- | --- |
-| `LB.1` | [Variables](./1-variables/) | Introduces typed values, zero values, and declaration styles. |
-| `LB.2` | [Constants](./2-constants/) | Separates immutable values from ordinary variables. |
-| `LB.3` | [Enums with iota](./3-enums/) | Shows how Go models enum-like values with typed constants. |
-| `LB.4` | [Application Logger](./4-application-logger/) | **Milestone**: Combines LB track concepts into a practical logger. |
+| `LB.1` | [Variables](./01-variables/) | Introduces typed values, zero values, and declaration styles. |
+| `LB.2` | [Constants](./02-constants/) | Separates immutable values from ordinary variables. |
+| `LB.3` | [Enums with iota](./03-enums/) | Shows how Go models enum-like values with typed constants. |
+| `LB.4` | [Application Logger](./04-application-logger/) | **Milestone**: Combines LB track concepts into a practical logger. |
 
 ### Track 2: Control Flow (CF)
 | ID | Lesson | What It Unlocks |
 | --- | --- | --- |
-| `CF.1` | [If / Else](./03-control-flow/1-if-else/) | Basic conditional branching and scope. |
-| `CF.2` | [For Basics](./03-control-flow/2-for-basics/) | The single iteration keyword in Go. |
-| `CF.3` | [Break / Continue](./03-control-flow/3-break-continue/) | Controlling loop execution. |
-| `CF.4` | [Switch](./03-control-flow/4-switch/) | Clean multi-way branching without boilerplate. |
-| `CF.5` | [Defer Basics](./03-control-flow/5-defer-basics/) | Mechanics and LIFO execution order. |
-| `CF.6` | [Defer Use Cases](./03-control-flow/6-defer-use-cases/) | Real-world resource management patterns. |
-| `CF.7` | [Pricing Checkout](./03-control-flow/7-pricing-checkout/) | **Milestone**: Logic-heavy exercise for state transitions. |
+| `CF.1` | [If / Else](./03-control-flow/01-if-else/) | Basic conditional branching and scope. |
+| `CF.2` | [For Basics](./03-control-flow/02-for-basics/) | The single iteration keyword in Go. |
+| `CF.3` | [Break / Continue](./03-control-flow/03-break-continue/) | Controlling loop execution. |
+| `CF.4` | [Switch](./03-control-flow/04-switch/) | Clean multi-way branching without boilerplate. |
+| `CF.5` | [Defer Basics](./03-control-flow/05-defer-basics/) | Mechanics and LIFO execution order. |
+| `CF.6` | [Defer Use Cases](./03-control-flow/06-defer-use-cases/) | Real-world resource management patterns. |
+| `CF.7` | [Pricing Checkout](./03-control-flow/07-pricing-checkout/) | **Milestone**: Logic-heavy exercise for state transitions. |
 
 ### Track 3: Data Structures (DS)
 | ID | Lesson | What It Unlocks |
 | --- | --- | --- |
-| `DS.1` | [Arrays](./04-data-structures/1-array/) | Fixed-length contiguous memory. |
-| `DS.2` | [Slices](./04-data-structures/2-slices/) | Dynamic, growable views into arrays (the most used structure). |
-| `DS.3` | [Maps](./04-data-structures/3-maps/) | Key-value storage and fast lookups. |
-| `DS.4` | [Pointers](./04-data-structures/4-pointers/) | Memory addresses, dereferencing, and shared state. |
-| `DS.5` | [Slices in Depth](./04-data-structures/5-slices-2/) | Length, capacity, and the underlying backing array. |
-| `DS.6` | [Contact Manager](./04-data-structures/6-contact-manager/) | **Milestone**: Integrated exercise using slices, maps, and pointers. |
+| `DS.1` | [Arrays](./04-data-structures/01-array/) | Fixed-length contiguous memory. |
+| `DS.2` | [Slices](./04-data-structures/02-slices/) | Dynamic, growable views into arrays (the most used structure). |
+| `DS.3` | [Maps](./04-data-structures/03-maps/) | Key-value storage and fast lookups. |
+| `DS.4` | [Pointers](./04-data-structures/04-pointers/) | Memory addresses, dereferencing, and shared state. |
+| `DS.5` | [Slices in Depth](./04-data-structures/05-slices-2/) | Length, capacity, and the underlying backing array. |
+| `DS.6` | [Contact Manager](./04-data-structures/06-contact-manager/) | **Milestone**: Integrated exercise using slices, maps, and pointers. |
 
 ## Zero-Magic Boundary
 

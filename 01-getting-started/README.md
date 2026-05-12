@@ -27,12 +27,12 @@ That loop is the real foundation for everything that follows.
 
 | ID | Lesson | What It Unlocks |
 | --- | --- | --- |
-| `GT.1` | [installation](./1-installation/) | confirms that Go is installed and runnable |
-| `GT.2` | [hello world](./2-hello-world/) | teaches the minimum executable Go program |
-| `GT.3` | [how Go works](./3-how-go-works/) | explains packages, imports, and compilation at a beginner-safe level |
-| `GT.4` | [development environment](./4-dev-environment/) | establishes the everyday command loop used across the repo |
-| `GT.5` | [go tools](./5-go-tools/) | mastering `fmt`, `vet`, and `doc` for professional code |
-| `GT.6` | [compiler errors](./6-reading-compiler-errors/) | decoding the machine's feedback and treating it as a partner |
+| `GT.1` | [installation](./01-installation/) | confirms that Go is installed and runnable |
+| `GT.2` | [hello world](./02-hello-world/) | teaches the minimum executable Go program |
+| `GT.3` | [how Go works](./03-how-go-works/) | explains packages, imports, and compilation at a beginner-safe level |
+| `GT.4` | [development environment](./04-dev-environment/) | establishes the everyday command loop used across the repo |
+| `GT.5` | [go tools](./05-go-tools/) | mastering `fmt`, `vet`, and `doc` for professional code |
+| `GT.6` | [compiler errors](./06-reading-compiler-errors/) | decoding the machine's feedback and treating it as a partner |
 
 ## Zero-Magic Boundary
 

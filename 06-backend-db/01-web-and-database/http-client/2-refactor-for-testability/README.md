@@ -71,7 +71,7 @@ Even when injecting a client, make sure the one you inject has a `Timeout` set. 
 3. Can you think of other external dependencies (besides HTTP) that should be hidden behind interfaces?
 
 > [!TIP]
-> You can now build and test HTTP clients. Now it's time to learn how to build the APIs they talk to! In [Lesson 1: REST Design Principles](../../apis/1-rest-design-principles/README.md), you will learn the theory behind building truly professional, scalable web interfaces.
+> You can now build and test HTTP clients. Now it's time to learn how to build the APIs they talk to! In [Lesson 1: REST Design Principles](../../01-apis/01-rest-design-principles/README.md), you will learn the theory behind building truly professional, scalable web interfaces.
 
 ## Next Step
 

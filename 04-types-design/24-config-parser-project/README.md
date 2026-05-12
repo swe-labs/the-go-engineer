@@ -97,4 +97,4 @@ go test ./...
 
 ## Next Step
 
-Next: `MP.1` -> [`05-packages-io/01-modules-and-packages/1-module-basics`](../../05-packages-io/01-modules-and-packages/1-module-basics/README.md)
+Next: `MP.1` -> [`05-packages-io/01-modules-and-packages/01-module-basics`](../../05-packages-io/01-modules-and-packages/01-module-basics/README.md)

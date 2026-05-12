@@ -1,0 +1,184 @@
+// Copyright (c) 2026 Rasel Hossen
+// Licensed under The Go Engineer License v1.0
+
+// ============================================================================
+// Section 03: Functions and Errors
+// Title: Order Summary
+// Level: Core
+// ============================================================================
+//
+// WHAT YOU'LL LEARN:
+//   - Combining validation, orchestration, and advanced functions.
+//   - Passing behavior via first-class function slices (pricing rules).
+//   - Using closure factories to generate configurable logic.
+//
+// WHY THIS MATTERS:
+//   - This is the capstone for Section 03. It demonstrates how a
+//     production-grade pipeline is built using small, focused boundaries
+//     that coordinate through explicit errors and flexible callbacks.
+//
+// RUN:
+//   go run ./03-functions-errors/09-order-summary
+//
+// KEY TAKEAWAY:
+//   - Focused functions compose into powerful, readable systems.
+// ============================================================================
+
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
+
+// Section 03: Functions & Errors - Order Summary (Milestone)
+//
+// Mental model:
+// Smaller helpers validate and calculate, one orchestration function owns the
+// sequence, and pricing rules are passed in as function values.
+//
+
+// pricingRule (Type): names the pricing rule concept so the lesson can pass it as a first-class value.
+type pricingRule func(int) int
+
+// validateOrderName (Function): runs the validate order name step and keeps its inputs, outputs, or errors visible.
+func validateOrderName(name string) error {
+	if strings.TrimSpace(name) == "" {
+		return errors.New("order name is required")
+	}
+
+	return nil
+}
+
+// validatePrices (Function): runs the validate prices step and keeps its inputs, outputs, or errors visible.
+func validatePrices(prices []int) error {
+	if len(prices) == 0 {
+		return errors.New("at least one price is required")
+	}
+
+	for i, price := range prices {
+		if price < 0 {
+			return fmt.Errorf("price at index %d cannot be negative", i)
+		}
+	}
+
+	return nil
+}
+
+// validateShipping (Function): runs the validate shipping step and keeps its inputs, outputs, or errors visible.
+func validateShipping(shipping int) error {
+	if shipping < 0 {
+		return errors.New("shipping cannot be negative")
+	}
+
+	return nil
+}
+
+// sumPrices (Function): runs the sum prices step and keeps its inputs, outputs, or errors visible.
+func sumPrices(prices []int) int {
+	total := 0
+
+	for _, price := range prices {
+		total += price
+	}
+
+	return total
+}
+
+// applyPricingRules (Function): runs the apply pricing rules step and keeps its inputs, outputs, or errors visible.
+func applyPricingRules(subtotal int, rules ...pricingRule) int {
+	adjusted := subtotal
+
+	for _, rule := range rules {
+		adjusted = rule(adjusted)
+		if adjusted < 0 {
+			adjusted = 0
+		}
+	}
+
+	return adjusted
+}
+
+// makeMinimumSubtotalDiscount (Function): runs the make minimum subtotal discount step and keeps its inputs, outputs, or errors visible.
+func makeMinimumSubtotalDiscount(threshold int, amount int) pricingRule {
+	return func(subtotal int) int {
+		if subtotal < threshold {
+			return subtotal
+		}
+
+		adjusted := subtotal - amount
+		if adjusted < 0 {
+			return 0
+		}
+
+		return adjusted
+	}
+}
+
+// buildSummary (Function): runs the build summary step and keeps its inputs, outputs, or errors visible.
+func buildSummary(name string, subtotal int, adjustedSubtotal int, shipping int) string {
+	total := adjustedSubtotal + shipping
+	return fmt.Sprintf(
+		"%s -> subtotal: %d, adjusted subtotal: %d, shipping: %d, total: %d",
+		name,
+		subtotal,
+		adjustedSubtotal,
+		shipping,
+		total,
+	)
+}
+
+// processOrder (Function): runs the process order step and keeps its inputs, outputs, or errors visible.
+func processOrder(name string, prices []int, shipping int, rules ...pricingRule) (string, error) {
+	if err := validateOrderName(name); err != nil {
+		return "", err
+	}
+
+	if err := validatePrices(prices); err != nil {
+		return "", err
+	}
+
+	if err := validateShipping(shipping); err != nil {
+		return "", err
+	}
+
+	subtotal := sumPrices(prices)
+	adjustedSubtotal := applyPricingRules(subtotal, rules...)
+
+	return buildSummary(name, subtotal, adjustedSubtotal, shipping), nil
+}
+
+func main() {
+	fmt.Println("=== Order Summary ===")
+
+	vipDiscount := makeMinimumSubtotalDiscount(50, 5)
+
+	summary, err := processOrder("starter cart", []int{12, 18, 25}, 10, vipDiscount)
+	if err != nil {
+		fmt.Println("error:", err)
+	} else {
+		fmt.Println(summary)
+	}
+
+	summary, err = processOrder("small cart", []int{12, 8}, 5, vipDiscount)
+	if err != nil {
+		fmt.Println("error:", err)
+	} else {
+		fmt.Println(summary)
+	}
+
+	summary, err = processOrder(" ", []int{12, 18, 25}, 10, vipDiscount)
+	if err != nil {
+		fmt.Println("error:", err)
+	} else {
+		fmt.Println(summary)
+	}
+
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
+	fmt.Println("NEXT UP: FE.10 -> 03-functions-errors/10-panic-and-recover")
+	fmt.Println("Run    : go run ./03-functions-errors/10-panic-and-recover")
+	fmt.Println("Current: FE.7 (order-summary)")
+	fmt.Println("---------------------------------------------------")
+}
