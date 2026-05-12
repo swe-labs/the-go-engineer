@@ -22,6 +22,7 @@ type Config struct {
 	HTTP     HTTPConfig
 	Database DatabaseConfig
 	Auth     AuthConfig
+	OTEL     OTELConfig
 }
 
 // AppConfig (Struct): defines application-level settings including service identity,
@@ -60,6 +61,17 @@ type AuthConfig struct {
 	TokenSecret string
 	TokenIssuer string
 	TokenTTL    time.Duration
+}
+
+// OTELConfig (Struct): defines OpenTelemetry tracer settings including endpoint,
+// security mode, timeout, and sampling rate. These values are passed to the
+// otel.Tracer constructor at startup.
+type OTELConfig struct {
+	Endpoint   string
+	Insecure   bool
+	Enabled    bool
+	Timeout    time.Duration
+	SampleRate float64
 }
 
 const defaultDevelopmentTokenSecret = "development-only-opslane-secret-change-me"
@@ -133,6 +145,18 @@ func LoadFromLookup(lookup LookupFunc) (Config, error) {
 		return Config{}, err
 	}
 
+	otlpTimeout, err := durationFromEnv(lookup, "OPSLANE_OTEL_TIMEOUT", 5*time.Second)
+	if err != nil {
+		return Config{}, fmt.Errorf("parse OPSLANE_OTEL_TIMEOUT: %w", err)
+	}
+
+	otlpSampleRate, err := floatFromEnv(lookup, "OPSLANE_OTEL_SAMPLE_RATE", 1.0)
+	if err != nil {
+		return Config{}, fmt.Errorf("parse OPSLANE_OTEL_SAMPLE_RATE: %w", err)
+	}
+
+	otelEndpoint := stringFromEnv(lookup, "OPSLANE_OTEL_ENDPOINT", "")
+
 	cfg := Config{
 		App: AppConfig{
 			Name:     "opslane",
@@ -159,6 +183,13 @@ func LoadFromLookup(lookup LookupFunc) (Config, error) {
 			TokenSecret: stringFromEnv(lookup, "OPSLANE_AUTH_TOKEN_SECRET", defaultDevelopmentTokenSecret),
 			TokenIssuer: stringFromEnv(lookup, "OPSLANE_AUTH_TOKEN_ISSUER", "opslane"),
 			TokenTTL:    tokenTTL,
+		},
+		OTEL: OTELConfig{
+			Endpoint:   otelEndpoint,
+			Insecure:   stringFromEnv(lookup, "OPSLANE_OTEL_INSECURE", "") == "true",
+			Enabled:    otelEndpoint != "",
+			Timeout:    otlpTimeout,
+			SampleRate: otlpSampleRate,
 		},
 	}
 
@@ -251,6 +282,14 @@ func (c Config) Validate() error {
 
 	if c.Auth.TokenTTL <= 0 {
 		return fmt.Errorf("OPSLANE_AUTH_TOKEN_TTL must be positive")
+	}
+
+	if c.OTEL.SampleRate < 0 || c.OTEL.SampleRate > 1 {
+		return fmt.Errorf("OPSLANE_OTEL_SAMPLE_RATE must be between 0 and 1, got %f", c.OTEL.SampleRate)
+	}
+
+	if c.OTEL.Timeout <= 0 {
+		return fmt.Errorf("OPSLANE_OTEL_TIMEOUT must be positive")
 	}
 
 	return nil

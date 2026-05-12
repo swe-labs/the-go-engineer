@@ -30,6 +30,9 @@ import (
 
 const startupDatabaseTimeout = 10 * time.Second
 
+// main (Function): application entry point that initializes all dependencies
+// (config, database, auth, workers, HTTP server) in dependency order and
+// coordinates graceful shutdown via signal handling.
 func main() {
 	cfg, err := config.Load()
 	if err != nil {
@@ -56,9 +59,15 @@ func main() {
 		os.Exit(1)
 	}
 
-	var otelCfg otel.Config
-	otelCfg.FromEnv()
-	tracer := otel.New(otelCfg, logger)
+	tracer := otel.New(otel.Config{
+		Endpoint:    cfg.OTEL.Endpoint,
+		Insecure:    cfg.OTEL.Insecure,
+		Timeout:     cfg.OTEL.Timeout,
+		Enabled:     cfg.OTEL.Enabled,
+		SampleRate:  cfg.OTEL.SampleRate,
+		ServiceName: cfg.App.Name,
+		Environment: cfg.App.Env,
+	}, logger)
 	defer tracer.Stop()
 
 	rateLimiter := ratelimit.New(ratelimit.Config{

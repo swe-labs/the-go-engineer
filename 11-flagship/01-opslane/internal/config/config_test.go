@@ -56,6 +56,22 @@ func TestLoadFromLookupDefaults(t *testing.T) {
 	if len(cfg.HTTP.TrustedProxyCIDRs) != 0 {
 		t.Fatalf("trusted proxy cidrs = %v, want none by default", cfg.HTTP.TrustedProxyCIDRs)
 	}
+
+	if cfg.OTEL.Endpoint != "" {
+		t.Fatalf("otel endpoint = %q, want empty", cfg.OTEL.Endpoint)
+	}
+
+	if cfg.OTEL.Enabled {
+		t.Fatal("otel should be disabled by default")
+	}
+
+	if cfg.OTEL.Timeout != 5*time.Second {
+		t.Fatalf("otel timeout = %v, want 5s", cfg.OTEL.Timeout)
+	}
+
+	if cfg.OTEL.SampleRate != 1.0 {
+		t.Fatalf("otel sample rate = %f, want 1.0", cfg.OTEL.SampleRate)
+	}
 }
 
 func TestLoadFromLookupOverrides(t *testing.T) {
@@ -79,6 +95,10 @@ func TestLoadFromLookupOverrides(t *testing.T) {
 		"OPSLANE_AUTH_TOKEN_SECRET":        "staging-secret-with-at-least-thirty-two-chars",
 		"OPSLANE_AUTH_TOKEN_ISSUER":        "opslane-staging",
 		"OPSLANE_AUTH_TOKEN_TTL":           "30m",
+		"OPSLANE_OTEL_ENDPOINT":            "otel.example.com:4318",
+		"OPSLANE_OTEL_INSECURE":            "true",
+		"OPSLANE_OTEL_TIMEOUT":             "10s",
+		"OPSLANE_OTEL_SAMPLE_RATE":         "0.5",
 	}
 
 	cfg, err := LoadFromLookup(func(key string) (string, bool) {
@@ -137,6 +157,26 @@ func TestLoadFromLookupOverrides(t *testing.T) {
 
 	if cfg.Auth.TokenTTL != 30*time.Minute {
 		t.Fatalf("token ttl = %v, want %v", cfg.Auth.TokenTTL, 30*time.Minute)
+	}
+
+	if cfg.OTEL.Endpoint != "otel.example.com:4318" {
+		t.Fatalf("otel endpoint = %q, want otel.example.com:4318", cfg.OTEL.Endpoint)
+	}
+
+	if !cfg.OTEL.Insecure {
+		t.Fatal("otel insecure should be true")
+	}
+
+	if !cfg.OTEL.Enabled {
+		t.Fatal("otel should be enabled when endpoint is set")
+	}
+
+	if cfg.OTEL.Timeout != 10*time.Second {
+		t.Fatalf("otel timeout = %v, want 10s", cfg.OTEL.Timeout)
+	}
+
+	if cfg.OTEL.SampleRate != 0.5 {
+		t.Fatalf("otel sample rate = %f, want 0.5", cfg.OTEL.SampleRate)
 	}
 }
 
@@ -239,6 +279,34 @@ func TestLoadFromLookupRejectsShortAuthSecret(t *testing.T) {
 	})
 	if err == nil {
 		t.Fatal("expected error for short auth secret")
+	}
+}
+
+func TestLoadFromLookupRejectsInvalidOTELSampleRate(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_OTEL_SAMPLE_RATE" {
+			return "1.5", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for sample rate > 1")
+	}
+}
+
+func TestLoadFromLookupRejectsInvalidOTELTimeout(t *testing.T) {
+	t.Parallel()
+
+	_, err := LoadFromLookup(func(key string) (string, bool) {
+		if key == "OPSLANE_OTEL_TIMEOUT" {
+			return "-5s", true
+		}
+		return "", false
+	})
+	if err == nil {
+		t.Fatal("expected error for negative timeout")
 	}
 }
 

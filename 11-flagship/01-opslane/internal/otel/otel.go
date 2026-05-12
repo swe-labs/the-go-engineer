@@ -17,7 +17,6 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-	"os"
 	"strconv"
 	"strings"
 	"sync"
@@ -33,30 +32,6 @@ type Config struct {
 	SampleRate  float64
 	ServiceName string
 	Environment string
-}
-
-func (c *Config) FromEnv() {
-	c.Endpoint = os.Getenv("OPSLANE_OTEL_ENDPOINT")
-	c.Insecure = os.Getenv("OPSLANE_OTEL_INSECURE") == "true"
-	c.Enabled = c.Endpoint != ""
-	c.ServiceName = os.Getenv("OPSLANE_SERVICE_NAME")
-	c.Environment = os.Getenv("OPSLANE_ENV")
-
-	timeout := os.Getenv("OPSLANE_OTEL_TIMEOUT")
-	if timeout != "" {
-		if d, err := time.ParseDuration(timeout); err == nil {
-			c.Timeout = d
-		}
-	}
-	if c.Timeout == 0 {
-		c.Timeout = 5 * time.Second
-	}
-	c.SampleRate = 1.0
-	if sampleRate := os.Getenv("OPSLANE_OTEL_SAMPLE_RATE"); sampleRate != "" {
-		if f, err := strconv.ParseFloat(sampleRate, 64); err == nil && f >= 0 && f <= 1 {
-			c.SampleRate = f
-		}
-	}
 }
 
 // Tracer (Struct): provides OpenTelemetry tracing for the Opslane backend.
@@ -83,6 +58,8 @@ type Span struct {
 	StatusMessage string
 }
 
+// New (Constructor): creates a Tracer and starts the background export loop if
+// tracing is enabled. Returns a no-op tracer when cfg.Enabled is false.
 func New(cfg Config, logger *slog.Logger) *Tracer {
 	if !cfg.Enabled {
 		return &Tracer{config: cfg}
@@ -104,6 +81,9 @@ func New(cfg Config, logger *slog.Logger) *Tracer {
 	return t
 }
 
+// exportLoop (Goroutine): drains the span channel on a 5-second tick or 100-span
+// batch boundary, then sends the batch to the OTLP endpoint. Runs in a background
+// goroutine started by New().
 func (t *Tracer) exportLoop() {
 	ticker := time.NewTicker(5 * time.Second)
 	defer ticker.Stop()
@@ -136,6 +116,9 @@ func (t *Tracer) exportLoop() {
 	}
 }
 
+// StartSpan (Method): creates a new span with the given name and attributes,
+// sampling according to the configured rate. Returns a context containing the
+// span and a finish function that records the end time and enqueues the span.
 func (t *Tracer) StartSpan(ctx context.Context, name string, attrs ...string) (context.Context, func()) {
 	if t.config.Enabled && t.config.SampleRate < 1.0 {
 		if shouldDropSpan(t.config.SampleRate) {
@@ -171,6 +154,8 @@ func (t *Tracer) StartSpan(ctx context.Context, name string, attrs ...string) (c
 	}
 }
 
+// Stop (Method): signals the export loop to flush remaining spans and waits for
+// the background goroutine to finish, then closes the OTLP HTTP client.
 func (t *Tracer) Stop() {
 	if t.client != nil {
 		close(t.stopped)
@@ -179,10 +164,14 @@ func (t *Tracer) Stop() {
 	}
 }
 
+// Enabled (Method): reports whether the tracer was configured with a non-empty
+// endpoint, allowing callers to skip tracing work when disabled.
 func (t *Tracer) Enabled() bool {
 	return t.config.Enabled
 }
 
+// HTTPMiddleware (Function): returns an HTTP middleware that wraps each request
+// in a named span with method and path attributes, enabling per-request tracing.
 func HTTPMiddleware(tracer *Tracer) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -196,8 +185,19 @@ func HTTPMiddleware(tracer *Tracer) func(http.Handler) http.Handler {
 	}
 }
 
-var spanKey = struct{}{}
+// contextKey (Type): uniquely typed key for context.WithValue lookups.
+// Using a named int type guarantees keys never collide across packages or
+// with other values in the same context chain.
+type contextKey int
 
+const (
+	traceIDKey contextKey = iota
+	spanIDKey
+	spanKey
+)
+
+// getOrCreateTraceID (Function): retrieves the trace ID from context, generating a
+// new one if none exists. Each trace represents one end-to-end request flow.
 func getOrCreateTraceID(ctx context.Context) string {
 	if traceID, ok := ctx.Value(traceIDKey).(string); ok && traceID != "" {
 		return traceID
@@ -205,6 +205,8 @@ func getOrCreateTraceID(ctx context.Context) string {
 	return generateTraceID()
 }
 
+// attrsToMap (Function): converts a flat key-value string slice into a string map
+// for efficient attribute storage on spans.
 func attrsToMap(attrs []string) map[string]string {
 	m := make(map[string]string)
 	for i := 0; i < len(attrs)-1; i += 2 {
@@ -213,21 +215,24 @@ func attrsToMap(attrs []string) map[string]string {
 	return m
 }
 
+// generateSpanID (Function): creates a random 8-byte hex span ID for OTLP compatibility.
 func generateSpanID() string {
 	return randomHex(8)
 }
 
+// generateTraceID (Function): creates a random 16-byte hex trace ID for OTLP compatibility.
 func generateTraceID() string {
 	return randomHex(16)
 }
 
-var traceIDKey = struct{}{}
-var spanIDKey = struct{}{}
-
+// WithTraceID (Function): stores the trace ID in context for propagation through
+// / the call chain without explicit parameter passing.
 func WithTraceID(ctx context.Context, traceID string) context.Context {
 	return context.WithValue(ctx, traceIDKey, traceID)
 }
 
+// GetTraceID (Function): extracts the trace ID from context, returning empty string
+// if tracing has not been initialized for this request.
 func GetTraceID(ctx context.Context) string {
 	if traceID, ok := ctx.Value(traceIDKey).(string); ok {
 		return traceID
@@ -235,10 +240,14 @@ func GetTraceID(ctx context.Context) string {
 	return ""
 }
 
+// WithSpanID (Function): stores the span ID in context so child spans can reference
+// their parent without direct parameter plumbing.
 func WithSpanID(ctx context.Context, spanID string) context.Context {
 	return context.WithValue(ctx, spanIDKey, spanID)
 }
 
+// GetSpanID (Function): extracts the current span ID from context, returning empty
+// string if the request has no active span.
 func GetSpanID(ctx context.Context) string {
 	if spanID, ok := ctx.Value(spanIDKey).(string); ok {
 		return spanID
@@ -246,6 +255,8 @@ func GetSpanID(ctx context.Context) string {
 	return ""
 }
 
+// WithTraceParent (Function): parses a W3C Trace-Context header value and stores
+// the extracted trace/span IDs in context for distributed trace propagation.
 func WithTraceParent(ctx context.Context, traceParent string) context.Context {
 	traceID, parentID, ok := ParseTraceParent(traceParent)
 	if !ok {
@@ -255,6 +266,8 @@ func WithTraceParent(ctx context.Context, traceParent string) context.Context {
 	return WithSpanID(ctx, parentID)
 }
 
+// ParseTraceParent (Function): validates and splits a W3C traceparent header into
+// its trace ID, parent span ID, and trace flags components.
 func ParseTraceParent(traceParent string) (traceID, parentID string, ok bool) {
 	parts := strings.Split(strings.TrimSpace(traceParent), "-")
 	if len(parts) != 4 {
@@ -278,6 +291,8 @@ func ParseTraceParent(traceParent string) (traceID, parentID string, ok bool) {
 	return traceID, parentID, true
 }
 
+// isValidHex (Function): checks that every character in the string is a valid
+// hexadecimal digit, used to validate trace and span IDs.
 func isValidHex(s string) bool {
 	for _, r := range s {
 		if !((r >= '0' && r <= '9') || (r >= 'a' && r <= 'f') || (r >= 'A' && r <= 'F')) {
@@ -287,6 +302,8 @@ func isValidHex(s string) bool {
 	return len(s) > 0
 }
 
+// isAllZero (Function): returns true when the string consists entirely of zero
+// characters, used to reject invalid zero-value trace and span IDs.
 func isAllZero(s string) bool {
 	for _, r := range s {
 		if r != '0' {
@@ -296,6 +313,8 @@ func isAllZero(s string) bool {
 	return true
 }
 
+// FormatTraceParent (Function): builds a W3C traceparent header string from the
+// given trace and span IDs for downstream propagation.
 func FormatTraceParent(traceID, spanID string) string {
 	if len(traceID) != 32 || len(spanID) != 16 {
 		return ""
@@ -303,6 +322,8 @@ func FormatTraceParent(traceID, spanID string) string {
 	return fmt.Sprintf("00-%s-%s-01", strings.ToLower(traceID), strings.ToLower(spanID))
 }
 
+// shouldDropSpan (Function): probabilistically decides whether to sample a span
+// based on the configured sample rate, using crypto/rand for unbiased selection.
 func shouldDropSpan(sampleRate float64) bool {
 	if sampleRate <= 0 {
 		return true
@@ -318,6 +339,8 @@ func shouldDropSpan(sampleRate float64) bool {
 	return v > sampleRate
 }
 
+// randomHex (Function): generates n random bytes and returns them as a hex string,
+// falling back to nanosecond timestamps if crypto/rand fails.
 func randomHex(n int) string {
 	buf := make([]byte, n)
 	if _, err := rand.Read(buf); err != nil {
@@ -326,6 +349,8 @@ func randomHex(n int) string {
 	return hex.EncodeToString(buf)
 }
 
+// otlpClient (Struct): manages the HTTP connection and serialization for sending
+// OTLP trace data to an OpenTelemetry-compatible backend.
 type otlpClient struct {
 	endpoint    string
 	insecure    bool
@@ -335,6 +360,8 @@ type otlpClient struct {
 	environment string
 }
 
+// newOTLPClient (Constructor): creates an OTLP HTTP client configured with the
+// given endpoint, security mode, and timeout. Uses HTTPS by default.
 func newOTLPClient(endpoint string, insecure bool, timeout time.Duration, serviceName, environment string) *otlpClient {
 	scheme := "https"
 	if insecure {
@@ -360,6 +387,8 @@ func newOTLPClient(endpoint string, insecure bool, timeout time.Duration, servic
 	}
 }
 
+// Export (Method): serializes a batch of spans into OTLP JSON format and sends
+// them to the configured endpoint via HTTP POST.
 func (c *otlpClient) Export(ctx context.Context, spans []Span) error {
 	if len(spans) == 0 {
 		return nil
@@ -415,6 +444,8 @@ func (c *otlpClient) Export(ctx context.Context, spans []Span) error {
 	return nil
 }
 
+// toOTLPSpans (Function): converts internal Span structs into the OTLP JSON wire
+// format for transmission to the telemetry backend.
 func toOTLPSpans(spans []Span) []map[string]any {
 	out := make([]map[string]any, 0, len(spans))
 	for _, span := range spans {
@@ -444,6 +475,7 @@ func toOTLPSpans(spans []Span) []map[string]any {
 	return out
 }
 
+// Close (Method): closes idle HTTP connections held by the OTLP client's transport.
 func (c *otlpClient) Close() {
 	if c.client != nil {
 		c.client.CloseIdleConnections()
