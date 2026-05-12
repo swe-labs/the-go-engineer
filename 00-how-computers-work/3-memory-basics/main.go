@@ -29,12 +29,15 @@ package main
 import "fmt"
 
 // noEscape (Function): returns a plain value whose lifetime stays inside the caller boundary.
+// The return-by-value pattern keeps the result on the stack, avoiding heap allocation.
 func noEscape() int {
 	x := 42
 	return x
 }
 
 // escapes (Function): returns an address, forcing the local value to outlive its stack frame.
+// Returning a pointer triggers escape analysis and heap allocation, which is the key
+// trade-off this lesson demonstrates.
 func escapes() *int {
 	x := 99
 	return &x

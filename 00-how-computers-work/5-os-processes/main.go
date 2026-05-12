@@ -32,6 +32,9 @@ import (
 	"runtime"
 )
 
+// main (Function): entry point for the program. It queries the OS for process
+// metadata (PID, parent PID, hostname) and prints them to demonstrate that a Go
+// program runs as an OS-managed process with syscall boundaries.
 func main() {
 	fmt.Println("=== OS Processes and Syscalls ===")
 	fmt.Printf("PID: %d\n", os.Getpid())

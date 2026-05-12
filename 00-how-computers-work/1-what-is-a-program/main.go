@@ -27,6 +27,8 @@ package main
 
 import "fmt"
 
+// main (Function): entry point for the program. It prints the core lesson
+// concept to stdout so the learner can see the fetch-decode-execute loop in action.
 func main() {
 	fmt.Println("A program is a list of instructions for the machine.")
 	fmt.Println("The CPU keeps fetching, decoding, and executing those instructions.")

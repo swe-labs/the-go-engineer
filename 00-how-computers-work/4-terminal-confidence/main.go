@@ -31,6 +31,9 @@ import (
 	"os"
 )
 
+// main (Function): entry point for the program. It writes to both stdout and stderr
+// to illustrate how programs expose multiple output streams that the shell can
+// redirect independently.
 func main() {
 	// Standard Output (stdout)
 	fmt.Println("This goes to standard output (stdout)")

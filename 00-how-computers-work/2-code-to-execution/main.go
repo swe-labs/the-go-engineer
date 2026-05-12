@@ -28,6 +28,9 @@ package main
 
 import "fmt"
 
+// main (Function): entry point for the program. It walks through the Go
+// compiler pipeline stages — tokens, AST, IR, binary — to demonstrate how
+// source code becomes a running executable.
 func main() {
 	fmt.Println("Source code : x := 42 + y")
 	fmt.Println("Tokens      : IDENT(x) DEFINE(:=) NUMBER(42) PLUS(+) IDENT(y)")
