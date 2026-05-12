@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// RequireAuth rejects anonymous requests and attaches verified tenant identity to context.
+// RequireAuth (Function): returns HTTP middleware that rejects anonymous requests and attaches verified identity to context
 func RequireAuth(tokens *TokenManager) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +23,7 @@ func RequireAuth(tokens *TokenManager) func(http.Handler) http.Handler {
 	}
 }
 
-// IdentityFromRequest verifies the Authorization header and returns trusted token claims.
+// IdentityFromRequest (Function): verifies the Authorization header and returns trusted token claims
 func IdentityFromRequest(tokens *TokenManager, r *http.Request) (Identity, error) {
 	if tokens == nil {
 		return Identity{}, ErrInvalidToken

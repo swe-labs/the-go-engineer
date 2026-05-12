@@ -9,9 +9,7 @@ import (
 	"net/http"
 )
 
-// PrometheusHandler returns an HTTP handler that exposes metrics
-// in Prometheus text format. This endpoint should be mounted at
-// /metrics for Prometheus scraper compatibility.
+// PrometheusHandler (Function): returns an HTTP handler exposing metrics in Prometheus text format
 func PrometheusHandler(m *AppMetrics) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/plain; version=0.0.4; charset=utf-8")
@@ -47,10 +45,12 @@ func PrometheusHandler(m *AppMetrics) http.HandlerFunc {
 	}
 }
 
+// prometheusWriter (Struct): wraps io.Writer for Prometheus text format output
 type prometheusWriter struct {
 	io.Writer
 }
 
+// printHistogramProm (Function): writes a Prometheus histogram text representation to writer
 func printHistogramProm(w io.Writer, name string, h *Histogram) {
 	snap := h.Snapshot()
 

@@ -31,11 +31,7 @@ import (
 //   Every request *must* pass through these layers first before hitting `ServeMux`.
 // ============================================================================
 
-// RecoverPanic acts as the outermost onion shell.
-// By wrapping `next.ServeHTTP` inside a function containing a `defer recover()`,
-// we guarantee that if ANY downstream handler throws a fatal panic, this
-// middleware will instantly catch it, write a 500 status code, and prevent
-// the entire server process from crashing!
+// RecoverPanic (Function): outermost middleware that catches panics, logs stack trace, and returns 500
 func RecoverPanic(logger *slog.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -55,8 +51,7 @@ func RecoverPanic(logger *slog.Logger) func(http.Handler) http.Handler {
 	}
 }
 
-// LogRequest wraps the HTTP handler to log the HTTP method, path, and total request duration.
-// It acts as a lightweight access log for the server.
+// LogRequest (Function): lightweight access log middleware logging method, path, and latency
 func LogRequest(logger *slog.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -71,7 +66,7 @@ func LogRequest(logger *slog.Logger) func(http.Handler) http.Handler {
 	}
 }
 
-// CORS allows browser-based clients to call the API during local development.
+// CORS (Function): middleware allowing browser-based API calls during local development
 func CORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -87,12 +82,13 @@ func CORS(next http.Handler) http.Handler {
 	})
 }
 
+// clientWindow (Struct): tracks request count and reset time for a single client's rate limit window
 type clientWindow struct {
 	count   int
 	resetAt time.Time
 }
 
-// RateLimit bounds how many requests one client IP can make inside a fixed window.
+// RateLimit (Function): per-IP rate limiting middleware with fixed window and proxy-aware client address
 func RateLimit(maxRequests int, window time.Duration, trustedProxyCIDRs []netip.Prefix) func(http.Handler) http.Handler {
 	var mu sync.Mutex
 	clients := make(map[string]clientWindow)
@@ -135,6 +131,7 @@ func RateLimit(maxRequests int, window time.Duration, trustedProxyCIDRs []netip.
 	}
 }
 
+// pruneExpiredClientWindows (Function): removes rate limit entries whose window has expired
 func pruneExpiredClientWindows(clients map[string]clientWindow, now time.Time) {
 	for clientIP, state := range clients {
 		if !now.Before(state.resetAt) {
@@ -143,7 +140,7 @@ func pruneExpiredClientWindows(clients map[string]clientWindow, now time.Time) {
 	}
 }
 
-// SecureHeaders sets mandatory security directives for browsers.
+// SecureHeaders (Function): middleware setting mandatory browser security headers (X-Frame-Options, X-Content-Type-Options)
 func SecureHeaders(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// Prevent Clickjacking (disallow being loaded in an iframe)
@@ -174,6 +171,7 @@ func ClientAddress(r *http.Request, trustedProxyCIDRs []netip.Prefix) string {
 	return r.RemoteAddr
 }
 
+// remotePeerIP (Function): extracts the IP address from a remote address string
 func remotePeerIP(remoteAddr string) netip.Addr {
 	host, _, err := net.SplitHostPort(remoteAddr)
 	if err == nil {
@@ -190,6 +188,7 @@ func remotePeerIP(remoteAddr string) netip.Addr {
 	return ip.Unmap()
 }
 
+// forwardedClientIP (Function): extracts the client IP from X-Forwarded-For or X-Real-IP headers
 func forwardedClientIP(r *http.Request) (netip.Addr, bool) {
 	if forwardedFor := strings.TrimSpace(r.Header.Get("X-Forwarded-For")); forwardedFor != "" {
 		firstHop := strings.TrimSpace(strings.Split(forwardedFor, ",")[0])
@@ -207,6 +206,7 @@ func forwardedClientIP(r *http.Request) (netip.Addr, bool) {
 	return netip.Addr{}, false
 }
 
+// isTrustedProxy (Function): checks if an IP address is within any of the trusted proxy CIDR ranges
 func isTrustedProxy(ip netip.Addr, trustedProxyCIDRs []netip.Prefix) bool {
 	for _, prefix := range trustedProxyCIDRs {
 		if prefix.Contains(ip) {

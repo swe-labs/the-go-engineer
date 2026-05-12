@@ -14,15 +14,15 @@ import (
 )
 
 var (
-	// ErrInvalidCredentials hides whether the email, password, or token detail was wrong.
+	// ErrInvalidCredentials (Error): hides whether the email, password, or token detail was wrong
 	ErrInvalidCredentials = errors.New("invalid credentials")
-	// ErrWeakPassword tells callers that the proposed password failed the local policy.
+	// ErrWeakPassword (Error): tells callers that the proposed password failed the local policy
 	ErrWeakPassword = errors.New("password does not meet policy")
 )
 
 const minimumPasswordLength = 12
 
-// ValidatePassword enforces the minimum local password policy before hashing.
+// ValidatePassword (Function): enforces the minimum local password policy before hashing
 func ValidatePassword(password string) error {
 	if utf8.RuneCountInString(password) < minimumPasswordLength {
 		return fmt.Errorf("%w: must be at least %d characters", ErrWeakPassword, minimumPasswordLength)
@@ -46,7 +46,7 @@ func ValidatePassword(password string) error {
 	return nil
 }
 
-// HashPassword validates and stores a password using bcrypt.
+// HashPassword (Function): validates and hashes a password using bcrypt
 func HashPassword(password string) (string, error) {
 	if err := ValidatePassword(password); err != nil {
 		return "", err
@@ -60,7 +60,7 @@ func HashPassword(password string) (string, error) {
 	return string(hash), nil
 }
 
-// VerifyPassword compares a bcrypt hash with a candidate password.
+// VerifyPassword (Function): compares a bcrypt hash with a candidate password
 func VerifyPassword(hash, password string) error {
 	if strings.TrimSpace(hash) == "" || password == "" {
 		return ErrInvalidCredentials

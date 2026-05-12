@@ -19,13 +19,13 @@ import (
 )
 
 var (
-	// ErrInvalidToken means the token is malformed, signed by the wrong secret, or has invalid claims.
+	// ErrInvalidToken (Error): signals a malformed, incorrectly signed, or invalid-claims token
 	ErrInvalidToken = errors.New("invalid token")
-	// ErrExpiredToken means the token was valid once but is now outside its allowed lifetime.
+	// ErrExpiredToken (Error): indicates the token is beyond its allowed lifetime
 	ErrExpiredToken = errors.New("token expired")
 )
 
-// Identity is the trusted tenant-scoped user data carried after authentication.
+// Identity (Struct): holds the trusted tenant-scoped user data carried after authentication
 type Identity struct {
 	UserID    int64           `json:"user_id"`
 	TenantID  int64           `json:"tenant_id"`
@@ -35,7 +35,7 @@ type Identity struct {
 	ExpiresAt time.Time       `json:"expires_at"`
 }
 
-// TokenManager issues and verifies HMAC-signed JWT-compatible access tokens.
+// TokenManager (Struct): issues and verifies HMAC-signed JWT-compatible access tokens
 //
 // NOTE: This is a teaching JWT implementation to demonstrate cryptographic
 // signatures and identity extraction without external dependencies.
@@ -48,11 +48,13 @@ type TokenManager struct {
 	now    func() time.Time
 }
 
+// tokenHeader (Struct): internal JWT header with algorithm and type fields
 type tokenHeader struct {
 	Algorithm string `json:"alg"`
 	Type      string `json:"typ"`
 }
 
+// tokenClaims (Struct): internal JWT payload with identity and expiry fields
 type tokenClaims struct {
 	Issuer    string          `json:"iss"`
 	Subject   string          `json:"sub"`
@@ -64,7 +66,7 @@ type tokenClaims struct {
 	ExpiresAt int64           `json:"exp"`
 }
 
-// NewTokenManager builds a token manager from validated runtime auth settings.
+// NewTokenManager (Constructor): builds a token manager from validated runtime auth settings
 func NewTokenManager(secret, issuer string, ttl time.Duration) (*TokenManager, error) {
 	if len(secret) < 32 {
 		return nil, fmt.Errorf("token secret must be at least 32 characters")
@@ -86,7 +88,7 @@ func NewTokenManager(secret, issuer string, ttl time.Duration) (*TokenManager, e
 	}, nil
 }
 
-// Issue creates a signed token for a validated tenant-scoped identity.
+// Issue (Method): creates a signed JWT token for a validated tenant-scoped identity
 func (m *TokenManager) Issue(identity Identity) (string, error) {
 	if identity.UserID <= 0 {
 		return "", fmt.Errorf("identity user id must be positive")
@@ -133,7 +135,7 @@ func (m *TokenManager) Issue(identity Identity) (string, error) {
 	return signingInput + "." + base64.RawURLEncoding.EncodeToString(signature), nil
 }
 
-// Verify checks a token signature, issuer, expiry, and required tenant identity claims.
+// Verify (Method): checks token signature, issuer, expiry, and required tenant identity claims
 func (m *TokenManager) Verify(token string) (Identity, error) {
 	parts := strings.Split(token, ".")
 	if len(parts) != 3 {
@@ -197,6 +199,7 @@ func (m *TokenManager) Verify(token string) (Identity, error) {
 	}, nil
 }
 
+// encodeSegment (Function): base64url-encodes a JSON-marshalled value for JWT segment
 func encodeSegment(value any) (string, error) {
 	data, err := json.Marshal(value)
 	if err != nil {
@@ -206,6 +209,7 @@ func encodeSegment(value any) (string, error) {
 	return base64.RawURLEncoding.EncodeToString(data), nil
 }
 
+// decodeSegment (Function): base64url-decodes and JSON-unmarshals a JWT segment into value
 func decodeSegment(segment string, value any) error {
 	data, err := base64.RawURLEncoding.DecodeString(segment)
 	if err != nil {
@@ -215,6 +219,7 @@ func decodeSegment(segment string, value any) error {
 	return json.Unmarshal(data, value)
 }
 
+// sign (Function): computes an HMAC-SHA256 signature for JWT signing input
 func sign(input string, secret []byte) []byte {
 	mac := hmac.New(sha256.New, secret)
 	mac.Write([]byte(input))

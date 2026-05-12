@@ -16,26 +16,31 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/middleware"
 )
 
+// LimiterKey (Function): extracts a rate limit key from an HTTP request
 type LimiterKey func(r *http.Request) string
 
+// ByIP (Function): creates a LimiterKey that extracts the client IP address
 func ByIP(trustedProxyCIDRs []netip.Prefix) LimiterKey {
 	return func(r *http.Request) string {
 		return middleware.ClientAddress(r, trustedProxyCIDRs)
 	}
 }
 
+// ByHeader (Function): creates a LimiterKey that extracts a specific HTTP header value
 func ByHeader(header string) func(r *http.Request) string {
 	return func(r *http.Request) string {
 		return r.Header.Get(header)
 	}
 }
 
+// ByTenantAndUser (Function): creates a LimiterKey combining tenant and user identifiers
 func ByTenantAndUser(tenantID, userID func(*http.Request) string) func(r *http.Request) string {
 	return func(r *http.Request) string {
 		return tenantID(r) + ":" + userID(r)
 	}
 }
 
+// Middleware (Function): HTTP rate limiting middleware with fail-open and rate limit headers
 func Middleware(limiter *Limiter, keyFunc LimiterKey, logger *slog.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -68,6 +73,7 @@ func Middleware(limiter *Limiter, keyFunc LimiterKey, logger *slog.Logger) func(
 	}
 }
 
+// setRateLimitHeaders (Function): sets X-RateLimit-* and Retry-After response headers
 func setRateLimitHeaders(w http.ResponseWriter, d Decision) {
 	limit := d.Limit
 	if limit <= 0 {
@@ -91,29 +97,35 @@ func setRateLimitHeaders(w http.ResponseWriter, d Decision) {
 	}
 }
 
+// PerIPMiddleware (Function): convenience middleware for per-IP rate limiting
 func PerIPMiddleware(limiter *Limiter, trustedProxyCIDRs []netip.Prefix, logger *slog.Logger) func(http.Handler) http.Handler {
 	return Middleware(limiter, ByIP(trustedProxyCIDRs), logger)
 }
 
+// AuthenticatedMiddleware (Function): convenience middleware for per-tenant-user rate limiting
 func AuthenticatedMiddleware(limiter *Limiter, tenantIDFunc, userIDFunc func(*http.Request) string, logger *slog.Logger) func(http.Handler) http.Handler {
 	return Middleware(limiter, ByTenantAndUser(tenantIDFunc, userIDFunc), logger)
 }
 
+// LimiterPool (Struct): thread-safe registry of named limiters
 type LimiterPool struct {
 	mu       sync.RWMutex
 	limiters map[string]*Limiter
 }
 
+// pool (Struct): package-level default limiter pool
 var pool = &LimiterPool{
 	limiters: make(map[string]*Limiter),
 }
 
+// RegisterLimiter (Function): registers a named limiter in the default pool
 func RegisterLimiter(name string, limiter *Limiter) {
 	pool.mu.Lock()
 	defer pool.mu.Unlock()
 	pool.limiters[name] = limiter
 }
 
+// GetLimiter (Function): retrieves a named limiter from the default pool
 func GetLimiter(name string) *Limiter {
 	pool.mu.RLock()
 	defer pool.mu.RUnlock()

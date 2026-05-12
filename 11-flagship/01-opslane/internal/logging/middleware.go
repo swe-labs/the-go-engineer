@@ -11,17 +11,14 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/otel"
 )
 
-// statusRecorder wraps http.ResponseWriter to capture the status code
-// written by downstream handlers. This is necessary because the
-// standard ResponseWriter does not expose the status after WriteHeader
-// is called.
+// statusRecorder (Struct): wraps http.ResponseWriter to capture the status code for logging
 type statusRecorder struct {
 	http.ResponseWriter
 	status      int
 	wroteHeader bool
 }
 
-// WriteHeader captures the HTTP status code before delegating to the underlying response writer.
+// WriteHeader (Method): captures the HTTP status code before delegating to the underlying writer
 func (sr *statusRecorder) WriteHeader(code int) {
 	if !sr.wroteHeader {
 		sr.status = code
@@ -30,7 +27,7 @@ func (sr *statusRecorder) WriteHeader(code int) {
 	sr.ResponseWriter.WriteHeader(code)
 }
 
-// Write captures the default 200 OK status if WriteHeader wasn't explicitly called first.
+// Write (Method): captures the default 200 OK status if WriteHeader wasn't explicitly called
 func (sr *statusRecorder) Write(b []byte) (int, error) {
 	if !sr.wroteHeader {
 		sr.status = http.StatusOK
@@ -39,17 +36,7 @@ func (sr *statusRecorder) Write(b []byte) (int, error) {
 	return sr.ResponseWriter.Write(b)
 }
 
-// RequestLogger returns HTTP middleware that:
-//
-//  1. Extracts or generates a correlation ID from the X-Correlation-ID header.
-//  2. Injects the correlation ID into the request context.
-//  3. Sets the correlation ID on the response header so clients can reference it.
-//  4. Wraps the ResponseWriter to capture the status code.
-//  5. Logs a structured request-completion line with method, path, status,
-//     latency, and correlation_id.
-//
-// This middleware replaces ad-hoc request logging with a single structured
-// entry that contains enough context to trace a request through the system.
+// RequestLogger (Function): returns HTTP middleware that logs structured request completions with correlation ID
 func RequestLogger(logger *slog.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

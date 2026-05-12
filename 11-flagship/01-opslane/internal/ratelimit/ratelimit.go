@@ -43,11 +43,13 @@ type Decision struct {
 	ResetAt   time.Time
 }
 
+// windowCounter (Struct): tracks request count and window end time for a rate limit key
 type windowCounter struct {
 	count     int64
 	windowEnd time.Time
 }
 
+// New (Constructor): creates a rate limiter with configurable requests per second, burst, and window
 func New(cfg Config) *Limiter {
 	if cfg.RequestsPerSecond == 0 {
 		cfg.RequestsPerSecond = 10
@@ -65,16 +67,19 @@ func New(cfg Config) *Limiter {
 	}
 }
 
+// Allow (Method): checks if a key is allowed, returning a bool decision
 func (l *Limiter) Allow(key string) (bool, error) {
 	d, err := l.AllowWithDecision(context.Background(), key)
 	return d.Allowed, err
 }
 
+// AllowContext (Method): checks if a key is allowed with context support
 func (l *Limiter) AllowContext(ctx context.Context, key string) (bool, error) {
 	d, err := l.AllowWithDecision(ctx, key)
 	return d.Allowed, err
 }
 
+// AllowWithDecision (Method): checks if a key is allowed, returning a full Decision struct
 func (l *Limiter) AllowWithDecision(ctx context.Context, key string) (Decision, error) {
 	if l.cfg.DB == nil {
 		return l.localAllow(key), nil
@@ -82,6 +87,7 @@ func (l *Limiter) AllowWithDecision(ctx context.Context, key string) (Decision, 
 	return l.dbAllow(ctx, key)
 }
 
+// localAllow (Method): in-memory rate limit check with mutex protection
 func (l *Limiter) localAllow(key string) Decision {
 	l.mu.Lock()
 	defer l.mu.Unlock()
@@ -124,6 +130,7 @@ func (l *Limiter) localAllow(key string) Decision {
 	}
 }
 
+// dbAllow (Method): PostgreSQL-backed rate limit check with upsert query
 func (l *Limiter) dbAllow(ctx context.Context, key string) (Decision, error) {
 	now := time.Now()
 	window := now.Truncate(time.Duration(l.cfg.WindowSeconds) * time.Second)
@@ -170,6 +177,7 @@ func (l *Limiter) dbAllow(ctx context.Context, key string) (Decision, error) {
 	}, nil
 }
 
+// Reset (Method): clears rate limit counters for a key in local or DB mode
 func (l *Limiter) Reset(key string) error {
 	if l.cfg.DB == nil {
 		l.mu.Lock()
@@ -182,23 +190,27 @@ func (l *Limiter) Reset(key string) error {
 	return err
 }
 
+// MultiLimiter (Struct): manages multiple named rate limiters for different API routes
 type MultiLimiter struct {
 	limiters map[string]*Limiter
 	mu       sync.Mutex
 }
 
+// NewMultiLimiter (Constructor): creates a named limiter registry
 func NewMultiLimiter() *MultiLimiter {
 	return &MultiLimiter{
 		limiters: make(map[string]*Limiter),
 	}
 }
 
+// Register (Method): adds a named rate limiter to the multi-limiter pool
 func (m *MultiLimiter) Register(name string, cfg Config) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	m.limiters[name] = New(cfg)
 }
 
+// Allow (Method): checks rate limit for a named limiter; returns true if limiter not found (fail-open)
 func (m *MultiLimiter) Allow(name, key string) (bool, error) {
 	m.mu.Lock()
 	limiter, ok := m.limiters[name]
@@ -211,6 +223,7 @@ func (m *MultiLimiter) Allow(name, key string) (bool, error) {
 	return limiter.Allow(key)
 }
 
+// CreateRateLimitTable (Function): creates the rate_limits table and index in PostgreSQL
 func CreateRateLimitTable(ctx context.Context, db *sql.DB) error {
 	_, err := db.ExecContext(ctx, `
 		CREATE TABLE IF NOT EXISTS rate_limits (

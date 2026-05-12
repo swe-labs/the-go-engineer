@@ -13,28 +13,21 @@ import (
 	"sync/atomic"
 )
 
-// Counter is a thread-safe monotonically increasing counter.
-// It uses sync/atomic for lock-free concurrent access.
+// Counter (Struct): thread-safe monotonically increasing counter using sync/atomic
 type Counter struct {
 	value atomic.Int64
 }
 
-// Inc increments the counter by one.
+// Inc (Method): increments the counter by one
 func (c *Counter) Inc() { c.value.Add(1) }
 
-// Add increments the counter by n.
+// Add (Method): increments the counter by n
 func (c *Counter) Add(n int64) { c.value.Add(n) }
 
-// Value returns the current counter value.
+// Value (Method): returns the current counter value
 func (c *Counter) Value() int64 { return c.value.Load() }
 
-// Histogram records observations into fixed buckets for latency
-// distribution analysis. Each bucket counts how many observations
-// were less than or equal to its upper bound.
-//
-// This is a simplified teaching implementation. Production systems
-// use more efficient representations (e.g., HDR histograms or
-// Prometheus-style cumulative buckets).
+// Histogram (Struct): records observations into fixed buckets for latency distribution analysis
 type Histogram struct {
 	mu      sync.Mutex
 	bounds  []float64 // sorted upper bounds
@@ -43,8 +36,7 @@ type Histogram struct {
 	sum     float64
 }
 
-// NewHistogram creates a histogram with the given bucket boundaries.
-// Boundaries are sorted automatically.
+// NewHistogram (Constructor): creates a histogram with automatically sorted bucket boundaries
 func NewHistogram(bounds []float64) *Histogram {
 	sorted := make([]float64, len(bounds))
 	copy(sorted, bounds)
@@ -56,8 +48,7 @@ func NewHistogram(bounds []float64) *Histogram {
 	}
 }
 
-// Observe records a single value. The value is placed in the first
-// bucket whose upper bound is greater than or equal to the value.
+// Observe (Method): records a single value into the appropriate bucket
 func (h *Histogram) Observe(v float64) {
 	h.mu.Lock()
 	defer h.mu.Unlock()
@@ -75,7 +66,7 @@ func (h *Histogram) Observe(v float64) {
 	h.buckets[len(h.bounds)]++
 }
 
-// HistogramSnapshot holds a point-in-time copy of a histogram.
+// HistogramSnapshot (Struct): point-in-time copy of a histogram for serialization
 type HistogramSnapshot struct {
 	Bounds  []float64 `json:"bounds"`
 	Buckets []int64   `json:"buckets"`
@@ -83,7 +74,7 @@ type HistogramSnapshot struct {
 	Sum     float64   `json:"sum"`
 }
 
-// Snapshot returns a point-in-time copy of the histogram data.
+// Snapshot (Method): returns a point-in-time copy of the histogram data
 func (h *Histogram) Snapshot() HistogramSnapshot {
 	h.mu.Lock()
 	defer h.mu.Unlock()
@@ -102,15 +93,14 @@ func (h *Histogram) Snapshot() HistogramSnapshot {
 	}
 }
 
-// Registry holds named counters and histograms. It provides a single
-// collection point for all application metrics.
+// Registry (Struct): holds named counters and histograms as a single metrics collection point
 type Registry struct {
 	mu         sync.RWMutex
 	counters   map[string]*Counter
 	histograms map[string]*Histogram
 }
 
-// NewRegistry creates an empty metric registry.
+// NewRegistry (Constructor): creates an empty metric registry
 func NewRegistry() *Registry {
 	return &Registry{
 		counters:   make(map[string]*Counter),
@@ -118,7 +108,7 @@ func NewRegistry() *Registry {
 	}
 }
 
-// Counter returns the named counter, creating it if necessary.
+// Counter (Method): returns the named counter, creating it if necessary (thread-safe)
 func (r *Registry) Counter(name string) *Counter {
 	r.mu.RLock()
 	if c, ok := r.counters[name]; ok {
@@ -140,9 +130,7 @@ func (r *Registry) Counter(name string) *Counter {
 	return c
 }
 
-// Histogram returns the named histogram, creating it with the given
-// bounds if necessary. If the histogram already exists, bounds are
-// ignored.
+// Histogram (Method): returns the named histogram, creating it with the given bounds if necessary
 func (r *Registry) Histogram(name string, bounds []float64) *Histogram {
 	r.mu.RLock()
 	if h, ok := r.histograms[name]; ok {
@@ -163,7 +151,7 @@ func (r *Registry) Histogram(name string, bounds []float64) *Histogram {
 	return h
 }
 
-// Snapshot returns all metrics as a serializable map.
+// Snapshot (Method): returns all metrics as a serializable map
 func (r *Registry) Snapshot() map[string]any {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -180,13 +168,12 @@ func (r *Registry) Snapshot() map[string]any {
 	return result
 }
 
-// DefaultHTTPBuckets are latency bucket boundaries in seconds,
-// suitable for HTTP request duration tracking.
+// DefaultHTTPBuckets (Slice): latency bucket boundaries in seconds for HTTP request duration tracking
 var DefaultHTTPBuckets = []float64{
 	0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10,
 }
 
-// AppMetrics holds pre-registered application-level metrics.
+// AppMetrics (Struct): holds pre-registered application-level metrics for HTTP, cache, and workers
 type AppMetrics struct {
 	Registry *Registry
 
@@ -206,8 +193,7 @@ type AppMetrics struct {
 	WorkerJobsFailed    *Counter
 }
 
-// NewAppMetrics creates the application metrics with pre-registered
-// counters and histograms.
+// NewAppMetrics (Constructor): creates the application metrics with pre-registered counters and histograms
 func NewAppMetrics() *AppMetrics {
 	r := NewRegistry()
 
@@ -225,7 +211,7 @@ func NewAppMetrics() *AppMetrics {
 	}
 }
 
-// ClassifyStatus increments the appropriate HTTP status class counter.
+// ClassifyStatus (Method): increments the appropriate HTTP status class counter (2xx, 4xx, 5xx)
 func (m *AppMetrics) ClassifyStatus(status int) {
 	switch {
 	case status >= 200 && status < 300:
@@ -237,8 +223,7 @@ func (m *AppMetrics) ClassifyStatus(status int) {
 	}
 }
 
-// RoundToMs rounds a float64 seconds value to millisecond precision.
-// Useful for human-readable duration display.
+// RoundToMs (Function): rounds a float64 seconds value to millisecond precision
 func RoundToMs(seconds float64) float64 {
 	return math.Round(seconds*1000) / 1000
 }

@@ -9,6 +9,7 @@ import (
 	"fmt"
 )
 
+// schemaStatements (Slice): ordered list of DDL statements for database schema migration
 var schemaStatements = []string{
 	`CREATE TABLE IF NOT EXISTS tenants (
 		id BIGSERIAL PRIMARY KEY,
@@ -72,6 +73,7 @@ var schemaStatements = []string{
 	`CREATE INDEX IF NOT EXISTS idx_payments_tenant_status ON payments(tenant_id, status);`,
 }
 
+// Migrate (Function): applies all schema migration statements in order
 func Migrate(ctx context.Context, database *sql.DB) error {
 	for _, statement := range schemaStatements {
 		if _, err := database.ExecContext(ctx, statement); err != nil {

@@ -26,8 +26,6 @@ package main
 
 import "fmt"
 
-//
-
 func main() {
 	fmt.Println("=== OPS.5 Alerting mindset ===")
 	fmt.Println("Learn how useful alerts differ from noisy alerts and why runbooks and service objectives matter.")

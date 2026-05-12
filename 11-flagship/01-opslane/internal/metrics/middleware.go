@@ -8,14 +8,14 @@ import (
 	"time"
 )
 
-// statusRecorder wraps http.ResponseWriter to capture the status code.
+// statusRecorder (Struct): wraps http.ResponseWriter to capture the status code for metrics
 type statusRecorder struct {
 	http.ResponseWriter
 	status      int
 	wroteHeader bool
 }
 
-// WriteHeader intercepts the status code for metric recording before passing it to the client.
+// WriteHeader (Method): intercepts the status code for metric recording before passing to the client
 func (sr *statusRecorder) WriteHeader(code int) {
 	if !sr.wroteHeader {
 		sr.status = code
@@ -24,7 +24,7 @@ func (sr *statusRecorder) WriteHeader(code int) {
 	sr.ResponseWriter.WriteHeader(code)
 }
 
-// Write assumes a 200 OK status for metrics if WriteHeader was not explicitly called.
+// Write (Method): assumes default 200 OK status for metrics if WriteHeader was not explicitly called
 func (sr *statusRecorder) Write(b []byte) (int, error) {
 	if !sr.wroteHeader {
 		sr.status = http.StatusOK
@@ -33,14 +33,7 @@ func (sr *statusRecorder) Write(b []byte) (int, error) {
 	return sr.ResponseWriter.Write(b)
 }
 
-// HTTPMetrics returns middleware that records per-request metrics:
-//
-//   - http_requests_total: incremented for every request
-//   - http_request_duration_seconds: latency histogram
-//   - http_responses_2xx / 4xx / 5xx: status class counters
-//
-// This middleware should be placed early in the middleware chain so
-// it wraps the full request lifecycle.
+// HTTPMetrics (Function): returns HTTP middleware recording request count, latency, and status class metrics
 func HTTPMetrics(m *AppMetrics) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

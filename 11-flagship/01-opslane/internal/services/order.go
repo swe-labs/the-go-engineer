@@ -13,7 +13,7 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
 
-// OrderRepository is the minimum persistence surface the order workflow needs.
+// OrderRepository (Interface): minimum persistence surface for the order workflow
 type OrderRepository interface {
 	CreateOrder(ctx context.Context, order *models.Order) error
 	GetOrderByID(ctx context.Context, tenantID, orderID int64) (models.Order, error)
@@ -21,7 +21,7 @@ type OrderRepository interface {
 	UpdateOrderStatus(ctx context.Context, tenantID, orderID int64, status models.OrderStatus) (models.Order, error)
 }
 
-// CreateOrderInput carries the tenant-scoped values required to begin an order workflow.
+// CreateOrderInput (Struct): tenant-scoped values required to begin an order workflow
 type CreateOrderInput struct {
 	TenantID       int64
 	UserID         int64
@@ -30,27 +30,26 @@ type CreateOrderInput struct {
 	IdempotencyKey string
 }
 
-// CreateOrderResult differentiates a brand-new order from an idempotent replay.
+// CreateOrderResult (Struct): differentiates a brand-new order from an idempotent replay
 type CreateOrderResult struct {
 	Order   models.Order
 	Created bool
 }
 
-// TransitionOrderRequest describes a tenant-scoped order status change.
+// TransitionOrderRequest (Struct): tenant-scoped order status change request
 type TransitionOrderRequest struct {
 	TenantID int64
 	OrderID  int64
 	Status   models.OrderStatus
 }
 
-// OrderService moves order creation and state changes out of handlers and into business workflow code.
+// OrderService (Struct): handles order creation and state change business workflows
 type OrderService struct {
 	orders    OrderRepository
 	inventory InventoryCoordinator
 }
 
-// NewOrderService initializes the core business logic for order management.
-// If no inventory coordinator is provided, it defaults to a no-op implementation.
+// NewOrderService (Constructor): initializes order management business logic with optional inventory coordinator
 func NewOrderService(orders OrderRepository, inventory InventoryCoordinator) *OrderService {
 	if inventory == nil {
 		noop := NewNoopInventoryCoordinator()
@@ -63,9 +62,7 @@ func NewOrderService(orders OrderRepository, inventory InventoryCoordinator) *Or
 	}
 }
 
-// CreateOrder handles the business logic of initiating a new purchase.
-// It reserves inventory synchronously before writing to the database, ensuring
-// that stock cannot be oversold even under high concurrency.
+// CreateOrder (Method): initiates a new purchase with synchronous inventory reservation and idempotency support
 func (s *OrderService) CreateOrder(ctx context.Context, input CreateOrderInput) (CreateOrderResult, error) {
 	if s == nil || s.orders == nil || s.inventory == nil {
 		return CreateOrderResult{}, fmt.Errorf("order service is not configured")
@@ -132,9 +129,7 @@ func (s *OrderService) CreateOrder(ctx context.Context, input CreateOrderInput) 
 	}, nil
 }
 
-// TransitionOrder safely moves an order from one state to another (e.g. Pending -> Paid).
-// It coordinates state-specific side effects, such as releasing inventory holds
-// when an order is cancelled or marked as failed.
+// TransitionOrder (Method): safely moves an order between states with inventory side-effect coordination
 func (s *OrderService) TransitionOrder(ctx context.Context, req TransitionOrderRequest) (models.Order, error) {
 	if s == nil || s.orders == nil || s.inventory == nil {
 		return models.Order{}, fmt.Errorf("order service is not configured")
@@ -205,6 +200,7 @@ func (s *OrderService) TransitionOrder(ctx context.Context, req TransitionOrderR
 	return updated, nil
 }
 
+// inventoryReservationFromOrder (Function): maps an order to an inventory reservation for release
 func inventoryReservationFromOrder(order models.Order) InventoryReservation {
 	return InventoryReservation{
 		TenantID:       order.TenantID,

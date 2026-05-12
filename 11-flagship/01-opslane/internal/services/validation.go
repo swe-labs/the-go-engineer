@@ -10,18 +10,18 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
 
-// Package-level error definitions for the services package.
 var (
-	// ErrInvalidOrder is returned when order input validation fails.
+	// ErrInvalidOrder (Error): returned when order input validation fails
 	ErrInvalidOrder = errors.New("invalid order")
-	// ErrOrderNotFound is returned when a requested order does not exist.
+	// ErrOrderNotFound (Error): returned when a requested order does not exist
 	ErrOrderNotFound = errors.New("order not found")
-	// ErrInvalidStatusTransition is returned when an order status change is not allowed.
+	// ErrInvalidStatusTransition (Error): returned when an order status change is not allowed
 	ErrInvalidStatusTransition = errors.New("invalid order status transition")
-	// ErrInventoryUnavailable is returned when inventory reservation fails.
+	// ErrInventoryUnavailable (Error): returned when inventory reservation fails
 	ErrInventoryUnavailable = errors.New("inventory unavailable")
 )
 
+// normalizeCreateOrderInput (Function): validates and normalizes order creation input
 func normalizeCreateOrderInput(input CreateOrderInput) (CreateOrderInput, error) {
 	input.Currency = strings.ToUpper(strings.TrimSpace(input.Currency))
 	input.IdempotencyKey = strings.TrimSpace(input.IdempotencyKey)
@@ -37,6 +37,7 @@ func normalizeCreateOrderInput(input CreateOrderInput) (CreateOrderInput, error)
 	return input, nil
 }
 
+// validateTransitionTarget (Function): validates that a target order status is a known value
 func validateTransitionTarget(status models.OrderStatus) error {
 	if !isKnownOrderStatus(status) {
 		return ErrInvalidStatusTransition
@@ -45,6 +46,7 @@ func validateTransitionTarget(status models.OrderStatus) error {
 	return nil
 }
 
+// isKnownOrderStatus (Function): checks if an order status is a recognized enum value
 func isKnownOrderStatus(status models.OrderStatus) bool {
 	switch status {
 	case models.OrderStatusPending,
@@ -58,6 +60,7 @@ func isKnownOrderStatus(status models.OrderStatus) bool {
 	}
 }
 
+// canTransitionOrder (Function): determines if an order status transition is valid
 func canTransitionOrder(current, next models.OrderStatus) bool {
 	switch current {
 	case models.OrderStatusPending:
@@ -71,10 +74,12 @@ func canTransitionOrder(current, next models.OrderStatus) bool {
 	}
 }
 
+// shouldReserveForTransition (Function): determines if inventory reservation is needed before a transition
 func shouldReserveForTransition(current, next models.OrderStatus) bool {
 	return current == models.OrderStatusFailed && next == models.OrderStatusProcessing
 }
 
+// shouldReleaseForTransition (Function): determines if inventory release is needed after a transition
 func shouldReleaseForTransition(current, next models.OrderStatus) bool {
 	switch current {
 	case models.OrderStatusPending, models.OrderStatusProcessing:
@@ -84,6 +89,7 @@ func shouldReleaseForTransition(current, next models.OrderStatus) bool {
 	}
 }
 
+// shouldRetryReleaseForSameStatus (Function): determines if inventory should be released on idempotent same-status retry
 func shouldRetryReleaseForSameStatus(status models.OrderStatus) bool {
 	return status == models.OrderStatusFailed || status == models.OrderStatusCancelled
 }

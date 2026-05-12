@@ -5,7 +5,7 @@ package services
 
 import "context"
 
-// InventoryReservation describes the tenant-scoped stock hold the order workflow needs.
+// InventoryReservation (Struct): tenant-scoped stock hold description for the order workflow
 type InventoryReservation struct {
 	TenantID       int64
 	UserID         int64
@@ -15,7 +15,7 @@ type InventoryReservation struct {
 	IdempotencyKey string
 }
 
-// InventoryCoordinator is the seam between the order workflow and stock reservation behavior.
+// InventoryCoordinator (Interface): seam between the order workflow and stock reservation behavior
 type InventoryCoordinator interface {
 	Reserve(ctx context.Context, reservation InventoryReservation) error
 	// Release must be safe for cleanup retries on duplicate or idempotent order creation flows.
@@ -24,20 +24,20 @@ type InventoryCoordinator interface {
 	Release(ctx context.Context, reservation InventoryReservation) error
 }
 
-// NoopInventoryCoordinator keeps Module 5 focused on the workflow boundary before real stock logic exists.
+// NoopInventoryCoordinator (Struct): stub inventory coordinator for development before real stock logic exists
 type NoopInventoryCoordinator struct{}
 
-// NewNoopInventoryCoordinator creates an inventory stub that always succeeds.
+// NewNoopInventoryCoordinator (Constructor): creates an inventory stub that always succeeds
 func NewNoopInventoryCoordinator() NoopInventoryCoordinator {
 	return NoopInventoryCoordinator{}
 }
 
-// Reserve simulates successfully acquiring stock for an order.
+// Reserve (Method): no-op that simulates successfully acquiring stock
 func (NoopInventoryCoordinator) Reserve(context.Context, InventoryReservation) error {
 	return nil
 }
 
-// Release simulates successfully dropping a hold on stock after an order fails or cancels.
+// Release (Method): no-op that simulates successfully releasing stock hold
 func (NoopInventoryCoordinator) Release(context.Context, InventoryReservation) error {
 	return nil
 }

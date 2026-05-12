@@ -12,14 +12,17 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
 
+// OrderWorkflow (Interface): transitions order status through the order service
 type OrderWorkflow interface {
 	TransitionOrder(ctx context.Context, req services.TransitionOrderRequest) (models.Order, error)
 }
 
+// OrderProcessor (Struct): handles TypeOrderStatusChanged events by delegating to the order workflow
 type OrderProcessor struct {
 	Workflow OrderWorkflow
 }
 
+// Handle (Method): processes a TypeOrderStatusChanged event through the order workflow
 func (p OrderProcessor) Handle(ctx context.Context, event events.Event) error {
 	if event.Type != events.TypeOrderStatusChanged {
 		return nil

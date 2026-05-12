@@ -17,48 +17,47 @@ import (
 )
 
 var (
-	// ErrInvalidPayment is returned when a payment request lacks required data or attempts an illegal state transition.
+	// ErrInvalidPayment (Error): returned when a payment request lacks required data or attempts an illegal state transition
 	ErrInvalidPayment = errors.New("invalid payment")
-	// ErrPaymentNotFound is returned when a specific provider reference cannot be located in the database.
+	// ErrPaymentNotFound (Error): returned when a specific provider reference cannot be located in the database
 	ErrPaymentNotFound = errors.New("payment not found")
-	// ErrOrderNotPayable is returned when attempting to pay for an order that is already paid, cancelled, or in an invalid state.
+	// ErrOrderNotPayable (Error): returned when attempting to pay for an order that is not in a payable state
 	ErrOrderNotPayable = errors.New("order not in a payable state")
 )
 
 const defaultPaymentGatewayTimeout = 2 * time.Second
 const defaultPaymentAttempts = 2
 
-// PaymentRepository is the persistence surface the payment workflow needs.
+// PaymentRepository (Interface): persistence surface for the payment workflow
 type PaymentRepository interface {
 	CreatePayment(ctx context.Context, payment *models.Payment) error
 	GetPaymentByProviderReference(ctx context.Context, tenantID int64, providerReference string) (models.Payment, error)
 	UpdatePaymentStatus(ctx context.Context, tenantID int64, providerReference string, status models.PaymentStatus, failureReason string) (models.Payment, error)
 }
 
-// PaymentOrderReader lets the payment service validate tenant-scoped order facts.
+// PaymentOrderReader (Interface): lets the payment service validate tenant-scoped order facts
 type PaymentOrderReader interface {
 	GetOrderByID(ctx context.Context, tenantID, orderID int64) (models.Order, error)
 }
 
-// PaymentOrderWorkflow is the order state machine seam used by payments.
+// PaymentOrderWorkflow (Interface): order state machine seam used by payments
 type PaymentOrderWorkflow interface {
 	TransitionOrder(ctx context.Context, req TransitionOrderRequest) (models.Order, error)
 }
 
-// PaymentServiceOptions allows configuring retries and timeouts for the payment gateway.
+// PaymentServiceOptions (Struct): configures retries and timeouts for the payment gateway
 type PaymentServiceOptions struct {
 	GatewayTimeout time.Duration
 	MaxAttempts    int
 }
 
-// ProcessPaymentResult differentiates a brand-new payment attempt from an idempotent replay.
+// ProcessPaymentResult (Struct): differentiates a brand-new payment attempt from an idempotent replay
 type ProcessPaymentResult struct {
 	Payment models.Payment
 	Created bool
 }
 
-// ReconcilePaymentInput carries data from external webhooks (e.g., Stripe) to update
-// the status of an asynchronous payment.
+// ReconcilePaymentInput (Struct): carries external webhook data to update asynchronous payment status
 type ReconcilePaymentInput struct {
 	TenantID          int64
 	ProviderReference string
@@ -66,7 +65,7 @@ type ReconcilePaymentInput struct {
 	FailureReason     string
 }
 
-// PaymentService owns duplicate protection, gateway calls, and payment-driven order transitions.
+// PaymentService (Struct): orchestrates duplicate protection, gateway calls, and payment-driven order transitions
 type PaymentService struct {
 	payments      PaymentRepository
 	orders        PaymentOrderReader
@@ -75,8 +74,7 @@ type PaymentService struct {
 	options       PaymentServiceOptions
 }
 
-// NewPaymentService initializes the core business logic for payment processing.
-// It orchestrates the order state machine, database persistence, and external gateway calls.
+// NewPaymentService (Constructor): initializes payment processing business logic with gateway, persistence, and order workflow
 func NewPaymentService(
 	payments PaymentRepository,
 	orders PaymentOrderReader,
@@ -100,9 +98,7 @@ func NewPaymentService(
 	}
 }
 
-// ProcessPayment is the primary entry point for charging a customer.
-// It verifies the order is payable, records a pending payment attempt in the DB,
-// calls the external gateway, and safely handles idempotent retries.
+// ProcessPayment (Method): charges a customer via gateway with idempotency, verification, and retries
 func (s *PaymentService) ProcessPayment(ctx context.Context, job paymentflow.Job) (ProcessPaymentResult, error) {
 	if s == nil || s.payments == nil || s.orders == nil || s.orderWorkflow == nil || s.gateway == nil {
 		return ProcessPaymentResult{}, fmt.Errorf("payment service is not configured")
@@ -173,8 +169,7 @@ func (s *PaymentService) ProcessPayment(ctx context.Context, job paymentflow.Job
 	return s.chargeGateway(ctx, payment, true)
 }
 
-// ReconcilePayment handles asynchronous updates from payment gateways (like Webhooks).
-// It updates the payment status and immediately propagates that status back to the parent order.
+// ReconcilePayment (Method): handles asynchronous gateway webhook updates and propagates to parent order
 func (s *PaymentService) ReconcilePayment(ctx context.Context, input ReconcilePaymentInput) (models.Payment, error) {
 	if s == nil || s.payments == nil || s.orderWorkflow == nil {
 		return models.Payment{}, fmt.Errorf("payment service is not configured")
@@ -214,6 +209,7 @@ func (s *PaymentService) ReconcilePayment(ctx context.Context, input ReconcilePa
 	return updated, nil
 }
 
+// chargeGateway (Method): executes gateway charge with retries and applies result to payment/order
 func (s *PaymentService) chargeGateway(ctx context.Context, current models.Payment, created bool) (ProcessPaymentResult, error) {
 	if err := s.moveOrderToProcessing(ctx, current); err != nil {
 		return ProcessPaymentResult{}, err
@@ -254,6 +250,7 @@ func (s *PaymentService) chargeGateway(ctx context.Context, current models.Payme
 	return ProcessPaymentResult{Payment: current, Created: created}, fmt.Errorf("charge payment: %w", lastErr)
 }
 
+// moveOrderToProcessing (Method): transitions the order to Processing status before charging
 func (s *PaymentService) moveOrderToProcessing(ctx context.Context, payment models.Payment) error {
 	_, err := s.orderWorkflow.TransitionOrder(ctx, TransitionOrderRequest{
 		TenantID: payment.TenantID,
@@ -267,6 +264,7 @@ func (s *PaymentService) moveOrderToProcessing(ctx context.Context, payment mode
 	return nil
 }
 
+// applyPaymentStatusToOrder (Method): propagates settled/failed payment status to the parent order
 func (s *PaymentService) applyPaymentStatusToOrder(ctx context.Context, payment models.Payment) error {
 	var target models.OrderStatus
 	switch payment.Status {
@@ -290,6 +288,7 @@ func (s *PaymentService) applyPaymentStatusToOrder(ctx context.Context, payment 
 	return nil
 }
 
+// syncPaymentToOrder (Method): ensures order status matches payment status on idempotent retry
 func (s *PaymentService) syncPaymentToOrder(ctx context.Context, payment models.Payment, order models.Order) error {
 	if payment.Status == models.PaymentStatusPending {
 		return nil
@@ -335,6 +334,7 @@ func (s *PaymentService) syncPaymentToOrder(ctx context.Context, payment models.
 	return nil
 }
 
+// normalizePaymentJob (Function): validates and normalizes a payment job input
 func normalizePaymentJob(job paymentflow.Job) (paymentflow.Job, error) {
 	job.ProviderReference = strings.TrimSpace(job.ProviderReference)
 
@@ -345,6 +345,7 @@ func normalizePaymentJob(job paymentflow.Job) (paymentflow.Job, error) {
 	return job, nil
 }
 
+// samePaymentTarget (Function): checks if a payment record matches a job's tenant/order/amount/reference
 func samePaymentTarget(payment models.Payment, job paymentflow.Job) bool {
 	return payment.TenantID == job.TenantID &&
 		payment.OrderID == job.OrderID &&
@@ -352,6 +353,7 @@ func samePaymentTarget(payment models.Payment, job paymentflow.Job) bool {
 		payment.AmountCents == job.AmountCents
 }
 
+// isKnownPaymentStatus (Function): checks if a payment status is a recognized enum value
 func isKnownPaymentStatus(status models.PaymentStatus) bool {
 	switch status {
 	case models.PaymentStatusPending,
@@ -365,6 +367,7 @@ func isKnownPaymentStatus(status models.PaymentStatus) bool {
 	}
 }
 
+// normalizeGatewayError (Function): converts gateway errors to canonical ErrGatewayTimeout/ErrGatewayUnavailable
 func normalizeGatewayError(err error) error {
 	if err == nil {
 		return nil
@@ -378,6 +381,7 @@ func normalizeGatewayError(err error) error {
 	return err
 }
 
+// isFinalPaymentStatus (Function): checks if a payment status is terminal (Settled, Failed, Refunded)
 func isFinalPaymentStatus(status models.PaymentStatus) bool {
 	switch status {
 	case models.PaymentStatusSettled, models.PaymentStatusFailed, models.PaymentStatusRefunded:

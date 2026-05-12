@@ -97,6 +97,7 @@ func NewPool(config PoolConfig) (*Pool, error) {
 	}, nil
 }
 
+// Start (Method): launches worker goroutines and begins processing events
 func (p *Pool) Start(ctx context.Context) error {
 	if p == nil {
 		return fmt.Errorf("worker pool is not configured")
@@ -134,6 +135,7 @@ func (p *Pool) Start(ctx context.Context) error {
 // Note: p.jobs is never closed while the pool is running, so there is no
 // risk of a "send on closed channel" panic here. Workers exit by watching
 // stopCh, not by channel closure.
+// Submit (Method): enqueues an event for processing, blocking until accepted, pool stopped, or context cancelled
 func (p *Pool) Submit(ctx context.Context, event events.Event) error {
 	if p == nil {
 		return fmt.Errorf("worker pool is not configured")
@@ -170,6 +172,7 @@ func (p *Pool) Submit(ctx context.Context, event events.Event) error {
 // that Stop (which holds the write-lock when it sets p.stopped) cannot sneak
 // in between the two operations. Because p.jobs is never closed while the pool
 // is running, the non-blocking send is safe.
+// TrySubmit (Method): non-blocking enqueue; returns ErrQueueFull or ErrPoolStopped immediately
 func (p *Pool) TrySubmit(event events.Event) error {
 	if p == nil {
 		return fmt.Errorf("worker pool is not configured")
@@ -195,6 +198,7 @@ func (p *Pool) TrySubmit(event events.Event) error {
 // Crucially, p.jobs is NOT closed here. Closing a channel that other
 // goroutines may still be sending to causes a panic. Instead workers
 // watch stopCh and drain any remaining buffered events before returning.
+// Stop (Method): signals all workers to exit and waits for them to finish draining buffered events
 func (p *Pool) Stop() {
 	if p == nil {
 		return
@@ -212,6 +216,7 @@ func (p *Pool) Stop() {
 	p.wg.Wait()
 }
 
+// QueueLength (Method): returns the number of events currently buffered in the job channel
 func (p *Pool) QueueLength() int {
 	if p == nil {
 		return 0
@@ -220,6 +225,7 @@ func (p *Pool) QueueLength() int {
 	return len(p.jobs)
 }
 
+// Name (Method): returns the pool's configured name
 func (p *Pool) Name() string {
 	if p == nil {
 		return ""
@@ -228,6 +234,7 @@ func (p *Pool) Name() string {
 	return p.name
 }
 
+// DurabilityMode (Method): returns the pool's configured durability mode
 func (p *Pool) DurabilityMode() DurabilityMode {
 	if p == nil {
 		return DurabilityInMemory
@@ -276,6 +283,7 @@ func (p *Pool) runWorker(ctx context.Context) {
 	}
 }
 
+// doHandle (Method): executes the handler with panic recovery
 func (p *Pool) doHandle(ctx context.Context, event events.Event) {
 	defer func() {
 		if r := recover(); r != nil {

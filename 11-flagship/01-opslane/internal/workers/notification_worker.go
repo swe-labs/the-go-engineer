@@ -10,6 +10,7 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/events"
 )
 
+// Notification (Struct): carries data for an outbound customer communication
 type Notification struct {
 	TenantID int64
 	EventID  string
@@ -18,14 +19,17 @@ type Notification struct {
 	Body     string
 }
 
+// NotificationSink (Interface): sends notifications through external channels (email, SMS, etc.)
 type NotificationSink interface {
 	Send(ctx context.Context, notification Notification) error
 }
 
+// NotificationWorker (Struct): handles TypeNotificationRequested events by sending through the notification sink
 type NotificationWorker struct {
 	Sink NotificationSink
 }
 
+// Handle (Method): processes a TypeNotificationRequested event through the notification sink
 func (w NotificationWorker) Handle(ctx context.Context, event events.Event) error {
 	if event.Type != events.TypeNotificationRequested {
 		return nil

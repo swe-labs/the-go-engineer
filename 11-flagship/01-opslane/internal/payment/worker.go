@@ -8,17 +8,16 @@ import (
 	"fmt"
 )
 
-// Handler processes one payment job.
+// Handler (Function): processes one payment job; returns error if processing fails
 type Handler func(context.Context, Job) error
 
-// Worker consumes tenant-scoped payment jobs until the queue closes or context stops.
+// Worker (Struct): consumes tenant-scoped payment jobs until the queue closes or context is cancelled
 type Worker struct {
 	handler Handler
 	jobs    <-chan Job
 }
 
-// NewWorker instantiates a consumer that reads payment jobs from a channel
-// and processes them sequentially using the provided handler.
+// NewWorker (Constructor): creates a consumer that reads and processes payment jobs from a channel
 func NewWorker(jobs <-chan Job, handler Handler) Worker {
 	return Worker{
 		jobs:    jobs,
@@ -26,8 +25,7 @@ func NewWorker(jobs <-chan Job, handler Handler) Worker {
 	}
 }
 
-// Run blocks until the context is cancelled or the jobs channel is closed.
-// It executes the handler for each job received.
+// Run (Method): blocks until context cancelled or jobs channel closed, executing handler for each job
 func (w Worker) Run(ctx context.Context) error {
 	if w.handler == nil {
 		return fmt.Errorf("payment worker handler is not configured")

@@ -11,31 +11,31 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
 
-// UserLookup is the minimum repository behavior auth needs to verify credentials.
+// UserLookup (Interface): minimum repository behavior auth needs to verify credentials
 type UserLookup interface {
 	GetUserByEmail(ctx context.Context, tenantID int64, email string) (models.User, error)
 }
 
-// LoginRequest carries the tenant-scoped credentials required to issue a token.
+// LoginRequest (Struct): carries the tenant-scoped credentials required to issue a token
 type LoginRequest struct {
 	TenantID int64
 	Email    string
 	Password string
 }
 
-// LoginResult is the safe auth response returned after successful authentication.
+// LoginResult (Struct): safe auth response returned after successful authentication
 type LoginResult struct {
 	Token    string
 	Identity Identity
 }
 
-// Service verifies credentials and issues tenant-scoped access tokens.
+// Service (Struct): verifies credentials and issues tenant-scoped access tokens
 type Service struct {
 	users  UserLookup
 	tokens *TokenManager
 }
 
-// NewService wires the auth service to its persistence and token dependencies.
+// NewService (Constructor): wires the auth service to its persistence and token dependencies
 func NewService(users UserLookup, tokens *TokenManager) *Service {
 	return &Service{
 		users:  users,
@@ -43,7 +43,7 @@ func NewService(users UserLookup, tokens *TokenManager) *Service {
 	}
 }
 
-// Login verifies a tenant-scoped user password and returns a signed access token.
+// Login (Method): verifies a tenant-scoped user password and returns a signed access token
 func (s *Service) Login(ctx context.Context, req LoginRequest) (LoginResult, error) {
 	if s == nil || s.users == nil || s.tokens == nil {
 		return LoginResult{}, fmt.Errorf("auth service is not configured")

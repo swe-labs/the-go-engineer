@@ -13,34 +13,28 @@ import (
 
 // correlationIDKey is the context key for the request correlation ID.
 // Using an unexported struct type prevents collisions with other packages.
+// correlationIDKey (Struct): unexported context key type for the request correlation ID
 type correlationIDKey struct{}
 
-// WithCorrelationID stores a correlation ID on the context. Every log
-// line produced from this context can include the ID, making it possible
-// to trace one request through HTTP handlers, services, and workers.
+// WithCorrelationID (Function): stores a correlation ID on the context for request tracing through logs
 func WithCorrelationID(ctx context.Context, id string) context.Context {
 	return context.WithValue(ctx, correlationIDKey{}, id)
 }
 
-// CorrelationID retrieves the correlation ID from the context.
-// Returns an empty string if no ID was set.
+// CorrelationID (Function): retrieves the correlation ID from the context; returns empty string if absent
 func CorrelationID(ctx context.Context) string {
 	id, _ := ctx.Value(correlationIDKey{}).(string)
 	return id
 }
 
-// GenerateCorrelationID produces a 16-byte hex-encoded random string.
-// Using crypto/rand avoids adding an external UUID dependency while still
-// providing collision-resistant identifiers.
+// GenerateCorrelationID (Function): produces a 16-byte hex-encoded random correlation ID using crypto/rand
 func GenerateCorrelationID() string {
 	b := make([]byte, 16)
 	_, _ = rand.Read(b)
 	return hex.EncodeToString(b)
 }
 
-// CorrelationIDFromRequest extracts the X-Correlation-ID header from
-// an HTTP request. If the header is absent or empty, it generates a
-// new correlation ID.
+// CorrelationIDFromRequest (Function): extracts or generates a correlation ID from an HTTP request header
 func CorrelationIDFromRequest(r *http.Request) string {
 	if id := r.Header.Get("X-Correlation-ID"); id != "" {
 		return id
@@ -48,10 +42,7 @@ func CorrelationIDFromRequest(r *http.Request) string {
 	return GenerateCorrelationID()
 }
 
-// ContextAttrs extracts structured log attributes from a context.
-// It reads correlation_id from the logging context. Auth identity
-// (tenant_id, user_id) should be added by the caller using
-// auth.IdentityFromContext, keeping this package free of auth imports.
+// ContextAttrs (Function): extracts structured slog attributes (correlation_id) from a context
 func ContextAttrs(ctx context.Context) []slog.Attr {
 	var attrs []slog.Attr
 	if id := CorrelationID(ctx); id != "" {

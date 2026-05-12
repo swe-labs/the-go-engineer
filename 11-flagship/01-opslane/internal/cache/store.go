@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// InMemoryStore is a bounded, TTL-aware in-memory cache.
+// InMemoryStore (Struct): bounded, TTL-aware in-memory cache with concurrent access support
 //
 // Design decisions:
 //   - sync.RWMutex protects the map; reads take the read-lock, writes take
@@ -34,8 +34,7 @@ type InMemoryStore struct {
 	once   sync.Once
 }
 
-// NewInMemoryStore creates a bounded in-memory cache with a background
-// janitor that cleans expired entries every cleanupInterval.
+// NewInMemoryStore (Constructor): creates a bounded in-memory cache with a background cleanup janitor
 func NewInMemoryStore(config Config) *InMemoryStore {
 	if config.MaxEntries <= 0 {
 		config.MaxEntries = DefaultConfig().MaxEntries
@@ -57,6 +56,7 @@ func NewInMemoryStore(config Config) *InMemoryStore {
 	return s
 }
 
+// Get (Method): retrieves a value by key, returning a copy to prevent mutation
 func (s *InMemoryStore) Get(_ context.Context, key string) ([]byte, error) {
 	if key == "" {
 		return nil, ErrKeyEmpty
@@ -93,6 +93,7 @@ func (s *InMemoryStore) Get(_ context.Context, key string) ([]byte, error) {
 	return cp, nil
 }
 
+// Set (Method): stores a value with TTL, evicting oldest entry if at capacity
 func (s *InMemoryStore) Set(_ context.Context, key string, value []byte, ttl time.Duration) error {
 	if key == "" {
 		return ErrKeyEmpty
@@ -131,6 +132,7 @@ func (s *InMemoryStore) Set(_ context.Context, key string, value []byte, ttl tim
 	return nil
 }
 
+// Delete (Method): removes a single key from the cache
 func (s *InMemoryStore) Delete(_ context.Context, key string) error {
 	if key == "" {
 		return ErrKeyEmpty
@@ -152,8 +154,7 @@ func (s *InMemoryStore) Delete(_ context.Context, key string) error {
 	return nil
 }
 
-// DeletePrefix removes all entries whose key starts with the given prefix.
-// This supports batch invalidation, e.g. clearing all order data for a tenant.
+// DeletePrefix (Method): removes all entries whose key starts with the given prefix
 func (s *InMemoryStore) DeletePrefix(_ context.Context, prefix string) error {
 	if prefix == "" {
 		return ErrKeyEmpty
@@ -183,8 +184,7 @@ func (s *InMemoryStore) DeletePrefix(_ context.Context, prefix string) error {
 	return nil
 }
 
-// Close stops the background janitor. After Close returns, Get and Set
-// return ErrCacheClosed.
+// Close (Method): stops the background janitor; subsequent Get/Set return ErrCacheClosed
 func (s *InMemoryStore) Close() error {
 	s.once.Do(func() {
 		close(s.closed)
@@ -192,16 +192,14 @@ func (s *InMemoryStore) Close() error {
 	return nil
 }
 
-// Len returns the number of entries currently in the cache.
-// Exported for tests and diagnostics.
+// Len (Method): returns the number of entries currently in the cache; exported for tests and diagnostics
 func (s *InMemoryStore) Len() int {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	return len(s.entries)
 }
 
-// evictOldest removes the entry that was inserted first. Must be called
-// with s.mu held for writing.
+// evictOldest (Method): removes the entry that was inserted first; caller must hold write lock
 func (s *InMemoryStore) evictOldest() {
 	if len(s.order) == 0 {
 		return
@@ -211,8 +209,7 @@ func (s *InMemoryStore) evictOldest() {
 	delete(s.entries, oldest)
 }
 
-// removeFromOrder removes a key from the insertion-order slice.
-// Must be called with s.mu held for writing.
+// removeFromOrder (Method): removes a key from the insertion-order slice; caller must hold write lock
 func (s *InMemoryStore) removeFromOrder(key string) {
 	for i, k := range s.order {
 		if k == key {
@@ -222,7 +219,7 @@ func (s *InMemoryStore) removeFromOrder(key string) {
 	}
 }
 
-// janitor periodically sweeps expired entries.
+// janitor (Goroutine): periodic background sweep of expired entries
 func (s *InMemoryStore) janitor(interval time.Duration) {
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
@@ -237,7 +234,7 @@ func (s *InMemoryStore) janitor(interval time.Duration) {
 	}
 }
 
-// sweep removes all expired entries in one pass.
+// sweep (Method): removes all expired entries in one pass
 func (s *InMemoryStore) sweep() {
 	now := s.now()
 

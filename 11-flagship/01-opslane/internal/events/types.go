@@ -9,26 +9,25 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/models"
 )
 
-// Type represents the routing key for a specific business event.
-// Subscribers use these keys to bind handlers to specific lifecycle moments.
+// Type (Type): routing key for a specific business event; used by subscribers to bind handlers
 type Type string
 
 const (
-	// TypeOrderCreated is emitted immediately after a new order is persisted.
+	// TypeOrderCreated (Constant): emitted immediately after a new order is persisted
 	TypeOrderCreated Type = "order.created"
-	// TypeOrderStatusChanged is emitted whenever an order transitions (e.g. Pending -> Paid).
+	// TypeOrderStatusChanged (Constant): emitted when an order transitions status
 	TypeOrderStatusChanged Type = "order.status_changed"
-	// TypePaymentRequested is emitted when a payment needs to be authorized by the gateway.
+	// TypePaymentRequested (Constant): emitted when a payment needs gateway authorization
 	TypePaymentRequested Type = "payment.requested"
-	// TypePaymentSettled is emitted when the gateway confirms funds are captured.
+	// TypePaymentSettled (Constant): emitted when the gateway confirms funds are captured
 	TypePaymentSettled Type = "payment.settled"
-	// TypePaymentFailed is emitted when a payment attempt is rejected by the gateway.
+	// TypePaymentFailed (Constant): emitted when a payment attempt is rejected by the gateway
 	TypePaymentFailed Type = "payment.failed"
-	// TypeNotificationRequested is emitted to trigger an asynchronous customer communication.
+	// TypeNotificationRequested (Constant): emitted to trigger asynchronous customer communication
 	TypeNotificationRequested Type = "notification.requested"
 )
 
-// Event is the small, explicit message that crosses the async boundary.
+// Event (Struct): small, explicit message that crosses the async event boundary
 type Event struct {
 	ID                string
 	Type              Type
@@ -44,8 +43,7 @@ type Event struct {
 	Metadata          map[string]string
 }
 
-// WithOccurredAt returns a copy of the event with the timestamp populated.
-// If the event already has a timestamp, it is preserved.
+// WithOccurredAt (Method): returns a copy of the event with the timestamp populated if absent
 func (e Event) WithOccurredAt(now time.Time) Event {
 	if e.OccurredAt.IsZero() {
 		e.OccurredAt = now
