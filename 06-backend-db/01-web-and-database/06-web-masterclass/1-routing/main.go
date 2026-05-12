@@ -67,14 +67,15 @@ func main() {
 	fmt.Println("    - http://localhost:8080/about")
 	fmt.Println("    - http://localhost:8080/posts/42")
 
-	// 3. Start the server
-	log.Fatal(http.ListenAndServe(":8080", mux))
-
-	fmt.Println("\n---------------------------------------------------")
+	fmt.Println()
+	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: MC.2 -> 06-backend-db/01-web-and-database/06-web-masterclass/2-dependency-injection")
 	fmt.Println("Current: MC.1 (routing)")
 	fmt.Println("Previous: DM.1 (embedded-migrations)")
 	fmt.Println("---------------------------------------------------")
+
+	// 3. Start the server
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
