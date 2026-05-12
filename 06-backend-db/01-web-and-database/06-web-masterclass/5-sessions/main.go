@@ -105,7 +105,7 @@ func (app *application) handleLogin(w http.ResponseWriter, r *http.Request) {
 		Value:    sessionID,
 		Path:     "/",
 		HttpOnly: true,                 // Important: Prevent JavaScript access (XSS)
-		Secure:   false,                // Set to true in production (HTTPS only)
+		Secure:   true,                 // Requires HTTPS; disable for local HTTP dev
 		SameSite: http.SameSiteLaxMode, // CSRF protection
 	}
 	http.SetCookie(w, cookie)
