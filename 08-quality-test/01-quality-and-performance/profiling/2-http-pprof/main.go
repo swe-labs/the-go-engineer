@@ -14,7 +14,7 @@
 //   - Expose live profiling endpoints on an internal-only server so you can inspect CPU, heap, mutex, and goroutine behavior while a service is under loa...
 //
 // RUN:
-//   go run ./08-quality-test/01-quality-and-performance/profiling/3-http-pprof
+//   go run ./08-quality-test/01-quality-and-performance/profiling/2-http-pprof
 //
 // KEY TAKEAWAY:
 //   - Expose live profiling endpoints on an internal-only server so you can inspect CPU, heap, mutex, and goroutine behavior while a service is under loa...

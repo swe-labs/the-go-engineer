@@ -36,7 +36,7 @@ graph TD
 
 ```bash
 # Run the demo server
-go run ./08-quality-test/01-quality-and-performance/profiling/3-http-pprof
+go run ./08-quality-test/01-quality-and-performance/profiling/2-http-pprof
 ```
 
 In a separate terminal, pull a 5-second CPU profile:

@@ -9,7 +9,7 @@ Learn to investigate the runtime cost of your code. This track introduces Go's p
 | ID | Topic | Surface | Why It Matters |
 | --- | --- | --- | --- |
 | `PR.1` | **CPU Profiling** | [`./1-cpu-profile`](./1-cpu-profile) | Finding "hot" functions in offline profiles. |
-| `PR.2` | **Live pprof** | [`./3-http-pprof`](./3-http-pprof) | Inspecting production-like traffic in real-time. |
+| `PR.2` | **Live pprof** | [`./2-http-pprof`](./2-http-pprof) | Inspecting production-like traffic in real-time. |
 | `PR.3` | **Memory Profiling** | [`./3-memory-profiling`](./3-memory-profiling) | Identifying leak sources and high-allocation paths. |
 | `PR.4` | **Escape Analysis** | [`./4-escape-analysis`](./4-escape-analysis) | Understanding Stack vs Heap allocation decisions. |
 | `PR.5` | **Benchmark-Driven Dev**| [`./5-benchmark-driven-development`](./5-benchmark-driven-development) | Using benchmarks to drive optimization loops. |
