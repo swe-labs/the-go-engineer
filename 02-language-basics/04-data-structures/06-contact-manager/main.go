@@ -104,8 +104,8 @@ func main() {
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
 	fmt.Println("SECTION COMPLETE: Section 02 Language Basics")
-	fmt.Println("NEXT UP: FE.1 -> 03-functions-errors/01-functions-basics")
-	fmt.Println("Run    : go run ./03-functions-errors/01-functions-basics")
+	fmt.Println("NEXT UP: DS.7 -> 02-language-basics/04-data-structures/07-slices")
+	fmt.Println("Run    : go run ./02-language-basics/04-data-structures/07-slices")
 	fmt.Println("Current: DS.6 (contact-manager)")
 	fmt.Println("---------------------------------------------------")
 }

@@ -9,7 +9,7 @@
 //
 // WHAT YOU'LL LEARN:
 //   - Defining generic functions using type parameters and constraints.
-//   - Using built-in constraints: `any` and `comparable`.
+//   - Using built-in constraints: `any`, `comparable`, and `cmp.Ordered`.
 //   - Implementing custom type constraints using interface unions.
 //   - The mechanics of monomorphization and compile-time type safety.
 //
@@ -31,7 +31,9 @@
 package main
 
 import (
+	"cmp"
 	"fmt"
+	"slices"
 )
 
 // Section 04: Types & Design - Generics
@@ -119,6 +121,25 @@ func main() {
 	fmt.Printf("  Has 'go':   %t\n", Contains(words, "go"))
 	fmt.Printf("  Has 5:      %t\n", Contains(numbers, 5))
 	fmt.Printf("  Has 'ruby': %t\n", Contains(words, "ruby"))
+	fmt.Println()
+
+	// 4. The cmp package provides generic ordered comparisons (Go 1.21+).
+	// cmp.Ordered is a built-in constraint covering all ordered types.
+	// cmp.Compare returns -1, 0, or 1. cmp.Less is a boolean check.
+	fmt.Println("--- Comparisons with cmp.Ordered (Go 1.21+) ---")
+
+	// Use cmp.Compare directly instead of a generic closure (Go closures cannot have type params).
+	fmt.Printf("  cmp.Compare(10, 20)       = %d\n", cmp.Compare(10, 20))
+	fmt.Printf("  cmp.Compare(3.14, 2.71)   = %d\n", cmp.Compare(3.14, 2.71))
+	fmt.Printf("  cmp.Compare(\"beta\", \"alpha\") = %d\n", cmp.Compare("beta", "alpha"))
+
+	// Sorting with cmp.Less — works with any ordered type.
+	names := []string{"Charlie", "Alice", "Bob"}
+	slices.SortFunc(names, func(a, b string) int { return cmp.Compare(a, b) })
+	fmt.Printf("  sorted names: %v\n", names)
+
+	// Using cmp.Less for comparison.
+	fmt.Printf("  cmp.Less(5, 10) = %v\n", cmp.Less(5, 10))
 
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
