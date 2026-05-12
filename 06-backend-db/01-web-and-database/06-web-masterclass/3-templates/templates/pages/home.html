@@ -1,0 +1,12 @@
+{{define "page"}}
+<h1>{{.Title}}</h1>
+<p>{{.Content}}</p>
+{{if .Items}}
+<h2>Topics Covered:</h2>
+<ul>
+    {{range .Items}}
+    <li>{{.}}</li>
+    {{end}}
+</ul>
+{{end}}
+{{end}}

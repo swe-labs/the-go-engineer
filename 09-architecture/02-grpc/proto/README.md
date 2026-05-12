@@ -56,4 +56,4 @@ cat ./09-architecture/02-grpc/proto/user.proto
 
 ## Next Step
 
-Now that you have a contract, learn how to build a service that fulfills it. Continue to [GR.2 Unary Server](../1-unary/server).
+Now that you have a contract, learn how to build a service that fulfills it. Continue to [GR.2 Unary Server](../01-unary/server).

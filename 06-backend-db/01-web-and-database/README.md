@@ -19,17 +19,17 @@ This section belongs to [06 Backend, APIs & Databases](../README.md).
 
 | Track | Entry | Milestone | Focus |
 | --- | --- | --- | --- |
-| HTTP Servers | [HS.1 net/http basics](./http-servers/1-net-http-basics) | `HS.10` | handler flow, middleware, validation, timeouts, shutdown, probes |
-| APIs | [API.1 REST design principles](./apis/1-rest-design-principles) | `API.9` | REST design, versioning, protobuf, gRPC, interceptors, trade-offs |
-| Databases | [DB.1 connecting to SQLite](./databases/1-connecting-to-db) | `DB.8` | SQL access, transactions, repositories, query safety, context timeouts |
+| HTTP Servers | [HS.1 net/http basics](./05-http-servers/01-net-http-basics) | `HS.10` | handler flow, middleware, validation, timeouts, shutdown, probes |
+| APIs | [API.1 REST design principles](./01-apis/01-rest-design-principles) | `API.9` | REST design, versioning, protobuf, gRPC, interceptors, trade-offs |
+| Databases | [DB.1 connecting to SQLite](./03-databases/01-connecting-to-db) | `DB.8` | SQL access, transactions, repositories, query safety, context timeouts |
 
 ## Supporting Reference Surfaces
 
 The stage also includes supporting reference directories that deepen the backend story:
 
-- [`http-client`](./http-client) for outbound HTTP dependency patterns
-- [`database-migrations`](./database-migrations) for schema evolution workflows
-- [`web-masterclass`](./web-masterclass) for larger application-shaped references
+- [`http-client`](./04-http-client) for outbound HTTP dependency patterns
+- [`database-migrations`](./02-database-migrations) for schema evolution workflows
+- [`web-masterclass`](./06-web-masterclass) for larger application-shaped references
 
 These are part of the stage inventory, but the canonical promoted path is the `HS`, `API`, and `DB` track set in `curriculum.v2.json`.
 

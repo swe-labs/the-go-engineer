@@ -12,9 +12,9 @@ This track belongs to [10 Production Operations](../README.md).
 
 | ID | Type | Surface | Mission | Requires |
 | --- | --- | --- | --- | --- |
-| `CG.1` | Lesson | [go generate Primer](./1-go-generate) | Master the built-in `go:generate` directive. | entry |
-| `CG.2` | Lesson | [Mockery Workflow](./2-mockery) | Generate clean, type-safe mocks for testing. | `CG.1` |
-| `CG.3` | Lesson | [sqlc Workflow](./3-sqlc) | Generate typed Go code from raw SQL queries. | `CG.2` |
+| `CG.1` | Lesson | [go generate Primer](./01-go-generate) | Master the built-in `go:generate` directive. | entry |
+| `CG.2` | Lesson | [Mockery Workflow](./02-mockery) | Generate clean, type-safe mocks for testing. | `CG.1` |
+| `CG.3` | Lesson | [sqlc Workflow](./03-sqlc) | Generate typed Go code from raw SQL queries. | `CG.2` |
 
 ## Why This Track Matters
 

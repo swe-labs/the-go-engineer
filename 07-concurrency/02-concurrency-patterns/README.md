@@ -20,8 +20,8 @@ This track belongs to [07 Concurrency](../README.md).
 
 | Surface | Entry | Milestone | Focus |
 | --- | --- | --- | --- |
-| errgroup path | [CP.1 errgroup](./1-errgroup) | `CP.5` | errgroup, cancellation, sync.Pool, and bounded concurrency |
-| Worker pool reference | [6 worker pool](./6-worker-pool) | `6-worker-pool` | worker-pool design and shutdown boundaries |
+| errgroup path | [CP.1 errgroup](./01-errgroup) | `CP.5` | errgroup, cancellation, sync.Pool, and bounded concurrency |
+| Worker pool reference | [6 worker pool](./06-worker-pool) | `6-worker-pool` | worker-pool design and shutdown boundaries |
 
 ## Suggested Order
 

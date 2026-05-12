@@ -12,9 +12,9 @@ This track belongs to [10 Production Operations](../README.md).
 
 | ID | Type | Surface | Mission | Requires |
 | --- | --- | --- | --- | --- |
-| `GS.1` | Lesson | [Signal Context](./1-signal-context) | Listen for `SIGINT` and `SIGTERM` using `signal.NotifyContext`. | entry |
-| `GS.2` | Lesson | [HTTP Server Shutdown](./2-http-server) | Drain active requests before stopping the server. | `GS.1` |
-| `GS.3` | Exercise | [Resource Cleanup](./3-capstone) | Coordinate the shutdown of a DB, a Worker, and a Server. | `GS.2` |
+| `GS.1` | Lesson | [Signal Context](./01-signal-context) | Listen for `SIGINT` and `SIGTERM` using `signal.NotifyContext`. | entry |
+| `GS.2` | Lesson | [HTTP Server Shutdown](./02-http-server) | Drain active requests before stopping the server. | `GS.1` |
+| `GS.3` | Exercise | [Resource Cleanup](./03-capstone) | Coordinate the shutdown of a DB, a Worker, and a Server. | `GS.2` |
 
 ## Why This Track Matters
 

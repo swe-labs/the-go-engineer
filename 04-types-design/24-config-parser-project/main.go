@@ -180,8 +180,8 @@ DB_PASS = "p@ss word"
 	fmt.Println(summary)
 
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: MP.1 -> 05-packages-io/01-modules-and-packages/1-module-basics")
-	fmt.Println("Run    : go run ./05-packages-io/01-modules-and-packages/1-module-basics")
+	fmt.Println("NEXT UP: MP.1 -> 05-packages-io/01-modules-and-packages/01-module-basics")
+	fmt.Println("Run    : go run ./05-packages-io/01-modules-and-packages/01-module-basics")
 	fmt.Println("Current: ST.6 (config-parser-project)")
 	fmt.Println("---------------------------------------------------")
 }

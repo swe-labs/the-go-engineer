@@ -23,11 +23,11 @@ Later sections return to performance and concurrency details:
 
 | ID | Type | Surface | Core Job |
 | --- | --- | --- | --- |
-| `HC.1` | Lesson | [what-is-a-program](./1-what-is-a-program) | fetch-decode-execute cycle and instruction model |
-| `HC.2` | Lesson | [code-to-execution](./2-code-to-execution) | source -> tokens -> AST -> IR -> binary |
-| `HC.3` | Lesson | [memory-basics](./3-memory-basics) | stack, heap, GC, and escape analysis |
-| `HC.4` | Lesson | [terminal-confidence](./4-terminal-confidence) | shell, stdout/stderr, and command flow |
-| `HC.5` | Lesson | [os-processes](./5-os-processes) | processes, signals, threads, and file descriptors |
+| `HC.1` | Lesson | [what-is-a-program](./01-what-is-a-program) | fetch-decode-execute cycle and instruction model |
+| `HC.2` | Lesson | [code-to-execution](./02-code-to-execution) | source -> tokens -> AST -> IR -> binary |
+| `HC.3` | Lesson | [memory-basics](./03-memory-basics) | stack, heap, GC, and escape analysis |
+| `HC.4` | Lesson | [terminal-confidence](./04-terminal-confidence) | shell, stdout/stderr, and command flow |
+| `HC.5` | Lesson | [os-processes](./05-os-processes) | processes, signals, threads, and file descriptors |
 
 ## How To Use This Section
 
@@ -66,4 +66,4 @@ Before moving to Section 01, you should be able to answer these without looking 
 
 ## Next Step
 
-Continue to [GT.1 Installation Verification](../01-getting-started/1-installation).
+Continue to [GT.1 Installation Verification](../01-getting-started/01-installation).

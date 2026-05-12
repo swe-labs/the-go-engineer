@@ -67,8 +67,8 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
-	fmt.Println("NEXT UP: TI.1 -> 04-types-design/1-struct")
-	fmt.Println("Run    : go run ./04-types-design/1-struct")
+	fmt.Println("NEXT UP: TI.1 -> 04-types-design/01-struct")
+	fmt.Println("Run    : go run ./04-types-design/01-struct")
 	fmt.Println("Current: FE.10 (panic-and-recover)")
 	fmt.Println("---------------------------------------------------")
 }
