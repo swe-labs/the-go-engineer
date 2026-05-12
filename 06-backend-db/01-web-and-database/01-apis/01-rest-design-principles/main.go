@@ -50,10 +50,12 @@ type userStore struct {
 	next  int
 }
 
+// newUserStore (Constructor): initializes a new in-memory user store with auto-incrementing IDs.
 func newUserStore() *userStore {
 	return &userStore{users: make(map[int]User), next: 1}
 }
 
+// userStore.create (Method): inserts a new User and returns it with an assigned ID.
 func (s *userStore) create(name, email string) User {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -63,6 +65,7 @@ func (s *userStore) create(name, email string) User {
 	return u
 }
 
+// userStore.list (Method): returns a snapshot of all stored users.
 func (s *userStore) list() []User {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -73,6 +76,7 @@ func (s *userStore) list() []User {
 	return result
 }
 
+// userStore.get (Method): retrieves a user by ID; the bool indicates whether the user was found.
 func (s *userStore) get(id int) (User, bool) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -80,6 +84,7 @@ func (s *userStore) get(id int) (User, bool) {
 	return u, ok
 }
 
+// userStore.delete (Method): removes a user by ID and reports whether the user existed.
 func (s *userStore) delete(id int) bool {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -88,6 +93,7 @@ func (s *userStore) delete(id int) bool {
 	return ok
 }
 
+// writeJSON (Function): serializes v as JSON and writes it with the given HTTP status code.
 func writeJSON(w http.ResponseWriter, status int, v any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)

@@ -33,10 +33,10 @@ import (
 
 // Config (Struct): aggregates configuration values read from environment variables.
 type Config struct {
-	Port    int
-	DBHost  string
-	DBUser  string
-	Debug   bool
+	Port   int
+	DBHost string
+	DBUser string
+	Debug  bool
 }
 
 // loadConfig (Function): reads configuration from environment variables with defaults.

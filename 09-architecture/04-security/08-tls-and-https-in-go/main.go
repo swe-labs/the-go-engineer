@@ -22,19 +22,116 @@
 
 package main
 
-import "fmt"
+import (
+	"crypto/rand"
+	"crypto/rsa"
+	"crypto/tls"
+	"crypto/x509"
+	"crypto/x509/pkix"
+	"encoding/pem"
+	"fmt"
+	"log"
+	"math/big"
+	"net/http"
+	"time"
+)
 
-//
+// handler (Function): responds to all HTTPS requests with a confirmation message.
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello from the secure server! You reached: %s\n", r.URL.Path)
+}
 
 func main() {
 	fmt.Println("=== SEC.8 TLS and HTTPS in Go ===")
-	fmt.Println("Learn the transport-level rules that turn plain HTTP into encrypted, identity-checked HTTPS.")
 	fmt.Println()
-	fmt.Println("- HTTPS is HTTP over a verified TLS channel.")
-	fmt.Println("- Certificate validation is part of the trust model, not an optional extra.")
-	fmt.Println("- Reasonable defaults are safer than hand-rolling exotic TLS settings.")
+
+	// --- Generate self-signed certificate ---
+	priv, err := rsa.GenerateKey(rand.Reader, 2048)
+	if err != nil {
+		log.Fatalf("Failed to generate RSA key: %v", err)
+	}
+
+	serial, err := rand.Int(rand.Reader, new(big.Int).Lsh(big.NewInt(1), 128))
+	if err != nil {
+		log.Fatalf("Failed to generate serial number: %v", err)
+	}
+
+	template := &x509.Certificate{
+		SerialNumber: serial,
+		Subject: pkix.Name{
+			Organization: []string{"The Go Engineer Demo"},
+			CommonName:   "localhost",
+		},
+		NotBefore:             time.Now(),
+		NotAfter:              time.Now().Add(1 * time.Hour),
+		KeyUsage:              x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
+		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
+		BasicConstraintsValid: true,
+		DNSNames:              []string{"localhost"},
+	}
+
+	certDER, err := x509.CreateCertificate(rand.Reader, template, template, &priv.PublicKey, priv)
+	if err != nil {
+		log.Fatalf("Failed to create certificate: %v", err)
+	}
+
+	// PEM-encode the certificate for display
+	certPEM := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: certDER})
+	keyPEM := pem.EncodeToMemory(&pem.Block{Type: "RSA PRIVATE KEY", Bytes: x509.MarshalPKCS1PrivateKey(priv)})
+
+	fmt.Println("Generated self-signed certificate:")
+	fmt.Printf("  Subject: %s\n", template.Subject.String())
+	fmt.Printf("  Serial: %s\n", template.SerialNumber)
+	fmt.Printf("  Valid until: %s\n", template.NotAfter.Format(time.RFC3339))
+	fmt.Println("  DNS names: localhost")
 	fmt.Println()
-	fmt.Println("Transport security is not optional on hostile networks, and misconfiguration can silently remove the safety you thought you had.")
+
+	// --- Start HTTPS server ---
+	tlsCert, err := tls.X509KeyPair(certPEM, keyPEM)
+	if err != nil {
+		log.Fatalf("Failed to load key pair: %v", err)
+	}
+
+	server := &http.Server{
+		Addr:    ":8443",
+		Handler: http.HandlerFunc(handler),
+		TLSConfig: &tls.Config{
+			Certificates: []tls.Certificate{tlsCert},
+			MinVersion:   tls.VersionTLS12,
+		},
+	}
+
+	go func() {
+		fmt.Printf("HTTPS server listening on https://localhost%s\n", server.Addr)
+		if err := server.ListenAndServeTLS("", ""); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("Server error: %v", err)
+		}
+	}()
+
+	// Allow server to start
+	time.Sleep(200 * time.Millisecond)
+
+	// --- Test request with insecure skip (demo only) ---
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		},
+	}
+
+	resp, err := client.Get("https://localhost:8443/hello")
+	if err != nil {
+		log.Fatalf("Test request failed: %v", err)
+	}
+	defer resp.Body.Close()
+
+	buf := make([]byte, 256)
+	n, _ := resp.Body.Read(buf)
+	fmt.Printf("Test response: %s", string(buf[:n]))
+	fmt.Println()
+
+	log.Println("TLS and HTTPS demo completed successfully.")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: SEC.9 -> 09-architecture/04-security/09-secrets-management")
