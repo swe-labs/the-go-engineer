@@ -1858,11 +1858,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "05-packages-io/02-io-and-cli/02-encoding/05-base64_encoding",
+      "path": "05-packages-io/02-io-and-cli/02-encoding/05-base64",
       "prerequisites": [
         "EN.1"
       ],
-      "run_command": "go run ./05-packages-io/02-io-and-cli/02-encoding/05-base64_encoding",
+      "run_command": "go run ./05-packages-io/02-io-and-cli/02-encoding/05-base64",
       "test_command": "",
       "starter_path": "",
       "next_items": [
@@ -3579,6 +3579,28 @@
       ],
       "run_command": "",
       "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/10-golden-files",
+      "starter_path": "",
+      "next_items": [
+        "PR.1"
+      ]
+    },
+    {
+      "id": "TE.11",
+      "section_id": "s08",
+      "slug": "testable-design-with-io-writer",
+      "title": "Testable Design with io.Writer",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/02-testing/11-testable-design",
+      "prerequisites": [
+        "TE.1",
+        "TE.2"
+      ],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/02-testing/11-testable-design",
       "starter_path": "",
       "next_items": [
         "PR.1"

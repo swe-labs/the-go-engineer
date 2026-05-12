@@ -27,9 +27,9 @@ This section belongs to [06 Backend, APIs & Databases](../README.md).
 
 The stage also includes supporting reference directories that deepen the backend story:
 
-- [`http-client`](./http-client) for outbound HTTP dependency patterns
-- [`database-migrations`](./database-migrations) for schema evolution workflows
-- [`web-masterclass`](./web-masterclass) for larger application-shaped references
+- [`http-client`](./04-http-client) for outbound HTTP dependency patterns
+- [`database-migrations`](./02-database-migrations) for schema evolution workflows
+- [`web-masterclass`](./06-web-masterclass) for larger application-shaped references
 
 These are part of the stage inventory, but the canonical promoted path is the `HS`, `API`, and `DB` track set in `curriculum.v2.json`.
 
