@@ -3377,6 +3377,68 @@
       ]
     },
     {
+      "id": "TE.1",
+      "section_id": "s08",
+      "slug": "unit-testing",
+      "title": "Unit Testing",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "foundation",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/testing/01-unit-testing",
+      "prerequisites": [],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/01-unit-testing",
+      "starter_path": "",
+      "next_items": [
+        "TE.2"
+      ]
+    },
+    {
+      "id": "TE.2",
+      "section_id": "s08",
+      "slug": "table-driven-tests",
+      "title": "Table-Driven Tests",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/testing/02-table-driven-tests",
+      "prerequisites": [
+        "TE.1"
+      ],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/02-table-driven-tests",
+      "starter_path": "",
+      "next_items": [
+        "TE.3"
+      ]
+    },
+    {
+      "id": "TE.3",
+      "section_id": "s08",
+      "slug": "http-handler-testing",
+      "title": "HTTP Handler Testing",
+      "type": "lesson",
+      "subtype": "integration",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "test",
+      "path": "08-quality-test/01-quality-and-performance/testing/03-http-handler-testing",
+      "prerequisites": [
+        "TE.1",
+        "TE.2"
+      ],
+      "run_command": "",
+      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/03-http-handler-testing",
+      "starter_path": "",
+      "next_items": [
+        "TE.4"
+      ]
+    },
+    {
       "id": "TE.5",
       "section_id": "s08",
       "slug": "sub-tests-and-tcleanup",
@@ -3520,68 +3582,6 @@
       "starter_path": "",
       "next_items": [
         "TE.5"
-      ]
-    },
-    {
-      "id": "TE.1",
-      "section_id": "s08",
-      "slug": "unit-testing",
-      "title": "Unit Testing",
-      "type": "lesson",
-      "subtype": "concept",
-      "level": "foundation",
-      "status": "implemented",
-      "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/user",
-      "prerequisites": [],
-      "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/user",
-      "starter_path": "",
-      "next_items": [
-        "TE.2"
-      ]
-    },
-    {
-      "id": "TE.2",
-      "section_id": "s08",
-      "slug": "table-driven-tests",
-      "title": "Table-Driven Tests",
-      "type": "lesson",
-      "subtype": "pattern",
-      "level": "core",
-      "status": "implemented",
-      "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/user",
-      "prerequisites": [
-        "TE.1"
-      ],
-      "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/user",
-      "starter_path": "",
-      "next_items": [
-        "TE.3"
-      ]
-    },
-    {
-      "id": "TE.3",
-      "section_id": "s08",
-      "slug": "http-handler-testing",
-      "title": "HTTP Handler Testing",
-      "type": "lesson",
-      "subtype": "integration",
-      "level": "core",
-      "status": "implemented",
-      "verification_mode": "test",
-      "path": "08-quality-test/01-quality-and-performance/testing/user",
-      "prerequisites": [
-        "TE.1",
-        "TE.2"
-      ],
-      "run_command": "",
-      "test_command": "go test ./08-quality-test/01-quality-and-performance/testing/user",
-      "starter_path": "",
-      "next_items": [
-        "TE.4"
       ]
     },
     {

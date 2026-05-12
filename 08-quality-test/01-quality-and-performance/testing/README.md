@@ -8,9 +8,9 @@ Master the tools and patterns required to build a reliable Go codebase. This tra
 
 | ID | Topic | Surface | Why It Matters |
 | --- | --- | --- | --- |
-| `TE.1` | **Unit Testing** | [`./user`](./user) | Basic `testing.T` and test file structure. |
-| `TE.2` | **Table-Driven Tests** | [`./user`](./user) | The idiomatic Go pattern for scaling test cases. |
-| `TE.3` | **HTTP Testing** | [`./user`](./user) | Testing handlers with `httptest`. |
+| `TE.1` | **Unit Testing** | [`./01-unit-testing`](./01-unit-testing) | Basic `testing.T` and test file structure. |
+| `TE.2` | **Table-Driven Tests** | [`./02-table-driven-tests`](./02-table-driven-tests) | The idiomatic Go pattern for scaling test cases. |
+| `TE.3` | **HTTP Testing** | [`./03-http-handler-testing`](./03-http-handler-testing) | Testing handlers with `httptest`. |
 | `TE.4` | **Benchmarking** | [`./benchmarks`](./benchmarks) | Measuring `ns/op` and `allocs/op`. |
 | `TE.5` | **Sub-tests & Cleanup** | [`./5-sub-tests-and-cleanup`](./5-sub-tests-and-cleanup) | Granular reporting and reliable teardown. |
 | `TE.6` | **Fuzz Testing** | [`./6-fuzz-testing`](./6-fuzz-testing) | Automating edge-case discovery. |
