@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/auth"
+	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/db"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/logging"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/metrics"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/middleware"
@@ -25,6 +26,11 @@ import (
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/ratelimit"
 	"github.com/swe-labs/the-go-engineer/11-flagship/01-opslane/internal/services"
 )
+
+// Compile-time assertion that *db.Store satisfies the Store interface.
+// If db.Store adds or removes a method, this line will fail to compile,
+// preventing silent interface drift between the handler layer and the repository.
+var _ Store = (*db.Store)(nil)
 
 const healthDatabaseTimeout = 2 * time.Second
 const apiRateLimitWindow = time.Minute
@@ -135,6 +141,8 @@ func (app *Application) Routes() http.Handler {
 	return handler
 }
 
+// handleIndex (Method): serves the root endpoint with a simple service identity
+// response used for connectivity verification.
 func (app *Application) handleIndex(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]string{
 		"service": app.ServiceName,
@@ -143,6 +151,8 @@ func (app *Application) handleIndex(w http.ResponseWriter, _ *http.Request) {
 	})
 }
 
+// handleHealth (Method): combines database ping and drain state into a composite
+// health check response for orchestration probes (k8s readiness/liveness).
 func (app *Application) handleHealth(w http.ResponseWriter, r *http.Request) {
 	statusCode := http.StatusOK
 	databaseStatus := "ok"
@@ -170,6 +180,8 @@ func (app *Application) handleHealth(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// handleMe (Method): returns the authenticated user's identity information
+// extracted from the JWT token in the request context.
 func (app *Application) handleMe(w http.ResponseWriter, r *http.Request) {
 	identity, err := auth.RequireIdentity(r.Context())
 	if err != nil {
@@ -186,6 +198,8 @@ func (app *Application) handleMe(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// handleLiveness (Method): returns a minimal alive response for liveness probes
+// without checking dependencies like the database.
 func (app *Application) handleLiveness(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]string{
 		"service": app.ServiceName,
@@ -194,6 +208,8 @@ func (app *Application) handleLiveness(w http.ResponseWriter, _ *http.Request) {
 	})
 }
 
+// writeJSON (Function): serializes the payload as JSON and writes it with the
+// given HTTP status code, setting the Content-Type header appropriately.
 func writeJSON(w http.ResponseWriter, status int, payload any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
