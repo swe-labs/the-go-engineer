@@ -60,7 +60,7 @@ Issue title format:
 [TYPE] short description
 ```
 
-Allowed types:
+Allowed types (match the branch prefix mapping below):
 
 ```text
 [FEAT] [FIX] [DOCS] [TEST] [CHORE] [REFACTOR] [SECURITY] [RELEASE]
@@ -76,13 +76,28 @@ Issue body should include:
 
 ## Branches
 
+Bracketed types are for human-facing surfaces (issues, PRs, commits). Branch names use the corresponding slash-prefixed type to avoid URL encoding and shell issues.
+
+| Type | Branch prefix | Example |
+| --- | --- | --- |
+| `[FEAT]` | `feat/` | `feat/s03-functions-basics` |
+| `[FIX]` | `fix/` | `fix/s06-tenant-scoping` |
+| `[DOCS]` | `docs/` | `docs/release-readiness` |
+| `[TEST]` | `test/` | `test/s08-benchmark-coverage` |
+| `[CHORE]` | `chore/` | `chore/tooling-update` |
+| `[REFACTOR]` | `refactor/` | `refactor/config-validation` |
+| `[SECURITY]` | `security/` | `security/input-sanitization` |
+| `[RELEASE]` | `release/` | `release/v2.1.2-prep` |
+
+Long-lived lines:
+
 | Branch | Purpose |
 | --- | --- |
 | `main` | active post-v2.1 implementation and integration line |
 | `release/v2` | stable v2.1.x maintenance line |
 | `release/v1` | stable v1 maintenance line |
 
-Branch from the line that should receive the change.
+Branch from the line that should receive the change. Include the lesson section number (`sNN`) when the change is specific to one section.
 
 Examples:
 
@@ -95,8 +110,18 @@ git switch -c docs/public-release-readiness
 ```bash
 git switch release/v2
 git pull --ff-only origin release/v2
-git switch -c release/v2.1.x-prep
+git switch -c release/v2.1.2-prep
 ```
+
+## Pull Requests
+
+PR titles use the same bracketed format as issues:
+
+```text
+[TYPE] short description
+```
+
+Open a draft PR early and link the issue with `Closes #<issue>`.
 
 ## Pull Requests
 
