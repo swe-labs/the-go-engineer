@@ -68,4 +68,4 @@ The code includes a "Heavy Workload" (e.g., intensive string manipulation or mat
 
 ## Next Step
 
-Next: `PR.2` -> [`08-quality-test/01-quality-and-performance/profiling/3-http-pprof`](../3-http-pprof/README.md)
+Next: `PR.2` -> [`08-quality-test/01-quality-and-performance/profiling/2-http-pprof`](../2-http-pprof/README.md)

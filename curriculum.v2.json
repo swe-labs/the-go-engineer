@@ -3283,11 +3283,11 @@
       "level": "core",
       "status": "implemented",
       "verification_mode": "run",
-      "path": "08-quality-test/01-quality-and-performance/profiling/3-http-pprof",
+      "path": "08-quality-test/01-quality-and-performance/profiling/2-http-pprof",
       "prerequisites": [
         "PR.1"
       ],
-      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/3-http-pprof",
+      "run_command": "go run ./08-quality-test/01-quality-and-performance/profiling/2-http-pprof",
       "test_command": "",
       "starter_path": "",
       "next_items": [
