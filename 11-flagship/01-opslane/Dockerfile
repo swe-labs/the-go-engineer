@@ -17,7 +17,10 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o opslane ./11-flagship/01-opslane/cmd/se
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates curl
 
-WORKDIR /root/
+# Create a non-root user for security best practice
+RUN adduser -D -H -u 1000 opslane
+USER opslane
+WORKDIR /home/opslane/
 
 COPY --from=builder /app/opslane .
 
