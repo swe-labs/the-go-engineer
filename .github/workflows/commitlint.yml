@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: Lint commit messages
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const pattern = /^\[(FEAT|FIX|DOCS|TEST|CHORE|REFACTOR|SECURITY|RELEASE)\] .+/;
