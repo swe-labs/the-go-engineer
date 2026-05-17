@@ -13,11 +13,11 @@ import (
 )
 
 var (
-	// ErrInvalidPoolConfig is returned when PoolConfig validation fails.
+	// ErrInvalidPoolConfig (Error): signals that PoolConfig validation failed at startup.
 	ErrInvalidPoolConfig = errors.New("invalid worker pool config")
-	// ErrPoolStopped is returned when attempting to submit to a stopped pool.
+	// ErrPoolStopped (Error): signals that a Submit call was rejected because the pool is shutting down.
 	ErrPoolStopped = errors.New("worker pool stopped")
-	// ErrQueueFull is returned by TrySubmit when the job channel has no capacity.
+	// ErrQueueFull (Error): signals that TrySubmit found no capacity in the job channel.
 	ErrQueueFull = errors.New("worker queue full")
 )
 

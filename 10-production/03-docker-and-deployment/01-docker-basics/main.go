@@ -8,13 +8,20 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - Learn the basic building blocks of images, containers, layers, and Dockerfiles.
+//   - Build a Docker image from a Go application using a Dockerfile.
+//   - Understand images, containers, layers, and the Docker build cache.
 //
 // WHY THIS MATTERS:
-//   - A Docker image is a packaged filesystem and startup contract; a container is one running instance of that package.
+//   - A Docker image is a packaged filesystem and startup contract; a container
+//     is one running instance of that package. Images are build outputs;
+//     containers are running instances.
 //
 // RUN:
 //   go run ./10-production/03-docker-and-deployment/01-docker-basics
+//
+// Build with Docker:
+//   docker build -t docker-basics ./10-production/03-docker-and-deployment/01-docker-basics/
+//   docker run -p 8080:8080 docker-basics
 //
 // KEY TAKEAWAY:
 //   - Images are build outputs; containers are running instances.
@@ -24,22 +31,34 @@
 
 package main
 
-import "fmt"
-
-//
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
 
 func main() {
-	fmt.Println("=== DOCKER.1 Docker basics ===")
-	fmt.Println("Learn the basic building blocks of images, containers, layers, and Dockerfiles.")
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello from Docker! Path: %s\n", r.URL.Path)
+	})
+	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintln(w, "healthy")
+	})
+
+	port := ":8080"
+	fmt.Printf("=== DOCKER.1 Docker basics ===\n")
+	fmt.Printf("Server starting on http://localhost%s\n", port)
 	fmt.Println()
-	fmt.Println("- Images are build outputs; containers are running instances.")
-	fmt.Println("- Dockerfiles describe how the image is assembled.")
-	fmt.Println("- Layer order influences rebuild speed and image cleanliness.")
-	fmt.Println()
-	fmt.Println("Container basics matter because deployment packaging changes startup, debugging, and runtime assumptions.")
+	fmt.Println("Build with Docker:")
+	fmt.Println("  docker build -t docker-basics ./10-production/03-docker-and-deployment/01-docker-basics/")
+	fmt.Println("  docker run -p 8080:8080 docker-basics")
 	fmt.Println()
 	fmt.Println("---------------------------------------------------")
 	fmt.Println("NEXT UP: DOCKER.2 -> 10-production/03-docker-and-deployment/02-multi-stage-builds")
 	fmt.Println("Current: DOCKER.1 (docker basics)")
 	fmt.Println("---------------------------------------------------")
+
+	log.Fatal(http.ListenAndServe(port, mux))
 }

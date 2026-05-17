@@ -8,7 +8,9 @@
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
-//   - WithCancel fundamentals and practical application in Go.
+//   - Create cancellable contexts with context.WithCancel().
+//   - Use ctx.Done() to listen for cancellation signals in goroutines.
+//   - Understand automatic cancellation propagation from parent to child contexts.
 //
 // WHY THIS MATTERS:
 //   - WithCancel provides a structured approach to writing clean Go code.
