@@ -119,15 +119,24 @@ func NewFileUserRepository(path string) *FileUserRepository {
 }
 
 // FileUserRepository.Save (Method): appends a user as a JSON line under a write lock.
-func (r *FileUserRepository) Save(user User) error {
+func (r *FileUserRepository) Save(user User) (err error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 	f, err := os.OpenFile(r.path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
-	defer f.Close()
-	return json.NewEncoder(f).Encode(user)
+	defer func() {
+		if closeErr := f.Close(); closeErr != nil {
+			if err == nil {
+				err = closeErr
+			} else {
+				err = fmt.Errorf("%v; close error: %w", err, closeErr)
+			}
+		}
+	}()
+	err = json.NewEncoder(f).Encode(user)
+	return err
 }
 
 // FileUserRepository.FindByID (Method): scans all stored lines for a matching ID under a read lock.
