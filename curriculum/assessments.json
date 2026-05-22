@@ -1,0 +1,2547 @@
+{
+    "schema_version":  "3.0.0",
+    "document_type":  "assessments",
+    "last_updated":  "2026-05-17",
+    "name":  "The Go Engineer v3 — Assessments",
+    "status":  "draft",
+    "architectural_decision":  {
+                                   "decision":  "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
+                                   "v2_policy":  "curriculum.v2.json is frozen legacy import data, not the active source of truth.",
+                                   "core_rule":  "Keep good lessons, break the old path, optimize for learner progression, proof, documentation quality, and job readiness.",
+                                   "full_bundle_policy":  "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only."
+                               },
+    "assessments":  [
+                        {
+                            "id":  "assessment-module-00",
+                            "title":  "Module 00 Assessment — Orientation",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-00-01",
+                                               "core-00-02",
+                                               "core-00-03",
+                                               "core-00-04",
+                                               "core-00-05",
+                                               "core-00-06",
+                                               "core-00-07",
+                                               "core-00-08",
+                                               "core-00-09",
+                                               "core-00-10"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Orientation.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-00-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-00-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-00-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-00-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Orientation solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-01",
+                            "title":  "Module 01 Assessment — Computers, Terminal, Git, and the Web",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-01-01",
+                                               "core-01-02",
+                                               "core-01-03",
+                                               "core-01-04",
+                                               "core-01-05",
+                                               "core-01-06",
+                                               "core-01-07",
+                                               "core-01-08",
+                                               "core-01-09",
+                                               "core-01-10",
+                                               "core-01-11",
+                                               "core-01-12",
+                                               "core-01-13",
+                                               "core-01-14",
+                                               "core-01-15"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Computers, Terminal, Git, and the Web.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-01-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-01-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-01-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-01-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Computers, Terminal, Git, and the Web solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-02",
+                            "title":  "Module 02 Assessment — Go Setup and Tooling",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-02-01",
+                                               "core-02-02",
+                                               "core-02-03",
+                                               "core-02-04",
+                                               "core-02-05",
+                                               "core-02-06",
+                                               "core-02-07",
+                                               "core-02-08",
+                                               "core-02-09",
+                                               "core-02-10",
+                                               "core-02-11",
+                                               "core-02-12",
+                                               "core-02-13",
+                                               "core-02-14"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Go Setup and Tooling.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-02-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-02-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-02-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-02-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Go Setup and Tooling solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-03",
+                            "title":  "Module 03 Assessment — Programming Fundamentals with Go",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-03-01",
+                                               "core-03-02",
+                                               "core-03-03",
+                                               "core-03-04",
+                                               "core-03-05",
+                                               "core-03-06",
+                                               "core-03-07",
+                                               "core-03-08",
+                                               "core-03-09",
+                                               "core-03-10",
+                                               "core-03-11",
+                                               "core-03-12",
+                                               "core-03-13",
+                                               "core-03-14",
+                                               "core-03-15",
+                                               "core-03-16",
+                                               "core-03-17",
+                                               "core-03-18",
+                                               "core-03-19",
+                                               "core-03-20",
+                                               "core-03-21",
+                                               "core-03-22",
+                                               "core-03-23"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Programming Fundamentals with Go.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-03-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-03-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-03-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-03-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Programming Fundamentals with Go solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-04",
+                            "title":  "Module 04 Assessment — Functions, Errors, and Data Semantics",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-04-01",
+                                               "core-04-02",
+                                               "core-04-03",
+                                               "core-04-04",
+                                               "core-04-05",
+                                               "core-04-06",
+                                               "core-04-07",
+                                               "core-04-08",
+                                               "core-04-09",
+                                               "core-04-10",
+                                               "core-04-11",
+                                               "core-04-12",
+                                               "core-04-13",
+                                               "core-04-14",
+                                               "core-04-15",
+                                               "core-04-16",
+                                               "core-04-17",
+                                               "core-04-18"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Functions, Errors, and Data Semantics.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-04-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-04-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-04-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-04-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Functions, Errors, and Data Semantics solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-05",
+                            "title":  "Module 05 Assessment — Types, Interfaces, Packages, and Modules",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-05-01",
+                                               "core-05-02",
+                                               "core-05-03",
+                                               "core-05-04",
+                                               "core-05-05",
+                                               "core-05-06",
+                                               "core-05-07",
+                                               "core-05-08",
+                                               "core-05-09",
+                                               "core-05-10",
+                                               "core-05-11",
+                                               "core-05-12",
+                                               "core-05-13",
+                                               "core-05-14",
+                                               "core-05-15",
+                                               "core-05-16",
+                                               "core-05-17",
+                                               "core-05-18",
+                                               "core-05-19",
+                                               "core-05-20",
+                                               "core-05-21",
+                                               "core-05-22",
+                                               "core-05-23"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Types, Interfaces, Packages, and Modules.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-05-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-05-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-05-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-05-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Types, Interfaces, Packages, and Modules solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-06",
+                            "title":  "Module 06 Assessment — Testing, Debugging, and Refactoring",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-06-01",
+                                               "core-06-02",
+                                               "core-06-03",
+                                               "core-06-04",
+                                               "core-06-05",
+                                               "core-06-06",
+                                               "core-06-07",
+                                               "core-06-08",
+                                               "core-06-09",
+                                               "core-06-10",
+                                               "core-06-11",
+                                               "core-06-12",
+                                               "core-06-13",
+                                               "core-06-14",
+                                               "core-06-15",
+                                               "core-06-16",
+                                               "core-06-17",
+                                               "core-06-18",
+                                               "core-06-19",
+                                               "core-06-20",
+                                               "core-06-21"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Testing, Debugging, and Refactoring.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-06-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-06-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-06-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-06-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Testing, Debugging, and Refactoring solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-07",
+                            "title":  "Module 07 Assessment — CLI, Files, JSON, and Configuration",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-07-01",
+                                               "core-07-02",
+                                               "core-07-03",
+                                               "core-07-04",
+                                               "core-07-05",
+                                               "core-07-06",
+                                               "core-07-07",
+                                               "core-07-08",
+                                               "core-07-09",
+                                               "core-07-10",
+                                               "core-07-11",
+                                               "core-07-12",
+                                               "core-07-13",
+                                               "core-07-14",
+                                               "core-07-15",
+                                               "core-07-16",
+                                               "core-07-17",
+                                               "core-07-18",
+                                               "core-07-19",
+                                               "core-07-20",
+                                               "core-07-21"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain CLI, Files, JSON, and Configuration.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-07-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-07-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-07-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-07-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does CLI, Files, JSON, and Configuration solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-08",
+                            "title":  "Module 08 Assessment -- HTTP and REST APIs",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-08-01",
+                                               "core-08-02",
+                                               "core-08-03",
+                                               "core-08-04",
+                                               "core-08-05",
+                                               "core-08-06",
+                                               "core-08-07",
+                                               "core-08-08",
+                                               "core-08-09",
+                                               "core-08-10",
+                                               "core-08-11",
+                                               "core-08-12",
+                                               "core-08-13",
+                                               "core-08-14",
+                                               "core-08-15",
+                                               "core-08-16",
+                                               "core-08-17",
+                                               "core-08-18",
+                                               "core-08-19",
+                                               "core-08-20"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain HTTP and REST APIs.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-08-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-08-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-08-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-08-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does HTTP and REST APIs solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-09",
+                            "title":  "Module 09 Assessment -- SQL and PostgreSQL Persistence",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-09-01",
+                                               "core-09-02",
+                                               "core-09-03",
+                                               "core-09-04",
+                                               "core-09-05",
+                                               "core-09-06",
+                                               "core-09-07",
+                                               "core-09-08",
+                                               "core-09-09",
+                                               "core-09-10",
+                                               "core-09-11",
+                                               "core-09-12",
+                                               "core-09-13",
+                                               "core-09-14",
+                                               "core-09-15",
+                                               "core-09-16",
+                                               "core-09-17",
+                                               "core-09-18",
+                                               "core-09-19",
+                                               "core-09-20",
+                                               "core-09-21",
+                                               "core-09-22",
+                                               "core-09-23",
+                                               "core-09-24",
+                                               "core-09-25",
+                                               "core-09-26"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain SQL and PostgreSQL Persistence.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-09-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-09-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-09-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-09-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does SQL and PostgreSQL Persistence solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-10",
+                            "title":  "Module 10 Assessment -- Authentication, Authorization, and Security",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-10-01",
+                                               "core-10-02",
+                                               "core-10-03",
+                                               "core-10-04",
+                                               "core-10-05",
+                                               "core-10-06",
+                                               "core-10-07",
+                                               "core-10-08",
+                                               "core-10-09",
+                                               "core-10-10",
+                                               "core-10-11",
+                                               "core-10-12",
+                                               "core-10-13",
+                                               "core-10-14",
+                                               "core-10-15",
+                                               "core-10-16",
+                                               "core-10-17",
+                                               "core-10-18",
+                                               "core-10-19",
+                                               "core-10-20",
+                                               "core-10-21",
+                                               "core-10-22",
+                                               "core-10-23",
+                                               "core-10-24"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Authentication, Authorization, and Security.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-10-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-10-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-10-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-10-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Authentication, Authorization, and Security solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-11",
+                            "title":  "Module 11 Assessment -- Lifecycle, Context, and Concurrency",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-11-01",
+                                               "core-11-02",
+                                               "core-11-03",
+                                               "core-11-04",
+                                               "core-11-05",
+                                               "core-11-06",
+                                               "core-11-07",
+                                               "core-11-08",
+                                               "core-11-09",
+                                               "core-11-10",
+                                               "core-11-11",
+                                               "core-11-12",
+                                               "core-11-13",
+                                               "core-11-14",
+                                               "core-11-15",
+                                               "core-11-16",
+                                               "core-11-17",
+                                               "core-11-18",
+                                               "core-11-19",
+                                               "core-11-20",
+                                               "core-11-21",
+                                               "core-11-22",
+                                               "core-11-23",
+                                               "core-11-24",
+                                               "core-11-25",
+                                               "core-11-26",
+                                               "core-11-27",
+                                               "core-11-28"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Lifecycle, Context, and Concurrency.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-11-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-11-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-11-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-11-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Lifecycle, Context, and Concurrency solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-12",
+                            "title":  "Module 12 Assessment -- Observability and Diagnostics",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-12-01",
+                                               "core-12-02",
+                                               "core-12-03",
+                                               "core-12-04",
+                                               "core-12-05",
+                                               "core-12-06",
+                                               "core-12-07",
+                                               "core-12-08",
+                                               "core-12-09",
+                                               "core-12-18",
+                                               "core-12-19",
+                                               "core-12-20"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Observability, Performance, and Reliability.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-12-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-12-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-12-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-12-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Observability, Performance, and Reliability solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-13",
+                            "title":  "Module 13 Assessment -- Performance and Memory Engineering",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-12-10",
+                                               "core-12-11",
+                                               "core-12-12",
+                                               "core-12-13",
+                                               "core-12-14",
+                                               "core-12-15",
+                                               "core-12-16",
+                                               "core-12-17"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Observability, Performance, and Reliability.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-12-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-12-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-12-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-12-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Observability, Performance, and Reliability solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-14",
+                            "title":  "Module 14 Assessment -- Architecture and Distributed Systems",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-13-01",
+                                               "core-13-02",
+                                               "core-13-03",
+                                               "core-13-04",
+                                               "core-13-05",
+                                               "core-13-06",
+                                               "core-13-07",
+                                               "core-13-08",
+                                               "core-13-09",
+                                               "core-13-10",
+                                               "core-13-11",
+                                               "core-13-12",
+                                               "core-13-13",
+                                               "core-13-14",
+                                               "core-13-15",
+                                               "core-13-16",
+                                               "core-13-17"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Architecture and Systems Thinking.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-13-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-13-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-13-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-13-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Architecture and Systems Thinking solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-15",
+                            "title":  "Module 15 Assessment -- Docker, CI/CD, and Deployment",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-14-01",
+                                               "core-14-02",
+                                               "core-14-03",
+                                               "core-14-04",
+                                               "core-14-05",
+                                               "core-14-06",
+                                               "core-14-07",
+                                               "core-14-08",
+                                               "core-14-09",
+                                               "core-14-10",
+                                               "core-14-11",
+                                               "core-14-12",
+                                               "core-14-13",
+                                               "core-14-14",
+                                               "core-14-15",
+                                               "core-14-16",
+                                               "core-14-17",
+                                               "core-14-18",
+                                               "core-14-19"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Docker, CI/CD, Linux, and Deployment.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-14-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-14-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-14-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-14-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Docker, CI/CD, Linux, and Deployment solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-16",
+                            "title":  "Module 16 Assessment -- Portfolio and Interview Readiness",
+                            "type":  "portfolio-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "core-15-01",
+                                               "core-15-02",
+                                               "core-15-03",
+                                               "core-15-04",
+                                               "core-15-05",
+                                               "core-15-06",
+                                               "core-15-07",
+                                               "core-15-08",
+                                               "core-15-09",
+                                               "core-15-10",
+                                               "core-15-11",
+                                               "core-15-12",
+                                               "core-15-13",
+                                               "core-15-14",
+                                               "core-15-15"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Portfolio, Collaboration, Interview Readiness, and Capstone Prep.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-15-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-15-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-15-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-15-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Portfolio, Collaboration, Interview Readiness, and Capstone Prep solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-17",
+                            "title":  "Module 17 Assessment -- Electives and Advanced Engineering",
+                            "type":  "project-review",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "elective-01",
+                                               "elective-02",
+                                               "elective-03",
+                                               "elective-04",
+                                               "elective-05",
+                                               "elective-06",
+                                               "elective-07",
+                                               "elective-08",
+                                               "elective-09",
+                                               "elective-10",
+                                               "elective-11",
+                                               "elective-12",
+                                               "elective-13",
+                                               "elective-14",
+                                               "elective-15",
+                                               "elective-16",
+                                               "elective-17",
+                                               "elective-18",
+                                               "elective-19",
+                                               "elective-20"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Advanced Electives.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-16-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-16-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-16-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-16-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Advanced Electives solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        },
+                        {
+                            "id":  "assessment-module-18",
+                            "title":  "Module 18 Assessment — Flagship Opslane",
+                            "type":  "capstone-defense",
+                            "status":  "planned",
+                            "target_ids":  [
+                                               "opslane-01",
+                                               "opslane-02",
+                                               "opslane-03",
+                                               "opslane-04",
+                                               "opslane-05",
+                                               "opslane-06",
+                                               "opslane-07",
+                                               "opslane-08",
+                                               "opslane-09",
+                                               "opslane-10",
+                                               "opslane-11",
+                                               "opslane-12",
+                                               "opslane-13",
+                                               "opslane-14",
+                                               "opslane-15"
+                                           ],
+                            "purpose":  "Verify that the learner can apply and explain Flagship Opslane.",
+                            "criteria":  [
+                                             {
+                                                 "id":  "module-17-conceptual",
+                                                 "title":  "Conceptual clarity",
+                                                 "description":  "Learner can explain the concepts without memorized magic.",
+                                                 "weight":  30,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Cannot explain."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Can explain basics."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Explains mechanics, usage, and mistakes clearly."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-17-implementation",
+                                                 "title":  "Implementation",
+                                                 "description":  "Learner can produce working code or an appropriate artifact.",
+                                                 "weight":  35,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No working artifact."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Partial artifact."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Complete and clean artifact."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-17-proof",
+                                                 "title":  "Proof",
+                                                 "description":  "Learner can verify the work through tests, checks, or review.",
+                                                 "weight":  25,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "No proof."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Some proof."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Strong proof with edge cases."
+                                                                }
+                                                            ]
+                                             },
+                                             {
+                                                 "id":  "module-17-communication",
+                                                 "title":  "Communication",
+                                                 "description":  "Learner can communicate decisions and tradeoffs.",
+                                                 "weight":  10,
+                                                 "levels":  [
+                                                                {
+                                                                    "score":  0,
+                                                                    "description":  "Poor communication."
+                                                                },
+                                                                {
+                                                                    "score":  3,
+                                                                    "description":  "Basic communication."
+                                                                },
+                                                                {
+                                                                    "score":  5,
+                                                                    "description":  "Professional explanation."
+                                                                }
+                                                            ]
+                                             }
+                                         ],
+                            "passing_score":  80,
+                            "evidence_required":  [
+                                                      "Completed practice tasks",
+                                                      "Project or assessment artifact",
+                                                      "Written or verbal explanation"
+                                                  ],
+                            "automated_checks":  [
+                                                     "go test ./..."
+                                                 ],
+                            "manual_review_questions":  [
+                                                            "What problem does Flagship Opslane solve?",
+                                                            "What mistakes should beginners avoid?",
+                                                            "Where would this appear in real software engineering?"
+                                                        ],
+                            "retake_policy":  "Learner may retry after fixing rubric gaps and writing a short correction note.",
+                            "documentation_mode":  "assessment",
+                            "readme_status":  "scaffolded",
+                            "readme_contract":  {
+                                                    "contract_id":  "assessment.v3",
+                                                    "documentation_mode":  "assessment",
+                                                    "required":  true
+                                                }
+                        }
+                    ],
+    "quality_gates":  [
+                          "schema-valid",
+                          "graph-valid",
+                          "no-orphan-core-items",
+                          "all-prerequisites-exist",
+                          "implemented-items-have-readmes",
+                          "implemented-items-have-run-or-test-command",
+                          "projects-have-rubrics",
+                          "lessons-have-zero-magic-contract",
+                          "future-concepts-have-preview-only",
+                          "electives-do-not-block-core",
+                          "legacy-v2-is-not-authoritative",
+                          "starter-solution-parity",
+                          "no-broken-internal-links",
+                          "readme-required-headings-valid",
+                          "readme-level-purpose-valid",
+                          "readme-crossrefs-rendered-with-human-titles",
+                          "readme-no-generic-zero-magic-placeholders",
+                          "readme-no-stale-v2-section-labels",
+                          "readme-next-step-valid",
+                          "readme-module-map-generated-from-curriculum",
+                          "readme-project-rubric-present",
+                          "readme-assessment-evidence-present",
+                          "readme-preview-only-required-for-future-concepts",
+                          "readme-no-elective-blocks-core",
+                          "readme-no-broken-human-readable-links"
+                      ],
+    "validation_commands":  {
+                                "validate_schema":  "go run ./internal/tools/curriculum validate-schema",
+                                "validate_graph":  "go run ./internal/tools/curriculum validate-graph",
+                                "validate_lessons":  "go run ./internal/tools/curriculum validate-lessons",
+                                "validate_readmes":  "go run ./internal/tools/curriculum validate-readmes",
+                                "validate_all":  "go run ./internal/tools/curriculum validate-all"
+                            },
+    "schema_version":  "3.0.0",
+    "curriculum_version":  "3.0.0-draft.3"
+}
