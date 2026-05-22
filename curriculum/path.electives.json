@@ -1,0 +1,2554 @@
+{
+    "schema_version":  "3.1.0",
+    "document_type":  "elective_path",
+    "curriculum_version":  "3.1.0-draft.1",
+    "last_updated":  "2026-05-17",
+    "name":  "The Go Engineer v3 — Advanced Electives",
+    "status":  "draft",
+    "architectural_decision":  {
+                                   "decision":  "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
+                                   "v2_policy":  "curriculum.v2.json is frozen legacy import data, not the active source of truth.",
+                                   "core_rule":  "Keep good lessons, break the old path, optimize for learner progression, proof, documentation quality, and job readiness.",
+                                   "full_bundle_policy":  "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only."
+                               },
+    "repository_structure":  [
+                                 "16-advanced-electives",
+                                 "curriculum/path.core.json",
+                                 "curriculum/path.electives.json",
+                                 "curriculum/projects.json",
+                                 "curriculum/assessments.json",
+                                 "curriculum/crossrefs.json",
+                                 "curriculum/migration.v2-to-v3.json",
+                                 "curriculum/legacy/curriculum.v2.json",
+                                 "docs/",
+                                 "scripts/",
+                                 "internal/tools/curriculum/"
+                             ],
+    "modules":  [
+                    {
+                        "id":  "module-17",
+                        "number":  17,
+                        "slug":  "advanced-electives",
+                        "title":  "Advanced Electives",
+                        "phase":  "elective",
+                        "path":  "16-advanced-electives",
+                        "status":  "planned",
+                        "learning_goal":  "Keep advanced Go and backend topics without blocking the core learner path.",
+                        "summary":  "Keep advanced Go and backend topics without blocking the core learner path.",
+                        "order":  17,
+                        "required":  false,
+                        "portfolio_output":  false,
+                        "prerequisites":  [
+                                              "module-16"
+                                          ],
+                        "entry_item_ids":  [
+                                               "elective-01"
+                                           ],
+                        "terminal_item_ids":  [
+                                                  "elective-20"
+                                              ],
+                        "source_legacy_section_ids":  [],
+                        "cognitive_load":  "moderate",
+                        "recommended_break_after":  false,
+                        "contains_foundational_hard_concepts":  false,
+                        "pacing":  "moderate",
+                        "tags":  [
+                                     "elective"
+                                 ],
+                        "readme_status":  "scaffolded",
+                        "readme_contract":  {
+                                                "contract_id":  "elective-module.v3",
+                                                "documentation_mode":  "elective-overview"
+                                            }
+                    }
+                ],
+    "items":  [
+                  {
+                      "id":  "elective-01",
+                      "module_id":  "module-17",
+                      "slug":  "generics",
+                      "title":  "Generics",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  1,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Generics in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete the core path through Module 15 before starting advanced electives."
+                                                   ],
+                      "prerequisites":  [
+                                            "core-15-15"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-02"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Generics solves for a Go developer.",
+                                         "why_it_exists":  "Generics exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Generics as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Generics with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Generics mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Generics in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "core-15-15",
+                                                              "label":  "Module 15.15 — Demo preparation",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 15.15 — Demo preparation"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Generics.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/01-generics/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/01-generics/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+                                                "TI.9"
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-02",
+                      "module_id":  "module-17",
+                      "slug":  "complex-generic-constraints",
+                      "title":  "Complex generic constraints",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  2,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Complex generic constraints in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-01."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-01"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-03"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Complex generic constraints solves for a Go developer.",
+                                         "why_it_exists":  "Complex generic constraints exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Complex generic constraints as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Complex generic constraints with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Complex generic constraints mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Complex generic constraints in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-01",
+                                                              "label":  "Module 16.01 — Generics",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.01 — Generics"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Complex generic constraints.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/02-complex-generic-constraints/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/02-complex-generic-constraints/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-03",
+                      "module_id":  "module-17",
+                      "slug":  "generic-data-structures",
+                      "title":  "Generic data structures",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  3,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Generic data structures in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-02."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-02"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-04"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Generic data structures solves for a Go developer.",
+                                         "why_it_exists":  "Generic data structures exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Generic data structures as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Generic data structures with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Generic data structures mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Generic data structures in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-02",
+                                                              "label":  "Module 16.02 — Complex generic constraints",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.02 — Complex generic constraints"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Generic data structures.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/03-generic-data-structures/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/03-generic-data-structures/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-04",
+                      "module_id":  "module-17",
+                      "slug":  "functional-options",
+                      "title":  "Functional options",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  4,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Functional options in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-03."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-03"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-05"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Functional options solves for a Go developer.",
+                                         "why_it_exists":  "Functional options exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Functional options as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Functional options with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Functional options mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Functional options in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-03",
+                                                              "label":  "Module 16.03 — Generic data structures",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.03 — Generic data structures"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Functional options.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/04-functional-options/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/04-functional-options/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-05",
+                      "module_id":  "module-17",
+                      "slug":  "method-values",
+                      "title":  "Method values",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  5,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Method values in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-04."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-04"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-06"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Method values solves for a Go developer.",
+                                         "why_it_exists":  "Method values exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Method values as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Method values with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Method values mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Method values in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-04",
+                                                              "label":  "Module 16.04 — Functional options",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.04 — Functional options"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Method values.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/05-method-values/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/05-method-values/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-06",
+                      "module_id":  "module-17",
+                      "slug":  "build-tags",
+                      "title":  "Build tags",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  6,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Build tags in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-05."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-05"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-07"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Build tags solves for a Go developer.",
+                                         "why_it_exists":  "Build tags exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Build tags as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Build tags with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Build tags mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Build tags in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-05",
+                                                              "label":  "Module 16.05 — Method values",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.05 — Method values"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Build tags.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/06-build-tags/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/06-build-tags/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-07",
+                      "module_id":  "module-17",
+                      "slug":  "go-generate",
+                      "title":  "go generate",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  7,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply go generate in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-06."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-06"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-08"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem go generate solves for a Go developer.",
+                                         "why_it_exists":  "go generate exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of go generate as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses go generate with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using go generate mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses go generate in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-06",
+                                                              "label":  "Module 16.06 — Build tags",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.06 — Build tags"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies go generate.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/07-go-generate/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/07-go-generate/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-08",
+                      "module_id":  "module-17",
+                      "slug":  "mockery",
+                      "title":  "Mockery",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  8,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Mockery in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-07."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-07"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-09"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Mockery solves for a Go developer.",
+                                         "why_it_exists":  "Mockery exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Mockery as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Mockery with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Mockery mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Mockery in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-07",
+                                                              "label":  "Module 16.07 — go generate",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.07 — go generate"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Mockery.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/08-mockery/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/08-mockery/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-09",
+                      "module_id":  "module-17",
+                      "slug":  "protobuf",
+                      "title":  "Protobuf",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  9,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Protobuf in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-08."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-08"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-10"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Protobuf solves for a Go developer.",
+                                         "why_it_exists":  "Protobuf exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Protobuf as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Protobuf with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Protobuf mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Protobuf in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-08",
+                                                              "label":  "Module 16.08 — Mockery",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.08 — Mockery"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Protobuf.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/09-protobuf/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/09-protobuf/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-10",
+                      "module_id":  "module-17",
+                      "slug":  "grpc-fundamentals",
+                      "title":  "gRPC fundamentals",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  10,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply gRPC fundamentals in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-09."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-09"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-11"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem gRPC fundamentals solves for a Go developer.",
+                                         "why_it_exists":  "gRPC fundamentals exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of gRPC fundamentals as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses gRPC fundamentals with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using gRPC fundamentals mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses gRPC fundamentals in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-09",
+                                                              "label":  "Module 16.09 — Protobuf",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.09 — Protobuf"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies gRPC fundamentals.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/10-grpc-fundamentals/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/10-grpc-fundamentals/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-11",
+                      "module_id":  "module-17",
+                      "slug":  "grpc-streaming",
+                      "title":  "gRPC streaming",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  11,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply gRPC streaming in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-10."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-10"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-12"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem gRPC streaming solves for a Go developer.",
+                                         "why_it_exists":  "gRPC streaming exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of gRPC streaming as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses gRPC streaming with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using gRPC streaming mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses gRPC streaming in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-10",
+                                                              "label":  "Module 16.10 — gRPC fundamentals",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.10 — gRPC fundamentals"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies gRPC streaming.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/11-grpc-streaming/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/11-grpc-streaming/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-12",
+                      "module_id":  "module-17",
+                      "slug":  "grpc-interceptors",
+                      "title":  "gRPC interceptors",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  12,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply gRPC interceptors in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-11."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-11"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-13"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem gRPC interceptors solves for a Go developer.",
+                                         "why_it_exists":  "gRPC interceptors exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of gRPC interceptors as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses gRPC interceptors with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using gRPC interceptors mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses gRPC interceptors in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-11",
+                                                              "label":  "Module 16.11 — gRPC streaming",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.11 — gRPC streaming"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies gRPC interceptors.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/12-grpc-interceptors/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/12-grpc-interceptors/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-13",
+                      "module_id":  "module-17",
+                      "slug":  "rest-vs-grpc-tradeoffs",
+                      "title":  "REST vs gRPC tradeoffs",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  13,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply REST vs gRPC tradeoffs in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-12."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-12"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-14"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem REST vs gRPC tradeoffs solves for a Go developer.",
+                                         "why_it_exists":  "REST vs gRPC tradeoffs exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of REST vs gRPC tradeoffs as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses REST vs gRPC tradeoffs with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using REST vs gRPC tradeoffs mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses REST vs gRPC tradeoffs in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-12",
+                                                              "label":  "Module 16.12 — gRPC interceptors",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.12 — gRPC interceptors"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies REST vs gRPC tradeoffs.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/13-rest-vs-grpc-tradeoffs/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/13-rest-vs-grpc-tradeoffs/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-14",
+                      "module_id":  "module-17",
+                      "slug":  "sync-map",
+                      "title":  "sync.Map",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  14,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply sync.Map in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-13."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-13"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-15"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem sync.Map solves for a Go developer.",
+                                         "why_it_exists":  "sync.Map exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of sync.Map as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses sync.Map with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using sync.Map mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses sync.Map in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-13",
+                                                              "label":  "Module 16.13 — REST vs gRPC tradeoffs",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.13 — REST vs gRPC tradeoffs"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies sync.Map.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/14-sync-map/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/14-sync-map/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-15",
+                      "module_id":  "module-17",
+                      "slug":  "sync-pool",
+                      "title":  "sync.Pool",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  15,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply sync.Pool in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-14."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-14"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-16"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem sync.Pool solves for a Go developer.",
+                                         "why_it_exists":  "sync.Pool exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of sync.Pool as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses sync.Pool with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using sync.Pool mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses sync.Pool in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-14",
+                                                              "label":  "Module 16.14 — sync.Map",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.14 — sync.Map"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies sync.Pool.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/15-sync-pool/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/15-sync-pool/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-16",
+                      "module_id":  "module-17",
+                      "slug":  "cqrs",
+                      "title":  "CQRS",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  16,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply CQRS in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-15."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-15"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-17"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem CQRS solves for a Go developer.",
+                                         "why_it_exists":  "CQRS exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of CQRS as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses CQRS with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using CQRS mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses CQRS in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-15",
+                                                              "label":  "Module 16.15 — sync.Pool",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.15 — sync.Pool"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies CQRS.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/16-cqrs/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/16-cqrs/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-17",
+                      "module_id":  "module-17",
+                      "slug":  "feature-flags",
+                      "title":  "Feature flags",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  17,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Feature flags in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-16."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-16"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-18"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Feature flags solves for a Go developer.",
+                                         "why_it_exists":  "Feature flags exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Feature flags as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Feature flags with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Feature flags mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Feature flags in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-16",
+                                                              "label":  "Module 16.16 — CQRS",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.16 — CQRS"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Feature flags.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/17-feature-flags/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/17-feature-flags/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-18",
+                      "module_id":  "module-17",
+                      "slug":  "blue-green-deployments",
+                      "title":  "Blue/green deployments",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  18,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Blue/green deployments in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-17."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-17"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-19"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Blue/green deployments solves for a Go developer.",
+                                         "why_it_exists":  "Blue/green deployments exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Blue/green deployments as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Blue/green deployments with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Blue/green deployments mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Blue/green deployments in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-17",
+                                                              "label":  "Module 16.17 — Feature flags",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.17 — Feature flags"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Blue/green deployments.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/18-blue-green-deployments/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/18-blue-green-deployments/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-19",
+                      "module_id":  "module-17",
+                      "slug":  "microservice-splitting",
+                      "title":  "Microservice splitting",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  19,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Microservice splitting in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-18."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-18"
+                                        ],
+                      "next_item_ids":  [
+                                            "elective-20"
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Microservice splitting solves for a Go developer.",
+                                         "why_it_exists":  "Microservice splitting exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Microservice splitting as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Microservice splitting with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Microservice splitting mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Microservice splitting in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-18",
+                                                              "label":  "Module 16.18 — Blue/green deployments",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.18 — Blue/green deployments"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Microservice splitting.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/19-microservice-splitting/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/19-microservice-splitting/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  },
+                  {
+                      "id":  "elective-20",
+                      "module_id":  "module-17",
+                      "slug":  "deeper-distributed-systems",
+                      "title":  "Deeper distributed systems",
+                      "type":  "lesson",
+                      "subtype":  "reference",
+                      "status":  "planned",
+                      "difficulty":  "elective",
+                      "phase":  "elective",
+                      "order":  20,
+                      "estimated_minutes":  45,
+                      "learning_objective":  "Understand and apply Deeper distributed systems in the context of professional Go software engineering.",
+                      "required_prior_knowledge":  [
+                                                       "Complete prerequisite lesson(s): elective-19."
+                                                   ],
+                      "prerequisites":  [
+                                            "elective-19"
+                                        ],
+                      "next_item_ids":  [
+
+                                        ],
+                      "zero_magic":  {
+                                         "problem_solved":  "This lesson explains what problem Deeper distributed systems solves for a Go developer.",
+                                         "why_it_exists":  "Deeper distributed systems exists because real software needs this concept to become understandable, reliable, or maintainable.",
+                                         "mental_model":  "Think of Deeper distributed systems as one step in the learner\u0027s path from raw code to professional engineering judgment.",
+                                         "under_the_hood":  "The lesson must explain the underlying mechanics rather than asking the learner to memorize behavior.",
+                                         "how_go_uses_it":  "The lesson shows how Go expresses Deeper distributed systems with idiomatic standard-library-first examples.",
+                                         "beginner_mistakes":  [
+                                                                   "Using Deeper distributed systems mechanically without understanding the reason.",
+                                                                   "Skipping error paths or edge cases.",
+                                                                   "Copying code without being able to explain the behavior."
+                                                               ],
+                                         "real_world_usage":  "Professional Go code uses Deeper distributed systems in production code, tests, tools, services, or operational workflows.",
+                                         "proof_of_understanding":  "The learner must complete the practice task and explain the result in plain language."
+                                     },
+                      "crossrefs":  {
+                                        "builds_on":  [
+                                                          {
+                                                              "target_id":  "elective-19",
+                                                              "label":  "Module 16.19 — Microservice splitting",
+                                                              "reason":  "This lesson depends on the target concept.",
+                                                              "required":  true,
+                                                              "display_text":  "Builds on: Module 16.19 — Microservice splitting"
+                                                          }
+                                                      ],
+                                        "preview_only":  [
+
+                                                         ],
+                                        "related":  [
+
+                                                    ],
+                                        "reinforced_in":  [
+
+                                                          ]
+                                    },
+                      "proof":  {
+                                    "practice_task":  "Complete a focused exercise that applies Deeper distributed systems.",
+                                    "assessment_id":  "assessment-module-17",
+                                    "project_id":  null,
+                                    "expected_artifact":  "Runnable code, tests where appropriate, and a short explanation.",
+                                    "mastery_checks":  [
+                                                           "Can explain the concept without hand-waving.",
+                                                           "Can identify common mistakes.",
+                                                           "Can apply the concept in a small working program."
+                                                       ],
+                                    "rubric_ids":  [
+                                                       "rubric-module-16"
+                                                   ]
+                                },
+                      "content_contract":  {
+                                               "readme_required":  true,
+                                               "runnable_required":  false,
+                                               "tests_required":  false,
+                                               "visual_model_required":  true,
+                                               "machine_view_required":  true,
+                                               "common_mistakes_required":  true,
+                                               "production_notes_required":  true,
+                                               "review_questions_required":  true,
+                                               "portfolio_artifact_required":  false
+                                           },
+                      "verification":  {
+                                           "mode":  "manual",
+                                           "run_command":  "",
+                                           "test_command":  "",
+                                           "race_command":  "",
+                                           "manual_steps":  [
+                                                                "Read the README.",
+                                                                "Run or inspect the example.",
+                                                                "Complete the practice task.",
+                                                                "Answer the review questions."
+                                                            ],
+                                           "expected_output":  "Learner can demonstrate the concept and explain it."
+                                       },
+                      "files":  {
+                                    "readme_path":  "16-advanced-electives/20-deeper-distributed-systems/README.md",
+                                    "main_path":  "",
+                                    "starter_path":  "",
+                                    "solution_path":  "",
+                                    "test_path":  "",
+                                    "assets_dir":  "16-advanced-electives/20-deeper-distributed-systems/assets",
+                                    "diagram_paths":  [
+
+                                                      ]
+                                },
+                      "source_legacy_ids":  [
+
+                                            ],
+                      "tags":  [
+                                   "elective",
+                                   "reference"
+                               ],
+                      "documentation_mode":  "reference",
+                      "readme_status":  "scaffolded",
+                      "zero_magic_status":  "placeholder",
+                      "readme_contract":  {
+                                              "contract_id":  "elective-lesson.v3",
+                                              "documentation_mode":  "reference",
+                                              "required":  true
+                                          }
+                  }
+              ],
+    "path":  {
+                 "entry_item_id":  "elective-01",
+                 "terminal_item_ids":  [
+                                           "elective-20"
+                                       ],
+                 "ordered_item_ids":  [
+                                          "elective-01",
+                                          "elective-02",
+                                          "elective-03",
+                                          "elective-04",
+                                          "elective-05",
+                                          "elective-06",
+                                          "elective-07",
+                                          "elective-08",
+                                          "elective-09",
+                                          "elective-10",
+                                          "elective-11",
+                                          "elective-12",
+                                          "elective-13",
+                                          "elective-14",
+                                          "elective-15",
+                                          "elective-16",
+                                          "elective-17",
+                                          "elective-18",
+                                          "elective-19",
+                                          "elective-20"
+                                      ],
+                 "required_for_core":  false,
+                 "recommended_after":  [
+                                           "core-15-15"
+                                       ],
+                 "notes":  "Electives are optional deepening tracks. They may reference the core path but must never block the core path."
+             },
+    "quality_gates":  [
+                          "schema-valid",
+                          "graph-valid",
+                          "no-orphan-core-items",
+                          "all-prerequisites-exist",
+                          "implemented-items-have-readmes",
+                          "implemented-items-have-run-or-test-command",
+                          "projects-have-rubrics",
+                          "lessons-have-zero-magic-contract",
+                          "future-concepts-have-preview-only",
+                          "electives-do-not-block-core",
+                          "legacy-v2-is-not-authoritative",
+                          "starter-solution-parity",
+                          "no-broken-internal-links",
+                          "readme-required-headings-valid",
+                          "readme-level-purpose-valid",
+                          "readme-crossrefs-rendered-with-human-titles",
+                          "readme-no-generic-zero-magic-placeholders",
+                          "readme-no-stale-v2-section-labels",
+                          "readme-next-step-valid",
+                          "readme-module-map-generated-from-curriculum",
+                          "readme-project-rubric-present",
+                          "readme-assessment-evidence-present",
+                          "readme-preview-only-required-for-future-concepts",
+                          "readme-no-elective-blocks-core",
+                          "readme-no-broken-human-readable-links"
+                      ],
+    "validation_commands":  {
+                                "validate_schema":  "go run ./internal/tools/curriculum validate-schema",
+                                "validate_graph":  "go run ./internal/tools/curriculum validate-graph",
+                                "validate_lessons":  "go run ./internal/tools/curriculum validate-lessons",
+                                "validate_readmes":  "go run ./internal/tools/curriculum validate-readmes",
+                                "validate_all":  "go run ./internal/tools/curriculum validate-all"
+                            }
+}

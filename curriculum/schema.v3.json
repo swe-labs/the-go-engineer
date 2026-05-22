@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/swe-labs/the-go-engineer/curriculum/schema.v3.json",
+  "title": "The Go Engineer Curriculum Schema v3",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "document_type",
+    "curriculum_version"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "3.0.0"
+    },
+    "document_type": {
+      "enum": [
+        "workspace_manifest",
+        "core_path",
+        "elective_path",
+        "projects",
+        "assessments",
+        "crossrefs",
+        "readme_contracts",
+        "migration",
+        "curriculum_full_bundle",
+        "operational_failure_taxonomy"
+      ]
+    },
+    "curriculum_version": {
+      "type": "string"
+    },
+    "last_updated": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "architectural_decision": {
+      "type": "object"
+    },
+    "modules": {
+      "type": "array"
+    },
+    "items": {
+      "type": "array"
+    },
+    "projects": {
+      "type": "array"
+    },
+    "assessments": {
+      "type": "array"
+    },
+    "crossrefs": {
+      "type": "object"
+    },
+    "contracts": {
+      "type": "array"
+    },
+    "migration": {
+      "type": "object"
+    },
+    "quality_gates": {
+      "type": "array"
+    },
+    "validation_commands": {
+      "type": "object"
+    },
+    "path": {
+      "type": "object"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "core_path"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "modules",
+          "items",
+          "path"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "elective_path"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "modules",
+          "items",
+          "path"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "projects"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "projects"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "assessments"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "assessments"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "crossrefs"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "crossrefs"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "readme_contracts"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "contracts"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "migration"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "migration"
+        ]
+      }
+    }
+  ]
+}
