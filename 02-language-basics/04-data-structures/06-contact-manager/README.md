@@ -96,4 +96,4 @@ Real-world database engines (like SQLite or Postgres) use similar patterns of "I
 
 ## Next Step
 
-Next: `FE.1` -> [`03-functions-errors/01-functions-basics`](../../../03-functions-errors/01-functions-basics/README.md)
+Next: `DS.7` -> [`02-language-basics/04-data-structures/07-slices`](../07-slices/README.md)

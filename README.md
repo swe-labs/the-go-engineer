@@ -7,7 +7,7 @@ Master Go backend engineering by moving from machine fundamentals to a productio
 
 The Go Engineer is a repository-first learning system with:
 
-- 215 registered curriculum items
+- 219 registered curriculum items
 - 12 locked sections from fundamentals to production systems
 - runnable Go lessons and exercises
 - tests, race checks, coverage, CI, and curriculum validation

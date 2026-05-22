@@ -861,6 +861,50 @@
       "test_command": "go test ./02-language-basics/04-data-structures/06-contact-manager",
       "starter_path": "02-language-basics/04-data-structures/06-contact-manager/_starter",
       "next_items": [
+        "DS.7"
+      ]
+    },
+    {
+      "id": "DS.7",
+      "section_id": "s02",
+      "slug": "slices-stdlib",
+      "title": "The slices package",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "02-language-basics/04-data-structures/07-slices",
+      "prerequisites": [
+        "DS.2",
+        "DS.5"
+      ],
+      "run_command": "go run ./02-language-basics/04-data-structures/07-slices",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
+        "DS.8"
+      ]
+    },
+    {
+      "id": "DS.8",
+      "section_id": "s02",
+      "slug": "maps-stdlib",
+      "title": "The maps package",
+      "type": "lesson",
+      "subtype": "concept",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "02-language-basics/04-data-structures/08-maps",
+      "prerequisites": [
+        "DS.3",
+        "DS.7"
+      ],
+      "run_command": "go run ./02-language-basics/04-data-structures/08-maps",
+      "test_command": "",
+      "starter_path": "",
+      "next_items": [
         "FE.1"
       ]
     },
@@ -2755,6 +2799,28 @@
       "run_command": "go run ./07-concurrency/01-concurrency/01-context/05-timeout-client",
       "test_command": "go test ./07-concurrency/01-concurrency/01-context/05-timeout-client",
       "starter_path": "07-concurrency/01-concurrency/01-context/05-timeout-client/_starter",
+      "next_items": [
+        "CT.6"
+      ]
+    },
+    {
+      "id": "CT.6",
+      "section_id": "s07",
+      "slug": "context-afterfunc",
+      "title": "context.AfterFunc",
+      "type": "lesson",
+      "subtype": "pattern",
+      "level": "core",
+      "status": "implemented",
+      "verification_mode": "run",
+      "path": "07-concurrency/01-concurrency/01-context/06-afterfunc",
+      "prerequisites": [
+        "CT.2",
+        "CT.3"
+      ],
+      "run_command": "go run ./07-concurrency/01-concurrency/01-context/06-afterfunc",
+      "test_command": "",
+      "starter_path": "",
       "next_items": [
         "TM.1"
       ]

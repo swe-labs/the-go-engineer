@@ -86,4 +86,4 @@ In a high-scale microservice architecture, a single service without timeouts can
 
 ## Next Step
 
-Next: `TM.1` -> [`07-concurrency/01-concurrency/04-time-and-scheduling/01-time`](../../04-time-and-scheduling/01-time/README.md)
+Next: `CT.6` -> [`07-concurrency/01-concurrency/01-context/06-afterfunc`](../06-afterfunc/README.md)
