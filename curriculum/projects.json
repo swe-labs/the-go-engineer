@@ -21,7 +21,7 @@
       "difficulty": "foundation",
       "status": "planned",
       "order": 1,
-      "summary": "Shell + Git Lab proves mastery of Computers, Terminal, Git, and the Web concepts.",
+      "summary": "Build and navigate a real shell environment, then manage code changes through a complete Git workflow.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-01-01",
@@ -46,133 +46,46 @@
         "core-01-15"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Shell + Git Lab",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
-          "id": "project-shell-git-lab-task-build",
-          "title": "Build the core behavior",
-          "type": "build",
-          "instructions": "Implement the main requirements for Shell + Git Lab.",
-          "done_when": [
-            "The program runs successfully.",
-            "The main behavior matches the README requirements."
-          ],
-          "files_touched": [
-            "01-computers-terminal-git-web"
-          ]
+          "title": "Set up and navigate the terminal",
+          "instruction": "Open your terminal, verify shell access, navigate directories, create and delete files, and configure basic shell aliases."
         },
         {
-          "id": "project-shell-git-lab-task-test",
-          "title": "Prove the behavior",
-          "type": "test",
-          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
-          "done_when": [
-            "Important success paths are verified.",
-            "At least one edge case or failure path is checked."
-          ],
-          "files_touched": [
-            "01-computers-terminal-git-web"
-          ]
+          "title": "Initialize and manage a Git repository",
+          "instruction": "Initialize a Git repository, stage and commit changes, create branches, merge, and resolve a simulated merge conflict."
         },
         {
-          "id": "project-shell-git-lab-task-explain",
-          "title": "Explain the result",
-          "type": "document",
-          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
-          "done_when": [
-            "README is clear.",
-            "A reviewer can run or inspect the project without guessing."
-          ],
-          "files_touched": [
-            "01-computers-terminal-git-web"
-          ]
+          "title": "Explain your workflow",
+          "instruction": "Document your shell and Git workflow, including commands used, decisions made, and how you resolved the merge conflict."
         }
       ],
       "assessment_id": "assessment-project-shell-git-lab",
       "rubric": [
         {
-          "id": "project-shell-git-lab-correctness",
-          "title": "Correctness",
-          "description": "Implementation satisfies the stated behavior.",
+          "criterion": "Correctness",
           "weight": 35,
-          "levels": [
-            {
-              "score": 0,
-              "description": "Does not run or misses core behavior."
-            },
-            {
-              "score": 3,
-              "description": "Mostly works with some gaps."
-            },
-            {
-              "score": 5,
-              "description": "Works correctly across normal and edge cases."
-            }
-          ]
+          "description": "Shell commands execute correctly; Git repository has proper commit history, branches, and conflict resolution."
         },
         {
-          "id": "project-shell-git-lab-go-quality",
-          "title": "Go quality",
-          "description": "Code is idiomatic, readable, and maintainable.",
+          "criterion": "Process quality",
           "weight": 25,
-          "levels": [
-            {
-              "score": 0,
-              "description": "Hard to read or unidiomatic."
-            },
-            {
-              "score": 3,
-              "description": "Readable with some issues."
-            },
-            {
-              "score": 5,
-              "description": "Clean, idiomatic, and well structured."
-            }
-          ]
+          "description": "Workflow follows best practices: meaningful commits, sensible branching, clean command structure."
         },
         {
-          "id": "project-shell-git-lab-proof",
-          "title": "Proof",
-          "description": "Tests or verification prove the behavior.",
+          "criterion": "Proof",
           "weight": 25,
-          "levels": [
-            {
-              "score": 0,
-              "description": "No proof."
-            },
-            {
-              "score": 3,
-              "description": "Some proof."
-            },
-            {
-              "score": 5,
-              "description": "Strong automated or documented proof."
-            }
-          ]
+          "description": "Git log, branch graph, and documentation demonstrate a complete and correct workflow."
         },
         {
-          "id": "project-shell-git-lab-explanation",
-          "title": "Explanation",
-          "description": "Learner can explain the design and tradeoffs.",
+          "criterion": "Explanation",
           "weight": 15,
-          "levels": [
-            {
-              "score": 0,
-              "description": "Cannot explain."
-            },
-            {
-              "score": 3,
-              "description": "Basic explanation."
-            },
-            {
-              "score": 5,
-              "description": "Clear professional explanation."
-            }
-          ]
+          "description": "Clear explanation of shell and Git commands, including why specific approaches were chosen."
         }
       ],
       "verification": {
@@ -228,7 +141,7 @@
       "difficulty": "foundation",
       "status": "planned",
       "order": 2,
-      "summary": "Tooling Failure Lab proves mastery of Go Setup and Tooling concepts.",
+      "summary": "Install Go tooling, then deliberately introduce and diagnose common Go setup failures.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-02-01",
@@ -252,133 +165,36 @@
         "core-02-14"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Tooling Failure Lab",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
-          "id": "project-tooling-failure-lab-task-build",
-          "title": "Build the core behavior",
-          "type": "build",
-          "instructions": "Implement the main requirements for Tooling Failure Lab.",
-          "done_when": [
-            "The program runs successfully.",
-            "The main behavior matches the README requirements."
-          ],
-          "files_touched": [
-            "02-go-setup-tooling"
-          ]
+          "title": "Install and configure Go",
+          "instruction": "Install Go, set up GOPATH or workspace, verify the installation with go version, and run a hello-world program."
         },
         {
-          "id": "project-tooling-failure-lab-task-test",
-          "title": "Prove the behavior",
-          "type": "test",
-          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
-          "done_when": [
-            "Important success paths are verified.",
-            "At least one edge case or failure path is checked."
-          ],
-          "files_touched": [
-            "02-go-setup-tooling"
-          ]
+          "title": "Introduce and diagnose tooling failures",
+          "instruction": "Simulate common tooling failures: wrong PATH, broken GOPATH, missing dependencies, and module resolution errors. Diagnose each failure using available tooling output."
         },
         {
-          "id": "project-tooling-failure-lab-task-explain",
-          "title": "Explain the result",
-          "type": "document",
-          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
-          "done_when": [
-            "README is clear.",
-            "A reviewer can run or inspect the project without guessing."
-          ],
-          "files_touched": [
-            "02-go-setup-tooling"
-          ]
+          "title": "Document your troubleshooting",
+          "instruction": "Write a troubleshooting guide documenting each failure, the diagnostic steps taken, and the resolution."
         }
       ],
       "assessment_id": "assessment-project-tooling-failure-lab",
       "rubric": [
         {
-          "id": "project-tooling-failure-lab-correctness",
-          "title": "Correctness",
-          "description": "Implementation satisfies the stated behavior.",
+          "criterion": "Correctness",
           "weight": 35,
-          "levels": [
-            {
-              "score": 0,
-              "description": "Does not run or misses core behavior."
-            },
-            {
-              "score": 3,
-              "description": "Mostly works with some gaps."
-            },
-            {
-              "score": 5,
-              "description": "Works correctly across normal and edge cases."
-            }
-          ]
+          "description": "Go installation is correct; failure simulations are realistic and resolvable."
         },
         {
-          "id": "project-tooling-failure-lab-go-quality",
-          "title": "Go quality",
-          "description": "Code is idiomatic, readable, and maintainable.",
           "weight": 25,
-          "levels": [
-            {
-              "score": 0,
-              "description": "Hard to read or unidiomatic."
-            },
-            {
-              "score": 3,
-              "description": "Readable with some issues."
-            },
-            {
-              "score": 5,
-              "description": "Clean, idiomatic, and well structured."
-            }
-          ]
-        },
-        {
-          "id": "project-tooling-failure-lab-proof",
-          "title": "Proof",
-          "description": "Tests or verification prove the behavior.",
-          "weight": 25,
-          "levels": [
-            {
-              "score": 0,
-              "description": "No proof."
-            },
-            {
-              "score": 3,
-              "description": "Some proof."
-            },
-            {
-              "score": 5,
-              "description": "Strong automated or documented proof."
-            }
-          ]
-        },
-        {
-          "id": "project-tooling-failure-lab-explanation",
-          "title": "Explanation",
-          "description": "Learner can explain the design and tradeoffs.",
-          "weight": 15,
-          "levels": [
-            {
-              "score": 0,
-              "description": "Cannot explain."
-            },
-            {
-              "score": 3,
-              "description": "Basic explanation."
-            },
-            {
-              "score": 5,
-              "description": "Clear professional explanation."
-            }
-          ]
+          "description": "Systematic diagnostic approach: identifying symptoms, isolating causes, applying fixes.",
+          "criterion": "Diagnostic quality"
         }
       ],
       "verification": {
@@ -434,7 +250,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 3,
-      "summary": "Pricing Checkout proves mastery of Programming Fundamentals with Go concepts.",
+      "summary": "Build a pricing calculator and checkout system using Go fundamentals: variables, control flow, and structs.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-03-01",
@@ -467,10 +283,10 @@
         "core-03-23"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Pricing Checkout",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -484,7 +300,8 @@
           ],
           "files_touched": [
             "03-programming-fundamentals"
-          ]
+          ],
+          "instruction": "Implement a Go program that calculates pricing with tax, discounts, and currency formatting using variables, structs, and control flow."
         },
         {
           "id": "project-pricing-checkout-task-test",
@@ -497,7 +314,8 @@
           ],
           "files_touched": [
             "03-programming-fundamentals"
-          ]
+          ],
+          "instruction": "Write table-driven tests covering normal pricing, edge cases (zero, negative), and discount boundaries."
         },
         {
           "id": "project-pricing-checkout-task-explain",
@@ -510,7 +328,8 @@
           ],
           "files_touched": [
             "03-programming-fundamentals"
-          ]
+          ],
+          "instruction": "Explain your struct design choices, how you handle invalid input, and what trade-offs you considered."
         }
       ],
       "assessment_id": "assessment-project-pricing-checkout",
@@ -649,7 +468,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 4,
-      "summary": "Contact Directory proves mastery of Programming Fundamentals with Go concepts.",
+      "summary": "Implement a contact directory manager using Go data structures: slices, maps, and custom types.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-03-01",
@@ -682,10 +501,10 @@
         "core-03-23"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Contact Directory",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -699,7 +518,8 @@
           ],
           "files_touched": [
             "03-programming-fundamentals"
-          ]
+          ],
+          "instruction": "Build a contact directory using Go slices and maps: add, search, update, and delete contacts with input validation."
         },
         {
           "id": "project-contact-directory-task-test",
@@ -712,7 +532,8 @@
           ],
           "files_touched": [
             "03-programming-fundamentals"
-          ]
+          ],
+          "instruction": "Write tests that verify CRUD operations, duplicate detection, and empty directory edge cases."
         },
         {
           "id": "project-contact-directory-task-explain",
@@ -725,7 +546,8 @@
           ],
           "files_touched": [
             "03-programming-fundamentals"
-          ]
+          ],
+          "instruction": "Explain your data structure choices and how you handle missing or malformed contact entries."
         }
       ],
       "assessment_id": "assessment-project-contact-directory",
@@ -864,7 +686,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 5,
-      "summary": "Order Summary Refactor proves mastery of Functions, Errors, and Data Semantics concepts.",
+      "summary": "Refactor a monolithic order summary function into well-structured Go code with proper error handling.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-04-01",
@@ -892,10 +714,10 @@
         "core-04-18"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Order Summary Refactor",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -909,7 +731,8 @@
           ],
           "files_touched": [
             "04-functions-errors-data-semantics"
-          ]
+          ],
+          "instruction": "Refactor a monolithic order summary function into well-separated Go functions with clear responsibilities and proper error returns."
         },
         {
           "id": "project-order-summary-refactor-task-test",
@@ -922,7 +745,8 @@
           ],
           "files_touched": [
             "04-functions-errors-data-semantics"
-          ]
+          ],
+          "instruction": "Write tests that cover the original behavior, then verify the refactored version produces identical output."
         },
         {
           "id": "project-order-summary-refactor-task-explain",
@@ -935,7 +759,8 @@
           ],
           "files_touched": [
             "04-functions-errors-data-semantics"
-          ]
+          ],
+          "instruction": "Explain your refactoring decisions: what you extracted, why, and how you preserved correctness."
         }
       ],
       "assessment_id": "assessment-project-order-summary-refactor",
@@ -1076,7 +901,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 6,
-      "summary": "Bank Account proves mastery of Types, Interfaces, Packages, and Modules concepts.",
+      "summary": "Build a bank account system demonstrating Go types, interfaces, and method sets.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-05-01",
@@ -1109,10 +934,10 @@
         "core-05-23"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Bank Account",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -1126,7 +951,8 @@
           ],
           "files_touched": [
             "05-types-interfaces-packages-modules"
-          ]
+          ],
+          "instruction": "Implement a BankAccount type with methods for deposit, withdraw, and balance — using proper Go receiver semantics."
         },
         {
           "id": "project-bank-account-task-test",
@@ -1139,7 +965,8 @@
           ],
           "files_touched": [
             "05-types-interfaces-packages-modules"
-          ]
+          ],
+          "instruction": "Write tests that verify account operations, zero-value behavior, and concurrent access safety."
         },
         {
           "id": "project-bank-account-task-explain",
@@ -1152,7 +979,8 @@
           ],
           "files_touched": [
             "05-types-interfaces-packages-modules"
-          ]
+          ],
+          "instruction": "Explain your method set design and how Go’s type system influences your interface choices."
         }
       ],
       "assessment_id": "assessment-project-bank-account",
@@ -1291,7 +1119,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 7,
-      "summary": "Payroll Processor proves mastery of Types, Interfaces, Packages, and Modules concepts.",
+      "summary": "Implement a payroll processor using Go packages, modules, and interface composition.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-05-01",
@@ -1324,10 +1152,10 @@
         "core-05-23"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Payroll Processor",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -1341,7 +1169,8 @@
           ],
           "files_touched": [
             "05-types-interfaces-packages-modules"
-          ]
+          ],
+          "instruction": "Build a payroll processor using Go interfaces for different employee types (hourly, salaried, contractor) with polymorphic pay calculation."
         },
         {
           "id": "project-payroll-processor-task-test",
@@ -1354,7 +1183,8 @@
           ],
           "files_touched": [
             "05-types-interfaces-packages-modules"
-          ]
+          ],
+          "instruction": "Write tests for each employee type, including edge cases like overtime, zero hours, and negative rates."
         },
         {
           "id": "project-payroll-processor-task-explain",
@@ -1367,7 +1197,8 @@
           ],
           "files_touched": [
             "05-types-interfaces-packages-modules"
-          ]
+          ],
+          "instruction": "Explain your interface hierarchy and how Go’s implicit interface satisfaction shapes your design."
         }
       ],
       "assessment_id": "assessment-project-payroll-processor",
@@ -1506,7 +1337,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 8,
-      "summary": "Bug Hunt Pack proves mastery of Testing, Debugging, and Refactoring concepts.",
+      "summary": "Identify, diagnose, and fix a set of deliberately introduced bugs across multiple Go packages.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-06-01",
@@ -1537,10 +1368,10 @@
         "core-06-21"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Bug Hunt Pack",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -1554,7 +1385,8 @@
           ],
           "files_touched": [
             "06-testing-debugging-refactoring"
-          ]
+          ],
+          "instruction": "Identify and fix a set of deliberate bugs across multiple Go packages covering logic errors, race conditions, and nil pointer dereferences."
         },
         {
           "id": "project-bug-hunt-pack-task-test",
@@ -1567,7 +1399,8 @@
           ],
           "files_touched": [
             "06-testing-debugging-refactoring"
-          ]
+          ],
+          "instruction": "Write tests that reproduce each bug, then verify the fix without breaking existing behavior."
         },
         {
           "id": "project-bug-hunt-pack-task-explain",
@@ -1580,7 +1413,8 @@
           ],
           "files_touched": [
             "06-testing-debugging-refactoring"
-          ]
+          ],
+          "instruction": "Document each bug: root cause, how you diagnosed it, and what test prevents regression."
         }
       ],
       "assessment_id": "assessment-project-bug-hunt-pack",
@@ -1719,7 +1553,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 9,
-      "summary": "Refactor Under Tests proves mastery of Testing, Debugging, and Refactoring concepts.",
+      "summary": "Add test coverage to legacy Go code, then refactor it while keeping all tests passing.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-06-01",
@@ -1750,10 +1584,10 @@
         "core-06-21"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Refactor Under Tests",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -1767,7 +1601,8 @@
           ],
           "files_touched": [
             "06-testing-debugging-refactoring"
-          ]
+          ],
+          "instruction": "Write comprehensive tests for a legacy Go package to characterize its existing behavior before refactoring."
         },
         {
           "id": "project-refactor-under-tests-task-test",
@@ -1780,7 +1615,8 @@
           ],
           "files_touched": [
             "06-testing-debugging-refactoring"
-          ]
+          ],
+          "instruction": "Refactor the code for clarity and maintainability while keeping all tests passing without changes."
         },
         {
           "id": "project-refactor-under-tests-task-explain",
@@ -1793,7 +1629,8 @@
           ],
           "files_touched": [
             "06-testing-debugging-refactoring"
-          ]
+          ],
+          "instruction": "Compare before and after: what improved, what risks remain, and how the test suite gives confidence."
         }
       ],
       "assessment_id": "assessment-project-refactor-under-tests",
@@ -1932,7 +1769,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 10,
-      "summary": "File Organizer proves mastery of CLI, Files, JSON, and Configuration concepts.",
+      "summary": "Build a CLI tool that organizes files by type, extension, or metadata using Go file I/O.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-07-01",
@@ -1963,10 +1800,10 @@
         "core-07-21"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of File Organizer",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -1980,7 +1817,8 @@
           ],
           "files_touched": [
             "07-cli-files-json-config"
-          ]
+          ],
+          "instruction": "Build a CLI tool that scans a directory and organizes files into subdirectories by extension, date, or user-specified rules."
         },
         {
           "id": "project-file-organizer-task-test",
@@ -1993,7 +1831,8 @@
           ],
           "files_touched": [
             "07-cli-files-json-config"
-          ]
+          ],
+          "instruction": "Write tests covering empty directories, nested files, symlinks, and permission errors."
         },
         {
           "id": "project-file-organizer-task-explain",
@@ -2006,7 +1845,8 @@
           ],
           "files_touched": [
             "07-cli-files-json-config"
-          ]
+          ],
+          "instruction": "Explain your CLI flag design, file I/O strategy, and how you handle edge cases like name collisions."
         }
       ],
       "assessment_id": "assessment-project-file-organizer",
@@ -2143,7 +1983,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 11,
-      "summary": "Log Search proves mastery of CLI, Files, JSON, and Configuration concepts.",
+      "summary": "Implement a log search and filtering tool using Go CLI flags, file reading, and pattern matching.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-07-01",
@@ -2174,10 +2014,10 @@
         "core-07-21"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Log Search",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -2191,7 +2031,8 @@
           ],
           "files_touched": [
             "07-cli-files-json-config"
-          ]
+          ],
+          "instruction": "Implement a CLI log search tool that reads log files, filters by level/timestamp/pattern, and outputs results with context lines."
         },
         {
           "id": "project-log-search-task-test",
@@ -2204,7 +2045,8 @@
           ],
           "files_touched": [
             "07-cli-files-json-config"
-          ]
+          ],
+          "instruction": "Write tests covering large files, regex patterns, no-match cases, and malformed log entries."
         },
         {
           "id": "project-log-search-task-explain",
@@ -2217,7 +2059,8 @@
           ],
           "files_touched": [
             "07-cli-files-json-config"
-          ]
+          ],
+          "instruction": "Explain your stream processing approach, memory efficiency, and how you handle encoding variations."
         }
       ],
       "assessment_id": "assessment-project-log-search",
@@ -2354,7 +2197,7 @@
       "difficulty": "core",
       "status": "planned",
       "order": 12,
-      "summary": "Config Parser proves mastery of CLI, Files, JSON, and Configuration concepts.",
+      "summary": "Parse and validate configuration files in JSON and YAML formats, with environment variable overrides.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-07-01",
@@ -2385,10 +2228,10 @@
         "core-07-21"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Config Parser",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -2402,7 +2245,8 @@
           ],
           "files_touched": [
             "07-cli-files-json-config"
-          ]
+          ],
+          "instruction": "Parse configuration files in JSON and YAML formats with environment variable override support and schema validation."
         },
         {
           "id": "project-config-parser-task-test",
@@ -2415,7 +2259,8 @@
           ],
           "files_touched": [
             "07-cli-files-json-config"
-          ]
+          ],
+          "instruction": "Write tests for each format, merge semantics, missing required fields, type coercion, and override precedence."
         },
         {
           "id": "project-config-parser-task-explain",
@@ -2428,7 +2273,8 @@
           ],
           "files_touched": [
             "07-cli-files-json-config"
-          ]
+          ],
+          "instruction": "Explain your parser design: format detection, schema validation, override ordering, and error reporting."
         }
       ],
       "assessment_id": "assessment-project-config-parser",
@@ -2565,7 +2411,7 @@
       "difficulty": "intermediate",
       "status": "planned",
       "order": 13,
-      "summary": "Book Catalog REST API proves mastery of HTTP and REST APIs concepts.",
+      "summary": "Build a REST API for a book catalog with CRUD endpoints, middleware, and JSON encoding.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-08-01",
@@ -2595,10 +2441,10 @@
         "core-08-20"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Book Catalog REST API",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -2612,7 +2458,8 @@
           ],
           "files_touched": [
             "08-http-rest-apis"
-          ]
+          ],
+          "instruction": "Build a REST API for a book catalog with CRUD endpoints (GET/POST/PUT/DELETE), proper status codes, and JSON request/response bodies."
         },
         {
           "id": "project-book-catalog-rest-api-task-test",
@@ -2625,7 +2472,8 @@
           ],
           "files_touched": [
             "08-http-rest-apis"
-          ]
+          ],
+          "instruction": "Write integration tests that test each endpoint end-to-end with valid and invalid payloads."
         },
         {
           "id": "project-book-catalog-rest-api-task-explain",
@@ -2638,7 +2486,8 @@
           ],
           "files_touched": [
             "08-http-rest-apis"
-          ]
+          ],
+          "instruction": "Explain your route design, middleware choices, error handling strategy, and API structure."
         }
       ],
       "assessment_id": "assessment-project-book-catalog-rest-api",
@@ -2779,7 +2628,7 @@
       "difficulty": "intermediate",
       "status": "planned",
       "order": 14,
-      "summary": "Task API with Postgres proves mastery of SQL and PostgreSQL Persistence concepts.",
+      "summary": "Build a task management API backed by PostgreSQL with migrations, queries, and transactions.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-09-01",
@@ -2815,10 +2664,10 @@
         "core-09-26"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Task API with Postgres",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -2832,7 +2681,8 @@
           ],
           "files_touched": [
             "09-sql-postgres-persistence"
-          ]
+          ],
+          "instruction": "Build a task management API backed by PostgreSQL with CRUD endpoints, migrations, prepared statements, and transaction support."
         },
         {
           "id": "project-task-api-postgres-task-test",
@@ -2845,7 +2695,8 @@
           ],
           "files_touched": [
             "09-sql-postgres-persistence"
-          ]
+          ],
+          "instruction": "Write integration tests that test queries with database fixtures, including rollback on error."
         },
         {
           "id": "project-task-api-postgres-task-explain",
@@ -2858,7 +2709,8 @@
           ],
           "files_touched": [
             "09-sql-postgres-persistence"
-          ]
+          ],
+          "instruction": "Explain your schema design, migration strategy, connection pooling, and transaction boundaries."
         }
       ],
       "assessment_id": "assessment-project-task-api-postgres",
@@ -2999,7 +2851,7 @@
       "difficulty": "intermediate",
       "status": "planned",
       "order": 15,
-      "summary": "Secure Authenticated API proves mastery of Authentication, Authorization, and Security concepts.",
+      "summary": "Add authentication and authorization to an API using JWT tokens, bcrypt passwords, and security middleware.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-10-01",
@@ -3033,10 +2885,10 @@
         "core-10-24"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Secure Authenticated API",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -3050,7 +2902,8 @@
           ],
           "files_touched": [
             "10-auth-security"
-          ]
+          ],
+          "instruction": "Add JWT-based authentication and bcrypt password hashing to an API, with middleware for protected routes and role-based access."
         },
         {
           "id": "project-secure-authenticated-api-task-test",
@@ -3063,7 +2916,8 @@
           ],
           "files_touched": [
             "10-auth-security"
-          ]
+          ],
+          "instruction": "Write tests for token generation, validation, expiration, invalid tokens, and unauthorized access."
         },
         {
           "id": "project-secure-authenticated-api-task-explain",
@@ -3076,7 +2930,8 @@
           ],
           "files_touched": [
             "10-auth-security"
-          ]
+          ],
+          "instruction": "Explain your security design: token format, password hashing choices, middleware architecture, and threat model."
         }
       ],
       "assessment_id": "assessment-project-secure-authenticated-api",
@@ -3215,7 +3070,7 @@
       "difficulty": "intermediate",
       "status": "planned",
       "order": 16,
-      "summary": "Concurrent Downloader proves mastery of Lifecycle, Context, and Concurrency concepts.",
+      "summary": "Build a concurrent file downloader using goroutines, channels, and error propagation.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-11-01",
@@ -3253,10 +3108,10 @@
         "core-11-28"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Concurrent Downloader",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -3270,7 +3125,8 @@
           ],
           "files_touched": [
             "11-context-time-concurrency"
-          ]
+          ],
+          "instruction": "Build a concurrent file downloader that downloads multiple URLs in parallel using goroutines, with progress reporting and error handling."
         },
         {
           "id": "project-concurrent-downloader-task-test",
@@ -3283,7 +3139,8 @@
           ],
           "files_touched": [
             "11-context-time-concurrency"
-          ]
+          ],
+          "instruction": "Write tests covering concurrent downloads, partial failures, timeouts, and retry behavior."
         },
         {
           "id": "project-concurrent-downloader-task-explain",
@@ -3296,7 +3153,8 @@
           ],
           "files_touched": [
             "11-context-time-concurrency"
-          ]
+          ],
+          "instruction": "Explain your concurrency design: worker count, error propagation, cancellation, and resource management."
         }
       ],
       "assessment_id": "assessment-project-concurrent-downloader",
@@ -3449,7 +3307,7 @@
       "difficulty": "intermediate",
       "status": "planned",
       "order": 17,
-      "summary": "URL Health Checker proves mastery of Lifecycle, Context, and Concurrency concepts.",
+      "summary": "Implement a URL health checker that concurrently monitors endpoints and reports status changes.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-11-01",
@@ -3487,10 +3345,10 @@
         "core-11-28"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of URL Health Checker",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -3504,7 +3362,8 @@
           ],
           "files_touched": [
             "11-context-time-concurrency"
-          ]
+          ],
+          "instruction": "Implement a URL health checker that monitors endpoints concurrently, detects status changes, and reports results with configurable intervals."
         },
         {
           "id": "project-url-health-checker-task-test",
@@ -3517,7 +3376,8 @@
           ],
           "files_touched": [
             "11-context-time-concurrency"
-          ]
+          ],
+          "instruction": "Write tests covering endpoint transitions (up/down/flapping), timeout handling, and concurrent monitoring."
         },
         {
           "id": "project-url-health-checker-task-explain",
@@ -3530,7 +3390,8 @@
           ],
           "files_touched": [
             "11-context-time-concurrency"
-          ]
+          ],
+          "instruction": "Explain your monitoring design: polling strategy, state management, alert generation, and concurrency model."
         }
       ],
       "assessment_id": "assessment-project-url-health-checker",
@@ -3683,7 +3544,7 @@
       "difficulty": "intermediate",
       "status": "planned",
       "order": 18,
-      "summary": "Bounded Worker Pool proves mastery of Lifecycle, Context, and Concurrency concepts.",
+      "summary": "Build a bounded worker pool that processes jobs concurrently with configurable parallelism and graceful shutdown.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-11-01",
@@ -3721,10 +3582,10 @@
         "core-11-28"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Bounded Worker Pool",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -3738,7 +3599,8 @@
           ],
           "files_touched": [
             "11-context-time-concurrency"
-          ]
+          ],
+          "instruction": "Build a bounded worker pool that processes jobs from a queue with configurable worker count, graceful shutdown, and error collection."
         },
         {
           "id": "project-bounded-worker-pool-task-test",
@@ -3751,7 +3613,8 @@
           ],
           "files_touched": [
             "11-context-time-concurrency"
-          ]
+          ],
+          "instruction": "Write tests covering job distribution, worker failure, graceful shutdown, and backlog handling."
         },
         {
           "id": "project-bounded-worker-pool-task-explain",
@@ -3764,7 +3627,8 @@
           ],
           "files_touched": [
             "11-context-time-concurrency"
-          ]
+          ],
+          "instruction": "Explain your pool design: job queue, worker lifecycle, backpressure, and shutdown coordination with context."
         }
       ],
       "assessment_id": "assessment-project-bounded-worker-pool",
@@ -3917,7 +3781,7 @@
       "difficulty": "intermediate",
       "status": "planned",
       "order": 19,
-      "summary": "PII Redactor proves mastery of Observability, Performance, and Reliability concepts.",
+      "summary": "Build a PII redaction service with structured logging, error tracking, and observability instrumentation.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-12-01",
@@ -3947,10 +3811,10 @@
         "core-12-20"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of PII Redactor",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -3964,7 +3828,8 @@
           ],
           "files_touched": [
             "12-observability-performance-reliability"
-          ]
+          ],
+          "instruction": "Build a PII redaction service with structured logging, error tracking, and metrics for redaction operations and failures."
         },
         {
           "id": "project-pii-redactor-task-test",
@@ -3977,7 +3842,8 @@
           ],
           "files_touched": [
             "12-observability-performance-reliability"
-          ]
+          ],
+          "instruction": "Write tests for redaction patterns, log output verification, metric collection, and error scenarios."
         },
         {
           "id": "project-pii-redactor-task-explain",
@@ -3990,7 +3856,8 @@
           ],
           "files_touched": [
             "12-observability-performance-reliability"
-          ]
+          ],
+          "instruction": "Explain your observability design: log structure, metric exposure, error classification, and monitoring coverage."
         }
       ],
       "assessment_id": "assessment-project-pii-redactor",
@@ -4127,7 +3994,7 @@
       "difficulty": "advanced",
       "status": "planned",
       "order": 20,
-      "summary": "Observability Retrofit proves mastery of Observability, Performance, and Reliability concepts.",
+      "summary": "Add structured logging, metrics, and tracing to an existing Go application without changing its behavior.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-12-01",
@@ -4157,10 +4024,10 @@
         "core-12-20"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Observability Retrofit",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -4174,7 +4041,8 @@
           ],
           "files_touched": [
             "12-observability-performance-reliability"
-          ]
+          ],
+          "instruction": "Add structured logging, OpenTelemetry tracing, and Prometheus metrics to an existing Go application without changing its external behavior."
         },
         {
           "id": "project-observability-retrofit-task-test",
@@ -4187,7 +4055,8 @@
           ],
           "files_touched": [
             "12-observability-performance-reliability"
-          ]
+          ],
+          "instruction": "Write tests that verify the observability output: log lines, trace spans, and metric values under load."
         },
         {
           "id": "project-observability-retrofit-task-explain",
@@ -4200,7 +4069,8 @@
           ],
           "files_touched": [
             "12-observability-performance-reliability"
-          ]
+          ],
+          "instruction": "Explain your retrofit strategy: instrumentation points, performance impact, and how you verified zero behavior change."
         }
       ],
       "assessment_id": "assessment-project-observability-retrofit",
@@ -4337,7 +4207,7 @@
       "difficulty": "advanced",
       "status": "planned",
       "order": 21,
-      "summary": "Profile and Fix Lab proves mastery of Observability, Performance, and Reliability concepts.",
+      "summary": "Profile a Go application with pprof, identify performance bottlenecks, and optimize CPU and memory usage.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-12-01",
@@ -4367,10 +4237,10 @@
         "core-12-20"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Profile and Fix Lab",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -4384,7 +4254,8 @@
           ],
           "files_touched": [
             "12-observability-performance-reliability"
-          ]
+          ],
+          "instruction": "Use pprof to profile a Go application, identify CPU and memory bottlenecks, and apply targeted optimizations."
         },
         {
           "id": "project-profile-and-fix-lab-task-test",
@@ -4397,7 +4268,8 @@
           ],
           "files_touched": [
             "12-observability-performance-reliability"
-          ]
+          ],
+          "instruction": "Write benchmarks that measure before/after performance and verify improvement without correctness regression."
         },
         {
           "id": "project-profile-and-fix-lab-task-explain",
@@ -4410,7 +4282,8 @@
           ],
           "files_touched": [
             "12-observability-performance-reliability"
-          ]
+          ],
+          "instruction": "Document your profiling process: flame graph analysis, identified bottleneck, fix applied, and measured improvement."
         }
       ],
       "assessment_id": "assessment-project-profile-and-fix-lab",
@@ -4547,7 +4420,7 @@
       "difficulty": "advanced",
       "status": "planned",
       "order": 22,
-      "summary": "Modular Refactor Review proves mastery of Architecture and Systems Thinking concepts.",
+      "summary": "Refactor a monolith into a modular, layered architecture with dependency injection and interface-based design.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-14-01",
@@ -4574,10 +4447,10 @@
         "core-14-17"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Modular Refactor Review",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -4591,7 +4464,8 @@
           ],
           "files_touched": [
             "13-architecture-systems-thinking"
-          ]
+          ],
+          "instruction": "Refactor a monolithic Go application into a modular architecture with layered packages, dependency injection, and interface-based boundaries."
         },
         {
           "id": "project-modular-refactor-review-task-test",
@@ -4604,7 +4478,8 @@
           ],
           "files_touched": [
             "13-architecture-systems-thinking"
-          ]
+          ],
+          "instruction": "Write integration tests that verify the refactored system produces identical behavior through the external API."
         },
         {
           "id": "project-modular-refactor-review-task-explain",
@@ -4617,7 +4492,8 @@
           ],
           "files_touched": [
             "13-architecture-systems-thinking"
-          ]
+          ],
+          "instruction": "Explain your architecture: package structure, dependency flow, interface contracts, and testing strategy."
         }
       ],
       "assessment_id": "assessment-project-modular-refactor-review",
@@ -4754,7 +4630,7 @@
       "difficulty": "advanced",
       "status": "planned",
       "order": 23,
-      "summary": "Dockerized Service with CI/CD proves mastery of Docker, CI/CD, Linux, and Deployment concepts.",
+      "summary": "Containerize a Go service with a multi-stage Dockerfile and set up a CI/CD pipeline for automated build and deploy.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-15-01",
@@ -4783,10 +4659,10 @@
         "core-15-19"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Dockerized Service with CI/CD",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -4800,7 +4676,8 @@
           ],
           "files_touched": [
             "14-docker-cicd-linux-deployment"
-          ]
+          ],
+          "instruction": "Create a multi-stage Dockerfile for a Go service, then set up a CI/CD pipeline with GitHub Actions for automated build, test, and deploy."
         },
         {
           "id": "project-dockerized-service-cicd-task-test",
@@ -4813,7 +4690,8 @@
           ],
           "files_touched": [
             "14-docker-cicd-linux-deployment"
-          ]
+          ],
+          "instruction": "Write tests that run inside the container and verify the deployed service responds correctly."
         },
         {
           "id": "project-dockerized-service-cicd-task-explain",
@@ -4826,7 +4704,8 @@
           ],
           "files_touched": [
             "14-docker-cicd-linux-deployment"
-          ]
+          ],
+          "instruction": "Explain your containerization choices: base image, layer optimization, security considerations, and pipeline stages."
         }
       ],
       "assessment_id": "assessment-project-dockerized-service-cicd",
@@ -4963,7 +4842,7 @@
       "difficulty": "advanced",
       "status": "planned",
       "order": 24,
-      "summary": "Portfolio Review Pack proves mastery of Portfolio, Collaboration, Interview Readiness, and Capstone Prep concepts.",
+      "summary": "Curate and present your strongest Go projects in a professional portfolio format for job applications.",
       "source_legacy_ids": [],
       "prerequisites": [
         "core-16-01",
@@ -4988,10 +4867,10 @@
         "core-16-15"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Portfolio Review Pack",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -5005,7 +4884,8 @@
           ],
           "files_touched": [
             "15-portfolio-interview-capstone"
-          ]
+          ],
+          "instruction": "Curate your strongest Go projects, write professional READMEs, and organize them into a portfolio ready for job applications."
         },
         {
           "id": "project-portfolio-review-pack-task-test",
@@ -5018,7 +4898,8 @@
           ],
           "files_touched": [
             "15-portfolio-interview-capstone"
-          ]
+          ],
+          "instruction": "Review each project for completeness: tests, documentation, error handling, and idiomatic Go style."
         },
         {
           "id": "project-portfolio-review-pack-task-explain",
@@ -5031,7 +4912,8 @@
           ],
           "files_touched": [
             "15-portfolio-interview-capstone"
-          ]
+          ],
+          "instruction": "Prepare a presentation explaining your technical growth, design philosophy, and the most challenging problem you solved."
         }
       ],
       "assessment_id": "assessment-project-portfolio-review-pack",
@@ -5162,7 +5044,7 @@
       "difficulty": "flagship",
       "status": "planned",
       "order": 25,
-      "summary": "Opslane Flagship proves mastery of Flagship Opslane concepts.",
+      "summary": "Build and deploy a full-stack application with operations dashboard, automated testing, CI/CD, and observability.",
       "source_legacy_ids": [],
       "prerequisites": [
         "opslane-01",
@@ -5187,10 +5069,10 @@
         "opslane-15"
       ],
       "deliverables": [
-        "Working implementation",
+        "Working implementation of Opslane Flagship",
         "README with run/test instructions",
-        "Tests or manual verification checklist",
-        "Short explanation of design decisions"
+        "Tests or verification checklist",
+        "Explanation of design decisions"
       ],
       "tasks": [
         {
@@ -5204,7 +5086,8 @@
           ],
           "files_touched": [
             "17-flagship-opslane"
-          ]
+          ],
+          "instruction": "Build and deploy a full-stack application with Go backend, operations dashboard, automated CI/CD, observability stack, and production readiness."
         },
         {
           "id": "project-opslane-task-test",
@@ -5217,7 +5100,8 @@
           ],
           "files_touched": [
             "17-flagship-opslane"
-          ]
+          ],
+          "instruction": "Write comprehensive tests across all layers: unit, integration, and end-to-end tests for critical paths."
         },
         {
           "id": "project-opslane-task-explain",
@@ -5230,7 +5114,8 @@
           ],
           "files_touched": [
             "17-flagship-opslane"
-          ]
+          ],
+          "instruction": "Document the complete system architecture, deployment process, monitoring setup, and incident response plan."
         }
       ],
       "assessment_id": "assessment-project-opslane",

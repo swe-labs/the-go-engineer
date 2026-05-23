@@ -774,7 +774,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies How to use this repository.",
+        "practice_task": "The learner must find three lessons by their IDs in the curriculum JSON, locate their README files on disk, and explain the relationship between the JSON entry and the folder structure.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -919,7 +919,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies What zero magic means.",
+        "practice_task": "The learner must take a one-line Go expression that uses implicit behavior, expand it into 5+ explicit lines, and explain what assumption was hidden in the original.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -1064,7 +1064,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies How lessons, exercises, projects, and checkpoints work.",
+        "practice_task": "The learner must complete one lesson cycle (read, exercise, pass tests), then describe which artifact they would add to their portfolio and why.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -1209,7 +1209,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies How to run code in this repository.",
+        "practice_task": "The learner must write a small Go program, run it with go run, write a test for it, run the test with go test -v, and run go vet without errors.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -1354,7 +1354,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies How starter folders work.",
+        "practice_task": "The learner must complete an exercise from the starter, pass all tests, then explain one design choice where their solution differs from the provided solution and why both are valid.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -1499,7 +1499,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies How assessments work.",
+        "practice_task": "The learner must take a module assessment, identify the question they were least confident about, return to the relevant lesson, and write a one-paragraph explanation that fills the gap.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -1644,7 +1644,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies How to ask good debugging questions.",
+        "practice_task": "The learner must take a provided buggy code snippet, write a well-structured debugging question for it, then debug and fix it using the hypothesis-testing methodology.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -1789,7 +1789,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies What job-ready means.",
+        "practice_task": "The learner must audit their own portfolio against a provided rubric, identify their weakest dimension, and write an improvement plan with specific next steps.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -1934,7 +1934,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies How to use the roadmap.",
+        "practice_task": "The learner must trace their path from core-00-01 through the next 10 modules, listing each module's prerequisites and portfolio output, and explain why the order is structured that way.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -2079,7 +2079,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies How to build a portfolio from this curriculum.",
+        "practice_task": "The learner must take a completed curriculum project, write a professional README and architecture diagram, and present the project in a recorded 3-minute walkthrough that explains design decisions and tradeoffs.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
@@ -2232,7 +2232,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies What is a program?.",
+        "practice_task": "The learner must write a Go program that prints 'Hello, program.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -2388,7 +2388,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Source code, executable, and process.",
+        "practice_task": "The learner must create a Go source file, compile it to a binary, run the binary, then modify the source, recompile, and confirm the change only appears after restarting the process.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -2542,7 +2542,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Files, bytes, directories, and paths.",
+        "practice_task": "The learner must write a Go program that creates a directory, writes a file with specific bytes, reads it back, and confirms the content matches using os and path/filepath packages.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -2696,7 +2696,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Terminal basics.",
+        "practice_task": "The learner must run three terminal commands, redirect output to a file using >, pipe data between two programs with |, and explain which process owns each step.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -2850,7 +2850,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Environment variables.",
+        "practice_task": "The learner must write a Go program that reads a DATABASE_URL environment variable, prints a connection string, and exits with a clear error if the variable is not set.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -3004,7 +3004,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Exit codes.",
+        "practice_task": "The learner must write a Go program that accepts a filename argument, attempts to open it, exits with 0 on success and 1 on failure, and demonstrate both cases in the terminal.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -3158,7 +3158,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies How the OS manages processes.",
+        "practice_task": "The learner must write a Go program that spawns a child process via os/exec, waits for it to complete, collects the exit code, and print the parent and child PIDs.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -3314,7 +3314,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Memory preview: stack vs heap.",
+        "practice_task": "The learner must write a Go program with two functions — one that allocates on the stack (local variable) and one that allocates on the heap (returned pointer) — and use 'go build -gcflags=-m' to verify the compiler's escape analysis decisions.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -3470,7 +3470,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Git mental model.",
+        "practice_task": "The learner must initialize a new Git repository, create three commits, run 'git log --oneline --graph' and explain the commit graph, then use 'git diff' to show changes between two commits.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -3624,7 +3624,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Git basics: status, add, commit.",
+        "practice_task": "The learner must create a repository, modify a file, stage it, make another modification, use git diff to see unstaged changes, re-stage, commit with a proper message, and confirm the commit with git log.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -3778,7 +3778,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Branching and merging.",
+        "practice_task": "The learner must create a feature branch, commit two changes, check out main and make a different change, merge the feature branch into main, and explain the resulting commit graph.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -3932,7 +3932,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies GitHub workflow.",
+        "practice_task": "The learner must create a fork of a repository, clone it, create a feature branch, push it, and create a pull request with a descriptive title and body explaining the change.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -4086,7 +4086,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Pull requests and code review.",
+        "practice_task": "The learner must review a provided pull request diff, leave at least three constructive comments, and explain the reasoning behind each comment.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -4240,7 +4240,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Web preview: client, server, DNS, and ports.",
+        "practice_task": "The learner must write a Go program that resolves a domain name to its IP addresses using net.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -4402,7 +4402,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies HTTP request and response preview.",
+        "practice_task": "The learner must write a Go program that starts an HTTP server on port 8080 with a single handler, then write a separate Go program that sends a GET request to http://localhost:8080 and prints the response body and status code.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -4556,7 +4556,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Install and verify Go.",
+        "practice_task": "The learner must install Go (if not already installed), run go version, go env GOROOT, and go env GOPATH, then explain what each command tells them about their setup.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -4712,7 +4712,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Hello World.",
+        "practice_task": "The learner must write a hello world program, run it with go run.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -4867,7 +4867,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies go run.",
+        "practice_task": "The learner must write a program that reads os.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -5021,7 +5021,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies go build.",
+        "practice_task": "The learner must build a main package with go build, run the binary, cross-compile it for a different OS, and verify the binary exists at the expected path.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -5175,7 +5175,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies go test.",
+        "practice_task": "The learner must write a simple function, write a test file with a passing and failing test case, run go test -v, and explain the output.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -5329,7 +5329,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies gofmt.",
+        "practice_task": "The learner must write a deliberately misformatted Go file, run gofmt -d to show the diff, then run gofmt -w to fix it, and verify the file is clean with gofmt -d (no output).",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -5483,7 +5483,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies go vet.",
+        "practice_task": "The learner must write a program with at least two go-vet-detectable issues (e.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -5637,7 +5637,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies go doc.",
+        "practice_task": "The learner must use go doc to look up three different standard library functions, then write a doc comment for a custom function and verify it with go doc.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -5791,7 +5791,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Editor setup and gopls.",
+        "practice_task": "The learner must install gopls if not already present, open a Go file, use hover to view documentation on fmt.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -5945,7 +5945,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Reading compiler errors.",
+        "practice_task": "The learner must write code that produces three different compiler errors, identify each error's location and cause from the message alone, and fix all three.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -6101,7 +6101,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Reading runtime errors.",
+        "practice_task": "The learner must write a program that panics with index out of range, read the traceback, identify the exact line, fix the bug, and confirm the program runs without panicking.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -6255,7 +6255,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Reading test failures.",
+        "practice_task": "The learner must write a test that fails, run go test -v, identify the test name, the file:line of the failure, the expected vs actual values, and fix the test or code.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -6409,7 +6409,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Go module root basics.",
+        "practice_task": "The learner must create a new module with go mod init, write a program that imports a standard library package, add an external dependency, run go mod tidy, explain what go.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -6567,7 +6567,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Tooling checklist.",
+        "practice_task": "The learner must run every command on the tooling checklist, capture the output of each, and explain what each command verifies about their Go development environment.",
         "project_id": "project-tooling-failure-lab",
         "rubric_ids": [
           "rubric-module-02"
@@ -6728,7 +6728,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Values and expressions.",
+        "practice_task": "Write three expressions demonstrating operator precedence, integer vs float division, and short-circuit, then explain each result.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -6889,7 +6889,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Variables.",
+        "practice_task": "Write a program with package-level var, function-level :=, and a shadowing example, then explain each variable's scope and lifetime.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -7052,7 +7052,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Types.",
+        "practice_task": "Define a named type, attempt illegal operation with underlying type, fix with explicit conversion, explaining the compiler error.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -7213,7 +7213,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Zero values.",
+        "practice_task": "Declare variables of five types without initializers, print zero values, then correctly initialize a nil map and nil slice.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -7374,7 +7374,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Type conversions.",
+        "practice_task": "Convert between int, int32, int64, float64, string, []byte, []rune in both directions, identifying safe, truncating, and invalid conversions.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -7535,7 +7535,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Constants.",
+        "practice_task": "Write typed, untyped, and iota-based constants, then explain which operations are valid constant expressions and why.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -7698,7 +7698,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies iota.",
+        "practice_task": "Define const block with A=iota, B, C_skip=_, D=1<<iota, E, predict values, then write byte-size enum (KB, MB, GB) with iota.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -7861,7 +7861,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Boolean logic.",
+        "practice_task": "Write function using short-circuit to safely access nil pointer field, then trace evaluation step by step.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -8022,7 +8022,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies If and else.",
+        "practice_task": "Write function using if-init, if-else chain for error handling, and early-return guard pattern.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -8185,7 +8185,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Switch.",
+        "practice_task": "Write expression switch, type switch, and blank switch, explaining when each is appropriate over if-else.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -8348,7 +8348,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Loops.",
+        "practice_task": "Write program using all three for forms, including labeled break from nested loop and for-range on string.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -8509,7 +8509,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Range.",
+        "practice_task": "Write program ranging over slice, map, string, and channel, printing type and value of each iteration variable.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -8670,7 +8670,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Arrays.",
+        "practice_task": "Allocate array, compute type/size, pass by value and pointer, explain copy behavior.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -8833,7 +8833,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Slices.",
+        "practice_task": "Create backing array, two sub-slices sharing it, modify one, observe effect on other - then use copy for independence.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -8995,7 +8995,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Slice length and capacity.",
+        "practice_task": "Create slice with make([]int, 2, 5), observe len/cap, append until capacity grows, explain each allocation.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -9156,7 +9156,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Slice sharing and aliasing.",
+        "practice_task": "Create scenario where appending to sub-slice corrupts original, fix with copy, explain both steps.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -9318,7 +9318,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Maps.",
+        "practice_task": "Implement word-count using map, handle missing key with comma-ok, demonstrate nil-map assignment panic.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -9481,7 +9481,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Comma-ok idiom.",
+        "practice_task": "Write function taking interface{} and safely extract string, int, []byte using comma-ok, returning errors for mismatches.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -9642,7 +9642,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Strings.",
+        "practice_task": "Write function reversing string byte-by-byte (wrong), then correctly by runes, explain difference.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -9803,7 +9803,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Bytes.",
+        "practice_task": "Write hex dump function taking []byte, print hex + ASCII, use bytes.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -9964,7 +9964,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Runes and Unicode.",
+        "practice_task": "Write function taking mixed ASCII + multi-byte string, output byte length, rune count, each rune's byte offset and hex value.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -10125,7 +10125,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Pointers as addresses.",
+        "practice_task": "Write function taking *int, modify it, show caller's variable changed.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -10288,7 +10288,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Beginner pointer mistakes.",
+        "practice_task": "Identify and fix four pointer bugs: nil dereference, loop capture, pointer to literal, returning pointer to stack zero value.",
         "project_id": "project-pricing-checkout",
         "rubric_ids": [
           "rubric-module-03"
@@ -10445,7 +10445,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Function basics.",
+        "practice_task": "The learner must write a function that takes a slice of integers, computes the sum, and returns both the sum and a boolean indicating whether the result is even.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -10604,7 +10604,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Parameters.",
+        "practice_task": "The learner must write a function `greet(name string, greeting string) string` that combines the greeting and name, then write tests for at least three different (greeting, name) pairs.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -10760,7 +10760,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Return values.",
+        "practice_task": "The learner must write a function with multiple return values (a quotient and remainder for integer division), handle the error case (division by zero), and write a test covering both success and failure paths.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -10917,7 +10917,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Multiple return values.",
+        "practice_task": "The learner must write a function `divideAndRemainder(a, b int) (int, int, error)` that returns quotient, remainder, and an error if b is zero.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -11074,7 +11074,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Scope.",
+        "practice_task": "The learner must write a program with nested scopes (a function containing a for loop containing an if statement, each with variables of the same name), predict the output, and explain which reference resolves to which declaration.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -11233,7 +11233,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Call stack mental model.",
+        "practice_task": "The learner must write a recursive factorial function, add print statements to trace the call and return stack, run it, and explain the stack content at each level of recursion.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -11391,7 +11391,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Passing by value.",
+        "practice_task": "The learner must write a function that takes an int, a slice, and a map, modifies each, and then predict which changes the caller sees.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -11550,7 +11550,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Pointer and value mutation behavior.",
+        "practice_task": "The learner must write a program that passes a struct, a slice, and a map to a function, mutates each inside the function, and prints both inside and outside.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -11700,7 +11700,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Errors as values.",
+        "practice_task": "The learner must write a function that reads a file, parses JSON, and processes each record — with every error path explicitly handled.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -11860,7 +11860,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Error wrapping.",
+        "practice_task": "The learner must write a three-layer function chain where the top wraps the middle's error and the middle calls the bottom that returns a sentinel error.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -12018,7 +12018,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies errors.Is.",
+        "practice_task": "The learner must create a sentinel error, a function that returns it wrapped in multiple layers, and write tests showing `errors.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -12176,7 +12176,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies errors.As.",
+        "practice_task": "The learner must create a custom error type `HTTPError` with Code and Message fields, write a function returning this error wrapped in fmt.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -12335,7 +12335,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Validation.",
+        "practice_task": "The learner must write a `ValidateUser` function that takes a `User` struct (Name, Email, Age) and returns a `[]ValidationError` where each error has a Field and Message.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -12497,7 +12497,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Orchestration.",
+        "practice_task": "The learner must write an orchestrator `CreateOrder(userID string, items []Item) (Order, error)` that: validates items, checks inventory, calculates total, creates order.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -12656,7 +12656,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies defer mechanics.",
+        "practice_task": "The learner must write a function that opens 3 files, defers each close, processes data, and handles errors at each step.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -12817,7 +12817,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies defer for cleanup.",
+        "practice_task": "The learner must write a function that opens a file, writes data, handles errors, and closes the file.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -12968,7 +12968,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies panic and recover.",
+        "practice_task": "The learner must write a function that spawns a goroutine that panics, and explain why the parent goroutine's deferred recover does not catch it.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -13128,7 +13128,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Custom error types.",
+        "practice_task": "The learner must define a `ValidationError` type with fields (Field string, Message string, Value interface{}), implement error interface, and write tests using errors.",
         "project_id": "project-order-summary-refactor",
         "rubric_ids": [
           "rubric-module-04"
@@ -13294,7 +13294,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Structs.",
+        "practice_task": "The learner must define a `Product` struct (ID int, Name string, Price float64, InStock bool), create instances using named initialization, write a formatting function, and write tests verifying field access.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -13462,7 +13462,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Methods.",
+        "practice_task": "The learner must define a `BankAccount` struct with `Deposit(amount float64)`, `Withdraw(amount float64) error`, `Balance() float64` methods.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -13630,7 +13630,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Pointer receivers.",
+        "practice_task": "The learner must create a `Counter` struct with `Increment()` (pointer receiver) and `Value() int` (value receiver).",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -13796,7 +13796,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Value receivers.",
+        "practice_task": "The learner must create a `Point` struct with `DistanceToOrigin() float64` (value receiver) and `Scale(factor float64)` (pointer receiver).",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -13960,7 +13960,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Receiver sets.",
+        "practice_task": "The learner must write a type with at least two methods (one value receiver, one pointer receiver), then write code that demonstrates: (1) a value of the type can call the value receiver method but NOT the pointer receiver method unless assigned to a variable, (2) a pointer to the type can call both methods.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -14127,7 +14127,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Composition.",
+        "practice_task": "The learner must define `Logger` with `Log(string)`, `Engine` with `Start()`, then compose into `Car` embedding both.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -14295,7 +14295,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Embedding.",
+        "practice_task": "The learner must define a `Mutex` with `Lock()`/`Unlock()`, embed it in a `Counter`, and write tests showing promoted methods work on Counter.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -14450,7 +14450,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Interfaces.",
+        "practice_task": "The learner must write a program that: (1) assigns a nil *os.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -14619,7 +14619,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Small interfaces.",
+        "practice_task": "The learner must identify three separate behaviors in a `FileProcessor`, extract each as a small interface (1-2 methods), and compose them.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -14785,7 +14785,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Interface embedding.",
+        "practice_task": "The learner must define Reader, Writer, Flusher interfaces, compose into ReadWriteFlusher, create a Buffer implementing all three, and write tests showing it satisfies the composed interface.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -14951,7 +14951,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Stringer.",
+        "practice_task": "The learner must define a `User` struct with Name, Email, Role, implement `String() string`, and write tests showing custom formatted output.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -15119,7 +15119,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Type assertions.",
+        "practice_task": "The learner must write `typeName(x interface{}) string` using a type switch returning the type name.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -15285,7 +15285,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Type switches.",
+        "practice_task": "The learner must write `formatValue(x interface{}) string` with a type switch returning specific formats for int, float64, string, bool, and default.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -15446,7 +15446,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Nil interfaces.",
+        "practice_task": "The learner must write a program that: (1) defines a custom error type, (2) creates a function that returns the custom error type as error, (3) returns nil explicitly, (4) demonstrates that err.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -15613,7 +15613,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Package names.",
+        "practice_task": "The learner must identify 3 standard library packages with good names, explain why each is appropriate, and rename 3 bad hypothetical packages into focused alternatives.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -15781,7 +15781,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Export rules.",
+        "practice_task": "The learner must create two packages: `store` (exported Store, unexported internals) and `main` (using store).",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -15950,7 +15950,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Project layout.",
+        "practice_task": "The learner must design a directory structure for a web service with: HTTP handlers, business logic, data storage, and CLI commands.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -16118,7 +16118,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Modules.",
+        "practice_task": "The learner must create a new module, add a third-party dependency, write code using it, run `go mod tidy`, and explain what go.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -16286,7 +16286,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies go.mod.",
+        "practice_task": "The learner must create a new module, add two dependencies (one standard, one third-party), run go mod tidy, and explain each section of the resulting go.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -16452,7 +16452,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies go.sum.",
+        "practice_task": "The learner must create a module, add a dependency, run go mod tidy, inspect go.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -16618,7 +16618,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Dependency management.",
+        "practice_task": "The learner must add a dependency to an existing module, update it to a newer version, use `go mod graph` to visualize dependencies, and use `go mod vendor` to create a vendor directory.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -16786,7 +16786,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Workspaces.",
+        "practice_task": "The learner must create two modules where one depends on the other, set up a workspace with `go work init`, make a change in the dependency module, and verify the dependent module sees the change immediately.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -16951,7 +16951,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Documentation comments.",
+        "practice_task": "The learner must write a package with doc comments for the package, two exported functions, and one exported type.",
         "project_id": "project-bank-account",
         "rubric_ids": [
           "rubric-module-05"
@@ -17117,7 +17117,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Why testing exists.",
+        "practice_task": "The learner must explain the Red-Green-Refactor cycle, write a simple test for a function, run it with `go test -v`, and explain what the test output means.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -17283,7 +17283,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Unit testing.",
+        "practice_task": "The learner must write a unit test for a function that calculates the area of a rectangle (including edge cases: zero, negative, large values).",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -17451,7 +17451,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Table-driven tests.",
+        "practice_task": "The learner must rewrite a set of 5 separate test functions into a single table-driven test with subtests using `t.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -17619,7 +17619,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Subtests.",
+        "practice_task": "The learner must write a table-driven test with at least 3 subtests, demonstrate running a specific subtest with -run, and show t.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -17785,7 +17785,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies t.Cleanup.",
+        "practice_task": "The learner must write a test that creates a temp file, registers t.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -17951,7 +17951,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Test fixtures.",
+        "practice_task": "The learner must create a testdata directory with a sample input file, write a test that reads the file, processes it, and verifies the output against a golden file.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -18117,7 +18117,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Golden files.",
+        "practice_task": "The learner must write a function that generates a formatted string, write a golden file test that compares the output to a stored golden file, and implement an update flag.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -18285,7 +18285,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Testable design with io.Writer.",
+        "practice_task": "The learner must write a function `greet(w io.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -18451,7 +18451,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Fakes before mocks.",
+        "practice_task": "The learner must define an interface `EmailSender { Send(to, subject, body string) error }`, create a `FakeEmailSender` that stores sent emails in a slice, and write a test using the fake to verify email content.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -18617,7 +18617,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Mocking tradeoffs.",
+        "practice_task": "The learner must write a service that calls an external API, use testify/mock to mock the API client, write tests that verify the correct API calls are made with the right parameters.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -18783,7 +18783,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Debugging mindset.",
+        "practice_task": "The learner must debug a provided buggy Go program: reproduce the bug, identify the root cause using debugging techniques, fix it, and explain the systematic process they followed.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -18949,7 +18949,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Reading stack traces.",
+        "practice_task": "The learner must cause a nil pointer dereference in a Go program, read the stack trace, identify the file, line number, and function where the panic occurred, and explain the call path that led there.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -19115,7 +19115,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Debugging panics.",
+        "practice_task": "The learner must write a function that intentionally panics, a deferred recover that catches the panic, and tests showing the function returns an error instead of crashing.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -19281,7 +19281,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Delve basics.",
+        "practice_task": "The learner must create a Go program with a bug, start a Delve debugging session, set a breakpoint at the buggy line, inspect the relevant variables, step through execution, and identify the bug.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -19447,7 +19447,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Breakpoints.",
+        "practice_task": "The learner must write a function with a loop, start a Delve session, set a breakpoint inside the loop, use a conditional breakpoint to stop on a specific iteration, and inspect the loop variables.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -19613,7 +19613,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Stepping through code.",
+        "practice_task": "The learner must set a breakpoint at a function call, use step to enter the function, step through the function body line by line, observe how a variable changes, and use stepout to return to the caller.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -19779,7 +19779,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Inspecting variables.",
+        "practice_task": "The learner must set a breakpoint in a function that manipulates a struct, inspect the struct's fields before and after modification, dereference a pointer, and use `locals` to see the full local variable state.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -19945,7 +19945,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Debugging tests.",
+        "practice_task": "The learner must have a failing test, start `dlv test -- -test.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -20111,7 +20111,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Refactoring safely.",
+        "practice_task": "The learner must take a long function with duplicated code, extract the duplicate code into a helper function, rename variables for clarity, and verify all tests still pass after each change.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -20277,7 +20277,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Fuzz testing.",
+        "practice_task": "The learner must write a function that parses a string (e.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -20445,7 +20445,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Race detector preview.",
+        "practice_task": "The learner must write a program with a data race (concurrent map write), run it with `go run -race`, see the race report, fix the race with a mutex, and verify `go run -race` reports no races.",
         "project_id": "project-bug-hunt-pack",
         "rubric_ids": [
           "rubric-module-06"
@@ -20615,7 +20615,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies CLI args.",
+        "practice_task": "The learner must write a CLI args program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different CLI args approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -20787,7 +20787,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Flags.",
+        "practice_task": "The learner must write a Flags program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Flags approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -20959,7 +20959,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Subcommands.",
+        "practice_task": "The learner must write a Subcommands program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Subcommands approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -21131,7 +21131,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Standard input and standard output.",
+        "practice_task": "The learner must write a Standard input and standard output program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Standard input and standard output approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -21301,7 +21301,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies io.Reader.",
+        "practice_task": "The learner must write a io.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -21471,7 +21471,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies io.Writer.",
+        "practice_task": "The learner must write a io.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -21641,7 +21641,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Files.",
+        "practice_task": "The learner must write a Files program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Files approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -21813,7 +21813,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Paths.",
+        "practice_task": "The learner must write a Paths program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Paths approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -21985,7 +21985,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Directories.",
+        "practice_task": "The learner must write a Directories program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Directories approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -22157,7 +22157,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Temp files.",
+        "practice_task": "The learner must write a Temp files program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Temp files approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -22327,7 +22327,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies fs.FS.",
+        "practice_task": "The learner must write a fs.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -22497,7 +22497,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies JSON marshal.",
+        "practice_task": "The learner must write a JSON marshal program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different JSON marshal approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -22669,7 +22669,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies JSON unmarshal.",
+        "practice_task": "The learner must write a JSON unmarshal program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different JSON unmarshal approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -22841,7 +22841,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies JSON encoder.",
+        "practice_task": "The learner must write a JSON encoder program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different JSON encoder approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -23011,7 +23011,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies JSON decoder.",
+        "practice_task": "The learner must write a JSON decoder program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different JSON decoder approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -23181,7 +23181,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Config files.",
+        "practice_task": "The learner must write a Config files program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Config files approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -23351,7 +23351,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Environment variables for configuration.",
+        "practice_task": "The learner must write a Environment variables for configuration program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Environment variables for configuration approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -23521,7 +23521,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Config validation.",
+        "practice_task": "The learner must write a Config validation program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Config validation approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -23691,7 +23691,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Text templates.",
+        "practice_task": "The learner must write a Text templates program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Text templates approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -23861,7 +23861,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Base64 as encoding, not encryption.",
+        "practice_task": "The learner must write a Base64 as encoding, not encryption program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Base64 as encoding, not encryption approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -24031,7 +24031,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies CLI testability.",
+        "practice_task": "The learner must write a CLI testability program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different CLI testability approaches.",
         "project_id": "project-file-organizer",
         "rubric_ids": [
           "rubric-module-07"
@@ -24187,7 +24187,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies HTTP as a protocol.",
+        "practice_task": "The learner must write a HTTP as a protocol program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different HTTP as a protocol approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -24345,7 +24345,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies net/http basics.",
+        "practice_task": "The learner must write a net/http basics program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different net/http basics approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -24502,7 +24502,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Handler lifecycle.",
+        "practice_task": "The learner must write a Handler lifecycle program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Handler lifecycle approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -24659,7 +24659,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Routing.",
+        "practice_task": "The learner must write a Routing program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Routing approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -24814,7 +24814,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Request parsing.",
+        "practice_task": "The learner must write a Request parsing program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Request parsing approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -24971,7 +24971,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Input validation.",
+        "practice_task": "The learner must write a Input validation program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Input validation approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -25126,7 +25126,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Response writing.",
+        "practice_task": "The learner must write a Response writing program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Response writing approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -25283,7 +25283,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies API error shape.",
+        "practice_task": "The learner must write a API error shape program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different API error shape approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -25439,7 +25439,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Status codes.",
+        "practice_task": "The learner must write a Status codes program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Status codes approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -25595,7 +25595,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Middleware pattern.",
+        "practice_task": "The learner must write a Middleware pattern program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Middleware pattern approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -25753,7 +25753,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Error middleware.",
+        "practice_task": "The learner must write a Error middleware program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Error middleware approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -25909,7 +25909,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Handler testing with httptest.",
+        "practice_task": "The learner must write a Handler testing with httptest program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Handler testing with httptest approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -26067,7 +26067,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Body size limits.",
+        "practice_task": "The learner must write a Body size limits program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Body size limits approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -26231,7 +26231,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Server timeouts.",
+        "practice_task": "The learner must write a Server timeouts program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Server timeouts approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -26395,7 +26395,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Graceful shutdown.",
+        "practice_task": "The learner must write a Graceful shutdown program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Graceful shutdown approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -26553,7 +26553,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Health and readiness probes.",
+        "practice_task": "The learner must write a Health and readiness probes program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Health and readiness probes approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -26711,7 +26711,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies REST design principles.",
+        "practice_task": "The learner must write a REST design principles program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different REST design principles approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -26869,7 +26869,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies API versioning.",
+        "practice_task": "The learner must write a API versioning program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different API versioning approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -27027,7 +27027,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Pagination and filtering.",
+        "practice_task": "The learner must write a Pagination and filtering program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Pagination and filtering approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -27185,7 +27185,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies OpenAPI basics.",
+        "practice_task": "The learner must write a OpenAPI basics program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different OpenAPI basics approaches.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -27341,7 +27341,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies gRPC and Protocol Buffers.",
+        "practice_task": "The learner must define a.",
         "project_id": "project-book-catalog-rest-api",
         "rubric_ids": [
           "rubric-module-08"
@@ -27497,7 +27497,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Why databases exist.",
+        "practice_task": "The learner must write a Why databases exist program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Why databases exist approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -27653,7 +27653,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Relational modeling.",
+        "practice_task": "The learner must write a Relational modeling program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Relational modeling approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -27809,7 +27809,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Tables, rows, and columns.",
+        "practice_task": "The learner must write a Tables, rows, and columns program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Tables, rows, and columns approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -27965,7 +27965,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Primary keys.",
+        "practice_task": "The learner must write a Primary keys program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Primary keys approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -28121,7 +28121,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Foreign keys.",
+        "practice_task": "The learner must write a Foreign keys program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Foreign keys approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -28277,7 +28277,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Constraints.",
+        "practice_task": "The learner must write a Constraints program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Constraints approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -28433,7 +28433,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies SQLite as a local learning tool.",
+        "practice_task": "The learner must write a SQLite as a local learning tool program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different SQLite as a local learning tool approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -28589,7 +28589,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies PostgreSQL as production default.",
+        "practice_task": "The learner must write a PostgreSQL as production default program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different PostgreSQL as production default approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -28745,7 +28745,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Docker Compose for Postgres.",
+        "practice_task": "The learner must write a Docker Compose for Postgres program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Docker Compose for Postgres approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -28901,7 +28901,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies database/sql.",
+        "practice_task": "The learner must write a database/sql program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different database/sql approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -29058,7 +29058,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies sql.DB as a pool.",
+        "practice_task": "The learner must write a sql.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -29215,7 +29215,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies INSERT.",
+        "practice_task": "The learner must write a INSERT program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different INSERT approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -29371,7 +29371,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies SELECT.",
+        "practice_task": "The learner must write a SELECT program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different SELECT approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -29527,7 +29527,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Scanning rows.",
+        "practice_task": "The learner must write a Scanning rows program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Scanning rows approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -29683,7 +29683,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Null handling.",
+        "practice_task": "The learner must write a Null handling program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Null handling approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -29839,7 +29839,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Prepared statements.",
+        "practice_task": "The learner must write a Prepared statements program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Prepared statements approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -29996,7 +29996,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Transactions.",
+        "practice_task": "The learner must write a Transactions program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Transactions approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -30155,7 +30155,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Rollback discipline.",
+        "practice_task": "The learner must write a Rollback discipline program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Rollback discipline approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -30311,7 +30311,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Migrations.",
+        "practice_task": "The learner must write a Migrations program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Migrations approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -30467,7 +30467,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Joins.",
+        "practice_task": "The learner must write a Joins program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Joins approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -30623,7 +30623,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Indexes.",
+        "practice_task": "The learner must write a Indexes program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Indexes approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -30779,7 +30779,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies EXPLAIN.",
+        "practice_task": "The learner must write a EXPLAIN program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different EXPLAIN approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -30943,7 +30943,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Query timeouts with context.",
+        "practice_task": "The learner must write a Query timeouts with context program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Query timeouts with context approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -31101,7 +31101,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Repository and service seam.",
+        "practice_task": "The learner must write a Repository and service seam program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Repository and service seam approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -31257,7 +31257,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Integration tests.",
+        "practice_task": "The learner must write a Integration tests program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different Integration tests approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -31415,7 +31415,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies sqlc.",
+        "practice_task": "The learner must write a sqlc program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different sqlc approaches.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -31571,7 +31571,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies UPDATE operations.",
+        "practice_task": "The learner must implement a soft-delete endpoint that sets a deleted_at timestamp instead of removing the row, add a recovery endpoint that clears the deleted_at flag, and demonstrate that queries filter out soft-deleted rows by default.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -31717,7 +31717,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies UPDATE operations.",
+        "practice_task": "The learner must implement an HTTP PATCH handler that updates a subset of resource fields using sqlc-generated UPDATE code, includes optimistic locking with a version field, and returns the updated row.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -31873,7 +31873,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Threat modeling.",
+        "practice_task": "The learner must threat-model a Go API gateway: draw the trust boundary, identify at least 4 threats using STRIDE, and write acceptance criteria that would prevent each threat.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -32030,7 +32030,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Trust boundaries.",
+        "practice_task": "The learner must write a Go HTTP service with three trust zones: external, authenticated, and admin.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -32184,7 +32184,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Input validation for security.",
+        "practice_task": "The learner must implement input validation for a Go HTTP endpoint accepting name, email, age.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -32339,7 +32339,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Authentication vs authorization.",
+        "practice_task": "The learner must implement a Go HTTP API with: login endpoint (returns JWT), GET /profile/:id (auth + authz), and GET /admin/users (auth + admin role).",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -32494,7 +32494,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Password hashing.",
+        "practice_task": "The learner must register two users with the same password and verify their bcrypt hashes differ (demonstrating salting).",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -32651,7 +32651,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Sessions and cookies.",
+        "practice_task": "The learner must implement a session-based authentication system in Go: login endpoint creates a Redis-backed session, middleware loads the session on each request, and a logout endpoint destroys the session.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -32806,7 +32806,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies JWT implementation.",
+        "practice_task": "The learner must implement a Go HTTP service that issues JWTs on login and verifies them on protected endpoints.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -32970,7 +32970,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies JWT risks.",
+        "practice_task": "The learner must implement a Go HTTP service that issues JWTs on login and verifies them on protected endpoints.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -33129,7 +33129,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies OAuth2 and OIDC overview.",
+        "practice_task": "The learner must configure a Go service as an OAuth2 client using golang.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -33288,7 +33288,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies API keys.",
+        "practice_task": "The learner must implement an API key authentication system in Go: key generation with crypto/rand, key hashing with SHA-256, a middleware that extracts and validates keys, and a test that verifies valid keys pass and invalid keys are rejected with 401.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -33447,7 +33447,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies RBAC.",
+        "practice_task": "The learner must implement RBAC in a Go HTTP service with role-permission mappings, a middleware guard, and tests.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -33605,7 +33605,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies ABAC and policy checks.",
+        "practice_task": "The learner must implement ABAC for a document management API: define attributes (user.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -33771,7 +33771,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Tenant isolation basics.",
+        "practice_task": "The learner must implement tenant isolation in a Go API: middleware that extracts tenant_id from the request, a repository that scopes queries by tenant_id, and tests that verify cross-tenant isolation.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -33929,7 +33929,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies SQL injection prevention.",
+        "practice_task": "The learner must audit a Go codebase with SQL injection vulnerabilities, fix each one using parameterized queries, and write a test that confirms the fix prevents injection attempts.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -34088,7 +34088,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies XSS.",
+        "practice_task": "The learner must audit a Go web application that serves user-generated content, identify XSS vulnerabilities in the template rendering, fix them using html/template's context-sensitive escaping, and add CSP headers.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -34248,7 +34248,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies CSRF.",
+        "practice_task": "The learner must implement CSRF protection in a Go web application, demonstrate that a forged cross-origin request is rejected, and explain the double-submit cookie pattern.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -34408,7 +34408,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies CORS.",
+        "practice_task": "The learner must implement CORS middleware in Go, handle preflight OPTIONS requests, validate origins against a whitelist, and explain why CORS does not protect against server-side attacks.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -34566,7 +34566,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Rate limiting.",
+        "practice_task": "The learner must implement a token bucket rate limiter in Go, wrap an HTTP handler with it, and write tests that verify (a) requests within limits succeed, (b) requests exceeding limits return 429, and (c) the bucket refills over time.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -34726,7 +34726,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies TLS and HTTPS.",
+        "practice_task": "The learner must configure a Go HTTP server with TLS 1.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -34886,7 +34886,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Secrets management.",
+        "practice_task": "The learner must configure a Go service that loads secrets from environment variables in development and from Vault/AWS Secrets Manager in production, implements graceful secret rotation, and handles missing secrets with clear error messages.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -35047,7 +35047,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Dependency security.",
+        "practice_task": "The learner must audit a Go project's dependencies, run govulncheck to identify vulnerabilities, update unsafe dependencies, and configure Dependabot or Renovate for automated dependency updates.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -35205,7 +35205,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies govulncheck.",
+        "practice_task": "The learner must run govulncheck on a deliberately vulnerable Go project, identify the CVE and affected module, update the dependency to the fixed version, and configure govulncheck as a pre-commit hook or CI pipeline step.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -35365,7 +35365,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies OWASP for Go APIs.",
+        "practice_task": "The learner must audit a Go API against the OWASP API Security Top 10, produce a risk assessment for each of the 10 categories, and implement fixes for the top 3 most critical risks found.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -35523,7 +35523,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Secure logging.",
+        "practice_task": "The learner must configure Go's log/slog in a service, implement a logging middleware that redacts sensitive fields (password, token, credit_card), write structured JSON logs, and produce a test that validates sensitive data is not present in log output.",
         "project_id": "project-secure-authenticated-api",
         "rubric_ids": [
           "rubric-module-10"
@@ -35692,7 +35692,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Time basics.",
+        "practice_task": "The learner must write a Go program that measures elapsed time, handles time.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -35863,7 +35863,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Durations.",
+        "practice_task": "The learner must write a function that takes attempt number and returns time.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -36032,7 +36032,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Timers.",
+        "practice_task": "The learner must write a concurrent Go program that uses timers correctly, verify it with -race, and explain why an alternative approach (without timers) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -36203,7 +36203,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Tickers.",
+        "practice_task": "The learner must write a concurrent Go program that uses tickers correctly, verify it with -race, and explain why an alternative approach (without tickers) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -36372,7 +36372,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Context basics.",
+        "practice_task": "The learner must write a concurrent Go program that uses context basics correctly, verify it with -race, and explain why an alternative approach (without context basics) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -36546,7 +36546,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Cancellation.",
+        "practice_task": "The learner must write a program that starts 5 worker goroutines sharing a context.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -36718,7 +36718,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Timeouts.",
+        "practice_task": "The learner must write a concurrent Go program that uses timeouts correctly, verify it with -race, and explain why an alternative approach (without timeouts) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -36889,7 +36889,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Deadlines.",
+        "practice_task": "The learner must write a concurrent Go program that uses deadlines correctly, verify it with -race, and explain why an alternative approach (without deadlines) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -37058,7 +37058,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Context values with caveats.",
+        "practice_task": "The learner must write a concurrent Go program that uses context values with caveats correctly, verify it with -race, and explain why an alternative approach (without context values with caveats) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -37227,7 +37227,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Why concurrency exists.",
+        "practice_task": "The learner must write a concurrent Go program that uses why concurrency exists correctly, verify it with -race, and explain why an alternative approach (without why concurrency exists) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -37401,7 +37401,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Goroutines.",
+        "practice_task": "The learner must write a program that starts 10 goroutines, each computing a different Fibonacci number, collects all results via a channel, and prints them in order.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -37574,7 +37574,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies WaitGroups.",
+        "practice_task": "The learner must write a concurrent Go program that uses waitgroups correctly, verify it with -race, and explain why an alternative approach (without waitgroups) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -37746,7 +37746,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Channels.",
+        "practice_task": "The learner must write a concurrent Go program that uses channels correctly, verify it with -race, and explain why an alternative approach (without channels) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -37918,7 +37918,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Buffered channels.",
+        "practice_task": "The learner must write a concurrent Go program that uses buffered channels correctly, verify it with -race, and explain why an alternative approach (without buffered channels) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -38090,7 +38090,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Closing channels.",
+        "practice_task": "The learner must write a concurrent Go program that uses closing channels correctly, verify it with -race, and explain why an alternative approach (without closing channels) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -38264,7 +38264,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Channel ownership.",
+        "practice_task": "The learner must implement a worker pool pattern where: (1) a dispatcher creates a jobs channel and a results channel, (2) dispatcher spawns N workers that receive from jobs and send to results, (3) dispatcher sends all jobs to the jobs channel and closes it, (4) dispatcher spawns a collector that reads from results until it is closed, (5) dispatcher closes results after all workers complete (using sync.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -38435,7 +38435,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Backpressure.",
+        "practice_task": "The learner must write a concurrent Go program that uses backpressure correctly, verify it with -race, and explain why an alternative approach (without backpressure) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -38605,7 +38605,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Pipelines.",
+        "practice_task": "The learner must write a concurrent Go program that uses pipelines correctly, verify it with -race, and explain why an alternative approach (without pipelines) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -38775,7 +38775,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Mutex and RWMutex.",
+        "practice_task": "The learner must write a concurrent Go program that uses mutex and rwmutex correctly, verify it with -race, and explain why an alternative approach (without mutex and rwmutex) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -38947,7 +38947,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Atomics with caution.",
+        "practice_task": "The learner must write a concurrent Go program that uses atomics with caution correctly, verify it with -race, and explain why an alternative approach (without atomics with caution) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -39117,7 +39117,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Race conditions.",
+        "practice_task": "The learner must write a concurrent Go program that uses race conditions correctly, verify it with -race, and explain why an alternative approach (without race conditions) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -39289,7 +39289,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Race detector.",
+        "practice_task": "The learner must write a concurrent Go program that uses race detector correctly, verify it with -race, and explain why an alternative approach (without race detector) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -39460,7 +39460,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Goroutine leaks.",
+        "practice_task": "The learner must take a program that starts 10 worker goroutines in a loop (without any stop mechanism), add a context with cancel to all of them, verify with runtime.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -39633,7 +39633,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Deadlocks.",
+        "practice_task": "The learner must write a concurrent Go program that uses deadlocks correctly, verify it with -race, and explain why an alternative approach (without deadlocks) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -39805,7 +39805,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies errgroup.",
+        "practice_task": "The learner must write a concurrent Go program that uses errgroup correctly, verify it with -race, and explain why an alternative approach (without errgroup) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -39975,7 +39975,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Bounded worker pools.",
+        "practice_task": "The learner must write a concurrent Go program that uses bounded worker pools correctly, verify it with -race, and explain why an alternative approach (without bounded worker pools) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -40145,7 +40145,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Retries and backoff.",
+        "practice_task": "The learner must write a concurrent Go program that uses retries and backoff correctly, verify it with -race, and explain why an alternative approach (without retries and backoff) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -40322,7 +40322,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Idempotency preview.",
+        "practice_task": "The learner must write a concurrent Go program that uses idempotency preview correctly, verify it with -race, and explain why an alternative approach (without idempotency preview) would be incorrect or less efficient.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -40485,7 +40485,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies sync.Once.",
+        "practice_task": "The learner must implement a thread-safe lazy singleton that initializes a shared resource on first access using sync.",
         "project_id": "project-concurrent-downloader",
         "rubric_ids": [
           "rubric-module-11"
@@ -40658,7 +40658,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Why observability exists.",
+        "practice_task": "The learner must instrument a sample HTTP service with: (1) structured JSON logging with correlation IDs, (2) Prometheus metrics for request count, latency, and error rate by endpoint, (3) a middleware that extracts and propagates trace context.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -40831,7 +40831,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Structured logging with slog.",
+        "practice_task": "The learner must write a Go HTTP server that uses slog with a JSON handler, logs every request with method, path, duration_ms, and status_code, implements a custom slog.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -41005,7 +41005,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Request-scoped logging.",
+        "practice_task": "The learner must write HTTP middleware that extracts or generates a correlation_id from the X-Correlation-ID header, attaches it to the request context via slog.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -41184,7 +41184,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Correlation IDs.",
+        "practice_task": "The learner must implement a middleware that (1) extracts X-Correlation-Id from the incoming request, (2) generates one if missing, (3) stores it in the request context, (4) injects it into all logged events, and (5) propagates it to downstream HTTP calls via the outgoing request header.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -41357,7 +41357,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies PII redaction.",
+        "practice_task": "The learner must implement a custom slog.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -41530,7 +41530,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Metrics.",
+        "practice_task": "The learner must instrument a Go HTTP server with Prometheus metrics: (1) a counter for total requests with labels endpoint, method, status_code, (2) a histogram for request duration with custom buckets appropriate for their service (50ms, 200ms, 500ms, 2s, 5s), (3) a gauge for in-flight requests.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -41701,7 +41701,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Prometheus.",
+        "practice_task": "The learner must deploy Prometheus (via docker-compose or download), configure it to scrape a Go service they instrumented earlier, write three PromQL queries: (1) requests per second by endpoint over the last hour, (2) p99 latency over the last 30 minutes, (3) error ratio (5xx / total) over the last 5 minutes, and configure an alert that fires when error ratio exceeds 5% for 5 minutes.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -41874,7 +41874,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Tracing.",
+        "practice_task": "The learner must set up distributed tracing between two Go services: Service A receives an HTTP request, calls Service B, which queries an in-memory database.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -42049,7 +42049,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies OpenTelemetry.",
+        "practice_task": "The learner must instrument a Go HTTP server with OpenTelemetry: (1) initialize OTel SDK with OTLP exporter to a local collector/Jaeger, (2) create spans for each HTTP request with attributes (method, path, status_code), (3) create a child span for a simulated DB query, (4) verify the complete trace appears in Jaeger UI with correct parent-child relationships.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -42220,7 +42220,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies pprof.",
+        "practice_task": "The learner must instrument a Go HTTP server with net/http/pprof, generate load with a tool, collect a 30-second CPU profile, run go tool pprof -http=:8080, identify the top 3 functions consuming CPU, write an optimization that reduces CPU in at least one of them, and re-profile to confirm the improvement.",
         "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
@@ -42395,7 +42395,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies CPU profiling.",
+        "practice_task": "The learner must write an HTTP handler that performs CPU-intensive work (json.",
         "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
@@ -42569,7 +42569,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Memory profiling.",
+        "practice_task": "The learner must write a Go program that allocates memory in at least three different functions (one of which has a memory leak via a forgotten reference), collect a heap profile, identify the leaking function by inuse_space, trace the reference chain, fix the leak by removing the forgotten reference, and confirm the fix by collecting a second heap profile showing inuse_space for that function dropped to near-zero.",
         "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
@@ -42742,7 +42742,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Benchmarks.",
+        "practice_task": "The learner must write two implementations of the same function (e.",
         "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
@@ -42914,7 +42914,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Escape analysis.",
+        "practice_task": "The learner must write three versions of a function that creates a struct and: (1) returns the struct by value, (2) returns a pointer to a local struct, (3) returns the value via interface{}.",
         "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
@@ -43087,7 +43087,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Memory layout.",
+        "practice_task": "The learner must write a struct with at least 5 fields of mixed sizes (int64, int32, int16, bool, string), predict its size using alignment rules, check with unsafe.",
         "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
@@ -43255,7 +43255,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Caching basics.",
+        "practice_task": "The learner must implement a thread-safe in-memory cache with: (1) Set(key, value, ttl), (2) Get(key) (value, bool) with TTL expiration, (3) LRU eviction when the cache exceeds maxSize, (4) a background goroutine that evicts expired entries every 30 seconds.",
         "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
@@ -43426,7 +43426,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Cache invalidation.",
+        "practice_task": "The learner must implement a cache layer for a user profile service with: (1) cache-aside read pattern with version checking, (2) active invalidation on profile update (delete cache entry after DB write succeeds), (3) a TTL fallback of 5 minutes, (4) a test that demonstrates the TOCTOU race and the fix.",
         "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
@@ -43595,7 +43595,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Alerting mindset.",
+        "practice_task": "The learner must define an SLO for a Go HTTP service (99.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -43772,7 +43772,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Incident debugging.",
+        "practice_task": "The learner is given a simulated production incident with: an alert notification, a metrics dashboard, structured log files with and without correlation IDs, and a deployment timeline.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -43943,7 +43943,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Reliability review.",
+        "practice_task": "The learner must conduct a reliability review of a simulated incident: a Go service during a black Friday sale experienced a 23-minute outage because a configuration change disabled connection pooling.",
         "project_id": "project-pii-redactor",
         "rubric_ids": [
           "rubric-module-12"
@@ -44099,7 +44099,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Why architecture exists.",
+        "practice_task": "The learner is given a Go project at 3 stages of growth (1K LOC flat, 20K LOC with implicit dependencies, 100K LOC with circular imports).",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -44254,7 +44254,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Package boundaries.",
+        "practice_task": "The learner is given a Go project with 5 packages and circular import errors.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -44413,7 +44413,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Service layer.",
+        "practice_task": "The learner is given a Go HTTP handler with 200 lines of inline business logic (validation, business rules, database calls, email sending).",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -44570,7 +44570,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Repository pattern deep dive.",
+        "practice_task": "The learner is given a Go HTTP handler with inline SQL queries and response formatting mixed together.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -44728,7 +44728,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Modular monolith.",
+        "practice_task": "The learner is given a Go codebase with 3 domains mixed in a single package (catalog, cart, orders).",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -44887,7 +44887,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Hexagonal architecture.",
+        "practice_task": "The learner is given a Go service with business logic mixed in HTTP handlers and direct Postgres calls.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -45043,7 +45043,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Domain modeling.",
+        "practice_task": "The learner is given a Go codebase with anemic domain types (User, Order, Product with only fields, all exported) and business rules scattered across HTTP handlers.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -45202,7 +45202,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Invariants.",
+        "practice_task": "The learner must implement a bank transfer function that: (1) reads both account balances, (2) checks the invariant that the sender has sufficient funds, (3) performs the transfer in a transaction with SELECT FOR UPDATE to lock both rows, (4) verifies the invariant after the transfer.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -45358,7 +45358,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Event-driven basics.",
+        "practice_task": "The learner must implement a mini event-driven system with: (1) an event publisher that writes to a channel (simulating a broker), (2) an order service that publishes 'order.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -45512,7 +45512,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Queues.",
+        "practice_task": "The learner must implement a producer-consumer system with: (1) an in-memory channel-based queue, (2) a producer that publishes 100 messages, (3) a consumer pool (5 goroutines) that processes messages with simulated work (time.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -45675,7 +45675,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Retries and idempotent consumers.",
+        "practice_task": "The learner must implement an HTTP client with: (1) retry with exponential backoff + jitter (max 3 retries), (2) classification of errors into retryable (5xx, timeout, connection refused) and non-retryable (4xx), (3) idempotency key generation and header injection, (4) a server that deduplicates requests by idempotency key.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -45834,7 +45834,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Payment workflow design.",
+        "practice_task": "The learner must implement a payment workflow with: (1) a PaymentIntent state machine (pending → authorized → captured → settled + failed/refunded), (2) async processing via a channel-based queue, (3) idempotent Stripe API calls (simulated), (4) retry with exponential backoff on gateway failures, (5) compensating action (void authorization if capture fails), (6) a test that proves retrying a failed capture does not create duplicate charges.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -45986,7 +45986,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Multi-tenancy architecture.",
+        "practice_task": "The learner must implement a multi-tenant Go HTTP service with: (1) middleware that extracts X-Tenant-ID header and stores it in context, (2) a tenant registry (in-memory map) with per-tenant configuration, (3) a repository that scopes all queries by tenant_id, (4) tests that prove Tenant A cannot access Tenant B's data even with a direct ID guess, (5) a cache layer that uses tenant-prefixed keys.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -46139,7 +46139,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Caching architecture.",
+        "practice_task": "The learner must implement a caching layer for a product catalog service with: (1) cache-aside pattern using Redis (simulated with a Go map + mutex), (2) TTL with jitter, (3) cache stampede prevention using singleflight, (4) write-through cache invalidation, (5) a benchmark that measures latency with and without cache, (6) a test that proves the cache reduces database load by 90%.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -46292,7 +46292,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies When to split services.",
+        "practice_task": "The learner is given a modular monolith with 4 domains (inventory, orders, shipping, notifications) and must: (1) identify which domain(s) are candidates for extraction based on team size (10 engineers per domain), deployment frequency (2/week for monolith, target 10/week), and scaling requirements (inventory needs 5x more capacity during sales), (2) design the extraction plan (which domain first, what API, how to handle shared data), (3) justify why the remaining domains stay as a monolith.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -46445,7 +46445,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Microservices as a tradeoff, not a default.",
+        "practice_task": "The learner must write a decision analysis document for a given system (e.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -46602,7 +46602,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Architecture decision records.",
+        "practice_task": "The learner must write 3 ADRs for a Go service architecture: (1) ADR-001: choosing between go-chi and standard net/http for HTTP routing, (2) ADR-002: choosing between direct SQL and an ORM (sqlx vs.",
         "project_id": "project-modular-refactor-review",
         "rubric_ids": [
           "rubric-module-13"
@@ -46760,7 +46760,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Linux processes.",
+        "practice_task": "The learner must write a Go program that: (1) spawns 5 child processes running 'sleep 1' in parallel using exec.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -46924,7 +46924,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Signals.",
+        "practice_task": "The learner must write a Go program that: (1) starts an HTTP server on :8080, (2) registers signal handlers for SIGINT and SIGTERM, (3) on signal, performs a graceful shutdown (server.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -47104,7 +47104,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Logs.",
+        "practice_task": "Given a minimal HTTP server, the learner must: (1) replace all fmt.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -47291,7 +47291,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies File permissions.",
+        "practice_task": "Write a Go program that creates a directory ~/secure-workspace with 0700 permissions, writes a config.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -47448,7 +47448,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Networking basics.",
+        "practice_task": "The learner must configure networking basics for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -47646,7 +47646,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Docker basics.",
+        "practice_task": "Write a Dockerfile that takes a Go HTTP server (which listens on :8080 and serves `{\"status\":\"ok\"}` at `/healthz`), builds it with CGO disabled, and produces a final image under 20 MB.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -47836,7 +47836,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Docker images and layers.",
+        "practice_task": "Create a Dockerfile that builds a Go HTTP server in under 10MB using multi-stage build with properly ordered layers and a.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -47993,7 +47993,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Multi-stage builds.",
+        "practice_task": "The learner must configure multi-stage builds for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -48149,7 +48149,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Docker Compose.",
+        "practice_task": "The learner must configure docker compose for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -48307,7 +48307,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Container health checks.",
+        "practice_task": "The learner must configure container health checks for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -48463,7 +48463,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies GitHub Actions.",
+        "practice_task": "The learner must configure github actions for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -48619,7 +48619,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies CI pipeline.",
+        "practice_task": "The learner must configure ci pipeline for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -48777,7 +48777,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Release artifacts.",
+        "practice_task": "The learner must configure release artifacts for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -48933,7 +48933,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Config in deployment.",
+        "practice_task": "The learner must configure config in deployment for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -49089,7 +49089,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Secrets in deployment.",
+        "practice_task": "The learner must configure secrets in deployment for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -49245,7 +49245,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Vulnerability scanning.",
+        "practice_task": "The learner must configure vulnerability scanning for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -49401,7 +49401,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies One deployment target.",
+        "practice_task": "The learner must configure one deployment target for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -49557,7 +49557,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Rollback basics.",
+        "practice_task": "The learner must configure rollback basics for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -49713,7 +49713,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Deployment runbook.",
+        "practice_task": "The learner must configure deployment runbook for a Go service, demonstrate it working in a local environment, and document the configuration decisions.",
         "project_id": "project-dockerized-service-cicd",
         "rubric_ids": [
           "rubric-module-14"
@@ -49869,7 +49869,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies README writing.",
+        "practice_task": "The learner must produce readme writing for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -50024,7 +50024,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies API docs.",
+        "practice_task": "The learner must produce api docs for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -50179,7 +50179,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Code review workflow.",
+        "practice_task": "The learner must produce code review workflow for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -50334,7 +50334,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Pull request etiquette.",
+        "practice_task": "The learner must produce pull request etiquette for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -50489,7 +50489,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Portfolio packaging.",
+        "practice_task": "The learner must produce portfolio packaging for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -50644,7 +50644,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Writing project narratives.",
+        "practice_task": "The learner must produce writing project narratives for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -50800,7 +50800,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Resume project bullets.",
+        "practice_task": "The learner must produce resume project bullets for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -50956,7 +50956,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Backend interview fundamentals.",
+        "practice_task": "The learner must produce backend interview fundamentals for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -51111,7 +51111,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Go interview topics.",
+        "practice_task": "The learner must produce go interview topics for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -51266,7 +51266,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies SQL interview topics.",
+        "practice_task": "The learner must produce sql interview topics for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -51421,7 +51421,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Debugging interview scenarios.",
+        "practice_task": "The learner must produce debugging interview scenarios for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -51576,7 +51576,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies System design basics.",
+        "practice_task": "The learner must produce system design basics for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -51731,7 +51731,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Architecture defense.",
+        "practice_task": "The learner must produce architecture defense for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -51886,7 +51886,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Capstone planning.",
+        "practice_task": "The learner must produce capstone planning for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -52041,7 +52041,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Demo preparation.",
+        "practice_task": "The learner must produce demo preparation for a Go project and receive actionable feedback from a peer.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-15"
@@ -52196,7 +52196,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane foundation and configuration.",
+        "practice_task": "The learner must add a new configuration parameter to the existing config struct, bind it to an environment variable, and write a test that verifies the configuration loads correctly.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -52351,7 +52351,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane database and models.",
+        "practice_task": "The learner must implement a new model with its migration, repository methods (Create, FindByID, List, Update, Delete), and a test that verifies CRUD operations through the repository.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -52508,7 +52508,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane authentication.",
+        "practice_task": "The learner must implement a login endpoint that validates credentials and returns a signed JWT, then write a middleware that extracts and validates the JWT on protected routes.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -52664,7 +52664,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane authorization.",
+        "practice_task": "The learner must implement an authorization middleware that checks both role-based permissions and resource ownership, then write tests that verify allowed and denied requests.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -52825,7 +52825,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane tenant isolation.",
+        "practice_task": "The learner must implement a tenant isolation layer including: (1) a middleware that extracts tenant_id from a JWT and stores it in context, (2) a repository base type that automatically appends WHERE tenant_id =.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -52982,7 +52982,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane HTTP API layer.",
+        "practice_task": "The learner must implement a new RESTful endpoint (full CRUD) with proper routing, middleware, request validation, error handling, and response formatting.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -53151,7 +53151,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane order processing.",
+        "practice_task": "The learner must implement an order processing saga that: (1) reserves inventory with SELECT FOR UPDATE, (2) calls a simulated payment gateway with idempotency key, (3) creates the order in the database, (4) handles the case where payment succeeds but order creation fails (refunds the payment), (5) handles the case where the client retries with the same idempotency key (returns the existing order without re-charging).",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -53309,7 +53309,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane payment pipeline.",
+        "practice_task": "The learner must implement a payment endpoint that creates a Stripe payment intent, and a webhook handler that verifies the signature and updates the billing state on payment success.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -53465,7 +53465,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane event bus.",
+        "practice_task": "The learner must implement an event bus interface with publish and subscribe methods, then wire two components together so that one publishes events and the other processes them asynchronously.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -53620,7 +53620,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane worker pools.",
+        "practice_task": "The learner must implement a configurable worker pool that takes tasks from a channel, processes them with error handling and panic recovery, and supports graceful shutdown by draining remaining tasks.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -53777,7 +53777,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane caching layer.",
+        "practice_task": "The learner must implement a cache-aside pattern with a TTL-based in-memory cache, then wire it into an existing data access path and measure the performance improvement.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -53934,7 +53934,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane observability.",
+        "practice_task": "The learner must instrument a handler with structured logging, a request counter metric, a latency histogram, and a trace span, then verify the output in the metrics endpoint.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -54099,7 +54099,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane graceful shutdown.",
+        "practice_task": "The learner must implement a graceful shutdown sequence for a service that includes: (1) an HTTP server, (2) a background worker processing queue messages, (3) a database connection pool.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -54256,7 +54256,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane deployment.",
+        "practice_task": "The learner must create a Dockerfile with multi-stage build, a docker-compose.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -54410,7 +54410,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Opslane portfolio defense.",
+        "practice_task": "The learner must prepare and deliver a 10-minute presentation covering Opslane's architecture, three key design decisions with trade-offs, and a scaling plan for handling 10x traffic.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -54544,7 +54544,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Helm charts.",
+        "practice_task": "The learner must produce a writing and deploying Helm charts for Kubernetes artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -54684,7 +54684,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies K8s probes and health checks.",
+        "practice_task": "The learner must produce a configuring liveness, readiness, and startup probes artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -54824,7 +54824,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Horizontal pod autoscaling.",
+        "practice_task": "The learner must produce a configuring HPA based on CPU, memory, and custom metrics artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -54964,7 +54964,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Service mesh preview.",
+        "practice_task": "The learner must produce a understanding service mesh concepts like Istio and Linkerd artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -55104,7 +55104,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Portfolio strategy.",
+        "practice_task": "The learner must produce a planning a job-ready Go portfolio artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -55244,7 +55244,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Project selection and scoping.",
+        "practice_task": "The learner must produce a choosing and scoping portfolio projects artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -55384,7 +55384,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Code review readiness.",
+        "practice_task": "The learner must produce a preparing code for professional review artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -55524,7 +55524,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Technical writing for engineers.",
+        "practice_task": "The learner must produce a writing clear READMEs and technical docs artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -55664,7 +55664,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Resume and LinkedIn optimization.",
+        "practice_task": "The learner must produce a optimizing resume and LinkedIn for Go roles artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -55804,7 +55804,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Behavioral interview preparation.",
+        "practice_task": "The learner must produce a preparing for behavioral interviews artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -55944,7 +55944,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies System design interview basics.",
+        "practice_task": "The learner must produce a preparing for system design interviews artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -56084,7 +56084,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Live coding interview practice.",
+        "practice_task": "The learner must produce a practicing live coding under interview conditions artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -56224,7 +56224,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Take-home project strategy.",
+        "practice_task": "The learner must produce a approaching take-home projects effectively artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -56364,7 +56364,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Negotiation fundamentals.",
+        "practice_task": "The learner must produce a understanding offer negotiation basics artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -56504,7 +56504,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Open source contribution.",
+        "practice_task": "The learner must produce a contributing to open source Go projects artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -56644,7 +56644,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Technical blog writing.",
+        "practice_task": "The learner must produce a writing technical blog posts about Go artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -56784,7 +56784,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Conference talk preparation.",
+        "practice_task": "The learner must produce a preparing and delivering conference talks artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -56924,7 +56924,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Mentorship and code review.",
+        "practice_task": "The learner must produce a giving and receiving code review feedback artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
@@ -57062,7 +57062,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Career roadmap.",
+        "practice_task": "The learner must produce a planning the next 12 months of career growth artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
         "project_id": "project-portfolio-review-pack",
         "rubric_ids": [
           "rubric-module-16"
