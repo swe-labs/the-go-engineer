@@ -9,26 +9,37 @@
       "concept": "process lifecycle",
       "canonical_owner": "core-01-01",
       "preview_locations": [],
-      "reinforcement_locations": ["core-16-01", "module-15"],
+      "reinforcement_locations": [
+        "core-16-01",
+        "module-15"
+      ],
       "notes": "First taught in module 01, reinforced through deployment"
     },
     {
       "concept": "stdin/stdout/stderr",
       "canonical_owner": "core-01-05",
       "preview_locations": [],
-      "reinforcement_locations": ["core-07-01", "core-16-03"]
+      "reinforcement_locations": [
+        "core-07-01",
+        "core-16-03"
+      ]
     },
     {
       "concept": "shell pipelines",
       "canonical_owner": "core-01-07",
       "preview_locations": [],
-      "reinforcement_locations": ["core-07-05"]
+      "reinforcement_locations": [
+        "core-07-05"
+      ]
     },
     {
       "concept": "go build",
       "canonical_owner": "core-02-01",
       "preview_locations": [],
-      "reinforcement_locations": ["core-06-01", "core-07-01"]
+      "reinforcement_locations": [
+        "core-06-01",
+        "core-07-01"
+      ]
     },
     {
       "concept": "go module cache",
@@ -40,272 +51,406 @@
       "concept": "compiler errors",
       "canonical_owner": "core-02-05",
       "preview_locations": [],
-      "reinforcement_locations": ["core-03-01"]
+      "reinforcement_locations": [
+        "core-03-01"
+      ]
     },
     {
       "concept": "slice header",
       "canonical_owner": "core-03-12",
       "preview_locations": [],
-      "reinforcement_locations": ["core-04-10", "core-05-05"]
+      "reinforcement_locations": [
+        "core-04-10",
+        "core-05-05"
+      ]
     },
     {
       "concept": "pointer semantics",
       "canonical_owner": "core-03-15",
       "preview_locations": [],
-      "reinforcement_locations": ["core-04-01", "core-05-01"]
+      "reinforcement_locations": [
+        "core-04-01",
+        "core-05-01"
+      ]
     },
     {
       "concept": "stack vs heap",
       "canonical_owner": "core-03-16",
       "preview_locations": [],
-      "reinforcement_locations": ["core-14-14", "core-15-14"]
+      "reinforcement_locations": [
+        "core-15-33",
+        "core-15-14"
+      ]
     },
     {
       "concept": "memory aliasing",
       "canonical_owner": "core-04-10",
       "preview_locations": [],
-      "reinforcement_locations": ["core-11-10"]
+      "reinforcement_locations": [
+        "core-11-10"
+      ]
     },
     {
       "concept": "errors as values",
       "canonical_owner": "core-04-04",
       "preview_locations": [],
-      "reinforcement_locations": ["core-05-01", "core-08-08"]
+      "reinforcement_locations": [
+        "core-05-01",
+        "core-08-08"
+      ]
     },
     {
       "concept": "error wrapping",
       "canonical_owner": "core-04-05",
       "preview_locations": [],
-      "reinforcement_locations": ["core-08-11"]
+      "reinforcement_locations": [
+        "core-08-11"
+      ]
     },
     {
       "concept": "panic/recover",
       "canonical_owner": "core-04-17",
       "preview_locations": [],
-      "reinforcement_locations": ["core-06-14"]
+      "reinforcement_locations": [
+        "core-06-14"
+      ]
     },
     {
       "concept": "interface semantics",
       "canonical_owner": "core-05-18",
       "preview_locations": [],
-      "reinforcement_locations": ["core-06-01", "core-07-01", "core-08-03"]
+      "reinforcement_locations": [
+        "core-06-01",
+        "core-07-01",
+        "core-08-03"
+      ]
     },
     {
       "concept": "nil interface",
       "canonical_owner": "core-05-19",
       "preview_locations": [],
-      "reinforcement_locations": ["core-08-03"]
+      "reinforcement_locations": [
+        "core-08-03"
+      ]
     },
     {
       "concept": "package layout",
       "canonical_owner": "core-05-22",
       "preview_locations": [],
-      "reinforcement_locations": ["core-16-02"]
+      "reinforcement_locations": [
+        "core-16-02"
+      ]
     },
     {
       "concept": "go test",
       "canonical_owner": "core-06-01",
       "preview_locations": [],
-      "reinforcement_locations": ["core-06-02", "core-06-03", "core-08-12"]
+      "reinforcement_locations": [
+        "core-06-02",
+        "core-06-03",
+        "core-08-12"
+      ]
     },
     {
       "concept": "test coverage",
       "canonical_owner": "core-06-02",
       "preview_locations": [],
-      "reinforcement_locations": ["core-06-03", "core-15-13"]
+      "reinforcement_locations": [
+        "core-06-03",
+        "core-15-13"
+      ]
     },
     {
       "concept": "race detector",
       "canonical_owner": "core-11-22",
-      "preview_locations": ["core-06-19"],
-      "reinforcement_locations": ["core-11-21", "core-11-23"]
+      "preview_locations": [
+        "core-06-19"
+      ],
+      "reinforcement_locations": [
+        "core-11-21",
+        "core-11-23"
+      ]
     },
     {
       "concept": "Delve debugger",
       "canonical_owner": "core-06-07",
       "preview_locations": [],
-      "reinforcement_locations": ["core-06-14", "core-06-19"]
+      "reinforcement_locations": [
+        "core-06-14",
+        "core-06-19"
+      ]
     },
     {
       "concept": "file I/O",
       "canonical_owner": "core-07-01",
       "preview_locations": [],
-      "reinforcement_locations": ["core-07-02", "core-07-03"]
+      "reinforcement_locations": [
+        "core-07-02",
+        "core-07-03"
+      ]
     },
     {
       "concept": "JSON encoding/decoding",
       "canonical_owner": "core-07-10",
       "preview_locations": [],
-      "reinforcement_locations": ["core-08-02", "core-08-05"]
+      "reinforcement_locations": [
+        "core-08-02",
+        "core-08-05"
+      ]
     },
     {
       "concept": "context cancellation",
       "canonical_owner": "core-11-06",
-      "preview_locations": ["core-07-20", "core-08-14", "core-09-23"],
-      "reinforcement_locations": ["core-12-03", "opslane-07"],
+      "preview_locations": [
+        "core-07-20",
+        "core-08-14",
+        "core-09-23"
+      ],
+      "reinforcement_locations": [
+        "core-12-03",
+        "opslane-07"
+      ],
       "notes": "Previewed in CLI/Config and HTTP/Req lifecycle modules before full treatment in module 11"
     },
     {
       "concept": "context deadlines",
       "canonical_owner": "core-11-08",
-      "preview_locations": ["core-08-14"],
-      "reinforcement_locations": ["core-11-06", "core-12-03"]
+      "preview_locations": [
+        "core-08-14"
+      ],
+      "reinforcement_locations": [
+        "core-11-06",
+        "core-12-03"
+      ]
     },
     {
       "concept": "HTTP handler lifecycle",
       "canonical_owner": "core-08-03",
       "preview_locations": [],
-      "reinforcement_locations": ["core-08-10", "core-08-15"]
+      "reinforcement_locations": [
+        "core-08-10",
+        "core-08-15"
+      ]
     },
     {
       "concept": "HTTP timeouts",
       "canonical_owner": "core-08-14",
-      "preview_locations": ["core-07-20", "core-11-07"],
-      "reinforcement_locations": ["core-11-06", "core-11-08"]
+      "preview_locations": [
+        "core-07-20",
+        "core-11-07"
+      ],
+      "reinforcement_locations": [
+        "core-11-06",
+        "core-11-08"
+      ]
     },
     {
       "concept": "graceful shutdown",
       "canonical_owner": "core-08-15",
-      "preview_locations": ["core-07-21"],
-      "reinforcement_locations": ["opslane-13"]
+      "preview_locations": [
+        "core-07-21"
+      ],
+      "reinforcement_locations": [
+        "opslane-13"
+      ]
     },
     {
       "concept": "middleware pattern",
       "canonical_owner": "core-08-10",
       "preview_locations": [],
-      "reinforcement_locations": ["core-10-06", "opslane-06"]
+      "reinforcement_locations": [
+        "core-10-06",
+        "opslane-06"
+      ]
     },
     {
       "concept": "database/sql pool",
       "canonical_owner": "core-09-11",
       "preview_locations": [],
-      "reinforcement_locations": ["core-09-12"]
+      "reinforcement_locations": [
+        "core-09-12"
+      ]
     },
     {
       "concept": "SQL transactions",
       "canonical_owner": "core-09-17",
       "preview_locations": [],
-      "reinforcement_locations": ["core-09-18"]
+      "reinforcement_locations": [
+        "core-09-18"
+      ]
     },
     {
       "concept": "migrations",
       "canonical_owner": "core-09-19",
       "preview_locations": [],
-      "reinforcement_locations": ["opslane-02"]
+      "reinforcement_locations": [
+        "opslane-02"
+      ]
     },
     {
       "concept": "JWT",
       "canonical_owner": "core-10-07",
       "preview_locations": [],
-      "reinforcement_locations": ["core-10-08"]
+      "reinforcement_locations": [
+        "core-10-08"
+      ]
     },
     {
       "concept": "RBAC",
       "canonical_owner": "core-10-11",
       "preview_locations": [],
-      "reinforcement_locations": ["opslane-04"]
+      "reinforcement_locations": [
+        "opslane-04"
+      ]
     },
     {
       "concept": "SQL injection",
       "canonical_owner": "core-10-14",
       "preview_locations": [],
-      "reinforcement_locations": ["core-09-12"]
+      "reinforcement_locations": [
+        "core-09-12"
+      ]
     },
     {
       "concept": "goroutine",
       "canonical_owner": "core-11-11",
-      "preview_locations": ["core-08-03", "core-08-15"],
-      "reinforcement_locations": ["core-11-12", "core-11-23", "core-12-03"]
+      "preview_locations": [
+        "core-08-03",
+        "core-08-15"
+      ],
+      "reinforcement_locations": [
+        "core-11-12",
+        "core-11-23",
+        "core-12-03"
+      ]
     },
     {
       "concept": "channel",
       "canonical_owner": "core-11-13",
       "preview_locations": [],
-      "reinforcement_locations": ["core-11-14", "core-11-15", "core-11-18"]
+      "reinforcement_locations": [
+        "core-11-14",
+        "core-11-15",
+        "core-11-18"
+      ]
     },
     {
       "concept": "mutex",
       "canonical_owner": "core-11-19",
       "preview_locations": [],
-      "reinforcement_locations": ["core-11-20"]
+      "reinforcement_locations": [
+        "core-11-20"
+      ]
     },
     {
       "concept": "race condition",
       "canonical_owner": "core-11-21",
-      "preview_locations": ["core-06-19"],
-      "reinforcement_locations": ["core-11-22", "core-11-23"]
+      "preview_locations": [
+        "core-06-19"
+      ],
+      "reinforcement_locations": [
+        "core-11-22",
+        "core-11-23"
+      ]
     },
     {
       "concept": "goroutine leak",
       "canonical_owner": "core-11-23",
       "preview_locations": [],
-      "reinforcement_locations": ["core-11-24"]
+      "reinforcement_locations": [
+        "core-11-24"
+      ]
     },
     {
       "concept": "errgroup",
       "canonical_owner": "core-11-25",
       "preview_locations": [],
-      "reinforcement_locations": ["opslane-10"]
+      "reinforcement_locations": [
+        "opslane-10"
+      ]
     },
     {
       "concept": "backpressure",
       "canonical_owner": "core-11-17",
       "preview_locations": [],
-      "reinforcement_locations": ["opslane-09"]
+      "reinforcement_locations": [
+        "opslane-09"
+      ]
     },
     {
       "concept": "structured logging",
       "canonical_owner": "core-12-02",
       "preview_locations": [],
-      "reinforcement_locations": ["core-12-03", "core-12-04", "opslane-12"]
+      "reinforcement_locations": [
+        "core-12-03",
+        "core-12-04",
+        "opslane-12"
+      ]
     },
     {
       "concept": "distributed tracing",
       "canonical_owner": "core-12-09",
       "preview_locations": [],
-      "reinforcement_locations": ["opslane-12"]
+      "reinforcement_locations": [
+        "opslane-12"
+      ]
     },
     {
       "concept": "pprof",
-      "canonical_owner": "core-13-01",
+      "canonical_owner": "core-13-10",
       "preview_locations": [],
-      "reinforcement_locations": ["core-13-02", "core-13-03"]
+      "reinforcement_locations": [
+        "core-14-02",
+        "core-14-03"
+      ]
     },
     {
       "concept": "escape analysis",
-      "canonical_owner": "core-13-05",
+      "canonical_owner": "core-13-14",
       "preview_locations": [],
-      "reinforcement_locations": ["core-13-06"]
+      "reinforcement_locations": [
+        "core-14-06"
+      ]
     },
     {
       "concept": "benchmarking",
-      "canonical_owner": "core-13-04",
+      "canonical_owner": "core-13-13",
       "preview_locations": [],
-      "reinforcement_locations": ["core-06-02"]
+      "reinforcement_locations": [
+        "core-06-02"
+      ]
     },
     {
       "concept": "repository pattern",
       "canonical_owner": "core-16-04",
       "preview_locations": [],
-      "reinforcement_locations": ["core-09-24"]
+      "reinforcement_locations": [
+        "core-09-24"
+      ]
     },
     {
       "concept": "hexagonal architecture",
       "canonical_owner": "core-16-06",
       "preview_locations": [],
-      "reinforcement_locations": ["opslane-01"]
+      "reinforcement_locations": [
+        "opslane-01"
+      ]
     },
     {
       "concept": "Docker multi-stage build",
       "canonical_owner": "core-16-08",
       "preview_locations": [],
-      "reinforcement_locations": ["opslane-14"]
+      "reinforcement_locations": [
+        "opslane-14"
+      ]
     },
     {
       "concept": "CI pipeline",
       "canonical_owner": "core-16-12",
       "preview_locations": [],
-      "reinforcement_locations": ["opslane-14"]
+      "reinforcement_locations": [
+        "opslane-14"
+      ]
     }
   ]
 }

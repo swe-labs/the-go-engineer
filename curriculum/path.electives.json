@@ -38,15 +38,23 @@
       "order": 17,
       "required": false,
       "portfolio_output": false,
-      "prerequisites": ["module-16"],
-      "entry_item_ids": ["elective-01"],
-      "terminal_item_ids": ["elective-20"],
+      "prerequisites": [
+        "module-16"
+      ],
+      "entry_item_ids": [
+        "elective-01"
+      ],
+      "terminal_item_ids": [
+        "elective-20"
+      ],
       "source_legacy_section_ids": [],
       "cognitive_load": "moderate",
       "recommended_break_after": false,
       "contains_foundational_hard_concepts": false,
       "pacing": "moderate",
-      "tags": ["elective"],
+      "tags": [
+        "elective"
+      ],
       "readme_status": "scaffolded",
       "readme_contract": {
         "contract_id": "elective-module.v3",
@@ -71,8 +79,12 @@
       "required_prior_knowledge": [
         "Complete the core path through Module 15 before starting advanced electives."
       ],
-      "prerequisites": ["core-16-15"],
-      "next_item_ids": ["elective-02"],
+      "prerequisites": [
+        "core-16-15"
+      ],
+      "next_item_ids": [
+        "elective-02"
+      ],
       "zero_magic": {
         "problem_solved": "New Go developers write separate functions for each type (IntMap, StringMap, FloatMap) or use interface{} with runtime type assertions. Both approaches produce duplicated code or lose compile-time type safety. Generics solve this by allowing functions and data structures to operate on any type while maintaining compile-time type checking.",
         "why_it_exists": "Generics exist because type-safe code reuse without generics requires extensive boilerplate (code generation, interface boxing, or reflection). Go 1.18 added generics to reduce boilerplate, eliminate runtime type assertions for type-safe containers, and enable reusable algorithms (sort, map, filter) without sacrificing compile-time safety.",
@@ -174,7 +186,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -209,8 +223,13 @@
         "assets_dir": "16-advanced-electives/01-generics/assets",
         "diagram_paths": []
       },
-      "source_legacy_ids": ["TI.9"],
-      "tags": ["elective", "reference"],
+      "source_legacy_ids": [
+        "TI.9"
+      ],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -236,8 +255,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-01."
       ],
-      "prerequisites": ["elective-01"],
-      "next_item_ids": ["elective-03"],
+      "prerequisites": [
+        "elective-01"
+      ],
+      "next_item_ids": [
+        "elective-03"
+      ],
       "zero_magic": {
         "problem_solved": "New Go developers use any or interface{} as a constraint because they do not understand Go 1.18+ constraint features. They lose compile-time type safety and reintroduce runtime type assertions. Complex generic constraints solve this by allowing type unions (|), type approximations (~T), and constraint embedding to precisely define which types are acceptable while catching violations at compile time.",
         "why_it_exists": "Complex constraints exist because simple constraints (any, comparable) are not expressive enough for real-world generic code. Type unions allow a type parameter to accept a fixed set of types. Type approximations allow any type whose underlying type matches. Constraint embedding composes reusable constraint interfaces. Without these features, generic code would need interface{} and runtime type checks for even moderately complex type requirements.",
@@ -338,7 +361,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -374,7 +399,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -400,8 +428,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-02."
       ],
-      "prerequisites": ["elective-02"],
-      "next_item_ids": ["elective-04"],
+      "prerequisites": [
+        "elective-02"
+      ],
+      "next_item_ids": [
+        "elective-04"
+      ],
       "zero_magic": {
         "problem_solved": "Before Go 1.18, type-safe data structures (stacks, queues, trees, sets) required either code generation per type or interface{} with runtime type assertions. Both approaches add maintenance burden or lose type safety. Generic data structures solve this by allowing a single implementation that works with any type while maintaining compile-time type checking.",
         "why_it_exists": "Generic data structures exist because containers and data structures are inherently type-agnostic — a Stack[int] and Stack[string] have the same implementation but different types. Manually duplicating Stack for each type is error-prone and unmaintainable. Generics allow writing the data structure once and using it with any type, with the compiler generating type-specific code at compile time.",
@@ -502,7 +534,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -538,7 +572,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -564,8 +601,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-03."
       ],
-      "prerequisites": ["elective-03"],
-      "next_item_ids": ["elective-05"],
+      "prerequisites": [
+        "elective-03"
+      ],
+      "next_item_ids": [
+        "elective-05"
+      ],
       "zero_magic": {
         "problem_solved": "Go constructors with many parameters create functions with long parameter lists that are hard to read, easy to misorder, and impossible to extend without breaking existing callers. Functional options solve this by using variadic option functions that set fields on a config struct after construction — each option is independent, optional, and discoverable.",
         "why_it_exists": "Functional options exist because Go does not have default parameter values, method overloading, or named parameters. Without functional options, constructors with 10+ parameters are unreadable (NewServer(addr, port, timeout, maxConns, ...)), callers must remember parameter order, and adding a new parameter breaks every call site. Functional options make each parameter explicit, independent, and backward-compatible.",
@@ -669,7 +710,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -705,7 +748,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -731,8 +777,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-04."
       ],
-      "prerequisites": ["elective-04"],
-      "next_item_ids": ["elective-06"],
+      "prerequisites": [
+        "elective-04"
+      ],
+      "next_item_ids": [
+        "elective-06"
+      ],
       "zero_magic": {
         "problem_solved": "Go developers often need to pass a method as a callback — for example, passing an HTTP handler's method to a router or passing a struct method to a sort.Interface. Method values (bound methods) and method expressions (unbound methods) provide type-safe ways to reference and call methods as first-class function values.",
         "why_it_exists": "Method values exist because Go treats methods as functions with a receiver parameter. A method value binds the receiver to the method, creating a function that can be passed around like any other function value. This enables patterns like dependency injection (passing a method as a callback), event handling (registering a method as a listener), and sorting (passing a Less method to sort.Sort).",
@@ -836,7 +886,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -872,7 +924,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -898,8 +953,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-05."
       ],
-      "prerequisites": ["elective-05"],
-      "next_item_ids": ["elective-07"],
+      "prerequisites": [
+        "elective-05"
+      ],
+      "next_item_ids": [
+        "elective-07"
+      ],
       "zero_magic": {
         "problem_solved": "Go code that depends on platform-specific features (system calls, file paths, network APIs) compiles only on specific operating systems or architectures. Without build tags, platform-specific files must use filename suffixes (_linux.go, _windows.go) or be excluded from cross-platform builds entirely. Build tags solve this by allowing conditional compilation based on OS, architecture, custom build constraints, or Go version.",
         "why_it_exists": "Build tags exist because Go supports cross-compilation to multiple targets from a single codebase. Platform-specific code (syscall, os, net) must be excluded on targets where it does not compile. Go provides two mechanisms: filename-based constraints (_linux.go only compiles on linux) and build tag comments (//go:build linux). Build tags also enable feature flags (//go:build cgo, //go:build debug) to include or exclude code without modifying source files.",
@@ -1003,7 +1062,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -1039,7 +1100,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -1065,8 +1129,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-06."
       ],
-      "prerequisites": ["elective-06"],
-      "next_item_ids": ["elective-08"],
+      "prerequisites": [
+        "elective-06"
+      ],
+      "next_item_ids": [
+        "elective-08"
+      ],
       "zero_magic": {
         "problem_solved": "Go code generation tasks (mocking interfaces, generating protobuf stubs, embedding assets, creating stringer methods) are manual, error-prone, and must be re-run when source changes. Without a standard tool, each project invents its own generation script. go generate solves this by providing a standard, project-wide mechanism to document and invoke code generators via //go:generate directives in Go source files.",
         "why_it_exists": "go generate exists because many development workflows require pre-compilation steps: generating mocks from interfaces, compiling Protocol Buffers, embedding static assets, generating String() methods for enums (stringer), and creating database model code. Before go generate, each project used shell scripts, Makefiles, or manual commands that were not discoverable or standard. go generate makes code generation a first-class, documented, and runnable part of the Go toolchain.",
@@ -1170,7 +1238,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -1206,7 +1276,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -1232,8 +1305,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-07."
       ],
-      "prerequisites": ["elective-07"],
-      "next_item_ids": ["elective-09"],
+      "prerequisites": [
+        "elective-07"
+      ],
+      "next_item_ids": [
+        "elective-09"
+      ],
       "zero_magic": {
         "problem_solved": "Testing Go code that depends on external interfaces (database, HTTP clients, message queues) requires test doubles that implement those interfaces. Writing mock implementations by hand is tedious, error-prone, and must be updated when the interface changes. Mockery solves this by generating mock implementations from Go interfaces automatically, using go:generate directives or CLI commands.",
         "why_it_exists": "Mockery exists because manual mock writing is repetitive and fragile. Every method on the interface must be implemented with an expectation mechanism (what should the mock return? Should it be called? How many times?). When the interface changes, the mock implementation must be updated manually. Mockery reads the interface definition and generates a complete mock implementation with expectations, assertions, and call tracking — all from the interface source.",
@@ -1337,7 +1414,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -1373,7 +1452,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -1399,8 +1481,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-08."
       ],
-      "prerequisites": ["elective-08"],
-      "next_item_ids": ["elective-10"],
+      "prerequisites": [
+        "elective-08"
+      ],
+      "next_item_ids": [
+        "elective-10"
+      ],
       "zero_magic": {
         "problem_solved": "JSON and other text-based serialization formats are slow to parse, produce large payloads, and lack schema enforcement across services. Protobuf solves this by providing a compact binary format with a schema definition language, code generation for multiple languages, and backward-compatible field evolution.",
         "why_it_exists": "Protobuf exists because microservices need a fast, compact, and schema-enforced serialization format for internal communication. JSON is human-readable but slow (full string parsing), large (field names repeated in every message), and error-prone (no compile-time schema validation). Protobuf encodes messages in ~10-30% of JSON size and parses 10-100x faster, with schema validation at code generation time.",
@@ -1502,7 +1588,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -1538,7 +1626,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -1564,8 +1655,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-09."
       ],
-      "prerequisites": ["elective-09"],
-      "next_item_ids": ["elective-11"],
+      "prerequisites": [
+        "elective-09"
+      ],
+      "next_item_ids": [
+        "elective-11"
+      ],
       "zero_magic": {
         "problem_solved": "Go services that communicate via REST/JSON face slow serialization, no built-in contract enforcement, and no streaming support. gRPC fundamentals solve this by providing a contract-first RPC framework with protobuf serialization, HTTP/2 transport, bidirectional streaming, and code generation for both server and client stubs.",
         "why_it_exists": "gRPC exists because microservices need an efficient, contract-driven RPC framework. REST/JSON requires manual documentation of endpoints, request/response schemas, and error handling. gRPC generates client and server code from a .proto definition, ensuring the contract is always in sync between services. HTTP/2 multiplexing allows multiple RPCs over a single TCP connection, reducing latency and connection overhead.",
@@ -1668,7 +1763,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -1704,7 +1801,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -1730,8 +1830,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-10."
       ],
-      "prerequisites": ["elective-10"],
-      "next_item_ids": ["elective-12"],
+      "prerequisites": [
+        "elective-10"
+      ],
+      "next_item_ids": [
+        "elective-12"
+      ],
       "zero_magic": {
         "problem_solved": "Unary RPCs (single request, single response) are insufficient for real-time data feeds, large result sets, or long-lived connections. gRPC streaming solves this with three streaming patterns: server-streaming (one request, many responses), client-streaming (many requests, one response), and bidirectional streaming (many requests, many responses) — all over a single HTTP/2 connection.",
         "why_it_exists": "gRPC streaming exists because many applications need continuous data flow rather than discrete request-response cycles. Server-streaming enables pagination and real-time updates (log tailing, event feeds). Client-streaming enables batch uploads and data aggregation. Bidirectional streaming enables chat, collaborative editing, and live data synchronization. HTTP/2's multiplexed streams make all three patterns efficient with a single TCP connection.",
@@ -1832,7 +1936,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -1868,7 +1974,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -1894,8 +2003,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-11."
       ],
-      "prerequisites": ["elective-11"],
-      "next_item_ids": ["elective-13"],
+      "prerequisites": [
+        "elective-11"
+      ],
+      "next_item_ids": [
+        "elective-13"
+      ],
       "zero_magic": {
         "problem_solved": "gRPC services need cross-cutting concerns — logging, authentication, rate limiting, error handling — for every RPC. Adding these to every handler duplicates code and is easy to miss on new endpoints. gRPC interceptors solve this by providing middleware hooks that run before (or after) every RPC, keeping handlers focused on business logic.",
         "why_it_exists": "gRPC interceptors exist because RPC handlers should contain business logic, not cross-cutting infrastructure. Without interceptors, every handler must implement auth checks, logging, metrics, and error handling. Interceptors provide a clean chain: incoming RPC passes through interceptors before reaching the handler, and the response passes through interceptors on the way back.",
@@ -1996,7 +2109,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -2032,7 +2147,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -2058,8 +2176,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-12."
       ],
-      "prerequisites": ["elective-12"],
-      "next_item_ids": ["elective-14"],
+      "prerequisites": [
+        "elective-12"
+      ],
+      "next_item_ids": [
+        "elective-14"
+      ],
       "zero_magic": {
         "problem_solved": "Go developers must choose between REST and gRPC when designing service APIs, but the decision is rarely clear-cut. REST is human-readable, browser-friendly, and has universal tooling. gRPC is faster, contract-enforced, and supports streaming. Choosing incorrectly leads to poor developer experience, performance bottlenecks, or maintenance overhead.",
         "why_it_exists": "REST vs gRPC tradeoffs exist because no single API protocol is optimal for all scenarios. REST excels for public APIs, browser clients, and CRUD operations where human readability and ecosystem tooling matter. gRPC excels for internal microservice communication, real-time streaming, and high-performance scenarios where efficiency and contract enforcement are critical. Understanding the tradeoffs helps developers choose the right protocol for each use case.",
@@ -2159,7 +2281,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -2195,7 +2319,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -2221,8 +2348,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-13."
       ],
-      "prerequisites": ["elective-13"],
-      "next_item_ids": ["elective-15"],
+      "prerequisites": [
+        "elective-13"
+      ],
+      "next_item_ids": [
+        "elective-15"
+      ],
       "zero_magic": {
         "problem_solved": "Go's built-in map type is not safe for concurrent use — concurrent reads and writes cause a fatal runtime panic. Using a sync.Mutex to protect map access adds contention that slows down read-heavy workloads. sync.Map solves this with an optimized concurrent map that uses an atomic read path for the common case and a write-locked path for mutations.",
         "why_it_exists": "sync.Map exists because concurrent map access patterns are common in Go: cache maps (read-mostly, write-occasionally), configuration maps (read-often, write-rarely), and registration maps (written once, read many times). A sync.Mutex-protected map acquires the lock on every read, even when no write is happening. sync.Map optimizes for the read-heavy case with an atomic read path that avoids locking entirely.",
@@ -2325,7 +2456,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -2361,7 +2494,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -2387,8 +2523,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-14."
       ],
-      "prerequisites": ["elective-14"],
-      "next_item_ids": ["elective-16"],
+      "prerequisites": [
+        "elective-14"
+      ],
+      "next_item_ids": [
+        "elective-16"
+      ],
       "zero_magic": {
         "problem_solved": "Go applications that allocate many short-lived objects (buffers, structs for serialization) put pressure on the garbage collector, increasing GC pause time and reducing throughput. sync.Pool solves this by reusing objects across goroutines, reducing allocation frequency and GC pressure.",
         "why_it_exists": "sync.Pool exists because memory allocation is expensive — each allocation requires heap management, and the GC must scan and free the allocated objects. sync.Pool caches temporary objects for reuse, amortizing the allocation cost across multiple uses. It is optimized for the common case where objects are used briefly and can be reset to their zero state between uses.",
@@ -2490,7 +2630,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -2526,7 +2668,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -2552,8 +2697,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-15."
       ],
-      "prerequisites": ["elective-15"],
-      "next_item_ids": ["elective-17"],
+      "prerequisites": [
+        "elective-15"
+      ],
+      "next_item_ids": [
+        "elective-17"
+      ],
       "zero_magic": {
         "problem_solved": "CRUD-based architectures use the same data model for reads and writes, causing contention when read-heavy and write-heavy workloads compete for the same tables. Complex queries require joins across multiple tables, slowing down read performance. CQRS solves this by separating read and write models into independent paths, each optimized for its specific workload.",
         "why_it_exists": "CQRS exists because read and write workloads have fundamentally different requirements. Writes need transactional integrity, validation, and normalized data. Reads need denormalized projections, fast lookups, and minimal joins. Sharing a single model forces compromises on both. CQRS allows each side to be optimized independently: the write side uses event sourcing or normalized tables; the read side uses denormalized projections or materialized views.",
@@ -2657,7 +2806,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -2693,7 +2844,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -2719,8 +2873,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-16."
       ],
-      "prerequisites": ["elective-16"],
-      "next_item_ids": ["elective-18"],
+      "prerequisites": [
+        "elective-16"
+      ],
+      "next_item_ids": [
+        "elective-18"
+      ],
       "zero_magic": {
         "problem_solved": "Deploying a new feature requires merging code and redeploying, making it impossible to test in production or roll back without another deployment. Feature flags solve this by allowing features to be toggled at runtime without redeployment — enabling gradual rollouts, A/B testing, and instant kill switches.",
         "why_it_exists": "Feature flags exist because deployment and feature release are separate concerns. A feature may be fully implemented and deployed but not ready for all users. Feature flags allow: gradual rollouts (1% → 10% → 100% of users), A/B testing (variant A vs variant B), operational kill switches (disable a feature instantly if it causes errors), and environment-specific behavior (enable in staging, disable in production).",
@@ -2823,7 +2981,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -2859,7 +3019,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -2885,8 +3048,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-17."
       ],
-      "prerequisites": ["elective-17"],
-      "next_item_ids": ["elective-19"],
+      "prerequisites": [
+        "elective-17"
+      ],
+      "next_item_ids": [
+        "elective-19"
+      ],
       "zero_magic": {
         "problem_solved": "Rolling updates minimize downtime but can cause issues when a bad deployment is gradually rolled out — some users see the bad version while others see the good version, and rollback takes multiple cycles. Blue/green deployments solve this by maintaining two identical environments and switching traffic instantly — deployment is either fully on the new version or fully on the old version.",
         "why_it_exists": "Blue/green deployments exist because zero-downtime deployments must be instant and fully reversible. Rolling updates take minutes to complete, during which two versions coexist — if the new version has a database migration incompatibility, the window between the old and new versions causes data corruption. Blue/green switches traffic instantly: the new environment is fully deployed and tested before any traffic reaches it. Rollback is a single switch back to the old environment.",
@@ -2990,7 +3157,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -3026,7 +3195,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -3052,8 +3224,12 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-18."
       ],
-      "prerequisites": ["elective-18"],
-      "next_item_ids": ["elective-20"],
+      "prerequisites": [
+        "elective-18"
+      ],
+      "next_item_ids": [
+        "elective-20"
+      ],
       "zero_magic": {
         "problem_solved": "Monolith applications become difficult to maintain as they grow — deployment takes hours, a single bug affects all features, and teams step on each other's code. Microservice splitting solves this by dividing the monolith into independently deployable services owned by separate teams, each with its own data store and deployment pipeline.",
         "why_it_exists": "Microservice splitting exists because organizations with multiple teams cannot effectively develop and deploy a single monolith. Dependencies between teams create coordination overhead, deployment coordination becomes a bottleneck, and a single failing component can take down the entire application. Splitting into services allows each team to own, develop, and deploy their service independently.",
@@ -3156,7 +3332,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -3192,7 +3370,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -3218,7 +3399,9 @@
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): elective-19."
       ],
-      "prerequisites": ["elective-19"],
+      "prerequisites": [
+        "elective-19"
+      ],
       "next_item_ids": [],
       "zero_magic": {
         "problem_solved": "Distributed systems fail in ways that single-process systems do not: network partitions, partial failures, clock skew, and cascading failures. Go developers building distributed services need to understand these failure modes and the patterns that mitigate them — consensus, consistency models, circuit breakers, and idempotency.",
@@ -3322,7 +3505,9 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "rubric_ids": ["rubric-module-16"]
+        "rubric_ids": [
+          "rubric-module-16"
+        ]
       },
       "content_contract": {
         "readme_required": true,
@@ -3358,7 +3543,10 @@
         "diagram_paths": []
       },
       "source_legacy_ids": [],
-      "tags": ["elective", "reference"],
+      "tags": [
+        "elective",
+        "reference"
+      ],
       "documentation_mode": "reference",
       "readme_status": "scaffolded",
       "zero_magic_status": "placeholder",
@@ -3371,7 +3559,9 @@
   ],
   "path": {
     "entry_item_id": "elective-01",
-    "terminal_item_ids": ["elective-20"],
+    "terminal_item_ids": [
+      "elective-20"
+    ],
     "ordered_item_ids": [
       "elective-01",
       "elective-02",
@@ -3395,7 +3585,9 @@
       "elective-20"
     ],
     "required_for_core": false,
-    "recommended_after": ["core-16-15"],
+    "recommended_after": [
+      "core-16-15"
+    ],
     "notes": "Electives are optional deepening tracks. They may reference the core path but must never block the core path."
   },
   "quality_gates": [
