@@ -51,15 +51,19 @@ go run ./06-backend-db/01-web-and-database/http-servers/10-rest-api-exercise
 ## Solution Walkthrough
 
 ### The `TaskStore`
+
 Notice the use of `sync.RWMutex`. This is critical because HTTP handlers run concurrently. If two requests try to write to the `tasks` map at the same time, the program will crash with a "concurrent map write" error. The `RWMutex` allows multiple readers to look at the list but only one writer to modify it.
 
 ### `TaskAPI` Struct
+
 We group our handlers onto a struct. This allows them to share access to the `TaskStore` without using global variables, making the code easier to test and maintain.
 
 ### Helper Functions
+
 `respondJSON` and `respondError` reduce boilerplate. In a real project, these might be moved to a shared `internal/api` package.
 
 ### Graceful Shutdown
+
 We include the full signal-handling logic from `HS.8` to ensure that even a complex API like this can exit cleanly without losing data that might be in the middle of being processed.
 
 ## Try It
@@ -84,9 +88,11 @@ When you run this exercise, the process starts a real HTTP server and waits for 
 The automated test suite uses `httptest` to cover the handlers directly. That keeps `go test ./...` fast and deterministic instead of launching a long-running server process.
 
 ## In Production
+
 In a real production environment, you would never store your data in an in-memory map. If the server restarts, all data is lost! In the following modules (Section 06 / Databases), you will learn how to replace this `TaskStore` with a real SQLite or PostgreSQL database.
 
 ## Thinking Questions
+
 1. Why is `sync.RWMutex` better than a regular `sync.Mutex` for a task list?
 2. How would you handle a situation where two people try to update the same task at the same time? (Optimistic Locking).
 3. What are the benefits of grouping handlers on a struct instead of using top-level functions?

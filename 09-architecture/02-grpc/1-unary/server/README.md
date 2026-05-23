@@ -41,9 +41,11 @@ go run ./09-architecture/02-grpc/1-unary/server
 ## Code Walkthrough
 
 ### Implementing the Interface
+
 Shows how the generated Go code creates an interface, and how you must satisfy it by creating a struct with matching methods.
 
 ### Starting the Listener
+
 Demonstrates how to open a TCP listener and start the gRPC server.
 
 ## Try It
@@ -53,9 +55,11 @@ Demonstrates how to open a TCP listener and start the gRPC server.
 3. Discuss: How does a gRPC server handle concurrent requests? (Hint: It's similar to `net/http`).
 
 ## In Production
+
 **Always use Interceptors.** Interceptors are the gRPC equivalent of middleware. Use them for logging, authentication (SEC.4), and monitoring. Never implement your business logic directly in the gRPC layer; call a Service Layer (ARCH.5) instead.
 
 ## Thinking Questions
+
 1. What is the difference between a Unary call and a standard HTTP REST call?
 2. Why does gRPC require HTTP/2?
 3. How do you handle "Timeouts" on the server side?

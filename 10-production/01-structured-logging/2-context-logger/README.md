@@ -48,12 +48,15 @@ go run ./10-production/01-structured-logging/2-context-logger
 ## Code Walkthrough
 
 ### Injecting into Context
+
 Shows how to create a custom key and use `context.WithValue` to store a unique Request ID.
 
 ### The Context-Aware Middleware
+
 Demonstrates a real-world pattern where an HTTP middleware generates a Request ID for every incoming request and stores it in the context.
 
 ### The Logger Interceptor
+
 Shows a simple `slog.Handler` wrapper that extracts the ID from the context and adds it as a top-level attribute to every log record.
 
 ## Try It
@@ -63,9 +66,11 @@ Shows a simple `slog.Handler` wrapper that extracts the ID from the context and 
 3. Discuss: Why should you avoid putting large objects (like a full `User` struct) into the context for logging?
 
 ## In Production
+
 **Don't rely on global variables.** In a concurrent Go server, global variables will be shared across all requests, leading to data races and incorrect logs. Always pass the `context.Context` through your function signatures. This is the "Standard Go Way" to handle per-request state.
 
 ## Thinking Questions
+
 1. Why doesn't `slog` automatically support context values out of the box?
 2. What is the performance cost of extracting values from a context for every log line?
 3. How do you handle "Sensitive" context values that should never be logged?

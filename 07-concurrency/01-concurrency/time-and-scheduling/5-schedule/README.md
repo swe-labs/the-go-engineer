@@ -46,15 +46,19 @@ go run ./07-concurrency/01-concurrency/time-and-scheduling/5-schedule
 ## Code Walkthrough
 
 ### `ScheduleInterval`
+
 This method creates a background goroutine that uses a `select` statement to toggle between a `time.Ticker` (for work) and a `stopChan` (for cleanup).
 
 ### `StopTask`
+
 This demonstrates how to "Signal" a background goroutine to stop. By calling `close(task.stopChan)`, all goroutines listening to that channel are instantly unblocked, allowing them to return gracefully.
 
 ### The Global WaitGroup
+
 We `Add(1)` to the `globalWg` for every task spawned and `Done()` only when the goroutine exits. This ensures the main program can wait for full completion.
 
 ### Thread-Safe Map
+
 Notice the `mu.Lock()` and `mu.Unlock()` around every access to the `tasks` map. This is non-negotiable for any shared state in Go.
 
 ## Try It
@@ -79,10 +83,12 @@ Running test...
 ```
 
 ## In Production
+
 **Don't build your own scheduler for critical business logic.**
 While this exercise is excellent for learning concurrency patterns, for production-grade background jobs, use battle-tested libraries like `robfig/cron` or distributed task queues like `Asynq` or `Temporal`. Home-grown schedulers are difficult to scale across multiple server instances.
 
 ## Thinking Questions
+
 1. Why do we need both a `globalWg` and a task-specific `wg`?
 2. Why is `close(chan)` used for the stop signal instead of sending a value like `ch <- true`?
 3. How would you modify the scheduler to persist tasks to a database so they survive a server restart?

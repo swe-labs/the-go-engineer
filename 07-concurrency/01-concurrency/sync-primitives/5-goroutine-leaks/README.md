@@ -30,6 +30,7 @@ graph TD
 ## Machine View
 
 In Go, a goroutine is extremely cheap (starting at ~2KB of stack space), but it is **not free**.
+
 - If a goroutine is blocked on a channel send/receive that will never complete, the Garbage Collector **cannot** clean it up.
 - The stack, the local variables, and the goroutine's control structure (`g` struct) remain in the heap indefinitely.
 - **Detection**: Use `runtime.NumGoroutine()` to monitor the count. In a healthy service, this number should remain stable or fluctuate within a range. If it only goes up, you have a leak.
@@ -43,12 +44,15 @@ go run ./07-concurrency/01-concurrency/sync-primitives/5-goroutine-leaks
 ## Code Walkthrough
 
 ### The Blocked Sender
+
 In `leakGenerator`, we create an unbuffered channel and try to send to it inside a goroutine. Since no one ever reads from that channel, the goroutine is suspended forever. It will never return, and its memory will never be reclaimed.
 
 ### The Context Pattern
+
 In `safeWorker`, we use a `select` statement to listen to a `context.Context`. This is the professional standard for goroutine management. When the parent calls `cancel()`, the worker receives the signal and returns immediately.
 
 ### Monitoring
+
 `runtime.NumGoroutine()` is your best friend in production. Most Go monitoring tools (like Prometheus or Datadog) track this metric automatically.
 
 ## Try It
@@ -75,13 +79,16 @@ Final Goroutines: 2 (Leaked remains, safe exited)
 ```
 
 ## In Production
+
 **Never start a goroutine without a shutdown plan.**
 The #1 rule of Go concurrency is: **Know when a goroutine will stop.** If you can't point to the line of code that will cause the goroutine to return, you have a bug. Common leak sources include:
+
 - Blocked sends on unbuffered channels.
 - `for range` loops on channels that are never closed.
 - Infinite `for { select {} }` loops without a cancellation case.
 
 ## Thinking Questions
+
 1. Why can't the Go Garbage Collector detect that a goroutine is "stuck" and kill it?
 2. How does a goroutine leak affect the performance of the surviving goroutines?
 3. What is the difference between a goroutine leak and a memory leak?

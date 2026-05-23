@@ -28,14 +28,14 @@ That means the real engineering hazards are not "how do I write SQL in Go?" but:
 
 ## Learning Path
 
-| ID | Lesson | Concept | Requires |
-| --- | --- | --- | --- |
-| `DB.1` | [connecting](./1-connecting-to-db) | blank imports, `sql.Open`, `db.Ping`, connection pools | entry |
-| `DB.2` | [query - INSERT](./2-query) | `db.Exec`, `?` parameters, `LastInsertId`, bcrypt | `DB.1` |
-| `DB.3` | [query - SELECT](./3-select) | `QueryRow`, `Query`, `rows.Scan`, `rows.Close`, `rows.Err` | `DB.1`, `DB.2` |
-| `DB.4` | [prepared statements](./4-prepare) | `db.Prepare`, `ExecContext`, statement reuse | `DB.2`, `DB.3` |
-| `DB.5` | [transactions](./5-transactions) | `BeginTx`, `defer Rollback`, `Commit`, ACID consistency | `DB.1`, `DB.2`, `DB.3` |
-| `DB.6` | [repository pattern project](./6-repository) | interface-driven data access, transactions, model mapping | `DB.1`, `DB.2`, `DB.3`, `DB.4`, `DB.5` |
+| ID     | Lesson                                       | Concept                                                    | Requires                               |
+| ------ | -------------------------------------------- | ---------------------------------------------------------- | -------------------------------------- |
+| `DB.1` | [connecting](./1-connecting-to-db)           | blank imports, `sql.Open`, `db.Ping`, connection pools     | entry                                  |
+| `DB.2` | [query - INSERT](./2-query)                  | `db.Exec`, `?` parameters, `LastInsertId`, bcrypt          | `DB.1`                                 |
+| `DB.3` | [query - SELECT](./3-select)                 | `QueryRow`, `Query`, `rows.Scan`, `rows.Close`, `rows.Err` | `DB.1`, `DB.2`                         |
+| `DB.4` | [prepared statements](./4-prepare)           | `db.Prepare`, `ExecContext`, statement reuse               | `DB.2`, `DB.3`                         |
+| `DB.5` | [transactions](./5-transactions)             | `BeginTx`, `defer Rollback`, `Commit`, ACID consistency    | `DB.1`, `DB.2`, `DB.3`                 |
+| `DB.6` | [repository pattern project](./6-repository) | interface-driven data access, transactions, model mapping  | `DB.1`, `DB.2`, `DB.3`, `DB.4`, `DB.5` |
 
 ## Suggested Order
 

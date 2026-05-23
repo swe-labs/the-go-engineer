@@ -13,7 +13,7 @@ By the end of this section, the learner should be able to explain:
 - how memory is divided and managed
 - how the terminal launches programs
 - how the OS manages processes
-Later sections return to performance and concurrency details:
+  Later sections return to performance and concurrency details:
 
 - `PR.6` covers why memory layout matters
 - `GC.0` explains why concurrency exists
@@ -21,13 +21,13 @@ Later sections return to performance and concurrency details:
 
 ## Section Map
 
-| ID | Type | Surface | Core Job |
-| --- | --- | --- | --- |
-| `HC.1` | Lesson | [what-is-a-program](./1-what-is-a-program) | fetch-decode-execute cycle and instruction model |
-| `HC.2` | Lesson | [code-to-execution](./2-code-to-execution) | source -> tokens -> AST -> IR -> binary |
-| `HC.3` | Lesson | [memory-basics](./3-memory-basics) | stack, heap, GC, and escape analysis |
-| `HC.4` | Lesson | [terminal-confidence](./4-terminal-confidence) | shell, stdout/stderr, and command flow |
-| `HC.5` | Lesson | [os-processes](./5-os-processes) | processes, signals, threads, and file descriptors |
+| ID     | Type   | Surface                                        | Core Job                                          |
+| ------ | ------ | ---------------------------------------------- | ------------------------------------------------- |
+| `HC.1` | Lesson | [what-is-a-program](./1-what-is-a-program)     | fetch-decode-execute cycle and instruction model  |
+| `HC.2` | Lesson | [code-to-execution](./2-code-to-execution)     | source -> tokens -> AST -> IR -> binary           |
+| `HC.3` | Lesson | [memory-basics](./3-memory-basics)             | stack, heap, GC, and escape analysis              |
+| `HC.4` | Lesson | [terminal-confidence](./4-terminal-confidence) | shell, stdout/stderr, and command flow            |
+| `HC.5` | Lesson | [os-processes](./5-os-processes)               | processes, signals, threads, and file descriptors |
 
 ## How To Use This Section
 

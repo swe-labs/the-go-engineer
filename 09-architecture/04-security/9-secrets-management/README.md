@@ -46,9 +46,11 @@ go run ./09-architecture/04-security/9-secrets-management
 ## Code Walkthrough
 
 ### Loading from Environment
+
 Shows how to use `os.Getenv` with a fallback for local development. Demonstrates the "Fail-fast" pattern: if a required secret (like `DB_PASSWORD`) is missing, the application should crash immediately with a clear error.
 
 ### The "Log Leak" Danger
+
 Shows how a simple `fmt.Printf("%+v", config)` can accidentally leak an API key to the console or a log file. Demonstrates how to use a custom `String()` method or a "Redacted" type to prevent this.
 
 ## Try It
@@ -58,9 +60,11 @@ Shows how a simple `fmt.Printf("%+v", config)` can accidentally leak an API key 
 3. Discuss: If you accidentally commit a secret to Git, is it enough to just delete the line and make a new commit? (Hint: Check the Git history).
 
 ## In Production
+
 **Git is forever.** If you ever commit a secret, consider it compromised. Rotate the secret immediately. In production, use your cloud provider's secret manager (AWS Secrets Manager, GCP Secret Manager, Azure Key Vault) or a dedicated tool like HashiCorp Vault. Never hard-code "test" credentials in your source code.
 
 ## Thinking Questions
+
 1. Why are Environment Variables better than hard-coded strings?
 2. What is "Secret Rotation," and why is it important?
 3. How can you use a `.gitignore` file to protect your team?

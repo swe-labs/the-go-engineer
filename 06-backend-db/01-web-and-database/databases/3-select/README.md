@@ -33,6 +33,7 @@ graph LR
 ## Machine View
 
 When you call `db.Query`, the database doesn't send the entire result set at once. Instead, it creates a **Server-Side Cursor** and starts streaming rows as you call `rows.Next()`.
+
 - **Resource Lock**: As long as the `rows` object is open, the underlying network connection is "Reserved." It cannot be returned to the connection pool for other queries to use.
 - **Scanning**: The `rows.Scan` function uses reflection to match the database's binary format to Go's internal types (like `string` or `time.Time`).
 - **Post-Iteration Errors**: `rows.Err()` is vital because `rows.Next()` might return `false` because of a network failure, not because the data actually ended.
@@ -48,15 +49,19 @@ The example will insert dummy users and then print them back to the console.
 ## Code Walkthrough
 
 ### `db.Query` vs `db.QueryRow`
+
 Use `Query` for 0 or more results. Use `QueryRow` when you expect exactly one (like looking up by ID). `QueryRow` is a shortcut that automatically handles the first `Next()` and `Close()` calls for you.
 
 ### `defer rows.Close()`
+
 This is the most important line in database code. It ensures that no matter how your function exits (success, error, or panic), the database connection is released.
 
 ### `rows.Scan(&a, &b, ...)`
+
 The arguments to `Scan` must be pointers to the variables where you want the data stored. The order **must** match the columns in your `SELECT` statement exactly.
 
 ### `sql.ErrNoRows`
+
 `QueryRow` returns this specific error if no matching record was found. You should almost always check for this explicitly to provide a better user experience (e.g., returning a 404 instead of a 500).
 
 ## Try It
@@ -66,9 +71,11 @@ The arguments to `Scan` must be pointers to the variables where you want the dat
 3. Try to scan a column into the wrong variable type (e.g., a `string` into an `int`) and see the error.
 
 ## In Production
+
 For very large result sets (e.g., 1,000,000 rows), do not load them all into a slice in memory. Instead, process each row inside the `rows.Next()` loop and then move on. This keeps your memory usage constant regardless of the result size.
 
 ## Thinking Questions
+
 1. Why must the arguments to `rows.Scan` be pointers?
 2. What happens to the database connection if you forget to call `rows.Close()`?
 3. Why is it necessary to check `rows.Err()` after the loop finishes?

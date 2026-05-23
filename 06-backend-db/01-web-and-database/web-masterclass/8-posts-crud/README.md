@@ -31,11 +31,12 @@ graph TD
 ## Machine View
 
 In a professional CRUD system, we strictly follow RESTful conventions:
+
 - **POST**: Create a new resource. The server should return a `201 Created` status code and the ID of the new resource.
 - **GET**: Retrieve a resource or a list of resources.
 - **PUT/PATCH**: Update an existing resource.
 - **DELETE**: Remove a resource.
-Each operation uses the database context properly. For example, the `Get` operation uses `QueryRowContext` because we expect exactly one result. The `List` operation uses `QueryContext` to stream multiple rows.
+  Each operation uses the database context properly. For example, the `Get` operation uses `QueryRowContext` because we expect exactly one result. The `List` operation uses `QueryContext` to stream multiple rows.
 
 ## Run Instructions
 
@@ -44,6 +45,7 @@ go run ./06-backend-db/01-web-and-database/web-masterclass/8-posts-crud
 ```
 
 Use `curl` to interact with the API:
+
 - Create: `curl -X POST -d '{"title":"Hello","content":"World"}' http://localhost:8087/api/posts`
 - List: `curl http://localhost:8087/api/posts`
 - Get: `curl http://localhost:8087/api/posts/1`
@@ -51,16 +53,21 @@ Use `curl` to interact with the API:
 ## Code Walkthrough
 
 ### Repository Abstraction
-The `PostRepository` interface is the heart of the system. It defines exactly what we can do with posts without specifying *how* they are stored. This makes the code much easier to test and maintain.
+
+The `PostRepository` interface is the heart of the system. It defines exactly what we can do with posts without specifying _how_ they are stored. This makes the code much easier to test and maintain.
 
 ### JSON Decoding
+
 We use `json.NewDecoder(r.Body).Decode(&input)` to parse incoming JSON directly from the request stream. This is more memory-efficient than reading the entire body into a string first.
 
 ### Path Parameter Extraction
+
 We use `r.PathValue("id")` and `strconv.Atoi()` to safely extract and convert the resource ID from the URL.
 
 ### Status Code Discipline
+
 We use specific HTTP status codes:
+
 - `201 Created` for successful creation.
 - `400 Bad Request` for invalid input (e.g., malformed JSON).
 - `404 Not Found` for resources that don't exist.
@@ -73,10 +80,12 @@ We use specific HTTP status codes:
 3. Add an `Author` field to the `Post` struct and update the database schema and queries to support it.
 
 ## In Production
+
 **Don't forget pagination.**
 As your blog grows to thousands of posts, a simple `SELECT * FROM posts` will become incredibly slow and could crash your server. Always implement limits and offsets (Pagination) for any route that returns a list of resources.
 
 ## Thinking Questions
+
 1. Why do we separate the Repository from the Handlers?
 2. What is the benefit of returning a `201 Created` status code instead of a simple `200 OK`?
 3. How would you handle a scenario where two users try to update the same post at the exact same time?

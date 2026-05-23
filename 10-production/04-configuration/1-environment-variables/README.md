@@ -48,12 +48,15 @@ graph LR
 ## Code Walkthrough
 
 ### Fetching Values
+
 Shows the basic usage of `os.Getenv` for simple string values.
 
 ### Handling Defaults
+
 Demonstrates the pattern of checking if a value is empty and assigning a safe default if it is.
 
 ### Lookup vs Getenv
+
 Shows when to use `LookupEnv` to verify that a required configuration was explicitly provided by the user.
 
 ## Try It
@@ -63,9 +66,11 @@ Shows when to use `LookupEnv` to verify that a required configuration was explic
 3. Discuss: Why are environment variables preferred over hardcoded strings for database passwords?
 
 ## In Production
+
 **Document your variables.** Every environment variable your application uses should be listed in a `README.md` or an `.env.example` file. Use **Fail-Fast** logic: if a critical variable like `DATABASE_URL` is missing, the application should call `log.Fatal` immediately on startup. Never assume a "default" for a production database.
 
 ## Thinking Questions
+
 1. What is the difference between `os.Getenv` and `os.LookupEnv`?
 2. Why are environment variables better than command-line flags for secrets?
 3. How do you handle environment variables that contain structured data (like a list of IDs)?

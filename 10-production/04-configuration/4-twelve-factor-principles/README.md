@@ -34,7 +34,7 @@ graph TD
 
 ## Machine View
 
-- **Code/Config Separation**: The core rule. If you can't open-source your application *right now* without leaking a secret, you are violating this principle.
+- **Code/Config Separation**: The core rule. If you can't open-source your application _right now_ without leaking a secret, you are violating this principle.
 - **Backing Services**: Treat a local MySQL and a managed AWS RDS as the same thing: a URL in an environment variable.
 - **Logs as Streams**: A Go app should never manage its own log files (rotation, compression). It should simply write to `Stdout`, and let the execution environment (Docker/K8s) handle the rest (Track SL).
 
@@ -48,12 +48,15 @@ go run ./10-production/04-configuration/4-twelve-factor-principles
 ## Code Walkthrough
 
 ### Environment-Based Config
+
 Demonstrates the use of `os.Getenv` as the primary configuration mechanism.
 
 ### Service Attachment
+
 Shows how to represent a "Backing Service" as a simple connection string injected at runtime.
 
 ### The Immutable Build
+
 Discusses why the binary should never be modified once it is compiled (Build -> Release -> Run).
 
 ## Try It
@@ -63,9 +66,11 @@ Discusses why the binary should never be modified once it is compiled (Build -> 
 3. Discuss: Why does the 12-Factor app suggest using environment variables instead of config files? (Hint: Portability and standard OS support).
 
 ## In Production
+
 **Don't be a zealot.** The 12-Factor principles were written in 2011. While the core idea (Config in Env) is still valid, modern practices sometimes favor **Config Maps** (Files) in Kubernetes for complex structures. The spirit is what matters: **Portability and Separation**. If your app is hard to deploy because it requires a "Magic File" in a specific folder, you are doing it wrong.
 
 ## Thinking Questions
+
 1. Why is "Store config in the environment" the most famous of the 12 factors?
 2. What does it mean to treat a database as an "Attached Resource"?
 3. How does the "Build, Release, Run" principle improve deployment safety?

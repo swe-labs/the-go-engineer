@@ -55,13 +55,13 @@ Beginner sections stay concrete. Later sections add design trade-offs, failure m
 
 ## Phase Blueprint
 
-| Phase | Sections | Required emphasis |
-| --- | --- | --- |
-| 0 | s00 | machine model, terminal confidence, execution basics |
-| 1 | s01-s04 | syntax, control flow, data structures, functions, errors, types |
-| 2 | s05-s08 | packages, I/O, APIs, databases, concurrency, tests, profiling |
-| 3 | s09-s10 | architecture, security, production operations |
-| 4 | s11 | integrated system design through Opslane |
+| Phase | Sections | Required emphasis                                               |
+| ----- | -------- | --------------------------------------------------------------- |
+| 0     | s00      | machine model, terminal confidence, execution basics            |
+| 1     | s01-s04  | syntax, control flow, data structures, functions, errors, types |
+| 2     | s05-s08  | packages, I/O, APIs, databases, concurrency, tests, profiling   |
+| 3     | s09-s10  | architecture, security, production operations                   |
+| 4     | s11      | integrated system design through Opslane                        |
 
 ## Canonical Lesson Contract
 

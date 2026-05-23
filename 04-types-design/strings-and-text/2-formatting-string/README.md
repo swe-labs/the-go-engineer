@@ -68,9 +68,11 @@ This wraps one error with additional context while preserving the underlying cau
 3. Wrap a different error with `fmt.Errorf`.
 
 ## In Production
+
 Readable output is operationally important. Logs, CLI tools, diagnostics, and user-facing errors all depend on deliberate formatting choices. Small formatting improvements often make debugging dramatically easier.
 
 ## Thinking Questions
+
 1. Why is `%+v` often more useful than `%v` while debugging structs?
 2. When do you want `Sprintf` instead of `Printf`?
 3. Why is error wrapping better than replacing the original error text entirely?

@@ -15,7 +15,7 @@ Learn how Go builds larger types from smaller reusable parts through composition
 
 Composition is a "has-a" relationship.
 
-Instead of saying one type *is* another type, Go says a type can *contain* other types as fields. Each inner type keeps responsibility for its own behavior.
+Instead of saying one type _is_ another type, Go says a type can _contain_ other types as fields. Each inner type keeps responsibility for its own behavior.
 
 ## Visual Model
 
@@ -65,9 +65,11 @@ The same `GPSLocation` component gets reused in a completely different parent ty
 3. Rename one composed field and update the call sites.
 
 ## In Production
+
 Composition is one of the main reasons Go code stays decoupled. Reusable components like config, metadata, stats, and identity blocks can be shared across many types without inheritance hierarchies.
 
 ## Thinking Questions
+
 1. Why is named-field composition easier to reason about than inheritance trees?
 2. What does explicit field access tell the reader?
 3. Why is reusing the same component type across different parents powerful?

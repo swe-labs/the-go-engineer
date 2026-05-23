@@ -32,6 +32,7 @@ graph TD
 ## Machine View
 
 In Go's `hchan` struct, `close()` sets a `closed` flag to 1.
+
 - **Receivers**: Any goroutines currently blocked on `recvq` are immediately unparked and receive the zero value.
 - **Senders**: Any goroutine trying to send to a closed channel will **panic** immediately. This is because a send to a closed channel is considered a logical bug in your concurrent design.
 - **Garbage Collection**: Channels are eventually cleaned up by the GC even if you don't close them. Closing is for **communication**, not for memory management.
@@ -45,12 +46,15 @@ go run ./07-concurrency/01-concurrency/goroutines/5-channels-closing
 ## Code Walkthrough
 
 ### `range` Loop
+
 The `for val := range ch` loop is the idiomatic way to consume a channel. It automatically stops as soon as the channel is closed and emptied.
 
 ### The Comma-OK Pattern
+
 `value, ok := <-ch` allows you to manually check if a channel is still open. If `ok` is false, the channel is closed and `value` is the zero value of the type.
 
 ### Broadcast Shutdown
+
 A closed channel unblocks **all** receivers. This is a powerful pattern for graceful shutdown: one close signal can tell 1,000 workers to stop immediately.
 
 ## Try It
@@ -82,13 +86,15 @@ Observe the two patterns for detection and the broadcast signal at the end:
 ```
 
 ## In Production
+
 **Only close from the sender side.**
 If you have multiple senders, closing is more complex (you might need a `sync.Once` or a coordinator). If you have one sender and multiple receivers, closing is the perfect way to say "I'm done sending."
 
 ## Thinking Questions
+
 1. Why does Go return the zero value of the type after a channel is closed?
 2. What happens if you try to close a channel that is already closed?
-3. In what scenario would you *not* want to close a channel?
+3. In what scenario would you _not_ want to close a channel?
 
 ## Next Step
 

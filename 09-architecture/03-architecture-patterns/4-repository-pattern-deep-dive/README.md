@@ -43,9 +43,11 @@ go run ./09-architecture/03-architecture-patterns/4-repository-pattern-deep-dive
 ## Code Walkthrough
 
 ### The "Anemic" Repository (Anti-pattern)
+
 Shows a repository that just wraps SQL. If you change a column name, you have to change both the DB and the Service. This is a sign of a bad abstraction.
 
 ### The "Domain" Repository
+
 Shows a repository that returns a fully-formed Aggregate. The Service doesn't know about SQL or database drivers.
 
 ## Try It
@@ -55,9 +57,11 @@ Shows a repository that returns a fully-formed Aggregate. The Service doesn't kn
 3. Discuss: If you use an ORM (like GORM), do you still need a Repository pattern?
 
 ## In Production
+
 **Don't create a repository for every table.** Create a repository for every **Aggregate Root**. If an `Order` has many `Items`, you don't need an `ItemRepository`. You should access `Items` through the `OrderRepository`. This maintains the consistency rules defined in your Domain (ARCH.2).
 
 ## Thinking Questions
+
 1. Why should a repository interface be defined in the Domain layer?
 2. How do you handle "Pagination" in a Repository pattern?
 3. What is the difference between a "Repository" and a "Data Access Object (DAO)"?

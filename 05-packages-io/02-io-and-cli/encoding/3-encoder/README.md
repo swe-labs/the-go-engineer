@@ -35,12 +35,15 @@ go run ./05-packages-io/02-io-and-cli/encoding/3-encoder
 ## Code Walkthrough
 
 ### `json.NewEncoder(w)`
+
 Initializes a new encoder that will write to the provided `io.Writer` (e.g., `os.Stdout`, an `os.File`, or an `http.ResponseWriter`).
 
 ### `enc.SetIndent(prefix, indent)`
+
 Configures the encoder to produce "pretty-printed" JSON. This is similar to `json.MarshalIndent`.
 
 ### `enc.Encode(v)`
+
 Serializes the value `v` and writes it to the underlying stream, followed by a newline character (`\n`). This behavior makes the Encoder perfect for generating **JSONL (JSON Lines)** files.
 
 ## Try It
@@ -50,9 +53,11 @@ Serializes the value `v` and writes it to the underlying stream, followed by a n
 3. Compare the time taken to marshal a large slice versus encoding it directly to a file (for very large slices, the memory savings will be obvious).
 
 ## In Production
+
 For production APIs, `json.NewEncoder(w).Encode(v)` is the standard way to return JSON responses. It keeps your server's memory footprint low and predictable, which is essential for scaling under heavy load.
 
 ## Thinking Questions
+
 1. When would you prefer `json.Marshal` over `json.NewEncoder`?
 2. What is "JSON Lines" (JSONL) format, and why is it useful for logging?
 3. How does the Encoder handle large slices of data?

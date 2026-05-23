@@ -43,9 +43,11 @@ go test -v ./08-quality-test/01-quality-and-performance/testing/10-golden-files
 ## Code Walkthrough
 
 ### The `testdata` Pattern
+
 Shows how to read a file from the `testdata` directory and compare its contents against the actual result of a function.
 
 ### Handling Diffs
+
 Demonstrates how to provide a human-readable diff (using a library or simple logic) when the output doesn't match the golden file, making it easy to see what broke.
 
 ## Try It
@@ -55,9 +57,11 @@ Demonstrates how to provide a human-readable diff (using a library or simple log
 3. (Advanced) Implement an `-update` flag in the test to automatically refresh the golden file.
 
 ## In Production
+
 Golden files are a double-edged sword. They are very easy to write, but they can lead to "Lazy Testing" where developers just update the golden file without actually checking if the new output is correct. **Always review the diff** before updating a golden file. They are best suited for stable outputs where any change is significant.
 
 ## Thinking Questions
+
 1. Why are golden files better than hard-coded strings for large outputs?
 2. How do you handle "Non-deterministic" data (like timestamps or random IDs) in a golden file?
 3. Should golden files be checked into Version Control (Git)?

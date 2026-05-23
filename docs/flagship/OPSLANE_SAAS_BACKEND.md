@@ -508,13 +508,13 @@ A learner who completes Opslane should be able to:
 
 ## Recommended Build Order
 
-| Week | Modules | Focus |
-| --- | --- | --- |
-| 1 | 1-2 | server shell, config, database, models |
-| 2 | 3-4 | authentication, tenant flow, API surfaces |
-| 3 | 5-6 | order workflow and payment simulation |
-| 4 | 7-8 | async processing and caching |
-| 5 | 9-10 | observability, shutdown, deployment |
+| Week | Modules | Focus                                     |
+| ---- | ------- | ----------------------------------------- |
+| 1    | 1-2     | server shell, config, database, models    |
+| 2    | 3-4     | authentication, tenant flow, API surfaces |
+| 3    | 5-6     | order workflow and payment simulation     |
+| 4    | 7-8     | async processing and caching              |
+| 5    | 9-10    | observability, shutdown, deployment       |
 
 ---
 

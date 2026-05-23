@@ -36,12 +36,15 @@ go run ./05-packages-io/02-io-and-cli/filesystem/5-embed
 ## Code Walkthrough
 
 ### `//go:embed` Directive
+
 Placed immediately above a variable declaration. It tells the compiler which files to include. Note that you must import the `embed` package (even if just with `_ "embed"`) for the directive to work.
 
 ### Embedding as `string` or `[]byte`
+
 The simplest way to embed a single file. Go automatically converts the file contents into the target type.
 
 ### `embed.FS`
+
 A virtual filesystem that can hold multiple files and directories. It implements the standard `io/fs` interfaces, meaning you can use it with many other Go packages (like `html/template` or `http.FileServer`) as if it were a real disk directory.
 
 ## Try It
@@ -51,9 +54,11 @@ A virtual filesystem that can hold multiple files and directories. It implements
 3. Use `staticFiles.ReadDir` to list all the files you've embedded in the `public` directory.
 
 ## In Production
+
 Embedding increases the size of your binary. If you embed a 100MB video file, your executable will be at least 100MB larger. For very large assets, traditional disk storage or a CDN is still preferred. However, for configuration defaults, SQL migration files, and web templates, embedding is the professional standard in Go.
 
 ## Thinking Questions
+
 1. Why does embedding make deployment easier?
 2. What are the limitations of what can be embedded (e.g., can you embed files from a parent directory)?
 3. How would you use `embed.FS` to serve a static website from a single Go binary?

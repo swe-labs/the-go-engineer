@@ -10,7 +10,7 @@ You know how to define functions and how to orchestrate them. But up to this poi
 
 In Go, functions are "first-class citizens." This means they are treated like any other value (like an `int` or a `string`). You can assign them to variables, pass them into other functions, and even return them from functions. This unlocks powerful patterns like callbacks and higher-order functions.
 
-> **Backward Reference:** In [Lesson 6: Orchestration](../6-orchestration/README.md), you hardcoded the exact helpers that `processCart` called. First-class functions let you pass the behavior *into* the function dynamically, rather than hardcoding it.
+> **Backward Reference:** In [Lesson 6: Orchestration](../6-orchestration/README.md), you hardcoded the exact helpers that `processCart` called. First-class functions let you pass the behavior _into_ the function dynamically, rather than hardcoding it.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ calculate(10, 4, subtract) -> 6
 
 ## Machine View
 
-A function value still points at compiled code. Passing it around moves a callable reference (a pointer to the function's code in memory), not a magical new execution model. 
+A function value still points at compiled code. Passing it around moves a callable reference (a pointer to the function's code in memory), not a magical new execution model.
 
 When you pass a function as an argument, Go is simply copying that reference. The caller can then execute the code at that reference using standard parentheses `()`.
 
@@ -53,7 +53,7 @@ go run ./03-functions-errors/8-first-class-functions
 
 ### `var mathFunc func(int, int) int`
 
-This declares a variable named `mathFunc`. But instead of an `int` or a `string`, its type is a function signature: `func(int, int) int`. This variable can hold *any* function that takes two integers and returns one integer.
+This declares a variable named `mathFunc`. But instead of an `int` or a `string`, its type is a function signature: `func(int, int) int`. This variable can hold _any_ function that takes two integers and returns one integer.
 
 ### `mathFunc = add`
 
@@ -85,14 +85,15 @@ This is an **anonymous function**. We define a function without a name directly 
 
 - Can any function be assigned to any variable?
   No. The function signature (parameters and return types) must match exactly.
-  
 - Why not just use an `if` statement to choose the operation?
-  Passing functions makes your code much more flexible. A library author can write `calculate` and let *you* provide the custom math operations.
+  Passing functions makes your code much more flexible. A library author can write `calculate` and let _you_ provide the custom math operations.
 
 ## In Production
+
 Callback-driven APIs stay readable only when function signatures are narrow and the names reveal the job each callback performs. Use first-class functions to make your code flexible, but don't overcomplicate simple branching logic.
 
 ## Thinking Questions
+
 1. What problem does this topic solve?
 2. What breaks if this boundary is handled implicitly instead of explicitly?
 3. Where would you expect to use this topic in production Go code?

@@ -37,11 +37,13 @@ go run ./05-packages-io/02-io-and-cli/cli-tools/1-args
 ```
 
 Try passing arguments:
+
 ```bash
 go run ./05-packages-io/02-io-and-cli/cli-tools/1-args hello world
 ```
 
 Try setting an environment variable:
+
 ```bash
 GREETING=Howdy go run ./05-packages-io/02-io-and-cli/cli-tools/1-args
 ```
@@ -49,12 +51,15 @@ GREETING=Howdy go run ./05-packages-io/02-io-and-cli/cli-tools/1-args
 ## Code Walkthrough
 
 ### `os.Args`
+
 The primary way to read inputs. Remember that `os.Args[0]` is always the path to the executable itself.
 
 ### `os.Getenv`
+
 Used to read environment variables. It returns an empty string if the variable is not set. For mission-critical variables (like database passwords), you should check if the result is empty and handle it appropriately.
 
 ### `os.Exit`
+
 Exits the program immediately with a status code. `0` indicates success, while non-zero values indicate various types of errors. Note that `defer` statements are **not** executed when `os.Exit` is called.
 
 ## Try It
@@ -64,9 +69,11 @@ Exits the program immediately with a status code. `0` indicates success, while n
 3. Add a check for a required environment variable (e.g., `APP_ENV`) and exit with an error if it's missing.
 
 ## In Production
+
 For complex CLI tools, raw `os.Args` can become difficult to manage. For simple flags, use the `flag` package (Lesson 2). For large CLI applications with many commands and nested flags, industry-standard libraries like `cobra` are preferred.
 
 ## Thinking Questions
+
 1. Why is `os.Args[0]` included in the slice instead of just starting with the first user argument?
 2. What are the security implications of reading sensitive data from command-line arguments (which might show up in process lists like `ps`)?
 3. When should you use an environment variable instead of a command-line argument?

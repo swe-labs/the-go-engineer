@@ -50,13 +50,16 @@ go run ./07-concurrency/02-concurrency-patterns/2-errgroup-context
 ## Code Walkthrough
 
 ### `errgroup.WithContext`
+
 This is the standard way to initialize an `errgroup` in production. It ensures that your goroutines aren't "islands"-they are part of a coordinated fleet.
 
 ### The Producer/Consumer Pattern
+
 - **Producer**: Generates work and sends it to a channel. It MUST listen to `ctx.Done()` to stop generating work if a consumer fails.
 - **Consumer**: Pulls work from the channel and processes it. It MUST listen to `ctx.Done()` before starting every task.
 
 ### `err != context.Canceled`
+
 When checking the error from `g.Wait()`, it is common to ignore `context.Canceled`. This is because one goroutine's error caused the others to be cancelled; the "Cancellation" is a symptom, not the root cause.
 
 ## Try It
@@ -78,10 +81,12 @@ WARN producer cancelled reason="context canceled" sent=4
 ```
 
 ## In Production
+
 **Propagate the Context.**
 Always pass the context down to the lowest-level I/O operations (like `sql.QueryContext` or `http.NewRequestWithContext`). If your consumers perform I/O without passing the context, they cannot be cancelled, and they will stay blocked on a network socket while the rest of the system is shutting down.
 
 ## Thinking Questions
+
 1. Why does `errgroup` cancel the context only on the **first** error?
 2. What happens if you use a context that was already cancelled as the parent for `errgroup.WithContext`?
 3. How does this pattern help prevent "Cascading Failures" in a microservice architecture?

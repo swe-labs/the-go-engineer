@@ -37,6 +37,7 @@ graph TD
     A["many values"] --> B["one collection type"]
     B --> C["read or update by position or key"]
 ```
+
 ```text
 numbers := [2]int{1, 2}
 
@@ -158,13 +159,16 @@ That is the real lesson outcome.
   Because array size is part of the type in Go.
 
 ## In Production
+
 You will not model most dynamic collections with arrays, but the value-copy rule matters whenever
 you reason about what gets copied and what stays shared.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
+
 ## Next Step
 
 Continue to `DS.2` slices.

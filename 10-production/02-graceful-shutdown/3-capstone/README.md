@@ -37,7 +37,7 @@ graph TD
 
 - **Dependency Order**: Resources must be closed in the **Reverse Order** they were opened. If your Service depends on the DB, you must stop the Service before you close the DB.
 - **ErrGroup**: A powerful abstraction that allows you to start multiple goroutines and wait for all of them to finish. It also handles the "First Error" propagation.
-- **Readiness Probes**: In Kubernetes, a failing readiness probe tells the service mesh (like Istio) or the load balancer to stop sending new traffic to this specific instance *before* it starts shutting down.
+- **Readiness Probes**: In Kubernetes, a failing readiness probe tells the service mesh (like Istio) or the load balancer to stop sending new traffic to this specific instance _before_ it starts shutting down.
 
 ## Run Instructions
 
@@ -50,7 +50,7 @@ go run ./10-production/02-graceful-shutdown/3-capstone
 
 - **The Shutdown Coordinator**: Demonstrates how to use `signal.NotifyContext` and `errgroup` to manage the entire lifecycle.
 - **The Readiness Handler**: Shows a simple atomic flag that can be toggled to signal to the outside world that the service is shutting down.
-- **The Dependency Sequence**: Walks through the logic that ensures the Database is only closed *after* the HTTP server and workers are done using it.
+- **The Dependency Sequence**: Walks through the logic that ensures the Database is only closed _after_ the HTTP server and workers are done using it.
 
 ## Try It
 
@@ -64,10 +64,12 @@ go run ./10-production/02-graceful-shutdown/3-capstone
 - Starter path: `10-production/02-graceful-shutdown/3-capstone/_starter`.
 
 ## In Production
+
 **Test your shutdown sequence!** Many teams write perfect startup logic but never actually test what happens during a `SIGTERM`. Use a load-testing tool (like `k6` or `hey`) to send traffic to your service while you trigger a restart. If you see any 5xx errors, your graceful shutdown is broken.
 
 ## Thinking Questions
-1. Why must the Readiness Probe fail *before* the HTTP server starts shutting down?
+
+1. Why must the Readiness Probe fail _before_ the HTTP server starts shutting down?
 2. What is the "Termination Grace Period" in Kubernetes, and why does it matter?
 3. How do you handle a background worker that refuses to stop?
 

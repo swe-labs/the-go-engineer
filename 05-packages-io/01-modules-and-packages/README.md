@@ -18,12 +18,12 @@ This track belongs to [05 Packages & IO](../README.md).
 
 ## Track Map
 
-| ID | Type | Surface | Why It Matters | Requires |
-| --- | --- | --- | --- | --- |
-| `MP.1` | Lesson | [module basics](./1-module-basics) | Explains what `go.mod` and `go.sum` actually do. | entry |
-| `MP.2` | Lesson | [managing deps](./2-managing-deps) | Shows how to add, inspect, trim, and explain dependencies. | `MP.1` |
-| `MP.3` | Exercise | [versioning workshop](./3-versioning) | Combines semantic versioning, `/v2` imports, and `replace`. | `MP.1`, `MP.2` |
-| `MP.4` | Stretch Lesson | [build tags](./4-build-tags) | Adds conditional compilation once the module workflow is stable. | `MP.1`, `MP.2` |
+| ID     | Type           | Surface                               | Why It Matters                                                   | Requires       |
+| ------ | -------------- | ------------------------------------- | ---------------------------------------------------------------- | -------------- |
+| `MP.1` | Lesson         | [module basics](./1-module-basics)    | Explains what `go.mod` and `go.sum` actually do.                 | entry          |
+| `MP.2` | Lesson         | [managing deps](./2-managing-deps)    | Shows how to add, inspect, trim, and explain dependencies.       | `MP.1`         |
+| `MP.3` | Exercise       | [versioning workshop](./3-versioning) | Combines semantic versioning, `/v2` imports, and `replace`.      | `MP.1`, `MP.2` |
+| `MP.4` | Stretch Lesson | [build tags](./4-build-tags)          | Adds conditional compilation once the module workflow is stable. | `MP.1`, `MP.2` |
 
 ## Suggested Order
 

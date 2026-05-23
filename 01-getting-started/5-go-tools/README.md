@@ -15,6 +15,7 @@ Writing code is only half the job. Engineering is about maintaining that code. G
 ## Mental Model
 
 Think of these tools as your "automated senior engineer":
+
 1. `go fmt`: Fixes your style.
 2. `go vet`: Catches suspicious logic.
 3. `go doc`: Explains how things work.
@@ -63,9 +64,11 @@ You can run `go doc fmt.Println` to see documentation for any standard library f
 3. Run `go doc fmt.Printf` in your terminal.
 
 ## In Production
+
 Never commit code that hasn't been through `go fmt`. Most teams enforce this in their CI/CD pipelines. Using `go vet` is also mandatory to catch common mistakes before they reach production.
 
 ## Thinking Questions
+
 1. Why does having a single standard format (`go fmt`) reduce "bikeshedding" in code reviews?
 2. What kind of errors can `go vet` find that the compiler might miss?
 3. Why is it useful to have documentation available in the terminal via `go doc`?

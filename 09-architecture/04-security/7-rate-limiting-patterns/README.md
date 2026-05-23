@@ -44,12 +44,15 @@ go run ./09-architecture/04-security/7-rate-limiting-patterns
 ## Code Walkthrough
 
 ### Global Rate Limiting
+
 Shows a simple middleware that limits the entire server to 10 requests per second.
 
 ### Per-User Rate Limiting
+
 Demonstrates a more advanced pattern where each User (identified by their API Key or IP address) has their own individual bucket. This prevents one malicious user from blocking everyone else.
 
 ### The 429 Response
+
 Shows how to return a `429 Too Many Requests` status code and a `Retry-After` header, which tells the client when they can try again.
 
 ## Try It
@@ -59,9 +62,11 @@ Shows how to return a `429 Too Many Requests` status code and a `Retry-After` he
 3. Discuss: Why should you use an IP-based rate limit for your "Login" page?
 
 ## In Production
+
 **Rate limit your most expensive endpoints.** Auth checks, search queries, and database writes are prime targets for abuse. Always monitor your "429" error rates; if they are too high, your limits might be too strict for your legitimate users. In a production environment, you often offload rate limiting to your **API Gateway** (e.g., Kong, NGINX, or AWS WAF) before the request even reaches your Go code.
 
 ## Thinking Questions
+
 1. What is the difference between "Hard Limiting" and "Soft Limiting" (Throttling)?
 2. How do you handle "Distributed Rate Limiting" without creating a bottleneck in Redis?
 3. What is a "Leaky Bucket" algorithm, and how does it differ from a "Token Bucket"?

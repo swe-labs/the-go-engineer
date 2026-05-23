@@ -39,6 +39,7 @@ go run ./06-backend-db/01-web-and-database/http-servers/5-response-writing-patte
 ```
 
 Check the responses in your browser or terminal:
+
 ```bash
 # Observe the JSON structure and Headers
 curl -i http://localhost:8084/user
@@ -47,27 +48,33 @@ curl -i http://localhost:8084/user
 ## Code Walkthrough
 
 ### Setting Headers
+
 Use `w.Header().Set("Key", "Value")`. The most common header in modern APIs is `Content-Type: application/json`.
 
 ### `w.WriteHeader(int)`
+
 Explicitly sets the HTTP status code. If you don't call this, Go defaults to `200 OK` as soon as you call `Write()`.
 
 ### `json.NewEncoder(w).Encode(v)`
+
 Streams the JSON representation of `v` directly into the `ResponseWriter`. It's faster and more memory-efficient than `json.Marshal`.
 
 ### The `APIResponse` Wrapper
+
 It is a best practice to wrap your data in a standard object. This allows you to add metadata (like messages or pagination info) without changing the shape of your domain models.
 
 ## Try It
 
 1. Create a helper function `RespondWithJSON(w, code, data)` to automate the header setting and encoding process.
 2. Add a `CreatedAt` timestamp to the `User` struct and see how it is formatted in the JSON output.
-3. Try setting a header *after* calling `w.WriteHeader(http.StatusNotFound)` and see if it appears in the client response.
+3. Try setting a header _after_ calling `w.WriteHeader(http.StatusNotFound)` and see if it appears in the client response.
 
 ## In Production
+
 Always handle encoding errors. While rare, `json.NewEncoder.Encode` can fail (e.g., if the data contains a circular reference). If it fails, your response might be partially written, which is difficult for clients to handle. For mission-critical responses, some engineers prefer `json.Marshal` first to ensure the JSON is valid before starting the HTTP write.
 
 ## Thinking Questions
+
 1. Why must headers be set before status codes?
 2. What is the benefit of the `omitempty` tag in the `APIResponse` struct?
 3. How would you handle responding with different formats (JSON vs XML) based on the client's `Accept` header?

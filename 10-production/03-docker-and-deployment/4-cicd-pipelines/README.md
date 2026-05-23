@@ -52,12 +52,15 @@ go test -v ./...
 ## Code Walkthrough
 
 ### The Pipeline Definition
+
 Shows a sample GitHub Actions workflow for a Go project.
 
 ### Quality Gates
+
 Demonstrates how to make the pipeline fail if test coverage drops below a certain percentage.
 
 ### Multi-Environment Strategy
+
 Explains how to deploy to "Staging" automatically but require a manual approval for "Production."
 
 ## Try It
@@ -68,9 +71,11 @@ Explains how to deploy to "Staging" automatically but require a manual approval 
 4. Discuss: Why should you never deploy code that hasn't passed through a CI pipeline?
 
 ## In Production
-**Test in the same environment you run.** Your CI pipeline should build the Docker image and then run your **Integration Tests** *against that image*. If you run tests on your local machine's Go version but deploy a different version in Docker, you risk "It works on CI but fails in Production" bugs.
+
+**Test in the same environment you run.** Your CI pipeline should build the Docker image and then run your **Integration Tests** _against that image_. If you run tests on your local machine's Go version but deploy a different version in Docker, you risk "It works on CI but fails in Production" bugs.
 
 ## Thinking Questions
+
 1. What is the difference between Continuous Delivery and Continuous Deployment?
 2. Why is "Failing Fast" important in a CI pipeline?
 3. How do you handle database migrations in an automated pipeline?

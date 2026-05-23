@@ -46,17 +46,21 @@ go run ./07-concurrency/01-concurrency/time-and-scheduling/3-timer-and-ticker
 ## Code Walkthrough
 
 ### `time.NewTimer(duration)`
+
 Creates a timer that will send a single value to `timer.C` after the duration. It is more flexible than `time.Sleep` because you can **Stop** or **Reset** it before it fires.
 
 ### `time.NewTicker(duration)`
+
 Creates a ticker that sends the time to `ticker.C` repeatedly at the given interval. It's the standard way to implement "Heartbeats" or "Background Cleanup" tasks in Go.
 
 ### The `for range` Pattern
+
 The most idiomatic way to use a Ticker is with a `for range` loop:
 `for t := range ticker.C { ... }`
 This loop will execute once every tick.
 
 ### `ticker.Stop()`
+
 Always `defer ticker.Stop()`. This tells the runtime to remove the ticker from its internal heap, stopping the background work immediately.
 
 ## Try It
@@ -83,10 +87,12 @@ stopped
 ```
 
 ## In Production
+
 **Don't use `time.After` in a loop.**
 `time.After(duration)` is a convenience function that creates a new Timer every time it's called. If you call it inside a high-frequency loop (like an HTTP handler), you will create thousands of timers that stay in the runtime heap until they expire, even if the request is already finished. **Always use a reusable `time.Timer` or `time.Ticker` in long-running loops.**
 
 ## Thinking Questions
+
 1. Why does a Ticker send the current `time` to the channel instead of just an empty struct?
 2. What is the difference between `time.Sleep(1s)` and `<-time.After(1s)`?
 3. How can you use a `select` statement to listen to both a Ticker and a Cancellation Context?

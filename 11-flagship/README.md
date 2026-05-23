@@ -13,8 +13,8 @@ By the end of this stage, a learner should be able to:
 
 ## Required Flagship Path
 
-| Project | Module Path | Core Job |
-| --- | --- | --- |
+| Project   | Module Path         | Core Job                                                     |
+| --------- | ------------------- | ------------------------------------------------------------ |
 | `Opslane` | `OPSL.1 -> OPSL.10` | integrated SaaS backend with explicit module-by-module proof |
 
 ## Suggested Learning Flow

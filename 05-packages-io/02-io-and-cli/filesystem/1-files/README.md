@@ -40,15 +40,19 @@ go run ./05-packages-io/02-io-and-cli/filesystem/1-files
 ## Code Walkthrough
 
 ### `os.WriteFile` and `os.ReadFile`
+
 These are helper functions for the 90% case where you just want to dump data to a file or read it all back. They handle the opening, closing, and error checking internally.
 
 ### `os.Open` and `os.Create`
+
 These return an `*os.File` object, which represents an open file handle. You use these when you need more control, like reading line-by-line or writing incrementally.
 
 ### `bufio.Scanner`
+
 Wraps a file handle and provides a convenient `Scan()` method to read the file one line at a time. It uses a fixed-size buffer (default 64KB), making it safe for files of any size.
 
 ### `os.OpenFile` with Flags
+
 Allows you to specify exactly how the file should be opened. Common flags include `O_APPEND` (to add to the end) and `O_CREATE` (to make the file if it doesn't exist).
 
 ## Try It
@@ -58,9 +62,11 @@ Allows you to specify exactly how the file should be opened. Common flags includ
 3. Try to read a file that doesn't exist and observe the error message.
 
 ## In Production
+
 **Resource Leaks** are a common cause of production crashes. If you open a file in a loop and forget to close it, your program will eventually hit the "Too many open files" limit and crash. Always use `defer` for cleanup. Also, be mindful of file permissions (0644 for data files, 0755 for executables/directories) to ensure your app is secure.
 
 ## Thinking Questions
+
 1. Why is it dangerous to use `os.ReadFile` on a multi-gigabyte log file?
 2. What is a "File Descriptor," and why is it a finite resource?
 3. What happens if you try to write to a file opened with `os.O_RDONLY`?

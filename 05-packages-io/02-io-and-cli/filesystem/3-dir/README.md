@@ -47,15 +47,19 @@ go run ./05-packages-io/02-io-and-cli/filesystem/3-dir
 ## Code Walkthrough
 
 ### `os.MkdirAll`
+
 The safest way to create directories. It ensures the entire path exists, creating any missing parent folders along the way. It is **idempotent**, meaning it won't return an error if the directory already exists.
 
 ### `os.ReadDir`
+
 Lists the contents of a single directory. It returns a slice of `DirEntry` objects, which contain the filename and whether it's a directory or a regular file.
 
 ### `filepath.WalkDir`
+
 The powerhouse of filesystem navigation. You provide a root path and a callback function. Go will then call your function for every single file and folder it finds under that root. You can even tell it to skip specific subtrees by returning `filepath.SkipDir`.
 
 ### `os.Stat` and `os.IsNotExist`
+
 The standard way to check if a file or folder exists. `os.Stat` returns information about a file; if the file is missing, it returns an error. You then use `os.IsNotExist(err)` to confirm that the error was specifically "not found."
 
 ## Try It
@@ -65,9 +69,11 @@ The standard way to check if a file or folder exists. `os.Stat` returns informat
 3. Write a function that checks if a directory exists and creates it only if it's missing.
 
 ## In Production
+
 Directory traversal can be slow if the tree is very deep or stored on a network drive. When using `WalkDir`, be mindful of performance. Also, always handle errors in your callback-permission denied errors are common when walking system directories. Finally, use `os.RemoveAll` with extreme caution; it is destructive and cannot be undone.
 
 ## Thinking Questions
+
 1. Why is `os.MkdirAll` usually preferred over `os.Mkdir`?
 2. What is the difference between `os.ReadDir` and `filepath.WalkDir`?
 3. How would you stop a `WalkDir` traversal as soon as you find the file you're looking for?

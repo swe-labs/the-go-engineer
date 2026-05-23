@@ -44,15 +44,19 @@ Once running, open your browser to `http://localhost:8080`.
 ## Code Walkthrough
 
 ### `http.ServeMux`
+
 The "Multiplexer". It matches incoming URL paths to specific handler functions. In Go, the `/` pattern matches everything, so it's often used as a catch-all root handler.
 
 ### `http.HandlerFunc`
+
 A clever type conversion. It allows you to use a regular function with the signature `func(w http.ResponseWriter, r *http.Request)` as an HTTP handler.
 
 ### `http.ResponseWriter`
+
 This is what you use to send data back to the client. You can set status codes with `w.WriteHeader()`, set headers with `w.Header().Set()`, and send the body with `w.Write()`.
 
 ### `http.ListenAndServe`
+
 The function that starts the engine. It blocks the main goroutine and keeps the program running until the server is shut down or an error occurs.
 
 ## Try It
@@ -62,9 +66,11 @@ The function that starts the engine. It blocks the main goroutine and keeps the 
 3. Try sending a request to a path that isn't registered (e.g., `/random`) and see how the `ServeMux` handles it.
 
 ## In Production
+
 While `http.ListenAndServe` is great for learning, in production you should use `http.Server` struct directly to set **Timeouts**. A server without timeouts can be easily taken down by "Slowloris" attacks where clients open connections but never send data. We will cover this in `HS.7`.
 
 ## Thinking Questions
+
 1. Why does Go start a new goroutine for every request?
 2. What happens if two routes overlap (e.g., `/` and `/health`)?
 3. How does `http.ResponseWriter` handle cases where you forget to set a status code?

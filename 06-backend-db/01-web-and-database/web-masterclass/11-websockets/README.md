@@ -46,15 +46,19 @@ Open `http://localhost:8090` in your browser. Type a message and watch the serve
 ## Code Walkthrough
 
 ### `websocket.Upgrader`
+
 This struct handles the heavy lifting of switching from HTTP to the WebSocket protocol. We configure things like buffer sizes and which domains are allowed to connect (`CheckOrigin`).
 
 ### `conn.ReadMessage()`
+
 This function blocks until a message is received from the client. It returns the message type (Text or Binary) and the data as a byte slice.
 
 ### `conn.WriteMessage()`
+
 Sends data back to the client. Like reading, it requires a message type.
 
 ### The `for` Loop (The Message Pump)
+
 Because a WebSocket is persistent, we use an infinite loop to keep the handler alive. If `ReadMessage` returns an error (e.g., the user closed their browser), we `break` out of the loop and the connection is closed.
 
 ## Try It
@@ -64,10 +68,12 @@ Because a WebSocket is persistent, we use an infinite loop to keep the handler a
 3. Send a JSON object instead of a plain string and use `json.Unmarshal` on the server to parse it.
 
 ## In Production
+
 **Handle disconnects gracefully.**
 Users on mobile devices will constantly lose their internet connection. Your server must be able to detect "Zombie" connections that are still open but inactive, and your client-side code must be able to automatically reconnect when the internet returns.
 
 ## Thinking Questions
+
 1. Why are WebSockets more efficient than "Polling" (asking the server for updates every 5 seconds)?
 2. What happens to a WebSocket connection if your server restarts?
 3. When would you use WebSockets instead of a standard REST API?

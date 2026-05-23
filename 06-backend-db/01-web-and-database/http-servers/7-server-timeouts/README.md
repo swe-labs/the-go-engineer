@@ -38,6 +38,7 @@ go run ./06-backend-db/01-web-and-database/http-servers/7-server-timeouts
 ```
 
 Observe the timeout in action:
+
 ```bash
 # This will succeed instantly
 curl -i http://localhost:8086/fast
@@ -49,16 +50,20 @@ curl -i http://localhost:8086/slow
 ## Code Walkthrough
 
 ### `http.Server` Configuration
+
 Instead of using `http.ListenAndServe`, we create an instance of `http.Server`. This is where we define the global rules for our network listener.
 
 ### `ReadTimeout` vs `WriteTimeout`
+
 - **Read**: Starts from when the connection is accepted until the request body is fully read.
 - **Write**: Starts from the end of the request header read until the end of the response write.
 
 ### `http.TimeoutHandler`
+
 This middleware allows you to set a per-route or global deadline for your logic. It is safer than just using a context timeout because it also handles the HTTP response part (sending a 503) for you.
 
 ### Why default to 503?
+
 When a timeout occurs, the server cannot fulfill the request. `503 Service Unavailable` is the standard way to tell the client: "I'm too busy or taking too long, please try again later."
 
 ## Try It
@@ -68,9 +73,11 @@ When a timeout occurs, the server cannot fulfill the request. `503 Service Unava
 3. Observe what happens to the console logs when a `TimeoutHandler` triggers-does the slow logic stop immediately? (Hint: See the Context lesson in Section 07).
 
 ## In Production
+
 Timeouts are not "One Size Fits All". A file upload service might need a 10-minute `ReadTimeout`, while a high-frequency trading API might need a 10ms timeout. Always monitor your "p99" response times and set your timeouts slightly above your expected maximum latency to provide a safety margin without cutting off legitimate users.
 
 ## Thinking Questions
+
 1. What is the difference between a network timeout and a logic timeout?
 2. How can a single hanging request cause a "Cascading Failure" in a microservice architecture?
 3. Why does Go's `http.ListenAndServe` not include default timeouts?

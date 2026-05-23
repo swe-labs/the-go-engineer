@@ -18,11 +18,11 @@ Think of Package Naming as **Labeling Boxes in a Warehouse**.
 
 ## Visual Model
 
-| ❌ Bad Name | ✅ Good Name | Why? |
-| --- | --- | --- |
+| ❌ Bad Name      | ✅ Good Name            | Why?                                                |
+| ---------------- | ----------------------- | --------------------------------------------------- |
 | `util`, `common` | `json`, `path`, `email` | Utilities should be grouped by their actual domain. |
-| `interfaces` | `provider`, `service` | Don't name a package after a technical construct. |
-| `my_cool_pkg` | `coolpkg` | Go package names should be lowercase, single words. |
+| `interfaces`     | `provider`, `service`   | Don't name a package after a technical construct.   |
+| `my_cool_pkg`    | `coolpkg`               | Go package names should be lowercase, single words. |
 
 ## Machine View
 
@@ -40,9 +40,11 @@ go run ./09-architecture/01-package-design/1-naming
 ## Code Walkthrough
 
 ### Stuttering Example
+
 Shows why `user.UserService` is redundant compared to `user.Service`.
 
 ### Generic Package Example
+
 Shows how a `util` package becomes a "junk drawer" that makes dependency management difficult.
 
 ## Try It
@@ -52,9 +54,11 @@ Shows how a `util` package becomes a "junk drawer" that makes dependency managem
 3. Try to split the `util` package into two domain-specific packages (e.g., `math` and `stringutil`).
 
 ## In Production
+
 **Naming is a signal of design quality.** If you find it hard to name a package, it's often a sign that the package is doing too many unrelated things. A well-named package has a "Single Responsibility."
 
 ## Thinking Questions
+
 1. Why are `util` and `common` considered "code smells" in Go?
 2. Should a package name be plural (`users`) or singular (`user`)?
 3. How does package naming affect how you write documentation (GoDoc)?

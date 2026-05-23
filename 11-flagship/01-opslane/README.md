@@ -23,16 +23,16 @@ This project exists so the curriculum has one integrated system where earlier st
 
 ## Current Project Shape
 
-| Area | Role |
-| --- | --- |
-| `cmd/server` | runnable flagship server entrypoint |
-| `internal/auth` | password hashing, signed tokens, auth context, and tenant identity middleware |
-| `internal/config` | validated configuration loading and startup contract |
-| `internal/db` | PostgreSQL setup, migrations, repository contracts, and transaction seams |
-| `internal/models` | tenant-aware domain records for users, orders, and payments |
-| `Dockerfile` | packages the application for containerized execution |
-| `docker-compose.yml` | runs the application with PostgreSQL and the flagship API |
-| `internal/` | holds the application boundaries that later modules will deepen |
+| Area                 | Role                                                                          |
+| -------------------- | ----------------------------------------------------------------------------- |
+| `cmd/server`         | runnable flagship server entrypoint                                           |
+| `internal/auth`      | password hashing, signed tokens, auth context, and tenant identity middleware |
+| `internal/config`    | validated configuration loading and startup contract                          |
+| `internal/db`        | PostgreSQL setup, migrations, repository contracts, and transaction seams     |
+| `internal/models`    | tenant-aware domain records for users, orders, and payments                   |
+| `Dockerfile`         | packages the application for containerized execution                          |
+| `docker-compose.yml` | runs the application with PostgreSQL and the flagship API                     |
+| `internal/`          | holds the application boundaries that later modules will deepen               |
 
 ## Current Progress
 

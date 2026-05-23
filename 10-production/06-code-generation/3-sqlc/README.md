@@ -48,12 +48,15 @@ go run ./10-production/06-code-generation/3-sqlc
 ## Code Walkthrough
 
 ### The Schema Definition
+
 Shows how to organize your `.sql` files in a `schema/` directory for versioning.
 
 ### The Query Annotation
+
 Demonstrates the special comments (`-- name: GetUser :one`) that sqlc uses to name your Go functions.
 
 ### The Generated Output
+
 Explores the `internal/db` package and shows how to use the generated `Queries` object in your service logic.
 
 ## Try It
@@ -64,9 +67,11 @@ Explores the `internal/db` package and shows how to use the generated `Queries` 
 4. Discuss: Why does sqlc make it easier to refactor your database schema than using `db.Query("SELECT ...")` strings?
 
 ## In Production
+
 **Don't use sqlc for dynamic filtering.** sqlc is optimized for static, well-defined queries. If you need to build a query where 10 different search filters are optional and combined at runtime, you should use a **Query Builder** (like `squirrel` or `bob`) or write a custom function. Trying to force highly dynamic logic into sqlc often leads to unreadable SQL.
 
 ## Thinking Questions
+
 1. Why does `sqlc` need the schema files to generate code for the queries?
 2. How does using `sqlc` improve the performance of your application compared to an ORM?
 3. Where should you put the generated code in your project structure? (Hint: `internal/db`).

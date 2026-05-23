@@ -47,15 +47,18 @@ go run ./07-concurrency/01-concurrency/context/3-with-timeout
 ## Code Walkthrough
 
 ### `context.WithTimeout`
+
 This is the most common way to wrap a context. You provide a `time.Duration` (e.g., `5 * time.Second`). This is essentially a "Self-Destruct" timer for the request.
 
 ### `context.WithDeadline`
+
 Use this when you have a specific point in time (e.g., "The end of the current minute"). `WithTimeout(ctx, 10s)` is just shorthand for `WithDeadline(ctx, time.Now().Add(10s))`.
 
 ### Distinguishing Errors
+
 - `ctx.Err() == context.DeadlineExceeded`: The clock ran out.
 - `ctx.Err() == context.Canceled`: Someone manually called `cancel()`.
-Distinguishing these is critical for logging-one is an external bottleneck, the other is an internal intent.
+  Distinguishing these is critical for logging-one is an external bottleneck, the other is an internal intent.
 
 ## Try It
 
@@ -83,10 +86,12 @@ Observe the two outcomes (Success vs. Timeout):
 ```
 
 ## In Production
+
 **Never perform I/O without a timeout.**
 Whether it's a database query, an HTTP request to another service, or a disk read-**set a timeout**. A service without timeouts is a "Dead Man Walking." Eventually, a downstream dependency will hang, and your service will use up all its goroutines waiting for it, causing a cascading failure.
 
 ## Thinking Questions
+
 1. Why does `WithTimeout` still return a `cancel` function?
 2. What happens to a child context if you increase the timeout of the parent? (Hint: You can't!).
 3. How can you tell if a context has a deadline without calling `Deadline()`?

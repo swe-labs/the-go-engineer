@@ -71,10 +71,12 @@ It is a guided mental model of what the real compiler is doing.
 3. Compare `go run` with `go build` and explain what extra thing `go build` leaves behind.
 
 ## In Production
+
 Build artifacts matter.
 When you deploy Go, you deploy the compiled binary for the target OS and CPU architecture, not the source files.
 
 ## Thinking Questions
+
 1. Why is IR useful instead of compiling source text directly into machine instructions in one step?
 2. Why does compile-time type checking remove whole categories of runtime failures?
 3. If two source files produce the same AST, what differences between the files stop mattering to the compiler?

@@ -47,21 +47,25 @@ go build -gcflags="-m" ./08-quality-test/01-quality-and-performance/profiling/4-
 ## Code Walkthrough
 
 ### Returning a Pointer
+
 Shows how `return &x` forces `x` to escape to the heap because the value must exist after the function finishes.
 
 ### Interface Conversion
+
 Shows how passing a concrete type to an `interface{}` argument (like `fmt.Println(x)`) often causes `x` to escape, as the compiler can't always prove how the interface will be used.
 
 ## Try It
 
 1. Run the `go build -gcflags="-m"` command. Look for lines that say `escapes to heap`.
-2. Can you find a variable that *doesn't* escape?
+2. Can you find a variable that _doesn't_ escape?
 3. Modify the code to return a **Value** instead of a **Pointer** (`return x` instead of `return &x`). Run the check again. Does it still escape?
 
 ## In Production
+
 **Don't obsess over every escape.** Escape analysis is a compiler optimization. Sometimes the heap is the correct place for data. However, in "Hot Paths" (code that runs millions of times), reducing escapes can dramatically reduce CPU usage by giving the Garbage Collector less work to do.
 
 ## Thinking Questions
+
 1. Why does `fmt.Println` almost always cause its arguments to escape?
 2. Is a pointer always slower than a value?
 3. How can a very large array on the stack cause a "Stack Overflow"?

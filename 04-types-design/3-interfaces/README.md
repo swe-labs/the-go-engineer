@@ -28,6 +28,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```text
 +-----------------------+
 | Shape interface       |
@@ -47,6 +48,7 @@ graph TD
 ## Machine View
 
 An interface value is internally a 2-word struct:
+
 - Word 1: pointer to the type descriptor (what concrete type is stored)
 - Word 2: pointer to the data (the actual struct value)
 
@@ -91,9 +93,11 @@ Sometimes you need to extract the concrete type from an interface. Use the comma
   Use interfaces when you need polymorphism. Use concrete types when you need specificity.
 
 ## In Production
+
 Interfaces are Go's primary tool for abstraction and testing. They let you write code that depends on behavior, not concrete types. This is essential for dependency injection, mocking, and flexible API design.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

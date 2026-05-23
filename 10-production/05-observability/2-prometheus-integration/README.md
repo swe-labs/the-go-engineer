@@ -47,12 +47,15 @@ go run ./10-production/05-observability/2-prometheus-integration
 ## Code Walkthrough
 
 ### Defining the Registry
+
 Shows how to create a custom registry instead of using the global one (recommended for testing).
 
 ### The Metrics Endpoint
+
 Demonstrates attaching the `promhttp` handler to your HTTP mux.
 
 ### Practical Instrumenting
+
 Shows how to wrap an existing HTTP handler with a middleware that automatically tracks request counts and latencies.
 
 ## Try It
@@ -63,13 +66,15 @@ Shows how to wrap an existing HTTP handler with a middleware that automatically 
 4. Discuss: Why is the Prometheus format simple plain text instead of JSON?
 
 ## In Production
+
 **Don't put the metrics endpoint on the public internet.** Anyone who can access `/metrics` can see internal details about your system's performance and usage. Always put your metrics on a **Private Port** (e.g., `9090`) or protect them with internal network rules (IP allow-listing) or basic authentication.
 
 ## Thinking Questions
+
 1. What are the benefits of a Pull model over a Push model?
 2. How does Prometheus handle a target that is temporarily offline?
 3. Why should you avoid using the "Global" registry in a large, modular application?
 
 ## Next Step
 
-Metrics tell you *what* is happening. Tracing tells you *where* it's happening. Continue to [OPS.3 Distributed Tracing Basics](../3-distributed-tracing-basics).
+Metrics tell you _what_ is happening. Tracing tells you _where_ it's happening. Continue to [OPS.3 Distributed Tracing Basics](../3-distributed-tracing-basics).

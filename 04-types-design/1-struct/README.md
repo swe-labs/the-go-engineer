@@ -80,9 +80,11 @@ Access fields with dot notation: structVar.FieldName.
 3. Try accessing a field that was not initialized and observe the zero value.
 
 ## In Production
+
 Structs are the foundation of data modeling in Go. Every API request, database record, and configuration object is modeled as a struct. Understanding how to design structs is essential for writing real applications.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

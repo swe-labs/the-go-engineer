@@ -44,6 +44,7 @@ go tool pprof mem.prof
 ```
 
 Inside pprof:
+
 - `top`: See which functions own the most memory.
 - `list`: See line-by-line allocations.
 - `sample_index=alloc_space`: Switch to seeing total allocations (GC pressure).
@@ -52,6 +53,7 @@ Inside pprof:
 ## Code Walkthrough
 
 ### The "Leaky" Loop
+
 The code creates a scenario where memory is allocated but not released (e.g., appending to a global slice). The profile will highlight the `append` line as the source of growth.
 
 ## Try It
@@ -61,9 +63,11 @@ The code creates a scenario where memory is allocated but not released (e.g., ap
 3. Modify the code to clear the slice at the end of each iteration and see how the profile changes.
 
 ## In Production
+
 **Memory is the #1 cause of production crashes (OOM - Out of Memory).** A slow program is annoying; a crashed program is an outage. Regularly check heap profiles of your production services to ensure your memory usage is stable over time.
 
 ## Thinking Questions
+
 1. Why does high memory allocation (even without a leak) slow down a Go program?
 2. How can a small "Buffer" accidentally cause a large memory leak in Go? (Hint: Slicing a large array).
 3. What is the default sampling rate for the Go heap profiler?

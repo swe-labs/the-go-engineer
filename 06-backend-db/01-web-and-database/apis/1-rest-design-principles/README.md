@@ -14,10 +14,10 @@ Think of REST as **The Standard Library Catalog System**.
 
 1. **The Nouns (Resources)**: Every item in the library (Book, Author, Member) has a unique address (a URL).
 2. **The Actions (Verbs)**: You don't ask the librarian for "the-action-of-taking-a-book". Instead, you use a standard gesture:
-    - **GET**: Show me the book.
-    - **POST**: Add a new book to the shelf.
-    - **PUT**: Replace a damaged book with a new copy.
-    - **DELETE**: Remove the book from the collection.
+   - **GET**: Show me the book.
+   - **POST**: Add a new book to the shelf.
+   - **PUT**: Replace a damaged book with a new copy.
+   - **DELETE**: Remove the book from the collection.
 3. **Uniform Interface**: No matter which library you go to in the world, the "Search" and "Borrow" gestures are the same. This makes the system predictable.
 
 ## Visual Model
@@ -49,12 +49,16 @@ This lesson is a conceptual guide. Read the console output for a summary of nami
 ## Code Walkthrough
 
 ### Resources as Nouns
+
 In REST, the URL identifies **What** you are talking about, not **What you are doing**.
+
 - ❌ `/getUsers`
 - ✅ `/users`
 
 ### HTTP Verbs as Actions
+
 We use the underlying HTTP methods to describe the operation:
+
 - `GET`: Retrieve data (Safe, Idempotent).
 - `POST`: Create data (Non-idempotent).
 - `PUT`: Update/Replace data (Idempotent).
@@ -62,10 +66,13 @@ We use the underlying HTTP methods to describe the operation:
 - `DELETE`: Remove data (Idempotent).
 
 ### Idempotency
+
 An operation is **Idempotent** if performing it multiple times has the same effect as performing it once. `GET`, `PUT`, and `DELETE` should be idempotent. `POST` is not-calling it twice creates two resources.
 
 ### Status Codes
+
 Use the right tool for the job:
+
 - `200 OK`: Success.
 - `201 Created`: Successfully created a resource.
 - `400 Bad Request`: Client sent bad data.
@@ -81,9 +88,11 @@ Use the right tool for the job:
 3. Think about how you would handle an action that doesn't fit a noun (like `/login` or `/search`).
 
 ## In Production
+
 While "Pure REST" (HATEOAS) is a popular academic topic, most production APIs follow "Pragmatic REST." This means focus on clean URLs, correct verbs, and consistent JSON shapes, but don't obsess over hypermedia links unless your use case strictly requires it. **Consistency** is more important than "perfect" REST adherence.
 
 ## Thinking Questions
+
 1. Why is statelessness important for scaling a web server?
 2. When should you use `PUT` vs `PATCH`?
 3. Is it okay to use `GET` to delete a resource if it's easier to implement? (Hint: No! Think about web crawlers).

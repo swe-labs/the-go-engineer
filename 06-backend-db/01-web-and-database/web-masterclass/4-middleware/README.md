@@ -35,7 +35,8 @@ graph LR
 ## Machine View
 
 In Go, middleware relies on the fact that `http.Handler` is an interface with a single method: `ServeHTTP(ResponseWriter, *Request)`.
-- **The Wrapper**: A middleware function takes a `http.Handler` as input and returns a *new* `http.Handler` as output.
+
+- **The Wrapper**: A middleware function takes a `http.Handler` as input and returns a _new_ `http.Handler` as output.
 - **The Delegation**: The new handler does some work and then calls `next.ServeHTTP()`. This is how the request "moves down" the chain.
 - **The Return Path**: Once `next.ServeHTTP()` returns, the middleware can perform more work. This is where you calculate request latency or log the final status code.
 
@@ -50,15 +51,19 @@ Visit `http://localhost:8083` to see logs in your terminal. Visit `http://localh
 ## Code Walkthrough
 
 ### The Middleware Signature
+
 `func (next http.Handler) http.Handler` is the standard way to write middleware in Go. It's simple, powerful, and requires no external libraries.
 
 ### `http.HandlerFunc`
+
 We use this type-cast to turn an anonymous function into something that satisfies the `http.Handler` interface.
 
 ### `recover()`
+
 Used inside a `deferred` function to catch a panic. If a panic occurs, `recover()` returns the error value, allowing you to log it and return a friendly 500 error instead of letting the entire process exit.
 
 ### Middleware Chaining
+
 `handler := A(B(C(mux)))`. The outermost function (`A`) is the first to receive the request and the last to finish processing the response.
 
 ## Try It
@@ -68,10 +73,12 @@ Used inside a `deferred` function to catch a panic. If a panic occurs, `recover(
 3. Change the order of the middleware and observe how the logs change.
 
 ## In Production
+
 **Don't reinvent the wheel for standard middleware.**
 While writing your own middleware is a great way to learn, for production you should use well-tested libraries like **gorilla/handlers** or **chi/middleware** for complex tasks like CORS (Cross-Origin Resource Sharing) or Gzip compression.
 
 ## Thinking Questions
+
 1. Why should the `Recovery` middleware usually be near the "outside" of the chain?
 2. How can you pass data from a middleware down to a handler? (Hint: Look up `context.WithValue`).
 3. What is the performance cost of having 50 layers of middleware?

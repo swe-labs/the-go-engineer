@@ -30,6 +30,7 @@ graph LR
 ## Machine View
 
 The `//go:embed` directive is a powerful Go feature that reads files at compile-time and stores them as a byte slice inside the binary.
+
 - **Atomic Schema Changes**: By using `golang-migrate`, each migration is treated as a single step. If a script fails halfway through, the database remains at the previous version (depending on the database's support for DDL transactions).
 - **History Table**: The library maintains a `schema_migrations` table with a single row containing the current version number.
 - **Consistency**: This ensures that every developer on your team and every environment (Dev, Staging, Prod) is running the exact same database structure.
@@ -45,15 +46,19 @@ This example demonstrates the code structure needed to run migrations against a 
 ## Code Walkthrough
 
 ### `//go:embed migrations/*.sql`
+
 This tells the Go compiler to find the `migrations` folder and include all `.sql` files within it into the `migrationFiles` variable.
 
 ### `iofs.New(migrationFiles, "migrations")`
+
 The `iofs` package allows the migration engine to read from our embedded filesystem as if it were a regular disk folder.
 
 ### `m.Up()`
+
 This is the command that actually executes the migrations. It finds all `.up.sql` files that haven't been run yet and executes them in numerical order.
 
 ### `migrate.ErrNoChange`
+
 This is a "Happy Error." It means the database is already at the latest version and no work was needed.
 
 ## Try It
@@ -63,9 +68,11 @@ This is a "Happy Error." It means the database is already at the latest version 
 3. Why do we provide a `.down.sql` file? (Hint: What happens if you need to roll back a release?).
 
 ## In Production
+
 **NEVER manually edit your database schema in production.** Every single change, no matter how small, must be a migration file in your repository. This ensures that your local environment and production environment are identical, preventing the "it works on my machine" nightmare.
 
 ## Thinking Questions
+
 1. Why is it better to embed migrations in the binary instead of reading them from the disk at runtime?
 2. What happens if two developers create a migration with the same version number?
 3. How would you handle a data migration (moving data from one column to another) vs. a schema migration?

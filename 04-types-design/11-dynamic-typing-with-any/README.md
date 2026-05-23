@@ -53,9 +53,11 @@ A typed nil inside an interface is not the same as a nil interface.
 3. Return a typed nil pointer from a function and compare it with a nil interface.
 
 ## In Production
+
 Dynamic values are useful at boundaries like logging, decoding, and plugin-style APIs, but they demand careful guards around assertions and nil checks.
 
 ## Thinking Questions
+
 1. Why does an interface need both type and value information?
 2. When should you prefer generics over `any`?
 3. Why can `value == nil` be misleading for interface values?

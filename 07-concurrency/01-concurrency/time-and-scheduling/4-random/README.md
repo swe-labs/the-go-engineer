@@ -47,15 +47,19 @@ go run ./07-concurrency/01-concurrency/time-and-scheduling/4-random
 ## Code Walkthrough
 
 ### `rand.IntN(100)`
+
 Returns a random integer in the range `[0, 100)`. It is the most common way to generate random IDs or indexes.
 
 ### `rand.Shuffle`
+
 Takes a slice and a swap function. It is a highly optimized implementation of the Fisher-Yates shuffle algorithm.
 
 ### `rand.NewPCG(seed1, seed2)`
+
 Creates a new source with two 64-bit seeds. This is the modern way to create reproducible "Islands" of randomness for tests.
 
 ### `math/rand/v2`
+
 Note the import path. We are using the version 2 package, which is the current standard for Go engineers.
 
 ## Try It
@@ -80,11 +84,13 @@ Sequence from rng2 (same seed 12345, 67890):
 ```
 
 ## In Production
+
 **Never use `math/rand` for security.**
 Pseudo-random numbers are predictable if you know the seed. If you are generating passwords, session tokens, or encryption keys, **you must use `crypto/rand`**.
 `math/rand` is for simulations, games, load balancing, and UI effects.
 
 ## Thinking Questions
+
 1. Why does `math/rand/v2` require two seeds (`uint64, uint64`) for its PCG source?
 2. What happens if you seed a generator with `0`?
 3. In a load balancer, why might you use a random shuffle to pick a server?

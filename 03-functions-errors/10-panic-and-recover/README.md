@@ -6,7 +6,7 @@ Learn when panic is appropriate, when it is not, and how recover turns a crash i
 
 ## Why This Lesson Exists Now
 
-You have learned how to handle ordinary, expected failures using the `error` interface. But sometimes, a program encounters a state that is fundamentally "wrong" or "impossible"-like trying to access a database that *must* be connected, or discovering a corrupted configuration.
+You have learned how to handle ordinary, expected failures using the `error` interface. But sometimes, a program encounters a state that is fundamentally "wrong" or "impossible"-like trying to access a database that _must_ be connected, or discovering a corrupted configuration.
 
 In these rare cases, Go provides `panic`. It stops the normal execution of the program and starts "unwinding" the stack. `recover` is the mechanism to catch that panic and stop the program from crashing entirely.
 
@@ -83,14 +83,15 @@ Because we recovered, the `main` function continues to run after `accessDatabase
 
 - Should I use `panic` for validation?
   No. Use `error` for anything that is expected to happen (like bad user input). Use `panic` only for programmer errors or "impossible" system states.
-  
 - Can I recover from a panic in a different goroutine?
   No. `recover` only works on the goroutine where the panic started.
 
 ## In Production
+
 Use panic sparingly for programmer bugs or impossible states, then recover only at boundaries (like a web server's request handler) where you can translate the crash into a log entry and a "500 Internal Server Error" response instead of letting the whole server die.
 
 ## Thinking Questions
+
 1. What problem does this topic solve?
 2. What breaks if this boundary is handled implicitly instead of explicitly?
 3. Where would you expect to use this topic in production Go code?

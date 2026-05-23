@@ -33,6 +33,7 @@ graph TD
 ## Machine View
 
 When you call `db.Begin`, the Go driver requests an **Exclusive Connection** from the pool.
+
 - **Connection Affinity**: Every subsequent call using the `tx` object (like `tx.Exec`) is guaranteed to use that same physical connection. This is vital because database transactions are tied to a specific session/connection.
 - **ACID**: Transactions provide Atomicity (All or nothing), Consistency (Rules are followed), Isolation (Other users can't see your partial work), and Durability (Once committed, it's saved forever).
 - **Resource Lock**: Because the connection is locked, if your transaction takes too long, other goroutines might be blocked waiting for a connection to become free.
@@ -48,15 +49,19 @@ The example shows a successful transaction creating a user and a profile, follow
 ## Code Walkthrough
 
 ### `db.Begin()`
+
 Starts the transaction and returns an `*sql.Tx` object.
 
 ### `defer tx.Rollback()`
+
 This is the **"Safety First"** pattern in Go. By deferring the rollback immediately after starting, you ensure that if your code returns early (due to an error or a panic), the transaction is cleaned up. If `tx.Commit()` is called successfully, the deferred rollback will do nothing.
 
 ### `tx.Exec` vs `db.Exec`
+
 This is a common mistake! You **must** use the `tx` object for all operations inside the transaction. If you use `db.Exec`, it will use a different connection from the pool and will not be part of your transaction!
 
 ### `tx.Commit()`
+
 The final step. This tells the database: "Everything is good, make it permanent."
 
 ## Try It
@@ -66,12 +71,15 @@ The final step. This tells the database: "Everything is good, make it permanent.
 3. Try starting a transaction and then letting the program sleep for 10 seconds. Observe if other database operations are blocked.
 
 ## In Production
+
 **Keep Transactions Short.** Do not put non-database work inside a transaction.
+
 - ❌ Begin -> Write DB -> **Call External API** -> Write DB -> Commit
 - ✅ Begin -> Write DB -> Write DB -> Commit -> **Call External API**
-Hogging a database connection while waiting for a slow network call is a recipe for a production outage.
+  Hogging a database connection while waiting for a slow network call is a recipe for a production outage.
 
 ## Thinking Questions
+
 1. Why do we use `defer tx.Rollback()`?
 2. What is the danger of using `db.Exec` inside a transaction block?
 3. How does a transaction protect your data if the server crashes in the middle of a complex update?

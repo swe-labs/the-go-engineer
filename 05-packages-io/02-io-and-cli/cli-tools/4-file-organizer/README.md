@@ -34,6 +34,7 @@ graph LR
 ## Machine View
 
 This tool uses several low-level OS operations:
+
 - `os.ReadDir`: Reads the directory index from the filesystem.
 - `os.MkdirAll`: Checks for directory existence and creates it if missing (idempotent operation).
 - `os.Rename`: A highly efficient OS operation that updates the directory entry pointers in the filesystem rather than copying the actual file data (when moving within the same partition).
@@ -46,18 +47,20 @@ go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer
 ```
 
 Run on a specific directory:
+
 ```bash
 go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer --dir=./my-folder
 ```
 
 Perform a safe preview (Dry Run):
+
 ```bash
 go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer --dir=./my-folder --dry-run
 ```
 
 ## Solution Walkthrough
 
-- **--dry-run Flag**: A standard safety pattern in CLI engineering. It allows the tool to log exactly what it *would* do without actually performing the destructive `os.Rename` or `os.MkdirAll` operations.
+- **--dry-run Flag**: A standard safety pattern in CLI engineering. It allows the tool to log exactly what it _would_ do without actually performing the destructive `os.Rename` or `os.MkdirAll` operations.
 - **os.ReadDir**: Returns a slice of `DirEntry` objects. We iterate over these, skipping anything that is already a directory to avoid recursive messiness.
 - **filepath.Ext**: Extracts the extension from the filename. We then clean it up (removing the dot) to use it as the subdirectory name.
 - **os.MkdirAll and os.Rename**: The "Engine" of the tool. `MkdirAll` is called for every file to ensure the target folder exists, and `Rename` moves the file to its new home.
@@ -73,11 +76,12 @@ go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer --dir=./my-fold
 - Use `go run ./05-packages-io/02-io-and-cli/cli-tools/4-file-organizer`.
 - Starter path: `05-packages-io/02-io-and-cli/cli-tools/4-file-organizer/_starter`.
 
-
 ## In Production
+
 Any tool that moves or deletes files must be treated with extreme caution. Always test with `--dry-run` first. In a production environment, you should also check if the target file already exists before renaming, to prevent accidental data loss from overwriting files with the same name in different source locations.
 
 ## Thinking Questions
+
 1. Why is `os.Rename` faster than copying a file and then deleting the original?
 2. What happens if the program crashes halfway through organizing a directory with 1,000 files?
 3. How would you modify this tool to handle subdirectories recursively?

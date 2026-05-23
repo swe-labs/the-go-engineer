@@ -69,9 +69,11 @@ This example demonstrates shadowing when the outer type defines a name that coll
 3. Create another shadowed field and inspect which one wins.
 
 ## In Production
+
 Embedding is useful for wrappers, adapters, and reusable building blocks, but it is easy to overuse. Teams need to remember that promotion is convenience syntax, not inheritance magic.
 
 ## Thinking Questions
+
 1. What stays the same between composition and embedding?
 2. What changes when promotion is available?
 3. Why can shadowing be useful and dangerous at the same time?

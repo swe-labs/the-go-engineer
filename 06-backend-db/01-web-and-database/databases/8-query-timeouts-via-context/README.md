@@ -33,10 +33,11 @@ graph LR
 
 In Go, every `sql` method has a "Context" version (e.g., `ExecContext`, `QueryContext`, `QueryRowContext`).
 When you pass a context with a timeout:
+
 1. **The Timer**: Go starts a timer in the background.
 2. **The Handshake**: The database driver sends the query to the database server.
 3. **The Interruption**: If the timer finishes before the database responds, Go immediately stops waiting, severs the network connection (or sends a cancel packet), and returns the error `context.DeadlineExceeded`.
-This is critical for **Resource Management**. An open database connection that is just "waiting" is a wasted slot in your connection pool.
+   This is critical for **Resource Management**. An open database connection that is just "waiting" is a wasted slot in your connection pool.
 
 ## Run Instructions
 
@@ -49,12 +50,15 @@ The example demonstrates a fast query that succeeds and a query with an impossib
 ## Code Walkthrough
 
 ### `context.WithTimeout`
+
 Creates a copy of the parent context with a specific duration. Always call the `cancel` function to ensure resources are cleaned up even if the query finishes early.
 
 ### `db.QueryRowContext(ctx, ...)`
+
 The "Context-aware" version of the query method. It takes the context as its first argument and respects its deadline.
 
 ### `context.DeadlineExceeded`
+
 The specific error returned when a timeout occurs. You can check for this to differentiate between a "Database is Down" error and a "Database is too Slow" error.
 
 ## Try It
@@ -64,10 +68,12 @@ The specific error returned when a timeout occurs. You can check for this to dif
 3. What happens if you use `context.Background()` instead of a timeout context? (Hint: It will wait forever!).
 
 ## In Production
+
 **Set timeouts on EVERYTHING.**
 A safe default for simple database queries is often between 500ms and 5 seconds. If a query takes longer than 5 seconds in an interactive web app, your user has likely already left. For background jobs (like generating reports), you might set a longer timeout (e.g., 5 minutes), but there should **always** be a limit.
 
 ## Thinking Questions
+
 1. Why is it important to use `defer cancel()` after creating a timeout context?
 2. How does a database timeout help prevent "Cascading Failures" in a system with many microservices?
 3. If a query times out, does it definitely stop running on the database server? (Hint: It depends on the driver and the database!).

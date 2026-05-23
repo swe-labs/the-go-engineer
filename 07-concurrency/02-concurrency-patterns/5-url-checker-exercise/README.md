@@ -50,7 +50,6 @@ go run ./07-concurrency/02-concurrency-patterns/5-url-checker-exercise
 - **The results Slice**: We pre-allocate a slice of exactly the right size: `make([]CheckResult, len(urls))`. Because each goroutine writes to its own specific index `i`, we don't need a Mutex to protect this slice! This is a high-performance "Disjoint Write" pattern.
 - **sort.Slice**: After `g.Wait()` returns, we know the slice is full. We use the standard library's sort package to re-order the results based on latency before printing them.
 
-
 ## Try It
 
 1. Add a URL that doesn't exist (e.g., `https://this-is-not-a-real-site.com`). Observe how the checker handles the network error gracefully.
@@ -74,10 +73,12 @@ Total time: 260ms (would be 850ms sequential)
 ```
 
 ## In Production
+
 **Don't use `http.DefaultClient`.**
 The default client has no timeout. If a server accepts a connection but never sends data, your goroutine will hang forever. Always create your own `http.Client` with a strict `Timeout` (as seen in the `New` function of our pool).
 
 ## Thinking Questions
+
 1. Why is a HEAD request better than a GET request for a health checker?
 2. If we have 1,000 URLs to check, what is a reasonable `SetLimit`?
 3. How can we modify this to stop as soon as we find **one** failing URL? (Hint: Return an error from `g.Go`).

@@ -18,10 +18,10 @@ This section belongs to [08 Quality & Testing](../README.md).
 
 ## Section Map
 
-| Track | Entry | Milestone | Focus |
-| --- | --- | --- | --- |
-| Testing | [TE.1 unit testing](./testing) | `TE.10` | unit tests, sub-tests, fuzzing, seams, integration tests, and golden files |
-| Profiling | [PR.1 CPU profile](./profiling) | `PR.6` | CPU, memory, escape analysis, benchmarks, and memory layout |
+| Track     | Entry                           | Milestone | Focus                                                                      |
+| --------- | ------------------------------- | --------- | -------------------------------------------------------------------------- |
+| Testing   | [TE.1 unit testing](./testing)  | `TE.10`   | unit tests, sub-tests, fuzzing, seams, integration tests, and golden files |
+| Profiling | [PR.1 CPU profile](./profiling) | `PR.6`    | CPU, memory, escape analysis, benchmarks, and memory layout                |
 
 ## Suggested Order
 

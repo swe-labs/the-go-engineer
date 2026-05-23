@@ -52,15 +52,15 @@ This section belongs to [02 Language Basics](../README.md).
 
 ## Section Map
 
-| ID | Type | Surface | Why It Matters | Requires |
-| --- | --- | --- | --- | --- |
-| `CF.1` | Lesson | [if / else](./1-if-else) | Introduces branching and decision-making. | entry |
-| `CF.2` | Lesson | [for basics](./2-for-basics) | Teaches Go's only loop keyword and repeated work. | `CF.1` |
-| `CF.3` | Lesson | [break / continue](./3-break-continue) | Teaches early exit and selective skipping inside loops. | `CF.2` |
-| `CF.4` | Lesson | [switch](./4-switch) | Teaches readable multi-branch decision logic. | `CF.1`, `CF.2`, `CF.3` |
-| `CF.5` | Lesson | [defer basics](./5-defer-basics) | Introduces cleanup scheduling and return-path safety. | `CF.4` |
-| `CF.6` | Lesson | [defer use cases](./6-defer-use-cases) | Shows file, mutex, and cleanup-shaped defer patterns. | `CF.5` |
-| `CF.7` | Exercise | [pricing checkout](./7-pricing-checkout) | Combines branching, looping, switching, and defer in one milestone. | `CF.1` through `CF.6` |
+| ID     | Type     | Surface                                  | Why It Matters                                                      | Requires               |
+| ------ | -------- | ---------------------------------------- | ------------------------------------------------------------------- | ---------------------- |
+| `CF.1` | Lesson   | [if / else](./1-if-else)                 | Introduces branching and decision-making.                           | entry                  |
+| `CF.2` | Lesson   | [for basics](./2-for-basics)             | Teaches Go's only loop keyword and repeated work.                   | `CF.1`                 |
+| `CF.3` | Lesson   | [break / continue](./3-break-continue)   | Teaches early exit and selective skipping inside loops.             | `CF.2`                 |
+| `CF.4` | Lesson   | [switch](./4-switch)                     | Teaches readable multi-branch decision logic.                       | `CF.1`, `CF.2`, `CF.3` |
+| `CF.5` | Lesson   | [defer basics](./5-defer-basics)         | Introduces cleanup scheduling and return-path safety.               | `CF.4`                 |
+| `CF.6` | Lesson   | [defer use cases](./6-defer-use-cases)   | Shows file, mutex, and cleanup-shaped defer patterns.               | `CF.5`                 |
+| `CF.7` | Exercise | [pricing checkout](./7-pricing-checkout) | Combines branching, looping, switching, and defer in one milestone. | `CF.1` through `CF.6`  |
 
 ## Suggested Learning Flow
 

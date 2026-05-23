@@ -44,15 +44,19 @@ go run ./07-concurrency/01-concurrency/time-and-scheduling/6-timezone
 ## Code Walkthrough
 
 ### `time.LoadLocation("Region/City")`
+
 This is how you get a handle on a specific timezone. Common values include `"America/New_York"`, `"Europe/Berlin"`, or `"Asia/Dubai"`.
 
 ### `t.In(loc)`
+
 This does **not** change the time; it returns a new `time.Time` object that is set to display according to the rules of the provided location.
 
 ### `t.UTC()`
+
 A convenience method to return the time in the Universal Coordinated Time (UTC) location.
 
 ### `time.Date(...)`
+
 When creating a date manually, you should always provide a location. Providing `time.UTC` is the safest default.
 
 ## Try It
@@ -76,7 +80,9 @@ UTC:       2026-04-29 05:30:40 +0000 UTC
 ```
 
 ## In Production
+
 **UTC Everywhere.**
+
 1. **Server Clock**: Set your servers to UTC.
 2. **Database**: Store all timestamps as UTC.
 3. **Internal Logic**: Perform all calculations in UTC.
@@ -85,6 +91,7 @@ UTC:       2026-04-29 05:30:40 +0000 UTC
 Failing to do this will lead to "Time Corruption" during DST transitions (where you might lose an hour of logs or double-bill a customer).
 
 ## Thinking Questions
+
 1. Why doesn't Go use simple integer offsets like `+5` instead of names like `"Asia/Karachi"`? (Hint: DST!).
 2. What happens if you parse a time string that has an offset (like `-0700`) but no location name?
 3. What is a "Leap Second" and does Go's `time` package account for it?

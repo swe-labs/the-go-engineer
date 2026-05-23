@@ -17,7 +17,7 @@ After learning methods in TI.2, you need to understand how receiver choice affec
 
 ## Mental Model
 
-Think of a type's method set like a menu. A Counter value has only the Get() menu item. A *Counter pointer has the full menu: Get(), Inc(), Reset(). The pointer version inherits the value receiver methods but adds its own.
+Think of a type's method set like a menu. A Counter value has only the Get() menu item. A \*Counter pointer has the full menu: Get(), Inc(), Reset(). The pointer version inherits the value receiver methods but adds its own.
 
 ## Visual Model
 
@@ -68,9 +68,11 @@ The Reader interface requires Get(). Counter value satisfies it because Get() ha
 3. Add a new method with a pointer receiver and see if the interface still accepts the value type.
 
 ## In Production
+
 Method sets affect API design. If you export a type that only has pointer receiver methods, callers must pass pointers. If you mix receiver types, document which interface they satisfy.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

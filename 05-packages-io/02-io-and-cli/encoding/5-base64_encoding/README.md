@@ -35,12 +35,15 @@ go run ./05-packages-io/02-io-and-cli/encoding/5-base64_encoding
 ## Code Walkthrough
 
 ### `base64.StdEncoding`
+
 The standard encoder used for JSON, emails, and general data transport. It uses the `+` and `/` characters.
 
 ### `base64.URLEncoding`
+
 A specialized version that replaces `+` with `-` and `/` with `_`. This is essential when putting Base64 data into a URL, as `+` and `/` have special meanings in web addresses that would cause the data to be misinterpreted.
 
 ### `EncodeToString` and `DecodeString`
+
 Helper functions that handle the conversion between `[]byte` and `string` automatically, making the common case very simple to implement.
 
 ## Try It
@@ -50,9 +53,11 @@ Helper functions that handle the conversion between `[]byte` and `string` automa
 3. Try decoding a string that isn't valid Base64 and observe the error.
 
 ## In Production
+
 **Base64 is NOT encryption.** It provides zero security. Anyone who sees a Base64 string can decode it back to the original bytes in milliseconds. Never use Base64 as a substitute for real encryption (like AES or RSA). It is strictly a format for **transporting** data, not securing it.
 
 ## Thinking Questions
+
 1. Why does Base64 data take up more space than the original binary data?
 2. When would using `URLEncoding` be mandatory instead of `StdEncoding`?
 3. How can you tell if a string is likely Base64 encoded just by looking at it?

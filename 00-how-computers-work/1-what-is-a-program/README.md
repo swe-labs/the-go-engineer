@@ -77,10 +77,12 @@ In `main.go`, the demo prints a few simple statements, but the important part is
 3. Explain why the new line appears only after the earlier instructions finish.
 
 ## In Production
+
 Programs are stored in memory just like data.
 That is one reason memory corruption bugs and instruction/data confusion can become security problems.
 
 ## Thinking Questions
+
 1. If the CPU can only do a few primitive instruction types, why do some programs still run slowly?
 2. What does “the computer is processing data” physically mean now that you know about the CPU loop?
 3. If you run the same program twice at the same time, what do you think the OS duplicates and what does it share?

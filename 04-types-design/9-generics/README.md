@@ -26,6 +26,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 This diagram shows the generic function signature:
 
 - `Sum` is the function name
@@ -76,9 +77,11 @@ The syntax `[T Numeric]` declares a type parameter T with constraint Numeric.
   Generics are monomorphized at compile time-no runtime overhead.
 
 ## In Production
+
 Generics are essential for building reusable data structures (maps, slices, trees) and utility functions without code duplication.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

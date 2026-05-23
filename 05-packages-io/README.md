@@ -15,12 +15,12 @@ By the end of this section, a learner should be able to:
 
 ## Section Map
 
-| Track | Surface | Core Job |
-| --- | --- | --- |
+| Track       | Surface                                           | Core Job                                                                         |
+| ----------- | ------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `MP.1-MP.4` | [Modules and Packages](./01-modules-and-packages) | teach module identity, dependency management, versioning, and package boundaries |
-| `CL.1-CL.4` | [CLI Workflows](./02-io-and-cli/cli-tools) | teach argument parsing, flags, standard streams, and command behavior |
-| `EN.1-EN.6` | [Encoding](./02-io-and-cli/encoding) | teach JSON, CSV, and structured data movement |
-| `FS.1-FS.8` | [Filesystem](./02-io-and-cli/filesystem) | teach files, directories, paths, and practical file tooling |
+| `CL.1-CL.4` | [CLI Workflows](./02-io-and-cli/cli-tools)        | teach argument parsing, flags, standard streams, and command behavior            |
+| `EN.1-EN.6` | [Encoding](./02-io-and-cli/encoding)              | teach JSON, CSV, and structured data movement                                    |
+| `FS.1-FS.8` | [Filesystem](./02-io-and-cli/filesystem)          | teach files, directories, paths, and practical file tooling                      |
 
 ## Why This Section Exists Now
 

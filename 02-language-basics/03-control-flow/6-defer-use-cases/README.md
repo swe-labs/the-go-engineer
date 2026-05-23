@@ -59,9 +59,11 @@ Go often uses pairs of functions: `Open/Close`, `Lock/Unlock`, `Begin/Commit`. T
 3. Think about how many return statements you would need to add cleanup to if you didn't use `defer`.
 
 ## In Production
+
 Resource leaks (unclosed files or database connections) are a major source of production outages. `defer` is the primary tool Go engineers use to prevent these leaks.
 
 ## Thinking Questions
+
 1. Why is it better to `defer` cleanup immediately after a successful open?
 2. What happens if you `defer` something that could also return an error (like `file.Close()`)?
 3. How does `defer` make code with many `if err != nil { return ... }` checks cleaner?

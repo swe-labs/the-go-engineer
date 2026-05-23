@@ -4,11 +4,11 @@ This document defines the release process for The Go Engineer.
 
 ## Release Lines
 
-| Line | Branch | Purpose |
-| --- | --- | --- |
-| v2.1.x | `release/v2` | stable v2.1 maintenance |
-| v1.x | `release/v1` | stable v1 maintenance |
-| post-v2.1 | `main` | future implementation and integration work |
+| Line      | Branch       | Purpose                                    |
+| --------- | ------------ | ------------------------------------------ |
+| v2.1.x    | `release/v2` | stable v2.1 maintenance                    |
+| v1.x      | `release/v1` | stable v1 maintenance                      |
+| post-v2.1 | `main`       | future implementation and integration work |
 
 The current stable release is `v2.1.1`.
 

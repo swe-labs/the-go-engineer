@@ -47,15 +47,19 @@ go run ./07-concurrency/02-concurrency-patterns/3-sync-pool
 ## Code Walkthrough
 
 ### `New` Function
+
 This is the factory. It is only called if the pool is empty. It should return a pointer to a freshly allocated object with its initial capacity set.
 
 ### `Get()`
+
 Retrieves an item from the pool. It returns `any`, so you must use a type assertion: `buf := pool.Get().(*bytes.Buffer)`.
 
 ### `Reset()`
+
 **CRITICAL**: You must clear the state of an object before returning it. If you put a buffer containing secret data back into the pool without resetting it, the next user might see that data!
 
 ### `Put()`
+
 Returns the object to the pool. Note the "Guard" pattern in the example: if a buffer has grown too large (e.g., to 10MB), we don't put it back, as it would waste memory. We let the GC reclaim it instead.
 
 ## Try It
@@ -79,13 +83,16 @@ Processed: processed request req_002 for user usr_99
 ```
 
 ## In Production
+
 **Don't over-use pools.**
 Pooling adds complexity and can lead to subtle bugs (like data leaking between requests). Only use `sync.Pool` for:
+
 - Large objects that are expensive to allocate.
 - Small objects that are allocated millions of times per second (e.g., log entries, metadata structs).
 - Situations where profiling shows that GC is a bottleneck.
 
 ## Thinking Questions
+
 1. Why does `sync.Pool` clear itself during every GC cycle?
 2. Why is it better to store pointers in a pool instead of raw values?
 3. How can pooling cause "Cache Pollution" if you don't reset objects correctly?

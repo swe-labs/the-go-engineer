@@ -35,15 +35,19 @@ go run ./05-packages-io/02-io-and-cli/encoding/1-marshalling
 ## Code Walkthrough
 
 ### Struct Tags
+
 The backticks after a field definition (e.g., `` `json:"id"` ``) are called struct tags. They provide instructions to the JSON encoder on how to name the field in the final output.
 
 ### `json.Marshal`
+
 Converts a Go value to a compact JSON byte slice. If an error occurs (e.g., trying to marshal a function or a channel), it will return an error.
 
 ### `json.MarshalIndent`
+
 Similar to `Marshal`, but adds whitespace and newlines to make the output "pretty" and human-readable. This is extremely useful for debugging or CLI output.
 
 ### `omitempty`
+
 A tag option that tells the encoder to skip a field if it contains its "zero value" (like `0`, `""`, `false`, or `nil`).
 
 ## Try It
@@ -53,9 +57,11 @@ A tag option that tells the encoder to skip a field if it contains its "zero val
 3. Use the `json:",string"` tag on the `ID` field and see it get wrapped in quotes in the JSON.
 
 ## In Production
+
 JSON marshalling using the standard library is powerful but uses reflection, which can be a bottleneck in extremely high-throughput systems. For most applications, it is more than fast enough. If you are handling millions of requests per second, you might look at code-generation libraries like `easyjson`.
 
 ## Thinking Questions
+
 1. Why must a field be exported (capitalized) to be included in the JSON output?
 2. When would you use `json.Marshal` versus `json.MarshalIndent`?
 3. How do you handle sensitive data (like passwords) using struct tags?

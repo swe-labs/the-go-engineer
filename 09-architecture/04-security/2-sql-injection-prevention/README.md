@@ -16,7 +16,7 @@ Think of SQL Injection as **A Malicious Form Entry**.
 1. **The Scenario**: A form asks for your "First Name."
 2. **The Honest User**: Enters "Alice." The query becomes: `SELECT * FROM users WHERE name = 'Alice'`.
 3. **The Malicious User**: Enters `Alice'; DROP TABLE users; --`.
-4. **The Disaster (Concatenation)**: If you use string formatting (`fmt.Sprintf`), the query becomes: `SELECT * FROM users WHERE name = 'Alice'; DROP TABLE users; --'`. The database executes *both* commands.
+4. **The Disaster (Concatenation)**: If you use string formatting (`fmt.Sprintf`), the query becomes: `SELECT * FROM users WHERE name = 'Alice'; DROP TABLE users; --'`. The database executes _both_ commands.
 5. **The Defense (Parameterization)**: If you use parameters (`?` or `$1`), the database treats the entire string `Alice'; DROP TABLE users; --` as a single, harmless name. It searches for a user with that literal name and finds nothing.
 
 ## Visual Model
@@ -50,9 +50,11 @@ go run ./09-architecture/04-security/2-sql-injection-prevention
 ## Code Walkthrough
 
 ### The Vulnerable Query
+
 Demonstrates a "Login" bypass where an attacker enters `' OR '1'='1` as a password to log in as the first user in the database.
 
 ### The Secure Query
+
 Shows the exact same logic using `db.QueryRow("SELECT ... WHERE pass = ?", input)`. The attack fails because the database looks for the literal string `' OR '1'='1`.
 
 ## Try It
@@ -62,9 +64,11 @@ Shows the exact same logic using `db.QueryRow("SELECT ... WHERE pass = ?", input
 3. Discuss: Is it safe to use a variable for a Table Name (e.g., `SELECT * FROM ` + tableName)? Why/Why not?
 
 ## In Production
+
 **No Exceptions.** Even for internal tools or "safe" inputs, always use parameterized queries. SQLi can lead to total data loss, identity theft, and full server compromise. If you need dynamic queries (e.g., optional filters), use a query builder library rather than building strings manually.
 
 ## Thinking Questions
+
 1. Why can't the database "detect" an injection attack automatically?
 2. What is a "Blind SQL Injection"?
 3. How does input validation (SEC.1) provide a "defense-in-depth" layer against SQLi?

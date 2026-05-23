@@ -13,6 +13,7 @@ Learn how to use build constraints (`//go:build`) to conditionally compile code 
 Think of Build Tags as **Custom Filters** for the compiler.
 
 When you run `go build`, the compiler looks at every file and asks:
+
 1. Does this file match the current OS/Architecture?
 2. Does it have a `//go:build` tag?
 3. If it has a tag, does that tag match the build flags provided by the user?
@@ -39,6 +40,7 @@ go run ./05-packages-io/01-modules-and-packages/4-build-tags
 ```
 
 Try running with a custom tag for the tests:
+
 ```bash
 go test -v -tags=integration ./05-packages-io/01-modules-and-packages/4-build-tags
 ```
@@ -46,12 +48,15 @@ go test -v -tags=integration ./05-packages-io/01-modules-and-packages/4-build-ta
 ## Code Walkthrough
 
 ### `os_windows.go` and `os_unix.go`
+
 These files use **Implicit Build Tags**. The Go compiler automatically recognizes filenames ending in `_windows.go`, `_linux.go`, `_darwin.go`, etc., and treats them as if they had the corresponding `//go:build` tag at the top.
 
 ### `//go:build integration`
+
 This is an **Explicit Build Tag**. It's used in `integration_test.go` to ensure those tests only run when the developer explicitly requests them.
 
 ### `runtime.GOOS`
+
 The code uses the `runtime` package to inspect the OS it was actually compiled for, confirming that the correct platform-specific file was selected.
 
 ## Try It
@@ -62,9 +67,11 @@ The code uses the `runtime` package to inspect the OS it was actually compiled f
 4. Build with the tag: `go build -tags=extra`. Now it succeeds!
 
 ## In Production
+
 Overusing build tags can make code difficult to navigate for IDEs and static analysis tools. Always provide a "default" implementation or an interface to ensure your project remains readable even when specific tags aren't active.
 
 ## Thinking Questions
+
 1. Why is separating integration tests behind a build tag a good engineering practice?
 2. What is the difference between an implicit build tag in a filename and an explicit `//go:build` comment?
 3. How would you handle a feature that is only available on Go version 1.21 or higher?

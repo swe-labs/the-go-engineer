@@ -25,13 +25,14 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```go
 // Constraint requiring methods
 type Adder interface {
     Add(other int) int
 }
 
-// Constraint requiring multiple interfaces  
+// Constraint requiring multiple interfaces
 type Serializer interface {
     fmt.Stringer
     json.Marshaler
@@ -69,9 +70,11 @@ The built-in `comparable` constraint allows equality operators.
 3. Build a constraint for numeric types with multiple operations.
 
 ## In Production
+
 Complex constraints are used in real Go code for data structures, serialization, and anywhere you need type-safe generic utilities.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

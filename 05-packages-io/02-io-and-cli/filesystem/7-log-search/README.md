@@ -62,11 +62,12 @@ go run ./05-packages-io/02-io-and-cli/filesystem/7-log-search
 - Use `go run ./05-packages-io/02-io-and-cli/filesystem/7-log-search`.
 - Starter path: `05-packages-io/02-io-and-cli/filesystem/7-log-search/_starter`.
 
-
 ## In Production
+
 Searching large filesystems can put significant pressure on disk I/O. In a production monitoring system, you would typically use a specialized indexing tool (like **Elasticsearch** or **Grafana Loki**) rather than raw filesystem scanning. However, for quick debugging and local tools, this pattern is incredibly powerful and efficient.
 
 ## Thinking Questions
+
 1. Why is `filepath.WalkDir` faster than the older `filepath.Walk`?
 2. How does `bufio.Scanner` help prevent Out-Of-Memory (OOM) errors?
 3. What are the pros and cons of implementing a case-insensitive search by converting everything to lowercase?

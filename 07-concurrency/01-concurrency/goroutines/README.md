@@ -7,15 +7,15 @@ with WaitGroups and channels before moving into more advanced synchronization to
 
 ## Track Map
 
-| ID | Type | Surface | Why It Matters | Requires |
-| --- | --- | --- | --- | --- |
-| `GC.1` | Lesson | [goroutines](./1-goroutine) | Introduces goroutines, scheduler basics, and closure-capture pitfalls. | entry |
-| `GC.2` | Lesson | [WaitGroups](./2-wait-group) | Teaches the standard barrier pattern for waiting on concurrent work. | `GC.1` |
-| `GC.3` | Lesson | [channels](./3-channels) | Introduces typed communication between goroutines. | `GC.1`, `GC.2` |
-| `GC.4` | Lesson | [buffered channels](./4-channels-buffered) | Explains queue-like channel behavior and bounded async flow. | `GC.3` |
-| `GC.5` | Lesson | [closing channels](./5-channels-closing) | Shows how receivers learn a producer is done. | `GC.3`, `GC.4` |
-| `GC.6` | Lesson | [pipeline project](./6-project-1) | Combines goroutines, channels, and cancellation into one mini flow. | `GC.3`, `GC.4`, `GC.5` |
-| `GC.7` | Exercise | [concurrent downloader](./7-downloader) | Applies coordination, fan-out, and bounded concurrency in one milestone. | `GC.1`, `GC.2`, `GC.3`, `GC.4`, `GC.5`, `GC.6` |
+| ID     | Type     | Surface                                    | Why It Matters                                                           | Requires                                       |
+| ------ | -------- | ------------------------------------------ | ------------------------------------------------------------------------ | ---------------------------------------------- |
+| `GC.1` | Lesson   | [goroutines](./1-goroutine)                | Introduces goroutines, scheduler basics, and closure-capture pitfalls.   | entry                                          |
+| `GC.2` | Lesson   | [WaitGroups](./2-wait-group)               | Teaches the standard barrier pattern for waiting on concurrent work.     | `GC.1`                                         |
+| `GC.3` | Lesson   | [channels](./3-channels)                   | Introduces typed communication between goroutines.                       | `GC.1`, `GC.2`                                 |
+| `GC.4` | Lesson   | [buffered channels](./4-channels-buffered) | Explains queue-like channel behavior and bounded async flow.             | `GC.3`                                         |
+| `GC.5` | Lesson   | [closing channels](./5-channels-closing)   | Shows how receivers learn a producer is done.                            | `GC.3`, `GC.4`                                 |
+| `GC.6` | Lesson   | [pipeline project](./6-project-1)          | Combines goroutines, channels, and cancellation into one mini flow.      | `GC.3`, `GC.4`, `GC.5`                         |
+| `GC.7` | Exercise | [concurrent downloader](./7-downloader)    | Applies coordination, fan-out, and bounded concurrency in one milestone. | `GC.1`, `GC.2`, `GC.3`, `GC.4`, `GC.5`, `GC.6` |
 
 ## Suggested Order
 

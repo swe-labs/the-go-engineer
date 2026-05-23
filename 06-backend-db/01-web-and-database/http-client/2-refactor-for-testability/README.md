@@ -30,10 +30,10 @@ graph TD
 
 ## Machine View
 
-In Go, interfaces are satisfied **Implicitly**. If a struct has a method that matches the interface signature, it *is* that interface.
+In Go, interfaces are satisfied **Implicitly**. If a struct has a method that matches the interface signature, it _is_ that interface.
 By defining `type HTTPClient interface { Get(url string) (*http.Response, error) }`, we create a contract.
 Because `*http.Client` already has a `Get` method with that exact signature, it satisfies our interface automatically.
-This allows us to write an `IoTClient` that accepts *any* struct that has a `Get` method, giving us a "Hook" to inject fake behavior during tests.
+This allows us to write an `IoTClient` that accepts _any_ struct that has a `Get` method, giving us a "Hook" to inject fake behavior during tests.
 
 ## Run Instructions
 
@@ -44,15 +44,19 @@ go run ./06-backend-db/01-web-and-database/http-client/2-refactor-for-testabilit
 ## Code Walkthrough
 
 ### The `HTTPClient` Interface
-This is our "Contract." It only cares about the *behavior* (making a GET request), not the implementation details (like timeouts or connection pools).
+
+This is our "Contract." It only cares about the _behavior_ (making a GET request), not the implementation details (like timeouts or connection pools).
 
 ### The `IoTClient` Struct
+
 Notice that `httpClient` is a field of type `HTTPClient` (the interface). We no longer call `http.Get` globally; we call `c.httpClient.Get`.
 
 ### Constructor Injection
+
 The `NewIoTClient` function requires an `HTTPClient` as an argument. This forces the caller to provide a client, making dependencies explicit.
 
 ### Implicit Satisfaction
+
 In `main()`, we pass a `*http.Client`. Go sees that it has a `Get` method and allows it to be used as an `HTTPClient`. No "implements" keyword required!
 
 ## Try It
@@ -62,10 +66,12 @@ In `main()`, we pass a `*http.Client`. Go sees that it has a `Get` method and al
 3. Add a `Post` method to the `HTTPClient` interface and update the `IoTClient` to use it.
 
 ## In Production
+
 **Always Use a Custom Client.**
-Even when injecting a client, make sure the one you inject has a `Timeout` set. Refactoring for testability makes your code *cleaner*, but it doesn't automatically make it *safer* if you still pass a `DefaultClient` under the hood.
+Even when injecting a client, make sure the one you inject has a `Timeout` set. Refactoring for testability makes your code _cleaner_, but it doesn't automatically make it _safer_ if you still pass a `DefaultClient` under the hood.
 
 ## Thinking Questions
+
 1. Why is it better to mock an interface rather than starting a real test server?
 2. How does dependency injection help with "Seams" in your architecture?
 3. Can you think of other external dependencies (besides HTTP) that should be hidden behind interfaces?

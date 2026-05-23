@@ -35,6 +35,7 @@ sequenceDiagram
 ## Machine View
 
 When you call `context.WithCancel(parent)`, Go allocates a `cancelCtx` struct.
+
 - **Done Channel**: It creates a channel `chan struct{}`. This channel is never sent any data; it is only ever **closed**.
 - **Broadcast**: Because closing a channel unblocks **all** goroutines currently waiting on it, this acts as a perfect broadcast signal.
 - **Hierarchy**: The `cancelCtx` adds itself to the `children` map of its parent. If the parent is cancelled, it iterates through its children and calls their `cancel` functions too.
@@ -48,12 +49,15 @@ go run ./07-concurrency/01-concurrency/context/2-with-cancel
 ## Code Walkthrough
 
 ### `context.WithCancel`
+
 This function returns a new context and a `cancel` function. **You must always call this function**, usually via `defer cancel()`. This ensures that even if your function returns early due to an error, the context tree is cleaned up.
 
 ### `<-ctx.Done()`
+
 This is the "Ear to the Ground." Inside a `select` statement, this case will trigger the moment `cancel()` is called.
 
 ### Propagation
+
 The second half of the demo shows that cancelling a single "Parent" context automatically cancels all its "Children." This is how you can shut down a complex web service with a single signal.
 
 ## Try It
@@ -83,10 +87,12 @@ Observe the graceful exit and the error status after cancellation:
 ```
 
 ## In Production
+
 **Forgetting `cancel()` causes memory leaks.**
 Even if your logic is correct, the Go runtime keeps the context in memory (and in its parent's child list) until the `cancel` function is called. In a high-traffic HTTP server, failing to `defer cancel()` can lead to thousands of "Zombies" in memory, eventually causing an Out of Memory (OOM) crash.
 
 ## Thinking Questions
+
 1. Why does `cancel()` take no arguments?
 2. What happens if you call `cancel()` twice?
 3. If a worker is blocked on a network call (`http.Get`), how does `ctx.Done()` help? (Hint: It doesn't, unless the network call also supports Context!).

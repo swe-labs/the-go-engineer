@@ -45,10 +45,9 @@ go run ./07-concurrency/01-concurrency/time-and-scheduling/7-reminder 5 "Take a 
 ## Solution Walkthrough
 
 - **time.AfterFunc(duration, func)**: Schedules a task for the future. It returns a `*time.Timer`, which you can use to `Stop()` the reminder if the user changes their mind.
-- **time.NewTicker(1 * time.Second)**: Used to update the UI. We use the `ticker.C` channel to drive the loop.
+- **time.NewTicker(1 \* time.Second)**: Used to update the UI. We use the `ticker.C` channel to drive the loop.
 - **Multiplexing with select**: The `select` statement allows our program to wait for the next tick **OR** the final alarm at the same time. Whichever happens first triggers its case.
 - **Parsing Arguments**: We use `os.Args` to read the seconds and message from the user. We convert the string to an integer using `strconv.Atoi` and multiply it by `time.Second` to get a valid Go duration.
-
 
 ## Try It
 
@@ -74,10 +73,12 @@ Observe the live countdown followed by the final reminder message:
 ```
 
 ## In Production
+
 **Don't rely on `time` for long-term persistence.**
 If your server restarts, all scheduled `AfterFunc` tasks are lost forever. For persistent reminders (like an email reminder scheduled for next week), you must store the target timestamp in a database and use a "Sweeper" pattern or a dedicated task queue (like `Temporal` or `SQS`).
 
 ## Thinking Questions
+
 1. Why does `AfterFunc` run the function in its own goroutine?
 2. What happens if you call `ticker.Stop()` but keep trying to read from `ticker.C`? (Hint: The channel is never closed!).
 3. How could you modify this program to handle multiple reminders simultaneously?

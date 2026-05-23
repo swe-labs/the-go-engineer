@@ -27,12 +27,12 @@ That loop is the real foundation for everything that follows.
 
 ## Section Map
 
-| ID | Lesson | What It Unlocks |
-| --- | --- | --- |
-| `GT.1` | [installation](./1-installation/) | confirms that Go is installed and runnable |
-| `GT.2` | [hello world](./2-hello-world/) | teaches the minimum executable Go program |
-| `GT.3` | [how Go works](./3-how-go-works/) | explains packages, imports, and compilation at a beginner-safe level |
-| `GT.4` | [development environment](./4-dev-environment/) | establishes the everyday command loop used across the repo |
+| ID     | Lesson                                          | What It Unlocks                                                      |
+| ------ | ----------------------------------------------- | -------------------------------------------------------------------- |
+| `GT.1` | [installation](./1-installation/)               | confirms that Go is installed and runnable                           |
+| `GT.2` | [hello world](./2-hello-world/)                 | teaches the minimum executable Go program                            |
+| `GT.3` | [how Go works](./3-how-go-works/)               | explains packages, imports, and compilation at a beginner-safe level |
+| `GT.4` | [development environment](./4-dev-environment/) | establishes the everyday command loop used across the repo           |
 
 ## Zero-Magic Boundary
 

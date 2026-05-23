@@ -46,9 +46,11 @@ go run ./09-architecture/01-package-design/2-visibility
 ## Code Walkthrough
 
 ### Exported vs. Unexported
+
 Shows how changing the first letter of a struct field or function name changes whether it can be accessed from `main.go`.
 
 ### The `internal` Boundary
+
 Demonstrates an attempt to import a package from an `internal` folder. You will see the compiler error: `use of internal package ... not allowed`.
 
 ## Try It
@@ -58,9 +60,11 @@ Demonstrates an attempt to import a package from an `internal` folder. You will 
 3. Discuss: When should you make a field exported vs. unexported?
 
 ## In Production
-**Export as little as possible.** Every exported identifier is a promise you have to keep. If you export a field, users will depend on it, and you can't change its type without a breaking change. Use `internal/` for everything that doesn't *absolutely* need to be public.
+
+**Export as little as possible.** Every exported identifier is a promise you have to keep. If you export a field, users will depend on it, and you can't change its type without a breaking change. Use `internal/` for everything that doesn't _absolutely_ need to be public.
 
 ## Thinking Questions
+
 1. Why does Go use capitalization instead of keywords like `public` or `private`?
 2. How does the `internal/` directory help with versioning and refactoring?
 3. Can a sub-package access unexported identifiers in its parent package?

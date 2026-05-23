@@ -43,15 +43,19 @@ The example uses the `dummyjson.com` API to fetch a list of products and map the
 ## Code Walkthrough
 
 ### `http.Get(url)`
+
 The simplest way to fetch data. It returns an `*http.Response` and an `error`. Note that the error only indicates a network failure (DNS error, connection refused). It does **not** catch HTTP errors like `404` or `500`.
 
 ### `defer resp.Body.Close()`
+
 This is the most important line in any HTTP client code. It ensures the network connection is cleaned up regardless of whether your parsing logic succeeds or fails.
 
 ### `json.NewDecoder(resp.Body)`
+
 Since `resp.Body` is an `io.ReadCloser`, we can stream the JSON data directly into our structs. This avoids reading the entire response into a large byte buffer first, saving memory.
 
 ### Mapping Models
+
 It is rare that an external API uses the exact same struct field names or structures as your internal domain. We usually define a "Transport Struct" (like `DummyResponse`) and then map those values into our "Domain Model" (like `RemoteDevice`).
 
 ## Try It
@@ -61,6 +65,7 @@ It is rare that an external API uses the exact same struct field names or struct
 3. Try fetching a URL that returns a `404` (e.g., `https://dummyjson.com/nonexistent`) and check why the `resp.StatusCode` check is necessary.
 
 ## In Production
+
 **NEVER use `http.Get` in a production service.** You should always instantiate your own `http.Client` with a reasonable `Timeout` (e.g., 5-10 seconds). This ensures that a single slow dependency cannot bring down your entire application.
 
 ```go
@@ -71,6 +76,7 @@ resp, err := client.Get(url)
 ```
 
 ## Thinking Questions
+
 1. Why does `http.Get` not return an error for a `404 Not Found` response?
 2. What happens if you forget to call `resp.Body.Close()`?
 3. How would you handle an API that returns a large list of 100,000 items?

@@ -32,6 +32,7 @@ graph TD
 ## Machine View
 
 This project demonstrates the **"Fan-In" Pattern**.
+
 - Multiple producers (`ping` and `pong`) are sending data to the same unbuffered channel.
 - The main goroutine acts as the consumer, multiplexing between the data channel and a timer channel using `select`.
 - **Graceful Shutdown**: By using `context.WithCancel`, we ensure that the background goroutines exit the moment we are done. Without this, the pinger/ponger would leak and stay in memory forever until the entire process dies.
@@ -45,12 +46,15 @@ go run ./07-concurrency/01-concurrency/goroutines/6-project-1
 ## Code Walkthrough
 
 ### The `select` Statement
+
 The `select` block in `ping` and `pong` allows them to "listen" for two things at once: a signal to stop (`ctx.Done()`) or a chance to speak (`ch <- ...`).
 
 ### Throttling
+
 We use `time.Sleep(1 * time.Second)` inside the actors to prevent them from flooding the console. This simulates real, slow work.
 
 ### Context Cancellation
+
 `ctx, cancel := context.WithCancel(context.Background())` is the modern Go way to coordinate shutdown. Calling `cancel()` closes the `ctx.Done()` channel, which all workers are listening to.
 
 ## Try It
@@ -74,10 +78,12 @@ done
 ```
 
 ## In Production
+
 **Always have a shutdown plan.**
 Never start a goroutine in a production service without knowing exactly how it will exit. Whether it's via a `Done` channel, a `Context`, or a limited number of items, "leaked" goroutines are the #1 cause of memory growth in Go applications.
 
 ## Thinking Questions
+
 1. Why did we use one channel for both `ping` and `pong` instead of two separate ones?
 2. What would happen if we didn't use `time.Sleep` in the pinger?
 3. How does `context` allow us to shut down a deep "tree" of 1,000 goroutines with one function call?

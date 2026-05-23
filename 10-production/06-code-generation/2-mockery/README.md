@@ -50,12 +50,15 @@ go run ./10-production/06-code-generation/2-mockery
 ## Code Walkthrough
 
 ### Defining the Interface
+
 Shows a clean, testable interface for a data-access layer.
 
 ### The Generate Directive
+
 Demonstrates placing `//go:generate mockery --name=...` directly above the interface definition.
 
 ### The Test Implementation
+
 Shows how to use the generated mock in a real unit test, including setting up return values and verifying calls.
 
 ## Try It
@@ -66,9 +69,11 @@ Shows how to use the generated mock in a real unit test, including setting up re
 4. Discuss: Why is it better to use `mockery` than to write `struct MyMock { ... }` by hand?
 
 ## In Production
+
 **Don't over-mock.** Mocks are powerful, but they can make your tests "Brittle"-meaning they break whenever you refactor the internal implementation of your code, even if the final output is still correct. Use mocks for **External Boundaries** (APIs, Databases) but prefer real objects or simple "Fake" implementations for internal logic whenever possible.
 
 ## Thinking Questions
+
 1. What happens if the interface changes but you forget to re-run Mockery?
 2. How does Mockery help you test "Error Paths" that are difficult to trigger with a real database?
 3. What is the difference between a "Mock," a "Spy," and a "Fake"?

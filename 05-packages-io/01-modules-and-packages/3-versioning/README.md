@@ -55,11 +55,12 @@ go run ./05-packages-io/01-modules-and-packages/3-versioning
 - Use `go run ./05-packages-io/01-modules-and-packages/3-versioning`.
 - Starter path: `05-packages-io/01-modules-and-packages/3-versioning/_starter`.
 
-
 ## In Production
+
 Breaking the major version boundary without updating the import path is a "contract violation." It will cause build failures for your users. If you maintain a public library, always prefer adding new, non-breaking functions over breaking existing ones.
 
 ## Thinking Questions
+
 1. Why does Go require a new import path (`/v2`) for major version bumps?
 2. How does the `/v2` rule help resolve conflicts where two of your dependencies require different major versions of a third library?
 3. When should you use the `replace` directive in a production `go.mod` file?

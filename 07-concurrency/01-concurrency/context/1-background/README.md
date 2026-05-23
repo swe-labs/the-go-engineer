@@ -33,6 +33,7 @@ graph TD
 ## Machine View
 
 At its core, `context.Context` is an interface with four methods:
+
 - `Deadline()`: When should I stop?
 - `Done()`: Am I stopped yet? (A channel that closes on cancellation).
 - `Err()`: Why was I stopped?
@@ -49,12 +50,15 @@ go run ./07-concurrency/01-concurrency/context/1-background
 ## Code Walkthrough
 
 ### `context.Background()`
+
 This is your starting point. You use it in `main()`, in tests, or at the top level of a request (like an HTTP handler). It never expires and never carries data.
 
 ### `context.TODO()`
+
 `TODO()` is technically identical to `Background()`. However, using `TODO()` tells other developers (and static analysis tools) that you **intend** to provide a real context later but haven't wired it through the call stack yet.
 
 ### The First Parameter Convention
+
 In Go, `context.Context` is **always** the first parameter of a function:
 `func DoWork(ctx context.Context, name string) error`
 This makes it impossible to miss that a function is part of a concurrent, cancellable call chain.
@@ -84,10 +88,12 @@ Processing order: order-123
 ```
 
 ## In Production
+
 **Do not store Contexts inside a struct.**
 Contexts are meant to be passed down the **Call Stack** as parameters. Storing them in a struct makes their lifetime ambiguous and can lead to goroutine leaks if the struct outlives the request it was meant for. The only exception is in rare cases like HTTP Request objects.
 
 ## Thinking Questions
+
 1. Why is `Context` an interface instead of a concrete struct?
 2. Why is `ctx.Done()` a channel instead of a boolean function? (Hint: `select`!).
 3. If `Background()` and `TODO()` behave identically, why does Go provide both?

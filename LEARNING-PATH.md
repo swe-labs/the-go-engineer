@@ -6,13 +6,13 @@ The source of truth for section ownership is [ARCHITECTURE.md](./ARCHITECTURE.md
 
 ## Phase Overview
 
-| Phase | Sections | Focus | Progress |
-| --- | --- | --- | --- |
-| 0 | s00 | machine foundation | 0% to 5% |
-| 1 | s01-s04 | language foundation | 5% to 52% |
-| 2 | s05-s08 | engineering core | 52% to 87% |
-| 3 | s09-s10 | systems engineering | 87% to 96% |
-| 4 | s11 | flagship integration | 96% to 100% |
+| Phase | Sections | Focus                | Progress    |
+| ----- | -------- | -------------------- | ----------- |
+| 0     | s00      | machine foundation   | 0% to 5%    |
+| 1     | s01-s04  | language foundation  | 5% to 52%   |
+| 2     | s05-s08  | engineering core     | 52% to 87%  |
+| 3     | s09-s10  | systems engineering  | 87% to 96%  |
+| 4     | s11      | flagship integration | 96% to 100% |
 
 ## Recommended Paths
 
@@ -52,20 +52,20 @@ Rules:
 
 ## Entry Points
 
-| Goal | Start here | Prerequisite |
-| --- | --- | --- |
-| First Go setup and execution | `s01` Getting Started | none |
-| Understand the machine model | `s00` How Computers Work | none |
-| Strengthen language fundamentals | `s02` Language Basics | `s01` |
-| Improve function and error design | `s03` Functions and Errors | `s02` |
-| Improve type design | `s04` Types and Design | `s02`, `s03` |
-| Build CLI and filesystem tools | `s05` Packages, I/O and CLI | `s03`, `s04` |
-| Build backend and database code | `s06` Backend, APIs and Databases | `s05`, explicit error handling |
-| Improve concurrency | `s07` Concurrency | functions, errors, packages, interfaces |
-| Improve testing and profiling | `s08` Quality and Testing | `s05`, `s06`, `s07` |
-| Study architecture and security | `s09` Architecture and Security | Phase 2 |
-| Study production operations | `s10` Production Operations | `s06`, `s07`, `s08` |
-| Integrate the whole system | `s11` Opslane Flagship | all earlier phases |
+| Goal                              | Start here                        | Prerequisite                            |
+| --------------------------------- | --------------------------------- | --------------------------------------- |
+| First Go setup and execution      | `s01` Getting Started             | none                                    |
+| Understand the machine model      | `s00` How Computers Work          | none                                    |
+| Strengthen language fundamentals  | `s02` Language Basics             | `s01`                                   |
+| Improve function and error design | `s03` Functions and Errors        | `s02`                                   |
+| Improve type design               | `s04` Types and Design            | `s02`, `s03`                            |
+| Build CLI and filesystem tools    | `s05` Packages, I/O and CLI       | `s03`, `s04`                            |
+| Build backend and database code   | `s06` Backend, APIs and Databases | `s05`, explicit error handling          |
+| Improve concurrency               | `s07` Concurrency                 | functions, errors, packages, interfaces |
+| Improve testing and profiling     | `s08` Quality and Testing         | `s05`, `s06`, `s07`                     |
+| Study architecture and security   | `s09` Architecture and Security   | Phase 2                                 |
+| Study production operations       | `s10` Production Operations       | `s06`, `s07`, `s08`                     |
+| Integrate the whole system        | `s11` Opslane Flagship            | all earlier phases                      |
 
 ## Proof Expectations
 
@@ -85,10 +85,10 @@ When a lesson mentions a concept that is introduced elsewhere, follow the inline
 
 ## Companion Docs
 
-| Document | Purpose |
-| --- | --- |
-| [README.md](./README.md) | project overview and quick start |
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | locked curriculum structure |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | teaching contract |
-| [docs/PROGRESSION.md](./docs/PROGRESSION.md) | phase and milestone visualization |
-| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | verification expectations |
+| Document                                             | Purpose                           |
+| ---------------------------------------------------- | --------------------------------- |
+| [README.md](./README.md)                             | project overview and quick start  |
+| [ARCHITECTURE.md](./ARCHITECTURE.md)                 | locked curriculum structure       |
+| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | teaching contract                 |
+| [docs/PROGRESSION.md](./docs/PROGRESSION.md)         | phase and milestone visualization |
+| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md)       | verification expectations         |

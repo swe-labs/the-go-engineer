@@ -48,9 +48,11 @@ go run ./09-architecture/04-security/10-owasp-top-10-for-go
 ## Code Walkthrough
 
 ### Broken Access Control
+
 Shows a vulnerable "Edit Profile" endpoint that doesn't check if the `id` in the URL matches the `id` of the logged-in user. We demonstrate how to fix it using a context-based check.
 
 ### Server-Side Request Forgery (SSRF)
+
 Demonstrates a "URL Preview" feature. An attacker can use it to scan your internal network (e.g., `http://localhost:8080/admin`). We show how to use an allow-list of domains to prevent this.
 
 ## Try It
@@ -60,9 +62,11 @@ Demonstrates a "URL Preview" feature. An attacker can use it to scan your intern
 3. Discuss: Which of the Top 10 risks is the most common in modern microservices?
 
 ## In Production
+
 **Security is a process, not a product.** The OWASP Top 10 changes every few years as the threat landscape evolves. Make the OWASP checklist a part of your **Definition of Done** for every new feature. Use static analysis tools like `gosec` to automatically scan your Go code for these common vulnerabilities.
 
 ## Thinking Questions
+
 1. Why is "Broken Access Control" now the #1 risk (overtaking Injection)?
 2. How does "Insecure Design" (A04) differ from a simple coding bug?
 3. What is the danger of "Vulnerable and Outdated Components" (A06) in a Go project?

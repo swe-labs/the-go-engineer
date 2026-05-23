@@ -26,6 +26,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```text
 type ValidationError struct {
     Field   string
@@ -69,9 +70,11 @@ Use errors.As() to check specific error types and handle them differently.
 3. Wrap multiple error types and handle each differently.
 
 ## In Production
+
 Custom errors are used in real applications for validation errors, API errors with codes, and database errors with retry information.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

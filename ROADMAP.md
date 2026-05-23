@@ -21,34 +21,34 @@ The repository now has:
 
 ## Branch Model
 
-| Branch | Role |
-| --- | --- |
-| `main` | active post-v2.1 implementation and integration line |
-| `release/v2` | stable v2.1.x maintenance line |
-| `release/v1` | stable v1 maintenance line |
+| Branch       | Role                                                 |
+| ------------ | ---------------------------------------------------- |
+| `main`       | active post-v2.1 implementation and integration line |
+| `release/v2` | stable v2.1.x maintenance line                       |
+| `release/v1` | stable v1 maintenance line                           |
 
 Work that should affect stable v2.1 users must land on or be backported to `release/v2`. Work that expands future depth without changing the stable release line belongs on `main`.
 
 ## Stable Snapshot
 
-| Area | Status | Standard |
-| --- | --- | --- |
-| Public architecture | Stable | 12 sections locked by `ARCHITECTURE.md` |
-| Curriculum registry | Stable | 12 sections and 215 items validated |
-| Lesson structure | Stable | README-first contract enforced by validator |
-| Section READMEs | Stable | section maps align with architecture and curriculum metadata |
-| Validator | Stable | strict checks fail on structural drift |
-| Tests | Stable | build, vet, unit tests, race tests, and coverage generation pass locally |
-| Opslane flagship | Stable baseline | integrated backend capstone remains open for future depth on `main` |
-| Workflow docs | Stable | issue, PR, review, and release workflow documented |
+| Area                | Status          | Standard                                                                 |
+| ------------------- | --------------- | ------------------------------------------------------------------------ |
+| Public architecture | Stable          | 12 sections locked by `ARCHITECTURE.md`                                  |
+| Curriculum registry | Stable          | 12 sections and 215 items validated                                      |
+| Lesson structure    | Stable          | README-first contract enforced by validator                              |
+| Section READMEs     | Stable          | section maps align with architecture and curriculum metadata             |
+| Validator           | Stable          | strict checks fail on structural drift                                   |
+| Tests               | Stable          | build, vet, unit tests, race tests, and coverage generation pass locally |
+| Opslane flagship    | Stable baseline | integrated backend capstone remains open for future depth on `main`      |
+| Workflow docs       | Stable          | issue, PR, review, and release workflow documented                       |
 
 ## Version Plan
 
-| Version | Line | Purpose |
-| --- | --- | --- |
-| `v2.1.1` | `release/v2` | stable curriculum completion and public documentation alignment |
-| `v2.1.x` | `release/v2` | low-risk fixes, docs corrections, validator fixes, dependency/security updates |
-| post-v2.1 | `main` | future lesson depth, flagship expansion, and tooling improvements |
+| Version   | Line         | Purpose                                                                        |
+| --------- | ------------ | ------------------------------------------------------------------------------ |
+| `v2.1.1`  | `release/v2` | stable curriculum completion and public documentation alignment                |
+| `v2.1.x`  | `release/v2` | low-risk fixes, docs corrections, validator fixes, dependency/security updates |
+| post-v2.1 | `main`       | future lesson depth, flagship expansion, and tooling improvements              |
 
 ## Maintenance Rules
 

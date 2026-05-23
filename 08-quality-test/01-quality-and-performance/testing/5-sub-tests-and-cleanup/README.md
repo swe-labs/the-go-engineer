@@ -44,9 +44,11 @@ go test -v ./08-quality-test/01-quality-and-performance/testing/5-sub-tests-and-
 ## Code Walkthrough
 
 ### `t.Run` for Iteration
+
 Shows how to loop over a table of cases and give each one a clear identity. This prevents one failure from hiding other potential bugs.
 
 ### `t.Cleanup` for Safety
+
 Demonstrates creating a temporary resource (like a database connection or file) and ensuring it is closed/deleted regardless of test success or failure.
 
 ## Try It
@@ -56,9 +58,11 @@ Demonstrates creating a temporary resource (like a database connection or file) 
 3. Compare `t.Cleanup` behavior with a `defer` by intentionaly failing the test with `t.Fatalf`.
 
 ## In Production
+
 Use `t.Cleanup` for any resource that needs to be released (ports, temp files, mocks). In large suites, failing to clean up resources can lead to "flaky tests" where tests pass in isolation but fail when run together because of leftover state.
 
 ## Thinking Questions
+
 1. Why is `t.Cleanup` preferred over `defer` for test teardown?
 2. How do sub-tests help when debugging a failure in a CI pipeline?
 3. If you have a `t.Cleanup` in the main test function and another in a sub-test, in what order do they run?

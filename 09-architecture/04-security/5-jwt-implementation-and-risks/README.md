@@ -50,12 +50,15 @@ go run ./09-architecture/04-security/5-jwt-implementation-and-risks
 ## Code Walkthrough
 
 ### Generating a Token
+
 Shows how to use the `golang-jwt/jwt` library to create a token with custom claims (UserID, ExpireTime) and sign it with a secret key.
 
 ### Validating a Token
+
 Demonstrates the correct way to parse and verify a token. It covers checking the `exp` (expiry) claim and ensuring the algorithm used matches what the server expects.
 
 ### The "None" Algorithm Attack
+
 Shows a vulnerable parser that accepts tokens with `alg: none`. An attacker can modify their claims (e.g., set `admin: true`) and the server will accept it. We show how to fix this by explicitly requiring a specific algorithm.
 
 ## Try It
@@ -65,9 +68,11 @@ Shows a vulnerable parser that accepts tokens with `alg: none`. An attacker can 
 3. Discuss: How do you "Revoke" a JWT if a user's account is compromised?
 
 ## In Production
+
 **Keep your secret keys secret.** Use an environment variable or a secret manager (SEC.9). Always set a short expiration time (`exp`). If you need long sessions, use "Refresh Tokens." Always use a reputable library and **never write your own JWT parser**.
 
 ## Thinking Questions
+
 1. Why shouldn't you store a JWT in `localStorage`?
 2. What is the benefit of using Asymmetric (RS256) signing in a microservice architecture?
 3. How does the "JTI" (JWT ID) claim help prevent Replay Attacks?

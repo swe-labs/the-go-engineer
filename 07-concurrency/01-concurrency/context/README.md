@@ -7,13 +7,13 @@ through function chains so I/O work can stop cleanly when the caller is done.
 
 ## Track Map
 
-| ID | Type | Surface | Why It Matters | Requires |
-| --- | --- | --- | --- | --- |
-| `CT.1` | Lesson | [background](./1-background) | Introduces root contexts and the `Context` interface. | entry |
-| `CT.2` | Lesson | [with cancel](./2-with-cancel) | Shows manual cancellation and goroutine cleanup. | `CT.1` |
-| `CT.3` | Lesson | [with timeout](./3-with-timeout) | Adds deadline-based cancellation for bounded work. | `CT.1`, `CT.2` |
-| `CT.4` | Lesson | [with value](./4-with-value) | Explains request-scoped metadata and the limits of context values. | `CT.1`, `CT.2`, `CT.3` |
-| `CT.5` | Exercise | [timeout-aware API client](./5-timeout-client) | Combines timeout control with a real HTTP request boundary. | `CT.1`, `CT.2`, `CT.3`, `CT.4` |
+| ID     | Type     | Surface                                        | Why It Matters                                                     | Requires                       |
+| ------ | -------- | ---------------------------------------------- | ------------------------------------------------------------------ | ------------------------------ |
+| `CT.1` | Lesson   | [background](./1-background)                   | Introduces root contexts and the `Context` interface.              | entry                          |
+| `CT.2` | Lesson   | [with cancel](./2-with-cancel)                 | Shows manual cancellation and goroutine cleanup.                   | `CT.1`                         |
+| `CT.3` | Lesson   | [with timeout](./3-with-timeout)               | Adds deadline-based cancellation for bounded work.                 | `CT.1`, `CT.2`                 |
+| `CT.4` | Lesson   | [with value](./4-with-value)                   | Explains request-scoped metadata and the limits of context values. | `CT.1`, `CT.2`, `CT.3`         |
+| `CT.5` | Exercise | [timeout-aware API client](./5-timeout-client) | Combines timeout control with a real HTTP request boundary.        | `CT.1`, `CT.2`, `CT.3`, `CT.4` |
 
 ## Suggested Order
 

@@ -6,15 +6,15 @@ Learn how to turn working Go services into operable software. This section cover
 
 ## Section Map
 
-| Track | Surface | Mission |
-| --- | --- | --- |
-| `SL.1-SL.5` | [Structured Logging](./01-structured-logging) | teach structured telemetry with `slog` |
-| `GS.1-GS.3` | [Graceful Shutdown](./02-graceful-shutdown) | teach signals, deadlines, cleanup, and service shutdown |
-| `CFG.1-CFG.5` | [Configuration](./04-configuration) | teach environment-driven startup discipline and validation |
-| `OPS.1-OPS.5` | [Observability](./05-observability) | teach health checks, metrics, tracing, and operational visibility |
-| `DOCKER.1-DOCKER.3` | [Containerization](./03-docker-and-deployment) | teach minimal, reproducible, and secure container images |
-| `DEPLOY.1-DEPLOY.3` | [Deployment](./03-docker-and-deployment) | teach deployment-aware service behavior and release checks |
-| `CG.1-CG.3` | [Code Generation](./06-code-generation) | teach `go:generate` and build-time automation |
+| Track               | Surface                                        | Mission                                                           |
+| ------------------- | ---------------------------------------------- | ----------------------------------------------------------------- |
+| `SL.1-SL.5`         | [Structured Logging](./01-structured-logging)  | teach structured telemetry with `slog`                            |
+| `GS.1-GS.3`         | [Graceful Shutdown](./02-graceful-shutdown)    | teach signals, deadlines, cleanup, and service shutdown           |
+| `CFG.1-CFG.5`       | [Configuration](./04-configuration)            | teach environment-driven startup discipline and validation        |
+| `OPS.1-OPS.5`       | [Observability](./05-observability)            | teach health checks, metrics, tracing, and operational visibility |
+| `DOCKER.1-DOCKER.3` | [Containerization](./03-docker-and-deployment) | teach minimal, reproducible, and secure container images          |
+| `DEPLOY.1-DEPLOY.3` | [Deployment](./03-docker-and-deployment)       | teach deployment-aware service behavior and release checks        |
+| `CG.1-CG.3`         | [Code Generation](./06-code-generation)        | teach `go:generate` and build-time automation                     |
 
 ## Why This Section Matters
 

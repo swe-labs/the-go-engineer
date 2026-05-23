@@ -51,9 +51,11 @@ go run ./08-quality-test/01-quality-and-performance/profiling/6-memory-layout
 ## Code Walkthrough
 
 ### Struct Alignment Demo
+
 Compares two structs with the same fields but different orders. Shows the `unsafe.Sizeof` difference.
 
 ### Cache Locality Demo
+
 Compares traversing a 2D slice "Row-by-Row" vs "Column-by-Column." Row-by-Row is significantly faster because it follows the way the memory is physically laid out, maximizing cache hits.
 
 ## Try It
@@ -63,9 +65,11 @@ Compares traversing a 2D slice "Row-by-Row" vs "Column-by-Column." Row-by-Row is
 3. (Advanced) Use `reflect.TypeOf(x).Field(i).Offset` to see exactly where each field starts in memory.
 
 ## In Production
+
 **Don't reorder every struct.** It can make code harder to read. Save this optimization for "Heavy" structs that you store in large slices (millions of elements) or for fields that are accessed millions of times per second in a tight loop.
 
 ## Thinking Questions
+
 1. Why does the CPU care about alignment?
 2. What is a "Cache Miss," and why is it expensive?
 3. Should you group fields by "Meaning" or by "Size"?

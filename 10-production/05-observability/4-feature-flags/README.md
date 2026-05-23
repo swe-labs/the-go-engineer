@@ -45,12 +45,15 @@ go run ./10-production/05-observability/4-feature-flags
 ## Code Walkthrough
 
 ### The Flag Interface
+
 Shows how to define a clean abstraction for checking flags so your business logic doesn't depend on a specific provider.
 
 ### The Conditional Logic
+
 Demonstrates the `if flag.Enabled("new_feature")` pattern in a real HTTP handler.
 
 ### The Lifecycle Management
+
 Discusses why flags should be short-lived and how to track their usage with metrics (OPS.1).
 
 ## Try It
@@ -60,9 +63,11 @@ Discusses why flags should be short-lived and how to track their usage with metr
 3. Discuss: Why is a feature flag safer than a code roll-back for fixing a bug in production?
 
 ## In Production
+
 **Don't let flags rot.** Feature flags are a form of **Technical Debt**. If you leave a flag in the code for 6 months after the feature is released, you now have to maintain two code paths forever. This makes testing harder and the code harder to read. Set an "Expiration Date" for every flag and make the developer who created it responsible for removing it.
 
 ## Thinking Questions
+
 1. What is the difference between a "Release Flag" and an "Ops Flag"?
 2. How do feature flags interact with your testing strategy?
 3. What happens if the feature flag service goes down? (Hint: Think about "Default Values").

@@ -46,15 +46,19 @@ go run ./07-concurrency/02-concurrency-patterns/1-errgroup
 ## Code Walkthrough
 
 ### `g.Go(func() error)`
+
 This replaces the `go func() { ... }` syntax. It handles the `Add()` and `Done()` logic for you automatically. If the function returns an error, the group captures it.
 
 ### `g.Wait()`
+
 Blocks until all goroutines finished. It returns the **first** error it encountered.
 
 ### `SetLimit(n)`
+
 A modern addition to the package. It ensures that no more than `n` goroutines are active at any given time. This is a "Semaphore-Lite" built directly into the group.
 
 ### `TryGo`
+
 Returns `false` if the limit has been reached, allowing you to implement custom backoff or prioritization logic.
 
 ## Try It
@@ -83,11 +87,13 @@ payment-gateway: connection refused (port 9443)
 ```
 
 ## In Production
+
 **Don't ignore the error from `g.Wait()`.**
 The whole point of `errgroup` is to handle failures. If you ignore the return value, you are essentially using a more expensive and slower version of `sync.WaitGroup`.
 Also, remember that `errgroup` only captures the **first** error. If you need a comprehensive report of every failure, you must collect them manually into a thread-safe slice.
 
 ## Thinking Questions
+
 1. Why does `g.Go` take a function that returns an `error` instead of a function that takes no arguments?
 2. What is the difference between `g.Wait()` and `wg.Wait()`?
 3. How does `errgroup` handle panics inside a goroutine? (Hint: It doesn't! It will crash the app just like a normal `go` routine).

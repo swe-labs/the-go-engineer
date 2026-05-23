@@ -67,9 +67,11 @@ The footer marks the transition to the essential Go toolchain.
 3. Add a fake tool name to the list and inspect the "not found" branch.
 
 ## In Production
+
 Reliable teams do not guess at their command loop. They use the same format-build-test rhythm locally, in CI, and in release pipelines so surprises show up early instead of late.
 
 ## Thinking Questions
+
 1. Why does Go treat formatting as a command instead of a personal style choice?
 2. What different problems do `go build` and `go test` solve?
 3. Why is checking the `PATH` part of environment confidence?

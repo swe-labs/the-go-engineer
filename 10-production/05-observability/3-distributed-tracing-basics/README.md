@@ -47,12 +47,15 @@ go run ./10-production/05-observability/3-distributed-tracing-basics
 ## Code Walkthrough
 
 ### Starting a Span
+
 Shows how to use a `Tracer` to create a new span from a context and defer the `span.End()` call.
 
 ### Adding Metadata (Attributes)
+
 Demonstrates attaching useful information like `user_id` or `http.status_code` to a span for better debugging.
 
 ### Context Hand-off
+
 Shows the pattern of passing the `ctx` through every function so that child spans can correctly identify their parent.
 
 ## Try It
@@ -62,9 +65,11 @@ Shows the pattern of passing the `ctx` through every function so that child span
 3. Discuss: Why should you never use `context.Background()` inside a traced function? (Hint: It breaks the trace chain).
 
 ## In Production
+
 **Don't trace everything.** High-volume services can generate terabytes of trace data per day. Use **Probability Sampling** to keep costs down. If a specific request fails or is exceptionally slow, you can use "Tail-based sampling" to ensure that those specific traces are kept, even if the "Happy Path" traces are discarded.
 
 ## Thinking Questions
+
 1. What is the difference between a Trace and a Span?
 2. How does a remote service know to continue the same trace started by your app?
 3. Why is `context` essential for distributed tracing in Go?

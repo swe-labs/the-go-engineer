@@ -14,13 +14,13 @@ By the end of this stage, a learner should be able to:
 
 ## Stage Map
 
-| Track | Surface | Core Job |
-| --- | --- | --- |
-| `GC.0-7` | Goroutines | Ground the reason concurrency exists and how goroutines communicate. |
-| `SY.1-6` | Synchronization | Learn the synchronization tools (mutex, atomic) that repair shared-state bugs. |
-| `CT.1-5` | Context | Learn to manage lifecycle, timeouts, and cancellation graphs. |
-| `TM.1-7` | Time | Teach timers, tickers, scheduling, and cleanup. |
-| `CP.1-5` | Concurrency Patterns | Master advanced patterns like `errgroup`, `sync.Pool`, and bounded pipelines. |
+| Track    | Surface              | Core Job                                                                       |
+| -------- | -------------------- | ------------------------------------------------------------------------------ |
+| `GC.0-7` | Goroutines           | Ground the reason concurrency exists and how goroutines communicate.           |
+| `SY.1-6` | Synchronization      | Learn the synchronization tools (mutex, atomic) that repair shared-state bugs. |
+| `CT.1-5` | Context              | Learn to manage lifecycle, timeouts, and cancellation graphs.                  |
+| `TM.1-7` | Time                 | Teach timers, tickers, scheduling, and cleanup.                                |
+| `CP.1-5` | Concurrency Patterns | Master advanced patterns like `errgroup`, `sync.Pool`, and bounded pipelines.  |
 
 ## Why This Stage Exists Now
 
