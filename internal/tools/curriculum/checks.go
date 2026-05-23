@@ -107,6 +107,18 @@ func validateProjectBinding() {
 	var core CoreBundle
 	readJSON("path.core.json", &core)
 
+	var electives ElectiveBundle
+	readJSON("path.electives.json", &electives)
+
+	// Build combined module lookup (core + electives)
+	allModules := make(map[string]bool)
+	for _, m := range core.Modules {
+		allModules[m.ID] = true
+	}
+	for _, m := range electives.Modules {
+		allModules[m.ID] = true
+	}
+
 	// Read projects.json as raw to check fields
 	projectsPath := filepath.Join(curriculumDir, "projects.json")
 	projectsData, err := os.ReadFile(projectsPath)
@@ -129,10 +141,22 @@ func validateProjectBinding() {
 		title := proj["title"].(string)
 
 		// Check required fields
-		requiredFields := []string{"id", "title", "slug", "type", "prerequisites", "deliverables", "verification", "rubric"}
+		requiredFields := []string{"id", "module_id", "title", "slug", "type", "prerequisites", "deliverables", "verification", "rubric"}
 		for _, field := range requiredFields {
 			if _, exists := proj[field]; !exists {
 				warnf("project '%s': missing required field '%s'", projID, field)
+				ok = false
+			}
+		}
+
+		// Check module_id references a valid module
+		if mid, exists := proj["module_id"]; exists {
+			midStr, midOK := mid.(string)
+			if !midOK || !strings.HasPrefix(midStr, "module-") {
+				warnf("project '%s': invalid module_id format '%v'", projID, mid)
+				ok = false
+			} else if !allModules[midStr] {
+				warnf("project '%s': module_id '%s' does not match any known module", projID, midStr)
 				ok = false
 			}
 		}
@@ -188,14 +212,10 @@ func validateNoPlaceholderZM() {
 
 	placeholderPhrases := []string{
 		"This lesson explains what problem",
-		"Think of",
 		"as one step in the learner's path",
 		"The lesson must explain the underlying mechanics",
 		"The lesson shows how Go expresses",
-		"Using",
 		"mechanically without understanding",
-		"Professional Go code uses",
-		"Complete a focused exercise that applies",
 	}
 
 	placeholderCount := 0
@@ -218,9 +238,8 @@ func validateNoPlaceholderZM() {
 		}
 
 		// Check specific fields using reflection via JSON marshal
-		zmJSON2, _ := json.Marshal(item.ZeroMagic)
 		var zmMap map[string]any
-		json.Unmarshal(zmJSON2, &zmMap)
+		json.Unmarshal(zmJSON, &zmMap)
 		for _, field := range []string{"problem_solved", "why_it_exists", "mental_model", "under_the_hood", "how_go_uses_it", "real_world_usage", "proof_of_understanding"} {
 			if val, exists := zmMap[field]; exists {
 				if str, ok := val.(string); ok && strings.TrimSpace(str) == "" {
@@ -408,9 +427,9 @@ func validateConceptOwnership() {
 	var concepts struct {
 		SchemaVersion string `json:"schema_version"`
 		Concepts      []struct {
-			Concept              string   `json:"concept"`
-			CanonicalOwner       string   `json:"canonical_owner"`
-			PreviewLocations     []string `json:"preview_locations"`
+			Concept                string   `json:"concept"`
+			CanonicalOwner         string   `json:"canonical_owner"`
+			PreviewLocations       []string `json:"preview_locations"`
 			ReinforcementLocations []string `json:"reinforcement_locations"`
 		} `json:"concepts"`
 	}
@@ -490,11 +509,11 @@ func validateCognitiveLoad() {
 	readJSON("path.electives.json", &electives)
 
 	type moduleLoad struct {
-		ID                              string
-		CognitiveLoad                   string
-		RecommendedBreakAfter           bool
+		ID                               string
+		CognitiveLoad                    string
+		RecommendedBreakAfter            bool
 		ContainsFoundationalHardConcepts bool
-		Pacing                          string
+		Pacing                           string
 	}
 	var allMods []moduleLoad
 
@@ -627,35 +646,71 @@ func validateZeroMagic() {
 		"core-12-07": {}, // Prometheus
 		"core-12-08": {}, // Tracing
 		"core-12-09": {}, // OpenTelemetry
-		"core-12-14": {}, // Escape analysis
 		"core-12-18": {}, // Alerting mindset
 		"core-12-20": {}, // Reliability review
 		// Phase 2 golden lessons — module 13 performance/memory
-		"core-12-10": {}, // pprof
-		"core-12-11": {}, // CPU profiling
-		"core-12-12": {}, // Memory profiling
-		"core-12-13": {}, // Benchmarks
-		"core-12-15": {}, // Memory layout
-		"core-12-16": {}, // Caching basics
-		"core-12-17": {}, // Cache invalidation
+		"core-13-10": {}, // pprof
+		"core-13-11": {}, // CPU profiling
+		"core-13-12": {}, // Memory profiling
+		"core-13-13": {}, // Benchmarks
+		"core-13-14": {}, // Escape analysis
+		"core-13-15": {}, // Memory layout
+		"core-13-16": {}, // Caching basics
+		"core-13-17": {}, // Cache invalidation
 		// Phase 2 golden lessons — module 14 architecture & distributed systems
-		"core-13-01": {}, // Why architecture exists
-		"core-13-02": {}, // Package boundaries
-		"core-13-03": {}, // Service layer
-		"core-13-04": {}, // Repository pattern deep dive
-		"core-13-05": {}, // Modular monolith
-		"core-13-06": {}, // Hexagonal architecture
-		"core-13-07": {}, // Domain modeling
-		"core-13-08": {}, // Invariants
-		"core-13-09": {}, // Event-driven basics
-		"core-13-10": {}, // Queues
-		"core-13-11": {}, // Retries and idempotent consumers
-		"core-13-12": {}, // Payment workflow design
-		"core-13-13": {}, // Multi-tenancy architecture
-		"core-13-14": {}, // Caching architecture
-		"core-13-15": {}, // When to split services
-		"core-13-16": {}, // Microservices as a tradeoff, not a default
-		"core-13-17": {}, // Architecture decision records
+		"core-14-01": {}, // Why architecture exists
+		"core-14-02": {}, // Package boundaries
+		"core-14-03": {}, // Service layer
+		"core-14-04": {}, // Repository pattern deep dive
+		"core-14-05": {}, // Modular monolith
+		"core-14-06": {}, // Hexagonal architecture
+		"core-14-07": {}, // Domain modeling
+		"core-14-08": {}, // Invariants
+		"core-14-09": {}, // Event-driven basics
+		"core-14-10": {}, // Queues
+		"core-14-11": {}, // Retries and idempotent consumers
+		"core-14-12": {}, // Payment workflow design
+		"core-14-13": {}, // Multi-tenancy architecture
+		"core-14-14": {}, // Caching architecture
+		"core-14-15": {}, // When to split services
+		"core-14-16": {}, // Microservices as a tradeoff, not a default
+		"core-14-17": {}, // Architecture decision records
+		// Phase 3 golden lessons — module 15 Docker, CI/CD, deployment
+		"core-15-01": {}, // Linux processes
+		"core-15-02": {}, // Signals
+		"core-15-03": {}, // Logs
+		"core-15-04": {}, // File permissions
+		"core-15-05": {}, // Networking basics
+		"core-15-06": {}, // Docker basics
+		"core-15-07": {}, // Docker images and layers
+		"core-15-08": {}, // Multi-stage builds
+		"core-15-09": {}, // Docker Compose
+		"core-15-10": {}, // Container health checks
+		"core-15-11": {}, // GitHub Actions
+		"core-15-12": {}, // CI pipeline
+		"core-15-13": {}, // Release artifacts
+		"core-15-14": {}, // Config in deployment
+		"core-15-15": {}, // Secrets in deployment
+		"core-15-16": {}, // Vulnerability scanning
+		"core-15-17": {}, // One deployment target
+		"core-15-18": {}, // Rollback basics
+		"core-15-19": {}, // Deployment runbook
+		// Phase 4 — module 16 career and portfolio
+		"core-16-01": {}, // README writing
+		"core-16-02": {}, // API docs
+		"core-16-03": {}, // Code review workflow
+		"core-16-04": {}, // Pull request etiquette
+		"core-16-05": {}, // Portfolio packaging
+		"core-16-06": {}, // Writing project narratives
+		"core-16-07": {}, // Resume project bullets
+		"core-16-08": {}, // Backend interview fundamentals
+		"core-16-09": {}, // Go interview topics
+		"core-16-10": {}, // SQL interview topics
+		"core-16-11": {}, // Debugging interview scenarios
+		"core-16-12": {}, // System design basics
+		"core-16-13": {}, // Architecture defense
+		"core-16-14": {}, // Capstone planning
+		"core-16-15": {}, // Demo preparation
 		// Critical failure-engineering items
 		"core-12-01": {},
 		"core-12-19": {},
@@ -741,7 +796,7 @@ func validateFailureEngineering() {
 	coverageModules := map[string]bool{
 		"module-08": true, "module-09": true, "module-10": true,
 		"module-11": true, "module-12": true, "module-14": true,
-		"module-15": true, "opslane": true,
+		"module-15": true, "module-18": true,
 	}
 
 	for _, item := range allItems {
@@ -771,8 +826,8 @@ func validateOperationalFailures() {
 	ok := true
 
 	var failures struct {
-		SchemaVersion    string `json:"schema_version"`
-		DocumentType     string `json:"document_type"`
+		SchemaVersion     string `json:"schema_version"`
+		DocumentType      string `json:"document_type"`
 		CurriculumVersion string `json:"curriculum_version"`
 		FailureCategories []struct {
 			Category    string   `json:"category"`

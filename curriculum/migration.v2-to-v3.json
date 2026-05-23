@@ -1,9 +1,9 @@
 {
-  "schema_version": "3.0.0",
+  "schema_version": "3.1.0",
   "document_type": "migration",
-  "curriculum_version": "3.0.0-draft.2",
-  "last_updated": "2026-05-17",
-  "name": "The Go Engineer v3 — Migration from v2",
+  "curriculum_version": "3.1.0-draft.1",
+  "last_updated": "2026-05-23",
+  "name": "The Go Engineer v3 \u2014 Migration from v2",
   "status": "draft",
   "architectural_decision": {
     "decision": "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
@@ -112,7 +112,13 @@
     "readme-assessment-evidence-present",
     "readme-preview-only-required-for-future-concepts",
     "readme-no-elective-blocks-core",
-    "readme-no-broken-human-readable-links"
+    "readme-no-broken-human-readable-links",
+    "project-graph-valid",
+    "crossref-entity-domains-valid",
+    "zero-magic-semantic-quality",
+    "schema-version-3.1.0",
+    "assessment-criteria-ids-match-module",
+    "project-module-id-matches-reinforces-prefix"
   ],
   "validation_commands": {
     "validate_schema": "go run ./internal/tools/curriculum validate-schema",

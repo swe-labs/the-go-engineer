@@ -163,6 +163,8 @@ func Validate(root string, report func(string)) (Result, error) {
 
 	markdownErrors := validateMarkdownSurfaces(root, report)
 
+	v21Errors := validateV21CurriculumFiles(root, report)
+
 	return Result{
 		LessonCount:      lessonCount,
 		FilesScanned:     filesScanned,
@@ -170,7 +172,7 @@ func Validate(root string, report func(string)) (Result, error) {
 		V2ItemCount:      v2ItemCount,
 		PlaceholderCount: v2PlaceholderCount,
 		HasV2:            hasV2,
-		ErrorCount:       pathErrors + runErrors + v2Errors + markdownErrors,
+		ErrorCount:       pathErrors + runErrors + v2Errors + markdownErrors + v21Errors,
 	}, nil
 }
 
@@ -1473,6 +1475,221 @@ func validateMarkdownLocalLinks(root, relPath string, report func(string)) int {
 		resolved := filepath.Clean(filepath.Join(filepath.Dir(relPath), filepath.FromSlash(target)))
 		if !pathExists(root, resolved) {
 			report(fmt.Sprintf("Broken local doc link: %s -> %s", filepath.ToSlash(relPath), target))
+			errorsFound++
+		}
+	}
+
+	return errorsFound
+}
+
+// v2.1 curriculum JSON file types for validation
+type v21Item struct {
+	ID              string `json:"id"`
+	ModuleID        string `json:"module_id"`
+	Title           string `json:"title"`
+	Type            string `json:"type"`
+	ZeroMagic       any    `json:"zero_magic"`
+	ZeroMagicStatus string `json:"zero_magic_status"`
+	Crossrefs       *struct {
+		BuildsOn     []any `json:"builds_on"`
+		PreviewOnly  []any `json:"preview_only"`
+		ReinforcedIn []any `json:"reinforced_in"`
+		Related      []any `json:"related"`
+	} `json:"crossrefs"`
+}
+
+type v21CoreCurriculum struct {
+	Items []v21Item `json:"items"`
+}
+
+type v21CrossRefFile struct {
+	Crossrefs *struct {
+		References []struct {
+			FromID   string `json:"from_id"`
+			Relation string `json:"relation"`
+			Reason   string `json:"reason"`
+		} `json:"references"`
+	} `json:"crossrefs"`
+}
+
+type v21FailuresFile struct {
+	Categories []struct {
+		Category string   `json:"category"`
+		Modules  []string `json:"modules"`
+	} `json:"failure_categories"`
+}
+
+var zeroMagicFieldCount = 13
+
+// items with architecturally justified builds_on deficits (orientation module)
+var buildsOnExceptionIDs = map[string]bool{
+	"core-00-01": true,
+	"core-00-02": true,
+	"core-00-03": true,
+	"core-00-04": true,
+	"core-00-05": true,
+}
+
+// terminal items in the last module (module-18) that cannot have reinforced_in references
+var terminalItemIDs = map[string]bool{
+	"opslane-01": true, "opslane-02": true, "opslane-03": true,
+	"opslane-04": true, "opslane-05": true, "opslane-06": true,
+	"opslane-07": true, "opslane-08": true, "opslane-09": true,
+	"opslane-10": true, "opslane-11": true, "opslane-12": true,
+	"opslane-13": true, "opslane-14": true, "opslane-15": true,
+}
+
+func validateV21CurriculumFiles(root string, report func(string)) int {
+	errorsFound := 0
+
+	// 1. File existence and parseability
+	jsonFiles := []string{
+		"curriculum/path.core.json",
+		"curriculum/path.electives.json",
+		"curriculum/crossrefs.json",
+		"curriculum/assessments.json",
+		"curriculum/concepts.json",
+		"curriculum/failures.json",
+		"curriculum/workspace.json",
+		"curriculum/projects.json",
+	}
+	for _, f := range jsonFiles {
+		if !pathExists(root, f) {
+			report(fmt.Sprintf("Missing v2.1 curriculum file: %s", f))
+			errorsFound++
+		}
+	}
+
+	// 2. Parse path.core.json for deep validation
+	corePath := filepath.Join(root, "curriculum/path.core.json")
+	coreData, err := os.ReadFile(corePath)
+	if err != nil {
+		report(fmt.Sprintf("Failed to read curriculum/path.core.json: %v", err))
+		errorsFound++
+		return errorsFound
+	}
+
+	var core v21CoreCurriculum
+	if err := json.Unmarshal(coreData, &core); err != nil {
+		report(fmt.Sprintf("Failed to parse curriculum/path.core.json: %v", err))
+		errorsFound++
+		return errorsFound
+	}
+
+	// 3. Zero-magic completeness check
+	for _, item := range core.Items {
+		if item.ZeroMagic == nil {
+			report(fmt.Sprintf("Missing zero_magic field: %s (%s)", item.ID, item.Title))
+			errorsFound++
+			continue
+		}
+
+		zm, ok := item.ZeroMagic.(map[string]any)
+		if !ok {
+			report(fmt.Sprintf("Invalid zero_magic type for: %s", item.ID))
+			errorsFound++
+			continue
+		}
+
+		if len(zm) != zeroMagicFieldCount {
+			report(fmt.Sprintf("Invalid zero_magic field count: %s has %d fields (expected %d)", item.ID, len(zm), zeroMagicFieldCount))
+			errorsFound++
+		}
+
+		status := strings.TrimSpace(item.ZeroMagicStatus)
+		if status != "golden" {
+			report(fmt.Sprintf("Item not at golden zero_magic status: %s (%s) -> %s", item.ID, item.Title, status))
+			errorsFound++
+		}
+	}
+
+	// 4. Crossref density check
+	for _, item := range core.Items {
+		if item.Crossrefs == nil {
+			report(fmt.Sprintf("Missing crossrefs block: %s (%s)", item.ID, item.Title))
+			errorsFound++
+			continue
+		}
+
+		bCount := len(item.Crossrefs.BuildsOn)
+		rCount := len(item.Crossrefs.Related)
+		rfCount := len(item.Crossrefs.ReinforcedIn)
+
+		if !buildsOnExceptionIDs[item.ID] && bCount < 2 {
+			report(fmt.Sprintf("Low builds_on density: %s has %d (minimum 2)", item.ID, bCount))
+			errorsFound++
+		}
+
+		if rCount < 3 {
+			report(fmt.Sprintf("Low related density: %s has %d (minimum 3)", item.ID, rCount))
+			errorsFound++
+		}
+
+		if !terminalItemIDs[item.ID] && rfCount < 1 {
+			report(fmt.Sprintf("Missing reinforced_in: %s has %d (minimum 1)", item.ID, rfCount))
+			errorsFound++
+		}
+	}
+
+	// 5. Parse crossrefs.json and check failure engineering coverage
+	xrefPath := filepath.Join(root, "curriculum/crossrefs.json")
+	if pathExists(root, "curriculum/crossrefs.json") {
+		xrefData, err := os.ReadFile(xrefPath)
+		if err == nil {
+			var xrefs v21CrossRefFile
+			if err := json.Unmarshal(xrefData, &xrefs); err == nil && xrefs.Crossrefs != nil {
+				feCount := 0
+				for _, ref := range xrefs.Crossrefs.References {
+					if strings.HasPrefix(ref.Reason, "Failure engineering:") {
+						feCount++
+					}
+				}
+				if feCount < 8 {
+					report(fmt.Sprintf("Low failure engineering coverage: crossrefs.json has %d FE refs (expected at least 8, one per failure-relevant module)", feCount))
+					errorsFound++
+				}
+			} else if err != nil {
+				report(fmt.Sprintf("Failed to parse curriculum/crossrefs.json: %v", err))
+				errorsFound++
+			}
+		} else {
+			report(fmt.Sprintf("Failed to read curriculum/crossrefs.json: %v", err))
+			errorsFound++
+		}
+	}
+
+	// 6. Parse failures.json for required coverage
+	failPath := filepath.Join(root, "curriculum/failures.json")
+	if pathExists(root, "curriculum/failures.json") {
+		failData, err := os.ReadFile(failPath)
+		if err == nil {
+			var failures v21FailuresFile
+			if err := json.Unmarshal(failData, &failures); err == nil {
+				modulesCovered := make(map[string]bool)
+				for _, cat := range failures.Categories {
+					for _, m := range cat.Modules {
+						modulesCovered[m] = true
+					}
+				}
+				expectedModules := []string{
+					"module-00", "module-01", "module-02", "module-03",
+					"module-04", "module-05", "module-06", "module-07",
+					"module-08", "module-09", "module-10", "module-11",
+					"module-12", "module-13", "module-14", "module-15",
+					"module-16", "module-18", // module-17 (electives) excluded intentionally
+				}
+				for _, m := range expectedModules {
+					if !modulesCovered[m] {
+						report(fmt.Sprintf("Missing failure coverage: module %s not in any failure category", m))
+						errorsFound++
+					}
+				}
+			} else if err != nil {
+				report(fmt.Sprintf("Failed to parse curriculum/failures.json: %v", err))
+				errorsFound++
+			}
+		} else {
+			report(fmt.Sprintf("Failed to read curriculum/failures.json: %v", err))
 			errorsFound++
 		}
 	}

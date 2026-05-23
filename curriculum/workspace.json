@@ -1,9 +1,9 @@
 {
-  "schema_version": "3.0.0",
+  "schema_version": "3.1.0",
   "document_type": "workspace_manifest",
-  "curriculum_version": "3.0.0-draft.3",
-  "last_updated": "2026-05-22",
-  "name": "The Go Engineer v3 — Curriculum Workspace",
+  "curriculum_version": "3.1.0-draft.1",
+  "last_updated": "2026-05-23",
+  "name": "The Go Engineer v3 \u2014 Curriculum Workspace",
   "status": "draft",
   "source_of_truth": [
     "curriculum/path.core.json",
@@ -67,7 +67,9 @@
     "readme-assessment-evidence-present",
     "readme-preview-only-required-for-future-concepts",
     "readme-no-elective-blocks-core",
-    "readme-no-broken-human-readable-links"
+    "readme-no-broken-human-readable-links",
+    "project-graph-valid",
+    "schema-version-3.1.0"
   ],
   "validation_commands": {
     "validate_schema": "go run ./internal/tools/curriculum validate-schema",
@@ -79,6 +81,21 @@
     "validate_assessment_completeness": "go run ./internal/tools/curriculum validate-assessment-completeness",
     "validate_unique_tags": "go run ./internal/tools/curriculum validate-unique-tags",
     "validate_crossrefs": "go run ./internal/tools/curriculum validate-crossrefs",
-    "validate_all": "go run ./internal/tools/curriculum validate-all"
+    "validate_all": "go run ./internal/tools/curriculum validate-all",
+    "validate_project_graph": "go run ./internal/tools/curriculum validate-project-graph"
+  },
+  "schema_version_policy": {
+    "active_version": "3.1.0",
+    "legacy_version": "3.0.0",
+    "rule": "All new and edited files must use schema_version 3.1.0. Files at 3.0.0 are accepted for reads only. Validators must reject writing 3.1.0-only fields into 3.0.0 files.",
+    "3.1.0_new_fields": {
+      "projects": [
+        "placement_anchor_item_id",
+        "prerequisite_item_ids",
+        "required_concepts",
+        "reinforcement_targets"
+      ],
+      "document_types": ["concept_ownership_registry"]
+    }
   }
 }
