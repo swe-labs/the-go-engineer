@@ -3,7 +3,7 @@
   "document_type": "workspace_manifest",
   "curriculum_version": "3.1.0-draft.1",
   "last_updated": "2026-05-23",
-  "name": "The Go Engineer v3 \u2014 Curriculum Workspace",
+  "name": "The Go Engineer v3 — Curriculum Workspace",
   "status": "draft",
   "source_of_truth": [
     "curriculum/path.core.json",
@@ -69,7 +69,11 @@
     "readme-no-elective-blocks-core",
     "readme-no-broken-human-readable-links",
     "project-graph-valid",
-    "schema-version-3.1.0"
+    "schema-version-3.1.0",
+    "assessment-criteria-ids-match-module",
+    "crossref-entity-domains-valid",
+    "project-module-id-matches-reinforces-prefix",
+    "zero-magic-semantic-quality"
   ],
   "validation_commands": {
     "validate_schema": "go run ./internal/tools/curriculum validate-schema",
@@ -95,7 +99,9 @@
         "required_concepts",
         "reinforcement_targets"
       ],
-      "document_types": ["concept_ownership_registry"]
+      "document_types": [
+        "concept_ownership_registry"
+      ]
     }
   }
 }
