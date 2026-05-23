@@ -15,7 +15,7 @@ Think of Configuration Files as **The Owner's Manual**.
 
 1. **Environment Variables**: Simple "Switches" (On/Off, Port Number).
 2. **Configuration Files**: Detailed "Schematics" (Database Connection Pool settings, Retry Policies, Feature Flags).
-3. **The Hybrid**: You use a file for the 50 settings that stay the same in every production cluster, and you use environment variables to override the 2 settings that are unique to *this* cluster (like the Database Password).
+3. **The Hybrid**: You use a file for the 50 settings that stay the same in every production cluster, and you use environment variables to override the 2 settings that are unique to _this_ cluster (like the Database Password).
 
 ## Visual Model
 
@@ -50,12 +50,15 @@ go run ./10-production/04-configuration/2-configuration-files
 ## Code Walkthrough
 
 ### The Config Struct
+
 Shows how to define a Go struct with tags (`yaml:"port"`, `json:"port"`) that match the file format.
 
 ### Parsing Logic
+
 Demonstrates reading a file from the disk and unmarshaling it into the struct.
 
 ### The Override Pattern
+
 Shows how to manually check for an environment variable and overwrite a field in the struct if it exists.
 
 ## Try It
@@ -65,9 +68,11 @@ Shows how to manually check for an environment variable and overwrite a field in
 3. Discuss: Why should you never commit a `config.yaml` that contains a real production password to Git? (See SEC.9).
 
 ## In Production
+
 **Beware of hidden defaults.** If your YAML parser ignores missing fields, your application might start up with a `0` or `""` value without you realizing it. Use a library that supports **Required Fields** or perform manual validation (CFG.5) immediately after parsing. Always provide an `example.config.yaml` in your repository so other developers know what keys are available.
 
 ## Thinking Questions
+
 1. When is a config file better than an environment variable?
 2. What is "Precedence," and why does it matter?
 3. Why is YAML more common than JSON for configuration files?

@@ -32,6 +32,7 @@ graph TD
 ## Machine View
 
 When a form is submitted with `method="POST"`, the browser encodes the data into a format called `application/x-www-form-urlencoded` (which looks like `email=alice%40example.com&password=secret`).
+
 - **Parsing**: Go does not automatically parse the request body for every request (as this would be a waste of CPU for simple GET requests). You must explicitly call `r.ParseForm()` or `r.ParseMultipartForm()`.
 - **Memory Limits**: Go's standard library has built-in protections that limit how much memory a form can consume, protecting you from "Zip Bomb" style attacks.
 - **PostForm vs Form**: `r.PostForm` only contains data from the request body (the safe way). `r.Form` contains data from both the body AND the URL query string (use with caution).
@@ -47,15 +48,19 @@ Open your browser to `http://localhost:8086`, try submitting empty fields, and o
 ## Code Walkthrough
 
 ### `r.ParseForm()`
+
 Reads the request body and populates `r.PostForm`. It is a good practice to check the error returned by this function, although it rarely fails for standard forms.
 
 ### `r.PostFormValue("key")`
+
 A convenient helper that calls `r.ParseForm()` for you automatically and returns the first value for the given key. If the key doesn't exist, it returns an empty string.
 
 ### Server-Side Validation
+
 This is the most important part of form handling. Never rely on HTML5 attributes like `required` or `type="email"`. An attacker can easily bypass these using `curl` or browser developer tools. Always re-validate everything on the server.
 
 ### Error Display
+
 If validation fails, you should re-render the form with helpful error messages, allowing the user to correct their mistakes without losing their previously entered data.
 
 ## Try It
@@ -65,10 +70,12 @@ If validation fails, you should re-render the form with helpful error messages, 
 3. Try to submit the form using `curl` with a missing field: `curl -X POST -d "email=alice@example.com" http://localhost:8086/signup`.
 
 ## In Production
+
 **Sanitize your output.**
 If you display a user's input back to them (e.g., "Registration successful for <username>"), ensure you use Go's `html/template` or `html.EscapeString` to prevent the user from injecting malicious HTML into your page.
 
 ## Thinking Questions
+
 1. Why is `r.PostForm` generally safer than `r.Form`?
 2. What happens if a form has two inputs with the same name? How do you access both values?
 3. How would you handle a file upload (like a profile picture) in a form? (Hint: Look up `multipart/form-data`).

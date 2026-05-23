@@ -30,9 +30,10 @@ graph LR
 ## Machine View
 
 At the code level, versioning usually involves either URL path segments or HTTP headers.
+
 - **URL Versioning** (`/v1/...`) is the most common. It makes it very clear to intermediate systems (like CDNs and Load Balancers) that these are different resources, which simplifies caching.
 - **Header Versioning** (`Accept: version=2`) keeps URLs "clean" but makes debugging and caching more complex.
-Regardless of the method, the goal is to route the request to a different handler or logic path that understands the expected data shape for that specific version.
+  Regardless of the method, the goal is to route the request to a different handler or logic path that understands the expected data shape for that specific version.
 
 ## Run Instructions
 
@@ -41,6 +42,7 @@ go run ./06-backend-db/01-web-and-database/apis/2-api-versioning-strategies
 ```
 
 Test the two versions:
+
 ```bash
 # Get the legacy V1 shape
 curl http://localhost:8089/v1/user
@@ -52,15 +54,18 @@ curl http://localhost:8089/v2/user
 ## Code Walkthrough
 
 ### Structured Versioning
+
 In the example, we define two different structs: `UserV1` and `UserV2`. This is the safest way to version. Even if the internal database structure changes, you can write conversion logic to map the new database fields back to the old `UserV1` JSON shape.
 
 ### Route Multiplexing
+
 We use the `http.ServeMux` to handle routing. By including the version in the route path (`/v1/user`), we explicitly separate the two contracts.
 
 ### Breaking vs. Non-Breaking
+
 - **Breaking**: Removing a field, changing a type, renaming a field, changing the URL.
 - **Non-Breaking**: Adding a new optional field, adding a new endpoint.
-**Rule of Thumb**: If a client needs to change their code to keep working, it's a breaking change and requires a new version.
+  **Rule of Thumb**: If a client needs to change their code to keep working, it's a breaking change and requires a new version.
 
 ## Try It
 
@@ -69,9 +74,11 @@ We use the `http.ServeMux` to handle routing. By including the version in the ro
 3. Add a new field to `UserV2` and verify that `UserV1` clients are unaffected.
 
 ## In Production
+
 Supporting many versions forever is expensive. Most professional APIs have a **Deprecation Policy**. For example: "We support v1 for 12 months after v2 is released." You should track the usage of old versions and proactively reach out to clients who are still using deprecated endpoints. Tools like **OpenAPI (Swagger)** can help document these transitions clearly.
 
 ## Thinking Questions
+
 1. Why is URL versioning generally preferred over Header versioning for public APIs?
 2. How would you handle a bug fix that needs to be applied to all versions simultaneously?
 3. What is the danger of having too many active versions (e.g., v1 through v15)?

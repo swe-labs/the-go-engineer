@@ -34,6 +34,7 @@ graph LR
 ## Machine View
 
 A buffered channel uses a **Circular Buffer** (ring buffer) in memory.
+
 - `make(chan T, 10)` allocates space for 10 elements of type `T` on the heap.
 - `len(ch)` returns the number of items currently in the buffer.
 - `cap(ch)` returns the total capacity.
@@ -48,12 +49,15 @@ go run ./07-concurrency/01-concurrency/goroutines/4-channels-buffered
 ## Code Walkthrough
 
 ### `make(chan T, N)`
+
 The second argument sets the capacity. Without it, the capacity is 0 (unbuffered).
 
 ### Non-Blocking Sends
+
 In the first example, we send 3 events to a channel of capacity 3. These sends happen **instantly** without a receiver being ready.
 
 ### Decoupling
+
 In the Producer-Consumer example, the producer can finish its first 5 jobs without waiting for the consumer. This "burst" handling is the primary reason to use buffers in production.
 
 ## Try It
@@ -85,10 +89,12 @@ Observe how the producer can stay "ahead" of the consumer until the buffer is fu
 ```
 
 ## In Production
+
 **Do not use massive buffers to hide latency.**
-A buffer of size 10,000 might prevent your producer from blocking, but it just delays the inevitable. If your consumer is slower than your producer, the buffer will *always* fill up eventually. Small buffers (1-100) are usually best for smoothing out jitter.
+A buffer of size 10,000 might prevent your producer from blocking, but it just delays the inevitable. If your consumer is slower than your producer, the buffer will _always_ fill up eventually. Small buffers (1-100) are usually best for smoothing out jitter.
 
 ## Thinking Questions
+
 1. When would you prefer an unbuffered channel over a buffered one?
 2. Why can't you change the capacity of a channel after it's created?
 3. What happens if the producer crashes while the buffer still has items in it?

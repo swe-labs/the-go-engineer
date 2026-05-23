@@ -48,12 +48,15 @@ go run ./10-production/05-observability/5-alerting-mindset
 ## Code Walkthrough
 
 ### Defining SLOs
+
 Shows how to translate a business requirement (e.g., "99.9% of requests must succeed") into a technical metric query.
 
 ### The Alerting Middleware
+
 Demonstrates a middleware that tracks the "Burn Rate" of your error budget and triggers a notification if it's too high.
 
 ### Runbook Integration
+
 Shows how to include a URL to a runbook in the metadata of your prometheus alerts.
 
 ## Try It
@@ -63,9 +66,11 @@ Shows how to include a URL to a runbook in the metadata of your prometheus alert
 3. Discuss: Why is "Alert Fatigue" one of the most dangerous things for a production team?
 
 ## In Production
+
 **If it doesn't require an action, it isn't an alert.** If an engineer receives a page, clicks "Acknowledge," and does nothing because "It always does that," then that alert should be deleted or turned into a dashboard. Every page should represent a real fire that requires a human to put it out.
 
 ## Thinking Questions
+
 1. What is an SLO (Service Level Objective), and how does it differ from an SLA (Service Level Agreement)?
 2. Why should you alert on symptoms (Errors) rather than causes (Memory usage)?
 3. How do you prevent "Alert Storms" when one service failure causes 100 other services to alert?

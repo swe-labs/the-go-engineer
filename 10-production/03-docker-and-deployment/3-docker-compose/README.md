@@ -52,12 +52,15 @@ graph TD
 ## Code Walkthrough
 
 ### The Compose File
+
 Shows a standard `docker-compose.yaml` structure with services, networks, and volumes.
 
 ### Environment Variable Injection
+
 Demonstrates how Compose can pass secrets and configuration (CFG.1) from your host machine into the containers.
 
 ### Health Checks
+
 Shows how to use `healthcheck` in Compose to ensure the database is actually ready before the Go app starts.
 
 ## Try It
@@ -68,9 +71,11 @@ Shows how to use `healthcheck` in Compose to ensure the database is actually rea
 4. Discuss: Why is it better to use Compose for local development than a local Kubernetes cluster?
 
 ## In Production
+
 **Don't use Docker Compose for production scaling.** While Compose is excellent for local development and small single-server deployments, it lacks the advanced features of an orchestrator like **Kubernetes** or **Amazon ECS**, such as auto-scaling, self-healing (restarting on different nodes), and rolling updates across a cluster of machines.
 
 ## Thinking Questions
+
 1. How do containers communicate with each other in a Compose environment?
 2. What is the difference between a "Named Volume" and a "Bind Mount"?
 3. Why should you use a `.env` file with Docker Compose?

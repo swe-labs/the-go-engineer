@@ -98,11 +98,11 @@ go run ./03-functions-errors/7-order-summary/_starter
 go test ./03-functions-errors/7-order-summary
 ```
 
-## ⚠️ In Production
+## In Production
 
 This is the everyday shape of backend Go code: validate, return errors explicitly, keep helpers small, and pass policy in as narrow callbacks. Closure-based configuration is common in pricing, retries, middleware, and feature-flag evaluation.
 
-## 🤔 Thinking Questions
+## Thinking Questions
 
 1. Why is returning an explicit error better than hiding failure inside printed output?
 2. What gets clearer when pricing policy is passed in as a function instead of hard-coded into `processOrder`?

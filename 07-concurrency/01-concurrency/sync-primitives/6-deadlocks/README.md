@@ -29,8 +29,9 @@ graph LR
 ## Machine View
 
 A deadlock occurs when there is a **Circular Wait**.
+
 1. **The Panic**: If Go's runtime scheduler detects that **all** goroutines are blocked (none are ready to run), it will crash the program with: `fatal error: all goroutines are asleep - deadlock!`.
-2. **Partial Deadlocks**: If even *one* goroutine is still able to run (like a background logger or a monitoring loop), the Go runtime **cannot** detect the deadlock. Your program will simply hang silently while memory and CPU usage stay flat.
+2. **Partial Deadlocks**: If even _one_ goroutine is still able to run (like a background logger or a monitoring loop), the Go runtime **cannot** detect the deadlock. Your program will simply hang silently while memory and CPU usage stay flat.
 
 ## Run Instructions
 
@@ -41,14 +42,17 @@ go run ./07-concurrency/01-concurrency/sync-primitives/6-deadlocks
 ## Code Walkthrough
 
 ### The Setup
+
 We have two resources, each with its own Mutex.
 
 ### The Circular Wait
+
 - Worker 1 locks A, then tries to lock B.
 - Worker 2 locks B, then tries to lock A.
-- If Worker 2 locks B *after* Worker 1 has already locked A, both workers will be blocked waiting for a lock held by the other.
+- If Worker 2 locks B _after_ Worker 1 has already locked A, both workers will be blocked waiting for a lock held by the other.
 
 ### The Fix (Consistent Ordering)
+
 The solution is simple: **Always lock in the same order.** If both workers were programmed to lock A then B, Worker 2 would simply wait at the "Lock A" step until Worker 1 was completely finished with both, and no deadlock would occur.
 
 ## Try It
@@ -75,13 +79,16 @@ Scenario: Circular Wait Deadlock
 ```
 
 ## In Production
+
 **Deadlocks are design failures.**
 To avoid them:
+
 - **Lock Ordering**: Document and enforce the order in which locks must be acquired.
 - **Avoid Nested Locks**: Try to never hold two locks at the same time.
 - **Use Channels**: Channels are much harder to deadlock than Mutexes because they naturally encourage a "Flow" of data rather than a "Gridlock" of state.
 
 ## Thinking Questions
+
 1. Why can't the Go compiler catch deadlocks at compile time?
 2. What is the difference between a Deadlock and a Livelock?
 3. How can you use `select` with a timeout to "break" a potential deadlock?

@@ -79,9 +79,11 @@ go test ./04-types-design/10-payroll-processor
 ```
 
 ## In Production
+
 Interface-driven processing is how Go code stays flexible without inheritance trees. Payment systems, storage layers, transports, and workers all benefit when callers depend on behavior contracts instead of concrete implementations.
 
 ## Thinking Questions
+
 1. Why is the payroll processor better off depending on `Payable` than on one employee struct?
 2. What changes when a value is stored behind an interface?
 3. Why is the generic helper useful here but not the main point of the exercise?

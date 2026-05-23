@@ -39,6 +39,7 @@ go run ./06-backend-db/01-web-and-database/http-servers/4-request-parsing-and-va
 ```
 
 Test the validation logic using `curl`:
+
 ```bash
 # Valid Request
 curl -X POST -d '{"username":"bob", "email":"bob@work.com", "age":30}' http://localhost:8083/users
@@ -53,15 +54,19 @@ curl -X POST -d '{"username":"oops", "age": "twenty"}' http://localhost:8083/use
 ## Code Walkthrough
 
 ### `json.NewDecoder`
+
 The standard way to parse JSON bodies. It connects an `io.Reader` directly to a struct. Always check the error returned by `Decode()`-it will tell you if the JSON was malformed or if the types didn't match.
 
 ### `r.URL.Query()`
+
 This returns a `url.Values` object, which is essentially a `map[string][]string`. Note that one key can have multiple values (e.g., `?tag=go&tag=web`). Use `.Get("key")` to get the first value for that key.
 
 ### The `Validate()` Method
+
 A clean pattern for validation is to define a method on your request struct. This keeps the handler focused on HTTP concerns (parsing/responding) and the struct focused on data integrity.
 
 ### Status Codes for Errors
+
 - `400 Bad Request`: Use this when the input format is wrong (malformed JSON).
 - `422 Unprocessable Entity`: Use this when the format is correct, but the data violates business rules (e.g., email missing).
 
@@ -72,9 +77,11 @@ A clean pattern for validation is to define a method on your request struct. Thi
 3. Create a helper function `respondWithError(w, code, message)` to dry up your error handling logic.
 
 ## In Production
+
 For complex validation, most Go teams use a validation library like **Go-Playground/Validator**. It allows you to define rules using struct tags, like `validate:"required,email"`. However, for simple logic, manual validation as shown in this lesson is more performant and easier to debug.
 
 ## Thinking Questions
+
 1. Why can you only read `r.Body` once?
 2. What happens if a client sends a JSON field that isn't in your struct?
 3. How would you handle a request that is too large (e.g., a 1GB JSON file)?

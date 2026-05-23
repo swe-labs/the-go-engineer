@@ -69,9 +69,11 @@ The builder is the efficient choice when constructing a string piece by piece in
 3. Add another value to the builder loop.
 
 ## In Production
+
 Text handling shows up everywhere: logs, config, CLI output, HTTP headers, and user input. Understanding immutability and choosing `strings.Builder` in hot loops prevents both bugs and unnecessary allocations.
 
 ## Thinking Questions
+
 1. Why does immutability make string code easier to reason about?
 2. When is `strings.Builder` a better choice than `+` concatenation?
 3. Why are trim and search helpers so common in backend code?

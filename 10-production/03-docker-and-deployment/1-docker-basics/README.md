@@ -36,7 +36,7 @@ graph TD
 
 ## Machine View
 
-- **Layer Caching**: Each line in a `Dockerfile` creates a "Layer." If you change a file, only the layers *after* that change need to be rebuilt.
+- **Layer Caching**: Each line in a `Dockerfile` creates a "Layer." If you change a file, only the layers _after_ that change need to be rebuilt.
 - **Isolation**: A container has its own network stack, filesystem, and process space, separated from the host OS via Linux namespaces and cgroups.
 - **Immutable**: Once an image is built, it cannot be changed. You must build a new image if you change the code.
 
@@ -53,12 +53,15 @@ graph TD
 ## Code Walkthrough
 
 ### The Basic Dockerfile
+
 Shows the most common instructions: `FROM` (base image), `WORKDIR`, `COPY`, `RUN go build`, and `CMD`.
 
 ### Image Tags
+
 Demonstrates how to name and version your images using the `-t` flag.
 
 ### Port Mapping
+
 Explains how to map a port on your local machine to a port inside the container using `-p`.
 
 ## Try It
@@ -69,9 +72,11 @@ Explains how to map a port on your local machine to a port inside the container 
 4. Discuss: Why is the `FROM golang:1.22` image so large (nearly 1GB)?
 
 ## In Production
+
 **Never use `latest`.** Always tag your images with a specific version number or the Git commit hash. Using `latest` makes your deployments non-deterministic-you might deploy a different version of the code than you intended because the `latest` tag was updated by someone else.
 
 ## Thinking Questions
+
 1. What is the difference between an Image and a Container?
 2. Why is "Layer Caching" important for fast CI/CD pipelines?
 3. What happens to the files inside a container when it is stopped?

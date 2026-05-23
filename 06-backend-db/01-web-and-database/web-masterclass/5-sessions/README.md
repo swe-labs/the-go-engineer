@@ -32,6 +32,7 @@ graph LR
 ## Machine View
 
 A session involves two parts: a **Client-Side Identifier** and a **Server-Side Store**.
+
 - **The Cookie**: The browser stores the session ID. In Go, we use `http.SetCookie`. We must set `HttpOnly: true` to prevent JavaScript from reading the cookie (protecting against XSS) and `SameSite: Lax` to protect against CSRF attacks.
 - **The Store**: The server keeps a map (or a database like Redis) where the ID is the key and the user's information is the value.
 - **Thread Safety**: Because Go handles every request in a separate goroutine, your session store (if it's a map) must be protected by a `sync.RWMutex` to prevent data races.
@@ -49,15 +50,19 @@ go run ./06-backend-db/01-web-and-database/web-masterclass/5-sessions
 ## Code Walkthrough
 
 ### `http.SetCookie(w, cookie)`
+
 The standard way to send a `Set-Cookie` header to the browser. The `Cookie` struct allows you to set the expiration, path, and security flags.
 
 ### `r.Cookie("name")`
+
 Retrieves a cookie from the incoming request. If the cookie doesn't exist, it returns an error, which you can use to identify unauthorized requests.
 
 ### `sync.RWMutex`
+
 Used to protect the `sessionStore` map. `Lock()` is used for writes (Login), and `RLock()` is used for reads (Secret), allowing multiple concurrent readers while ensuring exclusive access for writers.
 
 ### `crypto/rand`
+
 We use cryptographically secure random numbers to generate Session IDs. A simple `math/rand` number is too predictable and could allow an attacker to "guess" another user's session ID.
 
 ## Try It
@@ -67,10 +72,12 @@ We use cryptographically secure random numbers to generate Session IDs. A simple
 3. Implement a `handleLogout` function that clears the cookie and removes the ID from the server-side map.
 
 ## In Production
+
 **Don't use in-memory maps for production sessions.**
 If your server restarts, every single user will be logged out. Instead, use a persistent store like **Redis** or a **Database**. This also allows you to run multiple instances of your server behind a load balancer (Horizontal Scaling), as they can all share the same session data.
 
 ## Thinking Questions
+
 1. Why shouldn't you store a user's password or email address directly in a cookie?
 2. What is the benefit of the `HttpOnly` flag?
 3. What happens to your in-memory sessions if you have two copies of your server running?

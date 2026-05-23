@@ -32,6 +32,7 @@ graph LR
     A["input"] --> B["function boundary"]
     B --> C["value or error"]
 ```
+
 ```text
 main()
   |
@@ -148,10 +149,12 @@ The important thing is that `main()` now reads like a short list of jobs.
   No. Some functions only perform one fixed action.
 
 ## In Production
+
 Real programs become hard to read when every action stays inline.
 Small named functions are the first step toward readable application flow.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

@@ -47,13 +47,17 @@ go run ./07-concurrency/01-concurrency/context/4-with-value
 ## Code Walkthrough
 
 ### Custom Key Types
+
 `type contextKey string`. This is the single most important pattern in Go context usage. By defining a private type, you guarantee that no other package can accidentally overwrite your keys, even if they use the same string name.
 
 ### Value Extraction
+
 `ctx.Value(key).(string)`. Context values are stored as `any` (interface{}), so you must use a **Type Assertion** to get the actual data back.
 
 ### The "Request-Scoped" Rule
+
 Only store data that is specific to **this specific execution**.
+
 - **Good**: Request ID, Auth Token, Trace ID, User Locale.
 - **Bad**: DB Pool, Logger instance, Config map. These should be passed as explicit dependencies in structs or function arguments.
 
@@ -78,10 +82,12 @@ Observe how the values are extracted and inherited by child contexts:
 ```
 
 ## In Production
+
 **Context values are invisible dependencies.**
 If a function requires a `UserID` to work, it's usually better to pass it as an explicit argument. Use Context Values only for "transversal" data that needs to be available to 50 different functions (like a Logger's Trace ID) without adding it to every single signature.
 
 ## Thinking Questions
+
 1. Why doesn't Go provide a `Set` method for context values?
 2. What happens if you try to get a value for a key that doesn't exist?
 3. If `ctx.Value` is O(N), how can we store 20 values without killing performance? (Hint: Use a single struct as the value!).

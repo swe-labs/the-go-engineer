@@ -25,6 +25,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```text
 switch v := value.(type) {
 case string:
@@ -77,9 +78,11 @@ The default case handles types you have not explicitly handled.
   When you have an interface that can hold multiple concrete types and you need different logic for each.
 
 ## In Production
+
 Type switches are used in serialization (json.Unmarshal), reflection, and handling API responses that return different types.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

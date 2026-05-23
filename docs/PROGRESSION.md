@@ -33,35 +33,35 @@ flowchart LR
 
 ## Engineering Context Growth
 
-| Phase | Learner shift | Engineering weight |
-| --- | --- | --- |
-| Phase 0 | understand what the machine is doing | low, concrete |
-| Phase 1 | read and write Go intentionally | growing |
-| Phase 2 | build systems that behave predictably | high |
-| Phase 3 | design, secure, and operate systems | very high |
-| Phase 4 | integrate the curriculum into one backend system | full |
+| Phase   | Learner shift                                    | Engineering weight |
+| ------- | ------------------------------------------------ | ------------------ |
+| Phase 0 | understand what the machine is doing             | low, concrete      |
+| Phase 1 | read and write Go intentionally                  | growing            |
+| Phase 2 | build systems that behave predictably            | high               |
+| Phase 3 | design, secure, and operate systems              | very high          |
+| Phase 4 | integrate the curriculum into one backend system | full               |
 
 ## Key Milestones
 
-| Progress | Milestone | Surface | Proof |
-| --- | --- | --- | --- |
-| 5% | Machine model checkpoint | `HC.5` | explain process, memory, and execution basics |
-| 10% | First program | `GT.2` | run and modify Hello World |
-| 18% | Pricing Checkout | `CF.7` | reason through branches, loops, and cleanup |
-| 24% | Contact Directory | `DS.6` | use slices, maps, and pointers together |
-| 30% | Order Summary | `FE.7` | validate, orchestrate, and return errors cleanly |
-| 44% | Payroll Processor | `TI.10` | model types, interfaces, and generics together |
-| 58% | Filesystem Capstone | `FS.8` | build and test a filesystem-aware utility |
-| 66% | REST API | `HS.10` | build a timeout-aware HTTP service |
-| 70% | gRPC Service | `API.9` | define and serve a gRPC contract |
-| 74% | Repository Pattern Project | `DB.6` | manage database access through clear boundaries |
-| 77% | Concurrent Downloader | `GC.7` | coordinate goroutines and channels safely |
-| 81% | URL Health Checker | `CP.5` | debug concurrent failure and cancellation paths |
-| 85% | Benchmark Optimization | `PR.5` | profile and improve performance with evidence |
-| 88% | Modular Refactor | `ARCH.9` | reorganize a service around stronger architecture |
-| 91% | Secure API | `SEC.11` | apply practical security safeguards |
-| 96% | Shutdown Capstone | `GS.3` | coordinate graceful drain and shutdown |
-| 100% | Opslane Complete | `OPSL.10` | integrate the system end to end |
+| Progress | Milestone                  | Surface   | Proof                                             |
+| -------- | -------------------------- | --------- | ------------------------------------------------- |
+| 5%       | Machine model checkpoint   | `HC.5`    | explain process, memory, and execution basics     |
+| 10%      | First program              | `GT.2`    | run and modify Hello World                        |
+| 18%      | Pricing Checkout           | `CF.7`    | reason through branches, loops, and cleanup       |
+| 24%      | Contact Directory          | `DS.6`    | use slices, maps, and pointers together           |
+| 30%      | Order Summary              | `FE.7`    | validate, orchestrate, and return errors cleanly  |
+| 44%      | Payroll Processor          | `TI.10`   | model types, interfaces, and generics together    |
+| 58%      | Filesystem Capstone        | `FS.8`    | build and test a filesystem-aware utility         |
+| 66%      | REST API                   | `HS.10`   | build a timeout-aware HTTP service                |
+| 70%      | gRPC Service               | `API.9`   | define and serve a gRPC contract                  |
+| 74%      | Repository Pattern Project | `DB.6`    | manage database access through clear boundaries   |
+| 77%      | Concurrent Downloader      | `GC.7`    | coordinate goroutines and channels safely         |
+| 81%      | URL Health Checker         | `CP.5`    | debug concurrent failure and cancellation paths   |
+| 85%      | Benchmark Optimization     | `PR.5`    | profile and improve performance with evidence     |
+| 88%      | Modular Refactor           | `ARCH.9`  | reorganize a service around stronger architecture |
+| 91%      | Secure API                 | `SEC.11`  | apply practical security safeguards               |
+| 96%      | Shutdown Capstone          | `GS.3`    | coordinate graceful drain and shutdown            |
+| 100%     | Opslane Complete           | `OPSL.10` | integrate the system end to end                   |
 
 ## Completion Standard
 

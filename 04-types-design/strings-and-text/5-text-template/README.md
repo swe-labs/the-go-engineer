@@ -71,9 +71,11 @@ Execution walks the parsed template and fills in the placeholders from the provi
 3. Add another item to the `Items` slice and inspect the `range` output.
 
 ## In Production
+
 Templates are how teams generate emails, config files, reports, and stable text output without mixing presentation logic into business logic. The separation pays off quickly as systems grow.
 
 ## Thinking Questions
+
 1. Why is parsing once and executing many times a good design?
 2. Why must template-visible struct fields be exported?
 3. When is a template clearer than a long chain of manual string concatenation?

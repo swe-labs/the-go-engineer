@@ -10,14 +10,14 @@ This track belongs to [10 Production Operations](../README.md).
 
 ## Track Map
 
-| ID | Type | Surface | Mission | Requires |
-| --- | --- | --- | --- | --- |
-| **DOCKER.1** | Lesson | [Docker Basics](./1-docker-basics) | Master the `Dockerfile` for Go. | entry |
-| **DOCKER.2** | Lesson | [Multi-stage Builds](./2-multi-stage-builds) | Build in one image, run in a minimal one. | **DOCKER.1** |
-| **DOCKER.3** | Lesson | [Docker Compose](./3-docker-compose) | Orchestrate a Service + Database locally. | **DOCKER.2** |
-| **DEPLOY.1** | Lesson | [CI/CD Pipelines](./4-cicd-pipelines) | Automate testing and building on every push. | **DOCKER.3** |
-| **DEPLOY.2** | Lesson | [Blue/Green & Rollback](./5-blue-green-and-rollback) | Learn zero-downtime deployment patterns. | **DEPLOY.1** |
-| **DEPLOY.3** | Exercise | [Dockerised Service](./6-dockerised-service) | Containerize a complete Go API with DB. | **DOCKER/DEPLOY** |
+| ID           | Type     | Surface                                              | Mission                                      | Requires          |
+| ------------ | -------- | ---------------------------------------------------- | -------------------------------------------- | ----------------- |
+| **DOCKER.1** | Lesson   | [Docker Basics](./1-docker-basics)                   | Master the `Dockerfile` for Go.              | entry             |
+| **DOCKER.2** | Lesson   | [Multi-stage Builds](./2-multi-stage-builds)         | Build in one image, run in a minimal one.    | **DOCKER.1**      |
+| **DOCKER.3** | Lesson   | [Docker Compose](./3-docker-compose)                 | Orchestrate a Service + Database locally.    | **DOCKER.2**      |
+| **DEPLOY.1** | Lesson   | [CI/CD Pipelines](./4-cicd-pipelines)                | Automate testing and building on every push. | **DOCKER.3**      |
+| **DEPLOY.2** | Lesson   | [Blue/Green & Rollback](./5-blue-green-and-rollback) | Learn zero-downtime deployment patterns.     | **DEPLOY.1**      |
+| **DEPLOY.3** | Exercise | [Dockerised Service](./6-dockerised-service)         | Containerize a complete Go API with DB.      | **DOCKER/DEPLOY** |
 
 ## Why This Track Matters
 

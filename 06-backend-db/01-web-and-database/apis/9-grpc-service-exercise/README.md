@@ -46,15 +46,19 @@ The exercise simulates the behavior of a gRPC server implementation using native
 ## Solution Walkthrough
 
 ### Interface Satisfaction
+
 The `userService` struct satisfies the `UserServiceServer` interface. This is the core pattern of gRPC in Go: the transport is generated for you, but the business logic is your responsibility.
 
 ### Context Awareness
+
 Notice the use of `select { case <-ctx.Done(): ... }`. This is how you prevent "Goroutine Leaks" in high-traffic services. If the client gives up, the server should give up too.
 
 ### Error Handling
+
 In this exercise, we return a simple `fmt.Errorf`. In a real gRPC service, we would use the `google.golang.org/grpc/status` package to return codes like `codes.InvalidArgument` or `codes.Internal`.
 
 ### Decoupling
+
 The service implementation doesn't know anything about HTTP/2, binary framing, or serialization. It only knows about Go structs and contexts. This clean separation is why gRPC is so popular for backend development.
 
 ## Try It
@@ -78,12 +82,15 @@ The exercise simulates a gRPC server. You should see the successful retrieval of
 ```
 
 ## In Production
+
 For production gRPC services, you should always:
+
 - Use **Interceptors** for logging and auth (Lesson 7).
 - Set strict **Deadlines** on the client side.
 - Use a **Load Balancer** that understands gRPC (L7) to ensure traffic is distributed evenly across your backend instances.
 
 ## Thinking Questions
+
 1. Why is the `context.Context` the most important argument in a gRPC method?
 2. What are the benefits of having the server interface generated for you?
 3. How would you handle a "Breaking Change" in this service implementation?

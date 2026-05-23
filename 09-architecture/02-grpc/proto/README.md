@@ -47,9 +47,11 @@ cat ./09-architecture/02-grpc/proto/user.proto
 3. Discuss: Why are field tags (1, 2, 3) more important than field names in Protobuf?
 
 ## In Production
+
 **Treat your `.proto` files as immutable.** Never change a field tag once it has been deployed. Never change the type of a field tag. If you need to make a breaking change, create a new message or service version (e.g., `UserServiceV2`).
 
 ## Thinking Questions
+
 1. Why is Protobuf faster than JSON?
 2. What is the difference between `optional`, `required` (deprecated), and `repeated`?
 3. How do you handle "Enums" in Protobuf?

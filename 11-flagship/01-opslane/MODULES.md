@@ -20,18 +20,18 @@ This file explains what each module means, what proof looks like, and what comes
 
 ## Required Path
 
-| ID | Module | Current repository state |
-| --- | --- | --- |
-| `OPSL.1` | Foundation and Configuration | complete |
-| `OPSL.2` | Database and Models | complete |
-| `OPSL.3` | Authentication and Tenant Isolation | complete |
-| `OPSL.4` | HTTP API Layer | complete |
-| `OPSL.5` | Order Processing | complete |
-| `OPSL.6` | Payment Pipeline | complete |
-| `OPSL.7` | Event Bus and Worker Pools | complete |
-| `OPSL.8` | Caching Layer | complete |
-| `OPSL.9` | Observability | complete |
-| `OPSL.10` | Graceful Shutdown and Deployment | complete |
+| ID        | Module                              | Current repository state |
+| --------- | ----------------------------------- | ------------------------ |
+| `OPSL.1`  | Foundation and Configuration        | complete                 |
+| `OPSL.2`  | Database and Models                 | complete                 |
+| `OPSL.3`  | Authentication and Tenant Isolation | complete                 |
+| `OPSL.4`  | HTTP API Layer                      | complete                 |
+| `OPSL.5`  | Order Processing                    | complete                 |
+| `OPSL.6`  | Payment Pipeline                    | complete                 |
+| `OPSL.7`  | Event Bus and Worker Pools          | complete                 |
+| `OPSL.8`  | Caching Layer                       | complete                 |
+| `OPSL.9`  | Observability                       | complete                 |
+| `OPSL.10` | Graceful Shutdown and Deployment    | complete                 |
 
 ## OPSL.1 Foundation and Configuration
 

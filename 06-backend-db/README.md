@@ -14,11 +14,11 @@ By the end of this stage, a learner should be able to:
 
 ## Stage Map
 
-| Track | Surface | Core Job |
-| --- | --- | --- |
-| `HS.1-10` | HTTP Servers | Teach request/response boundaries, routing, middleware, and the REST API exercise. |
-| `API.1-9` | API Design | Compare REST and gRPC transport choices and implement an API service. |
-| `DB.1-8` | Databases | Teach connecting, querying, transactions, the repository pattern, and timeout budgeting. |
+| Track     | Surface      | Core Job                                                                                 |
+| --------- | ------------ | ---------------------------------------------------------------------------------------- |
+| `HS.1-10` | HTTP Servers | Teach request/response boundaries, routing, middleware, and the REST API exercise.       |
+| `API.1-9` | API Design   | Compare REST and gRPC transport choices and implement an API service.                    |
+| `DB.1-8`  | Databases    | Teach connecting, querying, transactions, the repository pattern, and timeout budgeting. |
 
 ## Why This Stage Exists Now
 

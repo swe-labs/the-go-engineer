@@ -17,11 +17,11 @@ This section belongs to [06 Backend, APIs & Databases](../README.md).
 
 ## Stage Map
 
-| Track | Entry | Milestone | Focus |
-| --- | --- | --- | --- |
-| HTTP Servers | [HS.1 net/http basics](./http-servers/1-net-http-basics) | `HS.10` | handler flow, middleware, validation, timeouts, shutdown, probes |
-| APIs | [API.1 REST design principles](./apis/1-rest-design-principles) | `API.9` | REST design, versioning, protobuf, gRPC, interceptors, trade-offs |
-| Databases | [DB.1 connecting to SQLite](./databases/1-connecting-to-db) | `DB.8` | SQL access, transactions, repositories, query safety, context timeouts |
+| Track        | Entry                                                           | Milestone | Focus                                                                  |
+| ------------ | --------------------------------------------------------------- | --------- | ---------------------------------------------------------------------- |
+| HTTP Servers | [HS.1 net/http basics](./http-servers/1-net-http-basics)        | `HS.10`   | handler flow, middleware, validation, timeouts, shutdown, probes       |
+| APIs         | [API.1 REST design principles](./apis/1-rest-design-principles) | `API.9`   | REST design, versioning, protobuf, gRPC, interceptors, trade-offs      |
+| Databases    | [DB.1 connecting to SQLite](./databases/1-connecting-to-db)     | `DB.8`    | SQL access, transactions, repositories, query safety, context timeouts |
 
 ## Supporting Reference Surfaces
 

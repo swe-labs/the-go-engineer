@@ -17,7 +17,7 @@ Loop control gives you two important tools:
 
 That lets one loop treat different iterations differently.
 
-> **Backward Reference:** In [Lesson 2: For Basics](../2-for-basics/README.md), you learned how to start and stop a loop based on the `for` condition. `break` and `continue` allow you to intervene from *inside* the loop body.
+> **Backward Reference:** In [Lesson 2: For Basics](../2-for-basics/README.md), you learned how to start and stop a loop based on the `for` condition. `break` and `continue` allow you to intervene from _inside_ the loop body.
 
 ## Visual Model
 
@@ -66,9 +66,11 @@ These statements do not just choose code paths. They also change whether the loo
 3. Remove `continue` and inspect how the output changes.
 
 ## In Production
+
 Search loops, filters, validators, and batch processors often depend on early exit and selective skipping. Used well, these tools make code faster and clearer. Used poorly, they hide control flow.
 
 ## Thinking Questions
+
 1. When would `break` be the wrong tool if you only want to skip one bad item?
 2. Why does the order of loop-control checks matter?
 3. What kinds of workloads benefit from stopping early?

@@ -15,11 +15,11 @@ Current stable release: `v2.1.1`
 
 Supported branches:
 
-| Branch | Purpose |
-| --- | --- |
-| `main` | active post-v2.1 implementation and integration line |
-| `release/v2` | stable v2.1.x maintenance line |
-| `release/v1` | stable v1 maintenance line |
+| Branch       | Purpose                                              |
+| ------------ | ---------------------------------------------------- |
+| `main`       | active post-v2.1 implementation and integration line |
+| `release/v2` | stable v2.1.x maintenance line                       |
+| `release/v1` | stable v1 maintenance line                           |
 
 Architecture v2.1 is locked. Normal work may improve lessons, tests, documentation, validators, or the Opslane flagship implementation, but must not add, remove, rename, or reorder public root sections without explicit maintainer approval.
 
@@ -51,30 +51,30 @@ Success! 597 files with run commands validated, and 12 v2 sections plus 215 v2 i
 
 ## Curriculum Map
 
-| Phase | Sections | Focus | Progress |
-| --- | --- | --- | --- |
-| 0 | s00 | machine foundation | 0% to 5% |
-| 1 | s01-s04 | language foundation | 5% to 52% |
-| 2 | s05-s08 | engineering core | 52% to 87% |
-| 3 | s09-s10 | systems engineering | 87% to 96% |
-| 4 | s11 | integrated flagship project | 96% to 100% |
+| Phase | Sections | Focus                       | Progress    |
+| ----- | -------- | --------------------------- | ----------- |
+| 0     | s00      | machine foundation          | 0% to 5%    |
+| 1     | s01-s04  | language foundation         | 5% to 52%   |
+| 2     | s05-s08  | engineering core            | 52% to 87%  |
+| 3     | s09-s10  | systems engineering         | 87% to 96%  |
+| 4     | s11      | integrated flagship project | 96% to 100% |
 
 ## Sections
 
-| Section | Folder | Primary outcome |
-| --- | --- | --- |
-| s00 | [00-how-computers-work](./00-how-computers-work) | understand execution, memory, terminal use, and processes |
-| s01 | [01-getting-started](./01-getting-started) | install Go, run programs, and read tool output |
-| s02 | [02-language-basics](./02-language-basics) | use values, control flow, slices, maps, and pointers intentionally |
-| s03 | [03-functions-errors](./03-functions-errors) | compose functions and handle failure explicitly |
-| s04 | [04-types-design](./04-types-design) | model behavior with structs, methods, interfaces, composition, and generics |
-| s05 | [05-packages-io](./05-packages-io) | work with modules, packages, CLI input, encoding, and filesystems |
-| s06 | [06-backend-db](./06-backend-db) | build HTTP servers, API contracts, gRPC services, and database-backed code |
-| s07 | [07-concurrency](./07-concurrency) | coordinate goroutines, channels, context, synchronization, and worker patterns |
-| s08 | [08-quality-test](./08-quality-test) | test, benchmark, profile, and verify behavior with evidence |
-| s09 | [09-architecture](./09-architecture) | apply package design, architecture patterns, and security controls |
-| s10 | [10-production](./10-production) | add logging, shutdown, configuration, observability, deployment, and code generation |
-| s11 | [11-flagship](./11-flagship) | integrate the curriculum through the Opslane SaaS backend capstone |
+| Section | Folder                                           | Primary outcome                                                                      |
+| ------- | ------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| s00     | [00-how-computers-work](./00-how-computers-work) | understand execution, memory, terminal use, and processes                            |
+| s01     | [01-getting-started](./01-getting-started)       | install Go, run programs, and read tool output                                       |
+| s02     | [02-language-basics](./02-language-basics)       | use values, control flow, slices, maps, and pointers intentionally                   |
+| s03     | [03-functions-errors](./03-functions-errors)     | compose functions and handle failure explicitly                                      |
+| s04     | [04-types-design](./04-types-design)             | model behavior with structs, methods, interfaces, composition, and generics          |
+| s05     | [05-packages-io](./05-packages-io)               | work with modules, packages, CLI input, encoding, and filesystems                    |
+| s06     | [06-backend-db](./06-backend-db)                 | build HTTP servers, API contracts, gRPC services, and database-backed code           |
+| s07     | [07-concurrency](./07-concurrency)               | coordinate goroutines, channels, context, synchronization, and worker patterns       |
+| s08     | [08-quality-test](./08-quality-test)             | test, benchmark, profile, and verify behavior with evidence                          |
+| s09     | [09-architecture](./09-architecture)             | apply package design, architecture patterns, and security controls                   |
+| s10     | [10-production](./10-production)                 | add logging, shutdown, configuration, observability, deployment, and code generation |
+| s11     | [11-flagship](./11-flagship)                     | integrate the curriculum through the Opslane SaaS backend capstone                   |
 
 ## Learning Model
 
@@ -111,22 +111,22 @@ go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance
 
 ## Documentation
 
-| Document | Purpose |
-| --- | --- |
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | locked public curriculum structure |
-| [curriculum.v2.json](./curriculum.v2.json) | machine-readable curriculum registry |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | teaching contract and lesson authoring rules |
-| [LEARNING-PATH.md](./LEARNING-PATH.md) | recommended paths through the curriculum |
-| [docs/PROGRESSION.md](./docs/PROGRESSION.md) | phase and milestone progression |
-| [CODE-STANDARDS.md](./CODE-STANDARDS.md) | Go source, comments, and teaching-code standards |
-| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | test and verification expectations |
-| [COMMON-MISTAKES.md](./COMMON-MISTAKES.md) | common Go mistakes and where they are taught |
-| [docs/ENGINEERING_ERROR_FRAMEWORK.md](./docs/ENGINEERING_ERROR_FRAMEWORK.md) | backend and production error model |
-| [docs/flagship/OPSLANE_SAAS_BACKEND.md](./docs/flagship/OPSLANE_SAAS_BACKEND.md) | Opslane flagship specification |
-| [CONTRIBUTING.md](./CONTRIBUTING.md) | contribution and pull request workflow |
-| [RELEASE.md](./RELEASE.md) | release and branch maintenance process |
-| [MAINTAINER-CHECKLIST.md](./MAINTAINER-CHECKLIST.md) | maintainer review and release checklist |
-| [CHANGELOG.md](./CHANGELOG.md) | release history |
+| Document                                                                         | Purpose                                          |
+| -------------------------------------------------------------------------------- | ------------------------------------------------ |
+| [ARCHITECTURE.md](./ARCHITECTURE.md)                                             | locked public curriculum structure               |
+| [curriculum.v2.json](./curriculum.v2.json)                                       | machine-readable curriculum registry             |
+| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md)                             | teaching contract and lesson authoring rules     |
+| [LEARNING-PATH.md](./LEARNING-PATH.md)                                           | recommended paths through the curriculum         |
+| [docs/PROGRESSION.md](./docs/PROGRESSION.md)                                     | phase and milestone progression                  |
+| [CODE-STANDARDS.md](./CODE-STANDARDS.md)                                         | Go source, comments, and teaching-code standards |
+| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md)                                   | test and verification expectations               |
+| [COMMON-MISTAKES.md](./COMMON-MISTAKES.md)                                       | common Go mistakes and where they are taught     |
+| [docs/ENGINEERING_ERROR_FRAMEWORK.md](./docs/ENGINEERING_ERROR_FRAMEWORK.md)     | backend and production error model               |
+| [docs/flagship/OPSLANE_SAAS_BACKEND.md](./docs/flagship/OPSLANE_SAAS_BACKEND.md) | Opslane flagship specification                   |
+| [CONTRIBUTING.md](./CONTRIBUTING.md)                                             | contribution and pull request workflow           |
+| [RELEASE.md](./RELEASE.md)                                                       | release and branch maintenance process           |
+| [MAINTAINER-CHECKLIST.md](./MAINTAINER-CHECKLIST.md)                             | maintainer review and release checklist          |
+| [CHANGELOG.md](./CHANGELOG.md)                                                   | release history                                  |
 
 ## Contribution Workflow
 

@@ -84,9 +84,11 @@ go test ./04-types-design/strings-and-text/6-config-parser
 ```
 
 ## In Production
+
 Config parsing is exactly where text bugs become system bugs. Poor parsing rules, unstable output, and ad hoc string handling lead to silent misconfiguration and painful incident debugging.
 
 ## Thinking Questions
+
 1. Why is compiling the regex once better than compiling it inside the scan loop?
 2. What advantage does a map provide after parsing?
 3. Why is template-based rendering safer than manual scattered output?

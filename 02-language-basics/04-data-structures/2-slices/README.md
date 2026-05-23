@@ -34,6 +34,7 @@ graph TD
     A["many values"] --> B["one collection type"]
     B --> C["read or update by position or key"]
 ```
+
 ```text
 items := make([]int, 0, 3)
 
@@ -63,6 +64,7 @@ so the slice can keep growing
 A slice is not an array. A slice is a data structure that points to an array.
 
 When you create a slice, Go creates a small "header" with three fields:
+
 - **pointer**: the address of the first element in the backing array
 - **len**: how many elements are currently accessible
 - **cap**: how many elements can be added before the backing array must be reallocated
@@ -151,11 +153,13 @@ by default.
   No. It usually creates another view over the same underlying data.
 
 ## In Production
+
 Slices are everywhere in Go.
 Understanding `len`, `cap`, `make`, and `append` prevents a huge amount of confusion later in file
 processing, HTTP work, concurrency, and general application code.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

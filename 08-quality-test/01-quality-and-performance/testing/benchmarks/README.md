@@ -45,9 +45,11 @@ go test -bench=. -benchmem ./08-quality-test/01-quality-and-performance/testing/
 ## Code Walkthrough
 
 ### `BenchmarkStringConcat`
+
 Compares `+` operator vs `strings.Builder`. At small scales, they look similar. At large scales, `strings.Builder` wins by avoiding repeated allocations.
 
 ### `BenchmarkSliceGrowth`
+
 Compares `append()` on a nil slice vs `make([]T, 0, cap)`. Pre-allocating capacity eliminates resizing costs.
 
 ## Try It
@@ -57,9 +59,11 @@ Compares `append()` on a nil slice vs `make([]T, 0, cap)`. Pre-allocating capaci
 3. Remove `b.ResetTimer()` and see how expensive setup work inflates your `ns/op`.
 
 ## In Production
+
 Never optimize based on a "feeling." Always write a benchmark first. Micro-benchmarks are great for utility functions (parsers, math, etc.), but they don't capture system-level effects like network latency or database lock contention. For those, you need **Profiling** (`PR.1`).
 
 ## Thinking Questions
+
 1. Why does `b.N` change between different runs of the same benchmark?
 2. If two functions have the same `ns/op` but one has 10x more `allocs/op`, which one should you prefer for a high-traffic server?
 3. What happens if you put a `defer` inside the `b.N` loop?

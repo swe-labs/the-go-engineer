@@ -46,12 +46,15 @@ go run ./10-production/01-structured-logging/3-custom-handler
 ## Code Walkthrough
 
 ### The `slog.Handler` Interface
+
 A deep dive into the four methods required to build a compliant handler.
 
 ### The "Notice" Handler
+
 Shows a real-world example of a handler that only triggers on `LevelWarn` and `LevelError`, sending a notification to a simulated external service.
 
 ### Formatting Logic
+
 Demonstrates how to manually iterate over the attributes in a `slog.Record` and format them into a custom string or JSON structure.
 
 ## Try It
@@ -61,9 +64,11 @@ Demonstrates how to manually iterate over the attributes in a `slog.Record` and 
 3. Discuss: Why should you avoid making blocking network calls (like an HTTP POST to Slack) directly inside the `Handle` method? (Hint: Think about concurrency).
 
 ## In Production
+
 **Performance matters.** The `Handle` method is called every time your application logs. If your handler is slow or performs disk I/O synchronously, it will slow down your entire application. Always use **Asynchronous Processing** (e.g., a worker pool or a channel) for slow destinations like remote APIs or databases.
 
 ## Thinking Questions
+
 1. What is the difference between a `Handler` and a `Logger`?
 2. How do you "Chain" multiple handlers together (e.g., Log to File AND Log to Console)?
 3. Why does `slog.Record` use a specialized iterator instead of a simple map for attributes?

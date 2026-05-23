@@ -69,9 +69,11 @@ These make regex useful for sanitizing and transforming text, not only matching 
 3. Replace a different sensitive pattern with a masked value.
 
 ## In Production
+
 Regex is powerful but easy to misuse. Precompiling patterns, keeping expressions readable, and understanding the engine's guarantees are what keep parsing code fast and maintainable.
 
 ## Thinking Questions
+
 1. Why is `MustCompile` appropriate for hardcoded patterns?
 2. When do capture groups matter more than plain matching?
 3. Why is Go's RE2 choice operationally important?

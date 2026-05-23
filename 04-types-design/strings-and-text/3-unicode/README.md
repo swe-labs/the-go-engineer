@@ -68,9 +68,11 @@ The `unicode` package helps classify characters during validation and parsing.
 3. Add another `unicode` classification check.
 
 ## In Production
+
 Unicode bugs are real production bugs. Counting bytes when you meant characters, slicing inside a multi-byte character, or iterating text incorrectly leads to broken validation, mangled UI text, and corrupted logs.
 
 ## Thinking Questions
+
 1. Why is `len(s)` not enough for many text problems?
 2. Why is `for range` a safer default than indexing byte-by-byte?
 3. What kinds of systems fail when they confuse bytes with characters?

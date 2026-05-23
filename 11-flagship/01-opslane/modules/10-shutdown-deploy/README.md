@@ -36,6 +36,7 @@ Implementation map: [SURFACE.md](./SURFACE.md)
 ## Required Files and Boundaries
 
 Shutdown behavior coordinates HTTP, database, and background work. It ensures:
+
 1. Load balancers stop sending traffic (health returns 503).
 2. In-flight HTTP requests complete.
 3. The event bus stops accepting new jobs.

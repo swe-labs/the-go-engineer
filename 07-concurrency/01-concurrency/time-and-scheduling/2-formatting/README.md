@@ -18,15 +18,15 @@ Think of Go's Time Formatting as **A Mirror**.
 
 ## Visual Model
 
-| Component | Value in Reference Date |
-| :--- | :--- |
-| **Month** | 01 (January) |
-| **Day** | 02 |
-| **Hour** | 03 (PM) or 15 (24h) |
-| **Minute** | 04 |
-| **Second** | 05 |
-| **Year** | 06 (2006) |
-| **Zone** | 07 (-07:00) |
+| Component  | Value in Reference Date |
+| :--------- | :---------------------- |
+| **Month**  | 01 (January)            |
+| **Day**    | 02                      |
+| **Hour**   | 03 (PM) or 15 (24h)     |
+| **Minute** | 04                      |
+| **Second** | 05                      |
+| **Year**   | 06 (2006)               |
+| **Zone**   | 07 (-07:00)             |
 
 **Mnemonic**: 1 (Month), 2 (Day), 3 (Hour), 4 (Minute), 5 (Second), 6 (Year), 7 (Zone).
 
@@ -45,15 +45,21 @@ go run ./07-concurrency/01-concurrency/time-and-scheduling/2-formatting
 ## Code Walkthrough
 
 ### `now.Format(layout)`
+
 To get a string, you call `Format` on a time object.
+
 - Example: `now.Format("Jan 2, 2006")` -> `Apr 29, 2026`.
 
 ### `time.Parse(layout, value)`
+
 To get a time object from a string. Note that `time.Parse` returns an error. If the string doesn't match the layout exactly, it will fail.
+
 - Tip: Use `time.RFC3339` for API and Database interactions.
 
 ### Built-in Constants
+
 Go provides constants for common standards so you don't have to remember the reference date:
+
 - `time.RFC3339`: `2006-01-02T15:04:05Z07:00` (The Gold Standard).
 - `time.Kitchen`: `3:04PM`.
 
@@ -78,10 +84,12 @@ Parsed RFC3339 (in UTC): 2025-12-25 09:00:00 +0000 UTC
 ```
 
 ## In Production
+
 **Always use `time.ParseInLocation` when parsing local times.**
 `time.Parse` assumes UTC unless the string contains timezone info. If you are parsing a user's input from a specific city (like "2024-05-01 10:00"), you must specify the `time.Location` to avoid being off by several hours.
 
 ## Thinking Questions
+
 1. Why did Go choose the specific date `January 2, 2006`? (Hint: 1-2-3-4-5-6).
 2. How do you format a date with a suffix like "1st", "2nd", or "3rd"? (Hint: Go doesn't support this natively!).
 3. What is the difference between `03` and `15` in a layout string?

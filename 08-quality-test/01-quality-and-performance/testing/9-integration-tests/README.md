@@ -46,9 +46,11 @@ go test -v ./08-quality-test/01-quality-and-performance/testing/9-integration-te
 ## Code Walkthrough
 
 ### Shared State Management
+
 The code demonstrates how to initialize a real database connection (or a simulated one like SQLite) and ensure that data created in one test doesn't leak into the next.
 
 ### Environmental Configuration
+
 Shows how to use environment variables (e.g., `DB_URL`) to allow the same test to run against a local SQLite for speed and a real Postgres in CI for accuracy.
 
 ## Try It
@@ -58,9 +60,11 @@ Shows how to use environment variables (e.g., `DB_URL`) to allow the same test t
 3. Try to run two integration tests in parallel. What happens to the shared data?
 
 ## In Production
+
 **Don't try to cover every edge case with integration tests.** They are slow, brittle, and expensive. Use them to verify that your **Configurations** and **Schemas** are correct. Use Unit Tests for complex logic. A healthy test suite follows the "Test Pyramid": thousands of Unit Tests, hundreds of Integration Tests, and a dozen End-to-End Tests.
 
 ## Thinking Questions
+
 1. Why are integration tests often "Flaky" (randomly failing)?
 2. How does "Containerization" (Docker) change the way we write integration tests?
 3. Should integration tests run on every commit, or only before a release?

@@ -46,15 +46,19 @@ Open `http://localhost:8088/api/items?page=1` and change the `page` parameter to
 ## Code Walkthrough
 
 ### Query Parameter Parsing
+
 We use `r.URL.Query().Get("page")` and `strconv.Atoi` to read the user's requested page. We always provide a default (Page 1) in case the parameter is missing or invalid.
 
 ### Metadata Calculation
+
 We calculate the `TotalPages` using `math.Ceil(TotalRecords / PageSize)`. This ensures that if we have 105 items and a page size of 10, we correctly identify that there are 11 pages (10 full pages and 1 partial page).
 
 ### The JSON Envelope
+
 Instead of returning a simple array, we return an object that contains both the `items` (the data) and the `metadata` (the context). This allows the frontend to know how many page buttons to render.
 
 ### Range Logic
+
 In the example, we simulate a database by slicing a local array. We use careful boundary checks (`if end > totalItems { end = totalItems }`) to prevent "Index Out of Range" panics.
 
 ## Try It
@@ -64,10 +68,12 @@ In the example, we simulate a database by slicing a local array. We use careful 
 3. Try to request a page number that doesn't exist (e.g., `page=999`). How does your code handle it?
 
 ## In Production
+
 **Set a Maximum Page Size.**
 Never let a user specify their own page size without a limit (e.g., `page_size=1000000`). This is a common way to crash a server by exhausting its memory. Always cap the page size at a reasonable limit like 100.
 
 ## Thinking Questions
+
 1. Why is an `ORDER BY` clause mandatory for reliable pagination?
 2. What are the downsides of `OFFSET` pagination for very large datasets?
 3. How would you handle pagination if your items were being added to the database every second (like a Twitter feed)?

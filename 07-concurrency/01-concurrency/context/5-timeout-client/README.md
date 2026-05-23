@@ -32,6 +32,7 @@ graph LR
 ## Machine View
 
 When you use `http.NewRequestWithContext(ctx, ...)`:
+
 - The `http.DefaultClient` checks the context at every stage: DNS lookup, TCP dial, TLS handshake, and reading the response body.
 - If the context expires at **any** of these stages, the client immediately closes the underlying socket and returns an error.
 - This is significantly better than `http.Client.Timeout`, because it allows you to dynamically adjust the timeout based on the specific request or propagate a deadline from an incoming RPC call.
@@ -47,7 +48,6 @@ go run ./07-concurrency/01-concurrency/context/5-timeout-client
 - **http.NewRequestWithContext**: This is the modern replacement for `http.NewRequest`. It permanently links the request's lifetime to the context. If you use the older method, the context is ignored, and your request can hang forever.
 - **ctx.Err() == context.DeadlineExceeded**: We use this check to provide a helpful error message. It's important to distinguish between "The server is down" (Connection Refused) and "The server is too slow" (Timeout).
 - **Resource Cleanup**: Even though the context times out, you must still call `cancel()` via `defer`. This ensures that the context's internal timer is stopped immediately, freeing up CPU resources.
-
 
 ## Try It
 
@@ -70,16 +70,20 @@ Observe the two outcomes (Success vs. Forced Timeout):
 ```
 
 ## In Production
+
 **Set defaults at the Client level too.**
 While using a Context per request is best, you should also configure your `http.Client` with a global `Timeout` as a "Last Resort" safety net.
+
 ```go
 client := &http.Client{
     Timeout: 30 * time.Second,
 }
 ```
+
 In a high-scale microservice architecture, a single service without timeouts can cause a "Deadly Embrace" where every service in the chain gets stuck waiting for each other, leading to a total system blackout.
 
 ## Thinking Questions
+
 1. If the server receives the request but the client times out while waiting for the response, does the server know to stop working? (Hint: Only if the server also uses the request context!).
 2. Why is `NewRequestWithContext` better than setting `client.Timeout`?
 3. How can you use `context.WithValue` to track which requests timed out in your logs?

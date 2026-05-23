@@ -43,6 +43,7 @@ graph LR
 
 gRPC streaming is made possible by **HTTP/2 Streams**.
 In HTTP/1.1, a "stream" didn't really exist; you just held the connection open. In HTTP/2, multiple independent "streams" can exist on a single TCP connection. This means you can have a bidirectional gRPC chat happening at the same time as a large file upload, and neither will block the other.
+
 - **Backpressure**: gRPC uses HTTP/2 flow control to ensure that a fast sender doesn't overwhelm a slow receiver.
 - **Cancellation**: If a client closes their side of a stream, the server is notified immediately via the `context.Context`, allowing it to stop doing unnecessary work.
 
@@ -57,12 +58,15 @@ Review the `streaming.proto` file to see how the `stream` keyword is used in met
 ## Code Walkthrough
 
 ### `rpc GetNotifications(Request) returns (stream Notification)`
+
 The `stream` keyword on the return type indicates that the server will return an object that the client can iterate over. In Go, this is generated as a `Recv()` method on the client and a `Send()` method on the server.
 
 ### `rpc UploadSensorData(stream SensorData) returns (Response)`
+
 The `stream` keyword on the parameter indicates that the client will send multiple messages. The server will receive these in a loop until the client signals it is finished.
 
 ### `rpc RealTimeChat(stream Message) returns (stream Message)`
+
 The ultimate form of communication. Both sides have a `Send()` and `Recv()` loop running concurrently (often in different goroutines).
 
 ## Try It
@@ -72,9 +76,11 @@ The ultimate form of communication. Both sides have a `Send()` and `Recv()` loop
 3. Think about how you would handle a network disconnect in the middle of a 1-hour bidirectional stream.
 
 ## In Production
+
 Streaming is powerful but **Expensive**. Each active stream keeps a TCP connection open and a goroutine active on the server. If you have 10,000 users all holding open "Notification Streams," you need a plan for scaling and resource management. Always implement **Timeouts** and **Keep-Alives** to clean up "Zombie Streams" from dead clients.
 
 ## Thinking Questions
+
 1. Why is gRPC streaming better than WebSocket for service-to-service communication?
 2. How would you implement a "Heartbeat" inside a bidirectional stream?
 3. When should you use a stream instead of a simple array in a Unary response? (Hint: Think about memory usage).

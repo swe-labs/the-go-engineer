@@ -53,12 +53,15 @@ go run ./10-production/02-graceful-shutdown/2-http-server
 ## Code Walkthrough
 
 ### The Server Struct
+
 Shows why you must use `&http.Server{}` instead of the shortcut `http.ListenAndServe`.
 
 ### Running in a Goroutine
+
 Demonstrates why the server must run in its own goroutine so the main thread can wait for the shutdown signal.
 
 ### The Draining Phase
+
 Shows how to create a 5-second timeout context and pass it to `server.Shutdown()`.
 
 ## Try It
@@ -68,9 +71,11 @@ Shows how to create a 5-second timeout context and pass it to `server.Shutdown()
 3. Discuss: Why do we need to check `if err != http.ErrServerClosed`?
 
 ## In Production
+
 **Set your timeouts carefully.** If your longest API request takes 10 seconds, your shutdown timeout should be at least 15 seconds. If you are using WebSockets or long-lived streams (Track GR), `Shutdown()` will wait for them to close. You may need to manually close those connections using the `BaseContext` or a separate signaling mechanism.
 
 ## Thinking Questions
+
 1. What is the difference between `server.Close()` and `server.Shutdown()`?
 2. How does the server know which requests are "active"?
 3. Why is it important to use a separate context for the `Shutdown` call?

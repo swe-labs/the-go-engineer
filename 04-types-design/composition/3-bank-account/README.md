@@ -79,9 +79,11 @@ go test ./04-types-design/composition/3-bank-account
 ```
 
 ## In Production
+
 Composition and embedding show up in data models, adapters, wrappers, and reusable components. Teams get into trouble when they describe embedding as inheritance and stop reasoning about the actual field and method behavior.
 
 ## Thinking Questions
+
 1. Why is shadowing different from inheritance-based overriding?
 2. When is embedding clearer than a named field, and when is it less clear?
 3. What behavior belongs in the shared `Account` type, and what behavior should stay in outer types?

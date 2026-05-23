@@ -4,7 +4,7 @@ The naive client demonstrates the problem; the refactor lesson demonstrates the 
 
 ## Learning Path
 
-| ID | Lesson | Concept | Requires |
-| --- | --- | --- | --- |
-| HCL.1 | [basic GET](./1-get-posts) | http.Get · resp.Body.Close · DefaultClient no-timeout problem | 🟢 entry |
-| HCL.2 | [refactor for testability](./2-refactor-for-testability) | HTTPClient interface · IoTClient struct · NewIoTClient DI | HCL.1 |
+| ID    | Lesson                                                   | Concept                                                       | Requires |
+| ----- | -------------------------------------------------------- | ------------------------------------------------------------- | -------- |
+| HCL.1 | [basic GET](./1-get-posts)                               | http.Get · resp.Body.Close · DefaultClient no-timeout problem | 🟢 entry |
+| HCL.2 | [refactor for testability](./2-refactor-for-testability) | HTTPClient interface · IoTClient struct · NewIoTClient DI     | HCL.1    |

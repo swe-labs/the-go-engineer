@@ -33,7 +33,7 @@ graph LR
 ## Machine View
 
 - **Async Boundary**: Events are usually processed asynchronously (in the background). The publisher doesn't wait for the consumers to finish.
-- **At-Least-Once Delivery**: Most event systems guarantee the event will be delivered *at least once*. This means your consumers must be **Idempotent** (handling the same event twice shouldn't cause a bug).
+- **At-Least-Once Delivery**: Most event systems guarantee the event will be delivered _at least once_. This means your consumers must be **Idempotent** (handling the same event twice shouldn't cause a bug).
 - **Domain Events**: In Go, these are often just structs that are passed through channels or sent to a message broker like NATS, RabbitMQ, or Kafka.
 
 ## Run Instructions
@@ -46,9 +46,11 @@ go run ./09-architecture/03-architecture-patterns/6-event-driven-architecture
 ## Code Walkthrough
 
 ### The Event Bus
+
 A simple in-memory implementation using Go channels. It allows components to `Subscribe` to specific event types and `Publish` events to them.
 
 ### Decoupled Components
+
 Shows an `OrderService` that publishes an event. A `BillingService` and a `ShippingService` react to that event without the `OrderService` knowing they exist.
 
 ## Try It
@@ -58,12 +60,14 @@ Shows an `OrderService` that publishes an event. A `BillingService` and a `Shipp
 3. Modify the `BillingService` to fail randomly. Notice how the `OrderService` (the publisher) is unaffected by the failure.
 
 ## In Production
+
 **Don't use EDA for simple, synchronous workflows.** Events make debugging harder because the execution path is not a single linear stack trace. Use EDA when you have **Side Effects** that don't need to happen immediately (e.g., sending emails, updating search indexes, or notifying other microservices).
 
 ## Thinking Questions
+
 1. What is the difference between a "Command" and an "Event"?
 2. What happens to the system if the Event Bus crashes?
-3. How do you handle "Order of Operations" (e.g., ensuring Shipping only happens *after* Billing)?
+3. How do you handle "Order of Operations" (e.g., ensuring Shipping only happens _after_ Billing)?
 
 ## Next Step
 

@@ -44,6 +44,7 @@ go test -v ./08-quality-test/01-quality-and-performance/testing/7-interfaces-for
 ## Code Walkthrough
 
 ### The Service Pattern
+
 The code defines a `DataStore` interface. The business logic accepts this interface in its constructor. This allows us to pass a real SQL implementation in `main.go` and a simple map-based implementation in `main_test.go`.
 
 ## Try It
@@ -53,10 +54,12 @@ The code defines a `DataStore` interface. The business logic accepts this interf
 3. Try to test the logic without using the interface. How would you handle the database dependency?
 
 ## In Production
+
 Don't over-interface. Only create an interface when you have a **Real Boundary** (Network, File System, Time, Third-party APIs). Interfaces add a small layer of abstraction that can make code navigation slightly harder, so use them where the testability benefit is clear.
 
 ## Thinking Questions
-1. Why is it better to define the interface *where it is used* rather than *where it is implemented*?
+
+1. Why is it better to define the interface _where it is used_ rather than _where it is implemented_?
 2. How do interfaces help with "Parallel Development" in a team?
 3. Can you test a function that uses `time.Now()` without using an interface?
 

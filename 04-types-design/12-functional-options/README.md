@@ -25,6 +25,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```go
 // Without options: too many parameters
 NewServer("web", "us-east", 4, 16, true, false, "linux", "10.0.0.1", ...)
@@ -68,10 +69,12 @@ Use functional composition to build up configuration.
 3. Make some options have default values.
 
 ## In Production
+
 Functional options are used throughout Go APIs-gRPC, Terraform provider, Cobra CLI, etc. Essential for building clean, extensible libraries.
 Functional options are used throughout Go APIs-gRPC, Terraform provider, Cobra CLI, etc. Essential for building clean, extensible libraries.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

@@ -31,7 +31,8 @@ graph TD
 ## Machine View
 
 In Go, Dependency Injection is remarkably simple because functions can be **Methods** on structs.
-- **Pointer Semantics**: We typically use a pointer to our application struct (`*application`). This ensures that every handler is looking at the *same* instance of the logger or database pool, rather than a copy.
+
+- **Pointer Semantics**: We typically use a pointer to our application struct (`*application`). This ensures that every handler is looking at the _same_ instance of the logger or database pool, rather than a copy.
 - **Type Safety**: Because the dependencies are fields on a struct, the compiler guarantees that they exist and are of the correct type. If you forget to initialize a field, you'll likely get a nil-pointer panic, which is much easier to debug than a silent global variable bug.
 - **No Reflection**: Unlike Java or .NET, Go DI is "Explicit." You can follow the code from `main()` directly into the handler to see exactly where every object came from.
 
@@ -46,12 +47,15 @@ Check your terminal output to see the logger in action when you visit the home p
 ## Code Walkthrough
 
 ### The `application` Struct
+
 This is your "Service Container." It holds any resource that needs to be shared. In a real-world app, this would include things like `*sql.DB`, `*redis.Client`, and `*smtp.Client`.
 
 ### Methods as Handlers
+
 By defining our handlers as `func (app *application) name(...)`, we give them access to the `app` variable (the receiver). This is how the "Injection" actually happens.
 
 ### `slog` (Structured Logging)
+
 The example uses Go's built-in `log/slog` package. It allows you to log data in a machine-readable format (like JSON or Key-Value pairs), which is essential for production monitoring and debugging.
 
 ## Try It
@@ -61,9 +65,11 @@ The example uses Go's built-in `log/slog` package. It allows you to log data in 
 3. Try to use the logger inside `handleHealth` to log whenever someone checks the system status.
 
 ## In Production
+
 **Avoid "God Objects."** While it's tempting to put every single utility into your `application` struct, keep it focused on high-level dependencies. If the struct grows too large, consider splitting it into smaller, more focused service structs (e.g., `AuthService`, `EmailService`).
 
 ## Thinking Questions
+
 1. Why are global variables considered "dangerous" in a multi-threaded web server?
 2. How does this pattern make it easier to write unit tests for a single handler?
 3. What happens if you forget to initialize a field in the `application` struct before the server starts?

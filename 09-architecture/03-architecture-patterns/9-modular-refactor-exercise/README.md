@@ -14,7 +14,7 @@ Think of this refactor as **Untangling Headphone Wires**.
 
 1. **The Knot**: Right now, the code is a mess. The database logic is mixed with HTTP logic, and every part of the app knows about every other part.
 2. **The Identification**: You find the ends of the wires (The Domain Boundaries).
-3. **The Extraction**: You carefully pull one wire out at a time, making sure it only connects to the things it *needs* to (The Interfaces).
+3. **The Extraction**: You carefully pull one wire out at a time, making sure it only connects to the things it _needs_ to (The Interfaces).
 4. **The Result**: You have a clean, organized set of modules that can be moved or changed without tangling the others.
 
 ## Visual Model
@@ -69,11 +69,12 @@ go test ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise
 - Use `go test ./09-architecture/03-architecture-patterns/9-modular-refactor-exercise/...`.
 - Starter path: `09-architecture/03-architecture-patterns/9-modular-refactor-exercise/_starter`.
 
-
 ## In Production
+
 **Refactor with a goal.** Don't refactor just for "Clean Code." Refactor because you need to add a new feature that is currently too hard to implement, or because your tests are too slow and brittle. Refactoring without a goal is "Gold Plating" and can introduce bugs without delivering value.
 
 ## Thinking Questions
+
 1. What was the hardest part of untangling the dependencies?
 2. How did using interfaces change the way you wrote your tests?
 3. If you had to split this app into microservices tomorrow, how much work would it be now vs. before the refactor?

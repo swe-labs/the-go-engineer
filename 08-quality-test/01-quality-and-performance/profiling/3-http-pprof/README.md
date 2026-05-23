@@ -40,11 +40,13 @@ go run ./08-quality-test/01-quality-and-performance/profiling/3-http-pprof
 ```
 
 In a separate terminal, pull a 5-second CPU profile:
+
 ```bash
 go tool pprof http://localhost:6060/debug/pprof/profile?seconds=5
 ```
 
 Or view the heap (memory) usage:
+
 ```bash
 go tool pprof http://localhost:6060/debug/pprof/heap
 ```
@@ -52,6 +54,7 @@ go tool pprof http://localhost:6060/debug/pprof/heap
 ## Code Walkthrough
 
 ### The Two-Port Pattern
+
 `main.go` starts two `http.ListenAndServe` calls in separate goroutines. One handles the public API, and the other handles the pprof diagnostics. This is the **Gold Standard** for production Go services.
 
 ## Try It
@@ -61,9 +64,11 @@ go tool pprof http://localhost:6060/debug/pprof/heap
 3. Try `curl http://localhost:6060/debug/pprof/`. It should succeed, showing the list of available profiles.
 
 ## In Production
+
 **NEVER expose pprof to the public internet.** It is a severe security risk as it can leak environment variables, stack traces, and internal memory layouts. Always bind it to `localhost` or an internal VPC IP.
 
 ## Thinking Questions
+
 1. Why does Go use a "Blank Import" for pprof?
 2. If your server is "Locking up" (frozen), which pprof endpoint would you use to find the deadlocked goroutine?
 3. How can you protect the pprof port if it must be accessible over a network?

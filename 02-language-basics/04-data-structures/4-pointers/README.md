@@ -31,6 +31,7 @@ graph TD
     A["many values"] --> B["one collection type"]
     B --> C["read or update by position or key"]
 ```
+
 ```text
 score    = 50
 scorePtr = &score
@@ -59,6 +60,7 @@ A pointer is a variable that stores a memory address. In Go, the zero value for 
 When you use `&` (address-of operator), you get a pointer to the variable. When you use `*` (dereference operator), you access the value stored at that address.
 
 Unlike some languages, Go does not allow pointer arithmetic. This keeps Go safe and simple. You can only:
+
 - Take the address of a variable
 - Follow that address to read or write the value
 
@@ -153,14 +155,16 @@ Dereferencing a nil pointer would panic, so the lesson shows the right habit fir
   reached directly.
 
 - Why show a slice element pointer here?
-Because `04-data-structures` ends with a milestone that updates stored slice data through a
-pointer.
+  Because `04-data-structures` ends with a milestone that updates stored slice data through a
+  pointer.
 
 ## In Production
+
 Pointers matter whenever a Go program must mutate stored state intentionally and safely. They also
 help learners stop confusing "copied value" with "original value."
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

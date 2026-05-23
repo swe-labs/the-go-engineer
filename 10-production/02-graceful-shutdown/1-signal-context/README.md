@@ -50,24 +50,29 @@ go run ./10-production/02-graceful-shutdown/1-signal-context
 ## Code Walkthrough
 
 ### The Global Context
+
 Shows how to wrap your `main` function's logic in a context created by `signal.NotifyContext`.
 
 ### The Blocking Wait
+
 Demonstrates how to use `<-ctx.Done()` to wait for the signal without spinning the CPU.
 
 ### The Cleanup Phase
-Shows the logic that runs *after* the signal is received but *before* the program exits.
+
+Shows the logic that runs _after_ the signal is received but _before_ the program exits.
 
 ## Try It
 
 1. Run the program. Press `Ctrl+C`. Notice how it prints a "Goodbye" message before exiting.
 2. Modify the code to wait for 2 seconds after the signal is received to simulate a "Slow Cleanup."
-3. Discuss: What happens if you receive a *second* `Ctrl+C` while the first one is still being processed? (Hint: Check the `stop()` function returned by `NotifyContext`).
+3. Discuss: What happens if you receive a _second_ `Ctrl+C` while the first one is still being processed? (Hint: Check the `stop()` function returned by `NotifyContext`).
 
 ## In Production
+
 **Kubernetes uses SIGTERM.** When you update a deployment, K8s sends a `SIGTERM` to your pod. It then waits for a "Termination Grace Period" (default 30s). If your app is still running after that, it sends a `SIGKILL`. Your goal is to finish all active work and exit within that grace period.
 
 ## Thinking Questions
+
 1. Why is `context` the best way to propagate a shutdown signal?
 2. What are the most common signals a Go developer needs to care about?
 3. What is the danger of a `main` function that exits immediately upon receiving a signal?

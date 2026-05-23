@@ -2,9 +2,10 @@
 
 ## Learning Objectives
 
-This is the **capstone section** — it ties together every concept from earlier sections into a real web application.
+This is the **capstone section** ï¿½ it ties together every concept from earlier sections into a real web application.
 
 By the end, you will understand:
+
 - HTTP routing with `net/http` and Go 1.22+ method-based patterns
 - Dependency injection via the `application` struct
 - HTML template rendering with caching and layouts
@@ -18,19 +19,19 @@ By the end, you will understand:
 
 ## Contents
 
-| Directory | Topic | Lectures | Level |
-|-----------|-------|----------|-------|
-| `1-routing/` | HTTP routing, handlers, path params | 1-2 | Intermediate |
-| `2-dependency-injection/` | App struct, slog, handler methods | 3-4 | Intermediate |
-| `3-templates/` | html/template, caching, layouts, CSS | 5-7 | Intermediate |
-| `4-middleware/` | Security headers, logging, panic recovery | 9 | Advanced |
-| `5-sessions/` | Cookie sessions, flash messages | 10 | Advanced |
-| `6-auth/` | bcrypt, login, registration, auth middleware | 11, 17-19 | Advanced |
-| `7-forms/` | Form validation library, error handling | 12-16 | Advanced |
-| `8-posts-crud/` | Repository pattern, SQLite, CRUD operations | 23-30 | Advanced |
-| `9-pagination/` | Metadata computation, dynamic links | 25, 34, 38 | Advanced |
-| `10-comments/` | Nested comments, thread-safe store | 28, 36-37 | Advanced |
-| `11-websockets/` | **Capstone** — WebSockets and live updates | All | Advanced |
+| Directory                 | Topic                                        | Lectures   | Level        |
+| ------------------------- | -------------------------------------------- | ---------- | ------------ |
+| `1-routing/`              | HTTP routing, handlers, path params          | 1-2        | Intermediate |
+| `2-dependency-injection/` | App struct, slog, handler methods            | 3-4        | Intermediate |
+| `3-templates/`            | html/template, caching, layouts, CSS         | 5-7        | Intermediate |
+| `4-middleware/`           | Security headers, logging, panic recovery    | 9          | Advanced     |
+| `5-sessions/`             | Cookie sessions, flash messages              | 10         | Advanced     |
+| `6-auth/`                 | bcrypt, login, registration, auth middleware | 11, 17-19  | Advanced     |
+| `7-forms/`                | Form validation library, error handling      | 12-16      | Advanced     |
+| `8-posts-crud/`           | Repository pattern, SQLite, CRUD operations  | 23-30      | Advanced     |
+| `9-pagination/`           | Metadata computation, dynamic links          | 25, 34, 38 | Advanced     |
+| `10-comments/`            | Nested comments, thread-safe store           | 28, 36-37  | Advanced     |
+| `11-websockets/`          | **Capstone** ï¿½ WebSockets and live updates   | All        | Advanced     |
 
 ## How to Run
 
@@ -65,7 +66,7 @@ Request ? secureHeaders ? logRequest ? recoverPanic ? Router ? Handler
 
 1. Start with `1-routing/` to understand HTTP basics
 2. Move to `2-dependency-injection/` to learn the app struct pattern
-3. Study `4-middleware/` — the most important pattern for production apps
+3. Study `4-middleware/` ï¿½ the most important pattern for production apps
 4. Explore `6-auth/` for security fundamentals
 5. Finish with `11-websockets/` to see everything wired together
 
@@ -75,18 +76,17 @@ Request ? secureHeaders ? logRequest ? recoverPanic ? Router ? Handler
 - [Go 1.22 HTTP Routing Enhancements](https://go.dev/blog/routing-enhancements)
 - [Writing Web Applications (Official)](https://go.dev/doc/articles/wiki/)
 
-
 ## Learning Path
 
-| ID | Lesson | Concept | Requires |
-| --- | --- | --- | --- |
-| WM.1 | [routing](./1-routing) | http.NewServeMux · method patterns · {param} · HandleFunc | ?? entry |
-| WM.2 | [dependency injection](./2-dependency-injection) | application struct · constructor · handler methods on struct | WM.1 |
-| WM.3 | [templates](./3-templates) | html/template · cache once · layout + partials + page | WM.1, WM.2 |
-| WM.4 | [middleware](./4-middleware) | func(http.Handler) http.Handler · chain · panic recovery | WM.1, WM.2, WM.3 |
-| WM.5 | [sessions](./5-sessions) | Cookie-based sessions · flash messages · session store | WM.1, WM.2, WM.3, WM.4 |
-| WM.6 | [authentication](./6-auth) | bcrypt · requireAuth middleware · context.WithValue user ID | WM.1, WM.2, WM.4, WM.5 |
-| WM.7 | [forms](./7-forms) | Form struct · Required · MinLength · MatchesField · Valid() | WM.1, WM.2, WM.4 |
-| WM.8 | [posts CRUD](./8-posts-crud) | PostRepository interface · ExecContext · pagination offset | WM.1, WM.2, WM.4, WM.6, WM.7 |
-| WM.9 | [pagination](./9-pagination) | computeMetadata · LIMIT/OFFSET · HasNext/HasPrev · links | WM.8 |
-| WM.10 | [comments](./10-comments) | Adjacency list · 2-pass tree build · sync.RWMutex store | WM.8, WM.9 |
+| ID    | Lesson                                           | Concept                                                      | Requires                     |
+| ----- | ------------------------------------------------ | ------------------------------------------------------------ | ---------------------------- |
+| WM.1  | [routing](./1-routing)                           | http.NewServeMux ï¿½ method patterns ï¿½ {param} ï¿½ HandleFunc    | ?? entry                     |
+| WM.2  | [dependency injection](./2-dependency-injection) | application struct ï¿½ constructor ï¿½ handler methods on struct | WM.1                         |
+| WM.3  | [templates](./3-templates)                       | html/template ï¿½ cache once ï¿½ layout + partials + page        | WM.1, WM.2                   |
+| WM.4  | [middleware](./4-middleware)                     | func(http.Handler) http.Handler ï¿½ chain ï¿½ panic recovery     | WM.1, WM.2, WM.3             |
+| WM.5  | [sessions](./5-sessions)                         | Cookie-based sessions ï¿½ flash messages ï¿½ session store       | WM.1, WM.2, WM.3, WM.4       |
+| WM.6  | [authentication](./6-auth)                       | bcrypt ï¿½ requireAuth middleware ï¿½ context.WithValue user ID  | WM.1, WM.2, WM.4, WM.5       |
+| WM.7  | [forms](./7-forms)                               | Form struct ï¿½ Required ï¿½ MinLength ï¿½ MatchesField ï¿½ Valid()  | WM.1, WM.2, WM.4             |
+| WM.8  | [posts CRUD](./8-posts-crud)                     | PostRepository interface ï¿½ ExecContext ï¿½ pagination offset   | WM.1, WM.2, WM.4, WM.6, WM.7 |
+| WM.9  | [pagination](./9-pagination)                     | computeMetadata ï¿½ LIMIT/OFFSET ï¿½ HasNext/HasPrev ï¿½ links     | WM.8                         |
+| WM.10 | [comments](./10-comments)                        | Adjacency list ï¿½ 2-pass tree build ï¿½ sync.RWMutex store      | WM.8, WM.9                   |

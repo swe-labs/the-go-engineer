@@ -6,14 +6,14 @@ This guide defines the required workflow for contributions to the stable v2.1 re
 
 Read these documents before changing curriculum, code, validation, or release surfaces:
 
-| Document | Purpose |
-| --- | --- |
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | locked v2.1 public structure |
-| [curriculum.v2.json](./curriculum.v2.json) | machine-readable curriculum registry |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | README-first teaching contract |
-| [CODE-STANDARDS.md](./CODE-STANDARDS.md) | Go and teaching-code standards |
-| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | verification expectations |
-| [RELEASE.md](./RELEASE.md) | release and branch process |
+| Document                                             | Purpose                              |
+| ---------------------------------------------------- | ------------------------------------ |
+| [ARCHITECTURE.md](./ARCHITECTURE.md)                 | locked v2.1 public structure         |
+| [curriculum.v2.json](./curriculum.v2.json)           | machine-readable curriculum registry |
+| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | README-first teaching contract       |
+| [CODE-STANDARDS.md](./CODE-STANDARDS.md)             | Go and teaching-code standards       |
+| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md)       | verification expectations            |
+| [RELEASE.md](./RELEASE.md)                           | release and branch process           |
 
 If documents disagree on public curriculum structure, `ARCHITECTURE.md` wins.
 
@@ -58,11 +58,11 @@ Issue body should include:
 
 ## Branches
 
-| Branch | Purpose |
-| --- | --- |
-| `main` | active post-v2.1 implementation and integration line |
-| `release/v2` | stable v2.1.x maintenance line |
-| `release/v1` | stable v1 maintenance line |
+| Branch       | Purpose                                              |
+| ------------ | ---------------------------------------------------- |
+| `main`       | active post-v2.1 implementation and integration line |
+| `release/v2` | stable v2.1.x maintenance line                       |
+| `release/v1` | stable v1 maintenance line                           |
 
 Branch from the line that should receive the change.
 

@@ -18,7 +18,7 @@ Go uses one keyword for several loop shapes:
 - condition-only loops
 - `range` loops over collections
 
-> **Backward Reference:** In [Lesson 1: If / Else](../1-if-else/README.md), you learned how to evaluate boolean conditions to choose a path. The `for` loop uses those exact same boolean conditions to decide whether to *keep going* on a path.
+> **Backward Reference:** In [Lesson 1: If / Else](../1-if-else/README.md), you learned how to evaluate boolean conditions to choose a path. The `for` loop uses those exact same boolean conditions to decide whether to _keep going_ on a path.
 
 ## Visual Model
 
@@ -68,9 +68,11 @@ The same code block can run zero times, once, or many times depending on the con
 3. Add another word to the `range` example.
 
 ## In Production
+
 Loops are everywhere in real systems: processing requests, scanning files, walking query results, aggregating metrics, and retrying work. Small loop mistakes often become large runtime problems.
 
 ## Thinking Questions
+
 1. Why does Go use one `for` keyword instead of separate loop keywords?
 2. What is the difference between a counted loop and a condition-only loop?
 3. Why can a loop validly run zero times?

@@ -35,15 +35,19 @@ go run ./05-packages-io/02-io-and-cli/encoding/4-decode
 ## Code Walkthrough
 
 ### `json.NewDecoder(r)`
+
 Initializes a decoder that will pull data from any `io.Reader` (e.g., an `os.File`, `strings.Reader`, or `http.Request.Body`).
 
 ### `dec.Decode(&v)`
+
 Reads the next JSON object from the stream and unmarshals it into `v`. Note that you must still pass a pointer.
 
 ### `io.EOF`
+
 A special error that signals the end of the input stream. In a loop, you should check for this specific error to know when to stop decoding.
 
 ### Multi-Object Streams
+
 Unlike `json.Unmarshal`, which expects one single JSON value, the Decoder can handle multiple JSON objects placed one after another in a stream (often called **JSON Lines** or **NDJSON**).
 
 ## Try It
@@ -53,9 +57,11 @@ Unlike `json.Unmarshal`, which expects one single JSON value, the Decoder can ha
 3. Use `json.NewDecoder(os.Stdin)` to create a tool that parses JSON piped from another command.
 
 ## In Production
+
 For web servers, always use `json.NewDecoder(r.Body).Decode(&v)` instead of reading the body into a byte slice. This prevents a common class of "Denial of Service" (DoS) attacks where a client sends a massive JSON payload to exhaust the server's memory.
 
 ## Thinking Questions
+
 1. Why is `io.EOF` treated differently from other errors during decoding?
 2. What happens if a stream contains a JSON array instead of separate JSON objects?
 3. How does the Decoder know where one JSON object ends and the next one begins?

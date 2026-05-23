@@ -38,6 +38,7 @@ graph TD
 ## Machine View
 
 When a program performs I/O (disk, network, database), the CPU is essentially doing nothing for millions of clock cycles.
+
 - In **Sequential** code, the thread of execution is "Blocked." The OS parks the thread, and your program stops moving.
 - In **Concurrent** code, when one path blocks, Go's scheduler says: "You wait here. I'm going to let this other path do some work while we wait for that disk/network response."
 
@@ -50,12 +51,15 @@ go run ./07-concurrency/01-concurrency/goroutines/0-why-concurrency-exists
 ## Code Walkthrough
 
 ### The Task Simulation
+
 We use `time.Sleep` to simulate **I/O Bound** work. This represents time where the CPU is not working, but the system is waiting for an external result.
 
 ### Sequential Loop
+
 The loop waits for Task A to finish before starting Task B. The total time is the **sum** of all wait times.
 
 ### The Overlap Concept
+
 In the concurrent simulation, we show that if the tasks can happen at the same time, the total time is only as long as the **single longest task**.
 
 ## Try It
@@ -76,15 +80,18 @@ Total Time Concurrent: ~100ms
 ```
 
 ## In Production
+
 Concurrency is not a magic "Go Faster" button for every problem.
+
 - **Good for Concurrency**: Network requests, database queries, file reads. (I/O Bound)
 - **Bad for Concurrency**: Complex math, image processing, cryptography. (CPU Bound - these need **Parallelism**, which is different!).
 
 ## Thinking Questions
+
 1. If you have 4 tasks that each take 1 second, what is the fastest possible time they can complete if run concurrently?
 2. Why is concurrency particularly important for a web server handling 1,000 users at once?
 3. What happens to the Chef's productivity if they only have one toaster but need to make 10 pieces of toast?
 
 ## Next Step
 
-Now that you understand *why* we need it, let's learn how Go implements it. Continue to [GC.1 Basic Goroutines](../1-goroutine/README.md).
+Now that you understand _why_ we need it, let's learn how Go implements it. Continue to [GC.1 Basic Goroutines](../1-goroutine/README.md).

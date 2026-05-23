@@ -49,15 +49,19 @@ go run ./06-backend-db/01-web-and-database/web-masterclass/6-auth
 ## Code Walkthrough
 
 ### Password Hashing (Bcrypt)
+
 We use `golang.org/x/crypto/bcrypt`. `GenerateFromPassword` handles the hashing and salting, while `CompareHashAndPassword` handles the verification.
 
 ### `context.WithValue`
-This function returns a *new* copy of the context with the provided key and value attached. We then pass this new context down the line using `r.WithContext(ctx)`.
+
+This function returns a _new_ copy of the context with the provided key and value attached. We then pass this new context down the line using `r.WithContext(ctx)`.
 
 ### Custom Context Keys
+
 We use a custom `contextKey` type instead of a plain `string`. This prevents "Key Collisions" if multiple packages try to store data in the context using the same name (like "user").
 
 ### Auth Middleware
+
 This function intercepts every request to protected routes. It acts as a gatekeeper: if the user isn't identified, the request is stopped immediately with an error.
 
 ## Try It
@@ -67,10 +71,12 @@ This function intercepts every request to protected routes. It acts as a gatekee
 3. What happens if you try to access `/profile` without the `?user=...` parameter?
 
 ## In Production
+
 **USE BCRYPT.**
 SHA-256 is too fast. Modern computers can calculate billions of SHA-256 hashes per second, making them vulnerable to "Brute Force" attacks. Algorithms like `bcrypt`, `scrypt`, and `argon2` are designed to be "Slow," making it impossible for hackers to guess millions of passwords even with powerful hardware.
 
 ## Thinking Questions
+
 1. Why is storing a plain text password the ultimate sin of backend development?
 2. How does using a `Salt` protect against Rainbow Tables?
 3. What is the difference between "Authentication" and "Authorization"?

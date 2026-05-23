@@ -31,9 +31,10 @@ graph LR
 ## Machine View
 
 Interceptors are functions that wrap the execution of gRPC methods.
+
 - **Unary Interceptors** are simpler: they take a request, call the handler, and return a response.
 - **Stream Interceptors** are more complex: they wrap the creation of the stream. To intercept individual messages within a stream, you must wrap the `ServerStream` or `ClientStream` object itself.
-In Go, gRPC server options only allow for **one** unary and **one** stream interceptor by default. If you want a chain of interceptors (Logging -> Auth -> Metrics), you must use a helper library like `go-grpc-middleware` or write a recursive wrapper function.
+  In Go, gRPC server options only allow for **one** unary and **one** stream interceptor by default. If you want a chain of interceptors (Logging -> Auth -> Metrics), you must use a helper library like `go-grpc-middleware` or write a recursive wrapper function.
 
 ## Run Instructions
 
@@ -46,15 +47,19 @@ This is a conceptual lesson. Review the code comments to understand the signatur
 ## Code Walkthrough
 
 ### `grpc.UnaryServerInterceptor`
+
 A function type with the signature:
 `func(ctx context.Context, req interface{}, info *UnaryServerInfo, handler UnaryHandler) (resp interface{}, err error)`
+
 - `info.FullMethod`: The path of the RPC being called.
 - `handler`: The next step in the chain (either another interceptor or the final logic).
 
 ### `grpc.StreamServerInterceptor`
+
 Used for streaming RPCs. It intercepts the **handshake** of the stream. If you need to log every message sent on a stream, you must create a wrapper struct for the `grpc.ServerStream` and override the `SendMsg` and `RecvMsg` methods.
 
 ### Metadata
+
 Interceptors often use `metadata.FromIncomingContext(ctx)` to read headers sent by the client. This is where you would look for an `Authorization` bearer token.
 
 ## Try It
@@ -64,9 +69,11 @@ Interceptors often use `metadata.FromIncomingContext(ctx)` to read headers sent 
 3. Look at the `grpc-ecosystem/go-grpc-middleware` repository on GitHub to see standard interceptors for recovery, logging, and auth.
 
 ## In Production
+
 **Performance is critical.** Interceptors run on every single request. If your Auth interceptor takes 100ms to check a database, you have just added 100ms of latency to every single call in your entire system. Use caching for auth tokens and keep your interceptors as "O(1)" as possible.
 
 ## Thinking Questions
+
 1. Why does gRPC use the term "Interceptor" instead of "Middleware"?
 2. What is the difference between an interceptor on the Client vs. the Server?
 3. How would you implement rate limiting using an interceptor?

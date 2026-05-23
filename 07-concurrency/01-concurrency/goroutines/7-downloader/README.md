@@ -38,6 +38,7 @@ graph TD
 ## Machine View
 
 This project implements a **Bounded Worker Pattern**.
+
 - **Semaphore**: `make(chan struct{}, 3)` acts as a lock. Since it's buffered, up to 3 goroutines can "acquire" a token by sending to it. The 4th goroutine will block on the send, preventing too many simultaneous network connections.
 - **Background Waiter**: `go func() { wg.Wait(); close(results) }()` is essential. If we called `wg.Wait()` on the main thread, it would block before we started reading from `results`. This would cause all workers to block indefinitely (Deadlock) because the `results` channel is unbuffered.
 
@@ -52,7 +53,6 @@ go run ./07-concurrency/01-concurrency/goroutines/7-downloader
 - **The Result Struct**: We group success and error data into a single `Result` struct. This allows the main goroutine to handle errors gracefully without crashing the whole program.
 - **Throttling (The Semaphore)**: `limiter <- struct{}{}` blocks if the buffer is full. `defer func() { <-limiter }()` ensures the token is returned to the buffer even if the download fails, allowing the next worker to start.
 - **The Channel Range Loop**: The main goroutine uses `for result := range results` to consume and display data as it arrives. This is much more memory-efficient than waiting for all downloads to finish and returning a giant slice.
-
 
 ## Try It
 
@@ -73,10 +73,12 @@ Done
 ```
 
 ## In Production
+
 **Respect external rate limits.**
 Just because Go can launch 1,000,000 goroutines doesn't mean the website you are downloading from can handle 1,000,000 requests. Always use a semaphore or worker pool to bound your concurrency to a reasonable number (typically 5-50 for external APIs).
 
 ## Thinking Questions
+
 1. Why is an unbuffered channel plus a background waiter better than a large buffered channel here?
 2. What happens if one download takes 10 minutes and the others take 1 second?
 3. How would you modify this to support a "Total Progress" percentage bar?

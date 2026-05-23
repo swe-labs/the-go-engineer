@@ -50,6 +50,7 @@ go test -fuzz=Fuzz ./08-quality-test/01-quality-and-performance/testing/6-fuzz-t
 ## Code Walkthrough
 
 ### `FuzzReverse`
+
 Shows how a simple "Reverse String" function can fail when handling multi-byte UTF-8 characters (like emojis or non-English letters). The fuzzer will quickly find an input that breaks the assumption that `len(s)` is the number of characters.
 
 ## Try It
@@ -59,9 +60,11 @@ Shows how a simple "Reverse String" function can fail when handling multi-byte U
 3. Fix the code to handle the failing case and rerun the fuzzer to prove it's fixed.
 
 ## In Production
+
 Fuzzing is critical for **Security Boundaries**. Any function that parses data from the internet (JSON, XML, Custom Protocols) must be fuzzed. A single unhandled edge case can lead to a Denial of Service (DoS) attack or memory corruption.
 
 ## Thinking Questions
+
 1. Why is it better to test "Invariants" (e.g., `Reverse(Reverse(s)) == s`) rather than exact outputs in a fuzz test?
 2. What is the difference between the "Seed Corpus" and the "Generated Corpus"?
 3. When should you stop a fuzzing run?

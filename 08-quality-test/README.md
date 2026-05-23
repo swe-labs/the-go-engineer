@@ -13,14 +13,14 @@ By the end of this section, you will be able to:
 
 ## Section Map
 
-| Track | Path | Core Job |
-| --- | --- | --- |
-| `TE.1-TE.10` | [`./01-quality-and-performance/testing`](./01-quality-and-performance/testing) | unit tests, table-driven patterns, fuzzing, mocking, and integration tests |
-| `PR.1-PR.6` | [`./01-quality-and-performance/profiling`](./01-quality-and-performance/profiling) | benchmarks, CPU and memory profiling, trace reading, and escape analysis |
+| Track        | Path                                                                               | Core Job                                                                   |
+| ------------ | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `TE.1-TE.10` | [`./01-quality-and-performance/testing`](./01-quality-and-performance/testing)     | unit tests, table-driven patterns, fuzzing, mocking, and integration tests |
+| `PR.1-PR.6`  | [`./01-quality-and-performance/profiling`](./01-quality-and-performance/profiling) | benchmarks, CPU and memory profiling, trace reading, and escape analysis   |
 
 ## Why This Section Exists
 
-You can now build concurrent, networked systems. But "it works on my machine" is not an engineering standard. This stage provides the tools to prove *why* it works and ensure it *stays* working as the system grows. You will learn to treat performance not as a "feeling," but as a measurable metric.
+You can now build concurrent, networked systems. But "it works on my machine" is not an engineering standard. This stage provides the tools to prove _why_ it works and ensure it _stays_ working as the system grows. You will learn to treat performance not as a "feeling," but as a measurable metric.
 
 ## Suggested Learning Flow
 

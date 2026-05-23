@@ -28,6 +28,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```text
 fmt.Stringer interface:
 +---------------------------+
@@ -83,9 +84,11 @@ Combine custom types with iota (from Section 02) to create enum-like constants.
   %v uses String() if available, %s specifically calls String().
 
 ## In Production
+
 Stringer is essential for logging, debugging, and user-facing output. It makes your types readable in any context where they are printed or logged.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

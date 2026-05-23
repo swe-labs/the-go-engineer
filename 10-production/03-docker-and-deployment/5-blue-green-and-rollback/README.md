@@ -52,12 +52,15 @@ go run ./10-production/03-docker-and-deployment/5-blue-green-and-rollback
 ## Code Walkthrough
 
 ### The Health Check Endpoint
+
 Shows how to implement a `/health` handler that checks database connectivity and system status.
 
 ### The Readiness vs Liveness Pattern
+
 Explains the difference between "I am alive" (Liveness) and "I am ready to handle traffic" (Readiness).
 
 ### The Rollback Script
+
 Demonstrates a simple script that can revert the Load Balancer to the previous version's image tag.
 
 ## Try It
@@ -67,9 +70,11 @@ Demonstrates a simple script that can revert the Load Balancer to the previous v
 3. Discuss: Why is Blue/Green deployment more expensive than a Rolling Update? (Hint: You need 2x the servers during the cutover).
 
 ## In Production
+
 **Beware of Database Migrations.** Blue/Green deployment is easy for stateless code, but difficult for databases. If your "Green" code migrates the database schema, your "Blue" code might stop working. Always use **Two-Phase Migrations** (Add column first, then use it) to ensure that both the old and new code can run against the same database during the cutover.
 
 ## Thinking Questions
+
 1. What is the main advantage of Blue/Green over Rolling Updates?
 2. How do "Canary Releases" differ from Blue/Green?
 3. Why is a "Health Check" more than just checking if the process is running?

@@ -32,6 +32,7 @@ graph LR
 ## Machine View
 
 A `time.Time` struct in Go is sophisticated:
+
 - **Wall Clock**: Used for display and persistence. Subject to NTP adjustments and leap seconds.
 - **Monotonic Clock**: Used for measurements. It only increases. When you subtract two times, Go uses the monotonic portion to ensure that `duration` is never negative just because the system clock was synced backward.
 - **Precision**: Go handles time at **Nanosecond** precision.
@@ -45,15 +46,19 @@ go run ./07-concurrency/01-concurrency/time-and-scheduling/1-time
 ## Code Walkthrough
 
 ### `time.Now()`
+
 Returns the current time. It contains both the wall and monotonic readings.
 
 ### `time.Duration`
+
 In Go, durations are integers (nanoseconds). You create them by multiplying a number by a unit: `5 * time.Minute`. **Never pass a raw integer to a time function.** Always use units.
 
 ### `time.Sleep()`
+
 Blocks the current goroutine for the specified duration. This is a "Stop the World" operation for that specific goroutine, but it doesn't affect other goroutines in your system.
 
 ### Arithmetic
+
 - `Add(duration)`: Returns a new time in the future/past.
 - `Sub(time)`: Returns a duration representing the gap between two moments.
 
@@ -84,10 +89,12 @@ Awake after sleep!
 ```
 
 ## In Production
+
 **Don't use `time.Now()` for critical timing logic.**
 If you are measuring how long a database query took, always use `time.Since(start)`. This is shorthand for `time.Now().Sub(start)`, and it guarantees the use of the monotonic clock. Using manual string parsing to compare times is prone to errors during Daylight Savings Time (DST) transitions.
 
 ## Thinking Questions
+
 1. Why are durations expressed as `int64` nanoseconds instead of floats?
 2. What happens to a `time.Sleep` if the OS puts the computer to sleep?
 3. How does Go represent time before the Unix Epoch (1970)?

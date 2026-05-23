@@ -15,6 +15,7 @@ Build a robust application configuration loader that reads from disk, decodes fr
 Think of a Config Parser as the **Pre-Flight Checklist** for a pilot.
 
 Before the plane (your application) takes off, you must check that:
+
 1. The **Flight Plan** (the config file) is readable.
 2. The **Instructions** (the JSON) are formatted correctly.
 3. All **Critical Systems** (required fields like `Port` and `DatabaseURL`) have been initialized.
@@ -60,12 +61,13 @@ go run ./05-packages-io/02-io-and-cli/encoding/6-config-parser
 - Use `go run ./05-packages-io/02-io-and-cli/encoding/6-config-parser`.
 - Starter path: `05-packages-io/02-io-and-cli/encoding/6-config-parser/_starter`.
 
-
 ## In Production
+
 In real-world applications, you might want to support multiple formats like YAML or TOML. Libraries like **Viper** are industry standard for this, as they handle file loading, environment variable overrides, and default values in a single package. However, understanding the manual process with the standard library is essential for debugging and building simpler, low-dependency tools.
 
 ## Thinking Questions
-1. Why is validation done *after* decoding rather than *during* decoding?
+
+1. Why is validation done _after_ decoding rather than _during_ decoding?
 2. What are the benefits of using `json.NewDecoder` over `os.ReadFile` for configuration?
 3. How would you handle a configuration where some fields are only required if `Debug` is set to `false`?
 

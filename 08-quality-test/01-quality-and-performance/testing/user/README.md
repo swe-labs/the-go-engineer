@@ -39,8 +39,8 @@ graph TD
 - **`go test`**: This is the tool that orchestrates everything. It scans for files ending in `_test.go`, compiles them along with your code, and executes functions that match `func TestXxx(t *testing.T)`.
 - **Zero Magic**: Unlike other languages, Go tests don't use "Annotations" or "Reflection" tricks. They are just regular Go code.
 - **Fail Fast vs. Continue**:
-    - `t.Errorf`: Marks the test as failed but continues execution. Great for table tests.
-    - `t.Fatalf`: Marks the test as failed and stops immediately. Use this when a setup step fails (e.g., "Failed to connect to DB").
+  - `t.Errorf`: Marks the test as failed but continues execution. Great for table tests.
+  - `t.Fatalf`: Marks the test as failed and stops immediately. Use this when a setup step fails (e.g., "Failed to connect to DB").
 
 ## Run Instructions
 
@@ -55,7 +55,9 @@ go test -v ./08-quality-test/01-quality-and-performance/testing/user
 ## Code Walkthrough
 
 ### Table-Driven Pattern
+
 We define a slice of anonymous structs:
+
 ```go
 testCases := []struct {
     desc     string
@@ -66,16 +68,20 @@ testCases := []struct {
     // ...
 }
 ```
+
 This is the **Gold Standard** for testing in Go. It's clean, easy to expand, and separates your "Logic" from your "Data."
 
 ### Sub-tests (`t.Run`)
+
 Inside the loop, we call `t.Run(tc.desc, ...)`. This gives each row of the table its own "Identity" in the test output. If `tc.desc` is "Too short," and it fails, you know exactly which input caused the problem.
 
 ### Testify vs. Standard Lib
+
 In this module, we use the `testify/assert` package.
+
 - **Standard Lib**: Requires `if actual != expected { t.Errorf(...) }`.
 - **Testify**: `assert.Equal(t, expected, actual)`.
-It's more readable and provides better diffs when things break.
+  It's more readable and provides better diffs when things break.
 
 ## Try It
 
@@ -100,10 +106,12 @@ ok      the-go-engineer/08-quality-test/01-quality-and-performance/testing/user 
 ```
 
 ## In Production
+
 **Test your error paths.**
-Don't just test the "Happy Path" (success). Most bugs live in the error handling code. Ensure your functions return the *correct* error type or message when inputs are invalid.
+Don't just test the "Happy Path" (success). Most bugs live in the error handling code. Ensure your functions return the _correct_ error type or message when inputs are invalid.
 
 ## Thinking Questions
+
 1. Why do we put test files in the same package as the code we are testing?
 2. What is the benefit of `t.Errorf` over a simple `panic`?
 3. How do you handle a function that returns a random value? (Hint: Test for a range or a property, not a specific number).

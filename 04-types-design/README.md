@@ -14,12 +14,12 @@ By the end of this stage, a learner should be able to:
 
 ## Stage Map
 
-| Track | Surface | Core Job |
-| --- | --- | --- |
-| `TI.1-10` | Types & Interfaces | Build the core type-modeling path from basic structs to the payroll processor project. |
-| `TI.11-15` | Advanced Types | Cover the stretch path: empty interface, assertions, type switches, and constraints. |
-| `CO.1-3` | Composition | Teach embedding and interface composition without classic OOP inheritance. |
-| `ST.1-6` | Strings & Text | Teach string internals, builders, parsing, formatting, and the config parser project. |
+| Track      | Surface            | Core Job                                                                               |
+| ---------- | ------------------ | -------------------------------------------------------------------------------------- |
+| `TI.1-10`  | Types & Interfaces | Build the core type-modeling path from basic structs to the payroll processor project. |
+| `TI.11-15` | Advanced Types     | Cover the stretch path: empty interface, assertions, type switches, and constraints.   |
+| `CO.1-3`   | Composition        | Teach embedding and interface composition without classic OOP inheritance.             |
+| `ST.1-6`   | Strings & Text     | Teach string internals, builders, parsing, formatting, and the config parser project.  |
 
 ## Why This Stage Exists Now
 

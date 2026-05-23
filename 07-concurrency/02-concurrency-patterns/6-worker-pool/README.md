@@ -48,12 +48,15 @@ go run ./07-concurrency/02-concurrency-patterns/6-worker-pool
 ## Code Walkthrough
 
 ### The Worker Loop
+
 The worker uses a `for { select { ... } }` pattern. It listens for EITHER a `ctx.Done()` (shutdown signal) or a new job from the `jobs` channel.
 
 ### `processJobSafe`
+
 This is a critical production pattern. It wraps the actual business logic in a "Safety Shell" that catches panics and converts them into standard Go `error` types returned via the `results` channel.
 
 ### Graceful Shutdown
+
 1. **Close the Queue**: `close(jobs)` tells the workers no more work is coming.
 2. **Wait for Draining**: `wg.Wait()` blocks until the workers have finished everything currently in the buffer.
 3. **Close Results**: Only after all workers are done do we close the `results` channel, signaling the main consumer that the report is finished.
@@ -80,11 +83,13 @@ Done! Success: 9, Failures: 1
 ```
 
 ## In Production
+
 **Buffer your channels carefully.**
 A small buffer (e.g., `numWorkers * 2`) provides enough "Backpressure" to stop the producer if the workers are falling behind. A massive buffer (e.g., 10,000) might hide a performance bottleneck until it's too late and your RAM is exhausted.
 Also, always monitor the "Depth" of your job queue in production to identify when you need to scale up your worker count.
 
 ## Thinking Questions
+
 1. Why do we wait for workers in a separate goroutine?
 2. What is the difference between `close(jobs)` and cancelling the `context`?
 3. In what scenario would you want to use a Worker Pool instead of an `errgroup`? (Hint: Long-lived background services!).

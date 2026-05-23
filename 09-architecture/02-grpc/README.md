@@ -21,12 +21,12 @@ gRPC is useful here because it forces architecture decisions into explicit contr
 
 ## Current Surface Shape
 
-| Area | Focus |
-| --- | --- |
-| `proto/` | service and message definitions |
-| `gen/` | generated Go code committed for runnable examples |
-| `1-unary/` | basic request/response RPC |
-| `2-streaming/` | streaming flows and interceptors |
+| Area           | Focus                                             |
+| -------------- | ------------------------------------------------- |
+| `proto/`       | service and message definitions                   |
+| `gen/`         | generated Go code committed for runnable examples |
+| `1-unary/`     | basic request/response RPC                        |
+| `2-streaming/` | streaming flows and interceptors                  |
 
 ## Next Step
 

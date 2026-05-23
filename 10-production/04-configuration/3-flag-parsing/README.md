@@ -31,7 +31,7 @@ graph TD
 
 ## Machine View
 
-- **`flag.String` / `flag.Int`**: Functions that define a flag and return a *pointer* to the value.
+- **`flag.String` / `flag.Int`**: Functions that define a flag and return a _pointer_ to the value.
 - **`flag.Parse()`**: Must be called after all flags are defined and before the values are accessed. It parses the `os.Args[1:]` slice.
 - **Usage**: Flags automatically provide a `-h` or `--help` output for your application, making it self-documenting.
 
@@ -48,12 +48,15 @@ go run ./10-production/04-configuration/3-flag-parsing -port=7000
 ## Code Walkthrough
 
 ### Defining Flags
+
 Shows how to define a flag with a name, a default value, and a help description.
 
 ### Parsing and Accessing
+
 Demonstrates calling `flag.Parse()` and dereferencing the pointers to get the actual values.
 
 ### The precedence Merge
+
 Shows a production pattern: loading a config file first, then checking if the flag value was changed by the user (not just the default).
 
 ## Try It
@@ -64,9 +67,11 @@ Shows a production pattern: loading a config file first, then checking if the fl
 4. Discuss: Why are pointers used for flag values instead of direct values?
 
 ## In Production
+
 **Don't over-use flags for service config.** Flags are hard to manage at scale in Kubernetes or Cloud platforms. If you have 200 settings, putting 200 flags in a Docker `ENTRYPOINT` is fragile and unreadable. Use flags for **Action Overrides** (e.g., `-migrate-db`) or **Critical Launch Parameters** (e.g., `-config-path`), and use Files or Environment variables for everything else.
 
 ## Thinking Questions
+
 1. Why must `flag.Parse()` be called after all flags are defined?
 2. What is the difference between `-port 80` and `-port=80`? (Hint: Both work in Go's flag package).
 3. How do you handle "Subcommands" (like `git push` vs `git pull`) using the `flag` package?

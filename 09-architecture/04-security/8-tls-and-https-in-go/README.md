@@ -33,7 +33,7 @@ graph LR
 - **`crypto/tls`**: Go's standard library for TLS. It is highly optimized and secure by default.
 - **`ListenAndServeTLS`**: The function used to start an HTTPS server. It requires a `certFile` and a `keyFile`.
 - **Cipher Suites**: The specific algorithms used for encryption. Modern Go versions automatically prefer secure ones (like TLS 1.3).
-- **HSTS (HTTP Strict Transport Security)**: A header that tells the browser to *only* use HTTPS for your site in the future.
+- **HSTS (HTTP Strict Transport Security)**: A header that tells the browser to _only_ use HTTPS for your site in the future.
 
 ## Run Instructions
 
@@ -45,12 +45,15 @@ go run ./09-architecture/04-security/8-tls-and-https-in-go
 ## Code Walkthrough
 
 ### Starting an HTTPS Server
+
 Shows how to use `http.ListenAndServeTLS` with a generated self-signed certificate. You will see how to handle the "Insecure Connection" warning in your browser.
 
 ### Custom TLS Config
+
 Demonstrates how to use `tls.Config` to restrict the server to **TLS 1.2 or higher** and disable weak ciphers. This is a common requirement for high-security environments like banking or healthcare.
 
 ### HTTP to HTTPS Redirect
+
 Shows a common pattern where a server listens on port 80 (HTTP) only to redirect all users to port 443 (HTTPS).
 
 ## Try It
@@ -60,9 +63,11 @@ Shows a common pattern where a server listens on port 80 (HTTP) only to redirect
 3. Discuss: Why should you use "Let's Encrypt" instead of self-signed certificates in production?
 
 ## In Production
+
 **Encryption is not optional.** Use HTTPS for everything. In production, you typically don't manage certificates in your Go code; you use a **Reverse Proxy** (like NGINX, Caddy, or an AWS Load Balancer) to "terminate" TLS. This allows your Go code to run as plain HTTP behind a secure perimeter. If you must handle TLS in Go, use a library like `autocert` to automate certificate renewal via Let's Encrypt.
 
 ## Thinking Questions
+
 1. What is the difference between Symmetric and Asymmetric encryption?
 2. How does a "Man-in-the-Middle" (MITM) attack work on plain HTTP?
 3. What is "Mutual TLS" (mTLS), and when would you use it?

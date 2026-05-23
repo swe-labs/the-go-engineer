@@ -49,9 +49,11 @@ go run ./09-architecture/02-grpc/2-streaming/client
 ## Code Walkthrough
 
 ### Receiver Loop
+
 Shows the standard `for { msg, err := stream.Recv() ... }` pattern.
 
 ### Concurrent Sender
+
 Demonstrates how to use a goroutine to send messages while the main thread waits for the stream to close.
 
 ## Try It
@@ -62,9 +64,11 @@ Demonstrates how to use a goroutine to send messages while the main thread waits
 4. Discuss: Why is it important to call `CloseSend()`?
 
 ## In Production
+
 **Don't keep streams open forever.** Even with keep-alives, network partitions will eventually kill your connection. Your client must be able to **Reconnect** and resume its work. Use "Backoff" strategies (like exponential backoff) when reconnecting to avoid overwhelming a struggling server.
 
 ## Thinking Questions
+
 1. How do you handle "Heartbeats" in a gRPC stream?
 2. What is the memory impact of having 10,000 open Bidi streams on a single client?
 3. When should you use a Stream vs. a simple Retry loop for a Unary call?

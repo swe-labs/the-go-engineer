@@ -51,12 +51,15 @@ graph TD
 ## Code Walkthrough
 
 ### The Config Validator
+
 Shows how to implement a `Validate()` method that checks for mandatory fields, valid port ranges, and properly formatted URLs.
 
 ### The Startup Sequence
-Demonstrates the exact line of code where validation happens: after the config is loaded but *before* the first resource is initialized.
+
+Demonstrates the exact line of code where validation happens: after the config is loaded but _before_ the first resource is initialized.
 
 ### Specific Error Messages
+
 Shows why you should return "Missing DATABASE_URL" instead of a generic "Invalid config."
 
 ## Try It
@@ -67,9 +70,11 @@ Shows why you should return "Missing DATABASE_URL" instead of a generic "Invalid
 4. Discuss: Why is it better to fail on boot than to use a "fallback" for a critical production setting?
 
 ## In Production
+
 **Don't rely on your cloud provider's UI.** Just because you "set" the variable in the AWS or Heroku console doesn't mean your app is receiving it correctly. Validation on boot is your **Final Defense**. It protects you from typos in variable names (e.g., `DATABSE_URL` instead of `DATABASE_URL`) and ensures that your deployment pipeline is actually working as intended.
 
 ## Thinking Questions
+
 1. Why is "Fail-Fast" considered a best practice for production operations?
 2. What is the danger of providing "Safe Defaults" for production environments?
 3. How can you automate the testing of your configuration validation logic?

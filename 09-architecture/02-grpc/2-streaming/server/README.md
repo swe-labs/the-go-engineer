@@ -52,9 +52,11 @@ go run ./09-architecture/02-grpc/2-streaming/server
 ## Code Walkthrough
 
 ### Server Streaming Example
+
 Shows how to loop over a slice of data and call `stream.Send()` for each item.
 
 ### Bidirectional Example
+
 Demonstrates a "Chat" service where the server receives a message and immediately echoes it back to all connected clients.
 
 ## Try It
@@ -64,9 +66,11 @@ Demonstrates a "Chat" service where the server receives a message and immediatel
 3. Discuss: When would you use Streaming instead of a simple Unary call?
 
 ## In Production
+
 **Beware of Load Balancers.** Many L7 load balancers (like standard NGINX or some Cloud ALBs) have short timeouts for long-lived connections. You may need to implement **Keep-Alives** or increase the "Idle Timeout" to keep your streams open. Monitor your "Stream Count" to ensure you aren't leaking connections.
 
 ## Thinking Questions
+
 1. How do you handle an error in the middle of a 100-message stream?
 2. Why is `io.EOF` used to signal the end of a stream?
 3. What is the difference between a gRPC stream and a Web Socket?

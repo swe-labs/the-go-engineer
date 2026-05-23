@@ -34,6 +34,7 @@ graph LR
     A["input"] --> B["function boundary"]
     B --> C["value or error"]
 ```
+
 ```text
 findItem(items, "tea")
         |
@@ -150,15 +151,17 @@ This line shows the same pattern again with a different meaning.
   Not yet, but it prepares you for that pattern.
 
 ## In Production
+
 Multiple return values let Go functions communicate more honestly.
 They make success, failure, and extra context visible to the caller.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** You now know how to return two values. The most common use case for this in Go is returning a result *and* an error object. In the very next lesson, [Lesson 4: Errors As Values](../4-errors-as-values/README.md), you will learn how Go handles failures without using exceptions.
+> **Forward Reference:** You now know how to return two values. The most common use case for this in Go is returning a result _and_ an error object. In the very next lesson, [Lesson 4: Errors As Values](../4-errors-as-values/README.md), you will learn how Go handles failures without using exceptions.
 
 ## Next Step
 

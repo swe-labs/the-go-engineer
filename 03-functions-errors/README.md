@@ -14,12 +14,12 @@ By the end of this stage, a learner should be able to:
 
 ## Stage Map
 
-| Track | Surface | Core Job |
-| --- | --- | --- |
-| `FE.1-6` | Core Functions | Teach basic signatures, multiple returns, named returns, and defer. |
-| `FE.7` | Order Summary | Capstone exercise combining function basics. |
-| `FE.8-9` | Advanced Functions | Teach first-class functions, callbacks, and closure state capture. |
-| `FE.10` | Panic & Recover | Teach the final boundary for unrecoverable errors. |
+| Track    | Surface            | Core Job                                                            |
+| -------- | ------------------ | ------------------------------------------------------------------- |
+| `FE.1-6` | Core Functions     | Teach basic signatures, multiple returns, named returns, and defer. |
+| `FE.7`   | Order Summary      | Capstone exercise combining function basics.                        |
+| `FE.8-9` | Advanced Functions | Teach first-class functions, callbacks, and closure state capture.  |
+| `FE.10`  | Panic & Recover    | Teach the final boundary for unrecoverable errors.                  |
 
 ## Why This Stage Exists Now
 

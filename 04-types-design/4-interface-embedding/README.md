@@ -25,6 +25,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```text
 // Embedded interfaces combine contracts
 type Reader interface {
@@ -73,9 +74,11 @@ The standard library's io.ReadWriter is a classic example-embedding io.Reader an
 3. Verify that satisfying the embedded interfaces automatically satisfies the combined one.
 
 ## In Production
+
 Interface embedding is used throughout the standard library (io.ReadWriter, io.ReadCloser, etc.) and in real APIs to compose behavior contracts.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

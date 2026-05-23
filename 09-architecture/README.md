@@ -6,11 +6,11 @@ Learn the engineering of large-scale Go systems. This section turns correct code
 
 ## Section Map
 
-| Track | Surface | Mission |
-| --- | --- | --- |
-| `PD.1-PD.3` | [Package Design](./01-package-design) | teach naming, visibility, and layout rules |
-| `ARCH.1-ARCH.9` | [Architecture Patterns](./03-architecture-patterns) | teach service layering, DDD, CQRS, and decoupling |
-| `SEC.1-SEC.11` | [Security](./04-security) | teach input validation, cryptographic safety, identity, and trust boundaries |
+| Track           | Surface                                             | Mission                                                                      |
+| --------------- | --------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `PD.1-PD.3`     | [Package Design](./01-package-design)               | teach naming, visibility, and layout rules                                   |
+| `ARCH.1-ARCH.9` | [Architecture Patterns](./03-architecture-patterns) | teach service layering, DDD, CQRS, and decoupling                            |
+| `SEC.1-SEC.11`  | [Security](./04-security)                           | teach input validation, cryptographic safety, identity, and trust boundaries |
 
 [gRPC Reference](./02-grpc) is supporting reference material for contract-first service boundaries. It is not a canonical public track in Section 09.
 

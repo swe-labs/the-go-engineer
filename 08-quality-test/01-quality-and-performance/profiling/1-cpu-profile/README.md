@@ -50,6 +50,7 @@ go tool pprof cpu.prof
 ## Code Walkthrough
 
 ### `main.go`
+
 The code includes a "Heavy Workload" (e.g., intensive string manipulation or math). It uses `pprof.StartCPUProfile` to record the execution and `pprof.StopCPUProfile` to save the results.
 
 ## Try It
@@ -59,9 +60,11 @@ The code includes a "Heavy Workload" (e.g., intensive string manipulation or mat
 3. (Advanced) If you have Graphviz installed, try the `web` command to see a visual call graph.
 
 ## In Production
+
 **Profile real workloads.** Profiling a program that is idling won't tell you anything. You must profile while the system is under load (either from a benchmark or a load-testing tool). CPU profiling adds about 1-5% overhead, which is low enough to be used in production for short bursts.
 
 ## Thinking Questions
+
 1. What is the difference between `Flat` time and `Cum` (Cumulative) time?
 2. Why might a function show high CPU usage but very low execution time in a benchmark?
 3. How often does the Go CPU profiler take a sample?

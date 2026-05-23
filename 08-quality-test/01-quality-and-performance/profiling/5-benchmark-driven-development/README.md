@@ -50,9 +50,11 @@ go test -bench=. -benchmem -count=5 ./08-quality-test/01-quality-and-performance
 ## Code Walkthrough
 
 ### The "Naive" Implementation
+
 A function that performs a common task (like joining strings) in a sub-optimal way.
 
 ### The "Optimized" Implementation
+
 The same task performed using more efficient techniques discovered in earlier lessons (e.g., `strings.Builder`).
 
 ## Try It
@@ -62,9 +64,11 @@ The same task performed using more efficient techniques discovered in earlier le
 3. Rerun the benchmarks. Did the memory usage (`B/op`) go down? Did the speed improve?
 
 ## In Production
+
 **Don't "Micro-Optimize" everything.** Most of your code is not in a "Hot Path." Spending hours saving 5 nanoseconds in a function that runs once a day is a waste of engineering time. Focus your BDD efforts on the 1% of code that consumes 90% of the resources.
 
 ## Thinking Questions
+
 1. Why do we run benchmarks multiple times (using `-count`)?
 2. What is the danger of optimizing for speed at the cost of code readability?
 3. How can you automate performance regression testing in a CI/CD pipeline?

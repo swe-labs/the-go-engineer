@@ -68,11 +68,12 @@ go test ./09-architecture/04-security/11-secure-api-exercise
 - Use `go test ./09-architecture/04-security/11-secure-api-exercise/...`.
 - Starter path: `09-architecture/04-security/11-secure-api-exercise/_starter`.
 
-
 ## In Production
+
 **Security is never finished.** New vulnerabilities are discovered every day. In production, you should combine these coding practices with infrastructure-level security (WAFs, VPCs, IAM roles) and regular security audits. The goal is to make attacking your system so expensive and difficult that the attacker gives up and moves on to an easier target.
 
 ## Thinking Questions
+
 1. Which layer of defense was the easiest to implement? Which was the hardest?
 2. If you had to remove one layer of defense to save performance, which would it be and why?
 3. How does "Observability" (logs/metrics) help you identify an ongoing attack?

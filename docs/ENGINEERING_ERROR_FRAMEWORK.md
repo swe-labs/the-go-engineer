@@ -179,8 +179,8 @@ logger.Info("login", "password", password)
 
 ## Summary
 
-| Error Type | When | Handling | Typical HTTP |
-| --- | --- | --- | --- |
-| UserError | validation, business rules | return | 400, 403, 404 |
-| SystemError | infrastructure, external failures | wrap and propagate | 500, 502, 503, 504 |
-| FatalError | startup or unrecoverable failure | log and exit at top level | not applicable |
+| Error Type  | When                              | Handling                  | Typical HTTP       |
+| ----------- | --------------------------------- | ------------------------- | ------------------ |
+| UserError   | validation, business rules        | return                    | 400, 403, 404      |
+| SystemError | infrastructure, external failures | wrap and propagate        | 500, 502, 503, 504 |
+| FatalError  | startup or unrecoverable failure  | log and exit at top level | not applicable     |

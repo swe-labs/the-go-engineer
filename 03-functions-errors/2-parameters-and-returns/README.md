@@ -28,6 +28,7 @@ graph LR
     A["input"] --> B["function boundary"]
     B --> C["value or error"]
 ```
+
 ```text
 prices ----------------------+
                              |
@@ -145,15 +146,17 @@ That is the full parameter-and-return contract in one readable line.
   No. It copies the slice header, which still points to the same underlying data.
 
 ## In Production
+
 Most useful code is "input in, result out."
 Clear parameters and return values are the first step toward dependable business logic.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?
 
-> **Forward Reference:** You just learned how to return a single value (`int` or `string`). But what if your function needs to return a result *and* an indication of success or failure? Go solves this uniquely by returning multiple values at once. You will learn this next in [Lesson 3: Multiple Return Values](../3-multiple-return-values/README.md).
+> **Forward Reference:** You just learned how to return a single value (`int` or `string`). But what if your function needs to return a result _and_ an indication of success or failure? Go solves this uniquely by returning multiple values at once. You will learn this next in [Lesson 3: Multiple Return Values](../3-multiple-return-values/README.md).
 
 ## Next Step
 

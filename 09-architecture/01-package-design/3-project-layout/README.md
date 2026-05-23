@@ -53,9 +53,11 @@ go run ./09-architecture/01-package-design/3-project-layout
 ## Code Walkthrough
 
 ### Small Project (Flat)
+
 Everything in the root. Perfect for libraries or simple tools.
 
 ### Large Project (Structured)
+
 Uses `cmd/` for binaries and `internal/` for core logic. Prevents "Folder Sprawl" and circular dependencies.
 
 ## Try It
@@ -65,9 +67,11 @@ Uses `cmd/` for binaries and `internal/` for core logic. Prevents "Folder Sprawl
 3. Add a new command to the `cmd/` folder (e.g., `cmd/cleanup/main.go`) that imports logic from `internal/`.
 
 ## In Production
+
 **Don't over-engineer your layout.** Start flat. Only create a new folder when you have a clear reason (e.g., you need to hide private code, or you need to build two different binaries). Go is not Java; deep folder hierarchies like `src/main/java/com/company/project/module` are an anti-pattern.
 
 ## Thinking Questions
+
 1. Why is the `cmd/` directory useful for large teams?
 2. If a project has only one binary, do you still need a `cmd/` folder?
 3. What happens if you try to import a package from another project's `internal/` directory?

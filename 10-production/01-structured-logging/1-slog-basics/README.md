@@ -50,12 +50,15 @@ go run ./10-production/01-structured-logging/1-slog-basics
 ## Code Walkthrough
 
 ### The Default Logger
+
 Shows how `slog.Info` looks right out of the box (standard text).
 
 ### Switching to JSON
+
 Demonstrates how to set a global logger that outputs everything as JSON.
 
 ### Using Attributes
+
 Shows the difference between `slog.Info("msg", "key", val)` and the more performant `slog.LogAttrs` pattern.
 
 ## Try It
@@ -65,9 +68,11 @@ Shows the difference between `slog.Info("msg", "key", val)` and the more perform
 3. Discuss: Why should you never put a User's Password in a log line?
 
 ## In Production
+
 **Set your log level via configuration.** Use an environment variable (SEC.9) to set the level to `INFO` in production and `DEBUG` in staging. Use the `JSONHandler` so your logs can be parsed by your monitoring stack. Avoid "Big Blob" logs where a single key contains a massive JSON string; break it down into searchable top-level keys instead.
 
 ## Thinking Questions
+
 1. What is the benefit of a `JSONHandler` over a `TextHandler`?
 2. Why is "Leveling" important for cost control in logging?
 3. How does `slog` differ from the standard `log` package in Go?

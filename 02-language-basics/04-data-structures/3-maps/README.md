@@ -30,6 +30,7 @@ graph TD
     A["many values"] --> B["one collection type"]
     B --> C["read or update by position or key"]
 ```
+
 ```text
 studentGrades
 
@@ -125,10 +126,12 @@ Use `make` when the map should start empty and grow step by step.
   Because a missing key returns the zero value, and that can look like a real stored value.
 
 ## In Production
+
 Maps appear constantly in Go for configuration, lookup tables, indexing, request classification,
 and in-memory caches. The comma-ok habit prevents subtle bugs around missing data.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

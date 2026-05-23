@@ -41,6 +41,7 @@ go run ./06-backend-db/01-web-and-database/http-servers/6-error-handling-middlew
 ```
 
 Test the error and panic recovery:
+
 ```bash
 # Test a handled error
 curl -i http://localhost:8085/fail
@@ -52,15 +53,19 @@ curl -i http://localhost:8085/panic
 ## Code Walkthrough
 
 ### The `AppHandler` Pattern
+
 This is a powerful idiom. By implementing `ServeHTTP` on a function type, we can perform "post-processing" on the returned error. This is the perfect place to log errors to an external system (like Sentry or Datadog) or to ensure all errors follow a consistent JSON format.
 
 ### `errors.As`
+
 We use `errors.As` to check if a returned error is a specific `AppError` type. This allows our handlers to return detailed error info while the middleware stays generic.
 
 ### The `Recovery` Middleware
+
 The most important middleware in any production server. It uses `defer` and `recover()` to catch panics. Without this, a single nil-pointer dereference in one handler would crash your entire API for all users.
 
 ### Logging
+
 Notice how we log the **real** error message to the server console, but send a **sanitized** message to the client. Never leak internal database errors or stack traces to the public!
 
 ## Try It
@@ -70,9 +75,11 @@ Notice how we log the **real** error message to the server console, but send a *
 3. Create a handler that returns a standard `errors.New("generic")` and see how the middleware handles it as a 500 error.
 
 ## In Production
+
 While `recover()` saves your server from crashing, a panic is still a sign of a bug. Your recovery middleware should always log the incident with high priority so developers can fix the underlying issue. Also, consider using a structured logger (like `slog`) instead of the standard `log` package for better observability.
 
 ## Thinking Questions
+
 1. Why do we log more information to the console than we send to the client?
 2. What are the risks of using `recover()` to "hide" bugs instead of fixing them?
 3. How would you modify the `AppHandler` to handle different response types (e.g., XML vs JSON errors)?

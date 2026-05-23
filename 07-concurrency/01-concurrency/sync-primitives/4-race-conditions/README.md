@@ -38,6 +38,7 @@ sequenceDiagram
 ## Machine View
 
 At the CPU level, `counter++` is not a single instruction. It is **three** distinct operations:
+
 1. `MOV EAX, [counter]` (Load value into register)
 2. `INC EAX` (Increment register)
 3. `MOV [counter], EAX` (Store register back to memory)
@@ -49,11 +50,13 @@ If the OS or the Go scheduler switches threads between step 1 and step 3, anothe
 ## Run Instructions
 
 Run normally first:
+
 ```bash
 go run ./07-concurrency/01-concurrency/goroutines/8-race
 ```
 
 Then run with the **Race Detector**:
+
 ```bash
 go run -race ./07-concurrency/01-concurrency/goroutines/8-race
 ```
@@ -61,12 +64,15 @@ go run -race ./07-concurrency/01-concurrency/goroutines/8-race
 ## Code Walkthrough
 
 ### The `unsafeCounter`
+
 This function launches 1,000 goroutines that all increment a shared integer. Because `counter++` is not atomic, they overwrite each other's work.
 
 ### `sync.Mutex`
+
 We add a `mu.Lock()` and `mu.Unlock()`. This ensures that only one goroutine can be in the "Critical Section" (the increment line) at a time. All other goroutines will block at `mu.Lock()` until the current holder releases it.
 
 ### `sync/atomic`
+
 For simple counters, a Mutex is often overkill. `atomic.AddInt64` uses special CPU instructions (like LOCK XADD on x86) to perform the read-modify-write in a single, uninterruptible hardware step.
 
 ## Try It
@@ -92,10 +98,12 @@ Verify that the "Unsafe" count is often less than 1000, while Mutex and Atomic a
 ```
 
 ## In Production
+
 **Races are often "Heisenbugs."**
 They might not show up on your local machine, but they will crash your production server under high load. **Never ignore a race detector warning.** Even if the code "seems to work," a race condition is a sign of undefined behavior that will eventually lead to a crash or data corruption.
 
 ## Thinking Questions
+
 1. Why is `atomic` faster than `mutex` for a simple counter?
 2. Why can't the compiler automatically detect and fix race conditions?
 3. If you have a race condition on a `map`, what happens to your Go program? (Hint: It's a fatal crash).

@@ -58,7 +58,6 @@ go run ./07-concurrency/02-concurrency-patterns/4-bounded-pipeline-exercise
   3. **Work**: Simulates image processing with `time.Sleep`.
   4. **Cleanup**: Resets and returns the buffer to the pool via a `defer`.
 
-
 ## Try It
 
 1. Increase the limit to `10`. Watch how much faster the batch job completes.
@@ -79,10 +78,12 @@ Starting batch job...
 ```
 
 ## In Production
+
 **Calculate your limits based on hardware.**
 A concurrency limit of `4` might be too low for a 64-core server, and too high for a 1-core Lambda function. A good rule of thumb is `runtime.NumCPU()` for CPU-bound tasks, and a higher multiple (e.g., `NumCPU * 10`) for I/O-bound tasks like network requests.
 
 ## Thinking Questions
+
 1. Why do we check `ctx.Done()` at the very beginning of `processImage`?
 2. What would happen to the memory usage if we didn't use `sync.Pool`?
 3. How can you handle a scenario where you want the pipeline to **continue** even if one image fails? (Hint: Don't return an error from `g.Go`).

@@ -35,6 +35,7 @@ go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands
 ```
 
 Try different subcommands:
+
 ```bash
 go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands greet -name="Gopher" -loud
 go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands calc -a=10 -b=5 -op=sub
@@ -42,6 +43,7 @@ go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands version
 ```
 
 Check subcommand-specific help:
+
 ```bash
 go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands greet -help
 ```
@@ -49,12 +51,15 @@ go run ./05-packages-io/02-io-and-cli/cli-tools/3-subcommands greet -help
 ## Code Walkthrough
 
 ### `switch os.Args[1]`
+
 The "router". It directs the execution flow based on the first user argument.
 
 ### `flag.NewFlagSet(name, errorHandling)`
+
 Creates a new isolated group of flags. `flag.ExitOnError` ensures the program quits gracefully if the user provides invalid flags.
 
 ### `fs.Parse(os.Args[2:])`
+
 Parses ONLY the arguments that belong to the subcommand, ignoring the program name and the subcommand name itself.
 
 ## Try It
@@ -64,9 +69,11 @@ Parses ONLY the arguments that belong to the subcommand, ignoring the program na
 3. Make the `version` command print the current OS using `runtime.GOOS`.
 
 ## In Production
+
 While `FlagSet` is powerful, complex tools with many nested subcommands (e.g., `docker container run`) are usually built using a library like **Cobra**. Cobra handles help generation, bash completion, and subcommand nesting much more elegantly than manual `switch` statements.
 
 ## Thinking Questions
+
 1. Why is it better to use `FlagSet` for subcommands instead of one global set of flags?
 2. What happens if a user types a subcommand that doesn't exist?
 3. How can you provide a "global" flag that works across all subcommands (e.g., `--verbose`)?

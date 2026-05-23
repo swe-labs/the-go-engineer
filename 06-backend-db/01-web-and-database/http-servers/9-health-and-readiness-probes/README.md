@@ -32,6 +32,7 @@ graph TD
 ## Machine View
 
 Health probes are usually called every few seconds by an external system. They should be extremely fast and lightweight.
+
 - **Liveness** should almost always return `200 OK` immediately. It only fails if the process is deadlocked or in a non-recoverable state.
 - **Readiness** should perform a "shallow" check of its environment. It might ping the database with a `SELECT 1` or check if a local cache is populated. If any critical dependency is missing, it returns a `503 Service Unavailable`.
 - Using `atomic.Bool` or `atomic.Value` to store the readiness state ensures that concurrent probe requests always see the most up-to-date and thread-safe status.
@@ -43,6 +44,7 @@ go run ./06-backend-db/01-web-and-database/http-servers/9-health-and-readiness-p
 ```
 
 Observe the transition from "Not Ready" to "Ready":
+
 1. Start the server.
 2. Immediately run: `curl -i http://localhost:8088/readyz` (You'll get a 503).
 3. Wait 5 seconds for the "startup" to finish.
@@ -51,15 +53,19 @@ Observe the transition from "Not Ready" to "Ready":
 ## Code Walkthrough
 
 ### `/healthz` vs `/readyz`
+
 These are the industry standard names for these endpoints. The `z` suffix is a convention used to avoid collisions with actual business routes (like `/health`).
 
 ### Atomic State
+
 We use `atomic.Bool` for the `isReady` flag because the startup routine and the HTTP handlers are running in different goroutines. Atomic operations are faster and cleaner than Mutexes for simple boolean flags.
 
 ### Simulation of Startup
+
 In a real app, the `isReady` flag would be set to `true` only after successful database connection, migration, and cache warming.
 
 ### Status Codes
+
 - `200 OK`: All systems go.
 - `503 Service Unavailable`: The server is alive but cannot handle requests right now.
 
@@ -70,9 +76,11 @@ In a real app, the `isReady` flag would be set to `true` only after successful d
 3. Combine the health probe with a `sync.Mutex` to protect a complex status object that includes multiple sub-system checks.
 
 ## In Production
+
 **Do not do heavy work in probes.** If your readiness probe takes 10 seconds to run, the load balancer might time out and think you are down. Keep your checks "shallow." For example, instead of running a complex query, just check if the database connection pool is not exhausted. Also, ensure your probes are not protected by authentication-the load balancer needs to reach them easily!
 
 ## Thinking Questions
+
 1. Why shouldn't the liveness probe check the database? (Hint: What happens if the DB goes down and K8s restarts 1,000 containers at once?)
 2. What is the benefit of using the `503` status code specifically?
 3. How would you implement a "Deep" health check for a human operator to see detailed system status?

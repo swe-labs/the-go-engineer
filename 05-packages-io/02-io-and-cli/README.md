@@ -17,11 +17,11 @@ This track belongs to [05 Packages & IO](../README.md).
 
 ## Track Map
 
-| Track | Entry | Milestone | Focus |
-| --- | --- | --- | --- |
-| CLI Tools | [CL.1 args](./cli-tools) | `CL.4` | arguments, flags, subcommands, and a safe file-organizer CLI |
-| Encoding | [EN.1 marshalling](./encoding) | `EN.6` | JSON encoding/decoding, streaming, base64, and config loading |
-| Filesystem | [FS.1 files](./filesystem) | `FS.7` | file I/O, traversal, embed, I/O composition, and log search |
+| Track      | Entry                          | Milestone | Focus                                                         |
+| ---------- | ------------------------------ | --------- | ------------------------------------------------------------- |
+| CLI Tools  | [CL.1 args](./cli-tools)       | `CL.4`    | arguments, flags, subcommands, and a safe file-organizer CLI  |
+| Encoding   | [EN.1 marshalling](./encoding) | `EN.6`    | JSON encoding/decoding, streaming, base64, and config loading |
+| Filesystem | [FS.1 files](./filesystem)     | `FS.7`    | file I/O, traversal, embed, I/O composition, and log search   |
 
 ## Suggested Order
 

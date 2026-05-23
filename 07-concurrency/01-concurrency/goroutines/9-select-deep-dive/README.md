@@ -35,6 +35,7 @@ graph TD
 ## Machine View
 
 The `select` statement is implemented as a runtime function (`selectgo`).
+
 1. **Scaffolding**: It randomizes the order of cases to avoid bias.
 2. **Polling**: it checks all channels to see if any are ready (have data in buffer or a blocked waiter).
 3. **Blocking**: If none are ready, it adds the current goroutine to the `recvq`/`sendq` of **every** channel in the `select` block and parks it.
@@ -49,15 +50,19 @@ go run ./07-concurrency/01-concurrency/goroutines/9-select-deep-dive
 ## Code Walkthrough
 
 ### Timeout Pattern
+
 `case <-time.After(d)` is the most common way to prevent your program from hanging forever on a slow external dependency.
 
 ### Non-blocking Select
+
 By adding a `default` case, `select` becomes non-blocking. This is useful for polling or for trying to send a notification without stopping progress.
 
 ### Context Cancellation
+
 `case <-ctx.Done()` is the professional way to handle timeouts and manual cancellations in production Go services.
 
 ### Fan-In Pattern
+
 We launch multiple goroutines and funnel their results into a single output channel. This allows a consumer to read from many sources as if they were one.
 
 ## Try It
@@ -88,10 +93,12 @@ Observe the different patterns in action, especially the random interleaving of 
 ```
 
 ## In Production
+
 **Beware of the "Zero-Case" Select.**
 `select {}` (with no cases) blocks forever. It is sometimes used to keep a main function alive, but it's usually a sign that you should be using a `WaitGroup` or a proper shutdown signal.
 
 ## Thinking Questions
+
 1. Why does Go randomize the order of cases in a `select` statement?
 2. What is the difference between `time.After(d)` inside a loop versus outside a loop? (Hint: Memory leaks!)
 3. How can you use `select` to implement a "Priority Queue" where one channel is checked more often than another?

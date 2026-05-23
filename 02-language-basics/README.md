@@ -13,18 +13,19 @@ By the end of this section, a learner should be able to:
 
 ## Section Map
 
-| ID | Lesson | What It Unlocks |
-| --- | --- | --- |
-| `LB.1` | [variables](./1-variables) | Introduces typed values, zero values, and declaration styles |
-| `LB.2` | [constants](./2-constants) | Separates immutable values from ordinary variables |
-| `LB.3` | [enums with iota](./3-enums) | Shows how Go models enum-like values |
-| `LB.4` | [application logger](./4-application-logger) | Combines the section into one milestone exercise |
+| ID     | Lesson                                       | What It Unlocks                                              |
+| ------ | -------------------------------------------- | ------------------------------------------------------------ |
+| `LB.1` | [variables](./1-variables)                   | Introduces typed values, zero values, and declaration styles |
+| `LB.2` | [constants](./2-constants)                   | Separates immutable values from ordinary variables           |
+| `LB.3` | [enums with iota](./3-enums)                 | Shows how Go models enum-like values                         |
+| `LB.4` | [application logger](./4-application-logger) | Combines the section into one milestone exercise             |
 
 ## Zero-Magic Boundary
 
 This section stays at the foundations level.
 
 It does not try to teach:
+
 - Functions as a design tool
 - Control flow in depth
 - Data structures

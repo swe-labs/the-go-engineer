@@ -17,7 +17,7 @@ Think of Splitting Services as **Dividing a Growing Restaurant**.
 2. **The Problem**: Eventually, the "Bakery" needs its own specialized ovens and 24/7 staff, while the "Pizza" section only runs at dinner. They are getting in each other's way.
 3. **The Split**: You move the Bakery to the building next door.
 4. **The Cost**: Now you have two rents, two sets of managers, and you have to drive the bread over to the pizza shop every morning (Network latency).
-5. **The Justification**: You only do this if the *benefit* of the Bakery's independence is greater than the *cost* of the extra rent and driving.
+5. **The Justification**: You only do this if the _benefit_ of the Bakery's independence is greater than the _cost_ of the extra rent and driving.
 
 ## Visual Model
 
@@ -58,9 +58,11 @@ go run ./09-architecture/03-architecture-patterns/8-when-to-split-services
 ## Code Walkthrough
 
 ### The "Heavy" Component
+
 Simulates a component that uses significant CPU/Memory. In a monolith, this impacts every other component.
 
 ### The "Independent" Service
+
 Shows how the heavy component can be moved behind a network boundary, allowing it to be scaled up (using more replicas) without scaling the rest of the application.
 
 ## Try It
@@ -70,9 +72,11 @@ Shows how the heavy component can be moved behind a network boundary, allowing i
 3. Discuss: If you have a team of 3 developers, is "Team Autonomy" a valid reason to split a service?
 
 ## In Production
+
 **Splitting is easy; Joining is hard.** Once you split a service, you've introduced "Distributed System Problems" (network failures, data consistency, complicated tracing). Only split when the pain of the monolith (slow deploys, resource starvation, team friction) is clearly visible in your metrics.
 
 ## Thinking Questions
+
 1. What is "Conway's Law," and how does it relate to service boundaries?
 2. How does a "Service Mesh" (like Istio) help manage a large number of split services?
 3. What is the difference between a "Service" and a "Package"?

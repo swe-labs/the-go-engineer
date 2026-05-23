@@ -27,6 +27,7 @@ graph TD
     A["data"] --> B["type definition"]
     B --> C["methods or interface behavior"]
 ```
+
 ```text
 +-------------------------------------------+
 | Circle struct                             |
@@ -86,9 +87,11 @@ If any method on a type needs a pointer receiver, make all methods on that type 
   Go automatically takes the address when needed. It is syntactic sugar.
 
 ## In Production
+
 Methods are how Go achieves encapsulation. The receiver type determines whether callers get a copy or share the original. This affects performance and mutation behavior.
 
 ## Thinking Questions
+
 1. What problem is this lesson trying to solve?
 2. What would change if you removed this idea from the program?
 3. Where do you expect to see this pattern again in real Go code?

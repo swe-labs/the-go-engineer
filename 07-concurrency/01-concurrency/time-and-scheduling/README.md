@@ -7,12 +7,12 @@ timeouts, and interval-based background work without leaking timers or tickers.
 
 ## Track Map
 
-| ID | Type | Surface | Why It Matters | Requires |
-| --- | --- | --- | --- | --- |
-| `TM.1` | Lesson | [time basics](./1-time) | Introduces `time.Time`, `time.Duration`, and elapsed-time calculations. | entry |
-| `TM.2` | Lesson | [formatting](./2-formatting) | Teaches parsing and formatting with Go's reference-time model. | `TM.1` |
-| `TM.3` | Lesson | [timers and tickers](./3-timer-and-ticker) | Explains one-shot and repeating timed events plus cleanup rules. | `TM.1`, `TM.2` |
-| `TM.7` | Exercise | [console reminder](./7-reminder) | Combines timers, tickers, and command-line input in one runnable milestone. | `TM.1`, `TM.2`, `TM.3` |
+| ID     | Type     | Surface                                    | Why It Matters                                                              | Requires               |
+| ------ | -------- | ------------------------------------------ | --------------------------------------------------------------------------- | ---------------------- |
+| `TM.1` | Lesson   | [time basics](./1-time)                    | Introduces `time.Time`, `time.Duration`, and elapsed-time calculations.     | entry                  |
+| `TM.2` | Lesson   | [formatting](./2-formatting)               | Teaches parsing and formatting with Go's reference-time model.              | `TM.1`                 |
+| `TM.3` | Lesson   | [timers and tickers](./3-timer-and-ticker) | Explains one-shot and repeating timed events plus cleanup rules.            | `TM.1`, `TM.2`         |
+| `TM.7` | Exercise | [console reminder](./7-reminder)           | Combines timers, tickers, and command-line input in one runnable milestone. | `TM.1`, `TM.2`, `TM.3` |
 
 ## Suggested Order
 
@@ -44,4 +44,3 @@ These lessons remain available, but they are not part of the live v2 track map y
 
 After `TM.7`, continue to the [Stage 07 overview](../README.md) or move on to
 [Stage 07: Concurrency Patterns](../../02-concurrency-patterns).
-

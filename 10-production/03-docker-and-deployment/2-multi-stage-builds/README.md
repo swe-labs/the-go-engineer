@@ -50,12 +50,15 @@ graph TD
 ## Code Walkthrough
 
 ### The Builder Stage
+
 Shows how to name a stage (`AS builder`) and perform a production-ready build with flags like `-ldflags="-s -w"`.
 
 ### The Final Stage
+
 Demonstrates using a minimal base image like `alpine` or `gcr.io/distroless/static`.
 
 ### Security Best Practices
+
 Shows why you should run your application as a **Non-root User** inside the container.
 
 ## Try It
@@ -65,9 +68,11 @@ Shows why you should run your application as a **Non-root User** inside the cont
 3. Discuss: Why is a smaller image faster to deploy in a cloud environment?
 
 ## In Production
+
 **Use Distroless.** Distroless images contain only your application and its runtime dependencies. They do not contain package managers, shells, or any other programs you would expect to find in a standard Linux distribution. This drastically reduces the **Attack Surface** of your application. If there is no shell, an attacker cannot run `ls`, `curl`, or `rm` even if they find a vulnerability in your code.
 
 ## Thinking Questions
+
 1. Why do we need a compiler in the build stage but not in the final stage?
 2. What is a "Static Binary," and why is it important for Docker?
 3. How does a multi-stage build protect your source code?

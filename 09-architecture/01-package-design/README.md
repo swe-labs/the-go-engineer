@@ -10,10 +10,10 @@ This track belongs to [09 Architecture & Security](../README.md).
 
 ## Track Map
 
-| ID | Type | Surface | Why It Matters | Requires |
-| --- | --- | --- | --- | --- |
-| `PD.1` | Lesson | [naming](./1-naming) | Keeps package names readable and domain-specific. | entry |
-| `PD.2` | Lesson | [visibility](./2-visibility) | Uses export rules and `internal/` to tighten boundaries. | `PD.1` |
+| ID     | Type   | Surface                              | Why It Matters                                             | Requires       |
+| ------ | ------ | ------------------------------------ | ---------------------------------------------------------- | -------------- |
+| `PD.1` | Lesson | [naming](./1-naming)                 | Keeps package names readable and domain-specific.          | entry          |
+| `PD.2` | Lesson | [visibility](./2-visibility)         | Uses export rules and `internal/` to tighten boundaries.   | `PD.1`         |
 | `PD.3` | Lesson | [project layout](./3-project-layout) | Chooses a layout that matches the real size of the system. | `PD.1`, `PD.2` |
 
 ## Suggested Order

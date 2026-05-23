@@ -59,11 +59,12 @@ go test -v ./10-production/01-structured-logging/5-exercise
 - Use `go test -v ./10-production/01-structured-logging/5-exercise`.
 - Starter path: `10-production/01-structured-logging/5-exercise/_starter`.
 
-
 ## In Production
+
 **Don't "Just Be Careful."** Logging Personally Identifiable Information (PII) is a major compliance violation (GDPR, HIPAA, SOC2). When a secret leaks into logs, it is retained for months and accessible to many engineers. The `ReplaceAttr` pattern is your **Safety Net**. It ensures that no matter how tired or rushed a developer is, the system will prevent a massive security incident.
 
 ## Thinking Questions
+
 1. Why is centralized redaction better than manual redaction at the call site?
 2. What happens if a developer logs a secret in the **Message** string instead of an attribute?
 3. How can you handle different redaction rules for different log levels (e.g., log full details in DEBUG but redact in INFO)?

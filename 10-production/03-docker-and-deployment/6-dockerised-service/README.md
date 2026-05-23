@@ -70,9 +70,11 @@ cd 10-production/03-docker-and-deployment/6-dockerised-service/_starter
 - Starter path: `10-production/03-docker-and-deployment/6-dockerised-service/_starter`.
 
 ## In Production
+
 **Production Readiness is a checklist, not a feeling.** A service is only production-ready if it is **Observable** (Logs/Metrics), **Configurable** (Env vars), **Secure** (Non-root user/No shell), and **Graceful** (Handles shutdown). This exercise forces you to address all these properties at once.
 
 ## Thinking Questions
+
 1. Why did we use `CGO_ENABLED=0` in the build stage?
 2. How does the Go app know the database is ready in the Compose environment?
 3. What happens to the database data if you run `docker-compose down`?

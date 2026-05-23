@@ -45,9 +45,11 @@ go run ./09-architecture/02-grpc/1-unary/client
 ## Code Walkthrough
 
 ### Connecting to the Server
+
 Shows the use of `grpc.NewClient` with `grpc.WithTransportCredentials(insecure.NewCredentials())` for local development.
 
 ### Making the Call
+
 Demonstrates how to create a context with a 1-second timeout and call a remote method just like a local function call.
 
 ## Try It
@@ -57,9 +59,11 @@ Demonstrates how to create a context with a 1-second timeout and call a remote m
 3. Discuss: Why is it better to use gRPC status codes instead of parsing error strings?
 
 ## In Production
+
 **Reuse your connections.** Don't call `NewClient` for every request. Create the connection once when your application starts and share it across all your handlers. Use **Interceptors** on the client side for tracing, retries, and monitoring. Always use TLS (SEC.8) in production.
 
 ## Thinking Questions
+
 1. What happens if the server restarts? Does the client need to reconnect manually?
 2. How do you handle "Retries" in a gRPC client?
 3. What is the difference between `grpc.NewClient` and the older `grpc.Dial`?

@@ -30,6 +30,7 @@ graph TD
 ## Machine View
 
 The Repository pattern uses **Dependency Injection (DI)**. Instead of your logic creating a database connection, the connection is passed (injected) into the repository struct. This allows you to:
+
 - **Test in Isolation**: You can pass a "Mock" repository to your business logic tests that returns hardcoded data without ever touching a real database.
 - **Switch Drivers**: You can swap your SQLite implementation for a high-performance PostgreSQL implementation just by changing the injection point in `main.go`.
 - **Centralize SQL**: All SQL strings are contained in a single directory (`repository/`), making it easy to find and optimize slow queries.
@@ -45,15 +46,19 @@ The example demonstrates a split structure with `models`, `repository`, and `mai
 ## Solution Walkthrough
 
 ### `UserRepository` Interface
+
 Defined in the `repository` package. It describes the **Intent** of our data access layer (Create, Get, List) without mentioning SQL or SQLite.
 
 ### `SQLUserRepository` Struct
+
 The concrete implementation. It holds a pointer to `*sql.DB` and implements every method in the interface. Note that the methods use `context.Context` to support timeouts and cancellations.
 
 ### `models` Package
+
 Contains our "Domain Models". These are simple structs that describe our data. Both the repository and the application logic use these shared models to communicate.
 
 ### Dependency Injection in `main.go`
+
 In `main()`, we initialize the `*sql.DB` and then "Inject" it into the repository: `repo := repository.NewSQLUserRepository(db)`.
 
 ## Try It
@@ -76,9 +81,11 @@ Running the repository project should show clean data management:
 ```
 
 ## In Production
+
 While the Repository pattern is great, avoid the **"Generic Repository"** trap (trying to build one repository that handles all types of data). Each major domain (Users, Orders, Products) should have its own specific repository interface that reflects its unique business needs.
 
 ## Thinking Questions
+
 1. Why is it better to return an interface from the repository constructor instead of a concrete struct?
 2. How does the Repository pattern help with writing unit tests for your HTTP handlers?
 3. What is the downside of having too many layers (Models -> Repository -> Service -> Handler)?

@@ -68,9 +68,11 @@ These lines show that packages can export both values and functions.
 3. Add one more call from the `strings` package.
 
 ## In Production
+
 Real Go systems are mostly package boundaries. Teams rely on imports, exported names, and clear package ownership to keep codebases understandable and deployable.
 
 ## Thinking Questions
+
 1. Why might Go prefer explicit package ownership at the call site?
 2. What does the capital letter rule communicate to the reader?
 3. Why is it useful that import resolution happens before the program starts running?

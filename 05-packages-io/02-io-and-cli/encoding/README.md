@@ -7,14 +7,14 @@ JSON and stream-oriented decoding.
 
 ## Track Map
 
-| ID | Type | Surface | Why It Matters | Requires |
-| --- | --- | --- | --- | --- |
-| `EN.1` | Lesson | [JSON marshalling](./1-marshalling) | Introduces struct-to-JSON serialization and struct tags. | entry |
-| `EN.2` | Lesson | [JSON unmarshalling](./2-unmarshal) | Shows how JSON becomes Go values and where zero values can hide missing fields. | `EN.1` |
-| `EN.3` | Lesson | [JSON encoder](./3-encoder) | Teaches stream-oriented writing with `json.NewEncoder`. | `EN.1`, `EN.2` |
-| `EN.4` | Lesson | [JSON decoder](./4-decode) | Teaches stream-oriented reading with `json.NewDecoder`. | `EN.2`, `EN.3` |
-| `EN.5` | Lesson | [base64](./5-base64_encoding) | Adds binary-to-text transport encoding. | `EN.1` |
-| `EN.6` | Exercise | [config parser](./6-config-parser) | Combines file I/O, JSON decoding, and validation in one milestone. | `EN.1`, `EN.2`, `EN.3`, `EN.4` |
+| ID     | Type     | Surface                             | Why It Matters                                                                  | Requires                       |
+| ------ | -------- | ----------------------------------- | ------------------------------------------------------------------------------- | ------------------------------ |
+| `EN.1` | Lesson   | [JSON marshalling](./1-marshalling) | Introduces struct-to-JSON serialization and struct tags.                        | entry                          |
+| `EN.2` | Lesson   | [JSON unmarshalling](./2-unmarshal) | Shows how JSON becomes Go values and where zero values can hide missing fields. | `EN.1`                         |
+| `EN.3` | Lesson   | [JSON encoder](./3-encoder)         | Teaches stream-oriented writing with `json.NewEncoder`.                         | `EN.1`, `EN.2`                 |
+| `EN.4` | Lesson   | [JSON decoder](./4-decode)          | Teaches stream-oriented reading with `json.NewDecoder`.                         | `EN.2`, `EN.3`                 |
+| `EN.5` | Lesson   | [base64](./5-base64_encoding)       | Adds binary-to-text transport encoding.                                         | `EN.1`                         |
+| `EN.6` | Exercise | [config parser](./6-config-parser)  | Combines file I/O, JSON decoding, and validation in one milestone.              | `EN.1`, `EN.2`, `EN.3`, `EN.4` |
 
 ## Suggested Order
 

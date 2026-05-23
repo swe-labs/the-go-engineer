@@ -55,9 +55,11 @@ go run ./09-architecture/03-architecture-patterns/1-architecture-trade-offs
 ## Code Walkthrough
 
 ### The "All-in-One" Logic
+
 Shows a simple program where every function calls every other function directly.
 
 ### The "Service-Oriented" Logic
+
 Simulates a network call between two components, demonstrating how you have to handle timeouts, retries, and serialization errors.
 
 ## Try It
@@ -67,9 +69,11 @@ Simulates a network call between two components, demonstrating how you have to h
 3. Discuss: At what point (number of developers or lines of code) would you switch from a Flat Monolith to a Modular Monolith?
 
 ## In Production
+
 **Don't start with Microservices.** It is an "Architecture of Scale," not an "Architecture of Speed." Most startups fail before they reach the scale where microservices are necessary. Start with a clean Modular Monolith, and only split out services when a specific component has a different scaling or deployment requirement than the rest.
 
 ## Thinking Questions
+
 1. Why is a "Distributed Monolith" the worst of both worlds?
 2. How does "Data Ownership" change when you move to microservices?
 3. What is the "Network Tax," and why does it matter?

@@ -4,10 +4,10 @@ This directory holds the live Section 06 teaching surfaces.
 
 ## Learning Surfaces
 
-| ID | Surface | Focus |
-| --- | --- | --- |
-| `CO.1` | [composition](./1-composition) | Named-field composition, has-a modeling, explicit reuse |
-| `CO.2` | [embedding](./2-embedding) | Anonymous fields, promoted methods, field shadowing |
+| ID     | Surface                                  | Focus                                                         |
+| ------ | ---------------------------------------- | ------------------------------------------------------------- |
+| `CO.1` | [composition](./1-composition)           | Named-field composition, has-a modeling, explicit reuse       |
+| `CO.2` | [embedding](./2-embedding)               | Anonymous fields, promoted methods, field shadowing           |
 | `CO.3` | [bank account project](./3-bank-account) | Milestone exercise combining both lessons in one small domain |
 
 ## Why This Section Matters
@@ -25,4 +25,3 @@ Use `CO.1` and `CO.2` to build those answers before taking on `CO.3`.
 
 Return to the [Section 06 overview](../README.md) for the full learner path, or jump straight to
 [CO.3](./3-bank-account) when you are ready for the milestone.
-

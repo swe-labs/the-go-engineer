@@ -47,12 +47,15 @@ go run ./07-concurrency/01-concurrency/goroutines/1-goroutine
 ## Code Walkthrough
 
 ### The `go` Keyword
+
 Adding `go` before a function call tells Go to run that function in a new, independent goroutine. The caller does not wait for it to return.
 
 ### The Closure Bug
-Notice line 120: `go func(name string, prepTime time.Duration)`. We pass the loop variables as **parameters**. If we didn't, all goroutines would accidentally share the same variable and likely all try to cook the *last* dish in the list!
+
+Notice line 120: `go func(name string, prepTime time.Duration)`. We pass the loop variables as **parameters**. If we didn't, all goroutines would accidentally share the same variable and likely all try to cook the _last_ dish in the list!
 
 ### `sync.WaitGroup`
+
 Because the main goroutine finishes its loop instantly, we use a `WaitGroup` to tell the main goroutine: "Wait until these 4 workers are done before you close the kitchen."
 
 ## Try It
@@ -78,9 +81,11 @@ Kitchen is open! Starting all orders concurrently...
 ```
 
 ## In Production
+
 **Do not use `time.Sleep` to wait for goroutines.** It is flaky and slow. Always use `sync.WaitGroup` for a known number of tasks, or **Channels** (which we will learn next) for streaming coordination.
 
 ## Thinking Questions
+
 1. Why does Go start with a small stack and grow it dynamically?
 2. What happens if a goroutine runs forever (an infinite loop) and the main function exits?
 3. How many goroutines can your computer handle before it runs out of memory? (Try to find out!)

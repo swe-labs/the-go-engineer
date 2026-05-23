@@ -47,12 +47,15 @@ go run ./10-production/01-structured-logging/4-zerolog-comparison
 ## Code Walkthrough
 
 ### The Zerolog Syntax
+
 Shows how to initialize a Zerolog logger and use its unique method-chaining API.
 
 ### Side-by-Side Comparison
+
 Demonstrates the same log operation (Level, Message, 3 Attributes) implemented in both `slog` and `zerolog`.
 
 ### Performance Hints
+
 Discusses the internal mechanics of how Zerolog avoids memory allocations during logging.
 
 ## Try It
@@ -62,9 +65,11 @@ Discusses the internal mechanics of how Zerolog avoids memory allocations during
 3. Discuss: If `slog` exists, why would a new project choose Zerolog?
 
 ## In Production
+
 **Favor the Standard Library unless you have a proven performance bottleneck.** In modern cloud environments (Kubernetes, AWS Lambda), the cost of the network transfer or the log storage is usually 100x more expensive than the CPU cost of the logging library itself. Only switch to Zerolog if your service is processing millions of requests per second and every microsecond of CPU time counts.
 
 ## Thinking Questions
+
 1. What does "Zero Allocation" mean in the context of logging?
 2. Why is a Fluent API (method chaining) popular for logging libraries?
 3. How do external dependencies impact the long-term maintainability of a Go project?
