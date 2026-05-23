@@ -42221,7 +42221,7 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "Complete a focused exercise that applies pprof.",
-        "project_id": "project-pii-redactor",
+        "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
         ]
@@ -42396,7 +42396,7 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "Complete a focused exercise that applies CPU profiling.",
-        "project_id": "project-pii-redactor",
+        "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
         ]
@@ -42570,7 +42570,7 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "Complete a focused exercise that applies Memory profiling.",
-        "project_id": "project-pii-redactor",
+        "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
         ]
@@ -42743,7 +42743,7 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "Complete a focused exercise that applies Benchmarks.",
-        "project_id": "project-pii-redactor",
+        "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
         ]
@@ -42915,7 +42915,7 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "Complete a focused exercise that applies Escape analysis.",
-        "project_id": "project-pii-redactor",
+        "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
         ]
@@ -43088,7 +43088,7 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "Complete a focused exercise that applies Memory layout.",
-        "project_id": "project-pii-redactor",
+        "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
         ]
@@ -43256,7 +43256,7 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "Complete a focused exercise that applies Caching basics.",
-        "project_id": "project-pii-redactor",
+        "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
         ]
@@ -43427,7 +43427,7 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "Complete a focused exercise that applies Cache invalidation.",
-        "project_id": "project-pii-redactor",
+        "project_id": "project-profile-and-fix-lab",
         "rubric_ids": [
           "rubric-module-12"
         ]
