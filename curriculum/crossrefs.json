@@ -22576,13 +22576,183 @@
         "required": false
       },
       {
-        "from_id": "core-11-07",
-        "relation": "preview_only",
-        "to_id": "core-08-14",
-        "target_id": "core-08-14",
-        "label": "Preview only: Explained fully in Module 08 — Server timeouts",
-        "display_text": "Preview: Server timeouts — covered in Module 08",
-        "reason": "Forward reference: context deadlines in module-11 are directly applied in HTTP server timeout configuration in module-08.",
+        "from_id": "elective-01",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-02",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-03",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-04",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-05",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-06",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-07",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-08",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-09",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-10",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-11",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-12",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-13",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-14",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-15",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-16",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-17",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-18",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-19",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
+        "required": false
+      },
+      {
+        "from_id": "elective-20",
+        "relation": "reinforced_in",
+        "to_id": "project-advanced-electives",
+        "target_id": "project-advanced-electives",
+        "label": "Project 17 — Advanced Electives Capstone",
+        "reason": "This project reinforces advanced elective concepts.",
         "required": false
       }
     ],

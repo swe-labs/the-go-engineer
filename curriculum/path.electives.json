@@ -32,7 +32,7 @@
       "title": "Advanced Electives",
       "phase": "elective",
       "path": "16-advanced-electives",
-      "status": "planned",
+      "status": "draft",
       "learning_goal": "Keep advanced Go and backend topics without blocking the core learner path.",
       "summary": "Keep advanced Go and backend topics without blocking the core learner path.",
       "order": 17,
@@ -70,7 +70,7 @@
       "title": "Generics",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 1,
@@ -136,14 +136,14 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "core-16-15",
+            "display_text": "Module 15.15 — Demo preparation",
             "label": "Module 15.15 — Demo preparation",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of Career roadmap.",
             "required": true,
-            "display_text": "Builds on: Module 15.15 — Demo preparation"
+            "target_id": "core-16-15"
           },
           {
-            "display_text": "Builds on: Module 17.15 — Demo preparation",
+            "display_text": "Module 17.15 — Demo preparation",
             "label": "Module 17.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -153,28 +153,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           },
           {
-            "display_text": "Related: Module 17.04 — Functional options",
+            "display_text": "Module 17.04 — Functional options",
             "label": "Module 17.04 — Functional options",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-04"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Generics.",
@@ -216,10 +224,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/01-generics/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/01-generics/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/01-generics/main_test.go",
         "assets_dir": "16-advanced-electives/01-generics/assets",
         "diagram_paths": []
       },
@@ -246,7 +254,7 @@
       "title": "Complex generic constraints",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 2,
@@ -311,14 +319,14 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-01",
+            "display_text": "Module 16.01 — Generics",
             "label": "Module 16.01 — Generics",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.01 — Generics"
+            "target_id": "elective-01"
           },
           {
-            "display_text": "Builds on: Module 16.15 — Demo preparation",
+            "display_text": "Module 16.15 — Demo preparation",
             "label": "Module 16.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -328,28 +336,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           },
           {
-            "display_text": "Related: Module 17.04 — Functional options",
+            "display_text": "Module 17.04 — Functional options",
             "label": "Module 17.04 — Functional options",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-04"
           },
           {
-            "display_text": "Related: Module 17.05 — Method values",
+            "display_text": "Module 17.05 — Method values",
             "label": "Module 17.05 — Method values",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-05"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Complex generic constraints.",
@@ -391,10 +407,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/02-complex-generic-constraints/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/02-complex-generic-constraints/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/02-complex-generic-constraints/main_test.go",
         "assets_dir": "16-advanced-electives/02-complex-generic-constraints/assets",
         "diagram_paths": []
       },
@@ -419,7 +435,7 @@
       "title": "Generic data structures",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 3,
@@ -484,14 +500,14 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-02",
+            "display_text": "Module 16.02 — Complex generic constraints",
             "label": "Module 16.02 — Complex generic constraints",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.02 — Complex generic constraints"
+            "target_id": "elective-02"
           },
           {
-            "display_text": "Builds on: Module 16.15 — Demo preparation",
+            "display_text": "Module 16.15 — Demo preparation",
             "label": "Module 16.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -501,28 +517,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.04 — Functional options",
+            "display_text": "Module 17.04 — Functional options",
             "label": "Module 17.04 — Functional options",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-04"
           },
           {
-            "display_text": "Related: Module 17.05 — Method values",
+            "display_text": "Module 17.05 — Method values",
             "label": "Module 17.05 — Method values",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-05"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Generic data structures.",
@@ -564,10 +588,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/03-generic-data-structures/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/03-generic-data-structures/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/03-generic-data-structures/main_test.go",
         "assets_dir": "16-advanced-electives/03-generic-data-structures/assets",
         "diagram_paths": []
       },
@@ -592,7 +616,7 @@
       "title": "Functional options",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 4,
@@ -660,14 +684,14 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-03",
+            "display_text": "Module 16.03 — Generic data structures",
             "label": "Module 16.03 — Generic data structures",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.03 — Generic data structures"
+            "target_id": "elective-03"
           },
           {
-            "display_text": "Builds on: Module 16.15 — Demo preparation",
+            "display_text": "Module 16.15 — Demo preparation",
             "label": "Module 16.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -677,28 +701,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.05 — Method values",
+            "display_text": "Module 17.05 — Method values",
             "label": "Module 17.05 — Method values",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-05"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Functional options.",
@@ -740,10 +772,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/04-functional-options/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/04-functional-options/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/04-functional-options/main_test.go",
         "assets_dir": "16-advanced-electives/04-functional-options/assets",
         "diagram_paths": []
       },
@@ -768,7 +800,7 @@
       "title": "Method values",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 5,
@@ -836,14 +868,14 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-04",
+            "display_text": "Module 16.04 — Functional options",
             "label": "Module 16.04 — Functional options",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.04 — Functional options"
+            "target_id": "elective-04"
           },
           {
-            "display_text": "Builds on: Module 16.15 — Demo preparation",
+            "display_text": "Module 16.15 — Demo preparation",
             "label": "Module 16.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -853,28 +885,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Method values.",
@@ -916,10 +956,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/05-method-values/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/05-method-values/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/05-method-values/main_test.go",
         "assets_dir": "16-advanced-electives/05-method-values/assets",
         "diagram_paths": []
       },
@@ -944,7 +984,7 @@
       "title": "Build tags",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 6,
@@ -1012,16 +1052,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-05",
+            "display_text": "Module 16.05 — Method values",
             "label": "Module 16.05 — Method values",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.05 — Method values"
+            "target_id": "elective-05"
           },
           {
-            "display_text": "Builds on: Module 17.04 — Functional options",
+            "display_text": "Module 17.04 — Functional options",
             "label": "Module 17.04 — Functional options",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-04"
           }
@@ -1029,28 +1069,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Build tags.",
@@ -1092,10 +1140,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/06-build-tags/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/06-build-tags/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/06-build-tags/main_test.go",
         "assets_dir": "16-advanced-electives/06-build-tags/assets",
         "diagram_paths": []
       },
@@ -1120,7 +1168,7 @@
       "title": "go generate",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 7,
@@ -1188,16 +1236,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-06",
+            "display_text": "Module 16.06 — Build tags",
             "label": "Module 16.06 — Build tags",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.06 — Build tags"
+            "target_id": "elective-06"
           },
           {
-            "display_text": "Builds on: Module 17.05 — Method values",
+            "display_text": "Module 17.05 — Method values",
             "label": "Module 17.05 — Method values",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-05"
           }
@@ -1205,28 +1253,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies go generate.",
@@ -1268,10 +1324,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/07-go-generate/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/07-go-generate/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/07-go-generate/main_test.go",
         "assets_dir": "16-advanced-electives/07-go-generate/assets",
         "diagram_paths": []
       },
@@ -1296,7 +1352,7 @@
       "title": "Mockery",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 8,
@@ -1364,16 +1420,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-07",
+            "display_text": "Module 16.07 — go generate",
             "label": "Module 16.07 — go generate",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.07 — go generate"
+            "target_id": "elective-07"
           },
           {
-            "display_text": "Builds on: Module 17.06 — Build tags",
+            "display_text": "Module 17.06 — Build tags",
             "label": "Module 17.06 — Build tags",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-06"
           }
@@ -1381,28 +1437,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Mockery.",
@@ -1444,10 +1508,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/08-mockery/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/08-mockery/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/08-mockery/main_test.go",
         "assets_dir": "16-advanced-electives/08-mockery/assets",
         "diagram_paths": []
       },
@@ -1472,7 +1536,7 @@
       "title": "Protobuf",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 9,
@@ -1538,16 +1602,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-08",
+            "display_text": "Module 16.08 — Mockery",
             "label": "Module 16.08 — Mockery",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.08 — Mockery"
+            "target_id": "elective-08"
           },
           {
-            "display_text": "Builds on: Module 17.07 — go generate",
+            "display_text": "Module 17.07 — go generate",
             "label": "Module 17.07 — go generate",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-07"
           }
@@ -1555,28 +1619,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Protobuf.",
@@ -1618,10 +1690,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/09-protobuf/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/09-protobuf/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/09-protobuf/main_test.go",
         "assets_dir": "16-advanced-electives/09-protobuf/assets",
         "diagram_paths": []
       },
@@ -1646,7 +1718,7 @@
       "title": "gRPC fundamentals",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 10,
@@ -1713,16 +1785,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-09",
+            "display_text": "Module 16.09 — Protobuf",
             "label": "Module 16.09 — Protobuf",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.09 — Protobuf"
+            "target_id": "elective-09"
           },
           {
-            "display_text": "Builds on: Module 17.08 — Mockery",
+            "display_text": "Module 17.08 — Mockery",
             "label": "Module 17.08 — Mockery",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-08"
           }
@@ -1730,28 +1802,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies gRPC fundamentals.",
@@ -1793,10 +1873,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/10-grpc-fundamentals/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/10-grpc-fundamentals/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/10-grpc-fundamentals/main_test.go",
         "assets_dir": "16-advanced-electives/10-grpc-fundamentals/assets",
         "diagram_paths": []
       },
@@ -1821,7 +1901,7 @@
       "title": "gRPC streaming",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 11,
@@ -1886,16 +1966,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-10",
+            "display_text": "Module 16.10 — gRPC fundamentals",
             "label": "Module 16.10 — gRPC fundamentals",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.10 — gRPC fundamentals"
+            "target_id": "elective-10"
           },
           {
-            "display_text": "Builds on: Module 17.09 — Protobuf",
+            "display_text": "Module 17.09 — Protobuf",
             "label": "Module 17.09 — Protobuf",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-09"
           }
@@ -1903,28 +1983,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies gRPC streaming.",
@@ -1966,10 +2054,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/11-grpc-streaming/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/11-grpc-streaming/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/11-grpc-streaming/main_test.go",
         "assets_dir": "16-advanced-electives/11-grpc-streaming/assets",
         "diagram_paths": []
       },
@@ -1994,7 +2082,7 @@
       "title": "gRPC interceptors",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 12,
@@ -2059,16 +2147,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-11",
+            "display_text": "Module 16.11 — gRPC streaming",
             "label": "Module 16.11 — gRPC streaming",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.11 — gRPC streaming"
+            "target_id": "elective-11"
           },
           {
-            "display_text": "Builds on: Module 17.10 — gRPC fundamentals",
+            "display_text": "Module 17.10 — gRPC fundamentals",
             "label": "Module 17.10 — gRPC fundamentals",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-10"
           }
@@ -2076,28 +2164,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies gRPC interceptors.",
@@ -2139,10 +2235,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/12-grpc-interceptors/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/12-grpc-interceptors/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/12-grpc-interceptors/main_test.go",
         "assets_dir": "16-advanced-electives/12-grpc-interceptors/assets",
         "diagram_paths": []
       },
@@ -2167,7 +2263,7 @@
       "title": "REST vs gRPC tradeoffs",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 13,
@@ -2231,16 +2327,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-12",
+            "display_text": "Module 16.12 — gRPC interceptors",
             "label": "Module 16.12 — gRPC interceptors",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.12 — gRPC interceptors"
+            "target_id": "elective-12"
           },
           {
-            "display_text": "Builds on: Module 17.11 — gRPC streaming",
+            "display_text": "Module 17.11 — gRPC streaming",
             "label": "Module 17.11 — gRPC streaming",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-11"
           }
@@ -2248,28 +2344,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies REST vs gRPC tradeoffs.",
@@ -2311,10 +2415,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/13-rest-vs-grpc-tradeoffs/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/13-rest-vs-grpc-tradeoffs/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/13-rest-vs-grpc-tradeoffs/main_test.go",
         "assets_dir": "16-advanced-electives/13-rest-vs-grpc-tradeoffs/assets",
         "diagram_paths": []
       },
@@ -2339,7 +2443,7 @@
       "title": "sync.Map",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 14,
@@ -2406,16 +2510,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-13",
+            "display_text": "Module 16.13 — REST vs gRPC tradeoffs",
             "label": "Module 16.13 — REST vs gRPC tradeoffs",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.13 — REST vs gRPC tradeoffs"
+            "target_id": "elective-13"
           },
           {
-            "display_text": "Builds on: Module 17.12 — gRPC interceptors",
+            "display_text": "Module 17.12 — gRPC interceptors",
             "label": "Module 17.12 — gRPC interceptors",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-12"
           }
@@ -2423,28 +2527,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies sync.Map.",
@@ -2486,10 +2598,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/14-sync-map/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/14-sync-map/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/14-sync-map/main_test.go",
         "assets_dir": "16-advanced-electives/14-sync-map/assets",
         "diagram_paths": []
       },
@@ -2514,7 +2626,7 @@
       "title": "sync.Pool",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 15,
@@ -2580,16 +2692,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-14",
+            "display_text": "Module 16.14 — sync.Map",
             "label": "Module 16.14 — sync.Map",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.14 — sync.Map"
+            "target_id": "elective-14"
           },
           {
-            "display_text": "Builds on: Module 17.13 — REST vs gRPC tradeoffs",
+            "display_text": "Module 17.13 — REST vs gRPC tradeoffs",
             "label": "Module 17.13 — REST vs gRPC tradeoffs",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-13"
           }
@@ -2597,28 +2709,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies sync.Pool.",
@@ -2660,10 +2780,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/15-sync-pool/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/15-sync-pool/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/15-sync-pool/main_test.go",
         "assets_dir": "16-advanced-electives/15-sync-pool/assets",
         "diagram_paths": []
       },
@@ -2688,7 +2808,7 @@
       "title": "CQRS",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 16,
@@ -2756,16 +2876,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-15",
+            "display_text": "Module 16.15 — sync.Pool",
             "label": "Module 16.15 — sync.Pool",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.15 — sync.Pool"
+            "target_id": "elective-15"
           },
           {
-            "display_text": "Builds on: Module 17.14 — sync.Map",
+            "display_text": "Module 17.14 — sync.Map",
             "label": "Module 17.14 — sync.Map",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-14"
           }
@@ -2773,28 +2893,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies CQRS.",
@@ -2836,10 +2964,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/16-cqrs/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/16-cqrs/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/16-cqrs/main_test.go",
         "assets_dir": "16-advanced-electives/16-cqrs/assets",
         "diagram_paths": []
       },
@@ -2864,7 +2992,7 @@
       "title": "Feature flags",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 17,
@@ -2931,16 +3059,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-16",
+            "display_text": "Module 16.16 — CQRS",
             "label": "Module 16.16 — CQRS",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.16 — CQRS"
+            "target_id": "elective-16"
           },
           {
-            "display_text": "Builds on: Module 17.15 — sync.Pool",
+            "display_text": "Module 17.15 — sync.Pool",
             "label": "Module 17.15 — sync.Pool",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-15"
           }
@@ -2948,28 +3076,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Feature flags.",
@@ -3011,10 +3147,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/17-feature-flags/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/17-feature-flags/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/17-feature-flags/main_test.go",
         "assets_dir": "16-advanced-electives/17-feature-flags/assets",
         "diagram_paths": []
       },
@@ -3039,7 +3175,7 @@
       "title": "Blue/green deployments",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 18,
@@ -3107,16 +3243,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-17",
+            "display_text": "Module 16.17 — Feature flags",
             "label": "Module 16.17 — Feature flags",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.17 — Feature flags"
+            "target_id": "elective-17"
           },
           {
-            "display_text": "Builds on: Module 17.16 — CQRS",
+            "display_text": "Module 17.16 — CQRS",
             "label": "Module 17.16 — CQRS",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-16"
           }
@@ -3124,28 +3260,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Blue/green deployments.",
@@ -3187,10 +3331,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/18-blue-green-deployments/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/18-blue-green-deployments/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/18-blue-green-deployments/main_test.go",
         "assets_dir": "16-advanced-electives/18-blue-green-deployments/assets",
         "diagram_paths": []
       },
@@ -3215,7 +3359,7 @@
       "title": "Microservice splitting",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 19,
@@ -3282,16 +3426,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-18",
+            "display_text": "Module 16.18 — Blue/green deployments",
             "label": "Module 16.18 — Blue/green deployments",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.18 — Blue/green deployments"
+            "target_id": "elective-18"
           },
           {
-            "display_text": "Builds on: Module 17.17 — Feature flags",
+            "display_text": "Module 17.17 — Feature flags",
             "label": "Module 17.17 — Feature flags",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-17"
           }
@@ -3299,28 +3443,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Microservice splitting.",
@@ -3362,10 +3514,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/19-microservice-splitting/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/19-microservice-splitting/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/19-microservice-splitting/main_test.go",
         "assets_dir": "16-advanced-electives/19-microservice-splitting/assets",
         "diagram_paths": []
       },
@@ -3390,7 +3542,7 @@
       "title": "Deeper distributed systems",
       "type": "lesson",
       "subtype": "reference",
-      "status": "planned",
+      "status": "draft",
       "difficulty": "elective",
       "phase": "elective",
       "order": 20,
@@ -3455,16 +3607,16 @@
       "crossrefs": {
         "builds_on": [
           {
-            "target_id": "elective-19",
+            "display_text": "Module 16.19 — Microservice splitting",
             "label": "Module 16.19 — Microservice splitting",
-            "reason": "This lesson depends on the target concept.",
+            "reason": " requires understanding of .",
             "required": true,
-            "display_text": "Builds on: Module 16.19 — Microservice splitting"
+            "target_id": "elective-19"
           },
           {
-            "display_text": "Builds on: Module 17.18 — Blue/green deployments",
+            "display_text": "Module 17.18 — Blue/green deployments",
             "label": "Module 17.18 — Blue/green deployments",
-            "reason": "This lesson builds on earlier concepts introduced in this module.",
+            "reason": " extends directly from .",
             "required": true,
             "target_id": "elective-18"
           }
@@ -3472,28 +3624,36 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Related: Module 17.01 — Generics",
+            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Related: Module 17.02 — Complex generic constraints",
+            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Related: Module 17.03 — Generic data structures",
+            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
-            "reason": "Related concepts within the same module.",
+            "reason": "Related concept:  builds on understanding from .",
             "required": false,
             "target_id": "elective-03"
           }
         ],
-        "reinforced_in": []
+        "reinforced_in": [
+          {
+            "display_text": "Project 17 — Advanced Electives Capstone",
+            "label": "Project 17 — Advanced Electives Capstone",
+            "reason": "This project reinforces advanced elective concepts.",
+            "required": false,
+            "target_id": "project-advanced-electives"
+          }
+        ]
       },
       "proof": {
         "practice_task": "Complete a focused exercise that applies Deeper distributed systems.",
@@ -3535,10 +3695,10 @@
       },
       "files": {
         "readme_path": "16-advanced-electives/20-deeper-distributed-systems/README.md",
-        "main_path": "",
+        "main_path": "16-advanced-electives/20-deeper-distributed-systems/main.go",
         "starter_path": "",
         "solution_path": "",
-        "test_path": "",
+        "test_path": "16-advanced-electives/20-deeper-distributed-systems/main_test.go",
         "assets_dir": "16-advanced-electives/20-deeper-distributed-systems/assets",
         "diagram_paths": []
       },

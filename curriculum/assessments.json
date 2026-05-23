@@ -2506,6 +2506,321 @@
         "documentation_mode": "assessment",
         "required": true
       }
+    },
+    {
+      "id": "assessment-project-course-setup",
+      "title": "Assessment - Course Setup Verification",
+      "type": "project-review",
+      "status": "draft",
+      "target_ids": [
+        "project-course-setup"
+      ],
+      "purpose": "Evaluate the Course Setup Verification project submission.",
+      "criteria": [
+        {
+          "id": "project-course-setup-correctness",
+          "title": "Correctness",
+          "weight": 35,
+          "levels": [
+            {
+              "score": 0,
+              "description": "Incorrect or missing implementation."
+            },
+            {
+              "score": 3,
+              "description": "Partially correct with minor issues."
+            },
+            {
+              "score": 5,
+              "description": "Fully correct implementation."
+            }
+          ]
+        },
+        {
+          "id": "project-course-setup-quality",
+          "title": "Code quality",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "Poor code structure."
+            },
+            {
+              "score": 3,
+              "description": "Adequate code structure."
+            },
+            {
+              "score": 5,
+              "description": "Idiomatic, clean Go code."
+            }
+          ]
+        },
+        {
+          "id": "project-course-setup-proof",
+          "title": "Proof",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No proof provided."
+            },
+            {
+              "score": 3,
+              "description": "Partial proof."
+            },
+            {
+              "score": 5,
+              "description": "Comprehensive proof with edge cases."
+            }
+          ]
+        },
+        {
+          "id": "project-course-setup-communication",
+          "title": "Communication",
+          "weight": 15,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No explanation."
+            },
+            {
+              "score": 3,
+              "description": "Basic explanation."
+            },
+            {
+              "score": 5,
+              "description": "Clear, professional explanation."
+            }
+          ]
+        }
+      ],
+      "passing_score": 80,
+      "evidence_required": [
+        "Project implementation",
+        "Tests",
+        "Written explanation"
+      ],
+      "automated_checks": [
+        "go test ./..."
+      ],
+      "manual_review_questions": [
+        "Can the learner explain their design decisions?",
+        "Does the implementation handle edge cases?",
+        "Is the code idiomatic Go?"
+      ],
+      "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded"
+    },
+    {
+      "id": "assessment-project-performance-analysis-lab",
+      "title": "Assessment - Performance Analysis Lab",
+      "type": "project-review",
+      "status": "draft",
+      "target_ids": [
+        "project-performance-analysis-lab"
+      ],
+      "purpose": "Evaluate the Performance Analysis Lab project submission.",
+      "criteria": [
+        {
+          "id": "project-performance-analysis-lab-correctness",
+          "title": "Correctness",
+          "weight": 35,
+          "levels": [
+            {
+              "score": 0,
+              "description": "Incorrect or missing implementation."
+            },
+            {
+              "score": 3,
+              "description": "Partially correct with minor issues."
+            },
+            {
+              "score": 5,
+              "description": "Fully correct implementation."
+            }
+          ]
+        },
+        {
+          "id": "project-performance-analysis-lab-quality",
+          "title": "Code quality",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "Poor code structure."
+            },
+            {
+              "score": 3,
+              "description": "Adequate code structure."
+            },
+            {
+              "score": 5,
+              "description": "Idiomatic, clean Go code."
+            }
+          ]
+        },
+        {
+          "id": "project-performance-analysis-lab-proof",
+          "title": "Proof",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No proof provided."
+            },
+            {
+              "score": 3,
+              "description": "Partial proof."
+            },
+            {
+              "score": 5,
+              "description": "Comprehensive proof with edge cases."
+            }
+          ]
+        },
+        {
+          "id": "project-performance-analysis-lab-communication",
+          "title": "Communication",
+          "weight": 15,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No explanation."
+            },
+            {
+              "score": 3,
+              "description": "Basic explanation."
+            },
+            {
+              "score": 5,
+              "description": "Clear, professional explanation."
+            }
+          ]
+        }
+      ],
+      "passing_score": 80,
+      "evidence_required": [
+        "Project implementation",
+        "Tests",
+        "Written explanation"
+      ],
+      "automated_checks": [
+        "go test ./..."
+      ],
+      "manual_review_questions": [
+        "Can the learner explain their design decisions?",
+        "Does the implementation handle edge cases?",
+        "Is the code idiomatic Go?"
+      ],
+      "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded"
+    },
+    {
+      "id": "assessment-project-advanced-electives",
+      "title": "Assessment - Advanced Electives Capstone",
+      "type": "project-review",
+      "status": "draft",
+      "target_ids": [
+        "project-advanced-electives"
+      ],
+      "purpose": "Evaluate the Advanced Electives Capstone project submission.",
+      "criteria": [
+        {
+          "id": "project-advanced-electives-correctness",
+          "title": "Correctness",
+          "weight": 35,
+          "levels": [
+            {
+              "score": 0,
+              "description": "Incorrect or missing implementation."
+            },
+            {
+              "score": 3,
+              "description": "Partially correct with minor issues."
+            },
+            {
+              "score": 5,
+              "description": "Fully correct implementation."
+            }
+          ]
+        },
+        {
+          "id": "project-advanced-electives-quality",
+          "title": "Code quality",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "Poor code structure."
+            },
+            {
+              "score": 3,
+              "description": "Adequate code structure."
+            },
+            {
+              "score": 5,
+              "description": "Idiomatic, clean Go code."
+            }
+          ]
+        },
+        {
+          "id": "project-advanced-electives-proof",
+          "title": "Proof",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No proof provided."
+            },
+            {
+              "score": 3,
+              "description": "Partial proof."
+            },
+            {
+              "score": 5,
+              "description": "Comprehensive proof with edge cases."
+            }
+          ]
+        },
+        {
+          "id": "project-advanced-electives-communication",
+          "title": "Communication",
+          "weight": 15,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No explanation."
+            },
+            {
+              "score": 3,
+              "description": "Basic explanation."
+            },
+            {
+              "score": 5,
+              "description": "Clear, professional explanation."
+            }
+          ]
+        }
+      ],
+      "passing_score": 80,
+      "evidence_required": [
+        "Project implementation",
+        "Tests",
+        "Written explanation"
+      ],
+      "automated_checks": [
+        "go test ./..."
+      ],
+      "manual_review_questions": [
+        "Can the learner explain their design decisions?",
+        "Does the implementation handle edge cases?",
+        "Is the code idiomatic Go?"
+      ],
+      "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded"
     }
   ],
   "quality_gates": [

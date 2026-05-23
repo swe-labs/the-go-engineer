@@ -19,7 +19,7 @@
       "type": "mini-project",
       "stage": "foundations",
       "difficulty": "foundation",
-      "status": "planned",
+      "status": "draft",
       "order": 1,
       "summary": "Build and navigate a real shell environment, then manage code changes through a complete Git workflow.",
       "source_legacy_ids": [],
@@ -139,7 +139,7 @@
       "type": "mini-project",
       "stage": "tooling",
       "difficulty": "foundation",
-      "status": "planned",
+      "status": "draft",
       "order": 2,
       "summary": "Install Go tooling, then deliberately introduce and diagnose common Go setup failures.",
       "source_legacy_ids": [],
@@ -248,7 +248,7 @@
       "type": "mini-project",
       "stage": "go-core",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 3,
       "summary": "Build a pricing calculator and checkout system using Go fundamentals: variables, control flow, and structs.",
       "source_legacy_ids": [],
@@ -466,7 +466,7 @@
       "type": "mini-project",
       "stage": "go-core",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 4,
       "summary": "Implement a contact directory manager using Go data structures: slices, maps, and custom types.",
       "source_legacy_ids": [],
@@ -684,7 +684,7 @@
       "type": "mini-project",
       "stage": "go-core",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 5,
       "summary": "Refactor a monolithic order summary function into well-structured Go code with proper error handling.",
       "source_legacy_ids": [],
@@ -899,7 +899,7 @@
       "type": "mini-project",
       "stage": "engineering-core",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 6,
       "summary": "Build a bank account system demonstrating Go types, interfaces, and method sets.",
       "source_legacy_ids": [],
@@ -1117,7 +1117,7 @@
       "type": "mini-project",
       "stage": "engineering-core",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 7,
       "summary": "Implement a payroll processor using Go packages, modules, and interface composition.",
       "source_legacy_ids": [],
@@ -1335,7 +1335,7 @@
       "type": "mini-project",
       "stage": "engineering-core",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 8,
       "summary": "Identify, diagnose, and fix a set of deliberately introduced bugs across multiple Go packages.",
       "source_legacy_ids": [],
@@ -1551,7 +1551,7 @@
       "type": "mini-project",
       "stage": "engineering-core",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 9,
       "summary": "Add test coverage to legacy Go code, then refactor it while keeping all tests passing.",
       "source_legacy_ids": [],
@@ -1767,7 +1767,7 @@
       "type": "mini-project",
       "stage": "cli-io",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 10,
       "summary": "Build a CLI tool that organizes files by type, extension, or metadata using Go file I/O.",
       "source_legacy_ids": [],
@@ -1981,7 +1981,7 @@
       "type": "mini-project",
       "stage": "cli-io",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 11,
       "summary": "Implement a log search and filtering tool using Go CLI flags, file reading, and pattern matching.",
       "source_legacy_ids": [],
@@ -2195,7 +2195,7 @@
       "type": "mini-project",
       "stage": "cli-io",
       "difficulty": "core",
-      "status": "planned",
+      "status": "draft",
       "order": 12,
       "summary": "Parse and validate configuration files in JSON and YAML formats, with environment variable overrides.",
       "source_legacy_ids": [],
@@ -2409,7 +2409,7 @@
       "type": "portfolio-project",
       "stage": "backend",
       "difficulty": "intermediate",
-      "status": "planned",
+      "status": "draft",
       "order": 13,
       "summary": "Build a REST API for a book catalog with CRUD endpoints, middleware, and JSON encoding.",
       "source_legacy_ids": [],
@@ -2626,7 +2626,7 @@
       "type": "portfolio-project",
       "stage": "data",
       "difficulty": "intermediate",
-      "status": "planned",
+      "status": "draft",
       "order": 14,
       "summary": "Build a task management API backed by PostgreSQL with migrations, queries, and transactions.",
       "source_legacy_ids": [],
@@ -2849,7 +2849,7 @@
       "type": "portfolio-project",
       "stage": "security",
       "difficulty": "intermediate",
-      "status": "planned",
+      "status": "draft",
       "order": 15,
       "summary": "Add authentication and authorization to an API using JWT tokens, bcrypt passwords, and security middleware.",
       "source_legacy_ids": [],
@@ -3068,7 +3068,7 @@
       "type": "mini-project",
       "stage": "concurrency",
       "difficulty": "intermediate",
-      "status": "planned",
+      "status": "draft",
       "order": 16,
       "summary": "Build a concurrent file downloader using goroutines, channels, and error propagation.",
       "source_legacy_ids": [],
@@ -3305,7 +3305,7 @@
       "type": "mini-project",
       "stage": "concurrency",
       "difficulty": "intermediate",
-      "status": "planned",
+      "status": "draft",
       "order": 17,
       "summary": "Implement a URL health checker that concurrently monitors endpoints and reports status changes.",
       "source_legacy_ids": [],
@@ -3542,7 +3542,7 @@
       "type": "mini-project",
       "stage": "concurrency",
       "difficulty": "intermediate",
-      "status": "planned",
+      "status": "draft",
       "order": 18,
       "summary": "Build a bounded worker pool that processes jobs concurrently with configurable parallelism and graceful shutdown.",
       "source_legacy_ids": [],
@@ -3779,7 +3779,7 @@
       "type": "portfolio-project",
       "stage": "reliability",
       "difficulty": "intermediate",
-      "status": "planned",
+      "status": "draft",
       "order": 19,
       "summary": "Build a PII redaction service with structured logging, error tracking, and observability instrumentation.",
       "source_legacy_ids": [],
@@ -3992,7 +3992,7 @@
       "type": "portfolio-project",
       "stage": "reliability",
       "difficulty": "advanced",
-      "status": "planned",
+      "status": "draft",
       "order": 20,
       "summary": "Add structured logging, metrics, and tracing to an existing Go application without changing its behavior.",
       "source_legacy_ids": [],
@@ -4205,7 +4205,7 @@
       "type": "portfolio-project",
       "stage": "reliability",
       "difficulty": "advanced",
-      "status": "planned",
+      "status": "draft",
       "order": 21,
       "summary": "Profile a Go application with pprof, identify performance bottlenecks, and optimize CPU and memory usage.",
       "source_legacy_ids": [],
@@ -4418,7 +4418,7 @@
       "type": "mini-project",
       "stage": "architecture",
       "difficulty": "advanced",
-      "status": "planned",
+      "status": "draft",
       "order": 22,
       "summary": "Refactor a monolith into a modular, layered architecture with dependency injection and interface-based design.",
       "source_legacy_ids": [],
@@ -4628,7 +4628,7 @@
       "type": "portfolio-project",
       "stage": "delivery",
       "difficulty": "advanced",
-      "status": "planned",
+      "status": "draft",
       "order": 23,
       "summary": "Containerize a Go service with a multi-stage Dockerfile and set up a CI/CD pipeline for automated build and deploy.",
       "source_legacy_ids": [],
@@ -4840,7 +4840,7 @@
       "type": "portfolio-project",
       "stage": "career",
       "difficulty": "advanced",
-      "status": "planned",
+      "status": "draft",
       "order": 24,
       "summary": "Curate and present your strongest Go projects in a professional portfolio format for job applications.",
       "source_legacy_ids": [],
@@ -5042,7 +5042,7 @@
       "type": "flagship",
       "stage": "flagship",
       "difficulty": "flagship",
-      "status": "planned",
+      "status": "draft",
       "order": 25,
       "summary": "Build and deploy a full-stack application with operations dashboard, automated testing, CI/CD, and observability.",
       "source_legacy_ids": [],
@@ -5260,6 +5260,214 @@
         "Docker multi-stage build",
         "CI pipeline"
       ]
+    },
+    {
+      "schema_version": "3.1.0",
+      "id": "project-course-setup",
+      "title": "Course Setup Verification",
+      "slug": "course-setup-verification",
+      "type": "mini-project",
+      "stage": "foundations",
+      "difficulty": "foundation",
+      "status": "draft",
+      "summary": "Verify your complete course environment: repository clone, Go installation, IDE setup, and first successful test run.",
+      "module_id": "module-00",
+      "tasks": [
+        {
+          "title": "Clone and verify the repository",
+          "instruction": "Clone the course repository, verify the directory structure, and confirm you can run go build ./... without errors."
+        },
+        {
+          "title": "Run the validation suite",
+          "instruction": "Run go run ./internal/tools/curriculum/ validate-all and confirm all validators pass."
+        },
+        {
+          "title": "Document your environment",
+          "instruction": "Write a short document describing your Go version, OS, IDE setup, and any configuration choices."
+        }
+      ],
+      "rubric": [
+        {
+          "criterion": "Correctness",
+          "weight": 35,
+          "description": "Repository is cloned correctly; Go builds and validators run without errors."
+        },
+        {
+          "criterion": "Environment quality",
+          "weight": 25,
+          "description": "Go toolchain, IDE, and debugging tools are properly configured and documented."
+        },
+        {
+          "criterion": "Proof",
+          "weight": 25,
+          "description": "Output from go version, go build, and validator demonstrate a working environment."
+        },
+        {
+          "criterion": "Explanation",
+          "weight": 15,
+          "description": "Clear documentation of environment choices, issues encountered, and resolutions."
+        }
+      ],
+      "deliverables": [
+        "Cloned repository with clean build",
+        "Validator output showing all checks pass",
+        "Environment documentation"
+      ],
+      "required_concepts": [],
+      "reinforcement_targets": [],
+      "source_legacy_ids": [],
+      "tags": [
+        "orientation",
+        "setup"
+      ],
+      "documentation_mode": "tutorial",
+      "readme_status": "scaffolded",
+      "prerequisites": [],
+      "verification": "Manual review: ensure repository clone, Go build, and validator output are present and correct.",
+      "assessment_id": "assessment-project-course-setup"
+    },
+    {
+      "schema_version": "3.1.0",
+      "id": "project-performance-analysis-lab",
+      "title": "Performance Analysis Lab",
+      "slug": "performance-analysis-lab",
+      "type": "mini-project",
+      "stage": "core",
+      "difficulty": "advanced",
+      "status": "draft",
+      "summary": "Profile a Go application with pprof, identify CPU and memory bottlenecks, and apply targeted optimizations with measurable improvements.",
+      "module_id": "module-13",
+      "tasks": [
+        {
+          "title": "Profile CPU usage with pprof",
+          "instruction": "Run pprof CPU profiling on a provided Go application, generate a flame graph, and identify the top 3 CPU hotspots."
+        },
+        {
+          "title": "Analyze memory allocations",
+          "instruction": "Use pprof heap profiling and escape analysis to identify excessive allocations and objects escaping to the heap."
+        },
+        {
+          "title": "Optimize and benchmark",
+          "instruction": "Apply targeted optimizations (object pooling, slice preallocation, escape reduction) and measure before/after with benchmarks."
+        }
+      ],
+      "rubric": [
+        {
+          "criterion": "Profiling accuracy",
+          "weight": 35,
+          "description": "Correct identification of CPU and memory bottlenecks with pprof flame graphs and heap profiles."
+        },
+        {
+          "criterion": "Optimization quality",
+          "weight": 25,
+          "description": "Optimizations target the real bottlenecks and follow Go performance best practices."
+        },
+        {
+          "criterion": "Proof",
+          "weight": 25,
+          "description": "Before/after benchmark data with statistical significance and profiling evidence."
+        },
+        {
+          "criterion": "Explanation",
+          "weight": 15,
+          "description": "Clear explanation of profiling process, bottleneck analysis, and optimization rationale."
+        }
+      ],
+      "deliverables": [
+        "pprof CPU and heap profiles",
+        "Optimized Go code with benchmarks",
+        "Performance analysis report"
+      ],
+      "required_concepts": [
+        "pprof profiling",
+        "benchmarking performance",
+        "memory allocation"
+      ],
+      "reinforcement_targets": [
+        "core-13-10",
+        "core-13-13",
+        "core-13-14"
+      ],
+      "source_legacy_ids": [],
+      "tags": [
+        "performance",
+        "profiling",
+        "optimization"
+      ],
+      "documentation_mode": "tutorial",
+      "readme_status": "scaffolded",
+      "prerequisites": [
+        "core-13-10",
+        "core-13-13"
+      ],
+      "verification": "Automated: before/after benchmark comparison. Manual review: flame graph analysis and optimization report.",
+      "assessment_id": "assessment-project-performance-analysis-lab"
+    },
+    {
+      "schema_version": "3.1.0",
+      "id": "project-advanced-electives",
+      "title": "Advanced Electives Capstone",
+      "slug": "advanced-electives-capstone",
+      "type": "mini-project",
+      "stage": "elective",
+      "difficulty": "advanced",
+      "status": "draft",
+      "summary": "Apply advanced Go topics from the electives path: build a project demonstrating functional programming, systems programming, or cloud-native Go patterns.",
+      "module_id": "module-17",
+      "tasks": [
+        {
+          "title": "Choose and plan an elective topic",
+          "instruction": "Select an advanced Go topic from the electives, define a project scope, and outline the implementation plan."
+        },
+        {
+          "title": "Implement the project",
+          "instruction": "Build a working Go application that demonstrates your chosen elective topic with proper packages, tests, and documentation."
+        },
+        {
+          "title": "Present your work",
+          "instruction": "Write a technical summary explaining the advanced concepts used, design decisions, and what you learned."
+        }
+      ],
+      "rubric": [
+        {
+          "criterion": "Technical depth",
+          "weight": 35,
+          "description": "Project demonstrates advanced Go concepts from the chosen elective with correct implementation."
+        },
+        {
+          "criterion": "Code quality",
+          "weight": 25,
+          "description": "Code follows Go idioms, is well-structured, tested, and documented."
+        },
+        {
+          "criterion": "Proof",
+          "weight": 25,
+          "description": "Tests, benchmarks, or demonstrations verify the implementation works correctly."
+        },
+        {
+          "criterion": "Explanation",
+          "weight": 15,
+          "description": "Clear technical write-up explaining the advanced concepts, design choices, and trade-offs."
+        }
+      ],
+      "deliverables": [
+        "Working Go project on elective topic",
+        "Tests and benchmarks",
+        "Technical summary and design document"
+      ],
+      "required_concepts": [],
+      "reinforcement_targets": [],
+      "source_legacy_ids": [],
+      "tags": [
+        "elective",
+        "advanced",
+        "capstone"
+      ],
+      "documentation_mode": "tutorial",
+      "readme_status": "scaffolded",
+      "prerequisites": [],
+      "verification": "Manual review of project implementation, tests, and technical write-up against elective module criteria.",
+      "assessment_id": "assessment-project-advanced-electives"
     }
   ],
   "quality_gates": [
