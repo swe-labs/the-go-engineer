@@ -2,15 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/swe-labs/the-go-engineer/curriculum/schema.v3.json",
   "title": "The Go Engineer Curriculum Schema v3",
+  "description": "Accepts schema_version 3.0.0 and 3.1.x. 3.0.0 files are legacy-compatible reads. 3.1.x is the active authoring version.",
   "type": "object",
-  "required": [
-    "schema_version",
-    "document_type",
-    "curriculum_version"
-  ],
+  "required": ["schema_version", "document_type", "curriculum_version"],
   "properties": {
     "schema_version": {
-      "const": "3.0.0"
+      "type": "string",
+      "enum": ["3.0.0", "3.1.0"],
+      "description": "3.0.0 = legacy compatible. 3.1.0 = current active version. New files must use 3.1.0."
     },
     "document_type": {
       "enum": [
@@ -23,7 +22,8 @@
         "readme_contracts",
         "migration",
         "curriculum_full_bundle",
-        "operational_failure_taxonomy"
+        "operational_failure_taxonomy",
+        "concept_ownership_registry"
       ]
     },
     "curriculum_version": {
@@ -70,6 +70,15 @@
     },
     "path": {
       "type": "object"
+    },
+    "concepts": {
+      "type": "array"
+    },
+    "failure_categories": {
+      "type": "array"
+    },
+    "required_coverage": {
+      "type": "object"
     }
   },
   "allOf": [
@@ -82,11 +91,7 @@
         }
       },
       "then": {
-        "required": [
-          "modules",
-          "items",
-          "path"
-        ]
+        "required": ["modules", "items", "path"]
       }
     },
     {
@@ -98,11 +103,7 @@
         }
       },
       "then": {
-        "required": [
-          "modules",
-          "items",
-          "path"
-        ]
+        "required": ["modules", "items", "path"]
       }
     },
     {
@@ -114,9 +115,7 @@
         }
       },
       "then": {
-        "required": [
-          "projects"
-        ]
+        "required": ["projects"]
       }
     },
     {
@@ -128,9 +127,7 @@
         }
       },
       "then": {
-        "required": [
-          "assessments"
-        ]
+        "required": ["assessments"]
       }
     },
     {
@@ -142,9 +139,7 @@
         }
       },
       "then": {
-        "required": [
-          "crossrefs"
-        ]
+        "required": ["crossrefs"]
       }
     },
     {
@@ -156,9 +151,7 @@
         }
       },
       "then": {
-        "required": [
-          "contracts"
-        ]
+        "required": ["contracts"]
       }
     },
     {
@@ -170,10 +163,42 @@
         }
       },
       "then": {
-        "required": [
-          "migration"
-        ]
+        "required": ["migration"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "concept_ownership_registry"
+          }
+        }
+      },
+      "then": {
+        "required": ["concepts"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "operational_failure_taxonomy"
+          }
+        }
+      },
+      "then": {
+        "required": ["failure_categories", "required_coverage"]
       }
     }
-  ]
+  ],
+  "x_backward_compatibility": {
+    "3.0.0_to_3.1.0": "Files at schema_version 3.0.0 are valid reads. They must be migrated to 3.1.0 before new fields are written. Generators must reject writing 3.1.0-only fields into 3.0.0 files.",
+    "3.1.0_new_fields_in_projects": [
+      "placement_anchor_item_id",
+      "prerequisite_item_ids",
+      "required_concepts",
+      "reinforcement_targets"
+    ],
+    "3.1.0_new_document_types": ["concept_ownership_registry"]
+  }
 }

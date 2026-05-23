@@ -186,28 +186,28 @@ type Module struct {
 }
 
 type ZeroMagic struct {
-	ProblemSolved              string   `json:"problem_solved"`
-	WhyItExists                string   `json:"why_it_exists"`
-	MentalModel                string   `json:"mental_model"`
-	UnderTheHood               string   `json:"under_the_hood"`
-	HowGoUsesIt                string   `json:"how_go_uses_it"`
-	RealWorldUsage             string   `json:"real_world_usage"`
-	ProofOfUnderstanding       string  `json:"proof_of_understanding"`
-	BeginnerMistakes           []string `json:"beginner_mistakes"`
-	StepByStepExecution        []string `json:"step_by_step_execution,omitempty"`
-	ExecutionTimeline          []string `json:"execution_timeline,omitempty"`
-	MemoryTimeline             []string `json:"memory_timeline,omitempty"`
-	FailureModes               []string `json:"failure_modes,omitempty"`
-	OperationalFailureExamples []string `json:"operational_failure_examples,omitempty"`
-	HiddenMagicChecks          []string `json:"hidden_magic_checks,omitempty"`
-	DebuggingWalkthroughs      []string `json:"debugging_walkthroughs,omitempty"`
+	ProblemSolved                string `json:"problem_solved"`
+	WhyItExists                  string `json:"why_it_exists"`
+	MentalModel                  string `json:"mental_model"`
+	UnderTheHood                 string `json:"under_the_hood"`
+	HowGoUsesIt                  string `json:"how_go_uses_it"`
+	RealWorldUsage               string `json:"real_world_usage"`
+	ProofOfUnderstanding         string `json:"proof_of_understanding"`
+	BeginnerMistakes             []any  `json:"beginner_mistakes"`
+	StepByStepExecution          []any  `json:"step_by_step_execution,omitempty"`
+	ExecutionTimeline            []any  `json:"execution_timeline,omitempty"`
+	MemoryTimeline               []any  `json:"memory_timeline,omitempty"`
+	FailureModes                 []any  `json:"failure_modes,omitempty"`
+	OperationalFailureExamples   []any  `json:"operational_failure_examples,omitempty"`
+	HiddenMagicChecks            []any  `json:"hidden_magic_checks,omitempty"`
+	DebuggingWalkthroughs        []any  `json:"debugging_walkthroughs,omitempty"`
 	DebuggingWalkthroughRequired bool   `json:"debugging_walkthrough_required,omitempty"`
-	ProductionExamples         []string `json:"production_examples,omitempty"`
-	PerformanceImplications    []string `json:"performance_implications,omitempty"`
-	OperationalConsiderations  []string `json:"operational_considerations,omitempty"`
-	CodeReadingTasks           []string `json:"code_reading_tasks,omitempty"`
-	RefactoringTasks           []string `json:"refactoring_tasks,omitempty"`
-	ReviewQuestions            []string `json:"review_questions,omitempty"`
+	ProductionExamples           []any  `json:"production_examples,omitempty"`
+	PerformanceImplications      []any  `json:"performance_implications,omitempty"`
+	OperationalConsiderations    []any  `json:"operational_considerations,omitempty"`
+	CodeReadingTasks             []any  `json:"code_reading_tasks,omitempty"`
+	RefactoringTasks             []any  `json:"refactoring_tasks,omitempty"`
+	ReviewQuestions              []any  `json:"review_questions,omitempty"`
 }
 
 type CrossrefRef struct {
@@ -225,23 +225,23 @@ type ItemCrossRefs struct {
 }
 
 type Proof struct {
-	PracticeTask    string   `json:"practice_task"`
-	AssessmentID    string   `json:"assessment_id"`
-	ProjectID       *string  `json:"project_id"`
-	ExpectedArtifact string  `json:"expected_artifact"`
-	MasteryChecks   []string `json:"mastery_checks"`
-	RubricIDs       []string `json:"rubric_ids"`
+	PracticeTask     string   `json:"practice_task"`
+	AssessmentID     string   `json:"assessment_id"`
+	ProjectID        *string  `json:"project_id"`
+	ExpectedArtifact string   `json:"expected_artifact"`
+	MasteryChecks    []string `json:"mastery_checks"`
+	RubricIDs        []string `json:"rubric_ids"`
 }
 
 type ContentContract struct {
-	ReadmeRequired        bool `json:"readme_required"`
-	RunnableRequired      bool `json:"runnable_required"`
-	TestsRequired         bool `json:"tests_required"`
-	VisualModelRequired   bool `json:"visual_model_required"`
-	MachineViewRequired   bool `json:"machine_view_required"`
-	CommonMistakesRequired bool `json:"common_mistakes_required"`
-	ProductionNotesRequired bool `json:"production_notes_required"`
-	ReviewQuestionsRequired bool `json:"review_questions_required"`
+	ReadmeRequired            bool `json:"readme_required"`
+	RunnableRequired          bool `json:"runnable_required"`
+	TestsRequired             bool `json:"tests_required"`
+	VisualModelRequired       bool `json:"visual_model_required"`
+	MachineViewRequired       bool `json:"machine_view_required"`
+	CommonMistakesRequired    bool `json:"common_mistakes_required"`
+	ProductionNotesRequired   bool `json:"production_notes_required"`
+	ReviewQuestionsRequired   bool `json:"review_questions_required"`
 	PortfolioArtifactRequired bool `json:"portfolio_artifact_required"`
 }
 
@@ -265,29 +265,29 @@ type Files struct {
 }
 
 type Item struct {
-	ID                   string         `json:"id"`
-	ModuleID             string         `json:"module_id"`
-	Slug                 string         `json:"slug"`
-	Title                string         `json:"title"`
-	Type                 string         `json:"type"`
-	Subtype              string         `json:"subtype"`
-	Status               string         `json:"status"`
-	Difficulty           string         `json:"difficulty"`
-	Phase                string         `json:"phase"`
-	Order                int            `json:"order"`
-	EstimatedMinutes     int            `json:"estimated_minutes"`
-	LearningObjective    string         `json:"learning_objective"`
-	RequiredPriorKnowledge []string     `json:"required_prior_knowledge"`
-	Prerequisites        []string       `json:"prerequisites"`
-	NextItemIDs          []string       `json:"next_item_ids"`
-	ZeroMagic            *ZeroMagic     `json:"zero_magic"`
-	CrossRefs            *ItemCrossRefs `json:"crossrefs"`
-	Proof                *Proof         `json:"proof"`
-	ContentContract      *ContentContract `json:"content_contract"`
-	Verification         *Verification  `json:"verification"`
-	Files                *Files         `json:"files"`
-	SourceLegacyIDs      []string       `json:"source_legacy_ids"`
-	Tags                 []string       `json:"tags"`
+	ID                     string           `json:"id"`
+	ModuleID               string           `json:"module_id"`
+	Slug                   string           `json:"slug"`
+	Title                  string           `json:"title"`
+	Type                   string           `json:"type"`
+	Subtype                string           `json:"subtype"`
+	Status                 string           `json:"status"`
+	Difficulty             string           `json:"difficulty"`
+	Phase                  string           `json:"phase"`
+	Order                  int              `json:"order"`
+	EstimatedMinutes       int              `json:"estimated_minutes"`
+	LearningObjective      string           `json:"learning_objective"`
+	RequiredPriorKnowledge []string         `json:"required_prior_knowledge"`
+	Prerequisites          []string         `json:"prerequisites"`
+	NextItemIDs            []string         `json:"next_item_ids"`
+	ZeroMagic              *ZeroMagic       `json:"zero_magic"`
+	CrossRefs              *ItemCrossRefs   `json:"crossrefs"`
+	Proof                  *Proof           `json:"proof"`
+	ContentContract        *ContentContract `json:"content_contract"`
+	Verification           *Verification    `json:"verification"`
+	Files                  *Files           `json:"files"`
+	SourceLegacyIDs        []string         `json:"source_legacy_ids"`
+	Tags                   []string         `json:"tags"`
 }
 
 type CoreBundle struct {

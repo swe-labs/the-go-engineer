@@ -94,9 +94,9 @@ func validateSchema() {
 		if item.ZeroMagic != nil {
 			zm := item.ZeroMagic
 			zmChecks := []struct {
-				name   string
-				value  string
-				arr    []string
+				name  string
+				value string
+				arr   []any
 			}{
 				{"problem_solved", zm.ProblemSolved, nil},
 				{"why_it_exists", zm.WhyItExists, nil},
@@ -348,5 +348,3 @@ func keysOfMap(m map[string]interface{}) []string {
 	}
 	return keys
 }
-
-

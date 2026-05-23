@@ -1,9 +1,9 @@
 {
-  "schema_version": "3.0.0",
+  "schema_version": "3.1.0",
   "document_type": "readme_contracts",
-  "curriculum_version": "3.0.0-draft.2",
-  "last_updated": "2026-05-17",
-  "name": "The Go Engineer v3 — README Contracts",
+  "curriculum_version": "3.1.0-draft.1",
+  "last_updated": "2026-05-23",
+  "name": "The Go Engineer v3 \u2014 README Contracts",
   "status": "draft",
   "architectural_decision": {
     "decision": "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
@@ -74,6 +74,7 @@
       "id": "lesson.v3",
       "applies_to": "core-lesson",
       "purpose": "World-class teaching README for a concept or skill.",
+      "applies_when": "The concept is required for the core path and every learner must master it before advancing.",
       "documentation_mode": "tutorial",
       "required_headings": [
         "Mission",
@@ -109,7 +110,17 @@
         "Code walkthrough",
         "Common mistakes",
         "In production"
-      ]
+      ],
+      "zero_magic_enforcement": {
+        "status_levels": {
+          "placeholder": "Heading scaffold only. No substantive content.",
+          "draft": "Content written but not reviewed for quality or production realism.",
+          "reviewed": "Content reviewed by a senior engineer for technical accuracy.",
+          "golden": "Content passes all validator quality rules and has been tested with learners."
+        },
+        "promotion_policy": "A lesson may only be promoted to golden after: (1) passing validate-no-placeholder-zm with semantic checks enabled, (2) being reviewed by a senior engineer, (3) containing a real production example and real debugging scenario.",
+        "regression_policy": "Any lesson that fails a semantic quality check must be immediately reverted to draft status regardless of previous promotion."
+      }
     },
     {
       "id": "elective-lesson.v3",
@@ -129,10 +140,7 @@
         "Production notes",
         "Related core lessons"
       ],
-      "generated_sections": [
-        "Prerequisites",
-        "Related core lessons"
-      ],
+      "generated_sections": ["Prerequisites", "Related core lessons"],
       "human_written_sections": [
         "When you need this",
         "Tradeoffs",
@@ -157,11 +165,7 @@
         "Stretch goals",
         "Portfolio notes"
       ],
-      "generated_sections": [
-        "Prerequisites",
-        "Lessons reinforced",
-        "Rubric"
-      ],
+      "generated_sections": ["Prerequisites", "Lessons reinforced", "Rubric"],
       "human_written_sections": [
         "Project mission",
         "Requirements",
@@ -185,11 +189,11 @@
       "generated_sections": [
         "Rubric",
         "Passing score",
-        "Manual review questions",
         "Retake policy"
       ],
       "human_written_sections": [
-        "What this assessment proves"
+        "What this assessment proves",
+        "Manual review questions"
       ]
     },
     {
@@ -233,6 +237,7 @@
         "What you will implement",
         "Files and packages",
         "Failure scenarios",
+        "Expected system state",
         "Required tests",
         "Security checklist",
         "Observability checklist",
@@ -240,13 +245,11 @@
         "Architecture defense questions",
         "Next checkpoint"
       ],
-      "generated_sections": [
-        "Prerequisites",
-        "Next checkpoint"
-      ],
+      "generated_sections": ["Prerequisites", "Next checkpoint"],
       "human_written_sections": [
         "Checkpoint mission",
         "Failure scenarios",
+        "Expected system state",
         "Architecture defense questions"
       ]
     }
@@ -259,6 +262,12 @@
     "No README may use stale v2-only navigation labels unless inside migration notes.",
     "Every future concept must use a preview-only reference.",
     "Every project README must expose its rubric.",
-    "Every module README must expose its exit checklist."
+    "Every module README must expose its exit checklist.",
+    "No README with zero_magic_status=golden may contain template-style phrases: 'Think of X as a contract', 'X is similar to', 'in simple terms', 'basically', 'just', or empty analogy filler.",
+    "Every lesson README marked golden must contain at least one concrete production failure example in the 'In production' section.",
+    "Every lesson README marked golden must include a realistic debugging scenario in 'Debugging task', not a generic 'fix the bug' placeholder.",
+    "Mental model sections must describe the mechanism, not the definition \u2014 'A goroutine is...' is a definition; 'When you write go f(), the runtime...' is a mental model.",
+    "Machine view sections must describe what the CPU/OS/runtime actually does, not restate the mental model.",
+    "Common mistakes sections must list real mistakes observed in production code, not conceptual misunderstandings that beginners never actually make."
   ]
 }
