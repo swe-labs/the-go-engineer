@@ -2471,7 +2471,15 @@
             "target_id": "core-00-08"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Computers, Terminal, Git, and the Web — What is a program?",
+            "label": "Preview only: Explained fully in Computers, Terminal, Git, and the Web — What is a program?",
+            "reason": "Preview of What is a program? from Computers, Terminal, Git, and the Web.",
+            "required": false,
+            "target_id": "core-01-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 01 — Shell + Git Lab",
@@ -5235,6 +5243,13 @@
             "reason": "Only preview HTTP in foundations; full backend treatment comes later.",
             "required": false,
             "target_id": "core-08-01"
+          },
+          {
+            "display_text": "Preview only: Explained fully in Go Setup and Tooling — Install and verify Go",
+            "label": "Preview only: Explained fully in Go Setup and Tooling — Install and verify Go",
+            "reason": "Preview of Install and verify Go from Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
           }
         ],
         "reinforced_in": [
@@ -7807,7 +7822,15 @@
             "target_id": "core-02-12"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Programming Fundamentals with Go — Values and expressions",
+            "label": "Preview only: Explained fully in Programming Fundamentals with Go — Values and expressions",
+            "reason": "Preview of Values and expressions from Programming Fundamentals with Go.",
+            "required": false,
+            "target_id": "core-03-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 02 — Tooling Failure Lab",
@@ -12188,7 +12211,15 @@
             "target_id": "core-03-21"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Functions, Errors, and Data Semantics — Function basics",
+            "label": "Preview only: Explained fully in Functions, Errors, and Data Semantics — Function basics",
+            "reason": "Preview of Function basics from Functions, Errors, and Data Semantics.",
+            "required": false,
+            "target_id": "core-04-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 03 — Pricing Checkout",
@@ -15557,7 +15588,15 @@
             "target_id": "core-04-16"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Types, Interfaces, Packages, and Modules — Structs",
+            "label": "Preview only: Explained fully in Types, Interfaces, Packages, and Modules — Structs",
+            "reason": "Preview of Structs from Types, Interfaces, Packages, and Modules.",
+            "required": false,
+            "target_id": "core-05-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 05 — Order Summary Refactor",
@@ -20040,7 +20079,15 @@
             "target_id": "core-05-21"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Testing, Debugging, and Refactoring — Why testing exists",
+            "label": "Preview only: Explained fully in Testing, Debugging, and Refactoring — Why testing exists",
+            "reason": "Preview of Why testing exists from Testing, Debugging, and Refactoring.",
+            "required": false,
+            "target_id": "core-06-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 06 — Bank Account",
@@ -24158,7 +24205,15 @@
             "target_id": "core-06-19"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in CLI, Files, JSON, Config, and Runtime Coordination — CLI args",
+            "label": "Preview only: Explained fully in CLI, Files, JSON, Config, and Runtime Coordination — CLI args",
+            "reason": "Preview of CLI args from CLI, Files, JSON, Config, and Runtime Coordination.",
+            "required": false,
+            "target_id": "core-07-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 08 — Bug Hunt Pack",
@@ -28368,6 +28423,13 @@
             "reason": "Clean resource teardown in module-07 previews the full graceful shutdown pattern in module-08.",
             "required": false,
             "target_id": "core-08-15"
+          },
+          {
+            "display_text": "Preview only: Explained fully in HTTP and REST APIs — HTTP as a protocol",
+            "label": "Preview only: Explained fully in HTTP and REST APIs — HTTP as a protocol",
+            "reason": "Preview of HTTP as a protocol from HTTP and REST APIs.",
+            "required": false,
+            "target_id": "core-08-01"
           }
         ],
         "reinforced_in": [
@@ -32386,7 +32448,15 @@
       "zero_magic_status": "golden",
       "crossrefs": {
         "builds_on": [],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in SQL and PostgreSQL Persistence — Why databases exist",
+            "label": "Preview only: Explained fully in SQL and PostgreSQL Persistence — Why databases exist",
+            "reason": "Preview of Why databases exist from SQL and PostgreSQL Persistence.",
+            "required": false,
+            "target_id": "core-09-01"
+          }
+        ],
         "reinforced_in": [],
         "related": []
       },
@@ -37452,7 +37522,15 @@
       "zero_magic_status": "golden",
       "crossrefs": {
         "builds_on": [],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Authentication, Authorization, and Security — Threat modeling",
+            "label": "Preview only: Explained fully in Authentication, Authorization, and Security — Threat modeling",
+            "reason": "Preview of Threat modeling from Authentication, Authorization, and Security.",
+            "required": false,
+            "target_id": "core-10-01"
+          }
+        ],
         "reinforced_in": [],
         "related": []
       },
@@ -37582,7 +37660,15 @@
       "zero_magic_status": "golden",
       "crossrefs": {
         "builds_on": [],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Authentication, Authorization, and Security — Threat modeling",
+            "label": "Preview only: Explained fully in Authentication, Authorization, and Security — Threat modeling",
+            "reason": "Preview of Threat modeling from Authentication, Authorization, and Security.",
+            "required": false,
+            "target_id": "core-10-01"
+          }
+        ],
         "reinforced_in": [],
         "related": []
       },
@@ -48027,7 +48113,15 @@
       "zero_magic_status": "golden",
       "crossrefs": {
         "builds_on": [],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Observability and Diagnostics — Why observability exists",
+            "label": "Preview only: Explained fully in Observability and Diagnostics — Why observability exists",
+            "reason": "Preview of Why observability exists from Observability and Diagnostics.",
+            "required": false,
+            "target_id": "core-12-01"
+          }
+        ],
         "reinforced_in": [],
         "related": []
       },
@@ -51024,7 +51118,15 @@
       "zero_magic_status": "golden",
       "crossrefs": {
         "builds_on": [],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Architecture and Distributed Systems — Why architecture exists",
+            "label": "Preview only: Explained fully in Architecture and Distributed Systems — Why architecture exists",
+            "reason": "Preview of Why architecture exists from Architecture and Distributed Systems.",
+            "required": false,
+            "target_id": "core-14-01"
+          }
+        ],
         "reinforced_in": [],
         "related": []
       },
@@ -51591,7 +51693,15 @@
             "target_id": "core-12-18"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Performance and Memory Engineering — pprof",
+            "label": "Preview only: Explained fully in Performance and Memory Engineering — pprof",
+            "reason": "Preview of pprof from Performance and Memory Engineering.",
+            "required": false,
+            "target_id": "core-13-10"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 19 — PII Redactor",
@@ -54478,7 +54588,22 @@
             "target_id": "core-14-15"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Docker, CI/CD, and Deployment — Linux processes",
+            "label": "Preview only: Explained fully in Docker, CI/CD, and Deployment — Linux processes",
+            "reason": "Preview of Linux processes from Docker, CI/CD, and Deployment.",
+            "required": false,
+            "target_id": "core-15-20"
+          },
+          {
+            "display_text": "Preview only: Explained fully in Docker, CI/CD, and Deployment — README writing",
+            "label": "Preview only: Explained fully in Docker, CI/CD, and Deployment — README writing",
+            "reason": "Preview of README writing from Docker, CI/CD, and Deployment.",
+            "required": false,
+            "target_id": "core-15-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 19 — PII Redactor",
@@ -57329,7 +57454,15 @@
       "zero_magic_status": "golden",
       "crossrefs": {
         "builds_on": [],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Portfolio and Interview Readiness — Portfolio strategy",
+            "label": "Preview only: Explained fully in Portfolio and Interview Readiness — Portfolio strategy",
+            "reason": "Preview of Portfolio strategy from Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          }
+        ],
         "reinforced_in": [],
         "related": []
       },
@@ -63754,7 +63887,15 @@
             "target_id": "core-15-17"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Portfolio and Interview Readiness — Portfolio strategy",
+            "label": "Preview only: Explained fully in Portfolio and Interview Readiness — Portfolio strategy",
+            "reason": "Preview of Portfolio strategy from Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 23 — Dockerized Service with CI/CD",
@@ -67199,7 +67340,15 @@
             "target_id": "core-16-13"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Flagship Opslane — Opslane foundation and configuration",
+            "label": "Preview only: Explained fully in Flagship Opslane — Opslane foundation and configuration",
+            "reason": "Preview of Opslane foundation and configuration from Flagship Opslane.",
+            "required": false,
+            "target_id": "opslane-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project 23 — Dockerized Service with CI/CD",
@@ -67355,7 +67504,15 @@
       "zero_magic_status": "golden",
       "crossrefs": {
         "builds_on": [],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Preview only: Explained fully in Lifecycle, Context, and Concurrency — Time basics",
+            "label": "Preview only: Explained fully in Lifecycle, Context, and Concurrency — Time basics",
+            "reason": "Preview of Time basics from Lifecycle, Context, and Concurrency.",
+            "required": false,
+            "target_id": "core-11-01"
+          }
+        ],
         "related": [],
         "reinforced_in": []
       },
