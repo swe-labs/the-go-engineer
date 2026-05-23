@@ -2,7 +2,7 @@
   "schema_version": "3.1.0",
   "document_type": "assessments",
   "last_updated": "2026-05-23",
-  "name": "The Go Engineer v3 \u2014 Assessments",
+  "name": "The Go Engineer v3 — Assessments",
   "status": "draft",
   "architectural_decision": {
     "decision": "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
@@ -13,7 +13,7 @@
   "assessments": [
     {
       "id": "assessment-module-00",
-      "title": "Module 00 Assessment \u2014 Orientation",
+      "title": "Module 00 Assessment — Orientation",
       "type": "project-review",
       "status": "planned",
       "target_ids": [
@@ -134,7 +134,7 @@
     },
     {
       "id": "assessment-module-01",
-      "title": "Module 01 Assessment \u2014 Computers, Terminal, Git, and the Web",
+      "title": "Module 01 Assessment — Computers, Terminal, Git, and the Web",
       "type": "project-review",
       "status": "planned",
       "target_ids": [
@@ -260,7 +260,7 @@
     },
     {
       "id": "assessment-module-02",
-      "title": "Module 02 Assessment \u2014 Go Setup and Tooling",
+      "title": "Module 02 Assessment — Go Setup and Tooling",
       "type": "project-review",
       "status": "planned",
       "target_ids": [
@@ -385,7 +385,7 @@
     },
     {
       "id": "assessment-module-03",
-      "title": "Module 03 Assessment \u2014 Programming Fundamentals with Go",
+      "title": "Module 03 Assessment — Programming Fundamentals with Go",
       "type": "project-review",
       "status": "planned",
       "target_ids": [
@@ -502,7 +502,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain what a slice header contains and why appending to a slice can cause surprising aliasing bugs.",
         "Walk me through the difference between value and pointer receivers. When would you choose each and why?",
@@ -519,7 +521,7 @@
     },
     {
       "id": "assessment-module-04",
-      "title": "Module 04 Assessment \u2014 Functions, Errors, and Data Semantics",
+      "title": "Module 04 Assessment — Functions, Errors, and Data Semantics",
       "type": "project-review",
       "status": "planned",
       "target_ids": [
@@ -631,7 +633,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain Go's error-as-values philosophy. Why is `if err != nil` preferable to exceptions for most cases?",
         "Show me how to properly wrap and unwrap errors using `%w` and `errors.As`. Why does unwrapping matter?",
@@ -648,7 +652,7 @@
     },
     {
       "id": "assessment-module-05",
-      "title": "Module 05 Assessment \u2014 Types, Interfaces, Packages, and Modules",
+      "title": "Module 05 Assessment — Types, Interfaces, Packages, and Modules",
       "type": "project-review",
       "status": "planned",
       "target_ids": [
@@ -765,7 +769,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain Go interfaces: when does a type satisfy an interface, and why is implicit satisfaction powerful?",
         "What is a nil interface vs a nil pointer inside an interface? Show me the gotcha and explain the internal representation.",
@@ -782,7 +788,7 @@
     },
     {
       "id": "assessment-module-06",
-      "title": "Module 06 Assessment \u2014 Testing, Debugging, and Refactoring",
+      "title": "Module 06 Assessment — Testing, Debugging, and Refactoring",
       "type": "project-review",
       "status": "planned",
       "target_ids": [
@@ -897,7 +903,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain `go test -race`. What does the race detector actually instrument? What kinds of bugs will it miss?",
         "Walk me through how you would debug a production panic from a goroutine stack trace.",
@@ -914,7 +922,7 @@
     },
     {
       "id": "assessment-module-07",
-      "title": "Module 07 Assessment \u2014 CLI, Files, JSON, and Configuration",
+      "title": "Module 07 Assessment — CLI, Files, JSON, and Configuration",
       "type": "project-review",
       "status": "planned",
       "target_ids": [
@@ -1029,7 +1037,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain what happens when you call `os.Open` and the file doesn't exist. Trace the error path all the way to the caller.",
         "Walk me through JSON encoding and decoding in Go. What are the rules for exported fields and custom marshalers?",
@@ -1160,7 +1170,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Walk me through what happens during an HTTP request lifecycle in Go's `net/http` from `ListenAndServe` to response write.",
         "Explain middleware chaining. How does wrapping `http.Handler` work, and what are the correct patterns for ordering middleware?",
@@ -1297,7 +1309,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain the `database/sql` connection pool. What happens when all connections are in use and a new query arrives?",
         "Walk me through a SQL transaction with a deferred rollback. What are the isolation levels and when do you need SERIALIZABLE?",
@@ -1432,7 +1446,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain the difference between authentication and authorization. How does JWT prove identity without a database lookup?",
         "Walk me through RBAC. How would you model roles, permissions, and resource access in a SQL schema?",
@@ -1571,7 +1587,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain Go's goroutine scheduler. How does M:N threading work, and what causes goroutine starvation?",
         "Walk me through a goroutine leak. Write the code that causes it, explain why it leaks, and show the fix.",
@@ -1702,7 +1720,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "What is structured logging and why does `log.Printf` fail in production? Walk me through a `slog` setup.",
         "Explain distributed tracing. What is a trace ID, a span, and a parent span? How do you propagate context across service boundaries?",
@@ -1719,7 +1739,7 @@
     },
     {
       "id": "assessment-module-13",
-      "title": "Module 13 Assessment \u2014 Performance and Memory Engineering",
+      "title": "Module 13 Assessment — Performance and Memory Engineering",
       "type": "project-review",
       "status": "planned",
       "target_ids": [
@@ -1821,7 +1841,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Walk me through using `go tool pprof` to find a memory leak. What does the heap profile show and what does it hide?",
         "Explain escape analysis. Give me a concrete example of a change that keeps a value on the stack and why it matters.",
@@ -1949,7 +1971,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain the repository pattern. Why does it make testing easier, and where does it add unnecessary complexity?",
         "Walk me through hexagonal architecture. What are ports, adapters, and the domain core? Show me the dependency direction.",
@@ -2079,7 +2103,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Explain Docker multi-stage builds. Why does a two-stage build produce a dramatically smaller final image?",
         "Walk me through a CI pipeline from commit to deployed container. What gates should run before merge?",
@@ -2353,7 +2379,7 @@
     },
     {
       "id": "assessment-module-18",
-      "title": "Module 18 Assessment \u2014 Flagship Opslane",
+      "title": "Module 18 Assessment — Flagship Opslane",
       "type": "capstone-defense",
       "status": "planned",
       "target_ids": [
@@ -2462,7 +2488,9 @@
         "Project or assessment artifact",
         "Written or verbal explanation"
       ],
-      "automated_checks": ["go test ./..."],
+      "automated_checks": [
+        "go test ./..."
+      ],
       "manual_review_questions": [
         "Walk me through the Opslane architecture end to end. Explain every service boundary and why each boundary exists.",
         "Show me how Opslane handles a cascading failure scenario. Where does backpressure apply and what happens if it fails?",

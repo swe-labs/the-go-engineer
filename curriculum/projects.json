@@ -3,7 +3,7 @@
   "document_type": "projects",
   "curriculum_version": "3.1.0-draft.1",
   "last_updated": "2026-05-23",
-  "name": "The Go Engineer v3 \u2014 Projects",
+  "name": "The Go Engineer v3 — Projects",
   "status": "draft",
   "architectural_decision": {
     "decision": "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
@@ -23,7 +23,11 @@
       "order": 1,
       "summary": "Shell + Git Lab proves mastery of Computers, Terminal, Git, and the Web concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-01-01", "core-01-02", "core-01-03"],
+      "prerequisites": [
+        "core-01-01",
+        "core-01-02",
+        "core-01-03"
+      ],
       "reinforces": [
         "core-01-01",
         "core-01-02",
@@ -57,7 +61,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["01-computers-terminal-git-web"]
+          "files_touched": [
+            "01-computers-terminal-git-web"
+          ]
         },
         {
           "id": "project-shell-git-lab-task-test",
@@ -68,7 +74,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["01-computers-terminal-git-web"]
+          "files_touched": [
+            "01-computers-terminal-git-web"
+          ]
         },
         {
           "id": "project-shell-git-lab-task-explain",
@@ -79,7 +87,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["01-computers-terminal-git-web"]
+          "files_touched": [
+            "01-computers-terminal-git-web"
+          ]
         }
       ],
       "assessment_id": "assessment-project-shell-git-lab",
@@ -193,7 +203,11 @@
       },
       "module_id": "module-01",
       "placement_anchor_item_id": "core-01-15",
-      "prerequisite_item_ids": ["core-01-01", "core-01-02", "core-01-03"],
+      "prerequisite_item_ids": [
+        "core-01-01",
+        "core-01-02",
+        "core-01-03"
+      ],
       "required_concepts": [
         "process lifecycle",
         "stdin/stdout/stderr",
@@ -216,7 +230,11 @@
       "order": 2,
       "summary": "Tooling Failure Lab proves mastery of Go Setup and Tooling concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-02-01", "core-02-02", "core-02-03"],
+      "prerequisites": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03"
+      ],
       "reinforces": [
         "core-02-01",
         "core-02-02",
@@ -249,7 +267,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["02-go-setup-tooling"]
+          "files_touched": [
+            "02-go-setup-tooling"
+          ]
         },
         {
           "id": "project-tooling-failure-lab-task-test",
@@ -260,7 +280,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["02-go-setup-tooling"]
+          "files_touched": [
+            "02-go-setup-tooling"
+          ]
         },
         {
           "id": "project-tooling-failure-lab-task-explain",
@@ -271,7 +293,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["02-go-setup-tooling"]
+          "files_touched": [
+            "02-go-setup-tooling"
+          ]
         }
       ],
       "assessment_id": "assessment-project-tooling-failure-lab",
@@ -385,8 +409,16 @@
       },
       "module_id": "module-02",
       "placement_anchor_item_id": "core-02-14",
-      "prerequisite_item_ids": ["core-02-01", "core-02-02", "core-02-03"],
-      "required_concepts": ["go build", "go module cache", "compiler errors"],
+      "prerequisite_item_ids": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03"
+      ],
+      "required_concepts": [
+        "go build",
+        "go module cache",
+        "compiler errors"
+      ],
       "reinforcement_targets": [
         "go build",
         "go module cache",
@@ -404,7 +436,11 @@
       "order": 3,
       "summary": "Pricing Checkout proves mastery of Programming Fundamentals with Go concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-03-01", "core-03-02", "core-03-03"],
+      "prerequisites": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
       "reinforces": [
         "core-03-01",
         "core-03-02",
@@ -446,7 +482,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["03-programming-fundamentals"]
+          "files_touched": [
+            "03-programming-fundamentals"
+          ]
         },
         {
           "id": "project-pricing-checkout-task-test",
@@ -457,7 +495,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["03-programming-fundamentals"]
+          "files_touched": [
+            "03-programming-fundamentals"
+          ]
         },
         {
           "id": "project-pricing-checkout-task-explain",
@@ -468,7 +508,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["03-programming-fundamentals"]
+          "files_touched": [
+            "03-programming-fundamentals"
+          ]
         }
       ],
       "assessment_id": "assessment-project-pricing-checkout",
@@ -582,7 +624,11 @@
       },
       "module_id": "module-03",
       "placement_anchor_item_id": "core-03-23",
-      "prerequisite_item_ids": ["core-03-01", "core-03-02", "core-03-03"],
+      "prerequisite_item_ids": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
       "required_concepts": [
         "slice header",
         "pointer semantics",
@@ -605,7 +651,11 @@
       "order": 4,
       "summary": "Contact Directory proves mastery of Programming Fundamentals with Go concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-03-01", "core-03-02", "core-03-03"],
+      "prerequisites": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
       "reinforces": [
         "core-03-01",
         "core-03-02",
@@ -647,7 +697,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["03-programming-fundamentals"]
+          "files_touched": [
+            "03-programming-fundamentals"
+          ]
         },
         {
           "id": "project-contact-directory-task-test",
@@ -658,7 +710,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["03-programming-fundamentals"]
+          "files_touched": [
+            "03-programming-fundamentals"
+          ]
         },
         {
           "id": "project-contact-directory-task-explain",
@@ -669,7 +723,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["03-programming-fundamentals"]
+          "files_touched": [
+            "03-programming-fundamentals"
+          ]
         }
       ],
       "assessment_id": "assessment-project-contact-directory",
@@ -783,7 +839,11 @@
       },
       "module_id": "module-03",
       "placement_anchor_item_id": "core-03-23",
-      "prerequisite_item_ids": ["core-03-01", "core-03-02", "core-03-03"],
+      "prerequisite_item_ids": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
       "required_concepts": [
         "slice header",
         "pointer semantics",
@@ -806,7 +866,11 @@
       "order": 5,
       "summary": "Order Summary Refactor proves mastery of Functions, Errors, and Data Semantics concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-04-01", "core-04-02", "core-04-03"],
+      "prerequisites": [
+        "core-04-01",
+        "core-04-02",
+        "core-04-03"
+      ],
       "reinforces": [
         "core-04-01",
         "core-04-02",
@@ -843,7 +907,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["04-functions-errors-data-semantics"]
+          "files_touched": [
+            "04-functions-errors-data-semantics"
+          ]
         },
         {
           "id": "project-order-summary-refactor-task-test",
@@ -854,7 +920,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["04-functions-errors-data-semantics"]
+          "files_touched": [
+            "04-functions-errors-data-semantics"
+          ]
         },
         {
           "id": "project-order-summary-refactor-task-explain",
@@ -865,7 +933,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["04-functions-errors-data-semantics"]
+          "files_touched": [
+            "04-functions-errors-data-semantics"
+          ]
         }
       ],
       "assessment_id": "assessment-project-order-summary-refactor",
@@ -979,7 +1049,11 @@
       },
       "module_id": "module-04",
       "placement_anchor_item_id": "core-04-18",
-      "prerequisite_item_ids": ["core-04-01", "core-04-02", "core-04-03"],
+      "prerequisite_item_ids": [
+        "core-04-01",
+        "core-04-02",
+        "core-04-03"
+      ],
       "required_concepts": [
         "memory aliasing",
         "errors as values",
@@ -1004,7 +1078,11 @@
       "order": 6,
       "summary": "Bank Account proves mastery of Types, Interfaces, Packages, and Modules concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-05-01", "core-05-02", "core-05-03"],
+      "prerequisites": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
       "reinforces": [
         "core-05-01",
         "core-05-02",
@@ -1046,7 +1124,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["05-types-interfaces-packages-modules"]
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ]
         },
         {
           "id": "project-bank-account-task-test",
@@ -1057,7 +1137,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["05-types-interfaces-packages-modules"]
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ]
         },
         {
           "id": "project-bank-account-task-explain",
@@ -1068,7 +1150,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["05-types-interfaces-packages-modules"]
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ]
         }
       ],
       "assessment_id": "assessment-project-bank-account",
@@ -1182,7 +1266,11 @@
       },
       "module_id": "module-05",
       "placement_anchor_item_id": "core-05-23",
-      "prerequisite_item_ids": ["core-05-01", "core-05-02", "core-05-03"],
+      "prerequisite_item_ids": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
       "required_concepts": [
         "interface semantics",
         "nil interface",
@@ -1205,7 +1293,11 @@
       "order": 7,
       "summary": "Payroll Processor proves mastery of Types, Interfaces, Packages, and Modules concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-05-01", "core-05-02", "core-05-03"],
+      "prerequisites": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
       "reinforces": [
         "core-05-01",
         "core-05-02",
@@ -1247,7 +1339,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["05-types-interfaces-packages-modules"]
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ]
         },
         {
           "id": "project-payroll-processor-task-test",
@@ -1258,7 +1352,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["05-types-interfaces-packages-modules"]
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ]
         },
         {
           "id": "project-payroll-processor-task-explain",
@@ -1269,7 +1365,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["05-types-interfaces-packages-modules"]
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ]
         }
       ],
       "assessment_id": "assessment-project-payroll-processor",
@@ -1383,7 +1481,11 @@
       },
       "module_id": "module-05",
       "placement_anchor_item_id": "core-05-23",
-      "prerequisite_item_ids": ["core-05-01", "core-05-02", "core-05-03"],
+      "prerequisite_item_ids": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
       "required_concepts": [
         "interface semantics",
         "nil interface",
@@ -1406,7 +1508,11 @@
       "order": 8,
       "summary": "Bug Hunt Pack proves mastery of Testing, Debugging, and Refactoring concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-06-01", "core-06-02", "core-06-03"],
+      "prerequisites": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
       "reinforces": [
         "core-06-01",
         "core-06-02",
@@ -1446,7 +1552,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["06-testing-debugging-refactoring"]
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ]
         },
         {
           "id": "project-bug-hunt-pack-task-test",
@@ -1457,7 +1565,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["06-testing-debugging-refactoring"]
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ]
         },
         {
           "id": "project-bug-hunt-pack-task-explain",
@@ -1468,7 +1578,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["06-testing-debugging-refactoring"]
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ]
         }
       ],
       "assessment_id": "assessment-project-bug-hunt-pack",
@@ -1582,9 +1694,21 @@
       },
       "module_id": "module-06",
       "placement_anchor_item_id": "core-06-21",
-      "prerequisite_item_ids": ["core-06-01", "core-06-02", "core-06-03"],
-      "required_concepts": ["go test", "test coverage", "Delve debugger"],
-      "reinforcement_targets": ["go test", "test coverage", "Delve debugger"]
+      "prerequisite_item_ids": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
+      "required_concepts": [
+        "go test",
+        "test coverage",
+        "Delve debugger"
+      ],
+      "reinforcement_targets": [
+        "go test",
+        "test coverage",
+        "Delve debugger"
+      ]
     },
     {
       "id": "project-refactor-under-tests",
@@ -1597,7 +1721,11 @@
       "order": 9,
       "summary": "Refactor Under Tests proves mastery of Testing, Debugging, and Refactoring concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-06-01", "core-06-02", "core-06-03"],
+      "prerequisites": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
       "reinforces": [
         "core-06-01",
         "core-06-02",
@@ -1637,7 +1765,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["06-testing-debugging-refactoring"]
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ]
         },
         {
           "id": "project-refactor-under-tests-task-test",
@@ -1648,7 +1778,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["06-testing-debugging-refactoring"]
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ]
         },
         {
           "id": "project-refactor-under-tests-task-explain",
@@ -1659,7 +1791,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["06-testing-debugging-refactoring"]
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ]
         }
       ],
       "assessment_id": "assessment-project-refactor-under-tests",
@@ -1773,9 +1907,21 @@
       },
       "module_id": "module-06",
       "placement_anchor_item_id": "core-06-21",
-      "prerequisite_item_ids": ["core-06-01", "core-06-02", "core-06-03"],
-      "required_concepts": ["go test", "test coverage", "Delve debugger"],
-      "reinforcement_targets": ["go test", "test coverage", "Delve debugger"]
+      "prerequisite_item_ids": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
+      "required_concepts": [
+        "go test",
+        "test coverage",
+        "Delve debugger"
+      ],
+      "reinforcement_targets": [
+        "go test",
+        "test coverage",
+        "Delve debugger"
+      ]
     },
     {
       "id": "project-file-organizer",
@@ -1788,7 +1934,11 @@
       "order": 10,
       "summary": "File Organizer proves mastery of CLI, Files, JSON, and Configuration concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-07-01", "core-07-02", "core-07-03"],
+      "prerequisites": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
       "reinforces": [
         "core-07-01",
         "core-07-02",
@@ -1828,7 +1978,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["07-cli-files-json-config"]
+          "files_touched": [
+            "07-cli-files-json-config"
+          ]
         },
         {
           "id": "project-file-organizer-task-test",
@@ -1839,7 +1991,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["07-cli-files-json-config"]
+          "files_touched": [
+            "07-cli-files-json-config"
+          ]
         },
         {
           "id": "project-file-organizer-task-explain",
@@ -1850,7 +2004,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["07-cli-files-json-config"]
+          "files_touched": [
+            "07-cli-files-json-config"
+          ]
         }
       ],
       "assessment_id": "assessment-project-file-organizer",
@@ -1964,9 +2120,19 @@
       },
       "module_id": "module-07",
       "placement_anchor_item_id": "core-07-21",
-      "prerequisite_item_ids": ["core-07-01", "core-07-02", "core-07-03"],
-      "required_concepts": ["file I/O", "JSON encoding/decoding"],
-      "reinforcement_targets": ["file I/O", "JSON encoding/decoding"]
+      "prerequisite_item_ids": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
+      "required_concepts": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ],
+      "reinforcement_targets": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ]
     },
     {
       "id": "project-log-search",
@@ -1979,7 +2145,11 @@
       "order": 11,
       "summary": "Log Search proves mastery of CLI, Files, JSON, and Configuration concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-07-01", "core-07-02", "core-07-03"],
+      "prerequisites": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
       "reinforces": [
         "core-07-01",
         "core-07-02",
@@ -2019,7 +2189,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["07-cli-files-json-config"]
+          "files_touched": [
+            "07-cli-files-json-config"
+          ]
         },
         {
           "id": "project-log-search-task-test",
@@ -2030,7 +2202,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["07-cli-files-json-config"]
+          "files_touched": [
+            "07-cli-files-json-config"
+          ]
         },
         {
           "id": "project-log-search-task-explain",
@@ -2041,7 +2215,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["07-cli-files-json-config"]
+          "files_touched": [
+            "07-cli-files-json-config"
+          ]
         }
       ],
       "assessment_id": "assessment-project-log-search",
@@ -2155,9 +2331,19 @@
       },
       "module_id": "module-07",
       "placement_anchor_item_id": "core-07-21",
-      "prerequisite_item_ids": ["core-07-01", "core-07-02", "core-07-03"],
-      "required_concepts": ["file I/O", "JSON encoding/decoding"],
-      "reinforcement_targets": ["file I/O", "JSON encoding/decoding"]
+      "prerequisite_item_ids": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
+      "required_concepts": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ],
+      "reinforcement_targets": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ]
     },
     {
       "id": "project-config-parser",
@@ -2170,7 +2356,11 @@
       "order": 12,
       "summary": "Config Parser proves mastery of CLI, Files, JSON, and Configuration concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-07-01", "core-07-02", "core-07-03"],
+      "prerequisites": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
       "reinforces": [
         "core-07-01",
         "core-07-02",
@@ -2210,7 +2400,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["07-cli-files-json-config"]
+          "files_touched": [
+            "07-cli-files-json-config"
+          ]
         },
         {
           "id": "project-config-parser-task-test",
@@ -2221,7 +2413,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["07-cli-files-json-config"]
+          "files_touched": [
+            "07-cli-files-json-config"
+          ]
         },
         {
           "id": "project-config-parser-task-explain",
@@ -2232,7 +2426,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["07-cli-files-json-config"]
+          "files_touched": [
+            "07-cli-files-json-config"
+          ]
         }
       ],
       "assessment_id": "assessment-project-config-parser",
@@ -2346,9 +2542,19 @@
       },
       "module_id": "module-07",
       "placement_anchor_item_id": "core-07-21",
-      "prerequisite_item_ids": ["core-07-01", "core-07-02", "core-07-03"],
-      "required_concepts": ["file I/O", "JSON encoding/decoding"],
-      "reinforcement_targets": ["file I/O", "JSON encoding/decoding"]
+      "prerequisite_item_ids": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
+      "required_concepts": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ],
+      "reinforcement_targets": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ]
     },
     {
       "id": "project-book-catalog-rest-api",
@@ -2361,7 +2567,11 @@
       "order": 13,
       "summary": "Book Catalog REST API proves mastery of HTTP and REST APIs concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-08-01", "core-08-02", "core-08-03"],
+      "prerequisites": [
+        "core-08-01",
+        "core-08-02",
+        "core-08-03"
+      ],
       "reinforces": [
         "core-08-01",
         "core-08-02",
@@ -2400,7 +2610,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["08-http-rest-apis"]
+          "files_touched": [
+            "08-http-rest-apis"
+          ]
         },
         {
           "id": "project-book-catalog-rest-api-task-test",
@@ -2411,7 +2623,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["08-http-rest-apis"]
+          "files_touched": [
+            "08-http-rest-apis"
+          ]
         },
         {
           "id": "project-book-catalog-rest-api-task-explain",
@@ -2422,7 +2636,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["08-http-rest-apis"]
+          "files_touched": [
+            "08-http-rest-apis"
+          ]
         }
       ],
       "assessment_id": "assessment-project-book-catalog-rest-api",
@@ -2536,7 +2752,11 @@
       },
       "module_id": "module-08",
       "placement_anchor_item_id": "core-08-20",
-      "prerequisite_item_ids": ["core-08-01", "core-08-02", "core-08-03"],
+      "prerequisite_item_ids": [
+        "core-08-01",
+        "core-08-02",
+        "core-08-03"
+      ],
       "required_concepts": [
         "HTTP handler lifecycle",
         "HTTP timeouts",
@@ -2561,7 +2781,11 @@
       "order": 14,
       "summary": "Task API with Postgres proves mastery of SQL and PostgreSQL Persistence concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-09-01", "core-09-02", "core-09-03"],
+      "prerequisites": [
+        "core-09-01",
+        "core-09-02",
+        "core-09-03"
+      ],
       "reinforces": [
         "core-09-01",
         "core-09-02",
@@ -2606,7 +2830,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["09-sql-postgres-persistence"]
+          "files_touched": [
+            "09-sql-postgres-persistence"
+          ]
         },
         {
           "id": "project-task-api-postgres-task-test",
@@ -2617,7 +2843,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["09-sql-postgres-persistence"]
+          "files_touched": [
+            "09-sql-postgres-persistence"
+          ]
         },
         {
           "id": "project-task-api-postgres-task-explain",
@@ -2628,7 +2856,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["09-sql-postgres-persistence"]
+          "files_touched": [
+            "09-sql-postgres-persistence"
+          ]
         }
       ],
       "assessment_id": "assessment-project-task-api-postgres",
@@ -2742,7 +2972,11 @@
       },
       "module_id": "module-09",
       "placement_anchor_item_id": "core-09-26",
-      "prerequisite_item_ids": ["core-09-01", "core-09-02", "core-09-03"],
+      "prerequisite_item_ids": [
+        "core-09-01",
+        "core-09-02",
+        "core-09-03"
+      ],
       "required_concepts": [
         "database/sql pool",
         "SQL transactions",
@@ -2767,7 +3001,11 @@
       "order": 15,
       "summary": "Secure Authenticated API proves mastery of Authentication, Authorization, and Security concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-10-01", "core-10-02", "core-10-03"],
+      "prerequisites": [
+        "core-10-01",
+        "core-10-02",
+        "core-10-03"
+      ],
       "reinforces": [
         "core-10-01",
         "core-10-02",
@@ -2810,7 +3048,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["10-auth-security"]
+          "files_touched": [
+            "10-auth-security"
+          ]
         },
         {
           "id": "project-secure-authenticated-api-task-test",
@@ -2821,7 +3061,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["10-auth-security"]
+          "files_touched": [
+            "10-auth-security"
+          ]
         },
         {
           "id": "project-secure-authenticated-api-task-explain",
@@ -2832,7 +3074,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["10-auth-security"]
+          "files_touched": [
+            "10-auth-security"
+          ]
         }
       ],
       "assessment_id": "assessment-project-secure-authenticated-api",
@@ -2946,9 +3190,21 @@
       },
       "module_id": "module-10",
       "placement_anchor_item_id": "core-10-24",
-      "prerequisite_item_ids": ["core-10-01", "core-10-02", "core-10-03"],
-      "required_concepts": ["JWT", "RBAC", "SQL injection"],
-      "reinforcement_targets": ["JWT", "RBAC", "SQL injection"]
+      "prerequisite_item_ids": [
+        "core-10-01",
+        "core-10-02",
+        "core-10-03"
+      ],
+      "required_concepts": [
+        "JWT",
+        "RBAC",
+        "SQL injection"
+      ],
+      "reinforcement_targets": [
+        "JWT",
+        "RBAC",
+        "SQL injection"
+      ]
     },
     {
       "id": "project-concurrent-downloader",
@@ -2961,7 +3217,11 @@
       "order": 16,
       "summary": "Concurrent Downloader proves mastery of Lifecycle, Context, and Concurrency concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-11-01", "core-11-02", "core-11-03"],
+      "prerequisites": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
       "reinforces": [
         "core-11-01",
         "core-11-02",
@@ -3008,7 +3268,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["11-context-time-concurrency"]
+          "files_touched": [
+            "11-context-time-concurrency"
+          ]
         },
         {
           "id": "project-concurrent-downloader-task-test",
@@ -3019,7 +3281,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["11-context-time-concurrency"]
+          "files_touched": [
+            "11-context-time-concurrency"
+          ]
         },
         {
           "id": "project-concurrent-downloader-task-explain",
@@ -3030,7 +3294,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["11-context-time-concurrency"]
+          "files_touched": [
+            "11-context-time-concurrency"
+          ]
         }
       ],
       "assessment_id": "assessment-project-concurrent-downloader",
@@ -3144,7 +3410,11 @@
       },
       "module_id": "module-11",
       "placement_anchor_item_id": "core-11-28",
-      "prerequisite_item_ids": ["core-11-01", "core-11-02", "core-11-03"],
+      "prerequisite_item_ids": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
       "required_concepts": [
         "goroutine",
         "channel",
@@ -3181,7 +3451,11 @@
       "order": 17,
       "summary": "URL Health Checker proves mastery of Lifecycle, Context, and Concurrency concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-11-01", "core-11-02", "core-11-03"],
+      "prerequisites": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
       "reinforces": [
         "core-11-01",
         "core-11-02",
@@ -3228,7 +3502,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["11-context-time-concurrency"]
+          "files_touched": [
+            "11-context-time-concurrency"
+          ]
         },
         {
           "id": "project-url-health-checker-task-test",
@@ -3239,7 +3515,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["11-context-time-concurrency"]
+          "files_touched": [
+            "11-context-time-concurrency"
+          ]
         },
         {
           "id": "project-url-health-checker-task-explain",
@@ -3250,7 +3528,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["11-context-time-concurrency"]
+          "files_touched": [
+            "11-context-time-concurrency"
+          ]
         }
       ],
       "assessment_id": "assessment-project-url-health-checker",
@@ -3364,7 +3644,11 @@
       },
       "module_id": "module-11",
       "placement_anchor_item_id": "core-11-28",
-      "prerequisite_item_ids": ["core-11-01", "core-11-02", "core-11-03"],
+      "prerequisite_item_ids": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
       "required_concepts": [
         "goroutine",
         "channel",
@@ -3401,7 +3685,11 @@
       "order": 18,
       "summary": "Bounded Worker Pool proves mastery of Lifecycle, Context, and Concurrency concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-11-01", "core-11-02", "core-11-03"],
+      "prerequisites": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
       "reinforces": [
         "core-11-01",
         "core-11-02",
@@ -3448,7 +3736,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["11-context-time-concurrency"]
+          "files_touched": [
+            "11-context-time-concurrency"
+          ]
         },
         {
           "id": "project-bounded-worker-pool-task-test",
@@ -3459,7 +3749,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["11-context-time-concurrency"]
+          "files_touched": [
+            "11-context-time-concurrency"
+          ]
         },
         {
           "id": "project-bounded-worker-pool-task-explain",
@@ -3470,7 +3762,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["11-context-time-concurrency"]
+          "files_touched": [
+            "11-context-time-concurrency"
+          ]
         }
       ],
       "assessment_id": "assessment-project-bounded-worker-pool",
@@ -3584,7 +3878,11 @@
       },
       "module_id": "module-11",
       "placement_anchor_item_id": "core-11-28",
-      "prerequisite_item_ids": ["core-11-01", "core-11-02", "core-11-03"],
+      "prerequisite_item_ids": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
       "required_concepts": [
         "goroutine",
         "channel",
@@ -3621,7 +3919,11 @@
       "order": 19,
       "summary": "PII Redactor proves mastery of Observability, Performance, and Reliability concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-12-01", "core-12-02", "core-12-03"],
+      "prerequisites": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
       "reinforces": [
         "core-12-01",
         "core-12-02",
@@ -3660,7 +3962,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["12-observability-performance-reliability"]
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ]
         },
         {
           "id": "project-pii-redactor-task-test",
@@ -3671,7 +3975,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["12-observability-performance-reliability"]
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ]
         },
         {
           "id": "project-pii-redactor-task-explain",
@@ -3682,7 +3988,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["12-observability-performance-reliability"]
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ]
         }
       ],
       "assessment_id": "assessment-project-pii-redactor",
@@ -3796,9 +4104,19 @@
       },
       "module_id": "module-12",
       "placement_anchor_item_id": "core-12-20",
-      "prerequisite_item_ids": ["core-12-01", "core-12-02", "core-12-03"],
-      "required_concepts": ["structured logging", "distributed tracing"],
-      "reinforcement_targets": ["structured logging", "distributed tracing"]
+      "prerequisite_item_ids": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
+      "required_concepts": [
+        "structured logging",
+        "distributed tracing"
+      ],
+      "reinforcement_targets": [
+        "structured logging",
+        "distributed tracing"
+      ]
     },
     {
       "id": "project-observability-retrofit",
@@ -3811,7 +4129,11 @@
       "order": 20,
       "summary": "Observability Retrofit proves mastery of Observability, Performance, and Reliability concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-12-01", "core-12-02", "core-12-03"],
+      "prerequisites": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
       "reinforces": [
         "core-12-01",
         "core-12-02",
@@ -3850,7 +4172,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["12-observability-performance-reliability"]
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ]
         },
         {
           "id": "project-observability-retrofit-task-test",
@@ -3861,7 +4185,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["12-observability-performance-reliability"]
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ]
         },
         {
           "id": "project-observability-retrofit-task-explain",
@@ -3872,7 +4198,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["12-observability-performance-reliability"]
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ]
         }
       ],
       "assessment_id": "assessment-project-observability-retrofit",
@@ -3986,9 +4314,19 @@
       },
       "module_id": "module-12",
       "placement_anchor_item_id": "core-12-20",
-      "prerequisite_item_ids": ["core-12-01", "core-12-02", "core-12-03"],
-      "required_concepts": ["structured logging", "distributed tracing"],
-      "reinforcement_targets": ["structured logging", "distributed tracing"]
+      "prerequisite_item_ids": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
+      "required_concepts": [
+        "structured logging",
+        "distributed tracing"
+      ],
+      "reinforcement_targets": [
+        "structured logging",
+        "distributed tracing"
+      ]
     },
     {
       "id": "project-profile-and-fix-lab",
@@ -4001,7 +4339,11 @@
       "order": 21,
       "summary": "Profile and Fix Lab proves mastery of Observability, Performance, and Reliability concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-12-01", "core-12-02", "core-12-03"],
+      "prerequisites": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
       "reinforces": [
         "core-12-01",
         "core-12-02",
@@ -4040,7 +4382,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["12-observability-performance-reliability"]
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ]
         },
         {
           "id": "project-profile-and-fix-lab-task-test",
@@ -4051,7 +4395,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["12-observability-performance-reliability"]
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ]
         },
         {
           "id": "project-profile-and-fix-lab-task-explain",
@@ -4062,7 +4408,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["12-observability-performance-reliability"]
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ]
         }
       ],
       "assessment_id": "assessment-project-profile-and-fix-lab",
@@ -4176,9 +4524,19 @@
       },
       "module_id": "module-12",
       "placement_anchor_item_id": "core-12-20",
-      "prerequisite_item_ids": ["core-12-01", "core-12-02", "core-12-03"],
-      "required_concepts": ["structured logging", "distributed tracing"],
-      "reinforcement_targets": ["structured logging", "distributed tracing"]
+      "prerequisite_item_ids": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
+      "required_concepts": [
+        "structured logging",
+        "distributed tracing"
+      ],
+      "reinforcement_targets": [
+        "structured logging",
+        "distributed tracing"
+      ]
     },
     {
       "id": "project-modular-refactor-review",
@@ -4191,7 +4549,11 @@
       "order": 22,
       "summary": "Modular Refactor Review proves mastery of Architecture and Systems Thinking concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-14-01", "core-14-02", "core-14-03"],
+      "prerequisites": [
+        "core-14-01",
+        "core-14-02",
+        "core-14-03"
+      ],
       "reinforces": [
         "core-14-01",
         "core-14-02",
@@ -4227,7 +4589,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["13-architecture-systems-thinking"]
+          "files_touched": [
+            "13-architecture-systems-thinking"
+          ]
         },
         {
           "id": "project-modular-refactor-review-task-test",
@@ -4238,7 +4602,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["13-architecture-systems-thinking"]
+          "files_touched": [
+            "13-architecture-systems-thinking"
+          ]
         },
         {
           "id": "project-modular-refactor-review-task-explain",
@@ -4249,7 +4615,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["13-architecture-systems-thinking"]
+          "files_touched": [
+            "13-architecture-systems-thinking"
+          ]
         }
       ],
       "assessment_id": "assessment-project-modular-refactor-review",
@@ -4363,9 +4731,19 @@
       },
       "module_id": "module-14",
       "placement_anchor_item_id": "core-14-17",
-      "prerequisite_item_ids": ["core-14-01", "core-14-02", "core-14-03"],
-      "required_concepts": ["repository pattern", "hexagonal architecture"],
-      "reinforcement_targets": ["repository pattern", "hexagonal architecture"]
+      "prerequisite_item_ids": [
+        "core-14-01",
+        "core-14-02",
+        "core-14-03"
+      ],
+      "required_concepts": [
+        "repository pattern",
+        "hexagonal architecture"
+      ],
+      "reinforcement_targets": [
+        "repository pattern",
+        "hexagonal architecture"
+      ]
     },
     {
       "id": "project-dockerized-service-cicd",
@@ -4378,7 +4756,11 @@
       "order": 23,
       "summary": "Dockerized Service with CI/CD proves mastery of Docker, CI/CD, Linux, and Deployment concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-15-01", "core-15-02", "core-15-03"],
+      "prerequisites": [
+        "core-15-01",
+        "core-15-02",
+        "core-15-03"
+      ],
       "reinforces": [
         "core-15-01",
         "core-15-02",
@@ -4416,7 +4798,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["14-docker-cicd-linux-deployment"]
+          "files_touched": [
+            "14-docker-cicd-linux-deployment"
+          ]
         },
         {
           "id": "project-dockerized-service-cicd-task-test",
@@ -4427,7 +4811,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["14-docker-cicd-linux-deployment"]
+          "files_touched": [
+            "14-docker-cicd-linux-deployment"
+          ]
         },
         {
           "id": "project-dockerized-service-cicd-task-explain",
@@ -4438,7 +4824,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["14-docker-cicd-linux-deployment"]
+          "files_touched": [
+            "14-docker-cicd-linux-deployment"
+          ]
         }
       ],
       "assessment_id": "assessment-project-dockerized-service-cicd",
@@ -4552,9 +4940,19 @@
       },
       "module_id": "module-15",
       "placement_anchor_item_id": "core-15-19",
-      "prerequisite_item_ids": ["core-15-01", "core-15-02", "core-15-03"],
-      "required_concepts": ["Docker multi-stage build", "CI pipeline"],
-      "reinforcement_targets": ["Docker multi-stage build", "CI pipeline"]
+      "prerequisite_item_ids": [
+        "core-15-01",
+        "core-15-02",
+        "core-15-03"
+      ],
+      "required_concepts": [
+        "Docker multi-stage build",
+        "CI pipeline"
+      ],
+      "reinforcement_targets": [
+        "Docker multi-stage build",
+        "CI pipeline"
+      ]
     },
     {
       "id": "project-portfolio-review-pack",
@@ -4567,7 +4965,11 @@
       "order": 24,
       "summary": "Portfolio Review Pack proves mastery of Portfolio, Collaboration, Interview Readiness, and Capstone Prep concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["core-16-01", "core-16-02", "core-16-03"],
+      "prerequisites": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03"
+      ],
       "reinforces": [
         "core-16-01",
         "core-16-02",
@@ -4601,7 +5003,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["15-portfolio-interview-capstone"]
+          "files_touched": [
+            "15-portfolio-interview-capstone"
+          ]
         },
         {
           "id": "project-portfolio-review-pack-task-test",
@@ -4612,7 +5016,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["15-portfolio-interview-capstone"]
+          "files_touched": [
+            "15-portfolio-interview-capstone"
+          ]
         },
         {
           "id": "project-portfolio-review-pack-task-explain",
@@ -4623,7 +5029,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["15-portfolio-interview-capstone"]
+          "files_touched": [
+            "15-portfolio-interview-capstone"
+          ]
         }
       ],
       "assessment_id": "assessment-project-portfolio-review-pack",
@@ -4737,7 +5145,11 @@
       },
       "module_id": "module-16",
       "placement_anchor_item_id": "core-16-15",
-      "prerequisite_item_ids": ["core-16-01", "core-16-02", "core-16-03"],
+      "prerequisite_item_ids": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03"
+      ],
       "required_concepts": [],
       "reinforcement_targets": []
     },
@@ -4752,7 +5164,11 @@
       "order": 25,
       "summary": "Opslane Flagship proves mastery of Flagship Opslane concepts.",
       "source_legacy_ids": [],
-      "prerequisites": ["opslane-01", "opslane-02", "opslane-03"],
+      "prerequisites": [
+        "opslane-01",
+        "opslane-02",
+        "opslane-03"
+      ],
       "reinforces": [
         "opslane-01",
         "opslane-02",
@@ -4786,7 +5202,9 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": ["17-flagship-opslane"]
+          "files_touched": [
+            "17-flagship-opslane"
+          ]
         },
         {
           "id": "project-opslane-task-test",
@@ -4797,7 +5215,9 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": ["17-flagship-opslane"]
+          "files_touched": [
+            "17-flagship-opslane"
+          ]
         },
         {
           "id": "project-opslane-task-explain",
@@ -4808,7 +5228,9 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": ["17-flagship-opslane"]
+          "files_touched": [
+            "17-flagship-opslane"
+          ]
         }
       ],
       "assessment_id": "assessment-project-opslane",
@@ -4922,7 +5344,11 @@
       },
       "module_id": "module-18",
       "placement_anchor_item_id": "opslane-15",
-      "prerequisite_item_ids": ["opslane-01", "opslane-02", "opslane-03"],
+      "prerequisite_item_ids": [
+        "opslane-01",
+        "opslane-02",
+        "opslane-03"
+      ],
       "required_concepts": [
         "context cancellation",
         "graceful shutdown",
