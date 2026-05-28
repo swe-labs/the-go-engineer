@@ -124,9 +124,9 @@ check-root:
 .PHONY: check-secrets
 check-secrets:
 	@if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then \
-		if git ls-files | grep -E '(^|/)\.env(\.|$$)' | grep -v '\.env\.example' >/dev/null; then \
+		if git ls-files | grep -E '(^|/)\.env(\.|$$)' >/dev/null; then \
 			echo "tracked .env file detected"; \
-			git ls-files | grep -E '(^|/)\.env(\.|$$)' | grep -v '\.env\.example'; \
+			git ls-files | grep -E '(^|/)\.env(\.|$$)'; \
 			exit 1; \
 		fi; \
 		if git grep -nE 'ghp_[A-Za-z0-9_]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}' -- . ':!metadata/legacy/curriculum.v2.json' >/tmp/go-engineer-secret-scan.txt 2>/dev/null; then \
