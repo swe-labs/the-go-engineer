@@ -79,7 +79,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git ls-files | grep -E '(^|/)\.env(\.|$|$)' | grep -v '\.env\.example'; then
+          if git ls-files | grep -E '(^|/)\.env(\.|$|$)'; then
             echo "::error::.env files must not be committed"
             exit 1
           fi
