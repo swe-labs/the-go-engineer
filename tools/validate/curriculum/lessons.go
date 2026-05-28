@@ -226,7 +226,7 @@ func validateForbiddenNames(cfg Config) ValidationResult {
 		if forbidden[base] {
 			r.Errorf("forbidden folder name %s at %s", d.Name(), path)
 		}
-		if base == ".git" {
+		if base == ".git" || base == ".opencode" || base == "node_modules" {
 			return filepath.SkipDir
 		}
 		return nil

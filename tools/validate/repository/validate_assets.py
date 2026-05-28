@@ -21,9 +21,20 @@ def load_metadata(metadata_dir):
     assessments = load_json(metadata_dir / "assessments.json")
     return core, electives, projects, assessments
 
-def all_items(metadata_dir):
+def all_items(metadata_dir, strict=True, root=None):
     core, electives, _, _ = load_metadata(metadata_dir)
-    return core.get("items", []) + electives.get("items", [])
+    modules_path = {}
+    for m in core.get("modules", []):
+        modules_path[m["id"]] = m.get("path", "")
+    for m in electives.get("modules", []):
+        modules_path[m["id"]] = m.get("path", "")
+    for items in [core.get("items", []), electives.get("items", [])]:
+        for item in items:
+            if not strict and root and item.get("module_id") in modules_path:
+                mod_path = root / modules_path[item["module_id"]]
+                if not mod_path.exists():
+                    continue
+            yield item
 
 def fail(errors):
     if errors:
@@ -37,10 +48,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--metadata-dir", default="metadata")
     parser.add_argument("--curriculum-dir", default="curriculum")
+    parser.add_argument("--strict", action=argparse.BooleanOptionalAction, default=True)
     args = parser.parse_args()
     root = Path.cwd()
     errors = []
-    for item in all_items(args.metadata_dir):
+    for item in all_items(args.metadata_dir, strict=args.strict, root=root):
         files = item.get("files") or {}
         assets_dir = files.get("assets_dir")
         if assets_dir and not (root / assets_dir).exists():

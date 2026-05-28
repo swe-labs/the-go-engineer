@@ -141,6 +141,8 @@ check-secrets:
 validate-metadata: check-root check-secrets
 	$(GO) run $(CURRICULUM_VALIDATOR) validate-metadata
 
+PYTHON_STRICT_FLAG=$(if $(filter 1,$(STRICT_REPOSITORY)),,--no-strict)
+
 .PHONY: validate-repository
 validate-repository: validate-metadata
 ifeq ($(STRICT_REPOSITORY),1)
@@ -152,17 +154,18 @@ endif
 		$(PYTHON) $(REPOSITORY_VALIDATORS)/validate_repository.py --metadata-dir $(METADATA_DIR) --curriculum-dir $(CURRICULUM_DIR); \
 	fi
 	@if [ -f $(REPOSITORY_VALIDATORS)/validate_readmes.py ]; then \
-		$(PYTHON) $(REPOSITORY_VALIDATORS)/validate_readmes.py --metadata-dir $(METADATA_DIR) --curriculum-dir $(CURRICULUM_DIR); \
+		$(PYTHON) $(REPOSITORY_VALIDATORS)/validate_readmes.py --metadata-dir $(METADATA_DIR) --curriculum-dir $(CURRICULUM_DIR) $(PYTHON_STRICT_FLAG); \
 	fi
 	@if [ -f $(REPOSITORY_VALIDATORS)/validate_code.py ]; then \
-		$(PYTHON) $(REPOSITORY_VALIDATORS)/validate_code.py --metadata-dir $(METADATA_DIR) --curriculum-dir $(CURRICULUM_DIR); \
+		$(PYTHON) $(REPOSITORY_VALIDATORS)/validate_code.py --metadata-dir $(METADATA_DIR) --curriculum-dir $(CURRICULUM_DIR) $(PYTHON_STRICT_FLAG); \
 	fi
 	@if [ -f $(REPOSITORY_VALIDATORS)/validate_assets.py ]; then \
-		$(PYTHON) $(REPOSITORY_VALIDATORS)/validate_assets.py --metadata-dir $(METADATA_DIR) --curriculum-dir $(CURRICULUM_DIR); \
+		$(PYTHON) $(REPOSITORY_VALIDATORS)/validate_assets.py --metadata-dir $(METADATA_DIR) --curriculum-dir $(CURRICULUM_DIR) $(PYTHON_STRICT_FLAG); \
 	fi
 
 .PHONY: validate-release
-validate-release: validate-repository validate-python validate-docs fmt-check test-tools
+validate-release: validate-python validate-docs fmt-check test-tools
+	+$(MAKE) validate-repository STRICT_REPOSITORY=1
 	$(GO) run $(CURRICULUM_VALIDATOR) validate-all --strict-repository
 
 .PHONY: validate-all
