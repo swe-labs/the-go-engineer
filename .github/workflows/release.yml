@@ -1,0 +1,75 @@
+name: Release curriculum
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      release_name:
+        description: "Release name"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-curriculum-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Validate and publish curriculum release
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run release validation
+        run: make validate-release
+
+      - name: Generate release artifacts
+        run: make release-artifacts
+
+      - name: Create release archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME:-manual}"
+          archive="go-engineer-curriculum-${version}.zip"
+          zip -r "$archive" metadata curriculum docs dist README.md go.mod go.sum .gitignore LICENSE Makefile             -x "*/.DS_Store"             -x "*/__pycache__/*"             -x "*/.pytest_cache/*"             -x "*/.env"             -x "*/.env.*"
+          echo "archive=$archive" >> "$GITHUB_ENV"
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: curriculum-release
+          path: |
+            ${{ env.archive }}
+            dist/**
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.event.inputs.release_name || github.ref_name }}
+          files: |
+            ${{ env.archive }}
+            dist/**
+          generate_release_notes: true

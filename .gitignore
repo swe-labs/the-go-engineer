@@ -1,56 +1,158 @@
-# Binaries
-bin/
-api
+# ---------------------------------------------------------------------------
+# Go Engineer ignore rules
+# ---------------------------------------------------------------------------
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+Icon?
+._*
+.opencode
+# Editor and IDE files
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+AGENTS.md
+AGENTS-*.md
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.asc
+*.gpg
+*.age
+secrets/
+.secrets/
+credentials.json
+token.json
+
+# Go build output
+/bin/
+/build/
+/out/
+/.gocache/
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
-
-# Test binary, built with `go test -c`
 *.test
-
-# Output of the go coverage tool
 *.out
 
-# Dependency directories
-vendor/
-
-# Go workspace file
+# Go workspace and local module files
 go.work
-.gocache/
+go.work.sum
 
-# Environment variables
-.env
+# Go coverage, test, and profiling artifacts
+coverage.out
+coverage.html
+*.coverprofile
+*.prof
+*.pprof
+cpu.prof
+mem.prof
+block.prof
+mutex.prof
+trace.out
+*.trace
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-# Agents
-.agents
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+*.egg-info/
 
-# OS
-.DS_Store
-Thumbs.db
+# Node or docs-tooling cache if added later
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+.next/
+vite.config.ts.timestamp-*
+vite.config.js.timestamp-*
 
-# Uploads
-uploads/
+# Generated release artifacts
+dist/*
+!dist/README.md
+!dist/.gitkeep
 
-# Database
-*.db
-*.sqlite
-
-# Logs
+# Temporary/generated reports outside dist
+tmp/
+temp/
+.temp/
+.cache/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
 *.log
 
-# OpenCode
-.opencode/
+# Local validation output
+VALIDATION.local.json
+validation.local.json
+completion.local.json
+migration.local.json
+audit.local.json
+coverage.local.json
+# Local/generated validation reports
+VALIDATION.module-*.md
+validation.module-*.md
+*.validation.local.md
 
-.cache/
+# Local archives and generated bundles
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
 
-# Temporary files
-temp/
+# Databases and local runtime state
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.sqlite-journal
 
-AGENTS.md
+# Curriculum generated scratch files
+.curriculum-cache/
+.generated/
+.scaffold/
+.local-output/
+
+# Keep source directories trackable
+!metadata/
+!curriculum/
+!tools/
+!docs/
+!dist/
