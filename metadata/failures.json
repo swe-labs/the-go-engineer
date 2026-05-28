@@ -1,0 +1,206 @@
+{
+  "schema_version": "3.1.0",
+  "document_type": "operational_failure_taxonomy",
+  "curriculum_version": "3.1.0",
+  "last_updated": "2026-05-29",
+  "status": "stable",
+  "failure_categories": [
+    {
+      "category": "configuration_failures",
+      "description": "Failures caused by incorrect, missing, or inconsistent configuration",
+      "modules": [
+        "module-07",
+        "module-10",
+        "module-15",
+        "module-00",
+        "module-01",
+        "module-06",
+        "module-05"
+      ]
+    },
+    {
+      "category": "resource_exhaustion",
+      "description": "Memory, CPU, file descriptor, or connection pool exhaustion",
+      "modules": [
+        "module-03",
+        "module-09",
+        "module-13",
+        "module-15",
+        "module-02"
+      ]
+    },
+    {
+      "category": "latency_failures",
+      "description": "High latency cascading into timeouts, retries, and degraded throughput",
+      "modules": [
+        "module-08",
+        "module-09",
+        "module-12",
+        "module-13"
+      ]
+    },
+    {
+      "category": "partial_failures",
+      "description": "Some requests succeed while others fail without clear signal",
+      "modules": [
+        "module-08",
+        "module-14"
+      ]
+    },
+    {
+      "category": "timeout_failures",
+      "description": "Operations exceeding deadlines, causing cascading cancellation",
+      "modules": [
+        "module-08",
+        "module-09",
+        "module-11"
+      ]
+    },
+    {
+      "category": "concurrency_failures",
+      "description": "Race conditions, deadlocks, livelocks, data races, goroutine leaks",
+      "modules": [
+        "module-11"
+      ]
+    },
+    {
+      "category": "memory_leaks",
+      "description": "Unbounded growth in heap, goroutine stacks, or caches",
+      "modules": [
+        "module-11",
+        "module-13"
+      ]
+    },
+    {
+      "category": "deadlocks",
+      "description": "Two or more operations blocking each other indefinitely",
+      "modules": [
+        "module-11"
+      ]
+    },
+    {
+      "category": "retry_storms",
+      "description": "Amplified load from aggressive retries during degraded conditions",
+      "modules": [
+        "module-14",
+        "module-15",
+        "module-18"
+      ]
+    },
+    {
+      "category": "data_consistency_failures",
+      "description": "Race conditions, transaction anomalies, or event ordering violations",
+      "modules": [
+        "module-09",
+        "module-10",
+        "module-14",
+        "module-04"
+      ]
+    },
+    {
+      "category": "security_failures",
+      "description": "Authentication bypass, authorization escalation, injection, secret exposure",
+      "modules": [
+        "module-10",
+        "module-16"
+      ]
+    },
+    {
+      "category": "deployment_failures",
+      "description": "Bad rollouts, environment drift, migration errors, rollback failures",
+      "modules": [
+        "module-15",
+        "module-16"
+      ]
+    },
+    {
+      "category": "observability_failures",
+      "description": "Missing logs, broken metrics, incomplete traces, alert fatigue",
+      "modules": [
+        "module-12",
+        "module-18"
+      ]
+    }
+  ],
+  "required_coverage": {
+    "module-11": [
+      "concurrency_failures",
+      "deadlocks",
+      "memory_leaks"
+    ],
+    "module-12": [
+      "observability_failures",
+      "latency_failures",
+      "partial_failures"
+    ],
+    "module-14": [
+      "partial_failures",
+      "retry_storms",
+      "data_consistency_failures"
+    ],
+    "module-15": [
+      "deployment_failures",
+      "configuration_failures",
+      "security_failures",
+      "resource_exhaustion"
+    ],
+    "module-10": [
+      "security_failures",
+      "data_consistency_failures"
+    ],
+    "module-08": [
+      "latency_failures",
+      "timeout_failures",
+      "partial_failures"
+    ],
+    "module-09": [
+      "timeout_failures",
+      "resource_exhaustion",
+      "data_consistency_failures"
+    ],
+    "module-00": [
+      "configuration_failures"
+    ],
+    "module-01": [
+      "configuration_failures"
+    ],
+    "module-02": [
+      "resource_exhaustion"
+    ],
+    "module-03": [
+      "resource_exhaustion",
+      "timeout_failures"
+    ],
+    "module-04": [
+      "data_consistency_failures"
+    ],
+    "module-05": [
+      "data_consistency_failures"
+    ],
+    "module-06": [
+      "configuration_failures",
+      "deployment_failures"
+    ],
+    "module-07": [
+      "configuration_failures"
+    ],
+    "module-13": [
+      "resource_exhaustion",
+      "memory_leaks",
+      "latency_failures"
+    ],
+    "module-16": [
+      "deployment_failures",
+      "security_failures"
+    ],
+    "module-18": [
+      "configuration_failures",
+      "concurrency_failures",
+      "timeout_failures",
+      "deployment_failures",
+      "security_failures",
+      "retry_storms",
+      "observability_failures"
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+name: Validate release
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "metadata/**"
+      - "curriculum/**"
+      - "tools/**"
+      - "docs/**"
+      - "dist/**"
+      - "go.mod"
+      - "go.sum"
+      - "Makefile"
+      - ".github/workflows/validate-release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-release:
+    name: Run release-quality gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate full release gate
+        run: make validate-release
+
+      - name: Audit completion when available
+        run: make audit-completion
+
+      - name: Check generated artifacts are reproducible when generator exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f tools/generate/generate_full_snapshot.py ]; then
+            make release-artifacts
+            if ! git diff --exit-code -- dist; then
+              echo "::error::dist artifacts are not reproducible. Regenerate and commit updated dist files."
+              exit 1
+            fi
+          else
+            echo "Snapshot generator not present yet; reproducibility check skipped"
+          fi
+
+      - name: Block forbidden folder names
+        shell: bash
+        run: |
+          set -euo pipefail
+          forbidden_regex='/(codex|ai|agent|bot|llm)(/|$)'
+          if find . -type d | grep -Ei "$forbidden_regex"; then
+            echo "::error::Forbidden tool-branded folder name found. Use neutral responsibility names such as authoring/."
+            exit 1
+          fi
+
+      - name: Block accidental secret files
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-files | grep -E '(^|/)\.env(\.|$|$)'; then
+            echo "::error::.env files must not be committed"
+            exit 1
+          fi

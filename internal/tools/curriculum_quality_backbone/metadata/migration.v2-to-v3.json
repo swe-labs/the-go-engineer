@@ -1,0 +1,185 @@
+{
+  "schema_version": "3.1.0",
+  "document_type": "migration",
+  "curriculum_version": "3.1.0-draft.1",
+  "last_updated": "2026-05-23",
+  "name": "The Go Engineer v3 — Migration from v2",
+  "status": "stable",
+  "architectural_decision": {
+    "decision": "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
+    "v2_policy": "curriculum.v2.json is frozen legacy import data, not the active source of truth.",
+    "core_rule": "Keep good lessons, break the old path, optimize for learner progression, proof, documentation quality, and job readiness.",
+    "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only."
+  },
+  "migration": {
+    "source_schema_version": "2",
+    "target_schema_version": "3.1.0",
+    "frozen_source_path": "metadata/legacy/curriculum.v2.json",
+    "default_policy": "Every legacy item must be mapped to keep, rewrite, split, merge, move-to-elective, replace, or archive. Every migrated README must also receive a legacy_readme_action: reuse, rewrite, split, merge, or archive.",
+    "high_confidence_moves": [
+      {
+        "legacy_pattern": "API.4-API.9",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "Protobuf/gRPC is valuable but should not block the core beginner path."
+      },
+      {
+        "legacy_pattern": "TI.14-TI.15",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "Complex generics and generic data structures are advanced."
+      },
+      {
+        "legacy_pattern": "TI.12",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "Functional options are useful but not core beginner material."
+      },
+      {
+        "legacy_pattern": "CP.3",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "sync.Pool is performance-specialized."
+      },
+      {
+        "legacy_pattern": "SY.2 sync.Map portion",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "sync.Map is specialized and should follow normal map+mutex reasoning."
+      },
+      {
+        "legacy_pattern": "ARCH.7",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "CQRS is advanced architecture."
+      },
+      {
+        "legacy_pattern": "DEPLOY.2",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "Blue/green deployment is advanced deployment strategy."
+      },
+      {
+        "legacy_pattern": "TE.1-TE.11",
+        "outcome": "rewrite",
+        "target_module": "module-06",
+        "reason": "Testing and debugging must move before backend work."
+      },
+      {
+        "legacy_pattern": "DB.*",
+        "outcome": "rewrite",
+        "target_module": "module-09",
+        "reason": "Database path must become SQL/Postgres-first with migrations and EXPLAIN."
+      },
+      {
+        "legacy_pattern": "SEC.*",
+        "outcome": "rewrite",
+        "target_module": "module-10",
+        "reason": "Security needs authn/authz strategy and secure API practice."
+      },
+      {
+        "legacy_pattern": "DEPLOY.helm",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "Helm belongs in optional deployment electives after core containerization and CI/CD."
+      },
+      {
+        "legacy_pattern": "DEPLOY.k8s-probes",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "Kubernetes probes are operationally important but should not block the core path."
+      },
+      {
+        "legacy_pattern": "DEPLOY.hpa",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "Horizontal pod autoscaling is an advanced orchestration topic."
+      },
+      {
+        "legacy_pattern": "DEPLOY.service-mesh",
+        "outcome": "move-to-elective",
+        "target_module": "module-17",
+        "reason": "Service mesh concepts are advanced distributed-systems operations topics."
+      }
+    ],
+    "mappings": [
+      {
+        "source": "core-15-01..core-15-15",
+        "outcome": "merge",
+        "target": "module-16",
+        "reason": "Duplicate career-readiness content was merged into canonical portfolio/interview lessons in module 16."
+      },
+      {
+        "source": "core-15-16..core-15-19",
+        "outcome": "move-to-elective",
+        "target": "elective-21..elective-24",
+        "reason": "Kubernetes and service-mesh topics are valuable but advanced; they no longer block core delivery mastery."
+      },
+      {
+        "source": "core-15-20..core-15-38",
+        "outcome": "renumber",
+        "target": "core-15-01..core-15-19",
+        "reason": "The delivery module was normalized to a clean 19-lesson sequence."
+      },
+      {
+        "source": "core-13-10..core-13-17",
+        "outcome": "renumber",
+        "target": "core-13-01..core-13-08",
+        "reason": "The performance module was normalized after being split from observability."
+      },
+      {
+        "source": "core-12-18..core-12-20",
+        "outcome": "renumber",
+        "target": "core-12-10..core-12-12",
+        "reason": "The observability module was normalized after performance lessons moved to module 13."
+      }
+    ],
+    "readme_migration_policy": {
+      "reuse": "Only allowed when the old README already satisfies the v3 contract after generated navigation updates.",
+      "rewrite": "Use when the topic is valid but explanation depth, examples, or structure are not world-class.",
+      "split": "Use when a v2 README teaches multiple v3 lessons.",
+      "merge": "Use when multiple v2 READMEs become one v3 lesson or project page.",
+      "archive": "Use when the content is obsolete or moved fully to electives."
+    }
+  },
+  "quality_gates": [
+    "schema-valid",
+    "graph-valid",
+    "no-orphan-core-items",
+    "all-prerequisites-exist",
+    "implemented-items-have-readmes",
+    "implemented-items-have-run-or-test-command",
+    "projects-have-rubrics",
+    "lessons-have-zero-magic-contract",
+    "future-concepts-have-preview-only",
+    "electives-do-not-block-core",
+    "legacy-v2-is-not-authoritative",
+    "starter-solution-parity",
+    "no-broken-internal-links",
+    "readme-required-headings-valid",
+    "readme-level-purpose-valid",
+    "readme-crossrefs-rendered-with-human-titles",
+    "readme-no-generic-zero-magic-placeholders",
+    "readme-no-stale-v2-section-labels",
+    "readme-next-step-valid",
+    "readme-module-map-generated-from-curriculum",
+    "readme-project-rubric-present",
+    "readme-assessment-evidence-present",
+    "readme-preview-only-required-for-future-concepts",
+    "readme-no-elective-blocks-core",
+    "readme-no-broken-human-readable-links",
+    "project-graph-valid",
+    "crossref-entity-domains-valid",
+    "zero-magic-semantic-quality",
+    "schema-version-3.1.0",
+    "assessment-criteria-ids-match-module",
+    "project-module-id-matches-reinforces-prefix"
+  ],
+  "validation_commands": {
+    "validate_schema": "go run ./internal/tools/curriculum validate-schema",
+    "validate_graph": "go run ./internal/tools/curriculum validate-graph",
+    "validate_lessons": "go run ./internal/tools/curriculum validate-lessons",
+    "validate_readmes": "go run ./internal/tools/curriculum validate-readmes",
+    "validate_all": "go run ./internal/tools/curriculum validate-all"
+  }
+}
