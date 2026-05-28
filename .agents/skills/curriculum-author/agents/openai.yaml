@@ -1,0 +1,5 @@
+interface:
+  display_name: "Curriculum Author"
+  short_description: "Create, audit, migrate, and complete zero-magic curriculum sections and lessons."
+  icon: "book-open"
+  brand_color: "#2563EB"

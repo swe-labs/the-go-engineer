@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="260" viewBox="0 0 940 260" role="img" aria-labelledby="title desc">
+  <title id="title">Terminal basics</title>
+  <desc id="desc">A concept flow from learner mental model to machine view and proof.</desc>
+  <rect width="940" height="260" fill="#ffffff"/>
+  <g font-family="Arial, sans-serif">
+    <text x="470" y="36" text-anchor="middle" font-size="22" font-weight="700">Terminal basics</text>
+    <rect x="40" y="82" width="240" height="96" rx="14" fill="#f3f4f6" stroke="#111827"/>
+    <text x="160" y="113" text-anchor="middle" font-size="16" font-weight="700">Mental model</text>
+    <foreignObject x="58" y="124" width="204" height="44">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial; font-size: 12px; text-align: center;">The terminal is a conversation with the computer: you type a command, the shell ...</div>
+    </foreignObject>
+    <line x1="280" y1="130" x2="350" y2="130" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="350" y="82" width="240" height="96" rx="14" fill="#eef2ff" stroke="#111827"/>
+    <text x="470" y="113" text-anchor="middle" font-size="16" font-weight="700">Machine view</text>
+    <foreignObject x="368" y="124" width="204" height="44">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial; font-size: 12px; text-align: center;">A shell parses your command line, resolves the executable, passes arguments and ...</div>
+    </foreignObject>
+    <line x1="590" y1="130" x2="660" y2="130" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="660" y="82" width="240" height="96" rx="14" fill="#ecfdf5" stroke="#111827"/>
+    <text x="780" y="113" text-anchor="middle" font-size="16" font-weight="700">Proof</text>
+    <text x="780" y="144" text-anchor="middle" font-size="13">Run, explain, modify, test.</text>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#111827"/>
+    </marker>
+  </defs>
+</svg>
