@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="270" viewBox="0 0 960 270" role="img" aria-labelledby="title desc">
+  <title id="title">go test</title>
+  <desc id="desc">A tooling concept flow from command to machine stage to proof.</desc>
+  <rect width="960" height="270" fill="#ffffff"/>
+  <g font-family="Arial, sans-serif">
+    <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700">go test</text>
+    <rect x="35" y="82" width="205" height="92" rx="14" fill="#f3f4f6" stroke="#111827"/>
+    <text x="137" y="113" text-anchor="middle" font-size="16" font-weight="700">Command</text>
+    <text x="137" y="142" text-anchor="middle" font-size="13">go test .</text>
+    <line x1="240" y1="128" x2="315" y2="128" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="315" y="82" width="285" height="92" rx="14" fill="#eef2ff" stroke="#111827"/>
+    <text x="457" y="113" text-anchor="middle" font-size="16" font-weight="700">Machine view</text>
+    <foreignObject x="337" y="124" width="240" height="44">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial; font-size: 12px; text-align: center;">The Go tool compiles the package and `_test.go` files into a temporary test binary, runs...</div>
+    </foreignObject>
+    <line x1="600" y1="128" x2="675" y2="128" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="675" y="82" width="250" height="92" rx="14" fill="#ecfdf5" stroke="#111827"/>
+    <text x="800" y="113" text-anchor="middle" font-size="16" font-weight="700">Proof</text>
+    <text x="800" y="142" text-anchor="middle" font-size="13">run, inspect, explain, fix</text>
+    <rect x="220" y="202" width="520" height="42" rx="10" fill="#fff7ed" stroke="#9a3412"/>
+    <foreignObject x="238" y="211" width="484" height="26">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial; font-size: 12px; text-align: center;">Mental model: `go test` is a referee. It builds your code and asks named test functions whether behavi...</div>
+    </foreignObject>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#111827"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,85 @@
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor and IDE files
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+*.swp
+*.swo
+*~
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+
+# Go build output
+/bin/
+/build/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage.out
+coverage.html
+
+# Go workspace/local files
+go.work
+go.work.sum
+
+# Test and profiling artifacts
+*.prof
+*.pprof
+cpu.prof
+mem.prof
+trace.out
+*.coverprofile
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Node/tooling cache if docs tooling is added later
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+
+# Generated release artifacts
+dist/*
+!dist/README.md
+
+# Temporary/generated reports outside dist
+tmp/
+.temp/
+.cache/
+*.tmp
+*.bak
+*.log
+
+# Local validation output
+VALIDATION.local.json
+completion.local.json
+migration.local.json
+
+# Keep source directories trackable
+!metadata/
+!curriculum/
+!tools/
+!docs/

@@ -1,0 +1,141 @@
+{
+  "schema_version": "3.1.0",
+  "document_type": "workspace_manifest",
+  "curriculum_version": "3.1.0-draft.1",
+  "last_updated": "2026-05-29",
+  "name": "The Go Engineer v3 — Curriculum Workspace",
+  "status": "stable",
+  "source_of_truth": [
+    "metadata/path.core.json",
+    "metadata/path.electives.json",
+    "metadata/projects.json",
+    "metadata/assessments.json",
+    "metadata/crossrefs.json",
+    "metadata/concepts.json",
+    "metadata/failures.json",
+    "metadata/readme.contracts.json",
+    "metadata/migration.v2-to-v3.json",
+    "metadata/schema.v3.json"
+  ],
+  "generated_files": [],
+  "policy": {
+    "split_files_are_authoritative": true,
+    "full_bundle_is_required": false,
+    "full_bundle_purpose": "Debugging, export, review, and research convenience only.",
+    "do_not_edit_generated_full_bundle_by_hand": true,
+    "source_of_truth": "Split metadata files under metadata/ are authoritative. Generated bundles are review/export artifacts only.",
+    "validation_tooling": "Metadata validation is now path-aware for metadata/, modules/, and electives/. The validate_all command no longer assumes a legacy curriculum/ directory."
+  },
+  "files": {
+    "schema": "metadata/schema.v3.json",
+    "core_path": "metadata/path.core.json",
+    "electives": "metadata/path.electives.json",
+    "projects": "metadata/projects.json",
+    "assessments": "metadata/assessments.json",
+    "crossrefs": "metadata/crossrefs.json",
+    "concepts": "metadata/concepts.json",
+    "failures": "metadata/failures.json",
+    "readme_contracts": "metadata/readme.contracts.json",
+    "migration": "metadata/migration.v2-to-v3.json",
+    "legacy_source": "metadata/legacy/curriculum.v2.json"
+  },
+  "quality_gates": [
+    "schema-valid",
+    "graph-valid",
+    "prerequisite-closure-valid",
+    "project-binding-valid",
+    "no-placeholder-zm",
+    "assessment-completeness",
+    "unique-tags",
+    "crossrefs-valid",
+    "no-orphan-core-items",
+    "all-prerequisites-exist",
+    "implemented-items-have-readmes",
+    "implemented-items-have-run-or-test-command",
+    "projects-have-rubrics",
+    "lessons-have-zero-magic-contract",
+    "future-concepts-have-preview-only",
+    "electives-do-not-block-core",
+    "legacy-v2-is-not-authoritative",
+    "starter-solution-parity",
+    "no-broken-internal-links",
+    "readme-required-headings-valid",
+    "readme-level-purpose-valid",
+    "readme-crossrefs-rendered-with-human-titles",
+    "readme-no-generic-zero-magic-placeholders",
+    "readme-no-stale-v2-section-labels",
+    "readme-next-step-valid",
+    "readme-module-map-generated-from-curriculum",
+    "readme-project-rubric-present",
+    "readme-assessment-evidence-present",
+    "readme-preview-only-required-for-future-concepts",
+    "readme-no-elective-blocks-core",
+    "readme-no-broken-human-readable-links",
+    "project-graph-valid",
+    "schema-version-3.1.0",
+    "assessment-criteria-ids-match-module",
+    "crossref-entity-domains-valid",
+    "project-module-id-matches-reinforces-prefix",
+    "zero-magic-semantic-quality"
+  ],
+  "validation_commands": {
+    "metadata": "go run ./tools/validate/curriculum validate-metadata",
+    "repository": "go run ./tools/validate/curriculum validate-repository --strict-repository",
+    "all": "go run ./tools/validate/curriculum validate-all --strict-repository",
+    "completion_audit": "python3 tools/audit/audit_completion.py --metadata-dir metadata --curriculum-dir curriculum --output dist/completion-report.json"
+  },
+  "schema_version_policy": {
+    "active_version": "3.1.0",
+    "legacy_version": "3.0.0",
+    "rule": "All new and edited files must use schema_version 3.1.0. Files at 3.0.0 are accepted for reads only. Validators must reject writing 3.1.0-only fields into 3.0.0 files.",
+    "3.1.0_new_fields": {
+      "projects": [
+        "placement_anchor_item_id",
+        "prerequisite_item_ids",
+        "required_concepts",
+        "reinforcement_targets"
+      ],
+      "document_types": [
+        "concept_ownership_registry"
+      ]
+    }
+  },
+  "legacy_inputs": [
+    {
+      "path": "metadata/legacy/curriculum.v2.lock.json",
+      "sha256": "e429366ee3b24b88ae8bc8a3a650362fa6e2087495f0728152aaac66c0cdf2fb",
+      "purpose": "Frozen v2 migration input."
+    }
+  ],
+  "repository_layout": {
+    "metadata": "metadata/",
+    "curriculum": "curriculum/",
+    "tools": "tools/",
+    "docs": "docs/",
+    "dist": "dist/",
+    "module_content_pattern": "curriculum/modules/{module}/{lessons|labs|projects|assessments}/{item}/",
+    "elective_content_pattern": "curriculum/electives/{elective}/{lessons|labs|projects|assessments}/{item}/"
+  },
+  "forbidden_folder_names": [
+    "codex",
+    "ai",
+    "agent",
+    "bot",
+    "llm"
+  ],
+  "root_cleanup_policy": {
+    "allowed_root_files": [
+      "README.md",
+      "go.mod",
+      "go.sum",
+      ".gitignore",
+      "LICENSE",
+      "Makefile"
+    ],
+    "forbidden_root_files": [
+      "AGENTS.md",
+      ".env"
+    ],
+    "legacy_docs_location": "docs/legacy-v2/"
+  }
+}

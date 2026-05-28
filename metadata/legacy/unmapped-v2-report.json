@@ -1,0 +1,2167 @@
+{
+  "schema_version": "1.0.0",
+  "document_type": "legacy_unmapped_report",
+  "curriculum_version": "3.1.0",
+  "last_updated": "2026-05-29",
+  "source_path": "metadata/legacy/curriculum.v2.lock.json",
+  "source_sha256": "e429366ee3b24b88ae8bc8a3a650362fa6e2087495f0728152aaac66c0cdf2fb",
+  "source_item_count": 215,
+  "directly_mapped_count": 83,
+  "policy_covered_count": 132,
+  "unmapped_count": 0,
+  "unmapped_items": [],
+  "coverage_entries": [
+    {
+      "source_id": "HC.1",
+      "source_title": "What is a program?",
+      "source_section_id": "s00",
+      "outcome": "direct",
+      "target_ids": [
+        "core-01-01"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "HC.2",
+      "source_title": "How code becomes execution",
+      "source_section_id": "s00",
+      "outcome": "rewrite",
+      "target_module_id": "module-01",
+      "target_path": "curriculum/modules/01-computers-terminal-git-web",
+      "coverage_status": "covered-by-policy",
+      "reason": "Machine and OS concepts are rewritten into Computers, Terminal, Git, and the Web."
+    },
+    {
+      "source_id": "HC.3",
+      "source_title": "Memory basics - stack vs heap",
+      "source_section_id": "s00",
+      "outcome": "direct",
+      "target_ids": [
+        "core-01-08"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "HC.4",
+      "source_title": "Terminal confidence",
+      "source_section_id": "s00",
+      "outcome": "rewrite",
+      "target_module_id": "module-01",
+      "target_path": "curriculum/modules/01-computers-terminal-git-web",
+      "coverage_status": "covered-by-policy",
+      "reason": "Machine and OS concepts are rewritten into Computers, Terminal, Git, and the Web."
+    },
+    {
+      "source_id": "HC.5",
+      "source_title": "How the OS manages processes",
+      "source_section_id": "s00",
+      "outcome": "direct",
+      "target_ids": [
+        "core-01-07"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "GT.1",
+      "source_title": "Installation Verification",
+      "source_section_id": "s01",
+      "outcome": "direct",
+      "target_ids": [
+        "core-02-01"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "GT.2",
+      "source_title": "Hello World",
+      "source_section_id": "s01",
+      "outcome": "direct",
+      "target_ids": [
+        "core-02-02"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "GT.3",
+      "source_title": "How Go Works",
+      "source_section_id": "s01",
+      "outcome": "rewrite",
+      "target_module_id": "module-02",
+      "target_path": "curriculum/modules/02-go-setup-tooling",
+      "coverage_status": "covered-by-policy",
+      "reason": "Go setup concepts are rewritten into Go Setup and Tooling."
+    },
+    {
+      "source_id": "GT.4",
+      "source_title": "Development Environment",
+      "source_section_id": "s01",
+      "outcome": "rewrite",
+      "target_module_id": "module-02",
+      "target_path": "curriculum/modules/02-go-setup-tooling",
+      "coverage_status": "covered-by-policy",
+      "reason": "Go setup concepts are rewritten into Go Setup and Tooling."
+    },
+    {
+      "source_id": "GT.5",
+      "source_title": "go fmt, go vet, go doc",
+      "source_section_id": "s01",
+      "outcome": "rewrite",
+      "target_module_id": "module-02",
+      "target_path": "curriculum/modules/02-go-setup-tooling",
+      "coverage_status": "covered-by-policy",
+      "reason": "Go setup concepts are rewritten into Go Setup and Tooling."
+    },
+    {
+      "source_id": "GT.6",
+      "source_title": "Reading compiler errors",
+      "source_section_id": "s01",
+      "outcome": "direct",
+      "target_ids": [
+        "core-02-10"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "LB.1",
+      "source_title": "Variables and Types",
+      "source_section_id": "s02",
+      "outcome": "direct",
+      "target_ids": [
+        "core-03-02"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "LB.2",
+      "source_title": "Constants",
+      "source_section_id": "s02",
+      "outcome": "direct",
+      "target_ids": [
+        "core-03-06"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "LB.3",
+      "source_title": "Enums with iota",
+      "source_section_id": "s02",
+      "outcome": "direct",
+      "target_ids": [
+        "core-03-07"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "LB.4",
+      "source_title": "Application Logger",
+      "source_section_id": "s02",
+      "outcome": "rewrite",
+      "target_module_id": "module-03",
+      "target_path": "curriculum/modules/03-programming-fundamentals",
+      "coverage_status": "covered-by-policy",
+      "reason": "Language basics are rewritten into Programming Fundamentals with Go."
+    },
+    {
+      "source_id": "CF.1",
+      "source_title": "If / Else",
+      "source_section_id": "s02",
+      "outcome": "direct",
+      "target_ids": [
+        "core-03-09"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CF.2",
+      "source_title": "For Basics",
+      "source_section_id": "s02",
+      "outcome": "rewrite",
+      "target_module_id": "module-03",
+      "target_path": "curriculum/modules/03-programming-fundamentals",
+      "coverage_status": "covered-by-policy",
+      "reason": "Control-flow basics are rewritten into Programming Fundamentals with Go, with defer/panic depth moved later."
+    },
+    {
+      "source_id": "CF.3",
+      "source_title": "Break / Continue",
+      "source_section_id": "s02",
+      "outcome": "rewrite",
+      "target_module_id": "module-03",
+      "target_path": "curriculum/modules/03-programming-fundamentals",
+      "coverage_status": "covered-by-policy",
+      "reason": "Control-flow basics are rewritten into Programming Fundamentals with Go, with defer/panic depth moved later."
+    },
+    {
+      "source_id": "CF.4",
+      "source_title": "Switch",
+      "source_section_id": "s02",
+      "outcome": "direct",
+      "target_ids": [
+        "core-03-10"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CF.5",
+      "source_title": "Defer - mechanics & order",
+      "source_section_id": "s02",
+      "outcome": "rewrite",
+      "target_module_id": "module-03",
+      "target_path": "curriculum/modules/03-programming-fundamentals",
+      "coverage_status": "covered-by-policy",
+      "reason": "Control-flow basics are rewritten into Programming Fundamentals with Go, with defer/panic depth moved later."
+    },
+    {
+      "source_id": "CF.6",
+      "source_title": "Defer in real use cases",
+      "source_section_id": "s02",
+      "outcome": "rewrite",
+      "target_module_id": "module-03",
+      "target_path": "curriculum/modules/03-programming-fundamentals",
+      "coverage_status": "covered-by-policy",
+      "reason": "Control-flow basics are rewritten into Programming Fundamentals with Go, with defer/panic depth moved later."
+    },
+    {
+      "source_id": "CF.7",
+      "source_title": "Pricing Checkout",
+      "source_section_id": "s02",
+      "outcome": "rewrite",
+      "target_module_id": "module-03",
+      "target_path": "curriculum/modules/03-programming-fundamentals",
+      "coverage_status": "covered-by-policy",
+      "reason": "Control-flow basics are rewritten into Programming Fundamentals with Go, with defer/panic depth moved later."
+    },
+    {
+      "source_id": "DS.1",
+      "source_title": "Arrays",
+      "source_section_id": "s02",
+      "outcome": "direct",
+      "target_ids": [
+        "core-03-13"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DS.2",
+      "source_title": "Slices",
+      "source_section_id": "s02",
+      "outcome": "direct",
+      "target_ids": [
+        "core-03-14"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DS.3",
+      "source_title": "Maps",
+      "source_section_id": "s02",
+      "outcome": "direct",
+      "target_ids": [
+        "core-03-17"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DS.4",
+      "source_title": "Pointers",
+      "source_section_id": "s02",
+      "outcome": "direct",
+      "target_ids": [
+        "core-03-22"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DS.5",
+      "source_title": "Slice Sharing and Capacity",
+      "source_section_id": "s02",
+      "outcome": "rewrite",
+      "target_module_id": "module-03",
+      "target_path": "curriculum/modules/03-programming-fundamentals",
+      "coverage_status": "covered-by-policy",
+      "reason": "Data-structure basics are rewritten into Programming Fundamentals with Go."
+    },
+    {
+      "source_id": "DS.6",
+      "source_title": "Contact Directory",
+      "source_section_id": "s02",
+      "outcome": "rewrite",
+      "target_module_id": "module-03",
+      "target_path": "curriculum/modules/03-programming-fundamentals",
+      "coverage_status": "covered-by-policy",
+      "reason": "Data-structure basics are rewritten into Programming Fundamentals with Go."
+    },
+    {
+      "source_id": "FE.1",
+      "source_title": "Functions Basics",
+      "source_section_id": "s03",
+      "outcome": "direct",
+      "target_ids": [
+        "core-04-01"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "FE.2",
+      "source_title": "Parameters and Returns",
+      "source_section_id": "s03",
+      "outcome": "rewrite",
+      "target_module_id": "module-04",
+      "target_path": "curriculum/modules/04-functions-errors-data-semantics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Functions and errors are rewritten into Functions, Errors, and Data Semantics."
+    },
+    {
+      "source_id": "FE.3",
+      "source_title": "Multiple Return Values",
+      "source_section_id": "s03",
+      "outcome": "rewrite",
+      "target_module_id": "module-04",
+      "target_path": "curriculum/modules/04-functions-errors-data-semantics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Functions and errors are rewritten into Functions, Errors, and Data Semantics."
+    },
+    {
+      "source_id": "FE.4",
+      "source_title": "Errors as Values",
+      "source_section_id": "s03",
+      "outcome": "direct",
+      "target_ids": [
+        "core-04-09"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "FE.5",
+      "source_title": "Validation",
+      "source_section_id": "s03",
+      "outcome": "direct",
+      "target_ids": [
+        "core-04-13"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "FE.6",
+      "source_title": "Orchestration",
+      "source_section_id": "s03",
+      "outcome": "rewrite",
+      "target_module_id": "module-04",
+      "target_path": "curriculum/modules/04-functions-errors-data-semantics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Functions and errors are rewritten into Functions, Errors, and Data Semantics."
+    },
+    {
+      "source_id": "FE.7",
+      "source_title": "Order Summary",
+      "source_section_id": "s03",
+      "outcome": "rewrite",
+      "target_module_id": "module-04",
+      "target_path": "curriculum/modules/04-functions-errors-data-semantics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Functions and errors are rewritten into Functions, Errors, and Data Semantics."
+    },
+    {
+      "source_id": "FE.8",
+      "source_title": "First-class functions",
+      "source_section_id": "s03",
+      "outcome": "rewrite",
+      "target_module_id": "module-04",
+      "target_path": "curriculum/modules/04-functions-errors-data-semantics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Functions and errors are rewritten into Functions, Errors, and Data Semantics."
+    },
+    {
+      "source_id": "FE.9",
+      "source_title": "Closures - mechanics",
+      "source_section_id": "s03",
+      "outcome": "rewrite",
+      "target_module_id": "module-04",
+      "target_path": "curriculum/modules/04-functions-errors-data-semantics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Functions and errors are rewritten into Functions, Errors, and Data Semantics."
+    },
+    {
+      "source_id": "FE.10",
+      "source_title": "panic and recover",
+      "source_section_id": "s03",
+      "outcome": "rewrite",
+      "target_module_id": "module-04",
+      "target_path": "curriculum/modules/04-functions-errors-data-semantics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Functions and errors are rewritten into Functions, Errors, and Data Semantics."
+    },
+    {
+      "source_id": "TI.1",
+      "source_title": "Structs",
+      "source_section_id": "s04",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-01"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TI.2",
+      "source_title": "Methods",
+      "source_section_id": "s04",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-02"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TI.3",
+      "source_title": "Interfaces",
+      "source_section_id": "s04",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-08"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TI.4",
+      "source_title": "Interface Embedding",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Core type/interface concepts are rewritten into Types, Interfaces, Packages, and Modules; advanced generics move to electives."
+    },
+    {
+      "source_id": "TI.5",
+      "source_title": "Stringer",
+      "source_section_id": "s04",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-11"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TI.6",
+      "source_title": "Type Switch",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Core type/interface concepts are rewritten into Types, Interfaces, Packages, and Modules; advanced generics move to electives."
+    },
+    {
+      "source_id": "TI.7",
+      "source_title": "Receiver Sets",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Core type/interface concepts are rewritten into Types, Interfaces, Packages, and Modules; advanced generics move to electives."
+    },
+    {
+      "source_id": "TI.8",
+      "source_title": "Custom Error Types",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Core type/interface concepts are rewritten into Types, Interfaces, Packages, and Modules; advanced generics move to electives."
+    },
+    {
+      "source_id": "TI.9",
+      "source_title": "Generics",
+      "source_section_id": "s04",
+      "outcome": "direct",
+      "target_ids": [
+        "elective-01"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TI.10",
+      "source_title": "Payroll Processor Project",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Core type/interface concepts are rewritten into Types, Interfaces, Packages, and Modules; advanced generics move to electives."
+    },
+    {
+      "source_id": "TI.11",
+      "source_title": "Empty interface, assertions, and nil interfaces",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Core type/interface concepts are rewritten into Types, Interfaces, Packages, and Modules; advanced generics move to electives."
+    },
+    {
+      "source_id": "TI.12",
+      "source_title": "Functional Options",
+      "source_section_id": "s04",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "TI.13",
+      "source_title": "Method Values",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Core type/interface concepts are rewritten into Types, Interfaces, Packages, and Modules; advanced generics move to electives."
+    },
+    {
+      "source_id": "TI.14",
+      "source_title": "Complex Generic Constraints",
+      "source_section_id": "s04",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "TI.15",
+      "source_title": "Generic Data Structures",
+      "source_section_id": "s04",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "CO.1",
+      "source_title": "Composition",
+      "source_section_id": "s04",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-06"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CO.2",
+      "source_title": "Embedding",
+      "source_section_id": "s04",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-07"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CO.3",
+      "source_title": "Bank Account Project",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Composition concepts are rewritten into type and package design lessons."
+    },
+    {
+      "source_id": "ST.1",
+      "source_title": "Strings",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "String/text and configuration workflows are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "ST.2",
+      "source_title": "Formatting",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "String/text and configuration workflows are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "ST.3",
+      "source_title": "Unicode and Runes",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "String/text and configuration workflows are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "ST.4",
+      "source_title": "Regex",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "String/text and configuration workflows are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "ST.5",
+      "source_title": "Text Templates",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "String/text and configuration workflows are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "ST.6",
+      "source_title": "Config Parser Project",
+      "source_section_id": "s04",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "String/text and configuration workflows are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "MP.1",
+      "source_title": "Module Basics",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-18"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "MP.2",
+      "source_title": "Managing Dependencies",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-21"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "MP.3",
+      "source_title": "Versioning Workshop",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Module/package concepts are rewritten into Types, Interfaces, Packages, and Modules."
+    },
+    {
+      "source_id": "MP.4",
+      "source_title": "Build Tags",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-05",
+      "target_path": "curriculum/modules/05-types-interfaces-packages-modules",
+      "coverage_status": "covered-by-policy",
+      "reason": "Module/package concepts are rewritten into Types, Interfaces, Packages, and Modules."
+    },
+    {
+      "source_id": "CL.1",
+      "source_title": "Args",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-07-01"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CL.2",
+      "source_title": "Flags",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-07-02"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CL.3",
+      "source_title": "Subcommands",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-07-03"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CL.4",
+      "source_title": "File Organizer",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "CLI concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "EN.1",
+      "source_title": "JSON Marshalling",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-07-12"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "EN.2",
+      "source_title": "JSON Unmarshalling",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-07-13"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "EN.3",
+      "source_title": "JSON Encoder",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "Encoding concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "EN.4",
+      "source_title": "JSON Decoder",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "Encoding concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "EN.5",
+      "source_title": "Base64",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "Encoding concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "EN.6",
+      "source_title": "Config Parser",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "Encoding concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "FS.1",
+      "source_title": "Files",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-07-07"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "FS.2",
+      "source_title": "Paths",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-07-08"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "FS.3",
+      "source_title": "Directories",
+      "source_section_id": "s05",
+      "outcome": "direct",
+      "target_ids": [
+        "core-07-09"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "FS.4",
+      "source_title": "Temp Files",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "Filesystem concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "FS.5",
+      "source_title": "Embed",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "Filesystem concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "FS.6",
+      "source_title": "I/O Patterns",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "Filesystem concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "FS.7",
+      "source_title": "Log Search",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "Filesystem concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "FS.8",
+      "source_title": "fs.FS Testing Seam",
+      "source_section_id": "s05",
+      "outcome": "rewrite",
+      "target_module_id": "module-07",
+      "target_path": "curriculum/modules/07-cli-files-json-config",
+      "coverage_status": "covered-by-policy",
+      "reason": "Filesystem concepts are rewritten into CLI, Files, JSON, and Config."
+    },
+    {
+      "source_id": "HS.1",
+      "source_title": "net/http basics",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-08-02"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "HS.2",
+      "source_title": "Routing patterns",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-08",
+      "target_path": "curriculum/modules/08-http-rest-apis",
+      "coverage_status": "covered-by-policy",
+      "reason": "HTTP server concepts are rewritten into HTTP and REST APIs."
+    },
+    {
+      "source_id": "HS.3",
+      "source_title": "Middleware - the pattern",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-08-10"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "HS.4",
+      "source_title": "Request parsing and validation",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-08",
+      "target_path": "curriculum/modules/08-http-rest-apis",
+      "coverage_status": "covered-by-policy",
+      "reason": "HTTP server concepts are rewritten into HTTP and REST APIs."
+    },
+    {
+      "source_id": "HS.5",
+      "source_title": "Response writing patterns",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-08",
+      "target_path": "curriculum/modules/08-http-rest-apis",
+      "coverage_status": "covered-by-policy",
+      "reason": "HTTP server concepts are rewritten into HTTP and REST APIs."
+    },
+    {
+      "source_id": "HS.6",
+      "source_title": "Error handling middleware",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-08",
+      "target_path": "curriculum/modules/08-http-rest-apis",
+      "coverage_status": "covered-by-policy",
+      "reason": "HTTP server concepts are rewritten into HTTP and REST APIs."
+    },
+    {
+      "source_id": "HS.7",
+      "source_title": "Server timeouts",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-08",
+      "target_path": "curriculum/modules/08-http-rest-apis",
+      "coverage_status": "covered-by-policy",
+      "reason": "HTTP server concepts are rewritten into HTTP and REST APIs."
+    },
+    {
+      "source_id": "HS.8",
+      "source_title": "Graceful HTTP shutdown",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-08-15"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "HS.9",
+      "source_title": "Health and readiness probes",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-08-16"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "HS.10",
+      "source_title": "REST API",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-08",
+      "target_path": "curriculum/modules/08-http-rest-apis",
+      "coverage_status": "covered-by-policy",
+      "reason": "HTTP server concepts are rewritten into HTTP and REST APIs."
+    },
+    {
+      "source_id": "API.1",
+      "source_title": "REST design principles",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-08-01",
+        "core-08-17"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "API.2",
+      "source_title": "API versioning strategies",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-08-18"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "API.3",
+      "source_title": "Pagination and filtering",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-08-19"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "API.4",
+      "source_title": "Protobuf basics",
+      "source_section_id": "s06",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "API.5",
+      "source_title": "gRPC fundamentals",
+      "source_section_id": "s06",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "API.6",
+      "source_title": "gRPC streaming",
+      "source_section_id": "s06",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "API.7",
+      "source_title": "gRPC interceptors",
+      "source_section_id": "s06",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "API.8",
+      "source_title": "REST vs gRPC - the trade-off",
+      "source_section_id": "s06",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "API.9",
+      "source_title": "gRPC Service",
+      "source_section_id": "s06",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "DB.1",
+      "source_title": "Connecting to SQLite",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-09-10"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DB.2",
+      "source_title": "Executing Queries (INSERT)",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-09",
+      "target_path": "curriculum/modules/09-sql-postgres-persistence",
+      "coverage_status": "covered-by-policy",
+      "reason": "Database concepts are rewritten into SQL and PostgreSQL Persistence."
+    },
+    {
+      "source_id": "DB.3",
+      "source_title": "Select Queries",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-09",
+      "target_path": "curriculum/modules/09-sql-postgres-persistence",
+      "coverage_status": "covered-by-policy",
+      "reason": "Database concepts are rewritten into SQL and PostgreSQL Persistence."
+    },
+    {
+      "source_id": "DB.4",
+      "source_title": "Prepared Statements",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-09-16"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DB.5",
+      "source_title": "Transactions",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-09-17"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DB.6",
+      "source_title": "Repository Pattern Project",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-09",
+      "target_path": "curriculum/modules/09-sql-postgres-persistence",
+      "coverage_status": "covered-by-policy",
+      "reason": "Database concepts are rewritten into SQL and PostgreSQL Persistence."
+    },
+    {
+      "source_id": "DB.7",
+      "source_title": "N+1 query detection",
+      "source_section_id": "s06",
+      "outcome": "rewrite",
+      "target_module_id": "module-09",
+      "target_path": "curriculum/modules/09-sql-postgres-persistence",
+      "coverage_status": "covered-by-policy",
+      "reason": "Database concepts are rewritten into SQL and PostgreSQL Persistence."
+    },
+    {
+      "source_id": "DB.8",
+      "source_title": "Query timeouts via context",
+      "source_section_id": "s06",
+      "outcome": "direct",
+      "target_ids": [
+        "core-09-23"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "GC.0",
+      "source_title": "Why concurrency exists",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Goroutine concepts are rewritten into Lifecycle, Context, and Concurrency."
+    },
+    {
+      "source_id": "GC.1",
+      "source_title": "Goroutines",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-11"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "GC.2",
+      "source_title": "WaitGroups",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-12"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "GC.3",
+      "source_title": "Channels",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-13"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "GC.4",
+      "source_title": "Buffered Channels",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-14"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "GC.5",
+      "source_title": "Closing Channels",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-15"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "GC.6",
+      "source_title": "Pipeline Project",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Goroutine concepts are rewritten into Lifecycle, Context, and Concurrency."
+    },
+    {
+      "source_id": "GC.7",
+      "source_title": "Concurrent Downloader",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Goroutine concepts are rewritten into Lifecycle, Context, and Concurrency."
+    },
+    {
+      "source_id": "SY.1",
+      "source_title": "sync.Mutex and RWMutex",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-19"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SY.2",
+      "source_title": "sync.Once and sync.Map",
+      "source_section_id": "s07",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "SY.3",
+      "source_title": "Atomic operations",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Synchronization concepts are rewritten into Lifecycle, Context, and Concurrency."
+    },
+    {
+      "source_id": "SY.4",
+      "source_title": "Race conditions",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-21"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SY.5",
+      "source_title": "Goroutine leaks",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-23"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SY.6",
+      "source_title": "Deadlocks",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-24"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CT.1",
+      "source_title": "Background and TODO",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-05"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CT.2",
+      "source_title": "WithCancel",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-06"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CT.3",
+      "source_title": "WithTimeout and WithDeadline",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-07"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "CT.4",
+      "source_title": "WithValue",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Context concepts are rewritten into Lifecycle, Context, and Concurrency."
+    },
+    {
+      "source_id": "CT.5",
+      "source_title": "Timeout-Aware API Client",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Context concepts are rewritten into Lifecycle, Context, and Concurrency."
+    },
+    {
+      "source_id": "TM.1",
+      "source_title": "Time Basics",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-01"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TM.2",
+      "source_title": "Time Formatting",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Time and timeout concepts are rewritten into Lifecycle, Context, and Concurrency."
+    },
+    {
+      "source_id": "TM.3",
+      "source_title": "Timers and Tickers",
+      "source_section_id": "s07",
+      "outcome": "direct",
+      "target_ids": [
+        "core-11-03"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TM.7",
+      "source_title": "Console Reminder",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Time and timeout concepts are rewritten into Lifecycle, Context, and Concurrency."
+    },
+    {
+      "source_id": "CP.1",
+      "source_title": "errgroup Basics",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Concurrency patterns are rewritten into Lifecycle, Context, and Concurrency; specialized patterns may move to electives."
+    },
+    {
+      "source_id": "CP.2",
+      "source_title": "errgroup with Context Cancellation",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Concurrency patterns are rewritten into Lifecycle, Context, and Concurrency; specialized patterns may move to electives."
+    },
+    {
+      "source_id": "CP.3",
+      "source_title": "sync.Pool",
+      "source_section_id": "s07",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "CP.4",
+      "source_title": "Bounded Pipeline Exercise",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Concurrency patterns are rewritten into Lifecycle, Context, and Concurrency; specialized patterns may move to electives."
+    },
+    {
+      "source_id": "CP.5",
+      "source_title": "URL Health Checker",
+      "source_section_id": "s07",
+      "outcome": "rewrite",
+      "target_module_id": "module-11",
+      "target_path": "curriculum/modules/11-lifecycle-context-concurrency",
+      "coverage_status": "covered-by-policy",
+      "reason": "Concurrency patterns are rewritten into Lifecycle, Context, and Concurrency; specialized patterns may move to electives."
+    },
+    {
+      "source_id": "TE.1",
+      "source_title": "Unit Testing",
+      "source_section_id": "s08",
+      "outcome": "direct",
+      "target_ids": [
+        "core-06-02"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TE.2",
+      "source_title": "Table-Driven Tests",
+      "source_section_id": "s08",
+      "outcome": "direct",
+      "target_ids": [
+        "core-06-03"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TE.3",
+      "source_title": "HTTP Handler Testing",
+      "source_section_id": "s08",
+      "outcome": "direct",
+      "target_ids": [
+        "core-08-12"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TE.4",
+      "source_title": "Benchmarking",
+      "source_section_id": "s08",
+      "outcome": "rewrite",
+      "target_module_id": "module-06",
+      "target_path": "curriculum/modules/06-testing-debugging-refactoring",
+      "coverage_status": "covered-by-policy",
+      "reason": "Testing concepts are moved earlier into Testing, Debugging, and Refactoring."
+    },
+    {
+      "source_id": "TE.5",
+      "source_title": "Sub-tests and t.Cleanup",
+      "source_section_id": "s08",
+      "outcome": "rewrite",
+      "target_module_id": "module-06",
+      "target_path": "curriculum/modules/06-testing-debugging-refactoring",
+      "coverage_status": "covered-by-policy",
+      "reason": "Testing concepts are moved earlier into Testing, Debugging, and Refactoring."
+    },
+    {
+      "source_id": "TE.6",
+      "source_title": "Fuzz testing",
+      "source_section_id": "s08",
+      "outcome": "direct",
+      "target_ids": [
+        "core-06-20"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TE.7",
+      "source_title": "Interfaces for testability",
+      "source_section_id": "s08",
+      "outcome": "rewrite",
+      "target_module_id": "module-06",
+      "target_path": "curriculum/modules/06-testing-debugging-refactoring",
+      "coverage_status": "covered-by-policy",
+      "reason": "Testing concepts are moved earlier into Testing, Debugging, and Refactoring."
+    },
+    {
+      "source_id": "TE.8",
+      "source_title": "Mocking with interfaces",
+      "source_section_id": "s08",
+      "outcome": "rewrite",
+      "target_module_id": "module-06",
+      "target_path": "curriculum/modules/06-testing-debugging-refactoring",
+      "coverage_status": "covered-by-policy",
+      "reason": "Testing concepts are moved earlier into Testing, Debugging, and Refactoring."
+    },
+    {
+      "source_id": "TE.9",
+      "source_title": "Integration tests",
+      "source_section_id": "s08",
+      "outcome": "direct",
+      "target_ids": [
+        "core-09-25"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "TE.10",
+      "source_title": "Golden files",
+      "source_section_id": "s08",
+      "outcome": "direct",
+      "target_ids": [
+        "core-06-07"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "PR.1",
+      "source_title": "CPU Profile",
+      "source_section_id": "s08",
+      "outcome": "direct",
+      "target_ids": [
+        "core-13-02"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "PR.2",
+      "source_title": "Live pprof Endpoint",
+      "source_section_id": "s08",
+      "outcome": "rewrite",
+      "target_module_id": "module-13",
+      "target_path": "curriculum/modules/13-performance-memory-engineering",
+      "coverage_status": "covered-by-policy",
+      "reason": "Profiling/performance concepts are rewritten into Performance and Memory Engineering."
+    },
+    {
+      "source_id": "PR.3",
+      "source_title": "Memory profiling",
+      "source_section_id": "s08",
+      "outcome": "direct",
+      "target_ids": [
+        "core-13-03"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "PR.4",
+      "source_title": "Escape analysis",
+      "source_section_id": "s08",
+      "outcome": "direct",
+      "target_ids": [
+        "core-13-05"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "PR.5",
+      "source_title": "Benchmark-driven development",
+      "source_section_id": "s08",
+      "outcome": "rewrite",
+      "target_module_id": "module-13",
+      "target_path": "curriculum/modules/13-performance-memory-engineering",
+      "coverage_status": "covered-by-policy",
+      "reason": "Profiling/performance concepts are rewritten into Performance and Memory Engineering."
+    },
+    {
+      "source_id": "PR.6",
+      "source_title": "Why memory layout matters",
+      "source_section_id": "s08",
+      "outcome": "rewrite",
+      "target_module_id": "module-13",
+      "target_path": "curriculum/modules/13-performance-memory-engineering",
+      "coverage_status": "covered-by-policy",
+      "reason": "Profiling/performance concepts are rewritten into Performance and Memory Engineering."
+    },
+    {
+      "source_id": "PD.1",
+      "source_title": "Naming Conventions",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-15"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "PD.2",
+      "source_title": "Visibility and Export Rules",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-16"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "PD.3",
+      "source_title": "Project Layout",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-05-17"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "ARCH.1",
+      "source_title": "Monolith vs Modular Monolith vs Microservices",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-14",
+      "target_path": "curriculum/modules/14-architecture-distributed-systems",
+      "coverage_status": "covered-by-policy",
+      "reason": "Architecture concepts are rewritten into Architecture and Distributed Systems."
+    },
+    {
+      "source_id": "ARCH.2",
+      "source_title": "Domain-Driven Design basics",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-14",
+      "target_path": "curriculum/modules/14-architecture-distributed-systems",
+      "coverage_status": "covered-by-policy",
+      "reason": "Architecture concepts are rewritten into Architecture and Distributed Systems."
+    },
+    {
+      "source_id": "ARCH.3",
+      "source_title": "Hexagonal architecture in Go",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-14",
+      "target_path": "curriculum/modules/14-architecture-distributed-systems",
+      "coverage_status": "covered-by-policy",
+      "reason": "Architecture concepts are rewritten into Architecture and Distributed Systems."
+    },
+    {
+      "source_id": "ARCH.4",
+      "source_title": "Repository pattern - deep dive",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-14",
+      "target_path": "curriculum/modules/14-architecture-distributed-systems",
+      "coverage_status": "covered-by-policy",
+      "reason": "Architecture concepts are rewritten into Architecture and Distributed Systems."
+    },
+    {
+      "source_id": "ARCH.5",
+      "source_title": "Service layer pattern",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-14",
+      "target_path": "curriculum/modules/14-architecture-distributed-systems",
+      "coverage_status": "covered-by-policy",
+      "reason": "Architecture concepts are rewritten into Architecture and Distributed Systems."
+    },
+    {
+      "source_id": "ARCH.6",
+      "source_title": "Event-driven architecture",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-14",
+      "target_path": "curriculum/modules/14-architecture-distributed-systems",
+      "coverage_status": "covered-by-policy",
+      "reason": "Architecture concepts are rewritten into Architecture and Distributed Systems."
+    },
+    {
+      "source_id": "ARCH.7",
+      "source_title": "CQRS basics",
+      "source_section_id": "s09",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "ARCH.8",
+      "source_title": "When to split services",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-14",
+      "target_path": "curriculum/modules/14-architecture-distributed-systems",
+      "coverage_status": "covered-by-policy",
+      "reason": "Architecture concepts are rewritten into Architecture and Distributed Systems."
+    },
+    {
+      "source_id": "ARCH.9",
+      "source_title": "Modular Refactor",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-14",
+      "target_path": "curriculum/modules/14-architecture-distributed-systems",
+      "coverage_status": "covered-by-policy",
+      "reason": "Architecture concepts are rewritten into Architecture and Distributed Systems."
+    },
+    {
+      "source_id": "SEC.1",
+      "source_title": "Input validation patterns",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-10-01"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SEC.2",
+      "source_title": "SQL injection prevention",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-10-14"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SEC.3",
+      "source_title": "XSS and CSRF",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-10-15",
+        "core-10-16"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SEC.4",
+      "source_title": "Authentication basics",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-10",
+      "target_path": "curriculum/modules/10-auth-security",
+      "coverage_status": "covered-by-policy",
+      "reason": "Security concepts are rewritten into Authentication and Security."
+    },
+    {
+      "source_id": "SEC.5",
+      "source_title": "JWT - implementation and risks",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-10",
+      "target_path": "curriculum/modules/10-auth-security",
+      "coverage_status": "covered-by-policy",
+      "reason": "Security concepts are rewritten into Authentication and Security."
+    },
+    {
+      "source_id": "SEC.6",
+      "source_title": "Password hashing",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-10-05"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SEC.7",
+      "source_title": "Rate limiting patterns",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-10-18"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SEC.8",
+      "source_title": "TLS and HTTPS in Go",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-10-19"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SEC.9",
+      "source_title": "Secrets management",
+      "source_section_id": "s09",
+      "outcome": "direct",
+      "target_ids": [
+        "core-10-20"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SEC.10",
+      "source_title": "OWASP Top 10 for Go",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-10",
+      "target_path": "curriculum/modules/10-auth-security",
+      "coverage_status": "covered-by-policy",
+      "reason": "Security concepts are rewritten into Authentication and Security."
+    },
+    {
+      "source_id": "SEC.11",
+      "source_title": "Secure API",
+      "source_section_id": "s09",
+      "outcome": "rewrite",
+      "target_module_id": "module-10",
+      "target_path": "curriculum/modules/10-auth-security",
+      "coverage_status": "covered-by-policy",
+      "reason": "Security concepts are rewritten into Authentication and Security."
+    },
+    {
+      "source_id": "SL.1",
+      "source_title": "slog Basics",
+      "source_section_id": "s10",
+      "outcome": "direct",
+      "target_ids": [
+        "core-12-02"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "SL.2",
+      "source_title": "Context-Keyed Logger",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-12",
+      "target_path": "curriculum/modules/12-observability-diagnostics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Structured logging is rewritten into Observability and Monitoring."
+    },
+    {
+      "source_id": "SL.3",
+      "source_title": "Custom slog Handler",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-12",
+      "target_path": "curriculum/modules/12-observability-diagnostics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Structured logging is rewritten into Observability and Monitoring."
+    },
+    {
+      "source_id": "SL.4",
+      "source_title": "zerolog Comparison",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-12",
+      "target_path": "curriculum/modules/12-observability-diagnostics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Structured logging is rewritten into Observability and Monitoring."
+    },
+    {
+      "source_id": "SL.5",
+      "source_title": "PII Redactor",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-12",
+      "target_path": "curriculum/modules/12-observability-diagnostics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Structured logging is rewritten into Observability and Monitoring."
+    },
+    {
+      "source_id": "GS.1",
+      "source_title": "signal NotifyContext",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Graceful shutdown/deployment runtime concepts are rewritten into delivery and operations."
+    },
+    {
+      "source_id": "GS.2",
+      "source_title": "HTTP Graceful Drain",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Graceful shutdown/deployment runtime concepts are rewritten into delivery and operations."
+    },
+    {
+      "source_id": "GS.3",
+      "source_title": "Shutdown Capstone",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Graceful shutdown/deployment runtime concepts are rewritten into delivery and operations."
+    },
+    {
+      "source_id": "CFG.1",
+      "source_title": "Environment variables",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Configuration concepts are rewritten into deployment configuration and delivery practice."
+    },
+    {
+      "source_id": "CFG.2",
+      "source_title": "Configuration files",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Configuration concepts are rewritten into deployment configuration and delivery practice."
+    },
+    {
+      "source_id": "CFG.3",
+      "source_title": "Flag parsing",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Configuration concepts are rewritten into deployment configuration and delivery practice."
+    },
+    {
+      "source_id": "CFG.4",
+      "source_title": "12-Factor App principles",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Configuration concepts are rewritten into deployment configuration and delivery practice."
+    },
+    {
+      "source_id": "CFG.5",
+      "source_title": "Config validation on boot",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Configuration concepts are rewritten into deployment configuration and delivery practice."
+    },
+    {
+      "source_id": "OPS.1",
+      "source_title": "Metrics basics",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-12",
+      "target_path": "curriculum/modules/12-observability-diagnostics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Operational concepts are rewritten into Observability and Monitoring."
+    },
+    {
+      "source_id": "OPS.2",
+      "source_title": "Prometheus integration",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-12",
+      "target_path": "curriculum/modules/12-observability-diagnostics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Operational concepts are rewritten into Observability and Monitoring."
+    },
+    {
+      "source_id": "OPS.3",
+      "source_title": "Distributed tracing basics",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-12",
+      "target_path": "curriculum/modules/12-observability-diagnostics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Operational concepts are rewritten into Observability and Monitoring."
+    },
+    {
+      "source_id": "OPS.4",
+      "source_title": "Feature flags",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-12",
+      "target_path": "curriculum/modules/12-observability-diagnostics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Operational concepts are rewritten into Observability and Monitoring."
+    },
+    {
+      "source_id": "OPS.5",
+      "source_title": "Alerting mindset",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-12",
+      "target_path": "curriculum/modules/12-observability-diagnostics",
+      "coverage_status": "covered-by-policy",
+      "reason": "Operational concepts are rewritten into Observability and Monitoring."
+    },
+    {
+      "source_id": "DOCKER.1",
+      "source_title": "Docker basics",
+      "source_section_id": "s10",
+      "outcome": "direct",
+      "target_ids": [
+        "core-15-06"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DOCKER.2",
+      "source_title": "Multi-stage builds",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Docker concepts are rewritten into Containerization, CI/CD, and Deployment."
+    },
+    {
+      "source_id": "DOCKER.3",
+      "source_title": "Docker Compose",
+      "source_section_id": "s10",
+      "outcome": "direct",
+      "target_ids": [
+        "core-15-09"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DEPLOY.1",
+      "source_title": "CI/CD pipelines",
+      "source_section_id": "s10",
+      "outcome": "direct",
+      "target_ids": [
+        "core-15-12"
+      ],
+      "coverage_status": "covered"
+    },
+    {
+      "source_id": "DEPLOY.2",
+      "source_title": "Blue/green and rollback",
+      "source_section_id": "s10",
+      "outcome": "move-to-elective",
+      "target_module_id": "module-17",
+      "target_path": "curriculum/electives/advanced-electives",
+      "coverage_status": "covered-by-policy",
+      "reason": "Advanced or specialized v2 content is preserved as elective material so it does not block the beginner-to-engineer core path."
+    },
+    {
+      "source_id": "DEPLOY.3",
+      "source_title": "Dockerised Service",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Core deployment concepts remain in delivery; advanced Kubernetes topics move to electives."
+    },
+    {
+      "source_id": "CG.1",
+      "source_title": "go generate Primer",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Build-time automation concepts are rewritten into delivery tooling where relevant."
+    },
+    {
+      "source_id": "CG.2",
+      "source_title": "Mockery Workflow",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Build-time automation concepts are rewritten into delivery tooling where relevant."
+    },
+    {
+      "source_id": "CG.3",
+      "source_title": "sqlc Workflow",
+      "source_section_id": "s10",
+      "outcome": "rewrite",
+      "target_module_id": "module-15",
+      "target_path": "curriculum/modules/15-docker-cicd-deployment",
+      "coverage_status": "covered-by-policy",
+      "reason": "Build-time automation concepts are rewritten into delivery tooling where relevant."
+    },
+    {
+      "source_id": "OPSL.1",
+      "source_title": "Opslane Foundation and Configuration",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    },
+    {
+      "source_id": "OPSL.2",
+      "source_title": "Opslane Database and Models",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    },
+    {
+      "source_id": "OPSL.3",
+      "source_title": "Opslane Authentication and Tenant Isolation",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    },
+    {
+      "source_id": "OPSL.4",
+      "source_title": "Opslane HTTP API Layer",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    },
+    {
+      "source_id": "OPSL.5",
+      "source_title": "Opslane Order Processing",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    },
+    {
+      "source_id": "OPSL.6",
+      "source_title": "Opslane Payment Pipeline",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    },
+    {
+      "source_id": "OPSL.7",
+      "source_title": "Opslane Event Bus and Worker Pools",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    },
+    {
+      "source_id": "OPSL.8",
+      "source_title": "Opslane Caching Layer",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    },
+    {
+      "source_id": "OPSL.9",
+      "source_title": "Opslane Observability",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    },
+    {
+      "source_id": "OPSL.10",
+      "source_title": "Opslane Graceful Shutdown and Deployment",
+      "source_section_id": "s11",
+      "outcome": "rewrite",
+      "target_module_id": "module-18",
+      "target_path": "curriculum/modules/18-flagship-opslane",
+      "coverage_status": "covered-by-policy",
+      "reason": "Flagship concepts are rewritten into Opslane capstone checkpoints."
+    }
+  ]
+}

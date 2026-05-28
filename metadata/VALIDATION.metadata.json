@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "document_type": "metadata_validation_report",
+  "status": "passed",
+  "validated_at": "2026-05-29",
+  "metadata_files": 15,
+  "summary": {
+    "core_modules": 18,
+    "elective_modules": 1,
+    "core_items": 334,
+    "elective_items": 24,
+    "items_total": 358,
+    "projects": 28,
+    "assessments": 47,
+    "concepts": 52,
+    "crossrefs": 2278,
+    "legacy_v2_items": 215,
+    "legacy_v2_unmapped": 0,
+    "canonical_path_policy": "curriculum/modules|electives/{module}/{lessons|labs|projects|assessments}/{item}/"
+  },
+  "checks": {
+    "json_parse": "passed",
+    "canonical_typed_paths": "passed",
+    "module_paths": "passed",
+    "item_graph": "passed",
+    "project_targets": "passed",
+    "assessment_targets": "passed",
+    "concept_ownership": "passed",
+    "crossref_targets": "passed",
+    "zero_magic_status": "passed",
+    "readme_status": "passed",
+    "legacy_v2_coverage": "passed",
+    "forbidden_folder_policy": "passed"
+  },
+  "errors": []
+}

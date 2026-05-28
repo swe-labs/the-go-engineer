@@ -1,0 +1,97 @@
+name: Validate metadata
+
+on:
+  pull_request:
+    paths:
+      - "metadata/**"
+      - "tools/validate/**"
+      - "go.mod"
+      - "go.sum"
+      - "Makefile"
+      - ".github/workflows/validate-metadata.yml"
+  push:
+    branches: [main]
+    paths:
+      - "metadata/**"
+      - "tools/validate/**"
+      - "go.mod"
+      - "go.sum"
+      - "Makefile"
+      - ".github/workflows/validate-metadata.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-metadata-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-metadata:
+    name: Validate metadata graph and contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify required metadata files exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            metadata/workspace.json
+            metadata/schema.v3.json
+            metadata/path.core.json
+            metadata/path.electives.json
+            metadata/concepts.json
+            metadata/projects.json
+            metadata/assessments.json
+            metadata/crossrefs.json
+            metadata/failures.json
+            metadata/readme.contracts.json
+            metadata/migration.v2-to-v3.json
+          )
+          for file in "${required[@]}"; do
+            test -f "$file" || { echo "::error file=$file::Missing required metadata file"; exit 1; }
+          done
+
+      - name: Check validator formatting
+        shell: bash
+        run: |
+          set -euo pipefail
+          unformatted="$(gofmt -l tools/validate/curriculum 2>/dev/null || true)"
+          if [ -n "$unformatted" ]; then
+            echo "$unformatted"
+            echo "::error::Go validator files must be gofmt-formatted"
+            exit 1
+          fi
+
+      - name: Test validation tooling
+        run: go test ./tools/validate/curriculum/...
+
+      - name: Run metadata validation
+        run: make validate-metadata
+
+      - name: Run optional metadata audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f tools/audit/audit_curriculum.py ]; then
+            python3 tools/audit/audit_curriculum.py --metadata-dir metadata
+          else
+            echo "Optional audit skipped: tools/audit/audit_curriculum.py not found"
+          fi

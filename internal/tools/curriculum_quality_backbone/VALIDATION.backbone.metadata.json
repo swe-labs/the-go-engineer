@@ -1,0 +1,20 @@
+{
+  "profile": "validate-metadata",
+  "root": "/mnt/data/curriculum_quality_backbone",
+  "metadata_dir": "/mnt/data/curriculum_quality_backbone/metadata",
+  "strict_repository": false,
+  "counts": {
+    "assessments": 47,
+    "concepts": 52,
+    "core_items": 334,
+    "core_modules": 18,
+    "elective_items": 24,
+    "elective_modules": 1,
+    "items": 358,
+    "metadata_files": 11,
+    "module_15_items": 19,
+    "modules": 19,
+    "projects": 28
+  },
+  "findings": null
+}

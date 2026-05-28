@@ -1,0 +1,302 @@
+{
+  "schema_version": "3.1.0",
+  "document_type": "readme_contracts",
+  "curriculum_version": "3.1.0-draft.1",
+  "last_updated": "2026-05-23",
+  "name": "The Go Engineer v3 — README Contracts",
+  "status": "stable",
+  "architectural_decision": {
+    "decision": "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
+    "v2_policy": "curriculum.v2.json is frozen legacy import data, not the active source of truth.",
+    "core_rule": "Keep good lessons, break the old path, optimize for learner progression, proof, documentation quality, and job readiness.",
+    "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only."
+  },
+  "contracts": [
+    {
+      "id": "root.v3",
+      "applies_to": "repository-root",
+      "purpose": "Learner front door and curriculum overview with explicit repository layout and proof expectations.",
+      "documentation_mode": "overview",
+      "required_headings": [
+        "What is The Go Engineer?",
+        "Repository layout",
+        "Who this is for",
+        "What you will become able to do",
+        "Core learning path",
+        "Projects and proof system",
+        "How to start",
+        "How to validate your progress",
+        "Advanced electives",
+        "Flagship Opslane",
+        "Contributing and maintenance",
+        "No-placeholder guarantee"
+      ],
+      "generated_sections": [
+        "Core learning path",
+        "Projects and proof system",
+        "Advanced electives"
+      ],
+      "human_written_sections": [
+        "What is The Go Engineer?",
+        "Who this is for",
+        "How to start"
+      ],
+      "validation_rules": []
+    },
+    {
+      "id": "module.v3",
+      "applies_to": "core-module",
+      "purpose": "Module-level learner map.",
+      "documentation_mode": "module-overview",
+      "required_headings": [
+        "Mission",
+        "Why this module exists now",
+        "What you will be able to do",
+        "Before you start",
+        "Directory map",
+        "Module map",
+        "Recommended order",
+        "Projects in this module",
+        "Common mistakes",
+        "Exit checklist",
+        "Assessment",
+        "Next module",
+        "No-placeholder guarantee"
+      ],
+      "generated_sections": [
+        "Module map",
+        "Projects in this module",
+        "Assessment",
+        "Next module"
+      ],
+      "human_written_sections": [
+        "Mission",
+        "Why this module exists now",
+        "Common mistakes"
+      ],
+      "validation_rules": []
+    },
+    {
+      "id": "lesson.v3",
+      "applies_to": "core-lesson",
+      "purpose": "World-class teaching README for a concept or skill.",
+      "applies_when": "The concept is required for the core path and every learner must master it before advancing.",
+      "documentation_mode": "tutorial",
+      "required_headings": [
+        "Mission",
+        "Why this lesson exists now",
+        "Prerequisites",
+        "Connections",
+        "Mental model",
+        "Visual model",
+        "Machine view",
+        "Run instructions",
+        "Verification surface",
+        "Code walkthrough",
+        "Common mistakes",
+        "Try it",
+        "Debugging task",
+        "Code-reading task",
+        "Refactoring task",
+        "In production",
+        "Thinking questions",
+        "Next step",
+        "Proof of understanding",
+        "No hidden magic checklist"
+      ],
+      "generated_sections": [
+        "Prerequisites",
+        "Connections",
+        "Run instructions",
+        "Verification surface",
+        "Next step"
+      ],
+      "human_written_sections": [
+        "Mission",
+        "Mental model",
+        "Machine view",
+        "Code walkthrough",
+        "Common mistakes",
+        "In production"
+      ],
+      "zero_magic_enforcement": {
+        "status_levels": {
+          "placeholder": "Heading scaffold only. No substantive content.",
+          "draft": "Content written but not reviewed for quality or production realism.",
+          "reviewed": "Content reviewed by a senior engineer for technical accuracy.",
+          "golden": "Content passes all validator quality rules and has been tested with learners."
+        },
+        "promotion_policy": "A lesson may only be promoted to golden after: (1) passing validate-no-placeholder-zm with semantic checks enabled, (2) being reviewed by a senior engineer, (3) containing a real production example and real debugging scenario.",
+        "regression_policy": "Any lesson that fails a semantic quality check must be immediately reverted to draft status regardless of previous promotion."
+      },
+      "validation_rules": []
+    },
+    {
+      "id": "elective-lesson.v3",
+      "applies_to": "elective-lesson",
+      "purpose": "Advanced reference/tutorial hybrid that does not block the core path.",
+      "documentation_mode": "reference",
+      "required_headings": [
+        "When you need this",
+        "When you do not need this",
+        "Prerequisites",
+        "Mental model",
+        "How it works",
+        "Go example",
+        "Tradeoffs",
+        "Common mistakes",
+        "Practice task",
+        "Production notes",
+        "Related core lessons",
+        "Proof of understanding",
+        "No hidden magic checklist"
+      ],
+      "generated_sections": [
+        "Prerequisites",
+        "Related core lessons"
+      ],
+      "human_written_sections": [
+        "When you need this",
+        "Tradeoffs",
+        "Production notes"
+      ],
+      "validation_rules": []
+    },
+    {
+      "id": "project.v3",
+      "applies_to": "project",
+      "purpose": "Project README with build requirements, verification, and rubric.",
+      "documentation_mode": "project",
+      "required_headings": [
+        "Project mission",
+        "What you will build",
+        "Prerequisites",
+        "Lessons reinforced",
+        "Requirements",
+        "Operating assumptions",
+        "Step-by-step build plan",
+        "Verification",
+        "Rubric",
+        "Common mistakes",
+        "Stretch goals",
+        "Portfolio notes"
+      ],
+      "generated_sections": [
+        "Prerequisites",
+        "Lessons reinforced",
+        "Rubric"
+      ],
+      "human_written_sections": [
+        "Project mission",
+        "Requirements",
+        "Common mistakes",
+        "Portfolio notes"
+      ],
+      "validation_rules": []
+    },
+    {
+      "id": "assessment.v3",
+      "applies_to": "assessment",
+      "purpose": "Assessment README with evidence and passing criteria.",
+      "documentation_mode": "assessment",
+      "required_headings": [
+        "What this assessment proves",
+        "Required evidence",
+        "Rubric",
+        "Passing score",
+        "Manual review questions",
+        "Retake policy"
+      ],
+      "generated_sections": [
+        "Rubric",
+        "Passing score",
+        "Retake policy"
+      ],
+      "human_written_sections": [
+        "What this assessment proves",
+        "Manual review questions"
+      ],
+      "validation_rules": []
+    },
+    {
+      "id": "flagship.v3",
+      "applies_to": "flagship",
+      "purpose": "Opslane learner front door and graduation proof map.",
+      "documentation_mode": "flagship",
+      "required_headings": [
+        "Flagship mission",
+        "What Opslane proves",
+        "Before you start",
+        "System overview",
+        "Checkpoint map",
+        "Local quickstart",
+        "Required proof",
+        "Security proof",
+        "Observability proof",
+        "Deployment proof",
+        "Portfolio defense",
+        "Production vs educational caveats"
+      ],
+      "generated_sections": [
+        "Before you start",
+        "Checkpoint map",
+        "Required proof"
+      ],
+      "human_written_sections": [
+        "Flagship mission",
+        "System overview",
+        "Production vs educational caveats"
+      ],
+      "validation_rules": []
+    },
+    {
+      "id": "flagship-checkpoint.v3",
+      "applies_to": "flagship-checkpoint",
+      "purpose": "Opslane checkpoint implementation guide.",
+      "documentation_mode": "flagship-checkpoint",
+      "required_headings": [
+        "Checkpoint mission",
+        "Prerequisites",
+        "What you will implement",
+        "Files and packages",
+        "Failure scenarios",
+        "Expected system state",
+        "Required tests",
+        "Security checklist",
+        "Observability checklist",
+        "Reviewer checklist",
+        "Architecture defense questions",
+        "Next checkpoint"
+      ],
+      "generated_sections": [
+        "Prerequisites",
+        "Next checkpoint"
+      ],
+      "human_written_sections": [
+        "Checkpoint mission",
+        "Failure scenarios",
+        "Expected system state",
+        "Architecture defense questions"
+      ],
+      "validation_rules": []
+    }
+  ],
+  "validation_rules": [
+    "Every README must match its declared contract_id.",
+    "Generated sections must be marked with curriculum generated comments.",
+    "Human-written sections must not be overwritten by generators.",
+    "No implemented lesson may keep placeholder zero-magic text.",
+    "No README may use stale v2-only navigation labels unless inside migration notes.",
+    "Every future concept must use a preview-only reference.",
+    "Every project README must expose its rubric.",
+    "Every module README must expose its exit checklist.",
+    "No README with zero_magic_status=golden may contain template-style phrases: 'Think of X as a contract', 'X is similar to', 'in simple terms', 'basically', 'just', or empty analogy filler.",
+    "Every lesson README marked golden must contain at least one concrete production failure example in the 'In production' section.",
+    "Every lesson README marked golden must include a realistic debugging scenario in 'Debugging task', not a generic 'fix the bug' placeholder.",
+    "Mental model sections must describe the mechanism, not the definition — 'A goroutine is...' is a definition; 'When you write go f(), the runtime...' is a mental model.",
+    "Machine view sections must describe what the CPU/OS/runtime actually does, not restate the mental model.",
+    "Common mistakes sections must list real mistakes observed in production code, not conceptual misunderstandings that beginners never actually make.",
+    "No README may ship with TODO, TBD, placeholder, lorem ipsum, or scaffold-only language.",
+    "README paths must follow modules/<module>/<lesson>/README.md or electives/advanced-electives/<lesson>/README.md."
+  ]
+}

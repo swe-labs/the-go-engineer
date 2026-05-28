@@ -1,0 +1,97 @@
+name: Validate repository
+
+on:
+  pull_request:
+    paths:
+      - "metadata/**"
+      - "curriculum/**"
+      - "tools/**"
+      - "docs/**"
+      - "go.mod"
+      - "go.sum"
+      - "Makefile"
+      - ".github/workflows/validate-repository.yml"
+  push:
+    branches: [main]
+    paths:
+      - "metadata/**"
+      - "curriculum/**"
+      - "tools/**"
+      - "docs/**"
+      - "go.mod"
+      - "go.sum"
+      - "Makefile"
+      - ".github/workflows/validate-repository.yml"
+  workflow_dispatch:
+    inputs:
+      strict_repository:
+        description: "Run strict repository validation"
+        required: true
+        default: "true"
+        type: choice
+        options: ["true", "false"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-repository-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-repository:
+    name: Validate learner-facing curriculum files
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate metadata first
+        run: make validate-metadata
+
+      - name: Validate repository structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          strict="${{ github.event.inputs.strict_repository || 'true' }}"
+          if [ "$strict" = "true" ]; then
+            make validate-repository
+          else
+            go run ./tools/validate/curriculum validate-repository
+          fi
+
+      - name: Run optional repository validators
+        shell: bash
+        run: |
+          set -euo pipefail
+          for script in validate_readmes.py validate_code.py validate_assets.py validate_repository.py; do
+            path="tools/validate/repository/$script"
+            if [ -f "$path" ]; then
+              python3 "$path" --metadata-dir metadata --curriculum-dir curriculum
+            else
+              echo "Optional validator skipped: $path not found"
+            fi
+          done
+
+      - name: Run Go tests when curriculum code exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          if find curriculum tools -name "*.go" | grep -q .; then
+            go test ./...
+          else
+            echo "No Go source files found yet"
+          fi
