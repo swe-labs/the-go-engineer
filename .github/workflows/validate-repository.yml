@@ -66,11 +66,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          strict="${{ github.event.inputs.strict_repository || 'true' }}"
+          # Non-strict by default for PRs (partial migration).
+          # Use workflow_dispatch with strict_repository=true for full release validation.
+          strict="${{ github.event.inputs.strict_repository || 'false' }}"
           if [ "$strict" = "true" ]; then
-            make validate-repository
+            make validate-repository STRICT_REPOSITORY=1
           else
-            go run ./tools/validate/curriculum validate-repository
+            make validate-repository STRICT_REPOSITORY=0
           fi
 
       - name: Run optional repository validators

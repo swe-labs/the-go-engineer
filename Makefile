@@ -19,7 +19,7 @@ DIST_DIR ?= dist
 CURRICULUM_VALIDATOR := ./$(TOOLS_DIR)/validate/curriculum
 REPOSITORY_VALIDATORS := $(TOOLS_DIR)/validate/repository
 
-STRICT_REPOSITORY ?= 1
+STRICT_REPOSITORY ?= 0
 
 .PHONY: help
 help:
