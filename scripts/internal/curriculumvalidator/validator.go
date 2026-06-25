@@ -163,7 +163,10 @@ func Validate(root string, report func(string)) (Result, error) {
 
 	markdownErrors := validateMarkdownSurfaces(root, report)
 
-	v21Errors := validateV21CurriculumFiles(root, report)
+	v21Errors := 0
+	if pathExists(root, "curriculum") {
+		v21Errors = validateV21CurriculumFiles(root, report)
+	}
 
 	return Result{
 		LessonCount:      lessonCount,
