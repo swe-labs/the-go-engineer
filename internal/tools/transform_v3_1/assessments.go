@@ -25,7 +25,7 @@ type AssessmentsBundle struct {
 	Assessments         []any  `json:"assessments"`
 }
 
-func main() {
+func transformAssessments() {
 	wd, _ := os.Getwd()
 	curDir := filepath.Join(wd, "curriculum")
 	if _, err := os.Stat(curDir); err != nil {

@@ -359,6 +359,9 @@ func main() {
 		}
 	}
 
+	// Run assessment transform
+	transformAssessments()
+
 	fmt.Println("\nTransform complete. Run 'go run ./internal/tools/curriculum/ validate-graph' to verify.")
 }
 
