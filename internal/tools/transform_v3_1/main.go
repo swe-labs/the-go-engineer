@@ -9,72 +9,72 @@ import (
 )
 
 type Module struct {
-	ID              string   `json:"id"`
-	Number          int      `json:"number"`
-	Slug            string   `json:"slug"`
-	Title           string   `json:"title"`
-	Phase           string   `json:"phase"`
-	Path            string   `json:"path"`
-	Status          string   `json:"status"`
-	LearningGoal    string   `json:"learning_goal"`
-	Summary         string   `json:"summary"`
-	Order           int      `json:"order"`
-	Required        bool     `json:"required"`
-	PortfolioOutput bool     `json:"portfolio_output"`
-	Prerequisites   []string `json:"prerequisites"`
-	EntryItemIDs    []string `json:"entry_item_ids"`
-	TerminalItemIDs []string `json:"terminal_item_ids"`
-	Tags            []string `json:"tags"`
-	ReadmeStatus    string   `json:"readme_status"`
-	ReadmeContract              any      `json:"readme_contract"`
-	SourceLegacyIDs             []string `json:"source_legacy_section_ids"`
-	CognitiveLoad               string   `json:"cognitive_load"`
-	RecommendedBreakAfter       bool     `json:"recommended_break_after"`
-	ContainsFoundationalHardConcepts bool `json:"contains_foundational_hard_concepts"`
-	Pacing                      string   `json:"pacing"`
+	ID                               string   `json:"id"`
+	Number                           int      `json:"number"`
+	Slug                             string   `json:"slug"`
+	Title                            string   `json:"title"`
+	Phase                            string   `json:"phase"`
+	Path                             string   `json:"path"`
+	Status                           string   `json:"status"`
+	LearningGoal                     string   `json:"learning_goal"`
+	Summary                          string   `json:"summary"`
+	Order                            int      `json:"order"`
+	Required                         bool     `json:"required"`
+	PortfolioOutput                  bool     `json:"portfolio_output"`
+	Prerequisites                    []string `json:"prerequisites"`
+	EntryItemIDs                     []string `json:"entry_item_ids"`
+	TerminalItemIDs                  []string `json:"terminal_item_ids"`
+	Tags                             []string `json:"tags"`
+	ReadmeStatus                     string   `json:"readme_status"`
+	ReadmeContract                   any      `json:"readme_contract"`
+	SourceLegacyIDs                  []string `json:"source_legacy_section_ids"`
+	CognitiveLoad                    string   `json:"cognitive_load"`
+	RecommendedBreakAfter            bool     `json:"recommended_break_after"`
+	ContainsFoundationalHardConcepts bool     `json:"contains_foundational_hard_concepts"`
+	Pacing                           string   `json:"pacing"`
 }
 
 type Item struct {
-	ID                   string         `json:"id"`
-	ModuleID             string         `json:"module_id"`
-	Slug                 string         `json:"slug"`
-	Title                string         `json:"title"`
-	Type                 string         `json:"type"`
-	Subtype              string         `json:"subtype"`
-	Status               string         `json:"status"`
-	Difficulty           string         `json:"difficulty"`
-	Phase                string         `json:"phase"`
-	Order                int            `json:"order"`
-	EstimatedMinutes     int            `json:"estimated_minutes"`
-	LearningObjective    string         `json:"learning_objective"`
-	RequiredPriorKnowledge []string     `json:"required_prior_knowledge"`
-	Prerequisites        []string       `json:"prerequisites"`
-	NextItemIDs          []string       `json:"next_item_ids"`
-	ZeroMagic            any            `json:"zero_magic"`
-	CrossRefs            any            `json:"crossrefs"`
-	Proof                any            `json:"proof"`
-	ContentContract      any            `json:"content_contract"`
-	Verification         any            `json:"verification"`
-	Files                any            `json:"files"`
-	SourceLegacyIDs      []string       `json:"source_legacy_ids"`
-	Tags                 []string       `json:"tags"`
-	DocumentationMode    string         `json:"documentation_mode"`
-	ReadmeStatus         string         `json:"readme_status"`
-	ZeroMagicStatus      string         `json:"zero_magic_status"`
-	ReadmeContract       any            `json:"readme_contract"`
+	ID                     string   `json:"id"`
+	ModuleID               string   `json:"module_id"`
+	Slug                   string   `json:"slug"`
+	Title                  string   `json:"title"`
+	Type                   string   `json:"type"`
+	Subtype                string   `json:"subtype"`
+	Status                 string   `json:"status"`
+	Difficulty             string   `json:"difficulty"`
+	Phase                  string   `json:"phase"`
+	Order                  int      `json:"order"`
+	EstimatedMinutes       int      `json:"estimated_minutes"`
+	LearningObjective      string   `json:"learning_objective"`
+	RequiredPriorKnowledge []string `json:"required_prior_knowledge"`
+	Prerequisites          []string `json:"prerequisites"`
+	NextItemIDs            []string `json:"next_item_ids"`
+	ZeroMagic              any      `json:"zero_magic"`
+	CrossRefs              any      `json:"crossrefs"`
+	Proof                  any      `json:"proof"`
+	ContentContract        any      `json:"content_contract"`
+	Verification           any      `json:"verification"`
+	Files                  any      `json:"files"`
+	SourceLegacyIDs        []string `json:"source_legacy_ids"`
+	Tags                   []string `json:"tags"`
+	DocumentationMode      string   `json:"documentation_mode"`
+	ReadmeStatus           string   `json:"readme_status"`
+	ZeroMagicStatus        string   `json:"zero_magic_status"`
+	ReadmeContract         any      `json:"readme_contract"`
 }
 
 type Bundle struct {
-	SchemaVersion       string   `json:"schema_version"`
-	DocumentType        string   `json:"document_type"`
-	CurriculumVersion   string   `json:"curriculum_version"`
-	LastUpdated         string   `json:"last_updated"`
-	Name                string   `json:"name"`
-	Status              string   `json:"status"`
-	ArchitecturalDecision any    `json:"architectural_decision"`
-	RepositoryStructure []string `json:"repository_structure"`
-	Modules             []Module `json:"modules"`
-	Items               []Item   `json:"items"`
+	SchemaVersion         string   `json:"schema_version"`
+	DocumentType          string   `json:"document_type"`
+	CurriculumVersion     string   `json:"curriculum_version"`
+	LastUpdated           string   `json:"last_updated"`
+	Name                  string   `json:"name"`
+	Status                string   `json:"status"`
+	ArchitecturalDecision any      `json:"architectural_decision"`
+	RepositoryStructure   []string `json:"repository_structure"`
+	Modules               []Module `json:"modules"`
+	Items                 []Item   `json:"items"`
 }
 
 func main() {
@@ -138,17 +138,17 @@ func main() {
 
 	// 3. Update shifted modules
 	type shift struct {
-		oldID         string
-		newID         string
-		number        int
-		slug          string
-		title         string
-		pathv         string
-		learningGoal  string
-		summary       string
-		tags          []string
-		entry         []string
-		terminal      []string
+		oldID        string
+		newID        string
+		number       int
+		slug         string
+		title        string
+		pathv        string
+		learningGoal string
+		summary      string
+		tags         []string
+		entry        []string
+		terminal     []string
 	}
 	shifts := []shift{
 		{"module-09", "module-08", 8, "http-rest-apis", "HTTP and REST APIs",
@@ -227,7 +227,7 @@ func main() {
 		Tags:            []string{"performance"},
 		ReadmeStatus:    "scaffolded",
 		ReadmeContract: map[string]any{
-			"contract_id":       "module.v3",
+			"contract_id":        "module.v3",
 			"documentation_mode": "module-overview",
 		},
 	}

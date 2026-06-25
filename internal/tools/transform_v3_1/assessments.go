@@ -9,20 +9,20 @@ import (
 )
 
 type Assessment struct {
-	ID             string   `json:"id"`
-	Title          string   `json:"title"`
-	Type           string   `json:"type"`
-	Status         string   `json:"status"`
-	TargetIDs      []string `json:"target_ids"`
-	Items          []any    `json:"-"`
+	ID        string   `json:"id"`
+	Title     string   `json:"title"`
+	Type      string   `json:"type"`
+	Status    string   `json:"status"`
+	TargetIDs []string `json:"target_ids"`
+	Items     []any    `json:"-"`
 }
 
 type AssessmentsBundle struct {
-	SchemaVersion       string `json:"schema_version"`
-	DocumentType        string `json:"document_type"`
-	CurriculumVersion   string `json:"curriculum_version"`
-	LastUpdated         string `json:"last_updated"`
-	Assessments         []any  `json:"assessments"`
+	SchemaVersion     string `json:"schema_version"`
+	DocumentType      string `json:"document_type"`
+	CurriculumVersion string `json:"curriculum_version"`
+	LastUpdated       string `json:"last_updated"`
+	Assessments       []any  `json:"assessments"`
 }
 
 func transformAssessments() {
