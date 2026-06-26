@@ -41,5 +41,3 @@ func TestCounterParallel(t *testing.T) {
 		t.Errorf("expected %d, got %d", n, c.value)
 	}
 }
-
-
