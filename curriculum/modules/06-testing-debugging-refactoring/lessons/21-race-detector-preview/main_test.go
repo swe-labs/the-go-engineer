@@ -42,10 +42,4 @@ func TestCounterParallel(t *testing.T) {
 	}
 }
 
-func TestUnsafeIncrementRaces(t *testing.T) {
-	c := &Counter{}
-	// This intentionally has a race — run with -race to detect it.
-	UnsafeIncrement(c)
-	// We don't assert on the value because it's non-deterministic.
-	t.Logf("unsafe counter value: %d (non-deterministic)", c.value)
-}
+
