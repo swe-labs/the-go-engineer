@@ -30,7 +30,7 @@ The most important relationship is between `metadata/` and `curriculum/`. The me
 
 ## Under the hood
 
-The `main.go` file in this lesson defines a `DirEntry` struct and a `repoDirs` slice that hard-codes each top-level directory's name, purpose, and typical contents. The `Lookup` function searches the slice by name and returns a pointer to the matching entry or nil if nothing is found.
+The Go example below defines a `DirEntry` struct and a `repoDirs` slice that hard-codes each top-level directory's name, purpose, and typical contents. The `Lookup` function searches the slice by name and returns a pointer to the matching entry or nil if nothing is found.
 
 This is a simple in-memory lookup, but it mirrors how the real curriculum validator works: it reads a metadata graph, follows paths, and checks for file existence. The principle is the same — use data to describe expected structure, then write code to verify it.
 
@@ -38,7 +38,7 @@ This is a simple in-memory lookup, but it mirrors how the real curriculum valida
 
 Go's own source tree follows a similar convention. The `src/` directory holds standard library packages. The `cmd/` directory holds compilers and tools. The `go/types` package is the type checker. Each directory has a clearly documented purpose. When you run `go vet`, Go knows where to find its analysis packages because the structure is predictable.
 
-In this curriculum, we apply the same discipline. Every module has a predictable shape: `lessons/`, `labs/`, `projects/`, and within each, a README, a `main.go`, and a `main_test.go`. This predictability means you can jump to any module and immediately know where to look.
+In this curriculum, we apply the same discipline. Every module has a predictable shape: `lessons/`, `projects/`, `assessments/`, and within each, a README explaining the content and sometimes inline Go code examples. This predictability means you can jump to any module and immediately know where to look.
 
 ## Go example
 
@@ -123,7 +123,7 @@ func main() {
 2. `repoDirs` is a slice that holds one `DirEntry` for each top-level directory in the repository.
 3. `Lookup("curriculum/")` iterates over `repoDirs` and compares each entry's `Name` field against the argument. It returns the matching entry or `nil`.
 4. `main()` prints a formatted table of all directories and their purposes.
-5. When you run `go run .`, you see the full map. When you run `go test .`, the tests call `Lookup` with known names and verify it returns non-nil entries with non-empty `Purpose` fields.
+5. Running the code shows the full map. Tests call `Lookup` with known names and verify it returns non-nil entries with non-empty `Purpose` fields.
 
 ## Common mistakes
 
@@ -164,17 +164,7 @@ Add a new top-level directory to `repoDirs` called `"scripts/"` with purpose "he
 
 ## Tests / verification
 
-Run the tests from the repository root:
-
-```bash
-go test ./curriculum/modules/00-orientation/lessons/01-how-to-use-this-repository/
-```
-
-Expected output:
-
-```
-ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/lessons/01-how-to-use-this-repository
-```
+The inline code example is for reading and understanding. To verify your understanding, complete the practice task above and check your answers against the description. You can also copy the inline code into a local `.go` file and run `go run .` and `go test .` in that directory to experiment with the output.
 
 ## Review questions
 
@@ -186,4 +176,4 @@ ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/le
 
 ## NEXT UP
 
-Lesson 02: What zero magic means — where you learn why every concept in this curriculum is explained explicitly, with no hidden surprises.
+[Lesson 02: What zero magic means](../02-what-zero-magic-means/README.md) — where you learn why every concept in this curriculum is explained explicitly, with no hidden surprises.

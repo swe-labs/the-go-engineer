@@ -23,11 +23,7 @@
       "order": 1,
       "summary": "Build and navigate a real shell environment, then manage code changes through a complete Git workflow.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-01-01",
-        "core-01-02",
-        "core-01-03"
-      ],
+      "prerequisites": ["core-01-01", "core-01-02", "core-01-03"],
       "reinforces": [
         "core-01-01",
         "core-01-02",
@@ -116,11 +112,7 @@
       },
       "module_id": "module-01",
       "placement_anchor_item_id": "core-01-15",
-      "prerequisite_item_ids": [
-        "core-01-01",
-        "core-01-02",
-        "core-01-03"
-      ],
+      "prerequisite_item_ids": ["core-01-01", "core-01-02", "core-01-03"],
       "required_concepts": [
         "process lifecycle",
         "stdin/stdout/stderr",
@@ -143,11 +135,7 @@
       "order": 2,
       "summary": "Install Go tooling, then deliberately introduce and diagnose common Go setup failures.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-02-01",
-        "core-02-02",
-        "core-02-03"
-      ],
+      "prerequisites": ["core-02-01", "core-02-02", "core-02-03"],
       "reinforces": [
         "core-02-01",
         "core-02-02",
@@ -225,16 +213,8 @@
       },
       "module_id": "module-02",
       "placement_anchor_item_id": "core-02-14",
-      "prerequisite_item_ids": [
-        "core-02-01",
-        "core-02-02",
-        "core-02-03"
-      ],
-      "required_concepts": [
-        "go build",
-        "go module cache",
-        "compiler errors"
-      ],
+      "prerequisite_item_ids": ["core-02-01", "core-02-02", "core-02-03"],
+      "required_concepts": ["go build", "go module cache", "compiler errors"],
       "reinforcement_targets": [
         "go build",
         "go module cache",
@@ -252,11 +232,7 @@
       "order": 3,
       "summary": "Build a pricing calculator and checkout system using Go fundamentals: variables, control flow, and structs.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-03-01",
-        "core-03-02",
-        "core-03-03"
-      ],
+      "prerequisites": ["core-03-01", "core-03-02", "core-03-03"],
       "reinforces": [
         "core-03-01",
         "core-03-02",
@@ -298,9 +274,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "03-programming-fundamentals"
-          ],
+          "files_touched": ["03-programming-fundamentals"],
           "instruction": "Implement a Go program that calculates pricing with tax, discounts, and currency formatting using variables, structs, and control flow."
         },
         {
@@ -312,9 +286,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "03-programming-fundamentals"
-          ],
+          "files_touched": ["03-programming-fundamentals"],
           "instruction": "Write table-driven tests covering normal pricing, edge cases (zero, negative), and discount boundaries."
         },
         {
@@ -326,9 +298,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "03-programming-fundamentals"
-          ],
+          "files_touched": ["03-programming-fundamentals"],
           "instruction": "Explain your struct design choices, how you handle invalid input, and what trade-offs you considered."
         }
       ],
@@ -443,11 +413,7 @@
       },
       "module_id": "module-03",
       "placement_anchor_item_id": "core-03-23",
-      "prerequisite_item_ids": [
-        "core-03-01",
-        "core-03-02",
-        "core-03-03"
-      ],
+      "prerequisite_item_ids": ["core-03-01", "core-03-02", "core-03-03"],
       "required_concepts": [
         "slice header",
         "pointer semantics",
@@ -470,11 +436,7 @@
       "order": 4,
       "summary": "Implement a contact directory manager using Go data structures: slices, maps, and custom types.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-03-01",
-        "core-03-02",
-        "core-03-03"
-      ],
+      "prerequisites": ["core-03-01", "core-03-02", "core-03-03"],
       "reinforces": [
         "core-03-01",
         "core-03-02",
@@ -516,9 +478,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "03-programming-fundamentals"
-          ],
+          "files_touched": ["03-programming-fundamentals"],
           "instruction": "Build a contact directory using Go slices and maps: add, search, update, and delete contacts with input validation."
         },
         {
@@ -530,9 +490,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "03-programming-fundamentals"
-          ],
+          "files_touched": ["03-programming-fundamentals"],
           "instruction": "Write tests that verify CRUD operations, duplicate detection, and empty directory edge cases."
         },
         {
@@ -544,9 +502,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "03-programming-fundamentals"
-          ],
+          "files_touched": ["03-programming-fundamentals"],
           "instruction": "Explain your data structure choices and how you handle missing or malformed contact entries."
         }
       ],
@@ -661,11 +617,7 @@
       },
       "module_id": "module-03",
       "placement_anchor_item_id": "core-03-23",
-      "prerequisite_item_ids": [
-        "core-03-01",
-        "core-03-02",
-        "core-03-03"
-      ],
+      "prerequisite_item_ids": ["core-03-01", "core-03-02", "core-03-03"],
       "required_concepts": [
         "slice header",
         "pointer semantics",
@@ -688,11 +640,7 @@
       "order": 5,
       "summary": "Refactor a monolithic order summary function into well-structured Go code with proper error handling.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-04-01",
-        "core-04-02",
-        "core-04-03"
-      ],
+      "prerequisites": ["core-04-01", "core-04-02", "core-04-03"],
       "reinforces": [
         "core-04-01",
         "core-04-02",
@@ -729,9 +677,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "04-functions-errors-data-semantics"
-          ],
+          "files_touched": ["04-functions-errors-data-semantics"],
           "instruction": "Refactor a monolithic order summary function into well-separated Go functions with clear responsibilities and proper error returns."
         },
         {
@@ -743,9 +689,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "04-functions-errors-data-semantics"
-          ],
+          "files_touched": ["04-functions-errors-data-semantics"],
           "instruction": "Write tests that cover the original behavior, then verify the refactored version produces identical output."
         },
         {
@@ -757,9 +701,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "04-functions-errors-data-semantics"
-          ],
+          "files_touched": ["04-functions-errors-data-semantics"],
           "instruction": "Explain your refactoring decisions: what you extracted, why, and how you preserved correctness."
         }
       ],
@@ -874,11 +816,7 @@
       },
       "module_id": "module-04",
       "placement_anchor_item_id": "core-04-18",
-      "prerequisite_item_ids": [
-        "core-04-01",
-        "core-04-02",
-        "core-04-03"
-      ],
+      "prerequisite_item_ids": ["core-04-01", "core-04-02", "core-04-03"],
       "required_concepts": [
         "memory aliasing",
         "errors as values",
@@ -903,11 +841,7 @@
       "order": 6,
       "summary": "Build a bank account system demonstrating Go types, interfaces, and method sets.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-05-01",
-        "core-05-02",
-        "core-05-03"
-      ],
+      "prerequisites": ["core-05-01", "core-05-02", "core-05-03"],
       "reinforces": [
         "core-05-01",
         "core-05-02",
@@ -949,9 +883,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "05-types-interfaces-packages-modules"
-          ],
+          "files_touched": ["05-types-interfaces-packages-modules"],
           "instruction": "Implement a BankAccount type with methods for deposit, withdraw, and balance — using proper Go receiver semantics."
         },
         {
@@ -963,9 +895,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "05-types-interfaces-packages-modules"
-          ],
+          "files_touched": ["05-types-interfaces-packages-modules"],
           "instruction": "Write tests that verify account operations, zero-value behavior, and concurrent access safety."
         },
         {
@@ -977,9 +907,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "05-types-interfaces-packages-modules"
-          ],
+          "files_touched": ["05-types-interfaces-packages-modules"],
           "instruction": "Explain your method set design and how Go’s type system influences your interface choices."
         }
       ],
@@ -1094,11 +1022,7 @@
       },
       "module_id": "module-05",
       "placement_anchor_item_id": "core-05-23",
-      "prerequisite_item_ids": [
-        "core-05-01",
-        "core-05-02",
-        "core-05-03"
-      ],
+      "prerequisite_item_ids": ["core-05-01", "core-05-02", "core-05-03"],
       "required_concepts": [
         "interface semantics",
         "nil interface",
@@ -1121,11 +1045,7 @@
       "order": 7,
       "summary": "Implement a payroll processor using Go packages, modules, and interface composition.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-05-01",
-        "core-05-02",
-        "core-05-03"
-      ],
+      "prerequisites": ["core-05-01", "core-05-02", "core-05-03"],
       "reinforces": [
         "core-05-01",
         "core-05-02",
@@ -1167,9 +1087,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "05-types-interfaces-packages-modules"
-          ],
+          "files_touched": ["05-types-interfaces-packages-modules"],
           "instruction": "Build a payroll processor using Go interfaces for different employee types (hourly, salaried, contractor) with polymorphic pay calculation."
         },
         {
@@ -1181,9 +1099,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "05-types-interfaces-packages-modules"
-          ],
+          "files_touched": ["05-types-interfaces-packages-modules"],
           "instruction": "Write tests for each employee type, including edge cases like overtime, zero hours, and negative rates."
         },
         {
@@ -1195,9 +1111,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "05-types-interfaces-packages-modules"
-          ],
+          "files_touched": ["05-types-interfaces-packages-modules"],
           "instruction": "Explain your interface hierarchy and how Go’s implicit interface satisfaction shapes your design."
         }
       ],
@@ -1312,11 +1226,7 @@
       },
       "module_id": "module-05",
       "placement_anchor_item_id": "core-05-23",
-      "prerequisite_item_ids": [
-        "core-05-01",
-        "core-05-02",
-        "core-05-03"
-      ],
+      "prerequisite_item_ids": ["core-05-01", "core-05-02", "core-05-03"],
       "required_concepts": [
         "interface semantics",
         "nil interface",
@@ -1339,11 +1249,7 @@
       "order": 8,
       "summary": "Identify, diagnose, and fix a set of deliberately introduced bugs across multiple Go packages.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-06-01",
-        "core-06-02",
-        "core-06-03"
-      ],
+      "prerequisites": ["core-06-01", "core-06-02", "core-06-03"],
       "reinforces": [
         "core-06-01",
         "core-06-02",
@@ -1383,9 +1289,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "06-testing-debugging-refactoring"
-          ],
+          "files_touched": ["06-testing-debugging-refactoring"],
           "instruction": "Identify and fix a set of deliberate bugs across multiple Go packages covering logic errors, race conditions, and nil pointer dereferences."
         },
         {
@@ -1397,9 +1301,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "06-testing-debugging-refactoring"
-          ],
+          "files_touched": ["06-testing-debugging-refactoring"],
           "instruction": "Write tests that reproduce each bug, then verify the fix without breaking existing behavior."
         },
         {
@@ -1411,9 +1313,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "06-testing-debugging-refactoring"
-          ],
+          "files_touched": ["06-testing-debugging-refactoring"],
           "instruction": "Document each bug: root cause, how you diagnosed it, and what test prevents regression."
         }
       ],
@@ -1528,21 +1428,9 @@
       },
       "module_id": "module-06",
       "placement_anchor_item_id": "core-06-21",
-      "prerequisite_item_ids": [
-        "core-06-01",
-        "core-06-02",
-        "core-06-03"
-      ],
-      "required_concepts": [
-        "go test",
-        "test coverage",
-        "Delve debugger"
-      ],
-      "reinforcement_targets": [
-        "go test",
-        "test coverage",
-        "Delve debugger"
-      ]
+      "prerequisite_item_ids": ["core-06-01", "core-06-02", "core-06-03"],
+      "required_concepts": ["go test", "test coverage", "Delve debugger"],
+      "reinforcement_targets": ["go test", "test coverage", "Delve debugger"]
     },
     {
       "id": "project-refactor-under-tests",
@@ -1555,11 +1443,7 @@
       "order": 9,
       "summary": "Add test coverage to legacy Go code, then refactor it while keeping all tests passing.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-06-01",
-        "core-06-02",
-        "core-06-03"
-      ],
+      "prerequisites": ["core-06-01", "core-06-02", "core-06-03"],
       "reinforces": [
         "core-06-01",
         "core-06-02",
@@ -1599,9 +1483,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "06-testing-debugging-refactoring"
-          ],
+          "files_touched": ["06-testing-debugging-refactoring"],
           "instruction": "Write comprehensive tests for a legacy Go package to characterize its existing behavior before refactoring."
         },
         {
@@ -1613,9 +1495,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "06-testing-debugging-refactoring"
-          ],
+          "files_touched": ["06-testing-debugging-refactoring"],
           "instruction": "Refactor the code for clarity and maintainability while keeping all tests passing without changes."
         },
         {
@@ -1627,9 +1507,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "06-testing-debugging-refactoring"
-          ],
+          "files_touched": ["06-testing-debugging-refactoring"],
           "instruction": "Compare before and after: what improved, what risks remain, and how the test suite gives confidence."
         }
       ],
@@ -1744,21 +1622,9 @@
       },
       "module_id": "module-06",
       "placement_anchor_item_id": "core-06-21",
-      "prerequisite_item_ids": [
-        "core-06-01",
-        "core-06-02",
-        "core-06-03"
-      ],
-      "required_concepts": [
-        "go test",
-        "test coverage",
-        "Delve debugger"
-      ],
-      "reinforcement_targets": [
-        "go test",
-        "test coverage",
-        "Delve debugger"
-      ]
+      "prerequisite_item_ids": ["core-06-01", "core-06-02", "core-06-03"],
+      "required_concepts": ["go test", "test coverage", "Delve debugger"],
+      "reinforcement_targets": ["go test", "test coverage", "Delve debugger"]
     },
     {
       "id": "project-file-organizer",
@@ -1771,11 +1637,7 @@
       "order": 10,
       "summary": "Build a CLI tool that organizes files by type, extension, or metadata using Go file I/O.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-07-01",
-        "core-07-02",
-        "core-07-03"
-      ],
+      "prerequisites": ["core-07-01", "core-07-02", "core-07-03"],
       "reinforces": [
         "core-07-01",
         "core-07-02",
@@ -1815,9 +1677,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "07-cli-files-json-config"
-          ],
+          "files_touched": ["07-cli-files-json-config"],
           "instruction": "Build a CLI tool that scans a directory and organizes files into subdirectories by extension, date, or user-specified rules."
         },
         {
@@ -1829,9 +1689,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "07-cli-files-json-config"
-          ],
+          "files_touched": ["07-cli-files-json-config"],
           "instruction": "Write tests covering empty directories, nested files, symlinks, and permission errors."
         },
         {
@@ -1843,9 +1701,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "07-cli-files-json-config"
-          ],
+          "files_touched": ["07-cli-files-json-config"],
           "instruction": "Explain your CLI flag design, file I/O strategy, and how you handle edge cases like name collisions."
         }
       ],
@@ -1960,19 +1816,9 @@
       },
       "module_id": "module-07",
       "placement_anchor_item_id": "core-07-21",
-      "prerequisite_item_ids": [
-        "core-07-01",
-        "core-07-02",
-        "core-07-03"
-      ],
-      "required_concepts": [
-        "file I/O",
-        "JSON encoding/decoding"
-      ],
-      "reinforcement_targets": [
-        "file I/O",
-        "JSON encoding/decoding"
-      ]
+      "prerequisite_item_ids": ["core-07-01", "core-07-02", "core-07-03"],
+      "required_concepts": ["file I/O", "JSON encoding/decoding"],
+      "reinforcement_targets": ["file I/O", "JSON encoding/decoding"]
     },
     {
       "id": "project-log-search",
@@ -1985,11 +1831,7 @@
       "order": 11,
       "summary": "Implement a log search and filtering tool using Go CLI flags, file reading, and pattern matching.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-07-01",
-        "core-07-02",
-        "core-07-03"
-      ],
+      "prerequisites": ["core-07-01", "core-07-02", "core-07-03"],
       "reinforces": [
         "core-07-01",
         "core-07-02",
@@ -2029,9 +1871,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "07-cli-files-json-config"
-          ],
+          "files_touched": ["07-cli-files-json-config"],
           "instruction": "Implement a CLI log search tool that reads log files, filters by level/timestamp/pattern, and outputs results with context lines."
         },
         {
@@ -2043,9 +1883,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "07-cli-files-json-config"
-          ],
+          "files_touched": ["07-cli-files-json-config"],
           "instruction": "Write tests covering large files, regex patterns, no-match cases, and malformed log entries."
         },
         {
@@ -2057,9 +1895,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "07-cli-files-json-config"
-          ],
+          "files_touched": ["07-cli-files-json-config"],
           "instruction": "Explain your stream processing approach, memory efficiency, and how you handle encoding variations."
         }
       ],
@@ -2174,19 +2010,9 @@
       },
       "module_id": "module-07",
       "placement_anchor_item_id": "core-07-21",
-      "prerequisite_item_ids": [
-        "core-07-01",
-        "core-07-02",
-        "core-07-03"
-      ],
-      "required_concepts": [
-        "file I/O",
-        "JSON encoding/decoding"
-      ],
-      "reinforcement_targets": [
-        "file I/O",
-        "JSON encoding/decoding"
-      ]
+      "prerequisite_item_ids": ["core-07-01", "core-07-02", "core-07-03"],
+      "required_concepts": ["file I/O", "JSON encoding/decoding"],
+      "reinforcement_targets": ["file I/O", "JSON encoding/decoding"]
     },
     {
       "id": "project-config-parser",
@@ -2199,11 +2025,7 @@
       "order": 12,
       "summary": "Parse and validate configuration files in JSON and YAML formats, with environment variable overrides.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-07-01",
-        "core-07-02",
-        "core-07-03"
-      ],
+      "prerequisites": ["core-07-01", "core-07-02", "core-07-03"],
       "reinforces": [
         "core-07-01",
         "core-07-02",
@@ -2243,9 +2065,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "07-cli-files-json-config"
-          ],
+          "files_touched": ["07-cli-files-json-config"],
           "instruction": "Parse configuration files in JSON and YAML formats with environment variable override support and schema validation."
         },
         {
@@ -2257,9 +2077,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "07-cli-files-json-config"
-          ],
+          "files_touched": ["07-cli-files-json-config"],
           "instruction": "Write tests for each format, merge semantics, missing required fields, type coercion, and override precedence."
         },
         {
@@ -2271,9 +2089,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "07-cli-files-json-config"
-          ],
+          "files_touched": ["07-cli-files-json-config"],
           "instruction": "Explain your parser design: format detection, schema validation, override ordering, and error reporting."
         }
       ],
@@ -2388,19 +2204,9 @@
       },
       "module_id": "module-07",
       "placement_anchor_item_id": "core-07-21",
-      "prerequisite_item_ids": [
-        "core-07-01",
-        "core-07-02",
-        "core-07-03"
-      ],
-      "required_concepts": [
-        "file I/O",
-        "JSON encoding/decoding"
-      ],
-      "reinforcement_targets": [
-        "file I/O",
-        "JSON encoding/decoding"
-      ]
+      "prerequisite_item_ids": ["core-07-01", "core-07-02", "core-07-03"],
+      "required_concepts": ["file I/O", "JSON encoding/decoding"],
+      "reinforcement_targets": ["file I/O", "JSON encoding/decoding"]
     },
     {
       "id": "project-book-catalog-rest-api",
@@ -2413,11 +2219,7 @@
       "order": 13,
       "summary": "Build a REST API for a book catalog with CRUD endpoints, middleware, and JSON encoding.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-08-01",
-        "core-08-02",
-        "core-08-03"
-      ],
+      "prerequisites": ["core-08-01", "core-08-02", "core-08-03"],
       "reinforces": [
         "core-08-01",
         "core-08-02",
@@ -2456,9 +2258,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "08-http-rest-apis"
-          ],
+          "files_touched": ["08-http-rest-apis"],
           "instruction": "Build a REST API for a book catalog with CRUD endpoints (GET/POST/PUT/DELETE), proper status codes, and JSON request/response bodies."
         },
         {
@@ -2470,9 +2270,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "08-http-rest-apis"
-          ],
+          "files_touched": ["08-http-rest-apis"],
           "instruction": "Write integration tests that test each endpoint end-to-end with valid and invalid payloads."
         },
         {
@@ -2484,9 +2282,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "08-http-rest-apis"
-          ],
+          "files_touched": ["08-http-rest-apis"],
           "instruction": "Explain your route design, middleware choices, error handling strategy, and API structure."
         }
       ],
@@ -2601,11 +2397,7 @@
       },
       "module_id": "module-08",
       "placement_anchor_item_id": "core-08-20",
-      "prerequisite_item_ids": [
-        "core-08-01",
-        "core-08-02",
-        "core-08-03"
-      ],
+      "prerequisite_item_ids": ["core-08-01", "core-08-02", "core-08-03"],
       "required_concepts": [
         "HTTP handler lifecycle",
         "HTTP timeouts",
@@ -2630,11 +2422,7 @@
       "order": 14,
       "summary": "Build a task management API backed by PostgreSQL with migrations, queries, and transactions.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-09-01",
-        "core-09-02",
-        "core-09-03"
-      ],
+      "prerequisites": ["core-09-01", "core-09-02", "core-09-03"],
       "reinforces": [
         "core-09-01",
         "core-09-02",
@@ -2679,9 +2467,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "09-sql-postgres-persistence"
-          ],
+          "files_touched": ["09-sql-postgres-persistence"],
           "instruction": "Build a task management API backed by PostgreSQL with CRUD endpoints, migrations, prepared statements, and transaction support."
         },
         {
@@ -2693,9 +2479,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "09-sql-postgres-persistence"
-          ],
+          "files_touched": ["09-sql-postgres-persistence"],
           "instruction": "Write integration tests that test queries with database fixtures, including rollback on error."
         },
         {
@@ -2707,9 +2491,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "09-sql-postgres-persistence"
-          ],
+          "files_touched": ["09-sql-postgres-persistence"],
           "instruction": "Explain your schema design, migration strategy, connection pooling, and transaction boundaries."
         }
       ],
@@ -2824,11 +2606,7 @@
       },
       "module_id": "module-09",
       "placement_anchor_item_id": "core-09-26",
-      "prerequisite_item_ids": [
-        "core-09-01",
-        "core-09-02",
-        "core-09-03"
-      ],
+      "prerequisite_item_ids": ["core-09-01", "core-09-02", "core-09-03"],
       "required_concepts": [
         "database/sql pool",
         "SQL transactions",
@@ -2853,11 +2631,7 @@
       "order": 15,
       "summary": "Add authentication and authorization to an API using JWT tokens, bcrypt passwords, and security middleware.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-10-01",
-        "core-10-02",
-        "core-10-03"
-      ],
+      "prerequisites": ["core-10-01", "core-10-02", "core-10-03"],
       "reinforces": [
         "core-10-01",
         "core-10-02",
@@ -2900,9 +2674,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "10-auth-security"
-          ],
+          "files_touched": ["10-auth-security"],
           "instruction": "Add JWT-based authentication and bcrypt password hashing to an API, with middleware for protected routes and role-based access."
         },
         {
@@ -2914,9 +2686,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "10-auth-security"
-          ],
+          "files_touched": ["10-auth-security"],
           "instruction": "Write tests for token generation, validation, expiration, invalid tokens, and unauthorized access."
         },
         {
@@ -2928,9 +2698,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "10-auth-security"
-          ],
+          "files_touched": ["10-auth-security"],
           "instruction": "Explain your security design: token format, password hashing choices, middleware architecture, and threat model."
         }
       ],
@@ -3045,21 +2813,9 @@
       },
       "module_id": "module-10",
       "placement_anchor_item_id": "core-10-24",
-      "prerequisite_item_ids": [
-        "core-10-01",
-        "core-10-02",
-        "core-10-03"
-      ],
-      "required_concepts": [
-        "JWT",
-        "RBAC",
-        "SQL injection"
-      ],
-      "reinforcement_targets": [
-        "JWT",
-        "RBAC",
-        "SQL injection"
-      ]
+      "prerequisite_item_ids": ["core-10-01", "core-10-02", "core-10-03"],
+      "required_concepts": ["JWT", "RBAC", "SQL injection"],
+      "reinforcement_targets": ["JWT", "RBAC", "SQL injection"]
     },
     {
       "id": "project-concurrent-downloader",
@@ -3072,11 +2828,7 @@
       "order": 16,
       "summary": "Build a concurrent file downloader using goroutines, channels, and error propagation.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-11-01",
-        "core-11-02",
-        "core-11-03"
-      ],
+      "prerequisites": ["core-11-01", "core-11-02", "core-11-03"],
       "reinforces": [
         "core-11-01",
         "core-11-02",
@@ -3123,9 +2875,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "11-context-time-concurrency"
-          ],
+          "files_touched": ["11-context-time-concurrency"],
           "instruction": "Build a concurrent file downloader that downloads multiple URLs in parallel using goroutines, with progress reporting and error handling."
         },
         {
@@ -3137,9 +2887,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "11-context-time-concurrency"
-          ],
+          "files_touched": ["11-context-time-concurrency"],
           "instruction": "Write tests covering concurrent downloads, partial failures, timeouts, and retry behavior."
         },
         {
@@ -3151,9 +2899,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "11-context-time-concurrency"
-          ],
+          "files_touched": ["11-context-time-concurrency"],
           "instruction": "Explain your concurrency design: worker count, error propagation, cancellation, and resource management."
         }
       ],
@@ -3268,11 +3014,7 @@
       },
       "module_id": "module-11",
       "placement_anchor_item_id": "core-11-28",
-      "prerequisite_item_ids": [
-        "core-11-01",
-        "core-11-02",
-        "core-11-03"
-      ],
+      "prerequisite_item_ids": ["core-11-01", "core-11-02", "core-11-03"],
       "required_concepts": [
         "goroutine",
         "channel",
@@ -3309,11 +3051,7 @@
       "order": 17,
       "summary": "Implement a URL health checker that concurrently monitors endpoints and reports status changes.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-11-01",
-        "core-11-02",
-        "core-11-03"
-      ],
+      "prerequisites": ["core-11-01", "core-11-02", "core-11-03"],
       "reinforces": [
         "core-11-01",
         "core-11-02",
@@ -3360,9 +3098,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "11-context-time-concurrency"
-          ],
+          "files_touched": ["11-context-time-concurrency"],
           "instruction": "Implement a URL health checker that monitors endpoints concurrently, detects status changes, and reports results with configurable intervals."
         },
         {
@@ -3374,9 +3110,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "11-context-time-concurrency"
-          ],
+          "files_touched": ["11-context-time-concurrency"],
           "instruction": "Write tests covering endpoint transitions (up/down/flapping), timeout handling, and concurrent monitoring."
         },
         {
@@ -3388,9 +3122,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "11-context-time-concurrency"
-          ],
+          "files_touched": ["11-context-time-concurrency"],
           "instruction": "Explain your monitoring design: polling strategy, state management, alert generation, and concurrency model."
         }
       ],
@@ -3505,11 +3237,7 @@
       },
       "module_id": "module-11",
       "placement_anchor_item_id": "core-11-28",
-      "prerequisite_item_ids": [
-        "core-11-01",
-        "core-11-02",
-        "core-11-03"
-      ],
+      "prerequisite_item_ids": ["core-11-01", "core-11-02", "core-11-03"],
       "required_concepts": [
         "goroutine",
         "channel",
@@ -3546,11 +3274,7 @@
       "order": 18,
       "summary": "Build a bounded worker pool that processes jobs concurrently with configurable parallelism and graceful shutdown.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-11-01",
-        "core-11-02",
-        "core-11-03"
-      ],
+      "prerequisites": ["core-11-01", "core-11-02", "core-11-03"],
       "reinforces": [
         "core-11-01",
         "core-11-02",
@@ -3597,9 +3321,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "11-context-time-concurrency"
-          ],
+          "files_touched": ["11-context-time-concurrency"],
           "instruction": "Build a bounded worker pool that processes jobs from a queue with configurable worker count, graceful shutdown, and error collection."
         },
         {
@@ -3611,9 +3333,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "11-context-time-concurrency"
-          ],
+          "files_touched": ["11-context-time-concurrency"],
           "instruction": "Write tests covering job distribution, worker failure, graceful shutdown, and backlog handling."
         },
         {
@@ -3625,9 +3345,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "11-context-time-concurrency"
-          ],
+          "files_touched": ["11-context-time-concurrency"],
           "instruction": "Explain your pool design: job queue, worker lifecycle, backpressure, and shutdown coordination with context."
         }
       ],
@@ -3742,11 +3460,7 @@
       },
       "module_id": "module-11",
       "placement_anchor_item_id": "core-11-28",
-      "prerequisite_item_ids": [
-        "core-11-01",
-        "core-11-02",
-        "core-11-03"
-      ],
+      "prerequisite_item_ids": ["core-11-01", "core-11-02", "core-11-03"],
       "required_concepts": [
         "goroutine",
         "channel",
@@ -3783,11 +3497,7 @@
       "order": 19,
       "summary": "Build a PII redaction service with structured logging, error tracking, and observability instrumentation.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-12-01",
-        "core-12-02",
-        "core-12-03"
-      ],
+      "prerequisites": ["core-12-01", "core-12-02", "core-12-03"],
       "reinforces": [
         "core-12-01",
         "core-12-02",
@@ -3826,9 +3536,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "12-observability-performance-reliability"
-          ],
+          "files_touched": ["12-observability-performance-reliability"],
           "instruction": "Build a PII redaction service with structured logging, error tracking, and metrics for redaction operations and failures."
         },
         {
@@ -3840,9 +3548,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "12-observability-performance-reliability"
-          ],
+          "files_touched": ["12-observability-performance-reliability"],
           "instruction": "Write tests for redaction patterns, log output verification, metric collection, and error scenarios."
         },
         {
@@ -3854,9 +3560,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "12-observability-performance-reliability"
-          ],
+          "files_touched": ["12-observability-performance-reliability"],
           "instruction": "Explain your observability design: log structure, metric exposure, error classification, and monitoring coverage."
         }
       ],
@@ -3971,19 +3675,9 @@
       },
       "module_id": "module-12",
       "placement_anchor_item_id": "core-12-20",
-      "prerequisite_item_ids": [
-        "core-12-01",
-        "core-12-02",
-        "core-12-03"
-      ],
-      "required_concepts": [
-        "structured logging",
-        "distributed tracing"
-      ],
-      "reinforcement_targets": [
-        "structured logging",
-        "distributed tracing"
-      ]
+      "prerequisite_item_ids": ["core-12-01", "core-12-02", "core-12-03"],
+      "required_concepts": ["structured logging", "distributed tracing"],
+      "reinforcement_targets": ["structured logging", "distributed tracing"]
     },
     {
       "id": "project-observability-retrofit",
@@ -3996,11 +3690,7 @@
       "order": 20,
       "summary": "Add structured logging, metrics, and tracing to an existing Go application without changing its behavior.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-12-01",
-        "core-12-02",
-        "core-12-03"
-      ],
+      "prerequisites": ["core-12-01", "core-12-02", "core-12-03"],
       "reinforces": [
         "core-12-01",
         "core-12-02",
@@ -4039,9 +3729,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "12-observability-performance-reliability"
-          ],
+          "files_touched": ["12-observability-performance-reliability"],
           "instruction": "Add structured logging, OpenTelemetry tracing, and Prometheus metrics to an existing Go application without changing its external behavior."
         },
         {
@@ -4053,9 +3741,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "12-observability-performance-reliability"
-          ],
+          "files_touched": ["12-observability-performance-reliability"],
           "instruction": "Write tests that verify the observability output: log lines, trace spans, and metric values under load."
         },
         {
@@ -4067,9 +3753,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "12-observability-performance-reliability"
-          ],
+          "files_touched": ["12-observability-performance-reliability"],
           "instruction": "Explain your retrofit strategy: instrumentation points, performance impact, and how you verified zero behavior change."
         }
       ],
@@ -4184,19 +3868,9 @@
       },
       "module_id": "module-12",
       "placement_anchor_item_id": "core-12-20",
-      "prerequisite_item_ids": [
-        "core-12-01",
-        "core-12-02",
-        "core-12-03"
-      ],
-      "required_concepts": [
-        "structured logging",
-        "distributed tracing"
-      ],
-      "reinforcement_targets": [
-        "structured logging",
-        "distributed tracing"
-      ]
+      "prerequisite_item_ids": ["core-12-01", "core-12-02", "core-12-03"],
+      "required_concepts": ["structured logging", "distributed tracing"],
+      "reinforcement_targets": ["structured logging", "distributed tracing"]
     },
     {
       "id": "project-profile-and-fix-lab",
@@ -4209,11 +3883,7 @@
       "order": 21,
       "summary": "Profile a Go application with pprof, identify performance bottlenecks, and optimize CPU and memory usage.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-12-01",
-        "core-12-02",
-        "core-12-03"
-      ],
+      "prerequisites": ["core-12-01", "core-12-02", "core-12-03"],
       "reinforces": [
         "core-12-01",
         "core-12-02",
@@ -4252,9 +3922,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "12-observability-performance-reliability"
-          ],
+          "files_touched": ["12-observability-performance-reliability"],
           "instruction": "Use pprof to profile a Go application, identify CPU and memory bottlenecks, and apply targeted optimizations."
         },
         {
@@ -4266,9 +3934,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "12-observability-performance-reliability"
-          ],
+          "files_touched": ["12-observability-performance-reliability"],
           "instruction": "Write benchmarks that measure before/after performance and verify improvement without correctness regression."
         },
         {
@@ -4280,9 +3946,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "12-observability-performance-reliability"
-          ],
+          "files_touched": ["12-observability-performance-reliability"],
           "instruction": "Document your profiling process: flame graph analysis, identified bottleneck, fix applied, and measured improvement."
         }
       ],
@@ -4397,19 +4061,9 @@
       },
       "module_id": "module-12",
       "placement_anchor_item_id": "core-12-20",
-      "prerequisite_item_ids": [
-        "core-12-01",
-        "core-12-02",
-        "core-12-03"
-      ],
-      "required_concepts": [
-        "structured logging",
-        "distributed tracing"
-      ],
-      "reinforcement_targets": [
-        "structured logging",
-        "distributed tracing"
-      ]
+      "prerequisite_item_ids": ["core-12-01", "core-12-02", "core-12-03"],
+      "required_concepts": ["structured logging", "distributed tracing"],
+      "reinforcement_targets": ["structured logging", "distributed tracing"]
     },
     {
       "id": "project-modular-refactor-review",
@@ -4422,11 +4076,7 @@
       "order": 22,
       "summary": "Refactor a monolith into a modular, layered architecture with dependency injection and interface-based design.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-14-01",
-        "core-14-02",
-        "core-14-03"
-      ],
+      "prerequisites": ["core-14-01", "core-14-02", "core-14-03"],
       "reinforces": [
         "core-14-01",
         "core-14-02",
@@ -4462,9 +4112,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "13-architecture-systems-thinking"
-          ],
+          "files_touched": ["13-architecture-systems-thinking"],
           "instruction": "Refactor a monolithic Go application into a modular architecture with layered packages, dependency injection, and interface-based boundaries."
         },
         {
@@ -4476,9 +4124,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "13-architecture-systems-thinking"
-          ],
+          "files_touched": ["13-architecture-systems-thinking"],
           "instruction": "Write integration tests that verify the refactored system produces identical behavior through the external API."
         },
         {
@@ -4490,9 +4136,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "13-architecture-systems-thinking"
-          ],
+          "files_touched": ["13-architecture-systems-thinking"],
           "instruction": "Explain your architecture: package structure, dependency flow, interface contracts, and testing strategy."
         }
       ],
@@ -4607,19 +4251,9 @@
       },
       "module_id": "module-14",
       "placement_anchor_item_id": "core-14-17",
-      "prerequisite_item_ids": [
-        "core-14-01",
-        "core-14-02",
-        "core-14-03"
-      ],
-      "required_concepts": [
-        "repository pattern",
-        "hexagonal architecture"
-      ],
-      "reinforcement_targets": [
-        "repository pattern",
-        "hexagonal architecture"
-      ]
+      "prerequisite_item_ids": ["core-14-01", "core-14-02", "core-14-03"],
+      "required_concepts": ["repository pattern", "hexagonal architecture"],
+      "reinforcement_targets": ["repository pattern", "hexagonal architecture"]
     },
     {
       "id": "project-dockerized-service-cicd",
@@ -4632,11 +4266,7 @@
       "order": 23,
       "summary": "Containerize a Go service with a multi-stage Dockerfile and set up a CI/CD pipeline for automated build and deploy.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-15-01",
-        "core-15-02",
-        "core-15-03"
-      ],
+      "prerequisites": ["core-15-01", "core-15-02", "core-15-03"],
       "reinforces": [
         "core-15-01",
         "core-15-02",
@@ -4674,9 +4304,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "14-docker-cicd-linux-deployment"
-          ],
+          "files_touched": ["14-docker-cicd-linux-deployment"],
           "instruction": "Create a multi-stage Dockerfile for a Go service, then set up a CI/CD pipeline with GitHub Actions for automated build, test, and deploy."
         },
         {
@@ -4688,9 +4316,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "14-docker-cicd-linux-deployment"
-          ],
+          "files_touched": ["14-docker-cicd-linux-deployment"],
           "instruction": "Write tests that run inside the container and verify the deployed service responds correctly."
         },
         {
@@ -4702,9 +4328,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "14-docker-cicd-linux-deployment"
-          ],
+          "files_touched": ["14-docker-cicd-linux-deployment"],
           "instruction": "Explain your containerization choices: base image, layer optimization, security considerations, and pipeline stages."
         }
       ],
@@ -4819,19 +4443,9 @@
       },
       "module_id": "module-15",
       "placement_anchor_item_id": "core-15-19",
-      "prerequisite_item_ids": [
-        "core-15-01",
-        "core-15-02",
-        "core-15-03"
-      ],
-      "required_concepts": [
-        "Docker multi-stage build",
-        "CI pipeline"
-      ],
-      "reinforcement_targets": [
-        "Docker multi-stage build",
-        "CI pipeline"
-      ]
+      "prerequisite_item_ids": ["core-15-01", "core-15-02", "core-15-03"],
+      "required_concepts": ["Docker multi-stage build", "CI pipeline"],
+      "reinforcement_targets": ["Docker multi-stage build", "CI pipeline"]
     },
     {
       "id": "project-portfolio-review-pack",
@@ -4844,11 +4458,7 @@
       "order": 24,
       "summary": "Curate and present your strongest Go projects in a professional portfolio format for job applications.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "core-16-01",
-        "core-16-02",
-        "core-16-03"
-      ],
+      "prerequisites": ["core-16-01", "core-16-02", "core-16-03"],
       "reinforces": [
         "core-16-01",
         "core-16-02",
@@ -4882,9 +4492,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "15-portfolio-interview-capstone"
-          ],
+          "files_touched": ["15-portfolio-interview-capstone"],
           "instruction": "Curate your strongest Go projects, write professional READMEs, and organize them into a portfolio ready for job applications."
         },
         {
@@ -4896,9 +4504,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "15-portfolio-interview-capstone"
-          ],
+          "files_touched": ["15-portfolio-interview-capstone"],
           "instruction": "Review each project for completeness: tests, documentation, error handling, and idiomatic Go style."
         },
         {
@@ -4910,9 +4516,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "15-portfolio-interview-capstone"
-          ],
+          "files_touched": ["15-portfolio-interview-capstone"],
           "instruction": "Prepare a presentation explaining your technical growth, design philosophy, and the most challenging problem you solved."
         }
       ],
@@ -5027,11 +4631,7 @@
       },
       "module_id": "module-16",
       "placement_anchor_item_id": "core-16-15",
-      "prerequisite_item_ids": [
-        "core-16-01",
-        "core-16-02",
-        "core-16-03"
-      ],
+      "prerequisite_item_ids": ["core-16-01", "core-16-02", "core-16-03"],
       "required_concepts": [],
       "reinforcement_targets": []
     },
@@ -5046,11 +4646,7 @@
       "order": 25,
       "summary": "Build and deploy a full-stack application with operations dashboard, automated testing, CI/CD, and observability.",
       "source_legacy_ids": [],
-      "prerequisites": [
-        "opslane-01",
-        "opslane-02",
-        "opslane-03"
-      ],
+      "prerequisites": ["opslane-01", "opslane-02", "opslane-03"],
       "reinforces": [
         "opslane-01",
         "opslane-02",
@@ -5084,9 +4680,7 @@
             "The program runs successfully.",
             "The main behavior matches the README requirements."
           ],
-          "files_touched": [
-            "17-flagship-opslane"
-          ],
+          "files_touched": ["17-flagship-opslane"],
           "instruction": "Build and deploy a full-stack application with Go backend, operations dashboard, automated CI/CD, observability stack, and production readiness."
         },
         {
@@ -5098,9 +4692,7 @@
             "Important success paths are verified.",
             "At least one edge case or failure path is checked."
           ],
-          "files_touched": [
-            "17-flagship-opslane"
-          ],
+          "files_touched": ["17-flagship-opslane"],
           "instruction": "Write comprehensive tests across all layers: unit, integration, and end-to-end tests for critical paths."
         },
         {
@@ -5112,9 +4704,7 @@
             "README is clear.",
             "A reviewer can run or inspect the project without guessing."
           ],
-          "files_touched": [
-            "17-flagship-opslane"
-          ],
+          "files_touched": ["17-flagship-opslane"],
           "instruction": "Document the complete system architecture, deployment process, monitoring setup, and incident response plan."
         }
       ],
@@ -5229,11 +4819,7 @@
       },
       "module_id": "module-18",
       "placement_anchor_item_id": "opslane-15",
-      "prerequisite_item_ids": [
-        "opslane-01",
-        "opslane-02",
-        "opslane-03"
-      ],
+      "prerequisite_item_ids": ["opslane-01", "opslane-02", "opslane-03"],
       "required_concepts": [
         "context cancellation",
         "graceful shutdown",
@@ -5272,6 +4858,7 @@
       "status": "draft",
       "summary": "Verify your complete course environment: repository clone, Go installation, IDE setup, and first successful test run.",
       "module_id": "module-00",
+      "prerequisites": ["core-00-10"],
       "tasks": [
         {
           "title": "Clone and verify the repository",
@@ -5316,13 +4903,9 @@
       "required_concepts": [],
       "reinforcement_targets": [],
       "source_legacy_ids": [],
-      "tags": [
-        "orientation",
-        "setup"
-      ],
+      "tags": ["orientation", "setup"],
       "documentation_mode": "tutorial",
       "readme_status": "scaffolded",
-      "prerequisites": [],
       "verification": "Manual review: ensure repository clone, Go build, and validator output are present and correct.",
       "assessment_id": "assessment-project-course-setup"
     },
@@ -5383,23 +4966,12 @@
         "benchmarking performance",
         "memory allocation"
       ],
-      "reinforcement_targets": [
-        "core-13-10",
-        "core-13-13",
-        "core-13-14"
-      ],
+      "reinforcement_targets": ["core-13-10", "core-13-13", "core-13-14"],
       "source_legacy_ids": [],
-      "tags": [
-        "performance",
-        "profiling",
-        "optimization"
-      ],
+      "tags": ["performance", "profiling", "optimization"],
       "documentation_mode": "tutorial",
       "readme_status": "scaffolded",
-      "prerequisites": [
-        "core-13-10",
-        "core-13-13"
-      ],
+      "prerequisites": ["core-13-10", "core-13-13"],
       "verification": "Automated: before/after benchmark comparison. Manual review: flame graph analysis and optimization report.",
       "assessment_id": "assessment-project-performance-analysis-lab"
     },
@@ -5458,11 +5030,7 @@
       "required_concepts": [],
       "reinforcement_targets": [],
       "source_legacy_ids": [],
-      "tags": [
-        "elective",
-        "advanced",
-        "capstone"
-      ],
+      "tags": ["elective", "advanced", "capstone"],
       "documentation_mode": "tutorial",
       "readme_status": "scaffolded",
       "prerequisites": [],

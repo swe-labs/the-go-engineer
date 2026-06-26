@@ -880,11 +880,11 @@
       "files": {
         "assets_dir": "00-orientation/01-how-to-use-this-repository/assets",
         "diagram_paths": [],
-        "main_path": "00-orientation/01-how-to-use-this-repository/main.go",
+        "main_path": "",
         "readme_path": "00-orientation/01-how-to-use-this-repository/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "00-orientation/01-how-to-use-this-repository/main_test.go"
+        "test_path": ""
       },
       "source_legacy_ids": [],
       "tags": [
@@ -1060,13 +1060,13 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/02-what-zero-magic-means/assets",
+        "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "00-orientation/02-what-zero-magic-means/main.go",
+        "main_path": "",
         "readme_path": "00-orientation/02-what-zero-magic-means/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "00-orientation/02-what-zero-magic-means/main_test.go"
+        "test_path": ""
       },
       "source_legacy_ids": [],
       "tags": [
@@ -1086,7 +1086,7 @@
       "module_id": "module-00",
       "slug": "how-lessons-exercises-projects-and-checkpoints-work",
       "title": "How lessons, exercises, projects, and checkpoints work",
-      "type": "lab",
+      "type": "lesson",
       "subtype": "concept",
       "status": "draft",
       "difficulty": "orientation",
@@ -1242,7 +1242,7 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/03-how-lessons-exercises-projects-and-checkpoints-work/assets",
+        "assets_dir": "",
         "diagram_paths": [],
         "main_path": "00-orientation/03-how-lessons-exercises-projects-and-checkpoints-work/main.go",
         "readme_path": "00-orientation/03-how-lessons-exercises-projects-and-checkpoints-work/README.md",
@@ -1424,13 +1424,13 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/04-how-to-run-code-in-this-repository/assets",
+        "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "00-orientation/04-how-to-run-code-in-this-repository/main.go",
+        "main_path": "",
         "readme_path": "00-orientation/04-how-to-run-code-in-this-repository/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "00-orientation/04-how-to-run-code-in-this-repository/main_test.go"
+        "test_path": ""
       },
       "source_legacy_ids": [],
       "tags": [
@@ -1606,13 +1606,13 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/05-how-starter-folders-work/assets",
+        "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "00-orientation/05-how-starter-folders-work/main.go",
+        "main_path": "",
         "readme_path": "00-orientation/05-how-starter-folders-work/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "00-orientation/05-how-starter-folders-work/main_test.go"
+        "test_path": ""
       },
       "source_legacy_ids": [],
       "tags": [
@@ -1795,13 +1795,13 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/06-how-assessments-work/assets",
+        "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "00-orientation/06-how-assessments-work/main.go",
+        "main_path": "",
         "readme_path": "00-orientation/06-how-assessments-work/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "00-orientation/06-how-assessments-work/main_test.go"
+        "test_path": ""
       },
       "source_legacy_ids": [],
       "tags": [
@@ -1984,13 +1984,13 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/07-how-to-ask-good-debugging-questions/assets",
+        "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "00-orientation/07-how-to-ask-good-debugging-questions/main.go",
+        "main_path": "",
         "readme_path": "00-orientation/07-how-to-ask-good-debugging-questions/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "00-orientation/07-how-to-ask-good-debugging-questions/main_test.go"
+        "test_path": ""
       },
       "source_legacy_ids": [],
       "tags": [
@@ -2173,13 +2173,13 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/08-what-job-ready-means/assets",
+        "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "00-orientation/08-what-job-ready-means/main.go",
+        "main_path": "",
         "readme_path": "00-orientation/08-what-job-ready-means/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "00-orientation/08-what-job-ready-means/main_test.go"
+        "test_path": ""
       },
       "source_legacy_ids": [],
       "tags": [
@@ -2362,13 +2362,13 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/09-how-to-use-the-roadmap/assets",
+        "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "00-orientation/09-how-to-use-the-roadmap/main.go",
+        "main_path": "",
         "readme_path": "00-orientation/09-how-to-use-the-roadmap/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "00-orientation/09-how-to-use-the-roadmap/main_test.go"
+        "test_path": ""
       },
       "source_legacy_ids": [],
       "tags": [
@@ -2559,13 +2559,13 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/10-how-to-build-a-portfolio-from-this-curriculum/assets",
+        "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "00-orientation/10-how-to-build-a-portfolio-from-this-curriculum/main.go",
+        "main_path": "",
         "readme_path": "00-orientation/10-how-to-build-a-portfolio-from-this-curriculum/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "00-orientation/10-how-to-build-a-portfolio-from-this-curriculum/main_test.go"
+        "test_path": ""
       },
       "source_legacy_ids": [],
       "tags": [

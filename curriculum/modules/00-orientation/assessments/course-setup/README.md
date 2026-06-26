@@ -33,3 +33,7 @@ You pass when your environment produces passing tests and you can describe your 
 ## Retake policy
 
 If your environment does not pass the verification project, resolve the issue listed in the test output and re-run. If a question answer is incomplete, revise and resubmit.
+
+## NEXT UP
+
+[Assessment: Module 00 Checkpoint](../checkpoint/README.md) — verify your understanding of all orientation concepts before moving to Module 01.

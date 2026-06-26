@@ -29,7 +29,7 @@ Zero magic eliminates each of these by making all behavior explicit.
 
 In Go, zero magic often means using explicit configuration structs, named constants, and clear function signatures that accept all dependencies as parameters.
 
-The `Config` struct in `main.go` holds the port, timeout, and verbosity settings. `MagicServer()` creates an empty `Config{}` and uses it directly — Go initializes all fields to their zero values (0 for int, false for bool). The server "works" but the port is 0, which would fail in real code. The reader sees nothing about defaults.
+The `Config` struct in the Go example below holds the port, timeout, and verbosity settings. `MagicServer()` creates an empty `Config{}` and uses it directly — Go initializes all fields to their zero values (0 for int, false for bool). The server "works" but the port is 0, which would fail in real code. The reader sees nothing about defaults.
 
 `ZeroMagicServer(cfg Config)` accepts the config as a parameter and explicitly checks each field. If `cfg.Port` is 0 (the zero value for int), it sets it to 8080. If `cfg.Timeout` is 0, it sets it to 30. Every possible state is handled in plain sight.
 
@@ -129,17 +129,7 @@ Add a new field `MaxRetries int` to the `Config` struct. Update `ZeroMagicServer
 
 ## Tests / verification
 
-Run the tests from the repository root:
-
-```bash
-go test ./curriculum/modules/00-orientation/lessons/02-what-zero-magic-means/
-```
-
-Expected output:
-
-```
-ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/lessons/02-what-zero-magic-means
-```
+The inline code example is for reading and understanding. To verify your understanding, complete the practice task above and check your answers against the description. You can also copy the inline code into a local `.go` file and run `go run .` and `go test .` in that directory to experiment with the output.
 
 ## Review questions
 
@@ -151,4 +141,4 @@ ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/le
 
 ## NEXT UP
 
-Lab 03: How lessons, exercises, projects, and checkpoints work — where you learn the learning cycle that every module follows.
+[Lesson 03: How lessons, exercises, projects, and checkpoints work](../03-how-lessons-exercises-projects-and-checkpoints-work/README.md) — where you learn the learning cycle that every module follows.

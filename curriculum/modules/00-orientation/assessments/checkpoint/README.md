@@ -53,3 +53,7 @@ Use `rubric.md` to self-grade before comparing with `answer-key.md`.
 ## Retake policy
 
 If you miss a category, return to the relevant lesson, revise your answer, and write one sentence explaining what changed in your understanding.
+
+## NEXT UP
+
+[Module 01 — Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md) — you are now ready for the technical content.

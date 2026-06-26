@@ -105,11 +105,12 @@ go run ./curriculum/modules/00-orientation/projects/course-setup-verification/_s
 go test ./curriculum/modules/00-orientation/projects/course-setup-verification/_starter
 ```
 
-Expected `go run` output (your results will depend on what is installed):
+The starter output shows the Go and Git checks. After adding the editor check (e.g., for `code`), your output will look something like:
 
 ```
 Course Setup Verification
 =========================
+
 OK: Go is installed
 OK: Git is installed
 NOT FOUND: code is not installed or not in PATH
@@ -122,3 +123,7 @@ ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/proje
 ```
 
 When you are done, update your Portfolio Plan (from Lesson 10) to include this project with status "complete" and the three evidence items: `main.go`, `main_test.go`, and this README.
+
+## NEXT UP
+
+[Assessment: Course Setup](../assessments/course-setup/README.md) — confirm your environment passes the verification.

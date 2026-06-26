@@ -33,7 +33,7 @@ To work on a lab, you copy `_starter/` to a new directory (or edit files in plac
 
 ## Under the hood
 
-The Go program in `main.go` defines a `Task` struct with three fields: `Name`, `Desc`, and `Complete`. The `CompareTasks` function takes two tasks — a starter and a solution — and returns a `Comparison` struct that reports which fields differ.
+The Go example below defines a `Task` struct with three fields: `Name`, `Desc`, and `Complete`. The `CompareTasks` function takes two tasks — a starter and a solution — and returns a `Comparison` struct that reports which fields differ.
 
 The `Comparison.Report()` method produces a human-readable string. If the starter's `Name` or `Desc` differs from the solution, the report says what is missing. If the starter matches the solution, the report says the starter is complete.
 
@@ -125,7 +125,7 @@ Scenario: You copied `_starter/` to a work directory, completed the task, but `g
 
 Step 1: Run `go test -v .` to see which specific test failed and what the expected vs actual values were. The `-v` flag prints the full test output including any messages from `t.Errorf`.
 
-Step 2: Open `_solution/main_test.go` and read the test cases. The tests define the expected behavior. Your starter code must match these expectations.
+Step 2: In a lab that provides a solution, open `_solution/main_test.go` and read the test cases. The tests define the expected behavior. Your starter code must match these expectations.
 
 Step 3: Compare your solution against the provided solution using a diff tool. On the command line: `diff -u your_work/main.go _solution/main.go`. Each line starting with `-` is in your file but not in the solution. Each line starting with `+` is in the solution but not in your file.
 
@@ -159,17 +159,7 @@ Add a new field `Difficulty string` to the `Task` struct. Update `CompareTasks` 
 
 ## Tests / verification
 
-Run the tests from the repository root:
-
-```bash
-go test ./curriculum/modules/00-orientation/lessons/05-how-starter-folders-work/
-```
-
-Expected output:
-
-```
-ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/lessons/05-how-starter-folders-work
-```
+The inline code example is for reading and understanding. To verify your understanding, complete the practice task above and check your answers against the description. You can also copy the inline code into a local `.go` file and run `go run .` and `go test .` in that directory to experiment with the output.
 
 ## Review questions
 
@@ -181,4 +171,4 @@ ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/le
 
 ## NEXT UP
 
-Lesson 06: How assessments work — where you learn how checkpoints and assessments verify your mastery before you move to the next module.
+[Lesson 06: How assessments work](../06-how-assessments-work/README.md) — where you learn how checkpoints and assessments verify your mastery before you move to the next module.

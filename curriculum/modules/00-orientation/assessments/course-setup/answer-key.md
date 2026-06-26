@@ -16,10 +16,10 @@
 
 ## Part 3 — Course project
 
-9. **Expected:** It checks that the Go toolchain is installed, `go version` works, the repository is correctly cloned, and `go build` succeeds.
+9. **Expected:** It uses `exec.LookPath` to check that Go and Git are installed and available in PATH. An editor check is left as a TODO.
 10. **Expected:** `ok` with no failures. If tests fail, the environment is not correctly set up.
-11. **Expected:** The solution uses a more robust checker, handles errors gracefully, and prints formatted output. The exact diff depends on the implementation.
-12. **Expected:** A success message indicating the environment passed all checks.
+11. **Expected:** The solution checks five tools (Go, Git, VS Code, Vim, Nano), uses a loop instead of repeated calls, and prints a summary message. The starter checks only Go and Git with a TODO for the editor.
+12. **Expected:** Two lines: `OK: Go is installed` and `OK: Git is installed`, preceded by a title and separator.
 
 ## Part 4 — Reflection
 

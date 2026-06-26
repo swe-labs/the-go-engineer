@@ -168,4 +168,4 @@ ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/la
 
 ## NEXT UP
 
-Lesson 04: How to run code in this repository — where you learn the difference between `go run`, `go test`, `go build`, and `go vet`.
+[Lesson 04: How to run code in this repository](../04-how-to-run-code-in-this-repository/README.md) — where you learn the difference between `go run`, `go test`, `go build`, and `go vet`.

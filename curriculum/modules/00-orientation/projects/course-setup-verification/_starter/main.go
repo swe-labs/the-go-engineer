@@ -22,6 +22,4 @@ func main() {
 	fmt.Println(checkTool("Git", "git"))
 
 	// TODO: Check for a text editor (e.g., "code" for VS Code, "vim", "nano", etc.)
-	editor := "code"
-	fmt.Println(checkTool("Editor (code)", editor))
 }

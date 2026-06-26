@@ -118,10 +118,10 @@ func atoi(s string) int {
 
 ## Step-by-step execution
 
-1. Run `go run . add 3 4`. The toolchain compiles the package, runs `main()` with `os.Args = ["...", "add", "3", "4"]`. The switch matches `"add"`, calls `Add(3, 4)`, and prints `7`.
-2. Run `go test .`. The toolchain compiles `main_test.go` alongside `main.go`. It calls each `TestXxx` function. `TestAdd` runs four cases: 2+3=5, -1+1=0, 0+0=0, 100+200=300. If any case fails, `t.Errorf` reports it and `go test` exits with a non-zero status.
-3. Run `go build .`. The toolchain writes a binary named `04-how-to-run-code-in-this-repository.exe` (or similar) to the current directory. You can run it directly.
-4. Run `go vet .`. The vet tool checks for suspicious patterns. If it finds one, it prints a warning to stderr. If the code is clean, it prints nothing.
+1. If you copy the inline code into a `.go` file, `go run . add 3 4` compiles the package, runs `main()` with `os.Args = ["...", "add", "3", "4"]`. The switch matches `"add"`, calls `Add(3, 4)`, and prints `7`.
+2. `go test .` compiles the test files alongside the package files. It calls each `TestXxx` function. `TestAdd` runs four cases: 2+3=5, -1+1=0, 0+0=0, 100+200=300. If any case fails, `t.Errorf` reports it and `go test` exits with a non-zero status.
+3. `go build .` writes a binary to the current directory. You can run it directly.
+4. `go vet .` checks for suspicious patterns. If it finds one, it prints a warning to stderr. If the code is clean, it prints nothing.
 
 ## Common mistakes
 
@@ -136,7 +136,7 @@ func atoi(s string) int {
 
 Scenario: You run `go test .` and get a compilation error: "undefined: Add".
 
-Step 1: Check that `main_test.go` and `main.go` are in the same directory. Go test compiles all `*_test.go` files with the package files. If the test file is in a different directory, the function `Add` will not be visible.
+Step 1: Check that the test file and the file defining `Add` are in the same directory. Go test compiles all `*_test.go` files with the package files. If the test file is in a different directory, the function `Add` will not be visible.
 
 Step 2: Check the package declaration at the top of both files. Both must say `package main` (the same package). If one says `package main_test`, the test is in an external test package and cannot access unexported symbols.
 
@@ -171,17 +171,7 @@ Add a new operation `mod` (modulus) to the calculator. Create a `Mod(a, b int) (
 
 ## Tests / verification
 
-Run the tests from the repository root:
-
-```bash
-go test ./curriculum/modules/00-orientation/lessons/04-how-to-run-code-in-this-repository/
-```
-
-Expected output:
-
-```
-ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/lessons/04-how-to-run-code-in-this-repository
-```
+The inline code example is for reading and understanding. To verify your understanding, complete the practice task above and check your answers against the description. You can also copy the inline code into a local `.go` file and run `go run .` and `go test .` in that directory to experiment with the output.
 
 ## Review questions
 
@@ -193,4 +183,4 @@ ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/le
 
 ## NEXT UP
 
-Lesson 05: How starter folders work — where you learn the `_starter/` and `_solution/` workflow used throughout this curriculum.
+[Lesson 05: How starter folders work](../05-how-starter-folders-work/README.md) — where you learn the `_starter/` and `_solution/` workflow used throughout this curriculum.

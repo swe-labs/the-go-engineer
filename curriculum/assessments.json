@@ -13,6 +13,7 @@
   "assessments": [
     {
       "id": "assessment-module-00",
+      "module_id": "module-00",
       "title": "Module 00 Assessment — Orientation",
       "type": "project-review",
       "status": "planned",

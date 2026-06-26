@@ -159,11 +159,9 @@ Create your own `PortfolioPlan` with at least four projects. At least one should
 
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/00-orientation/lessons/10-how-to-build-a-portfolio-from-this-curriculum
-```
+The inline code example is for reading and understanding. To verify your understanding, complete the practice task above and check your answers against the description. You can also copy the inline code into a local `.go` file and run `go run .` and `go test .` in that directory to experiment with the output.
 
-The tests verify:
+The tests in the inline example verify:
 - Complete project with description and evidence scores 5
 - Planned project with no info scores 0
 - In-progress project with description scores at least 2
@@ -181,4 +179,8 @@ The tests verify:
 
 ## NEXT UP
 
-Congratulations! You have completed Module 00. You are now ready for the technical content. Next up: [Module 01 — Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md).
+1. [Project: Course Setup Verification](../projects/course-setup-verification/README.md) — verify your environment
+2. [Assessment: Course Setup](../assessments/course-setup/README.md) — confirm your environment is ready
+3. [Assessment: Module 00 Checkpoint](../assessments/checkpoint/README.md) — verify you understand the orientation content
+
+Then move on to [Module 01 — Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md).

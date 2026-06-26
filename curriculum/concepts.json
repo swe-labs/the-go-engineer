@@ -451,6 +451,92 @@
       "reinforcement_locations": [
         "opslane-14"
       ]
+    },
+    {
+      "concept": "curriculum navigation",
+      "canonical_owner": "core-00-01",
+      "preview_locations": [],
+      "reinforcement_locations": [],
+      "notes": "How to use this repository — folder structure, README contracts, governance rules"
+    },
+    {
+      "concept": "zero-magic philosophy",
+      "canonical_owner": "core-00-02",
+      "preview_locations": [
+        "core-00-01"
+      ],
+      "reinforcement_locations": [
+        "core-01-01"
+      ],
+      "notes": "Every concept must be explicitly taught before it is used — no unexplained assumptions"
+    },
+    {
+      "concept": "lesson-exercise-project-assessment workflow",
+      "canonical_owner": "core-00-03",
+      "preview_locations": [],
+      "reinforcement_locations": [],
+      "notes": "Structure of learning materials: lessons teach, labs practice, projects integrate, assessments verify"
+    },
+    {
+      "concept": "code execution workflow",
+      "canonical_owner": "core-00-04",
+      "preview_locations": [],
+      "reinforcement_locations": [
+        "core-02-01"
+      ],
+      "notes": "How to run Go code in this repository — go run, go test, go build"
+    },
+    {
+      "concept": "starter/solution pattern",
+      "canonical_owner": "core-00-05",
+      "preview_locations": [],
+      "reinforcement_locations": [
+        "core-06-01"
+      ],
+      "notes": "_starter/ folders for exercises, _solution/ folders for verified answers"
+    },
+    {
+      "concept": "assessment workflow",
+      "canonical_owner": "core-00-06",
+      "preview_locations": [],
+      "reinforcement_locations": [],
+      "notes": "How checkpoints, quizzes, and project reviews measure understanding"
+    },
+    {
+      "concept": "debugging methodology",
+      "canonical_owner": "core-00-07",
+      "preview_locations": [],
+      "reinforcement_locations": [
+        "core-06-05"
+      ],
+      "notes": "Hypothesis-testing approach to debugging, structured bug reports, rubber duck method"
+    },
+    {
+      "concept": "job readiness assessment",
+      "canonical_owner": "core-00-08",
+      "preview_locations": [],
+      "reinforcement_locations": [
+        "core-16-01"
+      ],
+      "notes": "What job-ready means — rubric-based evaluation across code quality, design, communication, delivery"
+    },
+    {
+      "concept": "curriculum roadmap",
+      "canonical_owner": "core-00-09",
+      "preview_locations": [],
+      "reinforcement_locations": [
+        "core-01-01"
+      ],
+      "notes": "Dependency graph of modules, prerequisite chain, portfolio_output flags"
+    },
+    {
+      "concept": "portfolio curation",
+      "canonical_owner": "core-00-10",
+      "preview_locations": [],
+      "reinforcement_locations": [
+        "core-16-03"
+      ],
+      "notes": "Selecting, polishing, and presenting projects for job applications"
     }
   ]
 }
