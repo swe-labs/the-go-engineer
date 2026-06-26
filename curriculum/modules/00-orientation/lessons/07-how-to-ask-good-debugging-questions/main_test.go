@@ -26,9 +26,9 @@ func TestScoreQuestion_NoFieldsFilled(t *testing.T) {
 
 func TestScoreQuestion_PartialFields(t *testing.T) {
 	tests := []struct {
-		name  string
-		q     DebugQuestion
-		want  int
+		name string
+		q    DebugQuestion
+		want int
 	}{
 		{
 			name: "only expected and actual",

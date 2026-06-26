@@ -5,10 +5,10 @@ import (
 )
 
 type Step struct {
-	Index     int
-	Name      string
-	Action    string
-	Artifact  string
+	Index    int
+	Name     string
+	Action   string
+	Artifact string
 }
 
 type LearningCycle struct {

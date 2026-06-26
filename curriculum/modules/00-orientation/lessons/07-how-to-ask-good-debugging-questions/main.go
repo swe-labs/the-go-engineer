@@ -6,10 +6,10 @@ import (
 )
 
 type DebugQuestion struct {
-	Expected   string
-	Actual     string
-	Command    string
-	Error      string
+	Expected    string
+	Actual      string
+	Command     string
+	Error       string
 	Environment string
 }
 

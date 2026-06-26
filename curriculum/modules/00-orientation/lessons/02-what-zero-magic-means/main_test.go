@@ -6,31 +6,31 @@ import (
 
 func TestZeroMagicAppliesDefaults(t *testing.T) {
 	tests := []struct {
-		name       string
-		cfg        Config
-		wantPort   int
-		wantTime   int
+		name        string
+		cfg         Config
+		wantPort    int
+		wantTime    int
 		wantVerbose bool
 	}{
 		{
-			name:       "zero values get defaults",
-			cfg:        Config{},
-			wantPort:   8080,
-			wantTime:   30,
+			name:        "zero values get defaults",
+			cfg:         Config{},
+			wantPort:    8080,
+			wantTime:    30,
 			wantVerbose: false,
 		},
 		{
-			name:       "explicit values are preserved",
-			cfg:        Config{Port: 3000, Timeout: 10, Verbose: true},
-			wantPort:   3000,
-			wantTime:   10,
+			name:        "explicit values are preserved",
+			cfg:         Config{Port: 3000, Timeout: 10, Verbose: true},
+			wantPort:    3000,
+			wantTime:    10,
 			wantVerbose: true,
 		},
 		{
-			name:       "partial config fills port default",
-			cfg:        Config{Timeout: 45, Verbose: true},
-			wantPort:   8080,
-			wantTime:   45,
+			name:        "partial config fills port default",
+			cfg:         Config{Timeout: 45, Verbose: true},
+			wantPort:    8080,
+			wantTime:    45,
 			wantVerbose: true,
 		},
 	}

@@ -38,44 +38,44 @@ func TestCompareTasksStarterComplete(t *testing.T) {
 
 func TestCompareTasksPartialComplete(t *testing.T) {
 	tests := []struct {
-		name           string
-		starter        Task
-		solution       Task
-		wantMissName   bool
-		wantMissDesc   bool
-		wantComplete   bool
+		name         string
+		starter      Task
+		solution     Task
+		wantMissName bool
+		wantMissDesc bool
+		wantComplete bool
 	}{
 		{
-			name:           "all fields missing",
-			starter:        Task{Name: "", Desc: "", Complete: false},
-			solution:       Task{Name: "Task A", Desc: "Do something", Complete: true},
-			wantMissName:   true,
-			wantMissDesc:   true,
-			wantComplete:   false,
+			name:         "all fields missing",
+			starter:      Task{Name: "", Desc: "", Complete: false},
+			solution:     Task{Name: "Task A", Desc: "Do something", Complete: true},
+			wantMissName: true,
+			wantMissDesc: true,
+			wantComplete: false,
 		},
 		{
-			name:           "name only missing",
-			starter:        Task{Name: "", Desc: "Do something", Complete: true},
-			solution:       Task{Name: "Task A", Desc: "Do something", Complete: true},
-			wantMissName:   true,
-			wantMissDesc:   false,
-			wantComplete:   true,
+			name:         "name only missing",
+			starter:      Task{Name: "", Desc: "Do something", Complete: true},
+			solution:     Task{Name: "Task A", Desc: "Do something", Complete: true},
+			wantMissName: true,
+			wantMissDesc: false,
+			wantComplete: true,
 		},
 		{
-			name:           "desc only missing",
-			starter:        Task{Name: "Task A", Desc: "", Complete: true},
-			solution:       Task{Name: "Task A", Desc: "Do something", Complete: true},
-			wantMissName:   false,
-			wantMissDesc:   true,
-			wantComplete:   true,
+			name:         "desc only missing",
+			starter:      Task{Name: "Task A", Desc: "", Complete: true},
+			solution:     Task{Name: "Task A", Desc: "Do something", Complete: true},
+			wantMissName: false,
+			wantMissDesc: true,
+			wantComplete: true,
 		},
 		{
-			name:           "complete match",
-			starter:        Task{Name: "Task A", Desc: "Do something", Complete: true},
-			solution:       Task{Name: "Task A", Desc: "Do something", Complete: true},
-			wantMissName:   false,
-			wantMissDesc:   false,
-			wantComplete:   true,
+			name:         "complete match",
+			starter:      Task{Name: "Task A", Desc: "Do something", Complete: true},
+			solution:     Task{Name: "Task A", Desc: "Do something", Complete: true},
+			wantMissName: false,
+			wantMissDesc: false,
+			wantComplete: true,
 		},
 	}
 
