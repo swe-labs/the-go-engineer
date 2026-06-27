@@ -1,41 +1,35 @@
 package main
 
-import (
-	"testing"
-)
+import "testing"
 
-func TestStartPR(t *testing.T) {
-	pr := StartPR("Fix bug", "Fixes the nil pointer issue", "bugfix", "main")
-	if pr == nil {
-		t.Fatal("StartPR returned nil")
+func TestCreatePR(t *testing.T) {
+	id := createPR("Fix bug", "Fixes the nil pointer issue", "bugfix", "main")
+	if id != 1 {
+		t.Errorf("expected id 1, got %d", id)
 	}
-	if pr.Title != "Fix bug" {
-		t.Errorf("expected title 'Fix bug', got %q", pr.Title)
+	if prTitle != "Fix bug" {
+		t.Errorf("expected title 'Fix bug', got %q", prTitle)
 	}
-	if pr.Status != PROpen {
-		t.Errorf("expected status PROpen, got %v", pr.Status)
+	if prStatus != statusOpen {
+		t.Errorf("expected status open, got %s", prStatusString(prStatus))
 	}
 }
 
 func TestPRWorkflow(t *testing.T) {
-	repo := &GitHubRepo{Name: "test", Branches: map[string]bool{"main": true}, Protected: false}
-	pr := StartPR("Add feature", "New feature", "feature", "main")
-
-	pr.Approve()
-	ok, _ := pr.Merge(repo)
+	createPR("Add feature", "New feature", "feature", "main")
+	approvePR()
+	ok, _ := mergePR()
 	if !ok {
 		t.Fatal("expected successful merge on approved PR")
 	}
-	if pr.Status != PRMerged {
-		t.Errorf("expected PRMerged, got %v", pr.Status)
+	if prStatus != statusMerged {
+		t.Errorf("expected merged, got %s", prStatusString(prStatus))
 	}
 }
 
 func TestPRMergeRequiresApproval(t *testing.T) {
-	repo := &GitHubRepo{Name: "test", Branches: map[string]bool{"main": true}, Protected: false}
-	pr := StartPR("Unreviewed change", "Quick fix", "hotfix", "main")
-
-	ok, msg := pr.Merge(repo)
+	createPR("Unreviewed change", "Quick fix", "hotfix", "main")
+	ok, msg := mergePR()
 	if ok {
 		t.Fatal("expected merge to fail without approval")
 	}
@@ -45,20 +39,20 @@ func TestPRMergeRequiresApproval(t *testing.T) {
 }
 
 func TestPRStatusTransitions(t *testing.T) {
-	pr := StartPR("Test", "Desc", "src", "tgt")
-	if pr.Status != PROpen {
-		t.Errorf("expected PROpen, got %v", pr.Status)
+	createPR("Test", "Desc", "src", "tgt")
+	if prStatus != statusOpen {
+		t.Errorf("expected open, got %s", prStatusString(prStatus))
 	}
-	pr.RequestChanges()
-	if pr.Status != PRChangesRequested {
-		t.Errorf("expected PRChangesRequested, got %v", pr.Status)
+	requestChanges()
+	if prStatus != statusChangesRequested {
+		t.Errorf("expected changes requested, got %s", prStatusString(prStatus))
 	}
-	pr.Approve()
-	if pr.Status != PRApproved {
-		t.Errorf("expected PRApproved, got %v", pr.Status)
+	approvePR()
+	if prStatus != statusApproved {
+		t.Errorf("expected approved, got %s", prStatusString(prStatus))
 	}
-	pr.Close()
-	if pr.Status != PRApproved {
-		t.Errorf("Close should not affect merged or approved PRs; got %v", pr.Status)
+	closePR()
+	if prStatus != statusApproved {
+		t.Errorf("close should not affect approved PRs; got %s", prStatusString(prStatus))
 	}
 }

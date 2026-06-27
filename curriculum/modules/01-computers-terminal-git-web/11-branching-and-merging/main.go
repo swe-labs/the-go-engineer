@@ -5,145 +5,130 @@ import (
 	"strings"
 )
 
-type Commit struct {
-	Hash    string
-	Message string
-	Parent  string
+var commitSeq int
+
+func initRepo() {
+	commitSeq = 0
 }
 
-type Branch struct {
-	Name   string
-	Target string
+func nextHash() string {
+	commitSeq++
+	return fmt.Sprintf("%08x", commitSeq)
 }
 
-type SimRepo struct {
-	Commits map[string]Commit
-	Branches map[string]Branch
-	Head     string
-}
-
-func NewSimRepo() *SimRepo {
-	return &SimRepo{
-		Commits:  make(map[string]Commit),
-		Branches: make(map[string]Branch),
+func commit(branch, message string) (string, string) {
+	hash := nextHash()
+	entry := hash + ":" + message
+	if branch == "" {
+		return entry, hash
 	}
+	return branch + "," + entry, hash
 }
 
-func (r *SimRepo) Commit(branch, message string) string {
-	hash := fmt.Sprintf("%08x", len(r.Commits)+1)
-	parent := ""
-	if b, ok := r.Branches[branch]; ok {
-		parent = b.Target
+func branchFrom(source string) string {
+	return source
+}
+
+func logBranch(branch string) []string {
+	if branch == "" {
+		return []string{}
 	}
-	r.Commits[hash] = Commit{Hash: hash, Message: message, Parent: parent}
-	r.Branches[branch] = Branch{Name: branch, Target: hash}
-	r.Head = hash
-	return hash
+	parts := strings.Split(branch, ",")
+	var result [30]string
+	n := 0
+	for i := len(parts) - 1; i >= 0; i-- {
+		p := parts[i]
+		colonAt := 0
+		for j := 0; j < len(p); j++ {
+			if p[j] == ':' {
+				colonAt = j
+				break
+			}
+		}
+		if colonAt == 0 {
+			continue
+		}
+		hash := p[:colonAt]
+		msg := p[colonAt+1:]
+		result[n] = fmt.Sprintf("%s %s", hash[:7], msg)
+		n++
+	}
+	return result[:n]
 }
 
-func (r *SimRepo) Branch(name, fromBranch string) {
-	target := r.Branches[fromBranch].Target
-	r.Branches[name] = Branch{Name: name, Target: target}
-}
-
-func (r *SimRepo) Log(branch string) []string {
-	var log []string
-	hash := r.Branches[branch].Target
-	for hash != "" {
-		c, ok := r.Commits[hash]
-		if !ok {
+func merge(source, target string) (string, bool) {
+	if source == "" {
+		return target, false
+	}
+	if target == "" {
+		return source, true
+	}
+	sourceParts := strings.Split(source, ",")
+	targetParts := strings.Split(target, ",")
+	targetTipHash := targetParts[len(targetParts)-1][:8]
+	ff := false
+	for _, p := range sourceParts {
+		if len(p) >= 8 && p[:8] == targetTipHash {
+			ff = true
 			break
 		}
-		log = append(log, fmt.Sprintf("%s %s", c.Hash[:7], c.Message))
-		hash = c.Parent
 	}
-	return log
-}
-
-func (r *SimRepo) Merge(from, into string) (string, bool) {
-	fromCommit := r.Branches[from].Target
-	intoCommit := r.Branches[into].Target
-
-	ancestor := findMergeBase(r.Commits, fromCommit, intoCommit)
-	if ancestor == "" || ancestor == intoCommit {
-		r.Branches[into] = Branch{Name: into, Target: fromCommit}
-		return "", true
+	if ff {
+		return source, true
 	}
-
-	mergeHash := fmt.Sprintf("%08x", len(r.Commits)+1)
-	r.Commits[mergeHash] = Commit{Hash: mergeHash, Message: fmt.Sprintf("Merge branch '%s' into %s", from, into), Parent: intoCommit + "," + fromCommit}
-	r.Branches[into] = Branch{Name: into, Target: mergeHash}
-	r.Head = mergeHash
-	conflict := strings.Contains(r.Commits[fromCommit].Message, "conflict") && strings.Contains(r.Commits[intoCommit].Message, "conflict")
-	return mergeHash, !conflict
-}
-
-func findMergeBase(commits map[string]Commit, a, b string) string {
-	ancestorsA := map[string]bool{}
-	for h := a; h != ""; {
-		ancestorsA[h] = true
-		c, ok := commits[h]
-		if !ok {
-			break
+	merged := target
+	for _, sp := range sourceParts {
+		dup := false
+		for _, tp := range targetParts {
+			if sp == tp {
+				dup = true
+				break
+			}
 		}
-		if c.Parent == "" {
-			break
+		if !dup {
+			merged = merged + "," + sp
 		}
-		parents := strings.Split(c.Parent, ",")
-		h = parents[0]
 	}
-	for h := b; h != ""; {
-		if ancestorsA[h] {
-			return h
-		}
-		c, ok := commits[h]
-		if !ok {
-			break
-		}
-		if c.Parent == "" {
-			break
-		}
-		parents := strings.Split(c.Parent, ",")
-		h = parents[0]
-	}
-	return ""
+	hash := nextHash()
+	merged = merged + "," + hash + ":Merge branch"
+	return merged, true
 }
 
 func main() {
-	repo := NewSimRepo()
+	initRepo()
 
-	repo.Commit("main", "Initial commit")
-	repo.Commit("main", "Add README")
-	repo.Branch("feature", "main")
-	repo.Commit("feature", "Add feature logic")
-	repo.Commit("feature", "Add feature tests")
-	repo.Commit("main", "Update main config")
+	mainBranch, _ := commit("", "Initial commit")
+	mainBranch, _ = commit(mainBranch, "Add README")
+	featureBranch := branchFrom(mainBranch)
+	featureBranch, _ = commit(featureBranch, "Add feature logic")
+	featureBranch, _ = commit(featureBranch, "Add feature tests")
+	mainBranch, _ = commit(mainBranch, "Update main config")
 
 	fmt.Println("=== Git Branching Simulation ===")
 	fmt.Println()
 
 	fmt.Println("Main branch log:")
-	for _, l := range repo.Log("main") {
+	for _, l := range logBranch(mainBranch) {
 		fmt.Println(" ", l)
 	}
 	fmt.Println()
 
 	fmt.Println("Feature branch log:")
-	for _, l := range repo.Log("feature") {
+	for _, l := range logBranch(featureBranch) {
 		fmt.Println(" ", l)
 	}
 	fmt.Println()
 
-	hash, ok := repo.Merge("feature", "main")
+	merged, ok := merge(featureBranch, mainBranch)
 	if ok {
-		fmt.Printf("Merged successfully (merge commit: %s)\n", hash[:7])
+		fmt.Println("Merged successfully")
 	} else {
 		fmt.Println("Merge conflict detected (simulated conflict)")
 	}
-
 	fmt.Println()
+
 	fmt.Println("Main branch log after merge:")
-	for _, l := range repo.Log("main") {
+	for _, l := range logBranch(merged) {
 		fmt.Println(" ", l)
 	}
 }

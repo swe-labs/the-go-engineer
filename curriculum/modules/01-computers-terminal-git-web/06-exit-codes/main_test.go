@@ -1,41 +1,15 @@
 package main
 
-import (
-	"testing"
-)
+import "testing"
 
-func TestExitCodeByFileStatus(t *testing.T) {
-	tests := []struct {
-		name       string
-		fileExists bool
-		want       int
-	}{
-		{"file exists", true, 0},
-		{"file does not exist", false, 1},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := ExitCodeByFileStatus(tt.fileExists); got != tt.want {
-				t.Errorf("ExitCodeByFileStatus(%v) = %d, want %d", tt.fileExists, got, tt.want)
-			}
-		})
+func TestExitCodeByFileStatusExists(t *testing.T) {
+	if got := ExitCodeByFileStatus(true); got != 0 {
+		t.Errorf("ExitCodeByFileStatus(true) = %d, want 0", got)
 	}
 }
 
-func TestExitCodeByFileStatusEdgeCases(t *testing.T) {
-	tests := []struct {
-		name       string
-		fileExists bool
-		want       int
-	}{
-		{"empty struct false", false, 1},
-		{"empty struct true", true, 0},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := ExitCodeByFileStatus(tt.fileExists); got != tt.want {
-				t.Errorf("ExitCodeByFileStatus(%v) = %d, want %d", tt.fileExists, got, tt.want)
-			}
-		})
+func TestExitCodeByFileStatusNotExists(t *testing.T) {
+	if got := ExitCodeByFileStatus(false); got != 1 {
+		t.Errorf("ExitCodeByFileStatus(false) = %d, want 1", got)
 	}
 }

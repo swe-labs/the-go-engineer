@@ -1,62 +1,46 @@
 package main
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestGetPID(t *testing.T) {
-	tests := []struct {
-		name string
-	}{
-		{"returns positive PID"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := GetPID(); got <= 0 {
-				t.Errorf("GetPID() = %d, want > 0", got)
-			}
-		})
+	if got := GetPID(); got <= 0 {
+		t.Errorf("GetPID() = %d, want > 0", got)
 	}
 }
 
 func TestGetPPID(t *testing.T) {
-	tests := []struct {
-		name string
-	}{
-		{"returns positive PPID"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := GetPPID(); got <= 0 {
-				t.Errorf("GetPPID() = %d, want > 0", got)
-			}
-		})
+	if got := GetPPID(); got <= 0 {
+		t.Errorf("GetPPID() = %d, want > 0", got)
 	}
 }
 
-func TestRunCommand(t *testing.T) {
-	tests := []struct {
-		name    string
-		cmd     string
-		args    []string
-		want    int
-		wantErr bool
-	}{
-		{"valid command returns 0", "go", []string{"version"}, 0, false},
-		{"invalid command returns error", "nonexistent-command-xyz", []string{}, -1, true},
-		{"failing command returns non-zero", "go", []string{"build", "-invalid-flag"}, 2, false},
+func TestRunCommandValid(t *testing.T) {
+	got, err := RunCommand("go", "version")
+	if err != nil {
+		t.Errorf("RunCommand() error = %v", err)
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := RunCommand(tt.cmd, tt.args...)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("RunCommand() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if got != tt.want {
-				t.Errorf("RunCommand() = %d, want %d", got, tt.want)
-			}
-		})
+	if got != 0 {
+		t.Errorf("RunCommand() = %d, want 0", got)
+	}
+}
+
+func TestRunCommandInvalid(t *testing.T) {
+	got, err := RunCommand("nonexistent-command-xyz")
+	if err == nil {
+		t.Error("RunCommand() expected error")
+	}
+	if got != -1 {
+		t.Errorf("RunCommand() = %d, want -1", got)
+	}
+}
+
+func TestRunCommandFailsWithNonZero(t *testing.T) {
+	got, err := RunCommand("go", "build", "-invalid-flag")
+	if err != nil {
+		t.Errorf("RunCommand() unexpected error = %v", err)
+	}
+	if got == 0 {
+		t.Error("RunCommand() expected non-zero exit code")
 	}
 }
 

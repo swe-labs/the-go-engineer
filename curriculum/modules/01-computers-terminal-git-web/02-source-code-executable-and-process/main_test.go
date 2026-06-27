@@ -5,44 +5,25 @@ import (
 	"testing"
 )
 
-func TestProgramLifecycleDescribe(t *testing.T) {
-	p := ProgramLifecycle{
-		SourceFile: "/home/user/main.go",
-		BinaryPath: "/home/user/myapp",
-		PID:        1234,
-		Args:       []string{"./myapp", "--flag"},
-	}
-
-	got := p.Describe()
+func TestDescribeProgram(t *testing.T) {
+	got := describeProgram("/home/user/main.go", "/home/user/myapp", 1234, []string{"./myapp", "--flag"})
 	wantParts := []string{"Source:", "/home/user/main.go", "Binary:", "/home/user/myapp", "PID:", "1234", "Args:", "./myapp", "--flag"}
 	for _, part := range wantParts {
 		if !strings.Contains(got, part) {
-			t.Errorf("Describe() missing %q\nFull output:\n%s", part, got)
+			t.Errorf("describeProgram() missing %q\nFull output:\n%s", part, got)
 		}
 	}
 }
 
-func TestProgramLifecycleEmptyArgs(t *testing.T) {
-	p := ProgramLifecycle{
-		SourceFile: "main.go",
-		BinaryPath: "./app",
-		PID:        0,
-		Args:       []string{},
-	}
-	got := p.Describe()
+func TestDescribeProgramEmptyArgs(t *testing.T) {
+	got := describeProgram("main.go", "./app", 0, []string{})
 	if !strings.Contains(got, "Args:") {
-		t.Errorf("expected Args in Describe(), got %q", got)
+		t.Errorf("expected Args in describeProgram(), got %q", got)
 	}
 }
 
-func TestProgramLifecyclePIDZero(t *testing.T) {
-	p := ProgramLifecycle{
-		SourceFile: "src/main.go",
-		BinaryPath: "/bin/app",
-		PID:        0,
-		Args:       []string{"app"},
-	}
-	got := p.Describe()
+func TestDescribeProgramPIDZero(t *testing.T) {
+	got := describeProgram("src/main.go", "/bin/app", 0, []string{"app"})
 	if !strings.Contains(got, "PID:    0") {
 		t.Errorf("expected PID 0, got %q", got)
 	}

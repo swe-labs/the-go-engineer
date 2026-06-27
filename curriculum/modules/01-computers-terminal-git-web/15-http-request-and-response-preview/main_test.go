@@ -1,98 +1,44 @@
 package main
 
 import (
-	"io"
-	"net/http"
 	"strings"
 	"testing"
-	"time"
 )
 
-func TestServerResponds(t *testing.T) {
-	server := startServer()
-	defer server.Close()
-	time.Sleep(100 * time.Millisecond)
-
-	resp, err := http.Get("http://localhost:8080/")
-	if err != nil {
-		t.Fatalf("GET / failed: %v", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		t.Errorf("expected 200, got %d", resp.StatusCode)
-	}
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		t.Fatalf("read body failed: %v", err)
-	}
-	if !strings.Contains(string(body), "Hello from Go server!") {
-		t.Errorf("unexpected body: %q", string(body))
+func TestHTTPResponseStatus(t *testing.T) {
+	resp := httpResponse(200, "OK")
+	if !strings.Contains(resp, "200 OK") {
+		t.Errorf("expected 200 OK in response, got %q", resp)
 	}
 }
 
-func TestAPIHello(t *testing.T) {
-	server := startServer()
-	defer server.Close()
-	time.Sleep(100 * time.Millisecond)
-
-	resp, err := http.Get("http://localhost:8080/api/hello")
-	if err != nil {
-		t.Fatalf("GET /api/hello failed: %v", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		t.Errorf("expected 200, got %d", resp.StatusCode)
-	}
-
-	contentType := resp.Header.Get("Content-Type")
-	if contentType != "application/json" {
-		t.Errorf("expected application/json, got %q", contentType)
-	}
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		t.Fatalf("read body failed: %v", err)
-	}
-	if !strings.Contains(string(body), "Hello, API!") {
-		t.Errorf("unexpected body: %q", string(body))
+func TestHTTPRequestRoot(t *testing.T) {
+	resp := httpRequest("GET", "/", "")
+	if !strings.Contains(resp, "Hello from Go server!") {
+		t.Errorf("expected greeting in response, got %q", resp)
 	}
 }
 
-func TestRequestNotFound(t *testing.T) {
-	server := startServer()
-	defer server.Close()
-	time.Sleep(100 * time.Millisecond)
-
-	resp, err := http.Get("http://localhost:8080/nonexistent")
-	if err != nil {
-		t.Fatalf("request failed: %v", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		t.Logf("Note: got status %d for nonexistent path (catch-all handler)", resp.StatusCode)
+func TestHTTPRequestAPI(t *testing.T) {
+	resp := httpRequest("GET", "/api/hello", "")
+	if !strings.Contains(resp, "Hello, API!") {
+		t.Errorf("expected API greeting in response, got %q", resp)
 	}
 }
 
-func TestMakeRequest(t *testing.T) {
-	server := startServer()
-	defer server.Close()
-	time.Sleep(100 * time.Millisecond)
+func TestHTTPRequestNotFound(t *testing.T) {
+	resp := httpRequest("GET", "/nonexistent", "")
+	if !strings.Contains(resp, "404") {
+		t.Errorf("expected 404 in response, got %q", resp)
+	}
+}
 
-	status, body, headers, err := makeRequest("http://localhost:8080/")
-	if err != nil {
-		t.Fatalf("makeRequest failed: %v", err)
+func TestHTTPResponseFormat(t *testing.T) {
+	resp := httpResponse(200, "test body")
+	if !strings.Contains(resp, "HTTP/1.1") {
+		t.Errorf("expected HTTP/1.1 in response, got %q", resp)
 	}
-	if status != http.StatusOK {
-		t.Errorf("expected 200, got %d", status)
-	}
-	if body == "" {
-		t.Error("expected non-empty body")
-	}
-	if headers.Get("Content-Type") == "" {
-		t.Error("expected Content-Type header")
+	if !strings.Contains(resp, "Content-Type") {
+		t.Errorf("expected Content-Type header, got %q", resp)
 	}
 }

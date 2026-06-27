@@ -1,137 +1,107 @@
 package main
 
-import (
-	"fmt"
-)
-
-type PRStatus int
+import "fmt"
 
 const (
-	PRDraft PRStatus = iota
-	PROpen
-	PRChangesRequested
-	PRApproved
-	PRMerged
-	PRClosed
+	statusOpen             = 0
+	statusChangesRequested = 1
+	statusApproved         = 2
+	statusMerged           = 3
+	statusClosed           = 4
 )
 
-func (s PRStatus) String() string {
-	switch s {
-	case PRDraft:
-		return "draft"
-	case PROpen:
+var prID int
+var prTitle string
+var prSource string
+var prTarget string
+var prStatus int
+var prComments [30]string
+var prCommentCount int
+
+func prStatusString(s int) string {
+	if s == statusOpen {
 		return "open"
-	case PRChangesRequested:
+	}
+	if s == statusChangesRequested {
 		return "changes requested"
-	case PRApproved:
+	}
+	if s == statusApproved {
 		return "approved"
-	case PRMerged:
+	}
+	if s == statusMerged {
 		return "merged"
-	case PRClosed:
+	}
+	if s == statusClosed {
 		return "closed"
-	default:
-		return "unknown"
 	}
+	return "unknown"
 }
 
-type PullRequest struct {
-	ID          int
-	Title       string
-	Description string
-	Source      string
-	Target      string
-	Status      PRStatus
-	Comments    []string
-	Approvals   int
+func createPR(title, desc, source, target string) int {
+	prID = 1
+	prTitle = title
+	prSource = source
+	prTarget = target
+	prStatus = statusOpen
+	prCommentCount = 0
+	return prID
 }
 
-type GitHubRepo struct {
-	Name      string
-	Branches  map[string]bool
-	Protected bool
+func addComment(author, body string) {
+	prComments[prCommentCount] = author + ": " + body
+	prCommentCount++
 }
 
-func StartPR(title, desc, source, target string) *PullRequest {
-	return &PullRequest{
-		ID:          1,
-		Title:       title,
-		Description: desc,
-		Source:      source,
-		Target:      target,
-		Status:      PROpen,
-		Comments:    []string{},
-		Approvals:   0,
-	}
+func requestChanges() {
+	prStatus = statusChangesRequested
 }
 
-func (pr *PullRequest) AddComment(author, body string) {
-	pr.Comments = append(pr.Comments, fmt.Sprintf("%s: %s", author, body))
+func approvePR() {
+	prStatus = statusApproved
 }
 
-func (pr *PullRequest) RequestChanges() {
-	pr.Status = PRChangesRequested
-}
-
-func (pr *PullRequest) Approve() {
-	pr.Approvals++
-	if pr.Approvals >= 1 {
-		pr.Status = PRApproved
-	}
-}
-
-func (pr *PullRequest) Merge(repo *GitHubRepo) (bool, string) {
-	if pr.Status != PRApproved {
+func mergePR() (bool, string) {
+	if prStatus != statusApproved {
 		return false, "PR must be approved before merging"
 	}
-	if repo.Protected && pr.Target == "main" {
-		if len(pr.Comments) == 0 {
-			return false, "protected branch requires at least one review comment"
-		}
-	}
-	pr.Status = PRMerged
+	prStatus = statusMerged
 	return true, "Pull request merged successfully"
 }
 
-func (pr *PullRequest) Close() {
-	if pr.Status != PRMerged && pr.Status != PRApproved {
-		pr.Status = PRClosed
+func closePR() {
+	if prStatus != statusMerged && prStatus != statusApproved {
+		prStatus = statusClosed
 	}
 }
 
 func main() {
+	createPR("Add login feature", "Implements user authentication with JWT", "feature-login", "main")
+
 	fmt.Println("=== GitHub Workflow Simulation ===")
 	fmt.Println()
-
-	repo := &GitHubRepo{
-		Name:      "my-project",
-		Branches:  map[string]bool{"main": true, "feature-login": true},
-		Protected: true,
-	}
-
-	pr := StartPR("Add login feature", "Implements user authentication with JWT", "feature-login", "main")
-	fmt.Printf("PR #%d created: %s (%s -> %s)\n", pr.ID, pr.Title, pr.Source, pr.Target)
-	fmt.Printf("Status: %s\n", pr.Status)
+	fmt.Printf("PR #%d created: %s (%s -> %s)\n", prID, prTitle, prSource, prTarget)
+	fmt.Printf("Status: %s\n", prStatusString(prStatus))
 	fmt.Println()
 
-	pr.AddComment("reviewer1", "Please add error handling for empty credentials")
-	pr.RequestChanges()
-	fmt.Printf("After review: %s\n", pr.Status)
+	addComment("reviewer1", "Please add error handling for empty credentials")
+	requestChanges()
+	fmt.Printf("After review: %s\n", prStatusString(prStatus))
 
-	pr.AddComment("author", "Added error handling as requested")
-	pr.Approve()
-	fmt.Printf("After approval: %s\n", pr.Status)
+	addComment("author", "Added error handling as requested")
+	approvePR()
+	fmt.Printf("After approval: %s\n", prStatusString(prStatus))
 
-	ok, msg := pr.Merge(repo)
+	ok, msg := mergePR()
 	if ok {
 		fmt.Printf("Merge result: %s\n", msg)
-		fmt.Printf("Final status: %s\n", pr.Status)
+		fmt.Printf("Final status: %s\n", prStatusString(prStatus))
 	} else {
 		fmt.Printf("Merge blocked: %s\n", msg)
 	}
 	fmt.Println()
 
 	fmt.Println("Review comments:")
-	for _, c := range pr.Comments {
-		fmt.Println(" ", c)
+	for i := 0; i < prCommentCount; i++ {
+		fmt.Println(" ", prComments[i])
 	}
 }

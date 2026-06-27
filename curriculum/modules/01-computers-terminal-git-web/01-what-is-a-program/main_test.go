@@ -5,25 +5,38 @@ import (
 	"testing"
 )
 
-func TestProgramStageString(t *testing.T) {
-	tests := []struct {
-		stage ProgramStage
-		want  string
-	}{
-		{StageSource, "source code: human-readable text written by the programmer"},
-		{StageBinary, "executable binary: machine instructions produced by the compiler"},
-		{StageProcess, "running process: binary loaded into memory by the OS"},
-	}
-
-	for _, tt := range tests {
-		got := tt.stage.String()
-		if got != tt.want {
-			t.Errorf("ProgramStage(%d).String() = %q; want %q", tt.stage, got, tt.want)
-		}
+func TestSource(t *testing.T) {
+	got := stageString(StageSource)
+	want := "source code: human-readable text written by the programmer"
+	if got != want {
+		t.Errorf("stageString(StageSource) = %q; want %q", got, want)
 	}
 }
 
-func TestProgramStageOrder(t *testing.T) {
+func TestBinary(t *testing.T) {
+	got := stageString(StageBinary)
+	want := "executable binary: machine instructions produced by the compiler"
+	if got != want {
+		t.Errorf("stageString(StageBinary) = %q; want %q", got, want)
+	}
+}
+
+func TestProcess(t *testing.T) {
+	got := stageString(StageProcess)
+	want := "running process: binary loaded into memory by the OS"
+	if got != want {
+		t.Errorf("stageString(StageProcess) = %q; want %q", got, want)
+	}
+}
+
+func TestUnknown(t *testing.T) {
+	got := stageString(99)
+	if !strings.Contains(got, "unknown") {
+		t.Errorf("expected unknown for invalid stage, got %q", got)
+	}
+}
+
+func TestStageOrder(t *testing.T) {
 	if StageSource != 0 {
 		t.Errorf("StageSource should be 0, got %d", StageSource)
 	}
@@ -32,13 +45,5 @@ func TestProgramStageOrder(t *testing.T) {
 	}
 	if StageProcess != 2 {
 		t.Errorf("StageProcess should be 2, got %d", StageProcess)
-	}
-}
-
-func TestProgramStageUnknown(t *testing.T) {
-	var bad ProgramStage = 99
-	got := bad.String()
-	if !strings.Contains(got, "unknown") {
-		t.Errorf("expected unknown for invalid stage, got %q", got)
 	}
 }

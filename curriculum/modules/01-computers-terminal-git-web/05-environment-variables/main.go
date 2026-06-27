@@ -3,23 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-	"sort"
 	"strings"
 )
 
-type EnvVar struct {
-	Key   string
-	Value string
-	Set   bool
-}
-
-func GetEnv(key string) EnvVar {
-	val, ok := os.LookupEnv(key)
-	return EnvVar{
-		Key:   key,
-		Value: val,
-		Set:   ok,
-	}
+func GetEnv(key string) (string, bool) {
+	return os.LookupEnv(key)
 }
 
 func main() {
@@ -28,20 +16,19 @@ func main() {
 
 	vars := []string{"PATH", "HOME", "USER", "GOPATH", "GOROOT", "MY_CUSTOM_VAR"}
 	for _, key := range vars {
-		ev := GetEnv(key)
-		if ev.Set {
-			fmt.Printf("%s = %s\n", ev.Key, ev.Value)
+		val, ok := GetEnv(key)
+		if ok {
+			fmt.Printf("%s = %s\n", key, val)
 		} else {
-			fmt.Printf("%s = [not set]\n", ev.Key)
+			fmt.Printf("%s = [not set]\n", key)
 		}
 	}
 
 	fmt.Println()
-	fmt.Println("All environment variables (sorted):")
+	fmt.Println("All environment variables:")
 	fmt.Println()
 
 	all := os.Environ()
-	sort.Strings(all)
 	for _, pair := range all {
 		parts := strings.SplitN(pair, "=", 2)
 		if len(parts) == 2 {

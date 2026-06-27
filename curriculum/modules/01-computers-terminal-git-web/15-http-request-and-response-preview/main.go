@@ -1,81 +1,44 @@
 package main
 
-import (
-	"fmt"
-	"io"
-	"net/http"
-	"time"
-)
+import "fmt"
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/plain")
-	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "Hello from Go server!\nMethod: %s\nPath: %s\n", r.Method, r.URL.Path)
+func httpResponse(statusCode int, body string) string {
+	statusText := ""
+	if statusCode == 200 {
+		statusText = "OK"
+	} else if statusCode == 404 {
+		statusText = "Not Found"
+	} else if statusCode == 500 {
+		statusText = "Internal Server Error"
+	}
+	return fmt.Sprintf("HTTP/1.1 %d %s\r\nContent-Type: text/plain\r\nContent-Length: %d\r\n\r\n%s",
+		statusCode, statusText, len(body), body)
 }
 
-func startServer() *http.Server {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", helloHandler)
-	mux.HandleFunc("/api/hello", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		fmt.Fprintf(w, `{"message": "Hello, API!", "method": "%s"}`, r.Method)
-	})
-
-	server := &http.Server{
-		Addr:    ":8080",
-		Handler: mux,
+func httpRequest(method, path, body string) string {
+	if path == "/" || path == "" {
+		return httpResponse(200, "Hello from Go server!\nMethod: "+method+"\nPath: "+path)
 	}
-
-	go func() {
-		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			fmt.Printf("Server error: %v\n", err)
-		}
-	}()
-
-	return server
-}
-
-func makeRequest(url string) (int, string, http.Header, error) {
-	resp, err := http.Get(url)
-	if err != nil {
-		return 0, "", nil, fmt.Errorf("request failed: %w", err)
+	if path == "/api/hello" {
+		return httpResponse(200, `{"message": "Hello, API!", "method": "`+method+`"}`)
 	}
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return 0, "", nil, fmt.Errorf("read failed: %w", err)
-	}
-
-	return resp.StatusCode, string(body), resp.Header, nil
+	return httpResponse(404, "Not Found: "+path)
 }
 
 func main() {
-	server := startServer()
-	defer server.Close()
-	time.Sleep(100 * time.Millisecond)
-
 	fmt.Println("=== HTTP Request/Response Preview ===")
 	fmt.Println()
-	fmt.Println("Server started on http://localhost:8080")
-	fmt.Println()
 
-	urls := []string{
-		"http://localhost:8080/",
-		"http://localhost:8080/api/hello",
+	paths := []string{"/", "/api/hello", "/unknown"}
+	methods := []string{"GET", "POST"}
+
+	for _, path := range paths {
+		fmt.Printf("--- %s %s ---\n", methods[0], path)
+		resp := httpRequest(methods[0], path, "")
+		fmt.Println(resp)
 	}
 
-	for _, url := range urls {
-		fmt.Printf("--- GET %s ---\n", url)
-		status, body, headers, err := makeRequest(url)
-		if err != nil {
-			fmt.Printf("Error: %v\n", err)
-			continue
-		}
-		fmt.Printf("Status: %d %s\n", status, http.StatusText(status))
-		fmt.Printf("Content-Type: %s\n", headers.Get("Content-Type"))
-		fmt.Printf("Body: %s\n", body)
-		fmt.Println()
-	}
+	fmt.Println("HTTP (Hypertext Transfer Protocol) is the foundation of")
+	fmt.Println("data communication on the web. A client sends a request")
+	fmt.Println("and a server returns a response with a status code, headers, and body.")
 }

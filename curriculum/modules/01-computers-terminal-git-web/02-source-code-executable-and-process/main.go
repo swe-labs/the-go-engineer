@@ -7,17 +7,10 @@ import (
 	"path/filepath"
 )
 
-type ProgramLifecycle struct {
-	SourceFile string
-	BinaryPath string
-	PID        int
-	Args       []string
-}
-
-func (p ProgramLifecycle) Describe() string {
+func describeProgram(sourceFile, binaryPath string, pid int, args []string) string {
 	return fmt.Sprintf(
 		"Source: %s\nBinary: %s\nPID:    %d\nArgs:   %v",
-		p.SourceFile, p.BinaryPath, p.PID, p.Args,
+		sourceFile, binaryPath, pid, args,
 	)
 }
 
@@ -25,16 +18,14 @@ func main() {
 	exe, _ := os.Executable()
 	wd, _ := os.Getwd()
 
-	lifecycle := ProgramLifecycle{
-		SourceFile: filepath.Join(wd, "main.go"),
-		BinaryPath: exe,
-		PID:        os.Getpid(),
-		Args:       os.Args,
-	}
+	sourceFile := filepath.Join(wd, "main.go")
+	binaryPath := exe
+	pid := os.Getpid()
+	args := os.Args
 
 	fmt.Println("=== Source Code, Executable, and Process ===")
 	fmt.Println()
-	fmt.Println(lifecycle.Describe())
+	fmt.Println(describeProgram(sourceFile, binaryPath, pid, args))
 	fmt.Println()
 
 	path, _ := exec.LookPath(os.Args[0])

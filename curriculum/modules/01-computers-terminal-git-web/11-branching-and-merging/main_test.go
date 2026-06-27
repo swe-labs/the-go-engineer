@@ -5,25 +5,19 @@ import (
 	"testing"
 )
 
-func TestNewSimRepo(t *testing.T) {
-	r := NewSimRepo()
-	if r == nil {
-		t.Fatal("NewSimRepo() returned nil")
-	}
-	if len(r.Commits) != 0 {
-		t.Errorf("expected 0 commits, got %d", len(r.Commits))
-	}
-	if len(r.Branches) != 0 {
-		t.Errorf("expected 0 branches, got %d", len(r.Branches))
+func TestInitRepo(t *testing.T) {
+	initRepo()
+	if commitSeq != 0 {
+		t.Errorf("expected commitSeq 0 after init, got %d", commitSeq)
 	}
 }
 
 func TestCommitAndLog(t *testing.T) {
-	r := NewSimRepo()
-	r.Commit("main", "Initial commit")
-	r.Commit("main", "Second commit")
+	initRepo()
+	mainBranch, _ := commit("", "Initial commit")
+	mainBranch, _ = commit(mainBranch, "Second commit")
 
-	log := r.Log("main")
+	log := logBranch(mainBranch)
 	if len(log) != 2 {
 		t.Fatalf("expected 2 log entries, got %d", len(log))
 	}
@@ -36,19 +30,17 @@ func TestCommitAndLog(t *testing.T) {
 }
 
 func TestBranchAndMergeFastForward(t *testing.T) {
-	r := NewSimRepo()
-	r.Commit("main", "Initial commit")
-	r.Branch("feature", "main")
-	r.Commit("feature", "Feature work")
+	initRepo()
+	mainBranch, _ := commit("", "Initial commit")
+	featureBranch := branchFrom(mainBranch)
+	featureBranch, _ = commit(featureBranch, "Feature work")
 
-	hash, ok := r.Merge("feature", "main")
+	merged, ok := merge(featureBranch, mainBranch)
 	if !ok {
 		t.Fatal("expected successful fast-forward merge")
 	}
-	if hash != "" {
-		t.Logf("Fast-forward merge completed")
-	}
-	log := r.Log("main")
+	mainBranch = merged
+	log := logBranch(mainBranch)
 	if !strings.Contains(log[0], "Feature work") {
 		t.Errorf("expected feature work in main log after merge, got %q", log[0])
 	}

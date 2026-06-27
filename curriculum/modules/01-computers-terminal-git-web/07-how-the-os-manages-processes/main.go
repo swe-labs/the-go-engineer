@@ -6,23 +6,20 @@ import (
 	"os/exec"
 )
 
-// GetPID returns the current process ID.
 func GetPID() int {
 	return os.Getpid()
 }
 
-// GetPPID returns the parent process ID.
 func GetPPID() int {
 	return os.Getppid()
 }
 
-// RunCommand runs a command and returns its exit code.
-// Returns -1 if the command could not be started.
 func RunCommand(name string, args ...string) (int, error) {
 	cmd := exec.Command(name, args...)
-	if err := cmd.Run(); err != nil {
-		if exitErr, ok := err.(*exec.ExitError); ok {
-			return exitErr.ExitCode(), nil
+	err := cmd.Run()
+	if err != nil {
+		if cmd.ProcessState != nil {
+			return cmd.ProcessState.ExitCode(), nil
 		}
 		return -1, err
 	}

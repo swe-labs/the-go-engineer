@@ -1,99 +1,106 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-type DiffLine struct {
-	Number    int
-	Content   string
-	Type      string
-}
+const maxDiffLines = 50
+const maxComments = 30
 
-type ReviewComment struct {
-	Line      int
-	Author    string
-	Body      string
-	Blocking  bool
-}
+var diffLines [maxDiffLines]string
+var diffTypes [maxDiffLines]string
+var diffCount int
 
-type CodeReview struct {
-	Diff         []DiffLine
-	Comments     []ReviewComment
-	Approved     bool
-	ChangesReq   bool
-}
+var commentLines [maxComments]int
+var commentAuthors [maxComments]string
+var commentBodies [maxComments]string
+var commentBlocking [maxComments]bool
+var commentCount int
 
-func NewCodeReview(diffContent string) *CodeReview {
-	lines := strings.Split(diffContent, "\n")
-	cr := &CodeReview{Diff: make([]DiffLine, 0, len(lines))}
-	for i, line := range lines {
-		dt := "context"
-		if strings.HasPrefix(line, "+") {
-			dt = "addition"
-		} else if strings.HasPrefix(line, "-") {
-			dt = "deletion"
+var changesRequested bool
+var approved bool
+
+func reviewDiff(diffContent string) int {
+	diffCount = 0
+	changesRequested = false
+	approved = false
+	commentCount = 0
+	start := 0
+	for i := 0; i < len(diffContent); i++ {
+		if diffContent[i] == '\n' {
+			line := diffContent[start:i]
+			addDiffLine(line)
+			start = i + 1
 		}
-		cr.Diff = append(cr.Diff, DiffLine{Number: i + 1, Content: line, Type: dt})
 	}
-	return cr
+	if start < len(diffContent) {
+		line := diffContent[start:]
+		addDiffLine(line)
+	}
+	return diffCount
 }
 
-func (cr *CodeReview) LeaveComment(line int, author, body string, blocking bool) {
-	cr.Comments = append(cr.Comments, ReviewComment{Line: line, Author: author, Body: body, Blocking: blocking})
+func addDiffLine(content string) {
+	diffLines[diffCount] = content
+	dt := "context"
+	if len(content) > 0 && content[0] == '+' {
+		dt = "addition"
+	} else if len(content) > 0 && content[0] == '-' {
+		dt = "deletion"
+	}
+	diffTypes[diffCount] = dt
+	diffCount++
+}
+
+func addComment(line int, author, body string, blocking bool) {
+	commentLines[commentCount] = line
+	commentAuthors[commentCount] = author
+	commentBodies[commentCount] = body
+	commentBlocking[commentCount] = blocking
 	if blocking {
-		cr.ChangesReq = true
-		cr.Approved = false
+		changesRequested = true
+		approved = false
+	}
+	commentCount++
+}
+
+func resolveBlocking() {
+	changesRequested = false
+	for i := 0; i < commentCount; i++ {
+		commentBlocking[i] = false
 	}
 }
 
-func (cr *CodeReview) Approve() {
-	if cr.ChangesReq {
-		return
+func submitReview() bool {
+	if changesRequested {
+		return false
 	}
-	cr.Approved = true
+	approved = true
+	return true
 }
 
-func (cr *CodeReview) ResolveBlockingComments() {
-	cr.ChangesReq = false
-	for i := range cr.Comments {
-		cr.Comments[i].Blocking = false
-	}
-}
-
-func (cr *CodeReview) Summary() string {
-	var b strings.Builder
-	b.WriteString(fmt.Sprintf("Diff: %d lines (%d additions, %d deletions)\n", len(cr.Diff), cr.countType("addition"), cr.countType("deletion")))
-	b.WriteString(fmt.Sprintf("Comments: %d (%d blocking)\n", len(cr.Comments), cr.countBlocking()))
-	if cr.Approved {
-		b.WriteString("Status: APPROVED\n")
-	} else if cr.ChangesReq {
-		b.WriteString("Status: CHANGES REQUESTED\n")
-	} else {
-		b.WriteString("Status: PENDING REVIEW\n")
-	}
-	return b.String()
-}
-
-func (cr *CodeReview) countType(t string) int {
-	count := 0
-	for _, d := range cr.Diff {
-		if d.Type == t {
-			count++
+func summary() string {
+	additions := 0
+	deletions := 0
+	for i := 0; i < diffCount; i++ {
+		if diffTypes[i] == "addition" {
+			additions++
+		} else if diffTypes[i] == "deletion" {
+			deletions++
 		}
 	}
-	return count
-}
-
-func (cr *CodeReview) countBlocking() int {
-	count := 0
-	for _, c := range cr.Comments {
-		if c.Blocking {
-			count++
+	blocking := 0
+	for i := 0; i < commentCount; i++ {
+		if commentBlocking[i] {
+			blocking++
 		}
 	}
-	return count
+	status := "PENDING REVIEW"
+	if approved {
+		status = "APPROVED"
+	} else if changesRequested {
+		status = "CHANGES REQUESTED"
+	}
+	return fmt.Sprintf("Diff: %d lines (%d additions, %d deletions)\nComments: %d (%d blocking)\nStatus: %s\n",
+		diffCount, additions, deletions, commentCount, blocking, status)
 }
 
 func main() {
@@ -113,39 +120,39 @@ func main() {
 +    new()
  }`
 
-	review := NewCodeReview(diff)
+	reviewDiff(diff)
 
 	fmt.Println("=== Code Review Simulation ===")
 	fmt.Println()
 	fmt.Println("Submitted Diff:")
-	for _, d := range review.Diff {
+	for i := 0; i < diffCount; i++ {
 		mark := " "
-		if d.Type == "addition" {
+		if diffTypes[i] == "addition" {
 			mark = "+"
-		} else if d.Type == "deletion" {
+		} else if diffTypes[i] == "deletion" {
 			mark = "-"
 		}
-		fmt.Printf("  %s %s\n", mark, d.Content)
+		fmt.Printf("  %s %s\n", mark, diffLines[i])
 	}
 	fmt.Println()
 
-	review.LeaveComment(5, "alice", "Missing error handling on new() call", true)
-	review.LeaveComment(9, "bob", "Consider adding a unit test for this path", false)
+	addComment(5, "alice", "Missing error handling on new() call", true)
+	addComment(9, "bob", "Consider adding a unit test for this path", false)
 
 	fmt.Println("Review Comments:")
-	for _, c := range review.Comments {
+	for i := 0; i < commentCount; i++ {
 		blocking := ""
-		if c.Blocking {
+		if commentBlocking[i] {
 			blocking = " [BLOCKING]"
 		}
-		fmt.Printf("  Line %d - %s%s: %s\n", c.Line, c.Author, blocking, c.Body)
+		fmt.Printf("  Line %d - %s%s: %s\n", commentLines[i], commentAuthors[i], blocking, commentBodies[i])
 	}
 	fmt.Println()
 
-	fmt.Println(review.Summary())
+	fmt.Print(summary())
 
-	review.ResolveBlockingComments()
-	review.Approve()
+	resolveBlocking()
+	submitReview()
 	fmt.Println("After resolving comments and approving:")
-	fmt.Println(review.Summary())
+	fmt.Print(summary())
 }

@@ -3,18 +3,15 @@ package main
 import (
 	"fmt"
 	"os"
-	"runtime"
 )
 
-type ProgramStage int
-
 const (
-	StageSource ProgramStage = iota
+	StageSource int = iota
 	StageBinary
 	StageProcess
 )
 
-func (s ProgramStage) String() string {
+func stageString(s int) string {
 	switch s {
 	case StageSource:
 		return "source code: human-readable text written by the programmer"
@@ -32,14 +29,11 @@ func main() {
 	fmt.Println()
 
 	for stage := StageSource; stage <= StageProcess; stage++ {
-		fmt.Printf("Stage %d: %s\n", stage+1, stage)
+		fmt.Printf("Stage %d: %s\n", stage+1, stageString(stage))
 	}
 
 	fmt.Println()
 	fmt.Printf("This running program's source file:  %s\n", os.Args[0])
-	fmt.Printf("Compiler:                           %s\n", runtime.Compiler)
-	fmt.Printf("OS/Arch:                            %s/%s\n", runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("CPU count:                          %d\n", runtime.NumCPU())
 	fmt.Println()
 	fmt.Println("A program is source code compiled into a binary that the OS loads as a process.")
 }

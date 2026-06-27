@@ -2,28 +2,30 @@ package main
 
 import (
 	"fmt"
-	"net"
 	"os"
 )
 
-func resolveDomain(domain string) ([]string, error) {
-	addrs, err := net.LookupHost(domain)
-	if err != nil {
-		return nil, fmt.Errorf("lookup failed: %w", err)
+func dnsLookup(hostname string) string {
+	if hostname == "example.com" {
+		return "93.184.216.34"
 	}
-	return addrs, nil
+	if hostname == "localhost" {
+		return "127.0.0.1"
+	}
+	return ""
 }
 
-func dialTCP(address string) (*net.TCPConn, error) {
-	raddr, err := net.ResolveTCPAddr("tcp", address)
-	if err != nil {
-		return nil, fmt.Errorf("resolve failed: %w", err)
+func simulateConnection(address string) string {
+	colonPos := 0
+	for i := 0; i < len(address); i++ {
+		if address[i] == ':' {
+			colonPos = i
+			break
+		}
 	}
-	conn, err := net.DialTCP("tcp", nil, raddr)
-	if err != nil {
-		return nil, fmt.Errorf("dial failed: %w", err)
-	}
-	return conn, nil
+	host := address[:colonPos]
+	port := address[colonPos+1:]
+	return fmt.Sprintf("Simulated connection to %s on port %s (host: %s)", address, port, host)
 }
 
 func main() {
@@ -42,49 +44,18 @@ func main() {
 	fmt.Printf("=== Web Preview: %s ===\n", domain)
 	fmt.Println()
 
-	ips, err := resolveDomain(domain)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error resolving domain: %v\n", err)
+	ip := dnsLookup(domain)
+	if ip == "" {
+		fmt.Printf("Could not resolve %s\n", domain)
 		os.Exit(1)
 	}
-	fmt.Printf("Resolved %s to %d IP address(es):\n", domain, len(ips))
-	for _, ip := range ips {
-		fmt.Printf("  %s\n", ip)
-	}
+	fmt.Printf("Resolved %s to IP: %s\n", domain, ip)
 	fmt.Println()
 
-	address := net.JoinHostPort(ips[0], port)
-	fmt.Printf("Dialing TCP connection to %s...\n", address)
-
-	conn, err := dialTCP(address)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error connecting: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close()
-
-	localAddr := conn.LocalAddr().(*net.TCPAddr)
-	remoteAddr := conn.RemoteAddr().(*net.TCPAddr)
-
-	fmt.Printf("Connection established!\n")
-	fmt.Printf("  Local:  %s:%d\n", localAddr.IP, localAddr.Port)
-	fmt.Printf("  Remote: %s:%d\n", remoteAddr.IP, remoteAddr.Port)
+	address := ip + ":" + port
+	fmt.Println(simulateConnection(address))
 	fmt.Println()
-
-	request := fmt.Sprintf("GET / HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", domain)
-	_, err = conn.Write([]byte(request))
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error sending request: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Printf("Sent HTTP request to %s:%s\n", domain, port)
-
-	buf := make([]byte, 1024)
-	n, err := conn.Read(buf)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error reading response: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Printf("Received %d bytes in response\n", n)
-	fmt.Printf("First %d bytes:\n%s\n", n, string(buf[:n]))
+	fmt.Println("DNS translates domain names to IP addresses.")
+	fmt.Println("Ports identify specific services on a server.")
+	fmt.Printf("Port %s is the standard HTTP port.\n", port)
 }
