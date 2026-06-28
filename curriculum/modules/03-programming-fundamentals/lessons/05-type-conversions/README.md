@@ -204,6 +204,11 @@ Then write a function `fahrenheitToCelsius(f float64) float64` that converts Fah
 
 In `main()`, read a command-line argument, parse it, convert Fahrenheit to Celsius if the input ends with `"F"`, and print the result.
 
+**New concepts for this task:**
+
+- **`os.Args`** — a slice of command-line arguments provided by the `os` package. `os.Args[0]` is the program name; `os.Args[1]` is the first argument. Import `"os"` to access it.
+- **`strings.TrimSuffix(s, suffix)`** — returns `s` with the trailing `suffix` removed (if present). Import `"strings"`.
+
 ## Tests / verification
 
 ```bash

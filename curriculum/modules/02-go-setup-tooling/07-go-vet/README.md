@@ -48,6 +48,10 @@ func main() {
 }
 ```
 
+**New Go syntax in this example:**
+- `name := "Go"` — declares a variable `name` and assigns it the string value `"Go"`.
+- `fmt.Printf("Hello, %s!\n", name)` — prints formatted text. `%s` is replaced by the value of `name`. `\n` adds a newline. Unlike `fmt.Println`, `fmt.Printf` does not add a newline automatically.
+
 ## Step-by-step execution
 
 1. Run `go vet .` from this lesson directory — it should produce no output (no issues found).

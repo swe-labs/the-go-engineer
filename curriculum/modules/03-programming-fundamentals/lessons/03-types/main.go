@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -93,7 +92,7 @@ func convertUnits(value float64, from, to string) (float64, error) {
 	case "K":
 		celsius = value - 273.15
 	default:
-		return 0, errors.New("unknown unit: " + from)
+		return 0, fmt.Errorf("unknown unit: %s", from)
 	}
 
 	switch to {
@@ -104,6 +103,6 @@ func convertUnits(value float64, from, to string) (float64, error) {
 	case "K":
 		return celsius + 273.15, nil
 	default:
-		return 0, errors.New("unknown unit: " + to)
+		return 0, fmt.Errorf("unknown unit: %s", to)
 	}
 }

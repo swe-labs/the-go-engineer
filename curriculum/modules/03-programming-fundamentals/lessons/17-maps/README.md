@@ -231,6 +231,14 @@ Write a word counter that:
 
 Write a function `WordFrequency(text string) map[string]int` and a `TopWords(freq map[string]int, n int) []struct{Word string; Count int}` that returns the top n entries.
 
+**New concepts for this task:**
+
+- **`strings.Fields(s)`** — splits a string by whitespace and returns `[]string`. Import `"strings"`.
+- **`strings.ToLower(s)`** — returns `s` converted to lowercase.
+- **`strings.TrimFunc(s, fn)`** — removes leading/trailing characters where function `fn` returns `true`.
+- **`unicode.IsLetter(r)` / `unicode.IsNumber(r)`** — check whether a rune is a letter or number. Import `"unicode"`.
+- **`sort.Slice(slice, less)`** — sorts any slice in place. The second argument is a comparator function `func(i, j int) bool` that returns `true` when the element at `i` should appear before the element at `j`. Import `"sort"`.
+
 ## Tests / verification
 
 ```bash

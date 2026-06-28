@@ -69,6 +69,8 @@ String concatenation using `+` inside a loop allocates O(n²) memory. The compil
 
 Go source code is UTF-8. String literals are UTF-8. The `range` keyword over a string iterates over runes (not bytes):
 
+For character classification, the `unicode` package provides functions like `unicode.IsLetter(r)`, `unicode.IsNumber(r)`, and `unicode.IsSpace(r)` that operate on `rune` values. Import `"unicode"` to use them.
+
 ```go
 for i, r := range "Hi 👍" {
     fmt.Printf("%d: %U '%c'\n", i, r, r)

@@ -230,6 +230,8 @@ Write a function `wordCount(s string) map[string]int` that:
 - Returns a map of word → count.
 - Uses `for range` to iterate over the string's runes.
 
+To detect letters, use `unicode.IsLetter(r)` from the `unicode` package (import `"unicode"`). It returns `true` when the rune `r` is a Unicode letter.
+
 Write a function `mergeCounts(maps ...map[string]int) map[string]int` that merges multiple word-count maps, summing values for duplicate keys.
 
 In `main()`, call `wordCount` on `"hello world hello"` and verify the result. Then merge two counts and print the result.

@@ -43,6 +43,14 @@ func main() {
 }
 ```
 
+This Go program has four parts:
+- `package main` — declares that this code belongs to the main package, which produces an executable.
+- `import "fmt"` — brings in the `fmt` package for printing text.
+- `func main() { ... }` — the entry point; execution starts here.
+- `fmt.Println(...)` — prints a line of text to the terminal.
+
+Don't worry about understanding every detail — you will learn Go syntax in Module 03.
+
 ## Step-by-step execution
 
 1. **Download Go** from [go.dev/dl](https://go.dev/dl/) — choose the package for your operating system.

@@ -44,6 +44,10 @@ func main() {
 }
 ```
 
+**New Go syntax in this example:**
+- `items := []int{1, 2, 3}` — creates a slice (a variable-length list) of integers containing 1, 2, and 3.
+- `items[0]` — accesses the first element. Go uses 0-based indexing: position 0 is the first element, position 1 is the second, and so on.
+
 ## Step-by-step execution
 
 1. Run `go run .` from this lesson directory — it should succeed.

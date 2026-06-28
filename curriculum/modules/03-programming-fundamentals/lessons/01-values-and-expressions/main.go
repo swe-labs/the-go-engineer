@@ -11,18 +11,20 @@ func main() {
 }
 
 func evaluate(a, b int, op rune) int {
-	switch op {
-	case '+':
+	if op == '+' {
 		return a + b
-	case '-':
-		return a - b
-	case '*':
-		return a * b
-	case '/':
-		return a / b
-	case '%':
-		return a % b
-	default:
-		panic("unknown operator")
 	}
+	if op == '-' {
+		return a - b
+	}
+	if op == '*' {
+		return a * b
+	}
+	if op == '/' {
+		return a / b
+	}
+	if op == '%' {
+		return a % b
+	}
+	return 0
 }

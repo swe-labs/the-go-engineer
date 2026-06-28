@@ -60,6 +60,10 @@ func TestAdd(t *testing.T) {
 }
 ```
 
+**New Go syntax in this example:**
+- `func Add(a, b int) int { ... }` — a function named `Add` that takes two integers (`a` and `b`) and returns an integer. Go writes the type after the parameter name.
+- `got := Add(2, 3)` — the `:=` operator declares a new variable (`got`) and assigns it the result of `Add(2, 3)` in one step. Similarly, `want := 5` declares `want` with value 5.
+
 ## Step-by-step execution
 
 1. Run `go test .` from this lesson directory to run all tests.

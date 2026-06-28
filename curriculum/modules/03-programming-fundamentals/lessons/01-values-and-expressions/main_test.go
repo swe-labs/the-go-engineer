@@ -3,27 +3,44 @@ package main
 import "testing"
 
 func TestEvaluate(t *testing.T) {
-	tests := []struct {
-		a, b     int
-		op       rune
-		expected int
-	}{
-		{10, 5, '+', 15},
-		{10, 5, '-', 5},
-		{10, 5, '*', 50},
-		{10, 5, '/', 2},
-		{10, 5, '%', 0},
-		{7, 3, '+', 10},
-		{7, 3, '-', 4},
-		{7, 3, '*', 21},
-		{7, 3, '/', 2},
-		{7, 3, '%', 1},
+	got := evaluate(10, 5, '+')
+	if got != 15 {
+		t.Errorf("evaluate(10, 5, '+') = %d; want 15", got)
 	}
-
-	for _, tc := range tests {
-		got := evaluate(tc.a, tc.b, tc.op)
-		if got != tc.expected {
-			t.Errorf("evaluate(%d, %d, %q) = %d; want %d", tc.a, tc.b, tc.op, got, tc.expected)
-		}
+	got = evaluate(10, 5, '-')
+	if got != 5 {
+		t.Errorf("evaluate(10, 5, '-') = %d; want 5", got)
+	}
+	got = evaluate(10, 5, '*')
+	if got != 50 {
+		t.Errorf("evaluate(10, 5, '*') = %d; want 50", got)
+	}
+	got = evaluate(10, 5, '/')
+	if got != 2 {
+		t.Errorf("evaluate(10, 5, '/') = %d; want 2", got)
+	}
+	got = evaluate(10, 5, '%')
+	if got != 0 {
+		t.Errorf("evaluate(10, 5, '%%') = %d; want 0", got)
+	}
+	got = evaluate(7, 3, '+')
+	if got != 10 {
+		t.Errorf("evaluate(7, 3, '+') = %d; want 10", got)
+	}
+	got = evaluate(7, 3, '-')
+	if got != 4 {
+		t.Errorf("evaluate(7, 3, '-') = %d; want 4", got)
+	}
+	got = evaluate(7, 3, '*')
+	if got != 21 {
+		t.Errorf("evaluate(7, 3, '*') = %d; want 21", got)
+	}
+	got = evaluate(7, 3, '/')
+	if got != 2 {
+		t.Errorf("evaluate(7, 3, '/') = %d; want 2", got)
+	}
+	got = evaluate(7, 3, '%')
+	if got != 1 {
+		t.Errorf("evaluate(7, 3, '%%') = %d; want 1", got)
 	}
 }
