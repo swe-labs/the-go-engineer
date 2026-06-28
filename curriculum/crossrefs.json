@@ -22934,6 +22934,609 @@
         "label": "Preview only: Explained fully in Portfolio and Interview Readiness — Portfolio strategy",
         "reason": "Preview of Portfolio strategy from Portfolio and Interview Readiness.",
         "required": false
+      },
+      {
+        "from_id": "project-course-setup-verification",
+        "relation": "builds_on",
+        "to_id": "core-00-10",
+        "target_id": "core-00-10",
+        "label": "Project Course Setup Verification builds on core-00-10",
+        "reason": "The Course Setup Verification project requires the concepts taught in core-00-10.",
+        "required": true
+      },
+      {
+        "from_id": "project-shell-git-lab",
+        "relation": "builds_on",
+        "to_id": "core-01-15",
+        "target_id": "core-01-15",
+        "label": "Project Shell Git Lab builds on core-01-15",
+        "reason": "The Shell Git Lab project requires the concepts taught in core-01-15.",
+        "required": true
+      },
+      {
+        "from_id": "project-tooling-failure-lab",
+        "relation": "builds_on",
+        "to_id": "core-02-14",
+        "target_id": "core-02-14",
+        "label": "Project Tooling Failure Lab builds on core-02-14",
+        "reason": "The Tooling Failure Lab project requires the concepts taught in core-02-14.",
+        "required": true
+      },
+      {
+        "from_id": "project-contact-directory",
+        "relation": "builds_on",
+        "to_id": "core-03-23",
+        "target_id": "core-03-23",
+        "label": "Project Contact Directory builds on core-03-23",
+        "reason": "The Contact Directory project requires the concepts taught in core-03-23.",
+        "required": true
+      },
+      {
+        "from_id": "project-pricing-checkout",
+        "relation": "builds_on",
+        "to_id": "core-03-23",
+        "target_id": "core-03-23",
+        "label": "Project Pricing Checkout builds on core-03-23",
+        "reason": "The Pricing Checkout project requires the concepts taught in core-03-23.",
+        "required": true
+      },
+      {
+        "from_id": "project-order-summary-refactor",
+        "relation": "builds_on",
+        "to_id": "core-04-18",
+        "target_id": "core-04-18",
+        "label": "Project Order Summary Refactor builds on core-04-18",
+        "reason": "The Order Summary Refactor project requires the concepts taught in core-04-18.",
+        "required": true
+      },
+      {
+        "from_id": "project-bank-account",
+        "relation": "builds_on",
+        "to_id": "core-05-23",
+        "target_id": "core-05-23",
+        "label": "Project Bank Account builds on core-05-23",
+        "reason": "The Bank Account project requires the concepts taught in core-05-23.",
+        "required": true
+      },
+      {
+        "from_id": "project-payroll-processor",
+        "relation": "builds_on",
+        "to_id": "core-05-23",
+        "target_id": "core-05-23",
+        "label": "Project Payroll Processor builds on core-05-23",
+        "reason": "The Payroll Processor project requires the concepts taught in core-05-23.",
+        "required": true
+      },
+      {
+        "from_id": "project-bug-hunt-pack",
+        "relation": "builds_on",
+        "to_id": "core-06-21",
+        "target_id": "core-06-21",
+        "label": "Project Bug Hunt Pack builds on core-06-21",
+        "reason": "The Bug Hunt Pack project requires the concepts taught in core-06-21.",
+        "required": true
+      },
+      {
+        "from_id": "project-refactor-under-tests",
+        "relation": "builds_on",
+        "to_id": "core-06-21",
+        "target_id": "core-06-21",
+        "label": "Project Refactor Under Tests builds on core-06-21",
+        "reason": "The Refactor Under Tests project requires the concepts taught in core-06-21.",
+        "required": true
+      },
+      {
+        "from_id": "project-config-parser",
+        "relation": "builds_on",
+        "to_id": "core-07-21",
+        "target_id": "core-07-21",
+        "label": "Project Config Parser builds on core-07-21",
+        "reason": "The Config Parser project requires the concepts taught in core-07-21.",
+        "required": true
+      },
+      {
+        "from_id": "project-file-organizer",
+        "relation": "builds_on",
+        "to_id": "core-07-21",
+        "target_id": "core-07-21",
+        "label": "Project File Organizer builds on core-07-21",
+        "reason": "The File Organizer project requires the concepts taught in core-07-21.",
+        "required": true
+      },
+      {
+        "from_id": "project-log-search",
+        "relation": "builds_on",
+        "to_id": "core-07-21",
+        "target_id": "core-07-21",
+        "label": "Project Log Search builds on core-07-21",
+        "reason": "The Log Search project requires the concepts taught in core-07-21.",
+        "required": true
+      },
+      {
+        "from_id": "project-book-catalog-rest-api",
+        "relation": "builds_on",
+        "to_id": "core-08-21",
+        "target_id": "core-08-21",
+        "label": "Project Book Catalog Rest Api builds on core-08-21",
+        "reason": "The Book Catalog Rest Api project requires the concepts taught in core-08-21.",
+        "required": true
+      },
+      {
+        "from_id": "project-task-api-with-postgres",
+        "relation": "builds_on",
+        "to_id": "core-09-28",
+        "target_id": "core-09-28",
+        "label": "Project Task Api With Postgres builds on core-09-28",
+        "reason": "The Task Api With Postgres project requires the concepts taught in core-09-28.",
+        "required": true
+      },
+      {
+        "from_id": "project-secure-authenticated-api",
+        "relation": "builds_on",
+        "to_id": "core-10-25",
+        "target_id": "core-10-25",
+        "label": "Project Secure Authenticated Api builds on core-10-25",
+        "reason": "The Secure Authenticated Api project requires the concepts taught in core-10-25.",
+        "required": true
+      },
+      {
+        "from_id": "project-bounded-worker-pool",
+        "relation": "builds_on",
+        "to_id": "core-11-29",
+        "target_id": "core-11-29",
+        "label": "Project Bounded Worker Pool builds on core-11-29",
+        "reason": "The Bounded Worker Pool project requires the concepts taught in core-11-29.",
+        "required": true
+      },
+      {
+        "from_id": "project-concurrent-downloader",
+        "relation": "builds_on",
+        "to_id": "core-11-29",
+        "target_id": "core-11-29",
+        "label": "Project Concurrent Downloader builds on core-11-29",
+        "reason": "The Concurrent Downloader project requires the concepts taught in core-11-29.",
+        "required": true
+      },
+      {
+        "from_id": "project-url-health-checker",
+        "relation": "builds_on",
+        "to_id": "core-11-29",
+        "target_id": "core-11-29",
+        "label": "Project Url Health Checker builds on core-11-29",
+        "reason": "The Url Health Checker project requires the concepts taught in core-11-29.",
+        "required": true
+      },
+      {
+        "from_id": "project-observability-retrofit",
+        "relation": "builds_on",
+        "to_id": "core-12-20",
+        "target_id": "core-12-20",
+        "label": "Project Observability Retrofit builds on core-12-20",
+        "reason": "The Observability Retrofit project requires the concepts taught in core-12-20.",
+        "required": true
+      },
+      {
+        "from_id": "project-pii-redactor",
+        "relation": "builds_on",
+        "to_id": "core-12-20",
+        "target_id": "core-12-20",
+        "label": "Project Pii Redactor builds on core-12-20",
+        "reason": "The Pii Redactor project requires the concepts taught in core-12-20.",
+        "required": true
+      },
+      {
+        "from_id": "project-performance-analysis-lab",
+        "relation": "builds_on",
+        "to_id": "core-13-17",
+        "target_id": "core-13-17",
+        "label": "Project Performance Analysis Lab builds on core-13-17",
+        "reason": "The Performance Analysis Lab project requires the concepts taught in core-13-17.",
+        "required": true
+      },
+      {
+        "from_id": "project-profile-and-fix-lab",
+        "relation": "builds_on",
+        "to_id": "core-13-17",
+        "target_id": "core-13-17",
+        "label": "Project Profile And Fix Lab builds on core-13-17",
+        "reason": "The Profile And Fix Lab project requires the concepts taught in core-13-17.",
+        "required": true
+      },
+      {
+        "from_id": "project-modular-refactor-review",
+        "relation": "builds_on",
+        "to_id": "core-14-17",
+        "target_id": "core-14-17",
+        "label": "Project Modular Refactor Review builds on core-14-17",
+        "reason": "The Modular Refactor Review project requires the concepts taught in core-14-17.",
+        "required": true
+      },
+      {
+        "from_id": "project-dockerized-service-with-ci-cd",
+        "relation": "builds_on",
+        "to_id": "core-15-38",
+        "target_id": "core-15-38",
+        "label": "Project Dockerized Service With Ci Cd builds on core-15-38",
+        "reason": "The Dockerized Service With Ci Cd project requires the concepts taught in core-15-38.",
+        "required": true
+      },
+      {
+        "from_id": "project-portfolio-review-pack",
+        "relation": "builds_on",
+        "to_id": "core-16-15",
+        "target_id": "core-16-15",
+        "label": "Project Portfolio Review Pack builds on core-16-15",
+        "reason": "The Portfolio Review Pack project requires the concepts taught in core-16-15.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-00-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-00-10",
+        "target_id": "core-00-10",
+        "label": "Assessment Checkpoint builds on core-00-10",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-00-10.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-orientation-course-setup",
+        "relation": "builds_on",
+        "to_id": "core-00-10",
+        "target_id": "core-00-10",
+        "label": "Assessment Course Setup builds on core-00-10",
+        "reason": "The Course Setup assessment validates the concepts taught in core-00-10.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-computers-terminal-git-web-shell-git-lab",
+        "relation": "builds_on",
+        "to_id": "core-01-15",
+        "target_id": "core-01-15",
+        "label": "Assessment Shell Git Lab builds on core-01-15",
+        "reason": "The Shell Git Lab assessment validates the concepts taught in core-01-15.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-go-setup-tooling-tooling-failure-lab",
+        "relation": "builds_on",
+        "to_id": "core-02-14",
+        "target_id": "core-02-14",
+        "label": "Assessment Tooling Failure Lab builds on core-02-14",
+        "reason": "The Tooling Failure Lab assessment validates the concepts taught in core-02-14.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-03-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-03-23",
+        "target_id": "core-03-23",
+        "label": "Assessment Checkpoint builds on core-03-23",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-03-23.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-programming-fundamentals-contact-directory",
+        "relation": "builds_on",
+        "to_id": "core-03-23",
+        "target_id": "core-03-23",
+        "label": "Assessment Contact Directory builds on core-03-23",
+        "reason": "The Contact Directory assessment validates the concepts taught in core-03-23.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-programming-fundamentals-pricing-checkout",
+        "relation": "builds_on",
+        "to_id": "core-03-23",
+        "target_id": "core-03-23",
+        "label": "Assessment Pricing Checkout builds on core-03-23",
+        "reason": "The Pricing Checkout assessment validates the concepts taught in core-03-23.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-04-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-04-18",
+        "target_id": "core-04-18",
+        "label": "Assessment Checkpoint builds on core-04-18",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-04-18.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-functions-errors-data-semantics-order-summary-refactor",
+        "relation": "builds_on",
+        "to_id": "core-04-18",
+        "target_id": "core-04-18",
+        "label": "Assessment Order Summary Refactor builds on core-04-18",
+        "reason": "The Order Summary Refactor assessment validates the concepts taught in core-04-18.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-types-interfaces-packages-modules-bank-account",
+        "relation": "builds_on",
+        "to_id": "core-05-23",
+        "target_id": "core-05-23",
+        "label": "Assessment Bank Account builds on core-05-23",
+        "reason": "The Bank Account assessment validates the concepts taught in core-05-23.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-05-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-05-23",
+        "target_id": "core-05-23",
+        "label": "Assessment Checkpoint builds on core-05-23",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-05-23.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-types-interfaces-packages-modules-payroll-processor",
+        "relation": "builds_on",
+        "to_id": "core-05-23",
+        "target_id": "core-05-23",
+        "label": "Assessment Payroll Processor builds on core-05-23",
+        "reason": "The Payroll Processor assessment validates the concepts taught in core-05-23.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-testing-debugging-refactoring-bug-hunt-pack",
+        "relation": "builds_on",
+        "to_id": "core-06-21",
+        "target_id": "core-06-21",
+        "label": "Assessment Bug Hunt Pack builds on core-06-21",
+        "reason": "The Bug Hunt Pack assessment validates the concepts taught in core-06-21.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-06-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-06-21",
+        "target_id": "core-06-21",
+        "label": "Assessment Checkpoint builds on core-06-21",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-06-21.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-testing-debugging-refactoring-refactor-under-tests",
+        "relation": "builds_on",
+        "to_id": "core-06-21",
+        "target_id": "core-06-21",
+        "label": "Assessment Refactor Under Tests builds on core-06-21",
+        "reason": "The Refactor Under Tests assessment validates the concepts taught in core-06-21.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-07-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-07-21",
+        "target_id": "core-07-21",
+        "label": "Assessment Checkpoint builds on core-07-21",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-07-21.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-cli-files-json-config-config-parser",
+        "relation": "builds_on",
+        "to_id": "core-07-21",
+        "target_id": "core-07-21",
+        "label": "Assessment Config Parser builds on core-07-21",
+        "reason": "The Config Parser assessment validates the concepts taught in core-07-21.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-cli-files-json-config-file-organizer",
+        "relation": "builds_on",
+        "to_id": "core-07-21",
+        "target_id": "core-07-21",
+        "label": "Assessment File Organizer builds on core-07-21",
+        "reason": "The File Organizer assessment validates the concepts taught in core-07-21.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-cli-files-json-config-log-search",
+        "relation": "builds_on",
+        "to_id": "core-07-21",
+        "target_id": "core-07-21",
+        "label": "Assessment Log Search builds on core-07-21",
+        "reason": "The Log Search assessment validates the concepts taught in core-07-21.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-http-rest-apis-book-catalog-rest-api",
+        "relation": "builds_on",
+        "to_id": "core-08-21",
+        "target_id": "core-08-21",
+        "label": "Assessment Book Catalog Rest Api builds on core-08-21",
+        "reason": "The Book Catalog Rest Api assessment validates the concepts taught in core-08-21.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-08-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-08-21",
+        "target_id": "core-08-21",
+        "label": "Assessment Checkpoint builds on core-08-21",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-08-21.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-09-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-09-28",
+        "target_id": "core-09-28",
+        "label": "Assessment Checkpoint builds on core-09-28",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-09-28.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-sql-postgres-persistence-task-api-postgres",
+        "relation": "builds_on",
+        "to_id": "core-09-28",
+        "target_id": "core-09-28",
+        "label": "Assessment Task Api Postgres builds on core-09-28",
+        "reason": "The Task Api Postgres assessment validates the concepts taught in core-09-28.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-10-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-10-25",
+        "target_id": "core-10-25",
+        "label": "Assessment Checkpoint builds on core-10-25",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-10-25.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-auth-security-secure-authenticated-api",
+        "relation": "builds_on",
+        "to_id": "core-10-25",
+        "target_id": "core-10-25",
+        "label": "Assessment Secure Authenticated Api builds on core-10-25",
+        "reason": "The Secure Authenticated Api assessment validates the concepts taught in core-10-25.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-lifecycle-context-concurrency-bounded-worker-pool",
+        "relation": "builds_on",
+        "to_id": "core-11-29",
+        "target_id": "core-11-29",
+        "label": "Assessment Bounded Worker Pool builds on core-11-29",
+        "reason": "The Bounded Worker Pool assessment validates the concepts taught in core-11-29.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-11-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-11-29",
+        "target_id": "core-11-29",
+        "label": "Assessment Checkpoint builds on core-11-29",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-11-29.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-lifecycle-context-concurrency-concurrent-downloader",
+        "relation": "builds_on",
+        "to_id": "core-11-29",
+        "target_id": "core-11-29",
+        "label": "Assessment Concurrent Downloader builds on core-11-29",
+        "reason": "The Concurrent Downloader assessment validates the concepts taught in core-11-29.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-lifecycle-context-concurrency-url-health-checker",
+        "relation": "builds_on",
+        "to_id": "core-11-29",
+        "target_id": "core-11-29",
+        "label": "Assessment Url Health Checker builds on core-11-29",
+        "reason": "The Url Health Checker assessment validates the concepts taught in core-11-29.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-12-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-12-20",
+        "target_id": "core-12-20",
+        "label": "Assessment Checkpoint builds on core-12-20",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-12-20.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-observability-diagnostics-observability-retrofit",
+        "relation": "builds_on",
+        "to_id": "core-12-20",
+        "target_id": "core-12-20",
+        "label": "Assessment Observability Retrofit builds on core-12-20",
+        "reason": "The Observability Retrofit assessment validates the concepts taught in core-12-20.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-observability-diagnostics-pii-redactor",
+        "relation": "builds_on",
+        "to_id": "core-12-20",
+        "target_id": "core-12-20",
+        "label": "Assessment Pii Redactor builds on core-12-20",
+        "reason": "The Pii Redactor assessment validates the concepts taught in core-12-20.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-13-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-13-17",
+        "target_id": "core-13-17",
+        "label": "Assessment Checkpoint builds on core-13-17",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-13-17.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-performance-memory-engineering-performance-analysis-lab",
+        "relation": "builds_on",
+        "to_id": "core-13-17",
+        "target_id": "core-13-17",
+        "label": "Assessment Performance Analysis Lab builds on core-13-17",
+        "reason": "The Performance Analysis Lab assessment validates the concepts taught in core-13-17.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-performance-memory-engineering-profile-and-fix-lab",
+        "relation": "builds_on",
+        "to_id": "core-13-17",
+        "target_id": "core-13-17",
+        "label": "Assessment Profile And Fix Lab builds on core-13-17",
+        "reason": "The Profile And Fix Lab assessment validates the concepts taught in core-13-17.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-14-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-14-17",
+        "target_id": "core-14-17",
+        "label": "Assessment Checkpoint builds on core-14-17",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-14-17.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-architecture-distributed-systems-modular-refactor-review",
+        "relation": "builds_on",
+        "to_id": "core-14-17",
+        "target_id": "core-14-17",
+        "label": "Assessment Modular Refactor Review builds on core-14-17",
+        "reason": "The Modular Refactor Review assessment validates the concepts taught in core-14-17.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-15-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-15-38",
+        "target_id": "core-15-38",
+        "label": "Assessment Checkpoint builds on core-15-38",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-15-38.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-docker-cicd-deployment-dockerized-service-cicd",
+        "relation": "builds_on",
+        "to_id": "core-15-38",
+        "target_id": "core-15-38",
+        "label": "Assessment Dockerized Service Cicd builds on core-15-38",
+        "reason": "The Dockerized Service Cicd assessment validates the concepts taught in core-15-38.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-module-16-checkpoint",
+        "relation": "builds_on",
+        "to_id": "core-16-15",
+        "target_id": "core-16-15",
+        "label": "Assessment Checkpoint builds on core-16-15",
+        "reason": "The Checkpoint assessment validates the concepts taught in core-16-15.",
+        "required": true
+      },
+      {
+        "from_id": "assessment-portfolio-interview-readiness-portfolio-review-pack",
+        "relation": "builds_on",
+        "to_id": "core-16-15",
+        "target_id": "core-16-15",
+        "label": "Assessment Portfolio Review Pack builds on core-16-15",
+        "reason": "The Portfolio Review Pack assessment validates the concepts taught in core-16-15.",
+        "required": true
       }
     ],
     "entity_domains": {

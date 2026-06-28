@@ -67626,6 +67626,4426 @@
         "documentation_mode": "tutorial",
         "required": true
       }
+    },
+    {
+      "id": "project-course-setup-verification",
+      "module_id": "module-00",
+      "slug": "course-setup-verification",
+      "title": "Course Setup Verification",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 0 concepts by building Course Setup Verification.",
+      "required_prior_knowledge": [
+        "Complete module-00."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/projects/course-setup-verification/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-00-checkpoint",
+      "module_id": "module-00",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 0.",
+      "required_prior_knowledge": [
+        "Complete module-00."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-orientation-course-setup",
+      "module_id": "module-00",
+      "slug": "course-setup",
+      "title": "Course Setup",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 0.",
+      "required_prior_knowledge": [
+        "Complete module-00."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/assessments/course-setup/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-shell-git-lab",
+      "module_id": "module-01",
+      "slug": "shell-git-lab",
+      "title": "Shell Git Lab",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 1 concepts by building Shell Git Lab.",
+      "required_prior_knowledge": [
+        "Complete module-01."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/01-computers-terminal-git-web/projects/shell-git-lab/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-computers-terminal-git-web-shell-git-lab",
+      "module_id": "module-01",
+      "slug": "shell-git-lab",
+      "title": "Shell Git Lab",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 1.",
+      "required_prior_knowledge": [
+        "Complete module-01."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/01-computers-terminal-git-web/assessments/shell-git-lab/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-tooling-failure-lab",
+      "module_id": "module-02",
+      "slug": "tooling-failure-lab",
+      "title": "Tooling Failure Lab",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 2 concepts by building Tooling Failure Lab.",
+      "required_prior_knowledge": [
+        "Complete module-02."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/02-go-setup-tooling/projects/tooling-failure-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/02-go-setup-tooling/projects/tooling-failure-lab/README.md",
+        "solution_path": "modules/02-go-setup-tooling/projects/tooling-failure-lab/_solution",
+        "starter_path": "modules/02-go-setup-tooling/projects/tooling-failure-lab/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-go-setup-tooling-tooling-failure-lab",
+      "module_id": "module-02",
+      "slug": "tooling-failure-lab",
+      "title": "Tooling Failure Lab",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 2.",
+      "required_prior_knowledge": [
+        "Complete module-02."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/02-go-setup-tooling/assessments/tooling-failure-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/02-go-setup-tooling/assessments/tooling-failure-lab/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-contact-directory",
+      "module_id": "module-03",
+      "slug": "contact-directory",
+      "title": "Contact Directory",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 3 concepts by building Contact Directory.",
+      "required_prior_knowledge": [
+        "Complete module-03."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/03-programming-fundamentals/projects/contact-directory/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/03-programming-fundamentals/projects/contact-directory/README.md",
+        "solution_path": "modules/03-programming-fundamentals/projects/contact-directory/_solution",
+        "starter_path": "modules/03-programming-fundamentals/projects/contact-directory/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-pricing-checkout",
+      "module_id": "module-03",
+      "slug": "pricing-checkout",
+      "title": "Pricing Checkout",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 3 concepts by building Pricing Checkout.",
+      "required_prior_knowledge": [
+        "Complete module-03."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/03-programming-fundamentals/projects/pricing-checkout/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/03-programming-fundamentals/projects/pricing-checkout/README.md",
+        "solution_path": "modules/03-programming-fundamentals/projects/pricing-checkout/_solution",
+        "starter_path": "modules/03-programming-fundamentals/projects/pricing-checkout/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-03-checkpoint",
+      "module_id": "module-03",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 3.",
+      "required_prior_knowledge": [
+        "Complete module-03."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/03-programming-fundamentals/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/03-programming-fundamentals/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-programming-fundamentals-contact-directory",
+      "module_id": "module-03",
+      "slug": "contact-directory",
+      "title": "Contact Directory",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 3.",
+      "required_prior_knowledge": [
+        "Complete module-03."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/03-programming-fundamentals/assessments/contact-directory/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/03-programming-fundamentals/assessments/contact-directory/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-programming-fundamentals-pricing-checkout",
+      "module_id": "module-03",
+      "slug": "pricing-checkout",
+      "title": "Pricing Checkout",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 3.",
+      "required_prior_knowledge": [
+        "Complete module-03."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/03-programming-fundamentals/assessments/pricing-checkout/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/03-programming-fundamentals/assessments/pricing-checkout/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-order-summary-refactor",
+      "module_id": "module-04",
+      "slug": "order-summary-refactor",
+      "title": "Order Summary Refactor",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 4 concepts by building Order Summary Refactor.",
+      "required_prior_knowledge": [
+        "Complete module-04."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/04-functions-errors-data-semantics/projects/order-summary-refactor",
+        "test_command": "go test ./modules/04-functions-errors-data-semantics/projects/order-summary-refactor"
+      },
+      "files": {
+        "assets_dir": "modules/04-functions-errors-data-semantics/projects/order-summary-refactor/assets",
+        "diagram_paths": [],
+        "main_path": "modules/04-functions-errors-data-semantics/projects/order-summary-refactor/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/projects/order-summary-refactor/README.md",
+        "solution_path": "modules/04-functions-errors-data-semantics/projects/order-summary-refactor/_solution",
+        "starter_path": "modules/04-functions-errors-data-semantics/projects/order-summary-refactor/_starter",
+        "test_path": "modules/04-functions-errors-data-semantics/projects/order-summary-refactor/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-04-checkpoint",
+      "module_id": "module-04",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 4.",
+      "required_prior_knowledge": [
+        "Complete module-04."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/04-functions-errors-data-semantics/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/04-functions-errors-data-semantics/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-functions-errors-data-semantics-order-summary-refactor",
+      "module_id": "module-04",
+      "slug": "order-summary-refactor",
+      "title": "Order Summary Refactor",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 4.",
+      "required_prior_knowledge": [
+        "Complete module-04."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/04-functions-errors-data-semantics/assessments/order-summary-refactor/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/04-functions-errors-data-semantics/assessments/order-summary-refactor/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-bank-account",
+      "module_id": "module-05",
+      "slug": "bank-account",
+      "title": "Bank Account",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 5 concepts by building Bank Account.",
+      "required_prior_knowledge": [
+        "Complete module-05."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/05-types-interfaces-packages-modules/projects/bank-account/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/05-types-interfaces-packages-modules/projects/bank-account/README.md",
+        "solution_path": "modules/05-types-interfaces-packages-modules/projects/bank-account/_solution",
+        "starter_path": "modules/05-types-interfaces-packages-modules/projects/bank-account/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-payroll-processor",
+      "module_id": "module-05",
+      "slug": "payroll-processor",
+      "title": "Payroll Processor",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 5 concepts by building Payroll Processor.",
+      "required_prior_knowledge": [
+        "Complete module-05."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/05-types-interfaces-packages-modules/projects/payroll-processor/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/05-types-interfaces-packages-modules/projects/payroll-processor/README.md",
+        "solution_path": "modules/05-types-interfaces-packages-modules/projects/payroll-processor/_solution",
+        "starter_path": "modules/05-types-interfaces-packages-modules/projects/payroll-processor/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-types-interfaces-packages-modules-bank-account",
+      "module_id": "module-05",
+      "slug": "bank-account",
+      "title": "Bank Account",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 5.",
+      "required_prior_knowledge": [
+        "Complete module-05."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/05-types-interfaces-packages-modules/assessments/bank-account/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/05-types-interfaces-packages-modules/assessments/bank-account/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-05-checkpoint",
+      "module_id": "module-05",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 5.",
+      "required_prior_knowledge": [
+        "Complete module-05."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/05-types-interfaces-packages-modules/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/05-types-interfaces-packages-modules/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-types-interfaces-packages-modules-payroll-processor",
+      "module_id": "module-05",
+      "slug": "payroll-processor",
+      "title": "Payroll Processor",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 5.",
+      "required_prior_knowledge": [
+        "Complete module-05."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/05-types-interfaces-packages-modules/assessments/payroll-processor/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/05-types-interfaces-packages-modules/assessments/payroll-processor/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-bug-hunt-pack",
+      "module_id": "module-06",
+      "slug": "bug-hunt-pack",
+      "title": "Bug Hunt Pack",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 6 concepts by building Bug Hunt Pack.",
+      "required_prior_knowledge": [
+        "Complete module-06."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/06-testing-debugging-refactoring/projects/bug-hunt-pack/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/06-testing-debugging-refactoring/projects/bug-hunt-pack/README.md",
+        "solution_path": "modules/06-testing-debugging-refactoring/projects/bug-hunt-pack/_solution",
+        "starter_path": "modules/06-testing-debugging-refactoring/projects/bug-hunt-pack/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-refactor-under-tests",
+      "module_id": "module-06",
+      "slug": "refactor-under-tests",
+      "title": "Refactor Under Tests",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 6 concepts by building Refactor Under Tests.",
+      "required_prior_knowledge": [
+        "Complete module-06."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/06-testing-debugging-refactoring/projects/refactor-under-tests/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/06-testing-debugging-refactoring/projects/refactor-under-tests/README.md",
+        "solution_path": "modules/06-testing-debugging-refactoring/projects/refactor-under-tests/_solution",
+        "starter_path": "modules/06-testing-debugging-refactoring/projects/refactor-under-tests/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-testing-debugging-refactoring-bug-hunt-pack",
+      "module_id": "module-06",
+      "slug": "bug-hunt-pack",
+      "title": "Bug Hunt Pack",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 6.",
+      "required_prior_knowledge": [
+        "Complete module-06."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/06-testing-debugging-refactoring/assessments/bug-hunt-pack/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/06-testing-debugging-refactoring/assessments/bug-hunt-pack/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-06-checkpoint",
+      "module_id": "module-06",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 6.",
+      "required_prior_knowledge": [
+        "Complete module-06."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/06-testing-debugging-refactoring/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/06-testing-debugging-refactoring/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-testing-debugging-refactoring-refactor-under-tests",
+      "module_id": "module-06",
+      "slug": "refactor-under-tests",
+      "title": "Refactor Under Tests",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 6.",
+      "required_prior_knowledge": [
+        "Complete module-06."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/06-testing-debugging-refactoring/assessments/refactor-under-tests/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/06-testing-debugging-refactoring/assessments/refactor-under-tests/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-config-parser",
+      "module_id": "module-07",
+      "slug": "config-parser",
+      "title": "Config Parser",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 7 concepts by building Config Parser.",
+      "required_prior_knowledge": [
+        "Complete module-07."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/07-cli-files-json-config/projects/config-parser/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/07-cli-files-json-config/projects/config-parser/README.md",
+        "solution_path": "modules/07-cli-files-json-config/projects/config-parser/_solution",
+        "starter_path": "modules/07-cli-files-json-config/projects/config-parser/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-file-organizer",
+      "module_id": "module-07",
+      "slug": "file-organizer",
+      "title": "File Organizer",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 7 concepts by building File Organizer.",
+      "required_prior_knowledge": [
+        "Complete module-07."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/07-cli-files-json-config/projects/file-organizer/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/07-cli-files-json-config/projects/file-organizer/README.md",
+        "solution_path": "modules/07-cli-files-json-config/projects/file-organizer/_solution",
+        "starter_path": "modules/07-cli-files-json-config/projects/file-organizer/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-log-search",
+      "module_id": "module-07",
+      "slug": "log-search",
+      "title": "Log Search",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 7 concepts by building Log Search.",
+      "required_prior_knowledge": [
+        "Complete module-07."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/07-cli-files-json-config/projects/log-search/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/07-cli-files-json-config/projects/log-search/README.md",
+        "solution_path": "modules/07-cli-files-json-config/projects/log-search/_solution",
+        "starter_path": "modules/07-cli-files-json-config/projects/log-search/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-07-checkpoint",
+      "module_id": "module-07",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 7.",
+      "required_prior_knowledge": [
+        "Complete module-07."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/07-cli-files-json-config/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/07-cli-files-json-config/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-cli-files-json-config-config-parser",
+      "module_id": "module-07",
+      "slug": "config-parser",
+      "title": "Config Parser",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 7.",
+      "required_prior_knowledge": [
+        "Complete module-07."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/07-cli-files-json-config/assessments/config-parser/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/07-cli-files-json-config/assessments/config-parser/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-cli-files-json-config-file-organizer",
+      "module_id": "module-07",
+      "slug": "file-organizer",
+      "title": "File Organizer",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 7.",
+      "required_prior_knowledge": [
+        "Complete module-07."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/07-cli-files-json-config/assessments/file-organizer/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/07-cli-files-json-config/assessments/file-organizer/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-cli-files-json-config-log-search",
+      "module_id": "module-07",
+      "slug": "log-search",
+      "title": "Log Search",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 7.",
+      "required_prior_knowledge": [
+        "Complete module-07."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/07-cli-files-json-config/assessments/log-search/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/07-cli-files-json-config/assessments/log-search/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-book-catalog-rest-api",
+      "module_id": "module-08",
+      "slug": "book-catalog-rest-api",
+      "title": "Book Catalog Rest Api",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 8 concepts by building Book Catalog Rest Api.",
+      "required_prior_knowledge": [
+        "Complete module-08."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/08-http-rest-apis/projects/book-catalog-rest-api/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/08-http-rest-apis/projects/book-catalog-rest-api/README.md",
+        "solution_path": "modules/08-http-rest-apis/projects/book-catalog-rest-api/_solution",
+        "starter_path": "modules/08-http-rest-apis/projects/book-catalog-rest-api/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-http-rest-apis-book-catalog-rest-api",
+      "module_id": "module-08",
+      "slug": "book-catalog-rest-api",
+      "title": "Book Catalog Rest Api",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 8.",
+      "required_prior_knowledge": [
+        "Complete module-08."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/08-http-rest-apis/assessments/book-catalog-rest-api/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/08-http-rest-apis/assessments/book-catalog-rest-api/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-08-checkpoint",
+      "module_id": "module-08",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 8.",
+      "required_prior_knowledge": [
+        "Complete module-08."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/08-http-rest-apis/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/08-http-rest-apis/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-task-api-postgres",
+      "module_id": "module-09",
+      "slug": "task-api-with-postgres",
+      "title": "Task Api With Postgres",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 9 concepts by building Task Api With Postgres.",
+      "required_prior_knowledge": [
+        "Complete module-09."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/09-sql-postgres-persistence/projects/task-api-with-postgres/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/09-sql-postgres-persistence/projects/task-api-with-postgres/README.md",
+        "solution_path": "modules/09-sql-postgres-persistence/projects/task-api-with-postgres/_solution",
+        "starter_path": "modules/09-sql-postgres-persistence/projects/task-api-with-postgres/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-09-checkpoint",
+      "module_id": "module-09",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 9.",
+      "required_prior_knowledge": [
+        "Complete module-09."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/09-sql-postgres-persistence/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/09-sql-postgres-persistence/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-sql-postgres-persistence-task-api-postgres",
+      "module_id": "module-09",
+      "slug": "task-api-postgres",
+      "title": "Task Api Postgres",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 9.",
+      "required_prior_knowledge": [
+        "Complete module-09."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/09-sql-postgres-persistence/assessments/task-api-postgres/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/09-sql-postgres-persistence/assessments/task-api-postgres/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-secure-authenticated-api",
+      "module_id": "module-10",
+      "slug": "secure-authenticated-api",
+      "title": "Secure Authenticated Api",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 10 concepts by building Secure Authenticated Api.",
+      "required_prior_knowledge": [
+        "Complete module-10."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/10-auth-security/projects/secure-authenticated-api/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/10-auth-security/projects/secure-authenticated-api/README.md",
+        "solution_path": "modules/10-auth-security/projects/secure-authenticated-api/_solution",
+        "starter_path": "modules/10-auth-security/projects/secure-authenticated-api/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-10-checkpoint",
+      "module_id": "module-10",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 10.",
+      "required_prior_knowledge": [
+        "Complete module-10."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/10-auth-security/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/10-auth-security/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-auth-security-secure-authenticated-api",
+      "module_id": "module-10",
+      "slug": "secure-authenticated-api",
+      "title": "Secure Authenticated Api",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 10.",
+      "required_prior_knowledge": [
+        "Complete module-10."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/10-auth-security/assessments/secure-authenticated-api/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/10-auth-security/assessments/secure-authenticated-api/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-bounded-worker-pool",
+      "module_id": "module-11",
+      "slug": "bounded-worker-pool",
+      "title": "Bounded Worker Pool",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 11 concepts by building Bounded Worker Pool.",
+      "required_prior_knowledge": [
+        "Complete module-11."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/11-lifecycle-context-concurrency/projects/bounded-worker-pool/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/11-lifecycle-context-concurrency/projects/bounded-worker-pool/README.md",
+        "solution_path": "modules/11-lifecycle-context-concurrency/projects/bounded-worker-pool/_solution",
+        "starter_path": "modules/11-lifecycle-context-concurrency/projects/bounded-worker-pool/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-concurrent-downloader",
+      "module_id": "module-11",
+      "slug": "concurrent-downloader",
+      "title": "Concurrent Downloader",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 11 concepts by building Concurrent Downloader.",
+      "required_prior_knowledge": [
+        "Complete module-11."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/11-lifecycle-context-concurrency/projects/concurrent-downloader/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/11-lifecycle-context-concurrency/projects/concurrent-downloader/README.md",
+        "solution_path": "modules/11-lifecycle-context-concurrency/projects/concurrent-downloader/_solution",
+        "starter_path": "modules/11-lifecycle-context-concurrency/projects/concurrent-downloader/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-url-health-checker",
+      "module_id": "module-11",
+      "slug": "url-health-checker",
+      "title": "Url Health Checker",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 11 concepts by building Url Health Checker.",
+      "required_prior_knowledge": [
+        "Complete module-11."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/11-lifecycle-context-concurrency/projects/url-health-checker/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/11-lifecycle-context-concurrency/projects/url-health-checker/README.md",
+        "solution_path": "modules/11-lifecycle-context-concurrency/projects/url-health-checker/_solution",
+        "starter_path": "modules/11-lifecycle-context-concurrency/projects/url-health-checker/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-lifecycle-context-concurrency-bounded-worker-pool",
+      "module_id": "module-11",
+      "slug": "bounded-worker-pool",
+      "title": "Bounded Worker Pool",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 11.",
+      "required_prior_knowledge": [
+        "Complete module-11."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/11-lifecycle-context-concurrency/assessments/bounded-worker-pool/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/11-lifecycle-context-concurrency/assessments/bounded-worker-pool/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-11-checkpoint",
+      "module_id": "module-11",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 11.",
+      "required_prior_knowledge": [
+        "Complete module-11."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/11-lifecycle-context-concurrency/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/11-lifecycle-context-concurrency/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-lifecycle-context-concurrency-concurrent-downloader",
+      "module_id": "module-11",
+      "slug": "concurrent-downloader",
+      "title": "Concurrent Downloader",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 11.",
+      "required_prior_knowledge": [
+        "Complete module-11."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/11-lifecycle-context-concurrency/assessments/concurrent-downloader/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/11-lifecycle-context-concurrency/assessments/concurrent-downloader/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-lifecycle-context-concurrency-url-health-checker",
+      "module_id": "module-11",
+      "slug": "url-health-checker",
+      "title": "Url Health Checker",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 11.",
+      "required_prior_knowledge": [
+        "Complete module-11."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/11-lifecycle-context-concurrency/assessments/url-health-checker/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/11-lifecycle-context-concurrency/assessments/url-health-checker/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-observability-retrofit",
+      "module_id": "module-12",
+      "slug": "observability-retrofit",
+      "title": "Observability Retrofit",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 12 concepts by building Observability Retrofit.",
+      "required_prior_knowledge": [
+        "Complete module-12."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/12-observability-diagnostics/projects/observability-retrofit/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/12-observability-diagnostics/projects/observability-retrofit/README.md",
+        "solution_path": "modules/12-observability-diagnostics/projects/observability-retrofit/_solution",
+        "starter_path": "modules/12-observability-diagnostics/projects/observability-retrofit/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-pii-redactor",
+      "module_id": "module-12",
+      "slug": "pii-redactor",
+      "title": "Pii Redactor",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 12 concepts by building Pii Redactor.",
+      "required_prior_knowledge": [
+        "Complete module-12."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/12-observability-diagnostics/projects/pii-redactor/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/12-observability-diagnostics/projects/pii-redactor/README.md",
+        "solution_path": "modules/12-observability-diagnostics/projects/pii-redactor/_solution",
+        "starter_path": "modules/12-observability-diagnostics/projects/pii-redactor/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-12-checkpoint",
+      "module_id": "module-12",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 12.",
+      "required_prior_knowledge": [
+        "Complete module-12."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/12-observability-diagnostics/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/12-observability-diagnostics/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-observability-diagnostics-observability-retrofit",
+      "module_id": "module-12",
+      "slug": "observability-retrofit",
+      "title": "Observability Retrofit",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 12.",
+      "required_prior_knowledge": [
+        "Complete module-12."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/12-observability-diagnostics/assessments/observability-retrofit/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/12-observability-diagnostics/assessments/observability-retrofit/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-observability-diagnostics-pii-redactor",
+      "module_id": "module-12",
+      "slug": "pii-redactor",
+      "title": "Pii Redactor",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 12.",
+      "required_prior_knowledge": [
+        "Complete module-12."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/12-observability-diagnostics/assessments/pii-redactor/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/12-observability-diagnostics/assessments/pii-redactor/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-performance-analysis-lab",
+      "module_id": "module-13",
+      "slug": "performance-analysis-lab",
+      "title": "Performance Analysis Lab",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 13 concepts by building Performance Analysis Lab.",
+      "required_prior_knowledge": [
+        "Complete module-13."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/projects/performance-analysis-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/projects/performance-analysis-lab/README.md",
+        "solution_path": "modules/13-performance-memory-engineering/projects/performance-analysis-lab/_solution",
+        "starter_path": "modules/13-performance-memory-engineering/projects/performance-analysis-lab/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-profile-and-fix-lab",
+      "module_id": "module-13",
+      "slug": "profile-and-fix-lab",
+      "title": "Profile And Fix Lab",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 13 concepts by building Profile And Fix Lab.",
+      "required_prior_knowledge": [
+        "Complete module-13."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/projects/profile-and-fix-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/projects/profile-and-fix-lab/README.md",
+        "solution_path": "modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution",
+        "starter_path": "modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-13-checkpoint",
+      "module_id": "module-13",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 13.",
+      "required_prior_knowledge": [
+        "Complete module-13."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-performance-memory-engineering-performance-analysis-lab",
+      "module_id": "module-13",
+      "slug": "performance-analysis-lab",
+      "title": "Performance Analysis Lab",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 13.",
+      "required_prior_knowledge": [
+        "Complete module-13."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/assessments/performance-analysis-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/assessments/performance-analysis-lab/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-performance-memory-engineering-profile-and-fix-lab",
+      "module_id": "module-13",
+      "slug": "profile-and-fix-lab",
+      "title": "Profile And Fix Lab",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 13.",
+      "required_prior_knowledge": [
+        "Complete module-13."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/assessments/profile-and-fix-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/assessments/profile-and-fix-lab/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-modular-refactor-review",
+      "module_id": "module-14",
+      "slug": "modular-refactor-review",
+      "title": "Modular Refactor Review",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 14 concepts by building Modular Refactor Review.",
+      "required_prior_knowledge": [
+        "Complete module-14."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/14-architecture-distributed-systems/projects/modular-refactor-review/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/14-architecture-distributed-systems/projects/modular-refactor-review/README.md",
+        "solution_path": "modules/14-architecture-distributed-systems/projects/modular-refactor-review/_solution",
+        "starter_path": "modules/14-architecture-distributed-systems/projects/modular-refactor-review/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-14-checkpoint",
+      "module_id": "module-14",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 14.",
+      "required_prior_knowledge": [
+        "Complete module-14."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/14-architecture-distributed-systems/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/14-architecture-distributed-systems/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-architecture-distributed-systems-modular-refactor-review",
+      "module_id": "module-14",
+      "slug": "modular-refactor-review",
+      "title": "Modular Refactor Review",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 14.",
+      "required_prior_knowledge": [
+        "Complete module-14."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/14-architecture-distributed-systems/assessments/modular-refactor-review/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/14-architecture-distributed-systems/assessments/modular-refactor-review/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-dockerized-service-cicd",
+      "module_id": "module-15",
+      "slug": "dockerized-service-with-ci-cd",
+      "title": "Dockerized Service With Ci Cd",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 15 concepts by building Dockerized Service With Ci Cd.",
+      "required_prior_knowledge": [
+        "Complete module-15."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/15-docker-cicd-deployment/projects/dockerized-service-with-ci-cd/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/15-docker-cicd-deployment/projects/dockerized-service-with-ci-cd/README.md",
+        "solution_path": "modules/15-docker-cicd-deployment/projects/dockerized-service-with-ci-cd/_solution",
+        "starter_path": "modules/15-docker-cicd-deployment/projects/dockerized-service-with-ci-cd/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-15-checkpoint",
+      "module_id": "module-15",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 15.",
+      "required_prior_knowledge": [
+        "Complete module-15."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/15-docker-cicd-deployment/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/15-docker-cicd-deployment/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-docker-cicd-deployment-dockerized-service-cicd",
+      "module_id": "module-15",
+      "slug": "dockerized-service-cicd",
+      "title": "Dockerized Service Cicd",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 15.",
+      "required_prior_knowledge": [
+        "Complete module-15."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/15-docker-cicd-deployment/assessments/dockerized-service-cicd/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/15-docker-cicd-deployment/assessments/dockerized-service-cicd/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-portfolio-review-pack",
+      "module_id": "module-16",
+      "slug": "portfolio-review-pack",
+      "title": "Portfolio Review Pack",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 16 concepts by building Portfolio Review Pack.",
+      "required_prior_knowledge": [
+        "Complete module-16."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/README.md",
+        "solution_path": "modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/_solution",
+        "starter_path": "modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-16-checkpoint",
+      "module_id": "module-16",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 16.",
+      "required_prior_knowledge": [
+        "Complete module-16."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/16-portfolio-interview-readiness/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-portfolio-interview-readiness-portfolio-review-pack",
+      "module_id": "module-16",
+      "slug": "portfolio-review-pack",
+      "title": "Portfolio Review Pack",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 16.",
+      "required_prior_knowledge": [
+        "Complete module-16."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/assessments/portfolio-review-pack/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/16-portfolio-interview-readiness/assessments/portfolio-review-pack/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "project-15-opslane-portfolio-defense",
+      "module_id": "module-18",
+      "slug": "15-opslane-portfolio-defense",
+      "title": "15 Opslane Portfolio Defense",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 18 concepts by building 15 Opslane Portfolio Defense.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/18-flagship-opslane/projects/15-opslane-portfolio-defense",
+        "test_command": "go test ./modules/18-flagship-opslane/projects/15-opslane-portfolio-defense"
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/main.go",
+        "readme_path": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/README.md",
+        "solution_path": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/_solution",
+        "starter_path": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/_starter",
+        "test_path": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "project-opslane",
+      "module_id": "module-18",
+      "slug": "opslane-flagship",
+      "title": "Opslane Flagship",
+      "type": "project",
+      "subtype": "project",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 99,
+      "estimated_minutes": 120,
+      "learning_objective": "Apply module 18 concepts by building Opslane Flagship.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/projects/opslane-flagship/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/18-flagship-opslane/projects/opslane-flagship/README.md",
+        "solution_path": "modules/18-flagship-opslane/projects/opslane-flagship/_solution",
+        "starter_path": "modules/18-flagship-opslane/projects/opslane-flagship/_starter",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "documentation_mode": "project",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-01-opslane-foundation-and-configuration",
+      "module_id": "module-18",
+      "slug": "01-opslane-foundation-and-configuration",
+      "title": "01 Opslane Foundation And Configuration",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-02-opslane-database-and-models",
+      "module_id": "module-18",
+      "slug": "02-opslane-database-and-models",
+      "title": "02 Opslane Database And Models",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/02-opslane-database-and-models/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-03-opslane-authentication",
+      "module_id": "module-18",
+      "slug": "03-opslane-authentication",
+      "title": "03 Opslane Authentication",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/03-opslane-authentication/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/03-opslane-authentication/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/03-opslane-authentication/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/03-opslane-authentication/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/03-opslane-authentication/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/03-opslane-authentication/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/03-opslane-authentication/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-04-opslane-authorization",
+      "module_id": "module-18",
+      "slug": "04-opslane-authorization",
+      "title": "04 Opslane Authorization",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/04-opslane-authorization/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/04-opslane-authorization/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/04-opslane-authorization/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/04-opslane-authorization/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/04-opslane-authorization/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/04-opslane-authorization/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/04-opslane-authorization/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-05-opslane-tenant-isolation",
+      "module_id": "module-18",
+      "slug": "05-opslane-tenant-isolation",
+      "title": "05 Opslane Tenant Isolation",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-06-opslane-http-api-layer",
+      "module_id": "module-18",
+      "slug": "06-opslane-http-api-layer",
+      "title": "06 Opslane Http Api Layer",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-07-opslane-order-processing",
+      "module_id": "module-18",
+      "slug": "07-opslane-order-processing",
+      "title": "07 Opslane Order Processing",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/07-opslane-order-processing/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-08-opslane-payment-pipeline",
+      "module_id": "module-18",
+      "slug": "08-opslane-payment-pipeline",
+      "title": "08 Opslane Payment Pipeline",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-09-opslane-event-bus",
+      "module_id": "module-18",
+      "slug": "09-opslane-event-bus",
+      "title": "09 Opslane Event Bus",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/09-opslane-event-bus/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-10-opslane-worker-pools",
+      "module_id": "module-18",
+      "slug": "10-opslane-worker-pools",
+      "title": "10 Opslane Worker Pools",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/10-opslane-worker-pools/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-11-opslane-caching-layer",
+      "module_id": "module-18",
+      "slug": "11-opslane-caching-layer",
+      "title": "11 Opslane Caching Layer",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/11-opslane-caching-layer/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-12-opslane-observability",
+      "module_id": "module-18",
+      "slug": "12-opslane-observability",
+      "title": "12 Opslane Observability",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/12-opslane-observability/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/12-opslane-observability/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/12-opslane-observability/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/12-opslane-observability/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/12-opslane-observability/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/12-opslane-observability/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/12-opslane-observability/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-13-opslane-graceful-shutdown",
+      "module_id": "module-18",
+      "slug": "13-opslane-graceful-shutdown",
+      "title": "13 Opslane Graceful Shutdown",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-14-opslane-deployment",
+      "module_id": "module-18",
+      "slug": "14-opslane-deployment",
+      "title": "14 Opslane Deployment",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": "go test ./modules/18-flagship-opslane/assessments/14-opslane-deployment/..."
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/14-opslane-deployment/assets",
+        "diagram_paths": [],
+        "main_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/main.go",
+        "readme_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/README.md",
+        "solution_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/_solution",
+        "starter_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/_starter",
+        "test_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/main_test.go"
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-module-18-checkpoint",
+      "module_id": "module-18",
+      "slug": "checkpoint",
+      "title": "Checkpoint",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/18-flagship-opslane/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
+      "id": "assessment-flagship-opslane-opslane",
+      "module_id": "module-18",
+      "slug": "opslane",
+      "title": "Opslane",
+      "type": "assessment",
+      "subtype": "assessment",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 100,
+      "estimated_minutes": 60,
+      "learning_objective": "Assess understanding of module 18.",
+      "required_prior_knowledge": [
+        "Complete module-18."
+      ],
+      "prerequisites": [],
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "files": {
+        "assets_dir": "modules/18-flagship-opslane/assessments/opslane/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/18-flagship-opslane/assessments/opslane/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
     }
   ]
 }
