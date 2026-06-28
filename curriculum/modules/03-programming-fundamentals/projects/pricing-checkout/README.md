@@ -63,9 +63,9 @@ Item: Laptop - $999.99
 Item: Mouse - $24.99
 Item: Keyboard - $89.99
 Subtotal: $1114.97
-Discount (5%): $55.75
-Tax (US 7%): $74.15
-Total: $1133.37
+Discount (0%): $0.00
+Tax (US 7%): $78.04
+Total: $1193.01
 ```
 
 ```bash
