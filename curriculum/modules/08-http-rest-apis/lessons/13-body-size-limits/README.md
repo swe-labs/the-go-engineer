@@ -207,4 +207,4 @@ All tests should pass, covering valid bodies, oversized bodies, malformed JSON, 
 
 ## NEXT UP
 
-Server timeouts -- configuring `ReadTimeout`, `WriteTimeout`, `IdleTimeout`, and `ReadHeaderTimeout` to protect your server from slow clients and hanging connections.
+[Server Timeouts](../14-server-timeouts/README.md)

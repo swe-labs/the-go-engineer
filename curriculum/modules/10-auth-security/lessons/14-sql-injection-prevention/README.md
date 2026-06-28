@@ -264,4 +264,4 @@ The existing tests verify that unsafe queries are vulnerable to injection and sa
 
 ## NEXT UP
 
-XSS -- Cross-Site Scripting attacks and how Go's `html/template` package provides automatic context-sensitive escaping to prevent script injection.
+[Xss](../15-xss/README.md)

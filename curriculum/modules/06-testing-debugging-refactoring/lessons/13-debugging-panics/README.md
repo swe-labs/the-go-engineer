@@ -174,4 +174,4 @@ go test ./curriculum/modules/06-testing-debugging-refactoring/lessons/13-debuggi
 
 ## NEXT UP
 
-Delve basics — using a debugger to step through Go code interactively.
+[Delve Basics](../14-delve-basics/README.md)

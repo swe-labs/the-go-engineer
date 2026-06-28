@@ -171,4 +171,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/11-fs-fs
 
 ## NEXT UP
 
-JSON marshal — encoding and decoding JSON data in Go.
+[Json Marshal](../12-json-marshal/README.md)

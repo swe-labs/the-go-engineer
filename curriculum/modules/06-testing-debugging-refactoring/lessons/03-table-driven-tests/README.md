@@ -223,4 +223,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/03-tabl
 
 ## NEXT UP
 
-Subtests — deeper patterns for `t.Run`, parallelism, setup/teardown, and selective execution.
+[Subtests](../04-subtests/README.md)

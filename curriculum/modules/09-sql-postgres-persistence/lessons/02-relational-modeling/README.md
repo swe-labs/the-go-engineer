@@ -255,4 +255,4 @@ The tests verify the relational integrity of INSERT, JOIN queries, and the Go st
 
 ## NEXT UP
 
-Tables, rows, and columns — the concrete SQL primitives that implement the relational model.
+[Tables Rows And Columns](../03-tables-rows-and-columns/README.md)

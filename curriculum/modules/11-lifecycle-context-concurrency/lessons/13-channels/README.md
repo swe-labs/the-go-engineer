@@ -207,4 +207,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/13-channel
 
 ## NEXT UP
 
-Buffered channels — decouple sender and receiver with a bounded buffer, enabling asynchronous communication.
+[Buffered Channels](../14-buffered-channels/README.md)

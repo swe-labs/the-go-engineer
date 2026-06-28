@@ -171,4 +171,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/12-json-marshal
 
 ## NEXT UP
 
-JSON unmarshal — the reverse operation: parsing JSON byte slices back into Go values.
+[Json Unmarshal](../13-json-unmarshal/README.md)

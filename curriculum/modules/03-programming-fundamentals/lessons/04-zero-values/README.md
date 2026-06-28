@@ -224,4 +224,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/04-zero-values
 
 ## NEXT UP
 
-Type conversions — how to convert between Go's basic types with explicit syntax, the strconv package, and when to use unsafe conversions.
+[Type Conversions](../05-type-conversions/README.md)

@@ -192,4 +192,4 @@ The existing tests verify value storage, missing key behavior, multiple keys, ty
 
 ## NEXT UP
 
-Why concurrency exists — the fundamental reasons for concurrency and Go's model for expressing it.
+[Why Concurrency Exists](../10-why-concurrency-exists/README.md)

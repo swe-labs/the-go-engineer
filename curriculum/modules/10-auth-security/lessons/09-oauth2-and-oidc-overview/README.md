@@ -407,4 +407,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-API keys — generation, hashing, rotation, and scoping for service-to-service and developer API authentication.
+[Api Keys](../10-api-keys/README.md)

@@ -170,4 +170,4 @@ go test ./curriculum/modules/13-performance-memory-engineering/lessons/02-cpu-pr
 
 ## NEXT UP
 
-Memory profiling — understanding heap profiles, distinguishing alloc_objects from alloc_space and inuse_objects from inuse_space, and detecting memory leaks through heap dump analysis.
+[Memory Profiling](../03-memory-profiling/README.md)

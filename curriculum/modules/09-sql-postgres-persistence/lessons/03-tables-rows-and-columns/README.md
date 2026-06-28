@@ -234,4 +234,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/03-tables-rows-
 
 ## NEXT UP
 
-Primary keys — choosing the right identifier for every row.
+[Primary Keys](../04-primary-keys/README.md)

@@ -327,4 +327,4 @@ The tests verify that high-quality projects score at least 20, low-quality proje
 
 ## NEXT UP
 
-Project selection and scoping — learn how to define the right project, avoid over-engineering, and estimate a realistic timeline before writing a single line of code.
+[Project Selection And Scoping](../02-project-selection-and-scoping/README.md)

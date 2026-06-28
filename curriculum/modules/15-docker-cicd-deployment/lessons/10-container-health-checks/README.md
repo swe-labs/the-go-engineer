@@ -226,4 +226,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/10-container-h
 
 ## NEXT UP
 
-GitHub Actions — automating build, test, and deploy pipelines for Go projects with GitHub's CI/CD platform.
+[Github Actions](../11-github-actions/README.md)

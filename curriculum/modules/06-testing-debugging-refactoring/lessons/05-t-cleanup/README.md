@@ -245,4 +245,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/05-t-cl
 
 ## NEXT UP
 
-Test fixtures — organizing shared setup and teardown with `testdata` and `TestMain`.
+[Test Fixtures](../06-test-fixtures/README.md)

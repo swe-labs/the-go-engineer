@@ -231,4 +231,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/06-constraints
 
 ## NEXT UP
 
-SQLite as a local learning tool — why SQLite is ideal for development and testing.
+[Sqlite As A Local Learning Tool](../07-sqlite-as-a-local-learning-tool/README.md)

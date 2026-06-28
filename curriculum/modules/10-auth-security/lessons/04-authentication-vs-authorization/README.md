@@ -368,4 +368,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-Password hashing — why plaintext storage is catastrophic and how bcrypt, scrypt, and Argon2 provide cryptographic protection for user credentials.
+[Password Hashing](../05-password-hashing/README.md)

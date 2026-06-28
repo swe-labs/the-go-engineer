@@ -272,4 +272,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/19-strings
 
 ## NEXT UP
 
-Bytes (core-03-20): Work with `[]byte` slices, `bytes.Buffer`, and the `bytes` package for efficient binary data handling.
+[Bytes](../20-bytes/README.md)

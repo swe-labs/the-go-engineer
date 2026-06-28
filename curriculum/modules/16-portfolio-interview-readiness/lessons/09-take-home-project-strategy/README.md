@@ -234,4 +234,4 @@ The existing tests verify `TotalScore` (perfect, average, empty, single, uneven 
 
 ## NEXT UP
 
-Negotiation fundamentals — learn how to evaluate offers, understand total compensation, and negotiate effectively when you receive the offer.
+[Negotiation Fundamentals](../10-negotiation-fundamentals/README.md)

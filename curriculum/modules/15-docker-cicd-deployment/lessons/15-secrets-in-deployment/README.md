@@ -263,4 +263,4 @@ The existing tests verify the in-memory store, env secret store, template resolu
 
 ## NEXT UP
 
-Vulnerability scanning: detecting CVEs in dependencies and Docker images before they reach production.
+[Vulnerability Scanning](../16-vulnerability-scanning/README.md)

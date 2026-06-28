@@ -214,4 +214,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/12-typ
 
 ## NEXT UP
 
-Type switches — a cleaner syntax for dispatching on multiple types with `switch v := x.(type)`.
+[Type Switches](../13-type-switches/README.md)

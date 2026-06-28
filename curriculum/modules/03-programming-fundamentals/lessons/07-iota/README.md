@@ -262,4 +262,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/07-iota
 
 ## NEXT UP
 
-Boolean logic and how `bool` values combine with `&&`, `||`, and `!` to form predicates.
+[Boolean Logic](../08-boolean-logic/README.md)

@@ -277,4 +277,4 @@ The existing tests verify redaction of sensitive keys (case-insensitive), log le
 
 ## NEXT UP
 
-Refresh tokens -- implementing secure refresh token rotation with short-lived access tokens, long-lived refresh tokens, secure storage, and revocation in Go APIs.
+[Refresh Tokens](../25-refresh-tokens/README.md)

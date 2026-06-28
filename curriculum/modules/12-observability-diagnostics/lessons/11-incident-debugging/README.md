@@ -235,4 +235,4 @@ go run ./curriculum/modules/12-observability-diagnostics/lessons/11-incident-deb
 
 ## NEXT UP
 
-Reliability review — systematic patterns for building resilient Go services.
+[Reliability Review](../12-reliability-review/README.md)

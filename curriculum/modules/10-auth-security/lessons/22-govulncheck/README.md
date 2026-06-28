@@ -266,4 +266,4 @@ The existing tests verify vulnerability database loading, module version matchin
 
 ## NEXT UP
 
-OWASP for Go APIs -- applying the OWASP API Security Top 10 to Go API development, with a security checklist and common Go-specific vulnerabilities.
+[Owasp For Go Apis](../23-owasp-for-go-apis/README.md)

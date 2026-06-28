@@ -304,4 +304,4 @@ The existing tests verify address creation, order item total calculation, order 
 
 ## NEXT UP
 
-Invariants -- enforcing business rules at system boundaries to prevent invalid state.
+[Invariants](../08-invariants/README.md)

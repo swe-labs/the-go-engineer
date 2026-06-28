@@ -247,4 +247,4 @@ The existing tests verify `go.sum` parsing, module hash computation, dependency 
 
 ## NEXT UP
 
-govulncheck -- scanning Go projects for known vulnerabilities using the official Go vulnerability tool, integrating it into CI, and understanding the vulnerability database format.
+[Govulncheck](../22-govulncheck/README.md)

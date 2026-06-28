@@ -199,4 +199,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/17-backpre
 
 ## NEXT UP
 
-Pipelines — compose multiple stages connected by channels, with fan-out, fan-in, and cancellation propagation.
+[Pipelines](../18-pipelines/README.md)

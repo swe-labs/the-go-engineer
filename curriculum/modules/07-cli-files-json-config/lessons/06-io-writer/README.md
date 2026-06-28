@@ -150,4 +150,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/06-io-writer
 
 ## NEXT UP
 
-Files — opening, creating, reading, and writing files with the `os` package.
+[Files](../07-files/README.md)

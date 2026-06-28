@@ -194,4 +194,4 @@ go test ./curriculum/modules/06-testing-debugging-refactoring/lessons/18-debuggi
 
 ## NEXT UP
 
-Refactoring safely — using tests as a safety net for code changes.
+[Refactoring Safely](../19-refactoring-safely/README.md)

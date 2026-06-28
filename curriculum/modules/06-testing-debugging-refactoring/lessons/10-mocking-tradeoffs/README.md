@@ -245,4 +245,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/10-mock
 
 ## NEXT UP
 
-Debugging mindset — systematic approaches to diagnosing and fixing bugs.
+[Debugging Mindset](../11-debugging-mindset/README.md)

@@ -244,4 +244,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/08-boolean-logi
 
 ## NEXT UP
 
-If and else — how Go's conditional branching works with boolean expressions.
+[If And Else](../09-if-and-else/README.md)

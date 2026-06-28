@@ -202,4 +202,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/15-json-decoder
 
 ## NEXT UP
 
-Config files — patterns for loading application configuration from JSON and YAML files.
+[Config Files](../16-config-files/README.md)

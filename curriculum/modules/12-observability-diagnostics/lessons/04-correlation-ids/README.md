@@ -237,4 +237,4 @@ go test ./curriculum/modules/12-observability-diagnostics/lessons/04-correlation
 
 ## NEXT UP
 
-PII redaction — ensuring sensitive user data (passwords, emails, SSNs) is never written to logs.
+[Pii Redaction](../05-pii-redaction/README.md)

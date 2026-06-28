@@ -315,4 +315,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/27-update-opera
 
 ## NEXT UP
 
-DELETE operations — hard delete, soft delete, CASCADE, and batch delete strategies.
+[Delete Operations](../28-delete-operations/README.md)

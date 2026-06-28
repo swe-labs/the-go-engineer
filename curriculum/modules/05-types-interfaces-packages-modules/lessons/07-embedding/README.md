@@ -220,4 +220,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/07-emb
 
 ## NEXT UP
 
-Interfaces — Go's implicit satisfaction model, interface values, and the empty interface.
+[Interfaces](../08-interfaces/README.md)

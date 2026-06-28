@@ -279,4 +279,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/08-test
 
 ## NEXT UP
 
-Fakes before mocks — in-memory fake implementations as an alternative to mocking frameworks.
+[Fakes Before Mocks](../09-fakes-before-mocks/README.md)

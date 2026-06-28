@@ -396,4 +396,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-JWT implementation — self-contained tokens with signed claims for stateless authentication across services.
+[Jwt Implementation](../07-jwt-implementation/README.md)

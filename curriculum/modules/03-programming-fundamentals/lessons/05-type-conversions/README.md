@@ -226,4 +226,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/05-type-convers
 
 ## NEXT UP
 
-Constants and how the `const` keyword creates compile-time-evaluated named values with arbitrary precision.
+[Constants](../06-constants/README.md)

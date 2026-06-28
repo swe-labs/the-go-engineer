@@ -237,4 +237,4 @@ The tests verify dedup rejection, callback tracking, retry success after N attem
 
 ## NEXT UP
 
-Payment workflow design.
+[Payment Workflow Design](../12-payment-workflow-design/README.md)

@@ -276,4 +276,4 @@ The existing tests verify `AnalyzePost` (basic, missing sections, issues detecti
 
 ## NEXT UP
 
-Conference talk preparation — learn how to craft compelling talk proposals, design effective slides, and deliver presentations that showcase your expertise.
+[Conference Talk Preparation](../13-conference-talk-preparation/README.md)

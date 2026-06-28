@@ -244,4 +244,4 @@ The tests verify CRUD operations on the in-memory repository and validate that t
 
 ## NEXT UP
 
-Modular monolith -- organizing code into bounded contexts within a single process for clarity without the overhead of services.
+[Modular Monolith](../05-modular-monolith/README.md)

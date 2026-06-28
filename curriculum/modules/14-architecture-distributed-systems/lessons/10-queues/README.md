@@ -231,4 +231,4 @@ The tests verify FIFO ordering, empty-queue error handling, closed-queue rejecti
 
 ## NEXT UP
 
-Retries and idempotent consumers.
+[Retries And Idempotent Consumers](../11-retries-and-idempotent-consumers/README.md)

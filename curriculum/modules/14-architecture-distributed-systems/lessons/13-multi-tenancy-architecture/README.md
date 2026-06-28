@@ -281,4 +281,4 @@ The tests verify tenant context propagation, data isolation across tenants, miss
 
 ## NEXT UP
 
-Caching architecture.
+[Caching Architecture](../14-caching-architecture/README.md)

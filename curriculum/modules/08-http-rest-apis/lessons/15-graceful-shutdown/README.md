@@ -207,4 +207,4 @@ Tests validate handler behavior, server shutdown mechanics, and context cancella
 
 ## NEXT UP
 
-Health and readiness probes -- implementing `/healthz` and `/readyz` endpoints for Kubernetes and load balancer health checking.
+[Health And Readiness Probes](../16-health-and-readiness-probes/README.md)

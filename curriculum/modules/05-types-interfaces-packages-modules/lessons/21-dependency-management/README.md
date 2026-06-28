@@ -263,4 +263,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/21-dep
 
 ## NEXT UP
 
-Workspaces — developing multiple modules locally with `go.work` for seamless multi-module workflows.
+[Workspaces](../22-workspaces/README.md)

@@ -198,4 +198,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/21-cli-testability
 
 ## NEXT UP
 
-Congratulations on completing Module 07! You now know how to build CLI tools, read/write files, handle JSON, and manage configuration in Go. Next up: Module 08 — HTTP, REST APIs, and Web Services.
+Congratulations on completing Module 07! You now know how to build CLI tools, read/write files, handle JSON, and manage configuration in Go. Next up: [Http As A Protocol](../../08-http-rest-apis/lessons/01-http-as-a-protocol/README.md)

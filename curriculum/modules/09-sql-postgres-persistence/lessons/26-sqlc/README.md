@@ -248,4 +248,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/26-sqlc
 
 ## NEXT UP
 
-UPDATE operations — modifying existing rows with SET, optimistic locking, and partial updates.
+[Update Operations](../27-update-operations/README.md)

@@ -256,4 +256,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/17-maps
 
 ## NEXT UP
 
-Comma-ok idiom (core-03-18): Learn the two-value form pattern used not just for maps but for type assertions and channel receives.
+[Comma Ok Idiom](../18-comma-ok-idiom/README.md)

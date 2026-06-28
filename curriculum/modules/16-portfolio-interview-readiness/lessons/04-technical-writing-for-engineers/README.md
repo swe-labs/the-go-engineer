@@ -364,4 +364,4 @@ The tests verify detection of undocumented and documented exported symbols, corr
 
 ## NEXT UP
 
-Resume and LinkedIn optimization — learn to craft a resume and LinkedIn profile that passes keyword screens and tells a compelling career story.
+[Resume And Linkedin Optimization](../05-resume-and-linkedin-optimization/README.md)

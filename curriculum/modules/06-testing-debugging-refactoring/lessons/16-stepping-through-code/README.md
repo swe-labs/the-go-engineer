@@ -177,4 +177,4 @@ go test ./curriculum/modules/06-testing-debugging-refactoring/lessons/16-steppin
 
 ## NEXT UP
 
-Inspecting variables — how to print, watch, and understand variable state in Delve.
+[Inspecting Variables](../17-inspecting-variables/README.md)

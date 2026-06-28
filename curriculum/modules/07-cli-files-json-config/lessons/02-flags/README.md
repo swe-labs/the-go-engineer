@@ -147,4 +147,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/02-flags
 
 ## NEXT UP
 
-Subcommands — building multi-command CLIs like `git commit` and `docker run`.
+[Subcommands](../03-subcommands/README.md)

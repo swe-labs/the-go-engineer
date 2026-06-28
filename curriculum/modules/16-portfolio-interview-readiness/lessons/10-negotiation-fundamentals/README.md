@@ -215,4 +215,4 @@ The existing tests verify `TotalFirstYear` (simple, no equity/bonus, with perks)
 
 ## NEXT UP
 
-Open source contribution — learn how to find Go projects, make your first contribution, and build your professional reputation through open source work.
+[Open Source Contribution](../11-open-source-contribution/README.md)

@@ -223,4 +223,4 @@ The existing tests verify that unsafe rendering passes through injection payload
 
 ## NEXT UP
 
-CSRF -- Cross-Site Request Forgery attacks and how to prevent them with anti-CSRF tokens, SameSite cookies, and origin header validation.
+[Csrf](../16-csrf/README.md)

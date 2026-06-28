@@ -269,4 +269,4 @@ The existing tests verify `EvaluateProposal` (basic, empty abstract, novelty sco
 
 ## NEXT UP
 
-Mentorship and code review — learn how to give constructive feedback, mentor junior engineers, and grow your leadership skills through code review.
+[Mentorship And Code Review](../14-mentorship-and-code-review/README.md)

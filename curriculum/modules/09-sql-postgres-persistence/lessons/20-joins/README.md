@@ -230,4 +230,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/20-joins
 
 ## NEXT UP
 
-Indexes — speeding up queries with B-tree indexes, composite indexes, and understanding tradeoffs.
+[Indexes](../21-indexes/README.md)

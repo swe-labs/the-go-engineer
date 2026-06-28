@@ -274,4 +274,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/14-scanning-row
 
 ## NEXT UP
 
-Null handling — comprehensive coverage of NULL values in SQL and their Go counterparts.
+[Null Handling](../15-null-handling/README.md)

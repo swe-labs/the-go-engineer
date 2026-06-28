@@ -218,4 +218,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/02-unit
 
 ## NEXT UP
 
-Table-driven tests — structuring multiple test cases cleanly with slices of test data.
+[Table Driven Tests](../03-table-driven-tests/README.md)

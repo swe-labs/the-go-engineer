@@ -179,4 +179,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/06-docker-basi
 
 ## NEXT UP
 
-Docker images and layers — how layers work, layer caching, COPY order optimization, and .dockerignore.
+[Docker Images And Layers](../07-docker-images-and-layers/README.md)

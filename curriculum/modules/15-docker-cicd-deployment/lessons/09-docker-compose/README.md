@@ -203,4 +203,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/09-docker-comp
 
 ## NEXT UP
 
-Container health checks — implementing `/healthz` endpoints in Go, using Docker's HEALTHCHECK instruction, and distinguishing readiness from liveness.
+[Container Health Checks](../10-container-health-checks/README.md)

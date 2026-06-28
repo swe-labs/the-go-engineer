@@ -293,4 +293,4 @@ go test -tags=integration ./curriculum/modules/09-sql-postgres-persistence/lesso
 
 ## NEXT UP
 
-sqlc — type-safe SQL query generation from raw SQL.
+[Sqlc](../26-sqlc/README.md)

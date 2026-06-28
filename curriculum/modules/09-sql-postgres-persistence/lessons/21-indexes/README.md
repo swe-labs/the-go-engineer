@@ -238,4 +238,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/21-indexes
 
 ## NEXT UP
 
-EXPLAIN — reading query plans to understand and optimize query execution.
+[Explain](../22-explain/README.md)

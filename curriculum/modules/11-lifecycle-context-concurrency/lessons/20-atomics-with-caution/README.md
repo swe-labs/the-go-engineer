@@ -256,4 +256,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/20-atomics
 
 ## NEXT UP
 
-Race conditions — how data races occur, how to detect them with the race detector, and patterns to prevent them.
+[Race Conditions](../21-race-conditions/README.md)

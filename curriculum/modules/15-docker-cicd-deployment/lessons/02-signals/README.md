@@ -165,4 +165,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/02-signals
 
 ## NEXT UP
 
-Logs — where to write them (stdout/stderr), structured logging with slog, and the 12-factor app approach.
+[Logs](../03-logs/README.md)

@@ -280,4 +280,4 @@ go run ./curriculum/modules/12-observability-diagnostics/lessons/07-prometheus
 
 ## NEXT UP
 
-Tracing — moving from aggregate metrics to per-request distributed traces.
+[Tracing](../08-tracing/README.md)

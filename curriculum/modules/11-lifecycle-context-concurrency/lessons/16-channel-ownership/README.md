@@ -211,4 +211,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/16-channel
 
 ## NEXT UP
 
-Backpressure — controlling how fast producers can send when consumers are slow, using bounded channels and rejection patterns.
+[Backpressure](../17-backpressure/README.md)

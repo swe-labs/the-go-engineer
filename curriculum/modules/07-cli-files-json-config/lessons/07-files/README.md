@@ -153,4 +153,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/07-files
 
 ## NEXT UP
 
-Paths — manipulating file paths portably with `path/filepath`.
+[Paths](../08-paths/README.md)

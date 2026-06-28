@@ -224,4 +224,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/19-migrations
 
 ## NEXT UP
 
-Joins — combining data from multiple tables using INNER, LEFT, RIGHT, and FULL JOIN.
+[Joins](../20-joins/README.md)

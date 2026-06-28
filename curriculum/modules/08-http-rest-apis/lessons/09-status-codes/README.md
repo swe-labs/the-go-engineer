@@ -213,4 +213,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/09-status-codes
 
 ## NEXT UP
 
-Middleware pattern — wrapping `http.Handler` to add cross-cutting concerns like logging, recovery, and CORS.
+[Middleware Pattern](../10-middleware-pattern/README.md)

@@ -194,4 +194,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/05-scope
 
 ## NEXT UP
 
-Call stack mental model — stack frames, push/pop, and LIFO behaviour.
+[Call Stack Mental Model](../06-call-stack-mental-model/README.md)

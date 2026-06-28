@@ -154,4 +154,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/08-paths
 
 ## NEXT UP
 
-Directories — creating, removing, and listing directories.
+[Directories](../09-directories/README.md)

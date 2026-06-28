@@ -185,4 +185,4 @@ The tests verify that the in-memory store saves and finds items, returns an erro
 
 ## NEXT UP
 
-Service layer -- isolating business logic behind a dedicated layer with dependency injection via constructor.
+[Service Layer](../03-service-layer/README.md)

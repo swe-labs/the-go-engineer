@@ -239,4 +239,4 @@ go run ./curriculum/modules/12-observability-diagnostics/lessons/08-tracing
 
 ## NEXT UP
 
-OpenTelemetry — the unified API for traces, metrics, and logs that replaced OpenTracing and OpenCensus.
+[Opentelemetry](../09-opentelemetry/README.md)

@@ -230,4 +230,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/16-exp
 
 ## NEXT UP
 
-Project layout — how to organise Go projects using `cmd/`, `internal/`, `pkg/`, and flat layout conventions.
+[Modules](../18-modules/README.md)

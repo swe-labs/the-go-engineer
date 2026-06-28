@@ -186,4 +186,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/15-slice-length
 
 ## NEXT UP
 
-Slice sharing and aliasing — how multiple slices can share the same backing array, and how to avoid data corruption bugs.
+[Slice Sharing And Aliasing](../16-slice-sharing-and-aliasing/README.md)

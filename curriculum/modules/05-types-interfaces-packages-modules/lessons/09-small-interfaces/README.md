@@ -195,4 +195,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/09-sma
 
 ## NEXT UP
 
-Interface embedding — composing interfaces from smaller interfaces.
+[Interface Embedding](../10-interface-embedding/README.md)

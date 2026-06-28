@@ -250,4 +250,4 @@ The existing tests verify the security audit mechanism, input validation detecti
 
 ## NEXT UP
 
-Secure logging -- logging security events without exposing sensitive data, structured logging with redaction, audit trails, and log levels in Go.
+[Secure Logging](../24-secure-logging/README.md)

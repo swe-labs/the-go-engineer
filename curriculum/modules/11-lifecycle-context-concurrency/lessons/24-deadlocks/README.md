@@ -187,4 +187,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/24-deadloc
 
 ## NEXT UP
 
-Errgroup
+[Errgroup](../25-errgroup/README.md)

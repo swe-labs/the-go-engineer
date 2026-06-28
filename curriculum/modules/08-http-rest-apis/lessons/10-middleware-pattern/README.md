@@ -268,4 +268,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/10-middleware-pattern
 
 ## NEXT UP
 
-Error middleware — centralized error handling and panic recovery in middleware, returning structured errors.
+[Error Middleware](../11-error-middleware/README.md)

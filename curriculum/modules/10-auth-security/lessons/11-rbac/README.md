@@ -458,4 +458,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-ABAC and policy checks — attribute-based access control for fine-grained, context-aware authorization decisions.
+[Abac And Policy Checks](../12-abac-and-policy-checks/README.md)

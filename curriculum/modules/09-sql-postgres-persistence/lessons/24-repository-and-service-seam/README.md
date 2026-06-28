@@ -291,4 +291,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/24-repository-a
 
 ## NEXT UP
 
-Integration tests — testing with a real database, setup/teardown, and build tags.
+[Integration Tests](../25-integration-tests/README.md)

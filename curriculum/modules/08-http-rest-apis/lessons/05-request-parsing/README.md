@@ -199,4 +199,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/05-request-parsing
 
 ## NEXT UP
 
-Input validation — validating parsed input for required fields, type correctness, and range constraints using manual checks and `go-playground/validator`.
+[Input Validation](../06-input-validation/README.md)

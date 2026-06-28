@@ -168,4 +168,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/05-io-reader
 
 ## NEXT UP
 
-`io.Writer` — the counterpart interface for writing data.
+[Io Writer](../06-io-writer/README.md)

@@ -288,4 +288,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/23-doc
 
 ## NEXT UP
 
-Congratulations on completing Module 05! You now understand Go's type system with structs, methods, interfaces, and the module system. Next up: Module 06 — Testing, Debugging, and Refactoring.
+Congratulations on completing Module 05! You now understand Go's type system with structs, methods, interfaces, and the module system. Next up: [Why Testing Exists](../../06-testing-debugging-refactoring/lessons/01-why-testing-exists/README.md)

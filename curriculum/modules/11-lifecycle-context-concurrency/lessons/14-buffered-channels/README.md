@@ -217,4 +217,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/14-buffere
 
 ## NEXT UP
 
-Closing channels — the `close` function, the comma-ok idiom, range over channel, and the "who closes?" contract.
+[Closing Channels](../15-closing-channels/README.md)

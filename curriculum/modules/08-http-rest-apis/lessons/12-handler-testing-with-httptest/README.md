@@ -232,4 +232,4 @@ Expected output includes four passing tests: `TestUsersHandler`, `TestGreetingTa
 
 ## NEXT UP
 
-Body size limits -- protecting your server from oversized request payloads using `http.MaxBytesReader`.
+[Body Size Limits](../13-body-size-limits/README.md)

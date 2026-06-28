@@ -184,4 +184,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/06-com
 
 ## NEXT UP
 
-Embedding — deeper dive into promoted methods, interface embedding, and conflict resolution.
+[Embedding](../07-embedding/README.md)

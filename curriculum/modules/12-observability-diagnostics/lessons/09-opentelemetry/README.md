@@ -234,4 +234,4 @@ go run ./curriculum/modules/12-observability-diagnostics/lessons/09-opentelemetr
 
 ## NEXT UP
 
-Alerting mindset — translating observability data into actionable alerts that on-call engineers trust.
+[Alerting Mindset](../10-alerting-mindset/README.md)

@@ -223,4 +223,4 @@ The tests verify service evaluation for different team sizes and throughput leve
 
 ## NEXT UP
 
-Architecture decision records.
+[Architecture Decision Records](../17-architecture-decision-records/README.md)

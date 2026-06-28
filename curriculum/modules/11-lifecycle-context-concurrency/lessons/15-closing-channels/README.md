@@ -195,4 +195,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/15-closing
 
 ## NEXT UP
 
-Channel ownership — the discipline of who creates, sends, closes, and receives for safe channel usage.
+[Channel Ownership](../16-channel-ownership/README.md)

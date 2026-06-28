@@ -162,4 +162,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/03-subcommands
 
 ## NEXT UP
 
-Standard input and standard output — reading and writing the fundamental I/O streams.
+[Standard Input And Standard Output](../04-standard-input-and-standard-output/README.md)

@@ -188,4 +188,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/15-pac
 
 ## NEXT UP
 
-Export rules — how Go controls visibility of names across package boundaries with capitalisation.
+[Export Rules](../16-export-rules/README.md)

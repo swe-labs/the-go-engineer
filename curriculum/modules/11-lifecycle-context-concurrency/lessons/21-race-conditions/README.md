@@ -210,4 +210,4 @@ go test -race ./curriculum/modules/11-lifecycle-context-concurrency/lessons/21-r
 
 ## NEXT UP
 
-Race detector
+[Race Detector](../22-race-detector/README.md)

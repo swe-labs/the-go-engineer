@@ -183,4 +183,4 @@ go test ./curriculum/modules/06-testing-debugging-refactoring/lessons/14-delve-b
 
 ## NEXT UP
 
-Breakpoints — how to set, list, clear, and use conditional breakpoints in Delve.
+[Breakpoints](../15-breakpoints/README.md)

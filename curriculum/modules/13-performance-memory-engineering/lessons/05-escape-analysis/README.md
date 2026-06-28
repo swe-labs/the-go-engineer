@@ -179,4 +179,4 @@ go build -gcflags='-m' ./curriculum/modules/13-performance-memory-engineering/le
 
 ## NEXT UP
 
-Memory layout — understanding struct padding and alignment, using `unsafe.Sizeof` to measure struct sizes, reordering fields to minimize padding, and avoiding false sharing in concurrent code.
+[Memory Layout](../06-memory-layout/README.md)

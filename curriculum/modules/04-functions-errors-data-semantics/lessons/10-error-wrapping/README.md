@@ -219,4 +219,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/10-error
 
 ## NEXT UP
 
-errors.Is
+[Errors Is](../11-errors-is/README.md)

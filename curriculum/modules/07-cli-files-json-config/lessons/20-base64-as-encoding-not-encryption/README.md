@@ -188,4 +188,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/20-base64-as-encod
 
 ## NEXT UP
 
-CLI testability — testing command-line applications in Go.
+[Cli Testability](../21-cli-testability/README.md)

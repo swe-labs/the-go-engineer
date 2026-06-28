@@ -254,4 +254,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/19-go-
 
 ## NEXT UP
 
-go.sum — the checksum file that ensures reproducible, tamper-proof builds.
+[Go Sum](../20-go-sum/README.md)

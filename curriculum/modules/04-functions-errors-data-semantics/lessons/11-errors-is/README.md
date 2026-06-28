@@ -258,4 +258,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/11-error
 
 ## NEXT UP
 
-errors.As
+[Errors As](../12-errors-as/README.md)

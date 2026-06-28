@@ -308,4 +308,4 @@ The tests verify that trivial projects estimate 1-4 weeks, complex projects esti
 
 ## NEXT UP
 
-Code review readiness — prepare your code for professional review by understanding what reviewers look for and how to self-review before submitting.
+[Code Review Readiness](../03-code-review-readiness/README.md)

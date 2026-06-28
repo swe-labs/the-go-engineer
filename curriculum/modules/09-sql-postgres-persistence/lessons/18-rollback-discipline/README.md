@@ -258,4 +258,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/18-rollback-dis
 
 ## NEXT UP
 
-Migrations — schema changes applied in versioned, repeatable steps.
+[Migrations](../19-migrations/README.md)

@@ -201,4 +201,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/03-poi
 
 ## NEXT UP
 
-Value receivers — the other side of the receiver coin, with copy semantics and immutability guarantees.
+[Value Receivers](../04-value-receivers/README.md)

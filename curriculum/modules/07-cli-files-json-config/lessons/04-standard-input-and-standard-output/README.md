@@ -135,4 +135,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/04-standard-input-
 
 ## NEXT UP
 
-`io.Reader` — the fundamental interface for reading data in Go.
+[Io Reader](../05-io-reader/README.md)

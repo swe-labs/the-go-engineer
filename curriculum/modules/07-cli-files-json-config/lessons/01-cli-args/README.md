@@ -143,4 +143,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/01-cli-args
 
 ## NEXT UP
 
-Flags — parsing named command-line options with the `flag` package.
+[Flags](../02-flags/README.md)

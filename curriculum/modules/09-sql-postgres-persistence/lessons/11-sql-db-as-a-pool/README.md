@@ -221,4 +221,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/11-sql-db-as-a-
 
 ## NEXT UP
 
-INSERT — how to insert rows with Go, use `LastInsertId`, and batch inserts efficiently.
+[Insert](../12-insert/README.md)

@@ -237,4 +237,4 @@ The existing tests verify certificate generation produces valid certificates for
 
 ## NEXT UP
 
-Secrets management -- securely managing API keys, database credentials, and cryptographic keys in Go applications using environment variables, secret stores, and encrypted storage.
+[Secrets Management](../20-secrets-management/README.md)

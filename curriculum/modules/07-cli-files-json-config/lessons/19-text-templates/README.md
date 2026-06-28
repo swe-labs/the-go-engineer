@@ -188,4 +188,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/19-text-templates
 
 ## NEXT UP
 
-Base64 as encoding, not encryption — encoding binary data as text with base64.
+[Base64 As Encoding Not Encryption](../20-base64-as-encoding-not-encryption/README.md)

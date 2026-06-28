@@ -175,4 +175,4 @@ go test ./curriculum/modules/13-performance-memory-engineering/lessons/03-memory
 
 ## NEXT UP
 
-Benchmarks — writing benchmark functions with `testing.B`, using the `-bench` flag, analyzing results with `benchstat`, measuring allocation with `-benchmem`, and comparing performance across code changes.
+[Benchmarks](../04-benchmarks/README.md)

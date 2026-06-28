@@ -255,4 +255,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/06-test
 
 ## NEXT UP
 
-Golden files — comparing test output against stored expected output with `-update` flag support.
+[Golden Files](../07-golden-files/README.md)

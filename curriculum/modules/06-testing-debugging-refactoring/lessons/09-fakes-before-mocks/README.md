@@ -288,4 +288,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/09-fake
 
 ## NEXT UP
 
-Mocking tradeoffs — when mocking external services is worth the complexity.
+[Mocking Tradeoffs](../10-mocking-tradeoffs/README.md)

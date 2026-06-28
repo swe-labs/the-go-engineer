@@ -286,4 +286,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-Input validation for security — how allowlists, denylists, and sanitization gates prevent malicious data from crossing trust boundaries.
+[Input Validation For Security](../03-input-validation-for-security/README.md)

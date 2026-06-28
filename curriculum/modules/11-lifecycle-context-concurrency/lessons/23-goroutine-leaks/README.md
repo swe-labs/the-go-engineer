@@ -166,4 +166,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/23-gorouti
 
 ## NEXT UP
 
-Deadlocks
+[Deadlocks](../24-deadlocks/README.md)

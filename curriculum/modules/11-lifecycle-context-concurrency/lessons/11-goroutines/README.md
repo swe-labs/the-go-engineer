@@ -229,4 +229,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/11-gorouti
 
 ## NEXT UP
 
-Waitgroups — coordinate the completion of multiple goroutines with `sync.WaitGroup`.
+[Waitgroups](../12-waitgroups/README.md)

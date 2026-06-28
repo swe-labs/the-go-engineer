@@ -209,4 +209,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/18-mod
 
 ## NEXT UP
 
-go.mod — the complete structure of the `go.mod` file and every directive it supports.
+[Go Mod](../19-go-mod/README.md)

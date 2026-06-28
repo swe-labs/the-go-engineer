@@ -189,4 +189,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/27-retries
 
 ## NEXT UP
 
-Idempotency keys
+[Idempotency Keys](../28-idempotency-keys/README.md)

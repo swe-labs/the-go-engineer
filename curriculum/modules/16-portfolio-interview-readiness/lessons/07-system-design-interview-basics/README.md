@@ -358,4 +358,4 @@ The tests verify basic storage estimation, multi-unit aggregation, throughput es
 
 ## NEXT UP
 
-Live coding interview practice — learn strategies for coding under pressure, verbalizing your thought process, and solving problems methodically in an interview setting.
+[Live Coding Interview Practice](../08-live-coding-interview-practice/README.md)

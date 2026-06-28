@@ -266,4 +266,4 @@ The existing tests verify blue-green and canary deployment creation, deploy exec
 
 ## NEXT UP
 
-Rollback basics: strategies for reverting to a previous version when a deployment goes wrong.
+[Rollback Basics](../18-rollback-basics/README.md)

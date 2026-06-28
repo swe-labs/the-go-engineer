@@ -197,4 +197,4 @@ go test ./curriculum/modules/06-testing-debugging-refactoring/lessons/12-reading
 
 ## NEXT UP
 
-Debugging panics — how to dissect common panic types and fix them systematically.
+[Debugging Panics](../13-debugging-panics/README.md)

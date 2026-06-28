@@ -225,4 +225,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/04-subt
 
 ## NEXT UP
 
-`t.Cleanup` — registering cleanup functions that run when a test completes.
+[T Cleanup](../05-t-cleanup/README.md)

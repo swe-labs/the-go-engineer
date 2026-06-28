@@ -215,4 +215,4 @@ The existing tests verify that the ordering context places orders and creates in
 
 ## NEXT UP
 
-Hexagonal architecture -- ports and adapters for building testable, infrastructure-independent core domain logic.
+[Hexagonal Architecture](../06-hexagonal-architecture/README.md)

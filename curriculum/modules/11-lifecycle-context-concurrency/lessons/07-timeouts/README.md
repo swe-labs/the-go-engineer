@@ -199,4 +199,4 @@ The existing tests verify timeout exceeded, timeout respected, cancel-before-exp
 
 ## NEXT UP
 
-Deadlines — absolute time limits using `context.WithDeadline` and how they differ from relative timeouts.
+[Deadlines](../08-deadlines/README.md)

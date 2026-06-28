@@ -383,4 +383,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-RBAC — role-based access control with roles, permissions, and middleware enforcement in Go.
+[Rbac](../11-rbac/README.md)

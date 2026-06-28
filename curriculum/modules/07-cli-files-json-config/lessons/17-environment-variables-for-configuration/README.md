@@ -222,4 +222,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/17-environment-var
 
 ## NEXT UP
 
-Config validation — validating parsed configuration values before using them.
+[Config Validation](../18-config-validation/README.md)

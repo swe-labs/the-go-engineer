@@ -321,4 +321,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/14-orche
 
 ## NEXT UP
 
-defer mechanics
+[Defer Mechanics](../15-defer-mechanics/README.md)

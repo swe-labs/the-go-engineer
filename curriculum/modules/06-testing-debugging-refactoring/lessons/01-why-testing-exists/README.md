@@ -171,4 +171,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/01-why-
 
 ## NEXT UP
 
-Unit testing — writing `TestXxx` functions with `testing.T` and organizing test files.
+[Unit Testing](../02-unit-testing/README.md)

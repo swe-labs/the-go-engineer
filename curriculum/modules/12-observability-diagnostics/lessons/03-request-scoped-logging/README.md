@@ -235,4 +235,4 @@ go test ./curriculum/modules/12-observability-diagnostics/lessons/03-request-sco
 
 ## NEXT UP
 
-Correlation IDs — propagating a single identifier across service boundaries so a distributed request can be traced end-to-end.
+[Correlation Ids](../04-correlation-ids/README.md)

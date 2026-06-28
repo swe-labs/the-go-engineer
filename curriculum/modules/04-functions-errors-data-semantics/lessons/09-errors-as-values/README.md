@@ -244,4 +244,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/09-error
 
 ## NEXT UP
 
-Error wrapping — wrapping errors with `fmt.Errorf` and `%w`, and the `errors.Is` / `errors.As` functions.
+[Error Wrapping](../10-error-wrapping/README.md)

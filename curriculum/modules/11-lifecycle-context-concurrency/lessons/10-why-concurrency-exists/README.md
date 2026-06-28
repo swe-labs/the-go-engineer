@@ -197,4 +197,4 @@ The existing tests verify the sequential function's correctness and timing chara
 
 ## NEXT UP
 
-Goroutines — spawning lightweight concurrent threads of execution with the `go` keyword.
+[Goroutines](../11-goroutines/README.md)

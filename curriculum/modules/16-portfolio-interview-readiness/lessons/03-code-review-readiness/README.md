@@ -306,4 +306,4 @@ The tests verify that good code passes at least 5 of 9 checks, that error handli
 
 ## NEXT UP
 
-Technical writing for engineers — learn to write clear documentation, API docs, and Go doc comments that make your projects understandable and maintainable.
+[Technical Writing For Engineers](../04-technical-writing-for-engineers/README.md)

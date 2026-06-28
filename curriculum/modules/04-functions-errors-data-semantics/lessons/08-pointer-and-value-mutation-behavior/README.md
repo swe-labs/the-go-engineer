@@ -241,4 +241,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/08-point
 
 ## NEXT UP
 
-Errors as values — the error interface, nil error, and the `if err != nil` pattern.
+[Errors As Values](../09-errors-as-values/README.md)

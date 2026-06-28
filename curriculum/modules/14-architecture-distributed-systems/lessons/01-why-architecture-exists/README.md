@@ -230,4 +230,4 @@ The existing tests verify that `OrderProcessor` validates, logs, and processes p
 
 ## NEXT UP
 
-Package boundaries -- how to design, name, and organize Go packages for maximum maintainability.
+[Package Boundaries](../02-package-boundaries/README.md)

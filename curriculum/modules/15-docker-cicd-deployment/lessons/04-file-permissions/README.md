@@ -150,4 +150,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/04-file-permis
 
 ## NEXT UP
 
-Networking basics — TCP/UDP, ports, listening, dialing, and the difference between localhost and 0.0.0.0.
+[Networking Basics](../05-networking-basics/README.md)

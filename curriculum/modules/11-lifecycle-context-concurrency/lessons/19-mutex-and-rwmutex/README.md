@@ -235,4 +235,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/19-mutex-a
 
 ## NEXT UP
 
-Atomics with caution — lock-free atomic operations for counters and flags, and when to prefer mutexes over atomics.
+[Atomics With Caution](../20-atomics-with-caution/README.md)

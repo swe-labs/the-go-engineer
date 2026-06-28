@@ -264,4 +264,4 @@ The existing tests verify token generation produces unique values, validation su
 
 ## NEXT UP
 
-CORS -- Cross-Origin Resource Sharing, how browser-enforced access control works, and how to configure CORS headers in Go APIs.
+[Cors](../17-cors/README.md)

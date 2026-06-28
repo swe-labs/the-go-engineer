@@ -195,4 +195,4 @@ The existing tests verify timer fire, stop, reset, and `time.After`. After the p
 
 ## NEXT UP
 
-Tickers — periodic events that fire repeatedly at a fixed interval.
+[Tickers](../04-tickers/README.md)

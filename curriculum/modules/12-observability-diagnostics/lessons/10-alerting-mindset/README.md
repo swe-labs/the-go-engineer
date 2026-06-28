@@ -257,4 +257,4 @@ go run ./curriculum/modules/12-observability-diagnostics/lessons/10-alerting-min
 
 ## NEXT UP
 
-Incident debugging — applying structured methodology to diagnose production incidents using observability data.
+[Incident Debugging](../11-incident-debugging/README.md)

@@ -210,4 +210,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/06-constants
 
 ## NEXT UP
 
-iota — the constant generator for enumerated values and bitmask patterns in Go.
+[Iota](../07-iota/README.md)

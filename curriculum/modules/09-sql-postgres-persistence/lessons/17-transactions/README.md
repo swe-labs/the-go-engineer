@@ -225,4 +225,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/17-transactions
 
 ## NEXT UP
 
-Rollback discipline — patterns for safe, predictable transaction rollback with deferred functions.
+[Rollback Discipline](../18-rollback-discipline/README.md)

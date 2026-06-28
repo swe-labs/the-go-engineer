@@ -266,4 +266,4 @@ The tests verify that events are delivered to all subscribers, that unrelated ev
 
 ## NEXT UP
 
-Queues -- durable, asynchronous work distribution with message brokers.
+[Queues](../10-queues/README.md)

@@ -281,4 +281,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-Trust boundaries and how they define the lines between different trust levels in your Go architecture.
+[Trust Boundaries](../02-trust-boundaries/README.md)

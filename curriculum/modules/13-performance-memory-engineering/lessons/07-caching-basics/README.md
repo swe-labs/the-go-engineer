@@ -252,4 +252,4 @@ go test ./curriculum/modules/13-performance-memory-engineering/lessons/07-cachin
 
 ## NEXT UP
 
-Cache invalidation — strategies for keeping cached data consistent with the source of truth, including TTL-based, write-invalidate, write-update, cache stampede prevention, and stale-while-revalidate patterns.
+[Cache Invalidation](../08-cache-invalidation/README.md)

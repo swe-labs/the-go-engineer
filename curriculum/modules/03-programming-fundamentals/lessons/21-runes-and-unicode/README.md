@@ -202,4 +202,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/21-runes-and-un
 
 ## NEXT UP
 
-Pointers as addresses — Go's reference-by-value pointer model and how to use `&` and `*`.
+[Pointers As Addresses](../22-pointers-as-addresses/README.md)

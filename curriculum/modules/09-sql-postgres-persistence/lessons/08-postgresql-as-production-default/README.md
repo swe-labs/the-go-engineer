@@ -197,4 +197,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/08-postgresql-a
 
 ## NEXT UP
 
-Docker Compose for Postgres — how to run PostgreSQL locally with Docker Compose for development.
+[Docker Compose For Postgres](../09-docker-compose-for-postgres/README.md)

@@ -206,4 +206,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/07-response-writing
 
 ## NEXT UP
 
-API error shape — designing a consistent, structured JSON error format that clients can parse programmatically.
+[Api Error Shape](../08-api-error-shape/README.md)

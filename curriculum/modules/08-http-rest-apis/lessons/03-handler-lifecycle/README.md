@@ -188,4 +188,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/03-handler-lifecycle
 
 ## NEXT UP
 
-Routing — using `ServeMux` patterns, method-based routing, path parameters, and third-party routers like Chi and gorilla/mux.
+[Routing](../04-routing/README.md)

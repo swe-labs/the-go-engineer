@@ -252,4 +252,4 @@ go test -race ./curriculum/modules/06-testing-debugging-refactoring/lessons/21-r
 
 ## NEXT UP
 
-Congratulations on completing Module 06! You now understand Go's testing philosophy, debugging workflows, and safe refactoring techniques. Next up: Module 07 — CLI, Files, JSON, and Configuration.
+Congratulations on completing Module 06! You now understand Go's testing philosophy, debugging workflows, and safe refactoring techniques. Next up: [Cli Args](../../07-cli-files-json-config/lessons/01-cli-args/README.md)

@@ -228,4 +228,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/06-input-validation
 
 ## NEXT UP
 
-Response writing — writing response bodies, setting status codes, encoding JSON, setting Content-Type, and streaming responses.
+[Response Writing](../07-response-writing/README.md)

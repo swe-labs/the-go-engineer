@@ -150,4 +150,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/01-linux-proce
 
 ## NEXT UP
 
-Signals — how the OS interrupts processes and how Go handles them with `os/signal`.
+[Signals](../02-signals/README.md)

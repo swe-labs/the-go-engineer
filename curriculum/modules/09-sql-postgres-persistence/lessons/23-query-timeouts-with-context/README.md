@@ -216,4 +216,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/23-query-timeou
 
 ## NEXT UP
 
-Repository and service seam — abstracting data access behind interfaces for testability and clean architecture.
+[Repository And Service Seam](../24-repository-and-service-seam/README.md)

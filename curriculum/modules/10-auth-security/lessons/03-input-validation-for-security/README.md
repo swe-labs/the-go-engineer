@@ -317,4 +317,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-Authentication vs authorization — the difference between proving identity and proving permission, and why separating them in middleware matters.
+[Authentication Vs Authorization](../04-authentication-vs-authorization/README.md)

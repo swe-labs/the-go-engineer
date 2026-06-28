@@ -304,4 +304,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/16-defer
 
 ## NEXT UP
 
-panic and recover
+[Panic And Recover](../17-panic-and-recover/README.md)

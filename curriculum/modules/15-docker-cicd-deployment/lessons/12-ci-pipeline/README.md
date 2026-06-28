@@ -256,4 +256,4 @@ The existing tests verify pipeline simulation, result formatting, empty pipeline
 
 ## NEXT UP
 
-Release artifacts: how to produce, version, checksum, and store Go binaries as deployable artifacts.
+[Release Artifacts](../13-release-artifacts/README.md)

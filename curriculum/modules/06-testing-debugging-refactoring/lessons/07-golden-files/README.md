@@ -237,4 +237,4 @@ go test -v -update ./curriculum/modules/06-testing-debugging-refactoring/lessons
 
 ## NEXT UP
 
-Testable design with `io.Writer` — injecting dependencies to make output testable.
+[Testable Design With Io Writer](../08-testable-design-with-io-writer/README.md)

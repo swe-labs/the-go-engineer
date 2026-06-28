@@ -154,4 +154,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/03-logs
 
 ## NEXT UP
 
-File permissions — how Unix file modes work, octal notation, and how Go's `os.FileMode` maps to Linux permissions.
+[File Permissions](../04-file-permissions/README.md)

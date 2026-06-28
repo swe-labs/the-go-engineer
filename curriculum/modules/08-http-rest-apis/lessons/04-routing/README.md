@@ -197,4 +197,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/04-routing
 
 ## NEXT UP
 
-Request parsing — extracting data from query strings, path parameters, headers, and JSON/form bodies.
+[Request Parsing](../05-request-parsing/README.md)

@@ -304,4 +304,4 @@ The existing tests verify artifact creation, binary naming (including .exe), che
 
 ## NEXT UP
 
-Config in deployment: managing environment variables, config files, and the 12-factor app approach for Go services.
+[Config In Deployment](../14-config-in-deployment/README.md)

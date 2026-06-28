@@ -177,4 +177,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/14-json-encoder
 
 ## NEXT UP
 
-JSON decoder — streaming JSON input from readers instead of parsing byte slices in memory.
+[Json Decoder](../15-json-decoder/README.md)

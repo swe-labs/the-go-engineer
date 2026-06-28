@@ -228,4 +228,4 @@ The tests verify account creation validation, deposit and withdrawal rules, erro
 
 ## NEXT UP
 
-Event-driven basics -- decoupling producers and consumers with an in-memory event bus in Go.
+[Event Driven Basics](../09-event-driven-basics/README.md)

@@ -274,4 +274,4 @@ Tests cover parsing, filtering, sorting, offset pagination, cursor pagination ed
 
 ## NEXT UP
 
-OpenAPI basics -- documenting your REST API with OpenAPI 3.0, defining paths, methods, and schemas, and generating Go code from the spec.
+[Openapi Basics](../20-openapi-basics/README.md)

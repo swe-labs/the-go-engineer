@@ -181,4 +181,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/28-idempot
 
 ## NEXT UP
 
-Sync.Once
+[Sync Once](../29-sync-once/README.md)

@@ -205,4 +205,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/01-str
 
 ## NEXT UP
 
-Methods — attaching behavior to your named types with receiver functions.
+[Methods](../02-methods/README.md)

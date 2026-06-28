@@ -389,4 +389,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-OAuth2 and OIDC overview — delegated authorization and federated identity protocols that build on JWT concepts.
+[Oauth2 And Oidc Overview](../09-oauth2-and-oidc-overview/README.md)

@@ -199,4 +199,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/07-passi
 
 ## NEXT UP
 
-Pointer and value mutation behavior — `*T` params, value vs pointer receivers.
+[Pointer And Value Mutation Behavior](../08-pointer-and-value-mutation-behavior/README.md)

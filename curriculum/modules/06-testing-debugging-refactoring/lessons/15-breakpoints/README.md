@@ -199,4 +199,4 @@ go test ./curriculum/modules/06-testing-debugging-refactoring/lessons/15-breakpo
 
 ## NEXT UP
 
-Stepping through code — controlling execution line by line with next, step, stepout, and continue.
+[Stepping Through Code](../16-stepping-through-code/README.md)

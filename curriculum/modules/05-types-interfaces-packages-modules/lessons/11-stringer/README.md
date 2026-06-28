@@ -229,4 +229,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/11-str
 
 ## NEXT UP
 
-Type assertions — extracting concrete values from interface values with `x.(T)`.
+[Type Assertions](../12-type-assertions/README.md)

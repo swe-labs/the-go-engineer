@@ -186,4 +186,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/08-multi-stage
 
 ## NEXT UP
 
-Docker Compose — defining multi-service environments with `docker-compose.yml` for Go apps with databases and caches.
+[Docker Compose](../09-docker-compose/README.md)

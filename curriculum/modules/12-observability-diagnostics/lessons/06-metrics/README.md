@@ -248,4 +248,4 @@ go test ./curriculum/modules/12-observability-diagnostics/lessons/06-metrics
 
 ## NEXT UP
 
-Prometheus — a production-grade metrics system with histograms, summaries, labels, and a standardized scrape protocol.
+[Prometheus](../07-prometheus/README.md)

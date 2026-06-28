@@ -343,4 +343,4 @@ The existing tests verify runbook creation, step and contact addition, checklist
 
 ## NEXT UP
 
-Congratulations on completing Module 15! You now understand Docker, CI/CD, deployment strategies, and DevOps practices for Go services. Next up: Module 16 — Microservices, gRPC, and Service Mesh.
+Congratulations on completing Module 15! You now understand Docker, CI/CD, deployment strategies, and DevOps practices for Go services. Next up: [Portfolio Strategy](../../16-portfolio-interview-readiness/lessons/01-portfolio-strategy/README.md)

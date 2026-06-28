@@ -261,4 +261,4 @@ The existing tests verify rollback plan creation for every reason type, step cou
 
 ## NEXT UP
 
-Deployment runbook: a structured, step-by-step guide for deploying and operating a Go service in production.
+[Deployment Runbook](../19-deployment-runbook/README.md)

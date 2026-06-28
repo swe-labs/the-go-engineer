@@ -435,4 +435,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-SQL injection prevention — parameterized queries, prepared statements, and defense-in-depth against SQL injection in Go.
+[Sql Injection Prevention](../14-sql-injection-prevention/README.md)

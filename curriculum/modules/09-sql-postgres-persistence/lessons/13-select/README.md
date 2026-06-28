@@ -258,4 +258,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/13-select
 
 ## NEXT UP
 
-Scanning rows — how to map SQL result columns to Go variables with `rows.Scan`.
+[Scanning Rows](../14-scanning-rows/README.md)

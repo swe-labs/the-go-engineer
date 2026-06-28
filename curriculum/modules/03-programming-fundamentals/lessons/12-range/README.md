@@ -253,4 +253,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/12-range
 
 ## NEXT UP
 
-Arrays — fixed-size indexed collections with value semantics in Go.
+[Arrays](../13-arrays/README.md)

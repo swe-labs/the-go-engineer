@@ -182,4 +182,4 @@ The tests verify that a database can be opened, queried, and that concurrent ope
 
 ## NEXT UP
 
-Relational modeling — how to organize data into entities, attributes, and relationships before writing SQL.
+[Relational Modeling](../02-relational-modeling/README.md)

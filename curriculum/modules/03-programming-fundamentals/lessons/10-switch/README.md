@@ -275,4 +275,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/10-switch
 
 ## NEXT UP
 
-Loops — Go's `for` keyword as the only looping construct, covering all iteration patterns.
+[Loops](../11-loops/README.md)

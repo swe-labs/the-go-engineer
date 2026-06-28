@@ -227,4 +227,4 @@ go test -v ./curriculum/modules/06-testing-debugging-refactoring/lessons/11-debu
 
 ## NEXT UP
 
-Reading stack traces — interpreting Go panic and error stack traces to pinpoint failures.
+[Reading Stack Traces](../12-reading-stack-traces/README.md)

@@ -324,4 +324,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-JWT risks — common vulnerabilities including algorithm confusion, key theft, and the difficulty of token revocation.
+[Jwt Risks](../08-jwt-risks/README.md)

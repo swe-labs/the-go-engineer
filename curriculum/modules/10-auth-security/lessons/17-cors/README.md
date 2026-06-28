@@ -255,4 +255,4 @@ The existing tests verify that allowed origins receive ACAO headers, disallowed 
 
 ## NEXT UP
 
-Rate limiting -- protecting APIs from abuse with token bucket, leaky bucket, and sliding window algorithms implemented as HTTP middleware in Go.
+[Rate Limiting](../18-rate-limiting/README.md)

@@ -204,4 +204,4 @@ The existing tests verify deadline exceeded, not-exceeded, equivalence with time
 
 ## NEXT UP
 
-Context values with caveats — carrying request-scoped data through the context tree with type-safe keys and understanding the limitations.
+[Context Values With Caveats](../09-context-values-with-caveats/README.md)

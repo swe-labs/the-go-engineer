@@ -240,4 +240,4 @@ Tests verify v1 and v2 handlers, URL routing, header-based version dispatch, the
 
 ## NEXT UP
 
-Pagination and filtering -- implementing cursor and offset pagination, query parameters for filtering and sorting RESTful list endpoints.
+[Pagination And Filtering](../19-pagination-and-filtering/README.md)

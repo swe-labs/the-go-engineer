@@ -232,4 +232,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/10-database-sql
 
 ## NEXT UP
 
-sql.DB as a pool — how connection pooling works and how to configure it.
+[Sql Db As A Pool](../11-sql-db-as-a-pool/README.md)

@@ -291,4 +291,4 @@ Tests cover client methods with mock servers, error handling, timeout detection,
 
 ## NEXT UP
 
-Congratulations on completing Module 08! You now understand HTTP, building REST APIs with net/http, and production server concerns. Next up: Module 09 -- SQL, PostgreSQL, and Persistence.
+Congratulations on completing Module 08! You now understand HTTP, building REST APIs with net/http, and production server concerns. Next up: [Why Databases Exist](../../09-sql-postgres-persistence/lessons/01-why-databases-exist/README.md)

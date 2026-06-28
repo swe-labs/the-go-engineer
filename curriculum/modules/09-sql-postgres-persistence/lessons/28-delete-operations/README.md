@@ -258,4 +258,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/28-delete-opera
 
 ## NEXT UP
 
-Congratulations on completing Module 09! You now understand SQL, PostgreSQL, and building persistent Go applications. Next up: Module 10 — Auth and Security.
+Congratulations on completing Module 09! You now understand SQL, PostgreSQL, and building persistent Go applications. Next up: [Threat Modeling](../../10-auth-security/lessons/01-threat-modeling/README.md)

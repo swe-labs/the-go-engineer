@@ -212,4 +212,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/18-config-validati
 
 ## NEXT UP
 
-Text templates — generating dynamic text output using Go's text/template package.
+[Text Templates](../19-text-templates/README.md)

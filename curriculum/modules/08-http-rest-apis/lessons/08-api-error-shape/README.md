@@ -271,4 +271,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/08-api-error-shape
 
 ## NEXT UP
 
-Status codes — choosing the right HTTP status code for every response and avoiding common misclassification mistakes.
+[Status Codes](../09-status-codes/README.md)

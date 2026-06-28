@@ -183,4 +183,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/04-val
 
 ## NEXT UP
 
-Receiver sets — how Go determines whether a type satisfies an interface based on its method sets.
+[Receiver Sets](../05-receiver-sets/README.md)

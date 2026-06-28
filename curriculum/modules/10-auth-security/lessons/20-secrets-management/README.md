@@ -259,4 +259,4 @@ The existing tests verify secret storage and retrieval, encryption/decryption ro
 
 ## NEXT UP
 
-Dependency security -- managing supply chain risks, verifying dependencies, minimizing attack surface, and understanding the software supply chain in Go projects.
+[Dependency Security](../21-dependency-security/README.md)

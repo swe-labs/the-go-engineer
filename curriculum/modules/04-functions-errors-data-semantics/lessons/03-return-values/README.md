@@ -231,4 +231,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/03-retur
 
 ## NEXT UP
 
-Multiple return values — the `(T, error)` idiom and the blank identifier.
+[Multiple Return Values](../04-multiple-return-values/README.md)

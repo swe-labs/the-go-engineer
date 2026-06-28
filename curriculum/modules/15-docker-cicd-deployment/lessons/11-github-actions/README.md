@@ -316,4 +316,4 @@ The existing tests validate workflow structure, cache key generation, matrix exp
 
 ## NEXT UP
 
-CI pipeline: linting, vetting, testing, and building Go code as automated pipeline stages.
+[Ci Pipeline](../12-ci-pipeline/README.md)

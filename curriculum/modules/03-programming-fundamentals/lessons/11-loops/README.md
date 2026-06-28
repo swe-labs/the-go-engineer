@@ -334,4 +334,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/11-loops
 
 ## NEXT UP
 
-Range — deeper coverage of `for range` iteration over slices, arrays, maps, strings, and channels.
+[Range](../12-range/README.md)

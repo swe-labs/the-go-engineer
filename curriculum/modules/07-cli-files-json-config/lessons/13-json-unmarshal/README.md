@@ -172,4 +172,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/13-json-unmarshal
 
 ## NEXT UP
 
-JSON encoder — streaming JSON output to writers instead of building byte slices in memory.
+[Json Encoder](../14-json-encoder/README.md)

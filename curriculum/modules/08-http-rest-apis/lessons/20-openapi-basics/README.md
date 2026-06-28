@@ -270,4 +270,4 @@ Tests verify the spec structure, handler response, round-trip JSON marshalling, 
 
 ## NEXT UP
 
-HTTP Client -- using `http.Client`, making requests with `http.NewRequest`, configuring timeouts and transport, and managing connection pooling.
+[Http Client](../21-http-client/README.md)

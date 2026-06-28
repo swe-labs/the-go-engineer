@@ -222,4 +222,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/04-multi
 
 ## NEXT UP
 
-Scope — package, function, block scope, lexical scoping, and shadowing.
+[Scope](../05-scope/README.md)

@@ -204,4 +204,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/04-primary-keys
 
 ## NEXT UP
 
-Foreign keys — connecting tables and enforcing referential integrity.
+[Foreign Keys](../05-foreign-keys/README.md)

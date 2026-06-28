@@ -260,4 +260,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/15-null-handlin
 
 ## NEXT UP
 
-Prepared statements — parameterized queries that prevent SQL injection and improve performance.
+[Prepared Statements](../16-prepared-statements/README.md)

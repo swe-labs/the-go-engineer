@@ -179,4 +179,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/22-pointers-as-
 
 ## NEXT UP
 
-Beginner pointer mistakes — the most common pitfalls when learning Go pointers and how to avoid them.
+[Beginner Pointer Mistakes](../23-beginner-pointer-mistakes/README.md)

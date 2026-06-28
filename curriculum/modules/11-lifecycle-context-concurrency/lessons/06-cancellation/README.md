@@ -206,4 +206,4 @@ The existing tests verify that cancellation stops goroutines, the error is `Canc
 
 ## NEXT UP
 
-Timeouts — using `context.WithTimeout` to limit operation duration and detect stalled operations.
+[Timeouts](../07-timeouts/README.md)

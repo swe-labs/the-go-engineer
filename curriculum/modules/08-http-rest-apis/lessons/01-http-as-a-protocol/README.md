@@ -200,4 +200,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/01-http-as-a-protocol
 
 ## NEXT UP
 
-net/http basics — building your first Go HTTP server with `http.HandleFunc` and `http.ListenAndServe`.
+[Net Http Basics](../02-net-http-basics/README.md)

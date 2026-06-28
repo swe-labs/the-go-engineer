@@ -224,4 +224,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/16-prepared-sta
 
 ## NEXT UP
 
-Transactions — grouping multiple operations into atomic units with commit and rollback.
+[Transactions](../17-transactions/README.md)

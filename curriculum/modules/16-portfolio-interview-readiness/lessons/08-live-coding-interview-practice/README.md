@@ -356,4 +356,4 @@ The tests verify title extraction, fallback title, example/constraint extraction
 
 ## NEXT UP
 
-Take-home project strategy — learn how to approach take-home coding assignments with the same rigor as production projects.
+[Take Home Project Strategy](../09-take-home-project-strategy/README.md)

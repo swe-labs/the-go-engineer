@@ -313,4 +313,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/09-if-and-else
 
 ## NEXT UP
 
-Switch — Go's powerful multi-way branching construct with case lists, fallthrough, type switches, and expressionless forms.
+[Switch](../10-switch/README.md)

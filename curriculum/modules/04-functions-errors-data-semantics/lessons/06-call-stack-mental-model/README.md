@@ -183,4 +183,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/06-call-
 
 ## NEXT UP
 
-Passing by value — Go is always pass-by-value, copy semantics for all types.
+[Passing By Value](../07-passing-by-value/README.md)

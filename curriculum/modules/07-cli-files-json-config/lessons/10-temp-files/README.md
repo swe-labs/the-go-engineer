@@ -152,4 +152,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/10-temp-files
 
 ## NEXT UP
 
-`fs.FS` — the virtual filesystem interface for portable, testable file access.
+[Fs Fs](../11-fs-fs/README.md)

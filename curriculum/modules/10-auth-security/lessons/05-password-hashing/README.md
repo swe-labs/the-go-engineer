@@ -270,4 +270,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-Sessions and cookies — how server-managed session state combines with secure cookie flags for web authentication.
+[Sessions And Cookies](../06-sessions-and-cookies/README.md)

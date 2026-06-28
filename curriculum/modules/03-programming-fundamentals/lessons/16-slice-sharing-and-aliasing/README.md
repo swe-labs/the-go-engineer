@@ -216,4 +216,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/16-slice-sharin
 
 ## NEXT UP
 
-Maps — Go's built-in hash table for key-value associations.
+[Maps](../17-maps/README.md)

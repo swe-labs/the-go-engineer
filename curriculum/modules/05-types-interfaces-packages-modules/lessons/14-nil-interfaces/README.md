@@ -233,4 +233,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/14-nil
 
 ## NEXT UP
 
-Package names — how Go organises code into packages, naming conventions, and the relationship between directories and packages.
+[Package Names](../15-package-names/README.md)

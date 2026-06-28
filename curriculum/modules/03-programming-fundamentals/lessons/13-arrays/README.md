@@ -220,4 +220,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/13-arrays
 
 ## NEXT UP
 
-Slices — Go's dynamic, flexible view into arrays.
+[Slices](../14-slices/README.md)

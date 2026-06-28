@@ -280,4 +280,4 @@ The tests verify keyword detection, correct category breakdown, accurate match c
 
 ## NEXT UP
 
-Behavioral interview preparation — master the STAR method to tell compelling stories about your engineering experience.
+[Behavioral Interview Preparation](../06-behavioral-interview-preparation/README.md)

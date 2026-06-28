@@ -184,4 +184,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/07-docker-imag
 
 ## NEXT UP
 
-Multi-stage builds — separating build environment from runtime for tiny, secure Docker images.
+[Multi Stage Builds](../08-multi-stage-builds/README.md)

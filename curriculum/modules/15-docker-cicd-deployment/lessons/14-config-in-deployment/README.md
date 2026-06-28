@@ -282,4 +282,4 @@ The existing tests verify default values, custom environment variable loading, i
 
 ## NEXT UP
 
-Secrets in deployment: managing sensitive configuration like API keys, database passwords, and TLS certificates.
+[Secrets In Deployment](../15-secrets-in-deployment/README.md)

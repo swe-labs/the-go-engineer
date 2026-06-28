@@ -189,4 +189,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/05-rec
 
 ## NEXT UP
 
-Composition — Go's answer to inheritance, using struct embedding to reuse fields and methods.
+[Composition](../06-composition/README.md)

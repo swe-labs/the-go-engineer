@@ -217,4 +217,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/23-beginner-poi
 
 ## NEXT UP
 
-Congratulations on completing Module 03: Programming Fundamentals! You now have a solid foundation in Go's type system, control flow, data structures, and memory model. Next up: Module 04 — Functions, Errors, and Data Semantics.
+Congratulations on completing Module 03: Programming Fundamentals! You now have a solid foundation in Go's type system, control flow, data structures, and memory model. Next up: [Function Basics](../../04-functions-errors-data-semantics/lessons/01-function-basics/README.md)

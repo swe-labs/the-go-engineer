@@ -200,4 +200,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/07-sqlite-as-a-
 
 ## NEXT UP
 
-PostgreSQL as production default — why PostgreSQL is the recommended production database for Go services.
+[Postgresql As Production Default](../08-postgresql-as-production-default/README.md)

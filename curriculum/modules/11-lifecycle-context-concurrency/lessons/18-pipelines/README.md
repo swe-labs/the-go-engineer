@@ -259,4 +259,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/18-pipelin
 
 ## NEXT UP
 
-Mutex and RWMutex — protect shared state with `sync.Mutex` and `sync.RWMutex`, and choose between exclusive and shared locks.
+[Mutex And Rwmutex](../19-mutex-and-rwmutex/README.md)

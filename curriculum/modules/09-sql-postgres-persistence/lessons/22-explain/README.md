@@ -230,4 +230,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/22-explain
 
 ## NEXT UP
 
-Query timeouts with context — canceling long-running queries using Go's context package.
+[Query Timeouts With Context](../23-query-timeouts-with-context/README.md)

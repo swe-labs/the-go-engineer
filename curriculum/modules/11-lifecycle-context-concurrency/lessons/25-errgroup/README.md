@@ -186,4 +186,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/25-errgrou
 
 ## NEXT UP
 
-Bounded worker pools
+[Bounded Worker Pools](../26-bounded-worker-pools/README.md)

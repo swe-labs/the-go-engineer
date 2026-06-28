@@ -548,4 +548,4 @@ The test file `main_test.go` contains table-driven tests that verify:
 
 ## NEXT UP
 
-Tenant isolation basics — preventing cross-tenant data leakage in multi-tenant Go services.
+[Tenant Isolation Basics](../13-tenant-isolation-basics/README.md)

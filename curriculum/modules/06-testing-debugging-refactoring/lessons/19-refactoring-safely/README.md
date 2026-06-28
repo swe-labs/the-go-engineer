@@ -183,4 +183,4 @@ go vet ./curriculum/modules/06-testing-debugging-refactoring/lessons/19-refactor
 
 ## NEXT UP
 
-Fuzz testing — automatically generating random inputs to find edge cases and bugs.
+[Fuzz Testing](../20-fuzz-testing/README.md)

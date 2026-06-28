@@ -169,4 +169,4 @@ The existing tests verify `Parse`, `Format`, `Since`, and `Until`. After complet
 
 ## NEXT UP
 
-Durations — how to represent, compute, and compare spans of time.
+[Durations](../02-durations/README.md)

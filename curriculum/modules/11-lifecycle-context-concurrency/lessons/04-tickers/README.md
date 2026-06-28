@@ -174,4 +174,4 @@ The existing tests verify ticker firing, multiple ticks, stopping, and zero-dura
 
 ## NEXT UP
 
-Context basics — the standard way to carry deadlines, cancellation signals, and request-scoped values across API boundaries.
+[Context Basics](../05-context-basics/README.md)

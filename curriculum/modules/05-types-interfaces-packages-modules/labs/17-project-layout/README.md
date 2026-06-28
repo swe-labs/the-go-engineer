@@ -287,4 +287,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/labs/17-projec
 
 ## NEXT UP
 
-Modules — how Go modules define versioned, reproducible builds with module paths and `go.mod`.
+[Modules](../lessons/18-modules/README.md) — how Go modules define versioned, reproducible builds with module paths and `go.mod`.

@@ -251,4 +251,4 @@ Tests cover healthy/unhealthy states for both liveness and readiness, method val
 
 ## NEXT UP
 
-REST design principles -- resource-oriented URLs, statelessness, HATEOAS, idempotency, and the REST maturity model.
+[Rest Design Principles](../17-rest-design-principles/README.md)

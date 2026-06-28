@@ -223,4 +223,4 @@ go test ./curriculum/modules/12-observability-diagnostics/lessons/02-structured-
 
 ## NEXT UP
 
-Request-scoped logging — attaching per-request context to log entries so every log line from a single request carries the same request ID.
+[Request Scoped Logging](../03-request-scoped-logging/README.md)

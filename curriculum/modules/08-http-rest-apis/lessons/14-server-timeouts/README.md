@@ -218,4 +218,4 @@ Tests verify handler behavior, server configuration, and client-side timeout beh
 
 ## NEXT UP
 
-Graceful shutdown -- shutting down an HTTP server without dropping in-flight requests using `http.Server.Shutdown` and signal handling.
+[Graceful Shutdown](../15-graceful-shutdown/README.md)

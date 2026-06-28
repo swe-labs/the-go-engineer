@@ -248,4 +248,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/12-waitgro
 
 ## NEXT UP
 
-Channels — communicate between goroutines using typed message passing with `chan T`.
+[Channels](../13-channels/README.md)

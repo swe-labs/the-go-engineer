@@ -269,4 +269,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/12-error
 
 ## NEXT UP
 
-Validation
+[Validation](../13-validation/README.md)

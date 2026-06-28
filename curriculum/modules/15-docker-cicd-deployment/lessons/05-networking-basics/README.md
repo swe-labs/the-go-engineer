@@ -158,4 +158,4 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/05-networking-
 
 ## NEXT UP
 
-Docker basics — writing Dockerfiles for Go applications, building minimal images, and using FROM, RUN, COPY, CMD.
+[Docker Basics](../06-docker-basics/README.md)

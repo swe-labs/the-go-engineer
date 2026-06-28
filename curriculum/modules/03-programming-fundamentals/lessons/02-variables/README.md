@@ -211,4 +211,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/02-variables
 
 ## NEXT UP
 
-Types — the set of basic types in Go (int, float64, string, bool, byte, rune), type inference with `:=`, and the distinction between typed and untyped constants.
+[Types](../03-types/README.md)

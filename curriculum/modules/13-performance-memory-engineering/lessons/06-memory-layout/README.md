@@ -195,4 +195,4 @@ go test ./curriculum/modules/13-performance-memory-engineering/lessons/06-memory
 
 ## NEXT UP
 
-Caching basics — building in-memory caches in Go, using `sync.Map` for concurrent access, implementing LRU eviction with TTL, and comparing read-through vs write-through cache strategies.
+[Caching Basics](../07-caching-basics/README.md)

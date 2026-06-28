@@ -206,4 +206,4 @@ The existing tests verify `evaluate` with basic arithmetic. After completing the
 
 ## NEXT UP
 
-Variables and how they bind names to values with type inference and zero-value initialization.
+[Variables](../02-variables/README.md)

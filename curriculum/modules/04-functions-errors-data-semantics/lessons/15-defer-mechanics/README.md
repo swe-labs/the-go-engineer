@@ -237,4 +237,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/15-defer
 
 ## NEXT UP
 
-defer for cleanup
+[Defer For Cleanup](../16-defer-for-cleanup/README.md)

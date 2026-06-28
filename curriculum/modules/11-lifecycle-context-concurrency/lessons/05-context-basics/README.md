@@ -179,4 +179,4 @@ The existing tests verify `Background`, `WithCancel`, `WithTimeout`, and cancell
 
 ## NEXT UP
 
-Cancellation — using `context.WithCancel` to signal goroutines to stop and implement graceful shutdown.
+[Cancellation](../06-cancellation/README.md)

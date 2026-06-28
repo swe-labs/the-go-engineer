@@ -201,4 +201,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/03-types
 
 ## NEXT UP
 
-Zero values — the guaranteed default value for every Go type and why this design choice prevents an entire category of bugs.
+[Zero Values](../04-zero-values/README.md)

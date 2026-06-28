@@ -225,4 +225,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/20-go-
 
 ## NEXT UP
 
-Dependency management — how to add, upgrade, downgrade, and prune Go dependencies using `go get` and related tooling.
+[Dependency Management](../21-dependency-management/README.md)

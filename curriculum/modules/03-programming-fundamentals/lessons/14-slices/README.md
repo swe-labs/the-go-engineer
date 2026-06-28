@@ -206,4 +206,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/14-slices
 
 ## NEXT UP
 
-Slice length and capacity — understanding the difference and how they affect growth, bounds, and performance.
+[Slice Length And Capacity](../15-slice-length-and-capacity/README.md)

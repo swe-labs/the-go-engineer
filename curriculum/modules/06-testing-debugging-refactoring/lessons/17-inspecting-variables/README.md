@@ -180,4 +180,4 @@ go test ./curriculum/modules/06-testing-debugging-refactoring/lessons/17-inspect
 
 ## NEXT UP
 
-Debugging tests — using `dlv test` to step through test execution and debug test failures.
+[Debugging Tests](../18-debugging-tests/README.md)

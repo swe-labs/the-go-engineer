@@ -252,4 +252,4 @@ go test ./curriculum/modules/12-observability-diagnostics/lessons/05-pii-redacti
 
 ## NEXT UP
 
-Metrics — numeric aggregations (counters, gauges, histograms) that answer "how many times did it happen?" for request rate, error rate, and latency.
+[Metrics](../06-metrics/README.md)

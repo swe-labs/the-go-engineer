@@ -235,4 +235,4 @@ The existing tests verify that `UserService.Register` validates inputs and saves
 
 ## NEXT UP
 
-Repository pattern deep dive -- abstracting data access behind interfaces for testability and flexibility.
+[Repository Pattern Deep Dive](../04-repository-pattern-deep-dive/README.md)

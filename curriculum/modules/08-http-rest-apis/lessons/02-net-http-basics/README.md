@@ -153,4 +153,4 @@ The tests start the server, make HTTP requests to each route, and verify status 
 
 ## NEXT UP
 
-Handler lifecycle — understanding the `http.Handler` interface, `ServeHTTP`, and how Go processes requests from connection to response.
+[Handler Lifecycle](../03-handler-lifecycle/README.md)

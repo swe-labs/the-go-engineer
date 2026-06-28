@@ -149,4 +149,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/09-directories
 
 ## NEXT UP
 
-Temp files — creating temporary files and directories safely.
+[Temp Files](../10-temp-files/README.md)

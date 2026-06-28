@@ -192,4 +192,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/20-bytes
 
 ## NEXT UP
 
-Runes and Unicode — working with individual Unicode code points and Go's UTF-8 support.
+[Runes And Unicode](../21-runes-and-unicode/README.md)

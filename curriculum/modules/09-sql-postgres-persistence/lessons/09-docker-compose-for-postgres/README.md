@@ -206,4 +206,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/09-docker-compo
 
 ## NEXT UP
 
-database/sql — the standard library package that abstracts SQL database access in Go.
+[Database Sql](../10-database-sql/README.md)

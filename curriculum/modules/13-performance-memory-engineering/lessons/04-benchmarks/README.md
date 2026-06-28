@@ -200,4 +200,4 @@ go test -bench=. ./curriculum/modules/13-performance-memory-engineering/lessons/
 
 ## NEXT UP
 
-Escape analysis — understanding stack vs heap allocation decisions made by the Go compiler, using `-gcflags=-m` to inspect escape decisions, and writing allocation-efficient code by keeping values on the stack.
+[Escape Analysis](../05-escape-analysis/README.md)

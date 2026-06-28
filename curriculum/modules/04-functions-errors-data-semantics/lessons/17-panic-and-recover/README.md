@@ -211,4 +211,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/17-panic
 
 ## NEXT UP
 
-Custom error types
+[Custom Error Types](../18-custom-error-types/README.md)

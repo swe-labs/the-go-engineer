@@ -197,4 +197,4 @@ go test -fuzz=FuzzReverse -fuzztime=5s ./curriculum/modules/06-testing-debugging
 
 ## NEXT UP
 
-Race detector preview — detecting and preventing data races in concurrent Go programs.
+[Race Detector Preview](../21-race-detector-preview/README.md)

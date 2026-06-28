@@ -204,4 +204,4 @@ go test -race ./curriculum/modules/11-lifecycle-context-concurrency/lessons/22-r
 
 ## NEXT UP
 
-Goroutine leaks
+[Goroutine Leaks](../23-goroutine-leaks/README.md)

@@ -253,4 +253,4 @@ The tests verify that user registration sends a welcome email and persists the u
 
 ## NEXT UP
 
-Domain modeling -- designing entities, value objects, and aggregates in Go for complex business domains.
+[Domain Modeling](../07-domain-modeling/README.md)

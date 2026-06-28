@@ -204,4 +204,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/08-int
 
 ## NEXT UP
 
-Small interfaces — the power of 1-2 method interfaces and the interface segregation principle.
+[Small Interfaces](../09-small-interfaces/README.md)

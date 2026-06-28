@@ -186,4 +186,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/05-foreign-keys
 
 ## NEXT UP
 
-Constraints — NOT NULL, UNIQUE, CHECK, DEFAULT, and how they enforce data quality at the database level.
+[Constraints](../06-constraints/README.md)

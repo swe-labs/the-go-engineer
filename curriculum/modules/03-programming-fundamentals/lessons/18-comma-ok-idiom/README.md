@@ -267,4 +267,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/18-comma-ok-idi
 
 ## NEXT UP
 
-Strings (core-03-19): Explore Go's string type — immutable bytes under the hood, UTF-8 support, and the standard library for text manipulation.
+[Strings](../19-strings/README.md)

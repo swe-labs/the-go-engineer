@@ -321,4 +321,4 @@ go run ./curriculum/modules/12-observability-diagnostics/lessons/12-reliability-
 
 ## NEXT UP
 
-Congratulations on completing Module 12! You now understand observability, metrics, logging, tracing, and reliability patterns for production Go services. Next up: Module 13 — Deployment, CI/CD, DevOps.
+Congratulations on completing Module 12! You now understand observability, metrics, logging, tracing, and reliability patterns for production Go services. Next up: [Pprof](../../13-performance-memory-engineering/lessons/01-pprof/README.md)

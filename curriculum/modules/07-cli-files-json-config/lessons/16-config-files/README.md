@@ -220,4 +220,4 @@ go test ./curriculum/modules/07-cli-files-json-config/lessons/16-config-files
 
 ## NEXT UP
 
-Environment variables for configuration — reading configuration from the environment using 12-factor app principles.
+[Environment Variables For Configuration](../17-environment-variables-for-configuration/README.md)

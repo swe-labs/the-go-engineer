@@ -254,4 +254,4 @@ go test ./curriculum/modules/08-http-rest-apis/lessons/11-error-middleware
 
 ## NEXT UP
 
-Handler testing with httptest — writing table-driven tests for HTTP handlers using `httptest.NewRecorder` and `httptest.NewRequest`.
+[Handler Testing With Httptest](../12-handler-testing-with-httptest/README.md)

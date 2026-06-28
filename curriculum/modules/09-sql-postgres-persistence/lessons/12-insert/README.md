@@ -222,4 +222,4 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/12-insert
 
 ## NEXT UP
 
-SELECT — querying data with `db.Query` and iterating result sets.
+[Select](../13-select/README.md)

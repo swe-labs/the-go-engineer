@@ -285,4 +285,4 @@ The tests verify valid state transitions, invalid transition errors, amount limi
 
 ## NEXT UP
 
-Multi-tenancy architecture.
+[Multi Tenancy Architecture](../13-multi-tenancy-architecture/README.md)

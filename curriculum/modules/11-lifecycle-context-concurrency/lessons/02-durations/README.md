@@ -180,4 +180,4 @@ The existing tests verify duration arithmetic, comparison, and conversion. After
 
 ## NEXT UP
 
-Timers — one-shot events that fire after a specified duration.
+[Timers](../03-timers/README.md)

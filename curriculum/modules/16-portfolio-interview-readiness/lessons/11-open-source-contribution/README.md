@@ -245,4 +245,4 @@ The existing tests verify `MergeRate` (all, half, none, empty), `TotalChanges`, 
 
 ## NEXT UP
 
-Technical blog writing — learn how to write clear, engaging technical blog posts about Go that build your professional brand and share knowledge effectively.
+[Technical Blog Writing](../12-technical-blog-writing/README.md)

@@ -183,4 +183,4 @@ go test ./curriculum/modules/12-observability-diagnostics/lessons/01-why-observa
 
 ## NEXT UP
 
-Structured logging with slog — the first pillar of observability, with Go's log/slog package.
+[Structured Logging With Slog](../02-structured-logging-with-slog/README.md)

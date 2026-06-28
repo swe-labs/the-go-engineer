@@ -209,4 +209,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/02-param
 
 ## NEXT UP
 
-Return values — single return, named returns, and early returns.
+[Return Values](../03-return-values/README.md)

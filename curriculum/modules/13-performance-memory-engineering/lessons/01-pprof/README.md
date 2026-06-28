@@ -191,4 +191,4 @@ go test ./curriculum/modules/13-performance-memory-engineering/lessons/01-pprof
 
 ## NEXT UP
 
-CPU profiling — how to interpret CPU profiles, identify hotspots, use flame graphs, and apply the `top`/`list`/`web` commands to drill into performance bottlenecks.
+[Cpu Profiling](../02-cpu-profiling/README.md)

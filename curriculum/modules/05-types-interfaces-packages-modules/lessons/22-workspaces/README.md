@@ -225,4 +225,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/22-wor
 
 ## NEXT UP
 
-Documentation comments — how to write godoc-compatible documentation for packages, types, functions, and examples.
+[Documentation Comments](../23-documentation-comments/README.md)

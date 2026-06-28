@@ -283,4 +283,4 @@ The tests verify that full STAR responses score at least 3/4, minimal responses 
 
 ## NEXT UP
 
-System design interview basics — learn the format, framework, and practice techniques for system design interviews.
+[System Design Interview Basics](../07-system-design-interview-basics/README.md)

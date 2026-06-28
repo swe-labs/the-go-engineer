@@ -200,4 +200,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/02-met
 
 ## NEXT UP
 
-Pointer receivers — mutating the receiver and understanding when to use `*T`.
+[Pointer Receivers](../03-pointer-receivers/README.md)

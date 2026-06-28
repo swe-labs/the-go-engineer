@@ -186,4 +186,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/01-funct
 
 ## NEXT UP
 
-Parameters — positional arguments, type shorthand, and variadic parameters.
+[Parameters](../02-parameters/README.md)

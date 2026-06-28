@@ -230,4 +230,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/10-int
 
 ## NEXT UP
 
-Stringer — the `fmt.Stringer` interface and custom string formatting.
+[Stringer](../11-stringer/README.md)

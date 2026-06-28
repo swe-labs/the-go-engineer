@@ -224,4 +224,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/13-typ
 
 ## NEXT UP
 
-Nil interfaces — what happens when an interface variable is nil, and why `interface != nil` often fails to detect it.
+[Nil Interfaces](../14-nil-interfaces/README.md)
