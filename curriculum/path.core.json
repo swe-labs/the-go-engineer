@@ -12481,17 +12481,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/01-function-basics",
-        "test_command": "go test ./04-functions-errors-data-semantics/01-function-basics"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/01-function-basics",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/01-function-basics"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/01-function-basics/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/01-function-basics/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/01-function-basics/main.go",
-        "readme_path": "04-functions-errors-data-semantics/01-function-basics/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/01-function-basics/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/01-function-basics/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/01-function-basics/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/01-function-basics/main_test.go"
       },
       "source_legacy_ids": [
         "FE.1"
@@ -12669,17 +12669,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/02-parameters",
-        "test_command": "go test ./04-functions-errors-data-semantics/02-parameters"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/02-parameters",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/02-parameters"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/02-parameters/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/02-parameters/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/02-parameters/main.go",
-        "readme_path": "04-functions-errors-data-semantics/02-parameters/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/02-parameters/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/02-parameters/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/02-parameters/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/02-parameters/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -12854,17 +12854,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/03-return-values",
-        "test_command": "go test ./04-functions-errors-data-semantics/03-return-values"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/03-return-values",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/03-return-values"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/03-return-values/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/03-return-values/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/03-return-values/main.go",
-        "readme_path": "04-functions-errors-data-semantics/03-return-values/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/03-return-values/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/03-return-values/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/03-return-values/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/03-return-values/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -13040,17 +13040,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/04-multiple-return-values",
-        "test_command": "go test ./04-functions-errors-data-semantics/04-multiple-return-values"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/04-multiple-return-values",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/04-multiple-return-values"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/04-multiple-return-values/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/04-multiple-return-values/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/04-multiple-return-values/main.go",
-        "readme_path": "04-functions-errors-data-semantics/04-multiple-return-values/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/04-multiple-return-values/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/04-multiple-return-values/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/04-multiple-return-values/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/04-multiple-return-values/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -13226,17 +13226,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/05-scope",
-        "test_command": "go test ./04-functions-errors-data-semantics/05-scope"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/05-scope",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/05-scope"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/05-scope/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/05-scope/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/05-scope/main.go",
-        "readme_path": "04-functions-errors-data-semantics/05-scope/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/05-scope/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/05-scope/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/05-scope/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/05-scope/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -13414,17 +13414,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/06-call-stack-mental-model",
-        "test_command": "go test ./04-functions-errors-data-semantics/06-call-stack-mental-model"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/06-call-stack-mental-model",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/06-call-stack-mental-model"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/06-call-stack-mental-model/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/06-call-stack-mental-model/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/06-call-stack-mental-model/main.go",
-        "readme_path": "04-functions-errors-data-semantics/06-call-stack-mental-model/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/06-call-stack-mental-model/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/06-call-stack-mental-model/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/06-call-stack-mental-model/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/06-call-stack-mental-model/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -13601,17 +13601,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/07-passing-by-value",
-        "test_command": "go test ./04-functions-errors-data-semantics/07-passing-by-value"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/07-passing-by-value",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/07-passing-by-value"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/07-passing-by-value/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/07-passing-by-value/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/07-passing-by-value/main.go",
-        "readme_path": "04-functions-errors-data-semantics/07-passing-by-value/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/07-passing-by-value/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/07-passing-by-value/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/07-passing-by-value/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/07-passing-by-value/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -13789,17 +13789,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/08-pointer-and-value-mutation-behavior",
-        "test_command": "go test ./04-functions-errors-data-semantics/08-pointer-and-value-mutation-behavior"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/08-pointer-and-value-mutation-behavior",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/08-pointer-and-value-mutation-behavior"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/08-pointer-and-value-mutation-behavior/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/08-pointer-and-value-mutation-behavior/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/08-pointer-and-value-mutation-behavior/main.go",
-        "readme_path": "04-functions-errors-data-semantics/08-pointer-and-value-mutation-behavior/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/08-pointer-and-value-mutation-behavior/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/08-pointer-and-value-mutation-behavior/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/08-pointer-and-value-mutation-behavior/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/08-pointer-and-value-mutation-behavior/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -13968,17 +13968,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/09-errors-as-values",
-        "test_command": "go test ./04-functions-errors-data-semantics/09-errors-as-values"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/09-errors-as-values",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/09-errors-as-values"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/09-errors-as-values/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/09-errors-as-values/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/09-errors-as-values/main.go",
-        "readme_path": "04-functions-errors-data-semantics/09-errors-as-values/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/09-errors-as-values/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/09-errors-as-values/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/09-errors-as-values/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/09-errors-as-values/main_test.go"
       },
       "source_legacy_ids": [
         "FE.4"
@@ -14157,17 +14157,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/10-error-wrapping",
-        "test_command": "go test ./04-functions-errors-data-semantics/10-error-wrapping"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/10-error-wrapping",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/10-error-wrapping"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/10-error-wrapping/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/10-error-wrapping/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/10-error-wrapping/main.go",
-        "readme_path": "04-functions-errors-data-semantics/10-error-wrapping/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/10-error-wrapping/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/10-error-wrapping/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/10-error-wrapping/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/10-error-wrapping/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -14344,17 +14344,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/11-errors-is",
-        "test_command": "go test ./04-functions-errors-data-semantics/11-errors-is"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/11-errors-is",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/11-errors-is"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/11-errors-is/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/11-errors-is/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/11-errors-is/main.go",
-        "readme_path": "04-functions-errors-data-semantics/11-errors-is/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/11-errors-is/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/11-errors-is/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/11-errors-is/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/11-errors-is/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -14531,17 +14531,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/12-errors-as",
-        "test_command": "go test ./04-functions-errors-data-semantics/12-errors-as"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/12-errors-as",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/12-errors-as"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/12-errors-as/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/12-errors-as/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/12-errors-as/main.go",
-        "readme_path": "04-functions-errors-data-semantics/12-errors-as/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/12-errors-as/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/12-errors-as/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/12-errors-as/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/12-errors-as/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -14719,17 +14719,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/13-validation",
-        "test_command": "go test ./04-functions-errors-data-semantics/13-validation"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/13-validation",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/13-validation"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/13-validation/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/13-validation/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/13-validation/main.go",
-        "readme_path": "04-functions-errors-data-semantics/13-validation/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/13-validation/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/13-validation/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/13-validation/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/13-validation/main_test.go"
       },
       "source_legacy_ids": [
         "FE.5"
@@ -14910,17 +14910,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/14-orchestration",
-        "test_command": "go test ./04-functions-errors-data-semantics/14-orchestration"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/14-orchestration",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/14-orchestration"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/14-orchestration/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/14-orchestration/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/14-orchestration/main.go",
-        "readme_path": "04-functions-errors-data-semantics/14-orchestration/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/14-orchestration/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/14-orchestration/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/14-orchestration/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/14-orchestration/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -15098,17 +15098,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/15-defer-mechanics",
-        "test_command": "go test ./04-functions-errors-data-semantics/15-defer-mechanics"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/15-defer-mechanics",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/15-defer-mechanics"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/15-defer-mechanics/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/15-defer-mechanics/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/15-defer-mechanics/main.go",
-        "readme_path": "04-functions-errors-data-semantics/15-defer-mechanics/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/15-defer-mechanics/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/15-defer-mechanics/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/15-defer-mechanics/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/15-defer-mechanics/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -15288,17 +15288,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/16-defer-for-cleanup",
-        "test_command": "go test ./04-functions-errors-data-semantics/16-defer-for-cleanup"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/16-defer-for-cleanup",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/16-defer-for-cleanup"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/16-defer-for-cleanup/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/16-defer-for-cleanup/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/16-defer-for-cleanup/main.go",
-        "readme_path": "04-functions-errors-data-semantics/16-defer-for-cleanup/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/16-defer-for-cleanup/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/16-defer-for-cleanup/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/16-defer-for-cleanup/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/16-defer-for-cleanup/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -15468,17 +15468,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/17-panic-and-recover",
-        "test_command": "go test ./04-functions-errors-data-semantics/17-panic-and-recover"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/17-panic-and-recover",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/17-panic-and-recover"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/17-panic-and-recover/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/17-panic-and-recover/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/17-panic-and-recover/main.go",
-        "readme_path": "04-functions-errors-data-semantics/17-panic-and-recover/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/17-panic-and-recover/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/17-panic-and-recover/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/17-panic-and-recover/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/17-panic-and-recover/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -15665,17 +15665,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./04-functions-errors-data-semantics/18-custom-error-types",
-        "test_command": "go test ./04-functions-errors-data-semantics/18-custom-error-types"
+        "run_command": "go run ./curriculum/modules/04-functions-errors-data-semantics/lessons/18-custom-error-types",
+        "test_command": "go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/18-custom-error-types"
       },
       "files": {
-        "assets_dir": "04-functions-errors-data-semantics/18-custom-error-types/assets",
+        "assets_dir": "modules/04-functions-errors-data-semantics/lessons/18-custom-error-types/assets",
         "diagram_paths": [],
-        "main_path": "04-functions-errors-data-semantics/18-custom-error-types/main.go",
-        "readme_path": "04-functions-errors-data-semantics/18-custom-error-types/README.md",
+        "main_path": "modules/04-functions-errors-data-semantics/lessons/18-custom-error-types/main.go",
+        "readme_path": "modules/04-functions-errors-data-semantics/lessons/18-custom-error-types/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "04-functions-errors-data-semantics/18-custom-error-types/main_test.go"
+        "test_path": "modules/04-functions-errors-data-semantics/lessons/18-custom-error-types/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [

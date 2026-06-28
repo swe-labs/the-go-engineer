@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 )
 
@@ -50,7 +51,7 @@ func TestWrapWithVDoesNotWrap(t *testing.T) {
 	}
 }
 
-// fmtErrorfWithV simulates what happens with %v (no wrap chain preserved).
+// fmtErrorfWithV uses %v so the error is formatted but NOT wrapped.
 func fmtErrorfWithV(format string, args ...interface{}) error {
-	return errors.New(format) // simplified: actual %v behavior
+	return fmt.Errorf(format, args...) // %v preserves only the message, no wrap chain
 }

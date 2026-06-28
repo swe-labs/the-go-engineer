@@ -4,6 +4,10 @@
 
 Teach boundaries, failure, cleanup, mutation, and data behavior.
 
+## Module arc
+
+This module takes you from writing simple functions to building robust systems that handle failure professionally. The first half builds your function toolkit: declaration, parameters, return values, scope, and the call stack. The middle section dives into Go's data semantics — pass-by-value, pointers, mutation — giving you the mental model to predict exactly when data is copied versus shared. The second half is all about errors: treating them as values, wrapping them with context, matching with `errors.Is` and `errors.As`, validating input, composing fallible operations, and cleaning up with `defer`. You'll finish by designing custom error types that carry structured data and integrate with Go's error chain. The module concludes with a refactoring project where you apply everything together.
+
 ## Summary
 
 Develops function design, error handling, mutation, cleanup, and data semantics so learners can reason about boundaries and failure in real programs.
