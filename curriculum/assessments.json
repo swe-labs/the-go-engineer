@@ -2509,6 +2509,115 @@
       }
     },
     {
+      "id": "assessment-project-shell-git-lab",
+      "title": "Assessment - Shell + Git Lab",
+      "type": "project-review",
+      "status": "draft",
+      "target_ids": [
+        "project-shell-git-lab"
+      ],
+      "purpose": "Evaluate the Shell + Git Lab project submission.",
+      "criteria": [
+        {
+          "id": "project-shell-git-lab-correctness",
+          "title": "Correctness",
+          "weight": 35,
+          "levels": [
+            {
+              "score": 0,
+              "description": "Incorrect or missing implementation."
+            },
+            {
+              "score": 3,
+              "description": "Partially correct with minor issues."
+            },
+            {
+              "score": 5,
+              "description": "Fully correct implementation."
+            }
+          ]
+        },
+        {
+          "id": "project-shell-git-lab-process",
+          "title": "Process quality",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No meaningful workflow demonstrated."
+            },
+            {
+              "score": 3,
+              "description": "Basic workflow with some best practices."
+            },
+            {
+              "score": 5,
+              "description": "Clean workflow with meaningful commits and sensible branching."
+            }
+          ]
+        },
+        {
+          "id": "project-shell-git-lab-proof",
+          "title": "Proof",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No proof provided."
+            },
+            {
+              "score": 3,
+              "description": "Partial proof with gaps."
+            },
+            {
+              "score": 5,
+              "description": "Git log, branch graph, and documentation demonstrate a complete workflow."
+            }
+          ]
+        },
+        {
+          "id": "project-shell-git-lab-explanation",
+          "title": "Explanation",
+          "weight": 15,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No explanation provided."
+            },
+            {
+              "score": 3,
+              "description": "Basic explanation of commands used."
+            },
+            {
+              "score": 5,
+              "description": "Clear explanation of shell and Git commands, including why specific approaches were chosen."
+            }
+          ]
+        }
+      ],
+      "passing_score": 80,
+      "evidence_required": [
+        "Git repository with commit history",
+        "Verification script output (verify.ps1 or verify.sh)"
+      ],
+      "automated_checks": [
+        "powershell -ExecutionPolicy Bypass -File ./verify.ps1"
+      ],
+      "manual_review_questions": [
+        "Can the learner navigate the filesystem using shell commands?",
+        "Does the Git workflow demonstrate init, add, commit, branch, merge, and conflict resolution?",
+        "Can the learner explain why specific approaches were chosen?"
+      ],
+      "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
       "id": "assessment-project-course-setup",
       "title": "Assessment - Course Setup Verification",
       "type": "project-review",

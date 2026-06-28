@@ -167,17 +167,9 @@ Create your own `JobReadiness` with the five categories. Add at least one piece 
 
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/00-orientation/lessons/08-what-job-ready-means
-```
-
-The tests verify:
-- No gaps when all categories have evidence
-- All gaps when no categories have evidence
-- Specific gap names are returned correctly
-- Summary says "job-ready" when 100% filled
-- Summary shows fraction when partially filled
-- Empty readiness returns appropriate message
+1. Copy the inline Go code into a local `.go` file and run `go run .` to see your readiness report.
+2. Add evidence to all five categories and confirm the summary says "job-ready".
+3. Remove all evidence from one category and confirm it appears as a gap.
 
 ## Review questions
 

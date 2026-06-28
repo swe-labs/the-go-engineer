@@ -66,15 +66,12 @@ Production deployments compile code into binaries (or containers), push those ar
 - The compilation step adds latency to the edit-run cycle — Go's fast compiler keeps this under 1 second for most projects.
 - Statically linked binaries are larger but eliminate runtime dependency resolution, making deployment simpler and faster.
 
-## Practice task
-
-Create a Go source file, compile it to a binary, run the binary, then modify the source, recompile, and confirm the change only appears after restarting the process.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/02-source-code-executable-and-process/
-```
+1. Pick any compiled program on your system (e.g., `ping`, `notepad`, or a Go-compiled binary). Use `where <name>` (Windows) or `which <name>` (Linux/macOS) to locate the **binary** on disk.
+2. Run the program, then open a second terminal and use `ps` (Linux/macOS) or `Get-Process` (PowerShell) to find the running **process**. Note its PID.
+3. Modify the source file of a simple program, recompile, and re-run. Confirm that changes appear only after the process is restarted. (If you have Go installed, write a minimal `hello.go`.)
+4. The **source** is human-readable text; the **binary** is the compiled machine-code file; the **process** is the loaded program in memory with its PID.
 
 ## Review questions
 

@@ -163,16 +163,10 @@ Create a new rubric with four categories: `Syntax`, `Logic`, `Efficiency`, `Styl
 
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/00-orientation/lessons/06-how-assessments-work
-```
-
-The tests verify:
-- Answers above threshold pass
-- Answers below threshold fail
-- Multiple categories are evaluated independently
-- Missing answers get score 0 and fail
-- Empty rubric produces no evaluations
+1. Read the inline Go example and trace how `evaluateAnswer` checks each rubric category.
+2. Copy the code into a local `.go` file and run `go run .` to see the pass/fail output.
+3. Modify the answers so that all categories pass — confirm by reading the output.
+4. Remove one answer entirely and observe that its category defaults to 0 and fails.
 
 ## Review questions
 

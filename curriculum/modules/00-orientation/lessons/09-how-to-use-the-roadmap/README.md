@@ -139,17 +139,9 @@ Extend the program to add two more modules: Module 04 (Databases) with prerequis
 
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/00-orientation/lessons/09-how-to-use-the-roadmap
-```
-
-The tests verify:
-- A valid sequential path passes
-- A path with missing prerequisites fails
-- A single module with no prerequisites passes
-- A path with modules in wrong order fails
-- Multiple prerequisites on a single module are all checked
-- An empty path is valid (no violations)
+1. Copy the inline Go code into a local `.go` file and run `go run .` to see the valid and invalid path results.
+2. Create a path with a single module that has no prerequisites — confirm `validatePath` returns valid.
+3. Swap two modules in the valid path so they are out of order — confirm the validation fails with a clear error.
 
 ## Review questions
 

@@ -66,15 +66,13 @@ GitHub is the largest code hosting platform in the world. Millions of developers
 - Large PRs (1000+ lines changed) are slower to review and more likely to have merge conflicts.
 - GitHub Actions CI adds 1-10 minutes per PR depending on test suite size.
 
-## Practice task
-
-Create a fork of a repository, clone it, create a feature branch, push it, and create a pull request with a descriptive title and body explaining the change.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/12-github-workflow/
-```
+1. Fork a public repository on GitHub, clone it locally, create a `feature` branch, make a change, commit it, and push the branch to your fork.
+2. Open a pull request on GitHub from your fork's feature branch to the original repo's main branch. Write a descriptive title and body.
+3. Explore the PR page: check the "Files changed" tab, leave a comment on a diff line, and verify the status checks section.
+
+In the [Shell + Git Lab](../projects/shell-git-lab/README.md), you will use a local Git workflow that mirrors the GitHub fork-branch-PR cycle. Understanding remotes, pushes, and the propose-verify-merge pattern prepares you to publish your project to GitHub.
 
 ## Review questions
 

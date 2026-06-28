@@ -66,15 +66,13 @@ Every web request uses DNS, TCP, IP, and ports — from loading a webpage to cal
 - TCP connection setup requires a three-way handshake (SYN, SYN-ACK, ACK), adding ~1 RTT (round-trip time).
 - HTTPS adds one more RTT for TLS handshake — HTTP/2 and HTTP/3 reduce this with connection multiplexing and 0-RTT.
 
-## Practice task
-
-Write a Go program that resolves a domain name to its IP addresses using `net.LookupHost`, prints them, then opens a TCP connection to the server on port 80 and sends a raw HTTP GET request.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/
-```
+1. Use your browser to navigate to `https://example.com`. Open Developer Tools (F12), go to the "Network" tab, and reload. Observe the DNS resolution time and the remote IP address in the request details.
+2. Run `nslookup example.com` (or `Resolve-DnsName example.com` in PowerShell) to see the domain's IP addresses.
+3. Run `curl -v https://example.com` and study the output — note the TCP connect, TLS handshake, and HTTP request/response phases.
+
+The [Shell + Git Lab](../projects/shell-git-lab/README.md) verification script runs locally, but the same DNS and TCP concepts you learned here are what allow Git to communicate with remote repositories on GitHub. Understanding client-server fundamentals demystifies `git push` and `git fetch` over the network.
 
 ## Review questions
 

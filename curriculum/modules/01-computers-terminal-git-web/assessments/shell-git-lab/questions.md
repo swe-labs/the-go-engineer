@@ -34,7 +34,7 @@ b) `git create feature-login`
 c) `git new branch feature-login`  
 d) `git checkout feature-login`
 
-**5.** What is the exit code of a Go program that completes successfully?
+**5.** What exit code does a program return when it completes successfully?
 
 a) -1  
 b) 0  

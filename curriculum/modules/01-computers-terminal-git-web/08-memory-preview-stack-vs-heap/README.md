@@ -104,21 +104,18 @@ Performance-critical code in Go (network proxies, databases, game servers) minim
 - Frequent heap allocation generates garbage that the GC must collect, causing stop-the-world pauses (typically <1ms in Go).
 - Stack memory is cache-friendly (spatial locality). Heap memory can fragment and cause cache misses.
 
-## Practice task
-
-The learner must write a Go program with two functions — one that allocates on the stack (local variable) and one that allocates on the heap (returned pointer) — and use 'go build -gcflags=-m' to verify the compiler's escape analysis decisions.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/
-```
+1. Write a small Go source file (call it `escape.go`) with a local variable (returns int) and a returning-pointer function. Compile with `go build -gcflags=-m escape.go 2>&1` and look for "escapes to heap" and "does not escape" lines.
+2. Identify which variables the compiler chose to heap-allocate and explain why based on escape analysis rules.
 
 ## Review questions
 
-1. Learner must identify whether a given variable is stack-allocated or heap-allocated based on its lifetime and usage pattern.
-2. Learner must explain why Go can safely return a pointer to a local variable while C cannot.
-3. Learner must predict the relative performance of stack vs. heap allocation for a given code pattern.
+1. Identify whether a given variable is stack-allocated or heap-allocated based on its lifetime and usage pattern.
+2. Explain why Go can safely return a pointer to a local variable while C cannot.
+3. Predict the relative performance of stack vs. heap allocation for a given code pattern.
+4. When you run `git branch` or `git merge`, where does the OS store the branch names and commit data — stack or heap? Why?
+5. Why can a large Git repository with many commits cause noticeable heap allocation during operations like `git log --graph`?
 
 ## NEXT UP
 

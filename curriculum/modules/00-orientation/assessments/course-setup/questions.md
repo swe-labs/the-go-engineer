@@ -11,15 +11,15 @@
 
 5. What is the URL of your fork of the repository?
 6. What command did you use to clone it locally?
-7. After cloning, what directory do you run `go test ./...` from? Paste the terminal command and its output.
+7. After cloning, what does `git log --oneline -5` show? Paste the terminal command and its output.
 8. What does `git remote -v` show? Paste the output.
 
 ## Part 3 — Course project
 
-9. Open `projects/course-setup-verification/_starter/main.go`. What does it check for?
-10. Run `go test ./...` from the `_starter` directory. Did all tests pass? Paste the output.
-11. Look at `projects/course-setup-verification/_solution/main.go`. How does it differ from the starter?
-12. Run `go run .` inside the `_starter` directory. What output do you see?
+9. What three tools do you verify are installed in the Course Setup Verification project?
+10. Create a file called `setup.txt` with the version output of Go, Git, and your editor. Check it into your repo. Paste the contents of `setup.txt`.
+11. What command do you use to check the Go version? Paste the output.
+12. What command do you use to check the Git version? Paste the output.
 
 ## Part 4 — Reflection
 

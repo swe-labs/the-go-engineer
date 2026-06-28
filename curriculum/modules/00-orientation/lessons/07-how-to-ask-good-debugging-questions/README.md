@@ -140,16 +140,9 @@ Take a debugging question you have asked recently (or invent one). Write it as a
 
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/00-orientation/lessons/07-how-to-ask-good-debugging-questions
-```
-
-The tests verify:
-- All five fields filled scores 5
-- No fields filled scores 0
-- Partial fields score correctly (2 for Expected+Actual, 1 for only Error, 4 for all but Environment)
-- Whitespace-only fields are treated as empty
-- The `formatField` helper returns "(empty)" for blank input
+1. Copy the inline Go code into a local `.go` file and run `go run .` to see the two sample scores.
+2. Create your own `DebugQuestion` with exactly 3 fields filled — confirm `scoreQuestion` returns 3.
+3. Write a question with whitespace-only in every field and verify it scores 0.
 
 ## Review questions
 

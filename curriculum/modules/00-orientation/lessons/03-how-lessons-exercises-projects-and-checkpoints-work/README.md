@@ -146,17 +146,9 @@ Add a seventh step called "Share" between Reflect and Checkpoint with Index 6 (r
 
 ## Tests / verification
 
-Run the tests from the repository root:
-
-```bash
-go test ./curriculum/modules/00-orientation/labs/03-how-lessons-exercises-projects-and-checkpoints-work/
-```
-
-Expected output:
-
-```
-ok      github.com/rasel9t6/the-go-engineer/curriculum/modules/00-orientation/labs/03-how-lessons-exercises-projects-and-checkpoints-work
-```
+1. Read the inline Go example and trace the learning cycle from lesson to checkpoint.
+2. Copy the code into a local `.go` file and run `go run .` to see the full cycle in action.
+3. Complete the practice task above — add a seventh "Share" step and confirm the cycle is correct by reading the output.
 
 ## Review questions
 

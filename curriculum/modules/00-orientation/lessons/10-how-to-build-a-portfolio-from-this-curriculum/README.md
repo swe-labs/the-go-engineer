@@ -83,7 +83,7 @@ func main() {
 			{
 				Name:        "Course Setup Verification",
 				Description: "Verify Go, git, and editor installation",
-				Evidence:    []string{"main.go", "main_test.go", "README.md"},
+				Evidence:    []string{"setup.txt", "README.md"},
 				Status:      "complete",
 			},
 			{

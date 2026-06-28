@@ -66,15 +66,13 @@ Every professional software team uses code review. Google mandates at least one 
 - Thorough code review catches 60-70% of defects before they reach production, saving 10x the cost of fixing them later.
 - Mechanical style issues should be automated (formatters, linters) so reviewers can focus on logic and design.
 
-## Practice task
-
-Review a provided pull request diff, leave at least three constructive comments, and explain the reasoning behind each comment.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/
-```
+1. Open a pull request on GitHub (or use an existing open PR on a public repo like `golang/go`). Read the diff in the "Files changed" tab.
+2. Leave at least three inline comments: one suggesting a functional improvement, one asking for clarification, and one praising a well-written section.
+3. Practice the review workflow: request changes, then approve. Note how the PR status changes after each action.
+
+Although the [Shell + Git Lab](../projects/shell-git-lab/README.md) is a local repository exercise, the code review skills you learn here — writing clear descriptions, reading diffs, leaving constructive feedback — apply directly when you share your project on GitHub and open your first real PR.
 
 ## Review questions
 

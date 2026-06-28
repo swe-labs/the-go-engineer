@@ -66,15 +66,13 @@ HTTP is the foundation of the web — every API (REST, GraphQL), every webpage, 
 - HTTP/2 multiplexes multiple requests over a single TCP connection, eliminating head-of-line blocking.
 - Each HTTP request adds 200-500 bytes of header overhead — minimize requests and use caching headers for performance.
 
-## Practice task
-
-Write a Go program that starts an HTTP server on port 8080 with a single handler, then write a separate Go program that sends a GET request to `http://localhost:8080` and prints the response body and status code.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/15-http-request-and-response-preview/
-```
+1. Open your browser's Developer Tools (F12 → Network tab), navigate to any website, and inspect a request. Note the request method, URL, status code, headers, and response body.
+2. Run `curl -v https://example.com` and study every line: the TCP connection, TLS handshake, request headers sent, response headers received, status line, and body.
+3. Use `curl -X POST -H "Content-Type: application/json" -d '{"key":"value"}' https://httpbin.org/post` and compare the output to the earlier GET request.
+
+The [Shell + Git Lab](../projects/shell-git-lab/README.md) verification script uses HTTP-like status reporting (pass/fail per check). The same request-response pattern applies when Git communicates with GitHub over HTTPS: your client sends a request, the server responds with a status code and data.
 
 ## Review questions
 
@@ -86,4 +84,6 @@ go test ./curriculum/modules/01-computers-terminal-git-web/15-http-request-and-r
 
 ## NEXT UP
 
-[Module 02 — Go Basics](../../../02-go-basics/README.md)
+Complete the [Shell + Git Lab](../projects/shell-git-lab/README.md) project to practice everything you learned in this module.
+
+Then take the [Module 01 assessment](../assessments/shell-git-lab/README.md) to verify your understanding.

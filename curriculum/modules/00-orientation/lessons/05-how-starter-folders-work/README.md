@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-By the end of this lesson, you will understand how `_starter/` and `_solution/` directories work together in this curriculum. You will know why they exist, how to use them without cheating yourself, and how to programmatically compare a starter against a solution. You will demonstrate this by running a Go program that detects missing fields in incomplete work.
+By the end of this lesson, you will understand how `_starter/` and `_solution/` directories work together in this curriculum, starting from Module 02 where Go programming begins. You will know why they exist, how to use them without cheating yourself, and how to programmatically compare a starter against a solution.
 
 ## Why this matters
 

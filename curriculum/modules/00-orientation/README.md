@@ -87,7 +87,7 @@ Portfolio plan
 Module 00 includes one guided lab:
 
 ```text
-labs/03-how-lessons-exercises-projects-and-checkpoints-work/
+lessons/03-how-lessons-exercises-projects-and-checkpoints-work/
 ```
 
 The lab asks you to trace a learning cycle from lesson to proof.

@@ -11,15 +11,15 @@
 
 5. **Expected:** `https://github.com/<username>/the-go-engineer` or similar.
 6. **Expected:** `git clone https://github.com/<username>/the-go-engineer.git` (or SSH equivalent).
-7. **Expected:** `go test ./...` from the repository root. Output should show `ok` lines and no `FAIL`.
+7. **Expected:** `git remote -v` from the repository root. Output should show `origin` pointing to the learner's fork.
 8. **Expected:** Two remotes — `origin` pointing to the learner's fork and optionally `upstream` pointing to `swe-labs/the-go-engineer`.
 
 ## Part 3 — Course project
 
-9. **Expected:** It uses `exec.LookPath` to check that Go and Git are installed and available in PATH. An editor check is left as a TODO.
-10. **Expected:** `ok` with no failures. If tests fail, the environment is not correctly set up.
-11. **Expected:** The solution checks five tools (Go, Git, VS Code, Vim, Nano), uses a loop instead of repeated calls, and prints a summary message. The starter checks only Go and Git with a TODO for the editor.
-12. **Expected:** Two lines: `OK: Go is installed` and `OK: Git is installed`, preceded by a title and separator.
+9. **Expected:** Go, Git, and a text editor (VS Code, Vim, or Nano).
+10. **Expected:** A `setup.txt` file containing the version output of `go version`, `git version`, and the editor version command (e.g., `code --version`).
+11. **Expected:** `go version` — output should show `go version go1.26.X <os>/<arch>`.
+12. **Expected:** `git version` — output should show `git version 2.4X.X`.
 
 ## Part 4 — Reflection
 

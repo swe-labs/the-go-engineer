@@ -95,21 +95,21 @@ CI/CD pipelines, shell scripts, Makefiles, and container orchestrators all rely 
 - Exit codes beyond 255 are truncated (modulo 256) on Unix — always use 0-255 range.
 - Exit code 128+N on Unix conventionally indicates termination by signal N (e.g., 130 = SIGINT, 137 = SIGKILL).
 
-## Practice task
-
-The learner must write a Go program that accepts a filename argument, attempts to open it, exits with 0 on success and 1 on failure, and demonstrate both cases in the terminal.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/06-exit-codes/
-```
+1. Run `true` in your terminal, then check the exit code with `echo $?` (bash) or `$LASTEXITCODE` (PowerShell). It should be 0. Repeat with `false` — it should be 1.
+2. Chain commands: `true && echo "ran"` prints "ran". `false && echo "ran"` does not. Try the same with `||`.
+3. Run a command that fails (e.g., `ls nonexistent`), then check the exit code. Note how different failures produce different non-zero codes.
+
+Apply this in the [Shell + Git Lab](../projects/shell-git-lab/README.md): the verify script checks exit codes from every Git command. A failed merge or missing file produces a non-zero exit, and the script reports it as FAIL. Understanding exit codes helps you read and debug verification output.
 
 ## Review questions
 
-1. Learner must write a Go program that exits with code 42 and confirm the exit code using echo $? in bash.
-2. Learner must explain the difference between a panic (non-zero exit + stack trace) and os.Exit (clean exit with code).
-3. Learner must chain two commands with && and || and predict which runs based on exit codes.
+1. What exit code does a successful command return? What range indicates failure?
+2. Explain the difference between a panic (non-zero exit + stack trace) and os.Exit (clean exit with code).
+3. Chain two commands with `&&` and `||` and predict which runs based on exit codes.
+4. What exit code does a program return by default when it completes normally? Why is 0 used for success?
+5. Why does `git merge` produce a non-zero exit code when there is a merge conflict, and how should a script handle this?
 
 ## NEXT UP
 

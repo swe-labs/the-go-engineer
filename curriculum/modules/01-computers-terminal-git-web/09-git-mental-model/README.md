@@ -119,21 +119,21 @@ Git is the de facto standard for version control in the software industry. Every
 - Git's object store uses zlib compression, reducing disk usage by 30-70% compared to storing raw files.
 - Large binary files bloat Git history — Git is optimized for text files that diff well.
 
-## Practice task
-
-The learner must initialize a new Git repository, create three commits, run 'git log --oneline --graph' and explain the commit graph, then use 'git diff' to show changes between two commits.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/09-git-mental-model/
-```
+1. Initialize a new Git repository: `git init test-model && cd test-model`.
+2. Create three commits (add a file, modify it, modify it again). Run `git log --oneline --graph` and explain the commit DAG.
+3. Use `git diff <commit1> <commit2>` to show changes between two commits. Then inspect an object directly: `git cat-file -p <commit-hash>`.
+
+The [Shell + Git Lab](../projects/shell-git-lab/README.md) will ask you to apply this mental model directly — you will init a real repository, examine .git/objects, create commits, and verify the DAG with `git log --graph`.
 
 ## Review questions
 
-1. Learner must explain the difference between the working directory, the staging area, and the commit history.
-2. Learner must identify what happens to committed data when a branch is deleted.
-3. Learner must explain why Git can reconstruct any version of any file from its object database.
+1. Explain the difference between the working directory, the staging area, and the commit history.
+2. Identify what happens to committed data when a branch is deleted.
+3. Explain why Git can reconstruct any version of any file from its object database.
+4. How many parent commits does a merge commit have? How many does an initial commit have?
+5. What is the difference between a branch name and a tag in Git's object model?
 
 ## NEXT UP
 

@@ -110,21 +110,19 @@ Web servers fork child processes (Apache), containers are isolated process trees
 - Context switching between processes is slower than between threads because the TLB (translation lookaside buffer) must be flushed.
 - The OOM killer activates when memory is overcommitted — processes can be killed arbitrarily if they consume too much memory.
 
-## Practice task
-
-The learner must write a Go program that spawns a child process via os/exec, waits for it to complete, collects the exit code, and print the parent and child PIDs.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/
-```
+1. Open Task Manager (Windows) or run `ps aux` (Linux/macOS). Identify which processes belong to your terminal, your editor, and the OS kernel (system idle process, kernel task).
+2. Run a long-running command in the background: `sleep 30 &` (bash) or `Start-Sleep -Seconds 30` in a background job (PowerShell). Use `ps` to see both the parent shell and child process. Note the PPID (parent PID) of the child.
+3. Kill the parent shell process and observe what happens to the child — orphaned or reparented to init.
 
 ## Review questions
 
-1. Learner must run ps (or Task Manager) and identify which processes belong to the Go toolchain vs. the OS kernel.
-2. Learner must explain why a CPU-bound process on a single-core machine appears to run 'at the same time' as other processes.
-3. Learner must predict what happens to child processes when the parent process is killed.
+1. Run `ps` (or Task Manager) and identify which processes belong to the Go toolchain vs. the OS kernel.
+2. Explain why a CPU-bound process on a single-core machine appears to run "at the same time" as other processes.
+3. Predict what happens to child processes when the parent process is killed.
+4. How does the shell create a child process when you run a command like `ls -l`, and what happens to the shell while the child runs?
+5. What would happen if you ran `exec git merge` instead of just `git merge` in a shell script? How does `exec` differ from `fork`?
 
 ## NEXT UP
 

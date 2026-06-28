@@ -33,7 +33,7 @@ The example implements a minimal shell simulator. It reads input from stdin via 
 1. The user opens a terminal emulator which starts a shell process (bash, zsh, or PowerShell).
 2. The shell prints a prompt and waits for input — the user types a command and presses Enter.
 3. The shell parses the input, resolves the command (built-in, alias, or PATH lookup), forks a child process, and waits for it to complete.
-4. In the Go simulation: `bufio.NewScanner` reads lines from stdin, `strings.Fields` tokenizes the input, and `simulateShell` dispatches the command.
+4. In the [Shell + Git Lab](../projects/shell-git-lab/README.md): the verify script runs shell commands directly and checks their output. There is no Go simulation — you practice using a real terminal.
 5. The child process runs, reading from stdin and writing to stdout/stderr until it exits.
 6. The shell collects the exit code, displays the next prompt, and waits for the next command.
 
@@ -67,15 +67,11 @@ Professional developers spend hours daily in the terminal running builds, tailin
 - Piping large datasets between commands avoids writing temp files to disk, reducing I/O by 10-100x.
 - Using shell built-ins (`cd`, `echo`, `source`) is faster than external commands since no process fork is needed.
 
-## Practice task
-
-Run three terminal commands, redirect output to a file using `>`, pipe data between two programs with `|`, and explain which process owns each step.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/04-terminal-basics/
-```
+1. Open your terminal. Run `echo "hello"` and confirm output goes to stdout. Run `echo "error" >&2` (bash) or `Write-Error "error"` (PowerShell) to confirm stderr output.
+2. Chain commands with `&&` (run next only if previous succeeds) and `||` (run next only if previous fails). For example: `true && echo "yes"` vs `false && echo "no"`.
+3. Redirect output with `>` to a file, then append with `>>`. Pipe data between two commands with `|`. Explain which process owns each step.
 
 ## Review questions
 

@@ -66,15 +66,12 @@ Every day, developers write code, compile it, and run it. When a build fails, th
 - Compiled programs (Go, C, Rust) have a build step but run at near-native CPU speed.
 - JIT-compiled programs (Java, JavaScript V8) warm up over time, starting slow then approaching compiled speed.
 
-## Practice task
-
-Write a Go program that prints "Hello, program!", compile it with `go build`, run the resulting binary, then explain the role of each artifact (source, binary, process).
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/01-what-is-a-program/
-```
+1. Open your terminal and run a command like `ping localhost` (or `Get-Process -Name "explorer"` on PowerShell). Note that every running command is a **process** with a PID.
+2. Locate the executable on disk for a program you use daily (e.g., `where ping` / `Get-Command ping`). This is the **binary** — the compiled file stored on disk.
+3. The source code that produced that binary is human-readable text. Edit a simple text file, compile it, and observe: changing the source requires recompilation to affect the running process. (If you have Go installed, write a one-line `hello.go` and compile with `go build`.)
+4. Open Task Manager (Windows) or run `ps` (Linux/macOS) while a program runs. Confirm the process name matches a binary on disk and note its PID. Kill it with `kill <PID>` or `Stop-Process -Id <PID>` — the binary stays on disk but the process disappears.
 
 ## Review questions
 

@@ -42,10 +42,9 @@
         "core-01-15"
       ],
       "deliverables": [
-        "Working implementation of Shell + Git Lab",
-        "README with run/test instructions",
-        "Tests or verification checklist",
-        "Explanation of design decisions"
+        "Completed shell and Git workflow in your working directory",
+        "All verification checks passing (bash verify.sh)",
+        "Explanation of design decisions and commands used"
       ],
       "tasks": [
         {
@@ -86,11 +85,11 @@
       ],
       "verification": {
         "mode": "mixed",
-        "run_command": "bash ./verify.sh",
-        "test_command": "bash ./verify.sh",
+        "run_command": "powershell -ExecutionPolicy Bypass -File ./verify.ps1",
+        "test_command": "powershell -ExecutionPolicy Bypass -File ./verify.ps1",
         "manual_steps": [
-          "Run the project.",
-          "Run tests if present.",
+          "Run verify.ps1 (Windows) or verify.sh (Linux/macOS) from the project directory.",
+          "Verify all checks pass.",
           "Review README.",
           "Check rubric."
         ],

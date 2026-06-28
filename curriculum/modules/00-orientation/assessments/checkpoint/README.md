@@ -40,7 +40,7 @@ You may not copy from the answer key before attempting the questions.
 Submit:
 
 1. answers to `questions.md`
-2. one terminal transcript showing a `go run` and `go test` command from Module 00
+2. one terminal transcript showing `go version` and `git version` commands succeeding
 3. a short personal roadmap paragraph
 4. a short portfolio plan paragraph
 

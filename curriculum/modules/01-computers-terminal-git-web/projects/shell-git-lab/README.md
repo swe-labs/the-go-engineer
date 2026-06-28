@@ -2,49 +2,63 @@
 
 ## Goal
 
-Practice shell navigation and Git commands by building and navigating a simulated filesystem and managing code changes through a complete Git workflow.
+Practice shell navigation and Git commands by building a directory structure and managing code changes through a complete Git workflow — all in your terminal. No Go code required.
 
 ## Learning objectives
 
-- Navigate the filesystem using shell commands (cd, ls, pwd, mkdir, rm)
-- Initialize and manage a Git repository (init, add, commit, branch, merge)
+- Navigate the filesystem using shell commands (`cd`, `ls`, `pwd`, `mkdir`, `rm`)
+- Initialize and manage a Git repository (`init`, `add`, `commit`, `branch`, `merge`)
 - Resolve merge conflicts
-- Understand the shell and Git mental models from lessons 1-15
+- Understand shell and Git mental models from lessons 1–15
 
 ## Tasks
 
-### 1. Set up and navigate the terminal
+### 1. Shell fluency
 
-Open your terminal, verify shell access, navigate directories, create and delete files, and configure basic shell aliases.
+Open your terminal and complete the following:
 
-### 2. Initialize and manage a Git repository
+- Create a directory tree: `project/src/`, `project/docs/`, `project/tests/`
+- Create files: `project/README.md`, `project/src/main.go`, `project/docs/design.md`
+- Use `ls`, `pwd`, `tree` (or `Get-ChildItem` on PowerShell) to inspect the structure
+- Copy, move, and delete files using `cp`, `mv`, `rm`
+- Use `>` to write output to a file and `>>` to append
 
-Initialize a Git repository, stage and commit changes, create branches, merge, and resolve a simulated merge conflict.
+### 2. Git workflow
 
-### 3. Complete the Go simulation
+Inside `project/` initialize a Git repo and complete a full workflow:
 
-The `_starter` directory contains a Go program that simulates checking shell and Git knowledge. Complete the TODO markers to make all tests pass.
+- `git init`
+- Create an initial commit with `README.md`
+- Create a `feature` branch, add `src/main.go`, commit
+- Switch back to `main`, add `docs/design.md`, commit
+- Merge `feature` into `main` (fast-forward or three-way)
+- Create a deliberate merge conflict: edit the same line on two branches, attempt merge, resolve it
+- Run `git log --oneline --graph` and verify the DAG
 
-## Starter / solution workflow
+### 3. Conceptual understanding
 
-1. Start by reading this README and understanding the project structure.
-2. Open the `_starter` directory and read `main.go` and `main_test.go`.
-3. Complete the TODO markers in `_starter/main.go` — do not modify the test file.
-4. Run `go test -v ./_starter/` to verify your implementation.
-5. Once all tests pass, compare your solution with `_solution/main.go` to see alternative approaches.
+Write a brief explanation (100–200 words) answering:
+
+- What is the difference between the working directory, the staging area, and the commit history?
+- Why does Git use SHA-1 hashes for commits?
+- What happens when you merge two branches with diverged histories?
 
 ## Verification
 
-```bash
-# Run tests
-go test -v ./curriculum/modules/01-computers-terminal-git-web/projects/shell-git-lab/_starter/
-
-# Build the project
-go build ./curriculum/modules/01-computers-terminal-git-web/projects/shell-git-lab/_starter/
+```powershell
+# PowerShell (Windows / pwsh)
+powershell -ExecutionPolicy Bypass -File ./verify.ps1
 ```
+
+```bash
+# Bash (Linux / macOS / Git Bash on Windows)
+./verify.sh
+```
+
+On Windows, you can run `verify.ps1` directly from PowerShell. On Linux/macOS, or if you use Git Bash on Windows, run `verify.sh` instead.
 
 ## Deliverables
 
-- Working implementation in `_starter/main.go`
-- All tests passing
-- Explanation of your design decisions
+- Working Git repository with branches, commits, and a resolved merge conflict
+- All verification checks passing (14/14)
+- Written explanation of the three prompts above

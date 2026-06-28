@@ -66,15 +66,13 @@ Branching strategies (Git Flow, GitHub Flow, Trunk-Based Development) are founda
 - Merge conflicts require manual resolution, which can take minutes to hours depending on complexity.
 - Rebasing rewrites commit history (new hashes for existing changes), which is fast but forces other developers to re-sync.
 
-## Practice task
-
-Create a feature branch, commit two changes, check out main and make a different change, merge the feature branch into main, and explain the resulting commit graph.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/11-branching-and-merging/
-```
+1. Create a repo, create a `feature` branch, commit two changes. Check out `main` and make a different change. Merge `feature` into `main` — observe either a fast-forward or three-way merge depending on the diverged history.
+2. Run `git log --oneline --graph` and note the commit DAG.
+3. Create a deliberate merge conflict: edit the same line on two branches, attempt merge, open the conflicted file, identify the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`), resolve the conflict, add and commit.
+
+The [Shell + Git Lab](../projects/shell-git-lab/README.md) requires you to create branches, switch between them, merge, and resolve a simulated conflict — the same skills this lesson teaches. The verification script enforces that your branch graph and merge history are correct.
 
 ## Review questions
 

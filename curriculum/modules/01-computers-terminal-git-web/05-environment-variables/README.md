@@ -68,19 +68,16 @@ Environment variables are the standard mechanism for configuring Twelve-Factor A
 - Setting many environment variables (1000+) slightly increases process startup time due to the memory copy at fork.
 - Environment variables are limited in size — typical max is 32KB on Windows, 2MB on Linux for the entire environment block.
 
-## Practice task
-
-Write a Go program that reads a `DATABASE_URL` environment variable, prints a connection string, and exits with a clear error if the variable is not set.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/05-environment-variables/
-```
+1. Open a terminal and set an environment variable: `export MY_VAR="hello"` (bash) or `$env:MY_VAR = "hello"` (PowerShell).
+2. Confirm it is set: `echo $MY_VAR` (bash) or `echo $env:MY_VAR` (PowerShell).
+3. Open a new terminal window and try to access the same variable — it is not inherited because it was not exported to child processes.
+4. Run `env` (bash) or `Get-ChildItem Env:` (PowerShell) to list all environment variables. Find `PATH` and `HOME` entries and note their values.
 
 ## Review questions
 
-1. Set an environment variable in a terminal, run a Go program that reads it with `os.Getenv`, and confirm the value is passed correctly.
+1. Set an environment variable in a terminal, then read it in a second terminal with `echo $VAR` (bash) or `$env:VAR` (PowerShell). Explain why the second terminal does not see the variable unless it was started after the export.
 2. Why do changes to environment variables in a parent shell not affect already-running child processes?
 3. List three common environment variables (`PATH`, `HOME`, `GOOS`) and describe what each controls.
 4. What is the difference between `os.Getenv` and `os.LookupEnv` in Go?

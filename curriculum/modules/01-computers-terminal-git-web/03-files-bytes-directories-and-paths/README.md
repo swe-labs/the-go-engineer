@@ -69,15 +69,11 @@ Every application reads configuration files, writes logs, processes data files, 
 - SSDs provide ~500 MB/s sequential reads; HDDs provide ~150 MB/s. Random access is 10-100x slower on HDDs.
 - Directory traversal for deeply nested paths adds latency — each component requires a separate directory lookup.
 
-## Practice task
-
-Write a Go program that creates a directory, writes a file with specific bytes, reads it back, and confirms the content matches using `os` and `path/filepath` packages.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/
-```
+1. Use the terminal to create a directory: `mkdir testdir`, then create a file inside it: `echo "hello" > testdir/hello.txt`.
+2. Run `ls -la testdir` (Linux/macOS) or `Get-ChildItem testdir` (PowerShell) to see the file metadata. Note the file size in bytes.
+3. Run `pwd` (Linux/macOS) or `Get-Location` (PowerShell) to see the absolute path of the current directory. Construct a relative path to the file and verify it resolves correctly.
 
 ## Review questions
 

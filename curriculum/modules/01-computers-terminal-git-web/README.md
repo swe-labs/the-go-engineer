@@ -48,4 +48,4 @@ With that foundation in place, you will gain terminal fluency: navigating the fi
 
 ## NEXT UP
 
-[Module 02 — Go Basics](../02-go-basics/README.md)
+Complete the [Shell + Git Lab](./projects/shell-git-lab/README.md) project, then take the [Module 01 assessment](./assessments/shell-git-lab/README.md) before moving on.

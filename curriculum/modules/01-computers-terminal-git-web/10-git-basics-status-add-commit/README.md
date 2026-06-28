@@ -154,21 +154,21 @@ The status-add-commit cycle is performed dozens of times daily by every professi
 - Large repositories (100k+ files) slow down git status — use .gitignore to exclude build artifacts and dependencies.
 - Git's index file scales with the number of tracked files — performance degrades linearly.
 
-## Practice task
-
-The learner must create a repository, modify a file, stage it, make another modification, use git diff to see unstaged changes, re-stage, commit with a proper message, and confirm the commit with git log.
-
 ## Tests / verification
 
-```bash
-go test ./curriculum/modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/
-```
+1. Create a repository, add a file, and stage it with `git add`. Modify the file again without staging — run `git status` and note the file appears in both "staged" and "unstaged" sections.
+2. Use `git diff` to see unstaged changes and `git diff --staged` to see staged changes. Commit the staged version with `git commit -m "feat: add initial file"`.
+3. Run `git log --oneline` and confirm the commit shows up with your message. Then modify the file, stage it, and amend the commit with `git commit --amend`.
+
+In the [Shell + Git Lab](../projects/shell-git-lab/README.md), you will practice this exact workflow: initialize a repo, create files, stage them, commit with meaningful messages, and verify the history. The project verification script checks that staged files produce the expected commit graph.
 
 ## Review questions
 
-1. Learner must use git status to identify which changes are staged, unstaged, and untracked in a given scenario.
-2. Learner must write a meaningful commit message following the conventional commit format (type: description).
-3. Learner must use git diff --staged to review what will be committed before running git commit.
+1. Use `git status` to identify which changes are staged, unstaged, and untracked in a given scenario.
+2. Write a meaningful commit message following the conventional commit format (type: description).
+3. Use `git diff --staged` to review what will be committed before running `git commit`.
+4. What is the difference between `git diff` and `git diff --staged`? When would you use each?
+5. If you modify a file after staging it, which version will appear in the commit — the staged version or the latest modification?
 
 ## NEXT UP
 
