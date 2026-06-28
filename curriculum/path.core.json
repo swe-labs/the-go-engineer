@@ -878,10 +878,10 @@
         "test_command": ""
       },
       "files": {
-        "assets_dir": "00-orientation/01-how-to-use-this-repository/assets",
+        "assets_dir": "modules/00-orientation/lessons/01-how-to-use-this-repository/assets",
         "diagram_paths": [],
         "main_path": "",
-        "readme_path": "00-orientation/01-how-to-use-this-repository/README.md",
+        "readme_path": "modules/00-orientation/lessons/01-how-to-use-this-repository/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -1063,7 +1063,7 @@
         "assets_dir": "",
         "diagram_paths": [],
         "main_path": "",
-        "readme_path": "00-orientation/02-what-zero-magic-means/README.md",
+        "readme_path": "modules/00-orientation/lessons/02-what-zero-magic-means/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -1244,11 +1244,11 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "00-orientation/03-how-lessons-exercises-projects-and-checkpoints-work/main.go",
-        "readme_path": "00-orientation/03-how-lessons-exercises-projects-and-checkpoints-work/README.md",
-        "solution_path": "00-orientation/03-how-lessons-exercises-projects-and-checkpoints-work/_solution",
-        "starter_path": "00-orientation/03-how-lessons-exercises-projects-and-checkpoints-work/_starter",
-        "test_path": "00-orientation/03-how-lessons-exercises-projects-and-checkpoints-work/main_test.go"
+        "main_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/main.go",
+        "readme_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/README.md",
+        "solution_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/_solution",
+        "starter_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/_starter",
+        "test_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -1427,7 +1427,7 @@
         "assets_dir": "",
         "diagram_paths": [],
         "main_path": "",
-        "readme_path": "00-orientation/04-how-to-run-code-in-this-repository/README.md",
+        "readme_path": "modules/00-orientation/lessons/04-how-to-run-code-in-this-repository/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -1609,7 +1609,7 @@
         "assets_dir": "",
         "diagram_paths": [],
         "main_path": "",
-        "readme_path": "00-orientation/05-how-starter-folders-work/README.md",
+        "readme_path": "modules/00-orientation/lessons/05-how-starter-folders-work/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -1798,7 +1798,7 @@
         "assets_dir": "",
         "diagram_paths": [],
         "main_path": "",
-        "readme_path": "00-orientation/06-how-assessments-work/README.md",
+        "readme_path": "modules/00-orientation/lessons/06-how-assessments-work/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -1987,7 +1987,7 @@
         "assets_dir": "",
         "diagram_paths": [],
         "main_path": "",
-        "readme_path": "00-orientation/07-how-to-ask-good-debugging-questions/README.md",
+        "readme_path": "modules/00-orientation/lessons/07-how-to-ask-good-debugging-questions/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -2176,7 +2176,7 @@
         "assets_dir": "",
         "diagram_paths": [],
         "main_path": "",
-        "readme_path": "00-orientation/08-what-job-ready-means/README.md",
+        "readme_path": "modules/00-orientation/lessons/08-what-job-ready-means/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -2365,7 +2365,7 @@
         "assets_dir": "",
         "diagram_paths": [],
         "main_path": "",
-        "readme_path": "00-orientation/09-how-to-use-the-roadmap/README.md",
+        "readme_path": "modules/00-orientation/lessons/09-how-to-use-the-roadmap/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -2562,7 +2562,7 @@
         "assets_dir": "",
         "diagram_paths": [],
         "main_path": "",
-        "readme_path": "00-orientation/10-how-to-build-a-portfolio-from-this-curriculum/README.md",
+        "readme_path": "modules/00-orientation/lessons/10-how-to-build-a-portfolio-from-this-curriculum/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -2737,17 +2737,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/01-what-is-a-program",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/01-what-is-a-program",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/01-what-is-a-program/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/01-what-is-a-program/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/01-what-is-a-program/main.go",
-        "readme_path": "01-computers-terminal-git-web/01-what-is-a-program/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/01-what-is-a-program/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/01-what-is-a-program/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/01-what-is-a-program/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/01-what-is-a-program/main_test.go"
       },
       "source_legacy_ids": [
         "HC.1"
@@ -2922,17 +2922,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/02-source-code-executable-and-process",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/02-source-code-executable-and-process",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/02-source-code-executable-and-process/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/02-source-code-executable-and-process/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/02-source-code-executable-and-process/main.go",
-        "readme_path": "01-computers-terminal-git-web/02-source-code-executable-and-process/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/02-source-code-executable-and-process/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/02-source-code-executable-and-process/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/02-source-code-executable-and-process/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/02-source-code-executable-and-process/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -3105,17 +3105,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/03-files-bytes-directories-and-paths",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/03-files-bytes-directories-and-paths/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/03-files-bytes-directories-and-paths/main.go",
-        "readme_path": "01-computers-terminal-git-web/03-files-bytes-directories-and-paths/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/03-files-bytes-directories-and-paths/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -3288,17 +3288,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/04-terminal-basics",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/04-terminal-basics",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/04-terminal-basics/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/04-terminal-basics/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/04-terminal-basics/main.go",
-        "readme_path": "01-computers-terminal-git-web/04-terminal-basics/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/04-terminal-basics/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/04-terminal-basics/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/04-terminal-basics/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/04-terminal-basics/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -3471,17 +3471,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/05-environment-variables",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/05-environment-variables",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/05-environment-variables/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/05-environment-variables/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/05-environment-variables/main.go",
-        "readme_path": "01-computers-terminal-git-web/05-environment-variables/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/05-environment-variables/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/05-environment-variables/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/05-environment-variables/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/05-environment-variables/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -3654,17 +3654,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/06-exit-codes",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/06-exit-codes",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/06-exit-codes/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/06-exit-codes/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/06-exit-codes/main.go",
-        "readme_path": "01-computers-terminal-git-web/06-exit-codes/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/06-exit-codes/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/06-exit-codes/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/06-exit-codes/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/06-exit-codes/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -3837,17 +3837,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/07-how-the-os-manages-processes",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/07-how-the-os-manages-processes",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/07-how-the-os-manages-processes/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/07-how-the-os-manages-processes/main.go",
-        "readme_path": "01-computers-terminal-git-web/07-how-the-os-manages-processes/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/07-how-the-os-manages-processes/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/main_test.go"
       },
       "source_legacy_ids": [
         "HC.5"
@@ -4022,17 +4022,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/08-memory-preview-stack-vs-heap",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/main.go",
-        "readme_path": "01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/main_test.go"
       },
       "source_legacy_ids": [
         "HC.3"
@@ -4207,17 +4207,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/09-git-mental-model",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/09-git-mental-model",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/09-git-mental-model/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/09-git-mental-model/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/09-git-mental-model/main.go",
-        "readme_path": "01-computers-terminal-git-web/09-git-mental-model/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/09-git-mental-model/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/09-git-mental-model/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/09-git-mental-model/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/09-git-mental-model/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -4390,17 +4390,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/10-git-basics-status-add-commit",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/10-git-basics-status-add-commit",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/10-git-basics-status-add-commit/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/10-git-basics-status-add-commit/main.go",
-        "readme_path": "01-computers-terminal-git-web/10-git-basics-status-add-commit/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/10-git-basics-status-add-commit/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -4573,17 +4573,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/11-branching-and-merging",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/11-branching-and-merging",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/11-branching-and-merging/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/11-branching-and-merging/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/11-branching-and-merging/main.go",
-        "readme_path": "01-computers-terminal-git-web/11-branching-and-merging/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/11-branching-and-merging/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/11-branching-and-merging/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/11-branching-and-merging/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/11-branching-and-merging/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -4756,17 +4756,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/12-github-workflow",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/12-github-workflow",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/12-github-workflow/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/12-github-workflow/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/12-github-workflow/main.go",
-        "readme_path": "01-computers-terminal-git-web/12-github-workflow/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/12-github-workflow/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/12-github-workflow/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/12-github-workflow/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/12-github-workflow/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -4939,17 +4939,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/13-pull-requests-and-code-review",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/13-pull-requests-and-code-review",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/13-pull-requests-and-code-review/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/13-pull-requests-and-code-review/main.go",
-        "readme_path": "01-computers-terminal-git-web/13-pull-requests-and-code-review/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/13-pull-requests-and-code-review/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -5122,17 +5122,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/main.go",
-        "readme_path": "01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -5320,17 +5320,17 @@
         ],
         "mode": "manual",
         "race_command": "",
-        "run_command": "go run ./01-computers-terminal-git-web/15-http-request-and-response-preview",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/15-http-request-and-response-preview",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "01-computers-terminal-git-web/15-http-request-and-response-preview/assets",
+        "assets_dir": "modules/01-computers-terminal-git-web/15-http-request-and-response-preview/assets",
         "diagram_paths": [],
-        "main_path": "01-computers-terminal-git-web/15-http-request-and-response-preview/main.go",
-        "readme_path": "01-computers-terminal-git-web/15-http-request-and-response-preview/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/15-http-request-and-response-preview/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/15-http-request-and-response-preview/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "01-computers-terminal-git-web/15-http-request-and-response-preview/main_test.go"
+        "test_path": "modules/01-computers-terminal-git-web/15-http-request-and-response-preview/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -5503,17 +5503,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/01-install-and-verify-go",
+        "run_command": "go run ./modules/02-go-setup-tooling/01-install-and-verify-go",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/01-install-and-verify-go/assets",
+        "assets_dir": "modules/02-go-setup-tooling/01-install-and-verify-go/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/01-install-and-verify-go/main.go",
-        "readme_path": "02-go-setup-tooling/01-install-and-verify-go/README.md",
+        "main_path": "modules/02-go-setup-tooling/01-install-and-verify-go/main.go",
+        "readme_path": "modules/02-go-setup-tooling/01-install-and-verify-go/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/01-install-and-verify-go/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/01-install-and-verify-go/main_test.go"
       },
       "source_legacy_ids": [
         "GT.1"
@@ -5688,17 +5688,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/02-hello-world",
+        "run_command": "go run ./modules/02-go-setup-tooling/02-hello-world",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/02-hello-world/assets",
+        "assets_dir": "modules/02-go-setup-tooling/02-hello-world/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/02-hello-world/main.go",
-        "readme_path": "02-go-setup-tooling/02-hello-world/README.md",
+        "main_path": "modules/02-go-setup-tooling/02-hello-world/main.go",
+        "readme_path": "modules/02-go-setup-tooling/02-hello-world/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/02-hello-world/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/02-hello-world/main_test.go"
       },
       "source_legacy_ids": [
         "GT.2"
@@ -5872,17 +5872,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/03-go-run",
+        "run_command": "go run ./modules/02-go-setup-tooling/03-go-run",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/03-go-run/assets",
+        "assets_dir": "modules/02-go-setup-tooling/03-go-run/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/03-go-run/main.go",
-        "readme_path": "02-go-setup-tooling/03-go-run/README.md",
+        "main_path": "modules/02-go-setup-tooling/03-go-run/main.go",
+        "readme_path": "modules/02-go-setup-tooling/03-go-run/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/03-go-run/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/03-go-run/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -6055,17 +6055,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/04-go-build",
+        "run_command": "go run ./modules/02-go-setup-tooling/04-go-build",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/04-go-build/assets",
+        "assets_dir": "modules/02-go-setup-tooling/04-go-build/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/04-go-build/main.go",
-        "readme_path": "02-go-setup-tooling/04-go-build/README.md",
+        "main_path": "modules/02-go-setup-tooling/04-go-build/main.go",
+        "readme_path": "modules/02-go-setup-tooling/04-go-build/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/04-go-build/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/04-go-build/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -6238,17 +6238,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/05-go-test",
+        "run_command": "go run ./modules/02-go-setup-tooling/05-go-test",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/05-go-test/assets",
+        "assets_dir": "modules/02-go-setup-tooling/05-go-test/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/05-go-test/main.go",
-        "readme_path": "02-go-setup-tooling/05-go-test/README.md",
+        "main_path": "modules/02-go-setup-tooling/05-go-test/main.go",
+        "readme_path": "modules/02-go-setup-tooling/05-go-test/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/05-go-test/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/05-go-test/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -6421,17 +6421,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/06-gofmt",
+        "run_command": "go run ./modules/02-go-setup-tooling/06-gofmt",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/06-gofmt/assets",
+        "assets_dir": "modules/02-go-setup-tooling/06-gofmt/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/06-gofmt/main.go",
-        "readme_path": "02-go-setup-tooling/06-gofmt/README.md",
+        "main_path": "modules/02-go-setup-tooling/06-gofmt/main.go",
+        "readme_path": "modules/02-go-setup-tooling/06-gofmt/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/06-gofmt/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/06-gofmt/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -6604,17 +6604,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/07-go-vet",
+        "run_command": "go run ./modules/02-go-setup-tooling/07-go-vet",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/07-go-vet/assets",
+        "assets_dir": "modules/02-go-setup-tooling/07-go-vet/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/07-go-vet/main.go",
-        "readme_path": "02-go-setup-tooling/07-go-vet/README.md",
+        "main_path": "modules/02-go-setup-tooling/07-go-vet/main.go",
+        "readme_path": "modules/02-go-setup-tooling/07-go-vet/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/07-go-vet/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/07-go-vet/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -6787,17 +6787,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/08-go-doc",
+        "run_command": "go run ./modules/02-go-setup-tooling/08-go-doc",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/08-go-doc/assets",
+        "assets_dir": "modules/02-go-setup-tooling/08-go-doc/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/08-go-doc/main.go",
-        "readme_path": "02-go-setup-tooling/08-go-doc/README.md",
+        "main_path": "modules/02-go-setup-tooling/08-go-doc/main.go",
+        "readme_path": "modules/02-go-setup-tooling/08-go-doc/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/08-go-doc/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/08-go-doc/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -6970,17 +6970,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/09-editor-setup-and-gopls",
+        "run_command": "go run ./modules/02-go-setup-tooling/09-editor-setup-and-gopls",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/09-editor-setup-and-gopls/assets",
+        "assets_dir": "modules/02-go-setup-tooling/09-editor-setup-and-gopls/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/09-editor-setup-and-gopls/main.go",
-        "readme_path": "02-go-setup-tooling/09-editor-setup-and-gopls/README.md",
+        "main_path": "modules/02-go-setup-tooling/09-editor-setup-and-gopls/main.go",
+        "readme_path": "modules/02-go-setup-tooling/09-editor-setup-and-gopls/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/09-editor-setup-and-gopls/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/09-editor-setup-and-gopls/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -7153,17 +7153,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/10-reading-compiler-errors",
+        "run_command": "go run ./modules/02-go-setup-tooling/10-reading-compiler-errors",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/10-reading-compiler-errors/assets",
+        "assets_dir": "modules/02-go-setup-tooling/10-reading-compiler-errors/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/10-reading-compiler-errors/main.go",
-        "readme_path": "02-go-setup-tooling/10-reading-compiler-errors/README.md",
+        "main_path": "modules/02-go-setup-tooling/10-reading-compiler-errors/main.go",
+        "readme_path": "modules/02-go-setup-tooling/10-reading-compiler-errors/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/10-reading-compiler-errors/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/10-reading-compiler-errors/main_test.go"
       },
       "source_legacy_ids": [
         "GT.6"
@@ -7338,17 +7338,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/11-reading-runtime-errors",
+        "run_command": "go run ./modules/02-go-setup-tooling/11-reading-runtime-errors",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/11-reading-runtime-errors/assets",
+        "assets_dir": "modules/02-go-setup-tooling/11-reading-runtime-errors/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/11-reading-runtime-errors/main.go",
-        "readme_path": "02-go-setup-tooling/11-reading-runtime-errors/README.md",
+        "main_path": "modules/02-go-setup-tooling/11-reading-runtime-errors/main.go",
+        "readme_path": "modules/02-go-setup-tooling/11-reading-runtime-errors/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/11-reading-runtime-errors/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/11-reading-runtime-errors/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -7521,17 +7521,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/12-reading-test-failures",
+        "run_command": "go run ./modules/02-go-setup-tooling/12-reading-test-failures",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/12-reading-test-failures/assets",
+        "assets_dir": "modules/02-go-setup-tooling/12-reading-test-failures/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/12-reading-test-failures/main.go",
-        "readme_path": "02-go-setup-tooling/12-reading-test-failures/README.md",
+        "main_path": "modules/02-go-setup-tooling/12-reading-test-failures/main.go",
+        "readme_path": "modules/02-go-setup-tooling/12-reading-test-failures/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/12-reading-test-failures/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/12-reading-test-failures/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -7704,17 +7704,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/13-go-module-root-basics",
+        "run_command": "go run ./modules/02-go-setup-tooling/13-go-module-root-basics",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/13-go-module-root-basics/assets",
+        "assets_dir": "modules/02-go-setup-tooling/13-go-module-root-basics/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/13-go-module-root-basics/main.go",
-        "readme_path": "02-go-setup-tooling/13-go-module-root-basics/README.md",
+        "main_path": "modules/02-go-setup-tooling/13-go-module-root-basics/main.go",
+        "readme_path": "modules/02-go-setup-tooling/13-go-module-root-basics/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/13-go-module-root-basics/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/13-go-module-root-basics/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -7899,17 +7899,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./02-go-setup-tooling/14-tooling-checklist",
+        "run_command": "go run ./modules/02-go-setup-tooling/14-tooling-checklist",
         "test_command": ""
       },
       "files": {
-        "assets_dir": "02-go-setup-tooling/14-tooling-checklist/assets",
+        "assets_dir": "modules/02-go-setup-tooling/14-tooling-checklist/assets",
         "diagram_paths": [],
-        "main_path": "02-go-setup-tooling/14-tooling-checklist/main.go",
-        "readme_path": "02-go-setup-tooling/14-tooling-checklist/README.md",
+        "main_path": "modules/02-go-setup-tooling/14-tooling-checklist/main.go",
+        "readme_path": "modules/02-go-setup-tooling/14-tooling-checklist/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "02-go-setup-tooling/14-tooling-checklist/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/14-tooling-checklist/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -8089,17 +8089,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/01-values-and-expressions",
-        "test_command": "go test ./03-programming-fundamentals/01-values-and-expressions"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/01-values-and-expressions",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/01-values-and-expressions"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/01-values-and-expressions/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/01-values-and-expressions/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/01-values-and-expressions/main.go",
-        "readme_path": "03-programming-fundamentals/01-values-and-expressions/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/01-values-and-expressions/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/01-values-and-expressions/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/01-values-and-expressions/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/01-values-and-expressions/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -8279,17 +8279,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/02-variables",
-        "test_command": "go test ./03-programming-fundamentals/02-variables"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/02-variables",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/02-variables"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/02-variables/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/02-variables/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/02-variables/main.go",
-        "readme_path": "03-programming-fundamentals/02-variables/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/02-variables/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/02-variables/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/02-variables/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/02-variables/main_test.go"
       },
       "source_legacy_ids": [
         "LB.1"
@@ -8471,17 +8471,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/03-types",
-        "test_command": "go test ./03-programming-fundamentals/03-types"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/03-types",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/03-types"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/03-types/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/03-types/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/03-types/main.go",
-        "readme_path": "03-programming-fundamentals/03-types/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/03-types/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/03-types/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/03-types/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/03-types/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -8661,17 +8661,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/04-zero-values",
-        "test_command": "go test ./03-programming-fundamentals/04-zero-values"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/04-zero-values",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/04-zero-values"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/04-zero-values/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/04-zero-values/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/04-zero-values/main.go",
-        "readme_path": "03-programming-fundamentals/04-zero-values/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/04-zero-values/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/04-zero-values/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/04-zero-values/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/04-zero-values/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -8851,17 +8851,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/05-type-conversions",
-        "test_command": "go test ./03-programming-fundamentals/05-type-conversions"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/05-type-conversions",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/05-type-conversions"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/05-type-conversions/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/05-type-conversions/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/05-type-conversions/main.go",
-        "readme_path": "03-programming-fundamentals/05-type-conversions/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/05-type-conversions/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/05-type-conversions/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/05-type-conversions/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/05-type-conversions/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -9041,17 +9041,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/06-constants",
-        "test_command": "go test ./03-programming-fundamentals/06-constants"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/06-constants",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/06-constants"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/06-constants/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/06-constants/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/06-constants/main.go",
-        "readme_path": "03-programming-fundamentals/06-constants/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/06-constants/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/06-constants/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/06-constants/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/06-constants/main_test.go"
       },
       "source_legacy_ids": [
         "LB.2"
@@ -9233,17 +9233,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/07-iota",
-        "test_command": "go test ./03-programming-fundamentals/07-iota"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/07-iota",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/07-iota"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/07-iota/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/07-iota/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/07-iota/main.go",
-        "readme_path": "03-programming-fundamentals/07-iota/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/07-iota/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/07-iota/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/07-iota/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/07-iota/main_test.go"
       },
       "source_legacy_ids": [
         "LB.3"
@@ -9425,17 +9425,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/08-boolean-logic",
-        "test_command": "go test ./03-programming-fundamentals/08-boolean-logic"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/08-boolean-logic",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/08-boolean-logic"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/08-boolean-logic/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/08-boolean-logic/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/08-boolean-logic/main.go",
-        "readme_path": "03-programming-fundamentals/08-boolean-logic/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/08-boolean-logic/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/08-boolean-logic/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/08-boolean-logic/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/08-boolean-logic/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -9615,17 +9615,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/09-if-and-else",
-        "test_command": "go test ./03-programming-fundamentals/09-if-and-else"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/09-if-and-else",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/09-if-and-else"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/09-if-and-else/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/09-if-and-else/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/09-if-and-else/main.go",
-        "readme_path": "03-programming-fundamentals/09-if-and-else/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/09-if-and-else/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/09-if-and-else/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/09-if-and-else/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/09-if-and-else/main_test.go"
       },
       "source_legacy_ids": [
         "CF.1"
@@ -9807,17 +9807,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/10-switch",
-        "test_command": "go test ./03-programming-fundamentals/10-switch"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/10-switch",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/10-switch"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/10-switch/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/10-switch/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/10-switch/main.go",
-        "readme_path": "03-programming-fundamentals/10-switch/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/10-switch/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/10-switch/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/10-switch/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/10-switch/main_test.go"
       },
       "source_legacy_ids": [
         "CF.4"
@@ -9999,17 +9999,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/11-loops",
-        "test_command": "go test ./03-programming-fundamentals/11-loops"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/11-loops",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/11-loops"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/11-loops/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/11-loops/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/11-loops/main.go",
-        "readme_path": "03-programming-fundamentals/11-loops/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/11-loops/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/11-loops/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/11-loops/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/11-loops/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -10189,17 +10189,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/12-range",
-        "test_command": "go test ./03-programming-fundamentals/12-range"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/12-range",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/12-range"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/12-range/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/12-range/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/12-range/main.go",
-        "readme_path": "03-programming-fundamentals/12-range/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/12-range/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/12-range/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/12-range/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/12-range/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -10379,17 +10379,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/13-arrays",
-        "test_command": "go test ./03-programming-fundamentals/13-arrays"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/13-arrays",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/13-arrays"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/13-arrays/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/13-arrays/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/13-arrays/main.go",
-        "readme_path": "03-programming-fundamentals/13-arrays/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/13-arrays/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/13-arrays/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/13-arrays/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/13-arrays/main_test.go"
       },
       "source_legacy_ids": [
         "DS.1"
@@ -10571,17 +10571,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/14-slices",
-        "test_command": "go test ./03-programming-fundamentals/14-slices"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/14-slices",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/14-slices"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/14-slices/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/14-slices/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/14-slices/main.go",
-        "readme_path": "03-programming-fundamentals/14-slices/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/14-slices/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/14-slices/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/14-slices/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/14-slices/main_test.go"
       },
       "source_legacy_ids": [
         "DS.2"
@@ -10762,17 +10762,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/15-slice-length-and-capacity",
-        "test_command": "go test ./03-programming-fundamentals/15-slice-length-and-capacity"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/15-slice-length-and-capacity",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/15-slice-length-and-capacity"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/15-slice-length-and-capacity/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/15-slice-length-and-capacity/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/15-slice-length-and-capacity/main.go",
-        "readme_path": "03-programming-fundamentals/15-slice-length-and-capacity/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/15-slice-length-and-capacity/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/15-slice-length-and-capacity/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/15-slice-length-and-capacity/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/15-slice-length-and-capacity/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -10952,17 +10952,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/16-slice-sharing-and-aliasing",
-        "test_command": "go test ./03-programming-fundamentals/16-slice-sharing-and-aliasing"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/16-slice-sharing-and-aliasing",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/16-slice-sharing-and-aliasing"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/16-slice-sharing-and-aliasing/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/16-slice-sharing-and-aliasing/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/16-slice-sharing-and-aliasing/main.go",
-        "readme_path": "03-programming-fundamentals/16-slice-sharing-and-aliasing/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/16-slice-sharing-and-aliasing/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/16-slice-sharing-and-aliasing/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/16-slice-sharing-and-aliasing/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/16-slice-sharing-and-aliasing/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -11143,17 +11143,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/17-maps",
-        "test_command": "go test ./03-programming-fundamentals/17-maps"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/17-maps",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/17-maps"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/17-maps/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/17-maps/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/17-maps/main.go",
-        "readme_path": "03-programming-fundamentals/17-maps/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/17-maps/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/17-maps/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/17-maps/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/17-maps/main_test.go"
       },
       "source_legacy_ids": [
         "DS.3"
@@ -11335,17 +11335,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/18-comma-ok-idiom",
-        "test_command": "go test ./03-programming-fundamentals/18-comma-ok-idiom"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/18-comma-ok-idiom",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/18-comma-ok-idiom"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/18-comma-ok-idiom/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/18-comma-ok-idiom/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/18-comma-ok-idiom/main.go",
-        "readme_path": "03-programming-fundamentals/18-comma-ok-idiom/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/18-comma-ok-idiom/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/18-comma-ok-idiom/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/18-comma-ok-idiom/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/18-comma-ok-idiom/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -11525,17 +11525,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/19-strings",
-        "test_command": "go test ./03-programming-fundamentals/19-strings"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/19-strings",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/19-strings"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/19-strings/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/19-strings/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/19-strings/main.go",
-        "readme_path": "03-programming-fundamentals/19-strings/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/19-strings/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/19-strings/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/19-strings/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/19-strings/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -11715,17 +11715,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/20-bytes",
-        "test_command": "go test ./03-programming-fundamentals/20-bytes"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/20-bytes",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/20-bytes"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/20-bytes/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/20-bytes/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/20-bytes/main.go",
-        "readme_path": "03-programming-fundamentals/20-bytes/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/20-bytes/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/20-bytes/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/20-bytes/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/20-bytes/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -11905,17 +11905,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/21-runes-and-unicode",
-        "test_command": "go test ./03-programming-fundamentals/21-runes-and-unicode"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/21-runes-and-unicode",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/21-runes-and-unicode"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/21-runes-and-unicode/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/21-runes-and-unicode/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/21-runes-and-unicode/main.go",
-        "readme_path": "03-programming-fundamentals/21-runes-and-unicode/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/21-runes-and-unicode/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/21-runes-and-unicode/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/21-runes-and-unicode/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/21-runes-and-unicode/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -12095,17 +12095,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/22-pointers-as-addresses",
-        "test_command": "go test ./03-programming-fundamentals/22-pointers-as-addresses"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/22-pointers-as-addresses",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/22-pointers-as-addresses"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/22-pointers-as-addresses/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/22-pointers-as-addresses/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/22-pointers-as-addresses/main.go",
-        "readme_path": "03-programming-fundamentals/22-pointers-as-addresses/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/22-pointers-as-addresses/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/22-pointers-as-addresses/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/22-pointers-as-addresses/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/22-pointers-as-addresses/main_test.go"
       },
       "source_legacy_ids": [
         "DS.4"
@@ -12295,17 +12295,17 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./03-programming-fundamentals/23-beginner-pointer-mistakes",
-        "test_command": "go test ./03-programming-fundamentals/23-beginner-pointer-mistakes"
+        "run_command": "go run ./modules/03-programming-fundamentals/lessons/23-beginner-pointer-mistakes",
+        "test_command": "go test ./modules/03-programming-fundamentals/lessons/23-beginner-pointer-mistakes"
       },
       "files": {
-        "assets_dir": "03-programming-fundamentals/23-beginner-pointer-mistakes/assets",
+        "assets_dir": "modules/03-programming-fundamentals/lessons/23-beginner-pointer-mistakes/assets",
         "diagram_paths": [],
-        "main_path": "03-programming-fundamentals/23-beginner-pointer-mistakes/main.go",
-        "readme_path": "03-programming-fundamentals/23-beginner-pointer-mistakes/README.md",
+        "main_path": "modules/03-programming-fundamentals/lessons/23-beginner-pointer-mistakes/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/23-beginner-pointer-mistakes/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "03-programming-fundamentals/23-beginner-pointer-mistakes/main_test.go"
+        "test_path": "modules/03-programming-fundamentals/lessons/23-beginner-pointer-mistakes/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
