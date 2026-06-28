@@ -2618,6 +2618,120 @@
       }
     },
     {
+      "id": "assessment-project-tooling-failure-lab",
+      "title": "Assessment - Tooling Failure Lab",
+      "type": "project-review",
+      "status": "draft",
+      "target_ids": [
+        "project-tooling-failure-lab"
+      ],
+      "purpose": "Evaluate the Tooling Failure Lab project submission.",
+      "criteria": [
+        {
+          "id": "project-tooling-failure-lab-correctness",
+          "title": "Correctness",
+          "weight": 35,
+          "levels": [
+            {
+              "score": 0,
+              "description": "Incorrect or missing implementation."
+            },
+            {
+              "score": 3,
+              "description": "Partially correct with minor issues."
+            },
+            {
+              "score": 5,
+              "description": "Fully correct implementation."
+            }
+          ]
+        },
+        {
+          "id": "project-tooling-failure-lab-quality",
+          "title": "Diagnostic quality",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No diagnostic approach demonstrated."
+            },
+            {
+              "score": 3,
+              "description": "Some diagnostic steps with gaps."
+            },
+            {
+              "score": 5,
+              "description": "Systematic diagnostic approach: run tool, read error, identify cause, apply fix, verify."
+            }
+          ]
+        },
+        {
+          "id": "project-tooling-failure-lab-proof",
+          "title": "Proof",
+          "weight": 25,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No proof provided."
+            },
+            {
+              "score": 3,
+              "description": "Partial proof."
+            },
+            {
+              "score": 5,
+              "description": "TROUBLESHOOTING.md documents all failures with verification output."
+            }
+          ]
+        },
+        {
+          "id": "project-tooling-failure-lab-communication",
+          "title": "Communication",
+          "weight": 15,
+          "levels": [
+            {
+              "score": 0,
+              "description": "No explanation."
+            },
+            {
+              "score": 3,
+              "description": "Basic explanation."
+            },
+            {
+              "score": 5,
+              "description": "Clear, professional explanation of diagnostic process and tool usage."
+            }
+          ]
+        }
+      ],
+      "passing_score": 80,
+      "evidence_required": [
+        "Completed Tooling Failure Lab with all fixes",
+        "TROUBLESHOOTING.md",
+        "Tooling verification output"
+      ],
+      "automated_checks": [
+        "go run ./...",
+        "go test ./...",
+        "gofmt -l .",
+        "go vet ./..."
+      ],
+      "manual_review_questions": [
+        "Can the learner explain each tooling failure and how they diagnosed it?",
+        "Does the troubleshooting document cover all failures with root cause and fix?",
+        "Can the learner explain the Go compilation pipeline from source to binary?",
+        "Does the learner understand when to use go run vs go build vs go install?"
+      ],
+      "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
+      "documentation_mode": "assessment",
+      "readme_status": "scaffolded",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      }
+    },
+    {
       "id": "assessment-project-course-setup",
       "title": "Assessment - Course Setup Verification",
       "type": "project-review",
