@@ -35,34 +35,40 @@ A double panic (panic inside a deferred function during unwinding) is detected b
 
 ## How Go uses it
 
-```go
-// HTTP recovery middleware (net/http server already does this)
-func recoveryMiddleware(next http.Handler) http.Handler {
-    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        defer func() {
-            if err := recover(); err != nil {
-                http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-                log.Printf("panic recovered: %v", err)
-            }
-        }()
-        next.ServeHTTP(w, r)
-    })
-}
+Reliable programs use `recover` sparingly, in two specific patterns:
 
-// Per-item recovery in batch processing
-func processBatch(items []Item) {
+**Pattern 1 — Isolate panicking operations in batch processing.** Each item runs in its own closure so a panic in one item does not abort the entire batch:
+
+```go
+func processItems(items []string) []string {
+    var results []string
     for _, item := range items {
-        func() {
+        func(item string) {
             defer func() {
                 if err := recover(); err != nil {
-                    log.Printf("skipping item %v due to panic: %v", item, err)
+                    fmt.Printf("skipping %q due to panic: %v\n", item, err)
                 }
             }()
-            processItem(item) // may panic
-        }()
+            results = append(results, transform(item))
+        }(item)
     }
+    return results
 }
 ```
+
+**Pattern 2 — Convert panics to errors at API boundaries.** A public function catches panics from internal code and returns them as standard errors:
+
+```go
+func SafeWrite(path string, data []byte) (err error) {
+    defer func() {
+        if r := recover(); r != nil {
+            err = fmt.Errorf("write panic: %v", r)
+        }
+    }()
+    return os.WriteFile(path, data, 0644)
+}
+```
+
 
 ## Go example
 

@@ -14,7 +14,9 @@ Think of error wrapping as nesting Russian dolls. Each `fmt.Errorf("context: %w"
 
 ## Core idea
 
-Go 1.13 introduced error wrapping through the `fmt.Errorf` `%w` verb and the `errors.Unwrap` function. The `%w` verb creates a wrapped error that implements the `Unwrap() error` interface. This lets callers:
+Go 1.13 introduced error wrapping through the `fmt.Errorf` `%w` verb and the `errors.Unwrap` function. The `%w` verb creates a wrapped error that implements the `Unwrap() error` interface.
+
+Once an error is wrapped, you cannot use `==` to compare it against a sentinel — the wrapped error is a different value. Instead, `errors.Is(err, target)` walks the entire error chain calling `Unwrap` at each level and checks if any error in the chain matches the target. This lets callers:
 
 1. **Read the chain** -- `err.Error()` prints all levels with `:` separators.
 2. **Check the chain** -- `errors.Is(err, sentinel)` walks the chain matching values.

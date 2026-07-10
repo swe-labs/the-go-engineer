@@ -36,12 +36,15 @@ func parseInt(s string) (int, error) {
 }
 ```
 
+The `strconv` package provides conversions between strings and numeric types. `strconv.Atoi` (short for "ASCII to integer") parses a string like `"42"` into an `int`. It returns `(int, error)` — if the string is not a valid number, the error is non-nil.
+
 The caller checks the error immediately:
 
 ```go
 n, err := parseInt("42")
 if err != nil {
-    log.Fatal(err)
+    fmt.Println("error:", err)
+    return
 }
 fmt.Println(n)
 ```
