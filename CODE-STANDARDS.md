@@ -67,7 +67,7 @@ gofmt -w .
 CI checks formatting with:
 
 ```bash
-unformatted=$(gofmt -l .)
+unformatted=$(gofmt -l . | grep -v '_starter' || true)
 test -z "$unformatted"
 ```
 
@@ -306,7 +306,7 @@ Before final review:
 ```bash
 go build ./...
 go vet ./...
-unformatted=$(gofmt -l .); test -z "$unformatted" || (echo "$unformatted" && exit 1)
+unformatted=$(gofmt -l . | grep -v '_starter' || true); test -z "$unformatted" || (echo "$unformatted" && exit 1)
 go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...

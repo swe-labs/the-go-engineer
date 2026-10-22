@@ -20,8 +20,9 @@ jobs:
 
       - name: Format Check
         run: |
-          unformatted=$(gofmt -l .)
+          unformatted=$(gofmt -l . | grep -v '_starter' || true)
           if [ -n "$unformatted" ]; then
+            echo "Unformatted files:"
             echo "$unformatted"
             exit 1
           fi

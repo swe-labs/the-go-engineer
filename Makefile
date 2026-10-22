@@ -48,14 +48,15 @@ vet: ## Run go vet
 	go vet ./...
 	@echo "Vet passed"
 
-fmt: ## Format all Go files
+fmt: ## Format all Go files (excluding starter code)
 	@echo "Formatting code..."
-	gofmt -w .
+	@find . -name "*.go" -not -path "*/_starter/*" -exec gofmt -w {} + 2>/dev/null || gofmt -w .
 	@echo "Formatted"
 
-fmt-check: ## Check formatting without writing files
+fmt-check: ## Check formatting without writing files (excluding starter code)
 	@echo "Checking formatting..."
-	@test -z "$$(gofmt -l .)" || (echo "Unformatted files:" && gofmt -l . && exit 1)
+	@unformatted="$$(gofmt -l . | grep -v '_starter' || true)"; \
+	test -z "$$unformatted" || (echo "Unformatted files:" && echo "$$unformatted" && exit 1)
 	@echo "All files formatted"
 
 lint: vet fmt-check ## Run vet and format check
