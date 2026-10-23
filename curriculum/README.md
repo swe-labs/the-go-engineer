@@ -810,7 +810,7 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 
 # Cross-References
 
-Total cross-references: **2097**
+Total cross-references: **2094**
 
 ### Style Rules
 
@@ -827,8 +827,8 @@ Total cross-references: **2097**
 | ------------- | ----- | ----------- |
 | related       | 944   | Bidirectional conceptual links between related lessons |
 | builds_on     | 592   | Strict directional pedagogical prerequisites |
-| reinforced_in | 527   | Practical application links to projects and labs |
-| preview_only  | 34    | Early mental-model previews developed fully later |
+| reinforced_in | 512   | Practical application links to projects and labs |
+| preview_only  | 46    | Early mental-model previews developed fully later |
 
 ---
 

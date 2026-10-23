@@ -3115,7 +3115,7 @@
       "documentation_mode": "project",
       "id": "project-concurrent-downloader",
       "module_id": "module-11",
-      "order": 16,
+      "order": 18,
       "placement_anchor_item_id": "core-11-28",
       "portfolio": {
         "architecture_defense_required": false,
@@ -3280,7 +3280,7 @@
       "source_legacy_ids": [],
       "stage": "concurrency",
       "status": "draft",
-      "summary": "Build a concurrent file downloader using goroutines, channels, and error propagation.",
+      "summary": "Advanced concurrency extension: implement a chunked multi-part file downloader with HTTP Range requests, retry backoff, progress tracking, and stream re-assembly.",
       "tasks": [
         {
           "done_when": [
@@ -3517,7 +3517,7 @@
       "source_legacy_ids": [],
       "stage": "concurrency",
       "status": "draft",
-      "summary": "Implement a URL health checker that concurrently monitors endpoints and reports status changes.",
+      "summary": "Applied concurrency project: build a concurrent HTTP health check probe utilizing the bounded worker pool pattern to query URL endpoints with timeout control and error collection.",
       "tasks": [
         {
           "done_when": [
@@ -3589,7 +3589,7 @@
       "documentation_mode": "project",
       "id": "project-bounded-worker-pool",
       "module_id": "module-11",
-      "order": 18,
+      "order": 16,
       "placement_anchor_item_id": "core-11-28",
       "portfolio": {
         "architecture_defense_required": false,
@@ -3754,7 +3754,7 @@
       "source_legacy_ids": [],
       "stage": "concurrency",
       "status": "draft",
-      "summary": "Build a bounded worker pool that processes jobs concurrently with configurable parallelism and graceful shutdown.",
+      "summary": "Foundational concurrency mini-project: implement channel-based worker synchronization with fixed worker counts, graceful cancellation, and panic containment.",
       "tasks": [
         {
           "done_when": [
@@ -3967,7 +3967,7 @@
       "source_legacy_ids": [],
       "stage": "reliability",
       "status": "draft",
-      "summary": "Build a PII redaction service with structured logging, error tracking, and observability instrumentation.",
+      "summary": "Build a privacy-preserving log redactor that masks sensitive PII attributes (emails, credit cards, SSNs) before structured logs are shipped to collectors.",
       "tasks": [
         {
           "done_when": [

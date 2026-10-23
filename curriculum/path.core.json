@@ -1698,6 +1698,13 @@
             "reason": "Preview of What is a program? from Computers, Terminal, Git, and the Web.",
             "required": false,
             "target_id": "core-01-01"
+          },
+          {
+            "display_text": "Module 16.01 — Portfolio strategy",
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Establishes portfolio curation expectations during orientation, connecting forward to the final portfolio packaging and interview defense in Module 16.",
+            "required": false,
+            "target_id": "core-16-01"
           }
         ],
         "reinforced_in": [
@@ -2988,7 +2995,15 @@
             "target_id": "core-01-05"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Module 15.01 — Linux processes",
+            "label": "Module 15.01 — Linux processes",
+            "reason": "Introduces foundational OS process concepts (PIDs, scheduling, lifecycle) that are applied in production Linux containers and signals in Module 15.",
+            "required": false,
+            "target_id": "core-15-01"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project — Shell Git Lab",
@@ -3173,7 +3188,22 @@
             "target_id": "core-01-06"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Module 13.05 — Escape analysis",
+            "label": "Module 13.05 — Escape analysis",
+            "reason": "Previews stack frames and heap allocation models before formal compiler escape analysis in Module 13.",
+            "required": false,
+            "target_id": "core-13-05"
+          },
+          {
+            "display_text": "Module 13.06 — Memory layout",
+            "label": "Module 13.06 — Memory layout",
+            "reason": "Previews contiguous memory and pointer indirection before detailed struct alignment and cache-line engineering in Module 13.",
+            "required": false,
+            "target_id": "core-13-06"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project — Shell Git Lab",
@@ -6855,7 +6885,15 @@
             "target_id": "core-02-11"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Module 05.18 — Modules",
+            "label": "Module 05.18 — Modules",
+            "reason": "Introduces basic project root layout and go.mod initialization before deep semantic module versioning and dependency resolution in Module 05.",
+            "required": false,
+            "target_id": "core-05-18"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project — Tooling Failure Lab",
@@ -11239,7 +11277,15 @@
             "target_id": "core-03-20"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Module 04.07 — Passing by value",
+            "label": "Module 04.07 — Passing by value",
+            "reason": "Connects physical memory addressing and nil dereference pitfalls to Go calling conventions and pass-by-value semantics.",
+            "required": false,
+            "target_id": "core-04-07"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project — Pricing Checkout",
@@ -11438,6 +11484,13 @@
             "reason": "Preview of Function basics from Functions, Errors, and Data Semantics.",
             "required": false,
             "target_id": "core-04-01"
+          },
+          {
+            "display_text": "Module 04.08 — Pointer and value mutation behavior",
+            "label": "Module 04.08 — Pointer and value mutation behavior",
+            "reason": "Connects beginner pointer bugs directly to pointer vs value receiver mutation rules.",
+            "required": false,
+            "target_id": "core-04-08"
           }
         ],
         "reinforced_in": [
@@ -27133,7 +27186,22 @@
             "target_id": "core-07-15"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Module 15.14 — Configuration in deployment",
+            "label": "Module 15.14 — Configuration in deployment",
+            "reason": "Distinguishes local Twelve-Factor development environment variables from production deployment configuration injection.",
+            "required": false,
+            "target_id": "core-15-14"
+          },
+          {
+            "display_text": "Module 15.15 — Secrets in deployment",
+            "label": "Module 15.15 — Secrets in deployment",
+            "reason": "Distinguishes plaintext configuration values from production secret rotation and vault management disciplines.",
+            "required": false,
+            "target_id": "core-15-15"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project — File Organizer",
@@ -28158,7 +28226,15 @@
             "target_id": "core-07-20"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Module 10.06 — CORS",
+            "label": "Module 10.06 — CORS",
+            "reason": "Connects HTTP request/response headers to browser cross-origin resource sharing security enforcement.",
+            "required": false,
+            "target_id": "core-10-06"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project — Book Catalog Rest Api",
@@ -45821,7 +45897,15 @@
             "target_id": "core-11-18"
           }
         ],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Module 14.11 — Retries and idempotent consumers",
+            "label": "Module 14.11 — Retries and idempotent consumers",
+            "reason": "Progresses from single-process channel cancellation to distributed retry policies, exponential backoff, jitter, and idempotency keys.",
+            "required": false,
+            "target_id": "core-14-11"
+          }
+        ],
         "reinforced_in": [
           {
             "display_text": "Project — Concurrent Downloader",
@@ -50507,7 +50591,15 @@
       },
       "crossrefs": {
         "builds_on": [],
-        "preview_only": [],
+        "preview_only": [
+          {
+            "display_text": "Module 14.14 — Caching architecture",
+            "label": "Module 14.14 — Caching architecture",
+            "reason": "Connects in-memory single-process cache mechanics to distributed Redis cache-aside topology, stampede mitigation, and tenant key isolation.",
+            "required": false,
+            "target_id": "core-14-14"
+          }
+        ],
         "reinforced_in": [],
         "related": []
       },

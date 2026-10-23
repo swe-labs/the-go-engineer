@@ -15801,15 +15801,6 @@
       {
         "from_id": "core-12-06",
         "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Metrics concepts in a practical implementation.",
-        "required": true
-      },
-      {
-        "from_id": "core-12-06",
-        "relation": "reinforced_in",
         "to_id": "project-observability-retrofit",
         "target_id": "project-observability-retrofit",
         "label": "Project — Observability Retrofit",
@@ -15868,15 +15859,6 @@
         "target_id": "core-12-05",
         "label": "Module 12.05 — PII redaction",
         "reason": "Prometheus extends directly from PII redaction.",
-        "required": true
-      },
-      {
-        "from_id": "core-12-07",
-        "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Prometheus concepts in a practical implementation.",
         "required": true
       },
       {
@@ -15954,15 +15936,6 @@
       {
         "from_id": "core-12-08",
         "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Tracing concepts in a practical implementation.",
-        "required": true
-      },
-      {
-        "from_id": "core-12-08",
-        "relation": "reinforced_in",
         "to_id": "project-observability-retrofit",
         "target_id": "project-observability-retrofit",
         "label": "Project — Observability Retrofit",
@@ -16021,15 +15994,6 @@
         "target_id": "core-12-07",
         "label": "Module 12.07 — Prometheus",
         "reason": "OpenTelemetry extends directly from Prometheus.",
-        "required": true
-      },
-      {
-        "from_id": "core-12-09",
-        "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies OpenTelemetry concepts in a practical implementation.",
         "required": true
       },
       {
@@ -16116,15 +16080,6 @@
       {
         "from_id": "core-12-10",
         "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Alerting mindset concepts in a practical implementation.",
-        "required": true
-      },
-      {
-        "from_id": "core-12-10",
-        "relation": "reinforced_in",
         "to_id": "project-observability-retrofit",
         "target_id": "project-observability-retrofit",
         "label": "Project — Observability Retrofit",
@@ -16183,15 +16138,6 @@
         "target_id": "core-12-09",
         "label": "Module 12.09 — OpenTelemetry",
         "reason": "Incident debugging extends directly from OpenTelemetry.",
-        "required": true
-      },
-      {
-        "from_id": "core-12-11",
-        "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Incident debugging concepts in a practical implementation.",
         "required": true
       },
       {
@@ -16278,15 +16224,6 @@
       {
         "from_id": "core-12-12",
         "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Reliability review concepts in a practical implementation.",
-        "required": true
-      },
-      {
-        "from_id": "core-12-12",
-        "relation": "reinforced_in",
         "to_id": "project-observability-retrofit",
         "target_id": "project-observability-retrofit",
         "label": "Project — Observability Retrofit",
@@ -16345,15 +16282,6 @@
         "target_id": "core-12-12",
         "label": "Module 12.12 — Reliability review",
         "reason": "Architecture and Distributed Systems relies on foundational concepts from Observability and Diagnostics.",
-        "required": true
-      },
-      {
-        "from_id": "core-14-10",
-        "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Queues concepts in a practical implementation.",
         "required": true
       },
       {
@@ -16431,15 +16359,6 @@
       {
         "from_id": "core-14-11",
         "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Retries and idempotent consumers concepts in a practical implementation.",
-        "required": true
-      },
-      {
-        "from_id": "core-14-11",
-        "relation": "reinforced_in",
         "to_id": "project-observability-retrofit",
         "target_id": "project-observability-retrofit",
         "label": "Project — Observability Retrofit",
@@ -16498,15 +16417,6 @@
         "target_id": "core-12-12",
         "label": "Module 12.12 — Reliability review",
         "reason": "Architecture and Distributed Systems relies on foundational concepts from Observability and Diagnostics.",
-        "required": true
-      },
-      {
-        "from_id": "core-14-12",
-        "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Payment workflow design concepts in a practical implementation.",
         "required": true
       },
       {
@@ -16584,15 +16494,6 @@
       {
         "from_id": "core-14-13",
         "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Multi-tenancy architecture concepts in a practical implementation.",
-        "required": true
-      },
-      {
-        "from_id": "core-14-13",
-        "relation": "reinforced_in",
         "to_id": "project-observability-retrofit",
         "target_id": "project-observability-retrofit",
         "label": "Project — Observability Retrofit",
@@ -16651,15 +16552,6 @@
         "target_id": "core-12-12",
         "label": "Module 12.12 — Reliability review",
         "reason": "Architecture and Distributed Systems relies on foundational concepts from Observability and Diagnostics.",
-        "required": true
-      },
-      {
-        "from_id": "core-14-14",
-        "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Caching architecture concepts in a practical implementation.",
         "required": true
       },
       {
@@ -16737,15 +16629,6 @@
       {
         "from_id": "core-14-15",
         "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies When to split services concepts in a practical implementation.",
-        "required": true
-      },
-      {
-        "from_id": "core-14-15",
-        "relation": "reinforced_in",
         "to_id": "project-observability-retrofit",
         "target_id": "project-observability-retrofit",
         "label": "Project — Observability Retrofit",
@@ -16804,15 +16687,6 @@
         "target_id": "core-14-14",
         "label": "Module 14.14 — Caching architecture",
         "reason": "Microservices as a tradeoff, not a default extends directly from Caching architecture.",
-        "required": true
-      },
-      {
-        "from_id": "core-14-16",
-        "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Microservices as a tradeoff, not a default concepts in a practical implementation.",
         "required": true
       },
       {
@@ -16895,15 +16769,6 @@
         "label": "Module 15.01 — Linux processes",
         "reason": "Preview of Linux processes from Docker, CI/CD, and Deployment.",
         "required": false
-      },
-      {
-        "from_id": "core-14-17",
-        "relation": "reinforced_in",
-        "to_id": "project-pii-redactor",
-        "target_id": "project-pii-redactor",
-        "label": "Project — Pii Redactor",
-        "reason": "This project applies Architecture decision records concepts in a practical implementation.",
-        "required": true
       },
       {
         "from_id": "core-14-17",
@@ -18929,6 +18794,114 @@
         "label": "Project — Bank Account",
         "reason": "Bank Account reinforces generic data structures and type safety.",
         "required": true
+      },
+      {
+        "from_id": "core-01-07",
+        "relation": "preview_only",
+        "to_id": "core-15-01",
+        "target_id": "core-15-01",
+        "label": "Module 15.01 — Linux processes",
+        "reason": "Introduces foundational OS process concepts (PIDs, scheduling, lifecycle) that are applied in production Linux containers and signals in Module 15.",
+        "required": false
+      },
+      {
+        "from_id": "core-01-08",
+        "relation": "preview_only",
+        "to_id": "core-13-05",
+        "target_id": "core-13-05",
+        "label": "Module 13.05 — Escape analysis",
+        "reason": "Previews stack frames and heap allocation models before formal compiler escape analysis in Module 13.",
+        "required": false
+      },
+      {
+        "from_id": "core-01-08",
+        "relation": "preview_only",
+        "to_id": "core-13-06",
+        "target_id": "core-13-06",
+        "label": "Module 13.06 — Memory layout",
+        "reason": "Previews contiguous memory and pointer indirection before detailed struct alignment and cache-line engineering in Module 13.",
+        "required": false
+      },
+      {
+        "from_id": "core-02-13",
+        "relation": "preview_only",
+        "to_id": "core-05-18",
+        "target_id": "core-05-18",
+        "label": "Module 05.18 — Modules",
+        "reason": "Introduces basic project root layout and go.mod initialization before deep semantic module versioning and dependency resolution in Module 05.",
+        "required": false
+      },
+      {
+        "from_id": "core-03-22",
+        "relation": "preview_only",
+        "to_id": "core-04-07",
+        "target_id": "core-04-07",
+        "label": "Module 04.07 — Passing by value",
+        "reason": "Connects physical memory addressing and nil dereference pitfalls to Go calling conventions and pass-by-value semantics.",
+        "required": false
+      },
+      {
+        "from_id": "core-03-23",
+        "relation": "preview_only",
+        "to_id": "core-04-08",
+        "target_id": "core-04-08",
+        "label": "Module 04.08 — Pointer and value mutation behavior",
+        "reason": "Connects beginner pointer bugs directly to pointer vs value receiver mutation rules.",
+        "required": false
+      },
+      {
+        "from_id": "core-07-17",
+        "relation": "preview_only",
+        "to_id": "core-15-14",
+        "target_id": "core-15-14",
+        "label": "Module 15.14 — Configuration in deployment",
+        "reason": "Distinguishes local Twelve-Factor development environment variables from production deployment configuration injection.",
+        "required": false
+      },
+      {
+        "from_id": "core-07-17",
+        "relation": "preview_only",
+        "to_id": "core-15-15",
+        "target_id": "core-15-15",
+        "label": "Module 15.15 — Secrets in deployment",
+        "reason": "Distinguishes plaintext configuration values from production secret rotation and vault management disciplines.",
+        "required": false
+      },
+      {
+        "from_id": "core-11-20",
+        "relation": "preview_only",
+        "to_id": "core-14-11",
+        "target_id": "core-14-11",
+        "label": "Module 14.11 — Retries and idempotent consumers",
+        "reason": "Progresses from single-process channel cancellation to distributed retry policies, exponential backoff, jitter, and idempotency keys.",
+        "required": false
+      },
+      {
+        "from_id": "core-13-07",
+        "relation": "preview_only",
+        "to_id": "core-14-14",
+        "target_id": "core-14-14",
+        "label": "Module 14.14 — Caching architecture",
+        "reason": "Connects in-memory single-process cache mechanics to distributed Redis cache-aside topology, stampede mitigation, and tenant key isolation.",
+        "required": false
+      },
+      {
+        "from_id": "core-00-10",
+        "relation": "preview_only",
+        "to_id": "core-16-01",
+        "target_id": "core-16-01",
+        "label": "Module 16.01 — Portfolio strategy",
+        "reason": "Establishes portfolio curation expectations during orientation, connecting forward to the final portfolio packaging and interview defense in Module 16.",
+        "required": false
+      },
+      {
+        "from_id": "core-08-01",
+        "relation": "preview_only",
+        "to_id": "core-10-06",
+        "target_id": "core-10-06",
+        "label": "Module 10.06 — CORS",
+        "reason": "Connects HTTP request/response headers to browser cross-origin resource sharing security enforcement.",
+        "required": false
       }
     ],
     "style_rules": {
