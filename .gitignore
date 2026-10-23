@@ -47,6 +47,8 @@ uploads/
 
 # OpenCode
 .opencode/
+opencode/
+opencode.json
 
 .cache/
 
