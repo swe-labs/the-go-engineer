@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"errors"
-	"math/rand"
 	"testing"
 	"time"
 )
@@ -24,12 +23,16 @@ func TestRetryWithBackoff(t *testing.T) {
 		{
 			name:        "succeeds after retry",
 			maxAttempts: 5,
-			fn: func(ctx context.Context) error {
-				if rand.Intn(100) < 50 {
-					return errors.New("transient")
+			fn: func() func(ctx context.Context) error {
+				attempts := 0
+				return func(ctx context.Context) error {
+					attempts++
+					if attempts < 2 {
+						return errors.New("transient")
+					}
+					return nil
 				}
-				return nil
-			},
+			}(),
 			wantErr: false,
 		},
 		{
