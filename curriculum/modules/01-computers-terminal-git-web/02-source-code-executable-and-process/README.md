@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply Source code, executable, and process in the context of professional Go software engineering.
+Trace how the CPU fetches, decodes, and executes compiled machine instructions from system memory.
 
 ## Why this matters
 
@@ -10,7 +10,10 @@ Beginners conflate the static file they write with the dynamic process that runs
 
 ## Mental model
 
-Hello World is the minimal Go program: a package declaration, an import, and a main function calling fmt.Println. go run compiles and executes in one step. Every Go program starts with package main and func main.
+Think of the execution pipeline as a manufacturing plant:
+- **Source Code is the blueprint:** Written by software engineers, versioned in Git, checked by linters, and structured for human readability.
+- **Executable Binary is the machine tooling:** The compiler translates high-level constructs into fixed architecture-specific machine byte sequences (ELF on Linux, Mach-O on macOS, PE on Windows).
+- **Process is the live assembly line:** When you execute `./app`, the OS loader maps binary segments into private virtual RAM pages, allocates stack and heap, assigns a Process ID (PID), and points the CPU instruction register to the program's entry point to execute machine cycles.
 
 ## Core idea
 

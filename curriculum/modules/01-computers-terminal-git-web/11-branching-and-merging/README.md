@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply branching and merging in the context of professional Go software engineering.
+Create, switch, and merge Git branches, resolving merge conflicts and inspecting commit DAG ancestry with git log.
 
 ## Why this matters
 

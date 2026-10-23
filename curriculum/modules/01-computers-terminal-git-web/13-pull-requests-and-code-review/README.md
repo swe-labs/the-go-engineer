@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply pull requests and code review in the context of professional Go software engineering.
+Author professional GitHub Pull Requests, review peer diffs, and address code review feedback iteratively.
 
 ## Why this matters
 

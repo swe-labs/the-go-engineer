@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply Files, bytes, directories, and paths in the context of professional Go software engineering.
+Inspect filesystem hierarchies, file descriptors, binary byte representations, and absolute vs relative paths.
 
 ## Why this matters
 
@@ -10,7 +10,10 @@ Files are the fundamental storage abstraction in every OS. Without understanding
 
 ## Mental model
 
-Go compiles to a native binary with no VM. The compiler type-checks, inlines, escapes-analyzes, and optimises before producing a static binary. This gives Go fast startup and simple deployment.
+At the physical hardware layer, storage drives only store raw 8-bit bytes (0–255) grouped into sectors. The operating system filesystem overlays this raw storage with three fundamental abstractions:
+- **Files (Named Byte Streams):** An arbitrary sequence of bytes associated with metadata (inode/file record, size, permissions, timestamps).
+- **Directories (Name-to-Location Tables):** Specialized files whose content is a mapping of human-readable file names to filesystem node identifiers.
+- **Paths (Navigation Coordinates):** Absolute paths anchor navigation to the root (`/` on Unix, `C:\` on Windows). Relative paths resolve coordinates starting from the calling process's current working directory (CWD).
 
 ## Core idea
 

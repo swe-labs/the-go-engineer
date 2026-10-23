@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply How the OS manages processes in the context of professional Go software engineering.
+Analyze operating system process scheduling, virtual memory isolation, PID tracking, and process states (running, waiting, terminated).
 
 ## Why this matters
 

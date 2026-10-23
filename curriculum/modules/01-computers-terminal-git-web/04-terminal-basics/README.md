@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply Terminal basics in the context of professional Go software engineering.
+Navigate the shell, execute commands, manipulate file streams via redirection and piping, and inspect process exit statuses in the terminal.
 
 ## Why this matters
 
@@ -10,7 +10,11 @@ New developers face the terminal with anxiety because every error looks like ran
 
 ## Mental model
 
-A development environment pairs an editor with Go support, a terminal, Go tooling, and version control. The integrated terminal runs go build, go test, go fmt, and git without switching contexts.
+The terminal emulator is an interactive text interface connected to a command-line interpreter (the shell, e.g., Bash, Zsh, PowerShell). The shell operates in an infinite REPL loop:
+1. **Read:** Accepts a line of typed input from the user.
+2. **Parse & Resolve:** Tokenizes the command string, expands environment variables and wildcards, and searches the paths listed in `$PATH` for a matching executable.
+3. **Spawn & Connect:** Spawns a child process and attaches the three standard I/O streams: standard input (`stdin`, fd 0), standard output (`stdout`, fd 1), and standard error (`stderr`, fd 2).
+4. **Wait:** Pauses until execution finishes, collecting the child process's integer exit code.
 
 ## Core idea
 

@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply Exit codes in the context of professional Go software engineering.
+Evaluate process exit codes (0 for success, non-zero for failure) to construct robust shell script error handling and CI pipelines.
 
 ## Why this matters
 
@@ -10,7 +10,10 @@ Programs need a simple, universal way to signal success or failure to their call
 
 ## Mental model
 
-Compiler errors tell you exactly what is wrong and where. Read them from bottom to top: the last line is the root cause. Learning to read errors without panic is the highest-leverage skill for a new Go developer.
+When a process terminates, the operating system kernel accepts an integer exit status (0–255 on POSIX):
+- **Exit Code 0:** Universally signifies success ("completed without errors").
+- **Non-Zero (1–255):** Indicates an error, abnormal termination, or specific failure condition.
+- **Automation Contract:** CI/CD runners, shells, and orchestrators do not inspect console text; they rely strictly on the numeric exit status to decide whether a pipeline step succeeded or failed.
 
 ## Core idea
 

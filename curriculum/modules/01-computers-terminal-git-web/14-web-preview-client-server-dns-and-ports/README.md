@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply web preview: client, server, DNS, and ports in the context of professional Go software engineering.
+Trace the client-server architecture of the Web, resolving domain names via DNS and connecting over TCP ports.
 
 ## Why this matters
 

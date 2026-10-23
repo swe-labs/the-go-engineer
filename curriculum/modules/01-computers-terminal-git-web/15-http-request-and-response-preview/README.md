@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply HTTP request and response preview in the context of professional Go software engineering.
+Deconstruct HTTP requests and responses, inspecting request methods, URL paths, headers, status codes, and message bodies.
 
 ## Why this matters
 

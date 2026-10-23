@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply Environment variables in the context of professional Go software engineering.
+Read, set, and inherit environment variables across parent and child processes in POSIX and Windows environments.
 
 ## Why this matters
 
@@ -10,7 +10,10 @@ Applications need configuration that differs between development, testing, and p
 
 ## Mental model
 
-The Go toolchain includes build, test, fmt, vet, mod, and run. Each tool serves a specific purpose. Learning them replaces the need for complex build systems or task runners.
+Environment variables form a string-to-string dictionary (`KEY=VALUE`) stored by the OS kernel in the private address space of every process:
+- **Process Scope:** Every running process maintains its own independent environment block.
+- **One-Way Inheritance:** When a parent process spawns a child process, the operating system copies a snapshot of the parent's environment block into the child.
+- **Strict Isolation:** Changes made to environment variables by the child process cannot alter the parent process or sibling processes. Modifying a variable in a running application does not change the parent shell.
 
 ## Core idea
 

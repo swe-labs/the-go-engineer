@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply Git basics: status, add, commit in the context of professional Go software engineering.
+Initialize repositories, stage changes, create atomic commits with clear messages, and inspect repository status and diffs.
 
 ## Why this matters
 

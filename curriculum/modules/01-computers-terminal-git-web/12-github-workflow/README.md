@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply the GitHub workflow in the context of professional Go software engineering.
+Manage remote repositories, synchronize branch refs via git fetch, push, and pull, and configure remote tracking branches.
 
 ## Why this matters
 

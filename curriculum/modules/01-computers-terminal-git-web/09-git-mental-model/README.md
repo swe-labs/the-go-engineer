@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply Git mental model in the context of professional Go software engineering.
+Formulate a mental model of Git as a content-addressable directed acyclic graph (DAG) of immutable snapshots.
 
 ## Why this matters
 

@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply Memory preview: stack vs heap in the context of professional Go software engineering.
+Compare memory layout structures, distinguishing the fast automatic lifecycle of the call stack from the heap allocator.
 
 ## Why this matters
 

@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Understand and apply What is a program? in the context of professional Go software engineering.
+Distinguish between source code text, compiled machine binaries, and active operating system processes in execution.
 
 ## Why this matters
 
@@ -10,7 +10,12 @@ New programmers conflate source code, executables, and running processes. This c
 
 ## Mental model
 
-Installing Go means downloading the distribution, setting GOROOT and GOPATH, and verifying with go version. The toolchain is self-contained — one download includes the compiler, linker, formatter, and package manager.
+A computer program exists in three distinct states:
+1. **Source Code (Passive Text):** Human-readable text files sitting inert on disk (e.g., `.go` files).
+2. **Binary Executable (Passive Machine Code):** A formatted file of compiled machine instructions and static data on disk (ELF on Linux, Mach-O on macOS, PE on Windows) with a designated entry point.
+3. **Process (Active Execution):** An instantiated instance of that binary loaded into system memory by the OS kernel, assigned its own private address space, PID, file descriptors, and execution threads.
+
+Conflating these three states causes confusion when debugging builds versus runtime crashes.
 
 ## Core idea
 
