@@ -143,7 +143,7 @@ func TestCleanupRemovesExpired(t *testing.T) {
 }
 
 func TestGetExtendsNothing(t *testing.T) {
-	c := NewTTLCache(50*time.Millisecond, 100*time.Millisecond)
+	c := NewTTLCache(150*time.Millisecond, 500*time.Millisecond)
 	defer c.Stop()
 
 	c.Set("key", "val")
@@ -154,7 +154,7 @@ func TestGetExtendsNothing(t *testing.T) {
 		t.Fatal("expected hit before TTL")
 	}
 
-	time.Sleep(40 * time.Millisecond)
+	time.Sleep(160 * time.Millisecond)
 
 	_, ok = c.Get("key")
 	if ok {

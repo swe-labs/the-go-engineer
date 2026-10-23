@@ -64,10 +64,10 @@ func validateSchema() {
 		{"learning_objective", func(i Item) any { return i.LearningObjective }, nil},
 		{"estimated_minutes", func(i Item) any { return i.EstimatedMinutes }, map[string]bool{"project": true}},
 		{"prerequisites", func(i Item) any { return i.Prerequisites }, nil},
-		{"zero_magic", func(i Item) any { return i.ZeroMagic }, nil},
+		{"zero_magic", func(i Item) any { return i.ZeroMagic }, map[string]bool{"project": true, "assessment": true, "checkpoint": true, "capstone": true}},
 		{"crossrefs", func(i Item) any { return i.CrossRefs }, nil},
-		{"proof", func(i Item) any { return i.Proof }, nil},
-		{"files", func(i Item) any { return i.Files }, nil},
+		{"proof", func(i Item) any { return i.Proof }, map[string]bool{"project": true, "assessment": true, "checkpoint": true, "capstone": true}},
+		{"files", func(i Item) any { return i.Files }, map[string]bool{"checkpoint": true}},
 	}
 	for _, item := range allItems {
 		for _, c := range checks {

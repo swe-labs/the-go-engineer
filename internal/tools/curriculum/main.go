@@ -99,7 +99,15 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Unknown command: %s\n", cmd)
 		os.Exit(1)
 	}
+
+	if errorCount > 0 {
+		fmt.Fprintf(os.Stderr, "\nValidation failed with %d error(s).\n", errorCount)
+		os.Exit(1)
+	}
+	fmt.Println("\nAll curriculum checks passed successfully.")
 }
+
+var errorCount int
 
 func fatalf(format string, args ...any) {
 	fmt.Fprintf(os.Stderr, "ERROR: "+format+"\n", args...)
@@ -107,6 +115,7 @@ func fatalf(format string, args ...any) {
 }
 
 func warnf(format string, args ...any) {
+	errorCount++
 	fmt.Fprintf(os.Stderr, "WARN: "+format+"\n", args...)
 }
 

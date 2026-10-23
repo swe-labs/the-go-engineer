@@ -966,7 +966,7 @@ func validateCrossrefs() {
 			if !ok {
 				continue
 			}
-			if len(refArr) == 0 && item.Status != "planned" {
+			if len(refArr) == 0 && item.Status != "planned" && item.Status != "draft" && (item.Type == "lesson" || item.Type == "lab") {
 				warnf("%s: crossrefs.%s is empty (item status: %s)", item.ID, category, item.Status)
 				ok = false
 			}

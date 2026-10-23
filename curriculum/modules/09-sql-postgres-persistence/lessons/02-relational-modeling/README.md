@@ -45,11 +45,11 @@ When a Go program issues `SELECT u.name, o.total FROM users u JOIN orders o ON u
 3. Produces a result set that is the relational join of the two relations.
 4. Returns rows to the Go driver, which populates `sql.Rows`.
 
-The Go struct is the application-level analog of a relation. A well-designed Go struct mirrors its corresponding table column by column.
+The Go struct serves as the application-level data structure representing rows scanned from a relation or query projection. While an individual table row often maps cleanly to a struct, production Go avoids treating structs as direct table mirrors in an active-record sense: query projections, JOIN results, and domain aggregates often demand tailored struct definitions to avoid over-fetching and memory overhead.
 
 ## How Go uses it
 
-Go structs map directly to relational tables in a pattern called **Object-Relational Mapping (ORM)** — though Go's philosophy prefers explicit mapping over magic. A typical mapping:
+In contrast to ecosystems that rely on heavy **Object-Relational Mapping (ORM)** frameworks (which obscure SQL execution, risk N+1 query cascades, and hide transaction semantics), idiomatic Go favors explicit data mapping. Go structs define schema bindings using struct tags (e.g., `db:"name"` or `json:"name"`), scanned explicitly via standard `database/sql` row iterators or type-safe code generators like `sqlc`. A typical projection mapping:
 
 ```go
 type User struct {

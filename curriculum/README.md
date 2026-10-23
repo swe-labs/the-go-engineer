@@ -1,78 +1,91 @@
 # The Go Engineer v3 — Curriculum
 
-> Schema: 3.0.0 | Curriculum: 3.0.0-draft.2 | Status: draft | Updated: 2026-05-17
+> Schema: 3.1.0 | Curriculum: 3.1.0-draft.1 | Status: draft | Updated: 2026-10-22
 
 ## Architecture Decision
 
-**Decision:** Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.
+**Decision:** Reconcile and establish the Report 1 phase-based zero-to-software-engineer path as the canonical v3 curriculum.
 
-- **v2 Policy:** curriculum.v2.json is frozen legacy import data, not the active source of truth.
-- **Core Rule:** Keep good lessons, break the old path, optimize for learner progression, proof, documentation quality, and job readiness.
+- **v2 Policy:** curriculum.v2.json is frozen legacy import data, preserved for historical reference and backward compatibility.
+- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON files: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.
+- **Physical Curriculum:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/`.
+- **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern full-stack frontend engineering is defined as a companion path (semantic HTML, CSS, JavaScript fundamentals, progressive enhancement with Go templates/templ/HTMX/Tailwind).
 
 ## Quick Stats
 
-| Metric           | Count |
-| ---------------- | ----- |
-| Modules          | 18    |
-| Core Items       | 329   |
-| Elective Items   | 20    |
-| Total Items      | 349   |
-| Projects         | 25    |
-| Assessments      | 18    |
-| Cross-References | 878   |
+| Metric                           | Count | Notes                                                             |
+| -------------------------------- | ----- | ----------------------------------------------------------------- |
+| Core Modules                     | 18    | Modules 00 through 16, plus Module 18 (Flagship Opslane)          |
+| Elective Modules                 | 1     | Module 17 (Advanced Electives)                                    |
+| Total Modules                    | 19    | Modules 00–18                                                     |
+| Core Path Items (Metadata Total) | 419   | Total items array in `path.core.json` across all core modules     |
+| Instructional Lessons & Labs     | 319   | 318 lessons + 1 lab across Modules 00–16                         |
+| Flagship Opslane Milestones      | 15    | 14 checkpoints + 1 capstone in Module 18                          |
+| Learner Instructional Units      | 334   | 319 instructional lessons/labs + 15 Opslane milestones            |
+| Elective Items                   | 20    | Explicitly marked as planned / unreleased draft in Module 17      |
+| Projects                         | 28    | 27 module projects + 1 flagship capstone defense project          |
+| In-Path Assessment Checkpoints   | 57    | 15 module checkpoints + 14 Opslane checkpoints + 28 project nodes |
+| Assessment Registry Records      | 47    | 19 module assessments + 28 project assessments in assessments.json|
+| Canonical Concepts               | 60    | Fully resolved ownership without leaks in `concepts.json`         |
+| Operational Categories           | 13    | Mapped across 18 module coverage entries                          |
 
 ## Module Map
 
-| #   | Module                                                               | Phase            | Status  | Items | Portfolio |
-| --- | -------------------------------------------------------------------- | ---------------- | ------- | ----- | --------- |
-| 0   | **Orientation**                                                      | orientation      | planned | 10    | No        |
-| 1   | **Computers, Terminal, Git, and the Web**                            | foundations      | planned | 15    | No        |
-| 2   | **Go Setup and Tooling**                                             | tooling          | planned | 14    | No        |
-| 3   | **Programming Fundamentals with Go**                                 | go-core          | planned | 23    | No        |
-| 4   | **Functions, Errors, and Data Semantics**                            | go-core          | planned | 18    | No        |
-| 5   | **Types, Interfaces, Packages, and Modules**                         | engineering-core | planned | 23    | No        |
-| 6   | **Testing, Debugging, and Refactoring**                              | engineering-core | planned | 21    | No        |
-| 7   | **CLI, Files, JSON, and Configuration**                              | cli-io           | planned | 21    | No        |
-| 8   | **HTTP and REST APIs**                                               | backend          | planned | 20    | Yes       |
-| 9   | **SQL and PostgreSQL Persistence**                                   | data             | planned | 26    | Yes       |
-| 10  | **Authentication, Authorization, and Security**                      | security         | planned | 24    | Yes       |
-| 11  | **Lifecycle, Context, and Concurrency**                              | concurrency      | planned | 28    | No        |
-| 12  | **Observability, Performance, and Reliability**                      | reliability      | planned | 20    | Yes       |
-| 13  | **Architecture and Systems Thinking**                                | architecture     | planned | 17    | No        |
-| 14  | **Docker, CI/CD, Linux, and Deployment**                             | delivery         | planned | 19    | Yes       |
-| 15  | **Portfolio, Collaboration, Interview Readiness, and Capstone Prep** | career           | planned | 15    | Yes       |
-| 16  | **Advanced Electives**                                               | elective         | planned | 20    | No        |
-| 17  | **Flagship Opslane**                                                 | flagship         | planned | 15    | Yes       |
+| #   | Module | Phase | Status | Lessons/Labs | Milestones | Projects | Assessments | Total Path Items | Path |
+| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 00  | **Orientation** | orientation | draft | 10 | 0 | 1 | 2 | 13 | `curriculum/modules/00-orientation` |
+| 01  | **Computers, Terminal, Git, and the Web** | foundations | draft | 15 | 0 | 1 | 1 | 17 | `curriculum/modules/01-computers-terminal-git-web` |
+| 02  | **Go Setup and Tooling** | tooling | draft | 14 | 0 | 1 | 1 | 16 | `curriculum/modules/02-go-setup-tooling` |
+| 03  | **Programming Fundamentals with Go** | go-core | draft | 23 | 0 | 2 | 3 | 28 | `curriculum/modules/03-programming-fundamentals` |
+| 04  | **Functions, Errors, and Data Semantics** | go-core | draft | 18 | 0 | 1 | 2 | 21 | `curriculum/modules/04-functions-errors-data-semantics` |
+| 05  | **Types, Interfaces, Packages, and Modules** | engineering-core | draft | 23 | 0 | 2 | 3 | 28 | `curriculum/modules/05-types-interfaces-packages-modules` |
+| 06  | **Testing, Debugging, and Refactoring** | engineering-core | draft | 21 | 0 | 2 | 3 | 26 | `curriculum/modules/06-testing-debugging-refactoring` |
+| 07  | **CLI, Files, JSON, and Configuration** | cli-io | draft | 21 | 0 | 3 | 4 | 28 | `curriculum/modules/07-cli-files-json-config` |
+| 08  | **HTTP and REST APIs** | data | draft | 21 | 0 | 1 | 2 | 24 | `curriculum/modules/08-http-rest-apis` |
+| 09  | **SQL and PostgreSQL Persistence** | security | draft | 28 | 0 | 1 | 2 | 31 | `curriculum/modules/09-sql-postgres-persistence` |
+| 10  | **Authentication, Authorization, and Security** | concurrency | draft | 25 | 0 | 1 | 2 | 28 | `curriculum/modules/10-auth-security` |
+| 11  | **Lifecycle, Context, and Concurrency** | reliability | draft | 29 | 0 | 3 | 4 | 36 | `curriculum/modules/11-lifecycle-context-concurrency` |
+| 12  | **Observability and Diagnostics** | performance | draft | 12 | 0 | 2 | 3 | 17 | `curriculum/modules/12-observability-diagnostics` |
+| 13  | **Performance and Memory Engineering** | performance | draft | 8 | 0 | 2 | 3 | 13 | `curriculum/modules/13-performance-memory-engineering` |
+| 14  | **Architecture and Distributed Systems** | architecture | draft | 17 | 0 | 1 | 2 | 20 | `curriculum/modules/14-architecture-distributed-systems` |
+| 15  | **Docker, CI/CD, and Deployment** | delivery | draft | 19 | 0 | 1 | 2 | 22 | `curriculum/modules/15-docker-cicd-deployment` |
+| 16  | **Portfolio and Interview Readiness** | career | draft | 15 | 0 | 1 | 2 | 18 | `curriculum/modules/16-portfolio-interview-readiness` |
+| 17  | **Advanced Electives** | elective | planned | 20 | 0 | 0 | 0 | 20 | `curriculum/path.electives.json` |
+| 18  | **Flagship Opslane** | flagship | draft | 0 | 15 | 2 | 16 | 33 | `curriculum/modules/18-flagship-opslane` |
+| —   | **Total Curriculum** | — | — | **339** | **15** | **28** | **57** | **439** | *(419 core items + 20 electives)* |
 
 ## Repository Structure
 
 ```
-00-orientation
-01-computers-terminal-git-web
-02-go-setup-tooling
-03-programming-fundamentals
-04-functions-errors-data-semantics
-05-types-interfaces-packages-modules
-06-testing-debugging-refactoring
-07-cli-files-json-config
-08-http-rest-apis
-09-sql-postgres-persistence
-10-auth-security
-11-context-time-concurrency
-12-observability-performance-reliability
-13-architecture-systems-thinking
-14-docker-cicd-linux-deployment
-15-portfolio-interview-capstone
-17-flagship-opslane
-curriculum/path.core.json
-curriculum/path.electives.json
-curriculum/projects.json
-curriculum/assessments.json
-curriculum/crossrefs.json
-curriculum/migration.v2-to-v3.json
-curriculum/legacy/curriculum.v2.json
-docs/
-scripts/
+curriculum/
+  modules/
+    00-orientation/
+    01-computers-terminal-git-web/
+    02-go-setup-tooling/
+    03-programming-fundamentals/
+    04-functions-errors-data-semantics/
+    05-types-interfaces-packages-modules/
+    06-testing-debugging-refactoring/
+    07-cli-files-json-config/
+    08-http-rest-apis/
+    09-sql-postgres-persistence/
+    10-auth-security/
+    11-lifecycle-context-concurrency/
+    12-observability-diagnostics/
+    13-performance-memory-engineering/
+    14-architecture-distributed-systems/
+    15-docker-cicd-deployment/
+    16-portfolio-interview-readiness/
+    18-flagship-opslane/
+  assessments.json
+  concepts.json
+  crossrefs.json
+  failures.json
+  path.core.json
+  path.electives.json
+  projects.json
+  readme.contracts.json
+  schema.v3.json
 internal/tools/curriculum/
 ```
 

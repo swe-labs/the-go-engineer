@@ -6,7 +6,7 @@ Build and analyze threat models using STRIDE, DREAD, and attack trees to identif
 
 ## Why this matters
 
-Security vulnerabilities are cheapest to fix during design and most expensive after deployment. Threat modeling shifts security left: instead of finding bugs in production, you find design flaws before writing code. Every production breach at major companies can be traced to a threat that was identified but not modeled, or modeled but not mitigated. Professional Go engineers who threat-model produce services that survive penetration testing and pass security reviews on the first pass.
+Security vulnerabilities are cheapest to fix during design and most expensive after deployment. Threat modeling shifts security left: instead of finding bugs in production, you evaluate system architecture before writing code. Industry breach postmortems and retrospective analyses (such as the Verizon DBIR and CISA advisories) demonstrate that common initial access vectors and severe data exposures frequently trace back to unmodeled trust boundaries, missing authorization checks, or unvalidated inputs. The foundational paradigm of threat modeling—formulated by Adam Shostack and codified in the OWASP Threat Modeling Manifesto—centers on four essential questions: (1) What are we building? (2) What can go wrong? (3) What are we going to do about it? (4) Did we do a good enough job? Professional Go engineers use structured frameworks like STRIDE to answer question 2 methodically, producing services that resist common attack classes and stand up to rigorous security audits.
 
 ## Mental model
 

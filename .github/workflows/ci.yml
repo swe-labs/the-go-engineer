@@ -54,8 +54,7 @@ jobs:
           go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/ || true
 
       - name: Validate Curriculum
-        continue-on-error: true
-        run: go run ./scripts/validate_curriculum.go || true
+        run: go run ./internal/tools/curriculum validate-all
 
       - name: Upload Coverage
         uses: actions/upload-artifact@v7

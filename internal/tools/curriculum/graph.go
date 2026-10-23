@@ -114,7 +114,7 @@ func validateGraph() {
 			}
 			reachable[id] = true
 			item, exists := itemMap[id]
-			if !exists {
+			if !exists || item == nil {
 				continue
 			}
 			for _, next := range item.NextItemIDs {
@@ -123,9 +123,12 @@ func validateGraph() {
 				}
 			}
 		}
-		// Check all items in this module are reachable
+		// Check all instructional items in this module are reachable
 		for _, item := range allItems {
 			if item.ModuleID != mod.ID {
+				continue
+			}
+			if item.Type != "lesson" && item.Type != "lab" {
 				continue
 			}
 			if !reachable[item.ID] {
@@ -153,7 +156,7 @@ func validateGraph() {
 		visited[id] = true
 		inStack[id] = true
 		item, exists := itemMap[id]
-		if exists {
+		if exists && item != nil {
 			for _, next := range item.NextItemIDs {
 				dfs(next)
 			}

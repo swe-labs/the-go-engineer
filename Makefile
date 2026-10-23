@@ -80,9 +80,9 @@ deps-update: ## Update dependencies
 	@echo "Dependencies updated"
 
 ## Curriculum
-validate: ## Run curriculum validator (ignored failures for now)
+validate: ## Run curriculum validator
 	@echo "Validating curriculum..."
-	-go run ./scripts/validate_curriculum.go || true
+	go run ./internal/tools/curriculum validate-all
 	@echo "Curriculum validation completed"
 
 ## Run Examples
