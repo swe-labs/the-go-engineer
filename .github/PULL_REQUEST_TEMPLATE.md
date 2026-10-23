@@ -28,25 +28,24 @@ Closes #
 - [ ] gofmt check
 - [ ] `go mod tidy` no-diff check
 - [ ] `go test ./...`
-- [ ] `go test -race ./...`
-- [ ] `go test -coverprofile coverage.out ./...`
-- [ ] `go run ./scripts/validate_curriculum.go`
+- [ ] `go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...`
+- [ ] `go run ./internal/tools/curriculum validate-all`
 
 ## Curriculum Checklist
 
-- [ ] Architecture v2.1 remains intact.
-- [ ] `curriculum.v2.json` updated if needed.
-- [ ] Section README updated if needed.
-- [ ] Lesson README follows required section order if applicable.
-- [ ] `NEXT UP:` footer matches curriculum metadata if applicable.
-- [ ] Starter code compiles if applicable.
+- [ ] Architecture v3 remains intact.
+- [ ] Manifests in `curriculum/` updated if needed.
+- [ ] Module README updated if needed.
+- [ ] Lesson README follows required pedagogical section order if applicable.
+- [ ] `NEXT UP:` footer matches curriculum metadata in `curriculum/path.core.json` if applicable.
+- [ ] Starter code compiles and establishes red verification state if applicable.
 
 ## Tracking
 
 - [ ] Linked issue has assignee when appropriate.
 - [ ] Labels are applied.
 - [ ] Milestone is attached when available.
-- [ ] Issue or PR is added to `The Go Engineer v2`.
+- [ ] Issue or PR is added to `The Go Engineer v3`.
 
 ## Review Loop
 

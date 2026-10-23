@@ -147,7 +147,7 @@ go run ./scripts/validate_curriculum.go
 For benchmark changes:
 
 ```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
+go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution
 ```
 
 ## CI Expectations

@@ -30,16 +30,16 @@ Allowed types:
 Examples:
 
 ```text
-[FEAT] add SY.1 sync.Mutex lesson
-[FIX] correct SQL injection example in DB.3
-[DOCS] align roadmap with v2.1 final status
-[TEST] add TE.4 benchmark coverage
+[FEAT] add bounded worker pool lesson
+[FIX] correct SQL injection example in Module 09
+[DOCS] align roadmap with v3.0.0 status
+[TEST] add performance benchmark coverage
 [CHORE] update repository labels
 ```
 
 Every issue should include:
 
-- section ID, if applicable
+- module ID, if applicable
 - lesson IDs, if applicable
 - expected files
 - validation plan

@@ -55,7 +55,7 @@ go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-e
 Create the GitHub release from the stable tag:
 
 ```bash
-gh release create v2.1.x --target release/v2 --title "The Go Engineer v2.1.x" --notes-file RELEASE-NOTES-v2.1.x.md
+gh release create v3.x.x --target release/v3 --title "The Go Engineer v3.x.x" --notes-file RELEASE-NOTES-v3.x.x.md
 ```
 
 The release notes should include:
@@ -97,8 +97,8 @@ For security fixes:
 If a tag was pushed incorrectly before release publication:
 
 ```bash
-git tag -d v2.1.x
-git push origin --delete v2.1.x
+git tag -d v3.x.x
+git push origin --delete v3.x.x
 ```
 
 If the release was already published, prefer a revert followed by a patch release.
