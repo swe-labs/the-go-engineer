@@ -5382,7 +5382,7 @@
   ],
   "curriculum_version": "3.0.0",
   "document_type": "assessments",
-  "last_updated": "2026-05-23",
+  "last_updated": "2026-10-23",
   "name": "The Go Engineer v3 — Assessments",
   "quality_gates": [
     "schema-valid",

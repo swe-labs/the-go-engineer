@@ -2,7 +2,7 @@
   "schema_version": "3.1.0",
   "document_type": "workspace_manifest",
   "curriculum_version": "3.0.0",
-  "last_updated": "2026-05-23",
+  "last_updated": "2026-10-23",
   "name": "The Go Engineer v3 — Curriculum Workspace",
   "status": "stable",
   "source_of_truth": [

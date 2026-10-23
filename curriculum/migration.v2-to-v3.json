@@ -2,7 +2,7 @@
   "schema_version": "3.1.0",
   "document_type": "migration",
   "curriculum_version": "3.0.0",
-  "last_updated": "2026-05-23",
+  "last_updated": "2026-10-23",
   "name": "The Go Engineer v3 — Migration from v2",
   "status": "stable",
   "architectural_decision": {
@@ -13,50 +13,50 @@
   },
   "migration": {
     "source_schema_version": "2",
-    "target_schema_version": "3.0.0",
+    "target_schema_version": "3.1.0",
     "frozen_source_path": "curriculum/legacy/curriculum.v2.json",
     "default_policy": "Every legacy item must be mapped to keep, rewrite, split, merge, move-to-elective, replace, or archive. Every migrated README must also receive a legacy_readme_action: reuse, rewrite, split, merge, or archive.",
     "high_confidence_moves": [
       {
         "legacy_pattern": "API.4-API.9",
         "outcome": "move-to-elective",
-        "target_module": "module-16",
+        "target_module": "module-17",
         "reason": "Protobuf/gRPC is valuable but should not block the core beginner path."
       },
       {
         "legacy_pattern": "TI.14-TI.15",
         "outcome": "move-to-elective",
-        "target_module": "module-16",
+        "target_module": "module-17",
         "reason": "Complex generics and generic data structures are advanced."
       },
       {
         "legacy_pattern": "TI.12",
         "outcome": "move-to-elective",
-        "target_module": "module-16",
+        "target_module": "module-17",
         "reason": "Functional options are useful but not core beginner material."
       },
       {
         "legacy_pattern": "CP.3",
         "outcome": "move-to-elective",
-        "target_module": "module-16",
+        "target_module": "module-17",
         "reason": "sync.Pool is performance-specialized."
       },
       {
         "legacy_pattern": "SY.2 sync.Map portion",
         "outcome": "move-to-elective",
-        "target_module": "module-16",
+        "target_module": "module-17",
         "reason": "sync.Map is specialized and should follow normal map+mutex reasoning."
       },
       {
         "legacy_pattern": "ARCH.7",
         "outcome": "move-to-elective",
-        "target_module": "module-16",
+        "target_module": "module-17",
         "reason": "CQRS is advanced architecture."
       },
       {
         "legacy_pattern": "DEPLOY.2",
         "outcome": "move-to-elective",
-        "target_module": "module-16",
+        "target_module": "module-17",
         "reason": "Blue/green deployment is advanced deployment strategy."
       },
       {

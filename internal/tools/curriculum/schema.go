@@ -13,8 +13,19 @@ func validateSchema() {
 	fmt.Println("=== validate-schema ===")
 	ok := true
 
-	// 1. Parse all JSON files
-	files := []string{"path.core.json", "path.electives.json", "projects.json", "assessments.json", "crossrefs.json"}
+	// 1. Parse all 10 canonical JSON manifests and verify metadata consistency
+	files := []string{
+		"workspace.json",
+		"path.core.json",
+		"path.electives.json",
+		"projects.json",
+		"assessments.json",
+		"crossrefs.json",
+		"concepts.json",
+		"failures.json",
+		"readme.contracts.json",
+		"migration.v2-to-v3.json",
+	}
 	for _, f := range files {
 		fullPath := fmt.Sprintf("%s/%s", curriculumDir, f)
 		data, err := os.ReadFile(fullPath)
@@ -28,7 +39,32 @@ func validateSchema() {
 			ok = false
 			continue
 		}
-		fmt.Printf("  %s: valid JSON\n", f)
+
+		var header struct {
+			SchemaVersion     string `json:"schema_version"`
+			CurriculumVersion string `json:"curriculum_version"`
+			Status            string `json:"status"`
+			LastUpdated       string `json:"last_updated"`
+		}
+		if err := json.Unmarshal(data, &header); err == nil {
+			if header.SchemaVersion != "3.1.0" {
+				warnf("%s: expected schema_version '3.1.0', got '%s'", f, header.SchemaVersion)
+				ok = false
+			}
+			if header.CurriculumVersion != "3.0.0" {
+				warnf("%s: expected curriculum_version '3.0.0', got '%s'", f, header.CurriculumVersion)
+				ok = false
+			}
+			if header.Status != "stable" {
+				warnf("%s: expected status 'stable', got '%s'", f, header.Status)
+				ok = false
+			}
+			if header.LastUpdated != "2026-10-23" {
+				warnf("%s: expected last_updated '2026-10-23', got '%s'", f, header.LastUpdated)
+				ok = false
+			}
+		}
+		fmt.Printf("  %s: valid JSON & metadata\n", f)
 	}
 
 	// 2. Read core and electives for deeper checks
@@ -40,6 +76,26 @@ func validateSchema() {
 	readJSON("projects.json", &projects)
 	var crossrefs CrossrefBundle
 	readJSON("crossrefs.json", &crossrefs)
+
+	// Verify inventory counts and module statuses
+	if len(core.Items) != 421 {
+		warnf("path.core.json: expected exactly 421 core items, got %d", len(core.Items))
+		ok = false
+	}
+	if len(electives.Items) != 20 {
+		warnf("path.electives.json: expected exactly 20 elective items, got %d", len(electives.Items))
+		ok = false
+	}
+	if len(core.Modules) != 18 {
+		warnf("path.core.json: expected exactly 18 core modules, got %d", len(core.Modules))
+		ok = false
+	}
+	for _, m := range core.Modules {
+		if m.Status != "stable" {
+			warnf("path.core.json module %s: expected status 'stable', got '%s'", m.ID, m.Status)
+			ok = false
+		}
+	}
 
 	// 3. Check required fields on items
 	var allItems []Item

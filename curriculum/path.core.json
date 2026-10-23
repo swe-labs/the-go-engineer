@@ -67847,7 +67847,7 @@
       }
     }
   ],
-  "last_updated": "2026-05-22",
+  "last_updated": "2026-10-23",
   "modules": [
     {
       "cognitive_load": "low",
@@ -67873,7 +67873,7 @@
       "required": true,
       "slug": "orientation",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Explain the learning system, repository workflow, zero-magic contract, assessments, and job-ready target.",
       "tags": [
         "orientation"
@@ -67909,7 +67909,7 @@
       "required": true,
       "slug": "computers-terminal-git-web",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Make the machine, shell, Git, GitHub, and web basics feel safe before Go syntax.",
       "tags": [
         "foundations"
@@ -67945,7 +67945,7 @@
       "required": true,
       "slug": "go-setup-tooling",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Make the Go toolchain normal from day one.",
       "tags": [
         "tooling"
@@ -67981,7 +67981,7 @@
       "required": true,
       "slug": "programming-fundamentals",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Teach core programming through Go without hidden assumptions.",
       "tags": [
         "go-core"
@@ -68017,7 +68017,7 @@
       "required": true,
       "slug": "functions-errors-data-semantics",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Teach boundaries, failure, cleanup, mutation, and data behavior.",
       "tags": [
         "go-core"
@@ -68053,7 +68053,7 @@
       "required": true,
       "slug": "types-interfaces-packages-modules",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Turn scripts into maintainable Go programs.",
       "tags": [
         "engineering-core"
@@ -68089,7 +68089,7 @@
       "required": true,
       "slug": "testing-debugging-refactoring",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Move proof, diagnosis, and safe change before serious backend work.",
       "tags": [
         "engineering-core"
@@ -68125,7 +68125,7 @@
       "required": true,
       "slug": "cli-files-json-config",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Build useful local programs and understand process lifecycle before servers.",
       "tags": [
         "cli-io",
@@ -68162,7 +68162,7 @@
       "required": true,
       "slug": "http-rest-apis",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Build the first serious backend service.",
       "tags": [
         "backend"
@@ -68198,7 +68198,7 @@
       "required": true,
       "slug": "sql-postgres-persistence",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Teach real relational backend work.",
       "tags": [
         "data"
@@ -68234,7 +68234,7 @@
       "required": true,
       "slug": "auth-security",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Make secure backend behavior explicit.",
       "tags": [
         "security"
@@ -68270,7 +68270,7 @@
       "required": true,
       "slug": "lifecycle-context-concurrency",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Teach safe concurrent systems and request lifecycle after learners understand services.",
       "tags": [
         "concurrency",
@@ -68307,7 +68307,7 @@
       "required": true,
       "slug": "observability-diagnostics",
       "source_legacy_section_ids": null,
-      "status": "draft",
+      "status": "stable",
       "summary": "Make services observable before optimizing them.",
       "tags": [
         "observability"
@@ -68343,7 +68343,7 @@
       "required": true,
       "slug": "performance-memory-engineering",
       "source_legacy_section_ids": null,
-      "status": "draft",
+      "status": "stable",
       "summary": "Make services efficient through profiling, benchmark-driven optimization, and memory understanding.",
       "tags": [
         "performance"
@@ -68379,7 +68379,7 @@
       "required": true,
       "slug": "architecture-distributed-systems",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Teach architecture as tradeoff reasoning with distributed systems fundamentals.",
       "tags": [
         "architecture",
@@ -68416,7 +68416,7 @@
       "required": true,
       "slug": "docker-cicd-deployment",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Package, verify, and deliver production Go applications using Linux process model, Docker multi-stage builds, GitHub Actions CI/CD pipelines, and robust deployment runbooks.",
       "tags": [
         "delivery"
@@ -68452,7 +68452,7 @@
       "required": true,
       "slug": "portfolio-interview-readiness",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Convert competence into employability.",
       "tags": [
         "career"
@@ -68488,7 +68488,7 @@
       "required": true,
       "slug": "flagship-opslane",
       "source_legacy_section_ids": [],
-      "status": "draft",
+      "status": "stable",
       "summary": "Final graduation proof through a portfolio-grade backend system.",
       "tags": [
         "flagship"

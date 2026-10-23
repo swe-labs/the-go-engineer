@@ -34,27 +34,27 @@
 
 | #   | Module | Phase | Status | Lessons/Labs | Milestones | Projects | Assessments | Total Path Items | Path |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| 00  | **Orientation** | orientation | draft | 10 | 0 | 1 | 2 | 13 | `curriculum/modules/00-orientation` |
-| 01  | **Computers, Terminal, Git, and the Web** | foundations | draft | 15 | 0 | 1 | 1 | 17 | `curriculum/modules/01-computers-terminal-git-web` |
-| 02  | **Go Setup and Tooling** | tooling | draft | 14 | 0 | 1 | 1 | 16 | `curriculum/modules/02-go-setup-tooling` |
-| 03  | **Programming Fundamentals with Go** | go-core | draft | 24 | 0 | 2 | 3 | 29 | `curriculum/modules/03-programming-fundamentals` |
-| 04  | **Functions, Errors, and Data Semantics** | go-core | draft | 18 | 0 | 1 | 2 | 21 | `curriculum/modules/04-functions-errors-data-semantics` |
-| 05  | **Types, Interfaces, Packages, and Modules** | engineering-core | draft | 24 | 0 | 2 | 3 | 29 | `curriculum/modules/05-types-interfaces-packages-modules` |
-| 06  | **Testing, Debugging, and Refactoring** | engineering-core | draft | 21 | 0 | 2 | 3 | 26 | `curriculum/modules/06-testing-debugging-refactoring` |
-| 07  | **CLI, Files, JSON, Config, and Runtime Coordination** | cli-io | draft | 21 | 0 | 3 | 4 | 28 | `curriculum/modules/07-cli-files-json-config` |
-| 08  | **HTTP and REST APIs** | backend | draft | 21 | 0 | 1 | 2 | 24 | `curriculum/modules/08-http-rest-apis` |
-| 09  | **SQL and PostgreSQL Persistence** | data | draft | 28 | 0 | 1 | 2 | 31 | `curriculum/modules/09-sql-postgres-persistence` |
-| 10  | **Authentication, Authorization, and Security** | security | draft | 25 | 0 | 1 | 2 | 28 | `curriculum/modules/10-auth-security` |
-| 11  | **Lifecycle, Context, and Concurrency** | concurrency | draft | 29 | 0 | 3 | 4 | 36 | `curriculum/modules/11-lifecycle-context-concurrency` |
-| 12  | **Observability and Diagnostics** | reliability | draft | 12 | 0 | 2 | 3 | 17 | `curriculum/modules/12-observability-diagnostics` |
-| 13  | **Performance and Memory Engineering** | performance | draft | 8 | 0 | 2 | 3 | 13 | `curriculum/modules/13-performance-memory-engineering` |
-| 14  | **Architecture and Distributed Systems** | architecture | draft | 17 | 0 | 1 | 2 | 20 | `curriculum/modules/14-architecture-distributed-systems` |
-| 15  | **Docker, CI/CD, and Deployment** | delivery | draft | 19 | 0 | 1 | 2 | 22 | `curriculum/modules/15-docker-cicd-deployment` |
-| 16  | **Portfolio and Interview Readiness** | career | draft | 15 | 0 | 1 | 2 | 18 | `curriculum/modules/16-portfolio-interview-readiness` |
-| 18  | **Flagship Opslane** | flagship | draft | 0 | 15 | 2 | 16 | 33 | `curriculum/modules/18-flagship-opslane` |
+| 00  | **Orientation** | orientation | stable | 10 | 0 | 1 | 2 | 13 | `curriculum/modules/00-orientation` |
+| 01  | **Computers, Terminal, Git, and the Web** | foundations | stable | 15 | 0 | 1 | 1 | 17 | `curriculum/modules/01-computers-terminal-git-web` |
+| 02  | **Go Setup and Tooling** | tooling | stable | 14 | 0 | 1 | 1 | 16 | `curriculum/modules/02-go-setup-tooling` |
+| 03  | **Programming Fundamentals with Go** | go-core | stable | 24 | 0 | 2 | 3 | 29 | `curriculum/modules/03-programming-fundamentals` |
+| 04  | **Functions, Errors, and Data Semantics** | go-core | stable | 18 | 0 | 1 | 2 | 21 | `curriculum/modules/04-functions-errors-data-semantics` |
+| 05  | **Types, Interfaces, Packages, and Modules** | engineering-core | stable | 24 | 0 | 2 | 3 | 29 | `curriculum/modules/05-types-interfaces-packages-modules` |
+| 06  | **Testing, Debugging, and Refactoring** | engineering-core | stable | 21 | 0 | 2 | 3 | 26 | `curriculum/modules/06-testing-debugging-refactoring` |
+| 07  | **CLI, Files, JSON, Config, and Runtime Coordination** | cli-io | stable | 21 | 0 | 3 | 4 | 28 | `curriculum/modules/07-cli-files-json-config` |
+| 08  | **HTTP and REST APIs** | backend | stable | 21 | 0 | 1 | 2 | 24 | `curriculum/modules/08-http-rest-apis` |
+| 09  | **SQL and PostgreSQL Persistence** | data | stable | 28 | 0 | 1 | 2 | 31 | `curriculum/modules/09-sql-postgres-persistence` |
+| 10  | **Authentication, Authorization, and Security** | security | stable | 25 | 0 | 1 | 2 | 28 | `curriculum/modules/10-auth-security` |
+| 11  | **Lifecycle, Context, and Concurrency** | concurrency | stable | 29 | 0 | 3 | 4 | 36 | `curriculum/modules/11-lifecycle-context-concurrency` |
+| 12  | **Observability and Diagnostics** | reliability | stable | 12 | 0 | 2 | 3 | 17 | `curriculum/modules/12-observability-diagnostics` |
+| 13  | **Performance and Memory Engineering** | performance | stable | 8 | 0 | 2 | 3 | 13 | `curriculum/modules/13-performance-memory-engineering` |
+| 14  | **Architecture and Distributed Systems** | architecture | stable | 17 | 0 | 1 | 2 | 20 | `curriculum/modules/14-architecture-distributed-systems` |
+| 15  | **Docker, CI/CD, and Deployment** | delivery | stable | 19 | 0 | 1 | 2 | 22 | `curriculum/modules/15-docker-cicd-deployment` |
+| 16  | **Portfolio and Interview Readiness** | career | stable | 15 | 0 | 1 | 2 | 18 | `curriculum/modules/16-portfolio-interview-readiness` |
+| 18  | **Flagship Opslane** | flagship | stable | 0 | 15 | 2 | 16 | 33 | `curriculum/modules/18-flagship-opslane` |
 | 17  | **Advanced Electives** | elective | draft | 20 | 0 | 0 | 0 | 20 | `curriculum/path.electives.json` |
 | —   | **Core Subtotal** | — | — | **321** | **15** | **28** | **57** | **421** | *(Modules 00–16, 18)* |
-| —   | **Total Curriculum** | — | — | **341** | **15** | **28** | **57** | **441** | *(419 core items + 20 electives)* |
+| —   | **Total Curriculum** | — | — | **341** | **15** | **28** | **57** | **441** | *(421 core items + 20 electives)* |
 
 ## Workload Estimates & 52-Week Pacing Guide
 
@@ -75,7 +75,7 @@ Curriculum completion time cannot be calculated from reading time alone. A reali
 
 | Weekly Commitment | Total Weeks | Total Months | Viability & Pace Description |
 | :---: | :---: | :---: | :--- |
-| **12–15 hrs/week** | **40 – 52 weeks** | **10 – 12 mos** | **(Recommended)** Completes full backend core within 1 year with capacity for parallel frontend companion topics. |
+| **12–15 hrs/week** | **40 – 52 weeks** | **10 – 12 mos** | **(Recommended)** Completes 435–600 hours of core backend engineering in 29–50 weeks of focused study, leaving deliberate slack for review, autonomous project debugging, and parallel companion frontend progression. |
 | **8–10 hrs/week** | **55 – 65 weeks** | **13 – 15 mos** | Steady progress; core concepts finish in 1 year, with portfolio and Opslane defense extending into months 13–15. |
 | **5 hrs/week** | **90 – 115 weeks** | **21 – 26 mos** | Casual part-time; learners reach Module 08/09 by month 12 and graduate in year 2. |
 
@@ -143,7 +143,7 @@ internal/tools/curriculum/
 
 ## 0. Orientation
 
-> **Phase:** orientation | **Status:** draft | **Required:** True
+> **Phase:** orientation | **Status:** stable | **Required:** True
 
 **Learning Goal:** Explain the learning system, repository workflow, zero-magic contract, assessments, and job-ready target.
 
@@ -162,7 +162,7 @@ internal/tools/curriculum/
 
 ## 1. Computers, Terminal, Git, and the Web
 
-> **Phase:** foundations | **Status:** draft | **Required:** True
+> **Phase:** foundations | **Status:** stable | **Required:** True
 
 **Learning Goal:** Make the machine, shell, Git, GitHub, and web basics feel safe before Go syntax.
 
@@ -188,7 +188,7 @@ internal/tools/curriculum/
 
 ## 2. Go Setup and Tooling
 
-> **Phase:** tooling | **Status:** draft | **Required:** True
+> **Phase:** tooling | **Status:** stable | **Required:** True
 
 **Learning Goal:** Make the Go toolchain normal from day one.
 
@@ -213,7 +213,7 @@ internal/tools/curriculum/
 
 ## 3. Programming Fundamentals with Go
 
-> **Phase:** go-core | **Status:** draft | **Required:** True
+> **Phase:** go-core | **Status:** stable | **Required:** True
 
 **Learning Goal:** Teach core programming through Go without hidden assumptions.
 
@@ -248,7 +248,7 @@ internal/tools/curriculum/
 
 ## 4. Functions, Errors, and Data Semantics
 
-> **Phase:** go-core | **Status:** draft | **Required:** True
+> **Phase:** go-core | **Status:** stable | **Required:** True
 
 **Learning Goal:** Teach boundaries, failure, cleanup, mutation, and data behavior.
 
@@ -277,7 +277,7 @@ internal/tools/curriculum/
 
 ## 5. Types, Interfaces, Packages, and Modules
 
-> **Phase:** engineering-core | **Status:** draft | **Required:** True
+> **Phase:** engineering-core | **Status:** stable | **Required:** True
 
 **Learning Goal:** Turn scripts into maintainable Go programs.
 
@@ -312,7 +312,7 @@ internal/tools/curriculum/
 
 ## 6. Testing, Debugging, and Refactoring
 
-> **Phase:** engineering-core | **Status:** draft | **Required:** True
+> **Phase:** engineering-core | **Status:** stable | **Required:** True
 
 **Learning Goal:** Move proof, diagnosis, and safe change before serious backend work.
 
@@ -344,7 +344,7 @@ internal/tools/curriculum/
 
 ## 7. CLI, Files, JSON, Config, and Runtime Coordination
 
-> **Phase:** cli-io | **Status:** draft | **Required:** True
+> **Phase:** cli-io | **Status:** stable | **Required:** True
 
 **Learning Goal:** Build useful local programs and understand process lifecycle before servers.
 
@@ -376,7 +376,7 @@ internal/tools/curriculum/
 
 ## 8. HTTP and REST APIs
 
-> **Phase:** backend | **Status:** draft | **Required:** True
+> **Phase:** backend | **Status:** stable | **Required:** True
 
 **Learning Goal:** Build the first serious backend service.
 
@@ -408,7 +408,7 @@ internal/tools/curriculum/
 
 ## 9. SQL and PostgreSQL Persistence
 
-> **Phase:** data | **Status:** draft | **Required:** True
+> **Phase:** data | **Status:** stable | **Required:** True
 
 **Learning Goal:** Teach real relational backend work.
 
@@ -447,7 +447,7 @@ internal/tools/curriculum/
 
 ## 10. Authentication, Authorization, and Security
 
-> **Phase:** security | **Status:** draft | **Required:** True
+> **Phase:** security | **Status:** stable | **Required:** True
 
 **Learning Goal:** Make secure backend behavior explicit.
 
@@ -483,7 +483,7 @@ internal/tools/curriculum/
 
 ## 11. Lifecycle, Context, and Concurrency
 
-> **Phase:** concurrency | **Status:** draft | **Required:** True
+> **Phase:** concurrency | **Status:** stable | **Required:** True
 
 **Learning Goal:** Teach safe concurrent systems and request lifecycle after learners understand services.
 
@@ -523,7 +523,7 @@ internal/tools/curriculum/
 
 ## 12. Observability and Diagnostics
 
-> **Phase:** reliability | **Status:** draft | **Required:** True
+> **Phase:** reliability | **Status:** stable | **Required:** True
 
 **Learning Goal:** Make services observable before optimizing them.
 
@@ -546,7 +546,7 @@ internal/tools/curriculum/
 
 ## 13. Performance and Memory Engineering
 
-> **Phase:** performance | **Status:** draft | **Required:** True
+> **Phase:** performance | **Status:** stable | **Required:** True
 
 **Learning Goal:** Make services efficient through profiling, benchmark-driven optimization, and memory understanding.
 
@@ -565,7 +565,7 @@ internal/tools/curriculum/
 
 ## 14. Architecture and Distributed Systems
 
-> **Phase:** architecture | **Status:** draft | **Required:** True
+> **Phase:** architecture | **Status:** stable | **Required:** True
 
 **Learning Goal:** Teach architecture as tradeoff reasoning with distributed systems fundamentals.
 
@@ -593,7 +593,7 @@ internal/tools/curriculum/
 
 ## 15. Docker, CI/CD, and Deployment
 
-> **Phase:** delivery | **Status:** draft | **Required:** True
+> **Phase:** delivery | **Status:** stable | **Required:** True
 
 **Learning Goal:** Make software shippable and repeatable.
 
@@ -623,7 +623,7 @@ internal/tools/curriculum/
 
 ## 16. Portfolio and Interview Readiness
 
-> **Phase:** career | **Status:** draft | **Required:** True
+> **Phase:** career | **Status:** stable | **Required:** True
 
 **Learning Goal:** Convert competence into employability.
 
@@ -649,7 +649,7 @@ internal/tools/curriculum/
 
 ## 18. Flagship Opslane
 
-> **Phase:** flagship | **Status:** draft | **Required:** True
+> **Phase:** flagship | **Status:** stable | **Required:** True
 
 **Learning Goal:** Final graduation proof through a portfolio-grade backend system.
 
@@ -838,7 +838,7 @@ Total cross-references: **2094**
 
 **Source Schema:** 2
 
-**Target Schema:** 3.0.0
+**Target Schema:** 3.1.0
 
 **Default Policy:** Every legacy item must be mapped to keep, rewrite, split, merge, move-to-elective, replace, or archive. Every migrated README must also receive a legacy_readme_action: reuse, rewrite, split, merge, or archive.
 
@@ -899,4 +899,4 @@ Total cross-references: **2094**
 
 ---
 
-_Generated from 3.1.0-draft.1 | Schema 3.1.0 | 2026-10-23_
+_Generated from curriculum v3.0.0 | Schema 3.1.0 | 2026-10-23_
