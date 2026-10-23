@@ -1,0 +1,7 @@
+# TODO: Task 3 - Complete docker-compose configuration
+# Add container_name, port mappings, resource limits (cpus, memory), and healthcheck probe
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"

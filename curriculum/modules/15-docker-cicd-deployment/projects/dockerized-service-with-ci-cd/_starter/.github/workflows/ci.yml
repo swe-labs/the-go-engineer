@@ -1,0 +1,22 @@
+# TODO: Task 4 - Complete GitHub Actions CI/CD Pipeline
+# Requirements:
+# 1. Trigger on push and pull_request
+# 2. Go test job with -race flag
+# 3. Docker build job with multi-stage build caching
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+      - run: go test -v ./...

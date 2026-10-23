@@ -1,0 +1,62 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, "release/**"]
+  pull_request:
+    branches: [main, "release/**"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Unit & Race Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+          cache: true
+
+      - name: Verify Code Formatting & Vet
+        run: |
+          go vet ./...
+          test -z "$(gofmt -l .)"
+
+      - name: Run Tests with Race Detector
+        run: go test -v -race -coverprofile=coverage.out ./...
+
+  docker:
+    name: Build & Verify Container
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: actions/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: go-production-service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Verify Container Healthcheck
+        run: |
+          docker run -d --name test-service -p 8080:8080 go-production-service:latest
+          sleep 3
+          curl --fail http://localhost:8080/healthz || exit 1
+          curl --fail http://localhost:8080/readyz || exit 1
+          docker stop test-service
