@@ -1,78 +1,86 @@
-# The Go Engineer Progression
+# The Go Engineer Progression (v3)
 
-This document visualizes the stable v2.1 learner journey.
+This document visualizes the canonical v3 learner journey from foundational concepts to production systems engineering on `release/v3`.
 
-Section IDs and milestones must match [ARCHITECTURE.md](../ARCHITECTURE.md) and [curriculum.v2.json](../curriculum.v2.json).
+Module progression and item metadata are formally specified in [`curriculum/path.core.json`](../curriculum/path.core.json) and [ARCHITECTURE.md](../ARCHITECTURE.md).
 
 ## Phase Progression
 
 ```mermaid
-flowchart LR
-    P0["Phase 0\nMachine Foundation\ns00\n0% to 5%"] --> P1["Phase 1\nLanguage Foundation\ns01-s04\n5% to 52%"]
-    P1 --> P2["Phase 2\nEngineering Core\ns05-s08\n52% to 87%"]
-    P2 --> P3["Phase 3\nSystems Engineering\ns09-s10\n87% to 96%"]
-    P3 --> P4["Phase 4\nFlagship Project\ns11\n96% to 100%"]
+flowchart TD
+    P0["Phase 0: Orientation & Foundations\nModules 00–02\nTerminal, Git, OS concepts, Go toolchain"] --> P1["Phase 1: Go Core & Semantics\nModules 03–04\nTypes, memory layout, control flow, functions, errors"]
+    P1 --> P2["Phase 2: Engineering Core\nModules 05–07\nInterfaces, polymorphism, testing, CLI tools, files"]
+    P2 --> P3["Phase 3: Backend & Persistence\nModules 08–09\nHTTP/REST APIs, routing, middleware, SQL, PostgreSQL"]
+    P3 --> P4["Phase 4: Security & Concurrency\nModules 10–11\nJWT auth, RBAC, goroutines, channels, worker pools, context"]
+    P4 --> P5["Phase 5: Production Systems\nModules 12–15\nslog, pprof, tracing, architecture, Docker, CI/CD"]
+    P5 --> P7["Phase 7: Flagship Capstone\nModule 18\nOpslane Multi-tenant SaaS Platform (15 milestones)"]
+    P7 --> P6["Phase 6: Career & Portfolio\nModule 16\nPortfolio Packaging, Technical Writing & Architecture Defense"]
 ```
 
-## Section Flow
+## Module Flow
 
 ```mermaid
-flowchart LR
-    S00["s00\nHow Computers Work"] --> S01["s01\nGetting Started"]
-    S01 --> S02["s02\nLanguage Basics"]
-    S02 --> S03["s03\nFunctions and Errors"]
-    S03 --> S04["s04\nTypes and Design"]
-    S04 --> S05["s05\nPackages, I/O and CLI"]
-    S05 --> S06["s06\nBackend, APIs and Databases"]
-    S06 --> S07["s07\nConcurrency"]
-    S07 --> S08["s08\nQuality and Testing"]
-    S08 --> S09["s09\nArchitecture and Security"]
-    S09 --> S10["s10\nProduction Operations"]
-    S10 --> S11["s11\nOpslane Flagship"]
+flowchart TD
+    M00["00: Orientation"] --> M01["01: Computers, Terminal, Git & Web"]
+    M01 --> M02["02: Go Setup & Tooling"]
+    M02 --> M03["03: Programming Fundamentals"]
+    M03 --> M04["04: Functions, Errors & Data Semantics"]
+    M04 --> M05["05: Types, Interfaces & Packages"]
+    M05 --> M06["06: Testing, Debugging & Refactoring"]
+    M06 --> M07["07: CLI, Files, JSON & Config"]
+    M07 --> M08["08: HTTP & REST APIs"]
+    M08 --> M09["09: SQL, PostgreSQL & Persistence"]
+    M09 --> M10["10: Auth & Security"]
+    M10 --> M11["11: Lifecycle, Context & Concurrency"]
+    M11 --> M12["12: Observability & Diagnostics"]
+    M12 --> M13["13: Performance & Memory Engineering"]
+    M13 --> M14["14: Architecture & Distributed Systems"]
+    M14 --> M15["15: Docker, CI/CD & Deployment"]
+    M15 --> M18["18: Flagship Opslane Capstone"]
+    M18 --> M16["16: Portfolio & Interview Readiness"]
 ```
 
 ## Engineering Context Growth
 
-| Phase   | Learner shift                                    | Engineering weight |
-| ------- | ------------------------------------------------ | ------------------ |
-| Phase 0 | understand what the machine is doing             | low, concrete      |
-| Phase 1 | read and write Go intentionally                  | growing            |
-| Phase 2 | build systems that behave predictably            | high               |
-| Phase 3 | design, secure, and operate systems              | very high          |
-| Phase 4 | integrate the curriculum into one backend system | full               |
+| Phase | Learner Shift | Engineering Weight |
+|---|---|---|
+| **Phase 0: Foundations** (00–02) | Mental model of OS, process memory, and toolchain mechanics | Concrete, execution-level |
+| **Phase 1: Go Core** (03–04) | Understand stack vs heap allocation, pointer semantics, errors | Foundational systems |
+| **Phase 2: Engineering Core** (05–07) | Design structural polymorphism, test table suites, streaming I/O | Standard engineering |
+| **Phase 3: Persistence** (08–09) | Build robust REST handlers, connection pools, and DB transactions | High, production-facing |
+| **Phase 4: Concurrency** (10–11) | Coordinate bounded goroutine pools, cancellation, and JWT/RBAC | High, concurrency-critical |
+| **Phase 5: Production Systems** (12–15) | Diagnose memory bottlenecks (`pprof`), trace requests, deploy via CI/CD | Advanced systems |
+| **Phase 7: Flagship Capstone** (18) | Build multi-tenant SaaS backend with 15 progressive milestones | Full system integration |
+| **Phase 6: Portfolio & Defense** (16) | Defend architecture, package production deliverables, interview prep | Professional readiness |
 
-## Key Milestones
+## Key Projects & Milestones
 
-| Progress | Milestone                  | Surface   | Proof                                             |
-| -------- | -------------------------- | --------- | ------------------------------------------------- |
-| 5%       | Machine model checkpoint   | `HC.5`    | explain process, memory, and execution basics     |
-| 10%      | First program              | `GT.2`    | run and modify Hello World                        |
-| 18%      | Pricing Checkout           | `CF.7`    | reason through branches, loops, and cleanup       |
-| 24%      | Contact Directory          | `DS.6`    | use slices, maps, and pointers together           |
-| 30%      | Order Summary              | `FE.7`    | validate, orchestrate, and return errors cleanly  |
-| 44%      | Payroll Processor          | `TI.10`   | model types, interfaces, and generics together    |
-| 58%      | Filesystem Capstone        | `FS.8`    | build and test a filesystem-aware utility         |
-| 66%      | REST API                   | `HS.10`   | build a timeout-aware HTTP service                |
-| 70%      | gRPC Service               | `API.9`   | define and serve a gRPC contract                  |
-| 74%      | Repository Pattern Project | `DB.6`    | manage database access through clear boundaries   |
-| 77%      | Concurrent Downloader      | `GC.7`    | coordinate goroutines and channels safely         |
-| 81%      | URL Health Checker         | `CP.5`    | debug concurrent failure and cancellation paths   |
-| 85%      | Benchmark Optimization     | `PR.5`    | profile and improve performance with evidence     |
-| 88%      | Modular Refactor           | `ARCH.9`  | reorganize a service around stronger architecture |
-| 91%      | Secure API                 | `SEC.11`  | apply practical security safeguards               |
-| 96%      | Shutdown Capstone          | `GS.3`    | coordinate graceful drain and shutdown            |
-| 100%     | Opslane Complete           | `OPSL.10` | integrate the system end to end                   |
+| Module | Project / Milestone | Core Deliverable | Verification Mode |
+|---|---|---|---|
+| `00` | Course Setup Verification | Verify runtime, editor, Git workflow, study plan | Automated script |
+| `01` | Shell & Git Navigation Lab | Shell execution trace, commit hygiene | Terminal inspection |
+| `02` | Tooling Failure Lab | Diagnose PATH drift, broken build tags, module conflicts | Red-to-green repair |
+| `03` | Pricing Checkout & Contact Directory | Multi-branch pricing engine, pointer-backed address book | Unit test suite |
+| `04` | Order Summary Refactor | Sentinel errors, custom error types, stack allocations | Table test suite |
+| `05` | Bank Account & Payroll Processor | Interface abstraction, mockable polymorphism | Test suite with mocks |
+| `06` | Bug Hunt Pack & Refactored Library | TDD bug fixes, benchmark assertions, coverage audit | Coverage + race tests |
+| `07` | Config Parser & Log Analyzer | Streaming JSON decode, flag parsing, file I/O | CLI integration test |
+| `08` | Book Catalog REST API | HTTP router, middleware chain, httptest fixtures | HTTP integration tests |
+| `09` | Task API with PostgreSQL | Connection pooling, SQL migrations, ACID transactions | Database test suite |
+| `10` | Secure Authenticated API | Bcrypt password hashing, JWT claims, RBAC middleware | Auth security tests |
+| `11` | Bounded Worker Pool & Downloader | Worker pool, semaphore pattern, graceful context cancel | Race-detector test suite |
+| `12` | Observability Retrofit | Structured `slog`, OpenTelemetry tracing, Prometheus | Metrics inspection |
+| `13` | Performance & Memory Lab | Benchmark optimization, pprof heap/CPU analysis | Zero-alloc benchmarks |
+| `14` | Modular Refactor Review | Hexagonal decoupling, domain invariants, ADR documentation | Domain boundary audit |
+| `15` | Dockerized Production Service | Multi-stage Dockerfile, container health checks, CI/CD runbook | Docker health check |
+| `18` | Flagship Opslane Platform | 15 milestones: multi-tenancy, workers, caching, graceful shutdown | Complete capstone suite |
+| `16` | Portfolio Review Pack & Defense | Technical README, architecture diagrams, live defense answers | Portfolio rubric audit |
 
 ## Completion Standard
 
-By completing the curriculum, a learner should be able to:
+A learner who completes the curriculum demonstrates:
 
-- explain how a computer executes code
-- write Go code from scratch
-- structure code for maintainability
-- handle errors explicitly
-- coordinate concurrent work safely
-- test and profile code with evidence
-- build HTTP, gRPC, and database-backed services
-- secure, deploy, and operate production-shaped systems
-- connect isolated Go techniques into one integrated backend
+1. **Zero Magic Understanding:** Explains memory layouts, pointer dereferencing, goroutine scheduler mechanics, and CPU cache friendliness.
+2. **Production Code Quality:** Idiomatic Go adhering to standard conventions, table-driven tests, race detection, and structured logging.
+3. **Resilient Systems Engineering:** Defensive error classification, bounded concurrency, graceful shutdown, and resource leak prevention.
+4. **Architectural Mastery:** Capable of designing, building, profiling, and defending multi-tenant backend systems at scale.

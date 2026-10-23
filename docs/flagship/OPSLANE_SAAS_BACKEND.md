@@ -12,7 +12,7 @@ This is not a tutorial capstone. It is an integration and judgment capstone.
 
 ## Source of Truth
 
-This document is the source of truth for s11 Opslane flagship implementation and review.
+This document is the architectural specification for the Module 18 Opslane Flagship Capstone ([`curriculum/modules/18-flagship-opslane/`](../../curriculum/modules/18-flagship-opslane/README.md)).
 
 ---
 
