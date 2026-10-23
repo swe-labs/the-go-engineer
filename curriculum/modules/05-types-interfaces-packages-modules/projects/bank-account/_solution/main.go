@@ -8,10 +8,10 @@ import (
 )
 
 var (
-	ErrNegativeAmount     = errors.New("amount must be strictly positive")
-	ErrInsufficientFunds  = errors.New("insufficient funds for withdrawal")
-	ErrAccountFrozen      = errors.New("account is frozen")
-	ErrBufferEmpty        = errors.New("buffer is empty")
+	ErrNegativeAmount      = errors.New("amount must be strictly positive")
+	ErrInsufficientFunds   = errors.New("insufficient funds for withdrawal")
+	ErrAccountFrozen       = errors.New("account is frozen")
+	ErrBufferEmpty         = errors.New("buffer is empty")
 	ErrBelowMinimumBalance = errors.New("withdrawal breaches minimum balance")
 )
 

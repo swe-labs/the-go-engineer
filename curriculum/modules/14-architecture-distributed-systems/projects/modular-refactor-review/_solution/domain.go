@@ -23,22 +23,22 @@ const (
 )
 
 type OrderItem struct {
-	SKU         string `json:"sku"`
-	Quantity    int    `json:"quantity"`
-	PriceCents  int    `json:"price_cents"`
+	SKU        string `json:"sku"`
+	Quantity   int    `json:"quantity"`
+	PriceCents int    `json:"price_cents"`
 }
 
 type Order struct {
-	ID          string      `json:"id"`
-	Customer    string      `json:"customer"`
-	Email       string      `json:"email"`
-	Items       []OrderItem `json:"items"`
-	Subtotal    int         `json:"subtotal_cents"`
-	Discount    int         `json:"discount_cents"`
-	Total       int         `json:"total_cents"`
-	Status      OrderStatus `json:"status"`
-	PaymentRef  string      `json:"payment_ref,omitempty"`
-	CreatedAt   time.Time   `json:"created_at"`
+	ID         string      `json:"id"`
+	Customer   string      `json:"customer"`
+	Email      string      `json:"email"`
+	Items      []OrderItem `json:"items"`
+	Subtotal   int         `json:"subtotal_cents"`
+	Discount   int         `json:"discount_cents"`
+	Total      int         `json:"total_cents"`
+	Status     OrderStatus `json:"status"`
+	PaymentRef string      `json:"payment_ref,omitempty"`
+	CreatedAt  time.Time   `json:"created_at"`
 }
 
 // CalculateTotals calculates the subtotal, applies discount rules (10% off for orders >= $100),

@@ -106,7 +106,7 @@ Item,2,-1000`,
 			wantErr: ErrInvalidPrice,
 		},
 		{
-			name: "header only with no items",
+			name:    "header only with no items",
 			payload: `ORD-001,CA,GOLD`,
 			wantErr: ErrInvalidInvoice,
 		},

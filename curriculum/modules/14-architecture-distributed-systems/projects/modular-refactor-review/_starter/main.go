@@ -47,9 +47,9 @@ func generateLegacyID() string {
 
 func legacyCheckoutHandler(w http.ResponseWriter, r *http.Request) {
 	var body struct {
-		Customer     string `json:"customer"`
-		Email        string `json:"email"`
-		Items        []struct {
+		Customer string `json:"customer"`
+		Email    string `json:"email"`
+		Items    []struct {
 			SKU        string `json:"sku"`
 			Quantity   int    `json:"quantity"`
 			PriceCents int    `json:"price_cents"`

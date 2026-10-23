@@ -18923,10 +18923,10 @@
       }
     }
   },
-  "curriculum_version": "3.1.0-draft.1",
+  "curriculum_version": "3.0.0",
   "document_type": "crossrefs",
   "last_updated": "2026-05-23",
   "name": "The Go Engineer v3 — Cross References",
   "schema_version": "3.1.0",
-  "status": "draft"
+  "status": "stable"
 }

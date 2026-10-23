@@ -21,12 +21,12 @@ import (
 )
 
 var (
-	ErrNotFound       = errors.New("not found")
-	ErrUnauthorized   = errors.New("unauthorized")
-	ErrForbidden      = errors.New("forbidden")
-	ErrInvalidInput   = errors.New("invalid input")
-	ErrUserExists     = errors.New("user already exists")
-	ErrCrossTenant    = errors.New("cross-tenant access prohibited")
+	ErrNotFound     = errors.New("not found")
+	ErrUnauthorized = errors.New("unauthorized")
+	ErrForbidden    = errors.New("forbidden")
+	ErrInvalidInput = errors.New("invalid input")
+	ErrUserExists   = errors.New("user already exists")
+	ErrCrossTenant  = errors.New("cross-tenant access prohibited")
 )
 
 type Role string

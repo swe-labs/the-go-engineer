@@ -5,7 +5,7 @@
     "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
     "v2_policy": "curriculum.v2.json is frozen legacy import data, not the active source of truth."
   },
-  "curriculum_version": "3.1.0-draft.1",
+  "curriculum_version": "3.0.0",
   "document_type": "core_path",
   "items": [
     {
@@ -431,8 +431,8 @@
         "diagram_paths": [],
         "main_path": "",
         "readme_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/README.md",
-        "solution_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/_solution",
-        "starter_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": ""
       },
       "id": "core-00-03",
@@ -18375,8 +18375,8 @@
         "diagram_paths": [],
         "main_path": "modules/05-types-interfaces-packages-modules/labs/17-project-layout/main.go",
         "readme_path": "modules/05-types-interfaces-packages-modules/labs/17-project-layout/README.md",
-        "solution_path": "05-types-interfaces-packages-modules/17-project-layout/_solution",
-        "starter_path": "05-types-interfaces-packages-modules/17-project-layout/_starter",
+        "solution_path": "modules/05-types-interfaces-packages-modules/labs/17-project-layout/_solution",
+        "starter_path": "modules/05-types-interfaces-packages-modules/labs/17-project-layout/_starter",
         "test_path": "modules/05-types-interfaces-packages-modules/labs/17-project-layout/main_test.go"
       },
       "id": "core-05-17",
@@ -57274,8 +57274,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/01-opslane-foundation-and-configuration/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/01-opslane-foundation-and-configuration/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/main_test.go"
       },
       "id": "opslane-01",
@@ -57458,8 +57458,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/02-opslane-database-and-models/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/02-opslane-database-and-models/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/main_test.go"
       },
       "id": "opslane-02",
@@ -57642,8 +57642,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/03-opslane-authentication/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/03-opslane-authentication/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/03-opslane-authentication/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/03-opslane-authentication/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/03-opslane-authentication/main_test.go"
       },
       "id": "opslane-03",
@@ -57828,8 +57828,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/04-opslane-authorization/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/04-opslane-authorization/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/04-opslane-authorization/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/04-opslane-authorization/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/04-opslane-authorization/main_test.go"
       },
       "id": "opslane-04",
@@ -58013,8 +58013,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/05-opslane-tenant-isolation/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/05-opslane-tenant-isolation/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/main_test.go"
       },
       "id": "opslane-05",
@@ -58204,8 +58204,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/06-opslane-http-api-layer/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/06-opslane-http-api-layer/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/main_test.go"
       },
       "id": "opslane-06",
@@ -58389,8 +58389,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/07-opslane-order-processing/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/07-opslane-order-processing/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/main_test.go"
       },
       "id": "opslane-07",
@@ -58588,8 +58588,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/08-opslane-payment-pipeline/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/08-opslane-payment-pipeline/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/main_test.go"
       },
       "id": "opslane-08",
@@ -58774,8 +58774,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/09-opslane-event-bus/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/09-opslane-event-bus/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/main_test.go"
       },
       "id": "opslane-09",
@@ -58959,8 +58959,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/10-opslane-worker-pools/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/10-opslane-worker-pools/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/main_test.go"
       },
       "id": "opslane-10",
@@ -59143,8 +59143,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/11-opslane-caching-layer/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/11-opslane-caching-layer/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/main_test.go"
       },
       "id": "opslane-11",
@@ -59329,8 +59329,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/12-opslane-observability/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/12-opslane-observability/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/12-opslane-observability/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/12-opslane-observability/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/12-opslane-observability/main_test.go"
       },
       "id": "opslane-12",
@@ -59515,8 +59515,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/13-opslane-graceful-shutdown/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/13-opslane-graceful-shutdown/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/main_test.go"
       },
       "id": "opslane-13",
@@ -59710,8 +59710,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/main.go",
         "readme_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/14-opslane-deployment/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/14-opslane-deployment/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/main_test.go"
       },
       "id": "opslane-14",
@@ -59895,8 +59895,8 @@
         "diagram_paths": [],
         "main_path": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/main.go",
         "readme_path": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/README.md",
-        "solution_path": "modules/18-flagship-opslane/lessons/15-opslane-portfolio-defense/_solution",
-        "starter_path": "modules/18-flagship-opslane/lessons/15-opslane-portfolio-defense/_starter",
+        "solution_path": "",
+        "starter_path": "",
         "test_path": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/main_test.go"
       },
       "id": "opslane-15",
@@ -68531,5 +68531,5 @@
     "internal/tools/curriculum/"
   ],
   "schema_version": "3.1.0",
-  "status": "draft"
+  "status": "stable"
 }

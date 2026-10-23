@@ -5,7 +5,7 @@
     "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
     "v2_policy": "curriculum.v2.json is frozen legacy import data, not the active source of truth."
   },
-  "curriculum_version": "3.1.0-draft.1",
+  "curriculum_version": "3.0.0",
   "document_type": "elective_path",
   "items": [
     {
@@ -3776,7 +3776,7 @@
     "internal/tools/curriculum/"
   ],
   "schema_version": "3.1.0",
-  "status": "draft",
+  "status": "stable",
   "validation_commands": {
     "validate_all": "go run ./internal/tools/curriculum validate-all",
     "validate_graph": "go run ./internal/tools/curriculum validate-graph",

@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	ErrInvalidInvoice = errors.New("invalid invoice payload")
+	ErrInvalidInvoice  = errors.New("invalid invoice payload")
 	ErrInvalidQuantity = errors.New("quantity must be positive")
 	ErrInvalidPrice    = errors.New("price must be positive")
 )
@@ -46,10 +46,10 @@ func (l LineItem) Subtotal() int {
 }
 
 type Invoice struct {
-	OrderID    string
-	State      string
-	Tier       CustomerTier
-	Items      []LineItem
+	OrderID string
+	State   string
+	Tier    CustomerTier
+	Items   []LineItem
 }
 
 func (inv *Invoice) Subtotal() int {

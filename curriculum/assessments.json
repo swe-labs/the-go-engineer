@@ -5380,7 +5380,7 @@
       ]
     }
   ],
-  "curriculum_version": "3.1.0-draft.1",
+  "curriculum_version": "3.0.0",
   "document_type": "assessments",
   "last_updated": "2026-05-23",
   "name": "The Go Engineer v3 — Assessments",
@@ -5412,7 +5412,7 @@
     "readme-no-broken-human-readable-links"
   ],
   "schema_version": "3.1.0",
-  "status": "draft",
+  "status": "stable",
   "validation_commands": {
     "validate_all": "go run ./internal/tools/curriculum validate-all",
     "validate_graph": "go run ./internal/tools/curriculum validate-graph",

@@ -27,10 +27,10 @@ type BaseEvent struct {
 	Timestamp time.Time
 }
 
-func (b BaseEvent) Type() string           { return b.EventType }
-func (b BaseEvent) TenantID() string       { return b.Tenant }
-func (b BaseEvent) Payload() any           { return b.Data }
-func (b BaseEvent) OccurredAt() time.Time  { return b.Timestamp }
+func (b BaseEvent) Type() string          { return b.EventType }
+func (b BaseEvent) TenantID() string      { return b.Tenant }
+func (b BaseEvent) Payload() any          { return b.Data }
+func (b BaseEvent) OccurredAt() time.Time { return b.Timestamp }
 
 // Subscription represents an active event listener.
 type Subscription struct {

@@ -10,9 +10,9 @@ import (
 )
 
 var (
-	ErrPoolClosed   = errors.New("worker pool is closed")
-	ErrQueueFull    = errors.New("job queue is full")
-	ErrNilJob       = errors.New("job cannot be nil")
+	ErrPoolClosed      = errors.New("worker pool is closed")
+	ErrQueueFull       = errors.New("job queue is full")
+	ErrNilJob          = errors.New("job cannot be nil")
 	ErrShutdownTimeout = errors.New("shutdown timed out")
 )
 
@@ -35,13 +35,13 @@ type PoolStats struct {
 
 // WorkerPool manages a bounded set of worker goroutines.
 type WorkerPool struct {
-	workers       int
-	jobs          chan Job
-	wg            sync.WaitGroup
-	mu            sync.RWMutex
-	closed        bool
-	stopOnce      sync.Once
-	doneChan      chan struct{}
+	workers  int
+	jobs     chan Job
+	wg       sync.WaitGroup
+	mu       sync.RWMutex
+	closed   bool
+	stopOnce sync.Once
+	doneChan chan struct{}
 
 	activeWorkers int32
 	peakWorkers   int32

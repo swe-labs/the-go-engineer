@@ -33,10 +33,10 @@ func ContextWithCorrelationID(ctx context.Context, id string) context.Context {
 
 // MetricsRegistry encapsulates Prometheus metrics for Opslane observability.
 type MetricsRegistry struct {
-	Registry                 *prometheus.Registry
-	OrdersProcessedTotal     *prometheus.CounterVec
-	OrderProcessingDuration  *prometheus.HistogramVec
-	ActiveWorkersGauge       prometheus.Gauge
+	Registry                *prometheus.Registry
+	OrdersProcessedTotal    *prometheus.CounterVec
+	OrderProcessingDuration *prometheus.HistogramVec
+	ActiveWorkersGauge      prometheus.Gauge
 }
 
 func NewMetricsRegistry() *MetricsRegistry {

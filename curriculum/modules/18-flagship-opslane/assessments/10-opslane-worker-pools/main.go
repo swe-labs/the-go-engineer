@@ -24,8 +24,8 @@ type SimpleJob struct {
 	Work  func(ctx context.Context) error
 }
 
-func (j *SimpleJob) ID() string                              { return j.JobID }
-func (j *SimpleJob) Execute(ctx context.Context) error       { return j.Work(ctx) }
+func (j *SimpleJob) ID() string                        { return j.JobID }
+func (j *SimpleJob) Execute(ctx context.Context) error { return j.Work(ctx) }
 
 // BoundedWorkerPool manages a fixed set of concurrent worker goroutines.
 type BoundedWorkerPool struct {

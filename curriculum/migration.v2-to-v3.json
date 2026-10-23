@@ -1,10 +1,10 @@
 {
   "schema_version": "3.1.0",
   "document_type": "migration",
-  "curriculum_version": "3.1.0-draft.1",
+  "curriculum_version": "3.0.0",
   "last_updated": "2026-05-23",
-  "name": "The Go Engineer v3 \u2014 Migration from v2",
-  "status": "draft",
+  "name": "The Go Engineer v3 — Migration from v2",
+  "status": "stable",
   "architectural_decision": {
     "decision": "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
     "v2_policy": "curriculum.v2.json is frozen legacy import data, not the active source of truth.",

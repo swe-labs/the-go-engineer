@@ -1,6 +1,6 @@
 # The Go Engineer v3 — Curriculum
 
-> Schema: 3.1.0 | Curriculum: 3.1.0-draft.1 | Status: draft | Updated: 2026-10-23
+> Schema: 3.1.0 | Curriculum: 3.0.0 | Status: stable | Updated: 2026-10-23
 
 ## Architecture Decision
 

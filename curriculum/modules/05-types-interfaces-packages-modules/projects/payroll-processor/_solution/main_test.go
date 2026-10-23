@@ -32,11 +32,11 @@ func TestSalariedEmployee_CalculatePay(t *testing.T) {
 func TestHourlyEmployee_RegularAndOvertime(t *testing.T) {
 	// $50.00/hr (5000 cents/hr), Tax: 10%
 	testCases := []struct {
-		name         string
-		hours        float64
-		wantGross    int
-		wantTax      int
-		wantNet      int
+		name      string
+		hours     float64
+		wantGross int
+		wantTax   int
+		wantNet   int
 	}{
 		{
 			name:      "regular hours 30h",
@@ -153,8 +153,8 @@ func TestProcessBatch_PolymorphicPayroll(t *testing.T) {
 		t.Fatalf("expected 3 employees, got %d", summary.TotalEmployees)
 	}
 
-	expectedGross := 500000 + 200000 + 100000 // 800,000
-	expectedDed := 70000 + 20000 + 0          // 90,000
+	expectedGross := 500000 + 200000 + 100000  // 800,000
+	expectedDed := 70000 + 20000 + 0           // 90,000
 	expectedNet := expectedGross - expectedDed // 710,000
 
 	if summary.TotalGrossCents != expectedGross {

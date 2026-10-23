@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	ErrValidation       = errors.New("configuration validation failed")
+	ErrValidation        = errors.New("configuration validation failed")
 	ErrUnsupportedFormat = errors.New("unsupported configuration format")
 )
 
@@ -142,17 +142,17 @@ func (p *ConfigParser) parseKeyValueConfig(content string, cfg *AppConfig) error
 
 func (p *ConfigParser) applyEnvOverrides(cfg *AppConfig) {
 	overrides := map[string]string{
-		"APP_ENV":            "environment",
-		"APP_SERVER_HOST":    "server.host",
-		"APP_SERVER_PORT":    "server.port",
-		"APP_DB_HOST":        "database.host",
-		"APP_DB_PORT":        "database.port",
-		"APP_DB_NAME":        "database.name",
-		"APP_DB_USER":        "database.user",
-		"APP_DB_PASSWORD":    "database.password",
-		"APP_DB_MAX_CONNS":   "database.max_conns",
+		"APP_ENV":             "environment",
+		"APP_SERVER_HOST":     "server.host",
+		"APP_SERVER_PORT":     "server.port",
+		"APP_DB_HOST":         "database.host",
+		"APP_DB_PORT":         "database.port",
+		"APP_DB_NAME":         "database.name",
+		"APP_DB_USER":         "database.user",
+		"APP_DB_PASSWORD":     "database.password",
+		"APP_DB_MAX_CONNS":    "database.max_conns",
 		"APP_METRICS_ENABLED": "metrics.enabled",
-		"APP_METRICS_PATH":   "metrics.path",
+		"APP_METRICS_PATH":    "metrics.path",
 	}
 
 	for envKey, configKey := range overrides {

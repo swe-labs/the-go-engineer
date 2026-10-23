@@ -14,9 +14,9 @@ import (
 )
 
 var (
-	ErrEmptyQuery    = errors.New("search query cannot be empty")
-	ErrInvalidRegex  = errors.New("invalid regex pattern")
-	ErrFileNotFound  = errors.New("log file not found")
+	ErrEmptyQuery   = errors.New("search query cannot be empty")
+	ErrInvalidRegex = errors.New("invalid regex pattern")
+	ErrFileNotFound = errors.New("log file not found")
 )
 
 type LogLevel string

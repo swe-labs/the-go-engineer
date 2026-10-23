@@ -14,8 +14,8 @@ import (
 
 var (
 	ErrInvalidCredentials = errors.New("invalid email or password")
-	ErrTokenExpired        = errors.New("authentication token has expired")
-	ErrInvalidToken        = errors.New("invalid authentication token")
+	ErrTokenExpired       = errors.New("authentication token has expired")
+	ErrInvalidToken       = errors.New("invalid authentication token")
 )
 
 // UserAuth models user credentials and identity.
@@ -143,9 +143,9 @@ func (tm *TokenManager) ValidateAccessToken(tokenStr string) (*Claims, error) {
 
 // AuthService coordinates authentication workflows.
 type AuthService struct {
-	users      map[string]*UserAuth
-	passwords  *PasswordManager
-	tokens     *TokenManager
+	users     map[string]*UserAuth
+	passwords *PasswordManager
+	tokens    *TokenManager
 }
 
 func NewAuthService(secret string) *AuthService {

@@ -17,15 +17,15 @@ var (
 )
 
 type ProjectStatus struct {
-	Slug        string   `json:"slug"`
-	Title       string   `json:"title"`
-	Module      string   `json:"module"`
-	HasReadme   bool     `json:"has_readme"`
-	HasTests    bool     `json:"has_tests"`
-	HasCode     bool     `json:"has_code"`
-	HasProof    bool     `json:"has_proof"`
-	Score       int      `json:"score"` // 0-100
-	Gaps        []string `json:"gaps,omitempty"`
+	Slug      string   `json:"slug"`
+	Title     string   `json:"title"`
+	Module    string   `json:"module"`
+	HasReadme bool     `json:"has_readme"`
+	HasTests  bool     `json:"has_tests"`
+	HasCode   bool     `json:"has_code"`
+	HasProof  bool     `json:"has_proof"`
+	Score     int      `json:"score"` // 0-100
+	Gaps      []string `json:"gaps,omitempty"`
 }
 
 type PortfolioAuditReport struct {

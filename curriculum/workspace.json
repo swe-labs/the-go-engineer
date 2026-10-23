@@ -1,10 +1,10 @@
 {
   "schema_version": "3.1.0",
   "document_type": "workspace_manifest",
-  "curriculum_version": "3.1.0-draft.1",
+  "curriculum_version": "3.0.0",
   "last_updated": "2026-05-23",
   "name": "The Go Engineer v3 — Curriculum Workspace",
-  "status": "draft",
+  "status": "stable",
   "source_of_truth": [
     "curriculum/path.core.json",
     "curriculum/path.electives.json",
