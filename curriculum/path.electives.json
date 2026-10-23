@@ -84,7 +84,7 @@
         "test_path": "electives/advanced-electives/01-generics/main_test.go"
       },
       "id": "elective-01",
-      "learning_objective": "Understand and apply Generics in the context of professional Go software engineering.",
+      "learning_objective": "Implement type-safe generic functions and data structures using Go type parameters, compile-time monomorphization, and constraint interfaces.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-02"
@@ -102,7 +102,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Generics.",
+        "practice_task": "The learner must write a generic function that works with at least two distinct concrete types, write a generic data structure (e.g., a Stack or Queue), and explain how monomorphization works at compile time. They must also demonstrate understanding of constraint interfaces by writing a constraint with type approximation (~T) and a type union.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -268,7 +268,7 @@
         "test_path": "electives/advanced-electives/02-complex-generic-constraints/main_test.go"
       },
       "id": "elective-02",
-      "learning_objective": "Understand and apply Complex generic constraints in the context of professional Go software engineering.",
+      "learning_objective": "Construct and evaluate complex generic constraints incorporating type sets, union elements, and approximation terms (~T) for static compile-time safety.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-03"
@@ -286,7 +286,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Complex generic constraints.",
+        "practice_task": "The learner must write a constraint with a type union and type approximation, write a generic function that uses the constraint, demonstrate which types satisfy and do not satisfy the constraint, and explain why constraint satisfaction is checked at compile time rather than runtime.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -449,7 +449,7 @@
         "test_path": "electives/advanced-electives/03-generic-data-structures/main_test.go"
       },
       "id": "elective-03",
-      "learning_objective": "Understand and apply Generic data structures in the context of professional Go software engineering.",
+      "learning_objective": "Design and test type-safe generic collections (Stack, Queue, Ring) that maintain compile-time type invariants without runtime interface overhead.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-04"
@@ -467,7 +467,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Generic data structures.",
+        "practice_task": "The learner must implement a generic data structure (Stack[T] or Queue[T]) with Push, Pop, Peek, and Len methods, write tests that verify type safety (Stack[int] rejects string values at compile time), and explain how monomorphization produces concrete code for each instantiation.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -630,7 +630,7 @@
         "test_path": "electives/advanced-electives/04-functional-options/main_test.go"
       },
       "id": "elective-04",
-      "learning_objective": "Understand and apply Functional options in the context of professional Go software engineering.",
+      "learning_objective": "Architect extensible Go APIs and constructors using the functional options pattern with deterministic defaults, ordering, and validation.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-05"
@@ -648,7 +648,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Functional options.",
+        "practice_task": "The learner must implement a constructor with functional options: NewServer(addr string, opts ...Option) that accepts at least 3 options (WithTimeout, WithMaxConns, WithTLS), provide sensible defaults, and demonstrate that options are applied in order and that unset options use defaults.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -716,7 +716,7 @@
         "how_go_uses_it": "Go's standard library uses functional options in net/http (http.Server uses functional options via Server fields directly), gRPC (grpc.Dial with grpc.WithInsecure, grpc.WithBlock), and cloud client libraries (Google Cloud Go client uses functional options extensively). The pattern is idiomatic in Go for constructors with multiple optional parameters.",
         "mental_model": "A functional option is a function that modifies a config struct. The constructor accepts an empty config struct, applies each option function to it, and uses the resulting config. Each option is a standalone function that sets exactly one field. Callers specify only the options they care about — unset fields use their zero values or defaults. This is equivalent to the builder pattern but uses functions instead of a builder struct.",
         "performance_implications": [
-          "Each option function call is an indirect function call — overhead is negligible for typical configs (\u003c10 options), measurable at scale (1000+ instantiations/s)",
+          "Each option function call is an indirect function call — overhead is negligible for typical configs (<10 options), measurable at scale (1000+ instantiations/s)",
           "The functional options pattern allocates no heap memory per option — option functions are usually closures that capture no variables, so they are allocated in the binary's read-only data section",
           "Variadic ...Option allocates a slice — for hot-path constructors, consider a fixed-size array or builder pattern to avoid allocation",
           "Compared to a config struct literal, functional options add ~5ns per option call — irrelevant for startup code, measurable in high-frequency object creation"
@@ -729,11 +729,11 @@
           "→ Define: type Option func(*Config)",
           "→ Implement: func WithHost(host string) Option { return func(c *Config) { c.Host = host } }",
           "→ Implement: func WithPort(port int) Option { return func(c *Config) { c.Port = port } }",
-          "→ Constructor: func NewConfig(opts ...Option) *Config { c := \u0026Config{Host: \"localhost\", Port: 8080}; for _, opt := range opts { opt(c) }; return c }",
+          "→ Constructor: func NewConfig(opts ...Option) *Config { c := &Config{Host: \"localhost\", Port: 8080}; for _, opt := range opts { opt(c) }; return c }",
           "→ Use: cfg := NewConfig(WithHost(\"example.com\"), WithPort(443))",
           "→ Output: cfg.Host == \"example.com\", cfg.Port == 443"
         ],
-        "under_the_hood": "The functional options pattern uses a type Option func(*Config). The constructor NewServer(opts ...Option) creates a default Config, then calls each option in sequence: for _, opt := range opts { opt(\u0026cfg) }. Each option is a closure: func WithTimeout(d time.Duration) Option { return func(c *Config) { c.Timeout = d } }. The closure captures the parameter (d) and returns a function that applies it. Options are applied in order, so later options override earlier ones for the same field.",
+        "under_the_hood": "The functional options pattern uses a type Option func(*Config). The constructor NewServer(opts ...Option) creates a default Config, then calls each option in sequence: for _, opt := range opts { opt(&cfg) }. Each option is a closure: func WithTimeout(d time.Duration) Option { return func(c *Config) { c.Timeout = d } }. The closure captures the parameter (d) and returns a function that applies it. Options are applied in order, so later options override earlier ones for the same field.",
         "why_it_exists": "Functional options exist because Go does not have default parameter values, method overloading, or named parameters. Without functional options, constructors with 10+ parameters are unreadable (NewServer(addr, port, timeout, maxConns, ...)), callers must remember parameter order, and adding a new parameter breaks every call site. Functional options make each parameter explicit, independent, and backward-compatible."
       },
       "zero_magic_status": "placeholder"
@@ -814,7 +814,7 @@
         "test_path": "electives/advanced-electives/05-method-values/main_test.go"
       },
       "id": "elective-05",
-      "learning_objective": "Understand and apply Method values in the context of professional Go software engineering.",
+      "learning_objective": "Distinguish and apply method values vs. method expressions to implement decoupled callbacks, currying closures, and interface adapters.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-06"
@@ -832,7 +832,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Method values.",
+        "practice_task": "The learner must demonstrate the difference between method values and method expressions, write a sort.Interface implementation using method expressions, and use a method value as a callback in an event emitter pattern.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -911,7 +911,7 @@
         "step_by_step_execution": [
           "Define: type Logger struct { prefix string }",
           "→ Define: func (l *Logger) Log(msg string) { fmt.Println(l.prefix + \": \" + msg) }",
-          "→ Create method value: logger := \u0026Logger{\"app\"}; logFn := logger.Log",
+          "→ Create method value: logger := &Logger{\"app\"}; logFn := logger.Log",
           "→ logFn is a func(string) — the receiver logger is captured",
           "→ Call: logFn(\"hello\") — prints \"app: hello\"",
           "→ Pass to higher-order function: http.HandleFunc(\"/debug\", logger.Log — receiver captured at registration time",
@@ -998,7 +998,7 @@
         "test_path": "electives/advanced-electives/06-build-tags/main_test.go"
       },
       "id": "elective-06",
-      "learning_objective": "Understand and apply Build tags in the context of professional Go software engineering.",
+      "learning_objective": "Implement platform-specific and environment-isolated compilation units using Go build tags (//go:build) and verify target architecture isolation.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-07"
@@ -1016,7 +1016,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Build tags.",
+        "practice_task": "The learner must write a platform-specific implementation using build tags (e.g., a signal handler that uses syscall.SIGUSR1 on Linux and os.Interrupt on Windows), demonstrate that the correct file compiles on each platform, and use a custom build tag to conditionally include debug logging.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -1082,11 +1082,11 @@
           "Learner must create a cross-platform package with 3 build-tag variants and verify that only the correct variant compiles for each target"
         ],
         "how_go_uses_it": "The Go standard library uses build tags extensively in the syscall, os, and net packages. Platform-specific files use _linux.go, _windows.go, _darwin.go suffixes. The internal/syscall package uses build tags for system call definitions. Third-party libraries use build tags for cgo wrappers (//go:build cgo), CGo-free fallbacks (//go:build !cgo), and debug logging (//go:build debug).",
-        "mental_model": "A build tag is a boolean expression evaluated at compile time. Files whose build tag expression evaluates to false are excluded from the compilation. Common constraints include: GOOS (linux, darwin, windows), GOARCH (amd64, arm64), Go version (go1.22), custom tags set via -tags flag, and cgo. The expression syntax supports \u0026\u0026, ||, and ! operators for complex constraints.",
+        "mental_model": "A build tag is a boolean expression evaluated at compile time. Files whose build tag expression evaluates to false are excluded from the compilation. Common constraints include: GOOS (linux, darwin, windows), GOARCH (amd64, arm64), Go version (go1.22), custom tags set via -tags flag, and cgo. The expression syntax supports &&, ||, and ! operators for complex constraints.",
         "performance_implications": [
           "Build tags have zero runtime cost — excluded files do not exist in the compiled binary",
           "Build tag evaluation happens at compile time, not runtime — there is no conditional branching in the generated code",
-          "Complex build tag expressions (\u0026\u0026, ||, !) are resolved entirely during compilation and add no runtime overhead",
+          "Complex build tag expressions (&&, ||, !) are resolved entirely during compilation and add no runtime overhead",
           "Using too many platform-specific build tags increases build matrix complexity but does not affect runtime performance"
         ],
         "problem_solved": "Go code that depends on platform-specific features (system calls, file paths, network APIs) compiles only on specific operating systems or architectures. Without build tags, platform-specific files must use filename suffixes (_linux.go, _windows.go) or be excluded from cross-platform builds entirely. Build tags solve this by allowing conditional compilation based on OS, architecture, custom build constraints, or Go version.",
@@ -1095,13 +1095,13 @@
         "step_by_step_execution": [
           "Create file_a.go for Linux: //go:build linux — package main; func Platform() string { return \"linux\" }",
           "Create file_b.go for macOS: //go:build darwin — package main; func Platform() string { return \"darwin\" }",
-          "Create file_c.go for fallback: //go:build !linux \u0026\u0026 !darwin — package main; func Platform() string { return \"other\" }",
+          "Create file_c.go for fallback: //go:build !linux && !darwin — package main; func Platform() string { return \"other\" }",
           "Create main.go: package main; func main() { println(Platform()) }",
           "Run GOOS=linux go build — file_a.go is compiled, file_b.go and file_c.go are excluded",
           "Run GOOS=darwin go build — file_b.go is compiled, others excluded",
-          "Run GOOS=windows go build — file_c.go is compiled (matches !linux \u0026\u0026 !darwin)"
+          "Run GOOS=windows go build — file_c.go is compiled (matches !linux && !darwin)"
         ],
-        "under_the_hood": "Go's go/build package evaluates build constraints during package scanning. The //go:build comment (Go 1.17+) replaces the older // +build syntax. The expression is: //go:build linux \u0026\u0026 amd64 means the file only compiles on linux/amd64. Multiple //go:build lines are ORed. Filename-based constraints use the pattern *_GOOS.go, *_GOARCH.go, or *_GOOS_GOARCH.go — these are checked before build tag comments.",
+        "under_the_hood": "Go's go/build package evaluates build constraints during package scanning. The //go:build comment (Go 1.17+) replaces the older // +build syntax. The expression is: //go:build linux && amd64 means the file only compiles on linux/amd64. Multiple //go:build lines are ORed. Filename-based constraints use the pattern *_GOOS.go, *_GOARCH.go, or *_GOOS_GOARCH.go — these are checked before build tag comments.",
         "why_it_exists": "Build tags exist because Go supports cross-compilation to multiple targets from a single codebase. Platform-specific code (syscall, os, net) must be excluded on targets where it does not compile. Go provides two mechanisms: filename-based constraints (_linux.go only compiles on linux) and build tag comments (//go:build linux). Build tags also enable feature flags (//go:build cgo, //go:build debug) to include or exclude code without modifying source files."
       },
       "zero_magic_status": "placeholder"
@@ -1182,7 +1182,7 @@
         "test_path": "electives/advanced-electives/07-go-generate/main_test.go"
       },
       "id": "elective-07",
-      "learning_objective": "Understand and apply go generate in the context of professional Go software engineering.",
+      "learning_objective": "Automate static boilerplate and interface generation using go:generate directives, custom tooling binaries, and stringer.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-08"
@@ -1200,7 +1200,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies go generate.",
+        "practice_task": "The learner must create a Go file with a //go:generate directive that runs stringer on an enum type, run go generate, verify the generated String() method compiles and works, and document the generation command in the README.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -1366,7 +1366,7 @@
         "test_path": "electives/advanced-electives/08-mockery/main_test.go"
       },
       "id": "elective-08",
-      "learning_objective": "Understand and apply Mockery in the context of professional Go software engineering.",
+      "learning_objective": "Generate type-safe mock implementations using Mockery and construct deterministic unit test suites with call verification and expectations.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-09"
@@ -1384,7 +1384,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Mockery.",
+        "practice_task": "The learner must define a Go interface, generate a mock using Mockery with a //go:generate directive, write a test that injects the mock, sets expectations, exercises the code, and calls AssertExpectations — including a negative test that proves AssertExpectations fails when expected calls are not made.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -1454,7 +1454,7 @@
         "performance_implications": [
           "Mock method calls use testify's reflection-based matching — each expectation check is O(n) in the number of expectations for that method",
           "Creating mock instances allocates: testify stores call expectations in slices — large test suites with many mocks can have significant setup overhead",
-          "Mock assertions at test teardown (AssertExpectations) iterate over all expectations — negligible for typical tests (\u003c100 expectations)",
+          "Mock assertions at test teardown (AssertExpectations) iterate over all expectations — negligible for typical tests (<100 expectations)",
           "For performance-critical test execution (1000+ test cases), consider hand-written stub implementations instead of mockery-generated mocks"
         ],
         "problem_solved": "Testing Go code that depends on external interfaces (database, HTTP clients, message queues) requires test doubles that implement those interfaces. Writing mock implementations by hand is tedious, error-prone, and must be updated when the interface changes. Mockery solves this by generating mock implementations from Go interfaces automatically, using go:generate directives or CLI commands.",
@@ -1550,7 +1550,7 @@
         "test_path": "electives/advanced-electives/09-protobuf/main_test.go"
       },
       "id": "elective-09",
-      "learning_objective": "Understand and apply Protobuf in the context of professional Go software engineering.",
+      "learning_objective": "Define, compile, and serialize schema-first Protocol Buffer IDL definitions with backward-compatible wire format evolution.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-10"
@@ -1568,7 +1568,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Protobuf.",
+        "practice_task": "The learner must write a .proto file with at least 2 message types and 1 service definition, generate Go code using protoc and protoc-gen-go, marshal and unmarshal a protobuf message in Go, and demonstrate backward compatibility by adding a new field to the proto file without breaking existing messages.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -1647,8 +1647,8 @@
           "Create user.proto: syntax = \"proto3\"; message User { string id = 1; string email = 2; }",
           "Run: protoc --go_out=. --go_opt=paths=source_relative user.proto",
           "Generated: user.pb.go with type User struct { Id string; Email string }",
-          "Encode: user := \u0026User{Id: \"abc\", Email: \"a@b.com\"}; data, _ := proto.Marshal(user)",
-          "Decode: decoded := \u0026User{}; proto.Unmarshal(data, decoded)",
+          "Encode: user := &User{Id: \"abc\", Email: \"a@b.com\"}; data, _ := proto.Marshal(user)",
+          "Decode: decoded := &User{}; proto.Unmarshal(data, decoded)",
           "Wire format: field 1 (string Id) → tag byte 0x0a + length + bytes; field 2 (string Email) → tag byte 0x12 + length + bytes"
         ],
         "under_the_hood": "Protobuf encoding uses a binary wire format with varint encoding for integers, length-delimited strings/bytes, and fixed-width encoding for floats/doubles. Each field is identified by its field number and wire type (varint, 64-bit, length-delimited, start-group, 32-bit). The Go protoc plugin (protoc-gen-go) generates Go structs with protobuf struct tags and Marshal/Unmarshal methods that use the google.golang.org/protobuf/proto package for encoding and decoding.",
@@ -1732,7 +1732,7 @@
         "test_path": "electives/advanced-electives/10-grpc-fundamentals/main_test.go"
       },
       "id": "elective-10",
-      "learning_objective": "Understand and apply gRPC fundamentals in the context of professional Go software engineering.",
+      "learning_objective": "Build and test end-to-end unary gRPC services in Go using generated client and server stubs with context deadlines.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-11"
@@ -1750,7 +1750,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies gRPC fundamentals.",
+        "practice_task": "The learner must define a .proto service with at least one unary RPC, generate Go server and client code using protoc with the gRPC plugin, implement the server, write a client that calls the RPC with a context deadline, and verify the response is correct.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -1829,10 +1829,10 @@
         "step_by_step_execution": [
           "Define: service Greeter { rpc SayHello (HelloRequest) returns (HelloReply); }",
           "Generate: protoc --go_out=. --go-grpc_out=. *.proto",
-          "Server: type greeterServer struct{ pb.UnimplementedGreeterServer }; func (s *greeterServer) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloReply, error) { return \u0026pb.HelloReply{Message: \"Hello \" + req.Name}, nil }",
-          "Start server: lis, _ := net.Listen(\"tcp\", \":50051\"); s := grpc.NewServer(); pb.RegisterGreeterServer(s, \u0026greeterServer{}); s.Serve(lis)",
+          "Server: type greeterServer struct{ pb.UnimplementedGreeterServer }; func (s *greeterServer) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloReply, error) { return &pb.HelloReply{Message: \"Hello \" + req.Name}, nil }",
+          "Start server: lis, _ := net.Listen(\"tcp\", \":50051\"); s := grpc.NewServer(); pb.RegisterGreeterServer(s, &greeterServer{}); s.Serve(lis)",
           "Client: conn, _ := grpc.Dial(\"localhost:50051\", grpc.WithTransportCredentials(insecure.NewCredentials())); client := pb.NewGreeterClient(conn)",
-          "Call: resp, err := client.SayHello(ctx, \u0026pb.HelloRequest{Name: \"World\"}) — prints resp.Message == \"Hello World\""
+          "Call: resp, err := client.SayHello(ctx, &pb.HelloRequest{Name: \"World\"}) — prints resp.Message == \"Hello World\""
         ],
         "under_the_hood": "gRPC uses HTTP/2 for transport, with protobuf as the default serialization format. Each RPC is an HTTP/2 stream multiplexed over a single TCP connection. The server listens on a TCP port and accepts incoming streams. Client stubs marshal request messages to protobuf, send them over HTTP/2, and unmarshal response messages. gRPC supports four RPC types: unary (request-response), server-streaming, client-streaming, and bidirectional streaming.",
         "why_it_exists": "gRPC exists because microservices need an efficient, contract-driven RPC framework. REST/JSON requires manual documentation of endpoints, request/response schemas, and error handling. gRPC generates client and server code from a .proto definition, ensuring the contract is always in sync between services. HTTP/2 multiplexing allows multiple RPCs over a single TCP connection, reducing latency and connection overhead."
@@ -1915,7 +1915,7 @@
         "test_path": "electives/advanced-electives/11-grpc-streaming/main_test.go"
       },
       "id": "elective-11",
-      "learning_objective": "Understand and apply gRPC streaming in the context of professional Go software engineering.",
+      "learning_objective": "Implement and coordinate client-streaming, server-streaming, and bidirectional gRPC pipelines in Go with flow control and EOF handling.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-12"
@@ -1933,7 +1933,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies gRPC streaming.",
+        "practice_task": "The learner must implement a server-streaming RPC that sends 10 messages at 1-second intervals, a client that receives them with Recv() until io.EOF, and a bidirectional streaming RPC where the client sends 5 messages and the server echoes each one back.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -2011,7 +2011,7 @@
         "step_by_step_execution": [
           "Define: rpc ListFeatures(Rectangle) returns (stream Feature)",
           "Server: func (s *routeGuideServer) ListFeatures(rect *pb.Rectangle, stream pb.RouteGuide_ListFeaturesServer) error { for _, f := range features { if inRange(f, rect) { stream.Send(f) } }; return nil }",
-          "Client: stream, _ := client.ListFeatures(ctx, \u0026pb.Rectangle{...})",
+          "Client: stream, _ := client.ListFeatures(ctx, &pb.Rectangle{...})",
           "Loop: for { f, err := stream.Recv(); if err == io.EOF { break }; process(f) }",
           "Each stream.Send(f) blocks until the data is written to the HTTP/2 stream buffer or the client's Recv() consumes it"
         ],
@@ -2096,7 +2096,7 @@
         "test_path": "electives/advanced-electives/12-grpc-interceptors/main_test.go"
       },
       "id": "elective-12",
-      "learning_objective": "Understand and apply gRPC interceptors in the context of professional Go software engineering.",
+      "learning_objective": "Construct composable gRPC client and server interceptors for distributed telemetry, authentication metadata propagation, and panic recovery.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-13"
@@ -2114,7 +2114,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies gRPC interceptors.",
+        "practice_task": "The learner must implement a unary server interceptor that logs each RPC with method name, request size, duration, and response status, register it with the gRPC server, and verify that every RPC produces a log line with the expected fields.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -2277,7 +2277,7 @@
         "test_path": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/main_test.go"
       },
       "id": "elective-13",
-      "learning_objective": "Understand and apply REST vs gRPC tradeoffs in the context of professional Go software engineering.",
+      "learning_objective": "Evaluate technical tradeoffs between REST/JSON and gRPC/Protobuf protocols across payload overhead, latency, streaming, and client tooling.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-14"
@@ -2295,7 +2295,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies REST vs gRPC tradeoffs.",
+        "practice_task": "The learner must design the API protocol for three scenarios: (1) a public API for a weather service (REST), (2) an internal service for processing real-time stock trades (gRPC streaming), (3) a CRUD API for a CMS admin panel (REST), and explain the tradeoff decision for each scenario.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -2366,7 +2366,7 @@
           "REST over HTTP/1.1 has head-of-line blocking — one slow response blocks subsequent requests on the same connection; HTTP/2 (gRPC) eliminates this",
           "gRPC's binary format is ~3-5x smaller than JSON for the same data, reducing bandwidth and deserialization time",
           "REST's text format (JSON) is debuggable with curl and browser dev tools — gRPC requires grpcurl or similar specialized tools",
-          "For low-throughput APIs (\u003c100 RPS), the performance difference is negligible — developer productivity and tooling matter more"
+          "For low-throughput APIs (<100 RPS), the performance difference is negligible — developer productivity and tooling matter more"
         ],
         "problem_solved": "Go developers must choose between REST and gRPC when designing service APIs, but the decision is rarely clear-cut. REST is human-readable, browser-friendly, and has universal tooling. gRPC is faster, contract-enforced, and supports streaming. Choosing incorrectly leads to poor developer experience, performance bottlenecks, or maintenance overhead.",
         "proof_of_understanding": "The learner must design the API protocol for three scenarios: (1) a public API for a weather service (REST), (2) an internal service for processing real-time stock trades (gRPC streaming), (3) a CRUD API for a CMS admin panel (REST), and explain the tradeoff decision for each scenario.",
@@ -2457,7 +2457,7 @@
         "test_path": "electives/advanced-electives/14-sync-map/main_test.go"
       },
       "id": "elective-14",
-      "learning_objective": "Understand and apply sync.Map in the context of professional Go software engineering.",
+      "learning_objective": "Implement lock-contention mitigation using sync.Map for read-heavy and disjoint-write concurrent access patterns.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-15"
@@ -2475,7 +2475,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies sync.Map.",
+        "practice_task": "The learner must implement a typed cache using sync.Map that stores and retrieves values with type-safe Load and Store wrapper methods, write a concurrent test that proves 10 goroutines reading and 2 goroutines writing do not cause race conditions, and compare the performance against a map with sync.RWMutex using a benchmark.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -2640,7 +2640,7 @@
         "test_path": "electives/advanced-electives/15-sync-pool/main_test.go"
       },
       "id": "elective-15",
-      "learning_objective": "Understand and apply sync.Pool in the context of professional Go software engineering.",
+      "learning_objective": "Profile and optimize memory allocation cycles and GC pressure using sync.Pool for byte buffers and short-lived structs under high throughput.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-16"
@@ -2658,7 +2658,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies sync.Pool.",
+        "practice_task": "The learner must write a benchmark that allocates 1000 bytes.Buffers without sync.Pool and with sync.Pool, report the allocs/op and ns/op for each approach, and explain why sync.Pool reduces GC pressure despite not reducing total allocation count.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -2822,7 +2822,7 @@
         "test_path": "electives/advanced-electives/16-cqrs/main_test.go"
       },
       "id": "elective-16",
-      "learning_objective": "Understand and apply CQRS in the context of professional Go software engineering.",
+      "learning_objective": "Architect Command Query Responsibility Segregation (CQRS) systems separating command models from read projections with eventual consistency.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-17"
@@ -2840,7 +2840,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies CQRS.",
+        "practice_task": "The learner must design a CQRS system for an order management service with separate command and query models, implement an event store that persists commands as events, create a read model projection that consumes events and updates a denormalized orders_read table, and demonstrate that a write is visible on the read side only after event propagation completes (eventual consistency).",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -3006,7 +3006,7 @@
         "test_path": "electives/advanced-electives/17-feature-flags/main_test.go"
       },
       "id": "elective-17",
-      "learning_objective": "Understand and apply Feature flags in the context of professional Go software engineering.",
+      "learning_objective": "Design and evaluate runtime feature flags supporting dynamic percentage rollouts, user targeting, and decoupled release lifecycles.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-18"
@@ -3024,7 +3024,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Feature flags.",
+        "practice_task": "The learner must implement a feature flag system supporting percentage-based rollouts and user targeting, wrap a new code path in a flag check, demonstrate that the flag can be toggled at runtime without redeployment, and document the flag removal process.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -3189,7 +3189,7 @@
         "test_path": "electives/advanced-electives/18-blue-green-deployments/main_test.go"
       },
       "id": "elective-18",
-      "learning_objective": "Understand and apply Blue/green deployments in the context of professional Go software engineering.",
+      "learning_objective": "Formulate zero-downtime blue/green deployment strategies with forward/backward schema compatibility, health gating, and rollback runbooks.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-19"
@@ -3207,7 +3207,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Blue/green deployments.",
+        "practice_task": "The learner must design a blue/green deployment strategy for a Go service with a PostgreSQL database, including: (1) backward-compatible migration, (2) traffic switch mechanism, (3) health check on the standby environment before the switch, (4) cache pre-warming, and (5) rollback procedure.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -3373,7 +3373,7 @@
         "test_path": "electives/advanced-electives/19-microservice-splitting/main_test.go"
       },
       "id": "elective-19",
-      "learning_objective": "Understand and apply Microservice splitting in the context of professional Go software engineering.",
+      "learning_objective": "Deconstruct monolithic codebases into domain-isolated microservices using the Strangler Fig pattern and bounded context boundaries.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-20"
@@ -3391,7 +3391,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Microservice splitting.",
+        "practice_task": "The learner must identify three bounded contexts in a sample e-commerce monolith, define the API contract for one extracted service, and explain the migration strategy from monolith to services: data migration, traffic routing, and rollback plan.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"
@@ -3556,7 +3556,7 @@
         "test_path": "electives/advanced-electives/20-deeper-distributed-systems/main_test.go"
       },
       "id": "elective-20",
-      "learning_objective": "Understand and apply Deeper distributed systems in the context of professional Go software engineering.",
+      "learning_objective": "Design distributed systems resilient to network partitions, implementing circuit breakers, CAP tradeoffs, and retry backoff with jitter.",
       "module_id": "module-17",
       "next_item_ids": [],
       "order": 20,
@@ -3572,7 +3572,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "Complete a focused exercise that applies Deeper distributed systems.",
+        "practice_task": "The learner must explain the CAP tradeoff for a distributed key-value store, implement a circuit breaker that opens after 3 failures and half-opens after 30 seconds, and write a retry function with exponential backoff and jitter that calls an external service and handles transient failures.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-16"

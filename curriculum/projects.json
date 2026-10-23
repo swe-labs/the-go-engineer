@@ -4689,7 +4689,11 @@
         "core-15-02",
         "core-15-03"
       ],
-      "prerequisites": null,
+      "prerequisites": [
+        "core-15-08",
+        "core-15-12",
+        "core-15-13"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -4888,7 +4892,11 @@
         "required": true
       },
       "readme_status": "scaffolded",
-      "reinforcement_targets": [],
+      "reinforcement_targets": [
+        "portfolio strategy",
+        "technical writing",
+        "code review readiness"
+      ],
       "reinforces": [
         "core-16-01",
         "core-16-02",
@@ -4906,7 +4914,11 @@
         "core-16-14",
         "core-16-15"
       ],
-      "required_concepts": [],
+      "required_concepts": [
+        "portfolio strategy",
+        "technical writing",
+        "code review readiness"
+      ],
       "rubric": [
         {
           "description": "Implementation satisfies the stated behavior.",
@@ -5294,8 +5306,16 @@
         "core-00-10"
       ],
       "readme_status": "scaffolded",
-      "reinforcement_targets": [],
-      "required_concepts": [],
+      "reinforcement_targets": [
+        "zero-magic learning",
+        "repository navigation",
+        "local toolchain execution"
+      ],
+      "required_concepts": [
+        "zero-magic learning",
+        "repository navigation",
+        "local toolchain execution"
+      ],
       "rubric": [
         {
           "criterion": "Correctness",
@@ -5434,10 +5454,22 @@
       "documentation_mode": "tutorial",
       "id": "project-advanced-electives",
       "module_id": "module-17",
-      "prerequisites": null,
+      "prerequisites": [
+        "core-16-15"
+      ],
       "readme_status": "scaffolded",
-      "reinforcement_targets": [],
-      "required_concepts": [],
+      "reinforcement_targets": [
+        "generic constraints",
+        "grpc protocol",
+        "sync pool memory reuse",
+        "cqrs architecture"
+      ],
+      "required_concepts": [
+        "generic constraints",
+        "grpc protocol",
+        "sync pool memory reuse",
+        "cqrs architecture"
+      ],
       "rubric": [
         {
           "criterion": "Technical depth",

@@ -3128,7 +3128,12 @@
         "project-pricing-checkout"
       ],
       "title": "Assessment — Pricing Checkout",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "How does your binary search tier lookup handle boundary conditions, such as an order quantity exactly matching a tier limit or exceeding the highest defined tier?",
+        "Why are floating-point types dangerous for currency calculations, and how did your data modeling prevent precision loss during checkout tallying?",
+        "Walk me through how your unit test suite proves that tax and discount rules execute in deterministic sequence regardless of input order."
+      ]
     },
     {
       "criteria": [
@@ -3225,7 +3230,12 @@
         "project-contact-directory"
       ],
       "title": "Assessment — Contact Directory",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Explain the performance and memory differences between looking up a contact by ID in a map versus searching through a slice of structs.",
+        "What happens if two concurrent operations attempt to mutate the contact directory simultaneously, and how would you protect map access?",
+        "Why did you choose a custom type for phone numbers or emails, and how does Go's type system prevent assigning an unvalidated string to that field?"
+      ]
     },
     {
       "criteria": [
@@ -3322,7 +3332,12 @@
         "project-order-summary-refactor"
       ],
       "title": "Assessment — Order Summary Refactor",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "How did you decompose the monolithic summary function to separate calculation logic from I/O and formatting concerns?",
+        "Walk me through your error-handling strategy: where do you wrap errors with additional context versus returning sentinel errors?",
+        "How does your refactored design guarantee that intermediate allocations are minimized when processing large batches of line items?"
+      ]
     },
     {
       "criteria": [
@@ -3419,7 +3434,12 @@
         "project-bank-account"
       ],
       "title": "Assessment — Bank Account",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Why did you use pointer receivers for deposit and withdrawal methods, and what would happen if value receivers were mistakenly used?",
+        "Walk me through your generic transaction buffer: how does the type constraint ensure only valid transaction records can be buffered?",
+        "How does your implementation guarantee invariant protection so that account balances cannot drop below zero during concurrent attempts?"
+      ]
     },
     {
       "criteria": [
@@ -3516,7 +3536,12 @@
         "project-payroll-processor"
       ],
       "title": "Assessment — Payroll Processor",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "How did you use interface composition to model salaried vs. hourly employees without relying on inheritance?",
+        "Explain the package boundary decisions in your payroll system: which types and functions are exported versus kept package-private?",
+        "How do you mock or fake external payment gateway interactions in your unit tests without making actual network calls?"
+      ]
     },
     {
       "criteria": [
@@ -3613,7 +3638,12 @@
         "project-bug-hunt-pack"
       ],
       "title": "Assessment — Bug Hunt Pack",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Walk me through the most subtle bug you identified in the pack: what was the root cause, how did you reproduce it, and how did you verify the fix?",
+        "How did you use the Go race detector (go test -race) or delve debugger to isolate non-deterministic runtime failures?",
+        "What preventative design patterns or linter rules would catch this class of bug during compilation rather than in production?"
+      ]
     },
     {
       "criteria": [
@@ -3710,7 +3740,12 @@
         "project-refactor-under-tests"
       ],
       "title": "Assessment — Refactor Under Tests",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "How did you establish a baseline test suite for the legacy code before making any architectural or structural modifications?",
+        "What coverage metrics or characterization testing techniques did you use to ensure your refactoring introduced zero regression in behavior?",
+        "Walk me through how your refactored code improved testability through dependency injection or interface abstraction."
+      ]
     },
     {
       "criteria": [
@@ -3807,7 +3842,12 @@
         "project-file-organizer"
       ],
       "title": "Assessment — File Organizer",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "How does your file organizer handle symbolic links, circular directory references, and file permission errors during traversal?",
+        "Walk me through your resource cleanup strategy: how do you ensure file descriptors are never leaked when walking deep folder hierarchies?",
+        "How did you test dry-run mode to guarantee that no files are modified, moved, or deleted when the user supplies the safety flag?"
+      ]
     },
     {
       "criteria": [
@@ -3904,7 +3944,12 @@
         "project-log-search"
       ],
       "title": "Assessment — Log Search",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Why is streaming line-by-line processing with bufio.Scanner superior to reading entire log files into memory with os.ReadFile?",
+        "How does your CLI handle pipe input (cat app.log | logsearch) versus explicit file arguments, and how did you structure POSIX exit codes?",
+        "What edge cases occur when searching multi-gigabyte compressed or actively rotated log files, and how does your tool handle EOF or truncated lines?"
+      ]
     },
     {
       "criteria": [
@@ -4001,7 +4046,12 @@
         "project-config-parser"
       ],
       "title": "Assessment — Config Parser",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Walk me through your configuration precedence hierarchy: how do CLI flags override environment variables, and how do environment variables override file defaults?",
+        "How does your validator detect missing required fields or type mismatches before the application runtime starts serving requests?",
+        "Why is it dangerous to unmarshal configuration directly into exported application structs without validation, and how did you isolate secrets?"
+      ]
     },
     {
       "criteria": [
@@ -4098,7 +4148,12 @@
         "project-book-catalog-rest-api"
       ],
       "title": "Assessment — Book Catalog REST API",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "How do you distinguish between a client error (400 Bad Request, 404 Not Found, 422 Unprocessable) versus an internal server error (500) in your HTTP handlers?",
+        "Walk me through your JSON serialization design: why use json.NewDecoder(r.Body) instead of reading all bytes, and how do you limit payload sizes to prevent DoS?",
+        "How does your middleware chain handle panics, request logging, and correlation ID propagation across HTTP request contexts?"
+      ]
     },
     {
       "criteria": [
@@ -4195,7 +4250,12 @@
         "project-task-api-postgres"
       ],
       "title": "Assessment — Task API with Postgres",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Walk me through your database disaster recovery drill: what exact steps did you take to dump, destroy, restore, and verify database integrity?",
+        "How do database transactions (tx.Commit(), tx.Rollback()) ensure consistency when updating tasks with associated audit log entries?",
+        "Why did you use parameterized queries or sqlc-generated code instead of string interpolation, and what are the specific SQL injection risks prevented?"
+      ]
     },
     {
       "criteria": [
@@ -4292,7 +4352,12 @@
         "project-secure-authenticated-api"
       ],
       "title": "Assessment — Secure Authenticated API",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Walk me through your negative authorization test suite: how do your automated tests prove that Tenant A cannot access Tenant B's data even with a valid JWT?",
+        "Explain the cryptographic difference between token authentication (JWT signature verification) and password storage (bcrypt work factor hashing).",
+        "What security headers (CORS, CSP, X-Frame-Options) and token expiration/refresh mechanics did you implement to mitigate token theft and replay attacks?"
+      ]
     },
     {
       "criteria": [
@@ -4389,7 +4454,12 @@
         "project-concurrent-downloader"
       ],
       "title": "Assessment — Concurrent Downloader",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "How does your downloader use HTTP Range headers to split files into chunks, and how do you verify chunk integrity before re-assembling the final file?",
+        "Walk me through your worker pool and backpressure mechanism: what happens if a remote server throttles requests with 429 or drops connections mid-stream?",
+        "How does your cancellation logic propagate through context.Context to abort in-flight chunk downloads immediately without leaking goroutines or partial files?"
+      ]
     },
     {
       "criteria": [
@@ -4486,7 +4556,12 @@
         "project-url-health-checker"
       ],
       "title": "Assessment — URL Health Checker",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "How did you size the bounded worker pool, and why is an unbounded goroutine-per-URL approach dangerous when scanning thousands of endpoints?",
+        "How do you differentiate between DNS resolution failure, connection timeout, TLS handshake failure, and HTTP status code errors in your health reports?",
+        "Walk me through your synchronization model: how do channels and sync.WaitGroup coordinate probe dispatches, result collection, and graceful shutdown?"
+      ]
     },
     {
       "criteria": [
@@ -4583,7 +4658,12 @@
         "project-bounded-worker-pool"
       ],
       "title": "Assessment — Bounded Worker Pool",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Explain channel ownership: which goroutine is responsible for closing the task channel, and what happens if a sender writes to a closed channel?",
+        "How does your worker pool handle a task that panics: does the entire pool crash, or is the panic recovered and reported while keeping worker routines alive?",
+        "Walk me through how context.WithCancel or context.WithTimeout triggers worker drainage and graceful exit when terminating the application."
+      ]
     },
     {
       "criteria": [
@@ -4680,7 +4760,12 @@
         "project-pii-redactor"
       ],
       "title": "Assessment — PII Redactor",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "How does your redaction engine identify sensitive fields (credit cards, SSNs, bearer tokens) across structured JSON logs without destroying log readability?",
+        "What are the performance implications of regular expression matching on every log line under high throughput, and how did you optimize pattern evaluation?",
+        "How do your automated unit tests verify that edge cases (partially masked tokens, nested JSON objects, custom formatted inputs) never leak unredacted data?"
+      ]
     },
     {
       "criteria": [
@@ -4777,7 +4862,12 @@
         "project-observability-retrofit"
       ],
       "title": "Assessment — Observability Retrofit",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Walk me through how correlation IDs and trace contexts are extracted from incoming HTTP headers and injected into structured logs with slog.",
+        "What is the difference between log aggregation, metric counters/gauges, and distributed tracing spans, and when should an engineer use each?",
+        "How do you ensure that metric collection and tracing instrumentation do not introduce significant CPU overhead or latency spikes in the hot path?"
+      ]
     },
     {
       "criteria": [
@@ -4874,7 +4964,12 @@
         "project-profile-and-fix-lab"
       ],
       "title": "Assessment — Profile and Fix Lab",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Walk me through your before/after benchmark results: what specific bottleneck did the pprof CPU/heap profile reveal, and what code change resolved it?",
+        "How does escape analysis explain why heap allocations were occurring in the unoptimized version, and how did your refactor keep allocations on the stack?",
+        "Why is optimizing without benchmarks dangerous, and how did you use benchstat to verify that your performance gains were statistically significant?"
+      ]
     },
     {
       "criteria": [
@@ -4971,7 +5066,12 @@
         "project-modular-refactor-review"
       ],
       "title": "Assessment — Modular Refactor Review",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Explain the architectural boundaries between domain entities, service use-cases, and external adapters in your refactored modular monolith.",
+        "How does interface inversion prevent the business logic layer from directly depending on database drivers or third-party HTTP clients?",
+        "What Architecture Decision Record (ADR) did you write to justify this refactoring, and what tradeoffs (e.g. abstraction overhead vs testability) did you document?"
+      ]
     },
     {
       "criteria": [
@@ -5068,7 +5168,12 @@
         "project-dockerized-service-cicd"
       ],
       "title": "Assessment — Dockerized Service with CI/CD",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Walk me through your multi-stage Dockerfile: why do you build in a Go builder container and copy the binary into a minimal scratch or alpine image?",
+        "How does your CI/CD pipeline enforce quality gates (linting, tests with race detector, vulnerability scanning with govulncheck) before generating release artifacts?",
+        "What non-root user and Linux capability restrictions did you enforce in the container runtime to prevent container escape and privilege escalation?"
+      ]
     },
     {
       "criteria": [
@@ -5165,7 +5270,12 @@
         "project-portfolio-review-pack"
       ],
       "title": "Assessment — Portfolio Review Pack",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Walk me through your Flagship Opslane repository: how is the README structured so that an engineering hiring manager can evaluate your competence in 90 seconds?",
+        "How did you document your testing strategy, production deployment instructions, and disaster recovery procedures across your showcase repositories?",
+        "Defend one difficult architectural tradeoff made in your flagship project: what alternative did you consider, why did you reject it, and what were the consequences?"
+      ]
     },
     {
       "criteria": [
@@ -5262,7 +5372,12 @@
         "project-opslane"
       ],
       "title": "Assessment — Opslane Flagship",
-      "type": "project-review"
+      "type": "project-review",
+      "manual_review_questions": [
+        "Walk me through the architecture of your Flagship Opslane: how do the HTTP API, PostgreSQL persistence, worker pools, event bus, and caching layer interact?",
+        "How does your system enforce multi-tenant data isolation and prevent cross-tenant data leakage across both queries and asynchronous background jobs?",
+        "Demonstrate live incident recovery: if the primary database container crashes or a third-party payment webhook fails, how does the system maintain data integrity and recover?"
+      ]
     }
   ],
   "curriculum_version": "3.1.0-draft.1",

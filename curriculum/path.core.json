@@ -76,7 +76,7 @@
         "test_path": ""
       },
       "id": "core-00-01",
-      "learning_objective": "Understand and apply How to use this repository in the context of professional Go software engineering.",
+      "learning_objective": "Navigate the multi-module repository structure, locate lesson assets on disk, and map curriculum JSON metadata to filesystem folders.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-02"
@@ -254,7 +254,7 @@
         "test_path": ""
       },
       "id": "core-00-02",
-      "learning_objective": "Understand and apply What zero magic means in the context of professional Go software engineering.",
+      "learning_objective": "Deconstruct implicit abstractions into explicit, verifiable code statements to enforce zero-magic engineering standards.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-03"
@@ -436,7 +436,7 @@
         "test_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/main_test.go"
       },
       "id": "core-00-03",
-      "learning_objective": "Understand and apply How lessons, exercises, projects, and checkpoints work in the context of professional Go software engineering.",
+      "learning_objective": "Execute the end-to-end curriculum workflow spanning theory, hands-on exercises, automated test suites, and portfolio milestone checkpoints.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-04"
@@ -618,7 +618,7 @@
         "test_path": ""
       },
       "id": "core-00-04",
-      "learning_objective": "Understand and apply How to run code in this repository in the context of professional Go software engineering.",
+      "learning_objective": "Run, test, format, and vet Go code using essential CLI toolchain commands (go run, go test, go build, go vet, gofmt).",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-05"
@@ -800,7 +800,7 @@
         "test_path": ""
       },
       "id": "core-00-05",
-      "learning_objective": "Understand and apply How starter folders work in the context of professional Go software engineering.",
+      "learning_objective": "Navigate starter scaffolds, complete marked implementation gaps, pass unit tests, and compare solutions against reference implementations.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-06"
@@ -989,7 +989,7 @@
         "test_path": ""
       },
       "id": "core-00-06",
-      "learning_objective": "Understand and apply How assessments work in the context of professional Go software engineering.",
+      "learning_objective": "Prepare for module assessments by distinguishing superficial familiarity from demonstrable mastery, passing automated checks and oral reviews.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-07"
@@ -1178,7 +1178,7 @@
         "test_path": ""
       },
       "id": "core-00-07",
-      "learning_objective": "Understand and apply How to ask good debugging questions in the context of professional Go software engineering.",
+      "learning_objective": "Formulate structured, reproducible debugging questions containing environment telemetry, expected vs. actual behavior, and minimal repro steps.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-08"
@@ -1367,7 +1367,7 @@
         "test_path": ""
       },
       "id": "core-00-08",
-      "learning_objective": "Understand and apply What job-ready means in the context of professional Go software engineering.",
+      "learning_objective": "Evaluate technical readiness against observable software engineering graduation criteria rather than passive content consumption.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-09"
@@ -1556,7 +1556,7 @@
         "test_path": ""
       },
       "id": "core-00-09",
-      "learning_objective": "Understand and apply How to use the roadmap in the context of professional Go software engineering.",
+      "learning_objective": "Track prerequisite dependencies, module milestones, and learning paths across the curriculum roadmap graph.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-10"
@@ -1760,7 +1760,7 @@
         "test_path": ""
       },
       "id": "core-00-10",
-      "learning_objective": "Understand and apply How to build a portfolio from this curriculum in the context of professional Go software engineering.",
+      "learning_objective": "Curate, package, and document engineering projects into a professional portfolio demonstrating production-grade software craftsmanship.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-01-01"
@@ -1942,7 +1942,7 @@
         "test_path": "modules/01-computers-terminal-git-web/01-what-is-a-program/main_test.go"
       },
       "id": "core-01-01",
-      "learning_objective": "Understand and apply What is a program? in the context of professional Go software engineering.",
+      "learning_objective": "Distinguish between source code text, compiled machine binaries, and active operating system processes in execution.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-02"
@@ -2127,7 +2127,7 @@
         "test_path": "modules/01-computers-terminal-git-web/02-source-code-executable-and-process/main_test.go"
       },
       "id": "core-01-02",
-      "learning_objective": "Understand and apply Source code, executable, and process in the context of professional Go software engineering.",
+      "learning_objective": "Trace how the CPU fetches, decodes, and executes compiled machine instructions from system memory.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-03"
@@ -2310,7 +2310,7 @@
         "test_path": "modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/main_test.go"
       },
       "id": "core-01-03",
-      "learning_objective": "Understand and apply Files, bytes, directories, and paths in the context of professional Go software engineering.",
+      "learning_objective": "Inspect filesystem hierarchies, file descriptors, binary byte representations, and absolute vs relative paths.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-04"
@@ -2493,7 +2493,7 @@
         "test_path": "modules/01-computers-terminal-git-web/04-terminal-basics/main_test.go"
       },
       "id": "core-01-04",
-      "learning_objective": "Understand and apply Terminal basics in the context of professional Go software engineering.",
+      "learning_objective": "Navigate the shell, execute commands, manipulate file streams via redirection and piping, and inspect process exit statuses in the terminal.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-05"
@@ -2676,7 +2676,7 @@
         "test_path": "modules/01-computers-terminal-git-web/05-environment-variables/main_test.go"
       },
       "id": "core-01-05",
-      "learning_objective": "Understand and apply Environment variables in the context of professional Go software engineering.",
+      "learning_objective": "Read, set, and inherit environment variables across parent and child processes in POSIX and Windows environments.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-06"
@@ -2859,7 +2859,7 @@
         "test_path": "modules/01-computers-terminal-git-web/06-exit-codes/main_test.go"
       },
       "id": "core-01-06",
-      "learning_objective": "Understand and apply Exit codes in the context of professional Go software engineering.",
+      "learning_objective": "Evaluate process exit codes (0 for success, non-zero for failure) to construct robust shell script error handling and CI pipelines.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-07"
@@ -3050,7 +3050,7 @@
         "test_path": "modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/main_test.go"
       },
       "id": "core-01-07",
-      "learning_objective": "Understand and apply How the OS manages processes in the context of professional Go software engineering.",
+      "learning_objective": "Analyze operating system process scheduling, virtual memory isolation, PID tracking, and process states (running, waiting, terminated).",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-08"
@@ -3250,7 +3250,7 @@
         "test_path": "modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/main_test.go"
       },
       "id": "core-01-08",
-      "learning_objective": "Understand and apply Memory preview: stack vs heap in the context of professional Go software engineering.",
+      "learning_objective": "Compare memory layout structures, distinguishing the fast automatic lifecycle of the call stack from the heap allocator.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-09"
@@ -3435,7 +3435,7 @@
         "test_path": "modules/01-computers-terminal-git-web/09-git-mental-model/main_test.go"
       },
       "id": "core-01-09",
-      "learning_objective": "Understand and apply Git mental model in the context of professional Go software engineering.",
+      "learning_objective": "Formulate a mental model of Git as a content-addressable directed acyclic graph (DAG) of immutable snapshots.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-10"
@@ -3618,7 +3618,7 @@
         "test_path": "modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/main_test.go"
       },
       "id": "core-01-10",
-      "learning_objective": "Understand and apply Git basics: status, add, commit in the context of professional Go software engineering.",
+      "learning_objective": "Initialize repositories, stage changes, create atomic commits with clear messages, and inspect repository status and diffs.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-11"
@@ -3801,7 +3801,7 @@
         "test_path": "modules/01-computers-terminal-git-web/11-branching-and-merging/main_test.go"
       },
       "id": "core-01-11",
-      "learning_objective": "Understand and apply Branching and merging in the context of professional Go software engineering.",
+      "learning_objective": "Create, switch, and merge Git branches, resolving merge conflicts and inspecting commit DAG ancestry with git log.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-12"
@@ -3984,7 +3984,7 @@
         "test_path": "modules/01-computers-terminal-git-web/12-github-workflow/main_test.go"
       },
       "id": "core-01-12",
-      "learning_objective": "Understand and apply GitHub workflow in the context of professional Go software engineering.",
+      "learning_objective": "Manage remote repositories, synchronize branch refs via git fetch, push, and pull, and configure remote tracking branches.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-13"
@@ -4167,7 +4167,7 @@
         "test_path": "modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/main_test.go"
       },
       "id": "core-01-13",
-      "learning_objective": "Understand and apply Pull requests and code review in the context of professional Go software engineering.",
+      "learning_objective": "Author professional GitHub Pull Requests, review peer diffs, and address code review feedback iteratively.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-14"
@@ -4350,7 +4350,7 @@
         "test_path": "modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/main_test.go"
       },
       "id": "core-01-14",
-      "learning_objective": "Understand and apply Web preview: client, server, DNS, and ports in the context of professional Go software engineering.",
+      "learning_objective": "Trace the client-server architecture of the Web, resolving domain names via DNS and connecting over TCP ports.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-01-15"
@@ -4548,7 +4548,7 @@
         "test_path": "modules/01-computers-terminal-git-web/15-http-request-and-response-preview/main_test.go"
       },
       "id": "core-01-15",
-      "learning_objective": "Understand and apply HTTP request and response preview in the context of professional Go software engineering.",
+      "learning_objective": "Deconstruct HTTP requests and responses, inspecting request methods, URL paths, headers, status codes, and message bodies.",
       "module_id": "module-01",
       "next_item_ids": [
         "core-02-01"
@@ -4731,7 +4731,7 @@
         "test_path": "modules/02-go-setup-tooling/01-install-and-verify-go/main_test.go"
       },
       "id": "core-02-01",
-      "learning_objective": "Understand and apply Install and verify Go in the context of professional Go software engineering.",
+      "learning_objective": "Install, configure, and verify the Go toolchain, validating PATH, GOROOT, and GOPATH environment variables.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-02"
@@ -4916,7 +4916,7 @@
         "test_path": "modules/02-go-setup-tooling/02-hello-world/main_test.go"
       },
       "id": "core-02-02",
-      "learning_objective": "Understand and apply Hello World in the context of professional Go software engineering.",
+      "learning_objective": "Write, compile, and execute a canonical Hello World Go program, understanding package main and the entrypoint main() function.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-03"
@@ -5101,7 +5101,7 @@
         "test_path": "modules/02-go-setup-tooling/03-go-run/main_test.go"
       },
       "id": "core-02-03",
-      "learning_objective": "Understand and apply go run in the context of professional Go software engineering.",
+      "learning_objective": "Execute Go programs directly using go run, understanding how the toolchain compiles to a temporary directory before execution.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-04"
@@ -5283,7 +5283,7 @@
         "test_path": "modules/02-go-setup-tooling/04-go-build/main_test.go"
       },
       "id": "core-02-04",
-      "learning_objective": "Understand and apply go build in the context of professional Go software engineering.",
+      "learning_objective": "Compile standalone native executable binaries using go build, configuring output filenames and cross-compilation flags.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-05"
@@ -5466,7 +5466,7 @@
         "test_path": "modules/02-go-setup-tooling/05-go-test/main_test.go"
       },
       "id": "core-02-05",
-      "learning_objective": "Understand and apply go test in the context of professional Go software engineering.",
+      "learning_objective": "Execute unit tests and benchmarks using go test, interpreting pass/fail statuses and test run output.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-06"
@@ -5649,7 +5649,7 @@
         "test_path": "modules/02-go-setup-tooling/06-gofmt/main_test.go"
       },
       "id": "core-02-06",
-      "learning_objective": "Understand and apply gofmt in the context of professional Go software engineering.",
+      "learning_objective": "Format Go code deterministically using gofmt to enforce standard Go community style and formatting conventions.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-07"
@@ -5832,7 +5832,7 @@
         "test_path": "modules/02-go-setup-tooling/07-go-vet/main_test.go"
       },
       "id": "core-02-07",
-      "learning_objective": "Understand and apply go vet in the context of professional Go software engineering.",
+      "learning_objective": "Audit code for subtle bugs, unkeyed struct literals, and unreachable code using the static analysis tool go vet.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-08"
@@ -6015,7 +6015,7 @@
         "test_path": "modules/02-go-setup-tooling/08-go-doc/main_test.go"
       },
       "id": "core-02-08",
-      "learning_objective": "Understand and apply go doc in the context of professional Go software engineering.",
+      "learning_objective": "Query package and symbol documentation directly in the terminal using go doc for standard library and local code.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-09"
@@ -6198,7 +6198,7 @@
         "test_path": "modules/02-go-setup-tooling/09-editor-setup-and-gopls/main_test.go"
       },
       "id": "core-02-09",
-      "learning_objective": "Understand and apply Editor setup and gopls in the context of professional Go software engineering.",
+      "learning_objective": "Configure an editor with gopls Language Server Protocol (LSP) for real-time type checking, auto-completion, and jump-to-definition.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-10"
@@ -6381,7 +6381,7 @@
         "test_path": "modules/02-go-setup-tooling/10-reading-compiler-errors/main_test.go"
       },
       "id": "core-02-10",
-      "learning_objective": "Understand and apply Reading compiler errors in the context of professional Go software engineering.",
+      "learning_objective": "Diagnose and resolve Go compiler syntax, type-mismatch, and import errors by interpreting compiler diagnostic messages.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-11"
@@ -6566,7 +6566,7 @@
         "test_path": "modules/02-go-setup-tooling/11-reading-runtime-errors/main_test.go"
       },
       "id": "core-02-11",
-      "learning_objective": "Understand and apply Reading runtime errors in the context of professional Go software engineering.",
+      "learning_objective": "Analyze runtime panics and stack traces to pinpoint the exact line, function, and cause of a runtime crash.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-12"
@@ -6749,7 +6749,7 @@
         "test_path": "modules/02-go-setup-tooling/12-reading-test-failures/main_test.go"
       },
       "id": "core-02-12",
-      "learning_objective": "Understand and apply Reading test failures in the context of professional Go software engineering.",
+      "learning_objective": "Interpret test failure output, comparing expected vs actual values and debugging failing assertion lines.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-13"
@@ -6940,7 +6940,7 @@
         "test_path": "modules/02-go-setup-tooling/13-go-module-root-basics/main_test.go"
       },
       "id": "core-02-13",
-      "learning_objective": "Understand and apply Go module root basics in the context of professional Go software engineering.",
+      "learning_objective": "Initialize and manage a Go module root using go mod init, understanding how module paths define import boundaries.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-02-14"
@@ -7131,7 +7131,7 @@
         "test_path": "modules/02-go-setup-tooling/14-tooling-checklist/main_test.go"
       },
       "id": "core-02-14",
-      "learning_objective": "Understand and apply Tooling checklist in the context of professional Go software engineering.",
+      "learning_objective": "Validate a complete local Go development environment against an operational tooling verification checklist.",
       "module_id": "module-02",
       "next_item_ids": [
         "core-03-01"
@@ -7325,7 +7325,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/01-values-and-expressions/main_test.go"
       },
       "id": "core-03-01",
-      "learning_objective": "Understand and apply Values and expressions in the context of professional Go software engineering.",
+      "learning_objective": "Evaluate Go expressions, operator precedence, type rules, and short-circuit evaluation logic.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-02"
@@ -7515,7 +7515,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/02-variables/main_test.go"
       },
       "id": "core-03-02",
-      "learning_objective": "Understand and apply Variables in the context of professional Go software engineering.",
+      "learning_objective": "Declare, initialize, and scope variables using package var and short declaration (:=), identifying shadowing and variable lifetime.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-03"
@@ -7707,7 +7707,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/03-types/main_test.go"
       },
       "id": "core-03-03",
-      "learning_objective": "Understand and apply Types in the context of professional Go software engineering.",
+      "learning_objective": "Differentiate basic Go types (int, float64, string, bool) and predict their memory footprints and value ranges.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-04"
@@ -7897,7 +7897,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/04-zero-values/main_test.go"
       },
       "id": "core-03-04",
-      "learning_objective": "Understand and apply Zero values in the context of professional Go software engineering.",
+      "learning_objective": "Identify the deterministic zero value for every Go type and leverage zero-value usefulness in API and struct design.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-05"
@@ -8087,7 +8087,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/05-type-conversions/main_test.go"
       },
       "id": "core-03-05",
-      "learning_objective": "Understand and apply Type conversions in the context of professional Go software engineering.",
+      "learning_objective": "Perform explicit type conversions between numeric, string, and byte representations, recognizing conversion truncation risks.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-06"
@@ -8277,7 +8277,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/06-constants/main_test.go"
       },
       "id": "core-03-06",
-      "learning_objective": "Understand and apply Constants in the context of professional Go software engineering.",
+      "learning_objective": "Declare typed and untyped constants, evaluating compile-time constant arithmetic and precision rules.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-07"
@@ -8469,7 +8469,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/07-iota/main_test.go"
       },
       "id": "core-03-07",
-      "learning_objective": "Understand and apply iota in the context of professional Go software engineering.",
+      "learning_objective": "Construct clean, type-safe enumerations and bitmasks using iota and custom type definitions.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-08"
@@ -8661,7 +8661,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/08-boolean-logic/main_test.go"
       },
       "id": "core-03-08",
-      "learning_objective": "Understand and apply Boolean logic in the context of professional Go software engineering.",
+      "learning_objective": "Formulate compound boolean conditions using logical operators (&&, ||, !), avoiding boolean truth-table pitfalls.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-09"
@@ -8851,7 +8851,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/09-if-and-else/main_test.go"
       },
       "id": "core-03-09",
-      "learning_objective": "Understand and apply If and else in the context of professional Go software engineering.",
+      "learning_objective": "Structure branching logic using if and else with statement initialization, keeping happy-path code left-aligned.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-10"
@@ -9043,7 +9043,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/10-switch/main_test.go"
       },
       "id": "core-03-10",
-      "learning_objective": "Understand and apply Switch in the context of professional Go software engineering.",
+      "learning_objective": "Construct multi-branch switch statements with expressions, conditions, and fallthrough semantics.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-11"
@@ -9235,7 +9235,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/11-loops/main_test.go"
       },
       "id": "core-03-11",
-      "learning_objective": "Understand and apply Loops in the context of professional Go software engineering.",
+      "learning_objective": "Implement iterative loops using Go's unified for statement across standard, condition-only (while), and infinite loop forms.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-12"
@@ -9425,7 +9425,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/12-range/main_test.go"
       },
       "id": "core-03-12",
-      "learning_objective": "Understand and apply Range in the context of professional Go software engineering.",
+      "learning_objective": "Iterate over collections using for range, correctly managing value copies, index variables, and loop iteration variable scoping.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-13"
@@ -9615,7 +9615,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/13-arrays/main_test.go"
       },
       "id": "core-03-13",
-      "learning_objective": "Understand and apply Arrays in the context of professional Go software engineering.",
+      "learning_objective": "Declare and manipulate fixed-length arrays, understanding value-copy semantics and memory layout.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-14"
@@ -9807,7 +9807,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/14-slices/main_test.go"
       },
       "id": "core-03-14",
-      "learning_objective": "Understand and apply Slices in the context of professional Go software engineering.",
+      "learning_objective": "Construct and manipulate dynamic slices, managing underlying backing arrays, slicing operations, and the append() builtin.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-15"
@@ -9999,7 +9999,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/15-slice-length-and-capacity/main_test.go"
       },
       "id": "core-03-15",
-      "learning_objective": "Understand and apply Slice length and capacity in the context of professional Go software engineering.",
+      "learning_objective": "Inspect slice length vs. capacity, predicting reallocation and backing array growth behavior.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-16"
@@ -10189,7 +10189,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/16-slice-sharing-and-aliasing/main_test.go"
       },
       "id": "core-03-16",
-      "learning_objective": "Understand and apply Slice sharing and aliasing in the context of professional Go software engineering.",
+      "learning_objective": "Diagnose slice sharing, aliasing, and mutation bugs when sub-slices reference the same underlying backing array.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-17"
@@ -10379,7 +10379,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/17-maps/main_test.go"
       },
       "id": "core-03-17",
-      "learning_objective": "Understand and apply Maps in the context of professional Go software engineering.",
+      "learning_objective": "Create, populate, and query hash maps, managing key lookups, map allocations, and map deletion.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-18"
@@ -10571,7 +10571,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/18-comma-ok-idiom/main_test.go"
       },
       "id": "core-03-18",
-      "learning_objective": "Understand and apply Comma-ok idiom in the context of professional Go software engineering.",
+      "learning_objective": "Safely query maps using the comma-ok idiom to distinguish missing keys from keys holding zero values.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-19"
@@ -10761,7 +10761,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/19-strings/main_test.go"
       },
       "id": "core-03-19",
-      "learning_objective": "Understand and apply Strings in the context of professional Go software engineering.",
+      "learning_objective": "Manipulate UTF-8 strings as immutable byte slices, performing string slicing, indexing, and concatenation.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-20"
@@ -10951,7 +10951,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/20-bytes/main_test.go"
       },
       "id": "core-03-20",
-      "learning_objective": "Understand and apply Bytes in the context of professional Go software engineering.",
+      "learning_objective": "Process raw binary data and byte buffers using the bytes standard library package.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-21"
@@ -11141,7 +11141,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/21-runes-and-unicode/main_test.go"
       },
       "id": "core-03-21",
-      "learning_objective": "Understand and apply Runes and Unicode in the context of professional Go software engineering.",
+      "learning_objective": "Differentiate bytes, ASCII characters, and Unicode code points (runes) during text parsing and iteration.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-22"
@@ -11339,7 +11339,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/22-pointers-as-addresses/main_test.go"
       },
       "id": "core-03-22",
-      "learning_objective": "Understand and apply Pointers as addresses in the context of professional Go software engineering.",
+      "learning_objective": "Inspect memory addresses and dereference values using pointer operators (& and *), visualizing memory indirection.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-23"
@@ -11546,7 +11546,7 @@
         "test_path": "modules/03-programming-fundamentals/lessons/23-beginner-pointer-mistakes/main_test.go"
       },
       "id": "core-03-23",
-      "learning_objective": "Understand and apply Beginner pointer mistakes in the context of professional Go software engineering.",
+      "learning_objective": "Diagnose and prevent nil pointer dereferences, uninitialized pointer errors, and pointer aliasing bugs.",
       "module_id": "module-03",
       "next_item_ids": [
         "core-03-24"
@@ -11665,7 +11665,7 @@
       "phase": "go-core",
       "order": 24,
       "estimated_minutes": 45,
-      "learning_objective": "Understand and apply Algorithmic problem-solving and complexity in the context of professional Go software engineering.",
+      "learning_objective": "Analyze algorithm time and space complexity using Big-O notation, and implement efficient search and sort operations in Go.",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-23."
       ],
@@ -11884,7 +11884,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/01-function-basics/main_test.go"
       },
       "id": "core-04-01",
-      "learning_objective": "Understand and apply Function basics in the context of professional Go software engineering.",
+      "learning_objective": "Define, invoke, and compose Go functions with explicit parameter and return types to organize modular, testable logic.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-02"
@@ -12073,7 +12073,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/02-parameters/main_test.go"
       },
       "id": "core-04-02",
-      "learning_objective": "Understand and apply Parameters in the context of professional Go software engineering.",
+      "learning_objective": "Pass parameters by value to functions, understanding how arguments are copied onto the execution call stack.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-03"
@@ -12258,7 +12258,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/03-return-values/main_test.go"
       },
       "id": "core-04-03",
-      "learning_objective": "Understand and apply Return values in the context of professional Go software engineering.",
+      "learning_objective": "Return values from functions, avoiding unreadable named return variable side effects.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-04"
@@ -12443,7 +12443,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/04-multiple-return-values/main_test.go"
       },
       "id": "core-04-04",
-      "learning_objective": "Understand and apply Multiple return values in the context of professional Go software engineering.",
+      "learning_objective": "Leverage multiple return values to return computed results alongside explicit error values.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-05"
@@ -12629,7 +12629,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/05-scope/main_test.go"
       },
       "id": "core-04-05",
-      "learning_objective": "Understand and apply Scope in the context of professional Go software engineering.",
+      "learning_objective": "Analyze lexical variable scoping across package, function, block, and loop boundaries.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-06"
@@ -12815,7 +12815,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/06-call-stack-mental-model/main_test.go"
       },
       "id": "core-04-06",
-      "learning_objective": "Understand and apply Call stack mental model in the context of professional Go software engineering.",
+      "learning_objective": "Trace function execution, parameter push, and stack frame allocation on the runtime call stack.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-07"
@@ -13003,7 +13003,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/07-passing-by-value/main_test.go"
       },
       "id": "core-04-07",
-      "learning_objective": "Understand and apply Passing by value in the context of professional Go software engineering.",
+      "learning_objective": "Prove Go's strictly pass-by-value semantics across primitive types, structs, pointers, slices, and maps.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-08"
@@ -13190,7 +13190,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/08-pointer-and-value-mutation-behavior/main_test.go"
       },
       "id": "core-04-08",
-      "learning_objective": "Understand and apply Pointer and value mutation behavior in the context of professional Go software engineering.",
+      "learning_objective": "Predict and control data mutation behavior by contrasting value receiver/parameter copies against pointer mutations.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-09"
@@ -13379,7 +13379,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/09-errors-as-values/main_test.go"
       },
       "id": "core-04-09",
-      "learning_objective": "Understand and apply Errors as values in the context of professional Go software engineering.",
+      "learning_objective": "Treat errors as first-class values in Go, returning and checking errors explicitly rather than throwing exceptions.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-10"
@@ -13560,7 +13560,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/10-error-wrapping/main_test.go"
       },
       "id": "core-04-10",
-      "learning_objective": "Understand and apply Error wrapping in the context of professional Go software engineering.",
+      "learning_objective": "Add diagnostic context to errors using fmt.Errorf with the %w verb to build inspectable error chains.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-11"
@@ -13746,7 +13746,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/11-errors-is/main_test.go"
       },
       "id": "core-04-11",
-      "learning_objective": "Understand and apply errors.Is in the context of professional Go software engineering.",
+      "learning_objective": "Inspect error chains for specific sentinel error values using errors.Is across wrapped hierarchies.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-12"
@@ -13933,7 +13933,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/12-errors-as/main_test.go"
       },
       "id": "core-04-12",
-      "learning_objective": "Understand and apply errors.As in the context of professional Go software engineering.",
+      "learning_objective": "Extract and evaluate typed error details from error chains using errors.As.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-13"
@@ -14120,7 +14120,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/13-validation/main_test.go"
       },
       "id": "core-04-13",
-      "learning_objective": "Understand and apply Validation in the context of professional Go software engineering.",
+      "learning_objective": "Implement input validation functions that return actionable, descriptive validation errors.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-14"
@@ -14310,7 +14310,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/14-orchestration/main_test.go"
       },
       "id": "core-04-14",
-      "learning_objective": "Understand and apply Orchestration in the context of professional Go software engineering.",
+      "learning_objective": "Prevent nil pointer panics when checking interfaces by understanding typed nil vs interface nil semantics.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-15"
@@ -14499,7 +14499,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/15-defer-mechanics/main_test.go"
       },
       "id": "core-04-15",
-      "learning_objective": "Understand and apply defer mechanics in the context of professional Go software engineering.",
+      "learning_objective": "Trace deterministic LIFO execution order and deferred argument evaluation in Go defer statements.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-16"
@@ -14688,7 +14688,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/16-defer-for-cleanup/main_test.go"
       },
       "id": "core-04-16",
-      "learning_objective": "Understand and apply defer for cleanup in the context of professional Go software engineering.",
+      "learning_objective": "Guarantee deterministic resource cleanup (files, sockets, mutex locks) using defer immediately following acquisition.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-17"
@@ -14877,7 +14877,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/17-panic-and-recover/main_test.go"
       },
       "id": "core-04-17",
-      "learning_objective": "Understand and apply panic and recover in the context of professional Go software engineering.",
+      "learning_objective": "Evaluate appropriate use cases for panic and recover, restricting recovery to process boundaries and third-party libraries.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-04-18"
@@ -15066,7 +15066,7 @@
         "test_path": "modules/04-functions-errors-data-semantics/lessons/18-custom-error-types/main_test.go"
       },
       "id": "core-04-18",
-      "learning_objective": "Understand and apply Custom error types in the context of professional Go software engineering.",
+      "learning_objective": "Define custom error types implementing the error interface to attach structured diagnostic metadata to failures.",
       "module_id": "module-04",
       "next_item_ids": [
         "core-05-01"
@@ -15261,7 +15261,7 @@
         "test_path": "05-types-interfaces-packages-modules/01-structs/main_test.go"
       },
       "id": "core-05-01",
-      "learning_objective": "Understand and apply Structs in the context of professional Go software engineering.",
+      "learning_objective": "Define composite struct types with exported and unexported fields to model domain entities.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-02"
@@ -15458,7 +15458,7 @@
         "test_path": "05-types-interfaces-packages-modules/02-methods/main_test.go"
       },
       "id": "core-05-02",
-      "learning_objective": "Understand and apply Methods in the context of professional Go software engineering.",
+      "learning_objective": "Create and inspect struct field tags for JSON, database, and validation metadata reflection.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-03"
@@ -15655,7 +15655,7 @@
         "test_path": "05-types-interfaces-packages-modules/03-pointer-receivers/main_test.go"
       },
       "id": "core-05-03",
-      "learning_objective": "Understand and apply Pointer receivers in the context of professional Go software engineering.",
+      "learning_objective": "Attach methods to structs using pointer receivers to mutate state and avoid copying large data structures.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-04"
@@ -15850,7 +15850,7 @@
         "test_path": "05-types-interfaces-packages-modules/04-value-receivers/main_test.go"
       },
       "id": "core-05-04",
-      "learning_objective": "Understand and apply Value receivers in the context of professional Go software engineering.",
+      "learning_objective": "Attach methods using value receivers for immutable calculations and thread-safe read operations.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-05"
@@ -16045,7 +16045,7 @@
         "test_path": "05-types-interfaces-packages-modules/05-receiver-sets/main_test.go"
       },
       "id": "core-05-05",
-      "learning_objective": "Understand and apply Receiver sets in the context of professional Go software engineering.",
+      "learning_objective": "Analyze method sets to determine whether a concrete type satisfies an interface via value or pointer receivers.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-06"
@@ -16239,7 +16239,7 @@
         "test_path": "05-types-interfaces-packages-modules/06-composition/main_test.go"
       },
       "id": "core-05-06",
-      "learning_objective": "Understand and apply Composition in the context of professional Go software engineering.",
+      "learning_objective": "Define implicit Go interfaces as behavioral contracts, decoupling callers from concrete implementations.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-07"
@@ -16436,7 +16436,7 @@
         "test_path": "05-types-interfaces-packages-modules/07-embedding/main_test.go"
       },
       "id": "core-05-07",
-      "learning_objective": "Understand and apply Embedding in the context of professional Go software engineering.",
+      "learning_objective": "Design small, single-method interfaces (e.g. io.Reader, io.Writer) following the Go interface segregation idiom.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-08"
@@ -16633,7 +16633,7 @@
         "test_path": "05-types-interfaces-packages-modules/08-interfaces/main_test.go"
       },
       "id": "core-05-08",
-      "learning_objective": "Understand and apply Interfaces in the context of professional Go software engineering.",
+      "learning_objective": "Embed structs and interfaces to achieve composition and method promotion without inheritance.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-09"
@@ -16818,7 +16818,7 @@
         "test_path": "05-types-interfaces-packages-modules/09-small-interfaces/main_test.go"
       },
       "id": "core-05-09",
-      "learning_objective": "Understand and apply Small interfaces in the context of professional Go software engineering.",
+      "learning_objective": "Construct rich domain types by composing multiple focused interfaces into higher-level abstractions.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-10"
@@ -17013,7 +17013,7 @@
         "test_path": "05-types-interfaces-packages-modules/10-interface-embedding/main_test.go"
       },
       "id": "core-05-10",
-      "learning_objective": "Understand and apply Interface embedding in the context of professional Go software engineering.",
+      "learning_objective": "Design and enforce domain invariants by unexporting struct fields and exposing validated constructor functions.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-11"
@@ -17208,7 +17208,7 @@
         "test_path": "05-types-interfaces-packages-modules/11-stringer/main_test.go"
       },
       "id": "core-05-11",
-      "learning_objective": "Understand and apply Stringer in the context of professional Go software engineering.",
+      "learning_objective": "Apply polymorphism by writing functions that accept interface types and operate on arbitrary satisfying implementations.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-12"
@@ -17405,7 +17405,7 @@
         "test_path": "05-types-interfaces-packages-modules/12-type-assertions/main_test.go"
       },
       "id": "core-05-12",
-      "learning_objective": "Understand and apply Type assertions in the context of professional Go software engineering.",
+      "learning_objective": "Safely extract concrete types from interface values using the comma-ok type assertion syntax.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-13"
@@ -17600,7 +17600,7 @@
         "test_path": "05-types-interfaces-packages-modules/13-type-switches/main_test.go"
       },
       "id": "core-05-13",
-      "learning_objective": "Understand and apply Type switches in the context of professional Go software engineering.",
+      "learning_objective": "Branch on dynamic interface types using type switches to handle heterogeneous data payloads cleanly.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-14"
@@ -17795,7 +17795,7 @@
         "test_path": "05-types-interfaces-packages-modules/14-nil-interfaces/main_test.go"
       },
       "id": "core-05-14",
-      "learning_objective": "Understand and apply Nil interfaces in the context of professional Go software engineering.",
+      "learning_objective": "Inspect the internal pair representation of interfaces (type pointer, value pointer) to avoid typed-nil interface bugs.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-15"
@@ -17986,7 +17986,7 @@
         "test_path": "05-types-interfaces-packages-modules/15-package-names/main_test.go"
       },
       "id": "core-05-15",
-      "learning_objective": "Understand and apply Package names in the context of professional Go software engineering.",
+      "learning_objective": "Accept interfaces at consumer boundaries and return concrete structs from producer constructors.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-16"
@@ -18183,7 +18183,7 @@
         "test_path": "05-types-interfaces-packages-modules/16-export-rules/main_test.go"
       },
       "id": "core-05-16",
-      "learning_objective": "Understand and apply Export rules in the context of professional Go software engineering.",
+      "learning_objective": "Organize code into cohesive Go packages, managing public API exports via identifier capitalization.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-17"
@@ -18380,7 +18380,7 @@
         "test_path": "05-types-interfaces-packages-modules/17-project-layout/main_test.go"
       },
       "id": "core-05-17",
-      "learning_objective": "Understand and apply Project layout in the context of professional Go software engineering.",
+      "learning_objective": "Structure scalable project directory trees with clear separation between business domain, transports, and persistence.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-18"
@@ -18578,7 +18578,7 @@
         "test_path": "05-types-interfaces-packages-modules/18-modules/main_test.go"
       },
       "id": "core-05-18",
-      "learning_objective": "Understand and apply Modules in the context of professional Go software engineering.",
+      "learning_objective": "Structure Go repositories following standard layout conventions (cmd/, internal/, pkg/).",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-19"
@@ -18775,7 +18775,7 @@
         "test_path": "05-types-interfaces-packages-modules/19-go-mod/main_test.go"
       },
       "id": "core-05-19",
-      "learning_objective": "Understand and apply go.mod in the context of professional Go software engineering.",
+      "learning_objective": "Manage module dependencies, module paths, and minimum version selection using go.mod.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-20"
@@ -18970,7 +18970,7 @@
         "test_path": "05-types-interfaces-packages-modules/20-go-sum/main_test.go"
       },
       "id": "core-05-20",
-      "learning_objective": "Understand and apply go.sum in the context of professional Go software engineering.",
+      "learning_objective": "Verify dependency cryptographic checksums and build reproducibility using go.sum.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-21"
@@ -19165,7 +19165,7 @@
         "test_path": "05-types-interfaces-packages-modules/21-dependency-management/main_test.go"
       },
       "id": "core-05-21",
-      "learning_objective": "Understand and apply Dependency management in the context of professional Go software engineering.",
+      "learning_objective": "Add, upgrade, prune, and vendor third-party dependencies using go get and go mod tidy.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-22"
@@ -19362,7 +19362,7 @@
         "test_path": "05-types-interfaces-packages-modules/22-workspaces/main_test.go"
       },
       "id": "core-05-22",
-      "learning_objective": "Understand and apply Workspaces in the context of professional Go software engineering.",
+      "learning_objective": "Coordinate multi-module local development simultaneously using Go workspaces (go.work).",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-23"
@@ -19565,7 +19565,7 @@
         "test_path": "05-types-interfaces-packages-modules/23-documentation-comments/main_test.go"
       },
       "id": "core-05-23",
-      "learning_objective": "Understand and apply Documentation comments in the context of professional Go software engineering.",
+      "learning_objective": "Structure scalable project directory trees with clear separation between business domain, transports, and persistence.",
       "module_id": "module-05",
       "next_item_ids": [
         "core-05-24"
@@ -19688,7 +19688,7 @@
       "phase": "engineering-core",
       "order": 24,
       "estimated_minutes": 45,
-      "learning_objective": "Understand and apply Generics fundamentals in the context of professional Go software engineering.",
+      "learning_objective": "Write type-safe generic functions and collections using Go 1.18+ type parameters and basic constraints.",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-23."
       ],
@@ -19914,7 +19914,7 @@
         "test_path": "06-testing-debugging-refactoring/01-why-testing-exists/main_test.go"
       },
       "id": "core-06-01",
-      "learning_objective": "Understand and apply Why testing exists in the context of professional Go software engineering.",
+      "learning_objective": "Formulate a testing mindset that prioritizes behavior verification, edge cases, and deterministic execution.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-02"
@@ -20109,7 +20109,7 @@
         "test_path": "06-testing-debugging-refactoring/02-unit-testing/main_test.go"
       },
       "id": "core-06-02",
-      "learning_objective": "Understand and apply Unit testing in the context of professional Go software engineering.",
+      "learning_objective": "Author and execute unit tests in Go using the testing package and TestXxx function signatures.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-03"
@@ -20306,7 +20306,7 @@
         "test_path": "06-testing-debugging-refactoring/03-table-driven-tests/main_test.go"
       },
       "id": "core-06-03",
-      "learning_objective": "Understand and apply Table-driven tests in the context of professional Go software engineering.",
+      "learning_objective": "Structure comprehensive, maintainable test suites using idiomatic table-driven test cases.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-04"
@@ -20503,7 +20503,7 @@
         "test_path": "06-testing-debugging-refactoring/04-subtests/main_test.go"
       },
       "id": "core-06-04",
-      "learning_objective": "Understand and apply Subtests in the context of professional Go software engineering.",
+      "learning_objective": "Isolate test cases and execute subtests in parallel using t.Run() for granular reporting.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-05"
@@ -20698,7 +20698,7 @@
         "test_path": "06-testing-debugging-refactoring/05-t-cleanup/main_test.go"
       },
       "id": "core-06-05",
-      "learning_objective": "Understand and apply t.Cleanup in the context of professional Go software engineering.",
+      "learning_objective": "Register deterministic test teardown actions using t.Cleanup() to guarantee resource isolation across test cases.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-06"
@@ -20893,7 +20893,7 @@
         "test_path": "06-testing-debugging-refactoring/06-test-fixtures/main_test.go"
       },
       "id": "core-06-06",
-      "learning_objective": "Understand and apply Test fixtures in the context of professional Go software engineering.",
+      "learning_objective": "Manage shared test data, setup helpers, and mock database fixtures without cross-test state leakage.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-07"
@@ -21088,7 +21088,7 @@
         "test_path": "06-testing-debugging-refactoring/07-golden-files/main_test.go"
       },
       "id": "core-06-07",
-      "learning_objective": "Understand and apply Golden files in the context of professional Go software engineering.",
+      "learning_objective": "Validate complex serialization and output formats against golden reference files on disk.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-08"
@@ -21285,7 +21285,7 @@
         "test_path": "06-testing-debugging-refactoring/08-testable-design-with-io-writer/main_test.go"
       },
       "id": "core-06-08",
-      "learning_objective": "Understand and apply Testable design with io.Writer in the context of professional Go software engineering.",
+      "learning_objective": "Design testable code by accepting io.Writer or interface abstractions to eliminate hardcoded I/O dependencies.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-09"
@@ -21480,7 +21480,7 @@
         "test_path": "06-testing-debugging-refactoring/09-fakes-before-mocks/main_test.go"
       },
       "id": "core-06-09",
-      "learning_objective": "Understand and apply Fakes before mocks in the context of professional Go software engineering.",
+      "learning_objective": "Implement lightweight in-memory fakes rather than complex mock frameworks to verify interface interactions.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-10"
@@ -21675,7 +21675,7 @@
         "test_path": "06-testing-debugging-refactoring/10-mocking-tradeoffs/main_test.go"
       },
       "id": "core-06-10",
-      "learning_objective": "Understand and apply Mocking tradeoffs in the context of professional Go software engineering.",
+      "learning_objective": "Evaluate the architectural tradeoffs of mocking, avoiding over-mocking and fragile implementation-coupled tests.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-11"
@@ -21870,7 +21870,7 @@
         "test_path": "06-testing-debugging-refactoring/11-debugging-mindset/main_test.go"
       },
       "id": "core-06-11",
-      "learning_objective": "Understand and apply Debugging mindset in the context of professional Go software engineering.",
+      "learning_objective": "Measure and analyze test coverage using go test -cover to identify untested branches and edge cases.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-12"
@@ -22065,7 +22065,7 @@
         "test_path": "06-testing-debugging-refactoring/12-reading-stack-traces/main_test.go"
       },
       "id": "core-06-12",
-      "learning_objective": "Understand and apply Reading stack traces in the context of professional Go software engineering.",
+      "learning_objective": "Benchmark critical code paths using testing.B, reporting allocations per operation (allocs/op) and execution latency.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-13"
@@ -22260,7 +22260,7 @@
         "test_path": "06-testing-debugging-refactoring/13-debugging-panics/main_test.go"
       },
       "id": "core-06-13",
-      "learning_objective": "Understand and apply Debugging panics in the context of professional Go software engineering.",
+      "learning_objective": "Adopt a methodical debugging mindset: form hypotheses, observe symptoms, isolate variables, and verify fixes.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-14"
@@ -22455,7 +22455,7 @@
         "test_path": "06-testing-debugging-refactoring/14-delve-basics/main_test.go"
       },
       "id": "core-06-14",
-      "learning_objective": "Understand and apply Delve basics in the context of professional Go software engineering.",
+      "learning_objective": "Attach and navigate the Delve interactive debugger (dlv) to inspect running Go binaries.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-15"
@@ -22650,7 +22650,7 @@
         "test_path": "06-testing-debugging-refactoring/15-breakpoints/main_test.go"
       },
       "id": "core-06-15",
-      "learning_objective": "Understand and apply Breakpoints in the context of professional Go software engineering.",
+      "learning_objective": "Set line, function, and conditional breakpoints in Delve to halt program execution at points of interest.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-16"
@@ -22845,7 +22845,7 @@
         "test_path": "06-testing-debugging-refactoring/16-stepping-through-code/main_test.go"
       },
       "id": "core-06-16",
-      "learning_objective": "Understand and apply Stepping through code in the context of professional Go software engineering.",
+      "learning_objective": "Step through Go execution frame by frame using Delve step, next, and stepout commands.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-17"
@@ -23040,7 +23040,7 @@
         "test_path": "06-testing-debugging-refactoring/17-inspecting-variables/main_test.go"
       },
       "id": "core-06-17",
-      "learning_objective": "Understand and apply Inspecting variables in the context of professional Go software engineering.",
+      "learning_objective": "Inspect variable values, pointer contents, and call stack frames during active debugging sessions.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-18"
@@ -23235,7 +23235,7 @@
         "test_path": "06-testing-debugging-refactoring/18-debugging-tests/main_test.go"
       },
       "id": "core-06-18",
-      "learning_objective": "Understand and apply Debugging tests in the context of professional Go software engineering.",
+      "learning_objective": "Diagnose runtime panics, inspect tracebacks, and isolate the exact root cause of application crashes.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-19"
@@ -23445,7 +23445,7 @@
         "test_path": "06-testing-debugging-refactoring/19-refactoring-safely/main_test.go"
       },
       "id": "core-06-19",
-      "learning_objective": "Understand and apply Refactoring safely in the context of professional Go software engineering.",
+      "learning_objective": "Execute safe refactoring steps while keeping characterization tests passing to preserve existing behavior.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-20"
@@ -23640,7 +23640,7 @@
         "test_path": "06-testing-debugging-refactoring/20-fuzz-testing/main_test.go"
       },
       "id": "core-06-20",
-      "learning_objective": "Understand and apply Fuzz testing in the context of professional Go software engineering.",
+      "learning_objective": "Decompose high-complexity functions into smaller, single-responsibility units without regressions.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-06-21"
@@ -23845,7 +23845,7 @@
         "test_path": "06-testing-debugging-refactoring/21-race-detector-preview/main_test.go"
       },
       "id": "core-06-21",
-      "learning_objective": "Understand and apply Race detector preview in the context of professional Go software engineering.",
+      "learning_objective": "Conduct thorough code reviews, assessing readability, error handling, performance, and idiomatic Go design.",
       "module_id": "module-06",
       "next_item_ids": [
         "core-07-01"
@@ -24047,7 +24047,7 @@
         "test_path": "07-cli-files-json-config/01-cli-args/main_test.go"
       },
       "id": "core-07-01",
-      "learning_objective": "Understand and apply CLI args in the context of professional Go software engineering.",
+      "learning_objective": "Open, read, write, and close files using the os package with explicit permission bits and error handling.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-02"
@@ -24248,7 +24248,7 @@
         "test_path": "07-cli-files-json-config/02-flags/main_test.go"
       },
       "id": "core-07-02",
-      "learning_objective": "Understand and apply Flags in the context of professional Go software engineering.",
+      "learning_objective": "Stream data efficiently using the foundational io.Reader and io.Writer interfaces.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-03"
@@ -24449,7 +24449,7 @@
         "test_path": "07-cli-files-json-config/03-subcommands/main_test.go"
       },
       "id": "core-07-03",
-      "learning_objective": "Understand and apply Subcommands in the context of professional Go software engineering.",
+      "learning_objective": "Buffering file and stream operations with bufio.Reader and bufio.Writer to minimize system call overhead.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-04"
@@ -24650,7 +24650,7 @@
         "test_path": "07-cli-files-json-config/04-standard-input-and-standard-output/main_test.go"
       },
       "id": "core-07-04",
-      "learning_objective": "Understand and apply Standard input and standard output in the context of professional Go software engineering.",
+      "learning_objective": "Scan delimited text streams, tokens, and lines using bufio.Scanner with custom buffer limits.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-05"
@@ -24849,7 +24849,7 @@
         "test_path": "07-cli-files-json-config/05-io-reader/main_test.go"
       },
       "id": "core-07-05",
-      "learning_objective": "Understand and apply io.Reader in the context of professional Go software engineering.",
+      "learning_objective": "Compose data processing pipelines by chaining io.Reader and io.Writer implementations.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-06"
@@ -25048,7 +25048,7 @@
         "test_path": "07-cli-files-json-config/06-io-writer/main_test.go"
       },
       "id": "core-07-06",
-      "learning_objective": "Understand and apply io.Writer in the context of professional Go software engineering.",
+      "learning_objective": "Parse command-line arguments and flags using the standard library flag package.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-07"
@@ -25247,7 +25247,7 @@
         "test_path": "07-cli-files-json-config/07-files/main_test.go"
       },
       "id": "core-07-07",
-      "learning_objective": "Understand and apply Files in the context of professional Go software engineering.",
+      "learning_objective": "Structure idiomatic CLI subcommands, flag sets, and help documentation.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-08"
@@ -25448,7 +25448,7 @@
         "test_path": "07-cli-files-json-config/08-paths/main_test.go"
       },
       "id": "core-07-08",
-      "learning_objective": "Understand and apply Paths in the context of professional Go software engineering.",
+      "learning_objective": "Coordinate standard input (os.Stdin), standard output (os.Stdout), and error output (os.Stderr) in CLI tools.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-09"
@@ -25649,7 +25649,7 @@
         "test_path": "07-cli-files-json-config/09-directories/main_test.go"
       },
       "id": "core-07-09",
-      "learning_objective": "Understand and apply Directories in the context of professional Go software engineering.",
+      "learning_objective": "Capture, evaluate, and return standard POSIX process exit codes based on operation success or failure.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-10"
@@ -25850,7 +25850,7 @@
         "test_path": "07-cli-files-json-config/10-temp-files/main_test.go"
       },
       "id": "core-07-10",
-      "learning_objective": "Understand and apply Temp files in the context of professional Go software engineering.",
+      "learning_objective": "Implement graceful error output formatting for CLI utilities, directing diagnostics to stderr.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-11"
@@ -26049,7 +26049,7 @@
         "test_path": "07-cli-files-json-config/11-fs-fs/main_test.go"
       },
       "id": "core-07-11",
-      "learning_objective": "Understand and apply fs.FS in the context of professional Go software engineering.",
+      "learning_objective": "Format dynamic strings and text using the fmt package formatting verbs (%v, %+v, %#v, %d, %s, %w).",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-12"
@@ -26248,7 +26248,7 @@
         "test_path": "07-cli-files-json-config/12-json-marshal/main_test.go"
       },
       "id": "core-07-12",
-      "learning_objective": "Understand and apply JSON marshal in the context of professional Go software engineering.",
+      "learning_objective": "Serialize Go structs into in-memory JSON byte slices using json.Marshal and json.MarshalIndent.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-13"
@@ -26449,7 +26449,7 @@
         "test_path": "07-cli-files-json-config/13-json-unmarshal/main_test.go"
       },
       "id": "core-07-13",
-      "learning_objective": "Understand and apply JSON unmarshal in the context of professional Go software engineering.",
+      "learning_objective": "Deserialize JSON byte slices into Go structs using json.Unmarshal with strict type mapping.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-14"
@@ -26650,7 +26650,7 @@
         "test_path": "07-cli-files-json-config/14-json-encoder/main_test.go"
       },
       "id": "core-07-14",
-      "learning_objective": "Understand and apply JSON encoder in the context of professional Go software engineering.",
+      "learning_objective": "Stream and serialize large JSON datasets directly to I/O writers using json.Encoder.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-15"
@@ -26849,7 +26849,7 @@
         "test_path": "07-cli-files-json-config/15-json-decoder/main_test.go"
       },
       "id": "core-07-15",
-      "learning_objective": "Understand and apply JSON decoder in the context of professional Go software engineering.",
+      "learning_objective": "Stream and decode large JSON payloads incrementally from HTTP or file readers using json.Decoder.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-16"
@@ -27048,7 +27048,7 @@
         "test_path": "07-cli-files-json-config/16-config-files/main_test.go"
       },
       "id": "core-07-16",
-      "learning_objective": "Understand and apply Config files in the context of professional Go software engineering.",
+      "learning_objective": "Parse and validate structured configuration files across JSON, YAML, and TOML formats.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-17"
@@ -27262,7 +27262,7 @@
         "test_path": "07-cli-files-json-config/17-environment-variables-for-configuration/main_test.go"
       },
       "id": "core-07-17",
-      "learning_objective": "Understand and apply Environment variables for configuration in the context of professional Go software engineering.",
+      "learning_objective": "Load and override application settings dynamically using environment variables.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-18"
@@ -27461,7 +27461,7 @@
         "test_path": "07-cli-files-json-config/18-config-validation/main_test.go"
       },
       "id": "core-07-18",
-      "learning_objective": "Understand and apply Config validation in the context of professional Go software engineering.",
+      "learning_objective": "Validate configuration values on startup, failing fast with actionable errors when mandatory keys are missing.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-19"
@@ -27660,7 +27660,7 @@
         "test_path": "07-cli-files-json-config/19-text-templates/main_test.go"
       },
       "id": "core-07-19",
-      "learning_objective": "Understand and apply Text templates in the context of professional Go software engineering.",
+      "learning_objective": "Generate dynamic text, emails, and configuration files using the text/template engine.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-20"
@@ -27874,7 +27874,7 @@
         "test_path": "07-cli-files-json-config/20-base64-as-encoding-not-encryption/main_test.go"
       },
       "id": "core-07-20",
-      "learning_objective": "Understand and apply Base64 as encoding, not encryption in the context of professional Go software engineering.",
+      "learning_objective": "Encode and decode binary data using standard base64 encoding schemes, recognizing it as serialization rather than encryption.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-07-21"
@@ -28088,7 +28088,7 @@
         "test_path": "07-cli-files-json-config/21-cli-testability/main_test.go"
       },
       "id": "core-07-21",
-      "learning_objective": "Understand and apply CLI testability in the context of professional Go software engineering.",
+      "learning_objective": "Design CLI tools with dependency injection for stdin, stdout, and stderr to enable fast, deterministic unit testing.",
       "module_id": "module-07",
       "next_item_ids": [
         "core-08-01"
@@ -28288,7 +28288,7 @@
         "test_path": "08-http-rest-apis/01-http-as-a-protocol/main_test.go"
       },
       "id": "core-08-01",
-      "learning_objective": "Understand and apply HTTP as a protocol in the context of professional Go software engineering.",
+      "learning_objective": "Deconstruct the HTTP protocol lifecycle, inspecting request methods, paths, status codes, headers, and bodies.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-02"
@@ -28475,7 +28475,7 @@
         "test_path": "08-http-rest-apis/02-net-http-basics/main_test.go"
       },
       "id": "core-08-02",
-      "learning_objective": "Understand and apply net/http basics in the context of professional Go software engineering.",
+      "learning_objective": "Implement and start an HTTP server using http.ListenAndServe and configure custom http.Server timeouts.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-03"
@@ -28677,7 +28677,7 @@
         "test_path": "08-http-rest-apis/03-handler-lifecycle/main_test.go"
       },
       "id": "core-08-03",
-      "learning_objective": "Understand and apply Handler lifecycle in the context of professional Go software engineering.",
+      "learning_objective": "Implement custom HTTP endpoints satisfying the http.Handler interface.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-04"
@@ -28862,7 +28862,7 @@
         "test_path": "08-http-rest-apis/04-routing/main_test.go"
       },
       "id": "core-08-04",
-      "learning_objective": "Understand and apply Routing in the context of professional Go software engineering.",
+      "learning_objective": "Route HTTP requests to handler functions using http.HandleFunc and the ServeHTTP adapter.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-05"
@@ -29054,7 +29054,7 @@
         "test_path": "08-http-rest-apis/05-request-parsing/main_test.go"
       },
       "id": "core-08-05",
-      "learning_objective": "Understand and apply Request parsing in the context of professional Go software engineering.",
+      "learning_objective": "Route requests by path and HTTP method using Go 1.22+ enhanced http.ServeMux patterns.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-06"
@@ -29239,7 +29239,7 @@
         "test_path": "08-http-rest-apis/06-input-validation/main_test.go"
       },
       "id": "core-08-06",
-      "learning_objective": "Understand and apply Input validation in the context of professional Go software engineering.",
+      "learning_objective": "Extract and validate path parameters from dynamic routes in HTTP requests.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-07"
@@ -29431,7 +29431,7 @@
         "test_path": "08-http-rest-apis/07-response-writing/main_test.go"
       },
       "id": "core-08-07",
-      "learning_objective": "Understand and apply Response writing in the context of professional Go software engineering.",
+      "learning_objective": "Parse, validate, and extract query string parameters from request URLs with default fallbacks.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-08"
@@ -29616,7 +29616,7 @@
         "test_path": "08-http-rest-apis/08-api-error-shape/main_test.go"
       },
       "id": "core-08-08",
-      "learning_objective": "Understand and apply API error shape in the context of professional Go software engineering.",
+      "learning_objective": "Read and set HTTP headers, managing Content-Type, Authorization, and caching directives.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-09"
@@ -29808,7 +29808,7 @@
         "test_path": "08-http-rest-apis/09-status-codes/main_test.go"
       },
       "id": "core-08-09",
-      "learning_objective": "Understand and apply Status codes in the context of professional Go software engineering.",
+      "learning_objective": "Select and return appropriate HTTP status codes (2xx, 3xx, 4xx, 5xx) accurately reflecting endpoint outcomes.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-10"
@@ -29993,7 +29993,7 @@
         "test_path": "08-http-rest-apis/10-middleware-pattern/main_test.go"
       },
       "id": "core-08-10",
-      "learning_objective": "Understand and apply Middleware pattern in the context of professional Go software engineering.",
+      "learning_objective": "Parse and decode incoming JSON request bodies safely, enforcing maximum payload size limits.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-11"
@@ -30187,7 +30187,7 @@
         "test_path": "08-http-rest-apis/11-error-middleware/main_test.go"
       },
       "id": "core-08-11",
-      "learning_objective": "Understand and apply Error middleware in the context of professional Go software engineering.",
+      "learning_objective": "Serialize and return structured JSON response bodies with consistent error and data schemas.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-12"
@@ -30372,7 +30372,7 @@
         "test_path": "08-http-rest-apis/12-handler-testing-with-httptest/main_test.go"
       },
       "id": "core-08-12",
-      "learning_objective": "Understand and apply Handler testing with httptest in the context of professional Go software engineering.",
+      "learning_objective": "Construct composable HTTP middleware chains wrapping handlers for logging, authentication, and headers.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-13"
@@ -30566,7 +30566,7 @@
         "test_path": "08-http-rest-apis/13-body-size-limits/main_test.go"
       },
       "id": "core-08-13",
-      "learning_objective": "Understand and apply Body size limits in the context of professional Go software engineering.",
+      "learning_objective": "Attach and extract request-scoped metadata (correlation IDs, auth identities) using context.Context.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-14"
@@ -30773,7 +30773,7 @@
         "test_path": "08-http-rest-apis/14-server-timeouts/main_test.go"
       },
       "id": "core-08-14",
-      "learning_objective": "Understand and apply Server timeouts in the context of professional Go software engineering.",
+      "learning_objective": "Intercept unhandled runtime panics in HTTP handlers using recovery middleware to prevent server crashes.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-15"
@@ -30980,7 +30980,7 @@
         "test_path": "08-http-rest-apis/15-graceful-shutdown/main_test.go"
       },
       "id": "core-08-15",
-      "learning_objective": "Understand and apply Graceful shutdown in the context of professional Go software engineering.",
+      "learning_objective": "Implement structured request logging middleware recording method, path, status, duration, and IP.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-16"
@@ -31167,7 +31167,7 @@
         "test_path": "08-http-rest-apis/16-health-and-readiness-probes/main_test.go"
       },
       "id": "core-08-16",
-      "learning_objective": "Understand and apply Health and readiness probes in the context of professional Go software engineering.",
+      "learning_objective": "Implement CRUD endpoints following RESTful resource naming and state manipulation conventions.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-17"
@@ -31361,7 +31361,7 @@
         "test_path": "08-http-rest-apis/17-rest-design-principles/main_test.go"
       },
       "id": "core-08-17",
-      "learning_objective": "Understand and apply REST design principles in the context of professional Go software engineering.",
+      "learning_objective": "Validate incoming API payloads, returning structured 422 Unprocessable Entity error payloads on failure.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-18"
@@ -31548,7 +31548,7 @@
         "test_path": "08-http-rest-apis/18-api-versioning/main_test.go"
       },
       "id": "core-08-18",
-      "learning_objective": "Understand and apply API versioning in the context of professional Go software engineering.",
+      "learning_objective": "Standardize API error response bodies containing machine-readable error codes and human-readable messages.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-19"
@@ -31742,7 +31742,7 @@
         "test_path": "08-http-rest-apis/19-pagination-and-filtering/main_test.go"
       },
       "id": "core-08-19",
-      "learning_objective": "Understand and apply Pagination and filtering in the context of professional Go software engineering.",
+      "learning_objective": "Unit test HTTP handlers in isolation using net/http/httptest ResponseRecorder and NewRequest.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-20"
@@ -31929,7 +31929,7 @@
         "test_path": "08-http-rest-apis/20-openapi-basics/main_test.go"
       },
       "id": "core-08-20",
-      "learning_objective": "Understand and apply OpenAPI basics in the context of professional Go software engineering.",
+      "learning_objective": "Perform integration tests against running HTTP servers using httptest.Server.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-08-21"
@@ -32077,7 +32077,7 @@
         "test_path": "08-http-rest-apis/21-grpc-and-protocol-buffers/main_test.go"
       },
       "id": "core-08-21",
-      "learning_objective": "Understand and apply gRPC and Protocol Buffers in the context of professional Go software engineering.",
+      "learning_objective": "Execute outbound HTTP requests using http.Client with configured transport timeouts and context deadlines.",
       "module_id": "module-08",
       "next_item_ids": [
         "core-09-01"
@@ -32269,7 +32269,7 @@
         "test_path": "09-sql-postgres-persistence/01-why-databases-exist/main_test.go"
       },
       "id": "core-09-01",
-      "learning_objective": "Understand and apply Why databases exist in the context of professional Go software engineering.",
+      "learning_objective": "Model relational database schemas, tables, primary keys, and relationships for Go backend applications.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-02"
@@ -32454,7 +32454,7 @@
         "test_path": "09-sql-postgres-persistence/02-relational-modeling/main_test.go"
       },
       "id": "core-09-02",
-      "learning_objective": "Understand and apply Relational modeling in the context of professional Go software engineering.",
+      "learning_objective": "Connect to PostgreSQL instances and configure connection pools using database/sql and pgx drivers.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-03"
@@ -32646,7 +32646,7 @@
         "test_path": "09-sql-postgres-persistence/03-tables-rows-and-columns/main_test.go"
       },
       "id": "core-09-03",
-      "learning_objective": "Understand and apply Tables, rows, and columns in the context of professional Go software engineering.",
+      "learning_objective": "Tune database connection pool limits (max open, max idle, connection lifetimes) for production workloads.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-04"
@@ -32831,7 +32831,7 @@
         "test_path": "09-sql-postgres-persistence/04-primary-keys/main_test.go"
       },
       "id": "core-09-04",
-      "learning_objective": "Understand and apply Primary keys in the context of professional Go software engineering.",
+      "learning_objective": "Manage database schema migrations sequentially using SQL migration scripts and migration tooling.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-05"
@@ -33023,7 +33023,7 @@
         "test_path": "09-sql-postgres-persistence/05-foreign-keys/main_test.go"
       },
       "id": "core-09-05",
-      "learning_objective": "Understand and apply Foreign keys in the context of professional Go software engineering.",
+      "learning_objective": "Execute parameter-bound SQL statements to prevent SQL injection vulnerabilities.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-06"
@@ -33208,7 +33208,7 @@
         "test_path": "09-sql-postgres-persistence/06-constraints/main_test.go"
       },
       "id": "core-09-06",
-      "learning_objective": "Understand and apply Constraints in the context of professional Go software engineering.",
+      "learning_objective": "Execute single-row queries using db.QueryRow() and scan columns into Go variables and structs.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-07"
@@ -33400,7 +33400,7 @@
         "test_path": "09-sql-postgres-persistence/07-sqlite-as-a-local-learning-tool/main_test.go"
       },
       "id": "core-09-07",
-      "learning_objective": "Understand and apply SQLite as a local learning tool in the context of professional Go software engineering.",
+      "learning_objective": "Handle sql.ErrNoRows cleanly to return 404 Not Found responses on missing records.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-08"
@@ -33585,7 +33585,7 @@
         "test_path": "09-sql-postgres-persistence/08-postgresql-as-production-default/main_test.go"
       },
       "id": "core-09-08",
-      "learning_objective": "Understand and apply PostgreSQL as production default in the context of professional Go software engineering.",
+      "learning_objective": "Execute multi-row queries with db.Query(), iterating over rows and closing sql.Rows to prevent connection leaks.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-09"
@@ -33777,7 +33777,7 @@
         "test_path": "09-sql-postgres-persistence/09-docker-compose-for-postgres/main_test.go"
       },
       "id": "core-09-09",
-      "learning_objective": "Understand and apply Docker Compose for Postgres in the context of professional Go software engineering.",
+      "learning_objective": "Execute INSERT, UPDATE, and DELETE statements using db.Exec(), verifying rows affected.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-10"
@@ -33962,7 +33962,7 @@
         "test_path": "09-sql-postgres-persistence/10-database-sql/main_test.go"
       },
       "id": "core-09-10",
-      "learning_objective": "Understand and apply database/sql in the context of professional Go software engineering.",
+      "learning_objective": "Handle NULL database column values using sql.NullString, pointer fields, or database COALESCE functions.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-11"
@@ -34156,7 +34156,7 @@
         "test_path": "09-sql-postgres-persistence/11-sql-db-as-a-pool/main_test.go"
       },
       "id": "core-09-11",
-      "learning_objective": "Understand and apply sql.DB as a pool in the context of professional Go software engineering.",
+      "learning_objective": "Coordinate multi-statement database transactions using tx.Begin, tx.Commit, and deferred tx.Rollback.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-12"
@@ -34341,7 +34341,7 @@
         "test_path": "09-sql-postgres-persistence/12-insert/main_test.go"
       },
       "id": "core-09-12",
-      "learning_objective": "Understand and apply INSERT in the context of professional Go software engineering.",
+      "learning_objective": "Evaluate SQL transaction isolation levels and manage concurrency anomalies (dirty reads, phantom reads).",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-13"
@@ -34533,7 +34533,7 @@
         "test_path": "09-sql-postgres-persistence/13-select/main_test.go"
       },
       "id": "core-09-13",
-      "learning_objective": "Understand and apply SELECT in the context of professional Go software engineering.",
+      "learning_objective": "Generate type-safe Go database code from pure SQL queries using sqlc.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-14"
@@ -34718,7 +34718,7 @@
         "test_path": "09-sql-postgres-persistence/14-scanning-rows/main_test.go"
       },
       "id": "core-09-14",
-      "learning_objective": "Understand and apply Scanning rows in the context of professional Go software engineering.",
+      "learning_objective": "Organize repository layer patterns decoupling domain services from direct database query execution.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-15"
@@ -34910,7 +34910,7 @@
         "test_path": "09-sql-postgres-persistence/15-null-handling/main_test.go"
       },
       "id": "core-09-15",
-      "learning_objective": "Understand and apply Null handling in the context of professional Go software engineering.",
+      "learning_objective": "Test database repository implementations using real PostgreSQL containers in integration test suites.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-16"
@@ -35095,7 +35095,7 @@
         "test_path": "09-sql-postgres-persistence/16-prepared-statements/main_test.go"
       },
       "id": "core-09-16",
-      "learning_objective": "Understand and apply Prepared statements in the context of professional Go software engineering.",
+      "learning_objective": "Design B-tree and composite database indexes to optimize query performance and enforce unique constraints.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-17"
@@ -35289,7 +35289,7 @@
         "test_path": "09-sql-postgres-persistence/17-transactions/main_test.go"
       },
       "id": "core-09-17",
-      "learning_objective": "Understand and apply Transactions in the context of professional Go software engineering.",
+      "learning_objective": "Analyze SQL query execution plans using EXPLAIN and EXPLAIN ANALYZE to eliminate sequential table scans.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-18"
@@ -35476,7 +35476,7 @@
         "test_path": "09-sql-postgres-persistence/18-rollback-discipline/main_test.go"
       },
       "id": "core-09-18",
-      "learning_objective": "Understand and apply Rollback discipline in the context of professional Go software engineering.",
+      "learning_objective": "Model and query one-to-many and many-to-many relationships using foreign keys and junction tables.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-19"
@@ -35668,7 +35668,7 @@
         "test_path": "09-sql-postgres-persistence/19-migrations/main_test.go"
       },
       "id": "core-09-19",
-      "learning_objective": "Understand and apply Migrations in the context of professional Go software engineering.",
+      "learning_objective": "Query joined relational tables and scan multi-table result sets into domain models.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-20"
@@ -35853,7 +35853,7 @@
         "test_path": "09-sql-postgres-persistence/20-joins/main_test.go"
       },
       "id": "core-09-20",
-      "learning_objective": "Understand and apply Joins in the context of professional Go software engineering.",
+      "learning_objective": "Model soft deletes using deleted_at timestamps while maintaining unique constraint integrity.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-21"
@@ -36045,7 +36045,7 @@
         "test_path": "09-sql-postgres-persistence/21-indexes/main_test.go"
       },
       "id": "core-09-21",
-      "learning_objective": "Understand and apply Indexes in the context of professional Go software engineering.",
+      "learning_objective": "Implement paginated database queries using keyset (cursor-based) and offset-based pagination.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-22"
@@ -36230,7 +36230,7 @@
         "test_path": "09-sql-postgres-persistence/22-explain/main_test.go"
       },
       "id": "core-09-22",
-      "learning_objective": "Understand and apply EXPLAIN in the context of professional Go software engineering.",
+      "learning_objective": "Implement database health check probes (/healthz) verifying connection pool liveness and responsiveness.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-23"
@@ -36437,7 +36437,7 @@
         "test_path": "09-sql-postgres-persistence/23-query-timeouts-with-context/main_test.go"
       },
       "id": "core-09-23",
-      "learning_objective": "Understand and apply Query timeouts with context in the context of professional Go software engineering.",
+      "learning_objective": "Serialize and query semi-structured JSON documents in PostgreSQL using JSONB columns.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-24"
@@ -36624,7 +36624,7 @@
         "test_path": "09-sql-postgres-persistence/24-repository-and-service-seam/main_test.go"
       },
       "id": "core-09-24",
-      "learning_objective": "Understand and apply Repository and service seam in the context of professional Go software engineering.",
+      "learning_objective": "Execute database disaster recovery drills: dump schemas/data, drop databases, restore, and verify integrity.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-25"
@@ -36816,7 +36816,7 @@
         "test_path": "09-sql-postgres-persistence/25-integration-tests/main_test.go"
       },
       "id": "core-09-25",
-      "learning_objective": "Understand and apply Integration tests in the context of professional Go software engineering.",
+      "learning_objective": "Implement optimistic locking using record version columns to prevent lost updates during concurrent edits.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-26"
@@ -37003,7 +37003,7 @@
         "test_path": "09-sql-postgres-persistence/26-sqlc/main_test.go"
       },
       "id": "core-09-26",
-      "learning_objective": "Understand and apply sqlc in the context of professional Go software engineering.",
+      "learning_objective": "Prevent connection leaks by strictly closing sql.Rows, prepared statements, and rolled-back transactions.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-27"
@@ -37481,7 +37481,7 @@
         "test_path": "10-auth-security/01-threat-modeling/main_test.go"
       },
       "id": "core-10-01",
-      "learning_objective": "Understand and apply Threat modeling in the context of professional Go software engineering.",
+      "learning_objective": "Perform threat modeling for backend APIs, identifying trust boundaries, attack vectors, and mitigations.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-02"
@@ -37667,7 +37667,7 @@
         "test_path": "10-auth-security/02-trust-boundaries/main_test.go"
       },
       "id": "core-10-02",
-      "learning_objective": "Understand and apply Trust boundaries in the context of professional Go software engineering.",
+      "learning_objective": "Define trust boundaries between external client inputs, API gateways, internal services, and databases.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-03"
@@ -37858,7 +37858,7 @@
         "test_path": "10-auth-security/03-input-validation-for-security/main_test.go"
       },
       "id": "core-10-03",
-      "learning_objective": "Understand and apply Input validation for security in the context of professional Go software engineering.",
+      "learning_objective": "Validate and sanitize all incoming user inputs to protect downstream systems from injection and corruption.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-04"
@@ -38041,7 +38041,7 @@
         "test_path": "10-auth-security/04-authentication-vs-authorization/main_test.go"
       },
       "id": "core-10-04",
-      "learning_objective": "Understand and apply Authentication vs authorization in the context of professional Go software engineering.",
+      "learning_objective": "Differentiate authentication (verifying caller identity) from authorization (verifying permissions).",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-05"
@@ -38232,7 +38232,7 @@
         "test_path": "10-auth-security/05-password-hashing/main_test.go"
       },
       "id": "core-10-05",
-      "learning_objective": "Understand and apply Password hashing in the context of professional Go software engineering.",
+      "learning_objective": "Hash and verify passwords securely using bcrypt with appropriate adaptive work factors.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-06"
@@ -38418,7 +38418,7 @@
         "test_path": "10-auth-security/06-sessions-and-cookies/main_test.go"
       },
       "id": "core-10-06",
-      "learning_objective": "Understand and apply Sessions and cookies in the context of professional Go software engineering.",
+      "learning_objective": "Implement stateful server-side sessions, secure cookie attributes (HttpOnly, Secure, SameSite), and session invalidation.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-07"
@@ -38609,7 +38609,7 @@
         "test_path": "10-auth-security/07-jwt-implementation/main_test.go"
       },
       "id": "core-10-07",
-      "learning_objective": "Understand and apply JWT implementation in the context of professional Go software engineering.",
+      "learning_objective": "Construct and sign stateless JSON Web Tokens (JWT) containing standard and custom claims.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-08"
@@ -38793,7 +38793,7 @@
         "test_path": "10-auth-security/08-jwt-risks/main_test.go"
       },
       "id": "core-10-08",
-      "learning_objective": "Understand and apply JWT risks in the context of professional Go software engineering.",
+      "learning_objective": "Verify JWT signatures, inspect claim validity, and handle token expiration securely.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-09"
@@ -38993,7 +38993,7 @@
         "test_path": "10-auth-security/09-oauth2-and-oidc-overview/main_test.go"
       },
       "id": "core-10-09",
-      "learning_objective": "Understand and apply OAuth2 and OIDC overview in the context of professional Go software engineering.",
+      "learning_objective": "Identify JWT security risks: weak secret keys, none algorithm vulnerabilities, and lack of revocation.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-10"
@@ -39181,7 +39181,7 @@
         "test_path": "10-auth-security/10-api-keys/main_test.go"
       },
       "id": "core-10-10",
-      "learning_objective": "Understand and apply API keys in the context of professional Go software engineering.",
+      "learning_objective": "Generate, hash, and authenticate high-entropy API keys for machine-to-machine integrations.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-11"
@@ -39376,7 +39376,7 @@
         "test_path": "10-auth-security/11-rbac/main_test.go"
       },
       "id": "core-10-11",
-      "learning_objective": "Understand and apply RBAC in the context of professional Go software engineering.",
+      "learning_objective": "Implement Role-Based Access Control (RBAC) middleware verifying user roles against endpoint requirements.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-12"
@@ -39564,7 +39564,7 @@
         "test_path": "10-auth-security/12-abac-and-policy-checks/main_test.go"
       },
       "id": "core-10-12",
-      "learning_objective": "Understand and apply ABAC and policy checks in the context of professional Go software engineering.",
+      "learning_objective": "Implement Attribute-Based Access Control (ABAC) evaluating resource ownership and environmental attributes.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-13"
@@ -39766,7 +39766,7 @@
         "test_path": "10-auth-security/13-tenant-isolation-basics/main_test.go"
       },
       "id": "core-10-13",
-      "learning_objective": "Understand and apply Tenant isolation basics in the context of professional Go software engineering.",
+      "learning_objective": "Enforce strict multi-tenant data isolation, scoping all database queries by authenticated tenant IDs.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-14"
@@ -39953,7 +39953,7 @@
         "test_path": "10-auth-security/14-sql-injection-prevention/main_test.go"
       },
       "id": "core-10-14",
-      "learning_objective": "Understand and apply SQL injection prevention in the context of professional Go software engineering.",
+      "learning_objective": "Prevent SQL injection completely by using parameterized queries and static analysis checks.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-15"
@@ -40149,7 +40149,7 @@
         "test_path": "10-auth-security/15-xss/main_test.go"
       },
       "id": "core-10-15",
-      "learning_objective": "Understand and apply XSS in the context of professional Go software engineering.",
+      "learning_objective": "Mitigate Cross-Site Scripting (XSS) by encoding outputs and setting Content Security Policy (CSP) headers.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-16"
@@ -40337,7 +40337,7 @@
         "test_path": "10-auth-security/16-csrf/main_test.go"
       },
       "id": "core-10-16",
-      "learning_objective": "Understand and apply CSRF in the context of professional Go software engineering.",
+      "learning_objective": "Prevent Cross-Site Request Forgery (CSRF) on state-changing requests using SameSite cookies and anti-CSRF tokens.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-17"
@@ -40533,7 +40533,7 @@
         "test_path": "10-auth-security/17-cors/main_test.go"
       },
       "id": "core-10-17",
-      "learning_objective": "Understand and apply CORS in the context of professional Go software engineering.",
+      "learning_objective": "Configure Cross-Origin Resource Sharing (CORS) headers strictly, rejecting wildcard origins with credentials.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-18"
@@ -40720,7 +40720,7 @@
         "test_path": "10-auth-security/18-rate-limiting/main_test.go"
       },
       "id": "core-10-18",
-      "learning_objective": "Understand and apply Rate limiting in the context of professional Go software engineering.",
+      "learning_objective": "Protect API endpoints from denial-of-service and brute-force attacks using token bucket rate limiting.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-19"
@@ -40916,7 +40916,7 @@
         "test_path": "10-auth-security/19-tls-and-https/main_test.go"
       },
       "id": "core-10-19",
-      "learning_objective": "Understand and apply TLS and HTTPS in the context of professional Go software engineering.",
+      "learning_objective": "Configure TLS/HTTPS servers with modern cipher suites and enforce encrypted transit communications.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-20"
@@ -41105,7 +41105,7 @@
         "test_path": "10-auth-security/20-secrets-management/main_test.go"
       },
       "id": "core-10-20",
-      "learning_objective": "Understand and apply Secrets management in the context of professional Go software engineering.",
+      "learning_objective": "Manage application secrets securely using environment variables and secret managers, avoiding code commits.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-21"
@@ -41301,7 +41301,7 @@
         "test_path": "10-auth-security/21-dependency-security/main_test.go"
       },
       "id": "core-10-21",
-      "learning_objective": "Understand and apply Dependency security in the context of professional Go software engineering.",
+      "learning_objective": "Scan dependencies for known CVE vulnerabilities using govulncheck and automated dependency auditing.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-22"
@@ -41489,7 +41489,7 @@
         "test_path": "10-auth-security/22-govulncheck/main_test.go"
       },
       "id": "core-10-22",
-      "learning_objective": "Understand and apply govulncheck in the context of professional Go software engineering.",
+      "learning_objective": "Audit and mitigate OWASP API Security Top 10 vulnerabilities across authentication, authorization, and data exposure.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-23"
@@ -41683,7 +41683,7 @@
         "test_path": "10-auth-security/23-owasp-for-go-apis/main_test.go"
       },
       "id": "core-10-23",
-      "learning_objective": "Understand and apply OWASP for Go APIs in the context of professional Go software engineering.",
+      "learning_objective": "Redact credentials, tokens, and PII from application logs to prevent sensitive data leakage.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-24"
@@ -41872,7 +41872,7 @@
         "test_path": "10-auth-security/24-secure-logging/main_test.go"
       },
       "id": "core-10-24",
-      "learning_objective": "Understand and apply Secure logging in the context of professional Go software engineering.",
+      "learning_objective": "Implement OAuth2 and OpenID Connect (OIDC) client verification flows for third-party identity federation.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-25"
@@ -42080,7 +42080,7 @@
         "test_path": "11-context-time-concurrency/01-time-basics/main_test.go"
       },
       "id": "core-11-01",
-      "learning_objective": "Understand and apply Time basics in the context of professional Go software engineering.",
+      "learning_objective": "Measure, format, and manipulate timestamps and timezones using the standard library time package.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-02"
@@ -42280,7 +42280,7 @@
         "test_path": "11-context-time-concurrency/02-durations/main_test.go"
       },
       "id": "core-11-02",
-      "learning_objective": "Understand and apply Durations in the context of professional Go software engineering.",
+      "learning_objective": "Represent time spans using time.Duration and perform elapsed-time and timeout calculations.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-03"
@@ -42485,7 +42485,7 @@
         "test_path": "11-context-time-concurrency/03-timers/main_test.go"
       },
       "id": "core-11-03",
-      "learning_objective": "Understand and apply Timers in the context of professional Go software engineering.",
+      "learning_objective": "Schedule one-shot delayed executions and timeout events using time.Timer and time.After.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-04"
@@ -42685,7 +42685,7 @@
         "test_path": "11-context-time-concurrency/04-tickers/main_test.go"
       },
       "id": "core-11-04",
-      "learning_objective": "Understand and apply Tickers in the context of professional Go software engineering.",
+      "learning_objective": "Schedule recurring interval tasks using time.Ticker, ensuring tickers are stopped to prevent resource leaks.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-05"
@@ -42890,7 +42890,7 @@
         "test_path": "11-context-time-concurrency/05-context-basics/main_test.go"
       },
       "id": "core-11-05",
-      "learning_objective": "Understand and apply Context basics in the context of professional Go software engineering.",
+      "learning_objective": "Spawn concurrent lightweight goroutines and contrast Go's M:N runtime scheduler with OS threads.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-06"
@@ -43090,7 +43090,7 @@
         "test_path": "11-context-time-concurrency/06-cancellation/main_test.go"
       },
       "id": "core-11-06",
-      "learning_objective": "Understand and apply Cancellation in the context of professional Go software engineering.",
+      "learning_objective": "Synchronize goroutine completion deterministically using sync.WaitGroup (Add, Done, Wait).",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-07"
@@ -43310,7 +43310,7 @@
         "test_path": "11-context-time-concurrency/07-timeouts/main_test.go"
       },
       "id": "core-11-07",
-      "learning_objective": "Understand and apply Timeouts in the context of professional Go software engineering.",
+      "learning_objective": "Communicate and share memory safely between goroutines using unbuffered channels as synchronization points.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-08"
@@ -43510,7 +43510,7 @@
         "test_path": "11-context-time-concurrency/08-deadlines/main_test.go"
       },
       "id": "core-11-08",
-      "learning_objective": "Understand and apply Deadlines in the context of professional Go software engineering.",
+      "learning_objective": "Decouple producer-consumer processing speeds using buffered channels with bounded capacities.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-09"
@@ -43715,7 +43715,7 @@
         "test_path": "11-context-time-concurrency/09-context-values-with-caveats/main_test.go"
       },
       "id": "core-11-09",
-      "learning_objective": "Understand and apply Context values with caveats in the context of professional Go software engineering.",
+      "learning_objective": "Signal completion and terminate channel iteration safely by closing channels from the sender side.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-10"
@@ -43913,7 +43913,7 @@
         "test_path": "11-context-time-concurrency/10-why-concurrency-exists/main_test.go"
       },
       "id": "core-11-10",
-      "learning_objective": "Understand and apply Why concurrency exists in the context of professional Go software engineering.",
+      "learning_objective": "Iterate over streams of channel values using for range loops that terminate cleanly upon channel closure.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-11"
@@ -44119,7 +44119,7 @@
         "test_path": "11-context-time-concurrency/11-goroutines/main_test.go"
       },
       "id": "core-11-11",
-      "learning_objective": "Understand and apply Goroutines in the context of professional Go software engineering.",
+      "learning_objective": "Multiplex channel communications and handle non-blocking operations using select statements.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-12"
@@ -44325,7 +44325,7 @@
         "test_path": "11-context-time-concurrency/12-waitgroups/main_test.go"
       },
       "id": "core-11-12",
-      "learning_objective": "Understand and apply WaitGroups in the context of professional Go software engineering.",
+      "learning_objective": "Enforce strict channel ownership: producers create, send, and close channels while consumers read.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-13"
@@ -44533,7 +44533,7 @@
         "test_path": "11-context-time-concurrency/13-channels/main_test.go"
       },
       "id": "core-11-13",
-      "learning_objective": "Understand and apply Channels in the context of professional Go software engineering.",
+      "learning_objective": "Protect shared mutable state across goroutines using sync.Mutex to avoid data races.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-14"
@@ -44734,7 +44734,7 @@
         "test_path": "11-context-time-concurrency/14-buffered-channels/main_test.go"
       },
       "id": "core-11-14",
-      "learning_objective": "Understand and apply Buffered channels in the context of professional Go software engineering.",
+      "learning_objective": "Optimize read-heavy concurrent data structures using sync.RWMutex for concurrent reads and exclusive writes.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-15"
@@ -44942,7 +44942,7 @@
         "test_path": "11-context-time-concurrency/15-closing-channels/main_test.go"
       },
       "id": "core-11-15",
-      "learning_objective": "Understand and apply Closing channels in the context of professional Go software engineering.",
+      "learning_objective": "Perform lock-free atomic arithmetic and pointer swaps using sync/atomic for high-performance counters.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-16"
@@ -45143,7 +45143,7 @@
         "test_path": "11-context-time-concurrency/16-channel-ownership/main_test.go"
       },
       "id": "core-11-16",
-      "learning_objective": "Understand and apply Channel ownership in the context of professional Go software engineering.",
+      "learning_objective": "Detect concurrent data access races at test and run time using Go's built-in race detector (-race).",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-17"
@@ -45352,7 +45352,7 @@
         "test_path": "11-context-time-concurrency/17-backpressure/main_test.go"
       },
       "id": "core-11-17",
-      "learning_objective": "Understand and apply Backpressure in the context of professional Go software engineering.",
+      "learning_objective": "Identify and prevent circular wait deadlock scenarios in multi-lock concurrent architectures.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-18"
@@ -45551,7 +45551,7 @@
         "test_path": "11-context-time-concurrency/18-pipelines/main_test.go"
       },
       "id": "core-11-18",
-      "learning_objective": "Understand and apply Pipelines in the context of professional Go software engineering.",
+      "learning_objective": "Diagnose and eliminate goroutine leaks caused by blocked channel reads, writes, or missing cancellation.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-19"
@@ -45757,7 +45757,7 @@
         "test_path": "11-context-time-concurrency/19-mutex-and-rwmutex/main_test.go"
       },
       "id": "core-11-19",
-      "learning_objective": "Understand and apply Mutex and RWMutex in the context of professional Go software engineering.",
+      "learning_objective": "Propagate cancellation signals across call trees and asynchronous workers using context.WithCancel.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-20"
@@ -45966,7 +45966,7 @@
         "test_path": "11-context-time-concurrency/20-atomics-with-caution/main_test.go"
       },
       "id": "core-11-20",
-      "learning_objective": "Understand and apply Atomics with caution in the context of professional Go software engineering.",
+      "learning_objective": "Enforce operational time bounds on network and database calls using context.WithTimeout and context.WithDeadline.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-21"
@@ -46172,7 +46172,7 @@
         "test_path": "11-context-time-concurrency/21-race-conditions/main_test.go"
       },
       "id": "core-11-21",
-      "learning_objective": "Understand and apply Race conditions in the context of professional Go software engineering.",
+      "learning_objective": "Pass request-scoped telemetry and authentication metadata down call stacks using context.WithValue.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-22"
@@ -46373,7 +46373,7 @@
         "test_path": "11-context-time-concurrency/22-race-detector/main_test.go"
       },
       "id": "core-11-22",
-      "learning_objective": "Understand and apply Race detector in the context of professional Go software engineering.",
+      "learning_objective": "Manage groups of concurrent goroutines returning errors and canceling sibling workers using golang.org/x/sync/errgroup.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-23"
@@ -46579,7 +46579,7 @@
         "test_path": "11-context-time-concurrency/23-goroutine-leaks/main_test.go"
       },
       "id": "core-11-23",
-      "learning_objective": "Understand and apply Goroutine leaks in the context of professional Go software engineering.",
+      "learning_objective": "Implement bounded worker pools with fixed worker counts to process task queues without overwhelming system resources.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-24"
@@ -46782,7 +46782,7 @@
         "test_path": "11-context-time-concurrency/24-deadlocks/main_test.go"
       },
       "id": "core-11-24",
-      "learning_objective": "Understand and apply Deadlocks in the context of professional Go software engineering.",
+      "learning_objective": "Compose concurrent data pipelines connecting stages via channels with backpressure and cancellation.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-25"
@@ -46990,7 +46990,7 @@
         "test_path": "11-context-time-concurrency/25-errgroup/main_test.go"
       },
       "id": "core-11-25",
-      "learning_objective": "Understand and apply errgroup in the context of professional Go software engineering.",
+      "learning_objective": "Apply backpressure to shed load or slow down producers when downstream consumers reach saturation.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-26"
@@ -47189,7 +47189,7 @@
         "test_path": "11-context-time-concurrency/26-bounded-worker-pools/main_test.go"
       },
       "id": "core-11-26",
-      "learning_objective": "Understand and apply Bounded worker pools in the context of professional Go software engineering.",
+      "learning_objective": "Implement transient fault retry mechanisms with exponential backoff and randomized jitter.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-27"
@@ -47395,7 +47395,7 @@
         "test_path": "11-context-time-concurrency/27-retries-and-backoff/main_test.go"
       },
       "id": "core-11-27",
-      "learning_objective": "Understand and apply Retries and backoff in the context of professional Go software engineering.",
+      "learning_objective": "Intercept SIGINT and SIGTERM OS signals to execute clean graceful shutdown of HTTP servers and worker pools.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-28"
@@ -47750,7 +47750,7 @@
         "test_path": "11-context-time-concurrency/29-sync-once/main_test.go"
       },
       "id": "core-11-29",
-      "learning_objective": "Understand and apply sync.Once in the context of professional Go software engineering.",
+      "learning_objective": "Ensure thread-safe, one-time lazy initialization of shared resources across concurrent goroutines using sync.Once.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-12-01"
@@ -47956,7 +47956,7 @@
         "test_path": "12-observability-performance-reliability/01-why-observability-exists/main_test.go"
       },
       "id": "core-12-01",
-      "learning_objective": "Understand and apply Why observability exists in the context of professional Go software engineering.",
+      "learning_objective": "Formulate an observability mindset based on the three telemetry pillars: structured logs, metrics, and traces.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-02"
@@ -48159,7 +48159,7 @@
         "test_path": "12-observability-performance-reliability/02-structured-logging-with-slog/main_test.go"
       },
       "id": "core-12-02",
-      "learning_objective": "Understand and apply Structured logging with slog in the context of professional Go software engineering.",
+      "learning_objective": "Implement production structured logging using Go's standard library log/slog with JSON and text handlers.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-03"
@@ -48369,7 +48369,7 @@
         "test_path": "12-observability-performance-reliability/03-request-scoped-logging/main_test.go"
       },
       "id": "core-12-03",
-      "learning_objective": "Understand and apply Request-scoped logging in the context of professional Go software engineering.",
+      "learning_objective": "Generate and propagate correlation IDs across incoming HTTP requests and background operations.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-04"
@@ -48570,7 +48570,7 @@
         "test_path": "12-observability-performance-reliability/04-correlation-ids/main_test.go"
       },
       "id": "core-12-04",
-      "learning_objective": "Understand and apply Correlation IDs in the context of professional Go software engineering.",
+      "learning_objective": "Configure appropriate log levels (DEBUG, INFO, WARN, ERROR) and filter noise in production environments.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-05"
@@ -48786,7 +48786,7 @@
         "test_path": "12-observability-performance-reliability/05-pii-redaction/main_test.go"
       },
       "id": "core-12-05",
-      "learning_objective": "Understand and apply PII redaction in the context of professional Go software engineering.",
+      "learning_objective": "Attach request-scoped contextual attributes (user ID, tenant ID, request path) to slog instances.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-06"
@@ -48987,7 +48987,7 @@
         "test_path": "12-observability-performance-reliability/06-metrics/main_test.go"
       },
       "id": "core-12-06",
-      "learning_objective": "Understand and apply Metrics in the context of professional Go software engineering.",
+      "learning_objective": "Mask sensitive PII and confidential credentials before writing structured log entries.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-07"
@@ -49196,7 +49196,7 @@
         "test_path": "12-observability-performance-reliability/07-prometheus/main_test.go"
       },
       "id": "core-12-07",
-      "learning_objective": "Understand and apply Prometheus in the context of professional Go software engineering.",
+      "learning_objective": "Instrument application performance using Prometheus metric counters, gauges, and histogram buckets.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-08"
@@ -49396,7 +49396,7 @@
         "test_path": "12-observability-performance-reliability/08-tracing/main_test.go"
       },
       "id": "core-12-08",
-      "learning_objective": "Understand and apply Tracing in the context of professional Go software engineering.",
+      "learning_objective": "Expose Prometheus scrape endpoints (/metrics) and monitor HTTP request rates, errors, and latencies.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-09"
@@ -49605,7 +49605,7 @@
         "test_path": "12-observability-performance-reliability/09-opentelemetry/main_test.go"
       },
       "id": "core-12-09",
-      "learning_objective": "Understand and apply OpenTelemetry in the context of professional Go software engineering.",
+      "learning_objective": "Trace distributed requests across microservice boundaries using OpenTelemetry spans and trace context headers.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-10"
@@ -49750,7 +49750,7 @@
         "test_path": "12-observability-performance-reliability/10-pprof/main_test.go"
       },
       "id": "core-13-01",
-      "learning_objective": "Understand and apply pprof in the context of professional Go software engineering.",
+      "learning_objective": "Analyze memory alignment, field ordering, and struct padding to optimize struct memory layout.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-02"
@@ -49891,7 +49891,7 @@
         "test_path": "12-observability-performance-reliability/11-cpu-profiling/main_test.go"
       },
       "id": "core-13-02",
-      "learning_objective": "Understand and apply CPU profiling in the context of professional Go software engineering.",
+      "learning_objective": "Inspect compiler escape analysis decisions using -gcflags=\"-m\" to determine stack vs heap allocations.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-03"
@@ -50038,7 +50038,7 @@
         "test_path": "12-observability-performance-reliability/12-memory-profiling/main_test.go"
       },
       "id": "core-13-03",
-      "learning_objective": "Understand and apply Memory profiling in the context of professional Go software engineering.",
+      "learning_objective": "Analyze the Go runtime tri-color mark-and-sweep garbage collector, allocation pacing, and GOGC tuning.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-04"
@@ -50182,7 +50182,7 @@
         "test_path": "12-observability-performance-reliability/13-benchmarks/main_test.go"
       },
       "id": "core-13-04",
-      "learning_objective": "Understand and apply Benchmarks in the context of professional Go software engineering.",
+      "learning_objective": "Capture and analyze CPU profiles using pprof to locate functions consuming the most execution time.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-05"
@@ -50323,7 +50323,7 @@
         "test_path": "12-observability-performance-reliability/14-escape-analysis/main_test.go"
       },
       "id": "core-13-05",
-      "learning_objective": "Understand and apply Escape analysis in the context of professional Go software engineering.",
+      "learning_objective": "Capture and analyze heap memory allocation profiles using pprof to eliminate hot allocation paths.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-06"
@@ -50468,7 +50468,7 @@
         "test_path": "12-observability-performance-reliability/15-memory-layout/main_test.go"
       },
       "id": "core-13-06",
-      "learning_objective": "Understand and apply Memory layout in the context of professional Go software engineering.",
+      "learning_objective": "Compare benchmark results and verify statistical significance of optimizations using benchstat.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-07"
@@ -50616,7 +50616,7 @@
         "test_path": "12-observability-performance-reliability/16-caching-basics/main_test.go"
       },
       "id": "core-13-07",
-      "learning_objective": "Understand and apply Caching basics in the context of professional Go software engineering.",
+      "learning_objective": "Implement in-memory caching with TTL expiration, cache invalidation, and memory budget caps.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-08"
@@ -50762,7 +50762,7 @@
         "test_path": "12-observability-performance-reliability/17-cache-invalidation/main_test.go"
       },
       "id": "core-13-08",
-      "learning_objective": "Understand and apply Cache invalidation in the context of professional Go software engineering.",
+      "learning_objective": "Profile and resolve lock contention bottlenecks in concurrent code using mutex and block profiles.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-14-01"
@@ -50962,7 +50962,7 @@
         "test_path": "12-observability-performance-reliability/18-alerting-mindset/main_test.go"
       },
       "id": "core-12-10",
-      "learning_objective": "Understand and apply Alerting mindset in the context of professional Go software engineering.",
+      "learning_objective": "Implement separate liveness (/livez) and readiness (/readyz) container health check endpoints.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-11"
@@ -51169,7 +51169,7 @@
         "test_path": "12-observability-performance-reliability/19-incident-debugging/main_test.go"
       },
       "id": "core-12-11",
-      "learning_objective": "Understand and apply Incident debugging in the context of professional Go software engineering.",
+      "learning_objective": "Design proactive alerting strategies based on service-level objectives (SLOs) rather than raw metric noise.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-12"
@@ -51384,7 +51384,7 @@
         "test_path": "12-observability-performance-reliability/20-reliability-review/main_test.go"
       },
       "id": "core-12-12",
-      "learning_objective": "Understand and apply Reliability review in the context of professional Go software engineering.",
+      "learning_objective": "Construct an actionable production incident runbook with diagnostic triage steps and escalation paths.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-13-01"
@@ -51524,7 +51524,7 @@
         "test_path": "13-architecture-systems-thinking/01-why-architecture-exists/main_test.go"
       },
       "id": "core-14-01",
-      "learning_objective": "Understand and apply Why architecture exists in the context of professional Go software engineering.",
+      "learning_objective": "Evaluate architectural patterns and tradeoffs, balancing monolith simplicity against distributed complexity.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-02"
@@ -51663,7 +51663,7 @@
         "test_path": "13-architecture-systems-thinking/02-package-boundaries/main_test.go"
       },
       "id": "core-14-02",
-      "learning_objective": "Understand and apply Package boundaries in the context of professional Go software engineering.",
+      "learning_objective": "Design modular monoliths with strict package boundary encapsulation and explicit dependency injection.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-03"
@@ -51802,7 +51802,7 @@
         "test_path": "13-architecture-systems-thinking/03-service-layer/main_test.go"
       },
       "id": "core-14-03",
-      "learning_objective": "Understand and apply Service layer in the context of professional Go software engineering.",
+      "learning_objective": "Implement Hexagonal / Clean Architecture separating domain entities, use-case services, and adapter interfaces.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-04"
@@ -51945,7 +51945,7 @@
         "test_path": "13-architecture-systems-thinking/04-repository-pattern-deep-dive/main_test.go"
       },
       "id": "core-14-04",
-      "learning_objective": "Understand and apply Repository pattern deep dive in the context of professional Go software engineering.",
+      "learning_objective": "Apply the Service Layer pattern to orchestrate business workflows independent of transport and persistence.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-05"
@@ -52086,7 +52086,7 @@
         "test_path": "13-architecture-systems-thinking/05-modular-monolith/main_test.go"
       },
       "id": "core-14-05",
-      "learning_objective": "Understand and apply Modular monolith in the context of professional Go software engineering.",
+      "learning_objective": "Apply the Repository pattern to decouple data access logic from core domain business rules.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-06"
@@ -52228,7 +52228,7 @@
         "test_path": "13-architecture-systems-thinking/06-hexagonal-architecture/main_test.go"
       },
       "id": "core-14-06",
-      "learning_objective": "Understand and apply Hexagonal architecture in the context of professional Go software engineering.",
+      "learning_objective": "Enforce core domain invariants and business rules within entity models to prevent corrupt application state.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-07"
@@ -52371,7 +52371,7 @@
         "test_path": "13-architecture-systems-thinking/07-domain-modeling/main_test.go"
       },
       "id": "core-14-07",
-      "learning_objective": "Understand and apply Domain modeling in the context of professional Go software engineering.",
+      "learning_objective": "Design event-driven architectures with asynchronous domain events, producers, and decoupled subscribers.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-08"
@@ -52511,7 +52511,7 @@
         "test_path": "13-architecture-systems-thinking/08-invariants/main_test.go"
       },
       "id": "core-14-08",
-      "learning_objective": "Understand and apply Invariants in the context of professional Go software engineering.",
+      "learning_objective": "Publish and consume messages from message queues, handling message serialization, acknowledgments, and dead-letter queues.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-09"
@@ -52655,7 +52655,7 @@
         "test_path": "13-architecture-systems-thinking/09-event-driven-basics/main_test.go"
       },
       "id": "core-14-09",
-      "learning_objective": "Understand and apply Event-driven basics in the context of professional Go software engineering.",
+      "learning_objective": "Design idempotent consumers that safely handle duplicate message deliveries without corrupting state.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-10"
@@ -52860,7 +52860,7 @@
         "test_path": "13-architecture-systems-thinking/10-queues/main_test.go"
       },
       "id": "core-14-10",
-      "learning_objective": "Understand and apply Queues in the context of professional Go software engineering.",
+      "learning_objective": "Implement distributed retry strategies with exponential backoff, jitter, and dead-letter queue routing.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-11"
@@ -53057,7 +53057,7 @@
         "test_path": "13-architecture-systems-thinking/11-retries-and-idempotent-consumers/main_test.go"
       },
       "id": "core-14-11",
-      "learning_objective": "Understand and apply Retries and idempotent consumers in the context of professional Go software engineering.",
+      "learning_objective": "Implement the transactional outbox pattern to guarantee atomic database updates and event publishing.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-12"
@@ -53271,7 +53271,7 @@
         "test_path": "13-architecture-systems-thinking/12-payment-workflow-design/main_test.go"
       },
       "id": "core-14-12",
-      "learning_objective": "Understand and apply Payment workflow design in the context of professional Go software engineering.",
+      "learning_objective": "Architect multi-tenant backend systems with database-per-tenant, schema-per-tenant, or column-scoped isolation.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-13"
@@ -53472,7 +53472,7 @@
         "test_path": "13-architecture-systems-thinking/13-multi-tenancy-architecture/main_test.go"
       },
       "id": "core-14-13",
-      "learning_objective": "Understand and apply Multi-tenancy architecture in the context of professional Go software engineering.",
+      "learning_objective": "Enforce strict tenant data boundaries across API handlers, background workers, and caching layers.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-14"
@@ -53674,7 +53674,7 @@
         "test_path": "13-architecture-systems-thinking/14-caching-architecture/main_test.go"
       },
       "id": "core-14-14",
-      "learning_objective": "Understand and apply Caching architecture in the context of professional Go software engineering.",
+      "learning_objective": "Design multi-tier caching architectures (in-memory L1, distributed Redis L2) with cache-aside and write-through patterns.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-15"
@@ -53870,7 +53870,7 @@
         "test_path": "13-architecture-systems-thinking/15-when-to-split-services/main_test.go"
       },
       "id": "core-14-15",
-      "learning_objective": "Understand and apply When to split services in the context of professional Go software engineering.",
+      "learning_objective": "Evaluate organizational and technical criteria for splitting monolithic codebases into independent microservices.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-16"
@@ -54073,7 +54073,7 @@
         "test_path": "13-architecture-systems-thinking/16-microservices-as-a-tradeoff-not-a-default/main_test.go"
       },
       "id": "core-14-16",
-      "learning_objective": "Understand and apply Microservices as a tradeoff, not a default in the context of professional Go software engineering.",
+      "learning_objective": "Recognize microservices as an organizational tradeoff rather than a default architecture, evaluating operational costs.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-17"
@@ -54277,7 +54277,7 @@
         "test_path": "13-architecture-systems-thinking/17-architecture-decision-records/main_test.go"
       },
       "id": "core-14-17",
-      "learning_objective": "Understand and apply Architecture decision records in the context of professional Go software engineering.",
+      "learning_objective": "Author Architecture Decision Records (ADRs) documenting architectural context, options considered, decisions, and consequences.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-15-01"
@@ -54418,7 +54418,7 @@
         "test_path": "14-docker-cicd-linux-deployment/01-linux-processes/main_test.go"
       },
       "id": "core-15-01",
-      "learning_objective": "Understand and apply Linux processes in the context of professional Go software engineering.",
+      "learning_objective": "Trace Linux process initialization, PID 1 init responsibilities, signal forwarding, and process reaping in containers.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-02"
@@ -54561,7 +54561,7 @@
         "test_path": "14-docker-cicd-linux-deployment/02-signals/main_test.go"
       },
       "id": "core-15-02",
-      "learning_objective": "Understand and apply Signals in the context of professional Go software engineering.",
+      "learning_objective": "Intercept OS signals (SIGTERM, SIGINT) in Go services to complete in-flight requests and shut down gracefully.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-03"
@@ -54709,7 +54709,7 @@
         "test_path": "14-docker-cicd-linux-deployment/03-logs/main_test.go"
       },
       "id": "core-15-03",
-      "learning_objective": "Understand and apply Logs in the context of professional Go software engineering.",
+      "learning_objective": "Configure application logging to write raw JSON to standard output (stdout/stderr) for container log collectors.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-04"
@@ -54874,7 +54874,7 @@
         "test_path": "14-docker-cicd-linux-deployment/04-file-permissions/main_test.go"
       },
       "id": "core-15-04",
-      "learning_objective": "Understand and apply File permissions in the context of professional Go software engineering.",
+      "learning_objective": "Enforce POSIX file permission modes and directory ownership in containerized environments.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-05"
@@ -55045,7 +55045,7 @@
         "test_path": "14-docker-cicd-linux-deployment/05-networking-basics/main_test.go"
       },
       "id": "core-15-05",
-      "learning_objective": "Understand and apply Networking basics in the context of professional Go software engineering.",
+      "learning_objective": "Analyze container networking basics: port binding, bridge networks, DNS service discovery, and NAT routing.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-06"
@@ -55185,7 +55185,7 @@
         "test_path": "14-docker-cicd-linux-deployment/06-docker-basics/main_test.go"
       },
       "id": "core-15-06",
-      "learning_objective": "Understand and apply Docker basics in the context of professional Go software engineering.",
+      "learning_objective": "Build, tag, and inspect Docker container images from Dockerfiles using the docker CLI.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-07"
@@ -55370,7 +55370,7 @@
         "test_path": "14-docker-cicd-linux-deployment/07-docker-images-and-layers/main_test.go"
       },
       "id": "core-15-07",
-      "learning_objective": "Understand and apply Docker images and layers in the context of professional Go software engineering.",
+      "learning_objective": "Optimize Docker image layer caching, ordering instructions from least-frequently changed to most-frequently changed.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-08"
@@ -55542,7 +55542,7 @@
         "test_path": "14-docker-cicd-linux-deployment/08-multi-stage-builds/main_test.go"
       },
       "id": "core-15-08",
-      "learning_objective": "Understand and apply Multi-stage builds in the context of professional Go software engineering.",
+      "learning_objective": "Author multi-stage Dockerfiles compiling Go binaries in a builder stage and deploying into a minimal scratch or alpine runtime image.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-09"
@@ -55682,7 +55682,7 @@
         "test_path": "14-docker-cicd-linux-deployment/09-docker-compose/main_test.go"
       },
       "id": "core-15-09",
-      "learning_objective": "Understand and apply Docker Compose in the context of professional Go software engineering.",
+      "learning_objective": "Define and orchestrate multi-container local environments (Go API, PostgreSQL, Redis) using Docker Compose.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-10"
@@ -55824,7 +55824,7 @@
         "test_path": "14-docker-cicd-linux-deployment/10-container-health-checks/main_test.go"
       },
       "id": "core-15-10",
-      "learning_objective": "Understand and apply Container health checks in the context of professional Go software engineering.",
+      "learning_objective": "Configure Docker and container orchestration HEALTHCHECK directives to verify service liveness automatically.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-11"
@@ -55964,7 +55964,7 @@
         "test_path": "14-docker-cicd-linux-deployment/11-github-actions/main_test.go"
       },
       "id": "core-15-11",
-      "learning_objective": "Understand and apply GitHub Actions in the context of professional Go software engineering.",
+      "learning_objective": "Author automated GitHub Actions CI workflows executing on push and pull request events.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-12"
@@ -56104,7 +56104,7 @@
         "test_path": "14-docker-cicd-linux-deployment/12-ci-pipeline/main_test.go"
       },
       "id": "core-15-12",
-      "learning_objective": "Understand and apply CI pipeline in the context of professional Go software engineering.",
+      "learning_objective": "Build multi-step CI pipelines incorporating dependency caching, code formatting, vet analysis, race-enabled tests, and coverage reporting.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-13"
@@ -56246,7 +56246,7 @@
         "test_path": "14-docker-cicd-linux-deployment/13-release-artifacts/main_test.go"
       },
       "id": "core-15-13",
-      "learning_objective": "Understand and apply Release artifacts in the context of professional Go software engineering.",
+      "learning_objective": "Compile cross-platform release binaries and publish tagged container images to container registries in CI.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-14"
@@ -56386,7 +56386,7 @@
         "test_path": "14-docker-cicd-linux-deployment/14-config-in-deployment/main_test.go"
       },
       "id": "core-15-14",
-      "learning_objective": "Understand and apply Config in deployment in the context of professional Go software engineering.",
+      "learning_objective": "Inject production environment variables and configuration files into containers without baking secrets into image layers.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-15"
@@ -56526,7 +56526,7 @@
         "test_path": "14-docker-cicd-linux-deployment/15-secrets-in-deployment/main_test.go"
       },
       "id": "core-15-15",
-      "learning_objective": "Understand and apply Secrets in deployment in the context of professional Go software engineering.",
+      "learning_objective": "Manage deployment secrets securely using environment injection, secret mounts, and runtime access controls.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-16"
@@ -56666,7 +56666,7 @@
         "test_path": "14-docker-cicd-linux-deployment/16-vulnerability-scanning/main_test.go"
       },
       "id": "core-15-16",
-      "learning_objective": "Understand and apply Vulnerability scanning in the context of professional Go software engineering.",
+      "learning_objective": "Scan container images and dependencies for known vulnerabilities in CI pipelines using govulncheck and Trivy.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-17"
@@ -56806,7 +56806,7 @@
         "test_path": "14-docker-cicd-linux-deployment/17-one-deployment-target/main_test.go"
       },
       "id": "core-15-17",
-      "learning_objective": "Understand and apply One deployment target in the context of professional Go software engineering.",
+      "learning_objective": "Deploy a containerized Go service to a real cloud or VPS deployment target with persistent volume mounts.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-18"
@@ -56946,7 +56946,7 @@
         "test_path": "14-docker-cicd-linux-deployment/18-rollback-basics/main_test.go"
       },
       "id": "core-15-18",
-      "learning_objective": "Understand and apply Rollback basics in the context of professional Go software engineering.",
+      "learning_objective": "Formulate and execute deployment rollback procedures to restore service quickly following failed releases.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-19"
@@ -57094,7 +57094,7 @@
         "test_path": "14-docker-cicd-linux-deployment/19-deployment-runbook/main_test.go"
       },
       "id": "core-15-19",
-      "learning_objective": "Understand and apply Deployment runbook in the context of professional Go software engineering.",
+      "learning_objective": "Author a production deployment runbook detailing provisioning steps, health verification, backup procedures, and emergency operations.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-16-01"
@@ -57279,7 +57279,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/01-opslane-foundation-and-configuration/main_test.go"
       },
       "id": "opslane-01",
-      "learning_objective": "Understand and apply Opslane foundation and configuration in the context of professional Go software engineering.",
+      "learning_objective": "Initialize the Opslane backend foundation, configuring environment parsing, structured logging, and configuration validation.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-02"
@@ -57463,7 +57463,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/02-opslane-database-and-models/main_test.go"
       },
       "id": "opslane-02",
-      "learning_objective": "Understand and apply Opslane database and models in the context of professional Go software engineering.",
+      "learning_objective": "Model the Opslane relational database schema in PostgreSQL, implementing migrations, connection pooling, and data repositories.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-03"
@@ -57647,7 +57647,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/03-opslane-authentication/main_test.go"
       },
       "id": "opslane-03",
-      "learning_objective": "Understand and apply Opslane authentication in the context of professional Go software engineering.",
+      "learning_objective": "Implement JWT-based authentication and secure password hashing with bcrypt for user identity verification.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-04"
@@ -57833,7 +57833,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/04-opslane-authorization/main_test.go"
       },
       "id": "opslane-04",
-      "learning_objective": "Understand and apply Opslane authorization in the context of professional Go software engineering.",
+      "learning_objective": "Enforce granular role-based authorization (RBAC) and resource access control middleware across API endpoints.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-05"
@@ -58018,7 +58018,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/05-opslane-tenant-isolation/main_test.go"
       },
       "id": "opslane-05",
-      "learning_objective": "Understand and apply Opslane tenant isolation in the context of professional Go software engineering.",
+      "learning_objective": "Architect and enforce strict multi-tenant data isolation across all database queries, background tasks, and caches.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-06"
@@ -58209,7 +58209,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/06-opslane-http-api-layer/main_test.go"
       },
       "id": "opslane-06",
-      "learning_objective": "Understand and apply Opslane HTTP API layer in the context of professional Go software engineering.",
+      "learning_objective": "Construct the production HTTP REST API layer with standardized routing, payload validation, and consistent error envelopes.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-07"
@@ -58394,7 +58394,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/07-opslane-order-processing/main_test.go"
       },
       "id": "opslane-07",
-      "learning_objective": "Understand and apply Opslane order processing in the context of professional Go software engineering.",
+      "learning_objective": "Implement the order processing workflow with database transactions, status transitions, and audit trail logging.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-08"
@@ -58593,7 +58593,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/08-opslane-payment-pipeline/main_test.go"
       },
       "id": "opslane-08",
-      "learning_objective": "Understand and apply Opslane payment pipeline in the context of professional Go software engineering.",
+      "learning_objective": "Design and execute the payment processing pipeline with idempotency keys, transient retry backoff, and failure recovery.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-09"
@@ -58779,7 +58779,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/09-opslane-event-bus/main_test.go"
       },
       "id": "opslane-09",
-      "learning_objective": "Understand and apply Opslane event bus in the context of professional Go software engineering.",
+      "learning_objective": "Implement an internal asynchronous event bus to decouple state-changing operations from background notifications.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-10"
@@ -58964,7 +58964,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/10-opslane-worker-pools/main_test.go"
       },
       "id": "opslane-10",
-      "learning_objective": "Understand and apply Opslane worker pools in the context of professional Go software engineering.",
+      "learning_objective": "Build a bounded concurrent worker pool to process background jobs with concurrency limits, panic recovery, and cancellation.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-11"
@@ -59148,7 +59148,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/11-opslane-caching-layer/main_test.go"
       },
       "id": "opslane-11",
-      "learning_objective": "Understand and apply Opslane caching layer in the context of professional Go software engineering.",
+      "learning_objective": "Integrate a multi-tier caching layer with cache invalidation strategies to accelerate high-frequency read endpoints.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-12"
@@ -59334,7 +59334,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/12-opslane-observability/main_test.go"
       },
       "id": "opslane-12",
-      "learning_objective": "Understand and apply Opslane observability in the context of professional Go software engineering.",
+      "learning_objective": "Instrument the backend with structured slog logging, Prometheus metric endpoints, and OpenTelemetry trace context propagation.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-13"
@@ -59520,7 +59520,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/13-opslane-graceful-shutdown/main_test.go"
       },
       "id": "opslane-13",
-      "learning_objective": "Understand and apply Opslane graceful shutdown in the context of professional Go software engineering.",
+      "learning_objective": "Implement graceful shutdown coordination intercepting OS signals to drain in-flight HTTP requests and flush worker queues.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-14"
@@ -59715,7 +59715,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/14-opslane-deployment/main_test.go"
       },
       "id": "opslane-14",
-      "learning_objective": "Understand and apply Opslane deployment in the context of professional Go software engineering.",
+      "learning_objective": "Containerize the production system with multi-stage Dockerfiles, Docker Compose, and automated GitHub Actions CI/CD workflows.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-15"
@@ -59900,7 +59900,7 @@
         "test_path": "modules/18-flagship-opslane/lessons/15-opslane-portfolio-defense/main_test.go"
       },
       "id": "opslane-15",
-      "learning_objective": "Understand and apply Opslane portfolio defense in the context of professional Go software engineering.",
+      "learning_objective": "Defend the end-to-end architecture, disaster recovery procedures, and code craftsmanship of the Flagship Opslane system.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 15,
@@ -63227,7 +63227,7 @@
         "test_path": ""
       },
       "id": "assessment-module-00-checkpoint",
-      "learning_objective": "Assess understanding of module 0.",
+      "learning_objective": "Demonstrate mastery of module-00 competencies through automated verification and oral defense.",
       "module_id": "module-00",
       "next_item_ids": [],
       "order": 100,
@@ -63281,7 +63281,7 @@
         "test_path": ""
       },
       "id": "assessment-orientation-course-setup",
-      "learning_objective": "Assess understanding of module 0.",
+      "learning_objective": "Demonstrate mastery of module-00 competencies through automated verification and oral defense.",
       "module_id": "module-00",
       "next_item_ids": [],
       "order": 100,
@@ -63335,12 +63335,16 @@
         "test_path": ""
       },
       "id": "project-shell-git-lab",
-      "learning_objective": "Apply module 1 concepts by building Shell Git Lab.",
+      "learning_objective": "Build and verify Shell Git Lab demonstrating core module-01 engineering capabilities.",
       "module_id": "module-01",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-01-01",
+        "core-01-02",
+        "core-01-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -63389,7 +63393,7 @@
         "test_path": ""
       },
       "id": "assessment-computers-terminal-git-web-shell-git-lab",
-      "learning_objective": "Assess understanding of module 1.",
+      "learning_objective": "Demonstrate mastery of module-01 competencies through automated verification and oral defense.",
       "module_id": "module-01",
       "next_item_ids": [],
       "order": 100,
@@ -63443,12 +63447,16 @@
         "test_path": ""
       },
       "id": "project-tooling-failure-lab",
-      "learning_objective": "Apply module 2 concepts by building Tooling Failure Lab.",
+      "learning_objective": "Build and verify Tooling Failure Lab demonstrating core module-02 engineering capabilities.",
       "module_id": "module-02",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -63497,7 +63505,7 @@
         "test_path": ""
       },
       "id": "assessment-go-setup-tooling-tooling-failure-lab",
-      "learning_objective": "Assess understanding of module 2.",
+      "learning_objective": "Demonstrate mastery of module-02 competencies through automated verification and oral defense.",
       "module_id": "module-02",
       "next_item_ids": [],
       "order": 100,
@@ -63551,12 +63559,16 @@
         "test_path": ""
       },
       "id": "project-contact-directory",
-      "learning_objective": "Apply module 3 concepts by building Contact Directory.",
+      "learning_objective": "Build and verify Contact Directory demonstrating core module-03 engineering capabilities.",
       "module_id": "module-03",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -63605,12 +63617,16 @@
         "test_path": ""
       },
       "id": "project-pricing-checkout",
-      "learning_objective": "Apply module 3 concepts by building Pricing Checkout.",
+      "learning_objective": "Build and verify Pricing Checkout demonstrating core module-03 engineering capabilities.",
       "module_id": "module-03",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -63659,7 +63675,7 @@
         "test_path": ""
       },
       "id": "assessment-module-03-checkpoint",
-      "learning_objective": "Assess understanding of module 3.",
+      "learning_objective": "Demonstrate mastery of module-03 competencies through automated verification and oral defense.",
       "module_id": "module-03",
       "next_item_ids": [],
       "order": 100,
@@ -63713,7 +63729,7 @@
         "test_path": ""
       },
       "id": "assessment-programming-fundamentals-contact-directory",
-      "learning_objective": "Assess understanding of module 3.",
+      "learning_objective": "Demonstrate mastery of module-03 competencies through automated verification and oral defense.",
       "module_id": "module-03",
       "next_item_ids": [],
       "order": 100,
@@ -63767,7 +63783,7 @@
         "test_path": ""
       },
       "id": "assessment-programming-fundamentals-pricing-checkout",
-      "learning_objective": "Assess understanding of module 3.",
+      "learning_objective": "Demonstrate mastery of module-03 competencies through automated verification and oral defense.",
       "module_id": "module-03",
       "next_item_ids": [],
       "order": 100,
@@ -63821,12 +63837,16 @@
         "test_path": "modules/04-functions-errors-data-semantics/projects/order-summary-refactor/main_test.go"
       },
       "id": "project-order-summary-refactor",
-      "learning_objective": "Apply module 4 concepts by building Order Summary Refactor.",
+      "learning_objective": "Build and verify Order Summary Refactor demonstrating core module-04 engineering capabilities.",
       "module_id": "module-04",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-04-01",
+        "core-04-02",
+        "core-04-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -63875,7 +63895,7 @@
         "test_path": ""
       },
       "id": "assessment-module-04-checkpoint",
-      "learning_objective": "Assess understanding of module 4.",
+      "learning_objective": "Demonstrate mastery of module-04 competencies through automated verification and oral defense.",
       "module_id": "module-04",
       "next_item_ids": [],
       "order": 100,
@@ -63929,7 +63949,7 @@
         "test_path": ""
       },
       "id": "assessment-functions-errors-data-semantics-order-summary-refactor",
-      "learning_objective": "Assess understanding of module 4.",
+      "learning_objective": "Demonstrate mastery of module-04 competencies through automated verification and oral defense.",
       "module_id": "module-04",
       "next_item_ids": [],
       "order": 100,
@@ -63983,12 +64003,16 @@
         "test_path": ""
       },
       "id": "project-bank-account",
-      "learning_objective": "Apply module 5 concepts by building Bank Account.",
+      "learning_objective": "Build and verify Bank Account demonstrating core module-05 engineering capabilities.",
       "module_id": "module-05",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -64037,12 +64061,16 @@
         "test_path": ""
       },
       "id": "project-payroll-processor",
-      "learning_objective": "Apply module 5 concepts by building Payroll Processor.",
+      "learning_objective": "Build and verify Payroll Processor demonstrating core module-05 engineering capabilities.",
       "module_id": "module-05",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -64091,7 +64119,7 @@
         "test_path": ""
       },
       "id": "assessment-types-interfaces-packages-modules-bank-account",
-      "learning_objective": "Assess understanding of module 5.",
+      "learning_objective": "Demonstrate mastery of module-05 competencies through automated verification and oral defense.",
       "module_id": "module-05",
       "next_item_ids": [],
       "order": 100,
@@ -64145,7 +64173,7 @@
         "test_path": ""
       },
       "id": "assessment-module-05-checkpoint",
-      "learning_objective": "Assess understanding of module 5.",
+      "learning_objective": "Demonstrate mastery of module-05 competencies through automated verification and oral defense.",
       "module_id": "module-05",
       "next_item_ids": [],
       "order": 100,
@@ -64199,7 +64227,7 @@
         "test_path": ""
       },
       "id": "assessment-types-interfaces-packages-modules-payroll-processor",
-      "learning_objective": "Assess understanding of module 5.",
+      "learning_objective": "Demonstrate mastery of module-05 competencies through automated verification and oral defense.",
       "module_id": "module-05",
       "next_item_ids": [],
       "order": 100,
@@ -64253,12 +64281,16 @@
         "test_path": ""
       },
       "id": "project-bug-hunt-pack",
-      "learning_objective": "Apply module 6 concepts by building Bug Hunt Pack.",
+      "learning_objective": "Build and verify Bug Hunt Pack demonstrating core module-06 engineering capabilities.",
       "module_id": "module-06",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -64307,12 +64339,16 @@
         "test_path": ""
       },
       "id": "project-refactor-under-tests",
-      "learning_objective": "Apply module 6 concepts by building Refactor Under Tests.",
+      "learning_objective": "Build and verify Refactor Under Tests demonstrating core module-06 engineering capabilities.",
       "module_id": "module-06",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -64361,7 +64397,7 @@
         "test_path": ""
       },
       "id": "assessment-testing-debugging-refactoring-bug-hunt-pack",
-      "learning_objective": "Assess understanding of module 6.",
+      "learning_objective": "Demonstrate mastery of module-06 competencies through automated verification and oral defense.",
       "module_id": "module-06",
       "next_item_ids": [],
       "order": 100,
@@ -64415,7 +64451,7 @@
         "test_path": ""
       },
       "id": "assessment-module-06-checkpoint",
-      "learning_objective": "Assess understanding of module 6.",
+      "learning_objective": "Demonstrate mastery of module-06 competencies through automated verification and oral defense.",
       "module_id": "module-06",
       "next_item_ids": [],
       "order": 100,
@@ -64469,7 +64505,7 @@
         "test_path": ""
       },
       "id": "assessment-testing-debugging-refactoring-refactor-under-tests",
-      "learning_objective": "Assess understanding of module 6.",
+      "learning_objective": "Demonstrate mastery of module-06 competencies through automated verification and oral defense.",
       "module_id": "module-06",
       "next_item_ids": [],
       "order": 100,
@@ -64523,12 +64559,16 @@
         "test_path": ""
       },
       "id": "project-config-parser",
-      "learning_objective": "Apply module 7 concepts by building Config Parser.",
+      "learning_objective": "Build and verify Config Parser demonstrating core module-07 engineering capabilities.",
       "module_id": "module-07",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -64577,12 +64617,16 @@
         "test_path": ""
       },
       "id": "project-file-organizer",
-      "learning_objective": "Apply module 7 concepts by building File Organizer.",
+      "learning_objective": "Build and verify File Organizer demonstrating core module-07 engineering capabilities.",
       "module_id": "module-07",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -64631,12 +64675,16 @@
         "test_path": ""
       },
       "id": "project-log-search",
-      "learning_objective": "Apply module 7 concepts by building Log Search.",
+      "learning_objective": "Build and verify Log Search demonstrating core module-07 engineering capabilities.",
       "module_id": "module-07",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -64685,7 +64733,7 @@
         "test_path": ""
       },
       "id": "assessment-module-07-checkpoint",
-      "learning_objective": "Assess understanding of module 7.",
+      "learning_objective": "Demonstrate mastery of module-07 competencies through automated verification and oral defense.",
       "module_id": "module-07",
       "next_item_ids": [],
       "order": 100,
@@ -64739,7 +64787,7 @@
         "test_path": ""
       },
       "id": "assessment-cli-files-json-config-config-parser",
-      "learning_objective": "Assess understanding of module 7.",
+      "learning_objective": "Demonstrate mastery of module-07 competencies through automated verification and oral defense.",
       "module_id": "module-07",
       "next_item_ids": [],
       "order": 100,
@@ -64793,7 +64841,7 @@
         "test_path": ""
       },
       "id": "assessment-cli-files-json-config-file-organizer",
-      "learning_objective": "Assess understanding of module 7.",
+      "learning_objective": "Demonstrate mastery of module-07 competencies through automated verification and oral defense.",
       "module_id": "module-07",
       "next_item_ids": [],
       "order": 100,
@@ -64847,7 +64895,7 @@
         "test_path": ""
       },
       "id": "assessment-cli-files-json-config-log-search",
-      "learning_objective": "Assess understanding of module 7.",
+      "learning_objective": "Demonstrate mastery of module-07 competencies through automated verification and oral defense.",
       "module_id": "module-07",
       "next_item_ids": [],
       "order": 100,
@@ -64901,12 +64949,16 @@
         "test_path": ""
       },
       "id": "project-book-catalog-rest-api",
-      "learning_objective": "Apply module 8 concepts by building Book Catalog Rest Api.",
+      "learning_objective": "Build and verify Book Catalog Rest Api demonstrating core module-08 engineering capabilities.",
       "module_id": "module-08",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-08-01",
+        "core-08-02",
+        "core-08-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -64955,7 +65007,7 @@
         "test_path": ""
       },
       "id": "assessment-http-rest-apis-book-catalog-rest-api",
-      "learning_objective": "Assess understanding of module 8.",
+      "learning_objective": "Demonstrate mastery of module-08 competencies through automated verification and oral defense.",
       "module_id": "module-08",
       "next_item_ids": [],
       "order": 100,
@@ -65009,7 +65061,7 @@
         "test_path": ""
       },
       "id": "assessment-module-08-checkpoint",
-      "learning_objective": "Assess understanding of module 8.",
+      "learning_objective": "Demonstrate mastery of module-08 competencies through automated verification and oral defense.",
       "module_id": "module-08",
       "next_item_ids": [],
       "order": 100,
@@ -65063,12 +65115,16 @@
         "test_path": ""
       },
       "id": "project-task-api-postgres",
-      "learning_objective": "Apply module 9 concepts by building Task Api With Postgres.",
+      "learning_objective": "Build and verify Task Api With Postgres demonstrating core module-09 engineering capabilities.",
       "module_id": "module-09",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-09-01",
+        "core-09-02",
+        "core-09-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -65117,7 +65173,7 @@
         "test_path": ""
       },
       "id": "assessment-module-09-checkpoint",
-      "learning_objective": "Assess understanding of module 9.",
+      "learning_objective": "Demonstrate mastery of module-09 competencies through automated verification and oral defense.",
       "module_id": "module-09",
       "next_item_ids": [],
       "order": 100,
@@ -65171,7 +65227,7 @@
         "test_path": ""
       },
       "id": "assessment-sql-postgres-persistence-task-api-postgres",
-      "learning_objective": "Assess understanding of module 9.",
+      "learning_objective": "Demonstrate mastery of module-09 competencies through automated verification and oral defense.",
       "module_id": "module-09",
       "next_item_ids": [],
       "order": 100,
@@ -65225,12 +65281,16 @@
         "test_path": ""
       },
       "id": "project-secure-authenticated-api",
-      "learning_objective": "Apply module 10 concepts by building Secure Authenticated Api.",
+      "learning_objective": "Build and verify Secure Authenticated Api demonstrating core module-10 engineering capabilities.",
       "module_id": "module-10",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-10-01",
+        "core-10-02",
+        "core-10-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -65279,7 +65339,7 @@
         "test_path": ""
       },
       "id": "assessment-module-10-checkpoint",
-      "learning_objective": "Assess understanding of module 10.",
+      "learning_objective": "Demonstrate mastery of module-10 competencies through automated verification and oral defense.",
       "module_id": "module-10",
       "next_item_ids": [],
       "order": 100,
@@ -65333,7 +65393,7 @@
         "test_path": ""
       },
       "id": "assessment-auth-security-secure-authenticated-api",
-      "learning_objective": "Assess understanding of module 10.",
+      "learning_objective": "Demonstrate mastery of module-10 competencies through automated verification and oral defense.",
       "module_id": "module-10",
       "next_item_ids": [],
       "order": 100,
@@ -65387,12 +65447,16 @@
         "test_path": ""
       },
       "id": "project-bounded-worker-pool",
-      "learning_objective": "Apply module 11 concepts by building Bounded Worker Pool.",
+      "learning_objective": "Build and verify Bounded Worker Pool demonstrating core module-11 engineering capabilities.",
       "module_id": "module-11",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -65441,12 +65505,16 @@
         "test_path": ""
       },
       "id": "project-concurrent-downloader",
-      "learning_objective": "Apply module 11 concepts by building Concurrent Downloader.",
+      "learning_objective": "Build and verify Concurrent Downloader demonstrating core module-11 engineering capabilities.",
       "module_id": "module-11",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -65495,12 +65563,16 @@
         "test_path": ""
       },
       "id": "project-url-health-checker",
-      "learning_objective": "Apply module 11 concepts by building Url Health Checker.",
+      "learning_objective": "Build and verify Url Health Checker demonstrating core module-11 engineering capabilities.",
       "module_id": "module-11",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -65549,7 +65621,7 @@
         "test_path": ""
       },
       "id": "assessment-lifecycle-context-concurrency-bounded-worker-pool",
-      "learning_objective": "Assess understanding of module 11.",
+      "learning_objective": "Demonstrate mastery of module-11 competencies through automated verification and oral defense.",
       "module_id": "module-11",
       "next_item_ids": [],
       "order": 100,
@@ -65603,7 +65675,7 @@
         "test_path": ""
       },
       "id": "assessment-module-11-checkpoint",
-      "learning_objective": "Assess understanding of module 11.",
+      "learning_objective": "Demonstrate mastery of module-11 competencies through automated verification and oral defense.",
       "module_id": "module-11",
       "next_item_ids": [],
       "order": 100,
@@ -65657,7 +65729,7 @@
         "test_path": ""
       },
       "id": "assessment-lifecycle-context-concurrency-concurrent-downloader",
-      "learning_objective": "Assess understanding of module 11.",
+      "learning_objective": "Demonstrate mastery of module-11 competencies through automated verification and oral defense.",
       "module_id": "module-11",
       "next_item_ids": [],
       "order": 100,
@@ -65711,7 +65783,7 @@
         "test_path": ""
       },
       "id": "assessment-lifecycle-context-concurrency-url-health-checker",
-      "learning_objective": "Assess understanding of module 11.",
+      "learning_objective": "Demonstrate mastery of module-11 competencies through automated verification and oral defense.",
       "module_id": "module-11",
       "next_item_ids": [],
       "order": 100,
@@ -65765,12 +65837,16 @@
         "test_path": ""
       },
       "id": "project-observability-retrofit",
-      "learning_objective": "Apply module 12 concepts by building Observability Retrofit.",
+      "learning_objective": "Build and verify Observability Retrofit demonstrating core module-12 engineering capabilities.",
       "module_id": "module-12",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -65819,12 +65895,16 @@
         "test_path": ""
       },
       "id": "project-pii-redactor",
-      "learning_objective": "Apply module 12 concepts by building Pii Redactor.",
+      "learning_objective": "Build and verify Pii Redactor demonstrating core module-12 engineering capabilities.",
       "module_id": "module-12",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -65873,7 +65953,7 @@
         "test_path": ""
       },
       "id": "assessment-module-12-checkpoint",
-      "learning_objective": "Assess understanding of module 12.",
+      "learning_objective": "Demonstrate mastery of module-12 competencies through automated verification and oral defense.",
       "module_id": "module-12",
       "next_item_ids": [],
       "order": 100,
@@ -65927,7 +66007,7 @@
         "test_path": ""
       },
       "id": "assessment-observability-diagnostics-observability-retrofit",
-      "learning_objective": "Assess understanding of module 12.",
+      "learning_objective": "Demonstrate mastery of module-12 competencies through automated verification and oral defense.",
       "module_id": "module-12",
       "next_item_ids": [],
       "order": 100,
@@ -65981,7 +66061,7 @@
         "test_path": ""
       },
       "id": "assessment-observability-diagnostics-pii-redactor",
-      "learning_objective": "Assess understanding of module 12.",
+      "learning_objective": "Demonstrate mastery of module-12 competencies through automated verification and oral defense.",
       "module_id": "module-12",
       "next_item_ids": [],
       "order": 100,
@@ -66035,12 +66115,15 @@
         "test_path": ""
       },
       "id": "project-performance-analysis-lab",
-      "learning_objective": "Apply module 13 concepts by building Performance Analysis Lab.",
+      "learning_objective": "Build and verify Performance Analysis Lab demonstrating core module-13 engineering capabilities.",
       "module_id": "module-13",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-13-01",
+        "core-13-04"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -66089,12 +66172,16 @@
         "test_path": ""
       },
       "id": "project-profile-and-fix-lab",
-      "learning_objective": "Apply module 13 concepts by building Profile And Fix Lab.",
+      "learning_objective": "Build and verify Profile And Fix Lab demonstrating core module-13 engineering capabilities.",
       "module_id": "module-13",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -66143,7 +66230,7 @@
         "test_path": ""
       },
       "id": "assessment-module-13-checkpoint",
-      "learning_objective": "Assess understanding of module 13.",
+      "learning_objective": "Demonstrate mastery of module-13 competencies through automated verification and oral defense.",
       "module_id": "module-13",
       "next_item_ids": [],
       "order": 100,
@@ -66197,7 +66284,7 @@
         "test_path": ""
       },
       "id": "assessment-performance-memory-engineering-performance-analysis-lab",
-      "learning_objective": "Assess understanding of module 13.",
+      "learning_objective": "Demonstrate mastery of module-13 competencies through automated verification and oral defense.",
       "module_id": "module-13",
       "next_item_ids": [],
       "order": 100,
@@ -66251,7 +66338,7 @@
         "test_path": ""
       },
       "id": "assessment-performance-memory-engineering-profile-and-fix-lab",
-      "learning_objective": "Assess understanding of module 13.",
+      "learning_objective": "Demonstrate mastery of module-13 competencies through automated verification and oral defense.",
       "module_id": "module-13",
       "next_item_ids": [],
       "order": 100,
@@ -66305,12 +66392,16 @@
         "test_path": ""
       },
       "id": "project-modular-refactor-review",
-      "learning_objective": "Apply module 14 concepts by building Modular Refactor Review.",
+      "learning_objective": "Build and verify Modular Refactor Review demonstrating core module-14 engineering capabilities.",
       "module_id": "module-14",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-14-01",
+        "core-14-02",
+        "core-14-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -66359,7 +66450,7 @@
         "test_path": ""
       },
       "id": "assessment-module-14-checkpoint",
-      "learning_objective": "Assess understanding of module 14.",
+      "learning_objective": "Demonstrate mastery of module-14 competencies through automated verification and oral defense.",
       "module_id": "module-14",
       "next_item_ids": [],
       "order": 100,
@@ -66413,7 +66504,7 @@
         "test_path": ""
       },
       "id": "assessment-architecture-distributed-systems-modular-refactor-review",
-      "learning_objective": "Assess understanding of module 14.",
+      "learning_objective": "Demonstrate mastery of module-14 competencies through automated verification and oral defense.",
       "module_id": "module-14",
       "next_item_ids": [],
       "order": 100,
@@ -66467,12 +66558,16 @@
         "test_path": ""
       },
       "id": "project-dockerized-service-cicd",
-      "learning_objective": "Apply module 15 concepts by building Dockerized Service With Ci Cd.",
+      "learning_objective": "Build and verify Dockerized Service With Ci Cd demonstrating core module-15 engineering capabilities.",
       "module_id": "module-15",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-15-08",
+        "core-15-12",
+        "core-15-13"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -66521,7 +66616,7 @@
         "test_path": ""
       },
       "id": "assessment-module-15-checkpoint",
-      "learning_objective": "Assess understanding of module 15.",
+      "learning_objective": "Demonstrate mastery of module-15 competencies through automated verification and oral defense.",
       "module_id": "module-15",
       "next_item_ids": [],
       "order": 100,
@@ -66575,7 +66670,7 @@
         "test_path": ""
       },
       "id": "assessment-docker-cicd-deployment-dockerized-service-cicd",
-      "learning_objective": "Assess understanding of module 15.",
+      "learning_objective": "Demonstrate mastery of module-15 competencies through automated verification and oral defense.",
       "module_id": "module-15",
       "next_item_ids": [],
       "order": 100,
@@ -66629,12 +66724,16 @@
         "test_path": ""
       },
       "id": "project-portfolio-review-pack",
-      "learning_objective": "Apply module 16 concepts by building Portfolio Review Pack.",
+      "learning_objective": "Build and verify Portfolio Review Pack demonstrating core module-16 engineering capabilities.",
       "module_id": "module-16",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -66683,7 +66782,7 @@
         "test_path": ""
       },
       "id": "assessment-module-16-checkpoint",
-      "learning_objective": "Assess understanding of module 16.",
+      "learning_objective": "Demonstrate mastery of module-16 competencies through automated verification and oral defense.",
       "module_id": "module-16",
       "next_item_ids": [],
       "order": 100,
@@ -66737,7 +66836,7 @@
         "test_path": ""
       },
       "id": "assessment-portfolio-interview-readiness-portfolio-review-pack",
-      "learning_objective": "Assess understanding of module 16.",
+      "learning_objective": "Demonstrate mastery of module-16 competencies through automated verification and oral defense.",
       "module_id": "module-16",
       "next_item_ids": [],
       "order": 100,
@@ -66845,12 +66944,16 @@
         "test_path": ""
       },
       "id": "project-opslane",
-      "learning_objective": "Apply module 18 concepts by building Opslane Flagship.",
+      "learning_objective": "Build and verify Opslane Flagship demonstrating core module-18 engineering capabilities.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 99,
       "phase": "go-core",
-      "prerequisites": [],
+      "prerequisites": [
+        "opslane-01",
+        "opslane-02",
+        "opslane-03"
+      ],
       "readme_contract": {
         "contract_id": "project.v3",
         "documentation_mode": "project",
@@ -66899,7 +67002,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/main_test.go"
       },
       "id": "assessment-01-opslane-foundation-and-configuration",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -66953,7 +67056,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/main_test.go"
       },
       "id": "assessment-02-opslane-database-and-models",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67007,7 +67110,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/03-opslane-authentication/main_test.go"
       },
       "id": "assessment-03-opslane-authentication",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67061,7 +67164,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/04-opslane-authorization/main_test.go"
       },
       "id": "assessment-04-opslane-authorization",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67115,7 +67218,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/main_test.go"
       },
       "id": "assessment-05-opslane-tenant-isolation",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67169,7 +67272,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/main_test.go"
       },
       "id": "assessment-06-opslane-http-api-layer",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67223,7 +67326,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/main_test.go"
       },
       "id": "assessment-07-opslane-order-processing",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67277,7 +67380,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/main_test.go"
       },
       "id": "assessment-08-opslane-payment-pipeline",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67331,7 +67434,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/main_test.go"
       },
       "id": "assessment-09-opslane-event-bus",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67385,7 +67488,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/main_test.go"
       },
       "id": "assessment-10-opslane-worker-pools",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67439,7 +67542,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/main_test.go"
       },
       "id": "assessment-11-opslane-caching-layer",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67493,7 +67596,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/12-opslane-observability/main_test.go"
       },
       "id": "assessment-12-opslane-observability",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67547,7 +67650,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/main_test.go"
       },
       "id": "assessment-13-opslane-graceful-shutdown",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67601,7 +67704,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/main_test.go"
       },
       "id": "assessment-14-opslane-deployment",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67655,7 +67758,7 @@
         "test_path": ""
       },
       "id": "assessment-module-18-checkpoint",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
@@ -67709,7 +67812,7 @@
         "test_path": ""
       },
       "id": "assessment-flagship-opslane-opslane",
-      "learning_objective": "Assess understanding of module 18.",
+      "learning_objective": "Demonstrate mastery of module-18 competencies through automated verification and oral defense.",
       "module_id": "module-18",
       "next_item_ids": [],
       "order": 100,
