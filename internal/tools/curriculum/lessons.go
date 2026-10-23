@@ -180,7 +180,7 @@ func validateLessons() {
 		}
 	}
 
-	// 4. Check Machine Role comments in source files (for v2.1 compliance)
+	// 4. Check Machine Role comments in source files (machine execution role tags)
 	machineRoleCount := 0
 	for _, bundle := range allBundles {
 		for _, mod := range bundle.modules {

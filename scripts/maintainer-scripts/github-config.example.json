@@ -70,26 +70,26 @@
   ],
   "issues": [
     {
-      "title": "[EPIC] Complete Chapters 13-15 Implementation",
-      "body": "## Overview\nComplete implementation of Chapters 13-15 with all lessons and documentation updates.\n\n## Sub-Tasks\n- [ ] Documentation Updates\n- [ ] PR.3: Memory Profile Lesson\n- [ ] GR.4: Streaming RPC Lesson\n- [ ] GR.5: Interceptors Lesson\n- [ ] CG.2-4: Code Generation Lessons\n- [ ] Update curriculum.json\n\n## Success Criteria\n✓ All lessons compile and run without errors\n✓ All follow curriculum style guide\n✓ All changes merged to main branch",
+      "title": "[EPIC] Flagship Opslane Capstone Milestones Verification",
+      "body": "## Overview\nComplete end-to-end verification of Module 18 Flagship Opslane milestones and evaluation criteria.\n\n## Sub-Tasks\n- [ ] Verify core-18-01 through core-18-14 checkpoints\n- [ ] Validate project-18 capstone defense rubrics\n- [ ] Verify Docker Compose, migrations, and Prometheus configs\n- [ ] Update curriculum/path.core.json and assessments.json\n\n## Success Criteria\n✓ All 17 automated curriculum quality gates PASS\n✓ Full physical artifact parity verified\n✓ Changes merged to main branch",
       "labels": ["epic", "priority/high"],
       "assignees": []
     },
     {
-      "title": "[DOCS] Documentation Updates for Chapters 13-15",
-      "body": "## Overview\nUpdate all documentation files to reflect completion of Chapters 13-15.\n\n## Tasks\n- [ ] Update ROADMAP.md\n- [ ] Update CHANGELOG.md\n- [ ] Update README.md\n- [ ] Create section READMEs\n- [ ] Verify all links\n\n## Success Criteria\n✓ All documentation updated\n✓ No broken links\n✓ CI passes",
+      "title": "[DOCS] Documentation Updates for Module 18 Opslane",
+      "body": "## Overview\nUpdate all architecture and progression documentation to reflect Module 18 Opslane requirements.\n\n## Tasks\n- [ ] Update docs/PROGRESSION.md\n- [ ] Update docs/flagship/OPSLANE_SAAS_BACKEND.md\n- [ ] Update curriculum/README.md via generator script\n- [ ] Verify all cross-references\n\n## Success Criteria\n✓ All documentation updated\n✓ No broken links\n✓ CI passes",
       "labels": ["documentation", "priority/high"],
       "assignees": []
     },
     {
-      "title": "[FEATURE] Add PR.3: Memory Profile Lesson",
-      "body": "Add memory profiling lesson to Chapter 13.\n\n## Requirements\n- Heap vs allocs profiles\n- sync.Pool optimization\n- Memory leak detection\n\n## Testing\n- [ ] Compiles without error\n- [ ] Follows curriculum style\n- [ ] All CI checks pass",
+      "title": "[FEATURE] Add Performance Memory Profiling Benchmark Lab",
+      "body": "Add memory profiling benchmark suite to Module 13.\n\n## Requirements\n- Heap vs allocs profiles analysis\n- sync.Pool allocation reduction\n- Benchmark suite validation\n\n## Testing\n- [ ] Compiles without error\n- [ ] Passes go test -bench=. -benchmem\n- [ ] All CI checks pass",
       "labels": ["feature", "priority/high", "size/medium"],
       "assignees": []
     },
     {
-      "title": "[FEATURE] Add GR.4: Streaming RPC Lesson",
-      "body": "Add streaming RPC lesson to Chapter 14.\n\n## Files to Create\n- proto/stream.proto\n- server/main.go\n- client/main.go\n\n## Testing\n- [ ] Protobuf compiles\n- [ ] Server and client work together\n- [ ] All streaming patterns demonstrated",
+      "title": "[FEATURE] Add Opslane Tenant Isolation Middleware",
+      "body": "Implement tenant isolation and authentication middleware in Module 18.\n\n## Requirements\n- JWT token validation and claims extraction\n- Request context tenant binding\n- Cross-tenant data isolation test coverage\n\n## Testing\n- [ ] go test -race ./...\n- [ ] All 17 curriculum quality gates pass\n- [ ] Zero-magic execution traces verified",
       "labels": ["feature", "priority/high", "size/large"],
       "assignees": []
     }

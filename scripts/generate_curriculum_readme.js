@@ -17,7 +17,7 @@ function generateFullReadme() {
   // Architecture Decision
   parts.push('## Architecture Decision\n');
   parts.push('**Decision:** Reconcile and establish the Report 1 phase-based zero-to-software-engineer path as the canonical v3 curriculum.\n');
-  parts.push('- **v2 Policy:** `curriculum.v2.json` is frozen legacy import data, preserved for historical reference and backward compatibility.');
+  parts.push('- **v2 Policy:** `curriculum/legacy/curriculum.v2.json` is frozen legacy import data, preserved for historical reference and backward compatibility.');
   parts.push('- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON files: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.');
   parts.push('- **Physical Curriculum:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/`.');
   parts.push('- **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern full-stack frontend engineering is defined as a companion path (semantic HTML, CSS, JavaScript fundamentals, progressive enhancement with Go templates/templ/HTMX/Tailwind).');
@@ -105,7 +105,7 @@ function generateFullReadme() {
 
   // Electives row in module map
   const eModule = electives.modules[0];
-  parts.push('| 17  | **' + eModule.title + '** | ' + eModule.phase + ' | ' + eModule.status + ' | ' + electiveItems + ' | 0 | 0 | 0 | ' + electiveItems + ' | `curriculum/path.electives.json` |');
+  parts.push('| 17  | **' + eModule.title + '** | ' + eModule.phase + ' | ' + eModule.status + ' | ' + electiveItems + ' | 0 | 0 | 0 | ' + electiveItems + ' | `curriculum/' + eModule.path + '` |');
 
   parts.push('| —   | **Core Subtotal** | — | — | **' + totLessons + '** | **' + totMilestones + '** | **' + totProjects + '** | **' + totAssessments + '** | **' + totItems + '** | *(Modules 00–16, 18)* |');
   parts.push('| —   | **Total Curriculum** | — | — | **' + (totLessons + electiveItems) + '** | **' + totMilestones + '** | **' + totProjects + '** | **' + totAssessments + '** | **' + (totItems + electiveItems) + '** | *(' + totItems + ' core items + ' + electiveItems + ' electives)* |\n');
@@ -150,7 +150,7 @@ function generateFullReadme() {
 
   // Repository structure
   parts.push('## Repository Structure\n');
-  parts.push('```\ncurriculum/\n  modules/\n    00-orientation/\n    01-computers-terminal-git-web/\n    02-go-setup-tooling/\n    03-programming-fundamentals/\n    04-functions-errors-data-semantics/\n    05-types-interfaces-packages-modules/\n    06-testing-debugging-refactoring/\n    07-cli-files-json-config/\n    08-http-rest-apis/\n    09-sql-postgres-persistence/\n    10-auth-security/\n    11-lifecycle-context-concurrency/\n    12-observability-diagnostics/\n    13-performance-memory-engineering/\n    14-architecture-distributed-systems/\n    15-docker-cicd-deployment/\n    16-portfolio-interview-readiness/\n    18-flagship-opslane/\n  companion-frontend/\n    README.md\n  assessments.json\n  concepts.json\n  crossrefs.json\n  failures.json\n  path.core.json\n  path.electives.json\n  projects.json\n  readme.contracts.json\n  schema.v3.json\n  GRADUATION_CRITERIA.md\n  PILOT_TESTING_PROTOCOL.md\ninternal/tools/curriculum/\n```\n');
+  parts.push('```\ncurriculum/\n  modules/\n    00-orientation/\n    01-computers-terminal-git-web/\n    02-go-setup-tooling/\n    03-programming-fundamentals/\n    04-functions-errors-data-semantics/\n    05-types-interfaces-packages-modules/\n    06-testing-debugging-refactoring/\n    07-cli-files-json-config/\n    08-http-rest-apis/\n    09-sql-postgres-persistence/\n    10-auth-security/\n    11-lifecycle-context-concurrency/\n    12-observability-diagnostics/\n    13-performance-memory-engineering/\n    14-architecture-distributed-systems/\n    15-docker-cicd-deployment/\n    16-portfolio-interview-readiness/\n    18-flagship-opslane/\n  electives/\n    advanced-electives/\n  companion-frontend/\n    README.md\n  assessments.json\n  concepts.json\n  crossrefs.json\n  failures.json\n  path.core.json\n  path.electives.json\n  projects.json\n  readme.contracts.json\n  schema.v3.json\n  GRADUATION_CRITERIA.md\n  PILOT_TESTING_PROTOCOL.md\ninternal/tools/curriculum/\n```\n');
 
   parts.push('## Companion Tracks & Quality Assurance Protocols\n');
   parts.push('- **[Graduation Outcomes & Capstone Defense Rubric](GRADUATION_CRITERIA.md):** 6 observable competency outcomes (unassisted problem-solving, debugging, testing, disaster recovery, architectural defense, incident response) and formal Flagship Opslane oral defense protocol.');

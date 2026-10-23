@@ -95,11 +95,11 @@ labels:
     description: "Incorrect behavior or broken content"
 
 issues:
-  - title: "[FEAT] add SY.1 sync.Mutex lesson"
+  - title: "[FEAT] add bounded worker pool lesson"
     body: |
       ## Scope
-      Section: s07
-      Lesson IDs: SY.1
+      Module: 07-concurrency-patterns
+      Lesson IDs: core-07-03
 
       ## Validation
       - go test ./...
