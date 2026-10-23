@@ -324,6 +324,41 @@ steps:
 
 Then write a `main()` that reads the YAML content as a string literal, parses it, validates it, and prints the checklist. Handle errors gracefully.
 
+## Disaster Recovery Drill: Database Snapshot & Restoration Runbook
+
+A production deployment runbook must be backed by a verified disaster recovery protocol. When a database container, volume, or node suffers catastrophic failure, operational recovery requires deterministic, tested steps:
+
+### The 4-Step Recovery Protocol
+
+1. **Step 1 — Consistent Snapshot Creation (`pg_dump`):**
+   ```bash
+   # Export database in custom archive format (-Fc) with transaction snapshot
+   docker exec -t postgres-db pg_dump -U postgres -Fc -d taskdb > backup_snapshot_$(date +%Y%m%d_%H%M%S).dump
+   ```
+2. **Step 2 — Catastrophic Disaster Simulation:**
+   ```bash
+   # Stop container and completely purge persistent data volume
+   docker compose down -v
+   docker volume rm postgres_data || true
+   ```
+3. **Step 3 — Clean Instance Provisioning & Restore (`pg_restore`):**
+   ```bash
+   # Spin up fresh empty database container
+   docker compose up -d postgres-db
+   # Wait for readiness
+   docker exec -t postgres-db pg_isready -U postgres
+   # Restore snapshot into fresh instance
+   docker exec -i postgres-db pg_restore -U postgres -d taskdb --clean --if-exists < backup_snapshot.dump
+   ```
+4. **Step 4 — Automated Data Integrity Verification:**
+   ```sql
+   -- Verify row counts, foreign key invariants, and sequence counters
+   SELECT count(*) FROM tasks;
+   SELECT count(*) FROM users;
+   SELECT last_value FROM tasks_id_seq;
+   ```
+If the verification queries match pre-disaster checksums, the service is promoted back to production traffic.
+
 ## Tests / verification
 
 ```bash

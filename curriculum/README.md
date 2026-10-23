@@ -19,15 +19,15 @@
 | Core Modules                     | 18    | Modules 00 through 16, plus Module 18 (Flagship Opslane)          |
 | Elective Modules                 | 1     | Module 17 (Advanced Electives)                                    |
 | Total Modules                    | 19    | Modules 00–18                                                     |
-| Core Path Items (Metadata Total) | 419   | Total items array in `path.core.json` across all core modules     |
-| Instructional Lessons & Labs     | 319   | 318 lessons + 1 lab across Modules 00–16                         |
+| Core Path Items (Metadata Total) | 421   | Total items array in `path.core.json` across all core modules     |
+| Instructional Lessons & Labs     | 321   | 320 lessons + 1 lab across Modules 00–16                         |
 | Flagship Opslane Milestones      | 15    | 14 checkpoints + 1 capstone defense in Module 18          |
-| Learner Instructional Units      | 334   | 319 instructional lessons/labs + 15 Opslane milestones            |
+| Learner Instructional Units      | 336   | 321 instructional lessons/labs + 15 Opslane milestones            |
 | Elective Items                   | 20    | Explicitly marked as planned / unreleased draft in Module 17      |
 | Projects                         | 28    | 27 module projects + 1 flagship capstone defense project          |
 | In-Path Assessment Checkpoints   | 57    | 16 module checkpoints + 14 Opslane checkpoints + 27 project-bound nodes |
 | Assessment Registry Records      | 47    | 19 module assessments + 28 project assessments in `assessments.json`|
-| Canonical Concepts               | 60    | Fully resolved ownership without leaks in `concepts.json`         |
+| Canonical Concepts               | 62    | Fully resolved ownership without leaks in `concepts.json`         |
 | Operational Categories           | 13    | Mapped across 18 module coverage entries                          |
 
 ## Module Map
@@ -37,9 +37,9 @@
 | 00  | **Orientation** | orientation | draft | 10 | 0 | 1 | 2 | 13 | `curriculum/modules/00-orientation` |
 | 01  | **Computers, Terminal, Git, and the Web** | foundations | draft | 15 | 0 | 1 | 1 | 17 | `curriculum/modules/01-computers-terminal-git-web` |
 | 02  | **Go Setup and Tooling** | tooling | draft | 14 | 0 | 1 | 1 | 16 | `curriculum/modules/02-go-setup-tooling` |
-| 03  | **Programming Fundamentals with Go** | go-core | draft | 23 | 0 | 2 | 3 | 28 | `curriculum/modules/03-programming-fundamentals` |
+| 03  | **Programming Fundamentals with Go** | go-core | draft | 24 | 0 | 2 | 3 | 29 | `curriculum/modules/03-programming-fundamentals` |
 | 04  | **Functions, Errors, and Data Semantics** | go-core | draft | 18 | 0 | 1 | 2 | 21 | `curriculum/modules/04-functions-errors-data-semantics` |
-| 05  | **Types, Interfaces, Packages, and Modules** | engineering-core | draft | 23 | 0 | 2 | 3 | 28 | `curriculum/modules/05-types-interfaces-packages-modules` |
+| 05  | **Types, Interfaces, Packages, and Modules** | engineering-core | draft | 24 | 0 | 2 | 3 | 29 | `curriculum/modules/05-types-interfaces-packages-modules` |
 | 06  | **Testing, Debugging, and Refactoring** | engineering-core | draft | 21 | 0 | 2 | 3 | 26 | `curriculum/modules/06-testing-debugging-refactoring` |
 | 07  | **CLI, Files, JSON, Config, and Runtime Coordination** | cli-io | draft | 21 | 0 | 3 | 4 | 28 | `curriculum/modules/07-cli-files-json-config` |
 | 08  | **HTTP and REST APIs** | backend | draft | 21 | 0 | 1 | 2 | 24 | `curriculum/modules/08-http-rest-apis` |
@@ -53,8 +53,8 @@
 | 16  | **Portfolio and Interview Readiness** | career | draft | 15 | 0 | 1 | 2 | 18 | `curriculum/modules/16-portfolio-interview-readiness` |
 | 18  | **Flagship Opslane** | flagship | draft | 0 | 15 | 2 | 16 | 33 | `curriculum/modules/18-flagship-opslane` |
 | 17  | **Advanced Electives** | elective | draft | 20 | 0 | 0 | 0 | 20 | `curriculum/path.electives.json` |
-| —   | **Core Subtotal** | — | — | **319** | **15** | **28** | **57** | **419** | *(Modules 00–16, 18)* |
-| —   | **Total Curriculum** | — | — | **339** | **15** | **28** | **57** | **439** | *(419 core items + 20 electives)* |
+| —   | **Core Subtotal** | — | — | **321** | **15** | **28** | **57** | **421** | *(Modules 00–16, 18)* |
+| —   | **Total Curriculum** | — | — | **341** | **15** | **28** | **57** | **441** | *(419 core items + 20 electives)* |
 
 ## Workload Estimates & 52-Week Pacing Guide
 
@@ -64,12 +64,12 @@ Curriculum completion time cannot be calculated from reading time alone. A reali
 
 | Activity Layer | Items | On-Paper Metadata | Realistic Learner Effort | Notes |
 | :--- | :---: | :---: | :---: | :--- |
-| **Instructional Lessons & Labs** | 319 | 236.5 hrs | 235 – 265 hrs | Reading, mental models, running code examples, review questions (Modules 00–16) |
+| **Instructional Lessons & Labs** | 321 | 238.0 hrs | 235 – 265 hrs | Reading, mental models, running code examples, review questions (Modules 00–16) |
 | **Mini-Projects** | 19 | 38.0 hrs | 40 – 75 hrs | Immediate practical reinforcement (2–4 hours per project) |
 | **Portfolio Projects** | 8 | 16.0 hrs | 65 – 120 hrs | Multi-component services with tests, migrations, CI/CD (8–15 hours per project) |
 | **Flagship Opslane Milestones** | 15 | 30.0 hrs | 50 – 80 hrs | Integrated production system with auth, DB, payments, worker pools, metrics (Module 18) |
 | **In-Path Assessments & Defense** | 57 | 57.0 hrs | 45 – 60 hrs | Self-evaluation checklists, code reviews, and capstone oral/technical defense |
-| **Core Total** | **419** | **377.5 hrs** | **435 – 600 hrs** | **Realistic full engineering workload across all 18 core modules** |
+| **Core Total** | **420** | **379.0 hrs** | **435 – 600 hrs** | **Realistic full engineering workload across all 18 core modules** |
 
 ### 2. Weekly Commitment Planning Models
 
@@ -115,6 +115,8 @@ curriculum/
     15-docker-cicd-deployment/
     16-portfolio-interview-readiness/
     18-flagship-opslane/
+  companion-frontend/
+    README.md
   assessments.json
   concepts.json
   crossrefs.json
@@ -124,8 +126,14 @@ curriculum/
   projects.json
   readme.contracts.json
   schema.v3.json
+  PILOT_TESTING_PROTOCOL.md
 internal/tools/curriculum/
 ```
+
+## Companion Tracks & Quality Assurance Protocols
+
+- **[Frontend Companion Track](companion-frontend/README.md):** 4-stage progressive server-driven hypermedia track (`templ` + `HTMX` + `Tailwind` + `Alpine.js`) running parallel to backend modules and converging at Flagship Opslane.
+- **[Beginner Pilot Testing Protocol](PILOT_TESTING_PROTOCOL.md):** Formal empirical zero-intervention testing methodology evaluating unassisted learner velocity and cognitive load across Modules 00–05.
 
 ---
 
@@ -234,6 +242,7 @@ internal/tools/curriculum/
 | 21   | concept | runes-and-unicode | **Runes and Unicode** | 45 |
 | 22   | concept | pointers-as-addresses | **Pointers as addresses** | 45 |
 | 23   | concept | beginner-pointer-mistakes | **Beginner pointer mistakes** | 45 |
+| 24   | concept | algorithmic-problem-solving | **Algorithmic problem-solving and complexity** | 45 |
 
 ## 4. Functions, Errors, and Data Semantics
 
@@ -297,6 +306,7 @@ internal/tools/curriculum/
 | 21   | concept | dependency-management | **Dependency management** | 45 |
 | 22   | concept | workspaces | **Workspaces** | 45 |
 | 23   | concept | documentation-comments | **Documentation comments** | 45 |
+| 24   | concept | generics-fundamentals | **Generics fundamentals** | 45 |
 
 ## 6. Testing, Debugging, and Refactoring
 
@@ -800,7 +810,7 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 
 # Cross-References
 
-Total cross-references: **2091**
+Total cross-references: **2097**
 
 ### Style Rules
 
@@ -816,8 +826,8 @@ Total cross-references: **2091**
 | Relation      | Count | Description |
 | ------------- | ----- | ----------- |
 | related       | 944   | Bidirectional conceptual links between related lessons |
-| builds_on     | 588   | Strict directional pedagogical prerequisites |
-| reinforced_in | 525   | Practical application links to projects and labs |
+| builds_on     | 592   | Strict directional pedagogical prerequisites |
+| reinforced_in | 527   | Practical application links to projects and labs |
 | preview_only  | 34    | Early mental-model previews developed fully later |
 
 ---

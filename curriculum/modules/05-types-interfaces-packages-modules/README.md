@@ -43,6 +43,9 @@ Moves from scripts to maintainable Go systems by teaching types, methods, interf
 - `core-05-22` Workspaces
 - `core-05-23` Documentation comments
 
+### Session 5: Modern Type Parameters
+- `core-05-24` Generics fundamentals *(Type parameters, constraints, monomorphization, and interface tradeoffs)*
+
 ## Completion
 
 Complete every required lesson, lab, project, and assessment for this module.

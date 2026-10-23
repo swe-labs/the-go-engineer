@@ -11496,7 +11496,7 @@
       "learning_objective": "Understand and apply Beginner pointer mistakes in the context of professional Go software engineering.",
       "module_id": "module-03",
       "next_item_ids": [
-        "core-04-01"
+        "core-03-24"
       ],
       "order": 23,
       "phase": "go-core",
@@ -11601,6 +11601,161 @@
       "zero_magic_status": "golden"
     },
     {
+      "id": "core-03-24",
+      "module_id": "module-03",
+      "slug": "algorithmic-problem-solving",
+      "title": "Algorithmic problem-solving and complexity",
+      "type": "lesson",
+      "subtype": "concept",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "go-core",
+      "order": 24,
+      "estimated_minutes": 45,
+      "learning_objective": "Understand and apply Algorithmic problem-solving and complexity in the context of professional Go software engineering.",
+      "required_prior_knowledge": [
+        "Complete prerequisite lesson(s): core-03-23."
+      ],
+      "prerequisites": [
+        "core-03-23"
+      ],
+      "next_item_ids": [
+        "core-04-01"
+      ],
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Using nested loops to search slices or deduplicate collections, accidentally causing O(N^2) performance degradation.",
+          "Executing binary search via slices.BinarySearch on an unsorted slice, which produces unpredictable and invalid search results.",
+          "Attempting to modify slice length or structure while iterating through it with a range loop.",
+          "Desk-checking code purely in memory instead of writing down trace tables with explicit variable values."
+        ],
+        "execution_timeline": [
+          "Define inputs, expected outputs, zero values, and edge conditions (empty, 1-element, duplicates, unsorted).",
+          "Draft variable state trace table and verify invariants across iteration steps.",
+          "Select optimal data structure: slice for linear contiguous layout, map for O(1) set membership.",
+          "Apply standard library functions: slices.BinarySearch for O(log N) lookup, slices.SortFunc for compound sorting."
+        ],
+        "failure_modes": [
+          {
+            "cause": "Accidental quadratic O(N^2) complexity from nested linear scans.",
+            "fix": "Use an auxiliary map[K]struct{} to track seen items for O(N) deduplication.",
+            "scenario": "Learner attempts to deduplicate a 50,000 item slice using nested loops, freezing the application."
+          },
+          {
+            "cause": "BinarySearch executed on unsorted collection.",
+            "fix": "Ensure slice is sorted via slices.Sort or slices.SortFunc prior to invoking slices.BinarySearch.",
+            "scenario": "Learner queries price tier with slices.BinarySearch on unsorted pricing data, returning false negatives."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must trace variable transitions across 4 iterations using a formal trace table.",
+          "Learner must compare runtime performance of O(N^2) nested loops vs O(N) map-backed deduplication.",
+          "Learner must explain why binary search requires O(log N) operations and requires monotonic ordering."
+        ],
+        "how_go_uses_it": "Go stdlib uses slices.BinarySearch and pdqsort (slices.SortFunc) throughout the compiler, runtime symbol tables, HTTP routing engines, and template lexers for cache-efficient data retrieval.",
+        "mental_model": "Algorithms are deterministic state transformations governed by explicit loop invariants. Understanding time/space complexity Big-O allows engineers to choose the right data structure before writing code.",
+        "performance_implications": [
+          "Slices reside in contiguous memory, maximizing CPU cache line prefetching (64 bytes per fetch).",
+          "slices.BinarySearch executes in at most 20 comparisons for 1,000,000 items (log2(1e6) ≈ 20).",
+          "pdqsort in slices.SortFunc operates in O(N log N) worst-case time without recursion stack explosion."
+        ],
+        "problem_solved": "Prevents developers from writing inefficient quadratic code, enables structured problem breakdown, and provides reliable search/sort patterns for backend datasets.",
+        "proof_of_understanding": "Implement order-preserving deduplication, two-pointer in-place partitioning, binary search price tier lookup, and custom multi-field struct sorting.",
+        "real_world_usage": "Every production service processes lists of events, users, or transactions. Sorting by priority and timestamp, deduplicating records, and partitioning active items are everyday engineering tasks.",
+        "step_by_step_execution": [
+          "Identify the invariant condition that must hold true for each loop step.",
+          "Allocate memory with appropriate capacity hints to avoid slice re-allocations.",
+          "Implement the two-pointer or mapping pass.",
+          "Write table-driven unit tests covering boundary edge cases (empty, single, duplicate, reverse)."
+        ],
+        "under_the_hood": "pdqsort dynamically switches between quicksort, heapsort (when recursion depth exceeds threshold), and insertion sort (for small partitions), maintaining O(N log N) worst-case bounds.",
+        "why_it_exists": "Engineering requires solving algorithmic problems reliably without accidental performance pitfalls. Teaching decomposition, tracing, and complexity ensures learners can build scalable backend systems."
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "display_text": "Module 03.23 — Beginner pointer mistakes",
+            "label": "Module 03.23 — Beginner pointer mistakes",
+            "reason": "Algorithmic problem-solving relies on foundational value and pointer semantics.",
+            "required": true,
+            "target_id": "core-03-23"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "display_text": "Project — Pricing Checkout",
+            "label": "Project — Pricing Checkout",
+            "reason": "This project applies algorithmic search and multi-field sorting.",
+            "required": true,
+            "target_id": "project-pricing-checkout"
+          }
+        ],
+        "related": []
+      },
+      "proof": {
+        "assessment_id": "assessment-module-03",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "Implement order-preserving deduplication, two-pointer partitioning, and custom struct sorting with slices.SortFunc.",
+        "project_id": "project-pricing-checkout",
+        "rubric_ids": [
+          "rubric-module-03"
+        ]
+      },
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./curriculum/modules/03-programming-fundamentals/lessons/24-algorithmic-problem-solving",
+        "test_command": "go test ./curriculum/modules/03-programming-fundamentals/lessons/24-algorithmic-problem-solving"
+      },
+      "files": {
+        "assets_dir": "modules/03-programming-fundamentals/lessons/24-algorithmic-problem-solving/assets",
+        "diagram_paths": [],
+        "main_path": "modules/03-programming-fundamentals/lessons/24-algorithmic-problem-solving/main.go",
+        "readme_path": "modules/03-programming-fundamentals/lessons/24-algorithmic-problem-solving/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/03-programming-fundamentals/lessons/24-algorithmic-problem-solving/main_test.go"
+      },
+      "source_legacy_ids": [],
+      "tags": [
+        "go-core",
+        "foundation",
+        "concept",
+        "algorithms"
+      ],
+      "zero_magic_status": "golden",
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "readme_status": "scaffolded"
+    },
+    {
       "content_contract": {
         "common_mistakes_required": true,
         "machine_view_required": true,
@@ -11615,18 +11770,18 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 03.23 — Beginner pointer mistakes",
-            "label": "Module 03.23 — Beginner pointer mistakes",
-            "reason": "Function basics requires understanding of Beginner pointer mistakes.",
+            "display_text": "Module 03.24 — Algorithmic problem-solving and complexity",
+            "label": "Module 03.24 — Algorithmic problem-solving and complexity",
+            "reason": "Function basics requires understanding of Algorithmic problem-solving and complexity.",
             "required": true,
-            "target_id": "core-03-23"
+            "target_id": "core-03-24"
           },
           {
-            "display_text": "Module 03.22 — Pointers as addresses",
-            "label": "Module 03.22 — Pointers as addresses",
+            "display_text": "Module 03.23 — Beginner pointer mistakes",
+            "label": "Module 03.23 — Beginner pointer mistakes",
             "reason": "Functions, Errors, and Data Semantics relies on foundational concepts from Programming Fundamentals with Go.",
             "required": true,
-            "target_id": "core-03-22"
+            "target_id": "core-03-23"
           }
         ],
         "preview_only": [],
@@ -11684,7 +11839,7 @@
       "order": 1,
       "phase": "go-core",
       "prerequisites": [
-        "core-03-23"
+        "core-03-24"
       ],
       "proof": {
         "assessment_id": "assessment-module-04",
@@ -11707,7 +11862,7 @@
       },
       "readme_status": "scaffolded",
       "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): core-03-23."
+        "Complete prerequisite lesson(s): core-03-24."
       ],
       "slug": "function-basics",
       "source_legacy_ids": [
@@ -19360,7 +19515,7 @@
       "learning_objective": "Understand and apply Documentation comments in the context of professional Go software engineering.",
       "module_id": "module-05",
       "next_item_ids": [
-        "core-06-01"
+        "core-05-24"
       ],
       "order": 23,
       "phase": "engineering-core",
@@ -19469,6 +19624,161 @@
       "zero_magic_status": "golden"
     },
     {
+      "id": "core-05-24",
+      "module_id": "module-05",
+      "slug": "generics-fundamentals",
+      "title": "Generics fundamentals",
+      "type": "lesson",
+      "subtype": "concept",
+      "status": "draft",
+      "difficulty": "core",
+      "phase": "engineering-core",
+      "order": 24,
+      "estimated_minutes": 45,
+      "learning_objective": "Understand and apply Generics fundamentals in the context of professional Go software engineering.",
+      "required_prior_knowledge": [
+        "Complete prerequisite lesson(s): core-05-23."
+      ],
+      "prerequisites": [
+        "core-05-23"
+      ],
+      "next_item_ids": [
+        "core-06-01"
+      ],
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Over-using type parameters where a simple standard interface (such as io.Reader or error) would provide clearer behavioral abstraction.",
+          "Attempting to use equality operators (==, !=) on an unconstrained type parameter [T any] instead of [T comparable].",
+          "Attempting to declare type parameters on a method separate from the receiver type declaration.",
+          "Assuming generics incur runtime boxing or reflection overhead; in Go, generics are monomorphized with zero boxing allocations."
+        ],
+        "execution_timeline": [
+          "Identify the generic algorithm or container pattern (e.g., Map, Filter, Stack).",
+          "Specify appropriate type constraints: any, comparable, or cmp.Ordered.",
+          "Instantiate generic functions with type inference or explicit type arguments.",
+          "Compile to monomorphized machine code via GC shape stenciling."
+        ],
+        "failure_modes": [
+          {
+            "cause": "Using == operator on type parameter constrained only by any.",
+            "fix": "Change constraint to comparable: [T comparable].",
+            "scenario": "Compiler error: type parameter T has no constraints that allow == comparison."
+          },
+          {
+            "cause": "Attempting method-level type parameters on a non-generic receiver.",
+            "fix": "Declare the type parameter on the struct type itself: type Service[T any] struct.",
+            "scenario": "Compiler error: syntax error: method must have no type parameters."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must articulate the precise distinction between generics (type-safe algorithms/containers) and interfaces (behavioral contracts).",
+          "Learner must demonstrate generic Map, Filter, and Stack without runtime boxing.",
+          "Learner must explain why Go uses GC shape stenciling rather than pure Java-style type erasure or pure C++ template code bloat."
+        ],
+        "how_go_uses_it": "Standard library packages slices, maps, and cmp use generics to provide type-safe utilities without interface boxing or code generation.",
+        "mental_model": "Generics are compile-time type blueprints. The compiler verifies constraints at build time and emits specialized machine code with zero runtime boxing penalty.",
+        "performance_implications": [
+          "Zero interface fat-pointer allocations or dynamic dispatch overhead on generic operations.",
+          "Go stencils identical pointer types into shared GC shapes to minimize binary code expansion.",
+          "Inlining functions operates across monomorphized generic instantiations identically to concrete functions."
+        ],
+        "problem_solved": "Eliminates duplicate boilerplate code for data structures and slice algorithms while maintaining compile-time type safety without runtime reflection.",
+        "proof_of_understanding": "Implement generic Map, Filter, and a type-safe generic Stack with constraints, validating edge cases under unit tests.",
+        "real_world_usage": "Used across modern Go applications for type-safe repository abstractions, custom caching layers, slice transformations, and event processing buses.",
+        "step_by_step_execution": [
+          "Declare type parameters inside square brackets [T any].",
+          "Apply operations permitted strictly by the declared constraint.",
+          "Pass arguments and allow Go compiler to infer type arguments automatically.",
+          "Run unit tests to verify type constraints and runtime behavior."
+        ],
+        "under_the_hood": "The Go compiler uses GCShape stenciling: types sharing the same memory layout and GC pointer metadata share a single compiled function, while scalar types receive distinct instantiations.",
+        "why_it_exists": "Before Go 1.18, type-safe data structures required code generation or unsafe interface assertions. Generics provide type safety and code reuse without runtime performance penalties."
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "display_text": "Module 05.23 — Documentation comments",
+            "label": "Module 05.23 — Documentation comments",
+            "reason": "Generics fundamentals builds upon the complete types and interfaces foundation.",
+            "required": true,
+            "target_id": "core-05-23"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "display_text": "Project — Bank Account",
+            "label": "Project — Bank Account",
+            "reason": "This project reinforces generic data structures and type safety.",
+            "required": true,
+            "target_id": "project-bank-account"
+          }
+        ],
+        "related": []
+      },
+      "proof": {
+        "assessment_id": "assessment-module-05",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "Implement generic Map, Filter, and a type-safe generic Stack with constraints.",
+        "project_id": "project-bank-account",
+        "rubric_ids": [
+          "rubric-module-05"
+        ]
+      },
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./curriculum/modules/05-types-interfaces-packages-modules/lessons/24-generics-fundamentals",
+        "test_command": "go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/24-generics-fundamentals"
+      },
+      "files": {
+        "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/24-generics-fundamentals/assets",
+        "diagram_paths": [],
+        "main_path": "modules/05-types-interfaces-packages-modules/lessons/24-generics-fundamentals/main.go",
+        "readme_path": "modules/05-types-interfaces-packages-modules/lessons/24-generics-fundamentals/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/05-types-interfaces-packages-modules/lessons/24-generics-fundamentals/main_test.go"
+      },
+      "source_legacy_ids": [],
+      "tags": [
+        "engineering-core",
+        "core",
+        "concept",
+        "generics"
+      ],
+      "zero_magic_status": "golden",
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "readme_status": "scaffolded"
+    },
+    {
       "content_contract": {
         "common_mistakes_required": true,
         "machine_view_required": true,
@@ -19483,18 +19793,18 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 05.23 — Documentation comments",
-            "label": "Module 05.23 — Documentation comments",
-            "reason": "Why testing exists requires understanding of Documentation comments.",
+            "display_text": "Module 05.24 — Generics fundamentals",
+            "label": "Module 05.24 — Generics fundamentals",
+            "reason": "Why testing exists requires understanding of Generics fundamentals.",
             "required": true,
-            "target_id": "core-05-23"
+            "target_id": "core-05-24"
           },
           {
-            "display_text": "Module 05.22 — Workspaces",
-            "label": "Module 05.22 — Workspaces",
+            "display_text": "Module 05.23 — Documentation comments",
+            "label": "Module 05.23 — Documentation comments",
             "reason": "Testing, Debugging, and Refactoring relies on foundational concepts from Types, Interfaces, Packages, and Modules.",
             "required": true,
-            "target_id": "core-05-22"
+            "target_id": "core-05-23"
           },
           {
             "display_text": "Module 06.02 — Unit testing",
@@ -19559,7 +19869,7 @@
       "order": 1,
       "phase": "engineering-core",
       "prerequisites": [
-        "core-05-23"
+        "core-05-24"
       ],
       "proof": {
         "assessment_id": "assessment-module-06",
@@ -19582,7 +19892,7 @@
       },
       "readme_status": "scaffolded",
       "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): core-05-23."
+        "Complete prerequisite lesson(s): core-05-24."
       ],
       "slug": "why-testing-exists",
       "source_legacy_ids": [],
@@ -67482,7 +67792,7 @@
         "go-core"
       ],
       "terminal_item_ids": [
-        "core-03-23"
+        "core-03-24"
       ],
       "title": "Programming Fundamentals with Go"
     },
@@ -67554,7 +67864,7 @@
         "engineering-core"
       ],
       "terminal_item_ids": [
-        "core-05-23"
+        "core-05-24"
       ],
       "title": "Types, Interfaces, Packages, and Modules"
     },

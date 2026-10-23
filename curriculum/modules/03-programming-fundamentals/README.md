@@ -33,6 +33,7 @@ Introduces programming fundamentals through Go with explicit treatment of values
 - `core-03-21` Runes and Unicode
 - `core-03-22` Pointers as addresses
 - `core-03-23` Beginner pointer mistakes
+- `core-03-24` Algorithmic problem-solving and complexity
 
 ## Completion
 

@@ -50,6 +50,14 @@ Common mistakes:
 
 Authorization in Opslane follows the same patterns as Kubernetes RBAC, AWS IAM, and GitHub's permission model — roles, permissions, and resource scopes.
 
+## Concrete Proof: Negative Authorization Test Suite
+
+To prove authorization robustness, your test suite must implement four mandatory negative test cases:
+1. **Unauthenticated Request:** Calling protected endpoints without a Bearer token returns `401 Unauthorized` with structured JSON error `{ "error": "unauthorized" }`.
+2. **Role Mismatch (RBAC):** Authenticated user with role `viewer` attempting `POST /api/v1/orders` returns `403 Forbidden` with `{ "error": "insufficient_permissions" }`.
+3. **Cross-Tenant Boundary Rejection:** User belonging to Tenant A querying `/api/v1/tenants/tenant-B/resources` returns `404 Not Found` (preferred to avoid tenant enumeration) or `403 Forbidden`.
+4. **Token Tampering / Invalid Signature:** Request with altered JWT payload returns immediate `401 Unauthorized`.
+
 ## Thinking Questions
 
 1. What problem does this concept solve?

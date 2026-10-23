@@ -528,6 +528,24 @@
       "reinforcement_locations": [
         "core-16-03"
       ]
+    },
+    {
+      "canonical_owner": "core-03-24",
+      "concept": "algorithmic complexity and decomposition",
+      "notes": "Problem decomposition, invariant tracing, Big-O complexity models, binary search, and custom struct sorting",
+      "preview_locations": null,
+      "reinforcement_locations": [
+        "project-pricing-checkout"
+      ]
+    },
+    {
+      "canonical_owner": "core-05-24",
+      "concept": "generics and type parameters",
+      "notes": "Type parameters, standard constraints (any, comparable, cmp.Ordered), monomorphization, and interface-vs-generics tradeoffs",
+      "preview_locations": null,
+      "reinforcement_locations": [
+        "project-bank-account"
+      ]
     }
   ],
   "curriculum_version": "3.1.0-draft.1",

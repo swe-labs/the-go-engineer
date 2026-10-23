@@ -18875,6 +18875,60 @@
         "label": "Module 11.01 — Time basics",
         "reason": "Preview of Time basics from Lifecycle, Context, and Concurrency.",
         "required": false
+      },
+      {
+        "from_id": "core-03-24",
+        "relation": "builds_on",
+        "to_id": "core-03-23",
+        "target_id": "core-03-23",
+        "label": "Module 03.23 — Beginner pointer mistakes",
+        "reason": "Algorithmic problem-solving relies on foundational value and pointer semantics.",
+        "required": true
+      },
+      {
+        "from_id": "core-04-01",
+        "relation": "builds_on",
+        "to_id": "core-03-24",
+        "target_id": "core-03-24",
+        "label": "Module 03.24 — Algorithmic problem-solving and complexity",
+        "reason": "Function basics requires understanding of Algorithmic problem-solving and complexity.",
+        "required": true
+      },
+      {
+        "from_id": "core-05-24",
+        "relation": "builds_on",
+        "to_id": "core-05-23",
+        "target_id": "core-05-23",
+        "label": "Module 05.23 — Documentation comments",
+        "reason": "Generics fundamentals builds upon the complete types and interfaces foundation.",
+        "required": true
+      },
+      {
+        "from_id": "core-06-01",
+        "relation": "builds_on",
+        "to_id": "core-05-24",
+        "target_id": "core-05-24",
+        "label": "Module 05.24 — Generics fundamentals",
+        "reason": "Why testing exists requires understanding of Generics fundamentals.",
+        "required": true
+      },
+      {
+        "from_id": "core-03-24",
+        "relation": "reinforced_in",
+        "to_id": "project-pricing-checkout",
+        "target_id": "project-pricing-checkout",
+        "label": "Project — Pricing Checkout",
+        "reason": "Pricing checkout applies algorithmic search and multi-field sorting.",
+        "required": true
+      },
+      {
+        "from_id": "core-05-24",
+        "relation": "reinforced_in",
+        "to_id": "project-bank-account",
+        "target_id": "project-bank-account",
+        "label": "Project — Bank Account",
+        "reason": "Bank Account reinforces generic data structures and type safety.",
+        "required": true
       }
     ],
     "style_rules": {

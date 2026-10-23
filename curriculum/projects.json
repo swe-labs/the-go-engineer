@@ -303,7 +303,8 @@
         "core-03-20",
         "core-03-21",
         "core-03-22",
-        "core-03-23"
+        "core-03-23",
+        "core-03-24"
       ],
       "required_concepts": [
         "slice header",
@@ -439,6 +440,11 @@
           "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
           "title": "Explain the result",
           "type": "document"
+        },
+        {
+          "description": "Implement quantity-based tier pricing lookup using slices.BinarySearch over sorted tier thresholds.",
+          "id": "project-pricing-checkout-task-binary-search",
+          "title": "Optimized Tier Lookup with Binary Search"
         }
       ],
       "title": "Pricing Checkout",
@@ -929,7 +935,8 @@
       "reinforcement_targets": [
         "interface semantics",
         "nil interface",
-        "package layout"
+        "package layout",
+        "generics and type parameters"
       ],
       "reinforces": [
         "core-05-01",
@@ -954,7 +961,8 @@
         "core-05-20",
         "core-05-21",
         "core-05-22",
-        "core-05-23"
+        "core-05-23",
+        "core-05-24"
       ],
       "required_concepts": [
         "interface semantics",
@@ -1090,6 +1098,11 @@
           "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
           "title": "Explain the result",
           "type": "document"
+        },
+        {
+          "description": "Implement a generic audit event buffer TransactionBuffer[T any] to store and filter account ledger operations without runtime type assertions.",
+          "id": "project-bank-account-task-generic-buffer",
+          "title": "Type-Safe Generic Transaction Buffer"
         }
       ],
       "title": "Bank Account",
@@ -2822,6 +2835,22 @@
           "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
           "title": "Explain the result",
           "type": "document"
+        },
+        {
+          "done_when": [
+            "pg_dump snapshot is generated in custom format with transaction consistency.",
+            "Active PostgreSQL container and volume are destroyed.",
+            "Fresh database container is provisioned and restored using pg_restore.",
+            "Automated integrity verification query confirms row counts, foreign key constraints, and sequence alignment."
+          ],
+          "files_touched": [
+            "09-sql-postgres-persistence"
+          ],
+          "id": "project-task-api-postgres-task-disaster-recovery",
+          "instruction": "Execute an end-to-end disaster recovery drill: snapshot with pg_dump, destroy container and volume, restore into a fresh instance with pg_restore, and verify database integrity.",
+          "instructions": "Prove that application data survives complete container and volume destruction.",
+          "title": "Disaster recovery drill & integrity verification",
+          "type": "verify"
         }
       ],
       "title": "Task API with Postgres",
@@ -2835,7 +2864,7 @@
           "Check rubric."
         ],
         "mode": "mixed",
-        "run_command": "docker compose up -d \u0026\u0026 go run ./cmd/server/main.go",
+        "run_command": "docker compose up -d && go run ./cmd/server/main.go",
         "test_command": "go test -tags=integration ./..."
       }
     },
@@ -3041,6 +3070,22 @@
           "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
           "title": "Explain the result",
           "type": "document"
+        },
+        {
+          "done_when": [
+            "Unauthenticated request without token receives deterministic 401 Unauthorized with structured JSON error.",
+            "Authenticated request with insufficient role receives 403 Forbidden with zero administrative data leakage.",
+            "Cross-tenant isolation test proves User from Tenant A receives 403/404 attempting to access Tenant B resource.",
+            "Expired and tampered tokens receive immediate 401 rejection."
+          ],
+          "files_touched": [
+            "10-auth-security"
+          ],
+          "id": "project-secure-authenticated-api-task-authz-suite",
+          "instruction": "Implement a rigorous negative authorization test suite verifying 401 vs 403 separation, role mismatch rejection, and cross-tenant boundary isolation.",
+          "instructions": "Demonstrate through automated tests that unauthorized requests and cross-tenant access attempts are rejected deterministically.",
+          "title": "Negative authorization and tenant isolation suite",
+          "type": "verify"
         }
       ],
       "title": "Secure Authenticated API",
@@ -3054,7 +3099,7 @@
           "Check rubric."
         ],
         "mode": "mixed",
-        "run_command": "docker compose up -d \u0026\u0026 go run ./cmd/server/main.go",
+        "run_command": "docker compose up -d && go run ./cmd/server/main.go",
         "test_command": "go test -tags=integration ./..."
       }
     },
