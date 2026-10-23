@@ -75,13 +75,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/01-generics/assets",
+        "assets_dir": "electives/advanced-electives/01-generics/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/01-generics/main.go",
-        "readme_path": "16-advanced-electives/01-generics/README.md",
+        "main_path": "electives/advanced-electives/01-generics/main.go",
+        "readme_path": "electives/advanced-electives/01-generics/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/01-generics/main_test.go"
+        "test_path": "electives/advanced-electives/01-generics/main_test.go"
       },
       "id": "elective-01",
       "learning_objective": "Understand and apply Generics in the context of professional Go software engineering.",
@@ -259,13 +259,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/02-complex-generic-constraints/assets",
+        "assets_dir": "electives/advanced-electives/02-complex-generic-constraints/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/02-complex-generic-constraints/main.go",
-        "readme_path": "16-advanced-electives/02-complex-generic-constraints/README.md",
+        "main_path": "electives/advanced-electives/02-complex-generic-constraints/main.go",
+        "readme_path": "electives/advanced-electives/02-complex-generic-constraints/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/02-complex-generic-constraints/main_test.go"
+        "test_path": "electives/advanced-electives/02-complex-generic-constraints/main_test.go"
       },
       "id": "elective-02",
       "learning_objective": "Understand and apply Complex generic constraints in the context of professional Go software engineering.",
@@ -440,13 +440,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/03-generic-data-structures/assets",
+        "assets_dir": "electives/advanced-electives/03-generic-data-structures/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/03-generic-data-structures/main.go",
-        "readme_path": "16-advanced-electives/03-generic-data-structures/README.md",
+        "main_path": "electives/advanced-electives/03-generic-data-structures/main.go",
+        "readme_path": "electives/advanced-electives/03-generic-data-structures/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/03-generic-data-structures/main_test.go"
+        "test_path": "electives/advanced-electives/03-generic-data-structures/main_test.go"
       },
       "id": "elective-03",
       "learning_objective": "Understand and apply Generic data structures in the context of professional Go software engineering.",
@@ -621,13 +621,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/04-functional-options/assets",
+        "assets_dir": "electives/advanced-electives/04-functional-options/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/04-functional-options/main.go",
-        "readme_path": "16-advanced-electives/04-functional-options/README.md",
+        "main_path": "electives/advanced-electives/04-functional-options/main.go",
+        "readme_path": "electives/advanced-electives/04-functional-options/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/04-functional-options/main_test.go"
+        "test_path": "electives/advanced-electives/04-functional-options/main_test.go"
       },
       "id": "elective-04",
       "learning_objective": "Understand and apply Functional options in the context of professional Go software engineering.",
@@ -805,13 +805,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/05-method-values/assets",
+        "assets_dir": "electives/advanced-electives/05-method-values/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/05-method-values/main.go",
-        "readme_path": "16-advanced-electives/05-method-values/README.md",
+        "main_path": "electives/advanced-electives/05-method-values/main.go",
+        "readme_path": "electives/advanced-electives/05-method-values/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/05-method-values/main_test.go"
+        "test_path": "electives/advanced-electives/05-method-values/main_test.go"
       },
       "id": "elective-05",
       "learning_objective": "Understand and apply Method values in the context of professional Go software engineering.",
@@ -989,13 +989,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/06-build-tags/assets",
+        "assets_dir": "electives/advanced-electives/06-build-tags/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/06-build-tags/main.go",
-        "readme_path": "16-advanced-electives/06-build-tags/README.md",
+        "main_path": "electives/advanced-electives/06-build-tags/main.go",
+        "readme_path": "electives/advanced-electives/06-build-tags/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/06-build-tags/main_test.go"
+        "test_path": "electives/advanced-electives/06-build-tags/main_test.go"
       },
       "id": "elective-06",
       "learning_objective": "Understand and apply Build tags in the context of professional Go software engineering.",
@@ -1173,13 +1173,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/07-go-generate/assets",
+        "assets_dir": "electives/advanced-electives/07-go-generate/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/07-go-generate/main.go",
-        "readme_path": "16-advanced-electives/07-go-generate/README.md",
+        "main_path": "electives/advanced-electives/07-go-generate/main.go",
+        "readme_path": "electives/advanced-electives/07-go-generate/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/07-go-generate/main_test.go"
+        "test_path": "electives/advanced-electives/07-go-generate/main_test.go"
       },
       "id": "elective-07",
       "learning_objective": "Understand and apply go generate in the context of professional Go software engineering.",
@@ -1357,13 +1357,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/08-mockery/assets",
+        "assets_dir": "electives/advanced-electives/08-mockery/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/08-mockery/main.go",
-        "readme_path": "16-advanced-electives/08-mockery/README.md",
+        "main_path": "electives/advanced-electives/08-mockery/main.go",
+        "readme_path": "electives/advanced-electives/08-mockery/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/08-mockery/main_test.go"
+        "test_path": "electives/advanced-electives/08-mockery/main_test.go"
       },
       "id": "elective-08",
       "learning_objective": "Understand and apply Mockery in the context of professional Go software engineering.",
@@ -1541,13 +1541,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/09-protobuf/assets",
+        "assets_dir": "electives/advanced-electives/09-protobuf/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/09-protobuf/main.go",
-        "readme_path": "16-advanced-electives/09-protobuf/README.md",
+        "main_path": "electives/advanced-electives/09-protobuf/main.go",
+        "readme_path": "electives/advanced-electives/09-protobuf/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/09-protobuf/main_test.go"
+        "test_path": "electives/advanced-electives/09-protobuf/main_test.go"
       },
       "id": "elective-09",
       "learning_objective": "Understand and apply Protobuf in the context of professional Go software engineering.",
@@ -1723,13 +1723,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/10-grpc-fundamentals/assets",
+        "assets_dir": "electives/advanced-electives/10-grpc-fundamentals/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/10-grpc-fundamentals/main.go",
-        "readme_path": "16-advanced-electives/10-grpc-fundamentals/README.md",
+        "main_path": "electives/advanced-electives/10-grpc-fundamentals/main.go",
+        "readme_path": "electives/advanced-electives/10-grpc-fundamentals/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/10-grpc-fundamentals/main_test.go"
+        "test_path": "electives/advanced-electives/10-grpc-fundamentals/main_test.go"
       },
       "id": "elective-10",
       "learning_objective": "Understand and apply gRPC fundamentals in the context of professional Go software engineering.",
@@ -1906,13 +1906,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/11-grpc-streaming/assets",
+        "assets_dir": "electives/advanced-electives/11-grpc-streaming/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/11-grpc-streaming/main.go",
-        "readme_path": "16-advanced-electives/11-grpc-streaming/README.md",
+        "main_path": "electives/advanced-electives/11-grpc-streaming/main.go",
+        "readme_path": "electives/advanced-electives/11-grpc-streaming/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/11-grpc-streaming/main_test.go"
+        "test_path": "electives/advanced-electives/11-grpc-streaming/main_test.go"
       },
       "id": "elective-11",
       "learning_objective": "Understand and apply gRPC streaming in the context of professional Go software engineering.",
@@ -2087,13 +2087,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/12-grpc-interceptors/assets",
+        "assets_dir": "electives/advanced-electives/12-grpc-interceptors/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/12-grpc-interceptors/main.go",
-        "readme_path": "16-advanced-electives/12-grpc-interceptors/README.md",
+        "main_path": "electives/advanced-electives/12-grpc-interceptors/main.go",
+        "readme_path": "electives/advanced-electives/12-grpc-interceptors/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/12-grpc-interceptors/main_test.go"
+        "test_path": "electives/advanced-electives/12-grpc-interceptors/main_test.go"
       },
       "id": "elective-12",
       "learning_objective": "Understand and apply gRPC interceptors in the context of professional Go software engineering.",
@@ -2268,13 +2268,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/13-rest-vs-grpc-tradeoffs/assets",
+        "assets_dir": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/13-rest-vs-grpc-tradeoffs/main.go",
-        "readme_path": "16-advanced-electives/13-rest-vs-grpc-tradeoffs/README.md",
+        "main_path": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/main.go",
+        "readme_path": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/13-rest-vs-grpc-tradeoffs/main_test.go"
+        "test_path": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/main_test.go"
       },
       "id": "elective-13",
       "learning_objective": "Understand and apply REST vs gRPC tradeoffs in the context of professional Go software engineering.",
@@ -2448,13 +2448,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/14-sync-map/assets",
+        "assets_dir": "electives/advanced-electives/14-sync-map/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/14-sync-map/main.go",
-        "readme_path": "16-advanced-electives/14-sync-map/README.md",
+        "main_path": "electives/advanced-electives/14-sync-map/main.go",
+        "readme_path": "electives/advanced-electives/14-sync-map/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/14-sync-map/main_test.go"
+        "test_path": "electives/advanced-electives/14-sync-map/main_test.go"
       },
       "id": "elective-14",
       "learning_objective": "Understand and apply sync.Map in the context of professional Go software engineering.",
@@ -2631,13 +2631,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/15-sync-pool/assets",
+        "assets_dir": "electives/advanced-electives/15-sync-pool/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/15-sync-pool/main.go",
-        "readme_path": "16-advanced-electives/15-sync-pool/README.md",
+        "main_path": "electives/advanced-electives/15-sync-pool/main.go",
+        "readme_path": "electives/advanced-electives/15-sync-pool/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/15-sync-pool/main_test.go"
+        "test_path": "electives/advanced-electives/15-sync-pool/main_test.go"
       },
       "id": "elective-15",
       "learning_objective": "Understand and apply sync.Pool in the context of professional Go software engineering.",
@@ -2813,13 +2813,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/16-cqrs/assets",
+        "assets_dir": "electives/advanced-electives/16-cqrs/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/16-cqrs/main.go",
-        "readme_path": "16-advanced-electives/16-cqrs/README.md",
+        "main_path": "electives/advanced-electives/16-cqrs/main.go",
+        "readme_path": "electives/advanced-electives/16-cqrs/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/16-cqrs/main_test.go"
+        "test_path": "electives/advanced-electives/16-cqrs/main_test.go"
       },
       "id": "elective-16",
       "learning_objective": "Understand and apply CQRS in the context of professional Go software engineering.",
@@ -2997,13 +2997,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/17-feature-flags/assets",
+        "assets_dir": "electives/advanced-electives/17-feature-flags/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/17-feature-flags/main.go",
-        "readme_path": "16-advanced-electives/17-feature-flags/README.md",
+        "main_path": "electives/advanced-electives/17-feature-flags/main.go",
+        "readme_path": "electives/advanced-electives/17-feature-flags/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/17-feature-flags/main_test.go"
+        "test_path": "electives/advanced-electives/17-feature-flags/main_test.go"
       },
       "id": "elective-17",
       "learning_objective": "Understand and apply Feature flags in the context of professional Go software engineering.",
@@ -3180,13 +3180,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/18-blue-green-deployments/assets",
+        "assets_dir": "electives/advanced-electives/18-blue-green-deployments/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/18-blue-green-deployments/main.go",
-        "readme_path": "16-advanced-electives/18-blue-green-deployments/README.md",
+        "main_path": "electives/advanced-electives/18-blue-green-deployments/main.go",
+        "readme_path": "electives/advanced-electives/18-blue-green-deployments/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/18-blue-green-deployments/main_test.go"
+        "test_path": "electives/advanced-electives/18-blue-green-deployments/main_test.go"
       },
       "id": "elective-18",
       "learning_objective": "Understand and apply Blue/green deployments in the context of professional Go software engineering.",
@@ -3364,13 +3364,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/19-microservice-splitting/assets",
+        "assets_dir": "electives/advanced-electives/19-microservice-splitting/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/19-microservice-splitting/main.go",
-        "readme_path": "16-advanced-electives/19-microservice-splitting/README.md",
+        "main_path": "electives/advanced-electives/19-microservice-splitting/main.go",
+        "readme_path": "electives/advanced-electives/19-microservice-splitting/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/19-microservice-splitting/main_test.go"
+        "test_path": "electives/advanced-electives/19-microservice-splitting/main_test.go"
       },
       "id": "elective-19",
       "learning_objective": "Understand and apply Microservice splitting in the context of professional Go software engineering.",
@@ -3547,13 +3547,13 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "16-advanced-electives/20-deeper-distributed-systems/assets",
+        "assets_dir": "electives/advanced-electives/20-deeper-distributed-systems/assets",
         "diagram_paths": [],
-        "main_path": "16-advanced-electives/20-deeper-distributed-systems/main.go",
-        "readme_path": "16-advanced-electives/20-deeper-distributed-systems/README.md",
+        "main_path": "electives/advanced-electives/20-deeper-distributed-systems/main.go",
+        "readme_path": "electives/advanced-electives/20-deeper-distributed-systems/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "16-advanced-electives/20-deeper-distributed-systems/main_test.go"
+        "test_path": "electives/advanced-electives/20-deeper-distributed-systems/main_test.go"
       },
       "id": "elective-20",
       "learning_objective": "Understand and apply Deeper distributed systems in the context of professional Go software engineering.",
@@ -3675,7 +3675,7 @@
       "number": 17,
       "order": 17,
       "pacing": "moderate",
-      "path": "16-advanced-electives",
+      "path": "electives/advanced-electives",
       "phase": "elective",
       "portfolio_output": false,
       "prerequisites": [
@@ -3763,7 +3763,7 @@
     "readme-no-broken-human-readable-links"
   ],
   "repository_structure": [
-    "16-advanced-electives",
+    "electives/advanced-electives",
     "curriculum/path.core.json",
     "curriculum/path.electives.json",
     "curriculum/projects.json",
