@@ -123,7 +123,7 @@ func main() {
 |---|---|---|
 | Hand-editing manifests without running validators | Assuming JSON changes are valid without checking schema constraints | Run `go run ./internal/tools/curriculum validate-all` after any edit |
 | Confusing `curriculum/` manifests with lesson READMEs | Manifests declare the schema and graph; lesson READMEs contain the instructional prose | Keep metadata in `path.*.json` and human-facing teaching in the module folders |
-| Looking for legacy v2 directories (`metadata/`, `tools/`) | v2 directories were consolidated into `curriculum/` and `internal/tools/curriculum` in v3 | Reference the updated v3 structure documented in this lesson |
+| Looking for obsolete pre-v3 directories | Historical v2 folders were consolidated into `curriculum/` and `internal/tools/` in v3 | Reference the canonical v3 structure documented in this lesson |
 | Forgetting that `Lookup` returns `nil` | Dereferencing a nil pointer causes an immediate runtime panic in Go | Always check `if entry != nil` before accessing fields |
 
 ## Debugging walkthrough
