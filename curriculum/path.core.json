@@ -56908,7 +56908,7 @@
       },
       "readme_status": "scaffolded",
       "required_prior_knowledge": [
-        "Complete Module 15 â€” Portfolio, Collaboration, Interview Readiness, and Capstone Prep."
+        "Complete Module 15 — Docker, CI/CD, and Deployment (core-15-19). Technical capstone implementation requires end-to-end backend engineering, observability, architecture, and deployment foundations (Modules 00–15). Module 16 (Portfolio and Interview Readiness) and Module 17 (Electives) may be completed alongside or following the capstone."
       ],
       "slug": "opslane-foundation-and-configuration",
       "source_legacy_ids": [],

@@ -10,6 +10,7 @@
 - **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON files: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.
 - **Physical Curriculum:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/`.
 - **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern full-stack frontend engineering is defined as a companion path (semantic HTML, CSS, JavaScript fundamentals, progressive enhancement with Go templates/templ/HTMX/Tailwind).
+- **Capstone & Learning Path Flow:** Flagship Opslane (Module 18) directly requires the complete backend engineering and deployment runbook foundation of Module 15 (`core-15-19`). Module 16 (Portfolio and Interview Readiness) is intentionally decoupled from technical implementation so learners can construct their flagship capstone first, producing the production artifact that Module 16 packages for interviews. Module 17 (Advanced Electives) is an independent elective track and not on the mandatory capstone path.
 
 ## Quick Stats
 
