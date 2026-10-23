@@ -111,6 +111,14 @@ func (s *CachedOrderService) GetOrder(ctx context.Context, id string) (*OrderRec
 
 	// 2. Cache Miss: Singleflight synchronization prevents cache stampedes
 	v, err, _ := s.sfGroup.Do(cacheKey, func() (any, error) {
+		// Double-check cache inside singleflight barrier in case a concurrent flight populated it
+		if data, hit := s.cache.Get(cacheKey); hit {
+			var o OrderRecord
+			if err := json.Unmarshal(data, &o); err == nil {
+				return &o, nil
+			}
+		}
+
 		s.dbReads.Add(1)
 		order, err := s.store.FetchOrder(ctx, id)
 		if err != nil {

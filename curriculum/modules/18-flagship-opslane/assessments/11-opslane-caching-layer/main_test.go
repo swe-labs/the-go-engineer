@@ -90,12 +90,15 @@ func TestCachedOrderService_SingleflightStampede(t *testing.T) {
 	var wg sync.WaitGroup
 	wg.Add(concurrentCallers)
 
+	start := make(chan struct{})
 	for i := 0; i < concurrentCallers; i++ {
 		go func() {
 			defer wg.Done()
+			<-start
 			_, _ = service.GetOrder(context.Background(), "ord-stampede-3")
 		}()
 	}
+	close(start)
 
 	wg.Wait()
 
