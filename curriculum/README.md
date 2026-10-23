@@ -52,7 +52,7 @@
 | 15  | **Docker, CI/CD, and Deployment** | delivery | stable | 19 | 0 | 1 | 2 | 22 | `curriculum/modules/15-docker-cicd-deployment` |
 | 16  | **Portfolio and Interview Readiness** | career | stable | 15 | 0 | 1 | 2 | 18 | `curriculum/modules/16-portfolio-interview-readiness` |
 | 18  | **Flagship Opslane** | flagship | stable | 0 | 15 | 2 | 16 | 33 | `curriculum/modules/18-flagship-opslane` |
-| 17  | **Advanced Electives** | elective | draft | 20 | 0 | 0 | 0 | 20 | `curriculum/path.electives.json` |
+| 17  | **Advanced Electives** | elective | draft | 20 | 0 | 0 | 0 | 20 | `curriculum/electives/advanced-electives` |
 | —   | **Core Subtotal** | — | — | **321** | **15** | **28** | **57** | **421** | *(Modules 00–16, 18)* |
 | —   | **Total Curriculum** | — | — | **341** | **15** | **28** | **57** | **441** | *(421 core items + 20 electives)* |
 
@@ -115,6 +115,8 @@ curriculum/
     15-docker-cicd-deployment/
     16-portfolio-interview-readiness/
     18-flagship-opslane/
+  electives/
+    advanced-electives/
   companion-frontend/
     README.md
   assessments.json

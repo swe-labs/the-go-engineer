@@ -2,62 +2,94 @@
 
 ## Mission
 
-Understand and apply Opslane order processing in the context of professional Go software engineering.
+Build a deterministic order lifecycle state machine and transactional orchestration engine in Go, enforcing valid status transitions, serializable ACID transaction semantics, external payment integration, and immutable audit logging.
 
 ## Prerequisites
 
-- opslane-06
+- `opslane-06`
 
 ## Mental Model
 
-Order processing is a saga — a sequence of steps where each step has a compensating action for rollback. Reserve inventory (compensate: release inventory), charge payment (compensate: refund), create order (compensate: cancel order). The saga must handle partial failures: if step 3 fails after step 2 succeeded, the saga runs the compensating action for step 2. The idempotency key at the top level ensures that retries do not create duplicate orders. The payment-specific idempotency key ensures that the payment gateway is not called twice for the same charge.
+E-commerce and financial order processing cannot tolerate undefined states, partial executions, or double charges. An order must progress strictly through allowed state transitions: an order in `COMPLETED` or `CANCELLED` status cannot be reprocessed. In Opslane, the order lifecycle is governed by an explicit state transition matrix (`AllowedTransitions`). Processing an order wraps status progression, external payment authorization, and audit log generation in a single atomic database transaction with `LevelSerializable` isolation. If payment fails or a crash occurs, `defer tx.Rollback()` ensures the database reverts to its exact prior state.
 
 ## Visual Model
 
 ```text
-input -> concept boundary -> behavior -> observable result
+               ┌──────────┐
+               │ PENDING  │
+               └────┬─────┘
+                    │
+         ┌──────────┴──────────┐
+         │ (ProcessOrder)      │ (CancelOrder)
+         ▼                     ▼
+  ┌────────────┐        ┌───────────┐
+  │ PROCESSING │        │ CANCELLED │ [Terminal]
+  └──────┬─────┘        └───────────┘
+         │
+    ┌────┴──────────────────────────┐
+    │ Payment Gateway Execution     │
+    ├─────────────────┬─────────────┤
+    │ Success         │ Failure     │
+    ▼                 ▼             │
+┌───────────┐   ┌─────────┐         │
+│ COMPLETED │   │ FAILED  ├─────────┘ (Retry Capability)
+└───────────┘   └─────────┘
+ [Terminal]
 ```
 
 ## Machine View
 
-The saga pattern is implemented using local database transactions for local state and compensating API calls for external side effects. The local transaction handles inventory reservation and order creation atomically. The payment gateway call is outside the transaction (it cannot be inside a SQL transaction) — if it fails, the transaction is rolled back, releasing the inventory reservation. If the local transaction fails after payment succeeds, a refund is issued. The idempotency key is stored before the transaction begins (for the overall order) and before the payment call (for the payment). In Go, the saga is implemented as a state machine: OrderState transitions from Pending → PaymentPending → Confirmed → Fulfilled, with compensating transitions for each failure. The state machine is persisted in the database and retried by a background worker if the handler crashes mid-saga.
+Under the hood:
+1. `AllowedTransitions` enforces that `COMPLETED` and `CANCELLED` states have zero allowed outbound transitions, guaranteeing immutability once finalized.
+2. `db.BeginTx(ctx, &sql.TxOptions{Isolation: sql.LevelSerializable})` guarantees the highest degree of transaction isolation, preventing dirty reads, non-repeatable reads, and phantom reads under concurrent access.
+3. If `op.gateway.ProcessPayment()` returns an error, the handler returns early without calling `tx.Commit()`. The deferred `tx.Rollback()` executes automatically, discarding the intermediate `PROCESSING` status update and ensuring the order remains in its original status.
+4. An immutable audit record is inserted within the same transaction commit, guaranteeing an unforgeable trace of the order's completion.
 
 ## Run Instructions
 
 ```bash
-Read the lesson and complete the practice task.
-go test ./curriculum/modules/18-flagship-opslane/assessments/07-opslane-order-processing
+# Run order processing test suite
+go test -v ./curriculum/modules/18-flagship-opslane/assessments/07-opslane-order-processing
+
+# Run standalone demo
+go run ./curriculum/modules/18-flagship-opslane/assessments/07-opslane-order-processing
 ```
 
 ## Code Walkthrough
 
-Read the code from top to bottom. Connect each line to the mental model above. The important question is not only what the line does, but why the program needs that line.
+1. **State Machine Definition (lines 20–50)**: Defines `OrderStatus` constants, `AllowedTransitions` map, and `CanTransition` validator.
+2. **`PaymentGateway` Interface (lines 53–55)**: Inverts external payment processing dependency.
+3. **`OrderProcessor` & Schema (lines 57–85)**: Sets up database tables for `orders` and `audit_logs`.
+4. **`ProcessOrder` Workflow (lines 88–144)**:
+   - Starts serializable transaction with `defer tx.Rollback()`.
+   - Reads current status and amount.
+   - Evaluates `CanTransition(currentStatus, StatusProcessing)`.
+   - Updates status to `PROCESSING`.
+   - Invokes external `gateway.ProcessPayment(ctx, orderID, amount)`.
+   - On payment failure: aborts and rolls back transaction.
+   - On payment success: updates status to `COMPLETED`, writes audit log, and commits transaction.
 
 ## Try It
 
-1. Run the command exactly as shown.
-2. Change one input.
-3. Predict the output before running again.
-4. Explain the result in your own words.
+1. Run the test suite: verify that an order advances from PENDING to COMPLETED.
+2. Test payment failure: inject a failing gateway and verify that `ProcessOrder` rolls back, leaving the order in PENDING.
+3. Test terminal state protection: attempt to reprocess a COMPLETED order and verify `ErrInvalidStateTransition` is returned.
 
 Common mistakes:
-
-- Not using idempotency keys for payment processing — a network retry causes the payment gateway to charge the customer twice, and the duplicate charge is invisible until the customer reports it on their credit card statement.
-- Calling the payment gateway inside the HTTP handler without a timeout — a slow gateway blocks the handler for 60 seconds, exhausting the goroutine pool and causing all other requests to time out.
-- Acknowledging a queue message before processing completes — if the handler crashes after acknowledgement but before the order is persisted, the order is lost forever.
-- Assuming inventory reservation is synchronous — reserving inventory in a transaction that commits successfully does not guarantee the inventory is actually available if the reservation expires before fulfillment.
-- Logging credit card numbers or CVV in payment error logs — PCI DSS violation, immediate compliance failure, and the logs become a legal liability.
+- Not using `defer tx.Rollback()`, leaving open transactions and locks if an error returns before commit.
+- Updating database status before verifying payment authorization, risking stranded "completed" orders when payments fail.
+- Allowing status transitions from arbitrary strings without validating against a state machine.
 
 ## In Production
 
-Every e-commerce platform implements order processing as a saga. Shopify, Stripe, and Amazon all handle order processing with idempotency keys, inventory locking, and compensating transactions for payment refunds. Opslane's order processing must handle: (1) duplicate order creation (idempotency key), (2) payment failure after inventory reservation (release inventory), (3) inventory oversell under concurrent load (SELECT FOR UPDATE), and (4) payment gateway timeout (async reconciliation via webhook).
+In distributed e-commerce backends, payment calls should be designed with idempotency keys so that network timeouts can be retried without double charging the customer. If an external payment provider is slow, short context timeouts prevent database connections and transaction locks from being held indefinitely.
 
 ## Thinking Questions
 
-1. What problem does this concept solve?
-2. What would break if this concept were removed?
-3. How would you test the behavior?
+1. Why should `defer tx.Rollback()` always be called immediately after `db.BeginTx()`?
+2. What are the risks of performing an external network RPC (like a payment gateway) inside an open database transaction?
+3. How does the state machine allow failed orders to be retried while preventing completed orders from being reprocessed?
 
 ## Next Step
 
-Continue to the next item listed in metadata: `opslane-08`.
+Proceed to [Milestone 08 — Payment Pipeline](../08-opslane-payment-pipeline/README.md) to implement idempotent payment charging, provider webhooks, and ledger transactions.

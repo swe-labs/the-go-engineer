@@ -5,12 +5,9 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"io"
-	"io/fs"
 	"log/slog"
 	"os"
 	"path/filepath"
-	"strings"
 	"time"
 )
 

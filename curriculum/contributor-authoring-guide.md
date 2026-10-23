@@ -292,6 +292,21 @@ handle tens of thousands of concurrent connections."
 
 ---
 
+## Visual Models & Mermaid Diagrams
+
+Every project README and lesson concept that involves runtime coordination, memory layouts, or layered architecture must include a visual model. We standardize on GitHub-renderable Mermaid syntax or ASCII memory word boxes.
+
+### Guidelines for Authors:
+1. **Choose the Right Diagram Type**:
+   - `sequenceDiagram`: Best for concurrency/synchronization handshakes (channels, mutexes, worker rendezvous) and middleware call stacks.
+   - `flowchart TD` or `flowchart LR`: Best for hexagonal architecture (ports & adapters), data processing pipelines, and fan-out/fan-in.
+   - `stateDiagram-v2`: Best for entity states, connection lifecycle (`Idle` -> `Active` -> `Evicted`), and circuit breakers.
+   - ASCII Word Layouts: Best for low-level memory word offsets (e.g. slice header `ptr | len | cap`, interface `tab | data`).
+2. **Eliminate Abstract Placeholders**: Every node and arrow label must be a concrete Go type, channel direction, or system boundary. Never write `Service A -> Service B` without concrete protocols, or `Input -> Logic -> Output`.
+3. **Always Anchor with a Caption**: Include a 1-sentence caption directly under the diagram specifying the exact mechanical invariant illustrated.
+
+---
+
 ## Recommended Fields
 
 The 9 required fields above are the minimum. Add these recommended fields when the lesson's topic matches the spec's trigger tables:

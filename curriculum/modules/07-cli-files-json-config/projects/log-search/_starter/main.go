@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"context"
 	"errors"
 	"flag"
@@ -9,7 +8,6 @@ import (
 	"io"
 	"log/slog"
 	"os"
-	"regexp"
 	"strings"
 )
 

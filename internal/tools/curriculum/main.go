@@ -46,6 +46,9 @@ func main() {
 		fmt.Println("  validate-operational-failures Check operational failure taxonomy completeness and consistency")
 		fmt.Println("  validate-failure-engineering  Check critical items have operational failure examples")
 		fmt.Println("  validate-zero-magic           Check golden lessons meet authoring spec")
+		fmt.Println("  validate-physical-artifacts   Check all 441 items have verified physical files on disk")
+		fmt.Println("  validate-assessment-artifacts Check all assessments have complete 4-file suites (README, questions, rubric, answer-key)")
+		fmt.Println("  validate-starter-parity       Check project starters and solutions parse with valid Go ASTs")
 		fmt.Println("  validate-all                 Run all validators")
 		os.Exit(1)
 	}
@@ -80,6 +83,12 @@ func main() {
 		validateFailureEngineering()
 	case "validate-zero-magic":
 		validateZeroMagic()
+	case "validate-physical-artifacts":
+		validatePhysicalArtifacts()
+	case "validate-assessment-artifacts":
+		validateAssessmentArtifacts()
+	case "validate-starter-parity":
+		validateStarterParity()
 	case "validate-all":
 		validateSchema()
 		validateGraph()
@@ -95,6 +104,9 @@ func main() {
 		validateOperationalFailures()
 		validateFailureEngineering()
 		validateZeroMagic()
+		validatePhysicalArtifacts()
+		validateAssessmentArtifacts()
+		validateStarterParity()
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown command: %s\n", cmd)
 		os.Exit(1)

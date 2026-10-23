@@ -17,7 +17,6 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var (
@@ -386,7 +385,13 @@ func (a *APIHandler) handleMe(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *APIHandler) handleCreateDoc(w http.ResponseWriter, r *http.Request) {
-	claims, _ := ClaimsFromContext(r.Context())
+	claims, ok := ClaimsFromContext(r.Context())
+	if !ok || claims == nil {
+		writeJSON(w, http.StatusUnauthorized, JSONResponse{
+			Error: &APIError{Code: "UNAUTHORIZED", Message: "Missing authentication context"},
+		})
+		return
+	}
 	var req CreateDocumentRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		writeJSON(w, http.StatusBadRequest, JSONResponse{
@@ -407,7 +412,13 @@ func (a *APIHandler) handleCreateDoc(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *APIHandler) handleGetDoc(w http.ResponseWriter, r *http.Request) {
-	claims, _ := ClaimsFromContext(r.Context())
+	claims, ok := ClaimsFromContext(r.Context())
+	if !ok || claims == nil {
+		writeJSON(w, http.StatusUnauthorized, JSONResponse{
+			Error: &APIError{Code: "UNAUTHORIZED", Message: "Missing authentication context"},
+		})
+		return
+	}
 	id := r.PathValue("id")
 
 	doc, err := a.store.GetDocument(id)
@@ -430,7 +441,13 @@ func (a *APIHandler) handleGetDoc(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *APIHandler) handleDeleteDoc(w http.ResponseWriter, r *http.Request) {
-	claims, _ := ClaimsFromContext(r.Context())
+	claims, ok := ClaimsFromContext(r.Context())
+	if !ok || claims == nil {
+		writeJSON(w, http.StatusUnauthorized, JSONResponse{
+			Error: &APIError{Code: "UNAUTHORIZED", Message: "Missing authentication context"},
+		})
+		return
+	}
 	id := r.PathValue("id")
 
 	doc, err := a.store.GetDocument(id)

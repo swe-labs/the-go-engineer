@@ -148,13 +148,16 @@ Do diagrams clarify rather than decorate?
 
 **4+ criteria:**
 
-- Diagram reveals something the text cannot (memory layout, timeline, state machine)
-- Diagram has a caption explaining what to observe
+- Diagram reveals something the text cannot (memory layout, timeline, state machine, port/adapter boundaries)
+- Rendered using standard Mermaid (`sequenceDiagram`, `flowchart`, `stateDiagram-v2`, `erDiagram`) or explicit ASCII memory word boxes
+- Zero generic placeholder nodes; every node represents concrete Go types, channels, goroutines, or system components
+- Diagram has a caption explaining what to observe and what runtime state transition occurs
 - Diagram is referenced from the text at the point it is needed
 
 **2–3 signals:**
 
-- Diagram is decorative (adds no new information)
+- Diagram is decorative or generic (`input -> box -> output` with no domain semantics)
+- Syntax errors or unquoted labels that break markdown rendering
 - Diagram is not referenced from the text
 - Diagram is placed before the concept is introduced
 

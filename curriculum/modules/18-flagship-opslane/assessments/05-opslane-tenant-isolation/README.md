@@ -2,62 +2,91 @@
 
 ## Mission
 
-Understand and apply Opslane tenant isolation in the context of professional Go software engineering.
+Enforce strict multi-tenant data isolation across the persistence layer, combining context-bound tenant propagation, composite primary keys `(tenant_id, id)`, and automatic query scoping to prevent cross-tenant data leakage.
 
 ## Prerequisites
 
-- opslane-04
+- `opslane-04`
 
 ## Mental Model
 
-Tenant isolation is a data firewall between tenants. Every database query must include a tenant_id filter. Every cache key must include the tenant_id. Every queue message must include the tenant_id. Every API response must include only the requesting tenant's data. The tenant_id is not a parameter — it is a security boundary enforced at the infrastructure layer (database, cache, queue) and validated at the application layer (middleware, service, repository).
+In multi-tenant SaaS architectures, data leaks between corporate accounts represent existential business and legal failures. A naive design where repository methods take an unverified `tenantID` string as an argument relies on developer discipline and is prone to human error. Opslane enforces an architectural defense-in-depth model: repository methods extract the verified tenant identity strictly from `context.Context` via `TenantFromContext()`. If the context lacks tenant identity, the operation fails immediately (`ErrMissingTenantContext`). At the database level, composite primary keys `(tenant_id, id)` and mandatory `WHERE tenant_id = ?` clauses ensure that even if an attacker acquires an entity ID from a competing tenant, the database returns no rows.
 
 ## Visual Model
 
 ```text
-input -> concept boundary -> behavior -> observable result
+┌─────────────────────────────────────────────────────────────┐
+│ Authenticated HTTP Request Context                          │
+│   ctx = ContextWithTenant(ctx, "tenant-acme")               │
+└──────────────────────────────┬──────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│ IsolatedStore Data Access Methods                           │
+│   Create, GetByID, List, Update, Delete                     │
+│   ├─► tenantID, err := TenantFromContext(ctx)               │
+│   └─► If err != nil -> Abort: ErrMissingTenantContext       │
+└──────────────────────────────┬──────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│ Relational SQL Execution                                    │
+│   - Primary Key: (tenant_id, id)                            │
+│   - SELECT ... WHERE tenant_id = ? AND id = ?               │
+│   - UPDATE ... WHERE tenant_id = ? AND id = ?               │
+│   - DELETE ... WHERE tenant_id = ? AND id = ?               │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ## Machine View
 
-Tenant isolation in Go is enforced at the repository layer using context-scoped values. The middleware stores the tenant ID in context using a typed key (type tenantKeyType struct{} to prevent key collisions). The repository base type (or a query builder wrapper) extracts the tenant ID and appends it to every SQL query's WHERE clause. For PostgreSQL, a composite index on (tenant_id, ...) ensures efficient filtering even with millions of rows per tenant. For Redis, cache keys include the tenant_id prefix (e.g., acme-corp:order:123). For message queues, the message header includes the tenant_id, and consumers filter by tenant_id before processing. Testing tenant isolation requires two tenants with identical data shapes and randomized data — the test asserts that queries scoped to tenant A return only A's data even when B's IDs are known.
+Under the hood:
+1. `TenantFromContext` retrieves the unexported `tenantContextKey` from the active context. Missing or blank keys abort before executing database transactions.
+2. The table `tenant_orders` defines `PRIMARY KEY (tenant_id, id)`. This B-tree index layout clusters all rows belonging to a tenant together physically on disk, optimizing cache locality and range scans.
+3. Every mutating statement (`UPDATE`, `DELETE`) inspects `res.RowsAffected()`. If a caller attempts to update or delete an order with ID `"ord-1"` but their context specifies `tenant-beta` while the order belongs to `tenant-alpha`, `RowsAffected` evaluates to `0`, preventing unauthorized modification.
 
 ## Run Instructions
 
 ```bash
-Read the lesson and complete the practice task.
-go test ./curriculum/modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation
+# Run tenant isolation test suite
+go test -v ./curriculum/modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation
+
+# Run standalone verification demo
+go run ./curriculum/modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation
 ```
 
 ## Code Walkthrough
 
-Read the code from top to bottom. Connect each line to the mental model above. The important question is not only what the line does, but why the program needs that line.
+1. **Context Management (lines 14–32)**: Implements `ContextWithTenant` and `TenantFromContext` with sentinel `ErrMissingTenantContext`.
+2. **`TenantOrder` Struct (lines 35–41)**: Models orders with explicit `tenant_id` association.
+3. **`IsolatedStore` & Schema (lines 44–64)**: Sets up `tenant_orders` table with composite primary key `(tenant_id, id)`.
+4. **Isolated CRUD Operations (lines 67–178)**:
+   - `Create`: Extracts tenant from context; binds to new order.
+   - `GetByID`: Enforces `tenant_id = ? AND id = ?`; returns `nil, nil` on `sql.ErrNoRows`.
+   - `List`: Scopes orders strictly to `WHERE tenant_id = ? ORDER BY created_at DESC`.
+   - `Update` & `Delete`: Modifies rows strictly within the tenant boundary and verifies `RowsAffected() > 0`.
 
 ## Try It
 
-1. Run the command exactly as shown.
-2. Change one input.
-3. Predict the output before running again.
-4. Explain the result in your own words.
+1. Run the test suite: verify that tenant A cannot access, update, or delete tenant B's orders.
+2. Attempt an operation with `context.Background()` lacking tenant context: verify `ErrMissingTenantContext` is returned.
+3. Inspect database row count: verify that multi-tenant orders coexist in the same table without collisions.
 
 Common mistakes:
-
-- Adding WHERE tenant_id = ? to queries but forgetting it in one query — a single un-scoped query leaks all tenants' data to every tenant, and the bug is invisible until a customer reports seeing another tenant's data.
-- Using tenant_id from the URL path instead of the authenticated session — a tenant A user can change the URL path to tenant B's ID and access B's data if the middleware does not validate ownership.
-- Sharing a single connection pool across all tenants — one tenant's slow query blocks the pool, starving all other tenants and causing cross-tenant latency impact.
-- Including tenant_id in error messages or logs — a stack trace with tenant-specific identifiers in a shared log aggregator leaks tenant information to the on-call engineer who may not have authorization for that tenant.
-- Using a single database schema for all tenants without a tenant_id column — adding tenant isolation after launch requires a full data migration with downtime.
+- Passing tenant IDs as function arguments rather than deriving them from validated context tokens.
+- Omission of `tenant_id` in `UPDATE` or `DELETE` statements, which can accidentally overwrite or purge all tenants' data.
+- Relying on client-supplied headers (e.g. `X-Tenant-ID`) without verifying cryptographic JWT signatures.
 
 ## In Production
 
-Every SaaS platform implementing multi-tenancy depends on tenant isolation. GitHub uses organization-level isolation — every query includes the org ID. Slack uses workspace-level isolation. Opslane uses tenant-level isolation with a tenant_id in every table and every API response. A tenant leak at GitHub, Slack, or Opslane would be a P0 security incident with legal and regulatory consequences.
+In production PostgreSQL deployments, organizations often supplement application-level context isolation with Row-Level Security (RLS) policies (`CREATE POLICY tenant_isolation ON tenant_orders USING (tenant_id = current_setting('app.current_tenant'))`). This ensures defense-in-depth: even if an engineer writes a raw SQL query forgetting `WHERE tenant_id = ?`, the database engine automatically restricts visibility.
 
 ## Thinking Questions
 
-1. What problem does this concept solve?
-2. What would break if this concept were removed?
-3. How would you test the behavior?
+1. Why is deriving `tenant_id` from `context.Context` more secure than passing it as a URL query parameter or function argument?
+2. What are the query performance benefits of composite primary key `(tenant_id, id)` compared to a standalone UUID `id`?
+3. How does PostgreSQL Row-Level Security (RLS) reinforce application-level tenant isolation?
 
 ## Next Step
 
-Continue to the next item listed in metadata: `opslane-06`.
+Proceed to [Milestone 06 — HTTP API Layer](../06-opslane-http-api-layer/README.md) to integrate routing, request decoding, standard JSON envelopes, and RESTful CRUD endpoints.

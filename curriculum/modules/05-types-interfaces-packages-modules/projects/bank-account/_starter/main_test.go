@@ -108,7 +108,10 @@ func TestAccountPolymorphism_Transfer(t *testing.T) {
 }
 
 func TestConcurrentAccountAccess(t *testing.T) {
-	acc, _ := NewCheckingAccount("chk-concurrent", "Dan", 100000, 0)
+	acc, err := NewCheckingAccount("chk-concurrent", "Dan", 100000, 0)
+	if err != nil {
+		t.Fatalf("unexpected error creating account: %v", err)
+	}
 
 	const goroutines = 20
 	const iterations = 50

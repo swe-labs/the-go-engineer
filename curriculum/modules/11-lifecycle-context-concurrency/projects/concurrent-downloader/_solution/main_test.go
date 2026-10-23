@@ -82,7 +82,10 @@ func TestConcurrentDownloader_RetryOnTransientFailure(t *testing.T) {
 
 	results := downloader.DownloadAll(t.Context(), jobs)
 
-	if len(results) != 1 || results[0].Error != nil {
+	if len(results) != 1 {
+		t.Fatalf("expected 1 result, got %d", len(results))
+	}
+	if results[0].Error != nil {
 		t.Fatalf("expected successful recovery on retry, got %v", results[0].Error)
 	}
 	if results[0].Retries != 1 {

@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -16,6 +17,7 @@ import (
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
+	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/trace"
 )
 
@@ -60,18 +62,25 @@ func GenerateID() string {
 }
 
 type OrderService struct {
-	mu     sync.RWMutex
-	orders map[string]Order
-	// TODO: Task 1 & 2 & 3 - Integrate Metrics, Tracer, and Structured Logger
+	mu      sync.RWMutex
+	orders  map[string]Order
 	metrics *MetricsRegistry
 	tracer  trace.Tracer
+	logger  *slog.Logger
 }
 
-func NewOrderService(metrics *MetricsRegistry, tracer trace.Tracer) *OrderService {
+func NewOrderService(metrics *MetricsRegistry, tracer trace.Tracer, logger *slog.Logger) *OrderService {
+	if tracer == nil {
+		tracer = otel.GetTracerProvider().Tracer("order-service")
+	}
+	if logger == nil {
+		logger = slog.Default()
+	}
 	return &OrderService{
 		orders:  make(map[string]Order),
 		metrics: metrics,
 		tracer:  tracer,
+		logger:  logger,
 	}
 }
 
@@ -194,7 +203,7 @@ func NewHTTPHandler(svc *OrderService, gatherer prometheus.Gatherer) http.Handle
 
 func main() {
 	metrics := NewMetricsRegistry(nil)
-	svc := NewOrderService(metrics, nil)
+	svc := NewOrderService(metrics, nil, nil)
 	handler := NewHTTPHandler(svc, nil)
 
 	server := &http.Server{

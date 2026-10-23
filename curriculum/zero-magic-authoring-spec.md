@@ -218,6 +218,34 @@ Each step is a plain string in a JSON array; the `→` prefix is the visual indi
 
 ---
 
+## Visual Model & Mermaid Diagram Standard
+
+Every curriculum README and lesson specifying a `## Visual model` must provide a concrete, fully-rendered Mermaid diagram (or mechanical ASCII layout if documenting raw memory word offsets). Mental models in Go systems engineering require spatial and temporal anchoring: describing concurrent interleavings or middleware recursion purely in prose invites dangerous misconceptions.
+
+### Go Domain to Mermaid Syntax Mapping
+
+| Domain / Concept Area | Preferred Mermaid Syntax | Mechanical Purpose | Example Use Case |
+|---|---|---|---|
+| **Concurrency & Synchronization** | `sequenceDiagram` | Channel send/recv handshakes, `select` fairness, mutex contention, worker rendezvous. | `goroutine-leaks`, `channel-buffering`, `bounded-worker-pool` |
+| **HTTP Middleware & Request Lifecycle** | `sequenceDiagram` | Onion-style wrap (`ServeHTTP` recursion), context deadline propagation, response interception. | `middleware-chains`, `correlation-id`, `book-catalog-rest-api` |
+| **System Architecture & Packaging** | `flowchart TD` or `flowchart LR` | Hexagonal ports and adapters, Clean Architecture boundaries, package dependency graph. | `clean-architecture`, `modular-refactor-review`, `opslane` |
+| **Pipelines & Worker Pools** | `flowchart LR` | Data streaming, fan-out/fan-in worker topologies, backpressure queueing. | `bounded-worker-pool`, `concurrent-downloader`, `stream-processing` |
+| **Lifecycle & State Transitions** | `stateDiagram-v2` | Entity lifecycle, connection pool state transitions (`Idle` -> `Active` -> `Closed`), circuit breakers. | `database-pooling`, `task-api-with-postgres`, `url-health-checker` |
+| **Data Structures & Memory Offsets** | `flowchart TD` or ASCII box | Slice headers (`ptr`, `len`, `cap`), interface two-word `eface`/`iface` structures, ring buffers. | `slice-internals`, `interface-internals`, `bank-account` |
+| **Database Schemas & Relations** | `erDiagram` | Multi-tenant isolation, foreign keys, cascade constraints. | `task-api-with-postgres`, `secure-authenticated-api` |
+| **Version Control & Migrations** | `gitGraph` | Database schema migration forward/rollback chains, git trunk workflows. | `database-migrations`, `dockerized-service-with-ci-cd` |
+
+### Authoring Rules & Quality Gates for Diagrams
+
+1. **Zero Generic Placeholders**: Never use abstract placeholders (e.g. `input -> concept boundary -> behavior -> observable result`). Every node and edge must represent a concrete Go type, channel, goroutine, or system component.
+2. **Syntax Safety**:
+   - Always quote labels containing spaces, punctuation, or Go syntax (e.g. `G1["Goroutine 1: producer"] -->|"ch <- item"| C["Buffered Channel (cap=4)"]`).
+   - All blocks (`subgraph`, `loop`, `alt`, `opt`) must have matching `end` delimiters.
+   - Do not inject raw HTML tags (`<br>`, `<div >`) that break non-browser renderers; use Mermaid newline syntax `\n` or standard labels.
+3. **Coupled Narrative**: A diagram cannot stand alone. It must be accompanied by a caption explaining what critical transition to observe, and immediately connect into the `## Machine view` or execution mechanics.
+
+---
+
 ## Validator Integration
 
 The curriculum tool checks golden lessons via `validate-zero-magic` for:

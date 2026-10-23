@@ -6,7 +6,6 @@ import (
 	"log/slog"
 	"os"
 	"regexp"
-	"strings"
 	"sync/atomic"
 )
 

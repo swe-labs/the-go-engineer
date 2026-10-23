@@ -104,11 +104,13 @@ func TestWorkerPool_BackpressureAndQueueFull(t *testing.T) {
 	release := make(chan struct{})
 
 	// Occupy worker
-	_ = pool.Submit(func(ctx context.Context) error {
+	if err := pool.Submit(func(ctx context.Context) error {
 		close(started)
 		<-release
 		return nil
-	})
+	}); err != nil {
+		t.Fatalf("failed to submit worker job: %v", err)
+	}
 
 	<-started
 
