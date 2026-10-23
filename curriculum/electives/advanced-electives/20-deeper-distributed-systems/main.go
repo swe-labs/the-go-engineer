@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates Deeper distributed systems.
 func Demo() string {
-    return "Deeper distributed systems verified"
+	return "Deeper distributed systems verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

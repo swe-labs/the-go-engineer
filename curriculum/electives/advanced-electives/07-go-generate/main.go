@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates go generate.
 func Demo() string {
-    return "go generate verified"
+	return "go generate verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

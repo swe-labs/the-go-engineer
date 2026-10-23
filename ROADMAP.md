@@ -1,95 +1,57 @@
-# Project Status and Maintenance Plan
+# Project Status and Maintenance Plan (v3)
 
-This document describes the stable v2.1 project state and the maintenance plan for future work.
+This document describes the project state and maintenance plan for **The Go Engineer v3**.
 
 If this document and [ARCHITECTURE.md](./ARCHITECTURE.md) disagree on public curriculum structure, `ARCHITECTURE.md` is authoritative.
 
 ## Current State
 
-The v2.1 architecture is stable and locked.
+The v3 curriculum is implemented on branch `release/v3`.
 
-Current stable release: `v2.1.1`
+The repository features:
 
-The repository now has:
-
-- 5 public learning phases
-- 12 public sections, `s00` through `s11`
-- 215 registered curriculum items in `curriculum.v2.json`
-- strict curriculum validation through `go run ./scripts/validate_curriculum.go`
-- CI-equivalent local verification, including race tests
-- an integrated flagship backend path in `s11`
+- 18 core modules organized canonically in `curriculum/modules/`
+- 421 core path items in `curriculum/path.core.json`
+- Flagship Opslane Capstone in Module 18 with 15 progressive milestones
+- 20 Advanced Electives in `curriculum/electives/advanced-electives/`
+- Companion Full-Stack Frontend Track in `curriculum/companion-frontend/`
+- Complete reference solutions (`_solution/`) and student starter templates (`_starter/`)
+- 17 automated curriculum quality gates in `internal/tools/curriculum`
 
 ## Branch Model
 
-| Branch       | Role                                                 |
-| ------------ | ---------------------------------------------------- |
-| `main`       | active post-v2.1 implementation and integration line |
-| `release/v2` | stable v2.1.x maintenance line                       |
-| `release/v1` | stable v1 maintenance line                           |
-
-Work that should affect stable v2.1 users must land on or be backported to `release/v2`. Work that expands future depth without changing the stable release line belongs on `main`.
-
-## Stable Snapshot
-
-| Area                | Status          | Standard                                                                 |
-| ------------------- | --------------- | ------------------------------------------------------------------------ |
-| Public architecture | Stable          | 12 sections locked by `ARCHITECTURE.md`                                  |
-| Curriculum registry | Stable          | 12 sections and 215 items validated                                      |
-| Lesson structure    | Stable          | README-first contract enforced by validator                              |
-| Section READMEs     | Stable          | section maps align with architecture and curriculum metadata             |
-| Validator           | Stable          | strict checks fail on structural drift                                   |
-| Tests               | Stable          | build, vet, unit tests, race tests, and coverage generation pass locally |
-| Opslane flagship    | Stable baseline | integrated backend capstone remains open for future depth on `main`      |
-| Workflow docs       | Stable          | issue, PR, review, and release workflow documented                       |
-
-## Version Plan
-
-| Version   | Line         | Purpose                                                                        |
-| --------- | ------------ | ------------------------------------------------------------------------------ |
-| `v2.1.1`  | `release/v2` | stable curriculum completion and public documentation alignment                |
-| `v2.1.x`  | `release/v2` | low-risk fixes, docs corrections, validator fixes, dependency/security updates |
-| post-v2.1 | `main`       | future lesson depth, flagship expansion, and tooling improvements              |
+| Branch | Role |
+|---|---|
+| `main` | active development and next-generation feature work |
+| `release/v3` | active v3 release preparation and maintenance line |
+| `release/v2` | legacy v2.1.x maintenance line (archived) |
 
 ## Maintenance Rules
 
 Normal maintenance may:
 
-- correct lesson explanations, tests, or examples
-- improve public documentation
-- strengthen validators and CI
-- fix learner navigation, metadata, or README/source mismatches
-- deepen Opslane without changing the public 12-section spine
+- refine lesson explanations, tests, and starter code
+- improve public documentation and diagrams
+- enhance automated quality tooling in `internal/tools/curriculum`
+- address community feedback, errata, and dependency updates
 
 Normal maintenance must not:
 
-- add a new public root section
-- rename canonical section folders
-- move a lesson prefix to another section without explicit architecture approval
-- weaken validator checks to hide drift
-- publish a release without a clean verification record
+- introduce breaking changes to the 18-module progression without schema migration
+- bypass zero-magic pedagogical standards
+- weaken curriculum quality gates to mask drift
+- publish unverified commits to release branches
 
 ## Release Readiness
 
-A stable release is ready only when:
+A release is ready only when:
 
-- public docs, `ARCHITECTURE.md`, and `curriculum.v2.json` agree
+- public documentation and `curriculum/` metadata agree
 - `go build ./...` passes
 - `go vet ./...` passes
-- gofmt check passes
-- `go mod tidy` produces no `go.mod` or `go.sum` diff
-- `go test ./...` passes
-- `go test -race ./...` passes
-- `go test -coverprofile coverage.out ./...` passes
-- `go run ./scripts/validate_curriculum.go` reports success
-- GitHub CI is green
-- the release branch and tag are created from the verified commit
-
-## Current Focus
-
-After `v2.1.1`, development should stay bounded:
-
-1. maintain the stable v2.1.x line with small, auditable fixes
-2. improve Opslane depth on `main`
-3. keep validator coverage strict
-4. preserve public documentation as the accurate project mirror
-5. avoid architecture churn unless a future major version is explicitly planned
+- `gofmt -l .` reports 0 unformatted files
+- `go mod tidy` produces no diff in `go.mod` or `go.sum`
+- `go test ./...` passes 100%
+- `go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...` reports 0 races
+- `go run ./internal/tools/curriculum validate-all` passes all 17 quality gates
+- GitHub Actions CI is green

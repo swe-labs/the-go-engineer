@@ -2,16 +2,16 @@
 
 Use this checklist to keep repository workflow, branch maintenance, documentation, and releases consistent.
 
-All section references follow the locked v2.1 12-section architecture from `ARCHITECTURE.md`.
+All module references follow the canonical v3 architecture from [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## Daily Triage
 
 - Enforce issue-first workflow.
-- Confirm new contributor PRs target the correct branch.
+- Confirm new contributor PRs target the correct branch (`release/v3` or `main`).
 - Add labels early.
-- Move issues into the correct milestone and the GitHub Project: `The Go Engineer v2`.
-- Redirect stable-line work to the correct release branch.
-- Reject architecture changes unless they are explicitly approved.
+- Move issues into the correct milestone and the GitHub Project: `The Go Engineer v3`.
+- Redirect release-line work to the correct release branch.
+- Reject unapproved architectural drift.
 
 ## Project and milestone tracking
 
@@ -20,7 +20,7 @@ For every issue and PR:
 - assign the owner when appropriate
 - apply relevant labels
 - attach the active milestone when one exists
-- add the issue or PR to `The Go Engineer v2`
+- add the issue or PR to `The Go Engineer v3`
 - update tracking metadata when scope changes
 
 ## Required Issue Title Format

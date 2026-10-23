@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates gRPC fundamentals.
 func Demo() string {
-    return "gRPC fundamentals verified"
+	return "gRPC fundamentals verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

@@ -1,94 +1,43 @@
-# The Go Engineer Learning Path
+# The Go Engineer Learning Path (v3)
 
-This guide explains how to move through the stable v2.1 curriculum.
+This guide explains how to navigate through the canonical v3 curriculum on `release/v3`.
 
-The source of truth for section ownership is [ARCHITECTURE.md](./ARCHITECTURE.md).
+The source of truth for module progression is [`curriculum/path.core.json`](./curriculum/path.core.json) and [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## Phase Overview
 
-| Phase | Sections | Focus                | Progress    |
-| ----- | -------- | -------------------- | ----------- |
-| 0     | s00      | machine foundation   | 0% to 5%    |
-| 1     | s01-s04  | language foundation  | 5% to 52%   |
-| 2     | s05-s08  | engineering core     | 52% to 87%  |
-| 3     | s09-s10  | systems engineering  | 87% to 96%  |
-| 4     | s11      | flagship integration | 96% to 100% |
+| Phase | Modules | Focus | Key Projects & Milestones |
+|---|---|---|---|
+| **0. Orientation & Foundations** | `00`–`02` | Terminal, Git, operating system concepts, and Go toolchain mechanics | Course Setup Verification, Shell & Git Lab, Tooling Failure Lab |
+| **1. Go Core & Semantics** | `03`–`04` | Types, memory layout, control flow, functions, and error handling | Pricing Checkout, Contact Directory, Order Summary Refactor |
+| **2. Engineering Core** | `05`–`07` | Interfaces, polymorphism, test-driven refactoring, CLI tools, JSON, files | Bank Account, Payroll Processor, Bug Hunt Pack, Config Parser |
+| **3. Backend & Persistence** | `08`–`09` | HTTP/REST APIs, routing, middleware, SQL, PostgreSQL migrations, connection pools | Book Catalog REST API, Task API with PostgreSQL |
+| **4. Security & Concurrency** | `10`–`11` | Bcrypt, JWT auth, RBAC, goroutines, channels, bounded worker pools, context | Secure Authenticated API, Bounded Worker Pool, Concurrent Downloader |
+| **5. Production Systems** | `12`–`15` | Structured logging (`slog`), Prometheus, OpenTelemetry, profiling (`pprof`), hexagonal architecture, Docker, CI/CD | PII Redactor, Observability Retrofit, Performance Lab, Dockerized Service |
+| **6. Career & Portfolio** | `16` | Portfolio review engine, technical documentation, architectural interview defense | Portfolio Review Pack & Defense Guides |
+| **7. Flagship Capstone** | `18` | Multi-tenant incident management, event bus, worker pools, caching, and graceful shutdown | Flagship Opslane Platform (15 milestones) |
 
-## Recommended Paths
+## Companion Tracks
 
-### Full Path
+- **[Companion Full-Stack Frontend Track](./curriculum/companion-frontend/README.md):** 4 progressive stages (HTML/CSS, DOM/Fetch, Templ/Tailwind, HTMX/Alpine).
+- **[Advanced Electives](./curriculum/path.electives.json):** 20 deep-dive electives in `curriculum/electives/advanced-electives/` (Generics, sync.Pool, sync.Map, gRPC streaming, consensus, eBPF).
 
-Use this path if you are new to programming or want the complete curriculum.
+## Recommended Learning Paths
 
-Rules:
+### 1. Full Path (Zero to Production Engineer)
+Follow Modules 00 through 18 sequentially. Complete all lessons, labs, project starter refactors, and milestone assessments.
 
-- start at `s00`
-- follow sections in order through `s11`
-- run each lesson command
-- complete section proof surfaces before moving on
+### 2. Experienced Engineer Bridge Path
+- Skim Modules 00–01 if already comfortable with Unix/Git.
+- Complete Module 02 (tooling) and Modules 03–04 to cement Go pointer/value semantics and memory layout.
+- Complete projects in Modules 05–15.
+- Build and defend the Flagship Opslane capstone (Module 18) and prepare portfolio artifacts (Module 16).
 
-### Bridge Path
+## Verification & Proof
 
-Use this path if you already program but are new to Go.
+Every module provides automated verification:
 
-Rules:
-
-- skim `s00` if you already understand process, memory, terminal, and OS basics
-- complete `s01` as a Go toolchain check
-- move carefully through `s02` to `s04`; these establish Go-specific habits
-- do not skip proof surfaces in `s05` through `s08`
-- complete `s09` through `s11` in order
-
-### Targeted Path
-
-Use this path if you are returning to strengthen a specific area.
-
-Rules:
-
-- choose one section deliberately
-- read that section README first
-- check prerequisites honestly
-- complete that section proof surface before claiming the skill
-
-## Entry Points
-
-| Goal                              | Start here                        | Prerequisite                            |
-| --------------------------------- | --------------------------------- | --------------------------------------- |
-| First Go setup and execution      | `s01` Getting Started             | none                                    |
-| Understand the machine model      | `s00` How Computers Work          | none                                    |
-| Strengthen language fundamentals  | `s02` Language Basics             | `s01`                                   |
-| Improve function and error design | `s03` Functions and Errors        | `s02`                                   |
-| Improve type design               | `s04` Types and Design            | `s02`, `s03`                            |
-| Build CLI and filesystem tools    | `s05` Packages, I/O and CLI       | `s03`, `s04`                            |
-| Build backend and database code   | `s06` Backend, APIs and Databases | `s05`, explicit error handling          |
-| Improve concurrency               | `s07` Concurrency                 | functions, errors, packages, interfaces |
-| Improve testing and profiling     | `s08` Quality and Testing         | `s05`, `s06`, `s07`                     |
-| Study architecture and security   | `s09` Architecture and Security   | Phase 2                                 |
-| Study production operations       | `s10` Production Operations       | `s06`, `s07`, `s08`                     |
-| Integrate the whole system        | `s11` Opslane Flagship            | all earlier phases                      |
-
-## Proof Expectations
-
-Fast paths are allowed. Proof is not optional.
-
-- Full Path: complete every required milestone and proof surface.
-- Bridge Path: complete proof surfaces even when syntax is familiar.
-- Targeted Path: complete the chosen section's proof surface before moving on.
-
-## Navigation Rule
-
-When a lesson mentions a concept that is introduced elsewhere, follow the inline reference:
-
-- forward references name the later section or lesson that teaches the topic in detail
-- backward references name the earlier lesson that established the idea
-- sibling references point to nearby tracks that reuse the concept
-
-## Companion Docs
-
-| Document                                             | Purpose                           |
-| ---------------------------------------------------- | --------------------------------- |
-| [README.md](./README.md)                             | project overview and quick start  |
-| [ARCHITECTURE.md](./ARCHITECTURE.md)                 | locked curriculum structure       |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | teaching contract                 |
-| [docs/PROGRESSION.md](./docs/PROGRESSION.md)         | phase and milestone visualization |
-| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md)       | verification expectations         |
+- **Lessons:** Runnable code with verified machine execution traces (`go run main.go`).
+- **Projects:** Reference solutions (`_solution/`), starter templates (`_starter/`), and test suites (`go test ./...`).
+- **Milestones:** Comprehensive assessments, rubrics, and answer keys.
+- **Repository Quality Gates:** 17 automated gates checked via `go run ./internal/tools/curriculum validate-all`.

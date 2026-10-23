@@ -2,7 +2,7 @@
 
 This document establishes testing standards for The Go Engineer curriculum.
 
-Section references follow the locked v2.1 architecture from `ARCHITECTURE.md`.
+Module references follow the canonical v3 architecture from [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## Testing Promise
 
@@ -90,7 +90,7 @@ Required or strongly recommended for parsing, decoding, validation, and input-bo
 
 ### Level 7: API and gRPC Tests
 
-Required for API contracts in s06 and related sections.
+Required for API contracts in Module 08 and related modules.
 
 ## Error Handling in Tests
 

@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates Functional options.
 func Demo() string {
-    return "Functional options verified"
+	return "Functional options verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

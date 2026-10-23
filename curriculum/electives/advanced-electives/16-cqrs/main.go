@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates CQRS.
 func Demo() string {
-    return "CQRS verified"
+	return "CQRS verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

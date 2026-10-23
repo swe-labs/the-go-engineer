@@ -1,10 +1,8 @@
-# Common Go Mistakes - Reference Guide
+# Common Go Mistakes — Reference Guide
 
-This guide lists common Go mistakes, why they happen, and where the correct pattern is taught.
+This guide catalogs common Go engineering mistakes, underlying mechanisms, and defensive patterns taught throughout the curriculum.
 
-Section references use the locked v2.1 section map and lesson IDs from `curriculum.v2.json`.
-
-Stable architecture means the section map and curriculum contract are locked. Individual lesson depth may still grow during post-v2.1 implementation.
+Defensive design principles and failure modes are formally tracked in [`curriculum/failures.json`](./curriculum/failures.json) and demonstrated throughout canonical modules.
 
 ## 1. Capturing loop variables incorrectly in closures
 

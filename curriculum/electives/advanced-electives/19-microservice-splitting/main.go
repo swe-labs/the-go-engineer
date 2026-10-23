@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates Microservice splitting.
 func Demo() string {
-    return "Microservice splitting verified"
+	return "Microservice splitting verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

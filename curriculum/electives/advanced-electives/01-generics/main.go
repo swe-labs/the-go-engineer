@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates Generics.
 func Demo() string {
-    return "Generics verified"
+	return "Generics verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

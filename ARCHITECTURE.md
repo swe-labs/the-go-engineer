@@ -1,88 +1,67 @@
-# The Go Engineer - Architecture v2.1 Final (Locked)
+# The Go Engineer — Architecture v3
 
-## Locked Structure
+## Canonical Architecture
 
-This file defines the stable public curriculum structure for the v2.1 line.
+This document defines the authoritative curriculum architecture for **The Go Engineer v3** on `release/v3`.
 
-Architecture v2.1 is final and locked. Normal post-release work should improve lesson depth, proof surfaces, docs, tests, validation, and the Opslane implementation without changing the public 12-section spine.
+The v3 architecture establishes a zero-to-software-engineer path focused on production Go backend engineering, accompanied by an elective track and a companion full-stack track.
 
-## Source-of-Truth Rule
+## Authoritative Metadata
 
-If any document, script, template, lesson README, section README, or metadata file disagrees with this file on public curriculum structure, this file wins.
+All authoritative curriculum metadata is defined in modular JSON manifests under [`curriculum/`](./curriculum/README.md):
 
-The only exception is an explicit maintainer-approved architecture change. Without that approval, do not add, remove, rename, or reorder public sections.
+| Manifest | Purpose |
+|---|---|
+| [`curriculum/path.core.json`](./curriculum/path.core.json) | Canonical 18-module progression, instructional units, and prerequisites |
+| [`curriculum/projects.json`](./curriculum/projects.json) | Portfolio projects, reference solutions, and test fixtures |
+| [`curriculum/assessments.json`](./curriculum/assessments.json) | Checkpoint and capstone assessment suites, rubrics, and answer keys |
+| [`curriculum/concepts.json`](./curriculum/concepts.json) | Conceptual ownership, mental models, and reinforcement map |
+| [`curriculum/crossrefs.json`](./curriculum/crossrefs.json) | Cross-module forward and backward references |
+| [`curriculum/failures.json`](./curriculum/failures.json) | Explicit failure mode taxonomy and defensive patterns |
+| [`curriculum/readme.contracts.json`](./curriculum/readme.contracts.json) | Mandatory pedagogical contract structure for instructional READMEs |
+| [`curriculum/workspace.json`](./curriculum/workspace.json) | Canonical workspace and validation configuration |
+| [`curriculum/legacy/curriculum.v2.json`](./curriculum/legacy/curriculum.v2.json) | Frozen legacy v2 import archive |
 
-## Section Map
+## Core Module Map
 
-| Section | Title                     | Core Tracks                          | Outputs                                            |
-| ------- | ------------------------- | ------------------------------------ | -------------------------------------------------- |
-| s00     | How Computers Work        | HC                                   | HC.5                                               |
-| s01     | Getting Started           | GT                                   | GT.6                                               |
-| s02     | Language Basics           | LB, CF, DS                           | LB.4, CF.7, DS.6                                   |
-| s03     | Functions and Errors      | FE                                   | FE.10                                              |
-| s04     | Types and Design          | TI, CO, ST                           | TI.15, CO.3, ST.6                                  |
-| s05     | Packages and I/O          | MP, CL, EN, FS                       | MP.4, CL.4, EN.6, FS.8                             |
-| s06     | Backend, APIs & Databases | HS, API, DB                          | HS.10, API.9, DB.8                                 |
-| s07     | Concurrency               | GC, SY, CT, TM, CP                   | GC.7, SY.6, CT.5, TM.7, CP.5                       |
-| s08     | Quality & Testing         | TE, PR                               | TE.10, PR.6                                        |
-| s09     | Architecture & Security   | PD, ARCH, SEC                        | PD.3, ARCH.9, SEC.11                               |
-| s10     | Production Operations     | SL, GS, CFG, OPS, DOCKER, DEPLOY, CG | SL.5, GS.3, CFG.5, OPS.5, DOCKER.3, DEPLOY.3, CG.3 |
-| s11     | Flagship                  | OPSL (+ future flagship prefixes)    | OPSL.10                                            |
+Instructional content is organized canonically under `curriculum/modules/`:
 
-## Canonical Root Folders
+| Module | Title | Primary Focus | Key Deliverables |
+|---|---|---|---|
+| `00-orientation` | Orientation | Mental models, learning methodology, setup | Course setup verification, study plan |
+| `01-computers-terminal-git-web` | Computers, Terminal, Git & Web | Shell navigation, git lifecycle, networking | Shell & Git lab, HTTP inspection |
+| `02-go-setup-tooling` | Go Setup & Tooling | Toolchain, compiler, module graph, formatting | Tooling failure diagnosis lab |
+| `03-programming-fundamentals` | Programming Fundamentals | Data types, memory layout, control flow | Pricing checkout, contact directory |
+| `04-functions-errors-data-semantics` | Functions, Errors & Data Semantics | Stack/heap allocation, pointers, errors | Order summary refactor |
+| `05-types-interfaces-packages-modules` | Types, Interfaces & Packages | Structural polymorphism, composition | Bank account, payroll processor |
+| `06-testing-debugging-refactoring` | Testing, Debugging & Refactoring | Unit tests, table tests, coverage, benchmarks | Bug hunt pack, refactored library |
+| `07-cli-files-json-config` | CLI, Files, JSON & Config | Flag parsing, streaming I/O, serialization | Config parser, log analyzer CLI |
+| `08-http-rest-apis` | HTTP & REST APIs | Routing, middleware, JSON APIs, httptest | Book catalog REST API |
+| `09-sql-postgres-persistence` | SQL, PostgreSQL & Persistence | Connection pooling, migrations, transactions | Task API with PostgreSQL |
+| `10-auth-security` | Authentication & Security | Bcrypt hashing, JWT tokens, RBAC | Authenticated security service |
+| `11-lifecycle-context-concurrency` | Lifecycle, Context & Concurrency | Goroutines, channels, worker pools, select | Bounded worker pool, downloader |
+| `12-observability-diagnostics` | Observability & Diagnostics | Structured logging (`slog`), pprof, tracing | Observability retrofit lab |
+| `13-performance-memory-engineering` | Performance & Memory Engineering | Benchmarks, memory profiles, zero-alloc | Profile & fix optimization lab |
+| `14-architecture-distributed-systems` | Architecture & Distributed Systems | Hexagonal architecture, domain decoupling | Modular refactor review |
+| `15-docker-cicd-deployment` | Docker, CI/CD & Deployment | Multi-stage Docker, GitHub Actions, health | Dockerized production service |
+| `16-portfolio-interview-readiness` | Portfolio & Interview Readiness | Architecture defense, portfolio packaging | Portfolio review pack, rubrics |
+| `18-flagship-opslane` | Flagship Opslane Capstone | Production multi-tenant incident management | Opslane SaaS platform (15 milestones) |
 
-| Section | Folder                  |
-| ------- | ----------------------- |
-| s00     | `00-how-computers-work` |
-| s01     | `01-getting-started`    |
-| s02     | `02-language-basics`    |
-| s03     | `03-functions-errors`   |
-| s04     | `04-types-design`       |
-| s05     | `05-packages-io`        |
-| s06     | `06-backend-db`         |
-| s07     | `07-concurrency`        |
-| s08     | `08-quality-test`       |
-| s09     | `09-architecture`       |
-| s10     | `10-production`         |
-| s11     | `11-flagship`           |
+## Companion & Elective Tracks
 
-## Structural Notes
+- **Companion Frontend Track (`curriculum/companion-frontend/`):** 4 progressive stages exploring full-stack Go integration (Semantic HTML/CSS, Vanilla DOM & Fetch, Templ & Tailwind CSS, HTMX & Alpine.js).
+- **Advanced Electives (`curriculum/electives/advanced-electives/`):** 20 advanced electives (Generics, sync.Pool, sync.Map, gRPC streaming, distributed consensus, eBPF) outside the core path.
 
-- Legacy folders were removed after the active lesson surfaces were relocated.
-- Section 04 owns composition and strings/text under `04-types-design/`.
-- HC.8 moved into Section 07 as GC.0, and HC.6 moved into Section 08 as PR.6.
-- TI.12 and TI.13 were merged into TI.11, and the later advanced TI lessons were renumbered to TI.12-TI.15.
-- Section 06 includes HTTP server and API tracks alongside the existing database work.
-- Section 09 includes both architecture-pattern and security tracks.
-- Section 10 includes configuration, observability, deployment, and code-generation tracks alongside logging and shutdown.
-- Code generation is locked into Section 10 because learners usually first meet `go generate` inside Docker and CI workflows before applying it inside the flagship capstone.
-- `FG` is a human-facing umbrella for Section 11, while individual flagship projects use their own prefixes such as `OPSL`.
+## Quality Standards
 
-## Change Guardrails
-
-A normal PR may:
-
-- add or revise lessons inside existing sections
-- update proof surfaces, tests, and starter code
-- strengthen section READMEs
-- tighten `curriculum.v2.json`
-- improve validators and maintainer scripts
-- deepen the Opslane implementation
-
-A normal PR must not:
-
-- create a new public root section
-- rename canonical section folders
-- move a lesson prefix to a different section without maintainer approval
-- revive removed legacy folder structures
-- update architecture docs without matching curriculum metadata and validation
+- **Zero Magic:** Every lesson establishes explicit mental models and machine execution traces before code.
+- **Runnable & Tested:** All projects include reference solutions (`_solution/`), student starter templates (`_starter/`), and comprehensive test suites (`main_test.go`).
+- **Automated Quality Gates:** Enforced by `internal/tools/curriculum` across 17 automated gates.
 
 ## Validation
 
-Any structure-affecting change must pass:
+Run CI-equivalent curriculum validation:
 
 ```bash
-go run ./scripts/validate_curriculum.go
-go test ./...
-go vet ./...
+go run ./internal/tools/curriculum validate-all
 ```

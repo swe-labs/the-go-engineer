@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates sync.Map.
 func Demo() string {
-    return "sync.Map verified"
+	return "sync.Map verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

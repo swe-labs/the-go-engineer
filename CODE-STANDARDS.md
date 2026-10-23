@@ -13,9 +13,8 @@ Every lesson `main.go` file must start with this header:
 // Licensed under The Go Engineer License v1.0
 
 // ============================================================================
-// Section NN: Section Name - Lesson Title
-// Level: Foundation | Core | Stretch
-// Foundation = Phase 0-1, Core = Phase 2-3, Stretch = Phase 4
+// Module NN: Module Name - Lesson Title
+// Level: Foundation | Core | Advanced
 // ============================================================================
 //
 // WHAT YOU'LL LEARN:
@@ -26,7 +25,7 @@ Every lesson `main.go` file must start with this header:
 // WHY THIS MATTERS:
 //   One sentence on why this exists in a real production Go codebase.
 //
-// RUN: go run ./NN-section-slug/N-lesson-slug
+// RUN: go run ./curriculum/modules/NN-module-slug/lessons/NN-lesson-slug/main.go
 // ============================================================================
 ```
 
@@ -38,23 +37,14 @@ Every lesson `main()` should end with a clear takeaway and terminal footer:
 // - Summary point 2
 fmt.Println()
 fmt.Println("---------------------------------------------------")
-fmt.Println("NEXT UP: XY.N next-lesson-slug")
-fmt.Println("Run    : go run ./NN-section-slug/N-next-lesson-slug")
-fmt.Println("Current: XY.N current-lesson-slug")
+fmt.Println("NEXT UP: next-lesson-slug")
+fmt.Println("Run    : go run ./curriculum/modules/NN-module-slug/lessons/NN-next/main.go")
 fmt.Println("---------------------------------------------------")
 ```
 
-## NEXT UP Footer Format
+## Lesson Progression Alignment
 
-The footer must use `NEXT UP:` exactly, without emoji.
-
-The next item ID and slug must match `curriculum.v2.json`.
-
-The validator checks this pattern:
-
-```text
-NEXT UP:\s*([A-Z]{2,6}\.\d+)
-```
+Next item IDs and progression flow match the canonical manifest in [`curriculum/path.core.json`](./curriculum/path.core.json).
 
 ## Formatting Standards
 

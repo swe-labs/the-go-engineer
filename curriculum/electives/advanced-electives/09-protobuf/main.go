@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates Protobuf.
 func Demo() string {
-    return "Protobuf verified"
+	return "Protobuf verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

@@ -3,9 +3,9 @@ package main
 import "testing"
 
 func TestDemo(t *testing.T) {
-    got := Demo()
-    want := "sync.Pool verified"
-    if got != want {
-        t.Errorf("got %q, want %q", got, want)
-    }
+	got := Demo()
+	want := "sync.Pool verified"
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
 }

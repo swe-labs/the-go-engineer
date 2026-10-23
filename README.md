@@ -69,7 +69,7 @@ go run ./curriculum/modules/00-orientation/lessons/01-how-to-use-this-repository
 The repository includes both curriculum structural validators and standard Go test suites:
 
 ```bash
-# 1. Run all 14 automated curriculum quality gates
+# 1. Run all 17 automated curriculum quality gates
 go run ./internal/tools/curriculum validate-all
 
 # 2. Run the full unit and integration test suite

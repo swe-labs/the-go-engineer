@@ -1,36 +1,34 @@
 # Contributing to The Go Engineer
 
-This guide defines the required workflow for contributions to the stable v2.1 repository.
+This guide defines the required workflow for contributions to **The Go Engineer v3**.
 
 ## Source of Truth
 
 Read these documents before changing curriculum, code, validation, or release surfaces:
 
-| Document                                             | Purpose                              |
-| ---------------------------------------------------- | ------------------------------------ |
-| [ARCHITECTURE.md](./ARCHITECTURE.md)                 | locked v2.1 public structure         |
-| [curriculum.v2.json](./curriculum.v2.json)           | machine-readable curriculum registry |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | README-first teaching contract       |
-| [CODE-STANDARDS.md](./CODE-STANDARDS.md)             | Go and teaching-code standards       |
-| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md)       | verification expectations            |
-| [RELEASE.md](./RELEASE.md)                           | release and branch process           |
+| Document | Purpose |
+|---|---|
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | Canonical v3 public structure |
+| [`curriculum/`](./curriculum/README.md) | Modular curriculum metadata manifests |
+| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | Zero-magic teaching contract |
+| [CODE-STANDARDS.md](./CODE-STANDARDS.md) | Go and teaching-code standards |
+| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | Verification and test expectations |
+| [RELEASE.md](./RELEASE.md) | Release and branch workflow |
 
 If documents disagree on public curriculum structure, `ARCHITECTURE.md` wins.
 
 ## Architecture Rule
 
-The public architecture is locked at 12 sections, `s00` through `s11`.
-
-Do not add, remove, rename, or reorder public root sections unless a maintainer explicitly approves architecture work.
+The canonical v3 architecture consists of 18 core modules (`00`–`16` plus `18-flagship-opslane`) under `curriculum/modules/`, accompanied by the Companion Full-Stack Frontend Track and 20 Advanced Electives.
 
 Allowed work includes:
 
-- lesson corrections and depth improvements
-- tests and proof surfaces
-- README/source/curriculum metadata alignment
-- validator and CI improvements
-- Opslane flagship depth inside `s11`
-- public documentation cleanup
+- lesson corrections, depth improvements, and zero-magic explanations
+- project tests, starters, and reference solutions
+- curriculum metadata alignment across `curriculum/*.json`
+- quality tooling improvements in `internal/tools/curriculum`
+- Opslane milestone enhancements inside `curriculum/modules/18-flagship-opslane/`
+- public documentation improvements
 
 ## Issue First
 

@@ -4,13 +4,11 @@ This document defines the release process for The Go Engineer.
 
 ## Release Lines
 
-| Line      | Branch       | Purpose                                    |
-| --------- | ------------ | ------------------------------------------ |
-| v2.1.x    | `release/v2` | stable v2.1 maintenance                    |
-| v1.x      | `release/v1` | stable v1 maintenance                      |
-| post-v2.1 | `main`       | future implementation and integration work |
-
-The current stable release is `v2.1.1`.
+| Line | Branch | Purpose |
+|---|---|---|
+| v3.x | `release/v3` | active v3 release and maintenance line |
+| v2.1.x | `release/v2` | legacy v2.1 maintenance line (archived) |
+| v1.x | `release/v1` | legacy v1 maintenance line (archived) |
 
 ## Versioning
 
@@ -20,42 +18,16 @@ The project uses semantic versioning for stable releases:
 - minor: new stable content inside the locked architecture
 - patch: bug fixes, documentation corrections, validator fixes, CI changes, and low-risk curriculum repairs
 
-Do not reuse an existing tag. If `v2.1.0` already exists, the next stable patch is `v2.1.1`.
-
 ## Release Preconditions
 
 Before preparing a release:
 
 - the release issue is linked
-- the target branch is identified
-- public docs match `ARCHITECTURE.md` and `curriculum.v2.json`
-- all P0/P1/P2 review findings are fixed or explicitly accepted by the maintainer
+- the target branch is identified (`release/v3`)
+- public docs match [ARCHITECTURE.md](./ARCHITECTURE.md) and [`curriculum/`](./curriculum/README.md) manifests
+- all P0/P1/P2 review findings are fixed
 - GitHub CI is passing
-- local verification evidence is available
-
-## Release Preparation
-
-For a v2.1.x release:
-
-```bash
-git switch release/v2
-git pull --ff-only origin release/v2
-git switch -c release/v2.1.x-prep
-```
-
-Update:
-
-- [CHANGELOG.md](./CHANGELOG.md)
-- [README.md](./README.md)
-- [ROADMAP.md](./ROADMAP.md)
-- release notes for the target version
-- any public workflow document that changed
-
-Commit release metadata with:
-
-```bash
-git commit -m "[RELEASE] prepare v2.1.x"
-```
+- local verification evidence is verified
 
 ## Required Verification
 
@@ -68,73 +40,15 @@ unformatted=$(gofmt -l . | grep -v '_starter' || true); test -z "$unformatted" |
 go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
-go test -race ./...
-go test -coverprofile coverage.out ./...
-go run ./scripts/validate_curriculum.go
+go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...
+go run ./internal/tools/curriculum validate-all
 ```
 
 For benchmark-related releases:
 
 ```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
+go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution
 ```
-
-Remove generated local artifacts such as `coverage.out` unless they are intentionally tracked.
-
-## Release PR
-
-Open a PR into the release branch.
-
-PR title:
-
-```text
-[RELEASE] prepare v2.1.x
-```
-
-PR body:
-
-```markdown
-Closes #<issue>
-
-## Release
-
-- Version: v2.1.x
-- Target branch: release/v2
-
-## Scope
-
--
-
-## Validation
-
-- [ ] go build ./...
-- [ ] go vet ./...
-- [ ] gofmt check
-- [ ] go mod tidy no-diff check
-- [ ] go test ./...
-- [ ] go test -race ./...
-- [ ] go test -coverprofile coverage.out ./...
-- [ ] go run ./scripts/validate_curriculum.go
-
-## Risk
-
--
-```
-
-Keep the PR open until CI is green and review findings are handled.
-
-## Merge and Tag
-
-After approval and green CI:
-
-```bash
-git switch release/v2
-git pull --ff-only origin release/v2
-git tag v2.1.x
-git push origin v2.1.x
-```
-
-Do not force-update stable tags.
 
 ## GitHub Release
 

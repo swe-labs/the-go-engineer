@@ -8,19 +8,18 @@ The primary tool is the curriculum validator.
 
 ### `validate_curriculum.go`
 
-This script checks curriculum state, including:
+This script delegates to the canonical v3 curriculum validator (`internal/tools/curriculum`), checking:
 
-- paths and references in `curriculum.v2.json`
-- referenced files
-- `NEXT UP:` footers in lesson files
-- README structure for covered lesson categories
-- required runnable lesson surfaces
-- text encoding and section labels
+- modular JSON manifests in `curriculum/` (`path.core.json`, `projects.json`, `assessments.json`, etc.)
+- physical files, lessons, labs, project solutions, and starters
+- 17 automated curriculum quality gates including graph closure, zero-magic, and artifact parity
 
 Usage:
 
 ```bash
 go run ./scripts/validate_curriculum.go
+# or directly:
+go run ./internal/tools/curriculum validate-all
 ```
 
 ## CI-equivalent Local Verification
@@ -42,7 +41,7 @@ go run ./scripts/validate_curriculum.go
 For benchmark-related changes:
 
 ```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
+go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution
 ```
 
 ## Maintainer Automation Scripts

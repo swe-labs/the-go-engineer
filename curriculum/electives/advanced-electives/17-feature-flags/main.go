@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates Feature flags.
 func Demo() string {
-    return "Feature flags verified"
+	return "Feature flags verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

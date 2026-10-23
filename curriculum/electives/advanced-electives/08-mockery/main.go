@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates Mockery.
 func Demo() string {
-    return "Mockery verified"
+	return "Mockery verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

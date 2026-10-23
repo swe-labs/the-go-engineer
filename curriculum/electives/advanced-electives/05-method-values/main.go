@@ -4,9 +4,9 @@ import "fmt"
 
 // Demo demonstrates Method values.
 func Demo() string {
-    return "Method values verified"
+	return "Method values verified"
 }
 
 func main() {
-    fmt.Println(Demo())
+	fmt.Println(Demo())
 }

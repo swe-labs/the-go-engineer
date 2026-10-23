@@ -34,7 +34,7 @@ test-verbose: ## Run all tests with verbose output
 
 bench: ## Run benchmark suite
 	@echo "Running benchmarks..."
-	go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
+	go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution
 
 cover: ## Run tests with coverage report
 	@echo "Generating coverage report..."
@@ -87,10 +87,10 @@ validate: ## Run curriculum validator
 
 ## Run Examples
 run-hello: ## Run the Hello World example
-	go run ./01-getting-started/2-hello-world
+	go run ./curriculum/modules/00-orientation/lessons/01-how-to-use-this-repository/main.go
 
 run-env: ## Run the environment check
-	go run ./01-getting-started/4-dev-environment
+	go run ./curriculum/modules/02-go-setup-tooling/lessons/01-toolchain-installation-and-path/main.go
 
 ## CI
 ci: build vet fmt-check tidy test test-race cover validate ## Run CI-equivalent local checks
