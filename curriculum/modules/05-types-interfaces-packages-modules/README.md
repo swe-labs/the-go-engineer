@@ -8,22 +8,31 @@ Turn scripts into maintainable Go programs.
 
 Moves from scripts to maintainable Go systems by teaching types, methods, interfaces, packages, modules, and dependency boundaries.
 
-## Lessons
+## Learning Sessions & Lessons
 
+### Session 1: Structs & Composition
 - `core-05-01` Structs
 - `core-05-02` Methods
-- `core-05-03` Pointer receivers
-- `core-05-04` Value receivers
-- `core-05-05` Receiver sets
 - `core-05-06` Composition
 - `core-05-07` Embedding
+
+### Session 2: Method Receivers & Mutation Semantics (Consolidated Workshop)
+*A unified three-part workshop on method receiver design and interface satisfaction:*
+- `core-05-03` **Pointer receivers** *(Part 1: In-place mutation and struct pointer semantics)*
+- `core-05-04` **Value receivers** *(Part 2: Immutability, value copying, and safety)*
+- `core-05-05` **Receiver sets** *(Part 3: Method set rules and interface satisfaction)*
+
+### Session 3: Interface Abstractions & Dynamic Type Inspection
 - `core-05-08` Interfaces
 - `core-05-09` Small interfaces
 - `core-05-10` Interface embedding
 - `core-05-11` Stringer
-- `core-05-12` Type assertions
-- `core-05-13` Type switches
+*Unified Dynamic Type Inspection Workshop:*
+- `core-05-12` **Type assertions** *(Single dynamic type extraction with comma-ok idiom)*
+- `core-05-13` **Type switches** *(Multi-type branch discrimination across interface values)*
 - `core-05-14` Nil interfaces
+
+### Session 4: Packages, Modules & Code Boundaries
 - `core-05-15` Package names
 - `core-05-16` Export rules
 - `core-05-17` Project layout

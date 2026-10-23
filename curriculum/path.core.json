@@ -4875,7 +4875,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/02-go-setup-tooling/02-hello-world/assets",
         "diagram_paths": [],
@@ -5060,7 +5060,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/02-go-setup-tooling/03-go-run/assets",
         "diagram_paths": [],
@@ -5608,7 +5608,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/02-go-setup-tooling/06-gofmt/assets",
         "diagram_paths": [],
@@ -5791,7 +5791,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/02-go-setup-tooling/07-go-vet/assets",
         "diagram_paths": [],
@@ -5974,7 +5974,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/02-go-setup-tooling/08-go-doc/assets",
         "diagram_paths": [],
@@ -7082,7 +7082,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/02-go-setup-tooling/14-tooling-checklist/assets",
         "diagram_paths": [],

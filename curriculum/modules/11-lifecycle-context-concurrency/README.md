@@ -8,17 +8,23 @@ Teach safe concurrent systems and request lifecycle after learners understand se
 
 Builds reliable concurrent Go programs using context, cancellation, deadlines, goroutines, channels, synchronization, worker pools, backpressure, and leak prevention.
 
-## Lessons
+## Learning Sessions & Lessons
 
-- `core-11-01` Time basics
-- `core-11-02` Durations
-- `core-11-03` Timers
-- `core-11-04` Tickers
+### Session 1: Time Mechanics & Interval Scheduling (Consolidated Workshop)
+*A unified four-part foundation on time representation, elapsed measurements, and event scheduling:*
+- `core-11-01` **Time basics** *(Part 1: Monotonic vs wall clock time, UTC normalization)*
+- `core-11-02` **Durations** *(Part 2: Time units, arithmetic calculations, integer conversions)*
+- `core-11-03` **Timers** *(Part 3: One-shot timeouts, `time.NewTimer`, proper channel drainage)*
+- `core-11-04` **Tickers** *(Part 4: Periodic ticks, `time.NewTicker`, preventing goroutine/ticker leaks)*
+
+### Session 2: Request Lifecycle & Context Cancellation
 - `core-11-05` Context basics
 - `core-11-06` Cancellation
 - `core-11-07` Timeouts
 - `core-11-08` Deadlines
 - `core-11-09` Context values with caveats
+
+### Session 3: Concurrency Foundations & Channels
 - `core-11-10` Why concurrency exists
 - `core-11-11` Goroutines
 - `core-11-12` WaitGroups
@@ -28,12 +34,16 @@ Builds reliable concurrent Go programs using context, cancellation, deadlines, g
 - `core-11-16` Channel ownership
 - `core-11-17` Backpressure
 - `core-11-18` Pipelines
+
+### Session 4: Memory Synchronization & Race Avoidance
 - `core-11-19` Mutex and RWMutex
 - `core-11-20` Atomics with caution
 - `core-11-21` Race conditions
 - `core-11-22` Race detector
 - `core-11-23` Goroutine leaks
 - `core-11-24` Deadlocks
+
+### Session 5: Production Concurrency Patterns
 - `core-11-25` errgroup
 - `core-11-26` Bounded worker pools
 - `core-11-27` Retries and backoff
