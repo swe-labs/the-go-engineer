@@ -1,0 +1,32 @@
+package components
+
+type UserContext struct {
+	ID         string
+	Email      string
+	Name       string
+	Role       string
+	TenantName string
+}
+
+templ Layout(title string, user *UserContext) {
+	<!DOCTYPE html>
+	<html lang="en" class="h-full bg-slate-950 text-slate-100">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>{ title } — Opslane Console</title>
+			<link rel="stylesheet" href="/static/tailwind.css"/>
+		</head>
+		<body class="h-full flex flex-col font-sans antialiased">
+			if user != nil {
+				@Header(user)
+			}
+			<main class="flex-1 max-w-6xl w-full mx-auto px-4 py-8">
+				{ children... }
+			</main>
+			<footer class="border-t border-slate-800 bg-slate-900 py-4 text-center text-xs text-slate-500">
+				The Go Engineer &mdash; Frontend Companion Track &mdash; Stage 3 (Type-Safe templ + Tailwind)
+			</footer>
+		</body>
+	</html>
+}

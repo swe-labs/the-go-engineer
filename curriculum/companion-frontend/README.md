@@ -42,13 +42,13 @@ The **Frontend Companion Track** runs parallel to the core Go engineering curric
 
 The companion track is organized into four progressive stages coordinated with milestones in the backend core path:
 
-| Stage | Weeks | Focus Topics | Core Path Alignment | Practical Convergence Project |
-| :---: | :---: | :--- | :--- | :--- |
-| **1** | **10–14** | **Semantic HTML5 & Modern CSS** | Module 07 (CLI & Files) | Static Documentation & Template Renderer |
-| **2** | **15–24** | **Browser JS, DOM & Fetch API** | Module 08 & 09 (HTTP & SQL) | Dynamic Book Catalog with REST Client |
-| **3** | **25–33** | **Type-Safe UI with `templ` & Tailwind** | Module 10 (Auth & Security) | Authenticated Multi-Tenant Management Portal |
-| **4** | **34–42** | **Hypermedia Interactivity with HTMX & Alpine** | Modules 11–15 (Concurrency & CI/CD) | Live Metrics Dashboard with SSE & Polling |
-| **5** | **43–50** | **Flagship Opslane Integration** | Module 18 (Flagship Opslane) | Production Multi-Tenant Opslane Console |
+| Stage | Weeks | Focus Topics | Core Path Alignment | Practical Convergence Project | Executable Starter Directory |
+| :---: | :---: | :--- | :--- | :--- | :--- |
+| **1** | **10–14** | **Semantic HTML5 & Modern CSS** | Module 07 (CLI & Files) | Static Documentation & Template Renderer | [`stage-01-semantic-html-css/`](./stage-01-semantic-html-css) |
+| **2** | **15–24** | **Browser JS, DOM & Fetch API** | Module 08 & 09 (HTTP & SQL) | Dynamic Book Catalog with REST Client | [`stage-02-vanilla-dom-fetch/`](./stage-02-vanilla-dom-fetch) |
+| **3** | **25–33** | **Type-Safe UI with `templ` & Tailwind** | Module 10 (Auth & Security) | Authenticated Multi-Tenant Management Portal | [`stage-03-templ-tailwind/`](./stage-03-templ-tailwind) |
+| **4** | **34–42** | **Hypermedia Interactivity with HTMX & Alpine** | Modules 11–15 (Concurrency & CI/CD) | Live Metrics Dashboard with SSE & Polling | [`stage-04-htmx-alpine/`](./stage-04-htmx-alpine) |
+| **5** | **43–50** | **Flagship Opslane Integration** | Module 18 (Flagship Opslane) | Production Multi-Tenant Opslane Console | `curriculum/modules/18-flagship-opslane` |
 
 ---
 

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal Engineering Wiki — Server-rendered Go html/template with semantic HTML5 and modern responsive CSS">
+    <title>{{ .Title }} — Go Engineer Wiki</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Zero-JS Pure CSS Dark/Light Theme Controller -->
+    <input type="checkbox" id="theme-toggle" class="theme-toggle-input" aria-label="Toggle dark and light theme">
+
+    <div class="wiki-layout">
+        <!-- Site Header -->
+        <header class="wiki-header">
+            <div class="brand">
+                <a href="/wiki/welcome" class="brand-link">
+                    <span class="brand-badge">GO</span>
+                    <span class="brand-title">The Go Engineer Wiki</span>
+                </a>
+            </div>
+            <div class="header-actions">
+                <span class="tech-pill">Zero-JS HTML5 + CSS</span>
+                <label for="theme-toggle" class="theme-switch" role="button" tabindex="0" title="Switch Theme">
+                    <span class="theme-icon light-icon" aria-hidden="true">&#9788;</span>
+                    <span class="theme-icon dark-icon" aria-hidden="true">&#9790;</span>
+                    <span class="theme-label">Theme</span>
+                </label>
+            </div>
+        </header>
+
+        <!-- Main Workspace: Sidebar + Article + Info Rail -->
+        <div class="wiki-workspace">
+            <!-- Sidebar Navigation -->
+            <aside class="wiki-sidebar" aria-label="Wiki Document Index">
+                <nav class="sidebar-nav">
+                    <div class="nav-section-title">Knowledge Base</div>
+                    <ul class="nav-list">
+                        {{ range .NavItems }}
+                        <li class="nav-item">
+                            <a href="/wiki/{{ .Slug }}" class="nav-link {{ if .Active }}active{{ end }}">
+                                <span class="nav-bullet">&bull;</span>
+                                <span class="nav-text">{{ .Title }}</span>
+                            </a>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="wiki-main" id="main-content">
+                <article class="wiki-article">
+                    <header class="article-header">
+                        <div class="article-meta-badge">Module 07: Companion Stage 1</div>
+                        <h1 class="article-title">{{ .Title }}</h1>
+                    </header>
+                    <section class="article-body">
+                        {{ .Body }}
+                    </section>
+                </article>
+            </main>
+
+            <!-- Contextual Metadata Rail -->
+            <aside class="wiki-rail" aria-label="Article Details">
+                <section class="rail-card">
+                    <h2 class="rail-heading">Document Specs</h2>
+                    <dl class="specs-list">
+                        <div class="spec-row">
+                            <dt>Words:</dt>
+                            <dd>{{ .WordCount }}</dd>
+                        </div>
+                        <div class="spec-row">
+                            <dt>Read Time:</dt>
+                            <dd>{{ .ReadTimeMinutes }} min</dd>
+                        </div>
+                        <div class="spec-row">
+                            <dt>Engine:</dt>
+                            <dd>Go <code>html/template</code></dd>
+                        </div>
+                    </dl>
+                </section>
+                <section class="rail-card highlight-card">
+                    <h2 class="rail-heading">Zero Magic Notice</h2>
+                    <p class="rail-text">
+                        Rendered purely on the server. Zero client-side JavaScript execution. Layout orchestrated by CSS Grid and Flexbox.
+                    </p>
+                </section>
+            </aside>
+        </div>
+
+        <!-- Site Footer -->
+        <footer class="wiki-footer">
+            <p>The Go Engineer &mdash; Frontend Companion Track &mdash; Stage 1 (Semantic HTML5 &amp; Modern CSS)</p>
+            <p class="footer-sub">Compiled with Go <code>net/http</code> and standard library templates.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+package components
+
+templ Header(user *UserContext) {
+	<header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
+		<div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+			<div class="flex items-center space-x-6">
+				<a href="/profile" class="flex items-center space-x-2 font-bold text-lg text-white tracking-wide">
+					<span class="px-2 py-0.5 rounded bg-indigo-600 text-xs font-mono font-bold">STAGE 03</span>
+					<span>Opslane Console</span>
+				</a>
+				<nav class="hidden md:flex space-x-4 text-sm font-medium">
+					<a href="/profile" class="text-slate-300 hover:text-white transition">My Profile</a>
+					<a href="/settings" class="text-slate-300 hover:text-white transition">Tenant Settings</a>
+				</nav>
+			</div>
+			<div class="flex items-center space-x-4">
+				<div class="flex items-center space-x-2 text-sm">
+					<span class="text-slate-400">{ user.Email }</span>
+					if user.Role == "admin" {
+						<span class="px-2 py-0.5 text-xs font-semibold rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
+							Admin
+						</span>
+					} else {
+						<span class="px-2 py-0.5 text-xs font-semibold rounded bg-slate-700 text-slate-300">
+							Viewer
+						</span>
+					}
+				</div>
+				<form action="/auth/logout" method="POST" class="inline">
+					<button type="submit" class="text-xs text-rose-400 hover:text-rose-300 font-medium px-2.5 py-1 rounded border border-rose-500/30 hover:border-rose-500/60 transition">
+						Sign Out
+					</button>
+				</form>
+			</div>
+		</div>
+	</header>
+}
