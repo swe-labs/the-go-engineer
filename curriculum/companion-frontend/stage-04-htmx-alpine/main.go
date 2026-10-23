@@ -235,7 +235,8 @@ func (wp *WorkerPool) Enqueue(taskType string, duration time.Duration) *Task {
 	wp.taskQueue <- task
 	wp.broadcastLog(fmt.Sprintf("[Queue] Enqueued new job #%d (%s, target: %s)", task.ID, task.Type, task.DurationStr))
 
-	return task
+	taskCopy := *task
+	return &taskCopy
 }
 
 // Cancel attempts to abort an active or queued task.
@@ -255,7 +256,8 @@ func (wp *WorkerPool) Cancel(id int) (*Task, bool) {
 	task.Status = "CANCELLED"
 	task.StatusLower = "cancelled"
 
-	return task, true
+	taskCopy := *task
+	return &taskCopy, true
 }
 
 func (wp *WorkerPool) ListTasks() []*Task {
@@ -266,7 +268,8 @@ func (wp *WorkerPool) ListTasks() []*Task {
 	// Return in reverse chronological order
 	for i := wp.nextID - 1; i >= 1; i-- {
 		if t, ok := wp.tasks[i]; ok {
-			result = append(result, t)
+			tCopy := *t
+			result = append(result, &tCopy)
 		}
 	}
 	return result
