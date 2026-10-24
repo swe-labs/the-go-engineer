@@ -77,11 +77,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/01-generics/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/01-generics/main.go",
-        "readme_path": "electives/advanced-electives/01-generics/README.md",
+        "main_path": "electives/advanced-electives/lessons/01-generics/main.go",
+        "readme_path": "electives/advanced-electives/lessons/01-generics/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/01-generics/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/01-generics/main_test.go"
       },
       "id": "elective-01",
       "learning_objective": "Implement type-safe generic functions and data structures using Go type parameters, compile-time monomorphization, and constraint interfaces.",
@@ -261,11 +261,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/02-complex-generic-constraints/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/02-complex-generic-constraints/main.go",
-        "readme_path": "electives/advanced-electives/02-complex-generic-constraints/README.md",
+        "main_path": "electives/advanced-electives/lessons/02-complex-generic-constraints/main.go",
+        "readme_path": "electives/advanced-electives/lessons/02-complex-generic-constraints/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/02-complex-generic-constraints/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/02-complex-generic-constraints/main_test.go"
       },
       "id": "elective-02",
       "learning_objective": "Construct and evaluate complex generic constraints incorporating type sets, union elements, and approximation terms (~T) for static compile-time safety.",
@@ -442,11 +442,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/03-generic-data-structures/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/03-generic-data-structures/main.go",
-        "readme_path": "electives/advanced-electives/03-generic-data-structures/README.md",
+        "main_path": "electives/advanced-electives/lessons/03-generic-data-structures/main.go",
+        "readme_path": "electives/advanced-electives/lessons/03-generic-data-structures/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/03-generic-data-structures/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/03-generic-data-structures/main_test.go"
       },
       "id": "elective-03",
       "learning_objective": "Design and test type-safe generic collections (Stack, Queue, Ring) that maintain compile-time type invariants without runtime interface overhead.",
@@ -623,11 +623,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/04-functional-options/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/04-functional-options/main.go",
-        "readme_path": "electives/advanced-electives/04-functional-options/README.md",
+        "main_path": "electives/advanced-electives/lessons/04-functional-options/main.go",
+        "readme_path": "electives/advanced-electives/lessons/04-functional-options/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/04-functional-options/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/04-functional-options/main_test.go"
       },
       "id": "elective-04",
       "learning_objective": "Architect extensible Go APIs and constructors using the functional options pattern with deterministic defaults, ordering, and validation.",
@@ -807,11 +807,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/05-method-values/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/05-method-values/main.go",
-        "readme_path": "electives/advanced-electives/05-method-values/README.md",
+        "main_path": "electives/advanced-electives/lessons/05-method-values/main.go",
+        "readme_path": "electives/advanced-electives/lessons/05-method-values/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/05-method-values/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/05-method-values/main_test.go"
       },
       "id": "elective-05",
       "learning_objective": "Distinguish and apply method values vs. method expressions to implement decoupled callbacks, currying closures, and interface adapters.",
@@ -991,11 +991,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/06-build-tags/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/06-build-tags/main.go",
-        "readme_path": "electives/advanced-electives/06-build-tags/README.md",
+        "main_path": "electives/advanced-electives/lessons/06-build-tags/main.go",
+        "readme_path": "electives/advanced-electives/lessons/06-build-tags/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/06-build-tags/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/06-build-tags/main_test.go"
       },
       "id": "elective-06",
       "learning_objective": "Implement platform-specific and environment-isolated compilation units using Go build tags (//go:build) and verify target architecture isolation.",
@@ -1175,11 +1175,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/07-go-generate/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/07-go-generate/main.go",
-        "readme_path": "electives/advanced-electives/07-go-generate/README.md",
+        "main_path": "electives/advanced-electives/lessons/07-go-generate/main.go",
+        "readme_path": "electives/advanced-electives/lessons/07-go-generate/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/07-go-generate/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/07-go-generate/main_test.go"
       },
       "id": "elective-07",
       "learning_objective": "Automate static boilerplate and interface generation using go:generate directives, custom tooling binaries, and stringer.",
@@ -1359,11 +1359,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/08-mockery/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/08-mockery/main.go",
-        "readme_path": "electives/advanced-electives/08-mockery/README.md",
+        "main_path": "electives/advanced-electives/lessons/08-mockery/main.go",
+        "readme_path": "electives/advanced-electives/lessons/08-mockery/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/08-mockery/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/08-mockery/main_test.go"
       },
       "id": "elective-08",
       "learning_objective": "Generate type-safe mock implementations using Mockery and construct deterministic unit test suites with call verification and expectations.",
@@ -1543,11 +1543,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/09-protobuf/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/09-protobuf/main.go",
-        "readme_path": "electives/advanced-electives/09-protobuf/README.md",
+        "main_path": "electives/advanced-electives/lessons/09-protobuf/main.go",
+        "readme_path": "electives/advanced-electives/lessons/09-protobuf/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/09-protobuf/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/09-protobuf/main_test.go"
       },
       "id": "elective-09",
       "learning_objective": "Define, compile, and serialize schema-first Protocol Buffer IDL definitions with backward-compatible wire format evolution.",
@@ -1725,11 +1725,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/10-grpc-fundamentals/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/10-grpc-fundamentals/main.go",
-        "readme_path": "electives/advanced-electives/10-grpc-fundamentals/README.md",
+        "main_path": "electives/advanced-electives/lessons/10-grpc-fundamentals/main.go",
+        "readme_path": "electives/advanced-electives/lessons/10-grpc-fundamentals/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/10-grpc-fundamentals/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/10-grpc-fundamentals/main_test.go"
       },
       "id": "elective-10",
       "learning_objective": "Build and test end-to-end unary gRPC services in Go using generated client and server stubs with context deadlines.",
@@ -1908,11 +1908,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/11-grpc-streaming/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/11-grpc-streaming/main.go",
-        "readme_path": "electives/advanced-electives/11-grpc-streaming/README.md",
+        "main_path": "electives/advanced-electives/lessons/11-grpc-streaming/main.go",
+        "readme_path": "electives/advanced-electives/lessons/11-grpc-streaming/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/11-grpc-streaming/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/11-grpc-streaming/main_test.go"
       },
       "id": "elective-11",
       "learning_objective": "Implement and coordinate client-streaming, server-streaming, and bidirectional gRPC pipelines in Go with flow control and EOF handling.",
@@ -2089,11 +2089,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/12-grpc-interceptors/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/12-grpc-interceptors/main.go",
-        "readme_path": "electives/advanced-electives/12-grpc-interceptors/README.md",
+        "main_path": "electives/advanced-electives/lessons/12-grpc-interceptors/main.go",
+        "readme_path": "electives/advanced-electives/lessons/12-grpc-interceptors/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/12-grpc-interceptors/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/12-grpc-interceptors/main_test.go"
       },
       "id": "elective-12",
       "learning_objective": "Construct composable gRPC client and server interceptors for distributed telemetry, authentication metadata propagation, and panic recovery.",
@@ -2270,11 +2270,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/main.go",
-        "readme_path": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/README.md",
+        "main_path": "electives/advanced-electives/lessons/13-rest-vs-grpc-tradeoffs/main.go",
+        "readme_path": "electives/advanced-electives/lessons/13-rest-vs-grpc-tradeoffs/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/13-rest-vs-grpc-tradeoffs/main_test.go"
       },
       "id": "elective-13",
       "learning_objective": "Evaluate technical tradeoffs between REST/JSON and gRPC/Protobuf protocols across payload overhead, latency, streaming, and client tooling.",
@@ -2450,11 +2450,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/14-sync-map/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/14-sync-map/main.go",
-        "readme_path": "electives/advanced-electives/14-sync-map/README.md",
+        "main_path": "electives/advanced-electives/lessons/14-sync-map/main.go",
+        "readme_path": "electives/advanced-electives/lessons/14-sync-map/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/14-sync-map/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/14-sync-map/main_test.go"
       },
       "id": "elective-14",
       "learning_objective": "Implement lock-contention mitigation using sync.Map for read-heavy and disjoint-write concurrent access patterns.",
@@ -2633,11 +2633,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/15-sync-pool/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/15-sync-pool/main.go",
-        "readme_path": "electives/advanced-electives/15-sync-pool/README.md",
+        "main_path": "electives/advanced-electives/lessons/15-sync-pool/main.go",
+        "readme_path": "electives/advanced-electives/lessons/15-sync-pool/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/15-sync-pool/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/15-sync-pool/main_test.go"
       },
       "id": "elective-15",
       "learning_objective": "Profile and optimize memory allocation cycles and GC pressure using sync.Pool for byte buffers and short-lived structs under high throughput.",
@@ -2815,11 +2815,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/16-cqrs/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/16-cqrs/main.go",
-        "readme_path": "electives/advanced-electives/16-cqrs/README.md",
+        "main_path": "electives/advanced-electives/lessons/16-cqrs/main.go",
+        "readme_path": "electives/advanced-electives/lessons/16-cqrs/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/16-cqrs/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/16-cqrs/main_test.go"
       },
       "id": "elective-16",
       "learning_objective": "Architect Command Query Responsibility Segregation (CQRS) systems separating command models from read projections with eventual consistency.",
@@ -2999,11 +2999,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/17-feature-flags/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/17-feature-flags/main.go",
-        "readme_path": "electives/advanced-electives/17-feature-flags/README.md",
+        "main_path": "electives/advanced-electives/lessons/17-feature-flags/main.go",
+        "readme_path": "electives/advanced-electives/lessons/17-feature-flags/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/17-feature-flags/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/17-feature-flags/main_test.go"
       },
       "id": "elective-17",
       "learning_objective": "Design and evaluate runtime feature flags supporting dynamic percentage rollouts, user targeting, and decoupled release lifecycles.",
@@ -3182,11 +3182,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/18-blue-green-deployments/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/18-blue-green-deployments/main.go",
-        "readme_path": "electives/advanced-electives/18-blue-green-deployments/README.md",
+        "main_path": "electives/advanced-electives/lessons/18-blue-green-deployments/main.go",
+        "readme_path": "electives/advanced-electives/lessons/18-blue-green-deployments/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/18-blue-green-deployments/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/18-blue-green-deployments/main_test.go"
       },
       "id": "elective-18",
       "learning_objective": "Formulate zero-downtime blue/green deployment strategies with forward/backward schema compatibility, health gating, and rollback runbooks.",
@@ -3366,11 +3366,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/19-microservice-splitting/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/19-microservice-splitting/main.go",
-        "readme_path": "electives/advanced-electives/19-microservice-splitting/README.md",
+        "main_path": "electives/advanced-electives/lessons/19-microservice-splitting/main.go",
+        "readme_path": "electives/advanced-electives/lessons/19-microservice-splitting/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/19-microservice-splitting/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/19-microservice-splitting/main_test.go"
       },
       "id": "elective-19",
       "learning_objective": "Deconstruct monolithic codebases into domain-isolated microservices using the Strangler Fig pattern and bounded context boundaries.",
@@ -3549,11 +3549,11 @@
       "files": {
         "assets_dir": "electives/advanced-electives/20-deeper-distributed-systems/assets",
         "diagram_paths": [],
-        "main_path": "electives/advanced-electives/20-deeper-distributed-systems/main.go",
-        "readme_path": "electives/advanced-electives/20-deeper-distributed-systems/README.md",
+        "main_path": "electives/advanced-electives/lessons/20-deeper-distributed-systems/main.go",
+        "readme_path": "electives/advanced-electives/lessons/20-deeper-distributed-systems/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "electives/advanced-electives/20-deeper-distributed-systems/main_test.go"
+        "test_path": "electives/advanced-electives/lessons/20-deeper-distributed-systems/main_test.go"
       },
       "id": "elective-20",
       "learning_objective": "Design distributed systems resilient to network partitions, implementing circuit breakers, CAP tradeoffs, and retry backoff with jitter.",

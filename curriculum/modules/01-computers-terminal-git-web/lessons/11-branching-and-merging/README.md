@@ -170,7 +170,7 @@ Branching strategies (Git Flow, GitHub Flow, Trunk-Based Development) are founda
 2. Run `git log --oneline --graph` and note the commit DAG.
 3. Create a deliberate merge conflict: edit the same line on two branches, attempt merge, open the conflicted file, identify the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`), resolve the conflict, add and commit.
 
-The [Shell + Git Lab](../projects/shell-git-lab/README.md) requires you to create branches, switch between them, merge, and resolve a simulated conflict — the same skills this lesson teaches. The verification script enforces that your branch graph and merge history are correct.
+The [Shell + Git Lab](../../projects/shell-git-lab/README.md) requires you to create branches, switch between them, merge, and resolve a simulated conflict — the same skills this lesson teaches. The verification script enforces that your branch graph and merge history are correct.
 
 ## Review questions
 

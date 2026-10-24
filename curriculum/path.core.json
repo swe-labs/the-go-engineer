@@ -1935,8 +1935,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/01-what-is-a-program/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/01-what-is-a-program/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/01-what-is-a-program/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/01-what-is-a-program/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -1998,7 +1998,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/01-what-is-a-program",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/01-what-is-a-program",
         "test_command": ""
       },
       "zero_magic": {
@@ -2120,8 +2120,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/02-source-code-executable-and-process/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/02-source-code-executable-and-process/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -2181,7 +2181,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/02-source-code-executable-and-process",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process",
         "test_command": ""
       },
       "zero_magic": {
@@ -2303,8 +2303,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -2364,7 +2364,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths",
         "test_command": ""
       },
       "zero_magic": {
@@ -2486,8 +2486,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/04-terminal-basics/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/04-terminal-basics/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/04-terminal-basics/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/04-terminal-basics/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -2547,7 +2547,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/04-terminal-basics",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/04-terminal-basics",
         "test_command": ""
       },
       "zero_magic": {
@@ -2669,8 +2669,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/05-environment-variables/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/05-environment-variables/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/05-environment-variables/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/05-environment-variables/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -2730,7 +2730,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/05-environment-variables",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/05-environment-variables",
         "test_command": ""
       },
       "zero_magic": {
@@ -2852,8 +2852,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/06-exit-codes/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/06-exit-codes/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/06-exit-codes/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/06-exit-codes/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -2913,7 +2913,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/06-exit-codes",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/06-exit-codes",
         "test_command": ""
       },
       "zero_magic": {
@@ -3043,8 +3043,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -3106,7 +3106,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/07-how-the-os-manages-processes",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes",
         "test_command": ""
       },
       "zero_magic": {
@@ -3243,8 +3243,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -3306,7 +3306,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap",
         "test_command": ""
       },
       "zero_magic": {
@@ -3428,8 +3428,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/09-git-mental-model/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/09-git-mental-model/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/09-git-mental-model/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/09-git-mental-model/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -3489,7 +3489,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/09-git-mental-model",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/09-git-mental-model",
         "test_command": ""
       },
       "zero_magic": {
@@ -3611,8 +3611,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/10-git-basics-status-add-commit/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/10-git-basics-status-add-commit/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -3672,7 +3672,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/10-git-basics-status-add-commit",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/10-git-basics-status-add-commit",
         "test_command": ""
       },
       "zero_magic": {
@@ -3794,8 +3794,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/11-branching-and-merging/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/11-branching-and-merging/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/11-branching-and-merging/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/11-branching-and-merging/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -3855,7 +3855,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/11-branching-and-merging",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/11-branching-and-merging",
         "test_command": ""
       },
       "zero_magic": {
@@ -3977,8 +3977,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/12-github-workflow/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/12-github-workflow/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/12-github-workflow/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/12-github-workflow/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -4038,7 +4038,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/12-github-workflow",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/12-github-workflow",
         "test_command": ""
       },
       "zero_magic": {
@@ -4160,8 +4160,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -4221,7 +4221,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/13-pull-requests-and-code-review",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review",
         "test_command": ""
       },
       "zero_magic": {
@@ -4343,8 +4343,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/14-web-preview-client-server-dns-and-ports/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/14-web-preview-client-server-dns-and-ports/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -4404,7 +4404,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/14-web-preview-client-server-dns-and-ports",
         "test_command": ""
       },
       "zero_magic": {
@@ -4541,8 +4541,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/01-computers-terminal-git-web/15-http-request-and-response-preview/main.go",
-        "readme_path": "modules/01-computers-terminal-git-web/15-http-request-and-response-preview/README.md",
+        "main_path": "modules/01-computers-terminal-git-web/lessons/15-http-request-and-response-preview/main.go",
+        "readme_path": "modules/01-computers-terminal-git-web/lessons/15-http-request-and-response-preview/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -4602,7 +4602,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/01-computers-terminal-git-web/15-http-request-and-response-preview",
+        "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/15-http-request-and-response-preview",
         "test_command": ""
       },
       "zero_magic": {
@@ -4724,8 +4724,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/01-install-and-verify-go/main.go",
-        "readme_path": "modules/02-go-setup-tooling/01-install-and-verify-go/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/01-install-and-verify-go/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/01-install-and-verify-go/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -4787,7 +4787,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/01-install-and-verify-go",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/01-install-and-verify-go",
         "test_command": ""
       },
       "zero_magic": {
@@ -4909,8 +4909,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/02-hello-world/main.go",
-        "readme_path": "modules/02-go-setup-tooling/02-hello-world/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/02-hello-world/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/02-hello-world/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -4972,7 +4972,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/02-hello-world",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/02-hello-world",
         "test_command": ""
       },
       "zero_magic": {
@@ -5094,8 +5094,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/03-go-run/main.go",
-        "readme_path": "modules/02-go-setup-tooling/03-go-run/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/03-go-run/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/03-go-run/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -5155,7 +5155,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/03-go-run",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/03-go-run",
         "test_command": ""
       },
       "zero_magic": {
@@ -5276,8 +5276,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/04-go-build/main.go",
-        "readme_path": "modules/02-go-setup-tooling/04-go-build/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/04-go-build/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/04-go-build/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -5337,7 +5337,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/04-go-build",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/04-go-build",
         "test_command": ""
       },
       "zero_magic": {
@@ -5459,11 +5459,11 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/05-go-test/main.go",
-        "readme_path": "modules/02-go-setup-tooling/05-go-test/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/05-go-test/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/05-go-test/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "modules/02-go-setup-tooling/05-go-test/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/lessons/05-go-test/main_test.go"
       },
       "id": "core-02-05",
       "learning_objective": "Execute unit tests and benchmarks using go test, interpreting pass/fail statuses and test run output.",
@@ -5520,7 +5520,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/05-go-test",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/05-go-test",
         "test_command": ""
       },
       "zero_magic": {
@@ -5642,8 +5642,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/06-gofmt/main.go",
-        "readme_path": "modules/02-go-setup-tooling/06-gofmt/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/06-gofmt/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/06-gofmt/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -5703,7 +5703,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/06-gofmt",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/06-gofmt",
         "test_command": ""
       },
       "zero_magic": {
@@ -5825,8 +5825,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/07-go-vet/main.go",
-        "readme_path": "modules/02-go-setup-tooling/07-go-vet/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/07-go-vet/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/07-go-vet/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -5886,7 +5886,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/07-go-vet",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/07-go-vet",
         "test_command": ""
       },
       "zero_magic": {
@@ -6008,8 +6008,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/08-go-doc/main.go",
-        "readme_path": "modules/02-go-setup-tooling/08-go-doc/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/08-go-doc/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/08-go-doc/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -6069,7 +6069,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/08-go-doc",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/08-go-doc",
         "test_command": ""
       },
       "zero_magic": {
@@ -6191,8 +6191,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/09-editor-setup-and-gopls/main.go",
-        "readme_path": "modules/02-go-setup-tooling/09-editor-setup-and-gopls/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -6252,7 +6252,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/09-editor-setup-and-gopls",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls",
         "test_command": ""
       },
       "zero_magic": {
@@ -6374,8 +6374,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/10-reading-compiler-errors/main.go",
-        "readme_path": "modules/02-go-setup-tooling/10-reading-compiler-errors/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/10-reading-compiler-errors/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/10-reading-compiler-errors/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -6437,7 +6437,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/10-reading-compiler-errors",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/10-reading-compiler-errors",
         "test_command": ""
       },
       "zero_magic": {
@@ -6559,8 +6559,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/11-reading-runtime-errors/main.go",
-        "readme_path": "modules/02-go-setup-tooling/11-reading-runtime-errors/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/11-reading-runtime-errors/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/11-reading-runtime-errors/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -6620,7 +6620,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/11-reading-runtime-errors",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/11-reading-runtime-errors",
         "test_command": ""
       },
       "zero_magic": {
@@ -6742,11 +6742,11 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/12-reading-test-failures/main.go",
-        "readme_path": "modules/02-go-setup-tooling/12-reading-test-failures/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/12-reading-test-failures/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/12-reading-test-failures/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": "modules/02-go-setup-tooling/12-reading-test-failures/main_test.go"
+        "test_path": "modules/02-go-setup-tooling/lessons/12-reading-test-failures/main_test.go"
       },
       "id": "core-02-12",
       "learning_objective": "Interpret test failure output, comparing expected vs actual values and debugging failing assertion lines.",
@@ -6803,7 +6803,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/12-reading-test-failures",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/12-reading-test-failures",
         "test_command": ""
       },
       "zero_magic": {
@@ -6933,8 +6933,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/13-go-module-root-basics/main.go",
-        "readme_path": "modules/02-go-setup-tooling/13-go-module-root-basics/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/13-go-module-root-basics/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/13-go-module-root-basics/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -6994,7 +6994,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/13-go-module-root-basics",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/13-go-module-root-basics",
         "test_command": ""
       },
       "zero_magic": {
@@ -7124,8 +7124,8 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "modules/02-go-setup-tooling/14-tooling-checklist/main.go",
-        "readme_path": "modules/02-go-setup-tooling/14-tooling-checklist/README.md",
+        "main_path": "modules/02-go-setup-tooling/lessons/14-tooling-checklist/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/14-tooling-checklist/README.md",
         "solution_path": "",
         "starter_path": "",
         "test_path": ""
@@ -7185,7 +7185,7 @@
         ],
         "mode": "mixed",
         "race_command": "",
-        "run_command": "go run ./modules/02-go-setup-tooling/14-tooling-checklist",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/14-tooling-checklist",
         "test_command": ""
       },
       "zero_magic": {

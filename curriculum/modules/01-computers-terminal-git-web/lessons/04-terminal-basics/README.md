@@ -241,7 +241,7 @@ CI/CD automation pipelines (GitHub Actions, GitLab CI) are fundamentally shell s
    - Run `echo "success" && echo "second command ran"`
    - Notice how both commands run because the first succeeded.
 
-In the [Shell + Git Lab](../projects/shell-git-lab/README.md), you will apply all these commands in a verified project that tests directory trees, stream redirection, and Git integration.
+In the [Shell + Git Lab](../../projects/shell-git-lab/README.md), you will apply all these commands in a verified project that tests directory trees, stream redirection, and Git integration.
 
 ## Review questions
 

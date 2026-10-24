@@ -18,21 +18,21 @@ With that foundation in place, you will gain terminal fluency: navigating the fi
 
 | # | Lesson | Outcome |
 |---|--------|---------|
-| 1 | [What is a program?](../01-computers-terminal-git-web/01-what-is-a-program/README.md) | Distinguish source code, compiled binary, and running process; explain the three-part lifecycle of any program. |
-| 2 | [Source code, executable, and process](../01-computers-terminal-git-web/02-source-code-executable-and-process/README.md) | Trace how the CPU fetches, decodes, and executes compiled machine instructions from system memory using registers and the ALU. |
-| 3 | [Files, bytes, directories, and paths](../01-computers-terminal-git-web/03-files-bytes-directories-and-paths/README.md) | Navigate the filesystem tree, understand how bytes map to content, and write cross-platform Go file operations. |
-| 4 | [Terminal basics](../01-computers-terminal-git-web/04-terminal-basics/README.md) | Run commands, redirect output, pipe data between programs, and explain how the shell forks and manages child processes. |
-| 5 | [Environment variables](../01-computers-terminal-git-web/05-environment-variables/README.md) | Read and set environment variables, understand inheritance across processes, and configure Go applications without hard-coded secrets. |
-| 6 | [Exit codes](../01-computers-terminal-git-web/06-exit-codes/README.md) | Write programs that signal success or failure via exit codes; chain commands with `&&` and `||` based on exit status. |
-| 7 | [How the OS manages processes](../01-computers-terminal-git-web/07-how-the-os-manages-processes/README.md) | Spawn child processes, collect exit codes, and explain scheduling, context switching, and zombie processes. |
-| 8 | [Memory preview: stack vs heap](../01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/README.md) | Identify stack- vs heap-allocated variables; use `go build -gcflags=-m` to verify escape analysis decisions. |
-| 9 | [Git mental model](../01-computers-terminal-git-web/09-git-mental-model/README.md) | Explain Git's content-addressable object model, the DAG of commits, and why branches are just movable pointers. |
-| 10 | [Git basics: status, add, commit](../01-computers-terminal-git-web/10-git-basics-status-add-commit/README.md) | Navigate the working directory, staging area, and commit history; write meaningful commit messages. |
-| 11 | [Branching and merging](../01-computers-terminal-git-web/11-branching-and-merging/README.md) | Create branches, merge with fast-forward and three-way merges, and resolve merge conflicts. |
-| 12 | [GitHub workflow](../01-computers-terminal-git-web/12-github-workflow/README.md) | Fork, clone, branch, push, and open pull requests; explain the propose-verify-merge cycle. |
-| 13 | [Pull requests and code review](../01-computers-terminal-git-web/13-pull-requests-and-code-review/README.md) | Write effective PR descriptions, leave constructive review comments, and respond to feedback professionally. |
-| 14 | [Web preview: client, server, DNS, and ports](../01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/README.md) | Resolve domain names to IPs, establish TCP connections, and explain how a browser loads a webpage. |
-| 15 | [HTTP request and response preview](../01-computers-terminal-git-web/15-http-request-and-response-preview/README.md) | Start an HTTP server, send GET requests, read status codes and headers, and understand the request-response cycle. |
+| 1 | [What is a program?](./lessons/01-what-is-a-program/README.md) | Distinguish source code, compiled binary, and running process; explain the three-part lifecycle of any program. |
+| 2 | [Source code, executable, and process](./lessons/02-source-code-executable-and-process/README.md) | Trace how the CPU fetches, decodes, and executes compiled machine instructions from system memory using registers and the ALU. |
+| 3 | [Files, bytes, directories, and paths](./lessons/03-files-bytes-directories-and-paths/README.md) | Navigate the filesystem tree, understand how bytes map to content, and write cross-platform Go file operations. |
+| 4 | [Terminal basics](./lessons/04-terminal-basics/README.md) | Run commands, redirect output, pipe data between programs, and explain how the shell forks and manages child processes. |
+| 5 | [Environment variables](./lessons/05-environment-variables/README.md) | Read and set environment variables, understand inheritance across processes, and configure Go applications without hard-coded secrets. |
+| 6 | [Exit codes](./lessons/06-exit-codes/README.md) | Write programs that signal success or failure via exit codes; chain commands with `&&` and `||` based on exit status. |
+| 7 | [How the OS manages processes](./lessons/07-how-the-os-manages-processes/README.md) | Spawn child processes, collect exit codes, and explain scheduling, context switching, and zombie processes. |
+| 8 | [Memory preview: stack vs heap](./lessons/08-memory-preview-stack-vs-heap/README.md) | Identify stack- vs heap-allocated variables; use `go build -gcflags=-m` to verify escape analysis decisions. |
+| 9 | [Git mental model](./lessons/09-git-mental-model/README.md) | Explain Git's content-addressable object model, the DAG of commits, and why branches are just movable pointers. |
+| 10 | [Git basics: status, add, commit](./lessons/10-git-basics-status-add-commit/README.md) | Navigate the working directory, staging area, and commit history; write meaningful commit messages. |
+| 11 | [Branching and merging](./lessons/11-branching-and-merging/README.md) | Create branches, merge with fast-forward and three-way merges, and resolve merge conflicts. |
+| 12 | [GitHub workflow](./lessons/12-github-workflow/README.md) | Fork, clone, branch, push, and open pull requests; explain the propose-verify-merge cycle. |
+| 13 | [Pull requests and code review](./lessons/13-pull-requests-and-code-review/README.md) | Write effective PR descriptions, leave constructive review comments, and respond to feedback professionally. |
+| 14 | [Web preview: client, server, DNS, and ports](./lessons/14-web-preview-client-server-dns-and-ports/README.md) | Resolve domain names to IPs, establish TCP connections, and explain how a browser loads a webpage. |
+| 15 | [HTTP request and response preview](./lessons/15-http-request-and-response-preview/README.md) | Start an HTTP server, send GET requests, read status codes and headers, and understand the request-response cycle. |
 
 ## Project
 

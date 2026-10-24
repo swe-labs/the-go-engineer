@@ -178,7 +178,7 @@ The status-add-commit cycle is performed dozens of times daily by every professi
 2. Use `git diff` to see unstaged changes and `git diff --staged` to see staged changes. Commit the staged version with `git commit -m "feat: add initial file"`.
 3. Run `git log --oneline` and confirm the commit shows up with your message. Then modify the file, stage it, and amend the commit with `git commit --amend`.
 
-In the [Shell + Git Lab](../projects/shell-git-lab/README.md), you will practice this exact workflow: initialize a repo, create files, stage them, commit with meaningful messages, and verify the history. The project verification script checks that staged files produce the expected commit graph.
+In the [Shell + Git Lab](../../projects/shell-git-lab/README.md), you will practice this exact workflow: initialize a repo, create files, stage them, commit with meaningful messages, and verify the history. The project verification script checks that staged files produce the expected commit graph.
 
 ## Review questions
 

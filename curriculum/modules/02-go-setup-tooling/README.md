@@ -20,20 +20,20 @@ This module introduces the Go toolchain — the commands and tools you will use 
 
 | # | Lesson | Est. time |
 |---|--------|-----------|
-| 01 | [Install and Verify Go](./01-install-and-verify-go/README.md) | 45 min |
-| 02 | [Hello World](./02-hello-world/README.md) | 30 min |
-| 03 | [go run](./03-go-run/README.md) | 30 min |
-| 04 | [go build](./04-go-build/README.md) | 45 min |
-| 05 | [go test](./05-go-test/README.md) | 45 min |
-| 06 | [gofmt](./06-gofmt/README.md) | 30 min |
-| 07 | [go vet](./07-go-vet/README.md) | 30 min |
-| 08 | [go doc](./08-go-doc/README.md) | 30 min |
-| 09 | [Editor Setup and gopls](./09-editor-setup-and-gopls/README.md) | 45 min |
-| 10 | [Reading Compiler Errors](./10-reading-compiler-errors/README.md) | 45 min |
-| 11 | [Reading Runtime Errors](./11-reading-runtime-errors/README.md) | 45 min |
-| 12 | [Reading Test Failures](./12-reading-test-failures/README.md) | 45 min |
-| 13 | [Go Module Root Basics](./13-go-module-root-basics/README.md) | 45 min |
-| 14 | [Tooling Checklist](./14-tooling-checklist/README.md) | 30 min |
+| 01 | [Install and Verify Go](./lessons/01-install-and-verify-go/README.md) | 45 min |
+| 02 | [Hello World](./lessons/02-hello-world/README.md) | 30 min |
+| 03 | [go run](./lessons/03-go-run/README.md) | 30 min |
+| 04 | [go build](./lessons/04-go-build/README.md) | 45 min |
+| 05 | [go test](./lessons/05-go-test/README.md) | 45 min |
+| 06 | [gofmt](./lessons/06-gofmt/README.md) | 30 min |
+| 07 | [go vet](./lessons/07-go-vet/README.md) | 30 min |
+| 08 | [go doc](./lessons/08-go-doc/README.md) | 30 min |
+| 09 | [Editor Setup and gopls](./lessons/09-editor-setup-and-gopls/README.md) | 45 min |
+| 10 | [Reading Compiler Errors](./lessons/10-reading-compiler-errors/README.md) | 45 min |
+| 11 | [Reading Runtime Errors](./lessons/11-reading-runtime-errors/README.md) | 45 min |
+| 12 | [Reading Test Failures](./lessons/12-reading-test-failures/README.md) | 45 min |
+| 13 | [Go Module Root Basics](./lessons/13-go-module-root-basics/README.md) | 45 min |
+| 14 | [Tooling Checklist](./lessons/14-tooling-checklist/README.md) | 30 min |
 
 **Total**: ~9 hours
 

@@ -160,7 +160,7 @@ Every professional software team uses code review. Google mandates at least one 
 2. Leave at least three inline comments: one suggesting a functional improvement, one asking for clarification, and one praising a well-written section.
 3. Practice the review workflow: request changes, then approve. Note how the PR status changes after each action.
 
-Although the [Shell + Git Lab](../projects/shell-git-lab/README.md) is a local repository exercise, the code review skills you learn here — writing clear descriptions, reading diffs, leaving constructive feedback — apply directly when you share your project on GitHub and open your first real PR.
+Although the [Shell + Git Lab](../../projects/shell-git-lab/README.md) is a local repository exercise, the code review skills you learn here — writing clear descriptions, reading diffs, leaving constructive feedback — apply directly when you share your project on GitHub and open your first real PR.
 
 ## Review questions
 

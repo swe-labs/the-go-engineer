@@ -174,7 +174,7 @@ GitHub is the largest code hosting platform in the world. Millions of developers
 2. Open a pull request on GitHub from your fork's feature branch to the original repo's main branch. Write a descriptive title and body.
 3. Explore the PR page: check the "Files changed" tab, leave a comment on a diff line, and verify the status checks section.
 
-In the [Shell + Git Lab](../projects/shell-git-lab/README.md), you will use a local Git workflow that mirrors the GitHub fork-branch-PR cycle. Understanding remotes, pushes, and the propose-verify-merge pattern prepares you to publish your project to GitHub.
+In the [Shell + Git Lab](../../projects/shell-git-lab/README.md), you will use a local Git workflow that mirrors the GitHub fork-branch-PR cycle. Understanding remotes, pushes, and the propose-verify-merge pattern prepares you to publish your project to GitHub.
 
 ## Review questions
 
