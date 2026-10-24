@@ -12,6 +12,24 @@ Receiver sets are the bridge between methods and interfaces. When you assign a v
 
 Every type `T` has a method set — the set of methods callable on a value of that type. `*T` also has a method set, which is a superset of `T`'s. The rule is simple: **value methods are in both sets; pointer methods are only in `*T`'s set**. When you have a value, you cannot call a pointer method on it directly; when you have a pointer, you can call everything.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph MethodSetRules["Method Sets and Interface Satisfaction"]
+        subgraph ValueType["Value Type T"]
+            M_VAL["Contains ONLY methods with value receiver (t T)"]
+        end
+
+        subgraph PointerType["Pointer Type *T"]
+            M_BOTH["Contains methods with (t T) AND (*T) receivers"]
+        end
+    end
+
+    NOTE["A value of type T cannot satisfy an interface requiring a (*T) pointer receiver method!"]
+    ValueType -.-> NOTE
+```
+
 ## Core idea
 
 **Method set of `T`** (value type `T`):

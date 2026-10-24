@@ -12,6 +12,23 @@ A database function wraps `sql.ErrNoRows` with `"query user: %w"`. A file parser
 
 Imagine a chain of linked envelopes. Each envelope contains a message and a pointer to the next envelope. `errors.Is(err, target)` starts at the outermost envelope, checks if its contents match the target, then opens it and repeats on the next envelope. If any envelope matches, the answer is `true`. If the chain runs out, `false`. It is a depth-first search of a singly linked list.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    QUERY["errors.Is(err, sql.ErrNoRows)"]
+
+    QUERY --> TOP["Inspect Current Error: err"]
+    TOP --> MATCH{"err == target?"}
+    MATCH -->|Yes| FOUND["Return true (Target matched)"]
+    MATCH -->|No| UNWRAP{"Does err implement Unwrap()?"}
+    UNWRAP -->|Yes| NEXT["err = err.Unwrap()"] --> TOP
+    UNWRAP -->|No| NOT_FOUND["Return false (Target not in chain)"]
+
+    style FOUND stroke:#28a745,stroke-width:2px
+    style NOT_FOUND stroke:#dc3545,stroke-width:2px
+```
+
 ## Core idea
 
 `errors.Is` compares an error against a target by:

@@ -12,6 +12,25 @@ Embedding is one of Go's most distinctive features. It enables code reuse withou
 
 Embedding is automatic delegation. When you embed `A` in `B`, every method and field of `A` is automatically available on `B`. It is as if you wrote forwarding methods by hand — but the compiler does it for you. B does not "inherit" from A; B "has" an A and conveniently exposes A's interface.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph InnerStruct["type Entity struct"]
+        ID["ID string"]
+        CREATED["CreatedAt time.Time"]
+    end
+
+    subgraph OuterStruct["type Customer struct"]
+        EMBED["Entity (Anonymous Embedded Field)"]
+        NAME["Name string"]
+    end
+
+    InnerStruct --> EMBED
+    NOTE["Field Promotion: customer.ID directly accesses customer.Entity.ID"]
+    OuterStruct -.-> NOTE
+```
+
 ## Core idea
 
 **Embedded vs named field**:

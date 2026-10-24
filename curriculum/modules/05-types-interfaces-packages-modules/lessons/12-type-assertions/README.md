@@ -12,6 +12,22 @@ When you receive a value as an interface — from a function parameter, a channe
 
 Think of an interface value as a sealed box containing a concrete value of some type. A type assertion `x.(T)` tries to open the box. If the box contains a `T`, you get the value. If not, you either get a panic (single-return form) or a `false` (comma-ok form). The comma-ok form is like asking "is this a T?" and getting a yes/no answer.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    ASSERT["v, ok := i.(TargetType)"]
+
+    ASSERT --> CHECK{"Does dynamic concrete type in interface match TargetType?"}
+    CHECK -->|Yes| OK["ok = true
+v = concrete value of TargetType"]
+    CHECK -->|No| FAIL["ok = false
+v = zero-value of TargetType (No panic!)"]
+
+    style OK stroke:#28a745,stroke-width:2px
+    style FAIL stroke:#dc3545,stroke-width:2px
+```
+
 ## Core idea
 
 **Syntax**:

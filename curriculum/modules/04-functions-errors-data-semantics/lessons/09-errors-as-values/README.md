@@ -22,6 +22,29 @@ Think of a function returning a result as carrying a second box alongside the re
 
 Because `error` is an interface, any type that has an `Error() string` method qualifies as an error. This includes `errors.New`, `fmt.Errorf`, sentinel errors, and custom error types.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ErrorInterface["Built-in error Interface Specification"]
+        DEF["type error interface {
+    Error() string
+}"]
+    end
+
+    subgraph ErrorReturnFlow["Errors as Normal First-Class Return Values"]
+        FN["res, err := OpenAccount(name)"]
+        CHECK{"if err != nil"}
+        HANDLE["Handle error explicitly
+(log, retry, or wrap and return)"]
+        CONTINUE["Proceed with valid res"]
+
+        FN --> CHECK
+        CHECK -->|true| HANDLE
+        CHECK -->|false| CONTINUE
+    end
+```
+
 ## Core idea
 
 Functions that can fail return `(T, error)`:

@@ -12,6 +12,26 @@ Sentinel errors (checked with `errors.Is`) tell you _which_ error occurred. Cust
 
 `errors.Is` asks "does this chain contain the target value?" `errors.As` asks "does this chain contain a value of the target type?" Think of `errors.As` as a type-aware probe: it walks the chain, checks if each error's type matches (or implements) the target, and if so, assigns the error to the target pointer and returns `true`. It stops at the first match, not the deepest.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    QUERY["var pgErr *pgconn.PgError
+errors.As(err, &pgErr)"]
+
+    QUERY --> TOP["Inspect Current Error in Chain"]
+    TOP --> CHECK{"Can current error assign to target pointer type?"}
+    CHECK -->|Yes| COPY["Assign matched error to target pointer
+Return true"]
+    CHECK -->|No| UNWRAP{"Does error implement Unwrap()?"}
+    UNWRAP -->|Yes| NEXT["Advance to wrapped child error"] --> TOP
+    UNWRAP -->|No| FAIL["Target type not found
+Return false"]
+
+    style COPY stroke:#28a745,stroke-width:2px
+    style FAIL stroke:#dc3545,stroke-width:2px
+```
+
 ## Core idea
 
 `errors.As` searches the error chain for the first error that can be assigned to the target. The target must be a non-nil pointer to either an error type or an interface type. It works by:

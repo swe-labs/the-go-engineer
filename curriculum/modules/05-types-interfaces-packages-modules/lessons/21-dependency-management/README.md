@@ -20,6 +20,22 @@ Your module's dependency graph is a tree. `go get` is your gardening tool:
 
 **Minimum Version Selection (MVS)** is the rule: when multiple requirements for the same module conflict, Go chooses the minimum version that satisfies all requirements. This is simpler, more predictable, and more stable than the dependency-resolution algorithms used by npm, pip, or RubyGems.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph MVS["Minimal Version Selection (MVS)"]
+        A["Module A requires D v1.2.0"]
+        B["Module B requires D v1.4.0"]
+        MVS_RULE["MVS Rule: Select the OLDEST version that satisfies all constraints"]
+        RESULT["Selected: D v1.4.0 (Not v1.5.0 or latest)"]
+
+        A --> MVS_RULE
+        B --> MVS_RULE
+        MVS_RULE --> RESULT
+    end
+```
+
 ## Core idea
 
 ### `go get` — the primary dependency tool

@@ -12,6 +12,27 @@ Sentinel errors (`var ErrX = errors.New(...)`) tell you _which_ error happened. 
 
 A sentinel error is a post-it note with a message. A custom error type is a structured form with labeled fields. The `Error()` method is the cover page. The `Unwrap()` method links to a related form. The `Is()` method defines what counts as "the same" error. The `As()` method controls how this error can be extracted as another type. The `error` interface is the single requirement; everything else is optional but powerful.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph CustomStruct["type AppError struct"]
+        CODE["Code: "INVALID_PAYMENT_METHOD""]
+        MSG["Message: "Card expired""]
+        RETRY["Retryable: false"]
+        ERR["Err: underlying error (sql/network)"]
+    end
+
+    subgraph Impl["Implements error and Unwrap interfaces"]
+        M1["Error() string:
+fmt.Sprintf("[%s] %s", e.Code, e.Message)"]
+        M2["Unwrap() error:
+return e.Err"]
+    end
+
+    CustomStruct --- Impl
+```
+
 ## Core idea
 
 The `error` interface is one method:

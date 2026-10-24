@@ -18,6 +18,24 @@ When you `go build`, the Go toolchain downloads modules from the internet. How d
 - If the hashes match, the source is authentic. If they differ, the build fails with a security error.
 - The checksum database (`sum.golang.org`) acts as a notary — it publishes the hash on a public, append-only log, so you can verify that everyone sees the same source.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ChecksumAudit["go.sum Cryptographic Verification"]
+        DEP["Downloaded Module Version:
+golang.org/x/crypto v0.21.0"]
+        HASH["Compute SHA-256 Hash of downloaded zip & mod tree"]
+        RECORD["Compare against entry in go.sum:
+h1:8r8b...="]
+
+        DEP --> HASH --> RECORD
+        RECORD -->|Matches| OK["Build Continues (Integrity Verified)"]
+        RECORD -->|Mismatch| TAMPER["SECURITY ALERT: Checksum mismatch!
+Build aborted to prevent supply-chain attack"]
+    end
+```
+
 ## Core idea
 
 ### `go.sum` file structure

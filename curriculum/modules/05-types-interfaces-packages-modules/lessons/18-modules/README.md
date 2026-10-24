@@ -19,6 +19,30 @@ A Go module is a self-contained unit of versioned code. Think of it as a library
 
 Multiple modules in one repository is like a box set — each book has its own ISBN (module path) but they ship together in one box (the repo).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ModuleBoundary["Module: github.com/user/service"]
+        GOMOD["go.mod (Defines module path & Go version)"]
+        
+        subgraph PkgA["/pkg/auth"]
+            A_SRC["auth.go (package auth)"]
+        end
+        subgraph PkgB["/pkg/database"]
+            B_SRC["db.go (package database)"]
+        end
+        subgraph Cmd["/cmd/server"]
+            M_SRC["main.go
+import "github.com/user/service/pkg/auth""]
+        end
+    end
+
+    GOMOD --> Cmd
+    Cmd --> PkgA
+    Cmd --> PkgB
+```
+
 ## Core idea
 
 A module is defined by a `go.mod` file at its root. The module path is the import path prefix for all packages within the module.

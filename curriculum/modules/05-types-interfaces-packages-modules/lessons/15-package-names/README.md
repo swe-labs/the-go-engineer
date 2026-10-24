@@ -19,6 +19,17 @@ import "your/project/httputil"
 
 The package name should be **short**, **lowercase**, and **descriptive** — a noun that describes what the package provides. It is **not** required to be unique across your entire project, but it must be unique within the same directory.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Idiomatic["Idiomatic Go Package Naming"]
+        G1["short, lowercase, singular: http, json, user, auth"]
+        G2["No underscores or camelCase: NOT user_service, NOT authHelper"]
+        G3["Matches directory name: package user resides in /user directory"]
+    end
+```
+
 ## Core idea
 
 Every `.go` file starts with a `package` clause:

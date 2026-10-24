@@ -12,6 +12,28 @@ Go's philosophy is explicit error handling: return errors for expected failures.
 
 Think of `panic` as pulling a fire alarm. Normal operation (returning errors) is like a door closing normally. A panic is a building evacuation: every floor (function frame) must be evacuated in order, and each floor runs its cleanup checklist (deferred functions) before leaving. `recover` is the fire chief who can call off the evacuation at a specific floor -- the stack stops unwinding and normal execution resumes.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph NormalFlow["Normal Execution Stack"]
+        F1["main()"] --> F2["processData()"]
+        F2 --> PANIC["panic("database connection lost")"]
+    end
+
+    subgraph Unwinding["Runtime Stack Unwinding"]
+        PANIC --> U1["Unwind processData stack frame"]
+        U1 --> DEF["Execute deferred functions in main()"]
+        DEF --> REC{"r := recover() != nil?"}
+        REC -->|Recovered!| SAFE["Program resumes gracefully;
+Log critical error & return fallback"]
+        REC -->|No recover| CRASH["Process crashes with exit status 2"]
+    end
+
+    style SAFE stroke:#28a745,stroke-width:2px
+    style CRASH stroke:#dc3545,stroke-width:2px
+```
+
 ## Core idea
 
 - **`panic(v interface{})`**: Immediately stops execution of the current function, begins unwinding the stack, running deferred functions in each frame. If the unwinding reaches the top of the goroutine's stack, the program crashes with the panic value and stack trace.

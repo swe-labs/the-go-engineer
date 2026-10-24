@@ -17,6 +17,24 @@ The call stack is a stack of "frames" — one per active (called but not yet ret
 
 Each frame contains the function's parameters, local variables, and the return address (where execution should continue after the function returns). The frame at the top is the currently executing function.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph CallStack["Runtime Goroutine Call Stack"]
+        direction TB
+        F3["Stack Frame 3: calculateTax()
+[Local variables, return address]"]
+        F2["Stack Frame 2: processOrder()
+[Local variables, return address]"]
+        F1["Stack Frame 1: main()
+[Local variables, entry point]"]
+
+        F3 -->|Pushed on call / Popped on return| F2
+        F2 -->|Pushed on call / Popped on return| F1
+    end
+```
+
 ## Core idea
 
 **Stack frames** grow downward in memory (on most architectures). The stack pointer (SP) marks the boundary of the current frame. When `main` calls `foo` which calls `bar`, the stack looks like:

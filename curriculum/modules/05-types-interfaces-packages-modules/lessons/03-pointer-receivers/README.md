@@ -12,6 +12,24 @@ Value receiver methods operate on a copy — they cannot modify the original. Po
 
 A pointer receiver is a method whose receiver type is `*T` — a pointer to your named type. When you call `p.Method()`, Go passes a pointer to `p`. Inside the method, you read and write through that pointer, directly affecting the original value. If the receiver is `nil`, you can still call the method, but dereferencing the pointer inside will panic.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph Caller["Caller Struct Instance: u := User{Age: 30}"]
+        MEM["Memory Address: 0xc0000a2000
+Age: 30"]
+    end
+
+    subgraph PointerMethod["func (u *User) SetAge(newAge int)"]
+        RECV["u (*User) = 0xc0000a2000"]
+        MUT["u.Age = newAge"]
+    end
+
+    Caller -->|Passes memory address| RECV
+    MUT -->|Directly mutates caller's memory| MEM
+```
+
 ## Core idea
 
 Syntax:

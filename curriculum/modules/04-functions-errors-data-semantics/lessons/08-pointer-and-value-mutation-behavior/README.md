@@ -16,6 +16,22 @@ A value receiver reads the signpost and copies what is at the destination; the m
 
 Nil is a valid pointer value meaning "no signpost here." Dereferencing a nil pointer panics, so you must check before following.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph ValueReceiver["Value Semantics (modifyValue(u User))"]
+        U1["u User (Stack cell A)"] -->|Copies entire struct| U2["u User (Stack cell B)"]
+        U2 -->|Mutates cell B| U2_MOD["u.Name = "Bob" (cell A unchanged)"]
+    end
+
+    subgraph PointerReceiver["Pointer Semantics (modifyPointer(u *User))"]
+        P1["u User (Memory: 0x3000)"]
+        P_PTR["u *User (Pointer: 0x3000)"] -->|Dereference *u| P1
+        P_PTR -->|Mutates cell at 0x3000| P1_MOD["u.Name = "Bob" (Original mutated)"]
+    end
+```
+
 ## Core idea
 
 Pointer parameter:

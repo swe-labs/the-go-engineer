@@ -12,6 +12,22 @@ A file handle not closed, a mutex not unlocked, or a database transaction not ro
 
 `defer` is a contract you make with the function: "When I acquire this resource, I promise to release it before I leave." By placing the release immediately after the acquire, you never forget. The cleanup is guaranteed to run regardless of how the function exits -- normal return, error return, or panic. This is RAII (Resource Acquisition Is Initialization) adapted to Go's explicit error-handling style.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Fn as Worker Function
+    participant OS as Operating System / DB Connection
+
+    Fn->>OS: file, err := os.Open("data.csv")
+    Note over Fn: Check err != nil immediately
+    Fn->>Fn: defer file.Close() (Registered for cleanup)
+    Fn->>OS: Read chunks, process rows, evaluate business logic
+    Note over Fn: Any panic or return statement triggers cleanup
+    Fn-->>OS: Executing deferred file.Close() (FD freed safely)
+```
+
 ## Core idea
 
 The canonical cleanup pattern in Go:

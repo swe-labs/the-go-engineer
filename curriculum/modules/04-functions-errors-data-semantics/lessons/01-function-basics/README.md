@@ -14,6 +14,29 @@ A function is a named sequence of statements packaged as a single unit. Think of
 
 Go treats functions as _first-class values_. This means you can store a function in a variable, pass it to another function, and return it from a function — the same way you manipulate strings or integers. An anonymous function is a function literal without a name, useful for short inline operations.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph FuncSignature["Function Declaration Anatomy"]
+        KW["func"] --- NAME["CalculateTax"]
+        NAME --- PARAMS["(amount float64, rate float64)"]
+        PARAMS --- RET["(total float64)"]
+    end
+
+    subgraph Execution["Call & Return Flow"]
+        CALLER["Caller Scope:
+tax := CalculateTax(100.0, 0.08)"] -->|Pass arguments| ENTRY["Function Entry:
+Initialize stack frame with parameters"]
+        ENTRY --> BODY["Execute Function Body:
+result := amount * rate"]
+        BODY --> RETURN["return statement:
+Copy result to return slot"]
+        RETURN -->|Return control| RESUME["Caller Resumes:
+tax receives 8.0"]
+    end
+```
+
 ## Core idea
 
 Every function in Go starts with the `func` keyword:

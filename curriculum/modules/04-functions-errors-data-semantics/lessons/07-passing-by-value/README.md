@@ -14,6 +14,24 @@ When you pass a variable to a function, Go makes a photocopy of it. The function
 
 For maps, slices, and channels, the "value" being copied is the descriptor (pointer, length, capacity). The underlying data is shared, but the descriptor itself is copied. Think of it as photocopying a slip of paper that contains a street address: both you and the function have your own copy of the address, but both point to the same building.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph CallerMemory["Caller Stack"]
+        X["x := 10 (Memory: 0x1000)"]
+    end
+
+    subgraph CalleeMemory["Callee Stack: modify(val int)"]
+        VAL["val := 10 (Memory: 0x2000)
+val = 99"]
+    end
+
+    X -->|Bitwise copy (pass by value)| VAL
+    NOTE["x at 0x1000 remains 10! Callee modified distinct cell 0x2000."]
+    CalleeMemory -.-> NOTE
+```
+
 ## Core idea
 
 **Go is always pass-by-value.** There are no reference parameters. Every parameter receives a copy of the argument's value.

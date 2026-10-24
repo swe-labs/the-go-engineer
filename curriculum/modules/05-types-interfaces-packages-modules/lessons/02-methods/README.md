@@ -12,6 +12,21 @@ Methods attach behavior to data. In Go, you can define methods on any named type
 
 A method is a function with a **receiver** — an extra parameter that appears before the function name. When you call `obj.Method()`, Go passes `obj` as the receiver argument. The receiver binds the function to the type, just like `self` in Python or `this` in JavaScript, but explicit and visible in the signature.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph MethodDeclaration["Method Syntax Anatomy"]
+        KW["func"] --- RECV["(u User)"] --- NAME["FullName()"] --- RET["string"]
+    end
+
+    subgraph Invocation["Method Call Dispatch"]
+        USER["user := User{First: "John", Last: "Doe"}"] --> CALL["user.FullName()"]
+        CALL --> DISPATCH["Compiler rewrites to:
+User.FullName(user)"]
+    end
+```
+
 ## Core idea
 
 Method declaration syntax:

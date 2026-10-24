@@ -19,6 +19,33 @@ A workspace is a workbench where you lay out multiple modules side by side.
 
 Think of `go.work` as a **temporary, developer-local overlay** on top of the module graph. It does not affect published builds or other developers unless they also use workspaces.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph GoWorkspace["go.work Workspace Configuration"]
+        WORK["go.work:
+go 1.22
+use (
+    ./service-api
+    ./shared-sdk
+)"]
+
+        subgraph ServiceMod["Module 1: ./service-api"]
+            API_MOD["go.mod: module example.com/api
+import "example.com/sdk""]
+        end
+
+        subgraph SDKMod["Module 2: ./shared-sdk"]
+            SDK_MOD["go.mod: module example.com/sdk"]
+        end
+
+        WORK --> ServiceMod
+        WORK --> SDKMod
+        API_MOD -->|Resolves directly to local disk without replace directives!| SDK_MOD
+    end
+```
+
 ## Core idea
 
 ### The `go.work` file

@@ -12,6 +12,28 @@ A `struct` is Go's primary mechanism for grouping related data into a single com
 
 Think of a struct as a blueprint for a record with named slots. Each slot holds a value of a specific type. When you create a struct value, you fill those slots. Two struct values are equal if every corresponding slot holds an equal value. The struct itself is a value, not a reference — assigning one struct to another copies all slots.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph MemoryLayout["Struct Memory Alignment: type User struct"]
+        direction LR
+        F1["ID (int64)
+8 bytes
+[0..7]"] --- F2["IsActive (bool)
+1 byte
+[8]"] --- PAD["Padding
+7 bytes
+[9..15]"] --- F3["Age (int32)
+4 bytes
+[16..19]"] --- PAD2["Padding
+4 bytes
+[20..23]"]
+    end
+    NOTE["Total size = 24 bytes (Aligned to 8-byte boundary)"]
+    MemoryLayout -.-> NOTE
+```
+
 ## Core idea
 
 A struct is a composite type defined with the `type` keyword followed by the struct literal `struct { ... }` containing field declarations:

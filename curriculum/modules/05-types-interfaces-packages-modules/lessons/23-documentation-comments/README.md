@@ -18,6 +18,24 @@ A documentation comment is a conversation with the reader. Imagine you are expla
 
 The `go doc` tool is the reader's interface: it extracts these conversations and presents them as a beautifully formatted manual.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Source["Go Source Code: user.go"]
+        C1["// Package user provides multi-tenant authentication and profile management."]
+        C2["// User represents an authenticated account in the system."]
+        C3["// Authenticate verifies password against stored hash."]
+    end
+
+    subgraph Tooling["Godoc Tooling (go doc & pkg.go.dev)"]
+        PARSER["Extracts top-level comments directly adjacent to declarations"]
+        RENDER["Renders clean API documentation and synopsis"]
+    end
+
+    Source --> PARSER --> RENDER
+```
+
 ## Core idea
 
 ### Doc comment format

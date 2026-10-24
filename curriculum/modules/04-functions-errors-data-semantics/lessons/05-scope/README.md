@@ -18,6 +18,24 @@ Scope is the region of source code where a name (variable, function, type) is vi
 
 Lexical scoping means the scope is determined by the source code structure at compile time, not by runtime call paths.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph PackageScope["Package Scope (visible across all package files)"]
+        PKG_VAR["var ServiceName = "UserService""]
+
+        subgraph FuncScope["Function Scope: func ProcessOrder()"]
+            FN_VAR["orderID := 9001"]
+
+            subgraph BlockScope["Block Scope: if orderID > 0 { ... }"]
+                BLK_VAR["shadow := "inner"
+(Exists ONLY inside this block)"]
+            end
+        end
+    end
+```
+
 ## Core idea
 
 **Package scope**: Declarations at the top level (outside any function) are visible in all files of the same package. This includes variables, constants, types, and functions.

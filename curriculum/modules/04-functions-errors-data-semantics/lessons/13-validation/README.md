@@ -12,6 +12,21 @@ A production API receives thousands of requests per minute. Every field must be 
 
 Validation is a gatekeeper at the system boundary. Raw input arrives unchecked; the gatekeeper inspects each field against a set of rules. If all rules pass, the input is allowed through. If any rule fails, the gatekeeper returns a report of what failed and why. The report is a structured error (or multiple errors) that the caller can inspect to tell the user exactly what to fix.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Incoming User Registration Request"] --> V1{"Email empty?"}
+    V1 -->|Yes| E1["return ErrEmptyEmail"]
+    V1 -->|No| V2{"Password < 8 chars?"}
+    V2 -->|Yes| E2["return ErrPasswordTooShort"]
+    V2 -->|No| V3{"Username taken?"}
+    V3 -->|Yes| E3["return ErrDuplicateUsername"]
+    V3 -->|No| SUCCESS["Validation Passed: Proceed to persist user"]
+
+    style SUCCESS stroke:#28a745,stroke-width:2px
+```
+
 ## Core idea
 
 Validation in Go follows a simple contract: a function takes input and returns an error. The error is `nil` when the input is valid. The error is non-nil when the input is invalid, and the error describes what is wrong.

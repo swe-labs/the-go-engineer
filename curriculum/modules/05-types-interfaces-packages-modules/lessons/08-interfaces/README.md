@@ -12,6 +12,25 @@ Interfaces are Go's primary tool for abstraction and polymorphism. Unlike langua
 
 An interface is a contract: "if you have these methods, you are my type." Go checks the contract at compile time, but the binding happens when you assign a value to an interface variable. Think of an interface variable as a wrapper that stores two things: the concrete type and its value. When you call a method on the interface, Go unwraps the concrete value and calls its method.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Iface["Interface Representation (iface: 16 bytes)"]
+        TAB["itab pointer (*itab):
+- Type descriptor
+- Method table pointers"]
+        DATA["data pointer (unsafe.Pointer):
+Points to concrete value / heap copy"]
+    end
+
+    subgraph ConcreteType["Concrete Value on Heap: User{Name: "Alice"}"]
+        MEM["User Struct Memory Block"]
+    end
+
+    DATA --> MEM
+```
+
 ## Core idea
 
 **Interface type definition**:

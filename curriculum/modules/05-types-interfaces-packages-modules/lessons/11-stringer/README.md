@@ -12,6 +12,23 @@ Implement the `fmt.Stringer` interface to control how your types are printed, di
 
 `String()` is how your type introduces itself in text. When Go needs to convert your value to a string (for printing, logging, or error messages), it checks: "does this type have a `String() string` method?" If yes, call it. If no, fall back to the default `%+v` reflection-based output. Every type can have one `String()` method that controls all default string formatting.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph StringerInterface["fmt.Stringer Interface"]
+        DEF["type Stringer interface {
+    String() string
+}"]
+    end
+
+    CALL["fmt.Println(val) or fmt.Sprintf("%s", val)"] --> CHECK{"Does val implement fmt.Stringer?"}
+    CHECK -->|Yes| S_CALL["Call val.String() and output formatted text"]
+    CHECK -->|No| S_DEFAULT["Use internal reflection default formatting"]
+
+    DEF --- CHECK
+```
+
 ## Core idea
 
 **fmt.Stringer interface**:

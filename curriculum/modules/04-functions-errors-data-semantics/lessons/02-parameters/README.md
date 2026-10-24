@@ -14,6 +14,24 @@ Parameters are local variables inside the function that receive values from the 
 
 Variadic parameters (`...T`) are a special slot that collects all remaining arguments into a slice. The caller can pass zero, one, or many values, and the function receives them as a `[]T`.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph Caller["Caller Stack Frame"]
+        ARG1["price: 100.0 (float64)"]
+        ARG2["discount: 0.15 (float64)"]
+    end
+
+    subgraph Callee["Callee Stack Frame: ApplyDiscount(p, d float64)"]
+        P1["p: 100.0 (Distinct stack slot)"]
+        P2["d: 0.15 (Distinct stack slot)"]
+    end
+
+    ARG1 -->|Bitwise copy on call| P1
+    ARG2 -->|Bitwise copy on call| P2
+```
+
 ## Core idea
 
 Every parameter has a name and a type:

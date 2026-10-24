@@ -14,6 +14,24 @@ A return value is the output of a function. Think of a function as a vending mac
 
 Named return values are like pre-labelled bins. Before the function body runs, Go creates variables with those names and initialises them to their zero values. A bare `return` returns whatever those variables currently hold.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph NamedVsAnon["Return Value Mechanics"]
+        subgraph Anonymous["Anonymous: func compute() int"]
+            A1["return 42"] --> A2["Value placed in caller's return slot"]
+        end
+
+        subgraph Named["Named: func compute() (val int)"]
+            N1["val initialized to zero (0) at entry"]
+            N2["val = 42 (assigned in body)"]
+            N3["naked return copies val"]
+            N1 --> N2 --> N3
+        end
+    end
+```
+
 ## Core idea
 
 A function declares its return type after the parameter list:

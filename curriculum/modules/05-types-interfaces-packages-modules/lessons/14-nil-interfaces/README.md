@@ -20,6 +20,23 @@ A typed nil is a box with a label but nothing useful inside — e.g. `(*os.PathE
 
 Checking the box for nil only tells you whether the box itself is empty. It does **not** tell you whether the contents are a nil pointer.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph NilInterface["1. Pure Nil Interface: var err error = nil"]
+        I1["tab: nil
+data: nil
+(err == nil evaluates to TRUE)"]
+    end
+
+    subgraph NonNilWithNilPointer["2. Interface with Nil Concrete Pointer: var err error = (*MyError)(nil)"]
+        I2["tab: *MyError itab pointer (NON-NIL)
+data: nil
+(err == nil evaluates to FALSE! Traps beginners)"]
+    end
+```
+
 ## Core idea
 
 ```go

@@ -19,6 +19,21 @@ Think of orchestration as a pipeline of steps connected by error policy. Each st
 
 The orchestrator is not the business logic -- it is the glue that calls the logic and decides what happens when things go wrong.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    START["CheckoutOrder(orderID)"] --> S1["1. ReserveInventory(orderID)"]
+    S1 -->|Error| COMP_NONE["return fmt.Errorf("inventory: %w", err)"]
+    S1 -->|Success| S2["2. ProcessPayment(orderID, amount)"]
+    S2 -->|Error| COMP_INV["Rollback: ReleaseInventory(orderID)
+return fmt.Errorf("payment: %w", err)"]
+    S2 -->|Success| S3["3. EmitOrderConfirmedEvent(orderID)"]
+    S3 --> COMPLETE["Order Checkout Completed Successfully"]
+
+    style COMPLETE stroke:#28a745,stroke-width:2px
+```
+
 ## Core idea
 
 Go makes error orchestration explicit because errors are values. There is no exception system to silently skip error handling. Every call that returns an error must be handled, which forces the developer to decide the orchestration strategy.

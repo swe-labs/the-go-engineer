@@ -12,6 +12,20 @@ A bare error like `"not found"` tells you something went wrong but not where, wh
 
 Think of error wrapping as nesting Russian dolls. Each `fmt.Errorf("context: %w", err)` call places the original error inside a new doll that carries a label. When you print the error with `%v` or `Error()`, you see the labels from outermost to innermost: `"context: inner context: original error"`. When you call `errors.Unwrap`, you open the outer doll to reveal the next one in. The entire chain is a singly linked list of errors.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    E1["Root Cause:
+sql.ErrNoRows"] -->|fmt.Errorf("...: %w", err)| E2["Repository Error:
+"find user 42: sql: no rows in result set""]
+    E2 -->|fmt.Errorf("...: %w", err)| E3["Service Error:
+"authenticate: find user 42: sql: no rows""]
+
+    NOTE["%w creates an Unwrap() link forming a causal error chain"]
+    E2 -.-> NOTE
+```
+
 ## Core idea
 
 Go 1.13 introduced error wrapping through the `fmt.Errorf` `%w` verb and the `errors.Unwrap` function. The `%w` verb creates a wrapped error that implements the `Unwrap() error` interface.

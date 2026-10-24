@@ -12,6 +12,25 @@ Value receivers are the default in Go for a reason: they make immutability guara
 
 A value receiver is a copy. Inside the method, `c` is an independent copy of the caller's value. Any writes affect only the copy. When the method returns, the copy is discarded. From the caller's perspective, the original is unchanged. This is like passing a document to a reviewer: they can mark it up, but you keep the original.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph Caller["Caller Struct Instance"]
+        MEM["Original User: {Age: 30}
+(Memory: 0x1000)"]
+    end
+
+    subgraph ValueMethod["func (u User) UpdateAge(newAge int)"]
+        COPY["Isolated Copy: {Age: 30}
+(Memory: 0x2000)"]
+        MUT["u.Age = newAge (0x2000)"]
+    end
+
+    MEM -->|Bitwise copy on call| COPY
+    MUT -.->|Leaves original 0x1000 unchanged at 30!| MEM
+```
+
 ## Core idea
 
 Syntax:

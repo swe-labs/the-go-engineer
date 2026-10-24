@@ -20,6 +20,19 @@ The `go.mod` file is the identity card of every Go module. It declares what your
 
 The recipe is authored by the module maintainer but can be tweaked by consumers via `replace` and `exclude`.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Directives["go.mod Directives Anatomy"]
+        D1["module: github.com/user/app (Declares root module prefix)"]
+        D2["go: 1.22 (Minimum Go language toolchain version)"]
+        D3["require: external.com/pkg v1.2.3 (Direct & indirect dependencies)"]
+        D4["replace: old/pkg => ../local/pkg (Local override during development)"]
+        D5["exclude: bad/pkg v1.0.0 (Block compromised or broken versions)"]
+    end
+```
+
 ## Core idea
 
 ### `go.mod` directives

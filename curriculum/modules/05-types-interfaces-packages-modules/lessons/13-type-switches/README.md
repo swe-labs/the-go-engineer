@@ -18,6 +18,21 @@ A type switch is a sorting machine. Packages arrive on a conveyor belt (the inte
 
 The variable `v := x.(type)` gives you the package contents already unboxed for the bin it lands in — you do not need to assert again inside the case body.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    SWITCH["switch v := i.(type)"]
+
+    SWITCH --> C1{"case string:"}
+    C1 -->|Match| B1["v is typed as string"]
+    C1 -->|No| C2{"case int:"}
+    C2 -->|Match| B2["v is typed as int"]
+    C2 -->|No| C3{"case fmt.Stringer:"}
+    C3 -->|Match| B3["v is typed as fmt.Stringer"]
+    C3 -->|No| DEF["default: unhandled type"]
+```
+
 ## Core idea
 
 A type switch is a switch statement where the switch expression is `v := x.(type)`. Each `case` clause lists one or more types. When a match is found, the variable `v` has that concrete type inside the case body.

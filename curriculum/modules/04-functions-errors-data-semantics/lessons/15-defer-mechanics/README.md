@@ -12,6 +12,25 @@ Resource management is the most common source of bugs in systems programming: fi
 
 `defer` is a stack of to-do items attached to the current function call. When you say `defer f()`, you are adding `f()` to the top of the stack. The arguments to `f` are evaluated and frozen immediately (like taking a snapshot), but the function body does not execute until the surrounding function returns. When the function returns (normally, or via panic), the stack is popped in LIFO order -- last deferred, first executed.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ExecutionOrder["Function Execution with Defer (LIFO Stack)"]
+        direction TB
+        E1["1. Execute Statement A"]
+        D1["2. defer fmt.Println("First") --> Pushed to Stack"]
+        E2["3. Execute Statement B"]
+        D2["4. defer fmt.Println("Second") --> Pushed to Stack"]
+        E3["5. Function Reaches Return"]
+
+        POP1["6. Pop & Execute LIFO: Print "Second""]
+        POP2["7. Pop & Execute LIFO: Print "First""]
+
+        E1 --> D1 --> E2 --> D2 --> E3 --> POP1 --> POP2
+    end
+```
+
 ## Core idea
 
 Three key rules govern `defer`:

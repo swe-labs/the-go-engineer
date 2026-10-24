@@ -14,6 +14,23 @@ A function can return a tuple of values. Think of it like a delivery: the functi
 
 The blank identifier `_` acts as a "don't care" slot. If a function returns three values but you only need two, assign the unwanted one to `_`.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    CALL["user, err := FetchUser(101)"]
+
+    CALL --> EVAL{"Did database query succeed?"}
+
+    EVAL -->|Success| S_OK["user = &User{ID: 101, Name: "Alice"}
+err = nil"]
+    EVAL -->|Failure| S_ERR["user = nil
+err = ErrNotFound (or wrapped sql.ErrNoRows)"]
+
+    style S_OK stroke:#28a745,stroke-width:2px
+    style S_ERR stroke:#dc3545,stroke-width:2px
+```
+
 ## Core idea
 
 Multiple return types are listed in parentheses:

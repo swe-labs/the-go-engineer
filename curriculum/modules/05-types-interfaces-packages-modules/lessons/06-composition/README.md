@@ -12,6 +12,27 @@ Go rejects classical inheritance. Instead of subclassing, Go uses **composition*
 
 Think of embedding as copy-paste of fields and methods. When you embed `type A struct { X int }` inside `B`, it is as if `B` got an `X` field of its own, plus any methods `A` has. But the "copy" is logical — at runtime, the embedded field is a named sub-value, accessed through a synthetic field named after the embedded type.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph CompositionOverInheritance["Composition in Go"]
+        REPO["UserRepository (Interface)"]
+        LOGGER["Logger (Interface)"]
+        MAILING["Mailer (Interface)"]
+
+        subgraph Service["UserService Struct"]
+            S_REPO["repo: UserRepository"]
+            S_LOG["logger: Logger"]
+            S_MAIL["mailer: Mailer"]
+        end
+
+        REPO --- S_REPO
+        LOGGER --- S_LOG
+        MAILING --- S_MAIL
+    end
+```
+
 ## Core idea
 
 **Struct embedding** uses the type name without a field name:

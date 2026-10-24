@@ -12,6 +12,28 @@ Interface embedding is how Go builds complex abstractions from simple ones. `io.
 
 Embedding an interface is like making a to-do list by copying items from smaller lists. An interface that embeds `io.Reader` and `io.Writer` requires both `Read` and `Write`. There is no special runtime structure — the compiler merges the method requirements into one set. The composed interface is a union of its parts.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Interfaces["Interface Composition"]
+        R["type Reader interface {
+    Read(p []byte) (n int, err error)
+}"]
+        W["type Writer interface {
+    Write(p []byte) (n int, err error)
+}"]
+
+        RW["type ReadWriter interface {
+    Reader
+    Writer
+}"]
+    end
+
+    R --> RW
+    W --> RW
+```
+
 ## Core idea
 
 **Embedding interfaces**:

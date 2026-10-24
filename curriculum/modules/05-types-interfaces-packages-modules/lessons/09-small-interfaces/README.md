@@ -12,6 +12,23 @@ Small interfaces are the building blocks of composable Go programs. `io.Reader` 
 
 A small interface is a contract that does one thing. "I can read bytes." "I can close a resource." "I can compare for order." Because these contracts are tiny, many types satisfy them, and they can be mixed and matched freely. This is the Go implementation of the **Interface Segregation Principle**: no client should be forced to depend on methods it does not use.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SingleMethodInterfaces["The Power of Single-Method Interfaces"]
+        R["io.Reader:
+Read(p []byte) (n int, err error)"]
+        W["io.Writer:
+Write(p []byte) (n int, err error)"]
+        C["io.Closer:
+Close() error"]
+    end
+
+    R --> COMPOSER["Combine cleanly into io.ReadWriter or io.ReadCloser"]
+    W --> COMPOSER
+```
+
 ## Core idea
 
 **io.Reader**:

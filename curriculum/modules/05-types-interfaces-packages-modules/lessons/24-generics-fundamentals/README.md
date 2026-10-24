@@ -20,6 +20,23 @@ Type Parameter: [T comparable]
        └─ If T = []byte   ──► Compile Error! (slices cannot be compared with ==)
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph GenericDeclaration["Generic Function Declaration: [T constraints.Ordered]"]
+        SIG["func Min[T constraints.Ordered](a, b T) T"]
+    end
+
+    subgraph Instantiations["Compile-Time Monomorphization"]
+        C1["Min[int](10, 20) --> Generates concrete int machine instructions"]
+        C2["Min[string]("a", "b") --> Generates concrete string machine instructions"]
+    end
+
+    GenericDeclaration --> C1
+    GenericDeclaration --> C2
+```
+
 ## Core idea
 
 ### 1. Type Parameters & Constraints

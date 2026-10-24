@@ -16,6 +16,28 @@ Imagine a package is a house with two kinds of items:
 
 The `internal/` directory is a gated community: only packages that share the same root can enter. This is a stronger restriction than unexported — it restricts across packages, not just within one.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph PackageBoundary["Package Boundary Visibility"]
+        subgraph Exported["Exported (Starts with UPPERCASE letter)"]
+            T1["User (Type)"]
+            M1["NewUser() (Function)"]
+            F1["Name (Struct Field)"]
+        end
+
+        subgraph Unexported["Unexported / Private (Starts with lowercase letter)"]
+            T2["userInternal (Type)"]
+            M2["hashPassword() (Function)"]
+            F2["passwordHash (Struct Field)"]
+        end
+    end
+
+    Exported -->|Visible outside package| EXTERNAL["External Importers"]
+    Unexported -->|Visible ONLY inside package| INTERNAL["Internal Package Files"]
+```
+
 ## Core idea
 
 **Exported** = name starts with a capital letter. Visible to any package that imports this package.
