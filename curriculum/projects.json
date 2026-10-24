@@ -45,7 +45,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "process lifecycle",
         "stdin/stdout/stderr",
@@ -98,7 +98,7 @@
       "slug": "shell-git-lab",
       "source_legacy_ids": [],
       "stage": "foundations",
-      "status": "draft",
+      "status": "ready",
       "summary": "Build and navigate a real shell environment, then manage code changes through a complete Git workflow.",
       "tasks": [
         {
@@ -165,7 +165,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "go build",
         "go module cache",
@@ -207,7 +207,7 @@
       "slug": "tooling-failure-lab",
       "source_legacy_ids": [],
       "stage": "tooling",
-      "status": "draft",
+      "status": "ready",
       "summary": "Install Go tooling, then deliberately introduce and diagnose common Go setup failures.",
       "tasks": [
         {
@@ -274,7 +274,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "slice header",
         "pointer semantics",
@@ -396,7 +396,7 @@
       "slug": "pricing-checkout",
       "source_legacy_ids": [],
       "stage": "go-core",
-      "status": "draft",
+      "status": "ready",
       "summary": "Build a pricing calculator and checkout system using Go fundamentals: variables, control flow, and structs.",
       "tasks": [
         {
@@ -498,7 +498,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "slice header",
         "pointer semantics",
@@ -619,7 +619,7 @@
       "slug": "contact-directory",
       "source_legacy_ids": [],
       "stage": "go-core",
-      "status": "draft",
+      "status": "ready",
       "summary": "Implement a contact directory manager using Go data structures: slices, maps, and custom types.",
       "tasks": [
         {
@@ -716,7 +716,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "memory aliasing",
         "errors as values",
@@ -834,7 +834,7 @@
       "slug": "order-summary-refactor",
       "source_legacy_ids": [],
       "stage": "go-core",
-      "status": "draft",
+      "status": "ready",
       "summary": "Refactor a monolithic order summary function into well-structured Go code with proper error handling.",
       "tasks": [
         {
@@ -931,7 +931,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "interface semantics",
         "nil interface",
@@ -1054,7 +1054,7 @@
       "slug": "bank-account",
       "source_legacy_ids": [],
       "stage": "engineering-core",
-      "status": "draft",
+      "status": "ready",
       "summary": "Build a bank account system demonstrating Go types, interfaces, and method sets.",
       "tasks": [
         {
@@ -1156,7 +1156,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "interface semantics",
         "nil interface",
@@ -1277,7 +1277,7 @@
       "slug": "payroll-processor",
       "source_legacy_ids": [],
       "stage": "engineering-core",
-      "status": "draft",
+      "status": "ready",
       "summary": "Implement a payroll processor using Go packages, modules, and interface composition.",
       "tasks": [
         {
@@ -1374,7 +1374,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "go test",
         "test coverage",
@@ -1493,7 +1493,7 @@
       "slug": "bug-hunt-pack",
       "source_legacy_ids": [],
       "stage": "engineering-core",
-      "status": "draft",
+      "status": "ready",
       "summary": "Identify, diagnose, and fix a set of deliberately introduced bugs across multiple Go packages.",
       "tasks": [
         {
@@ -1590,7 +1590,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "go test",
         "test coverage",
@@ -1709,7 +1709,7 @@
       "slug": "refactor-under-tests",
       "source_legacy_ids": [],
       "stage": "engineering-core",
-      "status": "draft",
+      "status": "ready",
       "summary": "Add test coverage to legacy Go code, then refactor it while keeping all tests passing.",
       "tasks": [
         {
@@ -1806,7 +1806,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "file I/O",
         "JSON encoding/decoding"
@@ -1923,7 +1923,7 @@
       "slug": "file-organizer",
       "source_legacy_ids": [],
       "stage": "cli-io",
-      "status": "draft",
+      "status": "ready",
       "summary": "Build a CLI tool that organizes files by type, extension, or metadata using Go file I/O.",
       "tasks": [
         {
@@ -2020,7 +2020,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "file I/O",
         "JSON encoding/decoding"
@@ -2137,7 +2137,7 @@
       "slug": "log-search",
       "source_legacy_ids": [],
       "stage": "cli-io",
-      "status": "draft",
+      "status": "ready",
       "summary": "Implement a log search and filtering tool using Go CLI flags, file reading, and pattern matching.",
       "tasks": [
         {
@@ -2234,7 +2234,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "file I/O",
         "JSON encoding/decoding"
@@ -2351,7 +2351,7 @@
       "slug": "config-parser",
       "source_legacy_ids": [],
       "stage": "cli-io",
-      "status": "draft",
+      "status": "ready",
       "summary": "Parse and validate configuration files in JSON and YAML formats, with environment variable overrides.",
       "tasks": [
         {
@@ -2448,7 +2448,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "HTTP handler lifecycle",
         "HTTP timeouts",
@@ -2568,7 +2568,7 @@
       "slug": "book-catalog-rest-api",
       "source_legacy_ids": [],
       "stage": "backend",
-      "status": "draft",
+      "status": "ready",
       "summary": "Build a REST API for a book catalog with CRUD endpoints, middleware, and JSON encoding.",
       "tasks": [
         {
@@ -2665,7 +2665,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "database/sql pool",
         "SQL transactions",
@@ -2791,7 +2791,7 @@
       "slug": "task-api-with-postgres",
       "source_legacy_ids": [],
       "stage": "data",
-      "status": "draft",
+      "status": "ready",
       "summary": "Build a task management API backed by PostgreSQL with migrations, queries, and transactions.",
       "tasks": [
         {
@@ -2904,7 +2904,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "JWT",
         "RBAC",
@@ -3026,7 +3026,7 @@
       "slug": "secure-authenticated-api",
       "source_legacy_ids": [],
       "stage": "security",
-      "status": "draft",
+      "status": "ready",
       "summary": "Add authentication and authorization to an API using JWT tokens, bcrypt passwords, and security middleware.",
       "tasks": [
         {
@@ -3139,7 +3139,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "goroutine",
         "channel",
@@ -3279,7 +3279,7 @@
       "slug": "concurrent-downloader",
       "source_legacy_ids": [],
       "stage": "concurrency",
-      "status": "draft",
+      "status": "ready",
       "summary": "Advanced concurrency extension: implement a chunked multi-part file downloader with HTTP Range requests, retry backoff, progress tracking, and stream re-assembly.",
       "tasks": [
         {
@@ -3376,7 +3376,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "goroutine",
         "channel",
@@ -3516,7 +3516,7 @@
       "slug": "url-health-checker",
       "source_legacy_ids": [],
       "stage": "concurrency",
-      "status": "draft",
+      "status": "ready",
       "summary": "Applied concurrency project: build a concurrent HTTP health check probe utilizing the bounded worker pool pattern to query URL endpoints with timeout control and error collection.",
       "tasks": [
         {
@@ -3613,7 +3613,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "goroutine",
         "channel",
@@ -3753,7 +3753,7 @@
       "slug": "bounded-worker-pool",
       "source_legacy_ids": [],
       "stage": "concurrency",
-      "status": "draft",
+      "status": "ready",
       "summary": "Foundational concurrency mini-project: implement channel-based worker synchronization with fixed worker counts, graceful cancellation, and panic containment.",
       "tasks": [
         {
@@ -3850,7 +3850,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "structured logging",
         "distributed tracing"
@@ -3966,7 +3966,7 @@
       "slug": "pii-redactor",
       "source_legacy_ids": [],
       "stage": "reliability",
-      "status": "draft",
+      "status": "ready",
       "summary": "Build a privacy-preserving log redactor that masks sensitive PII attributes (emails, credit cards, SSNs) before structured logs are shipped to collectors.",
       "tasks": [
         {
@@ -4063,7 +4063,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "structured logging",
         "distributed tracing"
@@ -4179,7 +4179,7 @@
       "slug": "observability-retrofit",
       "source_legacy_ids": [],
       "stage": "reliability",
-      "status": "draft",
+      "status": "ready",
       "summary": "Add structured logging, metrics, and tracing to an existing Go application without changing its behavior.",
       "tasks": [
         {
@@ -4276,7 +4276,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "structured logging",
         "distributed tracing"
@@ -4392,7 +4392,7 @@
       "slug": "profile-and-fix-lab",
       "source_legacy_ids": [],
       "stage": "reliability",
-      "status": "draft",
+      "status": "ready",
       "summary": "Profile a Go application with pprof, identify performance bottlenecks, and optimize CPU and memory usage.",
       "tasks": [
         {
@@ -4489,7 +4489,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "repository pattern",
         "hexagonal architecture"
@@ -4602,7 +4602,7 @@
       "slug": "modular-refactor-review",
       "source_legacy_ids": [],
       "stage": "architecture",
-      "status": "draft",
+      "status": "ready",
       "summary": "Refactor a monolith into a modular, layered architecture with dependency injection and interface-based design.",
       "tasks": [
         {
@@ -4699,7 +4699,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "Docker multi-stage build",
         "CI pipeline"
@@ -4794,7 +4794,7 @@
       "slug": "dockerized-service-with-ci-cd",
       "source_legacy_ids": [],
       "stage": "delivery",
-      "status": "draft",
+      "status": "ready",
       "summary": "Containerize a Go service with a multi-stage Dockerfile and set up a CI/CD pipeline for automated build and deploy.",
       "tasks": [
         {
@@ -4891,7 +4891,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "portfolio strategy",
         "technical writing",
@@ -5004,7 +5004,7 @@
       "slug": "portfolio-review-pack",
       "source_legacy_ids": [],
       "stage": "career",
-      "status": "draft",
+      "status": "ready",
       "summary": "Curate and present your strongest Go projects in a professional portfolio format for job applications.",
       "tasks": [
         {
@@ -5101,7 +5101,7 @@
         "documentation_mode": "flagship",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "context cancellation",
         "graceful shutdown",
@@ -5230,7 +5230,7 @@
       "slug": "opslane-flagship",
       "source_legacy_ids": [],
       "stage": "flagship",
-      "status": "draft",
+      "status": "ready",
       "summary": "Build and deploy a full-stack application with operations dashboard, automated testing, CI/CD, and observability.",
       "tasks": [
         {
@@ -5305,7 +5305,7 @@
       "prerequisites": [
         "core-00-10"
       ],
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "zero-magic learning",
         "repository navigation",
@@ -5342,7 +5342,7 @@
       "slug": "course-setup-verification",
       "source_legacy_ids": [],
       "stage": "foundations",
-      "status": "draft",
+      "status": "ready",
       "summary": "Verify your complete course environment: repository clone, Go installation, IDE setup, and first successful test run.",
       "tags": [
         "orientation",
@@ -5381,7 +5381,7 @@
         "core-13-01",
         "core-13-04"
       ],
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "core-13-10",
         "core-13-13",
@@ -5418,7 +5418,7 @@
       "slug": "performance-analysis-lab",
       "source_legacy_ids": [],
       "stage": "core",
-      "status": "draft",
+      "status": "ready",
       "summary": "Profile a Go application with pprof, identify CPU and memory bottlenecks, and apply targeted optimizations with measurable improvements.",
       "tags": [
         "performance",
@@ -5457,7 +5457,7 @@
       "prerequisites": [
         "core-16-15"
       ],
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "reinforcement_targets": [
         "generic constraints",
         "grpc protocol",
@@ -5496,7 +5496,7 @@
       "slug": "advanced-electives-capstone",
       "source_legacy_ids": [],
       "stage": "elective",
-      "status": "draft",
+      "status": "ready",
       "summary": "Apply advanced Go topics from the electives path: build a project demonstrating functional programming, systems programming, or cloud-native Go patterns.",
       "tags": [
         "elective",

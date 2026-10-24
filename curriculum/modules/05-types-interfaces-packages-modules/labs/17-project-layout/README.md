@@ -16,7 +16,47 @@ Think of a Go project as a building with designated zones:
 - **`internal/`** — the employee-only area. Code here cannot be imported by external modules. This is where your business logic, domain types, and core services live.
 - **`pkg/`** — the public conference room. Library code that is safe and intended for external consumption. Not all projects need this.
 - **`go.mod`** — the building permit. Declares the module path and dependencies.
-- **Root-level `.go` files** — rarely used in large projects, but fine for small libraries or single-file tools.
+## Visual Model
+
+```mermaid
+graph TD
+    subgraph RepoRoot["Module Root (github.com/org/repo)"]
+        GOMOD["go.mod / go.sum (Module Identity)"]
+        
+        subgraph CMD["cmd/ (Entry Points)"]
+            CMD_SRV["cmd/server/main.go (Package main)"]
+            CMD_WKR["cmd/worker/main.go (Package main)"]
+        end
+        
+        subgraph INT["internal/ (Private Implementation - Compiler Enforced)"]
+            INT_DOM["internal/domain (Domain Logic)"]
+            INT_DB["internal/database (Storage Engines)"]
+            INT_SVC["internal/service (Business Orchestration)"]
+        end
+        
+        subgraph PKG["pkg/ (Public Library - Reusable Outside)"]
+            PKG_CLIENT["pkg/client (Exported SDK)"]
+        end
+    end
+
+    CMD_SRV --> INT_SVC
+    CMD_WKR --> INT_SVC
+    INT_SVC --> INT_DOM
+    INT_SVC --> INT_DB
+    
+    EXT["External Module (github.com/external/app)"]
+    EXT --> PKG_CLIENT
+    EXT -.->|COMPILER ERROR: use of internal package not allowed| INT_DOM
+
+    classDef root fill:#f9f9f9,stroke:#333,stroke-width:1px;
+    classDef cmd fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
+    classDef internal fill:#ffebee,stroke:#d32f2f,stroke-width:2px;
+    classDef public fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
+    class RepoRoot root;
+    class CMD_SRV,CMD_WKR cmd;
+    class INT_DOM,INT_DB,INT_SVC internal;
+    class PKG_CLIENT public;
+```
 
 ## Core idea
 

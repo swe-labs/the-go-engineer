@@ -112,7 +112,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-00-01",
         "core-00-02",
@@ -233,7 +233,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-01-01",
         "core-01-02",
@@ -359,7 +359,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-02-01",
         "core-02-02",
@@ -486,7 +486,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-03-01",
         "core-03-02",
@@ -622,7 +622,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-04-01",
         "core-04-02",
@@ -753,7 +753,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-05-01",
         "core-05-02",
@@ -889,7 +889,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-06-01",
         "core-06-02",
@@ -1023,7 +1023,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-07-01",
         "core-07-02",
@@ -1157,7 +1157,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-08-01",
         "core-08-02",
@@ -1290,7 +1290,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-09-01",
         "core-09-02",
@@ -1429,7 +1429,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-10-01",
         "core-10-02",
@@ -1566,7 +1566,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-11-01",
         "core-11-02",
@@ -1708,7 +1708,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-12-01",
         "core-12-02",
@@ -1833,7 +1833,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-13-01",
         "core-13-02",
@@ -1954,7 +1954,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-14-01",
         "core-14-02",
@@ -2084,7 +2084,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-15-01",
         "core-15-02",
@@ -2214,7 +2214,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "core-16-01",
         "core-16-02",
@@ -2340,7 +2340,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "elective-01",
         "elective-02",
@@ -2474,7 +2474,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "planned",
+      "status": "ready",
       "target_ids": [
         "opslane-01",
         "opslane-02",
@@ -2597,7 +2597,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-shell-git-lab"
       ],
@@ -2711,7 +2711,7 @@
       },
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-tooling-failure-lab"
       ],
@@ -2816,7 +2816,7 @@
       "purpose": "Evaluate the Course Setup Verification project submission.",
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-course-setup"
       ],
@@ -2921,7 +2921,7 @@
       "purpose": "Evaluate the Performance Analysis Lab project submission.",
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-performance-analysis-lab"
       ],
@@ -3026,7 +3026,7 @@
       "purpose": "Evaluate the Advanced Electives Capstone project submission.",
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-advanced-electives"
       ],
@@ -3123,7 +3123,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Pricing Checkout project submission: Build a pricing calculator and checkout system using Go fundamentals: variables, control flow, and structs.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-pricing-checkout"
       ],
@@ -3225,7 +3225,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Contact Directory project submission: Implement a contact directory manager using Go data structures: slices, maps, and custom types.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-contact-directory"
       ],
@@ -3327,7 +3327,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Order Summary Refactor project submission: Refactor a monolithic order summary function into well-structured Go code with proper error handling.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-order-summary-refactor"
       ],
@@ -3429,7 +3429,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Bank Account project submission: Build a bank account system demonstrating Go types, interfaces, and method sets.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-bank-account"
       ],
@@ -3531,7 +3531,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Payroll Processor project submission: Implement a payroll processor using Go packages, modules, and interface composition.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-payroll-processor"
       ],
@@ -3633,7 +3633,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Bug Hunt Pack project submission: Identify, diagnose, and fix a set of deliberately introduced bugs across multiple Go packages.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-bug-hunt-pack"
       ],
@@ -3735,7 +3735,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Refactor Under Tests project submission: Add test coverage to legacy Go code, then refactor it while keeping all tests passing.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-refactor-under-tests"
       ],
@@ -3837,7 +3837,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the File Organizer project submission: Build a CLI tool that organizes files by type, extension, or metadata using Go file I/O.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-file-organizer"
       ],
@@ -3939,7 +3939,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Log Search project submission: Implement a log search and filtering tool using Go CLI flags, file reading, and pattern matching.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-log-search"
       ],
@@ -4041,7 +4041,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Config Parser project submission: Parse and validate configuration files in JSON and YAML formats, with environment variable overrides.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-config-parser"
       ],
@@ -4143,7 +4143,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Book Catalog REST API project submission: Build a REST API for a book catalog with CRUD endpoints, middleware, and JSON encoding.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-book-catalog-rest-api"
       ],
@@ -4245,7 +4245,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Task API with Postgres project submission: Build a task management API backed by PostgreSQL with migrations, queries, and transactions.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-task-api-postgres"
       ],
@@ -4347,7 +4347,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Secure Authenticated API project submission: Add authentication and authorization to an API using JWT tokens, bcrypt passwords, and security middleware.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-secure-authenticated-api"
       ],
@@ -4449,7 +4449,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Concurrent Downloader project submission: Build a concurrent file downloader using goroutines, channels, and error propagation.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-concurrent-downloader"
       ],
@@ -4551,7 +4551,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the URL Health Checker project submission: Implement a URL health checker that concurrently monitors endpoints and reports status changes.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-url-health-checker"
       ],
@@ -4653,7 +4653,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Bounded Worker Pool project submission: Build a bounded worker pool that processes jobs concurrently with configurable parallelism and graceful shutdown.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-bounded-worker-pool"
       ],
@@ -4755,7 +4755,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the PII Redactor project submission: Build a PII redaction service with structured logging, error tracking, and observability instrumentation.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-pii-redactor"
       ],
@@ -4857,7 +4857,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Observability Retrofit project submission: Add structured logging, metrics, and tracing to an existing Go application without changing its behavior.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-observability-retrofit"
       ],
@@ -4959,7 +4959,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Profile and Fix Lab project submission: Profile a Go application with pprof, identify performance bottlenecks, and optimize CPU and memory usage.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-profile-and-fix-lab"
       ],
@@ -5061,7 +5061,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Modular Refactor Review project submission: Refactor a monolith into a modular, layered architecture with dependency injection and interface-based design.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-modular-refactor-review"
       ],
@@ -5163,7 +5163,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Dockerized Service with CI/CD project submission: Containerize a Go service with a multi-stage Dockerfile and set up a CI/CD pipeline for automated build and deploy.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-dockerized-service-cicd"
       ],
@@ -5265,7 +5265,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Portfolio Review Pack project submission: Curate and present your strongest Go projects in a professional portfolio format for job applications.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-portfolio-review-pack"
       ],
@@ -5367,7 +5367,7 @@
       "passing_score": 80,
       "purpose": "Evaluate the Opslane Flagship project submission: Build and deploy a full-stack application with operations dashboard, automated testing, CI/CD, and observability.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
-      "status": "draft",
+      "status": "ready",
       "target_ids": [
         "project-opslane"
       ],
