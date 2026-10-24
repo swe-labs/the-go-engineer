@@ -12,6 +12,24 @@ Developers need to track changes, collaborate on code, experiment safely, and re
 
 Git is a content-addressable filesystem where every object is identified by its SHA-1 hash. A commit is a snapshot of the entire repository at a point in time, linked to its parent(s) in a Directed Acyclic Graph (DAG). Branches are just movable pointers to commits.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph ThreeStates["The Three States of Git"]
+        WD["1. Working Directory
+(Actual files on disk that you edit)"]
+        STAGE["2. Staging Area (Index)
+(Snapshot of changes prepared for commit)"]
+        REPO["3. Git Repository (.git)
+(Permanent immutable object database: commits, trees, blobs)"]
+    end
+
+    WD -->|git add| STAGE
+    STAGE -->|git commit| REPO
+    REPO -->|git checkout / switch| WD
+```
+
 ## Core idea
 
 Without version control, teams lose history, overwrite each other's changes, and cannot safely experiment. Git's distributed model, content-addressable storage, and branching model make it the most powerful and resilient version control system ever built.

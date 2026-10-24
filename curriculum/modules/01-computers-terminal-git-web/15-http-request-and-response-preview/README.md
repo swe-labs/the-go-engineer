@@ -12,6 +12,36 @@ Applications need a standard way to request and transfer data over the web. HTTP
 
 HTTP is a request-response protocol where a client sends a message (method + path + headers + body) and the server replies with another message (status code + headers + body). It is stateless — each request is independent, with no memory of previous requests.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph RequestWire["HTTP Request Wire Anatomy"]
+        REQ_LINE["Request Line: GET /api/hello HTTP/1.1"]
+        REQ_HEADERS["Headers:
+Host: 127.0.0.1:8080
+Accept: application/json
+User-Agent: Go-http-client/1.1"]
+        REQ_BODY["Body: (Empty for GET)"]
+
+        REQ_LINE --- REQ_HEADERS --- REQ_BODY
+    end
+
+    subgraph ResponseWire["HTTP Response Wire Anatomy"]
+        RES_LINE["Status Line: HTTP/1.1 200 OK"]
+        RES_HEADERS["Headers:
+Content-Type: application/json
+Date: Sat, 24 Oct 2026 17:00:00 GMT
+Content-Length: 43"]
+        RES_BODY["Body:
+{"message": "Hello from Go!", "status": "ok"}"]
+
+        RES_LINE --- RES_HEADERS --- RES_BODY
+    end
+
+    RequestWire -->|TCP Socket Stream| ResponseWire
+```
+
 ## Core idea
 
 HTTP is a text-based protocol built on TCP. A client sends a request with a method (GET, POST), a path, headers, and an optional body. The server responds with a status code (200 OK, 404 Not Found), headers, and a body. Every web interaction follows this pattern.
@@ -27,6 +57,78 @@ Go's `net/http` package provides a complete HTTP client and server implementatio
 ## Go example
 
 The example program starts an HTTP server on port 8080 with two handlers (`/` and `/api/hello`), then makes a GET request to the server and prints the response status, headers, and body.
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"io"
+	"net"
+	"net/http"
+	"time"
+)
+
+func main() {
+	fmt.Println("=== HTTP Request / Response Lifecycle Preview ===")
+
+	// 1. Setup local HTTP server with two routes
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintln(w, "Welcome to The Go Engineer HTTP Server!")
+	})
+	mux.HandleFunc("/api/hello", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintln(w, `{"message": "Hello from Go!", "status": "ok"}`)
+	})
+
+	listener, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		fmt.Printf("failed to bind listener: %v\n", err)
+		return
+	}
+	defer listener.Close()
+
+	server := &http.Server{Handler: mux}
+	go func() {
+		_ = server.Serve(listener)
+	}()
+	defer server.Shutdown(context.Background())
+
+	baseURL := fmt.Sprintf("http://%s", listener.Addr().String())
+	fmt.Printf("Server listening at %s\n\n", baseURL)
+
+	// 2. Make GET request to /api/hello
+	targetURL := baseURL + "/api/hello"
+	fmt.Printf("[Client] Sending GET request to: %s\n", targetURL)
+
+	client := &http.Client{Timeout: 3 * time.Second}
+	resp, err := client.Get(targetURL)
+	if err != nil {
+		fmt.Printf("HTTP GET failed: %v\n", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	// 3. Inspect Response Wire Elements
+	fmt.Printf("[Response] Status: %s (Code: %d)\n", resp.Status, resp.StatusCode)
+	fmt.Println("[Response] Headers:")
+	for k, v := range resp.Header {
+		fmt.Printf("  %s: %s\n", k, v[0])
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Printf("failed to read body: %v\n", err)
+		return
+	}
+	fmt.Printf("[Response] Body:\n%s\n", string(body))
+}
+```
 
 ## Step-by-step execution
 

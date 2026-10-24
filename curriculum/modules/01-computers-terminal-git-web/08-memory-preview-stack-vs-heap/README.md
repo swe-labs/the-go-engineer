@@ -12,6 +12,27 @@ Not all data has the same lifetime. Stack memory auto-frees when functions retur
 
 The stack is a LIFO (Last-In-First-Out) structure for function-local data — like a stack of plates, the last one put on is the first taken off. The heap is a pool of memory for data that needs to live beyond its allocating function — like a storage unit where items can be retrieved in any order.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph VirtualMemory["Process 64-bit Virtual Address Space"]
+        TEXT[".text Segment: Compiled Go Machine Instructions"]
+        RODATA[".rodata: Read-only string literals & constants"]
+        DATA[".data / .bss: Global package variables"]
+        
+        HEAP["Heap (Managed by Go GC & runtime mallocgc)
+Dynamically allocated shared memory growing UPWARD"]
+        
+        FREE["Unallocated Virtual Memory"]
+        
+        STACK["Stack (Fast LIFO memory)
+Goroutine function call frames growing DOWNWARD"]
+    end
+
+    TEXT --- RODATA --- DATA --- HEAP --- FREE --- STACK
+```
+
 ## Core idea
 
 Memory is finite and must be reused. Stack vs. heap is the fundamental tradeoff between allocation speed and lifetime flexibility. Understanding this tradeoff is essential for writing correct, efficient programs in any language.

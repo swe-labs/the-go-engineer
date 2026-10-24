@@ -17,6 +17,20 @@ A computer program exists in three distinct states:
 
 Conflating these three states causes confusion when debugging builds versus runtime crashes.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    SRC["1. Source Code
+main.go
+(Passive text on disk)"] -->|go build| BIN["2. Executable Binary
+main (ELF / PE)
+(Passive machine code on disk)"]
+    BIN -->|OS Loader (execve)| PROC["3. Active Process
+PID: 1234
+(Allocated virtual memory & CPU execution)"]
+```
+
 ## Core idea
 
 Computers execute machine instructions, not human language. The concept of a "program" bridges the gap — it is the unit of work that the OS understands. Without a clear definition, every compile error, segfault, or deployment failure feels inexplicable.
@@ -32,6 +46,55 @@ Go compiles source code into a single static binary with no external dependencie
 ## Go example
 
 The example program defines three stages of a program (source, binary, process) as an enum and prints each stage's description. It also displays runtime information about the current process: the binary path, compiler version, OS/architecture, and CPU count.
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+	"runtime"
+)
+
+// ProgramStage represents one of the three fundamental states of a program.
+type ProgramStage int
+
+const (
+	StageSource ProgramStage = iota
+	StageBinary
+	StageProcess
+)
+
+func (s ProgramStage) String() string {
+	switch s {
+	case StageSource:
+		return "Source Code (inert human-readable text on disk)"
+	case StageBinary:
+		return "Executable Binary (compiled machine code on disk)"
+	case StageProcess:
+		return "Operating System Process (active execution in memory)"
+	default:
+		return "Unknown Stage"
+	}
+}
+
+func main() {
+	fmt.Println("=== Three Stages of a Program ===")
+	stages := []ProgramStage{StageSource, StageBinary, StageProcess}
+	for i, stage := range stages {
+		fmt.Printf("Stage %d: %s\n", i+1, stage.String())
+	}
+
+	fmt.Println("\n=== Active Process Runtime Metadata ===")
+	fmt.Printf("Executable Path (os.Args[0]): %s\n", os.Args[0])
+	fmt.Printf("Compiler:                     %s\n", runtime.Compiler)
+	fmt.Printf("Target OS / Architecture:     %s / %s\n", runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("Available Logical CPUs:       %d\n", runtime.NumCPU())
+	fmt.Printf("Process PID:                  %d\n", os.Getpid())
+
+	fmt.Println("\nSummary: Source code compiles into a binary executable, which the OS kernel executes as a process.")
+}
+```
 
 ## Step-by-step execution
 

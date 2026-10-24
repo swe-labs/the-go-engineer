@@ -12,6 +12,28 @@ Direct push to shared branches causes chaos. The GitHub workflow formalizes code
 
 GitHub extends Git with a collaborative layer: remotes host branches for sharing, pull requests are proposals for merging branches with discussion attached, and actions automate verification. The workflow is propose-verify-merge.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as Developer
+    participant Upstream as Upstream Repo (github.com/org/repo)
+    participant Fork as Personal Fork (github.com/user/repo)
+    participant Local as Local Clone
+    participant CI as GitHub Actions
+
+    Upstream->>Fork: Fork repository
+    Fork->>Local: git clone
+    Local->>Local: git checkout -b feat/new-api
+    Local->>Local: git commit -m "feat: new api"
+    Local->>Fork: git push origin feat/new-api
+    Fork->>Upstream: Open Pull Request
+    Upstream->>CI: Trigger Automated CI Tests
+    CI-->>Upstream: Status: PASSED
+    Note over Upstream: Maintainer reviews and clicks 'Merge Pull Request'
+```
+
 ## Core idea
 
 The GitHub workflow is a standardized collaboration pattern: fork or clone a repository, create a feature branch, push changes, open a pull request, discuss and review, then merge. This process ensures every change is reviewed, tested, and traceable.
@@ -27,6 +49,86 @@ The Go project itself uses GitHub with pull requests, code review, and CI. The s
 ## Go example
 
 The example program simulates the GitHub workflow as a state machine: a repository with forks, feature branches, pull requests with review status, and merge validation through branch protection rules.
+
+```go
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+type PRStatus string
+
+const (
+	StatusDraft            PRStatus = "Draft"
+	StatusPendingReview    PRStatus = "Pending Review"
+	StatusChangesRequested PRStatus = "Changes Requested"
+	StatusApproved         PRStatus = "Approved"
+	StatusMerged           PRStatus = "Merged"
+)
+
+// PullRequest simulates a GitHub pull request with branch protection rules.
+type PullRequest struct {
+	ID             int
+	Title          string
+	Author         string
+	SourceBranch   string
+	TargetBranch   string
+	Status         PRStatus
+	ApprovalsCount int
+	CIPassing      bool
+}
+
+// CanMerge validates GitHub branch protection rules: CI must pass and at least 1 approval.
+func (pr *PullRequest) CanMerge() error {
+	if !pr.CIPassing {
+		return errors.New("cannot merge: CI checks are failing")
+	}
+	if pr.ApprovalsCount < 1 {
+		return errors.New("cannot merge: at least 1 approval is required by branch protection")
+	}
+	return nil
+}
+
+func (pr *PullRequest) Merge() error {
+	if err := pr.CanMerge(); err != nil {
+		return err
+	}
+	pr.Status = StatusMerged
+	return nil
+}
+
+func main() {
+	fmt.Println("=== GitHub Workflow State Machine Simulation ===")
+
+	pr := &PullRequest{
+		ID:           101,
+		Title:        "feat: add rate limiting middleware",
+		Author:       "alice",
+		SourceBranch: "feature/rate-limiter",
+		TargetBranch: "main",
+		Status:       StatusPendingReview,
+		CIPassing:    true,
+	}
+
+	fmt.Printf("PR #%d: %s (Status: %s)\n", pr.ID, pr.Title, pr.Status)
+	fmt.Printf("Initial merge attempt: %v\n", pr.Merge())
+
+	// Reviewer adds approval
+	fmt.Println("\nReviewer 'bob' reviews and submits Approval...")
+	pr.ApprovalsCount++
+	pr.Status = StatusApproved
+	fmt.Printf("PR Status: %s (Approvals: %d, CI: %t)\n", pr.Status, pr.ApprovalsCount, pr.CIPassing)
+
+	// Second merge attempt
+	if err := pr.Merge(); err != nil {
+		fmt.Printf("Merge failed: %v\n", err)
+	} else {
+		fmt.Printf("✓ Merge successful! PR #%d is now merged into %s.\n", pr.ID, pr.TargetBranch)
+	}
+}
+```
 
 ## Step-by-step execution
 

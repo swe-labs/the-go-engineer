@@ -15,6 +15,28 @@ When a process terminates, the operating system kernel accepts an integer exit s
 - **Non-Zero (1–255):** Indicates an error, abnormal termination, or specific failure condition.
 - **Automation Contract:** CI/CD runners, shells, and orchestrators do not inspect console text; they rely strictly on the numeric exit status to decide whether a pipeline step succeeded or failed.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    PROG["Go Application Process terminates"] --> EXIT{"Termination Path"}
+
+    EXIT -->|main() returns normally| SUCCESS["os.Exit(0)
+Kernel sets exit_code = 0"]
+    EXIT -->|os.Exit(1) or unhandled error| FAILURE["os.Exit(1)
+Kernel sets exit_code = 1"]
+    EXIT -->|panic() occurs| PANIC["panic unwinds
+Exits with code 2"]
+
+    SUCCESS --> SHELL["Parent Shell / CI Runner reads code via waitpid()"]
+    FAILURE --> SHELL
+    PANIC --> SHELL
+
+    SHELL --> DECISION{"$? == 0 ?"}
+    DECISION -->|Yes: 0| CI_PASS["CI Step: SUCCESS (Proceed)"]
+    DECISION -->|No: != 0| CI_FAIL["CI Step: FAILED (Halt Pipeline)"]
+```
+
 ## Core idea
 
 Without exit codes, scripts and shells would need to parse program output to determine success — fragile, language-dependent, and slow. A single integer provides reliable, universal success/failure signaling.

@@ -12,6 +12,24 @@ Developers need a repeatable workflow to save work-in-progress, review changes b
 
 The Git workflow is three baskets: the working directory (your current edits), the staging area (what you plan to commit), and the commit history (what has been saved). Changes flow left to right: working → staged → committed.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as Developer
+    participant WD as Working Directory
+    participant Index as Staging Area
+    participant GitDB as Git Object Database (.git)
+
+    Dev->>WD: Edit file: main.go
+    Dev->>Index: git status (Reports: 'Changes not staged for commit')
+    Dev->>Index: git add main.go (Stages snapshot in index)
+    Dev->>GitDB: git commit -m "feat: add user login"
+    GitDB->>GitDB: Creates Blob (content) + Tree (directory) + Commit object
+    GitDB-->>Dev: Created commit [a1b2c3d] pointing to tree
+```
+
 ## Core idea
 
 Without staging, every file change would be automatically included in the next commit — making partial commits, code review, and selective history impossible. The status-add-commit workflow gives developers fine-grained control over what enters the permanent record.

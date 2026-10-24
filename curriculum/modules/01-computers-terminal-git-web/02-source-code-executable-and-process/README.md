@@ -15,6 +15,32 @@ Think of the execution pipeline as a manufacturing plant:
 - **Executable Binary is the machine tooling:** The compiler translates high-level constructs into fixed architecture-specific machine byte sequences (ELF on Linux, Mach-O on macOS, PE on Windows).
 - **Process is the live assembly line:** When you execute `./app`, the OS loader maps binary segments into private virtual RAM pages, allocates stack and heap, assigns a Process ID (PID), and points the CPU instruction register to the program's entry point to execute machine cycles.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph DiskStorage["Persistent Storage (Disk)"]
+        SRC["Source Code: main.go (ASCII / UTF-8 Text)"]
+        COMPILER["Go Toolchain (go build)"]
+        BIN["Compiled Binary: server (Machine Code & Static Rodata)"]
+        
+        SRC --> COMPILER --> BIN
+    end
+
+    subgraph OS_Kernel["Operating System & RAM"]
+        LOADER["OS Kernel Loader (execve / CreateProcess)"]
+        
+        subgraph ProcessMemory["Active Process Space (PID: 5821)"]
+            CODE[".text: Machine Instructions"]
+            STACK["Dynamic Goroutine Stacks"]
+            HEAP["Runtime Managed Heap (mcache / mheap)"]
+            FDS["File Descriptors (stdin=0, stdout=1, stderr=2)"]
+        end
+
+        BIN --> LOADER --> ProcessMemory
+    end
+```
+
 ## Core idea
 
 Without this distinction, every development action — editing, compiling, running, debugging — becomes muddy. Separating source, executable, and process gives developers precise language to discuss what is happening and why.
@@ -30,6 +56,65 @@ Go's toolchain explicitly separates these three stages: source files (.go) are i
 ## Go example
 
 The example defines a `ProgramLifecycle` struct that holds the source file path, binary path, process PID, and command-line arguments. It uses `os.Executable()` to find the current binary, `os.Getpid()` for the process ID, and `os.Args` for arguments. It also uses `exec.LookPath` to show how the OS finds the binary via PATH resolution.
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+)
+
+// ProgramLifecycle tracks the three states of a program lifecycle.
+type ProgramLifecycle struct {
+	SourcePath string
+	BinaryPath string
+	PID        int
+	Args       []string
+}
+
+// Describe formats the lifecycle fields into a human-readable summary.
+func (p ProgramLifecycle) Describe() string {
+	return fmt.Sprintf("Source file:  %s\nBinary path:  %s\nProcess PID:  %d\nProcess Args: %v",
+		p.SourcePath, p.BinaryPath, p.PID, p.Args)
+}
+
+func main() {
+	execPath, err := os.Executable()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "failed to get executable path: %v\n", err)
+		os.Exit(1)
+	}
+
+	wd, err := os.Getwd()
+	if err != nil {
+		wd = "."
+	}
+
+	lifecycle := ProgramLifecycle{
+		SourcePath: filepath.Join(wd, "main.go"),
+		BinaryPath: execPath,
+		PID:        os.Getpid(),
+		Args:       os.Args,
+	}
+
+	fmt.Println("=== Program Lifecycle Inspection ===")
+	fmt.Println(lifecycle.Describe())
+
+	fmt.Println("\n=== PATH Resolution Check ===")
+	binName := filepath.Base(execPath)
+	resolved, err := exec.LookPath(binName)
+	if err == nil {
+		fmt.Printf("Resolved '%s' via PATH: %s\n", binName, resolved)
+	} else {
+		fmt.Printf("Binary '%s' not found on system PATH (invoked directly)\n", binName)
+	}
+
+	fmt.Println("\nModel: Source Code (text) -> Compiled Binary (file) -> Running Process (PID)")
+}
+```
 
 ## Step-by-step execution
 

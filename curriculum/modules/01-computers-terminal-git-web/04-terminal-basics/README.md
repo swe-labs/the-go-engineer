@@ -16,6 +16,26 @@ The terminal emulator is an interactive text interface connected to a command-li
 3. **Spawn & Connect:** Spawns a child process and attaches the three standard I/O streams: standard input (`stdin`, fd 0), standard output (`stdout`, fd 1), and standard error (`stderr`, fd 2).
 4. **Wait:** Pauses until execution finishes, collecting the child process's integer exit code.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    USER["User Keyboard Input"] --> TERM["Terminal Emulator
+(Alacritty / Windows Terminal)"]
+    TERM --> SHELL["Shell Process
+(bash / zsh / PowerShell)"]
+    
+    subgraph ProcessExecution["Child Command Execution"]
+        SHELL -->|Fork & Exec| CHILD["Child Process (e.g., 'go test')"]
+        STDIN["stdin (fd 0)"] --> CHILD
+        CHILD --> STDOUT["stdout (fd 1)"]
+        CHILD --> STDERR["stderr (fd 2)"]
+    end
+
+    STDOUT --> TERM
+    STDERR --> TERM
+```
+
 ## Core idea
 
 The terminal predates GUIs and remains the most powerful interface for software development because it is composable, scriptable, remote-friendly, and consistent across machines. Learning the terminal is learning to speak the computer's native language.
@@ -31,6 +51,51 @@ Go developers use the terminal constantly: `go run` to test code, `go test` to v
 ## Go example
 
 The example implements a minimal shell simulator. It reads input from stdin via `bufio.Scanner`, tokenizes the input by splitting on whitespace, and dispatches commands. It supports `echo` (prints arguments), `hello` (prints a greeting), and `exit` (terminates the process). Unknown commands produce a "command not found" error — mirroring how real shells resolve commands via PATH lookup.
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+	fmt.Println("=== Minimal Go Shell Simulator ===")
+	fmt.Println("Commands: echo <args>, hello, exit")
+
+	scanner := bufio.NewScanner(os.Stdin)
+	for {
+		fmt.Print("gosh> ")
+		if !scanner.Scan() {
+			break // EOF
+		}
+
+		line := strings.TrimSpace(scanner.Text())
+		if line == "" {
+			continue
+		}
+
+		tokens := strings.Fields(line)
+		cmd := tokens[0]
+		args := tokens[1:]
+
+		switch cmd {
+		case "exit":
+			fmt.Println("Session terminated. Exit code 0.")
+			return
+		case "hello":
+			fmt.Println("Hello from the Go shell simulator!")
+		case "echo":
+			fmt.Println(strings.Join(args, " "))
+		default:
+			fmt.Fprintf(os.Stderr, "gosh: command not found: %s\n", cmd)
+		}
+	}
+}
+```
 
 ## Step-by-step execution
 

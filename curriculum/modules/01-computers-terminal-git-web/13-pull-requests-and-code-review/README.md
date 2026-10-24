@@ -12,6 +12,21 @@ Writing code alone leads to blind spots — the author knows what the code shoul
 
 Code review is pair debugging at scale — the author writes the solution, and reviewers validate assumptions, catch blind spots, and ensure consistency. The goal is not to find every bug but to share context, raise the team's collective code quality bar, and spread knowledge.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    PR_OPEN["Developer Opens Pull Request with Atomic Diff (<300 lines)"] --> CI["Automated CI Verification (Tests, Linter, Build)"]
+    
+    CI -->|CI Passes| REVIEW["Senior Engineer Reviews Diff"]
+    CI -->|CI Fails| FIX_CI["Developer Fixes Build"] --> CI
+
+    REVIEW --> FEEDBACK{"Review Outcome"}
+    
+    FEEDBACK -->|Inline Comments / Changes Requested| PUSH_FIX["Developer Pushes Follow-Up Commit"] --> CI
+    FEEDBACK -->|LGTM & Approved| MERGE["Squash & Merge into main"]
+```
+
 ## Core idea
 
 A pull request is a proposal to merge changes from one branch into another, with attached discussion, review comments, and automated checks. Code review is the process of examining those changes to catch defects, improve design, and share context before the code reaches production.
@@ -27,6 +42,79 @@ Go code review follows strict conventions documented in "CodeReviewComments" on 
 ## Go example
 
 The example program simulates a code review process: a diff with changed lines, a reviewer who inspects each change and leaves comments, and a merge decision based on review outcomes.
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// DiffLine represents a single line change in a pull request diff.
+type DiffLine struct {
+	LineNumber int
+	Type       string // "+", "-", " "
+	Content    string
+}
+
+// ReviewComment represents inline feedback left by a reviewer.
+type ReviewComment struct {
+	LineNumber int
+	Reviewer   string
+	Comment    string
+	IsBlocking bool
+}
+
+func main() {
+	fmt.Println("=== Code Review Workflow Simulation ===")
+
+	diff := []DiffLine{
+		{LineNumber: 10, Type: " ", Content: "func ConnectDB() (*sql.DB, error) {"},
+		{LineNumber: 11, Type: "-", Content: "    db, _ := sql.Open(\"postgres\", connStr)"},
+		{LineNumber: 11, Type: "+", Content: "    db, err := sql.Open(\"postgres\", connStr)"},
+		{LineNumber: 12, Type: "+", Content: "    if err != nil { return nil, err }"},
+		{LineNumber: 13, Type: " ", Content: "    return db, nil"},
+	}
+
+	fmt.Println("--- Diff Under Review ---")
+	for _, l := range diff {
+		fmt.Printf("%3d | %s %s\n", l.LineNumber, l.Type, l.Content)
+	}
+
+	comments := []ReviewComment{
+		{
+			LineNumber: 11,
+			Reviewer:   "senior-gopher",
+			Comment:    "Nice catch replacing the blank identifier with explicit error checking!",
+			IsBlocking: false,
+		},
+		{
+			LineNumber: 13,
+			Reviewer:   "senior-gopher",
+			Comment:    "Consider adding db.Ping() before returning to verify the connection is alive.",
+			IsBlocking: false,
+		},
+	}
+
+	fmt.Println("\n--- Review Comments ---")
+	hasBlockingComments := false
+	for _, c := range comments {
+		tag := "SUGGESTION"
+		if c.IsBlocking {
+			tag = "BLOCKING"
+			hasBlockingComments = true
+		}
+		fmt.Printf("[%s] Line %d by @%s: %s\n", tag, c.LineNumber, c.Reviewer, c.Comment)
+	}
+
+	fmt.Println("\n--- Merge Decision ---")
+	if !hasBlockingComments {
+		fmt.Println("Decision: APPROVED. No blocking review comments remaining; ready to merge.")
+	} else {
+		fmt.Println("Decision: CHANGES REQUESTED. Address blocking comments before merging.")
+	}
+}
+```
 
 ## Step-by-step execution
 

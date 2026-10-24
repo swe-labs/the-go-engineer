@@ -12,6 +12,20 @@ Operating systems need to run multiple programs concurrently while keeping them 
 
 A process is a running program with its own private memory space, file descriptors, and execution state. The OS kernel acts as a traffic cop — allocating CPU time, memory, and I/O resources among all running processes fairly.
 
+## Visual model
+
+```mermaid
+stateDiagram-v2
+    [*] --> New : Process Created (fork / CreateProcess)
+    New --> Ready : Loaded into Memory & PCB Allocated
+    Ready --> Running : CPU Scheduler Dispatches (Context Switch)
+    Running --> Ready : Time Slice Expired (Preemption)
+    Running --> Blocked : Waiting on I/O (Disk / Network / Sleep)
+    Blocked --> Ready : I/O Event Arrives / Unblocked
+    Running --> Terminated : os.Exit() / SIGKILL
+    Terminated --> [*] : Zombie status collected by parent waitpid()
+```
+
 ## Core idea
 
 Without OS-managed processes, every program would need its own CPU scheduler, memory isolation mechanism, and I/O multiplexer — essentially reimplementing the OS. Processes are the fundamental unit of workload isolation.

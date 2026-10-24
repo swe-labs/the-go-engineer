@@ -12,6 +12,28 @@ The web would not work without a standard way to locate servers (DNS), connect t
 
 The web is a client-server model: browsers (clients) send requests to servers using the HTTP protocol over TCP connections. DNS translates human-friendly names (google.com) to machine-friendly IP addresses (142.250.80.46). Ports identify which application on the server should handle the request.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client as Browser / HTTP Client
+    participant DNS as DNS Resolver (Port 53)
+    participant Server as Web Server (Port 443 / 80)
+
+    Client->>DNS: Query: What is the IP for example.com?
+    DNS-->>Client: Answer: 93.184.216.34
+    
+    Note over Client, Server: TCP 3-Way Handshake (SYN -> SYN-ACK -> ACK)
+    Client->>Server: SYN (Port 443)
+    Server-->>Client: SYN-ACK
+    Client->>Server: ACK (Connection Established)
+    
+    Note over Client, Server: Application Layer Protocol (HTTP / TLS)
+    Client->>Server: GET / HTTP/1.1
+    Server-->>Client: HTTP/1.1 200 OK (HTML Payload)
+```
+
 ## Core idea
 
 The internet relies on four layers working together: DNS resolves domain names to IP addresses, TCP provides reliable connections over IP routing, ports distinguish services on a single machine, and HTTP is the application protocol that clients and servers speak over these connections.
@@ -27,6 +49,69 @@ Go's `net` package provides DNS resolution (`net.LookupHost`, `net.LookupMX`), T
 ## Go example
 
 The example program resolves a domain name to IP addresses using `net.LookupHost`, establishes a TCP connection using `net.Dial`, and prints connection details including the local and remote addresses and port numbers.
+
+```go
+package main
+
+import (
+	"fmt"
+	"net"
+	"time"
+)
+
+func main() {
+	fmt.Println("=== DNS Resolution and TCP Socket Inspection ===")
+
+	// 1. DNS Resolution
+	targetHost := "example.com"
+	ips, err := net.LookupHost(targetHost)
+	if err != nil {
+		fmt.Printf("DNS resolution for %s failed (%v); falling back to 127.0.0.1 for local demo\n", targetHost, err)
+		ips = []string{"127.0.0.1"}
+	} else {
+		fmt.Printf("Resolved DNS host %q to IP addresses:\n", targetHost)
+		for _, ip := range ips {
+			fmt.Printf("  -> %s\n", ip)
+		}
+	}
+
+	// 2. Establishing a TCP Listener and Client Connection
+	listener, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		fmt.Printf("failed to bind local listener: %v\n", err)
+		return
+	}
+	defer listener.Close()
+
+	serverAddr := listener.Addr().String()
+	fmt.Printf("\nServer listening on: %s\n", serverAddr)
+
+	done := make(chan struct{})
+	go func() {
+		defer close(done)
+		conn, err := listener.Accept()
+		if err != nil {
+			return
+		}
+		defer conn.Close()
+		fmt.Printf("[Server] Accepted connection from remote: %s\n", conn.RemoteAddr())
+	}()
+
+	// 3. Dial TCP Connection
+	clientConn, err := net.DialTimeout("tcp", serverAddr, 2*time.Second)
+	if err != nil {
+		fmt.Printf("Dial failed: %v\n", err)
+		return
+	}
+	defer clientConn.Close()
+
+	fmt.Println("[Client] TCP 3-way handshake established successfully:")
+	fmt.Printf("  Local socket:  %s\n", clientConn.LocalAddr())
+	fmt.Printf("  Remote socket: %s\n", clientConn.RemoteAddr())
+
+	<-done
+}
+```
 
 ## Step-by-step execution
 

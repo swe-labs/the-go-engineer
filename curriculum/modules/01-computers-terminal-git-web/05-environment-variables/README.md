@@ -15,6 +15,28 @@ Environment variables form a string-to-string dictionary (`KEY=VALUE`) stored by
 - **One-Way Inheritance:** When a parent process spawns a child process, the operating system copies a snapshot of the parent's environment block into the child.
 - **Strict Isolation:** Changes made to environment variables by the child process cannot alter the parent process or sibling processes. Modifying a variable in a running application does not change the parent shell.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ParentShell["Parent Shell Process (bash / pwsh)"]
+        ENV_BLOCK["Environment Block:
+PATH=/usr/bin:...
+HOME=/home/user
+APP_PORT=8080"]
+        CMD["Command: go run main.go"]
+    end
+
+    subgraph ChildProcess["Child Process (Go Runtime)"]
+        COPIED["Inherited Environment Memory Copy"]
+        GO_CODE["os.Getenv('APP_PORT') -> '8080'
+os.LookupEnv('UNSET_VAR') -> '', false"]
+        COPIED --> GO_CODE
+    end
+
+    ParentShell -->|fork + execve (Clones environment block)| ChildProcess
+```
+
 ## Core idea
 
 Without environment variables, configuration would require config files that must be managed across machines, or compile-time constants that require rebuilding. Environment variables provide simple, process-scoped configuration that works everywhere.
@@ -30,6 +52,63 @@ Go reads environment variables for toolchain configuration: `GOPATH` (module cac
 ## Go example
 
 The example defines an `EnvVar` struct that holds a key, value, and whether the variable was set. The `GetEnv` function uses `os.LookupEnv` to distinguish between unset variables and variables set to empty string. `main()` checks several common variables (`PATH`, `HOME`, `USER`, `GOPATH`, `GOROOT`, `MY_CUSTOM_VAR`), then lists all environment variables sorted alphabetically using `os.Environ()`.
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+	"sort"
+)
+
+// EnvVar holds key, value, and presence status for an environment variable.
+type EnvVar struct {
+	Key    string
+	Value  string
+	IsSet  bool
+}
+
+// GetEnv retrieves an environment variable distinguishing between empty and unset.
+func GetEnv(key string) EnvVar {
+	val, exists := os.LookupEnv(key)
+	return EnvVar{
+		Key:   key,
+		Value: val,
+		IsSet: exists,
+	}
+}
+
+func main() {
+	fmt.Println("=== Checking Specific Environment Variables ===")
+	targetKeys := []string{"PATH", "HOME", "USER", "GOPATH", "GOROOT", "MY_CUSTOM_VAR"}
+	for _, key := range targetKeys {
+		v := GetEnv(key)
+		if v.IsSet {
+			valDisplay := v.Value
+			if len(valDisplay) > 40 {
+				valDisplay = valDisplay[:37] + "..."
+			}
+			fmt.Printf("✓ %-15s = %q\n", v.Key, valDisplay)
+		} else {
+			fmt.Printf("✗ %-15s = (unset)\n", v.Key)
+		}
+	}
+
+	fmt.Println("\n=== Listing All Process Environment Variables (Sorted) ===")
+	allEnv := os.Environ()
+	sort.Strings(allEnv)
+	fmt.Printf("Total variables in environment block: %d\n", len(allEnv))
+	limit := 5
+	if len(allEnv) < limit {
+		limit = len(allEnv)
+	}
+	fmt.Printf("First %d variables sample:\n", limit)
+	for i := 0; i < limit; i++ {
+		fmt.Printf("  [%02d] %s\n", i+1, allEnv[i])
+	}
+}
+```
 
 ## Step-by-step execution
 

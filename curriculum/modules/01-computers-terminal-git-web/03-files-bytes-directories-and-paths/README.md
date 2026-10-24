@@ -15,6 +15,31 @@ At the physical hardware layer, storage drives only store raw 8-bit bytes (0–2
 - **Directories (Name-to-Location Tables):** Specialized files whose content is a mapping of human-readable file names to filesystem node identifiers.
 - **Paths (Navigation Coordinates):** Absolute paths anchor navigation to the root (`/` on Unix, `C:\` on Windows). Relative paths resolve coordinates starting from the calling process's current working directory (CWD).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph FilesystemTree["Filesystem Tree Structure"]
+        ROOT["Root: / (Unix) or C:\ (Windows)"]
+        USR["usr / Users"]
+        VAR["var"]
+        APP["app / project"]
+        
+        ROOT --> USR & VAR & APP
+        
+        SUBDIR["data/"]
+        FILE["records.txt (File inode: 1042 bytes)"]
+        
+        APP --> SUBDIR --> FILE
+    end
+
+    subgraph ByteRepresentation["Raw File Content on Disk"]
+        BYTES["[0x48, 0x65, 0x6c, 0x6c, 0x6f...] ('Hello...')"]
+    end
+
+    FILE --- BYTES
+```
+
 ## Core idea
 
 Without a filesystem, every program would need to manage raw disk sectors — an impossible burden. Files, directories, and paths give developers a simple tree-based abstraction that works across programming languages and operating systems.
@@ -30,6 +55,90 @@ Go's `os` and `path/filepath` packages provide cross-platform filesystem access.
 ## Go example
 
 The example defines a `FileInfo` struct to hold path, size, directory flag, and content. Two functions — `CreateFile` and `ReadFile` — demonstrate writing bytes to disk and reading them back. `main()` creates a file, prints its metadata and content, then cleans up. Path manipulation functions like `filepath.Join`, `filepath.Abs`, `filepath.Base`, `filepath.Dir`, and `filepath.Ext` are used to inspect the path.
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+)
+
+// FileInfo holds metadata and content for a file.
+type FileInfo struct {
+	Path    string
+	Size    int64
+	IsDir   bool
+	Content string
+}
+
+// CreateFile writes bytes to disk, creating parent directories if necessary.
+func CreateFile(path string, content []byte) error {
+	dir := filepath.Dir(path)
+	if err := os.MkdirAll(dir, 0755); err != nil {
+		return fmt.Errorf("mkdir failed: %w", err)
+	}
+	if err := os.WriteFile(path, content, 0644); err != nil {
+		return fmt.Errorf("write file failed: %w", err)
+	}
+	return nil
+}
+
+// ReadFile retrieves content and metadata for a given path.
+func ReadFile(path string) (*FileInfo, error) {
+	stat, err := os.Stat(path)
+	if err != nil {
+		return nil, fmt.Errorf("stat failed: %w", err)
+	}
+	bytes, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("read failed: %w", err)
+	}
+	return &FileInfo{
+		Path:    path,
+		Size:    stat.Size(),
+		IsDir:   stat.IsDir(),
+		Content: string(bytes),
+	}, nil
+}
+
+func main() {
+	tempDir, err := os.MkdirTemp("", "the-go-engineer-file-io-*")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "failed to create temp dir: %v\n", err)
+		os.Exit(1)
+	}
+	defer os.RemoveAll(tempDir) // cleanup on exit
+
+	samplePath := filepath.Join(tempDir, "data", "records.txt")
+	sampleContent := []byte("Hello, byte-level file I/O in Go!\nLine 2: 42 bytes.\n")
+
+	if err := CreateFile(samplePath, sampleContent); err != nil {
+		fmt.Fprintf(os.Stderr, "failed to create file: %v\n", err)
+		os.Exit(1)
+	}
+
+	info, err := ReadFile(samplePath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "failed to read file: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("=== File Metadata and Content ===")
+	fmt.Printf("Path:     %s\n", info.Path)
+	fmt.Printf("Size:     %d bytes\n", info.Size)
+	fmt.Printf("Is Dir:   %t\n", info.IsDir)
+	fmt.Printf("Content:\n%s\n", info.Content)
+
+	fmt.Println("=== Path Manipulation Utilities ===")
+	abs, _ := filepath.Abs(samplePath)
+	fmt.Printf("filepath.Abs:  %s\n", abs)
+	fmt.Printf("filepath.Base: %s\n", filepath.Base(samplePath))
+	fmt.Printf("filepath.Dir:  %s\n", filepath.Dir(samplePath))
+	fmt.Printf("filepath.Ext:  %s\n", filepath.Ext(samplePath))
+}
+```
 
 ## Step-by-step execution
 
