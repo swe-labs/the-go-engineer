@@ -19,6 +19,19 @@ Think of each timeout as a different kind of gate with a timer:
 
 Each gate trips independently. No single timeout covers all gates -- you must configure each one.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ServerTimeouts["http.Server Timeout Defense Boundaries"]
+        CONN["1. Client establishes TCP connection"] --> R_HDR["ReadHeaderTimeout: 5s (Mitigates Slowloris attacks)"]
+        R_HDR --> R_BODY["ReadTimeout: 10s (Limits slow request body upload)"]
+        R_BODY --> EXEC["Handler execution context"]
+        EXEC --> W_TIMEOUT["WriteTimeout: 15s (Ensures response bytes complete)"]
+        W_TIMEOUT --> IDLE["IdleTimeout: 120s (Reclaims keep-alive TCP connections)"]
+    end
+```
+
 ## Core idea
 
 An `http.Server` struct has four timeout fields, all of type `time.Duration`:

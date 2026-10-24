@@ -25,6 +25,24 @@ Table (unsorted rows):        Index on last_name (B-tree):
 
 SQLite uses B-tree indexes by default. B-trees are balanced, sorted, and support fast search, insert, and delete (O(log n)).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph BTree["B-Tree Index (CREATE INDEX ON users (email))"]
+        ROOT["Root Node (Keys: m@...)"]
+        ROOT --> B1["Branch Page (Keys: a@.. to l@..)"]
+        ROOT --> B2["Branch Page (Keys: m@.. to z@..)"]
+        B1 --> L1["Leaf: 'alice@...' -> Heap CTID (Page 4, Slot 2)"]
+    end
+
+    subgraph Heap["Table Heap Data (Disk Blocks)"]
+        BLOCK["Read Page 4 directly (1 I/O operation instead of scanning 1,000,000 rows!)"]
+    end
+
+    L1 --> BLOCK
+```
+
 ## Core idea
 
 ```sql

@@ -12,6 +12,19 @@ Routing is the entry point of every HTTP API. A well-designed router maps clean 
 
 Think of the router as a dispatcher at a hotel front desk. A guest arrives with a request (method + path). The dispatcher checks the board: "GET /rooms/42 → room service, POST /checkin → front desk, DELETE /booking/7 → cancellations." Each board entry has a method and a path pattern. The dispatcher finds the best match and directs the guest to the right department. If no match is found, the guest gets a 404.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Incoming: GET /api/v1/orders/90210"] --> MUX["http.ServeMux (Go 1.22+ Path & Method Router)"]
+
+    MUX --> P1{"Matches 'GET /api/v1/orders/{id}' ?"}
+    P1 -->|Yes| H1["OrderHandler (id := r.PathValue("id"))"]
+    P1 -->|No| P2{"Matches 'POST /api/v1/orders' ?"}
+    P2 -->|No| P3{"Matches 'GET /healthz' ?"}
+    P3 -->|No| NF["404 Not Found / 405 Method Not Allowed"]
+```
+
 ## Core idea
 
 Go 1.22+ `http.ServeMux` supports:

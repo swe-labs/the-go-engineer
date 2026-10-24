@@ -18,6 +18,21 @@ A misconfigured connection pool is one of the most common sources of production 
 
 When a goroutine needs a connection, the pool hands out an idle one or opens a new one (up to MaxOpenConns). When the goroutine finishes, the connection returns to the idle pool (up to MaxIdleConns) or is closed.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph PoolState["sql.DB Connection Pool (e.g. MaxOpen=25, MaxIdle=10)"]
+        IN_USE["Active Connections (in use by queries): 8"]
+        IDLE["Idle Connections (warm & ready in pool): 5"]
+        WAITING["Callers Blocked (waiting for available connection): 0"]
+    end
+
+    APP_G["Goroutine (db.Query)"] -->|1. Requests connection| PoolState
+    PoolState -->|2. Borrows idle conn| APP_G
+    APP_G -->|3. rows.Close() returns conn| PoolState
+```
+
 ## Core idea
 
 The pool configuration methods:

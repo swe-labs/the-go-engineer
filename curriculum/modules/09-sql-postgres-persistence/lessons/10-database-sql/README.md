@@ -12,6 +12,16 @@ Use Go's `database/sql` package to open a database connection, register a driver
 
 `database/sql` is a **connection pool manager**, not a single connection. Think of it as a taxi dispatcher: you tell the dispatcher where to find taxis (the DSN), and it maintains a pool of taxis (connections) ready to go. When you need to make a trip (execute a query), the dispatcher assigns you a taxi, you use it, and it returns to the pool. The dispatcher handles creation, reuse, and retirement of taxis automatically.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    APP["Go Application Code"] --> STD["database/sql (Standard Library Interface)"]
+    STD --> DRIVER["database/sql/driver (Driver Interface)"]
+    DRIVER --> PGX["pgx / lib/pq (Concrete PostgreSQL Wire Driver)"]
+    PGX -->|TCP Wire Protocol (Port 5432)| PG_SRV["PostgreSQL Database Server"]
+```
+
 ## Core idea
 
 The `database/sql` package provides:

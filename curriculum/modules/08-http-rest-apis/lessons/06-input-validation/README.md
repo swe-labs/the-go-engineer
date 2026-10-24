@@ -12,6 +12,21 @@ Unvalidated input is the root cause of SQL injection, XSS, mass assignment, and 
 
 Think of validation as a sieve. Raw input goes in the top — strings, numbers, missing fields. Each sieve layer catches a specific kind of problem: missing required fields, wrong types, values out of range, format violations (email, UUID). Only what passes through all sieves is trusted and passed to business logic. Validation errors are collected and returned as a structured response so the client can fix all issues in one round trip.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    DECODE["Decode JSON to CreateOrderRequest struct"] --> V1{"order.Items length > 0?"}
+    V1 -->|No| E1["400 Bad Request: 'order must contain at least 1 item'"]
+    V1 -->|Yes| V2{"order.TotalAmount > 0?"}
+    V2 -->|No| E2["400 Bad Request: 'total amount must be positive'"]
+    V2 -->|Yes| V3{"email contains valid '@'?"}
+    V3 -->|No| E3["422 Unprocessable Entity: 'invalid email format'"]
+    V3 -->|Yes| SERVICE["Pass validated DTO to Domain Service"]
+
+    style SERVICE stroke:#28a745,stroke-width:2px
+```
+
 ## Core idea
 
 Validation in Go follows a layered approach:

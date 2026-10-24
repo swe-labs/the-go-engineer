@@ -27,6 +27,21 @@ SQL: UPDATE products SET qty = 15 WHERE id = 1;
                           change
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph OptimisticLocking["Optimistic Locking Pattern"]
+        READ["1. Read user: { id: 101, balance: 50, version: 3 }"]
+        UPDATE["2. UPDATE users SET balance = 75, version = version + 1
+   WHERE id = 101 AND version = 3;"]
+        CHECK{"RowsAffected == 1 ?"}
+        CHECK -->|Yes| OK["Update succeeded, version is now 4"]
+        CHECK -->|No (0 rows)| CONFLICT["Concurrency Conflict! Another request modified row;
+Rollback and retry operation"]
+    end
+```
+
 ## Core idea
 
 Basic UPDATE in Go:

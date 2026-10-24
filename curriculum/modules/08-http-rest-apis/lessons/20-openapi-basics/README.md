@@ -19,6 +19,16 @@ Think of an OpenAPI spec as a blueprint for your API:
 
 Just as a building blueprint lets electricians, plumbers, and inspectors all work from the same plan, an OpenAPI spec lets frontend, backend, QA, and devops teams coordinate.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    SPEC["OpenAPI 3.1 YAML/JSON Contract"] --> DOCS["Swagger UI / Redoc (Interactive API Docs)"]
+    SPEC --> CLIENT["Client SDK Generators (TypeScript, Go, Python)"]
+    SPEC --> MOCK["API Mocking Server (Prism)"]
+    SPEC --> VALIDATOR["Request/Response Contract Testing"]
+```
+
 ## Core idea
 
 OpenAPI 3.0 spec structure:

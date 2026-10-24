@@ -14,6 +14,41 @@ Imagine you are designing a filing cabinet for a company. Each drawer holds one 
 
 Normalization is the process of ensuring that every piece of information lives in exactly one drawer. If you find yourself writing the customer name on every invoice folder, you have denormalized data — fix it by keeping only the customer ID on the invoice and looking up the name in the customer drawer.
 
+## Visual model
+
+```mermaid
+erDiagram
+    TENANT ||--o{ USER : owns
+    USER ||--o{ ORDER : places
+    ORDER ||--|{ ORDER_ITEM : contains
+    PRODUCT ||--o{ ORDER_ITEM : referenced_in
+
+    TENANT {
+        uuid id PK
+        string name
+        timestamp created_at
+    }
+    USER {
+        uuid id PK
+        uuid tenant_id FK
+        string email
+        string password_hash
+    }
+    ORDER {
+        uuid id PK
+        uuid user_id FK
+        string status
+        decimal total_amount
+    }
+    ORDER_ITEM {
+        uuid id PK
+        uuid order_id FK
+        uuid product_id FK
+        int quantity
+        decimal unit_price
+    }
+```
+
 ## Core idea
 
 **Relational modeling** is a top-down design process:

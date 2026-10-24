@@ -27,6 +27,22 @@ Start query → context.WithTimeout(5s)
 
 The `*sql.DB` methods with `Context` suffix (`ExecContext`, `QueryContext`, `QueryRowContext`, `PrepareContext`) all accept a context. If the context is canceled, the in-progress database operation is interrupted.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Go Handler
+    participant DB as PostgreSQL Server
+
+    App->>App: ctx, cancel := context.WithTimeout(r.Context(), 2*time.Second)
+    App->>App: defer cancel()
+    App->>DB: db.QueryContext(ctx, "SELECT COUNT(*) FROM huge_audit_logs")
+    Note over App: 2.0 seconds elapse! ctx.Done() fires!
+    App->>DB: Driver sends cancellation packet (Postgres cancels backend query PID)
+    DB-->>App: Query aborted: context deadline exceeded
+```
+
 ## Core idea
 
 ```go

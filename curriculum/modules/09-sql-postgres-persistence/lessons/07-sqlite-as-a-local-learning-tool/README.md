@@ -12,6 +12,15 @@ SQLite is the most widely deployed database engine in the world — every smartp
 
 SQLite is an embedded database: it runs in the same process as your Go application. There is no separate server to start, no port to configure, and no connection string with host and port. The database is either a single file on disk (`./data.db`) or pure memory (`:memory:`). Think of it as a library (like `encoding/json`) rather than a service (like a web server).
 
+## Visual model
+
+```mermaid
+flowchart LR
+    APP["Go Application Process"] -->|Embedded in-process library (CGo / modernc.org/sqlite)| DB["Single File on Local Disk:
+app.db
+(Zero network latency, zero container overhead)"]
+```
+
 ## Core idea
 
 SQLite is a **serverless, zero-configuration, transactional SQL database engine** delivered as a C library. In Go, it is accessed through `modernc.org/sqlite`, a pure-Go port that requires no CGO.

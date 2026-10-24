@@ -12,6 +12,19 @@ Foreign keys are the mechanism that keeps related data consistent. Without them,
 
 A foreign key is a promise: "every value in this column must exist in that other table's primary key column." It is like a library catalog that only assigns a book to a shelf that actually exists. If someone removes a shelf, the catalog must either prevent the removal (RESTRICT), remove the book too (CASCADE), or set the shelf reference to NULL (SET NULL).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    PARENT["Parent Table: users (id: 'usr_100')"]
+    CHILD["Child Table: orders (user_id: 'usr_100')"]
+
+    CHILD -->|FOREIGN KEY (user_id) REFERENCES users(id)| PARENT
+    NOTE["Database rejects inserting an order with non-existent user_id!
+Database blocks deleting user while orders exist (ON DELETE RESTRICT)"]
+    CHILD -.-> NOTE
+```
+
 ## Core idea
 
 A **foreign key** is a column (or set of columns) that references the primary key (or unique column) of another table. It ensures:

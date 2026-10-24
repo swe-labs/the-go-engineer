@@ -12,6 +12,21 @@ The response is what the client sees. A correct response has the right status co
 
 Think of `ResponseWriter` as a three-step pipeline: first you set headers (via `w.Header().Set`), then you set the status code (via `w.WriteHeader`), then you write the body (via `w.Write` or `json.NewEncoder(w).Encode`). Once you enter the body phase, the header and status are locked. You cannot change them. The pipeline is one-way: headers → status → body. If you call `w.Write` before `w.WriteHeader`, Go automatically sends 200 OK as the status.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Protocol["ResponseWriter Protocol Rules"]
+        S1["1. Set Headers: w.Header().Set("Content-Type", "application/json")"]
+        S2["2. Set Status Code: w.WriteHeader(http.StatusCreated) (Optional, default 200)"]
+        S3["3. Write Body: w.Write(payloadBytes) / json.NewEncoder(w).Encode(data)"]
+
+        S1 --> S2 --> S3
+        NOTE["Setting headers AFTER WriteHeader or Write is a silent no-op!"]
+        S2 -.-> NOTE
+    end
+```
+
 ## Core idea
 
 `http.ResponseWriter` is an interface with three methods:

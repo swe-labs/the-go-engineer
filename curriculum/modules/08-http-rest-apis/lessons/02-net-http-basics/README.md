@@ -12,6 +12,24 @@ Every Go web service — from a tiny health-check endpoint to a multi-service pr
 
 Think of `net/http` as a dispatcher. You give it a map (the `ServeMux`): "when someone visits `/hello`, call this function." Then you tell it to listen on a port. Every incoming TCP connection is accepted, parsed into an `http.Request`, and handed to the matching handler function. The handler receives a `ResponseWriter` — a pipe to the client — and writes headers, status, and body into it. When the handler returns, the response is flushed and the connection is available for the next request.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    CLIENT["HTTP Client (Browser / curl)"] -->|TCP Connection| LISTENER["net.Listener (Port 8080)"]
+
+    subgraph GoServer["http.Server"]
+        LISTENER --> ACCEPT["Accept() loop"]
+        ACCEPT --> G1["Goroutine 1: Handle Client A"]
+        ACCEPT --> G2["Goroutine 2: Handle Client B"]
+        ACCEPT --> G3["Goroutine 3: Handle Client C"]
+
+        G1 --> HANDLER["http.Handler.ServeHTTP(w, r)"]
+        G2 --> HANDLER
+        G3 --> HANDLER
+    end
+```
+
 ## Core idea
 
 The `net/http` server is built on three core pieces:

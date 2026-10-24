@@ -12,6 +12,25 @@ Every production Go application outlives a single process. If you restart a web 
 
 Think of a flat file as a notebook that only one person can write in at a time. If two people write simultaneously, pages get lost or overwritten. A database is like a librarian: it ensures only one person modifies a page at a time, keeps a log of every change, and can find any page in milliseconds even when the archive holds millions of records. The librarian also guarantees that a partial update (e.g., transferring money from account A to B) either completes fully or leaves both accounts unchanged.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph InMem["In-Memory Application State"]
+        RAM["Process RAM (Variables, Maps)
+- Fast (nanoseconds)
+- Volatile: CRASH/RESTART ERASES EVERYTHING!"]
+    end
+
+    subgraph RelationalDB["Relational Database Engine (PostgreSQL)"]
+        WAL["Write-Ahead Log (WAL on SSD) - Durability"]
+        TABLES["Table Pages & B-Trees - Queryability"]
+        LOCKS["Row-Level Locks & MVCC - Concurrency Isolation"]
+    end
+
+    RAM -->|SQL Commands (INSERT, UPDATE)| RelationalDB
+```
+
 ## Core idea
 
 A database is a managed, durable, concurrent storage system that guarantees:

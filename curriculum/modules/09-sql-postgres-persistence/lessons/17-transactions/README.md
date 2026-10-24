@@ -19,6 +19,24 @@ Error flow:   Begin → Operation 1 → Operation 2 → Rollback  → all change
 
 Inside a transaction, you use `tx.Exec` and `tx.Query` instead of `db.Exec` and `db.Query`. All operations use the same database connection.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ACIDTransaction["db.BeginTx(ctx, &sql.TxOptions{})"]
+        STEP1["1. UPDATE accounts SET balance = balance - 100 WHERE id = 'A';"]
+        STEP2["2. UPDATE accounts SET balance = balance + 100 WHERE id = 'B';"]
+        CHECK{"Did both steps succeed?"}
+
+        STEP1 --> STEP2 --> CHECK
+        CHECK -->|Yes| COMMIT["tx.Commit(): Both atomic changes persist permanently"]
+        CHECK -->|No / Error / Panic| ROLLBACK["tx.Rollback(): Zero changes applied; state pristine"]
+    end
+
+    style COMMIT stroke:#28a745,stroke-width:2px
+    style ROLLBACK stroke:#dc3545,stroke-width:2px
+```
+
 ## Core idea
 
 `db.Begin()` returns a `*sql.Tx` representing a transaction. The `*sql.Tx` has its own `Exec`, `Query`, `QueryRow`, `Prepare`, and `Stmt` methods. After all operations complete, call `tx.Commit()`. On any error, call `tx.Rollback()`.

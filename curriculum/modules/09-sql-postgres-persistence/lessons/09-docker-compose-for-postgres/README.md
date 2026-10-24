@@ -12,6 +12,28 @@ Setting up PostgreSQL manually (install, service start, role creation, database 
 
 Docker Compose is a recipe for a multi-container application. The recipe for PostgreSQL says: "Use this image, expose port 5432, mount this directory for persistent data, and set these environment variables." Running `docker compose up` executes the recipe, starting a PostgreSQL server in a container that behaves exactly like a production server but runs on your local machine.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Host["Developer Host Machine"]
+        COMPOSE["docker compose up -d postgres"]
+        PORT["Forwarded Port: localhost:5432"]
+        VOL["Docker Named Volume: pg_data
+(Persists data across container restarts)"]
+
+        subgraph Container["PostgreSQL 16 Docker Container"]
+            PG["postgres daemon
+POSTGRES_DB=opslane
+POSTGRES_USER=postgres"]
+        end
+
+        COMPOSE --> Container
+        PORT --> PG
+        PG <--> VOL
+    end
+```
+
 ## Core idea
 
 A **Docker Compose** file (`compose.yaml` or `docker-compose.yml`) defines services, networks, and volumes. For PostgreSQL, the key configuration:

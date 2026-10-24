@@ -12,6 +12,26 @@ Every HTTP framework in Go â€” from the standard library to Gin, Chi, and Echo â
 
 Think of HTTP request processing as a pipeline. The server accepts a TCP connection, parses the request into an `*http.Request` and `http.ResponseWriter`, then calls `handler.ServeHTTP(w, r)`. The handler does its work and returns. That's it. A handler can be a function (via `http.HandlerFunc` adapter), a struct with a `ServeHTTP` method, or a chain of middleware wrapping a final handler. Every piece of Go HTTP middleware is just a handler that calls another handler's `ServeHTTP`.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph HandlerInterface["http.Handler Interface"]
+        DEF["type Handler interface {
+    ServeHTTP(w http.ResponseWriter, r *http.Request)
+}"]
+    end
+
+    subgraph Flow["Handler Invocation Flow"]
+        REQ["Incoming *http.Request (URL, Headers, Context, Body stream)"]
+        W["http.ResponseWriter (Header map, Status code, Output buffer)"]
+
+        REQ --> DEF
+        W --> DEF
+        DEF --> OUTPUT["Bytes streamed directly to client socket"]
+    end
+```
+
 ## Core idea
 
 The `http.Handler` interface is one method:

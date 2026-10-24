@@ -12,6 +12,28 @@ Handlers are the entry point for every HTTP request. If you cannot test them tho
 
 Think of httptest as a recording studio. Your handler is the performer. `httptest.NewRecorder` is a tape recorder that captures the response instead of sending it over a network. `httptest.NewServer` is a full soundstage -- it boots a real HTTP server on a random port, so your client code hits a real TCP socket, but the setup and teardown are instant. You are the producer who plays test scenarios through the system and inspects the recorded output.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph TestSetup["In-Memory Handler Unit Test"]
+        REQ["httptest.NewRequest("GET", "/users/42", nil)"]
+        REC["rec := httptest.NewRecorder()"]
+        HANDLER["userHandler.ServeHTTP(rec, req)"]
+
+        REQ --> HANDLER
+        REC --> HANDLER
+    end
+
+    subgraph Assertions["Inspect Recorder Output (No live TCP socket needed!)"]
+        A1["rec.Code == http.StatusOK"]
+        A2["rec.Body.String() contains 'Alice'"]
+        A3["rec.Header().Get('Content-Type') == 'application/json'"]
+    end
+
+    HANDLER --> Assertions
+```
+
 ## Core idea
 
 The `httptest.ResponseRecorder` implements `http.ResponseWriter` and records everything your handler writes:

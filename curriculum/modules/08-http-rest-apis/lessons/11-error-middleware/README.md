@@ -12,6 +12,18 @@ Without centralized error handling, every handler must write its own error respo
 
 Think of error middleware as a safety net stretched under a tightrope walker. The walker (handler) might slip (panic) or fail (return an error). The net catches everything. It doesn't matter how the walker fails — the net ensures the outcome is always the same: a structured, safe response. The net also logs the details so the crew knows what went wrong, but the audience (client) only sees a sanitized message.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Incoming HTTP Request"] --> MW["Recovery & Error Translation Middleware"]
+    MW --> HANDLER["Domain Handler execution"]
+    HANDLER -->|Panics unexpectedly!| PANIC["panic(err)"]
+    PANIC --> RECOVER["recover() catches panic in deferred func"]
+    RECOVER --> LOG["Log stack trace with Error level to telemetry"]
+    RECOVER --> RES["Send sanitized 500 JSON payload to client (No leak of internals!)"]
+```
+
 ## Core idea
 
 Error middleware combines two patterns:

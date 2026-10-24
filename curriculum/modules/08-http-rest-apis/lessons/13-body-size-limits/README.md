@@ -12,6 +12,16 @@ Without body size limits, an attacker can send a multi-gigabyte POST to your ser
 
 Think of `http.MaxBytesReader` as a fuse on an electrical circuit. The wire (your handler) can only carry so much current (data). The fuse limits the flow. When the current exceeds the rating, the fuse blows -- in Go terms, the reader returns an error and stops reading. Your handler checks for that error and returns `413 Request Entity Too Large` instead of trying to process the impossible.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Incoming POST Request Body (100 MB Malicious Payload)"] --> LIMIT["http.MaxBytesReader(w, r.Body, 1<<20) (1 MB Limit)"]
+    LIMIT --> READ["json.NewDecoder(limitedBody).Decode(&data)"]
+    READ -->|Bytes read > 1MB| TRAP["Error: http: request body too large"]
+    TRAP --> REJECT["Return 413 Payload Too Large & Close Connection (Defends Server RAM!)"]
+```
+
 ## Core idea
 
 `http.MaxBytesReader` wraps an `io.ReadCloser` (the request body) with a limit. When more than `n` bytes are read, subsequent reads return an error whose `Error()` method contains `"http: request body too large"`.

@@ -26,6 +26,20 @@ users.sql.go (generated):
 
 You write and maintain SQL. sqlc generates the boilerplate. The generated code is checked into your repository and reviewed like any other code.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    SQL_QUERY["query.sql (Raw SQL with annotations)"]
+    SQL_SCHEMA["schema.sql (DDL Table definitions)"]
+    SQLC["sqlc generate CLI (Validates SQL against schema at build time)"]
+
+    SQL_QUERY --> SQLC
+    SQL_SCHEMA --> SQLC
+    SQLC --> GO_CODE["db.go, models.go, query.sql.go
+(Type-safe Go structs & methods, zero reflection!)"]
+```
+
 ## Core idea
 
 sqlc reads annotated SQL queries and generates Go functions. Key annotations:

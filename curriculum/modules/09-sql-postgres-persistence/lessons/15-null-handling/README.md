@@ -28,6 +28,23 @@ Think of a nullable Go value as a box with an "is-valid" light. When you scan a 
 
 Always check `Valid` before reading the value field. If you skip the check, you are treating missing data as real data.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph DBRow["Database Column: middle_name NULL"]
+        NULL_VAL["NULL value in database"]
+    end
+
+    subgraph GoHandling["Go Null Representation Options"]
+        OPT1["sql.NullString{ String: "", Valid: false }"]
+        OPT2["*string (nil pointer if NULL, points to value if present)"]
+    end
+
+    DBRow --> OPT1
+    DBRow --> OPT2
+```
+
 ## Core idea
 
 Go's `database/sql` defines four nullable types in the standard library:

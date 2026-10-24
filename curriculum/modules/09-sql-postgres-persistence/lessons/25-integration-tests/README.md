@@ -26,6 +26,16 @@ Unit tests: fast, no DB, fakes, run on every save.
 Integration tests: slower, real DB, run in CI or on demand.
 E2E tests: slowest, full stack, run before release.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    TEST["go test -v ./... (Integration Test Suite)"] --> DOCKER["Docker Engine (Testcontainers / Local Postgres)"]
+    DOCKER --> MIGRATE["Apply all *.up.sql migrations"]
+    MIGRATE --> RUN["Execute repository tests against real database"]
+    RUN --> CLEAN["Truncate tables / drop ephemeral schema"]
+```
+
 ## Core idea
 
 An integration test for database code has three phases:

@@ -22,6 +22,24 @@ Execution 2:   slot 1 = "Bob"      slot 2 = "bob@example.com"
 
 The database parses and optimizes the template once. Each execution fills the slots with literal values that are never re-interpreted as SQL. The `?` markers are not string interpolation — they are protocol-level parameter binding.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Go Application
+    participant PG as PostgreSQL Server
+
+    App->>PG: db.PrepareContext(ctx, "INSERT INTO logs (level, msg) VALUES ($1, $2)")
+    PG->>PG: Parse SQL, build AST, plan statement once
+    PG-->>App: Return Statement Handle (*sql.Stmt)
+    loop 10,000 Log Inserts
+        App->>PG: stmt.ExecContext(ctx, "INFO", "user logged in")
+        PG-->>App: OK (Skips SQL parsing, high throughput!)
+    end
+    App->>PG: stmt.Close()
+```
+
 ## Core idea
 
 `db.Prepare(sql)` sends the SQL string to the database, which parses, validates, and compiles it into an execution plan. It returns a `*sql.Stmt`. You can then call `stmt.Exec(args...)` or `stmt.Query(args...)` multiple times with different arguments. When done, call `stmt.Close()` to free the server-side resource.

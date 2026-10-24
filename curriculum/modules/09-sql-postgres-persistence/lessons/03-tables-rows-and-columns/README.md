@@ -12,6 +12,24 @@ The `CREATE TABLE` statement is the most important SQL statement you will write.
 
 A table is a spreadsheet with a rigid header. Each column has a fixed name and a single allowed type. Each row is one record. Unlike a spreadsheet, SQL enforces rules per column: "this column must never be empty" (`NOT NULL`), "every value here must be unique" (`UNIQUE`), "values must be between 0 and 100" (`CHECK`). The table definition is the contract between the application and the database.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TableDef["Table: users (Schema Definition)"]
+        direction LR
+        COL1["id (UUID, PK)"] --- COL2["email (VARCHAR, UNIQUE)"] --- COL3["created_at (TIMESTAMPTZ)"]
+    end
+
+    subgraph RowData["Data Rows on Disk (8KB Page)"]
+        direction TB
+        R1["Row 1: { 9a3f..., 'alice@example.com', '2026-01-01T00:00:00Z' }"]
+        R2["Row 2: { 4b1c..., 'bob@example.com',   '2026-01-02T10:15:00Z' }"]
+    end
+
+    TableDef --> RowData
+```
+
 ## Core idea
 
 A **table** is a collection of **rows** (records). Each row has the same set of **columns** (fields). Each column has:

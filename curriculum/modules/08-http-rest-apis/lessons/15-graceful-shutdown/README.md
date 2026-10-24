@@ -20,6 +20,25 @@ Think of graceful shutdown like closing a store at the end of the day:
 
 `http.Server.Shutdown` orchestrates steps 1-4. You provide the "10 minutes" as a context deadline.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor OS as OS Kernel / Kubernetes
+    participant Srv as Go http.Server
+    participant Inflight as Active Inflight Requests
+    participant DB as Database Connection Pool
+
+    OS->>Srv: Signal SIGTERM / SIGINT
+    Srv->>Srv: server.Shutdown(ctx)
+    Note over Srv: 1. Immediately stops accepting NEW connections
+    Srv->>Inflight: 2. Awaits active requests until completion or ctx deadline
+    Inflight-->>Srv: All requests finished cleanly (status 200 emitted)
+    Srv->>DB: 3. Close database connections & background workers
+    Srv-->>OS: Process exits gracefully with code 0 (Zero dropped requests!)
+```
+
 ## Core idea
 
 `http.Server.Shutdown(ctx)` does two things:

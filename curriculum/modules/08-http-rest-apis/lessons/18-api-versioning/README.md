@@ -18,6 +18,21 @@ Versioning strategies:
 - **Query parameter versioning**: `/users?version=2`. Easy to implement but pollutes query strings.
 - **Subdomain versioning**: `v2.api.example.com`. Infrastructure-level separation.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Versioning["API Evolution & Deprecation"]
+        V1["/api/v1/users
+(Legacy schema: returns 'full_name' string)"]
+        V2["/api/v2/users
+(Modern schema: returns 'first_name', 'last_name', 'title')"]
+
+        ROUTER["API Gateway / ServeMux Router"] --> V1
+        ROUTER --> V2
+    end
+```
+
 ## Core idea
 
 The core versioning concern is backward compatibility. A change is backward-compatible if:

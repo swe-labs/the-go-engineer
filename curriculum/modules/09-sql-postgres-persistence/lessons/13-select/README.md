@@ -12,6 +12,16 @@ SELECT is the most frequently executed SQL statement in any read-heavy applicati
 
 Think of `db.Query` as ordering from a menu. You tell the kitchen (database) what you want (the SELECT statement), and they prepare a tray (sql.Rows) with all the items matching your order. You take items off the tray one at a time (rows.Next), examine each (rows.Scan), and when you are done, you return the tray (rows.Close) so it can be washed and reused.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    QUERY["SELECT id, email, created_at FROM users WHERE tenant_id = $1;"] --> PG["PostgreSQL Query Planner"]
+    PG --> INDEX["Index Scan on users_tenant_id_idx"]
+    INDEX --> STREAM["Stream row tuples over TCP socket"]
+    STREAM --> ROWS["*sql.Rows cursor in Go"]
+```
+
 ## Core idea
 
 The SELECT workflow in Go:

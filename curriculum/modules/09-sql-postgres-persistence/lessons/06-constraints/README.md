@@ -18,6 +18,18 @@ Think of constraints as bouncers at a club. Each bouncer enforces one rule:
 
 If any bouncer rejects a row, the entire row is turned away (the INSERT or UPDATE is rolled back).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Constraints["PostgreSQL Constraint Enforcement"]
+        C1["NOT NULL: Rejects INSERT if field is null"]
+        C2["UNIQUE: Enforces zero duplicate entries across column"]
+        C3["CHECK (price >= 0): Validates domain invariants at storage layer"]
+        C4["FOREIGN KEY: Guarantees referential integrity"]
+    end
+```
+
 ## Core idea
 
 SQL constraints are rules attached to columns or tables that the database engine enforces on every INSERT, UPDATE, or DELETE.

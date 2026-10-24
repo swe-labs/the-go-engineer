@@ -17,6 +17,18 @@ Think of INSERT as adding a new card to a filing cabinet. You can:
 
 Each trip to the cabinet has overhead (opening the drawer, finding the right section). Fewer trips = faster overall insertion.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    QUERY["db.QueryRowContext(ctx,
+  "INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id",
+  "Alice", "alice@example.com"
+)"]
+    QUERY -->|Parameterized execution ($1, $2)| PG["PostgreSQL Execution Engine"]
+    PG -->|Returns auto-generated UUID/serial| SCAN["row.Scan(&newUserID)"]
+```
+
 ## Core idea
 
 Three approaches to INSERT in Go:

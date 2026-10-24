@@ -25,6 +25,23 @@ Release:  tx.Commit()    → marks rollback as no-op
 
 The key insight: schedule the rollback *before* doing any work, but make it conditional on whether commit has already happened.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Business Service
+    participant Tx as Transaction (*sql.Tx)
+
+    App->>Tx: tx, err := db.BeginTx(ctx, nil)
+    App->>App: defer tx.Rollback() (Safety net registered!)
+    App->>Tx: Execute debit operation
+    App->>Tx: Execute credit operation
+    App->>Tx: err = tx.Commit()
+    Note over Tx: If Commit() succeeds, subsequent deferred tx.Rollback() is a safe no-op (ErrTxDone)!
+    Note over App: If code panics or returns early on error, deferred tx.Rollback() automatically cleans up!
+```
+
 ## Core idea
 
 The standard pattern uses a named return value and `defer`:

@@ -23,6 +23,23 @@ CASCADE delete:  Deleting a parent row automatically deletes children.
                  → All orders for user 1 are deleted automatically.
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph HardDelete["Hard Delete: DELETE FROM users WHERE id = $1"]
+        H1["Permanently removes row from table page"]
+        H2["Frees disk space on VACUUM"]
+        H3["Violates foreign keys unless ON DELETE CASCADE is configured"]
+    end
+
+    subgraph SoftDelete["Soft Delete: UPDATE users SET deleted_at = NOW() WHERE id = $1"]
+        S1["Row remains in table; flagged with timestamp"]
+        S2["Queries must filter: WHERE deleted_at IS NULL"]
+        S3["Auditable and reversible; avoids cascade deletions"]
+    end
+```
+
 ## Core idea
 
 Three delete strategies:

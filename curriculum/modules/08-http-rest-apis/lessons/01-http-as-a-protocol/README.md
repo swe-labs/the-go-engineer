@@ -12,6 +12,35 @@ HTTP is the foundation of every web API, microservice communication, and browser
 
 Think of HTTP as a conversation between a client and a server. The client sends an envelope (the request) containing a verb (method), an address (URL), some labels (headers), and optionally a package (body). The server opens it, does work, and sends back an envelope (the response) with a status code (did it work?), labels (response headers), and optionally a package (body). The conversation is stateless — each request-response pair is independent, with no memory of previous ones.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Request["HTTP Request Wire Anatomy"]
+        REQ_LINE["Request Line: GET /api/v1/users/42 HTTP/1.1"]
+        REQ_HDR["Headers:
+Host: api.example.com
+Authorization: Bearer <token>
+Accept: application/json"]
+        REQ_BODY["Body (Empty for GET, JSON payload for POST/PUT)"]
+
+        REQ_LINE --- REQ_HDR --- REQ_BODY
+    end
+
+    subgraph Response["HTTP Response Wire Anatomy"]
+        RES_LINE["Status Line: HTTP/1.1 200 OK"]
+        RES_HDR["Headers:
+Content-Type: application/json
+Content-Length: 54"]
+        RES_BODY["Body:
+{"id": 42, "name": "Alice", "role": "admin"}"]
+
+        RES_LINE --- RES_HDR --- RES_BODY
+    end
+
+    Request -->|TCP Handshake & Wire Transmission| Response
+```
+
 ## Core idea
 
 HTTP is a text-based request-response protocol running over TCP (typically port 80) or TLS (port 443). Every HTTP message consists of:

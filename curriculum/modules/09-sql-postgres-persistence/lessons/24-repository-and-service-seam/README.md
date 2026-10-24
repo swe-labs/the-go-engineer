@@ -29,6 +29,19 @@ Direct `database/sql` calls scattered across business logic make code untestable
 
 The service never imports `database/sql`. It only knows the interface. In production, you inject `SQLiteRepository`. In tests, you inject `FakeRepository`.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    HTTP["HTTP Transport Layer (OrderHandler)"] -->|Calls| SVC["Domain Service Layer (OrderService)
+(Business logic, validations, orchestration)"]
+    SVC -->|Depends on interface| REPO_IFACE["OrderRepository (Interface)"]
+    REPO_IFACE -->|Implemented by| REPO_IMPL["PostgresOrderRepository
+(SQL queries, row scanning, db transaction)"]
+
+    style REPO_IFACE stroke:#0366d6,stroke-width:2px
+```
+
 ## Core idea
 
 Define the data access contract as an interface:

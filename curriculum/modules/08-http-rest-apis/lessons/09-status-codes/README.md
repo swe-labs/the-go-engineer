@@ -12,6 +12,27 @@ HTTP status codes are the first thing a client sees in a response. A correct sta
 
 Status codes are traffic lights. Green (2xx): go ahead, everything worked. Yellow (3xx): look this way, the resource moved. Red (4xx): you made a mistake, fix it. Flashing red (5xx): the server is broken, wait and retry. A client obeys the traffic light without reading the sign (response body). If you show green when the road is closed (200 for an error), the client crashes.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph StatusCategories["HTTP Status Code Taxonomy"]
+        S2XX["2xx Success:
+200 OK (Read/Update)
+201 Created (Resource generated)
+204 No Content (Deletion completed)"]
+        S4XX["4xx Client Fault:
+400 Bad Request (Syntax error)
+401 Unauthorized (Missing/invalid token)
+403 Forbidden (Insufficient permissions)
+404 Not Found (Missing entity)
+422 Unprocessable Entity (Semantic validation)"]
+        S5XX["5xx Server Fault:
+500 Internal Server Error (Unexpected panic/DB down)
+503 Service Unavailable (Overloaded/draining)"]
+    end
+```
+
 ## Core idea
 
 HTTP status codes are three-digit integers grouped into five classes:

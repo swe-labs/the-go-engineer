@@ -24,6 +24,24 @@ Migration 002_add_email.sql
 
 A migrations table tracks which steps have been applied. The tool compares the current version to the latest and applies missing migrations in order.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph MigrationFiles["Versioned Migration SQL Files"]
+        V1["000001_create_users.up.sql"]
+        V2["000002_add_orders.up.sql"]
+        V3["000003_add_payments.up.sql"]
+    end
+
+    subgraph SchemaTable["schema_migrations Table in PostgreSQL"]
+        REC["version: 3
+dirty: false"]
+    end
+
+    MigrationFiles -->|migrate CLI / golang-migrate| SchemaTable
+```
+
 ## Core idea
 
 A migration system needs:

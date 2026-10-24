@@ -24,6 +24,26 @@ Plan (with index on email):
 
 The plan is a tree. Leaf nodes read data. Inner nodes combine or filter. Reading the plan bottom-up or indentation-first reveals the execution order.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    QUERY["EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM users WHERE email = 'a@b.com'"] --> PLANNER["PostgreSQL Query Planner Output"]
+
+    subgraph Bad["Without Index: Sequential Scan (Table Scan)"]
+        SEQ["Seq Scan on users (cost=0.00..1845.00 rows=1)
+Buffers: shared read=840 (Reads every disk page!)"]
+    end
+
+    subgraph Good["With B-Tree Index: Index Scan"]
+        IDX["Index Scan using users_email_idx on users (cost=0.42..8.44 rows=1)
+Buffers: shared hit=3 (Ultra-fast direct lookup!)"]
+    end
+
+    PLANNER --> Bad
+    PLANNER --> Good
+```
+
 ## Core idea
 
 In SQLite, `EXPLAIN QUERY PLAN` returns three columns:

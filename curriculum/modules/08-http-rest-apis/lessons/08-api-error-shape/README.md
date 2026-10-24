@@ -12,6 +12,19 @@ Clients consuming your API need to handle errors programmatically. If every endp
 
 Think of error responses as a contract. Every error — whether validation failure, authentication rejection, or internal crash — uses the same envelope. The envelope has a status code (the HTTP method-level indicator), an error code (a machine-readable string for programmatic handling), and a message (a human-readable explanation). Optionally, it has details (field-level errors) and a trace ID for debugging. The client opens the envelope and knows exactly where to look, regardless of which endpoint produced the error.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph RFC7807["Standard API Error Envelope (RFC 7807 Problem Details)"]
+        CODE["code: "INSUFFICIENT_FUNDS""]
+        TITLE["title: "Payment processing failed""]
+        STATUS["status: 402"]
+        DETAIL["detail: "Account balance is lower than total charge ($45.00 < $120.00)""]
+        INSTANCE["instance: "/api/v1/orders/ord_9876/checkout""]
+    end
+```
+
 ## Core idea
 
 A consistent JSON error response should include:

@@ -19,6 +19,26 @@ Think of `http.Client` as a phone operator in a switchboard:
 - The operator has rules: "hang up after 90 seconds of silence" (IdleConnTimeout), "don't start a new call if the last one took too long" (Timeout).
 - You can cancel a call at any time (context cancellation), and the operator will hang up and free the line.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ProductionClient["Production http.Client Configuration"]
+        CLIENT["http.Client{
+    Timeout: 10 * time.Second,
+    Transport: &http.Transport{
+        MaxIdleConns: 100,
+        MaxIdleConnsPerHost: 20,
+        IdleConnTimeout: 90 * time.Second,
+    },
+}"]
+        CTX["req, _ := http.NewRequestWithContext(ctx, "GET", url, nil)"]
+        DO["client.Do(req)"]
+
+        CLIENT --- CTX --> DO
+    end
+```
+
 ## Core idea
 
 `http.Client` has three key configuration areas:

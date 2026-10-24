@@ -12,6 +12,20 @@ Use `rows.Scan` to map SQL result columns to Go variables, handle column orderin
 
 `Scan` is like a factory conveyor belt. Each row arrives as a sequence of untyped values. `Scan` picks each value off the belt and places it into a waiting Go variable, converting the type as needed. If the belt has 4 items but you only provided 3 boxes, the conversion fails. If an item is a "NULL" sticker but you provided a non-pointer box, the conversion fails.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph CursorLoop["Safe sql.Rows Iteration Pattern"]
+        ROWS["rows, err := db.QueryContext(ctx, query, args)"]
+        DEFER["defer rows.Close() (Guaranteed cleanup)"]
+        LOOP["for rows.Next() { ... rows.Scan(&id, &name) ... }"]
+        ERR_CHECK["if err := rows.Err(); err != nil { return err }"]
+
+        ROWS --> DEFER --> LOOP --> ERR_CHECK
+    end
+```
+
 ## Core idea
 
 `rows.Scan(dest ...interface{})` copies the current row's column values into the provided Go variables. Key rules:

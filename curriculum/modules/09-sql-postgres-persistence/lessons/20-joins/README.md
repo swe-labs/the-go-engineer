@@ -33,6 +33,28 @@ INNER JOIN on users.id = orders.uid:
 Bob has no orders → excluded from INNER JOIN, included with LEFT JOIN.
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Sets["Relational Set Operations"]
+        direction LR
+        U["Users Table"]
+        O["Orders Table"]
+        U --- O
+    end
+
+    subgraph Outcomes["Join Behaviors"]
+        INNER["INNER JOIN:
+Returns only users who HAVE orders"]
+        LEFT["LEFT JOIN:
+Returns ALL users; orders fields are NULL if user has no orders"]
+    end
+
+    Sets --> INNER
+    Sets --> LEFT
+```
+
 ## Core idea
 
 The four standard join types:

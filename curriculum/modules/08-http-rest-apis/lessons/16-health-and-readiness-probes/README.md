@@ -17,6 +17,24 @@ Think of liveness vs readiness like a chef in a kitchen:
 
 Liveness says "don't kill me". Readiness says "send me traffic". A pod can be alive but not ready (e.g., warming cache after startup). A pod can be ready but not alive (shouldn't happen -- readiness implies liveness).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph K8s["Kubernetes / Load Balancer Probes"]
+        P_LIVE["Liveness Probe: GET /healthz"]
+        P_READY["Readiness Probe: GET /readyz"]
+    end
+
+    subgraph Application["Go Backend Status"]
+        P_LIVE -->|200 OK if HTTP server is responsive| ALIVE["Keep container running
+(Restart container if 500/timeout)"]
+        P_READY --> DB_CHECK{"Ping DB & Redis"}
+        DB_CHECK -->|OK| ROUTE["Route public traffic to container"]
+        DB_CHECK -->|DB Disconnected| DETACH["Remove container from load balancer endpoints until DB recovers"]
+    end
+```
+
 ## Core idea
 
 Expose two endpoints:

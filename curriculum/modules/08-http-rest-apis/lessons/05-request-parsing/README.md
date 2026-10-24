@@ -12,6 +12,16 @@ Every HTTP handler needs to read input. The input can come from the URL path, qu
 
 Imagine a request as a filing envelope. On the outside (the URL), you have the delivery address (path) and routing notes (query string). On the flap, you have stamps and labels (headers). Inside (the body), you have the actual document. Go lets you open the envelope and read each part separately. The path tells you *what* resource, the query string tells you *how* (filter, sort, paginate), headers tell you *who* and *what format*, and the body tells you *what to change*.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    REQ["*http.Request"] --> PATH["r.PathValue("id") -> "101""]
+    REQ --> QUERY["r.URL.Query().Get("limit") -> "20""]
+    REQ --> HDR["r.Header.Get("Authorization") -> Bearer token"]
+    REQ --> BODY["json.NewDecoder(r.Body).Decode(&payload)"]
+```
+
 ## Core idea
 
 There are four main places to read input from an HTTP request:

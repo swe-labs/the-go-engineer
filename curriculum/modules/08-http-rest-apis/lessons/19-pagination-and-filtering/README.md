@@ -19,6 +19,22 @@ Filtering is like asking for "all books by this author, published after 2020, un
 
 Sorting is like saying "sort by price, cheapest first" or "by date, newest first."
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph CursorPagination["Keyset / Cursor Pagination (Scalable O(1))"]
+        REQ["GET /api/v1/items?limit=20&after_id=item_1050"]
+        SQL["SELECT * FROM items
+WHERE id > 'item_1050'
+ORDER BY id ASC
+LIMIT 21;"]
+        RESP["Return 20 items + next_cursor = item_1070 + has_more = true"]
+
+        REQ --> SQL --> RESP
+    end
+```
+
 ## Core idea
 
 **Offset pagination** uses `page` and `limit` parameters:

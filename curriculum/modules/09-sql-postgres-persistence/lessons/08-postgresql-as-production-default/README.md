@@ -12,6 +12,33 @@ SQLite is ideal for learning and local development, but production Go services n
 
 If SQLite is a library (embedded in-process), PostgreSQL is a service (separate process, network-accessible). You connect to PostgreSQL over TCP, authenticate with a username and password, and send SQL queries just like you do to SQLite. The key difference is that PostgreSQL runs as a daemon, manages its own memory and disk, and handles thousands of concurrent connections with full MVCC (Multi-Version Concurrency Control).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Clients["Application Layer"]
+        APP1["Go Backend Pod 1"]
+        APP2["Go Backend Pod 2"]
+    end
+
+    subgraph PostgresArchitecture["PostgreSQL Server Architecture"]
+        POSTMASTER["Postmaster Daemon (Port 5432)"]
+        BACKEND1["Backend Worker Process 1"]
+        BACKEND2["Backend Worker Process 2"]
+        SHARED["Shared Buffer Pool (RAM Cache)"]
+        WAL["Write-Ahead Log (WAL Engine)"]
+
+        POSTMASTER --> BACKEND1
+        POSTMASTER --> BACKEND2
+        BACKEND1 <--> SHARED
+        BACKEND2 <--> SHARED
+        SHARED --> WAL
+    end
+
+    APP1 -->|TCP Connection| POSTMASTER
+    APP2 -->|TCP Connection| POSTMASTER
+```
+
 ## Core idea
 
 PostgreSQL is an **open-source, object-relational database system** with over 30 years of development. Key features that make it the production default:

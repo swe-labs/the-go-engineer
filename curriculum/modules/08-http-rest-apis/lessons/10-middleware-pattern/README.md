@@ -17,6 +17,20 @@ Request → [Logger] → [Auth] → [CORS] → [Handler] → Response
                 ←        ←        ←        ←
 ```
 
+## Visual model
+
+```mermaid
+flowchart LR
+    REQ["HTTP Request"] --> M1["Logging Middleware (Start Timer)"]
+    M1 --> M2["Auth Middleware (Validate JWT Claims)"]
+    M2 --> M3["Rate Limiting Middleware (Token Bucket)"]
+    M3 --> HANDLER["Business Handler (ServeHTTP)"]
+    HANDLER --> M3
+    M3 --> M2
+    M2 --> M1
+    M1 --> RES["HTTP Response (Log Duration & Status Code)"]
+```
+
 ## Core idea
 
 In Go, middleware is a function that takes an `http.Handler` and returns an `http.Handler`:

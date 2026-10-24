@@ -20,6 +20,28 @@ Think of a library:
 
 REST is not a protocol; it's a set of architectural constraints that, when followed, produce a system with desirable properties: scalability, cacheability, evolvability.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ResourceTree["Resource-Oriented URI Hierarchy"]
+        C["/api/v1/customers"]
+        C_ID["/api/v1/customers/{id}"]
+        O["/api/v1/customers/{id}/orders"]
+        O_ID["/api/v1/customers/{id}/orders/{order_id}"]
+
+        C --> C_ID --> O --> O_ID
+    end
+
+    subgraph Methods["HTTP Method Mapping"]
+        GET["GET: Retrieve representation (Idempotent, Safe)"]
+        POST["POST: Create child resource (Non-idempotent)"]
+        PUT["PUT: Full replacement (Idempotent)"]
+        PATCH["PATCH: Partial update (Idempotent / Non-idempotent)"]
+        DELETE["DELETE: Remove resource (Idempotent)"]
+    end
+```
+
 ## Core idea
 
 The five REST constraints (from Fielding's dissertation):

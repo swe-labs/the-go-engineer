@@ -12,6 +12,19 @@ Every row in a table needs a unique identifier. Without one, you cannot reliably
 
 A primary key is the row's passport. It uniquely identifies that row among all others in the table. Like a passport number, it should never change and should be assigned once at creation time. When another table references a row (via foreign key), it copies the primary key value — not the person's name or other mutable attribute.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph PrimaryKeyIndex["Primary Key B-Tree Index (Unique Invariant)"]
+        ROOT["Root Node"] --> BRANCH["Branch Page"]
+        BRANCH --> LEAF1["Leaf: ID 101 -> Heap Pointer CTID (0, 1)"]
+        BRANCH --> LEAF2["Leaf: ID 102 -> Heap Pointer CTID (0, 2)"]
+    end
+    NOTE["Guarantees uniqueness and O(log N) point lookup performance"]
+    PrimaryKeyIndex -.-> NOTE
+```
+
 ## Core idea
 
 A **primary key** is a column (or set of columns) that uniquely identifies each row in a table. It must satisfy:
