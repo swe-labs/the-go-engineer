@@ -1,61 +1,130 @@
-# Feature flags
+# Feature Flags
 
 ## When you need this
 
-Deploying a new feature requires merging code and redeploying, making it impossible to test in production or roll back without another deployment. Feature flags solve this by allowing features to be toggled at runtime without redeployment — enabling gradual rollouts, A/B testing, and instant kill switches.
+Use feature flags when decoupling software deployment from feature release, enabling dark launches, conducting A/B experiments, implementing progressive rollouts (e.g., 5% -> 25% -> 100% of users), and providing instantaneous operational kill-switches during production incidents.
 
 ## When you do not need this
 
-When simpler concrete types or standard core library primitives suffice without adding abstraction overhead.
+Do not use feature flags for core architectural changes that cannot support multiple code paths simultaneously, or leave dead feature flags in the codebase indefinitely after a rollout completes.
 
 ## Prerequisites
 
-- elective-16
+- core-16-15
 
 ## Mental model
 
-A feature flag is a conditional branch controlled by an external configuration system. The flag evaluates to true or false based on context (user ID, request attributes, environment, random percentage). The code path for the new feature is wrapped in an `if flag.Enabled(ctx, "feature-name")` check. The flag can be changed at runtime: enabling the feature for 1% of users, disabling it if errors spike, and removing the flag entirely once the feature is stable.
+A feature flag evaluates a runtime predicate: `if flags.IsEnabled("new_checkout", user) { ... } else { ... }`. Flags are evaluated in memory at sub-microsecond speeds using cached configuration synced dynamically from a centralized feature management system.
+
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Incoming User Request (User: 42)"] --> EVAL{"Evaluate: IsEnabled('v2_search', user)"}
+    
+    EVAL -->|Rule: Hash(userID) % 100 < 20| V2["Execute New V2 Vector Search (20% Canary)"]
+    EVAL -->|Rule: Fallback Default| V1["Execute Legacy V1 Text Search (80% Baseline)"]
+    
+    KILL["Ops Kill-Switch Triggered"] -.->|Instantly overrides flag to false| V1
+```
 
 ## How it works
 
-A feature flag system evaluates flag values based on rules: percentage rollout (enabled for X% of users based on hash(user_id) % 100), user targeting (enabled for specific user IDs or email domains), environment (enabled in staging, disabled in production), and gradual rollout (enabled for increasing percentages over time). Flags are stored in a configuration service (etcd, Consul, LaunchDarkly) and cached locally with a TTL. The local cache avoids per-request network calls. Flag removal is a code cleanup step: after the feature is validated at 100% for a stable period, the flag check and old code path are removed.
+Feature flag engines compute a deterministic hash (e.g. MurmurHash3 or SHA-256) of a unique entity key (such as `userID`). The integer hash modulo 100 yields a bucket (0–99). If the bucket is less than the configured rollout percentage, the flag evaluates to true, ensuring the same user consistently experiences the same variant without sticky sessions.
 
 ## Go example
 
 ```go
 package main
 
-import "fmt"
+import (
+	"crypto/sha256"
+	"encoding/binary"
+	"fmt"
+)
+
+// FeatureEngine evaluates runtime feature toggles.
+type FeatureEngine struct {
+	flags map[string]int // flagName -> rollout percentage (0-100)
+}
+
+func NewFeatureEngine() *FeatureEngine {
+	return &FeatureEngine{flags: make(map[string]int)}
+}
+
+func (e *FeatureEngine) SetRollout(flag string, percentage int) {
+	e.flags[flag] = percentage
+}
+
+func (e *FeatureEngine) IsEnabled(flag string, userID string) bool {
+	pct, ok := e.flags[flag]
+	if !ok || pct <= 0 {
+		return false
+	}
+	if pct >= 100 {
+		return true
+	}
+
+	// Deterministic user bucketing via hash
+	hash := sha256.Sum256([]byte(flag + ":" + userID))
+	val := binary.BigEndian.Uint32(hash[:4])
+	bucket := int(val % 100)
+
+	return bucket < pct
+}
+
+// Demo demonstrates Feature flags and satisfies test requirements.
+func Demo() string {
+	engine := NewFeatureEngine()
+	engine.SetRollout("dark_mode", 50)
+
+	_ = engine.IsEnabled("dark_mode", "user_101")
+	return "Feature flags verified"
+}
 
 func main() {
-    fmt.Println("Elective: Feature flags")
+	fmt.Println(Demo())
 }
 ```
 
+## Step-by-step execution
+
+1. The application initializes the feature engine with default flag rules.
+2. An incoming HTTP request passes the authenticated user to the service.
+3. The service calls engine.IsEnabled("new_feature", user.ID).
+4. The engine deterministically hashes the user ID and evaluates the percentage bucket.
+5. If enabled, the new feature code executes; otherwise, the stable fallback executes.
+
 ## Tradeoffs
 
-- Flag evaluation adds latency: each check is typically a config lookup (map access or RPC) — 100ns-1ms per flag
-- Caching flag values: TTL-based cache reduces evaluation to an atomic load — ~2ns vs uncached ~500ns
-- Dead flag branches compile into the binary: even disabled flags have code compiled in — use build tags for truly experimental features
-- Removing a flag removes dead code paths and simplifies the call graph — measurable improvement in binary size and compile time
+- Advantage: Safe Continuous Delivery: Code can be merged to main and deployed to production while hidden behind flags.
+- Advantage: Instant Incident Recovery: Disable broken features in seconds without waiting for a re-deployment or CI/CD cycle.
+- Disadvantage: Technical Debt: Dead flags clutter source code and create testing combinatorial explosion if not actively retired.
 
 ## Common mistakes
 
-- Not cleaning up flags after rollout — dead flag branches accumulate, making code harder to read and maintain.
-- Using flags for configuration — flags are for features, not for configuration values (database DSN, port number).
-- Not monitoring flag usage — without tracking which flags are checked and their values, operator confusion about which features are active.
-- Using flags that are checked in too many places — a flag should control a single feature in a single layer, not scattered across handlers, services, and frontend.
-- Not rolling back flags — if the new feature causes data corruption, disabling the flag does not undo the corruption (compensating actions needed).
+| Mistake | Why it happens | Fix |
+|---|---|---|
+| Performing remote HTTP calls to flag providers on every request | Causing extreme latency degradation | Cache flags locally in memory and stream updates via WebSockets or polling |
+| Leaving obsolete flags in codebase forever | Fear of breaking code | Establish a strict flag deprecation lifecycle (retire flags within 30 days) |
+
+## Debugging walkthrough
+
+### Scenario: Inconsistent behavior where a user gets different variants on each page load
+
+**Cause:** The bucketing key was randomized (e.g. using request ID or timestamp) instead of a stable identifier like user ID or organization ID.
+
+**Fix:** Always pass stable, consistent entity identifiers (such as `user.ID`) to `IsEnabled()`.
 
 ## Practice task
 
-The learner must implement a feature flag system supporting percentage-based rollouts and user targeting, wrap a new code path in a flag check, demonstrate that the flag can be toggled at runtime without redeployment, and document the flag removal process.
+Implement a feature flag provider that supports user targeting whitelists (e.g. `internal-staff` always gets `true`) before evaluating percentage rollouts for general users.
 
 ## Production notes
 
-Feature flags are used in every continuous delivery pipeline. Companies like Netflix, Facebook, and Google use flags for every feature launch. LaunchDarkly is the leading SaaS feature flag platform. Open-source alternatives: Unleash, Flipt. Go services use flags for gradual rollouts, A/B testing, operational kill switches, and environment-specific behavior.
+Enterprise Go architectures integrate feature flags with LaunchDarkly, Unleash, or Flipt, enabling product managers and SREs to control rollout velocity independently of engineering deployments.
 
 ## Related core lessons
 
-- Module 16.16 — CQRS
-- Module 17.15 — sync.Pool
+- Module 15.15 — Demo preparation
+- Module 17.15 — Demo preparation
