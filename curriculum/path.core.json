@@ -1935,7 +1935,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/01-what-is-a-program/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/01-what-is-a-program/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -1996,7 +1996,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/01-what-is-a-program",
         "test_command": ""
@@ -2120,7 +2120,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/02-source-code-executable-and-process/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/02-source-code-executable-and-process/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -2179,7 +2179,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/02-source-code-executable-and-process",
         "test_command": ""
@@ -2303,7 +2303,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -2362,7 +2362,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/03-files-bytes-directories-and-paths",
         "test_command": ""
@@ -2486,7 +2486,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/04-terminal-basics/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/04-terminal-basics/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -2545,7 +2545,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/04-terminal-basics",
         "test_command": ""
@@ -2669,7 +2669,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/05-environment-variables/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/05-environment-variables/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -2728,7 +2728,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/05-environment-variables",
         "test_command": ""
@@ -2852,7 +2852,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/06-exit-codes/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/06-exit-codes/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -2911,7 +2911,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/06-exit-codes",
         "test_command": ""
@@ -3043,7 +3043,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/07-how-the-os-manages-processes/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -3104,7 +3104,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/07-how-the-os-manages-processes",
         "test_command": ""
@@ -3243,7 +3243,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -3304,7 +3304,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap",
         "test_command": ""
@@ -3428,7 +3428,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/09-git-mental-model/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/09-git-mental-model/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -3487,7 +3487,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/09-git-mental-model",
         "test_command": ""
@@ -3611,7 +3611,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/10-git-basics-status-add-commit/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -3670,7 +3670,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/10-git-basics-status-add-commit",
         "test_command": ""
@@ -3794,7 +3794,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/11-branching-and-merging/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/11-branching-and-merging/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -3853,7 +3853,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/11-branching-and-merging",
         "test_command": ""
@@ -3977,7 +3977,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/12-github-workflow/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/12-github-workflow/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -4036,7 +4036,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/12-github-workflow",
         "test_command": ""
@@ -4160,7 +4160,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/13-pull-requests-and-code-review/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -4219,7 +4219,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/13-pull-requests-and-code-review",
         "test_command": ""
@@ -4343,7 +4343,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -4402,7 +4402,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports",
         "test_command": ""
@@ -4541,7 +4541,7 @@
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
-        "main_path": "",
+        "main_path": "modules/01-computers-terminal-git-web/15-http-request-and-response-preview/main.go",
         "readme_path": "modules/01-computers-terminal-git-web/15-http-request-and-response-preview/README.md",
         "solution_path": "",
         "starter_path": "",
@@ -4600,7 +4600,7 @@
           "Complete the practice task.",
           "Answer the review questions."
         ],
-        "mode": "manual",
+        "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/15-http-request-and-response-preview",
         "test_command": ""

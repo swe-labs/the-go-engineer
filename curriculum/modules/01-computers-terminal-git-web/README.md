@@ -19,7 +19,7 @@ With that foundation in place, you will gain terminal fluency: navigating the fi
 | # | Lesson | Outcome |
 |---|--------|---------|
 | 1 | [What is a program?](../01-computers-terminal-git-web/01-what-is-a-program/README.md) | Distinguish source code, compiled binary, and running process; explain the three-part lifecycle of any program. |
-| 2 | [Source code, executable, and process](../01-computers-terminal-git-web/02-source-code-executable-and-process/README.md) | Trace the full lifecycle from editing source to terminating a process; understand why editing source does not change a running binary. |
+| 2 | [Source code, executable, and process](../01-computers-terminal-git-web/02-source-code-executable-and-process/README.md) | Trace how the CPU fetches, decodes, and executes compiled machine instructions from system memory using registers and the ALU. |
 | 3 | [Files, bytes, directories, and paths](../01-computers-terminal-git-web/03-files-bytes-directories-and-paths/README.md) | Navigate the filesystem tree, understand how bytes map to content, and write cross-platform Go file operations. |
 | 4 | [Terminal basics](../01-computers-terminal-git-web/04-terminal-basics/README.md) | Run commands, redirect output, pipe data between programs, and explain how the shell forks and manages child processes. |
 | 5 | [Environment variables](../01-computers-terminal-git-web/05-environment-variables/README.md) | Read and set environment variables, understand inheritance across processes, and configure Go applications without hard-coded secrets. |
