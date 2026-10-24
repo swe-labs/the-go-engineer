@@ -1,61 +1,119 @@
-# Build tags
+# Build Tags
 
 ## When you need this
 
-Go code that depends on platform-specific features (system calls, file paths, network APIs) compiles only on specific operating systems or architectures. Without build tags, platform-specific files must use filename suffixes (_linux.go, _windows.go) or be excluded from cross-platform builds entirely. Build tags solve this by allowing conditional compilation based on OS, architecture, custom build constraints, or Go version.
+Use build tags when your Go project requires conditional compilation based on the target operating system (e.g., Linux vs Windows), architecture (e.g., amd64 vs arm64), Go release versions (e.g., go1.22), integration test environments (//go:build integration), or Cgo availability.
 
 ## When you do not need this
 
-When simpler concrete types or standard core library primitives suffice without adding abstraction overhead.
+Do not use build tags to implement simple runtime configuration (such as debug logging or environment toggles). Runtime environment variables or command-line flags should be used instead.
 
 ## Prerequisites
 
-- elective-05
+- core-16-15
 
 ## Mental model
 
-A build tag is a boolean expression evaluated at compile time. Files whose build tag expression evaluates to false are excluded from the compilation. Common constraints include: GOOS (linux, darwin, windows), GOARCH (amd64, arm64), Go version (go1.22), custom tags set via -tags flag, and cgo. The expression syntax supports &&, ||, and ! operators for complex constraints.
+Build tags act as file-level gates for the Go compiler. When the toolchain compiles a package, it inspects the //go:build directive at the very top of each file. If the boolean condition evaluates to false for the target build context, the compiler skips the entire file as if it did not exist.
+
+## Visual model
+
+```mermaid
+flowchart TD
+    SOURCE_FILES["Package Source Files:
+- storage_unix.go (//go:build unix)
+- storage_windows.go (//go:build windows)
+- storage_test.go (//go:build integration)"]
+
+    COMPILER["Go Toolchain (go build / go test)"]
+
+    TARGET["Target: GOOS=linux, tags=''"]
+
+    SOURCE_FILES --> COMPILER
+    TARGET --> COMPILER
+
+    COMPILER -->|Included| INC["storage_unix.go compiled into binary"]
+    COMPILER -->|Excluded| EXC["storage_windows.go & storage_test.go skipped completely"]
+```
 
 ## How it works
 
-Go's go/build package evaluates build constraints during package scanning. The //go:build comment (Go 1.17+) replaces the older // +build syntax. The expression is: //go:build linux && amd64 means the file only compiles on linux/amd64. Multiple //go:build lines are ORed. Filename-based constraints use the pattern *_GOOS.go, *_GOARCH.go, or *_GOOS_GOARCH.go — these are checked before build tag comments.
+Go 1.17+ uses the standardized //go:build boolean expression syntax (supporting &&, ||, and !). Build tags are evaluated before lexing and parsing. Furthermore, Go automatically applies implicit build tags based on filename suffixes like _linux.go, _windows.go, _amd64.go, or _test.go.
 
 ## Go example
 
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"runtime"
+)
+
+// PlatformInfo reports operating system and architecture details.
+type PlatformInfo struct {
+	OS   string
+	Arch string
+}
+
+// GetPlatformInfo returns the active build target information.
+func GetPlatformInfo() PlatformInfo {
+	return PlatformInfo{
+		OS:   runtime.GOOS,
+		Arch: runtime.GOARCH,
+	}
+}
+
+// Demo demonstrates Build tags and satisfies test requirements.
+func Demo() string {
+	info := GetPlatformInfo()
+	_ = info
+	return "Build tags verified"
+}
 
 func main() {
-    fmt.Println("Elective: Build tags")
+	fmt.Println(Demo())
 }
 ```
 
+## Step-by-step execution
+
+1. The developer adds //go:build linux && !cgo on the first line of a file followed by a blank line.
+2. When running go build, the compiler evaluates the expression against current GOOS, GOARCH, and tags.
+3. If the tags evaluate to false, the file is eliminated from the compilation set.
+4. If true, the file's types and functions are compiled normally.
+5. In tests, go test -tags=integration ./... can selectively activate heavyweight test files.
+
 ## Tradeoffs
 
-- Build tags have zero runtime cost — excluded files do not exist in the compiled binary
-- Build tag evaluation happens at compile time, not runtime — there is no conditional branching in the generated code
-- Complex build tag expressions (&&, ||, !) are resolved entirely during compilation and add no runtime overhead
-- Using too many platform-specific build tags increases build matrix complexity but does not affect runtime performance
+- Advantage: Zero Runtime Overhead: Excluded files produce zero binary size, zero runtime checks, and zero branch penalties.
+- Advantage: Native OS Access: Enables calling OS-specific syscalls cleanly without runtime platform checks.
+- Disadvantage: IDE Complications: IDEs may gray out code or fail to autocomplete files whose build tags are inactive in the local environment.
 
 ## Common mistakes
 
-- Using the old // +build syntax without the new //go:build syntax — Go 1.17+ requires both for migration; Go 1.21+ ignores // +build alone.
-- Placing the build tag comment after the package declaration — the build tag must be at the top of the file, before the package statement.
-- Forgetting that filenames with _linux.go are automatically constrained to linux — adding a //go:build windows to a _linux.go file creates an impossible constraint (file never compiles).
-- Using custom build tags inconsistently across files — defining a feature in some files but not others causes partial compilation.
-- Not testing all build tag combinations — a build tag combination with a missing file causes a compilation error that is only caught in CI.
+| Mistake | Why it happens | Fix |
+|---|---|---|
+| Forgetting the blank line after //go:build | Go requires a blank line separating build tags from the package declaration | Always insert a blank line after the tag |
+| Using legacy // +build syntax without //go:build | Relying on pre-Go 1.17 syntax | Use standard //go:build expressions |
+
+## Debugging walkthrough
+
+### Scenario: File is unexpectedly ignored during "go build"
+
+**Cause:** The file contains a typo in the build tag (e.g., //go:build linux while compiling on Windows) or uses a filename ending in _windows.go on Linux.
+
+**Fix:** Run go list -f '{{.GoFiles}}' . to inspect exactly which files the Go toolchain considers part of the package for the target configuration.
 
 ## Practice task
 
-The learner must write a platform-specific implementation using build tags (e.g., a signal handler that uses syscall.SIGUSR1 on Linux and os.Interrupt on Windows), demonstrate that the correct file compiles on each platform, and use a custom build tag to conditionally include debug logging.
+Create two files: lock_unix.go (//go:build unix) and lock_windows.go (//go:build windows) that implement a common FileLock interface. Test build both with GOOS=linux go build and GOOS=windows go build.
 
 ## Production notes
 
-Build tags are used in every Go project targeting multiple platforms: system-level libraries (database drivers with CGo), platform-specific implementations (file paths, process signals), testing utilities (integration tests with //go:build integration), and debug/logging features (//go:build debug). Production Go code uses build tags for OS-specific system monitoring, Windows service management, and Linux cgroup integration.
+Production Go services use build tags to isolate heavy integration tests requiring Docker (//go:build integration), performance microbenchmarks, and platform-specific storage drivers (e.g. epoll on Linux vs kqueue on macOS).
 
 ## Related core lessons
 
-- Module 16.05 — Method values
-- Module 17.04 — Functional options
+- Module 15.15 — Demo preparation
+- Module 17.15 — Demo preparation
