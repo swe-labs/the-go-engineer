@@ -14,6 +14,26 @@ A `rune` is a single Unicode code point — one conceptual character. A `string`
 
 Think of runes as the "what you mean" and bytes as the "what's stored". The string `"é"` is one rune (U+00E9) but two bytes (`0xC3 0xA9` in UTF-8). The string `"世界"` is two runes but six bytes.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph UTF8["UTF-8 Encoded Byte Stream on Wire / Disk"]
+        B1["0xE4 (1st byte)"] --- B2["0xB8 (2nd byte)"] --- B3["0x96 (3rd byte)"]
+    end
+
+    subgraph Decoder["UTF-8 Decoder (utf8.DecodeRune)"]
+        DEC["Decodes variable-length 1-4 byte sequence"]
+    end
+
+    subgraph Rune["Go rune (int32 - 4 bytes)"]
+        CP["Unicode Code Point: U+4E16 (世)
+Integer Value: 19990"]
+    end
+
+    UTF8 --> DEC --> CP
+```
+
 ## Core idea
 
 - **`rune`** is an alias for `int32`. It represents a Unicode code point (a numeric value from 0 to 0x10FFFF).

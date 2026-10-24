@@ -24,6 +24,26 @@ String "Hi 👍" in memory:
    len = 7 (bytes), not 3 (runes/characters)
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph StringHeader["String Header (StringHeader: 16 bytes)"]
+        PTR["Data Pointer (*byte): 0x6000 (8 bytes)"]
+        LEN["Length (int): 5 (8 bytes)"]
+    end
+
+    subgraph ReadOnlyData["Read-Only Memory Segment (.rodata)"]
+        direction LR
+        B0["'H' (0x48)"] --- B1["'e' (0x65)"] --- B2["'l' (0x6c)"] --- B3["'l' (0x6c)"] --- B4["'o' (0x6f)"]
+    end
+
+    PTR --> B0
+    NOTE["Strings in Go are IMMUTABLE:
+s[0] = 'h' fails at compile time!"]
+    StringHeader -.-> NOTE
+```
+
 ## Core idea
 
 A string in Go is:

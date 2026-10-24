@@ -14,6 +14,27 @@ Length and capacity govern how slices grow, when they allocate, and how much mem
 
 Picture a hotel corridor: `len` is the number of occupied rooms; `cap` is the total number of rooms on the floor. You can keep opening doors (appending) until you run out of rooms, at which point the hotel builds a new floor with more rooms and moves everyone over.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as User Code
+    participant S as Slice Header (len=3, cap=3)
+    participant OldArr as Old Backing Array [3]int
+    participant Runtime as Go Runtime (growslice)
+    participant NewArr as New Backing Array [6]int
+
+    Dev->>S: s = append(s, 40)
+    Note over S: len(3) == cap(3) -> No capacity!
+    S->>Runtime: Invoke runtime.growslice
+    Runtime->>NewArr: Allocate doubled capacity (cap=6)
+    Runtime->>NewArr: Copy elements [10, 20, 30] from OldArr
+    Runtime->>NewArr: Append new element 40 at index [3]
+    Runtime-->>S: Return new header: ptr=NewArr, len=4, cap=6
+    Note over S: OldArr abandoned to garbage collector
+```
+
 ## Core idea
 
 - `len(s)` returns the number of elements in the slice — the accessible portion.

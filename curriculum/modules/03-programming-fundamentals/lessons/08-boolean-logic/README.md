@@ -20,6 +20,25 @@ Short-circuit evaluation is a physical property of these gates: in a series (`&&
 
 The result of any boolean expression is always a `bool` — there is no truthy/falsy in Go. You cannot use an integer where a `bool` is expected, and vice versa.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph AndLogic["Short-Circuit AND: A && B"]
+        A1["Evaluate Left: A"] -->|false| RES1["Short-circuit: Result is false
+(Right operand B is NEVER executed)"]
+        A1 -->|true| B1["Evaluate Right: B"]
+        B1 --> RES2["Result is B's boolean value"]
+    end
+
+    subgraph OrLogic["Short-Circuit OR: A || B"]
+        A2["Evaluate Left: A"] -->|true| RES3["Short-circuit: Result is true
+(Right operand B is NEVER executed)"]
+        A2 -->|false| B2["Evaluate Right: B"]
+        B2 --> RES4["Result is B's boolean value"]
+    end
+```
+
 ## Core idea
 
 ```go

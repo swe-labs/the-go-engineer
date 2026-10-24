@@ -33,6 +33,24 @@ Omitting parts produces the other forms:
 
 `break` exits the innermost enclosing `for` (or `switch`/`select`). `continue` skips to the next iteration. A label before a loop allows `break` or `continue` to target a specific enclosing loop.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ThreeClauseLoop["Standard 3-Clause Loop: for i := 0; i < N; i++"]
+        INIT["1. Init Statement: i := 0 (runs once)"]
+        COND{"2. Condition: i < N"}
+        BODY["3. Execute Loop Body Block"]
+        POST["4. Post Statement: i++"]
+
+        INIT --> COND
+        COND -->|true| BODY
+        BODY --> POST
+        POST --> COND
+        COND -->|false| EXIT["Loop Terminates"]
+    end
+```
+
 ## Core idea
 
 ```go

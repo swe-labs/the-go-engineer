@@ -14,6 +14,24 @@ A slice is a window into an underlying array. The window has three fields: a poi
 
 When you `append` beyond the capacity, Go allocates a new, larger backing array, copies all elements over, and returns a new slice header pointing to the new array. The old backing array becomes unreachable if no other slice references it.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SliceHeader["Slice Header (24 bytes on 64-bit architecture)"]
+        PTR["Data Pointer (*T): 0x4000 (8 bytes)"]
+        LEN["Length (int): 3 (8 bytes)"]
+        CAP["Capacity (int): 5 (8 bytes)"]
+    end
+
+    subgraph BackingArray["Backing Array Allocated in Memory (0x4000)"]
+        direction LR
+        A0["[0]: 10 (Active)"] --- A1["[1]: 20 (Active)"] --- A2["[2]: 30 (Active)"] --- A3["[3]: 0 (Reserved Cap)"] --- A4["[4]: 0 (Reserved Cap)"]
+    end
+
+    PTR --> A0
+```
+
 ## Core idea
 
 A slice is a descriptor of a contiguous segment of an array. The slice type is `[]T` — no length in the type. Slices are created by:

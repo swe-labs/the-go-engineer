@@ -12,6 +12,26 @@ Unlike compile errors which catch problems before the program runs, runtime erro
 
 A panic is an unexpected error that stops program execution. When a panic occurs, Go prints a stack trace showing every function call from the start of the program to the crash point. The most recent call is at the top; `main` is somewhere near the bottom.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Stack["Goroutine Call Stack Trace (Top to Bottom)"]
+        F3["Frame 3: Crash Origin (Panic Site)\nmain.divide(a, b int)\n/app/main.go:24"]
+        F2["Frame 2: Intermediate Caller\nmain.calculateMetrics()\n/app/main.go:16"]
+        F1["Frame 1: Root Goroutine Entrypoint\nmain.main()\n/app/main.go:8"]
+    end
+
+    subgraph RuntimeAction["Go Runtime Panic Unwinding"]
+        P_OCCUR["1. Hardware/Runtime Trap (division by zero / nil dereference)"]
+        P_WALK["2. Stack Walker inspects Program Counters (PC) via symbol table"]
+        P_EMIT["3. Dumps formatted goroutine stack to stderr & exits status 2"]
+    end
+
+    F3 --> P_OCCUR --> P_WALK --> P_EMIT
+    F3 --- F2 --- F1
+```
+
 ## Core idea
 
 A Go panic traceback shows: the panic message (what went wrong), the stack frames (where it happened), and the file and line number of each frame. The first frame after the panic message is the exact location of the crash.

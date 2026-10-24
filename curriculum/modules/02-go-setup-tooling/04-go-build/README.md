@@ -12,6 +12,34 @@ By the end of this lesson, you will understand how `go build` compiles Go source
 
 `go build` is like `go run` without the run step — it compiles your source into a binary and saves it to disk. The binary is self-contained: statically linked, no external dependencies, and ready to run on any machine with the same operating system and architecture.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Inputs["Source & Dependencies"]
+        SRC["main.go / *.go source files"]
+        STDLIB["Go Standard Library (fmt, runtime, os)"]
+        MODS["External Go Modules (go.mod dependencies)"]
+    end
+
+    subgraph Toolchain["Go Compiler & Linker (cmd/compile & cmd/link)"]
+        AST["1. Parsing & AST Generation"]
+        TYPE["2. Type Checking & Verification"]
+        OPT["3. SSA Optimization & Escape Analysis"]
+        OBJ["4. Machine Code Emission (.a/.o objects)"]
+        LINK["5. Static Linker Bundles Runtime & Packages"]
+
+        AST --> TYPE --> OPT --> OBJ --> LINK
+    end
+
+    subgraph Output["Persistent Artifact on Disk"]
+        BIN["Statically Linked Binary Executable\n(ELF on Linux / PE on Windows / Mach-O on macOS)"]
+    end
+
+    Inputs --> AST
+    LINK --> Output
+```
+
 ## Core idea
 
 `go build` produces a standalone executable binary from your Go source code. Unlike interpreted languages, Go compiles everything — your code, the standard library, and any dependencies — into a single binary with no runtime or VM required.

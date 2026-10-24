@@ -14,6 +14,25 @@ A `const` declaration is a promise: this value never changes. The Go compiler tr
 
 Typed constants are different: `const x int = 10` has the type `int` baked in. You cannot assign `x` to a `float64` variable without an explicit conversion.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Untyped["Compile-Time Untyped Constants (Arbitrary Precision >= 256 bits)"]
+        C1["const Pi = 3.14159265358979323846"]
+        C2["const Big = 1 << 100"]
+    end
+
+    subgraph Assignment["Target Context Variable Assignment"]
+        V_F64["var f float64 = Pi
+(Implicitly assigned float64 type)"]
+        V_F32["var f32 float32 = Pi
+(Truncated to IEEE 754 32-bit float)"]
+    end
+
+    Untyped -->|Evaluated at compile time without runtime overhead| Assignment
+```
+
 ## Core idea
 
 ```go

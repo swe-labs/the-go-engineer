@@ -12,6 +12,28 @@ Without a working Go installation, nothing else in this curriculum works. Every 
 
 Go is a compiled language. The `go` command is your gateway to the entire toolchain: it compiles, runs, tests, formats, and analyzes your code. Installing Go places this command and its supporting libraries on your system. The `GOROOT` and `GOPATH` environment variables tell Go where to find its own standard library and where to look for your projects.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Host["Host Operating System Environment"]
+        PATH["System PATH Variable"]
+        subgraph GOROOT["GOROOT (e.g., /usr/local/go or C:\\Program Files\\Go)"]
+            BIN_GO["bin/go (Toolchain CLI & Compiler)"]
+            PKG_STD["src/ (Go Standard Library: fmt, net/http, os)"]
+        end
+        subgraph GOPATH["GOPATH (defaults to $HOME/go or %USERPROFILE%\\go)"]
+            BIN_TOOLS["bin/ (Installed 3rd-party binaries: gopls, dlv)"]
+            PKG_MOD["pkg/mod/ (Cached external module downloads)"]
+        end
+    end
+
+    Terminal["Terminal: go version"] -->|1. Searches PATH| BIN_GO
+    BIN_GO -->|2. Inspects built-in target| Host
+    BIN_GO -->|3. Locates Standard Library| PKG_STD
+    Terminal -->|Terminal Output| Result["go version go1.22.x windows/amd64"]
+```
+
 ## Core idea
 
 Go's toolchain is a single binary (`go`) that provides every operation you need. Installing Go means placing this binary in your PATH so your terminal can find it. Verification means running `go version` and seeing a valid version string.

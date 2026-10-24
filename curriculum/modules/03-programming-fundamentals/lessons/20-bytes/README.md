@@ -14,6 +14,22 @@ A `byte` is just a `uint8` — an 8-bit value from 0 to 255. A `[]byte` is a sli
 
 Think of `[]byte` as the lingua franca of data exchange. A string is the human-readable interpretation of bytes; `[]byte` is the raw machine representation.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph ImmutableStr["string: "hello""]
+        SH["Header: ptr, len"] --> STR_BYTES["Read-only memory: [h, e, l, l, o]"]
+    end
+
+    subgraph MutableSlice["[]byte: []byte(str)"]
+        BH["Header: ptr, len, cap"] --> BUF_BYTES["Heap memory: [h, e, l, l, o]"]
+    end
+
+    SH -->|Conversion copies bytes to ensure immutability| BH
+    BUF_BYTES -->|Mutations permitted: b[0] = 'H'| MUT["[H, e, l, l, o]"]
+```
+
 ## Core idea
 
 - `byte` is an alias for `uint8`. The two are interchangeable; `byte` signals "raw data" vs `uint8` which signals "small number".

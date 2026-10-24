@@ -14,6 +14,30 @@ A pointer is a memory address. It tells you where a value lives, not what it is.
 
 Think of it like a home address on a piece of paper. You can give someone the paper (pass a pointer), they can visit the house and change the furniture (modify the pointed-to value), and when you go home, you see the changes. Without a pointer, you photocopy the house's contents and hand over the photocopy — their changes don't affect the original.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph Memory["Stack Memory Space"]
+        subgraph ValueVar["Variable: x (int)"]
+            ADDR_X["Address: 0xc000014088"]
+            VAL_X["Value: 42"]
+            ADDR_X --- VAL_X
+        end
+
+        subgraph PointerVar["Variable: p (*int)"]
+            ADDR_P["Address: 0xc000014090"]
+            VAL_P["Value: 0xc000014088"]
+            ADDR_P --- VAL_P
+        end
+    end
+
+    VAL_P -->|Points to address of x (p = &x)| ADDR_X
+    DEREF["*p reads or overwrites value at target address (*p = 100)"]
+    PointerVar -.-> DEREF
+    DEREF -.-> VAL_X
+```
+
 ## Core idea
 
 - `*T` is the type "pointer to T". Zero value is `nil`.

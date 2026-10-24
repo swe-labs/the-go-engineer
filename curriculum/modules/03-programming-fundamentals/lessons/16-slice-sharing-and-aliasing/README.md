@@ -14,6 +14,37 @@ Multiple slices can be windows into the same building (backing array). If one wi
 
 When you `append` to a slice and capacity is sufficient, you paint on the existing wall. If capacity is exceeded, the runtime builds a new building and points the window there — the old building is safe from that window's future appends, but other windows still point to it.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph OriginalSlice["Original Slice: s1 = []int{10, 20, 30, 40, 50}"]
+        H1["Header s1:
+Data: 0x5000
+Len: 5
+Cap: 5"]
+    end
+
+    subgraph SubSlice["Sub-Slice: s2 = s1[1:4]"]
+        H2["Header s2:
+Data: 0x5008 (Offset +8 bytes)
+Len: 3
+Cap: 4"]
+    end
+
+    subgraph SharedBacking["Shared Backing Array (0x5000)"]
+        direction LR
+        B0["[0]: 10"] --- B1["[1]: 20 (s2[0])"] --- B2["[2]: 30 (s2[1])"] --- B3["[3]: 40 (s2[2])"] --- B4["[4]: 50 (s2 cap)"]
+    end
+
+    H1 --> B0
+    H2 --> B1
+
+    NOTE["Mutating s2[0] = 99 directly overwrites s1[1]!"]
+    H2 -.-> NOTE
+    NOTE -.-> B1
+```
+
 ## Core idea
 
 **Aliasing** occurs when two or more slice headers point to the same backing array. This happens through:

@@ -14,6 +14,34 @@ An expression is a recipe that produces a value. You combine ingredients (operan
 
 This model breaks only for short-circuit boolean operators (`&&`, `||`) which stop evaluating early, and for function calls whose arguments are evaluated before the call but the function itself may have side effects.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Expression["Source Expression: 3 + 4 * 2"]
+        PLUS["Operator: + (Precedence 3)"]
+        LIT3["Operand: 3 (untyped int)"]
+        MULT["Operator: * (Precedence 5)"]
+        LIT4["Operand: 4 (untyped int)"]
+        LIT2["Operand: 2 (untyped int)"]
+
+        PLUS --- LIT3
+        PLUS --- MULT
+        MULT --- LIT4
+        MULT --- LIT2
+    end
+
+    subgraph EvalOrder["Evaluation Sequence"]
+        STEP1["1. Evaluate higher precedence: 4 * 2 = 8"]
+        STEP2["2. Evaluate addition: 3 + 8 = 11"]
+        RES["Result Value: 11 (Type: int)"]
+
+        STEP1 --> STEP2 --> RES
+    end
+
+    Expression --> EvalOrder
+```
+
 ## Core idea
 
 A _value_ is data -- a number, a boolean, a string, or a compound type. An _expression_ is source code that the Go compiler and runtime evaluate to produce a value. Every expression has a _type_ (known at compile time) and a _value_ (known or computed at runtime).

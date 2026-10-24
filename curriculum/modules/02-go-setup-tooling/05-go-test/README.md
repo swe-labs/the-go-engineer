@@ -12,6 +12,36 @@ Testing is how you prove your code works. `go test` is the command that runs tho
 
 A test is a function that calls your code and checks the result against an expected value. `go test` finds all test functions (functions starting with `Test` in files ending with `_test.go`), runs them, and reports which passed and which failed.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Discovery["Package Discovery"]
+        SRC["Code: main.go (production functions)"]
+        TEST_SRC["Tests: main_test.go (func TestXxx(t *testing.T))"]
+    end
+
+    subgraph TestHarness["go test Runner (cmd/go)"]
+        SYNTH["1. Generates ephemeral _testmain.go entrypoint"]
+        BUILD["2. Compiles test runner binary (main.test)"]
+        EXEC["3. Executes test runner process with *testing.T context"]
+    end
+
+    subgraph Assertion["Assertion Evaluation"]
+        PASS["t.Log / No error -> Test PASS"]
+        FAIL["t.Errorf / t.Fatalf -> Test FAIL"]
+    end
+
+    subgraph Report["Terminal Output"]
+        OUT_OK["--- PASS: TestAdd (0.00s)\nPASS\nok package 0.002s"]
+        OUT_FAIL["--- FAIL: TestAdd (0.00s)\nFAIL\nexit status 1"]
+    end
+
+    Discovery --> SYNTH --> BUILD --> EXEC
+    EXEC --> PASS --> OUT_OK
+    EXEC --> FAIL --> OUT_FAIL
+```
+
 ## Core idea
 
 `go test` compiles the package and all `_test.go` files, runs every function matching `func TestXxx(t *testing.T)`, and reports PASS or FAIL for each one. A test fails when it calls `t.Errorf` or `t.Fatalf`.

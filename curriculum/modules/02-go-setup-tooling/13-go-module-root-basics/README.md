@@ -12,6 +12,27 @@ Every Go project starts with `go mod init`. The `go.mod` file defines your modul
 
 A Go module is a collection of packages with a single `go.mod` file at the root. The module path in `go.mod` is the import path prefix for all packages in the module. `go mod tidy` ensures the `go.mod` file matches the source code exactly.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ModuleRoot["Module Root Directory: /myproject"]
+        GOMOD["go.mod\nmodule github.com/user/myproject\ngo 1.22"]
+        GOSUM["go.sum\nCryptographic SHA-256 dependency hashes"]
+
+        subgraph SubPkg["Package Directory: /pkg/mathlib"]
+            CODE["math.go\npackage mathlib"]
+        end
+
+        subgraph CmdPkg["Command Directory: /cmd/app"]
+            MAIN["main.go\npackage main\nimport \"github.com/user/myproject/pkg/mathlib\""]
+        end
+    end
+
+    GOMOD -->|Defines canonical root prefix| CmdPkg
+    MAIN -->|Resolves internal module import| SubPkg
+```
+
 ## Core idea
 
 The `go.mod` file defines the module path, the Go version, and the dependencies required by the module. Every directory with `.go` files inside the module is a package, and its import path is `module-path/directory-path`.

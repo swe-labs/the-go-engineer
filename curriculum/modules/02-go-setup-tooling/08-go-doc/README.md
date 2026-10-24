@@ -12,6 +12,29 @@ Documentation is useless if it is hard to access. `go doc` puts documentation at
 
 `go doc` reads doc comments from Go source files and displays them in the terminal. A doc comment is a plain text comment immediately preceding a top-level declaration (package, function, type, const, var). The first sentence becomes the short summary; the full comment body is the detailed documentation.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SourceCode["Go Source File: calc.go"]
+        DOC["// Add returns the sum of two integers.\n// It handles negative integers safely."]
+        DECL["func Add(a, b int) int { return a + b }"]
+        DOC --- DECL
+    end
+
+    subgraph DocEngine["go/doc & go/parser Parsing Engine"]
+        AST["Extract CommentGroup immediately preceding Ast.FuncDecl"]
+        PARSE["Split 1st sentence as summary; format body via Godoc spec"]
+    end
+
+    subgraph Destinations["Documentation Consumption"]
+        CLI["Terminal CLI (offline):\ngo doc calc.Add"]
+        WEB["pkg.go.dev Web Portal:\nRendered HTML API Reference"]
+    end
+
+    SourceCode --> AST --> PARSE --> Destinations
+```
+
 ## Core idea
 
 `go doc` extracts and displays documentation from Go source files without compiling. It works offline and is always available. Writing a doc comment above any exported declaration makes that documentation accessible via `go doc`.

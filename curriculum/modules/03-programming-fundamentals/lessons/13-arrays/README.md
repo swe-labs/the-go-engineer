@@ -14,6 +14,30 @@ Think of an array as a fixed-size block of identical slots in memory, all with t
 
 If you picture a slice as a window into a separate backing array, the array is the building itself. The building has a fixed footprint; you cannot add more floors. The slice is just a view into some of the rooms.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph MemoryLayout["Array in Memory: var arr [4]int32"]
+        direction LR
+        I0["arr[0]: 4 bytes
+Addr: 0x1000"] --- I1["arr[1]: 4 bytes
+Addr: 0x1004"] --- I2["arr[2]: 4 bytes
+Addr: 0x1008"] --- I3["arr[3]: 4 bytes
+Addr: 0x100C"]
+    end
+
+    subgraph ValueCopy["Assignment: copyArr := arr"]
+        C0["copyArr[0]
+Addr: 0x2000"] --- C1["copyArr[1]
+Addr: 0x2004"] --- C2["copyArr[2]
+Addr: 0x2008"] --- C3["copyArr[3]
+Addr: 0x200C"]
+    end
+
+    MemoryLayout -->|Deep copy of all 16 bytes across stack| ValueCopy
+```
+
 ## Core idea
 
 In Go, an array type is written `[n]T` where `n` is a non-negative integer constant (the length) and `T` is the element type. The length must be a compile-time constant expression.

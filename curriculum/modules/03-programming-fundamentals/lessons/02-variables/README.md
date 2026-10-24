@@ -12,6 +12,30 @@ Every nontrivial program stores and manipulates data through variables. A mispla
 
 A variable is a named box that holds a value. You create the box (declare), optionally put something inside (initialize), and later look inside or replace the contents (assign). The box has a fixed type: once you declare `var age int`, that box will only ever hold integers. The short declaration `:=` creates the box and fills it in one step. Scope is like a set of nested rooms — a name declared in an inner room temporarily hides (shadows) the same name in an outer room.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph StackFrame["Current Function Stack Frame"]
+        subgraph VarA["Variable: age (int)"]
+            ADDR_A["Stack Offset: [SP+16]
+Type: int (64-bit)
+Size: 8 bytes"]
+            VAL_A["Value: 25
+Binary: 0x0000000000000019"]
+            ADDR_A --- VAL_A
+        end
+
+        subgraph InnerScope["Inner Block Scope: { shadow := "inner" }"]
+            ADDR_S["Stack Offset: [SP+24]
+Shadows outer variable
+Lifetime: Block end"]
+            VAL_S["Value: "inner" (string header: ptr, len)"]
+            ADDR_S --- VAL_S
+        end
+    end
+```
+
 ## Core idea
 
 Go provides two declaration forms:

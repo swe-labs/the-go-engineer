@@ -38,6 +38,30 @@ Each collection type has unique range behaviour:
 | Map | key type | copy of value | after all keys visited (non-deterministic order) |
 | Channel | never assigned | value received | after channel is closed |
 
+
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph BackingSlice["Underlying Slice Elements"]
+        E0["[0]: {ID: 1, Value: "A"}"]
+        E1["[1]: {ID: 2, Value: "B"}"]
+        E2["[2]: {ID: 3, Value: "C"}"]
+    end
+
+    subgraph LoopIteration["for idx, val := range slice"]
+        ITER["Iteration Step"]
+        VAR_I["idx (int): Current index offset"]
+        VAR_V["val (Item): Complete VALUE COPY of element"]
+    end
+
+    E0 -->|Copies 1st item bytes| VAR_V
+    E1 -.->|Copies 2nd item bytes| VAR_V
+    E2 -.->|Copies 3rd item bytes| VAR_V
+
+    style VAR_V stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
+```
+
 ## Under the hood
 
 The compiler expands `range` differently per type:

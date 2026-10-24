@@ -18,6 +18,23 @@ Think of a Go value as a box labelled with a type. The box contains bits. A type
 
 Conversions never silently lose information unless you ask for a narrower type. When the source value cannot be represented in the target type, integer conversions wrap around (two's complement truncation); float-to-int conversions truncate toward zero.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph Illegal["Implicit Conversion (Rejected by Compiler)"]
+        V1["var a int32 = 42"] -.->|Compile Error: cannot use int32 as int64| V2["var b int64 = a"]
+    end
+
+    subgraph Explicit["Explicit Conversion T(v)"]
+        S1["var a int32 = 42
+[4 bytes on stack]"] --> CONV["int64(a)
+(Sign extension / widening)"]
+        CONV --> S2["var b int64
+[8 bytes on stack] = 42"]
+    end
+```
+
 ## Core idea
 
 The syntax `T(x)` converts expression `x` to type `T`. Both `T` and `x` must have the same _underlying type_ or be numeric kinds, strings, or slices with compatible element types. The conversion is a compile-time checked operation that may produce a runtime value.

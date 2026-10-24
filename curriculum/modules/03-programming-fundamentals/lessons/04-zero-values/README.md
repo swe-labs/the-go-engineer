@@ -20,6 +20,27 @@ Think of each variable declaration as Go writing a default value into the box be
 
 The key insight: `nil` is a valid value. It is not "nothing" — it is a specific zero value that you can check for and that some built-in functions handle gracefully.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph MemoryZeroing["Zero-Value Memory Guarantee"]
+        direction TB
+        Z_NUM["Numeric (int, float64):
+All bits zero -> 0 / 0.0"]
+        Z_BOOL["Boolean (bool):
+Single zero byte -> false"]
+        Z_STR["String (string):
+Header { Data: 0x0, Len: 0 } -> """]
+        Z_PTR["Pointer (*T), Chan, Map, Func:
+Address pointer 0x0 -> nil"]
+        Z_SLICE["Slice ([]T):
+Header { Data: 0x0, Len: 0, Cap: 0 } -> nil"]
+        Z_STRUCT["Struct (type T struct):
+All fields initialized to their respective zero values"]
+    end
+```
+
 ## Core idea
 
 Every type in Go has a zero value:

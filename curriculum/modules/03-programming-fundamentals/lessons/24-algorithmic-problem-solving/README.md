@@ -30,6 +30,26 @@ Input Collection (N items)
 Deterministic Output Collection
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ProblemSolving["Algorithmic Engineering Framework"]
+        STEP1["1. Clarify Invariants & Constraints
+(Input bounds, edge cases: empty, duplicate, negative)"]
+        STEP2["2. Select Data Structure & Pattern
+(Hash Map lookup O(1) vs Two-Pointer / Sliding Window O(N))"]
+        STEP3["3. Mechanical Dry-Run
+(Trace memory state and pointer movements on paper)"]
+        STEP4["4. Write Zero-Magic Go Implementation
+(Idiomatic bounds checks, early error return)"]
+        STEP5["5. Table-Driven Test Verification
+(Unit test suites with boundary and stress cases)"]
+
+        STEP1 --> STEP2 --> STEP3 --> STEP4 --> STEP5
+    end
+```
+
 ## Core idea
 
 ### 1. Systematic Problem Decomposition

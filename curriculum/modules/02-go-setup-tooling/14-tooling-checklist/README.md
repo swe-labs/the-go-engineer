@@ -12,6 +12,19 @@ All the tooling knowledge from Module 02 is only useful if you can verify your e
 
 This is your Go health check. Run these commands whenever you set up a new machine, after a Go version upgrade, or when something feels off. Each command tests one part of the toolchain, and together they confirm the entire environment is functional.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    DEV["Developer Workstation"] --> V1["1. Toolchain Verification\n(go version, go env GOROOT GOPATH)"]
+    V1 --> V2["2. Build & Execution Pipeline\n(go run ., go build .)"]
+    V2 --> V3["3. Testing Suite\n(go test -v .)"]
+    V3 --> V4["4. Formatting & Static Analysis\n(gofmt -l ., go vet .)"]
+    V4 --> V5["5. Language Server Protocol\n(gopls version)"]
+    V5 --> V6["6. Module Integrity\n(go mod tidy, go mod verify)"]
+    V6 --> READY["All Checks Passed: Environment 100% Ready for Module 03"]
+```
+
 ## Core idea
 
 A complete Go development environment includes: a working `go` binary, the ability to compile and run code, the ability to test code, code formatting, static analysis, documentation access, a language server, and understanding of module basics. This checklist verifies all of them.

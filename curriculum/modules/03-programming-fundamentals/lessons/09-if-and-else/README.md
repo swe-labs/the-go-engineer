@@ -16,6 +16,31 @@ Think of a series of locked doors: you walk down a hallway and try each door. Th
 
 The short-statement form (`if err := doSomething(); err != nil`) is like a prep table before the door: you compute an intermediate result, inspect it, and decide which door to enter — all in one expression. The variable declared in the short statement is only visible within that if/else block, like a temporary note you crumple up and discard after leaving the room.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ShortStmt["if err := doWork(); err != nil"]
+        INIT["1. Short Initialization:
+err := doWork()
+(err scoped ONLY to if/else block)"]
+        COND{"2. Evaluate Condition:
+err != nil"}
+        THEN["Then Branch:
+Handle error and return"]
+        ELSE["Else / Follow-up Branch:
+Success logic"]
+        END["Outer Function Scope:
+err identifier no longer exists"]
+
+        INIT --> COND
+        COND -->|true| THEN
+        COND -->|false| ELSE
+        THEN --> END
+        ELSE --> END
+    end
+```
+
 ## Core idea
 
 An if statement evaluates a boolean expression and conditionally executes a block:

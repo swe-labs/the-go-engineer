@@ -12,6 +12,32 @@ Every value in Go has a type. The type system catches mismatches at compile time
 
 Think of a type as a mold or a stencil. The mold determines three things: (1) the set of values that fit, (2) the operations you can perform, and (3) the memory layout. An `int8` mold accepts values -128 to 127 and uses 1 byte. A `float64` mold accepts IEEE 754 doubles and uses 8 bytes. When you declare a variable `var x int32`, you've chosen the `int32` mold — Go will never let you pour a `string` into it without an explicit conversion.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph GoTypeSystem["Go Type System Architecture"]
+        subgraph Basic["Basic Primitive Types"]
+            INT["Integers: int, int8-64, uint8-64, uintptr"]
+            FLOAT["Floating Point: float32, float64"]
+            STR["Textual: string, rune (int32), byte (uint8)"]
+            BOOL["Boolean: bool (true / false)"]
+        end
+
+        subgraph Composite["Composite Types"]
+            ARR["Array: [N]T (Fixed size, contiguous)"]
+            SLI["Slice: []T (Dynamic header: ptr, len, cap)"]
+            MAP["Map: map[K]V (Hash table reference)"]
+            STRUCT["Struct: struct{...} (Aggregated fields)"]
+            PTR["Pointer: *T (Memory address reference)"]
+        end
+
+        subgraph Interfaces["Abstract Types"]
+            IFACE["interface{...} (Dynamic itab + data pointer)"]
+        end
+    end
+```
+
 ## Core idea
 
 Go's basic types fall into several families:

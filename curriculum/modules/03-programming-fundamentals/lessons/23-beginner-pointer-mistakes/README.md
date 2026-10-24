@@ -14,6 +14,26 @@ Every pointer-related bug falls into one of two categories: **pointing nowhere**
 
 Go's pointer model is simpler than C's, but the common mistakes are more insidious because Go's automatic dereferencing and escape analysis can hide what is happening.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph NilDereference["Mistake 1: Nil Pointer Dereference"]
+        P1["var ptr *User = nil (Address: 0x0)"]
+        D1["*ptr.Name (Dereference)"]
+        CRASH["CRASH: panic: runtime error:
+invalid memory address or nil pointer dereference"]
+        P1 --> D1 --> CRASH
+    end
+
+    subgraph Escape["Mistake 2: Pointer vs Value Semantics"]
+        BIG["Large Struct (>100 bytes)
+Pass by pointer to avoid copy overhead"]
+        SMALL["Small Value (int, float, time.Time)
+Pass by value for CPU cache locality and zero allocation"]
+    end
+```
+
 ## Core idea
 
 Five classic mistakes:

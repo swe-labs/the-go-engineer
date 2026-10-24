@@ -12,6 +12,27 @@ By the end of this lesson, you will understand what `go run` does, when to use i
 
 `go run` is like a REPL for compiled languages — it takes your source file, compiles it in a temp directory, runs the result, and cleans up. The source file remains; the binary disappears. Think of it as "compile, execute, forget."
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as Developer Terminal
+    participant CLI as go run CLI
+    participant Temp as OS Temp Directory (/tmp/go-build...)
+    participant Comp as Go Compiler & Linker
+    participant Proc as Child Process (PID)
+
+    Dev->>CLI: go run main.go
+    CLI->>Temp: Create ephemeral build directory
+    CLI->>Comp: Parse & compile source + stdlib
+    Comp-->>Temp: Emit temporary executable (b001/exe/main)
+    CLI->>Proc: Fork & exec binary with attached stdio
+    Proc->>Dev: Stream stdout/stderr directly to terminal
+    Proc-->>CLI: Process exits (status code 0)
+    CLI->>Temp: Delete temporary directory and binary
+```
+
 ## Core idea
 
 `go run` compiles a Go package and immediately executes the resulting binary, then discards it. It is the fastest feedback loop for Go development.

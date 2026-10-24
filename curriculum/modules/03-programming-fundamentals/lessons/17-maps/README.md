@@ -12,6 +12,30 @@ Maps are the most commonly used associative data structure in Go. They appear in
 
 Think of a map as a **hash-powered lookup table**. You give it a key — any comparable type — and it computes a hash code, then uses that hash to store or find the value in an internal bucket array. The map does not maintain insertion order; it scatters entries across buckets for fast access. A nil map is like a locked filing cabinet: you cannot write to it, but you can safely ask whether a key exists (it won't be there).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph MapHeader["hmap Struct Reference (Pointer)"]
+        COUNT["count: Number of active elements"]
+        B["B: log2(number of buckets)"]
+        BUCKETS["buckets: Pointer to bmap array"]
+    end
+
+    KEY["Key Input: "user_123""] --> HASH["Hash Function: aeshash("user_123")"]
+    HASH --> B_INDEX["Low bits -> Bucket index selector"]
+    HASH --> TOP["High 8 bits -> tophash cache"]
+
+    BUCKETS --> BMAP["Bucket (bmap):
+- tophash: [8]uint8
+- keys: [8]string
+- values: [8]int
+- overflow: *bmap"]
+
+    B_INDEX --> BMAP
+    TOP --> BMAP
+```
+
 ## Core idea
 
 A map in Go has the type `map[K]V` where `K` is the key type (must be comparable: booleans, numbers, strings, pointers, channels, structs with comparable fields, and arrays) and `V` is the value type (any type, including another map or slice).

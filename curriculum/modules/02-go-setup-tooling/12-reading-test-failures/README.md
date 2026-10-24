@@ -12,6 +12,28 @@ Test output is the most detailed feedback you will get about your code's correct
 
 A test function calls your code, checks the result against an expected value, and reports a failure if they do not match. `go test -v` prints the name of every test function and whether it passed or failed, along with any failure messages.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TestExecution["go test -v Execution Flow"]
+        RUN["=== RUN   TestCalculator_Add"]
+        EVAL["Evaluate: got == want ?"]
+        LOG["t.Errorf(\"Add(%d, %d) = %d; want %d\", a, b, got, want)"]
+        STATUS["--- FAIL: TestCalculator_Add (0.00s)"]
+
+        RUN --> EVAL
+        EVAL -->|Assertion Fails| LOG
+        LOG --> STATUS
+    end
+
+    subgraph FailureDiagnostic["Diagnostic Log Anatomy"]
+        LINE["calc_test.go:18: Add(2, 2) = 5; want 4\n  [File:Line]       [Got Result]  [Expected Outcome]"]
+    end
+
+    STATUS --> LINE
+```
+
 ## Core idea
 
 Test output has three parts: the test name, the PASS or FAIL status, and the failure message (if any). The failure message includes the file and line number of the failing assertion, the expected value, and the actual value.

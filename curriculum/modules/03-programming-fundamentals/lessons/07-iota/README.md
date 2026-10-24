@@ -25,6 +25,27 @@ new const block  → iota = 0 (reset)
 
 When combined with operators (`<<`, `|`, `+`), `iota` generates values that follow a pattern rather than a flat sequence.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph EnumBlock["const ( ... ) Block Evaluation"]
+        I0["Line 0: Sunday = iota       --> Value: 0, iota advances to 1"]
+        I1["Line 1: Monday             --> Repeated expr (Sunday): Value = 1"]
+        I2["Line 2: Tuesday            --> Repeated expr: Value = 2"]
+        I3["Line 3: _                  --> iota advances to 3 (Blank: value skipped)"]
+        I4["Line 4: Thursday           --> Repeated expr: Value = 4"]
+    end
+
+    subgraph BitmaskBlock["Bitmask const ( ... ) Block"]
+        B0["Line 0: Read  = 1 << iota  --> 1 << 0 = 1 (0001)"]
+        B1["Line 1: Write = 1 << iota  --> 1 << 1 = 2 (0010)"]
+        B2["Line 2: Exec  = 1 << iota  --> 1 << 2 = 4 (0100)"]
+    end
+
+    EnumBlock -.->|Closing paren resets iota to 0| BitmaskBlock
+```
+
 ## Core idea
 
 ```go

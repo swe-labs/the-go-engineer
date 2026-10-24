@@ -12,6 +12,30 @@ Compilation success does not mean code correctness. `go vet` catches classes of 
 
 If `go build` checks whether your code is valid Go, `go vet` checks whether your code is *sensible* Go. It looks for patterns that are syntactically correct but logically suspicious — a `fmt.Printf` call with the wrong format verb, an assignment that is never read, a lock that is copied by value.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    SRC["Go Source Code\n(Syntactically valid Go)"] --> TC["Compiler Frontend\n(Type-Checked AST + Types Info)"]
+
+    subgraph Analyzers["go/analysis Framework Pass"]
+        A_PRINTF["printf: fmt.Printf(\"%d\", \"hello\")"]
+        A_LOCK["copylocks: sync.Mutex passed by value"]
+        A_UNREACH["unreachable: dead code following return"]
+        A_SHADOW["shadow: accidental inner-scope := shadowing"]
+    end
+
+    TC --> A_PRINTF
+    TC --> A_LOCK
+    TC --> A_UNREACH
+    TC --> A_SHADOW
+
+    A_PRINTF --> OUT["CLI Diagnostics Output:\n./main.go:12: Printf format %d has arg of type string\nexit status 1"]
+    A_LOCK --> OUT
+    A_UNREACH --> OUT
+    A_SHADOW --> OUT
+```
+
 ## Core idea
 
 `go vet` runs static analysis on your Go source to detect suspicious constructs. It compiles the package, then runs built-in analyzers on the typed AST to find patterns that are valid Go but likely unintended.

@@ -21,6 +21,23 @@ v, ok := m["key"]   // ok == true  → key exists
                      // ok == false → key not present
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    LOOKUP["Map Lookup: val, ok := userScores["alice"]"]
+
+    LOOKUP --> CHECK{"Does key "alice" exist in map?"}
+
+    CHECK -->|Yes (Key Present)| OK_TRUE["ok = true
+val = stored value (e.g. 100)"]
+    CHECK -->|No (Key Missing)| OK_FALSE["ok = false
+val = zero-value of type (e.g. 0)"]
+
+    style OK_TRUE stroke:#28a745,stroke-width:2px
+    style OK_FALSE stroke:#dc3545,stroke-width:2px
+```
+
 ## Core idea
 
 The comma-ok idiom is the two-value return form used in three distinct Go constructs:

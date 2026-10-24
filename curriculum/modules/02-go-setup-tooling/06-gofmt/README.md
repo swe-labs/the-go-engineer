@@ -12,6 +12,16 @@ Formatting arguments waste time in code reviews. Go eliminates this entirely wit
 
 `gofmt` reads your Go source file, parses it into an AST, and prints the AST back out using Go's canonical formatting rules. If your code is valid Go, `gofmt` produces the same program with consistent indentation, spacing, and alignment.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    RAW["Raw Go Source\n(messy indentation, irregular spaces,\ninconsistent alignment)"] --> PARSE["go/parser\n(Constructs AST & strips superficial whitespace)"]
+    PARSE --> AST["Abstract Syntax Tree (AST)\n(Semantic Structure Preserved)"]
+    AST --> PRINT["go/printer\n(Applies Canonical Rules: tabs for indent,\nspaces for alignment, 1 space around operators)"]
+    PRINT --> CANON["Canonical Go Source\n(Byte-for-byte identical across all machines)"]
+```
+
 ## Core idea
 
 `gofmt` formats Go source code according to a single, official standard. Every Go file should be formatted with `gofmt` before committing. The `go fmt` command (which calls `gofmt`) can format entire packages at once.

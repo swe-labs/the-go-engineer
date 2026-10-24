@@ -16,6 +16,29 @@ A type switch is similar, but instead of matching values, it matches the dynamic
 
 An expressionless switch (`switch { ... }`) is a sequence of boolean conditions evaluated top-to-bottom — a cleaner if/else-if chain.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    EVAL["Evaluate Expression:
+switch status := order.Status; status"]
+
+    EVAL --> C1{"case StatusPending:"}
+    C1 -->|Match| B1["Execute Pending Handler
+(Automatic break: NO fallthrough)"]
+    C1 -->|No Match| C2{"case StatusPaid:"}
+    C2 -->|Match| B2["Execute Paid Handler
+(Exits switch automatically)"]
+    C2 -->|No Match| C3{"case StatusShipped:"}
+    C3 -->|Match| B3["Execute Shipped Handler"]
+    C3 -->|No Match| DEF["default: Log unknown status error"]
+
+    B1 --> EXIT["Continue Outside Switch Statement"]
+    B2 --> EXIT
+    B3 --> EXIT
+    DEF --> EXIT
+```
+
 ## Core idea
 
 ```go

@@ -12,6 +12,29 @@ A text editor without a language server is just a typewriter. `gopls` transforms
 
 `gopls` is the brain behind your Go editor. It reads your Go source files, builds an in-memory model of your codebase, and responds to editor requests (hover, go-to-definition, completion) via the Language Server Protocol (LSP). Your editor is the display; `gopls` is the intelligence.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as Developer Editor (VS Code / Neovim)
+    participant Client as Editor LSP Client
+    participant Server as gopls Language Server Daemon
+    participant Disk as Module Filesystem & Stdlib Cache
+
+    Dev->>Client: Hover cursor over symbol (e.g. fmt.Println)
+    Client->>Server: textDocument/hover (URI, Line: 14, Col: 5)
+    Server->>Disk: Consult in-memory AST & symbol table index
+    Server-->>Client: Returns Hover response (Signature + Godoc Markdown)
+    Client-->>Dev: Display rich tooltip with type signature & docs
+
+    Dev->>Client: Save file (Ctrl+S / :w)
+    Client->>Server: textDocument/formatting
+    Server->>Server: Run gofmt & organize imports in memory
+    Server-->>Client: Return TextEdit array (atomic line diffs)
+    Client-->>Dev: Document formatted cleanly on disk
+```
+
 ## Core idea
 
 `gopls` (Go Language Server) provides IDE features for any editor that supports the Language Server Protocol. It is developed by the Go team and is the official Go language server. Install it once, and every LSP-compatible editor gets the same high-quality Go experience.

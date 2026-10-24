@@ -12,6 +12,22 @@ Hello World is the smallest complete Go program. Every Go program you write will
 
 A Go source file is a text file with three sections: package declaration at the top, imports in the middle, and code at the bottom. The `main` function is where execution begins — like the front door of your program. The `fmt.Println` call sends text to your terminal.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SourceFile["main.go Source File"]
+        PKG["package main (Declares executable binary entrypoint)"]
+        IMP["import \"fmt\" (Imports formatted I/O standard package)"]
+        FN["func main() (Entrypoint: execution begins here)"]
+        CALL["fmt.Println(\"Hello, World!\")"]
+
+        PKG --> IMP --> FN --> CALL
+    end
+
+    CALL -->|Emits bytes to file descriptor 1| STDOUT["OS Standard Output (Terminal Console)"]
+```
+
 ## Core idea
 
 Every Go program starts with `package main` and a `func main()`. The `import` statement brings in packages from the standard library (or third parties) that provide functionality like printing, math, or file access.

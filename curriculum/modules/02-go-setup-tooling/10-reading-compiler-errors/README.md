@@ -12,6 +12,27 @@ Compiler errors are the most frequent feedback you will get as a Go developer. N
 
 Go's compiler produces error messages with a consistent format: `file:line:col: error message`. The first error is usually the real cause; later errors are often cascading effects. Fix errors from top to bottom.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Diagnostic["Compiler Diagnostic Anatomy"]
+        ERR["./main.go:14:5: undefined: fmt\n  [File]  [Line] [Col]     [Error Explanation]"]
+    end
+
+    subgraph Triage["Triage Workflow (Top-Down Remediation)"]
+        TOP["1. Read FIRST error only (Ignore secondary cascading noise)"]
+        NAV["2. Jump directly to File at Line:Column coordinates"]
+        CAT["3. Classify: Syntax vs Type Mismatch vs Undefined vs Unused"]
+        FIX["4. Apply targeted minimal correction"]
+        RETRY["5. Re-run `go build` to verify resolution"]
+
+        TOP --> NAV --> CAT --> FIX --> RETRY
+    end
+
+    Diagnostic --> TOP
+```
+
 ## Core idea
 
 Every Go compiler error includes three pieces of information: where (file and line number), what column (precise character position), and why (the error message). Reading all three tells you exactly what to fix.
