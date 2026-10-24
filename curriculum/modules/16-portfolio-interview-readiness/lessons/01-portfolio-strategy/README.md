@@ -12,6 +12,23 @@ A GitHub profile is the new resume. Every hiring manager and technical screener 
 
 Think of your portfolio as a product you are building for a specific audience: hiring managers, technical screeners, and your future teammates. Each project is a feature that showcases one or more dimensions of your engineering ability. Just as you would prioritize features by impact, you prioritize projects by how strongly they signal the skills your target roles demand. The portfolio strategy is your roadmap: it tells you which projects to build, which to retire, and how to present each one for maximum signal.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph BadPortfolio["Common Portfolio Mistakes"]
+        B1["5+ Identical Tutorial Clones (Todo app, Pokedex, Weather)"]
+        B2["No tests, no CI/CD, no Docker"]
+        B3["Zero architectural documentation or diagrams"]
+    end
+
+    subgraph HighSignalPortfolio["High-Signal Staff/Senior Ready Portfolio"]
+        G1["1-2 Deep Production Systems (Distributed Store, Payment Saga, Custom Proxy)"]
+        G2["Production Hygiene: 80%+ test coverage, race detection, OTel tracing, Docker Compose"]
+        G3["Rich Documentation: Architecture diagrams, ADRs, performance benchmarks, failure modes"]
+    end
+```
+
 ## Core idea
 
 There are three portfolio types that engineers mix and match:

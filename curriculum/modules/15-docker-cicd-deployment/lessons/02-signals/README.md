@@ -12,6 +12,27 @@ When Kubernetes decides to stop your pod, it sends SIGTERM and waits for the gra
 
 Signals are OS-level interrupts delivered to a process. Think of them as urgent kernel-to-process messages: "stop what you are doing immediately" (SIGTERM), "user pressed Ctrl+C" (SIGINT), "terminal disconnected" (SIGHUP), "illegal instruction" (SIGILL). A signal handler is like a fire alarm — it must be fast, non-blocking, and designed to run when the system is in an unpredictable state. Go's `signal.Notify` converts these OS interrupts into Go channel messages, allowing goroutines to handle them synchronously.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor OS as Linux Kernel / Docker
+    participant App as Go Process (cmd/server)
+    participant Srv as http.Server
+    participant DB as Postgres Connection Pool
+
+    OS->>App: Sends SIGTERM (Termination Request)
+    App->>App: signal.Notify catches signal on sigChan
+    Note over App: Begins Graceful Shutdown (Timeout: 10s)
+    App->>Srv: srv.Shutdown(ctx)
+    Srv->>Srv: Closes listener (Rejects new incoming TCP conns)
+    Srv->>Srv: Waits for active in-flight requests to complete
+    Srv-->>App: Shutdown returned nil
+    App->>DB: db.Close() (Drains idle pool connections)
+    App-->>OS: Process exits with status code 0
+```
+
 ## Core idea
 
 The `os/signal` package connects OS signals to Go channels. The key function is `signal.Notify(ch chan<- os.Signal, sig ...os.Signal)`, which registers the channel to receive the specified signals. Signals are delivered to the channel via a non-blocking send — if the channel is full, the signal is dropped. Always use a buffered channel of size 1 for signal delivery.

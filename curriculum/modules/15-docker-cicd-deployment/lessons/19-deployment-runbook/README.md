@@ -21,6 +21,19 @@ A deployment runbook is a recipe for deploying a specific service. Like a cookin
 
 The runbook is versioned alongside the service code. When the service changes (new configuration, new dependencies), the runbook is updated in the same PR. This keeps the runbook accurate and reviewable.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    START["Initiate Production Deployment"] --> PRE["1. Pre-Flight: Check DB backups, review pending migrations"]
+    PRE --> EXEC["2. Execution: Run schema migrations -> Trigger rolling deploy"]
+    EXEC --> VERIFY["3. Post-Flight: Check /readyz, observe 5xx error rate and P99 latency"]
+    
+    VERIFY --> OK{"Metrics Healthy for 10 Minutes?"}
+    OK -->|Yes| COMPLETE["Deployment Complete: Announce in #releases"]
+    OK -->|No: Error Spike Detected| ROLLBACK["Execute Immediate Rollback Procedure"]
+```
+
 ## Core idea
 
 A deployment runbook has four phases:

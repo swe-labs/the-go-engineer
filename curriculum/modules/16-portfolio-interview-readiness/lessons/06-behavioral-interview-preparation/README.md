@@ -12,6 +12,20 @@ Technical skills get you to the interview. Behavioral skills get you the offer. 
 
 Think of each behavioral question as a product demo. You are demoing your engineering approach to solving a real problem. The STAR format is the structure of the demo: situation and task set the context (what problem), action shows your contribution (how you solved it), and result proves the value (why it mattered). Just as a product demo without a clear problem statement feels random, a behavioral answer without STAR structure feels unfocused.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph STAR_Framework["The STAR Behavioral Interview Method"]
+        S["Situation: Set the business context, company state, and constraints"]
+        T["Task: Define the technical challenge, deadline, and your responsibility"]
+        A["Action: Detail the specific engineering decisions, tradeoffs, and code YOU implemented"]
+        R["Result: Quantify the outcome (latency drop, cost saved, zero downtime) and postmortem reflections"]
+
+        S --> T --> A --> R
+    end
+```
+
 ## Core idea
 
 The STAR method structures every behavioral response into four parts:

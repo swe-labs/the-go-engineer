@@ -20,6 +20,25 @@ Think of a release artifact like a medicine bottle: the label (version, commit, 
 
 The checksum file (`SHA256SUMS`) is the manifest that maps binary names to their hashes. Before deploying, the deployment tool recomputes the hash and compares it against the manifest. A mismatch means the artifact was corrupted or replaced.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    TAG["Git Tag Created: v1.2.0"] --> GORELEASER["GoReleaser / Buildx Pipeline"]
+
+    subgraph ArtifactMatrix["Multi-Platform Artifacts"]
+        BIN_AMD["app-linux-amd64 (Tarball + SHA256)"]
+        BIN_ARM["app-linux-arm64 (Tarball + SHA256)"]
+        OCI["Docker OCI Image: ghcr.io/org/app:v1.2.0
+Digest: sha256:7f9b..."]
+    end
+
+    GORELEASER --> BIN_AMD
+    GORELEASER --> BIN_ARM
+    GORELEASER --> OCI
+    OCI --> SIGN["Cosign Cryptographic Signature"]
+```
+
 ## Core idea
 
 Release artifacts for Go are self-contained, statically compiled binaries. The artifact pipeline:

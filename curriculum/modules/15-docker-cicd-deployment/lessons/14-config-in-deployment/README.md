@@ -18,6 +18,24 @@ Configuration is the separation between code and the environment it runs in. Thi
 
 The 12-factor app manifesto (factor 3: Config) states: store config in environment variables. Environment variables are language- and OS-agnostic, never accidentally committed to version control, and trivially changed between deployments without code changes.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph PriorityHierarchy["Configuration Loading Precedence"]
+        ENV["1. Environment Variables (Highest Precedence - Deployment Overrides)"]
+        FILE["2. Configuration File (config.yaml / Optional Local Defaults)"]
+        CODE["3. Struct Default Values (Hardcoded Sensible Defaults)"]
+    end
+
+    ENV --> PARSER["Configuration Parser & Validator"]
+    FILE --> PARSER
+    CODE --> PARSER
+
+    PARSER -->|Validation Passes| CFG["Immutable Config Struct"]
+    PARSER -->|Missing Required Variable| PANIC["Process Fails Fast on Boot with Clear Error"]
+```
+
 ## Core idea
 
 The 12-factor app approach to configuration:

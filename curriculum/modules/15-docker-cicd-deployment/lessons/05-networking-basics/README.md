@@ -12,6 +12,30 @@ Every HTTP service in Go ultimately calls `net.Listen("tcp", addr)`. The address
 
 A TCP connection is a pipe between two processes. One process listens (server), the other dials (client). The server binds to a port and accepts connections. The client dials to an IP:port and establishes a socket. Data flows bidirectionally through the socket. Think of it as a phone call: the server publishes its number (IP:port), the client dials it, and once connected, both sides can talk.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph DockerHost["Docker Host Machine"]
+        ETH0["Physical NIC (eth0: 192.168.1.50)"]
+        
+        subgraph BridgeNet["Docker Bridge Network (bridge / user-defined)"]
+            IPAM["Internal Gateway: 172.20.0.1"]
+            
+            subgraph Container1["Container: api"]
+                VETH1["eth0: 172.20.0.2 (Port 8080)"]
+            end
+
+            subgraph Container2["Container: postgres"]
+                VETH2["eth0: 172.20.0.3 (Port 5432)"]
+            end
+        end
+    end
+
+    ETH0 -->|Port Forward: -p 8080:8080 (iptables DNAT)| VETH1
+    VETH1 -->|Internal DNS: 'postgres:5432'| VETH2
+```
+
 ## Core idea
 
 | Concept | Description | Go type/function |

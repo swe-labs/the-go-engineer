@@ -12,6 +12,20 @@ Take-home projects are the single most common technical assessment in the Go eco
 
 Think of a take-home project as a miniature open-source contribution. The reviewer is a maintainer evaluating your PR. They check whether your code is correct, testable, documented, and maintainable. Your goal is to make their review as easy as possible. Every decision — naming, structure, comments, test coverage — should optimize for reviewer clarity. The clock is your constraint: allocate time deliberately across four phases: analysis (20%), implementation (50%), polish (20%), and review (10%).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TakeHomeRubric["Winning Take-Home Assignment Deliverable"]
+        D1["One-Command Run: 'docker compose up' boots app + DB + migrations"]
+        D2["Clean Code: Follows standard cmd/ and internal/ package boundaries"]
+        D3["Robust Tests: Unit tests with mocks + end-to-end integration tests"]
+        D4["Comprehensive README: Documents architectural choices, trade-offs, and future improvements"]
+
+        D1 --- D2 --- D3 --- D4
+    end
+```
+
 ## Core idea
 
 A take-home project strategy is a repeatable framework that converts a prompt into a submission that maximizes signal per minute spent. The core elements are:

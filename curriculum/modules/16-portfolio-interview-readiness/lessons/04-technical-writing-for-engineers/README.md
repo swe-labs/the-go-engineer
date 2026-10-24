@@ -22,6 +22,22 @@ Each level serves a different audience. Package-level documentation is for other
 
 Go enforces a documentation culture through `godoc`, which automatically renders comments as documentation. A documented exported symbol in Go is the norm, not the exception.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph EngineeringDocStructure["Standard Engineering Design Doc / README Anatomy"]
+        H1["1. Executive Summary & Problem Statement"]
+        H2["2. System Architecture Diagram (Mermaid / PlantUML)"]
+        H3["3. Quickstart & Local Setup (<3 commands with Docker Compose)"]
+        H4["4. API Specifications & Data Models"]
+        H5["5. Design Decisions & Rejected Alternatives"]
+        H6["6. Known Limitations & Failure Recovery"]
+
+        H1 --- H2 --- H3 --- H4 --- H5 --- H6
+    end
+```
+
 ## Core idea
 
 **Go doc comments** follow a strict convention:

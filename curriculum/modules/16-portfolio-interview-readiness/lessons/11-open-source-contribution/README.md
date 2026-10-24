@@ -12,6 +12,18 @@ Open source contributions are the most authentic signal of Go engineering abilit
 
 Think of open source contribution as a tiered career ladder: Consumer (download and use packages) → Reporter (file issues with reproduction steps) → Contributor (submit PRs with tests) → Reviewer (provide feedback on others' PRs) → Maintainer (merge PRs and set project direction). Each tier requires more context and responsibility. Start at the tier above your current comfort level and progress upward. The code is the project's asset, but community and communication are its operating system.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    FIND["Find Issue (good-first-issue / bug report)"] --> DISCUSS["Comment & Align with Maintainers on Approach"]
+    DISCUSS --> FORK["Fork & Create Feature Branch"]
+    FORK --> CODE["Implement Fix + Tests matching repo style"]
+    CODE --> PR["Submit Minimal PR with Context & References"]
+    PR --> REVIEW["Address Code Review Feedback Respectfully"]
+    REVIEW --> MERGE["Merged into Mainstream Project!"]
+```
+
 ## Core idea
 
 Open source contribution is a repeatable process of finding, understanding, fixing, and submitting improvements to public codebases. The key areas:

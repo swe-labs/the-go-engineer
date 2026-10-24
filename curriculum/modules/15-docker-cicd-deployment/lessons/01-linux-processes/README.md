@@ -12,6 +12,31 @@ Every Docker container is a Linux process with an isolated view of the world. Wh
 
 A process is a running program with its own address space, file descriptors, and process ID (PID). When you call `exec.Command`, Go forks a child process. The parent (your Go program) and child (the command) run concurrently. The parent can wait for the child to finish, read its output, or send it signals. If the parent exits without waiting, the child becomes an orphan and is adopted by PID 1 (init). If the parent never calls `Wait`, the child's exit status is never collected and it becomes a zombie — a dead process occupying a slot in the process table.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph LinuxProcess["Linux Process Anatomy (Go Application)"]
+        PID["Process ID (PID: 1234) & PPID"]
+        
+        subgraph FDs["Standard File Descriptors"]
+            FD0["FD 0: stdin"]
+            FD1["FD 1: stdout (slog JSON output)"]
+            FD2["FD 2: stderr (Panics & runtime errors)"]
+        end
+
+        subgraph MemoryMap["Virtual Memory Address Space"]
+            TEXT["Text (.text): Compiled Go machine instructions"]
+            RODATA["Rodata: Read-only string literals & constants"]
+            HEAP["Heap: Dynamic allocations managed by Go runtime GC"]
+            STACKS["Stacks: 2KB dynamic Goroutine stacks"]
+        end
+
+        ENV["Environment Variables (PATH, PORT, DATABASE_URL)"]
+        PROCFS["/proc/1234/ (Kernel stats: status, cmdline, fd, limits)"]
+    end
+```
+
 ## Core idea
 
 The `os/exec` package provides a safe, cross-platform way to run external commands. It separates command construction (`exec.Command`) from command execution (`Run`, `Start`, `Output`, `CombinedOutput`). The key types are:

@@ -12,6 +12,18 @@ Code review is where software quality happens. Every Go engineer spends as much 
 
 Think of your code like a submission to a publication. Before you submit, you proofread, check formatting, verify facts, and ensure you have not introduced errors. A code review readiness checklist is the same thing: you run through categories systematically to catch issues before the reviewer does. The reviewer's job should be to evaluate architectural decisions and business logic, not to fix formatting, missing error handling, or concurrency bugs.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph PullRequestChecklist["Pull Request Excellence Hygiene"]
+        PR_SIZE["1. Atomic Scope (<400 lines of code changed per PR)"]
+        PR_DESC["2. Detailed Context (Why this change? Architecture choices made)"]
+        PR_TEST["3. Automated Tests (Unit, integration, and race detector passing)"]
+        PR_DOC["4. Updated Architecture Docs / ADRs included in same PR"]
+    end
+```
+
 ## Core idea
 
 Code review checks fall into six categories. Each category targets a different aspect of code quality:

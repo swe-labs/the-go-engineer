@@ -12,6 +12,23 @@ A multi-stage Dockerfile is the standard way to build Go containers in productio
 
 Multi-stage build is like renting a fully equipped kitchen (builder stage) to prepare a meal, then transferring only the finished dish to a clean plate (runtime stage). The kitchen is discarded after use. The builder stage has the Go compiler, module cache, and all build tools. The runtime stage has nothing but the binary. Nothing from the builder leaks into the final image unless you explicitly `COPY --from=builder`.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph Stage1["Stage 1: Builder (golang:1.24-alpine ~350MB)"]
+        SRC["Go Source Code"] --> COMPILER["go build -ldflags='-w -s'"]
+        COMPILER --> BINARY["Static Binary: /bin/server (12MB)"]
+    end
+
+    subgraph Stage2["Stage 2: Final Minimal Runtime (scratch or distroless ~2MB)"]
+        BINARY -->|COPY --from=builder| MINIMAL["/bin/server"]
+        CA["/etc/ssl/certs/ca-certificates.crt"] -->|COPY| CERT["SSL Root Certificates"]
+    end
+
+    NOTE["Final Production Image Size: ~15MB (Zero shell, zero package manager, zero attack surface!)"]
+```
+
 ## Core idea
 
 A multi-stage Dockerfile uses multiple `FROM` instructions. Each `FROM` starts a new stage. You can name stages with `AS` and copy artifacts between them with `COPY --from=<stage>`. Only the last stage is used for the final image (unless you specify a target with `--target`).

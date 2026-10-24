@@ -20,6 +20,26 @@ Think of secrets like physical keys to a building. Config is the address (public
 
 A secret store is a lockbox. You authenticate to the lockbox, request a specific key, and receive the value. The lockbox logs every access. If someone tries to open the lockbox without authorization, an alarm sounds.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SecretVault["Centralized Secrets Storage"]
+        KMS["AWS Secrets Manager / Vault / GitHub Secrets"]
+    end
+
+    subgraph InjectionAtRuntime["Runtime Delivery (No Disk Storage)"]
+        KMS -->|IAM Role / Agent Injection| CONTAINER["Container Environment (DATABASE_PASSWORD)"]
+        CONTAINER --> PROCESS["Go Process Memory (os.Getenv)"]
+    end
+
+    subgraph SecurityGuarantees["Security Controls"]
+        PROCESS --> NO_LOG["Zero logging of secret values"]
+        PROCESS --> NO_DOCKER["Never baked into Docker image layers"]
+        PROCESS --> NO_GIT["Never committed to version control"]
+    end
+```
+
 ## Core idea
 
 The secrets management hierarchy for Go services:

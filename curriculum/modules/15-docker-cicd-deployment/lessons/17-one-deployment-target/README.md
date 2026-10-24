@@ -19,6 +19,26 @@ Think of it like replacing an aircraft engine in flight: you do not shut down th
 - **Rolling**: Replace instances one at a time. Each instance is taken out of service, updated, and returned.
 - **Recreate**: Stop all instances, start new ones. Requires downtime.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as Developer
+    participant CI as GitHub Actions
+    participant Registry as Container Registry (GHCR)
+    participant Target as Production Server (VPS / Cloud Instance)
+
+    Dev->>CI: git push origin main
+    CI->>CI: Run Tests & Build Image
+    CI->>Registry: Push image: ghcr.io/org/app:v1.2.0
+    CI->>Target: SSH Deploy / Webhook Trigger
+    Target->>Registry: docker pull ghcr.io/org/app:v1.2.0
+    Target->>Target: docker compose up -d --no-deps api
+    Target->>Target: Health probe verifies /readyz
+    Target-->>CI: Deployment Verified Successful
+```
+
 ## Core idea
 
 | Strategy | Traffic switch | Rollback speed | Zero downtime | Complexity |

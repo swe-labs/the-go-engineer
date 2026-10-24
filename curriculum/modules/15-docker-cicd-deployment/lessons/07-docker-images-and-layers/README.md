@@ -12,6 +12,23 @@ Every Dockerfile instruction creates a layer. Layers are cached and reused acros
 
 Think of image layers as a stack of transparencies. Each transparency shows only the files that were added or changed by that instruction. When a process reads a file, Docker's union filesystem (overlayfs) walks the stack from top to bottom and returns the first version it finds. Deleting a file in a later layer does not erase it from earlier layers — it just places a "hidden" marker on top. This explains why a 800 MB build stage can yield an 8 MB final image, and why deleting intermediate files mid-build does nothing to shrink the image.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ImageLayers["Docker Layer Cache Optimization"]
+        L1["Layer 1: FROM golang:1.24-alpine (Cached)"]
+        L2["Layer 2: WORKDIR /app (Cached)"]
+        L3["Layer 3: COPY go.mod go.sum (Cached unless dependencies change)"]
+        L4["Layer 4: RUN go mod download (Cached unless dependencies change)"]
+        L5["Layer 5: COPY . . (Invalidated on any code edit)"]
+        L6["Layer 6: RUN CGO_ENABLED=0 go build -o server ./cmd/server (Recompiled)"]
+
+        L1 --> L2 --> L3 --> L4 --> L5 --> L6
+    end
+    NOTE["Placing go.mod download before COPY . accelerates build times from minutes to seconds!"]
+```
+
 ## Core idea
 
 Each Dockerfile instruction creates a read-only layer:

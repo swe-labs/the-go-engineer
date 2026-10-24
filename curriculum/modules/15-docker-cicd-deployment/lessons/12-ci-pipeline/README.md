@@ -20,6 +20,22 @@ Think of a CI pipeline as a series of quality gates on an assembly line. Each ga
 
 If any required gate fails, the assembly line stops, and the change is rejected. If all gates pass, the code proceeds to the packaging and deployment stage (CD). The pipeline is defined as code (YAML or a Go script) so it is versioned, reviewable, and reproducible.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    CODE["Commit Pushed"] --> LINT["Stage 1: Lint
+(golangci-lint)"]
+    LINT --> TEST["Stage 2: Unit Tests
+(go test -race)"]
+    TEST --> INT["Stage 3: Integration Tests
+(Docker DB Service)"]
+    INT --> SEC["Stage 4: Security Scan
+(govulncheck + trivy)"]
+    SEC --> BUILD["Stage 5: Multi-Platform Build
+(linux/amd64, arm64)"]
+```
+
 ## Core idea
 
 Continuous Integration means merging code changes into a shared mainline frequently (multiple times per day) and verifying each merge with an automated build and test process. The core stages for a Go CI pipeline:

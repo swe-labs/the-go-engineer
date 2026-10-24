@@ -14,6 +14,27 @@ A GitHub Actions workflow is a directed acyclic graph of jobs. Each job runs on 
 
 Think of a workflow as a factory assembly line: the trigger event (push, PR) is the start bell, each job is a workstation, each step is a task at that workstation, and the matrix is multiple parallel assembly lines running the same procedure with different tools.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    TRIGGER["Trigger: git push / pull_request to main"] --> RUNNER["Virtual Runner: ubuntu-latest"]
+
+    subgraph JobExecution["Job: CI Pipeline"]
+        S1["actions/checkout@v4"]
+        S2["actions/setup-go@v5 (go-version: 1.24.x, cache: true)"]
+        S3["Run golangci-lint"]
+        S4["Run go test -race -v ./..."]
+        S5["Run govulncheck ./..."]
+
+        S1 --> S2 --> S3 --> S4 --> S5
+    end
+
+    RUNNER --> JobExecution
+    JobExecution -->|All Passed| SUCCESS["Green Checkmark: PR Ready for Merge"]
+    JobExecution -->|Any Step Failed| FAILURE["Red X: Build Blocked"]
+```
+
 ## Core idea
 
 GitHub Actions automates software workflows directly from your repository. The key building blocks:

@@ -12,6 +12,25 @@ In Docker and Kubernetes, logs are not files — they are streams. Docker captur
 
 Logs are the black box flight recorder for your service. Each log line is a timestamped sensor reading. Structured fields (user_id, duration_ms, error_kind) let you filter for anomalies in a dashboard. Unstructured chatter ("starting server...") is noise. The aggregation pipeline is the investigation board — if your sensors do not speak a common format (JSON), the board is useless. In Docker, stdout = flight data recorder, stderr = alarm bell.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph AppProcess["Go Container (PID 1)"]
+        APP["Application Code"] -->|log/slog| STDOUT["/dev/stdout (Line-delimited JSON)"]
+    end
+
+    subgraph DockerHost["Container Engine (Docker / containerd)"]
+        STDOUT --> DRIVER["Logging Driver (json-file / local / journald)"]
+        DRIVER --> LOGFILE["/var/lib/docker/containers/.../*.log"]
+    end
+
+    subgraph LogCollector["Telemetry Pipeline"]
+        LOGFILE --> SHIPPER["Vector / FluentBit / Promtail"]
+        SHIPPER --> BACKEND["Grafana Loki / Elasticsearch"]
+    end
+```
+
 ## Core idea
 
 The 12-factor app mandates that applications log to stdout/stderr, not to files. Docker captures these streams and routes them to the configured logging driver (json-file, journald, fluentd, etc.). Go's `log/slog` (structured logging) package outputs JSON by default when using `slog.NewJSONHandler`.

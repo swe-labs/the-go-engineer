@@ -12,6 +12,28 @@ A Go HTTP service never runs alone in production. It connects to PostgreSQL, Red
 
 Compose is a multi-container orchestrator for a single host. You declare services (containers), networks (communication channels), and volumes (persistent storage) in a YAML file. `docker compose up` creates everything in the right order based on `depends_on`. Each service gets its own hostname (the service name) on an internal DNS, so your Go app connects to `postgres:5432` instead of `localhost:5432`.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph DockerComposeTopology["docker-compose.yaml Topology"]
+        subgraph WebService["Service: api"]
+            BUILD["build: ."]
+            ENV1["DATABASE_URL: postgres://user:pass@db:5432/app"]
+            PORT["ports: - '8080:8080'"]
+            DEP["depends_on: db: condition: service_healthy"]
+        end
+
+        subgraph DBService["Service: db"]
+            IMAGE["image: postgres:16-alpine"]
+            HEALTH["healthcheck: pg_isready -U user"]
+            VOL["volumes: - pgdata:/var/lib/postgresql/data"]
+        end
+
+        WebService -->|Private Network| DBService
+    end
+```
+
 ## Core idea
 
 A `docker-compose.yml` file defines:

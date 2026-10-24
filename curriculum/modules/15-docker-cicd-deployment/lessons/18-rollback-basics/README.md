@@ -22,6 +22,24 @@ Rollback is not just redeploying old code. It may involve:
 
 The rollback plan answers: what do we do, in what order, how long will it take, and what data might we lose?
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph DeploymentApproaches["Rollback Techniques"]
+        subgraph ContainerRollback["Container Revert (Immediate)"]
+            PREV["Deploy previous known-good tag:
+docker compose pull api:v1.1.9 && docker compose up -d"]
+        end
+
+        subgraph SchemaCompatibility["Backward-Compatible Database Migrations"]
+            EXPAND["1. Expand: Add new nullable column / new table (Old code keeps working)"]
+            DEPLOY["2. Deploy: Release new Go binary that uses new column"]
+            CONTRACT["3. Contract: Remove old unused column in later migration"]
+        end
+    end
+```
+
 ## Core idea
 
 Rollback strategies by deployment type:

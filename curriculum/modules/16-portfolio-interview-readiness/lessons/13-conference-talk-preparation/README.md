@@ -12,6 +12,16 @@ Speaking at conferences is a force multiplier for your career. A single talk can
 
 A conference talk is a narrative arc, not a lecture. The audience is tired, distracted, and skeptical. Your job in 30-45 minutes is to earn their attention, teach them something valuable, and send them out with a concrete takeaway. Think of the talk as a journey: start where the audience is (a problem), take them through the struggle (your failed approaches), reveal the solution (your successful approach), and end with the destination (what they can do now). The proposal is the trailer for this journey — it must convince the program committee that the journey is worth funding.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    CFP["Submit CFP (Compelling Title & Abstract)"] --> OUTLINE["Build Story Arc (Problem, Climax, Solution)"]
+    OUTLINE --> SLIDES["Create Visual Slides (Code Snippets & Architecture Diagrams)"]
+    SLIDES --> REHEARSE["Rehearse & Time Presentation (25-35 minutes)"]
+    REHEARSE --> DELIVER["Deliver Presentation & Engage in Q&A"]
+```
+
 ## Core idea
 
 Every talk has three deliverables: the proposal (gets you accepted), the slides (guide the narrative), and the delivery (connects with the audience). Each requires different skills:

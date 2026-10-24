@@ -12,6 +12,28 @@ Docker is the standard way to package and distribute Go services. A single stati
 
 A container is just a Linux process isolated by namespaces (PID, network, mount) and constrained by cgroups. The Dockerfile is a recipe that assembles a read-only filesystem snapshot (image). Each instruction adds a layer — an overlayfs diff. When you run a container, Docker overlays a writable layer on top and executes CMD/ENTRYPOINT as PID 1. For Go developers, the model simplifies: Go binary + minimal base image = a running process. Everything else is packaging detail.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph VM_Arch["Virtual Machines (Heavyweight)"]
+        APP_VM["Application"]
+        GUEST_OS["Full Guest OS (Kernel, Systemd, Drivers ~1-10GB)"]
+        HYPERVISOR["Hypervisor (KVM, VMware)"]
+        HOST_VM["Host OS & Hardware"]
+
+        APP_VM --> GUEST_OS --> HYPERVISOR --> HOST_VM
+    end
+
+    subgraph Container_Arch["Linux Containers (Lightweight)"]
+        APP_C["Application (Static Go Binary ~15MB)"]
+        ISOLATION["Kernel Namespaces (PID, NET, MNT) + cgroups (CPU, RAM)"]
+        HOST_C["Shared Linux Host Kernel & Hardware"]
+
+        APP_C --> ISOLATION --> HOST_C
+    end
+```
+
 ## Core idea
 
 A Dockerfile is a sequence of instructions that build an image:

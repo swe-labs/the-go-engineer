@@ -12,6 +12,21 @@ Most engineers focus exclusively on base salary during negotiations, leaving 20-
 
 Think of an offer as a multi-dimensional value vector, not a single number. Each component (base, equity, bonus, perks) has different liquidity, tax treatment, and growth potential. Your goal is to maximize the total expected value of the vector, not any single component. Negotiation is collaborative problem-solving: you and the recruiter each want a deal that works. Your leverage comes from having alternatives (BATNA), understanding market rates, and being willing to walk away.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TotalCompensation["Total Compensation (TC) Components"]
+        BASE["Base Salary (Guaranteed Cash)"]
+        EQUITY["Equity / RSUs / Stock Options (Vesting over 4 years)"]
+        BONUS["Performance Bonus & Sign-On Bonus"]
+    end
+
+    OFFER["Initial Offer Received"] --> BENCHMARK["Benchmark against Levels.fyi & market data"]
+    BENCHMARK --> COUNTER["Professional counter-offer expressing enthusiasm + competing data"]
+    COUNTER --> OUTCOME["Increased Base, Sign-On, or Accelerated Vesting"]
+```
+
 ## Core idea
 
 Total compensation is the sum of all monetary and non-monetary benefits an employer provides. The standard components:

@@ -12,6 +12,25 @@ When your Go service runs as PID 1 in a Docker container, it creates files — l
 
 Each file has three permission rings: owner, group, and other. Each ring has three bits: read (r=4), write (w=2), execute (x=1). Octal notation encodes all three rings in one number: owner-group-other. Mode `0644` means owner can read+write (6), group can read (4), others can read (4). Go's `os.FileMode` is the language's direct port of this Unix model.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph NonRootSecurity["Container Least-Privilege Execution"]
+        ROOT_BAD["Anti-Pattern: Running as root (UID 0)
+Risk: Container breakout allows full host root takeover!"]
+        
+        NONROOT_GOOD["Production Pattern: Non-root User (UID 65532: nonroot)
+Container lacks CAP_SYS_ADMIN, cannot write to system directories"]
+    end
+
+    subgraph FileModes["POSIX Permission Bits (Octal)"]
+        R755["0755: rwxr-xr-x (Binary executables)"]
+        R644["0644: rw-r--r-- (Static configuration files)"]
+        R600["0600: rw------- (Private keys / TLS certs)"]
+    end
+```
+
 ## Core idea
 
 `os.FileMode` is a `uint32` that mirrors the Unix permission bitmap. The lower 12 bits encode:

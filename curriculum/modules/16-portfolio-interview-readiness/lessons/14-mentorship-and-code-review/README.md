@@ -12,6 +12,20 @@ Code review is the highest-leverage activity in software engineering. A single t
 
 Code review as mentorship is a teaching conversation, not an audit. The author has invested time and ego in their code. Your job is to improve the code while preserving the author's motivation and autonomy. Think of each comment as a teaching moment: explain not just what to change, but why the change matters and what principle it demonstrates. A review comment that teaches a concept ("this pattern separates concerns") is more valuable than one that just states a fix ("move this to a separate function"). The author should learn something from every review.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ConstructiveCodeReview["Senior Engineer Code Review Principles"]
+        P1["Empathy First: Assume good intent, praise elegant solutions"]
+        P2["Guiding Questions: 'How will this behave under network partition?' vs 'Change this'"]
+        P3["Focus on Invariants: Architecture, correctness, data races > nitpicks"]
+        P4["Automate Nits: Let linter and gofmt handle style; focus human reviews on design"]
+
+        P1 --- P2 --- P3 --- P4
+    end
+```
+
 ## Core idea
 
 Effective code review feedback has four dimensions beyond correctness:

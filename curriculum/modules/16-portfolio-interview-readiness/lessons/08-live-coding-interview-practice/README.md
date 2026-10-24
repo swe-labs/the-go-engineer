@@ -12,6 +12,21 @@ Live coding interviews are the most stressful part of the engineering interview 
 
 Think of a live coding interview as pair programming with a future teammate. The interviewer knows the solution and is evaluating how you think, not whether you get the right answer. Your job is to make your thinking visible. The interviewer cannot read your mind — they can only evaluate what you say and type. A clear verbalization of your approach is worth more than a perfect solution you arrive at silently.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph LiveCodingRoadmap["Live Coding Problem-Solving Cadence"]
+        C1["1. Clarify constraints, input types, and edge cases (nil, empty, duplicates)"]
+        C2["2. Propose brute force vs optimal approach before writing code; align with interviewer"]
+        C3["3. Write idiomatic, readable Go (proper error handling, clear naming, no clever hacks)"]
+        C4["4. Manually trace code with an example test case on the whiteboard"]
+        C5["5. State Time & Space Complexity (e.g., O(N log N) time, O(1) auxiliary space)"]
+
+        C1 --> C2 --> C3 --> C4 --> C5
+    end
+```
+
 ## Core idea
 
 The live coding interview follows a five-step framework:

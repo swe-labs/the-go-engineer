@@ -15,6 +15,18 @@ Health checks are the orchestrator asking your service: "Are you alive?" (livene
 - **Readiness**: Are all dependencies connected and warm? If no, remove from load balancer.
 - **Startup**: Has the service finished initializing? If no, delay liveness checks to avoid premature restarts.
 
+## Visual model
+
+```mermaid
+stateDiagram-v2
+    [*] --> Starting : Container Boot
+    Starting --> Healthy : Probe returns 200 OK (3 consecutive times)
+    Healthy --> Unhealthy : Probe fails / timeouts (e.g., DB down)
+    Unhealthy --> Healthy : Probe recovers
+    Unhealthy --> Restarting : Restart policy triggers if configured
+    Restarting --> Starting
+```
+
 ## Core idea
 
 | Probe type | Purpose | Failure action |

@@ -12,6 +12,24 @@ Most engineers drift through their careers, reacting to opportunities rather tha
 
 Your career is a product. You are the engineer building it. Skills are features. Experience is the changelog. Your resume is the README. A career roadmap is the product roadmap — it defines what features to build, in what order, and by when. The market (employers) provides feedback through interviews, promotions, and salary offers. Your job is to iterate: measure where you are, identify the gap to where you want to be, and execute a learning plan to close that gap.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph EngineeringLevels["Software Engineering Career Progression"]
+        L1["Junior Engineer:
+Task Execution, mastering language fundamentals, writing tests"]
+        L2["Mid-Level Engineer:
+Feature Ownership, system debugging, independently shipping production code"]
+        L3["Senior Engineer:
+System Architecture, cross-service design, incident response, mentoring peers"]
+        L4["Staff / Principal Engineer:
+Technical Strategy, organizational alignment, scaling platforms across teams"]
+
+        L1 --> L2 --> L3 --> L4
+    end
+```
+
 ## Core idea
 
 Career progression has two tracks: Individual Contributor (IC) and Engineering Management. Each has distinct skill requirements and promotion criteria:

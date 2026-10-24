@@ -12,6 +12,20 @@ The most common reason portfolio projects fail is not lack of skill — it is po
 
 Think of a project scope like a camera lens. A wide-angle lens (broad scope) captures everything but with less detail. A zoom lens (narrow scope) captures one thing sharply. The best portfolio projects use a zoom lens: they pick one valuable feature set and execute it exceptionally well rather than building ten features poorly. Scope is the art of choosing what not to build.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph ProjectScopingMatrix["Capstone Project Scoping Framework"]
+        DOMAIN["Realistic Problem Domain (Distributed Cache, Event-Driven Ingestion, Financial Ledger)"]
+        MVP["Strict MVP Boundary (1 Core User Flow + Production Architecture)"]
+        HARDENING["Production Hardening (Graceful Shutdown, Concurrency Controls, Telemetry)"]
+        DOCS["Transparent Tradeoff Postmortem (What failed? What would you do differently?)"]
+
+        DOMAIN --> MVP --> HARDENING --> DOCS
+    end
+```
+
 ## Core idea
 
 Project scoping breaks down into four dimensions:

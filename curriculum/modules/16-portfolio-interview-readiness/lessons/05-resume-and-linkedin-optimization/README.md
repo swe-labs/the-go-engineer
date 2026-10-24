@@ -12,6 +12,25 @@ Your resume and LinkedIn profile are the first filter in every job application. 
 
 Think of your resume as a search engine optimization (SEO) problem. Recruiters and ATS systems search for specific terms: "Go", "Kubernetes", "gRPC", "distributed systems". Your resume is a web page that needs to rank for these keywords. But unlike SEO, keyword stuffing is penalized — every keyword must appear in the context of a real achievement. The keyword analyzer measures your coverage while the bullet-point structure ensures the keywords are backed by evidence.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph BulletFormula["Google XYZ Bullet Formula"]
+        XYZ["Accomplished [X], as measured by [Y], by doing [Z]"]
+    end
+
+    subgraph WeakExample["Weak Resume Bullet"]
+        W["Wrote microservices in Go and used PostgreSQL"]
+    end
+
+    subgraph StrongExample["Strong Impact Bullet"]
+        S["Engineered high-throughput event processing pipeline in Go, reducing P99 latency by 45% (from 180ms to 99ms) and handling 15,000 req/sec via bounded worker pools and connection pooling."]
+    end
+
+    XYZ --> StrongExample
+```
+
 ## Core idea
 
 A resume for a Go engineering role breaks down into four keyword categories:

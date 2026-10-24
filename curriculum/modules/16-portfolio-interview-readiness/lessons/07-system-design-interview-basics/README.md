@@ -12,6 +12,21 @@ System design interviews are the highest-weighted round for senior engineering r
 
 Think of a system design interview as a collaborative whiteboarding session with a senior engineer who is your future teammate. Your goal is not to design the perfect system in 45 minutes — it is to demonstrate how you think about distributed systems problems. The interviewer wants to see that you can scope the problem, make reasonable assumptions, identify bottlenecks, and iterate on feedback. It is a conversation, not a presentation.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph SystemDesign45Min["45-Minute System Design Cadence"]
+        T1["0-5m: Scoping & Non-Functional Requirements"]
+        T2["5-15m: High-Level Architecture & API Design"]
+        T3["15-30m: Deep Dive (Data Model, Concurrency, Caching)"]
+        T4["30-40m: Bottlenecks, Failures & Scaling"]
+        T5["40-45m: Wrap-Up & Tradeoff Summary"]
+
+        T1 --> T2 --> T3 --> T4 --> T5
+    end
+```
+
 ## Core idea
 
 The system design interview follows a predictable four-phase structure:

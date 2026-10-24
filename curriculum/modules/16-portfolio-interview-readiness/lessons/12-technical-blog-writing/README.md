@@ -12,6 +12,21 @@ Technical blogging is one of the highest-leverage activities for a Go engineer. 
 
 A technical blog post is a teaching conversation with a motivated but uninformed reader. Your job is to take them from confusion to clarity in 5-10 minutes. The post has three phases: hook (why should I care?), teach (here is how it works), and land (here is what you can do now). Each section serves one of these phases. Code is not decoration — it is the primary teaching mechanism. Every code block should compile, demonstrate one idea, and be referenced by the surrounding text.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TechnicalArticleFunnel["High-Impact Engineering Blog Post Structure"]
+        HOOK["1. The Hook: Real production incident or difficult technical bug"]
+        MENTAL["2. The Concept: Clear mental model with architectural diagram"]
+        CODE["3. The Solution: Minimal reproducible Go code snippets"]
+        BENCH["4. The Evidence: Benchmark results and telemetry graphs"]
+        SUMMARY["5. Summary: Key rules of thumb for fellow engineers"]
+
+        HOOK --> MENTAL --> CODE --> BENCH --> SUMMARY
+    end
+```
+
 ## Core idea
 
 A technical blog post follows a standard structure optimized for developer reading patterns:
