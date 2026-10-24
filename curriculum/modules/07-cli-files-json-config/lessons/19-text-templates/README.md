@@ -12,6 +12,22 @@ Every application generates text: emails, reports, config files, code generation
 
 Think of a template as a mad libs form with blanks to fill in. The template text contains literal parts (the structure) and action markers (`{{...}}`) that are evaluated to insert data. The data (a Go struct, map, or slice) is the "context" passed to the template. Walking through the template, Go executes each action and writes the result to the output writer, leaving the literal parts unchanged.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    TPL["Template Text:
+"Hello {{.Name}}, your invoice #{{.InvoiceID}} is ready!""]
+    DATA["Context Struct:
+InvoiceData{Name: "Alice", InvoiceID: 1042}"]
+    EXEC["tmpl.Execute(writer, DATA)"]
+
+    TPL --> EXEC
+    DATA --> EXEC
+    EXEC --> OUT["Rendered Text:
+"Hello Alice, your invoice #1042 is ready!""]
+```
+
 ## Core idea
 
 `text/template` parses template text and executes it with a data context. Key syntax:

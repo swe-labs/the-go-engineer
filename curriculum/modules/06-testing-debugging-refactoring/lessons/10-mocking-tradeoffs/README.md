@@ -19,6 +19,26 @@ Test → mock.AssertCalled(t, "SendEmail", "alice@...", "Welcome!")
 
 The tradeoff: mocks verify *process* (how code was called), while fakes verify *state* (what the result was). Process verification is more precise but more brittle.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ExternalBoundary["Target for Mocks / Fakes: External I/O Boundary"]
+        STRIPE["Payment Gateway API (Stripe / PayPal)"]
+        SMS["Third-Party SMS Gateway (Twilio)"]
+        S3["Object Storage (AWS S3)"]
+    end
+
+    subgraph InternalDomain["DO NOT Mock: Internal Pure Domain Logic"]
+        CALC["Tax & Pricing Calculation Engine"]
+        VALID["Request Validation Rules"]
+        STATE["Order State Machine Transitions"]
+    end
+
+    NOTE["Mock at network and persistence boundaries; test internal domain logic concretely!"]
+    ExternalBoundary -.-> NOTE
+```
+
 ## Core idea
 
 Mocking is appropriate when:

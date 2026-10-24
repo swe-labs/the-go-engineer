@@ -19,6 +19,26 @@ TestAPI              ← parent test
 └── TestAPI/DELETE   ← subtest
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    ROOT["=== RUN   TestSplit"]
+    
+    subgraph Subtests["Hierarchical Subtest Execution"]
+        S1["=== RUN   TestSplit/comma_separated
+--- PASS: TestSplit/comma_separated (0.00s)"]
+        S2["=== RUN   TestSplit/empty_string
+--- PASS: TestSplit/empty_string (0.00s)"]
+        S3["=== RUN   TestSplit/trailing_delimiter
+--- PASS: TestSplit/trailing_delimiter (0.00s)"]
+    end
+
+    SUMMARY["--- PASS: TestSplit (0.01s)"]
+
+    ROOT --> Subtests --> SUMMARY
+```
+
 ## Core idea
 
 `t.Run` creates a subtest:

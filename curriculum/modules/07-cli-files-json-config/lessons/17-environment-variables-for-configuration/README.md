@@ -12,6 +12,18 @@ Environment variables are the standard way to inject configuration into deployed
 
 Think of environment variables as the operating system's bulletin board. Any program can post a notice (set a variable) and any child process can read it. Your Go application is a child of the shell (or container runtime), so it inherits the parent's environment block — a set of `KEY=VALUE` string pairs. Reading `os.Getenv("PORT")` is like walking to the bulletin board and looking for a notice labeled "PORT".
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph EnvLookup["os.LookupEnv vs os.Getenv"]
+        LOOKUP["val, ok := os.LookupEnv("PORT")"]
+        LOOKUP --> CHECK{"ok == true?"}
+        CHECK -->|Yes| USE["Use provided environment value (even if empty string!)"]
+        CHECK -->|No| DEFAULT["Key not set in environment -> Apply sensible default (8080)"]
+    end
+```
+
 ## Core idea
 
 The `os` package provides three functions for environment access:

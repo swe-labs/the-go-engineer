@@ -12,6 +12,14 @@ Every HTTP response, log line, and file write that produces JSON is an encoding 
 
 Think of `json.Marshal` as taking a photo and printing it; the photo exists fully in your hand before you hand it over. `json.NewEncoder` is a live TV feed — the encoder starts sending bytes to the writer immediately as it encodes, without storing the complete picture in memory. The encoder wraps a writer and writes JSON tokens (`{`, `"key"`, `:`, `value`, `,`, `}`) directly as it traverses the Go value.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    DATA["Go Data Object (Order)"] --> ENC["json.NewEncoder(httpResponseWriter)"]
+    ENC -->|Streams serialized JSON chunks directly| HTTP["HTTP Socket Stream (Zero intermediate memory buffer!)"]
+```
+
 ## Core idea
 
 `json.NewEncoder(w io.Writer) *json.Encoder` creates an encoder that writes JSON to `w`. Call `enc.Encode(v any) error` to encode a single value.

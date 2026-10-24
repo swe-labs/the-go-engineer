@@ -19,6 +19,23 @@ t.Cleanup(func() { ... }) ← registers undo
 // test ends → cleanup runs automatically
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TestExecution["Test Lifecycle with t.Cleanup"]
+        START["Test starts running"]
+        RES["Acquire temporary resource: db := setupTestDB(t)"]
+        REG["Register cleanup hook:
+t.Cleanup(func() { db.Close(); os.Remove(dbPath) })"]
+        TEST["Run test assertions & business operations"]
+        END["Test finishes (PASS, FAIL, or t.Fatal)"]
+        CLEAN["t.Cleanup function runs GUARANTEED (even on fatal failure!)"]
+
+        START --> RES --> REG --> TEST --> END --> CLEAN
+    end
+```
+
 ## Core idea
 
 `t.Cleanup` registers a function to be called when the test and all its subtests complete:

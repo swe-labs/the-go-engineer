@@ -18,6 +18,25 @@ table → iterate rows → run test → report failure
 
 The data structure describes *what* to test; the loop describes *how* to test it.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TableDef["Table of Test Cases: []struct{...}"]
+        TC1["Case 1: "valid positive numbers" {a: 2, b: 3, want: 5}"]
+        TC2["Case 2: "negative operands"       {a: -1, b: -4, want: -5}"]
+        TC3["Case 3: "zero boundary"          {a: 0, b: 0, want: 0}"]
+    end
+
+    LOOP["for _, tc := range tests"]
+
+    TableDef --> LOOP
+    LOOP --> EXEC["t.Run(tc.name, func(t *testing.T) {
+    got := Add(tc.a, tc.b)
+    if got != tc.want { t.Errorf(...) }
+})"]
+```
+
 ## Core idea
 
 A table-driven test uses a slice of anonymous structs to define test cases:

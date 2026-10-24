@@ -18,6 +18,21 @@ os.Args: mytool greet -name=Alice
          prog   cmd   cmd-specific flags
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    CLI["Command: ./tool build --minify --output bundle.js"] --> DISPATCH{"Inspect os.Args[1]"}
+
+    DISPATCH -->|build| FS1["buildCmd := flag.NewFlagSet("build", flag.ExitOnError)
+minify := buildCmd.Bool("minify", false, "...")
+buildCmd.Parse(os.Args[2:])"]
+    DISPATCH -->|test| FS2["testCmd := flag.NewFlagSet("test", flag.ExitOnError)
+race := testCmd.Bool("race", false, "...")
+testCmd.Parse(os.Args[2:])"]
+    DISPATCH -->|Unknown| USAGE["Print command usage synopsis and exit"]
+```
+
 ## Core idea
 
 The subcommand pattern has three parts:

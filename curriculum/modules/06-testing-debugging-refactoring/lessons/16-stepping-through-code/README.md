@@ -17,6 +17,25 @@ Think of the program counter (PC) as a cursor on a line of source code. Stepping
 - **`stepout` (so)**: Finish the current function and stop at the line after the call site in the caller.
 - **`continue` (c)**: Resume full-speed execution until the next breakpoint or program exit.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph NavigationCommands["Delve Execution Stepping Commands"]
+        NEXT["next (n):
+Step to next line in current function
+(Steps OVER function calls)"]
+        STEP["step (s):
+Step into function call on current line
+(Steps INSIDE callee)"]
+        STEPOUT["stepout (so):
+Execute remainder of current function
+(Steps OUT to caller)"]
+        CONT["continue (c):
+Resume full execution until next breakpoint"]
+    end
+```
+
 ## Core idea
 
 | Command | Short | Where you land |

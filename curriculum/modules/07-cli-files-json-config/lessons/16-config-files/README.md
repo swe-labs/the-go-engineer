@@ -12,6 +12,22 @@ Every non-trivial application needs configuration: database URLs, ports, log lev
 
 Think of your Go struct as a control panel with labeled dials and switches. A config file is a set of instructions for setting each control. Loading config is like having an operator read the instructions and adjust the panel accordingly. Multiple config files are like having a stack of instruction sheets — newer sheets override older ones for the same control.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ConfigLayers["Hierarchical Configuration Precedence"]
+        C1["1. Hardcoded In-Code Defaults (Lowest priority)"]
+        C2["2. Configuration File: config.yaml / config.json"]
+        C3["3. Environment Variables (e.g. PORT=9000, DB_PASS)"]
+        C4["4. Command-Line CLI Flags (e.g. --port 8080) (Highest priority)"]
+
+        C1 --> C2 --> C3 --> C4
+    end
+
+    C4 --> ACTIVE["Final Merged AppConfig in Memory"]
+```
+
 ## Core idea
 
 A config struct holds all configurable parameters for an application. A loading function reads a file (JSON, YAML, TOML), unmarshals its contents into the struct, and returns the populated config.

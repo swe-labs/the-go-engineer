@@ -17,6 +17,25 @@ Goroutine 1          Goroutine 2
    read x  ─────────  write x   ← RACE! (no synchronisation)
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph RaceDetector["Go Race Detector: go test -race"]
+        G1["Goroutine 1: write to shared var counter"]
+        G2["Goroutine 2: read from shared var counter"]
+        TSAN["ThreadSanitizer Shadow Memory Engine:
+Monitors memory addresses across threads"]
+        REPORT["WARNING: DATA RACE
+Write at 0x... by goroutine 1
+Previous Read at 0x... by goroutine 2"]
+
+        G1 --> TSAN
+        G2 --> TSAN
+        TSAN -->|No sync (mutex/channel)| REPORT
+    end
+```
+
 ## Core idea
 
 Enable the race detector with the `-race` flag:

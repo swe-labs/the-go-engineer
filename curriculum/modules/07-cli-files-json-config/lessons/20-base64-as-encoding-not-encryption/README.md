@@ -12,6 +12,23 @@ Base64 is everywhere: JWT tokens, JSON binary fields, email attachments (MIME), 
 
 Base64 is a translation system between binary (bytes) and text (ASCII characters). It takes any byte sequence and represents it using only 64 safe characters: A-Z, a-z, 0-9, +, and /. Think of it like Morse code for binary: Morse maps letters to dots/dashes; base64 maps bytes to characters. Both are encoding schemes that anyone can reverse. Encryption is fundamentally different — it uses a key to transform data so that only someone with the key can reverse it.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Encoding["Base64 Encoding (3 bytes = 24 bits -> four 6-bit ASCII chars)"]
+        RAW["Binary Data: [0x4D, 0x61, 0x6E] ('Man')"]
+        BITS["24 bits: 01001101 01100001 01101110"]
+        SPLIT["Four 6-bit chunks: [010011] [010110] [000101] [101110]"]
+        B64["ASCII Output: 'TWFu' (Easily reversed by anyone!)"]
+
+        RAW --> BITS --> SPLIT --> B64
+    end
+
+    NOTE["Base64 is a data-transport format, NEVER a security mechanism!"]
+    Encoding -.-> NOTE
+```
+
 ## Core idea
 
 Base64 encodes 3 bytes of binary data into 4 ASCII characters. Each group of 3 bytes (24 bits) is split into four 6-bit values, and each 6-bit value (0-63) maps to a character in the base64 alphabet.

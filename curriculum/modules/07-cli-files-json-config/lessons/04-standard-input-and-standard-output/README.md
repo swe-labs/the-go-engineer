@@ -17,6 +17,20 @@ echo "hello" | myprogram | go run transform.go
      stdin          stdout       stdin
 ```
 
+## Visual model
+
+```mermaid
+flowchart LR
+    STDIN["os.Stdin (File Descriptor 0)
+Standard Input stream"] --> PROC["Go Process (io.Copy / fmt.Scan)"]
+    PROC --> STDOUT["os.Stdout (File Descriptor 1)
+Standard Output (Normal payload)"]
+    PROC --> STDERR["os.Stderr (File Descriptor 2)
+Standard Error (Diagnostics & logs)"]
+
+    STDOUT --> PIPE["Pipe: | next-command"]
+```
+
 ## Core idea
 
 - `os.Stdin` is an `*os.File` that implements `io.Reader`. Read from it with `bufio.Scanner` for line-by-line processing.

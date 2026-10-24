@@ -12,6 +12,16 @@ A failing test gives you a failure message and a line number. But the failure me
 
 `dlv test` works like `dlv debug` but for the test binary. The test runner is a Go program that discovers and runs test functions. You set breakpoints inside specific test functions or helper functions they call. When a test function runs and hits a breakpoint, you inspect state, step through assertions, and watch the test's data flow — exactly like debugging a regular program.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    CMD["dlv test ./pkg/billing -- -test.run TestChargeCard_Declined"] --> TARGET["Delve builds test binary with DWARF symbols
+Attaches immediately before running test runner"]
+    TARGET --> BP["Automatically pause at break billing_test.go:34"]
+    BP --> DEBUG["Inspect got vs want state step-by-step"]
+```
+
 ## Core idea
 
 | Command | Effect |

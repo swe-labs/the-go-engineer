@@ -12,6 +12,22 @@ Setting breakpoints and stepping through code lets you navigate the program. But
 
 Each breakpoint hit freezes the program in a specific stack frame. You can query this frame like a snapshot: "what is the value of `x`?", "what are all the local variables?", "what type is this interface value?". The debugger reads the process memory directly, so the values are authoritative — they are not logs from a previous run or approximations.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph DelveInspection["Delve Variable Inspection Commands"]
+        P["print (p) user:
+Display value and struct fields"]
+        LOC["locals:
+Print all local variables in active stack frame"]
+        ARGS["args:
+Print function input arguments"]
+        WHAT["whatis user.CreatedAt:
+Display concrete type definition"]
+    end
+```
+
 ## Core idea
 
 Delve variable inspection commands:

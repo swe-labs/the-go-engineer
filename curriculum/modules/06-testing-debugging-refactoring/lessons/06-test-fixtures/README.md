@@ -19,6 +19,21 @@ testdata/            ← shared data directory
 └── schema.sql        ← database schema
 ```
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph FixtureSetup["Test Fixture Lifecycle"]
+        DIR["dir := t.TempDir()
+(Isolated ephemeral OS directory)"]
+        SEED["Write testdata payload: users.json, schema.sql"]
+        RUN["Execute system under test pointing to dir"]
+        TEARDOWN["Go test harness automatically purges t.TempDir at test completion"]
+
+        DIR --> SEED --> RUN --> TEARDOWN
+    end
+```
+
 ## Core idea
 
 Go treats the `testdata` directory specially: `go test` changes the working directory to the package directory, so tests can reference `testdata/` with relative paths. Any file or directory named `testdata` at the package root is ignored by the build — it is never compiled into the test binary.

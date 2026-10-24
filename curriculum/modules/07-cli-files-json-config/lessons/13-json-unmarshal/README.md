@@ -12,6 +12,16 @@ Reading JSON is the mirror of writing it — every API client, config loader, an
 
 Unmarshaling is like filling a prefabricated form. You have a Go struct (the form with labeled slots) and a JSON blob (the data to fill in). Go reads the JSON key by key, matches each key to a struct field tag (or name), converts the JSON value to the Go type, and stores it. If a key has no matching slot, it's discarded by default. If a value can't be converted to the slot's type, the whole operation fails.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    RAW["Raw JSON Bytes: '{"name":"Bob","age":28}'"] --> PARSER["json.Unmarshal(data, &user)"]
+    PARSER --> TYPECHECK["Verify JSON types match target Go fields"]
+    TYPECHECK --> TARGET["User struct populated on Stack / Heap:
+User{Name: "Bob", Age: 28}"]
+```
+
 ## Core idea
 
 `json.Unmarshal(data []byte, v any) error` parses JSON `data` and stores the result in the value pointed to by `v`. The target must be a pointer (to a struct, slice, map, or concrete type).

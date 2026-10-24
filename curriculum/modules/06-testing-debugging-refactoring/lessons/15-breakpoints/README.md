@@ -17,6 +17,23 @@ A breakpoint is a bookmark that says "stop here". When execution reaches a bookm
 
 Think of breakpoints as selective logging without having to edit, recompile, and redeploy code.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as Developer
+    participant DLV as Delve Debugger
+    participant CPU as OS Process & CPU
+
+    Dev->>DLV: break main.go:28
+    DLV->>CPU: Insert INT 3 (0xCC) trap instruction at memory address
+    Dev->>DLV: continue
+    CPU->>CPU: Execute instructions until INT 3 trap encountered
+    CPU-->>DLV: SIGTRAP signal intercepted! Process halted.
+    DLV-->>Dev: Breakpoint 1 hit at main.go:28
+```
+
 ## Core idea
 
 Delve breakpoint commands:

@@ -16,6 +16,28 @@ A fuzz test is like a robot that bangs on your function with millions of random 
 seed inputs → [mutate] → random inputs → [your function] → crash? → saved to corpus
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph FuzzHarness["Go Fuzzing Architecture (testing.F)"]
+        SEED["f.Add(seed1, seed2)
+(Seed corpus of known valid inputs)"]
+        ENGINE["Go Fuzzing Mutation Engine:
+Mutates bit patterns, inserts edge runes, nil bytes"]
+        RUN["f.Fuzz(func(t *testing.T, data []byte) {
+    ParsePayload(data)
+})"]
+        CRASH{"Did code panic or violate invariant?"}
+        CRASH_REPORT["Saved to testdata/fuzz/FuzzParse/crash-hash
+(Deterministic reproducible regression test!)"]
+
+        SEED --> ENGINE --> RUN --> CRASH
+        CRASH -->|Yes| CRASH_REPORT
+        CRASH -->|No| ENGINE
+    end
+```
+
 ## Core idea
 
 A fuzz test in Go has this structure:

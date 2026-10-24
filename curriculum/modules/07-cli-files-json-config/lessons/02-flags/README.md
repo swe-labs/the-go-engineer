@@ -18,6 +18,23 @@ $ mytool -name=Alice -count=3 extra.txt
          flags                  flag.Args()
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph FlagParsing["Go flag Package Flow"]
+        DEF["1. Define Flags:
+port := flag.Int("port", 8080, "server port")
+verbose := flag.Bool("v", false, "verbose output")"]
+        PARSE["2. flag.Parse():
+Scans os.Args[1:], extracts known flags, binds values to pointers"]
+        REMAIN["3. flag.Args():
+Slice of remaining non-flag positional arguments"]
+
+        DEF --> PARSE --> REMAIN
+    end
+```
+
 ## Core idea
 
 The `flag` package works in three phases:

@@ -21,6 +21,23 @@ Actual output  ──→  Compare  ←──  testdata/*.golden
                     -update flag → overwrite golden file
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph GoldenFlow["Golden File Snapshot Verification"]
+        RUN["Run function generating complex output (e.g. JSON/HTML/CLI table)"]
+        FLAG{"Is -update flag set?
+(go test -update)"}
+
+        FLAG -->|Yes| WRITE["Write fresh output to testdata/output.golden"]
+        FLAG -->|No| READ["Read expected bytes from testdata/output.golden"]
+        READ --> DIFF["Compare actual output bytes with golden file"]
+        DIFF -->|Match| PASS["Test PASS"]
+        DIFF -->|Mismatch| FAIL["Test FAIL with unified text diff"]
+    end
+```
+
 ## Core idea
 
 The golden file pattern consists of:

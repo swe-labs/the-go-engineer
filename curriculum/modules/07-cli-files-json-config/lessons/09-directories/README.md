@@ -20,6 +20,19 @@ Directories are containers that map names to files or subdirectories. The filesy
 README.md     main.go
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    START["filepath.WalkDir(root, walkFn)"] --> ENTRY["Visit Entry: DirEntry (name, isDir, type)"]
+    ENTRY --> CHECK{"isDir == true?"}
+    CHECK -->|Yes| DECIDE{"Skip directory?"}
+    DECIDE -->|Yes| SKIP["return filepath.SkipDir"]
+    DECIDE -->|No| SUB["Recurse into child directory"]
+    CHECK -->|No| FILE["Process file entry"]
+    SUB --> ENTRY
+```
+
 ## Core idea
 
 | Operation | Function | Behavior |

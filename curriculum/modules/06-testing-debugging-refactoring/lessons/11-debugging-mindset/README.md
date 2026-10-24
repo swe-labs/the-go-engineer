@@ -25,6 +25,24 @@ Symptom → Hypothesis → Experiment → Result
                   └── Narrow ──────────┘
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    OBS["1. Observe & Reproduce:
+Isolate bug into a failing, minimal test case"]
+    HYP["2. Form Hypothesis:
+Explain mechanically why state deviated from invariant"]
+    INSPECT["3. Instrument & Inspect:
+Use delve, logs, or traces to verify variables at breakpoint"]
+    FIX["4. Minimal Root-Cause Fix:
+Correct invariant violation (no symptom masking)"]
+    VERIFY["5. Re-run Automated Test:
+Failing test now turns GREEN"]
+
+    OBS --> HYP --> INSPECT --> FIX --> VERIFY
+```
+
 ## Core idea
 
 Systematic debugging relies on a few core techniques:

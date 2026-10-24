@@ -17,6 +17,22 @@ p []byte --> Writer --> [file | buffer | hash | network]
            Write(p)
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph WriterInterface["io.Writer Protocol"]
+        DEF["type Writer interface {
+    Write(p []byte) (n int, err error)
+}"]
+        PAYLOAD["data := []byte("log entry payload\n")"]
+        PAYLOAD --> WRITE["n, err := w.Write(data)"]
+        WRITE --> VERIFY{"n == len(data) && err == nil?"}
+        VERIFY -->|Yes| SUCCESS["All bytes successfully accepted by sink"]
+        VERIFY -->|No| ERR["Short write error / I/O failure"]
+    end
+```
+
 ## Core idea
 
 The `io.Writer` interface is one method:

@@ -18,6 +18,25 @@ Refactoring is a sequence of behaviour-preserving transformations. Each transfor
                                     [undo or fix]
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SafeRefactoring["Refactoring Feedback Cycle"]
+        GREEN1["1. Existing Test Suite is GREEN"]
+        CHANGE["2. Make small, isolated architectural refactoring change"]
+        TEST["3. Run tests: go test -v ./..."]
+        CHECK{"Tests Still Green?"}
+        REVERT["Revert or fix immediately
+(Never write new features during refactoring!)"]
+        COMMIT["4. Commit clean refactoring step in Git"]
+
+        GREEN1 --> CHANGE --> TEST --> CHECK
+        CHECK -->|No| REVERT --> CHANGE
+        CHECK -->|Yes| COMMIT --> GREEN1
+    end
+```
+
 ## Core idea
 
 Safe refactoring relies on three pillars:

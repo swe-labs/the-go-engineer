@@ -17,6 +17,22 @@ os.CreateTemp("", "prefix-*")  -->  /tmp/prefix-123456789
 os.MkdirTemp("", "build-*")    -->  /tmp/build-987654321/
 ```
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Application
+    participant OS as OS Filesystem
+
+    App->>OS: tmp, err := os.CreateTemp("", "cache-*.tmp")
+    Note over App: Created with secure 0600 permissions
+    App->>App: defer os.Remove(tmp.Name())
+    App->>OS: tmp.Write(data)
+    App->>OS: tmp.Close()
+    App->>OS: os.Rename(tmp.Name(), "target.json") (Atomic replacement!)
+```
+
 ## Core idea
 
 - `os.CreateTemp(dir, pattern) (*os.File, error)` — creates a temp file in `dir` (or `os.TempDir()` if `dir == ""`). The `pattern` may contain `*` which is replaced by random characters.

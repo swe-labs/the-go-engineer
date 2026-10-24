@@ -22,6 +22,30 @@ fstest.MapFS   --> | fs.FS | --> files defined in-memory
                   +-------+
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph FSInterface["io/fs.FS Abstraction Layer"]
+        FS["type FS interface {
+    Open(name string) (File, error)
+}"]
+    end
+
+    subgraph Providers["Concrete Implementations"]
+        EMBED["embed.FS
+(Compiled directly inside binary)"]
+        OS_DIR["os.DirFS("./static")
+(Real disk directory)"]
+        ZIP["zip.Reader
+(Read-only archive)"]
+    end
+
+    FS --- EMBED
+    FS --- OS_DIR
+    FS --- ZIP
+```
+
 ## Core idea
 
 The `fs.FS` interface:

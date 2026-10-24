@@ -12,6 +12,34 @@ JSON is the universal wire format for web APIs, configuration files, and data in
 
 Think of JSON marshaling as a camera that photographs Go values. The camera sees only exported fields (capital letter = visible). Struct tags are like sticky notes you put on each field telling the camera what name to use and how to treat special cases like empty values or string conversion. `json.Marshal` takes the picture into memory; `json.MarshalIndent` takes the same picture but arranges it neatly for human viewing.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph GoStruct["In-Memory Go Struct"]
+        S["User{
+  Name: "Alice",
+  Email: "alice@example.com",
+  Password: "secret"
+}"]
+    end
+
+    subgraph Tags["Struct Field Tags"]
+        T["Name string `json:"name"`
+Email string `json:"email"`
+Password string `json:"-"`"]
+    end
+
+    subgraph Output["Output JSON Payload"]
+        JSON["{
+  "name": "Alice",
+  "email": "alice@example.com"
+}"]
+    end
+
+    GoStruct --> Tags -->|json.Marshal| Output
+```
+
 ## Core idea
 
 `json.Marshal(v any) ([]byte, error)` converts a Go value into a JSON byte slice using reflection. It traverses the value at runtime, reads struct tags, and produces the corresponding JSON text.

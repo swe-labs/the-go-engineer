@@ -12,6 +12,23 @@ Without tests, every change to a codebase is a leap of faith. You modify one fun
 
 Imagine a safety net below a tightrope walker. The net does not help the walker cross, but it makes the fall safe. Tests are the same: they don't write the code, but they make mistakes safe. When you refactor, the test suite catches what you accidentally broke. When a new teammate changes unfamiliar code, the tests tell them instantly whether their change is correct. The test suite is an executable specification — it documents what the code is supposed to do in a form the machine can verify.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph WithoutTests["Without Automated Tests"]
+        C1["Code Change"] --> D1["Manual Click Testing"]
+        D1 --> P1["Missed Edge Case!"]
+        P1 --> F1["Production Incident & Outage"]
+    end
+
+    subgraph WithTests["With Automated Testing Harness"]
+        C2["Code Change"] --> T2["go test ./... (Runs in 1.2s)"]
+        T2 -->|Assertion Fails| R2["Instant Developer Feedback & Fix"]
+        T2 -->|All Pass| D2["Confident, Safe Production Release"]
+    end
+```
+
 ## Core idea
 
 Testing exists to answer one question: *does my code work as intended?* This breaks down into several concrete motivations:

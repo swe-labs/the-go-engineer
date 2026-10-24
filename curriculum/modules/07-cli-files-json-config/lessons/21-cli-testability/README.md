@@ -12,6 +12,30 @@ CLI tools are the backbone of DevOps, CI/CD, and developer tooling. But CLI apps
 
 Think of a CLI tool as a function: `func run(input io.Reader, output io.Writer, args []string) exitCode`. By pushing side effects (printing, reading, exiting) to explicit parameters, the core logic becomes testable. The `main()` function is just a thin wrapper that wires real `os.Stdin`, `os.Stdout`, and `os.Args` into `run()`.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TestableCLI["Decoupled CLI Architecture"]
+        MAIN["func main() {
+    os.Exit(run(os.Args, os.Stdout, os.Stderr))
+}"]
+
+        RUN["func run(args []string, stdout, stderr io.Writer) int"]
+    end
+
+    subgraph Tests["Unit Testing CLI without Child Process Exec"]
+        T1["stdout := &bytes.Buffer{}
+stderr := &bytes.Buffer{}
+exitCode := run([]string{"app", "--version"}, stdout, stderr)"]
+        ASSERT["Assert: exitCode == 0 && stdout.Contains("v1.0.0")"]
+
+        T1 --> ASSERT
+    end
+
+    RUN --- Tests
+```
+
 ## Core idea
 
 Three key patterns make CLI apps testable:

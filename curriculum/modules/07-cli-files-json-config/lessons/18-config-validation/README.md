@@ -12,6 +12,21 @@ A misconfigured application is a time bomb. It may start, appear healthy, then c
 
 Config validation is like a pre-flight checklist for an airplane. Before takeoff, the pilot verifies fuel level, flaps, instruments, and hydraulics. Each check passes or fails. If any check fails, the plane stays grounded. Your config validation function is the same: before the HTTP server starts, verify that required fields are present, ports are in range, URLs are parseable, and timeouts are positive.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    LOAD["Load & Merge Config from Env / File"] --> V1{"Port between 1 and 65535?"}
+    V1 -->|No| F1["FATAL: Invalid port"]
+    V1 -->|Yes| V2{"DatabaseURL non-empty?"}
+    V2 -->|No| F2["FATAL: Missing DATABASE_URL"]
+    V2 -->|Yes| V3{"JWTSecret >= 32 bytes?"}
+    V3 -->|No| F3["FATAL: Insecure JWT secret"]
+    V3 -->|Yes| START["All Invariants Validated: Boot Server"]
+
+    style START stroke:#28a745,stroke-width:2px
+```
+
 ## Core idea
 
 Validation is a function that takes a config struct and returns an error (or multiple errors). It checks:

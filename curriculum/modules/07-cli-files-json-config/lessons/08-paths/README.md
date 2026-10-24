@@ -18,6 +18,22 @@ A path is a sequence of directory names and a filename separated by `os.PathSepa
 "a", "b", "c"          -->  Join  --> "a/b/c"
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph CrossPlatform["path/filepath Portability"]
+        IN["filepath.Join("users", "config", "settings.json")"]
+        LINUX["Linux / macOS Target:
+"users/config/settings.json" (Slash: /)"]
+        WIN["Windows Target:
+"users\config\settings.json" (Backslash: \)"]
+
+        IN --> LINUX
+        IN --> WIN
+    end
+```
+
 ## Core idea
 
 Seven essential `filepath` functions:

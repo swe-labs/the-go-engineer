@@ -18,6 +18,22 @@ Test:         func TestAdd(t *testing.T)
 Contract:     Add(2, 3) == 5
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph UnitTestFlow["AAA Unit Testing Anatomy"]
+        ARRANGE["1. Arrange:
+Setup test inputs, dependencies, expected output"]
+        ACT["2. Act:
+got := CalculateDiscount(100.0, 0.20)"]
+        ASSERT["3. Assert:
+if got != want { t.Errorf("got %v, want %v", got, want) }"]
+
+        ARRANGE --> ACT --> ASSERT
+    end
+```
+
 ## Core idea
 
 The `testing` package provides the framework for automated tests. Every test function must follow the pattern:

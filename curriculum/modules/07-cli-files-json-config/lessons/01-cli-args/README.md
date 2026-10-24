@@ -19,6 +19,29 @@ shell:  go run main.go Alice 30
         os.Args[0]        os.Args[1:]
 ```
 
+## Visual model
+
+```mermaid
+flowchart LR
+    CLI["Terminal: ./cli-tool deploy --env prod -v app.tar.gz"] --> ARGS["os.Args Slice ([]string)"]
+    
+    subgraph SliceElements["os.Args Elements"]
+        A0["[0]: "./cli-tool" (Program binary name)"]
+        A1["[1]: "deploy" (1st positional argument)"]
+        A2["[2]: "--env" (Option flag)"]
+        A3["[3]: "prod" (Flag value)"]
+        A4["[4]: "-v" (Boolean flag)"]
+        A5["[5]: "app.tar.gz" (Target argument)"]
+    end
+
+    ARGS --- A0
+    ARGS --- A1
+    ARGS --- A2
+    ARGS --- A3
+    ARGS --- A4
+    ARGS --- A5
+```
+
 ## Core idea
 
 `os.Args` is a `[]string` (a slice of strings) declared in the `os` package. It is populated by the Go runtime before `main()` executes. The length `len(os.Args)` tells you how many tokens were on the command line.

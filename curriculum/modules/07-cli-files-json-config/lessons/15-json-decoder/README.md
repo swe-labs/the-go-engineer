@@ -12,6 +12,15 @@ Real-world JSON payloads can be gigabytes — logs, data exports, API responses.
 
 `json.Unmarshal` is like photocopying an entire book, then reading it. `json.NewDecoder` is like reading the book page by page as it feeds through a scanner — at any moment, only the current page is in memory. The decoder maintains a cursor into the input stream and produces tokens (`Delim`, `String`, `Number`, `Bool`, `nil`) one at a time, or decodes directly into a Go value with `Decode`.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    HTTP["HTTP Request Body Stream
+(r.Body)"] --> DEC["json.NewDecoder(r.Body)"]
+    DEC -->|Streams & decodes JSON tokens sequentially| STRUCT["Go Struct Destination (Payload)"]
+```
+
 ## Core idea
 
 `json.NewDecoder(r io.Reader) *json.Decoder` creates a decoder that reads from `r`. It provides two modes:

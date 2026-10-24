@@ -12,6 +12,24 @@ Print statement debugging (`fmt.Println`) works for simple programs, but it brea
 
 Think of Delve as a remote control for your program. The debugger starts your program in a paused state. You place markers (breakpoints) where you want to pause. When the program hits a marker, it stops, and you can inspect the current state, then tell it to continue (run to the next marker) or step forward one line at a time. Delve controls one goroutine at a time, so you can follow exactly what that goroutine is doing.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Architecture["Delve Debugger Architecture"]
+        DEV["Developer Terminal:
+dlv debug ./cmd/app"]
+        DLV["Delve Core Engine (dlv daemon)"]
+        OS_API["Operating System Debugging API
+(ptrace on Linux, Mach API on macOS)"]
+        BIN["Target Go Executable Process (Compiled with DWARF debug info)"]
+
+        DEV <--> DLV
+        DLV <--> OS_API
+        OS_API <--> BIN
+    end
+```
+
 ## Core idea
 
 Delve is Go's official debugger. It understands Go's runtime, goroutines, and data structures natively. Key commands:

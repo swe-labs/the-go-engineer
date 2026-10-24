@@ -19,6 +19,22 @@ data --> | Reader | --> p []byte
          (n int, err error)
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ReaderInterface["io.Reader Protocol"]
+        DEF["type Reader interface {
+    Read(p []byte) (n int, err error)
+}"]
+        CALL["Caller allocates slice: buf := make([]byte, 1024)"]
+        CALL --> EXEC["n, err := r.Read(buf)"]
+        EXEC --> CHECK{"err == io.EOF ?"}
+        CHECK -->|Yes| DONE["Stream ended cleanly; process remaining n bytes"]
+        CHECK -->|No| MORE["n bytes read into buf; loop for next chunk"]
+    end
+```
+
 ## Core idea
 
 The `io.Reader` interface is one method:

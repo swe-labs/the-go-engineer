@@ -19,6 +19,16 @@ A panic is an interrupt that unwinds the stack until a `recover()` is found — 
 | `send on closed channel` | Sending to a channel that has been closed |
 | `fatal error: all goroutines are asleep - deadlock!` | Every goroutine is blocked waiting on a channel, mutex, or select |
 
+## Visual model
+
+```mermaid
+flowchart LR
+    CRASH["Unexpected Runtime Panic"] --> DUMP["Stderr Stack Trace Emitted"]
+    DUMP --> LOGS["Captured by Observability Pipeline (CloudWatch / Grafana Loki)"]
+    LOGS --> REPRO["Write reproducing regression test (TestFailingOrderProcessing)"]
+    REPRO --> PATCH["Add defensive guard check or fix pointer lifecycle"]
+```
+
 ## Core idea
 
 Every panic trace tells you **exactly** what went wrong and **exactly** where. The skill is not guessing — it is reading the trace with precision.

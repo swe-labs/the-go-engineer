@@ -17,6 +17,21 @@ path --> [file bytes]     os.ReadFile(path)  --> []byte
        [file bytes]       os.WriteFile(path, data, perm)
 ```
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Go Application
+    participant OS as OS Kernel File Table
+
+    App->>OS: file, err := os.Open("config.yaml")
+    Note over App: Always check err != nil
+    App->>App: defer file.Close() (Guaranteed cleanup)
+    App->>OS: file.Read(buf) (Streaming file content)
+    App-->>OS: Executing deferred file.Close() (Kernel File Descriptor released)
+```
+
 ## Core idea
 
 Three main patterns for file access:

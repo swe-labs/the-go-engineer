@@ -22,6 +22,31 @@ Fake:          map[string]string in memory (fast, no setup)
 Mock:          testify/mock that records calls and verifies expectations
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph InterfaceDef["type UserRepository interface"]
+        DEF["Save(u *User) error
+FindByID(id string) (*User, error)"]
+    end
+
+    subgraph ProductionImpl["Production Adapter"]
+        REAL["PostgresUserRepository
+(Requires live database, connection pool, migrations)"]
+    end
+
+    subgraph TestFake["In-Memory Test Fake (Fast & Zero-Dependency)"]
+        FAKE["FakeUserRepository struct {
+    mu sync.RWMutex
+    users map[string]*User
+}"]
+    end
+
+    InterfaceDef --- ProductionImpl
+    InterfaceDef --- TestFake
+```
+
 ## Core idea
 
 An **in-memory fake** implements the same interface as the real dependency but stores data in memory instead of an external system. It has real behavior — you can call `Get`, `Set`, `Delete` — but it runs in process, has no side effects, and is reset between tests.

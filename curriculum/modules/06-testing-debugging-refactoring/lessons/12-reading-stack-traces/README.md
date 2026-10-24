@@ -27,6 +27,22 @@ main.main()
 
 Read from top: `buggyFunc` at line 42 panicked, called by `callChain` at line 38, called by `main` at line 10.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TraceTriage["Panic Trace Triage Algorithm"]
+        TOP["1. Read Panic Header:
+panic: runtime error: index out of range [5] with length 3"]
+        FIND["2. Scan down stack frames to locate FIRST frame in YOUR module:
+/app/pkg/orders/service.go:42"]
+        EXCLUDE["3. Ignore internal runtime frames (runtime/panic.go, runtime/slice.go)"]
+        INSPECT["4. Jump to service.go line 42 to inspect slice bounds"]
+
+        TOP --> FIND --> EXCLUDE --> INSPECT
+    end
+```
+
 ## Core idea
 
 Every stack trace contains:

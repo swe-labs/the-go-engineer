@@ -25,6 +25,21 @@ Function → Write(data) → io.Writer → os.Stdout (prod)
                                   → bytes.Buffer (test)
 ```
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph RigidDesign["Rigid Design (Hard to Test)"]
+        F1["func PrintReport()"] -->|Hardcoded direct write| STDOUT["os.Stdout (Terminal)"]
+    end
+
+    subgraph FlexibleDesign["Testable Design (Accepts io.Writer)"]
+        F2["func RenderReport(w io.Writer)"]
+        F2 -->|Production| OS_OUT["w = os.Stdout"]
+        F2 -->|Unit Tests| BUF["w = &bytes.Buffer{} (Inspect report string in test!)"]
+    end
+```
+
 ## Core idea
 
 Instead of:
