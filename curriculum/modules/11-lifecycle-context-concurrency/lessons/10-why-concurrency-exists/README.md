@@ -12,6 +12,25 @@ Concurrency is not about making programs faster — it is about making programs 
 
 Concurrency is the composition of independently executing tasks. Parallelism is the simultaneous execution of multiple tasks. Think of concurrency as the structure of your program (how you _write_ the code) and parallelism as the execution (how the hardware _runs_ the code). Go gives you concurrency primitives (goroutines, channels) that can be parallelized by the runtime if multiple CPU cores are available — but the code is the same either way.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Sequential["Sequential Execution (Total Time = A + B + C = 600ms)"]
+        S1["Task A (200ms I/O wait)"] --> S2["Task B (200ms I/O wait)"] --> S3["Task C (200ms I/O wait)"]
+    end
+
+    subgraph Concurrent["Concurrent Execution (Total Time ~ 210ms)"]
+        C_START["Start Tasks Concurrently"]
+        C1["Task A (200ms I/O)"]
+        C2["Task B (200ms I/O)"]
+        C3["Task C (200ms I/O)"]
+        C_JOIN["Join Results via Channels / WaitGroup"]
+
+        C_START --> C1 & C2 & C3 --> C_JOIN
+    end
+```
+
 ## Core idea
 
 **Concurrency vs parallelism**: Concurrency is about dealing with many things at once (design). Parallelism is about doing many things at once (execution). A concurrent program may or may not run in parallel.

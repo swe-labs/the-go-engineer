@@ -12,6 +12,22 @@ Relative timeouts (`WithTimeout`) are convenient, but some scenarios demand abso
 
 A deadline is an absolute point in time. `context.WithDeadline(ctx, t)` is like a fixed appointment: when the clock reaches `t`, the context cancels. A timeout is a deadline computed as `now + d`. `WithTimeout` is a convenience wrapper around `WithDeadline`. The key difference: deadlines compose. A downstream service can inspect the deadline, compute the remaining time, and decide if it can complete the work before the deadline expires.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    NOW["time.Now() (e.g., 14:00:00)"]
+    DEADLINE["Absolute Deadline: 14:00:05"]
+    
+    CTX["ctx, cancel := context.WithDeadline(parent, deadline)"]
+    
+    NOW & DEADLINE --> CTX
+    CTX --> RUNNING["Goroutine executing batch / query"]
+    
+    RUNNING -->|Clock passes 14:00:05| EXPIRED["ctx.Done() closed
+ctx.Err() == context.DeadlineExceeded"]
+```
+
 ## Core idea
 
 `context.WithDeadline(parent, deadline time.Time)` cancels the context when the system clock reaches `deadline`. The context's `Deadline()` method returns the absolute time.

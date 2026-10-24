@@ -12,6 +12,26 @@ The Go vulnerability database tracks over 10,000 published CVEs affecting Go mod
 
 `govulncheck` is a security radar for your Go project. It continuously scans the dependency horizon for known threats (CVEs) and alerts you before they become problems. Unlike simple version checkers, `govulncheck` filters out noise: if a vulnerability exists in a module but your code never calls the vulnerable function, `govulncheck` does not report it. This is the difference between a weather radar that shows every storm in the hemisphere and one that only shows storms heading toward your location.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph AnalysisPipeline["govulncheck Analysis Engine"]
+        SRC["Go Source Code + AST + Dependency Tree"]
+        VULNDB["Go Vulnerability Database (vuln.go.dev)"]
+        
+        AST_SCAN["Call Graph & Static Reachability Analysis"]
+        
+        SRC & VULNDB --> AST_SCAN
+    end
+
+    AST_SCAN --> REACHABLE{"Is the Vulnerable Function Actually Called?"}
+    
+    REACHABLE -->|Yes: Symbol Called in Callgraph| ALERT["HIGH RISK: Real Exploit Path Found!
+(Must upgrade dependency)"]
+    REACHABLE -->|No: Uncalled Symbol| INFO["LOW RISK: Vulnerable package imported, but vulnerable code unreachable"]
+```
+
 ## Core idea
 
 `govulncheck` works in three phases:

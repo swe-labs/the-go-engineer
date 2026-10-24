@@ -14,6 +14,31 @@ CORS is not a server-side security mechanism. It is a browser-enforced policy on
 
 Think of CORS as a bouncer at a club. The bouncer checks your ID (Origin header). If you are on the guest list (allowed origins), the bouncer lets you in (browser shows the response to JavaScript). If you are not, the bouncer turns you away (browser hides the response and raises an error). But if you sneak in through the back door (direct HTTP client), there is no bouncer.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Browser
+    participant API as Go API (api.backend.com)
+
+    Note over Browser: Web app on origin 'https://app.frontend.com'
+    Browser->>API: OPTIONS /api/v1/data (Preflight)
+Origin: https://app.frontend.com
+Access-Control-Request-Method: POST
+    
+    alt Origin Allowed by Whitelist
+        API-->>Browser: 204 No Content
+Access-Control-Allow-Origin: https://app.frontend.com
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+        Browser->>API: POST /api/v1/data (Actual Request)
+        API-->>Browser: 200 OK (Response Payload)
+    else Origin Not Allowed
+        API-->>Browser: 403 Forbidden / No Allow-Origin Header
+        Browser->>Browser: Browser blocks JavaScript from reading response!
+    end
+```
+
 ## Core idea
 
 The browser's same-origin policy prevents JavaScript from reading responses from a different origin (protocol + host + port). CORS is a mechanism to selectively relax this policy.

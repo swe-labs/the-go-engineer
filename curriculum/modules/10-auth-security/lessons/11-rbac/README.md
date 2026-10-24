@@ -12,6 +12,40 @@ RBAC is the dominant authorization model for enterprise applications. Kubernetes
 
 RBAC is a permission matrix with three dimensions: users, roles, and permissions. A user is assigned one or more roles. Each role grants a set of permissions. A permission is an action on a resource (e.g., "delete document"). The check is simple: does the user have a role that includes the required permission? If yes, allow. If no, deny. Roles can inherit from other roles (role hierarchy), where a senior role includes all permissions of a junior role.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Users["User Entities"]
+        U1["User: Alice"]
+        U2["User: Bob"]
+    end
+
+    subgraph Roles["Assigned Roles"]
+        R_ADMIN["Role: Admin"]
+        R_EDITOR["Role: Editor"]
+        R_VIEWER["Role: Viewer"]
+    end
+
+    subgraph Permissions["Discrete Permissions"]
+        P_READ["documents:read"]
+        P_WRITE["documents:write"]
+        P_DELETE["documents:delete"]
+    end
+
+    U1 --> R_ADMIN
+    U2 --> R_EDITOR
+
+    R_ADMIN --> P_READ
+    R_ADMIN --> P_WRITE
+    R_ADMIN --> P_DELETE
+
+    R_EDITOR --> P_READ
+    R_EDITOR --> P_WRITE
+
+    R_VIEWER --> P_READ
+```
+
 ## Core idea
 
 RBAC has three core entities:

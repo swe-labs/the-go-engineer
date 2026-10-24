@@ -14,6 +14,22 @@ A buffered channel is a mailbox with `capacity` slots. The sender drops a letter
 
 The buffer decouples the timing of send and receive. Unlike the unbuffered handoff, sender and receiver operate at their own pace, within the buffer's capacity.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph HChan["Buffered Channel: make(chan int, 3)"]
+        SLOT1["[ 10 ]"]
+        SLOT2["[ 20 ]"]
+        SLOT3["[ Empty ]"]
+    end
+
+    SENDER["Sender: ch <- 30"] -->|Non-blocking: space available| SLOT3
+    SLOT1 -->|Non-blocking: items available| RECEIVER["Receiver: <-ch"]
+
+    FULL_NOTE["When buffer is full (3/3), sender blocks until receiver reads."]
+```
+
 ## Core idea
 
 ```go

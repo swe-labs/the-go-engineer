@@ -16,6 +16,27 @@ Fan-out is like adding parallel workstations: multiple workers process items fro
 
 Cancellation is the emergency stop button: when pulled, every workstation stops processing and the belts clear.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph Stage1["Stage 1: Generator"]
+        GEN["Read raw numbers / files"] --> CH1["out <-chan int"]
+    end
+
+    subgraph Stage2["Stage 2: Square Filter"]
+        CH1 --> SQ["Read x, compute x*x"] --> CH2["out <-chan int"]
+    end
+
+    subgraph Stage3["Stage 3: Sink / Aggregator"]
+        CH2 --> SINK["Sum results / Write to DB"]
+    end
+
+    CTX["ctx.Done() (Context Cancellation Broadcast to ALL Stages)"] -.-> Stage1
+    CTX -.-> Stage2
+    CTX -.-> Stage3
+```
+
 ## Core idea
 
 ```

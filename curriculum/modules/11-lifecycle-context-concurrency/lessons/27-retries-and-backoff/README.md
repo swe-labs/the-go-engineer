@@ -12,6 +12,23 @@ Network calls, database queries, and RPCs fail transiently: a connection is rese
 
 Imagine you call a friend who is on another call. You wait a moment and call again. If they are still on the call, you wait longer. Each time you wait longer than the last time (exponential backoff). To avoid calling at the exact same time as other callers, you add a random delay (jitter). If you have a limited number of attempts (retry budget), you stop after your budget is exhausted. If your friend sends you a text saying "don't call back" (context cancellation), you stop.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Outgoing Network Request"] --> FAILED{"Request Failed with Transient Error (503 / Timeout)?"}
+    
+    FAILED -->|No| SUCCESS["Return Success Result"]
+    FAILED -->|Yes| CHECK_ATTEMPTS{"attempt < maxRetries?"}
+    
+    CHECK_ATTEMPTS -->|No| EXHAUSTED["Return ErrMaxRetriesReached"]
+    CHECK_ATTEMPTS -->|Yes| CALC["Calculate Backoff with Full Jitter:
+Delay = rand.Float64() * min(cap, base * 2^attempt)"]
+    
+    CALC --> WAIT["select { case <-time.After(delay): case <-ctx.Done(): return ctx.Err() }"]
+    WAIT --> REQ
+```
+
 ## Core idea
 
 Exponential backoff: after each failure, multiply the wait time by a constant factor (typically 2):

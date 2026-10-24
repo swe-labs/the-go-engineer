@@ -12,6 +12,33 @@ Every week, another database breach leaks millions of passwords. If you store pa
 
 Password hashing is a meat grinder: you put in a password, and what comes out is unrecognizable ground meat. You cannot reconstruct the original cut of meat from the ground meat. The grinder has a "difficulty dial" (cost factor): turning it up makes the grinding slower. A fast grinder (SHA-256) produces ground meat in microseconds — an attacker with a GPU can try billions of passwords per second. A slow grinder (bcrypt with cost 12) takes 250ms per password — the attacker can only try 4 passwords per second. The grinder also adds a random pinch of salt so that grinding the same password twice produces different results.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Registration["Password Storage Flow"]
+        P1["Plaintext Password: 'correct-horse-battery'"]
+        SALT["Cryptographically Secure Random Salt (crypto/rand)"]
+        KDF["Argon2id / bcrypt Key Derivation
+Cost / Memory / Parallelism Parameters"]
+        HASH["Stored Record:
+$argon2id$v=19$m=65536,t=3,p=4$salt$digest"]
+
+        P1 & SALT --> KDF --> HASH
+    end
+
+    subgraph Verification["Login Verification Flow"]
+        P2["Incoming Plaintext Password"]
+        FETCH["Fetch Salt & Digest from DB"]
+        COMP["subtle.ConstantTimeCompare(ComputedDigest, StoredDigest)"]
+
+        P2 & FETCH --> KDF2["KDF with Stored Parameters"]
+        KDF2 & FETCH --> COMP
+        COMP -->|Match (Constant Time)| AUTH_OK["Authentication Success"]
+        COMP -->|Mismatch| AUTH_FAIL["Authentication Failure"]
+    end
+```
+
 ## Core idea
 
 Three properties of a secure password hash:

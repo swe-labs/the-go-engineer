@@ -12,6 +12,28 @@ Sessions are the original web authentication mechanism and remain the most pract
 
 A session is a lockbox on the server. When a user logs in, the server creates a lockbox (session), puts their identity inside, and gives the user a key (session ID). The key is stored in a cookie. On every request, the user presents the key, and the server opens the lockbox to read the identity. If the user logs out, the server destroys the lockbox — the key becomes useless even if stolen. The lockbox never leaves the server, so the contents (user ID, roles, preferences) are safe even if the cookie is intercepted.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Browser
+    participant Server as Go API Server
+    participant Redis as Session Store (Redis / DB)
+
+    Browser->>Server: POST /login (username + password)
+    Server->>Server: Verify credentials
+    Server->>Server: Generate cryptographically random SessionID (32 bytes crypto/rand)
+    Server->>Redis: SET session:random_id -> {userID: 42, role: "admin"} EX 3600
+    Server-->>Browser: 200 OK + Set-Cookie: session_id=random_id; HttpOnly; Secure; SameSite=Lax
+
+    Note over Browser, Server: Subsequent Request
+    Browser->>Server: GET /api/v1/orders (Cookie: session_id=random_id)
+    Server->>Redis: GET session:random_id
+    Redis-->>Server: {userID: 42, role: "admin"}
+    Server-->>Browser: 200 OK (Protected Data)
+```
+
 ## Core idea
 
 A session system has three components:

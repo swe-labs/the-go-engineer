@@ -14,6 +14,22 @@ An unbuffered channel is a synchronous pipe. The sender blocks until a receiver 
 
 This "rendezvous" semantics ensures that send and receive happen at the same instant. The channel itself is just the agreement to meet.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Sender as Sender Goroutine
+    participant Ch as Unbuffered Channel (make(chan int))
+    actor Receiver as Receiver Goroutine
+
+    Note over Sender, Receiver: Synchronous Rendezvous Point
+    Sender->>Ch: ch <- 42 (Sender blocks waiting for receiver)
+    Receiver->>Ch: val := <-ch (Receiver arrives)
+    Ch-->>Receiver: Value 42 transferred directly
+    Note over Sender, Receiver: Both goroutines unblock simultaneously
+```
+
 ## Core idea
 
 ```go

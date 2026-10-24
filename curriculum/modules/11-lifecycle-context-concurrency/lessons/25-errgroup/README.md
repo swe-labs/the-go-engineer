@@ -12,6 +12,29 @@ Many Go programs need to run several independent operations in parallel and stop
 
 An errgroup is a collection of goroutines that share a lifecycle. When you call `g.Go(f)`, the function `f` runs in a new goroutine. If any function returns a non-nil error, the errgroup cancels the shared context, which signals all other goroutines to stop. The call to `g.Wait()` blocks until all goroutines finish and returns the first error (or nil). Think of it as a `sync.WaitGroup` with built-in error collection and context cancellation.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Caller as Calling Function
+    participant EG as errgroup.Group (with Context)
+    participant T1 as Subtask 1
+    participant T2 as Subtask 2 (Fails)
+    participant T3 as Subtask 3
+
+    Caller->>EG: g, ctx := errgroup.WithContext(parentCtx)
+    Caller->>T1: g.Go(func() error { ... })
+    Caller->>T2: g.Go(func() error { return errors.New("boom") })
+    Caller->>T3: g.Go(func() error { ... })
+
+    T2-->>EG: Returns first non-nil error
+    EG-->>T1: Closes ctx.Done() (Cancels siblings!)
+    EG-->>T3: Closes ctx.Done()
+    Caller->>EG: if err := g.Wait(); err != nil
+    EG-->>Caller: Returns "boom"
+```
+
 ## Core idea
 
 The `errgroup.Group` type has three methods:

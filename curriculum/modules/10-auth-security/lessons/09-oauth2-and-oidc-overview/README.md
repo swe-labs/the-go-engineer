@@ -12,6 +12,29 @@ OAuth2 is the industry standard for delegated authorization — it is how Google
 
 OAuth2 is a valet key system for APIs. The user (resource owner) gives a parking attendant (client application) a limited valet key (access token) instead of their car keys (password). The valet key only works for specific cars (scopes) and for a limited time (token expiry). The user gets their car keys back after the valet returns. OIDC adds an ID card (ID token) to the valet key: the parking garage can verify who the user is, not just that they have a key.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User
+    participant Client as Client Web App (Go Backend)
+    participant AuthServer as Identity Provider (OAuth2 / OIDC)
+    participant ResourceServer as Target API (Google / GitHub)
+
+    User->>Client: Click "Sign in with OAuth"
+    Client-->>User: 302 Redirect to AuthServer + state + code_challenge (PKCE)
+    User->>AuthServer: Authenticate & Consent
+    AuthServer-->>User: 302 Redirect to Client /callback?code=auth_code&state=val
+    User->>Client: GET /callback?code=auth_code&state=val
+    Client->>Client: Validate state (Prevents CSRF)
+    Client->>AuthServer: POST /token (auth_code + code_verifier + client_secret)
+    AuthServer-->>Client: {id_token (OIDC Identity), access_token (OAuth2 Perms)}
+    Client->>ResourceServer: GET /userinfo (Authorization: Bearer access_token)
+    ResourceServer-->>Client: User Profile Details
+    Client-->>User: Establish Local Authenticated Session
+```
+
 ## Core idea
 
 OAuth2 defines four roles:

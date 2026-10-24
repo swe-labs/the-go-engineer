@@ -12,6 +12,25 @@ A deadlock freezes a program permanently. All affected goroutines are blocked wa
 
 A deadlock is a traffic gridlock at an intersection. Four cars each need to cross, but each is blocking the car to its right. No car can move because each is waiting for the car in front. In Go terms, goroutine A holds mutex 1 and waits for mutex 2, while goroutine B holds mutex 2 and waits for mutex 1. Neither can proceed. The only way out is to break the cycle: impose a global order on resource acquisition.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant G1 as Goroutine 1
+    participant L1 as Lock A
+    participant L2 as Lock B
+    participant G2 as Goroutine 2
+
+    G1->>L1: G1 acquires Lock A
+    G2->>L2: G2 acquires Lock B
+    G1->>L2: G1 tries to acquire Lock B (Blocks waiting for G2)
+    G2->>L1: G2 tries to acquire Lock A (Blocks waiting for G1)
+
+    Note over G1, G2: Circular Wait Deadlock!
+    Note over G1, G2: Go Runtime: fatal error: all goroutines are asleep - deadlock!
+```
+
 ## Core idea
 
 The four Coffman conditions, all of which must hold for a deadlock to occur:

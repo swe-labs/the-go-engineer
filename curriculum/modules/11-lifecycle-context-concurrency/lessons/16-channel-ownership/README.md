@@ -16,6 +16,25 @@ If a channel has multiple producers, they must coordinate through a manager goro
 
 Ownership is about responsibility, not access. Any goroutine with a reference to the channel can technically send, receive, or close it. The discipline says: don't.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Owner["Channel Owner Goroutine"]
+        INIT["1. Instantiates channel: ch := make(chan Result)"]
+        WRITE["2. Performs writes: ch <- item"]
+        SHUT["3. Closes channel upon completion: close(ch)"]
+    end
+
+    subgraph Consumer["Channel Consumer Goroutines"]
+        READ["Reads data: for item := range ch { ... }"]
+        DETECT["Detects channel closure cleanly"]
+    end
+
+    Owner -->|Exclusive Write & Close Rights| Consumer
+    RULE["RULE: Consumers MUST NEVER close the channel!"]
+```
+
 ## Core idea
 
 | Role | Responsibilities |

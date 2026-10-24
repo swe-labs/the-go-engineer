@@ -12,6 +12,27 @@ Every goroutine you spawn must have a plan for how it stops. Without cancellatio
 
 Context cancellation is a tree broadcast. The root context branches into child contexts — when any parent is cancelled, all children receive the cancellation. The `Done()` channel is like a fire alarm: once it rings, it keeps ringing, and every goroutine in the building should have a plan for what to do when it hears it.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Parent as Parent Goroutine
+    participant Ctx as ctx (Derived via WithCancel)
+    participant Worker1 as Worker Goroutine 1
+    participant Worker2 as Worker Goroutine 2
+
+    Parent->>Worker1: go doWork(ctx)
+    Parent->>Worker2: go doWork(ctx)
+    Note over Worker1, Worker2: Running work in select { case <-ctx.Done(): return }
+    
+    Parent->>Ctx: cancel() [Closes ctx.Done() channel]
+    Ctx-->>Worker1: <-ctx.Done() unblocks!
+    Ctx-->>Worker2: <-ctx.Done() unblocks!
+    Worker1-->>Parent: Goroutine exits cleanly
+    Worker2-->>Parent: Goroutine exits cleanly
+```
+
 ## Core idea
 
 `context.WithCancel(parent)` returns a derived context and a `cancel` function. Calling `cancel()` does two things:

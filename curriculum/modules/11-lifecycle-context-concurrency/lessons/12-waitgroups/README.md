@@ -18,6 +18,30 @@ A WaitGroup is a counter guarded by a condition variable. Think of it as a sign-
 
 Multiple goroutines can call `Done` concurrently. The counter must reach zero exactly once. If `Add` and `Done` are mismatched, `Wait` never unblocks (counter never reaches zero) or a negative counter panics.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Main as Main Goroutine
+    participant WG as sync.WaitGroup
+    participant W1 as Worker 1
+    participant W2 as Worker 2
+
+    Main->>WG: wg.Add(2) (Set counter = 2 BEFORE spawning!)
+    Main->>W1: go worker(1, &wg)
+    Main->>W2: go worker(2, &wg)
+    Main->>WG: wg.Wait() [Blocks Main until counter == 0]
+
+    W1->>W1: Process Task
+    W1->>WG: defer wg.Done() [Decrements counter to 1]
+    
+    W2->>W2: Process Task
+    W2->>WG: defer wg.Done() [Decrements counter to 0]
+    
+    WG-->>Main: wg.Wait() unblocks!
+```
+
 ## Core idea
 
 ```go

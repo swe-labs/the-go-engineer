@@ -12,6 +12,22 @@ Durations govern every time-bound operation in Go: HTTP timeouts, database conne
 
 A `time.Duration` is an `int64` that counts nanoseconds. The named constants `time.Nanosecond`, `time.Microsecond`, `time.Millisecond`, `time.Second`, `time.Minute`, and `time.Hour` are multipliers. Arithmetic uses ordinary integer math on the nanosecond count. The `String()` method automatically selects the most readable unit: `1h30m15s` instead of `5415000000000`.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph NanosecondBase["time.Duration = type int64 (nanoseconds)"]
+        NS["1 nanosecond = 1"]
+        US["1 * time.Microsecond = 1,000 ns"]
+        MS["1 * time.Millisecond = 1,000,000 ns"]
+        S["1 * time.Second = 1,000,000,000 ns"]
+        M["1 * time.Minute = 60 * time.Second"]
+    end
+
+    MATH["500 * time.Millisecond"] -->|Type-safe Integer Arithmetic| DURATION["time.Duration value"]
+    PARSE["time.ParseDuration('2h45m')"] -->|String Parsing| DURATION
+```
+
 ## Core idea
 
 `time.Duration` is defined as `type Duration int64`. The nanosecond is the base unit. All constants are derived:

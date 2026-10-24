@@ -16,6 +16,31 @@ Refresh tokens are the front desk. You show your ID (the refresh token) to get a
 
 With rotation: every time you use the refresh token, you get a new one and the old one is invalidated. If an attacker steals a refresh token and uses it, the legitimate user's next request will fail (the token is already rotated), alerting them to the compromise.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client
+    participant Server as Go Auth API
+    participant DB as Refresh Token Store
+
+    Client->>Server: POST /auth/login (credentials)
+    Server->>DB: Store RefreshToken_Family_A (Revocation state = Active)
+    Server-->>Client: Return AccessToken (15m expiry) + RefreshToken_1 (7d expiry)
+
+    Note over Client, Server: AccessToken expires after 15m
+    Client->>Server: POST /auth/refresh (RefreshToken_1)
+    Server->>DB: Lookup RefreshToken_1
+    alt Token already used (Replay Attack Detected!)
+        Server->>DB: REVOKE ENTIRE FAMILY_A (Breach response!)
+        Server-->>Client: 401 Unauthorized (Security alert)
+    else Token valid and unused
+        Server->>DB: Mark RefreshToken_1 as Used; Store RefreshToken_2
+        Server-->>Client: Return new AccessToken + new RefreshToken_2
+    end
+```
+
 ## Core idea
 
 Refresh token flow:

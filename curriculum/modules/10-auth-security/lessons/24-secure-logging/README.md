@@ -14,6 +14,40 @@ Think of logs as a public bulletin board. Everyone on the operations team can re
 
 A redaction filter is like a privacy stamp: it automatically covers credit card numbers, passwords, and API keys before the log entry is posted. The original data is visible only to the application, never to the log aggregator.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph IncomingRequest["Raw Request"]
+        PAYLOAD["Body:
+{
+  'username': 'alice',
+  'password': 'super-secret',
+  'credit_card': '4111-2222-3333-4444'
+}"]
+    end
+
+    subgraph RedactionFilter["Slog Redaction Middleware"]
+        FILTER["Log Value Sanitizer:
+- Match sensitive keys
+- Mask with '[REDACTED]'
+- Hash identifiers if needed for tracing"]
+    end
+
+    subgraph StructuredOutput["Secure JSON Log Output"]
+        OUT["stdout:
+{
+  'time': '2026-10-24T16:00:00Z',
+  'level': 'INFO',
+  'user': 'alice',
+  'password': '[REDACTED]',
+  'credit_card': '4111-XXXX-XXXX-4444'
+}"]
+    end
+
+    IncomingRequest --> RedactionFilter --> StructuredOutput
+```
+
 ## Core idea
 
 Secure logging principles:

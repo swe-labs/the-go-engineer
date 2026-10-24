@@ -12,6 +12,27 @@ Timers are the building block for timeouts, retries, heartbeat intervals, and de
 
 A timer is a one-shot alarm that fires exactly once after a specified duration. Think of it as a countdown that sends a pulse on a channel when it reaches zero. You can cancel the alarm before it rings (`Stop`), or rewind it to count down from a new duration (`Reset`). Once it rings, the channel holds exactly one tick — be sure to drain it before resetting.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Main as Goroutine (Caller)
+    participant Runtime as Go Runtime Timer Heap
+    participant Ch as Timer Channel (t.C)
+
+    Main->>Runtime: t := time.NewTimer(500 * time.Millisecond)
+    Runtime-->>Main: Return *time.Timer with channel t.C
+
+    alt Timer Expires
+        Runtime->>Ch: Send current time after 500ms
+        Main->>Ch: <-t.C (Unblocks caller)
+    else Timer Stopped Early
+        Main->>Runtime: if !t.Stop() { <-t.C }
+        Note over Main, Runtime: Prevents timer from firing and avoids channel leaks
+    end
+```
+
 ## Core idea
 
 `time.NewTimer(d)` creates a `*time.Timer` with a `C` channel (`<-chan time.Time`) that receives the current time when `d` elapses.

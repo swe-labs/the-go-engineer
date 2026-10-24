@@ -12,6 +12,23 @@ Production services need recurring actions: health-check loops, metrics emission
 
 A ticker is a recurring timer. Instead of firing once, it fires repeatedly at a fixed interval. Each tick sends the current time on its channel. Think of a metronome: it ticks at a steady beat regardless of how the musician plays between beats. If the receiver is slow and misses a tick, the ticker drops the missed tick — it does not queue them.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    START["ticker := time.NewTicker(1 * time.Second)"] --> LOOP["select { case <-ticker.C: ... case <-ctx.Done(): return }"]
+    
+    subgraph PeriodicDelivery["Runtime Timer Queue"]
+        TICK1["Tick 1 (t=1s)"] --> CH["ticker.C"]
+        TICK2["Tick 2 (t=2s)"] --> CH
+        TICK3["Tick 3 (t=3s)"] --> CH
+    end
+
+    CH --> LOOP
+    LOOP -->|Shutdown Signal| STOP["defer ticker.Stop()"]
+    STOP --> RELEASE["Runtime stops recurring timer and frees resources"]
+```
+
 ## Core idea
 
 `time.NewTicker(d)` creates a `*time.Ticker` that sends the current time on `C` every `d`. The ticker runs until explicitly stopped with `ticker.Stop()`.

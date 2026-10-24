@@ -12,6 +12,23 @@ Input validation is the most effective defense against injection attacks (SQL, N
 
 Imagine an airport security checkpoint. Every passenger passes through gates: identity check (type validation), baggage scan (format validation), body scan (length validation), and interview (business rule validation). Each gate either passes the passenger through or diverts them to security. The gates are arranged in order of cost: cheap checks first (type, length), expensive checks last (business rules). An allowlist is the VIP list: only pre-approved items enter. A denylist is the no-fly list: known bad items are blocked but everything else passes.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    RAW["Untrusted Wire Input (JSON / URL / Headers)"] --> LIMIT["1. MaxBytesReader (Limit Payload Size)"]
+    LIMIT --> DECODE["2. json.NewDecoder with DisallowUnknownFields"]
+    DECODE --> SYNTAX["3. Syntax & Format Validation (UUID, Email, ISO-8601)"]
+    SYNTAX --> BUSINESS["4. Domain Constraints (Min <= Value <= Max, Allowed Enum)"]
+    
+    BUSINESS -->|Valid| SECURE["Trusted Internal Domain Struct"]
+    
+    LIMIT -->|Exceeded Limit| ERR413["413 Payload Too Large"]
+    DECODE -->|Malformed JSON / Extra Keys| ERR400["400 Bad Request"]
+    SYNTAX -->|Invalid Type / Regex| ERR422["422 Unprocessable Entity"]
+    BUSINESS -->|Out of Bounds| ERR422
+```
+
 ## Core idea
 
 Security input validation has two contrasting strategies:

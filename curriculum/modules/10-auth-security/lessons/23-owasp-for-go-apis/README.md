@@ -14,6 +14,24 @@ OWASP is the periodic table of web security risks. It categorizes the elements o
 
 Think of it as a pre-flight checklist for pilots. You do not skip items because "nothing bad happened last time." Each item addresses a real risk that has caused real breaches. Following the checklist makes security a repeatable process rather than a reactive scramble.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph OWASP_Top10_API["OWASP API Security Top 10 Go Architecture Defenses"]
+        A1["API1: Broken Object Level Auth (BOLA) -> Enforce user ownership in repo queries"]
+        A2["API2: Broken Authentication -> Strong Argon2id, secure JWT expiry, rate limiting"]
+        A3["API3: Broken Object Property Level Auth -> Use dedicated DTOs; disallow mass assignment"]
+        A4["API4: Unrestricted Resource Consumption -> Read limits (MaxBytesReader), timeouts, rate limiters"]
+        A5["API5: Broken Function Level Auth -> RBAC/ABAC middleware on route groups"]
+        A6["API6: Server-Side Request Forgery (SSRF) -> Validate and whitelist outbound HTTP client destinations"]
+        A7["API7: Security Misconfiguration -> Disable debug endpoints in prod, enforce TLS"]
+        A8["API8: Lack of Protection from Automated Threats -> Captcha, IP & account velocity limits"]
+        A9["API9: Improper Inventory Management -> Explicit routing, retire deprecated API versions"]
+        A10["API10: Unsafe Consumption of APIs -> Timeout and validate payloads from 3rd-party services"]
+    end
+```
+
 ## Core idea
 
 OWASP API Security Top 10 (2023):

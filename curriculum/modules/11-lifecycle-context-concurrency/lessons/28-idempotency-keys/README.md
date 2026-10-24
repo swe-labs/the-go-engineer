@@ -12,6 +12,27 @@ When a client retries a payment or order creation, the server must process the r
 
 An idempotency key is like a locker at a train station. The client puts their luggage in a locker (first request), and the station gives them a key. If the client returns with the same key (retry request), the station opens the same locker and shows them the same luggage — no duplicate luggage is created. The locker is the dedup store, the key is the idempotency key, and the luggage is the result.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client
+    participant Server as Go API Server
+    participant Cache as Redis / Postgres (Idempotency Store)
+
+    Client->>Server: POST /charges (Idempotency-Key: 'key_12345')
+    Server->>Cache: SET key_12345 "IN_PROGRESS" NX EX 120
+    alt Key already exists with Cached Response
+        Cache-->>Server: Return stored HTTP 200 payload
+        Server-->>Client: Return cached response immediately (No duplicate charge!)
+    else Key successfully acquired
+        Server->>Server: Process payment with Stripe
+        Server->>Cache: UPDATE key_12345 SET status="COMPLETED", body=response
+        Server-->>Client: HTTP 201 Created
+    end
+```
+
 ## Core idea
 
 Idempotency means applying an operation multiple times produces the same result as applying it once. For HTTP APIs:

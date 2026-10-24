@@ -14,6 +14,25 @@ Closing a channel is like putting a "no more deliveries" sign on a mailbox. The 
 
 You can close a channel only from the sender side. The sender knows when all values have been sent. The receiver only knows when the channel is closed. This asymmetry is the foundation of the ownership discipline.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    CLOSE["close(ch) (Executed by Sender)"] --> STATE["Channel Marked Closed"]
+
+    subgraph ReceiverActions["Receiver Reads from Closed Channel"]
+        R1["v, ok := <-ch"]
+        R1 --> CHECK{"Channel Empty?"}
+        CHECK -->|Items remaining in buffer| DRAIN["v = buffered item, ok = true"]
+        CHECK -->|Buffer drained| ZERO["v = zero value, ok = false"]
+    end
+
+    subgraph InvalidActions["Fatal Panics"]
+        P1["close(ch) on already closed channel -> PANIC"]
+        P2["ch <- val on closed channel -> PANIC"]
+    end
+```
+
 ## Core idea
 
 ```go

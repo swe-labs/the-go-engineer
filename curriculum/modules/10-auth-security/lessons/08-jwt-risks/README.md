@@ -12,6 +12,34 @@ JWTs are widely adopted but frequently misimplemented. The "none algorithm" vuln
 
 A JWT is a signed document. The signature proves the document has not been tampered with since signing. But the document itself is readable by anyone who possesses it. If an attacker steals the document, they can present it as their own until it expires. The issuer cannot "un-sign" a document — they can only publish a list of cancelled document IDs (denylist), which requires a database lookup, defeating the purpose of stateless tokens.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph CommonJWTVulnerabilities["Critical JWT Vulnerabilities & Mitigations"]
+        V1["Vulnerability: Alg 'none' Attack
+Attacker sets alg=none to bypass signature check"]
+        M1["Mitigation: Explicitly enforce allowed algorithms in parser whitelist"]
+
+        V2["Vulnerability: Key Confusion Attack
+Using RS256 public key as HS256 symmetric secret"]
+        M2["Mitigation: Strictly validate token header alg matches key type"]
+
+        V3["Vulnerability: Inability to Revoke Token
+Compromised token remains valid until exp"]
+        M3["Mitigation: Keep access tokens short-lived (5-15m) + revocation list in Redis"]
+
+        V4["Vulnerability: Sensitive Data Leakage
+Payload is only Base64 encoded, not encrypted"]
+        M4["Mitigation: Never place PII, passwords, or secrets in unencrypted claims"]
+    end
+
+    V1 --- M1
+    V2 --- M2
+    V3 --- M3
+    V4 --- M4
+```
+
 ## Core idea
 
 The major JWT risks fall into five categories:

@@ -12,6 +12,22 @@ Without timeouts, a slow dependency stalls your entire service. A database query
 
 A timeout is a deadline measured from "now." `context.WithTimeout(ctx, 5*time.Second)` is equivalent to `context.WithDeadline(ctx, time.Now().Add(5*time.Second))`. Think of it as placing a bomb under the operation: if the work does not finish before the fuse burns down, the context explodes and the operation fails with `DeadlineExceeded`. The timeout propagates through every function that receives the context — you set it once at the top level and every downstream call respects it.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    START["ctx, cancel := context.WithTimeout(parent, 2*time.Second)
+defer cancel()"] --> FORK{"Which happens first?"}
+
+    FORK -->|Work Completes in 500ms| FINISH["Worker returns result
+defer cancel() frees timer resources"]
+    FORK -->|Elapsed Time Reaches 2s| TIMEOUT["Runtime closes ctx.Done()
+ctx.Err() returns context.DeadlineExceeded"]
+
+    TIMEOUT --> ABORT["Worker detects <-ctx.Done()
+Aborts I/O and exits immediately"]
+```
+
 ## Core idea
 
 `context.WithTimeout(parent, d)` creates a context that automatically cancels after duration `d`. The returned context's `Done()` channel closes when the timeout fires. `ctx.Err()` returns `DeadlineExceeded`.

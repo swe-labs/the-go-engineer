@@ -12,6 +12,28 @@ JWTs enable stateless authentication: the token itself contains the user's ident
 
 A JWT is a digitally signed passport. The passport contains your photo and personal details (claims), is stamped with an official seal (signature), and has an expiry date. Any official (service) in any country (microservice) can verify the seal using the public key book (JWKS endpoint) without calling the issuing country's embassy (central auth server). The passport is self-sufficient: its validity is proven by the signature, not by a database lookup. But if the passport is stolen, the thief can use it until it expires — revocation requires a denylist.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Anatomy["JWT Anatomy (Base64URL Encoded)"]
+        HEADER["Header: {"alg": "HS256", "typ": "JWT"}"]
+        PAYLOAD["Payload: {"sub": "42", "exp": 1700000000, "role": "member"}"]
+        SIG["Signature: HMACSHA256(Header + '.' + Payload, Secret)"]
+
+        HEADER --- DOT1["."] --- PAYLOAD --- DOT2["."] --- SIG
+    end
+
+    subgraph Verification["Stateless Verification Pipeline"]
+        TOKEN["Incoming Bearer Token"] --> SPLIT["Split into Header, Payload, Signature"]
+        SPLIT --> CHECK_EXP["Verify Expiration: now < claims.ExpiresAt"]
+        SPLIT --> RECOMP["Recompute HMAC using Server Secret Key"]
+        RECOMP --> MATCH["subtle.ConstantTimeCompare(Recomputed, ReceivedSignature)"]
+        MATCH -->|Match & Not Expired| VALID["Context Injected with Claims"]
+        MATCH -->|Mismatch or Expired| REJECT["401 Unauthorized"]
+    end
+```
+
 ## Core idea
 
 A JWT is three base64url-encoded segments separated by dots:

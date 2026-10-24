@@ -12,6 +12,25 @@ Data races are the most insidious bugs in concurrent Go programs. They can go un
 
 The race detector records every memory access (read or write) of every goroutine along with a happens-before timestamp. When it observes two unsynchronized accesses to the same memory location at overlapping times, it prints a report with the stack traces of both goroutines and the exact line of the access. It is a dynamic analysis tool: it only finds races that are triggered during the execution. Running tests without the race detector is like flying an airplane without a preflight checklist.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    SRC["go test -race / go run -race"] --> COMPILE["Compiler Instruments Every Memory Read & Write"]
+    COMPILE --> SHADOW["Shadow Memory Tracks 4 Virtual Access Timestamps per Word"]
+    
+    subgraph Execution["Runtime Execution"]
+        G1_WRITE["G1 writes to address 0x1040"] --> CHECK{"Shadow Memory Check"}
+        G2_READ["G2 concurrently reads 0x1040 without synchronization"] --> CHECK
+    end
+
+    CHECK -->|Conflict Detected| REPORT["==================
+WARNING: DATA RACE
+Write at 0x1040 by goroutine 7:
+Previous read at 0x1040 by goroutine 6:
+=================="]
+```
+
 ## Core idea
 
 The race detector is not a separate binary. When you pass `-race` to `go build`, `go run`, or `go test`, the compiler instruments every memory access with a call to the runtime's race detector library (a C++ ThreadSanitizer). The instrumented binary runs 5-10x slower and uses 2-5x more memory. When a race is detected, the runtime prints a report to stderr and the program continues (or you can make it fail by using `go test -race` which treats races as test failures).

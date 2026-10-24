@@ -14,6 +14,25 @@ Imagine you are a bank teller. A customer hands you a withdrawal slip that says 
 
 SQL injection works because string concatenation mixes code (SQL instructions) with data (user input). Parameterized queries send the code template and the data values on separate channels, so the database never confuses the two.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Vulnerable["Vulnerable: String Concatenation"]
+        V_IN["Input: 'admin' OR '1'='1'"]
+        V_SQL["fmt.Sprintf('SELECT * FROM users WHERE name = %s', input)"]
+        V_PARSE["Database Parser: Executes injected OR 1=1 syntax!"]
+        V_IN --> V_SQL --> V_PARSE
+    end
+
+    subgraph Secure["Secure: Parameterized Prepared Query"]
+        S_IN["Input: 'admin' OR '1'='1'"]
+        S_QUERY["db.QueryContext(ctx, 'SELECT * FROM users WHERE name = $1', input)"]
+        S_DB["Database Engine treats input strictly as literal string value, never executable AST"]
+        S_IN --> S_QUERY --> S_DB
+    end
+```
+
 ## Core idea
 
 SQL injection occurs when untrusted user input is placed directly into a SQL query string, allowing an attacker to modify the query structure. The core defense is to use parameterized queries (also called prepared statements) where the SQL structure is fixed and user values are passed as separate parameters.

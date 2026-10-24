@@ -12,6 +12,28 @@ Context values are Go's mechanism for request-scoped data that spans the entire 
 
 Think of context as a tree of immutable key-value stores. Each `WithValue` call creates a new node in the tree. When you call `ctx.Value(key)`, Go walks up the tree from the current node to the root, looking for the first node that has the key. This is a linear search — not a hash map. The values are meant to be read-only metadata about the request (request ID, user ID, auth token), not mutable state or function arguments.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SafeContextValues["Legitimate Context Values (Request-Scoped Transversal Data)"]
+        V1["Trace ID / Correlation ID (Distributed Tracing)"]
+        V2["Authenticated Principal (User ID, Tenant ID)"]
+        V3["Client IP / Ingress Timestamp"]
+    end
+
+    subgraph AntiPatterns["Context Value Anti-Patterns (Code Smells)"]
+        A1["Passing optional function parameters (use struct options instead)"]
+        A2["Passing database connection handles (pass explicitly in struct)"]
+        A3["Using built-in types like string for keys (causes package collision)"]
+    end
+
+    subgraph KeySafety["Safe Custom Type Keys"]
+        K["type contextKey struct{}
+var traceIDKey = contextKey{}"]
+    end
+```
+
 ## Core idea
 
 `context.WithValue(parent, key, val)` returns a copy of the parent context with `key` mapped to `val`. The key must be comparable (`==` works on it). The value is retrieved with `ctx.Value(key)`.

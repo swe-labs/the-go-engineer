@@ -14,6 +14,25 @@ TLS is a sealed pipe between client and server. Before any application data flow
 
 HTTPS is HTTP running inside this TLS pipe. The HTTP traffic is invisible to anyone monitoring the connection.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client as Client (curl / browser)
+    participant Server as Go crypto/tls Server
+
+    Client->>Server: ClientHello (Supported Cipher Suites, TLS 1.3, Key Share)
+    Server->>Client: ServerHello (Chosen Cipher, Server Key Share)
+    Server->>Client: EncryptedExtensions, Certificate (X.509), CertificateVerify, Finished
+    Client->>Client: Validate X.509 Certificate Chain against Root CA Pool
+    Client->>Server: Finished
+    
+    Note over Client, Server: Shared Symmetric Session Key Established (AES-GCM / ChaCha20-Poly1305)
+    Client->>Server: Encrypted Application Data (HTTP/1.1 or HTTP/2 frames)
+    Server->>Client: Encrypted Application Data
+```
+
 ## Core idea
 
 TLS provides three guarantees:

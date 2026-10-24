@@ -12,6 +12,23 @@ A goroutine leak is a permanent memory leak: the goroutine's stack (initially 2 
 
 Every goroutine you spawn must have a guaranteed exit path. If you cannot prove that a goroutine will eventually reach a `return` statement, it is a leak waiting to happen. The goroutine itself is an allocation (stack + metadata) that persists until the goroutine exits. A blocked goroutine is not freed — it sits in the scheduler's run queue in `_Gwaiting` state forever. The Go runtime tracks every goroutine in an internal slice (`allgs`), and there is no timeout, no GC for goroutines, and no automatic reaper.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph LeakedGoroutine["Common Goroutine Leak Scenarios"]
+        S1["Scenario 1: Send to Unbuffered Channel with No Receiver
+ch <- result (Blocks forever)"]
+        S2["Scenario 2: Read from Channel that Never Sends
+<-ch (Blocks forever)"]
+        S3["Scenario 3: HTTP Response Body Not Closed
+resp.Body.Close() omitted -> Connection & goroutine hang"]
+        S4["Scenario 4: time.Ticker without defer ticker.Stop()"]
+    end
+
+    LeakedGoroutine --> CONSEQUENCE["Runtime cannot garbage collect goroutine stack (2KB-several MB) -> Out Of Memory (OOM)"]
+```
+
 ## Core idea
 
 A goroutine leaks when it enters a state from which it can never return. The three most common causes:

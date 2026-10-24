@@ -16,6 +16,23 @@ Unlike a mutex, there is no "lock" and "unlock." The atomic operation itself is 
 
 However, atomics only protect the single word they operate on. If you need to atomically update two related variables (e.g., balance and timestamp), a mutex is required.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph MutexApproach["sync.Mutex (Heavier Weight)"]
+        M1["Acquire Lock"] --> M2["Read/Write Variable"] --> M3["Release Lock"]
+    end
+
+    subgraph AtomicApproach["sync/atomic (CPU Lock-Free Primitives)"]
+        A1["atomic.AddInt64(&counter, 1)"]
+        A2["atomic.CompareAndSwapInt32(&state, old, new)"]
+        A3["atomic.LoadPointer(&ptr)"]
+        
+        NOTE["Single instruction on CPU bus (LOCK XADD / CMPXCHG)"]
+    end
+```
+
 ## Core idea
 
 ```go

@@ -12,6 +12,24 @@ Every production Go service passes `context.Context` as the first parameter to v
 
 A context is a tree. The root is `context.Background()`, which never cancels and carries nothing. Derived contexts branch off with additional properties: `WithCancel` adds a cancel trigger, `WithTimeout` adds a time limit, and `WithValue` adds a key-value pair. Cancellation flows downward: when a parent cancels, all its children cancel. A cancelled child does not cancel its parent.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    ROOT["context.Background() (Root Context)"]
+
+    CHILD_A["ctxA, cancelA := context.WithCancel(root)"]
+    CHILD_B["ctxB, cancelB := context.WithTimeout(root, 5*time.Second)"]
+
+    GRANDCHILD_A1["ctxA1 := context.WithValue(ctxA, traceKey, 'abc-123')"]
+    GRANDCHILD_A2["ctxA2, cancelA2 := context.WithDeadline(ctxA, deadline)"]
+
+    ROOT --> CHILD_A
+    ROOT --> CHILD_B
+    CHILD_A --> GRANDCHILD_A1
+    CHILD_A --> GRANDCHILD_A2
+```
+
 ## Core idea
 
 `context.Context` is an interface with four methods:

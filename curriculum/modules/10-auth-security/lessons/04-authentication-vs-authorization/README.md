@@ -12,6 +12,30 @@ Confusing authentication with authorization is the root cause of countless secur
 
 Authentication is the bouncer checking your ID at the club door: "are you who you say you are?" Authorization is the host inside checking your reservation: "are you allowed at this table?" The bouncer does not decide which table you can sit at; the host does not verify your identity. Two separate roles, two separate checks. In HTTP terms: authN failure returns 401 (Unauthorized — the HTTP name is misleading). AuthZ failure returns 403 (Forbidden). A 401 means "who are you?" A 403 means "I know who you are, but you cannot do that."
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client
+    participant AuthN as Authentication Gate ("Who are you?")
+    participant AuthZ as Authorization Gate ("What can you do?")
+    participant Handler as Domain Business Handler
+
+    Client->>AuthN: Request + Credentials (Password / Bearer Token)
+    alt Credentials Invalid
+        AuthN-->>Client: 401 Unauthorized (Missing or Invalid Identity)
+    else Credentials Valid
+        AuthN->>AuthZ: Principal Identity (UserID, Roles, Scopes)
+        alt Insufficient Permissions
+            AuthZ-->>Client: 403 Forbidden (Authenticated, but Not Allowed)
+        else Authorized
+            AuthZ->>Handler: Execute Action on Target Resource
+            Handler-->>Client: 200 OK / 201 Created
+        end
+    end
+```
+
 ## Core idea
 
 - **Authentication (AuthN)**: verifies identity. Answers "who are you?" Methods: passwords, JWTs, session cookies, biometrics, OAuth2 tokens.

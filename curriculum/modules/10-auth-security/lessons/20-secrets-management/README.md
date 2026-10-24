@@ -14,6 +14,26 @@ Secrets are the keys to your digital kingdom. They unlock databases, cloud accou
 
 A secret manager is a secure vault. You authenticate with the vault using a short-lived token, and the vault gives you the keys you need. If a key is compromised, you rotate it in the vault without redeploying the application.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph AntiPatterns["Insecure Anti-Patterns"]
+        AP1["Hardcoded in Go source code: const Secret = 'xyz'"]
+        AP2["Checked into Git repository (.env or config.yaml)"]
+        AP3["Baked into Docker container image filesystem"]
+    end
+
+    subgraph SecureLifecycle["Production Secret Delivery Lifecycle"]
+        VAULT["Secret Vault (AWS Secrets Manager / HashiCorp Vault)"]
+        ENV["Injected as Process Environment Variables at Container Launch"]
+        MEM["Read into Go process memory once on startup"]
+        SCRUB["Redacted from logs, stack traces, and JSON serialization"]
+
+        VAULT -->|Secure IAM API| ENV --> MEM --> SCRUB
+    end
+```
+
 ## Core idea
 
 Secret management principles:

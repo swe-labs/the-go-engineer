@@ -12,6 +12,29 @@ Starting an unbounded number of goroutines for each incoming task crashes a serv
 
 A worker pool is like a checkout counter at a supermarket. There are N cashiers (workers) who process customers (jobs). If all cashiers are busy, new customers line up in a queue (buffered channel). When a cashier finishes, they call the next customer from the queue. The number of cashiers stays constant, so the store never has more than N customers being served at once, regardless of how many customers enter.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph JobQueue["Inbound Job Channel"]
+        JOBS["jobs := make(chan Job, 100)"]
+    end
+
+    subgraph Workers["Fixed Pool of N Worker Goroutines"]
+        W1["Worker 1"]
+        W2["Worker 2"]
+        W3["Worker 3"]
+        WN["Worker N"]
+    end
+
+    subgraph ResultQueue["Outbound Results"]
+        RESULTS["results := make(chan Result, 100)"]
+    end
+
+    JOBS --> W1 & W2 & W3 & WN --> RESULTS
+    NOTE["Fixed concurrency prevents thread exhaustion & DB pool starvation"]
+```
+
 ## Core idea
 
 The bounded worker pool pattern uses three components:

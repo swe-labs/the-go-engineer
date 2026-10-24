@@ -14,6 +14,22 @@ Backpressure is like a pipe with a finite width. Water flows from the source (pr
 
 The pipe's width is the channel capacity. When it is full, the producer blocks (stops generating). This blocking propagates backward through the system: the slow consumer ultimately slows the original request source, which is the correct behavior — the system self-regulates.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    PRODUCER["Fast Producer (10,000 req/sec)"] --> QUEUE["Bounded Buffer (Cap = 100)"]
+    QUEUE --> CONSUMER["Slow Consumer (1,000 req/sec)"]
+
+    subgraph BackpressureReactions["Buffer Saturated Options"]
+        OPT1["1. Block Producer (Natural TCP / Channel throttling)"]
+        OPT2["2. Shed Load (HTTP 429 / 503 Overloaded)"]
+        OPT3["3. Drop Oldest / Newest (Lossy telemetry)"]
+    end
+
+    QUEUE -->|Buffer Full| BackpressureReactions
+```
+
 ## Core idea
 
 Three levels of backpressure:

@@ -12,6 +12,36 @@ Security vulnerabilities are cheapest to fix during design and most expensive af
 
 Imagine your Go service as a medieval castle. STRIDE is a checklist of ways an attacker can breach it: Spoofing (fake identity), Tampering (alter data), Repudiation (deny acting), Information disclosure (leak secrets), Denial of service (crash the castle), Elevation of privilege (guard becomes king). DREAD helps you rank which threats to fix first. Attack trees are the paths an attacker could walk to reach the treasure room. Every wall, gate, and guard post is a trust boundary where you must ask: what could go wrong here?
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph STRIDE["STRIDE Threat Modeling Taxonomy"]
+        S["Spoofing -> Identity faking (Bypassing auth)"]
+        T["Tampering -> Modifying payload in transit or database"]
+        R["Repudiation -> Claiming an action was never taken (No audit logs)"]
+        I["Information Disclosure -> Leaking PII, stack traces, or keys"]
+        D["Denial of Service -> Resource exhaustion via memory / CPU DOS"]
+        E["Elevation of Privilege -> Unprivileged user acting as admin"]
+    end
+
+    subgraph GoDefenses["Go Defensive Controls"]
+        DS["mTLS, JWT signature, Argon2id"]
+        DT["HMAC, AEAD encryption, parameterized SQL"]
+        DR["Structured audit logging with slog"]
+        DI["Strict JSON marshaling, sensitive field masking"]
+        DD["Rate limiting, request timeouts, bounded body reads"]
+        DE["Role-Based (RBAC) & Attribute-Based (ABAC) policies"]
+    end
+
+    S --> DS
+    T --> DT
+    R --> DR
+    I --> DI
+    D --> DD
+    E --> DE
+```
+
 ## Core idea
 
 A threat model has four components:

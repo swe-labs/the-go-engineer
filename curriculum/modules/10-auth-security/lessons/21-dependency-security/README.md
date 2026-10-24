@@ -14,6 +14,29 @@ Dependencies are like building materials in construction. You need to verify tha
 
 A software bill of materials (SBOM) is a complete inventory of every building material used in your project, including supplier, version, and license.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph DependencyVerification["Go Module Integrity Verification"]
+        SRC["go.mod (Declared Direct & Indirect Dependencies)"]
+        SUM["go.sum (Cryptographic SHA-256 Hashes of Module ZIPs)"]
+        GOSUMDB["sum.golang.org (Append-Only Cryptographic Transparency Log)"]
+        CACHE["$GOPATH/pkg/mod (Locally Downloaded Verified Cache)"]
+
+        SRC --> DOWNLOAD["go get / go build"]
+        DOWNLOAD --> COMPUTE["Compute Hash of Downloaded Module"]
+        COMPUTE --> CHECK_SUM{"Matches local go.sum?"}
+        
+        CHECK_SUM -->|No record yet| CHECK_DB{"Matches sum.golang.org log?"}
+        CHECK_DB -->|Verified| WRITE_SUM["Record Hash in go.sum"] --> CACHE
+        CHECK_DB -->|Tampered| FAIL["Security Panic: Checksum Mismatch!"]
+        
+        CHECK_SUM -->|Match| CACHE
+        CHECK_SUM -->|Mismatch| FAIL
+    end
+```
+
 ## Core idea
 
 Go's dependency security model rests on three pillars:

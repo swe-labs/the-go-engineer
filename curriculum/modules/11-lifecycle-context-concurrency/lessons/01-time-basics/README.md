@@ -12,6 +12,25 @@ Every production system tracks time: request logs, cache TTLs, retry backoff, se
 
 Think of `time.Time` as a struct with two internal clocks: a wall clock for calendar operations (year/month/day, timezone) and a monotonic clock for measuring elapsed time. The monotonic component is subtracted when you call `time.Since` or `time.Until`, so duration measurements remain accurate even if the system clock jumps due to NTP adjustments.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TimeStructure["time.Time Dual Clock Representation"]
+        WALL["Wall Clock Reading:
+Seconds & Nanoseconds since Jan 1, year 1
+Used for: Display, logging, calendar time"]
+        MONO["Monotonic Clock Reading:
+Nanoseconds since system startup
+Used for: time.Since(start), elapsed durations"]
+    end
+
+    T["t := time.Now()"] --> WALL
+    T --> MONO
+
+    ELAPSED["elapsed := time.Since(start)"] -->|Uses Monotonic Clock| ACCURATE["Safe against NTP step adjustments and leap seconds!"]
+```
+
 ## Core idea
 
 `time.Time` is Go's canonical type for an instant in time. Every `time.Time` value carries:

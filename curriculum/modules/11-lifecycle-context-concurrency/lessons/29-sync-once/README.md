@@ -12,6 +12,24 @@ Lazy initialization is a common performance optimization: you defer expensive wo
 
 `sync.Once` is a one-way turnstile. The first goroutine to call `Do(f)` passes through and runs `f`. After `f` completes, the turnstile locks permanently. Every subsequent goroutine that calls `Do(f)` sees the locked turnstile and passes through without running `f`. The turnstile can never be reset. Once a function has been executed (or is currently executing), no other goroutine will ever execute it again.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    CALL["once.Do(setupFunction)"] --> FAST{"atomic.LoadUint32(&once.done) == 1?"}
+
+    FAST -->|Yes (Fast Path)| RETURN["Return Immediately (No Mutex Overhead)"]
+    
+    FAST -->|No (Slow Path)| LOCK["once.m.Lock()"]
+    LOCK --> DBL_CHECK{"once.done == 0?"}
+    
+    DBL_CHECK -->|Yes| EXEC["Execute setupFunction()"]
+    EXEC --> SET_DONE["atomic.StoreUint32(&once.done, 1)"]
+    SET_DONE --> UNLOCK["once.m.Unlock()"]
+    
+    DBL_CHECK -->|No (Another thread finished)| UNLOCK
+```
+
 ## Core idea
 
 `sync.Once` has a single method:

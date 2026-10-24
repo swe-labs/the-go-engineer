@@ -12,6 +12,24 @@ Data races are the most common class of concurrency bug in Go. A single unsynchr
 
 A data race is like two people editing the same whiteboard cell at the same time. One writes "42", the other writes "99", and a third person reading at that instant might see "42", "99", or even "4" followed by "2" because the write was not atomic. The Go memory model guarantees nothing about reads that overlap with unsynchronized writes. The only way to make the outcome deterministic is to ensure that at most one goroutine accesses the variable at a time (mutex) or that access happens through a single owner that communicates via a channel.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor G1 as Goroutine 1
+    participant Mem as Memory Location (counter = 0)
+    actor G2 as Goroutine 2
+
+    Note over G1, G2: Concurrent Unsynchronized Access (Data Race!)
+    G1->>Mem: Read counter (0)
+    G2->>Mem: Read counter (0)
+    G1->>G1: Increment local register (0 + 1 = 1)
+    G2->>G2: Increment local register (0 + 1 = 1)
+    G1->>Mem: Write counter = 1
+    G2->>Mem: Write counter = 1 (Lost Update! Expected 2, got 1)
+```
+
 ## Core idea
 
 A data race occurs when two or more goroutines access the same variable concurrently, and at least one access is a write. All such unsynchronized accesses are data races. The Go memory model specifies that a read `r` of a variable `v` is allowed to observe a write `w` to `v` only if `r` does not happen before `w` and `w` does not happen before `r`. Without synchronization, there is no happens-before relation between goroutines.

@@ -14,6 +14,31 @@ A goroutine is a independently executing function that shares the same address s
 
 Goroutines are multiplexed onto OS threads automatically. The Go scheduler decides which goroutine runs on which thread at any moment. From your perspective, every goroutine runs concurrently; from the hardware perspective, `GOMAXPROCS` goroutines run in parallel.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph GoScheduler["Go Runtime M:N GMP Scheduler"]
+        subgraph Gs["Goroutines (G) - 2KB Stacks"]
+            G1["G1 (Runnable)"]
+            G2["G2 (Runnable)"]
+            G3["G3 (Running)"]
+        end
+
+        subgraph Ps["Logical Processors (P) - GOMAXPROCS"]
+            P1["P1 (Local Run Queue)"]
+            P2["P2 (Local Run Queue)"]
+        end
+
+        subgraph Ms["OS Kernel Threads (M)"]
+            M1["M1 (Executing G on CPU core 0)"]
+            M2["M2 (Executing G on CPU core 1)"]
+        end
+    end
+
+    Gs --> Ps --> Ms
+```
+
 ## Core idea
 
 The `go` keyword before a function call creates a new goroutine:

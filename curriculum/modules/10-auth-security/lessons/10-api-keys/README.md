@@ -12,6 +12,22 @@ API keys are the primary authentication mechanism for developer-facing APIs. Str
 
 An API key is a shared secret between the service and the client. Think of it as a long, random password that a program uses instead of a human. The service gives the client a key once (at creation time) and stores only a hash of it. If the database is breached, the attacker gets hashes, not usable keys. If a key leaks, the service rotates the key: the old hash is replaced with a new one. Keys can be scoped to specific permissions: a read-only key cannot write data, even if it is valid.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Incoming API Request
+Authorization: Bearer sk_live_xyz123..."] --> EXTRACT["Extract Key Prefix & Secret Body"]
+    EXTRACT --> HASH["Compute SHA-256 Digest of Secret Body"]
+    HASH --> LOOKUP["Query DB / Redis Cache by Hash"]
+
+    LOOKUP -->|Found & Active| SCOPE["Check Key Scopes & Rate Limit Tier"]
+    LOOKUP -->|Not Found / Revoked| REJ["401 Unauthorized (Invalid API Key)"]
+
+    SCOPE -->|Scope Permits Endpoint| ALLOW["Execute Handler"]
+    SCOPE -->|Scope Insufficient| FORBID["403 Forbidden (Insufficient Key Scope)"]
+```
+
 ## Core idea
 
 An API key system has five parts:

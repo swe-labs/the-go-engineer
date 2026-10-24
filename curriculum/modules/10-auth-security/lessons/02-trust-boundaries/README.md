@@ -12,6 +12,35 @@ Every data flow in a distributed system crosses trust boundaries: from the publi
 
 Picture a medieval castle with concentric walls. The outermost wall faces the wilderness (public internet). Inside that wall is the bailey (DMZ), where merchants and travellers are screened. The inner wall surrounds the keep (your application logic), and the innermost chamber (the vault) holds the treasure (user data). Each gate between these zones is a trust boundary: anyone entering must present credentials, and the gatekeeper checks them. In modern architecture, every service-to-service call, every database query, and every goroutine that handles user data crosses a trust boundary.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph Untrusted["Untrusted Public Network"]
+        CLIENT["Web Browser / Mobile App / Attacker"]
+    end
+
+    subgraph DMZ["Edge / Reverse Proxy (Boundary 1)"]
+        PROXY["TLS Termination / WAF (e.g., Envoy / Nginx)"]
+    end
+
+    subgraph InternalProcess["Go Application Process (Boundary 2)"]
+        MIDDLEWARE["Auth & Validation Middleware"]
+        CORE["Domain Business Logic"]
+    end
+
+    subgraph PrivateNetwork["Secure Private Infrastructure (Boundary 3)"]
+        DB[(PostgreSQL Database)]
+        REDIS[(Redis Cache / Session Store)]
+    end
+
+    CLIENT -->|Public HTTPS (Zero Trust)| PROXY
+    PROXY -->|Internal HTTP / mTLS| MIDDLEWARE
+    MIDDLEWARE -->|Validated & Authenticated Context| CORE
+    CORE -->|Connection Pool / Param Queries| DB
+    CORE -->|Encrypted Session Key| REDIS
+```
+
 ## Core idea
 
 A trust boundary is any point where data passes from a lower trust level to a higher trust level. In a typical Go web service, trust boundaries exist at:

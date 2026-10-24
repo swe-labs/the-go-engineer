@@ -18,6 +18,27 @@ A mutex is a lock on a door to a room containing shared data.
 
 The protocol is cooperative: all goroutines must follow the locking convention. A single goroutine that reads or writes without locking breaks the safety guarantee.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SyncMutex["sync.Mutex (Exclusive Lock)"]
+        M_LOCK["mu.Lock()"] --> M_CRIT["Critical Section (Only 1 Goroutine: Read or Write)"] --> M_UNLOCK["mu.Unlock()"]
+    end
+
+    subgraph SyncRWMutex["sync.RWMutex (Shared Reader / Exclusive Writer)"]
+        subgraph Readers["Shared Read Lock (mu.RLock)"]
+            R1["Reader Goroutine 1"]
+            R2["Reader Goroutine 2"]
+            R3["Reader Goroutine 3"]
+        end
+
+        subgraph Writer["Exclusive Write Lock (mu.Lock)"]
+            W1["Writer (Blocks all new readers & writers)"]
+        end
+    end
+```
+
 ## Core idea
 
 ```go

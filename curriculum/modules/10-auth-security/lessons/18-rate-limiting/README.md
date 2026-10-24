@@ -16,6 +16,25 @@ Alternatively, a leaky bucket is like a funnel with a small drain. Water poured 
 
 The key insight: token buckets allow bursts (you can use all tokens at once) while capping the sustained rate. Leaky buckets enforce a strict processing rate but cannot handle bursts.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TokenBucket["Token Bucket Algorithm (e.g., golang.org/x/time/rate)"]
+        BUCKET["Bucket (Max Capacity: B tokens)"]
+        REFILL["Refill Rate: r tokens per second"]
+        REFILL -->|Add tokens up to B| BUCKET
+    end
+
+    REQ["Incoming Client Request"] --> CHECK{"Bucket Has >= 1 Token?"}
+    
+    CHECK -->|Yes| CONSUME["Deduct 1 Token"]
+    CONSUME --> PASS["Forward Request to Handler"]
+
+    CHECK -->|No| REJECT["429 Too Many Requests
+Retry-After: N seconds"]
+```
+
 ## Core idea
 
 Rate limiting algorithms:

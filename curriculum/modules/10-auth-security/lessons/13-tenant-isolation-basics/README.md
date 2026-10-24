@@ -12,6 +12,29 @@ Every SaaS platform is multi-tenant: a single instance serves multiple customers
 
 A multi-tenant database is an apartment building. Each tenant has their own locked apartment door (tenant_id filter). The building manager (application) can enter any apartment for maintenance (admin override), but tenants cannot enter each other's apartments. There are three floor plans: everyone in their own building (separate database), their own floor (separate schema), or adjacent apartments with locks (shared table with tenant_id). The safest is each building, but the most practical is shared tables with row-level security.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph MultiTenantModels["Multi-Tenant Isolation Strategies"]
+        subgraph RowLevel["1. Row-Level Isolation (Shared DB, Shared Schema)"]
+            T1["SELECT * FROM invoices
+WHERE tenant_id = $1 AND id = $2;"]
+            RL_NOTE["Enforced by Repository Seam & PostgreSQL RLS"]
+        end
+
+        subgraph SchemaLevel["2. Schema-Level Isolation (Shared DB, Isolated Schema)"]
+            T2["SET search_path = tenant_acme, public;"]
+            SL_NOTE["Logical separation; migration complexity scales with tenants"]
+        end
+
+        subgraph DatabaseLevel["3. Database-Level Isolation (Separate DB Instances)"]
+            T3["Connection Pool points to dedicated tenant database"]
+            DL_NOTE["Maximum security & isolation; higher infrastructure cost"]
+        end
+    end
+```
+
 ## Core idea
 
 Three tenant isolation strategies:

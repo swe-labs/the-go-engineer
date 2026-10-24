@@ -16,6 +16,24 @@ Anti-CSRF tokens are a secret handshake. The server embeds a unique, unpredictab
 
 SameSite cookies are a complementary defense. A cookie with `SameSite=Strict` is not sent with cross-origin requests, preventing CSRF entirely. `SameSite=Lax` allows top-level navigations (like clicking a link) but blocks POST forms from other sites.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Authenticated User
+    participant Bank as Bank API (bank.com)
+    participant Malicious as Attacker Site (evil.com)
+
+    User->>Bank: Login (Bank sets session cookie: SameSite=None)
+    User->>Malicious: Visits malicious website in another tab
+    Malicious->>Bank: Auto-submits hidden form: POST /transfer {to: "attacker", amount: 1000}
+    Note over User, Bank: Browser automatically attaches bank.com cookie!
+    Bank->>Bank: Processes transfer because cookie is valid!
+
+    Note over Bank: Go Defense: SameSite=Lax/Strict Cookies + Synchronizer CSRF Token in Header
+```
+
 ## Core idea
 
 A CSRF attack has three requirements:

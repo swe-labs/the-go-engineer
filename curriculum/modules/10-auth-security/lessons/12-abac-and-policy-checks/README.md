@@ -12,6 +12,31 @@ RBAC answers "what role does the user have?" but cannot answer "can this user in
 
 ABAC is a security guard with a rulebook. The guard checks: who you are (user attributes), what you want to access (resource attributes), and the situation (environment attributes). The rulebook says: "Allow employees to view documents in their own department during work hours. Allow managers to view any document in their org. Deny all access from outside the corporate network." The guard does not memorize every rule — they consult the rulebook (policy engine) for every decision.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Inputs["Policy Evaluation Inputs"]
+        SUB["Subject Attributes:
+Role: 'Engineer', Dept: 'Billing', ID: 42"]
+        RES["Resource Attributes:
+OwnerID: 42, Status: 'Draft', Classification: 'Confidential'"]
+        ACT["Action: 'documents:update'"]
+        ENV["Environment:
+Time: 14:30 UTC, ClientIP: internal_subnet"]
+    end
+
+    subgraph Engine["Go ABAC Policy Engine"]
+        EVAL{"Rule:
+Subject.ID == Resource.OwnerID
+OR (Subject.Role == 'Admin' AND Env.IsInternal)"}
+    end
+
+    Inputs --> Engine
+    Engine -->|Predicate Evaluates True| PERMIT["Decision: ALLOW"]
+    Engine -->|Predicate Evaluates False| DENY["Decision: DENY (403 Forbidden)"]
+```
+
 ## Core idea
 
 ABAC makes decisions based on three attribute categories:
