@@ -12,6 +12,27 @@ Memory leaks in Go are rare but devastating: a service that grows by 1 MB per mi
 
 A heap profile is a photograph of the heap at a single moment. Each sample represents approximately 512 KB of live allocation. If a call site appears in 10 samples, it is responsible for roughly 5 MB of live heap. The profile is a probability-weighted estimate: allocation sites that allocate rarely may not appear in any sample, and heavy allocators appear in proportion to their allocation volume. Profiles collected at different times can be compared: if a call site's inuse_space grows between profile A and profile B, that site is leaking.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Allocator["Go Runtime Memory Allocator"]
+        MC["mcache (Per-P local cache)"]
+        MCEN["mcentral (Shared span cache)"]
+        MH["mheap (OS Virtual Memory)"]
+        MC --> MCEN --> MH
+    end
+
+    subgraph ProfileTypes["pprof Memory Views"]
+        INUSE_SPACE["inuse_space: Bytes allocated and still referenced by live objects"]
+        ALLOC_SPACE["alloc_space: Total cumulative bytes allocated since startup (GC churn)"]
+        INUSE_OBJ["inuse_objects: Number of live allocated objects"]
+        ALLOC_OBJ["alloc_objects: Total cumulative objects allocated"]
+    end
+
+    Allocator --> ProfileTypes
+```
+
 ## Core idea
 
 The Go runtime tracks allocation at every `mallocgc` call using sampling. The heap profile can be viewed through four lenses:

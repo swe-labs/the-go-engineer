@@ -14,6 +14,23 @@ A multi-tenant building has separate offices on each floor. In the **silent** mo
 
 The tenant identifier flows through every request like a badge: from HTTP request to middleware, into `context.Context`, through business logic, and into every SQL query as a `WHERE tenant_id = ?` clause.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Incoming Request (Header: X-Tenant-ID: 'acme_corp')"] --> MW["Tenant Middleware"]
+    MW --> CTX["ctx = withTenant(ctx, 'acme_corp')"]
+    CTX --> REPO["Repository Query"]
+
+    subgraph IsolationApproaches["Data Isolation Strategies"]
+        ROW["Row Level: SELECT * FROM orders WHERE tenant_id = $1 AND id = $2;"]
+        SCHEMA["Schema Level: SET search_path = acme_corp;"]
+        DATABASE["Database Level: tenantDBPools.Get('acme_corp').QueryRow(...)"]
+    end
+
+    REPO --> ROW
+```
+
 ## Core idea
 
 Three isolation models:

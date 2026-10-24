@@ -14,6 +14,22 @@ A monolith is a single apartment building. As the building grows, more people sh
 
 The trigger to split is not the size of the building itself but the friction of shared resources. If two teams can deploy their changes independently without stepping on each other, keep the monolith. If every deploy requires coordination between three teams, it is time to split.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    START["Considering Splitting Monolith into Microservice?"] --> Q1{"Do different components need radically different scaling profiles (e.g., 100x CPU vs DB)?"}
+    
+    Q1 -->|Yes| Q2{"Are there strictly distinct compliance / data isolation boundaries (e.g., PCI-DSS)?"}
+    Q1 -->|No| MONO["STAY MONOLITH: High development velocity, single deploy, no distributed transactions"]
+
+    Q2 -->|Yes| SPLIT["SPLIT SERVICE: Valid operational boundary justifies network complexity"]
+    Q2 -->|No| Q3{"Do independent teams suffer frequent release train contention?"}
+    
+    Q3 -->|Yes| SPLIT
+    Q3 -->|No| MONO
+```
+
 ## Core idea
 
 Triggers for splitting:

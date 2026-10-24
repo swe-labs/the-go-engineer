@@ -12,6 +12,26 @@ Benchmarks are the only way to objectively measure code performance. Without ben
 
 A benchmark is a stopwatch that runs a function many times and reports the average time per run. The framework finds the right number of repetitions to get a stable average — just like measuring a runner's lap time by timing 100 laps, not 1 lap. The key insight: benchmarks run the same code path repeatedly to cancel out measurement noise from GC, OS scheduling, and CPU frequency scaling. The result is a statistically stable measurement of execution time per operation.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    START["go test -bench=. -benchmem"] --> BENCH["func BenchmarkParser(b *testing.B)"]
+
+    subgraph BenchLoop["Benchmark Execution Harness"]
+        PREP["Expensive setup / fixtures"]
+        RESET["b.ResetTimer()"]
+        LOOP["for i := 0; i < b.N; i++ {
+    ParsePayload(input)
+}"]
+        
+        PREP --> RESET --> LOOP
+    end
+
+    BENCH --> BenchLoop
+    BenchLoop --> OUTPUT["BenchmarkParser-8   5000000   240.2 ns/op   64 B/op   2 allocs/op"]
+```
+
 ## Core idea
 
 A benchmark function in Go has the signature `func BenchmarkXxx(b *testing.B)`. The `testing.B` type provides:

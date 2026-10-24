@@ -14,6 +14,24 @@ A monolith is a bicycle. Simple, cheap, one person can fix it in 5 minutes. A mi
 
 Microservices add overhead to every operation: every function call becomes a network call, every database query becomes an API call, every transaction becomes a saga. The overhead is only justified when the benefits -- independent deployability, team autonomy, independent scaling -- are needed and not achievable with a well-factored monolith.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph MicroserviceTax["The Distributed Systems Overhead ('Microservice Tax')"]
+        N1["Network Latency & Flakiness (Failures are now the norm)"]
+        N2["Distributed Transactions & Eventual Consistency (Loss of ACID)"]
+        N3["Complex Deployment & Observability (Distributed Tracing, K8s, Istio)"]
+        N4["Duplicate Infrastructure & High Operational Maintenance"]
+    end
+
+    subgraph MonolithBenefits["Modular Monolith Advantages"]
+        M1["In-process function calls (Nanosecond latency, zero network error)"]
+        M2["Simple ACID database transactions across domains"]
+        M3["Single repository, single CI/CD pipeline, single binary deploy"]
+    end
+```
+
 ## Core idea
 
 The tradeoffs of microservices:

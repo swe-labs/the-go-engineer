@@ -12,6 +12,23 @@ CPU time is the most constrained resource in compute-bound services. Every micro
 
 CPU profiling is like a photographer taking a flash photo of the CPU every 10 ms. Each photo captures "what function is the CPU executing right now?" After 3,000 photos (30 seconds), the stack trace that appears in 37% of photos likely consumes approximately 37% of CPU. It is not exact — sampling error exists — but with enough samples, the error is small enough to guide optimization decisions. Functions that never appear in any photo consume negligible CPU and should not be optimized first.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SamplingEngine["Go CPU Profiler (100 Hz Sampling)"]
+        TIMER["OS Signal Timer (SIGPROF every 10ms)"]
+        STAMP["Snapshot program counters (PCs) across all running Ms"]
+        AGG["Aggregate call stack frequencies into profile protobuf"]
+        
+        TIMER --> STAMP --> AGG
+    end
+
+    AGG --> FLAME["Flame Graph Generation"]
+    FLAME --> FLAT["flat %: CPU time spent directly in function"]
+    FLAME --> CUM["cum %: CPU time spent in function + all its callees"]
+```
+
 ## Core idea
 
 A CPU profile is a collection of stack trace samples, each representing the program's call stack at an instant when the CPU was executing user code. The `go tool pprof` interactive shell provides four main views:

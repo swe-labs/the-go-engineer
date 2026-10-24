@@ -14,6 +14,27 @@ A package is a walled garden. Inside the walls, everything is shared -- function
 
 A good package boundary is one where the cost of crossing is justified by the freedom it gives the code inside. A bad boundary is one where you constantly need to cross it (too many packages) or where you never benefit from the isolation (too few packages).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    ROOT["Root Repository"]
+    CMD["cmd/api/main.go (Executable Entrypoint, Dependency Wiring)"]
+    INTERNAL["internal/ (Compiler-Enforced Private Packages)"]
+    
+    subgraph InternalPackages["internal/ Domain Boundaries"]
+        AUTH["internal/auth (User identity & JWTs)"]
+        BILLING["internal/billing (Invoicing & Stripe)"]
+        PLATFORM["internal/platform (HTTP, Postgres, Logger utilities)"]
+    end
+
+    ROOT --> CMD
+    CMD --> INTERNAL
+    INTERNAL --> InternalPackages
+
+    RULE["RULE: Code outside this repository cannot import anything under internal/"]
+```
+
 ## Core idea
 
 A package boundary serves three purposes:

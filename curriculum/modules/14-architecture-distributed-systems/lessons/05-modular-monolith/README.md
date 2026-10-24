@@ -14,6 +14,29 @@ A modular monolith is a city with distinct neighborhoods. The residential zone (
 
 If a neighborhood grows too large, it can be split off into its own city (microservice) without redesigning the communication channels. The interfaces between neighborhoods become the service contracts.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph SingleBinary["Single Deployable Binary (Modular Monolith)"]
+        MAIN["cmd/server/main.go"]
+
+        subgraph ModuleA["Module: Identity"]
+            SVC_A["UserService"]
+            REPO_A["UserRepo"]
+        end
+
+        subgraph ModuleB["Module: Orders"]
+            SVC_B["OrderService"]
+            REPO_B["OrderRepo"]
+        end
+
+        MAIN --> ModuleA
+        MAIN --> ModuleB
+        ModuleB -->|Direct Go Interface Call (Zero Network Latency)| ModuleA
+    end
+```
+
 ## Core idea
 
 A modular monolith has three properties:

@@ -12,6 +12,25 @@ Heap allocation is expensive: each allocation requires GC tracking, and each GC 
 
 Escape analysis is the compiler's answer to: "Does this value's address outlive the function that creates it?" If yes → heap (GC must track it). If no → stack (cheap allocation, freed when function returns). The compiler traces every pointer from creation to final use: if the pointer is returned, stored in a global, put into a heap-allocated struct, or captured by a closure — it escapes. If the pointer is only used locally or passed to functions that do not store it — it stays on the stack.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph CompilerDecision["Go Compiler Escape Analysis (go build -gcflags='-m')"]
+        PTR{"Does the variable's pointer outlive its declaring stack frame?"}
+    end
+
+    PTR -->|No: Local Lifetime| STACK["Stack Allocation
+- Sub-nanosecond allocation
+- Zero garbage collector overhead
+- Automatically freed when function returns"]
+    
+    PTR -->|Yes: Escapes to Heap| HEAP["Heap Allocation
+- Requires runtime mallocgc
+- Puts pressure on GC scan phase
+- Causes CPU latency spikes during GC cycles"]
+```
+
 ## Core idea
 
 The Go compiler runs escape analysis on the SSA (Static Single Assignment) intermediate representation after inlining. The analysis builds a directed graph of value flows: allocations, stores, loads, and function calls. For each allocation (call to `runtime.newobject` or stack allocation), the analysis walks forward through all uses of the allocated value. If any use stores the address in a location that outlives the allocating function, the allocation is marked "heap". If all uses are within the function's lifetime, the allocation stays on the stack.

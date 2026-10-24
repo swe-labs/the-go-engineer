@@ -14,6 +14,34 @@ Imagine a computer processor. The processor (core) defines ports: memory bus, I/
 
 In hexagonal architecture, the core domain logic is the processor. The ports are Go interfaces. The adapters are concrete implementations for HTTP, databases, message queues, and test mocks. The core imports only standard library and domain packages. Infrastructure imports the core.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph DrivingAdapters["Driving Adapters (Inbound)"]
+        HTTP["HTTP REST Handler"]
+        CLI["CLI Command"]
+        GRPC["gRPC Handler"]
+    end
+
+    subgraph Core["Domain Core (Hexagon)"]
+        PORTS_IN["Inbound Ports (Service Interfaces)"]
+        DOMAIN["Domain Logic & Entities"]
+        PORTS_OUT["Outbound Ports (Repository & Event Interfaces)"]
+        
+        PORTS_IN --> DOMAIN --> PORTS_OUT
+    end
+
+    subgraph DrivenAdapters["Driven Adapters (Outbound)"]
+        SQL["Postgres Adapter"]
+        MQ["Kafka Event Publisher"]
+        EMAIL["SendGrid Adapter"]
+    end
+
+    DrivingAdapters --> PORTS_IN
+    PORTS_OUT --> DrivenAdapters
+```
+
 ## Core idea
 
 Hexagonal architecture (also called ports and adapters) organizes code into three zones:

@@ -12,6 +12,24 @@ Every Go engineer will eventually debug a slow or memory-hungry service. Without
 
 pprof is a statistical sampling profiler built into the Go runtime. Think of it as an x-ray machine taking snapshots at regular intervals. Each snapshot captures either "what line of code is the CPU executing right now?" (CPU profile) or "what code path allocated this memory?" (heap profile). After enough snapshots (thousands per second), the distribution of stack traces accurately reflects where time or memory is going. It is statistical, not precise — like polling 1,000 voters and extrapolating to the entire population.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph GoApp["Go Application (import _ 'net/http/pprof')"]
+        HANDLER["/debug/pprof/* Endpoints"]
+        EP_CPU["/debug/pprof/profile (CPU profile)"]
+        EP_HEAP["/debug/pprof/heap (Heap memory profile)"]
+        EP_ALLOC["/debug/pprof/allocs (Allocation breakdown)"]
+        EP_ROUTINE["/debug/pprof/goroutine (Stack dumps)"]
+
+        HANDLER --> EP_CPU & EP_HEAP & EP_ALLOC & EP_ROUTINE
+    end
+
+    TOOL["go tool pprof http://localhost:6060/debug/pprof/..."] --> HANDLER
+    TOOL --> WEB["Interactive Web UI & Flame Graphs (localhost:8080)"]
+```
+
 ## Core idea
 
 pprof collects stack trace samples at runtime and groups them by call path. The result is a profile: a set of call stacks, each with a count of how many times that stack was observed. `go tool pprof` visualizes these counts as text, graphs, or flame graphs. The two most commonly used profile types are:

@@ -14,6 +14,30 @@ Request-scoped logging is like putting a unique label on every file in a project
 
 The flow is: middleware extracts/injects a request ID → stores a derived logger (with request ID attached) in context → every handler and downstream function retrieves the logger from context → all log lines from that request include the request ID.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Incoming HTTP Request"] --> MW["Logging Middleware"]
+    
+    subgraph ContextAttachment["Context Injection"]
+        MW --> ATTACH["logger := baseLogger.With(
+  'trace_id', traceID,
+  'tenant_id', tenantID
+)
+ctx = contextWithLogger(ctx, logger)"]
+    end
+
+    ATTACH --> HANDLER["Business Handler"]
+    HANDLER --> SVC["Domain Service Layer"]
+    SVC --> REPO["Database Repository"]
+
+    subgraph UnifiedLogging["Zero Parameter Threading"]
+        HANDLER -.->|loggerFrom(ctx).Info('processing order')| L1["Log with trace_id & tenant_id"]
+        REPO -.->|loggerFrom(ctx).Error('query failed')| L2["Log with trace_id & tenant_id"]
+    end
+```
+
 ## Core idea
 
 Go's `context.Context` is the carrier for request-scoped data. Store a `*slog.Logger` in context (derived from the base logger with request-specific fields via `With`). Any function that receives the context can retrieve the logger and log with the request-scoped attributes automatically included.

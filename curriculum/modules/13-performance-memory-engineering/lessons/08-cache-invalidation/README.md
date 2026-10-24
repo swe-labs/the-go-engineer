@@ -12,6 +12,24 @@ Cache invalidation is one of the two hard things in computer science (along with
 
 Cache invalidation is the problem of keeping a copy (cache) consistent with the source of truth (DB). Imagine a whiteboard that lists office phone numbers. Someone updates the central directory (DB) but forgets to erase the old number on the whiteboard (cache). Callers reach the wrong person. If the erasure is forgotten, the whiteboard shows old data. If the erasure happens before the directory update, the whiteboard is empty even though the directory update failed. If two people erase and write simultaneously, the final whiteboard state may match neither intended update. The three mechanisms are: TTL (the whiteboard self-erases after a timeout), active invalidation (someone erases when the directory changes), and write-through (someone updates the whiteboard as part of the directory update). Each has tradeoffs.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Strategies["Cache Invalidation Strategies"]
+        TTL["1. Time-To-Live (TTL)
+Data automatically expires after duration (Eventual consistency)"]
+        EXPLICIT["2. Write-Through / Invalidate on Mutation
+UPDATE database -> DELETE cache_key immediately"]
+        STAMPEDE["3. Singleflight / Mutex Locking
+Prevents Cache Stampede: Only 1 goroutine queries DB on miss"]
+    end
+
+    UPDATE["User Updates Profile"] --> DB_WRITE["Write to PostgreSQL"]
+    DB_WRITE --> DEL_CACHE["cache.Del(ctx, 'user:42')"]
+    DEL_CACHE --> NEXT_READ["Next read misses cache and repopulates with fresh DB row"]
+```
+
 ## Core idea
 
 The four main cache invalidation strategies:

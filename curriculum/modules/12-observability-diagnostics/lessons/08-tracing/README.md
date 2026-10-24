@@ -16,6 +16,24 @@ A span is like a single stop on the itinerary. It has a start time, end time, an
 
 The analogy breaks for sampling: unlike a physical delivery where every package is tracked, distributed tracing typically samples only 1-5% of requests to keep storage and CPU costs manageable.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph TraceSpanHierarchy["Distributed Trace (TraceID: 4bf92f3577b34da6)"]
+        ROOT["Root Span: HTTP POST /checkout (Duration: 180ms)"]
+        AUTH["Span: Verify JWT (Duration: 15ms)"]
+        INV["Span: Check Inventory DB (Duration: 35ms)"]
+        PAY["Span: Payment Gateway Call (Duration: 110ms)"]
+        CACHE["Span: Redis Invalidate (Duration: 5ms)"]
+
+        ROOT --> AUTH
+        ROOT --> INV
+        ROOT --> PAY
+        ROOT --> CACHE
+    end
+```
+
 ## Core idea
 
 A _trace_ represents the full path of a single request as it travels through a distributed system. A _span_ represents a single unit of work within a trace. Key span properties:

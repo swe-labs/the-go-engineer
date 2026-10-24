@@ -16,6 +16,26 @@ The key metric is the _burn rate_: how fast are you consuming your error budget?
 
 The analogy breaks because smoke detectors are binary (fire/no fire), while alerts have severity levels and can trigger automated responses before paging a human.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Funnel["Alerting Precision Funnel"]
+        SLI["1. Service Level Indicator (SLI)
+Measured success rate: Successful HTTP requests / Total requests"]
+        SLO["2. Service Level Objective (SLO)
+Target: 99.9% of requests succeed over 30 days"]
+        BUDGET["3. Error Budget
+Allowed downtime: 0.1% (43.2 minutes / month)"]
+        BURN["4. Multi-Window Multi-Burn-Rate Alert
+Page engineer ONLY when error budget is burning rapidly (e.g., 2% in 1 hr)"]
+    end
+
+    SLI --> SLO --> BUDGET --> BURN
+    BURN -->|Critical Threat to SLO| PAGER["Page On-Call Engineer"]
+    BURN -->|Minor Fluctuations| TICKET["Non-urgent Ticket / Jira"]
+```
+
 ## Core idea
 
 Three fundamental concepts underpin every alert:

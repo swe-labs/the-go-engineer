@@ -14,6 +14,39 @@ PII redaction is like a security guard at the logging factory gate. Every log re
 
 In Go terms, the security guard is a custom `slog.Handler` that wraps the real handler (text or JSON). The guard's `Handle` method inspects every attribute, redacts matching keys, and passes the cleaned record to the inner handler.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph StructWithSensitiveData["Domain Model"]
+        STRUCT["type UserRegistration struct {
+    Username string
+    Password SensitiveString
+    CardNumber CreditCard
+}"]
+    end
+
+    subgraph LogValuerInterface["slog.LogValuer Implementation"]
+        IMPL["func (p SensitiveString) LogValue() slog.Value {
+    return slog.StringValue('[REDACTED]')
+}
+func (c CreditCard) LogValue() slog.Value {
+    return slog.StringValue(mask(string(c)))
+}"]
+    end
+
+    STRUCT --> IMPL
+    IMPL --> LOG["slog.Info('registered user', 'data', req)"]
+    LOG --> JSON["{
+  "msg": "registered user",
+  "data": {
+    "username": "alice",
+    "password": "[REDACTED]",
+    "card_number": "************1234"
+  }
+}"]
+```
+
 ## Core idea
 
 Redact at the handler level, not at the call site. A handler-level redaction intercepts _every_ log call, including calls from third-party libraries and future code. Call-site redaction (manually masking values before passing to `slog.Info`) is fragile because a developer can forget to redact a new log line.

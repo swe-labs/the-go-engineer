@@ -12,6 +12,24 @@ Every byte of memory in a hot struct is multiplied by the number of instances. A
 
 Memory layout is like Tetris: each field is a block of a certain width (its size), and the compiler places them in a row (the struct). If a block cannot start at the current position because it would overlap a boundary (alignment), the compiler adds padding (empty space) before it. The row's total width is padded at the end to be a multiple of the widest block. Poor ordering wastes space (padding); optimal ordering fits all blocks with minimal gaps.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Unoptimized["Unoptimized Struct (32 Bytes due to Padding)"]
+        U1["bool a (1 byte)"] --- UP1["Padding (7 bytes)"]
+        U2["int64 b (8 bytes)"]
+        U3["bool c (1 byte)"] --- UP2["Padding (7 bytes)"]
+        U4["int64 d (8 bytes)"]
+    end
+
+    subgraph Optimized["Optimized Struct (24 Bytes - Fields Grouped by Size)"]
+        O1["int64 b (8 bytes)"]
+        O2["int64 d (8 bytes)"]
+        O3["bool a (1 byte)"] --- O4["bool c (1 byte)"] --- OP["Padding (6 bytes)"]
+    end
+```
+
 ## Core idea
 
 Every Go type has a natural alignment equal to its size (for primitive types). On 64-bit systems:

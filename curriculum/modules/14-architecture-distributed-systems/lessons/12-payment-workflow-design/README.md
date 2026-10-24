@@ -14,6 +14,23 @@ A payment workflow is a state machine. Each transition performs an action and mo
 
 Think of booking a flight + hotel + car rental as a single trip. You book the flight (step 1), then the hotel (step 2), then the car (step 3). If the car rental fails, you need to cancel the hotel and the flight. Each cancellation is a compensating transaction. You cannot simply "roll back" because the airline's system is separate from the hotel's system. The saga orchestrates the forward steps and, on failure, runs the compensating steps in reverse order.
 
+## Visual model
+
+```mermaid
+stateDiagram-v2
+    [*] --> Pending : Order Created
+    Pending --> Authorizing : Send Auth to Gateway
+    Authorizing --> Authorized : Card Approved
+    Authorizing --> Failed : Card Declined / Timeout
+    Authorized --> Capturing : Capture Funds
+    Capturing --> Settled : Payment Complete
+    Capturing --> Failed : Settlement Error
+    Failed --> Compensating : Execute Refund / Void
+    Compensating --> Cancelled : Order Voided
+    Settled --> [*]
+    Cancelled --> [*]
+```
+
 ## Core idea
 
 **Saga pattern**: a sequence of local transactions where each step has a compensating action that undoes it. There are two coordination models:

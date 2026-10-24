@@ -21,6 +21,27 @@ Incident debugging is a scientific investigation, not a guessing game. The proce
 
 The analogy breaks because production incidents have time pressure — you cannot spend hours testing every hypothesis. The skill is prioritizing the highest-probability hypothesis based on available data.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Engineer as On-Call Engineer
+    participant Grafana as Grafana Dashboard
+    participant Tempo as Distributed Tracing
+    participant Slog as Centralized Logs (Loki / ELK)
+    participant Service as Production Go Service
+
+    Grafana-->>Engineer: Alert: P99 Latency > 2s & HTTP 500 Spike
+    Engineer->>Grafana: Inspect Golden Signals (Identify affected route /orders)
+    Engineer->>Tempo: Filter traces by status=error & route=/orders
+    Tempo-->>Engineer: Reveals span 'postgres.exec' taking 1.9s before error
+    Engineer->>Slog: Query logs matching trace_id="abc-123"
+    Slog-->>Engineer: Error: "pq: canceling statement due to lock timeout"
+    Engineer->>Service: Mitigate (Kill blocking migration transaction / Scale replicas)
+    Service-->>Grafana: Latency & Error rates return to green baseline
+```
+
 ## Core idea
 
 Structured incident response follows a defined severity-based process:

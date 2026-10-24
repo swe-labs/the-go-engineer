@@ -16,6 +16,23 @@ The OTel Collector is like a USB hub: it receives OTLP (OpenTelemetry Protocol) 
 
 The analogy breaks because OTel also handles metrics and logs, not just traces, and the API/SDK separation requires explicit initialization rather than plug-and-play.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph GoProcess["Application Process (OTel Go SDK)"]
+        CODE["Instrumented Code (otel.Tracer)"] --> SPAN["TracerProvider & Spans"]
+        SPAN --> BATCH["BatchSpanProcessor"]
+        BATCH --> EXPORTER["OTLP Exporter (gRPC / HTTP)"]
+    end
+
+    subgraph Collector["Observability Infrastructure"]
+        EXPORTER -->|Network Export| OTEL_COL["OpenTelemetry Collector"]
+        OTEL_COL --> JAEGER["Jaeger / Tempo (Traces)"]
+        OTEL_COL --> PROM["Prometheus / Cortex (Metrics)"]
+    end
+```
+
 ## Core idea
 
 OpenTelemetry is a collection of APIs, SDKs, and tools for generating, collecting, and exporting telemetry data (traces, metrics, logs). Key concepts:

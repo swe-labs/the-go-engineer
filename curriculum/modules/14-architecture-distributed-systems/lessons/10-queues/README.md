@@ -12,6 +12,23 @@ Queues are the backbone of asynchronous processing in every production Go servic
 
 A queue is a line of people waiting for a service window. The first person in line is served first. New arrivals join at the back. This is First-In-First-Out (FIFO) order. In software, the "people" are messages or tasks, the "line" is a data structure (or a channel), and the "service windows" are concurrent worker goroutines. The queue decouples producers (who add items) from consumers (who remove and process them). Producers never wait for consumers, and consumers never wait for producers -- they meet only through the queue.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph PointToPoint["Worker Queue (Point-to-Point)"]
+        PROD1["Producer"] --> Q1["Queue: 'image-processing'"]
+        Q1 --> W1["Worker A"]
+        Q1 --> W2["Worker B (Competing Consumers)"]
+    end
+
+    subgraph PubSub["Publish / Subscribe (Fan-Out)"]
+        PUB["Publisher"] --> TOPIC["Topic: 'user-created'"]
+        TOPIC --> SUB1["Consumer: Welcome Email"]
+        TOPIC --> SUB2["Consumer: Analytics Engine"]
+    end
+```
+
 ## Core idea
 
 A FIFO queue exposes three fundamental operations:

@@ -14,6 +14,25 @@ Prometheus is like a meter reader who walks a route every 15 seconds (scrape int
 
 The analogy breaks for histograms: a histogram is not a single meter but a set of 15+ sub-meters, each counting how many readings fell into a specific bucket (≤10ms, ≤25ms, ≤50ms, ≤100ms, ≤250ms, etc.). Prometheus never computes percentiles server-side; it stores bucket counts, and the query tool (PromQL) estimates percentiles by linear interpolation within the bucket.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph GoApplication["Go Microservice"]
+        APP["Domain Handlers"] --> METRICS["Prometheus Registry
+- http_requests_total (Counter)
+- http_request_duration_seconds (Histogram)
+- active_workers (Gauge)"]
+        METRICS --> ENDPOINT["/metrics (promhttp.Handler())"]
+    end
+
+    subgraph PrometheusServer["Prometheus Server (Pull Architecture)"]
+        SCRAPE["Scrape Worker (e.g., every 15s)"] -->|HTTP GET /metrics| ENDPOINT
+        SCRAPE --> TSDB[(Time Series Database)]
+        TSDB --> ALERT_MGR["Alertmanager / Grafana"]
+    end
+```
+
 ## Core idea
 
 Prometheus defines four core metric types:

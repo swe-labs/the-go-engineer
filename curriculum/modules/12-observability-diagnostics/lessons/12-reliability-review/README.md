@@ -19,6 +19,19 @@ Reliability patterns are like building fire safety into a skyscraper:
 
 The analogy breaks because software is not physical — bulkheads can be resized at runtime, circuit breakers can be half-open (testing if the fire is out), and redundancy is limited by cost and consistency constraints.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ReadinessChecklist["Production Reliability Review Pillars"]
+        LIFECYCLE["1. Lifecycle: Graceful shutdown with signal handling & active request drain"]
+        LIMITS["2. Load Defense: MaxBytesReader, request timeouts, and client rate limiting"]
+        POOLING["3. Persistence: Bounded DB connections, query timeouts via context.WithTimeout"]
+        PROBES["4. Orchestration: Separate /healthz (liveness) and /readyz (readiness) endpoints"]
+        TELEMETRY["5. Telemetry: JSON structured logs with redaction, Prometheus metrics, OTel spans"]
+    end
+```
+
 ## Core idea
 
 Reliability patterns work together to create systems that survive failures:

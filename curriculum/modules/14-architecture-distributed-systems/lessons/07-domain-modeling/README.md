@@ -14,6 +14,28 @@ Think of a traffic intersection. The intersection has rules (stop signs, traffic
 
 A rich domain model is the traffic light. The data (which cars are waiting) and the rules (when to switch lights) are in the same place. An anemic model is the sign: the data (cars at intersection) and the rules (who goes first) are separate, and someone outside must coordinate them.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    subgraph AnemicModel["Anti-Pattern: Anemic Data Model"]
+        AD["type Account struct { Balance float64 }"]
+        AH["Handler directly modifies: acc.Balance -= 100
+(Business rules leak everywhere)"]
+        AD --- AH
+    end
+
+    subgraph RichDomainModel["Idiomatic Go: Rich Domain Entity"]
+        RD["type Account struct { balance Money }"]
+        RM["func (a *Account) Withdraw(amt Money) error {
+    if amt > a.balance { return ErrInsufficientFunds }
+    a.balance -= amt
+    return nil
+}"]
+        RD --- RM
+    end
+```
+
 ## Core idea
 
 Domain-Driven Design (DDD) provides three building blocks:

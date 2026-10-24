@@ -14,6 +14,21 @@ A cache is a fast, limited-size copy of a slower, authoritative data store. Thin
 
 In cache-aside (look-aside), the application code manages the cache. In read-through, the cache library automatically loads missing keys from the database. In write-behind, writes go to the cache first and are asynchronously flushed to the database. Write-through writes to both cache and database synchronously.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    REQ["Client Request"] --> L1{"L1 Cache (In-Memory Go Heap / sync.Map)"}
+    
+    L1 -->|Hit: <100ns| RESP1["Return Response"]
+    L1 -->|Miss| L2{"L2 Cache (Distributed Redis Cluster)"}
+    
+    L2 -->|Hit: ~1ms| RESP2["Populate L1 & Return Response"]
+    L2 -->|Miss| SOT["Source of Truth (PostgreSQL)"]
+    
+    SOT -->|Query: ~15ms| POPULATE["Populate L2 & L1"] --> RESP3["Return Response"]
+```
+
 ## Core idea
 
 Caching strategies differ by who manages cache population and how writes propagate:

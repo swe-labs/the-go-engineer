@@ -14,6 +14,22 @@ Metrics are the vital signs of a service. Like heart rate (request rate), blood 
 
 Metrics answer "is the service healthy?" and "what changed?". They do not answer "why?" (that is logs) or "where exactly?" (that is traces). The three together give a complete picture.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph FourGoldenSignals["The Four Golden Signals of Monitoring"]
+        LATENCY["1. Latency: Time taken to serve requests
+(P50, P90, P99 distribution)"]
+        TRAFFIC["2. Traffic: Demand placed on system
+(Requests per second, active connections)"]
+        ERRORS["3. Errors: Rate of failed requests
+(Explicit 5xx, implicit failures, validation 4xx)"]
+        SATURATION["4. Saturation: Resource fullness
+(Memory usage, CPU core busy %, DB pool queue length)"]
+    end
+```
+
 ## Core idea
 
 A metric is a numeric value that changes over time, exposed for external collection (scraping) by a monitoring system. The four fundamental metric types:

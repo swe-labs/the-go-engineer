@@ -14,6 +14,27 @@ Imagine mailing a letter. You put it in the mailbox (send). The postal service p
 
 Retries are analogous to knocking on a door again if nobody answers. Wait a short time, knock again. If still no answer, wait longer. This is exponential backoff. Adding random variation (jitter) prevents the "thundering herd" problem where all retries arrive simultaneously after a service outage.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Broker as Message Queue
+    participant Consumer as Go Event Consumer
+    participant DB as Postgres (Processed Events Table)
+
+    Broker->>Consumer: Deliver Message {id: "msg_789", event: "ChargeUser"}
+    Consumer->>DB: INSERT INTO processed_events (message_id) VALUES ('msg_789') ON CONFLICT DO NOTHING
+    alt Conflict Detected (Already Processed!)
+        DB-->>Consumer: 0 rows inserted
+        Consumer->>Broker: ACK (Skip processing without duplicate charge)
+    else New Message
+        DB-->>Consumer: 1 row inserted
+        Consumer->>Consumer: Execute Business Transaction
+        Consumer->>Broker: ACK
+    end
+```
+
 ## Core idea
 
 **Idempotency**: an operation is idempotent if processing it multiple times produces the same result as processing it once. `SET balance = 100` is idempotent. `ADD balance + 10` is not.

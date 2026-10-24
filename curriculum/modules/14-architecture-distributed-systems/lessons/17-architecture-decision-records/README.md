@@ -14,6 +14,24 @@ An ADR is a commit message for an architecture decision. It records what was dec
 
 Think of ADRs as a decision journal. When you face a fork in the road (monolith vs microservices, PostgreSQL vs MySQL, REST vs gRPC), you write an ADR documenting which path you took and why. Six months later, when someone asks "why did we choose Kafka over RabbitMQ?", the ADR has the answer.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ADR_Structure["Architecture Decision Record (ADR) Anatomy"]
+        TITLE["ADR 001: Adopt PostgreSQL and sqlc for Relational Persistence"]
+        STATUS["Status: Accepted | Date: 2026-10-24"]
+        CONTEXT["Context: Why are we making this choice? What problem are we solving?"]
+        DECISION["Decision: What is the chosen technical design or library?"]
+        CONSEQUENCES["Consequences:
+- Positive: Type-safe SQL, zero runtime overhead
+- Negative: Requires code generation step in CI"]
+        ALTERNATIVES["Alternatives Considered: GORM, Raw database/sql, Ent"]
+
+        TITLE --- STATUS --- CONTEXT --- DECISION --- CONSEQUENCES --- ALTERNATIVES
+    end
+```
+
 ## Core idea
 
 The standard ADR format (by Michael Nygard):

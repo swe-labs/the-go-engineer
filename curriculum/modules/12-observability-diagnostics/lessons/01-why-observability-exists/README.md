@@ -20,6 +20,28 @@ The three pillars each answer a different question:
 
 When all three are present and correlated (via a correlation ID), an operator can start with a metric alert (error rate spike), drill into logs (all errors have status=500, handler=/api/payments), and open a trace (the span for processPayment takes 5s because the database is under memory pressure).
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ThreePillars["The Three Pillars of Observability"]
+        METRICS["Metrics (Aggregated Health)
+What is broken and where?
+(Counter, Gauge, Histogram, Error Rate)"]
+        LOGS["Logs (Discrete Events)
+Why did it happen?
+(Timestamped JSON records with contextual keys)"]
+        TRACES["Traces (Distributed Journeys)
+Where did time go?
+(End-to-end request flow across microservices)"]
+    end
+
+    INCIDENT["Production Anomaly Detected"] --> METRICS
+    METRICS -->|Spike in HTTP 500s on /checkout| TRACES
+    TRACES -->|Identifies slow span in payment service| LOGS
+    LOGS -->|Locates exact error: 'timeout reaching gateway'| ROOT_CAUSE["Mitigation & Fix"]
+```
+
 ## Core idea
 
 Observability is designed in, not retrofitted. A system is observable when you can determine its internal state from the data it emits — without guessing, without reproducing, without redeploying with new log lines.

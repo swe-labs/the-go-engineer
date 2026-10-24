@@ -20,6 +20,28 @@ The sticky note is human-readable in isolation but useless for search, aggregati
 
 slog's handler API is an assembly line: each log call creates a `Record` (item on the line), passes it through the handler (worker that serializes it), and writes it to output (shipping dock). The handler decides the output format (text or JSON) and the log level determines whether the record reaches the handler at all.
 
+## Visual model
+
+```mermaid
+flowchart LR
+    CALL["slog.Info('user signed in',
+  'user_id', 42,
+  'duration_ms', 12.4)"] --> LOGGER["*slog.Logger"]
+    LOGGER --> HANDLER["slog.Handler (JSONHandler)"]
+
+    subgraph Output["JSON Record to stdout"]
+        REC["{
+  "time": "2026-10-24T17:00:00Z",
+  "level": "INFO",
+  "msg": "user signed in",
+  "user_id": 42,
+  "duration_ms": 12.4
+}"]
+    end
+
+    HANDLER --> Output
+```
+
 ## Core idea
 
 A structured log entry is a key-value mapping, not a flat string. Each attribute has a typed value (string, int, bool, duration) that the handler serializes according to its format. The schema for every log line is known at compile time (the keys are string literals) and the values are typed at runtime.

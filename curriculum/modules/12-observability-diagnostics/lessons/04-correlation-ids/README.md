@@ -14,6 +14,27 @@ A correlation ID is a single UUID that travels with a request across every servi
 
 The flow: client (or API gateway) generates a correlation ID → passes it as an HTTP header (X-Correlation-Id) → service A extracts it, stores in context, logs it, forwards it to service B → service B extracts it, stores in context, logs it, forwards to service C → ... → when any service fails, the entire chain is visible by searching the correlation ID.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client
+    participant Gateway as API Gateway
+    participant OrderSvc as Order Service (Go)
+    participant PaymentSvc as Payment Service (Go)
+
+    Client->>Gateway: POST /orders (No Header)
+    Gateway->>Gateway: Generate X-Request-ID: "req-987abc"
+    Gateway->>OrderSvc: POST /orders (X-Request-ID: "req-987abc")
+    OrderSvc->>OrderSvc: Store "req-987abc" in context.Context
+    OrderSvc->>PaymentSvc: POST /charge (Forward X-Request-ID: "req-987abc")
+    PaymentSvc->>PaymentSvc: Log event with trace_id="req-987abc"
+    PaymentSvc-->>OrderSvc: 200 OK (X-Request-ID: "req-987abc")
+    OrderSvc-->>Gateway: 200 OK
+    Gateway-->>Client: 200 OK (X-Request-ID: "req-987abc")
+```
+
 ## Core idea
 
 A correlation ID is a globally unique identifier that is generated once at the entry point of a request and propagated through every service, every goroutine, and every async operation that the request touches. It is never regenerated — the original ID travels unchanged through the entire system.

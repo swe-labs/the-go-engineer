@@ -12,6 +12,27 @@ Every Go HTTP service with a database should have some form of in-memory cache. 
 
 A cache is a fast temporary storage that sits between the application and a slow data source. Think of it as a drawer next to your desk. The drawer holds frequently used tools (data). Reaching into the drawer takes one second; walking to the toolbox takes five minutes. The drawer has limited space — when it fills up, the least-used tool goes back to the toolbox (LRU eviction). The key insight: caching only helps if the access pattern has locality — the same keys are requested repeatedly within the eviction window.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant App as Application Handler
+    participant Cache as Redis / In-Memory Cache
+    participant DB as PostgreSQL Database
+
+    App->>Cache: GET user:42
+    alt Cache Hit
+        Cache-->>App: Return cached JSON payload (Latency: <1ms)
+    else Cache Miss
+        Cache-->>App: Nil / Key not found
+        App->>DB: SELECT * FROM users WHERE id = 42 (Latency: ~15ms)
+        DB-->>App: Row data
+        App->>Cache: SET user:42 <data> EX 300 (TTL 5m)
+        App-->>App: Process and return response
+    end
+```
+
 ## Core idea
 
 A cache stores the result of an expensive operation so that future requests for the same key can be served faster. The fundamental operations are:

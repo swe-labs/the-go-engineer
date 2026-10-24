@@ -12,6 +12,23 @@ HTTP handlers, gRPC interceptors, and CLI commands are transport mechanisms. Dat
 
 The service layer is the brain of the application. The handler is the mouth (talks to the outside world). The repository is the hands (talks to storage). The brain decides what to do (business rules), the mouth receives input and delivers output, and the hands execute storage operations. The brain should not do the hands' job (SQL queries) or the mouth's job (HTTP parsing). The brain should be testable without the mouth or hands -- inject mock dependencies and test the business logic in isolation.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    HTTP["Transport Layer: http.Handler / gRPC
+(JSON parsing, status codes, query params)"]
+    SVC["Service Layer: OrderService
+(Business validation, transactional workflows, orchestration)"]
+    REPO["Repository Layer: OrderRepository
+(SQL queries, row scanning, transactions)"]
+    DB[(PostgreSQL Database)]
+
+    HTTP -->|Calls domain method| SVC
+    SVC -->|Calls data access interface| REPO
+    REPO -->|Executes SQL| DB
+```
+
 ## Core idea
 
 The service layer is a Go struct that:

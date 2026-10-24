@@ -14,6 +14,26 @@ Think of invariants as guardrails on a highway. The guardrails do not tell you w
 
 In code, invariants work the same way. You can create orders, add items, change addresses, and process payments. But you cannot create an order without items. You cannot ship an unpaid order. You cannot have a negative account balance. The guardrails (invariant checks) prevent the system from entering invalid states.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    RAW["Client Payload: {Email: '', Age: -5}"] --> CONSTRUCTOR["NewUser(email, age) (Constructor Seam)"]
+    
+    subgraph GuardInvariants["Invariant Validation"]
+        CHECK1{"email != '' && validEmail(email)"}
+        CHECK2{"age >= 18"}
+    end
+
+    CONSTRUCTOR --> CHECK1
+    CHECK1 -->|Invalid| ERR["Return ErrInvalidEmail"]
+    CHECK1 -->|Valid| CHECK2
+    CHECK2 -->|Invalid| ERR2["Return ErrUnderage"]
+    CHECK2 -->|Valid| INSTANCE["&User{email, age} (Valid Pointer Created)"]
+
+    NOTE["Unexported fields ensure instance state cannot be corrupted post-creation!"]
+```
+
 ## Core idea
 
 There are three levels of invariant enforcement:

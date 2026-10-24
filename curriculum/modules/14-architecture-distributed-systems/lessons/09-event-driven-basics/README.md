@@ -14,6 +14,25 @@ An event bus is a mailing list. The producer posts a message to the list (publis
 
 In Go, the event bus is typically an in-memory struct with a `Publish` method and a `Subscribe` method. Handlers are functions that match a signature. The bus calls each handler synchronously or asynchronously.
 
+## Visual model
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant OrderSvc as Order Service
+    participant Broker as Message Broker (Kafka / RabbitMQ)
+    participant NotificationSvc as Notification Service
+    participant InventorySvc as Inventory Service
+
+    OrderSvc->>OrderSvc: Commit Order to PostgreSQL
+    OrderSvc->>Broker: Publish Event: OrderPlaced {order_id: 101, user_id: 42}
+    Note over Broker: Asynchronous Fan-Out
+    Broker->>NotificationSvc: Deliver OrderPlaced
+    Broker->>InventorySvc: Deliver OrderPlaced
+    NotificationSvc->>NotificationSvc: Send Email Confirmation
+    InventorySvc->>InventorySvc: Reserve Warehouse Stock
+```
+
 ## Core idea
 
 An event is a record that something happened. It has a type (what happened) and data (the relevant payload).

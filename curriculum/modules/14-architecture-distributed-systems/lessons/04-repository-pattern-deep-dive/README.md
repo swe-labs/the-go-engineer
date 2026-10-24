@@ -14,6 +14,28 @@ A repository is a collection-like interface for domain objects. You ask the repo
 
 This abstraction is not about supporting multiple databases in production (you almost never do that). It is about making tests fast and reliable. An in-memory repository has no network, no disk, no connection pooling, no migration scripts. Tests that use it run in milliseconds and never flake due to database unavailability.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph Domain["Domain Package (Defines the Contract)"]
+        INTF["type UserRepository interface {
+    FindByID(ctx context.Context, id int64) (*User, error)
+    Create(ctx context.Context, u *User) error
+}"]
+    end
+
+    subgraph Implementations["Satisfying Implementations"]
+        PG["PostgresUserRepository (Production)
+Uses database/sql and raw SQL queries"]
+        MOCK["MockUserRepository (Unit Tests)
+Uses in-memory map without needing Docker"]
+    end
+
+    INTF <|.. PG
+    INTF <|.. MOCK
+```
+
 ## Core idea
 
 A repository interface is defined in the domain package (the consumer), not the infrastructure package (the implementor). This is dependency inversion: high-level modules (domain) do not depend on low-level modules (infrastructure). Both depend on abstractions.

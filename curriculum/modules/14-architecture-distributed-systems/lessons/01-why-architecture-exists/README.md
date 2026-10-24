@@ -14,6 +14,18 @@ Architecture is a set of constraints you choose to impose on yourself. Think of 
 
 In code, architecture means deciding which packages exist, what each package exports, and how packages depend on each other. The earlier you impose gentle structure, the later you hit the wall where the codebase becomes unproductive.
 
+## Visual model
+
+```mermaid
+flowchart TD
+    subgraph ArchitectureGoal["The Objective of Software Architecture"]
+        SCALE_TEAM["Scale Engineering Team (Clear ownership & boundaries)"]
+        SCALE_CODE["Control Cognitive Load (High cohesion, low coupling)"]
+        SCALE_CHANGE["Enable Safe Evolution (Swap DB/APIs without rewriting core)"]
+        TESTABLE["Ensure Testability (Mock external I/O via clean interfaces)"]
+    end
+```
+
 ## Core idea
 
 _Architecture_ is the set of design decisions that are expensive to change. Good architecture maximizes the parts of the system that can change independently. Two primary metrics measure this:
