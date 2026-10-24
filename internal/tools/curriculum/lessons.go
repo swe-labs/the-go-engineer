@@ -55,7 +55,7 @@ func validateLessons() {
 
 				// Check readme exists
 				if item.Files.ReadmePath != "" {
-					rp := filepath.Join(curriculumDir, "..", item.Files.ReadmePath)
+					rp := resolvePath(item.Files.ReadmePath)
 					if !pathExists(rp) {
 						warn(item.Files.ReadmePath, "README not found")
 					}
@@ -63,7 +63,7 @@ func validateLessons() {
 
 				// Check main source file exists
 				if item.Files.MainPath != "" {
-					mp := filepath.Join(curriculumDir, "..", item.Files.MainPath)
+					mp := resolvePath(item.Files.MainPath)
 					if !pathExists(mp) {
 						warn(item.Files.MainPath, "main source not found")
 					}
@@ -71,7 +71,7 @@ func validateLessons() {
 
 				// Check starter code exists
 				if item.Files.StarterPath != "" {
-					sp := filepath.Join(curriculumDir, "..", item.Files.StarterPath)
+					sp := resolvePath(item.Files.StarterPath)
 					if !pathExists(sp) {
 						warn(item.Files.StarterPath, "starter code not found")
 					}
@@ -79,7 +79,7 @@ func validateLessons() {
 
 				// Check solution exists
 				if item.Files.SolutionPath != "" {
-					sol := filepath.Join(curriculumDir, "..", item.Files.SolutionPath)
+					sol := resolvePath(item.Files.SolutionPath)
 					if !pathExists(sol) {
 						warn(item.Files.SolutionPath, "solution not found")
 					}
@@ -87,7 +87,7 @@ func validateLessons() {
 
 				// Check tests exist
 				if item.Files.TestPath != "" {
-					tp := filepath.Join(curriculumDir, "..", item.Files.TestPath)
+					tp := resolvePath(item.Files.TestPath)
 					if !pathExists(tp) {
 						warn(item.Files.TestPath, "test file not found")
 					}

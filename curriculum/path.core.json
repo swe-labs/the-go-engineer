@@ -103,11 +103,11 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [],
       "slug": "how-to-use-this-repository",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -283,13 +283,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-01."
       ],
       "slug": "what-zero-magic-means",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -465,13 +465,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-02."
       ],
       "slug": "how-lessons-exercises-projects-and-checkpoints-work",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -647,13 +647,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-03."
       ],
       "slug": "how-to-run-code-in-this-repository",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -829,13 +829,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-04."
       ],
       "slug": "how-starter-folders-work",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -1018,13 +1018,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-05."
       ],
       "slug": "how-assessments-work",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -1207,13 +1207,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-06."
       ],
       "slug": "how-to-ask-good-debugging-questions",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -1396,13 +1396,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-07."
       ],
       "slug": "what-job-ready-means",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -1585,13 +1585,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-08."
       ],
       "slug": "how-to-use-the-roadmap",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -1789,13 +1789,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-09."
       ],
       "slug": "how-to-build-a-portfolio-from-this-curriculum",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "orientation",
@@ -1971,7 +1971,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-00-10."
       ],
@@ -1979,7 +1979,7 @@
       "source_legacy_ids": [
         "HC.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -2156,13 +2156,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-01."
       ],
       "slug": "source-code-executable-and-process",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -2339,13 +2339,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-02."
       ],
       "slug": "files-bytes-directories-and-paths",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -2522,13 +2522,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-03."
       ],
       "slug": "terminal-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -2705,13 +2705,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-04."
       ],
       "slug": "environment-variables",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -2888,13 +2888,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-05."
       ],
       "slug": "exit-codes",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -3079,7 +3079,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-06."
       ],
@@ -3087,7 +3087,7 @@
       "source_legacy_ids": [
         "HC.5"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -3279,7 +3279,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-07."
       ],
@@ -3287,7 +3287,7 @@
       "source_legacy_ids": [
         "HC.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -3464,13 +3464,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-08."
       ],
       "slug": "git-mental-model",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -3647,13 +3647,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-09."
       ],
       "slug": "git-basics-status-add-commit",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -3830,13 +3830,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-10."
       ],
       "slug": "branching-and-merging",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -4013,13 +4013,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-11."
       ],
       "slug": "github-workflow",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -4196,13 +4196,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-12."
       ],
       "slug": "pull-requests-and-code-review",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -4379,13 +4379,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-13."
       ],
       "slug": "web-preview-client-server-dns-and-ports",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -4577,13 +4577,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-14."
       ],
       "slug": "http-request-and-response-preview",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "foundations",
@@ -4760,7 +4760,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-01-15."
       ],
@@ -4768,7 +4768,7 @@
       "source_legacy_ids": [
         "GT.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -4945,7 +4945,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-01."
       ],
@@ -4953,7 +4953,7 @@
       "source_legacy_ids": [
         "GT.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -5130,13 +5130,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-02."
       ],
       "slug": "go-run",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -5312,13 +5312,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-03."
       ],
       "slug": "go-build",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -5495,13 +5495,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-04."
       ],
       "slug": "go-test",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "tooling",
@@ -5678,13 +5678,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-05."
       ],
       "slug": "gofmt",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -5861,13 +5861,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-06."
       ],
       "slug": "go-vet",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -6044,13 +6044,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-07."
       ],
       "slug": "go-doc",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -6227,13 +6227,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-08."
       ],
       "slug": "editor-setup-and-gopls",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -6410,7 +6410,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-09."
       ],
@@ -6418,7 +6418,7 @@
       "source_legacy_ids": [
         "GT.6"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -6595,13 +6595,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-10."
       ],
       "slug": "reading-runtime-errors",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -6778,13 +6778,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-11."
       ],
       "slug": "reading-test-failures",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "tooling",
@@ -6969,13 +6969,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-12."
       ],
       "slug": "go-module-root-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -7160,13 +7160,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-13."
       ],
       "slug": "tooling-checklist",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "tooling",
@@ -7354,13 +7354,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-02-14."
       ],
       "slug": "values-and-expressions",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -7544,7 +7544,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-01."
       ],
@@ -7552,7 +7552,7 @@
       "source_legacy_ids": [
         "LB.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -7736,13 +7736,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-02."
       ],
       "slug": "types",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -7926,13 +7926,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-03."
       ],
       "slug": "zero-values",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -8116,13 +8116,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-04."
       ],
       "slug": "type-conversions",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -8306,7 +8306,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-05."
       ],
@@ -8314,7 +8314,7 @@
       "source_legacy_ids": [
         "LB.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -8498,7 +8498,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-06."
       ],
@@ -8506,7 +8506,7 @@
       "source_legacy_ids": [
         "LB.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -8690,13 +8690,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-07."
       ],
       "slug": "boolean-logic",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -8880,7 +8880,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-08."
       ],
@@ -8888,7 +8888,7 @@
       "source_legacy_ids": [
         "CF.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -9072,7 +9072,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-09."
       ],
@@ -9080,7 +9080,7 @@
       "source_legacy_ids": [
         "CF.4"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -9264,13 +9264,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-10."
       ],
       "slug": "loops",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -9454,13 +9454,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-11."
       ],
       "slug": "range",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -9644,7 +9644,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-12."
       ],
@@ -9652,7 +9652,7 @@
       "source_legacy_ids": [
         "DS.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -9836,7 +9836,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-13."
       ],
@@ -9844,7 +9844,7 @@
       "source_legacy_ids": [
         "DS.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -10028,13 +10028,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-14."
       ],
       "slug": "slice-length-and-capacity",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -10218,13 +10218,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-15."
       ],
       "slug": "slice-sharing-and-aliasing",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -10408,7 +10408,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-16."
       ],
@@ -10416,7 +10416,7 @@
       "source_legacy_ids": [
         "DS.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -10600,13 +10600,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-17."
       ],
       "slug": "comma-ok-idiom",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -10790,13 +10790,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-18."
       ],
       "slug": "strings",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -10980,13 +10980,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-19."
       ],
       "slug": "bytes",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -11170,13 +11170,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-20."
       ],
       "slug": "runes-and-unicode",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -11368,7 +11368,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-21."
       ],
@@ -11376,7 +11376,7 @@
       "source_legacy_ids": [
         "DS.4"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -11575,13 +11575,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-22."
       ],
       "slug": "beginner-pointer-mistakes",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -11660,7 +11660,7 @@
       "title": "Algorithmic problem-solving and complexity",
       "type": "lesson",
       "subtype": "concept",
-      "status": "draft",
+      "status": "ready",
       "difficulty": "core",
       "phase": "go-core",
       "order": 24,
@@ -11806,7 +11806,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded"
+      "readme_status": "reviewed"
     },
     {
       "content_contract": {
@@ -11913,7 +11913,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-03-24."
       ],
@@ -11921,7 +11921,7 @@
       "source_legacy_ids": [
         "FE.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -12102,13 +12102,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-01."
       ],
       "slug": "parameters",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -12287,13 +12287,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-02."
       ],
       "slug": "return-values",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -12472,13 +12472,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-03."
       ],
       "slug": "multiple-return-values",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -12658,13 +12658,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-04."
       ],
       "slug": "scope",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -12844,13 +12844,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-05."
       ],
       "slug": "call-stack-mental-model",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -13032,13 +13032,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-06."
       ],
       "slug": "passing-by-value",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -13219,13 +13219,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-07."
       ],
       "slug": "pointer-and-value-mutation-behavior",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -13408,7 +13408,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-08."
       ],
@@ -13416,7 +13416,7 @@
       "source_legacy_ids": [
         "FE.4"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -13589,13 +13589,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-09."
       ],
       "slug": "error-wrapping",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -13775,13 +13775,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-10."
       ],
       "slug": "errors-is",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -13962,13 +13962,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-11."
       ],
       "slug": "errors-as",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -14149,7 +14149,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-12."
       ],
@@ -14157,7 +14157,7 @@
       "source_legacy_ids": [
         "FE.5"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -14339,13 +14339,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-13."
       ],
       "slug": "orchestration",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -14528,13 +14528,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-14."
       ],
       "slug": "defer-mechanics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -14717,13 +14717,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-15."
       ],
       "slug": "defer-for-cleanup",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -14906,13 +14906,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-16."
       ],
       "slug": "panic-and-recover",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -15095,13 +15095,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-17."
       ],
       "slug": "custom-error-types",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "go-core",
@@ -15290,7 +15290,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-04-18."
       ],
@@ -15298,7 +15298,7 @@
       "source_legacy_ids": [
         "TI.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -15487,7 +15487,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-01."
       ],
@@ -15495,7 +15495,7 @@
       "source_legacy_ids": [
         "TI.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -15684,13 +15684,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-02."
       ],
       "slug": "pointer-receivers",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -15879,13 +15879,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-03."
       ],
       "slug": "value-receivers",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -16074,13 +16074,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-04."
       ],
       "slug": "receiver-sets",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -16268,7 +16268,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-05."
       ],
@@ -16276,7 +16276,7 @@
       "source_legacy_ids": [
         "CO.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -16465,7 +16465,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-06."
       ],
@@ -16473,7 +16473,7 @@
       "source_legacy_ids": [
         "CO.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -16662,7 +16662,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-07."
       ],
@@ -16670,7 +16670,7 @@
       "source_legacy_ids": [
         "TI.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -16847,13 +16847,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-08."
       ],
       "slug": "small-interfaces",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -17042,13 +17042,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-09."
       ],
       "slug": "interface-embedding",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -17237,7 +17237,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-10."
       ],
@@ -17245,7 +17245,7 @@
       "source_legacy_ids": [
         "TI.5"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -17434,13 +17434,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-11."
       ],
       "slug": "type-assertions",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -17629,13 +17629,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-12."
       ],
       "slug": "type-switches",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -17824,13 +17824,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-13."
       ],
       "slug": "nil-interfaces",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -18015,7 +18015,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-14."
       ],
@@ -18023,7 +18023,7 @@
       "source_legacy_ids": [
         "PD.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -18212,7 +18212,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-15."
       ],
@@ -18220,7 +18220,7 @@
       "source_legacy_ids": [
         "PD.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -18409,7 +18409,7 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-16."
       ],
@@ -18417,7 +18417,7 @@
       "source_legacy_ids": [
         "PD.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -18607,7 +18607,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-17."
       ],
@@ -18615,7 +18615,7 @@
       "source_legacy_ids": [
         "MP.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -18804,13 +18804,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-18."
       ],
       "slug": "go-mod",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -18999,13 +18999,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-19."
       ],
       "slug": "go-sum",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -19194,7 +19194,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-20."
       ],
@@ -19202,7 +19202,7 @@
       "source_legacy_ids": [
         "MP.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -19391,13 +19391,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-21."
       ],
       "slug": "workspaces",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -19594,13 +19594,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-22."
       ],
       "slug": "documentation-comments",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "engineering-core",
@@ -19683,7 +19683,7 @@
       "title": "Generics fundamentals",
       "type": "lesson",
       "subtype": "concept",
-      "status": "draft",
+      "status": "ready",
       "difficulty": "core",
       "phase": "engineering-core",
       "order": 24,
@@ -19829,7 +19829,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded"
+      "readme_status": "reviewed"
     },
     {
       "content_contract": {
@@ -19943,13 +19943,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-05-24."
       ],
       "slug": "why-testing-exists",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -20138,7 +20138,7 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-01."
       ],
@@ -20146,7 +20146,7 @@
       "source_legacy_ids": [
         "TE.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -20335,7 +20335,7 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-02."
       ],
@@ -20343,7 +20343,7 @@
       "source_legacy_ids": [
         "TE.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -20532,13 +20532,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-03."
       ],
       "slug": "subtests",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -20727,13 +20727,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-04."
       ],
       "slug": "t-cleanup",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -20922,13 +20922,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-05."
       ],
       "slug": "test-fixtures",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -21117,7 +21117,7 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-06."
       ],
@@ -21125,7 +21125,7 @@
       "source_legacy_ids": [
         "TE.10"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -21314,13 +21314,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-07."
       ],
       "slug": "testable-design-with-io-writer",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -21509,13 +21509,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-08."
       ],
       "slug": "fakes-before-mocks",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -21704,13 +21704,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-09."
       ],
       "slug": "mocking-tradeoffs",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -21899,13 +21899,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-10."
       ],
       "slug": "debugging-mindset",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "debugging",
       "tags": [
         "engineering-core",
@@ -22094,13 +22094,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-11."
       ],
       "slug": "reading-stack-traces",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -22289,13 +22289,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-12."
       ],
       "slug": "debugging-panics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "debugging",
       "tags": [
         "engineering-core",
@@ -22484,13 +22484,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-13."
       ],
       "slug": "delve-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "debugging",
       "tags": [
         "engineering-core",
@@ -22679,13 +22679,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-14."
       ],
       "slug": "breakpoints",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "debugging",
       "tags": [
         "engineering-core",
@@ -22874,13 +22874,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-15."
       ],
       "slug": "stepping-through-code",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -23069,13 +23069,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-16."
       ],
       "slug": "inspecting-variables",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -23264,13 +23264,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-17."
       ],
       "slug": "debugging-tests",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "debugging",
       "tags": [
         "engineering-core",
@@ -23474,13 +23474,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-18."
       ],
       "slug": "refactoring-safely",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -23669,7 +23669,7 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-19."
       ],
@@ -23677,7 +23677,7 @@
       "source_legacy_ids": [
         "TE.6"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -23874,13 +23874,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-20."
       ],
       "slug": "race-detector-preview",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "engineering-core",
@@ -24076,7 +24076,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-06-21."
       ],
@@ -24084,7 +24084,7 @@
       "source_legacy_ids": [
         "CL.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -24277,7 +24277,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-01."
       ],
@@ -24285,7 +24285,7 @@
       "source_legacy_ids": [
         "CL.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -24478,7 +24478,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-02."
       ],
@@ -24486,7 +24486,7 @@
       "source_legacy_ids": [
         "CL.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -24679,13 +24679,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-03."
       ],
       "slug": "standard-input-and-standard-output",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -24878,13 +24878,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-04."
       ],
       "slug": "io-reader",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -25077,13 +25077,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-05."
       ],
       "slug": "io-writer",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -25276,7 +25276,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-06."
       ],
@@ -25284,7 +25284,7 @@
       "source_legacy_ids": [
         "FS.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -25477,7 +25477,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-07."
       ],
@@ -25485,7 +25485,7 @@
       "source_legacy_ids": [
         "FS.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -25678,7 +25678,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-08."
       ],
@@ -25686,7 +25686,7 @@
       "source_legacy_ids": [
         "FS.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -25879,13 +25879,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-09."
       ],
       "slug": "temp-files",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -26078,13 +26078,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-10."
       ],
       "slug": "fs-fs",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -26277,7 +26277,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-11."
       ],
@@ -26285,7 +26285,7 @@
       "source_legacy_ids": [
         "EN.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -26478,7 +26478,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-12."
       ],
@@ -26486,7 +26486,7 @@
       "source_legacy_ids": [
         "EN.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -26679,13 +26679,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-13."
       ],
       "slug": "json-encoder",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -26878,13 +26878,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-14."
       ],
       "slug": "json-decoder",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -27077,13 +27077,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-15."
       ],
       "slug": "config-files",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -27291,13 +27291,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-16."
       ],
       "slug": "environment-variables-for-configuration",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -27490,13 +27490,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-17."
       ],
       "slug": "config-validation",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -27689,13 +27689,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-18."
       ],
       "slug": "text-templates",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -27903,13 +27903,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-19."
       ],
       "slug": "base64-as-encoding-not-encryption",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "cli-io",
@@ -28117,13 +28117,13 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-20."
       ],
       "slug": "cli-testability",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "cli-io",
@@ -28317,7 +28317,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-07-21."
       ],
@@ -28325,7 +28325,7 @@
       "source_legacy_ids": [
         "API.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -28504,7 +28504,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-01."
       ],
@@ -28512,7 +28512,7 @@
       "source_legacy_ids": [
         "HS.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -28706,13 +28706,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-02."
       ],
       "slug": "handler-lifecycle",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -28891,13 +28891,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-03."
       ],
       "slug": "routing",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -29083,13 +29083,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-04."
       ],
       "slug": "request-parsing",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -29268,13 +29268,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-05."
       ],
       "slug": "input-validation",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -29460,13 +29460,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-06."
       ],
       "slug": "response-writing",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -29645,13 +29645,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-07."
       ],
       "slug": "api-error-shape",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -29837,13 +29837,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-08."
       ],
       "slug": "status-codes",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -30022,7 +30022,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-09."
       ],
@@ -30030,7 +30030,7 @@
       "source_legacy_ids": [
         "HS.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -30216,13 +30216,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-10."
       ],
       "slug": "error-middleware",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -30401,7 +30401,7 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-11."
       ],
@@ -30409,7 +30409,7 @@
       "source_legacy_ids": [
         "TE.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "backend",
@@ -30595,13 +30595,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-12."
       ],
       "slug": "body-size-limits",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -30802,13 +30802,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-13."
       ],
       "slug": "server-timeouts",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -31009,7 +31009,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-14."
       ],
@@ -31017,7 +31017,7 @@
       "source_legacy_ids": [
         "HS.8"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -31196,7 +31196,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-15."
       ],
@@ -31204,7 +31204,7 @@
       "source_legacy_ids": [
         "HS.9"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -31390,7 +31390,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-16."
       ],
@@ -31398,7 +31398,7 @@
       "source_legacy_ids": [
         "API.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -31577,7 +31577,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-17."
       ],
@@ -31585,7 +31585,7 @@
       "source_legacy_ids": [
         "API.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -31771,7 +31771,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-18."
       ],
@@ -31779,7 +31779,7 @@
       "source_legacy_ids": [
         "API.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -31958,13 +31958,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-19."
       ],
       "slug": "openapi-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -32106,13 +32106,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-20."
       ],
       "slug": "http-client",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "backend",
@@ -32298,13 +32298,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-08-20."
       ],
       "slug": "why-databases-exist",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -32483,13 +32483,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-01."
       ],
       "slug": "relational-modeling",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -32675,13 +32675,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-02."
       ],
       "slug": "tables-rows-and-columns",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -32860,13 +32860,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-03."
       ],
       "slug": "primary-keys",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -33052,13 +33052,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-04."
       ],
       "slug": "foreign-keys",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -33237,13 +33237,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-05."
       ],
       "slug": "constraints",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -33429,13 +33429,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-06."
       ],
       "slug": "sqlite-as-a-local-learning-tool",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -33614,13 +33614,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-07."
       ],
       "slug": "postgresql-as-production-default",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -33806,13 +33806,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-08."
       ],
       "slug": "docker-compose-for-postgres",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -33991,7 +33991,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-09."
       ],
@@ -33999,7 +33999,7 @@
       "source_legacy_ids": [
         "DB.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -34185,13 +34185,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-10."
       ],
       "slug": "sql-db-as-a-pool",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -34370,13 +34370,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-11."
       ],
       "slug": "insert",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -34562,13 +34562,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-12."
       ],
       "slug": "select",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -34747,13 +34747,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-13."
       ],
       "slug": "scanning-rows",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -34939,13 +34939,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-14."
       ],
       "slug": "null-handling",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -35124,7 +35124,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-15."
       ],
@@ -35132,7 +35132,7 @@
       "source_legacy_ids": [
         "DB.4"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -35318,7 +35318,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-16."
       ],
@@ -35326,7 +35326,7 @@
       "source_legacy_ids": [
         "DB.5"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -35505,13 +35505,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-17."
       ],
       "slug": "rollback-discipline",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -35697,13 +35697,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-18."
       ],
       "slug": "migrations",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -35882,13 +35882,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-19."
       ],
       "slug": "joins",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -36074,13 +36074,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-20."
       ],
       "slug": "indexes",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -36259,13 +36259,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-21."
       ],
       "slug": "explain",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -36466,7 +36466,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-22."
       ],
@@ -36474,7 +36474,7 @@
       "source_legacy_ids": [
         "DB.8"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -36653,13 +36653,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-23."
       ],
       "slug": "repository-and-service-seam",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -36845,7 +36845,7 @@
         "documentation_mode": "how-to",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-24."
       ],
@@ -36853,7 +36853,7 @@
       "source_legacy_ids": [
         "TE.9"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "testing",
       "tags": [
         "data",
@@ -37032,13 +37032,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-25."
       ],
       "slug": "sqlc",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -37179,13 +37179,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-27."
       ],
       "slug": "delete-operations",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -37318,13 +37318,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-26."
       ],
       "slug": "update-operations",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "data",
@@ -37510,7 +37510,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-09-28."
       ],
@@ -37518,7 +37518,7 @@
       "source_legacy_ids": [
         "SEC.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -37696,13 +37696,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-01."
       ],
       "slug": "trust-boundaries",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -37887,13 +37887,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-02."
       ],
       "slug": "input-validation-for-security",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -38070,13 +38070,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-03."
       ],
       "slug": "authentication-vs-authorization",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -38261,7 +38261,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-04."
       ],
@@ -38269,7 +38269,7 @@
       "source_legacy_ids": [
         "SEC.6"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -38447,13 +38447,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-05."
       ],
       "slug": "sessions-and-cookies",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -38638,13 +38638,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-06."
       ],
       "slug": "jwt-implementation",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -38822,13 +38822,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-07."
       ],
       "slug": "jwt-risks",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -39022,13 +39022,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-08."
       ],
       "slug": "oauth2-and-oidc-overview",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -39210,13 +39210,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-09."
       ],
       "slug": "api-keys",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -39405,13 +39405,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-10."
       ],
       "slug": "rbac",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -39593,13 +39593,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-11."
       ],
       "slug": "abac-and-policy-checks",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -39795,13 +39795,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-12."
       ],
       "slug": "tenant-isolation-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -39982,7 +39982,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-13."
       ],
@@ -39990,7 +39990,7 @@
       "source_legacy_ids": [
         "SEC.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -40178,7 +40178,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-14."
       ],
@@ -40186,7 +40186,7 @@
       "source_legacy_ids": [
         "SEC.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -40366,7 +40366,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-15."
       ],
@@ -40374,7 +40374,7 @@
       "source_legacy_ids": [
         "SEC.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -40562,13 +40562,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-16."
       ],
       "slug": "cors",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -40749,7 +40749,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-17."
       ],
@@ -40757,7 +40757,7 @@
       "source_legacy_ids": [
         "SEC.7"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -40945,7 +40945,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-18."
       ],
@@ -40953,7 +40953,7 @@
       "source_legacy_ids": [
         "SEC.8"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -41134,7 +41134,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-19."
       ],
@@ -41142,7 +41142,7 @@
       "source_legacy_ids": [
         "SEC.9"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -41330,13 +41330,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-20."
       ],
       "slug": "dependency-security",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -41518,13 +41518,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-21."
       ],
       "slug": "govulncheck",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -41712,13 +41712,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-22."
       ],
       "slug": "owasp-for-go-apis",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -41901,13 +41901,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-23."
       ],
       "slug": "secure-logging",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "security",
       "tags": [
         "security",
@@ -42109,7 +42109,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-24."
       ],
@@ -42117,7 +42117,7 @@
       "source_legacy_ids": [
         "TM.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "request-lifecycle",
@@ -42309,13 +42309,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-01."
       ],
       "slug": "durations",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "request-lifecycle",
@@ -42514,7 +42514,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-02."
       ],
@@ -42522,7 +42522,7 @@
       "source_legacy_ids": [
         "TM.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "request-lifecycle",
@@ -42714,13 +42714,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-03."
       ],
       "slug": "tickers",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "request-lifecycle",
@@ -42919,7 +42919,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-04."
       ],
@@ -42927,7 +42927,7 @@
       "source_legacy_ids": [
         "CT.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "request-lifecycle",
@@ -43119,7 +43119,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-05."
       ],
@@ -43127,7 +43127,7 @@
       "source_legacy_ids": [
         "CT.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "request-lifecycle",
@@ -43339,7 +43339,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-06."
       ],
@@ -43347,7 +43347,7 @@
       "source_legacy_ids": [
         "CT.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "request-lifecycle",
@@ -43539,13 +43539,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-07."
       ],
       "slug": "deadlines",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "request-lifecycle",
@@ -43744,13 +43744,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-08."
       ],
       "slug": "context-values-with-caveats",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "request-lifecycle",
@@ -43942,13 +43942,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-09."
       ],
       "slug": "why-concurrency-exists",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -44148,7 +44148,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-10."
       ],
@@ -44156,7 +44156,7 @@
       "source_legacy_ids": [
         "GC.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -44354,7 +44354,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-11."
       ],
@@ -44362,7 +44362,7 @@
       "source_legacy_ids": [
         "GC.2"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -44562,7 +44562,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-12."
       ],
@@ -44570,7 +44570,7 @@
       "source_legacy_ids": [
         "GC.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -44763,7 +44763,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-13."
       ],
@@ -44771,7 +44771,7 @@
       "source_legacy_ids": [
         "GC.4"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -44971,7 +44971,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-14."
       ],
@@ -44979,7 +44979,7 @@
       "source_legacy_ids": [
         "GC.5"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -45172,13 +45172,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-15."
       ],
       "slug": "channel-ownership",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -45381,13 +45381,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-16."
       ],
       "slug": "backpressure",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -45580,13 +45580,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-17."
       ],
       "slug": "pipelines",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -45786,7 +45786,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-18."
       ],
@@ -45794,7 +45794,7 @@
       "source_legacy_ids": [
         "SY.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -45995,13 +45995,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-19."
       ],
       "slug": "atomics-with-caution",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -46201,7 +46201,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-20."
       ],
@@ -46209,7 +46209,7 @@
       "source_legacy_ids": [
         "SY.4"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -46402,13 +46402,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-21."
       ],
       "slug": "race-detector",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -46608,7 +46608,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-22."
       ],
@@ -46616,7 +46616,7 @@
       "source_legacy_ids": [
         "SY.5"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -46811,7 +46811,7 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-23."
       ],
@@ -46819,7 +46819,7 @@
       "source_legacy_ids": [
         "SY.6"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -47019,13 +47019,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-24."
       ],
       "slug": "errgroup",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -47218,13 +47218,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-25."
       ],
       "slug": "bounded-worker-pools",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -47424,13 +47424,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-26."
       ],
       "slug": "retries-and-backoff",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -47631,13 +47631,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-27."
       ],
       "slug": "idempotency-keys",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -47779,13 +47779,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-28."
       ],
       "slug": "sync-once",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "concurrency",
@@ -47985,13 +47985,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-11-28."
       ],
       "slug": "why-observability-exists",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -48188,7 +48188,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-01."
       ],
@@ -48196,7 +48196,7 @@
       "source_legacy_ids": [
         "SL.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -48398,13 +48398,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-02."
       ],
       "slug": "request-scoped-logging",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -48599,13 +48599,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-03."
       ],
       "slug": "correlation-ids",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -48815,13 +48815,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-04."
       ],
       "slug": "pii-redaction",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -49016,13 +49016,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-05."
       ],
       "slug": "metrics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -49225,13 +49225,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-06."
       ],
       "slug": "prometheus",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -49425,13 +49425,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-07."
       ],
       "slug": "tracing",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -49634,13 +49634,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-08."
       ],
       "slug": "opentelemetry",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -49779,13 +49779,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-09."
       ],
       "slug": "pprof",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -49920,7 +49920,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-10."
       ],
@@ -49928,7 +49928,7 @@
       "source_legacy_ids": [
         "PR.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -50067,7 +50067,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-11."
       ],
@@ -50075,7 +50075,7 @@
       "source_legacy_ids": [
         "PR.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -50211,13 +50211,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-12."
       ],
       "slug": "benchmarks",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -50352,7 +50352,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-13."
       ],
@@ -50360,7 +50360,7 @@
       "source_legacy_ids": [
         "PR.4"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -50497,13 +50497,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-14."
       ],
       "slug": "memory-layout",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -50645,13 +50645,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-15."
       ],
       "slug": "caching-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -50791,13 +50791,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-16."
       ],
       "slug": "cache-invalidation",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -50991,13 +50991,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Understanding of module-12 items up to core-12-16."
       ],
       "slug": "alerting-mindset",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -51198,13 +51198,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-18."
       ],
       "slug": "incident-debugging",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -51413,13 +51413,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-19."
       ],
       "slug": "reliability-review",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "reliability",
@@ -51553,13 +51553,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-12-20."
       ],
       "slug": "why-architecture-exists",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -51692,13 +51692,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-01."
       ],
       "slug": "package-boundaries",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -51831,13 +51831,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-02."
       ],
       "slug": "service-layer",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -51974,13 +51974,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-03."
       ],
       "slug": "repository-pattern-deep-dive",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -52115,13 +52115,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-04."
       ],
       "slug": "modular-monolith",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -52257,13 +52257,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-05."
       ],
       "slug": "hexagonal-architecture",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -52400,13 +52400,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-06."
       ],
       "slug": "domain-modeling",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -52540,13 +52540,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-07."
       ],
       "slug": "invariants",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -52684,13 +52684,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-08."
       ],
       "slug": "event-driven-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -52889,13 +52889,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-09."
       ],
       "slug": "queues",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -53086,13 +53086,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-10."
       ],
       "slug": "retries-and-idempotent-consumers",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -53300,13 +53300,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-11."
       ],
       "slug": "payment-workflow-design",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -53501,13 +53501,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-12."
       ],
       "slug": "multi-tenancy-architecture",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -53703,13 +53703,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-13."
       ],
       "slug": "caching-architecture",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -53899,13 +53899,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-14."
       ],
       "slug": "when-to-split-services",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -54102,13 +54102,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-15."
       ],
       "slug": "microservices-as-a-tradeoff-not-a-default",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -54306,13 +54306,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-16."
       ],
       "slug": "architecture-decision-records",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "architecture",
       "tags": [
         "architecture",
@@ -54447,13 +54447,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-13-17."
       ],
       "slug": "linux-processes",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -54590,13 +54590,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-01."
       ],
       "slug": "signals",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -54738,13 +54738,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-02."
       ],
       "slug": "logs",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -54903,13 +54903,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-03."
       ],
       "slug": "file-permissions",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -55074,13 +55074,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-04."
       ],
       "slug": "networking-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -55214,7 +55214,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-05."
       ],
@@ -55222,7 +55222,7 @@
       "source_legacy_ids": [
         "DOCKER.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -55399,13 +55399,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-06."
       ],
       "slug": "docker-images-and-layers",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -55571,13 +55571,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-07."
       ],
       "slug": "multi-stage-builds",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -55711,7 +55711,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-08."
       ],
@@ -55719,7 +55719,7 @@
       "source_legacy_ids": [
         "DOCKER.3"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -55853,13 +55853,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-09."
       ],
       "slug": "container-health-checks",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -55993,13 +55993,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-10."
       ],
       "slug": "github-actions",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -56133,7 +56133,7 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-11."
       ],
@@ -56141,7 +56141,7 @@
       "source_legacy_ids": [
         "DEPLOY.1"
       ],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -56275,13 +56275,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-12."
       ],
       "slug": "release-artifacts",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -56415,13 +56415,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-13."
       ],
       "slug": "config-in-deployment",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -56555,13 +56555,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-14."
       ],
       "slug": "secrets-in-deployment",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -56695,13 +56695,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-15."
       ],
       "slug": "vulnerability-scanning",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -56835,13 +56835,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-16."
       ],
       "slug": "one-deployment-target",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -56975,13 +56975,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-17."
       ],
       "slug": "rollback-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -57123,13 +57123,13 @@
         "documentation_mode": "explanation",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-14-18."
       ],
       "slug": "deployment-runbook",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "operations",
       "tags": [
         "delivery",
@@ -57308,13 +57308,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete Module 15 — Docker, CI/CD, and Deployment (core-15-19). Technical capstone implementation requires end-to-end backend engineering, observability, architecture, and deployment foundations (Modules 00–15). Module 16 (Portfolio and Interview Readiness) and Module 17 (Electives) may be completed alongside or following the capstone."
       ],
       "slug": "opslane-foundation-and-configuration",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -57492,13 +57492,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-01."
       ],
       "slug": "opslane-database-and-models",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -57676,13 +57676,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-02."
       ],
       "slug": "opslane-authentication",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -57862,13 +57862,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-03."
       ],
       "slug": "opslane-authorization",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -58047,13 +58047,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-04."
       ],
       "slug": "opslane-tenant-isolation",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -58238,13 +58238,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-05."
       ],
       "slug": "opslane-http-api-layer",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -58423,13 +58423,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-06."
       ],
       "slug": "opslane-order-processing",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -58622,13 +58622,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-07."
       ],
       "slug": "opslane-payment-pipeline",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -58808,13 +58808,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-08."
       ],
       "slug": "opslane-event-bus",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -58993,13 +58993,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-09."
       ],
       "slug": "opslane-worker-pools",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -59177,13 +59177,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-10."
       ],
       "slug": "opslane-caching-layer",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -59363,13 +59363,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-11."
       ],
       "slug": "opslane-observability",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -59549,13 +59549,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-12."
       ],
       "slug": "opslane-graceful-shutdown",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -59744,13 +59744,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-13."
       ],
       "slug": "opslane-deployment",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -59927,13 +59927,13 @@
         "documentation_mode": "flagship-checkpoint",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): opslane-14."
       ],
       "slug": "opslane-portfolio-defense",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "capstone",
       "tags": [
         "flagship",
@@ -60147,13 +60147,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-15-19."
       ],
       "slug": "portfolio-strategy",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -60353,13 +60353,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-01."
       ],
       "slug": "project-selection-and-scoping",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -60559,13 +60559,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-02."
       ],
       "slug": "code-review-readiness",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -60758,13 +60758,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-03."
       ],
       "slug": "technical-writing-for-engineers",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -60964,13 +60964,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-04."
       ],
       "slug": "resume-and-linkedin-optimization",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -61156,13 +61156,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-05."
       ],
       "slug": "behavioral-interview-preparation",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -61355,13 +61355,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-06."
       ],
       "slug": "system-design-interview-basics",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -61547,13 +61547,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-07."
       ],
       "slug": "live-coding-interview-practice",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -61746,13 +61746,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-08."
       ],
       "slug": "take-home-project-strategy",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -61938,13 +61938,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-09."
       ],
       "slug": "negotiation-fundamentals",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -62137,13 +62137,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-10."
       ],
       "slug": "open-source-contribution",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -62329,13 +62329,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-11."
       ],
       "slug": "technical-blog-writing",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -62528,13 +62528,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-12."
       ],
       "slug": "conference-talk-preparation",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -62720,13 +62720,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-13."
       ],
       "slug": "mentorship-and-code-review",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -62925,13 +62925,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-16-14."
       ],
       "slug": "career-roadmap",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "career",
       "tags": [
         "career",
@@ -63073,13 +63073,13 @@
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete prerequisite lesson(s): core-10-24."
       ],
       "slug": "refresh-tokens",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "concept",
       "tags": [
         "security",
@@ -63184,13 +63184,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-00."
       ],
       "slug": "course-setup-verification",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -63238,13 +63238,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-00."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -63292,13 +63292,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-00."
       ],
       "slug": "course-setup",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -63350,13 +63350,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-01."
       ],
       "slug": "shell-git-lab",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -63404,13 +63404,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-01."
       ],
       "slug": "shell-git-lab",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -63462,13 +63462,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-02."
       ],
       "slug": "tooling-failure-lab",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -63516,13 +63516,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-02."
       ],
       "slug": "tooling-failure-lab",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -63574,13 +63574,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-03."
       ],
       "slug": "contact-directory",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -63632,13 +63632,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-03."
       ],
       "slug": "pricing-checkout",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -63686,13 +63686,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-03."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -63740,13 +63740,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-03."
       ],
       "slug": "contact-directory",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -63794,13 +63794,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-03."
       ],
       "slug": "pricing-checkout",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -63852,13 +63852,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-04."
       ],
       "slug": "order-summary-refactor",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -63906,13 +63906,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-04."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -63960,13 +63960,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-04."
       ],
       "slug": "order-summary-refactor",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64018,13 +64018,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-05."
       ],
       "slug": "bank-account",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -64076,13 +64076,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-05."
       ],
       "slug": "payroll-processor",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -64130,13 +64130,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-05."
       ],
       "slug": "bank-account",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64184,13 +64184,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-05."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64238,13 +64238,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-05."
       ],
       "slug": "payroll-processor",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64296,13 +64296,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-06."
       ],
       "slug": "bug-hunt-pack",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -64354,13 +64354,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-06."
       ],
       "slug": "refactor-under-tests",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -64408,13 +64408,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-06."
       ],
       "slug": "bug-hunt-pack",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64462,13 +64462,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-06."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64516,13 +64516,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-06."
       ],
       "slug": "refactor-under-tests",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64574,13 +64574,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-07."
       ],
       "slug": "config-parser",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -64632,13 +64632,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-07."
       ],
       "slug": "file-organizer",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -64690,13 +64690,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-07."
       ],
       "slug": "log-search",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -64744,13 +64744,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-07."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64798,13 +64798,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-07."
       ],
       "slug": "config-parser",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64852,13 +64852,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-07."
       ],
       "slug": "file-organizer",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64906,13 +64906,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-07."
       ],
       "slug": "log-search",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -64964,13 +64964,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-08."
       ],
       "slug": "book-catalog-rest-api",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -65018,13 +65018,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-08."
       ],
       "slug": "book-catalog-rest-api",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65072,13 +65072,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-08."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65130,13 +65130,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-09."
       ],
       "slug": "task-api-with-postgres",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -65184,13 +65184,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-09."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65238,13 +65238,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-09."
       ],
       "slug": "task-api-postgres",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65296,13 +65296,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-10."
       ],
       "slug": "secure-authenticated-api",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -65350,13 +65350,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-10."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65404,13 +65404,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-10."
       ],
       "slug": "secure-authenticated-api",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65462,13 +65462,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-11."
       ],
       "slug": "bounded-worker-pool",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -65520,13 +65520,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-11."
       ],
       "slug": "concurrent-downloader",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -65578,13 +65578,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-11."
       ],
       "slug": "url-health-checker",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -65632,13 +65632,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-11."
       ],
       "slug": "bounded-worker-pool",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65686,13 +65686,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-11."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65740,13 +65740,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-11."
       ],
       "slug": "concurrent-downloader",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65794,13 +65794,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-11."
       ],
       "slug": "url-health-checker",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -65852,13 +65852,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-12."
       ],
       "slug": "observability-retrofit",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -65910,13 +65910,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-12."
       ],
       "slug": "pii-redactor",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -65964,13 +65964,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-12."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66018,13 +66018,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-12."
       ],
       "slug": "observability-retrofit",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66072,13 +66072,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-12."
       ],
       "slug": "pii-redactor",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66129,13 +66129,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-13."
       ],
       "slug": "performance-analysis-lab",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -66187,13 +66187,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-13."
       ],
       "slug": "profile-and-fix-lab",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -66241,13 +66241,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-13."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66295,13 +66295,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-13."
       ],
       "slug": "performance-analysis-lab",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66349,13 +66349,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-13."
       ],
       "slug": "profile-and-fix-lab",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66407,13 +66407,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-14."
       ],
       "slug": "modular-refactor-review",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -66461,13 +66461,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-14."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66515,13 +66515,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-14."
       ],
       "slug": "modular-refactor-review",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66573,13 +66573,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-15."
       ],
       "slug": "dockerized-service-with-ci-cd",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -66627,13 +66627,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-15."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66681,13 +66681,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-15."
       ],
       "slug": "dockerized-service-cicd",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66739,13 +66739,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-16."
       ],
       "slug": "portfolio-review-pack",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -66793,13 +66793,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-16."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66847,13 +66847,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-16."
       ],
       "slug": "portfolio-review-pack",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -66901,13 +66901,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "15-opslane-portfolio-defense",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -66959,13 +66959,13 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "opslane-flagship",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "project",
       "tags": [
         "go-core",
@@ -67013,13 +67013,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "01-opslane-foundation-and-configuration",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67067,13 +67067,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "02-opslane-database-and-models",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67121,13 +67121,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "03-opslane-authentication",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67175,13 +67175,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "04-opslane-authorization",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67229,13 +67229,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "05-opslane-tenant-isolation",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67283,13 +67283,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "06-opslane-http-api-layer",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67337,13 +67337,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "07-opslane-order-processing",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67391,13 +67391,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "08-opslane-payment-pipeline",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67445,13 +67445,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "09-opslane-event-bus",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67499,13 +67499,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "10-opslane-worker-pools",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67553,13 +67553,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "11-opslane-caching-layer",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67607,13 +67607,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "12-opslane-observability",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67661,13 +67661,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "13-opslane-graceful-shutdown",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67715,13 +67715,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "14-opslane-deployment",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67769,13 +67769,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "checkpoint",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",
@@ -67823,13 +67823,13 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
+      "readme_status": "reviewed",
       "required_prior_knowledge": [
         "Complete module-18."
       ],
       "slug": "opslane",
       "source_legacy_ids": [],
-      "status": "draft",
+      "status": "ready",
       "subtype": "assessment",
       "tags": [
         "go-core",

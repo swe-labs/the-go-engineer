@@ -23,7 +23,7 @@
 | Instructional Lessons & Labs     | 321   | 320 lessons + 1 lab across Modules 00–16                         |
 | Flagship Opslane Milestones      | 15    | 14 checkpoints + 1 capstone defense in Module 18          |
 | Learner Instructional Units      | 336   | 321 instructional lessons/labs + 15 Opslane milestones            |
-| Elective Items                   | 20    | Explicitly marked as planned / unreleased draft in Module 17      |
+| Elective Items                   | 20    | 20 advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |
 | Projects                         | 28    | 27 module projects + 1 flagship capstone defense project          |
 | In-Path Assessment Checkpoints   | 57    | 16 module checkpoints + 14 Opslane checkpoints + 27 project-bound nodes |
 | Assessment Registry Records      | 47    | 19 module assessments + 28 project assessments in `assessments.json`|
@@ -52,7 +52,7 @@
 | 15  | **Docker, CI/CD, and Deployment** | delivery | stable | 19 | 0 | 1 | 2 | 22 | `curriculum/modules/15-docker-cicd-deployment` |
 | 16  | **Portfolio and Interview Readiness** | career | stable | 15 | 0 | 1 | 2 | 18 | `curriculum/modules/16-portfolio-interview-readiness` |
 | 18  | **Flagship Opslane** | flagship | stable | 0 | 15 | 2 | 16 | 33 | `curriculum/modules/18-flagship-opslane` |
-| 17  | **Advanced Electives** | elective | draft | 20 | 0 | 0 | 0 | 20 | `curriculum/electives/advanced-electives` |
+| 17  | **Advanced Electives** | elective | stable | 20 | 0 | 0 | 0 | 20 | `curriculum/electives/advanced-electives` |
 | —   | **Core Subtotal** | — | — | **321** | **15** | **28** | **57** | **421** | *(Modules 00–16, 18)* |
 | —   | **Total Curriculum** | — | — | **341** | **15** | **28** | **57** | **441** | *(421 core items + 20 electives)* |
 
@@ -683,7 +683,7 @@ internal/tools/curriculum/
 
 ## 17. Advanced Electives
 
-> **Phase:** elective | **Status:** draft | **Required:** False
+> **Phase:** elective | **Status:** stable | **Required:** False
 
 **Learning Goal:** Keep advanced Go and backend topics without blocking the core learner path.
 

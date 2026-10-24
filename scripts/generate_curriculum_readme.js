@@ -47,7 +47,7 @@ function generateFullReadme() {
   parts.push('| Instructional Lessons & Labs     | ' + (lessons + labs) + '   | ' + lessons + ' lessons + ' + labs + ' lab across Modules 00–16                         |');
   parts.push('| Flagship Opslane Milestones      | ' + (checkpoints + capstones) + '    | ' + checkpoints + ' checkpoints + ' + capstones + ' capstone defense in Module 18          |');
   parts.push('| Learner Instructional Units      | ' + (lessons + labs + checkpoints + capstones) + '   | ' + (lessons + labs) + ' instructional lessons/labs + ' + (checkpoints + capstones) + ' Opslane milestones            |');
-  parts.push('| Elective Items                   | ' + electiveItems + '    | Explicitly marked as planned / unreleased draft in Module 17      |');
+  parts.push('| Elective Items                   | ' + electiveItems + '    | 20 advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |');
   parts.push('| Projects                         | ' + prjRecords + '    | 27 module projects + 1 flagship capstone defense project          |');
   parts.push('| In-Path Assessment Checkpoints   | ' + pathAssessments + '    | 16 module checkpoints + 14 Opslane checkpoints + 27 project-bound nodes |');
   parts.push('| Assessment Registry Records      | ' + regAssessments + '    | 19 module assessments + 28 project assessments in `assessments.json`|');
