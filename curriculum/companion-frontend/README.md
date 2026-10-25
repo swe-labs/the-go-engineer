@@ -88,37 +88,37 @@ Implement an interactive client for the Module 08 **Book Catalog REST API**:
 
 ---
 
-### Stage 3: Type-Safe Server Components with `a-h/templ` & Tailwind (Weeks 25–33)
+### Stage 3: Type-Safe Server Components with `a-h/templ`, Tailwind & `shadcn-templ` (Weeks 25–33)
 *Coordinated with Module 10 (Auth & Security)*
 
 #### Learning Objectives
 - Replace error-prone string templates with [`a-h/templ`](https://templ.guide) — compile-time checked Go component templates.
 - Compose reusable components with typed parameters, children blocks, and standard Go conditionals/loops.
-- Rapidly build sleek, modern user interfaces using Tailwind CSS utility classes.
+- Rapidly build sleek, modern user interfaces using Tailwind CSS utility classes and [`shadcn-templ`](https://github.com/axadrn/shadcn-templ) copy-and-own UI primitives (`@ui.Button`, `@ui.Card`, `@ui.Badge`).
+- Eliminate Node.js/npm dependencies entirely using the Standalone Tailwind CLI and live reloading via `air`.
 - Handle secure authentication flows: session cookies vs JWT Bearer tokens, CSRF protection middleware, and role-based UI rendering.
 
-#### Component Example (`header.templ`):
+#### Component Example (`profile.templ` with `@ui.Button` & `@ui.Badge`):
 ```templ
 package components
 
-templ Header(username string, isAdmin bool) {
-    <header class="flex items-center justify-between p-4 bg-slate-900 text-white shadow-md">
-        <div class="font-bold text-lg tracking-wide">Opslane Console</div>
-        <div class="flex items-center space-x-4">
-            <span class="text-sm text-slate-300">User: { username }</span>
-            if isAdmin {
-                <span class="px-2 py-0.5 text-xs bg-amber-500 text-slate-900 font-semibold rounded">Admin</span>
-            }
-            <form action="/auth/logout" method="POST">
-                <button type="submit" class="text-sm text-rose-400 hover:text-rose-300">Sign Out</button>
-            </form>
-        </div>
-    </header>
+import "github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
+
+templ RoleIndicator(role string) {
+    if role == "admin" {
+        @ui.Badge(ui.BadgeProps{Variant: "warning"}) {
+            Admin (Full Control)
+        }
+    } else {
+        @ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
+            Viewer (Read Only)
+        }
+    }
 }
 ```
 
 #### Core Verification Task
-Construct an authenticated user settings and profile management portal connected to the Module 10 **Secure Authenticated API**, with role-guarded controls and CSRF-protected form submissions.
+Construct an authenticated user settings and profile management portal connected to the Module 10 **Secure Authenticated API**, with role-guarded controls, type-safe `shadcn-templ` components, and CSRF-protected form submissions.
 
 ---
 

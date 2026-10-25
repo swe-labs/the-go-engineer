@@ -1,0 +1,46 @@
+package ui
+
+import "strings"
+
+// BadgeProps defines customization options for the shadcn-templ Badge component.
+type BadgeProps struct {
+	Variant string // "default", "secondary", "destructive", "outline", "success", "warning"
+	Class   string
+	ID      string
+}
+
+func getBadgeClasses(props BadgeProps) string {
+	base := "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none"
+
+	variants := map[string]string{
+		"default":     "border-transparent bg-indigo-600 text-white shadow hover:bg-indigo-500",
+		"secondary":   "border-transparent bg-slate-800 text-slate-100 hover:bg-slate-700",
+		"destructive": "border-transparent bg-rose-600 text-white shadow hover:bg-rose-500",
+		"outline":     "text-slate-200 border-slate-700",
+		"success":     "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+		"warning":     "border-amber-500/30 bg-amber-500/10 text-amber-400",
+	}
+
+	variantClass := variants["default"]
+	if v, ok := variants[props.Variant]; ok {
+		variantClass = v
+	}
+
+	classes := []string{base, variantClass}
+	if props.Class != "" {
+		classes = append(classes, props.Class)
+	}
+	return strings.Join(classes, " ")
+}
+
+// Badge renders a shadcn/ui compatible status badge.
+templ Badge(props BadgeProps) {
+	<span
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ getBadgeClasses(props) }
+	>
+		{ children... }
+	</span>
+}

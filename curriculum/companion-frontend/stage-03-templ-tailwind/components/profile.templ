@@ -1,5 +1,7 @@
 package components
 
+import "github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
+
 type ProfileViewModel struct {
 	User         UserContext
 	CSRFToken    string
@@ -41,21 +43,25 @@ templ Profile(vm ProfileViewModel) {
 					</div>
 
 					<dl class="space-y-3 text-xs border-t border-slate-800 pt-4">
-						<div class="flex justify-between">
+						<div class="flex justify-between items-center">
 							<dt class="text-slate-400">Account ID:</dt>
 							<dd class="font-mono text-slate-300">{ vm.User.ID }</dd>
 						</div>
-						<div class="flex justify-between">
+						<div class="flex justify-between items-center">
 							<dt class="text-slate-400">Role:</dt>
 							<dd>
 								if vm.User.Role == "admin" {
-									<span class="text-amber-400 font-semibold">Admin (Full Control)</span>
+									@ui.Badge(ui.BadgeProps{Variant: "warning"}) {
+										Admin (Full Control)
+									}
 								} else {
-									<span class="text-slate-300 font-semibold">Viewer (Read Only)</span>
+									@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
+										Viewer (Read Only)
+									}
 								}
 							</dd>
 						</div>
-						<div class="flex justify-between">
+						<div class="flex justify-between items-center">
 							<dt class="text-slate-400">Tenant:</dt>
 							<dd class="text-indigo-400 font-medium">{ vm.User.TenantName }</dd>
 						</div>
@@ -98,12 +104,9 @@ templ Profile(vm ProfileViewModel) {
 						</div>
 
 						<div class="pt-2">
-							<button 
-								type="submit" 
-								class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm rounded-lg transition"
-							>
+							@ui.Button(ui.ButtonProps{Type: "submit", Variant: "default"}) {
 								Save Profile Changes
-							</button>
+							}
 						</div>
 					</form>
 				</div>

@@ -1,0 +1,79 @@
+package ui
+
+// CardProps defines customization options for the shadcn-templ Card components.
+type CardProps struct {
+	Class string
+	ID    string
+}
+
+// Card renders a shadcn/ui compatible container card.
+templ Card(props CardProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ "rounded-xl border border-slate-800 bg-slate-900 text-slate-100 shadow-sm " + props.Class }
+	>
+		{ children... }
+	</div>
+}
+
+// CardHeader renders the top container of a card.
+templ CardHeader(props CardProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ "flex flex-col space-y-1.5 p-6 " + props.Class }
+	>
+		{ children... }
+	</div>
+}
+
+// CardTitle renders a card title header.
+templ CardTitle(props CardProps) {
+	<h3
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ "font-semibold leading-none tracking-tight text-white text-lg " + props.Class }
+	>
+		{ children... }
+	</h3>
+}
+
+// CardDescription renders a descriptive subtitle inside a card header.
+templ CardDescription(props CardProps) {
+	<p
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ "text-sm text-slate-400 " + props.Class }
+	>
+		{ children... }
+	</p>
+}
+
+// CardContent renders the main content area of a card.
+templ CardContent(props CardProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ "p-6 pt-0 " + props.Class }
+	>
+		{ children... }
+	</div>
+}
+
+// CardFooter renders the bottom action/status container of a card.
+templ CardFooter(props CardProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ "flex items-center p-6 pt-0 border-t border-slate-800/60 mt-4 " + props.Class }
+	>
+		{ children... }
+	</div>
+}

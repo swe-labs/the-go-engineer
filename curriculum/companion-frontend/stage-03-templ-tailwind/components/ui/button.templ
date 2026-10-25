@@ -1,0 +1,80 @@
+package ui
+
+import "strings"
+
+// ButtonProps defines customization options for the shadcn-templ Button component.
+type ButtonProps struct {
+	Variant  string // "default", "destructive", "outline", "secondary", "ghost", "link"
+	Size     string // "default", "sm", "lg", "icon"
+	Class    string
+	Type     string // "button", "submit", "reset"
+	Disabled bool
+	Href     string
+	ID       string
+}
+
+func getButtonClasses(props ButtonProps) string {
+	base := "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:pointer-events-none disabled:opacity-50"
+
+	variants := map[string]string{
+		"default":     "bg-indigo-600 text-white shadow hover:bg-indigo-500",
+		"destructive": "bg-rose-600 text-white shadow-sm hover:bg-rose-500",
+		"outline":     "border border-slate-700 bg-transparent text-slate-100 shadow-sm hover:bg-slate-800 hover:text-white",
+		"secondary":   "bg-slate-800 text-slate-100 shadow-sm hover:bg-slate-700",
+		"ghost":       "text-slate-300 hover:bg-slate-800 hover:text-white",
+		"link":        "text-indigo-400 underline-offset-4 hover:underline",
+	}
+
+	sizes := map[string]string{
+		"default": "h-9 px-4 py-2",
+		"sm":      "h-8 rounded-md px-3 text-xs",
+		"lg":      "h-10 rounded-md px-8 text-base",
+		"icon":    "h-9 w-9 p-0",
+	}
+
+	variantClass := variants["default"]
+	if v, ok := variants[props.Variant]; ok {
+		variantClass = v
+	}
+
+	sizeClass := sizes["default"]
+	if s, ok := sizes[props.Size]; ok {
+		sizeClass = s
+	}
+
+	classes := []string{base, variantClass, sizeClass}
+	if props.Class != "" {
+		classes = append(classes, props.Class)
+	}
+	return strings.Join(classes, " ")
+}
+
+// Button renders a shadcn/ui compatible type-safe button or anchor tag.
+templ Button(props ButtonProps) {
+	if props.Href != "" {
+		<a
+			if props.ID != "" {
+				id={ props.ID }
+			}
+			href={ templ.SafeURL(props.Href) }
+			class={ getButtonClasses(props) }
+		>
+			{ children... }
+		</a>
+	} else {
+		<button
+			if props.ID != "" {
+				id={ props.ID }
+			}
+			if props.Type != "" {
+				type={ props.Type }
+			} else {
+				type="button"
+			}
+			class={ getButtonClasses(props) }
+			disabled?={ props.Disabled }
+		>
+			{ children... }
+		</button>
+	}
+}
