@@ -1,5 +1,7 @@
 package components
 
+import "github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
+
 templ Header(user *UserContext) {
 	<header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
 		<div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -17,19 +19,24 @@ templ Header(user *UserContext) {
 				<div class="flex items-center space-x-2 text-sm">
 					<span class="text-slate-400">{ user.Email }</span>
 					if user.Role == "admin" {
-						<span class="px-2 py-0.5 text-xs font-semibold rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
+						@ui.Badge(ui.BadgeProps{Variant: ui.BadgeVariantWarning}) {
 							Admin
-						</span>
+						}
 					} else {
-						<span class="px-2 py-0.5 text-xs font-semibold rounded bg-slate-700 text-slate-300">
+						@ui.Badge(ui.BadgeProps{Variant: ui.BadgeVariantSecondary}) {
 							Viewer
-						</span>
+						}
 					}
 				</div>
 				<form action="/auth/logout" method="POST" class="inline">
-					<button type="submit" class="text-xs text-rose-400 hover:text-rose-300 font-medium px-2.5 py-1 rounded border border-rose-500/30 hover:border-rose-500/60 transition">
+					@ui.Button(ui.ButtonProps{
+						Type:    ui.TypeSubmit,
+						Variant: ui.VariantDestructive,
+						Size:    ui.SizeSm,
+						Class:   "h-7 text-xs border border-rose-500/30 bg-transparent text-rose-400 hover:bg-rose-500/10",
+					}) {
 						Sign Out
-					</button>
+					}
 				</form>
 			</div>
 		</div>

@@ -94,8 +94,8 @@ Implement an interactive client for the Module 08 **Book Catalog REST API**:
 #### Learning Objectives
 - Replace error-prone string templates with [`a-h/templ`](https://templ.guide) — compile-time checked Go component templates.
 - Compose reusable components with typed parameters, children blocks, and standard Go conditionals/loops.
-- Rapidly build sleek, modern user interfaces using Tailwind CSS utility classes and [`shadcn-templ`](https://github.com/axadrn/shadcn-templ) copy-and-own UI primitives (`@ui.Button`, `@ui.Card`, `@ui.Badge`).
-- Eliminate Node.js/npm dependencies entirely using the Standalone Tailwind CLI and live reloading via `air`.
+- Rapidly build sleek, modern user interfaces using Tailwind CSS utility classes and [`shadcn-templ`](https://shadcn-templ.com) copy-and-own UI primitives (`@ui.Button`, `@ui.Card`, `@ui.Badge`, `@ui.Input`, `@ui.Separator`), configured via `components.json`.
+- Eliminate Node.js/npm dependencies entirely using the Standalone Tailwind CLI and live reloading via `air` or Task.
 - Handle secure authentication flows: session cookies vs JWT Bearer tokens, CSRF protection middleware, and role-based UI rendering.
 
 #### Component Example (`profile.templ` with `@ui.Button` & `@ui.Badge`):

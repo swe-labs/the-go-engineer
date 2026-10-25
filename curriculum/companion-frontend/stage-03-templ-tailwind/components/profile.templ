@@ -31,85 +31,95 @@ templ Profile(vm ProfileViewModel) {
 
 			<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 				<!-- Profile Overview Card -->
-				<div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
-					<div class="flex items-center space-x-4 mb-4">
-						<div class="h-12 w-12 rounded-full bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center font-bold text-lg text-indigo-400">
-							{ string([]rune(vm.User.Name)[0:1]) }
+				@ui.Card(ui.CardProps{}) {
+					@ui.CardContent(ui.CardContentProps{Class: "p-6"}) {
+						<div class="flex items-center space-x-4 mb-4">
+							<div class="h-12 w-12 rounded-full bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center font-bold text-lg text-indigo-400">
+								{ string([]rune(vm.User.Name)[0:1]) }
+							</div>
+							<div>
+								<div class="font-bold text-white">{ vm.User.Name }</div>
+								<div class="text-xs text-slate-400">{ vm.User.Email }</div>
+							</div>
 						</div>
-						<div>
-							<div class="font-bold text-white">{ vm.User.Name }</div>
-							<div class="text-xs text-slate-400">{ vm.User.Email }</div>
-						</div>
-					</div>
 
-					<dl class="space-y-3 text-xs border-t border-slate-800 pt-4">
-						<div class="flex justify-between items-center">
-							<dt class="text-slate-400">Account ID:</dt>
-							<dd class="font-mono text-slate-300">{ vm.User.ID }</dd>
-						</div>
-						<div class="flex justify-between items-center">
-							<dt class="text-slate-400">Role:</dt>
-							<dd>
-								if vm.User.Role == "admin" {
-									@ui.Badge(ui.BadgeProps{Variant: "warning"}) {
-										Admin (Full Control)
+						<dl class="space-y-3 text-xs border-t border-slate-800 pt-4">
+							<div class="flex justify-between items-center">
+								<dt class="text-slate-400">Account ID:</dt>
+								<dd class="font-mono text-slate-300">{ vm.User.ID }</dd>
+							</div>
+							<div class="flex justify-between items-center">
+								<dt class="text-slate-400">Role:</dt>
+								<dd>
+									if vm.User.Role == "admin" {
+										@ui.Badge(ui.BadgeProps{Variant: ui.BadgeVariantWarning}) {
+											Admin (Full Control)
+										}
+									} else {
+										@ui.Badge(ui.BadgeProps{Variant: ui.BadgeVariantSecondary}) {
+											Viewer (Read Only)
+										}
 									}
-								} else {
-									@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
-										Viewer (Read Only)
-									}
-								}
-							</dd>
-						</div>
-						<div class="flex justify-between items-center">
-							<dt class="text-slate-400">Tenant:</dt>
-							<dd class="text-indigo-400 font-medium">{ vm.User.TenantName }</dd>
-						</div>
-					</dl>
-				</div>
+								</dd>
+							</div>
+							<div class="flex justify-between items-center">
+								<dt class="text-slate-400">Tenant:</dt>
+								<dd class="text-indigo-400 font-medium">{ vm.User.TenantName }</dd>
+							</div>
+						</dl>
+					}
+				}
 
 				<!-- Edit Profile Form (CSRF Protected) -->
-				<div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-6">
-					<h2 class="text-lg font-bold text-white mb-4">Edit Personal Information</h2>
-					<form action="/profile" method="POST" class="space-y-4">
-						<!-- CSRF Token Hidden Field -->
-						<input type="hidden" name="csrf_token" value={ vm.CSRFToken }/>
+				@ui.Card(ui.CardProps{Class: "lg:col-span-2"}) {
+					@ui.CardHeader(ui.CardHeaderProps{Class: "p-6 pb-2"}) {
+						@ui.CardTitle(ui.CardTitleProps{}) {
+							Edit Personal Information
+						}
+						@ui.CardDescription(ui.CardDescriptionProps{}) {
+							Update your public name and view linked tenant access
+						}
+					}
+					@ui.CardContent(ui.CardContentProps{Class: "p-6 pt-2"}) {
+						<form action="/profile" method="POST" class="space-y-4">
+							<!-- CSRF Token Hidden Field -->
+							<input type="hidden" name="csrf_token" value={ vm.CSRFToken }/>
 
-						<div>
-							<label for="name" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-								Full Name
-							</label>
-							<input 
-								type="text" 
-								id="name" 
-								name="name" 
-								value={ vm.User.Name } 
-								required 
-								class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
-							/>
-						</div>
+							<div class="space-y-1">
+								<label for="name" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+									Full Name
+								</label>
+								@ui.Input(ui.InputProps{
+									Type:     "text",
+									ID:       "name",
+									Name:     "name",
+									Value:    vm.User.Name,
+									Required: true,
+								})
+							</div>
 
-						<div>
-							<label for="email" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-								Email Address
-							</label>
-							<input 
-								type="email" 
-								id="email" 
-								value={ vm.User.Email } 
-								disabled 
-								class="w-full bg-slate-950/50 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-500 cursor-not-allowed"
-							/>
-							<p class="text-xs text-slate-500 mt-1">Contact your system administrator to change primary email.</p>
-						</div>
+							<div class="space-y-1">
+								<label for="email" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+									Email Address
+								</label>
+								@ui.Input(ui.InputProps{
+									Type:     "email",
+									ID:       "email",
+									Value:    vm.User.Email,
+									Disabled: true,
+									Class:    "bg-slate-950/50 border-slate-800 text-slate-500 cursor-not-allowed",
+								})
+								<p class="text-xs text-slate-500 mt-1">Contact your system administrator to change primary email.</p>
+							</div>
 
-						<div class="pt-2">
-							@ui.Button(ui.ButtonProps{Type: "submit", Variant: "default"}) {
-								Save Profile Changes
-							}
-						</div>
-					</form>
-				</div>
+							<div class="pt-2">
+								@ui.Button(ui.ButtonProps{Type: ui.TypeSubmit, Variant: ui.VariantDefault}) {
+									Save Profile Changes
+								}
+							</div>
+						</form>
+					}
+				}
 			</div>
 		</div>
 	}

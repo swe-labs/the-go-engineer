@@ -1,9 +1,70 @@
 package ui
 
-// CardProps defines customization options for the shadcn-templ Card components.
+// Card Sizes matching official shadcn-templ spec
+const (
+	CardSizeDefault = "default"
+	CardSizeSm      = "sm"
+)
+
+// CardProps defines options for the root Card container.
 type CardProps struct {
-	Class string
-	ID    string
+	Size       string // CardSizeDefault, CardSizeSm
+	Class      string
+	ID         string
+	Attributes templ.Attributes
+}
+
+// CardHeaderProps defines options for the CardHeader container.
+type CardHeaderProps struct {
+	Class      string
+	ID         string
+	Attributes templ.Attributes
+}
+
+// CardTitleProps defines options for the CardTitle element.
+type CardTitleProps struct {
+	Class      string
+	ID         string
+	Attributes templ.Attributes
+}
+
+// CardDescriptionProps defines options for the CardDescription element.
+type CardDescriptionProps struct {
+	Class      string
+	ID         string
+	Attributes templ.Attributes
+}
+
+// CardActionProps defines options for the CardAction container (top-right header slot).
+type CardActionProps struct {
+	Class      string
+	ID         string
+	Attributes templ.Attributes
+}
+
+// CardContentProps defines options for the CardContent container.
+type CardContentProps struct {
+	Class      string
+	ID         string
+	Attributes templ.Attributes
+}
+
+// CardFooterProps defines options for the CardFooter container.
+type CardFooterProps struct {
+	Class      string
+	ID         string
+	Attributes templ.Attributes
+}
+
+func getCardClasses(props CardProps) string {
+	base := "rounded-xl border border-slate-800 bg-slate-900 text-slate-100 shadow-sm"
+	if props.Size == CardSizeSm {
+		base += " text-sm"
+	}
+	if props.Class != "" {
+		base += " " + props.Class
+	}
+	return base
 }
 
 // Card renders a shadcn/ui compatible container card.
@@ -12,67 +73,86 @@ templ Card(props CardProps) {
 		if props.ID != "" {
 			id={ props.ID }
 		}
-		class={ "rounded-xl border border-slate-800 bg-slate-900 text-slate-100 shadow-sm " + props.Class }
+		class={ getCardClasses(props) }
+		{ props.Attributes... }
 	>
 		{ children... }
 	</div>
 }
 
 // CardHeader renders the top container of a card.
-templ CardHeader(props CardProps) {
+templ CardHeader(props CardHeaderProps) {
 	<div
 		if props.ID != "" {
 			id={ props.ID }
 		}
 		class={ "flex flex-col space-y-1.5 p-6 " + props.Class }
+		{ props.Attributes... }
 	>
 		{ children... }
 	</div>
 }
 
 // CardTitle renders a card title header.
-templ CardTitle(props CardProps) {
+templ CardTitle(props CardTitleProps) {
 	<h3
 		if props.ID != "" {
 			id={ props.ID }
 		}
 		class={ "font-semibold leading-none tracking-tight text-white text-lg " + props.Class }
+		{ props.Attributes... }
 	>
 		{ children... }
 	</h3>
 }
 
 // CardDescription renders a descriptive subtitle inside a card header.
-templ CardDescription(props CardProps) {
+templ CardDescription(props CardDescriptionProps) {
 	<p
 		if props.ID != "" {
 			id={ props.ID }
 		}
 		class={ "text-sm text-slate-400 " + props.Class }
+		{ props.Attributes... }
 	>
 		{ children... }
 	</p>
 }
 
+// CardAction places content in the top-right of the header (e.g. a button or badge).
+templ CardAction(props CardActionProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		class={ "ml-auto flex items-center " + props.Class }
+		{ props.Attributes... }
+	>
+		{ children... }
+	</div>
+}
+
 // CardContent renders the main content area of a card.
-templ CardContent(props CardProps) {
+templ CardContent(props CardContentProps) {
 	<div
 		if props.ID != "" {
 			id={ props.ID }
 		}
 		class={ "p-6 pt-0 " + props.Class }
+		{ props.Attributes... }
 	>
 		{ children... }
 	</div>
 }
 
 // CardFooter renders the bottom action/status container of a card.
-templ CardFooter(props CardProps) {
+templ CardFooter(props CardFooterProps) {
 	<div
 		if props.ID != "" {
 			id={ props.ID }
 		}
 		class={ "flex items-center p-6 pt-0 border-t border-slate-800/60 mt-4 " + props.Class }
+		{ props.Attributes... }
 	>
 		{ children... }
 	</div>

@@ -1,64 +1,76 @@
 package components
 
+import "github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
+
 templ Login(flashError string, csrfToken string) {
 	@Layout("Sign In", nil) {
-		<div class="max-w-md mx-auto mt-12 bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-xl">
-			<div class="text-center mb-6">
-				<span class="inline-block px-3 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full text-xs font-semibold mb-2">
-					Module 10 Auth &amp; Security
-				</span>
-				<h1 class="text-2xl font-bold text-white">Sign In to Opslane</h1>
-				<p class="text-sm text-slate-400 mt-1">Multi-tenant role-based access console</p>
-			</div>
+		<div class="max-w-md mx-auto mt-12">
+			@ui.Card(ui.CardProps{Class: "shadow-xl border-slate-800 bg-slate-900"}) {
+				@ui.CardHeader(ui.CardHeaderProps{Class: "text-center space-y-2 p-8 pb-4"}) {
+					<div class="flex justify-center">
+						@ui.Badge(ui.BadgeProps{Variant: ui.BadgeVariantSecondary, Class: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20"}) {
+							Module 10 Auth &amp; Security
+						}
+					</div>
+					@ui.CardTitle(ui.CardTitleProps{Class: "text-2xl font-bold text-center text-white"}) {
+						Sign In to Opslane
+					}
+					@ui.CardDescription(ui.CardDescriptionProps{Class: "text-center text-slate-400"}) {
+						Multi-tenant role-based access console
+					}
+				}
+				@ui.CardContent(ui.CardContentProps{Class: "p-8 pt-2 space-y-4"}) {
+					if flashError != "" {
+						<div class="mb-4 p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-sm">
+							{ flashError }
+						</div>
+					}
 
-			if flashError != "" {
-				<div class="mb-4 p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-sm">
-					{ flashError }
-				</div>
+					<form action="/auth/login" method="POST" class="space-y-4">
+						<input type="hidden" name="csrf_token" value={ csrfToken }/>
+						<div class="space-y-1">
+							<label for="email" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+								Work Email
+							</label>
+							@ui.Input(ui.InputProps{
+								Type:        "email",
+								ID:          "email",
+								Name:        "email",
+								Value:       "alice@acme.corp",
+								Required:    true,
+								Placeholder: "name@company.com",
+							})
+						</div>
+						<div class="space-y-1">
+							<label for="password" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+								Password
+							</label>
+							@ui.Input(ui.InputProps{
+								Type:        "password",
+								ID:          "password",
+								Name:        "password",
+								Value:       "opslane123",
+								Required:    true,
+								Placeholder: "••••••••",
+							})
+						</div>
+
+						<div class="p-3 bg-slate-950 rounded border border-slate-800 text-xs text-slate-400 space-y-1">
+							<p class="font-semibold text-slate-300">Test Accounts:</p>
+							<p>&bull; Admin: <code class="text-indigo-400 font-mono">alice@acme.corp</code> / <code class="text-slate-300 font-mono">opslane123</code></p>
+							<p>&bull; Viewer: <code class="text-indigo-400 font-mono">bob@acme.corp</code> / <code class="text-slate-300 font-mono">opslane123</code></p>
+						</div>
+
+						@ui.Button(ui.ButtonProps{
+							Type:    ui.TypeSubmit,
+							Variant: ui.VariantDefault,
+							Class:   "w-full py-2.5",
+						}) {
+							Sign In
+						}
+					</form>
+				}
 			}
-
-			<form action="/auth/login" method="POST" class="space-y-4">
-				<input type="hidden" name="csrf_token" value={ csrfToken }/>
-				<div>
-					<label for="email" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-						Work Email
-					</label>
-					<input 
-						type="email" 
-						id="email" 
-						name="email" 
-						value="alice@acme.corp" 
-						required 
-						class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
-					/>
-				</div>
-				<div>
-					<label for="password" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-						Password
-					</label>
-					<input 
-						type="password" 
-						id="password" 
-						name="password" 
-						value="opslane123" 
-						required 
-						class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
-					/>
-				</div>
-
-				<div class="p-3 bg-slate-950 rounded border border-slate-800 text-xs text-slate-400 space-y-1">
-					<p class="font-semibold text-slate-300">Test Accounts:</p>
-					<p>&bull; Admin: <code class="text-indigo-400 font-mono">alice@acme.corp</code> / <code class="text-slate-300 font-mono">opslane123</code></p>
-					<p>&bull; Viewer: <code class="text-indigo-400 font-mono">bob@acme.corp</code> / <code class="text-slate-300 font-mono">opslane123</code></p>
-				</div>
-
-				<button 
-					type="submit" 
-					class="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm rounded-lg transition"
-				>
-					Sign In
-				</button>
-			</form>
 		</div>
 	}
 }

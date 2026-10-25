@@ -1,0 +1,50 @@
+package ui
+
+// Separator Orientations matching official shadcn-templ spec
+const (
+	OrientationHorizontal = "horizontal"
+	OrientationVertical   = "vertical"
+)
+
+// SeparatorProps defines options for the Separator component.
+type SeparatorProps struct {
+	Orientation string // OrientationHorizontal, OrientationVertical
+	Decorative  bool
+	Class       string
+	ID          string
+	Attributes  templ.Attributes
+}
+
+func getSeparatorClasses(props SeparatorProps) string {
+	base := "shrink-0 bg-slate-800"
+	if props.Orientation == OrientationVertical {
+		base += " h-full w-[1px]"
+	} else {
+		base += " h-[1px] w-full"
+	}
+	if props.Class != "" {
+		base += " " + props.Class
+	}
+	return base
+}
+
+// Separator renders a visual or semantic divider.
+templ Separator(props SeparatorProps) {
+	<div
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		if props.Decorative {
+			role="none"
+		} else {
+			role="separator"
+			if props.Orientation != "" {
+				aria-orientation={ props.Orientation }
+			} else {
+				aria-orientation="horizontal"
+			}
+		}
+		class={ getSeparatorClasses(props) }
+		{ props.Attributes... }
+	></div>
+}

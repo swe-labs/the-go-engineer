@@ -2,26 +2,44 @@ package ui
 
 import "strings"
 
+// Badge Variants matching official shadcn-templ spec
+const (
+	BadgeVariantDefault     = "default"
+	BadgeVariantSecondary   = "secondary"
+	BadgeVariantDestructive = "destructive"
+	BadgeVariantOutline     = "outline"
+	BadgeVariantGhost       = "ghost"
+	BadgeVariantLink        = "link"
+	BadgeVariantSuccess     = "success"
+	BadgeVariantWarning     = "warning"
+)
+
 // BadgeProps defines customization options for the shadcn-templ Badge component.
 type BadgeProps struct {
-	Variant string // "default", "secondary", "destructive", "outline", "success", "warning"
-	Class   string
-	ID      string
+	Variant    string // BadgeVariantDefault, BadgeVariantSecondary, BadgeVariantDestructive, etc.
+	Href       string // Optional URL to render badge as <a>
+	Target     string // Optional link target
+	Class      string
+	ID         string
+	Attributes templ.Attributes
 }
 
-func getBadgeClasses(props BadgeProps) string {
+// BadgeVariants returns the computed classes for a given BadgeProps.
+func BadgeVariants(props BadgeProps) string {
 	base := "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none"
 
 	variants := map[string]string{
-		"default":     "border-transparent bg-indigo-600 text-white shadow hover:bg-indigo-500",
-		"secondary":   "border-transparent bg-slate-800 text-slate-100 hover:bg-slate-700",
-		"destructive": "border-transparent bg-rose-600 text-white shadow hover:bg-rose-500",
-		"outline":     "text-slate-200 border-slate-700",
-		"success":     "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-		"warning":     "border-amber-500/30 bg-amber-500/10 text-amber-400",
+		BadgeVariantDefault:     "border-transparent bg-indigo-600 text-white shadow hover:bg-indigo-500",
+		BadgeVariantSecondary:   "border-transparent bg-slate-800 text-slate-100 hover:bg-slate-700",
+		BadgeVariantDestructive: "border-transparent bg-rose-600 text-white shadow hover:bg-rose-500",
+		BadgeVariantOutline:     "text-slate-200 border-slate-700",
+		BadgeVariantGhost:       "border-transparent text-slate-300 hover:bg-slate-800",
+		BadgeVariantLink:        "border-transparent text-indigo-400 underline-offset-4 hover:underline",
+		BadgeVariantSuccess:     "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+		BadgeVariantWarning:     "border-amber-500/30 bg-amber-500/10 text-amber-400",
 	}
 
-	variantClass := variants["default"]
+	variantClass := variants[BadgeVariantDefault]
 	if v, ok := variants[props.Variant]; ok {
 		variantClass = v
 	}
@@ -33,14 +51,31 @@ func getBadgeClasses(props BadgeProps) string {
 	return strings.Join(classes, " ")
 }
 
-// Badge renders a shadcn/ui compatible status badge.
+// Badge renders a shadcn/ui compatible status badge or link badge.
 templ Badge(props BadgeProps) {
-	<span
-		if props.ID != "" {
-			id={ props.ID }
-		}
-		class={ getBadgeClasses(props) }
-	>
-		{ children... }
-	</span>
+	if props.Href != "" {
+		<a
+			if props.ID != "" {
+				id={ props.ID }
+			}
+			href={ templ.SafeURL(props.Href) }
+			if props.Target != "" {
+				target={ props.Target }
+			}
+			class={ BadgeVariants(props) }
+			{ props.Attributes... }
+		>
+			{ children... }
+		</a>
+	} else {
+		<span
+			if props.ID != "" {
+				id={ props.ID }
+			}
+			class={ BadgeVariants(props) }
+			{ props.Attributes... }
+		>
+			{ children... }
+		</span>
+	}
 }

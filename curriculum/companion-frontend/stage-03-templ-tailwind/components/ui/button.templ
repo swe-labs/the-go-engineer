@@ -2,42 +2,81 @@ package ui
 
 import "strings"
 
+// Button Variants matching official shadcn-templ v2 spec
+const (
+	VariantDefault     = "default"
+	VariantSecondary   = "secondary"
+	VariantDestructive = "destructive"
+	VariantOutline     = "outline"
+	VariantGhost       = "ghost"
+	VariantLink        = "link"
+)
+
+// Button Sizes matching official shadcn-templ v2 spec
+const (
+	SizeDefault = "default"
+	SizeXs      = "xs"
+	SizeSm      = "sm"
+	SizeLg      = "lg"
+	SizeIcon    = "icon"
+	SizeIconXs  = "icon-xs"
+	SizeIconSm  = "icon-sm"
+	SizeIconLg  = "icon-lg"
+)
+
+// Button Types matching official shadcn-templ v2 spec
+const (
+	TypeButton = "button"
+	TypeSubmit = "submit"
+	TypeReset  = "reset"
+)
+
 // ButtonProps defines customization options for the shadcn-templ Button component.
+// Follows official shadcn-templ specification including universal ID, Class, and Attributes.
 type ButtonProps struct {
-	Variant  string // "default", "destructive", "outline", "secondary", "ghost", "link"
-	Size     string // "default", "sm", "lg", "icon"
-	Class    string
-	Type     string // "button", "submit", "reset"
-	Disabled bool
-	Href     string
-	ID       string
+	Variant    string // VariantDefault, VariantSecondary, VariantDestructive, VariantOutline, VariantGhost, VariantLink
+	Size       string // SizeDefault, SizeXs, SizeSm, SizeLg, SizeIcon, SizeIconXs, SizeIconSm, SizeIconLg
+	Type       string // TypeButton, TypeSubmit, TypeReset
+	Href       string // Renders as <a> when provided
+	Target     string // Link target e.g. "_blank"
+	Disabled   bool
+	Form       string
+	Class      string
+	ID         string
+	Attributes templ.Attributes
 }
 
-func getButtonClasses(props ButtonProps) string {
+// Variants returns the computed Tailwind CSS classes for the given ButtonProps.
+// Matches the official shadcn-templ button.Variants() helper.
+func Variants(props ButtonProps) string {
 	base := "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:pointer-events-none disabled:opacity-50"
 
 	variants := map[string]string{
-		"default":     "bg-indigo-600 text-white shadow hover:bg-indigo-500",
-		"destructive": "bg-rose-600 text-white shadow-sm hover:bg-rose-500",
-		"outline":     "border border-slate-700 bg-transparent text-slate-100 shadow-sm hover:bg-slate-800 hover:text-white",
-		"secondary":   "bg-slate-800 text-slate-100 shadow-sm hover:bg-slate-700",
-		"ghost":       "text-slate-300 hover:bg-slate-800 hover:text-white",
-		"link":        "text-indigo-400 underline-offset-4 hover:underline",
+		VariantDefault:     "bg-indigo-600 text-white shadow hover:bg-indigo-500",
+		VariantDestructive: "bg-rose-600 text-white shadow-sm hover:bg-rose-500",
+		VariantOutline:     "border border-slate-700 bg-transparent text-slate-100 shadow-sm hover:bg-slate-800 hover:text-white",
+		VariantSecondary:   "bg-slate-800 text-slate-100 shadow-sm hover:bg-slate-700",
+		VariantGhost:       "text-slate-300 hover:bg-slate-800 hover:text-white",
+		VariantLink:        "text-indigo-400 underline-offset-4 hover:underline",
 	}
 
 	sizes := map[string]string{
-		"default": "h-9 px-4 py-2",
-		"sm":      "h-8 rounded-md px-3 text-xs",
-		"lg":      "h-10 rounded-md px-8 text-base",
-		"icon":    "h-9 w-9 p-0",
+		SizeDefault: "h-9 px-4 py-2",
+		SizeXs:      "h-7 rounded px-2 text-xs",
+		SizeSm:      "h-8 rounded-md px-3 text-xs",
+		SizeLg:      "h-10 rounded-md px-8 text-base",
+		SizeIcon:    "h-9 w-9 p-0",
+		SizeIconXs:  "h-7 w-7 p-0",
+		SizeIconSm:  "h-8 w-8 p-0",
+		SizeIconLg:  "h-10 w-10 p-0",
 	}
 
-	variantClass := variants["default"]
+	variantClass := variants[VariantDefault]
 	if v, ok := variants[props.Variant]; ok {
 		variantClass = v
 	}
 
-	sizeClass := sizes["default"]
+	sizeClass := sizes[SizeDefault]
 	if s, ok := sizes[props.Size]; ok {
 		sizeClass = s
 	}
@@ -57,7 +96,11 @@ templ Button(props ButtonProps) {
 				id={ props.ID }
 			}
 			href={ templ.SafeURL(props.Href) }
-			class={ getButtonClasses(props) }
+			if props.Target != "" {
+				target={ props.Target }
+			}
+			class={ Variants(props) }
+			{ props.Attributes... }
 		>
 			{ children... }
 		</a>
@@ -71,8 +114,12 @@ templ Button(props ButtonProps) {
 			} else {
 				type="button"
 			}
-			class={ getButtonClasses(props) }
+			if props.Form != "" {
+				form={ props.Form }
+			}
+			class={ Variants(props) }
 			disabled?={ props.Disabled }
+			{ props.Attributes... }
 		>
 			{ children... }
 		</button>
