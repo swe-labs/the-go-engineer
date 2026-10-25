@@ -6,10 +6,11 @@
   "name": "The Go Engineer v3 — README Contracts",
   "status": "stable",
   "architectural_decision": {
-    "decision": "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
-    "v2_policy": "curriculum.v2.json is frozen legacy import data, not the active source of truth.",
-    "core_rule": "Keep good lessons, break the old path, optimize for learner progression, proof, documentation quality, and job readiness.",
-    "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only."
+    "core_rule": "Optimize for learner progression, zero magic, rigorous proof of understanding, production-grade documentation, and job readiness.",
+    "decision": "Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.",
+    "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
+    "manifest_policy": "Authoritative modular v3 manifests are the active source of truth for the curriculum engine.",
+    "v2_policy": "curriculum.v2.json is archived legacy import data, not the active source of truth."
   },
   "contracts": [
     {
@@ -140,7 +141,10 @@
         "Production notes",
         "Related core lessons"
       ],
-      "generated_sections": ["Prerequisites", "Related core lessons"],
+      "generated_sections": [
+        "Prerequisites",
+        "Related core lessons"
+      ],
       "human_written_sections": [
         "When you need this",
         "Tradeoffs",
@@ -165,7 +169,11 @@
         "Stretch goals",
         "Portfolio notes"
       ],
-      "generated_sections": ["Prerequisites", "Lessons reinforced", "Rubric"],
+      "generated_sections": [
+        "Prerequisites",
+        "Lessons reinforced",
+        "Rubric"
+      ],
       "human_written_sections": [
         "Project mission",
         "Requirements",
@@ -245,7 +253,10 @@
         "Architecture defense questions",
         "Next checkpoint"
       ],
-      "generated_sections": ["Prerequisites", "Next checkpoint"],
+      "generated_sections": [
+        "Prerequisites",
+        "Next checkpoint"
+      ],
       "human_written_sections": [
         "Checkpoint mission",
         "Failure scenarios",
@@ -266,7 +277,7 @@
     "No README with zero_magic_status=golden may contain template-style phrases: 'Think of X as a contract', 'X is similar to', 'in simple terms', 'basically', 'just', or empty analogy filler.",
     "Every lesson README marked golden must contain at least one concrete production failure example in the 'In production' section.",
     "Every lesson README marked golden must include a realistic debugging scenario in 'Debugging task', not a generic 'fix the bug' placeholder.",
-    "Mental model sections must describe the mechanism, not the definition \u2014 'A goroutine is...' is a definition; 'When you write go f(), the runtime...' is a mental model.",
+    "Mental model sections must describe the mechanism, not the definition — 'A goroutine is...' is a definition; 'When you write go f(), the runtime...' is a mental model.",
     "Machine view sections must describe what the CPU/OS/runtime actually does, not restate the mental model.",
     "Common mistakes sections must list real mistakes observed in production code, not conceptual misunderstandings that beginners never actually make."
   ]

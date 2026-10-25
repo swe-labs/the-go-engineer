@@ -8,8 +8,8 @@
 
 Before authoring, read (in this order):
 
-1. `zero-magic-authoring-spec.md` — pedagogical contract and field definitions
-2. `quality-rubric.md` — scoring dimensions and minimums
+1. [zero-magic-authoring-spec.md](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/zero-magic-authoring-spec.md) — pedagogical contract and field definitions
+2. [quality-rubric.md](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/quality-rubric.md) — scoring dimensions and minimums
 3. This guide — how to apply the standards using golden lesson examples
 
 ---
@@ -18,9 +18,9 @@ Before authoring, read (in this order):
 
 | Spec                 | Location                                                 |
 | -------------------- | -------------------------------------------------------- |
-| Pedagogical contract | `zero-magic-authoring-spec.md`                           |
-| Quality rubric       | `quality-rubric.md`                                      |
-| Golden lessons       | `path.core.json` items in `goldenLessons` set            |
+| Pedagogical contract | [zero-magic-authoring-spec.md](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/zero-magic-authoring-spec.md) |
+| Quality rubric       | [quality-rubric.md](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/quality-rubric.md) |
+| Golden lessons       | [path.core.json](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/path.core.json) items in `goldenLessons` set |
 | Validator            | `go run ./internal/tools/curriculum validate-zero-magic` |
 
 ---

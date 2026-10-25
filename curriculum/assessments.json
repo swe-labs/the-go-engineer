@@ -1,9 +1,10 @@
 {
   "architectural_decision": {
-    "core_rule": "Keep good lessons, break the old path, optimize for learner progression, proof, documentation quality, and job readiness.",
-    "decision": "Break the locked v2 curriculum and rebuild around the Report 1 phase-based zero-to-software-engineer path.",
+    "core_rule": "Optimize for learner progression, zero magic, rigorous proof of understanding, production-grade documentation, and job readiness.",
+    "decision": "Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.",
     "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
-    "v2_policy": "curriculum.v2.json is frozen legacy import data, not the active source of truth."
+    "manifest_policy": "Authoritative modular v3 manifests are the active source of truth for the curriculum engine.",
+    "v2_policy": "curriculum.v2.json is archived legacy import data, not the active source of truth."
   },
   "assessments": [
     {
@@ -1180,7 +1181,7 @@
         "core-08-19",
         "core-08-20"
       ],
-      "title": "Module 08 Assessment -- HTTP and REST APIs",
+      "title": "Module 08 Assessment — HTTP and REST APIs",
       "type": "project-review"
     },
     {
@@ -1319,7 +1320,7 @@
         "core-09-25",
         "core-09-26"
       ],
-      "title": "Module 09 Assessment -- SQL and PostgreSQL Persistence",
+      "title": "Module 09 Assessment — SQL and PostgreSQL Persistence",
       "type": "project-review"
     },
     {
@@ -1456,7 +1457,7 @@
         "core-10-23",
         "core-10-24"
       ],
-      "title": "Module 10 Assessment -- Authentication, Authorization, and Security",
+      "title": "Module 10 Assessment — Authentication, Authorization, and Security",
       "type": "project-review"
     },
     {
@@ -1597,7 +1598,7 @@
         "core-11-27",
         "core-11-28"
       ],
-      "title": "Module 11 Assessment -- Lifecycle, Context, and Concurrency",
+      "title": "Module 11 Assessment — Lifecycle, Context, and Concurrency",
       "type": "project-review"
     },
     {
@@ -1723,7 +1724,7 @@
         "core-12-11",
         "core-12-12"
       ],
-      "title": "Module 12 Assessment -- Observability and Diagnostics",
+      "title": "Module 12 Assessment — Observability and Diagnostics",
       "type": "project-review"
     },
     {
@@ -1974,7 +1975,7 @@
         "core-14-16",
         "core-14-17"
       ],
-      "title": "Module 14 Assessment -- Architecture and Distributed Systems",
+      "title": "Module 14 Assessment — Architecture and Distributed Systems",
       "type": "project-review"
     },
     {
@@ -2106,7 +2107,7 @@
         "core-15-18",
         "core-15-19"
       ],
-      "title": "Module 15 Assessment -- Docker, CI/CD, and Deployment",
+      "title": "Module 15 Assessment — Docker, CI/CD, and Deployment",
       "type": "project-review"
     },
     {
@@ -2232,7 +2233,7 @@
         "core-16-14",
         "core-16-15"
       ],
-      "title": "Module 16 Assessment -- Portfolio and Interview Readiness",
+      "title": "Module 16 Assessment — Portfolio and Interview Readiness",
       "type": "portfolio-review"
     },
     {
@@ -2363,7 +2364,7 @@
         "elective-19",
         "elective-20"
       ],
-      "title": "Module 17 Assessment -- Electives and Advanced Engineering",
+      "title": "Module 17 Assessment — Electives and Advanced Engineering",
       "type": "project-review"
     },
     {
@@ -2601,7 +2602,7 @@
       "target_ids": [
         "project-shell-git-lab"
       ],
-      "title": "Assessment - Shell + Git Lab",
+      "title": "Assessment — Shell + Git Lab",
       "type": "project-review"
     },
     {
@@ -2715,7 +2716,7 @@
       "target_ids": [
         "project-tooling-failure-lab"
       ],
-      "title": "Assessment - Tooling Failure Lab",
+      "title": "Assessment — Tooling Failure Lab",
       "type": "project-review"
     },
     {
@@ -2820,7 +2821,7 @@
       "target_ids": [
         "project-course-setup"
       ],
-      "title": "Assessment - Course Setup Verification",
+      "title": "Assessment — Course Setup Verification",
       "type": "project-review"
     },
     {
@@ -2925,7 +2926,7 @@
       "target_ids": [
         "project-performance-analysis-lab"
       ],
-      "title": "Assessment - Performance Analysis Lab",
+      "title": "Assessment — Performance Analysis Lab",
       "type": "project-review"
     },
     {
@@ -3030,7 +3031,7 @@
       "target_ids": [
         "project-advanced-electives"
       ],
-      "title": "Assessment - Advanced Electives Capstone",
+      "title": "Assessment — Advanced Electives Capstone",
       "type": "project-review"
     },
     {
@@ -3039,15 +3040,15 @@
           "id": "project-pricing-checkout-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Pricing and checkout calculations fail core requirements: line item totals, tax calculations, discounts, or order summaries produce incorrect arithmetic or panic on edge cases.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Calculates line items and totals correctly for standard baskets, but fails on boundary conditions such as zero-price items, negative discounts, or multi-item tier discounts.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Fully implements pricing calculations, tiered discounts, taxes, and checkout validation with exact arithmetic and robust boundary handling across all test scenarios.",
               "score": 5
             }
           ],
@@ -3058,15 +3059,15 @@
           "id": "project-pricing-checkout-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Non-idiomatic Go: monolithic main function, exported globals, unformatted code, or ignored errors during arithmetic or parsing.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Basic Go idiomatic style with structs and functions, but has minor anti-patterns like excessive pointer usage for primitive types or repetitive pricing logic.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Exemplary Go code: clean type modeling with custom structs, clean method receivers, proper zero-value handling, strict error wrapping, and idiomatic naming.",
               "score": 5
             }
           ],
@@ -3077,15 +3078,15 @@
           "id": "project-pricing-checkout-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated tests or manual verification suite provided; calculation correctness cannot be independently verified.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Basic unit tests covering happy path calculations, but missing table-driven tests for discount tiers, tax boundary conditions, or invalid item inputs.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Comprehensive table-driven unit tests validating all price tiers, rounding rules, tax rates, empty carts, and error cases with 100% core calculation coverage.",
               "score": 5
             }
           ],
@@ -3096,15 +3097,15 @@
           "id": "project-pricing-checkout-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Unable to explain design decisions, struct field choices, or financial rounding rules during code review.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Can explain basic checkout flow and struct layout, but struggles to articulate numeric precision trade-offs (e.g. integer cents vs floats) or validation boundaries.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Articulates architectural choices clearly, detailing integer-cent currency representations, data flow, struct isolation, and validation trade-offs with senior-level precision.",
               "score": 5
             }
           ],
@@ -3141,15 +3142,15 @@
           "id": "project-contact-directory-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Contact directory operations (create, read, update, delete, search) fail or panic on missing records, duplicate keys, or invalid inputs.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "CRUD operations work for happy paths, but search returns inaccurate results or map mutations exhibit inconsistent state on concurrent or boundary updates.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "All contact operations, indexing, multi-field search, and deletion invariants function flawlessly with deterministic handling of missing keys and duplicates.",
               "score": 5
             }
           ],
@@ -3160,15 +3161,15 @@
           "id": "project-contact-directory-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Poor structure: exposes raw internal maps directly, lacks type encapsulation, or relies on global state.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Proper struct definitions and methods, but leaks internal map pointers or uses repetitive lookup code across operations.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Idiomatic type encapsulation: package-level encapsulation, value/pointer receiver correctness, custom domain types, and clean error wrapping.",
               "score": 5
             }
           ],
@@ -3179,15 +3180,15 @@
           "id": "project-contact-directory-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated tests provided; directory operations cannot be independently verified.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests exist for insertion and retrieval, but boundary conditions (duplicate IDs, empty directory searches, case-insensitive lookups) are untested.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Complete table-driven test suite validating CRUD lifecycle, edge-case lookups, case-insensitive searches, and non-existent key retrieval.",
               "score": 5
             }
           ],
@@ -3198,15 +3199,15 @@
           "id": "project-contact-directory-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Unable to explain slice vs map performance characteristics or map addressability rules in Go.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Understands basic map lookup mechanics but cannot explain hash map bucket growth, evacuation, or why map elements cannot be taken by address.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Articulates Go map internals, amortized lookup complexity, slice re-slicing mechanics, and memory allocation trade-offs with complete clarity.",
               "score": 5
             }
           ],
@@ -3243,15 +3244,15 @@
           "id": "project-order-summary-refactor-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Refactored order summary produces incorrect financial totals, misses line items, or fails to preserve original business logic behavior.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Preserves baseline calculation behavior, but error handling is incomplete or boundary conditions (empty orders, negative quantities) trigger panics.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Refactored code preserves 100% behavioral parity with original business logic, adding robust validation and deterministic error handling for all edge cases.",
               "score": 5
             }
           ],
@@ -3262,15 +3263,15 @@
           "id": "project-order-summary-refactor-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Code remains monolithic, uses global variables, ignores errors, or displays poor cyclomatic complexity.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Functions are separated, but responsibilities overlap (e.g., parsing mixed with calculations), or error messages lack context.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Single responsibility principle demonstrated throughout: small, focused functions, custom error types using fmt.Errorf with %w, and idiomatic error handling.",
               "score": 5
             }
           ],
@@ -3281,15 +3282,15 @@
           "id": "project-order-summary-refactor-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No characterization or regression tests provided before or after refactoring.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Basic tests pass for happy paths, but missing regression assertions for edge cases or error return contracts.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Thorough suite of characterization tests verifying zero regression across all calculation paths, discount combinations, and invalid inputs.",
               "score": 5
             }
           ],
@@ -3300,15 +3301,15 @@
           "id": "project-order-summary-refactor-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Unable to explain why specific refactoring steps were taken or how errors are propagated.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Can explain function decomposition, but struggles to justify error wrapping strategy or cyclomatic complexity reduction.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Fluently articulates the refactoring strategy, cyclomatic complexity reduction, error wrapping chains, and how the new design simplifies future extensions.",
               "score": 5
             }
           ],
@@ -3345,15 +3346,15 @@
           "id": "project-bank-account-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Bank account deposit, withdrawal, or transfer operations allow invalid overdrafts, negative amounts, or corrupt balance state.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Core deposit and withdrawal work, but transfers fail to maintain balance invariants or boundary validations are missing.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "All banking transactions enforce strict domain invariants: negative amounts rejected, overdraft rules respected, and multi-account transfers atomic.",
               "score": 5
             }
           ],
@@ -3364,15 +3365,15 @@
           "id": "project-bank-account-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Public mutable balance fields, lack of interface contracts, or non-idiomatic error management.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Encapsulation used, but interface definitions are overly broad or pointer vs value receiver semantics are confused.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Exemplary domain modeling: unexported balance fields with accessor methods, small consumer-defined interfaces, pointer receivers for state mutation, and custom sentinel errors.",
               "score": 5
             }
           ],
@@ -3383,15 +3384,15 @@
           "id": "project-bank-account-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated tests provided to verify account balance transitions or error states.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Unit tests check basic deposits and withdrawals, but omit concurrent operations or transfer invariant edge cases.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Robust unit tests testing all transaction types, zero/negative deposits, overdraft attempts, and verifying balance conservation across transfers.",
               "score": 5
             }
           ],
@@ -3402,15 +3403,15 @@
           "id": "project-bank-account-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain pointer receiver semantics or how interfaces enable decoupling.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains basic method receivers, but struggles to articulate interface satisfaction mechanics (method set rules on values vs pointers).",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Masterfully explains value vs pointer receiver method sets, interface satisfaction under the hood, and how invariant encapsulation prevents invalid system state.",
               "score": 5
             }
           ],
@@ -3447,15 +3448,15 @@
           "id": "project-payroll-processor-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Payroll calculations (gross, deductions, taxes, net pay) produce incorrect figures or fail across employee classification types.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Calculates pay correctly for full-time employees, but hourly overtime or contractor deduction logic has calculation bugs.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Calculates accurate compensation across all employee tiers (hourly, salaried, contractor) with exact tax withholding and overtime rules.",
               "score": 5
             }
           ],
@@ -3466,15 +3467,15 @@
           "id": "project-payroll-processor-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Monolithic package structure, type switching instead of polymorphism, or hardcoded deduction rules.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Uses interfaces for employee roles, but packages are tightly coupled or interface definitions are bloated.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Clean package architecture: domain interfaces for compensation strategies, interface composition, clean package boundaries, and zero circular dependencies.",
               "score": 5
             }
           ],
@@ -3485,15 +3486,15 @@
           "id": "project-payroll-processor-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No test suite provided to verify payroll computation across employee classifications.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests exist for standard salary runs, but omit overtime boundary checks, zero-hour weeks, or contractor tax exemptions.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Comprehensive table-driven tests verifying all compensation strategies, overtime threshold calculations, tax deductions, and error conditions.",
               "score": 5
             }
           ],
@@ -3504,15 +3505,15 @@
           "id": "project-payroll-processor-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain package organization or interface composition benefits.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains employee interfaces, but struggles to discuss package dependency direction or why small interfaces are preferred.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Clearly defends package boundaries, interface composition strategies, and explains how polymorphism decouples payroll calculation from employee storage.",
               "score": 5
             }
           ],
@@ -3549,15 +3550,15 @@
           "id": "project-bug-hunt-pack-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Fails to identify or fix the injected bugs; code continues to fail test cases or panics at runtime.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Identifies and patches most bugs, but fixes introduce subtle regressions or fail on corner-case inputs.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Accurately diagnoses, isolates, and resolves 100% of the injected defects without introducing any regressions or modifying test contracts.",
               "score": 5
             }
           ],
@@ -3568,15 +3569,15 @@
           "id": "project-bug-hunt-pack-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Fixes consist of hacky workarounds, silencing errors, or disabling assertions.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Bugs are resolved, but fixes add unnecessary complexity or fail to adhere to idiomatic Go patterns.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Root causes addressed idiomatically: proper nil-checks, correct loop variable scoping, accurate slice re-slicing, and clear error returns.",
               "score": 5
             }
           ],
@@ -3587,15 +3588,15 @@
           "id": "project-bug-hunt-pack-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No regression tests added; fixes are unverified.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Original failing tests pass, but no new regression tests are authored to prevent recurrence.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Every resolved bug is accompanied by a dedicated regression test reproducing the original defect and verifying the fix permanently.",
               "score": 5
             }
           ],
@@ -3606,15 +3607,15 @@
           "id": "project-bug-hunt-pack-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Unable to explain the mechanical root cause of any of the injected bugs.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Can explain what failed, but cannot articulate why the runtime behaved as it did (e.g., pointer aliasing vs value copy).",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Deeply explains the mechanical runtime root cause of each bug (e.g., goroutine capture, memory leak, off-by-one slice bounds, nil interface trap).",
               "score": 5
             }
           ],
@@ -3651,15 +3652,15 @@
           "id": "project-refactor-under-tests-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Refactored code breaks existing behavior or fails to run legacy test scenarios.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Code refactored with minor behavioral deviations on unexercised legacy code paths.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Refactored code maintains 100% behavioral parity with the legacy implementation across all supported operations and error modes.",
               "score": 5
             }
           ],
@@ -3670,15 +3671,15 @@
           "id": "project-refactor-under-tests-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Code structure remains tangled; global variables, tight coupling, and obscure naming persist.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Modularized into smaller functions, but dependencies remain hardcoded or error handling is inconsistent.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Transformed into clean, idiomatic architecture: dependency injection, decoupled packages, clear interfaces, and structured errors.",
               "score": 5
             }
           ],
@@ -3689,15 +3690,15 @@
           "id": "project-refactor-under-tests-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No characterization tests authored prior to refactoring; refactoring performed without safety net.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Basic characterization tests created, but gaps exist around error conditions and legacy edge cases.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Exemplary golden-master / characterization test suite created before refactoring, proving behavioral invariance throughout all refactoring phases.",
               "score": 5
             }
           ],
@@ -3708,15 +3709,15 @@
           "id": "project-refactor-under-tests-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot articulate the refactoring workflow or describe the safety mechanisms employed.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Describes refactoring steps, but cannot explain how characterization tests guard against regression.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Articulates professional refactoring methodology: characterization testing, incremental seams, dependency breaking, and verification gates.",
               "score": 5
             }
           ],
@@ -3753,15 +3754,15 @@
           "id": "project-file-organizer-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "File organizer crashes on invalid paths, deletes files unintentionally, or fails to categorize files.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Organizes basic directories, but fails on nested subdirectories, symlinks, permission errors, or duplicate destination file names.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Correctly discovers, categorizes, moves, or copies files based on rules, safely handling file collisions, nested folders, and permissions.",
               "score": 5
             }
           ],
@@ -3772,15 +3773,15 @@
           "id": "project-file-organizer-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Ignores file I/O errors, leaks open file descriptors, or lacks modular structure.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Uses path/filepath and os packages correctly, but defers Close in tight loops or has weak error reporting.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Clean CLI architecture: robust use of filepath.WalkDir, proper defer resource cleanup, atomic file operations, and structured logging.",
               "score": 5
             }
           ],
@@ -3791,15 +3792,15 @@
           "id": "project-file-organizer-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated tests or test fixtures provided; file operations must be manually verified.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Unit tests use fixed file paths rather than t.TempDir(), risking test pollution or failure across operating systems.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Hermetic automated tests using t.TempDir() and os.MkdirAll, verifying directory organization, collision handling, and non-destructive dry-run mode.",
               "score": 5
             }
           ],
@@ -3810,15 +3811,15 @@
           "id": "project-file-organizer-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain file descriptor limits, path traversal risks, or defer evaluation timing.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains basic file I/O, but struggles with file descriptor exhaustion in recursive traversal or cross-platform path separators.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Fluently articulates file system traversal mechanics, filepath.Clean security against traversal attacks, and file descriptor lifecycle management.",
               "score": 5
             }
           ],
@@ -3855,15 +3856,15 @@
           "id": "project-log-search-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Log search fails to filter lines, crashes on large files, or misinterprets search patterns.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Searches single files accurately, but fails on multi-file streams, invalid regex syntax, or inverted match options.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Accurately filters logs across files and stdin using regex and substring modes, supporting line numbers, context lines, and case insensitivity.",
               "score": 5
             }
           ],
@@ -3874,15 +3875,15 @@
           "id": "project-log-search-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Loads entire log files into memory at once (os.ReadFile on unbounded files), causing out-of-memory crashes on large files.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Uses bufio.Scanner, but fails to handle bufio.ErrTooLong for lines exceeding default buffer limits.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Streaming architecture: reads via bufio.Reader/Scanner with custom buffer limits, precompiles regular expressions, and handles io.EOF cleanly.",
               "score": 5
             }
           ],
@@ -3893,15 +3894,15 @@
           "id": "project-log-search-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated test suite provided; filtering behavior cannot be verified.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests verify basic string matches, but omit tests for regex syntax errors, oversized lines, or multi-file arguments.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Comprehensive table-driven tests verifying pattern matching, context line emission, flag precedence, and streaming memory bounds.",
               "score": 5
             }
           ],
@@ -3912,15 +3913,15 @@
           "id": "project-log-search-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain memory consumption differences between os.ReadFile and bufio.Scanner.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Understands streaming concept, but cannot explain scanner buffer growth or regular expression compilation costs.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Articulates memory footprint guarantees, streaming I/O pipelines, regexp.Compile overhead vs loop execution, and Unix filter conventions.",
               "score": 5
             }
           ],
@@ -3957,15 +3958,15 @@
           "id": "project-config-parser-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Fails to parse valid JSON/YAML configs, panics on missing fields, or fails to apply environment variable overrides.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Parses configuration files, but environment variable overrides have type conversion bugs or fallback defaults are ignored.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Parses multi-format configurations (JSON/YAML), applies environment overrides with type validation, and validates constraints flawlessly.",
               "score": 5
             }
           ],
@@ -3976,15 +3977,15 @@
           "id": "project-config-parser-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Hardcoded config keys, raw string manipulation, or lack of strong typing for configuration parameters.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Uses struct tags for unmarshaling, but validation logic is scattered or error messages are cryptic.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Idiomatic configuration pattern: strongly typed configuration struct, struct tags, centralized validation with descriptive field-level error messages.",
               "score": 5
             }
           ],
@@ -3995,15 +3996,15 @@
           "id": "project-config-parser-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated tests provided for config parsing or validation.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests cover valid configuration files, but omit invalid types, missing required fields, or precedence order tests.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Complete table-driven test suite verifying valid configs, default fallback, environment precedence, and clear error reporting on invalid schemas.",
               "score": 5
             }
           ],
@@ -4014,15 +4015,15 @@
           "id": "project-config-parser-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain struct tag reflection mechanics or configuration precedence rules.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains struct tags, but struggles to describe how reflect parses tags or how environment variable types are validated.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Deeply explains struct field tags, reflect package mechanics during unmarshaling, configuration precedence hierarchies, and 12-factor app principles.",
               "score": 5
             }
           ],
@@ -4059,15 +4060,15 @@
           "id": "project-book-catalog-rest-api-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Endpoints fail to respond, return wrong HTTP status codes, or corrupt in-memory book data.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "CRUD endpoints function for happy paths, but missing books return 500 instead of 404, or invalid JSON payloads trigger unhandled panics.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Complete RESTful API: proper HTTP verbs, semantic status codes (200, 201, 204, 400, 404, 422), robust JSON encoding/decoding, and clean routing.",
               "score": 5
             }
           ],
@@ -4078,15 +4079,15 @@
           "id": "project-book-catalog-rest-api-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Non-standard handler signatures, global variables without synchronization, or ignored errors during JSON encoding.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Standard http.HandlerFunc used, but middleware chaining is manual or request bodies are read multiple times.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Production HTTP design: idiomatic middleware pipeline (logging, recovery), json.NewDecoder with DisallowUnknownFields, and proper concurrency synchronization.",
               "score": 5
             }
           ],
@@ -4097,15 +4098,15 @@
           "id": "project-book-catalog-rest-api-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated API tests provided.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests exist using net/http/httptest, but cover only happy paths; validation errors and 404 handling are untested.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Comprehensive httptest.ResponseRecorder test suite exercising all endpoints, query parameters, invalid request bodies, and header validations.",
               "score": 5
             }
           ],
@@ -4116,15 +4117,15 @@
           "id": "project-book-catalog-rest-api-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain HTTP request lifecycle, ServeHTTP interface, or ResponseWriter behavior.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Understands HTTP routing, but struggles to explain handler multiplexing or why response headers must be set before WriteHeader.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Exemplary explanation of net/http internals: ServeHTTP execution, ResponseWriter buffering, middleware wrapping, and stream-based JSON decoding.",
               "score": 5
             }
           ],
@@ -4161,15 +4162,15 @@
           "id": "project-task-api-postgres-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Database queries fail, migrations crash, or task CRUD operations fail to persist data.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Basic CRUD operations succeed, but database connection leaks occur, or transaction rollback fails on partial query errors.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Full SQL persistence: schema migrations, robust CRUD queries, parameterized SQL preventing injection, and atomic multi-step transactions.",
               "score": 5
             }
           ],
@@ -4180,15 +4181,15 @@
           "id": "project-task-api-postgres-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "SQL string concatenation (SQL injection vulnerability), unclosed rows/statements, or hardcoded DSN credentials.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Uses parameterized queries, but connection pool parameters (MaxOpenConns, MaxIdleConns) are unconfigured, or rows.Close is not deferred.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Idiomatic database/sql usage: strict parameterized queries, proper rows.Err() checking, context-aware queries (QueryContext), and connection pool tuning.",
               "score": 5
             }
           ],
@@ -4199,15 +4200,15 @@
           "id": "project-task-api-postgres-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated tests or database integration tests provided.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests run against mock database or happy paths, but omit transaction rollback verification or constraint violation testing.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Integration test suite validating schema migrations, database constraint enforcement, transaction rollback on failure, and connection recycling.",
               "score": 5
             }
           ],
@@ -4218,15 +4219,15 @@
           "id": "project-task-api-postgres-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain connection pool mechanics, SQL injection risks, or transaction isolation.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains parameterized queries, but cannot articulate sql.DB connection lifecycle, idle connection timeouts, or deadlocks.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Masterfully explains sql.DB connection pooling, transaction boundaries (BEGIN/COMMIT/ROLLBACK), context propagation for cancellation, and migration versioning.",
               "score": 5
             }
           ],
@@ -4263,15 +4264,15 @@
           "id": "project-secure-authenticated-api-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Authentication bypass possible, password hashing omitted, or expired JWT tokens accepted.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "JWT authentication works, but claims validation is brittle, refresh tokens lack revocation, or role-based authorization is bypassed.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Secure authentication and authorization: bcrypt password hashing (work factor >= 12), signed JWT validation, role-based access control, and secure headers.",
               "score": 5
             }
           ],
@@ -4282,15 +4283,15 @@
           "id": "project-secure-authenticated-api-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Storing plaintext passwords, hardcoded JWT secrets in source code, or improper context user injection.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Uses bcrypt and JWT libraries, but context key types are unexported strings (context collision risk), or middleware error responses leak sensitive data.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Defense-in-depth architecture: typed context keys for user claims, environment-backed secrets, constant-time comparisons, and standardized error responses.",
               "score": 5
             }
           ],
@@ -4301,15 +4302,15 @@
           "id": "project-secure-authenticated-api-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No security or authentication tests provided.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests verify valid logins, but omit expired tokens, invalid signatures, malformed headers, or unauthorized role attempts.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Comprehensive security test suite verifying valid logins, expired/tampered tokens, unauthorized route protection, and timing attack resistance.",
               "score": 5
             }
           ],
@@ -4320,15 +4321,15 @@
           "id": "project-secure-authenticated-api-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain symmetric vs asymmetric JWT signing, password hashing salts, or auth middleware mechanics.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Understands JWT structure, but cannot explain token expiration trade-offs, revocation strategies, or bcrypt work factor scaling.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Articulates cryptographically sound principles: HMAC vs RSA signing, token revocation strategies, context value propagation, and OWASP API security top 10.",
               "score": 5
             }
           ],
@@ -4365,15 +4366,15 @@
           "id": "project-concurrent-downloader-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Downloader fails to download file chunks, corrupts assembled files, or causes goroutine deadlocks.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Downloads files concurrently, but file assembly fails if chunks arrive out of order, or network errors stall worker goroutines indefinitely.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Robust concurrent chunked downloader: Range requests, parallel chunk retrieval, ordered file assembly, and error propagation across workers.",
               "score": 5
             }
           ],
@@ -4384,15 +4385,15 @@
           "id": "project-concurrent-downloader-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Unbounded goroutine spawning, shared memory mutations without mutexes, or unclosed HTTP response bodies.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Uses goroutines and WaitGroup, but lacks context cancellation or channel buffer sizes are arbitrary.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Exemplary concurrency design: bounded worker concurrency, context cancellation on chunk failure, clean channel ownership, and zero data races under -race.",
               "score": 5
             }
           ],
@@ -4403,15 +4404,15 @@
           "id": "project-concurrent-downloader-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated tests or race detection verification provided.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests verify single download, but omit tests for partial chunk network failures or race detector validation.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Deterministic tests with httptest server simulating latency and failures, verified 100% race-free under go test -race.",
               "score": 5
             }
           ],
@@ -4422,15 +4423,15 @@
           "id": "project-concurrent-downloader-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain channel synchronization, goroutine scheduling, or HTTP Range headers.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains WaitGroup usage, but struggles to articulate how context cancellation propagates across active HTTP requests.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Deeply explains goroutine lifecycles, channel closing semantics, sync.WaitGroup mechanics, and context cancellation pipelines.",
               "score": 5
             }
           ],
@@ -4467,15 +4468,15 @@
           "id": "project-url-health-checker-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Health checker hangs, fails to report status transitions, or crashes on unreachable URLs.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Probes URLs concurrently, but status transitions are noisy or time.Ticker leaks occur on cancellation.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Concurrent health checker monitoring multiple endpoints, accurately reporting status transitions, response latency, and timeout failures.",
               "score": 5
             }
           ],
@@ -4486,15 +4487,15 @@
           "id": "project-url-health-checker-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Unbounded goroutines per probe tick, ignored context deadlines, or unbuffered channels causing permanent goroutine leaks.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Uses select with time.Ticker, but ticker is not stopped on exit, or HTTP clients lack configured transport timeouts.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Production concurrency architecture: ticker cleanup with defer ticker.Stop(), custom http.Client with timeout bounds, structured logging, and clean shutdown.",
               "score": 5
             }
           ],
@@ -4505,15 +4506,15 @@
           "id": "project-url-health-checker-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No tests provided; concurrency behavior is unverified.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests probe live internet URLs instead of local mock servers, causing flaky non-deterministic test runs.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Hermetic tests using httptest.Server simulating 200 OK, 500 errors, timeouts, and network connection drops; verified with go test -race.",
               "score": 5
             }
           ],
@@ -4524,15 +4525,15 @@
           "id": "project-url-health-checker-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain the select statement, time.Ticker lifecycle, or HTTP client transport timeouts.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains basic concurrency, but cannot articulate why default http.DefaultClient is hazardous in production.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Fluently articulates why http.DefaultClient causes connection exhaustion, how select multiplexes channel events, and how graceful cancellation drains probes.",
               "score": 5
             }
           ],
@@ -4569,15 +4570,15 @@
           "id": "project-bounded-worker-pool-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Worker pool drops tasks, executes tasks unboundedly, or deadlocks on queue completion.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Processes tasks concurrently with bounded workers, but shutdown drops in-flight jobs or panics on channel write after close.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Flawless bounded worker pool: strict concurrency limit, ordered job distribution, panic recovery per worker, and zero-drop graceful shutdown.",
               "score": 5
             }
           ],
@@ -4588,15 +4589,15 @@
           "id": "project-bounded-worker-pool-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Writing to closed channels, sharing loop variables across goroutines unsafely, or ignoring task execution panics.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Channel synchronization works, but channel ownership is ambiguous or error handling from workers is incomplete.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Textbook Go concurrency: explicit channel ownership (creator closes), worker panic recovery, structured task results channel, and clean context integration.",
               "score": 5
             }
           ],
@@ -4607,15 +4608,15 @@
           "id": "project-bounded-worker-pool-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No unit tests or race condition proofs provided.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests verify pool processing happy paths, but omit tests for worker panics, backlog saturation, or shutdown under load.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Exhaustive table-driven tests verifying worker concurrency caps, panic recovery resilience, shutdown queue draining, and 100% clean under go test -race.",
               "score": 5
             }
           ],
@@ -4626,15 +4627,15 @@
           "id": "project-bounded-worker-pool-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain channel closing rules or what happens when sending to a closed channel.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Understands worker loop, but struggles to explain why closing a channel must only be performed by the sender.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Articulates channel ownership principles, memory visibility across goroutines, runtime scheduler M:N threading model, and graceful drainage patterns.",
               "score": 5
             }
           ],
@@ -4671,15 +4672,15 @@
           "id": "project-pii-redactor-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Redaction engine leaks sensitive PII (credit cards, SSNs, bearer tokens) or corrupts structured log formatting.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Redacts top-level string fields, but fails on nested JSON objects, custom formatted inputs, or partially masked credentials.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Accurately masks all target PII patterns (emails, credit cards, SSNs, API keys) across structured and unstructured logs with zero leakage.",
               "score": 5
             }
           ],
@@ -4690,15 +4691,15 @@
           "id": "project-pii-redactor-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Compiling regex inside per-line loop, excessive memory allocations, or non-idiomatic slog handler implementation.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Implements slog.Handler, but creates excessive string allocations or fails to forward attributes to nested handlers.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "High-performance observability design: precompiled regular expressions, custom slog.Handler with zero allocs on non-PII paths, and clean attribute handling.",
               "score": 5
             }
           ],
@@ -4709,15 +4710,15 @@
           "id": "project-pii-redactor-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated tests or benchmark suites provided.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Unit tests cover basic regex matches, but omit nested JSON benchmarks or edge cases with malformed log entries.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Extensive test suite covering all PII patterns, nested JSON objects, corrupted input resilience, accompanied by memory and CPU benchmarks (testing.B).",
               "score": 5
             }
           ],
@@ -4728,15 +4729,15 @@
           "id": "project-pii-redactor-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain regular expression backtracking, slog.Handler interface, or heap allocations.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains pattern replacement, but struggles to describe how slog pipelines records or why per-log allocations hurt service throughput.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Articulates slog handler lifecycle, attribute traversal without allocation, regex compilation costs, and regulatory compliance standards (GDPR, PCI-DSS).",
               "score": 5
             }
           ],
@@ -4773,15 +4774,15 @@
           "id": "project-observability-retrofit-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Retrofitting breaks existing application functionality or fails to emit logs, metrics, or traces.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Emits logs and metrics, but metric labels have high cardinality or trace context is not propagated across service calls.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Seamless observability integration: structured logging with correlation IDs, Prometheus RED metrics (Rate, Errors, Duration), and OpenTelemetry trace propagation.",
               "score": 5
             }
           ],
@@ -4792,15 +4793,15 @@
           "id": "project-observability-retrofit-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Scattering global logger calls, creating dynamic unbounded metric label values, or ignoring trace errors.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Observability code works, but is tightly coupled to application logic rather than using clean middleware/decorator patterns.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Exemplary decoupling: HTTP and gRPC middleware decorators for metrics/tracing, structured slog logging with contextual attributes, and bounded metric cardinality.",
               "score": 5
             }
           ],
@@ -4811,15 +4812,15 @@
           "id": "project-observability-retrofit-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No tests verifying telemetry emission or correlation.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Manual curl tests verify /metrics endpoint, but automated unit tests for correlation ID injection and metric counters are absent.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Automated test suite asserting correlation ID propagation across HTTP headers, Prometheus metric counter increments, and trace span completion.",
               "score": 5
             }
           ],
@@ -4830,15 +4831,15 @@
           "id": "project-observability-retrofit-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain Prometheus metric types (Counter vs Gauge vs Histogram) or distributed tracing context propagation.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains metrics and logging, but struggles to articulate the danger of high cardinality labels in time-series databases.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Masterfully explains the three pillars of observability, OpenTelemetry W3C tracecontext propagation, Prometheus bucket sizing, and cardinality management.",
               "score": 5
             }
           ],
@@ -4875,15 +4876,15 @@
           "id": "project-profile-and-fix-lab-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Optimization breaks application correctness or fails to demonstrate measurable performance improvement.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Achieves minor performance gains, but misses primary CPU/memory bottlenecks identified in profiling traces.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Resolves major CPU and memory bottlenecks with verified benchmarks, achieving significant latency reduction and allocation elimination while preserving correctness.",
               "score": 5
             }
           ],
@@ -4894,15 +4895,15 @@
           "id": "project-profile-and-fix-lab-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Obfuscated code, unsafe pointer tricks without justification, or premature optimizations that destroy readability.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Optimizations improve performance, but code comments explaining algorithmic changes are missing.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Clean, idiomatic optimization: slice pre-allocation, pointer avoidance where values are cheaper, string/byte conversions without copies, and benchmark-proven decisions.",
               "score": 5
             }
           ],
@@ -4913,15 +4914,15 @@
           "id": "project-profile-and-fix-lab-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No benchmark results (testing.B) or profiling graphs (pprof) provided to substantiate improvements.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Benchmarks provided, but missing benchstat comparison or memory allocation numbers (-benchmem).",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Rigorous proof: before/after pprof profile captures (CPU and heap), benchstat statistical comparison proving p < 0.05 speedup and allocation drops.",
               "score": 5
             }
           ],
@@ -4932,15 +4933,15 @@
           "id": "project-profile-and-fix-lab-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain how to read pprof flame graphs or explain compiler escape analysis.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains top functions in pprof, but struggles with inlining, escape analysis (stack vs heap), or garbage collector pressure.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Deeply explains Go runtime memory allocation (mcache, mcentral, mheap), GC sweep/mark phases, escape analysis flags (-gcflags='-m'), and CPU cache locality.",
               "score": 5
             }
           ],
@@ -4977,15 +4978,15 @@
           "id": "project-modular-refactor-review-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Refactoring breaks existing system features, corrupts database transactions, or introduces circular dependencies.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Modularized into packages, but boundaries leak internal data structures or transaction boundaries are broken.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Complete modularization: strict domain boundaries, interface decoupling, dependency injection, and zero circular dependencies.",
               "score": 5
             }
           ],
@@ -4996,15 +4997,15 @@
           "id": "project-modular-refactor-review-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Circular package imports, package-level global variables, or god-packages that know about all subsystems.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Packages separated, but interfaces are defined in the provider package rather than consumer packages, creating tight coupling.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Clean architecture standards: consumer-defined interfaces, explicit dependency injection via constructors, unidirectional dependencies, and clean package naming.",
               "score": 5
             }
           ],
@@ -5015,15 +5016,15 @@
           "id": "project-modular-refactor-review-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No regression tests provided; architecture verification is subjective.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Unit tests pass, but package boundary assertions or dependency graph checks are unverified.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Comprehensive test suite verifying package isolation, mock-based unit tests for business logic, and automated checks ensuring zero circular dependencies.",
               "score": 5
             }
           ],
@@ -5034,15 +5035,15 @@
           "id": "project-modular-refactor-review-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain dependency inversion or why circular imports are rejected by the Go compiler.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains package separation, but struggles to justify interface placement (consumer vs producer) or constructor injection.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Fluently defends architectural decisions, package hierarchy, interface segregation principle, and maintenance benefits of modular design.",
               "score": 5
             }
           ],
@@ -5079,15 +5080,15 @@
           "id": "project-dockerized-service-cicd-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Docker build fails, produces bloated/insecure images, or CI/CD pipeline fails to run tests and build artifacts.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Docker image builds and CI pipeline runs, but image includes Go toolchain (single-stage build) or runs as root user.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Production containerization: multi-stage Dockerfile producing minimal distroless/scratch image (<25MB), non-root execution, and automated CI/CD pipeline.",
               "score": 5
             }
           ],
@@ -5098,15 +5099,15 @@
           "id": "project-dockerized-service-cicd-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Ignoring OS signals (SIGTERM/SIGINT) in code, hardcoding configurations in image, or unverified binary builds.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Binary builds with CGO_ENABLED=0, but graceful shutdown is missing in Go code, causing immediate connection drops on container stop.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Cloud-native Go application: signal.NotifyContext handling for SIGTERM, graceful HTTP server shutdown, health probes (/live, /ready), and static binary compilation.",
               "score": 5
             }
           ],
@@ -5117,15 +5118,15 @@
           "id": "project-dockerized-service-cicd-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated CI pipeline or image verification scripts provided.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "CI pipeline runs go test, but lacks linting (golangci-lint), security scanning (govulncheck/trivy), or multi-architecture build verification.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Complete CI/CD pipeline: automated linting, security vulnerability scanning, multi-stage test execution, container image build, and health check validation.",
               "score": 5
             }
           ],
@@ -5136,15 +5137,15 @@
           "id": "project-dockerized-service-cicd-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Cannot explain multi-stage Docker builds, non-root container security, or container signal handling.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Explains Dockerfile stages, but struggles with PID 1 signal forwarding, container zombie processes, or CGO cross-compilation nuances.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Deeply explains containerization mechanics: Linux namespaces and cgroups, PID 1 signal propagation, scratch vs distroless trade-offs, and secure CI/CD practices.",
               "score": 5
             }
           ],
@@ -5181,15 +5182,15 @@
           "id": "project-portfolio-review-pack-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Portfolio repositories are incomplete, unrunnable, missing READMEs, or code fails basic build checks.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Repositories compile and run, but documentation is minimal, architectural diagrams are missing, or commit history is messy.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Professional portfolio suite: clean git commit histories, architectural diagrams (Mermaid), comprehensive READMEs, clear setup runbooks, and demo videos/recordings.",
               "score": 5
             }
           ],
@@ -5200,15 +5201,15 @@
           "id": "project-portfolio-review-pack-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Code across portfolio projects exhibits elementary anti-patterns, lint errors, or unformatted files.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Code compiles cleanly, but consistency across projects (formatting, error handling, package structure) varies significantly.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Senior engineering consistency: all projects formatted with gofumpt, zero lint warnings under golangci-lint, consistent error wrapping, and idiomatic naming throughout.",
               "score": 5
             }
           ],
@@ -5219,15 +5220,15 @@
           "id": "project-portfolio-review-pack-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated verification scripts or test instructions provided in portfolio repositories.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Tests exist in projects, but lack single-command verification scripts (e.g., make test or go test ./...) or badges.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Every portfolio project includes automated test suites, CI status badges, reproducible Docker commands, and documented verification steps.",
               "score": 5
             }
           ],
@@ -5238,15 +5239,15 @@
           "id": "project-portfolio-review-pack-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Unable to conduct a technical walkthrough of portfolio projects during mock interview review.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Can explain code walkthrough, but struggles to articulate trade-offs, scalability bottlenecks, or design alternatives.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Senior-level technical defense: articulates architectural trade-offs, operational bottlenecks, distributed failure modes, and lessons learned with confidence.",
               "score": 5
             }
           ],
@@ -5283,15 +5284,15 @@
           "id": "project-opslane-crit-1",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Implementation satisfies the stated behavior.",
+              "description": "Opslane flagship service fails core functional workflows, drops messages, leaks tenant data, or crashes under failure simulation.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Core multi-tenant workflows function, but worker pools deadlock under heavy load, or tenant isolation fails under forged request headers.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Implementation satisfies the stated behavior.",
+              "description": "Complete enterprise operations platform: strict multi-tenant isolation, event-driven worker pools, transactional integrity, and resilient failure recovery.",
               "score": 5
             }
           ],
@@ -5302,15 +5303,15 @@
           "id": "project-opslane-crit-2",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Global state, unhandled errors, data races detected under go test -race, or messy package layering.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Layered architecture present, but context propagation is broken in async tasks or channel shutdown is abrupt.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Code is idiomatic, readable, and maintainable.",
+              "description": "Exemplary production Go codebase: strict domain layering, context cancellation throughout all async workers, clean channel ownership, and zero data races.",
               "score": 5
             }
           ],
@@ -5321,15 +5322,15 @@
           "id": "project-opslane-crit-3",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Tests or verification prove the behavior.",
+              "description": "No automated end-to-end integration tests, race detection proofs, or disaster recovery drills provided.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Unit tests pass, but integration tests for database failover, worker crash recovery, and multi-tenant isolation are incomplete.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Tests or verification prove the behavior.",
+              "description": "Comprehensive test suite: end-to-end API integration tests, load tests with race detector enabled, and verified disaster recovery drill satisfying RPO/RTO targets.",
               "score": 5
             }
           ],
@@ -5340,15 +5341,15 @@
           "id": "project-opslane-crit-4",
           "levels": [
             {
-              "description": "Does not satisfy criteria: Learner can explain the design and tradeoffs.",
+              "description": "Unable to defend the architecture, concurrency model, or operational resilience of Flagship Opslane.",
               "score": 0
             },
             {
-              "description": "Partially satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Can explain component interactions, but struggles to defend distributed consistency trade-offs, tenant isolation boundaries, or recovery procedures.",
               "score": 3
             },
             {
-              "description": "Fully satisfies criteria: Learner can explain the design and tradeoffs.",
+              "description": "Flawless capstone oral and technical defense: explains system architecture, database transaction boundaries, worker pool backpressure, and incident recovery protocols.",
               "score": 5
             }
           ],

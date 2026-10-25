@@ -4,13 +4,12 @@
 
 ## Architecture Decision
 
-**Decision:** Reconcile and establish the Report 1 phase-based zero-to-software-engineer path as the canonical v3 curriculum.
+**Decision:** Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.
 
-- **v2 Policy:** `curriculum/legacy/curriculum.v2.json` is frozen legacy import data, preserved for historical reference and backward compatibility.
-- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON files: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.
-- **Physical Curriculum:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/`.
-- **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern full-stack frontend engineering is defined as a companion path (semantic HTML, CSS, JavaScript fundamentals, progressive enhancement with Go templates/templ/HTMX/Tailwind).
-- **Capstone & Learning Path Flow:** Flagship Opslane (Module 18) directly requires the complete backend engineering and deployment runbook foundation of Module 15 (`core-15-19`). Module 16 (Portfolio and Interview Readiness) is intentionally decoupled from technical implementation so learners can construct their flagship capstone first, producing the production artifact that Module 16 packages for interviews. Module 17 (Advanced Electives) is an independent elective track and not on the mandatory capstone path.
+- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.
+- **Physical Curriculum Delivery:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/` and `curriculum/electives/`.
+- **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern server-driven full-stack frontend engineering is delivered via the companion path (semantic HTML, CSS, JavaScript, and progressive enhancement with Go templates/templ/HTMX/Tailwind/Datastar).
+- **Capstone & Learning Path Flow:** Flagship Opslane (Module 18) directly requires the complete backend engineering and deployment runbook foundation of Module 15 (`core-15-19`). Module 16 (Portfolio and Interview Readiness) packages the production artifacts produced by Opslane for senior-level engineering interviews. Module 17 (Advanced Electives) provides independent specialization tracks in Generics, gRPC, and distributed systems.
 
 ## Quick Stats
 
@@ -765,27 +764,27 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 | `assessment-module-05` | **Module 05 Assessment — Types, Interfaces, Packages, and Modules** | project-review | 80% |
 | `assessment-module-06` | **Module 06 Assessment — Testing, Debugging, and Refactoring** | project-review | 80% |
 | `assessment-module-07` | **Module 07 Assessment — CLI, Files, JSON, and Configuration** | project-review | 80% |
-| `assessment-module-08` | **Module 08 Assessment -- HTTP and REST APIs** | project-review | 80% |
-| `assessment-module-09` | **Module 09 Assessment -- SQL and PostgreSQL Persistence** | project-review | 80% |
-| `assessment-module-10` | **Module 10 Assessment -- Authentication, Authorization, and Security** | project-review | 80% |
-| `assessment-module-11` | **Module 11 Assessment -- Lifecycle, Context, and Concurrency** | project-review | 80% |
-| `assessment-module-12` | **Module 12 Assessment -- Observability and Diagnostics** | project-review | 80% |
+| `assessment-module-08` | **Module 08 Assessment — HTTP and REST APIs** | project-review | 80% |
+| `assessment-module-09` | **Module 09 Assessment — SQL and PostgreSQL Persistence** | project-review | 80% |
+| `assessment-module-10` | **Module 10 Assessment — Authentication, Authorization, and Security** | project-review | 80% |
+| `assessment-module-11` | **Module 11 Assessment — Lifecycle, Context, and Concurrency** | project-review | 80% |
+| `assessment-module-12` | **Module 12 Assessment — Observability and Diagnostics** | project-review | 80% |
 | `assessment-module-13` | **Module 13 Assessment — Performance and Memory Engineering** | project-review | 80% |
-| `assessment-module-14` | **Module 14 Assessment -- Architecture and Distributed Systems** | project-review | 80% |
-| `assessment-module-15` | **Module 15 Assessment -- Docker, CI/CD, and Deployment** | project-review | 80% |
-| `assessment-module-16` | **Module 16 Assessment -- Portfolio and Interview Readiness** | portfolio-review | 80% |
-| `assessment-module-17` | **Module 17 Assessment -- Electives and Advanced Engineering** | project-review | 80% |
+| `assessment-module-14` | **Module 14 Assessment — Architecture and Distributed Systems** | project-review | 80% |
+| `assessment-module-15` | **Module 15 Assessment — Docker, CI/CD, and Deployment** | project-review | 80% |
+| `assessment-module-16` | **Module 16 Assessment — Portfolio and Interview Readiness** | portfolio-review | 80% |
+| `assessment-module-17` | **Module 17 Assessment — Electives and Advanced Engineering** | project-review | 80% |
 | `assessment-module-18` | **Module 18 Assessment — Flagship Opslane** | capstone-defense | 80% |
 
 ### Project Assessments (28 Records)
 
 | ID | Title | Type | Passing Score |
 | -- | ----- | ---- | ------------- |
-| `assessment-project-shell-git-lab` | **Assessment - Shell + Git Lab** | project-review | 80% |
-| `assessment-project-tooling-failure-lab` | **Assessment - Tooling Failure Lab** | project-review | 80% |
-| `assessment-project-course-setup` | **Assessment - Course Setup Verification** | project-review | 80% |
-| `assessment-project-performance-analysis-lab` | **Assessment - Performance Analysis Lab** | project-review | 80% |
-| `assessment-project-advanced-electives` | **Assessment - Advanced Electives Capstone** | project-review | 80% |
+| `assessment-project-shell-git-lab` | **Assessment — Shell + Git Lab** | project-review | 80% |
+| `assessment-project-tooling-failure-lab` | **Assessment — Tooling Failure Lab** | project-review | 80% |
+| `assessment-project-course-setup` | **Assessment — Course Setup Verification** | project-review | 80% |
+| `assessment-project-performance-analysis-lab` | **Assessment — Performance Analysis Lab** | project-review | 80% |
+| `assessment-project-advanced-electives` | **Assessment — Advanced Electives Capstone** | project-review | 80% |
 | `assessment-project-pricing-checkout` | **Assessment — Pricing Checkout** | project-review | 80% |
 | `assessment-project-contact-directory` | **Assessment — Contact Directory** | project-review | 80% |
 | `assessment-project-order-summary-refactor` | **Assessment — Order Summary Refactor** | project-review | 80% |
@@ -861,43 +860,36 @@ Total cross-references: **2094**
 | DB.*                 | rewrite          | module-09 | Database path must become SQL/Postgres-first with migrations and EXPLAIN. |
 | SEC.*                | rewrite          | module-10 | Security needs authn/authz strategy and secure API practice.              |
 
-### Quality Gates
+### Authoritative Quality Gates (17/17 Passing)
 
-- schema-valid
-- graph-valid
-- no-orphan-core-items
-- all-prerequisites-exist
-- no-circular-dependencies
-- item-orders-sequential
-- phase-sequence-valid
-- no-null-arrays
-- crossref-targets-exist
-- crossref-targets-in-same-bundle
-- module-prerequisites-exist
-- item-prerequisites-exist
-- project-reinforces-items-exist
-- assessment-targets-exist
-- project-assessment-exists
-- no-duplicate-id
-- no-duplicate-slug
-- no-unused-crossref-item
-- item-has-zero-magic
-- item-has-proof
-- item-has-content-contract
-- item-has-verification
-- item-has-files
-- item-files-path-valid
-- assessment-retake-policy-present
+- `validate-schema`: 10 canonical JSON manifests valid against Schema 3.1.0
+- `validate-graph`: Strict DAG acyclicity across all item dependencies
+- `validate-lessons`: Zero machine role comments or unmotivated markers
+- `validate-prerequisite-closure`: Strict pedagogical progression across module boundaries
+- `validate-project-binding`: All 28 projects bound to valid curriculum placement anchors
+- `validate-no-placeholder-zm`: Zero mechanical placeholders across zero-magic blocks
+- `validate-assessment-completeness`: All 47 assessments equipped with weighted criteria
+- `validate-unique-tags`: Tag taxonomy consistency across core and electives
+- `validate-crossrefs`: Complete bidirectional graph integrity across all entities
+- `validate-concept-ownership`: All 62 concepts mapped to unambiguous canonical owners
+- `validate-cognitive-load`: Module pacing and cognitive density within verified bounds
+- `validate-operational-failures`: 13 operational failure categories mapped across 18 modules
+- `validate-failure-engineering`: Failure modes and detection strategies verified
+- `validate-zero-magic`: 92 golden lessons certified against pedagogical spec
+- `validate-physical-artifacts`: 441/441 physical lesson and elective READMEs verified on disk
+- `validate-assessment-artifacts`: 47 assessments + 14 Opslane milestones verified with complete physical suites
+- `validate-starter-parity`: 27 project starters (RED) and solutions (GREEN) verified with valid Go ASTs
 
 ### Validation Commands
 
-| Command          | Script                                              |
-| ---------------- | --------------------------------------------------- |
-| validate_all     | `go run ./internal/tools/curriculum validate-all`     |
-| validate_graph   | `go run ./internal/tools/curriculum validate-graph`   |
-| validate_lessons | `go run ./internal/tools/curriculum validate-lessons` |
-| validate_readmes | `go run ./internal/tools/curriculum validate-readmes` |
-| validate_schema  | `go run ./internal/tools/curriculum validate-schema`  |
+| Command | Purpose | Execution |
+| --- | --- | --- |
+| **Run All Gates** | Execute full 17-gate curriculum test suite | `go run ./scripts/validate_curriculum.go` |
+| **Validate Schema** | Check JSON manifests and key ordering | `go run ./internal/tools/curriculum validate-schema` |
+| **Validate Graph** | Check DAG dependency structure | `go run ./internal/tools/curriculum validate-graph` |
+| **Validate Physical** | Verify 441 physical READMEs | `go run ./internal/tools/curriculum validate-physical-artifacts` |
+| **Validate Assessments** | Verify 4-file assessment suites | `go run ./internal/tools/curriculum validate-assessment-artifacts` |
+| **Validate Code Parity** | Verify Go code and AST correctness | `go run ./internal/tools/curriculum validate-starter-parity` |
 
 ---
 

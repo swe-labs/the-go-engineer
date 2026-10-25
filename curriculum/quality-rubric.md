@@ -1,4 +1,8 @@
-# README Quality Rubric v1
+# README Quality Rubric (v3 Curriculum Standard)
+
+> **Pedagogical Authority:** The Go Engineer Curriculum Quality Assurance  
+> **Status:** Active Authoritative Standard (`v3.1.0` Schema)  
+> **Evaluation Scope:** Objective 10-dimension evaluation rubric for all curriculum lesson and project documentation.
 
 ## Scoring Scale
 

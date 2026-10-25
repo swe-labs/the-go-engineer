@@ -16,12 +16,11 @@ function generateFullReadme() {
 
   // Architecture Decision
   parts.push('## Architecture Decision\n');
-  parts.push('**Decision:** Reconcile and establish the Report 1 phase-based zero-to-software-engineer path as the canonical v3 curriculum.\n');
-  parts.push('- **v2 Policy:** `curriculum/legacy/curriculum.v2.json` is frozen legacy import data, preserved for historical reference and backward compatibility.');
-  parts.push('- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON files: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.');
-  parts.push('- **Physical Curriculum:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/`.');
-  parts.push('- **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern full-stack frontend engineering is defined as a companion path (semantic HTML, CSS, JavaScript fundamentals, progressive enhancement with Go templates/templ/HTMX/Tailwind).');
-  parts.push('- **Capstone & Learning Path Flow:** Flagship Opslane (Module 18) directly requires the complete backend engineering and deployment runbook foundation of Module 15 (`core-15-19`). Module 16 (Portfolio and Interview Readiness) is intentionally decoupled from technical implementation so learners can construct their flagship capstone first, producing the production artifact that Module 16 packages for interviews. Module 17 (Advanced Electives) is an independent elective track and not on the mandatory capstone path.\n');
+  parts.push('**Decision:** Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.\n');
+  parts.push('- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.');
+  parts.push('- **Physical Curriculum Delivery:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/` and `curriculum/electives/`.');
+  parts.push('- **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern server-driven full-stack frontend engineering is delivered via the companion path (semantic HTML, CSS, JavaScript, and progressive enhancement with Go templates/templ/HTMX/Tailwind/Datastar).');
+  parts.push('- **Capstone & Learning Path Flow:** Flagship Opslane (Module 18) directly requires the complete backend engineering and deployment runbook foundation of Module 15 (`core-15-19`). Module 16 (Portfolio and Interview Readiness) packages the production artifacts produced by Opslane for senior-level engineering interviews. Module 17 (Advanced Electives) provides independent specialization tracks in Generics, gRPC, and distributed systems.\n');
 
   // Quick stats
   const coreItems = core.items;
@@ -323,17 +322,18 @@ function generateFullReadme() {
   parts.push('| DB.*                 | rewrite          | module-09 | Database path must become SQL/Postgres-first with migrations and EXPLAIN. |');
   parts.push('| SEC.*                | rewrite          | module-10 | Security needs authn/authz strategy and secure API practice.              |\n');
 
-  parts.push('### Quality Gates\n');
-  parts.push('- schema-valid\n- graph-valid\n- no-orphan-core-items\n- all-prerequisites-exist\n- no-circular-dependencies\n- item-orders-sequential\n- phase-sequence-valid\n- no-null-arrays\n- crossref-targets-exist\n- crossref-targets-in-same-bundle\n- module-prerequisites-exist\n- item-prerequisites-exist\n- project-reinforces-items-exist\n- assessment-targets-exist\n- project-assessment-exists\n- no-duplicate-id\n- no-duplicate-slug\n- no-unused-crossref-item\n- item-has-zero-magic\n- item-has-proof\n- item-has-content-contract\n- item-has-verification\n- item-has-files\n- item-files-path-valid\n- assessment-retake-policy-present\n');
+  parts.push('### Authoritative Quality Gates (17/17 Passing)\n');
+  parts.push('- `validate-schema`: 10 canonical JSON manifests valid against Schema 3.1.0\n- `validate-graph`: Strict DAG acyclicity across all item dependencies\n- `validate-lessons`: Zero machine role comments or unmotivated markers\n- `validate-prerequisite-closure`: Strict pedagogical progression across module boundaries\n- `validate-project-binding`: All 28 projects bound to valid curriculum placement anchors\n- `validate-no-placeholder-zm`: Zero mechanical placeholders across zero-magic blocks\n- `validate-assessment-completeness`: All 47 assessments equipped with weighted criteria\n- `validate-unique-tags`: Tag taxonomy consistency across core and electives\n- `validate-crossrefs`: Complete bidirectional graph integrity across all entities\n- `validate-concept-ownership`: All 62 concepts mapped to unambiguous canonical owners\n- `validate-cognitive-load`: Module pacing and cognitive density within verified bounds\n- `validate-operational-failures`: 13 operational failure categories mapped across 18 modules\n- `validate-failure-engineering`: Failure modes and detection strategies verified\n- `validate-zero-magic`: 92 golden lessons certified against pedagogical spec\n- `validate-physical-artifacts`: 441/441 physical lesson and elective READMEs verified on disk\n- `validate-assessment-artifacts`: 47 assessments + 14 Opslane milestones verified with complete physical suites\n- `validate-starter-parity`: 27 project starters (RED) and solutions (GREEN) verified with valid Go ASTs\n');
 
   parts.push('### Validation Commands\n');
-  parts.push('| Command          | Script                                              |');
-  parts.push('| ---------------- | --------------------------------------------------- |');
-  parts.push('| validate_all     | `go run ./internal/tools/curriculum validate-all`     |');
-  parts.push('| validate_graph   | `go run ./internal/tools/curriculum validate-graph`   |');
-  parts.push('| validate_lessons | `go run ./internal/tools/curriculum validate-lessons` |');
-  parts.push('| validate_readmes | `go run ./internal/tools/curriculum validate-readmes` |');
-  parts.push('| validate_schema  | `go run ./internal/tools/curriculum validate-schema`  |\n');
+  parts.push('| Command | Purpose | Execution |');
+  parts.push('| --- | --- | --- |');
+  parts.push('| **Run All Gates** | Execute full 17-gate curriculum test suite | `go run ./scripts/validate_curriculum.go` |');
+  parts.push('| **Validate Schema** | Check JSON manifests and key ordering | `go run ./internal/tools/curriculum validate-schema` |');
+  parts.push('| **Validate Graph** | Check DAG dependency structure | `go run ./internal/tools/curriculum validate-graph` |');
+  parts.push('| **Validate Physical** | Verify 441 physical READMEs | `go run ./internal/tools/curriculum validate-physical-artifacts` |');
+  parts.push('| **Validate Assessments** | Verify 4-file assessment suites | `go run ./internal/tools/curriculum validate-assessment-artifacts` |');
+  parts.push('| **Validate Code Parity** | Verify Go code and AST correctness | `go run ./internal/tools/curriculum validate-starter-parity` |\n');
 
   parts.push('---\n');
   parts.push('_Generated from curriculum v' + core.curriculum_version + ' | Schema ' + core.schema_version + ' | ' + core.last_updated + '_\n');

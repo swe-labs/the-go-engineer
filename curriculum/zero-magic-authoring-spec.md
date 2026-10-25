@@ -1,14 +1,8 @@
-# Zero-Magic Authoring Spec v2
+# Zero-Magic Authoring Specification (v3 Curriculum Standard)
 
-> Changes from v1:
->
-> - Clarified `step_by_step_execution` vs `execution_timeline` boundary
-> - Strengthened memory timeline trigger criteria with specific examples
-> - Added failure mode completeness criteria (detection strategy)
-> - Added `→` format compliance note
-> - Updated Validator Integration with prioritized roadmap
-> - Added Quality Rubric reference
-> - Added format compliance examples
+> **Pedagogical Authority:** The Go Engineer Curriculum Architecture  
+> **Status:** Active Authoritative Standard (`v3.1.0` Schema)  
+> **Core Mission:** Eliminate "magic" — ensuring learners never write code they cannot explain mechanically, down to memory layout, temporal execution, and runtime failure modes.
 
 ## Purpose
 
