@@ -54,5 +54,6 @@ opencode.json
 
 # Temporary files
 temp/
+scratch/
 
 AGENTS.md

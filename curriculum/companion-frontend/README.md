@@ -2,7 +2,7 @@
 
 > **Status:** Released Companion Track  
 > **Target Audience:** Backend Go engineers seeking autonomous full-stack browser capability without bloated JavaScript build pipelines.  
-> **Core Architecture:** Progressive Server-Driven Web Applications (`Go` + `templ` + `HTMX` + `Tailwind CSS` + `Alpine.js`).
+> **Core Architecture:** Progressive Server-Driven Web Applications (`Go` + `templ` + `HTMX` + `Tailwind CSS` + `Alpine.js`, with `Datastar` SSE comparison).
 
 ---
 
@@ -18,14 +18,16 @@ The **Frontend Companion Track** runs parallel to the core Go engineering curric
 │  - Semantic HTML5 & Responsive Tailwind CSS            │
 │  - HTMX (AJAX swaps, polling, out-of-band updates)     │
 │  - Alpine.js (Lightweight client-only UI state)        │
+│  - Datastar (~13 KB unified SSE-first reactive engine) │
 └───────────────────────────▲────────────────────────────┘
                             │
-              HTTP / HTML Fragments (No JSON API overhead)
+               HTTP / HTML Fragments & SSE Streams
                             │
-┌───────────────────────────▼────────────────────────────┐
+┌────────────────────────────────────────────────────────┐
 │                  Go Backend Server                     │
 │  - Type-safe components (a-h/templ)                    │
 │  - High-performance routing & middleware               │
+│  - Real-time SSE streaming (http.Flusher / goroutines) │
 │  - PostgreSQL persistence & transactional business logic│
 └────────────────────────────────────────────────────────┘
 ```
@@ -47,7 +49,7 @@ The companion track is organized into four progressive stages coordinated with m
 | **1** | **10–14** | **Semantic HTML5 & Modern CSS** | Module 07 (CLI & Files) | Static Documentation & Template Renderer | [`stage-01-semantic-html-css/`](./stage-01-semantic-html-css) |
 | **2** | **15–24** | **Browser JS, DOM & Fetch API** | Module 08 & 09 (HTTP & SQL) | Dynamic Book Catalog with REST Client | [`stage-02-vanilla-dom-fetch/`](./stage-02-vanilla-dom-fetch) |
 | **3** | **25–33** | **Type-Safe UI with `templ` & Tailwind** | Module 10 (Auth & Security) | Authenticated Multi-Tenant Management Portal | [`stage-03-templ-tailwind/`](./stage-03-templ-tailwind) |
-| **4** | **34–42** | **Hypermedia Interactivity with HTMX & Alpine** | Modules 11–15 (Concurrency & CI/CD) | Live Metrics Dashboard with SSE & Polling | [`stage-04-htmx-alpine/`](./stage-04-htmx-alpine) |
+| **4** | **34–42** | **Hypermedia Interactivity: HTMX, Alpine & Datastar** | Modules 11–15 (Concurrency & CI/CD) | Live Metrics Dashboard with SSE (HTMX + Datastar Starters) | [`stage-04-htmx-alpine/`](./stage-04-htmx-alpine) |
 | **5** | **43–50** | **Flagship Opslane Integration** | Module 18 (Flagship Opslane) | Production Multi-Tenant Opslane Console | `curriculum/modules/18-flagship-opslane` |
 
 ---
@@ -154,6 +156,15 @@ Construct an authenticated user settings and profile management portal connected
 
 #### Core Verification Task
 Build a live log stream and background job runner dashboard connected to Module 11 (Worker Pools) and Module 12 (Observability) using Server-Sent Events (SSE) and HTMX out-of-band swaps (`hx-swap-oob`).
+
+#### Modern Go-Native Alternative: Datastar (SSE-First Paradigm)
+While HTMX and Alpine.js teach essential, resume-ready hypermedia foundations, Go backend engineers frequently encounter friction at the boundary between HTMX DOM swaps and Alpine client state.
+
+The companion track includes a complete comparative starter in [`stage-04-htmx-alpine/datastar/`](./stage-04-htmx-alpine/datastar/README.md) demonstrating **Datastar**:
+- **Unified ~13 KB Footprint:** Replaces both HTMX and Alpine with a single script, eliminating state desync.
+- **Server-Sent Events Native:** Every HTTP interaction operates over persistent or on-demand SSE streams (`datastar-patch-elements` and `datastar-patch-signals`).
+- **No Out-of-Band Workarounds:** Any SSE event can target arbitrary DOM selectors (`mode: prepend`, `mode: outer`, etc.) directly from Go's standard `http.Flusher`.
+- **First-Class Go SDK:** Integrates natively with `github.com/starfederation/datastar/sdk/go` and compile-time type-checked `a-h/templ` components.
 
 ---
 

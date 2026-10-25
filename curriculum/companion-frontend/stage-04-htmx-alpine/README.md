@@ -110,6 +110,12 @@ stage-04-htmx-alpine/
 │   ├── dashboard.html    # Full dashboard view with SSE connection
 │   ├── metrics_card.html # Metrics partial (supports OOB swaps)
 │   └── task_row.html     # Individual task table row fragment
+├── datastar/             # Modern Alternative: Pure SSE & Datastar signals variant
+│   ├── static/           # Vendored datastar.js (~13 KB single script)
+│   ├── templates/        # Datastar-native templates
+│   ├── main.go           # Server streaming datastar-patch-elements
+│   ├── main_test.go      # Datastar test suite
+│   └── README.md         # Datastar guide & HTMX comparison
 ├── main.go               # Worker pool, SSE broker, and handlers
 ├── main_test.go          # SSE, OOB swaps, and concurrency tests
 └── README.md             # This guide
@@ -141,8 +147,21 @@ go test -v ./...
 
 ---
 
-## 5. Learner Extension Challenges
+## 5. Modern Alternative: Datastar SSE-First Variant
+
+Looking to eliminate the seam between HTMX swaps and Alpine client state?
+
+Check out the complete comparative implementation in [`datastar/`](./datastar/README.md):
+- **Single Script:** Replaces both HTMX (14 KB) and Alpine (15 KB) with a single ~13 KB script (`datastar.js`).
+- **SSE Native:** Uses `datastar-patch-elements` and `datastar-patch-signals` to stream DOM mutations directly to any selector without out-of-band swap hacks.
+- **Run side-by-side:** Start the Datastar server with `go run ./datastar/main.go` listening at `http://localhost:8081` and compare both architectures head-to-head.
+
+---
+
+## 6. Learner Extension Challenges
 
 1. **Worker Pool Auto-Scaler**: Add an endpoint `POST /workers/scale?count=N` that dynamically increases or decreases the number of active worker goroutines.
 2. **Task Priority Channels**: Refactor `taskQueue` into dual channels (`highPriorityQueue` and `lowPriorityQueue`) using a Go `select` statement.
 3. **Filtering Table Rows by Status**: Add an Alpine.js or HTMX filter bar (`All`, `Running`, `Completed`, `Cancelled`) to toggle row visibility.
+4. **Datastar Templ Refactor**: Refactor the Datastar variant to use [`a-h/templ`](https://templ.guide) and `github.com/starfederation/datastar/sdk/go`.
+

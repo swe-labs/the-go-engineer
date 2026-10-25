@@ -154,7 +154,7 @@ function generateFullReadme() {
 
   parts.push('## Companion Tracks & Quality Assurance Protocols\n');
   parts.push('- **[Graduation Outcomes & Capstone Defense Rubric](GRADUATION_CRITERIA.md):** 6 observable competency outcomes (unassisted problem-solving, debugging, testing, disaster recovery, architectural defense, incident response) and formal Flagship Opslane oral defense protocol.');
-  parts.push('- **[Frontend Companion Track](companion-frontend/README.md):** 4-stage progressive server-driven hypermedia track (`templ` + `HTMX` + `Tailwind` + `Alpine.js`) running parallel to backend modules and converging at Flagship Opslane.');
+  parts.push('- **[Frontend Companion Track](companion-frontend/README.md):** 4-stage progressive server-driven hypermedia track (`templ` + `HTMX` + `Tailwind` + `Alpine.js`, with `Datastar` comparison) running parallel to backend modules and converging at Flagship Opslane.');
   parts.push('- **[Beginner Pilot Testing Protocol](PILOT_TESTING_PROTOCOL.md):** Formal empirical zero-intervention testing methodology evaluating unassisted learner velocity and cognitive load across Modules 00–05.\n');
 
   parts.push('---\n');
