@@ -1,4 +1,4 @@
-# Lesson 05: How starter folders work
+# How starter folders work
 
 ## Learning objective
 

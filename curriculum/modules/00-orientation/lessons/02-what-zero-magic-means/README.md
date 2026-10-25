@@ -1,4 +1,4 @@
-# Lesson 02: What zero magic means
+# What zero magic means
 
 ## Learning objective
 

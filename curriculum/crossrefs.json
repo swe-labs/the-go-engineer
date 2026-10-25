@@ -81,7 +81,7 @@
         "to_id": "core-00-02",
         "target_id": "core-00-02",
         "label": "Module 00.02 — What zero magic means",
-        "reason": "Both How to use this repository and What zero magic means build understanding within Orientation.",
+        "reason": "Understanding repository directory boundaries establishes the physical foundation for the zero-magic curriculum contract.",
         "required": false
       },
       {
@@ -90,7 +90,7 @@
         "to_id": "core-00-03",
         "target_id": "core-00-03",
         "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-        "reason": "Both How to use this repository and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+        "reason": "Navigating repository directories is required to locate and execute lessons, guided labs, and portfolio milestones.",
         "required": false
       },
       {
@@ -99,7 +99,7 @@
         "to_id": "core-00-04",
         "target_id": "core-00-04",
         "label": "Module 00.04 — How to run code in this repository",
-        "reason": "Both How to use this repository and How to run code in this repository build understanding within Orientation.",
+        "reason": "Understanding directory structure ensures code execution commands are run from the correct package root.",
         "required": false
       },
       {
@@ -108,7 +108,7 @@
         "to_id": "core-00-01",
         "target_id": "core-00-01",
         "label": "Module 00.01 — How to use this repository",
-        "reason": "What zero magic means requires understanding of How to use this repository.",
+        "reason": "The zero-magic contract governs how all repository files, manifests, and instructional READMEs are written.",
         "required": true
       },
       {
@@ -135,7 +135,7 @@
         "to_id": "core-00-03",
         "target_id": "core-00-03",
         "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-        "reason": "Both What zero magic means and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+        "reason": "Zero magic defines the standard of proof required in each phase of the lesson-to-checkpoint learning cycle.",
         "required": false
       },
       {
@@ -144,7 +144,7 @@
         "to_id": "core-00-04",
         "target_id": "core-00-04",
         "label": "Module 00.04 — How to run code in this repository",
-        "reason": "Both What zero magic means and How to run code in this repository build understanding within Orientation.",
+        "reason": "Zero magic requires understanding exactly what toolchain commands execute behind go run and go test.",
         "required": false
       },
       {
@@ -162,7 +162,7 @@
         "to_id": "core-00-02",
         "target_id": "core-00-02",
         "label": "Module 00.02 — What zero magic means",
-        "reason": "How lessons, exercises, projects, and checkpoints work requires understanding of What zero magic means.",
+        "reason": "Each phase of the learning loop reinforces zero magic by verifying understanding through working code rather than passive reading.",
         "required": true
       },
       {
@@ -189,7 +189,7 @@
         "to_id": "core-00-01",
         "target_id": "core-00-01",
         "label": "Module 00.01 — How to use this repository",
-        "reason": "Both How lessons, exercises, projects, and checkpoints work and How to use this repository build understanding within Orientation.",
+        "reason": "The four-tier workflow maps directly to the repository folder hierarchy: lessons/, projects/, and assessments/.",
         "required": false
       },
       {
@@ -198,7 +198,7 @@
         "to_id": "core-00-04",
         "target_id": "core-00-04",
         "label": "Module 00.04 — How to run code in this repository",
-        "reason": "Both How lessons, exercises, projects, and checkpoints work and How to run code in this repository build understanding within Orientation.",
+        "reason": "Hands-on exercises and checkpoints require executing and testing code using standard Go CLI commands.",
         "required": false
       },
       {
@@ -243,7 +243,7 @@
         "to_id": "core-00-01",
         "target_id": "core-00-01",
         "label": "Module 00.01 — How to use this repository",
-        "reason": "Both How to run code in this repository and How to use this repository build understanding within Orientation.",
+        "reason": "Executing Go commands requires navigating to the appropriate module and lesson directories on disk.",
         "required": false
       },
       {
@@ -252,7 +252,7 @@
         "to_id": "core-00-02",
         "target_id": "core-00-02",
         "label": "Module 00.02 — What zero magic means",
-        "reason": "Both How to run code in this repository and What zero magic means build understanding within Orientation.",
+        "reason": "Toolchain commands replace magical assumptions by providing deterministic compiler and runtime feedback.",
         "required": false
       },
       {
@@ -261,7 +261,7 @@
         "to_id": "core-00-05",
         "target_id": "core-00-05",
         "label": "Module 00.05 — How starter folders work",
-        "reason": "Both How to run code in this repository and How starter folders work build understanding within Orientation.",
+        "reason": "Running go test and go build is the core mechanism used to verify implementations inside starter folders.",
         "required": false
       },
       {
@@ -297,7 +297,7 @@
         "to_id": "core-00-01",
         "target_id": "core-00-01",
         "label": "Module 00.01 — How to use this repository",
-        "reason": "Both How starter folders work and How to use this repository build understanding within Orientation.",
+        "reason": "Starter and solution folders reside within standardized module paths defined in repository manifests.",
         "required": false
       },
       {
@@ -306,7 +306,7 @@
         "to_id": "core-00-02",
         "target_id": "core-00-02",
         "label": "Module 00.02 — What zero magic means",
-        "reason": "Both How starter folders work and What zero magic means build understanding within Orientation.",
+        "reason": "The starter/solution pattern enforces zero magic by requiring learners to write missing logic before viewing reference code.",
         "required": false
       },
       {
@@ -315,7 +315,7 @@
         "to_id": "core-00-03",
         "target_id": "core-00-03",
         "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-        "reason": "Both How starter folders work and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+        "reason": "Starter scaffolds serve as the hands-on bridge connecting conceptual lessons to portfolio project milestones.",
         "required": false
       },
       {
@@ -360,7 +360,7 @@
         "to_id": "core-00-01",
         "target_id": "core-00-01",
         "label": "Module 00.01 — How to use this repository",
-        "reason": "Both How assessments work and How to use this repository build understanding within Orientation.",
+        "reason": "Assessment rubrics verify that learners can independently navigate and explain repository architecture.",
         "required": false
       },
       {
@@ -369,7 +369,7 @@
         "to_id": "core-00-02",
         "target_id": "core-00-02",
         "label": "Module 00.02 — What zero magic means",
-        "reason": "Both How assessments work and What zero magic means build understanding within Orientation.",
+        "reason": "Assessments evaluate whether learners possess genuine first-principles understanding without reliance on hidden magic.",
         "required": false
       },
       {
@@ -378,7 +378,7 @@
         "to_id": "core-00-03",
         "target_id": "core-00-03",
         "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-        "reason": "Both How assessments work and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+        "reason": "Assessments form the terminal validation gate of the lesson-exercise-project-assessment loop.",
         "required": false
       },
       {
@@ -423,7 +423,7 @@
         "to_id": "core-00-01",
         "target_id": "core-00-01",
         "label": "Module 00.01 — How to use this repository",
-        "reason": "Both How to ask good debugging questions and How to use this repository build understanding within Orientation.",
+        "reason": "Formulating high-signal questions requires citing specific repository file paths, manifests, and Git branches.",
         "required": false
       },
       {
@@ -432,7 +432,7 @@
         "to_id": "core-00-02",
         "target_id": "core-00-02",
         "label": "Module 00.02 — What zero magic means",
-        "reason": "Both How to ask good debugging questions and What zero magic means build understanding within Orientation.",
+        "reason": "Hypothesis-driven debugging eliminates guessing by methodically verifying assumptions against runtime evidence.",
         "required": false
       },
       {
@@ -441,7 +441,7 @@
         "to_id": "core-00-03",
         "target_id": "core-00-03",
         "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-        "reason": "Both How to ask good debugging questions and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+        "reason": "Debugging discipline is exercised continuously throughout guided labs, project implementations, and checkpoint retakes.",
         "required": false
       },
       {
@@ -486,7 +486,7 @@
         "to_id": "core-00-01",
         "target_id": "core-00-01",
         "label": "Module 00.01 — How to use this repository",
-        "reason": "Both What job-ready means and How to use this repository build understanding within Orientation.",
+        "reason": "Job-ready engineering capability includes navigating large unfamiliar codebases and adhering to repository conventions.",
         "required": false
       },
       {
@@ -495,7 +495,7 @@
         "to_id": "core-00-02",
         "target_id": "core-00-02",
         "label": "Module 00.02 — What zero magic means",
-        "reason": "Both What job-ready means and What zero magic means build understanding within Orientation.",
+        "reason": "Zero-magic mastery distinguishes production-grade software engineers from tutorial-dependent beginners.",
         "required": false
       },
       {
@@ -504,7 +504,7 @@
         "to_id": "core-00-03",
         "target_id": "core-00-03",
         "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-        "reason": "Both What job-ready means and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+        "reason": "Completing the lesson-to-checkpoint loop across all modules generates the observable proof required for job readiness.",
         "required": false
       },
       {
@@ -549,7 +549,7 @@
         "to_id": "core-00-01",
         "target_id": "core-00-01",
         "label": "Module 00.01 — How to use this repository",
-        "reason": "Both How to use the roadmap and How to use this repository build understanding within Orientation.",
+        "reason": "The curriculum roadmap graph dictates the sequence of repository modules and prerequisite paths.",
         "required": false
       },
       {
@@ -558,7 +558,7 @@
         "to_id": "core-00-02",
         "target_id": "core-00-02",
         "label": "Module 00.02 — What zero magic means",
-        "reason": "Both How to use the roadmap and What zero magic means build understanding within Orientation.",
+        "reason": "Roadmap ordering ensures foundational systems and concurrency concepts are taught before distributed architectures.",
         "required": false
       },
       {
@@ -567,7 +567,7 @@
         "to_id": "core-00-03",
         "target_id": "core-00-03",
         "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-        "reason": "Both How to use the roadmap and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+        "reason": "Tracking progress through the roadmap aligns daily lesson completion with long-term capstone delivery.",
         "required": false
       },
       {
@@ -621,7 +621,7 @@
         "to_id": "core-00-01",
         "target_id": "core-00-01",
         "label": "Module 00.01 — How to use this repository",
-        "reason": "Both How to build a portfolio from this curriculum and How to use this repository build understanding within Orientation.",
+        "reason": "Portfolio repositories mirror the production-grade directory layout and documentation standards established in this repository.",
         "required": false
       },
       {
@@ -630,7 +630,7 @@
         "to_id": "core-00-02",
         "target_id": "core-00-02",
         "label": "Module 00.02 — What zero magic means",
-        "reason": "Both How to build a portfolio from this curriculum and What zero magic means build understanding within Orientation.",
+        "reason": "Zero magic is demonstrated in portfolios through clear architecture diagrams, benchmark evidence, and operational runbooks.",
         "required": false
       },
       {
@@ -639,7 +639,7 @@
         "to_id": "core-00-03",
         "target_id": "core-00-03",
         "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-        "reason": "Both How to build a portfolio from this curriculum and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+        "reason": "Curriculum projects provide the raw material that is polished, tested, and packaged into public portfolio showcases.",
         "required": false
       },
       {

@@ -43,21 +43,21 @@
           {
             "display_text": "Module 00.02 — What zero magic means",
             "label": "Module 00.02 — What zero magic means",
-            "reason": "Both How to use this repository and What zero magic means build understanding within Orientation.",
+            "reason": "Understanding repository directory boundaries establishes the physical foundation for the zero-magic curriculum contract.",
             "required": false,
             "target_id": "core-00-02"
           },
           {
             "display_text": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
             "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-            "reason": "Both How to use this repository and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+            "reason": "Navigating repository directories is required to locate and execute lessons, guided labs, and portfolio milestones.",
             "required": false,
             "target_id": "core-00-03"
           },
           {
             "display_text": "Module 00.04 — How to run code in this repository",
             "label": "Module 00.04 — How to run code in this repository",
-            "reason": "Both How to use this repository and How to run code in this repository build understanding within Orientation.",
+            "reason": "Understanding directory structure ensures code execution commands are run from the correct package root.",
             "required": false,
             "target_id": "core-00-04"
           }
@@ -88,9 +88,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can locate curriculum manifests (path.core.json, projects.json) and correlate item IDs to filesystem directories.",
+          "Can explain the separation of concerns between curriculum/, internal/tools/, web/, and .agents/.",
+          "Can identify the role of schema.v3.json in automated curriculum validation."
         ],
         "practice_task": "The learner must find three lessons by their IDs in the curriculum JSON, locate their README files on disk, and explain the relationship between the JSON entry and the folder structure.",
         "project_id": null,
@@ -157,7 +157,7 @@
           "Learner must identify the correct README contract for a given lesson type."
         ],
         "how_go_uses_it": "Go's standard library uses a consistent package layout convention (std vs internal, cmd vs pkg) that mirrors this repository's intentional folder structure. Understanding one helps navigate the other.",
-        "mental_model": "This repository is a structured Go curriculum that builds from first principles to production deployment. Each module depends on previous ones â€” the graph ensures you have prerequisite knowledge before tackling harder topics.",
+        "mental_model": "This repository is a structured Go curriculum that builds from first principles to production deployment. Each module depends on previous ones — the graph ensures you have prerequisite knowledge before tackling harder topics.",
         "performance_implications": [
           "Reading orientation materials takes 30-60 minutes but saves hours of confusion later.",
           "Following the prescribed order reduces context-switching overhead across lessons.",
@@ -221,14 +221,14 @@
           {
             "display_text": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
             "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-            "reason": "Both What zero magic means and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+            "reason": "Zero magic defines the standard of proof required in each phase of the lesson-to-checkpoint learning cycle.",
             "required": false,
             "target_id": "core-00-03"
           },
           {
             "display_text": "Module 00.04 — How to run code in this repository",
             "label": "Module 00.04 — How to run code in this repository",
-            "reason": "Both What zero magic means and How to run code in this repository build understanding within Orientation.",
+            "reason": "Zero magic requires understanding exactly what toolchain commands execute behind go run and go test.",
             "required": false,
             "target_id": "core-00-04"
           },
@@ -268,9 +268,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can explain the zero-magic contract: no unexplained dependencies, no hidden frameworks, and no magical boilerplate.",
+          "Can identify hidden assumptions in technical explanations and formulate explicit foundational bridges.",
+          "Can differentiate between operational fundamentals (syscalls, memory, protocols) and convenience abstractions."
         ],
         "practice_task": "The learner must take a one-line Go expression that uses implicit behavior, expand it into 5+ explicit lines, and explain what assumption was hidden in the original.",
         "project_id": null,
@@ -403,14 +403,14 @@
           {
             "display_text": "Module 00.01 — How to use this repository",
             "label": "Module 00.01 — How to use this repository",
-            "reason": "Both How lessons, exercises, projects, and checkpoints work and How to use this repository build understanding within Orientation.",
+            "reason": "The four-tier workflow maps directly to the repository folder hierarchy: lessons/, projects/, and assessments/.",
             "required": false,
             "target_id": "core-00-01"
           },
           {
             "display_text": "Module 00.04 — How to run code in this repository",
             "label": "Module 00.04 — How to run code in this repository",
-            "reason": "Both How lessons, exercises, projects, and checkpoints work and How to run code in this repository build understanding within Orientation.",
+            "reason": "Hands-on exercises and checkpoints require executing and testing code using standard Go CLI commands.",
             "required": false,
             "target_id": "core-00-04"
           },
@@ -450,9 +450,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can trace the four-phase curriculum loop: lesson theory -> guided lab -> integrated project -> rigorous assessment.",
+          "Can explain when and how to consult _solution/ folders without compromising cognitive struggle.",
+          "Can identify criteria that turn a standard coding project into verifiable portfolio proof."
         ],
         "practice_task": "The learner must complete one lesson cycle (read, exercise, pass tests), then describe which artifact they would add to their portfolio and why.",
         "project_id": null,
@@ -585,21 +585,21 @@
           {
             "display_text": "Module 00.01 — How to use this repository",
             "label": "Module 00.01 — How to use this repository",
-            "reason": "Both How to run code in this repository and How to use this repository build understanding within Orientation.",
+            "reason": "Executing Go commands requires navigating to the appropriate module and lesson directories on disk.",
             "required": false,
             "target_id": "core-00-01"
           },
           {
             "display_text": "Module 00.02 — What zero magic means",
             "label": "Module 00.02 — What zero magic means",
-            "reason": "Both How to run code in this repository and What zero magic means build understanding within Orientation.",
+            "reason": "Toolchain commands replace magical assumptions by providing deterministic compiler and runtime feedback.",
             "required": false,
             "target_id": "core-00-02"
           },
           {
             "display_text": "Module 00.05 — How starter folders work",
             "label": "Module 00.05 — How starter folders work",
-            "reason": "Both How to run code in this repository and How starter folders work build understanding within Orientation.",
+            "reason": "Running go test and go build is the core mechanism used to verify implementations inside starter folders.",
             "required": false,
             "target_id": "core-00-05"
           }
@@ -632,9 +632,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can execute, format, build, and test Go packages using go run, gofmt, go build, and go test.",
+          "Can interpret compiler errors, test failures, and exit codes without IDE reliance.",
+          "Can explain the difference between compiling a temporary executable (go run) and emitting a binary (go build)."
         ],
         "practice_task": "The learner must write a small Go program, run it with go run, write a test for it, run the test with go test -v, and run go vet without errors.",
         "project_id": null,
@@ -767,21 +767,21 @@
           {
             "display_text": "Module 00.01 — How to use this repository",
             "label": "Module 00.01 — How to use this repository",
-            "reason": "Both How starter folders work and How to use this repository build understanding within Orientation.",
+            "reason": "Starter and solution folders reside within standardized module paths defined in repository manifests.",
             "required": false,
             "target_id": "core-00-01"
           },
           {
             "display_text": "Module 00.02 — What zero magic means",
             "label": "Module 00.02 — What zero magic means",
-            "reason": "Both How starter folders work and What zero magic means build understanding within Orientation.",
+            "reason": "The starter/solution pattern enforces zero magic by requiring learners to write missing logic before viewing reference code.",
             "required": false,
             "target_id": "core-00-02"
           },
           {
             "display_text": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
             "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-            "reason": "Both How starter folders work and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+            "reason": "Starter scaffolds serve as the hands-on bridge connecting conceptual lessons to portfolio project milestones.",
             "required": false,
             "target_id": "core-00-03"
           }
@@ -814,9 +814,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can navigate starter scaffolds, locate marked TODO gaps, and write passing implementations.",
+          "Can run targeted unit tests to verify specific implementation behavior.",
+          "Can compare personal solutions against reference implementations to analyze architectural tradeoffs."
         ],
         "practice_task": "The learner must complete an exercise from the starter, pass all tests, then explain one design choice where their solution differs from the provided solution and why both are valid.",
         "project_id": null,
@@ -956,21 +956,21 @@
           {
             "display_text": "Module 00.01 — How to use this repository",
             "label": "Module 00.01 — How to use this repository",
-            "reason": "Both How assessments work and How to use this repository build understanding within Orientation.",
+            "reason": "Assessment rubrics verify that learners can independently navigate and explain repository architecture.",
             "required": false,
             "target_id": "core-00-01"
           },
           {
             "display_text": "Module 00.02 — What zero magic means",
             "label": "Module 00.02 — What zero magic means",
-            "reason": "Both How assessments work and What zero magic means build understanding within Orientation.",
+            "reason": "Assessments evaluate whether learners possess genuine first-principles understanding without reliance on hidden magic.",
             "required": false,
             "target_id": "core-00-02"
           },
           {
             "display_text": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
             "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-            "reason": "Both How assessments work and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+            "reason": "Assessments form the terminal validation gate of the lesson-exercise-project-assessment loop.",
             "required": false,
             "target_id": "core-00-03"
           }
@@ -1003,9 +1003,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can explain the structure of checkpoint rubrics across correctness, code quality, testing, and oral defense.",
+          "Can distinguish between superficial multiple-choice familiarity and demonstrable mastery.",
+          "Can formulate a targeted remediation plan after identifying assessment weak points."
         ],
         "practice_task": "The learner must take a module assessment, identify the question they were least confident about, return to the relevant lesson, and write a one-paragraph explanation that fills the gap.",
         "project_id": null,
@@ -1145,21 +1145,21 @@
           {
             "display_text": "Module 00.01 — How to use this repository",
             "label": "Module 00.01 — How to use this repository",
-            "reason": "Both How to ask good debugging questions and How to use this repository build understanding within Orientation.",
+            "reason": "Formulating high-signal questions requires citing specific repository file paths, manifests, and Git branches.",
             "required": false,
             "target_id": "core-00-01"
           },
           {
             "display_text": "Module 00.02 — What zero magic means",
             "label": "Module 00.02 — What zero magic means",
-            "reason": "Both How to ask good debugging questions and What zero magic means build understanding within Orientation.",
+            "reason": "Hypothesis-driven debugging eliminates guessing by methodically verifying assumptions against runtime evidence.",
             "required": false,
             "target_id": "core-00-02"
           },
           {
             "display_text": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
             "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-            "reason": "Both How to ask good debugging questions and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+            "reason": "Debugging discipline is exercised continuously throughout guided labs, project implementations, and checkpoint retakes.",
             "required": false,
             "target_id": "core-00-03"
           }
@@ -1192,9 +1192,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can formulate a 7-point debugging question containing environment, expected vs actual behavior, and minimal reproduction.",
+          "Can apply systematic hypothesis-testing to isolate failure modes instead of random code alterations.",
+          "Can extract high-signal stack traces and error messages from terminal outputs."
         ],
         "practice_task": "The learner must take a provided buggy code snippet, write a well-structured debugging question for it, then debug and fix it using the hypothesis-testing methodology.",
         "project_id": null,
@@ -1334,21 +1334,21 @@
           {
             "display_text": "Module 00.01 — How to use this repository",
             "label": "Module 00.01 — How to use this repository",
-            "reason": "Both What job-ready means and How to use this repository build understanding within Orientation.",
+            "reason": "Job-ready engineering capability includes navigating large unfamiliar codebases and adhering to repository conventions.",
             "required": false,
             "target_id": "core-00-01"
           },
           {
             "display_text": "Module 00.02 — What zero magic means",
             "label": "Module 00.02 — What zero magic means",
-            "reason": "Both What job-ready means and What zero magic means build understanding within Orientation.",
+            "reason": "Zero-magic mastery distinguishes production-grade software engineers from tutorial-dependent beginners.",
             "required": false,
             "target_id": "core-00-02"
           },
           {
             "display_text": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
             "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-            "reason": "Both What job-ready means and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+            "reason": "Completing the lesson-to-checkpoint loop across all modules generates the observable proof required for job readiness.",
             "required": false,
             "target_id": "core-00-03"
           }
@@ -1381,9 +1381,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can audit technical capability against the 6 observable graduation outcomes.",
+          "Can identify the difference between passive tutorial completion and autonomous software delivery.",
+          "Can articulate architectural tradeoffs and operational failure recovery in oral defense scenarios."
         ],
         "practice_task": "The learner must audit their own portfolio against a provided rubric, identify their weakest dimension, and write an improvement plan with specific next steps.",
         "project_id": null,
@@ -1452,7 +1452,7 @@
           "Learner must describe the difference between 'can write Go' and 'can engineer Go systems.'"
         ],
         "how_go_uses_it": "Go's cultural emphasis on simplicity, readability, and maintainability directly maps to what employers look for: not clever code, but code that a team can understand, deploy, and operate confidently.",
-        "mental_model": "Job-ready means you can take a vague requirement, design a solution, implement it testably, document your decisions, and deliver it through CI to production â€” independently.",
+        "mental_model": "Job-ready means you can take a vague requirement, design a solution, implement it testably, document your decisions, and deliver it through CI to production — independently.",
         "performance_implications": [
           "A portfolio with 3 well-documented projects is more impressive than 10 unfinished tutorials.",
           "Employers spend an average of 7 seconds per resume scan; your portfolio link and project descriptions must communicate competence instantly.",
@@ -1469,7 +1469,7 @@
           "Iterate: improve the weakest area and repeat the self-review until all rubric criteria are met."
         ],
         "under_the_hood": "The Go engineering hiring rubric at most companies evaluates candidates on a 1-4 scale across coding, design, communication, and testing. The curriculum's proof system (exercises, projects, checkpoints, assessments) maps to this rubric so every completed module produces measurable progress on the hiring scale.",
-        "why_it_exists": "Without a clear definition of job-ready, learners stay in tutorial purgatory indefinitely â€” never feeling ready enough to apply. A concrete rubric makes readiness measurable and the path to it clear."
+        "why_it_exists": "Without a clear definition of job-ready, learners stay in tutorial purgatory indefinitely — never feeling ready enough to apply. A concrete rubric makes readiness measurable and the path to it clear."
       },
       "zero_magic_status": "golden"
     },
@@ -1523,21 +1523,21 @@
           {
             "display_text": "Module 00.01 — How to use this repository",
             "label": "Module 00.01 — How to use this repository",
-            "reason": "Both How to use the roadmap and How to use this repository build understanding within Orientation.",
+            "reason": "The curriculum roadmap graph dictates the sequence of repository modules and prerequisite paths.",
             "required": false,
             "target_id": "core-00-01"
           },
           {
             "display_text": "Module 00.02 — What zero magic means",
             "label": "Module 00.02 — What zero magic means",
-            "reason": "Both How to use the roadmap and What zero magic means build understanding within Orientation.",
+            "reason": "Roadmap ordering ensures foundational systems and concurrency concepts are taught before distributed architectures.",
             "required": false,
             "target_id": "core-00-02"
           },
           {
             "display_text": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
             "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-            "reason": "Both How to use the roadmap and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+            "reason": "Tracking progress through the roadmap aligns daily lesson completion with long-term capstone delivery.",
             "required": false,
             "target_id": "core-00-03"
           }
@@ -1570,9 +1570,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can navigate the curriculum dependency graph and explain topological prerequisite ordering.",
+          "Can identify milestone modules and their corresponding portfolio capstones.",
+          "Can plan a realistic personal progression trajectory based on module cognitive load and pacing."
         ],
         "practice_task": "The learner must trace their path from core-00-01 through the next 10 modules, listing each module's prerequisites and portfolio output, and explain why the order is structured that way.",
         "project_id": null,
@@ -1641,7 +1641,7 @@
           "Learner must locate the portfolio_output flag in the JSON and list all portfolio-producing modules."
         ],
         "how_go_uses_it": "Go's module system (go.mod, semantic import versioning) uses a dependency graph similar to this curriculum's prerequisite chain. Each module declares what it needs (require) and what it provides (export), and the build fails if dependencies are missing.",
-        "mental_model": "The roadmap is a dependency graph: each module lists its prerequisites (dependencies) and its outputs (portfolio artifacts). Completing a module is like resolving a dependency â€” once it is done, downstream modules can use it.",
+        "mental_model": "The roadmap is a dependency graph: each module lists its prerequisites (dependencies) and its outputs (portfolio artifacts). Completing a module is like resolving a dependency — once it is done, downstream modules can use it.",
         "performance_implications": [
           "Following the prerequisite order reduces concept-switching overhead and prevents relearning the same fundamentals.",
           "The curriculum takes approximately 400-600 hours total; pacing yourself at 15-20 hours per week yields completion in 6-9 months.",
@@ -1727,21 +1727,21 @@
           {
             "display_text": "Module 00.01 — How to use this repository",
             "label": "Module 00.01 — How to use this repository",
-            "reason": "Both How to build a portfolio from this curriculum and How to use this repository build understanding within Orientation.",
+            "reason": "Portfolio repositories mirror the production-grade directory layout and documentation standards established in this repository.",
             "required": false,
             "target_id": "core-00-01"
           },
           {
             "display_text": "Module 00.02 — What zero magic means",
             "label": "Module 00.02 — What zero magic means",
-            "reason": "Both How to build a portfolio from this curriculum and What zero magic means build understanding within Orientation.",
+            "reason": "Zero magic is demonstrated in portfolios through clear architecture diagrams, benchmark evidence, and operational runbooks.",
             "required": false,
             "target_id": "core-00-02"
           },
           {
             "display_text": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
             "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
-            "reason": "Both How to build a portfolio from this curriculum and How lessons, exercises, projects, and checkpoints work build understanding within Orientation.",
+            "reason": "Curriculum projects provide the raw material that is polished, tested, and packaged into public portfolio showcases.",
             "required": false,
             "target_id": "core-00-03"
           }
@@ -1774,9 +1774,9 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can explain the concept without hand-waving.",
-          "Can identify common mistakes.",
-          "Can apply the concept in a small working program."
+          "Can package a completed backend project with architecture diagrams, reproducible benchmarks, and operational runbooks.",
+          "Can document system tradeoffs, failure modes, and performance profiles in a professional repository README.",
+          "Can deliver a structured technical walkthrough demonstrating code craftsmanship and domain knowledge."
         ],
         "practice_task": "The learner must take a completed curriculum project, write a professional README and architecture diagram, and present the project in a recorded 3-minute walkthrough that explains design decisions and tradeoffs.",
         "project_id": null,
@@ -63173,7 +63173,7 @@
         "test_path": ""
       },
       "id": "project-course-setup-verification",
-      "learning_objective": "Apply module 0 concepts by building Course Setup Verification.",
+      "learning_objective": "Verify and document the complete local Go engineering workstation: directory structure, Go 1.24+ toolchain, IDE plugins, and automated curriculum validation test execution.",
       "module_id": "module-00",
       "next_item_ids": [],
       "order": 99,
@@ -63227,7 +63227,7 @@
         "test_path": ""
       },
       "id": "assessment-module-00-checkpoint",
-      "learning_objective": "Demonstrate mastery of module-00 competencies through automated verification and oral defense.",
+      "learning_objective": "Demonstrate independent comprehension of repository navigation, zero-magic engineering contracts, assessment rubrics, and the Go execution toolchain.",
       "module_id": "module-00",
       "next_item_ids": [],
       "order": 100,
@@ -63250,7 +63250,7 @@
         "go-core",
         "assessment"
       ],
-      "title": "Checkpoint",
+      "title": "Module 00 Checkpoint — Orientation",
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
@@ -63281,7 +63281,7 @@
         "test_path": ""
       },
       "id": "assessment-orientation-course-setup",
-      "learning_objective": "Demonstrate mastery of module-00 competencies through automated verification and oral defense.",
+      "learning_objective": "Verify end-to-end local workstation readiness by compiling Go source code, executing curriculum test suites, and passing all automated quality gates.",
       "module_id": "module-00",
       "next_item_ids": [],
       "order": 100,
@@ -63304,7 +63304,7 @@
         "go-core",
         "assessment"
       ],
-      "title": "Course Setup",
+      "title": "Course Setup Verification Assessment",
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",

@@ -122,7 +122,7 @@ The checkpoint verifies that you can navigate the curriculum, explain zero magic
 
 You are ready for Module 01 when you can:
 
-- [ ] explain the difference between `metadata/`, `curriculum/`, `tools/`, `docs/`, and `dist/`
+- [ ] explain the difference between `curriculum/`, `internal/tools/`, `web/`, and `.agents/`
 - [ ] find a lesson README from its metadata path
 - [ ] explain zero magic in your own words
 - [ ] run at least one lesson example

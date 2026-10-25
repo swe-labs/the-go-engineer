@@ -1,4 +1,4 @@
-# Lesson 01: How to use this repository
+# How to use this repository
 
 ## Learning objective
 

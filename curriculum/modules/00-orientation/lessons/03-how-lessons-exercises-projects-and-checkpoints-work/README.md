@@ -1,4 +1,4 @@
-# Lab 03: How lessons, exercises, projects, and checkpoints work
+# How lessons, exercises, projects, and checkpoints work
 
 ## Learning objective
 

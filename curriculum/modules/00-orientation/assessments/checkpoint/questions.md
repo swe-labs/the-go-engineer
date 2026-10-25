@@ -2,10 +2,10 @@
 
 ## Part 1 — Repository navigation
 
-1. What is the responsibility of `metadata/`?
-2. What is the responsibility of `curriculum/`?
-3. What is the responsibility of `tools/`?
-4. Why should `dist/` not be hand-edited?
+1. What is the responsibility of `curriculum/` (manifest blueprints vs. physical instructional modules)?
+2. What is the responsibility of `internal/tools/curriculum/`?
+3. What is the responsibility of `web/` and `.agents/`?
+4. Why must manifest blueprints (e.g. `path.core.json`, `projects.json`) strictly validate against `schema.v3.json` before releases?
 5. Given the path `curriculum/modules/08-http-rest-apis/lessons/03-handler-lifecycle/README.md`, identify the module and lesson.
 
 ## Part 2 — Zero magic

@@ -1,32 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="920" height="240" viewBox="0 0 920 240" role="img" aria-labelledby="title desc">
-  <title id="title">Repository concept flow</title>
-  <desc id="desc">Metadata points to curriculum files; tools validate them; docs define standards; dist stores generated release artifacts.</desc>
+  <title id="title">Repository Architecture Flow</title>
+  <desc id="desc">Curriculum manifests and modules compile through internal quality tools to learner web portals and agent governance.</desc>
   <rect width="920" height="240" fill="#ffffff"/>
-  <g font-family="Arial, sans-serif" font-size="16">
-    <rect x="30" y="80" width="140" height="70" rx="12" fill="#f3f4f6" stroke="#111827"/>
-    <text x="100" y="110" text-anchor="middle" font-weight="700">metadata/</text>
-    <text x="100" y="133" text-anchor="middle">the map</text>
+  <g font-family="Arial, sans-serif" font-size="15">
+    <rect x="20" y="80" width="170" height="70" rx="12" fill="#f3f4f6" stroke="#111827" stroke-width="1.5"/>
+    <text x="105" y="108" text-anchor="middle" font-weight="700">curriculum/</text>
+    <text x="105" y="132" text-anchor="middle" font-size="13" fill="#4b5563">manifests &amp; modules</text>
 
-    <line x1="170" y1="115" x2="260" y2="115" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="190" y1="115" x2="250" y2="115" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <rect x="260" y="80" width="150" height="70" rx="12" fill="#f3f4f6" stroke="#111827"/>
-    <text x="335" y="110" text-anchor="middle" font-weight="700">curriculum/</text>
-    <text x="335" y="133" text-anchor="middle">learner path</text>
+    <rect x="250" y="80" width="180" height="70" rx="12" fill="#f3f4f6" stroke="#111827" stroke-width="1.5"/>
+    <text x="340" y="108" text-anchor="middle" font-weight="700">internal/tools/</text>
+    <text x="340" y="132" text-anchor="middle" font-size="13" fill="#4b5563">17 quality gates</text>
 
-    <line x1="410" y1="115" x2="500" y2="115" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="430" y1="115" x2="490" y2="115" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <rect x="500" y="80" width="130" height="70" rx="12" fill="#f3f4f6" stroke="#111827"/>
-    <text x="565" y="110" text-anchor="middle" font-weight="700">tools/</text>
-    <text x="565" y="133" text-anchor="middle">check proof</text>
+    <rect x="490" y="80" width="170" height="70" rx="12" fill="#f3f4f6" stroke="#111827" stroke-width="1.5"/>
+    <text x="575" y="108" text-anchor="middle" font-weight="700">web/</text>
+    <text x="575" y="132" text-anchor="middle" font-size="13" fill="#4b5563">learner portal</text>
 
-    <line x1="630" y1="115" x2="720" y2="115" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="660" y1="115" x2="720" y2="115" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <rect x="720" y="80" width="150" height="70" rx="12" fill="#f3f4f6" stroke="#111827"/>
-    <text x="795" y="110" text-anchor="middle" font-weight="700">dist/</text>
-    <text x="795" y="133" text-anchor="middle">release output</text>
+    <rect x="720" y="80" width="175" height="70" rx="12" fill="#f3f4f6" stroke="#111827" stroke-width="1.5"/>
+    <text x="807" y="108" text-anchor="middle" font-weight="700">.agents/</text>
+    <text x="807" y="132" text-anchor="middle" font-size="13" fill="#4b5563">governance &amp; skills</text>
 
-    <rect x="280" y="175" width="320" height="42" rx="10" fill="#fff7ed" stroke="#9a3412"/>
-    <text x="440" y="202" text-anchor="middle">docs/ define the standards used throughout</text>
+    <rect x="250" y="175" width="420" height="42" rx="10" fill="#fff7ed" stroke="#9a3412"/>
+    <text x="460" y="202" text-anchor="middle" font-size="14" fill="#9a3412" font-weight="600">Unified v3 architecture: zero magic from first principles to production</text>
   </g>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">

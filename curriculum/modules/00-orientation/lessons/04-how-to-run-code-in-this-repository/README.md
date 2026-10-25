@@ -1,4 +1,4 @@
-# Lesson 04: How to run code in this repository
+# How to run code in this repository
 
 ## Learning objective
 

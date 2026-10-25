@@ -1,4 +1,4 @@
-# Assessment - Course Setup Verification
+# Course Setup Verification Assessment
 
 ## Purpose
 
