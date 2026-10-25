@@ -529,7 +529,7 @@ func validateCognitiveLoad() {
 	var rawElectives map[string]any
 	readJSON("path.electives.json", &rawElectives)
 
-	checkModules := func(raw map[string]any, source string) {
+	checkModules := func(raw map[string]any) {
 		mods, exists := raw["modules"].([]any)
 		if !exists {
 			return
@@ -589,8 +589,8 @@ func validateCognitiveLoad() {
 		}
 	}
 
-	checkModules(rawCore, "path.core.json")
-	checkModules(rawElectives, "path.electives.json")
+	checkModules(rawCore)
+	checkModules(rawElectives)
 
 	if ok {
 		fmt.Println("  All cognitive load checks passed.")

@@ -71,15 +71,21 @@ func (d *DatastarSSE) PatchElements(elements string, selector string, mode strin
 	var buf bytes.Buffer
 	buf.WriteString("event: datastar-patch-elements\n")
 	if selector != "" {
-		buf.WriteString("data: selector " + selector + "\n")
+		buf.WriteString("data: selector ")
+		buf.WriteString(selector)
+		buf.WriteByte('\n')
 	}
 	if mode != "" {
-		buf.WriteString("data: mode " + mode + "\n")
+		buf.WriteString("data: mode ")
+		buf.WriteString(mode)
+		buf.WriteByte('\n')
 	}
 	for _, line := range strings.Split(elements, "\n") {
-		buf.WriteString("data: elements " + line + "\n")
+		buf.WriteString("data: elements ")
+		buf.WriteString(line)
+		buf.WriteByte('\n')
 	}
-	buf.WriteString("\n")
+	buf.WriteByte('\n')
 
 	_, err := d.w.Write(buf.Bytes())
 	if err == nil {
@@ -92,7 +98,9 @@ func (d *DatastarSSE) PatchElements(elements string, selector string, mode strin
 func (d *DatastarSSE) PatchSignals(signalsJSON string) error {
 	var buf bytes.Buffer
 	buf.WriteString("event: datastar-patch-signals\n")
-	buf.WriteString("data: signals " + signalsJSON + "\n\n")
+	buf.WriteString("data: signals ")
+	buf.WriteString(signalsJSON)
+	buf.WriteString("\n\n")
 
 	_, err := d.w.Write(buf.Bytes())
 	if err == nil {
@@ -147,15 +155,21 @@ func (b *SSEBroker) BroadcastPatchElements(elements string, selector string, mod
 	var buf bytes.Buffer
 	buf.WriteString("event: datastar-patch-elements\n")
 	if selector != "" {
-		buf.WriteString("data: selector " + selector + "\n")
+		buf.WriteString("data: selector ")
+		buf.WriteString(selector)
+		buf.WriteByte('\n')
 	}
 	if mode != "" {
-		buf.WriteString("data: mode " + mode + "\n")
+		buf.WriteString("data: mode ")
+		buf.WriteString(mode)
+		buf.WriteByte('\n')
 	}
 	for line := range strings.SplitSeq(elements, "\n") {
-		buf.WriteString("data: elements " + line + "\n")
+		buf.WriteString("data: elements ")
+		buf.WriteString(line)
+		buf.WriteByte('\n')
 	}
-	buf.WriteString("\n")
+	buf.WriteByte('\n')
 
 	b.BroadcastRaw(buf.String())
 }

@@ -382,13 +382,14 @@ func skipValue(dec *json.Decoder) {
 		return
 	}
 	if delim, ok := t.(json.Delim); ok {
-		if delim == '{' {
+		switch delim {
+		case '{':
 			for dec.More() {
 				dec.Token() // key
 				skipValue(dec)
 			}
 			dec.Token() // closing }
-		} else if delim == '[' {
+		case '[':
 			for dec.More() {
 				skipValue(dec)
 			}

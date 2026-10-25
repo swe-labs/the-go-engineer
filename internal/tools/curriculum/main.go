@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 var curriculumDir string
@@ -145,45 +144,6 @@ func readJSON(path string, v any) {
 	if err := json.Unmarshal(data, v); err != nil {
 		fatalf("cannot parse %s: %v", path, err)
 	}
-}
-
-// itemIDFromModuleItem maps old module numbering to new.
-// Item IDs keep their original number even when module_id changes.
-func itemModuleID(itemID string) string {
-	parts := strings.Split(itemID, "-")
-	if len(parts) < 3 {
-		return ""
-	}
-	prefix := parts[0]
-	num := parts[1]
-	switch prefix {
-	case "core":
-		n := 0
-		fmt.Sscanf(num, "%d", &n)
-		if n <= 7 {
-			return fmt.Sprintf("module-%s", num)
-		}
-		if n >= 8 && n <= 15 {
-			return fmt.Sprintf("module-%02d", n+1)
-		}
-		// core-11 items split: 01-09 go to module-08, 10-28 go to module-12
-		if n == 11 {
-			sub := 0
-			fmt.Sscanf(parts[2], "%d", &sub)
-			if sub >= 1 && sub <= 9 {
-				return "module-08"
-			}
-			if sub >= 10 && sub <= 28 {
-				return "module-12"
-			}
-		}
-		return fmt.Sprintf("module-%s", num)
-	case "elective":
-		return "module-17"
-	case "opslane":
-		return "module-18"
-	}
-	return ""
 }
 
 // Module metadata structures
