@@ -7,156 +7,524 @@
   "failure_categories": [
     {
       "category": "configuration_failures",
-      "description": "Failures caused by incorrect, missing, or inconsistent configuration",
+      "name": "Configuration & Environment Drift Failures",
+      "description": "Failures caused by incorrect, missing, unvalidated, or inconsistent configuration, environment variables, CLI flags, build tags, or schema drift across environments.",
       "modules": [
+        "module-00",
+        "module-01",
+        "module-02",
+        "module-05",
+        "module-06",
         "module-07",
         "module-10",
         "module-15",
-        "module-00",
-        "module-01",
-        "module-06",
-        "module-05"
+        "module-18"
+      ],
+      "observable_symptoms": [
+        "Process crashes immediately on startup with missing environment variable errors or type conversion panics",
+        "Silent fallback to unsafe development defaults in production environments (e.g. hardcoded secrets, default passwords)",
+        "Compilation errors or unexpected test passes due to missing build tags (//go:build integration ignored)",
+        "Port collision or bind address failures (bind: address already in use)"
+      ],
+      "mechanical_root_causes": [
+        "Unchecked os.Getenv() calls returning empty strings without startup validation gates",
+        "Type parsing errors (e.g. strconv.Atoi on non-numeric env strings) resulting in unhandled zero values",
+        "Config struct initialization without strict decoding (mapstructure without ErrorUnused: true)",
+        "Mismatched build tag constraints leading to missing symbol compilation or silent omission of tests"
+      ],
+      "detection_strategies": [
+        "Fail-fast configuration validation during startup with structured error reporting",
+        "Automated smoke tests executing binaries with --help and invalid configuration fixtures",
+        "Linters enforcing strict environment variable schema validation (go-envconfig validation)"
+      ],
+      "mitigation_patterns": [
+        "Define canonical typed configuration structs validated immediately at the entrypoint (main())",
+        "Use 12-factor environment bindings with explicit default contracts and fail-fast assertions",
+        "Enforce startup pre-flight checks validating database URLs, API secrets, and TLS certificates before binding ports"
+      ],
+      "canonical_lessons": [
+        "core-00-01",
+        "core-01-03",
+        "core-02-01",
+        "core-05-17",
+        "core-06-03",
+        "core-07-16",
+        "core-10-18",
+        "core-15-04",
+        "opslane-01"
       ]
     },
     {
       "category": "resource_exhaustion",
-      "description": "Memory, CPU, file descriptor, or connection pool exhaustion",
+      "name": "Memory, CPU, Socket & Pool Exhaustion",
+      "description": "Uncontrolled resource consumption leading to system starvation, OS out-of-memory (OOM) killer invocation, file descriptor limits, or connection pool starvation.",
       "modules": [
+        "module-02",
         "module-03",
         "module-09",
         "module-13",
-        "module-15",
-        "module-02"
+        "module-15"
+      ],
+      "observable_symptoms": [
+        "Process terminated abruptly by Linux kernel OOM Killer with signal: killed (exit code 137)",
+        "Database queries hanging or failing with sql: connection pool exhausted or remaining connection slots are reserved",
+        "Network operations failing with socket: too many open files (EMFILE / ENFILE)",
+        "CPU utilization pinned at 100% across all cores while throughput plummets to near zero"
+      ],
+      "mechanical_root_causes": [
+        "Unbounded slice append operations inside loops reallocating backing arrays without capacity preallocation",
+        "Unclosed sql.Rows or http.Response.Body preventing socket and connection reuse",
+        "Lack of bounded queues or rate-limiters on ingress HTTP endpoints under burst traffic",
+        "Container cgroup limits set lower than Go runtime peak heap allocation and GC pacing thresholds"
+      ],
+      "detection_strategies": [
+        "Continuous pprof heap profiling monitoring inuse_space and inuse_objects",
+        "Prometheus metrics tracking go_memstats_heap_alloc_bytes, go_goroutines, and sql.DBStats.OpenConnections",
+        "OS file descriptor monitoring via /proc/<pid>/fd and lsof -p <pid>"
+      ],
+      "mitigation_patterns": [
+        "Preallocate slice capacities with make([]T, 0, capacity) to eliminate reallocation churn",
+        "Always defer resource cleanup immediately after allocation: defer rows.Close() and defer resp.Body.Close()",
+        "Configure explicit connection pool ceilings on sql.DB: SetMaxOpenConns, SetMaxIdleConns, SetConnMaxLifetime",
+        "Implement bounded worker pools with backpressure instead of spawning unbounded goroutines per request"
+      ],
+      "canonical_lessons": [
+        "core-02-12",
+        "core-03-14",
+        "core-09-04",
+        "core-13-04",
+        "core-15-10"
       ]
     },
     {
       "category": "latency_failures",
-      "description": "High latency cascading into timeouts, retries, and degraded throughput",
+      "name": "Tail Latency Amplification & Bottlenecks",
+      "description": "High response times cascading into request queueing, timeout cascades, degraded throughput, and head-of-line blocking.",
       "modules": [
         "module-08",
         "module-09",
         "module-12",
         "module-13"
+      ],
+      "observable_symptoms": [
+        "p99 and p99.9 latency spikes by orders of magnitude while median p50 latency remains normal",
+        "HTTP request queues filling up and dropping incoming requests with 503 Service Unavailable",
+        "Synchronous downstream calls blocking worker goroutines, leading to thread and goroutine pileups",
+        "Database query duration metrics exhibiting bimodal distribution with extreme long-tail latency"
+      ],
+      "mechanical_root_causes": [
+        "Sequential database queries inside loops (the N+1 query problem) instead of batched or JOIN queries",
+        "Missing database table indexes forcing sequential disk/table scans over millions of tuples",
+        "Lock contention on shared mutexes protecting hot memory regions during high concurrent traffic",
+        "Synchronous logging or network I/O executed on critical request processing paths"
+      ],
+      "detection_strategies": [
+        "Distributed tracing with OpenTelemetry displaying flame graphs and per-span duration breakdowns",
+        "Database query planning analysis via EXPLAIN (ANALYZE, BUFFERS) on slow queries",
+        "pprof CPU profiles and block/mutex contention profiles (go tool pprof /debug/pprof/block)"
+      ],
+      "mitigation_patterns": [
+        "Batch database queries using IN (...) or multi-row INSERT/UPDATE queries",
+        "Add targeted compound database indexes matching query WHERE and ORDER BY predicates",
+        "Offload non-critical operations (logging, telemetry, email dispatch) to asynchronous background workers",
+        "Replace coarse-grained global mutexes with sharded locks, atomic primitives, or read-write locks (sync.RWMutex)"
+      ],
+      "canonical_lessons": [
+        "core-08-08",
+        "core-09-12",
+        "core-12-08",
+        "core-13-02"
       ]
     },
     {
       "category": "partial_failures",
-      "description": "Some requests succeed while others fail without clear signal",
+      "name": "Partial Failures & Degraded Dependencies",
+      "description": "Subsets of requests, batch items, or downstream service calls failing while others succeed without clear caller signals or proper degradation.",
       "modules": [
         "module-08",
+        "module-12",
         "module-14"
+      ],
+      "observable_symptoms": [
+        "Batch endpoints returning HTTP 200 OK despite 40% of internal operations silently failing",
+        "Downstream third-party outage rendering the entire application unresponsive instead of degrading gracefully",
+        "Frontend displays partially loaded pages with blank widgets and infinite loading spinners",
+        "Log streams littered with sporadic network reset errors without associated span tracing"
+      ],
+      "mechanical_root_causes": [
+        "Lack of isolated error handling in concurrent fanout operations (errgroup terminating without recording partial successes)",
+        "Tightly coupled downstream dependencies lacking circuit breakers or graceful degradation fallbacks",
+        "Treating compound distributed operations as atomic without two-phase commits or saga compensation workflows"
+      ],
+      "detection_strategies": [
+        "Distributed trace analysis identifying broken child spans within successful root spans",
+        "Metric tracking comparing raw request counts against partial failure and error rates",
+        "Chaos engineering and dependency fault injection (e.g. injecting 20% latency/errors in test environments)"
+      ],
+      "mitigation_patterns": [
+        "Implement circuit breakers (e.g. gobreaker) to fail fast when downstream services become degraded",
+        "Provide graceful fallback mechanisms (cached responses, default templates, read-only degraded modes)",
+        "Use structured batch response models returning explicit per-item status and error payloads"
+      ],
+      "canonical_lessons": [
+        "core-08-16",
+        "core-12-10",
+        "core-14-10"
       ]
     },
     {
       "category": "timeout_failures",
-      "description": "Operations exceeding deadlines, causing cascading cancellation",
+      "name": "Deadline Exceeded & Timeout Cascades",
+      "description": "Operations exceeding defined deadline thresholds, causing cascading cancellation, hung sockets, or orphaned background tasks.",
       "modules": [
         "module-08",
         "module-09",
-        "module-11"
+        "module-11",
+        "module-18"
+      ],
+      "observable_symptoms": [
+        "Requests returning 504 Gateway Timeout or context deadline exceeded under high concurrency",
+        "HTTP connections hanging indefinitely when communicating with unresponsive external peers",
+        "Cascading cancellation where a parent timeout cancels multiple critical background transactions mid-flight",
+        "Database transaction deadlocks caused by abandoned transactions holding locks past client disconnections"
+      ],
+      "mechanical_root_causes": [
+        "Using default http.Client{} or http.Server{} without setting Timeout, ReadTimeout, or WriteTimeout",
+        "Executing database queries without propagating the incoming request context.Context",
+        "Failure to check ctx.Err() or <-ctx.Done() in long-running computation loops",
+        "Setting arbitrary, uncoordinated timeout thresholds across distributed service tiers (upstream timeout shorter than downstream)"
+      ],
+      "detection_strategies": [
+        "Monitoring rate of context.DeadlineExceeded and context.Canceled errors in error logs and metrics",
+        "Pprof goroutine dumps highlighting stacks stuck in net/http.(*persistConn).readLoop or syscall.Syscall",
+        "Synthetic healthcheck probes monitoring latency and timeout response frequencies"
+      ],
+      "mitigation_patterns": [
+        "Always configure explicit timeouts on http.Server (ReadTimeout, WriteTimeout, IdleTimeout) and custom http.Client",
+        "Pass context.Context from HTTP handlers down into every database and network call (QueryContext, ExecContext)",
+        "Implement deadline budgets where child deadlines are strictly smaller than parent deadlines",
+        "Clean up acquired resources in defer blocks to prevent orphaned locks when timeouts trigger"
+      ],
+      "canonical_lessons": [
+        "core-08-12",
+        "core-09-08",
+        "core-11-04",
+        "opslane-13"
       ]
     },
     {
       "category": "concurrency_failures",
-      "description": "Race conditions, deadlocks, livelocks, data races, goroutine leaks",
+      "name": "Data Races, Race Conditions & Goroutine Mismanagement",
+      "description": "Unsynchronized memory access, concurrent read/write mutations, channel panics, and goroutine synchronization flaws.",
       "modules": [
-        "module-11"
+        "module-11",
+        "module-18"
+      ],
+      "observable_symptoms": [
+        "Go runtime panic: concurrent map read and map write or concurrent map writes",
+        "Panic: send on closed channel or close of closed channel crashing the entire server process",
+        "Subtle, non-deterministic data corruption in shared state variables during load spikes",
+        "Thread sanitizer output reported by go test -race"
+      ],
+      "mechanical_root_causes": [
+        "Accessing or modifying shared struct pointers or maps from multiple goroutines without mutex synchronization",
+        "Closing a channel from a consumer rather than the producer, leading to double-close panics",
+        "Capturing iteration variables by reference in closures spawned inside for loops (pre-Go 1.22 semantics)",
+        "Relying on time.Sleep() for synchronization instead of explicit signaling primitives (sync.WaitGroup, channels)"
+      ],
+      "detection_strategies": [
+        "Run all CI test suites and integration benchmarks with Go race detector enabled: go test -race ./...",
+        "Static analysis using go vet and concurrency linters (govet, errcheck, staticcheck)",
+        "Stress testing under high concurrency using tools like wrk, hey, or vegeta"
+      ],
+      "mitigation_patterns": [
+        "Protect shared state mutations with sync.Mutex or sync.RWMutex, deferring Unlock() immediately",
+        "Share memory by communicating: use channels for ownership transfer rather than shared mutable pointers",
+        "Follow the channel closing rule: only the sender goroutine should close a channel, never the receiver",
+        "Use sync/atomic for simple counters and bitflags to avoid lock contention"
+      ],
+      "canonical_lessons": [
+        "core-11-06",
+        "core-11-08",
+        "core-11-10",
+        "opslane-09",
+        "opslane-10"
       ]
     },
     {
       "category": "memory_leaks",
-      "description": "Unbounded growth in heap, goroutine stacks, or caches",
+      "name": "Memory Leaks & Goroutine Stack Retention",
+      "description": "Unbounded growth in heap allocations, leaked goroutines permanently retaining call stacks, or unmanaged in-memory caches.",
       "modules": [
         "module-11",
         "module-13"
+      ],
+      "observable_symptoms": [
+        "Process resident set size (RSS) grows monotonically over days until the node runs out of memory",
+        "go_goroutines metric continuously increases over time, never returning to baseline",
+        "Garbage collection CPU overhead (go_gc_duration_seconds) steadily climbs as live heap object count increases",
+        "Degraded system performance and increased allocation latency due to memory fragmentation"
+      ],
+      "mechanical_root_causes": [
+        "Spawning goroutines that block indefinitely on channel receives when no sender will ever write",
+        "Sub-slicing a small portion of a massive array or buffer, keeping the entire backing array reachable in heap",
+        "Adding items to package-level global maps or caches without an eviction policy (TTL or LRU limits)",
+        "Setting up event listeners or timers (time.Tick instead of time.NewTicker) that never get stopped"
+      ],
+      "detection_strategies": [
+        "Generate heap differential profiles via go tool pprof -base profile1.pb.gz profile2.pb.gz",
+        "Monitor runtime.NumGoroutine() over time and inspect stack traces at /debug/pprof/goroutine?debug=2",
+        "Automate leak detection in unit test suites using Uber's goleak library (goleak.VerifyNone(t))"
+      ],
+      "mitigation_patterns": [
+        "Ensure every spawned goroutine has a guaranteed exit condition tied to context cancellation",
+        "Copy required byte or slice sub-ranges to new independent slices to release references to large underlying buffers",
+        "Always use bounded cache structures with maximum size thresholds and LRU eviction policies",
+        "Always call ticker.Stop() in a defer statement when using time.NewTicker"
+      ],
+      "canonical_lessons": [
+        "core-11-05",
+        "core-11-12",
+        "core-13-06",
+        "core-13-08"
       ]
     },
     {
       "category": "deadlocks",
-      "description": "Two or more operations blocking each other indefinitely",
+      "name": "Deadlocks & Circular Resource Wait",
+      "description": "Two or more concurrent operations or goroutines blocking each other indefinitely due to circular waits on locks or channels.",
       "modules": [
         "module-11"
+      ],
+      "observable_symptoms": [
+        "Go runtime fatal panic: fatal error: all goroutines are asleep - deadlock!",
+        "Application hangs completely; CPU utilization drops to near zero while memory remains static",
+        "HTTP request processing stalls completely, with all incoming requests timing out at the load balancer",
+        "Shutdown signals (SIGTERM/SIGINT) hang indefinitely during server drain phase"
+      ],
+      "mechanical_root_causes": [
+        "Inverted lock acquisition order between goroutines (Goroutine 1 locks A then B; Goroutine 2 locks B then A)",
+        "Writing to an unbuffered channel while holding a mutex needed by the receiving goroutine",
+        "Calling WaitGroup.Wait() before calling WaitGroup.Add() or forgetting to call WaitGroup.Done() on an error return path",
+        "A goroutine trying to acquire a non-reentrant sync.Mutex that it already holds"
+      ],
+      "detection_strategies": [
+        "Send SIGQUIT (Ctrl+\\ or kill -3 <pid>) to dump full goroutine stack traces and lock states to stderr",
+        "Inspect blocked goroutines via /debug/pprof/block and /debug/pprof/goroutine",
+        "Static analysis with deadcode and concurrency checkers"
+      ],
+      "mitigation_patterns": [
+        "Enforce a strict, documented global lock acquisition hierarchy across the codebase",
+        "Never hold locks across channel communication or network I/O calls",
+        "Always place defer wg.Done() as the first statement inside spawned worker goroutines",
+        "Use select with time.After or ctx.Done() as an escape hatch when attempting channel communications"
+      ],
+      "canonical_lessons": [
+        "core-11-07",
+        "core-11-09",
+        "core-11-14"
       ]
     },
     {
       "category": "retry_storms",
-      "description": "Amplified load from aggressive retries during degraded conditions",
+      "name": "Retry Storms & Thundering Herd",
+      "description": "Exponential load amplification caused by aggressive client or service retries during upstream degradation, completely preventing recovery.",
       "modules": [
         "module-14",
         "module-15",
         "module-18"
+      ],
+      "observable_symptoms": [
+        "Downstream database or microservice briefly hiccups, and request rate instantly spikes 10x to 50x",
+        "Recovering backend service is immediately knocked back down by a wall of queued retry traffic",
+        "CrashLoopBackOff loops on Kubernetes pods simultaneously hitting upstream dependencies upon restart",
+        "Exponential growth in error rates and connection reset drops"
+      ],
+      "mechanical_root_causes": [
+        "Retrying failed requests immediately in a tight loop without delay or backoff",
+        "Using constant delay retries where all failed clients retry simultaneously at synchronized intervals",
+        "Retrying non-idempotent operations or retrying errors that are non-transient (e.g. 400 Bad Request, 401 Unauthorized)",
+        "Lack of retry budgets allowing unlimited retries per incoming request across nested service tiers"
+      ],
+      "detection_strategies": [
+        "Monitor client-side and server-side request rate ratios (healthy ratio close to 1.0; spike during outage indicates retry storms)",
+        "Track retry counter metrics by status code and endpoint (http_retries_total)",
+        "Distributed trace inspection showing multiple identical child spans generated for a single parent span"
+      ],
+      "mitigation_patterns": [
+        "Implement exponential backoff with full jitter to decorrelate retry attempts across clients",
+        "Enforce strict retry budgets (e.g. client retries cannot exceed 10% of total request volume)",
+        "Only retry transient status codes (502, 503, 504, connection resets) and never retry 4xx client errors",
+        "Combine retries with circuit breakers to fast-fail when the upstream error rate exceeds a critical threshold"
+      ],
+      "canonical_lessons": [
+        "core-14-12",
+        "core-15-14",
+        "opslane-08",
+        "opslane-14"
       ]
     },
     {
       "category": "data_consistency_failures",
-      "description": "Race conditions, transaction anomalies, or event ordering violations",
+      "name": "Data Consistency, Mutation & State Divergence",
+      "description": "Silent data corruption, value/pointer receiver mutation traps, database transaction isolation anomalies, or eventual consistency conflicts.",
       "modules": [
+        "module-04",
+        "module-05",
         "module-09",
         "module-10",
-        "module-14",
-        "module-04"
+        "module-14"
+      ],
+      "observable_symptoms": [
+        "Method calls appear to update object state, but subsequent reads return original unmodified values",
+        "Nil pointer dereference panics when checking if err != nil on a typed nil interface",
+        "Database records contain inconsistent totals, duplicate transactions, or lost updates under concurrent access",
+        "Split-brain reads where users see differing states of the same entity depending on which node answers"
+      ],
+      "mechanical_root_causes": [
+        "Defining mutation methods with value receivers func (s Struct) Mutate() instead of pointer receivers func (s *Struct) Mutate()",
+        "Assigning a concrete nil pointer (*MyError)(nil) to an error interface, where (type != nil, value == nil) evaluates to err != nil",
+        "Executing multi-step database updates without an enclosing transaction (BEGIN ... COMMIT) or with insufficient isolation levels",
+        "Out-of-order event consumption in distributed message pipelines without sequence numbering or idempotency keys"
+      ],
+      "detection_strategies": [
+        "Unit tests asserting state mutations and testing pointer vs value receiver semantics",
+        "Database transaction tests executing concurrent conflicting updates and verifying serialization guarantees",
+        "Static analysis checks targeting nil interface assignment patterns"
+      ],
+      "mitigation_patterns": [
+        "Follow strict receiver consistency rules: if any method mutates the struct or if the struct contains synchronization primitives, use pointer receivers exclusively",
+        "Never declare concrete error pointer variables; always return the error interface directly as nil",
+        "Use explicit transactions with appropriate isolation (sql.LevelSerializable or SELECT ... FOR UPDATE for pessimistic locking)",
+        "Implement idempotency keys and version vectors (optimistic locking) for distributed and asynchronous updates"
+      ],
+      "canonical_lessons": [
+        "core-04-06",
+        "core-05-14",
+        "core-09-14",
+        "core-10-14",
+        "core-14-08"
       ]
     },
     {
       "category": "security_failures",
-      "description": "Authentication bypass, authorization escalation, injection, secret exposure",
+      "name": "Authentication, Authorization & Injection Vulnerabilities",
+      "description": "Security breaches caused by authentication bypass, authorization escalation, SQL injection, token tampering, or credential exposure.",
       "modules": [
         "module-10",
-        "module-16"
+        "module-16",
+        "module-18"
+      ],
+      "observable_symptoms": [
+        "Unauthorized users accessing restricted admin API routes or accessing other tenants' data",
+        "Database data exfiltration or table destruction resulting from SQL injection payloads",
+        "Secret tokens, database passwords, or private keys discovered in public Git repositories",
+        "JWT tokens accepted after expiration or accepted without cryptographic signature verification"
+      ],
+      "mechanical_root_causes": [
+        "Constructing SQL queries using string formatting (fmt.Sprintf) rather than parameterized queries ($1, $2)",
+        "Failing to validate JWT exp (expiration), iss (issuer), or using the none algorithm",
+        "Missing tenant isolation predicates in database queries (WHERE tenant_id = $1 omitted)",
+        "Hardcoding production API keys or credentials directly into source files or unignored config files"
+      ],
+      "detection_strategies": [
+        "Automated security scanning with govulncheck to identify known vulnerabilities in dependencies",
+        "Secret scanning tools (gitleaks, trufflehog) integrated into pre-commit hooks and CI pipelines",
+        "Automated penetration testing targeting OWASP Top 10 API vulnerabilities"
+      ],
+      "mitigation_patterns": [
+        "Always use parameterized queries (db.QueryRowContext(\"SELECT ... WHERE id = $1\", id))",
+        "Use battle-tested authentication libraries and validate all standard JWT claims with strict algorithm pinning",
+        "Enforce multi-tenant row-level security or programmatic middleware checks verifying tenant boundaries on every query",
+        "Store all credentials in environment variables or external secret managers (Vault, AWS Secrets Manager), never in code"
+      ],
+      "canonical_lessons": [
+        "core-10-04",
+        "core-10-10",
+        "core-16-04",
+        "opslane-03"
       ]
     },
     {
       "category": "deployment_failures",
-      "description": "Bad rollouts, environment drift, migration errors, rollback failures",
+      "name": "Deployment, Migration & Lifecycle Failures",
+      "description": "Failed rollouts, environment drift, schema migration deadlocks, bad healthcheck designs, or ungraceful termination.",
       "modules": [
         "module-15",
-        "module-16"
+        "module-16",
+        "module-18"
+      ],
+      "observable_symptoms": [
+        "Kubernetes pods failing to reach ready state: CrashLoopBackOff, OOMKilled, or failing liveness probes",
+        "Deployment of new code causes downtime because the production database schema was not migrated first",
+        "In-flight HTTP requests terminated abruptly with connection reset by peer during container rollouts",
+        "Database migration locks the entire table for hours, causing widespread service outage"
+      ],
+      "mechanical_root_causes": [
+        "Coupling backward-incompatible schema migrations directly with application code releases",
+        "Liveness probes pointing to heavy endpoints that query the database, causing cascading pod restarts under database load",
+        "Missing SIGTERM signal handling, causing the process to be abruptly killed by Docker/Kubernetes after default grace periods",
+        "Non-deterministic Docker builds caused by using the latest image tag instead of pinned immutable SHAs"
+      ],
+      "detection_strategies": [
+        "Pre-deployment staging smoke tests executing end-to-end migration and healthcheck verifications",
+        "Canary deployments and blue-green rollouts monitoring error rates before traffic cutover",
+        "CI pipeline validation verifying clean reproducible Docker builds and lint gates"
+      ],
+      "mitigation_patterns": [
+        "Follow the Expand/Contract migration pattern: database schema changes must be backward-compatible with previous application versions",
+        "Design lightweight liveness probes (/healthz checking only internal memory) separate from readiness probes (/ready checking dependencies)",
+        "Implement graceful shutdown handlers listening for os.Interrupt / syscall.SIGTERM, draining HTTP servers and workers before exit",
+        "Pin all base image tags and toolchain versions to immutable hashes in Dockerfiles"
+      ],
+      "canonical_lessons": [
+        "core-15-08",
+        "core-15-16",
+        "core-16-06",
+        "opslane-13",
+        "opslane-14"
       ]
     },
     {
       "category": "observability_failures",
-      "description": "Missing logs, broken metrics, incomplete traces, alert fatigue",
+      "name": "Observability Gaps, Blind Spots & Alert Fatigue",
+      "description": "Missing structured logs, unpropagated trace contexts, broken metrics pipelines, unmonitored failure modes, or alarm storms.",
       "modules": [
         "module-12",
         "module-18"
+      ],
+      "observable_symptoms": [
+        "Production incident occurs, but logs contain unsearchable plain-text strings lacking request IDs or user context",
+        "Distributed traces terminate abruptly at service boundaries because trace context headers were not propagated",
+        "Critical service degradation occurs without triggering any alerts, discovered only when customers complain",
+        "On-call engineers overwhelmed by hundreds of non-actionable alerts, leading to alert fatigue and ignored incidents"
+      ],
+      "mechanical_root_causes": [
+        "Using fmt.Println or unstructured log.Printf instead of structured logging with slog",
+        "Failing to inject/extract OpenTelemetry trace context headers across outbound HTTP requests",
+        "Exporting high-cardinality metrics (e.g. user IDs or IP addresses as Prometheus labels) causing metric server crashes",
+        "Alerting on symptoms or non-actionable thresholds instead of user-impacting SLO/error-budget burn rates"
+      ],
+      "detection_strategies": [
+        "Audit log streams for structured key compliance (e.g. trace_id, span_id, service, level)",
+        "Automate trace continuity checks verifying end-to-end span completeness in integration test suites",
+        "Monitor Prometheus scrape errors and cardinality counters"
+      ],
+      "mitigation_patterns": [
+        "Standardize on structured logging using Go's log/slog with contextual handlers",
+        "Propagate OpenTelemetry traceparent headers across all HTTP client requests and background jobs",
+        "Follow RED (Rate, Errors, Duration) and USE (Utilization, Saturation, Errors) metric architectures with low-cardinality labels",
+        "Define actionable multi-window, multi-burn-rate alerts based on service level objectives (SLOs)"
+      ],
+      "canonical_lessons": [
+        "core-12-02",
+        "core-12-04",
+        "core-12-14",
+        "opslane-12"
       ]
     }
   ],
   "required_coverage": {
-    "module-11": [
-      "concurrency_failures",
-      "deadlocks",
-      "memory_leaks"
-    ],
-    "module-12": [
-      "observability_failures",
-      "latency_failures",
-      "partial_failures"
-    ],
-    "module-14": [
-      "partial_failures",
-      "retry_storms",
-      "data_consistency_failures"
-    ],
-    "module-15": [
-      "deployment_failures",
-      "retry_storms",
-      "resource_exhaustion"
-    ],
-    "module-10": [
-      "security_failures",
-      "data_consistency_failures"
-    ],
-    "module-08": [
-      "latency_failures",
-      "timeout_failures",
-      "partial_failures"
-    ],
-    "module-09": [
-      "timeout_failures",
-      "resource_exhaustion",
-      "data_consistency_failures"
-    ],
     "module-00": [
       "configuration_failures"
     ],
@@ -164,42 +532,80 @@
       "configuration_failures"
     ],
     "module-02": [
+      "configuration_failures",
       "resource_exhaustion"
     ],
     "module-03": [
-      "resource_exhaustion",
-      "timeout_failures"
+      "resource_exhaustion"
     ],
     "module-04": [
       "data_consistency_failures"
     ],
     "module-05": [
+      "configuration_failures",
       "data_consistency_failures"
     ],
     "module-06": [
-      "configuration_failures",
-      "deployment_failures"
+      "configuration_failures"
     ],
     "module-07": [
       "configuration_failures"
     ],
-    "module-13": [
+    "module-08": [
+      "latency_failures",
+      "partial_failures",
+      "timeout_failures"
+    ],
+    "module-09": [
+      "data_consistency_failures",
+      "latency_failures",
       "resource_exhaustion",
+      "timeout_failures"
+    ],
+    "module-10": [
+      "configuration_failures",
+      "data_consistency_failures",
+      "security_failures"
+    ],
+    "module-11": [
+      "concurrency_failures",
+      "deadlocks",
       "memory_leaks",
-      "latency_failures"
+      "timeout_failures"
+    ],
+    "module-12": [
+      "latency_failures",
+      "observability_failures",
+      "partial_failures"
+    ],
+    "module-13": [
+      "latency_failures",
+      "memory_leaks",
+      "resource_exhaustion"
+    ],
+    "module-14": [
+      "data_consistency_failures",
+      "partial_failures",
+      "retry_storms"
+    ],
+    "module-15": [
+      "configuration_failures",
+      "deployment_failures",
+      "resource_exhaustion",
+      "retry_storms"
     ],
     "module-16": [
       "deployment_failures",
       "security_failures"
     ],
     "module-18": [
-      "configuration_failures",
       "concurrency_failures",
-      "timeout_failures",
+      "configuration_failures",
       "deployment_failures",
-      "security_failures",
+      "observability_failures",
       "retry_storms",
-      "observability_failures"
+      "security_failures",
+      "timeout_failures"
     ]
   }
 }

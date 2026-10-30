@@ -45,7 +45,7 @@ Use descriptive `name` fields and `t.Run`.
 
 ### Level 3: HTTP Handler Tests
 
-Required for HTTP handlers in s06 onward.
+Required for HTTP handlers in Module 08 onward.
 
 Use `httptest` instead of launching a real server unless the lesson explicitly teaches server lifecycle behavior.
 
@@ -125,12 +125,12 @@ func setupTestDB(t *testing.T) *sql.DB {
 
 | Area                                                    | Target |
 | ------------------------------------------------------- | ------ |
-| General minimum where no stricter section target exists | 75%    |
+| General minimum where no stricter module target exists  | 75%    |
 | Phase 0-1 foundation lessons with testable behavior     | 80%    |
-| s06 Backend, APIs & Databases                           | 85%    |
-| s08 Quality & Testing                                   | 95%    |
-| s09 Architecture & Security                             | 85%    |
-| s11 Opslane Flagship                                    | 90%    |
+| Module 08 HTTP/REST & Module 09 SQL Persistence         | 85%    |
+| Module 06 Testing, Debugging & Refactoring              | 95%    |
+| Module 10 Auth & Security, Module 14 Architecture       | 85%    |
+| Module 18 Flagship Opslane Capstone                     | 90%    |
 
 Coverage is a signal, not a substitute for meaningful assertions.
 

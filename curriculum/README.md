@@ -24,7 +24,7 @@
 | Learner Instructional Units      | 336   | 321 instructional lessons/labs + 15 Opslane milestones            |
 | Elective Items                   | 20    | 20 advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |
 | Projects                         | 28    | 27 module projects + 1 flagship capstone defense project          |
-| In-Path Assessment Checkpoints   | 57    | 16 module checkpoints + 14 Opslane checkpoints + 27 project-bound nodes |
+| In-Path Assessment Checkpoints   | 57    | 16 module checkpoints + 15 Opslane assessments + 26 project-bound nodes |
 | Assessment Registry Records      | 47    | 19 module assessments + 28 project assessments in `assessments.json`|
 | Canonical Concepts               | 62    | Fully resolved ownership without leaks in `concepts.json`         |
 | Operational Categories           | 13    | Mapped across 18 module coverage entries                          |
@@ -64,11 +64,11 @@ Curriculum completion time cannot be calculated from reading time alone. A reali
 | Activity Layer | Items | On-Paper Metadata | Realistic Learner Effort | Notes |
 | :--- | :---: | :---: | :---: | :--- |
 | **Instructional Lessons & Labs** | 321 | 238.0 hrs | 235 – 265 hrs | Reading, mental models, running code examples, review questions (Modules 00–16) |
-| **Mini-Projects** | 19 | 38.0 hrs | 40 – 75 hrs | Immediate practical reinforcement (2–4 hours per project) |
+| **Mini-Projects** | 18 | 36.0 hrs | 36 – 72 hrs | Immediate practical reinforcement (2–4 hours per project) |
 | **Portfolio Projects** | 8 | 16.0 hrs | 65 – 120 hrs | Multi-component services with tests, migrations, CI/CD (8–15 hours per project) |
-| **Flagship Opslane Milestones** | 15 | 30.0 hrs | 50 – 80 hrs | Integrated production system with auth, DB, payments, worker pools, metrics (Module 18) |
+| **Flagship Opslane Milestones & Projects** | 17 | 34.0 hrs | 55 – 85 hrs | Integrated production system with auth, DB, payments, worker pools, metrics (Module 18) |
 | **In-Path Assessments & Defense** | 57 | 57.0 hrs | 45 – 60 hrs | Self-evaluation checklists, code reviews, and capstone oral/technical defense |
-| **Core Total** | **420** | **379.0 hrs** | **435 – 600 hrs** | **Realistic full engineering workload across all 18 core modules** |
+| **Core Total** | **421** | **381.0 hrs** | **435 – 600 hrs** | **Realistic full engineering workload across all 18 core modules** |
 
 ### 2. Weekly Commitment Planning Models
 
@@ -443,8 +443,8 @@ internal/tools/curriculum/
 | 24   | concept | repository-and-service-seam | **Repository and service seam** | 45 |
 | 25   | testing | integration-tests | **Integration tests** | 45 |
 | 26   | concept | sqlc | **sqlc** | 45 |
-| 27   | concept | delete-operations | **DELETE operations** | 45 |
-| 28   | concept | update-operations | **UPDATE operations** | 45 |
+| 27   | concept | update-operations | **UPDATE operations** | 45 |
+| 28   | concept | delete-operations | **DELETE operations** | 45 |
 
 ## 10. Authentication, Authorization, and Security
 
@@ -738,8 +738,8 @@ internal/tools/curriculum/
 | 19   | Mod 11 | **URL Health Checker** | mini-project | concurrency | intermediate |
 | 20   | Mod 12 | **Observability Retrofit** | portfolio-project | reliability | advanced |
 | 21   | Mod 12 | **PII Redactor** | portfolio-project | reliability | intermediate |
-| 22   | Mod 12 | **Profile and Fix Lab** | portfolio-project | reliability | advanced |
-| 23   | Mod 13 | **Performance Analysis Lab** | mini-project | core | advanced |
+| 22   | Mod 13 | **Performance Analysis Lab** | mini-project | core | advanced |
+| 23   | Mod 13 | **Profile and Fix Lab** | portfolio-project | core | advanced |
 | 24   | Mod 14 | **Modular Refactor Review** | mini-project | architecture | advanced |
 | 25   | Mod 15 | **Dockerized Service with CI/CD** | portfolio-project | delivery | advanced |
 | 26   | Mod 16 | **Portfolio Review Pack** | portfolio-project | career | advanced |
@@ -813,7 +813,7 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 
 # Cross-References
 
-Total cross-references: **2094**
+Total cross-references: **2089**
 
 ### Style Rules
 
@@ -829,7 +829,7 @@ Total cross-references: **2094**
 | Relation      | Count | Description |
 | ------------- | ----- | ----------- |
 | related       | 944   | Bidirectional conceptual links between related lessons |
-| builds_on     | 592   | Strict directional pedagogical prerequisites |
+| builds_on     | 587   | Strict directional pedagogical prerequisites |
 | reinforced_in | 512   | Practical application links to projects and labs |
 | preview_only  | 46    | Early mental-model previews developed fully later |
 

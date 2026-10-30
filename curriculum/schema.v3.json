@@ -1,7 +1,31 @@
 {
   "$id": "https://github.com/swe-labs/the-go-engineer/curriculum/schema.v3.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "The Go Engineer Curriculum Schema v3",
+  "description": "Accepts schema_version 3.0.0 and 3.1.x. 3.0.0 files are legacy-compatible reads. 3.1.x is the active authoring version.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "document_type",
+    "curriculum_version"
+  ],
   "allOf": [
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "workspace_manifest"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "source_of_truth",
+          "files",
+          "quality_gates"
+        ]
+      }
+    },
     {
       "if": {
         "properties": {
@@ -132,7 +156,6 @@
       }
     }
   ],
-  "description": "Accepts schema_version 3.0.0 and 3.1.x. 3.0.0 files are legacy-compatible reads. 3.1.x is the active authoring version.",
   "properties": {
     "architectural_decision": {
       "type": "object"
@@ -165,9 +188,19 @@
         "curriculum_full_bundle",
         "operational_failure_taxonomy",
         "concept_ownership_registry"
-      ]
+      ],
+      "type": "string"
     },
     "failure_categories": {
+      "type": "array"
+    },
+    "files": {
+      "type": "object"
+    },
+    "generated_files": {
+      "items": {
+        "type": "string"
+      },
       "type": "array"
     },
     "items": {
@@ -188,6 +221,9 @@
     "path": {
       "type": "object"
     },
+    "policy": {
+      "type": "object"
+    },
     "projects": {
       "type": "array"
     },
@@ -202,6 +238,15 @@
       "pattern": "^(3\\.0\\.0|3\\.1\\.[0-9]+)$",
       "type": "string"
     },
+    "schema_version_policy": {
+      "type": "object"
+    },
+    "source_of_truth": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
     "status": {
       "type": "string"
     },
@@ -209,17 +254,11 @@
       "type": "object"
     }
   },
-  "required": [
-    "schema_version",
-    "document_type",
-    "curriculum_version"
-  ],
-  "title": "The Go Engineer Curriculum Schema v3",
-  "type": "object",
   "x_backward_compatibility": {
     "3.0.0_to_3.1.0": "Files at schema_version 3.0.0 are valid reads. They must be migrated to 3.1.0 before new fields are written. Generators must reject writing 3.1.0-only fields into 3.0.0 files.",
     "3.1.0_new_document_types": [
-      "concept_ownership_registry"
+      "concept_ownership_registry",
+      "operational_failure_taxonomy"
     ],
     "3.1.0_new_fields_in_projects": [
       "placement_anchor_item_id",

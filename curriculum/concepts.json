@@ -11,11 +11,11 @@
       ]
     },
     {
-      "canonical_owner": "core-01-05",
+      "canonical_owner": "core-01-04",
       "concept": "stdin/stdout/stderr",
       "preview_locations": null,
       "reinforcement_locations": [
-        "core-07-01",
+        "core-07-04",
         "core-16-03"
       ]
     },
@@ -28,12 +28,13 @@
       ]
     },
     {
-      "canonical_owner": "core-02-01",
+      "canonical_owner": "core-02-04",
       "concept": "go build",
       "preview_locations": null,
       "reinforcement_locations": [
         "core-06-01",
-        "core-07-01"
+        "core-07-01",
+        "core-15-08"
       ]
     },
     {
@@ -43,7 +44,7 @@
       "reinforcement_locations": null
     },
     {
-      "canonical_owner": "core-02-05",
+      "canonical_owner": "core-02-10",
       "concept": "compiler errors",
       "preview_locations": null,
       "reinforcement_locations": [
@@ -51,51 +52,64 @@
       ]
     },
     {
-      "canonical_owner": "core-03-12",
+      "canonical_owner": "core-03-14",
       "concept": "slice header",
       "preview_locations": null,
       "reinforcement_locations": [
-        "core-04-10",
+        "core-03-15",
+        "core-03-16",
+        "core-04-07",
         "core-05-05"
       ]
     },
     {
-      "canonical_owner": "core-03-15",
+      "canonical_owner": "core-03-22",
       "concept": "pointer semantics",
       "preview_locations": null,
       "reinforcement_locations": [
-        "core-04-01",
-        "core-05-01"
+        "core-03-23",
+        "core-04-07",
+        "core-04-08",
+        "core-05-03"
+      ]
+    },
+    {
+      "canonical_owner": "core-04-06",
+      "concept": "stack vs heap",
+      "preview_locations": [
+        "core-01-08"
+      ],
+      "reinforcement_locations": [
+        "core-13-05",
+        "core-13-06"
       ]
     },
     {
       "canonical_owner": "core-03-16",
-      "concept": "stack vs heap",
-      "preview_locations": null,
-      "reinforcement_locations": null
-    },
-    {
-      "canonical_owner": "core-04-10",
       "concept": "memory aliasing",
       "preview_locations": null,
       "reinforcement_locations": [
+        "core-04-08",
         "core-11-10"
       ]
     },
     {
-      "canonical_owner": "core-04-04",
+      "canonical_owner": "core-04-09",
       "concept": "errors as values",
       "preview_locations": null,
       "reinforcement_locations": [
-        "core-05-01",
+        "core-04-10",
+        "core-04-18",
         "core-08-08"
       ]
     },
     {
-      "canonical_owner": "core-04-05",
+      "canonical_owner": "core-04-10",
       "concept": "error wrapping",
       "preview_locations": null,
       "reinforcement_locations": [
+        "core-04-11",
+        "core-04-12",
         "core-08-11"
       ]
     },
@@ -108,28 +122,32 @@
       ]
     },
     {
-      "canonical_owner": "core-05-18",
+      "canonical_owner": "core-05-08",
       "concept": "interface semantics",
       "preview_locations": null,
       "reinforcement_locations": [
-        "core-06-01",
-        "core-07-01",
+        "core-05-09",
+        "core-05-10",
+        "core-06-08",
         "core-08-03"
       ]
     },
     {
-      "canonical_owner": "core-05-19",
+      "canonical_owner": "core-05-14",
       "concept": "nil interface",
       "preview_locations": null,
       "reinforcement_locations": [
+        "core-06-09",
         "core-08-03"
       ]
     },
     {
-      "canonical_owner": "core-05-22",
+      "canonical_owner": "core-05-17",
       "concept": "package layout",
       "preview_locations": null,
       "reinforcement_locations": [
+        "core-05-18",
+        "core-14-02",
         "core-16-02"
       ]
     },
@@ -155,38 +173,44 @@
       "canonical_owner": "core-11-22",
       "concept": "race detector",
       "preview_locations": [
-        "core-06-19"
+        "core-06-21",
+        "core-11-21"
       ],
       "reinforcement_locations": [
-        "core-11-21",
-        "core-11-23"
+        "core-11-26",
+        "opslane-10"
       ]
     },
     {
-      "canonical_owner": "core-06-07",
+      "canonical_owner": "core-06-14",
       "concept": "Delve debugger",
       "preview_locations": null,
       "reinforcement_locations": [
-        "core-06-14",
-        "core-06-19"
+        "core-06-15",
+        "core-06-16",
+        "core-06-17"
       ]
     },
     {
-      "canonical_owner": "core-07-01",
+      "canonical_owner": "core-07-07",
       "concept": "file I/O",
       "preview_locations": null,
       "reinforcement_locations": [
-        "core-07-02",
-        "core-07-03"
+        "core-07-08",
+        "core-07-09",
+        "core-07-10",
+        "core-07-11"
       ]
     },
     {
-      "canonical_owner": "core-07-10",
+      "canonical_owner": "core-07-12",
       "concept": "JSON encoding/decoding",
       "preview_locations": null,
       "reinforcement_locations": [
-        "core-08-02",
-        "core-08-05"
+        "core-07-13",
+        "core-07-14",
+        "core-07-15",
+        "core-08-02"
       ]
     },
     {
@@ -210,8 +234,9 @@
         "core-08-14"
       ],
       "reinforcement_locations": [
-        "core-11-06",
-        "core-12-03"
+        "core-11-27",
+        "core-12-03",
+        "opslane-07"
       ]
     },
     {
@@ -227,12 +252,11 @@
       "canonical_owner": "core-08-14",
       "concept": "HTTP timeouts",
       "preview_locations": [
-        "core-07-20",
-        "core-11-07"
+        "core-07-20"
       ],
       "reinforcement_locations": [
-        "core-11-06",
-        "core-11-08"
+        "core-11-07",
+        "opslane-06"
       ]
     },
     {
@@ -297,9 +321,12 @@
     {
       "canonical_owner": "core-10-14",
       "concept": "SQL injection",
-      "preview_locations": null,
-      "reinforcement_locations": [
+      "preview_locations": [
         "core-09-12"
+      ],
+      "reinforcement_locations": [
+        "project-secure-authenticated-api",
+        "opslane-03"
       ]
     },
     {
@@ -406,40 +433,54 @@
     {
       "canonical_owner": "core-13-04",
       "concept": "benchmarking",
-      "preview_locations": null,
-      "reinforcement_locations": [
+      "preview_locations": [
         "core-06-02"
-      ]
-    },
-    {
-      "canonical_owner": "core-16-04",
-      "concept": "repository pattern",
-      "preview_locations": null,
+      ],
       "reinforcement_locations": [
-        "core-09-24"
+        "project-performance-analysis-lab",
+        "project-profile-and-fix-lab"
       ]
     },
     {
-      "canonical_owner": "core-16-06",
+      "canonical_owner": "core-14-04",
+      "concept": "repository pattern",
+      "preview_locations": [
+        "core-09-24"
+      ],
+      "reinforcement_locations": [
+        "core-14-05",
+        "opslane-02",
+        "project-modular-refactor-review"
+      ]
+    },
+    {
+      "canonical_owner": "core-14-06",
       "concept": "hexagonal architecture",
       "preview_locations": null,
       "reinforcement_locations": [
-        "opslane-01"
+        "core-14-07",
+        "opslane-01",
+        "project-modular-refactor-review"
       ]
     },
     {
-      "canonical_owner": "core-16-08",
+      "canonical_owner": "core-15-08",
       "concept": "Docker multi-stage build",
-      "preview_locations": null,
+      "preview_locations": [
+        "core-09-09"
+      ],
       "reinforcement_locations": [
+        "core-15-10",
+        "project-dockerized-service-cicd",
         "opslane-14"
       ]
     },
     {
-      "canonical_owner": "core-16-12",
+      "canonical_owner": "core-15-12",
       "concept": "CI pipeline",
       "preview_locations": null,
       "reinforcement_locations": [
+        "project-dockerized-service-cicd",
         "opslane-14"
       ]
     },

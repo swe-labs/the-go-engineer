@@ -13,7 +13,7 @@ func validateSchema() {
 	fmt.Println("=== validate-schema ===")
 	ok := true
 
-	// 1. Parse all 10 canonical JSON manifests and verify metadata consistency
+	// 1. Parse all 9 canonical active JSON manifests and verify metadata consistency
 	files := []string{
 		"workspace.json",
 		"path.core.json",
@@ -24,7 +24,6 @@ func validateSchema() {
 		"concepts.json",
 		"failures.json",
 		"readme.contracts.json",
-		"migration.v2-to-v3.json",
 	}
 	for _, f := range files {
 		fullPath := fmt.Sprintf("%s/%s", curriculumDir, f)
@@ -65,6 +64,71 @@ func validateSchema() {
 			}
 		}
 		fmt.Printf("  %s: valid JSON & metadata\n", f)
+	}
+
+	// Validate schema.v3.json (the JSON Schema definition)
+	schemaPath := filepath.Join(curriculumDir, "schema.v3.json")
+	schemaData, err := os.ReadFile(schemaPath)
+	if err != nil {
+		warnf("cannot read schema.v3.json: %v", err)
+		ok = false
+	} else if !json.Valid(schemaData) {
+		warnf("schema.v3.json: invalid JSON")
+		ok = false
+	} else {
+		var schemaMeta struct {
+			ID     string `json:"$id"`
+			Schema string `json:"$schema"`
+			Title  string `json:"title"`
+		}
+		if err := json.Unmarshal(schemaData, &schemaMeta); err != nil || schemaMeta.ID == "" || schemaMeta.Schema == "" {
+			warnf("schema.v3.json: missing $id or $schema")
+			ok = false
+		} else {
+			fmt.Printf("  schema.v3.json: valid JSON Schema definition\n")
+		}
+	}
+
+	// Verify readme.contracts.json defines core contracts and anti-overengineering rules
+	var contractsBundle struct {
+		Contracts []struct {
+			ID                   string         `json:"id"`
+			AppliesTo            string         `json:"applies_to"`
+			CoreRequiredHeadings []string       `json:"core_required_headings"`
+			ContextualHeadings   []string       `json:"contextual_headings"`
+			SubtypeProfiles      map[string]any `json:"subtype_profiles"`
+		} `json:"contracts"`
+	}
+	readJSON("readme.contracts.json", &contractsBundle)
+	contractMap := make(map[string]struct {
+		CoreRequiredHeadings []string
+		ContextualHeadings   []string
+		SubtypeProfiles      map[string]any
+	})
+	for _, c := range contractsBundle.Contracts {
+		contractMap[c.ID] = struct {
+			CoreRequiredHeadings []string
+			ContextualHeadings   []string
+			SubtypeProfiles      map[string]any
+		}{c.CoreRequiredHeadings, c.ContextualHeadings, c.SubtypeProfiles}
+	}
+
+	expectedContracts := []string{"root.v3", "module.v3", "lesson.v3", "elective-lesson.v3", "project.v3", "companion-stage.v3"}
+	for _, cName := range expectedContracts {
+		c, exists := contractMap[cName]
+		if !exists {
+			warnf("readme.contracts.json: missing contract '%s'", cName)
+			ok = false
+		} else if cName == "lesson.v3" {
+			if len(c.CoreRequiredHeadings) == 0 || len(c.ContextualHeadings) == 0 {
+				warnf("readme.contracts.json: lesson.v3 missing core_required_headings or contextual_headings")
+				ok = false
+			}
+			if len(c.SubtypeProfiles) == 0 {
+				warnf("readme.contracts.json: lesson.v3 missing subtype_profiles")
+				ok = false
+			}
+		}
 	}
 
 	// 2. Read core and electives for deeper checks
@@ -191,29 +255,19 @@ func validateSchema() {
 		}
 	}
 
-	// 6. Check canonical key ordering in core JSON using byte-level tokenization
-	canonicalKeyOrder := []string{
-		"id", "module_id", "slug", "title", "type", "subtype",
-		"status", "difficulty", "phase", "order", "estimated_minutes",
-		"learning_objective", "required_prior_knowledge", "prerequisites",
-		"next_item_ids", "zero_magic", "crossrefs", "proof",
-		"content_contract", "verification", "files", "source_legacy_ids", "tags",
-	}
+	// 6. Check canonical key ordering in core JSON using byte-level tokenization (alphabetical order)
 	// Read raw file bytes for deterministic token-level key extraction
 	rawBytes, err := os.ReadFile(filepath.Join(curriculumDir, "path.core.json"))
 	if err == nil {
 		// Find items array, extract keys for each item object in file order
 		itemKeys := extractItemKeysInOrder(rawBytes)
 		for _, ik := range itemKeys {
-			var lastIdx int
-			for _, k := range ik.keys {
-				idx := indexOf(canonicalKeyOrder, k)
-				if idx < lastIdx {
-					warnf("%s: key '%s' out of canonical order (after position %d)", ik.id, k, lastIdx)
+			for i := 1; i < len(ik.keys); i++ {
+				if ik.keys[i] < ik.keys[i-1] {
+					warnf("%s: key '%s' out of canonical alphabetical order (after '%s')", ik.id, ik.keys[i], ik.keys[i-1])
 					ok = false
 					break
 				}
-				lastIdx = idx
 			}
 		}
 	} else {
@@ -305,73 +359,78 @@ type itemKeyEntry struct {
 func extractItemKeysInOrder(data []byte) []itemKeyEntry {
 	var result []itemKeyEntry
 	dec := json.NewDecoder(strings.NewReader(string(data)))
-	// Walk through the top-level object looking for "items" key
-	for {
-		t, err := dec.Token()
+
+	// Must start with top-level object '{'
+	t, err := dec.Token()
+	if err != nil {
+		return nil
+	}
+	if delim, ok := t.(json.Delim); !ok || delim != '{' {
+		return nil
+	}
+
+	for dec.More() {
+		tok, err := dec.Token()
 		if err != nil {
 			break
 		}
-		if delim, ok := t.(json.Delim); ok {
-			if delim == '{' {
-				// Read keys of this object
-				for dec.More() {
-					keyTok, err := dec.Token()
-					if err != nil {
-						break
-					}
-					key := fmt.Sprintf("%v", keyTok)
-					if key == "items" {
-						// Consume the ":" token
-						dec.Token()
-						// items should be an array
-						arrTok, err := dec.Token()
-						if err != nil {
-							break
-						}
-						if arrDelim, ok := arrTok.(json.Delim); ok && arrDelim == '[' {
-							for dec.More() {
-								// Each item is an object
-								objTok, err := dec.Token()
-								if err != nil {
-									break
-								}
-								if objDelim, ok := objTok.(json.Delim); ok && objDelim == '{' {
-									entry := itemKeyEntry{}
-									var objKeys []string
-									for dec.More() {
-										kTok, err := dec.Token()
-										if err != nil {
-											break
-										}
-										k := fmt.Sprintf("%v", kTok)
-										objKeys = append(objKeys, k)
-										if k == "id" {
-											// Read the id value
-											dec.Token() // consume ":"
-											idTok, _ := dec.Token()
-											entry.id = fmt.Sprintf("%v", idTok)
-										} else {
-											// Skip the value
-											skipValue(dec)
-										}
-									}
-									// Consume the closing }
-									dec.Token()
-									entry.keys = objKeys
-									result = append(result, entry)
-								}
-							}
-						}
-					} else {
-						skipValue(dec)
-					}
-				}
-			}
+		key, ok := tok.(string)
+		if !ok {
+			continue
 		}
-		if delim, ok := t.(json.Delim); ok && delim == '}' {
+		if key != "items" {
+			skipValue(dec)
+			continue
+		}
+
+		// 'items' value must start with '['
+		arrTok, err := dec.Token()
+		if err != nil {
 			break
 		}
+		if delim, ok := arrTok.(json.Delim); !ok || delim != '[' {
+			break
+		}
+
+		// Iterate each item in items array
+		for dec.More() {
+			itemTok, err := dec.Token()
+			if err != nil {
+				break
+			}
+			if delim, ok := itemTok.(json.Delim); !ok || delim != '{' {
+				skipValue(dec)
+				continue
+			}
+
+			entry := itemKeyEntry{}
+			for dec.More() {
+				kTok, err := dec.Token()
+				if err != nil {
+					break
+				}
+				k, ok := kTok.(string)
+				if !ok {
+					continue
+				}
+				entry.keys = append(entry.keys, k)
+				if k == "id" {
+					idTok, err := dec.Token()
+					if err == nil {
+						entry.id = fmt.Sprintf("%v", idTok)
+					}
+				} else {
+					skipValue(dec)
+				}
+			}
+			// Consume closing '}'
+			dec.Token()
+			result = append(result, entry)
+		}
+		// Consume closing ']'
+		dec.Token()
 	}
+
 	return result
 }
 

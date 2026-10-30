@@ -138,7 +138,6 @@ func validateProjectBinding() {
 	for _, p := range projects {
 		proj := p.(map[string]any)
 		projID := proj["id"].(string)
-		title := proj["title"].(string)
 
 		// Check required fields
 		requiredFields := []string{"id", "module_id", "title", "slug", "type", "prerequisites", "deliverables", "verification", "rubric"}
@@ -186,8 +185,6 @@ func validateProjectBinding() {
 			warnf("project '%s': missing assessment_id", projID)
 			ok = false
 		}
-
-		_ = title
 	}
 
 	if ok {
@@ -507,21 +504,6 @@ func validateCognitiveLoad() {
 	var electives ElectiveBundle
 	readJSON("path.core.json", &core)
 	readJSON("path.electives.json", &electives)
-
-	type moduleLoad struct {
-		ID                               string
-		CognitiveLoad                    string
-		RecommendedBreakAfter            bool
-		ContainsFoundationalHardConcepts bool
-		Pacing                           string
-	}
-	var allMods []moduleLoad
-
-	// Use raw JSON to read full module fields (our struct may not have them)
-	for range core.Modules {
-		// We use raw JSON read separately for the full field set
-	}
-	_ = allMods
 
 	// Read raw module data to check fields
 	var rawCore map[string]any
@@ -948,68 +930,40 @@ func validateCrossrefs() {
 	}
 
 	// 2. Check item-level crossrefs resolve
-	for _, item := range allItems {
-		if item.CrossRefs == nil {
-			continue
-		}
-		// Marshal to check all fields
-		crossJSON, _ := json.Marshal(item.CrossRefs)
-		var crossMap map[string]any
-		json.Unmarshal(crossJSON, &crossMap)
-
-		for _, category := range []string{"builds_on", "preview_only", "related", "reinforced_in"} {
-			refs, exists := crossMap[category]
-			if !exists {
-				continue
-			}
-			refArr, ok := refs.([]any)
-			if !ok {
-				continue
-			}
-			for _, r := range refArr {
-				ref := r.(map[string]any)
-				if targetID, exists := ref["target_id"]; exists {
-					tid := targetID.(string)
-					if _, exists := itemMap[tid]; !exists && !projectIDs[tid] {
-						warnf("%s: crossrefs.%s target '%s' does not exist", item.ID, category, tid)
-						ok = false
-					}
-				}
-			}
-		}
-	}
-
-	// 3. Check preview_only links point to valid future items
 	moduleOrder := make(map[string]int)
 	for _, m := range core.Modules {
 		moduleOrder[m.ID] = m.Number
 	}
+	for _, m := range electives.Modules {
+		moduleOrder[m.ID] = m.Number
+	}
+
 	for _, item := range allItems {
 		if item.CrossRefs == nil {
 			continue
 		}
-		crossJSON, _ := json.Marshal(item.CrossRefs)
-		var crossMap map[string]any
-		json.Unmarshal(crossJSON, &crossMap)
-
-		if previewRefs, exists := crossMap["preview_only"]; exists {
-			previewArr, ok := previewRefs.([]any)
-			if !ok {
-				continue
+		checkRefs := func(refs []CrossrefRef, category string) {
+			for _, ref := range refs {
+				if _, exists := itemMap[ref.TargetID]; !exists && !projectIDs[ref.TargetID] {
+					warnf("%s: crossrefs.%s target '%s' does not exist", item.ID, category, ref.TargetID)
+					ok = false
+				}
 			}
-			itemModNum := moduleOrder[item.ModuleID]
-			for _, r := range previewArr {
-				ref := r.(map[string]any)
-				if targetID, exists := ref["target_id"]; exists {
-					tid := targetID.(string)
-					if targetItem, exists := itemMap[tid]; exists {
-						targetModNum := moduleOrder[targetItem.ModuleID]
-						if targetModNum <= itemModNum {
-							warnf("%s: preview_only target '%s' is in module %s (order %d), not in a future module (item at order %d)",
-								item.ID, tid, targetItem.ModuleID, targetModNum, itemModNum)
-							ok = false
-						}
-					}
+		}
+		checkRefs(item.CrossRefs.BuildsOn, "builds_on")
+		checkRefs(item.CrossRefs.PreviewOnly, "preview_only")
+		checkRefs(item.CrossRefs.Related, "related")
+		checkRefs(item.CrossRefs.ReinforcedIn, "reinforced_in")
+
+		// 3. Check preview_only links point to valid future items
+		itemModNum := moduleOrder[item.ModuleID]
+		for _, ref := range item.CrossRefs.PreviewOnly {
+			if targetItem, exists := itemMap[ref.TargetID]; exists && targetItem != nil {
+				targetModNum := moduleOrder[targetItem.ModuleID]
+				if targetModNum <= itemModNum {
+					warnf("%s: preview_only target '%s' is in module %s (order %d), not in a future module (item at order %d)",
+						item.ID, ref.TargetID, targetItem.ModuleID, targetModNum, itemModNum)
+					ok = false
 				}
 			}
 		}

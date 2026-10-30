@@ -29,7 +29,7 @@ for _, url := range urls {
 
 Go 1.22+ fixes this for `for`/`range` loop variables, but the pattern remains useful for understanding older code.
 
-**Taught in:** s03 FE.9, s07 GC.1
+**Taught in:** Module 04: Functions (`core-04-08`), Module 11: Goroutines (`core-11-11`)
 
 ## 2. Using `time.Sleep` to synchronize goroutines
 
@@ -52,7 +52,7 @@ go func() {
 wg.Wait()
 ```
 
-**Taught in:** s07 GC.2
+**Taught in:** Module 11: WaitGroups & Goroutine Coordination (`core-11-12`)
 
 ## 3. Not checking `rows.Err()`
 
@@ -75,7 +75,7 @@ if err := rows.Err(); err != nil {
 }
 ```
 
-**Taught in:** s06 DB.3
+**Taught in:** Module 09: SQL Queries & Error Inspection (`core-09-10`, `core-09-13`)
 
 ## 4. Forgetting `rows.Close()`
 
@@ -99,7 +99,7 @@ if err != nil {
 defer rows.Close()
 ```
 
-**Taught in:** s06 DB.3, s02 CF.5
+**Taught in:** Module 04: Defer for Cleanup (`core-04-16`), Module 09: Connection Pool Lifecycle (`core-09-11`, `core-09-13`)
 
 ## 5. Compiling regex inside a loop
 
@@ -118,7 +118,7 @@ for _, line := range lines {
 var alertPattern = regexp.MustCompile(`ERROR|WARN`)
 ```
 
-**Taught in:** s04 ST.4, s08 PR.5
+**Taught in:** Module 07: CLI, Files & Text Processing (`core-07-06`), Module 13: Benchmark-Driven Optimization (`core-13-03`)
 
 ## 6. String concatenation with `+=` in a loop
 
@@ -141,7 +141,7 @@ for _, word := range words {
 result := builder.String()
 ```
 
-**Taught in:** s04 ST.1
+**Taught in:** Module 03: String and Memory Layouts (`core-03-19`), Module 13: Zero-Allocation Engineering (`core-13-04`)
 
 ## 7. Passing a `sync.WaitGroup` by value
 
@@ -161,7 +161,7 @@ func work(wg *sync.WaitGroup) {
 }
 ```
 
-**Taught in:** s07 GC.2
+**Taught in:** Module 05: Pointer vs Value Receivers (`core-05-03`), Module 11: WaitGroups (`core-11-12`)
 
 ## 8. Sending on a closed channel
 
@@ -174,7 +174,7 @@ ch <- value
 
 **The fix:** only the sending owner closes the channel, or redesign ownership so one goroutine is responsible for closing.
 
-**Taught in:** s07 GC.5, s07 SY.2
+**Taught in:** Module 11: Closing Channels & Channel Ownership (`core-11-15`, `core-11-16`)
 
 ## 9. Not using `%w` for error wrapping
 
@@ -190,7 +190,7 @@ return fmt.Errorf("query failed: %v", err)
 return fmt.Errorf("query failed: %w", err)
 ```
 
-**Taught in:** s03 FE.4, s04 TI.8
+**Taught in:** Module 04: Errors as Values & Custom Error Types (`core-04-09`, `core-04-18`)
 
 ## 10. HTTP server with no timeouts
 
@@ -213,7 +213,7 @@ server := &http.Server{
 }
 ```
 
-**Taught in:** s06 HS.7
+**Taught in:** Module 08: Server Timeouts & Production HTTP (`core-08-14`)
 
 ## 11. HTTP client with no timeout
 
@@ -230,7 +230,7 @@ client := &http.Client{Timeout: 10 * time.Second}
 resp, err := client.Get(url)
 ```
 
-**Taught in:** s06 HS.1, s07 CT.5
+**Taught in:** Module 08: HTTP Clients (`core-08-02`, `core-08-15`), Module 11: Context Deadlines & Cancellation (`core-11-06`)
 
 ## 12. Ignoring close errors on write paths
 
@@ -250,7 +250,7 @@ defer func() {
 }()
 ```
 
-**Taught in:** s05 FS.1, s02 CF.5
+**Taught in:** Module 04: Defer Mechanics (`core-04-16`), Module 07: Files and Filesystem I/O (`core-07-07`)
 
 ## 13. Not canceling a context
 
@@ -267,7 +267,7 @@ ctx, cancel := context.WithTimeout(parent, 5*time.Second)
 defer cancel()
 ```
 
-**Taught in:** s07 CT.3
+**Taught in:** Module 11: Context Cancellation and Timeouts (`core-11-06`, `core-11-07`)
 
 ## 14. Concurrent map read/write without synchronization
 
@@ -282,7 +282,7 @@ from different goroutines.
 
 **The fix:** protect the map with `sync.Mutex`, `sync.RWMutex`, channels, or `sync.Map` when appropriate.
 
-**Taught in:** s07 SY.1, s07 SY.4
+**Taught in:** Module 03: Maps (`core-03-17`), Module 11: Mutex, RWMutex & Race Detection (`core-11-19`, `core-11-21`)
 
 ## 15. `log.Fatal` inside a goroutine
 
@@ -300,7 +300,7 @@ go func() {
 
 **The fix:** report the error to a coordinator and let `main` decide how to shut down.
 
-**Taught in:** s03 FE.10, s10 GS.1
+**Taught in:** Module 04: Panic and Recover Mechanics (`core-04-17`), Module 11: Graceful Shutdown & Goroutine Leaks (`core-11-04`, `core-11-23`)
 
 ## Required Checks
 

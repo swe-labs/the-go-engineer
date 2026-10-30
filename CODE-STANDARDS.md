@@ -227,7 +227,7 @@ i++ // Increment i
 When a lesson uses a concept taught elsewhere, reference the lesson ID:
 
 ```go
-// context.WithTimeout is covered in CT.3. Here we use it to prevent the query
+// context.WithTimeout is covered in core-11-03. Here we use it to prevent the query
 // from running indefinitely when the database is slow.
 ```
 

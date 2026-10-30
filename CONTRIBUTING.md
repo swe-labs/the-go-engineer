@@ -110,23 +110,40 @@ Examples:
 
 Keep commits logical. Do not mix unrelated formatting, docs, and behavior changes unless the PR is explicitly a repository-wide cleanup.
 
-## Lesson Contract
+## Lesson Contract & Anti-Overengineering Standards
 
-Every learner-facing lesson README must include these sections in order:
+All instructional READMEs conform to the canonical pedagogical contract defined in [`curriculum/readme.contracts.json`](./curriculum/readme.contracts.json) and enforced by the zero-magic curriculum architecture.
 
-1. `## Mission`
-2. `## Prerequisites`
-3. `## Mental Model`
-4. `## Visual Model`
-5. `## Machine View`
-6. `## Run Instructions`
-7. `## Code Walkthrough`
-8. `## Try It`
-9. `## In Production`
-10. `## Thinking Questions`
-11. `## Next Step`
+### 1. Core Required Headings (Mandatory for All Lessons)
+Every lesson README must include these 6 core sections in order:
+1. `## Mission` — Clear statement of what the learner will build, understand, and prove.
+2. `## Prerequisites` — Explicit concepts or previous lesson IDs required.
+3. `## Mental Model` — Zero-magic foundation of how the machine/runtime operates.
+4. `## Code Walkthrough` — Line-by-line explanation of the code (`## Solution Walkthrough` for exercises/projects).
+5. `## In Production` — Real-world trade-offs, operational considerations, or telemetry.
+6. `## Next Steps` — Direct link and progression to the next lesson or project milestone.
 
-Exercises replace `## Code Walkthrough` with `## Solution Walkthrough` and include `## Verification Surface`.
+### 2. Contextual Headings (Applied by Subtype Profile)
+To prevent cognitive overload and avoid artificial padding, the remaining 11 headings are included only when justified by cognitive necessity and the lesson's subtype profile:
+- `## Visual Model` — Mermaid diagram visualizing lifecycle, topology, or data flow.
+- `## Memory Layout` — Stack vs heap allocations, struct padding, or pointer indirection.
+- `## Physical Timeline` — Execution trace or concurrency sequence diagram.
+- `## Machine View` — OS syscalls, assembly snippets, or runtime scheduler events.
+- `## Common Failure Modes` — Root causes, compiler errors, or panic scenarios.
+- `## Edge Cases` — Boundary conditions, zero values, or overflow behaviors.
+- `## Benchmark & Allocation Analysis` — Benchmarks and zero-alloc profiling.
+- `## Production Notes` — Hardened configuration, rate limits, or deployment caveats.
+- `## Review Questions & Explanations` — Self-assessment questions with answers.
+- `## Verification Surface` — Automated test commands, test cases, and assertions (required for exercises/projects).
+- `## Portfolio Artifact` — Deliverables, architecture notes, and defense rubrics (required for capstones).
+
+### 3. Subtype Profiles
+- `conceptual` — Focuses on mental models, core walkthrough, and production context.
+- `pattern` — Emphasizes visual models, common failure modes, and idioms.
+- `deep-dive` — Adds memory layouts, machine views, and allocation analysis.
+- `exercise` — Replaces code walkthrough with solution walkthrough and verification surface.
+- `project` — Multi-file architecture with verification surface and test suite.
+- `capstone` — Comprehensive systems capstone with portfolio artifacts and operational rubrics.
 
 Every lesson `main.go` should include:
 

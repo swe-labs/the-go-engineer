@@ -203,6 +203,16 @@
           "criterion": "Diagnostic quality",
           "description": "Systematic diagnostic approach: identifying symptoms, isolating causes, applying fixes.",
           "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Terminal outputs, diagnostic logs, and verification commands prove each failure mode was reproduced and resolved.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear explanation of each failure mechanism, toolchain interaction, and resolution step.",
+          "weight": 15
         }
       ],
       "slug": "tooling-failure-lab",
@@ -3828,7 +3838,7 @@
       "id": "project-pii-redactor",
       "module_id": "module-12",
       "order": 19,
-      "placement_anchor_item_id": "core-12-20",
+      "placement_anchor_item_id": "core-12-12",
       "portfolio": {
         "architecture_defense_required": false,
         "artifact_description": "PII Redactor can be used as a learning proof artifact.",
@@ -3866,14 +3876,6 @@
         "core-12-07",
         "core-12-08",
         "core-12-09",
-        "core-13-01",
-        "core-13-02",
-        "core-13-03",
-        "core-13-04",
-        "core-13-05",
-        "core-13-06",
-        "core-13-07",
-        "core-13-08",
         "core-12-10",
         "core-12-11",
         "core-12-12"
@@ -4041,7 +4043,7 @@
       "id": "project-observability-retrofit",
       "module_id": "module-12",
       "order": 20,
-      "placement_anchor_item_id": "core-12-20",
+      "placement_anchor_item_id": "core-12-12",
       "portfolio": {
         "architecture_defense_required": false,
         "artifact_description": "Observability Retrofit can be used as a learning proof artifact.",
@@ -4079,14 +4081,6 @@
         "core-12-07",
         "core-12-08",
         "core-12-09",
-        "core-13-01",
-        "core-13-02",
-        "core-13-03",
-        "core-13-04",
-        "core-13-05",
-        "core-13-06",
-        "core-13-07",
-        "core-13-08",
         "core-12-10",
         "core-12-11",
         "core-12-12"
@@ -4252,9 +4246,9 @@
       "difficulty": "advanced",
       "documentation_mode": "project",
       "id": "project-profile-and-fix-lab",
-      "module_id": "module-12",
+      "module_id": "module-13",
       "order": 21,
-      "placement_anchor_item_id": "core-12-20",
+      "placement_anchor_item_id": "core-13-08",
       "portfolio": {
         "architecture_defense_required": false,
         "artifact_description": "Profile and Fix Lab can be used as a learning proof artifact.",
@@ -4263,14 +4257,14 @@
         "readme_required": true
       },
       "prerequisite_item_ids": [
-        "core-12-01",
-        "core-12-02",
-        "core-12-03"
+        "core-13-01",
+        "core-13-02",
+        "core-13-03"
       ],
       "prerequisites": [
-        "core-12-01",
-        "core-12-02",
-        "core-12-03"
+        "core-13-01",
+        "core-13-02",
+        "core-13-03"
       ],
       "readme_contract": {
         "contract_id": "project.v3",
@@ -4279,19 +4273,12 @@
       },
       "readme_status": "reviewed",
       "reinforcement_targets": [
-        "structured logging",
-        "distributed tracing"
+        "CPU profiling",
+        "heap allocation optimization",
+        "escape analysis",
+        "sync.Pool memory reuse"
       ],
       "reinforces": [
-        "core-12-01",
-        "core-12-02",
-        "core-12-03",
-        "core-12-04",
-        "core-12-05",
-        "core-12-06",
-        "core-12-07",
-        "core-12-08",
-        "core-12-09",
         "core-13-01",
         "core-13-02",
         "core-13-03",
@@ -4299,14 +4286,14 @@
         "core-13-05",
         "core-13-06",
         "core-13-07",
-        "core-13-08",
-        "core-12-10",
-        "core-12-11",
-        "core-12-12"
+        "core-13-08"
       ],
       "required_concepts": [
-        "structured logging",
-        "distributed tracing"
+        "pprof profiling",
+        "benchmarking performance",
+        "memory allocation",
+        "escape analysis",
+        "sync.Pool"
       ],
       "rubric": [
         {
@@ -4392,9 +4379,9 @@
       ],
       "slug": "profile-and-fix-lab",
       "source_legacy_ids": [],
-      "stage": "reliability",
+      "stage": "core",
       "status": "ready",
-      "summary": "Profile a Go application with pprof, identify performance bottlenecks, and optimize CPU and memory usage.",
+      "summary": "Profile a CPU and memory bottlenecked Go batch-processing application using pprof, identify heap allocation hotspots, and apply mechanical optimizations to eliminate GC pressure.",
       "tasks": [
         {
           "done_when": [
@@ -4402,7 +4389,7 @@
             "The main behavior matches the README requirements."
           ],
           "files_touched": [
-            "12-observability-performance-reliability"
+            "13-performance-memory-engineering"
           ],
           "id": "project-profile-and-fix-lab-task-build",
           "instruction": "Use pprof to profile a Go application, identify CPU and memory bottlenecks, and apply targeted optimizations.",
@@ -4416,7 +4403,7 @@
             "At least one edge case or failure path is checked."
           ],
           "files_touched": [
-            "12-observability-performance-reliability"
+            "13-performance-memory-engineering"
           ],
           "id": "project-profile-and-fix-lab-task-test",
           "instruction": "Write benchmarks that measure before/after performance and verify improvement without correctness regression.",
@@ -4430,7 +4417,7 @@
             "A reviewer can run or inspect the project without guessing."
           ],
           "files_touched": [
-            "12-observability-performance-reliability"
+            "13-performance-memory-engineering"
           ],
           "id": "project-profile-and-fix-lab-task-explain",
           "instruction": "Document your profiling process: flame graph analysis, identified bottleneck, fix applied, and measured improvement.",
@@ -4450,8 +4437,8 @@
           "Check rubric."
         ],
         "mode": "mixed",
-        "run_command": "go run ./cmd/server/main.go",
-        "test_command": "go test ./..."
+        "run_command": "go run .",
+        "test_command": "go test -v ./..."
       }
     },
     {
@@ -5303,6 +5290,10 @@
       "documentation_mode": "tutorial",
       "id": "project-course-setup",
       "module_id": "module-00",
+      "placement_anchor_item_id": "core-00-10",
+      "prerequisite_item_ids": [
+        "core-00-10"
+      ],
       "prerequisites": [
         "core-00-10"
       ],
@@ -5378,15 +5369,20 @@
       "documentation_mode": "tutorial",
       "id": "project-performance-analysis-lab",
       "module_id": "module-13",
+      "placement_anchor_item_id": "core-13-08",
+      "prerequisite_item_ids": [
+        "core-13-01",
+        "core-13-04"
+      ],
       "prerequisites": [
         "core-13-01",
         "core-13-04"
       ],
       "readme_status": "reviewed",
       "reinforcement_targets": [
-        "core-13-10",
-        "core-13-13",
-        "core-13-14"
+        "CPU and heap profiling",
+        "escape analysis and stack allocation",
+        "benchmark-driven optimization"
       ],
       "required_concepts": [
         "pprof profiling",
@@ -5455,6 +5451,10 @@
       "documentation_mode": "tutorial",
       "id": "project-advanced-electives",
       "module_id": "module-17",
+      "placement_anchor_item_id": "elective-20",
+      "prerequisite_item_ids": [
+        "core-16-15"
+      ],
       "prerequisites": [
         "core-16-15"
       ],

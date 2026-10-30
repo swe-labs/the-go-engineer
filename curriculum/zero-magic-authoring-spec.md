@@ -13,8 +13,38 @@ mechanically. This spec defines the pedagogical contract for all curriculum cont
 
 A learner should never write code they cannot explain step by step.
 
-If a learner can complete an exercise but cannot describe _what happens in memory_,
+If a learner can complete an exercise but cannot describe _what happens in physical memory_,
 _what happens over time_, or _what happens on failure_, the lesson has failed.
+
+---
+
+## The Universal Physical Footprint Standard (The 6 Physical Pillars)
+
+Every lesson introducing Go primitives, data structures, concurrency, collections, or I/O MUST ground the concept in its physical machine reality:
+
+1. **Pillar 1: Primitives & Zero-Value Hardware Guarantee**:
+   - State size in bytes and bits (e.g. `uint8` = 1 byte/8 bits; `int64` = 8 bytes/64 bits) and word boundary alignment.
+   - Explain the physical **Zero-Value Guarantee**: Contiguous memory initialized by the Go runtime to all binary zeros (`00000000`). It is not "empty" or "null"; it is a concrete bit pattern (`0`, `false`, `nil`).
+   - Explain **Type Projection**: Bits have no intrinsic meaning; the type system instructs the compiler how many bytes to read and how to project those bits into meaningful operations.
+2. **Pillar 2: Composite Descriptors & Machine Headers**:
+   - Slices: 24-byte header (`*data`, `len`, `cap`) pointing to a contiguous backing array.
+   - Strings: 16-byte header (`*data`, `len`) pointing to read-only byte arrays.
+   - Interfaces: 16-byte header (`*itab`, `*data`). Passing a value to an interface forces heap allocation so `*data` holds a valid pointer.
+3. **Pillar 3: Concurrency Engine Physical Footprint**:
+   - Goroutines: 2,048-byte (2 KB) contiguous initial stack frame + runtime `g` struct descriptor (~376–400B). Depth triggers contiguous stack doubling on the heap. Provide capacity math ($N \times \text{bytes}$).
+   - Channels (`hchan`): ~96B struct with circular ring buffer `buf`, 8B spinlock `lock mutex`, and `waitq` doubly linked lists with `sudog` (~152B each).
+   - Mutexes (`sync.Mutex`): 8 bytes (4B `state` bitmask + 4B `sema`).
+4. **Pillar 4: Hash Table Mechanics & Bucket Topology (`map`)**:
+   - `hmap` pointer (48B) pointing to array of `bmap` buckets (8 key-value pairs per bucket).
+   - Deleting keys (`delete(m, key)`) sets tombstones but **never frees bucket memory back to the OS**.
+5. **Pillar 5: Hardware Physics & Cache Lines**:
+   - 64-byte L1/L2/L3 CPU cache lines.
+   - Multi-core false sharing: insert 64-byte padding (`_ [56]byte` or `cpu.CacheLinePad`) between hot multi-core fields.
+   - Struct field ordering: order descending by size (8B, 4B, 2B, 1B) to eliminate compiler zero-padding bloat.
+6. **Pillar 6: I/O, Network & OS Buffers**:
+   - `bufio` 4,096-byte (4 KB) page buffers.
+   - OS kernel socket buffers (`SO_RCVBUF`, `SO_SNDBUF`, 128KB–2MB).
+   - Draining `resp.Body` to `io.Discard` before closing prevents TCP resets (`RST`), keeping keep-alive connection pools alive.
 
 ---
 
@@ -118,6 +148,40 @@ Eliminate magic by requiring learners to:
 - Trace execution timelines
 - Walk through failure scenarios
 - Read and explain source code before writing it
+
+### 5. Spec-Driven Authoring Protocol
+
+All instructional authoring must follow the 4-step engineering pipeline:
+1. **Specification Contract**: Define measurable behavioral objectives and exact physical preconditions.
+2. **Table-Driven TDD Test Scaffold**: Construct table-driven test cases covering nominal, boundary, and failure conditions.
+3. **Hardware-Grounded Implementation & Prose**: Write the mechanical narrative and complete runnable Go code.
+4. **Quality Gate Audit**: Verify against all 17 automated quality gates (`go run ./scripts/validate_curriculum.go`).
+
+### 6. Cognitive Anchor Quotes Standard
+
+To anchor difficult systems mental models, integrate authoritative aphorisms from computing pioneers:
+- *"Simplicity is prerequisite for reliability."* — Edsger W. Dijkstra (clean minimal interfaces, clean domain boundaries)
+- *"There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies..."* — C.A.R. Hoare (zero-magic mechanics)
+- *"Clear is better than clever."* — Rob Pike (explicit error handling `if err != nil`)
+- *"Debugging is twice as hard as writing the code in the first place..."* — Brian Kernighan (Delve inspection over clever code)
+
+### 7. 3-Tier Clean Domain Architecture Standard for Capstones
+
+All capstones and backend service projects must strictly decouple:
+- `transport/`: HTTP handlers, routing, JSON parsing, status codes. Enforces boundary sanitization; never passes raw `*http.Request` into domain entities.
+- `domain/`: Pure business entities, state invariants, domain errors, repository interfaces. Never imports transport or database drivers.
+- `repo/`: Implements domain storage interfaces using SQL/caching.
+
+### 8. Delve (`dlv`) Runtime Inspection Standard
+
+Debugging walkthroughs must feature real Delve (`dlv`) stack frame navigation commands (`frame`, `locals`, `goroutines`, `goroutine <id> stack`) rather than defaulting to scattershot `fmt.Println` print debugging.
+
+### 9. Anti-Overengineering & Anti-Slop Directive
+
+Do not force all 17 headings onto a lesson if the subject matter does not warrant them. Forcing an orientation lesson, shell introduction, or career strategy document to invent a fake `Performance implications` or fake `Under the hood` produces **artificial template slop**, violating zero-magic principles. Omit non-applicable sections rather than populating them with placeholder filler. Always respect the item's `content_contract` flags and `subtype_profiles` defined in `curriculum/readme.contracts.json`.
+
+- **6 Core Invariant Headings**: Mandatory across ALL lessons (`Learning objective`, `Why this matters`, `Mental model`, `Common mistakes`, `Review questions`, `NEXT UP`).
+- **11 Contextual Headings**: Enforced only when applicable based on `subtype` and `content_contract` flags.
 
 ---
 
