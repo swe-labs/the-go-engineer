@@ -18,6 +18,9 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/a-h/templ"
+	"github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-04-htmx-alpine/datastar/components"
 )
 
 //go:embed templates/*.html
@@ -27,25 +30,10 @@ var defaultTemplatesFS embed.FS
 var defaultStaticFS embed.FS
 
 // Task represents a unit of work processed by the background worker pool.
-type Task struct {
-	ID          int
-	Type        string
-	Status      string // "QUEUED", "RUNNING", "COMPLETED", "CANCELLED"
-	StatusLower string
-	WorkerID    int
-	Duration    time.Duration
-	DurationStr string
-	CreatedAt   time.Time
-}
+type Task = components.Task
 
 // MetricsSnapshot represents system and worker runtime stats.
-type MetricsSnapshot struct {
-	ActiveWorkers int
-	TotalWorkers  int
-	QueueDepth    int
-	CompletedJobs int64
-	Goroutines    int
-}
+type MetricsSnapshot = components.MetricsSnapshot
 
 // DatastarSSE provides zero-dependency helpers to stream Datastar v1.0 Server-Sent Events.
 type DatastarSSE struct {
@@ -92,6 +80,15 @@ func (d *DatastarSSE) PatchElements(elements string, selector string, mode strin
 		d.flusher.Flush()
 	}
 	return err
+}
+
+// PatchComponent renders a type-safe templ.Component and streams a `datastar-patch-elements` event.
+func (d *DatastarSSE) PatchComponent(ctx context.Context, c templ.Component, selector string, mode string) error {
+	var buf bytes.Buffer
+	if err := c.Render(ctx, &buf); err != nil {
+		return err
+	}
+	return d.PatchElements(buf.String(), selector, mode)
 }
 
 // PatchSignals formats and streams a `datastar-patch-signals` SSE event.
@@ -172,6 +169,16 @@ func (b *SSEBroker) BroadcastPatchElements(elements string, selector string, mod
 	buf.WriteByte('\n')
 
 	b.BroadcastRaw(buf.String())
+}
+
+// BroadcastComponent renders a type-safe templ.Component and broadcasts a `datastar-patch-elements` event.
+func (b *SSEBroker) BroadcastComponent(ctx context.Context, c templ.Component, selector string, mode string) error {
+	var buf bytes.Buffer
+	if err := c.Render(ctx, &buf); err != nil {
+		return err
+	}
+	b.BroadcastPatchElements(buf.String(), selector, mode)
+	return nil
 }
 
 // WorkerPool manages concurrent goroutines executing background tasks.
@@ -295,20 +302,41 @@ func (wp *WorkerPool) runWorker(workerID int) {
 
 func (wp *WorkerPool) broadcastLog(msg string) {
 	now := time.Now().Format("15:04:05")
+	if wp.templates == nil {
+		var buf bytes.Buffer
+		if err := components.LogEntry(now, msg, false).Render(context.Background(), &buf); err == nil {
+			wp.broker.BroadcastPatchElements(buf.String(), "#log-stream", "append")
+		}
+		return
+	}
 	entryHTML := fmt.Sprintf(`<div class="log-entry"><span class="log-time font-mono">%s</span><span class="log-msg">%s</span></div>`, now, msg)
 	wp.broker.BroadcastPatchElements(entryHTML, "#log-stream", "append")
 }
 
 func (wp *WorkerPool) broadcastTaskRow(task *Task) {
+	selector := fmt.Sprintf("#task-%d", task.ID)
+	if wp.templates == nil {
+		var buf bytes.Buffer
+		if err := components.TaskRow(task).Render(context.Background(), &buf); err == nil {
+			wp.broker.BroadcastPatchElements(buf.String(), selector, "outer")
+		}
+		return
+	}
 	var buf bytes.Buffer
 	_ = wp.templates.ExecuteTemplate(&buf, "task_row.html", task)
-	selector := fmt.Sprintf("#task-%d", task.ID)
 	wp.broker.BroadcastPatchElements(buf.String(), selector, "outer")
 }
 
 func (wp *WorkerPool) broadcastMetrics() {
-	var buf bytes.Buffer
 	snap := wp.Snapshot()
+	if wp.templates == nil {
+		var buf bytes.Buffer
+		if err := components.MetricsCard(snap).Render(context.Background(), &buf); err == nil {
+			wp.broker.BroadcastPatchElements(buf.String(), "#metrics-panel", "outer")
+		}
+		return
+	}
+	var buf bytes.Buffer
 	_ = wp.templates.ExecuteTemplate(&buf, "metrics_card.html", snap)
 	wp.broker.BroadcastPatchElements(buf.String(), "#metrics-panel", "outer")
 }
@@ -423,15 +451,22 @@ func (s *DashboardServer) handleDashboard(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	metrics := s.pool.Snapshot()
+	tasks := s.pool.ListTasks()
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	if s.templates == nil {
+		_ = components.Dashboard(metrics, tasks).Render(r.Context(), w)
+		return
+	}
+
 	data := struct {
 		Metrics MetricsSnapshot
 		Tasks   []*Task
 	}{
-		Metrics: s.pool.Snapshot(),
-		Tasks:   s.pool.ListTasks(),
+		Metrics: metrics,
+		Tasks:   tasks,
 	}
-
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	_ = s.templates.ExecuteTemplate(w, "dashboard.html", data)
 }
 
@@ -483,6 +518,13 @@ func (s *DashboardServer) handleTasks(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		if s.templates == nil {
+			_ = sse.PatchComponent(r.Context(), components.TaskRow(task), "#tasks-table-body", "prepend")
+			_ = sse.PatchComponent(r.Context(), components.MetricsCard(s.pool.Snapshot()), "#metrics-panel", "outer")
+			_ = sse.PatchSignals(`{"modalOpen": false}`)
+			return
+		}
+
 		// 1. Prepend new task row to table
 		var taskBuf bytes.Buffer
 		_ = s.templates.ExecuteTemplate(&taskBuf, "task_row.html", task)
@@ -500,6 +542,12 @@ func (s *DashboardServer) handleTasks(w http.ResponseWriter, r *http.Request) {
 	case http.MethodGet:
 		tasks := s.pool.ListTasks()
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		if s.templates == nil {
+			for _, t := range tasks {
+				_ = components.TaskRow(t).Render(r.Context(), w)
+			}
+			return
+		}
 		for _, t := range tasks {
 			_ = s.templates.ExecuteTemplate(w, "task_row.html", t)
 		}
@@ -532,9 +580,14 @@ func (s *DashboardServer) handleTaskActions(w http.ResponseWriter, r *http.Reque
 			return
 		}
 
+		selector := fmt.Sprintf("#task-%d", task.ID)
+		if s.templates == nil {
+			_ = sse.PatchComponent(r.Context(), components.TaskRow(task), selector, "outer")
+			return
+		}
+
 		var rowBuf bytes.Buffer
 		_ = s.templates.ExecuteTemplate(&rowBuf, "task_row.html", task)
-		selector := fmt.Sprintf("#task-%d", task.ID)
 		_ = sse.PatchElements(rowBuf.String(), selector, "outer")
 		return
 	}
@@ -545,7 +598,17 @@ func (s *DashboardServer) handleTaskActions(w http.ResponseWriter, r *http.Reque
 func (s *DashboardServer) handleMetrics(w http.ResponseWriter, r *http.Request) {
 	snap := s.pool.Snapshot()
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	if s.templates == nil {
+		_ = components.MetricsCard(snap).Render(r.Context(), w)
+		return
+	}
 	_ = s.templates.ExecuteTemplate(w, "metrics_card.html", snap)
+}
+
+// RenderComponent renders a type-safe templ.Component directly to the response writer.
+func (s *DashboardServer) RenderComponent(w http.ResponseWriter, r *http.Request, c templ.Component) error {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	return c.Render(r.Context(), w)
 }
 
 func (s *DashboardServer) handleSSE(w http.ResponseWriter, r *http.Request) {
@@ -559,8 +622,13 @@ func (s *DashboardServer) handleSSE(w http.ResponseWriter, r *http.Request) {
 	defer s.broker.Unsubscribe(clientCh)
 
 	// Send initial connection log entry via Datastar patch elements
-	initLog := fmt.Sprintf(`<div class="log-entry log-system"><span class="log-time font-mono">%s</span><span class="log-msg">[Datastar] Live SSE stream established with browser</span></div>`, time.Now().Format("15:04:05"))
-	_ = sse.PatchElements(initLog, "#log-stream", "append")
+	now := time.Now().Format("15:04:05")
+	if s.templates == nil {
+		_ = sse.PatchComponent(r.Context(), components.LogEntry(now, "[Datastar] Live SSE stream established with browser", true), "#log-stream", "append")
+	} else {
+		initLog := fmt.Sprintf(`<div class="log-entry log-system"><span class="log-time font-mono">%s</span><span class="log-msg">[Datastar] Live SSE stream established with browser</span></div>`, now)
+		_ = sse.PatchElements(initLog, "#log-stream", "append")
+	}
 
 	notify := r.Context().Done()
 	for {

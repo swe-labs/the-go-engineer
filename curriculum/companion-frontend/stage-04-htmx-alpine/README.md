@@ -95,29 +95,88 @@ Local UI states (modals, dropdowns, drawer accordions) stay on the client using 
 </div>
 ```
 
+### 5. The GOTH Architecture: Type-Safe `templ` Component Streaming
+In production architectures, hand-crafted HTML strings or unvalidated `html/template` strings risk runtime syntax errors and escaping issues. This starter includes a complete **GOTH (Go + Orchestration/Tailwind + Templ + HTMX)** pipeline located in [`components/`](./components):
+
+```go
+// Render and stream a type-safe templ.Component over SSE
+func (b *SSEBroker) BroadcastComponent(ctx context.Context, event string, c templ.Component) error {
+    var buf bytes.Buffer
+    if err := c.Render(ctx, &buf); err != nil {
+        return err
+    }
+    b.Broadcast(event, buf.String())
+    return nil
+}
+```
+
+Components are compile-time checked pure Go structs generated from `.templ` definitions:
+```templ
+// components/task_row.templ
+package components
+
+templ TaskRow(t *Task) {
+    <tr id={ fmt.Sprintf("task-%d", t.ID) } class={ fmt.Sprintf("task-row status-%s", t.StatusLower) }>
+        <td class="font-mono text-muted text-xs">{ fmt.Sprintf("#%d", t.ID) }</td>
+        <td class="font-semibold">{ t.Type }</td>
+        <td>
+            <span class={ fmt.Sprintf("status-badge badge-%s", t.StatusLower) }>
+                { t.Status }
+            </span>
+        </td>
+        ...
+        <td class="text-right">
+            if t.Status == "QUEUED" || t.Status == "RUNNING" {
+                <button
+                    type="button"
+                    class="btn-action-cancel"
+                    hx-post={ fmt.Sprintf("/tasks/%d/cancel", t.ID) }
+                    hx-target={ fmt.Sprintf("#task-%d", t.ID) }
+                    hx-swap="outerHTML"
+                >
+                    Cancel
+                </button>
+            }
+        </td>
+    </tr>
+}
+```
+
+When initialized without runtime templates (`tmpl = nil`), the server runs in **pure compile-time type-safe mode**, rendering directly to `http.ResponseWriter` with zero reflection and zero runtime template parsing.
+
 ---
 
 ## 3. Directory Structure
 
 ```
 stage-04-htmx-alpine/
+├── components/           # Type-Safe templ component library (GOTH stack)
+│   ├── components_test.go # Comprehensive unit tests for templ components
+│   ├── dashboard.templ   # Root HTML dashboard layout in templ
+│   ├── dashboard_templ.go # Generated Go source code
+│   ├── metrics_card.templ # Reactive metrics card with OOB swap support
+│   ├── metrics_card_templ.go
+│   ├── task_row.templ    # Granular partial table row & log entry
+│   ├── task_row_templ.go
+│   └── types.go          # Domain types (Task, MetricsSnapshot)
 ├── static/
 │   ├── alpine.min.js     # Vendor Alpine.js v3.14 (offline)
 │   ├── htmx.min.js       # Vendor HTMX v1.9.12 (offline)
 │   ├── sse.js            # Vendor HTMX SSE extension (offline)
 │   └── style.css         # Modern dark dashboard & status styles
-├── templates/
+├── templates/            # Standard html/template files (for comparison)
 │   ├── dashboard.html    # Full dashboard view with SSE connection
 │   ├── metrics_card.html # Metrics partial (supports OOB swaps)
 │   └── task_row.html     # Individual task table row fragment
 ├── datastar/             # Modern Alternative: Pure SSE & Datastar signals variant
+│   ├── components/       # Datastar-native templ component library (GOTD stack)
 │   ├── static/           # Vendored datastar.js (~13 KB single script)
 │   ├── templates/        # Datastar-native templates
 │   ├── main.go           # Server streaming datastar-patch-elements
-│   ├── main_test.go      # Datastar test suite
+│   ├── main_test.go      # Datastar test suite (html/template + templ modes)
 │   └── README.md         # Datastar guide & HTMX comparison
-├── main.go               # Worker pool, SSE broker, and handlers
-├── main_test.go          # SSE, OOB swaps, and concurrency tests
+├── main.go               # Worker pool, SSE broker, and handlers (dual-mode)
+├── main_test.go          # SSE, OOB swaps, concurrency, and templ mode tests
 └── README.md             # This guide
 ```
 

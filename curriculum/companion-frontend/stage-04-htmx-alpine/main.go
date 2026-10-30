@@ -16,6 +16,9 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/a-h/templ"
+	"github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-04-htmx-alpine/components"
 )
 
 //go:embed templates/*.html
@@ -25,26 +28,10 @@ var defaultTemplatesFS embed.FS
 var defaultStaticFS embed.FS
 
 // Task represents a unit of work processed by the background worker pool.
-type Task struct {
-	ID          int
-	Type        string
-	Status      string // "QUEUED", "RUNNING", "COMPLETED", "CANCELLED"
-	StatusLower string
-	WorkerID    int
-	Duration    time.Duration
-	DurationStr string
-	CreatedAt   time.Time
-}
+type Task = components.Task
 
 // MetricsSnapshot represents system and worker runtime stats.
-type MetricsSnapshot struct {
-	ActiveWorkers int
-	TotalWorkers  int
-	QueueDepth    int
-	CompletedJobs int64
-	Goroutines    int
-	OOB           bool // Out-Of-Band swap flag for HTMX
-}
+type MetricsSnapshot = components.MetricsSnapshot
 
 // SSEBroker coordinates Server-Sent Events subscribers.
 type SSEBroker struct {
@@ -87,6 +74,16 @@ func (b *SSEBroker) Broadcast(event, data string) {
 			// Non-blocking drop if client is saturated
 		}
 	}
+}
+
+// BroadcastComponent renders a type-safe templ.Component and broadcasts it over SSE.
+func (b *SSEBroker) BroadcastComponent(ctx context.Context, event string, c templ.Component) error {
+	var buf bytes.Buffer
+	if err := c.Render(ctx, &buf); err != nil {
+		return err
+	}
+	b.Broadcast(event, buf.String())
+	return nil
 }
 
 // WorkerPool manages concurrent goroutines executing background tasks.
@@ -204,13 +201,27 @@ func (wp *WorkerPool) runWorker(workerID int) {
 
 func (wp *WorkerPool) broadcastLog(msg string) {
 	now := time.Now().Format("15:04:05")
+	if wp.templates == nil {
+		var buf bytes.Buffer
+		if err := components.LogEntry(now, msg, false).Render(context.Background(), &buf); err == nil {
+			wp.broker.Broadcast("log", buf.String())
+		}
+		return
+	}
 	entryHTML := fmt.Sprintf(`<div class="log-entry"><span class="log-time font-mono">%s</span><span class="log-msg">%s</span></div>`, now, msg)
 	wp.broker.Broadcast("log", entryHTML)
 }
 
 func (wp *WorkerPool) broadcastMetrics() {
-	var buf bytes.Buffer
 	snap := wp.Snapshot(false)
+	if wp.templates == nil {
+		var buf bytes.Buffer
+		if err := components.MetricsCard(snap).Render(context.Background(), &buf); err == nil {
+			wp.broker.Broadcast("metric", buf.String())
+		}
+		return
+	}
+	var buf bytes.Buffer
 	_ = wp.templates.ExecuteTemplate(&buf, "metrics_card.html", snap)
 	wp.broker.Broadcast("metric", buf.String())
 }
@@ -330,15 +341,22 @@ func (s *DashboardServer) handleDashboard(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	metrics := s.pool.Snapshot(false)
+	tasks := s.pool.ListTasks()
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	if s.templates == nil {
+		_ = components.Dashboard(metrics, tasks).Render(r.Context(), w)
+		return
+	}
+
 	data := struct {
 		Metrics MetricsSnapshot
 		Tasks   []*Task
 	}{
-		Metrics: s.pool.Snapshot(false),
-		Tasks:   s.pool.ListTasks(),
+		Metrics: metrics,
+		Tasks:   tasks,
 	}
-
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	_ = s.templates.ExecuteTemplate(w, "dashboard.html", data)
 }
 
@@ -361,6 +379,12 @@ func (s *DashboardServer) handleTasks(w http.ResponseWriter, r *http.Request) {
 
 		// HTMX Response: Primary Partial Row + Out-of-Band (OOB) Metrics Update
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		if s.templates == nil {
+			_ = components.TaskRow(task).Render(r.Context(), w)
+			metricsSnap := s.pool.Snapshot(true)
+			_ = components.MetricsCard(metricsSnap).Render(r.Context(), w)
+			return
+		}
 		_ = s.templates.ExecuteTemplate(w, "task_row.html", task)
 
 		// Append OOB swapped metrics card
@@ -370,6 +394,12 @@ func (s *DashboardServer) handleTasks(w http.ResponseWriter, r *http.Request) {
 	case http.MethodGet:
 		tasks := s.pool.ListTasks()
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		if s.templates == nil {
+			for _, t := range tasks {
+				_ = components.TaskRow(t).Render(r.Context(), w)
+			}
+			return
+		}
 		for _, t := range tasks {
 			_ = s.templates.ExecuteTemplate(w, "task_row.html", t)
 		}
@@ -397,6 +427,10 @@ func (s *DashboardServer) handleTaskActions(w http.ResponseWriter, r *http.Reque
 		}
 
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		if s.templates == nil {
+			_ = components.TaskRow(task).Render(r.Context(), w)
+			return
+		}
 		_ = s.templates.ExecuteTemplate(w, "task_row.html", task)
 		return
 	}
@@ -407,7 +441,17 @@ func (s *DashboardServer) handleTaskActions(w http.ResponseWriter, r *http.Reque
 func (s *DashboardServer) handleMetrics(w http.ResponseWriter, r *http.Request) {
 	snap := s.pool.Snapshot(false)
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	if s.templates == nil {
+		_ = components.MetricsCard(snap).Render(r.Context(), w)
+		return
+	}
 	_ = s.templates.ExecuteTemplate(w, "metrics_card.html", snap)
+}
+
+// RenderComponent renders a type-safe templ.Component directly to the response writer.
+func (s *DashboardServer) RenderComponent(w http.ResponseWriter, r *http.Request, c templ.Component) error {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	return c.Render(r.Context(), w)
 }
 
 func (s *DashboardServer) handleSSE(w http.ResponseWriter, r *http.Request) {
@@ -425,7 +469,15 @@ func (s *DashboardServer) handleSSE(w http.ResponseWriter, r *http.Request) {
 	defer s.broker.Unsubscribe(clientCh)
 
 	// Send initial connection event
-	_, _ = fmt.Fprintf(w, "event: log\ndata: <div class=\"log-entry log-system\"><span class=\"log-time font-mono\">%s</span><span class=\"log-msg\">[SSE] Live stream established with browser</span></div>\n\n", time.Now().Format("15:04:05"))
+	now := time.Now().Format("15:04:05")
+	if s.templates == nil {
+		var buf bytes.Buffer
+		_ = components.LogEntry(now, "[SSE] Live stream established with browser", true).Render(r.Context(), &buf)
+		_, _ = fmt.Fprintf(w, "event: log\ndata: %s\n\n", strings.ReplaceAll(buf.String(), "\n", " "))
+	} else {
+		_, _ = fmt.Fprintf(w, "event: log\ndata: <div class=\"log-entry log-system\"><span class=\"log-time font-mono\">%s</span><span class=\"log-msg\">[SSE] Live stream established with browser</span></div>\n\n", now)
+	}
+	flusher.Flush()
 	flusher.Flush()
 
 	notify := r.Context().Done()

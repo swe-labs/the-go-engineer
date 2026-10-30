@@ -90,7 +90,85 @@ Datastar automatically deserializes this JSON and updates client signals, closin
 
 ---
 
-## 5. Official Go SDK Harmony
+## 5. The GOTD Pipeline: Go + Templ + Datastar
+
+This starter comes equipped with a first-class **GOTD (Go + Orchestration/Tailwind + Templ + Datastar)** pipeline in [`components/`](./components). 
+
+Instead of manual string formatting, components are defined in type-safe `.templ` files and streamed directly to client targets:
+
+```go
+// PatchComponent renders a compile-time checked templ.Component directly to an SSE patch
+func (d *DatastarSSE) PatchComponent(ctx context.Context, c templ.Component, selector string, mode string) error {
+    var buf bytes.Buffer
+    if err := c.Render(ctx, &buf); err != nil {
+        return err
+    }
+    return d.PatchElements(buf.String(), selector, mode)
+}
+```
+
+### Type-Safe Component Example (`task_row.templ`):
+```templ
+package components
+
+templ TaskRow(t *Task) {
+    <tr id={ fmt.Sprintf("task-%d", t.ID) } class={ fmt.Sprintf("task-row status-%s", t.StatusLower) }>
+        <td class="font-mono text-muted text-xs">{ fmt.Sprintf("#%d", t.ID) }</td>
+        <td class="font-semibold">{ t.Type }</td>
+        <td>
+            <span class={ fmt.Sprintf("status-badge badge-%s", t.StatusLower) }>
+                { t.Status }
+            </span>
+        </td>
+        <td class="font-mono text-xs">{ t.DurationStr }</td>
+        <td class="text-right">
+            if t.Status == "QUEUED" || t.Status == "RUNNING" {
+                <button
+                    type="button"
+                    class="btn-action-cancel"
+                    data-on-click={ fmt.Sprintf("@post('/tasks/%d/cancel')", t.ID) }
+                    title="Cancel execution"
+                >
+                    Cancel
+                </button>
+            }
+        </td>
+    </tr>
+}
+```
+
+When initialized with `tmpl = nil`, the server operates in **pure compile-time type-safe mode** with zero template parsing overhead.
+
+---
+
+## 6. Directory Structure
+
+```
+stage-04-htmx-alpine/datastar/
+├── components/           # Datastar-native templ component library (GOTD stack)
+│   ├── components_test.go # Comprehensive unit tests for templ components
+│   ├── dashboard.templ   # Root HTML dashboard layout in templ with Datastar signals
+│   ├── dashboard_templ.go # Generated Go source code
+│   ├── metrics_card.templ # Reactive metrics card
+│   ├── metrics_card_templ.go
+│   ├── task_row.templ    # Granular partial table row with data-on-click="@post(...)"
+│   ├── task_row_templ.go
+│   └── types.go          # Domain types (Task, MetricsSnapshot)
+├── static/
+│   ├── datastar.js       # Vendored datastar.js v1.0.4 (~13 KB single script)
+│   └── style.css         # Modern dark dashboard & status styles
+├── templates/            # Standard html/template files (for comparison)
+│   ├── dashboard.html    # Full dashboard view with Datastar attributes
+│   ├── metrics_card.html # Metrics partial
+│   └── task_row.html     # Task row fragment
+├── main.go               # Server streaming datastar-patch-elements (dual-mode)
+├── main_test.go          # Datastar test suite (html/template + templ modes)
+└── README.md             # This guide
+```
+
+---
+
+## 7. Official Go SDK Harmony
 
 While this starter implements the SSE protocol with pure Go standard library code (`DatastarSSE`), the Datastar project provides an official first-party Go SDK:
 
@@ -98,7 +176,7 @@ While this starter implements the SSE protocol with pure Go standard library cod
 go get github.com/starfederation/datastar/sdk/go
 ```
 
-With the official SDK and [`a-h/templ`](https://templ.guide) (taught in Stage 3), handlers become exceptionally concise:
+With the official SDK and [`a-h/templ`](https://templ.guide), handlers become exceptionally concise:
 
 ```go
 import datastar "github.com/starfederation/datastar/sdk/go"
@@ -119,7 +197,7 @@ func handleTask(w http.ResponseWriter, r *http.Request) {
 
 ---
 
-## 6. Running the Datastar Starter
+## 8. Running the Datastar Starter
 
 ### 1. Start the Datastar Server
 

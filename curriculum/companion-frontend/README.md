@@ -157,6 +157,11 @@ Construct an authenticated user settings and profile management portal connected
 #### Core Verification Task
 Build a live log stream and background job runner dashboard connected to Module 11 (Worker Pools) and Module 12 (Observability) using Server-Sent Events (SSE) and HTMX out-of-band swaps (`hx-swap-oob`).
 
+#### The GOTH & GOTD Architectural Pipelines:
+Stage 4 includes dual-mode implementations supporting both standard `html/template` and compile-time type-checked `templ` components:
+- **GOTH (Go + Orchestration/Tailwind + Templ + HTMX):** Located in [`stage-04-htmx-alpine/components/`](./stage-04-htmx-alpine/components), rendering type-safe components via `BroadcastComponent` over SSE.
+- **GOTD (Go + Orchestration/Tailwind + Templ + Datastar):** Located in [`stage-04-htmx-alpine/datastar/components/`](./stage-04-htmx-alpine/datastar/components), streaming typed components directly into `datastar-patch-elements` wire protocol via `PatchComponent`.
+
 #### Modern Go-Native Alternative: Datastar (SSE-First Paradigm)
 While HTMX and Alpine.js teach essential, resume-ready hypermedia foundations, Go backend engineers frequently encounter friction at the boundary between HTMX DOM swaps and Alpine client state.
 
@@ -164,7 +169,7 @@ The companion track includes a complete comparative starter in [`stage-04-htmx-a
 - **Unified ~13 KB Footprint:** Replaces both HTMX and Alpine with a single script, eliminating state desync.
 - **Server-Sent Events Native:** Every HTTP interaction operates over persistent or on-demand SSE streams (`datastar-patch-elements` and `datastar-patch-signals`).
 - **No Out-of-Band Workarounds:** Any SSE event can target arbitrary DOM selectors (`mode: prepend`, `mode: outer`, etc.) directly from Go's standard `http.Flusher`.
-- **First-Class Go SDK:** Integrates natively with `github.com/starfederation/datastar/sdk/go` and compile-time type-checked `a-h/templ` components.
+- **First-Class Go SDK & Templ Integration:** Integrates natively with `github.com/starfederation/datastar/sdk/go` and compile-time type-checked `a-h/templ` components.
 
 ---
 

@@ -1,0 +1,34 @@
+package components
+
+import (
+	"fmt"
+	"strconv"
+)
+
+templ MetricsCard(m MetricsSnapshot) {
+	<div id="metrics-panel" class="metrics-grid">
+		<div class="metric-card">
+			<div class="metric-label">Active Workers</div>
+			<div class="metric-value font-mono text-emerald">{ fmt.Sprintf("%d / %d", m.ActiveWorkers, m.TotalWorkers) }</div>
+			<div class="metric-sub">Worker Pool Capacity</div>
+		</div>
+		<div class="metric-card">
+			<div class="metric-label">Queue Depth</div>
+			<div class={ "metric-value font-mono", templ.KV("text-amber", m.QueueDepth > 5), templ.KV("text-primary", m.QueueDepth <= 5) }>
+				{ strconv.Itoa(m.QueueDepth) }
+			</div>
+			<div class="metric-sub">Buffered Channel Backlog</div>
+		</div>
+		<div class="metric-card">
+			<div class="metric-label">Completed Jobs</div>
+			<div class="metric-value font-mono text-purple">{ strconv.FormatInt(m.CompletedJobs, 10) }</div>
+			<div class="metric-sub">Processed Lifecycle Tasks</div>
+		</div>
+		<div class="metric-card">
+			<div class="metric-label">Goroutines</div>
+			<div class="metric-value font-mono text-cyan">{ strconv.Itoa(m.Goroutines) }</div>
+			<div class="metric-sub">Runtime Scheduler Threads</div>
+		</div>
+	</div>
+}
+
