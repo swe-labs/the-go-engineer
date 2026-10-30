@@ -39,9 +39,9 @@ To ensure balanced qualitative validation, test subjects are recruited across tw
 3. **Observer Non-Interference:** Observers do not proactively correct syntax errors, provide leading hints, or interrupt problem-solving.
 4. **Ethical Rescue Protocol (Stuck Threshold):** If a participant remains completely blocked on a single step for **> 20 minutes** despite re-reading curriculum material:
    - The observer logs a **Severity 1 Friction Bug** with exact reproduction steps.
-   - The observer provides the minimal atomic hint necessary to unblock progress (e.g., pointing to a specific compiler line or syntax rule).
+   - The observer applies the **3-Tier Socratic Hint Ladder** (Tier 1 Nudge $\rightarrow$ Tier 2 Targeted Clue $\rightarrow$ Tier 3 Walkthrough), providing the minimal atomic guidance necessary to unblock progress without giving away complete solutions.
    - Non-interference resumes immediately.
-   - *Rationale:* This ensures testing remains humane and instructive rather than devolving into an endurance test.
+   - *Rationale:* This ensures testing remains humane, instructive, and calibrated to observable engineering milestones rather than devolving into an endurance test.
 
 ---
 

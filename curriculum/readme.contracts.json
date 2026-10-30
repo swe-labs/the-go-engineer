@@ -6,7 +6,7 @@
   "name": "The Go Engineer v3 — README Contracts",
   "status": "stable",
   "architectural_decision": {
-    "core_rule": "Optimize for learner progression, zero magic, rigorous proof of understanding, production-grade documentation, and job readiness.",
+    "core_rule": "Optimize for learner progression, zero magic, rigorous proof of understanding, production-grade documentation, and job readiness without template slop or artificial over-engineering.",
     "decision": "Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.",
     "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
     "manifest_policy": "Authoritative modular v3 manifests are the active source of truth for the curriculum engine.",
@@ -33,102 +33,316 @@
       "generated_sections": [
         "Core learning path",
         "Projects and proof system",
-        "Advanced electives"
+        "How to validate your progress",
+        "Advanced electives",
+        "Flagship Opslane"
       ],
       "human_written_sections": [
         "What is The Go Engineer?",
         "Who this is for",
-        "How to start"
-      ]
+        "What you will become able to do",
+        "How to start",
+        "Contributing and maintenance"
+      ],
+      "section_specifications": {
+        "What is The Go Engineer?": "High-level overview of the curriculum philosophy, zero-magic engineering guarantee, and target competency profile.",
+        "Who this is for": "Explicit audience definition: career transitioners, CS graduates, backend engineers leveling up in Go systems engineering.",
+        "What you will become able to do": "Observable engineering capabilities unlocked upon graduation (unassisted debugging, concurrency, performance engineering, incident response).",
+        "Core learning path": "Authoritative module-by-module syllabus table generated directly from path.core.json.",
+        "Projects and proof system": "Overview of the 28 hands-on project capstones, grading rubrics, and the dual-state starter/solution proof model.",
+        "How to start": "Zero-friction local setup instructions: Go toolchain installation, repository clone, and initial validation execution.",
+        "How to validate your progress": "Validation commands (scripts/validate_curriculum.go) and test execution guide.",
+        "Advanced electives": "Catalogue of the 20 specialized elective tracks (Generics, gRPC, eBPF, distributed consensus).",
+        "Flagship Opslane": "Introduction to Module 18 Flagship Opslane: multi-tenant production incident simulator and graduation defense.",
+        "Contributing and maintenance": "Governance rules, PR checklist, and contributor authoring standards."
+      }
     },
     {
       "id": "module.v3",
       "applies_to": "core-module",
-      "purpose": "Module-level learner map.",
+      "purpose": "Module-level learner orientation map and progression arc.",
       "documentation_mode": "module-overview",
       "required_headings": [
         "Mission",
-        "Why this module exists now",
-        "What you will be able to do",
-        "Before you start",
-        "Module map",
-        "Recommended order",
-        "Projects in this module",
-        "Common mistakes",
-        "Exit checklist",
-        "Assessment",
+        "Tracks in this curriculum",
+        "Who this module is for",
+        "What you will build",
+        "Prerequisites",
+        "Concept map",
+        "Lessons",
+        "Labs",
+        "Projects",
+        "Assessments",
+        "Common failure modes",
+        "Completion checklist",
         "Next module"
       ],
       "generated_sections": [
-        "Module map",
-        "Projects in this module",
-        "Assessment",
+        "Concept map",
+        "Lessons",
+        "Labs",
+        "Projects",
+        "Assessments",
+        "Completion checklist",
         "Next module"
       ],
       "human_written_sections": [
         "Mission",
-        "Why this module exists now",
-        "Common mistakes"
-      ]
+        "Tracks in this curriculum",
+        "Who this module is for",
+        "What you will build",
+        "Prerequisites",
+        "Common failure modes"
+      ],
+      "canonical_heading_aliases": {
+        "Goal": "Mission",
+        "Summary": "Mission",
+        "Learning Sessions & Lessons": "Lessons",
+        "Completion": "Completion checklist",
+        "Exit checklist": "Completion checklist",
+        "NEXT UP": "Next module"
+      },
+      "section_specifications": {
+        "Mission": "Pedagogical objective of the module and the exact engineering capability it unlocks.",
+        "Tracks in this curriculum": "Orientation linking this module into the Core Backend Path, Advanced Electives, and Companion Frontend Track.",
+        "Who this module is for": "Target learner persona and prerequisite knowledge expected.",
+        "What you will build": "Concrete physical artifacts, services, or tools built throughout the module.",
+        "Prerequisites": "Direct upstream module dependencies and verified conceptual foundation.",
+        "Concept map": "Structured visual diagram or graph mapping primary concepts and their progression.",
+        "Lessons": "Numbered sequence of instructional lessons linking to individual lesson READMEs.",
+        "Labs": "Hands-on diagnostic drills and coding exercises.",
+        "Projects": "Module project capstone specifications and starter locations.",
+        "Assessments": "Module checkpoint assessment and evaluation rubric.",
+        "Common failure modes": "Summary of primary operational traps and runtime failures addressed in this module from failures.json.",
+        "Completion checklist": "Measurable gate criteria required before advancing to the next module.",
+        "Next module": "Direct hyperlink and progression rationale for the downstream module."
+      }
     },
     {
       "id": "lesson.v3",
       "applies_to": "core-lesson",
-      "purpose": "World-class teaching README for a concept or skill.",
+      "purpose": "World-class teaching README for a concept, systems technique, or operational skill.",
       "applies_when": "The concept is required for the core path and every learner must master it before advancing.",
       "documentation_mode": "tutorial",
       "required_headings": [
-        "Mission",
-        "Why this lesson exists now",
-        "Prerequisites",
-        "Connections",
+        "Learning objective",
+        "Why this matters",
         "Mental model",
+        "Core idea",
         "Visual model",
-        "Machine view",
-        "Run instructions",
-        "Verification surface",
-        "Code walkthrough",
+        "Under the hood",
+        "How Go uses it",
+        "Go example",
+        "Step-by-step execution",
         "Common mistakes",
-        "Try it",
-        "Debugging task",
-        "Code-reading task",
-        "Refactoring task",
-        "In production",
-        "Thinking questions",
-        "Next step"
+        "Debugging walkthrough",
+        "Production notes",
+        "Performance implications",
+        "Practice task",
+        "Tests / verification",
+        "Review questions",
+        "NEXT UP"
       ],
+      "core_required_headings": [
+        "Learning objective",
+        "Why this matters",
+        "Mental model",
+        "Common mistakes",
+        "Review questions",
+        "NEXT UP"
+      ],
+      "contextual_headings": [
+        "Core idea",
+        "Visual model",
+        "Under the hood",
+        "How Go uses it",
+        "Go example",
+        "Step-by-step execution",
+        "Debugging walkthrough",
+        "Production notes",
+        "Performance implications",
+        "Practice task",
+        "Tests / verification"
+      ],
+      "anti_overengineering_policy": "Do not force all 17 headings if a lesson's subject matter does not warrant them. Non-applicable sections should be omitted rather than populated with placeholder slop. Always respect the item's content_contract flags (visual_model_required, machine_view_required, production_notes_required, runnable_required, tests_required).",
+      "subtype_profiles": {
+        "concept": {
+          "description": "Deep programming fundamentals, type semantics, memory mechanics, and runtime structures.",
+          "mandatory_additions": [
+            "Under the hood",
+            "Go example",
+            "Step-by-step execution",
+            "Performance implications",
+            "Practice task"
+          ],
+          "conditional_additions": [
+            "Visual model (when memory layout, pointer indirection, or headers are involved)",
+            "Production notes (when production failure modes exist)"
+          ],
+          "acceptable_omissions": [
+            "Debugging walkthrough (if concept is purely foundational syntax without runtime crash traps)"
+          ]
+        },
+        "operations": {
+          "description": "Systems programming, Linux processes, signals, Docker containerization, CI/CD, and runbooks.",
+          "mandatory_additions": [
+            "Go example",
+            "Step-by-step execution",
+            "Production notes",
+            "Tests / verification"
+          ],
+          "conditional_additions": [
+            "Visual model (when process tree, network socket, or pipeline topology is involved)",
+            "Debugging walkthrough (when operational failure triage is taught)"
+          ],
+          "acceptable_omissions": [
+            "Performance implications (when teaching process management, signals, or configuration files)"
+          ]
+        },
+        "architecture": {
+          "description": "Service boundaries, package structure, domain invariants, and design patterns.",
+          "mandatory_additions": [
+            "Core idea",
+            "Visual model",
+            "Under the hood",
+            "How Go uses it",
+            "Production notes"
+          ],
+          "conditional_additions": [
+            "Go example (when architectural interface contracts are shown)"
+          ],
+          "acceptable_omissions": [
+            "Debugging walkthrough (for purely conceptual architectural tradeoffs and boundary definitions)",
+            "Performance implications (unless teaching sharding, latency budgets, or multi-tenant scaling)"
+          ]
+        },
+        "career": {
+          "description": "Portfolio strategy, technical documentation, resume projects, code review preparation, and interview readiness.",
+          "mandatory_additions": [
+            "Core idea",
+            "Practice task"
+          ],
+          "acceptable_omissions": [
+            "Under the hood (purely non-runtime strategic topics)",
+            "Visual model (unless illustrating project portfolio timelines)",
+            "Go example (when teaching portfolio documentation or interview communication)",
+            "Step-by-step execution",
+            "Debugging walkthrough",
+            "Performance implications"
+          ]
+        },
+        "debugging": {
+          "description": "Delve debugger drills, pprof profiling, race detector diagnostics, and panic trace recovery.",
+          "mandatory_additions": [
+            "Go example",
+            "Under the hood",
+            "Debugging walkthrough",
+            "Practice task",
+            "Tests / verification"
+          ],
+          "acceptable_omissions": [
+            "Core idea (superseded by Debugging walkthrough)"
+          ]
+        },
+        "testing": {
+          "description": "Unit testing, table-driven tests, subtests, mocks, test harnesses, and coverage analysis.",
+          "mandatory_additions": [
+            "Go example",
+            "Step-by-step execution",
+            "Practice task",
+            "Tests / verification"
+          ],
+          "acceptable_omissions": [
+            "Performance implications (unless teaching benchmarking or memory allocation tracking)"
+          ]
+        }
+      },
       "generated_sections": [
-        "Prerequisites",
-        "Connections",
-        "Run instructions",
-        "Verification surface",
-        "Next step"
+        "Tests / verification",
+        "NEXT UP"
       ],
       "human_written_sections": [
-        "Mission",
+        "Learning objective",
+        "Why this matters",
         "Mental model",
-        "Machine view",
-        "Code walkthrough",
+        "Core idea",
+        "Visual model",
+        "Under the hood",
+        "How Go uses it",
+        "Go example",
+        "Step-by-step execution",
         "Common mistakes",
-        "In production"
+        "Debugging walkthrough",
+        "Production notes",
+        "Performance implications",
+        "Practice task",
+        "Review questions"
       ],
+      "canonical_heading_aliases": {
+        "Mission": "Learning objective",
+        "Why this lesson exists now": "Why this matters",
+        "Machine view": "Under the hood",
+        "Code walkthrough": "Step-by-step execution",
+        "Debugging task": "Debugging walkthrough",
+        "In production": "Production notes",
+        "Try it": "Practice task",
+        "Verification surface": "Tests / verification",
+        "Run instructions": "Tests / verification",
+        "Thinking questions": "Review questions",
+        "Next step": "NEXT UP"
+      },
+      "section_specifications": {
+        "Learning objective": "Measurable, behavioral statement: 'By the end of this lesson, you will be able to...'",
+        "Why this matters": "Operational and architectural justification: real-world production incidents and system design tradeoffs.",
+        "Mental model": "Durable physical analogy or conceptual construct that accurately models mechanical behavior without hand-waving.",
+        "Core idea": "Concise formulation of the fundamental rule, syntax, or language invariant in plain language.",
+        "Visual model": "Concrete, domain-specific Mermaid diagram (sequenceDiagram, flowchart TD/LR, stateDiagram-v2, erDiagram) or ASCII layout. Skip if the concept has no spatial, memory, or concurrent structure.",
+        "Under the hood": "Mechanical explanation: compiler actions, runtime structs, memory allocation, bits & bytes, adhering to the 6 Physical Pillars. Skip for pure career/strategy lessons.",
+        "How Go uses it": "Idiomatic usage patterns across the Go standard library, runtime internals, and production architectures.",
+        "Go example": "Complete, self-contained, runnable code (package main, imports, func main()) demonstrating the concept. Skip for text-only strategy lessons.",
+        "Step-by-step execution": "Numbered chronological walkthrough tracing variable states, registers, stack frames, and outputs across execution.",
+        "Common mistakes": "Markdown table format (Mistake | Why it happens | Fix) documenting real mistakes observed in production code.",
+        "Debugging walkthrough": "Realistic failure scenario: error symptoms, Delve commands, stack traces, root cause isolation, and resolution.",
+        "Production notes": "Operational risks, defense-in-depth patterns, and failure modes from curriculum/failures.json.",
+        "Performance implications": "Algorithmic complexity (Big-O), heap vs stack allocations, CPU cache line effects, struct alignment, and GC overhead. Skip if performance is neutral or non-applicable.",
+        "Practice task": "Actionable, hands-on modification exercise for the learner to alter code and observe behavioral changes.",
+        "Tests / verification": "Exact verification commands (go run, go test -v, go test -race) and verified output signatures.",
+        "Review questions": "4-5 diagnostic and conceptual questions evaluating mechanical comprehension.",
+        "NEXT UP": "Relative link and canonical item ID to the next sequential learning node in path.core.json."
+      },
       "zero_magic_enforcement": {
         "status_levels": {
           "placeholder": "Heading scaffold only. No substantive content.",
           "draft": "Content written but not reviewed for quality or production realism.",
           "reviewed": "Content reviewed by a senior engineer for technical accuracy.",
-          "golden": "Content passes all validator quality rules and has been tested with learners."
+          "golden": "Content passes all validator quality rules, satisfies the 6 Physical Pillars, and has been tested with learners."
         },
-        "promotion_policy": "A lesson may only be promoted to golden after: (1) passing validate-no-placeholder-zm with semantic checks enabled, (2) being reviewed by a senior engineer, (3) containing a real production example and real debugging scenario.",
+        "promotion_policy": "A lesson may only be promoted to golden after: (1) passing validate-no-placeholder-zm with semantic checks enabled, (2) being reviewed by a senior engineer, (3) containing a real production example and real debugging scenario where applicable, (4) grounding concepts mechanically in the 6 Physical Pillars without template filler.",
         "regression_policy": "Any lesson that fails a semantic quality check must be immediately reverted to draft status regardless of previous promotion."
       }
     },
     {
       "id": "elective-lesson.v3",
       "applies_to": "elective-lesson",
-      "purpose": "Advanced reference/tutorial hybrid that does not block the core path.",
+      "purpose": "Advanced reference/tutorial hybrid for specialized systems topics outside the core path.",
       "documentation_mode": "reference",
       "required_headings": [
+        "When you need this",
+        "When you do not need this",
+        "Prerequisites",
+        "Mental model",
+        "Visual model",
+        "How it works",
+        "Go example",
+        "Step-by-step execution",
+        "Tradeoffs",
+        "Common mistakes",
+        "Debugging walkthrough",
+        "Production notes",
+        "Practice task",
+        "Related core lessons"
+      ],
+      "core_required_headings": [
         "When you need this",
         "When you do not need this",
         "Prerequisites",
@@ -137,9 +351,14 @@
         "Go example",
         "Tradeoffs",
         "Common mistakes",
-        "Practice task",
-        "Production notes",
         "Related core lessons"
+      ],
+      "contextual_headings": [
+        "Visual model",
+        "Step-by-step execution",
+        "Debugging walkthrough",
+        "Production notes",
+        "Practice task"
       ],
       "generated_sections": [
         "Prerequisites",
@@ -147,67 +366,183 @@
       ],
       "human_written_sections": [
         "When you need this",
+        "When you do not need this",
+        "Mental model",
+        "Visual model",
+        "How it works",
+        "Go example",
+        "Step-by-step execution",
         "Tradeoffs",
-        "Production notes"
-      ]
+        "Common mistakes",
+        "Debugging walkthrough",
+        "Production notes",
+        "Practice task"
+      ],
+      "section_specifications": {
+        "When you need this": "Production scenarios, throughput bottlenecks, or architectural requirements where this advanced technique is justified.",
+        "When you do not need this": "Anti-patterns, premature optimization traps, and simpler standard idioms that should be preferred by default.",
+        "Prerequisites": "Core backend modules and foundational lessons required before attempting this elective.",
+        "Mental model": "High-level physical analogy explaining the mechanical mechanics of the specialized tool or technique.",
+        "Visual model": "Domain-specific Mermaid diagram visualizing internal queues, ring buffers, memory layouts, or protocol streams.",
+        "How it works": "In-depth runtime explanation covering compiler behavior, syscalls, OS kernel interactions, or synchronization primitives.",
+        "Go example": "Production-grade, fully working Go code snippet demonstrating the advanced technique.",
+        "Step-by-step execution": "Detailed walkthrough tracing runtime execution flow and state transitions.",
+        "Tradeoffs": "Explicit analysis of complexity, cognitive overhead, maintenance burden, and performance gains.",
+        "Common mistakes": "Subtle production pitfalls, concurrency gotchas, or memory retention traps.",
+        "Debugging walkthrough": "Diagnostic commands, pprof profiles, or runtime diagnostics specific to this advanced technology.",
+        "Production notes": "Operational runbooks, configuration tuning flags, and monitoring metrics.",
+        "Practice task": "Hands-on advanced exercise reinforcing the elective concept.",
+        "Related core lessons": "Bidirectional links to relevant core path lessons that previewed or reinforce this topic."
+      }
     },
     {
       "id": "project.v3",
       "applies_to": "project",
-      "purpose": "Project README with build requirements, verification, and rubric.",
+      "purpose": "Project capstone README with build requirements, step-by-step plan, verification suite, and rubric.",
       "documentation_mode": "project",
       "required_headings": [
-        "Project mission",
-        "What you will build",
+        "Learning objective",
+        "Why this matters",
+        "Project overview",
         "Prerequisites",
-        "Lessons reinforced",
-        "Requirements",
+        "Available concepts",
+        "Tasks",
         "Step-by-step build plan",
         "Verification",
         "Rubric",
+        "Common mistakes",
+        "Stretch goals",
+        "Portfolio notes",
+        "NEXT UP"
+      ],
+      "core_required_headings": [
+        "Learning objective",
+        "Why this matters",
+        "Project overview",
+        "Prerequisites",
+        "Tasks",
+        "Verification",
+        "Rubric",
+        "NEXT UP"
+      ],
+      "contextual_headings": [
+        "Available concepts",
+        "Step-by-step build plan",
         "Common mistakes",
         "Stretch goals",
         "Portfolio notes"
       ],
       "generated_sections": [
         "Prerequisites",
-        "Lessons reinforced",
-        "Rubric"
+        "Available concepts",
+        "Verification",
+        "Rubric",
+        "NEXT UP"
       ],
       "human_written_sections": [
-        "Project mission",
-        "Requirements",
+        "Learning objective",
+        "Why this matters",
+        "Project overview",
+        "Tasks",
+        "Step-by-step build plan",
         "Common mistakes",
+        "Stretch goals",
         "Portfolio notes"
-      ]
+      ],
+      "canonical_heading_aliases": {
+        "Project mission": "Learning objective",
+        "What you will build": "Project overview",
+        "Lessons reinforced": "Available concepts",
+        "Requirements": "Tasks"
+      },
+      "section_specifications": {
+        "Learning objective": "Core engineering capability and architectural proof demonstrated by completing this capstone.",
+        "Why this matters": "Industry context: how this project mirrors real-world production microservices and tooling.",
+        "Project overview": "High-level architectural design, data structures, and functional scope of the project.",
+        "Prerequisites": "Direct lesson prerequisites and previous projects that must be completed first.",
+        "Available concepts": "Inventory of concepts permitted for use, ensuring zero unearned prerequisite usage.",
+        "Tasks": "Explicit list of functional requirements, API endpoints, CLI flags, or data contracts to implement.",
+        "Step-by-step build plan": "Milestone-by-milestone implementation plan guiding the learner from empty starter to passing solution.",
+        "Verification": "Automated test commands (go test -v ./..., go test -race), benchmarks, and expected output signatures.",
+        "Rubric": "Structured criteria table with weights summing to 100% across functionality, architecture, concurrency, and error handling.",
+        "Common mistakes": "Architectural pitfalls, race conditions, and anti-patterns frequently observed in learner submissions.",
+        "Stretch goals": "Optional advanced features for high-performing learners (caching, metrics, graceful degradation).",
+        "Portfolio notes": "Guidance on documenting this project in technical portfolio repositories and speaking to it in interviews.",
+        "NEXT UP": "Direct progression anchor to the subsequent lesson, module, or assessment."
+      }
     },
     {
       "id": "assessment.v3",
       "applies_to": "assessment",
-      "purpose": "Assessment README with evidence and passing criteria.",
+      "purpose": "Assessment README with evidence requirements, passing criteria, and retake policies.",
       "documentation_mode": "assessment",
       "required_headings": [
-        "What this assessment proves",
-        "Required evidence",
+        "Purpose",
+        "Scope",
+        "Targets",
+        "Prerequisites",
+        "Evidence required",
+        "Time expectation",
+        "Passing standard",
         "Rubric",
-        "Passing score",
-        "Manual review questions",
-        "Retake policy"
+        "Review questions",
+        "Retake policy",
+        "NEXT UP"
+      ],
+      "core_required_headings": [
+        "Purpose",
+        "Scope",
+        "Targets",
+        "Passing standard",
+        "Rubric",
+        "Retake policy",
+        "NEXT UP"
+      ],
+      "contextual_headings": [
+        "Prerequisites",
+        "Evidence required",
+        "Time expectation",
+        "Review questions"
       ],
       "generated_sections": [
+        "Targets",
+        "Prerequisites",
+        "Passing standard",
         "Rubric",
-        "Passing score",
-        "Retake policy"
+        "Retake policy",
+        "NEXT UP"
       ],
       "human_written_sections": [
-        "What this assessment proves",
-        "Manual review questions"
-      ]
+        "Purpose",
+        "Scope",
+        "Evidence required",
+        "Time expectation",
+        "Review questions"
+      ],
+      "canonical_heading_aliases": {
+        "What this assessment proves": "Purpose",
+        "Required evidence": "Evidence required",
+        "Passing score": "Passing standard",
+        "Manual review questions": "Review questions"
+      },
+      "section_specifications": {
+        "Purpose": "Clear statement of the competencies, problem-solving skills, and debugging capability validated.",
+        "Scope": "Module boundaries, topics covered, and excluded advanced material.",
+        "Targets": "Enumeration of target lesson IDs and project deliverables assessed.",
+        "Prerequisites": "Lessons and modules that must be completed before attempting this assessment.",
+        "Evidence required": "Concrete physical deliverables: passing automated test runs, code diffs, written diagnostic responses.",
+        "Time expectation": "Estimated unassisted completion time (e.g., 45–90 minutes).",
+        "Passing standard": "Explicit minimum threshold required to pass (e.g., 80% weighted score with zero fatal flaws).",
+        "Rubric": "4-tier evaluation rubric (Exemplary, Proficient, Developing, Incomplete) with weighted scoring.",
+        "Review questions": "Diagnostic interview questions assessing deep mechanical understanding of underlying concepts.",
+        "Retake policy": "Protocol for review, study remediation, and retake eligibility upon failing.",
+        "NEXT UP": "Next curriculum progression milestone upon passing."
+      }
     },
     {
       "id": "flagship.v3",
       "applies_to": "flagship",
-      "purpose": "Opslane learner front door and graduation proof map.",
+      "purpose": "Opslane learner front door, production systems architecture, and graduation proof map.",
       "documentation_mode": "flagship",
       "required_headings": [
         "Flagship mission",
@@ -223,62 +558,199 @@
         "Portfolio defense",
         "Production vs educational caveats"
       ],
+      "core_required_headings": [
+        "Flagship mission",
+        "What Opslane proves",
+        "Before you start",
+        "System overview",
+        "Checkpoint map",
+        "Required proof",
+        "Portfolio defense"
+      ],
+      "contextual_headings": [
+        "Local quickstart",
+        "Security proof",
+        "Observability proof",
+        "Deployment proof",
+        "Production vs educational caveats"
+      ],
       "generated_sections": [
         "Before you start",
         "Checkpoint map",
-        "Required proof"
+        "Required proof",
+        "Security proof",
+        "Observability proof",
+        "Deployment proof"
       ],
       "human_written_sections": [
         "Flagship mission",
+        "What Opslane proves",
         "System overview",
+        "Local quickstart",
+        "Portfolio defense",
         "Production vs educational caveats"
-      ]
+      ],
+      "section_specifications": {
+        "Flagship mission": "Production systems mission statement for Flagship Opslane: an enterprise multi-tenant event delivery and monitoring service.",
+        "What Opslane proves": "Senior-level capabilities demonstrated: high-concurrency event routing, fault recovery, multi-tenancy, and observability.",
+        "Before you start": "Prerequisite runbook foundation: completion of Modules 00 through 15.",
+        "System overview": "Complete architectural blueprint covering transport layer, event bus, database persistence, caching, and workers.",
+        "Checkpoint map": "Sequential roadmap of all 15 Opslane implementation milestones.",
+        "Local quickstart": "Step-by-step local bootstrap guide (Docker Compose, database migrations, initial service startup).",
+        "Required proof": "Summary of passing test suites, benchmarks, and functional acceptance criteria across all milestones.",
+        "Security proof": "Verification of authentication, JWT validation, HMAC signatures, and tenant isolation.",
+        "Observability proof": "Demonstration of structured logging, Prometheus metrics scraping, and OpenTelemetry distributed tracing.",
+        "Deployment proof": "Production deployment verification: Docker containerization, healthchecks, and zero-downtime rolling restart runbooks.",
+        "Portfolio defense": "Oral defense preparation guide and architectural rehearsal questions for senior engineering interviews.",
+        "Production vs educational caveats": "Explicit tradeoffs: educational simplifications vs enterprise multi-region production considerations."
+      }
     },
     {
       "id": "flagship-checkpoint.v3",
       "applies_to": "flagship-checkpoint",
-      "purpose": "Opslane checkpoint implementation guide.",
+      "purpose": "Opslane checkpoint implementation guide, failure scenarios, and verification contracts.",
       "documentation_mode": "flagship-checkpoint",
       "required_headings": [
-        "Checkpoint mission",
+        "Mission",
         "Prerequisites",
-        "What you will implement",
-        "Files and packages",
-        "Failure scenarios",
-        "Expected system state",
-        "Required tests",
-        "Security checklist",
-        "Observability checklist",
-        "Reviewer checklist",
-        "Architecture defense questions",
-        "Next checkpoint"
+        "Mental Model",
+        "Visual Model",
+        "Machine View",
+        "Run Instructions",
+        "Code Walkthrough",
+        "Try It",
+        "In Production",
+        "Thinking Questions",
+        "Next Step"
+      ],
+      "core_required_headings": [
+        "Mission",
+        "Prerequisites",
+        "Code Walkthrough",
+        "Try It",
+        "In Production",
+        "Next Step"
+      ],
+      "contextual_headings": [
+        "Mental Model",
+        "Visual Model",
+        "Machine View",
+        "Run Instructions",
+        "Thinking Questions"
       ],
       "generated_sections": [
         "Prerequisites",
-        "Next checkpoint"
+        "Run Instructions",
+        "Next Step"
       ],
       "human_written_sections": [
-        "Checkpoint mission",
-        "Failure scenarios",
-        "Expected system state",
-        "Architecture defense questions"
-      ]
+        "Mission",
+        "Mental Model",
+        "Visual Model",
+        "Machine View",
+        "Code Walkthrough",
+        "Try It",
+        "In Production",
+        "Thinking Questions"
+      ],
+      "canonical_heading_aliases": {
+        "Checkpoint mission": "Mission",
+        "What you will implement": "Code Walkthrough",
+        "Expected system state": "In Production",
+        "Required tests": "Try It",
+        "Architecture defense questions": "Thinking Questions",
+        "Next checkpoint": "Next Step"
+      },
+      "section_specifications": {
+        "Mission": "Specific milestone objective within the Opslane architecture (e.g., event bus, worker pool, caching layer).",
+        "Prerequisites": "Prior Opslane milestones and verified system state required before beginning.",
+        "Mental Model": "Conceptual model explaining how this subsystem coordinates with the rest of the Opslane architecture.",
+        "Visual Model": "Mermaid sequence or flowchart visualizing component interactions and data flow.",
+        "Machine View": "Runtime internals: channel buffers, goroutine lifecycle, database locks, or memory allocation.",
+        "Run Instructions": "Exact CLI and curl commands to start the service, apply migrations, and verify functionality.",
+        "Code Walkthrough": "Detailed explanation of packages, interfaces, and methods implemented in this milestone.",
+        "Try It": "Specific test suites and manual curl experiments to execute and observe.",
+        "In Production": "Production incident scenarios, failure modes, and mitigation strategies applicable to this milestone.",
+        "Thinking Questions": "Senior engineering design questions testing tradeoffs and alternative architectures.",
+        "Next Step": "Link and prerequisite transition to the subsequent Opslane milestone."
+      }
+    },
+    {
+      "id": "companion-stage.v3",
+      "applies_to": "companion-stage",
+      "purpose": "Frontend companion track stage guide and hypermedia integration specification.",
+      "documentation_mode": "companion-stage",
+      "required_headings": [
+        "Stage mission",
+        "Pedagogical scope",
+        "Backend alignment",
+        "Architecture and tech stack",
+        "Component contracts",
+        "Running the stage",
+        "Verification and test suite",
+        "Progressive enhancement checklist",
+        "Next stage"
+      ],
+      "core_required_headings": [
+        "Stage mission",
+        "Pedagogical scope",
+        "Backend alignment",
+        "Architecture and tech stack",
+        "Running the stage",
+        "Verification and test suite",
+        "Next stage"
+      ],
+      "contextual_headings": [
+        "Component contracts",
+        "Progressive enhancement checklist"
+      ],
+      "generated_sections": [
+        "Backend alignment",
+        "Running the stage",
+        "Verification and test suite",
+        "Next stage"
+      ],
+      "human_written_sections": [
+        "Stage mission",
+        "Pedagogical scope",
+        "Architecture and tech stack",
+        "Component contracts",
+        "Progressive enhancement checklist"
+      ],
+      "section_specifications": {
+        "Stage mission": "Full-stack hypermedia learning goal for this progressive stage (HTML/CSS, DOM Fetch, Templ/Tailwind, HTMX/Alpine).",
+        "Pedagogical scope": "Frontend concepts introduced and their mechanical connection to server-driven Go rendering.",
+        "Backend alignment": "Direct alignment to parallel backend modules (Modules 08, 09, 10, 11, 15).",
+        "Architecture and tech stack": "Explanation of libraries used (templ, tailwind, htmx, datastar) and asset pipeline architecture.",
+        "Component contracts": "Typed Go component function signatures, props interfaces, and HTML rendering outputs.",
+        "Running the stage": "Zero-Node development instructions: running the Go server with embedded assets.",
+        "Verification and test suite": "Test execution commands (go test -v ./...) validating HTTP endpoints, HTML rendering, and SSE streams.",
+        "Progressive enhancement checklist": "Verification that the application functions cleanly across progressive capability tiers.",
+        "Next stage": "Link and transition to the subsequent frontend companion stage."
+      }
     }
   ],
   "validation_rules": [
-    "Every README must match its declared contract_id.",
-    "Generated sections must be marked with curriculum generated comments.",
-    "Human-written sections must not be overwritten by generators.",
-    "No implemented lesson may keep placeholder zero-magic text.",
-    "No README may use stale v2-only navigation labels unless inside migration notes.",
-    "Every future concept must use a preview-only reference.",
-    "Every project README must expose its rubric.",
-    "Every module README must expose its exit checklist.",
-    "No README with zero_magic_status=golden may contain template-style phrases: 'Think of X as a contract', 'X is similar to', 'in simple terms', 'basically', 'just', or empty analogy filler.",
-    "Every lesson README marked golden must contain at least one concrete production failure example in the 'In production' section.",
-    "Every lesson README marked golden must include a realistic debugging scenario in 'Debugging task', not a generic 'fix the bug' placeholder.",
-    "Mental model sections must describe the mechanism, not the definition — 'A goroutine is...' is a definition; 'When you write go f(), the runtime...' is a mental model.",
-    "Machine view sections must describe what the CPU/OS/runtime actually does, not restate the mental model.",
-    "Common mistakes sections must list real mistakes observed in production code, not conceptual misunderstandings that beginners never actually make."
+    "Every README must match its declared contract_id and satisfy its core_required_headings without exception.",
+    "Generated sections must be marked with curriculum generated comments (<!-- curriculum:generated:start --> and <!-- curriculum:generated:end -->).",
+    "Human-written sections must not be overwritten or modified by generator scripts.",
+    "Anti-slop rule: Do not force contextual headings if the subject matter does not warrant them. Omit non-applicable sections rather than populating them with artificial template filler.",
+    "No implemented lesson may keep placeholder zero-magic text (e.g. 'mechanically without understanding', 'one step in the learner's path').",
+    "No README may use stale legacy navigation labels or non-existent lesson IDs unless inside historical migration notes.",
+    "Every future concept must use an explicit preview-only reference; lessons cannot assume mastery of unintroduced concepts.",
+    "Every project README must expose its rubric with explicit percentage weights summing to 100%.",
+    "Every module README must expose its completion checklist and sequential module arc.",
+    "No README with zero_magic_status=golden may contain template-style phrases: 'Think of X as a contract', 'X is similar to', 'in simple terms', 'basically', 'just', 'obviously', or empty analogy filler.",
+    "Every lesson README marked golden must contain at least one concrete production failure example from curriculum/failures.json in the 'Production notes' section when production failure modes apply.",
+    "Every lesson README marked golden must include a realistic debugging scenario in 'Debugging walkthrough' when error modes or debugging mechanics are taught.",
+    "Mental model sections must describe the physical mechanism, not merely restate the dictionary definition — 'A goroutine is...' is a definition; 'When you write go f(), the runtime allocates a 2 KB stack and registers the g pointer...' is a mental model.",
+    "Under the hood sections must describe what the CPU, OS, and Go runtime actually do (stack vs heap, descriptors, word boundaries, syscalls), adhering strictly to the 6 Physical Pillars for all lessons introducing runtime mechanics.",
+    "Common mistakes sections must list real mistakes observed in production code with concrete fixes, formatted as a markdown table.",
+    "Every golden lesson introducing Go primitives, memory layouts, or runtime mechanisms must ground concepts in the 6 Physical Pillars (bytes/word alignment, composite headers, concurrency engine descriptors, hash table bucket topology, CPU cache lines, or I/O buffer mechanics).",
+    "Visual models must use semantic Mermaid diagram types (flowchart TD/LR, sequenceDiagram, stateDiagram-v2, or erDiagram) with quoted labels to visualize state transitions, pointer indirection, and concurrency flows without rendering errors.",
+    "Execution and memory timelines must adhere to the discrete temporal format (T0, T1, T2...) detailing physical register, stack frame, and heap allocation states across time when temporal or concurrent flow is introduced.",
+    "All project and service capstone starters must enforce 3-tier clean domain separation (transport/ -> domain/ -> repo/) with domain layers free of external framework dependencies.",
+    "Cognitive load budgeting: each lesson may introduce at most 1 primary new concept; all prerequisite language constructs must be verified against curriculum/crossrefs.json and curriculum/concepts.json.",
+    "Transitive prerequisite verification: concepts must strictly follow canonical introduction in curriculum/concepts.json; preview locations must strictly precede, reinforcement must strictly follow."
   ]
 }

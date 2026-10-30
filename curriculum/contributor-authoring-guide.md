@@ -25,21 +25,21 @@ Before authoring, read (in this order):
 
 ---
 
-## Authoring Workflow
+## Spec-Driven Authoring Workflow
 
 ```
-1. Identify the confusion: what do learners get wrong?
-2. Write the mental model first (the analogy)
-3. Write under_the_hood (the mechanics)
-4. Write execution_timeline or memory_timeline (what happens over time/in memory — check the spec's trigger tables for when each is required)
-5. Write step_by_step_execution (the prose walkthrough)
-6. Write failure_modes (what breaks and how)
-7. Write beginner_mistakes (with mechanical root cause)
-8. Write hidden_magic_checks (questions that force mechanical reasoning)
-9. Write proof_of_understanding (how mastery is demonstrated)
-10. Write problem_solved and why_it_exists (framing)
-11. Self-review against the Quality Rubric
-12. Run validate-zero-magic
+1. Specification Contract: define measurable behavioral objectives and exact physical preconditions
+2. Table-Driven TDD Test Scaffold: construct table-driven test cases covering nominal, boundary, and failure cases
+3. Identify the mental model: anchor with an authoritative computing pioneer quote (Dijkstra, Hoare, Pike, Kernighan)
+4. Write under_the_hood: ground in the 6 Physical Pillars (bits, bytes, zero-value guarantee 00000000, machine headers)
+5. Write execution_timeline or memory_timeline (what happens over time/in memory with → prefix)
+6. Write step_by_step_execution (the prose walkthrough tracing runtime state)
+7. Write failure_modes (what breaks, mechanical root cause, detection)
+8. Write beginner_mistakes (with mechanical root cause)
+9. Write hidden_magic_checks (questions that force mechanical reasoning)
+10. Write proof_of_understanding (how mastery is demonstrated)
+11. Self-review against the Quality Rubric (quality-rubric.md)
+12. Run the 17-gate automated validator: go run ./scripts/validate_curriculum.go
 ```
 
 ---

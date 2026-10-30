@@ -9,7 +9,14 @@ import (
 )
 
 func main() {
-	cmd := exec.Command("go", "run", "./internal/tools/curriculum", "validate-all")
+	args := []string{"run", "./internal/tools/curriculum"}
+	if len(os.Args) > 1 {
+		args = append(args, os.Args[1:]...)
+	} else {
+		args = append(args, "validate-all")
+	}
+
+	cmd := exec.Command("go", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {

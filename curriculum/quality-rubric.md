@@ -62,7 +62,9 @@ Does the learner explain mechanics, not just usage?
 
 **4+ criteria:**
 
-- Every function or concept has an under_the_hood explanation
+- Every function or concept has an under_the_hood explanation grounded in physical memory
+- Physical footprint is explicitly declared (size in bytes/bits, word alignment, zero-value guarantee `00000000`)
+- Composite descriptors (slices, strings, interfaces) are diagrammed with exact machine headers
 - The learner can predict behavior before running code
 - Hidden_magic_checks require mechanical reasoning
 
@@ -71,6 +73,7 @@ Does the learner explain mechanics, not just usage?
 - Lesson explains what but not how
 - Learner can complete exercises without understanding runtime behavior
 - No memory model or execution model is presented
+- Vague "boxes" analogies used instead of concrete memory byte layouts
 
 ---
 
@@ -80,13 +83,13 @@ Does the lesson teach how to diagnose failures?
 
 **4+ criteria:**
 
-- At least one debugging walkthrough is included
+- At least one debugging walkthrough is included utilizing Delve (`dlv`) commands (breakpoints, stack frame navigation, goroutine dumps)
 - Common failure modes list concrete symptoms and root causes
 - Learner practices reading error messages, stack traces, and log output
 
 **2–3 signals:**
 
-- Debugging is not mentioned
+- Debugging is not mentioned or relies solely on scattershot `println`
 - Only happy-path code is shown
 - Error messages are not explained
 
@@ -99,8 +102,9 @@ Does the content apply to real engineering work?
 **4+ criteria:**
 
 - Production examples show real code patterns (not toy examples)
-- Performance implications are discussed
-- Operational considerations are addressed (deployment, monitoring, rollback)
+- Capstones enforce 3-tier clean domain architecture (`transport/` -> `domain/` -> `repo/`) with boundary sanitization
+- Performance implications are discussed (CPU cache lines, false sharing, struct padding)
+- Operational considerations are addressed (container CFS CPU quotas, graceful shutdown, monitoring)
 
 **2–3 signals:**
 

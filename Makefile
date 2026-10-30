@@ -98,7 +98,7 @@ ci: build vet fmt-check tidy test test-race cover validate ## Run CI-equivalent 
 
 clean: ## Remove build artifacts and caches
 	@echo "Cleaning..."
-	rm -f coverage.out coverage.html
+	rm -f coverage.out coverage.html curriculum.exe *.exe
 	go clean -cache -testcache
 	@echo "Clean"
 

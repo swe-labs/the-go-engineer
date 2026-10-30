@@ -10,17 +10,30 @@ import (
 var curriculumDir string
 
 func init() {
-	wd, _ := os.Getwd()
-	// Walk up to find curriculum/ directory
-	for dir := wd; dir != "."; dir = filepath.Dir(dir) {
+	wd, err := os.Getwd()
+	if err != nil {
+		curriculumDir = "curriculum"
+		return
+	}
+	// Walk up to find the root curriculum/ directory containing path.core.json
+	for dir := wd; ; {
 		candidate := filepath.Join(dir, "curriculum")
-		if info, err := os.Stat(candidate); err == nil && info.IsDir() {
+		if info, err := os.Stat(filepath.Join(candidate, "path.core.json")); err == nil && !info.IsDir() {
 			curriculumDir = candidate
 			return
 		}
-		if dir == "/" || dir == `\` {
+		// If current directory is the curriculum directory itself
+		if filepath.Base(dir) == "curriculum" {
+			if info, err := os.Stat(filepath.Join(dir, "path.core.json")); err == nil && !info.IsDir() {
+				curriculumDir = dir
+				return
+			}
+		}
+		parent := filepath.Dir(dir)
+		if parent == dir || dir == "." || dir == "/" || dir == `\` {
 			break
 		}
+		dir = parent
 	}
 	// Fallback
 	curriculumDir = filepath.Join(wd, "curriculum")

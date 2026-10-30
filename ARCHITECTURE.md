@@ -13,12 +13,14 @@ All authoritative curriculum metadata is defined in modular JSON manifests under
 | Manifest | Purpose |
 |---|---|
 | [`curriculum/path.core.json`](./curriculum/path.core.json) | Canonical 18-module progression, instructional units, and prerequisites |
+| [`curriculum/path.electives.json`](./curriculum/path.electives.json) | Advanced electives catalog, prerequisites, and learning outcomes |
 | [`curriculum/projects.json`](./curriculum/projects.json) | Portfolio projects, reference solutions, and test fixtures |
 | [`curriculum/assessments.json`](./curriculum/assessments.json) | Checkpoint and capstone assessment suites, rubrics, and answer keys |
 | [`curriculum/concepts.json`](./curriculum/concepts.json) | Conceptual ownership, mental models, and reinforcement map |
 | [`curriculum/crossrefs.json`](./curriculum/crossrefs.json) | Cross-module forward and backward references |
 | [`curriculum/failures.json`](./curriculum/failures.json) | Explicit failure mode taxonomy and defensive patterns |
 | [`curriculum/readme.contracts.json`](./curriculum/readme.contracts.json) | Mandatory pedagogical contract structure for instructional READMEs |
+| [`curriculum/schema.v3.json`](./curriculum/schema.v3.json) | Structural JSON schema and validation definitions for all v3 manifests |
 | [`curriculum/workspace.json`](./curriculum/workspace.json) | Canonical workspace and validation configuration |
 | [`curriculum/legacy/curriculum.v2.json`](./curriculum/legacy/curriculum.v2.json) | Frozen legacy v2 import archive |
 

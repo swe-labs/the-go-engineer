@@ -59,27 +59,33 @@ Good teaching surfaces explain:
 
 Foundational modules establish concrete mental models (stack vs heap, pointer semantics, goroutine mechanics). Production modules focus on systems architecture, observability, fault tolerance, and multi-tenant security.
 
-## Canonical Contract
+## Canonical Contract & Anti-Overengineering Directive
 
-### Required README Sections
+### README Section Architecture
 
-Instructional READMEs conform to the contract defined in `curriculum/readme.contracts.json`:
+Instructional READMEs conform to the canonical 17-heading contract defined in [`curriculum/readme.contracts.json`](./curriculum/readme.contracts.json). To guarantee high pedagogical value without artificial ceremony, headings are divided into Core Required and Contextual sections:
 
-1. `## Mission`
-2. `## Prerequisites`
-3. `## Mental Model`
-4. `## Visual Model`
-5. `## Machine View`
-6. `## Run Instructions`
-7. `## Code Walkthrough`
-8. `## Try It`
-9. `## In Production`
-10. `## Thinking Questions`
-11. `## Next Step`
+#### Core Required Headings (Mandatory across all lessons)
+1. `## Mission` — Explicit declaration of capabilities earned and verified.
+2. `## Prerequisites` — Transitive dependencies and foundational concepts.
+3. `## Mental Model` — Transparent mechanical foundation before code.
+4. `## Code Walkthrough` — Thorough line-by-line inspection (`## Solution Walkthrough` for exercises/projects).
+5. `## In Production` — Operational realities, telemetry, and failure handling.
+6. `## Next Steps` — Forward progression and curriculum linkage.
 
-For exercises and projects:
-- `## Solution Walkthrough`
-- `## Verification Surface`
+#### Contextual Headings (Applied based on instructional necessity)
+Applied selectively based on the lesson's subtype profile (`conceptual`, `pattern`, `deep-dive`, `exercise`, `project`, `capstone`) and real cognitive necessity:
+- `## Visual Model` (Mermaid diagram of flow/lifecycle)
+- `## Memory Layout` (Stack/heap byte layout and pointer indirection)
+- `## Physical Timeline` (Sequence diagram of concurrent interactions)
+- `## Machine View` (OS syscalls, assembly snippets, or runtime scheduling)
+- `## Common Failure Modes` (Concrete traps, compiler errors, or panic scenarios)
+- `## Edge Cases` (Zero values, boundary limits, or race conditions)
+- `## Benchmark & Allocation Analysis` (Allocations per op and throughput)
+- `## Production Notes` (Hardened configurations, security caveats)
+- `## Review Questions & Explanations` (Self-check conceptual prompts)
+- `## Verification Surface` (Automated test suites, assertions; required for exercises/projects)
+- `## Portfolio Artifact` (Deliverables and defense rubrics; required for capstones)
 
 ## Quality Gates & Verification
 

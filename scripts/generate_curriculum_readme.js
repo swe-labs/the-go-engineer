@@ -48,7 +48,7 @@ function generateFullReadme() {
   parts.push('| Learner Instructional Units      | ' + (lessons + labs + checkpoints + capstones) + '   | ' + (lessons + labs) + ' instructional lessons/labs + ' + (checkpoints + capstones) + ' Opslane milestones            |');
   parts.push('| Elective Items                   | ' + electiveItems + '    | 20 advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |');
   parts.push('| Projects                         | ' + prjRecords + '    | 27 module projects + 1 flagship capstone defense project          |');
-  parts.push('| In-Path Assessment Checkpoints   | ' + pathAssessments + '    | 16 module checkpoints + 14 Opslane checkpoints + 27 project-bound nodes |');
+  parts.push('| In-Path Assessment Checkpoints   | ' + pathAssessments + '    | 16 module checkpoints + 15 Opslane assessments + 26 project-bound nodes |');
   parts.push('| Assessment Registry Records      | ' + regAssessments + '    | 19 module assessments + 28 project assessments in `assessments.json`|');
   parts.push('| Canonical Concepts               | ' + conceptCount + '    | Fully resolved ownership without leaks in `concepts.json`         |');
   parts.push('| Operational Categories           | ' + failureCategoryCount + '    | Mapped across 18 module coverage entries                          |\n');
@@ -116,16 +116,45 @@ function generateFullReadme() {
   const lessonItemsCount = lessons + labs;
   const lessonMins = coreItems.filter(it => it.type === 'lesson' || it.type === 'lab').reduce((acc, it) => acc + (it.estimated_minutes || 45), 0);
   const lessonHrs = (lessonMins / 60).toFixed(1);
-  const totalCoreItems = lessonItemsCount + 19 + 8 + (checkpoints + capstones) + pathAssessments;
-  const totalCoreHrs = (parseFloat(lessonHrs) + 38.0 + 16.0 + 30.0 + 57.0).toFixed(1);
+
+  const coreProjects = coreItems.filter(it => it.type === 'project');
+  const miniProjects = coreProjects.filter(p => {
+    const prj = projects.projects.find(x => x.id === p.id);
+    return prj ? prj.type === 'mini-project' : false;
+  });
+  const miniMins = miniProjects.reduce((acc, it) => acc + (it.estimated_minutes || 120), 0);
+  const miniHrs = (miniMins / 60).toFixed(1);
+
+  const portfolioProjects = coreProjects.filter(p => {
+    const prj = projects.projects.find(x => x.id === p.id);
+    return prj ? prj.type === 'portfolio-project' : false;
+  });
+  const portfolioMins = portfolioProjects.reduce((acc, it) => acc + (it.estimated_minutes || 120), 0);
+  const portfolioHrs = (portfolioMins / 60).toFixed(1);
+
+  const flagshipMilestonesCount = checkpoints + capstones;
+  const milestoneMins = coreItems.filter(it => it.type === 'checkpoint' || it.type === 'capstone').reduce((acc, it) => acc + (it.estimated_minutes || 120), 0);
+
+  const flagshipProjects = coreProjects.filter(p => {
+    const prj = projects.projects.find(x => x.id === p.id);
+    return prj ? prj.type === 'flagship' || p.id.includes('opslane') : p.id.includes('opslane');
+  });
+  const flagshipMins = flagshipProjects.reduce((acc, it) => acc + (it.estimated_minutes || 120), 0);
+
+  const assessMins = coreItems.filter(it => it.type === 'assessment').reduce((acc, it) => acc + (it.estimated_minutes || 60), 0);
+  const assessHrs = (assessMins / 60).toFixed(1);
+
+  const totalCoreItems = lessonItemsCount + miniProjects.length + portfolioProjects.length + flagshipProjects.length + flagshipMilestonesCount + pathAssessments;
+  const totalCoreMins = lessonMins + miniMins + portfolioMins + flagshipMins + milestoneMins + assessMins;
+  const totalCoreHrs = (totalCoreMins / 60).toFixed(1);
 
   parts.push('| Activity Layer | Items | On-Paper Metadata | Realistic Learner Effort | Notes |');
   parts.push('| :--- | :---: | :---: | :---: | :--- |');
   parts.push('| **Instructional Lessons & Labs** | ' + lessonItemsCount + ' | ' + lessonHrs + ' hrs | 235 – 265 hrs | Reading, mental models, running code examples, review questions (Modules 00–16) |');
-  parts.push('| **Mini-Projects** | 19 | 38.0 hrs | 40 – 75 hrs | Immediate practical reinforcement (2–4 hours per project) |');
-  parts.push('| **Portfolio Projects** | 8 | 16.0 hrs | 65 – 120 hrs | Multi-component services with tests, migrations, CI/CD (8–15 hours per project) |');
-  parts.push('| **Flagship Opslane Milestones** | ' + (checkpoints + capstones) + ' | 30.0 hrs | 50 – 80 hrs | Integrated production system with auth, DB, payments, worker pools, metrics (Module 18) |');
-  parts.push('| **In-Path Assessments & Defense** | ' + pathAssessments + ' | 57.0 hrs | 45 – 60 hrs | Self-evaluation checklists, code reviews, and capstone oral/technical defense |');
+  parts.push('| **Mini-Projects** | ' + miniProjects.length + ' | ' + miniHrs + ' hrs | 36 – 72 hrs | Immediate practical reinforcement (2–4 hours per project) |');
+  parts.push('| **Portfolio Projects** | ' + portfolioProjects.length + ' | ' + portfolioHrs + ' hrs | 65 – 120 hrs | Multi-component services with tests, migrations, CI/CD (8–15 hours per project) |');
+  parts.push('| **Flagship Opslane Milestones & Projects** | ' + (flagshipMilestonesCount + flagshipProjects.length) + ' | ' + ((milestoneMins + flagshipMins) / 60).toFixed(1) + ' hrs | 55 – 85 hrs | Integrated production system with auth, DB, payments, worker pools, metrics (Module 18) |');
+  parts.push('| **In-Path Assessments & Defense** | ' + pathAssessments + ' | ' + assessHrs + ' hrs | 45 – 60 hrs | Self-evaluation checklists, code reviews, and capstone oral/technical defense |');
   parts.push('| **Core Total** | **' + totalCoreItems + '** | **' + totalCoreHrs + ' hrs** | **435 – 600 hrs** | **Realistic full engineering workload across all 18 core modules** |\n');
 
   parts.push('### 2. Weekly Commitment Planning Models\n');

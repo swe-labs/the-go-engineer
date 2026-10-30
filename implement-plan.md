@@ -54,7 +54,7 @@ Start with the following files and their actual contents on `release/v3`:
 - `curriculum/failures.json`
 - `curriculum/crossrefs.json`
 - `curriculum/readme.contracts.json`
-- `curriculum/migration.v2-to-v3.json`
+- `curriculum/legacy/migration.v2-to-v3.json`
 - `curriculum/contributor-authoring-guide.md`
 - `curriculum/zero-magic-authoring-spec.md`
 - `curriculum/quality-rubric.md`
