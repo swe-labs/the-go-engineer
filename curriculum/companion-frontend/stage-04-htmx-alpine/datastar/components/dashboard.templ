@@ -1,0 +1,151 @@
+package components
+
+templ Dashboard(m MetricsSnapshot, tasks []*Task) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>Worker Pool &amp; Metrics Dashboard — Datastar SSE Edition</title>
+			<link rel="stylesheet" href="/static/style.css"/>
+			<!-- Embedded Offline Vendor Script (Datastar v1.0.4) -->
+			<script type="module" src="/static/datastar.js"></script>
+		</head>
+		<body data-signals="{ modalOpen: false, terminalOpen: true, customType: 'Database Vacuum', customDuration: 3 }">
+			<div class="dashboard-layout" data-init="@get('/events')">
+				<!-- Dashboard Header -->
+				<header class="dashboard-header">
+					<div class="brand">
+						<span class="brand-pill">DATASTAR EDITION</span>
+						<h1 class="brand-heading">Opslane Concurrency &amp; Metrics Dashboard</h1>
+					</div>
+					<div class="header-status">
+						<span class="live-dot" title="Datastar Server-Sent Events active"></span>
+						<span class="text-xs text-muted">Datastar SSE Stream: <strong class="text-emerald">CONNECTED</strong></span>
+					</div>
+				</header>
+
+				<!-- Main Dashboard Workspace -->
+				<main class="dashboard-main">
+					<!-- Metrics Bar (Streamed via Datastar SSE datastar-patch-elements) -->
+					<section id="metrics-container" class="section-metrics">
+						@MetricsCard(m)
+					</section>
+
+					<!-- Action Toolbar & Quick Dispatch -->
+					<section class="toolbar-section">
+						<div class="toolbar-title-group">
+							<h2 class="section-title">Background Worker Pool</h2>
+							<p class="section-subtitle">Module 11 Goroutine workers powered by Datastar unified signals &amp; SSE fragments</p>
+						</div>
+
+						<div class="toolbar-buttons">
+							<!-- Datastar Action Triggers -->
+							<button
+								type="button"
+								class="btn btn-outline"
+								data-on-click="@post('/tasks?type=Data+Ingestion')"
+							>
+								+ Ingestion Job
+							</button>
+							<button
+								type="button"
+								class="btn btn-outline"
+								data-on-click="@post('/tasks?type=Index+Reconciliation')"
+							>
+								+ Reconciliation Job
+							</button>
+
+							<!-- Datastar Signal Modal Trigger -->
+							<button
+								type="button"
+								class="btn btn-primary"
+								data-on-click="$modalOpen = true"
+							>
+								Custom Task Dispatch …
+							</button>
+						</div>
+					</section>
+
+					<!-- Tasks Table -->
+					<section class="table-container">
+						<table class="tasks-table">
+							<thead>
+								<tr>
+									<th class="w-16">ID</th>
+									<th>Job Description</th>
+									<th>Status</th>
+									<th>Assigned Worker</th>
+									<th>Duration</th>
+									<th class="text-right">Action</th>
+								</tr>
+							</thead>
+							<tbody id="tasks-table-body">
+								for _, t := range tasks {
+									@TaskRow(t)
+								}
+							</tbody>
+						</table>
+					</section>
+
+					<!-- Live SSE Log Terminal Drawer (Managed via Datastar Signals) -->
+					<section class="terminal-section">
+						<div class="terminal-header" data-on-click="$terminalOpen = !$terminalOpen">
+							<div class="terminal-title">
+								<span class="terminal-icon">&gt;_</span>
+								<span>Live Worker Pool Execution Stream (SSE: <code>datastar-patch-elements</code>)</span>
+							</div>
+							<button type="button" class="btn-toggle" data-text="$terminalOpen ? 'Collapse' : 'Expand'">Collapse</button>
+						</div>
+
+						<div class="terminal-body" data-show="$terminalOpen">
+							<div id="log-stream" class="terminal-logs">
+								@LogEntry("00:00:00", "[Datastar] Listening for Server-Sent Events on /events stream...", true)
+							</div>
+						</div>
+					</section>
+				</main>
+
+				<!-- Datastar Reactive Modal Dialog -->
+				<div
+					class="modal-backdrop"
+					data-show="$modalOpen"
+					style="display: none;"
+					data-on-keydown__window.escape="$modalOpen = false"
+				>
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title">Dispatch Custom Background Job</h3>
+							<button type="button" class="modal-close" data-on-click="$modalOpen = false">&times;</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="custom-type">Job Classification</label>
+								<select id="custom-type" class="form-select" data-bind="customType">
+									<option value="Database Vacuum">Database Vacuum &amp; Optimize</option>
+									<option value="Payment Batch Ledger">Payment Batch Settlement</option>
+									<option value="Audit Snapshot Generation">Audit Snapshot Generation</option>
+									<option value="Dead Letter Queue Replay">Dead Letter Queue Replay</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="custom-duration">Simulated Work Duration (Seconds)</label>
+								<input type="number" id="custom-duration" min="1" max="15" class="form-input" data-bind="customDuration"/>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-on-click="$modalOpen = false">Cancel</button>
+							<button type="button" class="btn btn-primary" data-on-click="@post('/tasks')">Queue Worker Job</button>
+						</div>
+					</div>
+				</div>
+
+				<footer class="dashboard-footer">
+					<p>The Go Engineer — Frontend Companion Track — Stage 4 (Datastar SSE Hypermedia Edition)</p>
+					<p class="footer-note">Single ~13 KB Script • Server-Sent Events First • Zero Out-Of-Band Hacks • Go Standard Library</p>
+				</footer>
+			</div>
+		</body>
+	</html>
+}
+

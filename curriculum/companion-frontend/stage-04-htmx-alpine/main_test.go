@@ -156,3 +156,77 @@ func TestDashboardServer_SSEStream(t *testing.T) {
 		t.Errorf("expected SSE event payload in body, got: %s", body)
 	}
 }
+
+func setupTestDashboardTempl(t *testing.T) (*DashboardServer, *WorkerPool) {
+	t.Helper()
+
+	broker := NewSSEBroker()
+	pool := NewWorkerPool(2, broker, nil) // pure templ mode
+	server := NewDashboardServer(pool, broker, nil, defaultStaticFS)
+
+	return server, pool
+}
+
+func TestDashboardServer_TemplMode(t *testing.T) {
+	server, pool := setupTestDashboardTempl(t)
+
+	// 1. Root dashboard render
+	req := httptest.NewRequest(http.MethodGet, "/", nil)
+	rr := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusOK {
+		t.Fatalf("expected 200 OK for templ root dashboard, got %d", rr.Code)
+	}
+	body := rr.Body.String()
+	for _, marker := range []string{"hx-ext=\"sse\"", "sse-connect=\"/events\"", "id=\"metrics-panel\"", "id=\"tasks-table-body\"", "id=\"log-stream\""} {
+		if !strings.Contains(body, marker) {
+			t.Errorf("expected templ dashboard to contain %q", marker)
+		}
+	}
+
+	// 2. Enqueue task via POST /tasks
+	form := url.Values{"type": {"Templ Benchmark"}, "duration": {"4"}}
+	reqPost := httptest.NewRequest(http.MethodPost, "/tasks", strings.NewReader(form.Encode()))
+	reqPost.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	rrPost := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrPost, reqPost)
+
+	if rrPost.Code != http.StatusOK {
+		t.Fatalf("expected 200 OK on enqueuing task in templ mode, got %d", rrPost.Code)
+	}
+	postBody := rrPost.Body.String()
+	if !strings.Contains(postBody, "Templ Benchmark") || !strings.Contains(postBody, "hx-swap-oob=\"true\"") {
+		t.Errorf("expected templ response to include task row and OOB swap, got %s", postBody)
+	}
+
+	// 3. Cancel task
+	task := pool.Enqueue("Long Running Templ Task", 20*time.Second)
+	reqCancel := httptest.NewRequest(http.MethodPost, fmt.Sprintf("/tasks/%d/cancel", task.ID), nil)
+	rrCancel := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrCancel, reqCancel)
+
+	if rrCancel.Code != http.StatusOK {
+		t.Fatalf("expected 200 OK on cancel in templ mode, got %d", rrCancel.Code)
+	}
+	if !strings.Contains(rrCancel.Body.String(), "badge-cancelled") {
+		t.Errorf("expected badge-cancelled in templ cancel response, got %s", rrCancel.Body.String())
+	}
+
+	// 4. GET /metrics
+	reqMetrics := httptest.NewRequest(http.MethodGet, "/metrics", nil)
+	rrMetrics := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrMetrics, reqMetrics)
+	if rrMetrics.Code != http.StatusOK || !strings.Contains(rrMetrics.Body.String(), "id=\"metrics-panel\"") {
+		t.Errorf("expected valid metrics panel in templ mode, got %s", rrMetrics.Body.String())
+	}
+
+	// 5. GET /tasks list
+	reqTasks := httptest.NewRequest(http.MethodGet, "/tasks", nil)
+	rrTasks := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrTasks, reqTasks)
+	if rrTasks.Code != http.StatusOK || !strings.Contains(rrTasks.Body.String(), "<tr id=\"task-") {
+		t.Errorf("expected task rows list in templ mode, got %s", rrTasks.Body.String())
+	}
+}
+
