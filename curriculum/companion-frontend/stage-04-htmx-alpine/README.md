@@ -222,5 +222,5 @@ Check out the complete comparative implementation in [`datastar/`](./datastar/RE
 1. **Worker Pool Auto-Scaler**: Add an endpoint `POST /workers/scale?count=N` that dynamically increases or decreases the number of active worker goroutines.
 2. **Task Priority Channels**: Refactor `taskQueue` into dual channels (`highPriorityQueue` and `lowPriorityQueue`) using a Go `select` statement.
 3. **Filtering Table Rows by Status**: Add an Alpine.js or HTMX filter bar (`All`, `Running`, `Completed`, `Cancelled`) to toggle row visibility.
-4. **Datastar Templ Refactor**: Refactor the Datastar variant to use [`a-h/templ`](https://templ.guide) and `github.com/starfederation/datastar/sdk/go`.
+4. **Persistent Signal Store**: Persist client signals to local storage using Datastar `@persist` or server-side session sync.
 

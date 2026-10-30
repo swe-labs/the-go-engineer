@@ -102,19 +102,18 @@ The lab asks you to trace a learning cycle from lesson to proof.
 
 ## Projects
 
-Module 00 has no portfolio project. Its output is a readiness plan.
+Module 00 includes one foundation project:
 
-Portfolio work begins later when you have enough technical material to build meaningful artifacts.
+- [`projects/course-setup-verification/`](./projects/course-setup-verification/README.md) — Course Setup Verification: verify your Go environment, Git installation, IDE configuration, and local build verification.
+
+While full-scale software portfolio systems begin in Module 01, this first operational project establishes your personal proof repository and environment baseline.
 
 ## Assessments
 
-Complete the checkpoint:
+Complete the two Module 00 assessments:
 
-```text
-assessments/checkpoint/
-```
-
-The checkpoint verifies that you can navigate the curriculum, explain zero magic, run a lesson, and describe the proof workflow.
+1. [`assessments/course-setup/`](./assessments/course-setup/README.md) — Course Setup Verification Assessment (evaluates `project-course-setup`).
+2. [`assessments/checkpoint/`](./assessments/checkpoint/README.md) — Module 00 Checkpoint (verifies curriculum navigation, zero-magic contracts, and learning cycle readiness).
 
 ## Common failure modes
 
