@@ -16,6 +16,18 @@ Think of each module as a node in a graph. An arrow points from a module to anot
 
 A roadmap is a dependency graph, not a playlist. Each module lists its prerequisites. A learning path is valid if every prerequisite for each module has been completed before that module is attempted. If you attempt a module whose prerequisites are not met, the path is invalid. You must go back and complete the prerequisite first.
 
+### Linear backend path vs. parallel companion tracks
+
+While the **Core Path** (`modules/00` through `modules/18`) enforces strict prerequisite dependencies, the **Frontend Companion Track** (`companion-frontend/`) runs in parallel as a non-blocking skills accelerator:
+
+- **Stage 1 (Semantic HTML5 & Modern CSS):** Pairs with Module 07 (*CLI & Files*).
+- **Stage 2 (DOM & Fetch API):** Pairs with Modules 08 & 09 (*HTTP REST APIs & SQL Persistence*).
+- **Stage 3 (templ, Tailwind & shadcn-templ):** Pairs with Module 10 (*Auth & Security*).
+- **Stage 4 (HTMX, Alpine.js & Datastar):** Pairs with Modules 11–15 (*Concurrency, Observability & Deployment*).
+- **Stage 5 (Convergence):** Converges in Module 18 (*Flagship Opslane Console*).
+
+You do not need to pause your backend progress to work on the companion track. Instead, dip into each companion stage when you reach its corresponding backend milestone.
+
 ## Under the hood
 
 Each module in the curriculum has an ID, a title, and a list of prerequisite module IDs. Module 00 is the root: it has no prerequisites. Every other module depends on module 00 directly or indirectly. The validation algorithm keeps a set of completed modules. As it walks the path, it checks that every prerequisite for the current module exists in the completed set. If a prerequisite is missing, the path is invalid and the algorithm reports which step failed and why.

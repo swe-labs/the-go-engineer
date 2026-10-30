@@ -20,7 +20,7 @@ The repository separates concerns so that learners, maintainers, and automated v
 
 | Directory | Concern | Audience |
 |-----------|---------|----------|
-| `curriculum/` | Manifest blueprints (`*.json`), lesson modules (`modules/`), and electives | Learners, validators, instructors |
+| `curriculum/` | Manifest blueprints (`*.json`), lesson modules (`modules/`), electives (`electives/`), and companion frontend (`companion-frontend/`) | Learners, validators, instructors |
 | `internal/tools/` | Automated quality gates, graph validation, and verification CLI | CI pipelines, maintainers |
 | `web/` | Learner portal, curriculum graph visualizer, and dashboard | Learners, reviewers |
 | `.agents/` | Pedagogical skills, governance rubrics, and authoring workflows | Engineering mentors, AI assistants |
@@ -64,6 +64,7 @@ var repoDirs = []DirEntry{
 			"modules/00-orientation/ -- Module 0: orientation and setup",
 			"modules/01-...          -- technical modules and portfolio code",
 			"electives/              -- advanced elective tracks",
+			"companion-frontend/     -- 4-stage progressive server-driven hypermedia track",
 		},
 	},
 	{

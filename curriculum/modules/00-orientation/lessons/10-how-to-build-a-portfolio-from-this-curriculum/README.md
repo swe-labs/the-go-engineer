@@ -146,6 +146,7 @@ A professional portfolio goes beyond what this program models. Real portfolios i
 - Commit history shows consistent work over time (not a single massive push)
 - Projects are deployed (even to a free tier) so employers can see them running
 - Each project links to the related job readiness category it demonstrates
+- **Full-Stack Capability Evidence:** In addition to backend portfolio projects, the [Frontend Companion Track](../../companion-frontend/README.md) provides 4 tangible browser applications (Engineering Wiki, Dynamic Book Catalog Client, SaaS Auth Console, and Real-time Opslane Dashboard) proving that you can autonomously deliver complete user-facing software without relying on heavy external frontend teams.
 
 When you apply for jobs, customize your portfolio to the role. If the job emphasizes testing, lead with the project that has the most comprehensive tests. If it emphasizes operations, lead with the deployed project.
 
