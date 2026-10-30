@@ -8,6 +8,14 @@ Before you write serious Go code, you need to know how the repository is organiz
 
 The goal is not to memorize folder names. The goal is to understand the learning system so every later module feels navigable and fair.
 
+## Tracks in this curriculum
+
+The curriculum organizes your engineering journey into three coordinated tracks:
+
+1. **Core Backend Path (`curriculum/modules/`):** The primary 18-module progression from computing fundamentals and systems programming to concurrent worker pools, distributed architectures, and Flagship Opslane.
+2. **Advanced Electives (`curriculum/electives/`):** Deep dives into gRPC streaming, complex generics constraints, CQRS, and advanced distributed patterns.
+3. **[Frontend Companion Track](../../companion-frontend/README.md) (`curriculum/companion-frontend/`):** A 4-stage progressive server-driven hypermedia track (`templ` + `HTMX` + `Tailwind CSS` + `Alpine.js`, with `Datastar` comparison) running parallel to Modules 07–15 and converging at Flagship Opslane.
+
 ## Who this module is for
 
 This module is for:
