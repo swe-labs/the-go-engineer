@@ -38,3 +38,4 @@ func TestCheckFileStatus(t *testing.T) {
 		t.Errorf("expected exit code 1 for directory, got %d", code)
 	}
 }
+
