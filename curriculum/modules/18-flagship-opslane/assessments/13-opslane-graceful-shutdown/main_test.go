@@ -45,7 +45,15 @@ func TestGracefulShutdown_InFlightCompleteAndNewRejected(t *testing.T) {
 	var inFlightBody string
 	var inFlightErr error
 
-	// 2. Launch long in-flight request (50ms)
+	started := make(chan struct{})
+	var startOnce sync.Once
+	coordinator.onSlowTaskStart = func() {
+		startOnce.Do(func() {
+			close(started)
+		})
+	}
+
+	// 2. Launch long in-flight request
 	go func() {
 		defer wg.Done()
 		resp, err := client.Get("http://" + addr + "/slow-task")
@@ -59,11 +67,15 @@ func TestGracefulShutdown_InFlightCompleteAndNewRejected(t *testing.T) {
 		inFlightBody = string(b)
 	}()
 
-	// Allow request to reach the handler
-	time.Sleep(15 * time.Millisecond)
+	// Wait deterministically until the request has entered handleSlowTask
+	select {
+	case <-started:
+	case <-time.After(5 * time.Second):
+		t.Fatal("timed out waiting for slow-task to start")
+	}
 
 	// 3. Initiate Graceful Shutdown concurrently while request is in flight
-	shutdownCtx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if err := coordinator.GracefulShutdown(shutdownCtx); err != nil {
@@ -73,7 +85,7 @@ func TestGracefulShutdown_InFlightCompleteAndNewRejected(t *testing.T) {
 	// 4. In-flight request must finish successfully (200 OK)
 	wg.Wait()
 	if inFlightErr != nil {
-		t.Fatalf("in-flight request failed prematurely: %v", err)
+		t.Fatalf("in-flight request failed prematurely: %v", inFlightErr)
 	}
 	if inFlightStatus != http.StatusOK || inFlightBody != "SLOW_TASK_COMPLETED" {
 		t.Fatalf("expected in-flight request to complete with 200 OK, got status %d, body: %q", inFlightStatus, inFlightBody)

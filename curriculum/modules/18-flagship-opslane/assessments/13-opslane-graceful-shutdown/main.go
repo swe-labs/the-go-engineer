@@ -15,11 +15,12 @@ import (
 
 // ShutdownCoordinator coordinates graceful termination across HTTP and background resources.
 type ShutdownCoordinator struct {
-	server       *http.Server
-	shuttingDown atomic.Bool
-	workerActive atomic.Int32
-	workerQueue  chan string
-	cleanupDone  chan struct{}
+	server          *http.Server
+	shuttingDown    atomic.Bool
+	workerActive    atomic.Int32
+	workerQueue     chan string
+	cleanupDone     chan struct{}
+	onSlowTaskStart func()
 }
 
 func NewShutdownCoordinator(addr string) *ShutdownCoordinator {
@@ -57,6 +58,9 @@ func (sc *ShutdownCoordinator) handlePing(w http.ResponseWriter, r *http.Request
 }
 
 func (sc *ShutdownCoordinator) handleSlowTask(w http.ResponseWriter, r *http.Request) {
+	if sc.onSlowTaskStart != nil {
+		sc.onSlowTaskStart()
+	}
 	// Simulate an active in-flight request processing
 	time.Sleep(50 * time.Millisecond)
 	w.WriteHeader(http.StatusOK)
