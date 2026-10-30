@@ -146,7 +146,7 @@ A professional portfolio goes beyond what this program models. Real portfolios i
 - Commit history shows consistent work over time (not a single massive push)
 - Projects are deployed (even to a free tier) so employers can see them running
 - Each project links to the related job readiness category it demonstrates
-- **Full-Stack Capability Evidence:** In addition to backend portfolio projects, the [Frontend Companion Track](../../companion-frontend/README.md) provides 4 tangible browser applications (Engineering Wiki, Dynamic Book Catalog Client, SaaS Auth Console, and Real-time Opslane Dashboard) proving that you can autonomously deliver complete user-facing software without relying on heavy external frontend teams.
+- **Full-Stack Capability Evidence:** In addition to backend portfolio projects, the [Frontend Companion Track](../../../../companion-frontend/README.md) provides 4 tangible browser applications (Engineering Wiki, Dynamic Book Catalog Client, SaaS Auth Console, and Real-time Opslane Dashboard) proving that you can autonomously deliver complete user-facing software without relying on heavy external frontend teams.
 
 When you apply for jobs, customize your portfolio to the role. If the job emphasizes testing, lead with the project that has the most comprehensive tests. If it emphasizes operations, lead with the deployed project.
 
@@ -180,8 +180,8 @@ The tests in the inline example verify:
 
 ## NEXT UP
 
-1. [Project: Course Setup Verification](../projects/course-setup-verification/README.md) — verify your environment
-2. [Assessment: Course Setup](../assessments/course-setup/README.md) — confirm your environment is ready
-3. [Assessment: Module 00 Checkpoint](../assessments/checkpoint/README.md) — verify you understand the orientation content
+1. [Project: Course Setup Verification](../../projects/course-setup-verification/README.md) — verify your environment
+2. [Assessment: Course Setup](../../assessments/course-setup/README.md) — confirm your environment is ready
+3. [Assessment: Module 00 Checkpoint](../../assessments/checkpoint/README.md) — verify you understand the orientation content
 
 Then move on to [Module 01 — Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md).

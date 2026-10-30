@@ -154,7 +154,7 @@ Add a seventh step called "Share" between Reflect and Checkpoint with Index 6 (r
 
 1. What are the four content types used in this curriculum, and what is the purpose of each?
 2. How does the `Advance()` method in the Go example simulate progression through the learning cycle?
-3. Why should you complete the Reflec step before moving to the next lesson?
+3. Why should you complete the Reflect step before moving to the next lesson?
 4. What would happen if a module had two projects but no exercises?
 5. In the Go example, what change would you make to allow a learner to go back to a previous step?
 

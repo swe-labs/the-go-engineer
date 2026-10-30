@@ -43,4 +43,4 @@ When you are done, update your Portfolio Plan (from Lesson 10) to include this p
 
 ## NEXT UP
 
-[Assessment: Course Setup](../assessments/course-setup/README.md) — confirm your environment passes the verification.
+[Assessment: Course Setup](../../assessments/course-setup/README.md) — confirm your environment passes the verification.

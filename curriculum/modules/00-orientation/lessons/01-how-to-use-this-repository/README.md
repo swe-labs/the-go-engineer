@@ -10,7 +10,7 @@ Every engineering project depends on a shared mental model of its own layout. Wh
 
 ## Mental model
 
-Picture a modern software engineering system. The curriculum core (`curriculum/`) holds both the authoritative machine-readable blueprints (such as `path.core.json` and `projects.json`) and the physical instructional modules (`modules/` and `electives/`). The internal toolchain (`internal/tools/curriculum/`) serves as the automated quality compiler, executing 14 strict quality gates. The learner web platform (`web/`) visualizes your progression graph. The agent governance framework (`.agents/`) maintains pedagogical standards.
+Picture a modern software engineering system. The curriculum core (`curriculum/`) holds both the authoritative machine-readable blueprints (such as `path.core.json` and `projects.json`) and the physical instructional modules (`modules/` and `electives/`). The internal toolchain (`internal/tools/curriculum/`) serves as the automated quality compiler, executing 17 strict quality gates. The learner web platform (`web/`) visualizes your progression graph. The agent governance framework (`.agents/`) maintains pedagogical standards.
 
 When you wonder "Why does this file exist here?", trace it back to one of these core system layers. Every file in the root belongs to a clearly defined architectural concern.
 
@@ -71,7 +71,7 @@ var repoDirs = []DirEntry{
 		Name:    "internal/tools/",
 		Purpose: "curriculum quality gates and automated validation tooling",
 		Contents: []string{
-			"curriculum/main.go      -- 14 automated quality validators (schema, graph, zero-magic)",
+			"curriculum/main.go      -- 17 automated quality validators (schema, graph, zero-magic)",
 		},
 	},
 	{

@@ -24,4 +24,4 @@
 ## Part 4 — Reflection
 
 13. **Expected:** Any honest reflection. Common issues: GOPATH confusion, missing `gopls`, Windows path quoting. Resolution should be concrete.
-14. **Expected:** Any honest answer. Common unclear areas: the relationship between v2 and v3 curriculum, elective modules, proof workflow.
+14. **Expected:** Any honest answer. Common unclear areas: the relationship between core modules, elective tracks, the frontend companion track, and the proof workflow.
