@@ -6097,7 +6097,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/08-go-doc",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/08-go-doc"
       },
       "files": {
         "assets_dir": "",
@@ -6106,7 +6106,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/08-go-doc/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/08-go-doc/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -6280,7 +6280,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls"
       },
       "files": {
         "assets_dir": "",
@@ -6289,7 +6289,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -6463,7 +6463,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/10-reading-compiler-errors",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/10-reading-compiler-errors"
       },
       "files": {
         "assets_dir": "",
@@ -6472,7 +6472,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/10-reading-compiler-errors/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/10-reading-compiler-errors/main_test.go"
       },
       "source_legacy_ids": [
         "GT.6"
@@ -6648,7 +6648,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/11-reading-runtime-errors",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/11-reading-runtime-errors"
       },
       "files": {
         "assets_dir": "",
@@ -6657,7 +6657,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/11-reading-runtime-errors/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/11-reading-runtime-errors/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -6831,7 +6831,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/12-reading-test-failures",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/12-reading-test-failures"
       },
       "files": {
         "assets_dir": "",
@@ -7022,7 +7022,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/13-go-module-root-basics",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/13-go-module-root-basics"
       },
       "files": {
         "assets_dir": "",
@@ -7031,7 +7031,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/13-go-module-root-basics/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/13-go-module-root-basics/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -7217,7 +7217,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/14-tooling-checklist",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/14-tooling-checklist"
       },
       "files": {
         "assets_dir": "",
@@ -7226,7 +7226,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/14-tooling-checklist/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/14-tooling-checklist/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [

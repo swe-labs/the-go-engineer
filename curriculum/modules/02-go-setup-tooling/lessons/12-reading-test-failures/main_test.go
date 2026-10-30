@@ -1,19 +1,42 @@
 package main
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestAdd(t *testing.T) {
-	got := Add(2, 2)
-	want := 4
-	if got != want {
-		t.Errorf("Add(2, 2) = %d; want %d", got, want)
+	tests := []struct {
+		name string
+		a, b int
+		want int
+	}{
+		{"standard addition", 2, 2, 4},
+		{"identity with zero", 0, 0, 0},
+		{"negative integers", -5, 5, 0},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := Add(tt.a, tt.b)
+			if got != tt.want {
+				t.Errorf("%s", FormatFailureMessage(tt.name, got, tt.want))
+			}
+		})
 	}
 }
 
-func TestAddZero(t *testing.T) {
-	got := Add(0, 0)
-	want := 0
-	if got != want {
-		t.Errorf("Add(0, 0) = %d; want %d", got, want)
+func TestFormatFailureMessage(t *testing.T) {
+	msg := FormatFailureMessage("Sqrt(4)", 3, 2)
+	expected := "Sqrt(4) = 3; want 2"
+	if msg != expected {
+		t.Errorf("FormatFailureMessage() = %q, want %q", msg, expected)
 	}
+	if !strings.Contains(msg, "want 2") {
+		t.Errorf("message should clearly specify desired want value")
+	}
+}
+
+func TestMainExecution(t *testing.T) {
+	main()
 }
