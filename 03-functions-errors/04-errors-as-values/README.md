@@ -59,6 +59,7 @@ go run ./03-functions-errors/04-errors-as-values
 1. In `main.go`, change `divide(12, 0)` to `divide(12, 4)`. Does the `if err != nil` block still run?
 2. Add a new item to the `catalog` map and look it up successfully.
 3. Try to look up an item that is **not** in the catalog. Observe the formatted error message.
+4. When `lookupPrice` returns an error, print a fallback line such as `using default price: 0` instead of the raw error—then run the program again with a valid `"tea"` lookup to see both handled paths in one run.
 
 ## In Production
 
