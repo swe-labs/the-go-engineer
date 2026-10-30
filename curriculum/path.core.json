@@ -4711,7 +4711,7 @@
         "performance_implications": [
           "A correct installation saves hours of debugging. The download takes about 2 minutes on a typical connection.",
           "Multiple Go versions can coexist; using a version manager (go install golang.org/dl/go1.X.X@latest) avoids PATH conflicts.",
-          "The go binary itself is about 15 MB and starts instantly â€” no heavy toolchain overhead."
+          "The go binary itself is about 15 MB and starts instantly — no heavy toolchain overhead."
         ],
         "problem_solved": "Before writing Go code, learners need a working toolchain. This lesson ensures the go command is on PATH, the version is correct, and GOROOT points to a valid installation so subsequent tooling lessons work without errors.",
         "proof_of_understanding": "The learner must install Go (if not already installed), run go version, go env GOROOT, and go env GOPATH, then explain what each command tells them about their setup.",
@@ -4813,7 +4813,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/01-install-and-verify-go",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/01-install-and-verify-go"
       },
       "files": {
         "assets_dir": "",
@@ -4822,7 +4822,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/01-install-and-verify-go/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/01-install-and-verify-go/main_test.go"
       },
       "source_legacy_ids": [
         "GT.1"
@@ -4895,10 +4895,10 @@
         "mental_model": "A Go program is a collection of packages. Only the package named main with func main() produces an executable. Other packages are reusable libraries. This separation forces clear boundaries between executable entry points and library code from day one.",
         "performance_implications": [
           "Hello World compiles in under one second. The resulting binary is about 1.5 MB due to the statically linked runtime.",
-          "The startup time is essentially instant â€” Go does not need a virtual machine or runtime initialization step.",
+          "The startup time is essentially instant — Go does not need a virtual machine or runtime initialization step.",
           "Using fmt.Println for a single string is fine; for hot paths, consider fmt.Fprintf with a buffered writer."
         ],
-        "problem_solved": "Every language learner's first milestone is getting a program to compile and run. Hello World validates that the entire toolchain â€” editor, compiler, linker, and runtime â€” works end-to-end before tackling more complex concepts.",
+        "problem_solved": "Every language learner's first milestone is getting a program to compile and run. Hello World validates that the entire toolchain — editor, compiler, linker, and runtime — works end-to-end before tackling more complex concepts.",
         "proof_of_understanding": "The learner must write a hello world program, run it with go run ., modify it to print the current time using time.Now, and confirm the output.",
         "real_world_usage": "Hello World is the canonical starting point for any Go project. Production Go services begin as a main.go with func main(), then grow into HTTP servers, CLI tools, or worker processes. The same package main convention applies at every scale.",
         "step_by_step_execution": [
@@ -4908,7 +4908,7 @@
           "Open a terminal in that directory and run go run .",
           "Verify the output reads Hello, World! and no errors appear."
         ],
-        "under_the_hood": "go run compiles the main package into a temporary directory, links the Go runtime statically, executes the binary, and discards the build artifacts. The Go linker includes the minimum runtime needed â€” garbage collector, scheduler, and defer stack â€” even for a trivial program that only calls fmt.Println.",
+        "under_the_hood": "go run compiles the main package into a temporary directory, links the Go runtime statically, executes the binary, and discards the build artifacts. The Go linker includes the minimum runtime needed — garbage collector, scheduler, and defer stack — even for a trivial program that only calls fmt.Println.",
         "why_it_exists": "Hello World is the simplest program that proves the toolchain works. It removes the biggest unknown in learning a new language: whether the computer is set up correctly to compile and run code."
       },
       "crossrefs": {
@@ -4998,7 +4998,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/02-hello-world",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/02-hello-world"
       },
       "files": {
         "assets_dir": "",
@@ -5007,7 +5007,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/02-hello-world/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/02-hello-world/main_test.go"
       },
       "source_legacy_ids": [
         "GT.2"
@@ -5081,7 +5081,7 @@
         "performance_implications": [
           "go run compiles from scratch every time. For large projects, use go test -count=1 or go build first to leverage cached compilation.",
           "The compiled binary is placed in a temp directory and deleted after execution, so there is no disk pollution.",
-          "Startup overhead is the same as a compiled binary â€” go run does not add runtime latency."
+          "Startup overhead is the same as a compiled binary — go run does not add runtime latency."
         ],
         "problem_solved": "Developers need a fast edit-compile-run loop. go run eliminates the separate build-and-run step, making iteration immediate. It also avoids cluttering the project directory with binary artifacts.",
         "proof_of_understanding": "The learner must write a program that reads os.Args and prints each argument, then run it with go run . hello world and verify the output.",
@@ -5182,7 +5182,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/03-go-run",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/03-go-run"
       },
       "files": {
         "assets_dir": "",
@@ -5191,7 +5191,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/03-go-run/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/03-go-run/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -5261,7 +5261,7 @@
         "how_go_uses_it": "The Go standard library is compiled with go build. Third-party tools are distributed via go install (which is go build plus binary placement). go build -ldflags=\"-s -w\" strips debug info for smaller production binaries.",
         "mental_model": "go build is the compile-and-link step without execution. It produces a static binary containing the Go runtime and all dependencies, with no external DLLs or shared libraries required at runtime.",
         "performance_implications": [
-          "go build uses cached compilation â€” only changed files are recompiled. Consecutive builds of the same code complete in < 1 second.",
+          "go build uses cached compilation — only changed files are recompiled. Consecutive builds of the same code complete in < 1 second.",
           "The resulting binary is typically 5-20 MB for a small service due to the statically linked runtime.",
           "Use -ldflags=\"-s -w\" to reduce binary size by ~30% by stripping symbol tables and DWARF debug info."
         ],
@@ -5365,7 +5365,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/04-go-build",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/04-go-build"
       },
       "files": {
         "assets_dir": "",
@@ -5374,7 +5374,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/04-go-build/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/04-go-build/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -5548,7 +5548,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/05-go-test",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/05-go-test"
       },
       "files": {
         "assets_dir": "",
@@ -5625,9 +5625,9 @@
           "Learner must explain why gofmt uses tabs for indentation and spaces for alignment."
         ],
         "how_go_uses_it": "The Go standard library is formatted with gofmt before every commit. The gofmt -s flag simplifies unnecessary code (like redundant type declarations). gofmt -r rule applies mechanical refactoring patterns across a codebase.",
-        "mental_model": "gofmt is an opinionated code formatter with zero configuration. There is no style guide to memorize â€” gofmt is the style guide. Every Go file in the ecosystem looks the same because gofmt eliminates formatting debates.",
+        "mental_model": "gofmt is an opinionated code formatter with zero configuration. There is no style guide to memorize — gofmt is the style guide. Every Go file in the ecosystem looks the same because gofmt eliminates formatting debates.",
         "performance_implications": [
-          "gofmt completes in milliseconds for typical files. It does not compile the code â€” it parses and reformats the AST.",
+          "gofmt completes in milliseconds for typical files. It does not compile the code — it parses and reformats the AST.",
           "Formatting early and often reduces merge conflicts because diff noise from style changes is eliminated.",
           "Most editors run gofmt on save via gopls, making formatting invisible to the developer."
         ],
@@ -5731,7 +5731,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/06-gofmt",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/06-gofmt"
       },
       "files": {
         "assets_dir": "",
@@ -5740,7 +5740,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/06-gofmt/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/06-gofmt/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -5782,8 +5782,8 @@
       "zero_magic": {
         "beginner_mistakes": [
           "Running go vet only once and ignoring its warnings because the code compiles and runs fine.",
-          "Confusing go vet warnings with compiler errors â€” vet warnings are suspicious patterns, not syntax errors.",
-          "Assuming go vet catches all bugs â€” it only detects specific known patterns, not logic errors or missing tests."
+          "Confusing go vet warnings with compiler errors — vet warnings are suspicious patterns, not syntax errors.",
+          "Assuming go vet catches all bugs — it only detects specific known patterns, not logic errors or missing tests."
         ],
         "execution_timeline": [
           "Write Go code that compiles successfully but contains a suspicious pattern (e.g., unused variable, printf format mismatch).",
@@ -5808,13 +5808,13 @@
           "Learner must explain why go vet warnings are not compiler errors but are still important to fix."
         ],
         "how_go_uses_it": "The Go standard library is vetted before every release. go vet is integrated into the go toolchain and runs specific analyzers for printf mismatches, unreachable code, shadowed variables, lock misuses, and test format issues. The golang.org/x/tools repository contains additional analyzers that can be added via go vet -vettool.",
-        "mental_model": "go vet is a static analysis linter that finds suspicious code patterns â€” code that compiles but is probably wrong. Unlike gofmt which fixes style, go vet flags likely bugs.",
+        "mental_model": "go vet is a static analysis linter that finds suspicious code patterns — code that compiles but is probably wrong. Unlike gofmt which fixes style, go vet flags likely bugs.",
         "performance_implications": [
-          "go vet runs after compilation and is fast â€” typically less than a second per package.",
+          "go vet runs after compilation and is fast — typically less than a second per package.",
           "CI pipelines should fail on go vet warnings, preventing suspicious patterns from reaching production.",
           "go vet ./... on a large monorepo runs in parallel across packages and completes in seconds."
         ],
-        "problem_solved": "Many bugs are not syntax errors â€” they compile fine but behave unexpectedly. go vet catches common suspicious patterns like printf argument mismatches, unused variables, and dead assignments before they cause runtime failures.",
+        "problem_solved": "Many bugs are not syntax errors — they compile fine but behave unexpectedly. go vet catches common suspicious patterns like printf argument mismatches, unused variables, and dead assignments before they cause runtime failures.",
         "proof_of_understanding": "The learner must write a program with at least two go-vet-detectable issues (e.g., Printf mismatch and unused variable), run go vet ./..., read the warnings, and fix all of them.",
         "real_world_usage": "CI pipelines run go vet ./... in parallel with go test. Many organizations enforce zero go vet warnings in production code. go vet -vettool=$(which staticcheck) runs the staticcheck analyzer as a vet pass for deeper analysis.",
         "step_by_step_execution": [
@@ -5825,7 +5825,7 @@
           "Run go vet ./... from the module root to check all packages."
         ],
         "under_the_hood": "go vet compiles each package, then runs a set of built-in analyzers on the compiled AST and type information. Each analyzer implements the go/analysis.Analyzer interface. Popular built-in analyzers include printf (checks format verb/argument matching), shadow (detects shadowed variables), copylocks (detects passing locks by value), and unreachable (detects dead code).",
-        "why_it_exists": "Compilation success does not mean code correctness. go vet catches a class of bugs that the compiler does not check â€” suspicious patterns that are valid Go but likely unintended."
+        "why_it_exists": "Compilation success does not mean code correctness. go vet catches a class of bugs that the compiler does not check — suspicious patterns that are valid Go but likely unintended."
       },
       "crossrefs": {
         "builds_on": [
@@ -5914,7 +5914,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/02-go-setup-tooling/lessons/07-go-vet",
-        "test_command": ""
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/07-go-vet"
       },
       "files": {
         "assets_dir": "",
@@ -5923,7 +5923,7 @@
         "readme_path": "modules/02-go-setup-tooling/lessons/07-go-vet/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/02-go-setup-tooling/lessons/07-go-vet/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -5993,7 +5993,7 @@
         "how_go_uses_it": "The entire Go standard library is documented via doc comments. go doc extracts and formats these comments. pkg.go.dev renders the same documentation for all publicly available Go packages. The convention is: package comments start with Package <name>, function comments start with the function name.",
         "mental_model": "go doc reads doc comments from Go source files and displays them in the terminal. A doc comment is a plain text comment preceding a top-level declaration. The first sentence becomes the short summary; the full comment body is the detailed documentation.",
         "performance_implications": [
-          "go doc is instant â€” it reads source files directly without compiling.",
+          "go doc is instant — it reads source files directly without compiling.",
           "Well-documented code is faster to onboard into, reducing the time to understand unfamiliar packages.",
           "go doc requires no internet access; it works fully offline for any installed package."
         ],
@@ -6180,7 +6180,7 @@
           "Incremental updates after the initial index are sub-second. gopls watches file changes and re-indexes only modified files.",
           "Memory usage is typically 100-300 MB for a medium-sized module. This is normal and expected for a language server."
         ],
-        "problem_solved": "Without gopls, Go developers have no IDE features â€” no autocomplete, no go-to-definition, no inline errors. gopls provides these capabilities and ensures every editor has the same high-quality Go experience.",
+        "problem_solved": "Without gopls, Go developers have no IDE features — no autocomplete, no go-to-definition, no inline errors. gopls provides these capabilities and ensures every editor has the same high-quality Go experience.",
         "proof_of_understanding": "The learner must install gopls if not already present, open a Go file, use hover to view documentation on fmt.Println, use go-to-definition to navigate to the standard library source, and fix a diagnostic shown by gopls.",
         "real_world_usage": "Every professional Go developer uses gopls daily. VS Code's Go extension, vim-go, and gopls Emacs mode all depend on gopls for the core editing experience. CI does not use gopls, but developers rely on it for real-time feedback.",
         "step_by_step_execution": [
@@ -6190,7 +6190,7 @@
           "Open a Go file and verify features: hover over fmt.Println, trigger completion with ., go to definition on a function call.",
           "Introduce a syntax error and observe the red squiggly underline with the error message."
         ],
-        "under_the_hood": "gopls implements the Language Server Protocol (LSP) â€” a JSON-RPC protocol for editor communication. It parses the module's Go files, resolves imports, builds a type-checked AST, and maintains a cache of symbols and their locations. When you hover over a symbol, gopls looks up its doc comment; when you go-to-definition, it returns the file, line, and column of the declaration.",
+        "under_the_hood": "gopls implements the Language Server Protocol (LSP) — a JSON-RPC protocol for editor communication. It parses the module's Go files, resolves imports, builds a type-checked AST, and maintains a cache of symbols and their locations. When you hover over a symbol, gopls looks up its doc comment; when you go-to-definition, it returns the file, line, and column of the declaration.",
         "why_it_exists": "Editors without language servers are just text editors with syntax highlighting. gopls transforms any LSP-compatible editor into a full-featured Go IDE, providing real-time feedback that accelerates learning and development."
       },
       "crossrefs": {
@@ -6360,7 +6360,7 @@
         "mental_model": "Compiler errors are the Go compiler's way of saying I cannot translate this into machine code. The error message tells you exactly where (file:line:col) and why (error message). The first error is usually the real cause; later errors are often cascading effects.",
         "performance_implications": [
           "Go's compiler stops after the first pass but may report multiple errors from that pass.",
-          "Fix errors from top to bottom â€” the first error is often the root cause of subsequent ones.",
+          "Fix errors from top to bottom — the first error is often the root cause of subsequent ones.",
           "Reading and understanding the error message is faster than random trial-and-error debugging."
         ],
         "problem_solved": "Compile errors are frustrating for beginners who do not know what the messages mean. This lesson teaches learners to read error messages systematically, reducing the time between error and fix.",
@@ -6545,7 +6545,7 @@
         "mental_model": "A panic traceback is a call stack printed in reverse order. The top of the traceback is the panic site (the line that panicked). Each frame below shows who called whom. Read from top to bottom: the first frame is the bug, the last frame is main.",
         "performance_implications": [
           "Printing a traceback is slow (millions of cycles) and should not happen in normal operation.",
-          "Panics are intended for truly exceptional conditions â€” not for regular error handling.",
+          "Panics are intended for truly exceptional conditions — not for regular error handling.",
           "Recovering from a panic in a deferred function is the correct way to prevent crashes in long-running servers (e.g., HTTP handler per-request recovery)."
         ],
         "problem_solved": "Runtime errors crash programs without warning. Understanding panic tracebacks lets developers find the exact cause quickly instead of guessing where the crash occurred.",
@@ -6714,7 +6714,7 @@
             "scenario": "go test -v shows a test failed but the error message says something unexpected."
           },
           {
-            "cause": "The test code itself has a bug â€” usually accessing a test data slice beyond its length.",
+            "cause": "The test code itself has a bug — usually accessing a test data slice beyond its length.",
             "fix": "Look at the traceback printed after the panic to find the exact line in the test file. Fix the test's data setup or access pattern.",
             "scenario": "go test shows panic: runtime error: index out of range inside a test."
           }
@@ -6725,11 +6725,11 @@
           "Learner must identify a test failure caused by incorrect setup (not a production code bug) from the error message."
         ],
         "how_go_uses_it": "Go's testing package reports failures with file:line information. t.Error marks the test as failed but continues execution. t.Fatal marks the test as failed and stops immediately. The -v flag prints all test names and log output. go test -json formats output as JSON for CI tooling.",
-        "mental_model": "A test failure output tells you: which test (TestXxx), where (file:line), what was expected vs what was actual, and any additional log messages. The first failure message is the most actionable â€” fix it before worrying about cascading failures.",
+        "mental_model": "A test failure output tells you: which test (TestXxx), where (file:line), what was expected vs what was actual, and any additional log messages. The first failure message is the most actionable — fix it before worrying about cascading failures.",
         "performance_implications": [
-          "go test -v output can be very long for large test suites â€” pipe it through less or grep for specific test names.",
+          "go test -v output can be very long for large test suites — pipe it through less or grep for specific test names.",
           "Use go test -run ^TestName$ to run a single test and reduce noise.",
-          "Cascading failures happen when an early test failure leaves state that breaks later tests â€” fix from top to bottom."
+          "Cascading failures happen when an early test failure leaves state that breaks later tests — fix from top to bottom."
         ],
         "problem_solved": "Test output is meaningless if you cannot read it. This lesson teaches learners to parse go test -v output, understand failure messages, and locate the exact line causing a test to fail.",
         "proof_of_understanding": "The learner must write a test that fails, run go test -v, identify the test name, the file:line of the failure, the expected vs actual values, and fix the test or code.",
