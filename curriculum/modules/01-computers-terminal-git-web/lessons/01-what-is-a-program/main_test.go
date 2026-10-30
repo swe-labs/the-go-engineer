@@ -28,3 +28,4 @@ func TestMainExecution(t *testing.T) {
 	// Verify main executes cleanly without panic
 	main()
 }
+

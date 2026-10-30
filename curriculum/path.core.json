@@ -2024,7 +2024,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/01-what-is-a-program",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/01-what-is-a-program"
       },
       "files": {
         "assets_dir": "",
@@ -2033,7 +2033,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/01-what-is-a-program/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/01-what-is-a-program/main_test.go"
       },
       "source_legacy_ids": [
         "HC.1"
@@ -2209,7 +2209,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process"
       },
       "files": {
         "assets_dir": "",
@@ -2218,7 +2218,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -2392,7 +2392,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths"
       },
       "files": {
         "assets_dir": "",
@@ -2401,7 +2401,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -2575,7 +2575,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/04-terminal-basics",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/04-terminal-basics"
       },
       "files": {
         "assets_dir": "",
@@ -2584,7 +2584,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/04-terminal-basics/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/04-terminal-basics/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -2758,7 +2758,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/05-environment-variables",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/05-environment-variables"
       },
       "files": {
         "assets_dir": "",
@@ -2767,7 +2767,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/05-environment-variables/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/05-environment-variables/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -2941,7 +2941,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/06-exit-codes",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/06-exit-codes"
       },
       "files": {
         "assets_dir": "",
@@ -2950,7 +2950,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/06-exit-codes/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/06-exit-codes/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -3132,7 +3132,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes"
       },
       "files": {
         "assets_dir": "",
@@ -3141,7 +3141,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes/main_test.go"
       },
       "source_legacy_ids": [
         "HC.5"
@@ -3332,7 +3332,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap"
       },
       "files": {
         "assets_dir": "",
@@ -3341,7 +3341,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap/main_test.go"
       },
       "source_legacy_ids": [
         "HC.3"
@@ -3517,7 +3517,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/09-git-mental-model",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/09-git-mental-model"
       },
       "files": {
         "assets_dir": "",
@@ -3526,7 +3526,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/09-git-mental-model/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/09-git-mental-model/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -3700,7 +3700,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/10-git-basics-status-add-commit",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/10-git-basics-status-add-commit"
       },
       "files": {
         "assets_dir": "",
@@ -3709,7 +3709,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/10-git-basics-status-add-commit/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/10-git-basics-status-add-commit/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -3883,7 +3883,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/11-branching-and-merging",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/11-branching-and-merging"
       },
       "files": {
         "assets_dir": "",
@@ -3892,7 +3892,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/11-branching-and-merging/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/11-branching-and-merging/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -4066,7 +4066,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/12-github-workflow",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/12-github-workflow"
       },
       "files": {
         "assets_dir": "",
@@ -4075,7 +4075,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/12-github-workflow/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/12-github-workflow/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -4249,7 +4249,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review"
       },
       "files": {
         "assets_dir": "",
@@ -4258,7 +4258,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -4432,7 +4432,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/14-web-preview-client-server-dns-and-ports",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/14-web-preview-client-server-dns-and-ports"
       },
       "files": {
         "assets_dir": "",
@@ -4441,7 +4441,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/14-web-preview-client-server-dns-and-ports/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/14-web-preview-client-server-dns-and-ports/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [
@@ -4630,7 +4630,7 @@
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/01-computers-terminal-git-web/lessons/15-http-request-and-response-preview",
-        "test_command": ""
+        "test_command": "go test -v ./modules/01-computers-terminal-git-web/lessons/15-http-request-and-response-preview"
       },
       "files": {
         "assets_dir": "",
@@ -4639,7 +4639,7 @@
         "readme_path": "modules/01-computers-terminal-git-web/lessons/15-http-request-and-response-preview/README.md",
         "solution_path": "",
         "starter_path": "",
-        "test_path": ""
+        "test_path": "modules/01-computers-terminal-git-web/lessons/15-http-request-and-response-preview/main_test.go"
       },
       "source_legacy_ids": [],
       "tags": [

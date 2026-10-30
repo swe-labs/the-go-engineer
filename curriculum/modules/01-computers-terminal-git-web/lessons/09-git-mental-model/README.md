@@ -36,7 +36,49 @@ Without version control, teams lose history, overwrite each other's changes, and
 
 ## Under the hood
 
-Git's object database contains four types: blob (file content), tree (directory listing with mode/type/hash/name), commit (tree hash, parent hashes, author, committer, message), and tag (annotated tag pointing to a commit). Packfiles compress multiple objects together with delta encoding for efficient storage and transfer.
+Git's object database is a content-addressable key-value store housed directly inside `.git/objects/`. There are four primitive object types:
+- **`blob`**: Stores raw file bytes (no filename, no permissions—just file contents).
+- **`tree`**: Represents a directory, storing filenames, file permissions (modes like `100644` or `100755`), and hashes pointing to blobs or nested subtree objects.
+- **`commit`**: Stores a pointer to the root `tree` snapshot, zero or more `parent` commit hashes, author and committer metadata (name, email, timestamp), and the commit message.
+- **`tag`**: An annotated reference pointing directly to a specific commit.
+
+### How Git stores objects on disk (Zero-Magic)
+
+When Git hashes an object, it prepends a header:
+```text
+header = "<type> <content-length-in-bytes>\0"
+full_payload = header + content
+object_id = sha1(full_payload)
+```
+
+Git splits the 40-character hexadecimal SHA-1 string:
+- The first 2 characters become a folder name under `.git/objects/` (e.g., `.git/objects/2a/`).
+- The remaining 38 characters become the filename (e.g., `ae6c35c94fcfb415dbe95f408b9ce91ee846ed`).
+- The entire payload (header + content) is compressed with zlib before being written to disk.
+
+### Low-Level Git Plumbing Commands
+
+High-level "porcelain" commands (`git add`, `git commit`) call these low-level "plumbing" tools under the hood:
+
+```bash
+# 1. Manually hash a string and store it in .git/objects/
+echo "hello world" | git hash-object -w --stdin
+# Output: 3b18e512dba79e4c8300dd08aeb37f8e728b8dad
+
+# 2. Inspect the object's type (-t)
+git cat-file -t 3b18e512dba79e4c8300dd08aeb37f8e728b8dad
+# Output: blob
+
+# 3. Pretty-print the object's contents (-p)
+git cat-file -p 3b18e512dba79e4c8300dd08aeb37f8e728b8dad
+# Output: hello world
+
+# 4. Inspect a commit's tree snapshot
+git cat-file -p HEAD
+# Output shows 'tree <hash>', 'parent <hash>', 'author ...', and the commit message.
+```
+
+Packfiles (`.git/objects/pack/`) subsequently compress multiple objects together with delta encoding for efficient disk storage and network transfer.
 
 ## How Go uses it
 

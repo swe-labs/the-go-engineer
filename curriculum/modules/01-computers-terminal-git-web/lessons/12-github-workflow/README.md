@@ -40,7 +40,30 @@ The GitHub workflow is a standardized collaboration pattern: fork or clone a rep
 
 ## Under the hood
 
-A pull request is essentially a request to merge two Git refs. GitHub stores metadata (comments, reviews, status checks) in its database, linked to the PR number. When a merge button is clicked, GitHub performs `git merge` on the server, or for squash merge, uses `git merge --squash`. Branch protection rules are enforced server-side before the merge is allowed.
+### Remote Tracking References (Zero-Magic)
+
+Git maintains separate references for your local branches and your view of remote branches:
+- **Local branch**: `.git/refs/heads/main` (where you commit locally).
+- **Remote-tracking branch**: `.git/refs/remotes/origin/main` (where the remote `origin` was the last time you communicated with it).
+
+When you run:
+- **`git fetch origin`**: Git downloads new objects and advances `.git/refs/remotes/origin/main`. Your local working directory and `.git/refs/heads/main` remain untouched.
+- **`git merge origin/main`**: Git merges the updated remote tracking branch into your local branch.
+- **`git pull`**: A shorthand helper that executes `git fetch` followed immediately by `git merge`.
+
+### Safe Pushing: `--force-with-lease` vs `--force`
+
+When you rewrite history locally (via `git rebase` or `git commit --amend`), a normal `git push` is rejected because your local branch has diverged from the remote.
+- **`git push --force` (Dangerous)**: Tells GitHub to point the remote branch to your commit regardless of whether other engineers pushed work. Teammates' commits are permanently detached.
+- **`git push --force-with-lease` (Production Standard)**: Tells GitHub: *"Only update the remote branch if the remote commit currently matches my local `origin/<branch>` reference."* If another engineer pushed commits since your last fetch, the push fails safely, preventing silent data loss.
+
+### Branch Protection & Automated Rulesets
+
+In enterprise production repositories, branch protection rules protect `main` by rejecting direct pushes:
+1. **Require pull request before merging**: All changes must go through review.
+2. **Require status checks to pass**: CI workflows (e.g., `go test ./...`, `golangci-lint`) must succeed before the merge button unlocks.
+3. **Require approvals**: At least 1-2 authorized reviewers must sign off.
+4. **Require linear history**: Encourages squash-and-merge or rebase merges to prevent noisy multi-parent merge bubbles.
 
 ## How Go uses it
 

@@ -33,7 +33,29 @@ A pull request is a proposal to merge changes from one branch into another, with
 
 ## Under the hood
 
-GitHub stores PR reviews as events linked to specific commits. Review comments on the "Files changed" tab reference specific lines in specific diffs. "Request changes" blocks merge via branch protection. "Approve" signals the PR is ready to merge. The merge queue can enforce that status checks pass before allowing the merge button.
+### Pull Request Anatomy & Review Cognitive Load
+
+A high-quality pull request is engineered to minimize reviewer cognitive load:
+1. **Atomic Scope**: The PR solves one specific problem. Industry studies show that reviewer defect-finding efficiency drops by over 50% when review size exceeds 400 lines of code.
+2. **Standard PR Structure**:
+   - **Why (Context)**: What problem or ticket does this address?
+   - **What (Solution)**: How does this implementation solve it?
+   - **Verification (Proof)**: Exact test commands executed (`go test -race ./...`) and benchmark results.
+   - **Migration / Risk**: Any breaking changes, config adjustments, or database migration requirements.
+
+### The Conventional Comments Standard
+
+Ambiguous review comments cause friction and review delays. Professional teams adopt **Conventional Comments** to label feedback intent explicitly:
+
+| Label | Intent | Merge Blocking? | Example |
+| :--- | :--- | :--- | :--- |
+| **`issue:`** | Identifies a bug, memory leak, security vulnerability, or broken contract. | **Yes** | `issue: db connection is not closed on early error return, leaking file descriptors.` |
+| **`suggestion:`** | A concrete improvement recommendation with proposed code. | No | `suggestion: use strings.Builder here to avoid unnecessary memory allocations in the loop.` |
+| **`question:`** | Seeking clarification to understand the author's reasoning. | No | `question: what happens if the payment provider API returns a 504 timeout during charge?` |
+| **`nit:`** | Minor cosmetic polish or personal preference. | No | `nit: typo in error message string ('recieved' -> 'received').` |
+| **`praise:`** | Positive reinforcement of clean, idiomatic code. | No | `praise: excellent table-driven test coverage for edge case unicode strings!` |
+
+Under the hood, GitHub stores PR reviews as discrete event records linked to Git commit SHAs. When a reviewer clicks **"Request changes"**, GitHub's branch protection engine blocks merging until the author pushes updates and the reviewer re-evaluates the diff.
 
 ## How Go uses it
 

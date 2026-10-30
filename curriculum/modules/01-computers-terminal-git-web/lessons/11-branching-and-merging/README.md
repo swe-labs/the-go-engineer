@@ -32,7 +32,42 @@ Git branches are lightweight, movable pointers to commits. Merging combines dive
 
 ## Under the hood
 
-Git merge performs a three-way merge using the merge base (B), the current branch tip (A), and the incoming branch tip (C). For each file, Git diffs B→A and B→C, then combines both diffs. If both diffs touch the same line differently, Git marks a conflict with `<<<<<<<`, `=======`, and `>>>>>>>` markers. `git rebase` instead replays C's commits onto A, creating new commit objects with different hashes.
+### Three-Way Merge Mechanics (Zero-Magic)
+
+When merging two diverged branches, Git does **not** simply compare the two tips. Doing so would make it impossible to know which changes were intended. Instead, Git performs a **3-way merge** using three points in the DAG:
+1. **$O$ (Merge Base)**: The most recent common ancestor commit between the two branches.
+2. **$A$ (Target / HEAD)**: The tip of the branch you are currently on.
+3. **$B$ (Incoming Branch)**: The tip of the branch you are merging in.
+
+For every file and chunk:
+- **Case 1 (Change only in A)**: $O \neq A$ and $O = B$. Git takes $A$'s changes automatically.
+- **Case 2 (Change only in B)**: $O = A$ and $O \neq B$. Git takes $B$'s changes automatically.
+- **Case 3 (Identical changes in both)**: $O \neq A$, $O \neq B$, but $A = B$. Git takes the change with no conflict.
+- **Case 4 (Conflicting changes)**: $O \neq A$, $O \neq B$, and $A \neq B$. Both branches touched the same lines with different code. Git pauses and inserts **conflict markers**.
+
+### Deconstructing Merge Conflict Markers
+
+```text
+<<<<<<< HEAD (Current branch: main)
+func ConnectDB(dsn string) (*sql.DB, error) {
+    return sql.Open("postgres", dsn)
+}
+=======
+func ConnectDB(ctx context.Context, dsn string) (*pgxpool.Pool, error) {
+    return pgxpool.New(ctx, dsn)
+}
+>>>>>>> feature/pgx-driver (Incoming branch)
+```
+
+- The code between `<<<<<<< HEAD` and `=======` is what was on your checked-out branch.
+- The code between `=======` and `>>>>>>> <branch>` is the version from the incoming branch.
+
+### The Conflict Resolution Lifecycle
+
+1. **Check Status**: `git status` displays files with status `both modified: main.go`.
+2. **Resolve**: Open the file in your editor, synthesize the correct solution, and delete the marker lines (`<<<<<<<`, `=======`, `>>>>>>>`).
+3. **Stage**: Run `git add main.go`. Staging signals to Git that the conflict for that file has been resolved.
+4. **Complete**: Run `git commit` (or `git merge --continue`). Git creates a **merge commit** possessing **two parent commit pointers** (`Parent 1: HEAD`, `Parent 2: incoming branch tip`).
 
 ## How Go uses it
 

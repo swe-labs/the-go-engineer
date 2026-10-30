@@ -36,7 +36,36 @@ Without staging, every file change would be automatically included in the next c
 
 ## Under the hood
 
-The Git index (staging area) is a binary file at .git/index. It contains a sorted list of paths with their metadata (mode, SHA-1 hash, stage number). git add updates the hash in the index. git commit reads the index, builds a tree object from it, creates a commit object pointing to that tree, and writes the commit hash into the current branch ref.
+### The Staging Area (`.git/index`) Internal Structure
+
+The Git index (staging area) is a high-performance binary file located at `.git/index`. It is **not** a copy of your files; rather, it is a binary cache containing:
+1. A sorted table of all tracked file paths.
+2. Cached OS filesystem metadata (`stat` cache): modification timestamp (`mtime`), file size, inode, and file permissions.
+3. The SHA-1 hash of the corresponding `blob` stored in `.git/objects/`.
+4. Stage flags (used during merge conflict resolution: Stage 1 = Common Ancestor, Stage 2 = Target Branch / HEAD, Stage 3 = Incoming Branch).
+
+Because `.git/index` caches OS timestamps and file sizes, `git status` avoids re-hashing thousands of files on every keystroke. It simply calls the OS `stat()` system call; if the `mtime` and file size match the index entry, Git knows instantly the file hasn't changed.
+
+### The Conventional Commits Specification
+
+Professional engineering teams standardize commit messages using the **Conventional Commits** specification. This format enables automated semantic release versioning and generates readable changelogs:
+
+```text
+<type>[optional scope]: <short description in imperative mood>
+
+[optional detailed body explaining 'why' rather than 'what']
+
+[optional footer(s): e.g., 'BREAKING CHANGE: ...' or 'Fixes #123']
+```
+
+| Type | When to use | Example |
+| :--- | :--- | :--- |
+| `feat` | A new feature or capability | `feat(auth): add JWT bearer token validation` |
+| `fix` | A bug fix | `fix(router): prevent panic on nil context in middleware` |
+| `docs` | Documentation updates only | `docs(readme): add docker run instructions` |
+| `refactor`| Code restructuring without feature or bug changes | `refactor(db): extract connection pool initialization` |
+| `test` | Adding or updating tests | `test(cache): add benchmark for concurrent LRU evictions` |
+| `chore` | Build tasks, tool configurations, dependencies | `chore(deps): upgrade golang.org/x/crypto to v0.19.0` |
 
 ## How Go uses it
 
