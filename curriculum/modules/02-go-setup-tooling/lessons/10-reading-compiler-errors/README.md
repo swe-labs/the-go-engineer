@@ -55,21 +55,103 @@ Go's compiler is designed to produce clear, actionable error messages. Starting 
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+// CompilerError represents a structured Go compile-time error.
+type CompilerError struct {
+	File     string
+	Line     int
+	Col      int
+	Message  string
+	Category string
+}
+
+// ParseCompilerError decodes the standard Go compiler diagnostic format: file:line:col: message
+func ParseCompilerError(raw string) (CompilerError, error) {
+	parts := strings.SplitN(raw, ":", 4)
+	if len(parts) < 4 {
+		return CompilerError{}, fmt.Errorf("invalid compiler error format: %s", raw)
+	}
+
+	file := strings.TrimSpace(parts[0])
+	line, err := strconv.Atoi(strings.TrimSpace(parts[1]))
+	if err != nil {
+		return CompilerError{}, fmt.Errorf("invalid line number: %s", parts[1])
+	}
+	col, err := strconv.Atoi(strings.TrimSpace(parts[2]))
+	if err != nil {
+		return CompilerError{}, fmt.Errorf("invalid column number: %s", parts[2])
+	}
+	msg := strings.TrimSpace(parts[3])
+
+	cat := "General"
+	switch {
+	case strings.Contains(msg, "imported and not used"):
+		cat = "Unused Import"
+	case strings.Contains(msg, "declared and not used"):
+		cat = "Unused Variable"
+	case strings.Contains(msg, "cannot use"):
+		cat = "Type Mismatch"
+	case strings.Contains(msg, "undefined"):
+		cat = "Undefined Identifier"
+	case strings.Contains(msg, "syntax error"):
+		cat = "Syntax Error"
+	}
+
+	return CompilerError{
+		File:     file,
+		Line:     line,
+		Col:      col,
+		Message:  msg,
+		Category: cat,
+	}, nil
+}
 
 func main() {
-	fmt.Println("Compiler errors tell you exactly what is wrong.")
-	fmt.Println("Read the file, line, column, and message.")
+	fmt.Println("=== Deconstructing Go Compiler Error Diagnostics ===")
+
+	sampleErrors := []string{
+		`main.go:5:2: "os" imported and not used`,
+		`main.go:12:15: cannot use "42" (untyped string constant) as int value in assignment`,
+		`main.go:18:5: undefined: UserProfile`,
+	}
+
+	for i, raw := range sampleErrors {
+		errItem, err := ParseCompilerError(raw)
+		if err != nil {
+			fmt.Printf("Parse error: %v\n", err)
+			continue
+		}
+
+		fmt.Printf("[%d] %s Error at %s (Line %d, Col %d):\n", i+1, errItem.Category, errItem.File, errItem.Line, errItem.Col)
+		fmt.Printf("    Message: %s\n\n", errItem.Message)
+	}
+
+	fmt.Println("Insight: Go compiler errors are deterministic and provide pinpoint coordinate accuracy.")
+	fmt.Println("Always address the FIRST error in compiler output, as subsequent errors are often cascades.")
 }
 ```
 
+This program breaks down the compiler output into its constituent parts:
+- **`file`**: The exact source file containing the syntax or type violation.
+- **`line:col`**: Precise source code coordinates where the lexer or type-checker halted.
+- **`category`**: Semantic error classification (Unused Import, Type Mismatch, Undefined Identifier).
+
 ## Step-by-step execution
 
-1. Run `go build .` from this lesson directory — it should succeed with no errors.
-2. Introduce a deliberate syntax error (remove a closing brace) and run `go build .` again.
-3. Read the error: note the file path, line number, column, and message.
-4. Fix the error and rebuild.
-5. Introduce a type error (pass a string to a function expecting an int) and observe the different error format.
+1. Run the error parser program:
+   ```bash
+   go run .
+   ```
+2. Run the automated unit tests:
+   ```bash
+   go test -v .
+   ```
+3. Intentionally introduce an unused import in `main.go` and run `go build .` to observe the native compiler output.
 
 ## Common mistakes
 

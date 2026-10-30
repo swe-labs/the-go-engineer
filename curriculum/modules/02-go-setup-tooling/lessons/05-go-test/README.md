@@ -82,22 +82,55 @@ package main
 import "testing"
 
 func TestAdd(t *testing.T) {
-	got := Add(2, 3)
-	want := 5
-	if got != want {
-		t.Errorf("Add(2, 3) = %d; want %d", got, want)
+	tests := []struct {
+		name string
+		a    int
+		b    int
+		want int
+	}{
+		{"positive integers", 2, 3, 5},
+		{"negative integers", -1, -2, -3},
+		{"mixed signs", -5, 10, 5},
+		{"zeros", 0, 0, 0},
+		{"identity with zero", 42, 0, 42},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := Add(tt.a, tt.b)
+			if got != tt.want {
+				t.Errorf("Add(%d, %d) = %d; want %d", tt.a, tt.b, got, tt.want)
+			}
+		})
+	}
+}
+
+func BenchmarkAdd(b *testing.B) {
+	for i := 0; b.Loop(); i++ {
+		_ = Add(i, 42)
 	}
 }
 ```
 
-**New Go syntax in this example:**
-- `func Add(a, b int) int { ... }` — a function named `Add` that takes two integers (`a` and `b`) and returns an integer. Go writes the type after the parameter name.
-- `got := Add(2, 3)` — the `:=` operator declares a new variable (`got`) and assigns it the result of `Add(2, 3)` in one step. Similarly, `want := 5` declares `want` with value 5.
+**Key Testing Patterns in this Example:**
+- **Table-Driven Tests**: Defining test cases as an anonymous slice of structs (`tests := []struct{...}`). This is the universal standard in Go codebases.
+- **Hierarchical Subtests (`t.Run`)**: Each table row runs as an isolated subtest with its own name, enabling targeted filtering (e.g. `go test -run TestAdd/zeros`).
+- **Standard Microbenchmarking (`testing.B`)**: Uses Go 1.24+ `b.Loop()` to measure throughput and nanoseconds per operation (`ns/op`).
 
 ## Step-by-step execution
 
-1. Run `go test .` from this lesson directory to run all tests.
-2. Check the output — it should say `ok` or `PASS`.
+1. Run the test suite with verbose output:
+   ```bash
+   go test -v .
+   ```
+2. Run only a specific subtest:
+   ```bash
+   go test -v -run "TestAdd/mixed_signs" .
+   ```
+3. Run the microbenchmark:
+   ```bash
+   go test -bench="." -run="^$" .
+   ```
 3. Run `go test -v .` to see each test name and its result.
 4. Introduce a deliberate bug in `Add` (change `+` to `-`) and run `go test .` again to see a failure.
 5. Fix the bug and run `go test .` again to confirm the fix.

@@ -70,21 +70,100 @@ The Go toolchain itself is built with `go build`. Standard build variations:
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+	"runtime"
+)
+
+// Injected via -ldflags during build (e.g. -ldflags="-X main.Version=v1.0.0")
+var Version = "dev"
+
+// BinaryInfo holds characteristics of the compiled binary.
+type BinaryInfo struct {
+	Name      string
+	Path      string
+	SizeBytes int64
+	GOOS      string
+	GOARCH    string
+	Version   string
+}
+
+// GetBinaryInfo inspects the currently running compiled binary on disk.
+func GetBinaryInfo() (BinaryInfo, error) {
+	execPath, err := os.Executable()
+	if err != nil {
+		return BinaryInfo{}, err
+	}
+
+	info, err := os.Stat(execPath)
+	if err != nil {
+		return BinaryInfo{}, err
+	}
+
+	return BinaryInfo{
+		Name:      filepath.Base(execPath),
+		Path:      execPath,
+		SizeBytes: info.Size(),
+		GOOS:      runtime.GOOS,
+		GOARCH:    runtime.GOARCH,
+		Version:   Version,
+	}, nil
+}
+
+// FormatBinaryReport returns a human-readable summary of the binary.
+func FormatBinaryReport(b BinaryInfo) string {
+	return fmt.Sprintf(
+		"Binary: %s\nTarget: %s/%s\nVersion: %s\nSize: %.2f KB (%d bytes)",
+		b.Name,
+		b.GOOS,
+		b.GOARCH,
+		b.Version,
+		float64(b.SizeBytes)/1024.0,
+		b.SizeBytes,
+	)
+}
 
 func main() {
-	fmt.Println("Built with go build")
-	fmt.Println("This is a standalone binary.")
+	fmt.Println("=== Deconstructing 'go build' Standalone Binary ===")
+
+	b, err := GetBinaryInfo()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error inspecting binary: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Println(FormatBinaryReport(b))
+	fmt.Println("\nInsight: 'go build' emits a self-contained, statically linked binary executable.")
+	fmt.Println("It requires no external Go runtime on the host machine to execute.")
 }
 ```
 
+This program highlights how `go build` packages code into a statically linked artifact:
+- **Build-Time Metadata Injection (`-ldflags`)**: The `Version` string can be mutated at link time without altering source code via `-ldflags="-X main.Version=v1.2.3"`.
+- **Target OS/Arch Embeddings**: Stored in the binary header and inspectable via `runtime.GOOS` / `runtime.GOARCH`.
+- **Binary Footprint**: Quantifies the static runtime and compiled standard library footprint.
+
 ## Step-by-step execution
 
-1. Run `go build .` from this lesson directory — a binary named `04-go-build` (or `04-go-build.exe` on Windows) appears.
-2. Run the binary directly: `./04-go-build` (Linux/macOS) or `.\04-go-build.exe` (Windows).
-3. Check the binary size with `ls -lh 04-go-build` or `dir 04-go-build.exe`.
-4. Run `go build -ldflags="-s -w" .` and compare the smaller binary size.
-5. Clean up with `go clean` or delete the binary manually.
+1. Compile the program into a persistent local binary:
+   ```bash
+   go build -o app .
+   ```
+2. Execute the standalone executable:
+   ```bash
+   ./app
+   ```
+3. Test version injection via linker flags:
+   ```bash
+   go build -ldflags="-X main.Version=v2.0.0" -o app-v2 .
+   ./app-v2
+   ```
+4. Run the automated unit tests:
+   ```bash
+   go test -v .
+   ```
 
 ## Common mistakes
 

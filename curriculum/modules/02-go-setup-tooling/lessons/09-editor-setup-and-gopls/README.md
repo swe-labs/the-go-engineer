@@ -62,27 +62,112 @@ Installation: `go install golang.org/x/tools/gopls@latest`
 ```go
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// LSPRequest models a JSON-RPC request sent by an editor to the gopls language server.
+type LSPRequest struct {
+	JSONRPC string `json:"jsonrpc"`
+	ID      int    `json:"id"`
+	Method  string `json:"method"`
+	Params  struct {
+		URI      string `json:"uri"`
+		Position struct {
+			Line      int `json:"line"`
+			Character int `json:"character"`
+		} `json:"position"`
+	} `json:"params"`
+}
+
+// LSPResponse models a JSON-RPC response returned by gopls to the editor.
+type LSPResponse struct {
+	JSONRPC string      `json:"jsonrpc"`
+	ID      int         `json:"id"`
+	Result  interface{} `json:"result,omitempty"`
+	Error   string      `json:"error,omitempty"`
+}
+
+// HoverResult represents hover documentation sent back to the editor tooltip.
+type HoverResult struct {
+	Contents string `json:"contents"`
+}
+
+// LocationResult represents the target file and coordinates for 'Go to Definition' (F12).
+type LocationResult struct {
+	URI  string `json:"uri"`
+	Line int    `json:"line"`
+}
+
+// HandleLSPRequest simulates how gopls answers editor queries over JSON-RPC.
+func HandleLSPRequest(req LSPRequest) LSPResponse {
+	resp := LSPResponse{
+		JSONRPC: "2.0",
+		ID:      req.ID,
+	}
+
+	switch req.Method {
+	case "textDocument/hover":
+		resp.Result = HoverResult{
+			Contents: "func Println(a ...any) (n int, err error)\nPackage fmt: Println formats using default formats.",
+		}
+	case "textDocument/definition":
+		resp.Result = LocationResult{
+			URI:  "file:///usr/local/go/src/fmt/print.go",
+			Line: 285,
+		}
+	default:
+		resp.Error = fmt.Sprintf("method not supported: %s", req.Method)
+	}
+
+	return resp
+}
 
 func main() {
-	fmt.Println("gopls is the Go language server.")
-	fmt.Println("It powers your editor's Go features.")
+	fmt.Println("=== Deconstructing 'gopls' Language Server Protocol (LSP) ===")
+
+	// Simulating an editor requesting hover information on 'fmt.Println'
+	hoverReq := LSPRequest{
+		JSONRPC: "2.0",
+		ID:      1,
+		Method:  "textDocument/hover",
+	}
+	hoverReq.Params.URI = "file:///project/main.go"
+	hoverReq.Params.Position.Line = 10
+	hoverReq.Params.Position.Character = 6
+
+	resp := HandleLSPRequest(hoverReq)
+	rawJSON, _ := json.MarshalIndent(resp, "", "  ")
+
+	fmt.Println("1. Editor -> gopls: JSON-RPC request for 'textDocument/hover'")
+	fmt.Println("2. gopls parses AST, type-checks symbols, and replies:")
+	fmt.Println(string(rawJSON))
+
+	fmt.Println("\nInsight: gopls is a standalone background daemon communicating via JSON-RPC.")
+	fmt.Println("It decouples language intelligence from the editor, powering VS Code, Neovim, and Zed equally.")
 }
 ```
 
+This program removes the magic from modern editor tooling by modeling the **Language Server Protocol (LSP)**:
+- Editors (VS Code, Zed, Neovim) do not have built-in Go compilers; they communicate with a background daemon (`gopls`) over standard JSON-RPC.
+- When you hover over a symbol, the editor dispatches a `textDocument/hover` event.
+- When you press F12 ("Go to Definition"), the editor dispatches `textDocument/definition` with document URI and cursor line/column coordinates.
+
 ## Step-by-step execution
 
-1. Check if `gopls` is installed: `gopls version`
-2. If not installed, run: `go install golang.org/x/tools/gopls@latest`
-3. Install your editor's Go extension:
-   - VS Code: install the Go extension from the marketplace
-   - Vim/Neovim: install `vim-go` or configure `gopls` via `coc.nvim` or `vim-lsp`
-   - Emacs: use `eglot` or `lsp-mode`
-4. Open any Go file and verify features:
-   - Hover over `fmt.Println` — you should see its documentation
-   - Trigger completion by typing `fmt.` — you should see a list of functions
-   - Go to definition on `Println` — it should navigate to the standard library source
-5. Introduce a deliberate syntax error (remove a closing brace) and observe the red squiggly underline.
+1. Run the LSP simulation:
+   ```bash
+   go run .
+   ```
+2. Run the automated unit tests:
+   ```bash
+   go test -v .
+   ```
+3. Check your system's installed `gopls` version:
+   ```bash
+   gopls version
+   ```
 
 ## Common mistakes
 
