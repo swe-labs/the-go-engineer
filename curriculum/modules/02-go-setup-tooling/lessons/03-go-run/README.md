@@ -61,20 +61,84 @@ The Go standard library uses `go run` extensively in its own development. The `g
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
+)
+
+// ExecutionMetadata stores details about how the binary was executed.
+type ExecutionMetadata struct {
+	ExecutablePath string
+	IsTemporary    bool
+	Directory      string
+	Filename       string
+}
+
+// InspectExecution determines if the program is running from a temporary build directory.
+func InspectExecution() (ExecutionMetadata, error) {
+	execPath, err := os.Executable()
+	if err != nil {
+		return ExecutionMetadata{}, err
+	}
+
+	cleanPath := filepath.Clean(execPath)
+	dir := filepath.Dir(cleanPath)
+	file := filepath.Base(cleanPath)
+
+	// "go run" places compiled binaries in a temporary build directory (e.g. go-build or OS Temp)
+	tempDir := os.TempDir()
+	isTemp := strings.Contains(cleanPath, "go-build") || strings.HasPrefix(cleanPath, tempDir)
+
+	return ExecutionMetadata{
+		ExecutablePath: cleanPath,
+		IsTemporary:    isTemp,
+		Directory:      dir,
+		Filename:       file,
+	}, nil
+}
 
 func main() {
-	fmt.Println("Running with go run")
-	fmt.Println("This program was compiled and executed in one step.")
+	fmt.Println("=== Deconstructing 'go run' Execution ===")
+
+	meta, err := InspectExecution()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to inspect executable: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Active Executable Path: %s\n", meta.ExecutablePath)
+	fmt.Printf("Binary Filename:        %s\n", meta.Filename)
+	fmt.Printf("Directory Location:     %s\n", meta.Directory)
+	fmt.Printf("Is Temporary Build Dir: %t\n", meta.IsTemporary)
+
+	if meta.IsTemporary {
+		fmt.Println("\nInsight: 'go run' compiled this code into a temporary binary and executed it directly.")
+		fmt.Println("When this process exits, the temporary directory will be cleaned up.")
+	} else {
+		fmt.Println("\nInsight: Running from a persistent compiled binary on disk.")
+	}
 }
 ```
 
+This program removes the magic from `go run` by interrogating its own active executable at runtime:
+- `os.Executable()` resolves the exact path to the executing binary.
+- When invoked via `go run .`, the path points directly inside a temporary compiler scratch directory (e.g., `AppData\Local\Temp\go-build...` on Windows or `/tmp/go-build...` on Linux/macOS).
+- The binary is completely deleted by the Go toolchain immediately after process exit.
+
 ## Step-by-step execution
 
-1. Run `go run .` from this lesson directory.
-2. Observe the output in your terminal.
-3. Modify the message string and run `go run .` again — see how fast the edit-run cycle is.
-4. Run `go build .` afterward to see the difference — notice the binary that remains on disk.
+1. Run the lesson via `go run`:
+   ```bash
+   go run .
+   ```
+   Notice that `Is Temporary Build Dir` outputs `true`.
+2. Run the automated unit tests:
+   ```bash
+   go test -v .
+   ```
+3. Run `go build .` followed by executing `./03-go-run` directly — observe how `Is Temporary Build Dir` switches to `false`.
 
 ## Common mistakes
 

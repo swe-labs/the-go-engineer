@@ -42,24 +42,71 @@ The Go team runs `gofmt -l` on every pull request to the standard library. Any f
 
 ## Go example
 
+## Go example
+
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"go/format"
+	"os"
+)
+
+// FormatSourceCode formats raw Go code bytes according to canonical gofmt rules.
+func FormatSourceCode(src []byte) ([]byte, error) {
+	return format.Source(src)
+}
 
 func main() {
-	fmt.Println("gofmt formats your Go code")
-	fmt.Println("Consistent style across every Go file")
+	fmt.Println("=== Deconstructing 'gofmt' Engine (go/format) ===")
+
+	// Deliberately poorly formatted Go source snippet
+	unformattedSnippet := []byte(`package    main
+import    "fmt"
+func    Calculate(   x int,y int  )   int {
+    sum:=x+y
+        return sum
+}`)
+
+	fmt.Println("--- 1. Unformatted Source Input ---")
+	fmt.Println(string(unformattedSnippet))
+
+	formatted, err := FormatSourceCode(unformattedSnippet)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Formatting error: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("\n--- 2. Canonical gofmt Output ---")
+	fmt.Println(string(formatted))
+
+	fmt.Println("Insight: gofmt parses Go source into an Abstract Syntax Tree (AST)")
+	fmt.Println("and re-emits it according to the language's official grammar specification.")
+	fmt.Println("Result: Zero time wasted debating code formatting in code reviews.")
 }
 ```
 
+This program demystifies `gofmt` by invoking the exact same standard library package (`go/format`) that powers the CLI:
+- `format.Source()` parses raw Go code bytes into an AST using `go/parser`.
+- It recalculates column positions and indent levels, replacing arbitrary spaces with canonical tabs.
+- It re-emits pure, standardized Go code with zero human intervention.
+
 ## Step-by-step execution
 
-1. Create a deliberately misformatted Go file (wrong indentation, extra spaces).
-2. Run `gofmt -d main.go` to see the diff of what would change.
-3. Run `gofmt -w main.go` to format the file in place.
-4. Run `gofmt -l .` to confirm no files need formatting.
-5. Run `go fmt ./...` from the module root to format all files at once.
+1. Execute the formatting demonstration:
+   ```bash
+   go run .
+   ```
+2. Run the automated unit tests:
+   ```bash
+   go test -v .
+   ```
+3. Test the official CLI tool:
+   ```bash
+   gofmt -d main.go
+   gofmt -l .
+   ```
 
 ## Common mistakes
 

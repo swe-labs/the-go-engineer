@@ -66,38 +66,54 @@ The message `Add(2, 2) = 5; want 4` tells you:
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
+// Add returns the sum of two integers.
 func Add(a, b int) int {
 	return a + b
 }
 
-func main() {
-	fmt.Println(Add(2, 2))
+// FormatFailureMessage formats an idiomatic Go test failure string adhering to
+// the standard "got X; want Y" diagnostic pattern.
+func FormatFailureMessage(callDescription string, got, want any) string {
+	return fmt.Sprintf("%s = %v; want %v", callDescription, got, want)
 }
-```
 
-```go
-package main
+func main() {
+	fmt.Println("=== Deconstructing Go Test Failure Reports ===")
 
-import "testing"
+	a, b := 2, 3
+	actual := Add(a, b)
+	fmt.Printf("Add(%d, %d) returned: %d\n\n", a, b, actual)
 
-func TestAdd(t *testing.T) {
-	got := Add(2, 2)
-	want := 4
-	if got != want {
-		t.Errorf("Add(2, 2) = %d; want %d", got, want)
-	}
+	// Demonstrating the canonical Go failure report format
+	simulatedInput := "Add(2, 2)"
+	simulatedGot := 5
+	simulatedWant := 4
+	failureReport := FormatFailureMessage(simulatedInput, simulatedGot, simulatedWant)
+
+	fmt.Println("--- Anatomy of an Idiomatic Test Failure Log ---")
+	fmt.Println("--- FAIL: TestAdd (0.00s)")
+	fmt.Printf("    calc_test.go:14: %s\n\n", failureReport)
+
+	fmt.Println("Insight: Go testing discourages opaque assertion macros (like assert.Equal).")
+	fmt.Println("Standard 'got != want' messages clearly display what the code did vs what was expected.")
 }
 ```
 
 ## Step-by-step execution
 
-1. Run `go test -v .` from this lesson directory — tests should pass.
-2. Modify `Add` to return `a * b` instead of `a + b` (introduce a bug).
-3. Run `go test -v .` again and observe the failure message.
-4. Read the failure message: note the test name, file:line, actual vs expected.
-5. Fix the bug and confirm tests pass.
+1. Run the test report simulation:
+   ```bash
+   go run .
+   ```
+2. Run the unit test suite:
+   ```bash
+   go test -v .
+   ```
+3. Introduce a deliberate assertion failure in `main_test.go` and run `go test -v .` to observe the native test runner output.
 
 ## Common mistakes
 

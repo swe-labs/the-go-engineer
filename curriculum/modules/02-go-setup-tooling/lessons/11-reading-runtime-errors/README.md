@@ -55,26 +55,78 @@ The Go runtime panics for several common errors:
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"runtime/debug"
+	"strings"
+)
+
+// SafeExecute runs an arbitrary function and intercepts any runtime panic,
+// returning the recovered value and the top frames of the runtime stack trace.
+func SafeExecute(fn func()) (recoveredVal any, stack string) {
+	defer func() {
+		if r := recover(); r != nil {
+			recoveredVal = r
+			rawStack := string(debug.Stack())
+			lines := strings.Split(rawStack, "\n")
+			// Extract top 6 lines of stack trace for concise pedagogical inspection
+			if len(lines) > 6 {
+				stack = strings.Join(lines[:6], "\n")
+			} else {
+				stack = rawStack
+			}
+		}
+	}()
+
+	fn()
+	return nil, ""
+}
+
+// AccessElement attempts an index access that may trigger an out-of-bounds runtime panic.
+func AccessElement(items []int, idx int) int {
+	return items[idx]
+}
 
 func main() {
-	items := []int{1, 2, 3}
-	fmt.Println(items[0]) // This works
-	fmt.Println("Runtime errors happen when the program is running.")
+	fmt.Println("=== Deconstructing Go Runtime Panics & Stack Traces ===")
+
+	numbers := []int{10, 20, 30}
+	fmt.Printf("Slice initialized: %v (Length: %d)\n", numbers, len(numbers))
+
+	// Safely trigger and capture an index out-of-bounds runtime panic
+	fmt.Println("\nAttempting out-of-bounds access at index 5...")
+	recoveredVal, stack := SafeExecute(func() {
+		_ = AccessElement(numbers, 5)
+	})
+
+	if recoveredVal != nil {
+		fmt.Printf("✓ Successfully intercepted runtime panic: %v\n\n", recoveredVal)
+		fmt.Println("--- Anatomy of the Runtime Stack Trace ---")
+		fmt.Println(stack)
+		fmt.Println("\nInsight: The stack trace reads bottom-to-top (caller -> callee -> crash point).")
+		fmt.Println("The top frame points directly to the function and line number where the CPU halted.")
+	} else {
+		fmt.Println("No panic occurred.")
+	}
 }
 ```
 
-**New Go syntax in this example:**
-- `items := []int{1, 2, 3}` — creates a slice (a variable-length list) of integers containing 1, 2, and 3.
-- `items[0]` — accesses the first element. Go uses 0-based indexing: position 0 is the first element, position 1 is the second, and so on.
+This program demonstrates the mechanics of Go runtime exceptions:
+- **Zero-Crash Inspection**: Intercepts panics using `defer` and `recover()`, preventing process termination while allowing detailed inspection.
+- **Stack Trace Introspection**: Extracts the exact call stack using `runtime/debug.Stack()`.
+- **Root Cause Isolation**: Identifies the failed instruction, slice boundary violation, and caller history.
 
 ## Step-by-step execution
 
-1. Run `go run .` from this lesson directory — it should succeed.
-2. Modify the code to access `items[5]` (out of bounds) and run again.
-3. Read the traceback: identify the panic message, the file, and the line number.
-4. Fix the index and run again.
-5. Introduce a nil pointer dereference: declare `var items []int` without initialization and try to access `items[0]`.
+1. Run the safe panic execution demo:
+   ```bash
+   go run .
+   ```
+2. Run the automated unit tests:
+   ```bash
+   go test -v .
+   ```
+3. Trace the crash frame coordinates (`file.go:line +0x...`) back to `AccessElement`.
 
 ## Common mistakes
 

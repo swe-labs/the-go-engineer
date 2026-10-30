@@ -57,29 +57,100 @@ The Go team releases two versions per year (e.g., Go 1.22 in February, Go 1.23 i
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"runtime"
+	"strings"
+)
+
+// EnvironmentInfo captures essential runtime details about the Go installation.
+type EnvironmentInfo struct {
+	Version  string
+	GOOS     string
+	GOARCH   string
+	Compiler string
+	NumCPU   int
+	GOROOT   string
+}
+
+// GetEnvironmentInfo extracts active Go runtime and system metadata.
+func GetEnvironmentInfo() EnvironmentInfo {
+	return EnvironmentInfo{
+		Version:  runtime.Version(),
+		GOOS:     runtime.GOOS,
+		GOARCH:   runtime.GOARCH,
+		Compiler: runtime.Compiler,
+		NumCPU:   runtime.NumCPU(),
+		GOROOT:   runtime.GOROOT(),
+	}
+}
+
+// VerifyInstallation checks whether the environment is properly configured.
+func VerifyInstallation(info EnvironmentInfo) (bool, []string) {
+	var issues []string
+
+	if !strings.HasPrefix(info.Version, "go") && !strings.HasPrefix(info.Version, "devel") {
+		issues = append(issues, "invalid Go version prefix detected")
+	}
+	if info.GOOS == "" {
+		issues = append(issues, "target operating system (GOOS) is undefined")
+	}
+	if info.GOARCH == "" {
+		issues = append(issues, "target architecture (GOARCH) is undefined")
+	}
+	if info.NumCPU <= 0 {
+		issues = append(issues, "logical CPU count must be greater than zero")
+	}
+
+	return len(issues) == 0, issues
+}
 
 func main() {
-	fmt.Println("Go is installed and working!")
-	fmt.Println("You are ready for Module 02.")
+	fmt.Println("=== Go Installation & Environment Diagnostics ===")
+
+	info := GetEnvironmentInfo()
+	fmt.Printf("Go Version:           %s\n", info.Version)
+	fmt.Printf("Target OS (GOOS):     %s\n", info.GOOS)
+	fmt.Printf("Target Arch (GOARCH): %s\n", info.GOARCH)
+	fmt.Printf("Compiler:             %s\n", info.Compiler)
+	fmt.Printf("Logical CPUs:         %d\n", info.NumCPU)
+	if info.GOROOT != "" {
+		fmt.Printf("GOROOT Directory:     %s\n", info.GOROOT)
+	} else {
+		fmt.Printf("GOROOT Directory:     (standard embedded default)\n")
+	}
+
+	ok, issues := VerifyInstallation(info)
+	if !ok {
+		fmt.Println("\nConfiguration Issues Detected:")
+		for _, issue := range issues {
+			fmt.Printf("  - %s\n", issue)
+		}
+		return
+	}
+
+	fmt.Println("\nStatus: Go toolchain installation is verified and ready for Module 02.")
 }
 ```
 
-This Go program has four parts:
-- `package main` — declares that this code belongs to the main package, which produces an executable.
-- `import "fmt"` — brings in the `fmt` package for printing text.
-- `func main() { ... }` — the entry point; execution starts here.
-- `fmt.Println(...)` — prints a line of text to the terminal.
-
-Don't worry about understanding every detail — you will learn Go syntax in Module 03.
+This diagnostic program inspects the active Go toolchain directly from within the runtime:
+- `runtime.Version()` retrieves the exact compiler release string (e.g., `go1.22.0`).
+- `runtime.GOOS` and `runtime.GOARCH` identify the compilation target (e.g., `windows/amd64` or `linux/arm64`).
+- `runtime.Compiler` reveals the active compiler backend (`gc` for the standard Go compiler).
+- `runtime.GOROOT()` returns the root directory containing the standard library and toolchain files.
+- `VerifyInstallation()` validates the operational sanity of the environment.
 
 ## Step-by-step execution
 
-1. **Download Go** from [go.dev/dl](https://go.dev/dl/) — choose the package for your operating system.
+1. **Download Go** from [go.dev/dl](https://go.dev/dl/) — choose the installer for your operating system.
 2. **Run the installer** and follow the default settings. The installer adds Go to your PATH automatically.
 3. **Open a new terminal** (or restart your current one) so the PATH update takes effect.
-4. **Run `go version`**. You should see output like `go version go1.22.0 windows/amd64`.
-5. **Run the example** from this lesson directory: `go run .` — you should see the confirmation message.
+4. **Run `go version`**. Confirm that a valid version string is returned.
+5. **Run the example and test suite**:
+   ```bash
+   go run .
+   go test -v .
+   ```
 
 ## Common mistakes
 

@@ -53,22 +53,54 @@ The `fmt` package is the most-used package in the Go standard library. `fmt.Prin
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+	"os"
+)
+
+// FormatGreeting constructs a standard Go welcome message.
+func FormatGreeting(target string) string {
+	if target == "" {
+		target = "World"
+	}
+	return fmt.Sprintf("Hello, %s!", target)
+}
+
+// WriteGreeting sends formatted output to an io.Writer (e.g., os.Stdout).
+func WriteGreeting(w io.Writer, target string) error {
+	_, err := fmt.Fprintln(w, FormatGreeting(target))
+	return err
+}
 
 func main() {
-	fmt.Println("Hello, World!")
-	fmt.Println("My Go installation works.")
+	// Demonstrating output to standard output stream (os.Stdout)
+	if err := WriteGreeting(os.Stdout, "World"); err != nil {
+		fmt.Fprintf(os.Stderr, "Error writing greeting: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("Program completed successfully via package main -> func main() entry point.")
 }
 ```
 
+This program demonstrates three core concepts:
+1. **Entry Point Requirement**: `package main` coupled with `func main()` forms the mandatory execution entry point. Without both, the Go toolchain will not compile a standalone binary.
+2. **Deterministic String Formatting**: `FormatGreeting` isolates business logic from I/O, allowing pure unit testing without terminal side effects.
+3. **Standard Stream Writing**: `WriteGreeting` writes to `io.Writer`, accepting `os.Stdout` (File Descriptor 1) in production, but allowing `bytes.Buffer` in automated tests.
+
 ## Step-by-step execution
 
-1. Create a new file called `main.go` in your lesson directory.
-2. Write the package declaration: `package main`.
-3. Import the `fmt` package: `import "fmt"`.
-4. Write the `main` function: `func main() { ... }`.
-5. Inside `main`, call `fmt.Println("Hello, World!")`.
-6. Save the file and run `go run main.go`.
+1. Open your terminal and navigate to this lesson directory.
+2. Inspect `main.go` and observe the separation between string formatting and stream writing.
+3. Execute the program:
+   ```bash
+   go run .
+   ```
+4. Run the automated unit tests:
+   ```bash
+   go test -v .
+   ```
 
 ## Common mistakes
 

@@ -60,27 +60,84 @@ Key commands:
 ## Go example
 
 ```go
+// Package main demonstrates the conventions and mechanics of Go doc comments.
+//
+// Go's documentation tool ('go doc') extracts comments directly from the Abstract
+// Syntax Tree without requiring external annotations, HTML tags, or separate markdown files.
+// Every exported symbol should have a comment beginning with its own name.
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-// Add returns the sum of two integers.
-func Add(a, b int) int {
-	return a + b
+// Calculator provides basic arithmetic operations with clear documentation contracts.
+type Calculator struct {
+	Base int
+}
+
+// Add computes and returns the sum of the base value and the given integer parameter n.
+// It does not mutate the receiver.
+func (c Calculator) Add(n int) int {
+	return c.Base + n
+}
+
+// CleanDocString normalizes raw comment lines for terminal display.
+func CleanDocString(comment string) string {
+	lines := strings.Split(comment, "\n")
+	var cleaned []string
+	for _, line := range lines {
+		trimmed := strings.TrimSpace(strings.TrimPrefix(line, "//"))
+		if trimmed != "" {
+			cleaned = append(cleaned, trimmed)
+		}
+	}
+	return strings.Join(cleaned, " ")
 }
 
 func main() {
-	fmt.Println(Add(3, 4))
+	fmt.Println("=== Deconstructing 'go doc' Documentation Engine ===")
+
+	calc := Calculator{Base: 10}
+	result := calc.Add(5)
+	fmt.Printf("Calculation: 10 + 5 = %d\n\n", result)
+
+	sampleComment := `// Add computes and returns the sum of the base value.
+// It does not mutate the receiver.`
+
+	fmt.Println("--- Doc Comment Parsing Demonstration ---")
+	fmt.Println("Raw Doc Comment in Source:")
+	fmt.Println(sampleComment)
+	fmt.Println("\nCleaned Doc Summary (as shown by 'go doc'):")
+	fmt.Printf("  %s\n", CleanDocString(sampleComment))
+
+	fmt.Println("\nInsight: In Go, documentation is code. Run 'go doc' on any package or symbol")
+	fmt.Println("to read instantaneous, offline documentation formatted directly from source.")
 }
 ```
 
+This program implements the canonical Go doc comment conventions:
+- **Package Comments**: Precedes `package main` without an intervening blank line. Starts with `// Package <name> ...`.
+- **Symbol Comments**: Precedes `type Calculator` and `func (c Calculator) Add` starting explicitly with the symbol's name.
+- **Pure Go**: Extracts and displays clean human-readable documentation without any HTML or external pre-processors.
+
 ## Step-by-step execution
 
-1. Run `go doc .` from this lesson directory to see the package documentation.
-2. Run `go doc Add` to see the documentation for the `Add` function.
-3. Run `go doc fmt` to see the standard library `fmt` package docs.
-4. Run `go doc fmt.Println` to see the `Println` function docs.
-5. Add a doc comment above the `main` function and run `go doc main` to confirm it appears.
+1. Execute the doc parser demonstration:
+   ```bash
+   go run .
+   ```
+2. Run the automated unit tests:
+   ```bash
+   go test -v .
+   ```
+3. Use the built-in Go documentation reader on this package and standard library:
+   ```bash
+   go doc .
+   go doc Calculator.Add
+   go doc fmt.Println
+   ```
 
 ## Common mistakes
 
