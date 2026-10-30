@@ -1893,7 +1893,7 @@
         "beginner_mistakes": [
           "Thinking a program is just a file you double-click, ignoring the compilation and loading steps.",
           "Confusing source code (human-readable text) with the executable binary (machine code).",
-          "Assuming all programs are .exe files â€” not recognizing scripts, bytecode, or JIT-compiled programs."
+          "Assuming all programs are .exe files — not recognizing scripts, bytecode, or JIT-compiled programs."
         ],
         "execution_timeline": [
           "The programmer writes source code in a text editor and saves it to disk.",
@@ -1907,7 +1907,7 @@
             "scenario": "A learner writes a Go program that compiles but does nothing when run."
           },
           {
-            "cause": "They ran the old compiled binary instead of recompiling â€” the source change was never built.",
+            "cause": "They ran the old compiled binary instead of recompiling — the source change was never built.",
             "fix": "Always recompile after editing: run 'go build' or 'go run .' to produce a fresh binary.",
             "scenario": "A learner edits source code but the old behavior persists when they run the program."
           }
@@ -1917,8 +1917,8 @@
           "Learner must predict what happens when a program with a syntax error is submitted to the compiler.",
           "Learner must explain why deleting the .go source file does not stop a running program."
         ],
-        "how_go_uses_it": "Go compiles source code into a single static binary with no external dependencies. The 'go build' command handles the entire pipeline: lexing, parsing, type-checking, code generation, and linking. Go programs start at package main's func main() â€” there is no hidden runtime initialization beyond what the Go runtime manages.",
-        "mental_model": "Installing Go means downloading the distribution, setting GOROOT and GOPATH, and verifying with go version. The toolchain is self-contained â€” one download includes the compiler, linker, formatter, and package manager.",
+        "how_go_uses_it": "Go compiles source code into a single static binary with no external dependencies. The 'go build' command handles the entire pipeline: lexing, parsing, type-checking, code generation, and linking. Go programs start at package main's func main() — there is no hidden runtime initialization beyond what the Go runtime manages.",
+        "mental_model": "A computer program exists in three distinct states: human-readable source code on disk, a compiled binary executable of machine instructions, and an active operating system process instantiated in virtual memory.",
         "performance_implications": [
           "Interpreted programs (Python, Ruby) start instantly but run 10-50x slower than compiled code.",
           "Compiled programs (Go, C, Rust) have a build step but run at near-native CPU speed.",
@@ -1929,13 +1929,13 @@
         "real_world_usage": "Every day, developers write code, compile it, and run it. When a build fails, they read compiler errors. When a binary crashes, they inspect the process. Understanding the source-binary-process pipeline is the foundation of all software engineering.",
         "step_by_step_execution": [
           "Write source code in a text editor and save it as a .go file.",
-          "Run 'go build' â€” the compiler reads the source, checks types, generates machine code, and writes an executable.",
-          "Run the executable â€” the OS loader reads the binary, maps it into memory, and jumps to the entry point.",
+          "Run 'go build' — the compiler reads the source, checks types, generates machine code, and writes an executable.",
+          "Run the executable — the OS loader reads the binary, maps it into memory, and jumps to the entry point.",
           "The CPU executes instructions sequentially, branching on conditions, looping, and calling functions.",
           "When main returns or os.Exit is called, the process terminates and the OS reclaims its resources."
         ],
         "under_the_hood": "The Go compiler (gc) translates Go source through several stages: lexing splits text into tokens, parsing builds an AST, type-checking enforces correctness, SSA (static single assignment) optimization rewrites the IR, and code generation emits machine instructions. The linker resolves package imports into a single binary with a predetermined entry point.",
-        "why_it_exists": "Computers execute machine instructions, not human language. The concept of a 'program' bridges the gap â€” it is the unit of work that the OS understands. Without a clear definition, every compile error, segfault, or deployment failure feels inexplicable."
+        "why_it_exists": "Computers execute machine instructions, not human language. The concept of a 'program' bridges the gap — it is the unit of work that the OS understands. Without a clear definition, every compile error, segfault, or deployment failure feels inexplicable."
       },
       "crossrefs": {
         "builds_on": [
@@ -2076,9 +2076,9 @@
       ],
       "zero_magic": {
         "beginner_mistakes": [
-          "Believing source code and the running program are the same thing â€” editing source while the program runs does not change behavior.",
-          "Thinking the executable contains the source code â€” compiled binaries contain machine instructions, not human-readable text.",
-          "Assuming every running program corresponds to exactly one file on disk â€” daemons and interpreters blur this line."
+          "Believing source code and the running program are the same thing — editing source while the program runs does not change behavior.",
+          "Thinking the executable contains the source code — compiled binaries contain machine instructions, not human-readable text.",
+          "Assuming every running program corresponds to exactly one file on disk — daemons and interpreters blur this line."
         ],
         "execution_timeline": [
           "Source code is written as text and stored in a file on disk.",
@@ -2102,25 +2102,25 @@
           "Learner must explain why a compiled Go binary can run on a machine without Go installed.",
           "Learner must trace the lifecycle of a program from keyboard input to terminal output through all three stages."
         ],
-        "how_go_uses_it": "Go's toolchain explicitly separates these three stages: source files (.go) are input, 'go build' produces a standalone executable binary, and 'go run' combines both steps plus execution in one command. Go binaries are statically linked â€” the executable contains everything needed to run, including the Go runtime.",
-        "mental_model": "Hello World is the minimal Go program: a package declaration, an import, and a main function calling fmt.Println. go run compiles and executes in one step. Every Go program starts with package main and func main.",
+        "how_go_uses_it": "Go's toolchain explicitly separates these three stages: source files (.go) are input, 'go build' produces a standalone executable binary, and 'go run' combines both steps plus execution in one command. Go binaries are statically linked — the executable contains everything needed to run, including the Go runtime.",
+        "mental_model": "The physical computer executes machine instructions via the Von Neumann architecture: the CPU continuously fetches byte opcodes from memory at the address in the Instruction Pointer (RIP), decodes them, and executes them with the ALU.",
         "performance_implications": [
           "Source code is human-readable and compressible; executables are larger (2-20 MB for Go) and optimized for the CPU.",
-          "The compilation step adds latency to the edit-run cycle â€” Go's fast compiler keeps this under 1 second for most projects.",
+          "The compilation step adds latency to the edit-run cycle — Go's fast compiler keeps this under 1 second for most projects.",
           "Statically linked binaries are larger but eliminate runtime dependency resolution, making deployment simpler and faster."
         ],
-        "problem_solved": "Beginners conflate the static file they write with the dynamic process that runs. This causes confusion about edits, compilation errors, and debugging â€” understanding the separation clarifies the entire development workflow.",
+        "problem_solved": "Beginners conflate the static file they write with the dynamic process that runs. This causes confusion about edits, compilation errors, and debugging — understanding the separation clarifies the entire development workflow.",
         "proof_of_understanding": "The learner must create a Go source file, compile it to a binary, run the binary, then modify the source, recompile, and confirm the change only appears after restarting the process.",
         "real_world_usage": "Production deployments compile code into binaries (or containers), push those artifacts to servers, and restart processes. CI/CD pipelines automate this exact source-to-executable-to-process flow. Understanding each stage is essential for debugging, deployment, and incident response.",
         "step_by_step_execution": [
           "Write source code in a text editor and save as main.go.",
-          "Run 'go build -o myapp' â€” the compiler reads main.go and produces a binary named myapp.",
-          "Run './myapp' â€” the OS loader reads the binary, creates a new process, and starts executing instructions.",
+          "Run 'go build -o myapp' — the compiler reads main.go and produces a binary named myapp.",
+          "Run './myapp' — the OS loader reads the binary, creates a new process, and starts executing instructions.",
           "The process runs until main returns, calling os.Exit to clean up resources.",
           "The OS reclaims the process's memory, closes file descriptors, and removes the process entry from the process table."
         ],
         "under_the_hood": "A Go binary uses the ELF (Linux) or PE (Windows) format. The OS loader reads the ELF/PE header, maps segments into virtual memory, resolves dynamic symbols (though Go prefers static linking), and jumps to the runtime entry point (_rt0_amd64_linux on amd64 Linux). The Go runtime then initializes the garbage collector, scheduler, and finally calls the user's main function.",
-        "why_it_exists": "Without this distinction, every development action â€” editing, compiling, running, debugging â€” becomes muddy. Separating source, executable, and process gives developers precise language to discuss what is happening and why."
+        "why_it_exists": "Without this distinction, every development action — editing, compiling, running, debugging — becomes muddy. Separating source, executable, and process gives developers precise language to discuss what is happening and why."
       },
       "crossrefs": {
         "builds_on": [
@@ -2259,9 +2259,9 @@
       ],
       "zero_magic": {
         "beginner_mistakes": [
-          "Confusing a file's name with its contents â€” renaming a .txt to .pdf does not make it a PDF.",
-          "Assuming paths like C:\\\\Users\\\\name\\\\file.txt mean the same on every OS â€” Linux uses forward slashes and no drive letters.",
-          "Thinking directories store files hierarchically â€” on disk, directories are just special files mapping names to inode numbers."
+          "Confusing a file's name with its contents — renaming a .txt to .pdf does not make it a PDF.",
+          "Assuming paths like C:\\\\Users\\\\name\\\\file.txt mean the same on every OS — Linux uses forward slashes and no drive letters.",
+          "Thinking directories store files hierarchically — on disk, directories are just special files mapping names to inode numbers."
         ],
         "execution_timeline": [
           "The filesystem driver receives a path string from a system call like open() or ReadFile().",
@@ -2286,11 +2286,11 @@
           "Learner must determine whether two paths refer to the same file using inode comparison."
         ],
         "how_go_uses_it": "Go's os and path/filepath packages provide cross-platform filesystem access. os.Open, os.ReadFile, os.WriteFile, and filepath.Join abstract over OS differences. Go's embed package even allows embedding files directly into the binary at compile time.",
-        "mental_model": "Go compiles to a native binary with no VM. The compiler type-checks, inlines, escapes-analyzes, and optimises before producing a static binary. This gives Go fast startup and simple deployment.",
+        "mental_model": "Storage hardware stores raw bytes in sectors; the operating system abstracts this into a hierarchical tree of files, directories, path coordinates, and numeric file descriptors connecting processes to standard I/O streams.",
         "performance_implications": [
           "Reading a file byte-by-byte is 100-1000x slower than reading in large buffers due to syscall overhead.",
           "SSDs provide ~500 MB/s sequential reads; HDDs provide ~150 MB/s. Random access is 10-100x slower on HDDs.",
-          "Directory traversal for deeply nested paths adds latency â€” each component requires a separate directory lookup."
+          "Directory traversal for deeply nested paths adds latency — each component requires a separate directory lookup."
         ],
         "problem_solved": "Files are the fundamental storage abstraction in every OS. Without understanding how paths resolve, how bytes relate to content, and how directories organize data, every file operation feels fragile and unpredictable.",
         "proof_of_understanding": "The learner must write a Go program that creates a directory, writes a file with specific bytes, reads it back, and confirms the content matches using os and path/filepath packages.",
@@ -2298,12 +2298,12 @@
         "step_by_step_execution": [
           "The OS mounts a filesystem (NTFS, ext4, APFS) that organizes data as a tree of directories and files.",
           "A file is a named sequence of bytes stored in fixed-size blocks on disk, tracked by an inode containing metadata (size, permissions, timestamps).",
-          "A directory is a special file that maps names to inode numbers â€” ls/dir reads this mapping.",
+          "A directory is a special file that maps names to inode numbers — ls/dir reads this mapping.",
           "A path is a string of directory names separated by separators (slash, backslash) leading to a target file or directory.",
           "When a program opens a path, the OS filesystem driver traverses the tree, resolving each component until it finds the target inode."
         ],
-        "under_the_hood": "On Linux, ext4 stores files in blocks (default 4 KB). Each file's inode (index node) stores 15 block pointers: 12 direct, 1 indirect, 1 doubly indirect, 1 triply indirect â€” supporting files up to 16 TB. NTFS uses MFT (Master File Table) entries instead of inodes. All filesystems use B-trees or similar structures for directory lookups.",
-        "why_it_exists": "Without a filesystem, every program would need to manage raw disk sectors â€” an impossible burden. Files, directories, and paths give developers a simple tree-based abstraction that works across programming languages and operating systems."
+        "under_the_hood": "On Linux, ext4 stores files in blocks (default 4 KB). Each file's inode (index node) stores 15 block pointers: 12 direct, 1 indirect, 1 doubly indirect, 1 triply indirect — supporting files up to 16 TB. NTFS uses MFT (Master File Table) entries instead of inodes. All filesystems use B-trees or similar structures for directory lookups.",
+        "why_it_exists": "Without a filesystem, every program would need to manage raw disk sectors — an impossible burden. Files, directories, and paths give developers a simple tree-based abstraction that works across programming languages and operating systems."
       },
       "crossrefs": {
         "builds_on": [
@@ -2442,13 +2442,13 @@
       ],
       "zero_magic": {
         "beginner_mistakes": [
-          "Typing commands without understanding the working directory â€” running rm -rf * in the wrong directory can be catastrophic.",
-          "Confusing the terminal (the window) with the shell (the program running inside it) â€” they are different layers.",
+          "Typing commands without understanding the working directory — running rm -rf * in the wrong directory can be catastrophic.",
+          "Confusing the terminal (the window) with the shell (the program running inside it) — they are different layers.",
           "Using relative paths without checking the current directory first, leading to 'file not found' errors."
         ],
         "execution_timeline": [
           "The user opens a terminal emulator which starts a shell process (bash, zsh, or PowerShell).",
-          "The shell prints a prompt and waits for input â€” the user types a command and presses Enter.",
+          "The shell prints a prompt and waits for input — the user types a command and presses Enter.",
           "The shell parses the input, resolves the command (built-in, alias, or PATH lookup), forks a child process, and waits for it to complete."
         ],
         "failure_modes": [
@@ -2469,23 +2469,23 @@
           "Learner must explain what happens when Ctrl+C is pressed while a command is running."
         ],
         "how_go_uses_it": "Go developers use the terminal constantly: 'go run' to test code, 'go test' to verify correctness, 'go build' to produce binaries, 'go mod tidy' to manage dependencies, and 'go vet' to catch bugs. The go command is itself a terminal program with flags, arguments, and exit codes.",
-        "mental_model": "A development environment pairs an editor with Go support, a terminal, Go tooling, and version control. The integrated terminal runs go build, go test, go fmt, and git without switching contexts.",
+        "mental_model": "The terminal consists of an emulator capturing keystrokes and an interactive shell interpreter executing a REPL: reading input, parsing arguments, resolving executables via $PATH, forking child processes, and wiring standard streams.",
         "performance_implications": [
-          "Starting a new shell process for every command adds ~1-5ms overhead â€” negligible for interactive use but significant in tight loops.",
+          "Starting a new shell process for every command adds ~1-5ms overhead — negligible for interactive use but significant in tight loops.",
           "Piping large datasets between commands avoids writing temp files to disk, reducing I/O by 10-100x.",
           "Using shell built-ins (cd, echo, source) is faster than external commands since no process fork is needed."
         ],
-        "problem_solved": "New developers face the terminal with anxiety because every error looks like random noise. Understanding what the shell does â€” parsing, resolving, forking, waiting â€” transforms the terminal from a scary black box into a predictable tool.",
+        "problem_solved": "New developers face the terminal with anxiety because every error looks like random noise. Understanding what the shell does — parsing, resolving, forking, waiting — transforms the terminal from a scary black box into a predictable tool.",
         "proof_of_understanding": "The learner must run three terminal commands, redirect output to a file using >, pipe data between two programs with |, and explain which process owns each step.",
         "real_world_usage": "Professional developers spend hours daily in the terminal running builds, tailing logs, grepping code, managing git, deploying services, and debugging production. Terminal fluency is the difference between fighting the machine and commanding it.",
         "step_by_step_execution": [
-          "Open a terminal emulator â€” the shell process starts with your home directory as the working directory.",
-          "Type a command and press Enter â€” the shell parses the input line into a command name and arguments.",
+          "Open a terminal emulator — the shell process starts with your home directory as the working directory.",
+          "Type a command and press Enter — the shell parses the input line into a command name and arguments.",
           "The shell searches PATH for an executable matching the command name and forks a child process.",
           "The child process runs, reading from stdin and writing to stdout/stderr until it exits.",
           "The shell collects the exit code, displays the next prompt, and waits for the next command."
         ],
-        "under_the_hood": "Every terminal command creates at minimum one OS process. The shell uses fork+exec on Unix or CreateProcess on Windows. stdin/stdout/stderr are file descriptors inherited from the parent shell. The shell's job is to orchestrate these processes â€” piping fd 1 of process A to fd 0 of process B, collecting exit codes, and managing job control (foreground/background).",
+        "under_the_hood": "Every terminal command creates at minimum one OS process. The shell uses fork+exec on Unix or CreateProcess on Windows. stdin/stdout/stderr are file descriptors inherited from the parent shell. The shell's job is to orchestrate these processes — piping fd 1 of process A to fd 0 of process B, collecting exit codes, and managing job control (foreground/background).",
         "why_it_exists": "The terminal predates GUIs and remains the most powerful interface for software development because it is composable, scriptable, remote-friendly, and consistent across machines. Learning the terminal is learning to speak the computer's native language."
       },
       "crossrefs": {
@@ -2626,7 +2626,7 @@
       "zero_magic": {
         "beginner_mistakes": [
           "Hard-coding sensitive values like API keys and database passwords in source code instead of using environment variables.",
-          "Assuming environment variables are automatically available in all contexts â€” child processes inherit them, but system services may not.",
+          "Assuming environment variables are automatically available in all contexts — child processes inherit them, but system services may not.",
           "Modifying environment variables in one terminal and expecting them to persist in other terminals or after reboot."
         ],
         "execution_timeline": [
@@ -2652,19 +2652,19 @@
           "Learner must list three common environment variables (PATH, HOME, GOOS) and describe what each controls."
         ],
         "how_go_uses_it": "Go reads environment variables for toolchain configuration: GOPATH (module cache location), GOROOT (Go installation root), GOOS/GOARCH (cross-compilation target), GOPROXY (module proxy), and GONOSUMCHECK (checksum database bypass). Go programs read config via os.Getenv() or the os.Environ() slice.",
-        "mental_model": "The Go toolchain includes build, test, fmt, vet, mod, and run. Each tool serves a specific purpose. Learning them replaces the need for complex build systems or task runners.",
+        "mental_model": "Environment variables form a string-to-string dictionary stored in the private memory block of each process. A parent process passes a snapshot of its environment to child processes upon fork, ensuring configuration isolation.",
         "performance_implications": [
           "Reading an environment variable is a fast in-memory lookup (~100ns), not a disk or network operation.",
           "Setting many environment variables (1000+) slightly increases process startup time due to the memory copy at fork.",
-          "Environment variables are limited in size â€” typical max is 32KB on Windows, 2MB on Linux for the entire environment block."
+          "Environment variables are limited in size — typical max is 32KB on Windows, 2MB on Linux for the entire environment block."
         ],
         "problem_solved": "Applications need configuration that differs between development, testing, and production without modifying code. Environment variables provide a universal, language-agnostic mechanism for injecting configuration at runtime.",
         "proof_of_understanding": "The learner must write a Go program that reads a DATABASE_URL environment variable, prints a connection string, and exits with a clear error if the variable is not set.",
-        "real_world_usage": "Environment variables are the standard mechanism for configuring Twelve-Factor Apps â€” database URLs, API keys, log levels, feature flags, and deployment-specific settings. Docker, Kubernetes, Heroku, and CI/CD systems all use environment variables for configuration injection.",
+        "real_world_usage": "Environment variables are the standard mechanism for configuring Twelve-Factor Apps — database URLs, API keys, log levels, feature flags, and deployment-specific settings. Docker, Kubernetes, Heroku, and CI/CD systems all use environment variables for configuration injection.",
         "step_by_step_execution": [
           "The OS kernel maintains an environment block for each process: a list of KEY=VALUE strings.",
           "When a new process is spawned (fork+exec), the parent's environment block is copied into the child's address space.",
-          "The child process reads variables via language-specific APIs â€” os.Getenv in Go, getenv in C, process.env in Node.",
+          "The child process reads variables via language-specific APIs — os.Getenv in Go, getenv in C, process.env in Node.",
           "The shell manages environment inheritance: export VAR=value marks a variable for export to child processes.",
           "Shell initialization files (~/.bashrc, /etc/profile) pre-populate the environment at login."
         ],
@@ -2809,8 +2809,8 @@
       "zero_magic": {
         "beginner_mistakes": [
           "Ignoring exit codes entirely and assuming a program succeeded because no error text was printed.",
-          "Using exit code 0 for errors and non-zero for success â€” by convention, 0 means success, non-zero means failure.",
-          "Forgetting that a program exiting with code 0 may still have produced incorrect output â€” exit code only indicates the program ran without internal errors."
+          "Using exit code 0 for errors and non-zero for success — by convention, 0 means success, non-zero means failure.",
+          "Forgetting that a program exiting with code 0 may still have produced incorrect output — exit code only indicates the program ran without internal errors."
         ],
         "execution_timeline": [
           "A program completes its work and calls os.Exit(code) or returns from main, triggering process termination.",
@@ -2835,24 +2835,24 @@
           "Learner must chain two commands with && and || and predict which runs based on exit codes."
         ],
         "how_go_uses_it": "Go programs use os.Exit(code) for explicit exit codes and panic() for unrecoverable errors (which exits with code 2). The 'go vet' tool reports when os.Exit is called in unexpected places. Go tests use t.FailNow() and t.Fatal() to signal failure with appropriate exit codes.",
-        "mental_model": "Compiler errors tell you exactly what is wrong and where. Read them from bottom to top: the last line is the root cause. Learning to read errors without panic is the highest-leverage skill for a new Go developer.",
+        "mental_model": "Every terminating process returns a numeric status code (0 for success, non-zero 1-255 for failure) to the OS kernel, enabling automated scripts, callers, and CI pipelines to determine outcome without parsing text.",
         "performance_implications": [
-          "Reading an exit code is a zero-cost operation â€” the kernel already captures it during process termination.",
-          "Exit codes beyond 255 are truncated (modulo 256) on Unix â€” always use 0-255 range.",
+          "Reading an exit code is a zero-cost operation — the kernel already captures it during process termination.",
+          "Exit codes beyond 255 are truncated (modulo 256) on Unix — always use 0-255 range.",
           "Exit code 128+N on Unix conventionally indicates termination by signal N (e.g., 130 = SIGINT, 137 = SIGKILL)."
         ],
-        "problem_solved": "Programs need a simple, universal way to signal success or failure to their caller (shell, CI system, or another program). Exit codes provide this with a single integer â€” no parsing of output text required.",
+        "problem_solved": "Programs need a simple, universal way to signal success or failure to their caller (shell, CI system, or another program). Exit codes provide this with a single integer — no parsing of output text required.",
         "proof_of_understanding": "The learner must write a Go program that accepts a filename argument, attempts to open it, exits with 0 on success and 1 on failure, and demonstrate both cases in the terminal.",
         "real_world_usage": "CI/CD pipelines, shell scripts, Makefiles, and container orchestrators all rely on exit codes to determine whether a step succeeded. 'docker run' exits with the container's exit code. 'kubectl apply' uses exit codes for success/failure signaling.",
         "step_by_step_execution": [
-          "A Go program completes normally â€” the runtime calls os.Exit(0) automatically when main returns.",
+          "A Go program completes normally — the runtime calls os.Exit(0) automatically when main returns.",
           "If the program encounters an error, it calls os.Exit(1) (or another code) to signal failure.",
           "The OS kernel stores the exit code in the process's exit status field in the process table.",
           "The parent shell retrieves the exit code using waitpid() on Unix or GetExitCodeProcess on Windows.",
           "The shell stores the exit code in $? (bash) or $LASTEXITCODE (PowerShell) for use in conditionals."
         ],
         "under_the_hood": "On Linux, the exit syscall (nr 60 on x86_64) takes a single integer argument. The kernel sets the process's exit_code field in task_struct, wakes up the parent waiting on waitid(), and stores the code until the parent collects it with wait4() (zombie state). On Windows, ExitProcess sets the exit code in the EPROCESS block.",
-        "why_it_exists": "Without exit codes, scripts and shells would need to parse program output to determine success â€” fragile, language-dependent, and slow. A single integer provides reliable, universal success/failure signaling."
+        "why_it_exists": "Without exit codes, scripts and shells would need to parse program output to determine success — fragile, language-dependent, and slow. A single integer provides reliable, universal success/failure signaling."
       },
       "crossrefs": {
         "builds_on": [
@@ -2991,9 +2991,9 @@
       ],
       "zero_magic": {
         "beginner_mistakes": [
-          "Thinking a 'process' is the same as a 'program' or a 'thread' â€” they are distinct OS abstractions.",
-          "Assuming every running program gets its own CPU core â€” the OS scheduler time-shares cores among all processes.",
-          "Believing a terminated process disappears instantly â€” it leaves a zombie entry until the parent collects its exit code."
+          "Thinking a 'process' is the same as a 'program' or a 'thread' — they are distinct OS abstractions.",
+          "Assuming every running program gets its own CPU core — the OS scheduler time-shares cores among all processes.",
+          "Believing a terminated process disappears instantly — it leaves a zombie entry until the parent collects its exit code."
         ],
         "execution_timeline": [
           "The user or another process requests a new process via fork() on Unix or CreateProcess() on Windows.",
@@ -3018,11 +3018,11 @@
           "Learner must predict what happens to child processes when the parent process is killed."
         ],
         "how_go_uses_it": "Go's runtime manages goroutines as user-space threads multiplexed onto OS threads. Go programs typically use one OS thread per CPU core (GOMAXPROCS) and schedule thousands of goroutines across them. The os/exec package spawns external processes, and os.FindProcess looks them up by PID.",
-        "mental_model": "A process is a running program with its own private memory space, file descriptors, and execution state. The OS kernel acts as a traffic cop â€” allocating CPU time, memory, and I/O resources among all running processes fairly.",
+        "mental_model": "A process is a running program with its own private memory space, file descriptors, and execution state. The OS kernel acts as a traffic cop — allocating CPU time, memory, and I/O resources among all running processes fairly.",
         "performance_implications": [
-          "Creating a new process is expensive (microseconds to milliseconds) â€” fork+copy-on-write or CreateProcess requires significant kernel work.",
+          "Creating a new process is expensive (microseconds to milliseconds) — fork+copy-on-write or CreateProcess requires significant kernel work.",
           "Context switching between processes is slower than between threads because the TLB (translation lookaside buffer) must be flushed.",
-          "The OOM killer activates when memory is overcommitted â€” processes can be killed arbitrarily if they consume too much memory."
+          "The OOM killer activates when memory is overcommitted — processes can be killed arbitrarily if they consume too much memory."
         ],
         "problem_solved": "Operating systems need to run multiple programs concurrently while keeping them isolated. The process abstraction provides memory isolation, fair CPU scheduling, and resource accounting.",
         "proof_of_understanding": "The learner must write a Go program that spawns a child process via os/exec, waits for it to complete, collects the exit code, and print the parent and child PIDs.",
@@ -3030,12 +3030,12 @@
         "step_by_step_execution": [
           "The OS boots, initializing the scheduler and the process table (a kernel data structure tracking all processes).",
           "When fork() is called, the kernel copies the parent's PCB, creates a new virtual address space (with copy-on-write optimization), and assigns a new PID.",
-          "The scheduler maintains run queues â€” when a CPU core is free, it dequeues the highest-priority ready process and performs a context switch.",
+          "The scheduler maintains run queues — when a CPU core is free, it dequeues the highest-priority ready process and performs a context switch.",
           "A context switch saves the current process's registers and program counter, then loads the next process's saved state.",
           "When a process calls exit(), the kernel closes its file descriptors, frees its memory, stores the exit code, and transitions it to zombie state until the parent calls wait()."
         ],
-        "under_the_hood": "On Linux, each process has a task_struct containing PID, parent PID, memory map (mm_struct), file descriptor table (files_struct), signal handlers, and scheduling priority. The scheduler on modern Linux (CFS â€” Completely Fair Scheduler) uses red-black trees to track process runtime and ensures fairness by selecting the process with the least runtime.",
-        "why_it_exists": "Without OS-managed processes, every program would need its own CPU scheduler, memory isolation mechanism, and I/O multiplexer â€” essentially reimplementing the OS. Processes are the fundamental unit of workload isolation."
+        "under_the_hood": "On Linux, each process has a task_struct containing PID, parent PID, memory map (mm_struct), file descriptor table (files_struct), signal handlers, and scheduling priority. The scheduler on modern Linux (CFS — Completely Fair Scheduler) uses red-black trees to track process runtime and ensures fairness by selecting the process with the least runtime.",
+        "why_it_exists": "Without OS-managed processes, every program would need its own CPU scheduler, memory isolation mechanism, and I/O multiplexer — essentially reimplementing the OS. Processes are the fundamental unit of workload isolation."
       },
       "crossrefs": {
         "builds_on": [
@@ -3184,9 +3184,9 @@
       ],
       "zero_magic": {
         "beginner_mistakes": [
-          "Thinking 'memory' is a single uniform space â€” stack and heap have different allocation patterns, lifetimes, and performance characteristics.",
-          "Returning a pointer to a stack-allocated variable from a function â€” in Go this is safe (escape analysis), but in C this causes undefined behavior.",
-          "Assuming heap allocation is always bad â€” small, short-lived allocations on the stack are fast, but heap is necessary for dynamic lifetimes."
+          "Thinking 'memory' is a single uniform space — stack and heap have different allocation patterns, lifetimes, and performance characteristics.",
+          "Returning a pointer to a stack-allocated variable from a function — in Go this is safe (escape analysis), but in C this causes undefined behavior.",
+          "Assuming heap allocation is always bad — small, short-lived allocations on the stack are fast, but heap is necessary for dynamic lifetimes."
         ],
         "execution_timeline": [
           "When a function is called, the runtime pushes a stack frame containing local variables, return address, and saved registers.",
@@ -3202,7 +3202,7 @@
           {
             "cause": "Each recursive call pushes a stack frame, and infinite recursion fills the limited stack space (1-8 MB per goroutine in Go).",
             "fix": "Add a proper base case, or convert the recursion to iteration (or tail recursion where supported).",
-            "scenario": "A recursive function with no base case causes a stack overflow â€” the stack memory is exhausted."
+            "scenario": "A recursive function with no base case causes a stack overflow — the stack memory is exhausted."
           }
         ],
         "hidden_magic_checks": [
@@ -3211,23 +3211,23 @@
           "Learner must predict the relative performance of stack vs. heap allocation for a given code pattern."
         ],
         "how_go_uses_it": "Go uses escape analysis at compile time to decide stack vs. heap allocation. If a variable's address does not escape the function, it stays on the stack. If the compiler cannot prove the address is not used after the function returns, it allocates on the heap. Go's garbage collector handles heap reclamation automatically.",
-        "mental_model": "The stack is a LIFO (Last-In-First-Out) structure for function-local data â€” like a stack of plates, the last one put on is the first taken off. The heap is a pool of memory for data that needs to live beyond its allocating function â€” like a storage unit where items can be retrieved in any order.",
+        "mental_model": "The stack is a LIFO (Last-In-First-Out) structure for function-local data — like a stack of plates, the last one put on is the first taken off. The heap is a pool of memory for data that needs to live beyond its allocating function — like a storage unit where items can be retrieved in any order.",
         "performance_implications": [
-          "Stack allocation takes ~1-3 nanoseconds â€” just moving the stack pointer. Heap allocation takes ~10-100 nanoseconds plus GC overhead.",
+          "Stack allocation takes ~1-3 nanoseconds — just moving the stack pointer. Heap allocation takes ~10-100 nanoseconds plus GC overhead.",
           "Frequent heap allocation generates garbage that the GC must collect, causing stop-the-world pauses (typically <1ms in Go).",
           "Stack memory is cache-friendly (spatial locality). Heap memory can fragment and cause cache misses."
         ],
         "problem_solved": "Not all data has the same lifetime. Stack memory auto-frees when functions return (fast), but only works for fixed-size, function-scoped data. Heap memory persists until explicitly freed or garbage-collected, at the cost of slower allocation and reclamation.",
-        "proof_of_understanding": "The learner must write a Go program with two functions â€” one that allocates on the stack (local variable) and one that allocates on the heap (returned pointer) â€” and use 'go build -gcflags=-m' to verify the compiler's escape analysis decisions.",
+        "proof_of_understanding": "The learner must write a Go program with two functions — one that allocates on the stack (local variable) and one that allocates on the heap (returned pointer) — and use 'go build -gcflags=-m' to verify the compiler's escape analysis decisions.",
         "real_world_usage": "Performance-critical code in Go (network proxies, databases, game servers) minimizes heap allocations by designing data structures that stay on the stack or use object pools. Understanding stack vs. heap is essential for writing efficient Go programs.",
         "step_by_step_execution": [
-          "A function is called â€” the runtime pushes a stack frame onto the goroutine's stack (growing if needed).",
-          "Local variables are allocated by decrementing the stack pointer â€” no malloc, no GC tracking.",
+          "A function is called — the runtime pushes a stack frame onto the goroutine's stack (growing if needed).",
+          "Local variables are allocated by decrementing the stack pointer — no malloc, no GC tracking.",
           "If the variable's address is returned or stored in a globally reachable location, escape analysis marks it for heap allocation.",
           "Heap allocation calls Go's memory allocator (tcmalloc-inspired), which finds a free span in the heap arena.",
           "When the heap object is no longer reachable, the garbage collector marks and sweeps it in a later GC cycle."
         ],
-        "under_the_hood": "Go's stack grows dynamically (starting at 2 KB, growing up to 1 GB on 64-bit systems). Stack frames are copied on growth via stack copying â€” the GC updates all pointers in the old stack to point to the new location. Go's heap uses a page-based allocator with three tiers: page heap (large allocations), central free lists (medium), and per-P caches (small, fast).",
+        "under_the_hood": "Go's stack grows dynamically (starting at 2 KB, growing up to 1 GB on 64-bit systems). Stack frames are copied on growth via stack copying — the GC updates all pointers in the old stack to point to the new location. Go's heap uses a page-based allocator with three tiers: page heap (large allocations), central free lists (medium), and per-P caches (small, fast).",
         "why_it_exists": "Memory is finite and must be reused. Stack vs. heap is the fundamental tradeoff between allocation speed and lifetime flexibility. Understanding this tradeoff is essential for writing correct, efficient programs in any language."
       },
       "crossrefs": {
@@ -3304,7 +3304,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "The learner must write a Go program with two functions â€” one that allocates on the stack (local variable) and one that allocates on the heap (returned pointer) â€” and use 'go build -gcflags=-m' to verify the compiler's escape analysis decisions.",
+        "practice_task": "The learner must write a Go program with two functions — one that allocates on the stack (local variable) and one that allocates on the heap (returned pointer) — and use 'go build -gcflags=-m' to verify the compiler's escape analysis decisions.",
         "project_id": "project-shell-git-lab",
         "rubric_ids": [
           "rubric-module-01"
@@ -3384,8 +3384,8 @@
       ],
       "zero_magic": {
         "beginner_mistakes": [
-          "Thinking Git stores versions of files as deltas â€” Git stores full snapshots, not diffs.",
-          "Believing git commit saves changes to a remote server â€” commits are local until git push.",
+          "Thinking Git stores versions of files as deltas — Git stores full snapshots, not diffs.",
+          "Believing git commit saves changes to a remote server — commits are local until git push.",
           "Confusing the working directory, the staging area (index), and the commit history as all the same thing."
         ],
         "execution_timeline": [
@@ -3413,19 +3413,19 @@
         "how_go_uses_it": "Go projects depend on Git for version control and module distribution. 'go mod download' fetches modules from Git repositories. 'go get' resolves package paths to Git remote URLs. The Go ecosystem on GitHub relies entirely on Git for collaboration, code review, and release management.",
         "mental_model": "Git is a content-addressable filesystem where every object is identified by its SHA-1 hash. A commit is a snapshot of the entire repository at a point in time, linked to its parent(s) in a Directed Acyclic Graph (DAG). Branches are just movable pointers to commits.",
         "performance_implications": [
-          "Git operations are fast because they are local â€” no network needed for commit, diff, log, or branch operations.",
+          "Git operations are fast because they are local — no network needed for commit, diff, log, or branch operations.",
           "Git's object store uses zlib compression, reducing disk usage by 30-70% compared to storing raw files.",
-          "Large binary files bloat Git history â€” Git is optimized for text files that diff well."
+          "Large binary files bloat Git history — Git is optimized for text files that diff well."
         ],
         "problem_solved": "Developers need to track changes, collaborate on code, experiment safely, and revert mistakes. Git provides a distributed, offline-capable version control system that solves all these problems with a unified data model.",
         "proof_of_understanding": "The learner must initialize a new Git repository, create three commits, run 'git log --oneline --graph' and explain the commit graph, then use 'git diff' to show changes between two commits.",
         "real_world_usage": "Git is the de facto standard for version control in the software industry. Every open-source project, every enterprise codebase, every CI/CD pipeline, and every deployment system integrates with Git. GitHub, GitLab, and Bitbucket host millions of repositories.",
         "step_by_step_execution": [
-          "Initialize a Git repository â€” this creates the .git directory with objects/, refs/, HEAD, and config files.",
-          "Create or modify files in the working directory â€” Git detects changes by comparing current file hashes with the index.",
-          "Stage changes with 'git add' â€” Git computes the SHA-1 hash of each file, stores the content as a blob in objects/, and updates the index.",
-          "Commit with 'git commit' â€” Git creates a tree object (listing blobs and subtrees), a commit object (linking to tree, parent, author, message), and advances the current branch pointer.",
-          "Push with 'git push' â€” Git uploads new objects to the remote, and the remote updates its refs to match."
+          "Initialize a Git repository — this creates the .git directory with objects/, refs/, HEAD, and config files.",
+          "Create or modify files in the working directory — Git detects changes by comparing current file hashes with the index.",
+          "Stage changes with 'git add' — Git computes the SHA-1 hash of each file, stores the content as a blob in objects/, and updates the index.",
+          "Commit with 'git commit' — Git creates a tree object (listing blobs and subtrees), a commit object (linking to tree, parent, author, message), and advances the current branch pointer.",
+          "Push with 'git push' — Git uploads new objects to the remote, and the remote updates its refs to match."
         ],
         "under_the_hood": "Git's object database contains four types: blob (file content), tree (directory listing with mode/type/hash/name), commit (tree hash, parent hashes, author, committer, message), and tag (annotated tag pointing to a commit). Packfiles compress multiple objects together with delta encoding for efficient storage and transfer.",
         "why_it_exists": "Without version control, teams lose history, overwrite each other's changes, and cannot safely experiment. Git's distributed model, content-addressable storage, and branching model make it the most powerful and resilient version control system ever built."
@@ -3585,7 +3585,7 @@
           {
             "cause": "git add captures the file's content at the moment of staging; subsequent edits are unstaged modifications.",
             "fix": "Always run 'git status' before committing, and re-stage changed files or use 'git commit -a' for tracked files.",
-            "scenario": "A developer stages a file, edits it again, then commits â€” the second edit is not included in the commit."
+            "scenario": "A developer stages a file, edits it again, then commits — the second edit is not included in the commit."
           }
         ],
         "hidden_magic_checks": [
@@ -3596,22 +3596,22 @@
         "how_go_uses_it": "Go developers use Git for every project: 'git init' creates a module, 'git add' and 'git commit' save work, 'git push' publishes code. Go's 'go mod vendor' creates a vendor directory that should be committed. GitHub Actions CI runs tests on every git push.",
         "mental_model": "The Git workflow is three baskets: the working directory (your current edits), the staging area (what you plan to commit), and the commit history (what has been saved). Changes flow left to right: working â†’ staged â†’ committed.",
         "performance_implications": [
-          "git add and git commit are local operations â€” no network, no latency. A typical commit takes under 100ms.",
-          "Large repositories (100k+ files) slow down git status â€” use .gitignore to exclude build artifacts and dependencies.",
-          "Git's index file scales with the number of tracked files â€” performance degrades linearly."
+          "git add and git commit are local operations — no network, no latency. A typical commit takes under 100ms.",
+          "Large repositories (100k+ files) slow down git status — use .gitignore to exclude build artifacts and dependencies.",
+          "Git's index file scales with the number of tracked files — performance degrades linearly."
         ],
         "problem_solved": "Developers need a repeatable workflow to save work-in-progress, review changes before committing, and build a clean history. The status-add-commit cycle provides a safe, structured way to record progress.",
         "proof_of_understanding": "The learner must create a repository, modify a file, stage it, make another modification, use git diff to see unstaged changes, re-stage, commit with a proper message, and confirm the commit with git log.",
         "real_world_usage": "The status-add-commit cycle is performed dozens of times daily by every professional developer. It is the fundamental rhythm of Git-based development, used in every codebase from small personal projects to monorepos at Google and Microsoft.",
         "step_by_step_execution": [
-          "Run 'git status' to see the current state â€” modified tracked files, staged files, and untracked files are listed separately.",
-          "Run 'git add <file>' or 'git add .' to stage changes â€” Git hashes file contents and updates the index.",
+          "Run 'git status' to see the current state — modified tracked files, staged files, and untracked files are listed separately.",
+          "Run 'git add <file>' or 'git add .' to stage changes — Git hashes file contents and updates the index.",
           "Run 'git diff --staged' to review exactly what will be included in the next commit.",
           "Run 'git commit -m \"type: description\"' to create a commit from the staged snapshot.",
           "Run 'git log --oneline' to verify the commit appears at the top of the history."
         ],
         "under_the_hood": "The Git index (staging area) is a binary file at .git/index. It contains a sorted list of paths with their metadata (mode, SHA-1 hash, stage number). git add updates the hash in the index. git commit reads the index, builds a tree object from it, creates a commit object pointing to that tree, and writes the commit hash into the current branch ref.",
-        "why_it_exists": "Without staging, every file change would be automatically included in the next commit â€” making partial commits, code review, and selective history impossible. The status-add-commit workflow gives developers fine-grained control over what enters the permanent record."
+        "why_it_exists": "Without staging, every file change would be automatically included in the next commit — making partial commits, code review, and selective history impossible. The status-add-commit workflow gives developers fine-grained control over what enters the permanent record."
       },
       "crossrefs": {
         "builds_on": [
@@ -3755,7 +3755,7 @@
           "Deleting a branch without merging or rebasing it first, losing all commits that existed only on that branch."
         ],
         "execution_timeline": [
-          "A branch is created from a starting commit â€” the branch pointer initially points to that same commit.",
+          "A branch is created from a starting commit — the branch pointer initially points to that same commit.",
           "New commits on the branch advance the branch pointer forward while other branches remain at their positions.",
           "When merged, Git finds the merge base (the common ancestor), applies the changes, and creates a merge commit with two parents."
         ],
@@ -3777,9 +3777,9 @@
           "Learner must explain the difference between a fast-forward merge and a three-way merge."
         ],
         "how_go_uses_it": "Go projects on GitHub use the standard branching model: main is stable, feature branches contain work-in-progress, and pull requests merge branches after review. Go modules use Git tags (v1.2.3) for release versioning.",
-        "mental_model": "A branch is just a named pointer to a specific commit. Creating a branch costs nothing â€” it's just writing 20 bytes (a SHA-1 hash) to a file in .git/refs/heads/. The magic is that each branch can move independently as new commits are added, creating divergent histories.",
+        "mental_model": "A branch is just a named pointer to a specific commit. Creating a branch costs nothing — it's just writing 20 bytes (a SHA-1 hash) to a file in .git/refs/heads/. The magic is that each branch can move independently as new commits are added, creating divergent histories.",
         "performance_implications": [
-          "Branch creation is instant and costs negligible disk space â€” Git stores commits in the shared object database, not per branch.",
+          "Branch creation is instant and costs negligible disk space — Git stores commits in the shared object database, not per branch.",
           "Merge conflicts require manual resolution, which can take minutes to hours depending on complexity.",
           "Rebasing rewrites commit history (new hashes for existing changes), which is fast but forces other developers to re-sync."
         ],
@@ -3788,13 +3788,13 @@
         "real_world_usage": "Branching strategies (Git Flow, GitHub Flow, Trunk-Based Development) are foundational to team software development. Every PR, every hotfix, every release candidate uses branches and merges. CI/CD pipelines are triggered by pushes to specific branches.",
         "step_by_step_execution": [
           "Choose a starting commit (e.g., the latest main) and create a branch: 'git branch feature-x' or 'git checkout -b feature-x'.",
-          "Make commits on the branch â€” the branch pointer advances, main stays at the original commit.",
+          "Make commits on the branch — the branch pointer advances, main stays at the original commit.",
           "When work is complete, switch to main and merge: 'git checkout main && git merge feature-x'.",
           "Git finds the merge base (common ancestor of main and feature-x) and creates a merge commit combining both histories.",
-          "If there are conflicts, Git pauses the merge â€” resolve conflicts in the affected files, 'git add' them, and 'git merge --continue'."
+          "If there are conflicts, Git pauses the merge — resolve conflicts in the affected files, 'git add' them, and 'git merge --continue'."
         ],
         "under_the_hood": "Git merge performs a three-way merge using the merge base (B), the current branch tip (A), and the incoming branch tip (C). For each file, Git diffs Bâ†’A and Bâ†’C, then combines both diffs. If both diffs touch the same line differently, Git marks a conflict with <<<<<<<, =======, and >>>>>>> markers. 'git rebase' instead replays C's commits onto A, creating new commit objects with different hashes.",
-        "why_it_exists": "Without branching, every developer would directly modify the same codebase, creating chaos. Branches provide parallel workspaces, and merges provide controlled integration â€” the foundation of collaborative software development."
+        "why_it_exists": "Without branching, every developer would directly modify the same codebase, creating chaos. Branches provide parallel workspaces, and merges provide controlled integration — the foundation of collaborative software development."
       },
       "crossrefs": {
         "builds_on": [
@@ -3934,7 +3934,7 @@
       "zero_magic": {
         "beginner_mistakes": [
           "Making changes directly on the main branch instead of creating a feature branch and opening a pull request.",
-          "Pushing sensitive data (API keys, passwords) to a public GitHub repository and then deleting it â€” Git history still contains the secret.",
+          "Pushing sensitive data (API keys, passwords) to a public GitHub repository and then deleting it — Git history still contains the secret.",
           "Opening a pull request with a single commit that contains unrelated changes, making review difficult."
         ],
         "execution_timeline": [
@@ -3962,7 +3962,7 @@
         "how_go_uses_it": "The Go project itself uses GitHub with pull requests, code review, and CI. The standard library, community packages, and most Go tools follow the same fork-branch-PR-review workflow. GitHub Actions runs Go tests on every PR for most open-source Go projects.",
         "mental_model": "GitHub extends Git with a collaborative layer: remotes host branches for sharing, pull requests are proposals for merging branches with discussion attached, and actions automate verification. The workflow is propose-verify-merge.",
         "performance_implications": [
-          "Pushing to GitHub is network-bound â€” a typical push of a few commits takes 1-5 seconds.",
+          "Pushing to GitHub is network-bound — a typical push of a few commits takes 1-5 seconds.",
           "Large PRs (1000+ lines changed) are slower to review and more likely to have merge conflicts.",
           "GitHub Actions CI adds 1-10 minutes per PR depending on test suite size."
         ],
@@ -3977,7 +3977,7 @@
           "Address review feedback with additional commits, then the maintainer merges the PR."
         ],
         "under_the_hood": "A pull request is essentially a request to merge two Git refs. GitHub stores metadata (comments, reviews, status checks) in its database, linked to the PR number. When a merge button is clicked, GitHub performs 'git merge' on the server, or for squash merge, uses 'git merge --squash'. Branch protection rules are enforced server-side before the merge is allowed.",
-        "why_it_exists": "Direct push to shared branches causes chaos. The GitHub workflow formalizes code review, automated testing, and controlled integration â€” making collaboration scalable from solo developers to thousands of contributors."
+        "why_it_exists": "Direct push to shared branches causes chaos. The GitHub workflow formalizes code review, automated testing, and controlled integration — making collaboration scalable from solo developers to thousands of contributors."
       },
       "crossrefs": {
         "builds_on": [
@@ -4117,7 +4117,7 @@
       "zero_magic": {
         "beginner_mistakes": [
           "Submitting a massive pull request with 50+ files changed and expecting a thorough review.",
-          "Taking code review feedback personally â€” review is about code quality, not personal criticism.",
+          "Taking code review feedback personally — review is about code quality, not personal criticism.",
           "Merging a PR without waiting for CI checks to pass or without any approvals."
         ],
         "execution_timeline": [
@@ -4143,21 +4143,21 @@
           "Learner must identify which changes in a diff are related to the PR's purpose and which are incidental formatting changes."
         ],
         "how_go_uses_it": "Go code review follows strict conventions documented in 'CodeReviewComments' on the Go wiki. Reviewers check for proper error handling, correct use of interfaces, test coverage, and idiomatic Go style. The 'go vet' and 'gofmt' tools automate style and correctness checks.",
-        "mental_model": "Code review is pair debugging at scale â€” the author writes the solution, and reviewers validate assumptions, catch blind spots, and ensure consistency. The goal is not to find every bug but to share context, raise the team's collective code quality bar, and spread knowledge.",
+        "mental_model": "Code review is pair debugging at scale — the author writes the solution, and reviewers validate assumptions, catch blind spots, and ensure consistency. The goal is not to find every bug but to share context, raise the team's collective code quality bar, and spread knowledge.",
         "performance_implications": [
-          "Each review cycle adds 1-24 hours to delivery time â€” smaller, focused PRs reduce this latency.",
+          "Each review cycle adds 1-24 hours to delivery time — smaller, focused PRs reduce this latency.",
           "Thorough code review catches 60-70% of defects before they reach production, saving 10x the cost of fixing them later.",
           "Mechanical style issues should be automated (formatters, linters) so reviewers can focus on logic and design."
         ],
-        "problem_solved": "Writing code alone leads to blind spots â€” the author knows what the code should do and may not notice edge cases, readability issues, or design flaws. Code review provides a second (and third, fourth) pair of eyes to catch issues early.",
+        "problem_solved": "Writing code alone leads to blind spots — the author knows what the code should do and may not notice edge cases, readability issues, or design flaws. Code review provides a second (and third, fourth) pair of eyes to catch issues early.",
         "proof_of_understanding": "The learner must review a provided pull request diff, leave at least three constructive comments, and explain the reasoning behind each comment.",
         "real_world_usage": "Every professional software team uses code review. Google mandates at least one review before any code is merged. Open-source projects like Go, Kubernetes, and VS Code require reviews from maintainers. Code review is the primary quality gate in modern software development.",
         "step_by_step_execution": [
-          "Open the PR on GitHub â€” review the Files Changed tab to see the full diff.",
+          "Open the PR on GitHub — review the Files Changed tab to see the full diff.",
           "Read each changed file starting from the most critical (business logic) to the least (tests, config).",
           "For each change, ask: is this correct? Is it clear? Is it tested? Could it break anything?",
           "Leave inline comments for specific lines, and a summary comment with overall feedback.",
-          "The author addresses feedback, and the cycle repeats until approval â€” then the PR is merged."
+          "The author addresses feedback, and the cycle repeats until approval — then the PR is merged."
         ],
         "under_the_hood": "GitHub stores PR reviews as events linked to specific commits. Review comments on the 'Files changed' tab reference specific lines in specific diffs. 'Request changes' blocks merge via branch protection. 'Approve' signals the PR is ready to merge. The merge queue can enforce that status checks pass before allowing the merge button.",
         "why_it_exists": "No developer writes perfect code every time. Code review is a cheap, effective quality gate that also spreads domain knowledge across the team, reducing bus factor and onboarding time."
@@ -4299,12 +4299,12 @@
       ],
       "zero_magic": {
         "beginner_mistakes": [
-          "Thinking 'the internet' is a single entity â€” the web is one application (HTTP) running on top of the internet (TCP/IP).",
+          "Thinking 'the internet' is a single entity — the web is one application (HTTP) running on top of the internet (TCP/IP).",
           "Confusing a URL (like https://example.com/path) with the underlying IP address and port.",
-          "Believing that typing a domain name directly contacts the server â€” the browser first resolves DNS to get an IP address."
+          "Believing that typing a domain name directly contacts the server — the browser first resolves DNS to get an IP address."
         ],
         "execution_timeline": [
-          "A user types a URL in the browser â€” the browser checks its cache, then queries DNS to resolve the domain to an IP address.",
+          "A user types a URL in the browser — the browser checks its cache, then queries DNS to resolve the domain to an IP address.",
           "The browser opens a TCP connection to the server at the resolved IP address on port 80 (HTTP) or 443 (HTTPS).",
           "The browser sends an HTTP request, the server processes it and sends back an HTTP response with the requested content."
         ],
@@ -4328,17 +4328,17 @@
         "how_go_uses_it": "Go's net package provides DNS resolution (net.LookupHost, net.LookupMX), TCP/UDP connections (net.Dial), and HTTP client/server (net/http). Go's standard HTTP server listens on a port with http.ListenAndServe(\\\":8080\\\", handler). The 'net/http/httptest' package creates test servers without real ports.",
         "mental_model": "The web is a client-server model: browsers (clients) send requests to servers using the HTTP protocol over TCP connections. DNS translates human-friendly names (google.com) to machine-friendly IP addresses (142.250.80.46). Ports identify which application on the server should handle the request.",
         "performance_implications": [
-          "DNS lookups add 10-100ms to the first request to a domain â€” DNS caching (browser, OS, network) reduces this.",
+          "DNS lookups add 10-100ms to the first request to a domain — DNS caching (browser, OS, network) reduces this.",
           "TCP connection setup requires a three-way handshake (SYN, SYN-ACK, ACK), adding ~1 RTT (round-trip time).",
-          "HTTPS adds one more RTT for TLS handshake â€” HTTP/2 and HTTP/3 reduce this with connection multiplexing and 0-RTT."
+          "HTTPS adds one more RTT for TLS handshake — HTTP/2 and HTTP/3 reduce this with connection multiplexing and 0-RTT."
         ],
         "problem_solved": "The web would not work without a standard way to locate servers (DNS), connect to them (TCP/IP), and identify which application handles the request (ports). Understanding these layers removes the magic from 'how does the browser load a webpage?'",
         "proof_of_understanding": "The learner must write a Go program that resolves a domain name to its IP addresses using net.LookupHost, prints them, then opens a TCP connection to the server on port 80 and sends a raw HTTP GET request.",
-        "real_world_usage": "Every web request uses DNS, TCP, IP, and ports â€” from loading a webpage to calling a REST API to connecting to a database. Understanding these fundamentals is essential for debugging network issues, configuring firewalls, and designing distributed systems.",
+        "real_world_usage": "Every web request uses DNS, TCP, IP, and ports — from loading a webpage to calling a REST API to connecting to a database. Understanding these fundamentals is essential for debugging network issues, configuring firewalls, and designing distributed systems.",
         "step_by_step_execution": [
           "The user types 'https://example.com' into a browser and presses Enter.",
           "The browser checks its DNS cache, then queries a DNS resolver (typically the ISP's or 8.8.8.8) to resolve 'example.com' to an IP address.",
-          "The browser opens a TCP connection to that IP address on port 443 (HTTPS) â€” the three-way handshake establishes the connection.",
+          "The browser opens a TCP connection to that IP address on port 443 (HTTPS) — the three-way handshake establishes the connection.",
           "The browser performs a TLS handshake to encrypt the connection, then sends an HTTP GET request.",
           "The server processes the request, sends an HTTP response with HTML content, and the browser renders the page."
         ],
@@ -4482,9 +4482,9 @@
       ],
       "zero_magic": {
         "beginner_mistakes": [
-          "Thinking HTTP is the same as 'the internet' â€” HTTP is one protocol running on top of TCP/IP.",
-          "Believing every HTTP response contains HTML â€” responses can be JSON, XML, images, binary data, or any content type.",
-          "Assuming HTTP is always initiated by a client â€” server-sent events (SSE) and WebSockets enable server-initiated communication."
+          "Thinking HTTP is the same as 'the internet' — HTTP is one protocol running on top of TCP/IP.",
+          "Believing every HTTP response contains HTML — responses can be JSON, XML, images, binary data, or any content type.",
+          "Assuming HTTP is always initiated by a client — server-sent events (SSE) and WebSockets enable server-initiated communication."
         ],
         "execution_timeline": [
           "A client (browser, curl, Go http.Client) sends an HTTP request consisting of a method, URL, headers, and optional body.",
@@ -4508,16 +4508,16 @@
           "Learner must explain the meaning of HTTP status codes 200, 301, 400, 404, and 500.",
           "Learner must use curl to make a GET request and a POST request, and interpret the response."
         ],
-        "how_go_uses_it": "Go's net/http package provides a complete HTTP client and server implementation. http.HandleFunc registers routes, http.Request represents incoming requests, http.ResponseWriter sends responses. The standard library's HTTP server is production-grade â€” used by Docker, Kubernetes, Prometheus, and many other projects.",
-        "mental_model": "HTTP is a request-response protocol where a client sends a message (method + path + headers + body) and the server replies with another message (status code + headers + body). It is stateless â€” each request is independent, with no memory of previous requests.",
+        "how_go_uses_it": "Go's net/http package provides a complete HTTP client and server implementation. http.HandleFunc registers routes, http.Request represents incoming requests, http.ResponseWriter sends responses. The standard library's HTTP server is production-grade — used by Docker, Kubernetes, Prometheus, and many other projects.",
+        "mental_model": "HTTP is a request-response protocol where a client sends a message (method + path + headers + body) and the server replies with another message (status code + headers + body). It is stateless — each request is independent, with no memory of previous requests.",
         "performance_implications": [
           "HTTP/1.1 allows multiple requests per connection (keep-alive), reducing connection overhead from ~1 RTT per request to ~1 RTT per connection.",
           "HTTP/2 multiplexes multiple requests over a single TCP connection, eliminating head-of-line blocking.",
-          "Each HTTP request adds 200-500 bytes of header overhead â€” minimize requests and use caching headers for performance."
+          "Each HTTP request adds 200-500 bytes of header overhead — minimize requests and use caching headers for performance."
         ],
-        "problem_solved": "Applications need a standard way to request and transfer data over the web. HTTP provides a universal protocol with well-defined methods (GET, POST, PUT, DELETE), status codes, headers, and content negotiation â€” understood by every web server, browser, and API client.",
+        "problem_solved": "Applications need a standard way to request and transfer data over the web. HTTP provides a universal protocol with well-defined methods (GET, POST, PUT, DELETE), status codes, headers, and content negotiation — understood by every web server, browser, and API client.",
         "proof_of_understanding": "The learner must write a Go program that starts an HTTP server on port 8080 with a single handler, then write a separate Go program that sends a GET request to http://localhost:8080 and prints the response body and status code.",
-        "real_world_usage": "HTTP is the foundation of the web â€” every API (REST, GraphQL), every webpage, every image load, and every AJAX request uses HTTP. REST APIs, microservices, cloud services, and serverless functions all communicate over HTTP.",
+        "real_world_usage": "HTTP is the foundation of the web — every API (REST, GraphQL), every webpage, every image load, and every AJAX request uses HTTP. REST APIs, microservices, cloud services, and serverless functions all communicate over HTTP.",
         "step_by_step_execution": [
           "A client creates an HTTP request with a method (GET) a URL (https://api.example.com/users) and optional headers (Authorization: Bearer <token>).",
           "The client opens a TCP connection to the server and sends the request as text following the HTTP protocol format.",
