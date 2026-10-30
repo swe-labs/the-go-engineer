@@ -59,3 +59,4 @@ func TestHandleLSPRequest_Unsupported(t *testing.T) {
 func TestMainExecution(t *testing.T) {
 	main()
 }
+
