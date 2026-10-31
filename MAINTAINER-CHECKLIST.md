@@ -124,7 +124,6 @@ Before release or workflow changes, verify these documents agree with `ARCHITECT
 - `ARCHITECTURE.md`
 - `ROADMAP.md`
 - `LEARNING-PATH.md`
-- `CURRICULUM-BLUEPRINT.md`
 - `CODE-STANDARDS.md`
 - `TESTING-STANDARDS.md`
 - `COMMON-MISTAKES.md`

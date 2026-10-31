@@ -4,6 +4,8 @@ This guide explains how to navigate through the canonical v3 curriculum on `rele
 
 The source of truth for module progression is [`curriculum/path.core.json`](./curriculum/path.core.json) and [ARCHITECTURE.md](./ARCHITECTURE.md).
 
+> **Visual Diagrams:** For interactive Mermaid flowcharts mapping both phase-level and module-level dependency graphs, see [`docs/PROGRESSION.md`](./docs/PROGRESSION.md).
+
 ## Phase Overview
 
 | Phase | Modules | Focus | Key Projects & Milestones |

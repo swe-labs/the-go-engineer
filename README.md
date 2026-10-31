@@ -89,10 +89,12 @@ go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curric
 
 ## Authoritative Documentation
 
+- **[System Architecture (`ARCHITECTURE.md`)](./ARCHITECTURE.md):** Canonical v3 architecture, metadata manifests, and zero-magic engineering standards.
 - **[Curriculum Map & Pacing Guide](./curriculum/README.md):** Comprehensive 52-week roadmap, workload estimates, and module catalog.
+- **[Visual Progression Charts (`docs/PROGRESSION.md`)](./docs/PROGRESSION.md):** Interactive flowcharts detailing phase transitions and module dependency flow.
+- **[Flagship Opslane Capstone Architecture (`docs/flagship/OPSLANE_SAAS_BACKEND.md`)](./docs/flagship/OPSLANE_SAAS_BACKEND.md):** Production multi-tenant SaaS backend architecture and milestone rubrics.
 - **[Quality Rubrics](./curriculum/quality-rubric.md):** 5-point evaluation criteria for code quality, proof, and documentation.
 - **[Zero-Magic Authoring Specification](./curriculum/zero-magic-authoring-spec.md):** Principles for mental models and transparent systems engineering.
-- **[Flagship Opslane Capstone](./curriculum/modules/18-flagship-opslane/README.md):** Architecture and milestone specifications for the capstone service.
 - **[Release History & Changelog](./CHANGELOG.md):** Version changelog and migration notes.
 - **[Contribution Guidelines](./CONTRIBUTING.md):** Workflow for contributors.
 

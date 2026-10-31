@@ -54,11 +54,25 @@ Instructional content is organized canonically under `curriculum/modules/`:
 - **Companion Frontend Track (`curriculum/companion-frontend/`):** 4 progressive stages exploring full-stack Go integration (Semantic HTML/CSS, Vanilla DOM & Fetch, Templ & Tailwind CSS, HTMX & Alpine.js).
 - **Advanced Electives (`curriculum/electives/advanced-electives/`):** 20 advanced electives (Generics, sync.Pool, sync.Map, gRPC streaming, distributed consensus, eBPF) outside the core path.
 
-## Quality Standards
+## Quality Standards & Pedagogical Rules
 
-- **Zero Magic:** Every lesson establishes explicit mental models and machine execution traces before code.
+The curriculum enforces a strict **Zero-Magic** engineering standard:
+
+- **README First, Code Second:** Every learner-facing lesson teaches through `README.md` before source code. The learner must understand the mission, prerequisites, mental model, and machine execution view before reading `main.go`.
+- **Code Is Never Skipped:** Prose never replaces working code. Explain the code, run the code, then modify the code.
+- **Zero Magic:** Every section teaches only what has been earned. If a concept depends on later ideas, either defer it or provide an explicit forward reference.
+- **Explanations Answer How, Why, and What Changes:** Good teaching surfaces explain what the code does, why it exists, what would change if the design changed, and what failure mode or trap the learner will encounter.
+- **Stage-Aware Engineering Depth:** Foundational modules establish concrete mental models (stack vs heap, pointer semantics, goroutine mechanics). Production modules focus on systems architecture, observability, fault tolerance, and multi-tenant security.
 - **Runnable & Tested:** All projects include reference solutions (`_solution/`), student starter templates (`_starter/`), and comprehensive test suites (`main_test.go`).
 - **Automated Quality Gates:** Enforced by `internal/tools/curriculum` across 17 automated gates.
+
+## Architectural Reference Documents
+
+Detailed systems specifications and progression models live in [`docs/`](./docs/):
+
+- **[Visual Progression Maps (`docs/PROGRESSION.md`)](./docs/PROGRESSION.md):** Complete Mermaid flowcharts visualising phase-by-phase and module-by-module learning progression.
+- **[Engineering Error Framework (`docs/ENGINEERING_ERROR_FRAMEWORK.md`)](./docs/ENGINEERING_ERROR_FRAMEWORK.md):** Three-tier error architecture (`UserError`, `SystemError`, `FatalError`) governing production API failure handling.
+- **[Flagship Opslane Capstone Specification (`docs/flagship/OPSLANE_SAAS_BACKEND.md`)](./docs/flagship/OPSLANE_SAAS_BACKEND.md):** Comprehensive 15-milestone architectural specification, database models, event bus topology, and API contracts.
 
 ## Validation
 
