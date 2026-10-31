@@ -10,7 +10,7 @@ Read these documents before changing curriculum, code, validation, or release su
 |---|---|
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | Canonical v3 public structure |
 | [`curriculum/`](./curriculum/README.md) | Modular curriculum metadata manifests |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | Zero-magic teaching contract |
+| [`curriculum/zero-magic-authoring-spec.md`](./curriculum/zero-magic-authoring-spec.md) | Zero-magic teaching specification |
 | [CODE-STANDARDS.md](./CODE-STANDARDS.md) | Go and teaching-code standards |
 | [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | Verification and test expectations |
 | [RELEASE.md](./RELEASE.md) | Release and branch workflow |

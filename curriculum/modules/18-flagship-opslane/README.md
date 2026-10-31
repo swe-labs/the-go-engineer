@@ -8,6 +8,8 @@ Final graduation proof through a portfolio-grade backend system.
 
 Serves as the final proof of readiness by integrating architecture, persistence, security, reliability, observability, deployment, and portfolio-quality communication in one flagship system.
 
+> **Full Architectural Specification:** For complete system architecture, data models, event bus topology, and API endpoint contracts, see [`docs/flagship/OPSLANE_SAAS_BACKEND.md`](../../../docs/flagship/OPSLANE_SAAS_BACKEND.md).
+
 ## Prerequisites & Learning Path Architecture
 
 - **Technical Prerequisite:** `core-15-19` (Module 15: Docker, CI/CD, and Deployment — Deployment runbook).
