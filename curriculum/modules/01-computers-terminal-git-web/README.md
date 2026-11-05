@@ -152,6 +152,6 @@ You are ready to advance to Module 02 when you can:
 
 After completing this module, advance to:
 
-[Module 02: Go Foundations](../02-go-foundations/README.md)
+[Module 02: Go Setup and Tooling](../02-go-setup-tooling/README.md)
 
 In Module 02, you will write your first real Go programs, mastering packages, modules, entrypoints, type systems, variables, constants, and the Go toolchain.
