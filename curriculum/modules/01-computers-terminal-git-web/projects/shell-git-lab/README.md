@@ -62,3 +62,9 @@ On Windows, you can run `verify.ps1` directly from PowerShell. On Linux/macOS, o
 - Working Git repository with branches, commits, and a resolved merge conflict
 - All verification checks passing (14/14)
 - Written explanation of the three prompts above
+
+## NEXT UP
+
+Validate your understanding and earn module credit:
+
+👉 [Assessment: Shell + Git Lab](../../assessments/shell-git-lab/README.md)

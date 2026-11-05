@@ -34,3 +34,12 @@ Use this after attempting the checkpoint.
 16. Later modules depend on earlier skills, so order is based on prerequisites, not preference.
 17. Strong evidence includes tests, clear README, architecture diagram, deployment notes, tradeoff explanation, screenshots/logs, and clean commits.
 18. Good answers name concrete schedule, proof tasks, and how the learner will handle weak spots.
+
+---
+
+## Module Complete
+
+Congratulations on completing Module 00: Orientation! You have verified your environment, mastered the zero-magic philosophy, and established your study loop.
+
+Advance to the first technical module:
+👉 [Module 01: Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md)

@@ -213,8 +213,6 @@ The tests in the inline example verify:
 
 ## NEXT UP
 
-1. [Project: Course Setup Verification](../../projects/course-setup-verification/README.md) — verify your environment
-2. [Assessment: Course Setup](../../assessments/course-setup/README.md) — confirm your environment is ready
-3. [Assessment: Module 00 Checkpoint](../../assessments/checkpoint/README.md) — verify you understand the orientation content
+Advance to the practical capstone project:
 
-Then move on to [Module 01 — Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md).
+👉 [Project: Course Setup Verification](../../projects/course-setup-verification/README.md)

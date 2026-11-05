@@ -4,6 +4,11 @@
 
 This assessment evaluates your understanding of shell commands, Git fundamentals, and web concepts covered in Module 01 — Computers, Terminal, Git, and the Web. It tests both your knowledge recall and your ability to apply concepts in practical scenarios.
 
+## Prerequisites
+
+- [Module 01 Overview](../../README.md) and [Lessons 01–15](../../lessons/01-what-is-a-program/README.md) completed
+- [Capstone Project: Shell + Git Lab](../../projects/shell-git-lab/README.md) verified (14/14 checks passing)
+
 ## Scope
 
 - Shell commands and terminal basics (lessons 4-6)
@@ -28,3 +33,9 @@ You may reference your own notes and the module's lesson README files during the
 ## Retake policy
 
 You may retake the assessment once after 48 hours. The retake will use different questions covering the same topics. Your highest score will be recorded.
+
+## NEXT UP: Next Module
+
+You have reached the official exit gate for Module 01. Once you achieve passing scores on this assessment and the shell-git lab verification, advance to Module 02:
+
+👉 [Module 02: Go Setup and Tooling](../../../02-go-setup-tooling/README.md)

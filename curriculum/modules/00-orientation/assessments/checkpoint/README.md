@@ -6,6 +6,12 @@ This checkpoint verifies that you understand how to use the Go Engineer curricul
 
 The goal is not memorization. The goal is operational readiness: you can navigate the repository, understand the zero-magic contract, run examples, use starters correctly, and explain how proof works.
 
+## Prerequisites
+
+- [Module 00 Overview](../../README.md) and [Lessons 01–10](../../lessons/01-how-to-use-this-repository/README.md) completed
+- [Capstone Project: Course Setup Verification](../../projects/course-setup-verification/README.md) completed
+- [Assessment: Course Setup](../course-setup/README.md) passed
+
 ## Scope
 
 This checkpoint covers:
@@ -54,6 +60,8 @@ Use `rubric.md` to self-grade before comparing with `answer-key.md`.
 
 If you miss a category, return to the relevant lesson, revise your answer, and write one sentence explaining what changed in your understanding.
 
-## NEXT UP
+## NEXT UP: Next Module
 
-[Module 01 — Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md) — you are now ready for the technical content.
+You have reached the official exit gate for Module 00. Advance to the first technical module:
+
+👉 [Module 01: Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md)
