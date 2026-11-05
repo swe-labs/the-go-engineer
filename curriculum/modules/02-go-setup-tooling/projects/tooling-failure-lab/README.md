@@ -164,4 +164,6 @@ Multiply returns the product of two integers.
 
 ## NEXT UP
 
-[Module 03 — Programming Fundamentals with Go](../../../03-programming-fundamentals/README.md)
+Validate your understanding and earn module credit:
+
+- [Assessment: Tooling Failure Lab](../../assessments/tooling-failure-lab/README.md)

@@ -35,6 +35,7 @@ func validateSESENavigation() {
 	lockedModules := map[string]string{
 		"module-00": "../01-computers-terminal-git-web/README.md",
 		"module-01": "../02-go-setup-tooling/README.md",
+		"module-02": "../03-programming-fundamentals/README.md",
 	}
 
 	for _, mod := range core.Modules {
@@ -95,6 +96,9 @@ func validateSESENavigation() {
 		checkpointReadme := filepath.Join(assessDir, "checkpoint", "README.md")
 		if modID == "module-01" {
 			checkpointReadme = filepath.Join(assessDir, "shell-git-lab", "README.md")
+		}
+		if modID == "module-02" {
+			checkpointReadme = filepath.Join(assessDir, "tooling-failure-lab", "README.md")
 		}
 
 		cData, err := os.ReadFile(checkpointReadme)

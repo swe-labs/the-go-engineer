@@ -1,5 +1,8 @@
 # go run
 
+> "Go was designed to make software development faster and more productive. Compilation is so fast that go run feels like an interpreter, but with the safety and speed of compiled machine code."
+> — Rob Pike, *Go: A Language for Software Engineering*
+
 ## Learning objective
 
 By the end of this lesson, you will understand what `go run` does, when to use it, and how it differs from `go build`. You will use `go run` to execute Go programs without producing a permanent binary.

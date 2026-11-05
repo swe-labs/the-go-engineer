@@ -1,5 +1,8 @@
 # Install and Verify Go
 
+> "Simplicity is prerequisite for reliability."
+> — Edsger W. Dijkstra (Foundational principle of the Unix and Go toolchain design)
+
 ## Learning objective
 
 By the end of this lesson, you will install Go on your system, verify it works with `go version`, and understand the basic Go environment variables (`GOROOT`, `GOPATH`, `GOOS`, `GOARCH`). You will demonstrate this by running a Go program that confirms your installation.
@@ -16,22 +19,28 @@ Go is a compiled language. The `go` command is your gateway to the entire toolch
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
     subgraph Host["Host Operating System Environment"]
-        PATH["System PATH Variable"]
+        PATH["System PATH Variable"]:::standardNode
         subgraph GOROOT["GOROOT (e.g., /usr/local/go or C:\\Program Files\\Go)"]
-            BIN_GO["bin/go (Toolchain CLI & Compiler)"]
-            PKG_STD["src/ (Go Standard Library: fmt, net/http, os)"]
+            BIN_GO["bin/go (Toolchain CLI & Compiler)"]:::frontDoor
+            PKG_STD["src/ (Go Standard Library: fmt, net/http, os)"]:::standardNode
         end
         subgraph GOPATH["GOPATH (defaults to $HOME/go or %USERPROFILE%\\go)"]
-            BIN_TOOLS["bin/ (Installed 3rd-party binaries: gopls, dlv)"]
-            PKG_MOD["pkg/mod/ (Cached external module downloads)"]
+            BIN_TOOLS["bin/ (Installed 3rd-party binaries: gopls, dlv)"]:::capstoneNode
+            PKG_MOD["pkg/mod/ (Cached external module downloads)"]:::standardNode
         end
     end
 
-    Terminal["Terminal: go version"] -->|1. Searches PATH| BIN_GO
+    Terminal["Terminal: go version"]:::standardNode -->|1. Searches PATH| BIN_GO
     BIN_GO -->|2. Inspects built-in target| Host
     BIN_GO -->|3. Locates Standard Library| PKG_STD
-    Terminal -->|Terminal Output| Result["go version go1.22.x windows/amd64"]
+    Terminal -->|Terminal Output| Result["go version go1.24.x / go1.26.x windows/amd64"]:::exitGate
 ```
 
 ## Core idea

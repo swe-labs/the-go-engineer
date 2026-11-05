@@ -4,6 +4,11 @@
 
 This assessment verifies that you can independently apply everything from Module 02. You will demonstrate that your Go toolchain is correctly installed, configured, and usable — and that you can diagnose and fix common tooling failures.
 
+## Prerequisites
+
+- [Module 02 Overview](../../README.md) and [Lessons 01–14](../../lessons/01-install-and-verify-go/README.md) completed
+- [Capstone Project: Tooling Failure Lab](../../projects/tooling-failure-lab/README.md) completed with all 5 failures fixed
+
 ## Evidence required
 
 Submit the following artifacts:
@@ -50,6 +55,8 @@ Be prepared to answer these questions in a review session:
 
 If you score below 80%, review the lessons corresponding to your rubric gaps, fix the issues, and resubmit with a short correction note explaining what you changed and why.
 
-## NEXT UP
+## NEXT UP: Next Module
 
-[Module 03 — Programming Fundamentals with Go](../../../03-programming-fundamentals/README.md)
+You have reached the official exit gate for Module 02. Once you achieve passing scores on this assessment and the Tooling Failure Lab project, advance to Module 03:
+
+- [Module 03: Programming Fundamentals with Go](../../../03-programming-fundamentals/README.md)

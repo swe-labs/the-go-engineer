@@ -1,5 +1,8 @@
 # go build
 
+> "Go binaries are self-contained. The compiler produces single static binaries with no external dependencies, packaging the Go runtime, garbage collector, and all linked libraries into one machine artifact."
+> — Russ Cox, Go Tech Lead
+
 ## Learning objective
 
 By the end of this lesson, you will understand how `go build` compiles Go source into a standalone binary, know the difference between `go build` and `go run`, and be able to produce a binary you can share and deploy.
@@ -16,24 +19,30 @@ By the end of this lesson, you will understand how `go build` compiles Go source
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
     subgraph Inputs["Source & Dependencies"]
-        SRC["main.go / *.go source files"]
-        STDLIB["Go Standard Library (fmt, runtime, os)"]
-        MODS["External Go Modules (go.mod dependencies)"]
+        SRC["main.go / *.go source files"]:::standardNode
+        STDLIB["Go Standard Library (fmt, runtime, os)"]:::standardNode
+        MODS["External Go Modules (go.mod dependencies)"]:::standardNode
     end
 
     subgraph Toolchain["Go Compiler & Linker (cmd/compile & cmd/link)"]
-        AST["1. Parsing & AST Generation"]
-        TYPE["2. Type Checking & Verification"]
-        OPT["3. SSA Optimization & Escape Analysis"]
-        OBJ["4. Machine Code Emission (.a/.o objects)"]
-        LINK["5. Static Linker Bundles Runtime & Packages"]
+        AST["1. Parsing & AST Generation"]:::standardNode
+        TYPE["2. Type Checking & Verification"]:::standardNode
+        OPT["3. SSA Optimization & Escape Analysis"]:::standardNode
+        OBJ["4. Machine Code Emission (.a/.o objects)"]:::standardNode
+        LINK["5. Static Linker Bundles Runtime & Packages"]:::capstoneNode
 
         AST --> TYPE --> OPT --> OBJ --> LINK
     end
 
     subgraph Output["Persistent Artifact on Disk"]
-        BIN["Statically Linked Binary Executable\n(ELF on Linux / PE on Windows / Mach-O on macOS)"]
+        BIN["Statically Linked Binary Executable\n(ELF on Linux / PE on Windows / Mach-O on macOS)"]:::exitGate
     end
 
     Inputs --> AST

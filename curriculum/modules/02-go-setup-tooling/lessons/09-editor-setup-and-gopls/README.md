@@ -1,5 +1,8 @@
 # Editor Setup and gopls
 
+> "The Language Server Protocol allows a single Go language server to bring rich code intelligence, diagnostics, and refactoring to any developer editor without vendor lock-in."
+> — Rebecca Stambler, Go Tools Team
+
 ## Learning objective
 
 By the end of this lesson, you will have `gopls` installed, your editor configured for Go development, and you will use editor features like completion, hover documentation, and go-to-definition.

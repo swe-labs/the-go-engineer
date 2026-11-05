@@ -1,5 +1,8 @@
 # go doc
 
+> "Godoc is not just a tool; it is a philosophy. Good comments write good documentation. The best documentation is written close to the code, in plain English, with no boilerplate."
+> — Rob Pike, *Godoc: Documenting Go Code*
+
 ## Learning objective
 
 By the end of this lesson, you will understand how to use `go doc` to read documentation from the terminal, how to write doc comments for your own code, and how to verify that your doc comments appear correctly.
@@ -16,20 +19,26 @@ Documentation is useless if it is hard to access. `go doc` puts documentation at
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
     subgraph SourceCode["Go Source File: calc.go"]
-        DOC["// Add returns the sum of two integers.\n// It handles negative integers safely."]
-        DECL["func Add(a, b int) int { return a + b }"]
+        DOC["// Add returns the sum of two integers.\n// It handles negative integers safely."]:::standardNode
+        DECL["func Add(a, b int) int { return a + b }"]:::frontDoor
         DOC --- DECL
     end
 
     subgraph DocEngine["go/doc & go/parser Parsing Engine"]
-        AST["Extract CommentGroup immediately preceding Ast.FuncDecl"]
-        PARSE["Split 1st sentence as summary; format body via Godoc spec"]
+        AST["Extract CommentGroup immediately preceding Ast.FuncDecl"]:::standardNode
+        PARSE["Split 1st sentence as summary; format body via Godoc spec"]:::capstoneNode
     end
 
     subgraph Destinations["Documentation Consumption"]
-        CLI["Terminal CLI (offline):\ngo doc calc.Add"]
-        WEB["pkg.go.dev Web Portal:\nRendered HTML API Reference"]
+        CLI["Terminal CLI (offline):\ngo doc calc.Add"]:::frontDoor
+        WEB["pkg.go.dev Web Portal:\nRendered HTML API Reference"]:::exitGate
     end
 
     SourceCode --> AST --> PARSE --> Destinations

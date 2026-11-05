@@ -1,5 +1,8 @@
 # go vet
 
+> "A tool like go vet can find bugs that are difficult to see by inspection. It doesn't find all bugs, but it finds things that are almost certainly mistakes."
+> — Rob Pike, *Lexical Scanning in Go*
+
 ## Learning objective
 
 By the end of this lesson, you will understand what `go vet` does, the kinds of bugs it catches, and how to use it to detect suspicious code patterns that compile but are likely wrong.
@@ -16,13 +19,19 @@ If `go build` checks whether your code is valid Go, `go vet` checks whether your
 
 ```mermaid
 flowchart TD
-    SRC["Go Source Code\n(Syntactically valid Go)"] --> TC["Compiler Frontend\n(Type-Checked AST + Types Info)"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
+    SRC["Go Source Code\n(Syntactically valid Go)"]:::standardNode --> TC["Compiler Frontend\n(Type-Checked AST + Types Info)"]:::frontDoor
 
     subgraph Analyzers["go/analysis Framework Pass"]
-        A_PRINTF["printf: fmt.Printf(\"%d\", \"hello\")"]
-        A_LOCK["copylocks: sync.Mutex passed by value"]
-        A_UNREACH["unreachable: dead code following return"]
-        A_SHADOW["shadow: accidental inner-scope := shadowing"]
+        A_PRINTF["printf: fmt.Printf(\"%d\", \"hello\")"]:::standardNode
+        A_LOCK["copylocks: sync.Mutex passed by value"]:::standardNode
+        A_UNREACH["unreachable: dead code following return"]:::standardNode
+        A_SHADOW["shadow: accidental inner-scope := shadowing"]:::standardNode
     end
 
     TC --> A_PRINTF
@@ -30,7 +39,7 @@ flowchart TD
     TC --> A_UNREACH
     TC --> A_SHADOW
 
-    A_PRINTF --> OUT["CLI Diagnostics Output:\n./main.go:12: Printf format %d has arg of type string\nexit status 1"]
+    A_PRINTF --> OUT["CLI Diagnostics Output:\n./main.go:12: Printf format %d has arg of type string\nexit status 1"]:::capstoneNode
     A_LOCK --> OUT
     A_UNREACH --> OUT
     A_SHADOW --> OUT
