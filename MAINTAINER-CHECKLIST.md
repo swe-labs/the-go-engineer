@@ -133,10 +133,8 @@ Before release or workflow changes, verify these documents agree with `ARCHITECT
 - `CONTRIBUTING.md`
 - `RELEASE.md`
 - `MAINTAINER-CHECKLIST.md`
-- `AGENTS.md`
 - `.github/pull_request_template.md`
 - `.github/ISSUE_TEMPLATE/*`
-- `.agents/skills/*/SKILL.md`
 
 ## Architecture Checklist
 

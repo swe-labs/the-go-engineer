@@ -92,7 +92,7 @@
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
           "Can locate curriculum manifests (path.core.json, projects.json) and correlate item IDs to filesystem directories.",
-          "Can explain the separation of concerns between curriculum/, internal/tools/, web/, and .agents/.",
+          "Can explain the separation of concerns between curriculum/, internal/tools/, web/, and scripts/.",
           "Can identify the role of schema.v3.json in automated curriculum validation."
         ],
         "practice_task": "The learner must find three lessons by their IDs in the curriculum JSON, locate their README files on disk, and explain the relationship between the JSON entry and the folder structure.",

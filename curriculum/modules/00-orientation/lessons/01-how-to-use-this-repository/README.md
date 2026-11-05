@@ -12,7 +12,7 @@ Every engineering project depends on a shared mental model of its own layout. Wh
 
 ## Mental model
 
-Picture a modern software engineering system. The curriculum core (`curriculum/`) holds both the authoritative machine-readable blueprints (such as `path.core.json` and `projects.json`) and the physical instructional modules (`modules/` and `electives/`). The internal toolchain (`internal/tools/curriculum/`) serves as the automated quality compiler, executing 17 strict quality gates. The learner web platform (`web/`) visualizes your progression graph. The agent governance framework (`.agents/`) maintains pedagogical standards.
+Picture a modern software engineering system. The curriculum core (`curriculum/`) holds both the authoritative machine-readable blueprints (such as `path.core.json` and `projects.json`) and the physical instructional modules (`modules/` and `electives/`). The internal toolchain (`internal/tools/curriculum/`) serves as the automated quality compiler, executing 17 strict quality gates. The learner web platform (`web/`) visualizes your progression graph. The operational scripts and tooling harnesses (`scripts/`) automate validation and testing.
 
 When you wonder "Why does this file exist here?", trace it back to one of these core system layers. Every file in the root belongs to a clearly defined architectural concern.
 
@@ -25,7 +25,7 @@ The repository separates concerns so that learners, maintainers, and automated v
 | `curriculum/` | Manifest blueprints (`*.json`), lesson modules (`modules/`), electives (`electives/`), and companion frontend (`companion-frontend/`) | Learners, validators, instructors |
 | `internal/tools/` | Automated quality gates, graph validation, and verification CLI | CI pipelines, maintainers |
 | `web/` | Learner portal, curriculum graph visualizer, and dashboard | Learners, reviewers |
-| `.agents/` | Pedagogical skills, governance rubrics, and authoring workflows | Engineering mentors, AI assistants |
+| `scripts/` | Operational automation and quality gate execution (`scripts/validate_curriculum.go`) | Learners, CI pipelines, maintainers |
 
 The most important relationship is between the **manifest blueprints** inside `curriculum/` (such as `path.core.json`, `projects.json`, and `schema.v3.json`) and the **physical filesystem** (`curriculum/modules/`). The metadata JSON declares which lessons exist, their prerequisites, and their contracts. The module directories hold the actual README files, code, tests, and starter scaffolds. The validator tool (`internal/tools/curriculum` and `scripts/validate_curriculum.go`) reads the metadata, walks the filesystem, and verifies strict alignment. If an artifact is missing or invalid, the quality gates fail.
 
@@ -49,15 +49,15 @@ flowchart TD
         T --> G
     end
 
-    subgraph Presentation ["Layer 3: Learner Experience & Standards"]
+    subgraph Presentation ["Layer 3: Learner Experience & Automation"]
         W["web/app/<br/>(Learner Portal & Graph UI)"]
-        A[".agents/skills/<br/>(Pedagogical Skills & Governance)"]
+        S["scripts/<br/>(Automation & Verification Runners)"]
     end
 
     M -.->|Compiled & Audited| G
     MOD -.->|Filesystem Parity| G
     G ==>|Guarantees Soundness| W
-    G ==>|Enforces Standards| A
+    G ==>|Enforces Standards| S
 ```
 
 Below is the conceptual flow showing how manifests, quality tools, and learner interfaces interact across the entire codebase:
@@ -119,10 +119,10 @@ var repoDirs = []DirEntry{
 		},
 	},
 	{
-		Name:    ".agents/",
-		Purpose: "curriculum skills, quality rubrics, and automated authoring assistants",
+		Name:    "scripts/",
+		Purpose: "operational automation and quality gate execution runners",
 		Contents: []string{
-			"skills/                 -- domain workflows (curriculum-validator, project-mentor, etc.)",
+			"validate_curriculum.go  -- runs all 17 automated quality gates against curriculum manifests",
 		},
 	},
 }
@@ -190,7 +190,7 @@ Step 4: If `go test .` fails with "nil pointer dereference", the `Lookup` functi
 
 ## Practice task
 
-Add a new top-level directory to `repoDirs` called `"scripts/"` with purpose "helper scripts for common development tasks" and contents `["setup.sh", "lint.sh"]`. Run `go test .` to verify that `Lookup("scripts/")` now returns the new entry, and update the tests to include the new directory in the expected lookup results.
+Add a new top-level directory to `repoDirs` called `"docs/"` with purpose "architectural documentation and curriculum specifications" and contents `["ARCHITECTURE.md", "LEARNING-PATH.md"]`. Run `go test .` to verify that `Lookup("docs/")` now returns the new entry, and update the tests to include the new directory in the expected lookup results.
 
 ## Tests / verification
 
