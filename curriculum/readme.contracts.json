@@ -100,7 +100,8 @@
         "Learning Sessions & Lessons": "Lessons",
         "Completion": "Completion checklist",
         "Exit checklist": "Completion checklist",
-        "NEXT UP": "Next module"
+        "NEXT UP": "Next module",
+        "Start here": "Next module"
       },
       "section_specifications": {
         "Mission": "Pedagogical objective of the module and the exact engineering capability it unlocks.",

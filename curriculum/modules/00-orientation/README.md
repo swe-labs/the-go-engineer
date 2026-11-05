@@ -131,12 +131,11 @@ You are ready for Module 01 when you can:
 - [ ] answer the checkpoint questions
 - [ ] write a short personal roadmap and portfolio plan
 
-## Next module
+## Start here
 
-After this module, continue to:
+Begin your orientation with the first lesson:
 
-```text
-curriculum/modules/01-computers-terminal-git-web/
-```
+👉 **[Lesson 01: How to use this repository](./lessons/01-how-to-use-this-repository/README.md)**
 
-That module teaches the computing, terminal, Git, and web foundations you will use throughout the rest of the curriculum.
+> [!NOTE] Single-Entry Navigation
+> Module progression is strictly sequential. Complete lessons 01 through 10, finish the setup project, and pass the assessment checkpoint. The exit gate to Module 01 unlocks upon completing the assessment checkpoint.

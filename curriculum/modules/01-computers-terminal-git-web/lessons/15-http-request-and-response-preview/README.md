@@ -269,4 +269,6 @@ Modern production systems design APIs around clear HTTP semantics. REST APIs use
 
 ## NEXT UP
 
-Complete the [Shell + Git Lab](../../projects/shell-git-lab/README.md) project, then take the [Module 01 assessment](../../assessments/shell-git-lab/README.md).
+Advance to Step 2 (Capstone Project):
+
+👉 [Project: Shell + Git Lab](../../projects/shell-git-lab/README.md)

@@ -148,10 +148,11 @@ You are ready to advance to Module 02 when you can:
 - [ ] Pass all 14/14 checks in the Shell + Git Lab verification suite (`./verify.ps1` or `./verify.sh`).
 - [ ] Complete the Shell + Git Lab assessment scoring at least 70%.
 
-## Next module
+## Start here
 
-After completing this module, advance to:
+Begin Step 1 of this module with the first lesson:
 
-[Module 02: Go Setup and Tooling](../02-go-setup-tooling/README.md)
+👉 **[Lesson 01: What is a program?](./lessons/01-what-is-a-program/README.md)**
 
-In Module 02, you will write your first real Go programs, mastering packages, modules, entrypoints, type systems, variables, constants, and the Go toolchain.
+> [!NOTE] Single-Entry Navigation
+> Module progression is strictly sequential. Complete lessons 01 through 15, build and verify the shell-git lab project, and complete the assessment suite. The exit gate to Module 02 unlocks upon completing the assessment checkpoint.

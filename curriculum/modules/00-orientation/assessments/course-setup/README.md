@@ -8,6 +8,11 @@ This assessment verifies that you have successfully set up your development envi
 
 - `project-course-setup`
 
+## Prerequisites
+
+- [Module 00 Overview](../../README.md) and [Lessons 01–10](../../lessons/01-how-to-use-this-repository/README.md) completed
+- [Capstone Project: Course Setup Verification](../../projects/course-setup-verification/README.md) completed
+
 ## Evidence
 
 Submit:
