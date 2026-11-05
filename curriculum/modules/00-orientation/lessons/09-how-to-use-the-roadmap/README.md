@@ -2,6 +2,8 @@
 
 ## Learning objective
 
+> *"The function of good software is to make the complex appear simple."* — Grady Booch
+
 Understand how the curriculum roadmap works as a dependency graph, how prerequisites determine valid learning paths, and how to validate your own progression through the modules. You will be able to read the module dependency graph, identify the correct order, and explain why some modules must come before others.
 
 ## Why this matters
@@ -27,6 +29,46 @@ While the **Core Path** (`modules/00` through `modules/18`) enforces strict prer
 - **Stage 5 (Convergence):** Converges in Module 18 (*Flagship Opslane Console*).
 
 You do not need to pause your backend progress to work on the companion track. Instead, dip into each companion stage when you reach its corresponding backend milestone.
+
+## Visual model
+
+The curriculum is structured as a Directed Acyclic Graph (DAG) with trunk progression and optional specialized branch forks:
+
+```mermaid
+flowchart TD
+    subgraph CoreTrunk ["Core Backend Trunk (Strict Linear DAG)"]
+        M00["M00: Orientation"] --> M01["M01: Systems & Git"]
+        M01 --> M02["M02: Go Basics"]
+        M02 --> M03["M03: Testing in Go"]
+        M03 --> M04["M04: Control Flow"]
+        M04 --> M05["M05: Structs & Interfaces"]
+        M05 --> M06["M06: Architecture"]
+        M06 --> M07["M07: CLI & Files"]
+        M07 --> M08["M08: HTTP REST"]
+        M08 --> M09["M09: SQL & DBs"]
+        M09 --> M10["M10: Auth & Security"]
+        M10 --> M11["M11: Concurrency"]
+        M11 --> M12["M12: Logging"]
+        M12 --> M13["M13: Metrics"]
+        M13 --> M14["M14: Performance"]
+        M14 --> M15["M15: Docker & CI"]
+        M15 --> M16["M16: Career"]
+        M16 --> M18["M18: Opslane Capstone"]
+    end
+
+    subgraph CompanionForks ["Companion Frontend Track (Optional Forks)"]
+        FE1["Stage 1: HTML5/CSS<br/><i>(Forks after M07)</i>"]
+        FE2["Stage 2: REST Client<br/><i>(Forks after M08/M09)</i>"]
+        FE3["Stage 3: templ + Tailwind<br/><i>(Forks after M10)</i>"]
+        FE4["Stage 4: HTMX + Realtime<br/><i>(Forks after M11)</i>"]
+    end
+
+    M07 -.->|Fork 1| FE1
+    M09 -.->|Fork 2| FE2
+    M10 -.->|Fork 3| FE3
+    M11 -.->|Fork 4| FE4
+    FE4 -.->|Converges at Flagship| M18
+```
 
 ## Under the hood
 
@@ -165,4 +207,4 @@ Extend the program to add two more modules: Module 04 (Databases) with prerequis
 
 ## NEXT UP
 
-[How to build a portfolio from this curriculum](../10-how-to-build-a-portfolio-from-this-curriculum/README.md) — Turn your curriculum projects into professional portfolio evidence.
+[Lesson 10: How to build a portfolio from this curriculum](../10-how-to-build-a-portfolio-from-this-curriculum/README.md) — Turn your curriculum projects into professional portfolio evidence.

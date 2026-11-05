@@ -2,6 +2,10 @@
 
 ## Learning objective
 
+> *"Clear is better than clever."* — Rob Pike
+>
+> *"There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies."* — C.A.R. Hoare
+
 By the end of this lesson, you will be able to identify "magic" in code — behavior that happens implicitly without being visible to the reader — and replace it with "zero magic" — explicit, readable, verifiable code. You will learn why this curriculum bans magic and how to apply the principle in Go.
 
 ## Why this matters
@@ -24,6 +28,27 @@ In code, magic is the vending machine with a blank screen. Zero magic is the mac
 - **Unexplained conventions**: "We always multiply by 1000 because the API expects milliseconds" — but the code just says `* 1000` with no comment or constant name.
 
 Zero magic eliminates each of these by making all behavior explicit.
+
+## Visual model
+
+The zero-magic principle replaces hidden assumptions and implicit state with visible arguments and explicit invariants:
+
+```mermaid
+flowchart LR
+    subgraph Magic ["Magic Approach (Implicit & Opaque)"]
+        direction TB
+        M1["Call Server()"] --> M2["Hidden Global State / Magic Env Vars"]
+        M2 --> M3["Silent Default Port (e.g. 8080)"]
+        M3 --> M4["Runtime Failure: Why did it bind to 8080?"]
+    end
+
+    subgraph ZeroMagic ["Zero-Magic Approach (Explicit & Verifiable)"]
+        direction TB
+        Z1["Call Server(cfg Config)"] --> Z2["Explicit Parameters (Port, Timeout, Verbose)"]
+        Z2 --> Z3["Visible Validation & Transparent Defaults"]
+        Z3 --> Z4["Predictable Execution: Exactly what was passed"]
+    end
+```
 
 ## Under the hood
 

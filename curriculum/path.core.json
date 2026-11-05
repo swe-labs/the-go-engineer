@@ -69,7 +69,9 @@
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/00-orientation/lessons/01-how-to-use-this-repository/assets",
-        "diagram_paths": [],
+        "diagram_paths": [
+          "modules/00-orientation/lessons/01-how-to-use-this-repository/assets/diagrams/concept-flow.svg"
+        ],
         "main_path": "",
         "readme_path": "modules/00-orientation/lessons/01-how-to-use-this-repository/README.md",
         "solution_path": "",

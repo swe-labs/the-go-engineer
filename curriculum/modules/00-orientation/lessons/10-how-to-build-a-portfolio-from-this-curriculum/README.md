@@ -2,6 +2,8 @@
 
 ## Learning objective
 
+> *"Talk is cheap. Show me the code."* — Linus Torvalds
+
 Learn how to turn curriculum projects into professional portfolio evidence. You will be able to create a portfolio plan, assess each project's readiness score, and identify what evidence each project needs before it is ready to show employers.
 
 ## Why this matters
@@ -15,6 +17,37 @@ Think of each portfolio project as a museum exhibit. The exhibit has a label (th
 ## Core idea
 
 A portfolio project has four attributes: Name, Description, Evidence, and Status. The readiness score measures how complete the presentation is. A project with a clear description, multiple evidence items, and a "complete" status scores 5/5. A project with no description, no evidence, and "planned" status scores 0/5. You should aim for every portfolio project to score at least 4/5 before sharing it with employers.
+
+## Visual model
+
+Transforming raw repository exercises into an employer-ready engineering portfolio follows a systematic evaluation pipeline:
+
+```mermaid
+flowchart LR
+    subgraph Source ["Curriculum Capstones"]
+        P1["Module Projects<br/><i>REST, SQL, Auth, Concurrency</i>"]
+        P2["Companion Frontends<br/><i>templ, HTMX, Tailwind</i>"]
+        P3["Flagship Opslane<br/><i>Distributed Systems</i>"]
+    end
+
+    subgraph Evidence ["Verifiable Artifacts"]
+        E1["Passing Test Suites & Benchmarks"]
+        E2["Architectural READMEs & Diagrams"]
+        E3["Docker Compose & CI Workflows"]
+    end
+
+    subgraph Evaluation ["Readiness Scoring (0–5)"]
+        S["scoreReadiness()<br/><i>Description (+1) + Evidence (+3) + Status (+2)</i>"]
+    end
+
+    subgraph Showcase ["Employer Presentation"]
+        PF["Public GitHub Portfolio<br/><i>Clean Commits & Production Deployments</i>"]
+    end
+
+    Source --> Evidence
+    Evidence --> Evaluation
+    Evaluation -->|Score ≥ 4/5| Showcase
+```
 
 ## Under the hood
 

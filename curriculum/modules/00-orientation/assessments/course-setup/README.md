@@ -12,7 +12,7 @@ This assessment verifies that you have successfully set up your development envi
 
 Submit:
 
-1. A `setup.txt` file containing version output for Go, Git, and your editor
+1. A `setup.txt` file containing version output for Go (1.24+ / 1.26+), Git, your editor, and `validate_curriculum.go` verification
 2. A short paragraph describing your editor setup (extensions, keybindings, debugging configuration)
 3. Answers to `questions.md`
 

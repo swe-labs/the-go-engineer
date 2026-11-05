@@ -2,6 +2,8 @@
 
 ## Learning objective
 
+> *"Make it work, make it right, make it fast."* — Kent Beck
+
 By the end of this lesson, you will understand how `_starter/` and `_solution/` directories work together in this curriculum, starting from Module 02 where Go programming begins. You will know why they exist, how to use them without cheating yourself, and how to programmatically compare a starter against a solution.
 
 ## Why this matters
@@ -30,6 +32,38 @@ The underscore prefix (`_starter/` not `starter/`) is intentional. In Go's toolc
 - The learner must copy or work inside the starter directory to make progress.
 
 To work on a lab, you copy `_starter/` to a new directory (or edit files in place if the lesson instructions say so), complete the missing code, and compare your result against `_solution/`.
+
+## Visual model
+
+The dual-state architecture isolates your practice space from the verified reference implementation:
+
+```mermaid
+flowchart TD
+    subgraph IsolatedScaffold ["Dual-State Repository Layout"]
+        ST["_starter/<br/><i>Intentional TODO markers & scaffold</i>"]
+        SOL["_solution/<br/><i>Passing reference implementation</i>"]
+    end
+
+    subgraph LearnerFlow ["Active Engineering Loop"]
+        CP["Copy _starter/ to Work Directory"]
+        IMP["Implement Code & Pass Invariants"]
+        TST["Run go test -v . (Verify Behavior)"]
+    end
+
+    subgraph Reflection ["Proof & Diff Verification"]
+        DIFF["diff -u your_work/main.go _solution/main.go"]
+        AUDIT["Confirm Idiomatic Style & Edge Cases"]
+    end
+
+    ST ==> CP
+    CP --> IMP
+    IMP --> TST
+    TST -->|Passes| DIFF
+    SOL -.->|Reference Target| DIFF
+    DIFF --> AUDIT
+```
+
+Because directory names beginning with `_` are ignored by Go's build system, `go test ./...` in parent directories never accidentally executes incomplete starter code.
 
 ## Under the hood
 

@@ -2,6 +2,8 @@
 
 ## Learning objective
 
+> *"Talk is cheap. Show me the code."* — Linus Torvalds
+
 Define job readiness as demonstrable evidence across five skill categories: Implementation, Testing, Debugging, Communication, and Operations. You will be able to audit your own portfolio, identify gaps, and describe what evidence proves readiness in each category.
 
 ## Why this matters
@@ -15,6 +17,32 @@ Think of job readiness as a set of five buckets. Each bucket holds evidence: cod
 ## Core idea
 
 Job readiness is not a feeling. It is a portfolio of repeatable evidence across five dimensions. If you cannot show a project, a test, a debugging story, a clear README, and a deployment, you are not ready. If you can show all five, you are ready even if you feel nervous.
+
+## Visual model
+
+A complete engineering portfolio provides verifiable proof across all five core capabilities:
+
+```mermaid
+flowchart TD
+    JR["Job-Ready Engineering Candidate<br/>(Verifiable Proof Across All Dimensions)"]
+
+    subgraph EvidenceBuckets ["The 5 Core Evidence Pillars"]
+        direction TB
+        B1["1. Implementation<br/><i>Clean, idiomatic Go services & CLI tools</i>"]
+        B2["2. Testing<br/><i>Table-driven tests, race detection, benchmarks</i>"]
+        B3["3. Debugging<br/><i>Triage logs, Delve traces, postmortem notes</i>"]
+        B4["4. Communication<br/><i>Clear architecture READMEs, design trade-offs</i>"]
+        B5["5. Operations<br/><i>Docker containers, CI/CD automation, runbooks</i>"]
+    end
+
+    JR --> B1
+    JR --> B2
+    JR --> B3
+    JR --> B4
+    JR --> B5
+
+    EvidenceBuckets ==> PROOF["Hiring Signal<br/>(Differentiates true engineers from syntax memorizers)"]
+```
 
 ## Under the hood
 
@@ -181,4 +209,4 @@ Create your own `JobReadiness` with the five categories. Add at least one piece 
 
 ## NEXT UP
 
-[How to use the roadmap](../09-how-to-use-the-roadmap/README.md) — Learn how module dependencies, prerequisites, and pacing guide your learning path.
+[Lesson 09: How to use the roadmap](../09-how-to-use-the-roadmap/README.md) — Learn how module dependencies, prerequisites, and pacing guide your learning path.

@@ -2,11 +2,13 @@
 
 ## Mission
 
+> *"Simplicity is prerequisite for reliability."* — Edsger W. Dijkstra
+
 This module teaches you how to use the curriculum itself.
 
 Before you write serious Go code, you need to know how the repository is organized, what "zero magic" means, how lessons and labs work, how assessments judge progress, and what kind of portfolio evidence you will build.
 
-The goal is not to memorize folder names. The goal is to understand the learning system so every later module feels navigable and fair.
+The goal is not to memorize folder names. The goal is to understand the learning system so every later module feels navigable, transparent, and fair.
 
 ## Tracks in this curriculum
 
@@ -53,26 +55,17 @@ If those commands are unfamiliar, continue anyway. Module 01 and Module 02 will 
 
 ## Concept map
 
-```text
-Repository map
-    ↓
-Zero-magic contract
-    ↓
-Lesson/lab/project/checkpoint loop
-    ↓
-Run/test/verify habit
-    ↓
-Starter/solution workflow
-    ↓
-Assessment workflow
-    ↓
-Debugging question workflow
-    ↓
-Job-ready definition
-    ↓
-Roadmap navigation
-    ↓
-Portfolio plan
+```mermaid
+flowchart TD
+    M01["01. Repository Map<br/><i>curriculum/, internal/tools/, web/, .agents/</i>"] --> M02["02. Zero-Magic Contract<br/><i>No hidden defaults, explicit invariants</i>"]
+    M02 --> M03["03. Four Content Types<br/><i>Lesson → Lab → Project → Checkpoint</i>"]
+    M03 --> M04["04. Toolchain Execution<br/><i>go run, go test, go build, go vet</i>"]
+    M04 --> M05["05. Dual-State Scaffolds<br/><i>_starter/ vs _solution/ workflows</i>"]
+    M05 --> M06["06. Assessment Framework<br/><i>Criterion rubrics & actionable feedback</i>"]
+    M06 --> M07["07. Structured Debugging<br/><i>5-field high-signal case files</i>"]
+    M07 --> M08["08. Job Readiness<br/><i>5 evidence pillars of engineering proof</i>"]
+    M08 --> M09["09. Roadmap Navigation<br/><i>Trunk & fork dependency graphs</i>"]
+    M09 --> M10["10. Portfolio Proof Plan<br/><i>Readiness scoring & capstone showcases</i>"]
 ```
 
 ## Lessons
@@ -121,7 +114,7 @@ Complete the two Module 00 assessments:
 | ------------------------------ | --------------------------------------------------------------- | ---------------------------------------------------------- |
 | Treating reading as completion | You can quote text but cannot run, change, or explain anything. | Use the proof task at the end of every lesson.             |
 | Skipping orientation           | Later folders and validators feel mysterious.                   | Finish this module before jumping ahead.                   |
-| Copying commands blindly       | A command fails and you do not know what it was meant to prove. | Read the Run Instructions and Machine View before running. |
+| Copying commands blindly       | A command fails and you do not know what it was meant to prove. | Read the under-the-hood walkthrough and run instructions before running. |
 | Looking at solutions too early | You finish faster but learn less.                               | Attempt the starter first, then compare.                   |
 | Avoiding assessments           | Weak spots remain invisible.                                    | Use assessments as feedback, not punishment.               |
 
