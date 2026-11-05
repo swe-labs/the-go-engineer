@@ -1,5 +1,8 @@
 # Tooling Checklist
 
+> "The competent programmer is fully aware of the strictly limited size of their skull; therefore, they approach their work with full humility, and among other things they verify their toolchain systematically."
+> — Edsger W. Dijkstra, *The Humble Programmer*
+
 ## Learning objective
 
 By the end of this lesson, you will have verified every tool in the Go development environment by running each command from the previous lessons and confirming it works.
@@ -16,13 +19,18 @@ This is your Go health check. Run these commands whenever you set up a new machi
 
 ```mermaid
 flowchart TD
-    DEV["Developer Workstation"] --> V1["1. Toolchain Verification\n(go version, go env GOROOT GOPATH)"]
-    V1 --> V2["2. Build & Execution Pipeline\n(go run ., go build .)"]
-    V2 --> V3["3. Testing Suite\n(go test -v .)"]
-    V3 --> V4["4. Formatting & Static Analysis\n(gofmt -l ., go vet .)"]
-    V4 --> V5["5. Language Server Protocol\n(gopls version)"]
-    V5 --> V6["6. Module Integrity\n(go mod tidy, go mod verify)"]
-    V6 --> READY["All Checks Passed: Environment 100% Ready for Module 03"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
+    DEV["Developer Workstation"]:::standardNode --> V1["1. Toolchain Verification\n(go version, go env GOROOT GOPATH)"]:::frontDoor
+    V1 --> V2["2. Build & Execution Pipeline\n(go run ., go build .)"]:::standardNode
+    V2 --> V3["3. Testing Suite\n(go test -v .)"]:::standardNode
+    V3 --> V4["4. Formatting & Static Analysis\n(gofmt -l ., go vet .)"]:::standardNode
+    V4 --> V5["5. Language Server Protocol\n(gopls version)"]:::standardNode
+    V5 --> V6["6. Module Integrity\n(go mod tidy, go mod verify)"]:::capstoneNode
+    V6 --> READY["All Checks Passed: Environment 100% Ready for Capstone Project"]:::exitGate
 ```
 
 ## Core idea
@@ -213,4 +221,6 @@ Expected output should include:
 
 ## NEXT UP
 
-[Module 03 — Programming Fundamentals with Go](../../../03-programming-fundamentals/README.md) — start learning Go syntax, values, variables, and control flow.
+Advance to Step 2 (Capstone Project):
+
+- [Project: Tooling Failure Lab](../../projects/tooling-failure-lab/README.md)

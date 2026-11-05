@@ -1,5 +1,8 @@
 # Hello World
 
+> "The only way to learn a new programming language is by writing programs in it. The first program to write is the same for all languages: Print the words 'hello, world'."
+> — Brian W. Kernighan & Dennis M. Ritchie, *The C Programming Language* (1978)
+
 ## Learning objective
 
 By the end of this lesson, you will understand the structure of a minimal Go program — package declaration, import, function, and statement — and you will write and run your own Hello World program.
@@ -16,16 +19,21 @@ A Go source file is a text file with three sections: package declaration at the 
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
     subgraph SourceFile["main.go Source File"]
-        PKG["package main (Declares executable binary entrypoint)"]
-        IMP["import \"fmt\" (Imports formatted I/O standard package)"]
-        FN["func main() (Entrypoint: execution begins here)"]
-        CALL["fmt.Println(\"Hello, World!\")"]
+        PKG["package main (Declares executable binary entrypoint)"]:::frontDoor
+        IMP["import \"fmt\" (Imports formatted I/O standard package)"]:::standardNode
+        FN["func main() (Entrypoint: execution begins here)"]:::frontDoor
+        CALL["fmt.Println(\"Hello, World!\")"]:::standardNode
 
         PKG --> IMP --> FN --> CALL
     end
 
-    CALL -->|Emits bytes to file descriptor 1| STDOUT["OS Standard Output (Terminal Console)"]
+    CALL -->|Emits bytes to file descriptor 1| STDOUT["OS Standard Output (Terminal Console)"]:::exitGate
 ```
 
 ## Core idea

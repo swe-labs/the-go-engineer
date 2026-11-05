@@ -1,5 +1,8 @@
 # Reading Test Failures
 
+> "Program testing can be used to show the presence of bugs, but never to show their absence!"
+> — Edsger W. Dijkstra, *Notes on Structured Programming*
+
 ## Learning objective
 
 By the end of this lesson, you will be able to run tests with `go test -v`, read the output to identify which test failed and why, and fix both the test and the code under test.
@@ -16,11 +19,17 @@ A test function calls your code, checks the result against an expected value, an
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
     subgraph TestExecution["go test -v Execution Flow"]
-        RUN["=== RUN   TestCalculator_Add"]
-        EVAL["Evaluate: got == want ?"]
-        LOG["t.Errorf(\"Add(%d, %d) = %d; want %d\", a, b, got, want)"]
-        STATUS["--- FAIL: TestCalculator_Add (0.00s)"]
+        RUN["=== RUN   TestCalculator_Add"]:::standardNode
+        EVAL["Evaluate: got == want ?"]:::frontDoor
+        LOG["t.Errorf(\"Add(%d, %d) = %d; want %d\", a, b, got, want)"]:::capstoneNode
+        STATUS["--- FAIL: TestCalculator_Add (0.00s)"]:::exitGate
 
         RUN --> EVAL
         EVAL -->|Assertion Fails| LOG
@@ -28,7 +37,7 @@ flowchart TD
     end
 
     subgraph FailureDiagnostic["Diagnostic Log Anatomy"]
-        LINE["calc_test.go:18: Add(2, 2) = 5; want 4\n  [File:Line]       [Got Result]  [Expected Outcome]"]
+        LINE["calc_test.go:18: Add(2, 2) = 5; want 4\n  [File:Line]       [Got Result]  [Expected Outcome]"]:::capstoneNode
     end
 
     STATUS --> LINE

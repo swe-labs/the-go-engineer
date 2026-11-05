@@ -69,3 +69,12 @@
 - **Supply-Chain Security:** Without `go.sum`, an attacker who compromises an upstream GitHub account or proxy could replace an existing release tag (e.g., `v1.2.0`) with malicious code. When a teammate or CI server builds the project, Go checks the downloaded content against the recorded checksum in `go.sum`. If the hashes mismatch, Go halts compilation immediately with a security verification error. Both files must be committed to ensure reproducible, secure builds across all developer workstations and CI runners.
 
 *Grading: 1 point for articulating the distinct purposes of `go.mod` (declarative versioning) vs `go.sum` (cryptographic integrity); 1 point for explaining how `go.sum` protects against upstream tampering and supply-chain attacks.*
+
+---
+
+## Module Complete
+
+Congratulations on completing Module 02: Go Setup and Tooling! You have mastered the complete Go compiler pipeline, test harness, code formatting, static analysis, language server integration, module foundations, and diagnostic debugging.
+
+Advance to the next module:
+- [Module 03: Programming Fundamentals with Go](../../../03-programming-fundamentals/README.md)

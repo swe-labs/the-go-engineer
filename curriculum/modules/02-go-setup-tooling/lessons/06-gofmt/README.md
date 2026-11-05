@@ -1,5 +1,8 @@
 # gofmt
 
+> "Gofmt's style is no one's favorite, yet gofmt is everyone's favorite."
+> — Rob Pike, *Go Proverbs*
+
 ## Learning objective
 
 By the end of this lesson, you will understand what `gofmt` does, why Go enforces a single formatting style, and how to use `gofmt` to format your code automatically.
@@ -16,10 +19,15 @@ Formatting arguments waste time in code reviews. Go eliminates this entirely wit
 
 ```mermaid
 flowchart LR
-    RAW["Raw Go Source\n(messy indentation, irregular spaces,\ninconsistent alignment)"] --> PARSE["go/parser\n(Constructs AST & strips superficial whitespace)"]
-    PARSE --> AST["Abstract Syntax Tree (AST)\n(Semantic Structure Preserved)"]
-    AST --> PRINT["go/printer\n(Applies Canonical Rules: tabs for indent,\nspaces for alignment, 1 space around operators)"]
-    PRINT --> CANON["Canonical Go Source\n(Byte-for-byte identical across all machines)"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
+    RAW["Raw Go Source\n(messy indentation, irregular spaces,\ninconsistent alignment)"]:::standardNode --> PARSE["go/parser\n(Constructs AST & strips superficial whitespace)"]:::frontDoor
+    PARSE --> AST["Abstract Syntax Tree (AST)\n(Semantic Structure Preserved)"]:::capstoneNode
+    AST --> PRINT["go/printer\n(Applies Canonical Rules: tabs for indent,\nspaces for alignment, 1 space around operators)"]:::frontDoor
+    PRINT --> CANON["Canonical Go Source\n(Byte-for-byte identical across all machines)"]:::exitGate
 ```
 
 ## Core idea
@@ -39,8 +47,6 @@ The Go team runs `gofmt -l` on every pull request to the standard library. Any f
 - `gofmt -l .` — lists files that are not formatted correctly
 - `gofmt -d main.go` — shows a diff of what would change
 - `go fmt ./...` — formats all packages in the module
-
-## Go example
 
 ## Go example
 

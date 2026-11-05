@@ -1,5 +1,8 @@
 # Reading Compiler Errors
 
+> "The compiler is your primary collaborator. When it rejects your code, it is protecting your users from runtime failures before a single byte of machine code is emitted."
+> — Robert Griesemer, Co-Designer of Go
+
 ## Learning objective
 
 By the end of this lesson, you will be able to read Go compiler error messages, identify the file, line, column, and error type, and fix common compile errors without guessing.
@@ -16,16 +19,22 @@ Go's compiler produces error messages with a consistent format: `file:line:col: 
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
     subgraph Diagnostic["Compiler Diagnostic Anatomy"]
-        ERR["./main.go:14:5: undefined: fmt\n  [File]  [Line] [Col]     [Error Explanation]"]
+        ERR["./main.go:14:5: undefined: fmt\n  [File]  [Line] [Col]     [Error Explanation]"]:::frontDoor
     end
 
     subgraph Triage["Triage Workflow (Top-Down Remediation)"]
-        TOP["1. Read FIRST error only (Ignore secondary cascading noise)"]
-        NAV["2. Jump directly to File at Line:Column coordinates"]
-        CAT["3. Classify: Syntax vs Type Mismatch vs Undefined vs Unused"]
-        FIX["4. Apply targeted minimal correction"]
-        RETRY["5. Re-run `go build` to verify resolution"]
+        TOP["1. Read FIRST error only (Ignore secondary cascading noise)"]:::standardNode
+        NAV["2. Jump directly to File at Line:Column coordinates"]:::standardNode
+        CAT["3. Classify: Syntax vs Type Mismatch vs Undefined vs Unused"]:::standardNode
+        FIX["4. Apply targeted minimal correction"]:::capstoneNode
+        RETRY["5. Re-run `go build` to verify resolution"]:::exitGate
 
         TOP --> NAV --> CAT --> FIX --> RETRY
     end

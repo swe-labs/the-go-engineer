@@ -1,5 +1,8 @@
 # go test
 
+> "Testing is not an afterthought in Go; it is built into the language and runtime from day one. You don't need third-party assertion frameworks to prove correctness."
+> — Dave Cheney, *Practical Go: Real World Advice for Writing Maintainable Go Programs*
+
 ## Learning objective
 
 By the end of this lesson, you will understand what `go test` does, how to write and run a basic test, and how to interpret test output. You will run existing tests and observe pass/fail results.
@@ -16,25 +19,31 @@ A test is a function that calls your code and checks the result against an expec
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
     subgraph Discovery["Package Discovery"]
-        SRC["Code: main.go (production functions)"]
-        TEST_SRC["Tests: main_test.go (func TestXxx(t *testing.T))"]
+        SRC["Code: main.go (production functions)"]:::frontDoor
+        TEST_SRC["Tests: main_test.go (func TestXxx(t *testing.T))"]:::standardNode
     end
 
     subgraph TestHarness["go test Runner (cmd/go)"]
-        SYNTH["1. Generates ephemeral _testmain.go entrypoint"]
-        BUILD["2. Compiles test runner binary (main.test)"]
-        EXEC["3. Executes test runner process with *testing.T context"]
+        SYNTH["1. Generates ephemeral _testmain.go entrypoint"]:::standardNode
+        BUILD["2. Compiles test runner binary (main.test)"]:::standardNode
+        EXEC["3. Executes test runner process with *testing.T context"]:::capstoneNode
     end
 
     subgraph Assertion["Assertion Evaluation"]
-        PASS["t.Log / No error -> Test PASS"]
-        FAIL["t.Errorf / t.Fatalf -> Test FAIL"]
+        PASS["t.Log / No error -> Test PASS"]:::exitGate
+        FAIL["t.Errorf / t.Fatalf -> Test FAIL"]:::capstoneNode
     end
 
     subgraph Report["Terminal Output"]
-        OUT_OK["--- PASS: TestAdd (0.00s)\nPASS\nok package 0.002s"]
-        OUT_FAIL["--- FAIL: TestAdd (0.00s)\nFAIL\nexit status 1"]
+        OUT_OK["--- PASS: TestAdd (0.00s)\nPASS\nok package 0.002s"]:::exitGate
+        OUT_FAIL["--- FAIL: TestAdd (0.00s)\nFAIL\nexit status 1"]:::capstoneNode
     end
 
     Discovery --> SYNTH --> BUILD --> EXEC

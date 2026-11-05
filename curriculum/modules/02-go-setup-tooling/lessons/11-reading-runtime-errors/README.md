@@ -1,5 +1,8 @@
 # Reading Runtime Errors
 
+> "Don't panic. Panic should be reserved for truly unrecoverable conditions — programming bugs or runtime invariants violated so severely that continued execution is impossible."
+> — Rob Pike, *Go Proverbs*
+
 ## Learning objective
 
 By the end of this lesson, you will understand how to read a Go panic traceback, identify the file and line where the panic occurred, and fix common runtime errors like index out of range and nil pointer dereference.
@@ -16,16 +19,22 @@ A panic is an unexpected error that stops program execution. When a panic occurs
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
     subgraph Stack["Goroutine Call Stack Trace (Top to Bottom)"]
-        F3["Frame 3: Crash Origin (Panic Site)\nmain.divide(a, b int)\n/app/main.go:24"]
-        F2["Frame 2: Intermediate Caller\nmain.calculateMetrics()\n/app/main.go:16"]
-        F1["Frame 1: Root Goroutine Entrypoint\nmain.main()\n/app/main.go:8"]
+        F3["Frame 3: Crash Origin (Panic Site)\nmain.divide(a, b int)\n/app/main.go:24"]:::capstoneNode
+        F2["Frame 2: Intermediate Caller\nmain.calculateMetrics()\n/app/main.go:16"]:::standardNode
+        F1["Frame 1: Root Goroutine Entrypoint\nmain.main()\n/app/main.go:8"]:::frontDoor
     end
 
     subgraph RuntimeAction["Go Runtime Panic Unwinding"]
-        P_OCCUR["1. Hardware/Runtime Trap (division by zero / nil dereference)"]
-        P_WALK["2. Stack Walker inspects Program Counters (PC) via symbol table"]
-        P_EMIT["3. Dumps formatted goroutine stack to stderr & exits status 2"]
+        P_OCCUR["1. Hardware/Runtime Trap (division by zero / nil dereference)"]:::standardNode
+        P_WALK["2. Stack Walker inspects Program Counters (PC) via symbol table"]:::standardNode
+        P_EMIT["3. Dumps formatted goroutine stack to stderr & exits status 2"]:::exitGate
     end
 
     F3 --> P_OCCUR --> P_WALK --> P_EMIT

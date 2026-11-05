@@ -1,5 +1,8 @@
 # Go Module Root Basics
 
+> "A module is a collection of packages that are released, versioned, and distributed together. Modules record precise dependency requirements and create reproducible builds."
+> — Russ Cox, *Go Modules in Practice*
+
 ## Learning objective
 
 By the end of this lesson, you will understand what a Go module is, how `go.mod` defines the module root, and how Go uses the module path to resolve imports.
@@ -16,16 +19,22 @@ A Go module is a collection of packages with a single `go.mod` file at the root.
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
+
     subgraph ModuleRoot["Module Root Directory: /myproject"]
-        GOMOD["go.mod\nmodule github.com/user/myproject\ngo 1.22"]
-        GOSUM["go.sum\nCryptographic SHA-256 dependency hashes"]
+        GOMOD["go.mod\nmodule github.com/user/myproject\ngo 1.24"]:::frontDoor
+        GOSUM["go.sum\nCryptographic SHA-256 dependency hashes"]:::standardNode
 
         subgraph SubPkg["Package Directory: /pkg/mathlib"]
-            CODE["math.go\npackage mathlib"]
+            CODE["math.go\npackage mathlib"]:::standardNode
         end
 
         subgraph CmdPkg["Command Directory: /cmd/app"]
-            MAIN["main.go\npackage main\nimport \"github.com/user/myproject/pkg/mathlib\""]
+            MAIN["main.go\npackage main\nimport \"github.com/user/myproject/pkg/mathlib\""]:::capstoneNode
         end
     end
 
