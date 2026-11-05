@@ -19,6 +19,10 @@ Code review is pair debugging at scale — the author writes the solution, and r
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     PR_OPEN["Developer Opens Pull Request with Atomic Diff (<300 lines)"] --> CI["Automated CI Verification (Tests, Linter, Build)"]
     
     CI -->|CI Passes| REVIEW["Senior Engineer Reviews Diff"]

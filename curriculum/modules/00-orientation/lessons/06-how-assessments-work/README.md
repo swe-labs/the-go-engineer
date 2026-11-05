@@ -1,8 +1,8 @@
 # How assessments work
 
-## Learning objective
-
 > *"Without data, you're just another person with an opinion."* — W. Edwards Deming
+
+## Learning objective
 
 Explain how checkpoints, rubrics, and answer keys measure mastery. You will be able to read a rubric, evaluate an answer against it, and describe how self-grading helps you identify what to study next.
 
@@ -26,6 +26,10 @@ The criterion-referenced evaluation pipeline provides transparent, objective mas
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph Inputs ["Assessment Specification & Submission"]
         R["Rubric Standards<br/><i>Categories, MaxScore, PassThreshold</i>"]
         A["Learner Submission<br/><i>Concrete Evidence & Answers</i>"]

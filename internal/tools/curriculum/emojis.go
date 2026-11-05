@@ -1,0 +1,109 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+	"unicode/utf8"
+)
+
+var (
+	inlineBacktickRegex = regexp.MustCompile("`[^`]*`")
+)
+
+// isEmojiCharacter tests if a rune falls into Unicode emoji or decorative symbol ranges.
+func isEmojiCharacter(r rune) bool {
+	// Unicode Emoji presentation and symbols
+	if r >= 0x1F300 && r <= 0x1FAFF {
+		return true
+	}
+	// Miscellaneous symbols (dingbats, arrows, pictographs)
+	if r >= 0x2600 && r <= 0x27BF {
+		// Allow standard bullet / checkmarks if needed, but flag decorative symbols
+		if r == 0x27A1 || r == 0x2705 || r == 0x274C || r == 0x2728 || r == 0x2714 || r == 0x2716 {
+			return true
+		}
+	}
+	// Common decorative emojis
+	if r == 0x1F449 || r == 0x1F680 || r == 0x1F4A1 || r == 0x1F3AF || r == 0x27A1 {
+		return true
+	}
+	return false
+}
+
+// validateNoEmojis scans all Markdown files in curriculum/ to enforce the strict
+// No-Emojis Invariant across technical prose, headings, tables, and lists.
+// Code blocks (fenced or inline) teaching Unicode runes or CLI indicators are excluded.
+func validateNoEmojis() {
+	fmt.Println("=== validate-no-emojis ===")
+	ok := true
+	violations := 0
+	filesChecked := 0
+
+	err := filepath.Walk(curriculumDir, func(path string, info os.FileInfo, walkErr error) error {
+		if walkErr != nil {
+			return walkErr
+		}
+		if info.IsDir() || !strings.HasSuffix(strings.ToLower(path), ".md") {
+			return nil
+		}
+
+		file, err := os.Open(path)
+		if err != nil {
+			warnf("cannot open markdown file %s: %v", path, err)
+			ok = false
+			return nil
+		}
+		defer file.Close()
+
+		filesChecked++
+		scanner := bufio.NewScanner(file)
+		lineNo := 0
+		inCodeBlock := false
+
+		for scanner.Scan() {
+			lineNo++
+			line := scanner.Text()
+			trimmed := strings.TrimSpace(line)
+
+			if strings.HasPrefix(trimmed, "```") {
+				inCodeBlock = !inCodeBlock
+				continue
+			}
+			if inCodeBlock {
+				continue
+			}
+
+			// Strip inline backticks so code examples of UTF-8 runes are allowed
+			lineNoInline := inlineBacktickRegex.ReplaceAllString(line, "")
+
+			for i := 0; i < len(lineNoInline); {
+				r, size := utf8.DecodeRuneInString(lineNoInline[i:])
+				if isEmojiCharacter(r) {
+					relPath, _ := filepath.Rel(curriculumDir, path)
+					warnf("%s:%d contains forbidden emoji '%c' (U+%04X): %s", relPath, lineNo, r, r, trimmed)
+					violations++
+					ok = false
+					break
+				}
+				i += size
+			}
+		}
+		return nil
+	})
+
+	if err != nil {
+		warnf("error walking markdown files for emojis: %v", err)
+		ok = false
+	}
+
+	fmt.Printf("  Scanned %d markdown files for emojis (%d violations).\n", filesChecked, violations)
+	if ok && violations == 0 {
+		fmt.Println("  Strict No-Emojis Invariant verified across all prose.")
+	} else {
+		fmt.Println("  No-Emojis validation failed with violations.")
+	}
+}

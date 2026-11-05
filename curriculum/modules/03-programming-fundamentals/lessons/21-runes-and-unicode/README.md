@@ -189,7 +189,7 @@ offset 3: rune é (U+00E9)
 - **`[]rune(s)` allocates**: Converting a string to `[]rune` decodes all UTF-8 sequences and allocates a new slice. For large strings, this is expensive.
 - **`strings` package functions** work at the byte level on valid UTF-8 strings. They don't split runes, so they are safe for substring searches even in multi-byte text.
 - **Normalization**: "é" can be one code point (U+00E9) or two (U+0065 + U+0301). Use `golang.org/x/text/unicode/norm` for NFC/NFD normalization.
-- **Emoji and grapheme clusters**: A single visible emoji like "👨‍👩‍👧‍👦" (family) is multiple code points joined by zero-width joiners. `range` iterates over individual code points, not grapheme clusters. For grapheme clusters, use `golang.org/x/text/segment`.
+- **Emoji and grapheme clusters**: A single visible emoji like `"👨‍👩‍👧‍👦"` (family) is multiple code points joined by zero-width joiners. `range` iterates over individual code points, not grapheme clusters. For grapheme clusters, use `golang.org/x/text/segment`.
 
 ## Performance implications
 

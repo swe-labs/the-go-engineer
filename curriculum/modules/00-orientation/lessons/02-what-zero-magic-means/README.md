@@ -1,10 +1,10 @@
 # What zero magic means
 
-## Learning objective
-
 > *"Clear is better than clever."* — Rob Pike
 >
 > *"There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies."* — C.A.R. Hoare
+
+## Learning objective
 
 By the end of this lesson, you will be able to identify "magic" in code — behavior that happens implicitly without being visible to the reader — and replace it with "zero magic" — explicit, readable, verifiable code. You will learn why this curriculum bans magic and how to apply the principle in Go.
 
@@ -35,6 +35,10 @@ The zero-magic principle replaces hidden assumptions and implicit state with vis
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph Magic ["Magic Approach (Implicit & Opaque)"]
         direction TB
         M1["Call Server()"] --> M2["Hidden Global State / Magic Env Vars"]

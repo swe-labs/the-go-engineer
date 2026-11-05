@@ -1,8 +1,8 @@
 # How to use this repository
 
-## Learning objective
-
 > *"Simplicity is prerequisite for reliability."* — Edsger W. Dijkstra
+
+## Learning objective
 
 By the end of this lesson, you will be able to open this repository and immediately identify what each top-level directory holds, how metadata connects to learner-facing content, and which tools validate the connection. You will demonstrate this by running a Go program that models the directory structure as searchable data.
 
@@ -35,6 +35,10 @@ The architecture connects blueprints, instructional prose, and verification gate
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph Storage ["Layer 1: Blueprints & Physical Modules"]
         C["curriculum/"]
         M["path.core.json & projects.json<br/>(Authoritative Manifests)"]

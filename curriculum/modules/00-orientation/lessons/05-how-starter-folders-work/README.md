@@ -1,8 +1,8 @@
 # How starter folders work
 
-## Learning objective
-
 > *"Make it work, make it right, make it fast."* — Kent Beck
+
+## Learning objective
 
 By the end of this lesson, you will understand how `_starter/` and `_solution/` directories work together in this curriculum, starting from Module 02 where Go programming begins. You will know why they exist, how to use them without cheating yourself, and how to programmatically compare a starter against a solution.
 
@@ -39,6 +39,10 @@ The dual-state architecture isolates your practice space from the verified refer
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph IsolatedScaffold ["Dual-State Repository Layout"]
         ST["_starter/<br/><i>Intentional TODO markers & scaffold</i>"]
         SOL["_solution/<br/><i>Passing reference implementation</i>"]

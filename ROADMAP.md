@@ -53,5 +53,5 @@ A release is ready only when:
 - `go mod tidy` produces no diff in `go.mod` or `go.sum`
 - `go test ./...` passes 100%
 - `go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...` reports 0 races
-- `go run ./internal/tools/curriculum validate-all` passes all 17 quality gates
+- `go run ./internal/tools/curriculum validate-all` passes all 24 quality gates
 - GitHub Actions CI is green

@@ -1,8 +1,8 @@
 # How to run code in this repository
 
-## Learning objective
-
 > *"Clear is better than clever."* — Rob Pike
+
+## Learning objective
 
 By the end of this lesson, you will understand the difference between `go run`, `go test`, `go build`, and `go vet`. You will know when to use each command and what each one tells you about your code. You will demonstrate this by running a simple calculator program using each command.
 
@@ -36,6 +36,10 @@ The Go toolchain commands serve distinct stages in the engineering lifecycle:
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     SRC["Source Code (*.go)"]
 
     subgraph Commands ["Go Toolchain Verification Matrix"]

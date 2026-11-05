@@ -26,6 +26,10 @@ HTTP (Hypertext Transfer Protocol) is an application-level, text-based, request-
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph RequestWire["1. HTTP Request (Wire Format Over TCP)"]
         direction TB
         REQ_LINE["Request Line: GET /api/v1/users HTTP/1.1"]

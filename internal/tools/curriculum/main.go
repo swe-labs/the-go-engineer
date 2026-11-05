@@ -64,6 +64,10 @@ func main() {
 		fmt.Println("  validate-markdown-links       Check all relative markdown links resolve to real files on disk")
 		fmt.Println("  validate-sese-navigation      Check Single-Entry Single-Exit navigation and exit gate integrity")
 		fmt.Println("  validate-project-scripts      Check cross-platform bash/powershell project verification script parity")
+		fmt.Println("  validate-no-emojis            Check strict No-Emojis Invariant across curriculum prose")
+		fmt.Println("  validate-anchor-quotes        Check pioneer anchor quotes on locked module lessons")
+		fmt.Println("  validate-diagram-palette      Check Dark Engineering Palette compliance on diagrams")
+		fmt.Println("  validate-readme-contracts     Check 6-heading core contracts on locked module lessons")
 		fmt.Println("  validate-all                 Run all validators")
 		os.Exit(1)
 	}
@@ -110,6 +114,14 @@ func main() {
 		validateSESENavigation()
 	case "validate-project-scripts":
 		validateProjectScripts()
+	case "validate-no-emojis":
+		validateNoEmojis()
+	case "validate-anchor-quotes":
+		validateAnchorQuotes()
+	case "validate-diagram-palette":
+		validateDiagramPalette()
+	case "validate-readme-contracts":
+		validateReadmeContracts()
 	case "validate-all":
 		validateSchema()
 		validateGraph()
@@ -131,6 +143,10 @@ func main() {
 		validateMarkdownLinks()
 		validateSESENavigation()
 		validateProjectScripts()
+		validateNoEmojis()
+		validateAnchorQuotes()
+		validateDiagramPalette()
+		validateReadmeContracts()
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown command: %s\n", cmd)
 		os.Exit(1)

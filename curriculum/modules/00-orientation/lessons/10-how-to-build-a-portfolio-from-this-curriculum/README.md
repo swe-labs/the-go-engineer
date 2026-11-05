@@ -1,8 +1,8 @@
 # How to build a portfolio from this curriculum
 
-## Learning objective
-
 > *"Talk is cheap. Show me the code."* — Linus Torvalds
+
+## Learning objective
 
 Learn how to turn curriculum projects into professional portfolio evidence. You will be able to create a portfolio plan, assess each project's readiness score, and identify what evidence each project needs before it is ready to show employers.
 
@@ -24,6 +24,10 @@ Transforming raw repository exercises into an employer-ready engineering portfol
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph Source ["Curriculum Capstones"]
         P1["Module Projects<br/><i>REST, SQL, Auth, Concurrency</i>"]
         P2["Companion Frontends<br/><i>templ, HTMX, Tailwind</i>"]

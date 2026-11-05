@@ -1,8 +1,8 @@
 # How to ask good debugging questions
 
-## Learning objective
-
 > *"Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it."* — Brian Kernighan
+
+## Learning objective
 
 Turn vague confusion into a structured question that contains evidence and a testable hypothesis. You will learn the five fields every debugging question should include and how to score your own questions for completeness before you ask for help.
 
@@ -24,6 +24,10 @@ A high-signal debugging case file eliminates ambiguity by providing all 5 diagno
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     Q["Structured Debugging Case File<br/>(Target Score: 5/5)"]
 
     subgraph Pillars ["The 5 Essential Evidence Fields"]
