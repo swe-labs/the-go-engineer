@@ -81,36 +81,26 @@ func validateSESENavigation() {
 
 	// Verify exit gates on locked module assessments
 	for modID, nextModuleLink := range lockedModules {
-		var assessDir string
-		for _, mod := range core.Modules {
-			if mod.ID == modID {
-				assessDir = filepath.Join(resolveModuleDir(mod.Path), "assessments")
-				break
+		foundExitGate := false
+		var checkedFiles []string
+
+		for _, item := range core.Items {
+			if item.ModuleID == modID && item.Type == "assessment" && item.Files != nil && item.Files.ReadmePath != "" {
+				fullPath := resolvePath(item.Files.ReadmePath)
+				checkedFiles = append(checkedFiles, item.Files.ReadmePath)
+				cData, err := os.ReadFile(fullPath)
+				if err != nil {
+					continue
+				}
+				if strings.Contains(string(cData), nextModuleLink) {
+					foundExitGate = true
+					break
+				}
 			}
 		}
-		if assessDir == "" {
-			continue
-		}
 
-		// Find the checkpoint assessment README
-		checkpointReadme := filepath.Join(assessDir, "checkpoint", "README.md")
-		if modID == "module-01" {
-			checkpointReadme = filepath.Join(assessDir, "shell-git-lab", "README.md")
-		}
-		if modID == "module-02" {
-			checkpointReadme = filepath.Join(assessDir, "tooling-failure-lab", "README.md")
-		}
-
-		cData, err := os.ReadFile(checkpointReadme)
-		if err != nil {
-			warnf("%s missing exit assessment README at %s", modID, checkpointReadme)
-			ok = false
-			continue
-		}
-
-		cContent := string(cData)
-		if !strings.Contains(cContent, nextModuleLink) {
-			warnf("%s assessment exit gate at %s missing forward link '%s'", modID, checkpointReadme, nextModuleLink)
+		if !foundExitGate {
+			warnf("%s assessment exit gate missing forward link '%s' (checked %v)", modID, nextModuleLink, checkedFiles)
 			ok = false
 		}
 	}

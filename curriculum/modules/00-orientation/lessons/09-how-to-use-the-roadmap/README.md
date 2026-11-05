@@ -1,8 +1,8 @@
 # How to use the roadmap
 
-## Learning objective
-
 > *"The function of good software is to make the complex appear simple."* — Grady Booch
+
+## Learning objective
 
 Understand how the curriculum roadmap works as a dependency graph, how prerequisites determine valid learning paths, and how to validate your own progression through the modules. You will be able to read the module dependency graph, identify the correct order, and explain why some modules must come before others.
 
@@ -36,6 +36,10 @@ The curriculum is structured as a Directed Acyclic Graph (DAG) with trunk progre
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph CoreTrunk ["Core Backend Trunk (Strict Linear DAG)"]
         M00["M00: Orientation"] --> M01["M01: Systems & Git"]
         M01 --> M02["M02: Go Basics"]

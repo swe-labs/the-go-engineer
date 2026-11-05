@@ -189,4 +189,64 @@ func TestCanonicalValidationGatesExecution(t *testing.T) {
 	if errorCount != 0 {
 		t.Errorf("validateStarterParity failed with %d errors", errorCount)
 	}
+
+	validateLessons()
+	if errorCount != 0 {
+		t.Errorf("validateLessons failed with %d errors", errorCount)
+	}
+
+	validatePrerequisiteClosure()
+	if errorCount != 0 {
+		t.Errorf("validatePrerequisiteClosure failed with %d errors", errorCount)
+	}
+
+	validateProjectBinding()
+	if errorCount != 0 {
+		t.Errorf("validateProjectBinding failed with %d errors", errorCount)
+	}
+
+	validateFailureEngineering()
+	if errorCount != 0 {
+		t.Errorf("validateFailureEngineering failed with %d errors", errorCount)
+	}
+
+	validateZeroMagic()
+	if errorCount != 0 {
+		t.Errorf("validateZeroMagic failed with %d errors", errorCount)
+	}
+
+	validateMarkdownLinks()
+	if errorCount != 0 {
+		t.Errorf("validateMarkdownLinks failed with %d errors", errorCount)
+	}
+
+	validateSESENavigation()
+	if errorCount != 0 {
+		t.Errorf("validateSESENavigation failed with %d errors", errorCount)
+	}
+
+	validateProjectScripts()
+	if errorCount != 0 {
+		t.Errorf("validateProjectScripts failed with %d errors", errorCount)
+	}
+
+	validateNoEmojis()
+	if errorCount != 0 {
+		t.Errorf("validateNoEmojis failed with %d errors", errorCount)
+	}
+
+	validateAnchorQuotes()
+	if errorCount != 0 {
+		t.Errorf("validateAnchorQuotes failed with %d errors", errorCount)
+	}
+
+	validateDiagramPalette()
+	if errorCount != 0 {
+		t.Errorf("validateDiagramPalette failed with %d errors", errorCount)
+	}
+
+	validateReadmeContracts()
+	if errorCount != 0 {
+		t.Errorf("validateReadmeContracts failed with %d errors", errorCount)
+	}
 }

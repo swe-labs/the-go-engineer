@@ -26,6 +26,10 @@ The terminal system consists of two separate programs cooperating:
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph Host["Terminal Interface"]
         USER["Keyboard Input"] --> TERM["Terminal Emulator
 (Windows Terminal / Alacritty)"]

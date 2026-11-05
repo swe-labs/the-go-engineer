@@ -1,8 +1,8 @@
 # How lessons, exercises, projects, and checkpoints work
 
-## Learning objective
-
 > *"Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it."* — Brian Kernighan
+
+## Learning objective
 
 By the end of this lab, you will understand the four content types used in this curriculum — lesson, exercise, project, and checkpoint — and how they connect to form a complete learning cycle. You will demonstrate this by running a Go program that models the cycle as a series of steps, advancing through each one programmatically.
 
@@ -35,6 +35,10 @@ Every module follows the six-step iterative engineering cycle:
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     S1["1. Read<br/><i>Mental Model & Narrative</i>"] --> S2["2. Run<br/><i>Execute Baseline Code</i>"]
     S2 --> S3["3. Try<br/><i>Work in _starter/</i>"]
     S3 --> S4["4. Test<br/><i>Run go test verification</i>"]
