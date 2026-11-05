@@ -88,4 +88,4 @@ Learner may retry after fixing rubric gaps and writing a short correction note.
 
 ## NEXT UP
 
-[Module 11: Lifecycle, Context, and Concurrency](../../11-lifecycle-context-concurrency/README.md)
+[Module 11: Lifecycle, Context, and Concurrency](../../../11-lifecycle-context-concurrency/README.md)

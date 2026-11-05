@@ -300,4 +300,4 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/18-custo
 
 ## NEXT UP
 
-Congratulations on completing Module 04! You now understand Go's function system, error handling philosophy, and data semantics. Next up: [Structs](../../05-types-interfaces-packages-modules/lessons/01-structs/README.md)
+Congratulations on completing Module 04! You now understand Go's function system, error handling philosophy, and data semantics. Next up: [Structs](../../../05-types-interfaces-packages-modules/lessons/01-structs/README.md)

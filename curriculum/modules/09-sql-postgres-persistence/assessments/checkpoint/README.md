@@ -92,4 +92,4 @@ Learner may retry after fixing rubric gaps and writing a short correction note.
 
 ## NEXT UP
 
-[Module 10: Authentication and Security](../../10-auth-security/README.md)
+[Module 10: Authentication and Security](../../../10-auth-security/README.md)

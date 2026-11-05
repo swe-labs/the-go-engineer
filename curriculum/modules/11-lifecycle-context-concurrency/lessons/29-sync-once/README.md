@@ -239,4 +239,4 @@ go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/29-sync-on
 
 ## NEXT UP
 
-Congratulations on completing Module 11! You now understand time, context, goroutines, channels, synchronization, and patterns for robust concurrent programs. Next up: [Why Observability Exists](../../12-observability-diagnostics/lessons/01-why-observability-exists/README.md)
+Congratulations on completing Module 11! You now understand time, context, goroutines, channels, synchronization, and patterns for robust concurrent programs. Next up: [Why Observability Exists](../../../12-observability-diagnostics/lessons/01-why-observability-exists/README.md)

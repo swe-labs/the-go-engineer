@@ -114,4 +114,4 @@ PASS
 
 ## NEXT UP
 
-[Module 08: HTTP REST APIs](../../08-http-rest-apis/README.md)
+[Module 08: HTTP REST APIs](../../../08-http-rest-apis/README.md)

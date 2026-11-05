@@ -271,4 +271,4 @@ Modern production systems design APIs around clear HTTP semantics. REST APIs use
 
 Advance to Step 2 (Capstone Project):
 
-👉 [Project: Shell + Git Lab](../../projects/shell-git-lab/README.md)
+- [Project: Shell + Git Lab](../../projects/shell-git-lab/README.md)

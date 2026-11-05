@@ -77,4 +77,4 @@ Components:
 Congratulations on completing Module 01: Computers, Terminal, Git, and the Web! You have mastered low-level execution fundamentals, terminal pipelines, Git content-addressable DAGs, and HTTP wire structures.
 
 Advance to write your first Go programs:
-👉 [Module 02: Go Setup and Tooling](../../../02-go-setup-tooling/README.md)
+- [Module 02: Go Setup and Tooling](../../../02-go-setup-tooling/README.md)

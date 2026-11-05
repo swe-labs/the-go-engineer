@@ -123,4 +123,4 @@ go run ./curriculum/modules/08-http-rest-apis/projects/book-catalog-rest-api/_so
 
 ## NEXT UP
 
-[Task API with Postgres](../09-sql-postgres-persistence/projects/task-api-with-postgres/README.md)
+[Task API with Postgres](../../../09-sql-postgres-persistence/projects/task-api-with-postgres/README.md)

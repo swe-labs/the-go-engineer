@@ -266,4 +266,4 @@ go test ./curriculum/modules/13-performance-memory-engineering/lessons/08-cache-
 
 ## NEXT UP
 
-Congratulations on completing Module 13! You now understand profiling, benchmarking, memory optimization, caching, and performance engineering in Go. Next up: [Why Architecture Exists](../../14-architecture-distributed-systems/lessons/01-why-architecture-exists/README.md)
+Congratulations on completing Module 13! You now understand profiling, benchmarking, memory optimization, caching, and performance engineering in Go. Next up: [Why Architecture Exists](../../../14-architecture-distributed-systems/lessons/01-why-architecture-exists/README.md)

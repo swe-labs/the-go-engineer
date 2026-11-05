@@ -92,4 +92,4 @@ Learner may retry after fixing rubric gaps and writing a short correction note.
 
 ## NEXT UP
 
-[Module 12: Observability and Diagnostics](../../12-observability-diagnostics/README.md)
+[Module 12: Observability and Diagnostics](../../../12-observability-diagnostics/README.md)

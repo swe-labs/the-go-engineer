@@ -117,4 +117,4 @@ ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/12-observability-dia
 
 ## NEXT UP
 
-[Profile and Fix Lab](../../13-performance-memory-engineering/projects/profile-and-fix-lab/README.md)
+[Profile and Fix Lab](../../../13-performance-memory-engineering/projects/profile-and-fix-lab/README.md)

@@ -106,4 +106,4 @@ PASS
 
 ## NEXT UP
 
-[Flagship Opslane Capstone](../../18-flagship-opslane/README.md)
+[Flagship Opslane Capstone](../../../18-flagship-opslane/README.md)

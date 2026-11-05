@@ -61,6 +61,9 @@ func main() {
 		fmt.Println("  validate-physical-artifacts   Check all 441 items have verified physical files on disk")
 		fmt.Println("  validate-assessment-artifacts Check all assessments have complete 4-file suites (README, questions, rubric, answer-key)")
 		fmt.Println("  validate-starter-parity       Check project starters and solutions parse with valid Go ASTs")
+		fmt.Println("  validate-markdown-links       Check all relative markdown links resolve to real files on disk")
+		fmt.Println("  validate-sese-navigation      Check Single-Entry Single-Exit navigation and exit gate integrity")
+		fmt.Println("  validate-project-scripts      Check cross-platform bash/powershell project verification script parity")
 		fmt.Println("  validate-all                 Run all validators")
 		os.Exit(1)
 	}
@@ -101,6 +104,12 @@ func main() {
 		validateAssessmentArtifacts()
 	case "validate-starter-parity":
 		validateStarterParity()
+	case "validate-markdown-links":
+		validateMarkdownLinks()
+	case "validate-sese-navigation":
+		validateSESENavigation()
+	case "validate-project-scripts":
+		validateProjectScripts()
 	case "validate-all":
 		validateSchema()
 		validateGraph()
@@ -119,6 +128,9 @@ func main() {
 		validatePhysicalArtifacts()
 		validateAssessmentArtifacts()
 		validateStarterParity()
+		validateMarkdownLinks()
+		validateSESENavigation()
+		validateProjectScripts()
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown command: %s\n", cmd)
 		os.Exit(1)

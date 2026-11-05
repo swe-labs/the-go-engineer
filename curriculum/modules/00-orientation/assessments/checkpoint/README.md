@@ -64,4 +64,4 @@ If you miss a category, return to the relevant lesson, revise your answer, and w
 
 You have reached the official exit gate for Module 00. Advance to the first technical module:
 
-👉 [Module 01: Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md)
+- [Module 01: Computers, Terminal, Git, and the Web](../../../01-computers-terminal-git-web/README.md)

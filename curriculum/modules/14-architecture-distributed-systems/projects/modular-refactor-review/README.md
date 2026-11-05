@@ -128,4 +128,4 @@ ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/14-architecture-dist
 
 ## NEXT UP
 
-[Dockerized Service with CI/CD](../../15-docker-cicd-deployment/projects/dockerized-service-with-ci-cd/README.md)
+[Dockerized Service with CI/CD](../../../15-docker-cicd-deployment/projects/dockerized-service-with-ci-cd/README.md)

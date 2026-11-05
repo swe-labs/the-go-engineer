@@ -109,4 +109,4 @@ Expected output:
 
 ## NEXT UP
 
-[Module 18: Flagship Capstone (Opslane)](../../18-flagship-opslane/README.md)
+[Module 18: Flagship Capstone (Opslane)](../../../18-flagship-opslane/README.md)

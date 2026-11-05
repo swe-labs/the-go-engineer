@@ -101,4 +101,4 @@ PASS
 
 ## NEXT UP
 
-[Module 06: Testing & Debugging](../../06-testing-debugging-refactoring/README.md)
+[Module 06: Testing & Debugging](../../../06-testing-debugging-refactoring/README.md)
