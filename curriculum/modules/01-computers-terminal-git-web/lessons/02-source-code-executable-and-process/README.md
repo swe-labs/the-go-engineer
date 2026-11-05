@@ -1,5 +1,8 @@
 # Source code, executable, and process
 
+> *"There must be a distinction between instructions and the data upon which they operate, though both may reside within the same physical memory organ."*  
+> — **John von Neumann**, *First Draft of a Report on the EDVAC* (1945)
+
 ## Learning objective
 
 Trace how the CPU fetches, decodes, and executes compiled machine instructions from system memory.
@@ -196,15 +199,39 @@ Modern high-performance backend engineering demands mechanical sympathy. When op
 - Sequential memory iteration is up to 50x faster than random memory pointer chasing due to CPU hardware prefetching.
 - Tight loops that fit entirely within the CPU's L1 Instruction Cache (L1i, typically 32 KB) run with zero instruction fetch latency.
 
+## Practice task
+
+1. Open `main.go` and trace an additional instruction step in the simulated pipeline:
+   - Add a `SUBQ` instruction subtracting `10` from `RAX` (Hex opcode `48 83 e8 0a`).
+   - Observe how the step updates the simulated ALU register state.
+2. Compile the lesson code into an executable:
+   ```bash
+   go build -o test_bin ./curriculum/modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process
+   ```
+3. Use the Go disassembler tool to view real machine instructions in the compiled binary:
+   - On Linux/macOS: `go tool objdump -s main.main test_bin | head -n 30`
+   - On Windows PowerShell: `go tool objdump -s main.main test_bin.exe | Select-Object -First 30`
+4. Find the `MOVQ`, `CALL`, and `RET` machine instructions emitted by the compiler and compare them with the mental model.
+
 ## Tests / verification
 
-1. Run the example program: `go run ./curriculum/modules/01-computers-terminal-git-web/02-source-code-executable-and-process`.
-2. Inspect the printed CPU architecture, logical core count, and process PID.
-3. Build a binary of the example: `go build -o test_bin ./curriculum/modules/01-computers-terminal-git-web/02-source-code-executable-and-process`.
-4. Inspect the compiled machine instructions using the Go disassembler:
+1. Run the automated tests for the lesson:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process
+   ```
+2. Run the lesson program directly:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process
+   ```
+3. Inspect the printed CPU architecture, logical core count, and process PID.
+4. Build a binary of the example:
+   ```bash
+   go build -o test_bin ./curriculum/modules/01-computers-terminal-git-web/lessons/02-source-code-executable-and-process
+   ```
+5. Inspect the compiled machine instructions using the Go disassembler:
    - On Linux/macOS: `go tool objdump -s main.main test_bin | head -n 25`
    - On Windows PowerShell: `go tool objdump -s main.main test_bin.exe | Select-Object -First 25`
-5. Observe how every line of Go code maps directly to machine assembly instructions (`TEXT`, `SUBQ`, `MOVQ`, `CALL`, `RET`).
+6. Observe how every line of Go code maps directly to machine assembly instructions (`TEXT`, `SUBQ`, `MOVQ`, `CALL`, `RET`).
 
 ## Review questions
 

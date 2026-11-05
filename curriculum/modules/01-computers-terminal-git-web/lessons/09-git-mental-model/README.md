@@ -1,5 +1,8 @@
 # Git mental model
 
+> *"In many ways you can look at git as a filesystem — it's content-addressable, and it has a notion of versioning, but I really really designed it from the point of view of a filesystem person."*  
+> — **Linus Torvalds** (2007)
+
 ## Learning objective
 
 Formulate a mental model of Git as a content-addressable directed acyclic graph (DAG) of immutable snapshots.
@@ -179,11 +182,32 @@ Git is the de facto standard for version control in the software industry. Every
 - Git's object store uses zlib compression, reducing disk usage by 30-70% compared to storing raw files.
 - Large binary files bloat Git history — Git is optimized for text files that diff well.
 
+## Practice task
+
+1. Open `main.go` and add a new function `NewTree(entries map[string]string) string` that hashes directory entry names and their associated blob hashes.
+2. Create two commits in `main()` with different messages but pointing to the same tree object hash.
+3. Observe how Git's DAG decouples commit metadata (author, message, parent) from underlying content trees.
+4. Run low-level Git plumbing in your terminal:
+   ```bash
+   echo "zero magic git" | git hash-object --stdin
+   ```
+   Compare the 40-character SHA-1 output with the mental model.
+
 ## Tests / verification
 
-1. Initialize a new Git repository: `git init test-model && cd test-model`.
-2. Create three commits (add a file, modify it, modify it again). Run `git log --oneline --graph` and explain the commit DAG.
-3. Use `git diff <commit1> <commit2>` to show changes between two commits. Then inspect an object directly: `git cat-file -p <commit-hash>`.
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/09-git-mental-model
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/09-git-mental-model
+   ```
+3. Test Git DAG inspection manually:
+   - Initialize a new temporary Git repository: `git init test-model && cd test-model`.
+   - Create three commits (add a file, modify it, modify it again).
+   - Run `git log --oneline --graph` and inspect the commit DAG.
+   - Inspect the object database directly: `git cat-file -p HEAD`. Notice how it points to a `tree` hash, an author timestamp, and a parent commit hash.
 
 The [Shell + Git Lab](../../projects/shell-git-lab/README.md) will ask you to apply this mental model directly — you will init a real repository, examine .git/objects, create commits, and verify the DAG with `git log --graph`.
 

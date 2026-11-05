@@ -1,5 +1,8 @@
 # What is a program?
 
+> *"A computer is a machine that can be instructed to carry out sequences of arithmetic or logical operations automatically."*  
+> — **Alan Turing**, *Computing Machinery and Intelligence* (1950)
+
 ## Learning objective
 
 Distinguish between source code text, compiled machine binaries, and active operating system processes in execution.
@@ -134,11 +137,31 @@ Every day, developers write code, compile it, and run it. When a build fails, th
 - Compiled programs (Go, C, Rust) have a build step but run at near-native CPU speed.
 - JIT-compiled programs (Java, JavaScript V8) warm up over time, starting slow then approaching compiled speed.
 
+## Practice task
+
+1. Open `main.go` and add `runtime.Version()` to the active process metadata printout.
+2. Compile the source file into a standalone binary:
+   ```bash
+   go build -o program_demo .
+   ```
+3. Run the binary directly from your terminal (`./program_demo` or `.\program_demo.exe`).
+4. Inspect the difference between the source code file and the compiled binary on disk:
+   - On Linux/macOS: `ls -lh main.go program_demo` and `file program_demo`
+   - On Windows PowerShell: `Get-Item main.go, program_demo.exe | Select-Object Name, Length`
+5. Observe how the source code is ~1-2 KB of human-readable text, while the binary is ~2 MB of machine instructions containing the complete Go runtime and standard library dependencies.
+
 ## Tests / verification
 
+Run the automated tests and verify the lesson binary:
+```bash
+go run ./curriculum/modules/01-computers-terminal-git-web/lessons/01-what-is-a-program
+go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/01-what-is-a-program
+```
+
+Follow up with conceptual inspection:
 1. Open your terminal and run a command like `ping localhost` (or `Get-Process -Name "explorer"` on PowerShell). Note that every running command is a **process** with a PID.
 2. Locate the executable on disk for a program you use daily (e.g., `where ping` / `Get-Command ping`). This is the **binary** — the compiled file stored on disk.
-3. The source code that produced that binary is human-readable text. Edit a simple text file, compile it, and observe: changing the source requires recompilation to affect the running process. (If you have Go installed, write a one-line `hello.go` and compile with `go build`.)
+3. The source code that produced that binary is human-readable text. Edit a simple text file, compile it, and observe: changing the source requires recompilation to affect the running process.
 4. Open Task Manager (Windows) or run `ps` (Linux/macOS) while a program runs. Confirm the process name matches a binary on disk and note its PID. Kill it with `kill <PID>` or `Stop-Process -Id <PID>` — the binary stays on disk but the process disappears.
 
 ## Review questions

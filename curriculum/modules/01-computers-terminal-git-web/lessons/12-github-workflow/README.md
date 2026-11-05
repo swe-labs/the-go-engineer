@@ -1,5 +1,8 @@
 # GitHub workflow
 
+> *"Continuous Integration doesn't get rid of bugs, but it does make them dramatically easier to find and remove."*  
+> — **Martin Fowler** (2006)
+
 ## Learning objective
 
 Manage remote repositories, synchronize branch refs via git fetch, push, and pull, and configure remote tracking branches.
@@ -191,11 +194,32 @@ GitHub is the largest code hosting platform in the world. Millions of developers
 - Large PRs (1000+ lines changed) are slower to review and more likely to have merge conflicts.
 - GitHub Actions CI adds 1-10 minutes per PR depending on test suite size.
 
+## Practice task
+
+1. Open `main.go` and add a new rule to `CanMerge()`: if `SourceBranch == TargetBranch`, return an error `"cannot merge a branch into itself"`.
+2. Add a `TestCanMerge_SelfBranch` unit test in `main_test.go` verifying that merging `main` into `main` fails.
+3. Run the tests using `go test -v .` to verify that your branch protection logic succeeds.
+4. Trace Git remote tracking refs in your terminal:
+   ```bash
+   git remote -v
+   git branch -r
+   ```
+   Identify the difference between local branches and remote-tracking `origin/` branches.
+
 ## Tests / verification
 
-1. Fork a public repository on GitHub, clone it locally, create a `feature` branch, make a change, commit it, and push the branch to your fork.
-2. Open a pull request on GitHub from your fork's feature branch to the original repo's main branch. Write a descriptive title and body.
-3. Explore the PR page: check the "Files changed" tab, leave a comment on a diff line, and verify the status checks section.
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/12-github-workflow
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/12-github-workflow
+   ```
+3. Test GitHub workflow concepts manually:
+   - Fork a public repository on GitHub, clone it locally, create a `feature` branch, make a change, commit it, and push the branch to your fork.
+   - Open a pull request on GitHub from your fork's feature branch to the original repo's main branch. Write a descriptive title and body.
+   - Explore the PR page: check the "Files changed" tab, leave a comment on a diff line, and verify the status checks section.
 
 In the [Shell + Git Lab](../../projects/shell-git-lab/README.md), you will use a local Git workflow that mirrors the GitHub fork-branch-PR cycle. Understanding remotes, pushes, and the propose-verify-merge pattern prepares you to publish your project to GitHub.
 

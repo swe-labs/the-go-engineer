@@ -1,5 +1,8 @@
 # How the OS manages processes
 
+> *"A process is basically a program in execution. Associated with each process is its address space, a list of memory locations from some minimum to some maximum."*  
+> — **Andrew S. Tanenbaum**, *Modern Operating Systems*
+
 ## Learning objective
 
 Analyze operating system process scheduling, virtual memory isolation, PID tracking, and process states (running, waiting, terminated).
@@ -182,17 +185,33 @@ In containerized microservice architectures (Kubernetes, Docker), understanding 
 - Go goroutines, by contrast, are user-space constructs: creating a goroutine takes ~0.2 microseconds and only 2 KB of initial stack memory.
 - Context switches between OS processes cause CPU cache pollution (L1/L2 caches lose locality), whereas goroutine switches avoid page-table switches.
 
+## Practice task
+
+1. Open `main.go` and add a new field `NumGoroutine int` to `ProcessMetadata`, populating it with `runtime.NumGoroutine()`.
+2. Observe how the Go runtime initializes a few background goroutines (such as the garbage collector and finalizer goroutines) even in a simple program.
+3. Run the program and verify the child process execution:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes
+   ```
+4. Confirm that the child process outputs `Hello from Child Process` and reports exit code `0`.
+
 ## Tests / verification
 
-1. Inspect the process tree on your operating system:
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/07-how-the-os-manages-processes
+   ```
+3. Inspect the process tree on your operating system:
    - Linux / macOS: Run `pstree -p` or `ps -ef` to see parent-child PID relationships.
    - Windows PowerShell: Run `Get-Process | Select-Object -First 10 Id, ProcessName, CPU`
-2. Test signal handling in your terminal:
+4. Test signal handling in your terminal:
    - Start a long-running command: `sleep 100` (POSIX) or `Start-Sleep 100` (PowerShell).
    - Press `Ctrl+C` to send `SIGINT` and verify the process terminates immediately.
-3. Observe process PID and PPID using the example Go program:
-   - Run `go run ./curriculum/modules/01-computers-terminal-git-web/07-how-the-os-manages-processes`.
-   - Confirm that PPID matches the process ID of your terminal shell.
+5. Confirm that PPID in the program output matches the process ID of your terminal shell.
 
 ## Review questions
 

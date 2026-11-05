@@ -1,23 +1,88 @@
 # Module 01: Computers, Terminal, Git, and the Web
 
-## Learning goal
+## Mission
 
-Make the machine, shell, Git, GitHub, and web basics feel safe before Go syntax.
+> *"The computer is incredibly fast, accurate, and stupid. Man is incredibly slow, inaccurate, and brilliant. The marriage of the two is a challenge and a war beyond imagination."* — Stuart G. Walesh / Richard Feynman
 
-## Summary
+This module establishes the foundational systems mental models every software engineer needs before writing syntax.
 
-This module builds the foundational mental models every software engineer needs before writing a single line of Go. You will learn what a program actually is — from source code to executable to running process — and how the operating system manages files, processes, and memory. These concepts remove the magic from compilation, debugging, and deployment.
+You will learn what a program physically is — from source text to compiled binary to active operating system process — and how the kernel manages files, processes, memory address spaces, and hardware registers. These concepts eliminate the "magic" from compilation, segmentation faults, and deployment.
 
-With that foundation in place, you will gain terminal fluency: navigating the filesystem, running commands, piping data, and reading exit codes. You will then master Git — not just memorizing commands but understanding its object model, branching mechanics, and the GitHub pull request workflow that powers modern collaboration. Finally, you will get a preview of the web: how DNS resolves domain names, how TCP connections carry HTTP requests and responses, and how clients and servers communicate across the internet.
+With that machine foundation established, you will gain terminal fluency: navigating filesystem hierarchies, chaining commands, redirecting streams, and harvesting exit codes. You will master Git's content-addressable Directed Acyclic Graph (DAG) of immutable snapshots, branching mechanics, and the pull request workflow that powers modern engineering teams. Finally, you will explore the networking bedrock of the web: DNS name resolution, the TCP 3-way handshake, port multiplexing, and the HTTP request-response wire format.
+
+## Tracks in this curriculum
+
+The curriculum organizes your engineering journey into three coordinated tracks:
+
+1. **Core Backend Path (`curriculum/modules/`):** Module 01 is the mandatory foundation following Module 00 Orientation. It bridges physical hardware abstractions to developer tooling, preparing you directly for Module 02 (Go Foundations) and beyond.
+2. **Advanced Electives (`curriculum/electives/`):** The process scheduling, memory allocation (stack vs heap), and TCP socket models learned here are direct prerequisites for advanced electives in systems programming, eBPF, and distributed consensus.
+3. **[Frontend Companion Track](../../companion-frontend/README.md) (`curriculum/companion-frontend/`):** The network protocols and HTTP request/response wire formats introduced in Lessons 14–15 form the architectural foundation for building hypermedia web UIs (`templ`, `HTMX`, `Tailwind CSS`) running alongside Modules 07–15.
+
+## Who this module is for
+
+This module is designed for:
+
+- Aspiring software engineers and career transitioners who want to build durable systems understanding rather than superficial syntax tricks.
+- Self-taught programmers who find terminal commands, Git merge conflicts, or compiler errors mysterious or stressful.
+- Experienced developers from interpreted languages (Python, JavaScript, Ruby) who want to understand machine compilation, process memory models, and native binary execution.
+- Engineers seeking mechanical sympathy for how CPU registers, operating system kernels, and network sockets collaborate.
+
+## What you will build
+
+Throughout this module and its capstone lab, you will build and verify concrete systems artifacts:
+
+- Cross-platform filesystem navigation and manipulation scripts.
+- Multi-command shell pipelines with independent standard stream (`stdin`, `stdout`, `stderr`) redirection.
+- A fully initialized local Git repository featuring feature branches, 3-way merges, and resolved merge conflicts.
+- A functional Go networking harness that resolves DNS records, binds ephemeral TCP sockets, and inspects HTTP request/response wire data.
+- Automated verification evidence passing 14/14 automated checks via `verify.ps1` and `verify.sh`.
 
 ## Prerequisites
 
-- Module 00 — Orientation
+- [Module 00: Orientation](../00-orientation/README.md)
+
+You should be able to:
+- Open a terminal emulator on your operating system (Windows Terminal, iTerm2, Alacritty, or Bash).
+- Clone this repository locally.
+- Run Go toolchain commands (`go version`).
+
+## Concept map
+
+```mermaid
+flowchart TD
+    subgraph Part1["1. Computing & OS Architecture"]
+        L01["01. What is a Program?<br/><i>Source → Binary → Process</i>"] --> L02["02. Source Code, Executable & Process<br/><i>CPU Fetch-Decode-Execute</i>"]
+        L02 --> L03["03. Files, Bytes & Paths<br/><i>Inodes, CRLF vs LF, File Descriptors</i>"]
+    end
+
+    subgraph Part2["2. Terminal & Process Management"]
+        L03 --> L04["04. Terminal Basics<br/><i>Piping, Redirection, Shell REPL</i>"]
+        L04 --> L05["05. Environment Variables<br/><i>Process Memory, One-Way Inheritance, $PATH</i>"]
+        L05 --> L06["06. Exit Codes<br/><i>0 vs Non-Zero, POSIX Signals</i>"]
+        L06 --> L07["07. How OS Manages Processes<br/><i>PCB, Scheduling, Context Switching</i>"]
+        L07 --> L08["08. Memory Preview: Stack vs Heap<br/><i>LIFO Frames vs Allocator Arena</i>"]
+    end
+
+    subgraph Part3["3. Git & Distributed Version Control"]
+        L08 --> L09["09. Git Mental Model<br/><i>Content-Addressable DAG, Blobs, Trees, Commits</i>"]
+        L09 --> L10["10. Git Basics<br/><i>Working Tree → Staging Area → Repository</i>"]
+        L10 --> L11["11. Branching & Merging<br/><i>Movable Pointers, 3-Way Merges, Conflict Markers</i>"]
+        L11 --> L12["12. GitHub Workflow<br/><i>Forks, Remotes, Tracking Refs, CI Gates</i>"]
+        L12 --> L13["13. Pull Requests & Code Review<br/><i>Conventional Comments, Cognitive Load</i>"]
+    end
+
+    subgraph Part4["4. Web & Network Foundations"]
+        L13 --> L14["14. Web Preview: Client, Server, DNS & Ports<br/><i>IP Routing, TCP 3-Way Handshake, Sockets</i>"]
+        L14 --> L15["15. HTTP Request & Response Preview<br/><i>Wire Format, Status Codes, REST Semantics</i>"]
+    end
+
+    Part4 --> Capstone["Capstone: Shell + Git Lab<br/><i>14/14 Automated Verification Checks</i>"]
+```
 
 ## Lessons
 
-| # | Lesson | Outcome |
-|---|--------|---------|
+| Order | Lesson | Outcome |
+| :---: | :--- | :--- |
 | 1 | [What is a program?](./lessons/01-what-is-a-program/README.md) | Distinguish source code, compiled binary, and running process; explain the three-part lifecycle of any program. |
 | 2 | [Source code, executable, and process](./lessons/02-source-code-executable-and-process/README.md) | Trace how the CPU fetches, decodes, and executes compiled machine instructions from system memory using registers and the ALU. |
 | 3 | [Files, bytes, directories, and paths](./lessons/03-files-bytes-directories-and-paths/README.md) | Navigate the filesystem tree, understand how bytes map to content, and write cross-platform Go file operations. |
@@ -34,18 +99,59 @@ With that foundation in place, you will gain terminal fluency: navigating the fi
 | 14 | [Web preview: client, server, DNS, and ports](./lessons/14-web-preview-client-server-dns-and-ports/README.md) | Resolve domain names to IPs, establish TCP connections, and explain how a browser loads a webpage. |
 | 15 | [HTTP request and response preview](./lessons/15-http-request-and-response-preview/README.md) | Start an HTTP server, send GET requests, read status codes and headers, and understand the request-response cycle. |
 
-## Project
+## Labs
 
-[**Shell + Git Lab**](./projects/shell-git-lab/README.md) — A hands-on lab where you practice terminal navigation, filesystem operations, and the full Git workflow: initialize a repository, create branches, make commits, merge changes, and resolve a simulated merge conflict. This project reinforces every lesson in the module and produces a terminal + Git workflow you can demonstrate.
+Module 01 integrates guided terminal, Git, and networking drills into every lesson:
+
+- **Filesystem & Stream Lab (Lessons 03 & 04):** Creating directory trees, testing CRLF line endings, and piping stdout/stderr into separate buffers.
+- **Process & Signal Lab (Lessons 06 & 07):** Capturing child exit statuses, inspecting `$PATH` resolution, and triggering graceful terminations.
+- **Git DAG Plumbing Drill (Lessons 09–11):** Inspecting `.git/objects/` with `git cat-file` and resolving multi-line merge conflicts.
+
+## Projects
+
+Module 01 culminates in a comprehensive hands-on project capstone:
+
+- [**Shell + Git Lab**](./projects/shell-git-lab/README.md) — A complete terminal and Git lab where you construct a multi-tier project directory tree, initialize a local Git repository, manage feature branch lifecycles, execute three-way merges, resolve simulated merge conflicts, and verify repository health against an automated 14-point test suite (`verify.ps1` / `verify.sh`).
 
 ## Assessments
 
-[**Shell + Git Lab Assessment**](./assessments/shell-git-lab/README.md) — A 30-minute assessment covering shell commands, Git fundamentals, and web concepts from the module. Includes multiple-choice and short-answer questions with a detailed rubric.
+Evaluate your conceptual and operational mastery with the module assessment suite:
 
-## Estimated time
+- [**Shell + Git Lab Assessment**](./assessments/shell-git-lab/README.md) — A 30-minute structured assessment covering shell streams, process isolation, Git DAG mechanics, and network protocol layers.
+  - Diagnostic review questions: [`questions.md`](./assessments/shell-git-lab/questions.md)
+  - Detailed evaluation rubric: [`rubric.md`](./assessments/shell-git-lab/rubric.md)
+  - Comprehensive answer key: [`answer-key.md`](./assessments/shell-git-lab/answer-key.md)
 
-~750 minutes (15 lessons × 45 min + 60 min project + 30 min assessment)
+## Common failure modes
 
-## NEXT UP
+| Failure Mode | Observable Symptom | Root Cause | Engineering Fix |
+|---|---|---|---|
+| **CRLF Script Termination** | `/bin/bash^M: bad interpreter: No such file or directory` | Windows carriage return bytes (`\r\n`) committed to shell scripts | Normalize line endings via `dos2unix` or configure `.gitattributes` to force `LF` on scripts. |
+| **Stream Blindness** | `cmd > output.log` passes silently, but errors still print to terminal and logs are incomplete | Single `>` only redirects `stdout` (fd 1); diagnostic errors and panics write to `stderr` (fd 2) | Redirect both streams: `cmd > output.log 2>&1`. |
+| **Environment Variable Leak Assumption** | Child script modifies an environment variable, but parent terminal shell remains unchanged | Environment variables have one-way inheritance and process-level isolation | Use `source script.sh` if parent shell mutation is intended, or pass values via stdout pipes. |
+| **Silent Force-Push Overwrite** | Teammates' remote commits vanish without warning after a rebase | Running `git push --force` unconditionally updates remote refs | Standardize on `git push --force-with-lease` across all workflows and protect `main`. |
+| **Port Collision** | `listen tcp :8080: bind: address already in use` | Another active process or orphaned daemon is holding socket port 8080 | Identify PID via `lsof -i :8080` or `netstat -ano`, terminate holding process, or configure dynamic ephemeral ports (`:0`). |
 
-Complete the [Shell + Git Lab](./projects/shell-git-lab/README.md) project, then take the [Module 01 assessment](./assessments/shell-git-lab/README.md) before moving on.
+## Completion checklist
+
+You are ready to advance to Module 02 when you can:
+
+- [ ] Explain the three-part program lifecycle (source code on disk → executable binary → active OS process in memory).
+- [ ] Describe the CPU Instruction Cycle (Fetch, Decode, Execute, Advance) and explain the role of `RIP` and hardware registers.
+- [ ] Explain the difference between file descriptors 0 (stdin), 1 (stdout), and 2 (stderr), and use redirection operators (`>`, `>>`, `2>`, `|`).
+- [ ] Read and set environment variables, and explain how `$PATH` command resolution works.
+- [ ] Interpret standard exit codes (0 for success, non-zero for failure, 137 for OOM, 143 for SIGTERM).
+- [ ] Differentiate Call Stack allocation from Dynamic Heap allocation and understand compiler Escape Analysis.
+- [ ] Explain Git's object model (blobs, trees, commits) as a content-addressable DAG.
+- [ ] Execute a full Git branching, 3-way merging, and conflict resolution cycle.
+- [ ] Describe DNS resolution, the TCP 3-way handshake, port demultiplexing, and HTTP wire format.
+- [ ] Pass all 14/14 checks in the Shell + Git Lab verification suite (`./verify.ps1` or `./verify.sh`).
+- [ ] Complete the Shell + Git Lab assessment scoring at least 70%.
+
+## Next module
+
+After completing this module, advance to:
+
+[Module 02: Go Foundations](../02-go-foundations/README.md)
+
+In Module 02, you will write your first real Go programs, mastering packages, modules, entrypoints, type systems, variables, constants, and the Go toolchain.
