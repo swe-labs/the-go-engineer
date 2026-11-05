@@ -57,7 +57,7 @@ If those commands are unfamiliar, continue anyway. Module 01 and Module 02 will 
 
 ```mermaid
 flowchart TD
-    M01["01. Repository Map<br/><i>curriculum/, internal/tools/, web/, .agents/</i>"] --> M02["02. Zero-Magic Contract<br/><i>No hidden defaults, explicit invariants</i>"]
+    M01["01. Repository Map<br/><i>curriculum/, internal/tools/, web/, scripts/</i>"] --> M02["02. Zero-Magic Contract<br/><i>No hidden defaults, explicit invariants</i>"]
     M02 --> M03["03. Four Content Types<br/><i>Lesson → Lab → Project → Checkpoint</i>"]
     M03 --> M04["04. Toolchain Execution<br/><i>go run, go test, go build, go vet</i>"]
     M04 --> M05["05. Dual-State Scaffolds<br/><i>_starter/ vs _solution/ workflows</i>"]
@@ -122,7 +122,7 @@ Complete the two Module 00 assessments:
 
 You are ready for Module 01 when you can:
 
-- [ ] explain the difference between `curriculum/`, `internal/tools/`, `web/`, and `.agents/`
+- [ ] explain the difference between `curriculum/`, `internal/tools/`, `web/`, and `scripts/`
 - [ ] find a lesson README from its metadata path
 - [ ] explain zero magic in your own words
 - [ ] run at least one lesson example
