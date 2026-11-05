@@ -1,5 +1,8 @@
 # Web preview: client, server, DNS, and ports
 
+> *"The internet is based on a very simple idea: move the data from here to there without paying attention to what the data is."*  
+> — **Vint Cerf**, co-designer of TCP/IP (Turing Award Lecture, 2004)
+
 ## Learning objective
 
 Trace the client-server architecture of the Web, resolving domain names via DNS and connecting over TCP ports.
@@ -199,18 +202,30 @@ In cloud-native production environments (AWS, GCP, Kubernetes), DNS and ports di
 - A TCP 3-way handshake requires one full network Round Trip Time (RTT, ~20–100 ms over the internet) before any HTTP data can be transmitted.
 - HTTPS connections require an additional TLS handshake (~1–2 additional RTTs), which is why HTTP/2 and HTTP/3 support connection reuse and persistent keep-alive connections.
 
+## Practice task
+
+1. Open `main.go` and add `"golang.org"` to the DNS lookup routine.
+2. Observe whether the domain returns multiple `A` records (IPv4 addresses) for load balancing.
+3. Modify the server message in `main.go` to send a personalized greeting string over the TCP socket before closing.
+4. Run `go run .` and observe the client reading the socket response.
+
 ## Tests / verification
 
-1. Query DNS records from your terminal:
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/14-web-preview-client-server-dns-and-ports
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/14-web-preview-client-server-dns-and-ports
+   ```
+3. Query DNS records from your terminal:
    - POSIX: `dig example.com` or `host example.com`
    - Windows PowerShell: `Resolve-DnsName example.com`
    - Observe the returned `A` record containing the IPv4 address.
-2. Inspect active listening ports on your machine:
+4. Inspect active listening ports on your machine:
    - Linux/macOS: `netstat -tuln` or `lsof -i -P -n | grep LISTEN`
    - Windows PowerShell: `Get-NetTCPConnection -State Listen | Select-Object -First 10 LocalAddress, LocalPort, OwningProcess`
-3. Run the Go networking example:
-   - `go run ./curriculum/modules/01-computers-terminal-git-web/14-web-preview-client-server-dns-and-ports`
-   - Confirm DNS resolution, TCP listener binding, and ephemeral port connection.
 
 ## Review questions
 

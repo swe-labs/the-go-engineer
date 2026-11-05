@@ -1,5 +1,8 @@
 # Environment variables
 
+> *"An operating system should provide an environment in which users can cooperate without getting in each other's way."*  
+> — **Brian W. Kernighan & Rob Pike**, *The UNIX Programming Environment* (1984)
+
 ## Learning objective
 
 Read, set, and inherit environment variables across parent and child processes in POSIX and Windows environments.
@@ -205,18 +208,35 @@ The **Twelve-Factor App methodology** dictates that configuration must be strict
 - Huge environment blocks (megabytes of data) increase memory duplication cost during process fork operations.
 - Long `$PATH` lists with non-existent network mounted directories can introduce noticeable command lookup latency in interactive shells.
 
+## Practice task
+
+1. In your terminal, export a custom environment variable:
+   - POSIX: `export APP_PORT="8080"`
+   - PowerShell: `$env:APP_PORT = "8080"`
+2. Modify `main.go` to add `APP_PORT` to the `targetKeys` slice.
+3. Run the program and verify that `APP_PORT` is displayed as `✓ APP_PORT = "8080"`.
+4. Open a second terminal window where `APP_PORT` was never exported and run the program again. Verify that it prints `✗ APP_PORT = (unset)`, confirming strict process isolation.
+
 ## Tests / verification
 
-1. Open your terminal and set a test environment variable:
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/05-environment-variables
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/05-environment-variables
+   ```
+3. Test environment variables manually in your terminal:
    - Bash: `export TEST_TOKEN="supersecret123"`
    - PowerShell: `$env:TEST_TOKEN = "supersecret123"`
-2. Verify the variable is set in the current shell:
+4. Verify the variable is set in the current shell:
    - Bash: `echo $TEST_TOKEN`
    - PowerShell: `echo $env:TEST_TOKEN`
-3. Launch a child shell and verify inheritance:
+5. Launch a child shell and verify one-way inheritance:
    - Bash: `bash -c 'echo "Child sees: $TEST_TOKEN"'`
    - PowerShell: `powershell -Command 'Write-Host "Child sees: $env:TEST_TOKEN"'`
-4. Open a completely new terminal window and verify isolation:
+6. Open a completely new terminal window and verify isolation:
    - Notice the variable is unset in the new window, proving process isolation.
 
 ## Review questions

@@ -1,5 +1,8 @@
 # Pull requests and code review
 
+> *"Given enough eyeballs, all bugs are shallow."*  
+> — **Eric S. Raymond**, *The Cathedral and the Bazaar* (1999) (Linus's Law)
+
 ## Learning objective
 
 Author professional GitHub Pull Requests, review peer diffs, and address code review feedback iteratively.
@@ -176,11 +179,28 @@ Every professional software team uses code review. Google mandates at least one 
 - Thorough code review catches 60-70% of defects before they reach production, saving 10x the cost of fixing them later.
 - Mechanical style issues should be automated (formatters, linters) so reviewers can focus on logic and design.
 
+## Practice task
+
+1. Open `main.go` and add a blocking review comment to `comments`:
+   - Line 11: `"issue: sql.Open does not validate credentials; call db.Ping() or connection will remain unverified."`
+   - Set `IsBlocking: true`.
+2. Run the program and verify that the merge decision transitions from `APPROVED` to `CHANGES REQUESTED`.
+3. Simulate author response: add a diff line fixing the issue (`db.PingContext(ctx)`), clear the blocking comment, and re-run to verify transition back to `APPROVED`.
+
 ## Tests / verification
 
-1. Open a pull request on GitHub (or use an existing open PR on a public repo like `golang/go`). Read the diff in the "Files changed" tab.
-2. Leave at least three inline comments: one suggesting a functional improvement, one asking for clarification, and one praising a well-written section.
-3. Practice the review workflow: request changes, then approve. Note how the PR status changes after each action.
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review
+   ```
+3. Test code review practices in an open-source repo:
+   - Open a pull request on GitHub (e.g., on a public repo like `golang/go`). Read the diff in the "Files changed" tab.
+   - Categorize comments using Conventional Comments (`issue:`, `suggestion:`, `nit:`, `question:`).
+   - Verify how the PR status transitions from "Review required" to "Approved" or "Changes requested".
 
 Although the [Shell + Git Lab](../../projects/shell-git-lab/README.md) is a local repository exercise, the code review skills you learn here — writing clear descriptions, reading diffs, leaving constructive feedback — apply directly when you share your project on GitHub and open your first real PR.
 

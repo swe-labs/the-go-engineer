@@ -1,5 +1,8 @@
 # Memory preview: stack vs heap
 
+> *"Data dominates. If you've chosen the right data structures and organized things well, the algorithms will almost always be self-evident; data structures, not algorithms, are central to programming."*  
+> — **Rob Pike**, *Notes on Programming in C* (1989)
+
 ## Learning objective
 
 Compare memory layout structures, distinguishing the fast automatic lifecycle of the call stack from the heap allocator.
@@ -171,15 +174,34 @@ In modern cloud environments, understanding stack vs. heap allocation is the div
 - **Heap Allocation:** ~20–50 nanoseconds (allocator search, span locking, metadata tracking).
 - **Garbage Collection Sweep:** Costs CPU background cycles proportional to the number of live pointers on the heap.
 
+## Practice task
+
+1. Open `main.go` and inspect the two functions `StackValue()` and `HeapValue()`.
+2. Run the compiler escape analysis tool:
+   ```bash
+   go build -gcflags="-m" ./curriculum/modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap
+   ```
+3. Locate the compiler output for `HeapValue()`:
+   - Identify the line that says `moved to heap: x`.
+   - Explain why `StackValue()` does not have a corresponding `moved to heap` line.
+4. Add a function `LargeArrayOnStack() [1024]int` that creates a 1024-element int array and returns it by value. Re-run `go build -gcflags="-m"` to see if it stays on the stack or escapes.
+
 ## Tests / verification
 
-1. Run the example program: `go run ./curriculum/modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap`.
-2. Inspect the printed output, noticing how the pointer address (`0xc000...`) points to a memory location in the process heap.
-3. Verify escape analysis using the Go compiler flag:
+1. Run the automated lesson tests:
    ```bash
-   go build -gcflags="-m" ./curriculum/modules/01-computers-terminal-git-web/08-memory-preview-stack-vs-heap
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap
    ```
-4. Observe the compiler output lines:
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap
+   ```
+3. Inspect the printed output, noticing how the pointer address (`0xc000...`) points to a memory location in the process heap.
+4. Verify escape analysis using the Go compiler flag:
+   ```bash
+   go build -gcflags="-m" ./curriculum/modules/01-computers-terminal-git-web/lessons/08-memory-preview-stack-vs-heap
+   ```
+5. Observe the compiler output lines:
    - Notice lines like: `moved to heap: x` or `make([]int, n) escapes to heap`.
    - This proves the Go compiler made the stack vs. heap decision at compile time!
 

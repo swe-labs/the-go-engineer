@@ -1,5 +1,8 @@
 # Git basics: status, add, commit
 
+> *"Git is a very simple tool, but it's very flexible... A commit is just a snapshot."*  
+> — **Linus Torvalds** (2007)
+
 ## Learning objective
 
 Initialize repositories, stage changes, create atomic commits with clear messages, and inspect repository status and diffs.
@@ -201,11 +204,32 @@ The status-add-commit cycle is performed dozens of times daily by every professi
 - Large repositories (100k+ files) slow down git status — use .gitignore to exclude build artifacts and dependencies.
 - Git's index file scales with the number of tracked files — performance degrades linearly.
 
+## Practice task
+
+1. Open `main.go` and implement an `UnstageAll()` method on `Repo` that clears the staging map without touching working files.
+2. In `main()`, stage `hello.txt`, call `UnstageAll()`, and assert that `StageNames()` is empty.
+3. Test staging behavior in your terminal:
+   - Create a scratch repo: `git init scratch && cd scratch`
+   - Create `file1.txt` and `file2.txt`.
+   - Stage only `file1.txt`: `git add file1.txt`.
+   - Run `git status` and observe `file1.txt` staged in green, `file2.txt` untracked in red.
+
 ## Tests / verification
 
-1. Create a repository, add a file, and stage it with `git add`. Modify the file again without staging — run `git status` and note the file appears in both "staged" and "unstaged" sections.
-2. Use `git diff` to see unstaged changes and `git diff --staged` to see staged changes. Commit the staged version with `git commit -m "feat: add initial file"`.
-3. Run `git log --oneline` and confirm the commit shows up with your message. Then modify the file, stage it, and amend the commit with `git commit --amend`.
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/10-git-basics-status-add-commit
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/10-git-basics-status-add-commit
+   ```
+3. Test status, staging, and commit cycles manually:
+   - Create a repository, add a file, and stage it with `git add`.
+   - Modify the file again without staging — run `git status` and note the file appears in both "staged" and "unstaged" sections.
+   - Use `git diff` to see unstaged changes and `git diff --staged` to see staged changes.
+   - Commit the staged version with `git commit -m "feat: add initial file"`.
+   - Run `git log --oneline` and confirm the commit shows up with your message.
 
 In the [Shell + Git Lab](../../projects/shell-git-lab/README.md), you will practice this exact workflow: initialize a repo, create files, stage them, commit with meaningful messages, and verify the history. The project verification script checks that staged files produce the expected commit graph.
 

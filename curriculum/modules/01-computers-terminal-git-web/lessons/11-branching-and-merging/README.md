@@ -1,5 +1,8 @@
 # Branching and merging
 
+> *"Branches are cheap. Use them. If you make a branch for every little thing, you will find that you can throw things away easily and keep the good stuff."*  
+> — **Linus Torvalds** (2007)
+
 ## Learning objective
 
 Create, switch, and merge Git branches, resolving merge conflicts and inspecting commit DAG ancestry with git log.
@@ -199,11 +202,30 @@ Branching strategies (Git Flow, GitHub Flow, Trunk-Based Development) are founda
 - Merge conflicts require manual resolution, which can take minutes to hours depending on complexity.
 - Rebasing rewrites commit history (new hashes for existing changes), which is fast but forces other developers to re-sync.
 
+## Practice task
+
+1. Open `main.go` and add a new branch `hotfix` off commit `c0`.
+2. Add a commit to `hotfix` that changes `security.go`.
+3. Simulate merging `hotfix` into `main` and assert that no conflict occurs since `security.go` was not modified on `main`.
+4. Test branch creation in your local terminal:
+   - Run `git branch feature-test`
+   - Run `git switch feature-test` (or `git checkout feature-test`)
+   - Check `.git/HEAD` to see it points to `refs/heads/feature-test`.
+
 ## Tests / verification
 
-1. Create a repo, create a `feature` branch, commit two changes. Check out `main` and make a different change. Merge `feature` into `main` — observe either a fast-forward or three-way merge depending on the diverged history.
-2. Run `git log --oneline --graph` and note the commit DAG.
-3. Create a deliberate merge conflict: edit the same line on two branches, attempt merge, open the conflicted file, identify the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`), resolve the conflict, add and commit.
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/11-branching-and-merging
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/11-branching-and-merging
+   ```
+3. Test branching and merging manually:
+   - Create a repo, create a `feature` branch, commit two changes. Check out `main` and make a different change. Merge `feature` into `main` — observe either a fast-forward or three-way merge depending on the diverged history.
+   - Run `git log --oneline --graph` and note the commit DAG.
+   - Create a deliberate merge conflict: edit the same line on two branches, attempt merge, open the conflicted file, identify the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`), resolve the conflict, add and commit.
 
 The [Shell + Git Lab](../../projects/shell-git-lab/README.md) requires you to create branches, switch between them, merge, and resolve a simulated conflict — the same skills this lesson teaches. The verification script enforces that your branch graph and merge history are correct.
 

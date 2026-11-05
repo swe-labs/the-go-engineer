@@ -1,5 +1,8 @@
 # Files, bytes, directories, and paths
 
+> *"In Unix, everything is a stream of bytes. A file is just a stream of bytes."*  
+> — **Ken Thompson**, co-creator of Unix, B, and Go (Turing Award Lecture, 1983)
+
 ## Learning objective
 
 Inspect filesystem hierarchies, file descriptors, binary byte representations, and absolute vs relative paths.
@@ -236,16 +239,36 @@ In high-concurrency microservices, improper file descriptor management and path 
 - Deep directory path traversal requires multiple inode lookups from disk or page cache.
 - Modern SSDs deliver high random read throughput, but unbuffered sequential writes still benefit significantly from kernel write-back caching.
 
+## Practice task
+
+1. Open `main.go` and implement a helper function `DetectLineEndings(content []byte) string`:
+   - Returns `"CRLF (Windows)"` if `\r\n` is present.
+   - Returns `"LF (POSIX / Linux / macOS)"` if `\n` is present without `\r`.
+   - Returns `"None / Single Line"` if no newline bytes are detected.
+2. In `main()`, test this function against two strings: one created with `\r\n` and one with `\n`.
+3. Verify that your tests pass by running:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths
+   ```
+
 ## Tests / verification
 
-1. Create a directory and file using your terminal:
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/03-files-bytes-directories-and-paths
+   ```
+3. Test filesystem operations manually from your terminal:
    - Bash: `mkdir -p testdir && echo -e "hello\r\nworld" > testdir/hello.txt`
    - PowerShell: `New-Item -ItemType Directory -Path testdir -Force; "hello`r`nworld" | Out-File -FilePath testdir/hello.txt -Encoding ascii`
-2. Inspect the file metadata with `ls -la testdir` (Linux/macOS) or `Get-ChildItem testdir` (PowerShell). Note the byte size.
-3. Inspect the raw bytes to confirm line ending representation:
+4. Inspect the file metadata with `ls -la testdir` (Linux/macOS) or `Get-ChildItem testdir` (PowerShell). Note the byte size.
+5. Inspect the raw bytes to confirm line ending representation:
    - On Linux/macOS: `xxd testdir/hello.txt` or `hexdump -C testdir/hello.txt`
    - On Windows PowerShell: `Format-Hex testdir/hello.txt`
-4. Confirm whether you see `0d 0a` (`\r\n`) or `0a` (`\n`).
+6. Confirm whether you see `0d 0a` (`\r\n`) or `0a` (`\n`).
 
 ## Review questions
 

@@ -1,5 +1,8 @@
 # HTTP request and response preview
 
+> *"The Representational State Transfer (REST) style is an abstraction of the architectural elements within a distributed hypermedia system."*  
+> — **Roy Fielding**, co-author of the HTTP specification (2000)
+
 ## Learning objective
 
 Deconstruct HTTP requests and responses, inspecting request methods, URL paths, headers, status codes, and message bodies.
@@ -228,17 +231,33 @@ Modern production systems design APIs around clear HTTP semantics. REST APIs use
 - HTTP/1.1 requires a new request per connection or sequential pipeline; HTTP/2 and HTTP/3 multiplex hundreds of requests concurrently over a single TCP/QUIC connection.
 - Reading `resp.Body` lazily streams bytes as they arrive from the network; reading large files with `io.ReadAll()` loads the entire file into RAM, risking memory spikes.
 
+## Practice task
+
+1. Open `main.go` and add a third route handler: `/api/healthz`.
+2. Configure the handler to return an HTTP status code `200 OK` with JSON payload `{"status":"healthy","uptime":"ok"}`.
+3. In `main()`, send a client request to `/api/healthz` and verify the status code and JSON response body.
+4. Test an HTTP request with curl in your terminal:
+   ```bash
+   curl -i https://httpbin.org/get
+   ```
+   Inspect the raw response status line (`HTTP/2 200`), response headers, and payload.
+
 ## Tests / verification
 
-1. Test an HTTP request directly using terminal `curl`:
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/15-http-request-and-response-preview
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/15-http-request-and-response-preview
+   ```
+3. Test an HTTP request directly using terminal `curl`:
    - `curl -i https://httpbin.org/get`
    - Observe the printed raw status line (`HTTP/2 200`), response headers (`content-type`, `date`), and JSON body.
-2. Test error status codes:
+4. Test error status codes:
    - `curl -i https://httpbin.org/status/404` (Observe `404 Not Found`)
    - `curl -i https://httpbin.org/status/500` (Observe `500 Internal Server Error`)
-3. Run the Go HTTP example program:
-   - `go run ./curriculum/modules/01-computers-terminal-git-web/15-http-request-and-response-preview`
-   - Observe the live deconstructed HTTP headers and JSON payload.
 
 ## Review questions
 

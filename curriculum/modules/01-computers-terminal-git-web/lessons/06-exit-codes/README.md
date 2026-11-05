@@ -1,5 +1,8 @@
 # Exit codes
 
+> *"Simplicity is prerequisite for reliability."*  
+> — **Edsger W. Dijkstra** (1970)
+
 ## Learning objective
 
 Evaluate process exit codes (0 for success, non-zero for failure) to construct robust shell script error handling and CI pipelines.
@@ -44,7 +47,9 @@ Kernel exit status: 137 (128+9)"]
 
 Without exit codes, scripts would need to parse arbitrary strings like `"error"`, `"FAILED"`, or `"done"` — a fragile approach that breaks whenever log formats change, translations are added, or casing changes. A single standardized integer creates an unambiguous, universal machine-to-machine contract.
 
-## Standard Exit Code Reference
+## Under the hood
+
+### Standard Exit Code Reference
 
 While applications can define custom codes between 1 and 125, the software engineering industry adheres to standard conventions:
 
@@ -61,7 +66,7 @@ While applications can define custom codes between 1 and 125, the software engin
 | **137** | **Terminated by `SIGKILL` (128 + 9)** | Process was killed by `kill -9` or the OS **Out of Memory (OOM) Killer**. |
 | **143** | **Terminated by `SIGTERM` (128 + 15)**| Graceful termination request from Docker, Kubernetes, or system shutdown. |
 
-## Shell Evaluation and Automation
+### Shell Evaluation and Automation
 
 How the calling shell retrieves the exit code of the immediately preceding command:
 - **Bash / Zsh:** Special variable `$?`
@@ -174,15 +179,37 @@ In Kubernetes, Pod restart policies and health probes (Liveness and Readiness pr
 - Capturing an exit code is a zero-cost operation; the OS kernel already tracks process termination status in the process table.
 - Exit codes are restricted to 8 bits on POSIX systems (0–255); any integer greater than 255 is truncated via modulo 256 (`256 % 256 = 0`), which can accidentally turn a failure into a success!
 
+## Practice task
+
+1. Run the lesson program with an existing file:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/06-exit-codes README.md
+   ```
+   Inspect the exit code in your shell (`echo $?` in Bash or `$LASTEXITCODE` in PowerShell). Confirm it is `0`.
+2. Run the lesson program with a missing file:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/06-exit-codes missing.txt
+   ```
+   Inspect the exit code. Confirm it is `1`.
+3. Run the lesson program with no arguments:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/06-exit-codes
+   ```
+   Confirm it terminates with exit code `2` (Invalid Arguments).
+
 ## Tests / verification
 
-1. Run a command that succeeds and check its exit code:
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/06-exit-codes
+   ```
+2. Test commands directly in your terminal and check exit status:
    - Bash: `echo "hello" && echo $?` (Prints `0`)
    - PowerShell: `Write-Host "hello"; $LASTEXITCODE` (Or `$?`)
-2. Run a command that fails and check its exit code:
+3. Run a command that fails and check its exit code:
    - Bash: `ls /nonexistent_directory 2> /dev/null; echo $?` (Prints non-zero)
    - PowerShell: `Get-ChildItem C:\nonexistent_directory -ErrorAction SilentlyContinue; $?` (Prints `False`)
-3. Test conditional chaining:
+4. Test conditional chaining:
    - Bash: `true && echo "Runs on success"` vs `false && echo "Will not run"`
    - Bash: `false || echo "Runs on failure"`
 

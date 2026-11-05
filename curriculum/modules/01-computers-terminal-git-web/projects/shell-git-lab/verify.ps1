@@ -9,13 +9,16 @@ $total = 14
 
 function Check {
     param([string]$Name, [scriptblock]$Condition)
-    $script:pass++
     try {
         $result = & $Condition
-        if ($result) { Write-Host "  PASS  $Name" -ForegroundColor Green }
-        else { throw "assertion failed" }
+        if ($result) {
+            $script:pass++
+            Write-Host "  PASS  $Name" -ForegroundColor Green
+        } else {
+            $script:fail++
+            Write-Host "  FAIL  $Name" -ForegroundColor Red
+        }
     } catch {
-        $script:pass--
         $script:fail++
         Write-Host "  FAIL  $Name" -ForegroundColor Red
     }
@@ -29,8 +32,8 @@ Check "src subdirectory exists" { Test-Path (Join-Path $ProjectRoot "src") }
 Check "docs subdirectory exists" { Test-Path (Join-Path $ProjectRoot "docs") }
 Check "tests subdirectory exists" { Test-Path (Join-Path $ProjectRoot "tests") }
 Check "README.md exists" { Test-Path (Join-Path $ProjectRoot "README.md") }
-Check "src/main.go exists" { Test-Path (Join-Path $ProjectRoot "src" "main.go") }
-Check "docs/design.md exists" { Test-Path (Join-Path $ProjectRoot "docs" "design.md") }
+Check "src/main.go exists" { Test-Path (Join-Path $ProjectRoot "src/main.go") }
+Check "docs/design.md exists" { Test-Path (Join-Path $ProjectRoot "docs/design.md") }
 
 # --- Git checks ---
 Push-Location $ProjectRoot
@@ -46,9 +49,12 @@ try {
         $log.Count -ge 3
     }
 
-    # Check README.md was an initial commit (exists at root)
+    # Check README.md and src/main.go in git tree
     Check "README.md in git tree" {
         $null -ne (git ls-files "README.md" 2>$null)
+    }
+    Check "src/main.go in git tree" {
+        $null -ne (git ls-files "src/main.go" 2>$null)
     }
 
     # Check merge conflict marker resolved (no conflict markers in any tracked file)

@@ -1,5 +1,8 @@
 # Terminal basics
 
+> *"Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface."*  
+> — **Doug McIlroy**, inventor of Unix pipes (1978)
+
 ## Learning objective
 
 Navigate the shell, execute commands, manipulate file streams via redirection and piping, and inspect process exit statuses in the terminal.
@@ -45,7 +48,9 @@ flowchart LR
 
 GUIs present rigid, pre-defined buttons; the command-line interface (CLI) provides a composable programming language where small, focused tools connect together like plumbing pipes. Master the terminal, and you can automate any multi-step development, testing, build, or deployment task effortlessly.
 
-## The Shell Command Rosetta Stone
+## Under the hood
+
+### The Shell Command Rosetta Stone
 
 Whether developing on Linux, macOS, or Windows, you will frequently transition between POSIX shells (Bash, Zsh, Git Bash) and Windows PowerShell. Below is the definitive cross-platform command reference:
 
@@ -69,7 +74,7 @@ Whether developing on Linux, macOS, or Windows, you will frequently transition b
 | **Follow Live File** | `tail -f app.log` | `Get-Content app.log -Wait` | Stream new lines as they are written |
 | **Search Pattern** | `grep "error" app.log` | `Select-String "error" app.log` | Filter lines matching regex or string |
 
-## Streams, Redirection, and Piping Masterclass
+### Streams, Redirection, and Piping Masterclass
 
 Every process is born with three standard communication channels:
 - **`stdin` (File Descriptor 0):** Input stream read by the program (default: keyboard).
@@ -224,20 +229,38 @@ CI/CD automation pipelines (GitHub Actions, GitLab CI) are fundamentally shell s
 - In-memory piping (`cmd1 | cmd2`) is memory-buffered by the kernel (typically a 64 KB pipe buffer); data streams between processes without touching physical SSD storage.
 - Using shell built-ins (`cd`, `echo`) executes inside the existing shell process with zero process creation overhead.
 
+## Practice task
+
+1. Open `main.go` and add an extra line of simulated input: `"orange\napple cider\n"`.
+2. Modify the grep query to match `"pie"` instead of `"apple"`.
+3. Run the program and verify that only lines containing `"pie"` are captured on `stdout`.
+4. Test stream redirection directly in your terminal:
+   - Create a log: `echo "2026-11-06 INFO server started" > app.log`
+   - Append an error: `echo "2026-11-06 ERROR database timeout" >> app.log`
+   - Filter errors: `grep "ERROR" app.log` (POSIX) or `Select-String "ERROR" app.log` (PowerShell).
+
 ## Tests / verification
 
-1. Test file and directory navigation:
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/04-terminal-basics
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/04-terminal-basics
+   ```
+3. Test file and directory navigation:
    - Create a directory: `mkdir -p test_shell/docs`
    - Enter it: `cd test_shell/docs`
    - Verify location: `pwd` (POSIX) or `Get-Location` (PowerShell)
-2. Test file creation and redirection:
+4. Test file creation and redirection:
    - Overwrite: `echo "first line" > output.txt`
    - Append: `echo "second line" >> output.txt`
    - Inspect: `cat output.txt` (verify both lines appear)
-3. Test pipeline filtering:
+5. Test pipeline filtering:
    - POSIX: `cat output.txt | grep "second"`
    - PowerShell: `Get-Content output.txt | Select-String "second"`
-4. Test conditional chaining:
+6. Test conditional chaining:
    - Run `echo "success" && echo "second command ran"`
    - Notice how both commands run because the first succeeded.
 

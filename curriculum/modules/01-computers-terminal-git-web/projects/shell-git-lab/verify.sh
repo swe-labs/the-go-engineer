@@ -35,6 +35,7 @@ check "at least 3 commits exist" bash -c '[[ $(git log --oneline 2>/dev/null | w
 check "feature branch merged" bash -c 'git branch --merged 2>/dev/null | grep -q "feature"'
 check "git log shows commit history" bash -c '[[ $(git log --oneline --graph 2>/dev/null | wc -l) -ge 3 ]]'
 check "README.md is tracked" bash -c 'git ls-files README.md 2>/dev/null | grep -q .'
+check "src/main.go is tracked" bash -c 'git ls-files src/main.go 2>/dev/null | grep -q .'
 check "no unresolved merge conflicts" bash -c '! git grep -l ">>>>>>>" -- "*.md" "*.go" 2>/dev/null | grep -q .'
 popd > /dev/null
 
