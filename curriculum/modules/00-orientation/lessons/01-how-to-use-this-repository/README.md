@@ -2,6 +2,8 @@
 
 ## Learning objective
 
+> *"Simplicity is prerequisite for reliability."* — Edsger W. Dijkstra
+
 By the end of this lesson, you will be able to open this repository and immediately identify what each top-level directory holds, how metadata connects to learner-facing content, and which tools validate the connection. You will demonstrate this by running a Go program that models the directory structure as searchable data.
 
 ## Why this matters
@@ -25,7 +27,42 @@ The repository separates concerns so that learners, maintainers, and automated v
 | `web/` | Learner portal, curriculum graph visualizer, and dashboard | Learners, reviewers |
 | `.agents/` | Pedagogical skills, governance rubrics, and authoring workflows | Engineering mentors, AI assistants |
 
-The most important relationship is between the **manifest blueprints** inside `curriculum/` (such as `path.core.json`, `projects.json`, and `schema.v3.json`) and the **physical filesystem** (`curriculum/modules/`). The metadata JSON declares which lessons exist, their prerequisites, and their contracts. The module directories hold the actual README files, code, tests, and starter scaffolds. The validator tool (`internal/tools/curriculum`) reads the metadata, walks the filesystem, and verifies strict alignment. If an artifact is missing or invalid, the quality gates fail.
+The most important relationship is between the **manifest blueprints** inside `curriculum/` (such as `path.core.json`, `projects.json`, and `schema.v3.json`) and the **physical filesystem** (`curriculum/modules/`). The metadata JSON declares which lessons exist, their prerequisites, and their contracts. The module directories hold the actual README files, code, tests, and starter scaffolds. The validator tool (`internal/tools/curriculum` and `scripts/validate_curriculum.go`) reads the metadata, walks the filesystem, and verifies strict alignment. If an artifact is missing or invalid, the quality gates fail.
+
+## Visual model
+
+The architecture connects blueprints, instructional prose, and verification gates into a single coherent system:
+
+```mermaid
+flowchart TD
+    subgraph Storage ["Layer 1: Blueprints & Physical Modules"]
+        C["curriculum/"]
+        M["path.core.json & projects.json<br/>(Authoritative Manifests)"]
+        MOD["modules/ & electives/<br/>(Instructional READMEs & Code)"]
+        C --> M
+        C --> MOD
+    end
+
+    subgraph Quality ["Layer 2: Automated Quality Engine"]
+        T["internal/tools/curriculum/<br/>scripts/validate_curriculum.go"]
+        G["17 Quality Gates<br/>(Schema, DAG, Zero-Magic, Parity)"]
+        T --> G
+    end
+
+    subgraph Presentation ["Layer 3: Learner Experience & Standards"]
+        W["web/app/<br/>(Learner Portal & Graph UI)"]
+        A[".agents/skills/<br/>(Pedagogical Skills & Governance)"]
+    end
+
+    M -.->|Compiled & Audited| G
+    MOD -.->|Filesystem Parity| G
+    G ==>|Guarantees Soundness| W
+    G ==>|Enforces Standards| A
+```
+
+Below is the conceptual flow showing how manifests, quality tools, and learner interfaces interact across the entire codebase:
+
+![Repository Architecture Flow](assets/diagrams/concept-flow.svg)
 
 ## Under the hood
 
@@ -122,7 +159,7 @@ func main() {
 
 | Mistake | Why it happens | Fix |
 |---|---|---|
-| Hand-editing manifests without running validators | Assuming JSON changes are valid without checking schema constraints | Run `go run ./internal/tools/curriculum validate-all` after any edit |
+| Hand-editing manifests without running validators | Assuming JSON changes are valid without checking schema constraints | Run `go run ./scripts/validate_curriculum.go` after any edit |
 | Confusing `curriculum/` manifests with lesson READMEs | Manifests declare the schema and graph; lesson READMEs contain the instructional prose | Keep metadata in `path.*.json` and human-facing teaching in the module folders |
 | Looking for obsolete pre-v3 directories | Historical v2 folders were consolidated into `curriculum/` and `internal/tools/` in v3 | Reference the canonical v3 structure documented in this lesson |
 | Forgetting that `Lookup` returns `nil` | Dereferencing a nil pointer causes an immediate runtime panic in Go | Always check `if entry != nil` before accessing fields |

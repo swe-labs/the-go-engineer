@@ -2,6 +2,8 @@
 
 ## Learning objective
 
+> *"Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it."* — Brian Kernighan
+
 By the end of this lab, you will understand the four content types used in this curriculum — lesson, exercise, project, and checkpoint — and how they connect to form a complete learning cycle. You will demonstrate this by running a Go program that models the cycle as a series of steps, advancing through each one programmatically.
 
 ## Why this matters
@@ -26,6 +28,23 @@ The curriculum defines four content types:
 | **Checkpoint** | Verify mastery before moving to the next module | 1 session | All tests pass, self-assessment complete |
 
 These types appear inside each module in the same order: lessons first, then exercises, then a project, then a checkpoint.
+
+## Visual model
+
+Every module follows the six-step iterative engineering cycle:
+
+```mermaid
+flowchart LR
+    S1["1. Read<br/><i>Mental Model & Narrative</i>"] --> S2["2. Run<br/><i>Execute Baseline Code</i>"]
+    S2 --> S3["3. Try<br/><i>Work in _starter/</i>"]
+    S3 --> S4["4. Test<br/><i>Run go test verification</i>"]
+    S4 --> S5["5. Reflect<br/><i>Answer review questions</i>"]
+    S5 --> S6["6. Checkpoint<br/><i>Module assessment proof</i>"]
+
+    S4 -.->|Fails| S3
+```
+
+Each step generates tangible evidence: notes, console output, passing tests, written reflections, and verified commits.
 
 ## Under the hood
 

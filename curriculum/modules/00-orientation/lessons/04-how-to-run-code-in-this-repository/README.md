@@ -2,6 +2,8 @@
 
 ## Learning objective
 
+> *"Clear is better than clever."* — Rob Pike
+
 By the end of this lesson, you will understand the difference between `go run`, `go test`, `go build`, and `go vet`. You will know when to use each command and what each one tells you about your code. You will demonstrate this by running a simple calculator program using each command.
 
 ## Why this matters
@@ -24,9 +26,36 @@ Think of each command as a different inspection tool for a house.
 | `go run .` | Compiles and runs the main package immediately | While developing, to see quick results | Program output to stdout/stderr |
 | `go test .` | Compiles test files and runs all test functions | Before and after making changes, to verify correctness | PASS/FAIL with test details |
 | `go build .` | Compiles the package into a binary (or checks that it compiles) | Before committing, to ensure the code compiles standalone | Binary file or "nothing" if -o is not set |
-| `go vet` | Analyzes the package for suspicious constructs | Before committing, to catch common mistakes | Warnings for suspicious code, or nothing if clean |
+| `go vet .` | Analyzes the package for suspicious constructs | Before committing, to catch common mistakes | Warnings for suspicious code, or nothing if clean |
 
 The chart order is intentional: run first to explore, test to verify, build to ship, vet to audit.
+
+## Visual model
+
+The Go toolchain commands serve distinct stages in the engineering lifecycle:
+
+```mermaid
+flowchart TD
+    SRC["Source Code (*.go)"]
+
+    subgraph Commands ["Go Toolchain Verification Matrix"]
+        direction TB
+        R["go run .<br/><i>Fast iterative exploration</i>"]
+        T["go test .<br/><i>Automated regression verification</i>"]
+        B["go build .<br/><i>Production binary compilation</i>"]
+        V["go vet .<br/><i>Static AST heuristic analysis</i>"]
+    end
+
+    SRC --> R
+    SRC --> T
+    SRC --> B
+    SRC --> V
+
+    R --> OUT1["Ephemeral Executable in Temp Dir<br/>→ Streams stdout/stderr directly"]
+    T --> OUT2["Test Binary Execution<br/>→ Reports PASS / FAIL with assertion details"]
+    B --> OUT3["Standalone Machine Binary<br/>→ Deployable to production environment"]
+    V --> OUT4["AST Diagnostic Reports<br/>→ Catches unreachable code, printf bugs, shadowing"]
+```
 
 ## Under the hood
 

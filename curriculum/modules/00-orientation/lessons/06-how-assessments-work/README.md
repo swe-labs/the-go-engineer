@@ -2,6 +2,8 @@
 
 ## Learning objective
 
+> *"Without data, you're just another person with an opinion."* — W. Edwards Deming
+
 Explain how checkpoints, rubrics, and answer keys measure mastery. You will be able to read a rubric, evaluate an answer against it, and describe how self-grading helps you identify what to study next.
 
 ## Why this matters
@@ -17,6 +19,32 @@ You are not being judged. You are being measured against a standard you can see 
 ## Core idea
 
 An assessment has three parts: a rubric that defines the criteria, an answer that provides the evidence, and an evaluation that compares the answer against the rubric. If you know the rubric before you start, you know exactly what to aim for.
+
+## Visual model
+
+The criterion-referenced evaluation pipeline provides transparent, objective mastery measurement:
+
+```mermaid
+flowchart LR
+    subgraph Inputs ["Assessment Specification & Submission"]
+        R["Rubric Standards<br/><i>Categories, MaxScore, PassThreshold</i>"]
+        A["Learner Submission<br/><i>Concrete Evidence & Answers</i>"]
+    end
+
+    subgraph Engine ["Evaluation Function"]
+        E["evaluateAnswer(rubric, answers)<br/><i>Criterion Comparison</i>"]
+    end
+
+    subgraph Feedback ["Diagnostic Report"]
+        P["Category PASS / FAIL<br/><i>Meets standard vs Needs improvement</i>"]
+        T["Targeted Study Plan<br/><i>Remediate specific weak categories</i>"]
+    end
+
+    R --> E
+    A --> E
+    E --> P
+    P --> T
+```
 
 ## Under the hood
 
@@ -178,4 +206,4 @@ Create a new rubric with four categories: `Syntax`, `Logic`, `Efficiency`, `Styl
 
 ## NEXT UP
 
-[How to ask good debugging questions](../07-how-to-ask-good-debugging-questions/README.md) — Learn to turn vague confusion into structured, answerable questions.
+[Lesson 07: How to ask good debugging questions](../07-how-to-ask-good-debugging-questions/README.md) — Learn to turn vague confusion into structured, answerable questions.

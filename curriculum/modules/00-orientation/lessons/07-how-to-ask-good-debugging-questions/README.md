@@ -2,6 +2,8 @@
 
 ## Learning objective
 
+> *"Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it."* — Brian Kernighan
+
 Turn vague confusion into a structured question that contains evidence and a testable hypothesis. You will learn the five fields every debugging question should include and how to score your own questions for completeness before you ask for help.
 
 ## Why this matters
@@ -15,6 +17,32 @@ Think of a debugging question as a detective case file. The file has five slots:
 ## Core idea
 
 Every debugging question can be scored on completeness from 1 to 5 based on five fields: Expected, Actual, Command, Error, Environment. A score of 5 means the question contains everything needed to reproduce and diagnose the problem. A score of 1 or 2 means the question will require back-and-forth before anyone can help.
+
+## Visual model
+
+A high-signal debugging case file eliminates ambiguity by providing all 5 diagnostic dimensions:
+
+```mermaid
+flowchart TD
+    Q["Structured Debugging Case File<br/>(Target Score: 5/5)"]
+
+    subgraph Pillars ["The 5 Essential Evidence Fields"]
+        direction TB
+        F1["1. Expected Behavior<br/><i>What should happen according to specification?</i>"]
+        F2["2. Actual Behavior<br/><i>What observed behavior diverged?</i>"]
+        F3["3. Exact Command Line<br/><i>Exact invocation copied from terminal</i>"]
+        F4["4. Exact Error Output<br/><i>Full raw stderr / panic stack trace</i>"]
+        F5["5. Environment Context<br/><i>OS, Go version, architecture, working directory</i>"]
+    end
+
+    Q --> F1
+    Q --> F2
+    Q --> F3
+    Q --> F4
+    Q --> F5
+
+    Pillars ==> RES["Rapid Root-Cause Diagnosis<br/>(Zero back-and-forth latency)"]
+```
 
 ## Under the hood
 
@@ -150,8 +178,8 @@ Take a debugging question you have asked recently (or invent one). Write it as a
 2. Why does the function use `strings.TrimSpace` before checking if a field is empty?
 3. A question scores 3/5. What information is likely missing?
 4. How does writing a structured question help you debug even before asking for help?
-5. What would you change in the struct to add a "Steps to Reproduce" field?
+5. What would change in the struct to add a "Steps to Reproduce" field?
 
 ## NEXT UP
 
-[What job-ready means](../08-what-job-ready-means/README.md) — Define job readiness as demonstrated ability across five skill categories.
+[Lesson 08: What job-ready means](../08-what-job-ready-means/README.md) — Define job readiness as demonstrated ability across five skill categories.
