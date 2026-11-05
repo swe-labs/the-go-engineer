@@ -152,7 +152,7 @@ You are ready to advance to Module 02 when you can:
 
 Begin Step 1 of this module with the first lesson:
 
-👉 **[Lesson 01: What is a program?](./lessons/01-what-is-a-program/README.md)**
+- [Lesson 01: What is a program?](./lessons/01-what-is-a-program/README.md)**
 
 > [!NOTE] Single-Entry Navigation
 > Module progression is strictly sequential. Complete lessons 01 through 15, build and verify the shell-git lab project, and complete the assessment suite. The exit gate to Module 02 unlocks upon completing the assessment checkpoint.

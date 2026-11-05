@@ -213,4 +213,4 @@ Expected output should include:
 
 ## NEXT UP
 
-[Module 03 — Programming Fundamentals with Go](../../03-programming-fundamentals/README.md) — start learning Go syntax, values, variables, and control flow.
+[Module 03 — Programming Fundamentals with Go](../../../03-programming-fundamentals/README.md) — start learning Go syntax, values, variables, and control flow.

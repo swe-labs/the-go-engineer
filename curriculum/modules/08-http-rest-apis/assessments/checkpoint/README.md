@@ -82,4 +82,4 @@ Learner may retry after fixing rubric gaps and writing a short correction note.
 
 ## NEXT UP
 
-[Module 09: SQL and PostgreSQL Persistence](../../09-sql-postgres-persistence/README.md)
+[Module 09: SQL and PostgreSQL Persistence](../../../09-sql-postgres-persistence/README.md)

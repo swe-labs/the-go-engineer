@@ -18,7 +18,7 @@ Do not use generics when a simple concrete type satisfies the domain requirement
 
 ## Mental model
 
-Generics in Go function as compile-time blueprints. When you write a generic function like func Map[T, U any](s []T, f func(T) U) []U, the compiler does not generate dynamic dispatch tables or boxed objects. Instead, it inspects every call site in your code and performs monomorphization (specialization with GC shape sharing for pointers).
+Generics in Go function as compile-time blueprints. When you write a generic function like `func Map[T, U any](s []T, f func(T) U) []U`, the compiler does not generate dynamic dispatch tables or boxed objects. Instead, it inspects every call site in your code and performs monomorphization (specialization with GC shape sharing for pointers).
 
 At runtime, the generic abstraction ceases to exist: the CPU executes specialized, near-native machine code directly on concrete types.
 
@@ -27,7 +27,7 @@ At runtime, the generic abstraction ceases to exist: the CPU executes specialize
 ```mermaid
 flowchart TD
     subgraph SourceCode["Source Code (Compile Time)"]
-        GEN_DEF["func Map[T, U any](s []T, f func(T) U) []U"]
+        GEN_DEF["`func Map[T, U any](s []T, f func(T) U) []U`"]
         CALL_INT["Map([]int{1, 2}, itoa)"]
         CALL_STR["Map([]string{"a"}, toUpper)"]
     end
@@ -135,7 +135,7 @@ func Min[T cmp.Ordered](a, b T) T {
 
 ## Practice task
 
-Implement a generic Reduce[T any, U any](slice []T, initial U, accumulator func(U, T) U) U function. Then use it to calculate the total byte count from a slice of string tokens. Verify that it executes without dynamic allocations when working with integer accumulators.
+Implement a generic `Reduce[T any, U any](slice []T, initial U, accumulator func(U, T) U) U` function. Then use it to calculate the total byte count from a slice of string tokens. Verify that it executes without dynamic allocations when working with integer accumulators.
 
 ## Production notes
 

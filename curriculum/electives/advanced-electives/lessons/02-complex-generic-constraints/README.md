@@ -125,7 +125,7 @@ type Number interface {
 
 ## Practice task
 
-Write a generic constraint Serializable that requires a type to implement both fmt.Stringer and have an underlying type of ~string | ~[]byte. Implement a function Checksum[T Serializable](val T) string that computes a hash.
+Write a generic constraint Serializable that requires a type to implement both fmt.Stringer and have an underlying type of ~string | ~[]byte. Implement a function `Checksum[T Serializable](val T)` string that computes a hash.
 
 ## Production notes
 

@@ -127,4 +127,4 @@ ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/15-docker-cicd-deplo
 
 ## NEXT UP
 
-[Module 16: Portfolio & Interview Readiness](../../16-portfolio-interview-readiness/README.md)
+[Module 16: Portfolio & Interview Readiness](../../../16-portfolio-interview-readiness/README.md)

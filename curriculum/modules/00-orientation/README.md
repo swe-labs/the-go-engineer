@@ -135,7 +135,7 @@ You are ready for Module 01 when you can:
 
 Begin your orientation with the first lesson:
 
-👉 **[Lesson 01: How to use this repository](./lessons/01-how-to-use-this-repository/README.md)**
+- [Lesson 01: How to use this repository](./lessons/01-how-to-use-this-repository/README.md)**
 
 > [!NOTE] Single-Entry Navigation
 > Module progression is strictly sequential. Complete lessons 01 through 10, finish the setup project, and pass the assessment checkpoint. The exit gate to Module 01 unlocks upon completing the assessment checkpoint.

@@ -102,4 +102,4 @@ PASS
 
 ## NEXT UP
 
-[Module 12: Observability & Profiling](../../12-observability-profiling/README.md)
+[Module 12: Observability & Profiling](../../../12-observability-diagnostics/README.md)

@@ -99,4 +99,4 @@ PASS
 
 ## NEXT UP
 
-[Module 07: CLI, Files, and Config](../../07-cli-files-json-config/README.md)
+[Module 07: CLI, Files, and Config](../../../07-cli-files-json-config/README.md)

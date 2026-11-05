@@ -67,4 +67,4 @@ On Windows, you can run `verify.ps1` directly from PowerShell. On Linux/macOS, o
 
 Validate your understanding and earn module credit:
 
-👉 [Assessment: Shell + Git Lab](../../assessments/shell-git-lab/README.md)
+- [Assessment: Shell + Git Lab](../../assessments/shell-git-lab/README.md)

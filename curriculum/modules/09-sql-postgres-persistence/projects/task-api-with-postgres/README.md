@@ -133,4 +133,4 @@ DATABASE_URL="postgres://postgres:postgrespassword@localhost:5432/taskdb?sslmode
 
 ## NEXT UP
 
-[Secure Authenticated API](../10-auth-security/projects/secure-authenticated-api/README.md)
+[Secure Authenticated API](../../../10-auth-security/projects/secure-authenticated-api/README.md)

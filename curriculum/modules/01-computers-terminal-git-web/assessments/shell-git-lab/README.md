@@ -38,4 +38,4 @@ You may retake the assessment once after 48 hours. The retake will use different
 
 You have reached the official exit gate for Module 01. Once you achieve passing scores on this assessment and the shell-git lab verification, advance to Module 02:
 
-👉 [Module 02: Go Setup and Tooling](../../../02-go-setup-tooling/README.md)
+- [Module 02: Go Setup and Tooling](../../../02-go-setup-tooling/README.md)

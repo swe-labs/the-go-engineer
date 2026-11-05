@@ -94,4 +94,4 @@ In Kubernetes manifests, liveness and readiness probes are declared with `period
 
 ## Next Step
 
-Proceed to [Milestone 15 — Portfolio Defense](../projects/15-opslane-portfolio-defense/README.md) to rehearse technical interview defense questions and articulate Opslane's production architectural guarantees.
+Proceed to [Milestone 15 — Portfolio Defense](../../projects/15-opslane-portfolio-defense/README.md) to rehearse technical interview defense questions and articulate Opslane's production architectural guarantees.

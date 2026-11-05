@@ -276,4 +276,4 @@ The tests verify ADR creation, status transitions (proposed, accepted, deprecate
 
 ## NEXT UP
 
-Congratulations on completing Module 14! You now understand architecture patterns, distributed systems, event-driven design, multi-tenancy, and architecture decision records. Next up: [Linux Processes](../../15-docker-cicd-deployment/lessons/01-linux-processes/README.md)
+Congratulations on completing Module 14! You now understand architecture patterns, distributed systems, event-driven design, multi-tenancy, and architecture decision records. Next up: [Linux Processes](../../../15-docker-cicd-deployment/lessons/01-linux-processes/README.md)

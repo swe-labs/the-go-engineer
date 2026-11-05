@@ -215,4 +215,4 @@ The tests in the inline example verify:
 
 Advance to the practical capstone project:
 
-👉 [Project: Course Setup Verification](../../projects/course-setup-verification/README.md)
+- [Project: Course Setup Verification](../../projects/course-setup-verification/README.md)
