@@ -19,6 +19,7 @@ func validateDiagramPalette() {
 		"module-00": true,
 		"module-01": true,
 		"module-02": true,
+		"module-03": true,
 	}
 
 	diagramsChecked := 0
@@ -85,3 +86,4 @@ func validateDiagramPalette() {
 		fmt.Println("  Diagram palette validation failed with warnings/errors.")
 	}
 }
+

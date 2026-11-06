@@ -1,5 +1,8 @@
 # Constants
 
+> "Constants in Go are untyped values of arbitrary precision until given a type by context."
+> — Rob Pike
+
 ## Learning objective
 
 Declare typed and untyped constants using `const`, understand compile-time evaluation and arbitrary-precision numeric constants, and use `iota` for enumerated constant blocks.
@@ -18,6 +21,10 @@ Typed constants are different: `const x int = 10` has the type `int` baked in. Y
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph Untyped["Compile-Time Untyped Constants (Arbitrary Precision >= 256 bits)"]
         C1["const Pi = 3.14159265358979323846"]
         C2["const Big = 1 << 100"]

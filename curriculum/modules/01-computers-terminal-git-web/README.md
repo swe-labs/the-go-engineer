@@ -37,11 +37,13 @@ Throughout this module and its capstone lab, you will build and verify concrete 
 - A functional Go networking harness that resolves DNS records, binds ephemeral TCP sockets, and inspects HTTP request/response wire data.
 - Automated verification evidence passing 14/14 automated checks via `verify.ps1` and `verify.sh`.
 
+
 ## Prerequisites
 
 - [Module 00: Orientation](../00-orientation/README.md)
 
 You should be able to:
+
 - Open a terminal emulator on your operating system (Windows Terminal, iTerm2, Alacritty, or Bash).
 - Clone this repository locally.
 - Run Go toolchain commands (`go version`).
@@ -81,23 +83,23 @@ flowchart TD
 
 ## Lessons
 
-| Order | Lesson | Outcome |
-| :---: | :--- | :--- |
-| 1 | [What is a program?](./lessons/01-what-is-a-program/README.md) | Distinguish source code, compiled binary, and running process; explain the three-part lifecycle of any program. |
-| 2 | [Source code, executable, and process](./lessons/02-source-code-executable-and-process/README.md) | Trace how the CPU fetches, decodes, and executes compiled machine instructions from system memory using registers and the ALU. |
-| 3 | [Files, bytes, directories, and paths](./lessons/03-files-bytes-directories-and-paths/README.md) | Navigate the filesystem tree, understand how bytes map to content, and write cross-platform Go file operations. |
-| 4 | [Terminal basics](./lessons/04-terminal-basics/README.md) | Run commands, redirect output, pipe data between programs, and explain how the shell forks and manages child processes. |
-| 5 | [Environment variables](./lessons/05-environment-variables/README.md) | Read and set environment variables, understand inheritance across processes, and configure Go applications without hard-coded secrets. |
-| 6 | [Exit codes](./lessons/06-exit-codes/README.md) | Write programs that signal success or failure via exit codes; chain commands with `&&` and `||` based on exit status. |
-| 7 | [How the OS manages processes](./lessons/07-how-the-os-manages-processes/README.md) | Spawn child processes, collect exit codes, and explain scheduling, context switching, and zombie processes. |
-| 8 | [Memory preview: stack vs heap](./lessons/08-memory-preview-stack-vs-heap/README.md) | Identify stack- vs heap-allocated variables; use `go build -gcflags=-m` to verify escape analysis decisions. |
-| 9 | [Git mental model](./lessons/09-git-mental-model/README.md) | Explain Git's content-addressable object model, the DAG of commits, and why branches are just movable pointers. |
-| 10 | [Git basics: status, add, commit](./lessons/10-git-basics-status-add-commit/README.md) | Navigate the working directory, staging area, and commit history; write meaningful commit messages. |
-| 11 | [Branching and merging](./lessons/11-branching-and-merging/README.md) | Create branches, merge with fast-forward and three-way merges, and resolve merge conflicts. |
-| 12 | [GitHub workflow](./lessons/12-github-workflow/README.md) | Fork, clone, branch, push, and open pull requests; explain the propose-verify-merge cycle. |
-| 13 | [Pull requests and code review](./lessons/13-pull-requests-and-code-review/README.md) | Write effective PR descriptions, leave constructive review comments, and respond to feedback professionally. |
-| 14 | [Web preview: client, server, DNS, and ports](./lessons/14-web-preview-client-server-dns-and-ports/README.md) | Resolve domain names to IPs, establish TCP connections, and explain how a browser loads a webpage. |
-| 15 | [HTTP request and response preview](./lessons/15-http-request-and-response-preview/README.md) | Start an HTTP server, send GET requests, read status codes and headers, and understand the request-response cycle. |
+| Order | Lesson                                                                                                       | Outcome                                                                                                                                |
+| :---: | :----------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+|   1   | [What is a program?](./lessons/01-what-is-a-program/README.md)                                                | Distinguish source code, compiled binary, and running process; explain the three-part lifecycle of any program.                        |
+|   2   | [Source code, executable, and process](./lessons/02-source-code-executable-and-process/README.md)             | Trace how the CPU fetches, decodes, and executes compiled machine instructions from system memory using registers and the ALU.         |
+|   3   | [Files, bytes, directories, and paths](./lessons/03-files-bytes-directories-and-paths/README.md)              | Navigate the filesystem tree, understand how bytes map to content, and write cross-platform Go file operations.                        |
+|   4   | [Terminal basics](./lessons/04-terminal-basics/README.md)                                                     | Run commands, redirect output, pipe data between programs, and explain how the shell forks and manages child processes.                |
+|   5   | [Environment variables](./lessons/05-environment-variables/README.md)                                         | Read and set environment variables, understand inheritance across processes, and configure Go applications without hard-coded secrets. |
+|   6   | [Exit codes](./lessons/06-exit-codes/README.md)                                                               | Write programs that signal success or failure via exit codes; chain commands with`&&` and `                                          |
+|   7   | [How the OS manages processes](./lessons/07-how-the-os-manages-processes/README.md)                           | Spawn child processes, collect exit codes, and explain scheduling, context switching, and zombie processes.                            |
+|   8   | [Memory preview: stack vs heap](./lessons/08-memory-preview-stack-vs-heap/README.md)                          | Identify stack- vs heap-allocated variables; use`go build -gcflags=-m` to verify escape analysis decisions.                          |
+|   9   | [Git mental model](./lessons/09-git-mental-model/README.md)                                                   | Explain Git's content-addressable object model, the DAG of commits, and why branches are just movable pointers.                        |
+|  10  | [Git basics: status, add, commit](./lessons/10-git-basics-status-add-commit/README.md)                        | Navigate the working directory, staging area, and commit history; write meaningful commit messages.                                    |
+|  11  | [Branching and merging](./lessons/11-branching-and-merging/README.md)                                         | Create branches, merge with fast-forward and three-way merges, and resolve merge conflicts.                                            |
+|  12  | [GitHub workflow](./lessons/12-github-workflow/README.md)                                                     | Fork, clone, branch, push, and open pull requests; explain the propose-verify-merge cycle.                                             |
+|  13  | [Pull requests and code review](./lessons/13-pull-requests-and-code-review/README.md)                         | Write effective PR descriptions, leave constructive review comments, and respond to feedback professionally.                           |
+|  14  | [Web preview: client, server, DNS, and ports](./lessons/14-web-preview-client-server-dns-and-ports/README.md) | Resolve domain names to IPs, establish TCP connections, and explain how a browser loads a webpage.                                     |
+|  15  | [HTTP request and response preview](./lessons/15-http-request-and-response-preview/README.md)                 | Start an HTTP server, send GET requests, read status codes and headers, and understand the request-response cycle.                     |
 
 ## Labs
 
@@ -124,13 +126,13 @@ Evaluate your conceptual and operational mastery with the module assessment suit
 
 ## Common failure modes
 
-| Failure Mode | Observable Symptom | Root Cause | Engineering Fix |
-|---|---|---|---|
-| **CRLF Script Termination** | `/bin/bash^M: bad interpreter: No such file or directory` | Windows carriage return bytes (`\r\n`) committed to shell scripts | Normalize line endings via `dos2unix` or configure `.gitattributes` to force `LF` on scripts. |
-| **Stream Blindness** | `cmd > output.log` passes silently, but errors still print to terminal and logs are incomplete | Single `>` only redirects `stdout` (fd 1); diagnostic errors and panics write to `stderr` (fd 2) | Redirect both streams: `cmd > output.log 2>&1`. |
-| **Environment Variable Leak Assumption** | Child script modifies an environment variable, but parent terminal shell remains unchanged | Environment variables have one-way inheritance and process-level isolation | Use `source script.sh` if parent shell mutation is intended, or pass values via stdout pipes. |
-| **Silent Force-Push Overwrite** | Teammates' remote commits vanish without warning after a rebase | Running `git push --force` unconditionally updates remote refs | Standardize on `git push --force-with-lease` across all workflows and protect `main`. |
-| **Port Collision** | `listen tcp :8080: bind: address already in use` | Another active process or orphaned daemon is holding socket port 8080 | Identify PID via `lsof -i :8080` or `netstat -ano`, terminate holding process, or configure dynamic ephemeral ports (`:0`). |
+| Failure Mode                                   | Observable Symptom                                                                               | Root Cause                                                                                            | Engineering Fix                                                                                                                  |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **CRLF Script Termination**              | `/bin/bash^M: bad interpreter: No such file or directory`                                      | Windows carriage return bytes (`\r\n`) committed to shell scripts                                   | Normalize line endings via`dos2unix` or configure `.gitattributes` to force `LF` on scripts.                               |
+| **Stream Blindness**                     | `cmd > output.log` passes silently, but errors still print to terminal and logs are incomplete | Single`>` only redirects `stdout` (fd 1); diagnostic errors and panics write to `stderr` (fd 2) | Redirect both streams:`cmd > output.log 2>&1`.                                                                                 |
+| **Environment Variable Leak Assumption** | Child script modifies an environment variable, but parent terminal shell remains unchanged       | Environment variables have one-way inheritance and process-level isolation                            | Use`source script.sh` if parent shell mutation is intended, or pass values via stdout pipes.                                   |
+| **Silent Force-Push Overwrite**          | Teammates' remote commits vanish without warning after a rebase                                  | Running`git push --force` unconditionally updates remote refs                                       | Standardize on`git push --force-with-lease` across all workflows and protect `main`.                                         |
+| **Port Collision**                       | `listen tcp :8080: bind: address already in use`                                               | Another active process or orphaned daemon is holding socket port 8080                                 | Identify PID via`lsof -i :8080` or `netstat -ano`, terminate holding process, or configure dynamic ephemeral ports (`:0`). |
 
 ## Completion checklist
 
@@ -154,5 +156,5 @@ Begin Step 1 of this module with the first lesson:
 
 - [Lesson 01: What is a program?](./lessons/01-what-is-a-program/README.md)**
 
-> [!NOTE] Single-Entry Navigation
+> [!NOTE] ✏️ Single-Entry Navigation
 > Module progression is strictly sequential. Complete lessons 01 through 15, build and verify the shell-git lab project, and complete the assessment suite. The exit gate to Module 02 unlocks upon completing the assessment checkpoint.

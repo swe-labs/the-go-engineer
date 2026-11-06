@@ -1,5 +1,8 @@
 # Algorithmic Problem-Solving and Complexity
 
+> "Premature optimization is the root of all evil, but algorithmic efficiency is the foundation of scalable systems."
+> — Donald E. Knuth
+
 ## Learning objective
 
 Decompose programming challenges systematically into discrete algorithmic steps, trace state transformations using desk-checking tables, reason intuitively about time and space complexity ($O(1)$, $O(N)$, $O(\log N)$, $O(N^2)$), and apply idiomatic Go slice algorithms (order-preserving deduplication, two-pointer partitioning, binary search via `slices.BinarySearch`, and custom comparator sorting via `slices.SortFunc`).
@@ -34,6 +37,10 @@ Deterministic Output Collection
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph ProblemSolving["Algorithmic Engineering Framework"]
         STEP1["1. Clarify Invariants & Constraints
 (Input bounds, edge cases: empty, duplicate, negative)"]
@@ -117,7 +124,7 @@ func main() {
 }
 ```
 
-## Failure modes & common mistakes
+## Common mistakes
 
 1. **Accidental $O(N^2)$ Lookup:** Checking slice containment with an inner loop inside another loop instead of using a lookup set or map. A list of 100,000 items takes fractions of a millisecond with a map, but over 30 seconds with nested slice searches.
 2. **Binary Search on Unsorted Data:** Calling `slices.BinarySearch` on an unsorted slice yields bogus results without compile or runtime errors. Ensure data is sorted first.
@@ -139,3 +146,11 @@ func main() {
 2. How many comparisons does `slices.BinarySearch` require in the worst case to locate an item in a sorted slice of $1,000,000$ elements?
 3. What does `slices.BinarySearch` return if the target element is NOT present in the slice? How can this return value be used?
 4. Why does `slices.SortFunc` outperform older reflection-based or interface-based sorting in Go?
+
+
+## NEXT UP
+
+Advance to Step 2 (Hands-On Capstone Projects):
+
+- [Project 1: Contact Directory](../../projects/contact-directory/README.md)
+- [Project 2: Pricing Checkout](../../projects/pricing-checkout/README.md)

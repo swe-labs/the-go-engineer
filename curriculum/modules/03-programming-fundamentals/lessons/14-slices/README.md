@@ -1,5 +1,8 @@
 # Slices
 
+> "A slice does not store any data; it just describes a section of an underlying array."
+> — Rob Pike, *Go Slices: usage and internals*
+
 ## Learning objective
 
 Create, manipulate, and reason about slices — Go's dynamically-sized, reference-typed view into a contiguous segment of an underlying array.
@@ -18,6 +21,10 @@ When you `append` beyond the capacity, Go allocates a new, larger backing array,
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph SliceHeader["Slice Header (24 bytes on 64-bit architecture)"]
         PTR["Data Pointer (*T): 0x4000 (8 bytes)"]
         LEN["Length (int): 3 (8 bytes)"]

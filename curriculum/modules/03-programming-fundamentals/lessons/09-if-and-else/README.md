@@ -1,5 +1,8 @@
 # If and else
 
+> "Simplicity is prerequisite for reliability."
+> — Edsger W. Dijkstra
+
 ## Learning objective
 
 Write and reason about Go if/else chains including short-statement form, boolean conditions, nesting, and readability patterns, and predict the execution path for any conditional structure.
@@ -20,6 +23,10 @@ The short-statement form (`if err := doSomething(); err != nil`) is like a prep 
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph ShortStmt["if err := doWork(); err != nil"]
         INIT["1. Short Initialization:
 err := doWork()

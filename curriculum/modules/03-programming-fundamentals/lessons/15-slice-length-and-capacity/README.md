@@ -1,5 +1,8 @@
 # Slice length and capacity
 
+> "Understanding the difference between length and capacity is understanding how Go manages memory."
+> — Rob Pike
+
 ## Learning objective
 
 Distinguish between slice length and capacity, predict when `append` allocates, and use `cap`-aware slicing to control memory and growth behavior.

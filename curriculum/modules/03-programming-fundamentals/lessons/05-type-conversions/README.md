@@ -1,5 +1,8 @@
 # Type conversions
 
+> "You can't have trust without transparency. In Go, every conversion is explicit."
+> — Dennis Ritchie
+
 ## Learning objective
 
 Convert between Go types explicitly using the `T(x)` conversion syntax, numeric conversions between integer and float types, string/byte slice interconversion, the `strconv` package for parsing and formatting, and recognize when unsafe conversions are necessary or dangerous.
@@ -22,6 +25,10 @@ Conversions never silently lose information unless you ask for a narrower type. 
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph Illegal["Implicit Conversion (Rejected by Compiler)"]
         V1["var a int32 = 42"] -.->|Compile Error: cannot use int32 as int64| V2["var b int64 = a"]
     end

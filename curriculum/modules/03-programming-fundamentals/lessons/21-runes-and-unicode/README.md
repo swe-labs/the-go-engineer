@@ -1,5 +1,8 @@
 # Runes and Unicode
 
+> "UTF-8 was designed on a placemat in a New Jersey diner to make Unicode transparent and backwards-compatible with ASCII."
+> — Ken Thompson & Rob Pike
+
 ## Learning objective
 
 Explain the relationship between `rune`, `byte`, Unicode code points, and UTF-8 encoding, and write Go code that correctly handles multi-byte characters.
@@ -18,6 +21,10 @@ Think of runes as the "what you mean" and bytes as the "what's stored". The stri
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph UTF8["UTF-8 Encoded Byte Stream on Wire / Disk"]
         B1["0xE4 (1st byte)"] --- B2["0xB8 (2nd byte)"] --- B3["0x96 (3rd byte)"]
     end

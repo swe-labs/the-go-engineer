@@ -1,5 +1,8 @@
 # Maps
 
+> "Hash tables are the workhorse of modern software engineering."
+> — Donald E. Knuth
+
 ## Learning objective
 
 Create, read, update, and delete entries in Go maps (`map[K]V`), distinguish nil maps from empty maps, predict iteration order behavior, and explain why maps are reference types.
@@ -16,6 +19,10 @@ Think of a map as a **hash-powered lookup table**. You give it a key — any com
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph MapHeader["hmap Struct Reference (Pointer)"]
         COUNT["count: Number of active elements"]
         B["B: log2(number of buckets)"]

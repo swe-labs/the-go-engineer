@@ -1,5 +1,8 @@
 # iota
 
+> "Controlling complexity is the essence of computer programming."
+> — Brian W. Kernighan
+
 ## Learning objective
 
 Use `iota` to generate enumerated constants, reset iota per const block, skip values with `_`, create bitmask patterns with `<<` and `|`, and type iota constant blocks.
@@ -29,6 +32,10 @@ When combined with operators (`<<`, `|`, `+`), `iota` generates values that foll
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph EnumBlock["const ( ... ) Block Evaluation"]
         I0["Line 0: Sunday = iota       --> Value: 0, iota advances to 1"]
         I1["Line 1: Monday             --> Repeated expr (Sunday): Value = 1"]

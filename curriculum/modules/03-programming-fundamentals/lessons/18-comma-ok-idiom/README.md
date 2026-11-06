@@ -1,5 +1,8 @@
 # Comma-ok idiom
 
+> "Explicit error and status checking turns runtime surprises into deterministic flow control."
+> — Rob Pike
+
 ## Learning objective
 
 Use the comma-ok (comma-ok) two-value form to safely access map entries, perform type assertions, and receive from channels — and explain why omitting the `ok` check is a common source of bugs.
@@ -25,6 +28,10 @@ v, ok := m["key"]   // ok == true  → key exists
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     LOOKUP["Map Lookup: val, ok := userScores["alice"]"]
 
     LOOKUP --> CHECK{"Does key "alice" exist in map?"}

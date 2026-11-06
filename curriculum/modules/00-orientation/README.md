@@ -57,15 +57,23 @@ If those commands are unfamiliar, continue anyway. Module 01 and Module 02 will 
 
 ```mermaid
 flowchart TD
-    M01["01. Repository Map<br/><i>curriculum/, internal/tools/, web/, scripts/</i>"] --> M02["02. Zero-Magic Contract<br/><i>No hidden defaults, explicit invariants</i>"]
-    M02 --> M03["03. Four Content Types<br/><i>Lesson → Lab → Project → Checkpoint</i>"]
-    M03 --> M04["04. Toolchain Execution<br/><i>go run, go test, go build, go vet</i>"]
-    M04 --> M05["05. Dual-State Scaffolds<br/><i>_starter/ vs _solution/ workflows</i>"]
-    M05 --> M06["06. Assessment Framework<br/><i>Criterion rubrics & actionable feedback</i>"]
-    M06 --> M07["07. Structured Debugging<br/><i>5-field high-signal case files</i>"]
-    M07 --> M08["08. Job Readiness<br/><i>5 evidence pillars of engineering proof</i>"]
-    M08 --> M09["09. Roadmap Navigation<br/><i>Trunk & fork dependency graphs</i>"]
-    M09 --> M10["10. Portfolio Proof Plan<br/><i>Readiness scoring & capstone showcases</i>"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
+    M01["01. Repository Map<br/><i>curriculum/, internal/tools/, web/, scripts/</i>"]:::frontDoor
+    M02["02. Zero-Magic Contract<br/><i>No hidden defaults, explicit invariants</i>"]:::standardNode
+    M03["03. Four Content Types<br/><i>Lesson → Lab → Project → Checkpoint</i>"]:::standardNode
+    M04["04. Execution Workflow<br/><i>Terminal Invocation & Exit Codes</i>"]:::standardNode
+    M05["05. Dual-State Scaffolds<br/><i>_starter/ vs _solution/ workflows</i>"]:::standardNode
+    M06["06. Assessment Framework<br/><i>Criterion rubrics & actionable feedback</i>"]:::standardNode
+    M07["07. Structured Debugging<br/><i>5-field high-signal case files</i>"]:::standardNode
+    M08["08. Job Readiness<br/><i>5 evidence pillars of engineering proof</i>"]:::standardNode
+    M09["09. Roadmap Navigation<br/><i>Trunk & fork dependency graphs</i>"]:::standardNode
+    M10["10. Portfolio Proof Plan<br/><i>Readiness scoring & capstone showcases</i>"]:::capstoneNode
+
+    M01 --> M02 --> M03 --> M04 --> M05 --> M06 --> M07 --> M08 --> M09 --> M10
 ```
 
 ## Lessons
@@ -114,7 +122,7 @@ Complete the two Module 00 assessments:
 | ------------------------------ | --------------------------------------------------------------- | ---------------------------------------------------------- |
 | Treating reading as completion | You can quote text but cannot run, change, or explain anything. | Use the proof task at the end of every lesson.             |
 | Skipping orientation           | Later folders and validators feel mysterious.                   | Finish this module before jumping ahead.                   |
-| Copying commands blindly       | A command fails and you do not know what it was meant to prove. | Read the under-the-hood walkthrough and run instructions before running. |
+| Copying commands blindly       | A command fails and you do not know what it was meant to prove. | Read the mental model and command context before running. |
 | Looking at solutions too early | You finish faster but learn less.                               | Attempt the starter first, then compare.                   |
 | Avoiding assessments           | Weak spots remain invisible.                                    | Use assessments as feedback, not punishment.               |
 
@@ -125,8 +133,7 @@ You are ready for Module 01 when you can:
 - [ ] explain the difference between `curriculum/`, `internal/tools/`, `web/`, and `scripts/`
 - [ ] find a lesson README from its metadata path
 - [ ] explain zero magic in your own words
-- [ ] run at least one lesson example
-- [ ] run at least one test command
+- [ ] run or inspect at least one command verification
 - [ ] use a starter folder without editing the solution first
 - [ ] answer the checkpoint questions
 - [ ] write a short personal roadmap and portfolio plan
@@ -135,7 +142,7 @@ You are ready for Module 01 when you can:
 
 Begin your orientation with the first lesson:
 
-- [Lesson 01: How to use this repository](./lessons/01-how-to-use-this-repository/README.md)**
+- [Lesson 01: How to use this repository](./lessons/01-how-to-use-this-repository/README.md)
 
 > [!NOTE] Single-Entry Navigation
 > Module progression is strictly sequential. Complete lessons 01 through 10, finish the setup project, and pass the assessment checkpoint. The exit gate to Module 01 unlocks upon completing the assessment checkpoint.

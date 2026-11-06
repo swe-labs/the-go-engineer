@@ -36,6 +36,7 @@ func validateSESENavigation() {
 		"module-00": "../01-computers-terminal-git-web/README.md",
 		"module-01": "../02-go-setup-tooling/README.md",
 		"module-02": "../03-programming-fundamentals/README.md",
+		"module-03": "../04-functions-errors-data-semantics/README.md",
 	}
 
 	for _, mod := range core.Modules {
