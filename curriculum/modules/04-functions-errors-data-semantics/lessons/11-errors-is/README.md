@@ -1,5 +1,7 @@
 # errors.Is
 
+> *"Controlling complexity is the essence of computer programming."* — Brian Kernighan
+
 ## Learning objective
 
 Use `errors.Is` to match sentinel errors through a wrapping chain, explain the difference between `==` and `errors.Is`, and implement a custom `Is` method on an error type.
@@ -16,17 +18,25 @@ Imagine a chain of linked envelopes. Each envelope contains a message and a poin
 
 ```mermaid
 flowchart TD
-    QUERY["errors.Is(err, sql.ErrNoRows)"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-    QUERY --> TOP["Inspect Current Error: err"]
-    TOP --> MATCH{"err == target?"}
-    MATCH -->|Yes| FOUND["Return true (Target matched)"]
-    MATCH -->|No| UNWRAP{"Does err implement Unwrap()?"}
-    UNWRAP -->|Yes| NEXT["err = err.Unwrap()"] --> TOP
-    UNWRAP -->|No| NOT_FOUND["Return false (Target not in chain)"]
+    QUERY["errors.Is(err, sql.ErrNoRows)"]:::frontDoor
+    TOP["Inspect Current Node: err"]:::standardNode
+    MATCH{"err == target?"}:::standardNode
+    FOUND["Return true<br/>(Target matched in chain)"]:::exitGate
+    UNWRAP{"Implements Unwrap()?"}:::standardNode
+    NEXT["err = err.Unwrap()"]:::standardNode
+    NOT_FOUND["Return false<br/>(Target not in chain)"]:::capstoneNode
 
-    style FOUND stroke:#28a745,stroke-width:2px
-    style NOT_FOUND stroke:#dc3545,stroke-width:2px
+    QUERY --> TOP
+    TOP --> MATCH
+    MATCH -->|Yes| FOUND
+    MATCH -->|No| UNWRAP
+    UNWRAP -->|Yes| NEXT --> TOP
+    UNWRAP -->|No| NOT_FOUND
 ```
 
 ## Core idea
@@ -275,4 +285,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/11-error
 
 ## NEXT UP
 
-[Errors As](../12-errors-as/README.md)
+Advance to error type assertions with errors.As:
+
+- [Lesson 12: errors.As](../12-errors-as/README.md)

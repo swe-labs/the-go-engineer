@@ -1,5 +1,7 @@
 # Errors as values
 
+> *"Errors are values. Treat them as such."* — Rob Pike
+
 ## Learning objective
 
 Use Go's `error` interface to represent and propagate errors, apply the `if err != nil` pattern consistently, and distinguish `nil` errors from non-nil errors containing a `nil` pointer.
@@ -26,18 +28,20 @@ Because `error` is an interface, any type that has an `Error() string` method qu
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
     subgraph ErrorInterface["Built-in error Interface Specification"]
-        DEF["type error interface {
-    Error() string
-}"]
+        DEF["type error interface { Error() string }"]:::frontDoor
     end
 
     subgraph ErrorReturnFlow["Errors as Normal First-Class Return Values"]
-        FN["res, err := OpenAccount(name)"]
-        CHECK{"if err != nil"}
-        HANDLE["Handle error explicitly
-(log, retry, or wrap and return)"]
-        CONTINUE["Proceed with valid res"]
+        FN["res, err := OpenAccount(name)"]:::frontDoor
+        CHECK{"if err != nil"}:::standardNode
+        HANDLE["Handle error explicitly<br/>(wrap and return early)"]:::capstoneNode
+        CONTINUE["Proceed with valid res"]:::exitGate
 
         FN --> CHECK
         CHECK -->|true| HANDLE
@@ -270,4 +274,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/09-error
 
 ## NEXT UP
 
-[Error Wrapping](../10-error-wrapping/README.md)
+Advance to error wrapping and contextual chains:
+
+- [Lesson 10: Error wrapping](../10-error-wrapping/README.md)

@@ -64,7 +64,7 @@ The curriculum enforces a strict **Zero-Magic** engineering standard:
 - **Explanations Answer How, Why, and What Changes:** Good teaching surfaces explain what the code does, why it exists, what would change if the design changed, and what failure mode or trap the learner will encounter.
 - **Stage-Aware Engineering Depth:** Foundational modules establish concrete mental models (stack vs heap, pointer semantics, goroutine mechanics). Production modules focus on systems architecture, observability, fault tolerance, and multi-tenant security.
 - **Runnable & Tested:** All projects include reference solutions (`_solution/`), student starter templates (`_starter/`), and comprehensive test suites (`main_test.go`).
-- **Automated Quality Gates:** Enforced by `internal/tools/curriculum` across 17 automated gates.
+- **Automated Quality Gates:** Enforced by `internal/tools/curriculum` across 24 automated gates.
 
 ## Architectural Reference Documents
 

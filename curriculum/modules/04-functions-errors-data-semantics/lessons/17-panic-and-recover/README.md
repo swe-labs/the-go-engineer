@@ -1,5 +1,7 @@
 # panic and recover
 
+> *"Don't panic."* — Rob Pike
+
 ## Learning objective
 
 Distinguish between errors (expected failures) and panics (unexpected invariants), use `recover` in a deferred function to catch a panic, and build a panic-recovery middleware pattern.
@@ -16,22 +18,23 @@ Think of `panic` as pulling a fire alarm. Normal operation (returning errors) is
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
     subgraph NormalFlow["Normal Execution Stack"]
-        F1["main()"] --> F2["processData()"]
-        F2 --> PANIC["panic("database connection lost")"]
+        F1["main()"]:::frontDoor --> F2["processData()"]:::standardNode
+        F2 --> PANIC["panic('database connection lost')"]:::capstoneNode
     end
 
     subgraph Unwinding["Runtime Stack Unwinding"]
-        PANIC --> U1["Unwind processData stack frame"]
-        U1 --> DEF["Execute deferred functions in main()"]
-        DEF --> REC{"r := recover() != nil?"}
-        REC -->|Recovered!| SAFE["Program resumes gracefully;
-Log critical error & return fallback"]
-        REC -->|No recover| CRASH["Process crashes with exit status 2"]
+        PANIC --> U1["Unwind processData stack frame"]:::standardNode
+        U1 --> DEF["Execute deferred functions in caller"]:::standardNode
+        DEF --> REC{"r := recover() != nil?"}:::standardNode
+        REC -->|Recovered| SAFE["Program resumes gracefully<br/>Log critical error & return fallback"]:::exitGate
+        REC -->|No recover| CRASH["Process crashes with exit status 2"]:::capstoneNode
     end
-
-    style SAFE stroke:#28a745,stroke-width:2px
-    style CRASH stroke:#dc3545,stroke-width:2px
 ```
 
 ## Core idea
@@ -239,4 +242,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/17-panic
 
 ## NEXT UP
 
-[Custom Error Types](../18-custom-error-types/README.md)
+Advance to custom error types:
+
+- [Lesson 18: Custom error types](../18-custom-error-types/README.md)

@@ -1,5 +1,7 @@
 # defer for cleanup
 
+> *"Handle normal cases and worst cases separately."* — Butler Lampson
+
 ## Learning objective
 
 Use `defer` to release resources safely: close files, unlock mutexes, commit or roll back transactions, and clean up in error paths. Recognize and avoid defer-in-loop pitfalls.
@@ -15,17 +17,18 @@ A file handle not closed, a mutex not unlocked, or a database transaction not ro
 ## Visual model
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    actor Fn as Worker Function
-    participant OS as Operating System / DB Connection
+flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-    Fn->>OS: file, err := os.Open("data.csv")
-    Note over Fn: Check err != nil immediately
-    Fn->>Fn: defer file.Close() (Registered for cleanup)
-    Fn->>OS: Read chunks, process rows, evaluate business logic
-    Note over Fn: Any panic or return statement triggers cleanup
-    Fn-->>OS: Executing deferred file.Close() (FD freed safely)
+    A["Acquire Resource<br/>f, err := os.Open(path)"]:::frontDoor --> C{"err != nil?"}:::standardNode
+    C -->|Yes| E["Return Error Immediately<br/>(No cleanup needed)"]:::capstoneNode
+    C -->|No| D["Register Deferred Cleanup<br/>defer f.Close()"]:::standardNode
+    D --> W["Perform File Processing / DB Queries"]:::standardNode
+    W --> R{"Exit Path?"}:::standardNode
+    R -->|Normal Return / Error Return / Panic| CL["Automatic LIFO Cleanup<br/>f.Close() executed before frame exits"]:::exitGate
 ```
 
 ## Core idea
@@ -320,4 +323,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/16-defer
 
 ## NEXT UP
 
-[Panic And Recover](../17-panic-and-recover/README.md)
+Advance to crash boundaries with panic and recover:
+
+- [Lesson 17: Panic and recover](../17-panic-and-recover/README.md)

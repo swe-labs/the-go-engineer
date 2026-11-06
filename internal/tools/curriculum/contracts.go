@@ -27,6 +27,7 @@ func validateReadmeContracts() {
 		"module-01": true,
 		"module-02": true,
 		"module-03": true,
+		"module-04": true,
 	}
 
 	requiredHeadings := []string{

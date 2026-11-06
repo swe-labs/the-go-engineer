@@ -44,7 +44,7 @@ The canonical v3 curriculum consists of **18 core modules** organized into progr
 
 ### Prerequisites
 
-- **Go:** 1.24+ (declared in [`go.mod`](./go.mod))
+- **Go:** 1.26+ (declared in [`go.mod`](./go.mod))
 - **Git:** Standard git CLI
 - **Operating System:** Linux, macOS, or Windows (WSL2 or MinGW-w64 recommended for CGO race detection)
 
@@ -69,7 +69,7 @@ go run ./curriculum/modules/00-orientation/lessons/01-how-to-use-this-repository
 The repository includes both curriculum structural validators and standard Go test suites:
 
 ```bash
-# 1. Run all 17 automated curriculum quality gates
+# 1. Run all 24 automated curriculum quality gates
 go run ./internal/tools/curriculum validate-all
 
 # 2. Run the full unit and integration test suite

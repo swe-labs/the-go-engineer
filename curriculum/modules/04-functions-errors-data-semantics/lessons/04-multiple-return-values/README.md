@@ -1,5 +1,7 @@
 # Multiple return values
 
+> *"Multiple return values provide a cleaner way to handle errors and status without global state."* — Rob Pike
+
 ## Learning objective
 
 Write and call functions that return multiple values, use the `(T, error)` return idiom, discard unwanted returns with the blank identifier `_`, and name multiple return values for clarity.
@@ -18,17 +20,20 @@ The blank identifier `_` acts as a "don't care" slot. If a function returns thre
 
 ```mermaid
 flowchart TD
-    CALL["user, err := FetchUser(101)"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-    CALL --> EVAL{"Did database query succeed?"}
+    CALL["Caller Invocation<br/>user, err := FetchUser(101)"]:::frontDoor
+    EVAL{"Query Status?"}:::standardNode
 
-    EVAL -->|Success| S_OK["user = &User{ID: 101, Name: "Alice"}
-err = nil"]
-    EVAL -->|Failure| S_ERR["user = nil
-err = ErrNotFound (or wrapped sql.ErrNoRows)"]
+    S_OK["Success Branch<br/>user = &User{ID: 101}, err = nil"]:::exitGate
+    S_ERR["Error Branch<br/>user = nil, err = ErrNotFound"]:::capstoneNode
 
-    style S_OK stroke:#28a745,stroke-width:2px
-    style S_ERR stroke:#dc3545,stroke-width:2px
+    CALL --> EVAL
+    EVAL -->|Found| S_OK
+    EVAL -->|Not Found| S_ERR
 ```
 
 ## Core idea
@@ -239,4 +244,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/04-multi
 
 ## NEXT UP
 
-[Scope](../05-scope/README.md)
+Advance to variable scoping rules:
+
+- [Lesson 05: Scope](../05-scope/README.md)

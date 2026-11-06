@@ -1,5 +1,7 @@
 # Parameters
 
+> *"The only way to pass parameters in C is by value."* — Dennis Ritchie
+
 ## Learning objective
 
 Declare functions with positional parameters, use type shorthand for same-type parameters, and write variadic functions that accept zero or more arguments of a given type.
@@ -18,18 +20,23 @@ Variadic parameters (`...T`) are a special slot that collects all remaining argu
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
     subgraph Caller["Caller Stack Frame"]
-        ARG1["price: 100.0 (float64)"]
-        ARG2["discount: 0.15 (float64)"]
+        ARG1["price: 100.0 (float64)"]:::frontDoor
+        ARG2["discount: 0.15 (float64)"]:::frontDoor
     end
 
     subgraph Callee["Callee Stack Frame: ApplyDiscount(p, d float64)"]
-        P1["p: 100.0 (Distinct stack slot)"]
-        P2["d: 0.15 (Distinct stack slot)"]
+        P1["p: 100.0 (Distinct stack slot)"]:::standardNode
+        P2["d: 0.15 (Distinct stack slot)"]:::standardNode
     end
 
-    ARG1 -->|Bitwise copy on call| P1
-    ARG2 -->|Bitwise copy on call| P2
+    ARG1 -->|Bitwise 8B copy| P1
+    ARG2 -->|Bitwise 8B copy| P2
 ```
 
 ## Core idea
@@ -227,4 +234,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/02-param
 
 ## NEXT UP
 
-[Return Values](../03-return-values/README.md)
+Advance to return value semantics:
+
+- [Lesson 03: Return values](../03-return-values/README.md)

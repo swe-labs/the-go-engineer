@@ -16,7 +16,7 @@ The repository features:
 - 20 Advanced Electives in `curriculum/electives/advanced-electives/`
 - Companion Full-Stack Frontend Track in `curriculum/companion-frontend/`
 - Complete reference solutions (`_solution/`) and student starter templates (`_starter/`)
-- 17 automated curriculum quality gates in `internal/tools/curriculum`
+- 24 automated curriculum quality gates in `internal/tools/curriculum`
 
 ## Branch Model
 

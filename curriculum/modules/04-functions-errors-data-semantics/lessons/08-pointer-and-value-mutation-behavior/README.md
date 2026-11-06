@@ -1,5 +1,7 @@
 # Pointer and value mutation behavior
 
+> *"Pointers are like jumps, only worse."* — Tony Hoare
+
 ## Learning objective
 
 Use pointer parameters (`*T`) to mutate caller state, distinguish value receivers from pointer receivers, handle nil pointers safely, and decide when to use pointer vs value parameters.
@@ -20,15 +22,20 @@ Nil is a valid pointer value meaning "no signpost here." Dereferencing a nil poi
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
     subgraph ValueReceiver["Value Semantics (modifyValue(u User))"]
-        U1["u User (Stack cell A)"] -->|Copies entire struct| U2["u User (Stack cell B)"]
-        U2 -->|Mutates cell B| U2_MOD["u.Name = "Bob" (cell A unchanged)"]
+        U1["u User (Stack cell A)"]:::frontDoor -->|Copies entire struct| U2["u User (Stack cell B)"]:::standardNode
+        U2 -->|Mutates cell B| U2_MOD["u.Name = 'Bob'<br/>(Cell A unchanged)"]:::capstoneNode
     end
 
     subgraph PointerReceiver["Pointer Semantics (modifyPointer(u *User))"]
-        P1["u User (Memory: 0x3000)"]
-        P_PTR["u *User (Pointer: 0x3000)"] -->|Dereference *u| P1
-        P_PTR -->|Mutates cell at 0x3000| P1_MOD["u.Name = "Bob" (Original mutated)"]
+        P1["u User at 0x3000"]:::frontDoor
+        P_PTR["u *User (Address: 0x3000)"]:::standardNode -->|Dereference *u| P1
+        P_PTR -->|Mutates cell at 0x3000| P1_MOD["u.Name = 'Bob'<br/>(Original mutated)"]:::exitGate
     end
 ```
 
@@ -257,4 +264,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/08-point
 
 ## NEXT UP
 
-[Errors As Values](../09-errors-as-values/README.md)
+Advance to error handling fundamentals:
+
+- [Lesson 09: Errors as values](../09-errors-as-values/README.md)

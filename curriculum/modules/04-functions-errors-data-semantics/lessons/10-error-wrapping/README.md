@@ -1,5 +1,7 @@
 # Error wrapping
 
+> *"Wrapping an error gives context to the caller while preserving the underlying cause."* — Russ Cox
+
 ## Learning objective
 
 Wrap errors with additional context using `fmt.Errorf` and the `%w` verb, explain when wrapping is appropriate versus when it adds noise, and unwrap errors programmatically using `errors.Unwrap`.
@@ -16,13 +18,15 @@ Think of error wrapping as nesting Russian dolls. Each `fmt.Errorf("context: %w"
 
 ```mermaid
 flowchart LR
-    E1["Root Cause:
-sql.ErrNoRows"] -->|fmt.Errorf("...: %w", err)| E2["Repository Error:
-"find user 42: sql: no rows in result set""]
-    E2 -->|fmt.Errorf("...: %w", err)| E3["Service Error:
-"authenticate: find user 42: sql: no rows""]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-    NOTE["%w creates an Unwrap() link forming a causal error chain"]
+    E1["Root Cause<br/>sql.ErrNoRows"]:::capstoneNode -->|fmt.Errorf: %w| E2["Repository Layer<br/>find user 42: sql.ErrNoRows"]:::standardNode
+    E2 -->|fmt.Errorf: %w| E3["Service Layer<br/>authenticate: find user 42..."]:::frontDoor
+
+    NOTE["%w establishes an Unwrap() chain for errors.Is and errors.As"]:::exitGate
     E2 -.-> NOTE
 ```
 
@@ -235,4 +239,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/10-error
 
 ## NEXT UP
 
-[Errors Is](../11-errors-is/README.md)
+Advance to sentinel error inspection with errors.Is:
+
+- [Lesson 11: errors.Is](../11-errors-is/README.md)

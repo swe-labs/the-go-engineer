@@ -1,5 +1,7 @@
 # defer mechanics
 
+> *"Simplicity is a great virtue but it requires hard work to achieve it."* — Edsger W. Dijkstra
+
 ## Learning objective
 
 Use the `defer` statement to schedule function calls at return, predict LIFO execution order, understand argument capture versus closure capture, and exploit deferred functions with named return values.
@@ -16,16 +18,21 @@ Resource management is the most common source of bugs in systems programming: fi
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
     subgraph ExecutionOrder["Function Execution with Defer (LIFO Stack)"]
         direction TB
-        E1["1. Execute Statement A"]
-        D1["2. defer fmt.Println("First") --> Pushed to Stack"]
-        E2["3. Execute Statement B"]
-        D2["4. defer fmt.Println("Second") --> Pushed to Stack"]
-        E3["5. Function Reaches Return"]
+        E1["1. Execute Statement A"]:::frontDoor
+        D1["2. defer fmt.Println('First')<br/>(Pushed to LIFO stack)"]:::standardNode
+        E2["3. Execute Statement B"]:::standardNode
+        D2["4. defer fmt.Println('Second')<br/>(Pushed to top of stack)"]:::standardNode
+        E3["5. Function Reaches Return"]:::capstoneNode
 
-        POP1["6. Pop & Execute LIFO: Print "Second""]
-        POP2["7. Pop & Execute LIFO: Print "First""]
+        POP1["6. Pop & Execute LIFO: Print 'Second'"]:::exitGate
+        POP2["7. Pop & Execute LIFO: Print 'First'"]:::exitGate
 
         E1 --> D1 --> E2 --> D2 --> E3 --> POP1 --> POP2
     end
@@ -256,4 +263,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/15-defer
 
 ## NEXT UP
 
-[Defer For Cleanup](../16-defer-for-cleanup/README.md)
+Advance to resource cleanup patterns with defer:
+
+- [Lesson 16: Defer for cleanup](../16-defer-for-cleanup/README.md)
