@@ -4,10 +4,10 @@ Use this after attempting the checkpoint.
 
 ## Part 1
 
-1. `curriculum/` houses both authoritative manifest blueprints (`path.core.json`, `projects.json`, etc.) and the physical instructional content (`modules/`, `electives/`, and companion tracks).
-2. `internal/tools/curriculum/` serves as the automated quality compiler, running 17 quality gates covering schemas, dependency cycles, zero-magic compliance, and AST parity.
-3. `web/` hosts the learner progression portal and graph visualizer, while `scripts/` contains operational automation and the automated quality gate runner (`scripts/validate_curriculum.go`).
-4. Manifest blueprints declare the learning graph; strict validation against `schema.v3.json` guarantees zero dangling references, no cyclic dependencies, and complete filesystem parity.
+1. The Core Backend Path (Modules 00–18) is the linear engineering spine; the Companion Frontend Track (Stages 01–04) teaches server-driven full-stack hypermedia in Go; Advanced Electives provide deep specializations in gRPC, generics, and distributed systems.
+2. Every module consists of an Overview `README.md` (mission and concept map), `lessons/` (concepts and mental models), `projects/` (hands-on implementations), and `assessments/` (diagnostic checkpoints).
+3. Single-Entry, Single-Exit (SESE) requires entering each module through `## Start here` in its root README and advancing sequentially until passing the assessment checkpoint exit gate. This prevents skipping prerequisites or hitting unearned knowledge gaps.
+4. In your own dedicated local directory or personal git repository (e.g. `~/the-go-engineer-workspace`), leaving the curriculum repository as your clean reference textbook.
 5. Module: `08-http-rest-apis`. Lesson: `03-handler-lifecycle`.
 
 ## Part 2

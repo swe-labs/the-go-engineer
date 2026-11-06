@@ -2,52 +2,57 @@
 
 ## Goal
 
-Verify that your development environment is ready for this curriculum. You will check that Go, Git, and a text editor are installed on your system using your terminal, and confirm that the automated quality toolchain runs successfully.
+Verify that your development environment is ready for this curriculum. You will confirm that your terminal, Git, and a text editor are installed and configured, and establish your personal development workspace directory for course projects.
 
 ## Prerequisites
 
-- Lesson 01 through Lesson 10 of Module 00 (Orientation)
-- Go 1.24+ (or Go 1.26+) installed
-- A terminal open
-- A text editor (VS Code, GoLand, Neovim, etc.)
+- Lessons 01 through 10 of Module 00 (Orientation) completed
+- A terminal application open (Bash, Zsh, PowerShell, etc.)
+- Git installed on your system
+- A text editor or IDE installed (VS Code, GoLand, Neovim, etc.)
 
-## Task
+## Tasks
 
-Open your terminal and run the following environment checks:
+Execute the following environment verification steps in your terminal:
 
-1. **Go**: Run `go version`. You should see output indicating Go 1.24 or higher, such as `go version go1.26.0 windows/amd64` (or `darwin/arm64`, `linux/amd64`).
-2. **Git**: Run `git version`. You should see output like `git version 2.43.0` or higher.
-3. **Text editor**: Run the command for your editor — `code --version` (VS Code), `vim --version`, or `nano --version`.
-4. **Toolchain verification**: Run the automated quality gate runner from repository root:
+1. **Terminal and Shell**: Verify that your terminal shell is working and inspect your current path:
    ```bash
-   go run ./scripts/validate_curriculum.go
+   pwd    # On Windows PowerShell: Get-Location
    ```
-   Confirm that all 17 quality gates pass.
-
-Record the output of each command in a file called `setup.txt`:
-
-```bash
-go version > setup.txt
-git version >> setup.txt
-code --version >> setup.txt   # or vim/nano
-go run ./scripts/validate_curriculum.go >> setup.txt
-```
+2. **Git Installation & Identity**: Confirm Git is installed and that your committer identity is configured:
+   ```bash
+   git --version
+   git config user.name
+   git config user.email
+   ```
+   If your name or email returns blank, configure them:
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "your.email@example.com"
+   ```
+3. **Text Editor**: Verify your editor from the command line (e.g., `code --version` for VS Code, or confirm your IDE is launched).
+4. **Initialize Your Learning Workspace**: Create a dedicated directory outside the curriculum repository where you will store your personal code, experiment scripts, and project solutions:
+   ```bash
+   mkdir -p ~/the-go-engineer-workspace
+   ```
+5. **Record Your Setup Evidence**: In your learning workspace directory, create an environment summary file named `setup.txt`:
+   ```bash
+   git --version > setup.txt
+   git config user.name >> setup.txt
+   git config user.email >> setup.txt
+   ```
 
 ## Verification
 
-Run each command below and confirm the output matches what you expect:
+Review your `setup.txt` file and verify:
+- Git reports a valid version (e.g., `git version 2.43.0` or higher).
+- Your committer name and email are recorded.
+- Your personal workspace directory exists and is ready for project work.
 
-```bash
-go version
-git version
-code --version   # or your editor
-go run ./scripts/validate_curriculum.go
-```
-
-The expected output for Go is a valid version string (e.g., `go version go1.26.0 ...`). If you see `command not found` or similar, the tool is not installed or not in your system `PATH`.
-
-When you are done, update your Portfolio Plan (from Lesson 10) to include this project with status "complete" and the evidence file `setup.txt`.
+When you are done, note this milestone in your personal portfolio plan from Lesson 10.
 
 ## NEXT UP
 
-[Assessment: Course Setup](../../assessments/course-setup/README.md) — confirm your environment passes the verification.
+Advance to the setup assessment:
+
+- [Assessment: Course Setup](../../assessments/course-setup/README.md)

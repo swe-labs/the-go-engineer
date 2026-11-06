@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This assessment verifies that you have successfully set up your development environment, can fork and clone the repository, run Go code, and pass the project verification. It is the first operational gate in the curriculum.
+This assessment verifies that you have successfully set up your terminal environment, configured Git with your committer identity, verified your code editor, and created a dedicated local workspace for your projects.
 
 ## Targets
 
@@ -17,28 +17,29 @@ This assessment verifies that you have successfully set up your development envi
 
 Submit:
 
-1. A `setup.txt` file containing version output for Go (1.24+ / 1.26+), Git, your editor, and `validate_curriculum.go` verification
-2. A short paragraph describing your editor setup (extensions, keybindings, debugging configuration)
+1. A `setup.txt` file containing your Git version, configured committer name and email, and editor confirmation
+2. A short paragraph describing your editor and terminal setup
 3. Answers to `questions.md`
 
 ## Time expectation
 
-Plan for 20 to 30 minutes.
+Plan for 15 to 20 minutes.
 
 ## Allowed resources
 
 - Your terminal and editor
-- The repository files
 - The Module 00 project `course-setup-verification`
 
 ## Passing standard
 
-You pass when your environment produces passing tests and you can describe your toolchain setup without guessing.
+You pass when your environment produces verified Git identity output and you have established a dedicated workspace for your project implementations.
 
 ## Retake policy
 
-If your environment does not pass the verification project, resolve the issue listed in the test output and re-run. If a question answer is incomplete, revise and resubmit.
+If your Git identity or editor configuration is missing, complete the missing step from `course-setup-verification` and re-verify.
 
 ## NEXT UP
 
-[Assessment: Module 00 Checkpoint](../checkpoint/README.md) — verify your understanding of all orientation concepts before moving to Module 01.
+Advance to the final module checkpoint:
+
+- [Assessment: Module 00 Checkpoint](../checkpoint/README.md)

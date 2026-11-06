@@ -62,7 +62,7 @@ flowchart TD
     classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
     classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-    M01["01. Repository Map<br/><i>curriculum/, internal/tools/, web/, scripts/</i>"]:::frontDoor
+    M01["01. Curriculum Map<br/><i>Core Path, Frontend, Electives</i>"]:::frontDoor
     M02["02. Zero-Magic Contract<br/><i>No hidden defaults, explicit invariants</i>"]:::standardNode
     M03["03. Four Content Types<br/><i>Lesson → Lab → Project → Checkpoint</i>"]:::standardNode
     M04["04. Execution Workflow<br/><i>Terminal Invocation & Exit Codes</i>"]:::standardNode
@@ -130,8 +130,8 @@ Complete the two Module 00 assessments:
 
 You are ready for Module 01 when you can:
 
-- [ ] explain the difference between `curriculum/`, `internal/tools/`, `web/`, and `scripts/`
-- [ ] find a lesson README from its metadata path
+- [ ] explain the three learning tracks in this curriculum
+- [ ] navigate to any lesson, project, or assessment without guessing
 - [ ] explain zero magic in your own words
 - [ ] run or inspect at least one command verification
 - [ ] use a starter folder without editing the solution first
