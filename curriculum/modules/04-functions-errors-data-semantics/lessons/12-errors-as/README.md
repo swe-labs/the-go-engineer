@@ -1,5 +1,7 @@
 # errors.As
 
+> *"The programmer, like the poet, works only slightly removed from pure thought-stuff."* — Fred Brooks
+
 ## Learning objective
 
 Use `errors.As` to find and extract the first error in a chain that matches a target type, explain the difference between `errors.As` and a direct type assertion, and implement a custom `As` method on an error type.
@@ -16,20 +18,25 @@ Sentinel errors (checked with `errors.Is`) tell you _which_ error occurred. Cust
 
 ```mermaid
 flowchart TD
-    QUERY["var pgErr *pgconn.PgError
-errors.As(err, &pgErr)"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-    QUERY --> TOP["Inspect Current Error in Chain"]
-    TOP --> CHECK{"Can current error assign to target pointer type?"}
-    CHECK -->|Yes| COPY["Assign matched error to target pointer
-Return true"]
-    CHECK -->|No| UNWRAP{"Does error implement Unwrap()?"}
-    UNWRAP -->|Yes| NEXT["Advance to wrapped child error"] --> TOP
-    UNWRAP -->|No| FAIL["Target type not found
-Return false"]
+    QUERY["var pgErr *pgconn.PgError<br/>errors.As(err, &pgErr)"]:::frontDoor
+    TOP["Inspect Current Node in Error Chain"]:::standardNode
+    CHECK{"Can assign to target pointer type?"}:::standardNode
+    COPY["Assign matched error to *target<br/>Return true"]:::exitGate
+    UNWRAP{"Implements Unwrap()?"}:::standardNode
+    NEXT["Advance to inner wrapped error"]:::standardNode
+    FAIL["Target type not found<br/>Return false"]:::capstoneNode
 
-    style COPY stroke:#28a745,stroke-width:2px
-    style FAIL stroke:#dc3545,stroke-width:2px
+    QUERY --> TOP
+    TOP --> CHECK
+    CHECK -->|Yes| COPY
+    CHECK -->|No| UNWRAP
+    UNWRAP -->|Yes| NEXT --> TOP
+    UNWRAP -->|No| FAIL
 ```
 
 ## Core idea
@@ -289,4 +296,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/12-error
 
 ## NEXT UP
 
-[Validation](../13-validation/README.md)
+Advance to structured input validation:
+
+- [Lesson 13: Validation](../13-validation/README.md)

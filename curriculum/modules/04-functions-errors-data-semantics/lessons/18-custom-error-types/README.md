@@ -1,5 +1,7 @@
 # Custom error types
 
+> *"The connections between modules are the assumptions which the modules make about each other."* — David Parnas
+
 ## Learning objective
 
 Design custom error types that implement the `error` interface, carry structured context fields, implement `Is`/`As`/`Unwrap` methods for chain compatibility, and enable callers to extract typed error data.
@@ -16,21 +18,24 @@ A sentinel error is a post-it note with a message. A custom error type is a stru
 
 ```mermaid
 flowchart TD
-    subgraph CustomStruct["type AppError struct"]
-        CODE["Code: "INVALID_PAYMENT_METHOD""]
-        MSG["Message: "Card expired""]
-        RETRY["Retryable: false"]
-        ERR["Err: underlying error (sql/network)"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
+    subgraph CustomStruct["type AppError struct (Custom Error Type)"]
+        CODE["Field: Code string ('ERR_UNAUTHORIZED')"]:::frontDoor
+        MSG["Field: Message string ('token expired')"]:::standardNode
+        ERR["Field: Err error (underlying driver error)"]:::capstoneNode
     end
 
-    subgraph Impl["Implements error and Unwrap interfaces"]
-        M1["Error() string:
-fmt.Sprintf("[%s] %s", e.Code, e.Message)"]
-        M2["Unwrap() error:
-return e.Err"]
+    subgraph InterfaceContracts["Interface Implementations"]
+        M1["Error() string<br/>Formats human/log representation"]:::standardNode
+        M2["Unwrap() error<br/>Exposes wrapped Err for errors.Is / As"]:::exitGate
+        M3["Is(target error) bool<br/>Custom semantic equality matching"]:::standardNode
     end
 
-    CustomStruct --- Impl
+    CustomStruct --> InterfaceContracts
 ```
 
 ## Core idea
@@ -300,4 +305,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/18-custo
 
 ## NEXT UP
 
-Congratulations on completing Module 04! You now understand Go's function system, error handling philosophy, and data semantics. Next up: [Structs](../../../05-types-interfaces-packages-modules/lessons/01-structs/README.md)
+Advance to the hands-on project for Module 04:
+
+- [Project: Order Summary Refactor](../../projects/order-summary-refactor/README.md)

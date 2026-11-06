@@ -1,5 +1,7 @@
 # Passing by value
 
+> *"Everything in C is passed by value, and Go inherits this simplicity."* — Dennis Ritchie
+
 ## Learning objective
 
 Explain that Go is always pass-by-value, demonstrate how values are copied for all types, and identify when pass-by-value has performance implications for large structs.
@@ -18,17 +20,21 @@ For maps, slices, and channels, the "value" being copied is the descriptor (poin
 
 ```mermaid
 flowchart LR
-    subgraph CallerMemory["Caller Stack"]
-        X["x := 10 (Memory: 0x1000)"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
+    subgraph CallerMemory["Caller Stack Frame"]
+        X["x := 10<br/>Address: 0xc000018090"]:::frontDoor
     end
 
-    subgraph CalleeMemory["Callee Stack: modify(val int)"]
-        VAL["val := 10 (Memory: 0x2000)
-val = 99"]
+    subgraph CalleeMemory["Callee Stack Frame: modify(val int)"]
+        VAL["val := 10<br/>Address: 0xc0000180b8<br/>val = 99"]:::capstoneNode
     end
 
-    X -->|Bitwise copy (pass by value)| VAL
-    NOTE["x at 0x1000 remains 10! Callee modified distinct cell 0x2000."]
+    X -->|Bitwise 8B Copy| VAL
+    NOTE["Original cell at 0xc000018090 remains 10.<br/>Callee mutated distinct local memory cell."]:::exitGate
     CalleeMemory -.-> NOTE
 ```
 
@@ -217,4 +223,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/07-passi
 
 ## NEXT UP
 
-[Pointer And Value Mutation Behavior](../08-pointer-and-value-mutation-behavior/README.md)
+Advance to pointer and value mutation behavior:
+
+- [Lesson 08: Pointer and value mutation behavior](../08-pointer-and-value-mutation-behavior/README.md)

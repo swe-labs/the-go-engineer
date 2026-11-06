@@ -813,7 +813,12 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 
 # Cross-References
 
-Total cross-references: **2089**
+Total cross-references: **2086**
+
+> **Gating vs. lineage:** Hard progression gates are the `prerequisites` arrays in
+> `path.core.json` and `path.electives.json`. `builds_on` records the broader,
+> directional pedagogical lineage and must remain acyclic, but it is not the
+> field a learner-frontier tool should use to block progression.
 
 ### Style Rules
 
@@ -829,7 +834,7 @@ Total cross-references: **2089**
 | Relation      | Count | Description |
 | ------------- | ----- | ----------- |
 | related       | 944   | Bidirectional conceptual links between related lessons |
-| builds_on     | 587   | Strict directional pedagogical prerequisites |
+| builds_on     | 584   | Directional pedagogical lineage (acyclic; not the hard gate) |
 | reinforced_in | 512   | Practical application links to projects and labs |
 | preview_only  | 46    | Early mental-model previews developed fully later |
 
@@ -884,7 +889,7 @@ Total cross-references: **2089**
 
 | Command | Purpose | Execution |
 | --- | --- | --- |
-| **Run All Gates** | Execute full 17-gate curriculum test suite | `go run ./scripts/validate_curriculum.go` |
+| **Run All Gates** | Execute full 24-gate curriculum test suite | `go run ./scripts/validate_curriculum.go` |
 | **Validate Schema** | Check JSON manifests and key ordering | `go run ./internal/tools/curriculum validate-schema` |
 | **Validate Graph** | Check DAG dependency structure | `go run ./internal/tools/curriculum validate-graph` |
 | **Validate Physical** | Verify 441 physical READMEs | `go run ./internal/tools/curriculum validate-physical-artifacts` |

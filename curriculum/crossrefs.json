@@ -6153,15 +6153,6 @@
       },
       {
         "from_id": "core-06-01",
-        "label": "Module 06.02 — Unit testing",
-        "reason": "conceptual overlap: test coverage is only meaningful once you understand what go test actually measures",
-        "relation": "builds_on",
-        "required": false,
-        "target_id": "core-06-02",
-        "to_id": "core-06-02"
-      },
-      {
-        "from_id": "core-06-01",
         "label": "Project — Bug Hunt Pack",
         "reason": "This project applies Why testing exists concepts in a practical implementation.",
         "relation": "reinforced_in",
@@ -15495,15 +15486,6 @@
       },
       {
         "from_id": "core-12-02",
-        "label": "Module 12.03 — Request-scoped logging",
-        "reason": "conceptual overlap: structured log fields and context values are both propagated through the same call chain",
-        "relation": "builds_on",
-        "required": false,
-        "target_id": "core-12-03",
-        "to_id": "core-12-03"
-      },
-      {
-        "from_id": "core-12-02",
         "label": "Project — Pii Redactor",
         "reason": "This project applies Structured logging with slog concepts in a practical implementation.",
         "relation": "reinforced_in",
@@ -16059,15 +16041,6 @@
         "required": false,
         "target_id": "core-14-01",
         "to_id": "core-14-01"
-      },
-      {
-        "from_id": "core-12-10",
-        "label": "Module 14.17 — Architecture decision records",
-        "reason": "Alerting mindset requires understanding of Architecture decision records.",
-        "relation": "builds_on",
-        "required": true,
-        "target_id": "core-14-17",
-        "to_id": "core-14-17"
       },
       {
         "from_id": "core-12-10",

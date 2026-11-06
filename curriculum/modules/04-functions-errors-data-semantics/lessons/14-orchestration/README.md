@@ -1,5 +1,7 @@
 # Orchestration
 
+> *"Fools ignore complexity. Pragmatists suffer it. Some can avoid it. Geniuses remove it."* — Alan Perlis
+
 ## Learning objective
 
 Compose multiple functions that return errors, implement short-circuit and collect-all error strategies, and build resilient retry logic with error handling.
@@ -23,15 +25,17 @@ The orchestrator is not the business logic -- it is the glue that calls the logi
 
 ```mermaid
 flowchart TD
-    START["CheckoutOrder(orderID)"] --> S1["1. ReserveInventory(orderID)"]
-    S1 -->|Error| COMP_NONE["return fmt.Errorf("inventory: %w", err)"]
-    S1 -->|Success| S2["2. ProcessPayment(orderID, amount)"]
-    S2 -->|Error| COMP_INV["Rollback: ReleaseInventory(orderID)
-return fmt.Errorf("payment: %w", err)"]
-    S2 -->|Success| S3["3. EmitOrderConfirmedEvent(orderID)"]
-    S3 --> COMPLETE["Order Checkout Completed Successfully"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-    style COMPLETE stroke:#28a745,stroke-width:2px
+    START["CheckoutOrder(orderID)"]:::frontDoor --> S1["1. ReserveInventory(orderID)"]:::standardNode
+    S1 -->|Error| COMP_NONE["Early Return:<br/>fmt.Errorf('inventory: %w', err)"]:::capstoneNode
+    S1 -->|Success| S2["2. ProcessPayment(orderID, amount)"]:::standardNode
+    S2 -->|Error| COMP_INV["Compensating Rollback:<br/>ReleaseInventory(orderID)"]:::capstoneNode
+    S2 -->|Success| S3["3. EmitOrderConfirmedEvent(orderID)"]:::standardNode
+    S3 --> COMPLETE["Order Checkout Completed Successfully"]:::exitGate
 ```
 
 ## Core idea
@@ -336,4 +340,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/14-orche
 
 ## NEXT UP
 
-[Defer Mechanics](../15-defer-mechanics/README.md)
+Advance to defer mechanics and cleanup stacks:
+
+- [Lesson 15: Defer mechanics](../15-defer-mechanics/README.md)

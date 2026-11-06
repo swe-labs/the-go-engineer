@@ -1,5 +1,7 @@
 # Return values
 
+> *"The purpose of a function is to compute a result from its arguments."* — C.A.R. Hoare
+
 ## Learning objective
 
 Write functions that return values using both explicit and named return syntax, understand naked returns and their pitfalls, and use early returns to simplify control flow.
@@ -18,17 +20,21 @@ Named return values are like pre-labelled bins. Before the function body runs, G
 
 ```mermaid
 flowchart TD
-    subgraph NamedVsAnon["Return Value Mechanics"]
-        subgraph Anonymous["Anonymous: func compute() int"]
-            A1["return 42"] --> A2["Value placed in caller's return slot"]
-        end
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-        subgraph Named["Named: func compute() (val int)"]
-            N1["val initialized to zero (0) at entry"]
-            N2["val = 42 (assigned in body)"]
-            N3["naked return copies val"]
-            N1 --> N2 --> N3
-        end
+    subgraph Anonymous["Anonymous Return: func compute() int"]
+        A1["return 42"]:::frontDoor --> A2["Value copied to caller stack return slot"]:::exitGate
+    end
+
+    subgraph Named["Named Return: func compute() (val int)"]
+        N1["val initialized to 0 at frame entry"]:::frontDoor
+        N2["val = 42 (assigned in body)"]:::standardNode
+        N3["naked return reads val variable"]:::standardNode
+        N4["val copied to caller stack slot"]:::exitGate
+        N1 --> N2 --> N3 --> N4
     end
 ```
 
@@ -249,4 +255,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/03-retur
 
 ## NEXT UP
 
-[Multiple Return Values](../04-multiple-return-values/README.md)
+Advance to multiple return values:
+
+- [Lesson 04: Multiple return values](../04-multiple-return-values/README.md)

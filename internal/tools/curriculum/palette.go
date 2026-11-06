@@ -20,6 +20,7 @@ func validateDiagramPalette() {
 		"module-01": true,
 		"module-02": true,
 		"module-03": true,
+		"module-04": true,
 	}
 
 	diagramsChecked := 0

@@ -1,5 +1,7 @@
 # Function basics
 
+> *"Subroutines are the primary mechanism for structure in programs."* — Maurice Wilkes
+
 ## Learning objective
 
 Declare and call functions in Go using the `func` keyword, distinguish named from anonymous functions, assign functions to variables, and pass functions as arguments.
@@ -18,22 +20,28 @@ Go treats functions as _first-class values_. This means you can store a function
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
     subgraph FuncSignature["Function Declaration Anatomy"]
-        KW["func"] --- NAME["CalculateTax"]
-        NAME --- PARAMS["(amount float64, rate float64)"]
-        PARAMS --- RET["(total float64)"]
+        KW["func Keyword"]:::frontDoor --- NAME["Identifier: CalculateTax"]:::standardNode
+        NAME --- PARAMS["Parameters: (amount, rate float64)"]:::standardNode
+        PARAMS --- RET["Return: (total float64)"]:::exitGate
     end
 
     subgraph Execution["Call & Return Flow"]
-        CALLER["Caller Scope:
-tax := CalculateTax(100.0, 0.08)"] -->|Pass arguments| ENTRY["Function Entry:
-Initialize stack frame with parameters"]
-        ENTRY --> BODY["Execute Function Body:
-result := amount * rate"]
-        BODY --> RETURN["return statement:
-Copy result to return slot"]
-        RETURN -->|Return control| RESUME["Caller Resumes:
-tax receives 8.0"]
+        CALLER["Caller Stack Frame<br/>tax := CalculateTax(100.0, 0.08)"]:::frontDoor
+        ENTRY["Stack Frame Pushed<br/>amount=100.0, rate=0.08"]:::standardNode
+        BODY["Execute Body<br/>result := amount * rate"]:::standardNode
+        RETURN["Return Slot Written<br/>total = 8.0"]:::standardNode
+        RESUME["Caller Resumes<br/>Frame Popped, tax = 8.0"]:::exitGate
+
+        CALLER -->|Copy Arguments| ENTRY
+        ENTRY --> BODY
+        BODY --> RETURN
+        RETURN -->|Pop Frame| RESUME
     end
 ```
 
@@ -209,4 +217,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/01-funct
 
 ## NEXT UP
 
-[Parameters](../02-parameters/README.md)
+Advance to function parameter mechanics:
+
+- [Lesson 02: Parameters](../02-parameters/README.md)

@@ -1,5 +1,7 @@
 # Validation
 
+> *"Writing is nature's way of letting you know how sloppy your thinking is."* — Leslie Lamport
+
 ## Learning objective
 
 Implement input validation patterns in Go, accumulate multiple validation errors using `errors.Join`, and design validation that returns actionable error information.
@@ -16,15 +18,18 @@ Validation is a gatekeeper at the system boundary. Raw input arrives unchecked; 
 
 ```mermaid
 flowchart TD
-    REQ["Incoming User Registration Request"] --> V1{"Email empty?"}
-    V1 -->|Yes| E1["return ErrEmptyEmail"]
-    V1 -->|No| V2{"Password < 8 chars?"}
-    V2 -->|Yes| E2["return ErrPasswordTooShort"]
-    V2 -->|No| V3{"Username taken?"}
-    V3 -->|Yes| E3["return ErrDuplicateUsername"]
-    V3 -->|No| SUCCESS["Validation Passed: Proceed to persist user"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-    style SUCCESS stroke:#28a745,stroke-width:2px
+    REQ["Incoming Registration Request"]:::frontDoor --> V1{"Email empty?"}:::standardNode
+    V1 -->|Yes| E1["errs = append(errs, ErrEmptyEmail)"]:::capstoneNode
+    V1 -->|No| V2{"Password < 8 chars?"}:::standardNode
+    V2 -->|Yes| E2["errs = append(errs, ErrPasswordTooShort)"]:::capstoneNode
+    V2 -->|No| V3{"Username taken?"}:::standardNode
+    V3 -->|Yes| E3["errs = append(errs, ErrDuplicateUsername)"]:::capstoneNode
+    V3 -->|No| SUCCESS["Validation Complete<br/>errors.Join(errs...)"]:::exitGate
 ```
 
 ## Core idea
@@ -265,4 +270,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/13-valid
 
 ## NEXT UP
 
-[Orchestration](../14-orchestration/README.md)
+Advance to multi-step fallible operation orchestration:
+
+- [Lesson 14: Orchestration](../14-orchestration/README.md)

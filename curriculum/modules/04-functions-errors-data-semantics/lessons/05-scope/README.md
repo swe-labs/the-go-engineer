@@ -1,5 +1,7 @@
 # Scope
 
+> *"The value of an expression depends only on the values of its sub-expressions and the bindings of its variables."* — Peter Landin
+
 ## Learning objective
 
 Identify the scope of variables in Go — package scope, function scope, and block scope — and explain how lexical scoping and shadowing affect variable visibility and lifetime.
@@ -22,15 +24,19 @@ Lexical scoping means the scope is determined by the source code structure at co
 
 ```mermaid
 flowchart TD
-    subgraph PackageScope["Package Scope (visible across all package files)"]
-        PKG_VAR["var ServiceName = "UserService""]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+
+    subgraph PackageScope["Package Scope (all package files)"]
+        PKG_VAR["var ServiceName = 'UserService'"]:::frontDoor
 
         subgraph FuncScope["Function Scope: func ProcessOrder()"]
-            FN_VAR["orderID := 9001"]
+            FN_VAR["orderID := 9001"]:::standardNode
 
-            subgraph BlockScope["Block Scope: if orderID > 0 { ... }"]
-                BLK_VAR["shadow := "inner"
-(Exists ONLY inside this block)"]
+            subgraph BlockScope["Block Scope: if orderID > 0"]
+                BLK_VAR["shadow := 'inner'<br/>(Exists only inside block)"]:::capstoneNode
             end
         end
     end
@@ -212,4 +218,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/05-scope
 
 ## NEXT UP
 
-[Call Stack Mental Model](../06-call-stack-mental-model/README.md)
+Advance to call stack mechanics:
+
+- [Lesson 06: Call stack mental model](../06-call-stack-mental-model/README.md)

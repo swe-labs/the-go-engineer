@@ -57,3 +57,9 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/projects/order-s
 | Error handling completeness | `errors.Is` / `errors.As` used correctly; sentinel and custom types both tested | One matching strategy used but not both | No structured error matching |
 | Test coverage | Table-driven tests cover success, each failure mode, error matching, and multi-error | Tests cover success and basic failure | Tests are incomplete or missing |
 | Code organization | Clean separation of types, validation, processing; `defer` used appropriately | Reasonable organization but some mixing of concerns | Monolithic, no `defer`, panics for expected failures |
+
+## NEXT UP
+
+Advance to the project assessment to verify your refactored implementation:
+
+- [Assessment: Order Summary Refactor](../../assessments/order-summary-refactor/README.md)

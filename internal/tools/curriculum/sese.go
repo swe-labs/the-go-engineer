@@ -37,6 +37,7 @@ func validateSESENavigation() {
 		"module-01": "../02-go-setup-tooling/README.md",
 		"module-02": "../03-programming-fundamentals/README.md",
 		"module-03": "../04-functions-errors-data-semantics/README.md",
+		"module-04": "../05-types-interfaces-packages-modules/README.md",
 	}
 
 	for _, mod := range core.Modules {

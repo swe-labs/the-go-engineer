@@ -41,6 +41,18 @@ func validateGraph() {
 		moduleMap[electives.Modules[i].ID] = &electives.Modules[i]
 	}
 
+	coreItemIDs := make(map[string]bool)
+	for _, item := range core.Items {
+		coreItemIDs[item.ID] = true
+	}
+	moduleOrder := make(map[string]int)
+	for i := range core.Modules {
+		moduleOrder[core.Modules[i].ID] = core.Modules[i].Number
+	}
+	for i := range electives.Modules {
+		moduleOrder[electives.Modules[i].ID] = electives.Modules[i].Number
+	}
+
 	// 1. Check all prerequisite item IDs exist
 	for _, item := range allItems {
 		for _, prereq := range item.Prerequisites {
@@ -98,6 +110,42 @@ func validateGraph() {
 		checkRefs(item.CrossRefs.ReinforcedIn, "reinforced_in")
 	}
 
+	// 4b. builds_on must point backward. Central crossrefs.json is authoritative
+	// for core items; electives carry their crossrefs in path.electives.json.
+	buildsOn := make(map[string][]string)
+	for _, ref := range crossrefs.Crossrefs.References {
+		if ref.Relation == "builds_on" && coreItemIDs[ref.FromID] {
+			buildsOn[ref.FromID] = append(buildsOn[ref.FromID], ref.TargetID)
+		}
+	}
+	for _, item := range electives.Items {
+		if item.CrossRefs == nil {
+			continue
+		}
+		for _, ref := range item.CrossRefs.BuildsOn {
+			buildsOn[item.ID] = append(buildsOn[item.ID], ref.TargetID)
+		}
+	}
+	for fromID, targets := range buildsOn {
+		fromItem := itemMap[fromID]
+		if fromItem == nil {
+			continue
+		}
+		fromMod := moduleOrder[fromItem.ModuleID]
+		for _, targetID := range targets {
+			toItem := itemMap[targetID]
+			if toItem == nil {
+				continue
+			}
+			toMod := moduleOrder[toItem.ModuleID]
+			if toMod > fromMod || (toMod == fromMod && toItem.Order >= fromItem.Order) {
+				warnf("%s: builds_on target '%s' is not earlier (module %d order %d vs module %d order %d)",
+					fromID, targetID, toMod, toItem.Order, fromMod, fromItem.Order)
+				ok = false
+			}
+		}
+	}
+
 	// 5. Check for orphan items (items not reachable from any module entry point)
 	for _, mod := range core.Modules {
 		reachable := make(map[string]bool)
@@ -138,38 +186,20 @@ func validateGraph() {
 		}
 	}
 
-	// 6. Check no cycles in item graph
-	visited := make(map[string]bool)
-	inStack := make(map[string]bool)
-	var hasCycle bool
-	var dfs func(id string)
-	dfs = func(id string) {
-		if inStack[id] {
-			warnf("cycle detected involving item '%s'", id)
-			hasCycle = true
-			ok = false
-			return
-		}
-		if visited[id] {
-			return
-		}
-		visited[id] = true
-		inStack[id] = true
-		item, exists := itemMap[id]
-		if exists && item != nil {
-			for _, next := range item.NextItemIDs {
-				dfs(next)
-			}
-		}
-		inStack[id] = false
-	}
+	// 6. Check no cycles in the traversal, prerequisite, and builds_on graphs.
+	nextAdj := make(map[string][]string)
+	prereqAdj := make(map[string][]string)
 	for _, item := range allItems {
-		if !visited[item.ID] {
-			dfs(item.ID)
-		}
+		nextAdj[item.ID] = item.NextItemIDs
+		prereqAdj[item.ID] = item.Prerequisites
 	}
-	if !hasCycle {
-		fmt.Println("  No cycles detected in item graph.")
+	cycleNext := detectCycles("next_item_id", allItems, nextAdj)
+	cyclePrereq := detectCycles("prerequisite", allItems, prereqAdj)
+	cycleBuilds := detectCycles("builds_on", allItems, buildsOn)
+	if cycleNext || cyclePrereq || cycleBuilds {
+		ok = false
+	} else {
+		fmt.Println("  No cycles detected in next_item_id, prerequisite, or builds_on graphs.")
 	}
 
 	// 7. Check assessment_id naming convention
@@ -187,4 +217,38 @@ func validateGraph() {
 	} else {
 		fmt.Println("  Graph checks completed with warnings/errors.")
 	}
+}
+
+// detectCycles reports whether the adjacency graph contains a cycle.
+// It only walks nodes that exist in allItems; dangling targets are handled by
+// the existence checks in validateGraph.
+func detectCycles(label string, allItems []Item, adjacency map[string][]string) bool {
+	visited := make(map[string]bool)
+	inStack := make(map[string]bool)
+	hasCycle := false
+
+	var dfs func(id string)
+	dfs = func(id string) {
+		if inStack[id] {
+			warnf("%s cycle detected involving item '%s'", label, id)
+			hasCycle = true
+			return
+		}
+		if visited[id] {
+			return
+		}
+		visited[id] = true
+		inStack[id] = true
+		for _, next := range adjacency[id] {
+			dfs(next)
+		}
+		inStack[id] = false
+	}
+
+	for _, item := range allItems {
+		if !visited[item.ID] {
+			dfs(item.ID)
+		}
+	}
+	return hasCycle
 }

@@ -1,5 +1,7 @@
 # Call stack mental model
 
+> *"A stack is an indispensable mechanism for managing the activation records of nested subroutine invocations."* — Edsger W. Dijkstra
+
 ## Learning objective
 
 Visualise the call stack as a LIFO structure of stack frames, track how data flows between frames, and distinguish stack allocation from heap allocation in Go.
@@ -21,17 +23,19 @@ Each frame contains the function's parameters, local variables, and the return a
 
 ```mermaid
 flowchart TD
-    subgraph CallStack["Runtime Goroutine Call Stack"]
-        direction TB
-        F3["Stack Frame 3: calculateTax()
-[Local variables, return address]"]
-        F2["Stack Frame 2: processOrder()
-[Local variables, return address]"]
-        F1["Stack Frame 1: main()
-[Local variables, entry point]"]
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
 
-        F3 -->|Pushed on call / Popped on return| F2
-        F2 -->|Pushed on call / Popped on return| F1
+    subgraph CallStack["Runtime Goroutine Call Stack (LIFO)"]
+        direction TB
+        F3["Stack Frame 3: calculateTax()<br/>Local vars, SP boundary, return address"]:::capstoneNode
+        F2["Stack Frame 2: processOrder()<br/>Local vars, saved caller SP"]:::standardNode
+        F1["Stack Frame 1: main()<br/>Goroutine entry frame, 2 KB baseline"]:::frontDoor
+
+        F3 -->|Pushed on Call / Popped on Return| F2
+        F2 -->|Pushed on Call / Popped on Return| F1
     end
 ```
 
@@ -201,4 +205,6 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/06-call-
 
 ## NEXT UP
 
-[Passing By Value](../07-passing-by-value/README.md)
+Advance to data semantics and pass-by-value:
+
+- [Lesson 07: Passing by value](../07-passing-by-value/README.md)
