@@ -1,5 +1,8 @@
 # Switch
 
+> "There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies."
+> — C.A.R. Hoare
+
 ## Learning objective
 
 Write switch statements with expression switches, case lists, default clauses, fallthrough, type switches, and expressionless switches to replace long if/else chains.
@@ -20,6 +23,10 @@ An expressionless switch (`switch { ... }`) is a sequence of boolean conditions 
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     EVAL["Evaluate Expression:
 switch status := order.Status; status"]
 

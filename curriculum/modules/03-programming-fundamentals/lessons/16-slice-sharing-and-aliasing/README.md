@@ -1,5 +1,8 @@
 # Slice sharing and aliasing
 
+> "Aliasing without synchronization is the root of unexpected state mutation."
+> — Russ Cox
+
 ## Learning objective
 
 Identify when multiple slices share the same backing array, predict aliasing bugs, and write defensive code using `copy()` and capacity-limited slicing.
@@ -18,6 +21,10 @@ When you `append` to a slice and capacity is sufficient, you paint on the existi
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph OriginalSlice["Original Slice: s1 = []int{10, 20, 30, 40, 50}"]
         H1["Header s1:
 Data: 0x5000

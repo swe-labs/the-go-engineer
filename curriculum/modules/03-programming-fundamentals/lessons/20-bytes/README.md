@@ -1,5 +1,8 @@
 # Bytes
 
+> "At the lowest layer of I/O and networking, everything is a sequence of bytes."
+> — Claude E. Shannon
+
 ## Learning objective
 
 Work with `[]byte` as the universal data buffer in Go, convert between strings and byte slices, and use the `bytes` package for searching, splitting, joining, and replacing byte data.
@@ -18,6 +21,10 @@ Think of `[]byte` as the lingua franca of data exchange. A string is the human-r
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph ImmutableStr["string: "hello""]
         SH["Header: ptr, len"] --> STR_BYTES["Read-only memory: [h, e, l, l, o]"]
     end

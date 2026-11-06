@@ -167,6 +167,32 @@
       ],
       "anti_overengineering_policy": "Do not force all 17 headings if a lesson's subject matter does not warrant them. Non-applicable sections should be omitted rather than populated with placeholder slop. Always respect the item's content_contract flags (visual_model_required, machine_view_required, production_notes_required, runnable_required, tests_required).",
       "subtype_profiles": {
+        "orientation": {
+          "description": "Course orientation, mental models, workflows, and learning strategy. Pure conceptual prose with zero Go code or syntax.",
+          "mandatory_additions": [
+            "Core idea",
+            "Visual model"
+          ],
+          "acceptable_omissions": [
+            "Under the hood",
+            "Go example",
+            "Step-by-step execution",
+            "Debugging walkthrough",
+            "Production notes",
+            "Performance implications",
+            "Practice task",
+            "Tests / verification"
+          ],
+          "prohibited_headings": [
+            "Go example",
+            "Step-by-step execution",
+            "Under the hood",
+            "Debugging walkthrough",
+            "Production notes",
+            "Performance implications",
+            "Tests / verification"
+          ]
+        },
         "concept": {
           "description": "Deep programming fundamentals, type semantics, memory mechanics, and runtime structures.",
           "mandatory_additions": [

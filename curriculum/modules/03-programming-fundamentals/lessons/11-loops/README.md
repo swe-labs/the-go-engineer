@@ -1,5 +1,8 @@
 # Loops
 
+> "The computer should do the repetitive work; the programmer should specify the rule."
+> — Ada Lovelace
+
 ## Learning objective
 
 Write all forms of Go's `for` loop — init/condition/post, condition-only (while-style), infinite, `for range`, and use `break`, `continue`, and labeled break/continue for flow control.
@@ -37,6 +40,10 @@ Omitting parts produces the other forms:
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph ThreeClauseLoop["Standard 3-Clause Loop: for i := 0; i < N; i++"]
         INIT["1. Init Statement: i := 0 (runs once)"]
         COND{"2. Condition: i < N"}

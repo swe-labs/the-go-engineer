@@ -1,5 +1,8 @@
 # Pointers as addresses
 
+> "There is no magic in pointers; an address is simply a number identifying a byte in memory."
+> — Maurice V. Wilkes
+
 ## Learning objective
 
 Use Go's `&` and `*` operators to create, dereference, and pass pointers, and explain the differences between Go pointers and C pointers.
@@ -18,6 +21,10 @@ Think of it like a home address on a piece of paper. You can give someone the pa
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph Memory["Stack Memory Space"]
         subgraph ValueVar["Variable: x (int)"]
             ADDR_X["Address: 0xc000014088"]

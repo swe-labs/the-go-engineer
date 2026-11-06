@@ -21,6 +21,7 @@ func validateAnchorQuotes() {
 		"module-00": true,
 		"module-01": true,
 		"module-02": true,
+		"module-03": true,
 	}
 
 	checkedLessons := 0

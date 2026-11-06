@@ -1,5 +1,8 @@
 # Beginner pointer mistakes
 
+> "I call it my billion-dollar mistake: the invention of the null reference in 1965."
+> — Tony Hoare
+
 ## Learning objective
 
 Identify and avoid the five most common pointer-related bugs in Go: nil dereference, returning pointer to local variable, pointer vs value receiver confusion, range variable aliasing with pointers, and dangling pointers via append.
@@ -18,6 +21,10 @@ Go's pointer model is simpler than C's, but the common mistakes are more insidio
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph NilDereference["Mistake 1: Nil Pointer Dereference"]
         P1["var ptr *User = nil (Address: 0x0)"]
         D1["*ptr.Name (Dereference)"]
@@ -237,4 +244,4 @@ go test ./curriculum/modules/03-programming-fundamentals/lessons/23-beginner-poi
 
 ## NEXT UP
 
-Congratulations on completing Module 03: Programming Fundamentals! You now have a solid foundation in Go's type system, control flow, data structures, and memory model. Next up: [Function Basics](../../../04-functions-errors-data-semantics/lessons/01-function-basics/README.md)
+- [Lesson 24: Algorithmic Problem-Solving and Complexity](../24-algorithmic-problem-solving/README.md)

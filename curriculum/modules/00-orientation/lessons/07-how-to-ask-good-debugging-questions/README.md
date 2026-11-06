@@ -1,26 +1,31 @@
 # How to ask good debugging questions
 
-> *"Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it."* — Brian Kernighan
+> *"Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?"* — Brian Kernighan
 
 ## Learning objective
 
-Turn vague confusion into a structured question that contains evidence and a testable hypothesis. You will learn the five fields every debugging question should include and how to score your own questions for completeness before you ask for help.
+By the end of this lesson, you will be able to structure technical debugging inquiries using the 5 Evidence Fields, isolate root causes systematically, and turn vague confusion into high-signal problem reports.
 
 ## Why this matters
 
-The most common reason engineers get stuck is not lack of skill. It is asking a question that cannot be answered. "It doesn't work" tells the helper nothing. "I expected X, I got Y, I ran Z, here is the error, here is my environment" gives them everything they need to help you in minutes. This skill separates junior engineers who stay stuck for hours from engineers who unblock themselves or get quick help. It also makes you a better debugger of your own problems: writing down the fields forces you to think clearly.
+In professional engineering environments, asking "Why doesn't this work?" without evidence wastes team time, delays incident resolution, and signals a lack of engineering rigor. The best engineers communicate problems with exact evidence: reproduction steps, configuration states, and verbatim error outputs. Learning to formulate high-signal debugging questions often leads you directly to the solution before you even have to ask someone else.
 
 ## Mental model
 
-Think of a debugging question as a detective case file. The file has five slots: what you expected to happen, what actually happened, what command you ran, what error you saw, and what environment you were in. A complete case file lets another detective pick it up and start investigating immediately. A file with missing slots forces them to track you down and ask basic questions, wasting everyone's time.
+Whenever you encounter a broken test, compilation failure, or unexpected behavior, construct a **5-Field Debugging Case File**:
 
-## Core idea
+```text
+The 5 Evidence Fields of Structured Debugging
+1. EXPECTED BEHAVIOR    ──> What should happen according to the specification?
+2. ACTUAL BEHAVIOR      ──> What happened instead? (Symptoms, observed output)
+3. EXACT COMMAND & PATH ──> From which directory did you run what exact command?
+4. FULL ERROR OUTPUT    ──> Verbatim terminal text and error traces (never cropped)
+5. ENVIRONMENT CONTEXT  ──> Operating system, tool versions, and recent file changes
+```
 
-Every debugging question can be scored on completeness from 1 to 5 based on five fields: Expected, Actual, Command, Error, Environment. A score of 5 means the question contains everything needed to reproduce and diagnose the problem. A score of 1 or 2 means the question will require back-and-forth before anyone can help.
+When you document all five fields, you replace subjective guesswork with empirical evidence. In many cases, writing down the exact command and reading the full error output reveals the root cause immediately.
 
 ## Visual model
-
-A high-signal debugging case file eliminates ambiguity by providing all 5 diagnostic dimensions:
 
 ```mermaid
 flowchart TD
@@ -28,162 +33,44 @@ flowchart TD
     classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
     classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
     classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
-    Q["Structured Debugging Case File<br/>(Target Score: 5/5)"]
 
-    subgraph Pillars ["The 5 Essential Evidence Fields"]
-        direction TB
-        F1["1. Expected Behavior<br/><i>What should happen according to specification?</i>"]
-        F2["2. Actual Behavior<br/><i>What observed behavior diverged?</i>"]
-        F3["3. Exact Command Line<br/><i>Exact invocation copied from terminal</i>"]
-        F4["4. Exact Error Output<br/><i>Full raw stderr / panic stack trace</i>"]
-        F5["5. Environment Context<br/><i>OS, Go version, architecture, working directory</i>"]
+    subgraph LowSignal ["Low-Signal Anti-Pattern"]
+        L1["Error Encountered"]:::frontDoor --> L2["Vague Message: 'It broke'"]:::standardNode
+        L2 --> L3["Frustration & Guessing"]:::capstoneNode
     end
 
-    Q --> F1
-    Q --> F2
-    Q --> F3
-    Q --> F4
-    Q --> F5
-
-    Pillars ==> RES["Rapid Root-Cause Diagnosis<br/>(Zero back-and-forth latency)"]
+    subgraph HighSignal ["High-Signal Engineering Protocol"]
+        H1["Error Encountered"]:::frontDoor --> H2["Collect 5 Evidence Fields<br/>(Expected, Actual, Command, Error, Env)"]:::standardNode
+        H2 --> H3["Formulate Falsifiable Hypothesis"]:::standardNode
+        H3 --> H4["Test One Variable at a Time"]:::standardNode
+        H4 ==> H5["Root Cause Isolated & Resolved"]:::exitGate
+    end
 ```
 
-## Under the hood
+## Key principles
 
-The five fields serve specific purposes:
-- Expected: defines the correct behavior. Without this, the helper does not know what "working" looks like.
-- Actual: defines the observed behavior. The gap between expected and actual is the bug.
-- Command: defines exactly how to reproduce. "I ran `curl -v http://localhost:8080/health`" is reproducible. "I tried to start the server" is not.
-- Error: defines the specific error signal. Paste the exact error message, not a paraphrase.
-- Environment: defines the context. OS version, Go version, running locally or in Docker, etc.
-
-When you fill all five, you have usually solved the problem yourself because writing forces clarity.
-
-## How Go uses it
-
-The Go program defines a `DebugQuestion` struct with string fields for each of the five categories. The `scoreQuestion` function counts how many fields are non-empty (after trimming whitespace) and returns a score from 0 to 5. The `main` function demonstrates two questions: a vague one (score 2) and a high-quality one (score 5), showing the learner what each level looks like.
-
-## Go example
-
-```go
-package main
-
-import (
-	"fmt"
-	"strings"
-)
-
-type DebugQuestion struct {
-	Expected    string
-	Actual      string
-	Command     string
-	Error       string
-	Environment string
-}
-
-func scoreQuestion(q DebugQuestion) int {
-	score := 0
-	if strings.TrimSpace(q.Expected) != "" {
-		score++
-	}
-	if strings.TrimSpace(q.Actual) != "" {
-		score++
-	}
-	if strings.TrimSpace(q.Command) != "" {
-		score++
-	}
-	if strings.TrimSpace(q.Error) != "" {
-		score++
-	}
-	if strings.TrimSpace(q.Environment) != "" {
-		score++
-	}
-	return score
-}
-
-func main() {
-	vague := DebugQuestion{
-		Expected:    "",
-		Actual:      "it doesn't work",
-		Command:     "",
-		Error:       "some error",
-		Environment: "",
-	}
-
-	good := DebugQuestion{
-		Expected:    "the server should return 200 OK on GET /health",
-		Actual:      "the server returns 503 Service Unavailable",
-		Command:     "curl -v http://localhost:8080/health",
-		Error:       "HTTP/1.1 503 Service Unavailable",
-		Environment: "Windows 11, Go 1.25, running locally with go run",
-	}
-
-	fmt.Println("Vague question score:", scoreQuestion(vague), "/ 5")
-	fmt.Println("Good question score: ", scoreQuestion(good), "/ 5")
-}
-```
-
-## Step-by-step execution
-
-1. The program creates two `DebugQuestion` values. The `vague` one fills only Actual ("it doesn't work") and Error ("some error"), leaving the other three fields empty.
-2. The `good` one fills all five fields with specific, concrete information.
-3. `scoreQuestion` is called for each. It checks each field with `strings.TrimSpace` to handle whitespace-only inputs.
-4. For `vague`: only Actual and Error are non-empty, so the score is 2.
-5. For `good`: all five fields are non-empty, so the score is 5.
-6. `main` prints both scores side by side.
-
-The lesson is visual: you can see exactly which fields the vague question is missing and how much more useful the good question is.
+1. **Verbatim Text, Never Screenshots**: Always copy-paste the exact error text. Screenshots cannot be searched, copied, or grepped, and they often cut off essential line numbers or stack frames.
+2. **One Variable at a Time**: When trying to fix an issue, change one thing, re-test, and observe the result. Changing multiple parameters simultaneously obscures which change resolved or worsened the problem.
+3. **Trace Back to the Origin**: Read error messages starting from the first line of output, not just the last line. The first line usually reports the primary failure; subsequent lines are often cascading side effects.
+4. **Reproducibility**: If you cannot reproduce an error consistently, you cannot be sure you have fixed it. Always verify that you can trigger the failure predictably before implementing a solution.
 
 ## Common mistakes
 
-| Mistake | Why it happens | Fix |
+| Mistake | Consequence | Correction |
 |---|---|---|
-| Describing the error from memory instead of pasting it | You think you remember it exactly | Always copy-paste the exact error. One character difference can matter. |
-| Leaving out the expected behavior | You assume the helper knows what should happen | State the expected outcome explicitly. Do not make assumptions. |
-| Writing commands from memory with typos | You abbreviate or approximate | Copy-paste the actual command you ran from your terminal history. |
-| Omitting the environment | You think the problem is universal | Include OS, language version, and runtime context. Many bugs are environment-specific. |
-| Writing a paragraph instead of structured fields | You dump everything you know in one block | Use the five-field structure explicitly. Your helper will thank you. |
-
-## Debugging walkthrough
-
-Imagine you run this program and it prints a score of 0 for a question where you filled in some fields.
-
-1. Check for whitespace. A field containing `" "` (a single space) will be treated as empty because `strings.TrimSpace(" ")` returns `""`.
-2. Verify the field names in your `DebugQuestion` literal match the struct exactly. A typo like `Environent` will compile but the field will stay empty.
-3. Add a debug print of each field with its length before scoring: `fmt.Printf("Expected: %q (len=%d)\n", q.Expected, len(q.Expected))`.
-4. If scoreQuestion is returning unexpected results, write a small test that passes a known value and check the return.
-5. If the program does not compile, check that you imported `"strings"` and that all struct fields are correctly typed as `string`.
-
-For debugging your own learning: if you are stuck and cannot formulate a good question, try writing down the five fields in a text file. The act of writing often reveals the answer.
-
-## Production notes
-
-Many engineering teams use debugging templates in their issue trackers. A bug report template with fields for Expected, Actual, Steps to Reproduce, Logs, and Environment is essentially the same idea as this five-field struct. Some teams automate the scoring: if a bug report is missing required fields, a bot labels it "needs more info."
-
-When you are helping someone else debug, ask them for the five fields before reading their error. This trains them to provide structured information and reduces the time you spend extracting basic facts.
-
-## Performance implications
-
-The scoring function runs in O(1) time with five field checks. There is no performance concern. The meaningful performance metric is human: a well-structured question can reduce debugging time from hours to minutes. The cost of writing a structured question is about 30 seconds. The cost of a vague question is often several hours of back-and-forth.
-
-## Practice task
-
-Take a debugging question you have asked recently (or invent one). Write it as a `DebugQuestion` struct. Score it. Identify which fields are missing. Rewrite the question to include all five fields. Run both through the program and compare the scores.
-
-## Tests / verification
-
-1. Copy the inline Go code into a local `.go` file and run `go run .` to see the two sample scores.
-2. Create your own `DebugQuestion` with exactly 3 fields filled — confirm `scoreQuestion` returns 3.
-3. Write a question with whitespace-only in every field and verify it scores 0.
+| Paraphrasing error messages (for example: "I got a permissions error") | Omitting the exact file path or error code needed for diagnosis | Copy and paste the entire verbatim error output from the terminal |
+| Changing code randomly in hopes that it starts working | Introducing new bugs while failing to understand the original issue | Read the documentation, state a hypothesis, and test one change at a time |
+| Asking for help without stating what you have already tried | Forcing others to suggest things you already ruled out | Include a summary of your attempted fixes and their observed outcomes |
 
 ## Review questions
 
-1. What are the five fields of a structured debugging question?
-2. Why does the function use `strings.TrimSpace` before checking if a field is empty?
-3. A question scores 3/5. What information is likely missing?
-4. How does writing a structured question help you debug even before asking for help?
-5. What would change in the struct to add a "Steps to Reproduce" field?
+1. What are the 5 Evidence Fields required for a structured debugging report?
+2. Why is copying verbatim error text superior to taking screenshots or paraphrasing errors?
+3. Why should you change only one variable at a time when diagnosing an issue?
+4. Why does reading the first line of an error trace matter more than reading the final line?
 
 ## NEXT UP
 
-[Lesson 08: What job-ready means](../08-what-job-ready-means/README.md) — Define job readiness as demonstrated ability across five skill categories.
+Advance to understanding what job readiness looks like in software engineering:
+
+- [Lesson 08: What job ready means](../08-what-job-ready-means/README.md)

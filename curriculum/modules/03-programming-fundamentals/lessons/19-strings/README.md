@@ -1,5 +1,8 @@
 # Strings
 
+> "In Go, a string is in effect a read-only slice of bytes."
+> — Rob Pike, *Strings, bytes, runes and characters in Go*
+
 ## Learning objective
 
 Manipulate Go strings using the `strings` and `strconv` packages, explain why strings are immutable `[]byte` under the hood, and handle UTF-8 encoded text correctly without corrupting multi-byte sequences.
@@ -28,6 +31,10 @@ String "Hi 👍" in memory:
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph StringHeader["String Header (StringHeader: 16 bytes)"]
         PTR["Data Pointer (*byte): 0x6000 (8 bytes)"]
         LEN["Length (int): 5 (8 bytes)"]

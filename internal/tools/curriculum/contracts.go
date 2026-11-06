@@ -26,6 +26,7 @@ func validateReadmeContracts() {
 		"module-00": true,
 		"module-01": true,
 		"module-02": true,
+		"module-03": true,
 	}
 
 	requiredHeadings := []string{
@@ -35,6 +36,16 @@ func validateReadmeContracts() {
 		"Common mistakes",
 		"Review questions",
 		"NEXT UP",
+	}
+
+	prohibitedOrientationHeadings := []string{
+		"Go example",
+		"Step-by-step execution",
+		"Under the hood",
+		"Debugging walkthrough",
+		"Production notes",
+		"Performance implications",
+		"Tests / verification",
 	}
 
 	lessonsChecked := 0
@@ -65,9 +76,17 @@ func validateReadmeContracts() {
 		lessonsChecked++
 		foundHeadings := make(map[string]bool)
 		scanner := bufio.NewScanner(file)
+		isOrientation := item.Subtype == "orientation"
+		hasGoCodeBlock := false
 
 		for scanner.Scan() {
 			line := strings.TrimSpace(scanner.Text())
+
+			// Check for Go code block in orientation lessons
+			if isOrientation && (strings.HasPrefix(line, "```go") || strings.HasPrefix(line, "```golang")) {
+				hasGoCodeBlock = true
+			}
+
 			if !strings.HasPrefix(line, "## ") {
 				continue
 			}
@@ -78,8 +97,25 @@ func validateReadmeContracts() {
 					foundHeadings[req] = true
 				}
 			}
+
+			// In orientation lessons, forbid coding headings
+			if isOrientation {
+				for _, prohib := range prohibitedOrientationHeadings {
+					if strings.EqualFold(h2Text, prohib) || strings.HasPrefix(strings.ToLower(h2Text), strings.ToLower(prohib)) {
+						warnf("%s (%s): orientation lesson contains forbidden coding heading '## %s'", item.ID, item.Slug, h2Text)
+						contractViolations++
+						ok = false
+					}
+				}
+			}
 		}
 		file.Close()
+
+		if isOrientation && hasGoCodeBlock {
+			warnf("%s (%s): orientation lesson contains forbidden Go code block (theory lessons must be code-free)", item.ID, item.Slug)
+			contractViolations++
+			ok = false
+		}
 
 		for _, req := range requiredHeadings {
 			if !foundHeadings[req] {
@@ -97,3 +133,4 @@ func validateReadmeContracts() {
 		fmt.Println("  README contract validation failed with violations.")
 	}
 }
+

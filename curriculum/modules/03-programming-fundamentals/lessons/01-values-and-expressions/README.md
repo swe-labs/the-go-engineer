@@ -1,5 +1,8 @@
 # Values and expressions
 
+> "Fools ignore complexity. Pragmatists suffer it. Some can avoid it. Geniuses remove it."
+> — Alan J. Perlis, *Epigrams in Programming*
+
 ## Learning objective
 
 Write and evaluate Go expressions using literals, variables, and arithmetic/boolean operators, and predict the result of any expression by applying Go's operator precedence and type rules.
@@ -18,6 +21,10 @@ This model breaks only for short-circuit boolean operators (`&&`, `||`) which st
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph Expression["Source Expression: 3 + 4 * 2"]
         PLUS["Operator: + (Precedence 3)"]
         LIT3["Operand: 3 (untyped int)"]

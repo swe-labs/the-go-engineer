@@ -1,5 +1,8 @@
 # Range
 
+> "Don't just iterate; understand what is copied and what is referenced."
+> — Ken Thompson
+
 ## Learning objective
 
 Iterate over slices, arrays, maps, strings, and channels using `for range`, understand the copy semantics of range variables, use the blank identifier to discard values, and distinguish single-value from two-value range forms.
@@ -43,6 +46,10 @@ Each collection type has unique range behaviour:
 
 ```mermaid
 flowchart LR
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph BackingSlice["Underlying Slice Elements"]
         E0["[0]: {ID: 1, Value: "A"}"]
         E1["[1]: {ID: 2, Value: "B"}"]

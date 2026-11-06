@@ -1,5 +1,8 @@
 # Types
 
+> "Types are not just constraints on data; they are the language in which we describe program properties to the compiler."
+> — Robin Milner
+
 ## Learning objective
 
 Identify and use Go's basic types (int, float64, string, bool, byte, rune), distinguish typed from untyped constants, and declare custom type aliases and definitions.
@@ -16,6 +19,10 @@ Think of a type as a mold or a stencil. The mold determines three things: (1) th
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph GoTypeSystem["Go Type System Architecture"]
         subgraph Basic["Basic Primitive Types"]
             INT["Integers: int, int8-64, uint8-64, uintptr"]

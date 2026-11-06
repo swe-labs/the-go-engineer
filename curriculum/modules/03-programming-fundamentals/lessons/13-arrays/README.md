@@ -1,5 +1,8 @@
 # Arrays
 
+> "Contiguous memory is the foundation of high-performance computing."
+> — John von Neumann
+
 ## Learning objective
 
 Declare, initialize, iterate over, and compare fixed-size arrays in Go, and explain the value semantics that distinguish `[n]T` from slices.
@@ -18,6 +21,10 @@ If you picture a slice as a window into a separate backing array, the array is t
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph MemoryLayout["Array in Memory: var arr [4]int32"]
         direction LR
         I0["arr[0]: 4 bytes

@@ -1,5 +1,8 @@
 # Boolean logic
 
+> "A mathematical analysis of logic is a calculus of deductive reasoning."
+> — George Boole
+
 ## Learning objective
 
 Write and evaluate boolean expressions using `&&`, `||`, and `!`, apply short-circuit evaluation and De Morgan's laws, and use boolean logic correctly in control flow, nil checks, and boundary conditions.
@@ -24,6 +27,10 @@ The result of any boolean expression is always a `bool` — there is no truthy/f
 
 ```mermaid
 flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
     subgraph AndLogic["Short-Circuit AND: A && B"]
         A1["Evaluate Left: A"] -->|false| RES1["Short-circuit: Result is false
 (Right operand B is NEVER executed)"]
