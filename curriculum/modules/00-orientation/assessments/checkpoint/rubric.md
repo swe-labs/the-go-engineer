@@ -2,7 +2,7 @@
 
 | Category | Weight | Meets standard |
 |---|---:|---|
-| Repository navigation | 20% | Correctly explains `curriculum/`, `internal/tools/`, `web/`, and `scripts/`. |
+| Curriculum navigation | 20% | Correctly explains the 3 tracks, standard module anatomy, SESE navigation, and workspace setup. |
 | Zero-magic understanding | 20% | Explains no-hidden-assumption learning and gives a concrete example. |
 | Workflow understanding | 20% | Distinguishes lessons, labs, projects, assessments, starters, and solutions. |
 | Running/debugging readiness | 20% | Explains `go run`, `go test`, and writes a high-signal debugging question. |

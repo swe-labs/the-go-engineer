@@ -176,7 +176,8 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...
-go run ./internal/tools/curriculum validate-all
+go test -v ./internal/tools/curriculum/...
+go run ./scripts/validate_curriculum.go
 ```
 
 For benchmark-related changes:
@@ -195,7 +196,7 @@ Before final review:
 - `NEXT UP:` footers match curriculum metadata in `curriculum/path.core.json`
 - Go code is formatted and idiomatic
 - tests prove behavior where behavior should be provable
-- all 17 automated curriculum quality gates pass (`go run ./internal/tools/curriculum validate-all`)
+- all 24 automated curriculum quality gates pass (`go run ./scripts/validate_curriculum.go`)
 - P0/P1/P2 findings are fixed or explicitly documented
 
 Final squash merge is maintainer-controlled.

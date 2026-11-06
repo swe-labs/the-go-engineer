@@ -103,7 +103,29 @@ For v3.x maintenance releases:
 4. Open a release PR into `release/v3`.
 5. Squash and merge after green CI and approval.
 
+## Maintainer vs. Learner Isolation Invariant
+
+Maintainers and authors must strictly preserve the boundary between internal tooling and learner-facing content:
+
+1. **Maintainer-Only Scope**:
+   - `internal/tools/curriculum/`: Automated graph engine, schema validation, contract validation, and verification CLI.
+   - `scripts/`: Operational runners (`validate_curriculum.go`), maintenance scripts, catalog generators.
+   - `curriculum/*.json`: Authoritative schema and graph manifests (`path.core.json`, `projects.json`, `schema.v3.json`, etc.).
+   - `MAINTAINER-CHECKLIST.md`, `CONTRIBUTING.md`, `ARCHITECTURE.md`: Contributor and maintainer standards.
+
+2. **Learner-Facing Scope**:
+   - `curriculum/modules/`: 18 core backend modules (instructional lessons, project capstones, assessment checkpoints).
+   - `curriculum/companion-frontend/`: Server-driven full-stack hypermedia track.
+   - `curriculum/electives/`: Advanced specialization tracks.
+   - Learner tools: Terminal, text editor/IDE, standard Go toolchain (`go run`, `go test`, `go build`).
+
+3. **Strict Isolation Rule**:
+   - Learner-facing READMEs, lessons, projects, and assessments must **never** reference internal maintainer scripts (`scripts/validate_curriculum.go`), internal packages (`internal/tools/`), JSON manifest schemas (`schema.v3.json`), or automated quality gates.
+   - Learners are never instructed to run maintainer validation scripts or tested on repo maintainer infrastructure.
+
 ## Local Verification
+
+Run this sequence before committing or opening pull requests:
 
 ```bash
 go build ./...
@@ -113,8 +135,40 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...
-go run ./internal/tools/curriculum validate-all
+go test -v ./internal/tools/curriculum/...
+go run ./scripts/validate_curriculum.go
 ```
+
+### The 24 Authoritative Curriculum Quality Gates
+
+All 24 validation gates executed by `go run ./scripts/validate_curriculum.go` must pass:
+
+| Gate | Description |
+|:---|:---|
+| `validate-schema` | Validates all 10 JSON manifests against `schema.v3.json`. |
+| `validate-graph` | Detects cycles and verifies DAG reachability. |
+| `validate-lessons` | Enforces zero machine-role comments and valid `NEXT UP` footers. |
+| `validate-prerequisite-closure` | Verifies prerequisite closures across modules. |
+| `validate-project-binding` | Ensures all 28 projects bind to valid anchors, deliverables, and rubrics. |
+| `validate-no-placeholder-zm` | Scans for boilerplate or placeholder phrases in `zero_magic` blocks. |
+| `validate-assessment-completeness` | Verifies all assessments have non-generic criteria and passing scores. |
+| `validate-unique-tags` | Enforces tag taxonomy consistency. |
+| `validate-crossrefs` | Validates bidirectional integrity across cross-reference edges. |
+| `validate-concept-ownership` | Ensures all 62 canonical concepts map to unambiguous owners. |
+| `validate-cognitive-load` | Verifies cognitive density ratings and pacing. |
+| `validate-operational-failures` | Verifies 100% mathematical symmetry across all 13 failure categories. |
+| `validate-failure-engineering` | Ensures production modules include concrete failure examples. |
+| `validate-zero-magic` | Validates adherence of all 92 golden lessons to zero-magic authoring spec. |
+| `validate-physical-artifacts` | Verifies existence of all 441 instructional READMEs on disk. |
+| `validate-assessment-artifacts` | Verifies 4-file assessment suites across all checkpoints and milestones. |
+| `validate-starter-parity` | Compiles and validates Go AST correctness across starters and solutions. |
+| `validate-markdown-links` | Crawls Markdown files and verifies all relative links exist on disk. |
+| `validate-sese-navigation` | Enforces SESE entry (`## Start here`) and exit gate integrity. |
+| `validate-project-scripts` | Verifies cross-platform script parity (`verify.sh` and `verify.ps1`). |
+| `validate-no-emojis` | Enforces strict zero-emoji invariant across all Markdown prose. |
+| `validate-anchor-quotes` | Enforces pioneer anchor quotes at the top of locked lessons. |
+| `validate-diagram-palette` | Enforces Dark Engineering Palette classes and colors on Mermaid flowcharts. |
+| `validate-readme-contracts` | Enforces 6 core headings and subtype profiles per `readme.contracts.json`. |
 
 ## Documentation Alignment Check
 
@@ -142,7 +196,7 @@ Before release or workflow changes, verify these documents agree with `ARCHITECT
 - [ ] Module directories remain canonically organized under `curriculum/modules/`.
 - [ ] Item IDs belong to the declared module progression.
 - [ ] Metadata manifests in `curriculum/` match filesystem paths.
-- [ ] All 17 automated curriculum quality gates pass.
+- [ ] All 24 automated curriculum quality gates pass.
 
 ## Lesson Checklist
 

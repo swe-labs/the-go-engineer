@@ -5282,9 +5282,9 @@
     {
       "assessment_id": "assessment-project-course-setup",
       "deliverables": [
-        "Cloned repository with clean build",
-        "Validator output showing all checks pass",
-        "Environment documentation"
+        "Configured terminal and Git identity",
+        "Verified text editor and local development workspace",
+        "Environment documentation file (setup.txt)"
       ],
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
@@ -5311,22 +5311,22 @@
       "rubric": [
         {
           "criterion": "Correctness",
-          "description": "Repository is cloned correctly; Go builds and validators run without errors.",
+          "description": "Terminal environment and Git committer identity configured correctly.",
           "weight": 35
         },
         {
           "criterion": "Environment quality",
-          "description": "Go toolchain, IDE, and debugging tools are properly configured and documented.",
+          "description": "Text editor and dedicated local workspace directory properly established.",
           "weight": 25
         },
         {
           "criterion": "Proof",
-          "description": "Output from go version, go build, and validator demonstrate a working environment.",
+          "description": "Output from git version, committer config, and workspace creation demonstrate a working setup.",
           "weight": 25
         },
         {
           "criterion": "Explanation",
-          "description": "Clear documentation of environment choices, issues encountered, and resolutions.",
+          "description": "Clear documentation of environment choices and personal workspace location.",
           "weight": 15
         }
       ],
@@ -5335,28 +5335,28 @@
       "source_legacy_ids": [],
       "stage": "foundations",
       "status": "ready",
-      "summary": "Verify your complete course environment: repository clone, Go installation, IDE setup, and first successful test run.",
+      "summary": "Verify your complete course environment: terminal shell, Git configuration, editor setup, and workspace initialization.",
       "tags": [
         "orientation",
         "setup"
       ],
       "tasks": [
         {
-          "instruction": "Clone the course repository, verify the directory structure, and confirm you can run go build ./... without errors.",
-          "title": "Clone and verify the repository"
+          "instruction": "Verify your terminal shell, check working directory, and confirm basic shell command execution.",
+          "title": "Verify terminal shell"
         },
         {
-          "instruction": "Run go run ./internal/tools/curriculum/ validate-all and confirm all validators pass.",
-          "title": "Run the validation suite"
+          "instruction": "Confirm Git is installed and configure committer name and email.",
+          "title": "Configure Git identity"
         },
         {
-          "instruction": "Write a short document describing your Go version, OS, IDE setup, and any configuration choices.",
-          "title": "Document your environment"
+          "instruction": "Establish your dedicated local workspace directory for course projects and record setup.txt.",
+          "title": "Establish workspace and record setup"
         }
       ],
       "title": "Course Setup Verification",
       "type": "mini-project",
-      "verification": "Manual review: ensure repository clone, Go build, and validator output are present and correct."
+      "verification": "Manual review: ensure Git version, configured identity, editor confirmation, and workspace directory are present."
     },
     {
       "assessment_id": "assessment-project-performance-analysis-lab",

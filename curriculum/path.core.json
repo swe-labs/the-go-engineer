@@ -79,7 +79,7 @@
         "test_path": ""
       },
       "id": "core-00-01",
-      "learning_objective": "Navigate the multi-module repository structure, locate lesson assets on disk, and map curriculum JSON metadata to filesystem folders.",
+      "learning_objective": "Navigate the multi-module curriculum structure, explain the three learning tracks, and understand the standard anatomy of lessons, projects, and assessments.",
       "module_id": "module-00",
       "next_item_ids": [
         "core-00-02"
@@ -91,11 +91,11 @@
         "assessment_id": "assessment-module-00",
         "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
         "mastery_checks": [
-          "Can locate curriculum manifests (path.core.json, projects.json) and correlate item IDs to filesystem directories.",
-          "Can explain the separation of concerns between curriculum/, internal/tools/, web/, and scripts/.",
-          "Can identify the role of schema.v3.json in automated curriculum validation."
+          "Can navigate curriculum tracks (Core Backend Path, Companion Frontend Track, Advanced Electives).",
+          "Can explain the standard anatomy of a module (overview, lessons, projects, assessments).",
+          "Can establish and organize a personal workspace directory for course projects."
         ],
-        "practice_task": "The learner must find three lessons by their IDs in the curriculum JSON, locate their README files on disk, and explain the relationship between the JSON entry and the folder structure.",
+        "practice_task": "The learner must locate three lessons across different modules on disk, identify their prerequisites, and outline how they will structure their personal project workspace.",
         "project_id": null,
         "rubric_ids": [
           "rubric-module-00"
