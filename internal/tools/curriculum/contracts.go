@@ -113,15 +113,31 @@ func validateReadmeContracts() {
 			required = append(required, mod.RequiredHeadings...)
 			forbidden = mod.ForbiddenHeadings
 		}
+		if c.ID == "lesson.v3" {
+			required = sortLessonRequired(required)
+		}
 
 		headings, hasGo := scanReadmeHeadings(readme)
 
 		// 3. Required headings (content-shape).
 		found := normalizeHeadings(headings, c.HeadingAliases)
+		lastReqIdx := -1
+		var lastReqHeading string
 		for _, req := range required {
 			if !headingSatisfied(req, found) {
 				add(contractViolation{item.ID, c.ID, "heading",
 					fmt.Sprintf("missing required heading '## %s'", req), sevs})
+			} else {
+				reqIdx := findHeadingIndex(req, headings, c.HeadingAliases)
+				if reqIdx != -1 {
+					if reqIdx < lastReqIdx {
+						add(contractViolation{item.ID, c.ID, "heading-order",
+							fmt.Sprintf("required heading '## %s' appears before preceding required heading '## %s'", req, lastReqHeading), sevs})
+					} else {
+						lastReqIdx = reqIdx
+						lastReqHeading = req
+					}
+				}
 			}
 		}
 
@@ -271,10 +287,23 @@ func validateDocumentContracts(reg *Registry, core CoreBundle, electives Electiv
 		sev := documentShapeSeverity(t.moduleID)
 		headings, _ := scanReadmeHeadings(data)
 		found := normalizeHeadings(headings, t.family.HeadingAliases)
+		lastReqIdx := -1
+		var lastReqHeading string
 		for _, req := range t.family.RequiredHeadings {
 			if !headingSatisfied(req, found) {
 				add(contractViolation{t.id, t.family.ID, "heading",
 					fmt.Sprintf("missing required heading '## %s'", req), sev})
+			} else {
+				reqIdx := findHeadingIndex(req, headings, t.family.HeadingAliases)
+				if reqIdx != -1 {
+					if reqIdx < lastReqIdx {
+						add(contractViolation{t.id, t.family.ID, "heading-order",
+							fmt.Sprintf("required heading '## %s' appears before preceding required heading '## %s'", req, lastReqHeading), sev})
+					} else {
+						lastReqIdx = reqIdx
+						lastReqHeading = req
+					}
+				}
 			}
 		}
 	}
@@ -418,6 +447,59 @@ func headingSatisfied(required string, found map[string]bool) bool {
 		}
 	}
 	return false
+}
+
+// findHeadingIndex returns the index of the first heading in headings that satisfies required.
+func findHeadingIndex(required string, headings []string, aliases map[string]string) int {
+	for idx, h := range headings {
+		if headingMatches(h, required) {
+			return idx
+		}
+		for variant, canon := range aliases {
+			if headingMatches(required, canon) && headingMatches(h, variant) {
+				return idx
+			}
+		}
+	}
+	return -1
+}
+
+var canonicalLessonSequence = []string{
+	"Learning objective",
+	"Why this matters",
+	"Mental model",
+	"Visual model",
+	"Core idea",
+	"Under the hood",
+	"How Go uses it",
+	"Go example",
+	"Step-by-step execution",
+	"Runtime evidence",
+	"Common mistakes",
+	"Debugging walkthrough",
+	"Production notes",
+	"Performance implications",
+	"Practice task",
+	"Tests / verification",
+	"Review questions",
+	"NEXT UP",
+}
+
+func lessonHeadingRank(h string) int {
+	for i, c := range canonicalLessonSequence {
+		if headingMatches(h, c) {
+			return i
+		}
+	}
+	return 999
+}
+
+func sortLessonRequired(reqs []string) []string {
+	res := append([]string{}, reqs...)
+	sort.SliceStable(res, func(i, j int) bool {
+		return lessonHeadingRank(res[i]) < lessonHeadingRank(res[j])
+	})
+	return res
 }
 
 func contentFlag(item Item, flag string) bool {

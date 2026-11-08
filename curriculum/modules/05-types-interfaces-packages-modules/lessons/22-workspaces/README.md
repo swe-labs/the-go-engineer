@@ -213,7 +213,7 @@ Symptom: CI fails because it does not have `go.work` and cannot find local modul
 - **`go.work` is local-only**: The Go team's official recommendation is to keep `go.work` out of version control. Each developer generates their own with `go work init`.
 - **CI/CD**: In CI, do not use `go.work`. Build each module independently with `go build ./...` from the module root. Use `go mod download` to cache dependencies.
 - **Multi-module CI**: Set up separate CI jobs for each module, or use a matrix build. A workspace is not needed for CI — it is a development convenience.
-- **VS Code / gopls**: The Go language server supports workspace mode. When `go.work` is present, `gopls` resolves imports across modules seamlessly.
+- **VS Code / gopls**: The Go language server supports workspace mode. When `go.work` is present, `gopls` resolves imports across modules without local `replace` directives.
 - **Migration from `replace`**: If your team uses `replace` directives extensively, migrate to a workspace. The workspace is cleaner, does not require editing each `go.mod`, and prevents accidental commits of local paths.
 
 ## Performance implications

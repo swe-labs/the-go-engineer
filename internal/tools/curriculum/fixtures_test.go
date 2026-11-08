@@ -771,6 +771,10 @@ var failureMutations = map[string]func(*testing.T, string){
 	"validate-readme-contracts": func(t *testing.T, dir string) {
 		replaceFixture(t, dir, "modules/00-alpha/lessons/01-alpha/README.md", "## Learning objective", "## Goal")
 	},
+	"validate-anti-slop": func(t *testing.T, dir string) {
+		appendFixture(t, dir, "modules/00-alpha/lessons/01-alpha/README.md",
+			"\nIn simple terms, this is a cutting-edge fixture.\n")
+	},
 }
 
 func TestValidatorFixtures(t *testing.T) {

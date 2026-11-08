@@ -117,7 +117,7 @@ go run ./curriculum/modules/08-http-rest-apis/projects/book-catalog-rest-api/_so
 | Criterion | Excellent (5) | Good (3) | Needs Work (0) |
 |---|---|---|---|
 | **Correctness** | All CRUD endpoints, health check, and error codes match specification; tests pass | Most endpoints work; minor status code mismatch | Missing endpoints or non-functional routing |
-| **Middleware & Reliability** | Panic recovery, correlation ID propagation, and timeouts work seamlessly | Logging or correlation ID missing | Unhandled panics crash server |
+| **Middleware & Reliability** | Panic recovery, correlation ID propagation, and timeouts function reliably across all routes | Logging or correlation ID missing | Unhandled panics crash server |
 | **Concurrency & Thread-Safety** | In-memory store uses `sync.RWMutex` with proper lock acquisition and defer unlock | Mutex used but potential race conditions | Unsynchronized map access causing runtime panics |
 | **API Quality** | Consistent JSON envelope for both data and errors; graceful shutdown implemented | JSON returned but inconsistent envelope | Non-JSON responses or abrupt server termination |
 

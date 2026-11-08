@@ -209,6 +209,36 @@ func validateProjectBinding() {
 	}
 }
 
+var zeroMagicPlaceholderPhrases = []string{
+	"This lesson explains what problem",
+	"as one step in the learner's path",
+	"one step in the learner's path",
+	"The lesson must explain the underlying mechanics",
+	"The lesson shows how Go expresses",
+	"mechanically without understanding",
+	"in the context of professional Go",
+}
+
+func findZeroMagicPlaceholder(zm *ZeroMagic) (string, bool) {
+	fields := []string{
+		zm.ProblemSolved,
+		zm.WhyItExists,
+		zm.MentalModel,
+		zm.UnderTheHood,
+		zm.HowGoUsesIt,
+		zm.RealWorldUsage,
+		zm.ProofOfUnderstanding,
+	}
+	for _, text := range fields {
+		for _, phrase := range zeroMagicPlaceholderPhrases {
+			if strings.Contains(text, phrase) {
+				return phrase, true
+			}
+		}
+	}
+	return "", false
+}
+
 func validateNoPlaceholderZM() {
 	fmt.Println("=== validate-no-placeholder-zm ===")
 	ok := true
@@ -222,43 +252,36 @@ func validateNoPlaceholderZM() {
 	allItems = append(allItems, core.Items...)
 	allItems = append(allItems, electives.Items...)
 
-	placeholderPhrases := []string{
-		"This lesson explains what problem",
-		"as one step in the learner's path",
-		"The lesson must explain the underlying mechanics",
-		"The lesson shows how Go expresses",
-		"mechanically without understanding",
-	}
-
 	placeholderCount := 0
 	for _, item := range allItems {
 		if item.ZeroMagic == nil {
 			continue
 		}
+		zm := item.ZeroMagic
 
-		// Marshal to JSON string to search all fields
-		zmJSON, _ := json.Marshal(item.ZeroMagic)
-		zmStr := string(zmJSON)
-
-		for _, phrase := range placeholderPhrases {
-			if strings.Contains(zmStr, phrase) {
-				warnf("%s: zero_magic contains placeholder text: %q", item.ID, phrase)
-				placeholderCount++
-				ok = false
-				break
-			}
+		if phrase, found := findZeroMagicPlaceholder(zm); found {
+			warnf("%s: zero_magic contains placeholder text: %q", item.ID, phrase)
+			placeholderCount++
+			ok = false
 		}
 
-		// Check specific fields using reflection via JSON marshal
-		var zmMap map[string]any
-		json.Unmarshal(zmJSON, &zmMap)
-		for _, field := range []string{"problem_solved", "why_it_exists", "mental_model", "under_the_hood", "how_go_uses_it", "real_world_usage", "proof_of_understanding"} {
-			if val, exists := zmMap[field]; exists {
-				if str, ok := val.(string); ok && strings.TrimSpace(str) == "" {
-					warnf("%s: zero_magic.%s is empty", item.ID, field)
-					placeholderCount++
-					ok = false
-				}
+		fields := []struct {
+			name string
+			val  string
+		}{
+			{"problem_solved", zm.ProblemSolved},
+			{"why_it_exists", zm.WhyItExists},
+			{"mental_model", zm.MentalModel},
+			{"under_the_hood", zm.UnderTheHood},
+			{"how_go_uses_it", zm.HowGoUsesIt},
+			{"real_world_usage", zm.RealWorldUsage},
+			{"proof_of_understanding", zm.ProofOfUnderstanding},
+		}
+		for _, f := range fields {
+			if strings.TrimSpace(f.val) == "" {
+				warnf("%s: zero_magic.%s is empty", item.ID, f.name)
+				placeholderCount++
+				ok = false
 			}
 		}
 	}
@@ -642,14 +665,6 @@ func validateZeroMagic() {
 	allItems = append(allItems, core.Items...)
 	allItems = append(allItems, electives.Items...)
 
-	// Golden lessons are derived from the item's zero_magic_status field, the
-	// single source of truth, rather than a hand-maintained ID list.
-	placeholderPhrases := []string{
-		"mechanically without understanding",
-		"one step in the learner's path",
-		"in the context of professional Go",
-	}
-
 	goldenCount := 0
 	for _, item := range allItems {
 		if item.ZeroMagicStatus != "golden" {
@@ -664,14 +679,9 @@ func validateZeroMagic() {
 		zm := item.ZeroMagic
 
 		// Check for placeholder content that indicates un-authored zero_magic
-		zmJSON, _ := json.Marshal(zm)
-		zmStr := string(zmJSON)
-		for _, phrase := range placeholderPhrases {
-			if strings.Contains(zmStr, phrase) {
-				errorf("%s: zero_magic contains placeholder text: %q", item.ID, phrase)
-				ok = false
-				break
-			}
+		if phrase, found := findZeroMagicPlaceholder(zm); found {
+			errorf("%s: zero_magic contains placeholder text: %q", item.ID, phrase)
+			ok = false
 		}
 
 		// Required spec fields for golden lessons

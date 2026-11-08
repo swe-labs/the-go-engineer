@@ -44,7 +44,7 @@ Under the hood:
 1. `contextKey` is defined as a private unexported type `type contextKey string` to prevent collisions with other packages storing values in the same context tree.
 2. `UserContext` provides `HasPermission`, which executes an $O(k)$ lookup across the role's permission slice.
 3. `RequirePermission` acts as an HTTP handler decorator. If the user is missing from context, it emits HTTP 401 Unauthorized. If the user's role lacks the requested permission, it sets `w.WriteHeader(http.StatusForbidden)` and renders an explanatory JSON payload without leaking internal authorization logic.
-4. If authorized, execution passes seamlessly to `next(w, r)` without overhead.
+4. If authorized, execution delegates directly to `next(w, r)`.
 
 A representative excerpt from `main.go` (`UserContext.HasPermission`):
 

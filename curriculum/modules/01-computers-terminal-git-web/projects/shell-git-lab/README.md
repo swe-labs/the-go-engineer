@@ -1,15 +1,15 @@
 # Shell + Git Lab
 
-## Project overview
-
-Practice shell navigation and Git commands by building a directory structure and managing code changes through a complete Git workflow — all in your terminal. No Go code required.
-
 ## Learning objective
 
 - Navigate the filesystem using shell commands (`cd`, `ls`, `pwd`, `mkdir`, `rm`)
 - Initialize and manage a Git repository (`init`, `add`, `commit`, `branch`, `merge`)
 - Resolve merge conflicts
-- Understand shell and Git mental models from lessons 1–15
+- Apply shell and Git mental models from lessons 1–15
+
+## Project overview
+
+Practice shell navigation and Git commands by building a directory structure and managing code changes through a complete Git workflow — all in your terminal. No Go code required.
 
 ## Tasks
 

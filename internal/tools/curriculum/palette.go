@@ -71,6 +71,29 @@ func validateDiagramPalette() {
 				}
 			}
 
+			// Check block balance (subgraph, loop, alt, opt vs end)
+			lines := strings.Split(diagram, "\n")
+			opens := 0
+			closes := 0
+			for _, l := range lines {
+				trimmed := strings.TrimSpace(l)
+				if strings.HasPrefix(trimmed, "subgraph ") ||
+					strings.HasPrefix(trimmed, "loop ") ||
+					strings.HasPrefix(trimmed, "alt ") ||
+					strings.HasPrefix(trimmed, "opt ") {
+					opens++
+				}
+				if trimmed == "end" || strings.HasPrefix(trimmed, "end ") || strings.HasPrefix(trimmed, "end;") {
+					closes++
+				}
+			}
+			if opens != closes {
+				errorf("%s (%s): Mermaid diagram has unclosed block (opens=%d, closes=%d) in %s",
+					item.ID, item.Slug, opens, closes, item.Files.ReadmePath)
+				nonCompliant++
+				ok = false
+			}
+
 			idx = end + 3
 		}
 	}

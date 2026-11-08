@@ -1,4 +1,4 @@
-.PHONY: build test test-race test-verbose bench vet fmt fmt-check lint tidy deps-check deps-update clean run-hello run-env cover validate ci help
+.PHONY: build test test-race test-verbose bench vet fmt fmt-check lint tidy deps-check deps-update clean run-hello run-env cover validate catalog ci help
 
 # ============================================================================
 # The Go Engineer — Makefile
@@ -84,6 +84,11 @@ validate: ## Run curriculum validator
 	@echo "Validating curriculum..."
 	go run ./internal/tools/curriculum validate-all
 	@echo "Curriculum validation completed"
+
+catalog: ## Regenerate curriculum/README.md from manifests
+	@echo "Generating curriculum README..."
+	go run ./internal/tools/curriculum generate-catalog
+	@echo "Curriculum README generated"
 
 ## Run Examples
 run-hello: ## Run the Hello World example

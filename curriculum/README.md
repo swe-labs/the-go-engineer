@@ -906,6 +906,8 @@ Total cross-references: **2086**
 - `validate-anchor-quotes`: Authoritative pioneer anchor quotes present in locked lessons
 - `validate-diagram-palette`: Mermaid diagrams comply with the Dark Engineering Palette
 - `validate-readme-contracts`: Documentation contracts satisfied per item family and subtype
+- `validate-anti-slop`: Strict anti-slop lexical rules and banned generic filler eliminated across prose
+
 ### Validation Commands
 
 | Command | Purpose | Execution |

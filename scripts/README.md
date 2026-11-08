@@ -47,20 +47,23 @@ go run ./scripts/validate_curriculum.go validate-sese-navigation
 | `validate-sese-navigation` | SESE Flow | Enforces front door (`Start here` -> Lesson 01), prohibits escape hatches, verifies assessment exit gates. |
 | `validate-project-scripts` | Script Parity | Verifies cross-platform parity (`verify.sh` and `verify.ps1`) for script-backed projects. |
 | `validate-no-emojis` | Professional Prose | Scans all Markdown files, enforcing zero non-code emojis across prose, headers, lists, and tables. |
-| `validate-anchor-quotes` | Pioneer Anchors | Enforces authoritative pioneer anchor quotes at the top of lessons in locked modules. |
-| `validate-diagram-palette` | Diagram Styling | Enforces Dark Engineering Palette classes and color tokens on Mermaid flowcharts. |
-| `validate-readme-contracts` | Documentation Contract | Resolves each item's document contract (family + subtype modifiers) from `readme.contracts.json` and verifies required headings, code policy, and file layout. Structural defects always block; content-shape defects in locked modules block, and other items follow `severity_policy.by_status` (draft/scaffolded skip, review/reviewed warn, ready-and-later block). `--strict` promotes every remaining advisory to an error for the release gate. |
+| `validate-anchor-quotes` | Pioneer Anchors | Enforces authoritative computing pioneer and Go designer anchor quotes with valid attribution at the top of lessons in locked modules. |
+| `validate-diagram-palette` | Diagram Styling & Syntax | Enforces Dark Engineering Palette classes/color tokens on flowcharts and verifies matching block delimiters (`subgraph`/`loop`/`alt`/`opt` vs `end`). |
+| `validate-readme-contracts` | Documentation Contract | Resolves each item's document contract (family + subtype modifiers) from `readme.contracts.json` and verifies required headings, sequential heading order, code policy, and file layout. Structural defects always block; content-shape defects in locked modules block, and other items follow `severity_policy.by_status` (draft/scaffolded skip, review/reviewed warn, ready-and-later block). `--strict` promotes every remaining advisory to an error for the release gate. |
+| `validate-anti-slop` | Anti-Slop Prose Invariant | Scans all Markdown prose across the curriculum for banned AI filler, lexical tells, unearned marketing superlatives, and empty transition phrases. |
 
 ---
 
 ## 2. Curriculum Catalog Generator
 
-### `scripts/generate_curriculum_readme.js`
-
-Authoritative generator for [`curriculum/README.md`](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/README.md). Computes all quick stats, module breakdown tables, workload pacing models, project lists, assessment registries, and cross-reference distributions directly from the canonical JSON manifests.
+The authoritative generator for [`curriculum/README.md`](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/README.md) is built directly into the Go curriculum toolchain (`internal/tools/curriculum/catalog.go`). It computes quick stats, module breakdown tables, workload pacing models, project lists, assessment registries, and cross-reference distributions directly from the canonical JSON manifests without requiring external runtimes like Node.js.
 
 ```bash
-node scripts/generate_curriculum_readme.js
+# Generate curriculum/README.md via toolchain
+go run ./internal/tools/curriculum generate-catalog
+
+# Or via the script forwarder
+go run ./scripts/validate_curriculum.go generate-catalog
 ```
 
 ---
@@ -98,11 +101,3 @@ go test -v ./curriculum/companion-frontend/...
 # 5. Run full curriculum verification suite
 go run ./scripts/validate_curriculum.go
 ```
-
----
-
-## 5. Maintainer Automation Scripts
-
-Maintainer tools for repository labels, milestone sync, and issue automation live in `scripts/maintainer-scripts/`.
-
-See [maintainer-scripts/GITHUB_AUTOMATION_GUIDE.md](./maintainer-scripts/GITHUB_AUTOMATION_GUIDE.md).

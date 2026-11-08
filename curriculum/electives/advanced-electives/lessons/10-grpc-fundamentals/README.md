@@ -14,7 +14,7 @@ Do not use gRPC for public web client APIs that require direct browser consumpti
 
 ## Mental model
 
-gRPC elevates remote procedure calls to language-native function calls: resp, err := client.GetUser(ctx, req). Under the hood, gRPC serializes request structs into Protobuf, transmits them over an HTTP/2 multiplexed TCP stream, and decodes the response on the other side seamlessly.
+gRPC elevates remote procedure calls to language-native function calls: resp, err := client.GetUser(ctx, req). Under the hood, gRPC serializes request structs into Protobuf, transmits them over an HTTP/2 multiplexed TCP stream, and decodes the response on the other side directly into Go typed values.
 
 ## Visual model
 

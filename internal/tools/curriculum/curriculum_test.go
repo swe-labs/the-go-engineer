@@ -438,3 +438,21 @@ func TestDeriveNextModuleLinks(t *testing.T) {
 		t.Error("terminal module must not have a forward link")
 	}
 }
+
+// TestCatalogGeneratorMatchesCurriculumReadme verifies that curriculum/README.md
+// is strictly in sync with the canonical JSON manifests via generateCatalog().
+func TestCatalogGeneratorMatchesCurriculumReadme(t *testing.T) {
+	expectedCatalog, err := generateCatalog()
+	if err != nil {
+		t.Fatalf("generateCatalog failed: %v", err)
+	}
+	readmePath := filepath.Join(curriculumDir, "README.md")
+	data, err := os.ReadFile(readmePath)
+	if err != nil {
+		t.Fatalf("cannot read %s: %v", readmePath, err)
+	}
+	actual := string(data)
+	if actual != expectedCatalog {
+		t.Errorf("curriculum/README.md is out of sync with manifests; run 'make catalog' or 'go run ./internal/tools/curriculum generate-catalog' to update")
+	}
+}

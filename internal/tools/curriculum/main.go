@@ -76,6 +76,10 @@ func main() {
 		fmt.Fprintln(os.Stderr, "--strict and --advisory are mutually exclusive")
 		os.Exit(2)
 	}
+	if cmd == "generate-catalog" || cmd == "generate-readme" {
+		writeCatalog()
+		return
+	}
 	ran := false
 	for _, v := range validators() {
 		if v.Name == cmd {
@@ -152,6 +156,7 @@ func validators() []validator {
 		{"validate-anchor-quotes", "Check pioneer anchor quotes on locked module lessons", validateAnchorQuotes},
 		{"validate-diagram-palette", "Check Dark Engineering Palette compliance on diagrams", validateDiagramPalette},
 		{"validate-readme-contracts", "Check README contract families (headings, code policy, file policy) across all items", validateReadmeContracts},
+		{"validate-anti-slop", "Check anti-slop lexical rules and banned generic filler across curriculum prose", validateAntiSlop},
 	}
 }
 
@@ -171,6 +176,7 @@ func printUsage() {
 		fmt.Printf("  %-*s %s\n", width, v.Name, v.Desc)
 	}
 	fmt.Printf("  %-*s %s\n", width, "validate-all", "Run all validators")
+	fmt.Printf("  %-*s %s\n", width, "generate-catalog", "Generate curriculum/README.md from manifests")
 	fmt.Println("")
 	fmt.Println("Flags:")
 	fmt.Println("  --strict                     Promote advisory warnings to errors (release gate)")
@@ -425,8 +431,12 @@ type Item struct {
 
 // PathBundle is the shape shared by path.core.json and path.electives.json.
 type PathBundle struct {
-	Modules []Module `json:"modules"`
-	Items   []Item   `json:"items"`
+	SchemaVersion     string   `json:"schema_version"`
+	CurriculumVersion string   `json:"curriculum_version"`
+	Status            string   `json:"status"`
+	LastUpdated       string   `json:"last_updated"`
+	Modules           []Module `json:"modules"`
+	Items             []Item   `json:"items"`
 }
 
 // CoreBundle and ElectiveBundle are aliases: both manifests share one schema, so

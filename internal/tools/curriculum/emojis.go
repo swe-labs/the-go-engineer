@@ -11,7 +11,7 @@ import (
 
 // isEmojiCharacter tests if a rune falls into Unicode emoji or decorative symbol ranges.
 func isEmojiCharacter(r rune) bool {
-	// Unicode Emoji presentation and symbols
+	// Unicode Emoji presentation and symbols (includes 0x1F449, 0x1F680, 0x1F4A1, 0x1F3AF)
 	if r >= 0x1F300 && r <= 0x1FAFF {
 		return true
 	}
@@ -21,10 +21,6 @@ func isEmojiCharacter(r rune) bool {
 		if r == 0x27A1 || r == 0x2705 || r == 0x274C || r == 0x2728 || r == 0x2714 || r == 0x2716 {
 			return true
 		}
-	}
-	// Common decorative emojis
-	if r == 0x1F449 || r == 0x1F680 || r == 0x1F4A1 || r == 0x1F3AF {
-		return true
 	}
 	return false
 }
@@ -56,6 +52,8 @@ func validateNoEmojis() {
 
 		filesChecked++
 		scanner := bufio.NewScanner(file)
+		buf := make([]byte, 64*1024)
+		scanner.Buffer(buf, 1024*1024)
 		lineNo := 0
 		inCodeBlock := false
 
@@ -86,6 +84,11 @@ func validateNoEmojis() {
 				}
 				i += size
 			}
+		}
+		if scanErr := scanner.Err(); scanErr != nil {
+			relPath, _ := filepath.Rel(curriculumDir, path)
+			errorf("%s: scanner error while reading emojis: %v", relPath, scanErr)
+			ok = false
 		}
 		return nil
 	})

@@ -6,7 +6,7 @@ Refactor a tightly coupled, monolithic Go application into a modular, testable h
 
 ## Why this matters
 
-As codebases grow, initial prototypes frequently degenerate into sprawling monoliths where HTTP handlers directly perform database operations, business calculations, third-party payment requests, and notification dispatches. This creates untestable codebases prone to regressions and cascade failures. Senior Go engineers must know how to decouple business rules from infrastructure mechanisms, allowing business logic to be tested in isolation and infrastructure adapters to be swapped seamlessly.
+As codebases grow, initial prototypes frequently degenerate into sprawling monoliths where HTTP handlers directly perform database operations, business calculations, third-party payment requests, and notification dispatches. This creates untestable codebases prone to regressions and cascade failures. Senior Go engineers must know how to decouple business rules from infrastructure mechanisms, allowing business logic to be tested in isolation and infrastructure adapters to be swapped without modifying domain packages.
 
 ## Prerequisites
 

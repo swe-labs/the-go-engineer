@@ -41,6 +41,8 @@ func validateMarkdownLinks() {
 
 		dir := filepath.Dir(path)
 		scanner := bufio.NewScanner(file)
+		buf := make([]byte, 64*1024)
+		scanner.Buffer(buf, 1024*1024)
 		lineNo := 0
 		inCodeBlock := false
 
@@ -97,6 +99,11 @@ func validateMarkdownLinks() {
 					ok = false
 				}
 			}
+		}
+		if scanErr := scanner.Err(); scanErr != nil {
+			relSrc, _ := filepath.Rel(curriculumDir, path)
+			errorf("%s: scanner error while reading markdown links: %v", relSrc, scanErr)
+			ok = false
 		}
 		return nil
 	})

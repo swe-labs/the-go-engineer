@@ -21,15 +21,6 @@ func validateLessons() {
 	readJSON("path.core.json", &core)
 	readJSON("path.electives.json", &electives)
 
-	type bundle struct {
-		modules []Module
-		items   []Item
-	}
-	allBundles := []bundle{
-		{core.Modules, core.Items},
-		{electives.Modules, electives.Items},
-	}
-
 	allItems := make([]Item, 0, len(core.Items)+len(electives.Items))
 	allItems = append(allItems, core.Items...)
 	allItems = append(allItems, electives.Items...)
@@ -58,24 +49,20 @@ func validateLessons() {
 		}
 	}
 
-	for _, b := range allBundles {
-		for _, mod := range b.modules {
-			for _, item := range b.items {
-				if item.ModuleID != mod.ID || item.Files == nil || !contentStatuses[item.Status] {
-					continue
-				}
-				check := func(path, label string) {
-					if path != "" && !pathExists(resolvePath(path)) {
-						missing(path, label+" not found")
-					}
-				}
-				check(item.Files.ReadmePath, "README")
-				check(item.Files.MainPath, "main source")
-				check(item.Files.StarterPath, "starter code")
-				check(item.Files.SolutionPath, "solution")
-				check(item.Files.TestPath, "test file")
+	for _, item := range allItems {
+		if item.Files == nil || !contentStatuses[item.Status] {
+			continue
+		}
+		check := func(path, label string) {
+			if path != "" && !pathExists(resolvePath(path)) {
+				missing(path, label+" not found")
 			}
 		}
+		check(item.Files.ReadmePath, "README")
+		check(item.Files.MainPath, "main source")
+		check(item.Files.StarterPath, "starter code")
+		check(item.Files.SolutionPath, "solution")
+		check(item.Files.TestPath, "test file")
 	}
 
 	var issues []lessonIssue
@@ -113,35 +100,31 @@ func validateLessons() {
 
 	// 3. Check README NEXT UP footers (content-shape).
 	nextChecked := 0
-	for _, b := range allBundles {
-		for _, mod := range b.modules {
-			for _, item := range b.items {
-				if item.ModuleID != mod.ID || item.Files == nil || item.Files.ReadmePath == "" {
-					continue
-				}
-				if item.Type != "lesson" && item.Type != "lab" {
-					continue
-				}
-				fullPath := resolvePath(item.Files.ReadmePath)
-				data, err := os.ReadFile(fullPath)
-				if err != nil {
-					continue
-				}
-				nextChecked++
-				sev := contentShapeSeverity(item)
+	for _, item := range allItems {
+		if item.Files == nil || item.Files.ReadmePath == "" {
+			continue
+		}
+		if item.Type != "lesson" && item.Type != "lab" {
+			continue
+		}
+		fullPath := resolvePath(item.Files.ReadmePath)
+		data, err := os.ReadFile(fullPath)
+		if err != nil {
+			continue
+		}
+		nextChecked++
+		sev := contentShapeSeverity(item)
 
-				section, found := nextUpSection(string(data))
-				if !found {
-					issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: missing '## NEXT UP' section in README", item.ID)})
-					continue
-				}
-				if len(item.NextItemIDs) == 0 {
-					continue
-				}
-				if !nextUpReferencesValid(section, item, fullPath, idByReadme) {
-					issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: NEXT UP section does not link to a declared next item %v", item.ID, item.NextItemIDs)})
-				}
-			}
+		section, found := nextUpSection(string(data))
+		if !found {
+			issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: missing '## NEXT UP' section in README", item.ID)})
+			continue
+		}
+		if len(item.NextItemIDs) == 0 {
+			continue
+		}
+		if !nextUpReferencesValid(section, item, fullPath, idByReadme) {
+			issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: NEXT UP section does not link to a declared next item %v", item.ID, item.NextItemIDs)})
 		}
 	}
 

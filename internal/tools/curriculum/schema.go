@@ -137,27 +137,7 @@ func validateSchema() {
 		}
 	}
 
-	// Verify readme.contracts.json defines the full contract registry, with a
-	// small required-heading core, an optional allowlist, a selector, and the
-	// lesson subtype modifiers (registry v2).
-	type contractShape struct {
-		ID               string         `json:"id"`
-		AppliesTo        string         `json:"applies_to"`
-		Shape            string         `json:"shape"`
-		Selector         map[string]any `json:"selector"`
-		RequiredHeadings []string       `json:"required_headings"`
-		OptionalHeadings []string       `json:"optional_headings"`
-		SubtypeModifiers map[string]any `json:"subtype_modifiers"`
-	}
-	var contractsBundle struct {
-		Contracts []contractShape `json:"contracts"`
-	}
-	readJSON("readme.contracts.json", &contractsBundle)
-	contractMap := make(map[string]contractShape)
-	for _, c := range contractsBundle.Contracts {
-		contractMap[c.ID] = c
-	}
-
+	// Verify that the canonical contract families exist in the registry.
 	expectedContracts := []string{
 		"root.v3",
 		"module.v3",
@@ -170,8 +150,8 @@ func validateSchema() {
 		"companion-stage.v3",
 	}
 	for _, cName := range expectedContracts {
-		c, exists := contractMap[cName]
-		if !exists {
+		c := reg.contractByID(cName)
+		if c == nil {
 			errorf("readme.contracts.json: missing contract '%s'", cName)
 			ok = false
 			continue
@@ -180,7 +160,7 @@ func validateSchema() {
 			errorf("readme.contracts.json: %s missing required_headings", cName)
 			ok = false
 		}
-		if len(c.Selector) == 0 {
+		if c.Selector.Doc == "" && len(c.Selector.Type) == 0 {
 			errorf("readme.contracts.json: %s missing selector", cName)
 			ok = false
 		}
@@ -189,7 +169,7 @@ func validateSchema() {
 			ok = false
 		}
 	}
-	if c, exists := contractMap["lesson.v3"]; exists && len(c.SubtypeModifiers) == 0 {
+	if c := reg.contractByID("lesson.v3"); c != nil && len(c.SubtypeModifiers) == 0 {
 		errorf("readme.contracts.json: lesson.v3 missing subtype_modifiers")
 		ok = false
 	}
