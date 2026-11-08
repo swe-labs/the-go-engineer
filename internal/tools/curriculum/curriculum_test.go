@@ -7,55 +7,6 @@ import (
 	"testing"
 )
 
-func TestIndexOf(t *testing.T) {
-	tests := []struct {
-		name     string
-		slice    []string
-		target   string
-		expected int
-	}{
-		{
-			name:     "found at start",
-			slice:    []string{"id", "title", "order"},
-			target:   "id",
-			expected: 0,
-		},
-		{
-			name:     "found in middle",
-			slice:    []string{"id", "title", "order"},
-			target:   "title",
-			expected: 1,
-		},
-		{
-			name:     "found at end",
-			slice:    []string{"id", "title", "order"},
-			target:   "order",
-			expected: 2,
-		},
-		{
-			name:     "not found",
-			slice:    []string{"id", "title", "order"},
-			target:   "nonexistent",
-			expected: -1,
-		},
-		{
-			name:     "empty slice",
-			slice:    []string{},
-			target:   "any",
-			expected: -1,
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			result := indexOf(tt.slice, tt.target)
-			if result != tt.expected {
-				t.Fatalf("expected indexOf(%v, %q) = %d, got %d", tt.slice, tt.target, tt.expected, result)
-			}
-		})
-	}
-}
-
 func TestExtractItemKeysInOrder(t *testing.T) {
 	rawJSON := []byte(`{
 		"schema_version": "3.1.0",
@@ -414,5 +365,76 @@ func TestHasGeneratedMarkers(t *testing.T) {
 				t.Fatalf("hasGeneratedMarkers() = %t, want %t", got, tt.want)
 			}
 		})
+	}
+}
+
+// TestHeadingMatches pins whole-word, order-preserving heading matching. These
+// are the false positives that substring matching used to accept.
+func TestHeadingMatches(t *testing.T) {
+	tests := []struct {
+		name     string
+		present  string
+		required string
+		want     bool
+	}{
+		{"exact", "Mission", "Mission", true},
+		{"case and numbering", "7. Mission", "Mission", true},
+		{"prefix allowed", "Grading rubric", "Rubric", true},
+		{"mission vs submission", "Submission checklist", "Mission", false},
+		{"tasks vs subtasks", "Subtasks", "Tasks", false},
+		{"purpose vs repurpose", "Repurpose notes", "Purpose", false},
+		{"evidence required absent suffix", "Evidence", "Evidence required", false},
+		{"required is subsequence", "Evidence required for mastery", "Evidence required", true},
+		{"empty required", "Mission", "", false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := headingMatches(tt.present, tt.required); got != tt.want {
+				t.Fatalf("headingMatches(%q, %q) = %t, want %t", tt.present, tt.required, got, tt.want)
+			}
+		})
+	}
+}
+
+// TestResolveAssessmentDirName pins the manifest-first resolution rule that
+// replaced the hardcoded assessment slugs.
+func TestResolveAssessmentDirName(t *testing.T) {
+	tests := []struct {
+		name string
+		rec  assessmentRecord
+		want string
+	}{
+		{"artifact_dir wins", assessmentRecord{ID: "assessment-module-01", ArtifactDir: "shell-git-lab"}, "shell-git-lab"},
+		{"slug wins", assessmentRecord{ID: "assessment-project-x", Slug: "custom-slug"}, "custom-slug"},
+		{"project prefix", assessmentRecord{ID: "assessment-project-tooling-failure-lab"}, "tooling-failure-lab"},
+		{"module checkpoint default", assessmentRecord{ID: "assessment-module-07"}, "checkpoint"},
+		{"generic prefix", assessmentRecord{ID: "assessment-weird-format"}, "weird-format"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := resolveAssessmentDirName(tt.rec); got != tt.want {
+				t.Fatalf("resolveAssessmentDirName() = %q, want %q", got, tt.want)
+			}
+		})
+	}
+}
+
+// TestDeriveNextModuleLinks pins the metadata-derived SESE chain, including the
+// 16 -> 18 jump and the terminal module having no forward link.
+func TestDeriveNextModuleLinks(t *testing.T) {
+	modules := []Module{
+		{ID: "module-18", Order: 18, Path: "18-flagship-opslane"},
+		{ID: "module-00", Order: 0, Path: "00-orientation"},
+		{ID: "module-16", Order: 16, Path: "16-portfolio-interview-readiness"},
+	}
+	links := deriveNextModuleLinks(modules)
+	if got, want := links["module-00"], "../16-portfolio-interview-readiness/README.md"; got != want {
+		t.Errorf("module-00 link = %q, want %q", got, want)
+	}
+	if got, want := links["module-16"], "../18-flagship-opslane/README.md"; got != want {
+		t.Errorf("module-16 link = %q, want %q", got, want)
+	}
+	if _, ok := links["module-18"]; ok {
+		t.Error("terminal module must not have a forward link")
 	}
 }

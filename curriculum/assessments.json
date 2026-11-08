@@ -114,6 +114,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-00-01",
         "core-00-02",
@@ -130,6 +131,7 @@
       "type": "project-review"
     },
     {
+      "artifact_dir": "shell-git-lab",
       "automated_checks": [],
       "criteria": [
         {
@@ -236,6 +238,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-01-01",
         "core-01-02",
@@ -257,6 +260,7 @@
       "type": "project-review"
     },
     {
+      "artifact_dir": "tooling-failure-lab",
       "automated_checks": [],
       "criteria": [
         {
@@ -363,6 +367,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-02-01",
         "core-02-02",
@@ -491,6 +496,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-03-01",
         "core-03-02",
@@ -629,6 +635,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-04-01",
         "core-04-02",
@@ -761,6 +768,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-05-01",
         "core-05-02",
@@ -899,6 +907,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-06-01",
         "core-06-02",
@@ -1034,6 +1043,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-07-01",
         "core-07-02",
@@ -1169,6 +1179,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-08-01",
         "core-08-02",
@@ -1304,6 +1315,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-09-01",
         "core-09-02",
@@ -1446,6 +1458,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-10-01",
         "core-10-02",
@@ -1585,6 +1598,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-11-01",
         "core-11-02",
@@ -1729,6 +1743,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-12-01",
         "core-12-02",
@@ -1855,6 +1870,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-13-01",
         "core-13-02",
@@ -1977,6 +1993,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-14-01",
         "core-14-02",
@@ -2108,6 +2125,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-15-01",
         "core-15-02",
@@ -2239,6 +2257,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "core-16-01",
         "core-16-02",
@@ -2260,6 +2279,7 @@
       "type": "portfolio-review"
     },
     {
+      "artifact_dir": "advanced-electives",
       "automated_checks": [],
       "criteria": [
         {
@@ -2509,6 +2529,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "opslane-01",
         "opslane-02",
@@ -2748,6 +2769,7 @@
       "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "project-tooling-failure-lab"
       ],
@@ -5305,6 +5327,7 @@
       "purpose": "Evaluate the Portfolio Review Pack project submission: Curate and present your strongest Go projects in a professional portfolio format for job applications.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "project-portfolio-review-pack"
       ],
@@ -5407,6 +5430,7 @@
       "purpose": "Evaluate the Opslane Flagship project submission: Build and deploy a full-stack application with operations dashboard, automated testing, CI/CD, and observability.",
       "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
       "status": "ready",
+      "suite": "full",
       "target_ids": [
         "project-opslane"
       ],

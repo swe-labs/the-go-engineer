@@ -83,7 +83,47 @@ func validatePhysicalArtifacts() {
 		}
 	}
 
+	// Model the intentional shared README bindings. Each Opslane milestone and
+	// its assessment/project counterpart point at one physical README; any other
+	// sharing is a binding defect. The count is pinned in expected.json so a
+	// silently dropped or newly duplicated binding fails the build.
+	bindings := make(map[string][]Item)
+	for _, item := range allItems {
+		if item.Files != nil && item.Files.ReadmePath != "" {
+			bindings[item.Files.ReadmePath] = append(bindings[item.Files.ReadmePath], item)
+		}
+	}
+	sharedGroups := 0
+	for readmePath, group := range bindings {
+		if len(group) == 1 {
+			continue
+		}
+		sharedGroups++
+		if len(group) != 2 {
+			errorf("readme_path '%s' is bound by %d items; shared bindings must be exactly one milestone/counterpart pair", readmePath, len(group))
+			ok = false
+			continue
+		}
+		a, b := group[0], group[1]
+		isMilestone := func(i Item) bool { return i.Type == "checkpoint" || i.Type == "capstone" }
+		isCounterpart := func(i Item) bool { return i.Type == "assessment" || i.Type == "project" }
+		if !((isMilestone(a) && isCounterpart(b)) || (isMilestone(b) && isCounterpart(a))) {
+			errorf("readme_path '%s' is shared by %s (%s) and %s (%s); expected a milestone/counterpart pair",
+				readmePath, a.ID, a.Type, b.ID, b.Type)
+			ok = false
+		}
+		if a.ModuleID != b.ModuleID {
+			errorf("readme_path '%s' is shared across modules %s and %s", readmePath, a.ModuleID, b.ModuleID)
+			ok = false
+		}
+	}
+	if expected := loadExpected().Inventory.SharedReadmeBindings; expected != 0 && sharedGroups != expected {
+		errorf("expected %d shared README bindings, found %d", expected, sharedGroups)
+		ok = false
+	}
+
 	fmt.Printf("  Verified %d/%d physical instructional READMEs on disk.\n", readmeCount, totalItems)
+	fmt.Printf("  Verified %d intentional shared README binding(s).\n", sharedGroups)
 	if ok {
 		fmt.Println("  All physical artifact checks passed.")
 	} else {
@@ -93,84 +133,69 @@ func validatePhysicalArtifacts() {
 
 // validateAssessmentArtifacts verifies that all assessments declared in
 // assessments.json and Opslane milestones possess verified physical evaluation artifacts.
+// assessmentRecord is the subset of assessments.json needed to locate the
+// physical artifacts for one assessment. suite/artifact_dir are explicit data,
+// so the validator never hardcodes a slug or guesses a directory.
+type assessmentRecord struct {
+	ID          string `json:"id"`
+	ModuleID    string `json:"module_id"`
+	Slug        string `json:"slug"`
+	Type        string `json:"type"`
+	ArtifactDir string `json:"artifact_dir"`
+	Suite       string `json:"suite"`
+}
+
+// resolveAssessmentDirName returns the physical directory name for an
+// assessment. The manifest is authoritative; naming conventions are only a
+// fallback for records that omit the field.
+func resolveAssessmentDirName(a assessmentRecord) string {
+	if a.ArtifactDir != "" {
+		return a.ArtifactDir
+	}
+	if a.Slug != "" {
+		return a.Slug
+	}
+	if strings.HasPrefix(a.ID, "assessment-project-") {
+		return strings.TrimPrefix(a.ID, "assessment-project-")
+	}
+	if strings.HasPrefix(a.ID, "assessment-module-") {
+		return "checkpoint"
+	}
+	return strings.TrimPrefix(a.ID, "assessment-")
+}
+
 func validateAssessmentArtifacts() {
 	fmt.Println("=== validate-assessment-artifacts ===")
 	ok := true
 
 	var rawAssessments struct {
-		Assessments []struct {
-			ID       string `json:"id"`
-			ModuleID string `json:"module_id"`
-			Slug     string `json:"slug"`
-			Type     string `json:"type"`
-		} `json:"assessments"`
+		Assessments []assessmentRecord `json:"assessments"`
 	}
 	readJSON("assessments.json", &rawAssessments)
 
 	var core CoreBundle
 	readJSON("path.core.json", &core)
+	var electives ElectiveBundle
+	readJSON("path.electives.json", &electives)
 
-	resolveSlug := func(id, slug string) string {
-		if slug != "" {
-			return slug
-		}
-		if strings.HasPrefix(id, "assessment-project-") {
-			return strings.TrimPrefix(id, "assessment-project-")
-		}
-		if strings.HasPrefix(id, "assessment-module-") {
-			return "checkpoint"
-		}
-		if id == "assessment-go-setup-tooling-tooling-failure-lab" {
-			return "tooling-failure-lab"
-		}
-		return strings.TrimPrefix(id, "assessment-")
-	}
-
-	modDirMap := make(map[string]string)
-	for _, m := range core.Modules {
-		modDirMap[m.ID] = m.Path
+	moduleDirs := make(map[string]string)
+	for _, m := range append(append([]Module{}, core.Modules...), electives.Modules...) {
+		moduleDirs[m.ID] = resolveModuleDir(m.Path)
 	}
 
 	verifiedCount := 0
 	for _, a := range rawAssessments.Assessments {
-		slug := resolveSlug(a.ID, a.Slug)
-
-		var assessDir string
-		if a.ModuleID != "" && modDirMap[a.ModuleID] != "" {
-			mPath := modDirMap[a.ModuleID]
-			candidates := []string{
-				filepath.Join(curriculumDir, mPath, "assessments", slug),
-				filepath.Join(curriculumDir, "modules", filepath.Base(mPath), "assessments", slug),
-			}
-			for _, c := range candidates {
-				if info, err := os.Stat(c); err == nil && info.IsDir() {
-					assessDir = c
-					break
-				}
-			}
+		modDir, hasModule := moduleDirs[a.ModuleID]
+		if !hasModule {
+			errorf("%s: unknown module_id '%s'", a.ID, a.ModuleID)
+			ok = false
+			continue
 		}
 
-		if assessDir == "" {
-			// Fallback search across electives and other modules
-			candidates := []string{
-				filepath.Join(curriculumDir, "electives", "advanced-electives", "assessments", slug),
-			}
-			for _, m := range core.Modules {
-				candidates = append(candidates,
-					filepath.Join(curriculumDir, m.Path, "assessments", slug),
-					filepath.Join(curriculumDir, "modules", filepath.Base(m.Path), "assessments", slug),
-				)
-			}
-			for _, c := range candidates {
-				if info, err := os.Stat(c); err == nil && info.IsDir() {
-					assessDir = c
-					break
-				}
-			}
-		}
-
-		if assessDir == "" {
-			errorf("%s: assessment directory not found for slug '%s'", a.ID, slug)
+		dirName := resolveAssessmentDirName(a)
+		assessDir := filepath.Join(modDir, "assessments", dirName)
+		if info, err := os.Stat(assessDir); err != nil || !info.IsDir() {
+			errorf("%s: assessment directory '%s' not found under '%s'", a.ID, dirName, filepath.Join(modDir, "assessments"))
 			ok = false
 			continue
 		}
@@ -188,15 +213,9 @@ func validateAssessmentArtifacts() {
 			ok = false
 		}
 
-		// For module checkpoints, labs, and capstones, require full 4-file suite
-		isCheckpointOrLab := a.Type == "checkpoint" ||
-			strings.Contains(a.ID, "checkpoint") ||
-			strings.HasPrefix(a.ID, "assessment-module-") ||
-			slug == "tooling-failure-lab" ||
-			slug == "portfolio-review-pack" ||
-			slug == "opslane"
-
-		if isCheckpointOrLab {
+		// Full suites are declared in assessments.json (module checkpoints plus
+		// the project reviews that carry questions/rubric/answer-key files).
+		if a.Suite == "full" {
 			for _, rf := range []string{"questions.md", "rubric.md", "answer-key.md"} {
 				fPath := filepath.Join(assessDir, rf)
 				info, err := os.Stat(fPath)
@@ -213,36 +232,41 @@ func validateAssessmentArtifacts() {
 		verifiedCount++
 	}
 
-	// Also verify all Opslane milestones in module-18 have full 4-file suites.
-	opslaneDir := filepath.Join(curriculumDir, "modules", "18-flagship-opslane", "assessments")
-	entries, err := os.ReadDir(opslaneDir)
+	// Opslane milestones are the terminal module's checkpoint items whose
+	// physical suite lives under assessments/. Derive both the module and the
+	// milestone list from manifests instead of hardcoding the module slug.
+	terminalModule := Module{}
+	for _, m := range core.Modules {
+		if m.Order > terminalModule.Order {
+			terminalModule = m
+		}
+	}
 	opslaneCount := 0
-	if err != nil {
-		errorf("cannot read Opslane milestone directory '%s': %v", opslaneDir, err)
+	for _, item := range core.Items {
+		if item.ModuleID != terminalModule.ID || item.Type != "checkpoint" ||
+			item.Files == nil || item.Files.ReadmePath == "" {
+			continue
+		}
+		if !strings.Contains(filepath.ToSlash(item.Files.ReadmePath), "/assessments/") {
+			continue
+		}
+		milestoneDir := filepath.Dir(resolvePath(item.Files.ReadmePath))
+		for _, rf := range []string{"README.md", "questions.md", "rubric.md", "answer-key.md"} {
+			fPath := filepath.Join(milestoneDir, rf)
+			info, err := os.Stat(fPath)
+			if err != nil {
+				errorf("opslane milestone '%s': missing '%s'", item.ID, rf)
+				ok = false
+			} else if info.Size() < 50 {
+				errorf("opslane milestone '%s': '%s' too small (%d bytes)", item.ID, rf, info.Size())
+				ok = false
+			}
+		}
+		opslaneCount++
+	}
+	if expected := loadExpected().Inventory.OpslaneMilestones; expected != 0 && opslaneCount != expected {
+		errorf("expected %d Opslane milestones, verified %d", expected, opslaneCount)
 		ok = false
-	} else {
-		for _, e := range entries {
-			if !e.IsDir() || (!strings.HasPrefix(e.Name(), "0") && !strings.HasPrefix(e.Name(), "1")) {
-				continue
-			}
-			milestoneDir := filepath.Join(opslaneDir, e.Name())
-			for _, rf := range []string{"README.md", "questions.md", "rubric.md", "answer-key.md"} {
-				fPath := filepath.Join(milestoneDir, rf)
-				info, err := os.Stat(fPath)
-				if err != nil {
-					errorf("opslane milestone '%s': missing '%s'", e.Name(), rf)
-					ok = false
-				} else if info.Size() < 50 {
-					errorf("opslane milestone '%s': '%s' too small (%d bytes)", e.Name(), rf, info.Size())
-					ok = false
-				}
-			}
-			opslaneCount++
-		}
-		if expected := loadExpected().Inventory.OpslaneMilestones; expected != 0 && opslaneCount != expected {
-			errorf("expected %d Opslane milestones, verified %d", expected, opslaneCount)
-			ok = false
-		}
 	}
 
 	fmt.Printf("  Verified %d module/project assessments + %d Opslane milestones have verified physical artifacts.\n", verifiedCount, opslaneCount)

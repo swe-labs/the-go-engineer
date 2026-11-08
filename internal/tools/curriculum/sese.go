@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -20,10 +21,23 @@ func resolveModuleDir(modPath string) string {
 	return candidate1
 }
 
+// deriveNextModuleLinks maps each module to the relative link of the module
+// that follows it in canonical order. The terminal module has no entry.
+func deriveNextModuleLinks(modules []Module) map[string]string {
+	sorted := append([]Module{}, modules...)
+	sort.Slice(sorted, func(i, j int) bool { return sorted[i].Order < sorted[j].Order })
+	links := make(map[string]string)
+	for i := 0; i+1 < len(sorted); i++ {
+		links[sorted[i].ID] = "../" + filepath.Base(sorted[i+1].Path) + "/README.md"
+	}
+	return links
+}
+
 // validateSESENavigation verifies that module root READMEs adhere to the Single-Entry, Single-Exit (SESE) standard:
-// 1. Entry Invariant: Module root READMEs must end with "Start here" or "NEXT UP" pointing to Lesson 01.
-// 2. No Escape Hatch: Module root READMEs must not offer direct exit links jumping to downstream modules.
-// 3. Exit Invariant: For every locked module (see curriculum/expected.json), the assessment checkpoint must contain the exit link to the next module.
+//  1. Entry Invariant: Every module root README must provide a navigation footer. Locked modules end with "Start here" or "NEXT UP";
+//     unlocked modules end with "Next module" linking to the next module in the canonical order.
+//  2. No Escape Hatch: Locked module root READMEs must not offer a direct "Next module" exit link.
+//  3. Exit Invariant: For every locked module (see curriculum/expected.json), the assessment checkpoint must contain the exit link to the next module.
 func validateSESENavigation() {
 	fmt.Println("=== validate-sese-navigation ===")
 	ok := true
@@ -31,15 +45,9 @@ func validateSESENavigation() {
 	var core CoreBundle
 	readJSON("path.core.json", &core)
 
-	// Forward-link targets for the exit-gate check; the set of locked modules
-	// itself comes from curriculum/expected.json (single source of truth).
-	nextModuleLinks := map[string]string{
-		"module-00": "../01-computers-terminal-git-web/README.md",
-		"module-01": "../02-go-setup-tooling/README.md",
-		"module-02": "../03-programming-fundamentals/README.md",
-		"module-03": "../04-functions-errors-data-semantics/README.md",
-		"module-04": "../05-types-interfaces-packages-modules/README.md",
-	}
+	// Derive the forward-link targets from module metadata and order, so the
+	// chain never has to be duplicated by hand when a module is added or renamed.
+	nextModuleLinks := deriveNextModuleLinks(core.Modules)
 
 	for _, mod := range core.Modules {
 		modDir := resolveModuleDir(mod.Path)
@@ -67,18 +75,37 @@ func validateSESENavigation() {
 			}
 		}
 
-		// For locked modules, assert strictly
+		// Every module must end with a navigable footer. The exact contract
+		// depends on the module's position in the chain, not on whether it is
+		// locked: a dead-end page is never acceptable.
+		nextLink, hasNext := nextModuleLinks[mod.ID]
 		if lockedModuleSet()[mod.ID] {
 			if !strings.HasPrefix(lastH2, "Start here") && !strings.HasPrefix(lastH2, "NEXT UP") {
 				errorf("%s root README:%d expected final heading '## Start here', got '## %s'", mod.ID, lastH2LineNo, lastH2)
 				ok = false
 			}
-
-			// Must not contain direct skip link to next module at root
 			if strings.Contains(content, "## Next module") {
-				errorf("%s root README contains '## Next module' escape hatch; module root must only contain '## Start here'", mod.ID)
+				errorf("%s root README contains '## Next module' escape hatch; locked module root must only contain '## Start here'", mod.ID)
 				ok = false
 			}
+		} else if hasNext {
+			if !strings.HasPrefix(lastH2, "Next module") {
+				errorf("%s root README:%d expected final heading '## Next module', got '## %s'", mod.ID, lastH2LineNo, lastH2)
+				ok = false
+			}
+			if !strings.Contains(content, nextLink) {
+				errorf("%s root README must link to the next module at '%s'", mod.ID, nextLink)
+				ok = false
+			}
+		} else {
+			if !strings.HasPrefix(lastH2, "Completion") {
+				errorf("%s root README:%d is terminal and must end with '## Completion', got '## %s'", mod.ID, lastH2LineNo, lastH2)
+				ok = false
+			}
+		}
+		if !strings.Contains(content, "](") {
+			errorf("%s root README has no Markdown links; the module overview is a dead end", mod.ID)
+			ok = false
 		}
 	}
 
