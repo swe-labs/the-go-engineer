@@ -431,17 +431,20 @@ func validateUniqueTags() {
 	}
 
 	for tag, users := range globalTags {
-		if len(users) > 1 {
-			// Tags can legitimately appear on multiple items (they're category markers)
-			// But flag exact duplicates to be sure
-			seen := make(map[string]bool)
-			for _, user := range users {
-				if seen[user] {
-					errorf("tag '%s' duplicated on item '%s'", tag, user)
-					ok = false
-				}
-				seen[user] = true
+		// Flag exact duplicate tags on the same item (error).
+		seen := make(map[string]bool)
+		for _, user := range users {
+			if seen[user] {
+				errorf("tag '%s' duplicated on item '%s'", tag, user)
+				ok = false
 			}
+			seen[user] = true
+		}
+		// Surface globally-shared category tags as informational. Category
+		// markers (e.g. "concept", "alpha") legitimately appear on many items,
+		// but maintainers should be able to see which tags are shared.
+		if len(users) > 1 {
+			infof("tag '%s' shared across %d item(s): %v", tag, len(users), users)
 		}
 	}
 

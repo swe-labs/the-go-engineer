@@ -116,12 +116,12 @@ All instructional READMEs conform to the canonical pedagogical contract defined 
 
 ### 1. Core Required Headings (Mandatory for All Lessons)
 Every lesson README must include these 6 core sections in order:
-1. `## Mission` — Clear statement of what the learner will build, understand, and prove.
-2. `## Prerequisites` — Explicit concepts or previous lesson IDs required.
-3. `## Mental Model` — Zero-magic foundation of how the machine/runtime operates.
-4. `## Code Walkthrough` — Line-by-line explanation of the code (`## Solution Walkthrough` for exercises/projects).
-5. `## In Production` — Real-world trade-offs, operational considerations, or telemetry.
-6. `## Next Steps` — Direct link and progression to the next lesson or project milestone.
+1. `## Learning objective` — Measurable, behavior-based statement: "By the end of this lesson, you will be able to..."
+2. `## Why this matters` — Real-world operational context: production incidents, system design tradeoffs.
+3. `## Mental model` — Concrete, durable physical analogy that grounds the abstract concept without hand-waving.
+4. `## Common mistakes` — Markdown table (`Mistake | Why it happens | Fix`) documenting real mistakes observed in production code.
+5. `## Review questions` — 4–5 conceptual and diagnostic questions testing mechanical comprehension.
+6. `## NEXT UP` — Relative link and canonical item ID to the next sequential learning node.
 
 ### 2. Contextual Headings (Applied by Subtype Profile)
 To prevent cognitive overload and avoid artificial padding, the remaining 11 headings are included only when justified by cognitive necessity and the lesson's subtype profile:
@@ -138,12 +138,17 @@ To prevent cognitive overload and avoid artificial padding, the remaining 11 hea
 - `## Portfolio Artifact` — Deliverables, architecture notes, and defense rubrics (required for capstones).
 
 ### 3. Subtype Profiles
-- `conceptual` — Focuses on mental models, core walkthrough, and production context.
-- `pattern` — Emphasizes visual models, common failure modes, and idioms.
-- `deep-dive` — Adds memory layouts, machine views, and allocation analysis.
-- `exercise` — Replaces code walkthrough with solution walkthrough and verification surface.
-- `project` — Multi-file architecture with verification surface and test suite.
-- `capstone` — Comprehensive systems capstone with portfolio artifacts and operational rubrics.
+Subtypes declared in `curriculum/path.core.json` and `curriculum/path.electives.json`:
+- `orientation` — Course navigation, learning strategy, mental models, portfolio proof. Mandates `Core idea` / `Visual model`. Omits `Under the hood`, `Go example`, `Step-by-step execution`, `Debugging walkthrough`, `Production notes`, `Performance implications`, `Practice task`, `Tests / verification`. Contains zero Go code blocks.
+- `concept` — Deep language semantics, types, and memory mechanics. Mandates `Under the hood`, `Go example`, `Step-by-step execution`, `Performance implications`, `Practice task`.
+- `testing` — Table-driven tests, mocks. Mandates `Go example`, `Step-by-step execution`, `Practice task`, `Tests / verification`.
+- `debugging` — Delve, pprof, race detection. Mandates `Go example`, `Under the hood`, `Debugging walkthrough`, `Practice task`, `Tests / verification`.
+- `security` — Authentication, authorization, injection vulnerabilities. Mandates `Production notes`, `Go example`, `Step-by-step execution`.
+- `operations` — Systems, Linux, Docker, CI/CD, runbooks. Mandates `Go example`, `Step-by-step execution`, `Production notes`, `Tests / verification`.
+- `architecture` — Monoliths, clean domain boundaries, invariants. Mandates `Core idea`, `Visual model`, `Under the hood`, `How Go uses it`, `Production notes`.
+- `career` — Portfolio, READMEs, interviews. Mandates `Core idea`, `Practice task`. Omits `Under the hood`, `Go example`, `Performance implications`.
+- `reference` — Conceptual overviews with no runnable code. Code policy typically `forbidden`.
+- `lab` — Hands-on exercises with a runnable solution. Mandates `Go example`, `Tests / verification`.
 
 Every lesson `main.go` should include:
 

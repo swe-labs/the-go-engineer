@@ -25,16 +25,21 @@ type SubtypeModifier struct {
 // Contract is one README document family: a small invariant heading core, an
 // optional allowlist, alias normalization, and code/file policies.
 type Contract struct {
-	ID               string                     `json:"id"`
-	AppliesTo        string                     `json:"applies_to"`
-	Shape            string                     `json:"shape"`
-	Selector         Selector                   `json:"selector"`
-	CodePolicy       string                     `json:"code_policy"`
-	FilePolicy       map[string]string          `json:"file_policy"`
-	RequiredHeadings []string                   `json:"required_headings"`
-	OptionalHeadings []string                   `json:"optional_headings"`
-	HeadingAliases   map[string]string          `json:"heading_aliases"`
-	SubtypeModifiers map[string]SubtypeModifier `json:"subtype_modifiers"`
+	ID                    string                     `json:"id"`
+	AppliesTo             string                     `json:"applies_to"`
+	Purpose               string                     `json:"purpose"`
+	DocumentationMode     string                     `json:"documentation_mode"`
+	Shape                 string                     `json:"shape"`
+	Selector              Selector                   `json:"selector"`
+	CodePolicy            string                     `json:"code_policy"`
+	FilePolicy            map[string]string          `json:"file_policy"`
+	RequiredHeadings      []string                   `json:"required_headings"`
+	OptionalHeadings      []string                   `json:"optional_headings"`
+	HeadingAliases        map[string]string          `json:"heading_aliases"`
+	SubtypeModifiers      map[string]SubtypeModifier `json:"subtype_modifiers"`
+	GeneratedSections     []string                   `json:"generated_sections,omitempty"`
+	HumanWrittenSections  []string                   `json:"human_written_sections,omitempty"`
+	SectionSpecifications map[string]string          `json:"section_specifications,omitempty"`
 }
 
 // SeverityPolicy is the tiered severity model shared by the content-shape

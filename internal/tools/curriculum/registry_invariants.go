@@ -14,12 +14,14 @@ import (
 var allowedDocumentationModes = map[string]bool{
 	"assessment":          true,
 	"companion-overview":  true,
+	"companion-stage":     true,
 	"elective-overview":   true,
 	"explanation":         true,
 	"flagship":            true,
 	"flagship-checkpoint": true,
 	"how-to":              true,
 	"module-overview":     true,
+	"overview":            true,
 	"project":             true,
 	"reference":           true,
 	"repository-root":     true,
@@ -226,6 +228,47 @@ func validateRegistryFields(reg *Registry, exp *ExpectedBundle) bool {
 				}
 			default:
 				errorf("readme.contracts.json: %s file_policy[%s] has unknown token '%s'", c.ID, key, token)
+				ok = false
+			}
+		}
+
+		// Contract-level metadata fields.
+		if strings.TrimSpace(c.Purpose) == "" {
+			errorf("readme.contracts.json: %s has an empty purpose", c.ID)
+			ok = false
+		}
+		if c.DocumentationMode != "" && !allowedDocumentationModes[c.DocumentationMode] {
+			errorf("readme.contracts.json: %s has unknown documentation_mode '%s'", c.ID, c.DocumentationMode)
+			ok = false
+		}
+
+		// generated_sections and human_written_sections must not overlap.
+		genSet := make(map[string]bool, len(c.GeneratedSections))
+		for _, h := range c.GeneratedSections {
+			genSet[normalizeHeading(h)] = true
+		}
+		humSet := make(map[string]bool, len(c.HumanWrittenSections))
+		for _, h := range c.HumanWrittenSections {
+			humSet[normalizeHeading(h)] = true
+		}
+		for h := range genSet {
+			if humSet[h] {
+				errorf("readme.contracts.json: %s heading '%s' appears in both generated_sections and human_written_sections", c.ID, h)
+				ok = false
+			}
+		}
+
+		// section_specifications keys must be declared headings (required or optional).
+		declared := make(map[string]bool)
+		for _, h := range c.RequiredHeadings {
+			declared[normalizeHeading(h)] = true
+		}
+		for _, h := range c.OptionalHeadings {
+			declared[normalizeHeading(h)] = true
+		}
+		for spec := range c.SectionSpecifications {
+			if !declared[normalizeHeading(spec)] {
+				errorf("readme.contracts.json: %s section_specifications key '%s' is not a declared heading", c.ID, spec)
 				ok = false
 			}
 		}

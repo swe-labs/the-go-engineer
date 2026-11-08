@@ -23,12 +23,21 @@ func resolveModuleDir(modPath string) string {
 
 // deriveNextModuleLinks maps each module to the relative link of the module
 // that follows it in canonical order. The terminal module has no entry.
+// The relative path is computed from the physical module directories so it
+// remains correct across the modules/ and electives/ directory split.
 func deriveNextModuleLinks(modules []Module) map[string]string {
 	sorted := append([]Module{}, modules...)
 	sort.Slice(sorted, func(i, j int) bool { return sorted[i].Order < sorted[j].Order })
 	links := make(map[string]string)
 	for i := 0; i+1 < len(sorted); i++ {
-		links[sorted[i].ID] = "../" + filepath.Base(sorted[i+1].Path) + "/README.md"
+		fromDir := resolveModuleDir(sorted[i].Path)
+		toReadme := filepath.Join(resolveModuleDir(sorted[i+1].Path), "README.md")
+		rel, err := filepath.Rel(fromDir, toReadme)
+		if err != nil {
+			links[sorted[i].ID] = "../" + filepath.Base(sorted[i+1].Path) + "/README.md"
+			continue
+		}
+		links[sorted[i].ID] = filepath.ToSlash(rel)
 	}
 	return links
 }
@@ -43,13 +52,18 @@ func validateSESENavigation() {
 	ok := true
 
 	var core CoreBundle
+	var electives ElectiveBundle
 	readJSON("path.core.json", &core)
+	readJSON("path.electives.json", &electives)
+
+	allModules := append(append([]Module{}, core.Modules...), electives.Modules...)
+	allItems := append(append([]Item{}, core.Items...), electives.Items...)
 
 	// Derive the forward-link targets from module metadata and order, so the
 	// chain never has to be duplicated by hand when a module is added or renamed.
-	nextModuleLinks := deriveNextModuleLinks(core.Modules)
+	nextModuleLinks := deriveNextModuleLinks(allModules)
 
-	for _, mod := range core.Modules {
+	for _, mod := range allModules {
 		modDir := resolveModuleDir(mod.Path)
 		rootReadme := filepath.Join(modDir, "README.md")
 
@@ -120,7 +134,7 @@ func validateSESENavigation() {
 		foundExitGate := false
 		var checkedFiles []string
 
-		for _, item := range core.Items {
+		for _, item := range allItems {
 			if item.ModuleID == modID && item.Type == "assessment" && item.Files != nil && item.Files.ReadmePath != "" {
 				fullPath := resolvePath(item.Files.ReadmePath)
 				checkedFiles = append(checkedFiles, item.Files.ReadmePath)

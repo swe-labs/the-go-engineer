@@ -313,6 +313,7 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "root.v3",
       "applies_to": "repository-root",
+      "purpose": "Fixture root contract.",
       "shape": "overview",
       "selector": {
         "doc": "repository-root"
@@ -329,6 +330,7 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "module.v3",
       "applies_to": "core-module",
+      "purpose": "Fixture module contract.",
       "shape": "overview",
       "selector": {
         "doc": "module",
@@ -346,6 +348,7 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "lesson.v3",
       "applies_to": "core-lesson",
+      "purpose": "Fixture lesson contract.",
       "shape": "standard-lesson",
       "selector": {
         "type": ["lesson"],
@@ -369,6 +372,7 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "elective-lesson.v3",
       "applies_to": "elective-lesson",
+      "purpose": "Fixture elective-lesson contract.",
       "shape": "reference",
       "selector": {
         "type": ["lesson"],
@@ -386,6 +390,7 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "project.v3",
       "applies_to": "project",
+      "purpose": "Fixture project contract.",
       "shape": "project",
       "selector": {
         "type": ["project"],
@@ -405,6 +410,7 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "assessment.v3",
       "applies_to": "assessment",
+      "purpose": "Fixture assessment contract.",
       "shape": "assessment",
       "selector": {
         "type": ["assessment"],
@@ -422,6 +428,7 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "flagship.v3",
       "applies_to": "flagship",
+      "purpose": "Fixture flagship contract.",
       "shape": "flagship",
       "selector": {
         "doc": "flagship-module"
@@ -438,6 +445,7 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "flagship-checkpoint.v3",
       "applies_to": "flagship-checkpoint",
+      "purpose": "Fixture flagship-checkpoint contract.",
       "shape": "flagship-checkpoint",
       "selector": {
         "type": ["checkpoint"],
@@ -455,6 +463,7 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "companion-stage.v3",
       "applies_to": "companion-stage",
+      "purpose": "Fixture companion-stage contract.",
       "shape": "companion",
       "selector": {
         "doc": "companion-stage"
