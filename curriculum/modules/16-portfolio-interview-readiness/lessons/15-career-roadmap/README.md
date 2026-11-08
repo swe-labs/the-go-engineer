@@ -308,4 +308,4 @@ The existing tests verify `AnalyzeGaps` (basic, no gaps, empty skills), `compute
 
 ## NEXT UP
 
-Congratulations on completing Module 16 and the entire core curriculum! You have built a solid foundation in Go engineering — from fundamentals through production deployment and career readiness. Next up: Elective modules, starting with Module 18 — Flagship Opslane.
+Congratulations on completing the required core path through Module 16! You have built a solid foundation in Go engineering — from fundamentals through production deployment and career readiness. Next up: Module 18 — Flagship Opslane, the required capstone that closes the core path. The optional Module 17 (Advanced Electives) track can be taken alongside it to go deeper into generics, gRPC, and distributed patterns.
