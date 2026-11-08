@@ -2,7 +2,7 @@
 
 ## Mission
 
-> *"The computer is incredibly fast, accurate, and stupid. Man is incredibly slow, inaccurate, and brilliant. The marriage of the two is a challenge and a war beyond imagination."* — Stuart G. Walesh / Richard Feynman
+> *"Computers are incredibly fast, accurate, and stupid. Human beings are incredibly slow, inaccurate, and brilliant. Together they are powerful beyond imagination."* — Paul Armer (attribution traced by Quote Investigator; commonly misattributed to Einstein and Feynman)
 
 This module establishes the foundational systems mental models every software engineer needs before writing syntax.
 

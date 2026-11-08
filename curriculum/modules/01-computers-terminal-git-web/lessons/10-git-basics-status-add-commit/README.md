@@ -1,7 +1,7 @@
 # Git basics: status, add, commit
 
-> *"Git is a very simple tool, but it's very flexible... A commit is just a snapshot."*  
-> — **Linus Torvalds** (2007)
+> *"git tracks your content. It never ever tracks a single file."*  
+> — **Linus Torvalds**, Tech Talk at Google (May 3, 2007)
 
 ## Learning objective
 

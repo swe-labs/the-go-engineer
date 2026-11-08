@@ -1,6 +1,6 @@
 # What is a program?
 
-> *"A computer is a machine that can be instructed to carry out sequences of arithmetic or logical operations automatically."*  
+> *"The idea behind digital computers may be explained by saying that these machines are intended to carry out any operations which could be done by a human computer."*  
 > — **Alan Turing**, *Computing Machinery and Intelligence* (1950)
 
 ## Learning objective

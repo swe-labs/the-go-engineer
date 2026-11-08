@@ -1,6 +1,6 @@
 # Source code, executable, and process
 
-> *"There must be a distinction between instructions and the data upon which they operate, though both may reside within the same physical memory organ."*  
+> *"At any rate the total memory constitutes the third specific part of the device: M."*  
 > — **John von Neumann**, *First Draft of a Report on the EDVAC* (1945)
 
 ## Learning objective

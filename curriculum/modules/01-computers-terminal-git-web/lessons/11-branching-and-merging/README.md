@@ -1,7 +1,7 @@
 # Branching and merging
 
-> *"Branches are cheap. Use them. If you make a branch for every little thing, you will find that you can throw things away easily and keep the good stuff."*  
-> — **Linus Torvalds** (2007)
+> *"Performance for making a branch under git, it's literally you create a new file that is 41-byte in size."*  
+> — **Linus Torvalds**, Tech Talk at Google (May 3, 2007)
 
 ## Learning objective
 
@@ -13,7 +13,7 @@ Teams need to work on multiple features simultaneously without interfering with 
 
 ## Mental model
 
-A branch is just a named pointer to a specific commit. Creating a branch costs nothing — it's just writing 20 bytes (a SHA-1 hash) to a file in `.git/refs/heads/`. The magic is that each branch can move independently as new commits are added, creating divergent histories.
+A branch is just a named pointer to a specific commit. Creating a branch costs nothing — it's just writing 41 bytes (a 40-character SHA-1 checksum plus a trailing newline) to a file in `.git/refs/heads/`. The magic is that each branch can move independently as new commits are added, creating divergent histories.
 
 ## Visual model
 

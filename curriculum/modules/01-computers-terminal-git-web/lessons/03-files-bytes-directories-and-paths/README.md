@@ -1,7 +1,7 @@
 # Files, bytes, directories, and paths
 
-> *"In Unix, everything is a stream of bytes. A file is just a stream of bytes."*  
-> — **Ken Thompson**, co-creator of Unix, B, and Go (Turing Award Lecture, 1983)
+> *"Equally important, the notion of a file is uniform, so no distinction need be made in accessing a file, whether it contains data or a device."*  
+> — **Dennis M. Ritchie & Ken Thompson**, *The UNIX Time-Sharing System* (1974)
 
 ## Learning objective
 

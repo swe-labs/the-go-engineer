@@ -1,7 +1,7 @@
 # Git mental model
 
-> *"In many ways you can look at git as a filesystem — it's content-addressable, and it has a notion of versioning, but I really really designed it from the point of view of a filesystem person."*  
-> — **Linus Torvalds** (2007)
+> *"Git is a content-addressable filesystem."*  
+> — **Linus Torvalds**, Tech Talk at Google (May 3, 2007)
 
 ## Learning objective
 

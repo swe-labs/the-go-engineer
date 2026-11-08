@@ -1,6 +1,7 @@
 # What job ready means
 
-> *"If you don't start with a spec, every piece of code you write is a bug."* — Leslie Lamport
+> *"If you're thinking without writing, you only think you're thinking."*  
+> — **Leslie Lamport** (interview, 2021)
 
 ## Learning objective
 
