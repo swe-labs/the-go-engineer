@@ -84,8 +84,8 @@ func TestValidateWorkflowTimeout(t *testing.T) {
 }
 
 func TestGoCacheKey(t *testing.T) {
-	key := GoCacheKey("1.22", "ubuntu", "abcdef1234567890abcdef")
-	want := "go-cache-1.22-ubuntu-abcdef12"
+	key := GoCacheKey("1.27", "ubuntu", "abcdef1234567890abcdef")
+	want := "go-cache-1.27-ubuntu-abcdef12"
 	if key != want {
 		t.Errorf("got %q, want %q", key, want)
 	}
@@ -112,19 +112,19 @@ func TestExpandMatrixEmpty(t *testing.T) {
 }
 
 func TestExpandMatrixSingle(t *testing.T) {
-	m := map[string][]string{"go": {"1.22"}}
+	m := map[string][]string{"go": {"1.27"}}
 	combos := ExpandMatrix(m)
 	if len(combos) != 1 {
 		t.Fatalf("expected 1 combo, got %d", len(combos))
 	}
-	if combos[0]["go"] != "1.22" {
-		t.Errorf("expected go=1.22, got %s", combos[0]["go"])
+	if combos[0]["go"] != "1.27" {
+		t.Errorf("expected go=1.27, got %s", combos[0]["go"])
 	}
 }
 
 func TestExpandMatrixCrossProduct(t *testing.T) {
 	m := map[string][]string{
-		"go": {"1.21", "1.22"},
+		"go": {"1.26", "1.27"},
 		"os": {"linux", "windows"},
 	}
 	combos := ExpandMatrix(m)
@@ -137,10 +137,10 @@ func TestSuggestRunner(t *testing.T) {
 	tests := []struct {
 		goVer, osSuffix, want string
 	}{
-		{"1.22", "", "ubuntu-latest"},
-		{"1.22", "win-x64", "windows-latest"},
-		{"1.22", "mac-x64", "macos-latest"},
-		{"1.22", "linux-x64", "ubuntu-latest"},
+		{"1.27", "", "ubuntu-latest"},
+		{"1.27", "win-x64", "windows-latest"},
+		{"1.27", "mac-x64", "macos-latest"},
+		{"1.27", "linux-x64", "ubuntu-latest"},
 	}
 	for _, tc := range tests {
 		got := SuggestRunner(tc.goVer, tc.osSuffix)

@@ -1,6 +1,6 @@
 module github.com/rasel9t6/the-go-engineer
 
-go 1.26.0
+go 1.27.0
 
 require (
 	github.com/a-h/templ v0.3.1070

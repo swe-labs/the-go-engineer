@@ -71,7 +71,7 @@
   "issues": [
     {
       "title": "[EPIC] Flagship Opslane Capstone Milestones Verification",
-      "body": "## Overview\nComplete end-to-end verification of Module 18 Flagship Opslane milestones and evaluation criteria.\n\n## Sub-Tasks\n- [ ] Verify core-18-01 through core-18-14 checkpoints\n- [ ] Validate project-18 capstone defense rubrics\n- [ ] Verify Docker Compose, migrations, and Prometheus configs\n- [ ] Update curriculum/path.core.json and assessments.json\n\n## Success Criteria\n✓ All 17 automated curriculum quality gates PASS\n✓ Full physical artifact parity verified\n✓ Changes merged to main branch",
+      "body": "## Overview\nComplete end-to-end verification of Module 18 Flagship Opslane milestones and evaluation criteria.\n\n## Sub-Tasks\n- [ ] Verify core-18-01 through core-18-14 checkpoints\n- [ ] Validate project-18 capstone defense rubrics\n- [ ] Verify Docker Compose, migrations, and Prometheus configs\n- [ ] Update curriculum/path.core.json and assessments.json\n\n## Success Criteria\n✓ All 24 automated curriculum quality gates PASS\n✓ Full physical artifact parity verified\n✓ Changes merged to main branch",
       "labels": ["epic", "priority/high"],
       "assignees": []
     },
@@ -89,7 +89,7 @@
     },
     {
       "title": "[FEATURE] Add Opslane Tenant Isolation Middleware",
-      "body": "Implement tenant isolation and authentication middleware in Module 18.\n\n## Requirements\n- JWT token validation and claims extraction\n- Request context tenant binding\n- Cross-tenant data isolation test coverage\n\n## Testing\n- [ ] go test -race ./...\n- [ ] All 17 curriculum quality gates pass\n- [ ] Zero-magic execution traces verified",
+      "body": "Implement tenant isolation and authentication middleware in Module 18.\n\n## Requirements\n- JWT token validation and claims extraction\n- Request context tenant binding\n- Cross-tenant data isolation test coverage\n\n## Testing\n- [ ] go test -race ./...\n- [ ] All 24 curriculum quality gates pass\n- [ ] Zero-magic execution traces verified",
       "labels": ["feature", "priority/high", "size/large"],
       "assignees": []
     }

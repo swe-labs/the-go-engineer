@@ -56,7 +56,7 @@ func TestLayersHasFirstLayer(t *testing.T) {
 	var result BuildSuggestion
 	json.NewDecoder(rec.Body).Decode(&result)
 
-	if result.Layers[0].Command != "FROM golang:1.25-alpine" {
-		t.Errorf("first layer command = %q, want %q", result.Layers[0].Command, "FROM golang:1.25-alpine")
+	if result.Layers[0].Command != "FROM golang:1.27-alpine" {
+		t.Errorf("first layer command = %q, want %q", result.Layers[0].Command, "FROM golang:1.27-alpine")
 	}
 }

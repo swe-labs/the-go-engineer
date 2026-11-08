@@ -141,7 +141,7 @@ func main() {
 				RunsOn: "ubuntu-latest",
 				Steps: []Step{
 					{Name: "Checkout", Uses: "actions/checkout@v4"},
-					{Name: "Setup Go", Uses: "actions/setup-go@v5", With: map[string]string{"go-version": "1.22"}},
+					{Name: "Setup Go", Uses: "actions/setup-go@v6", With: map[string]string{"go-version": "1.27"}},
 					{Name: "Run tests", Run: "go test ./..."},
 				},
 			},
@@ -157,14 +157,14 @@ func main() {
 	fmt.Printf("Workflow %q validated OK (%d jobs)\n", w.Name, len(w.Jobs))
 
 	cacheStep := GenerateCacheStep(
-		GoCacheKey("1.22", "ubuntu", "abcdef1234567890"),
-		"go-cache-1.22-ubuntu-",
+		GoCacheKey("1.27", "ubuntu", "abcdef1234567890"),
+		"go-cache-1.27-ubuntu-",
 		"~/.cache/go",
 	)
 	fmt.Printf("Cache step: %s (key=%s)\n", cacheStep.Name, cacheStep.With["key"])
 
 	matrix := map[string][]string{
-		"go": {"1.21", "1.22"},
+		"go": {"1.26", "1.27"},
 		"os": {"ubuntu", "windows"},
 	}
 	combos := ExpandMatrix(matrix)

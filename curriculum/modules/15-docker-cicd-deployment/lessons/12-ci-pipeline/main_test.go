@@ -84,7 +84,7 @@ func TestStageRequiredField(t *testing.T) {
 
 func initGoModule(t *testing.T, dir string) {
 	t.Helper()
-	err := os.WriteFile(filepath.Join(dir, "go.mod"), []byte("module testmodule\ngo 1.22\n"), 0644)
+	err := os.WriteFile(filepath.Join(dir, "go.mod"), []byte("module testmodule\ngo 1.27.0\n"), 0644)
 	if err != nil {
 		t.Fatal(err)
 	}

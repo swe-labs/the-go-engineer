@@ -10,7 +10,7 @@ jobs:
 
       - uses: actions/setup-go@v6
         with:
-          go-version: "1.26"
+          go-version: "1.27"
 
       - name: Build
         run: go build ./...
@@ -54,7 +54,7 @@ jobs:
           go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution || true
 
       - name: Validate Curriculum
-        run: go run ./internal/tools/curriculum validate-all
+        run: go run ./internal/tools/curriculum validate-all --strict
 
       - name: Upload Coverage
         uses: actions/upload-artifact@v7

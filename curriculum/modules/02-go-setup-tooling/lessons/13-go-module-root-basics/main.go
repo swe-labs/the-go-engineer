@@ -60,7 +60,7 @@ func main() {
 	sampleGoMod := `
 module github.com/my-org/payment-gateway
 
-go 1.23.0
+go 1.27.0
 
 require (
 	golang.org/x/crypto v0.24.0

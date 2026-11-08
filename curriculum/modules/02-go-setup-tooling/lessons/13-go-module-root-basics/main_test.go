@@ -9,7 +9,7 @@ func TestParseGoMod_Valid(t *testing.T) {
 // Auto-generated module file
 module github.com/user/demo-service
 
-go 1.22.4
+go 1.27.0
 `
 	mod, err := ParseGoMod(input)
 	if err != nil {
@@ -19,13 +19,13 @@ go 1.22.4
 	if mod.ModulePath != "github.com/user/demo-service" {
 		t.Errorf("expected module path 'github.com/user/demo-service', got %q", mod.ModulePath)
 	}
-	if mod.GoVersion != "1.22.4" {
-		t.Errorf("expected Go version '1.22.4', got %q", mod.GoVersion)
+	if mod.GoVersion != "1.27.0" {
+		t.Errorf("expected Go version '1.27.0', got %q", mod.GoVersion)
 	}
 }
 
 func TestParseGoMod_MissingModule(t *testing.T) {
-	input := `go 1.22`
+	input := `go 1.27.0`
 	_, err := ParseGoMod(input)
 	if err == nil {
 		t.Errorf("expected error when 'module' directive is missing")
@@ -54,4 +54,3 @@ func TestResolveImportPath(t *testing.T) {
 func TestMainExecution(t *testing.T) {
 	main()
 }
-

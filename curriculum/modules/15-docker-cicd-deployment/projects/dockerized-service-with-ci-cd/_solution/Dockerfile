@@ -1,5 +1,5 @@
 # Stage 1: Build static Go binary with cached layers
-FROM golang:1.24-alpine AS builder
+FROM golang:1.27-alpine AS builder
 
 # Install CA certificates and create unprivileged non-root user
 RUN apk update && apk add --no-cache ca-certificates tzdata && \

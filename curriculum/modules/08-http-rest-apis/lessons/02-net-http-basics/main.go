@@ -23,7 +23,7 @@ func timeHandler(w http.ResponseWriter, r *http.Request) {
 func versionHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprint(w, "Go 1.24")
+	fmt.Fprint(w, "Go 1.27")
 }
 
 func main() {

@@ -15,7 +15,7 @@ func TestHandcraftedGoMod(t *testing.T) {
 
 	goMod := `module example.com/handcrafted
 
-go 1.25.0
+go 1.27.0
 
 require rsc.io/quote v1.5.2
 `

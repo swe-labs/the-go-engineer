@@ -14,7 +14,7 @@ type LayerInfo struct {
 }
 
 var recommendedLayers = []LayerInfo{
-	{Command: "FROM golang:1.25-alpine", SizeBytes: 150_000_000, Cacheable: true},
+	{Command: "FROM golang:1.27-alpine", SizeBytes: 150_000_000, Cacheable: true},
 	{Command: "WORKDIR /app", SizeBytes: 0, Cacheable: true},
 	{Command: "COPY go.mod go.sum ./", SizeBytes: 50_000, Cacheable: true},
 	{Command: "RUN go mod download", SizeBytes: 200_000_000, Cacheable: true},
