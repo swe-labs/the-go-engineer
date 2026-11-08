@@ -168,7 +168,7 @@ All validation gates executed by `go run ./scripts/validate_curriculum.go` must 
 | `validate-no-emojis` | Enforces strict zero-emoji invariant across all Markdown prose. |
 | `validate-anchor-quotes` | Enforces pioneer anchor quotes at the top of locked lessons. |
 | `validate-diagram-palette` | Enforces Dark Engineering Palette classes and colors on Mermaid flowcharts. |
-| `validate-readme-contracts` | Resolves each item's document contract (family + subtype) from `readme.contracts.json`; verifies required headings, code policy, and file layout. Locked-module content-shape defects block; `--strict` gates the rest. |
+| `validate-readme-contracts` | Resolves each item's document contract (family + subtype) from `readme.contracts.json`; verifies required headings, code policy, and file layout. Locked-module content-shape defects block; other items follow `severity_policy.by_status` (draft/scaffolded skip, review/reviewed warn, ready-and-later block); `--strict` promotes the remaining advisories. |
 
 ## Documentation Alignment Check
 

@@ -171,9 +171,9 @@ func contentShapeSeverity(item Item) severity {
 		return sevError
 	}
 	sp := loadRegistry().SeverityPolicy
-	// During rollout ("advisory") content-shape issues never block; only the
-	// --strict release gate promotes them. After the advisory report is clean,
-	// flip content_shape_enforcement to "enforce" to apply the tiered policy.
+	// While content-shape enforcement is "advisory", issues never block; only
+	// the --strict release gate promotes them. Once enforcement is "enforce",
+	// locked modules block and every other item follows by_status.
 	if sp.Enforcement != "enforce" {
 		return sevWarning
 	}

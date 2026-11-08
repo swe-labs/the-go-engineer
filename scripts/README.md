@@ -49,7 +49,7 @@ go run ./scripts/validate_curriculum.go validate-sese-navigation
 | `validate-no-emojis` | Professional Prose | Scans all Markdown files, enforcing zero non-code emojis across prose, headers, lists, and tables. |
 | `validate-anchor-quotes` | Pioneer Anchors | Enforces authoritative pioneer anchor quotes at the top of lessons in locked modules. |
 | `validate-diagram-palette` | Diagram Styling | Enforces Dark Engineering Palette classes and color tokens on Mermaid flowcharts. |
-| `validate-readme-contracts` | Documentation Contract | Resolves each item's document contract (family + subtype modifiers) from `readme.contracts.json` and verifies required headings, code policy, and file layout. Structural defects always block; content-shape defects in locked modules block by default, and `--strict` promotes every remaining advisory to an error for the release gate. |
+| `validate-readme-contracts` | Documentation Contract | Resolves each item's document contract (family + subtype modifiers) from `readme.contracts.json` and verifies required headings, code policy, and file layout. Structural defects always block; content-shape defects in locked modules block, and other items follow `severity_policy.by_status` (draft/scaffolded skip, review/reviewed warn, ready-and-later block). `--strict` promotes every remaining advisory to an error for the release gate. |
 
 ---
 

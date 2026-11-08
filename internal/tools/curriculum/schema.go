@@ -57,13 +57,8 @@ func validateSchema() {
 		errorf("readme.contracts.json: validation_rules must document the generated-catalog marker rule")
 		ok = false
 	}
-	for status, tier := range reg.SeverityPolicy.ByStatus {
-		switch tier {
-		case "error", "warning", "skip":
-		default:
-			errorf("readme.contracts.json: severity_policy.by_status[%s] has unknown tier '%s'", status, tier)
-			ok = false
-		}
+	if !validateRegistryFields(reg, exp) {
+		ok = false
 	}
 
 	files := []string{
@@ -358,17 +353,140 @@ func validateSchema() {
 		}
 	}
 
-	// 5. Check proof fields
+	// 5. Check proof fields. Every proof block is a complete contract: the task,
+	// the assessment binding, the artifact the learner produces, the checklist
+	// that proves mastery, and the rubric that scores it.
 	for _, item := range allItems {
-		if item.Proof != nil {
-			if item.Proof.PracticeTask == "" {
-				errorf("%s: proof.practice_task is empty", item.ID)
+		if item.Proof == nil {
+			continue
+		}
+		if item.Proof.PracticeTask == "" {
+			errorf("%s: proof.practice_task is empty", item.ID)
+			ok = false
+		}
+		if item.Proof.AssessmentID == "" {
+			errorf("%s: proof.assessment_id is empty", item.ID)
+			ok = false
+		}
+		if strings.TrimSpace(item.Proof.ExpectedArtifact) == "" {
+			errorf("%s: proof.expected_artifact is empty", item.ID)
+			ok = false
+		}
+		if len(item.Proof.MasteryChecks) == 0 {
+			errorf("%s: proof.mastery_checks is empty", item.ID)
+			ok = false
+		}
+		for i, check := range item.Proof.MasteryChecks {
+			if strings.TrimSpace(check) == "" {
+				errorf("%s: proof.mastery_checks[%d] is empty", item.ID, i)
 				ok = false
 			}
-			if item.Proof.AssessmentID == "" {
-				errorf("%s: proof.assessment_id is empty", item.ID)
+		}
+		if len(item.Proof.RubricIDs) == 0 {
+			errorf("%s: proof.rubric_ids is empty", item.ID)
+			ok = false
+		}
+		for i, rubric := range item.Proof.RubricIDs {
+			if strings.TrimSpace(rubric) == "" {
+				errorf("%s: proof.rubric_ids[%d] is empty", item.ID, i)
 				ok = false
 			}
+		}
+	}
+
+	// 5b. Check verification metadata. The mode is a closed vocabulary, and a
+	// declared command must state what a successful run looks like.
+	for _, item := range allItems {
+		v := item.Verification
+		if v == nil {
+			errorf("%s: missing 'verification'", item.ID)
+			ok = false
+			continue
+		}
+		switch v.Mode {
+		case "manual", "mixed", "automated":
+		default:
+			errorf("%s: verification.mode '%s' is not 'automated', 'manual', or 'mixed'", item.ID, v.Mode)
+			ok = false
+		}
+		hasCommand := strings.TrimSpace(v.RunCommand) != "" || strings.TrimSpace(v.TestCommand) != ""
+		if hasCommand && strings.TrimSpace(v.ExpectedOutput) == "" {
+			errorf("%s: verification.expected_output is empty while a run/test command is declared", item.ID)
+			ok = false
+		}
+		for i, step := range v.ManualSteps {
+			if strings.TrimSpace(step) == "" {
+				errorf("%s: verification.manual_steps[%d] is empty", item.ID, i)
+				ok = false
+			}
+		}
+	}
+
+	// 5c. Check the files metadata that points at directories and diagrams. The
+	// README/source/test paths are enforced by the physical-artifact gate; the
+	// asset fields need their own existence check or a broken path is invisible.
+	for _, item := range allItems {
+		if item.Files == nil {
+			continue
+		}
+		if assetsDir := strings.TrimSpace(item.Files.AssetsDir); assetsDir != "" {
+			info, err := os.Stat(resolvePath(assetsDir))
+			if err != nil || !info.IsDir() {
+				errorf("%s: files.assets_dir '%s' does not exist or is not a directory", item.ID, assetsDir)
+				ok = false
+			}
+		}
+		for i, diagram := range item.Files.DiagramPaths {
+			if strings.TrimSpace(diagram) == "" {
+				errorf("%s: files.diagram_paths[%d] is empty", item.ID, i)
+				ok = false
+				continue
+			}
+			info, err := os.Stat(resolvePath(diagram))
+			if err != nil || info.IsDir() {
+				errorf("%s: files.diagram_paths[%d] '%s' does not exist or is not a file", item.ID, i, diagram)
+				ok = false
+			}
+		}
+	}
+
+	// 5d. Check readme_contract metadata on every item and module. The contract
+	// id resolves against the registry (aliases included), and the documentation
+	// mode must be one of the declared authoring modes.
+	for _, item := range allItems {
+		if !validateReadmeContractFields(reg, item.ID, item.ReadmeContract) {
+			ok = false
+		}
+	}
+	for _, m := range core.Modules {
+		if !validateReadmeContractFields(reg, m.ID, m.ReadmeContract) {
+			ok = false
+		}
+	}
+	for _, m := range electives.Modules {
+		if !validateReadmeContractFields(reg, m.ID, m.ReadmeContract) {
+			ok = false
+		}
+	}
+
+	// 5e. portfolio_output is a promise that the module produces a project or
+	// capstone artifact, so at least one such item must exist in the module.
+	portfolioItems := make(map[string]bool)
+	for _, item := range allItems {
+		if item.Type == "project" || item.Type == "capstone" {
+			portfolioItems[item.ModuleID] = true
+		}
+	}
+	for _, m := range core.Modules {
+		if m.PortfolioOutput && !portfolioItems[m.ID] {
+			errorf("%s: portfolio_output is true but the module has no project or capstone item", m.ID)
+			ok = false
+		}
+	}
+	for _, m := range electives.Modules {
+		if m.PortfolioOutput && !portfolioItems[m.ID] {
+			errorf("%s: portfolio_output is true but the module has no project or capstone item", m.ID)
+			ok = false
 		}
 	}
 

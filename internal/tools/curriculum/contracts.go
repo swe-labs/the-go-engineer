@@ -34,9 +34,10 @@ type contractViolation struct {
 //     content_contract flags.
 //
 // Structural failures always block. Content-shape failures are tiered by
-// severity policy: locked modules always block, other statuses follow the
-// registry's by_status map (advisory during rollout). --strict promotes all
-// content-shape warnings to errors; --advisory skips content-shape entirely.
+// severity policy: locked modules always block, and other items follow the
+// registry's by_status map (draft/scaffolded skip, review/reviewed warn,
+// ready-and-later block). --strict promotes all content-shape warnings to
+// errors; --advisory skips content-shape entirely.
 func validateReadmeContracts() {
 	fmt.Println("=== validate-readme-contracts ===")
 	reg := loadRegistry()
