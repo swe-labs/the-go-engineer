@@ -1083,7 +1083,7 @@
           "Learner must create a cross-platform package with 3 build-tag variants and verify that only the correct variant compiles for each target"
         ],
         "how_go_uses_it": "The Go standard library uses build tags extensively in the syscall, os, and net packages. Platform-specific files use _linux.go, _windows.go, _darwin.go suffixes. The internal/syscall package uses build tags for system call definitions. Third-party libraries use build tags for cgo wrappers (//go:build cgo), CGo-free fallbacks (//go:build !cgo), and debug logging (//go:build debug).",
-        "mental_model": "A build tag is a boolean expression evaluated at compile time. Files whose build tag expression evaluates to false are excluded from the compilation. Common constraints include: GOOS (linux, darwin, windows), GOARCH (amd64, arm64), Go version (go1.22), custom tags set via -tags flag, and cgo. The expression syntax supports \u0026\u0026, ||, and ! operators for complex constraints.",
+        "mental_model": "A build tag is a boolean expression evaluated at compile time. Files whose build tag expression evaluates to false are excluded from the compilation. Common constraints include: GOOS (linux, darwin, windows), GOARCH (amd64, arm64), Go version (go1.27), custom tags set via -tags flag, and cgo. The expression syntax supports \u0026\u0026, ||, and ! operators for complex constraints.",
         "performance_implications": [
           "Build tags have zero runtime cost — excluded files do not exist in the compiled binary",
           "Build tag evaluation happens at compile time, not runtime — there is no conditional branching in the generated code",
@@ -3559,7 +3559,9 @@
       "id": "elective-20",
       "learning_objective": "Design distributed systems resilient to network partitions, implementing circuit breakers, CAP tradeoffs, and retry backoff with jitter.",
       "module_id": "module-17",
-      "next_item_ids": [],
+      "next_item_ids": [
+        "elective-21"
+      ],
       "order": 20,
       "phase": "elective",
       "prerequisites": [
@@ -3661,6 +3663,1012 @@
         "why_it_exists": "Deeper distributed systems knowledge exists because distributed systems are fundamentally different from single-process systems. In a single process, a function call either returns a value or panics. In a distributed system, a network call can return a value, timeout, return garbage, or never return. Partial failures are the norm. Understanding CAP theorem, consensus (Raft/Paxos), eventual consistency, and failure mitigation patterns is essential for building reliable distributed systems."
       },
       "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "display_text": "Module 15.19 — Deployment runbook",
+            "label": "Module 15.19 — Deployment runbook",
+            "reason": "The deployment runbook establishes the release and rollback discipline that a scheduler automates.",
+            "required": true,
+            "target_id": "core-15-19"
+          }
+        ],
+        "preview_only": [],
+        "related": [
+          {
+            "display_text": "Module 15.07 — Docker images and layers",
+            "label": "Module 15.07 — Docker images and layers",
+            "reason": "An orchestrator schedules containers, so the image and layer model still governs startup cost.",
+            "required": false,
+            "target_id": "core-15-07"
+          },
+          {
+            "display_text": "Module 15.09 — Docker Compose",
+            "label": "Module 15.09 — Docker Compose",
+            "reason": "Compose is the single-host model that the decision rule compares against orchestration.",
+            "required": false,
+            "target_id": "core-15-09"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "display_text": "Project — Kubernetes Go Service Capstone",
+            "label": "Project — Kubernetes Go Service Capstone",
+            "reason": "The capstone applies desired state and reconciliation on a real local cluster.",
+            "required": false,
+            "target_id": "project-kubernetes-go-service"
+          }
+        ]
+      },
+      "difficulty": "elective",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 40,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "electives/advanced-electives/lessons/21-why-orchestration/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "elective-21",
+      "learning_objective": "Explain desired state and the reconciliation loop in your own words, and choose between a single host, a managed platform, Kubernetes, and serverless using explicit criteria.",
+      "module_id": "module-17",
+      "next_item_ids": [
+        "elective-22"
+      ],
+      "order": 21,
+      "phase": "elective",
+      "prerequisites": [
+        "core-15-19"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-17",
+        "expected_artifact": "A written decision that justifies the orchestration choice for a described system, plus answers to the review questions.",
+        "mastery_checks": [
+          "Can distinguish desired state from observed state without hand-waving.",
+          "Can describe what a controller does when the gap cannot be closed.",
+          "Can apply the decision rule to a concrete system."
+        ],
+        "practice_task": "Given a service with its traffic profile, availability target, and team operations budget, decide whether to adopt an orchestrator and justify the decision with the lesson's decision rule.",
+        "project_id": "project-kubernetes-go-service",
+        "rubric_ids": [
+          "rubric-module-17"
+        ]
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "required_prior_knowledge": [
+        "Complete prerequisite lesson(s): core-15-19."
+      ],
+      "slug": "why-orchestration",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "elective",
+        "kubernetes",
+        "concept"
+      ],
+      "title": "Why orchestration: desired state and the control loop",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can explain desired state, observed state, and reconciliation, and justify when to adopt an orchestrator.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Choosing Kubernetes for one service on one host because it is the default in tutorials.",
+          "Treating YAML authoring as the learning goal instead of the desired-state model.",
+          "Assuming an orchestrator removes the need to understand Linux processes, signals, and cgroups.",
+          "Expecting self-healing to repair an impossible desired state such as an unpullable image.",
+          "Adopting an orchestrator without an on-call plan for the control plane itself."
+        ],
+        "execution_timeline": [
+          "You declare desired state: replicas, image, resources, probes.",
+          "The API server persists the declaration and notifies watchers.",
+          "Controllers compare desired state with observed state.",
+          "The scheduler binds new Pods to nodes that have capacity.",
+          "Kubelets start containers and report status back to the API server.",
+          "The loop repeats continuously; each action is idempotent and retried on failure.",
+          "When the gap cannot be closed, the controller records an event or condition instead of silently failing."
+        ],
+        "failure_modes": [
+          "Impossible desired state: an image that cannot be pulled or a manifest that references a missing object keeps the loop from converging.",
+          "Capacity starvation: the scheduler cannot place a Pod, so the desired replica count is never reached.",
+          "Control-plane dependency: the orchestrator becomes a new single point of failure that no one is on call to operate.",
+          "Abstraction leak: a host-level failure such as disk pressure or a kernel OOM surfaces as a confusing Pod-level symptom."
+        ],
+        "hidden_magic_checks": [
+          "Learner must state what the control plane stores and what it compares on each reconcile.",
+          "Learner must explain why 'self-healing' does not mean 'cannot fail'."
+        ],
+        "how_go_uses_it": "The Kubernetes control plane is written in Go, and custom controllers and operators are ordinary Go programs built on client-go and controller-runtime that implement the same watch, compare, and act loop.",
+        "mental_model": "An orchestrator is a thermostat for infrastructure: you declare a target, controllers read the current state, and the loop acts to close the gap. The analogy breaks because one orchestrator reconciles many object kinds and can be blocked by capacity, quotas, or an unpullable image.",
+        "performance_implications": [
+          "The control plane adds latency between declaring state and observing it, bounded by watch propagation and probe periods.",
+          "Extra replicas for a rollout temporarily raise aggregate CPU and memory demand across the cluster.",
+          "A control plane that is heavily loaded slows every reconciliation, including health recovery."
+        ],
+        "problem_solved": "A single host with a process manager keeps services running only until the host fails. Orchestration maintains a declared state across many machines and replaces failed instances automatically.",
+        "proof_of_understanding": "Given a short system description, the learner chooses between a single host, a managed platform, an orchestrator, and serverless, and justifies the choice with the decision rule.",
+        "real_world_usage": "Kubernetes, Nomad, and cloud container services all implement desired-state reconciliation. The same convergence pattern appears in configuration management and in any system that drives infrastructure toward a declared target.",
+        "step_by_step_execution": [
+          "An operator declares a Deployment with replicas: 3.",
+          "The API server stores the object and the Deployment controller observes it.",
+          "The controller creates a ReplicaSet, which requests three Pods.",
+          "The scheduler assigns each Pod to a node with free capacity.",
+          "The kubelet starts each container and reports readiness.",
+          "A node fails; the controller observes fewer than three available replicas and creates a replacement.",
+          "The scheduler places the replacement on a healthy node and the observed state matches desired again."
+        ],
+        "under_the_hood": "The control plane stores desired state in the API server, controllers watch objects and compare desired with observed, the scheduler binds Pods to nodes, and kubelets report status back. Reconciliation is continuous and idempotent: a failed action is retried and surfaced as an event or condition.",
+        "why_it_exists": "As services multiply across machines, manual restarts and placement decisions do not scale and do not converge. A control loop that continuously reconciles desired and observed state keeps capacity correct without an operator in the loop."
+      },
+      "zero_magic_status": "reviewed"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "display_text": "Elective 21 — Why orchestration",
+            "label": "Elective 21 — Why orchestration",
+            "reason": "The object model is the vocabulary of the reconciliation loop introduced earlier.",
+            "required": true,
+            "target_id": "elective-21"
+          }
+        ],
+        "preview_only": [],
+        "related": [
+          {
+            "display_text": "Module 15.05 — Networking basics",
+            "label": "Module 15.05 — Networking basics",
+            "reason": "Service and Ingress routing build on the DNS and TCP fundamentals from the core path.",
+            "required": false,
+            "target_id": "core-15-05"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "display_text": "Project — Kubernetes Go Service Capstone",
+            "label": "Project — Kubernetes Go Service Capstone",
+            "reason": "The capstone deploys a Service and an Ingress around a real Go service.",
+            "required": false,
+            "target_id": "project-kubernetes-go-service"
+          }
+        ]
+      },
+      "difficulty": "elective",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "electives/advanced-electives/lessons/22-kubernetes-object-model/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "elective-22",
+      "learning_objective": "Model a stateless Go service as a Deployment behind a Service and an Ingress, and trace the path of a request from the client to the container process.",
+      "module_id": "module-17",
+      "next_item_ids": [
+        "elective-23"
+      ],
+      "order": 22,
+      "phase": "elective",
+      "prerequisites": [
+        "elective-21"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-17",
+        "expected_artifact": "A request-path diagram for a described service plus answers to the review questions.",
+        "mastery_checks": [
+          "Can explain what a Service solves that a Pod cannot.",
+          "Can describe how a Service selects endpoints.",
+          "Can name the layer responsible for a given failure symptom."
+        ],
+        "practice_task": "For a Go HTTP service on port 8080, write the Deployment, Service, and Ingress objects and trace what a client sees at each layer when the Service has zero endpoints.",
+        "project_id": "project-kubernetes-go-service",
+        "rubric_ids": [
+          "rubric-module-17"
+        ]
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "required_prior_knowledge": [
+        "Complete prerequisite lesson(s): elective-21."
+      ],
+      "slug": "kubernetes-object-model",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "elective",
+        "kubernetes",
+        "networking"
+      ],
+      "title": "Pods, Deployments, Services, and Ingress",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can model a stateless service and trace a request from the client to the container.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Addressing Pods directly by name or IP instead of through a Service.",
+          "Assuming a Pod keeps its name, IP, or node across a restart.",
+          "Using a Deployment's labels as an address instead of exposing it through a Service.",
+          "Forgetting that an Ingress object does nothing without an Ingress controller.",
+          "Confusing containerPort with the port the Go process actually listens on.",
+          "Treating a namespace as a network boundary without NetworkPolicies."
+        ],
+        "execution_timeline": [
+          "kubectl apply writes the Deployment to the API server.",
+          "The Deployment controller creates a ReplicaSet, which creates Pods.",
+          "The scheduler binds each Pod to a node.",
+          "The kubelet starts the container and runs probes.",
+          "The Endpoints controller adds each ready Pod's IP to the Service.",
+          "The data plane rewrites packets destined for the Service cluster IP to a chosen Pod IP.",
+          "The Ingress controller accepts external traffic and forwards it to the Service by host and path."
+        ],
+        "failure_modes": [
+          "Selector mismatch: a Service whose selector does not match any Pod labels has zero endpoints and no error.",
+          "Not-ready exclusion: a Running Pod that fails readiness is removed from endpoints, so the Service delivers no traffic.",
+          "Missing Ingress controller: the Ingress object applies cleanly but routes nothing.",
+          "Pod identity assumption: code that caches a Pod name or IP breaks on the next reschedule."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain why the Service cluster IP is not pingable.",
+          "Learner must name the object that lists the ready Pod IPs behind a Service."
+        ],
+        "how_go_uses_it": "A Go service that only consumes the cluster needs no Kubernetes client library: it reads configuration from environment variables or mounted files, binds a port, and answers HTTP. Services that extend the cluster use client-go and controller-runtime to reconcile custom objects.",
+        "mental_model": "A Service is a phone book entry, not a phone: clients resolve a stable name, and the entry forwards to whichever Pods are currently ready. The analogy breaks at selection, because a Service lists only Pods whose labels match its selector and whose readiness probe passes.",
+        "performance_implications": [
+          "A Service adds one data-plane hop per request; with kube-proxy in iptables mode the lookup cost grows with the number of Services.",
+          "Readiness churn removes and re-adds endpoints, briefly changing load distribution across the remaining Pods.",
+          "An Ingress controller is itself a workload that consumes cluster resources and adds a proxy hop."
+        ],
+        "problem_solved": "A bare container has a short lifetime and no stable address. The Service separates the running process from the address clients use, and the Ingress provides the entry point outside the cluster, so a rollout is invisible to clients.",
+        "proof_of_understanding": "The learner models a stateless Go service and traces a request from the client to the container, naming the object and failure mode at each layer.",
+        "real_world_usage": "Every Kubernetes deployment uses Deployments, Services, and Ingress or a Gateway. The same separation of running process and stable address appears in service meshes and in cloud load balancers.",
+        "step_by_step_execution": [
+          "A client resolves the Ingress host and opens a connection to the ingress controller.",
+          "The controller matches the host and path and forwards the request to the Service cluster IP.",
+          "The data plane selects a ready Pod IP from the Service endpoints.",
+          "The request reaches the Pod on the container's listening port.",
+          "The Go handler reads configuration from environment or mounted files and produces a response.",
+          "The response returns through the data plane and the ingress controller to the client.",
+          "When a Pod is replaced, the endpoints change but the Ingress and Service names do not."
+        ],
+        "under_the_hood": "Labels and selectors connect the objects: the Service selects Pods by label, and the Endpoints controller keeps the ready Pod IPs in sync. The cluster IP is virtual and has no listening process; only the data-plane rewrite rules make it work.",
+        "why_it_exists": "Pods are ephemeral, so clients cannot depend on a Pod's name, IP, or node. A stable Service address and an Ingress entry point decouple client traffic from the changing set of running Pods."
+      },
+      "zero_magic_status": "reviewed"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "display_text": "Elective 22 — Kubernetes object model",
+            "label": "Elective 22 — Kubernetes object model",
+            "reason": "Configuration is injected into the Pod template defined by the object model.",
+            "required": true,
+            "target_id": "elective-22"
+          }
+        ],
+        "preview_only": [],
+        "related": [
+          {
+            "display_text": "Module 15.14 — Configuration in deployment",
+            "label": "Module 15.14 — Configuration in deployment",
+            "reason": "The twelve-factor configuration model carried from containers applies unchanged inside a Pod.",
+            "required": false,
+            "target_id": "core-15-14"
+          },
+          {
+            "display_text": "Module 15.15 — Secrets in deployment",
+            "label": "Module 15.15 — Secrets in deployment",
+            "reason": "Secret handling builds on the core secrets lessons.",
+            "required": false,
+            "target_id": "core-15-15"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "display_text": "Project — Kubernetes Go Service Capstone",
+            "label": "Project — Kubernetes Go Service Capstone",
+            "reason": "The capstone requires a ConfigMap and Secret split and a hardened security context.",
+            "required": false,
+            "target_id": "project-kubernetes-go-service"
+          }
+        ]
+      },
+      "difficulty": "elective",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 50,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "electives/advanced-electives/lessons/23-config-and-security-context/main.go",
+        "readme_path": "electives/advanced-electives/lessons/23-config-and-security-context/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "electives/advanced-electives/lessons/23-config-and-security-context/main_test.go"
+      },
+      "id": "elective-23",
+      "learning_objective": "Inject configuration and secrets into a Go service with ConfigMaps and Secrets, load them with a fail-fast validator, and constrain the container with a non-root, read-only security context.",
+      "module_id": "module-17",
+      "next_item_ids": [
+        "elective-24"
+      ],
+      "order": 23,
+      "phase": "elective",
+      "prerequisites": [
+        "elective-22"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-17",
+        "expected_artifact": "A runnable Go loader with tests, a ConfigMap and Secret, and a hardened Deployment fragment.",
+        "mastery_checks": [
+          "Can explain environment versus file delivery and their update behavior.",
+          "Can validate configuration and fail fast at startup.",
+          "Can set a non-root, read-only security context."
+        ],
+        "practice_task": "Harden an in-memory Deployment, move the database URL to a file mount, add a validated timeout value, and write a table-driven test for the timeout.",
+        "project_id": "project-kubernetes-go-service",
+        "rubric_ids": [
+          "rubric-module-17"
+        ]
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "required_prior_knowledge": [
+        "Complete prerequisite lesson(s): elective-22."
+      ],
+      "slug": "config-and-security-context",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "elective",
+        "kubernetes",
+        "configuration",
+        "security"
+      ],
+      "title": "Configuration, secrets, and security context",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Tests pass and the binary fails fast with 'config error: APP_MAX_CONNS is required' when configuration is missing.",
+        "manual_steps": [
+          "Read the README.",
+          "Run the tests and the fail-fast demonstration.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "automated",
+        "race_command": "go test -race -count=1 .",
+        "run_command": "go run .",
+        "test_command": "go test -race -count=1 ."
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Baking secrets into the image instead of mounting them from a Secret.",
+          "Reading a Secret from an environment variable, where it leaks into dumps and child processes.",
+          "Assuming a Secret is encrypted at rest when it is only base64-encoded.",
+          "Running the container as root with the default writable filesystem.",
+          "Enabling readOnlyRootFilesystem and then writing logs or temp files to the root.",
+          "Reading configuration once and expecting a mounted Secret to rotate in place."
+        ],
+        "execution_timeline": [
+          "The Deployment references a ConfigMap for non-sensitive values and a Secret for the sensitive value.",
+          "The kubelet renders ConfigMap keys into environment variables at container start.",
+          "The kubelet projects the Secret into a read-only volume as a file.",
+          "The Go loader reads the environment and the file, validating each value.",
+          "An invalid value returns an error and the process exits non-zero.",
+          "A valid configuration lets the process serve traffic.",
+          "When the Secret changes, the kubelet rewrites the mounted file in place."
+        ],
+        "failure_modes": [
+          "CrashLoopBackOff from a missing required value: the process exits before serving, which is the intended fail-fast behavior.",
+          "Read-only filesystem error: an entrypoint that writes to the root filesystem fails after the hardening change.",
+          "Secret exposure: an environment-sourced secret appears in crash dumps, child processes, or kubectl describe.",
+          "Permission denied on the mounted file: a non-root process cannot read a secret file whose mode excludes it."
+        ],
+        "hidden_magic_checks": [
+          "Learner must state which delivery mechanism rotates in place and what the application must do to observe it.",
+          "Learner must explain what readOnlyRootFilesystem breaks and how to fix it without disabling the setting."
+        ],
+        "how_go_uses_it": "The loader reads from os.Getenv and os.ReadFile and returns an error on the first invalid value so main can exit non-zero. Taking the environment and file reader as parameters makes the loader testable without touching the real process environment.",
+        "mental_model": "An environment variable is a sealed envelope: fixed when the container starts. A mounted ConfigMap or Secret is a mailbox: the kubelet overwrites the file when the source changes, so a loader that re-reads the file sees the new value. The loader's behavior must match the delivery.",
+        "performance_implications": [
+          "Reading configuration at startup is negligible; re-reading files on a timer adds a small periodic cost.",
+          "A readOnlyRootFilesystem can improve I/O predictability but forces temp files onto a mounted emptyDir.",
+          "Dropping capabilities and requiring non-root has no measurable runtime cost."
+        ],
+        "problem_solved": "A twelve-factor service reads configuration from its environment, not from files baked into the image. Kubernetes provides a ConfigMap for non-sensitive values and a Secret for sensitive ones, and a security context constrains the process so a bug cannot become a host compromise.",
+        "proof_of_understanding": "The learner hardens a Deployment, splits configuration from secrets, validates configuration with fail-fast behavior, and proves secret rotation with a test.",
+        "real_world_usage": "Every production Kubernetes service splits configuration from secrets, mounts secrets as files for rotation, and runs with a restrictive security context. External Secrets Operator, Sealed Secrets, and cloud secret managers keep plaintext out of Git.",
+        "step_by_step_execution": [
+          "LoadConfig reads APP_ADDR and APP_LOG_LEVEL from the environment and applies defaults.",
+          "It validates APP_LOG_LEVEL against the allowed set.",
+          "It reads APP_MAX_CONNS and rejects a missing or non-numeric value.",
+          "It reads the file path in APP_DATABASE_URL_FILE and reads that file.",
+          "It trims the trailing newline, checks for emptiness, and stores the value.",
+          "On success main prints the resolved configuration; on any failure it prints the error and exits 1."
+        ],
+        "under_the_hood": "ConfigMap and Secret values are rendered by the kubelet, not the API server: environment variables are fixed at container start, while projected volumes are synced periodically so the on-disk file changes in place. The security context is enforced by the container runtime and the Linux kernel through user namespaces, read-only mounts, and capability sets.",
+        "why_it_exists": "Configuration and secrets must reach the process without being baked into the image, and the process must not run with more privilege than it needs. ConfigMaps, Secrets, and the security context provide those two contracts."
+      },
+      "zero_magic_status": "reviewed"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "display_text": "Elective 23 — Configuration and security context",
+            "label": "Elective 23 — Configuration and security context",
+            "reason": "Probes and shutdown are configured in the same Pod template as the loader and security context.",
+            "required": true,
+            "target_id": "elective-23"
+          }
+        ],
+        "preview_only": [],
+        "related": [
+          {
+            "display_text": "Module 15.10 — Container health checks",
+            "label": "Module 15.10 — Container health checks",
+            "reason": "The core health-check lesson establishes readiness and liveness before Kubernetes adds startup probes.",
+            "required": false,
+            "target_id": "core-15-10"
+          },
+          {
+            "display_text": "Module 15.02 — Signals",
+            "label": "Module 15.02 — Signals",
+            "reason": "Graceful shutdown depends on the SIGTERM semantics from the core path.",
+            "required": false,
+            "target_id": "core-15-02"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "display_text": "Project — Kubernetes Go Service Capstone",
+            "label": "Project — Kubernetes Go Service Capstone",
+            "reason": "The capstone requires all three probes and a bounded drain before the grace period expires.",
+            "required": false,
+            "target_id": "project-kubernetes-go-service"
+          }
+        ]
+      },
+      "difficulty": "elective",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 55,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "electives/advanced-electives/lessons/24-probes-and-graceful-shutdown/main.go",
+        "readme_path": "electives/advanced-electives/lessons/24-probes-and-graceful-shutdown/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "electives/advanced-electives/lessons/24-probes-and-graceful-shutdown/main_test.go"
+      },
+      "id": "elective-24",
+      "learning_objective": "Implement startup, readiness, and liveness probes with correct timing, and drain in-flight HTTP requests on SIGTERM within the termination grace period without returning errors to clients.",
+      "module_id": "module-17",
+      "next_item_ids": [
+        "elective-25"
+      ],
+      "order": 24,
+      "phase": "elective",
+      "prerequisites": [
+        "elective-23"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-17",
+        "expected_artifact": "A runnable Go server with probes and a bounded drain, plus the Deployment probe configuration.",
+        "mastery_checks": [
+          "Can state the question each probe answers.",
+          "Can explain why readiness must fail before shutdown.",
+          "Can bound the drain to the grace period."
+        ],
+        "practice_task": "Add a startup phase that simulates a slow migration and a test that asserts /readyz returns 503, then 200, then 503 after shutdown.",
+        "project_id": "project-kubernetes-go-service",
+        "rubric_ids": [
+          "rubric-module-17"
+        ]
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "required_prior_knowledge": [
+        "Complete prerequisite lesson(s): elective-23."
+      ],
+      "slug": "probes-and-graceful-shutdown",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "elective",
+        "kubernetes",
+        "reliability"
+      ],
+      "title": "Probes, lifecycle, and graceful shutdown",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Tests pass under the race detector; the server drains in-flight requests on SIGTERM and exits before the grace period.",
+        "manual_steps": [
+          "Read the README.",
+          "Run the tests and the signal demonstration.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "automated",
+        "race_command": "go test -race -count=1 .",
+        "run_command": "go run .",
+        "test_command": "go test -race -count=1 ."
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "A liveness probe that checks a dependency, causing every Pod to restart during a database outage.",
+          "Calling Shutdown with context.Background() so it has no deadline.",
+          "Never flipping readiness to false before shutdown.",
+          "A grace period shorter than the p99 request duration.",
+          "New connections arriving after SIGTERM because endpoint propagation is not instant.",
+          "Streaming handlers that ignore the request context and cannot be canceled."
+        ],
+        "execution_timeline": [
+          "The control plane sends SIGTERM and removes the Pod from Service endpoints.",
+          "The readiness endpoint starts returning 503 so no new traffic is routed.",
+          "http.Server.Shutdown closes the listener and stops accepting new connections.",
+          "In-flight handlers finish their work and write responses.",
+          "The in-flight counter reaches zero and Shutdown returns.",
+          "The process exits before terminationGracePeriodSeconds expires.",
+          "If the drain exceeds the grace period, SIGKILL terminates the process and requests fail."
+        ],
+        "failure_modes": [
+          "Dropped requests during a deploy: the process exits before in-flight handlers finish.",
+          "Restart storm: a liveness probe that checks a shared dependency restarts every replica during a dependency outage.",
+          "Stuck shutdown: a handler that ignores its context keeps Shutdown from returning until the deadline.",
+          "Traffic to a terminating Pod: endpoint removal races with SIGTERM, so the drain starts too late."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain why readiness should fail before http.Server.Shutdown is called.",
+          "Learner must state what happens when the shutdown context expires."
+        ],
+        "how_go_uses_it": "http.Server.Shutdown closes listeners and waits for active connections to become idle. A sync.WaitGroup tracks in-flight requests as a second guard, and an atomic.Bool carries the readiness state so /readyz can report draining without locking.",
+        "mental_model": "A restaurant closing for the night: stop seating new guests, finish the orders already taken, and leave when the last table is done. The analogy breaks at the alarm, because the platform, not the kitchen, controls the deadline.",
+        "performance_implications": [
+          "Every probe is an HTTP request; with many replicas the aggregate probe traffic is significant, so keep handlers cheap.",
+          "The drain window sets the minimum rollout duration, so a long drain slows every deploy.",
+          "Shutdown closes listeners immediately, so clients that do not retry see a refused connection unless readiness flips first."
+        ],
+        "problem_solved": "A rolling update replaces Pods while traffic is live. Probes and a bounded drain ensure the load balancer stops sending traffic before the process stops accepting it, and in-flight work finishes instead of failing.",
+        "proof_of_understanding": "The learner implements all three probes with correct timing and proves with a test that shutdown waits for an in-flight request.",
+        "real_world_usage": "Every production Kubernetes service uses readiness and liveness probes and a graceful drain. The pattern is the same in any supervisor that sends a termination signal and expects the process to finish its work.",
+        "step_by_step_execution": [
+          "NewServer sets readiness to true and registers /healthz, /readyz, and /work.",
+          "Start binds a listener and serves in a background goroutine.",
+          "A request to /work enters a tracking middleware that increments the in-flight counter.",
+          "Shutdown sets readiness to false, so /readyz returns 503.",
+          "Shutdown closes the listener and waits for active handlers to return.",
+          "The middleware decrements the counter as each handler finishes.",
+          "Shutdown returns and main exits with code 0 before the grace period expires."
+        ],
+        "under_the_hood": "http.Server.Shutdown does not interrupt handlers: it closes listeners and waits for active connections to become idle. A handler blocked without a context can keep Shutdown from returning, which is why every blocking call must receive the request context.",
+        "why_it_exists": "During a rolling update, endpoint removal and SIGTERM are concurrent, and the process must stop accepting new traffic and finish the requests it already accepted. Probes and a shutdown drain make that transition lossless."
+      },
+      "zero_magic_status": "reviewed"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "display_text": "Elective 24 — Probes and graceful shutdown",
+            "label": "Elective 24 — Probes and graceful shutdown",
+            "reason": "Resource limits and the runtime interplay determine whether the probes keep passing under load.",
+            "required": true,
+            "target_id": "elective-24"
+          }
+        ],
+        "preview_only": [],
+        "related": [
+          {
+            "display_text": "Module 11.11 — Goroutines",
+            "label": "Module 11.11 — Goroutines",
+            "reason": "GOMAXPROCS caps how many goroutines execute Go code in parallel.",
+            "required": false,
+            "target_id": "core-11-11"
+          },
+          {
+            "display_text": "Module 13.05 — Escape analysis",
+            "label": "Module 13.05 — Escape analysis",
+            "reason": "Allocation behavior determines the working set that the memory limit must accommodate.",
+            "required": false,
+            "target_id": "core-13-05"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "display_text": "Project — Kubernetes Go Service Capstone",
+            "label": "Project — Kubernetes Go Service Capstone",
+            "reason": "The capstone requires resource requests and limits wired to the Go runtime.",
+            "required": false,
+            "target_id": "project-kubernetes-go-service"
+          }
+        ]
+      },
+      "difficulty": "elective",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 55,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "electives/advanced-electives/lessons/25-resources-and-go-runtime/main.go",
+        "readme_path": "electives/advanced-electives/lessons/25-resources-and-go-runtime/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "electives/advanced-electives/lessons/25-resources-and-go-runtime/main_test.go"
+      },
+      "id": "elective-25",
+      "learning_objective": "Set container CPU and memory requests and limits, relate them to GOMAXPROCS, GOMEMLIMIT, and garbage-collection behavior, and diagnose CPU throttling and OOM kills from measured signals.",
+      "module_id": "module-17",
+      "next_item_ids": [
+        "elective-26"
+      ],
+      "order": 25,
+      "phase": "elective",
+      "prerequisites": [
+        "elective-24"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-17",
+        "expected_artifact": "A runnable Go program that computes a runtime budget from a container limit, with tests, plus a resources block in a Deployment.",
+        "mastery_checks": [
+          "Can explain the difference between a request and a limit.",
+          "Can relate GOMEMLIMIT to the container memory limit.",
+          "Can name the metric that reveals CPU throttling."
+        ],
+        "practice_task": "Given a Go service with a measured working set and p99 latency, choose requests and limits, set GOMEMLIMIT, and justify the numbers with the throttling argument.",
+        "project_id": "project-kubernetes-go-service",
+        "rubric_ids": [
+          "rubric-module-17"
+        ]
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "required_prior_knowledge": [
+        "Complete prerequisite lesson(s): elective-24."
+      ],
+      "slug": "resources-and-go-runtime",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "elective",
+        "kubernetes",
+        "performance"
+      ],
+      "title": "Resources, the Go runtime, and autoscaling",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Tests pass; running the binary with a 1 GiB limit and GOGC=50 prints gomaxprocs, container_limit, soft_limit, gc_percent, and heap_alloc.",
+        "manual_steps": [
+          "Read the README.",
+          "Run the tests and the budget demonstration.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "automated",
+        "race_command": "go test -race -count=1 .",
+        "run_command": "APP_MEMORY_LIMIT_BYTES=1073741824 GOGC=50 go run .",
+        "test_command": "go test -race -count=1 ."
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Setting a CPU limit with no request, so the scheduler has nothing to place the Pod against.",
+          "Ignoring CFS throttling because average CPU utilization is low.",
+          "Setting GOMEMLIMIT equal to the container memory limit with no headroom.",
+          "Assuming GOMAXPROCS equals the CPU limit on older Go versions.",
+          "Scaling replicas without scaling the database connection pool.",
+          "Using CPU alone to drive the autoscaler for a queue-bound service."
+        ],
+        "execution_timeline": [
+          "The container starts with CPU and memory requests and limits.",
+          "The kernel exposes the limits as a CFS quota and a memory cgroup ceiling.",
+          "GOMAXPROCS reads the CPU quota on Go 1.25 and later, or the node CPU count earlier.",
+          "The program sets GOMEMLIMIT below the container limit to leave headroom.",
+          "As the live heap approaches GOMEMLIMIT, the garbage collector runs more aggressively.",
+          "If the heap still exceeds the container limit, the kernel OOM killer terminates the process.",
+          "The autoscaler changes replica count in response to a metric, which multiplies the connection pool."
+        ],
+        "failure_modes": [
+          "CFS throttling: a bursty service is throttled at the period boundary even when average utilization is low, causing periodic latency spikes.",
+          "OOM kill: the heap grows past the container limit before the garbage collector reacts, and the kernel terminates the process with no Go panic.",
+          "Connection exhaustion: replica count multiplied by pool size exceeds the database max_connections.",
+          "Scheduler starvation: a CPU request larger than any free node capacity leaves the Pod Pending."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain why a low average CPU can still hide throttling.",
+          "Learner must state what happens when GOMEMLIMIT equals the container limit."
+        ],
+        "how_go_uses_it": "runtime.GOMAXPROCS reports or sets the parallel execution limit, debug.SetGCPercent tunes collection aggressiveness, and debug.SetMemoryLimit sets the soft heap ceiling the garbage collector targets before the kernel OOM killer acts.",
+        "mental_model": "A container limit is a speed limit with a camera, and the Go runtime historically could not see the sign. The runtime now reads the CPU quota and can be told the memory ceiling with GOMEMLIMIT, so the two views of the machine agree.",
+        "performance_implications": [
+          "A CPU limit that is low relative to burst demand causes throttling that shows up as p99 latency, not average CPU.",
+          "GOMEMLIMIT too close to the container limit makes the collector and the OOM killer race.",
+          "More replicas multiply connection pools, so pool size must be budgeted against max_connections."
+        ],
+        "problem_solved": "The kernel enforces container CPU and memory limits, while the Go runtime makes scheduling and collection decisions from its own view of the machine. When the two disagree, a healthy process is throttled or killed. Resource settings plus the matching runtime controls reconcile the two views.",
+        "proof_of_understanding": "The learner sets requests and limits from measured data, wires GOMEMLIMIT and GOMAXPROCS to the container limit, and diagnoses throttling and OOM kills from the correct metrics.",
+        "real_world_usage": "Every Go service in a container needs resource requests and limits, and production clusters use GOMEMLIMIT and CPU-quota-aware GOMAXPROCS to avoid throttling and OOM kills. Autoscalers adjust replica counts against the same settings.",
+        "step_by_step_execution": [
+          "The container starts with a memory limit that the kernel exposes as a cgroup ceiling.",
+          "GOMAXPROCS(0) reports the current processor count, which reflects the quota on Go 1.25 and later.",
+          "ComputeBudget reserves fifteen percent of the container limit as a soft limit.",
+          "debug.SetGCPercent tunes how much the heap may grow between collections.",
+          "debug.SetMemoryLimit sets the soft heap ceiling.",
+          "runtime.ReadMemStats reports the current live heap, far below the soft limit at startup."
+        ],
+        "under_the_hood": "The kernel enforces the CPU limit as a per-period CFS quota and the memory limit as a cgroup ceiling policed by the OOM killer. The Go runtime answers with GOMAXPROCS for parallelism and GOMEMLIMIT for the heap target, so collection pressure rises as the heap approaches the soft limit.",
+        "why_it_exists": "Without resource settings the scheduler cannot place Pods predictably and one workload can starve its neighbors. Without the matching runtime controls, a Go process can be throttled while its average CPU looks idle, or be killed by the OOM killer before its garbage collector reacts."
+      },
+      "zero_magic_status": "reviewed"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "display_text": "Elective 25 — Resources and the Go runtime",
+            "label": "Elective 25 — Resources and the Go runtime",
+            "reason": "A rollout multiplies resource demand transiently, which the resource budget must absorb.",
+            "required": true,
+            "target_id": "elective-25"
+          }
+        ],
+        "preview_only": [],
+        "related": [
+          {
+            "display_text": "Module 15.18 — Rollback basics",
+            "label": "Module 15.18 — Rollback basics",
+            "reason": "The rollback discipline from the core path is what kubectl rollout undo automates.",
+            "required": false,
+            "target_id": "core-15-18"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "display_text": "Project — Kubernetes Go Service Capstone",
+            "label": "Project — Kubernetes Go Service Capstone",
+            "reason": "The capstone must demonstrate a rollout, a rollback, and a node drain under a PodDisruptionBudget.",
+            "required": false,
+            "target_id": "project-kubernetes-go-service"
+          }
+        ]
+      },
+      "difficulty": "elective",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 55,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "electives/advanced-electives/lessons/26-rollouts-and-troubleshooting/main.go",
+        "readme_path": "electives/advanced-electives/lessons/26-rollouts-and-troubleshooting/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "electives/advanced-electives/lessons/26-rollouts-and-troubleshooting/main_test.go"
+      },
+      "id": "elective-26",
+      "learning_objective": "Perform a zero-downtime rolling update, verify it, roll back, protect availability during a node drain, and diagnose a stalled rollout.",
+      "module_id": "module-17",
+      "next_item_ids": [],
+      "order": 26,
+      "phase": "elective",
+      "prerequisites": [
+        "elective-25"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-17",
+        "expected_artifact": "A runnable version endpoint with tests plus a rollout, rollback, and PDB configuration and a runbook extension.",
+        "mastery_checks": [
+          "Can explain what maxUnavailable and maxSurge control.",
+          "Can verify the serving revision after a rollout.",
+          "Can diagnose a stalled rollout from events."
+        ],
+        "practice_task": "Extend the Module 15 runbook with a Kubernetes rollout and rollback phase, an expand/contract migration step, a PodDisruptionBudget, and the top three failure modes with exact commands.",
+        "project_id": "project-kubernetes-go-service",
+        "rubric_ids": [
+          "rubric-module-17"
+        ]
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "required_prior_knowledge": [
+        "Complete prerequisite lesson(s): elective-25."
+      ],
+      "slug": "rollouts-and-troubleshooting",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "elective",
+        "kubernetes",
+        "operations"
+      ],
+      "title": "Rollouts, rollback, and troubleshooting",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Tests pass; GET /version reports the build revision and environment; a rollout is verifiable and reversible.",
+        "manual_steps": [
+          "Read the README.",
+          "Run the tests and the version-endpoint demonstration.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "automated",
+        "race_command": "go test -race -count=1 .",
+        "run_command": "go run .",
+        "test_command": "go test -race -count=1 ."
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Shipping a destructive schema change in the same release as the code that depends on it.",
+          "Leaving off a readiness probe so rollout status is meaningless.",
+          "Using maxUnavailable: 0 without spare capacity, so the rollout can never surge.",
+          "Deleting the Deployment to start over instead of rolling back.",
+          "Ignoring the ProgressDeadlineExceeded condition.",
+          "Rolling back a release that changed the schema incompatibly."
+        ],
+        "execution_timeline": [
+          "The Pod template changes, so the controller creates a new ReplicaSet.",
+          "The new ReplicaSet surges one Pod within maxSurge.",
+          "The new Pod must pass readiness and stay ready for minReadySeconds.",
+          "The controller scales the old ReplicaSet down within maxUnavailable.",
+          "The steps repeat until the new ReplicaSet is fully available and the old is zero.",
+          "The Service routes to whichever revision is ready at each moment.",
+          "If no progress occurs for progressDeadlineSeconds, the rollout is marked stalled."
+        ],
+        "failure_modes": [
+          "Unpullable image: ImagePullBackOff stops the rollout and, with maxUnavailable: 0, the old Pods are not removed.",
+          "Capacity shortfall: the cluster cannot schedule the surge Pod, so the rollout waits indefinitely.",
+          "Incompatible schema: the old and new revisions share a database, so a destructive migration breaks the rollback.",
+          "Stalled rollout unnoticed: ProgressDeadlineExceeded is ignored until users report errors."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain why the version endpoint is the proof that a rollout succeeded.",
+          "Learner must explain the difference between a PodDisruptionBudget and the rollout strategy."
+        ],
+        "how_go_uses_it": "The version endpoint reports build metadata from debug.ReadBuildInfo and the environment, so a client can prove which revision answered. The response shape is additive so an older client keeps decoding a newer response, which is what makes a rollback safe.",
+        "mental_model": "A rolling update is a bridge being repainted while traffic keeps crossing: keep a lane open, add a detour before closing one, and reopen the old lane if the paint is wrong. The analogy breaks when old and new interact through a shared database, which is why schema changes must stay backward compatible.",
+        "performance_implications": [
+          "maxSurge: 1 runs replicas plus one during the transition, so nodes and the database pool must absorb the surge.",
+          "maxUnavailable: 0 slows the rollout because each Pod must become ready before the next is removed.",
+          "New and old ReplicaSets briefly overlap, so the transient connection-pool demand exceeds the steady state."
+        ],
+        "problem_solved": "A rollout replaces every instance of a running service in front of users. The update strategy, a meaningful readiness probe, and a one-command rollback turn a routine deploy from a hope into a measured, reversible operation.",
+        "proof_of_understanding": "The learner performs a rolling update, verifies the serving revision through the version endpoint, rolls back, and diagnoses a stalled rollout from cluster events.",
+        "real_world_usage": "Every continuous-delivery pipeline for Kubernetes uses rolling updates with readiness gates and rollback. The expand/contract migration pattern is standard practice for keeping a rollback valid across a schema change.",
+        "step_by_step_execution": [
+          "kubectl set image or kubectl apply changes the Pod template.",
+          "The Deployment controller creates a new ReplicaSet tagged with the template hash.",
+          "The new ReplicaSet scales up by maxSurge and the kubelet runs the readiness probe.",
+          "Once the new Pod is ready for minReadySeconds, the controller scales the old ReplicaSet down by maxUnavailable.",
+          "The Service routes to ready endpoints from either revision during the transition.",
+          "GET /version reports which revision answered a given request.",
+          "kubectl rollout undo copies the previous template into a new revision and repeats the transition."
+        ],
+        "under_the_hood": "The Deployment controller adjusts the old and new ReplicaSets step by step within maxUnavailable and maxSurge, and completion requires the new ReplicaSet to be fully available and the old to be zero. A Pod counts as available only after readiness passes and minReadySeconds elapses; no progress for progressDeadlineSeconds sets the stalled condition.",
+        "why_it_exists": "A rollout is the riskiest routine operation because it replaces live capacity in front of users. Controlled transitions, meaningful readiness, and a verified rollback path let a team ship frequently without turning a deploy into an outage."
+      },
+      "zero_magic_status": "reviewed"
     }
   ],
   "last_updated": "2026-10-23",
@@ -3697,7 +4705,7 @@
         "elective"
       ],
       "terminal_item_ids": [
-        "elective-20"
+        "elective-26"
       ],
       "title": "Advanced Electives"
     }
@@ -3726,14 +4734,20 @@
       "elective-17",
       "elective-18",
       "elective-19",
-      "elective-20"
+      "elective-20",
+      "elective-21",
+      "elective-22",
+      "elective-23",
+      "elective-24",
+      "elective-25",
+      "elective-26"
     ],
     "recommended_after": [
       "core-16-15"
     ],
     "required_for_core": false,
     "terminal_item_ids": [
-      "elective-20"
+      "elective-26"
     ]
   },
   "quality_gates": [

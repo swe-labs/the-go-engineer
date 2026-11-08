@@ -2354,7 +2354,9 @@
       "manual_review_questions": [
         "When would you choose generics over an interface? Give a concrete example where generics produce cleaner code.",
         "Explain what gRPC adds over plain HTTP/JSON. When is the complexity worth it?",
-        "Walk me through the functional options pattern. When does it improve API design and when is it over-engineering?"
+        "Walk me through the functional options pattern. When does it improve API design and when is it over-engineering?",
+        "Explain the Kubernetes reconciliation loop. What does the control plane compare on each pass, and what happens when the gap cannot be closed?",
+        "Why must a container's memory limit and GOMEMLIMIT be different values, and what fails when they are equal?"
       ],
       "passing_score": 80,
       "purpose": "Verify that the learner can independently apply and explain advanced electives across functional programming, systems programming, web assembly, and cloud-native Go.",
@@ -2386,7 +2388,13 @@
         "elective-17",
         "elective-18",
         "elective-19",
-        "elective-20"
+        "elective-20",
+        "elective-21",
+        "elective-22",
+        "elective-23",
+        "elective-24",
+        "elective-25",
+        "elective-26"
       ],
       "title": "Module 17 Assessment — Electives and Advanced Engineering",
       "type": "project-review"
@@ -5409,6 +5417,114 @@
         "How does your system enforce multi-tenant data isolation and prevent cross-tenant data leakage across both queries and asynchronous background jobs?",
         "Demonstrate live incident recovery: if the primary database container crashes or a third-party payment webhook fails, how does the system maintain data integrity and recover?"
       ]
+    },
+    {
+      "automated_checks": [
+        "go test ./..."
+      ],
+      "criteria": [
+        {
+          "id": "project-kubernetes-go-service-correctness",
+          "levels": [
+            {
+              "description": "Incorrect or missing deployment.",
+              "score": 0
+            },
+            {
+              "description": "Partially correct; some objects missing or the rollout or rollback not demonstrated.",
+              "score": 3
+            },
+            {
+              "description": "Fully correct; rollout, rollback, and drain all complete as specified.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "id": "project-kubernetes-go-service-readiness",
+          "levels": [
+            {
+              "description": "Missing probes, resources, security context, or configuration split.",
+              "score": 0
+            },
+            {
+              "description": "Some production settings present but incomplete.",
+              "score": 3
+            },
+            {
+              "description": "Probes, resource requests and limits, hardened security context, and ConfigMap/Secret split all present and correct.",
+              "score": 5
+            }
+          ],
+          "title": "Production readiness",
+          "weight": 25
+        },
+        {
+          "id": "project-kubernetes-go-service-proof",
+          "levels": [
+            {
+              "description": "No captured evidence.",
+              "score": 0
+            },
+            {
+              "description": "Some output captured without interpretation.",
+              "score": 3
+            },
+            {
+              "description": "Rollout status, version endpoint, probe results, and drain evidence captured and interpreted.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "id": "project-kubernetes-go-service-explanation",
+          "levels": [
+            {
+              "description": "No explanation provided.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation that lists objects without tradeoffs.",
+              "score": 3
+            },
+            {
+              "description": "Professional defense of each object, the tested failure modes, and the tradeoffs.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "documentation_mode": "assessment",
+      "evidence_required": [
+        "Deployment manifests and hardened image reference",
+        "Rollout, rollback, and drain evidence",
+        "Version endpoint output before and after rollback",
+        "Runbook extension and written defense"
+      ],
+      "id": "assessment-project-kubernetes-go-service",
+      "module_id": "module-17",
+      "manual_review_questions": [
+        "Which revision is serving traffic right now, and which command proved it?",
+        "Why does maxUnavailable: 0 require spare cluster capacity to produce zero downtime?",
+        "What does the PodDisruptionBudget protect against, and what does it not protect against?",
+        "You changed the schema and the code in the same release. Why is the rollback unsafe, and what should have happened instead?",
+        "Name the two metrics you would alert on for a Go service under a CPU limit, and why."
+      ],
+      "passing_score": 80,
+      "purpose": "Evaluate the Kubernetes Go Service Capstone submission: a containerized Go service deployed and operated on a local cluster with production-grade objects, a verified rollout and rollback, and a PodDisruptionBudget.",
+      "retake_policy": "Learner may retry after fixing the rubric gaps and writing a short correction note.",
+      "status": "ready",
+      "target_ids": [
+        "project-kubernetes-go-service"
+      ],
+      "title": "Assessment — Kubernetes Go Service Capstone",
+      "type": "project-review"
     }
   ],
   "curriculum_version": "3.0.0",

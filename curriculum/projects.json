@@ -5521,6 +5521,95 @@
       "title": "Advanced Electives Capstone",
       "type": "mini-project",
       "verification": "Manual review of project implementation, tests, and technical write-up against elective module criteria."
+    },
+    {
+      "assessment_id": "assessment-project-kubernetes-go-service",
+      "deliverables": [
+        "Module 15 Go service deployed to a local kind or k3d cluster",
+        "Production Deployment with probes, resources, and a hardened security context",
+        "Service and Ingress (or NodePort fallback)",
+        "Demonstrated rollout, rollback, and PodDisruptionBudget during a node drain",
+        "Runbook extension covering rollout, verification, rollback, and the top three failure modes"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "tutorial",
+      "id": "project-kubernetes-go-service",
+      "module_id": "module-17",
+      "placement_anchor_item_id": "elective-26",
+      "prerequisite_item_ids": [
+        "core-15-19"
+      ],
+      "prerequisites": [
+        "core-15-19"
+      ],
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "desired state and reconciliation",
+        "readiness gate",
+        "cgroup CPU quota",
+        "rolling update"
+      ],
+      "required_concepts": [
+        "desired state and reconciliation",
+        "readiness gate",
+        "cgroup CPU quota",
+        "rolling update"
+      ],
+      "rubric": [
+        {
+          "criterion": "Correctness",
+          "description": "The service runs in the cluster, traffic reaches it, and the rollout, rollback, and drain all complete as specified.",
+          "weight": 35
+        },
+        {
+          "criterion": "Production readiness",
+          "description": "Probes, resource requests and limits, the hardened security context, and the ConfigMap/Secret split are all present and correct.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Rollout status, the version endpoint, probe results, and drain evidence are captured and interpreted.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear written defense of each object, the tested failure modes, and the tradeoffs.",
+          "weight": 15
+        }
+      ],
+      "schema_version": "3.1.0",
+      "slug": "kubernetes-go-service-capstone",
+      "source_legacy_ids": [],
+      "stage": "elective",
+      "status": "ready",
+      "summary": "Deploy a containerized Go service to a local Kubernetes cluster and operate it with production-grade objects: probes, resource limits, a hardened security context, a ConfigMap/Secret split, a verified rolling update, a rollback, and a PodDisruptionBudget.",
+      "tags": [
+        "elective",
+        "kubernetes",
+        "operations",
+        "capstone"
+      ],
+      "tasks": [
+        {
+          "instruction": "Stand up a local kind or k3d cluster and load the Module 15 service image.",
+          "title": "Provision the cluster"
+        },
+        {
+          "instruction": "Write the Deployment, Service, Ingress or NodePort, ConfigMap, Secret, and PodDisruptionBudget, and apply them.",
+          "title": "Declare the desired state"
+        },
+        {
+          "instruction": "Roll out a change, verify the serving revision through the version endpoint, roll back, and drain a node under the PodDisruptionBudget.",
+          "title": "Operate and recover"
+        },
+        {
+          "instruction": "Write the runbook extension and defend each object and failure mode in writing.",
+          "title": "Document and defend"
+        }
+      ],
+      "title": "Kubernetes Go Service Capstone",
+      "type": "mini-project",
+      "verification": "Run the verification commands to confirm rollout status, the serving revision, the security context, resource settings, the PodDisruptionBudget, the rollback, and a node drain, then review the written defense against the rubric."
     }
   ],
   "quality_gates": [

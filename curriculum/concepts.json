@@ -587,6 +587,65 @@
       "reinforcement_locations": [
         "project-bank-account"
       ]
+    },
+    {
+      "canonical_owner": "elective-21",
+      "concept": "desired state and reconciliation",
+      "notes": "Declarative desired state, observed state, and the control loop that closes the gap",
+      "preview_locations": null,
+      "reinforcement_locations": [
+        "elective-26"
+      ]
+    },
+    {
+      "canonical_owner": "elective-22",
+      "concept": "kubernetes service endpoints",
+      "notes": "Stable Service identity, label selection, and the ready Pod IPs behind a Service",
+      "preview_locations": null,
+      "reinforcement_locations": [
+        "elective-24"
+      ]
+    },
+    {
+      "canonical_owner": "elective-23",
+      "concept": "configmap and secret delivery",
+      "notes": "Environment versus file delivery, in-place rotation, and fail-fast validation",
+      "preview_locations": null,
+      "reinforcement_locations": [
+        "elective-26"
+      ]
+    },
+    {
+      "canonical_owner": "elective-24",
+      "concept": "readiness gate",
+      "notes": "Readiness controls traffic, liveness restarts a stuck process, and the drain bounds in-flight work",
+      "preview_locations": null,
+      "reinforcement_locations": [
+        "elective-26"
+      ]
+    },
+    {
+      "canonical_owner": "elective-25",
+      "concept": "cgroup CPU quota",
+      "notes": "The CFS quota, GOMAXPROCS, CFS throttling, and the memory limit to GOMEMLIMIT relationship",
+      "preview_locations": null,
+      "reinforcement_locations": [
+        "elective-26"
+      ]
+    },
+    {
+      "canonical_owner": "elective-26",
+      "concept": "rolling update",
+      "notes": "maxUnavailable, maxSurge, minReadySeconds, revision history, and the rollback path",
+      "preview_locations": null,
+      "reinforcement_locations": []
+    },
+    {
+      "canonical_owner": "elective-26",
+      "concept": "pod disruption budget",
+      "notes": "Bounding voluntary disruption during node drains and cluster upgrades",
+      "preview_locations": null,
+      "reinforcement_locations": []
     }
   ],
   "curriculum_version": "3.0.0",

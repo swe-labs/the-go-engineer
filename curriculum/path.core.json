@@ -464,8 +464,8 @@
         ]
       },
       "readme_contract": {
-        "contract_id": "project.v3",
-        "documentation_mode": "project",
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
         "required": true
       },
       "readme_status": "reviewed",
@@ -18415,8 +18415,8 @@
         ]
       },
       "readme_contract": {
-        "contract_id": "project.v3",
-        "documentation_mode": "project",
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
         "required": true
       },
       "readme_status": "reviewed",
@@ -37353,6 +37353,13 @@
       "title": "DELETE operations",
       "type": "lesson",
       "verification": {
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
         "run_command": "go run ./09-sql-postgres-persistence/28-delete-operations",
         "test_command": "go test ./09-sql-postgres-persistence/28-delete-operations"
       },
@@ -55043,7 +55050,7 @@
           "Step 1: Run go run main.go with a file that creates a secret file using os.WriteFile and explicitly pass os.FileMode(0600) for the key file and os.FileMode(0644) for a non-sensitive config file.",
           "Step 2: Inspect the created file permissions with ls -la on Linux or Get-ChildItem on Windows (Go abstracts underlying permissions but the interface stays the same).",
           "Step 3: Use os.Stat inside the program and call .Mode().Perm() to retrieve the numeric permission bits; print them as octal with fmt.Printf(\"%o\", mode.Perm()).",
-          "Step 4: Run the same program inside a Docker container (FROM golang:1.22-alpine) built with USER 1000 and observe that os.WriteFile still works correctly because permissions are relative to the UID, not the container boundary.",
+          "Step 4: Run the same program inside a Docker container (FROM golang:1.27-alpine) built with USER 1000 and observe that os.WriteFile still works correctly because permissions are relative to the UID, not the container boundary.",
           "Step 5: Add os.Chmod to reduce permissions of an already-written config file from 0644 to 0600 after a config value validation; verify the change with os.Lstat (note: Lstat does not follow symlinks \u00e2\u20ac\u201d important for /proc or /etc hosts).",
           "Step 6: Apply umask by calling syscall.Umask(0027) at startup and verify that os.OpenFile with 0640 produces a file with permissions 0640 (because group-w is already absent) but os.OpenFile with 0666 produces 0640 (group-w is stripped).",
           "Step 7: Test setuid behavior by creating a small Go binary that prints os.Getuid(), building it with os.FileMode(0755), setting setuid via os.Chmod(path, os.FileMode(04555)), and observing that the kernel ignores setuid on Go binaries with the nosuid mount option or in Docker by default."
@@ -55292,7 +55299,7 @@
           "Forgetting `--chmod` on COPY or running as root, leaving the container with a security profile that violates the principle of least privilege."
         ],
         "execution_timeline": [
-          "\u00e2\u0153\u008f\u00ef\u00b8\u008f Developer writes a Dockerfile with `FROM golang:1.22-alpine AS build` and `FROM scratch`.",
+          "\u00e2\u0153\u008f\u00ef\u00b8\u008f Developer writes a Dockerfile with `FROM golang:1.27-alpine AS build` and `FROM scratch`.",
           "\u00e2\u0161\u2122\u00ef\u00b8\u008f Docker daemon reads the Dockerfile and creates a build context from the directory (less anything in `.dockerignore`).",
           "\u00f0\u0178\u201c\u00a6 The builder executes each instruction: `WORKDIR /app`, `COPY go.mod go.sum .`, `RUN go mod download` (layers cached).",
           "\u00f0\u0178\u201d\u00a8 `COPY . .` then `RUN CGO_ENABLED=0 go build -ldflags=\"-s -w\" -o /app/server .` produces a static binary.",
@@ -55305,8 +55312,8 @@
         ],
         "failure_modes": [
           {
-            "cause": "Using `FROM golang:1.22` (full Debian) without multi-stage \u00e2\u20ac\u201d final image is 900 MB.",
-            "fix": "Switch to multi-stage: `FROM golang:1.22-alpine AS build` + `FROM scratch`.",
+            "cause": "Using `FROM golang:1.27` (full Debian) without multi-stage \u00e2\u20ac\u201d final image is 900 MB.",
+            "fix": "Switch to multi-stage: `FROM golang:1.27-alpine AS build` + `FROM scratch`.",
             "scenario": "Deploying a 900 MB image to AWS ECS causes slow pull times and higher cost."
           },
           {
@@ -55362,7 +55369,7 @@
         "real_world_usage": "Every major Go project uses Docker for delivery. Docker Hub lists official images for Go itself, as well as Go-based tools like Traefik, Caddy, Hugo, and Syncthing. In production, Go services are deployed as Docker containers on ECS, GKE, AKS, or EKS \u00e2\u20ac\u201d often built via CI (GitHub Actions, GitLab CI) and pushed to a registry, then pulled by the orchestrator. `docker-compose.yml` is used for local development to spin up the Go API alongside Postgres, Redis, and a message broker.",
         "step_by_step_execution": [
           "Create a `.dockerignore` listing `.git`, `vendor/`, `*.md`, `tmp/`, `coverage.out`, `Dockerfile`.",
-          "Write a `Dockerfile` with `FROM golang:1.22-alpine AS build` and set `WORKDIR /app`.",
+          "Write a `Dockerfile` with `FROM golang:1.27-alpine AS build` and set `WORKDIR /app`.",
           "Copy dependency files first: `COPY go.mod go.sum ./` then `RUN go mod download`.",
           "Copy source: `COPY . .` and build: `RUN CGO_ENABLED=0 go build -ldflags=\"-s -w\" -o /server .`.",
           "Start the minimal stage: `FROM scratch`. Copy the binary: `COPY --from=build /server /server`.",
@@ -55477,7 +55484,7 @@
         "execution_timeline": [
           "Developer writes multi-stage Dockerfile",
           "docker build reads Dockerfile and sends build context to daemon (excluding .dockerignore)",
-          "Docker resolves base image: FROM golang:1.22 AS builder",
+          "Docker resolves base image: FROM golang:1.27 AS builder",
           "Each instruction executes as a new read-only layer",
           "Cached layers are reused when instruction + parent ID + file checksums match",
           "RUN go mod download is cached independently from source code",
@@ -55495,8 +55502,8 @@
             "scenario": "Docker build cache miss on every commit because go.mod is copied after all source files"
           },
           {
-            "cause": "Single-stage build using golang:1.22 as the final base image instead of multi-stage with scratch",
-            "fix": "Use multi-stage build: FROM golang:1.22 AS builder, then FROM scratch, COPY --from=builder /app/main /main",
+            "cause": "Single-stage build using golang:1.27 as the final base image instead of multi-stage with scratch",
+            "fix": "Use multi-stage build: FROM golang:1.27 AS builder, then FROM scratch, COPY --from=builder /app/main /main",
             "scenario": "Final image is 800MB+ containing the Go toolchain and source code"
           },
           {
@@ -55535,7 +55542,7 @@
         "real_world_usage": "Every major Go project that ships as a Docker image uses multi-stage builds with scratch or distroless. Docker CLI, Kubernetes (kubelet, kube-apiserver, etcd), Prometheus, Grafana, Caddy, Traefik, and HashiCorp tools (Consul, Vault, Nomad, Terraform) all follow this pattern. The Go Dockerfile is so universally clean that Docker's official documentation uses it as the canonical multi-stage example.",
         "step_by_step_execution": [
           "1. Create a .dockerignore excluding .git, node_modules, *.local, and any build artifacts.",
-          "2. Start the builder stage: FROM golang:1.22-alpine AS builder.",
+          "2. Start the builder stage: FROM golang:1.27-alpine AS builder.",
           "3. Set WORKDIR /build and copy dependency files first: COPY go.mod go.sum ./.",
           "4. Download dependencies: RUN go mod download (this layer is cached unless go.mod or go.sum change).",
           "5. Copy all remaining source code: COPY . . (this layer invalidates on any source change).",
@@ -63029,7 +63036,7 @@
         "test_path": ""
       },
       "id": "project-course-setup",
-      "learning_objective": "Verify and document the complete local Go engineering workstation: directory structure, Go 1.24+ toolchain, IDE plugins, and automated curriculum validation test execution.",
+      "learning_objective": "Verify and document the complete local Go engineering workstation: directory structure, Go 1.27+ toolchain, IDE plugins, and automated curriculum validation test execution.",
       "module_id": "module-00",
       "next_item_ids": [],
       "order": 99,
@@ -63056,7 +63063,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -63110,7 +63121,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -63164,7 +63179,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -63222,7 +63241,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -63276,7 +63299,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -63334,7 +63361,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -63388,7 +63419,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -63446,7 +63481,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -63504,7 +63543,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -63558,7 +63601,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -63612,7 +63659,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -63666,7 +63717,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -63724,7 +63779,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/04-functions-errors-data-semantics/projects/order-summary-refactor",
@@ -63778,7 +63837,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -63832,7 +63895,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -63890,7 +63957,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -63948,7 +64019,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -64002,7 +64077,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64056,7 +64135,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64110,7 +64193,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64168,7 +64255,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -64226,7 +64317,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -64280,7 +64375,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64334,7 +64433,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64388,7 +64491,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64446,7 +64553,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -64504,7 +64615,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -64562,7 +64677,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -64616,7 +64735,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64670,7 +64793,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64724,7 +64851,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64778,7 +64909,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64836,7 +64971,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -64890,7 +65029,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -64944,7 +65087,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65002,7 +65149,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -65056,7 +65207,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65110,7 +65265,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65168,7 +65327,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -65222,7 +65385,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65276,7 +65443,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65334,7 +65505,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -65392,7 +65567,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -65450,7 +65629,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -65504,7 +65687,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65558,7 +65745,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65612,7 +65803,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65666,7 +65861,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65724,7 +65923,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -65782,7 +65985,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -65836,7 +66043,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65890,7 +66101,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -65944,7 +66159,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66001,7 +66220,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -66059,7 +66282,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -66113,7 +66340,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66167,7 +66398,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66221,7 +66456,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66279,7 +66518,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -66333,7 +66576,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66387,7 +66634,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66445,7 +66696,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -66499,7 +66754,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66553,7 +66812,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66611,7 +66874,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -66665,7 +66932,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66719,7 +66990,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66753,7 +67028,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "project.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "project",
         "required": true
       },
@@ -66764,7 +67039,7 @@
       "slug": "15-opslane-portfolio-defense",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "project",
+      "subtype": "flagship-checkpoint",
       "tags": [
         "flagship",
         "project",
@@ -66774,7 +67049,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "go run ./modules/18-flagship-opslane/projects/15-opslane-portfolio-defense",
@@ -66832,7 +67111,11 @@
       "type": "project",
       "verification": {
         "expected_output": "Working implementation with passing tests.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
         "mode": "mixed",
         "race_command": "",
         "run_command": "",
@@ -66866,7 +67149,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -66877,7 +67160,7 @@
       "slug": "01-opslane-foundation-and-configuration",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -66886,7 +67169,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66920,7 +67207,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -66931,7 +67218,7 @@
       "slug": "02-opslane-database-and-models",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -66940,7 +67227,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -66974,7 +67265,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -66985,7 +67276,7 @@
       "slug": "03-opslane-authentication",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -66994,7 +67285,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67028,7 +67323,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67039,7 +67334,7 @@
       "slug": "04-opslane-authorization",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67048,7 +67343,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67082,7 +67381,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67093,7 +67392,7 @@
       "slug": "05-opslane-tenant-isolation",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67102,7 +67401,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67136,7 +67439,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67147,7 +67450,7 @@
       "slug": "06-opslane-http-api-layer",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67156,7 +67459,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67190,7 +67497,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67201,7 +67508,7 @@
       "slug": "07-opslane-order-processing",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67210,7 +67517,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67244,7 +67555,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67255,7 +67566,7 @@
       "slug": "08-opslane-payment-pipeline",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67264,7 +67575,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67298,7 +67613,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67309,7 +67624,7 @@
       "slug": "09-opslane-event-bus",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67318,7 +67633,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67352,7 +67671,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67363,7 +67682,7 @@
       "slug": "10-opslane-worker-pools",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67372,7 +67691,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67406,7 +67729,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67417,7 +67740,7 @@
       "slug": "11-opslane-caching-layer",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67426,7 +67749,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67460,7 +67787,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67471,7 +67798,7 @@
       "slug": "12-opslane-observability",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67480,7 +67807,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67514,7 +67845,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67525,7 +67856,7 @@
       "slug": "13-opslane-graceful-shutdown",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67534,7 +67865,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67568,7 +67903,7 @@
       "phase": "flagship",
       "prerequisites": [],
       "readme_contract": {
-        "contract_id": "assessment.v3",
+        "contract_id": "flagship-checkpoint.v3",
         "documentation_mode": "assessment",
         "required": true
       },
@@ -67579,7 +67914,7 @@
       "slug": "14-opslane-deployment",
       "source_legacy_ids": [],
       "status": "ready",
-      "subtype": "assessment",
+      "subtype": "milestone-assessment",
       "tags": [
         "go-core",
         "assessment"
@@ -67588,7 +67923,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67642,7 +67981,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -67696,7 +68039,11 @@
       "type": "assessment",
       "verification": {
         "expected_output": "Completed assessment with evidence.",
-        "manual_steps": [],
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
         "mode": "manual",
         "race_command": "",
         "run_command": "",
@@ -68337,8 +68684,8 @@
         "module-16"
       ],
       "readme_contract": {
-        "contract_id": "module.v3",
-        "documentation_mode": "module-overview"
+        "contract_id": "flagship.v3",
+        "documentation_mode": "flagship"
       },
       "readme_status": "scaffolded",
       "recommended_break_after": true,
