@@ -12,7 +12,6 @@ check() {
         PASS=$((PASS + 1))
         printf "  PASS  %s\n" "$name"
     else
-        PASS=$((PASS - 1))
         FAIL=$((FAIL + 1))
         printf "  FAIL  %s\n" "$name"
     fi

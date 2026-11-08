@@ -13,7 +13,7 @@ Almost every software system today communicates over HTTP: mobile apps communica
 
 > [!NOTE]
 > **Zero-Magic Reassurance:**
-> The Go example below uses `http.NewServeMux()` and a background server goroutine to demonstrate a live, functional HTTP exchange. Full Go web server architecture and middleware design will be taught in depth in Module 14. For now, focus on the **HTTP wire protocol**: how plain-text request lines, headers, status codes, and JSON bodies travel over the network.
+> The Go example below uses `http.NewServeMux()` and a background server goroutine to demonstrate a live, functional HTTP exchange. Full Go web server architecture and middleware design will be taught in depth in Module 08. For now, focus on the **HTTP wire protocol**: how plain-text request lines, headers, status codes, and JSON bodies travel over the network.
 
 ## Mental model
 
@@ -106,11 +106,11 @@ Status codes are three-digit integers grouped into five functional classes:
 
 ## How Go uses it
 
-Go's standard library `net/http` package is considered one of the finest in computer science:
+Go's standard library `net/http` package provides a production-ready HTTP server and client:
 - `http.HandleFunc("/api/hello", handler)` registers URL route handlers.
 - `http.ListenAndServe(":8080", nil)` starts a production-grade multi-threaded HTTP server.
 - `http.Get("https://api.example.com")` issues an outgoing HTTP GET request.
-- Unlike in Node.js or Python, Go's standard `net/http` server is production-ready out of the box — powers high-scale production systems at Google, Cloudflare, and Docker without requiring external web application servers.
+- Unlike in Node.js or Python, Go's standard `net/http` server is production-ready out of the box — it powers high-scale production systems at companies such as Cloudflare and Docker without requiring an external web application server.
 
 ## Go example
 
@@ -277,4 +277,4 @@ Advance to Step 2 (Capstone Project):
 
 - [Project: Shell + Git Lab](../../projects/shell-git-lab/README.md)
 
-Then continue to [Install and verify Go](../../../02-go-setup-tooling/lessons/01-install-and-verify-go/README.md) in Module 02.
+After completing the project and the module assessment checkpoint, continue to [Install and verify Go](../../../02-go-setup-tooling/lessons/01-install-and-verify-go/README.md) in Module 02.

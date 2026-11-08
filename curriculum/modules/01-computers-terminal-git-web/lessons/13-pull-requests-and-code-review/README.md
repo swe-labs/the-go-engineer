@@ -43,7 +43,7 @@ A pull request is a proposal to merge changes from one branch into another, with
 ### Pull Request Anatomy & Review Cognitive Load
 
 A high-quality pull request is engineered to minimize reviewer cognitive load:
-1. **Atomic Scope**: The PR solves one specific problem. Industry studies show that reviewer defect-finding efficiency drops by over 50% when review size exceeds 400 lines of code.
+1. **Atomic Scope**: The PR solves one specific problem. Industry experience consistently shows reviewer defect-finding efficiency drops sharply once a review exceeds roughly 400 lines of code.
 2. **Standard PR Structure**:
    - **Why (Context)**: What problem or ticket does this address?
    - **What (Solution)**: How does this implementation solve it?
@@ -180,7 +180,7 @@ Every professional software team uses code review. Google mandates at least one 
 ## Performance implications
 
 - Each review cycle adds 1-24 hours to delivery time — smaller, focused PRs reduce this latency.
-- Thorough code review catches 60-70% of defects before they reach production, saving 10x the cost of fixing them later.
+- Thorough code review catches a large share of defects before they reach production, where fixes cost far more than at review time.
 - Mechanical style issues should be automated (formatters, linters) so reviewers can focus on logic and design.
 
 ## Practice task

@@ -5,7 +5,9 @@ import (
 	"fmt"
 )
 
-// HashContent returns the SHA-1 hash of content as a hex string (like Git object IDs).
+// HashContent returns the SHA-1 hash of content as a hex string.
+// Note: real Git object IDs hash "<type> <length>\0" + content, not the raw
+// content alone — this simulation hashes the content directly for simplicity.
 func HashContent(content string) string {
 	h := sha1.Sum([]byte(content))
 	return fmt.Sprintf("%x", h)

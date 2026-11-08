@@ -21,6 +21,8 @@ Imagine process memory as two distinct workspaces:
 - **The Call Stack (The Stack of Trays):** A strictly organized, Last-In-First-Out (LIFO) scratchpad for function-local variables. When a function is called, a new frame is pushed onto the stack. When the function returns, its frame is immediately popped off. Allocation and cleanup are completely automatic and cost almost zero CPU cycles.
 - **The Dynamic Heap (The Shared Storage Warehouse):** A large, flexible pool of memory for variables that must survive beyond the function that created them, or whose size cannot be known at compile time. Data stays on the heap until explicitly freed or reclaimed by Go's Garbage Collector (GC).
 
+The analogy breaks at allocation control: in Go you never choose a shelf yourself. The compiler's escape analysis decides stack versus heap at build time (verify with `go build -gcflags="-m"`), and unlike a real warehouse, this one empties itself — the garbage collector reclaims storage automatically.
+
 ## Visual model
 
 ```mermaid

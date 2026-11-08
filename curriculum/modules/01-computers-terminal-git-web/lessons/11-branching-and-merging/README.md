@@ -128,7 +128,7 @@ func main() {
 
 	// 4. Commit on feature branch
 	c2 := &Commit{
-		Hash:    "9z8y7x6",
+		Hash:    "9c8b7a6",
 		Message: "Add login handler on feature",
 		Parent:  c0,
 		Changes: map[string]string{"README.md": "v1.0", "login.go": "func Login() {}"},
@@ -152,7 +152,7 @@ func main() {
 
 	if !hasConflict {
 		mergeCommit := &Commit{
-			Hash:    "m3r9e01",
+			Hash:    "e4f5a61",
 			Message: fmt.Sprintf("Merge branch '%s' into %s", featureBranch.Name, mainBranch.Name),
 			Parent:  mainBranch.Tip,
 		}

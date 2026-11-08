@@ -39,7 +39,7 @@ flowchart LR
 
 ## Core idea
 
-Without version control, teams lose history, overwrite each other's changes, and cannot safely experiment. Git's distributed model, content-addressable storage, and branching model make it the most powerful and resilient version control system ever built.
+Without version control, teams lose history, overwrite each other's changes, and cannot safely experiment. Git's distributed model, content-addressable storage, and branching model make it resilient to data loss and well suited to workflows from solo projects to thousands of contributors.
 
 ## Under the hood
 
@@ -101,7 +101,9 @@ import (
 	"fmt"
 )
 
-// HashContent returns the SHA-1 hash of content as a hex string (like Git object IDs).
+// HashContent returns the SHA-1 hash of content as a hex string.
+// Note: real Git object IDs hash "<type> <length>\0" + content, not the raw
+// content alone — this simulation hashes the content directly for simplicity.
 func HashContent(content string) string {
 	h := sha1.Sum([]byte(content))
 	return fmt.Sprintf("%x", h)
@@ -178,12 +180,12 @@ func main() {
 
 ## Production notes
 
-Git is the de facto standard for version control in the software industry. Every open-source project, every enterprise codebase, every CI/CD pipeline, and every deployment system integrates with Git. GitHub, GitLab, and Bitbucket host millions of repositories.
+Git is the de facto standard for version control in the software industry. Nearly all open-source projects and enterprise codebases integrate with Git, and CI/CD pipelines are built around its commit and branch model. GitHub, GitLab, and Bitbucket host millions of repositories.
 
 ## Performance implications
 
 - Git operations are fast because they are local — no network needed for commit, diff, log, or branch operations.
-- Git's object store uses zlib compression, reducing disk usage by 30-70% compared to storing raw files.
+- Git's object store uses zlib compression to shrink stored objects, and packfiles further delta-compress similar objects for efficient storage and transfer.
 - Large binary files bloat Git history — Git is optimized for text files that diff well.
 
 ## Practice task

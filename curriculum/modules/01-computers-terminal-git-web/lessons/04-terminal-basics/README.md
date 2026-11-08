@@ -64,7 +64,7 @@ Whether developing on Linux, macOS, or Windows, you will frequently transition b
 | **Change Directory** | `cd <dir>` | `cd <dir>` or `Set-Location` | Navigate into target directory |
 | **Parent Directory** | `cd ..` | `cd ..` | Move one directory up the tree |
 | **Home Directory** | `cd ~` or `cd` | `cd ~` | Jump directly to user's home folder |
-| **Previous Directory** | `cd -` | `cd -` | Jump back to the last visited folder |
+| **Previous Directory** | `cd -` | `Push-Location` / `Pop-Location` | Jump back to the last visited folder (`Pop-Location` returns to the location saved by the most recent `Push-Location`) |
 | **List Contents** | `ls` | `ls` or `Get-ChildItem` | List visible files in directory |
 | **List Details & Hidden**| `ls -la` | `Get-ChildItem -Force` | Show permissions, size, dates, and hidden files (`.git`) |
 | **Make Directory** | `mkdir -p a/b/c` | `mkdir a/b/c` or `New-Item -ItemType Directory` | Create directory tree including parents |

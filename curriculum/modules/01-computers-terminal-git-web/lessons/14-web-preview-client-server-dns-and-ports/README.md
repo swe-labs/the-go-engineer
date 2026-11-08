@@ -23,6 +23,8 @@ The web operates on a client-server architecture layered like a postal delivery 
 3. **TCP/IP (The Delivery Highway):** Breaks data into packets, routes them across internet routers (IP), and guarantees reliable, ordered, error-checked delivery (TCP).
 4. **Ports (The Apartment Numbers):** A single server host with one IP address can run many different services (web server, database, SSH). A 16-bit port number (0–65535) tells the OS kernel which specific process should receive the incoming network packets.
 
+The analogy breaks at delivery guarantees: ordinary mail is best-effort, while TCP retransmits lost packets and reassembles them in order. DNS also differs from a phonebook — answers are cached worldwide until their TTL expires, so a renamed domain does not update everywhere at once.
+
 ## Visual model
 
 ```mermaid
