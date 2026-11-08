@@ -79,6 +79,7 @@ func main() {
 	ran := false
 	for _, v := range validators() {
 		if v.Name == cmd {
+			currentValidator = v.Name
 			v.Run()
 			ran = true
 			break
@@ -90,8 +91,13 @@ func main() {
 			os.Exit(1)
 		}
 		for _, v := range validators() {
+			currentValidator = v.Name
 			v.Run()
 		}
+	}
+
+	if reportPath != "" {
+		writeValidationReport()
 	}
 
 	if errorCount > 0 {
@@ -181,6 +187,70 @@ var (
 	reportPath   string
 )
 
+// currentValidator is the command whose run is producing diagnostics. It labels
+// every JSON report entry so one report can cover a single gate or validate-all.
+var currentValidator string
+
+// validationRecord is one diagnostic captured for the JSON report. Structured
+// fields are populated when the originating validator has that context.
+type validationRecord struct {
+	Validator string `json:"validator"`
+	Severity  string `json:"severity"`
+	ItemID    string `json:"item_id,omitempty"`
+	Family    string `json:"family,omitempty"`
+	Kind      string `json:"kind,omitempty"`
+	Detail    string `json:"detail"`
+}
+
+var validationRecords = []validationRecord{}
+
+func recordValidation(sev, itemID, family, kind, detail string) {
+	validationRecords = append(validationRecords, validationRecord{
+		Validator: currentValidator,
+		Severity:  sev,
+		ItemID:    itemID,
+		Family:    family,
+		Kind:      kind,
+		Detail:    detail,
+	})
+}
+
+// writeValidationReport writes every captured diagnostic, regardless of which
+// validator produced it, so --report has the same meaning for every command.
+func writeValidationReport() {
+	mode := "default"
+	if strictMode {
+		mode = "strict"
+	} else if advisoryMode {
+		mode = "advisory"
+	}
+	payload := struct {
+		GeneratedBy string             `json:"generated_by"`
+		Mode        string             `json:"mode"`
+		Total       int                `json:"total"`
+		Violations  []validationRecord `json:"violations"`
+	}{
+		GeneratedBy: "curriculum validators",
+		Mode:        mode,
+		Total:       len(validationRecords),
+		Violations:  validationRecords,
+	}
+	data, err := json.MarshalIndent(payload, "", "  ")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "ERROR: cannot marshal report: %v\n", err)
+		return
+	}
+	out := reportPath
+	if !filepath.IsAbs(out) {
+		out = filepath.Join(filepath.Dir(curriculumDir), reportPath)
+	}
+	if err := os.WriteFile(out, append(data, '\n'), 0o644); err != nil {
+		fmt.Fprintf(os.Stderr, "ERROR: cannot write report %s: %v\n", out, err)
+		return
+	}
+	fmt.Printf("\nWrote validation report to %s\n", out)
+}
+
 func fatalf(format string, args ...any) {
 	fmt.Fprintf(os.Stderr, "ERROR: "+format+"\n", args...)
 	os.Exit(1)
@@ -189,13 +259,17 @@ func fatalf(format string, args ...any) {
 // errorf reports a structural defect that always fails the build.
 func errorf(format string, args ...any) {
 	errorCount++
-	fmt.Fprintf(os.Stderr, "ERROR: "+format+"\n", args...)
+	detail := fmt.Sprintf(format, args...)
+	recordValidation("error", "", "", "", detail)
+	fmt.Fprintf(os.Stderr, "ERROR: %s\n", detail)
 }
 
 // warnf reports an advisory issue. It fails the build only under --strict.
 func warnf(format string, args ...any) {
 	warningCount++
-	fmt.Fprintf(os.Stderr, "WARN: "+format+"\n", args...)
+	detail := fmt.Sprintf(format, args...)
+	recordValidation("warning", "", "", "", detail)
+	fmt.Fprintf(os.Stderr, "WARN: %s\n", detail)
 }
 
 func infof(format string, args ...any) {
@@ -349,15 +423,17 @@ type Item struct {
 	Tags                   []string         `json:"tags"`
 }
 
-type CoreBundle struct {
+// PathBundle is the shape shared by path.core.json and path.electives.json.
+type PathBundle struct {
 	Modules []Module `json:"modules"`
 	Items   []Item   `json:"items"`
 }
 
-type ElectiveBundle struct {
-	Modules []Module `json:"modules"`
-	Items   []Item   `json:"items"`
-}
+// CoreBundle and ElectiveBundle are aliases: both manifests share one schema, so
+// there is no reason to maintain two byte-identical structs.
+type CoreBundle = PathBundle
+
+type ElectiveBundle = PathBundle
 
 type Project struct {
 	ID    string `json:"id"`

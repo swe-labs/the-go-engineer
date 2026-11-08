@@ -52,8 +52,9 @@ type SeverityPolicy struct {
 
 // Registry is the in-memory form of curriculum/readme.contracts.json.
 type Registry struct {
-	Contracts      []Contract     `json:"contracts"`
-	SeverityPolicy SeverityPolicy `json:"severity_policy"`
+	Contracts       []Contract     `json:"contracts"`
+	SeverityPolicy  SeverityPolicy `json:"severity_policy"`
+	ValidationRules []string       `json:"validation_rules"`
 }
 
 var registryCache *Registry

@@ -5,13 +5,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"regexp"
 	"strings"
 	"unicode/utf8"
-)
-
-var (
-	inlineBacktickRegex = regexp.MustCompile("`[^`]*`")
 )
 
 // isEmojiCharacter tests if a rune falls into Unicode emoji or decorative symbol ranges.
@@ -78,7 +73,7 @@ func validateNoEmojis() {
 			}
 
 			// Strip inline backticks so code examples of UTF-8 runes are allowed
-			lineNoInline := inlineBacktickRegex.ReplaceAllString(line, "")
+			lineNoInline := inlineCodeRegex.ReplaceAllString(line, "")
 
 			for i := 0; i < len(lineNoInline); {
 				r, size := utf8.DecodeRuneInString(lineNoInline[i:])

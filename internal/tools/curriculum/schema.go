@@ -15,6 +15,57 @@ func validateSchema() {
 
 	// 1. Parse all canonical active JSON manifests and verify metadata consistency
 	exp := loadExpected()
+	reg := loadRegistry()
+
+	// The contract registry's own rules are part of the invariants: they must be
+	// modeled (not data-only), aliases must resolve unambiguously, and every
+	// severity override must use a known tier.
+	contractIDs := make(map[string]bool)
+	for _, c := range reg.Contracts {
+		if contractIDs[c.ID] {
+			errorf("readme.contracts.json: duplicate contract id '%s'", c.ID)
+			ok = false
+		}
+		contractIDs[c.ID] = true
+	}
+	aliasOwners := make(map[string]string)
+	for _, c := range reg.Contracts {
+		for _, a := range c.Selector.Aliases {
+			if prev, dup := aliasOwners[a]; dup {
+				errorf("readme.contracts.json: alias '%s' declared by both '%s' and '%s'", a, prev, c.ID)
+				ok = false
+			}
+			aliasOwners[a] = c.ID
+			if contractIDs[a] {
+				errorf("readme.contracts.json: alias '%s' collides with a contract id", a)
+				ok = false
+			}
+		}
+	}
+	if len(reg.ValidationRules) == 0 {
+		errorf("readme.contracts.json: validation_rules must not be empty")
+		ok = false
+	}
+	hasMarkerRule := false
+	for _, rule := range reg.ValidationRules {
+		if strings.Contains(rule, "curriculum:generated:start") {
+			hasMarkerRule = true
+			break
+		}
+	}
+	if !hasMarkerRule {
+		errorf("readme.contracts.json: validation_rules must document the generated-catalog marker rule")
+		ok = false
+	}
+	for status, tier := range reg.SeverityPolicy.ByStatus {
+		switch tier {
+		case "error", "warning", "skip":
+		default:
+			errorf("readme.contracts.json: severity_policy.by_status[%s] has unknown tier '%s'", status, tier)
+			ok = false
+		}
+	}
+
 	files := []string{
 		"expected.json",
 		"workspace.json",
@@ -181,6 +232,29 @@ func validateSchema() {
 	}
 	if total := len(core.Modules) + len(electives.Modules); total != exp.Inventory.TotalModules {
 		errorf("expected %d total modules (core+electives), got %d", exp.Inventory.TotalModules, total)
+		ok = false
+	}
+
+	// The path manifests and the standalone registries are parallel views. Their
+	// relationship is intentionally not one-to-one (a module assessment record
+	// covers many lesson items, and some project records have no path item), but
+	// the shape is pinned so it cannot drift silently.
+	allPathItems := append(append([]Item{}, core.Items...), electives.Items...)
+	pathProjectItems, pathAssessmentItems := 0, 0
+	for _, item := range allPathItems {
+		switch item.Type {
+		case "project":
+			pathProjectItems++
+		case "assessment":
+			pathAssessmentItems++
+		}
+	}
+	if pathProjectItems != exp.Inventory.PathProjectItems {
+		errorf("path manifests: expected %d project items, got %d", exp.Inventory.PathProjectItems, pathProjectItems)
+		ok = false
+	}
+	if pathAssessmentItems != exp.Inventory.PathAssessmentItems {
+		errorf("path manifests: expected %d assessment items, got %d", exp.Inventory.PathAssessmentItems, pathAssessmentItems)
 		ok = false
 	}
 	if len(projects.Projects) != exp.Inventory.Projects {
@@ -364,12 +438,6 @@ func validateSchema() {
 	for _, a := range assessments.Assessments {
 		assessIDs[a.ID] = true
 	}
-	if len(assessIDs) == 0 {
-		// Try parsing raw
-		var rawAssessments map[string]interface{}
-		readJSON("assessments.json", &rawAssessments)
-		fmt.Printf("  assessments keys: %v\n", keysOfMap(rawAssessments))
-	}
 
 	for _, item := range allItems {
 		if item.Proof != nil && item.Proof.AssessmentID != "" {
@@ -385,15 +453,6 @@ func validateSchema() {
 	} else {
 		fmt.Println("  Schema checks completed with warnings/errors.")
 	}
-}
-
-func indexOf(slice []string, s string) int {
-	for i, v := range slice {
-		if v == s {
-			return i
-		}
-	}
-	return -1
 }
 
 type itemKeyEntry struct {
@@ -502,12 +561,4 @@ func skipValue(dec *json.Decoder) {
 			dec.Token() // closing ]
 		}
 	}
-}
-
-func keysOfMap(m map[string]interface{}) []string {
-	var keys []string
-	for k := range m {
-		keys = append(keys, k)
-	}
-	return keys
 }

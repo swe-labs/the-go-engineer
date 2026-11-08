@@ -17,7 +17,10 @@
     "projects": 29,
     "concepts": 69,
     "starter_parity_projects": 27,
-    "opslane_milestones": 14
+    "opslane_milestones": 14,
+    "path_project_items": 28,
+    "path_assessment_items": 57,
+    "shared_readme_bindings": 15
   },
   "locked_modules": [
     "module-00",

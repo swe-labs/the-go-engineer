@@ -17,6 +17,9 @@ type ExpectedInventory struct {
 	Concepts              int `json:"concepts"`
 	StarterParityProjects int `json:"starter_parity_projects"`
 	OpslaneMilestones     int `json:"opslane_milestones"`
+	PathProjectItems      int `json:"path_project_items"`
+	PathAssessmentItems   int `json:"path_assessment_items"`
+	SharedReadmeBindings  int `json:"shared_readme_bindings"`
 }
 
 type ExpectedBundle struct {

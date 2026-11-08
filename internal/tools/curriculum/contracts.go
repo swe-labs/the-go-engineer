@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"io/fs"
 	"os"
@@ -467,15 +466,6 @@ func fileField(item Item, key string) (field, path string) {
 	return key + "_path", ""
 }
 
-func sortedKeys(m map[string]string) []string {
-	keys := make([]string, 0, len(m))
-	for k := range m {
-		keys = append(keys, k)
-	}
-	sort.Strings(keys)
-	return keys
-}
-
 const maxContractPrint = 40
 
 // reportContractViolations prints violations (errors first), counts them, prints
@@ -497,6 +487,7 @@ func reportContractViolations(violations []contractViolation) {
 		case sevError:
 			errTotal++
 			errorCount++
+			recordValidation("error", v.ItemID, v.Family, v.Kind, v.Detail)
 			if printedErr < maxContractPrint {
 				fmt.Fprintf(os.Stderr, "ERROR: [%s/%s] %s: %s\n", v.Family, v.Kind, v.ItemID, v.Detail)
 				printedErr++
@@ -504,6 +495,7 @@ func reportContractViolations(violations []contractViolation) {
 		case sevWarning:
 			warnTotal++
 			warningCount++
+			recordValidation("warning", v.ItemID, v.Family, v.Kind, v.Detail)
 			if printedWarn < maxContractPrint {
 				fmt.Fprintf(os.Stderr, "WARN: [%s/%s] %s: %s\n", v.Family, v.Kind, v.ItemID, v.Detail)
 				printedWarn++
@@ -513,7 +505,7 @@ func reportContractViolations(violations []contractViolation) {
 
 	if len(violations) > 0 {
 		fmt.Printf("  contract violations by kind:")
-		for _, k := range sortedIntKeys(byKind) {
+		for _, k := range sortedKeys(byKind) {
 			fmt.Printf(" %s=%d", k, byKind[k])
 		}
 		fmt.Printf(" (errors=%d warnings=%d)\n", errTotal, warnTotal)
@@ -521,62 +513,14 @@ func reportContractViolations(violations []contractViolation) {
 			fmt.Printf("  (output truncated at %d per severity; use --report for the full list)\n", maxContractPrint)
 		}
 	}
-
-	if reportPath != "" {
-		writeContractReport(violations)
-	}
 }
 
-func sortedIntKeys(m map[string]int) []string {
+// sortedKeys returns the sorted keys of any string-keyed map.
+func sortedKeys[V any](m map[string]V) []string {
 	keys := make([]string, 0, len(m))
 	for k := range m {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
 	return keys
-}
-
-type contractReportEntry struct {
-	ItemID   string `json:"item_id"`
-	Family   string `json:"family"`
-	Kind     string `json:"kind"`
-	Severity string `json:"severity"`
-	Detail   string `json:"detail"`
-}
-
-func writeContractReport(violations []contractViolation) {
-	entries := make([]contractReportEntry, 0, len(violations))
-	for _, v := range violations {
-		sev := "warning"
-		if v.Sev == sevError {
-			sev = "error"
-		}
-		entries = append(entries, contractReportEntry{v.ItemID, v.Family, v.Kind, sev, v.Detail})
-	}
-	mode := "default"
-	if strictMode {
-		mode = "strict"
-	} else if advisoryMode {
-		mode = "advisory"
-	}
-	payload := map[string]any{
-		"generated_by": "validate-readme-contracts",
-		"mode":         mode,
-		"total":        len(entries),
-		"violations":   entries,
-	}
-	data, err := json.MarshalIndent(payload, "", "  ")
-	if err != nil {
-		errorf("cannot marshal report: %v", err)
-		return
-	}
-	out := reportPath
-	if !filepath.IsAbs(out) {
-		out = filepath.Join(filepath.Dir(curriculumDir), reportPath)
-	}
-	if err := os.WriteFile(out, append(data, '\n'), 0o644); err != nil {
-		errorf("cannot write report %s: %v", out, err)
-		return
-	}
-	fmt.Printf("  wrote violation report to %s\n", out)
 }
