@@ -139,9 +139,9 @@ go test -v ./internal/tools/curriculum/...
 go run ./scripts/validate_curriculum.go
 ```
 
-### The 24 Authoritative Curriculum Quality Gates
+### The Authoritative Curriculum Quality Gates
 
-All 24 validation gates executed by `go run ./scripts/validate_curriculum.go` must pass:
+All validation gates executed by `go run ./scripts/validate_curriculum.go` must pass. The authoritative command list lives in the `validators()` registry in `internal/tools/curriculum/main.go`; this table is a reference:
 
 | Gate | Description |
 |:---|:---|
@@ -149,17 +149,17 @@ All 24 validation gates executed by `go run ./scripts/validate_curriculum.go` mu
 | `validate-graph` | Detects cycles and verifies DAG reachability. |
 | `validate-lessons` | Enforces zero machine-role comments and valid `NEXT UP` footers. |
 | `validate-prerequisite-closure` | Verifies prerequisite closures across modules. |
-| `validate-project-binding` | Ensures all 28 projects bind to valid anchors, deliverables, and rubrics. |
+| `validate-project-binding` | Ensures all 29 projects bind to valid anchors, deliverables, and rubrics. |
 | `validate-no-placeholder-zm` | Scans for boilerplate or placeholder phrases in `zero_magic` blocks. |
 | `validate-assessment-completeness` | Verifies all assessments have non-generic criteria and passing scores. |
 | `validate-unique-tags` | Enforces tag taxonomy consistency. |
 | `validate-crossrefs` | Validates bidirectional integrity across cross-reference edges. |
-| `validate-concept-ownership` | Ensures all 62 canonical concepts map to unambiguous owners. |
+| `validate-concept-ownership` | Ensures all 69 canonical concepts map to unambiguous owners. |
 | `validate-cognitive-load` | Verifies cognitive density ratings and pacing. |
 | `validate-operational-failures` | Verifies 100% mathematical symmetry across all 13 failure categories. |
 | `validate-failure-engineering` | Ensures production modules include concrete failure examples. |
-| `validate-zero-magic` | Validates adherence of all 92 golden lessons to zero-magic authoring spec. |
-| `validate-physical-artifacts` | Verifies existence of all 441 instructional READMEs on disk. |
+| `validate-zero-magic` | Validates adherence of all 356 golden lessons to zero-magic authoring spec. |
+| `validate-physical-artifacts` | Verifies existence of all 447 instructional READMEs on disk. |
 | `validate-assessment-artifacts` | Verifies 4-file assessment suites across all checkpoints and milestones. |
 | `validate-starter-parity` | Compiles and validates Go AST correctness across starters and solutions. |
 | `validate-markdown-links` | Crawls Markdown files and verifies all relative links exist on disk. |
@@ -168,7 +168,7 @@ All 24 validation gates executed by `go run ./scripts/validate_curriculum.go` mu
 | `validate-no-emojis` | Enforces strict zero-emoji invariant across all Markdown prose. |
 | `validate-anchor-quotes` | Enforces pioneer anchor quotes at the top of locked lessons. |
 | `validate-diagram-palette` | Enforces Dark Engineering Palette classes and colors on Mermaid flowcharts. |
-| `validate-readme-contracts` | Enforces 6 core headings and subtype profiles per `readme.contracts.json`. |
+| `validate-readme-contracts` | Resolves each item's document contract (family + subtype) from `readme.contracts.json`; verifies required headings, code policy, and file layout. Locked-module content-shape defects block; `--strict` gates the rest. |
 
 ## Documentation Alignment Check
 
@@ -196,7 +196,7 @@ Before release or workflow changes, verify these documents agree with `ARCHITECT
 - [ ] Module directories remain canonically organized under `curriculum/modules/`.
 - [ ] Item IDs belong to the declared module progression.
 - [ ] Metadata manifests in `curriculum/` match filesystem paths.
-- [ ] All 24 automated curriculum quality gates pass.
+- [ ] All automated curriculum quality gates pass.
 
 ## Lesson Checklist
 

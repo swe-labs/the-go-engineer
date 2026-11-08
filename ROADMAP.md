@@ -13,10 +13,10 @@ The repository features:
 - 18 core modules organized canonically in `curriculum/modules/`
 - 421 core path items in `curriculum/path.core.json`
 - Flagship Opslane Capstone in Module 18 with 15 progressive milestones
-- 20 Advanced Electives in `curriculum/electives/advanced-electives/`
+- 26 Advanced Electives in `curriculum/electives/advanced-electives/`
 - Companion Full-Stack Frontend Track in `curriculum/companion-frontend/`
 - Complete reference solutions (`_solution/`) and student starter templates (`_starter/`)
-- 24 automated curriculum quality gates in `internal/tools/curriculum`
+- Automated curriculum quality gates in `internal/tools/curriculum`
 
 ## Branch Model
 
@@ -53,5 +53,5 @@ A release is ready only when:
 - `go mod tidy` produces no diff in `go.mod` or `go.sum`
 - `go test ./...` passes 100%
 - `go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...` reports 0 races
-- `go run ./internal/tools/curriculum validate-all` passes all 24 quality gates
+- `go run ./internal/tools/curriculum validate-all` passes all quality gates
 - GitHub Actions CI is green

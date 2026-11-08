@@ -118,4 +118,4 @@ Every module and fork provides automated verification:
 - **Lessons:** Runnable code with verified machine execution traces (`go run main.go`).
 - **Projects:** Reference solutions (`_solution/`), starter templates (`_starter/`), and test suites (`go test ./...`).
 - **Milestones:** Comprehensive assessments, rubrics, and answer keys.
-- **Repository Quality Gates:** 24 automated gates checked via `go run ./scripts/validate_curriculum.go`.
+- **Repository Quality Gates:** The automated gate suite is checked via `go run ./scripts/validate_curriculum.go`.

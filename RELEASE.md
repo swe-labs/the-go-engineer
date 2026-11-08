@@ -41,7 +41,7 @@ go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...
-go run ./internal/tools/curriculum validate-all
+go run ./internal/tools/curriculum validate-all --strict
 ```
 
 For benchmark-related releases:

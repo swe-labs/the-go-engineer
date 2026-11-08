@@ -12,8 +12,8 @@ Format: `Version - Date`.
 - **Complete Reference Solutions and Starter Scaffolds:** Added reference implementations (`_solution/`), student starter templates (`_starter/`), and automated test suites (`main_test.go`) across all core portfolio projects (Modules 02–16).
 - **Flagship Capstone Project (Opslane):** Integrated 15-milestone SaaS backend capstone (Module 18) demonstrating multi-tenant data models, PostgreSQL migrations, JWT authentication, RBAC authorization, event bus, worker pools, caching, observability, and graceful shutdown.
 - **Companion Frontend Track:** Added 4-stage companion full-stack track under `curriculum/companion-frontend` covering Semantic HTML/CSS, Vanilla DOM & Fetch, Templ & Tailwind CSS, and HTMX & Alpine.js.
-- **Zero-Magic Pedagogical Standards:** Added 92 golden lessons with verified machine-level mental models, stack/heap allocation explanations, and explicit failure-mode engineering.
-- **Automated Curriculum Quality Gates:** Added 17 automated quality gates in `internal/tools/curriculum` enforcing schema integrity, cycle-free graph closure, zero-magic standards, tag uniqueness, concept ownership, failure engineering coverage, README pedagogical contracts, and workspace synchronization.
+- **Zero-Magic Pedagogical Standards:** Added 356 golden lessons with verified machine-level mental models, stack/heap allocation explanations, and explicit failure-mode engineering.
+- **Automated Curriculum Quality Gates:** Added automated quality gates in `internal/tools/curriculum` enforcing schema integrity, cycle-free graph closure, zero-magic standards, tag uniqueness, concept ownership, failure engineering coverage, README pedagogical contracts, and workspace synchronization.
 - **Portfolio Auditor Tool:** Added automated CLI audit engine in Module 16 (`portfolio-review-pack`) to score project completeness and provide technical interview defense guides.
 
 ### Changed
@@ -21,7 +21,7 @@ Format: `Version - Date`.
 - Transitioned canonical curriculum metadata from legacy monolithic structure to modular JSON files (`path.core.json`, `path.electives.json`, `projects.json`, `assessments.json`, `crossrefs.json`, `concepts.json`, `failures.json`, `readme.contracts.json`, `workspace.json`, `schema.v3.json`).
 - Updated active schema format to `3.1.0` and promoted core curriculum version to `3.0.0` stable.
 - Rewrote root `README.md` and `curriculum/README.md` with transparent 52-week pacing schedules and workload estimates (435–600 learner hours).
-- Modernized Go dependencies and tooling across the repository for Go 1.24+ compatibility.
+- Modernized Go dependencies and tooling across the repository for Go 1.27+ compatibility.
 
 ### Fixed
 
@@ -31,7 +31,7 @@ Format: `Version - Date`.
 
 ### Validation
 
-- `go run ./internal/tools/curriculum validate-all` (17/17 quality gates passed)
+- `go run ./internal/tools/curriculum validate-all` (all quality gates passed)
 - `go test ./...` (all unit and integration tests passed)
 - `go vet ./...` (0 warnings/errors)
 - `gofmt -l .` (0 unformatted files)

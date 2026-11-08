@@ -52,7 +52,7 @@ Instructional content is organized canonically under `curriculum/modules/`:
 ## Companion & Elective Tracks
 
 - **Companion Frontend Track (`curriculum/companion-frontend/`):** 4 progressive stages exploring full-stack Go integration (Semantic HTML/CSS, Vanilla DOM & Fetch, Templ & Tailwind CSS, HTMX & Alpine.js).
-- **Advanced Electives (`curriculum/electives/advanced-electives/`):** 20 advanced electives (Generics, sync.Pool, sync.Map, gRPC streaming, distributed consensus, eBPF) outside the core path.
+- **Advanced Electives (`curriculum/electives/advanced-electives/`):** 26 advanced electives (Generics, sync.Pool, sync.Map, gRPC streaming, distributed consensus, eBPF) outside the core path.
 
 ## Quality Standards & Pedagogical Rules
 
@@ -64,7 +64,7 @@ The curriculum enforces a strict **Zero-Magic** engineering standard:
 - **Explanations Answer How, Why, and What Changes:** Good teaching surfaces explain what the code does, why it exists, what would change if the design changed, and what failure mode or trap the learner will encounter.
 - **Stage-Aware Engineering Depth:** Foundational modules establish concrete mental models (stack vs heap, pointer semantics, goroutine mechanics). Production modules focus on systems architecture, observability, fault tolerance, and multi-tenant security.
 - **Runnable & Tested:** All projects include reference solutions (`_solution/`), student starter templates (`_starter/`), and comprehensive test suites (`main_test.go`).
-- **Automated Quality Gates:** Enforced by `internal/tools/curriculum` across 24 automated gates.
+- **Automated Quality Gates:** Enforced by `internal/tools/curriculum` across the automated gate suite. The command list is defined once in the Go validator registry, so the usage text, `validate-all`, and the docs can never drift from the gates that run.
 
 ## Architectural Reference Documents
 

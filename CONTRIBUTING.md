@@ -19,7 +19,7 @@ If documents disagree on public curriculum structure, `ARCHITECTURE.md` wins.
 
 ## Architecture Rule
 
-The canonical v3 architecture consists of 18 core modules (`00`–`16` plus `18-flagship-opslane`) under `curriculum/modules/`, accompanied by the Companion Full-Stack Frontend Track and 20 Advanced Electives.
+The canonical v3 architecture consists of 18 core modules (`00`–`16` plus `18-flagship-opslane`) under `curriculum/modules/`, accompanied by the Companion Full-Stack Frontend Track and 26 Advanced Electives.
 
 Allowed work includes:
 
@@ -196,7 +196,7 @@ Before final review:
 - `NEXT UP:` footers match curriculum metadata in `curriculum/path.core.json`
 - Go code is formatted and idiomatic
 - tests prove behavior where behavior should be provable
-- all 24 automated curriculum quality gates pass (`go run ./scripts/validate_curriculum.go`)
+- all automated curriculum quality gates pass (`go run ./scripts/validate_curriculum.go`)
 - P0/P1/P2 findings are fixed or explicitly documented
 
 Final squash merge is maintainer-controlled.
