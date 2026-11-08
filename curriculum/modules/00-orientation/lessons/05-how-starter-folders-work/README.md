@@ -56,12 +56,20 @@ flowchart TD
     end
 ```
 
-## Key principles
+## Core idea
 
 1. **Struggle Builds Competence**: The cognitive friction you feel when debugging failing tests is where real learning happens. Peeking at solutions eliminates this friction and stunts growth.
 2. **Preserve the Test Invariants**: Do not alter test expectations in `_starter/` to make buggy code pass. The tests represent the customer specification.
 3. **Comparative Analysis**: Use `_solution/` not as an answer key to copy, but as an engineering peer review. Compare how the reference implementation structured its types, handled errors, and organized responsibilities.
 4. **Independent Reproduction**: If you do consult a reference implementation to unblock yourself, close it and rewrite your solution from scratch without looking.
+
+## Practice task
+
+1. Navigate to the project directory for Module 00: `curriculum/modules/00-orientation/projects/course-setup-verification/`.
+2. Inspect `README.md` and observe its sections: Learning objective, Prerequisites, Project overview, Tasks, Verification, and Rubric.
+3. Navigate to a dual-state capstone in an upcoming module (for example, `curriculum/modules/01-computers-terminal-git-web/projects/shell-git-lab/`):
+   - Notice the coexistence of `_starter/` (the scaffold containing starter files) and `_solution/` (the reference implementation).
+4. In your notes, write down a personal engineering commitment: under what exact conditions will you permit yourself to open a `_solution/` folder during your coursework?
 
 ## Common mistakes
 

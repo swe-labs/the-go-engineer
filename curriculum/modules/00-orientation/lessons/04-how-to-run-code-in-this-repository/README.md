@@ -59,12 +59,21 @@ flowchart TD
     end
 ```
 
-## Key principles
+## Core idea
 
 1. **Know Your Working Directory**: Command-line tools resolve relative paths from the current working directory of your shell. Running a command from the repository root behaves differently than running it from inside a module subdirectory.
 2. **Inspect the Output Streams**: Programs output diagnostic messages to `stdout` and error details to `stderr`. Never ignore terminal text; error messages usually explain the exact root cause.
 3. **Verify the Exit Code**: In automated workflows, a script is considered successful only when its exit code is zero. Always confirm that your verification commands terminate cleanly without errors.
 4. **Clean Environment Isolation**: Tools should execute predictably regardless of local machine configuration. Keeping dependencies explicit and environment variables clean ensures consistent results.
+
+## Practice task
+
+1. Open your terminal and confirm your active working directory using `pwd` (Linux/macOS) or `Get-Location` (Windows PowerShell).
+2. Execute a valid command (such as `git --version`) and verify that it terminates with an exit code of `0`. Print the exit code in your terminal using `echo $?` (Linux/macOS) or `echo $LASTEXITCODE` (PowerShell).
+3. Execute an intentional invalid command (such as `git checkout non-existent-branch-test-xyz`) to observe an error. Inspect the terminal output:
+   - What diagnostic text was written to the `stderr` stream?
+   - What integer exit code was returned?
+4. In two sentences, explain why automated CI/CD runners rely on process exit codes rather than parsing human-readable English strings to determine build success or failure.
 
 ## Common mistakes
 

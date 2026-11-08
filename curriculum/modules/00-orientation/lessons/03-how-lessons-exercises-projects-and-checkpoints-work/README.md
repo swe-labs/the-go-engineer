@@ -48,12 +48,22 @@ flowchart TD
     end
 ```
 
-## Key principles
+## Core idea
 
 1. **One Concept at a Time**: Lessons are bounded to prevent cognitive overload. Master the isolated concept before moving forward.
 2. **Experimentation Over Memorization**: Change inputs, break code intentionally, and observe compiler warnings. Understanding error paths is essential for debugging.
 3. **Autonomous Problem Solving**: Project capstones do not provide line-by-line instructions. You receive an architectural specification and must implement the solution independently.
 4. **Gated Progression**: Assessment checkpoints ensure you have solid mastery before you proceed to advanced modules that depend on those foundations.
+
+## Practice task
+
+1. Select an upcoming core technical topic in the curriculum (such as Module 03 on variables and memory layout, or Module 08 on HTTP requests).
+2. Trace the 4-phase learning loop for this topic in your notes:
+   - **Phase 1 (Absorb)**: What mental model will you absorb from the lesson text and diagrams?
+   - **Phase 2 (Practice)**: What hands-on guided drills will you execute to test edge cases?
+   - **Phase 3 (Synthesize)**: What standalone software system will you construct in the project?
+   - **Phase 4 (Verify)**: What objective rubric criteria in the checkpoint will validate your understanding?
+3. In one paragraph, explain which specific physical artifact produced during this cycle (such as an automated test transcript, a performance benchmark log, or an architectural design doc) will serve as verifiable proof in your engineering portfolio, and why passive reading alone fails to produce that proof.
 
 ## Common mistakes
 

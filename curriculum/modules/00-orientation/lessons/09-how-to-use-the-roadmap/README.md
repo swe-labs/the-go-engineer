@@ -64,12 +64,25 @@ flowchart TD
     F4 -.->|Full-Stack Convergence| M16
 ```
 
-## Key principles
+## Core idea
 
 1. **Prerequisite Integrity**: Every topic assumes mastery of its predecessors. Never skip modules in the core trunk.
 2. **SESE Navigation Discipline**: Do not use "escape hatches" to jump across modules. Finish the lessons, complete the project, and pass the assessment checkpoint to earn your progression.
 3. **Electives are Extensions, Not Shortcuts**: Electives offer specialized depth for specific career tracks. Finish the core foundations before branching into electives.
 4. **Pacing for Retention**: Moving thoroughly through one module every week or two with complete exercises yields far greater competence than skimming multiple modules quickly.
+
+## Practice task
+
+1. Open `curriculum/path.core.json` or the root learning path document and trace the 18 modules of the Core Backend Trunk from Module 00 to Module 18.
+2. Identify the first 3 fork points where elective gateways and the companion frontend track branch off:
+   - Module 05 completion: Unlocks Elective Gateway A (Generics)
+   - Module 07 completion: Unlocks Companion Frontend Stage 1 (Semantic HTML5 & Modern CSS)
+   - Module 08/09 completion: Unlocks Companion Frontend Stage 2 and Elective Gateway B (Protobuf & gRPC)
+3. Select your intended engineering persona:
+   - **Profile A (Pure Backend Specialist)**: Maintain focus on the Core Trunk (M00 through M18) without detours.
+   - **Profile B (Autonomous Full-Stack Engineer)**: Complete the Core Trunk and execute the 4 Companion Frontend Stages.
+   - **Profile C (Systems & Performance Architect)**: Complete the Core Trunk and execute all 4 Elective Gateways.
+4. Record your chosen profile and your estimated progression pace in your personal roadmap document.
 
 ## Common mistakes
 

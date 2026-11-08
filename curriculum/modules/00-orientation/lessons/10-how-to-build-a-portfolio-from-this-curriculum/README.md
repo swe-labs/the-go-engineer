@@ -18,7 +18,7 @@ A high-signal portfolio project is structured around five core engineering compo
 The Anatomy of a High-Impact Portfolio Project
 1. SPECIFICATION & ARCHITECTURE ──> Clear problem statement, constraints, and Mermaid system diagram
 2. ITERATIVE GIT HISTORY        ──> Granular, purposeful commits documenting why changes were made
-3. COMPLETE AUTOMATED TESTS ──> Unit, integration, and edge-case tests runnable via one command
+3. COMPLETE AUTOMATED TESTS     ──> Unit, integration, and edge-case tests runnable via one command
 4. OPERATIONAL RUNBOOK          ──> Clear instructions for building, configuring, and verifying the system
 5. ENGINEERING TRADEOFF ANALYSIS ──> Honest discussion of alternatives considered and known constraints
 ```
@@ -51,12 +51,24 @@ flowchart TD
     end
 ```
 
-## Key principles
+## Core idea
 
 1. **Depth Over Breadth**: Focus on mastering and documenting fewer, high-complexity systems rather than producing many shallow exercises.
 2. **Every Project Needs an Architecture Diagram**: Diagrams show that you understand the boundaries, data flows, and concurrency patterns in your system.
 3. **Commit Discipline from Day One**: Avoid single commits containing an entire project. Commit frequently in logical increments with descriptive commit messages explaining why each change was made.
 4. **Document Tradeoffs**: Engineering is the art of compromise. Explain in your project README why you chose a particular data structure, protocol, or design pattern, and what the drawbacks were.
+
+## Practice task
+
+1. In your personal workspace notes, draft a project portfolio template containing the 5 required sections:
+   - Problem Specification and Constraints
+   - Architecture Model and Data Flow Diagram
+   - Iterative Git Commit Protocol
+   - Automated Verification and Benchmark Suite
+   - Engineering Tradeoffs and Alternative Designs
+2. Select one future capstone project from the curriculum that aligns with your goals (such as the HTTP API in Module 08, the Concurrent Worker Pool in Module 11, or Flagship Opslane in Module 18).
+3. Draft a mock problem statement and write out two distinct architectural tradeoffs you anticipate facing in that project (for example: synchronous HTTP handling versus an asynchronous queue, or in-memory state versus transactional database persistence).
+4. Save this template in your personal workspace as your standard specification for packaging all completed curriculum projects.
 
 ## Common mistakes
 

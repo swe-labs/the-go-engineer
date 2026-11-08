@@ -56,12 +56,21 @@ flowchart TD
     end
 ```
 
-## Key principles
+## Core idea
 
 1. **Sequential Progression**: The core backend trunk (Modules 00 through 18) is designed to be completed in order. Each module builds directly upon the concepts mastered in the previous one.
 2. **Single-Entry, Single-Exit (SESE)**: Enter each module through its root `README.md` at `## Start here`. Complete all lessons and projects in sequence. You exit the module only when you pass the final assessment checkpoint.
 3. **Dedicated Working Space**: Keep your personal practice code, experiment files, and project implementations in a separate personal working directory or personal repository. Treat the curriculum as your textbook and specification.
 4. **Active Reflection**: At the end of every lesson, test your understanding against the review questions before clicking the link to the next topic.
+
+## Practice task
+
+1. Open your terminal or file explorer and locate three distinct lessons across different modules in the repository:
+   - Module 00: `curriculum/modules/00-orientation/lessons/02-what-zero-magic-means/README.md`
+   - Module 01: `curriculum/modules/01-computers-terminal-git-web/lessons/01-what-is-a-program/README.md`
+   - Module 04: `curriculum/modules/04-functions-errors-data-semantics/lessons/01-function-basics/README.md`
+2. Open each file and locate its structure: confirm that each lesson begins with an authoritative quote, a clear `## Learning objective`, a `## Mental model`, and a `## Visual model`.
+3. Choose an absolute directory path outside the curriculum repository on your local machine (such as `~/the-go-engineer-workspace`) where you will keep your project implementations and notes. Record this absolute path in your study log.
 
 ## Common mistakes
 

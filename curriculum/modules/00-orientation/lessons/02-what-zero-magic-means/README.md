@@ -8,7 +8,7 @@ By the end of this lesson, you will be able to define the "Zero-Magic" engineeri
 
 ## Why this matters
 
-Many introductory programming tutorials rely on "magic": copy-pasting code snippets, relying on invisible framework conventions, and accepting unexplained abstractions. When software breaks in production, engineers who rely on magic are stranded because they do not know what happens under the surface. A zero-magic engineer can trace any behavior down to the operating system, memory layout, and network protocols.
+Many introductory programming tutorials rely on "magic": copying code snippets, relying on invisible framework conventions, and accepting unexplained abstractions. When software breaks in production, engineers who rely on magic are stranded because they do not know what happens under the surface. A zero-magic engineer can trace any behavior down to the operating system, memory layout, and network protocols.
 
 ## Mental model
 
@@ -52,12 +52,22 @@ flowchart TD
     end
 ```
 
-## Key principles
+## Core idea
 
 1. **Explicit Over Implicit**: Nothing happens in software by accident. Config files, environment variables, and execution parameters should be transparently declared rather than assumed.
 2. **First-Principles Grounding**: Real computers consist of CPUs, memory registers, disk storage, and network interfaces. Every software concept maps to these physical components.
 3. **Traceable Failure Modes**: You truly understand a system only when you can explain how it fails, why it fails, and what specific error output it produces under pressure.
 4. **No Unexplained Steps**: If a lesson or tutorial asks you to run a command without explaining what that command executes, question it until you understand the underlying mechanism.
+
+## Practice task
+
+1. Identify a software tool, command, or framework convention you have encountered in the past that felt like "magic" (such as an automated cloud deploy button, an ORM database migration, or an IDE run shortcut).
+2. Write down a 4-layer technical breakdown decomposing what that tool actually executes beneath the surface:
+   - What specific files or paths on disk does it inspect, create, or alter?
+   - What underlying operating system process or binary does it spawn?
+   - What network packets, ports, or system calls does it initiate?
+   - What exact error symptom occurs if permissions are missing or network access drops?
+3. In two sentences, explain how decomposing an abstraction into explicit operating system actions changes how you troubleshoot unexpected failures.
 
 ## Common mistakes
 

@@ -51,12 +51,24 @@ flowchart TD
     end
 ```
 
-## Key principles
+## Core idea
 
 1. **Proof Over Perception**: Resumes make claims; public repositories, green test suites, and clean commit logs provide undeniable proof.
 2. **Every Choice Has Tradeoffs**: There are rarely "perfect" solutions in engineering. Every architectural decision involves tradeoffs between performance, complexity, memory, and readability. A job-ready engineer can articulate why they chose one approach over another.
 3. **Failure Engineering**: Production software spends most of its life handling unexpected network drops, corrupt inputs, and exhausted resources. You are job-ready when you design systems for failure from the beginning.
 4. **Ownership**: A professional engineer takes responsibility for the complete lifecycle of their code: understanding requirements, implementing functionality, verifying correctness, and documenting operational behavior.
+
+## Practice task
+
+1. Open your notes and review the 5 Pillars of Engineering Proof:
+   - Autonomous problem solving
+   - Mechanical comprehension
+   - Rigorous test engineering
+   - Operational maturity
+   - Technical communication
+2. Self-evaluate your current software engineering experience on a 1–5 scale across each of the 5 pillars.
+3. Identify your single lowest-scoring pillar.
+4. Write a 3-bullet concrete improvement plan describing how you will use upcoming curriculum modules (such as building projects from specifications in `_starter/` scaffolds and passing automated test suites) to generate undeniable proof for that specific dimension.
 
 ## Common mistakes
 

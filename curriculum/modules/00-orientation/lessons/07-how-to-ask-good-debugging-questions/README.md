@@ -47,12 +47,24 @@ flowchart TD
     end
 ```
 
-## Key principles
+## Core idea
 
 1. **Verbatim Text, Never Screenshots**: Always copy-paste the exact error text. Screenshots cannot be searched, copied, or grepped, and they often cut off essential line numbers or stack frames.
 2. **One Variable at a Time**: When trying to fix an issue, change one thing, re-test, and observe the result. Changing multiple parameters simultaneously obscures which change resolved or worsened the problem.
 3. **Trace Back to the Origin**: Read error messages starting from the first line of output, not just the last line. The first line usually reports the primary failure; subsequent lines are often cascading side effects.
 4. **Reproducibility**: If you cannot reproduce an error consistently, you cannot be sure you have fixed it. Always verify that you can trigger the failure predictably before implementing a solution.
+
+## Practice task
+
+1. Create a structured debugging case file template in a text file on your local computer containing the 5 Evidence Fields:
+   - Expected behavior
+   - Actual observed behavior
+   - Exact command and working directory
+   - Full verbatim error output
+   - Environment context (OS, toolchain versions, terminal shell)
+2. Execute an intentional invalid command in your terminal (such as attempting to change into a non-existent directory: `cd /non/existent/path/xyz`).
+3. Complete the 5 Evidence Fields in your case file using the real terminal output produced by this failure.
+4. Formulate a single falsifiable hypothesis explaining why the error occurred, and state the exact verification command that proves or disproves your hypothesis.
 
 ## Common mistakes
 

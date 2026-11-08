@@ -55,12 +55,19 @@ flowchart TD
     end
 ```
 
-## Key principles
+## Core idea
 
 1. **Diagnostic, Not Punitive**: Assessments are not designed to rank you; they exist to detect misunderstandings before you tackle advanced topics that depend on those concepts.
 2. **Strict Objective Grading**: Grade yourself with the rigor of an external engineering reviewer. If your explanation is vague or misses the mechanical reality, mark it down and review.
 3. **The Exit Gate Role**: Checkpoints serve as the single exit gate for each module. You do not advance to the next module until the assessment checkpoint is verified.
 4. **Articulate the Shift**: The retake policy requires that you write down what was missing in your original answer and what you now understand. Articulation cements retention.
+
+## Practice task
+
+1. Open the assessment directory for Module 00: `curriculum/modules/00-orientation/assessments/checkpoint/`.
+2. Inspect the 4 files in the suite: `README.md`, `questions.md`, `rubric.md`, and `answer-key.md`.
+3. Open `rubric.md` and review the 4 evaluation dimensions: Repository navigation, Zero-magic contract, Workflow and tooling, and Roadmap and portfolio planning.
+4. Identify the single dimension where you currently feel least prepared. Review the corresponding orientation lesson, and write a two-sentence reflection explaining what evidence you will provide in your checkpoint submission to satisfy that rubric criterion.
 
 ## Common mistakes
 
