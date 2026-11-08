@@ -89,7 +89,7 @@
       "prerequisites": [],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can navigate curriculum tracks (Core Backend Path, Companion Frontend Track, Advanced Electives).",
           "Can explain the standard anatomy of a module (overview, lessons, projects, assessments).",
@@ -122,7 +122,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],
@@ -269,7 +268,7 @@
       ],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can explain the zero-magic contract: no unexplained dependencies, no hidden frameworks, and no magical boilerplate.",
           "Can identify hidden assumptions in technical explanations and formulate explicit foundational bridges.",
@@ -304,7 +303,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],
@@ -451,7 +449,7 @@
       ],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can trace the four-phase curriculum loop: lesson theory -> guided lab -> integrated project -> rigorous assessment.",
           "Can explain when and how to consult _solution/ folders without compromising cognitive struggle.",
@@ -486,7 +484,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],
@@ -633,7 +630,7 @@
       ],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can execute, format, build, and test Go packages using go run, gofmt, go build, and go test.",
           "Can interpret compiler errors, test failures, and exit codes without IDE reliance.",
@@ -668,7 +665,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],
@@ -815,7 +811,7 @@
       ],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can navigate starter scaffolds, locate marked TODO gaps, and write passing implementations.",
           "Can run targeted unit tests to verify specific implementation behavior.",
@@ -850,7 +846,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],
@@ -1004,7 +999,7 @@
       ],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can explain the structure of checkpoint rubrics across correctness, code quality, testing, and oral defense.",
           "Can distinguish between superficial multiple-choice familiarity and demonstrable mastery.",
@@ -1039,7 +1034,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],
@@ -1193,7 +1187,7 @@
       ],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can formulate a 7-point debugging question containing environment, expected vs actual behavior, and minimal reproduction.",
           "Can apply systematic hypothesis-testing to isolate failure modes instead of random code alterations.",
@@ -1228,7 +1222,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],
@@ -1382,7 +1375,7 @@
       ],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can audit technical capability against the 6 observable graduation outcomes.",
           "Can identify the difference between passive tutorial completion and autonomous software delivery.",
@@ -1417,7 +1410,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],
@@ -1571,7 +1563,7 @@
       ],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can navigate the curriculum dependency graph and explain topological prerequisite ordering.",
           "Can identify milestone modules and their corresponding portfolio capstones.",
@@ -1606,7 +1598,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],
@@ -1775,7 +1766,7 @@
       ],
       "proof": {
         "assessment_id": "assessment-module-00",
-        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
         "mastery_checks": [
           "Can package a completed backend project with architecture diagrams, reproducible benchmarks, and operational runbooks.",
           "Can document system tradeoffs, failure modes, and performance profiles in a professional repository README.",
@@ -1810,7 +1801,6 @@
         "expected_output": "Learner can demonstrate the concept and explain it.",
         "manual_steps": [
           "Read the README.",
-          "Run or inspect the example.",
           "Complete the practice task.",
           "Answer the review questions."
         ],

@@ -150,6 +150,7 @@ func validators() []validator {
 		{"validate-assessment-artifacts", "Check all assessments have complete 4-file suites (README, questions, rubric, answer-key)", validateAssessmentArtifacts},
 		{"validate-starter-parity", "Check project starters and solutions parse with valid Go ASTs", validateStarterParity},
 		{"validate-markdown-links", "Check all relative markdown links resolve to real files on disk", validateMarkdownLinks},
+		{"validate-inline-paths", "Check inline-code repository path citations resolve to real files on disk", validateInlinePaths},
 		{"validate-sese-navigation", "Check Single-Entry Single-Exit navigation and exit gate integrity", validateSESENavigation},
 		{"validate-project-scripts", "Check cross-platform bash/powershell project verification script parity", validateProjectScripts},
 		{"validate-no-emojis", "Check strict No-Emojis Invariant across curriculum prose", validateNoEmojis},

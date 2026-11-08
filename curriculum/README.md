@@ -900,6 +900,7 @@ Total cross-references: **2086**
 - `validate-assessment-artifacts`: 48 assessments + 14 Opslane milestones verified with complete physical suites
 - `validate-starter-parity`: 27 project starters (RED) and solutions (GREEN) verified with valid Go ASTs
 - `validate-markdown-links`: All relative Markdown links verified with zero broken targets
+- `validate-inline-paths`: All inline-code repository path citations resolve to real files on disk
 - `validate-sese-navigation`: Single-entry, single-exit navigation flow verified
 - `validate-project-scripts`: Script-backed project harness parity verified
 - `validate-no-emojis`: Zero emoji violations across Markdown prose

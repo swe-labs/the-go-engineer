@@ -3,7 +3,7 @@
   "document_type": "workspace_manifest",
   "curriculum_version": "3.0.0",
   "last_updated": "2026-10-23",
-  "name": "The Go Engineer v3 — Curriculum Workspace",
+  "name": "The Go Engineer v3 \u2014 Curriculum Workspace",
   "status": "stable",
   "source_of_truth": [
     "curriculum/path.core.json",
@@ -55,12 +55,14 @@
     "validate-assessment-artifacts",
     "validate-starter-parity",
     "validate-markdown-links",
+    "validate-inline-paths",
     "validate-sese-navigation",
     "validate-project-scripts",
     "validate-no-emojis",
     "validate-anchor-quotes",
     "validate-diagram-palette",
-    "validate-readme-contracts"
+    "validate-readme-contracts",
+    "validate-anti-slop"
   ],
   "validation_commands": {
     "validate_all": "go run ./internal/tools/curriculum validate-all",

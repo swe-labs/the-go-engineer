@@ -751,6 +751,10 @@ var failureMutations = map[string]func(*testing.T, string){
 	"validate-markdown-links": func(t *testing.T, dir string) {
 		appendFixture(t, dir, "README.md", "\n[Broken](missing.md)\n")
 	},
+	"validate-inline-paths": func(t *testing.T, dir string) {
+		appendFixture(t, dir, "modules/00-alpha/lessons/01-alpha/README.md",
+			"\nSee `curriculum/modules/00-alpha/lessons/01-alpha/missing-artifact.md` for details.\n")
+	},
 	"validate-sese-navigation": func(t *testing.T, dir string) {
 		replaceFixture(t, dir, "modules/00-alpha/README.md", "## Start here", "## Wrap up")
 	},

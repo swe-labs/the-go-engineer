@@ -620,6 +620,7 @@ func generateCatalog() (string, error) {
 		fmt.Sprintf("- `validate-assessment-artifacts`: %d assessments + %d Opslane milestones verified with complete physical suites", regAssessments, inv.OpslaneMilestones),
 		fmt.Sprintf("- `validate-starter-parity`: %d project starters (RED) and solutions (GREEN) verified with valid Go ASTs", inv.StarterParityProjects),
 		"- `validate-markdown-links`: All relative Markdown links verified with zero broken targets",
+		"- `validate-inline-paths`: All inline-code repository path citations resolve to real files on disk",
 		"- `validate-sese-navigation`: Single-entry, single-exit navigation flow verified",
 		"- `validate-project-scripts`: Script-backed project harness parity verified",
 		"- `validate-no-emojis`: Zero emoji violations across Markdown prose",

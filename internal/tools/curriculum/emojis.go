@@ -15,12 +15,12 @@ func isEmojiCharacter(r rune) bool {
 	if r >= 0x1F300 && r <= 0x1FAFF {
 		return true
 	}
-	// Miscellaneous symbols (dingbats, arrows, pictographs)
+	// Miscellaneous symbols and dingbats (0x2600-0x27BF): flag every rune. Arrows
+	// (U+2190-0x21FF, e.g. the -> used throughout prose) live outside this range and
+	// stay allowed. The previous implementation only flagged six hardcoded dingbats,
+	// which let U+270F (pencil) through a module README.
 	if r >= 0x2600 && r <= 0x27BF {
-		// Allow standard bullet / checkmarks if needed, but flag decorative symbols
-		if r == 0x27A1 || r == 0x2705 || r == 0x274C || r == 0x2728 || r == 0x2714 || r == 0x2716 {
-			return true
-		}
+		return true
 	}
 	return false
 }
