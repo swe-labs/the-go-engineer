@@ -705,7 +705,7 @@
     "File requirements are derived from content_contract flags: main when runnable_required, test when tests_required, starter/solution when portfolio_artifact_required.",
     "A lesson whose content_contract sets runnable_required and tests_required to false may ship a README alone with no source or test files.",
     "A README with code_policy=forbidden must not contain a Go code block; code_policy=required must contain one.",
-    "Generated sections must be marked with curriculum generated comments (<!-- curriculum:generated:start --> and <!-- curriculum:generated:end -->).",
+    "The machine-generated curriculum catalog (curriculum/README.md) must be wrapped in curriculum generated comments (<!-- curriculum:generated:start --> ... <!-- curriculum:generated:end -->); validate-readme-contracts enforces the markers, and generator scripts must not modify human-written sections.",
     "Human-written sections must not be overwritten or modified by generator scripts.",
     "Anti-slop rule: Do not force optional or contextual headings if the subject matter does not warrant them. Omit non-applicable sections rather than populating them with artificial template filler.",
     "No implemented lesson may keep placeholder zero-magic text (e.g. 'mechanically without understanding', 'one step in the learner's path').",

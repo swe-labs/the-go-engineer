@@ -1,3 +1,5 @@
+<!-- curriculum:generated:start -->
+
 # The Go Engineer v3 — Curriculum
 
 > Schema: 3.1.0 | Curriculum: 3.0.0 | Status: stable | Updated: 2026-10-23
@@ -918,3 +920,5 @@ Total cross-references: **2086**
 ---
 
 _Generated from curriculum v3.0.0 | Schema 3.1.0 | 2026-10-23_
+
+<!-- curriculum:generated:end -->

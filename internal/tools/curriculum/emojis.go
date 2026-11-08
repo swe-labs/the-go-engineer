@@ -28,7 +28,7 @@ func isEmojiCharacter(r rune) bool {
 		}
 	}
 	// Common decorative emojis
-	if r == 0x1F449 || r == 0x1F680 || r == 0x1F4A1 || r == 0x1F3AF || r == 0x27A1 {
+	if r == 0x1F449 || r == 0x1F680 || r == 0x1F4A1 || r == 0x1F3AF {
 		return true
 	}
 	return false

@@ -394,3 +394,25 @@ func TestScanReadmeHeadings(t *testing.T) {
 		t.Error("a non-Go fence must not be detected as Go code")
 	}
 }
+
+// TestHasGeneratedMarkers pins the generated-boundary contract: both markers
+// must be present before a generated file is considered safe to regenerate.
+func TestHasGeneratedMarkers(t *testing.T) {
+	tests := []struct {
+		name string
+		data string
+		want bool
+	}{
+		{"both markers", "<!-- curriculum:generated:start -->\n# Catalog\n<!-- curriculum:generated:end -->\n", true},
+		{"missing end", "<!-- curriculum:generated:start -->\n# Catalog\n", false},
+		{"missing start", "# Catalog\n<!-- curriculum:generated:end -->\n", false},
+		{"no markers", "# Catalog\n", false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := hasGeneratedMarkers([]byte(tt.data)); got != tt.want {
+				t.Fatalf("hasGeneratedMarkers() = %t, want %t", got, tt.want)
+			}
+		})
+	}
+}

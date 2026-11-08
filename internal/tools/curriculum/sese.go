@@ -23,7 +23,7 @@ func resolveModuleDir(modPath string) string {
 // validateSESENavigation verifies that module root READMEs adhere to the Single-Entry, Single-Exit (SESE) standard:
 // 1. Entry Invariant: Module root READMEs must end with "Start here" or "NEXT UP" pointing to Lesson 01.
 // 2. No Escape Hatch: Module root READMEs must not offer direct exit links jumping to downstream modules.
-// 3. Exit Invariant: For completed modules (00, 01), the assessment checkpoint must contain the exit link to the next module.
+// 3. Exit Invariant: For every locked module (see curriculum/expected.json), the assessment checkpoint must contain the exit link to the next module.
 func validateSESENavigation() {
 	fmt.Println("=== validate-sese-navigation ===")
 	ok := true

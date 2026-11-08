@@ -14,6 +14,7 @@ function generateFullReadme() {
   const parts = [];
   const pad = (value, width) => String(value).padEnd(width, ' ');
 
+  parts.push('<!-- curriculum:generated:start -->\n');
   parts.push('# The Go Engineer v3 — Curriculum\n');
   parts.push('> Schema: ' + core.schema_version + ' | Curriculum: ' + core.curriculum_version + ' | Status: ' + core.status + ' | Updated: ' + core.last_updated + '\n');
 
@@ -417,6 +418,7 @@ function generateFullReadme() {
 
   parts.push('---\n');
   parts.push('_Generated from curriculum v' + core.curriculum_version + ' | Schema ' + core.schema_version + ' | ' + core.last_updated + '_\n');
+  parts.push('<!-- curriculum:generated:end -->\n');
 
   return parts.join('\n');
 }

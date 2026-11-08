@@ -179,6 +179,18 @@ func validateReadmeContracts() {
 	// they are checked separately through their selector "doc" role token.
 	docChecked := validateDocumentContracts(reg, core, electives, add)
 
+	// The curriculum catalog is machine-generated. Enforce its generated
+	// boundary markers so a generator run can never silently overwrite
+	// human-authored prose without a visible, checkable signal.
+	catalogPath := filepath.Join(curriculumDir, "README.md")
+	if catalogData, err := os.ReadFile(catalogPath); err != nil {
+		add(contractViolation{"curriculum/README.md", "root.v3", "generated-markers",
+			fmt.Sprintf("cannot read generated catalog: %v", err), sevError})
+	} else if !hasGeneratedMarkers(catalogData) {
+		add(contractViolation{"curriculum/README.md", "root.v3", "generated-markers",
+			"generated catalog must be wrapped in curriculum:generated start/end markers", sevError})
+	}
+
 	reportContractViolations(violations)
 
 	fmt.Printf("  Verified README contracts across %d items and %d documents (%d violations).\n", checked, docChecked, len(violations))
@@ -187,6 +199,15 @@ func validateReadmeContracts() {
 	} else {
 		fmt.Println("  README contract issues reported above.")
 	}
+}
+
+// hasGeneratedMarkers reports whether a file carries both curriculum generated
+// boundary markers, the signal that the file is machine-generated and safe to
+// regenerate.
+func hasGeneratedMarkers(data []byte) bool {
+	s := string(data)
+	return strings.Contains(s, "<!-- curriculum:generated:start -->") &&
+		strings.Contains(s, "<!-- curriculum:generated:end -->")
 }
 
 // validateDocumentContracts checks document-level contract families (those with
