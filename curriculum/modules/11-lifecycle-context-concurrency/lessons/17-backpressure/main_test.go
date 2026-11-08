@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestBackpressureCompiles(t *testing.T) {
 }
@@ -10,11 +13,11 @@ func TestBoundedProducerBackpressure(t *testing.T) {
 	ch := boundedProducer(done, 2)
 	<-ch
 	<-ch
-	// buffer full now, producer should block on send
+	// buffer full now, producer unblocks as items are consumed
 	select {
 	case <-ch:
 		// ok, consumer is reading
-	default:
+	case <-time.After(1 * time.Second):
 		t.Fatal("expected at least one more value")
 	}
 	close(done)
