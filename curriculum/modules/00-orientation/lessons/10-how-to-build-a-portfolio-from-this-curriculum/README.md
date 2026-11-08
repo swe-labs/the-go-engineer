@@ -18,7 +18,7 @@ A high-signal portfolio project is structured around five core engineering compo
 The Anatomy of a High-Impact Portfolio Project
 1. SPECIFICATION & ARCHITECTURE ──> Clear problem statement, constraints, and Mermaid system diagram
 2. ITERATIVE GIT HISTORY        ──> Granular, purposeful commits documenting why changes were made
-3. COMPREHENSIVE AUTOMATED TESTS ──> Unit, integration, and edge-case tests runnable via one command
+3. COMPLETE AUTOMATED TESTS ──> Unit, integration, and edge-case tests runnable via one command
 4. OPERATIONAL RUNBOOK          ──> Clear instructions for building, configuring, and verifying the system
 5. ENGINEERING TRADEOFF ANALYSIS ──> Honest discussion of alternatives considered and known constraints
 ```
@@ -63,7 +63,7 @@ flowchart TD
 | Mistake | Consequence | Correction |
 |---|---|---|
 | Pushing entire projects in one "Initial commit" | Concealing your thought process and problem-solving iteration | Commit incrementally as you build features and fix tests |
-| Leaving READMEs blank or with default generator text | Giving reviewers the impression of an unfinished project | Write a comprehensive README covering architecture, usage, and testing |
+| Leaving READMEs blank or with default generator text | Giving reviewers the impression of an unfinished project | Write a thorough README covering architecture, usage, and testing |
 | Omitting verification instructions | Reviewers cannot run or verify your tests easily | Provide exact terminal commands to run the test suite and build the project |
 
 ## Review questions
@@ -78,3 +78,5 @@ flowchart TD
 Advance to the practical capstone project for Module 00:
 
 - [Project: Course Setup Verification](../../projects/course-setup-verification/README.md)
+
+Then continue to [What is a program?](../../../01-computers-terminal-git-web/lessons/01-what-is-a-program/README.md) after finishing the Module 00 project and checkpoint.

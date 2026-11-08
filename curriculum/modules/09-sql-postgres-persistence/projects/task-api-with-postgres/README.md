@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Build a robust, transactional task management service backed by SQL persistence using Go's `database/sql` package. Master connection pool tuning, automated schema migrations, parameterized queries immune to SQL injection, and multi-table transactional status transitions with audit logging.
+Build a reliable, transactional task management service backed by SQL persistence using Go's `database/sql` package. Master connection pool tuning, automated schema migrations, parameterized queries immune to SQL injection, and multi-table transactional status transitions with audit logging.
 
 ## Why this matters
 

@@ -1,10 +1,10 @@
 # Shell + Git Lab
 
-## Goal
+## Project overview
 
 Practice shell navigation and Git commands by building a directory structure and managing code changes through a complete Git workflow — all in your terminal. No Go code required.
 
-## Learning objectives
+## Learning objective
 
 - Navigate the filesystem using shell commands (`cd`, `ls`, `pwd`, `mkdir`, `rm`)
 - Initialize and manage a Git repository (`init`, `add`, `commit`, `branch`, `merge`)
@@ -62,6 +62,17 @@ On Windows, you can run `verify.ps1` directly from PowerShell. On Linux/macOS, o
 - Working Git repository with branches, commits, and a resolved merge conflict
 - All verification checks passing (14/14)
 - Written explanation of the three prompts above
+
+## Rubric
+
+| Criterion | Weight | Passing standard |
+| --- | --- | --- |
+| Shell fluency | 25% | Correct directory tree created and manipulated with `cd`, `ls`, `pwd`, `mkdir`, `cp`, `mv`, and `rm`. |
+| Git workflow | 35% | History shows branches, commits, a merge, and a deliberately resolved conflict. |
+| Verification suite | 25% | `verify.ps1` / `verify.sh` passes all 14 checks. |
+| Conceptual explanation | 15% | Written answers correctly distinguish the working directory, staging area, and commit history. |
+
+A passing score is 80%.
 
 ## NEXT UP
 

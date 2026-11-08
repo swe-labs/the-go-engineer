@@ -137,3 +137,7 @@ gRPC is the primary transport layer for Google Cloud, CockroachDB, Kubernetes in
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[gRPC streaming](../11-grpc-streaming/README.md)

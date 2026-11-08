@@ -92,57 +92,145 @@ import (
 	"time"
 )
 
-func worker(id int, wg *sync.WaitGroup) {
+func printNumbers(wg *sync.WaitGroup) {
 	defer wg.Done()
-	fmt.Printf("Worker %d starting\n", id)
-	time.Sleep(time.Duration(id) * 50 * time.Millisecond)
-	fmt.Printf("Worker %d done\n", id)
+	for i := 1; i <= 5; i++ {
+		time.Sleep(10 * time.Millisecond)
+		fmt.Printf("goroutine: %d\n", i)
+	}
+}
+
+func sayHello() {
+	fmt.Println("Hello from a goroutine")
 }
 
 func main() {
-	runtime.GOMAXPROCS(2)
+	fmt.Println("=== Goroutine basics ===")
+	go sayHello()
+	time.Sleep(50 * time.Millisecond)
+
+	fmt.Println("\n=== Goroutine scheduling ===")
 	var wg sync.WaitGroup
+	wg.Add(2)
 
-	for i := 1; i <= 5; i++ {
-		wg.Add(1)
-		go worker(i, &wg)
-	}
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 3; i++ {
+			runtime.Gosched()
+			fmt.Println("lambda goroutine")
+		}
+	}()
 
+	go printNumbers(&wg)
 	wg.Wait()
-	fmt.Println("All workers finished")
+
+	fmt.Println("\n=== GOMAXPROCS ===")
+	fmt.Printf("Logical CPUs: %d\n", runtime.NumCPU())
+	fmt.Printf("GOMAXPROCS: %d\n", runtime.GOMAXPROCS(0))
+
+	fmt.Println("\n=== Goroutine stack growth ===")
+	stackTester(0)
+}
+
+func stackTester(depth int) {
+	if depth >= 1000 {
+		return
+	}
+	if depth%100 == 0 {
+		fmt.Printf("stack depth: %d\n", depth)
+	}
+	stackTester(depth + 1)
 }
 ```
 
-Output (order varies due to scheduling):
+Expected output (the interleaving varies between runs; `Logical CPUs` and `GOMAXPROCS` depend on the machine):
 
 ```
-Worker 5 starting
-Worker 1 starting
-Worker 3 starting
-Worker 2 starting
-Worker 4 starting
-Worker 1 done
-Worker 2 done
-Worker 3 done
-Worker 4 done
-Worker 5 done
-All workers finished
+=== Goroutine basics ===
+Hello from a goroutine
+
+=== Goroutine scheduling ===
+lambda goroutine
+lambda goroutine
+lambda goroutine
+goroutine: 1
+goroutine: 2
+goroutine: 3
+goroutine: 4
+goroutine: 5
+
+=== GOMAXPROCS ===
+Logical CPUs: 12
+GOMAXPROCS: 12
+
+=== Goroutine stack growth ===
+stack depth: 0
+stack depth: 100
+stack depth: 200
+stack depth: 300
+stack depth: 400
+stack depth: 500
+stack depth: 600
+stack depth: 700
+stack depth: 800
+stack depth: 900
 ```
 
 ## Step-by-step execution
 
-For the program above with `GOMAXPROCS=2` and 5 workers:
+The program has four sections. Each one isolates a property of goroutines.
 
-1. `main` goroutine starts. Sets `GOMAXPROCS=2` — at most 2 OS threads run Go code simultaneously.
-2. Loop `i=1..5`: each `go worker(i, &wg)` creates a new goroutine. The `wg.Add(1)` increments the counter before the goroutine starts.
-3. The scheduler places goroutines onto `P0` and `P1` local queues. With 5 goroutines and 2 Ps, 2 run immediately and 3 queue.
-4. Each worker prints its start message, sleeps (`time.Sleep` yields the processor), then prints its done message.
-5. When a worker sleeps, the scheduler dequeues a waiting worker onto the freed P.
-6. Each worker calls `wg.Done()` before exiting, decrementing the counter.
-7. `main` blocks at `wg.Wait()` until the counter reaches 0.
-8. After the 5th worker finishes, the counter is 0, `wg.Wait()` unblocks, and `main` prints the final message.
+1. **Basics.** `main` starts `sayHello` with `go`. The `go` statement enqueues the new goroutine and returns immediately, so `main` continues to `time.Sleep(50 * time.Millisecond)`. During that sleep the scheduler runs `sayHello`, which prints `Hello from a goroutine`. Without the sleep, `main` could exit before `sayHello` runs.
+2. **Scheduling.** `wg.Add(2)` reserves two slots before either goroutine starts. The first goroutine calls `runtime.Gosched()` on every iteration, which voluntarily yields its processor to the run queue. The second goroutine, `printNumbers`, sleeps 10 ms between prints. The two interleave because both yield: `Gosched` yields cooperatively, and `time.Sleep` parks the goroutine until the timer fires. `wg.Wait()` blocks `main` until both call `wg.Done()`.
+3. **GOMAXPROCS.** `runtime.NumCPU()` returns the logical CPU count. `runtime.GOMAXPROCS(0)` returns the current setting without changing it, which defaults to that CPU count. `GOMAXPROCS` caps how many goroutines run Go code in parallel; it does not cap how many goroutines exist.
+4. **Stack growth.** `stackTester` recurses 1000 frames, printing every 100th depth. Each frame grows the goroutine stack; the runtime copies the stack to a larger allocation when it fills. This is why a goroutine can start at 2 KB and serve a deep call chain without a fixed large stack.
 
-The order of start/done messages is non-deterministic because the scheduler interleaves goroutines.
+The print order in the scheduling section is non-deterministic because the scheduler interleaves runnable goroutines at every yield point.
+
+## Runtime evidence
+
+Run the lesson tests with the race detector:
+
+```bash
+go test -race -count=1 .
+```
+
+Expected output (from `curriculum/modules/11-lifecycle-context-concurrency/lessons/11-goroutines`):
+
+```text
+ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/11-lifecycle-context-concurrency/lessons/11-goroutines	0.4s
+```
+
+The race detector instruments every memory access. The example passes because `sync.WaitGroup` establishes a happens-before edge between each goroutine and `wg.Wait()`; no unsynchronized shared memory remains.
+
+To observe the scheduler directly, build the binary and enable the scheduler trace:
+
+```bash
+go build -o goroutines-demo .
+GODEBUG=schedtrace=1000 ./goroutines-demo
+```
+
+Expected output (the first line is the scheduler snapshot, printed to stderr; the program output follows):
+
+```text
+SCHED 0ms: gomaxprocs=12 idleprocs=12 threads=6 spinningthreads=0 needspinning=0 idlethreads=3 runqueue=0 [ 0 0 0 0 0 0 0 0 0 0 0 0 ] schedticks=[ 3 0 0 0 0 0 0 0 0 0 2 2 ]
+```
+
+Interpretation: `schedtrace=1000` prints a scheduler snapshot every 1000 ms. `gomaxprocs=12` is the number of logical processors (P) the runtime created, equal to `runtime.NumCPU()` on this machine. `idleprocs=12` means every P was idle at that instant, which is expected for a short-lived program. `threads=6` is the count of OS threads (M) currently created. `runqueue=0` and the twelve `[ 0 ... ]` entries are the per-P local run queue lengths. Your machine reports different numbers; the invariant is that `gomaxprocs` equals `runtime.NumCPU()` unless you override it.
+
+Now force a single processor and rerun:
+
+```bash
+GOMAXPROCS=1 GODEBUG=schedtrace=1000 ./goroutines-demo
+```
+
+Expected output:
+
+```text
+SCHED 0ms: gomaxprocs=1 idleprocs=1 threads=4 spinningthreads=0 needspinning=0 idlethreads=1 runqueue=0 [ 0 ] schedticks=[ 6 ]
+```
+
+Interpretation: `gomaxprocs=1` and a single-element `runqueue` array show that one P now services every goroutine. All goroutines still run, but they cannot execute Go code in parallel. This is the difference between concurrency (all goroutines make progress) and parallelism (multiple goroutines run at the same instant).
 
 ## Common mistakes
 
@@ -239,10 +327,12 @@ Run it and observe the non-deterministic print order. Then set `GOMAXPROCS=1` an
 
 ## Tests / verification
 
-```go
+```bash
 go run ./curriculum/modules/11-lifecycle-context-concurrency/lessons/11-goroutines
-go test ./curriculum/modules/11-lifecycle-context-concurrency/lessons/11-goroutines
+go test -race -count=1 ./curriculum/modules/11-lifecycle-context-concurrency/lessons/11-goroutines
 ```
+
+The `go run` command prints the four section banners and the goroutine output. The `go test` command runs the package tests under the race detector; a clean run prints `ok`.
 
 ## Review questions
 

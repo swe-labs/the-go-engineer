@@ -6,7 +6,7 @@ Apply backpressure using bounded channels to control producer-consumer rates, im
 
 ## Why this matters
 
-In any producer-consumer system, the producer can outpace the consumer. Without backpressure, the producer allocates unbounded memory (buffered channel grows, or values pile up in a slice), eventually causing OOM crashes or degrading latency for all consumers. Backpressure is the mechanism by which a slow consumer tells the producer "slow down." In Go, bounded channels provide backpressure by design: when the buffer is full, the producer blocks. This is the simplest, most robust backpressure mechanism available. Every production service — HTTP servers, event processors, queue consumers — must handle backpressure or fail under load.
+In any producer-consumer system, the producer can outpace the consumer. Without backpressure, the producer allocates unbounded memory (buffered channel grows, or values pile up in a slice), eventually causing OOM crashes or degrading latency for all consumers. Backpressure is the mechanism by which a slow consumer tells the producer "slow down." In Go, bounded channels provide backpressure by design: when the buffer is full, the producer blocks. This is the simplest, most reliable backpressure mechanism available. Every production service — HTTP servers, event processors, queue consumers — must handle backpressure or fail under load.
 
 ## Mental model
 

@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Performance and Memory Engineering:
 
 ## Targets
 
 - `project-profile-and-fix-lab`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Assessment Overview & Industrial Context
+## Assessment Overview & Industrial Context
 
 In high-throughput Go backend services, writing code that merely passes functional tests is insufficient. Under heavy production workloads, suboptimal memory allocation patterns—such as unpooled temporary buffers, naive string concatenations in tight loops, and unhinted slice appends—trigger severe heap allocation churn. This churn forces Go's Garbage Collector (GC) to run frequently, causing stop-the-world (STW) pauses, latency degradation (p99 spikes), and eventual Out-Of-Memory (OOM) process termination.
 
@@ -22,7 +22,7 @@ In this assessment, you will step into the shoes of a systems performance engine
 
 ---
 
-## 2. Core Competencies Tested
+## Core Competencies Tested
 
 - **Profiling with `pprof`**: Generating CPU and memory profiles via `go test -bench -cpuprofile -memprofile` and inspecting top allocation functions with `go tool pprof`.
 - **Heap Churn Elimination via `sync.Pool`**: Reusing expensive byte buffers across batch executions, implementing thread-safe buffer acquisition, reset (`buf.Reset()`), and return (`defer pool.Put(buf)`).
@@ -33,7 +33,7 @@ In this assessment, you will step into the shoes of a systems performance engine
 
 ---
 
-## 3. Zero-Magic Architectural Breakdown
+## Zero-Magic Architectural Breakdown
 
 ```
 [ Unoptimized Pipeline ]
@@ -60,7 +60,7 @@ In Go, `string` values are immutable byte sequences. The operation `s += part` d
 
 ---
 
-## 4. Implementation Requirements & Task Breakdown
+## Implementation Requirements & Task Breakdown
 
 ### Task 1: Eliminate Heap Churn with `sync.Pool`
 In `_starter/main.go`:
@@ -95,7 +95,7 @@ In `_starter/main.go`:
 
 ---
 
-## 5. Verification & Acceptance Criteria
+## Verification & Acceptance Criteria
 
 Run benchmarks and unit tests:
 
@@ -116,7 +116,7 @@ go test -bench="." -benchmem ./curriculum/modules/13-performance-memory-engineer
 
 ---
 
-## 6. Common Pitfalls & Anti-Patterns
+## Common Pitfalls & Anti-Patterns
 
 1. **Pooling Oversized Buffers**:
    *Anti-pattern*: Putting 100MB buffers back into `sync.Pool`, causing memory bloat that persists until the next GC cycle.
@@ -132,7 +132,7 @@ go test -bench="." -benchmem ./curriculum/modules/13-performance-memory-engineer
 
 ---
 
-## 7. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -143,8 +143,12 @@ go test -bench="." -benchmem ./curriculum/modules/13-performance-memory-engineer
 
 ---
 
-## 8. Submission & Reflection
+## Submission & Reflection
 
 1. Submit benchmark comparison output (`benchstat` or before/after benchmark results).
 2. Submit a screenshot or text dump of `go tool pprof -top mem.pprof` after optimization.
 3. Answer: *Why does Go's Garbage Collector clear `sync.Pool` instances during STW phases, and how does this affect tail latency under fluctuating traffic?*
+
+## Retake policy
+
+If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.

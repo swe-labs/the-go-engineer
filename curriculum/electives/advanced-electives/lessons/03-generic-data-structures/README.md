@@ -142,3 +142,7 @@ Production Go services use generic data structures in bounded in-memory queues f
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Functional options](../04-functional-options/README.md)

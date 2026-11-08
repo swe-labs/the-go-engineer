@@ -40,7 +40,7 @@ A Dockerfile is a sequence of instructions that build an image:
 
 | Instruction | Purpose | Go-specific advice |
 |---|---|---|
-| `FROM` | Base image | Use `golang:1.25-alpine` for build, `scratch` or `distroless` for runtime |
+| `FROM` | Base image | Use `golang:1.27-alpine` for build, `scratch` or `distroless` for runtime |
 | `RUN` | Execute command | Use for `go build`, never for runtime config |
 | `COPY` | Add files from context | Copy only the Go binary, not source |
 | `CMD` | Default command | Use exec form: `CMD ["./server"]` |
@@ -61,7 +61,7 @@ Go's static compilation model makes it the ideal language for Docker:
 
 The canonical Go Dockerfile pattern is:
 ```dockerfile
-FROM golang:1.25-alpine AS builder
+FROM golang:1.27-alpine AS builder
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
@@ -126,7 +126,7 @@ func main() {
 ## Step-by-step execution
 
 1. `docker build -t myapp .` sends the Dockerfile and directory to dockerd.
-2. Docker pulls the `golang:1.25-alpine` base image if not cached.
+2. Docker pulls the `golang:1.27-alpine` base image if not cached.
 3. `WORKDIR /app` creates the directory in the image.
 4. `COPY go.mod go.sum ./` copies dependency files.
 5. `RUN go mod download` downloads dependencies and caches them.
@@ -150,7 +150,7 @@ func main() {
 Consider a Dockerfile that produces a 1.2 GB image for a simple Go server:
 
 ```dockerfile
-FROM golang:1.25
+FROM golang:1.27
 COPY . .
 RUN go build -o server .
 CMD ["./server"]
@@ -158,11 +158,11 @@ CMD ["./server"]
 
 **Symptom:** `docker images` shows 1.2 GB. Deployment is slow.
 
-**Investigation:** Check each layer's size with `docker history myapp`. The `golang:1.25` base image is ~800 MB. The `COPY . .` layer includes the host's Go module cache and `.git` history.
+**Investigation:** Check each layer's size with `docker history myapp`. The `golang:1.27` base image is ~800 MB. The `COPY . .` layer includes the host's Go module cache and `.git` history.
 
 **Root cause:** Using the full `golang` image instead of `golang:alpine` or multi-stage build. Copying everything instead of using a `.dockerignore`.
 
-**Fix:** Use multi-stage build with `golang:1.25-alpine` for the builder and `scratch` for the runtime. Add a `.dockerignore` with `.git`, `vendor/`, `README.md`. Final image: ~15 MB.
+**Fix:** Use multi-stage build with `golang:1.27-alpine` for the builder and `scratch` for the runtime. Add a `.dockerignore` with `.git`, `vendor/`, `README.md`. Final image: ~15 MB.
 
 ## Production notes
 
@@ -171,7 +171,7 @@ CMD ["./server"]
 - Scan images for vulnerabilities with `docker scout` or `trivy` before deploying.
 - Set `USER 1001` in the Dockerfile to run as non-root.
 - Use `HEALTHCHECK` instruction to enable Docker's container health monitoring.
-- Pin the base image digest (`golang:1.25-alpine@sha256:...`) for reproducible builds.
+- Pin the base image digest (`golang:1.27-alpine@sha256:...`) for reproducible builds.
 
 ## Performance implications
 

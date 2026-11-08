@@ -49,6 +49,24 @@ Under the hood:
 3. For errors classified as `ErrTransientNetwork`, the loop backs off using `time.After(delay)` while respecting `ctx.Done()`. If the caller's context cancels or times out, the key reservation is cleaned up (`delete(pp.records, idempotencyKey)`) and `ctx.Err()` is returned.
 4. Non-transient errors (such as `ErrCardDeclined`) break out immediately on attempt 0 without retrying, preventing wasted cycles and credit card fraud flags.
 
+A representative excerpt from `main.go` (`PaymentPipeline.Charge`):
+
+```go
+	pp.mu.Lock()
+	record, exists := pp.records[idempotencyKey]
+	if exists {
+		if record.Status == "COMPLETED" {
+			receipt := record.Receipt
+			pp.mu.Unlock()
+			// Idempotent cache hit: return original receipt without re-charging
+			return receipt, nil
+		}
+		if record.Status == "IN_PROGRESS" {
+			pp.mu.Unlock()
+			return nil, ErrDuplicateInFlight
+		}
+```
+
 ## Run Instructions
 
 ```bash

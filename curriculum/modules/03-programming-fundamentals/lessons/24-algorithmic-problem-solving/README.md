@@ -154,3 +154,5 @@ Advance to Step 2 (Hands-On Capstone Projects):
 
 - [Project 1: Contact Directory](../../projects/contact-directory/README.md)
 - [Project 2: Pricing Checkout](../../projects/pricing-checkout/README.md)
+
+Then continue to [Function basics](../../../04-functions-errors-data-semantics/lessons/01-function-basics/README.md) in Module 04.

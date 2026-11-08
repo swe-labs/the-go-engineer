@@ -11,7 +11,7 @@
 
     <rect x="250" y="80" width="180" height="70" rx="12" fill="#f3f4f6" stroke="#111827" stroke-width="1.5"/>
     <text x="340" y="108" text-anchor="middle" font-weight="700">internal/tools/</text>
-    <text x="340" y="132" text-anchor="middle" font-size="13" fill="#4b5563">17 quality gates</text>
+    <text x="340" y="132" text-anchor="middle" font-size="13" fill="#4b5563">24 quality gates</text>
 
     <line x1="430" y1="115" x2="490" y2="115" stroke="#111827" stroke-width="2" marker-end="url(#arrow)"/>
 

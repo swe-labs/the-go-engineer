@@ -2,7 +2,7 @@
 
 > **Companion Track Stage:** 4 (Modern Alternative Variant)
 > **Core Module Alignment:** Module 11 (_Concurrency & Lifecycle_) and Module 12 (_Observability & Diagnostics_)
-> **Key Technologies:** `Go 1.24+`, `Datastar v1.0.4` (~13 KB single script), `Server-Sent Events (SSE)`, Standard Library `http.Flusher`.
+> **Key Technologies:** `Go 1.27+`, `Datastar v1.0.4` (~13 KB single script), `Server-Sent Events (SSE)`, Standard Library `http.Flusher`.
 > **Prerequisites:** [Stage 4 Primary (HTMX &amp; Alpine.js)](../README.md), Go goroutines and buffered channels.
 
 ---
@@ -146,7 +146,7 @@ When initialized with `tmpl = nil`, the server operates in **pure compile-time t
 ```
 stage-04-htmx-alpine/datastar/
 ├── components/           # Datastar-native templ component library (GOTD stack)
-│   ├── components_test.go # Comprehensive unit tests for templ components
+│   ├── components_test.go # Complete unit tests for templ components
 │   ├── dashboard.templ   # Root HTML dashboard layout in templ with Datastar signals
 │   ├── dashboard_templ.go # Generated Go source code
 │   ├── metrics_card.templ # Reactive metrics card
@@ -226,3 +226,26 @@ go test -v ./...
 ```
 
 All tests verify root rendering, SSE wire formatting, signal patching, task cancellation, and real-time event streaming.
+
+---
+
+## Stage mission
+
+Demonstrate the Datastar paradigm: a single ~13 KB SSE-first script that replaces both HTMX and Alpine, streams `datastar-patch-elements` and `datastar-patch-signals` events from Go, and removes the state desync between server DOM swaps and client state.
+
+## Backend alignment
+
+Aligns with [Module 11: Lifecycle, Context, and Concurrency](../../../modules/11-lifecycle-context-concurrency/README.md) and [Module 12: Observability and Diagnostics](../../../modules/12-observability-diagnostics/README.md), using the same Go worker-pool and streaming foundations as the primary Stage 4.
+
+## Verification and test suite
+
+```bash
+go test -v ./...
+```
+
+Then `go run main.go` and open `http://localhost:8081/`. Confirm that a single script tag loads, that posting a task patches the table and the metrics card in one stream, and that the modal signal resets server-side.
+
+## Next stage
+
+This is a variant of Stage 4, not a separate progression step. Return to the [primary Stage 4 guide](../README.md) for the HTMX and Alpine.js track, then continue to the [Flagship Opslane Console](../../../modules/18-flagship-opslane/README.md).
+

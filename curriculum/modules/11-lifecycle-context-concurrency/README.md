@@ -8,6 +8,10 @@ Teach safe concurrent systems and request lifecycle after learners understand se
 
 Builds reliable concurrent Go programs using context, cancellation, deadlines, goroutines, channels, synchronization, worker pools, backpressure, and leak prevention.
 
+## Prerequisites
+
+- [Module 10: Authentication, Authorization, and Security](../10-auth-security/README.md) — complete that module's completion checkpoint before starting this one.
+
 ## Learning Sessions & Lessons
 
 ### Session 1: Time Mechanics & Interval Scheduling (Consolidated Workshop)
@@ -50,6 +54,23 @@ Builds reliable concurrent Go programs using context, cancellation, deadlines, g
 - `core-11-28` Idempotency keys
 - `core-11-29` sync.Once
 
+## Projects
+
+- [`projects/bounded-worker-pool/README.md`](./projects/bounded-worker-pool/README.md) — **Bounded Worker Pool**
+- [`projects/concurrent-downloader/README.md`](./projects/concurrent-downloader/README.md) — **Concurrent Downloader**
+- [`projects/url-health-checker/README.md`](./projects/url-health-checker/README.md) — **Url Health Checker**
+
+## Assessments
+
+- [`assessments/bounded-worker-pool/README.md`](./assessments/bounded-worker-pool/README.md) — **Bounded Worker Pool**
+- [`assessments/checkpoint/README.md`](./assessments/checkpoint/README.md) — **Module 11 Checkpoint — Concurrency and Parallelism in Go**
+- [`assessments/concurrent-downloader/README.md`](./assessments/concurrent-downloader/README.md) — **Concurrent Downloader**
+- [`assessments/url-health-checker/README.md`](./assessments/url-health-checker/README.md) — **Url Health Checker**
+
 ## Completion
 
 Complete every required lesson, lab, project, and assessment for this module.
+
+## Next module
+
+After passing this module's exit gate, continue to [Module 12: Observability and Diagnostics](../12-observability-diagnostics/README.md).

@@ -6,7 +6,7 @@ Build a resilient, high-throughput concurrent file downloader in Go. Master boun
 
 ## Why this matters
 
-Network I/O is inherently prone to transient failures: flaky connections, rate limits (HTTP 429), and temporary upstream outages (HTTP 503). Writing production-grade download clients requires bounded worker concurrency to prevent socket exhaustion, automatic retry logic with backoff, and robust streaming directly into destinations without unbounded memory allocation.
+Network I/O is inherently prone to transient failures: flaky connections, rate limits (HTTP 429), and temporary upstream outages (HTTP 503). Writing production-grade download clients requires bounded worker concurrency to prevent socket exhaustion, automatic retry logic with backoff, and reliable streaming directly into destinations without unbounded memory allocation.
 
 ## Prerequisites
 

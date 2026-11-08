@@ -267,7 +267,7 @@ Another scenario:
 
 ```
 $ go version -m ./myapp
-./myapp: go1.22.0
+./myapp: go1.27.0
 ...
     build	-main.version=v1.2.3
     build	-main.commit=abc1234

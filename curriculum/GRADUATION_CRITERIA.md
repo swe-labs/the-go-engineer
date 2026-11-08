@@ -19,7 +19,7 @@ Graduation from *The Go Engineer* is determined by observable engineering behavi
 - **Evidence:** Tracing through execution state tables, setting conditional breakpoints, analyzing compiler escape decisions, and identifying the exact hardware or runtime root cause before applying a minimal, verified regression fix.
 
 ### Outcome 3: Automated Verification & Test Rigor
-- **Capability:** Write robust, deterministic, table-driven unit and integration test suites that prove correctness under both success and failure conditions.
+- **Capability:** Write reliable, deterministic, table-driven unit and integration test suites that prove correctness under both success and failure conditions.
 - **Evidence:** Testing boundary values ($N=0, 1, \infty$), validating error returns with `errors.Is`/`errors.As`, structuring subtests with `t.Run()`, avoiding non-deterministic time-dependent assertions, and asserting transactional rollback on simulated database failures.
 
 ### Outcome 4: End-to-End Delivery & Disaster Recovery Proof
@@ -43,7 +43,7 @@ The capstone defense evaluates the learner's complete implementation of **Flagsh
 | Score | Rating | Meaning | Defense Criteria |
 | :---: | :--- | :--- | :--- |
 | **5** | **Exemplary** | Autonomous Technical Mastery | Demonstrates complete technical mastery; explains runtime mechanics when relevant to debugging; zero data races under `-race`; deterministic failure handling; reproducible disaster recovery drill satisfying defined RPO/RTO. |
-| **4** | **Proficient** | Core Engineering Competence | Meets all mandatory specification requirements; clean idiomatic Go; deterministic unit and integration tests; robust error handling; clearly defends architectural decisions and operational trade-offs. |
+| **4** | **Proficient** | Core Engineering Competence | Meets all mandatory specification requirements; clean idiomatic Go; deterministic unit and integration tests; reliable error handling; clearly defends architectural decisions and operational trade-offs. |
 | **3** | **Competent** | Foundational Competence | Implements core behavior; tests cover major happy paths; requires minor guidance during technical defense of distributed tradeoffs or failure modes. |
 | **2** | **Novice** | Developing Competence | Incomplete specification requirements; brittle error handling; struggles to explain race conditions, context lifecycle, or tenant isolation boundaries. |
 | **1** | **Unprepared**| Incomplete | Code non-functional or copied without comprehension; missing tests; service panics or leaks resources under failure scenarios. |
@@ -59,7 +59,7 @@ Before scheduling the oral and technical defense, the learner must provide verif
 1. **Clean Version Control & Repository Hygiene:**
    - Git repository with clear, conventional commit messages.
    - Zero committed secrets, API keys, or uncommitted `.env` files.
-   - Comprehensive top-level `README.md` with system overview, architecture diagram, and local setup instructions.
+   - Thorough top-level `README.md` with system overview, architecture diagram, and local setup instructions.
 
 2. **3-Tier Clean Domain Architecture:**
    - Strict separation of transport (`transport/http`), business domain (`domain/`), and database persistence (`repo/postgres`).
@@ -138,6 +138,6 @@ Graduates of *The Go Engineer* demonstrate the technical autonomy and operationa
 
 | Engineering Role / Level | Operational Readiness Benchmark |
 | :--- | :--- |
-| **Go Backend Engineer (L3/L4 / Mid-Level)** | Capable of designing, implementing, testing, and shipping robust Go microservices independently without day-to-day oversight. |
+| **Go Backend Engineer (L3/L4 / Mid-Level)** | Capable of designing, implementing, testing, and shipping reliable Go microservices independently without day-to-day oversight. |
 | **Production Systems Reliability** | Diagnoses production outages from structured telemetry, reads assembly/compiler escape traces when debugging performance bottlenecks, and maintains zero-data-loss disaster recovery runbooks. |
 | **Code Quality & Team Stewardship** | Enforces idiomatic Go patterns, table-driven testing standards, clean architectural boundaries, and defensive concurrency practices in peer code reviews. |

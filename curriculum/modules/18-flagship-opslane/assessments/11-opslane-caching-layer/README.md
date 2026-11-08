@@ -49,6 +49,26 @@ Under the hood:
 4. When `fn()` returns, `singleflight` broadcasts the return value and error to all waiting goroutines simultaneously, and `s.dbReads` increments by exactly 1.
 5. In `UpdateOrder`, updating the database source of truth is executed first; upon success, `s.cache.Delete(cacheKey)` removes the key so subsequent reads fetch fresh data.
 
+A representative excerpt from `main.go` (`TTLCache.Get`):
+
+```go
+func (c *TTLCache) Get(key string) ([]byte, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+
+	entry, exists := c.entries[key]
+	if !exists {
+		return nil, false
+	}
+
+	if time.Now().After(entry.ExpiresAt) {
+		return nil, false
+	}
+
+	return entry.Value, true
+}
+```
+
 ## Run Instructions
 
 ```bash

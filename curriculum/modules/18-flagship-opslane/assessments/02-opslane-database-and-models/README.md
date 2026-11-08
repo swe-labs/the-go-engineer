@@ -47,6 +47,16 @@ Under the hood:
 3. Foreign keys enforce `ON DELETE CASCADE` for tenant data cleanup.
 4. `OrderRepository.GetByID` uses `QueryRowContext` parameterized queries, preventing SQL injection and preventing tenant data leakage by requiring both `tenant_id` and `order_id` in the `WHERE` clause.
 
+A representative excerpt from `main.go` (`ConnectDatabase`):
+
+```go
+	// Production connection pool tuning
+	db.SetMaxOpenConns(25)
+	db.SetMaxIdleConns(10)
+	db.SetConnMaxLifetime(15 * time.Minute)
+	db.SetConnMaxIdleTime(5 * time.Minute)
+```
+
 ## Run Instructions
 
 ```bash

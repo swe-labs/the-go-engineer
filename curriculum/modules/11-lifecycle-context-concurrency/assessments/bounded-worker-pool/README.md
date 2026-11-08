@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Evaluate your ability to build a robust, bounded worker pool in Go. This assessment verifies that you can manage goroutine lifecycles, coordinate channel-based job distribution, isolate task panics (`recover`), implement non-blocking and deadline-driven backpressure (`select`), drain queues gracefully with `sync.WaitGroup`, and pass the Go race detector with zero data races.
+Evaluate your ability to build a reliable, bounded worker pool in Go. This assessment verifies that you can manage goroutine lifecycles, coordinate channel-based job distribution, isolate task panics (`recover`), implement non-blocking and deadline-driven backpressure (`select`), drain queues gracefully with `sync.WaitGroup`, and pass the Go race detector with zero data races.
 
 ## Targets
 

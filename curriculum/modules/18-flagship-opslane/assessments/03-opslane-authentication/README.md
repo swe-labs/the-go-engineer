@@ -48,6 +48,15 @@ Under the hood:
 3. `TokenManager.ValidateAccessToken` inspects the token's header to explicitly verify that the signing algorithm is HMAC (`*jwt.SigningMethodHMAC`). This defends against critical JWT algorithm substitution vulnerabilities (e.g. attackers switching `alg` to `none` or an asymmetric public key).
 4. `GenerateRefreshToken` generates 32 bytes of cryptographically secure pseudo-random entropy from the OS kernel via `crypto/rand.Read`, encoded to a 64-character hexadecimal string.
 
+A representative excerpt from `main.go` (`PasswordManager.Verify`):
+
+```go
+func (pm *PasswordManager) Verify(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
+}
+```
+
 ## Run Instructions
 
 ```bash
@@ -81,7 +90,7 @@ Common mistakes:
 
 ## In Production
 
-In production cloud environments, JWT signing keys should be rotated periodically or backed by asymmetric key pairs (RS256 / EdDSA) with JWKS endpoints. Short access token lifespans (10–15 minutes) limit the blast radius of stolen tokens, while refresh tokens stored securely in HttpOnly cookies allow seamless session renewal without re-prompting users for credentials.
+In production cloud environments, JWT signing keys should be rotated periodically or backed by asymmetric key pairs (RS256 / EdDSA) with JWKS endpoints. Short access token lifespans (10–15 minutes) limit the blast radius of stolen tokens, while refresh tokens stored securely in HttpOnly cookies allow smooth session renewal without re-prompting users for credentials.
 
 ## Thinking Questions
 

@@ -6,7 +6,7 @@ Choose the correct HTTP status code for every response type, distinguish between
 
 ## Why this matters
 
-HTTP status codes are the first thing a client sees in a response. A correct status code tells the client whether to retry (429, 503), redirect (301, 302), fix the request (400, 422), or celebrate (200, 201). An incorrect status code causes clients to misbehave: retrying a 400 that will never succeed, caching a 200 error response, or treating a 500 validation error as a server bug. Getting status codes right is the cheapest way to make your API robust.
+HTTP status codes are the first thing a client sees in a response. A correct status code tells the client whether to retry (429, 503), redirect (301, 302), fix the request (400, 422), or celebrate (200, 201). An incorrect status code causes clients to misbehave: retrying a 400 that will never succeed, caching a 200 error response, or treating a 500 validation error as a server bug. Getting status codes right is the cheapest way to make your API reliable.
 
 ## Mental model
 

@@ -30,11 +30,15 @@ Can a motivated learner understand the lesson without external help?
 - Concepts introduced in dependency order
 - Each paragraph answers an implicit "why does this matter?"
 - Code examples are minimal and focused on one idea
+- Every paragraph passes the deletion test: removing it would remove a capability, a causal link, or a verification step
+- No generic introductions, restated headings, fake transitions, or summary padding
 
 **2–3 signals:**
 
 - Learner must search the web to understand terminology
 - Paragraphs are dense walls of text without structure
+- Prose sounds generic and could belong to any lesson
+- The lesson repeats the heading or summarizes without adding a decision rule
 
 ---
 
@@ -47,12 +51,14 @@ Does the lesson reflect real production behavior?
 - Examples use realistic data (not foo/bar/baz)
 - Failure scenarios are production failures, not toy errors
 - Code patterns match idiomatic Go standard library usage
+- Numbers and benchmarks are measured or cited, with the command and environment needed to reproduce them
 
 **2–3 signals:**
 
 - Examples use throwaway variables (x, y, z)
 - Error handling is omitted or unrealistic
 - Production tradeoffs are not mentioned
+- Performance numbers are invented or presented without a command or environment
 
 ---
 
@@ -123,12 +129,14 @@ Is the analogy accurate and durable?
 - Mental model maps cleanly to the runtime behavior
 - Model is internally consistent (no contradictions)
 - Model survives edge cases (does not break under unusual conditions)
+- The analogy maps each element explicitly, states where it breaks, and returns to the physical or execution mechanism
 
 **2–3 signals:**
 
 - Analogy is too vague to be useful ("think of it as a box")
 - Analogy breaks under common edge cases
 - No mental model is provided
+- The analogy is decorative and the lesson never returns to the mechanism
 
 ---
 

@@ -13,7 +13,7 @@ This assessment verifies that you have successfully set up your terminal environ
 - [Module 00 Overview](../../README.md) and [Lessons 01–10](../../lessons/01-how-to-use-this-repository/README.md) completed
 - [Capstone Project: Course Setup Verification](../../projects/course-setup-verification/README.md) completed
 
-## Evidence
+## Evidence required
 
 Submit:
 
@@ -33,6 +33,16 @@ Plan for 15 to 20 minutes.
 ## Passing standard
 
 You pass when your environment produces verified Git identity output and you have established a dedicated workspace for your project implementations.
+
+## Rubric
+
+| Dimension | Weight | Passing standard |
+| --- | --- | --- |
+| Toolchain verification | 40% | Terminal, Git, and editor confirmed working and reported in `setup.txt`. |
+| Git identity configured | 30% | `git config user.name` and `git config user.email` both return non-empty values. |
+| Workspace established | 30% | A dedicated personal workspace directory exists outside the curriculum repository. |
+
+A passing score is 80% with all three criteria satisfied.
 
 ## Retake policy
 

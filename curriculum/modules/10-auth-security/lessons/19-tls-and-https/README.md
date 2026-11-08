@@ -6,7 +6,7 @@ Configure TLS certificates for Go HTTP servers, understand the TLS handshake pro
 
 ## Why this matters
 
-HTTPS is not optional. Every production web service must use TLS to encrypt data in transit, prevent man-in-the-middle attacks, and protect user privacy. Browsers mark HTTP sites as "not secure." Regulations (GDPR, PCI-DSS, HIPAA) require encryption in transit. Go's `crypto/tls` package provides a robust, production-ready TLS implementation used by Kubernetes, Docker, and major Go web frameworks. Go engineers must know how to configure TLS servers, generate certificates, and enforce secure defaults.
+HTTPS is not optional. Every production web service must use TLS to encrypt data in transit, prevent man-in-the-middle attacks, and protect user privacy. Browsers mark HTTP sites as "not secure." Regulations (GDPR, PCI-DSS, HIPAA) require encryption in transit. Go's `crypto/tls` package provides a reliable, production-ready TLS implementation used by Kubernetes, Docker, and major Go web frameworks. Go engineers must know how to configure TLS servers, generate certificates, and enforce secure defaults.
 
 ## Mental model
 

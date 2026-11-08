@@ -156,3 +156,7 @@ Production architectures use gRPC streaming for telemetry exporters (OpenTelemet
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[gRPC interceptors](../12-grpc-interceptors/README.md)

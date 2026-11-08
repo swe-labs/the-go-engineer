@@ -149,3 +149,7 @@ In production Go services, generics are most commonly applied in:
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Complex generic constraints](../02-complex-generic-constraints/README.md)

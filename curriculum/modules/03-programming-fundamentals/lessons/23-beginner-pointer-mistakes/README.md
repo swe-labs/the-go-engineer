@@ -197,7 +197,7 @@ And call with `c.Increment()` — Go automatically takes the address of `c` for 
 - **Use `*T` for method receivers** when the method modifies the receiver or when `T` contains a mutex (sync.Mutex must not be copied).
 - **Never store `&slice[i]` after `append`**: The pointer may become invalid. Recompute after every `append`.
 - **Interface nil vs pointer nil**: A `*int` variable that is nil does not make the interface holding it nil. `var p *int; var i interface{} = p; i == nil` is `false`. This is a common source of bugs in error handling.
-- **Go 1.22+ fixed the range variable**: Update your go.mod `go` directive to 1.22 and remove `v := v` shims, but keep them if you support older toolchains.
+- **Go 1.22+ fixed the range variable**: Update your go.mod `go` directive to 1.27.0 and remove `v := v` shims, but keep them if you support older toolchains.
 
 ## Performance implications
 

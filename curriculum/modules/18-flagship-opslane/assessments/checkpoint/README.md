@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Flagship Opslane:
 
 ## Targets
 
@@ -22,13 +22,13 @@ Validate mastery for the target curriculum items.
 - `opslane-14`
 - `opslane-15`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Visual Model: Complete Opslane Flagship Distributed Architecture
+## Visual Model: Complete Opslane Flagship Distributed Architecture
 
 ```
 +-----------------------------------------------------------------------------------------+
@@ -77,7 +77,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 2. Core Architectural Scenarios
+## Core Architectural Scenarios
 
 ### Scenario 1: Multi-Tenant Data Isolation & Query Security (`opslane-01` to `opslane-05`)
 - How does the Opslane HTTP middleware inject tenant identity into the request `context.Context`?
@@ -100,7 +100,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 3. Invariant Production Rules
+## Invariant Production Rules
 
 1. **Strict Multi-Tenant Boundary**: All database reads, writes, and cache keys MUST incorporate the tenant identifier.
 2. **Never Publish Events Before Commit**: Asynchronous events must only trigger after the local database transaction is committed to disk.
@@ -109,7 +109,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 4. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -120,6 +120,10 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 5. Submission Requirements
+## Submission Requirements
 
-Submit your answers to the 10 questions in `questions.md` demonstrating comprehensive mastery of the entire Opslane distributed platform.
+Submit your answers to the 10 questions in `questions.md` demonstrating mastery of the entire Opslane distributed platform.
+
+## Retake policy
+
+If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.

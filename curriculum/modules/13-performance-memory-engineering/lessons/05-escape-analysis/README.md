@@ -106,14 +106,20 @@ go build -gcflags='-m' ./curriculum/modules/13-performance-memory-engineering/le
 Expected output:
 
 ```
-./main.go:15:6: can inline stackAllocated
-./main.go:20:6: can inline heapAllocated
-./main.go:26:16: inlining call to stackAllocated
-./main.go:27:16: inlining call to heapAllocated
-./main.go:27:16: &User{...} escapes to heap
+./main.go:11:6: can inline stackAllocated
+./main.go:16:6: can inline heapAllocated
+./main.go:21:21: inlining call to stackAllocated
+./main.go:22:20: inlining call to heapAllocated
+./main.go:24:13: inlining call to fmt.Println
+./main.go:11:29: leaking param: name to result ~r0 level=0
+./main.go:16:28: leaking param: name
+./main.go:17:9: &User{...} escapes to heap
+./main.go:22:20: &User{...} escapes to heap
+./main.go:24:13: ... argument does not escape
+./main.go:24:14: a escapes to heap
 ```
 
-The `heapAllocated` call's `&User{...}` escapes because it is returned as a pointer. The `stackAllocated` call's `User` stays on the stack (after inlining).
+Three allocations are reported. At `main.go:17`, the `&User{}` returned by `heapAllocated` escapes because a pointer to it leaves the function. At `main.go:22`, the inlined `heapAllocated` call reports the same escape. At `main.go:24:14`, `a` escapes because `fmt.Println` takes `...any`; boxing `a` into an interface stores a pointer to a heap copy. The `leaking param: name` lines are related: the `string` field is copied into a value that escapes, so the parameter is treated as leaking to the result.
 
 ## Step-by-step execution
 
@@ -122,6 +128,47 @@ The `heapAllocated` call's `&User{...}` escapes because it is returned as a poin
 3. Escape analysis traces the `new` value: it is stored in the return value, which is used by the caller (`main`). Since the caller assigns the return value to a variable (`b`) that is used after the call, the allocation escapes to heap.
 4. For `stackAllocated`, the SSA creates a `User` struct value (not via `new`). The return value is a copy of the struct. The analysis finds no pointer escape — all uses of the struct are within the allocation frame.
 5. `main` calls `fmt.Println(a, b)`. The interface parameter of `fmt.Println` causes both `a` and `b` to escape because interface values store pointers to the concrete type. This is visible in the `-m` output.
+
+## Runtime evidence
+
+Confirm the package builds and its tests pass under the race detector:
+
+```bash
+go test -race -count=1 .
+```
+
+Expected output (from `curriculum/modules/13-performance-memory-engineering/lessons/05-escape-analysis`):
+
+```text
+ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/13-performance-memory-engineering/lessons/05-escape-analysis	2.0s
+```
+
+Now ask the compiler for the escape decisions and the reason for each one by passing `-m` twice:
+
+```bash
+go build -gcflags='-m -m' . 2>&1 | grep -A 6 "escapes to heap"
+```
+
+Expected output (trimmed to the escape sites):
+
+```text
+./main.go:17:9: &User{...} escapes to heap in heapAllocated:
+./main.go:17:9:   flow: ~r0 ← &{storage for &User{...}}:
+./main.go:22:20: &User{...} escapes to heap in main:
+./main.go:22:20:   flow: ~r0 ← &{storage for &User{...}}:
+./main.go:22:20:   flow: b ← ~r0:
+./main.go:22:20:   flow: {storage for ... argument} ← b:
+./main.go:22:20:   flow: fmt.a ← &{storage for ... argument}:
+./main.go:22:20:   flow: {heap} ← *fmt.a:
+./main.go:24:14: a escapes to heap in main:
+./main.go:24:14:   flow: {storage for ... argument} ← &{storage for a}:
+./main.go:24:14:   flow: fmt.a ← &{storage for ... argument}:
+./main.go:24:14:   flow: {heap} ← *fmt.a:
+```
+
+Interpretation: each `escapes to heap` line names the containing function (`in heapAllocated`, `in main`). The `flow:` lines form a chain that ends at `{heap}`. Read the chain `b` at `main.go:22:20` bottom-up: the returned `*User` is stored in `b`, `b` is boxed into the `... argument` slice, that slice is stored in `fmt.a`, and `*fmt.a` reaches `{heap}`. Because the heap reference is reachable, the allocation cannot stay on the stack. Remove `fmt.Println(a, b)` and the `a escapes to heap` report at `main.go:24:14` disappears, because nothing carries `a` past the function boundary.
+
+The `-gcflags` flag is applied at build time. Escape analysis runs before code generation, so checking it costs a rebuild but has no runtime effect.
 
 ## Common mistakes
 

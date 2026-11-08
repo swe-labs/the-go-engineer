@@ -16,7 +16,7 @@ Multi-stage build is like renting a fully equipped kitchen (builder stage) to pr
 
 ```mermaid
 flowchart LR
-    subgraph Stage1["Stage 1: Builder (golang:1.24-alpine ~350MB)"]
+    subgraph Stage1["Stage 1: Builder (golang:1.27-alpine ~350MB)"]
         SRC["Go Source Code"] --> COMPILER["go build -ldflags='-w -s'"]
         COMPILER --> BINARY["Static Binary: /bin/server (12MB)"]
     end
@@ -35,7 +35,7 @@ A multi-stage Dockerfile uses multiple `FROM` instructions. Each `FROM` starts a
 
 | Stage | Base image | Contents | Purpose |
 |---|---|---|---|
-| Builder | `golang:1.25-alpine` | Compiler, modules, source | Compile the binary |
+| Builder | `golang:1.27-alpine` | Compiler, modules, source | Compile the binary |
 | Runtime | `scratch` | Only the binary | Run the service |
 
 ## Under the hood
@@ -49,7 +49,7 @@ The `scratch` image is an empty filesystem — literally no files, no directorie
 The canonical multi-stage Dockerfile for Go:
 
 ```dockerfile
-FROM golang:1.25-alpine AS builder
+FROM golang:1.27-alpine AS builder
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
@@ -117,7 +117,7 @@ func main() {
 ## Step-by-step execution
 
 1. `docker build -t myapp .` sends the context to dockerd.
-2. Docker pulls `golang:1.25-alpine` for the builder stage.
+2. Docker pulls `golang:1.27-alpine` for the builder stage.
 3. `WORKDIR /app` creates the working directory.
 4. `COPY go.mod go.sum ./` copies dependency files.
 5. `RUN go mod download` caches dependencies.
@@ -137,14 +137,14 @@ The builder stage and its ~350 MB of layers are discarded. The final image conta
 - **Not stripping debug info.** Without `-ldflags="-s -w"`, the binary includes DWARF debug info and symbol tables, increasing size by 30-50%.
 - **Running the runtime stage as root.** The `scratch` image has no `/etc/passwd` by default, so `USER 1001` creates an anonymous user. For distroless, `USER nonroot` is already defined.
 - **Including unnecessary files from the builder.** `COPY --from=builder /go/bin/server` is better than `COPY --from=builder /go/ .` which copies the entire Go toolchain.
-- **Not pinning the Go version.** Using `golang:latest` in CI breaks builds when a new Go version is released. Pin to `golang:1.25-alpine`.
+- **Not pinning the Go version.** Using `golang:latest` in CI breaks builds when a new Go version is released. Pin to `golang:1.27-alpine`.
 
 ## Debugging walkthrough
 
 Consider a Dockerfile that builds a Go binary with CGO:
 
 ```dockerfile
-FROM golang:1.25-alpine AS builder
+FROM golang:1.27-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN go build -o server .
@@ -199,7 +199,7 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/lessons/08-multi-stage
 2. Why does a Go binary compiled with the default `CGO_ENABLED=1` fail on a `scratch` image?
 3. What do the `-ldflags="-s -w"` flags do, and why are they recommended for production?
 4. When would you choose `gcr.io/distroless/static` over `scratch` as the runtime base image?
-5. What is the final image size difference between a single-stage build with `golang:1.25` and a multi-stage build with `scratch`?
+5. What is the final image size difference between a single-stage build with `golang:1.27` and a multi-stage build with `scratch`?
 
 ## NEXT UP
 

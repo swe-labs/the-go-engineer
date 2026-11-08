@@ -151,7 +151,7 @@ When initialized without runtime templates (`tmpl = nil`), the server runs in **
 ```
 stage-04-htmx-alpine/
 ├── components/           # Type-Safe templ component library (GOTH stack)
-│   ├── components_test.go # Comprehensive unit tests for templ components
+│   ├── components_test.go # Complete unit tests for templ components
 │   ├── dashboard.templ   # Root HTML dashboard layout in templ
 │   ├── dashboard_templ.go # Generated Go source code
 │   ├── metrics_card.templ # Reactive metrics card with OOB swap support
@@ -223,4 +223,27 @@ Check out the complete comparative implementation in [`datastar/`](./datastar/RE
 2. **Task Priority Channels**: Refactor `taskQueue` into dual channels (`highPriorityQueue` and `lowPriorityQueue`) using a Go `select` statement.
 3. **Filtering Table Rows by Status**: Add an Alpine.js or HTMX filter bar (`All`, `Running`, `Completed`, `Cancelled`) to toggle row visibility.
 4. **Persistent Signal Store**: Persist client signals to local storage using Datastar `@persist` or server-side session sync.
+
+---
+
+## Stage mission
+
+Build a real-time worker-pool and metrics dashboard using HTMX partial swaps, out-of-band updates, Server-Sent Events, and Alpine.js micro-state, all driven by Go goroutines. The stage proves you can add rich interactivity without an SPA framework.
+
+## Backend alignment
+
+Aligns with [Module 11: Lifecycle, Context, and Concurrency](../../modules/11-lifecycle-context-concurrency/README.md) and [Module 12: Observability and Diagnostics](../../modules/12-observability-diagnostics/README.md). The worker pool, context cancellation, and SSE event broker mirror those modules' concurrency and observability patterns.
+
+## Verification and test suite
+
+```bash
+go test -v ./...
+```
+
+Then `go run main.go` and open `http://localhost:8080/`. Dispatch jobs, watch the out-of-band queue-depth update, cancel a running task, and follow the live SSE log stream.
+
+## Next stage
+
+The primary track ends here. Compare the SSE-first alternative in [`datastar/`](./datastar/README.md), then bring the whole companion stack into the [Flagship Opslane Console](../../modules/18-flagship-opslane/README.md).
+
 

@@ -22,6 +22,27 @@ input -> concept boundary -> behavior -> observable result
 
 Under the hood, interviewers evaluate four dimensions: technical depth (do you understand the concepts?), architectural thinking (can you reason about trade-offs?), communication (can you explain clearly?), and growth mindset (can you identify improvements?).
 
+A representative excerpt from `main.go` (`OpslaneSystemContract.VerifyIdempotency`):
+
+```go
+// VerifyIdempotency ensures second charge with same key returns cached transaction ID without re-executing.
+func (c *OpslaneSystemContract) VerifyIdempotency(key string) (txID string, wasCharged bool) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	if existingTx, found := c.idemKeys[key]; found {
+		c.criteria["idempotency"].Validated = true
+		return existingTx, false // Cached replay
+	}
+
+	c.chargesRun.Add(1)
+	newTx := fmt.Sprintf("tx-%d", c.chargesRun.Load())
+	c.idemKeys[key] = newTx
+
+	return newTx, true
+}
+```
+
 ## Run Instructions
 
 ```bash

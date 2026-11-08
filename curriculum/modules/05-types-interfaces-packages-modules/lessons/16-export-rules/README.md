@@ -252,4 +252,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/16-exp
 
 ## NEXT UP
 
-[Modules](../18-modules/README.md)
+[Project layout lab](../../labs/17-project-layout/README.md)

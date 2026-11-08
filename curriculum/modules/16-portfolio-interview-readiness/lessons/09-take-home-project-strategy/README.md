@@ -19,8 +19,8 @@ flowchart TD
     subgraph TakeHomeRubric["Winning Take-Home Assignment Deliverable"]
         D1["One-Command Run: 'docker compose up' boots app + DB + migrations"]
         D2["Clean Code: Follows standard cmd/ and internal/ package boundaries"]
-        D3["Robust Tests: Unit tests with mocks + end-to-end integration tests"]
-        D4["Comprehensive README: Documents architectural choices, trade-offs, and future improvements"]
+        D3["Reliable Tests: Unit tests with mocks + end-to-end integration tests"]
+        D4["Complete README: Documents architectural choices, trade-offs, and future improvements"]
 
         D1 --- D2 --- D3 --- D4
     end

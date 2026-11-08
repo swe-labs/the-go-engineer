@@ -8,6 +8,10 @@ Build the first serious backend service.
 
 Introduces backend service development through HTTP handlers, clients, middleware, request parsing, response writing, timeouts, and graceful shutdown.
 
+## Prerequisites
+
+- [Module 07: CLI, Files, JSON, Config, and Runtime Coordination](../07-cli-files-json-config/README.md) — complete that module's completion checkpoint before starting this one.
+
 ## Lessons
 
 - `core-08-01` HTTP as a protocol
@@ -32,6 +36,19 @@ Introduces backend service development through HTTP handlers, clients, middlewar
 - `core-08-20` OpenAPI basics
 - `core-08-21` HTTP Client
 
+## Projects
+
+- [`projects/book-catalog-rest-api/README.md`](./projects/book-catalog-rest-api/README.md) — **Book Catalog Rest Api**
+
+## Assessments
+
+- [`assessments/book-catalog-rest-api/README.md`](./assessments/book-catalog-rest-api/README.md) — **Book Catalog Rest Api**
+- [`assessments/checkpoint/README.md`](./assessments/checkpoint/README.md) — **Module 08 Checkpoint — HTTP, REST, and JSON Services**
+
 ## Completion
 
 Complete every required lesson, lab, project, and assessment for this module.
+
+## Next module
+
+After passing this module's exit gate, continue to [Module 09: SQL and PostgreSQL Persistence](../09-sql-postgres-persistence/README.md).

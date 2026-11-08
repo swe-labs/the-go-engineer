@@ -248,7 +248,7 @@ func (a *AppError) Is(target error) bool {
 
 ## Production notes
 
-- **Always use `errors.Is` for sentinel matching in library code**: Callers may wrap your sentinel. Using `errors.Is` in your own internal checks makes your code robust to its own wrapping.
+- **Always use `errors.Is` for sentinel matching in library code**: Callers may wrap your sentinel. Using `errors.Is` in your own internal checks makes your code reliable to its own wrapping.
 
 - **Prefer sentinel errors over error types when callers only need equality**: A sentinel (`var ErrX = errors.New(...)`) is simpler and works with `errors.Is` trivially. Only create a custom type when you need to carry structured data.
 

@@ -38,8 +38,9 @@ Before authoring, read (in this order):
 8. Write beginner_mistakes (with mechanical root cause)
 9. Write hidden_magic_checks (questions that force mechanical reasoning)
 10. Write proof_of_understanding (how mastery is demonstrated)
-11. Self-review against the Quality Rubric (quality-rubric.md)
-12. Run the 17-gate automated validator: go run ./scripts/validate_curriculum.go
+11. Apply the global `technical-writing` prose quality pass: deletion test, explanation ladder, analogy contract, evidence discipline, anti-slop
+12. Self-review against the Quality Rubric (quality-rubric.md)
+13. Run the automated validator: go run ./scripts/validate_curriculum.go
 ```
 
 ---
@@ -324,6 +325,65 @@ Check the golden lesson index below for lessons that exemplify each recommended 
 
 ---
 
+## Prose Quality and Anti-Slop
+
+The curriculum contract governs structure: headings, contracts, physical models, and navigation. The global `technical-writing` skill governs whether the prose is necessary, legible, and grounded.
+
+### The deletion test
+
+For every paragraph, ask: if I remove this, does the learner lose a capability, a causal link, or a verification step? If not, cut it. Length is earned, not minimized. A long lesson is acceptable when every section carries weight; a short lesson is not automatically good.
+
+### The explanation ladder
+
+Use five levels, in order:
+
+1. Purpose: one sentence.
+2. Concrete anchor: a real input, example, or failure.
+3. Mechanism: how it works, with a diagram or timeline when the concept has spatial or temporal structure.
+4. Edge cases: where it breaks and what it costs.
+5. Verification: the command or observation that proves the claim.
+
+Do not stop at the analogy. The mechanism is the lesson.
+
+### The analogy contract
+
+Map each element of the analogy to the mechanism, state where the analogy breaks, and return to the physical or execution model. A mental model that cannot survive an edge case is a liability.
+
+Bad:
+
+> A slice is like a box.
+
+Good:
+
+> A slice is a window into a backing array. The pointer is where the window starts, the length is how many elements you can see, and the capacity is how many elements exist from that start to the end of the array. The window analogy breaks when `append` reallocates: the old window does not grow; it points to a new, larger array.
+
+### Evidence discipline
+
+Use measured numbers, runnable commands, and expected output. State the toolchain, environment, and command for any benchmark. Do not invent "typical" numbers or rely on vague "best practice" claims. If a claim is a hypothesis, label it.
+
+### Anti-slop checklist
+
+- No generic introduction that could open any lesson.
+- No heading restated as a sentence.
+- No fake transition ("Now that we have seen X, let us look at Y").
+- No summary that repeats the body instead of adding a decision rule.
+- No unsupported superlatives ("best", "fastest", "most secure").
+- No vague words replacing a measurement ("robust", "seamless", "comprehensive").
+- Every bullet list is prioritized or ordered.
+- Every analogy is mapped and bounded.
+
+### Before and after
+
+Before:
+
+> Error handling is a critical aspect of modern software development. In this lesson, we will explore best practices for handling errors in Go and discuss why they matter for building reliable systems.
+
+After:
+
+> A Go function that returns `nil` on a failed database write hides the failure from every caller. This lesson shows how to wrap the error with the operation and the row ID, return it to the handler, and map it to a 500 response without leaking the SQL text.
+
+---
+
 ## Quality Self-Review Checklist
 
 Before submitting, score your lesson against each dimension from the full rubric (see `quality-rubric.md` for detailed criteria):
@@ -342,6 +402,14 @@ Before submitting, score your lesson against each dimension from the full rubric
 | Failure realism      | 4+              | Do failure modes describe trigger → symptom → root cause → detection? |
 
 Passing threshold for golden standard: **4/5 per dimension, 45/50 overall.**
+
+Prose quality gate (binary, in addition to the scored rubric):
+
+- [ ] Every paragraph passes the deletion test.
+- [ ] Every analogy is mapped, bounded, and returned to the mechanism.
+- [ ] Every number is measured or cited with a reproducible command.
+- [ ] No generic introduction, restated heading, fake transition, or summary padding.
+- [ ] No unsupported superlative or vague claim standing in for evidence.
 
 ---
 

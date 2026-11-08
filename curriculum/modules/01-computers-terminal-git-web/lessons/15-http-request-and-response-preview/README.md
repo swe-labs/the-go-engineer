@@ -276,3 +276,5 @@ Modern production systems design APIs around clear HTTP semantics. REST APIs use
 Advance to Step 2 (Capstone Project):
 
 - [Project: Shell + Git Lab](../../projects/shell-git-lab/README.md)
+
+Then continue to [Install and verify Go](../../../02-go-setup-tooling/lessons/01-install-and-verify-go/README.md) in Module 02.

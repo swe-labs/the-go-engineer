@@ -3,7 +3,7 @@
 ## Assessment Dimensions
 
 ### 1. Probe Separation & Orchestration Semantics (30%)
-- **Excellent (5 pts)**: Complete decoupling of `/health/live` (lightweight, zero external dependencies) from `/health/ready` (comprehensive dependency evaluation); HTTP 200 vs 503 status codes conform to orchestrator specs.
+- **Excellent (5 pts)**: Complete decoupling of `/health/live` (lightweight, zero external dependencies) from `/health/ready` (thorough dependency evaluation); HTTP 200 vs 503 status codes conform to orchestrator specs.
 - **Proficient (3 pts)**: Probes separated, but liveness executes light dependency queries or readiness returns 500 instead of 503.
 - **Developing (1 pt)**: Single health endpoint combines liveness and readiness indiscriminately.
 - **Unacceptable (0 pts)**: No health endpoints implemented.

@@ -1,6 +1,6 @@
 # Course Setup Verification
 
-## Goal
+## Learning objective
 
 Verify that your development environment is ready for this curriculum. You will confirm that your terminal, Git, and a text editor are installed and configured, and establish your personal development workspace directory for course projects.
 
@@ -10,6 +10,10 @@ Verify that your development environment is ready for this curriculum. You will 
 - A terminal application open (Bash, Zsh, PowerShell, etc.)
 - Git installed on your system
 - A text editor or IDE installed (VS Code, GoLand, Neovim, etc.)
+
+## Project overview
+
+This is a lightweight, non-coding orientation project. Its deliverable is a single `setup.txt` evidence file recording your Git version and committer identity, plus a dedicated personal workspace directory (`~/the-go-engineer-workspace`) that lives outside the curriculum repository and holds the code for every project that follows.
 
 ## Tasks
 
@@ -50,6 +54,16 @@ Review your `setup.txt` file and verify:
 - Your personal workspace directory exists and is ready for project work.
 
 When you are done, note this milestone in your personal portfolio plan from Lesson 10.
+
+## Rubric
+
+| Criterion | Weight | Passing standard |
+| --- | --- | --- |
+| Toolchain verification | 40% | Terminal, Git, and editor confirmed working; `git --version` reports a supported release. |
+| Git identity configured | 30% | `git config user.name` and `git config user.email` both return non-empty values. |
+| Workspace established | 30% | A personal workspace directory exists outside the curriculum repository. |
+
+A passing score is 80% with all three criteria satisfied.
 
 ## NEXT UP
 

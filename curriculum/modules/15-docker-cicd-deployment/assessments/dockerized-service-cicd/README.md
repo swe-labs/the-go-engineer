@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Docker, CI/CD, and Deployment:
 
 ## Targets
 
 - `project-dockerized-service-cicd`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Assessment Overview & Industrial Context
+## Assessment Overview & Industrial Context
 
 Modern cloud platforms (Kubernetes, AWS ECS, Nomad) deploy services as lightweight, secure container images. Deploying raw Go binaries directly or relying on bloated single-stage container builds exposes severe operational problems:
 - **Massive Image Footprints**: A single-stage container that includes the entire Go compiler, package toolchain, and build cache can exceed 800MB, increasing deployment time, network bandwidth consumption, and cluster autoscaling latency.
@@ -26,9 +26,9 @@ In this assessment, you will containerize a production-grade Go HTTP microservic
 
 ---
 
-## 2. Core Competencies Tested
+## Core Competencies Tested
 
-- **Multi-Stage Dockerfile Optimization**: Separating the build environment (`golang:1.24-alpine`) from the minimal runtime environment (`scratch` or minimal `alpine`), leveraging layer caching for `go.mod` dependencies.
+- **Multi-Stage Dockerfile Optimization**: Separating the build environment (`golang:1.27-alpine`) from the minimal runtime environment (`scratch` or minimal `alpine`), leveraging layer caching for `go.mod` dependencies.
 - **Static Compilation & Binary Hardening**: Compiling CGO-free static binaries using `CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w"`.
 - **Container Security & Least Privilege**: Creating and enforcing an unprivileged non-root user (`USER appuser:appuser`, UID `10001`), bundling essential root CA certificates (`ca-certificates`), and eliminating shells from production images.
 - **Orchestration Probes & Graceful Drain**: Implementing independent `/healthz` (liveness) and `/readyz` (readiness) HTTP endpoints, a CLI healthcheck command flag (`-healthcheck`), and signal-driven graceful shutdown (`SIGTERM`/`SIGINT`).
@@ -36,11 +36,11 @@ In this assessment, you will containerize a production-grade Go HTTP microservic
 
 ---
 
-## 3. Zero-Magic Architectural Breakdown
+## Zero-Magic Architectural Breakdown
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│ STAGE 1: BUILDER (golang:1.24-alpine)                    │
+│ STAGE 1: BUILDER (golang:1.27-alpine)                    │
 │   1. Install ca-certificates & tzdata                    │
 │   2. Create unprivileged appuser (UID 10001)             │
 │   3. COPY go.mod go.sum -> RUN go mod download (CACHED)  │
@@ -67,12 +67,12 @@ By default, Go dynamically links to `libc` if certain standard library features 
 
 ---
 
-## 4. Implementation Requirements & Task Breakdown
+## Implementation Requirements & Task Breakdown
 
 ### Task 1: Multi-Stage `Dockerfile`
 In `_starter/Dockerfile`:
 - Builder Stage:
-  - Base: `golang:1.24-alpine AS builder`.
+  - Base: `golang:1.27-alpine AS builder`.
   - Install `ca-certificates` and `tzdata`.
   - Create non-root user: `RUN adduser -D -g '' -u 10001 appuser`.
   - Copy `go.mod` and `go.sum`; execute `go mod download`.
@@ -110,7 +110,7 @@ In `_starter/.github/workflows/ci.yml`:
 
 ---
 
-## 5. Verification & Acceptance Criteria
+## Verification & Acceptance Criteria
 
 Run test verification suite:
 
@@ -127,7 +127,7 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/projects/dockerized-se
 
 ---
 
-## 6. Common Pitfalls & Anti-Patterns
+## Common Pitfalls & Anti-Patterns
 
 1. **Missing CA Certificates in `scratch`**:
    *Anti-pattern*: Using `FROM scratch` without copying `/etc/ssl/certs/ca-certificates.crt`. Any outbound HTTPS call (e.g. third-party APIs, webhooks) will fail with `x509: certificate signed by unknown authority`.
@@ -143,7 +143,7 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/projects/dockerized-se
 
 ---
 
-## 7. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -154,8 +154,12 @@ go test -v ./curriculum/modules/15-docker-cicd-deployment/projects/dockerized-se
 
 ---
 
-## 8. Submission & Reflection
+## Submission & Reflection
 
 1. Submit the output from `docker build` showing stage transitions and final image size.
 2. Submit test output from `go test -v ./...`.
 3. Answer: *Why is `/bin/sh` or `/bin/bash` intentionally excluded from production runtime container images in high-security environments?*
+
+## Retake policy
+
+If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.

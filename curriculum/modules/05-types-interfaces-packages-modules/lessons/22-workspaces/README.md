@@ -25,7 +25,7 @@ Think of `go.work` as a **temporary, developer-local overlay** on top of the mod
 flowchart TD
     subgraph GoWorkspace["go.work Workspace Configuration"]
         WORK["go.work:
-go 1.22
+go 1.27.0
 use (
     ./service-api
     ./shared-sdk
@@ -51,7 +51,7 @@ import "example.com/sdk""]
 ### The `go.work` file
 
 ```
-go 1.25.0
+go 1.27.0
 
 use (
     ./myapp
@@ -128,7 +128,7 @@ The `go.work` file is intentionally not part of the module's public API. It is n
 
 ```go
 // go.work
-go 1.25.0
+go 1.27.0
 
 use (
     ./app

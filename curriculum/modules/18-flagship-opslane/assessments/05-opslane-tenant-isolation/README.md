@@ -45,6 +45,32 @@ Under the hood:
 2. The table `tenant_orders` defines `PRIMARY KEY (tenant_id, id)`. This B-tree index layout clusters all rows belonging to a tenant together physically on disk, optimizing cache locality and range scans.
 3. Every mutating statement (`UPDATE`, `DELETE`) inspects `res.RowsAffected()`. If a caller attempts to update or delete an order with ID `"ord-1"` but their context specifies `tenant-beta` while the order belongs to `tenant-alpha`, `RowsAffected` evaluates to `0`, preventing unauthorized modification.
 
+A representative excerpt from `main.go` (`IsolatedStore.GetByID`):
+
+```go
+// GetByID queries an order enforcing the tenant boundary.
+func (s *IsolatedStore) GetByID(ctx context.Context, id string) (*TenantOrder, error) {
+	tenantID, err := TenantFromContext(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	query := `SELECT id, tenant_id, title, amount, created_at FROM tenant_orders WHERE tenant_id = ? AND id = ?`
+	var o TenantOrder
+	err = s.db.QueryRowContext(ctx, query, tenantID, id).Scan(
+		&o.ID, &o.TenantID, &o.Title, &o.Amount, &o.CreatedAt,
+	)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, nil // Not found within this tenant's silo
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	return &o, nil
+}
+```
+
 ## Run Instructions
 
 ```bash

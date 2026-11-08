@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Docker, CI/CD, and Deployment:
 
 ## Targets
 
@@ -26,13 +26,13 @@ Validate mastery for the target curriculum items.
 - `core-15-18`
 - `core-15-19`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Deep-Dive Cloud-Native & Deployment Scenarios
+## Deep-Dive Cloud-Native & Deployment Scenarios
 
 Provide rigorous, production-grade answers to each scenario, referencing Linux container specifications (OCI), cgroups v2, Docker engine internals, and orchestration platforms (Kubernetes).
 
@@ -72,7 +72,7 @@ A software engineering team wants to implement an enterprise GitHub Actions CI/C
 
 ---
 
-## 2. Practical Containerization Challenge
+## Practical Containerization Challenge
 
 Write and verify the deployment files for a production Go microservice:
 1. An optimized multi-stage `Dockerfile` producing a static non-root `scratch` image with CA certificates and timezone data.
@@ -84,7 +84,7 @@ Write and verify the deployment files for a production Go microservice:
 
 ---
 
-## 3. Invariant Deployment Rules
+## Invariant Deployment Rules
 
 1. **Never Run as Root in Production**: Always specify `USER <non-root-uid>` in the production container stage.
 2. **Deterministic Static Builds**: Always compile with `CGO_ENABLED=0 -trimpath -ldflags="-s -w"` for container deployments.
@@ -93,7 +93,7 @@ Write and verify the deployment files for a production Go microservice:
 
 ---
 
-## 4. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -104,6 +104,10 @@ Write and verify the deployment files for a production Go microservice:
 
 ---
 
-## 5. Submission Requirements
+## Submission Requirements
 
 Submit your detailed answers for Scenarios 1–4 and the complete Dockerfile, docker-compose.yml, and Go source code for the practical containerization challenge.
+
+## Retake policy
+
+If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.

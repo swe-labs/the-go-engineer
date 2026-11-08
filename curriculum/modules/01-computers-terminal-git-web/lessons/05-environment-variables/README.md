@@ -248,7 +248,7 @@ The **Twelve-Factor App methodology** dictates that configuration must be strict
 1. What does "one-way environment inheritance" mean when a parent shell spawns a child process?
 2. If two different directories in `$PATH` both contain an executable named `app`, which one will the shell execute and why?
 3. Why is the current directory (`.`) excluded from `$PATH` by default on POSIX operating systems?
-4. In Go, what is the crucial behavioral difference between `os.Getenv("VAR")` and `os.LookupEnv("VAR")`?
+4. In Go, what is the essential behavioral difference between `os.Getenv("VAR")` and `os.LookupEnv("VAR")`?
 5. How does the Twelve-Factor App methodology utilize environment variables in production cloud deployments?
 
 ## NEXT UP

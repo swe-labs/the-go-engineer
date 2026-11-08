@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Portfolio and Interview Readiness:
 
 ## Targets
 
@@ -22,13 +22,13 @@ Validate mastery for the target curriculum items.
 - `core-16-14`
 - `core-16-15`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Visual Model: Career Engineering & Interview Execution Lifecycle
+## Visual Model: Career Engineering & Interview Execution Lifecycle
 
 ```
 +-----------------------------------------------------------------------------------------+
@@ -66,7 +66,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 2. Core Scenarios
+## Core Scenarios
 
 ### Scenario 1: Portfolio Strategy & Architectural Case Studies (`core-16-01` to `core-16-04`)
 You are curating your GitHub profile for Senior Backend Engineer roles at top-tier distributed systems and cloud infrastructure companies.
@@ -92,7 +92,7 @@ You receive an initial offer of $160,000 base + equity, but market benchmarks fo
 
 ---
 
-## 3. Invariant Career Rules
+## Invariant Career Rules
 
 1. **Never Make Unverifiable Claims**: If a technology or architectural pattern is listed on your resume, you must be prepared to write it, profile it, and debug it live.
 2. **Code Speaks Through Tests**: In live coding and take-home exercises, untested code is considered broken code. Always write tests first or concurrently.
@@ -101,7 +101,7 @@ You receive an initial offer of $160,000 base + equity, but market benchmarks fo
 
 ---
 
-## 4. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -112,6 +112,10 @@ You receive an initial offer of $160,000 base + equity, but market benchmarks fo
 
 ---
 
-## 5. Submission Requirements
+## Submission Requirements
 
 Submit your answers to the 10 questions in `questions.md` demonstrating mastery of portfolio curation, live technical communication, and career engineering.
+
+## Retake policy
+
+If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.

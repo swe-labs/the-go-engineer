@@ -155,7 +155,7 @@ All instructional authoring must follow the 4-step engineering pipeline:
 1. **Specification Contract**: Define measurable behavioral objectives and exact physical preconditions.
 2. **Table-Driven TDD Test Scaffold**: Construct table-driven test cases covering nominal, boundary, and failure conditions.
 3. **Hardware-Grounded Implementation & Prose**: Write the mechanical narrative and complete runnable Go code.
-4. **Quality Gate Audit**: Verify against all 17 automated quality gates (`go run ./scripts/validate_curriculum.go`).
+4. **Quality Gate Audit**: Verify against all automated quality gates (`go run ./scripts/validate_curriculum.go`).
 
 ### 6. Cognitive Anchor Quotes Standard
 
@@ -178,10 +178,13 @@ Debugging walkthroughs must feature real Delve (`dlv`) stack frame navigation co
 
 ### 9. Anti-Overengineering & Anti-Slop Directive
 
-Do not force all 17 headings onto a lesson if the subject matter does not warrant them. Forcing an orientation lesson, shell introduction, or career strategy document to invent a fake `Performance implications` or fake `Under the hood` produces **artificial template slop**, violating zero-magic principles. Omit non-applicable sections rather than populating them with placeholder filler. Always respect the item's `content_contract` flags and `subtype_profiles` defined in `curriculum/readme.contracts.json`.
+Do not force every allowed heading onto a lesson if the subject matter does not warrant them. Forcing an orientation lesson, shell introduction, or career strategy document to invent a fake `Performance implications` or fake `Under the hood` produces **artificial template slop**, violating zero-magic principles. Omit non-applicable sections rather than populating them with placeholder filler. Always respect the item's `content_contract` flags and `subtype_modifiers` defined in `curriculum/readme.contracts.json`.
 
-- **6 Core Invariant Headings**: Mandatory across ALL lessons (`Learning objective`, `Why this matters`, `Mental model`, `Common mistakes`, `Review questions`, `NEXT UP`).
-- **11 Contextual Headings**: Enforced only when applicable based on `subtype` and `content_contract` flags.
+- **Nine document families**: `root.v3`, `module.v3`, `lesson.v3`, `elective-lesson.v3`, `project.v3`, `assessment.v3`, `flagship.v3`, `flagship-checkpoint.v3`, and `companion-stage.v3`, selected per item by `type`/`subtype`.
+- **Small invariant core**: each family declares the short list of `required_headings` every member must contain (a standard lesson requires `Learning objective`, `Why this matters`, `Mental model`, `Common mistakes`, `Review questions`, and `NEXT UP`).
+- **Optional allowlist**: `optional_headings` are permitted but never required. Omission is correct, not a violation.
+- **Subtype modifiers**: per-subtype rules add or forbid specific sections (an `orientation` lesson forbids `Go example` and the code-heavy sections while requiring `Visual model`).
+- **Derived file/code policy**: `file_policy` and `code_policy` derive from the item's `content_contract` flags, so a pure-theory lesson may ship a README alone while a runnable lesson must ship source and tests.
 
 ---
 

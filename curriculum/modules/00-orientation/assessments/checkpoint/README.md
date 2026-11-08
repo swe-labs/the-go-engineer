@@ -56,6 +56,17 @@ You pass when your answers show that you can navigate the curriculum without gue
 
 Use `rubric.md` to self-grade before comparing with `answer-key.md`.
 
+## Rubric
+
+| Dimension | Weight | Passing standard |
+| --- | --- | --- |
+| Repository navigation | 30% | Locates lessons, projects, and assessments without guessing and explains the folder layout. |
+| Zero-magic contract | 30% | Explains what zero-magic means and how proof (tests, transcripts) demonstrates understanding. |
+| Workflow and tooling | 25% | Runs examples and tests, uses starters correctly, and describes the lesson/lab/project workflow. |
+| Roadmap and portfolio planning | 15% | Articulates a personal roadmap and how completed work becomes portfolio evidence. |
+
+A passing score is 70%, with no single dimension below 50%.
+
 ## Retake policy
 
 If you miss a category, return to the relevant lesson, revise your answer, and write one sentence explaining what changed in your understanding.

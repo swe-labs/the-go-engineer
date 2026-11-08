@@ -6,7 +6,7 @@ Extract data from HTTP requests using query strings (`r.URL.Query`), path values
 
 ## Why this matters
 
-Every HTTP handler needs to read input. The input can come from the URL path, query parameters, headers, or the request body. Parsing these correctly is the difference between a robust API that gracefully handles edge cases and one that panics on missing data or crashes on malformed input. Go's standard library provides direct, zero-allocation access to each of these sources — but each has its own gotchas around encoding, escaping, and buffering.
+Every HTTP handler needs to read input. The input can come from the URL path, query parameters, headers, or the request body. Parsing these correctly is the difference between a reliable API that gracefully handles edge cases and one that panics on missing data or crashes on malformed input. Go's standard library provides direct, zero-allocation access to each of these sources — but each has its own gotchas around encoding, escaping, and buffering.
 
 ## Mental model
 
@@ -166,7 +166,7 @@ mux.HandleFunc("GET /users/{id}", func(w http.ResponseWriter, r *http.Request) {
 
 **Root cause**: Go version < 1.22. `r.PathValue` was introduced in Go 1.22. On older versions, the method exists (it was added to `*http.Request` in 1.22) but returns empty string because `ServeMux` doesn't set path values.
 
-**Fix**: Update `go.mod` to Go 1.22+: `go mod edit -go=1.22`. Or use a third-party router that supports path parameters.
+**Fix**: Update `go.mod` to Go 1.27+: `go mod edit -go=1.27.0`. Or use a third-party router that supports path parameters.
 
 ## Production notes
 

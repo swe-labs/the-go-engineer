@@ -224,3 +224,5 @@ Expected output should include:
 Advance to Step 2 (Capstone Project):
 
 - [Project: Tooling Failure Lab](../../projects/tooling-failure-lab/README.md)
+
+Then continue to [Values and expressions](../../../03-programming-fundamentals/lessons/01-values-and-expressions/README.md) in Module 03.

@@ -35,7 +35,7 @@ Your mission is to build an enterprise-ready containerized service:
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│ STAGE 1: BUILDER (golang:1.24-alpine)                    │
+│ STAGE 1: BUILDER (golang:1.27-alpine)                    │
 │   1. Install ca-certificates & create appuser (UID 10001)│
 │   2. COPY go.mod go.sum -> RUN go mod download (CACHED)  │
 │   3. COPY source code                                    │
@@ -58,7 +58,7 @@ Your mission is to build an enterprise-ready containerized service:
 ### Task 1 — Multi-Stage Dockerfile Optimization
 
 In `_starter/Dockerfile`:
-- Define `FROM golang:1.24-alpine AS builder`.
+- Define `FROM golang:1.27-alpine AS builder`.
 - Install `ca-certificates` and `tzdata`.
 - Create an unprivileged user `appuser` (UID `10001`).
 - Copy `go.mod` and `go.sum` first; run `go mod download`.

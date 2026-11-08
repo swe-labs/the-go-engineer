@@ -52,6 +52,21 @@ Under the hood:
 3. The `GET /metrics` route mounts `promhttp.HandlerFor(s.metrics.Registry, promhttp.HandlerOpts{})`, outputting standard text-based Prometheus exposition format.
 4. Structured logging emits JSON lines with key-value pairs (`"correlation_id"`, `"tenant_id"`, `"duration_sec"`), allowing log aggregators to index events in real time.
 
+A representative excerpt from `main.go` (`handleProcessOrder`):
+
+```go
+	// 1. Record Prometheus metrics
+	s.metrics.OrdersProcessedTotal.WithLabelValues(tenantID, "success").Inc()
+	s.metrics.OrderProcessingDuration.WithLabelValues(tenantID, "success").Observe(duration)
+
+	// 2. Structured slog log with correlation ID
+	s.logger.Info("Order processed successfully",
+		"correlation_id", corrID,
+		"tenant_id", tenantID,
+		"duration_sec", duration,
+	)
+```
+
 ## Run Instructions
 
 ```bash

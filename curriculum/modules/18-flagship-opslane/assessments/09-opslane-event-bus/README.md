@@ -42,6 +42,24 @@ Under the hood:
 3. Handlers run in isolated goroutines: `b.wg.Add(1)` tracks active execution. Each goroutine establishes a panic recovery boundary with `defer recover()`, preventing unhandled errors in third-party handlers from crashing the entire process.
 4. `Close(ctx)` sets `b.closed = true`, spawns a waiter on `b.wg.Wait()`, and uses `select` to return cleanly when all handlers finish or return `ctx.Err()` if shutdown timeout expires.
 
+A representative excerpt from `main.go` (`EventBus.Publish`):
+
+```go
+	for _, sub := range allSubs {
+		b.wg.Add(1)
+		go func(s Subscription) {
+			defer b.wg.Done()
+			defer func() {
+				if r := recover(); r != nil {
+					log.Printf("[EventBus] Recovered panic in handler for topic %s: %v", s.topic, r)
+				}
+			}()
+
+			_ = s.handler(ctx, e)
+		}(sub)
+	}
+```
+
 ## Run Instructions
 
 ```bash

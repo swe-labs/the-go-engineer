@@ -2,7 +2,7 @@
 
 ## When you need this
 
-Use build tags when your Go project requires conditional compilation based on the target operating system (e.g., Linux vs Windows), architecture (e.g., amd64 vs arm64), Go release versions (e.g., go1.22), integration test environments (//go:build integration), or Cgo availability.
+Use build tags when your Go project requires conditional compilation based on the target operating system (e.g., Linux vs Windows), architecture (e.g., amd64 vs arm64), Go release versions (e.g., go1.27), integration test environments (//go:build integration), or Cgo availability.
 
 ## When you do not need this
 
@@ -117,3 +117,7 @@ Production Go services use build tags to isolate heavy integration tests requiri
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[go generate](../07-go-generate/README.md)

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Observability and Diagnostics:
 
 ## Targets
 
@@ -19,13 +19,13 @@ Validate mastery for the target curriculum items.
 - `core-12-11`
 - `core-12-12`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Theoretical & Architecture Scenarios
+## Theoretical & Architecture Scenarios
 
 Answer each scenario in depth, citing Go runtime mechanics, standard library specifications (`log/slog`, `net/http/pprof`), and telemetry standards (Prometheus, OpenTelemetry).
 
@@ -68,7 +68,7 @@ A production Go service experiences high CPU utilization and latency spikes duri
 
 ---
 
-## 2. Practical Diagnostic Challenge
+## Practical Diagnostic Challenge
 
 Write a self-contained Go demonstration or code snippet illustrating:
 1. Setting up a root `slog.Logger` configured with a custom JSON handler that extracts OpenTelemetry `trace_id` and `span_id` from `context.Context` and appends them to all emitted log records.
@@ -80,7 +80,7 @@ Write a self-contained Go demonstration or code snippet illustrating:
 
 ---
 
-## 3. Invariant Operational Rules
+## Invariant Operational Rules
 
 1. **Strict Cardinality Bounds**: Prometheus metric label sets must NEVER include unbounded identifiers (UUIDs, timestamps, user IDs, credit card numbers, email addresses).
 2. **Context Continuity**: Never discard `context.Context` when invoking logging or tracing methods in HTTP or gRPC request paths.
@@ -89,7 +89,7 @@ Write a self-contained Go demonstration or code snippet illustrating:
 
 ---
 
-## 4. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -100,6 +100,10 @@ Write a self-contained Go demonstration or code snippet illustrating:
 
 ---
 
-## 5. Submission & Verification
+## Submission & Verification
 
 Submit a markdown document containing your complete technical analyses for Scenarios 1–5 and your tested code snippet for the practical challenge.
+
+## Retake policy
+
+If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.

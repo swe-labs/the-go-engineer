@@ -130,7 +130,7 @@ Hands-on diagnostic drills are embedded in each lesson:
 
 ## Assessments
 
-- [Tooling Failure Lab Assessment](./assessments/tooling-failure-lab/README.md): Comprehensive evaluation covering toolchain mechanics, compilation pipelines, module root principles, and troubleshooting defense.
+- [Tooling Failure Lab Assessment](./assessments/tooling-failure-lab/README.md): Thorough evaluation covering toolchain mechanics, compilation pipelines, module root principles, and troubleshooting defense.
 
 ## Common failure modes
 
@@ -147,7 +147,7 @@ Hands-on diagnostic drills are embedded in each lesson:
 
 You are ready for Module 03 when you can:
 
-- [ ] Execute `go version` and confirm a supported Go release (1.24+ or 1.26+).
+- [ ] Execute `go version` and confirm a supported Go release (1.27+).
 - [ ] Explain the physical role of `GOROOT`, `GOPATH`, and the `$PATH` variable.
 - [ ] Describe the exact difference between `go run` (ephemeral) and `go build` (persistent static binary).
 - [ ] Run `go test -v .` and interpret test pass and failure output.

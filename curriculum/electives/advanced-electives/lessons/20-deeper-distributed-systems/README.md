@@ -144,3 +144,7 @@ Core cloud infrastructure like Kubernetes (`etcd`), HashiCorp Consul, and Kafka 
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Why orchestration: desired state and the control loop](../21-why-orchestration/README.md)

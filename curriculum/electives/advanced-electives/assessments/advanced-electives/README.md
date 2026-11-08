@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Validate that you can scope, build, test, and defend a Go project on an advanced elective topic.
 
 ## Targets
 
 - `project-advanced-electives`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide a working repository, captured `go test -race ./...` and benchmark output, and a written architecture decision record for the chosen elective topic.
 
 ---
 
-## 1. Visual Model: Specialization Stream Verification Pipeline
+## Visual Model: Specialization Stream Verification Pipeline
 
 ```
 +-----------------------------------------------------------------------------------------+
@@ -34,7 +34,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 2. Assessment Requirements
+## Assessment Requirements
 
 1. **Production-Grade Implementation**:
    - Implement one or more specialization streams under `curriculum/electives/advanced-electives/`.
@@ -46,7 +46,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 3. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -57,7 +57,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 4. Verification
+## Verification
 
 ```bash
 # Run all 20 advanced elective test suites

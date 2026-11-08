@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Validate configuration values at startup by checking required fields, type constraints, and range boundaries, and return comprehensive validation errors that fail fast before the application serves traffic.
+Validate configuration values at startup by checking required fields, type constraints, and range boundaries, and return thorough validation errors that fail fast before the application serves traffic.
 
 ## Why this matters
 

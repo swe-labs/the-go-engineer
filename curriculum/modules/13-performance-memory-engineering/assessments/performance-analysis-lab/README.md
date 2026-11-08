@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Performance and Memory Engineering:
 
 ## Targets
 
 - `project-performance-analysis-lab`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Assessment Overview & Industrial Context
+## Assessment Overview & Industrial Context
 
 Concurrency bottlenecks in Go are rarely exposed during basic unit testing. A single shared mutex guarding a map or state structure will pass hundreds of sequential tests effortlessly. However, when deployed under high parallel concurrency (tens of thousands of requests per second across 16+ CPU cores), goroutines pile up in a lock convoy waiting to acquire the single mutex lock. This causes CPU cache bouncing, lock contention stalls, and throughput collapse.
 
@@ -24,7 +24,7 @@ In this assessment, you will analyze a high-throughput rate-limiting engine (`Sh
 
 ---
 
-## 2. Core Competencies Tested
+## Core Competencies Tested
 
 - **Parallel Concurrency Benchmarking**: Evaluating lock contention using `testing.B.RunParallel` across multiple CPU threads.
 - **Lock Striping & Sharding**: Partitioning global lock contention into an array of 64 independent shards using FNV-1a hashing.
@@ -34,7 +34,7 @@ In this assessment, you will analyze a high-throughput rate-limiting engine (`Sh
 
 ---
 
-## 3. Zero-Magic Architectural Breakdown
+## Zero-Magic Architectural Breakdown
 
 ```
 [ Unsharded Bottleneck ]
@@ -68,7 +68,7 @@ When a method returns a pointer `*TokenResult`, the compiler cannot prove the ob
 
 ---
 
-## 4. Implementation Requirements & Task Breakdown
+## Implementation Requirements & Task Breakdown
 
 ### Task 1: Lock Striping with 64 Independent Shards
 In `_starter/main.go`:
@@ -103,7 +103,7 @@ In `_starter/main.go`:
 
 ---
 
-## 5. Verification & Acceptance Criteria
+## Verification & Acceptance Criteria
 
 Run parallel benchmarks and tests:
 
@@ -123,7 +123,7 @@ go test -bench="BenchmarkRateLimiter_Parallel" -benchmem ./curriculum/modules/13
 
 ---
 
-## 6. Common Pitfalls & Anti-Patterns
+## Common Pitfalls & Anti-Patterns
 
 1. **Deadlocks in Multi-Shard Operations**:
    *Anti-pattern*: Attempting to acquire locks on multiple shards without consistent ordering, triggering circular deadlocks.
@@ -139,7 +139,7 @@ go test -bench="BenchmarkRateLimiter_Parallel" -benchmem ./curriculum/modules/13
 
 ---
 
-## 7. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -150,8 +150,12 @@ go test -bench="BenchmarkRateLimiter_Parallel" -benchmem ./curriculum/modules/13
 
 ---
 
-## 8. Submission & Reflection
+## Submission & Reflection
 
 1. Submit benchmark output for both sequential and parallel rate limiter executions.
 2. Submit the compiler escape analysis log snippet for `Allow`.
 3. Answer: *Why is FNV-1a preferred over cryptographic hash functions (such as SHA-256) for internal shard key distribution?*
+
+## Retake policy
+
+If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.

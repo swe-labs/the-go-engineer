@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Performance and Memory Engineering:
 
 ## Targets
 
@@ -15,13 +15,13 @@ Validate mastery for the target curriculum items.
 - `core-13-07`
 - `core-13-08`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Deep-Dive Memory & Performance Diagnostic Scenarios
+## Deep-Dive Memory & Performance Diagnostic Scenarios
 
 Analyze and answer each technical scenario, referencing Go runtime internals (mcache, mcentral, mheap, GC pacer, write barrier) and profiling methodologies.
 
@@ -74,7 +74,7 @@ func BenchmarkMap(b *testing.B) {
 
 ---
 
-## 2. Practical Memory Optimization Challenge
+## Practical Memory Optimization Challenge
 
 Given an unoptimized JSON log parser that decodes records, normalizes fields, and filters errors, write an optimized Go implementation that:
 1. Reuses scratch memory buffers using `sync.Pool`.
@@ -84,7 +84,7 @@ Given an unoptimized JSON log parser that decodes records, normalizes fields, an
 
 ---
 
-## 3. Invariant Performance Guidelines
+## Invariant Performance Guidelines
 
 1. **Profile Before Optimizing**: Never guess where bottlenecks exist; prove them using `pprof` flame graphs or benchmark allocation reports (`-benchmem`).
 2. **Value Semantics First**: Default to passing and returning values on the stack unless ownership transfer, mutation, or struct size (>128 bytes) explicitly requires pointer semantics.
@@ -93,7 +93,7 @@ Given an unoptimized JSON log parser that decodes records, normalizes fields, an
 
 ---
 
-## 4. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -104,6 +104,10 @@ Given an unoptimized JSON log parser that decodes records, normalizes fields, an
 
 ---
 
-## 5. Submission Requirements
+## Submission Requirements
 
 Submit your detailed answers for Scenarios 1–5 alongside your verified code and benchmark output for the practical optimization challenge.
+
+## Retake policy
+
+If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.

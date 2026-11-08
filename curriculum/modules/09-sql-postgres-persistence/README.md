@@ -8,6 +8,10 @@ Teach real relational backend work.
 
 Builds relational persistence skills with SQL, PostgreSQL, database/sql, pooling, migrations, transactions, query safety, and data access patterns.
 
+## Prerequisites
+
+- [Module 08: HTTP and REST APIs](../08-http-rest-apis/README.md) — complete that module's completion checkpoint before starting this one.
+
 ## Lessons
 
 - `core-09-01` Why databases exist
@@ -39,6 +43,19 @@ Builds relational persistence skills with SQL, PostgreSQL, database/sql, pooling
 - `core-09-27` UPDATE operations
 - `core-09-28` DELETE operations
 
+## Projects
+
+- [`projects/task-api-with-postgres/README.md`](./projects/task-api-with-postgres/README.md) — **Task Api With Postgres**
+
+## Assessments
+
+- [`assessments/checkpoint/README.md`](./assessments/checkpoint/README.md) — **Module 09 Checkpoint — Relational Databases and SQL Persistence**
+- [`assessments/task-api-postgres/README.md`](./assessments/task-api-postgres/README.md) — **Task Api Postgres**
+
 ## Completion
 
 Complete every required lesson, lab, project, and assessment for this module.
+
+## Next module
+
+After passing this module's exit gate, continue to [Module 10: Authentication, Authorization, and Security](../10-auth-security/README.md).

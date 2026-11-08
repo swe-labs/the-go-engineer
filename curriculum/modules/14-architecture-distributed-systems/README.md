@@ -8,6 +8,10 @@ Teach architecture as tradeoff reasoning with distributed systems fundamentals.
 
 Teaches architecture as tradeoff reasoning: package boundaries, service layers, repositories, domain modeling, events, queues, idempotency, and service-splitting decisions.
 
+## Prerequisites
+
+- [Module 13: Performance and Memory Engineering](../13-performance-memory-engineering/README.md) — complete that module's completion checkpoint before starting this one.
+
 ## Lessons
 
 - `core-14-01` Why architecture exists
@@ -28,6 +32,19 @@ Teaches architecture as tradeoff reasoning: package boundaries, service layers, 
 - `core-14-16` Microservices as a tradeoff, not a default
 - `core-14-17` Architecture decision records
 
+## Projects
+
+- [`projects/modular-refactor-review/README.md`](./projects/modular-refactor-review/README.md) — **Modular Refactor Review**
+
+## Assessments
+
+- [`assessments/checkpoint/README.md`](./assessments/checkpoint/README.md) — **Module 14 Checkpoint — Software Architecture, Domain Modeling, and Layering**
+- [`assessments/modular-refactor-review/README.md`](./assessments/modular-refactor-review/README.md) — **Modular Refactor Review**
+
 ## Completion
 
 Complete every required lesson, lab, project, and assessment for this module.
+
+## Next module
+
+After passing this module's exit gate, continue to [Module 15: Docker, CI/CD, and Deployment](../15-docker-cicd-deployment/README.md).

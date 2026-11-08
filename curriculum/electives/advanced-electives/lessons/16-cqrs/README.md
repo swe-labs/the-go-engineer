@@ -170,3 +170,7 @@ CQRS is heavily adopted in e-commerce checkout platforms (Amazon, Shopify), ride
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Feature flags](../17-feature-flags/README.md)

@@ -8,6 +8,10 @@ Package, verify, and ship Go services with Linux process knowledge, containers, 
 
 Turns software into a shippable artifact through Linux process basics, Docker, image layers, compose, CI, release artifacts, deployment configuration, security scanning, rollback, and runbooks.
 
+## Prerequisites
+
+- [Module 14: Architecture and Distributed Systems](../14-architecture-distributed-systems/README.md) — complete that module's completion checkpoint before starting this one.
+
 ## Lessons
 
 - `core-15-01` Linux processes
@@ -30,6 +34,19 @@ Turns software into a shippable artifact through Linux process basics, Docker, i
 - `core-15-18` Rollback basics
 - `core-15-19` Deployment runbook
 
+## Projects
+
+- [`projects/dockerized-service-with-ci-cd/README.md`](./projects/dockerized-service-with-ci-cd/README.md) — **Dockerized Service With Ci Cd**
+
+## Assessments
+
+- [`assessments/checkpoint/README.md`](./assessments/checkpoint/README.md) — **Module 15 Checkpoint — Docker, Containers, CI/CD, and Production Deployment**
+- [`assessments/dockerized-service-cicd/README.md`](./assessments/dockerized-service-cicd/README.md) — **Dockerized Service Cicd**
+
 ## Completion
 
 Complete every required lesson, lab, project, and assessment for this module.
+
+## Next module
+
+After passing this module's exit gate, continue to [Module 16: Portfolio and Interview Readiness](../16-portfolio-interview-readiness/README.md).

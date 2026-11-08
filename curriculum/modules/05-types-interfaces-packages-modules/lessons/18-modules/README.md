@@ -50,7 +50,7 @@ A module is defined by a `go.mod` file at its root. The module path is the impor
 ```go
 module github.com/rasel9t6/the-go-engineer
 
-go 1.25.0
+go 1.27.0
 ```
 
 - Every package inside this module (e.g., `curriculum/modules/...`) is imported relative to `github.com/rasel9t6/the-go-engineer`.
@@ -122,7 +122,7 @@ The `replace` directive is applied during resolution — before any version comp
 // File: go.mod
 module github.com/rasel9t6/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/18-modules/example
 
-go 1.25.0
+go 1.27.0
 
 require github.com/google/uuid v1.6.0
 

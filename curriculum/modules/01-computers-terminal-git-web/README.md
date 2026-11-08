@@ -111,7 +111,7 @@ Module 01 integrates guided terminal, Git, and networking drills into every less
 
 ## Projects
 
-Module 01 culminates in a comprehensive hands-on project capstone:
+Module 01 culminates in a hands-on project capstone:
 
 - [**Shell + Git Lab**](./projects/shell-git-lab/README.md) — A complete terminal and Git lab where you construct a multi-tier project directory tree, initialize a local Git repository, manage feature branch lifecycles, execute three-way merges, resolve simulated merge conflicts, and verify repository health against an automated 14-point test suite (`verify.ps1` / `verify.sh`).
 
@@ -122,7 +122,7 @@ Evaluate your conceptual and operational mastery with the module assessment suit
 - [**Shell + Git Lab Assessment**](./assessments/shell-git-lab/README.md) — A 30-minute structured assessment covering shell streams, process isolation, Git DAG mechanics, and network protocol layers.
   - Diagnostic review questions: [`questions.md`](./assessments/shell-git-lab/questions.md)
   - Detailed evaluation rubric: [`rubric.md`](./assessments/shell-git-lab/rubric.md)
-  - Comprehensive answer key: [`answer-key.md`](./assessments/shell-git-lab/answer-key.md)
+  - Thorough answer key: [`answer-key.md`](./assessments/shell-git-lab/answer-key.md)
 
 ## Common failure modes
 

@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Build resilient Go services by applying reliability patterns: circuit breakers, bulkheads, graceful degradation, redundancy, and a comprehensive reliability checklist.
+Build resilient Go services by applying reliability patterns: circuit breakers, bulkheads, graceful degradation, redundancy, and a thorough reliability checklist.
 
 ## Why this matters
 

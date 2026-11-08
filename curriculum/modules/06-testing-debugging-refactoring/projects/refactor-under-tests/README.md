@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Master the disciplined practice of characterization testing and safe code refactoring in Go. Learn how to wrap monolithic, untested legacy code in comprehensive automated tests to lock in existing behavior before breaking it down into clean, cohesive domain types without introducing regressions.
+Master the disciplined practice of characterization testing and safe code refactoring in Go. Learn how to wrap monolithic, untested legacy code in thorough automated tests to lock in existing behavior before breaking it down into clean, cohesive domain types without introducing regressions.
 
 ## Why this matters
 

@@ -76,7 +76,7 @@ stage-03-templ-tailwind/
 │   │   ├── input_templ.go
 │   │   ├── separator.templ # Semantic/decorative divider (horizontal & vertical)
 │   │   ├── separator_templ.go
-│   │   └── ui_test.go    # Comprehensive unit tests for UI component rendering
+│   │   └── ui_test.go    # Complete unit tests for UI component rendering
 │   ├── header.templ      # Navigation bar and role indicator (uses @ui.Badge & @ui.Button)
 │   ├── header_templ.go
 │   ├── layout.templ      # Master HTML document wrapper
@@ -387,3 +387,26 @@ go run github.com/a-h/templ/cmd/templ@v0.3.1070 generate
 go test -v ./...
 ```
 This runs both the auth/security tests in `main_test.go` and the unit test suite in `components/ui/ui_test.go` covering all component variants, sizes, links, and attribute spreading.
+
+---
+
+## Stage mission
+
+Replace string templates with compile-time type-checked `a-h/templ` components, styled with Tailwind and `shadcn-templ` primitives, behind real session authentication and CSRF protection. The stage proves you can build a secure, type-safe UI with zero Node.js dependencies.
+
+## Backend alignment
+
+Aligns with [Module 10: Authentication, Authorization, and Security](../../modules/10-auth-security/README.md). The stage reuses that module's session-cookie, CSRF, and role-based authorization models and renders them through templ components.
+
+## Verification and test suite
+
+```bash
+go test -v ./...
+```
+
+Then `go run main.go` and open `http://localhost:8080/login`. Sign in as the admin and viewer accounts from the credentials table, and confirm the role-guarded controls and the CSRF rejection.
+
+## Next stage
+
+Continue to [Stage 4: Hypermedia Interactivity with HTMX & Alpine.js](../stage-04-htmx-alpine/README.md).
+

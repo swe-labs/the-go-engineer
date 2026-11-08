@@ -49,6 +49,30 @@ Under the hood:
 3. Component checks execute concurrently using goroutines and `sync.WaitGroup`, collecting `ComponentHealth` structs into a preallocated slice `results[idx]` indexed by check number, avoiding slice append race conditions.
 4. If `allHealthy` evaluates to `false`, `w.WriteHeader(http.StatusServiceUnavailable)` is emitted alongside latency measurements in milliseconds.
 
+A representative excerpt from `main.go` (`handleReadiness`):
+
+```go
+func (s *DeploymentHealthService) handleReadiness(w http.ResponseWriter, r *http.Request) {
+	start := time.Now()
+
+	// 50ms deadline for readiness checks
+	ctx, cancel := context.WithTimeout(r.Context(), 50*time.Millisecond)
+	defer cancel()
+
+	results := make([]ComponentHealth, len(s.checkers))
+	var wg sync.WaitGroup
+	wg.Add(len(s.checkers))
+
+	for i, checker := range s.checkers {
+		go func(idx int, ch HealthChecker) {
+			defer wg.Done()
+			results[idx] = ch.CheckHealth(ctx)
+		}(i, checker)
+	}
+
+	wg.Wait()
+```
+
 ## Run Instructions
 
 ```bash

@@ -147,7 +147,7 @@ http.HandleFunc("/users/", userHandler)
 ## Practice task
 
 Write a Go program that:
-- Registers three handlers: `/greet` (returns `"Hello, Gopher!"`), `/time` (returns current time as JSON `{"now":"..."}`), and `/version` (returns `"Go 1.24"` as plain text).
+- Registers three handlers: `/greet` (returns `"Hello, Gopher!"`), `/time` (returns current time as JSON `{"now":"..."}`), and `/version` (returns `"Go 1.27"` as plain text).
 - Each handler sets the appropriate `Content-Type`.
 - Uses `http.ListenAndServe` with error handling (`log.Fatal`).
 - Run with `go run .` and test with `curl` or the test file.

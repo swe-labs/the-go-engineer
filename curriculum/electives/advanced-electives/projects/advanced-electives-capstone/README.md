@@ -60,7 +60,7 @@ graph TD
 ## 3. Required Deliverables
 
 1. **Executable Go Service**: Clean idiomatic Go code organized under standard conventions (`cmd/`, `internal/`, `pkg/`).
-2. **Benchmark & Test Suite**: Comprehensive unit tests achieving >=80% coverage on core packages, race detector compliance (`go test -race ./...`), and Go benchmarks (`go test -bench=. -benchmem`).
+2. **Benchmark & Test Suite**: Thorough unit tests achieving >=80% coverage on core packages, race detector compliance (`go test -race ./...`), and Go benchmarks (`go test -bench=. -benchmem`).
 3. **Architecture Decision Record (ADR)**: A markdown technical design document detailing:
    - The selected elective topics and problem statement.
    - Mechanical trade-offs (e.g. GC pressure vs `sync.Pool` complexity, gRPC streaming vs REST polling).

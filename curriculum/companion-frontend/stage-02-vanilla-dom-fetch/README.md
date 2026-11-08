@@ -116,3 +116,26 @@ go test -v ./...
 1. **Inline Edit Modal**: Add an "Edit" button to book cards that opens a modal dialog and dispatches `PUT /api/books/{id}`.
 2. **Sort by Price/Title**: Add client-side sort dropdowns to reorder the active collection in memory.
 3. **Optimistic UI Updates**: Update the DOM immediately on deletion, with a rollback mechanism if the network call fails.
+
+---
+
+## Stage mission
+
+Build an interactive browser client that talks asynchronously to a Go REST API using modern vanilla JavaScript — no frameworks, no bundler, no npm. The stage proves you can manage DOM state, debounce input, and render server-returned validation errors by hand.
+
+## Backend alignment
+
+Aligns with [Module 08: HTTP and REST APIs](../../modules/08-http-rest-apis/README.md) and [Module 09: SQL and PostgreSQL Persistence](../../modules/09-sql-postgres-persistence/README.md). The Go server mirrors those modules' REST semantics and persistence patterns; the browser is a second client of the same API shape.
+
+## Verification and test suite
+
+```bash
+go test -v ./...
+```
+
+Then `go run main.go` and open `http://localhost:8080/`. Confirm debounced search, field-level validation error rendering, and asynchronous add/delete without a reload.
+
+## Next stage
+
+Continue to [Stage 3: Type-Safe Server Components with templ & Tailwind](../stage-03-templ-tailwind/README.md).
+

@@ -46,6 +46,21 @@ Under the hood:
 3. Path routing leverages Go 1.22+ pattern matching (`"GET /api/v1/orders/{id}"`), using `r.PathValue("id")` to extract path parameters cleanly without external router dependencies.
 4. `DELETE /api/v1/orders/{id}` returns HTTP 204 No Content upon successful deletion, conforming to REST standards.
 
+A representative excerpt from `main.go` (`CreateOrderRequest.Validate`):
+
+```go
+	if req.Amount <= 0 {
+		errs = append(errs, FieldError{Field: "amount", Issue: "amount must be greater than zero"})
+	}
+
+	curr := strings.ToUpper(strings.TrimSpace(req.Currency))
+	if curr == "" {
+		req.Currency = "USD"
+	} else if curr != "USD" && curr != "EUR" && curr != "GBP" {
+		errs = append(errs, FieldError{Field: "currency", Issue: "currency must be one of: USD, EUR, GBP"})
+	}
+```
+
 ## Run Instructions
 
 ```bash

@@ -105,3 +105,9 @@ go test -v -race ./curriculum/modules/18-flagship-opslane/projects/opslane-flags
 - **Security & Multi-Tenancy (25%)**: Complete data isolation across tenants; viewer roles denied write operations.
 - **Concurrency & Performance (25%)**: Background jobs handled via bounded worker pool with backpressure; singleflight caching prevents database stampedes.
 - **Reliability & Telemetry (15%)**: All HTTP routes instrumented with correlation IDs, structured logs, atomic metrics, and clean graceful shutdown.
+
+## NEXT UP
+
+Package and defend this reference implementation:
+
+- [Module 16: Portfolio and Interview Readiness](../../../16-portfolio-interview-readiness/README.md)

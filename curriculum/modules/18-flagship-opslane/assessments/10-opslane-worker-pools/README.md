@@ -2,7 +2,7 @@
 
 ## Mission
 
-Design and implement a robust, bounded worker pool in Go, managing fixed concurrency ceilings, buffered backpressure channels, atomic performance telemetry, panic isolation, and graceful drain-and-stop shutdown.
+Design and implement a reliable, bounded worker pool in Go, managing fixed concurrency ceilings, buffered backpressure channels, atomic performance telemetry, panic isolation, and graceful drain-and-stop shutdown.
 
 ## Prerequisites
 

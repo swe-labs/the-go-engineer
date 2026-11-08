@@ -6,7 +6,7 @@ Understand and apply Go generics (type parameters) introduced in Go 1.18+, inclu
 
 ## Why this matters
 
-Prior to Go 1.18, writing type-agnostic code required either duplicating logic across every concrete type, relying on `interface{}` with runtime type assertions (which bypasses compile-time type safety and incurs heap boxing allocations), or using code generation tools. Generics solve this by allowing functions and data structures to accept type parameters checked at compile time. However, generics can easily be abused: using generics where standard interfaces suffice creates needlessly complex APIs. Understanding when to reach for generics and when to stick to interfaces is a crucial software design skill.
+Prior to Go 1.18, writing type-agnostic code required either duplicating logic across every concrete type, relying on `interface{}` with runtime type assertions (which bypasses compile-time type safety and incurs heap boxing allocations), or using code generation tools. Generics solve this by allowing functions and data structures to accept type parameters checked at compile time. However, generics can easily be abused: using generics where standard interfaces suffice creates needlessly complex APIs. Understanding when to reach for generics and when to stick to interfaces is a essential software design skill.
 
 ## Mental model
 
@@ -122,3 +122,7 @@ func main() {
 2. Why does Go use GC shape stenciling instead of pure monomorphization for every single pointer type?
 3. In what scenario would you choose an `interface` over a generic type parameter?
 4. Can a method on a non-generic struct declare its own type parameters? How do you work around this limitation?
+
+## NEXT UP
+
+[Why testing exists](../../../06-testing-debugging-refactoring/lessons/01-why-testing-exists/README.md)

@@ -389,6 +389,29 @@ The existing tests verify runbook creation, step and contact addition, checklist
 4. A deployment fails at the post-deploy health check. What does the runbook say to do? What if the rollback also fails?
 5. What information should be included in each runbook step beyond the command to run?
 
+## Beyond a single host: when orchestration is justified
+
+The deployment target in this module is one Linux host running Docker Compose. That is a deliberate baseline: it teaches the process, image, network, volume, and health-check mechanics without a control plane hiding them. It is also enough for many production services.
+
+An orchestrator becomes justified when at least one of these is true:
+
+| Requirement | Why Compose on one host stops working | What an orchestrator provides |
+|---|---|---|
+| More traffic than one host can serve | Vertical scaling has a ceiling | Scheduling across a pool of machines |
+| Self-healing after a node failure | A dead host takes its containers with it | Reconciliation: desired replicas are rescheduled |
+| Zero-downtime rollout across many instances | `docker compose up` replaces containers on one host | Rolling updates, readiness gates, rollback history |
+| Service discovery between many services | Static hostnames and manual configuration | Stable virtual IPs and DNS |
+| Multi-team isolation | One Docker daemon is a shared blast radius | Namespaces, quotas, RBAC, network policies |
+| Declarative desired state | Imperative shell scripts drift | Controllers continuously compare desired and actual state |
+
+Kubernetes is the dominant implementation of those ideas, but it is not the only one. A managed PaaS, a serverless platform, or a Nomad cluster can be the right answer. The decision is about the operational model, not the logo.
+
+Kubernetes is not free. It adds a control plane, a network model, a storage model, a security model, and a new class of failures: unschedulable pods, image pull errors, readiness flapping, OOM kills, and rollout stalls. A small team with one service should usually exhaust a single host, a managed PaaS, or a serverless option before adopting it.
+
+If you need the orchestration model, the Kubernetes Operations stream in the Advanced Electives gateway covers the object model, probes, resource limits, `GOMAXPROCS` and `GOMEMLIMIT` under cgroups, rollouts, and rollback. The goal is not YAML memorization; it is understanding what the control plane is doing to your process. The stream begins with [Why orchestration: desired state and the control loop](../../../../electives/advanced-electives/lessons/21-why-orchestration/README.md) and ends with the [Kubernetes Go Service Capstone](../../../../electives/advanced-electives/projects/kubernetes-go-service-capstone/README.md).
+
+[Advanced Electives gateway](../../../../electives/advanced-electives/README.md)
+
 ## NEXT UP
 
 Congratulations on completing Module 15! You now understand Docker, CI/CD, deployment strategies, and DevOps practices for Go services. Next up: [Portfolio Strategy](../../../16-portfolio-interview-readiness/lessons/01-portfolio-strategy/README.md)

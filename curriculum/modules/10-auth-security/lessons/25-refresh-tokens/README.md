@@ -318,4 +318,8 @@ The existing tests verify token issuance, validation, rotation (old token invali
 4. Why must the rotate operation be atomic (database transaction or locked operation)?
 5. What is the difference between revoking a refresh token and letting it expire?
 
-Congratulations on completing Module 10! You now understand authentication, authorization, and security best practices for Go APIs. Next up: Module 11 -- Lifecycle, Context, and Concurrency.
+Congratulations on completing Module 10! You now understand authentication, authorization, and security best practices for Go APIs.
+
+## NEXT UP
+
+[Time basics](../../../11-lifecycle-context-concurrency/lessons/01-time-basics/README.md)

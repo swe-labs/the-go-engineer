@@ -22,7 +22,7 @@ flowchart TD
 
     subgraph JobExecution["Job: CI Pipeline"]
         S1["actions/checkout@v4"]
-        S2["actions/setup-go@v5 (go-version: 1.24.x, cache: true)"]
+        S2["actions/setup-go@v6 (go-version: 1.27.x, cache: true)"]
         S3["Run golangci-lint"]
         S4["Run go test -race -v ./..."]
         S5["Run govulncheck ./..."]
@@ -47,7 +47,7 @@ GitHub Actions automates software workflows directly from your repository. The k
 | Step | An individual task within a job | `Run go test ./...` |
 | Action | A reusable step packaged as a GitHub repo | `actions/checkout@v4` |
 | Runner | The VM that executes jobs | `ubuntu-latest`, `windows-latest` |
-| Matrix | Cross-product of variables expanding into multiple jobs | `{go: [1.21, 1.22], os: [linux, windows]}` |
+| Matrix | Cross-product of variables expanding into multiple jobs | `{go: [1.26, 1.27], os: [linux, windows]}` |
 | Cache | Store/restore dependencies by key to avoid redownloads | `actions/cache@v4` for Go module cache |
 
 ## Under the hood
@@ -70,7 +70,7 @@ Go projects on GitHub Actions typically follow this pattern:
 - **Build**: `go build ./...` or build the specific binary.
 - **Cache**: `actions/cache@v4` with key based on `go.sum` hash.
 
-The Go team provides `actions/setup-go@v5` which installs a specific Go version, sets `GOROOT` and `GOPATH`, and adds `$GOROOT/bin` and `$GOPATH/bin` to `PATH`.
+The Go team provides `actions/setup-go@v6` which installs a specific Go version, sets `GOROOT` and `GOPATH`, and adds `$GOROOT/bin` and `$GOPATH/bin` to `PATH`.
 
 Many open-source Go projects use a single workflow with a matrix of Go versions and operating systems. The `go.mod` file pins the module path and minimum Go version, while the workflow matrix tests across the N-2 latest Go releases.
 
@@ -191,8 +191,8 @@ func main() {
 				RunsOn: "ubuntu-latest",
 				Steps: []Step{
 					{Name: "Checkout", Uses: "actions/checkout@v4"},
-					{Name: "Setup Go", Uses: "actions/setup-go@v5",
-						With: map[string]string{"go-version": "1.22"}},
+					{Name: "Setup Go", Uses: "actions/setup-go@v6",
+						With: map[string]string{"go-version": "1.27"}},
 					{Name: "Run tests", Run: "go test ./..."},
 				},
 			},
@@ -208,7 +208,7 @@ func main() {
 	fmt.Printf("Workflow %q validated OK (%d jobs)\n", w.Name, len(w.Jobs))
 
 	matrix := map[string][]string{
-		"go": {"1.21", "1.22"},
+		"go": {"1.26", "1.27"},
 		"os": {"ubuntu", "windows"},
 	}
 	combos := ExpandMatrix(matrix)
@@ -230,14 +230,14 @@ For the workflow validation of the example above:
 5. For steps, it iterates: step 0 has `Uses` (passes), step 1 has `Uses` (passes), step 2 has `Run` (passes).
 6. No errors are returned.
 
-For `ExpandMatrix` with `go: [1.21, 1.22]` and `os: [ubuntu, windows]`:
+For `ExpandMatrix` with `go: [1.26, 1.27]` and `os: [ubuntu, windows]`:
 
-1. `keys = ["go", "os"]`, `values = [["1.21", "1.22"], ["ubuntu", "windows"]]`.
-2. Recurse with idx=0, iterate over `["1.21", "1.22"]`:
-   - Set `combo["go"]="1.21"`, recurse idx=1.
+1. `keys = ["go", "os"]`, `values = [["1.26", "1.27"], ["ubuntu", "windows"]]`.
+2. Recurse with idx=0, iterate over `["1.26", "1.27"]`:
+   - Set `combo["go"]="1.26"`, recurse idx=1.
      - Set `combo["os"]="ubuntu"`, recurse idx=2 (base): copy and append.
      - Set `combo["os"]="windows"`, recurse idx=2 (base): copy and append.
-   - Set `combo["go"]="1.22"`, recurse idx=1.
+   - Set `combo["go"]="1.27"`, recurse idx=1.
      - Same as above for `os`.
 3. Result: 4 combinations.
 
@@ -330,9 +330,9 @@ The existing tests validate workflow structure, cache key generation, matrix exp
 ## Review questions
 
 1. What three fields are required for every GitHub Actions step? What error does a step missing all three produce?
-2. A matrix with `go: [1.21, 1.22, 1.23]` and `os: [ubuntu, windows, macos]` produces how many jobs? What is the GitHub limit?
+2. A matrix with `go: [1.25, 1.26, 1.27]` and `os: [ubuntu, windows, macos]` produces how many jobs? What is the GitHub limit?
 3. Why does caching the Go module cache reduce CI time? What file is typically used to compute the cache key?
-4. How does `actions/setup-go@v5` differ from manually downloading and installing Go in a step?
+4. How does `actions/setup-go@v6` differ from manually downloading and installing Go in a step?
 5. What happens when a job's step fails? Does the workflow continue, stop the job, or stop all jobs?
 
 ## NEXT UP

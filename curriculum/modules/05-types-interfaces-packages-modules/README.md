@@ -8,6 +8,10 @@ Turn scripts into maintainable Go programs.
 
 Moves from scripts to maintainable Go systems by teaching types, methods, interfaces, packages, modules, and dependency boundaries.
 
+## Prerequisites
+
+- [Module 04: Functions, Errors, and Data Semantics](../04-functions-errors-data-semantics/README.md) — complete that module's completion checkpoint before starting this one.
+
 ## Learning Sessions & Lessons
 
 ### Session 1: Structs & Composition
@@ -46,6 +50,21 @@ Moves from scripts to maintainable Go systems by teaching types, methods, interf
 ### Session 5: Modern Type Parameters
 - `core-05-24` Generics fundamentals *(Type parameters, constraints, monomorphization, and interface tradeoffs)*
 
+## Projects
+
+- [`projects/bank-account/README.md`](./projects/bank-account/README.md) — **Bank Account**
+- [`projects/payroll-processor/README.md`](./projects/payroll-processor/README.md) — **Payroll Processor**
+
+## Assessments
+
+- [`assessments/bank-account/README.md`](./assessments/bank-account/README.md) — **Bank Account**
+- [`assessments/checkpoint/README.md`](./assessments/checkpoint/README.md) — **Module 05 Checkpoint — Types, Interfaces, Packages, and Modules**
+- [`assessments/payroll-processor/README.md`](./assessments/payroll-processor/README.md) — **Payroll Processor**
+
 ## Completion
 
 Complete every required lesson, lab, project, and assessment for this module.
+
+## Next module
+
+After passing this module's exit gate, continue to [Module 06: Testing, Debugging, and Refactoring](../06-testing-debugging-refactoring/README.md).

@@ -15,7 +15,7 @@
 **Explanation:** Synchronous RPC or HTTP calls between microservices create tight temporal coupling: if a downstream service slows down from 20ms to 2000ms, upstream handlers block, exhausting connection pools and crashing the ingress server. An internal event bus with bounded worker pools decouples event emission from consumption, isolates downstream panics, and allows the system to buffer tasks or apply backpressure during spikes.
 
 ### Question 5: B
-**Explanation:** In production environments such as Kubernetes or ECS, orchestrators send `SIGTERM` when scaling down, restarting pods, or performing rolling deployments. In local development or CLI execution, developers use `SIGINT` (Ctrl+C). Handling both signals in Go via `signal.NotifyContext(ctx, os.Interrupt, syscall.SIGTERM)` ensures seamless graceful draining across both development and production.
+**Explanation:** In production environments such as Kubernetes or ECS, orchestrators send `SIGTERM` when scaling down, restarting pods, or performing rolling deployments. In local development or CLI execution, developers use `SIGINT` (Ctrl+C). Handling both signals in Go via `signal.NotifyContext(ctx, os.Interrupt, syscall.SIGTERM)` ensures smooth graceful draining across both development and production.
 
 ### Question 6: A
 **Explanation:** Without TTL expiration and memory eviction bounds, an in-memory cache will grow indefinitely as new keys are added, eventually exhausting host memory and triggering Linux OOM killer termination. Combining TTL expirations with Redis `allkeys-lru` guarantees that expired keys are reclaimed and least-recently-used keys are evicted if memory limits are reached.

@@ -129,3 +129,7 @@ Companies that successfully split monoliths (such as Uber, Netflix, and Monzo) i
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Deeper distributed systems](../20-deeper-distributed-systems/README.md)

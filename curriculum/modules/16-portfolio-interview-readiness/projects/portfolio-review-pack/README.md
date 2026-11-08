@@ -8,6 +8,10 @@ Curate, audit, and systematically defend a portfolio of production-grade Go proj
 
 Hiring managers and staff interviewers evaluate more than whether your code compiles. In senior technical interviews, you will be expected to defend every architectural trade-off: "Why choose Postgres transactions over eventual consistency?", "How do you detect memory leaks in production?", "Why use a bounded worker pool instead of raw goroutines?", and "Why hexagonal architecture over MVC?". Building an auditable portfolio with automated validation and deep defense briefs transforms you from a code author into an authoritative systems engineer.
 
+## Project overview
+
+You will build a `PortfolioAuditor` that walks a declared set of showcase projects, scoring each on documentation, code, tests, and operational proof before emitting a markdown scorecard. The work has three parts: the audit engine and report writer in `_starter/main.go`, and six architecture defense briefs you rehearse for interviews.
+
 ## Prerequisites
 
 Complete Modules 08 through 15, ensuring all reference implementations, automated test suites, and containerization artifacts are implemented and verified.
@@ -37,7 +41,7 @@ Your portfolio showcases 8 foundational pillars of senior Go backend engineering
 
 In `_starter/main.go`:
 - Implement `(a *PortfolioAuditor) AuditProject(def PortfolioShowcaseDef) ProjectStatus`:
-  - Verify `README.md` exists and contains comprehensive documentation (>100 bytes).
+  - Verify `README.md` exists and contains thorough documentation (>100 bytes).
   - Verify reference Go source code (`*.go`) exists.
   - Verify automated unit/integration tests (`*_test.go`) exist.
   - Verify proof artifacts (`Dockerfile`, `docker-compose.yml`, or benchmark tests) exist.

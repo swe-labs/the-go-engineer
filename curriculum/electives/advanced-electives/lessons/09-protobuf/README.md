@@ -135,3 +135,7 @@ Protobuf is the standard wire format for gRPC, Kubernetes internal cluster state
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[gRPC fundamentals](../10-grpc-fundamentals/README.md)

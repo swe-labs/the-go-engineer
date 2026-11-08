@@ -125,3 +125,7 @@ Production engineering teams enforce code generation consistency by pinning gene
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Mockery](../08-mockery/README.md)

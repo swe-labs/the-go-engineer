@@ -46,6 +46,23 @@ Under the hood:
 3. `RequirePermission` acts as an HTTP handler decorator. If the user is missing from context, it emits HTTP 401 Unauthorized. If the user's role lacks the requested permission, it sets `w.WriteHeader(http.StatusForbidden)` and renders an explanatory JSON payload without leaking internal authorization logic.
 4. If authorized, execution passes seamlessly to `next(w, r)` without overhead.
 
+A representative excerpt from `main.go` (`UserContext.HasPermission`):
+
+```go
+func (u *UserContext) HasPermission(perm Permission) bool {
+	perms, exists := RolePermissions[u.Role]
+	if !exists {
+		return false
+	}
+	for _, p := range perms {
+		if p == perm {
+			return true
+		}
+	}
+	return false
+}
+```
+
 ## Run Instructions
 
 ```bash

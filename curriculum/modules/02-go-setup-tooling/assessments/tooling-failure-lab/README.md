@@ -4,6 +4,13 @@
 
 This assessment verifies that you can independently apply everything from Module 02. You will demonstrate that your Go toolchain is correctly installed, configured, and usable — and that you can diagnose and fix common tooling failures.
 
+## Targets
+
+- Toolchain installation and workspace configuration (`go version`, `go env`, `go.mod`)
+- Build and run workflow (`go build`, `go run`, the module cache)
+- Diagnostics and tooling (`go vet`, `gopls`, `gofmt`, panic tracebacks)
+- Diagnosis and repair of the five tooling failures in the Tooling Failure Lab
+
 ## Prerequisites
 
 - [Module 02 Overview](../../README.md) and [Lessons 01–14](../../lessons/01-install-and-verify-go/README.md) completed

@@ -56,6 +56,25 @@ Under the hood:
 3. If active requests do not complete before `shutdownCtx` expires (e.g. within 5 seconds), `server.Shutdown` returns `ctx.Err()`, allowing the operator to force termination rather than hanging indefinitely.
 4. In `main.go`, `http.ErrServerClosed` is ignored because it indicates that `Shutdown()` closed the listener as commanded.
 
+A representative excerpt from `main.go` (`ShutdownCoordinator.GracefulShutdown`):
+
+```go
+func (sc *ShutdownCoordinator) GracefulShutdown(ctx context.Context) error {
+	// Step 1: Reject new requests at middleware level
+	sc.shuttingDown.Store(true)
+
+	// Step 2: Stop accepting TCP connections and wait for in-flight HTTP requests to drain
+	if err := sc.server.Shutdown(ctx); err != nil {
+		return fmt.Errorf("http server shutdown failed: %w", err)
+	}
+
+	// Step 3: Flush background worker queue
+	close(sc.workerQueue)
+
+	return nil
+}
+```
+
 ## Run Instructions
 
 ```bash

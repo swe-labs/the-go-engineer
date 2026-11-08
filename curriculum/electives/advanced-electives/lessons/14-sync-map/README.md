@@ -127,3 +127,7 @@ The Go runtime itself uses `sync.Map` internally for registration packages, refl
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[sync.Pool](../15-sync-pool/README.md)

@@ -105,3 +105,26 @@ go test -v ./...
 1. **Add Table of Contents (TOC)**: Enhance `main.go` to scan markdown headings (`##`, `###`) and generate an in-page anchor navigation list inside `<aside class="wiki-rail">`.
 2. **Add a New Article**: Create `content/distributed-consensus.md` and verify that the sidebar dynamically indexes and highlights it.
 3. **Print Stylesheet**: Add an `@media print` rule to `style.css` that hides the sidebar and metadata rail, ensuring clean, high-contrast hardcopy documentation prints.
+
+---
+
+## Stage mission
+
+Build a server-rendered engineering documentation wiki using only the Go standard library (`net/http`, `html/template`), semantic HTML5, and modern CSS. The stage proves you can deliver a complete, accessible, zero-JavaScript web page from Go.
+
+## Backend alignment
+
+Aligns with [Module 07: CLI, Files, JSON, and Configuration](../../modules/07-cli-files-json-config/README.md). The wiki reuses the file-reading, embedding, and template skills that Module 07 teaches, expressed through HTTP instead of the command line.
+
+## Verification and test suite
+
+```bash
+go test -v ./...
+```
+
+Then `go run main.go` and open `http://localhost:8080/wiki/welcome`. Confirm the zero-JS theme toggle, the responsive grid collapse, and the 404 page.
+
+## Next stage
+
+Continue to [Stage 2: Browser JavaScript, DOM & Fetch API](../stage-02-vanilla-dom-fetch/README.md).
+

@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Observability and Diagnostics:
 
 ## Targets
 
 - `project-pii-redactor`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Assessment Overview & Industrial Context
+## Assessment Overview & Industrial Context
 
 Under compliance mandates including GDPR, HIPAA, and PCI-DSS, logging unmasked Personally Identifiable Information (PII), authentication credentials, or financial account identifiers to centralized log collectors (e.g., Datadog, Splunk, Elastic) constitutes a major security failure and legal liability. 
 
@@ -24,7 +24,7 @@ In this assessment, you will implement a high-throughput, privacy-preserving log
 
 ---
 
-## 2. Core Competencies Tested
+## Core Competencies Tested
 
 - **Custom `slog.Handler` Implementation**: Implementing `Enabled`, `Handle`, `WithAttrs`, and `WithGroup` conforming to Go 1.21's structured logging specification.
 - **Recursive Attribute Sanitization**: Walking arbitrary trees of `slog.Attr`, including `slog.KindGroup` nested groups, without dropping attributes or mutating shared memory.
@@ -34,7 +34,7 @@ In this assessment, you will implement a high-throughput, privacy-preserving log
 
 ---
 
-## 3. Zero-Magic Architectural Breakdown
+## Zero-Magic Architectural Breakdown
 
 ```
 [ Application Code ]
@@ -67,7 +67,7 @@ Logging handlers are invoked concurrently from hundreds of active goroutines. Us
 
 ---
 
-## 4. Redaction Specification & Rules
+## Redaction Specification & Rules
 
 | Category | Input Example | Expected Redacted Output | Rule Description |
 |---|---|---|---|
@@ -78,7 +78,7 @@ Logging handlers are invoked concurrently from hundreds of active goroutines. Us
 
 ---
 
-## 5. Implementation Requirements & Task Breakdown
+## Implementation Requirements & Task Breakdown
 
 ### Task 1: Key-Based Attribute Sanitization
 - In `sanitizeAttr(a slog.Attr) slog.Attr`:
@@ -104,7 +104,7 @@ Logging handlers are invoked concurrently from hundreds of active goroutines. Us
 
 ---
 
-## 6. Verification & Acceptance Criteria
+## Verification & Acceptance Criteria
 
 Run all unit tests in the project directory:
 
@@ -122,7 +122,7 @@ go test -v -race ./curriculum/modules/12-observability-diagnostics/projects/pii-
 
 ---
 
-## 7. Common Pitfalls & Anti-Patterns
+## Common Pitfalls & Anti-Patterns
 
 1. **Mutating Inbound `slog.Record` Directly**:
    *Anti-pattern*: Attempting to overwrite slices inside `r` in place, which can cause race conditions if the caller retains references.
@@ -142,7 +142,7 @@ go test -v -race ./curriculum/modules/12-observability-diagnostics/projects/pii-
 
 ---
 
-## 8. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -153,8 +153,12 @@ go test -v -race ./curriculum/modules/12-observability-diagnostics/projects/pii-
 
 ---
 
-## 9. Submission & Reflection
+## Submission & Reflection
 
 1. Submit output from `go test -v -race ./...`.
 2. Submit a sample JSON log output before and after passing through your redactor.
 3. Answer: *Why is it critical that `WithAttrs` and `WithGroup` return a new handler instance rather than mutating the receiver?*
+
+## Retake policy
+
+If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.

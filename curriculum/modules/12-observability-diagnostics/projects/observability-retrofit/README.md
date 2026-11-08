@@ -20,7 +20,7 @@ This project draws on `log/slog`, `context.Context` propagation, `github.com/pro
 
 The `_starter/` directory provides an existing order management service with in-memory persistence and HTTP endpoints (`POST /orders`, `GET /orders/{id}`, `POST /orders/{id}/cancel`). However, the existing code uses unstructured `log.Println`, has zero metrics, and does not produce OpenTelemetry trace spans.
 
-Your mission is to retrofit comprehensive observability:
+Your mission is to retrofit full observability:
 - **Structured Contextual Logging**: Replace all unstructured `log.Println` calls with `log/slog` methods (`InfoContext`, `WarnContext`, `ErrorContext`) carrying contextual attributes (`order_id`, `customer`, `amount_cents`).
 - **Prometheus Telemetry**:
   - `order_requests_total`: CounterVec tracking operation counts partitioned by `operation` (`create`, `get`, `cancel`) and `status` (`success`, `error`).

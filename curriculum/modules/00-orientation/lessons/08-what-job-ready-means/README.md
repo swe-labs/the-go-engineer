@@ -64,7 +64,7 @@ flowchart TD
 |---|---|---|
 | Equating knowing syntax with being ready for a job | Failing technical interview design and debugging questions | Focus on architecture, failure modes, and automated testing |
 | Building only cookie-cutter tutorial apps | Being lost in an applicant pool of identical projects | Build complete, standalone systems with custom architecture and deep tests |
-| Neglecting technical writing and documentation | Projects look incomplete and unmaintained to reviewers | Write comprehensive READMEs explaining problem statement, architecture, and verification |
+| Neglecting technical writing and documentation | Projects look incomplete and unmaintained to reviewers | Write thorough READMEs explaining problem statement, architecture, and verification |
 
 ## Review questions
 

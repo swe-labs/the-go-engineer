@@ -30,6 +30,17 @@ You may reference your own notes and the module's lesson README files during the
 - Each multiple-choice question is worth 1 point
 - Short-answer questions are worth 2 points
 
+## Rubric
+
+| Dimension | Weight | Passing standard |
+| --- | --- | --- |
+| Shell and terminal basics | 30% | Correctly explains navigation, paths, and file operations, and predicts what each command produces. |
+| Git mental model and workflow | 40% | Traces a change from working directory to staging area to commit history and resolves conflicts correctly. |
+| Files, bytes, and paths | 15% | Distinguishes files from directories and explains how paths are resolved. |
+| Web preview concepts | 15% | Explains how client requests reach a server and what is returned. |
+
+A passing score is 70%, with no single dimension below 50%.
+
 ## Retake policy
 
 You may retake the assessment once after 48 hours. The retake will use different questions covering the same topics. Your highest score will be recorded.

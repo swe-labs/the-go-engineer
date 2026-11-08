@@ -137,3 +137,7 @@ Method values are heavily used in standard library HTTP routing (http.HandleFunc
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Build tags](../06-build-tags/README.md)

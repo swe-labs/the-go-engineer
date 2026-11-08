@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Flagship Opslane:
 
 ## Targets
 
 - `project-opslane`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Visual Model: Capstone Defense Evaluation Pipeline
+## Visual Model: Capstone Defense Evaluation Pipeline
 
 ```
 +-----------------------------------------------------------------------------------------+
@@ -38,7 +38,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 2. Capstone Submission Requirements
+## Capstone Submission Requirements
 
 1. **Repository Completeness**:
    - Complete working implementation in `projects/opslane-flagship/_solution/`.
@@ -52,7 +52,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 3. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -63,7 +63,7 @@ Submit answers, code evidence, test output, and explanation where required.
 
 ---
 
-## 4. Verification
+## Verification
 
 ```bash
 # Verify all 14 milestone test suites pass cleanly
@@ -72,3 +72,7 @@ go test -v ./curriculum/modules/18-flagship-opslane/assessments/...
 # Verify flagship solution passes all integration tests
 go test -v -race ./curriculum/modules/18-flagship-opslane/projects/opslane-flagship/_solution
 ```
+
+## Retake policy
+
+If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.

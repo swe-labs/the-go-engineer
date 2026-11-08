@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Architecture and Distributed Systems:
 
 ## Targets
 
@@ -24,13 +24,13 @@ Validate mastery for the target curriculum items.
 - `core-14-16`
 - `core-14-17`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Deep-Dive Distributed Systems & Architecture Scenarios
+## Deep-Dive Distributed Systems & Architecture Scenarios
 
 Answer each scenario in detail, providing architectural diagrams, Go interface definitions, and trade-off analyses where relevant.
 
@@ -61,7 +61,7 @@ A Go downstream service experiences intermittent network packet loss, causing up
 
 ---
 
-## 2. Practical Architecture Challenge
+## Practical Architecture Challenge
 
 Design and implement the Go interface contracts and service orchestration for a distributed resilient order processor:
 1. Define pure domain interfaces: `PaymentPort`, `InventoryPort`, `OutboxRepository`.
@@ -73,7 +73,7 @@ Design and implement the Go interface contracts and service orchestration for a 
 
 ---
 
-## 3. Invariant Architectural Principles
+## Invariant Architectural Principles
 
 1. **Dependencies Point Inward**: Core business domain logic must never import outer infrastructure packages (database drivers, HTTP routers, cloud SDKs).
 2. **Never Retry Non-Idempotent Mutations**: Never automatically retry non-idempotent operations without an idempotency key header (`Idempotency-Key`).
@@ -82,7 +82,7 @@ Design and implement the Go interface contracts and service orchestration for a 
 
 ---
 
-## 4. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -93,6 +93,10 @@ Design and implement the Go interface contracts and service orchestration for a 
 
 ---
 
-## 5. Submission Requirements
+## Submission Requirements
 
 Submit your architectural breakdown addressing Scenarios 1–4 and the interface and orchestration code for the practical challenge.
+
+## Retake policy
+
+If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.

@@ -26,7 +26,12 @@ Module 16 is positioned to bridge engineering mastery and career transition. Whi
 
 ---
 
-## Lesson Tracks
+## Prerequisites
+
+- [Module 15: Docker, CI/CD, and Deployment](../15-docker-cicd-deployment/README.md) — complete that module's completion checkpoint, including the deployment runbook, before starting this one.
+- A production-shaped project to package and defend. The primary portfolio asset is the [Flagship Opslane](../18-flagship-opslane/README.md) system built in Module 18.
+
+## Lessons
 
 To maintain focus on immediate hiring outcomes, Module 16 separates immediate job-search readiness from long-term career growth:
 
@@ -73,6 +78,11 @@ Ongoing professional development for advancing from junior/mid-level to senior e
 - **Format:** Portfolio inspection, behavioral simulation, and live technical defense.
 - **Passing Threshold:** 80% passing score on the portfolio review rubric.
 
+## Assessments
+
+- [`assessments/checkpoint/README.md`](./assessments/checkpoint/README.md) — **Module 16 Checkpoint — Capstone Portfolio, Engineering Standards, and Interview Readiness**
+- [`assessments/portfolio-review-pack/README.md`](./assessments/portfolio-review-pack/README.md) — **Portfolio Review Pack**
+
 ---
 
 ## Completion Checklist
@@ -82,3 +92,7 @@ To complete Module 16:
 - [ ] Finalize repository documentation, README, and verification scripts for the Flagship Capstone.
 - [ ] Pass the Portfolio Review Pack project review.
 - [ ] Complete the graduation milestone defense checklist.
+
+## Next module
+
+After passing this module's exit gate, continue to [Module 18: Flagship Opslane](../18-flagship-opslane/README.md) for the graduation capstone. Learners who want a specialization may instead (or additionally) take [Module 17: Advanced Electives](../../electives/advanced-electives/README.md) as an optional companion track.

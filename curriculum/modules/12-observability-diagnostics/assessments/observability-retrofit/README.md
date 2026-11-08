@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Observability and Diagnostics:
 
 ## Targets
 
 - `project-observability-retrofit`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Assessment Overview & Industrial Context
+## Assessment Overview & Industrial Context
 
 In production distributed systems, deploying microservices as opaque black boxes is unacceptable. When an e-commerce checkout flow spikes in error rates or degrades in tail latency (p99), operations teams require real-time correlated telemetry across the three foundational pillars of observability:
 1. **Structured Contextual Logging**: Emitting JSON-formatted log lines with consistent key/value attributes (`order_id`, `customer`, `amount_cents`) and context trace identifiers via Go 1.21+'s standard `log/slog`.
@@ -25,7 +25,7 @@ Your challenge in this assessment is to retrofit production telemetry into an ex
 
 ---
 
-## 2. Core Competencies Tested
+## Core Competencies Tested
 
 - **Zero-Allocation Context Logging**: Replacing `log.Println` with `slog.InfoContext`, `slog.WarnContext`, and `slog.ErrorContext` carrying explicit typed attributes.
 - **Dimensional Metric Modeling**: Correctly choosing between Counter, Gauge, and Histogram; avoiding high-cardinality label explosions (e.g., never using `order_id` as a Prometheus label).
@@ -35,7 +35,7 @@ Your challenge in this assessment is to retrofit production telemetry into an ex
 
 ---
 
-## 3. Zero-Magic Architectural Breakdown
+## Zero-Magic Architectural Breakdown
 
 ```
 [ Inbound HTTP Request ]
@@ -67,7 +67,7 @@ In Prometheus, each unique combination of key-value label pairs generates a dist
 
 ---
 
-## 4. Implementation Requirements & Task Breakdown
+## Implementation Requirements & Task Breakdown
 
 ### Task 1: Structured Logging with `log/slog`
 - Replace all legacy `log.Print*` calls with `slog` methods.
@@ -104,7 +104,7 @@ In Prometheus, each unique combination of key-value label pairs generates a dist
 
 ---
 
-## 5. Verification & Acceptance Criteria
+## Verification & Acceptance Criteria
 
 Run all tests in the project directory:
 
@@ -121,7 +121,7 @@ go test -v -race ./curriculum/modules/12-observability-diagnostics/projects/obse
 
 ---
 
-## 6. Common Pitfalls & Anti-Patterns
+## Common Pitfalls & Anti-Patterns
 
 1. **Leaking Unbounded Labels to Prometheus**:
    *Anti-pattern*: Adding `order_id` as a label to `order_requests_total`.
@@ -141,7 +141,7 @@ go test -v -race ./curriculum/modules/12-observability-diagnostics/projects/obse
 
 ---
 
-## 7. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -152,8 +152,12 @@ go test -v -race ./curriculum/modules/12-observability-diagnostics/projects/obse
 
 ---
 
-## 8. Submission & Reflection
+## Submission & Reflection
 
 1. Provide output from `go test -v -race ./...`.
 2. Provide a curl output snippet from `GET /metrics` showing `order_requests_total` and `active_orders_count`.
-3. Answer: *Why is distributed tracing necessary in a microservice mesh even if every service has comprehensive Prometheus metrics and structured logging?*
+3. Answer: *Why is distributed tracing necessary in a microservice mesh even if every service has detailed Prometheus metrics and structured logging?*
+
+## Retake policy
+
+If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.

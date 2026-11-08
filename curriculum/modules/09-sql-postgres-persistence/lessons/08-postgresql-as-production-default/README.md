@@ -6,7 +6,7 @@ Describe PostgreSQL's key features that make it the recommended production datab
 
 ## Why this matters
 
-SQLite is ideal for learning and local development, but production Go services need a database that handles concurrent writes, enforces robust authentication, supports network access, and scales horizontally. PostgreSQL is the industry standard for Go backends — it is feature-rich, battle-tested, and has first-class Go driver support. Understanding how to connect and interact with PostgreSQL prepares you for real-world deployment.
+SQLite is ideal for learning and local development, but production Go services need a database that handles concurrent writes, enforces reliable authentication, supports network access, and scales horizontally. PostgreSQL is the industry standard for Go backends — it is feature-rich, battle-tested, and has first-class Go driver support. Understanding how to connect and interact with PostgreSQL prepares you for real-world deployment.
 
 ## Mental model
 

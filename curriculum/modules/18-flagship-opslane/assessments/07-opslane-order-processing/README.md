@@ -45,6 +45,15 @@ Under the hood:
 3. If `op.gateway.ProcessPayment()` returns an error, the handler returns early without calling `tx.Commit()`. The deferred `tx.Rollback()` executes automatically, discarding the intermediate `PROCESSING` status update and ensuring the order remains in its original status.
 4. An immutable audit record is inserted within the same transaction commit, guaranteeing an unforgeable trace of the order's completion.
 
+A representative excerpt from `main.go` (`OrderProcessor.ProcessOrder`):
+
+```go
+	// 2. Validate state machine invariant
+	if !CanTransition(currentStatus, StatusProcessing) {
+		return fmt.Errorf("%w: cannot transition from %s to %s", ErrInvalidStateTransition, currentStatus, StatusProcessing)
+	}
+```
+
 ## Run Instructions
 
 ```bash

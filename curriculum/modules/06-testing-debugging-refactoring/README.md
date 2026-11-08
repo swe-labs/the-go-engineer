@@ -8,6 +8,10 @@ Move proof, diagnosis, and safe change before serious backend work.
 
 Builds professional feedback loops through unit tests, table tests, debugging, refactoring, coverage, and safe change management.
 
+## Prerequisites
+
+- [Module 05: Types, Interfaces, Packages, and Modules](../05-types-interfaces-packages-modules/README.md) — complete that module's completion checkpoint before starting this one.
+
 ## Learning Sessions & Lessons
 
 ### Session 1: Unit Testing & Feedback Loops
@@ -40,6 +44,21 @@ Builds professional feedback loops through unit tests, table tests, debugging, r
 - `core-06-20` Fuzz testing
 - `core-06-21` Race detector preview
 
+## Projects
+
+- [`projects/bug-hunt-pack/README.md`](./projects/bug-hunt-pack/README.md) — **Bug Hunt Pack**
+- [`projects/refactor-under-tests/README.md`](./projects/refactor-under-tests/README.md) — **Refactor Under Tests**
+
+## Assessments
+
+- [`assessments/bug-hunt-pack/README.md`](./assessments/bug-hunt-pack/README.md) — **Bug Hunt Pack**
+- [`assessments/checkpoint/README.md`](./assessments/checkpoint/README.md) — **Module 06 Checkpoint — Testing and Debugging**
+- [`assessments/refactor-under-tests/README.md`](./assessments/refactor-under-tests/README.md) — **Refactor Under Tests**
+
 ## Completion
 
 Complete every required lesson, lab, project, and assessment for this module.
+
+## Next module
+
+After passing this module's exit gate, continue to [Module 07: CLI, Files, JSON, Config, and Runtime Coordination](../07-cli-files-json-config/README.md).

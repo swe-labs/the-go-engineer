@@ -1,6 +1,6 @@
 # Order Summary Refactor
 
-## Learning Objectives
+## Learning objective
 
 - Design custom error types that implement the `error` interface
 - Wrap errors with `fmt.Errorf` and `%w` to preserve the error chain

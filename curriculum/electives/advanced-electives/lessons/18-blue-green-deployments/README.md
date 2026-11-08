@@ -2,7 +2,7 @@
 
 ## When you need this
 
-Use Blue/Green deployments when deploying critical Go services that require zero downtime, instantaneous rollback capabilities, and the ability to run comprehensive pre-flight smoke tests against the production-ready idle environment before directing live customer traffic to it.
+Use Blue/Green deployments when deploying critical Go services that require zero downtime, instantaneous rollback capabilities, and the ability to run thorough pre-flight smoke tests against the production-ready idle environment before directing live customer traffic to it.
 
 ## When you do not need this
 
@@ -152,3 +152,7 @@ Blue/Green deployments are standard practice across AWS (ECS service target grou
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Microservice splitting](../19-microservice-splitting/README.md)

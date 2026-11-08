@@ -6,7 +6,7 @@ Assess and mitigate software supply chain risks in Go projects by verifying depe
 
 ## Why this matters
 
-Software supply chain attacks are one of the fastest-growing security threats. The 2024 XZ Utils backdoor (CVE-2024-3094) and the 2018 event-stream incident demonstrated that a compromised dependency can give attackers access to thousands of downstream projects. Go's module system includes strong supply chain security features: `go.sum` for tamper-proof dependency verification, the checksum database for global transparency, and reproducible builds. Go engineers must understand these features and the broader supply chain risk landscape to protect their applications.
+Software supply chain attacks are one of the fastest-growing security threats. The 2024 XZ Utils backdoor (CVE-2024-3094) and the 2018 event-stream incident demonstrated that a compromised dependency can give attackers access to thousands of downstream projects. Go's module system includes strong supply chain security features: `go.sum` for tamper-proof dependency verification, the checksum database for global transparency, and reproducible builds. Go engineers must understand these features and the broader supply chain risk surface to protect their applications.
 
 ## Mental model
 

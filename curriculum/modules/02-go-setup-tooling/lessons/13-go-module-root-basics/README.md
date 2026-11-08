@@ -26,7 +26,7 @@ flowchart TD
     classDef container fill:#161b22,stroke:#30363d,stroke-width:1px,color:#8b949e;
 
     subgraph ModuleRoot["Module Root Directory: /myproject"]
-        GOMOD["go.mod\nmodule github.com/user/myproject\ngo 1.24"]:::frontDoor
+        GOMOD["go.mod\nmodule github.com/user/myproject\ngo 1.27.0"]:::frontDoor
         GOSUM["go.sum\nCryptographic SHA-256 dependency hashes"]:::standardNode
 
         subgraph SubPkg["Package Directory: /pkg/mathlib"]
@@ -51,7 +51,7 @@ The `go.mod` file defines the module path, the Go version, and the dependencies 
 The `go.mod` file is a line-oriented text file with directives:
 
 - `module example.com/myapp` — the module's import path prefix
-- `go 1.22` — the Go version used for compilation
+- `go 1.27.0` — the Go version used for compilation
 - `require example.com/lib v1.2.3` — a dependency and its version
 - `replace example.com/lib => ../local-lib` — override a dependency's location
 - `exclude example.com/lib v1.2.4` — prevent a specific version from being used
@@ -143,7 +143,7 @@ func main() {
 	sampleGoMod := `
 module github.com/my-org/payment-gateway
 
-go 1.23.0
+go 1.27.0
 
 require (
 	golang.org/x/crypto v0.24.0
@@ -213,7 +213,7 @@ This program demonstrates how Go modules establish package namespaces:
 ## Production notes
 
 - Commit both `go.mod` and `go.sum`. The `go.sum` file ensures reproducible builds.
-- Pin your Go version in `go.mod`: the `go 1.22` directive tells Go which language version to use.
+- Pin your Go version in `go.mod`: the `go 1.27.0` directive tells Go which language version to use.
 - Use `replace` directives for local development but remove them before merging.
 - In CI, run `go mod verify` to ensure no dependency tampering.
 

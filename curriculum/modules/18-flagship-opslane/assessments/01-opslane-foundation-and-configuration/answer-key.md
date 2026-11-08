@@ -26,7 +26,7 @@
 
 **7. Architectural advantages of startup configuration parsing:**
 1. **Fail-Fast Reliability:** If a required environment variable is missing or malformed, the process aborts immediately upon launch with a descriptive error before registering with load balancers, rather than failing on an arbitrary client request hours later.
-2. **Immutable Runtime State:** Storing configuration in an immutable struct avoids repeated OS system calls (`os.Getenv`), prevents race conditions from concurrent environment mutations, and enables seamless dependency injection into components.
+2. **Immutable Runtime State:** Storing configuration in an immutable struct avoids repeated OS system calls (`os.Getenv`), prevents race conditions from concurrent environment mutations, and enables clean dependency injection into components.
 *Grading: 1 pt for fail-fast explanation; 1 pt for immutability/dependency injection benefits.*
 
 **8. Runtime behavior on unhandled panics:**

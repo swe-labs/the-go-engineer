@@ -306,4 +306,4 @@ go test ./curriculum/modules/05-types-interfaces-packages-modules/lessons/23-doc
 
 ## NEXT UP
 
-Congratulations on completing Module 05! You now understand Go's type system with structs, methods, interfaces, and the module system. Next up: [Why Testing Exists](../../../06-testing-debugging-refactoring/lessons/01-why-testing-exists/README.md)
+[Generics fundamentals](../24-generics-fundamentals/README.md), the final lesson in Module 05. Then advance to [Why Testing Exists](../../../06-testing-debugging-refactoring/lessons/01-why-testing-exists/README.md) in Module 06.

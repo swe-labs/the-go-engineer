@@ -8,7 +8,7 @@ Answer each question with concrete reasoning and evidence.
 When curating a senior software engineering portfolio on GitHub, what is the single most critical factor that distinguishes high-impact projects from generic tutorial clones?
 - A) The repository having thousands of stars from automated bots.
 - B) An extensive commit history spanning over ten years.
-- C) Verifiable proof of production engineering: detailed architectural contracts, comprehensive automated test suites including race detection, reproducible benchmarks, and operational artifacts (Docker, CI/CD).
+- C) Verifiable proof of production engineering: detailed architectural contracts, thorough automated test suites including race detection, reproducible benchmarks, and operational artifacts (Docker, CI/CD).
 - D) Using as many external third-party libraries and frameworks as possible.
 
 ---

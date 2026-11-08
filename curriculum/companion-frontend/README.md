@@ -181,3 +181,36 @@ In Module 18, the learner brings together backend engineering and frontend compa
 2. **Order & Payment Pipeline UI:** Real-time order tracking, payment processing states, and transactional ledger audits.
 3. **Operational Controls:** Graceful node draining, live health monitoring, and system metrics visualization.
 4. **Zero Single-Page Overhead:** Delivered as a single compiled Go binary containing embedded assets via Go's standard `//go:embed` directive.
+
+---
+
+## Stage mission
+
+The Frontend Companion Track exists to make a backend Go engineer independently capable of shipping complete, working web products through the browser — without adopting an SPA build pipeline. Its mission is to teach a hypermedia-driven, server-rendered architecture that leans on Go's concurrency strengths and keeps business logic in one type-checked language.
+
+## Backend alignment
+
+Each stage converges on a point in the core path:
+
+| Stage | Weeks | Core module alignment | Convergence project |
+| :---: | :---: | :--- | :--- |
+| **1** | 10–14 | Module 07 (CLI, files, templates) | Server-rendered documentation wiki |
+| **2** | 15–24 | Modules 08–09 (HTTP, SQL) | Book Catalog REST client |
+| **3** | 25–33 | Module 10 (auth & security) | Authenticated tenant console |
+| **4** | 34–42 | Modules 11–15 (concurrency, observability, deployment) | Live metrics dashboard |
+| **5** | 43–50 | Module 18 (Flagship Opslane) | Opslane Console |
+
+## Verification and test suite
+
+Every stage is a runnable Go program with its own test suite. From any stage directory:
+
+```bash
+go test -v ./...
+```
+
+Then start that stage's server with `go run main.go` and exercise it in the browser. No stage requires Node.js or npm.
+
+## Next stage
+
+Start with [Stage 1: Semantic HTML5 & Modern CSS](./stage-01-semantic-html-css/README.md), then proceed through stages 2–4 in order before integrating the stack into the Flagship Opslane Console.
+

@@ -128,3 +128,7 @@ Enterprise Go architectures integrate feature flags with LaunchDarkly, Unleash, 
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Blue/green deployments](../18-blue-green-deployments/README.md)

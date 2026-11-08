@@ -26,7 +26,7 @@ The recipe is authored by the module maintainer but can be tweaked by consumers 
 flowchart TD
     subgraph Directives["go.mod Directives Anatomy"]
         D1["module: github.com/user/app (Declares root module prefix)"]
-        D2["go: 1.22 (Minimum Go language toolchain version)"]
+        D2["go: 1.27.0 (Minimum Go language toolchain version)"]
         D3["require: external.com/pkg v1.2.3 (Direct & indirect dependencies)"]
         D4["replace: old/pkg => ../local/pkg (Local override during development)"]
         D5["exclude: bad/pkg v1.0.0 (Block compromised or broken versions)"]
@@ -46,7 +46,7 @@ module github.com/rasel9t6/the-go-engineer
 **`go`**: The Go language version the module was written for. This sets the language features available and the toolchain version.
 
 ```
-go 1.25.0
+go 1.27.0
 ```
 
 **`require`**: Lists dependencies with exact versions.
@@ -106,7 +106,7 @@ go mod why -m github.com/google/uuid
 
 ## Under the hood
 
-The `go.mod` file is parsed by the `cmd/go` tool. The `go` directive sets the language version, which controls language features (e.g., `go 1.18` enables generics). The toolchain version (`go 1.25.0` in the `go` directive) indicates which Go toolchain to use.
+The `go.mod` file is parsed by the `cmd/go` tool. The `go` directive sets the language version, which controls language features (e.g., `go 1.18` enables generics). The toolchain version (`go 1.27.0` in the `go` directive) indicates which Go toolchain to use.
 
 Module resolution uses **Minimum Version Selection (MVS)**: given a directed acyclic graph of module requirements, Go selects the minimum version of each module that satisfies all `require` statements. This ensures deterministic, reproducible builds.
 
@@ -151,7 +151,7 @@ A corresponding `go.mod` file:
 ```
 module github.com/example/myapp
 
-go 1.25.0
+go 1.27.0
 
 require (
     github.com/gorilla/mux v1.8.1
@@ -193,7 +193,7 @@ To add an `exclude`:
 - **Using `replace` with an absolute path**: Use relative paths so the module works on other machines.
 - **Forgetting to `go mod tidy` after changing dependencies**: Builds may use stale versions or fail with import errors.
 - **Committing a `go.mod` with `replace` pointing to a local path**: This breaks other developers. Use `go.work` instead for local development, or remove `replace` before committing.
-- **Setting `go` directive too high**: If you set `go 1.25` but use syntax only available in `go 1.26`, the code compiles but users on Go 1.25 get confusing errors. Match the directive to your actual Go version.
+- **Setting `go` directive too high**: If you set `go 1.27` but use syntax only available in `go 1.28`, the code compiles but users on Go 1.27 get confusing errors. Match the directive to your actual Go version.
 
 ## Debugging walkthrough
 
@@ -243,7 +243,7 @@ Create a new module manually (without `go mod init`):
 
 1. Create a directory and write a `go.mod` file by hand with:
    - `module example.com/handcrafted`
-   - `go 1.25.0`
+   - `go 1.27.0`
    - `require rsc.io/quote v1.5.2`
 2. Create `main.go` that imports `rsc.io/quote` and prints `quote.Hello()`.
 3. Run `go mod tidy` to download the dependency and verify.

@@ -8,6 +8,10 @@ Build useful local programs and understand process lifecycle before servers.
 
 Teaches practical local tools using CLI input, file I/O, JSON, configuration, signals, and runtime coordination before network services.
 
+## Prerequisites
+
+- [Module 06: Testing, Debugging, and Refactoring](../06-testing-debugging-refactoring/README.md) — complete that module's completion checkpoint before starting this one.
+
 ## Learning Sessions & Lessons
 
 ### Session 1: Command-Line Interfaces & Unix Streams
@@ -41,6 +45,23 @@ Teaches practical local tools using CLI input, file I/O, JSON, configuration, si
 - `core-07-20` Base64 as encoding, not encryption
 - `core-07-21` CLI testability
 
+## Projects
+
+- [`projects/config-parser/README.md`](./projects/config-parser/README.md) — **Config Parser**
+- [`projects/file-organizer/README.md`](./projects/file-organizer/README.md) — **File Organizer**
+- [`projects/log-search/README.md`](./projects/log-search/README.md) — **Log Search**
+
+## Assessments
+
+- [`assessments/checkpoint/README.md`](./assessments/checkpoint/README.md) — **Module 07 Checkpoint — File System, CLI, and Operating System**
+- [`assessments/config-parser/README.md`](./assessments/config-parser/README.md) — **Config Parser**
+- [`assessments/file-organizer/README.md`](./assessments/file-organizer/README.md) — **File Organizer**
+- [`assessments/log-search/README.md`](./assessments/log-search/README.md) — **Log Search**
+
 ## Completion
 
 Complete every required lesson, lab, project, and assessment for this module.
+
+## Next module
+
+After passing this module's exit gate, continue to [Module 08: HTTP and REST APIs](../08-http-rest-apis/README.md).

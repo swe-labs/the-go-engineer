@@ -157,11 +157,11 @@ Hands-on diagnostic drills are embedded in each lesson:
 ## Projects
 
 - [Project 1: Contact Directory](./projects/contact-directory/README.md): An in-memory CLI application for managing contact records with search filters, input validation, and slice manipulation drills.
-- [Project 2: Pricing Checkout](./projects/pricing-checkout/README.md): A comprehensive production-grade checkout calculator applying tiered quantity discounts, coupon validation, and state sales tax calculations, verified by table-driven test suites.
+- [Project 2: Pricing Checkout](./projects/pricing-checkout/README.md): A thorough production-grade checkout calculator applying tiered quantity discounts, coupon validation, and state sales tax calculations, verified by table-driven test suites.
 
 ## Assessments
 
-- [Module 03 Checkpoint Assessment](./assessments/checkpoint/README.md): Comprehensive 4-file evaluation suite testing data types, slice header mechanics, pointer behavior, and problem-solving.
+- [Module 03 Checkpoint Assessment](./assessments/checkpoint/README.md): Thorough 4-file evaluation suite testing data types, slice header mechanics, pointer behavior, and problem-solving.
 - [Contact Directory Assessment](./assessments/contact-directory/README.md): Rubric and question suite validating the Contact Directory project.
 - [Pricing Checkout Assessment](./assessments/pricing-checkout/README.md): Rubric and question suite validating the Pricing Checkout project.
 

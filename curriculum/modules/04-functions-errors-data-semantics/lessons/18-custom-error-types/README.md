@@ -308,3 +308,5 @@ go test ./curriculum/modules/04-functions-errors-data-semantics/lessons/18-custo
 Advance to the hands-on project for Module 04:
 
 - [Project: Order Summary Refactor](../../projects/order-summary-refactor/README.md)
+
+Then continue to [Structs](../../../05-types-interfaces-packages-modules/lessons/01-structs/README.md) in Module 05.

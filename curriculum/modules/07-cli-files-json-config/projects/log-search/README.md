@@ -6,7 +6,7 @@ Build a high-performance streaming log search CLI tool in Go. Master buffered I/
 
 ## Why this matters
 
-Production log files frequently reach gigabytes in size. Inexperienced developers often load entire files into memory using `os.ReadFile`, triggering out-of-memory (OOM) crashes in production environments. Writing robust infrastructure tools requires streaming data line-by-line using `bufio.Scanner`, maintaining constant O(1) memory regardless of input file size.
+Production log files frequently reach gigabytes in size. Inexperienced developers often load entire files into memory using `os.ReadFile`, triggering out-of-memory (OOM) crashes in production environments. Writing reliable infrastructure tools requires streaming data line-by-line using `bufio.Scanner`, maintaining constant O(1) memory regardless of input file size.
 
 ## Prerequisites
 

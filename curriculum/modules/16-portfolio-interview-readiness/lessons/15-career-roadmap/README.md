@@ -6,7 +6,7 @@ Create a structured career development plan by analyzing your current skills aga
 
 ## Why this matters
 
-Most engineers drift through their careers, reacting to opportunities rather than creating them. A deliberate career roadmap transforms luck into strategy. Engineers with written career plans grow faster, earn more, and report higher satisfaction than those without. In the Go ecosystem specifically, the landscape changes rapidly: new frameworks, deployment patterns, and architectural paradigms emerge yearly. A roadmap ensures you learn the right things at the right time rather than chasing every trend. Whether you aspire to Staff Engineer at a Go-heavy company or CTO of a startup, a written plan increases your odds.
+Most engineers drift through their careers, reacting to opportunities rather than creating them. A deliberate career roadmap transforms luck into strategy. Engineers with written career plans grow faster, earn more, and report higher satisfaction than those without. In the Go ecosystem specifically, the tooling changes rapidly: new frameworks, deployment patterns, and architectural paradigms emerge yearly. A roadmap ensures you learn the right things at the right time rather than chasing every trend. Whether you aspire to Staff Engineer at a Go-heavy company or CTO of a startup, a written plan increases your odds.
 
 ## Mental model
 
@@ -251,7 +251,7 @@ plan := CareerPlan{
 
 - Go concurrency: 8 (not 10) — strong proficiency, expert is unnecessary
 - System design: 7 — solid understanding of distributed systems patterns
-- Testing: 7 — comprehensive test strategies
+- Testing: 7 — thorough test strategies
 - Kubernetes: 5 — enough to deploy and debug, no need to administer clusters
 - Mentoring: 6 — start practicing with junior colleagues
 
@@ -308,4 +308,4 @@ The existing tests verify `AnalyzeGaps` (basic, no gaps, empty skills), `compute
 
 ## NEXT UP
 
-Congratulations on completing Module 16 and the entire core curriculum! You have built a comprehensive foundation in Go engineering — from fundamentals through production deployment and career readiness. Next up: Elective modules, starting with Module 18 — Flagship Opslane.
+Congratulations on completing Module 16 and the entire core curriculum! You have built a solid foundation in Go engineering — from fundamentals through production deployment and career readiness. Next up: Elective modules, starting with Module 18 — Flagship Opslane.

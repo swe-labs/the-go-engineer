@@ -135,3 +135,7 @@ Complex generic constraints are central to high-performance financial systems (c
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Generic data structures](../03-generic-data-structures/README.md)

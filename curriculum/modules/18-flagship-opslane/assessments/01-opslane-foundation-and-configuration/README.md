@@ -45,6 +45,18 @@ Under the hood:
 3. `InitLogger` binds a typed `slog.Handler`. Production uses `slog.NewJSONHandler` targeting stdout for collector daemon ingestion (FluentBit, Vector). Development uses `slog.NewTextHandler` for terminal ergonomics.
 4. `recoverMiddleware` intercepts goroutine panics in HTTP request chains using `defer recover()`, preventing process termination while logging structured error details and returning HTTP 500 JSON payloads.
 
+A representative excerpt from `main.go` (`LoadConfig`):
+
+```go
+	if p := os.Getenv("PORT"); p != "" {
+		port, err := strconv.Atoi(p)
+		if err != nil || port < 1024 || port > 65535 {
+			return nil, fmt.Errorf("invalid PORT %q: must be integer between 1024 and 65535", p)
+		}
+		cfg.Port = port
+	}
+```
+
 ## Run Instructions
 
 ```bash

@@ -17,7 +17,7 @@ Think of image layers as a stack of transparencies. Each transparency shows only
 ```mermaid
 flowchart TD
     subgraph ImageLayers["Docker Layer Cache Optimization"]
-        L1["Layer 1: FROM golang:1.24-alpine (Cached)"]
+        L1["Layer 1: FROM golang:1.27-alpine (Cached)"]
         L2["Layer 2: WORKDIR /app (Cached)"]
         L3["Layer 3: COPY go.mod go.sum (Cached unless dependencies change)"]
         L4["Layer 4: RUN go mod download (Cached unless dependencies change)"]
@@ -35,7 +35,7 @@ Each Dockerfile instruction creates a read-only layer:
 
 | Instruction | Layer content | Cache key |
 |---|---|---|
-| `FROM golang:1.25` | Base image filesystem | Image digest |
+| `FROM golang:1.27` | Base image filesystem | Image digest |
 | `WORKDIR /app` | Directory metadata | Command string |
 | `COPY go.mod go.sum ./` | Files from build context | File checksums |
 | `RUN go mod download` | Downloaded modules | Command output |
@@ -54,14 +54,14 @@ Go's large standard library and module graph make layer management critical:
 
 ```dockerfile
 # INEFFICIENT: Every source change invalidates the entire build
-FROM golang:1.25-alpine
+FROM golang:1.27-alpine
 WORKDIR /app
 COPY . .
 RUN go mod download
 RUN go build -o server .
 
 # EFFICIENT: Dependencies cached separately from source
-FROM golang:1.25-alpine
+FROM golang:1.27-alpine
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
@@ -90,7 +90,7 @@ type LayerInfo struct {
 }
 
 var recommendedLayers = []LayerInfo{
-	{Command: "FROM golang:1.25-alpine", SizeBytes: 150_000_000, Cacheable: true},
+	{Command: "FROM golang:1.27-alpine", SizeBytes: 150_000_000, Cacheable: true},
 	{Command: "WORKDIR /app", SizeBytes: 0, Cacheable: true},
 	{Command: "COPY go.mod go.sum ./", SizeBytes: 50_000, Cacheable: true},
 	{Command: "RUN go mod download", SizeBytes: 200_000_000, Cacheable: true},
@@ -117,12 +117,50 @@ func main() {
 ## Step-by-step execution
 
 1. `docker build` sends the build context to dockerd.
-2. Docker checks its layer cache for `FROM golang:1.25-alpine`. If the image is cached, layer 0 is reused.
+2. Docker checks its layer cache for `FROM golang:1.27-alpine`. If the image is cached, layer 0 is reused.
 3. `WORKDIR /app` creates a metadata layer. Always cached unless the command changes.
 4. `COPY go.mod go.sum ./` computes checksums of the two files. If they match the cache, this layer is reused.
 5. `RUN go mod download` runs the command. The cache key is the command string and the previous layer hash. Cached if nothing changed.
 6. `COPY . .` computes checksums of all source files. Any edit invalidates this layer.
 7. `RUN go build` must recompile because the previous layer changed.
+
+## Runtime evidence
+
+The lesson ships a small HTTP server that reports the layer model from `main.go`. Start it:
+
+```bash
+go run ./curriculum/modules/15-docker-cicd-deployment/lessons/07-docker-images-and-layers
+```
+
+Expected output:
+
+```text
+Listening on :8080
+```
+
+In a second terminal, query the endpoint:
+
+```bash
+curl -s localhost:8080/layers
+```
+
+Expected output:
+
+```json
+{"layers":[{"command":"FROM golang:1.27-alpine","size_bytes":150000000,"cacheable":true},{"command":"WORKDIR /app","size_bytes":0,"cacheable":true},{"command":"COPY go.mod go.sum ./","size_bytes":50000,"cacheable":true},{"command":"RUN go mod download","size_bytes":200000000,"cacheable":true},{"command":"COPY . .","size_bytes":500000,"cacheable":false},{"command":"RUN CGO_ENABLED=0 go build -o server .","size_bytes":15000000,"cacheable":false}],"estimated_size_bytes":365550000}
+```
+
+Interpretation: the first two layers are cached from the base image and do not grow. `RUN go mod download` dominates `estimated_size_bytes` because the module cache lives inside that layer. The last two layers are marked not cacheable because their inputs are the source tree, which changes on every edit. The endpoint reports `estimated_size_bytes` as the sum of the layer sizes; the real image on disk differs because the base image is shared across images and the layer sizes are compressed on pull.
+
+Measuring the real image requires a running Docker daemon. Build the lesson image, then inspect its layers:
+
+```bash
+docker build -t images-lesson:naive -f Dockerfile .
+docker images images-lesson --format '{{.Repository}}:{{.Tag}} {{.Size}}'
+docker history images-lesson:naive --no-trunc --format '{{.Size}}  {{.CreatedBy}}'
+```
+
+Expected result: `docker history` prints one row per layer. `docker images` prints the total, which is the sum of the layer sizes decompressed. Compare that total with the `estimated_size_bytes` value from `/layers`. A large gap means a layer is retaining files you believed a later `RUN rm` removed; that is the exact failure the Debugging walkthrough below diagnoses. Absolute sizes depend on the base image digest and the Docker version, so measure the delta between the naive build and the multi-stage build from the next lesson rather than a single number.
 
 ## Common mistakes
 
@@ -137,7 +175,7 @@ func main() {
 Consider a Dockerfile that produces a 450 MB image:
 
 ```dockerfile
-FROM golang:1.25
+FROM golang:1.27
 RUN apt-get update && apt-get install -y curl
 COPY . .
 RUN go build -o server .
@@ -153,7 +191,7 @@ CMD ["./server"]
 
 **Fix:** Use multi-stage build. The builder stage has all the tools, the runtime stage has only the binary:
 ```dockerfile
-FROM golang:1.25 AS builder
+FROM golang:1.27 AS builder
 COPY . .
 RUN go build -o server .
 

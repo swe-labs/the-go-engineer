@@ -40,7 +40,7 @@ flowchart TD
     Terminal["Terminal: go version"]:::standardNode -->|1. Searches PATH| BIN_GO
     BIN_GO -->|2. Inspects built-in target| Host
     BIN_GO -->|3. Locates Standard Library| PKG_STD
-    Terminal -->|Terminal Output| Result["go version go1.24.x / go1.26.x windows/amd64"]:::exitGate
+    Terminal -->|Terminal Output| Result["go version go1.27.x windows/amd64"]:::exitGate
 ```
 
 ## Core idea
@@ -59,7 +59,7 @@ When you run `go version`, the binary prints its own version and the target oper
 
 ## How Go uses it
 
-The Go team releases two versions per year (e.g., Go 1.22 in February, Go 1.23 in August). Each release includes toolchain updates, standard library additions, and performance improvements. Running `go version` tells you exactly which release you have. The `GOROOT` environment variable (usually set by the installer) points to the directory containing the Go distribution. `GOPATH` defaults to `$HOME/go` on Unix or `%USERPROFILE%\go` on Windows and is where `go install` places compiled binaries.
+The Go team releases two versions per year (e.g., Go 1.26 in February, Go 1.27 in August). Each release includes toolchain updates, standard library additions, and performance improvements. Running `go version` tells you exactly which release you have. The `GOROOT` environment variable (usually set by the installer) points to the directory containing the Go distribution. `GOPATH` defaults to `$HOME/go` on Unix or `%USERPROFILE%\go` on Windows and is where `go install` places compiled binaries.
 
 ## Go example
 
@@ -143,7 +143,7 @@ func main() {
 ```
 
 This diagnostic program inspects the active Go toolchain directly from within the runtime:
-- `runtime.Version()` retrieves the exact compiler release string (e.g., `go1.22.0`).
+- `runtime.Version()` retrieves the exact compiler release string (e.g., `go1.27.0`).
 - `runtime.GOOS` and `runtime.GOARCH` identify the compilation target (e.g., `windows/amd64` or `linux/arm64`).
 - `runtime.Compiler` reveals the active compiler backend (`gc` for the standard Go compiler).
 - `runtime.GOROOT()` returns the root directory containing the standard library and toolchain files.
@@ -183,7 +183,7 @@ This diagnostic program inspects the active Go toolchain directly from within th
 
 - CI/CD pipelines install Go via the official setup-go action (GitHub Actions) or equivalent. They never use `GOPATH`-based workflows — everything uses Go modules.
 - Production Go versions should match the `go` directive in your `go.mod` file. Mixing versions between development and CI causes subtle build differences.
-- Always pin your Go version in CI (e.g., `go 1.22.x`), never use `latest`.
+- Always pin your Go version in CI (e.g., `go 1.27.x`), never use `latest`.
 
 ## Performance implications
 
@@ -207,7 +207,7 @@ go env GOROOT GOPATH GOOS GOARCH
 go run .
 ```
 
-Expected `go version` output is a version string like `go version go1.22.0 windows/amd64`. The `go env` command prints each variable on its own line. `go run .` should print the two-line confirmation message.
+Expected `go version` output is a version string like `go version go1.27.0 windows/amd64`. The `go env` command prints each variable on its own line. `go run .` should print the two-line confirmation message.
 
 ## Review questions
 

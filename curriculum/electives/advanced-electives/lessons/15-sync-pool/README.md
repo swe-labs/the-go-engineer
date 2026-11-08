@@ -126,3 +126,7 @@ High-throughput Go web frameworks (like Gin, FastHTTP), structured loggers (`zap
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[CQRS](../16-cqrs/README.md)

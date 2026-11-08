@@ -2,19 +2,19 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Architecture and Distributed Systems:
 
 ## Targets
 
 - `project-modular-refactor-review`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
-## 1. Assessment Overview & Industrial Context
+## Assessment Overview & Industrial Context
 
 In fast-growing software organizations, greenfield prototypes frequently evolve into monolithic, tightly coupled systems where HTTP handlers directly access global database connections, perform complex domain calculations, make synchronous third-party API calls, and emit notifications inline. 
 
@@ -27,7 +27,7 @@ In this assessment, you will refactor a legacy e-commerce checkout monolith (`ma
 
 ---
 
-## 2. Core Competencies Tested
+## Core Competencies Tested
 
 - **Hexagonal Architecture (Ports & Adapters)**: Separating pure business domain models from inbound drivers (HTTP handlers) and outbound secondary adapters (databases, payment processors, notification services).
 - **Dependency Inversion Principle (DIP)**: Defining port interfaces that the core domain owns, forcing concrete infrastructure adapters to depend on domain interfaces rather than vice versa.
@@ -37,7 +37,7 @@ In this assessment, you will refactor a legacy e-commerce checkout monolith (`ma
 
 ---
 
-## 3. Zero-Magic Architectural Breakdown
+## Zero-Magic Architectural Breakdown
 
 ```
                        ┌───────────────────────────────────────┐
@@ -73,7 +73,7 @@ In legacy monoliths, global variables (`var globalDB = ...`) bypass function par
 
 ---
 
-## 4. Implementation Requirements & Task Breakdown
+## Implementation Requirements & Task Breakdown
 
 ### Task 1: Domain Entities & Business Invariants
 In `domain.go`:
@@ -123,7 +123,7 @@ In `handler.go`:
 
 ---
 
-## 5. Verification & Acceptance Criteria
+## Verification & Acceptance Criteria
 
 Run all unit tests in the project directory:
 
@@ -140,7 +140,7 @@ go test -v -race ./curriculum/modules/14-architecture-distributed-systems/projec
 
 ---
 
-## 6. Common Pitfalls & Anti-Patterns
+## Common Pitfalls & Anti-Patterns
 
 1. **Leaking Infrastructure Details into Domain Models**:
    *Anti-pattern*: Adding SQL tags or HTTP headers to domain structs in `domain.go`.
@@ -156,7 +156,7 @@ go test -v -race ./curriculum/modules/14-architecture-distributed-systems/projec
 
 ---
 
-## 7. 4-Tier Assessment Rubric
+## 4-Tier Assessment Rubric
 
 | Level | Criteria & Observable Evidence |
 |---|---|
@@ -167,8 +167,12 @@ go test -v -race ./curriculum/modules/14-architecture-distributed-systems/projec
 
 ---
 
-## 8. Submission & Reflection
+## Submission & Reflection
 
 1. Submit the terminal test output from `go test -v -race ./...`.
 2. Provide a diagram or dependency graph showing package import directions.
 3. Answer: *Why does Go's structural typing (implicit interface fulfillment) make hexagonal architecture easier to maintain compared to nominally typed languages like Java or C#?*
+
+## Retake policy
+
+If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.

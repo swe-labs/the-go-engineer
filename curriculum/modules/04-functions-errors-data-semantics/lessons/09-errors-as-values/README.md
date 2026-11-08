@@ -8,7 +8,7 @@ Use Go's `error` interface to represent and propagate errors, apply the `if err 
 
 ## Why this matters
 
-Go does not have exceptions. Instead, errors are ordinary values that functions return. This design forces you to handle errors explicitly, making control flow visible and predictable. The `if err != nil` pattern appears more than any other in production Go code. Mastering it is required to write robust Go programs.
+Go does not have exceptions. Instead, errors are ordinary values that functions return. This design forces you to handle errors explicitly, making control flow visible and predictable. The `if err != nil` pattern appears more than any other in production Go code. Mastering it is required to write reliable Go programs.
 
 ## Mental model
 

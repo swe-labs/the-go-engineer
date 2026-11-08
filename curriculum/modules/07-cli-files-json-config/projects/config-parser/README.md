@@ -2,7 +2,7 @@
 
 ## Learning objective
 
-Build a robust, layered configuration parser in Go. Master JSON and key-value file parsing with `encoding/json`, schema validation, environment variable override precedence (Twelve-Factor App methodology), and mockable environment lookups.
+Build a reliable, layered configuration parser in Go. Master JSON and key-value file parsing with `encoding/json`, schema validation, environment variable override precedence (Twelve-Factor App methodology), and mockable environment lookups.
 
 ## Why this matters
 

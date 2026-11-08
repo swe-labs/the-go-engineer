@@ -121,3 +121,7 @@ Standard enterprise Go interceptor suites include `go-grpc-middleware` packages 
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[REST vs gRPC tradeoffs](../13-rest-vs-grpc-tradeoffs/README.md)

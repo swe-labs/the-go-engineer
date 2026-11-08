@@ -159,3 +159,7 @@ The functional options pattern is universally used in production Go libraries in
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Method values](../05-method-values/README.md)

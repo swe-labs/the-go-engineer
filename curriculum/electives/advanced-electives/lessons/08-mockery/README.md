@@ -134,9 +134,13 @@ Define an EmailSender interface with a Send(to, body string) error method. Write
 
 ## Production notes
 
-Mockery is the de-facto mocking tool in Go enterprise microservices, generating mocks automatically via //go:generate mockery --name=Repository to support comprehensive test suites.
+Mockery is the de-facto mocking tool in Go enterprise microservices, generating mocks automatically via //go:generate mockery --name=Repository to support thorough test suites.
 
 ## Related core lessons
 
 - Module 15.15 — Demo preparation
 - Module 17.15 — Demo preparation
+
+## NEXT UP
+
+[Protobuf](../09-protobuf/README.md)

@@ -2,15 +2,15 @@
 
 ## Purpose
 
-Validate mastery for the target curriculum items.
+Mastery is validated against the following target items from Portfolio and Interview Readiness:
 
 ## Targets
 
 - `project-portfolio-review-pack`
 
-## Evidence
+## Evidence required
 
-Submit answers, code evidence, test output, and explanation where required.
+Provide written answers to each scenario below, any required Go code or patch, captured test output proving it passes, and a short explanation of your design decisions.
 
 ---
 
@@ -124,3 +124,18 @@ go test -v ./curriculum/modules/16-portfolio-interview-readiness/projects/portfo
 # Run the live portfolio audit tool
 go run ./curriculum/modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/_solution/main.go
 ```
+
+## Rubric
+
+| Criterion | Weight | Passing standard |
+| --- | --- | --- |
+| Audit engine correctness | 35% | `_starter/main.go` passes all `_starter/main_test.go` tests and computes the documented weighted score. |
+| Scorecard generation | 25% | Emits a formatted markdown report with per-project pass/fail status and readiness calculation. |
+| Defense brief mastery | 30% | Answers in `questions.md` defend architectural trade-offs with runtime mechanics and failure-mode awareness. |
+| Explanation quality | 10% | Written reasoning is precise and links each decision to operational consequences. |
+
+A passing score is 80%, with no single criterion below 60%.
+
+## Retake policy
+
+If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.

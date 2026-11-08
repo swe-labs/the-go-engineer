@@ -19,7 +19,7 @@ This assessment covers:
 - Role-Based Access Control (RBAC) middleware: enforcing role hierarchy (`ADMIN` > `MEMBER` > `VIEWER`) and returning `403 Forbidden`
 - Multi-tenant boundary isolation: verifying that authenticated users cannot view or delete cross-tenant resources
 - Defense-in-depth HTTP security headers: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, and `Content-Security-Policy`
-- Comprehensive negative testing: asserting rejection of forged tokens, expired signatures, unauthenticated access, and cross-tenant tampering
+- Thorough negative testing: asserting rejection of forged tokens, expired signatures, unauthenticated access, and cross-tenant tampering
 
 ## Evidence required
 

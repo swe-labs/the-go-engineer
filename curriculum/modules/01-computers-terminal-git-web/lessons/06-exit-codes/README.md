@@ -5,7 +5,7 @@
 
 ## Learning objective
 
-Evaluate process exit codes (0 for success, non-zero for failure) to construct robust shell script error handling and CI pipelines.
+Evaluate process exit codes (0 for success, non-zero for failure) to construct reliable shell script error handling and CI pipelines.
 
 ## Why this matters
 
