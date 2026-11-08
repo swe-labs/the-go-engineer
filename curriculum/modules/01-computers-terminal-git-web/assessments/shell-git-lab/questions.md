@@ -1,6 +1,6 @@
 # Shell + Git Lab — Questions
 
-Total: 14 questions (10 multiple choice × 1 pt, 4 short answer × 2 pt = 18 points). Passing: 10/14 correct (70%).
+Total: 14 questions (10 multiple choice × 1 pt, 4 short answer × 2 pt = 18 points). Passing: at least 13 of 18 points (72%).
 
 ---
 

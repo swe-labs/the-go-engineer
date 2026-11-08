@@ -11,10 +11,11 @@ This assessment evaluates your understanding of shell commands, Git fundamentals
 
 ## Scope
 
-- Shell commands and terminal basics (lessons 4-6)
+- Shell commands, exit codes, and pipes (lessons 4-6)
 - Git mental model and workflow (lessons 9-13)
 - Web preview concepts (lessons 14-15)
-- Files, bytes, directories, and paths (lesson 3)
+
+Filesystem mechanics from lesson 3 (inodes, CRLF, permissions) are exercised in the capstone project's verification suite rather than in these knowledge questions.
 
 ## Time expectation
 
@@ -26,20 +27,16 @@ You may reference your own notes and the module's lesson README files during the
 
 ## Passing standard
 
-- 10 out of 14 questions correct (70%) to pass
-- Each multiple-choice question is worth 1 point
-- Short-answer questions are worth 2 points
+- 18 points total: 10 multiple-choice questions (1 point each) and 4 short-answer questions (2 points each)
+- Passing: at least 13 of 18 points (72%)
 
 ## Rubric
 
-| Dimension | Weight | Passing standard |
+| Dimension | Approx. weight | Assessed by |
 | --- | --- | --- |
-| Shell and terminal basics | 30% | Correctly explains navigation, paths, and file operations, and predicts what each command produces. |
-| Git mental model and workflow | 40% | Traces a change from working directory to staging area to commit history and resolves conflicts correctly. |
-| Files, bytes, and paths | 15% | Distinguishes files from directories and explains how paths are resolved. |
-| Web preview concepts | 15% | Explains how client requests reach a server and what is returned. |
-
-A passing score is 70%, with no single dimension below 50%.
+| Git mental model and workflow | ~45% (8 pts) | Questions 2, 3, 4, 9, 11, 13 |
+| Web preview concepts | ~40% (7 pts) | Questions 6, 7, 8, 12, 14 |
+| Shell, exit codes, and pipes | ~15% (3 pts) | Questions 1, 5, 10 |
 
 ## Retake policy
 

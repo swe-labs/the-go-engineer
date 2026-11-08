@@ -41,7 +41,7 @@ func TestBranch_PointerMovementAndHistory(t *testing.T) {
 
 func TestConflictDetectionLogic(t *testing.T) {
 	baseCommit := &Commit{
-		Hash:    "base123",
+		Hash:    "ba5e123",
 		Message: "Base commit",
 		Changes: map[string]string{"app.go": "original", "config.go": "env: dev"},
 	}
@@ -73,7 +73,7 @@ func TestConflictDetectionLogic(t *testing.T) {
 
 	// Verify merge commit generation
 	mergeCommit := &Commit{
-		Hash:    "merge999",
+		Hash:    "def5678",
 		Message: fmt.Sprintf("Merge branch 'feature' into main"),
 		Parent:  baseCommit,
 	}
