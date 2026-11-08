@@ -39,6 +39,10 @@ Execute the following environment verification steps in your terminal:
    ```bash
    mkdir -p ~/the-go-engineer-workspace
    ```
+   On Windows PowerShell, omit `-p` (PowerShell's `mkdir` creates parent directories):
+   ```powershell
+   mkdir ~/the-go-engineer-workspace
+   ```
 5. **Record Your Setup Evidence**: In your learning workspace directory, create an environment summary file named `setup.txt`:
    ```bash
    git --version > setup.txt

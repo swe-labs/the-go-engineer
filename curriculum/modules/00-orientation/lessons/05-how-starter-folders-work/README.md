@@ -12,7 +12,7 @@ In professional software development, nobody gives you complete solutions to cop
 
 ## Mental model
 
-Project directories in this curriculum are structured into two complementary states:
+Dual-state project capstones in this curriculum are structured into two complementary states:
 
 ```text
 Project Directory
@@ -67,7 +67,7 @@ flowchart TD
 
 1. Navigate to the project directory for Module 00: `curriculum/modules/00-orientation/projects/course-setup-verification/`.
 2. Inspect `README.md` and observe its sections: Learning objective, Prerequisites, Project overview, Tasks, Verification, and Rubric.
-3. Navigate to a dual-state capstone in an upcoming module (for example, `curriculum/modules/01-computers-terminal-git-web/projects/shell-git-lab/`):
+3. Navigate to a dual-state capstone in an upcoming module (for example, `curriculum/modules/02-go-setup-tooling/projects/tooling-failure-lab/`):
    - Notice the coexistence of `_starter/` (the scaffold containing starter files) and `_solution/` (the reference implementation).
 4. In your notes, write down a personal engineering commitment: under what exact conditions will you permit yourself to open a `_solution/` folder during your coursework?
 

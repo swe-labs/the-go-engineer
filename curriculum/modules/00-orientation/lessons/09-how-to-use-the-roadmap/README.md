@@ -43,13 +43,14 @@ flowchart TD
     classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
     classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
     classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    classDef electiveNode fill:#2a1030,stroke:#8b5cf6,stroke-width:2px,color:#ffffff;
 
     subgraph CoreTrunk ["Core Backend Trunk (Strictly Sequential)"]
         M00["Mod 00: Orientation"]:::frontDoor --> M01["Mod 01-02: Foundations & Tooling"]:::standardNode
-        M01 --> M03["Mod 03-06: Programming & Types"]:::standardNode
-        M03 --> M07["Mod 07: Concurrency Engine"]:::standardNode
-        M07 --> M08["Mod 08-15: Systems, HTTP & Storage"]:::standardNode
-        M08 --> M16["Mod 16-18: Distributed Systems & Opslane"]:::exitGate
+        M01 --> M03["Mod 03-07: Programming, Types & CLI"]:::standardNode
+        M03 --> M08["Mod 08-11: HTTP, SQL, Auth & Concurrency"]:::standardNode
+        M08 --> M16["Mod 12-15: Observability, Performance & Deployment"]:::standardNode
+        M16 --> M18["Mod 16 & 18: Portfolio & Opslane Capstone"]:::exitGate
     end
 
     subgraph CompanionFrontend ["Companion Frontend Track (Parallel)"]
@@ -60,8 +61,23 @@ flowchart TD
         F1 --> F2 --> F3 --> F4
     end
 
-    M07 -.->|Frontend Unlocks| F1
-    F4 -.->|Full-Stack Convergence| M16
+    subgraph Electives ["Module 17: Advanced Electives (Gateway-Gated)"]
+        EA["Gateway A: Generics (Electives 01-04)"]:::electiveNode
+        EB["Gateway B: Protobuf & gRPC (Electives 09-13)"]:::electiveNode
+        EC["Gateway C: sync.Pool & sync.Map (Electives 14-15)"]:::electiveNode
+        ED["Gateway D: Distributed & Releases (Electives 16-20)"]:::electiveNode
+    end
+
+    M03 -.->|Gateway A Unlocks| EA
+    M08 -.->|Gateway B Unlocks| EB
+    M08 -.->|Gateway C Unlocks| EC
+    M16 -.->|Gateway D Unlocks| ED
+    M08 -.->|Frontend Unlocks| F1
+    EA -.->|Advanced Proof| M18
+    EB -.->|Advanced Proof| M18
+    EC -.->|Advanced Proof| M18
+    ED -.->|Advanced Proof| M18
+    F4 -.->|Full-Stack Convergence| M18
 ```
 
 ## Core idea

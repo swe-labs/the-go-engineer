@@ -65,6 +65,7 @@ flowchart TD
 2. **Inspect the Output Streams**: Programs output diagnostic messages to `stdout` and error details to `stderr`. Never ignore terminal text; error messages usually explain the exact root cause.
 3. **Verify the Exit Code**: In automated workflows, a script is considered successful only when its exit code is zero. Always confirm that your verification commands terminate cleanly without errors.
 4. **Clean Environment Isolation**: Tools should execute predictably regardless of local machine configuration. Keeping dependencies explicit and environment variables clean ensures consistent results.
+5. **The Two Repository Workhorse Commands**: This repository uses two commands everywhere. `go run <lesson-directory>` compiles a lesson's program and executes it in one step — it proves the program works right now. `go test <lesson-directory>` compiles the lesson's test files and runs their test functions — it proves the behavior is still correct after any change. Both print diagnostics to `stderr` and communicate success or failure through their exit code.
 
 ## Practice task
 

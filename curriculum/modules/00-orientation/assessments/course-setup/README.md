@@ -17,7 +17,7 @@ This assessment verifies that you have successfully set up your terminal environ
 
 Submit:
 
-1. A `setup.txt` file containing your Git version, configured committer name and email, and editor confirmation
+1. A `setup.txt` file containing your Git version, configured committer name, and committer email
 2. A short paragraph describing your editor and terminal setup
 3. Answers to `questions.md`
 

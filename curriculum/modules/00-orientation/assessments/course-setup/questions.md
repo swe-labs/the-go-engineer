@@ -1,27 +1,25 @@
 # Questions
 
+Answer from the Course Setup Verification project and the Module 00 lessons. Paste real
+terminal output where asked.
+
 ## Part 1 — Environment verification
 
-1. What Go version do you have installed? Paste the output of `go version`.
-2. What operating system and architecture are you on? Paste the output of `go env GOOS GOARCH`.
-3. What editor or IDE are you using? List at least two Go-related extensions or plugins you have installed.
-4. Can you run `go fmt` from your editor on save? If yes, how did you configure it? If no, what command do you run manually?
+1. Paste the output of `git --version` from your terminal.
+2. What exit code did `git --version` return, and what does that code mean? (See Lesson 04.)
+3. Paste the output of `git config user.name` and `git config user.email`. If either was blank when you started, what command did you run to configure it?
+4. Which editor or IDE did you confirm, and what command verifies it from the terminal (for example `code --version`)?
 
-## Part 2 — Repository setup
+## Part 2 — Workspace and evidence
 
-5. What is the URL of your fork of the repository?
-6. What command did you use to clone it locally?
-7. After cloning, what does `git log --oneline -5` show? Paste the terminal command and its output.
-8. What does `git remote -v` show? Paste the output.
+5. Why does your personal workspace directory (`~/the-go-engineer-workspace`) live outside the curriculum repository? (See Lesson 01.)
+6. What exact command did you use to create your workspace directory? Give the Bash and PowerShell forms if you know both.
+7. Paste the contents of your `setup.txt` file. Which three pieces of information does it record?
+8. Which redirection operators did you use to create and then append to `setup.txt`, and what is the difference between them? (See Lesson 04.)
 
-## Part 3 — Course project
+## Part 3 — Curriculum contract
 
-9. What three tools do you verify are installed in the Course Setup Verification project?
-10. Create a file called `setup.txt` with the version output of Go, Git, and your editor. Check it into your repo. Paste the contents of `setup.txt`.
-11. What command do you use to check the Go version? Paste the output.
-12. What command do you use to check the Git version? Paste the output.
-
-## Part 4 — Reflection
-
-13. What was the hardest part of setting up your environment? How did you resolve it?
-14. What is one thing about the curriculum structure that still feels unclear after the setup process?
+9. Explain "zero magic" in your own words and give one example from your own setup process. (See Lesson 02.)
+10. What are the four phases of the learning loop, and which curriculum artifact belongs to each phase? (See Lesson 03.)
+11. List the 5 Evidence Fields of a structured debugging report. (See Lesson 07.)
+12. Your `git config user.email` command returns blank. Write the 5 Evidence Fields for this failure as you would report it to a mentor.

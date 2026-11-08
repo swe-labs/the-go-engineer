@@ -105,7 +105,7 @@ The lab asks you to trace a learning cycle from lesson to proof.
 
 Module 00 includes one foundation project:
 
-- [`projects/course-setup-verification/`](./projects/course-setup-verification/README.md) — Course Setup Verification: verify your Go environment, Git installation, IDE configuration, and local build verification.
+- [`projects/course-setup-verification/`](./projects/course-setup-verification/README.md) — Course Setup Verification: verify your terminal, Git installation, and editor configuration, and establish your personal workspace directory.
 
 While full-scale software portfolio systems begin in Module 01, this first operational project establishes your personal proof repository and environment baseline.
 

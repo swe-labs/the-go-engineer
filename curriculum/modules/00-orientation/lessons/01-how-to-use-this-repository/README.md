@@ -27,7 +27,7 @@ Curriculum Architecture
 Every module within the curriculum follows an identical, predictable anatomy:
 1. **Module Root (`README.md`)**: The front door. Outlines the module mission, concept map, prerequisites, and SESE entry point.
 2. **Lessons (`lessons/`)**: Focused conceptual topics introducing mental models, architectural diagrams, principles, and common mistakes.
-3. **Projects (`projects/`)**: Hands-on engineering milestones with starter scaffolds (`_starter/`) and reference implementations (`_solution/`).
+3. **Projects (`projects/`)**: Hands-on engineering milestones. Dual-state capstones provide starter scaffolds (`_starter/`) and reference implementations (`_solution/`); earlier foundation projects are guided checklists instead.
 4. **Assessments (`assessments/`)**: Objective diagnostic checkpoints with explicit rubrics to evaluate your understanding before advancing.
 
 You write your code and build your projects in your own dedicated local workspace or personal git repository, keeping the curriculum repository clean as your authoritative reference.

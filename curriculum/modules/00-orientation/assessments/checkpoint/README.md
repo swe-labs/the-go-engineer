@@ -46,7 +46,7 @@ You may not copy from the answer key before attempting the questions.
 Submit:
 
 1. answers to `questions.md`
-2. one terminal transcript showing `go version` and `git version` commands succeeding
+2. one terminal transcript showing `git version` and `git config user.name` succeeding (the Course Setup Verification project)
 3. a short personal roadmap paragraph
 4. a short portfolio plan paragraph
 
