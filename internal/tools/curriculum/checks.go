@@ -780,8 +780,6 @@ func validateOperationalFailures() {
 	for _, m := range electives.Modules {
 		validModuleIDs[m.ID] = true
 	}
-	// Allow "opslane" as a valid module key in failures taxonomy
-	validModuleIDs["opslane"] = true
 
 	// 1. Check all category names are unique
 	categoryNames := make(map[string]string)
