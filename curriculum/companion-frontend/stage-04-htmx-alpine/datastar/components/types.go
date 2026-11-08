@@ -22,4 +22,3 @@ type MetricsSnapshot struct {
 	CompletedJobs int64
 	Goroutines    int
 }
-

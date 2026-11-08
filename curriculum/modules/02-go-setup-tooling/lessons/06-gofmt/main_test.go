@@ -32,4 +32,3 @@ func TestFormatSourceCode(t *testing.T) {
 func TestMainExecution(t *testing.T) {
 	main()
 }
-

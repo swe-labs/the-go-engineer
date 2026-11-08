@@ -229,4 +229,3 @@ func TestDashboardServer_TemplMode(t *testing.T) {
 		t.Errorf("expected task rows list in templ mode, got %s", rrTasks.Body.String())
 	}
 }
-

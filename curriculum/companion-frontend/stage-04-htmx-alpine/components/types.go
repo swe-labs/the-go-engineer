@@ -23,4 +23,3 @@ type MetricsSnapshot struct {
 	Goroutines    int
 	OOB           bool // Out-Of-Band swap flag for HTMX
 }
-

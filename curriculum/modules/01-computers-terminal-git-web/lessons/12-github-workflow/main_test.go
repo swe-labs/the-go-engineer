@@ -49,4 +49,3 @@ func TestPullRequest_CanMerge(t *testing.T) {
 func TestMainExecution(t *testing.T) {
 	main()
 }
-

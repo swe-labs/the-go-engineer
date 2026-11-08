@@ -39,4 +39,3 @@ func TestSafeExecute_InterceptPanic(t *testing.T) {
 func TestMainExecution(t *testing.T) {
 	main()
 }
-

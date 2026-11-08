@@ -87,4 +87,3 @@ func TestLocalhostResolution(t *testing.T) {
 func TestMainExecution(t *testing.T) {
 	main()
 }
-

@@ -87,4 +87,3 @@ func TestHTTPServerEndpoints(t *testing.T) {
 func TestMainExecution(t *testing.T) {
 	main()
 }
-
