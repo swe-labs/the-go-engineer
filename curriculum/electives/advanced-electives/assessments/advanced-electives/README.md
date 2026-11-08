@@ -52,7 +52,7 @@ Provide a working repository, captured `go test -race ./...` and benchmark outpu
 |---|---|
 | **Level 1: Inadequate** | Code fails to compile or fails tests; no benchmarks; cannot explain trade-offs. |
 | **Level 2: Developing** | Compiles and passes basic unit tests; lacks race detection verification; benchmarks without memory analysis. |
-| **Level 3: Proficient** | All 20 elective tests compile and pass; benchmark profiles provided; ADR clearly documents architectural rationale. |
+| **Level 3: Proficient** | All elective lesson tests compile and pass; benchmark profiles provided; ADR clearly documents architectural rationale. |
 | **Level 4: Exemplary** | Exceptional mastery. Compares CPU cache line mechanics, monomorphization assembly output, or gRPC HTTP/2 framing; demonstrates measurable zero-allocation performance gains. |
 
 ---
@@ -60,6 +60,6 @@ Provide a working repository, captured `go test -race ./...` and benchmark outpu
 ## Verification
 
 ```bash
-# Run all 20 advanced elective test suites
+# Run all advanced elective test suites
 go test -v ./curriculum/electives/advanced-electives/...
 ```
