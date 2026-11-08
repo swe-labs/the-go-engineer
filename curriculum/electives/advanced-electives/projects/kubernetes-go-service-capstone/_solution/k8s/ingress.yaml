@@ -1,0 +1,22 @@
+# Requires an Ingress controller (for example ingress-nginx in a kind/k3d
+# cluster). Without one, this object applies cleanly but routes nothing; a
+# NodePort Service is the fallback.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: orders-api
+  labels:
+    app: orders-api
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: orders-api.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: orders-api
+                port:
+                  name: http
