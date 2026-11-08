@@ -76,7 +76,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/01-generics/assets",
+        "assets_dir": "electives/advanced-electives/lessons/01-generics/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/01-generics/main.go",
         "readme_path": "electives/advanced-electives/lessons/01-generics/README.md",
@@ -260,7 +260,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/02-complex-generic-constraints/assets",
+        "assets_dir": "electives/advanced-electives/lessons/02-complex-generic-constraints/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/02-complex-generic-constraints/main.go",
         "readme_path": "electives/advanced-electives/lessons/02-complex-generic-constraints/README.md",
@@ -441,7 +441,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/03-generic-data-structures/assets",
+        "assets_dir": "electives/advanced-electives/lessons/03-generic-data-structures/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/03-generic-data-structures/main.go",
         "readme_path": "electives/advanced-electives/lessons/03-generic-data-structures/README.md",
@@ -622,7 +622,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/04-functional-options/assets",
+        "assets_dir": "electives/advanced-electives/lessons/04-functional-options/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/04-functional-options/main.go",
         "readme_path": "electives/advanced-electives/lessons/04-functional-options/README.md",
@@ -806,7 +806,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/05-method-values/assets",
+        "assets_dir": "electives/advanced-electives/lessons/05-method-values/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/05-method-values/main.go",
         "readme_path": "electives/advanced-electives/lessons/05-method-values/README.md",
@@ -990,7 +990,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/06-build-tags/assets",
+        "assets_dir": "electives/advanced-electives/lessons/06-build-tags/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/06-build-tags/main.go",
         "readme_path": "electives/advanced-electives/lessons/06-build-tags/README.md",
@@ -1174,7 +1174,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/07-go-generate/assets",
+        "assets_dir": "electives/advanced-electives/lessons/07-go-generate/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/07-go-generate/main.go",
         "readme_path": "electives/advanced-electives/lessons/07-go-generate/README.md",
@@ -1358,7 +1358,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/08-mockery/assets",
+        "assets_dir": "electives/advanced-electives/lessons/08-mockery/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/08-mockery/main.go",
         "readme_path": "electives/advanced-electives/lessons/08-mockery/README.md",
@@ -1542,7 +1542,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/09-protobuf/assets",
+        "assets_dir": "electives/advanced-electives/lessons/09-protobuf/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/09-protobuf/main.go",
         "readme_path": "electives/advanced-electives/lessons/09-protobuf/README.md",
@@ -1724,7 +1724,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/10-grpc-fundamentals/assets",
+        "assets_dir": "electives/advanced-electives/lessons/10-grpc-fundamentals/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/10-grpc-fundamentals/main.go",
         "readme_path": "electives/advanced-electives/lessons/10-grpc-fundamentals/README.md",
@@ -1907,7 +1907,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/11-grpc-streaming/assets",
+        "assets_dir": "electives/advanced-electives/lessons/11-grpc-streaming/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/11-grpc-streaming/main.go",
         "readme_path": "electives/advanced-electives/lessons/11-grpc-streaming/README.md",
@@ -2088,7 +2088,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/12-grpc-interceptors/assets",
+        "assets_dir": "electives/advanced-electives/lessons/12-grpc-interceptors/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/12-grpc-interceptors/main.go",
         "readme_path": "electives/advanced-electives/lessons/12-grpc-interceptors/README.md",
@@ -2269,7 +2269,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/13-rest-vs-grpc-tradeoffs/assets",
+        "assets_dir": "electives/advanced-electives/lessons/13-rest-vs-grpc-tradeoffs/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/13-rest-vs-grpc-tradeoffs/main.go",
         "readme_path": "electives/advanced-electives/lessons/13-rest-vs-grpc-tradeoffs/README.md",
@@ -2449,7 +2449,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/14-sync-map/assets",
+        "assets_dir": "electives/advanced-electives/lessons/14-sync-map/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/14-sync-map/main.go",
         "readme_path": "electives/advanced-electives/lessons/14-sync-map/README.md",
@@ -2632,7 +2632,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/15-sync-pool/assets",
+        "assets_dir": "electives/advanced-electives/lessons/15-sync-pool/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/15-sync-pool/main.go",
         "readme_path": "electives/advanced-electives/lessons/15-sync-pool/README.md",
@@ -2814,7 +2814,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/16-cqrs/assets",
+        "assets_dir": "electives/advanced-electives/lessons/16-cqrs/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/16-cqrs/main.go",
         "readme_path": "electives/advanced-electives/lessons/16-cqrs/README.md",
@@ -2998,7 +2998,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/17-feature-flags/assets",
+        "assets_dir": "electives/advanced-electives/lessons/17-feature-flags/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/17-feature-flags/main.go",
         "readme_path": "electives/advanced-electives/lessons/17-feature-flags/README.md",
@@ -3181,7 +3181,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/18-blue-green-deployments/assets",
+        "assets_dir": "electives/advanced-electives/lessons/18-blue-green-deployments/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/18-blue-green-deployments/main.go",
         "readme_path": "electives/advanced-electives/lessons/18-blue-green-deployments/README.md",
@@ -3365,7 +3365,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/19-microservice-splitting/assets",
+        "assets_dir": "electives/advanced-electives/lessons/19-microservice-splitting/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/19-microservice-splitting/main.go",
         "readme_path": "electives/advanced-electives/lessons/19-microservice-splitting/README.md",
@@ -3548,7 +3548,7 @@
       "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
-        "assets_dir": "electives/advanced-electives/20-deeper-distributed-systems/assets",
+        "assets_dir": "electives/advanced-electives/lessons/20-deeper-distributed-systems/assets",
         "diagram_paths": [],
         "main_path": "electives/advanced-electives/lessons/20-deeper-distributed-systems/main.go",
         "readme_path": "electives/advanced-electives/lessons/20-deeper-distributed-systems/README.md",

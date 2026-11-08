@@ -37353,6 +37353,7 @@
       "title": "DELETE operations",
       "type": "lesson",
       "verification": {
+        "expected_output": "Program prints the soft-delete count, active and deleted user counts, hard-delete count, remaining orders, and restored-user count; tests pass.",
         "manual_steps": [
           "Read the README.",
           "Run or inspect the example.",

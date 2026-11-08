@@ -37,18 +37,18 @@
     "default_content_shape": "warning",
     "content_shape_enforcement": "enforce",
     "by_status": {
-      "draft": "warning",
-      "scaffolded": "warning",
+      "draft": "skip",
+      "scaffolded": "skip",
       "review": "warning",
       "reviewed": "warning",
-      "ready": "warning",
-      "published": "warning",
-      "live": "warning",
-      "complete": "warning",
-      "stable": "warning",
-      "golden": "warning"
+      "ready": "error",
+      "published": "error",
+      "live": "error",
+      "complete": "error",
+      "stable": "error",
+      "golden": "error"
     },
-    "rollout_note": "Content-shape enforcement is active. Structural defects always block. Content-shape defects in locked modules block by default; other modules follow by_status and are promoted to errors in release builds via --strict.",
+    "rollout_note": "Content-shape enforcement is active. Structural defects always block. Content-shape defects in locked modules block. On other items, the item status selects the tier: draft and scaffolded are skipped, review and reviewed are advisory, and ready or later statuses block. --strict promotes remaining advisories; --advisory skips content-shape checks.",
     "always_error": [
       "missing-file",
       "invalid-json",
@@ -725,7 +725,7 @@
     "All project and service capstone starters must enforce 3-tier clean domain separation (transport/ -> domain/ -> repo/) with domain layers free of external framework dependencies.",
     "Cognitive load budgeting: each lesson may introduce at most 1 primary new concept; all prerequisite language constructs must be verified against curriculum/crossrefs.json and curriculum/concepts.json.",
     "Transitive prerequisite verification: concepts must strictly follow canonical introduction in curriculum/concepts.json; preview locations must strictly precede, reinforcement must strictly follow.",
-    "Severity: structural defects (missing-file, invalid-json, broken-link, duplicate-id, dangling-contract, contract-mismatch, unknown-module) always block; content-shape violations block by default only for locked modules and are advisory for every other item (all item statuses currently map to warning in by_status). --strict promotes advisories to errors for release.",
-    "Content-shape advisories on non-locked items must be reported but must not fail the default validation run."
+    "Severity: structural defects (missing-file, invalid-json, broken-link, duplicate-id, dangling-contract, contract-mismatch, unknown-module) always block. Content-shape violations block for locked modules; on other items the status selects the tier: draft and scaffolded are skipped, review and reviewed are advisory, and ready, published, live, complete, stable, and golden block. --strict promotes remaining advisories; --advisory skips content-shape checks.",
+    "Content-shape skip tiers are silent, warnings are reported without failing the default run, and error tiers fail the default run."
   ]
 }
