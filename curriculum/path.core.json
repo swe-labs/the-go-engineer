@@ -68352,7 +68352,7 @@
       "order": 10,
       "pacing": "moderate",
       "path": "08-http-rest-apis",
-      "phase": "data",
+      "phase": "backend",
       "portfolio_output": true,
       "prerequisites": [
         "module-07"
@@ -68388,7 +68388,7 @@
       "order": 11,
       "pacing": "steady",
       "path": "09-sql-postgres-persistence",
-      "phase": "security",
+      "phase": "data",
       "portfolio_output": true,
       "prerequisites": [
         "module-08"
@@ -68424,7 +68424,7 @@
       "order": 12,
       "pacing": "steady",
       "path": "10-auth-security",
-      "phase": "concurrency",
+      "phase": "security",
       "portfolio_output": false,
       "prerequisites": [
         "module-09"
@@ -68460,7 +68460,7 @@
       "order": 13,
       "pacing": "steady",
       "path": "11-lifecycle-context-concurrency",
-      "phase": "reliability",
+      "phase": "concurrency",
       "portfolio_output": true,
       "prerequisites": [
         "module-10"
@@ -68497,7 +68497,7 @@
       "order": 13,
       "pacing": "steady",
       "path": "12-observability-diagnostics",
-      "phase": "performance",
+      "phase": "reliability",
       "portfolio_output": true,
       "prerequisites": [
         "module-11"

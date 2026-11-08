@@ -77,27 +77,6 @@ function generateFullReadme() {
   parts.push('| #   | Module | Phase | Status | Lessons/Labs | Milestones | Projects | Assessments | Total Path Items | Path |');
   parts.push('| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |');
 
-  const phaseMap = {
-    'module-00': 'orientation',
-    'module-01': 'foundations',
-    'module-02': 'tooling',
-    'module-03': 'go-core',
-    'module-04': 'go-core',
-    'module-05': 'engineering-core',
-    'module-06': 'engineering-core',
-    'module-07': 'cli-io',
-    'module-08': 'backend',
-    'module-09': 'data',
-    'module-10': 'security',
-    'module-11': 'concurrency',
-    'module-12': 'reliability',
-    'module-13': 'performance',
-    'module-14': 'architecture',
-    'module-15': 'delivery',
-    'module-16': 'career',
-    'module-18': 'flagship'
-  };
-
   let totLessons = 0, totMilestones = 0, totProjects = 0, totAssessments = 0, totItems = 0;
 
   core.modules.forEach(m => {
@@ -115,8 +94,8 @@ function generateFullReadme() {
     totAssessments += mAssessments;
     totItems += mTotal;
 
-    const phase = phaseMap[m.id] || m.phase;
-    const pathCol = mNum === 18 ? '`curriculum/modules/18-flagship-opslane`' : '`curriculum/' + (m.path.startsWith('modules/') ? m.path : 'modules/' + m.path) + '`';
+    const phase = m.phase;
+    const pathCol = '`curriculum/' + (m.path.startsWith('modules/') ? m.path : 'modules/' + m.path) + '`';
 
     parts.push('| ' + String(mNum).padStart(2, '0') + '  | **' + m.title + '** | ' + phase + ' | ' + m.status + ' | ' + mLessons + ' | ' + mMilestones + ' | ' + mProjects + ' | ' + mAssessments + ' | ' + mTotal + ' | ' + pathCol + ' |');
   });
@@ -218,10 +197,41 @@ function generateFullReadme() {
   // Detailed core catalog
   parts.push('# Core Path\n');
 
+  // Cluster annotations for consolidated sessions. The map is keyed by item ID;
+  // validate it against the manifest so a renamed item fails generation instead
+  // of silently losing its workshop annotation.
+  const clusterNotes = {
+    'core-04-15': ' *(Workshop: Deterministic Cleanup — Part 1)*',
+    'core-04-16': ' *(Workshop: Deterministic Cleanup — Part 2)*',
+    'core-05-03': ' *(Workshop: Method Receivers & Mutation — Part 1)*',
+    'core-05-04': ' *(Workshop: Method Receivers & Mutation — Part 2)*',
+    'core-05-05': ' *(Workshop: Method Receivers & Mutation — Part 3)*',
+    'core-05-12': ' *(Workshop: Dynamic Type Inspection — Part 1)*',
+    'core-05-13': ' *(Workshop: Dynamic Type Inspection — Part 2)*',
+    'core-06-14': ' *(Workshop: Delve Debugging Workflow — Step 1)*',
+    'core-06-15': ' *(Workshop: Delve Debugging Workflow — Step 2)*',
+    'core-06-16': ' *(Workshop: Delve Debugging Workflow — Step 3)*',
+    'core-06-17': ' *(Workshop: Delve Debugging Workflow — Step 4)*',
+    'core-07-12': ' *(Workshop: In-Memory JSON — Part 1)*',
+    'core-07-13': ' *(Workshop: In-Memory JSON — Part 2)*',
+    'core-07-14': ' *(Workshop: Streaming JSON — Part 1)*',
+    'core-07-15': ' *(Workshop: Streaming JSON — Part 2)*',
+    'core-11-01': ' *(Workshop: Time Mechanics & Scheduling — Part 1)*',
+    'core-11-02': ' *(Workshop: Time Mechanics & Scheduling — Part 2)*',
+    'core-11-03': ' *(Workshop: Time Mechanics & Scheduling — Part 3)*',
+    'core-11-04': ' *(Workshop: Time Mechanics & Scheduling — Part 4)*'
+  };
+  const catalogItemIDs = new Set(coreItems.map(it => it.id));
+  for (const id of Object.keys(clusterNotes)) {
+    if (!catalogItemIDs.has(id)) {
+      throw new Error('clusterNotes references an item that is not in path.core.json: ' + id);
+    }
+  }
+
   core.modules.forEach(m => {
     const mNum = parseInt(m.id.replace('module-', ''), 10);
     const mItems = coreItems.filter(it => it.module_id === m.id && (it.type === 'lesson' || it.type === 'lab' || it.type === 'checkpoint' || it.type === 'capstone'));
-    const phase = phaseMap[m.id] || m.phase;
+    const phase = m.phase;
 
     parts.push('## ' + mNum + '. ' + m.title + '\n');
     parts.push('> **Phase:** ' + phase + ' | **Status:** ' + m.status + ' | **Required:** ' + (m.required !== false ? 'True' : 'False') + '\n');
@@ -244,29 +254,6 @@ function generateFullReadme() {
 
     parts.push('| #   | Type    | Slug | Title | Minutes |');
     parts.push('| --- | ------- | ---- | ----- | ------- |');
-
-    // Cluster annotations for consolidated sessions
-    const clusterNotes = {
-      'core-04-15': ' *(Workshop: Deterministic Cleanup — Part 1)*',
-      'core-04-16': ' *(Workshop: Deterministic Cleanup — Part 2)*',
-      'core-05-03': ' *(Workshop: Method Receivers & Mutation — Part 1)*',
-      'core-05-04': ' *(Workshop: Method Receivers & Mutation — Part 2)*',
-      'core-05-05': ' *(Workshop: Method Receivers & Mutation — Part 3)*',
-      'core-05-12': ' *(Workshop: Dynamic Type Inspection — Part 1)*',
-      'core-05-13': ' *(Workshop: Dynamic Type Inspection — Part 2)*',
-      'core-06-14': ' *(Workshop: Delve Debugging Workflow — Step 1)*',
-      'core-06-15': ' *(Workshop: Delve Debugging Workflow — Step 2)*',
-      'core-06-16': ' *(Workshop: Delve Debugging Workflow — Step 3)*',
-      'core-06-17': ' *(Workshop: Delve Debugging Workflow — Step 4)*',
-      'core-07-12': ' *(Workshop: In-Memory JSON — Part 1)*',
-      'core-07-13': ' *(Workshop: In-Memory JSON — Part 2)*',
-      'core-07-14': ' *(Workshop: Streaming JSON — Part 1)*',
-      'core-07-15': ' *(Workshop: Streaming JSON — Part 2)*',
-      'core-11-01': ' *(Workshop: Time Mechanics & Scheduling — Part 1)*',
-      'core-11-02': ' *(Workshop: Time Mechanics & Scheduling — Part 2)*',
-      'core-11-03': ' *(Workshop: Time Mechanics & Scheduling — Part 3)*',
-      'core-11-04': ' *(Workshop: Time Mechanics & Scheduling — Part 4)*'
-    };
 
     mItems.forEach((it, idx) => {
       const itemType = it.subtype || it.type;
