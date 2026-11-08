@@ -136,8 +136,18 @@ func validateProjectBinding() {
 	}
 
 	for _, p := range projects {
-		proj := p.(map[string]any)
-		projID := proj["id"].(string)
+		proj, isObj := p.(map[string]any)
+		if !isObj {
+			errorf("projects.json: project entry is not a JSON object")
+			ok = false
+			continue
+		}
+		projID, hasID := proj["id"].(string)
+		if !hasID {
+			errorf("projects.json: project entry is missing a string 'id'")
+			ok = false
+			continue
+		}
 
 		// Check required fields
 		requiredFields := []string{"id", "module_id", "title", "slug", "type", "prerequisites", "deliverables", "verification", "rubric"}
@@ -162,9 +172,14 @@ func validateProjectBinding() {
 
 		// Check prerequisites reference valid items
 		if prereqs, exists := proj["prerequisites"]; exists {
-			if prereqArr, ok := prereqs.([]any); ok {
+			if prereqArr, isArr := prereqs.([]any); isArr {
 				for _, prereq := range prereqArr {
-					prereqID := prereq.(string)
+					prereqID, isStr := prereq.(string)
+					if !isStr {
+						errorf("project '%s': prerequisite entry is not a string", projID)
+						ok = false
+						continue
+					}
 					found := false
 					for _, item := range core.Items {
 						if item.ID == prereqID {
@@ -282,8 +297,18 @@ func validateAssessmentCompleteness() {
 	}
 
 	for _, a := range assessments {
-		assess := a.(map[string]any)
-		assessID := assess["id"].(string)
+		assess, isObj := a.(map[string]any)
+		if !isObj {
+			errorf("assessments.json: assessment entry is not a JSON object")
+			ok = false
+			continue
+		}
+		assessID, hasID := assess["id"].(string)
+		if !hasID {
+			errorf("assessments.json: assessment entry is missing a string 'id'")
+			ok = false
+			continue
+		}
 
 		// Check has criteria
 		criteria, hasCriteria := assess["criteria"]
@@ -303,10 +328,20 @@ func validateAssessmentCompleteness() {
 		// Check for generic rubric (criteria without module-specific context)
 		genericPatterns := []string{"general", "overall", "rubric"}
 		for i, c := range criteriaArr {
-			crit := c.(map[string]any)
+			crit, isObj := c.(map[string]any)
+			if !isObj {
+				errorf("%s: criteria[%d] is not a JSON object", assessID, i)
+				ok = false
+				continue
+			}
 			critName := ""
 			if name, exists := crit["name"]; exists {
-				critName = name.(string)
+				if s, isStr := name.(string); isStr {
+					critName = s
+				} else {
+					errorf("%s: criteria[%d] 'name' is not a string", assessID, i)
+					ok = false
+				}
 			}
 			for _, pattern := range genericPatterns {
 				if strings.Contains(strings.ToLower(critName), pattern) {
@@ -517,8 +552,18 @@ func validateCognitiveLoad() {
 			return
 		}
 		for _, m := range mods {
-			mm := m.(map[string]any)
-			id := mm["id"].(string)
+			mm, isObj := m.(map[string]any)
+			if !isObj {
+				errorf("modules: module entry is not a JSON object")
+				ok = false
+				continue
+			}
+			id, hasID := mm["id"].(string)
+			if !hasID {
+				errorf("modules: module entry is missing a string 'id'")
+				ok = false
+				continue
+			}
 
 			cl, hasCL := mm["cognitive_load"]
 			if !hasCL {

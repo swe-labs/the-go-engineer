@@ -61,9 +61,11 @@ func main() {
 			fmt.Fprintf(os.Stderr, "unknown flag: %s\n", a)
 			os.Exit(2)
 		default:
-			if cmd == "" {
-				cmd = a
+			if cmd != "" {
+				fmt.Fprintf(os.Stderr, "unexpected argument: %s\n", a)
+				os.Exit(2)
 			}
+			cmd = a
 		}
 	}
 	if cmd == "" {
