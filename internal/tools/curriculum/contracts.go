@@ -2,136 +2,560 @@ package main
 
 import (
 	"bufio"
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io/fs"
 	"os"
+	"path/filepath"
+	"regexp"
+	"sort"
 	"strings"
 )
 
-// validateReadmeContracts verifies that all instructional lessons in locked modules
-// strictly satisfy the 6 non-negotiable core headings declared in readme.contracts.json:
-// 1. ## Learning objective
-// 2. ## Why this matters
-// 3. ## Mental model
-// 4. ## Common mistakes
-// 5. ## Review questions
-// 6. ## NEXT UP
+// contractViolation is one issue found while validating an item README against
+// its resolved contract family.
+type contractViolation struct {
+	ItemID string
+	Family string
+	Kind   string // contract-id | heading | forbidden-heading | code | file
+	Detail string
+	Sev    severity
+}
+
+// validateReadmeContracts resolves every curriculum item to a README contract
+// family from readme.contracts.json and verifies:
+//   - the declared contract_id exists and matches the family resolved from the
+//     item's type/subtype,
+//   - the README satisfies the family's required heading core (after alias
+//     normalization) and omits any subtype-forbidden headings,
+//   - code_policy (required/forbidden/optional) and content_contract runnable
+//     expectations,
+//   - file_policy (readme/main/test/starter/solution) derived from
+//     content_contract flags.
+//
+// Structural failures always block. Content-shape failures are tiered by
+// severity policy: locked modules always block, other statuses follow the
+// registry's by_status map (advisory during rollout). --strict promotes all
+// content-shape warnings to errors; --advisory skips content-shape entirely.
 func validateReadmeContracts() {
 	fmt.Println("=== validate-readme-contracts ===")
-	ok := true
+	reg := loadRegistry()
 
 	var core CoreBundle
+	var electives ElectiveBundle
 	readJSON("path.core.json", &core)
+	readJSON("path.electives.json", &electives)
 
-	lockedModules := map[string]bool{
-		"module-00": true,
-		"module-01": true,
-		"module-02": true,
-		"module-03": true,
-		"module-04": true,
+	items := make([]Item, 0, len(core.Items)+len(electives.Items))
+	items = append(items, core.Items...)
+	items = append(items, electives.Items...)
+
+	aliases := reg.aliasesOf() // aliasID -> canonical family id
+
+	var violations []contractViolation
+	add := func(v contractViolation) {
+		if v.Sev == sevSkip {
+			return
+		}
+		violations = append(violations, v)
 	}
 
-	requiredHeadings := []string{
-		"Learning objective",
-		"Why this matters",
-		"Mental model",
-		"Common mistakes",
-		"Review questions",
-		"NEXT UP",
-	}
-
-	prohibitedOrientationHeadings := []string{
-		"Go example",
-		"Step-by-step execution",
-		"Under the hood",
-		"Debugging walkthrough",
-		"Production notes",
-		"Performance implications",
-		"Tests / verification",
-	}
-
-	lessonsChecked := 0
-	contractViolations := 0
-
-	for _, item := range core.Items {
-		if item.Type != "lesson" {
-			continue
-		}
-		if !lockedModules[item.ModuleID] {
+	checked := 0
+	for _, item := range items {
+		c, matched := reg.resolveItemContract(item)
+		if !matched {
+			add(contractViolation{item.ID, "", "contract-id",
+				"no single contract family matches the item's type/subtype", sevError})
 			continue
 		}
 
-		if item.Files == nil || item.Files.ReadmePath == "" {
-			warnf("%s: missing files.readme_path in metadata", item.ID)
-			ok = false
-			continue
-		}
-
-		fullPath := resolvePath(item.Files.ReadmePath)
-		file, err := os.Open(fullPath)
-		if err != nil {
-			warnf("%s: cannot open README at %s: %v", item.ID, fullPath, err)
-			ok = false
-			continue
-		}
-
-		lessonsChecked++
-		foundHeadings := make(map[string]bool)
-		scanner := bufio.NewScanner(file)
-		isOrientation := item.Subtype == "orientation"
-		hasGoCodeBlock := false
-
-		for scanner.Scan() {
-			line := strings.TrimSpace(scanner.Text())
-
-			// Check for Go code block in orientation lessons
-			if isOrientation && (strings.HasPrefix(line, "```go") || strings.HasPrefix(line, "```golang")) {
-				hasGoCodeBlock = true
+		// 1. contract_id integrity (always structural).
+		if item.ReadmeContract != nil {
+			declared := item.ReadmeContract.ContractID
+			if declared != "" {
+				canonical := declared
+				if aliasTarget, isAlias := aliases[declared]; isAlias {
+					canonical = aliasTarget
+				}
+				if reg.contractByID(canonical) == nil {
+					add(contractViolation{item.ID, c.ID, "contract-id",
+						fmt.Sprintf("declared contract_id '%s' is not defined in readme.contracts.json", declared), sevError})
+				} else if canonical != c.ID {
+					add(contractViolation{item.ID, c.ID, "contract-id",
+						fmt.Sprintf("declared contract_id '%s' does not match resolved family '%s'", declared, c.ID), sevError})
+				}
 			}
+		}
 
-			if !strings.HasPrefix(line, "## ") {
+		// 2. README must exist (structural).
+		if item.Files == nil || item.Files.ReadmePath == "" {
+			add(contractViolation{item.ID, c.ID, "file", "missing files.readme_path in metadata", sevError})
+			continue
+		}
+		readme, err := os.ReadFile(resolvePath(item.Files.ReadmePath))
+		if err != nil {
+			add(contractViolation{item.ID, c.ID, "file", fmt.Sprintf("cannot read README: %v", err), sevError})
+			continue
+		}
+		checked++
+
+		sevs := contentShapeSeverity(item)
+
+		// Layered subtype modifier.
+		codePolicy := c.CodePolicy
+		required := append([]string{}, c.RequiredHeadings...)
+		var forbidden []string
+		if mod, hasMod := c.SubtypeModifiers[item.Subtype]; hasMod {
+			if mod.CodePolicy != "" {
+				codePolicy = mod.CodePolicy
+			}
+			required = append(required, mod.RequiredHeadings...)
+			forbidden = mod.ForbiddenHeadings
+		}
+
+		headings, hasGo := scanReadmeHeadings(readme)
+
+		// 3. Required headings (content-shape).
+		found := normalizeHeadings(headings, c.HeadingAliases)
+		for _, req := range required {
+			if !headingSatisfied(req, found) {
+				add(contractViolation{item.ID, c.ID, "heading",
+					fmt.Sprintf("missing required heading '## %s'", req), sevs})
+			}
+		}
+
+		// 4. Forbidden headings (content-shape).
+		for _, fb := range forbidden {
+			for _, h := range headings {
+				if headingMatches(h, fb) {
+					add(contractViolation{item.ID, c.ID, "forbidden-heading",
+						fmt.Sprintf("contains forbidden heading '## %s'", h), sevs})
+				}
+			}
+		}
+
+		// 5. Code policy (content-shape).
+		switch codePolicy {
+		case "required":
+			if !hasGo {
+				add(contractViolation{item.ID, c.ID, "code",
+					"code_policy=required but the README has no Go code block", sevs})
+			}
+		case "forbidden":
+			if hasGo {
+				add(contractViolation{item.ID, c.ID, "code",
+					"code_policy=forbidden but the README contains a Go code block", sevs})
+			}
+		}
+		if item.ContentContract != nil && item.ContentContract.RunnableRequired && !hasGo {
+			add(contractViolation{item.ID, c.ID, "code",
+				"content_contract.runnable_required but the README has no Go code block", sevs})
+		}
+
+		// 6. File policy (content-shape), derived from content_contract flags.
+		for _, key := range sortedKeys(c.FilePolicy) {
+			token := c.FilePolicy[key]
+			need := token == "required"
+			if strings.HasPrefix(token, "when:") {
+				need = contentFlag(item, strings.TrimPrefix(token, "when:"))
+			}
+			if !need {
 				continue
 			}
-			h2Text := strings.TrimSpace(strings.TrimPrefix(line, "## "))
-
-			for _, req := range requiredHeadings {
-				if strings.EqualFold(h2Text, req) || strings.HasPrefix(strings.ToLower(h2Text), strings.ToLower(req)) {
-					foundHeadings[req] = true
-				}
-			}
-
-			// In orientation lessons, forbid coding headings
-			if isOrientation {
-				for _, prohib := range prohibitedOrientationHeadings {
-					if strings.EqualFold(h2Text, prohib) || strings.HasPrefix(strings.ToLower(h2Text), strings.ToLower(prohib)) {
-						warnf("%s (%s): orientation lesson contains forbidden coding heading '## %s'", item.ID, item.Slug, h2Text)
-						contractViolations++
-						ok = false
-					}
-				}
-			}
-		}
-		file.Close()
-
-		if isOrientation && hasGoCodeBlock {
-			warnf("%s (%s): orientation lesson contains forbidden Go code block (theory lessons must be code-free)", item.ID, item.Slug)
-			contractViolations++
-			ok = false
-		}
-
-		for _, req := range requiredHeadings {
-			if !foundHeadings[req] {
-				warnf("%s (%s): missing required heading '## %s' in %s", item.ID, item.Slug, req, item.Files.ReadmePath)
-				contractViolations++
-				ok = false
+			field, path := fileField(item, key)
+			if path == "" {
+				add(contractViolation{item.ID, c.ID, "file",
+					fmt.Sprintf("file_policy requires '%s' but files.%s is empty", key, field), sevs})
+			} else if !pathExists(resolvePath(path)) {
+				add(contractViolation{item.ID, c.ID, "file",
+					fmt.Sprintf("file_policy requires '%s' but '%s' is missing on disk", key, path), sevs})
 			}
 		}
 	}
 
-	fmt.Printf("  Verified 6-heading core contracts across %d locked lessons (%d violations).\n", lessonsChecked, contractViolations)
-	if ok && contractViolations == 0 {
-		fmt.Println("  All locked lessons strictly comply with README contract specifications.")
+	// Document-level contracts (root README, module overviews, flagship, and
+	// companion stages) govern whole documents rather than registry items, so
+	// they are checked separately through their selector "doc" role token.
+	docChecked := validateDocumentContracts(reg, core, electives, add)
+
+	reportContractViolations(violations)
+
+	fmt.Printf("  Verified README contracts across %d items and %d documents (%d violations).\n", checked, docChecked, len(violations))
+	if len(violations) == 0 {
+		fmt.Println("  All items comply with README contract specifications.")
 	} else {
-		fmt.Println("  README contract validation failed with violations.")
+		fmt.Println("  README contract issues reported above.")
 	}
 }
 
+// validateDocumentContracts checks document-level contract families (those with
+// a selector "doc" role token) against their target READMEs: the repository
+// root, each module overview, the flagship overview, and the companion-stage
+// guides. It returns the number of documents checked and reports any heading
+// violations through add.
+func validateDocumentContracts(reg *Registry, core CoreBundle, electives ElectiveBundle, add func(contractViolation)) int {
+	companionRoot := filepath.Join(curriculumDir, "companion-frontend")
+
+	type target struct {
+		id       string // report identifier (module id or path label)
+		path     string
+		moduleID string
+		family   *Contract
+	}
+
+	var targets []target
+	modules := append(append([]Module{}, core.Modules...), electives.Modules...)
+
+	for i := range reg.Contracts {
+		c := &reg.Contracts[i]
+		switch c.Selector.Doc {
+		case "":
+			continue
+		case "repository-root":
+			targets = append(targets, target{
+				"repository-root", filepath.Join(filepath.Dir(curriculumDir), "README.md"), "", c,
+			})
+		case "module", "flagship-module":
+			for _, m := range modules {
+				if m.ReadmeContract == nil || m.ReadmeContract.ContractID == "" {
+					continue
+				}
+				fam := reg.contractByID(canonicalContractID(reg, m.ReadmeContract.ContractID))
+				if fam == nil || fam.ID != c.ID {
+					continue
+				}
+				targets = append(targets, target{
+					m.ID, filepath.Join(resolveModuleDir(m.Path), "README.md"), m.ID, c,
+				})
+			}
+		case "companion-stage":
+			for _, p := range companionReadmes(companionRoot) {
+				targets = append(targets, target{
+					"companion:" + filepath.Base(filepath.Dir(p)), p, "", c,
+				})
+			}
+		}
+	}
+
+	checked := 0
+	for _, t := range targets {
+		data, err := os.ReadFile(t.path)
+		if err != nil {
+			add(contractViolation{t.id, t.family.ID, "file",
+				fmt.Sprintf("cannot read document README: %v", err), sevError})
+			continue
+		}
+		checked++
+		sev := documentShapeSeverity(t.moduleID)
+		headings, _ := scanReadmeHeadings(data)
+		found := normalizeHeadings(headings, t.family.HeadingAliases)
+		for _, req := range t.family.RequiredHeadings {
+			if !headingSatisfied(req, found) {
+				add(contractViolation{t.id, t.family.ID, "heading",
+					fmt.Sprintf("missing required heading '## %s'", req), sev})
+			}
+		}
+	}
+	return checked
+}
+
+// canonicalContractID resolves a declared contract_id (possibly a selector
+// alias such as elective-module.v3) to its canonical family id.
+func canonicalContractID(reg *Registry, id string) string {
+	if alias, ok := reg.aliasesOf()[id]; ok {
+		return alias
+	}
+	return id
+}
+
+// documentShapeSeverity mirrors contentShapeSeverity for document-level
+// contracts, which carry no item status: locked modules still block, and every
+// other document follows the same advisory/strict rollout switch.
+func documentShapeSeverity(moduleID string) severity {
+	if advisoryMode {
+		return sevSkip
+	}
+	if strictMode {
+		return sevError
+	}
+	sp := loadRegistry().SeverityPolicy
+	if sp.Enforcement != "enforce" {
+		return sevWarning
+	}
+	if moduleID != "" && lockedModuleSet()[moduleID] {
+		return sevError
+	}
+	return sevWarning
+}
+
+// companionReadmes returns every README.md under the companion track directory,
+// sorted for deterministic reporting.
+func companionReadmes(root string) []string {
+	var out []string
+	_ = filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return nil
+		}
+		if !d.IsDir() && d.Name() == "README.md" {
+			out = append(out, path)
+		}
+		return nil
+	})
+	sort.Strings(out)
+	return out
+}
+
+// scanReadmeHeadings returns all H2 headings and whether a Go code fence exists.
+func scanReadmeHeadings(data []byte) (headings []string, hasGo bool) {
+	scanner := bufio.NewScanner(bytes.NewReader(data))
+	scanner.Buffer(make([]byte, 1024*1024), 1024*1024)
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if strings.HasPrefix(line, "```go") || strings.HasPrefix(line, "```golang") {
+			hasGo = true
+		}
+		if strings.HasPrefix(line, "## ") {
+			headings = append(headings, strings.TrimSpace(strings.TrimPrefix(line, "## ")))
+		}
+	}
+	return headings, hasGo
+}
+
+func normalizeHeading(s string) string {
+	s = strings.TrimSpace(s)
+	s = strings.TrimSpace(strings.TrimLeft(s, "#"))
+	return strings.ToLower(s)
+}
+
+// normalizeHeadings converts raw H2 headings into a normalized set, applying the
+// contract's alias map so variants count toward their canonical heading.
+func normalizeHeadings(headings []string, aliases map[string]string) map[string]bool {
+	lookup := make(map[string]string, len(aliases))
+	for variant, canonical := range aliases {
+		lookup[normalizeHeading(variant)] = canonical
+	}
+	found := make(map[string]bool, len(headings)*2)
+	for _, h := range headings {
+		n := normalizeHeading(h)
+		found[n] = true
+		if canon, ok := lookup[n]; ok {
+			found[normalizeHeading(canon)] = true
+		}
+	}
+	return found
+}
+
+// headingEnumerator strips a leading ordered/unordered list marker that authors
+// sometimes bake into a heading, e.g. "7. 4-Tier Assessment Rubric" -> "4-Tier...".
+var headingEnumerator = regexp.MustCompile(`^\s*(?:\d+[.)]?|[-*+])\s+`)
+
+// headingTokens splits a normalized heading into lowercased alphanumeric words,
+// discarding punctuation so "4-tier" -> ["4","tier"] and "rubric" -> ["rubric"].
+func headingTokens(s string) []string {
+	return strings.FieldsFunc(s, func(r rune) bool {
+		return !(r >= 'a' && r <= 'z') && !(r >= '0' && r <= '9')
+	})
+}
+
+// headingMatches reports whether a present heading satisfies a required one.
+// Matching is whole-word and order-preserving: the required heading must be a
+// contiguous token subsequence of the present heading (case-insensitive, after
+// stripping any list marker). This prevents substring false positives such as
+// "Submission checklist" satisfying "Mission", while still allowing a prefixed
+// heading such as "Grading rubric" to satisfy "Rubric".
+func headingMatches(present, required string) bool {
+	p := headingEnumerator.ReplaceAllString(normalizeHeading(present), "")
+	r := headingEnumerator.ReplaceAllString(normalizeHeading(required), "")
+	if p == r {
+		return true
+	}
+	pt := headingTokens(p)
+	rt := headingTokens(r)
+	if len(rt) == 0 || len(rt) > len(pt) {
+		return false
+	}
+	for i := 0; i+len(rt) <= len(pt); i++ {
+		match := true
+		for j := range rt {
+			if pt[i+j] != rt[j] {
+				match = false
+				break
+			}
+		}
+		if match {
+			return true
+		}
+	}
+	return false
+}
+
+func headingSatisfied(required string, found map[string]bool) bool {
+	for f := range found {
+		if headingMatches(f, required) {
+			return true
+		}
+	}
+	return false
+}
+
+func contentFlag(item Item, flag string) bool {
+	cc := item.ContentContract
+	if cc == nil {
+		return false
+	}
+	switch flag {
+	case "readme_required":
+		return cc.ReadmeRequired
+	case "runnable_required":
+		return cc.RunnableRequired
+	case "tests_required":
+		return cc.TestsRequired
+	case "visual_model_required":
+		return cc.VisualModelRequired
+	case "machine_view_required":
+		return cc.MachineViewRequired
+	case "common_mistakes_required":
+		return cc.CommonMistakesRequired
+	case "production_notes_required":
+		return cc.ProductionNotesRequired
+	case "review_questions_required":
+		return cc.ReviewQuestionsRequired
+	case "portfolio_artifact_required":
+		return cc.PortfolioArtifactRequired
+	}
+	return false
+}
+
+func fileField(item Item, key string) (field, path string) {
+	if item.Files == nil {
+		return key + "_path", ""
+	}
+	switch key {
+	case "readme":
+		return "readme_path", item.Files.ReadmePath
+	case "main":
+		return "main_path", item.Files.MainPath
+	case "test":
+		return "test_path", item.Files.TestPath
+	case "starter":
+		return "starter_path", item.Files.StarterPath
+	case "solution":
+		return "solution_path", item.Files.SolutionPath
+	}
+	return key + "_path", ""
+}
+
+func sortedKeys(m map[string]string) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
+}
+
+const maxContractPrint = 40
+
+// reportContractViolations prints violations (errors first), counts them, prints
+// a by-kind summary, and writes a JSON report when --report is set.
+func reportContractViolations(violations []contractViolation) {
+	sort.SliceStable(violations, func(i, j int) bool {
+		if violations[i].Sev != violations[j].Sev {
+			return violations[i].Sev > violations[j].Sev
+		}
+		return violations[i].ItemID < violations[j].ItemID
+	})
+
+	byKind := make(map[string]int)
+	errTotal, warnTotal := 0, 0
+	printedErr, printedWarn := 0, 0
+	for _, v := range violations {
+		byKind[v.Kind]++
+		switch v.Sev {
+		case sevError:
+			errTotal++
+			errorCount++
+			if printedErr < maxContractPrint {
+				fmt.Fprintf(os.Stderr, "ERROR: [%s/%s] %s: %s\n", v.Family, v.Kind, v.ItemID, v.Detail)
+				printedErr++
+			}
+		case sevWarning:
+			warnTotal++
+			warningCount++
+			if printedWarn < maxContractPrint {
+				fmt.Fprintf(os.Stderr, "WARN: [%s/%s] %s: %s\n", v.Family, v.Kind, v.ItemID, v.Detail)
+				printedWarn++
+			}
+		}
+	}
+
+	if len(violations) > 0 {
+		fmt.Printf("  contract violations by kind:")
+		for _, k := range sortedIntKeys(byKind) {
+			fmt.Printf(" %s=%d", k, byKind[k])
+		}
+		fmt.Printf(" (errors=%d warnings=%d)\n", errTotal, warnTotal)
+		if errTotal > maxContractPrint || warnTotal > maxContractPrint {
+			fmt.Printf("  (output truncated at %d per severity; use --report for the full list)\n", maxContractPrint)
+		}
+	}
+
+	if reportPath != "" {
+		writeContractReport(violations)
+	}
+}
+
+func sortedIntKeys(m map[string]int) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
+}
+
+type contractReportEntry struct {
+	ItemID   string `json:"item_id"`
+	Family   string `json:"family"`
+	Kind     string `json:"kind"`
+	Severity string `json:"severity"`
+	Detail   string `json:"detail"`
+}
+
+func writeContractReport(violations []contractViolation) {
+	entries := make([]contractReportEntry, 0, len(violations))
+	for _, v := range violations {
+		sev := "warning"
+		if v.Sev == sevError {
+			sev = "error"
+		}
+		entries = append(entries, contractReportEntry{v.ItemID, v.Family, v.Kind, sev, v.Detail})
+	}
+	mode := "default"
+	if strictMode {
+		mode = "strict"
+	} else if advisoryMode {
+		mode = "advisory"
+	}
+	payload := map[string]any{
+		"generated_by": "validate-readme-contracts",
+		"mode":         mode,
+		"total":        len(entries),
+		"violations":   entries,
+	}
+	data, err := json.MarshalIndent(payload, "", "  ")
+	if err != nil {
+		errorf("cannot marshal report: %v", err)
+		return
+	}
+	out := reportPath
+	if !filepath.IsAbs(out) {
+		out = filepath.Join(filepath.Dir(curriculumDir), reportPath)
+	}
+	if err := os.WriteFile(out, append(data, '\n'), 0o644); err != nil {
+		errorf("cannot write report %s: %v", out, err)
+		return
+	}
+	fmt.Printf("  wrote violation report to %s\n", out)
+}

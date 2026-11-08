@@ -12,12 +12,65 @@
     "manifest_policy": "Authoritative modular v3 manifests are the active source of truth for the curriculum engine.",
     "v2_policy": "curriculum.v2.json is archived legacy import data, not the active source of truth."
   },
+  "contract_model": {
+    "description": "A README contract is a small invariant core plus an allowlist of optional sections. Families are selected by item shape (type/subtype). Subtype modifiers add or forbid a few sections for a specific kind of lesson. File and code requirements are derived from the item's content_contract flags, so a pure-theory lesson needs only a README while a runnable lesson must ship source and tests.",
+    "layers": {
+      "family_core": "Headings every document in the family must contain. Enforced.",
+      "optional": "Allowed but not required headings. Omission is correct, not a violation (anti-slop).",
+      "subtype_modifier": "Per-subtype additions or forbiddances layered on top of the family."
+    },
+    "file_policy_tokens": {
+      "required": "The path must exist.",
+      "optional": "The path may exist.",
+      "when:runnable_required": "Required only when content_contract.runnable_required is true.",
+      "when:tests_required": "Required only when content_contract.tests_required is true.",
+      "when:portfolio_artifact_required": "Required only when content_contract.portfolio_artifact_required is true."
+    },
+    "code_policy_tokens": {
+      "required": "The README must contain a Go code block.",
+      "optional": "A Go code block may or may not be present.",
+      "forbidden": "The README must not contain a Go code block."
+    }
+  },
+  "severity_policy": {
+    "description": "Tiered severity. Structural defects marked by always_error tokens always block. Content-shape violations (headings, code policy, file policy) are tiered: locked modules always block; otherwise the item's status is looked up in by_status.",
+    "default_content_shape": "warning",
+    "content_shape_enforcement": "enforce",
+    "by_status": {
+      "draft": "warning",
+      "scaffolded": "warning",
+      "review": "warning",
+      "reviewed": "warning",
+      "ready": "warning",
+      "published": "warning",
+      "live": "warning",
+      "complete": "warning",
+      "stable": "warning",
+      "golden": "warning"
+    },
+    "rollout_note": "Content-shape enforcement is active. Structural defects always block. Content-shape defects in locked modules block by default; other modules follow by_status and are promoted to errors in release builds via --strict.",
+    "always_error": [
+      "missing-file",
+      "invalid-json",
+      "broken-link",
+      "duplicate-id",
+      "dangling-contract",
+      "contract-mismatch",
+      "unknown-module"
+    ],
+    "locked_modules_ref": "curriculum/expected.json#/locked_modules",
+    "locked_modules_note": "The authoritative locked-module list lives in curriculum/expected.json (single source of truth). Validators read it from there rather than duplicating it here."
+  },
   "contracts": [
     {
       "id": "root.v3",
       "applies_to": "repository-root",
       "purpose": "Learner front door and curriculum overview.",
       "documentation_mode": "overview",
+      "selector": { "doc": "repository-root" },
+      "shape": "overview",
+      "code_policy": "optional",
+      "file_policy": { "readme": "required" },
       "required_headings": [
         "What is The Go Engineer?",
         "Who this is for",
@@ -30,6 +83,8 @@
         "Flagship Opslane",
         "Contributing and maintenance"
       ],
+      "optional_headings": [],
+      "heading_aliases": {},
       "generated_sections": [
         "Core learning path",
         "Projects and proof system",
@@ -52,7 +107,7 @@
         "Projects and proof system": "Overview of the 28 hands-on project capstones, grading rubrics, and the dual-state starter/solution proof model.",
         "How to start": "Zero-friction local setup instructions: Go toolchain installation, repository clone, and initial validation execution.",
         "How to validate your progress": "Validation commands (scripts/validate_curriculum.go) and test execution guide.",
-        "Advanced electives": "Catalogue of the 20 specialized elective tracks (Generics, gRPC, eBPF, distributed consensus).",
+        "Advanced electives": "Catalogue of the specialized elective tracks (Generics, gRPC, eBPF, distributed consensus, Kubernetes).",
         "Flagship Opslane": "Introduction to Module 18 Flagship Opslane: multi-tenant production incident simulator and graduation defense.",
         "Contributing and maintenance": "Governance rules, PR checklist, and contributor authoring standards."
       }
@@ -62,21 +117,36 @@
       "applies_to": "core-module",
       "purpose": "Module-level learner orientation map and progression arc.",
       "documentation_mode": "module-overview",
+      "selector": { "doc": "module", "aliases": ["elective-module.v3"] },
+      "shape": "overview",
+      "code_policy": "optional",
+      "file_policy": { "readme": "required" },
       "required_headings": [
         "Mission",
-        "Tracks in this curriculum",
-        "Who this module is for",
-        "What you will build",
         "Prerequisites",
-        "Concept map",
         "Lessons",
-        "Labs",
         "Projects",
         "Assessments",
-        "Common failure modes",
         "Completion checklist",
         "Next module"
       ],
+      "optional_headings": [
+        "Tracks in this curriculum",
+        "Who this module is for",
+        "What you will build",
+        "Concept map",
+        "Labs",
+        "Common failure modes"
+      ],
+      "heading_aliases": {
+        "Goal": "Mission",
+        "Summary": "Mission",
+        "Learning Sessions & Lessons": "Lessons",
+        "Completion": "Completion checklist",
+        "Exit checklist": "Completion checklist",
+        "NEXT UP": "Next module",
+        "Start here": "Next module"
+      },
       "generated_sections": [
         "Concept map",
         "Lessons",
@@ -94,15 +164,6 @@
         "Prerequisites",
         "Common failure modes"
       ],
-      "canonical_heading_aliases": {
-        "Goal": "Mission",
-        "Summary": "Mission",
-        "Learning Sessions & Lessons": "Lessons",
-        "Completion": "Completion checklist",
-        "Exit checklist": "Completion checklist",
-        "NEXT UP": "Next module",
-        "Start here": "Next module"
-      },
       "section_specifications": {
         "Mission": "Pedagogical objective of the module and the exact engineering capability it unlocks.",
         "Tracks in this curriculum": "Orientation linking this module into the Core Backend Path, Advanced Electives, and Companion Frontend Track.",
@@ -125,68 +186,59 @@
       "purpose": "World-class teaching README for a concept, systems technique, or operational skill.",
       "applies_when": "The concept is required for the core path and every learner must master it before advancing.",
       "documentation_mode": "tutorial",
+      "selector": { "type": ["lesson", "lab"], "subtype_not": ["reference"] },
+      "shape": "standard-lesson",
+      "code_policy": "optional",
+      "file_policy": {
+        "readme": "required",
+        "main": "when:runnable_required",
+        "test": "when:tests_required"
+      },
       "required_headings": [
         "Learning objective",
         "Why this matters",
         "Mental model",
+        "Common mistakes",
+        "Review questions",
+        "NEXT UP"
+      ],
+      "optional_headings": [
         "Core idea",
         "Visual model",
         "Under the hood",
         "How Go uses it",
         "Go example",
         "Step-by-step execution",
-        "Common mistakes",
-        "Debugging walkthrough",
-        "Production notes",
-        "Performance implications",
-        "Practice task",
-        "Tests / verification",
-        "Review questions",
-        "NEXT UP"
-      ],
-      "core_required_headings": [
-        "Learning objective",
-        "Why this matters",
-        "Mental model",
-        "Common mistakes",
-        "Review questions",
-        "NEXT UP"
-      ],
-      "contextual_headings": [
-        "Core idea",
-        "Visual model",
-        "Under the hood",
-        "How Go uses it",
-        "Go example",
-        "Step-by-step execution",
+        "Runtime evidence",
         "Debugging walkthrough",
         "Production notes",
         "Performance implications",
         "Practice task",
         "Tests / verification"
       ],
-      "anti_overengineering_policy": "Do not force all 17 headings if a lesson's subject matter does not warrant them. Non-applicable sections should be omitted rather than populated with placeholder slop. Always respect the item's content_contract flags (visual_model_required, machine_view_required, production_notes_required, runnable_required, tests_required).",
-      "subtype_profiles": {
+      "heading_aliases": {
+        "Mission": "Learning objective",
+        "Why this lesson exists now": "Why this matters",
+        "Key principles": "Core idea",
+        "Machine view": "Under the hood",
+        "Code walkthrough": "Step-by-step execution",
+        "Debugging task": "Debugging walkthrough",
+        "In production": "Production notes",
+        "Try it": "Practice task",
+        "Verification surface": "Tests / verification",
+        "Run instructions": "Tests / verification",
+        "Thinking questions": "Review questions",
+        "Next step": "NEXT UP"
+      },
+      "subtype_modifiers": {
         "orientation": {
           "description": "Course orientation, mental models, workflows, and learning strategy. Pure conceptual prose with zero Go code or syntax.",
-          "mandatory_additions": [
-            "Core idea",
-            "Visual model"
-          ],
-          "acceptable_omissions": [
-            "Under the hood",
+          "code_policy": "forbidden",
+          "required_headings": ["Visual model"],
+          "forbidden_headings": [
             "Go example",
-            "Step-by-step execution",
-            "Debugging walkthrough",
-            "Production notes",
-            "Performance implications",
-            "Practice task",
-            "Tests / verification"
-          ],
-          "prohibited_headings": [
-            "Go example",
-            "Step-by-step execution",
             "Under the hood",
+            "Step-by-step execution",
             "Debugging walkthrough",
             "Production notes",
             "Performance implications",
@@ -194,96 +246,32 @@
           ]
         },
         "concept": {
-          "description": "Deep programming fundamentals, type semantics, memory mechanics, and runtime structures.",
-          "mandatory_additions": [
-            "Under the hood",
-            "Go example",
-            "Step-by-step execution",
-            "Performance implications",
-            "Practice task"
-          ],
-          "conditional_additions": [
-            "Visual model (when memory layout, pointer indirection, or headers are involved)",
-            "Production notes (when production failure modes exist)"
-          ],
-          "acceptable_omissions": [
-            "Debugging walkthrough (if concept is purely foundational syntax without runtime crash traps)"
-          ]
+          "description": "Deep programming fundamentals, type semantics, memory mechanics, and runtime structures."
         },
         "operations": {
-          "description": "Systems programming, Linux processes, signals, Docker containerization, CI/CD, and runbooks.",
-          "mandatory_additions": [
-            "Go example",
-            "Step-by-step execution",
-            "Production notes",
-            "Tests / verification"
-          ],
-          "conditional_additions": [
-            "Visual model (when process tree, network socket, or pipeline topology is involved)",
-            "Debugging walkthrough (when operational failure triage is taught)"
-          ],
-          "acceptable_omissions": [
-            "Performance implications (when teaching process management, signals, or configuration files)"
-          ]
+          "description": "Systems programming, Linux processes, signals, Docker containerization, CI/CD, and runbooks."
         },
         "architecture": {
-          "description": "Service boundaries, package structure, domain invariants, and design patterns.",
-          "mandatory_additions": [
-            "Core idea",
-            "Visual model",
-            "Under the hood",
-            "How Go uses it",
-            "Production notes"
-          ],
-          "conditional_additions": [
-            "Go example (when architectural interface contracts are shown)"
-          ],
-          "acceptable_omissions": [
-            "Debugging walkthrough (for purely conceptual architectural tradeoffs and boundary definitions)",
-            "Performance implications (unless teaching sharding, latency budgets, or multi-tenant scaling)"
-          ]
+          "description": "Service boundaries, package structure, domain invariants, and design patterns."
         },
         "career": {
-          "description": "Portfolio strategy, technical documentation, resume projects, code review preparation, and interview readiness.",
-          "mandatory_additions": [
-            "Core idea",
-            "Practice task"
-          ],
-          "acceptable_omissions": [
-            "Under the hood (purely non-runtime strategic topics)",
-            "Visual model (unless illustrating project portfolio timelines)",
-            "Go example (when teaching portfolio documentation or interview communication)",
-            "Step-by-step execution",
-            "Debugging walkthrough",
-            "Performance implications"
-          ]
+          "description": "Portfolio strategy, technical documentation, resume projects, code review preparation, and interview readiness."
         },
         "debugging": {
           "description": "Delve debugger drills, pprof profiling, race detector diagnostics, and panic trace recovery.",
-          "mandatory_additions": [
-            "Go example",
-            "Under the hood",
-            "Debugging walkthrough",
-            "Practice task",
-            "Tests / verification"
-          ],
-          "acceptable_omissions": [
-            "Core idea (superseded by Debugging walkthrough)"
-          ]
+          "required_headings": ["Debugging walkthrough"],
+          "code_policy": "required"
         },
         "testing": {
           "description": "Unit testing, table-driven tests, subtests, mocks, test harnesses, and coverage analysis.",
-          "mandatory_additions": [
-            "Go example",
-            "Step-by-step execution",
-            "Practice task",
-            "Tests / verification"
-          ],
-          "acceptable_omissions": [
-            "Performance implications (unless teaching benchmarking or memory allocation tracking)"
-          ]
+          "required_headings": ["Tests / verification"],
+          "code_policy": "required"
+        },
+        "security": {
+          "description": "Authentication, authorization, input validation, secrets handling, and defensive runtime posture."
         }
       },
+      "anti_overengineering_policy": "Do not force optional headings if a lesson's subject matter does not warrant them. Non-applicable sections should be omitted rather than populated with placeholder slop. Always respect the item's content_contract flags (visual_model_required, machine_view_required, production_notes_required, runnable_required, tests_required).",
       "generated_sections": [
         "Tests / verification",
         "NEXT UP"
@@ -298,6 +286,7 @@
         "How Go uses it",
         "Go example",
         "Step-by-step execution",
+        "Runtime evidence",
         "Common mistakes",
         "Debugging walkthrough",
         "Production notes",
@@ -305,19 +294,6 @@
         "Practice task",
         "Review questions"
       ],
-      "canonical_heading_aliases": {
-        "Mission": "Learning objective",
-        "Why this lesson exists now": "Why this matters",
-        "Machine view": "Under the hood",
-        "Code walkthrough": "Step-by-step execution",
-        "Debugging task": "Debugging walkthrough",
-        "In production": "Production notes",
-        "Try it": "Practice task",
-        "Verification surface": "Tests / verification",
-        "Run instructions": "Tests / verification",
-        "Thinking questions": "Review questions",
-        "Next step": "NEXT UP"
-      },
       "section_specifications": {
         "Learning objective": "Measurable, behavioral statement: 'By the end of this lesson, you will be able to...'",
         "Why this matters": "Operational and architectural justification: real-world production incidents and system design tradeoffs.",
@@ -328,6 +304,7 @@
         "How Go uses it": "Idiomatic usage patterns across the Go standard library, runtime internals, and production architectures.",
         "Go example": "Complete, self-contained, runnable code (package main, imports, func main()) demonstrating the concept. Skip for text-only strategy lessons.",
         "Step-by-step execution": "Numbered chronological walkthrough tracing variable states, registers, stack frames, and outputs across execution.",
+        "Runtime evidence": "Exact command, verifiable expected output, and interpretation that proves the mechanism at runtime. Skip when the lesson has no runnable artifact.",
         "Common mistakes": "Markdown table format (Mistake | Why it happens | Fix) documenting real mistakes observed in production code.",
         "Debugging walkthrough": "Realistic failure scenario: error symptoms, Delve commands, stack traces, root cause isolation, and resolution.",
         "Production notes": "Operational risks, defense-in-depth patterns, and failure modes from curriculum/failures.json.",
@@ -353,40 +330,33 @@
       "applies_to": "elective-lesson",
       "purpose": "Advanced reference/tutorial hybrid for specialized systems topics outside the core path.",
       "documentation_mode": "reference",
+      "selector": { "type": ["lesson", "lab"], "subtype": ["reference"] },
+      "shape": "reference",
+      "code_policy": "required",
+      "file_policy": {
+        "readme": "required",
+        "main": "when:runnable_required",
+        "test": "when:tests_required"
+      },
       "required_headings": [
         "When you need this",
         "When you do not need this",
-        "Prerequisites",
         "Mental model",
+        "Common mistakes",
+        "Related core lessons"
+      ],
+      "optional_headings": [
+        "Prerequisites",
         "Visual model",
         "How it works",
         "Go example",
         "Step-by-step execution",
         "Tradeoffs",
-        "Common mistakes",
-        "Debugging walkthrough",
-        "Production notes",
-        "Practice task",
-        "Related core lessons"
-      ],
-      "core_required_headings": [
-        "When you need this",
-        "When you do not need this",
-        "Prerequisites",
-        "Mental model",
-        "How it works",
-        "Go example",
-        "Tradeoffs",
-        "Common mistakes",
-        "Related core lessons"
-      ],
-      "contextual_headings": [
-        "Visual model",
-        "Step-by-step execution",
         "Debugging walkthrough",
         "Production notes",
         "Practice task"
       ],
+      "heading_aliases": {},
       "generated_sections": [
         "Prerequisites",
         "Related core lessons"
@@ -427,38 +397,42 @@
       "applies_to": "project",
       "purpose": "Project capstone README with build requirements, step-by-step plan, verification suite, and rubric.",
       "documentation_mode": "project",
+      "selector": { "type": ["project"], "subtype_not": ["flagship-checkpoint"] },
+      "shape": "project",
+      "code_policy": "optional",
+      "file_policy": {
+        "readme": "required",
+        "starter": "when:portfolio_artifact_required",
+        "solution": "when:portfolio_artifact_required"
+      },
       "required_headings": [
         "Learning objective",
-        "Why this matters",
         "Project overview",
-        "Prerequisites",
-        "Available concepts",
-        "Tasks",
-        "Step-by-step build plan",
-        "Verification",
-        "Rubric",
-        "Common mistakes",
-        "Stretch goals",
-        "Portfolio notes",
-        "NEXT UP"
-      ],
-      "core_required_headings": [
-        "Learning objective",
-        "Why this matters",
-        "Project overview",
-        "Prerequisites",
         "Tasks",
         "Verification",
         "Rubric",
         "NEXT UP"
       ],
-      "contextual_headings": [
+      "optional_headings": [
+        "Why this matters",
+        "Prerequisites",
         "Available concepts",
         "Step-by-step build plan",
         "Common mistakes",
         "Stretch goals",
         "Portfolio notes"
       ],
+      "heading_aliases": {
+        "Project mission": "Project overview",
+        "Mission": "Learning objective",
+        "What you will build": "Project overview",
+        "Lessons reinforced": "Available concepts",
+        "Requirements": "Tasks",
+        "Background": "Project overview",
+        "Lab overview": "Project overview",
+        "Architectural Pillars": "Project overview",
+        "Deliverables": "Tasks"
+      },
       "generated_sections": [
         "Prerequisites",
         "Available concepts",
@@ -476,12 +450,6 @@
         "Stretch goals",
         "Portfolio notes"
       ],
-      "canonical_heading_aliases": {
-        "Project mission": "Learning objective",
-        "What you will build": "Project overview",
-        "Lessons reinforced": "Available concepts",
-        "Requirements": "Tasks"
-      },
       "section_specifications": {
         "Learning objective": "Core engineering capability and architectural proof demonstrated by completing this capstone.",
         "Why this matters": "Industry context: how this project mirrors real-world production microservices and tooling.",
@@ -503,34 +471,33 @@
       "applies_to": "assessment",
       "purpose": "Assessment README with evidence requirements, passing criteria, and retake policies.",
       "documentation_mode": "assessment",
+      "selector": { "type": ["assessment"], "subtype_not": ["milestone-assessment"] },
+      "shape": "assessment",
+      "code_policy": "optional",
+      "file_policy": { "readme": "required" },
       "required_headings": [
         "Purpose",
-        "Scope",
         "Targets",
+        "Rubric",
+        "Retake policy"
+      ],
+      "optional_headings": [
+        "Scope",
         "Prerequisites",
         "Evidence required",
         "Time expectation",
         "Passing standard",
-        "Rubric",
         "Review questions",
-        "Retake policy",
         "NEXT UP"
       ],
-      "core_required_headings": [
-        "Purpose",
-        "Scope",
-        "Targets",
-        "Passing standard",
-        "Rubric",
-        "Retake policy",
-        "NEXT UP"
-      ],
-      "contextual_headings": [
-        "Prerequisites",
-        "Evidence required",
-        "Time expectation",
-        "Review questions"
-      ],
+      "heading_aliases": {
+        "What this assessment proves": "Purpose",
+        "Required evidence": "Evidence required",
+        "Passing score": "Passing standard",
+        "Manual review questions": "Review questions",
+        "Overview": "Purpose",
+        "Scope": "Targets"
+      },
       "generated_sections": [
         "Targets",
         "Prerequisites",
@@ -546,12 +513,6 @@
         "Time expectation",
         "Review questions"
       ],
-      "canonical_heading_aliases": {
-        "What this assessment proves": "Purpose",
-        "Required evidence": "Evidence required",
-        "Passing score": "Passing standard",
-        "Manual review questions": "Review questions"
-      },
       "section_specifications": {
         "Purpose": "Clear statement of the competencies, problem-solving skills, and debugging capability validated.",
         "Scope": "Module boundaries, topics covered, and excluded advanced material.",
@@ -571,36 +532,27 @@
       "applies_to": "flagship",
       "purpose": "Opslane learner front door, production systems architecture, and graduation proof map.",
       "documentation_mode": "flagship",
+      "selector": { "doc": "flagship-module" },
+      "shape": "flagship",
+      "code_policy": "optional",
+      "file_policy": { "readme": "required" },
       "required_headings": [
         "Flagship mission",
         "What Opslane proves",
-        "Before you start",
         "System overview",
-        "Checkpoint map",
-        "Local quickstart",
-        "Required proof",
-        "Security proof",
-        "Observability proof",
-        "Deployment proof",
-        "Portfolio defense",
-        "Production vs educational caveats"
-      ],
-      "core_required_headings": [
-        "Flagship mission",
-        "What Opslane proves",
-        "Before you start",
-        "System overview",
-        "Checkpoint map",
         "Required proof",
         "Portfolio defense"
       ],
-      "contextual_headings": [
+      "optional_headings": [
+        "Before you start",
+        "Checkpoint map",
         "Local quickstart",
         "Security proof",
         "Observability proof",
         "Deployment proof",
         "Production vs educational caveats"
       ],
+      "heading_aliases": {},
       "generated_sections": [
         "Before you start",
         "Checkpoint map",
@@ -637,34 +589,37 @@
       "applies_to": "flagship-checkpoint",
       "purpose": "Opslane checkpoint implementation guide, failure scenarios, and verification contracts.",
       "documentation_mode": "flagship-checkpoint",
+      "selector": { "type": ["checkpoint", "capstone", "assessment", "project"], "subtype": ["capstone", "milestone-assessment", "flagship-checkpoint"] },
+      "shape": "flagship-checkpoint",
+      "code_policy": "optional",
+      "file_policy": {
+        "readme": "required",
+        "main": "when:runnable_required",
+        "test": "when:tests_required"
+      },
       "required_headings": [
         "Mission",
-        "Prerequisites",
-        "Mental Model",
-        "Visual Model",
-        "Machine View",
-        "Run Instructions",
-        "Code Walkthrough",
-        "Try It",
-        "In Production",
-        "Thinking Questions",
-        "Next Step"
-      ],
-      "core_required_headings": [
-        "Mission",
-        "Prerequisites",
         "Code Walkthrough",
         "Try It",
         "In Production",
         "Next Step"
       ],
-      "contextual_headings": [
+      "optional_headings": [
+        "Prerequisites",
         "Mental Model",
         "Visual Model",
         "Machine View",
         "Run Instructions",
         "Thinking Questions"
       ],
+      "heading_aliases": {
+        "Checkpoint mission": "Mission",
+        "What you will implement": "Code Walkthrough",
+        "Expected system state": "In Production",
+        "Required tests": "Try It",
+        "Architecture defense questions": "Thinking Questions",
+        "Next checkpoint": "Next Step"
+      },
       "generated_sections": [
         "Prerequisites",
         "Run Instructions",
@@ -680,14 +635,6 @@
         "In Production",
         "Thinking Questions"
       ],
-      "canonical_heading_aliases": {
-        "Checkpoint mission": "Mission",
-        "What you will implement": "Code Walkthrough",
-        "Expected system state": "In Production",
-        "Required tests": "Try It",
-        "Architecture defense questions": "Thinking Questions",
-        "Next checkpoint": "Next Step"
-      },
       "section_specifications": {
         "Mission": "Specific milestone objective within the Opslane architecture (e.g., event bus, worker pool, caching layer).",
         "Prerequisites": "Prior Opslane milestones and verified system state required before beginning.",
@@ -707,30 +654,24 @@
       "applies_to": "companion-stage",
       "purpose": "Frontend companion track stage guide and hypermedia integration specification.",
       "documentation_mode": "companion-stage",
+      "selector": { "doc": "companion-stage" },
+      "shape": "companion",
+      "code_policy": "optional",
+      "file_policy": { "readme": "required" },
       "required_headings": [
         "Stage mission",
-        "Pedagogical scope",
         "Backend alignment",
-        "Architecture and tech stack",
-        "Component contracts",
-        "Running the stage",
-        "Verification and test suite",
-        "Progressive enhancement checklist",
-        "Next stage"
-      ],
-      "core_required_headings": [
-        "Stage mission",
-        "Pedagogical scope",
-        "Backend alignment",
-        "Architecture and tech stack",
-        "Running the stage",
         "Verification and test suite",
         "Next stage"
       ],
-      "contextual_headings": [
+      "optional_headings": [
+        "Pedagogical scope",
+        "Architecture and tech stack",
         "Component contracts",
+        "Running the stage",
         "Progressive enhancement checklist"
       ],
+      "heading_aliases": {},
       "generated_sections": [
         "Backend alignment",
         "Running the stage",
@@ -758,10 +699,15 @@
     }
   ],
   "validation_rules": [
-    "Every README must match its declared contract_id and satisfy its core_required_headings without exception.",
+    "Each item resolves to exactly one contract through its selector (type/subtype); the item's declared contract_id must match the resolved family or one of its aliases.",
+    "Every README must satisfy its family's core required_headings (after canonical alias normalization) without exception; optional_headings may be omitted.",
+    "Subtype modifiers layer on top of the family: they may add required headings, forbid headings, or change the code policy.",
+    "File requirements are derived from content_contract flags: main when runnable_required, test when tests_required, starter/solution when portfolio_artifact_required.",
+    "A lesson whose content_contract sets runnable_required and tests_required to false may ship a README alone with no source or test files.",
+    "A README with code_policy=forbidden must not contain a Go code block; code_policy=required must contain one.",
     "Generated sections must be marked with curriculum generated comments (<!-- curriculum:generated:start --> and <!-- curriculum:generated:end -->).",
     "Human-written sections must not be overwritten or modified by generator scripts.",
-    "Anti-slop rule: Do not force contextual headings if the subject matter does not warrant them. Omit non-applicable sections rather than populating them with artificial template filler.",
+    "Anti-slop rule: Do not force optional or contextual headings if the subject matter does not warrant them. Omit non-applicable sections rather than populating them with artificial template filler.",
     "No implemented lesson may keep placeholder zero-magic text (e.g. 'mechanically without understanding', 'one step in the learner's path').",
     "No README may use stale legacy navigation labels or non-existent lesson IDs unless inside historical migration notes.",
     "Every future concept must use an explicit preview-only reference; lessons cannot assume mastery of unintroduced concepts.",
@@ -778,6 +724,8 @@
     "Execution and memory timelines must adhere to the discrete temporal format (T0, T1, T2...) detailing physical register, stack frame, and heap allocation states across time when temporal or concurrent flow is introduced.",
     "All project and service capstone starters must enforce 3-tier clean domain separation (transport/ -> domain/ -> repo/) with domain layers free of external framework dependencies.",
     "Cognitive load budgeting: each lesson may introduce at most 1 primary new concept; all prerequisite language constructs must be verified against curriculum/crossrefs.json and curriculum/concepts.json.",
-    "Transitive prerequisite verification: concepts must strictly follow canonical introduction in curriculum/concepts.json; preview locations must strictly precede, reinforcement must strictly follow."
+    "Transitive prerequisite verification: concepts must strictly follow canonical introduction in curriculum/concepts.json; preview locations must strictly precede, reinforcement must strictly follow.",
+    "Severity: structural defects (missing-file, invalid-json, broken-link, duplicate-id, dangling-contract, contract-mismatch, unknown-module) always block; content-shape violations block by default only for locked modules and are advisory for every other item (all item statuses currently map to warning in by_status). --strict promotes advisories to errors for release.",
+    "Content-shape advisories on non-locked items must be reported but must not fail the default validation run."
   ]
 }

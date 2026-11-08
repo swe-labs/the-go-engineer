@@ -53,7 +53,7 @@ func validateNoEmojis() {
 
 		file, err := os.Open(path)
 		if err != nil {
-			warnf("cannot open markdown file %s: %v", path, err)
+			errorf("cannot open markdown file %s: %v", path, err)
 			ok = false
 			return nil
 		}
@@ -84,7 +84,7 @@ func validateNoEmojis() {
 				r, size := utf8.DecodeRuneInString(lineNoInline[i:])
 				if isEmojiCharacter(r) {
 					relPath, _ := filepath.Rel(curriculumDir, path)
-					warnf("%s:%d contains forbidden emoji '%c' (U+%04X): %s", relPath, lineNo, r, r, trimmed)
+					errorf("%s:%d contains forbidden emoji '%c' (U+%04X): %s", relPath, lineNo, r, r, trimmed)
 					violations++
 					ok = false
 					break
@@ -96,7 +96,7 @@ func validateNoEmojis() {
 	})
 
 	if err != nil {
-		warnf("error walking markdown files for emojis: %v", err)
+		errorf("error walking markdown files for emojis: %v", err)
 		ok = false
 	}
 

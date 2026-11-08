@@ -31,8 +31,9 @@ func validateSESENavigation() {
 	var core CoreBundle
 	readJSON("path.core.json", &core)
 
-	// Modules audited and locked into SESE
-	lockedModules := map[string]string{
+	// Forward-link targets for the exit-gate check; the set of locked modules
+	// itself comes from curriculum/expected.json (single source of truth).
+	nextModuleLinks := map[string]string{
 		"module-00": "../01-computers-terminal-git-web/README.md",
 		"module-01": "../02-go-setup-tooling/README.md",
 		"module-02": "../03-programming-fundamentals/README.md",
@@ -46,7 +47,7 @@ func validateSESENavigation() {
 
 		data, err := os.ReadFile(rootReadme)
 		if err != nil {
-			warnf("%s: root README not found at %s", mod.ID, rootReadme)
+			errorf("%s: root README not found at %s", mod.ID, rootReadme)
 			ok = false
 			continue
 		}
@@ -67,22 +68,28 @@ func validateSESENavigation() {
 		}
 
 		// For locked modules, assert strictly
-		if _, isLocked := lockedModules[mod.ID]; isLocked {
+		if lockedModuleSet()[mod.ID] {
 			if !strings.HasPrefix(lastH2, "Start here") && !strings.HasPrefix(lastH2, "NEXT UP") {
-				warnf("%s root README:%d expected final heading '## Start here', got '## %s'", mod.ID, lastH2LineNo, lastH2)
+				errorf("%s root README:%d expected final heading '## Start here', got '## %s'", mod.ID, lastH2LineNo, lastH2)
 				ok = false
 			}
 
 			// Must not contain direct skip link to next module at root
 			if strings.Contains(content, "## Next module") {
-				warnf("%s root README contains '## Next module' escape hatch; module root must only contain '## Start here'", mod.ID)
+				errorf("%s root README contains '## Next module' escape hatch; module root must only contain '## Start here'", mod.ID)
 				ok = false
 			}
 		}
 	}
 
 	// Verify exit gates on locked module assessments
-	for modID, nextModuleLink := range lockedModules {
+	for modID := range lockedModuleSet() {
+		nextModuleLink, hasLink := nextModuleLinks[modID]
+		if !hasLink {
+			errorf("%s is locked but has no next-module exit-gate link configured", modID)
+			ok = false
+			continue
+		}
 		foundExitGate := false
 		var checkedFiles []string
 
@@ -102,7 +109,7 @@ func validateSESENavigation() {
 		}
 
 		if !foundExitGate {
-			warnf("%s assessment exit gate missing forward link '%s' (checked %v)", modID, nextModuleLink, checkedFiles)
+			errorf("%s assessment exit gate missing forward link '%s' (checked %v)", modID, nextModuleLink, checkedFiles)
 			ok = false
 		}
 	}
@@ -156,20 +163,20 @@ func validateProjectScripts() {
 		// Check verify.sh
 		shPath := filepath.Join(projDir, "verify.sh")
 		if shInfo, err := os.Stat(shPath); err != nil {
-			warnf("%s: missing verify.sh in %s", p.ID, projDir)
+			errorf("%s: missing verify.sh in %s", p.ID, projDir)
 			ok = false
 		} else if shInfo.Size() < 50 {
-			warnf("%s: verify.sh is too small (%d bytes)", p.ID, shInfo.Size())
+			errorf("%s: verify.sh is too small (%d bytes)", p.ID, shInfo.Size())
 			ok = false
 		}
 
 		// Check verify.ps1
 		psPath := filepath.Join(projDir, "verify.ps1")
 		if psInfo, err := os.Stat(psPath); err != nil {
-			warnf("%s: missing verify.ps1 in %s", p.ID, projDir)
+			errorf("%s: missing verify.ps1 in %s", p.ID, projDir)
 			ok = false
 		} else if psInfo.Size() < 50 {
-			warnf("%s: verify.ps1 is too small (%d bytes)", p.ID, psInfo.Size())
+			errorf("%s: verify.ps1 is too small (%d bytes)", p.ID, psInfo.Size())
 			ok = false
 		}
 	}

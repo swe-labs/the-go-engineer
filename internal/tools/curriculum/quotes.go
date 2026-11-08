@@ -17,13 +17,8 @@ func validateAnchorQuotes() {
 	readJSON("path.core.json", &core)
 
 	// Modules audited and locked into zero-magic pioneer anchor quote requirements
-	lockedModules := map[string]bool{
-		"module-00": true,
-		"module-01": true,
-		"module-02": true,
-		"module-03": true,
-		"module-04": true,
-	}
+	// (single source of truth: curriculum/expected.json).
+	lockedModules := lockedModuleSet()
 
 	checkedLessons := 0
 	missingQuotes := 0
@@ -38,7 +33,7 @@ func validateAnchorQuotes() {
 
 		checkedLessons++
 		if item.Files == nil || item.Files.ReadmePath == "" {
-			warnf("%s: missing files.readme_path in metadata", item.ID)
+			errorf("%s: missing files.readme_path in metadata", item.ID)
 			ok = false
 			continue
 		}
@@ -46,7 +41,7 @@ func validateAnchorQuotes() {
 		fullPath := resolvePath(item.Files.ReadmePath)
 		file, err := os.Open(fullPath)
 		if err != nil {
-			warnf("%s: cannot open README at %s: %v", item.ID, fullPath, err)
+			errorf("%s: cannot open README at %s: %v", item.ID, fullPath, err)
 			ok = false
 			continue
 		}
@@ -66,7 +61,7 @@ func validateAnchorQuotes() {
 		file.Close()
 
 		if !hasQuote {
-			warnf("%s (%s): missing pioneer anchor quote before ## Learning objective in %s", item.ID, item.Slug, item.Files.ReadmePath)
+			errorf("%s (%s): missing pioneer anchor quote before ## Learning objective in %s", item.ID, item.Slug, item.Files.ReadmePath)
 			missingQuotes++
 			ok = false
 		}

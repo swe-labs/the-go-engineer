@@ -44,7 +44,7 @@ func validatePhysicalArtifacts() {
 
 	for _, item := range allItems {
 		if item.Files == nil || item.Files.ReadmePath == "" {
-			warnf("%s: missing files.readme_path in metadata", item.ID)
+			errorf("%s: missing files.readme_path in metadata", item.ID)
 			ok = false
 			continue
 		}
@@ -52,13 +52,13 @@ func validatePhysicalArtifacts() {
 		resolved := resolvePath(item.Files.ReadmePath)
 		info, err := os.Stat(resolved)
 		if err != nil {
-			warnf("%s: physical README not found at '%s'", item.ID, item.Files.ReadmePath)
+			errorf("%s: physical README not found at '%s'", item.ID, item.Files.ReadmePath)
 			ok = false
 			continue
 		}
 
 		if info.Size() < 50 {
-			warnf("%s: physical README '%s' is too small (%d bytes)", item.ID, item.Files.ReadmePath, info.Size())
+			errorf("%s: physical README '%s' is too small (%d bytes)", item.ID, item.Files.ReadmePath, info.Size())
 			ok = false
 			continue
 		}
@@ -68,7 +68,7 @@ func validatePhysicalArtifacts() {
 		if item.Files.MainPath != "" {
 			mResolved := resolvePath(item.Files.MainPath)
 			if _, err := os.Stat(mResolved); err != nil {
-				warnf("%s: physical main_path not found at '%s'", item.ID, item.Files.MainPath)
+				errorf("%s: physical main_path not found at '%s'", item.ID, item.Files.MainPath)
 				ok = false
 			}
 		}
@@ -77,7 +77,7 @@ func validatePhysicalArtifacts() {
 		if item.Files.TestPath != "" {
 			tResolved := resolvePath(item.Files.TestPath)
 			if _, err := os.Stat(tResolved); err != nil {
-				warnf("%s: physical test_path not found at '%s'", item.ID, item.Files.TestPath)
+				errorf("%s: physical test_path not found at '%s'", item.ID, item.Files.TestPath)
 				ok = false
 			}
 		}
@@ -170,7 +170,7 @@ func validateAssessmentArtifacts() {
 		}
 
 		if assessDir == "" {
-			warnf("%s: assessment directory not found for slug '%s'", a.ID, slug)
+			errorf("%s: assessment directory not found for slug '%s'", a.ID, slug)
 			ok = false
 			continue
 		}
@@ -179,12 +179,12 @@ func validateAssessmentArtifacts() {
 		rPath := filepath.Join(assessDir, "README.md")
 		rInfo, err := os.Stat(rPath)
 		if err != nil {
-			warnf("%s: missing README.md in '%s'", a.ID, assessDir)
+			errorf("%s: missing README.md in '%s'", a.ID, assessDir)
 			ok = false
 			continue
 		}
 		if rInfo.Size() < 100 {
-			warnf("%s: README.md in '%s' is too small (%d bytes)", a.ID, assessDir, rInfo.Size())
+			errorf("%s: README.md in '%s' is too small (%d bytes)", a.ID, assessDir, rInfo.Size())
 			ok = false
 		}
 
@@ -201,10 +201,10 @@ func validateAssessmentArtifacts() {
 				fPath := filepath.Join(assessDir, rf)
 				info, err := os.Stat(fPath)
 				if err != nil {
-					warnf("%s: missing required assessment file '%s'", a.ID, rf)
+					errorf("%s: missing required assessment file '%s'", a.ID, rf)
 					ok = false
 				} else if info.Size() < 50 {
-					warnf("%s: assessment file '%s' is too small (%d bytes)", a.ID, rf, info.Size())
+					errorf("%s: assessment file '%s' is too small (%d bytes)", a.ID, rf, info.Size())
 					ok = false
 				}
 			}
@@ -213,11 +213,14 @@ func validateAssessmentArtifacts() {
 		verifiedCount++
 	}
 
-	// Also verify all 14 Opslane milestones in module-18 have full 4-file suites
+	// Also verify all Opslane milestones in module-18 have full 4-file suites.
 	opslaneDir := filepath.Join(curriculumDir, "modules", "18-flagship-opslane", "assessments")
 	entries, err := os.ReadDir(opslaneDir)
 	opslaneCount := 0
-	if err == nil {
+	if err != nil {
+		errorf("cannot read Opslane milestone directory '%s': %v", opslaneDir, err)
+		ok = false
+	} else {
 		for _, e := range entries {
 			if !e.IsDir() || (!strings.HasPrefix(e.Name(), "0") && !strings.HasPrefix(e.Name(), "1")) {
 				continue
@@ -227,14 +230,18 @@ func validateAssessmentArtifacts() {
 				fPath := filepath.Join(milestoneDir, rf)
 				info, err := os.Stat(fPath)
 				if err != nil {
-					warnf("opslane milestone '%s': missing '%s'", e.Name(), rf)
+					errorf("opslane milestone '%s': missing '%s'", e.Name(), rf)
 					ok = false
 				} else if info.Size() < 50 {
-					warnf("opslane milestone '%s': '%s' too small (%d bytes)", e.Name(), rf, info.Size())
+					errorf("opslane milestone '%s': '%s' too small (%d bytes)", e.Name(), rf, info.Size())
 					ok = false
 				}
 			}
 			opslaneCount++
+		}
+		if expected := loadExpected().Inventory.OpslaneMilestones; expected != 0 && opslaneCount != expected {
+			errorf("expected %d Opslane milestones, verified %d", expected, opslaneCount)
+			ok = false
 		}
 	}
 
@@ -246,8 +253,12 @@ func validateAssessmentArtifacts() {
 	}
 }
 
-// validateStarterParity verifies that projects have valid starter and solution implementations
-// that parse cleanly without syntax errors and declare appropriate Go test suites.
+// validateStarterParity verifies that projects which ship starter/solution
+// code have valid Go implementations that parse cleanly and declare both
+// production and test Go files. Projects that ship no code artifacts at all
+// (environment and shell-workflow labs) are exempt from the parity contract,
+// but the number of code-bearing projects is checked against expected.json so
+// a silently dropped starter or solution is still caught.
 func validateStarterParity() {
 	fmt.Println("=== validate-starter-parity ===")
 	ok := true
@@ -263,76 +274,71 @@ func validateStarterParity() {
 
 	var core CoreBundle
 	readJSON("path.core.json", &core)
+	var electives ElectiveBundle
+	readJSON("path.electives.json", &electives)
+
+	projectRoots := projectDirectories(core.Modules, electives.Modules)
 
 	projectCount := 0
 	fset := token.NewFileSet()
 
 	for _, p := range rawProjects.Projects {
-		var projDir string
-		for _, m := range core.Modules {
-			candidates := []string{
-				filepath.Join(curriculumDir, m.Path, "projects", p.Slug),
-				filepath.Join(curriculumDir, "modules", filepath.Base(m.Path), "projects", p.Slug),
-			}
-			for _, c := range candidates {
-				if info, err := os.Stat(c); err == nil && info.IsDir() {
-					projDir = c
-					break
-				}
-			}
-			if projDir != "" {
-				break
-			}
-		}
-
+		projDir := locateProjectDir(projectRoots, p.Slug)
 		if projDir == "" {
+			errorf("%s: project directory not found for slug '%s'", p.ID, p.Slug)
+			ok = false
 			continue
 		}
 
 		starterDir := filepath.Join(projDir, "_starter")
 		solutionDir := filepath.Join(projDir, "_solution")
+		hasStarter := isDirectory(starterDir)
+		hasSolution := isDirectory(solutionDir)
 
-		// If _starter exists, check Go files parse cleanly
-		if sInfo, err := os.Stat(starterDir); err == nil && sInfo.IsDir() {
-			files, _ := os.ReadDir(starterDir)
-			goFilesFound := 0
-			for _, f := range files {
-				if strings.HasSuffix(f.Name(), ".go") {
-					goFilesFound++
-					fullPath := filepath.Join(starterDir, f.Name())
-					if _, parseErr := parser.ParseFile(fset, fullPath, nil, parser.AllErrors); parseErr != nil {
-						warnf("%s: starter file '%s' has syntax errors: %v", p.ID, f.Name(), parseErr)
-						ok = false
-					}
-				}
-			}
-			if goFilesFound == 0 {
-				warnf("%s: _starter directory has no .go files", p.ID)
-				ok = false
-			}
+		if !hasStarter && !hasSolution {
+			// No code artifacts shipped (e.g. environment/shell labs); these
+			// projects are not part of the starter-parity inventory.
+			continue
+		}
+		if hasStarter != hasSolution {
+			errorf("%s: incomplete starter/solution pair (_starter=%t, _solution=%t)", p.ID, hasStarter, hasSolution)
+			ok = false
+			continue
 		}
 
-		// If _solution exists, check Go files parse cleanly
-		if solInfo, err := os.Stat(solutionDir); err == nil && solInfo.IsDir() {
-			files, _ := os.ReadDir(solutionDir)
-			goFilesFound := 0
-			for _, f := range files {
-				if strings.HasSuffix(f.Name(), ".go") {
-					goFilesFound++
-					fullPath := filepath.Join(solutionDir, f.Name())
-					if _, parseErr := parser.ParseFile(fset, fullPath, nil, parser.AllErrors); parseErr != nil {
-						warnf("%s: solution file '%s' has syntax errors: %v", p.ID, f.Name(), parseErr)
-						ok = false
-					}
-				}
+		for _, side := range []struct {
+			label string
+			dir   string
+		}{
+			{"_starter", starterDir},
+			{"_solution", solutionDir},
+		} {
+			goFiles, testFiles, parseIssues, err := inspectGoArtifacts(side.dir, fset)
+			if err != nil {
+				errorf("%s: cannot read %s directory: %v", p.ID, side.label, err)
+				ok = false
+				continue
 			}
-			if goFilesFound == 0 {
-				warnf("%s: _solution directory has no .go files", p.ID)
+			for _, issue := range parseIssues {
+				errorf("%s: %s %s", p.ID, side.label, issue)
+				ok = false
+			}
+			if goFiles == 0 {
+				errorf("%s: %s directory has no .go files", p.ID, side.label)
+				ok = false
+			}
+			if testFiles == 0 {
+				errorf("%s: %s directory declares no Go test suite (no _test.go files)", p.ID, side.label)
 				ok = false
 			}
 		}
 
 		projectCount++
+	}
+
+	if expected := loadExpected().Inventory.StarterParityProjects; expected != 0 && projectCount != expected {
+		errorf("expected %d starter-parity projects, verified %d", expected, projectCount)
+		ok = false
 	}
 
 	fmt.Printf("  Verified Go code parity and AST validity across %d projects.\n", projectCount)
@@ -341,4 +347,60 @@ func validateStarterParity() {
 	} else {
 		fmt.Println("  Starter parity checks completed with warnings/errors.")
 	}
+}
+
+// isDirectory reports whether path exists and is a directory.
+func isDirectory(path string) bool {
+	info, err := os.Stat(path)
+	return err == nil && info.IsDir()
+}
+
+// inspectGoArtifacts counts Go source and _test.go files directly inside dir and
+// returns a human-readable issue for each .go file that fails to parse. A
+// non-nil error means the directory itself could not be read.
+func inspectGoArtifacts(dir string, fset *token.FileSet) (goFiles, testFiles int, parseIssues []string, err error) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return 0, 0, nil, err
+	}
+	for _, e := range entries {
+		if e.IsDir() || !strings.HasSuffix(e.Name(), ".go") {
+			continue
+		}
+		goFiles++
+		if strings.HasSuffix(e.Name(), "_test.go") {
+			testFiles++
+		}
+		fullPath := filepath.Join(dir, e.Name())
+		if _, parseErr := parser.ParseFile(fset, fullPath, nil, parser.AllErrors); parseErr != nil {
+			parseIssues = append(parseIssues, fmt.Sprintf("file '%s' has syntax errors: %v", e.Name(), parseErr))
+		}
+	}
+	return goFiles, testFiles, parseIssues, nil
+}
+
+// projectDirectories returns the candidate project roots for every module,
+// including elective modules, handling both absolute module paths and the
+// legacy bare "<module>/projects/<slug>" layout.
+func projectDirectories(coreModules, electiveModules []Module) []string {
+	var roots []string
+	for _, m := range append(append([]Module{}, coreModules...), electiveModules...) {
+		roots = append(roots,
+			filepath.Join(curriculumDir, m.Path, "projects"),
+			filepath.Join(curriculumDir, "modules", filepath.Base(m.Path), "projects"),
+		)
+	}
+	return roots
+}
+
+// locateProjectDir returns the first existing "<root>/<slug>" directory, or ""
+// when no project root contains the slug.
+func locateProjectDir(roots []string, slug string) string {
+	for _, root := range roots {
+		candidate := filepath.Join(root, slug)
+		if isDirectory(candidate) {
+			return candidate
+		}
+	}
+	return ""
 }

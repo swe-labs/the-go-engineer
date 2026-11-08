@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const core = JSON.parse(fs.readFileSync('curriculum/path.core.json', 'utf8'));
 const electives = JSON.parse(fs.readFileSync('curriculum/path.electives.json', 'utf8'));
@@ -7,9 +8,11 @@ const assessments = JSON.parse(fs.readFileSync('curriculum/assessments.json', 'u
 const crossrefs = JSON.parse(fs.readFileSync('curriculum/crossrefs.json', 'utf8'));
 const concepts = JSON.parse(fs.readFileSync('curriculum/concepts.json', 'utf8'));
 const failures = JSON.parse(fs.readFileSync('curriculum/failures.json', 'utf8'));
+const expected = JSON.parse(fs.readFileSync('curriculum/expected.json', 'utf8'));
 
 function generateFullReadme() {
   const parts = [];
+  const pad = (value, width) => String(value).padEnd(width, ' ');
 
   parts.push('# The Go Engineer v3 — Curriculum\n');
   parts.push('> Schema: ' + core.schema_version + ' | Curriculum: ' + core.curriculum_version + ' | Status: ' + core.status + ' | Updated: ' + core.last_updated + '\n');
@@ -33,25 +36,40 @@ function generateFullReadme() {
   const electiveItems = electives.items.length;
   const prjRecords = projects.projects.length;
   const regAssessments = assessments.assessments.length;
+  const moduleAssessments = assessments.assessments.filter(a => a.id.startsWith('assessment-module-'));
+  const projectAssessments = assessments.assessments.filter(a => !a.id.startsWith('assessment-module-'));
   const conceptCount = concepts.concepts.length;
   const failureCategoryCount = failures.failure_categories ? failures.failure_categories.length : 13;
+  const flagshipProjectsCount = projects.projects.filter(p => p.type === 'flagship').length;
+
+  // Inventory counts come from expected.json (the single source of truth) so the
+  // generated catalog cannot drift from the manifest inventory.
+  const inv = expected.inventory;
+  const coreModulesCount = inv.core_modules;
+  const electiveModulesCount = inv.elective_modules;
+  const totalModulesCount = inv.total_modules;
+  const totalItemCount = inv.total_items;
+  const goldenCount = [...core.items, ...electives.items].filter(it => it.zero_magic_status === 'golden').length;
+  const directionalCrossrefEdges = crossrefs.crossrefs.references.length;
+  const manifestCount = fs.readdirSync('curriculum', { withFileTypes: true })
+    .filter(e => e.isFile() && e.name.endsWith('.json')).length;
 
   parts.push('## Quick Stats\n');
   parts.push('| Metric                           | Count | Notes                                                             |');
   parts.push('| -------------------------------- | ----- | ----------------------------------------------------------------- |');
-  parts.push('| Core Modules                     | 18    | Modules 00 through 16, plus Module 18 (Flagship Opslane)          |');
-  parts.push('| Elective Modules                 | 1     | Module 17 (Advanced Electives)                                    |');
-  parts.push('| Total Modules                    | 19    | Modules 00–18                                                     |');
-  parts.push('| Core Path Items (Metadata Total) | ' + coreItems.length + '   | Total items array in `path.core.json` across all core modules     |');
-  parts.push('| Instructional Lessons & Labs     | ' + (lessons + labs) + '   | ' + lessons + ' lessons + ' + labs + ' lab across Modules 00–16                         |');
-  parts.push('| Flagship Opslane Milestones      | ' + (checkpoints + capstones) + '    | ' + checkpoints + ' checkpoints + ' + capstones + ' capstone defense in Module 18          |');
-  parts.push('| Learner Instructional Units      | ' + (lessons + labs + checkpoints + capstones) + '   | ' + (lessons + labs) + ' instructional lessons/labs + ' + (checkpoints + capstones) + ' Opslane milestones            |');
-  parts.push('| Elective Items                   | ' + electiveItems + '    | 20 advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |');
-  parts.push('| Projects                         | ' + prjRecords + '    | 27 module projects + 1 flagship capstone defense project          |');
-  parts.push('| In-Path Assessment Checkpoints   | ' + pathAssessments + '    | 16 module checkpoints + 15 Opslane assessments + 26 project-bound nodes |');
-  parts.push('| Assessment Registry Records      | ' + regAssessments + '    | 19 module assessments + 28 project assessments in `assessments.json`|');
-  parts.push('| Canonical Concepts               | ' + conceptCount + '    | Fully resolved ownership without leaks in `concepts.json`         |');
-  parts.push('| Operational Categories           | ' + failureCategoryCount + '    | Mapped across 18 module coverage entries                          |\n');
+  parts.push('| Core Modules                     | ' + pad(coreModulesCount, 5) + ' | Modules 00 through 16, plus Module 18 (Flagship Opslane)          |');
+  parts.push('| Elective Modules                 | ' + pad(electiveModulesCount, 5) + ' | Module 17 (Advanced Electives)                                    |');
+  parts.push('| Total Modules                    | ' + pad(totalModulesCount, 5) + ' | Modules 00–18                                                     |');
+  parts.push('| Core Path Items (Metadata Total) | ' + pad(coreItems.length, 5) + ' | Total items array in `path.core.json` across all core modules     |');
+  parts.push('| Instructional Lessons & Labs     | ' + pad(lessons + labs, 5) + ' | ' + lessons + ' lessons + ' + labs + ' lab across Modules 00–16                         |');
+  parts.push('| Flagship Opslane Milestones      | ' + pad(checkpoints + capstones, 5) + ' | ' + checkpoints + ' checkpoints + ' + capstones + ' capstone defense in Module 18          |');
+  parts.push('| Learner Instructional Units      | ' + pad(lessons + labs + checkpoints + capstones, 5) + ' | ' + (lessons + labs) + ' instructional lessons/labs + ' + (checkpoints + capstones) + ' Opslane milestones            |');
+  parts.push('| Elective Items                   | ' + pad(electiveItems, 5) + ' | ' + electiveItems + ' advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |');
+  parts.push('| Projects                         | ' + pad(prjRecords, 5) + ' | ' + (prjRecords - flagshipProjectsCount) + ' module projects + ' + flagshipProjectsCount + ' flagship capstone project                  |');
+  parts.push('| In-Path Assessment Checkpoints   | ' + pad(pathAssessments, 5) + ' | End-of-module checkpoints, project reviews, and flagship Opslane milestones across Modules 00–18 |');
+  parts.push('| Assessment Registry Records      | ' + pad(regAssessments, 5) + ' | ' + moduleAssessments.length + ' module assessments + ' + projectAssessments.length + ' project assessments in `assessments.json`|');
+  parts.push('| Canonical Concepts               | ' + pad(conceptCount, 5) + ' | Fully resolved ownership without leaks in `concepts.json`         |');
+  parts.push('| Operational Categories           | ' + pad(failureCategoryCount, 5) + ' | Mapped across ' + coreModulesCount + ' module coverage entries                          |\n');
 
   // Module Map
   parts.push('## Module Map\n');
@@ -176,9 +194,18 @@ function generateFullReadme() {
   parts.push('| **43–50** | Flagship Implementation | Module 18 | Flagship Opslane: multi-tenant architecture, event bus, caching, graceful shutdown, production deployment |');
   parts.push('| **51–52** | Portfolio & Graduation Review | Module 16 | Portfolio packaging, architecture defense rehearsal, resume project bullets, mock interview prep |\n');
 
-  // Repository structure
+  // Repository structure — derived from the manifests and curriculum/ contents
+  // so adding a module, elective, or manifest cannot silently desync the tree.
+  const moduleDirs = [...core.modules]
+    .sort((a, b) => parseInt(a.id.replace('module-', ''), 10) - parseInt(b.id.replace('module-', ''), 10))
+    .map(m => '    ' + path.basename(m.path) + '/');
+  const curriculumFiles = fs.readdirSync('curriculum', { withFileTypes: true })
+    .filter(e => e.isFile() && (e.name.endsWith('.json') || (e.name.endsWith('.md') && e.name !== 'README.md')))
+    .map(e => e.name)
+    .sort();
+  const electiveDir = path.basename(electives.modules[0].path);
   parts.push('## Repository Structure\n');
-  parts.push('```\ncurriculum/\n  modules/\n    00-orientation/\n    01-computers-terminal-git-web/\n    02-go-setup-tooling/\n    03-programming-fundamentals/\n    04-functions-errors-data-semantics/\n    05-types-interfaces-packages-modules/\n    06-testing-debugging-refactoring/\n    07-cli-files-json-config/\n    08-http-rest-apis/\n    09-sql-postgres-persistence/\n    10-auth-security/\n    11-lifecycle-context-concurrency/\n    12-observability-diagnostics/\n    13-performance-memory-engineering/\n    14-architecture-distributed-systems/\n    15-docker-cicd-deployment/\n    16-portfolio-interview-readiness/\n    18-flagship-opslane/\n  electives/\n    advanced-electives/\n  companion-frontend/\n    README.md\n  assessments.json\n  concepts.json\n  crossrefs.json\n  failures.json\n  path.core.json\n  path.electives.json\n  projects.json\n  readme.contracts.json\n  schema.v3.json\n  GRADUATION_CRITERIA.md\n  PILOT_TESTING_PROTOCOL.md\ninternal/tools/curriculum/\n```\n');
+  parts.push('```\ncurriculum/\n  modules/\n' + moduleDirs.join('\n') + '\n  electives/\n    ' + electiveDir + '/\n  companion-frontend/\n    README.md\n' + curriculumFiles.map(f => '  ' + f).join('\n') + '\ninternal/tools/curriculum/\n```\n');
 
   parts.push('## Companion Tracks & Quality Assurance Protocols\n');
   parts.push('- **[Graduation Outcomes & Capstone Defense Rubric](GRADUATION_CRITERIA.md):** 6 observable competency outcomes (unassisted problem-solving, debugging, testing, disaster recovery, architectural defense, incident response) and formal Flagship Opslane oral defense protocol.');
@@ -286,21 +313,19 @@ function generateFullReadme() {
   parts.push('\n---\n');
   parts.push('# Assessments\n');
   parts.push('The assessment framework evaluates mastery across end-of-module milestones and practical project implementations.\n');
-  parts.push('### Module Assessments (19 Records)\n');
+  parts.push('### Module Assessments (' + moduleAssessments.length + ' Records)\n');
   parts.push('| ID | Title | Type | Passing Score |');
   parts.push('| -- | ----- | ---- | ------------- |');
 
-  const moduleAssessments = assessments.assessments.filter(a => a.id.startsWith('assessment-module-'));
   moduleAssessments.forEach(a => {
     const score = a.passing_score ? (String(a.passing_score).endsWith('%') ? a.passing_score : a.passing_score + '%') : '80%';
     parts.push('| `' + a.id + '` | **' + a.title + '** | ' + a.type + ' | ' + score + ' |');
   });
 
-  parts.push('\n### Project Assessments (28 Records)\n');
+  parts.push('\n### Project Assessments (' + projectAssessments.length + ' Records)\n');
   parts.push('| ID | Title | Type | Passing Score |');
   parts.push('| -- | ----- | ---- | ------------- |');
 
-  const projectAssessments = assessments.assessments.filter(a => !a.id.startsWith('assessment-module-'));
   projectAssessments.forEach(a => {
     const score = a.passing_score ? (String(a.passing_score).endsWith('%') ? a.passing_score : a.passing_score + '%') : '80%';
     parts.push('| `' + a.id + '` | **' + a.title + '** | ' + a.type + ' | ' + score + ' |');
@@ -314,6 +339,7 @@ function generateFullReadme() {
   refs.forEach(r => { relDist[r.relation] = (relDist[r.relation] || 0) + 1; });
 
   parts.push('Total cross-references: **' + refs.length + '**\n');
+  parts.push('> **Gating vs. lineage:** Hard progression gates are the `prerequisites` arrays in\n> `path.core.json` and `path.electives.json`. `builds_on` records the broader,\n> directional pedagogical lineage and must remain acyclic, but it is not the\n> field a learner-frontier tool should use to block progression.\n');
   parts.push('### Style Rules\n');
   parts.push('| Relation      | Template                                                     |');
   parts.push('| ------------- | ------------------------------------------------------------ |');
@@ -326,7 +352,7 @@ function generateFullReadme() {
   parts.push('| Relation      | Count | Description |');
   parts.push('| ------------- | ----- | ----------- |');
   parts.push('| related       | ' + (relDist.related || 0) + '   | Bidirectional conceptual links between related lessons |');
-  parts.push('| builds_on     | ' + (relDist.builds_on || 0) + '   | Strict directional pedagogical prerequisites |');
+  parts.push('| builds_on     | ' + (relDist.builds_on || 0) + '   | Directional pedagogical lineage (acyclic; not the hard gate) |');
   parts.push('| reinforced_in | ' + (relDist.reinforced_in || 0) + '   | Practical application links to projects and labs |');
   parts.push('| preview_only  | ' + (relDist.preview_only || 0) + '    | Early mental-model previews developed fully later |\n');
 
@@ -351,16 +377,41 @@ function generateFullReadme() {
   parts.push('| DB.*                 | rewrite          | module-09 | Database path must become SQL/Postgres-first with migrations and EXPLAIN. |');
   parts.push('| SEC.*                | rewrite          | module-10 | Security needs authn/authz strategy and secure API practice.              |\n');
 
-  parts.push('### Authoritative Quality Gates (17/17 Passing)\n');
-  parts.push('- `validate-schema`: 10 canonical JSON manifests valid against Schema 3.1.0\n- `validate-graph`: Strict DAG acyclicity across all item dependencies\n- `validate-lessons`: Zero machine role comments or unmotivated markers\n- `validate-prerequisite-closure`: Strict pedagogical progression across module boundaries\n- `validate-project-binding`: All 28 projects bound to valid curriculum placement anchors\n- `validate-no-placeholder-zm`: Zero mechanical placeholders across zero-magic blocks\n- `validate-assessment-completeness`: All 47 assessments equipped with weighted criteria\n- `validate-unique-tags`: Tag taxonomy consistency across core and electives\n- `validate-crossrefs`: Complete bidirectional graph integrity across all entities\n- `validate-concept-ownership`: All 62 concepts mapped to unambiguous canonical owners\n- `validate-cognitive-load`: Module pacing and cognitive density within verified bounds\n- `validate-operational-failures`: 13 operational failure categories mapped across 18 modules\n- `validate-failure-engineering`: Failure modes and detection strategies verified\n- `validate-zero-magic`: 92 golden lessons certified against pedagogical spec\n- `validate-physical-artifacts`: 441/441 physical lesson and elective READMEs verified on disk\n- `validate-assessment-artifacts`: 47 assessments + 14 Opslane milestones verified with complete physical suites\n- `validate-starter-parity`: 27 project starters (RED) and solutions (GREEN) verified with valid Go ASTs\n');
+  parts.push('### Authoritative Quality Gates\n');
+  parts.push([
+    '- `validate-schema`: ' + manifestCount + ' canonical JSON manifests valid against Schema 3.1.0',
+    '- `validate-graph`: Strict DAG acyclicity across all item dependencies',
+    '- `validate-lessons`: Zero machine role comments or unmotivated markers',
+    '- `validate-prerequisite-closure`: Strict pedagogical progression across module boundaries',
+    '- `validate-project-binding`: All ' + prjRecords + ' projects bound to valid curriculum placement anchors',
+    '- `validate-no-placeholder-zm`: Zero mechanical placeholders across zero-magic blocks',
+    '- `validate-assessment-completeness`: All ' + regAssessments + ' assessments equipped with weighted criteria',
+    '- `validate-unique-tags`: Tag taxonomy consistency across core and electives',
+    '- `validate-crossrefs`: Complete bidirectional graph integrity across all entities',
+    '- `validate-concept-ownership`: All ' + conceptCount + ' concepts mapped to unambiguous canonical owners',
+    '- `validate-cognitive-load`: Module pacing and cognitive density within verified bounds',
+    '- `validate-operational-failures`: ' + failureCategoryCount + ' operational failure categories mapped across ' + coreModulesCount + ' modules',
+    '- `validate-failure-engineering`: Failure modes and detection strategies verified',
+    '- `validate-zero-magic`: ' + goldenCount + ' golden lessons certified against pedagogical spec',
+    '- `validate-physical-artifacts`: ' + totalItemCount + '/' + totalItemCount + ' physical lesson and elective READMEs verified on disk',
+    '- `validate-assessment-artifacts`: ' + regAssessments + ' assessments + ' + inv.opslane_milestones + ' Opslane milestones verified with complete physical suites',
+    '- `validate-starter-parity`: ' + inv.starter_parity_projects + ' project starters (RED) and solutions (GREEN) verified with valid Go ASTs',
+    '- `validate-markdown-links`: All relative Markdown links verified with zero broken targets',
+    '- `validate-sese-navigation`: Single-entry, single-exit navigation flow verified',
+    '- `validate-project-scripts`: Script-backed project harness parity verified',
+    '- `validate-no-emojis`: Zero emoji violations across Markdown prose',
+    '- `validate-anchor-quotes`: Authoritative pioneer anchor quotes present in locked lessons',
+    '- `validate-diagram-palette`: Mermaid diagrams comply with the Dark Engineering Palette',
+    '- `validate-readme-contracts`: Documentation contracts satisfied per item family and subtype',
+  ].join('\n'));
 
   parts.push('### Validation Commands\n');
   parts.push('| Command | Purpose | Execution |');
   parts.push('| --- | --- | --- |');
-  parts.push('| **Run All Gates** | Execute full 17-gate curriculum test suite | `go run ./scripts/validate_curriculum.go` |');
+  parts.push('| **Run All Gates** | Execute full curriculum verification suite | `go run ./scripts/validate_curriculum.go` |');
   parts.push('| **Validate Schema** | Check JSON manifests and key ordering | `go run ./internal/tools/curriculum validate-schema` |');
   parts.push('| **Validate Graph** | Check DAG dependency structure | `go run ./internal/tools/curriculum validate-graph` |');
-  parts.push('| **Validate Physical** | Verify 441 physical READMEs | `go run ./internal/tools/curriculum validate-physical-artifacts` |');
+  parts.push('| **Validate Physical** | Verify ' + totalItemCount + ' physical READMEs | `go run ./internal/tools/curriculum validate-physical-artifacts` |');
   parts.push('| **Validate Assessments** | Verify 4-file assessment suites | `go run ./internal/tools/curriculum validate-assessment-artifacts` |');
   parts.push('| **Validate Code Parity** | Verify Go code and AST correctness | `go run ./internal/tools/curriculum validate-starter-parity` |\n');
 

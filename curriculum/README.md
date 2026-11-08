@@ -22,11 +22,11 @@
 | Instructional Lessons & Labs     | 321   | 320 lessons + 1 lab across Modules 00–16                         |
 | Flagship Opslane Milestones      | 15    | 14 checkpoints + 1 capstone defense in Module 18          |
 | Learner Instructional Units      | 336   | 321 instructional lessons/labs + 15 Opslane milestones            |
-| Elective Items                   | 20    | 20 advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |
-| Projects                         | 28    | 27 module projects + 1 flagship capstone defense project          |
-| In-Path Assessment Checkpoints   | 57    | 16 module checkpoints + 15 Opslane assessments + 26 project-bound nodes |
-| Assessment Registry Records      | 47    | 19 module assessments + 28 project assessments in `assessments.json`|
-| Canonical Concepts               | 62    | Fully resolved ownership without leaks in `concepts.json`         |
+| Elective Items                   | 26    | 26 advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |
+| Projects                         | 29    | 28 module projects + 1 flagship capstone project                  |
+| In-Path Assessment Checkpoints   | 57    | End-of-module checkpoints, project reviews, and flagship Opslane milestones across Modules 00–18 |
+| Assessment Registry Records      | 48    | 19 module assessments + 29 project assessments in `assessments.json`|
+| Canonical Concepts               | 69    | Fully resolved ownership without leaks in `concepts.json`         |
 | Operational Categories           | 13    | Mapped across 18 module coverage entries                          |
 
 ## Module Map
@@ -51,9 +51,9 @@
 | 15  | **Docker, CI/CD, and Deployment** | delivery | stable | 19 | 0 | 1 | 2 | 22 | `curriculum/modules/15-docker-cicd-deployment` |
 | 16  | **Portfolio and Interview Readiness** | career | stable | 15 | 0 | 1 | 2 | 18 | `curriculum/modules/16-portfolio-interview-readiness` |
 | 18  | **Flagship Opslane** | flagship | stable | 0 | 15 | 2 | 16 | 33 | `curriculum/modules/18-flagship-opslane` |
-| 17  | **Advanced Electives** | elective | stable | 20 | 0 | 0 | 0 | 20 | `curriculum/electives/advanced-electives` |
+| 17  | **Advanced Electives** | elective | stable | 26 | 0 | 0 | 0 | 26 | `curriculum/electives/advanced-electives` |
 | —   | **Core Subtotal** | — | — | **321** | **15** | **28** | **57** | **421** | *(Modules 00–16, 18)* |
-| —   | **Total Curriculum** | — | — | **341** | **15** | **28** | **57** | **441** | *(421 core items + 20 electives)* |
+| —   | **Total Curriculum** | — | — | **347** | **15** | **28** | **57** | **447** | *(421 core items + 26 electives)* |
 
 ## Workload Estimates & 52-Week Pacing Guide
 
@@ -118,17 +118,22 @@ curriculum/
     advanced-electives/
   companion-frontend/
     README.md
+  GRADUATION_CRITERIA.md
+  PILOT_TESTING_PROTOCOL.md
   assessments.json
   concepts.json
+  contributor-authoring-guide.md
   crossrefs.json
+  expected.json
   failures.json
   path.core.json
   path.electives.json
   projects.json
+  quality-rubric.md
   readme.contracts.json
   schema.v3.json
-  GRADUATION_CRITERIA.md
-  PILOT_TESTING_PROTOCOL.md
+  workspace.json
+  zero-magic-authoring-spec.md
 internal/tools/curriculum/
 ```
 
@@ -150,16 +155,16 @@ internal/tools/curriculum/
 
 | #   | Type    | Slug | Title | Minutes |
 | --- | ------- | ---- | ----- | ------- |
-| 1   | concept | how-to-use-this-repository | **How to use this repository** | 45 |
-| 2   | concept | what-zero-magic-means | **What zero magic means** | 45 |
-| 3   | concept | how-lessons-exercises-projects-and-checkpoints-work | **How lessons, exercises, projects, and checkpoints work** | 120 |
-| 4   | concept | how-to-run-code-in-this-repository | **How to run code in this repository** | 45 |
-| 5   | concept | how-starter-folders-work | **How starter folders work** | 45 |
-| 6   | concept | how-assessments-work | **How assessments work** | 45 |
-| 7   | concept | how-to-ask-good-debugging-questions | **How to ask good debugging questions** | 45 |
-| 8   | concept | what-job-ready-means | **What job-ready means** | 45 |
-| 9   | concept | how-to-use-the-roadmap | **How to use the roadmap** | 45 |
-| 10   | concept | how-to-build-a-portfolio-from-this-curriculum | **How to build a portfolio from this curriculum** | 45 |
+| 1   | orientation | how-to-use-this-repository | **How to use this repository** | 45 |
+| 2   | orientation | what-zero-magic-means | **What zero magic means** | 45 |
+| 3   | orientation | how-lessons-exercises-projects-and-checkpoints-work | **How lessons, exercises, projects, and checkpoints work** | 120 |
+| 4   | orientation | how-to-run-code-in-this-repository | **How to run code in this repository** | 45 |
+| 5   | orientation | how-starter-folders-work | **How starter folders work** | 45 |
+| 6   | orientation | how-assessments-work | **How assessments work** | 45 |
+| 7   | orientation | how-to-ask-good-debugging-questions | **How to ask good debugging questions** | 45 |
+| 8   | orientation | what-job-ready-means | **What job-ready means** | 45 |
+| 9   | orientation | how-to-use-the-roadmap | **How to use the roadmap** | 45 |
+| 10   | orientation | how-to-build-a-portfolio-from-this-curriculum | **How to build a portfolio from this curriculum** | 45 |
 
 ## 1. Computers, Terminal, Git, and the Web
 
@@ -710,6 +715,12 @@ internal/tools/curriculum/
 | 18   | reference | blue-green-deployments | **Blue/green deployments** | 45 |
 | 19   | reference | microservice-splitting | **Microservice splitting** | 45 |
 | 20   | reference | deeper-distributed-systems | **Deeper distributed systems** | 45 |
+| 21   | concept   | why-orchestration | **Why orchestration: desired state and the control loop** | 40 |
+| 22   | concept   | kubernetes-object-model | **Pods, Deployments, Services, and Ingress** | 45 |
+| 23   | operations | config-and-security-context | **Configuration, secrets, and security context** | 50 |
+| 24   | operations | probes-and-graceful-shutdown | **Probes, lifecycle, and graceful shutdown** | 55 |
+| 25   | operations | resources-and-go-runtime | **Resources, the Go runtime, and autoscaling** | 55 |
+| 26   | operations | rollouts-and-troubleshooting | **Rollouts, rollback, and troubleshooting** | 55 |
 
 ---
 
@@ -744,7 +755,8 @@ internal/tools/curriculum/
 | 25   | Mod 15 | **Dockerized Service with CI/CD** | portfolio-project | delivery | advanced |
 | 26   | Mod 16 | **Portfolio Review Pack** | portfolio-project | career | advanced |
 | 27   | Mod 17 | **Advanced Electives Capstone** | mini-project | elective | advanced |
-| 28   | Mod 18 | **Opslane Flagship** | flagship | flagship | flagship |
+| 28   | Mod 17 | **Kubernetes Go Service Capstone** | mini-project | elective | advanced |
+| 29   | Mod 18 | **Opslane Flagship** | flagship | flagship | flagship |
 
 ---
 
@@ -776,7 +788,7 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 | `assessment-module-17` | **Module 17 Assessment — Electives and Advanced Engineering** | project-review | 80% |
 | `assessment-module-18` | **Module 18 Assessment — Flagship Opslane** | capstone-defense | 80% |
 
-### Project Assessments (28 Records)
+### Project Assessments (29 Records)
 
 | ID | Title | Type | Passing Score |
 | -- | ----- | ---- | ------------- |
@@ -808,6 +820,7 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 | `assessment-project-dockerized-service-cicd` | **Assessment — Dockerized Service with CI/CD** | project-review | 80% |
 | `assessment-project-portfolio-review-pack` | **Assessment — Portfolio Review Pack** | project-review | 80% |
 | `assessment-project-opslane` | **Assessment — Opslane Flagship** | project-review | 80% |
+| `assessment-project-kubernetes-go-service` | **Assessment — Kubernetes Go Service Capstone** | project-review | 80% |
 
 ---
 
@@ -865,34 +878,40 @@ Total cross-references: **2086**
 | DB.*                 | rewrite          | module-09 | Database path must become SQL/Postgres-first with migrations and EXPLAIN. |
 | SEC.*                | rewrite          | module-10 | Security needs authn/authz strategy and secure API practice.              |
 
-### Authoritative Quality Gates (17/17 Passing)
+### Authoritative Quality Gates
 
-- `validate-schema`: 10 canonical JSON manifests valid against Schema 3.1.0
+- `validate-schema`: 11 canonical JSON manifests valid against Schema 3.1.0
 - `validate-graph`: Strict DAG acyclicity across all item dependencies
 - `validate-lessons`: Zero machine role comments or unmotivated markers
 - `validate-prerequisite-closure`: Strict pedagogical progression across module boundaries
-- `validate-project-binding`: All 28 projects bound to valid curriculum placement anchors
+- `validate-project-binding`: All 29 projects bound to valid curriculum placement anchors
 - `validate-no-placeholder-zm`: Zero mechanical placeholders across zero-magic blocks
-- `validate-assessment-completeness`: All 47 assessments equipped with weighted criteria
+- `validate-assessment-completeness`: All 48 assessments equipped with weighted criteria
 - `validate-unique-tags`: Tag taxonomy consistency across core and electives
 - `validate-crossrefs`: Complete bidirectional graph integrity across all entities
-- `validate-concept-ownership`: All 62 concepts mapped to unambiguous canonical owners
+- `validate-concept-ownership`: All 69 concepts mapped to unambiguous canonical owners
 - `validate-cognitive-load`: Module pacing and cognitive density within verified bounds
 - `validate-operational-failures`: 13 operational failure categories mapped across 18 modules
 - `validate-failure-engineering`: Failure modes and detection strategies verified
-- `validate-zero-magic`: 92 golden lessons certified against pedagogical spec
-- `validate-physical-artifacts`: 441/441 physical lesson and elective READMEs verified on disk
-- `validate-assessment-artifacts`: 47 assessments + 14 Opslane milestones verified with complete physical suites
+- `validate-zero-magic`: 356 golden lessons certified against pedagogical spec
+- `validate-physical-artifacts`: 447/447 physical lesson and elective READMEs verified on disk
+- `validate-assessment-artifacts`: 48 assessments + 14 Opslane milestones verified with complete physical suites
 - `validate-starter-parity`: 27 project starters (RED) and solutions (GREEN) verified with valid Go ASTs
-
+- `validate-markdown-links`: All relative Markdown links verified with zero broken targets
+- `validate-sese-navigation`: Single-entry, single-exit navigation flow verified
+- `validate-project-scripts`: Script-backed project harness parity verified
+- `validate-no-emojis`: Zero emoji violations across Markdown prose
+- `validate-anchor-quotes`: Authoritative pioneer anchor quotes present in locked lessons
+- `validate-diagram-palette`: Mermaid diagrams comply with the Dark Engineering Palette
+- `validate-readme-contracts`: Documentation contracts satisfied per item family and subtype
 ### Validation Commands
 
 | Command | Purpose | Execution |
 | --- | --- | --- |
-| **Run All Gates** | Execute full 24-gate curriculum test suite | `go run ./scripts/validate_curriculum.go` |
+| **Run All Gates** | Execute full curriculum verification suite | `go run ./scripts/validate_curriculum.go` |
 | **Validate Schema** | Check JSON manifests and key ordering | `go run ./internal/tools/curriculum validate-schema` |
 | **Validate Graph** | Check DAG dependency structure | `go run ./internal/tools/curriculum validate-graph` |
-| **Validate Physical** | Verify 441 physical READMEs | `go run ./internal/tools/curriculum validate-physical-artifacts` |
+| **Validate Physical** | Verify 447 physical READMEs | `go run ./internal/tools/curriculum validate-physical-artifacts` |
 | **Validate Assessments** | Verify 4-file assessment suites | `go run ./internal/tools/curriculum validate-assessment-artifacts` |
 | **Validate Code Parity** | Verify Go code and AST correctness | `go run ./internal/tools/curriculum validate-starter-parity` |
 

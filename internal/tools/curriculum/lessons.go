@@ -7,213 +7,275 @@ import (
 	"strings"
 )
 
+// lessonIssue is one content-shape issue found by the lesson validator.
+type lessonIssue struct {
+	Sev severity
+	Msg string
+}
+
 func validateLessons() {
 	fmt.Println("=== validate-lessons ===")
-	ok := true
 
 	var core CoreBundle
 	var electives ElectiveBundle
 	readJSON("path.core.json", &core)
 	readJSON("path.electives.json", &electives)
 
-	allBundles := []struct {
+	type bundle struct {
 		modules []Module
 		items   []Item
-	}{
+	}
+	allBundles := []bundle{
 		{core.Modules, core.Items},
 		{electives.Modules, electives.Items},
 	}
 
-	// Statuses that should have content on disk
+	allItems := make([]Item, 0, len(core.Items)+len(electives.Items))
+	allItems = append(allItems, core.Items...)
+	allItems = append(allItems, electives.Items...)
+
+	// Statuses that should have content on disk.
 	contentStatuses := map[string]bool{
 		"ready": true, "published": true, "live": true,
 		"review": true, "complete": true,
 	}
 
-	// 1. Check lesson source directory structure
+	// Map every item's resolved README path to its id, so a NEXT UP link can be
+	// validated against the item's declared next_item_ids.
+	idByReadme := make(map[string]string, len(allItems))
+	for _, it := range allItems {
+		if it.Files != nil && it.Files.ReadmePath != "" {
+			idByReadme[filepath.Clean(resolvePath(it.Files.ReadmePath))] = it.ID
+		}
+	}
+
+	// 1. Check lesson source directory structure (structural: always blocks).
 	warnedMissing := make(map[string]bool)
-	warn := func(path string, msg string) {
+	missing := func(path, msg string) {
 		if !warnedMissing[path] {
-			warnf("lesson path '%s': %s", path, msg)
+			errorf("lesson path '%s': %s", path, msg)
 			warnedMissing[path] = true
-			ok = false
 		}
 	}
 
-	for _, bundle := range allBundles {
-		for _, mod := range bundle.modules {
-			for _, item := range bundle.items {
-				if item.ModuleID != mod.ID {
+	for _, b := range allBundles {
+		for _, mod := range b.modules {
+			for _, item := range b.items {
+				if item.ModuleID != mod.ID || item.Files == nil || !contentStatuses[item.Status] {
 					continue
 				}
-				if item.Files == nil {
-					continue
-				}
-				if !contentStatuses[item.Status] {
-					continue
-				}
-
-				// Check readme exists
-				if item.Files.ReadmePath != "" {
-					rp := resolvePath(item.Files.ReadmePath)
-					if !pathExists(rp) {
-						warn(item.Files.ReadmePath, "README not found")
+				check := func(path, label string) {
+					if path != "" && !pathExists(resolvePath(path)) {
+						missing(path, label+" not found")
 					}
 				}
-
-				// Check main source file exists
-				if item.Files.MainPath != "" {
-					mp := resolvePath(item.Files.MainPath)
-					if !pathExists(mp) {
-						warn(item.Files.MainPath, "main source not found")
-					}
-				}
-
-				// Check starter code exists
-				if item.Files.StarterPath != "" {
-					sp := resolvePath(item.Files.StarterPath)
-					if !pathExists(sp) {
-						warn(item.Files.StarterPath, "starter code not found")
-					}
-				}
-
-				// Check solution exists
-				if item.Files.SolutionPath != "" {
-					sol := resolvePath(item.Files.SolutionPath)
-					if !pathExists(sol) {
-						warn(item.Files.SolutionPath, "solution not found")
-					}
-				}
-
-				// Check tests exist
-				if item.Files.TestPath != "" {
-					tp := resolvePath(item.Files.TestPath)
-					if !pathExists(tp) {
-						warn(item.Files.TestPath, "test file not found")
-					}
-				}
+				check(item.Files.ReadmePath, "README")
+				check(item.Files.MainPath, "main source")
+				check(item.Files.StarterPath, "starter code")
+				check(item.Files.SolutionPath, "solution")
+				check(item.Files.TestPath, "test file")
 			}
 		}
 	}
 
-	// 2. Check RUN: headers in source files
-	for _, bundle := range allBundles {
-		for _, mod := range bundle.modules {
-			for _, item := range bundle.items {
-				if item.ModuleID != mod.ID {
+	var issues []lessonIssue
+
+	// 2. Check verification.mode consistency (content-shape).
+	// automated => a run or test command must be declared
+	// manual    => at least one manual step must be declared
+	// mixed     => a run/test command or at least one manual step
+	modeChecked := 0
+	for _, item := range allItems {
+		if item.Verification == nil {
+			continue
+		}
+		modeChecked++
+		sev := contentShapeSeverity(item)
+		hasCmd := strings.TrimSpace(item.Verification.RunCommand) != "" || strings.TrimSpace(item.Verification.TestCommand) != ""
+		hasSteps := len(item.Verification.ManualSteps) > 0
+		switch item.Verification.Mode {
+		case "automated":
+			if !hasCmd {
+				issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: verification.mode=automated but no run_command/test_command declared", item.ID)})
+			}
+		case "manual":
+			if !hasSteps {
+				issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: verification.mode=manual but no manual_steps declared", item.ID)})
+			}
+		case "mixed":
+			if !hasCmd && !hasSteps {
+				issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: verification.mode=mixed but neither a command nor manual_steps is declared", item.ID)})
+			}
+		default:
+			issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: verification.mode '%s' is not 'automated', 'manual', or 'mixed'", item.ID, item.Verification.Mode)})
+		}
+	}
+
+	// 3. Check README NEXT UP footers (content-shape).
+	nextChecked := 0
+	for _, b := range allBundles {
+		for _, mod := range b.modules {
+			for _, item := range b.items {
+				if item.ModuleID != mod.ID || item.Files == nil || item.Files.ReadmePath == "" {
 					continue
 				}
-				if item.Files == nil || item.Files.MainPath == "" {
+				if item.Type != "lesson" && item.Type != "lab" {
 					continue
 				}
-				if item.Verification == nil {
-					continue
-				}
-				mp := filepath.Join(curriculumDir, "..", item.Files.MainPath)
-				data, err := os.ReadFile(mp)
+				fullPath := resolvePath(item.Files.ReadmePath)
+				data, err := os.ReadFile(fullPath)
 				if err != nil {
 					continue
 				}
-				content := string(data)
-				runHeader := fmt.Sprintf("RUN: %s", item.Verification.RunCommand)
-				if !strings.Contains(content, runHeader) {
-					warnf("%s (%s): RUN header mismatch — expected '%s'", item.ID, item.Files.MainPath, runHeader)
-					ok = false
+				nextChecked++
+				sev := contentShapeSeverity(item)
+
+				section, found := nextUpSection(string(data))
+				if !found {
+					issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: missing '## NEXT UP' section in README", item.ID)})
+					continue
+				}
+				if len(item.NextItemIDs) == 0 {
+					continue
+				}
+				if !nextUpReferencesValid(section, item, fullPath, idByReadme) {
+					issues = append(issues, lessonIssue{sev, fmt.Sprintf("%s: NEXT UP section does not link to a declared next item %v", item.ID, item.NextItemIDs)})
 				}
 			}
 		}
 	}
 
-	// 3. Check README NEXT UP footers
-	for _, bundle := range allBundles {
-		for _, mod := range bundle.modules {
-			for _, item := range bundle.items {
-				if item.ModuleID != mod.ID {
-					continue
-				}
-				if item.Files == nil || item.Files.ReadmePath == "" {
-					continue
-				}
-				rp := filepath.Join(curriculumDir, "..", item.Files.ReadmePath)
-				data, err := os.ReadFile(rp)
-				if err != nil {
-					continue
-				}
-				content := string(data)
-				lines := strings.Split(content, "\n")
+	reportLessonIssues(issues, modeChecked, nextChecked)
 
-				// Find the NEXT UP footer
-				var hasFooter bool
-				for _, line := range lines {
-					if strings.Contains(line, "NEXT UP:") {
-						hasFooter = true
-
-						// Check it references a valid next item
-						if len(item.NextItemIDs) > 0 {
-							// Build a lookup from item IDs to titles
-							titleByID := make(map[string]string)
-							for _, i := range bundle.items {
-								titleByID[i.ID] = i.Title
-							}
-							var found bool
-							for _, nid := range item.NextItemIDs {
-								if title, ok := titleByID[nid]; ok {
-									if strings.Contains(line, title) || strings.Contains(line, nid) {
-										found = true
-										break
-									}
-								}
-							}
-							if !found {
-								warnf("%s: NEXT UP footer may reference wrong item (expected one of %v)", item.ID, item.NextItemIDs)
-								ok = false
-							}
-						}
-						break
-					}
-				}
-				if !hasFooter && item.Type == "lesson" {
-					warnf("%s: missing NEXT UP footer in README", item.ID)
-					ok = false
-				}
-			}
-		}
-	}
-
-	// 4. Check Machine Role comments in source files (machine execution role tags)
+	// 4. Count machine role comments in source files (informational).
 	machineRoleCount := 0
-	for _, bundle := range allBundles {
-		for _, mod := range bundle.modules {
-			for _, item := range bundle.items {
-				if item.ModuleID != mod.ID {
-					continue
-				}
-				if item.Files == nil || item.Files.MainPath == "" {
-					continue
-				}
-				mp := filepath.Join(curriculumDir, "..", item.Files.MainPath)
-				data, err := os.ReadFile(mp)
-				if err != nil {
-					continue
-				}
-				content := string(data)
-				lines := strings.Split(content, "\n")
-				for _, line := range lines {
-					trimmed := strings.TrimSpace(line)
-					if strings.HasPrefix(trimmed, "//go:role") || strings.HasPrefix(trimmed, "/*go:role") {
-						machineRoleCount++
-					}
-				}
+	for _, item := range allItems {
+		if item.Files == nil || item.Files.MainPath == "" {
+			continue
+		}
+		data, err := os.ReadFile(resolvePath(item.Files.MainPath))
+		if err != nil {
+			continue
+		}
+		for _, line := range strings.Split(string(data), "\n") {
+			trimmed := strings.TrimSpace(line)
+			if strings.HasPrefix(trimmed, "//go:role") || strings.HasPrefix(trimmed, "/*go:role") {
+				machineRoleCount++
 			}
 		}
 	}
 	fmt.Printf("  Machine role comments found: %d\n", machineRoleCount)
+}
 
-	if ok {
-		fmt.Println("  All lesson checks passed.")
-	} else {
-		fmt.Println("  Lesson checks completed with warnings/errors.")
+const maxLessonPrint = 40
+
+// reportLessonIssues prints lesson issues (errors first), counting all of them
+// while printing at most maxLessonPrint per severity.
+func reportLessonIssues(issues []lessonIssue, modeChecked, nextChecked int) {
+	errTotal, warnTotal := 0, 0
+	printedErr, printedWarn := 0, 0
+	for _, is := range issues {
+		switch is.Sev {
+		case sevError:
+			errTotal++
+			errorCount++
+			if printedErr < maxLessonPrint {
+				fmt.Fprintf(os.Stderr, "ERROR: %s\n", is.Msg)
+				printedErr++
+			}
+		case sevWarning:
+			warnTotal++
+			warningCount++
+			if printedWarn < maxLessonPrint {
+				fmt.Fprintf(os.Stderr, "WARN: %s\n", is.Msg)
+				printedWarn++
+			}
+		}
 	}
+	fmt.Printf("  Checked verification.mode on %d items and NEXT UP on %d lessons (%d errors, %d advisory).\n",
+		modeChecked, nextChecked, errTotal, warnTotal)
+	if warnTotal > maxLessonPrint {
+		fmt.Printf("  (advisory output truncated at %d; %d total)\n", maxLessonPrint, warnTotal)
+	}
+	fmt.Println("  All lesson checks passed.")
+}
+
+// nextUpSection returns the text of the NEXT UP section (from the heading to the
+// next H2 or EOF) and whether the heading was found.
+func nextUpSection(content string) (string, bool) {
+	lines := strings.Split(content, "\n")
+	start := -1
+	for i, line := range lines {
+		trimmed := strings.TrimSpace(line)
+		if !strings.HasPrefix(trimmed, "## ") {
+			continue
+		}
+		if headingMatches(strings.TrimSpace(strings.TrimPrefix(trimmed, "## ")), "NEXT UP") {
+			start = i
+			break
+		}
+	}
+	if start < 0 {
+		return "", false
+	}
+	var sb strings.Builder
+	for i := start + 1; i < len(lines); i++ {
+		if strings.HasPrefix(strings.TrimSpace(lines[i]), "## ") {
+			break
+		}
+		sb.WriteString(lines[i])
+		sb.WriteString("\n")
+	}
+	return sb.String(), true
+}
+
+// nextUpReferencesValid reports whether the NEXT UP section links to (or names)
+// one of the item's declared next items.
+func nextUpReferencesValid(section string, item Item, readmePath string, idByReadme map[string]string) bool {
+	baseDir := filepath.Dir(readmePath)
+
+	// 1. Follow markdown links and match them to a next item's README.
+	for _, target := range extractMarkdownTargets(section) {
+		target = strings.SplitN(target, "#", 2)[0]
+		if target == "" || strings.Contains(target, "://") {
+			continue
+		}
+		resolved := filepath.Clean(filepath.Join(baseDir, filepath.FromSlash(target)))
+		if id, ok := idByReadme[resolved]; ok {
+			for _, nid := range item.NextItemIDs {
+				if id == nid {
+					return true
+				}
+			}
+		}
+	}
+
+	// 2. Fallback: the section names a next item id directly.
+	for _, nid := range item.NextItemIDs {
+		if strings.Contains(section, nid) {
+			return true
+		}
+	}
+	return false
+}
+
+// extractMarkdownTargets returns the link targets of every [label](target) in text.
+func extractMarkdownTargets(text string) []string {
+	var out []string
+	for {
+		open := strings.Index(text, "](")
+		if open < 0 {
+			break
+		}
+		rest := text[open+2:]
+		close := strings.Index(rest, ")")
+		if close < 0 {
+			break
+		}
+		out = append(out, strings.TrimSpace(rest[:close]))
+		text = rest[close+1:]
+	}
+	return out
 }
 
 func pathExists(path string) bool {

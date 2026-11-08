@@ -57,13 +57,13 @@ func validateGraph() {
 	for _, item := range allItems {
 		for _, prereq := range item.Prerequisites {
 			if _, exists := itemMap[prereq]; !exists {
-				warnf("%s: prerequisite '%s' does not exist", item.ID, prereq)
+				errorf("%s: prerequisite '%s' does not exist", item.ID, prereq)
 				ok = false
 			}
 		}
 		for _, np := range item.NextItemIDs {
 			if _, exists := itemMap[np]; !exists {
-				warnf("%s: next_item_id '%s' does not exist", item.ID, np)
+				errorf("%s: next_item_id '%s' does not exist", item.ID, np)
 				ok = false
 			}
 		}
@@ -73,7 +73,7 @@ func validateGraph() {
 	for _, mod := range core.Modules {
 		for _, prereq := range mod.Prerequisites {
 			if _, exists := moduleMap[prereq]; !exists {
-				warnf("module '%s': prerequisite '%s' does not exist", mod.ID, prereq)
+				errorf("module '%s': prerequisite '%s' does not exist", mod.ID, prereq)
 				ok = false
 			}
 		}
@@ -82,11 +82,11 @@ func validateGraph() {
 	// 3. Check crossref targets exist
 	for _, ref := range crossrefs.Crossrefs.References {
 		if _, exists := itemMap[ref.FromID]; !exists {
-			warnf("crossref from '%s' does not exist", ref.FromID)
+			errorf("crossref from '%s' does not exist", ref.FromID)
 			ok = false
 		}
 		if _, exists := itemMap[ref.TargetID]; !exists {
-			warnf("crossref to '%s' does not exist", ref.TargetID)
+			errorf("crossref to '%s' does not exist", ref.TargetID)
 			ok = false
 		}
 	}
@@ -99,7 +99,7 @@ func validateGraph() {
 		checkRefs := func(refs []CrossrefRef, category string) {
 			for _, ref := range refs {
 				if _, exists := itemMap[ref.TargetID]; !exists {
-					warnf("%s: crossrefs.%s target '%s' does not exist", item.ID, category, ref.TargetID)
+					errorf("%s: crossrefs.%s target '%s' does not exist", item.ID, category, ref.TargetID)
 					ok = false
 				}
 			}
@@ -139,7 +139,7 @@ func validateGraph() {
 			}
 			toMod := moduleOrder[toItem.ModuleID]
 			if toMod > fromMod || (toMod == fromMod && toItem.Order >= fromItem.Order) {
-				warnf("%s: builds_on target '%s' is not earlier (module %d order %d vs module %d order %d)",
+				errorf("%s: builds_on target '%s' is not earlier (module %d order %d vs module %d order %d)",
 					fromID, targetID, toMod, toItem.Order, fromMod, fromItem.Order)
 				ok = false
 			}
@@ -180,7 +180,7 @@ func validateGraph() {
 				continue
 			}
 			if !reachable[item.ID] {
-				warnf("%s (module %s): not reachable from module entry points %v", item.ID, mod.ID, mod.EntryItemIDs)
+				errorf("%s (module %s): not reachable from module entry points %v", item.ID, mod.ID, mod.EntryItemIDs)
 				ok = false
 			}
 		}
@@ -206,7 +206,7 @@ func validateGraph() {
 	for _, item := range allItems {
 		if item.Proof != nil && item.Proof.AssessmentID != "" {
 			if !strings.HasPrefix(item.Proof.AssessmentID, "assessment-") {
-				warnf("%s: assessment_id '%s' does not follow 'assessment-*' convention", item.ID, item.Proof.AssessmentID)
+				errorf("%s: assessment_id '%s' does not follow 'assessment-*' convention", item.ID, item.Proof.AssessmentID)
 				ok = false
 			}
 		}
@@ -230,7 +230,7 @@ func detectCycles(label string, allItems []Item, adjacency map[string][]string) 
 	var dfs func(id string)
 	dfs = func(id string) {
 		if inStack[id] {
-			warnf("%s cycle detected involving item '%s'", label, id)
+			errorf("%s cycle detected involving item '%s'", label, id)
 			hasCycle = true
 			return
 		}

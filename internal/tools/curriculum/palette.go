@@ -15,13 +15,8 @@ func validateDiagramPalette() {
 	var core CoreBundle
 	readJSON("path.core.json", &core)
 
-	lockedModules := map[string]bool{
-		"module-00": true,
-		"module-01": true,
-		"module-02": true,
-		"module-03": true,
-		"module-04": true,
-	}
+	// Locked modules (single source of truth: curriculum/expected.json).
+	lockedModules := lockedModuleSet()
 
 	diagramsChecked := 0
 	nonCompliant := 0
@@ -70,7 +65,7 @@ func validateDiagramPalette() {
 					strings.Contains(diagram, "#22272e")
 
 				if !hasPalette {
-					warnf("%s (%s): Mermaid flowchart lacks Dark Engineering Palette styling in %s", item.ID, item.Slug, item.Files.ReadmePath)
+					errorf("%s (%s): Mermaid flowchart lacks Dark Engineering Palette styling in %s", item.ID, item.Slug, item.Files.ReadmePath)
 					nonCompliant++
 					ok = false
 				}
@@ -87,4 +82,3 @@ func validateDiagramPalette() {
 		fmt.Println("  Diagram palette validation failed with warnings/errors.")
 	}
 }
-

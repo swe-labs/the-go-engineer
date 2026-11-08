@@ -33,7 +33,7 @@ func validateMarkdownLinks() {
 
 		file, err := os.Open(path)
 		if err != nil {
-			warnf("cannot open markdown file %s: %v", path, err)
+			errorf("cannot open markdown file %s: %v", path, err)
 			ok = false
 			return nil
 		}
@@ -92,7 +92,7 @@ func validateMarkdownLinks() {
 				resolved := filepath.Clean(filepath.Join(dir, cleanTarget))
 				if _, err := os.Stat(resolved); err != nil {
 					relSrc, _ := filepath.Rel(curriculumDir, path)
-					warnf("%s:%d -> '%s' (target does not exist on disk: %s)", relSrc, lineNo, target, resolved)
+					errorf("%s:%d -> '%s' (target does not exist on disk: %s)", relSrc, lineNo, target, resolved)
 					brokenLinks++
 					ok = false
 				}
@@ -102,7 +102,7 @@ func validateMarkdownLinks() {
 	})
 
 	if err != nil {
-		warnf("error walking markdown files in %s: %v", curriculumDir, err)
+		errorf("error walking markdown files in %s: %v", curriculumDir, err)
 		ok = false
 	}
 
@@ -113,4 +113,3 @@ func validateMarkdownLinks() {
 		fmt.Println("  Markdown link validation failed with broken links.")
 	}
 }
-

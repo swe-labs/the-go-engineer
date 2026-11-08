@@ -13,8 +13,10 @@ func validateSchema() {
 	fmt.Println("=== validate-schema ===")
 	ok := true
 
-	// 1. Parse all 9 canonical active JSON manifests and verify metadata consistency
+	// 1. Parse all canonical active JSON manifests and verify metadata consistency
+	exp := loadExpected()
 	files := []string{
+		"expected.json",
 		"workspace.json",
 		"path.core.json",
 		"path.electives.json",
@@ -29,12 +31,12 @@ func validateSchema() {
 		fullPath := fmt.Sprintf("%s/%s", curriculumDir, f)
 		data, err := os.ReadFile(fullPath)
 		if err != nil {
-			warnf("cannot read %s: %v", f, err)
+			errorf("cannot read %s: %v", f, err)
 			ok = false
 			continue
 		}
 		if !json.Valid(data) {
-			warnf("%s: invalid JSON", f)
+			errorf("%s: invalid JSON", f)
 			ok = false
 			continue
 		}
@@ -47,19 +49,19 @@ func validateSchema() {
 		}
 		if err := json.Unmarshal(data, &header); err == nil {
 			if header.SchemaVersion != "3.1.0" {
-				warnf("%s: expected schema_version '3.1.0', got '%s'", f, header.SchemaVersion)
+				errorf("%s: expected schema_version '3.1.0', got '%s'", f, header.SchemaVersion)
 				ok = false
 			}
 			if header.CurriculumVersion != "3.0.0" {
-				warnf("%s: expected curriculum_version '3.0.0', got '%s'", f, header.CurriculumVersion)
+				errorf("%s: expected curriculum_version '3.0.0', got '%s'", f, header.CurriculumVersion)
 				ok = false
 			}
 			if header.Status != "stable" {
-				warnf("%s: expected status 'stable', got '%s'", f, header.Status)
+				errorf("%s: expected status 'stable', got '%s'", f, header.Status)
 				ok = false
 			}
-			if header.LastUpdated != "2026-10-23" {
-				warnf("%s: expected last_updated '2026-10-23', got '%s'", f, header.LastUpdated)
+			if header.LastUpdated != exp.LastUpdated {
+				errorf("%s: expected last_updated '%s' (from expected.json), got '%s'", f, exp.LastUpdated, header.LastUpdated)
 				ok = false
 			}
 		}
@@ -70,10 +72,10 @@ func validateSchema() {
 	schemaPath := filepath.Join(curriculumDir, "schema.v3.json")
 	schemaData, err := os.ReadFile(schemaPath)
 	if err != nil {
-		warnf("cannot read schema.v3.json: %v", err)
+		errorf("cannot read schema.v3.json: %v", err)
 		ok = false
 	} else if !json.Valid(schemaData) {
-		warnf("schema.v3.json: invalid JSON")
+		errorf("schema.v3.json: invalid JSON")
 		ok = false
 	} else {
 		var schemaMeta struct {
@@ -82,53 +84,68 @@ func validateSchema() {
 			Title  string `json:"title"`
 		}
 		if err := json.Unmarshal(schemaData, &schemaMeta); err != nil || schemaMeta.ID == "" || schemaMeta.Schema == "" {
-			warnf("schema.v3.json: missing $id or $schema")
+			errorf("schema.v3.json: missing $id or $schema")
 			ok = false
 		} else {
 			fmt.Printf("  schema.v3.json: valid JSON Schema definition\n")
 		}
 	}
 
-	// Verify readme.contracts.json defines core contracts and anti-overengineering rules
+	// Verify readme.contracts.json defines the full contract registry, with a
+	// small required-heading core, an optional allowlist, a selector, and the
+	// lesson subtype modifiers (registry v2).
+	type contractShape struct {
+		ID               string         `json:"id"`
+		AppliesTo        string         `json:"applies_to"`
+		Shape            string         `json:"shape"`
+		Selector         map[string]any `json:"selector"`
+		RequiredHeadings []string       `json:"required_headings"`
+		OptionalHeadings []string       `json:"optional_headings"`
+		SubtypeModifiers map[string]any `json:"subtype_modifiers"`
+	}
 	var contractsBundle struct {
-		Contracts []struct {
-			ID                   string         `json:"id"`
-			AppliesTo            string         `json:"applies_to"`
-			CoreRequiredHeadings []string       `json:"core_required_headings"`
-			ContextualHeadings   []string       `json:"contextual_headings"`
-			SubtypeProfiles      map[string]any `json:"subtype_profiles"`
-		} `json:"contracts"`
+		Contracts []contractShape `json:"contracts"`
 	}
 	readJSON("readme.contracts.json", &contractsBundle)
-	contractMap := make(map[string]struct {
-		CoreRequiredHeadings []string
-		ContextualHeadings   []string
-		SubtypeProfiles      map[string]any
-	})
+	contractMap := make(map[string]contractShape)
 	for _, c := range contractsBundle.Contracts {
-		contractMap[c.ID] = struct {
-			CoreRequiredHeadings []string
-			ContextualHeadings   []string
-			SubtypeProfiles      map[string]any
-		}{c.CoreRequiredHeadings, c.ContextualHeadings, c.SubtypeProfiles}
+		contractMap[c.ID] = c
 	}
 
-	expectedContracts := []string{"root.v3", "module.v3", "lesson.v3", "elective-lesson.v3", "project.v3", "companion-stage.v3"}
+	expectedContracts := []string{
+		"root.v3",
+		"module.v3",
+		"lesson.v3",
+		"elective-lesson.v3",
+		"project.v3",
+		"assessment.v3",
+		"flagship.v3",
+		"flagship-checkpoint.v3",
+		"companion-stage.v3",
+	}
 	for _, cName := range expectedContracts {
 		c, exists := contractMap[cName]
 		if !exists {
-			warnf("readme.contracts.json: missing contract '%s'", cName)
+			errorf("readme.contracts.json: missing contract '%s'", cName)
 			ok = false
-		} else if cName == "lesson.v3" {
-			if len(c.CoreRequiredHeadings) == 0 || len(c.ContextualHeadings) == 0 {
-				warnf("readme.contracts.json: lesson.v3 missing core_required_headings or contextual_headings")
-				ok = false
-			}
-			if len(c.SubtypeProfiles) == 0 {
-				warnf("readme.contracts.json: lesson.v3 missing subtype_profiles")
-				ok = false
-			}
+			continue
 		}
+		if len(c.RequiredHeadings) == 0 {
+			errorf("readme.contracts.json: %s missing required_headings", cName)
+			ok = false
+		}
+		if len(c.Selector) == 0 {
+			errorf("readme.contracts.json: %s missing selector", cName)
+			ok = false
+		}
+		if c.Shape == "" {
+			errorf("readme.contracts.json: %s missing shape", cName)
+			ok = false
+		}
+	}
+	if c, exists := contractMap["lesson.v3"]; exists && len(c.SubtypeModifiers) == 0 {
+		errorf("readme.contracts.json: lesson.v3 missing subtype_modifiers")
+		ok = false
 	}
 
 	// 2. Read core and electives for deeper checks
@@ -141,22 +158,48 @@ func validateSchema() {
 	var crossrefs CrossrefBundle
 	readJSON("crossrefs.json", &crossrefs)
 
-	// Verify inventory counts and module statuses
-	if len(core.Items) != 421 {
-		warnf("path.core.json: expected exactly 421 core items, got %d", len(core.Items))
+	// Verify inventory counts against expected.json (single source of truth)
+	if len(core.Items) != exp.Inventory.CoreItems {
+		errorf("path.core.json: expected %d core items, got %d", exp.Inventory.CoreItems, len(core.Items))
 		ok = false
 	}
-	if len(electives.Items) != 20 {
-		warnf("path.electives.json: expected exactly 20 elective items, got %d", len(electives.Items))
+	if len(core.Modules) != exp.Inventory.CoreModules {
+		errorf("path.core.json: expected %d core modules, got %d", exp.Inventory.CoreModules, len(core.Modules))
 		ok = false
 	}
-	if len(core.Modules) != 18 {
-		warnf("path.core.json: expected exactly 18 core modules, got %d", len(core.Modules))
+	if len(electives.Items) != exp.Inventory.ElectiveItems {
+		errorf("path.electives.json: expected %d elective items, got %d", exp.Inventory.ElectiveItems, len(electives.Items))
+		ok = false
+	}
+	if len(electives.Modules) != exp.Inventory.ElectiveModules {
+		errorf("path.electives.json: expected %d elective modules, got %d", exp.Inventory.ElectiveModules, len(electives.Modules))
+		ok = false
+	}
+	if total := len(core.Items) + len(electives.Items); total != exp.Inventory.TotalItems {
+		errorf("expected %d total items (core+electives), got %d", exp.Inventory.TotalItems, total)
+		ok = false
+	}
+	if total := len(core.Modules) + len(electives.Modules); total != exp.Inventory.TotalModules {
+		errorf("expected %d total modules (core+electives), got %d", exp.Inventory.TotalModules, total)
+		ok = false
+	}
+	if len(projects.Projects) != exp.Inventory.Projects {
+		errorf("projects.json: expected %d projects, got %d", exp.Inventory.Projects, len(projects.Projects))
+		ok = false
+	}
+	var conceptsBundle struct {
+		Concepts []struct {
+			Concept string `json:"concept"`
+		} `json:"concepts"`
+	}
+	readJSON("concepts.json", &conceptsBundle)
+	if len(conceptsBundle.Concepts) != exp.Inventory.Concepts {
+		errorf("concepts.json: expected %d concepts, got %d", exp.Inventory.Concepts, len(conceptsBundle.Concepts))
 		ok = false
 	}
 	for _, m := range core.Modules {
 		if m.Status != "stable" {
-			warnf("path.core.json module %s: expected status 'stable', got '%s'", m.ID, m.Status)
+			errorf("path.core.json module %s: expected status 'stable', got '%s'", m.ID, m.Status)
 			ok = false
 		}
 	}
@@ -197,13 +240,13 @@ func validateSchema() {
 			v := c.getter(item)
 			rv := reflect.ValueOf(v)
 			if rv.Kind() == reflect.Ptr && rv.IsNil() {
-				warnf("%s: missing '%s'", item.ID, c.name)
+				errorf("%s: missing '%s'", item.ID, c.name)
 				ok = false
 			} else if rv.Kind() == reflect.String && rv.String() == "" {
-				warnf("%s: '%s' is empty", item.ID, c.name)
+				errorf("%s: '%s' is empty", item.ID, c.name)
 				ok = false
 			} else if rv.Kind() == reflect.Slice && rv.IsNil() {
-				warnf("%s: '%s' is null (empty array expected)", item.ID, c.name)
+				errorf("%s: '%s' is null (empty array expected)", item.ID, c.name)
 				ok = false
 			}
 		}
@@ -230,11 +273,11 @@ func validateSchema() {
 			for _, c := range zmChecks {
 				if c.arr != nil {
 					if len(c.arr) == 0 {
-						warnf("%s: zero_magic.%s is empty", item.ID, c.name)
+						errorf("%s: zero_magic.%s is empty", item.ID, c.name)
 						ok = false
 					}
 				} else if c.value == "" {
-					warnf("%s: zero_magic.%s is empty", item.ID, c.name)
+					errorf("%s: zero_magic.%s is empty", item.ID, c.name)
 					ok = false
 				}
 			}
@@ -245,11 +288,11 @@ func validateSchema() {
 	for _, item := range allItems {
 		if item.Proof != nil {
 			if item.Proof.PracticeTask == "" {
-				warnf("%s: proof.practice_task is empty", item.ID)
+				errorf("%s: proof.practice_task is empty", item.ID)
 				ok = false
 			}
 			if item.Proof.AssessmentID == "" {
-				warnf("%s: proof.assessment_id is empty", item.ID)
+				errorf("%s: proof.assessment_id is empty", item.ID)
 				ok = false
 			}
 		}
@@ -264,14 +307,14 @@ func validateSchema() {
 		for _, ik := range itemKeys {
 			for i := 1; i < len(ik.keys); i++ {
 				if ik.keys[i] < ik.keys[i-1] {
-					warnf("%s: key '%s' out of canonical alphabetical order (after '%s')", ik.id, ik.keys[i], ik.keys[i-1])
+					errorf("%s: key '%s' out of canonical alphabetical order (after '%s')", ik.id, ik.keys[i], ik.keys[i-1])
 					ok = false
 					break
 				}
 			}
 		}
 	} else {
-		warnf("cannot read path.core.json for key ordering check: %v", err)
+		errorf("cannot read path.core.json for key ordering check: %v", err)
 		ok = false
 	}
 
@@ -279,7 +322,7 @@ func validateSchema() {
 	seen := make(map[string]string)
 	for _, item := range allItems {
 		if prev, dup := seen[item.ID]; dup {
-			warnf("duplicate item ID '%s' (in %s and %s)", item.ID, prev, item.SourceLegacyIDs)
+			errorf("duplicate item ID '%s' (in %s and %s)", item.ID, prev, item.SourceLegacyIDs)
 			ok = false
 		}
 		if len(item.SourceLegacyIDs) > 0 {
@@ -301,7 +344,7 @@ func validateSchema() {
 	}
 	for _, item := range allItems {
 		if _, ok := moduleIDs[item.ModuleID]; !ok {
-			warnf("%s: references unknown module_id '%s'", item.ID, item.ModuleID)
+			errorf("%s: references unknown module_id '%s'", item.ID, item.ModuleID)
 			ok = false
 		}
 	}
@@ -313,6 +356,10 @@ func validateSchema() {
 	}
 	var assessments AssessmentsBundle
 	readJSON("assessments.json", &assessments)
+	if len(assessments.Assessments) != exp.Inventory.Assessments {
+		errorf("assessments.json: expected %d assessments, got %d", exp.Inventory.Assessments, len(assessments.Assessments))
+		ok = false
+	}
 	assessIDs := make(map[string]bool)
 	for _, a := range assessments.Assessments {
 		assessIDs[a.ID] = true
@@ -327,7 +374,7 @@ func validateSchema() {
 	for _, item := range allItems {
 		if item.Proof != nil && item.Proof.AssessmentID != "" {
 			if !assessIDs[item.Proof.AssessmentID] {
-				warnf("%s: proof.assessment_id '%s' not found in assessments.json", item.ID, item.Proof.AssessmentID)
+				errorf("%s: proof.assessment_id '%s' not found in assessments.json", item.ID, item.Proof.AssessmentID)
 				ok = false
 			}
 		}

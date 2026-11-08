@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 var curriculumDir string
@@ -41,133 +42,157 @@ func init() {
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("Usage: go run ./internal/tools/curriculum <command>")
-		fmt.Println("")
-		fmt.Println("Commands:")
-		fmt.Println("  validate-schema              Check JSON structure, formatting, required fields")
-		fmt.Println("  validate-graph               Check prerequisites, cross-refs, module chains")
-		fmt.Println("  validate-lessons             Check lesson contracts, zero_magic, content requirements")
-		fmt.Println("  validate-prerequisite-closure Check no hidden leaks, circular deps, future-concept violations")
-		fmt.Println("  validate-project-binding     Check every project has module binding, anchor, prerequisites")
-		fmt.Println("  validate-no-placeholder-zm   Check no zero_magic fields contain placeholder text")
-		fmt.Println("  validate-assessment-completeness Check assessments have module-specific criteria")
-		fmt.Println("  validate-unique-tags         Check no duplicate tags across items")
-		fmt.Println("  validate-crossrefs           Check crossref references resolve, no empty arrays on implemented lessons")
-		fmt.Println("  validate-concept-ownership   Check concept ownership registry entries resolve, no duplicates")
-		fmt.Println("  validate-cognitive-load      Check cognitive load metadata completeness and consistency")
-		fmt.Println("  validate-operational-failures Check operational failure taxonomy completeness and consistency")
-		fmt.Println("  validate-failure-engineering  Check critical items have operational failure examples")
-		fmt.Println("  validate-zero-magic           Check golden lessons meet authoring spec")
-		fmt.Println("  validate-physical-artifacts   Check all 441 items have verified physical files on disk")
-		fmt.Println("  validate-assessment-artifacts Check all assessments have complete 4-file suites (README, questions, rubric, answer-key)")
-		fmt.Println("  validate-starter-parity       Check project starters and solutions parse with valid Go ASTs")
-		fmt.Println("  validate-markdown-links       Check all relative markdown links resolve to real files on disk")
-		fmt.Println("  validate-sese-navigation      Check Single-Entry Single-Exit navigation and exit gate integrity")
-		fmt.Println("  validate-project-scripts      Check cross-platform bash/powershell project verification script parity")
-		fmt.Println("  validate-no-emojis            Check strict No-Emojis Invariant across curriculum prose")
-		fmt.Println("  validate-anchor-quotes        Check pioneer anchor quotes on locked module lessons")
-		fmt.Println("  validate-diagram-palette      Check Dark Engineering Palette compliance on diagrams")
-		fmt.Println("  validate-readme-contracts     Check 6-heading core contracts on locked module lessons")
-		fmt.Println("  validate-all                 Run all validators")
+		printUsage()
 		os.Exit(1)
 	}
 
-	cmd := os.Args[1]
-	switch cmd {
-	case "validate-schema":
-		validateSchema()
-	case "validate-graph":
-		validateGraph()
-	case "validate-lessons":
-		validateLessons()
-	case "validate-prerequisite-closure":
-		validatePrerequisiteClosure()
-	case "validate-project-binding":
-		validateProjectBinding()
-	case "validate-no-placeholder-zm":
-		validateNoPlaceholderZM()
-	case "validate-assessment-completeness":
-		validateAssessmentCompleteness()
-	case "validate-unique-tags":
-		validateUniqueTags()
-	case "validate-crossrefs":
-		validateCrossrefs()
-	case "validate-concept-ownership":
-		validateConceptOwnership()
-	case "validate-cognitive-load":
-		validateCognitiveLoad()
-	case "validate-operational-failures":
-		validateOperationalFailures()
-	case "validate-failure-engineering":
-		validateFailureEngineering()
-	case "validate-zero-magic":
-		validateZeroMagic()
-	case "validate-physical-artifacts":
-		validatePhysicalArtifacts()
-	case "validate-assessment-artifacts":
-		validateAssessmentArtifacts()
-	case "validate-starter-parity":
-		validateStarterParity()
-	case "validate-markdown-links":
-		validateMarkdownLinks()
-	case "validate-sese-navigation":
-		validateSESENavigation()
-	case "validate-project-scripts":
-		validateProjectScripts()
-	case "validate-no-emojis":
-		validateNoEmojis()
-	case "validate-anchor-quotes":
-		validateAnchorQuotes()
-	case "validate-diagram-palette":
-		validateDiagramPalette()
-	case "validate-readme-contracts":
-		validateReadmeContracts()
-	case "validate-all":
-		validateSchema()
-		validateGraph()
-		validateLessons()
-		validatePrerequisiteClosure()
-		validateProjectBinding()
-		validateNoPlaceholderZM()
-		validateAssessmentCompleteness()
-		validateUniqueTags()
-		validateCrossrefs()
-		validateConceptOwnership()
-		validateCognitiveLoad()
-		validateOperationalFailures()
-		validateFailureEngineering()
-		validateZeroMagic()
-		validatePhysicalArtifacts()
-		validateAssessmentArtifacts()
-		validateStarterParity()
-		validateMarkdownLinks()
-		validateSESENavigation()
-		validateProjectScripts()
-		validateNoEmojis()
-		validateAnchorQuotes()
-		validateDiagramPalette()
-		validateReadmeContracts()
-	default:
-		fmt.Fprintf(os.Stderr, "Unknown command: %s\n", cmd)
+	cmd := ""
+	for _, a := range os.Args[1:] {
+		switch {
+		case a == "--strict":
+			strictMode = true
+		case a == "--advisory":
+			advisoryMode = true
+		case a == "--report":
+			reportPath = "curriculum-validation-report.json"
+		case strings.HasPrefix(a, "--report="):
+			reportPath = strings.TrimPrefix(a, "--report=")
+		case strings.HasPrefix(a, "--"):
+			fmt.Fprintf(os.Stderr, "unknown flag: %s\n", a)
+			os.Exit(2)
+		default:
+			if cmd == "" {
+				cmd = a
+			}
+		}
+	}
+	if cmd == "" {
+		fmt.Fprintln(os.Stderr, "missing command")
 		os.Exit(1)
+	}
+	if advisoryMode && strictMode {
+		fmt.Fprintln(os.Stderr, "--strict and --advisory are mutually exclusive")
+		os.Exit(2)
+	}
+	ran := false
+	for _, v := range validators() {
+		if v.Name == cmd {
+			v.Run()
+			ran = true
+			break
+		}
+	}
+	if !ran {
+		if cmd != "validate-all" {
+			fmt.Fprintf(os.Stderr, "Unknown command: %s\n", cmd)
+			os.Exit(1)
+		}
+		for _, v := range validators() {
+			v.Run()
+		}
 	}
 
 	if errorCount > 0 {
 		fmt.Fprintf(os.Stderr, "\nValidation failed with %d error(s).\n", errorCount)
 		os.Exit(1)
 	}
+	if strictMode && warningCount > 0 {
+		fmt.Fprintf(os.Stderr, "\nStrict release gate failed with %d warning(s).\n", warningCount)
+		os.Exit(1)
+	}
+	if warningCount > 0 {
+		fmt.Fprintf(os.Stderr, "\nAll curriculum checks passed (%d advisory warning(s); run with --strict to enforce).\n", warningCount)
+		return
+	}
 	fmt.Println("\nAll curriculum checks passed successfully.")
 }
 
+// validator couples a CLI command name, its one-line description, and the
+// function that implements it. It is the single source of truth for the
+// command list, the usage text, and the `validate-all` sequence, so adding a
+// gate is a one-line change instead of three parallel edits.
+type validator struct {
+	Name string
+	Desc string
+	Run  func()
+}
+
+// validators returns every curriculum validator in canonical execution order.
+func validators() []validator {
+	return []validator{
+		{"validate-schema", "Check JSON structure, formatting, required fields", validateSchema},
+		{"validate-graph", "Check prerequisites, cross-refs, module chains", validateGraph},
+		{"validate-lessons", "Check lesson contracts, zero_magic, content requirements", validateLessons},
+		{"validate-prerequisite-closure", "Check no hidden leaks, circular deps, future-concept violations", validatePrerequisiteClosure},
+		{"validate-project-binding", "Check every project has module binding, anchor, prerequisites", validateProjectBinding},
+		{"validate-no-placeholder-zm", "Check no zero_magic fields contain placeholder text", validateNoPlaceholderZM},
+		{"validate-assessment-completeness", "Check assessments have module-specific criteria", validateAssessmentCompleteness},
+		{"validate-unique-tags", "Check no duplicate tags across items", validateUniqueTags},
+		{"validate-crossrefs", "Check crossref references resolve, no empty arrays on implemented lessons", validateCrossrefs},
+		{"validate-concept-ownership", "Check concept ownership registry entries resolve, no duplicates", validateConceptOwnership},
+		{"validate-cognitive-load", "Check cognitive load metadata completeness and consistency", validateCognitiveLoad},
+		{"validate-operational-failures", "Check operational failure taxonomy completeness and consistency", validateOperationalFailures},
+		{"validate-failure-engineering", "Check critical items have operational failure examples", validateFailureEngineering},
+		{"validate-zero-magic", "Check golden lessons meet authoring spec", validateZeroMagic},
+		{"validate-physical-artifacts", "Check all items have verified physical files on disk", validatePhysicalArtifacts},
+		{"validate-assessment-artifacts", "Check all assessments have complete 4-file suites (README, questions, rubric, answer-key)", validateAssessmentArtifacts},
+		{"validate-starter-parity", "Check project starters and solutions parse with valid Go ASTs", validateStarterParity},
+		{"validate-markdown-links", "Check all relative markdown links resolve to real files on disk", validateMarkdownLinks},
+		{"validate-sese-navigation", "Check Single-Entry Single-Exit navigation and exit gate integrity", validateSESENavigation},
+		{"validate-project-scripts", "Check cross-platform bash/powershell project verification script parity", validateProjectScripts},
+		{"validate-no-emojis", "Check strict No-Emojis Invariant across curriculum prose", validateNoEmojis},
+		{"validate-anchor-quotes", "Check pioneer anchor quotes on locked module lessons", validateAnchorQuotes},
+		{"validate-diagram-palette", "Check Dark Engineering Palette compliance on diagrams", validateDiagramPalette},
+		{"validate-readme-contracts", "Check README contract families (headings, code policy, file policy) across all items", validateReadmeContracts},
+	}
+}
+
+// printUsage renders the command list from the validator registry so the help
+// text can never drift from the gates that actually run.
+func printUsage() {
+	fmt.Println("Usage: go run ./internal/tools/curriculum <command>")
+	fmt.Println("")
+	fmt.Println("Commands:")
+	width := len("validate-all")
+	for _, v := range validators() {
+		if len(v.Name) > width {
+			width = len(v.Name)
+		}
+	}
+	for _, v := range validators() {
+		fmt.Printf("  %-*s %s\n", width, v.Name, v.Desc)
+	}
+	fmt.Printf("  %-*s %s\n", width, "validate-all", "Run all validators")
+	fmt.Println("")
+	fmt.Println("Flags:")
+	fmt.Println("  --strict                     Promote advisory warnings to errors (release gate)")
+	fmt.Println("  --advisory                   Report structural errors only; skip content-shape checks")
+	fmt.Println("  --report[=path]              Write a JSON violation report (default curriculum-validation-report.json)")
+}
+
 var errorCount int
+var warningCount int
+
+var (
+	strictMode   bool
+	advisoryMode bool
+	reportPath   string
+)
 
 func fatalf(format string, args ...any) {
 	fmt.Fprintf(os.Stderr, "ERROR: "+format+"\n", args...)
 	os.Exit(1)
 }
 
-func warnf(format string, args ...any) {
+// errorf reports a structural defect that always fails the build.
+func errorf(format string, args ...any) {
 	errorCount++
+	fmt.Fprintf(os.Stderr, "ERROR: "+format+"\n", args...)
+}
+
+// warnf reports an advisory issue. It fails the build only under --strict.
+func warnf(format string, args ...any) {
+	warningCount++
 	fmt.Fprintf(os.Stderr, "WARN: "+format+"\n", args...)
 }
 
@@ -189,22 +214,23 @@ func readJSON(path string, v any) {
 
 // Module metadata structures
 type Module struct {
-	ID              string   `json:"id"`
-	Number          int      `json:"number"`
-	Slug            string   `json:"slug"`
-	Title           string   `json:"title"`
-	Phase           string   `json:"phase"`
-	Path            string   `json:"path"`
-	Status          string   `json:"status"`
-	LearningGoal    string   `json:"learning_goal"`
-	Summary         string   `json:"summary"`
-	Order           int      `json:"order"`
-	Required        bool     `json:"required"`
-	PortfolioOutput bool     `json:"portfolio_output"`
-	Prerequisites   []string `json:"prerequisites"`
-	EntryItemIDs    []string `json:"entry_item_ids"`
-	TerminalItemIDs []string `json:"terminal_item_ids"`
-	Tags            []string `json:"tags"`
+	ID              string          `json:"id"`
+	Number          int             `json:"number"`
+	Slug            string          `json:"slug"`
+	Title           string          `json:"title"`
+	Phase           string          `json:"phase"`
+	Path            string          `json:"path"`
+	Status          string          `json:"status"`
+	LearningGoal    string          `json:"learning_goal"`
+	Summary         string          `json:"summary"`
+	Order           int             `json:"order"`
+	Required        bool            `json:"required"`
+	PortfolioOutput bool            `json:"portfolio_output"`
+	Prerequisites   []string        `json:"prerequisites"`
+	EntryItemIDs    []string        `json:"entry_item_ids"`
+	TerminalItemIDs []string        `json:"terminal_item_ids"`
+	Tags            []string        `json:"tags"`
+	ReadmeContract  *ReadmeContract `json:"readme_contract"`
 }
 
 type ZeroMagic struct {
@@ -253,6 +279,12 @@ type Proof struct {
 	ExpectedArtifact string   `json:"expected_artifact"`
 	MasteryChecks    []string `json:"mastery_checks"`
 	RubricIDs        []string `json:"rubric_ids"`
+}
+
+type ReadmeContract struct {
+	ContractID        string `json:"contract_id"`
+	DocumentationMode string `json:"documentation_mode"`
+	Required          bool   `json:"required"`
 }
 
 type ContentContract struct {
@@ -308,6 +340,9 @@ type Item struct {
 	ContentContract        *ContentContract `json:"content_contract"`
 	Verification           *Verification    `json:"verification"`
 	Files                  *Files           `json:"files"`
+	ReadmeContract         *ReadmeContract  `json:"readme_contract"`
+	ReadmeStatus           string           `json:"readme_status"`
+	ZeroMagicStatus        string           `json:"zero_magic_status"`
 	SourceLegacyIDs        []string         `json:"source_legacy_ids"`
 	Tags                   []string         `json:"tags"`
 }
