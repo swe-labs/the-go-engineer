@@ -1,6 +1,7 @@
 # Passing by value
 
-> *"Everything in C is passed by value, and Go inherits this simplicity."* — Dennis Ritchie
+> *"In C, all function arguments are passed 'by value'."*
+> — Brian W. Kernighan & Dennis M. Ritchie, *The C Programming Language* (1978)
 
 ## Learning objective
 
@@ -82,71 +83,31 @@ package main
 import "fmt"
 
 func main() {
-	// int is copied
-	n := 10
-	double(n)
-	fmt.Println("after double:", n) // 10
+	original := []int{1, 2, 3, 4, 5}
+	rotated := rotate(original, 2)
+	fmt.Println("original:", original)
+	fmt.Println("rotated:", rotated)
+}
 
-	// slice header is copied, backing array is shared
-	nums := []int{1, 2, 3}
-	modifyFirst(nums)
-	fmt.Println("after modifyFirst:", nums) // [99 2 3]
-
-	// appending inside function does NOT affect caller
-	nums2 := []int{1, 2, 3}
-	tryAppend(nums2)
-	fmt.Println("after tryAppend:", nums2) // [1 2 3]
-
-	// map header is copied, underlying map is shared
-	m := map[string]int{"a": 1}
-	mapAdd(m, "b", 2)
-	fmt.Println("after mapAdd:", m) // map[a:1 b:2]
-
-	// large struct copy demonstration
-	type big struct {
-		nums [1000]int
+func rotate(nums []int, n int) []int {
+	if len(nums) == 0 {
+		return []int{}
 	}
-	b := big{[1000]int{}}
-	updateBig(b)
-	fmt.Println("b.nums[0] after updateBig:", b.nums[0]) // 0
-}
-
-func double(x int) {
-	x = x * 2
-}
-
-func modifyFirst(s []int) {
-	s[0] = 99
-}
-
-func tryAppend(s []int) {
-	s = append(s, 4, 5, 6)
-}
-
-func mapAdd(m map[string]int, key string, val int) {
-	m[key] = val
-}
-
-func updateBig(b big) {
-	b.nums[0] = 999
+	n = n % len(nums)
+	result := make([]int, len(nums))
+	for i, v := range nums {
+		newPos := (i - n + len(nums)) % len(nums)
+		result[newPos] = v
+	}
+	return result
 }
 ```
 
 ## Step-by-step execution
-
-For `modifyFirst(nums)` where `nums = []int{1, 2, 3}`:
-
-1. The slice header is copied: pointer to backing array `[1,2,3]`, length `3`, capacity `3`.
-2. Inside `modifyFirst`, `s[0] = 99` writes through the pointer to the shared backing array.
-3. After return, the caller's `nums` header still points to the same backing array, now `[99, 2, 3]`.
-
-For `tryAppend(nums2)`:
-
-1. Slice header copied: pointer to `[1,2,3]`, length `3`, capacity `3`.
-2. `append(s, 4,5,6)` exceeds capacity (3), so Go allocates a new backing array of size ≥6.
-3. `s` is reassigned to the new header — but this is the function's local copy.
-4. Caller's `nums2` still points to the original `[1,2,3]` array.
-
+1. `original` is a slice: the variable holds a 24-byte header (pointer, length, capacity), not the elements.
+2. `rotate(original, 2)` receives a **copy of the header** — both header copies point at the same backing array.
+3. `rotate` builds a brand-new `result` slice (a fresh backing array) and returns its header; the caller's `original` is untouched: `[1 2 3 4 5]`.
+4. The printed `rotated: [3 4 5 1 2]` is the new slice; comparing the two lines proves the elements were not shared — mutation inside `rotate` would have been invisible anyway because it only wrote to `result`.
 ## Common mistakes
 
 - **Thinking slices are "passed by reference"**: The slice header is copied, but the backing array is shared. Appending may or may not modify the caller's view depending on capacity.

@@ -1,6 +1,7 @@
 # defer for cleanup
 
-> *"Handle normal cases and worst cases separately."* — Butler Lampson
+> *"Handle normal and worst cases separately as a rule, because the requirements for the two are quite different: the normal case must be fast, and the worst case must make some progress."*
+> — Butler Lampson, *Hints for Computer System Design* (1983)
 
 ## Learning objective
 
@@ -98,89 +99,80 @@ package main
 import (
 	"errors"
 	"fmt"
-	"sync"
+	"os"
 )
 
-type Resource struct {
-	Name string
-}
-
-func (r *Resource) Open() error {
-	fmt.Printf("opening %s\n", r.Name)
-	return nil
-}
-
-func (r *Resource) Close() error {
-	fmt.Printf("closing %s\n", r.Name)
-	return nil
-}
-
-type ResourceManager struct {
-	mu  sync.Mutex
-	res map[string]*Resource
-}
-
-func NewResourceManager() *ResourceManager {
-	return &ResourceManager{res: make(map[string]*Resource)}
-}
-
-func (rm *ResourceManager) Acquire(name string) (*Resource, error) {
-	rm.mu.Lock()
-	defer rm.mu.Unlock()
-
-	if r, ok := rm.res[name]; ok {
-		return r, nil
-	}
-	r := &Resource{Name: name}
-	if err := r.Open(); err != nil {
-		return nil, fmt.Errorf("open resource: %w", err)
-	}
-	rm.res[name] = r
-	return r, nil
-}
-
-func processResource(rm *ResourceManager, name string) (err error) {
-	r, err := rm.Acquire(name)
+func writeToFile(filename, content string) (err error) {
+	file, err := os.Create(filename)
 	if err != nil {
-		return err
+		return fmt.Errorf("create file: %w", err)
 	}
-	defer fmt.Println("deferred cleanup for", r.Name)
+	defer func() {
+		if cerr := file.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("close file: %w", cerr)
+		}
+	}()
+	_, err = file.WriteString(content)
+	if err != nil {
+		return fmt.Errorf("write file: %w", err)
+	}
+	return nil
+}
 
-	// Simulate processing
-	if name == "bad" {
-		return errors.New("processing failed")
+func safeProcess(items []string) error {
+	var errs []error
+	for _, item := range items {
+		filename := item + ".txt"
+		content := "Content for " + item
+		if err := writeToFileToLoop(filename, content); err != nil {
+			errs = append(errs, err)
+		}
+	}
+	return errors.Join(errs...)
+}
+
+// writeToFileToLoop opens and closes a file within a single iteration (no defer in loop).
+func writeToFileToLoop(filename, content string) error {
+	file, err := os.Create(filename)
+	if err != nil {
+		return fmt.Errorf("create: %w", err)
+	}
+	_, err = file.WriteString(content)
+	closeErr := file.Close()
+	if err != nil {
+		return fmt.Errorf("write: %w", err)
+	}
+	if closeErr != nil {
+		return fmt.Errorf("close: %w", closeErr)
 	}
 	return nil
 }
 
 func main() {
-	rm := NewResourceManager()
-	for _, name := range []string{"good", "bad"} {
-		err := processResource(rm, name)
-		if err != nil {
-			fmt.Printf("processResource(%q): %v\n", name, err)
-		} else {
-			fmt.Printf("processResource(%q): success\n", name)
-		}
+	if err := writeToFile("hello.txt", "Hello, World!"); err != nil {
+		fmt.Println("writeToFile error:", err)
+	} else {
+		fmt.Println("writeToFile: success")
 	}
+
+	if err := safeProcess([]string{"a", "b"}); err != nil {
+		fmt.Println("safeProcess error:", err)
+	} else {
+		fmt.Println("safeProcess: success")
+	}
+
+	// Cleanup test files
+	os.Remove("hello.txt")
+	os.Remove("a.txt")
+	os.Remove("b.txt")
 }
 ```
 
 ## Step-by-step execution
-
-For `processResource(rm, "bad")`:
-
-1. `rm.Acquire("bad")` is called.
-2. Inside Acquire: `rm.mu.Lock()`, then `defer rm.mu.Unlock()`.
-3. The resource is created and stored.
-4. `rm.Acquire` returns the resource.
-5. Back in `processResource`: `defer fmt.Println("deferred cleanup for", r.Name)` is registered.
-6. The `if name == "bad"` branch triggers, returning `errors.New("processing failed")`.
-7. Before the function actually returns to the caller, the deferred statement runs: prints "deferred cleanup for bad".
-8. The function returns the error to `main`.
-
-Important: `defer` does NOT close the resource -- it just prints a message. In real code, you would defer `r.Close()` or similar. The key observation is that the deferred cleanup runs even on the error path.
-
+1. `writeToFile` opens `hello.txt`; on success the `defer` registers a closure that closes the file.
+2. `WriteString` writes the content; when the function returns, the deferred close runs — and because the return value is **named** (`err error`), the closure can override it if `Close` fails after a successful write.
+3. `safeProcess` deliberately does NOT use `defer` inside its loop — deferring in a loop would hold every file open until the function returns; instead `writeToFileToLoop` opens, writes, and closes within each iteration.
+4. Errors from each iteration are collected with `errors.Join` and returned together.
 ## Common mistakes
 
 - **Deferring close on a nil resource**: If `os.Open` returns an error, `f` is nil. `defer f.Close()` would panic because `Close` is called on a nil pointer. Always check the error before deferring.

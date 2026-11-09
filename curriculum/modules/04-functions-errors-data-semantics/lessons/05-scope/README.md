@@ -84,57 +84,36 @@ package main
 
 import "fmt"
 
-// Package-level variable — visible in all functions in this package.
-var level = "package"
+var name = "global"
 
 func main() {
-	fmt.Println("outer level:", level) // "package"
-
-	// Function scope variable shadows package-level.
-	level := "function"
-	fmt.Println("main level:", level) // "function"
-
-	if true {
-		// Block scope variable shadows function scope.
-		level := "block"
-		fmt.Println("block level:", level) // "block"
-
-		// Inner block — no new shadow.
-		{
-			fmt.Println("inner block level:", level) // "block" (inherits from outer block)
-		}
-	}
-
-	// Back to function scope — "block" is gone.
-	fmt.Println("after block level:", level) // "function"
-
-	// Demonstrating shadowing with if-scoped err.
-	val := 10
-	if val > 5 {
-		result := val * 2 // block-scoped
-		fmt.Println("if result:", result)
-	}
-	// fmt.Println(result) // compile error: result undefined here
-
-	_ = val
+	fmt.Println("demoScope result:", demoScope())
 }
 
-func helper() {
-	fmt.Println("helper level:", level) // "package" — the original package-level var
+func demoScope() string {
+	globalCopy := name
+	name := "local"
+	localCopy := name
+
+	if true {
+		name := "block"
+		blockCopy := name
+
+		// Return in order: block, local, global
+		return blockCopy + " " + localCopy + " " + globalCopy
+	}
+
+	// unreachable but keeps return type satisfied
+	return ""
 }
 ```
 
 ## Step-by-step execution
-
-For the shadowing example at `level := "function"` in `main`:
-
-1. Go encounters the identifier `level` in the assignment `level := "function"`.
-2. It searches scopes: innermost (function body) finds the new declaration — no outer search needed.
-3. This `level` shadows the package-level `level` for the rest of `main`.
-4. Inside the `if` block, another `level := "block"` shadows the function-level `level`.
-5. After the `if` block, the block-scoped `level` is out of scope. `level` refers to the function-scoped one again.
-6. In `helper()`, there is no local `level`, so Go finds the package-level `level`.
-
+1. `main` calls `demoScope`; `demoScope` reads the package-level `name` ("global") into `globalCopy`.
+2. `name := "local"` declares a new function-scope `name`, shadowing the package-level one; `localCopy` captures it.
+3. Inside the `if true` block, `name := "block"` shadows again; `blockCopy` captures "block".
+4. The return expression concatenates the three: `"block local global"`.
+5. The block-scope `name` disappears when the `if` ends; the function-scope and package-level `name`s were untouched by the inner declarations.
 ## Common mistakes
 
 - **Accidental shadowing with `:=`**: Inside an `if` or `for`, `err := ...` creates a new `err`, shadowing an outer one. Use `=` (with `err` already declared) to reuse the outer variable.

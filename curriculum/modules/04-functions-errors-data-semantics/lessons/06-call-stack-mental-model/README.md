@@ -1,6 +1,7 @@
 # Call stack mental model
 
-> *"A stack is an indispensable mechanism for managing the activation records of nested subroutine invocations."* — Edsger W. Dijkstra
+> *"It was on one of my journeys between the EDSAC room and the punching equipment that the realization came over me with full force that a good part of the remainder of my life was going to be spent in finding errors in my own programs."*
+> — Maurice V. Wilkes, *Memoirs of a Computer Pioneer* (1985)
 
 ## Learning objective
 
@@ -87,45 +88,35 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("main starts")
-	result := add(3, 4)
-	fmt.Println("main got:", result)
-	fmt.Println("main ends")
+	fmt.Println("fib(5) =", fib(5))
 }
 
-func add(a, b int) int {
-	fmt.Println("  add starts")
-	sum := inner(a, b)
-	fmt.Println("  add ends")
-	return sum
-}
+func fib(n int) int {
+	indent := ""
+	for i := 0; i < 5-n; i++ {
+		indent += "  "
+	}
+	fmt.Printf("%sfib(%d) called\n", indent, n)
 
-func inner(x, y int) int {
-	fmt.Println("    inner starts")
-	z := x + y
-	fmt.Println("    inner ends, returning", z)
-	return z
+	if n <= 1 {
+		fmt.Printf("%sfib(%d) returns %d\n", indent, n, n)
+		return n
+	}
+
+	a := fib(n - 1)
+	b := fib(n - 2)
+	result := a + b
+	fmt.Printf("%sfib(%d) returns %d\n", indent, n, result)
+	return result
 }
 ```
 
 ## Step-by-step execution
-
-For `main()` → `add(3, 4)` → `inner(3, 4)`:
-
-1. **Start**: Stack has only the `main` frame with local variable space.
-
-2. **`main` calls `add(3, 4)`**: Push a new frame for `add`. Arguments `3` and `4` are copied into `add`'s parameter slots. Return address points to the assignment `result := ...`.
-
-3. **`add` calls `inner(3, 4)`**: Push another frame for `inner`. `x=3`, `y=4`. Return address points to `sum := inner(a, b)`.
-
-4. **`inner` executes**: Evaluates `x + y = 7`. Stores `7` in local variable `z`.
-
-5. **`inner` returns**: `inner`'s frame is popped. The value `7` is placed where `add` expects the result. Execution resumes in `add` at `sum := ...`.
-
-6. **`add` returns**: `add`'s frame is popped. Value `7` is returned to `main`.
-
-7. **`main` continues**: Assigns `result = 7`, prints, and returns.
-
+1. `main` calls `fib(5)`, pushing a frame whose indent level (0) marks its depth.
+2. `fib(5)` calls `fib(4)`, which calls `fib(3)`, down to `fib(1)` — five frames deep; the printed indentation visualizes the stack depth.
+3. `fib(1)` and `fib(0)` hit the base case and return immediately.
+4. Each returning frame is popped, and its caller resumes: `fib(2)` returns `1`, `fib(3)` returns `2`, and so on up to `fib(5)` returning `5`.
+5. The maximum stack depth equals the recursion depth — five simultaneous `fib` frames at the deepest point.
 ## Common mistakes
 
 - **Deep recursion causing stack overflow**: `runtime: goroutine stack exceeds 1000000000-byte limit` — each recursive call adds a frame. For deep recursion, use iteration or tail-call workarounds.

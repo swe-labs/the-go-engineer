@@ -1,6 +1,7 @@
 # Parameters
 
-> *"The only way to pass parameters in C is by value."* — Dennis Ritchie
+> *"The bigger the interface, the weaker the abstraction."*
+> — Rob Pike, Go Proverbs (2015)
 
 ## Learning objective
 
@@ -96,22 +97,29 @@ package main
 
 import "fmt"
 
-// Type shorthand: a and b are both int.
-func multiply(a, b int) int {
-	return a * b
+func main() {
+	fmt.Println("max() =", max())
+	fmt.Println("max(3, 7, 2) =", max(3, 7, 2))
+	fmt.Println("max(-5, -1, -10) =", max(-5, -1, -10))
+	fmt.Println("concat(\", \", \"a\", \"b\", \"c\") =", concat(", ", "a", "b", "c"))
+	fmt.Println("concat(\"-\", \"x\") =", concat("-", "x"))
+	fmt.Println("concat(\" \") =", concat(" "))
 }
 
-// Variadic: nums ...int collects zero or more ints.
-func sum(nums ...int) int {
-	total := 0
-	for _, n := range nums {
-		total += n
+func max(nums ...int) int {
+	if len(nums) == 0 {
+		return 0
 	}
-	return total
+	m := nums[0]
+	for _, n := range nums[1:] {
+		if n > m {
+			m = n
+		}
+	}
+	return m
 }
 
-// Mixed parameters: fixed first, variadic second.
-func join(sep string, parts ...string) string {
+func concat(sep string, parts ...string) string {
 	result := ""
 	for i, p := range parts {
 		if i > 0 {
@@ -121,45 +129,15 @@ func join(sep string, parts ...string) string {
 	}
 	return result
 }
-
-// Empty interface variadic: accepts any types.
-func printAll(vals ...interface{}) {
-	for _, v := range vals {
-		fmt.Println(v)
-	}
-}
-
-func main() {
-	fmt.Println("multiply(4, 5) =", multiply(4, 5))
-	fmt.Println("sum() =", sum())
-	fmt.Println("sum(1, 2, 3) =", sum(1, 2, 3))
-	fmt.Println("sum(10) =", sum(10))
-	fmt.Println("join(\", \", \"a\", \"b\", \"c\") =", join(", ", "a", "b", "c"))
-	fmt.Println("join(\"-\") =", join("-"))
-
-	printAll("hello", 42, true)
-
-	// Slice expansion into variadic.
-	nums := []int{2, 4, 6}
-	fmt.Println("sum(nums...) =", sum(nums...))
-}
 ```
 
 ## Step-by-step execution
-
-For `sum(1, 2, 3)`:
-
-1. Compiler rewrites call to `sum([]int{1, 2, 3})`.
-2. New slice `[]int{1, 2, 3}` is allocated (backed by a 3-element array).
-3. Inside `sum`, `nums` refers to this slice.
-4. Loop iterates: `total` becomes `0 + 1 = 1`, then `1 + 2 = 3`, then `3 + 3 = 6`.
-5. Returns `6`.
-
-For `sum(nums...)` with `nums := []int{2, 4, 6}`:
-
-1. Go passes the existing slice `nums` directly — no copy of the elements.
-2. `sum` receives the same backing array. If `sum` modifies elements, the caller sees changes (but `sum` only reads).
-
+1. `max()` is called with zero arguments, so `nums` is an empty `[]int` slice; `len(nums) == 0` returns `0`.
+2. `max(3, 7, 2)` packs the three values into `nums`; the loop keeps the largest, returning `7`.
+3. `max(-5, -1, -10)` returns `-1` (the largest of the negatives).
+4. `concat(", ", "a", "b", "c")` walks `parts`, inserting the separator between elements: `"a, b, c"`.
+5. `concat("-", "x")` has one part, so the separator is never inserted: `"x"`.
+6. `concat(" ")` has zero parts; the loop never runs, returning `""`.
 ## Common mistakes
 
 - **Variadic not last**: `func bad(a ...int, b string)` is a compile error. The variadic parameter must be the final one.
