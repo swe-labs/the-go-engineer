@@ -143,38 +143,72 @@ strconv.Quote("hello")        // `"hello"` (with quotes and escapes)
 package main
 
 import (
+	"errors"
 	"fmt"
 	"strings"
-	"strconv"
+	"unicode"
 )
 
-func main() {
-	s := "The quick brown fox"
+func CleanAndSplit(text string) ([]string, error) {
+	cleaned := strings.TrimSpace(text)
+	cleaned = strings.ToLower(cleaned)
 
-	fmt.Println("len (bytes):", len(s))
-	fmt.Println("Contains 'fox':", strings.Contains(s, "fox"))
-	fmt.Println("HasPrefix 'The':", strings.HasPrefix(s, "The"))
-	fmt.Println("Index of 'brown':", strings.Index(s, "brown"))
-
-	words := strings.Fields(s)
-	fmt.Println("Words:", words)
-	fmt.Println("Joined:", strings.Join(words, "-"))
-
-	fmt.Println("Replace:", strings.ReplaceAll(s, "fox", "cat"))
-	fmt.Println("Upper:", strings.ToUpper(s))
-
-	var sb strings.Builder
-	for i := 0; i < 5; i++ {
-		sb.WriteString(strconv.Itoa(i))
-		sb.WriteString(", ")
+	var filtered []rune
+	for _, r := range cleaned {
+		if unicode.IsLetter(r) || unicode.IsNumber(r) || unicode.IsSpace(r) {
+			filtered = append(filtered, r)
+		} else {
+			filtered = append(filtered, ' ')
+		}
 	}
-	fmt.Println("Builder:", sb.String())
 
-	n, _ := strconv.Atoi("42")
-	fmt.Println("Atoi 42 + 8 =", n+8)
+	words := strings.Fields(string(filtered))
 
-	quoted := strconv.Quote("hello \"world\"")
-	fmt.Println("Quoted:", quoted)
+	var result []string
+	for _, w := range words {
+		if len(w) >= 3 {
+			result = append(result, w)
+		}
+	}
+
+	if len(result) == 0 {
+		return nil, errors.New("empty result")
+	}
+	return result, nil
+}
+
+func WordCount(words []string) map[string]int {
+	freq := make(map[string]int)
+	for _, w := range words {
+		freq[w]++
+	}
+	return freq
+}
+
+func main() {
+	input := "  Hello, World! Go is   amazing.  "
+	words, err := CleanAndSplit(input)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	fmt.Println("Words:", words)
+
+	freq := WordCount(words)
+	fmt.Println("Frequency:", freq)
+
+	if _, err := CleanAndSplit(""); err != nil {
+		fmt.Println("Empty input error:", err)
+	}
+
+	if _, err := CleanAndSplit("a an"); err != nil {
+		fmt.Println("Short words error:", err)
+	}
+
+	fmt.Println("\n--- CleanAndSplit demo ---")
+	for i, w := range words {
+		fmt.Printf("%d: %s\n", i, w)
+	}
 }
 ```
 

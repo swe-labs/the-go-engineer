@@ -1,7 +1,7 @@
 # Type conversions
 
-> "You can't have trust without transparency. In Go, every conversion is explicit."
-> — Dennis Ritchie
+> *"Clear is better than clever."*
+> — Rob Pike, Go Proverbs (2015)
 
 ## Learning objective
 
@@ -87,35 +87,59 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"os"
 	"strconv"
+	"strings"
 )
 
+func parseCelsius(input string) (float64, error) {
+	s := strings.TrimSpace(input)
+	if s == "" {
+		return 0, fmt.Errorf("empty input")
+	}
+	if strings.HasSuffix(s, "C") {
+		s = strings.TrimSuffix(s, "C")
+	} else if strings.HasSuffix(s, "F") {
+		return 0, fmt.Errorf("expected Celsius, got Fahrenheit: %q", input)
+	} else if strings.HasSuffix(s, "K") {
+		return 0, fmt.Errorf("expected Celsius, got Kelvin: %q", input)
+	}
+	v, err := strconv.ParseFloat(s, 64)
+	if err != nil {
+		return 0, fmt.Errorf("parsing %q: %w", input, err)
+	}
+	return v, nil
+}
+
+func fahrenheitToCelsius(f float64) float64 {
+	return (f - 32) * 5 / 9
+}
+
 func main() {
-	var i int = 255
-	var f float64 = float64(i)
-	fmt.Printf("int → float64: %d → %f\n", i, f)
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: go run . <temperature>")
+		fmt.Println("Examples: 23.5C, 98.6F, -10")
+		return
+	}
 
-	var trunc int = int(3.99)
-	fmt.Printf("float64 → int (truncate): %d\n", trunc)
+	input := os.Args[1]
+	if strings.HasSuffix(input, "F") {
+		f, err := strconv.ParseFloat(strings.TrimSuffix(input, "F"), 64)
+		if err != nil {
+			fmt.Printf("Error parsing Fahrenheit value: %v\n", err)
+			return
+		}
+		c := fahrenheitToCelsius(f)
+		fmt.Printf("%s = %.2fC\n", input, c)
+		return
+	}
 
-	s := strconv.Itoa(42)
-	n, _ := strconv.Atoi("42")
-	fmt.Printf("strconv.Itoa(42) = %q, strconv.Atoi(\"42\") = %d\n", s, n)
-
-	gpa, _ := strconv.ParseFloat("3.75", 64)
-	fmt.Printf("ParseFloat: %f\n", gpa)
-
-	formatted := strconv.FormatFloat(math.Pi, 'f', 4, 64)
-	fmt.Printf("FormatFloat(Pi, 4 digits): %s\n", formatted)
-
-	b := []byte("Go")
-	s2 := string(b)
-	fmt.Printf("[]byte → string: %q\n", s2)
-
-	large := math.MaxUint16
-	narrow := byte(large)
-	fmt.Printf("uint16(%d) → byte wraps to: %d\n", large, narrow)
+	c, err := parseCelsius(input)
+	if err != nil {
+		fmt.Printf("Error: %v\n", err)
+		return
+	}
+	fmt.Printf("%.2fC\n", c)
 }
 ```
 

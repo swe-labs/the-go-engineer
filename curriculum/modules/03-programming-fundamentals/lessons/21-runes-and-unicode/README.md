@@ -85,36 +85,37 @@ package main
 
 import (
 	"fmt"
-	"unicode/utf8"
+	"unicode"
 )
 
+func reverseRunes(s string) string {
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
+}
+
+func countLetters(s string) map[rune]int {
+	counts := make(map[rune]int)
+	for _, r := range s {
+		if unicode.IsLetter(r) {
+			counts[r]++
+		}
+	}
+	return counts
+}
+
 func main() {
-	s := "Hello, 世界 🚀"
-	fmt.Println("string:", s)
-	fmt.Println("len(s):", len(s), "bytes")
-	fmt.Println("utf8.RuneCountInString(s):", utf8.RuneCountInString(s), "runes")
+	s1 := "Hello, 世界 🚀"
+	fmt.Println("original:", s1)
+	fmt.Println("reversed:", reverseRunes(s1))
+	fmt.Println("letter counts:", countLetters(s1))
 
-	// range over string yields runes
-	fmt.Println("\nRune iteration:")
-	for i, r := range s {
-		fmt.Printf("  byte=%d rune=%c (%U) width=%d\n", i, r, r, utf8.RuneLen(r))
-	}
-
-	// Manual decoding
-	fmt.Println("\nManual decode:")
-	for i := 0; i < len(s); {
-		r, size := utf8.DecodeRuneInString(s[i:])
-		fmt.Printf("  byte=%d rune=%c (%U) size=%d\n", i, r, r, size)
-		i += size
-	}
-
-	// Invalid UTF-8
-	invalid := "hello\xfe\xffworld"
-	fmt.Println("\nInvalid UTF-8:")
-	fmt.Println("string:", invalid)
-	for i, r := range invalid {
-		fmt.Printf("  byte=%d rune=%q (%U)\n", i, r, r)
-	}
+	s2 := "café"
+	fmt.Println("original:", s2)
+	fmt.Println("reversed:", reverseRunes(s2))
+	fmt.Println("letter counts:", countLetters(s2))
 }
 ```
 

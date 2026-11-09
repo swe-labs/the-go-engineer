@@ -1,7 +1,7 @@
 # Slice length and capacity
 
-> "Understanding the difference between length and capacity is understanding how Go manages memory."
-> — Rob Pike
+> *"The length is the number of elements referred to by the slice. The capacity is the number of elements in the underlying array, beginning at the element referred to by the slice pointer."*
+> — Andrew Gerrand, *Go Slices: usage and internals* (2011)
 
 ## Learning objective
 
@@ -76,30 +76,23 @@ package main
 
 import "fmt"
 
+func growSteps(initialCap, numAppends int) []int {
+	s := make([]int, 0, initialCap)
+	oldCap := cap(s)
+	for i := 0; i < numAppends; i++ {
+		s = append(s, i)
+		if cap(s) != oldCap {
+			fmt.Printf("capacity grew: %d -> %d (len=%d)\n", oldCap, cap(s), len(s))
+			oldCap = cap(s)
+		}
+	}
+	return s
+}
+
 func main() {
-	// Preallocated with extra capacity
-	s := make([]int, 3, 8)
-	fmt.Printf("initial: len=%d cap=%d s=%v\n", len(s), cap(s), s)
-
-	// Append within capacity — no allocation
-	s = append(s, 10, 20)
-	fmt.Printf("after 2 appends: len=%d cap=%d s=%v\n", len(s), cap(s), s)
-
-	// Re-slice within capacity
-	t := s[1:4]
-	fmt.Printf("t = s[1:4]: len=%d cap=%d t=%v\n", len(t), cap(t), t)
-
-	// Full slice expression to limit capacity
-	u := s[1:4:4]
-	fmt.Printf("u = s[1:4:4]: len=%d cap=%d u=%v\n", len(u), cap(u), u)
-
-	// append on limited-capacity slice forces allocation
-	u = append(u, 99)
-	fmt.Println("after u append:", u, "s:", s)
-
-	// Reslice to full capacity
-	full := s[:cap(s)]
-	fmt.Println("full slice s[:cap(s)]:", full)
+	result := growSteps(2, 10)
+	fmt.Println("final slice:", result)
+	fmt.Println("final len:", len(result), "cap:", cap(result))
 }
 ```
 

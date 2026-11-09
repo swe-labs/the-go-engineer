@@ -1,7 +1,7 @@
 # Bytes
 
-> "At the lowest layer of I/O and networking, everything is a sequence of bytes."
-> — Claude E. Shannon
+> *"The fundamental problem of communication is that of reproducing at one point, either exactly or approximately, a message selected at another point."*
+> — Claude E. Shannon, *A Mathematical Theory of Communication* (1948)
 
 ## Learning objective
 
@@ -71,35 +71,38 @@ import (
 	"fmt"
 )
 
+func wordCount(text []byte) map[string]int {
+	counts := make(map[string]int)
+	words := bytes.Fields(text)
+	for _, w := range words {
+		counts[string(w)]++
+	}
+	return counts
+}
+
+func toUpperASCII(b []byte) []byte {
+	result := make([]byte, len(b))
+	for i, c := range b {
+		if c >= 'a' && c <= 'z' {
+			result[i] = c - 32
+		} else {
+			result[i] = c
+		}
+	}
+	return result
+}
+
 func main() {
-	// byte is uint8
-	var b byte = 65
-	fmt.Println("byte as char:", string(b), "as int:", b)
+	text := []byte("hello world hello Go")
+	fmt.Println("wordCount:", wordCount(text))
 
-	// []byte from string
-	data := []byte("hello world")
-	fmt.Println("data:", data)
-	fmt.Println("data as string:", string(data))
+	upper := toUpperASCII(text)
+	fmt.Println("toUpperASCII:", string(upper))
 
-	// bytes package utilities
-	fmt.Println("Contains 'world':", bytes.Contains(data, []byte("world")))
-	fmt.Println("HasPrefix 'hello':", bytes.HasPrefix(data, []byte("hello")))
-
-	// Split and Join
-	parts := bytes.Split(data, []byte(" "))
-	fmt.Println("Split by space:", parts)
-	joined := bytes.Join(parts, []byte(","))
-	fmt.Println("Joined with comma:", string(joined))
-
-	// Replace
-	replaced := bytes.Replace(data, []byte("world"), []byte("go"), 1)
-	fmt.Println("Replaced:", string(replaced))
-
-	// bytes.Buffer
 	var buf bytes.Buffer
-	buf.WriteString("count: ")
-	buf.Write([]byte{49, 50, 51})
-	fmt.Println("Buffer:", buf.String())
+	buf.WriteString("bytes.Buffer example: ")
+	buf.Write(upper)
+	fmt.Println(buf.String())
 }
 ```
 

@@ -10,7 +10,7 @@ Real e-commerce systems process pricing with tax, discounts, and currency format
 
 ## Prerequisites
 
-Complete all Module 03 lessons (01–23).
+Complete all Module 03 lessons (01–24) and the [Contact Directory](../contact-directory/README.md) project. This is Project 2 of the two module capstones.
 
 ## Available concepts
 

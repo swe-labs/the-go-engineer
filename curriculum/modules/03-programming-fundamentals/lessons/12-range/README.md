@@ -1,7 +1,7 @@
 # Range
 
-> "Don't just iterate; understand what is copied and what is referenced."
-> — Ken Thompson
+> *"It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures."*
+> — Alan J. Perlis, *Epigrams in Programming*
 
 ## Learning objective
 
@@ -97,52 +97,69 @@ The compiler expands `range` differently per type:
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unicode"
+)
+
+func wordCount(s string) map[string]int {
+	counts := make(map[string]int)
+	start := -1
+	for i, r := range s {
+		if unicode.IsLetter(r) {
+			if start == -1 {
+				start = i
+			}
+		} else {
+			if start != -1 {
+				counts[s[start:i]]++
+				start = -1
+			}
+		}
+	}
+	if start != -1 {
+		counts[s[start:]]++
+	}
+	return counts
+}
+
+func mergeCounts(maps ...map[string]int) map[string]int {
+	merged := make(map[string]int)
+	for _, m := range maps {
+		for k, v := range m {
+			merged[k] += v
+		}
+	}
+	return merged
+}
 
 func main() {
-	// Slice range
+	// Slice range demo
 	nums := []int{10, 20, 30}
-	fmt.Println("--- slice ---")
 	for i, v := range nums {
-		fmt.Printf("i=%d, v=%d\n", i, v)
+		fmt.Printf("slice[%d] = %d\n", i, v)
 	}
 
-	// Array range (copy semantics)
-	arr := [3]int{1, 2, 3}
-	fmt.Println("--- array (copy) ---")
-	for i, v := range arr {
-		if i == 0 {
-			arr[1] = 999 // modifies original, NOT the range copy
-		}
-		fmt.Printf("i=%d, v=%d\n", i, v)
-	}
-	fmt.Println("arr after:", arr) // [1, 999, 3]
-
-	// String range (runes)
-	fmt.Println("--- string ---")
+	// String range demo (runes)
 	s := "Hi, 世界"
 	for i, r := range s {
-		fmt.Printf("byte=%d, rune=%c (U+%04X)\n", i, r, r)
+		fmt.Printf("byte=%d rune=%c\n", i, r)
 	}
 
-	// Map range (non-deterministic order)
-	fmt.Println("--- map ---")
+	// Map range demo
 	m := map[string]int{"a": 1, "b": 2, "c": 3}
 	for k, v := range m {
-		fmt.Printf("k=%q, v=%d\n", k, v)
+		fmt.Printf("map[%q] = %d\n", k, v)
 	}
 
-	// Single-value range
-	fmt.Println("--- single-value (indices) ---")
-	for i := range nums {
-		fmt.Printf("index=%d\n", i)
-	}
+	// Practice task
+	wc := wordCount("hello world hello")
+	fmt.Println("wordCount:", wc)
 
-	// Discard index
-	fmt.Println("--- discard index ---")
-	for _, v := range nums {
-		fmt.Printf("value=%d\n", v)
-	}
+	m1 := map[string]int{"hello": 2, "world": 1}
+	m2 := map[string]int{"hello": 1, "go": 3}
+	merged := mergeCounts(m1, m2)
+	fmt.Println("merged:", merged)
 }
 ```
 

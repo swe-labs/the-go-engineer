@@ -1,7 +1,7 @@
 # Maps
 
-> "Hash tables are the workhorse of modern software engineering."
-> — Donald E. Knuth
+> *"Data dominates. If you've chosen the right data structures and organized things well, the algorithms will almost always be self-evident."*
+> — Rob Pike, *Notes on Programming in C*
 
 ## Learning objective
 
@@ -102,41 +102,69 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strings"
+	"unicode"
 )
 
+func WordFrequency(text string) map[string]int {
+	freq := make(map[string]int)
+	for _, word := range strings.Fields(text) {
+		cleaned := strings.TrimFunc(strings.ToLower(word), func(r rune) bool {
+			return !unicode.IsLetter(r) && !unicode.IsNumber(r)
+		})
+		if cleaned != "" {
+			freq[cleaned]++
+		}
+	}
+	return freq
+}
+
+type WordCount struct {
+	Word  string
+	Count int
+}
+
+func TopWords(freq map[string]int, n int) []WordCount {
+	if len(freq) == 0 || n <= 0 {
+		return nil
+	}
+	wcs := make([]WordCount, 0, len(freq))
+	for word, count := range freq {
+		wcs = append(wcs, WordCount{Word: word, Count: count})
+	}
+	sort.Slice(wcs, func(i, j int) bool {
+		if wcs[i].Count != wcs[j].Count {
+			return wcs[i].Count > wcs[j].Count
+		}
+		return wcs[i].Word < wcs[j].Word
+	})
+	if n > len(wcs) {
+		n = len(wcs)
+	}
+	return wcs[:n]
+}
+
 func main() {
-	ages := map[string]int{
-		"alice": 30,
-		"bob":   25,
+	text := `The quick brown fox jumps over the lazy dog. The dog barks, and the fox runs away. Quick as a flash, the fox disappears into the woods. The dog sniffs the ground but the fox is gone. What a chase! The fox wins again.`
+
+	freq := WordFrequency(text)
+	fmt.Println("Total unique words:", len(freq))
+
+	for w, c := range freq {
+		if c > 1 {
+			fmt.Printf("  %s: %d\n", w, c)
+		}
 	}
-	ages["carol"] = 35
 
-	fmt.Println("Initial map:", ages)
-
-	ages["bob"] = 26
-	fmt.Println("Bob's updated age:", ages["bob"])
-
-	delete(ages, "alice")
-	fmt.Println("After delete:", ages)
-
-	_, exists := ages["alice"]
-	fmt.Println("Alice exists?", exists)
-
-	v, ok := ages["carol"]
-	fmt.Printf("Carol lookup: value=%d, ok=%v\n", v, ok)
-
-	word := "mississippi"
-	freq := make(map[rune]int)
-	for _, ch := range word {
-		freq[ch]++
+	fmt.Println("\nTop 5 words:")
+	for _, wc := range TopWords(freq, 5) {
+		fmt.Printf("  %s: %d\n", wc.Word, wc.Count)
 	}
-	fmt.Println("Character frequencies:", freq)
 
-	var nilMap map[string]int
-	fmt.Println("nil map len:", len(nilMap))
-	fmt.Println("nil map lookup:", nilMap["x"])
-	// nilMap["x"] = 1 // would panic
+	empty := WordFrequency("")
+	fmt.Println("\nEmpty input length:", len(empty))
+	fmt.Println("TopWords on empty:", TopWords(empty, 5))
 }
 ```
 

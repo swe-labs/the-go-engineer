@@ -43,7 +43,7 @@ Plan for 60 to 90 minutes.
 | **Proof** | 25% | Tests cover normal cases and edge cases (not found, duplicate, empty, case-insensitive search, sorted output verification) | Tests cover normal CRUD operations only | No meaningful test coverage |
 | **Code quality** | 20% | Idiomatic Go: clean map/slice usage, proper error returns, `sort.Slice` for ordering, consistent naming | Mostly readable with minor issues | Hard to read, unidiomatic, or uses global state |
 
-**Passing score**: 70%
+**Passing score**: 80%
 
 ## Review questions
 
@@ -61,7 +61,7 @@ You pass when all tests pass, your directory workflow output demonstrates all CR
 
 ## Retake policy
 
-If you score below 70%, review the relevant Module 03 lessons (maps, slices, comma-ok idiom, sorting), fix the issues, and resubmit with a short correction note.
+If you score below 80%, review the relevant Module 03 lessons (maps, slices, comma-ok idiom, sorting), fix the issues, and resubmit with a short correction note.
 
 ## NEXT UP
 

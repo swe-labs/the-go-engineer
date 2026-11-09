@@ -1,7 +1,7 @@
 # Switch
 
-> "There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies."
-> — C.A.R. Hoare
+> *"There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies."*
+> — C.A.R. Hoare, Turing Lecture (1980)
 
 ## Learning objective
 
@@ -95,67 +95,61 @@ The absence of automatic fallthrough is a deliberate design choice. Go's creator
 ```go
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
+
+func calc(a, b float64, op string) (float64, error) {
+	switch op {
+	case "add", "sum", "+":
+		return a + b, nil
+	case "sub", "diff", "-":
+		return a - b, nil
+	case "mul", "prod", "*":
+		return a * b, nil
+	case "div", "/":
+		if b == 0 {
+			return 0, errors.New("division by zero")
+		}
+		return a / b, nil
+	default:
+		return 0, fmt.Errorf("unknown operator: %s", op)
+	}
+}
 
 func describe(v interface{}) string {
 	switch v := v.(type) {
-	case nil:
-		return "nil"
 	case int:
-		return fmt.Sprintf("int %d", v)
+		return fmt.Sprintf("int: %d", v)
 	case float64:
-		return fmt.Sprintf("float64 %f", v)
+		return fmt.Sprintf("float: %f", v)
 	case string:
-		return fmt.Sprintf("string %q (len %d)", v, len(v))
+		return fmt.Sprintf("string: %s", v)
 	case bool:
-		if v {
-			return "true"
-		}
-		return "false"
-	case []int:
-		return fmt.Sprintf("[]int len=%d cap=%d", len(v), cap(v))
+		return fmt.Sprintf("bool: %t", v)
 	default:
-		return fmt.Sprintf("unknown type %T", v)
+		return fmt.Sprintf("unknown type: %T", v)
 	}
 }
 
 func main() {
-	fmt.Println(describe(nil))
+	ops := []string{"add", "sub", "mul", "div", "+", "-", "*", "/", "unknown"}
+	for _, op := range ops {
+		result, err := calc(10, 3, op)
+		if err != nil {
+			fmt.Printf("calc(10, 3, %q) error: %v\n", op, err)
+		} else {
+			fmt.Printf("calc(10, 3, %q) = %f\n", op, result)
+		}
+	}
+
+	fmt.Println()
 	fmt.Println(describe(42))
 	fmt.Println(describe(3.14))
 	fmt.Println(describe("hello"))
 	fmt.Println(describe(true))
-	fmt.Println(describe([]int{1, 2, 3}))
-	fmt.Println(describe(struct{}{}))
-
-	// Expressionless switch as if/else chain
-	score := 85
-	switch {
-	case score >= 90:
-		fmt.Println("A")
-	case score >= 80:
-		fmt.Println("B")
-	case score >= 70:
-		fmt.Println("C")
-	case score >= 60:
-		fmt.Println("D")
-	default:
-		fmt.Println("F")
-	}
-
-	// Fallthrough example
-	i := 2
-	switch i {
-	case 1:
-		fmt.Println("one")
-	case 2:
-		fmt.Println("two")
-		fallthrough
-	case 3:
-		fmt.Println("three")
-	default:
-		fmt.Println("other")
-	}
+	fmt.Println(describe(struct{ name string }{"test"}))
 }
 ```
 

@@ -1,7 +1,7 @@
 # Boolean logic
 
-> "A mathematical analysis of logic is a calculus of deductive reasoning."
-> — George Boole
+> *"The Design of the following Treatise is to investigate the fundamental laws of those operations of the mind by which reasoning is performed."*
+> — George Boole, *An Investigation of the Laws of Thought* (1854)
 
 ## Learning objective
 
@@ -102,37 +102,44 @@ package main
 
 import "fmt"
 
-func main() {
-	// Truth table
-	fmt.Println("AND truth table:")
-	for _, a := range []bool{true, false} {
-		for _, b := range []bool{true, false} {
-			fmt.Printf("  %5t && %5t = %5t\n", a, b, a&&b)
-		}
+func canAccess(role string, isAdmin, isActive bool, hour int) bool {
+	if role == "" {
+		return false
 	}
-
-	fmt.Println("\nOR truth table:")
-	for _, a := range []bool{true, false} {
-		for _, b := range []bool{true, false} {
-			fmt.Printf("  %5t || %5t = %5t\n", a, b, a||b)
-		}
+	if role == "banned" {
+		return false
 	}
-
-	// Short-circuit demonstration
-	fmt.Println("\nShort-circuit:")
-	fmt.Printf("  false && sideEffect() = %t (sideEffect not called)\n", false && sideEffect())
-	fmt.Printf("  true || sideEffect()  = %t (sideEffect not called)\n", true || sideEffect())
-
-	// De Morgan's laws
-	a, b := true, false
-	fmt.Println("\nDe Morgan's laws:")
-	fmt.Printf("  !(a && b) == !a || !b: %t\n", !(a && b) == (!a || !b))
-	fmt.Printf("  !(a || b) == !a && !b: %t\n", !(a || b) == (!a && !b))
+	if !isActive {
+		return false
+	}
+	if isAdmin {
+		return true
+	}
+	return hour >= 9 && hour < 17
 }
 
-func sideEffect() bool {
-	fmt.Println("  sideEffect() WAS called!")
-	return true
+func main() {
+	cases := []struct {
+		role     string
+		isAdmin  bool
+		isActive bool
+		hour     int
+	}{
+		{"admin", true, true, 3},
+		{"admin", true, false, 3},
+		{"user", false, true, 10},
+		{"user", false, true, 20},
+		{"user", false, false, 10},
+		{"banned", false, true, 10},
+		{"", false, true, 10},
+		{"guest", false, true, 9},
+		{"guest", false, true, 17},
+	}
+	for _, c := range cases {
+		access := canAccess(c.role, c.isAdmin, c.isActive, c.hour)
+		fmt.Printf("role=%q admin=%t active=%t hour=%d → %t\n",
+			c.role, c.isAdmin, c.isActive, c.hour, access)
+	}
 }
 ```
 

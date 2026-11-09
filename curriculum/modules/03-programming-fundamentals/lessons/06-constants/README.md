@@ -1,7 +1,7 @@
 # Constants
 
-> "Constants in Go are untyped values of arbitrary precision until given a type by context."
-> — Rob Pike
+> *"Making something variable is easy. Controlling duration of constancy is the trick."*
+> — Alan J. Perlis, *Epigrams in Programming*
 
 ## Learning objective
 
@@ -84,32 +84,54 @@ package main
 import "fmt"
 
 const (
-	UnixToGoOffset = 62135596800 // untyped int constant
-	SecondsPerDay  = 86400
+	DaysInWeek      = 7
+	HoursInDay      = 24
+	MinutesInHour   = 60
+	SecondsInMinute = 60
+	SecondsPerWeek  = DaysInWeek * HoursInDay * MinutesInHour * SecondsInMinute
 )
 
-const typedHello string = "hello"
+const (
+	Monday = iota
+	Tuesday
+	Wednesday
+	Thursday
+	Friday
+	Saturday
+	Sunday
+)
 
 func main() {
-	const localConst = 42
-	fmt.Println("localConst:", localConst)
+	fmt.Println("Seconds per week:", SecondsPerWeek)
 
-	const bigShift = 1 << 100
-	fmt.Printf("1<<100 has type %T\n", bigShift) // still untyped
+	fmt.Printf("Monday = %d\n", Monday)
+	fmt.Printf("Tuesday = %d\n", Tuesday)
+	fmt.Printf("Wednesday = %d\n", Wednesday)
+	fmt.Printf("Thursday = %d\n", Thursday)
+	fmt.Printf("Friday = %d\n", Friday)
+	fmt.Printf("Saturday = %d\n", Saturday)
+	fmt.Printf("Sunday = %d\n", Sunday)
+}
 
-	// Constrain to a concrete type:
-	const normalized = bigShift >> 97
-	fmt.Println("normalized (1<<3):", normalized)
-
-	// Typed constant requires explicit conversion
-	var s string = typedHello
-	fmt.Println("s:", s)
-
-	// Untyped constant assigned to different types
-	var i int = SecondsPerDay
-	var f float64 = SecondsPerDay
-	var d time.Duration = SecondsPerDay * time.Second
-	fmt.Println(i, f, d)
+func weekdayName(n int) string {
+	switch n {
+	case Monday:
+		return "Monday"
+	case Tuesday:
+		return "Tuesday"
+	case Wednesday:
+		return "Wednesday"
+	case Thursday:
+		return "Thursday"
+	case Friday:
+		return "Friday"
+	case Saturday:
+		return "Saturday"
+	case Sunday:
+		return "Sunday"
+	default:
+		return "unknown"
+	}
 }
 ```
 

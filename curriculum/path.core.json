@@ -7307,7 +7307,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/01-values-and-expressions/assets",
         "diagram_paths": [],
@@ -7497,7 +7497,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/02-variables/assets",
         "diagram_paths": [],
@@ -7879,7 +7879,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/04-zero-values/assets",
         "diagram_paths": [],
@@ -8069,7 +8069,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/05-type-conversions/assets",
         "diagram_paths": [],
@@ -8259,7 +8259,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/06-constants/assets",
         "diagram_paths": [],
@@ -8451,7 +8451,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/07-iota/assets",
         "diagram_paths": [],
@@ -8643,7 +8643,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/08-boolean-logic/assets",
         "diagram_paths": [],
@@ -8833,7 +8833,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/09-if-and-else/assets",
         "diagram_paths": [],
@@ -9025,7 +9025,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/10-switch/assets",
         "diagram_paths": [],
@@ -9217,7 +9217,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/11-loops/assets",
         "diagram_paths": [],
@@ -9597,7 +9597,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/13-arrays/assets",
         "diagram_paths": [],
@@ -10553,7 +10553,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/18-comma-ok-idiom/assets",
         "diagram_paths": [],
@@ -10743,7 +10743,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/19-strings/assets",
         "diagram_paths": [],
@@ -10933,7 +10933,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/20-bytes/assets",
         "diagram_paths": [],

@@ -10,7 +10,7 @@ CRUD (Create, Read, Update, Delete) operations are the foundation of nearly ever
 
 ## Prerequisites
 
-Complete all Module 03 lessons (01–23). Complete the [Pricing Checkout](../pricing-checkout/README.md) project first.
+Complete all Module 03 lessons (01–24). This is Project 1 of the two module capstones — the [Pricing Checkout](../pricing-checkout/README.md) project follows it.
 
 ## Available concepts
 

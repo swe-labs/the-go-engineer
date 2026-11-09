@@ -1,7 +1,7 @@
 # Pointers as addresses
 
-> "There is no magic in pointers; an address is simply a number identifying a byte in memory."
-> — Maurice V. Wilkes
+> *"A pointer is a variable that contains the address of a variable."*
+> — Brian W. Kernighan & Dennis M. Ritchie, *The C Programming Language* (1978)
 
 ## Learning objective
 
@@ -83,28 +83,28 @@ package main
 
 import "fmt"
 
+func swap(a, b *int) {
+	tmp := *a
+	*a = *b
+	*b = tmp
+}
+
+func apply(nums []int, fn func(*int)) {
+	for i := range nums {
+		fn(&nums[i])
+	}
+}
+
 func main() {
-	x := 10
-	p := &x
+	x, y := 1, 2
+	fmt.Println("before swap: x =", x, "y =", y)
+	swap(&x, &y)
+	fmt.Println("after swap: x =", x, "y =", y)
 
-	fmt.Println("x:", x)
-	fmt.Println("p:", p)   // memory address
-	fmt.Println("*p:", *p) // value at address
-
-	*p = 20
-	fmt.Println("x after *p = 20:", x)
-
-	// Pointer to struct
-	type Point struct{ X, Y int }
-	pt := Point{3, 4}
-	q := &pt
-	q.X = 5 // equivalent to (*q).X = 5
-	fmt.Println("pt after q.X = 5:", pt)
-
-	// new function
-	n := new(int)
-	*n = 99
-	fmt.Println("*n:", *n)
+	vals := []int{10, 20, 30}
+	fmt.Println("before apply:", vals)
+	apply(vals, func(p *int) { *p *= 2 })
+	fmt.Println("after apply:", vals)
 }
 ```
 

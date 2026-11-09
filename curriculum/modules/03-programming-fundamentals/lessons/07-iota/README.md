@@ -125,50 +125,41 @@ package main
 
 import "fmt"
 
-type Permission uint8
+type Flag uint8
 
 const (
-	Read Permission = 1 << iota
-	Write
-	Execute
+	FlagA Flag = 1 << iota
+	FlagB
+	FlagC
+	FlagD
 )
 
-const (
-	_  = 1 << (10 * iota)
-	KiB
-	MiB
-	GiB
-	TiB
-	PiB
-)
-
-type Weekday int
-
-const (
-	Monday Weekday = iota + 1
-	Tuesday
-	Wednesday
-	Thursday
-	Friday
-	Saturday
-	Sunday
-)
-
-func main() {
-	fmt.Printf("Read=%b, Write=%b, Execute=%b\n", Read, Write, Execute)
-
-	perm := Read | Write
-	fmt.Printf("Read|Write = %b, can read? %t, can exec? %t\n",
-		perm, perm&Read != 0, perm&Execute != 0)
-
-	fmt.Printf("1 MiB = %d bytes\n", MiB)
-	fmt.Printf("1 GiB = %d bytes\n", GiB)
-
-	fmt.Printf("Wednesday = %d\n", Wednesday)
+func set(f, flag Flag) Flag {
+	return f | flag
 }
 
-func hasPermission(perm, check Permission) bool {
-	return perm&check != 0
+func clear(f, flag Flag) Flag {
+	return f &^ flag
+}
+
+func has(f, flag Flag) bool {
+	return f&flag != 0
+}
+
+func main() {
+	var f Flag = FlagA | FlagC
+	fmt.Printf("initial: %08b\n", f)
+
+	f = set(f, FlagB)
+	fmt.Printf("set(B):  %08b\n", f)
+
+	f = clear(f, FlagC)
+	fmt.Printf("clr(C):  %08b\n", f)
+
+	fmt.Printf("has A: %t\n", has(f, FlagA))
+	fmt.Printf("has B: %t\n", has(f, FlagB))
+	fmt.Printf("has C: %t\n", has(f, FlagC))
+	fmt.Printf("has D: %t\n", has(f, FlagD))
 }
 ```
 

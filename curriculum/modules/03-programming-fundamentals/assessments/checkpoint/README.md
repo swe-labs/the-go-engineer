@@ -54,7 +54,7 @@ Submit:
 | **Map and string handling** | Uses comma-ok idiom correctly; explains rune vs byte distinction | Basic map usage without edge-case awareness | Cannot explain map iteration order or rune concept |
 | **Pointer fundamentals** | Explains addressing, dereferencing, and nil pointer panics | Knows pointer syntax but cannot trace mutations | Cannot explain why pointers exist |
 
-**Passing threshold**: 3/5 average across all dimensions
+**Passing score**: 80%
 
 ## Retake policy
 
