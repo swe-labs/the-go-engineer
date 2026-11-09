@@ -46,6 +46,7 @@ var approvedPioneers = []string{
 	"Dave Cheney",
 	"Rebecca Stambler",
 	"Martin Fowler",
+	"Andrew Gerrand",
 	"Eric S. Raymond",
 	"Eric Raymond",
 	"Roy Fielding",
