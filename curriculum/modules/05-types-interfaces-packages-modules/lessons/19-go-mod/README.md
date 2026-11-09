@@ -129,20 +129,67 @@ package main
 
 import (
 	"fmt"
-	"runtime/debug"
+	"os"
+	"os/exec"
 )
 
 func main() {
-	bi, ok := debug.ReadBuildInfo()
-	if !ok {
-		fmt.Println("no build info (run with 'go run' or 'go build')")
-		return
+	tmpDir, err := os.MkdirTemp("", "go-mod-demo")
+	if err != nil {
+		panic(err)
 	}
-	fmt.Println("Module path:", bi.Main.Path)
-	fmt.Println("Go version:", bi.GoVersion)
-	for _, dep := range bi.Deps {
-		fmt.Printf("  dep: %s@%s\n", dep.Path, dep.Version)
+	defer os.RemoveAll(tmpDir)
+
+	// Write go.mod by hand.
+	goMod := `module example.com/handcrafted
+
+go 1.27.0
+
+require rsc.io/quote v1.5.2
+`
+	if err := os.WriteFile(tmpDir+"/go.mod", []byte(goMod), 0644); err != nil {
+		panic(err)
 	}
+
+	// Write main.go.
+	mainSrc := `package main
+
+import (
+	"fmt"
+	"rsc.io/quote"
+)
+
+func main() {
+	fmt.Println(quote.Hello())
+}
+`
+	if err := os.WriteFile(tmpDir+"/main.go", []byte(mainSrc), 0644); err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Module created. Running go mod tidy...")
+	cmd := exec.Command("go", "mod", "tidy")
+	cmd.Dir = tmpDir
+	if out, err := cmd.CombinedOutput(); err != nil {
+		panic(fmt.Sprintf("go mod tidy: %v\n%s", err, out))
+	}
+
+	fmt.Println("Building...")
+	cmd = exec.Command("go", "build", "-o", tmpDir+"/demo", ".")
+	cmd.Dir = tmpDir
+	if out, err := cmd.CombinedOutput(); err != nil {
+		panic(fmt.Sprintf("go build: %v\n%s", err, out))
+	}
+
+	fmt.Println("Running...")
+	cmd = exec.Command(tmpDir + "/demo")
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		panic(fmt.Sprintf("run: %v\n%s", err, out))
+	}
+	fmt.Printf("Output: %s", out)
+
+	fmt.Println("\ngo.mod demo complete.")
 }
 ```
 

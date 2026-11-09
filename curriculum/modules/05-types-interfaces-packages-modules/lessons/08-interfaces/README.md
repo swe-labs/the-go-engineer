@@ -84,7 +84,10 @@ The `itab` (interface table) is a cache generated at runtime, mapping the concre
 ```go
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Stringer interface {
 	String() string
@@ -103,6 +106,42 @@ func printAny(v interface{}) {
 	fmt.Printf("value=%v type=%T\n", v, v)
 }
 
+type Notifier interface {
+	Notify(message string) error
+}
+
+type EmailNotifier struct {
+	Address string
+}
+
+func (e EmailNotifier) Notify(message string) error {
+	if e.Address == "" {
+		return errors.New("email address is empty")
+	}
+	fmt.Printf("Email to %s: %s\n", e.Address, message)
+	return nil
+}
+
+type SMSNotifier struct {
+	Phone string
+}
+
+func (s SMSNotifier) Notify(message string) error {
+	if s.Phone == "" {
+		return errors.New("phone number is empty")
+	}
+	fmt.Printf("SMS to %s: %s\n", s.Phone, message)
+	return nil
+}
+
+func SendAlerts(notifiers []Notifier, message string) {
+	for _, n := range notifiers {
+		if err := n.Notify(message); err != nil {
+			fmt.Println("notify error:", err)
+		}
+	}
+}
+
 func main() {
 	var s Stringer
 	fmt.Printf("nil? %v, type=%T\n", s == nil, s)
@@ -112,9 +151,8 @@ func main() {
 	fmt.Printf("type=%T\n", s)
 
 	var p *Book
-	s = p                // assigning typed nil
-	fmt.Printf("nil? %v, type=%T\n", s == nil, s) // false!
-	fmt.Printf("value nil? %v\n", s == nil)       // true
+	s = p
+	fmt.Printf("typed nil assignment: nil? %v, type=%T\n", s == nil, s)
 
 	var empty interface{}
 	empty = 42
@@ -123,6 +161,12 @@ func main() {
 	printAny(empty)
 	empty = Book{Title: "Brave New World", Author: "Huxley"}
 	printAny(empty)
+
+	notifiers := []Notifier{
+		EmailNotifier{Address: "alice@example.com"},
+		SMSNotifier{Phone: "+1234567890"},
+	}
+	SendAlerts(notifiers, "System maintenance at midnight")
 }
 ```
 

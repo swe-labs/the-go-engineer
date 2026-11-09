@@ -10,7 +10,7 @@ Go does not have class inheritance. Instead, Go architectures rely on compositio
 
 ## Prerequisites
 
-Complete all Module 05 lessons (01–23) on struct definitions, value vs pointer receivers, interfaces, method sets, type switches, nil interfaces, and generics.
+Complete all Module 05 lessons (01–24) on struct definitions, value vs pointer receivers, interfaces, method sets, type switches, nil interfaces, and generics.
 
 ## Available concepts
 
