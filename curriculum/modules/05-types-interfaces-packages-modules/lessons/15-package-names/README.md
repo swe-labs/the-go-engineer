@@ -51,7 +51,7 @@ Rules:
 The import path is the full filesystem path relative to your module root:
 
 ```go
-import "github.com/rasel9t6/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names"
+import "github.com/swe-labs/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names"
 ```
 
 The last element of the import path **should** match the package name, but Go does not enforce this. If they diverge, users import by the path but qualify by the package name — a guaranteed source of confusion.
@@ -106,7 +106,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/rasel9t6/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names/greeter"
+	"github.com/swe-labs/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names/greeter"
 )
 
 func main() {
@@ -126,7 +126,7 @@ For the `greeter` package:
 
 For package name resolution during import:
 
-1. `import "github.com/rasel9t6/the-go-engineer/.../greeter"` tells the compiler to find the directory `greeter` under the module root.
+1. `import "github.com/swe-labs/the-go-engineer/.../greeter"` tells the compiler to find the directory `greeter` under the module root.
 2. The compiler reads the first `.go` file in that directory, extracts the `package` clause, and uses it as the qualifier.
 3. If the package name does not match the directory name, the compiler still compiles it — but humans will be confused.
 

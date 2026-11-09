@@ -140,7 +140,7 @@ go test -race -count=1 .
 Expected output (from `curriculum/modules/13-performance-memory-engineering/lessons/05-escape-analysis`):
 
 ```text
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/13-performance-memory-engineering/lessons/05-escape-analysis	2.0s
+ok  	github.com/swe-labs/the-go-engineer/curriculum/modules/13-performance-memory-engineering/lessons/05-escape-analysis	2.0s
 ```
 
 Now ask the compiler for the escape decisions and the reason for each one by passing `-m` twice:

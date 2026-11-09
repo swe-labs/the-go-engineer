@@ -12,7 +12,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components"
+	"github.com/swe-labs/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components"
 )
 
 //go:embed static/*

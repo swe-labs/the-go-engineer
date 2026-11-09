@@ -462,26 +462,26 @@ Any PR touching Opslane must be checked for:
 
 ## Assessment Model
 
-### Phase 1: Code Quality
+### Assessment Stage 1: Code Quality
 
 - correctness
 - explicit error handling
 - system boundaries
 - naming and maintainability
 
-### Phase 2: Failure Injection
+### Assessment Stage 2: Failure Injection
 
 - diagnose injected failures
 - explain the real root cause
 - implement bounded fixes
 
-### Phase 3: Performance and Scale
+### Assessment Stage 3: Performance and Scale
 
 - identify bottlenecks
 - support claims with measurements
 - improve behavior without introducing hidden instability
 
-### Phase 4: Architecture Defense
+### Assessment Stage 4: Architecture Defense
 
 - explain design choices
 - compare alternatives

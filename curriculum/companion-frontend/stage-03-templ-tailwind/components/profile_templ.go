@@ -8,7 +8,7 @@ package components
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
+import "github.com/swe-labs/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
 
 type ProfileViewModel struct {
 	User         UserContext

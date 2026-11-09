@@ -198,7 +198,7 @@ go test -race -count=1 .
 Expected output (from `curriculum/modules/11-lifecycle-context-concurrency/lessons/11-goroutines`):
 
 ```text
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/11-lifecycle-context-concurrency/lessons/11-goroutines	0.4s
+ok  	github.com/swe-labs/the-go-engineer/curriculum/modules/11-lifecycle-context-concurrency/lessons/11-goroutines	0.4s
 ```
 
 The race detector instruments every memory access. The example passes because `sync.WaitGroup` establishes a happens-before edge between each goroutine and `wg.Wait()`; no unsynchronized shared memory remains.

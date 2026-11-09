@@ -103,7 +103,7 @@ Expected output:
 === RUN   TestHTTPHandler_Endpoints
 --- PASS: TestHTTPHandler_Endpoints (0.00s)
 PASS
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/12-observability-diagnostics/projects/observability-retrofit/_solution	0.443s
+ok  	github.com/swe-labs/the-go-engineer/curriculum/modules/12-observability-diagnostics/projects/observability-retrofit/_solution	0.443s
 ```
 
 ## Rubric

@@ -236,7 +236,7 @@ go test -race -count=1 .
 Expected output (from `curriculum/electives/advanced-electives/lessons/23-config-and-security-context`):
 
 ```text
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/electives/advanced-electives/lessons/23-config-and-security-context	1.7s
+ok  	github.com/swe-labs/the-go-engineer/curriculum/electives/advanced-electives/lessons/23-config-and-security-context	1.7s
 ```
 
 The tests cover the valid path, the defaults, a missing required value, a non-numeric value, an invalid log level, and secret rotation. Now demonstrate fail-fast behavior by running the binary with no configuration:

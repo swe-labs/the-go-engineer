@@ -40,7 +40,7 @@ flowchart TD
 **`module`**: The module's import path. All packages in the module are imported relative to this path.
 
 ```
-module github.com/rasel9t6/the-go-engineer
+module github.com/swe-labs/the-go-engineer
 ```
 
 **`go`**: The Go language version the module was written for. This sets the language features available and the toolchain version.

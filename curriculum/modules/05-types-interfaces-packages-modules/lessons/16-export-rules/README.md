@@ -124,7 +124,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/rasel9t6/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/16-export-rules/person"
+	"github.com/swe-labs/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/16-export-rules/person"
 )
 
 func main() {

@@ -48,12 +48,12 @@ import "github.com/user/service/pkg/auth""]
 A module is defined by a `go.mod` file at its root. The module path is the import path prefix for all packages within the module.
 
 ```go
-module github.com/rasel9t6/the-go-engineer
+module github.com/swe-labs/the-go-engineer
 
 go 1.27.0
 ```
 
-- Every package inside this module (e.g., `curriculum/modules/...`) is imported relative to `github.com/rasel9t6/the-go-engineer`.
+- Every package inside this module (e.g., `curriculum/modules/...`) is imported relative to `github.com/swe-labs/the-go-engineer`.
 - The `go` directive specifies the Go language version expected.
 
 ### Module versioning
@@ -120,7 +120,7 @@ The `replace` directive is applied during resolution — before any version comp
 
 ```go
 // File: go.mod
-module github.com/rasel9t6/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/18-modules/example
+module github.com/swe-labs/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/18-modules/example
 
 go 1.27.0
 

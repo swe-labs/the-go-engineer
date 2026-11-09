@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/rasel9t6/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names/mathutil"
-	"github.com/rasel9t6/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names/strutil"
+	"github.com/swe-labs/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names/mathutil"
+	"github.com/swe-labs/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names/strutil"
 )
 
 func main() {

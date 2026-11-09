@@ -114,7 +114,7 @@ Expected output:
 === RUN   TestHTTPHandler_EndToEnd
 --- PASS: TestHTTPHandler_EndToEnd (0.00s)
 PASS
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/14-architecture-distributed-systems/projects/modular-refactor-review/_solution	0.818s
+ok  	github.com/swe-labs/the-go-engineer/curriculum/modules/14-architecture-distributed-systems/projects/modular-refactor-review/_solution	0.818s
 ```
 
 ## Rubric

@@ -102,7 +102,7 @@ Implement an interactive client for the Module 08 **Book Catalog REST API**:
 ```templ
 package components
 
-import "github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
+import "github.com/swe-labs/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
 
 templ RoleIndicator(role string) {
     if role == "admin" {

@@ -18,7 +18,7 @@ import (
 	"time"
 
 	"github.com/a-h/templ"
-	"github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-04-htmx-alpine/components"
+	"github.com/swe-labs/the-go-engineer/curriculum/companion-frontend/stage-04-htmx-alpine/components"
 )
 
 //go:embed templates/*.html

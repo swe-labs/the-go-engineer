@@ -1,6 +1,6 @@
 # The Go Engineer
 
-[![CI](https://github.com/rasel9t6/the-go-engineer/actions/workflows/ci.yml/badge.svg)](https://github.com/rasel9t6/the-go-engineer/actions)
+[![CI](https://github.com/swe-labs/the-go-engineer/actions/workflows/ci.yml/badge.svg)](https://github.com/swe-labs/the-go-engineer/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 > **Release status:** `v3.0.0` on the `release/v3` line. Authoritative curriculum metadata lives in [`curriculum/`](./curriculum/README.md).
@@ -81,7 +81,7 @@ The **dual-state starter/solution model** means every project begins as a runnab
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/rasel9t6/the-go-engineer.git
+git clone https://github.com/swe-labs/the-go-engineer.git
 cd the-go-engineer
 
 # 2. Download dependencies

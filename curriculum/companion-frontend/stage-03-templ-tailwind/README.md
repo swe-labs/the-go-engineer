@@ -114,9 +114,9 @@ The [`components.json`](./components.json) file holds configuration for your pro
   "menuColor": "default",
   "menuAccent": "subtle",
   "aliases": {
-    "utils": "github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/utils",
-    "components": "github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components",
-    "ui": "github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
+    "utils": "github.com/swe-labs/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/utils",
+    "components": "github.com/swe-labs/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components",
+    "ui": "github.com/swe-labs/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
   },
   "scripts": {
     "dir": "static",

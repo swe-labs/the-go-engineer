@@ -193,7 +193,7 @@ Insight: Go testing discourages opaque assertion macros (like assert.Equal).
 Standard 'got != want' messages clearly display what the code did vs what was expected.
 --- PASS: TestMainExecution (0.00s)
 PASS
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/02-go-setup-tooling/lessons/12-reading-test-failures
+ok  	github.com/swe-labs/the-go-engineer/curriculum/modules/02-go-setup-tooling/lessons/12-reading-test-failures
 ```
 
 ## Review questions

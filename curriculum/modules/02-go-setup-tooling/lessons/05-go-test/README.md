@@ -199,7 +199,7 @@ Expected output (passing):
     --- PASS: TestAdd/zeros (0.00s)
     --- PASS: TestAdd/identity_with_zero (0.00s)
 PASS
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/02-go-setup-tooling/lessons/05-go-test
+ok  	github.com/swe-labs/the-go-engineer/curriculum/modules/02-go-setup-tooling/lessons/05-go-test
 ```
 
 Also run:

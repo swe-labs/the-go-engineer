@@ -36,6 +36,7 @@ assignees: ""
 - [ ] Security-sensitive tests added or updated
 - [ ] `go test ./...`
 - [ ] `go test -race ./...`
+- [ ] `go test -coverprofile=coverage.out ./...`
 - [ ] `go run ./scripts/validate_curriculum.go`
 
 ## Risk Notes

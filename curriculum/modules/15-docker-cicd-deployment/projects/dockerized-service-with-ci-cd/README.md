@@ -113,7 +113,7 @@ Expected output:
 === RUN   TestCIDeploymentWorkflow
 --- PASS: TestCIDeploymentWorkflow (0.00s)
 PASS
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/15-docker-cicd-deployment/projects/dockerized-service-with-ci-cd/_solution	0.965s
+ok  	github.com/swe-labs/the-go-engineer/curriculum/modules/15-docker-cicd-deployment/projects/dockerized-service-with-ci-cd/_solution	0.965s
 ```
 
 ## Rubric

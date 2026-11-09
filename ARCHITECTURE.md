@@ -81,3 +81,5 @@ Run CI-equivalent curriculum validation:
 ```bash
 go run ./internal/tools/curriculum validate-all
 ```
+
+For full PR readiness, use the complete local verification bundle in `CODE-STANDARDS.md`.

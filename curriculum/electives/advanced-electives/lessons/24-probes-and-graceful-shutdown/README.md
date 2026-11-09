@@ -285,7 +285,7 @@ go test -race -count=1 .
 Expected output:
 
 ```text
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/electives/advanced-electives/lessons/24-probes-and-graceful-shutdown	2.4s
+ok  	github.com/swe-labs/the-go-engineer/curriculum/electives/advanced-electives/lessons/24-probes-and-graceful-shutdown	2.4s
 ```
 
 Interpretation: `TestShutdownWaitsForInflightRequest` blocks a handler, starts shutdown, asserts that shutdown does not return for at least 100 ms, releases the handler, and then asserts that both the request and shutdown complete. A failure means the process can exit while a request is still in flight. The `-race` flag proves the `atomic.Bool` and `WaitGroup` usage is free of data races.

@@ -194,7 +194,7 @@ go test -race -count=1 .
 Expected output (from `curriculum/electives/advanced-electives/lessons/25-resources-and-go-runtime`):
 
 ```text
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/electives/advanced-electives/lessons/25-resources-and-go-runtime	1.7s
+ok  	github.com/swe-labs/the-go-engineer/curriculum/electives/advanced-electives/lessons/25-resources-and-go-runtime	1.7s
 ```
 
 Now run the binary with a 1 GiB container limit and `GOGC=50`:

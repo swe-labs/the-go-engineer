@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/a-h/templ"
-	"github.com/rasel9t6/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
+	"github.com/swe-labs/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components/ui"
 )
 
 func renderToString(ctx context.Context, c templ.Component) (string, error) {

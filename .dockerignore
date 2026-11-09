@@ -1,0 +1,53 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+!go.mod
+!go.sum
+
+# Test and coverage
+*_test.go
+coverage.out
+coverage.html
+*.cover
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+tmp/
+temp/
+vendor/
+
+# Build artifacts
+bin/
+dist/
+
+# Curriculum (not needed in container)
+00-how-computers-work/
+01-getting-started/
+02-language-basics/
+03-functions-errors/
+04-types-design/
+05-packages-io/
+06-backend-db/
+07-concurrency/
+08-quality-test/
+09-architecture/
+10-production/
+
+# Scripts
+scripts/
+
+# Docs
+docs/

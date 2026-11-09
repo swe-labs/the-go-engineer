@@ -285,7 +285,7 @@ Create the following directory structure within this lab directory:
 
 ```
 lab-17-project-layout/
-  go.mod  (module github.com/rasel9t6/the-go-engineer/lab-17-project-layout)
+  go.mod  (module github.com/swe-labs/the-go-engineer/lab-17-project-layout)
   cmd/
     server/
       main.go       → package main; prints "Server starting..." then calls Greet from internal/hello

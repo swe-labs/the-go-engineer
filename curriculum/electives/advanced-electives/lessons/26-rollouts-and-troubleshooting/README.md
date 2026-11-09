@@ -273,7 +273,7 @@ go test -race -count=1 .
 Expected output (from `curriculum/electives/advanced-electives/lessons/26-rollouts-and-troubleshooting`):
 
 ```text
-ok  	github.com/rasel9t6/the-go-engineer/curriculum/electives/advanced-electives/lessons/26-rollouts-and-troubleshooting	2.0s
+ok  	github.com/swe-labs/the-go-engineer/curriculum/electives/advanced-electives/lessons/26-rollouts-and-troubleshooting	2.0s
 ```
 
 The tests cover metadata extraction, the missing-metadata defaults, the JSON handler, and the rollback-compatible response shape. Now build the binary and query the version endpoint:

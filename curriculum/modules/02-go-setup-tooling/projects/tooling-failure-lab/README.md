@@ -132,7 +132,7 @@ Expected output:
 === RUN   TestMultiplyNegative
 --- PASS: TestMultiplyNegative (0.00s)
 PASS
-ok   	github.com/rasel9t6/the-go-engineer/curriculum/modules/02-go-setup-tooling/projects/tooling-failure-lab/_starter
+ok   	github.com/swe-labs/the-go-engineer/curriculum/modules/02-go-setup-tooling/projects/tooling-failure-lab/_starter
 ```
 
 ```bash

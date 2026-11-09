@@ -1,0 +1,31 @@
+#!/bin/sh
+# commit-msg hook: validates commit message format.
+#
+# Format: [TYPE] short imperative description
+# Types:  FEAT | FIX | DOCS | TEST | CHORE | REFACTOR | SECURITY | RELEASE
+#
+# Install: git config core.hooksPath .githooks
+
+MSG_FILE="$1"
+COMMIT_RX='^\[(FEAT|FIX|DOCS|TEST|CHORE|REFACTOR|SECURITY|RELEASE)\] .+'
+SUBJECT=$(head -1 "$MSG_FILE")
+
+# Allow merge commits
+echo "$SUBJECT" | grep -Eq '^Merge ' && exit 0
+
+if ! echo "$SUBJECT" | grep -Eq "$COMMIT_RX"; then
+	echo ""
+	echo "  ERROR: Invalid commit message format."
+	echo ""
+	echo "  Expected: [TYPE] short imperative description"
+	echo "  Example:  [FIX] correct tenant scoping in DB.3"
+	echo "  Example:  [DOCS] align release workflow with v2.1 maintenance"
+	echo ""
+	echo "  Allowed types: FEAT | FIX | DOCS | TEST | CHORE | REFACTOR | SECURITY | RELEASE"
+	echo ""
+	echo "  Your subject: $SUBJECT"
+	echo ""
+	exit 1
+fi
+
+exit 0
