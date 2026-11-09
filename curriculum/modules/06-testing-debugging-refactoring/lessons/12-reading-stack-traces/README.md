@@ -115,6 +115,24 @@ func Third() {
 
 func trigger() { deep() }
 func deep()    { panic("boom") }
+
+func GetCallerInfo(skip int) (funcName, file string, line int, ok bool) {
+	pc, file, line, ok := runtime.Caller(skip)
+	if !ok {
+		return "", "", 0, false
+	}
+	fn := runtime.FuncForPC(pc)
+	return fn.Name(), file, line, true
+}
+
+func StackDepth() int {
+	for i := 0; ; i++ {
+		_, _, _, ok := runtime.Caller(i)
+		if !ok {
+			return i
+		}
+	}
+}
 ```
 
 ## Step-by-step execution

@@ -82,26 +82,27 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
-// Greet returns a greeting for the given name.
-func Greet(name string) string {
-	return "Hello, " + strings.TrimSpace(name) + "!"
-}
-
-// Sum returns the sum of a slice of integers.
-func Sum(nums []int) int {
-	total := 0
-	for _, n := range nums {
-		total += n
+func SplitHostPort(addr string) (host string, port int, err error) {
+	host, portStr, cut := strings.Cut(addr, ":")
+	if !cut {
+		return "", 0, fmt.Errorf("missing port in address %q", addr)
 	}
-	return total
+	port, err = strconv.Atoi(portStr)
+	if err != nil {
+		return "", 0, fmt.Errorf("invalid port %q in address %q", portStr, addr)
+	}
+	if port < 1 || port > 65535 {
+		return "", 0, fmt.Errorf("port %d out of range in address %q", port, addr)
+	}
+	return host, port, nil
 }
 
 func main() {
-	fmt.Println(Greet("Alice"))
-	fmt.Println(Sum([]int{1, 2, 3, 4}))
+	fmt.Println(SplitHostPort("localhost:8080"))
 }
 ```
 

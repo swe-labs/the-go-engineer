@@ -10,7 +10,7 @@ In professional software engineering, you rarely write software from a blank sla
 
 ## Prerequisites
 
-Complete all Module 06 lessons (01–13) on table-driven tests, subtests, test coverage analysis (`go test -cover`), benchmark profiling, and regression safety.
+Complete all Module 06 lessons (01–21) on table-driven tests, subtests, test coverage analysis (`go test -cover`), benchmark profiling, and regression safety.
 
 ## Available concepts
 

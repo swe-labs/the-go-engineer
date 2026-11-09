@@ -93,20 +93,27 @@ go test -run 'TestAdd/(positive|negative)'  # regex pattern
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-// Max returns the larger of two integers.
-func Max(a, b int) int {
-	if a > b {
-		return a
+func ParseBool(s string) (bool, error) {
+	switch strings.ToLower(s) {
+	case "true", "1":
+		return true, nil
+	case "false", "0":
+		return false, nil
+	default:
+		return false, fmt.Errorf("invalid boolean: %q", s)
 	}
-	return b
 }
 
 func main() {
-	fmt.Println("Max(3, 7) =", Max(3, 7))
-	fmt.Println("Max(10, 2) =", Max(10, 2))
-	fmt.Println("Max(5, 5) =", Max(5, 5))
+	fmt.Println(ParseBool("true"))
+	fmt.Println(ParseBool("FALSE"))
+	fmt.Println(ParseBool("1"))
+	fmt.Println(ParseBool("yes"))
 }
 ```
 

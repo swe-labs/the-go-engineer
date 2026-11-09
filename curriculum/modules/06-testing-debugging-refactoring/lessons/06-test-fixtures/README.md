@@ -87,27 +87,38 @@ The pattern is consistent: fixtures live in `testdata/`, tests reference them by
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
 )
 
-// LoadFixture reads a fixture file from the testdata directory.
-func LoadFixture(name string) (string, error) {
-	data, err := os.ReadFile(filepath.Join("testdata", name))
+type User struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
+}
+
+func LoadUsers() ([]User, error) {
+	data, err := os.ReadFile(filepath.Join("testdata", "users.json"))
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-	return string(data), nil
+	var users []User
+	if err := json.Unmarshal(data, &users); err != nil {
+		return nil, err
+	}
+	return users, nil
 }
 
 func main() {
-	content, err := LoadFixture("greeting.txt")
+	users, err := LoadUsers()
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
 	}
-	fmt.Print(content)
+	for _, u := range users {
+		fmt.Printf("%s is %d years old\n", u.Name, u.Age)
+	}
 }
 ```
 

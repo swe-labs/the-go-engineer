@@ -105,9 +105,7 @@ The standard library generally prefers fakes and real implementations over mocks
 ```go
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // UserStore stores user information.
 type UserStore interface {
@@ -115,7 +113,7 @@ type UserStore interface {
 	Find(name string) (int, error)
 }
 
-// RealUserStore connects to a database (simulated).
+// RealUserStore is a production implementation backed by a map.
 type RealUserStore struct {
 	db map[string]int
 }
@@ -131,6 +129,23 @@ func (r *RealUserStore) Find(name string) (int, error) {
 		return 0, fmt.Errorf("user %q not found", name)
 	}
 	return age, nil
+}
+
+// Calculator performs arithmetic operations.
+type Calculator interface {
+	Add(a, b int) int
+	Multiply(a, b int) int
+}
+
+// RealCalculator performs real arithmetic.
+type RealCalculator struct{}
+
+func (RealCalculator) Add(a, b int) int      { return a + b }
+func (RealCalculator) Multiply(a, b int) int { return a * b }
+
+// Double returns n*2 using Add.
+func Double(c Calculator, n int) int {
+	return c.Add(n, n)
 }
 
 // Greeter greets users from a store.
@@ -156,6 +171,8 @@ func main() {
 	g := NewGreeter(store)
 	msg, _ := g.Greet("Alice")
 	fmt.Println(msg)
+
+	fmt.Println("Double(5) =", Double(RealCalculator{}, 5))
 }
 ```
 

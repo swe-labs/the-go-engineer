@@ -94,11 +94,22 @@ package main
 
 import (
 	"errors"
-	"testing"
+	"fmt"
 	"unicode/utf8"
 )
 
-// Reverse returns the reversed version of s.
+func main() {
+	inputs := []string{"hello", "world", "héllo", ""}
+	for _, s := range inputs {
+		result, err := Reverse(s)
+		if err != nil {
+			fmt.Printf("Reverse(%q) error: %v\n", s, err)
+		} else {
+			fmt.Printf("Reverse(%q) = %q\n", s, result)
+		}
+	}
+}
+
 func Reverse(s string) (string, error) {
 	if !utf8.ValidString(s) {
 		return "", errors.New("invalid utf-8")
@@ -108,28 +119,6 @@ func Reverse(s string) (string, error) {
 		runes[i], runes[j] = runes[j], runes[i]
 	}
 	return string(runes), nil
-}
-
-func FuzzReverse(f *testing.F) {
-	seeds := []string{"hello", "world", "12345", "", "a", "abc"}
-	for _, s := range seeds {
-		f.Add(s)
-	}
-
-	f.Fuzz(func(t *testing.T, s string) {
-		// Invariant: reversing twice gives the original.
-		first, err := Reverse(s)
-		if err != nil {
-			return // skip invalid inputs
-		}
-		second, err := Reverse(first)
-		if err != nil {
-			t.Errorf("Reverse(Reverse(%q)) returned error: %v", s, err)
-		}
-		if second != s {
-			t.Errorf("Reverse(Reverse(%q)) = %q, want %q", s, second, s)
-		}
-	})
 }
 ```
 

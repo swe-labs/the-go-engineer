@@ -61,32 +61,8 @@ package main
 
 import (
 	"errors"
-	"testing"
+	"fmt"
 )
-
-func TestProcessOrder(t *testing.T) {
-	tests := []struct {
-		name     string
-		items    []string
-		wantErr  bool
-		wantCost int
-	}{
-		{"valid order", []string{"item1", "item2"}, false, 200},
-		{"empty order", []string{}, true, 0},
-		{"unknown item", []string{"nope"}, true, 0},
-	}
-	for _, tc := range tests {
-		t.Run(tc.name, func(t *testing.T) {
-			cost, err := processOrder(tc.items)
-			if (err != nil) != tc.wantErr {
-				t.Errorf("processOrder() error = %v, wantErr %v", err, tc.wantErr)
-			}
-			if cost != tc.wantCost {
-				t.Errorf("processOrder() cost = %d, want %d", cost, tc.wantCost)
-			}
-		})
-	}
-}
 
 type Item struct {
 	Name  string
@@ -96,6 +72,16 @@ type Item struct {
 var catalog = map[string]int{
 	"item1": 100,
 	"item2": 100,
+}
+
+func main() {
+	items := []string{"item1", "item2"}
+	cost, err := processOrder(items)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("Total cost:", cost)
+	}
 }
 
 func processOrder(items []string) (int, error) {

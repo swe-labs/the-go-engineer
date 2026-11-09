@@ -79,6 +79,8 @@ func main() {
 
 	result := compute(10, 5)
 	fmt.Println("Result:", result)
+
+	fmt.Println("Done.")
 }
 
 func greeting(name string) string {
