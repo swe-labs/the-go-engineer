@@ -10,7 +10,7 @@ Writing new code is only half of a software engineer's job; debugging subtle edg
 
 ## Prerequisites
 
-Complete all Module 06 lessons (01–13) on unit testing with `testing.T`, table-driven tests, subtests, race condition detection with `-race`, Delve debugger basics, and error tracing.
+Complete all Module 06 lessons (01–21) on unit testing with `testing.T`, table-driven tests, subtests, race condition detection with `-race`, Delve debugger basics, and error tracing.
 
 ## Available concepts
 

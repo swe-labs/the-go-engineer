@@ -101,6 +101,10 @@ func computeScore(id int) int {
 	bonus := id * id
 	return base + bonus
 }
+
+func multiply(x, y int) int {
+	return x * y
+}
 ```
 
 Debugging session:

@@ -107,30 +107,43 @@ Production Go codebases routinely design functions to accept `io.Writer` or `io.
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"io"
 	"log"
 	"os"
+	"strings"
 )
 
-// Greet writes a greeting to w.
 func Greet(w io.Writer, name string) {
 	fmt.Fprintf(w, "Hello, %s!\n", name)
 }
 
-// NewLogger creates a logger that writes to w with a prefix.
 func NewLogger(w io.Writer, prefix string) *log.Logger {
-	return log.New(w, prefix, log.LstdFlags)
+	return log.New(w, prefix, 0)
+}
+
+func WriteTable(w io.Writer, rows [][2]string) {
+	fmt.Fprintln(w, "Name    | Age")
+	fmt.Fprintln(w, "--------|-----")
+	for _, row := range rows {
+		fmt.Fprintf(w, "%-7s | %s\n", row[0], row[1])
+	}
 }
 
 func main() {
 	Greet(os.Stdout, "Alice")
 
-	var buf bytes.Buffer
-	logger := NewLogger(&buf, "APP: ")
+	logger := NewLogger(os.Stdout, "APP: ")
 	logger.Println("started")
-	fmt.Print("Captured log: ", buf.String())
+
+	WriteTable(os.Stdout, [][2]string{
+		{"Alice", "30"},
+		{"Bob", "25"},
+	})
+
+	var buf strings.Builder
+	WriteTable(&buf, [][2]string{{"Test", "1"}})
+	fmt.Print("Captured:\n", buf.String())
 }
 ```
 
