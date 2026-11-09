@@ -45,7 +45,7 @@ This lab draws on the following concepts. If any are unfamiliar, review the corr
 
 ## Lab overview
 
-The `_starter/` directory contains a Go program with **5 deliberate failures**. Each failure is designed to be discovered by one of the Go tooling commands you learned in Module 02. Your job is to:
+The `_starter/` directory contains a Go program with **4 deliberate failures**. Each failure is designed to be discovered by one of the Go tooling commands you learned in Module 02. Each failure is designed to be discovered by one of the Go tooling commands you learned in Module 02. Your job is to:
 
 1. Run each tool and observe what it reports.
 2. Identify which failure each tool uncovers.
@@ -132,7 +132,7 @@ Expected output:
 === RUN   TestMultiplyNegative
 --- PASS: TestMultiplyNegative (0.00s)
 PASS
-ok      tooling-failure-lab      0.xxx
+ok   	github.com/rasel9t6/the-go-engineer/curriculum/modules/02-go-setup-tooling/projects/tooling-failure-lab/_starter
 ```
 
 ```bash
@@ -157,7 +157,7 @@ Multiply returns the product of two integers.
 
 | Criterion | Excellent (5) | Good (3) | Needs Work (0) |
 |-----------|--------------|----------|----------------|
-| **Correctness** | All 5 failures identified and fixed; all verification commands pass | 3-4 failures fixed; most verification passes | Fewer than 3 failures fixed |
+| **Correctness** | All 4 failures identified and fixed; all verification commands pass | 2-3 failures fixed; most verification passes | Fewer than 2 failures fixed |
 | **Diagnostic quality** | Systematic approach: run tool, read error, identify cause, apply fix, verify | Some systematic steps but skips verification | Random trial-and-error; no record of diagnostic steps |
 | **Documentation** | TROUBLESHOOTING.md covers all failures with root cause and fix for each | Covers most failures but missing root cause details | Missing or incomplete documentation |
 | **Tool mastery** | Uses all 6 tools (go run, go build, go test, gofmt, go vet, go doc) correctly | Uses 4-5 tools correctly | Uses fewer than 4 tools |

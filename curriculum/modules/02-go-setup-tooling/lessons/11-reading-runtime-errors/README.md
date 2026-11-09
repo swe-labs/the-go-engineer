@@ -1,7 +1,7 @@
 # Reading Runtime Errors
 
-> "Don't panic. Panic should be reserved for truly unrecoverable conditions — programming bugs or runtime invariants violated so severely that continued execution is impossible."
-> — Rob Pike, *Go Proverbs*
+> *"Don't panic."*
+> — Rob Pike, Go Proverbs (2015)
 
 ## Learning objective
 
@@ -179,15 +179,28 @@ This program demonstrates the mechanics of Go runtime exceptions:
 4. Read both tracebacks and identify the file, line, and panic type for each.
 
 ## Tests / verification
-
 ```bash
 go run .
 ```
 
-Expected output:
+Expected output (stack addresses and absolute paths vary by machine):
 ```
-1
-Runtime errors happen when the program is running.
+=== Deconstructing Go Runtime Panics & Stack Traces ===
+Slice initialized: [10 20 30] (Length: 3)
+
+Attempting out-of-bounds access at index 5...
+Successfully intercepted runtime panic: runtime error: index out of range [5] with length 3
+
+--- Anatomy of the Runtime Stack Trace ---
+goroutine 1 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:26 +0x5e
+main.SafeExecute.func1()
+	C:/Users/you/the-go-engineer/curriculum/modules/02-go-setup-tooling/lessons/11-reading-runtime-errors/main.go:15 +0x5c
+panic({0x7ff6ca97f038?, 0xbda92084198?})
+
+Insight: The stack trace reads bottom-to-top (caller -> callee -> crash point).
+The top frame points directly to the function and line number where the CPU halted.
 ```
 
 ## Review questions

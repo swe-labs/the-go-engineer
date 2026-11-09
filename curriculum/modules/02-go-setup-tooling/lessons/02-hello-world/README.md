@@ -119,7 +119,7 @@ This program demonstrates three core concepts:
 
 ## Debugging walkthrough
 
-**Scenario**: You run `go run main.go` and get `package is not a main package`.
+**Scenario**: You run `go run main.go` and get `package command-line-arguments is not a main package`.
 
 1. Check the first line of your file. It must be exactly `package main` with no extra spaces.
 2. If the file is in a subdirectory, ensure you run `go run` from the directory containing the file, or specify the full path.
@@ -157,7 +157,7 @@ go run .
 Expected output:
 ```
 Hello, World!
-My Go installation works.
+Program completed successfully via package main -> func main() entry point.
 ```
 
 After your modification, the output should include your name and favorite language.

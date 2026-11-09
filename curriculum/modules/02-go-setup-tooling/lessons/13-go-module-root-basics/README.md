@@ -1,7 +1,7 @@
 # Go Module Root Basics
 
-> "A module is a collection of packages that are released, versioned, and distributed together. Modules record precise dependency requirements and create reproducible builds."
-> — Russ Cox, *Go Modules in Practice*
+> *"A module is a collection of related Go packages that are versioned together as a single unit. Modules record precise dependency requirements and create reproducible builds."*
+> — Go Modules design (Russ Cox et al.), go.dev/wiki/Modules
 
 ## Learning objective
 
@@ -230,7 +230,6 @@ This program demonstrates how Go modules establish package namespaces:
 3. Examine the generated `go.mod` and `go.sum` files.
 
 ## Tests / verification
-
 ```bash
 go list -m all | head -10
 ```
@@ -243,8 +242,17 @@ go run .
 
 Expected output:
 ```
-This package is part of a Go module.
-The module root has a go.mod file.
+=== Deconstructing 'go.mod' and Go Module Root Mechanics ===
+Module Root Path:   github.com/my-org/payment-gateway
+Target Go Version:  1.27.0
+
+--- Subpackage Path Resolution ---
+Filesystem folder: ./internal/processor
+Go import path:    "github.com/my-org/payment-gateway/internal/processor"
+
+Insight: The go.mod file establishes the root boundary of the module.
+All internal packages are imported using the module path prefix, regardless
+of whether the repository has been pushed to a remote host yet.
 ```
 
 ## Review questions

@@ -2,8 +2,8 @@
 
 ## Mission
 
-> "Go was designed to address the problems of scale at Google: millions of lines of code, thousands of developers, and immense distributed infrastructure. The toolchain was built from the ground up to be blazingly fast, reproducible, and transparent."
-> — Rob Pike, *Go at Google: Language Design in the Service of Software Engineering*
+> *"The goals of the Go project were to eliminate the slowness and clumsiness of software development at Google, and thereby to make the process more productive and scalable."*
+> — Rob Pike, *Go at Google: Language Design in the Service of Software Engineering* (2012)
 
 This module equips you with total mechanical mastery of the Go development toolchain.
 
@@ -39,7 +39,7 @@ Throughout this module and its capstone project, you will build and verify concr
 - Standardized source code formatted via `gofmt` and inspected via `go vet` static analyzers.
 - Offline documentation generated and queried via `go doc`.
 - A fully initialized Go module root governed by `go.mod` and verified by `go.sum`.
-- A completed troubleshooting portfolio (`TROUBLESHOOTING.md`) diagnosing and fixing 5 deliberate failure modes in the Tooling Failure Lab capstone project.
+- A completed troubleshooting portfolio (`TROUBLESHOOTING.md`) diagnosing and fixing 4 deliberate failure modes in the Tooling Failure Lab capstone project.
 
 ## Prerequisites
 
@@ -118,15 +118,15 @@ flowchart TD
 ## Labs
 
 Hands-on diagnostic drills are embedded in each lesson:
-- **Lesson 01:** Inspect environment variables and test cross-compilation target parameters (`GOOS=linux go build`).
+- **Lesson 01:** Inspect environment variables (`GOROOT`, `GOPATH`, `GOOS`, `GOARCH`) and verify the toolchain with `go version` and `go run`.
 - **Lesson 03 vs 04:** Profile the compilation footprint of `go run` temp directories versus persistent `go build` binaries.
 - **Lesson 07:** Run `go vet` against suspicious printf format verbs and mutex copies.
-- **Lesson 10:** Deliberately induce and fix 4 categories of compile-time syntax and type errors.
-- **Lesson 11:** Trace panic crashes from division by zero and nil pointer dereference down to exact lines.
+- **Lesson 10:** Deliberately induce and fix 3 categories of compile-time errors (unused import, type mismatch, undefined identifier).
+- **Lesson 11:** Trace panic crashes from index-out-of-range and nil pointer dereference down to exact lines.
 
 ## Projects
 
-- [Tooling Failure Lab](./projects/tooling-failure-lab/README.md): Capstone project where you receive a broken Go repository with 5 deliberate tooling and environment defects, systematically diagnose each failure, write a structured troubleshooting report, and verify that all tools pass.
+- [Tooling Failure Lab](./projects/tooling-failure-lab/README.md): Capstone project where you receive a broken Go repository with 4 deliberate tooling and environment defects, systematically diagnose each failure, write a structured troubleshooting report, and verify that all tools pass.
 
 ## Assessments
 
@@ -137,7 +137,7 @@ Hands-on diagnostic drills are embedded in each lesson:
 | Failure Mode | Observable Symptom | Mechanical Root Cause | Remediation |
 |---|---|---|---|
 | **Command not found** | `go: command not found` | The Go `bin/` directory is missing from the system `$PATH`. | Add `$GOROOT/bin` (e.g. `/usr/local/go/bin` or `C:\Program Files\Go\bin`) to your user `$PATH`. |
-| **No main package** | `cannot run non-main package` | Running `go run` on a file declaring `package calc` instead of `package main`. | Executable entrypoints must declare `package main` and define `func main()`. |
+| **No main package** | `package <name> is not a main package` | Running `go run` on a file declaring `package calc` instead of `package main`. | Executable entrypoints must declare `package main` and define `func main()`. |
 | **Unused import or variable** | `imported and not used: "fmt"` | Go compiler strictly forbids unused imports and local variables to prevent code bloat. | Remove unused imports or use `go fmt` / `gopls` to organize imports automatically. |
 | **Nil pointer dereference** | `panic: runtime error: invalid memory address or nil pointer dereference` | Reading from or writing to a pointer that has not been initialized (`nil`). | Check pointer initialization before dereferencing; inspect line number in panic traceback. |
 | **Missing module root** | `go: go.mod file not found in current directory or any parent directory` | Running module-aware commands in an uninitialized directory without `go.mod`. | Run `go mod init <module-path>` at the root of the project. |
@@ -158,8 +158,8 @@ You are ready for Module 03 when you can:
 - [ ] Read a compiler error down to file, line, and column coordinates.
 - [ ] Read a panic traceback and identify the crash site in application code.
 - [ ] Initialize and verify a Go module using `go mod init`, `go.mod`, and `go.sum`.
-- [ ] Complete the Tooling Failure Lab project fixing all 5 failure modes.
-- [ ] Pass the Module 02 assessment scoring at least 80%.
+- [ ] Complete the Tooling Failure Lab project fixing all 4 failure modes.
+- [ ] Pass the Module 02 assessment scoring at least 72%.
 
 ## Start here
 

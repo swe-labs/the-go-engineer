@@ -1,48 +1,60 @@
 # Tooling Failure Lab — Rubric
 
-## Criteria
+This rubric scores the 14-question knowledge assessment (18 points: 10 multiple-choice
+at 1 point, 4 short-answer at 2 points). Question-to-dimension mapping:
 
-### 1. Toolchain and environment fluency (30%)
+| Dimension | Questions | Points | Approx. weight |
+|---|---|---|---|
+| Toolchain & module system (GOROOT/GOPATH, tidy, cross-compile, dependency errors) | 1, 7, 9, 12 | 5 | ~28% |
+| Build, run & static diagnostics (run vs build, vet, gofmt, pipeline) | 3, 4, 6, 10, 11 | 6 | ~33% |
+| Runtime failures & traceback triage | 5, 13 | 3 | ~17% |
+| Module integrity & supply chain (main entrypoint, go.mod vs go.sum) | 2, 8, 14 | 4 | ~22% |
 
-| Level | Score | Description |
-|-------|-------|-------------|
-| Excellent | 5 | Deeply understands `GOROOT`, `GOPATH`, module cache mechanics, `go.mod`/`go.sum` lifecycle, and cross-compilation (`GOOS`/`GOARCH`). Configures tools without trial-and-error. |
-| Proficient | 3 | Accurately manages standard Go toolchain commands (`build`, `test`, `vet`, `run`, `mod tidy`); minor uncertainty regarding module cache internals or path overrides. |
-| Developing | 1 | Relies on guessing paths or commands; struggles to distinguish between module mode and legacy GOPATH mode. |
-| Not attempted | 0 | No toolchain configuration demonstrated. |
+## Dimension standards
 
-### 2. Diagnostic and debugging competency (35%)
+### Toolchain & module system (5 points)
 
-| Level | Score | Description |
-|-------|-------|-------------|
-| Excellent | 5 | Quickly and methodically diagnoses compiler errors, syntax issues, `go vet` warnings, missing dependency resolution, and panic tracebacks. Pinpoints exact file, line, and root cause. |
-| Proficient | 3 | Resolves standard compilation errors and missing modules, but takes multiple attempts or misinterprets runtime panic call stacks. |
-| Developing | 1 | Cannot effectively read error messages or panic traces; changes code haphazardly without diagnosing the root cause. |
-| Not attempted | 0 | No debugging or failure remediation demonstrated. |
+| Level | Standard |
+|-------|----------|
+| Excellent (5) | Correctly distinguishes GOROOT vs GOPATH, states exactly what `go mod tidy` synchronizes, gives the `GOOS`/`GOARCH` cross-compilation recipe, and names distinct root causes for missing-package build errors with their fix commands. |
+| Proficient (3-4) | Commands correct; conflates module cache internals or names fewer than three distinct root causes. |
+| Developing (1-2) | Guesses paths or confuses module mode with legacy GOPATH mode. |
+| Not demonstrated (0) | Toolchain answers incorrect or absent. |
 
-### 3. Verification and proof of execution (20%)
+### Build, run & static diagnostics (6 points)
 
-| Level | Score | Description |
-|-------|-------|-------------|
-| Excellent | 5 | All verification commands pass cleanly (`go test`, `go vet`, `go build`). Provides clean terminal capture proving correct environment configuration and dependency verification. |
-| Proficient | 3 | Primary verification checks pass; minor warnings or incomplete terminal environment capture. |
-| Developing | 1 | Multiple verification checks fail; test suite or compiler reports outstanding errors. |
-| Not attempted | 0 | No verification output provided. |
+| Level | Standard |
+|-------|----------|
+| Excellent (6) | Precisely contrasts the `go run` temp-binary lifecycle with `go build`'s persistent artifact; names the vet analyzer classes (printf, unreachable) the compiler accepts; explains gofmt's AST-based determinism; walks the compilation pipeline stages in order. |
+| Proficient (4-5) | Lifecycle and pipeline correct with minor omissions (e.g. skips the SSA stage). |
+| Developing (2-3) | Believes `go run` interprets code or that vet finds compile-time errors. |
+| Not demonstrated (0-1) | Build/run answers incorrect or absent. |
 
-### 4. Conceptual clarity and trade-off analysis (15%)
+### Runtime failures & traceback triage (3 points)
 
-| Level | Score | Description |
-|-------|-------|-------------|
-| Excellent | 5 | Clearly articulates the compiler pipeline (lexing -> parsing -> type checking -> SSA -> codegen/link), the role of `go.sum` in supply chain security, and LSP architecture with `gopls`. |
-| Proficient | 3 | Can explain core compiler and module concepts clearly with minor omissions in internal mechanics. |
-| Developing | 1 | Can repeat buzzwords but cannot explain why Go requires `package main`, how `go vet` differs from the compiler, or what `gopls` does. |
-| Not attempted | 0 | No conceptual explanation provided. |
+| Level | Standard |
+|-------|----------|
+| Excellent (3) | Reads the panic value first, skips `runtime.gopanic` frames, and pinpoints the first application frame's file and line. |
+| Proficient (2) | Finds the crash site but cannot distinguish runtime frames from application frames. |
+| Not demonstrated (0-1) | Traceback reading incorrect or absent. |
+
+### Module integrity & supply chain (4 points)
+
+| Level | Standard |
+|-------|----------|
+| Excellent (4) | States the exact `package main` / `func main()` entrypoint contract and explains `go.sum`'s SHA-256 checksum verification against upstream tampering. |
+| Proficient (2-3) | Entry-point contract correct; supply-chain explanation generic. |
+| Not demonstrated (0-1) | Module integrity answers incorrect or absent. |
 
 ## Scoring guide
 
-| Total points | Grade |
-|--------------|-------|
-| 18–20 | Exceeds expectations |
-| 14–17 | Meets expectations (Passing) |
-| 8–13 | Needs improvement |
-| 0–7 | Incomplete — retake recommended |
+| Total points | Result |
+|--------------|--------|
+| 16-18 | Exceeds expectations |
+| 13-15 | Meets expectations — module passed (72%+) |
+| 9-12 | Needs improvement — retake recommended |
+| 0-8 | Incomplete — retake required |
+
+A passing score is at least 13 of 18 points (72%). The Tooling Failure Lab project
+itself is graded separately by the project rubric in `projects/tooling-failure-lab/README.md`
+(passing 80% with all failures fixed).

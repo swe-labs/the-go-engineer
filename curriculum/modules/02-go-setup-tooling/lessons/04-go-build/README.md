@@ -1,7 +1,7 @@
 # go build
 
-> "Go binaries are self-contained. The compiler produces single static binaries with no external dependencies, packaging the Go runtime, garbage collector, and all linked libraries into one machine artifact."
-> — Russ Cox, Go Tech Lead
+> *"Self-contained binaries and easy cross-compilation simplified deployment."*
+> — Russ Cox et al., *The Go Programming Language and Environment* (CACM, 2022)
 
 ## Learning objective
 
@@ -35,7 +35,7 @@ flowchart TD
         AST["1. Parsing & AST Generation"]:::standardNode
         TYPE["2. Type Checking & Verification"]:::standardNode
         OPT["3. SSA Optimization & Escape Analysis"]:::standardNode
-        OBJ["4. Machine Code Emission (.a/.o objects)"]:::standardNode
+        OBJ["4. Machine Code Emission (build-cache object files)"]:::standardNode
         LINK["5. Static Linker Bundles Runtime & Packages"]:::capstoneNode
 
         AST --> TYPE --> OPT --> OBJ --> LINK
@@ -226,8 +226,15 @@ Then run the binary:
 
 Expected output:
 ```
-Built with go build
-This is a standalone binary.
+=== Deconstructing 'go build' Standalone Binary ===
+Binary: 04-go-build.exe
+Target: windows/amd64
+Version: dev
+Size: 1739.00 KB (1780736 bytes)
+
+Insight: 'go build' emits a self-contained, statically linked binary executable.
+It requires no external Go runtime on the host machine to execute.
+(Binary name, size, and target vary by machine and Go version.)
 ```
 
 Verify no output from `go build .` itself — it produces a binary silently.

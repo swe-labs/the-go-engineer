@@ -165,8 +165,24 @@ go run .
 
 Expected output:
 ```
-gofmt formats your Go code
-Consistent style across every Go file
+=== Deconstructing 'gofmt' Engine (go/format) ===
+--- 1. Unformatted Source Input ---
+package    main
+import    "fmt"
+func    Calculate(   x int,y int  )   int {
+    sum:=x+y
+        return sum
+}
+
+--- 2. Canonical gofmt Output ---
+package main
+
+import "fmt"
+
+func Calculate(x int, y int) int {
+	sum := x + y
+	return sum
+}
 ```
 
 ## Review questions

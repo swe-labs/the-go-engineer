@@ -1,7 +1,7 @@
 # Install and Verify Go
 
-> "Simplicity is prerequisite for reliability."
-> — Edsger W. Dijkstra (Foundational principle of the Unix and Go toolchain design)
+> *"The language was designed by and for people who write—and read and debug and maintain—large software systems."*
+> — Rob Pike, *Go at Google: Language Design in the Service of Software Engineering* (2012)
 
 ## Learning objective
 
@@ -174,7 +174,7 @@ This diagnostic program inspects the active Go toolchain directly from within th
 
 1. Check whether Go is installed at the default path: look for `C:\Go\bin\go.exe` (Windows) or `/usr/local/go/bin/go` (macOS/Linux).
 2. If the file exists, add it to your PATH manually:
-   - Windows: `setx PATH "%PATH%;C:\Go\bin"` then restart your terminal.
+   - Windows: edit PATH through **System Properties > Environment Variables** (avoid `setx PATH "%PATH%;..."` — `setx` silently truncates PATH at 1,024 characters and merges your user and system paths). Then restart your terminal.
    - macOS/Linux: add `export PATH=$PATH:/usr/local/go/bin` to `~/.bashrc` or `~/.zshrc`.
 3. If the file does not exist, re-run the installer from [go.dev/dl](https://go.dev/dl/).
 4. Run `go version` again to confirm.

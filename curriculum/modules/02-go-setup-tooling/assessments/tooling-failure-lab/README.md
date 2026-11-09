@@ -9,12 +9,12 @@ This assessment verifies that you can independently apply everything from Module
 - Toolchain installation and workspace configuration (`go version`, `go env`, `go.mod`)
 - Build and run workflow (`go build`, `go run`, the module cache)
 - Diagnostics and tooling (`go vet`, `gopls`, `gofmt`, panic tracebacks)
-- Diagnosis and repair of the five tooling failures in the Tooling Failure Lab
+- Diagnosis and repair of the four tooling failures in the Tooling Failure Lab
 
 ## Prerequisites
 
 - [Module 02 Overview](../../README.md) and [Lessons 01–14](../../lessons/01-install-and-verify-go/README.md) completed
-- [Capstone Project: Tooling Failure Lab](../../projects/tooling-failure-lab/README.md) completed with all 5 failures fixed
+- [Capstone Project: Tooling Failure Lab](../../projects/tooling-failure-lab/README.md) completed with all 4 failures fixed
 
 ## Evidence required
 
@@ -33,7 +33,7 @@ Submit the following artifacts:
 | Proof | 25% | Strong proof with tests or verification covering Go installation and workspace setup, including edge cases | Some proof provided but lacks depth | No proof of understanding |
 | Communication | 10% | Professional explanation linking Go tooling to broader development workflow and trade-offs | Basic explanation with some clarity | No explanation provided |
 
-**Passing score**: 80%
+**Passing score**: at least 13 of 18 points (72%)
 
 ## Review questions
 

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"strings"
 	"testing"
 )
 
@@ -17,8 +16,8 @@ func TestInspectExecution(t *testing.T) {
 	if meta.Filename == "" {
 		t.Errorf("expected non-empty Filename")
 	}
-	if !strings.HasSuffix(meta.Directory, "") {
-		t.Errorf("invalid directory")
+	if meta.Directory == "" || meta.Directory == "." {
+		t.Errorf("expected an absolute directory, got %q", meta.Directory)
 	}
 
 	// During "go test", tests run from temporary directories as well

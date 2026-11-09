@@ -1,7 +1,7 @@
 # Reading Test Failures
 
-> "Program testing can be used to show the presence of bugs, but never to show their absence!"
-> — Edsger W. Dijkstra, *Notes on Structured Programming*
+> *"The most effective debugging tool is still careful thought, coupled with judiciously placed print statements."*
+> — Brian Kernighan, *Unix for Beginners* (1979)
 
 ## Learning objective
 
@@ -165,7 +165,6 @@ func main() {
 5. Run tests again to confirm all pass.
 
 ## Tests / verification
-
 ```bash
 go test -v .
 ```
@@ -173,17 +172,29 @@ go test -v .
 Expected output:
 ```
 === RUN   TestAdd
+=== RUN   TestAdd/standard_addition
+=== RUN   TestAdd/identity_with_zero
+=== RUN   TestAdd/negative_integers
 --- PASS: TestAdd (0.00s)
-=== RUN   TestAddZero
---- PASS: TestAddZero (0.00s)
-PASS
-ok  	02-go-setup-tooling/12-reading-test-failures	0.xxx
-```
+    --- PASS: TestAdd/standard_addition (0.00s)
+    --- PASS: TestAdd/identity_with_zero (0.00s)
+    --- PASS: TestAdd/negative_integers (0.00s)
+=== RUN   TestFormatFailureMessage
+--- PASS: TestFormatFailureMessage (0.00s)
+=== RUN   TestMainExecution
+=== Deconstructing Go Test Failure Reports ===
+Add(2, 3) returned: 5
 
-```bash
-go run .
+--- Anatomy of an Idiomatic Test Failure Log ---
+--- FAIL: TestAdd (0.00s)
+    calc_test.go:14: Add(2, 2) = 5; want 4
+
+Insight: Go testing discourages opaque assertion macros (like assert.Equal).
+Standard 'got != want' messages clearly display what the code did vs what was expected.
+--- PASS: TestMainExecution (0.00s)
+PASS
+ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/02-go-setup-tooling/lessons/12-reading-test-failures
 ```
-Expected output: `4`
 
 ## Review questions
 

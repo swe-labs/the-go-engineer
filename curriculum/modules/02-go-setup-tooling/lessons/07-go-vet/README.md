@@ -1,7 +1,7 @@
 # go vet
 
-> "A tool like go vet can find bugs that are difficult to see by inspection. It doesn't find all bugs, but it finds things that are almost certainly mistakes."
-> — Rob Pike, *Lexical Scanning in Go*
+> *"Simplicity is prerequisite for reliability."*
+> — Edsger W. Dijkstra
 
 ## Learning objective
 
@@ -54,7 +54,7 @@ flowchart TD
 `go vet` uses the `go/analysis` framework. Each analyzer implements the `go/analysis.Analyzer` interface and operates on the compiled AST and type information. Built-in analyzers include:
 
 - `printf` — checks format verb and argument type matching
-- `shadow` — detects variables shadowed by inner declarations
+- `shadow` — detects variables shadowed by inner declarations (opt-in: not part of the default `go vet` suite)
 - `copylocks` — detects passing a mutex or similar type by value
 - `unreachable` — detects dead code after a return or panic
 - `tests` — checks that test functions have the correct signature
@@ -212,7 +212,6 @@ This program categorizes the most dangerous bugs that escape compiler syntax che
 4. Fix both issues and confirm `go vet .` produces no output.
 
 ## Tests / verification
-
 ```bash
 go vet .
 ```
@@ -225,8 +224,15 @@ go run .
 
 Expected output:
 ```
-Hello, Go!
-go vet found no issues in this file.
+=== Deconstructing 'go vet' Static Analysis Engine ===
+[1] Checker: printf       | Severity: WARNING
+    Problem: Printf format %d has arg 'hello' of wrong type string
+    Bad Pattern: fmt.Printf("%d
+", "hello")
+
+[2] Checker: copylocks    | Severity: ERROR
+    Problem: assignment copies lock value to pass-by-value receiver
+    Bad Pattern: type SafeCounter struct { mu sync.Mutex; val int }; func (c SafeCounter) Inc() {}
 ```
 
 ## Review questions

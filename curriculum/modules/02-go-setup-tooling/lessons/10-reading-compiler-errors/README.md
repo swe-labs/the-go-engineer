@@ -1,7 +1,7 @@
 # Reading Compiler Errors
 
-> "The compiler is your primary collaborator. When it rejects your code, it is protecting your users from runtime failures before a single byte of machine code is emitted."
-> — Robert Griesemer, Co-Designer of Go
+> *"The first step to making Go scale, dependency-wise, is that the language defines that unused dependencies are a compile-time error (not a warning, an error)."*
+> — Rob Pike, *Go at Google: Language Design in the Service of Software Engineering* (2012)
 
 ## Learning objective
 
@@ -171,7 +171,7 @@ This program breaks down the compiler output into its constituent parts:
 
 ## Debugging walkthrough
 
-**Scenario**: Go reports `declared and not used: x` on line 5, but `x` is clearly assigned on line 6.
+**Scenario**: Go reports `x declared and not used` on line 5, but `x` is clearly assigned on line 6.
 
 1. In Go, a variable is only "used" if it is *read*, not just assigned. An assignment without reading the value is unused.
 2. Use the variable in a read context (e.g., `fmt.Println(x)`), or declare it with `_ = x` to suppress the error intentionally.
@@ -213,8 +213,18 @@ go run .
 
 Expected output:
 ```
-Compiler errors tell you exactly what is wrong.
-Read the file, line, column, and message.
+=== Deconstructing Go Compiler Error Diagnostics ===
+[1] Unused Import Error at main.go (Line 5, Col 2):
+    Message: "os" imported and not used
+
+[2] Type Mismatch Error at main.go (Line 12, Col 15):
+    Message: cannot use "42" (untyped string constant) as int value in assignment
+
+[3] Undefined Identifier Error at main.go (Line 18, Col 5):
+    Message: undefined: UserProfile
+
+Insight: Go compiler errors are deterministic and provide pinpoint coordinate accuracy.
+Always address the FIRST error in compiler output, as subsequent errors are often cascades.
 ```
 
 ## Review questions

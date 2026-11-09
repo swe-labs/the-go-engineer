@@ -1,7 +1,7 @@
 # go doc
 
-> "Godoc is not just a tool; it is a philosophy. Good comments write good documentation. The best documentation is written close to the code, in plain English, with no boilerplate."
-> — Rob Pike, *Godoc: Documenting Go Code*
+> *"The Go project takes documentation seriously."*
+> — Rob Pike, The Go Blog (2011)
 
 ## Learning objective
 
@@ -183,18 +183,36 @@ This program implements the canonical Go doc comment conventions:
 4. Add a package-level doc comment above `package main` and verify with `go doc .`.
 
 ## Tests / verification
-
 ```bash
 go run .
 ```
-Expected output: `7`
+
+Expected output:
+```
+=== Deconstructing 'go doc' Documentation Engine ===
+Calculation: 10 + 5 = 15
+
+--- Doc Comment Parsing Demonstration ---
+Raw Doc Comment in Source:
+// Add computes and returns the sum of the base value.
+// It does not mutate the receiver.
+
+Cleaned Doc Summary (as shown by 'go doc'):
+  Add computes and returns the sum of the base value. It does not mutate the receiver.
+
+Insight: In Go, documentation is code. Run 'go doc' on any package or symbol
+to read instantaneous, offline documentation formatted directly from source.
+```
 
 ```bash
 go doc Add
 ```
+
 Expected output:
 ```
-Add returns the sum of two integers.
+func (c Calculator) Add(n int) int
+    Add computes and returns the sum of the base value and the given integer
+    parameter n. It does not mutate the receiver.
 ```
 
 ## Review questions

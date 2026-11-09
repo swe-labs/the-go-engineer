@@ -1,7 +1,7 @@
 # go test
 
-> "Testing is not an afterthought in Go; it is built into the language and runtime from day one. You don't need third-party assertion frameworks to prove correctness."
-> — Dave Cheney, *Practical Go: Real World Advice for Writing Maintainable Go Programs*
+> *"Program testing can be used to show the presence of bugs, but never to show their absence!"*
+> — Edsger W. Dijkstra, *Notes on Structured Programming* (1970)
 
 ## Learning objective
 
@@ -140,9 +140,9 @@ func BenchmarkAdd(b *testing.B) {
    ```bash
    go test -bench="." -run="^$" .
    ```
-3. Run `go test -v .` to see each test name and its result.
-4. Introduce a deliberate bug in `Add` (change `+` to `-`) and run `go test .` again to see a failure.
-5. Fix the bug and run `go test .` again to confirm the fix.
+4. Run `go test -v .` to see each test name and its result.
+5. Introduce a deliberate bug in `Add` (change `+` to `-`) and run `go test .` again to see a failure.
+6. Fix the bug and run `go test .` again to confirm the fix.
 
 ## Common mistakes
 
@@ -187,13 +187,19 @@ go test -v .
 Expected output (passing):
 ```
 === RUN   TestAdd
+=== RUN   TestAdd/positive_integers
+=== RUN   TestAdd/negative_integers
+=== RUN   TestAdd/mixed_signs
+=== RUN   TestAdd/zeros
+=== RUN   TestAdd/identity_with_zero
 --- PASS: TestAdd (0.00s)
-=== RUN   TestAddNegative
---- PASS: TestAddNegative (0.00s)
-=== RUN   TestAddZero
---- PASS: TestAddZero (0.00s)
+    --- PASS: TestAdd/positive_integers (0.00s)
+    --- PASS: TestAdd/negative_integers (0.00s)
+    --- PASS: TestAdd/mixed_signs (0.00s)
+    --- PASS: TestAdd/zeros (0.00s)
+    --- PASS: TestAdd/identity_with_zero (0.00s)
 PASS
-ok  	02-go-setup-tooling/05-go-test	0.xxx
+ok  	github.com/rasel9t6/the-go-engineer/curriculum/modules/02-go-setup-tooling/lessons/05-go-test
 ```
 
 Also run:

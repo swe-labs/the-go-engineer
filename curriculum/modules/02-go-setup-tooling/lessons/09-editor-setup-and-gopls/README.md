@@ -1,7 +1,7 @@
 # Editor Setup and gopls
 
-> "The Language Server Protocol allows a single Go language server to bring rich code intelligence, diagnostics, and refactoring to any developer editor without vendor lock-in."
-> — Rebecca Stambler, Go Tools Team
+> *"Go, pls stop breaking my editor."*
+> — Rebecca Stambler, GopherCon Singapore (2019)
 
 ## Learning objective
 
@@ -215,7 +215,6 @@ This program removes the magic from modern editor tooling by modeling the **Lang
 6. Add a syntax error and watch the diagnostic appear.
 
 ## Tests / verification
-
 ```bash
 gopls version
 ```
@@ -228,8 +227,20 @@ go run .
 
 Expected output:
 ```
-gopls is the Go language server.
-It powers your editor's Go features.
+=== Deconstructing 'gopls' Language Server Protocol (LSP) ===
+1. Editor -> gopls: JSON-RPC request for 'textDocument/hover'
+2. gopls parses AST, type-checks symbols, and replies:
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "contents": "func Println(a ...any) (n int, err error)
+Package fmt: Println formats using default formats."
+  }
+}
+
+Insight: gopls is a standalone background daemon communicating via JSON-RPC.
+It decouples language intelligence from the editor, powering VS Code, Neovim, and Zed equally.
 ```
 
 Verify with your editor that hover, completion, and diagnostics all work on the `main.go` file.

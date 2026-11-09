@@ -1,7 +1,7 @@
 # Tooling Checklist
 
-> "The competent programmer is fully aware of the strictly limited size of their skull; therefore, they approach their work with full humility, and among other things they verify their toolchain systematically."
-> — Edsger W. Dijkstra, *The Humble Programmer*
+> *"The competent programmer is fully aware of the strictly limited size of his own skull; therefore he approaches his task with full humility, and among other things he avoids clever tricks like the plague."*
+> — Edsger W. Dijkstra, *The Humble Programmer* (1972)
 
 ## Learning objective
 
@@ -207,7 +207,7 @@ go doc fmt.Println
 
 Expected output should include:
 - A valid Go version string
-- The program output: `Tooling checklist complete. All Go tools are verified and working.`
+- The program output: the checklist report `=== Module 02 Go Toolchain Readiness Checklist ===` with every check marked `[✓ PASS]`
 - No output from `go build .` and `go vet .` (success is silent)
 - Documentation for `fmt.Println`
 

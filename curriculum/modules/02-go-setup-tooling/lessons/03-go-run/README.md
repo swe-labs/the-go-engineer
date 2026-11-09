@@ -1,7 +1,7 @@
 # go run
 
-> "Go was designed to make software development faster and more productive. Compilation is so fast that go run feels like an interpreter, but with the safety and speed of compiled machine code."
-> — Rob Pike, *Go: A Language for Software Engineering*
+> *"The origin myth for Go states that it was during one of those 45 minute builds that Go was conceived."*
+> — Rob Pike, *Go at Google: Language Design in the Service of Software Engineering* (2012)
 
 ## Learning objective
 
@@ -53,7 +53,7 @@ The binary name is a random hash — you never see it. The entire cycle happens 
 
 ## How Go uses it
 
-The Go standard library uses `go run` extensively in its own development. The `go tool` subcommands (like `go test`, `go build`) are themselves Go programs that are run during development. The `go run` command accepts file paths, package paths, and module patterns:
+The `go` command accepts file paths, package paths, and module patterns:
 
 - `go run main.go` — run a single file
 - `go run .` — run the package in the current directory
@@ -141,17 +141,17 @@ This program removes the magic from `go run` by interrogating its own active exe
    ```bash
    go test -v .
    ```
-3. Run `go build .` followed by executing `./03-go-run` directly — observe how `Is Temporary Build Dir` switches to `false`.
+3. Run `go build .` followed by executing the binary directly (`./03-go-run` on Linux/macOS, `.-go-run.exe` on Windows) — observe how `Is Temporary Build Dir` switches to `false`.
 
 ## Common mistakes
 
 - **Using `go run` for production**: `go run` produces no permanent binary. For production, use `go build` and deploy the resulting executable.
 - **Running `go run main.go` when there are multiple files**: If the directory has multiple `.go` files, `go run main.go` only compiles that one file. If `main.go` references functions in other files, compilation fails. Use `go run .` instead.
-- **Forgetting that `go run` recompiles every time**: Unlike `go test` which caches results, `go run` always recompiles. For large programs, this adds startup time. Use `go build` + run the binary for repeated executions.
+- **Forgetting what `go run` caches**: The build cache still speeds up compilation of unchanged packages, but `go run` rebuilds the executable and re-runs your program on every invocation — and only `go test` caches pass/fail results. Use `go build` + run the binary when you execute the same program repeatedly.
 
 ## Debugging walkthrough
 
-**Scenario**: `go run .` produces `package main is not a main package`.
+**Scenario**: `go run .` produces `package <name> is not a main package`.
 
 1. Check that one file in the directory has `func main()`. You can only have one `main` function per package.
 2. Check that the file with `func main()` is in `package main` (not `package foo`).
@@ -165,7 +165,7 @@ This program removes the magic from `go run` by interrogating its own active exe
 
 ## Performance implications
 
-- `go run` recompiles every time — no cache reuse. For a tiny program this is instant; for a large module it adds 1-3 seconds.
+- `go run` re-executes the program on every invocation; compilation itself is served from the build cache, so only unchanged packages skip recompilation. For a tiny program this is instant; for a large module the link-and-run step adds 1-3 seconds.
 - The temporary binary is compiled with debug symbols and no optimizations (like `go build` without flags).
 - `go run -count=1 .` is redundant — `go run` never caches.
 
@@ -183,8 +183,15 @@ go run .
 
 Expected output:
 ```
-Running with go run
-This program was compiled and executed in one step.
+=== Deconstructing 'go run' Execution ===
+Active Executable Path: C:\Users\you\AppData\Local\Temp\go-build1234567\b001\exe\03-go-run.exe
+Binary Filename:        03-go-run.exe
+Directory Location:     C:\Users\you\AppData\Local\Temp\go-build1234567\b001\exe
+Is Temporary Build Dir: true
+
+Insight: 'go run' compiled this code into a temporary binary and executed it directly.
+When this process exits, the temporary directory will be cleaned up.
+(Executable paths vary by machine; the go-build temp directory is constant.)
 ```
 
 After your modification, the output should reflect your new message.
