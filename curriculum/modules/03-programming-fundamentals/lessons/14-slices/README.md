@@ -1,7 +1,7 @@
 # Slices
 
-> "A slice does not store any data; it just describes a section of an underlying array."
-> — Rob Pike, *Go Slices: usage and internals*
+> *"A slice is a descriptor of an array segment. It consists of a pointer to the array, the length of the segment, and its capacity (the maximum length of the segment)."*
+> — Andrew Gerrand, *Go Slices: usage and internals* (2011)
 
 ## Learning objective
 
@@ -86,30 +86,36 @@ package main
 
 import "fmt"
 
+func merge(a, b []int) []int {
+	result := make([]int, 0, len(a)+len(b))
+	result = append(result, a...)
+	result = append(result, b...)
+	return result
+}
+
+func dedup(sorted []int) []int {
+	if len(sorted) == 0 {
+		return []int{}
+	}
+	result := make([]int, 0, len(sorted))
+	result = append(result, sorted[0])
+	for i := 1; i < len(sorted); i++ {
+		if sorted[i] != sorted[i-1] {
+			result = append(result, sorted[i])
+		}
+	}
+	return result
+}
+
 func main() {
-	// Slice literal
-	fruits := []string{"apple", "banana", "cherry"}
-	fmt.Println("fruits:", fruits, "len:", len(fruits), "cap:", cap(fruits))
+	a := []int{1, 2, 3}
+	b := []int{4, 5, 6}
+	fmt.Println("merge:", merge(a, b))
 
-	// make with length and capacity
-	s := make([]int, 3, 6)
-	fmt.Println("s:", s, "len:", len(s), "cap:", cap(s))
-
-	// append
-	s = append(s, 10, 20, 30)
-	fmt.Println("after append:", s, "len:", len(s), "cap:", cap(s))
-
-	// slice expression
-	sub := fruits[1:3]
-	fmt.Println("sub:", sub)
-
-	// nil slice
-	var nilSlice []int
-	fmt.Println("nil slice:", nilSlice, "len:", len(nilSlice), "cap:", cap(nilSlice), "is nil:", nilSlice == nil)
-
-	// empty slice literal
-	empty := []int{}
-	fmt.Println("empty slice:", empty, "len:", len(empty), "cap:", cap(empty), "is nil:", empty == nil)
+	dups := []int{1, 1, 2, 3, 3, 3, 4, 5, 5}
+	fmt.Println("dedup:", dedup(dups))
+	fmt.Println("dedup empty:", dedup([]int{}))
+	fmt.Println("dedup single:", dedup([]int{7}))
 }
 ```
 

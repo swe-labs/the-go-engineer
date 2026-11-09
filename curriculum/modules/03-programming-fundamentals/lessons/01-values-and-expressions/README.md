@@ -96,21 +96,37 @@ package main
 import "fmt"
 
 func main() {
-	a := 10
-	b := 3
+	fmt.Println(evaluate(10, 5, '+'))
+	fmt.Println(evaluate(10, 5, '-'))
+	fmt.Println(evaluate(10, 5, '*'))
+	fmt.Println(evaluate(10, 5, '/'))
+	fmt.Println(evaluate(10, 5, '%'))
+}
 
-	fmt.Println("a + b =", a+b)
-	fmt.Println("a - b =", a-b)
-	fmt.Println("a * b =", a*b)
-	fmt.Println("a / b =", a/b)
-	fmt.Println("a % b =", a%b)
-
-	fmt.Println("(a + b) * 2 =", (a+b)*2)
-	fmt.Println("a + b * 2 =", a+b*2)
+func evaluate(a, b int, op rune) int {
+	if op == '+' {
+		return a + b
+	}
+	if op == '-' {
+		return a - b
+	}
+	if op == '*' {
+		return a * b
+	}
+	if op == '/' {
+		return a / b
+	}
+	if op == '%' {
+		return a % b
+	}
+	return 0
 }
 ```
 
-Run with `go run .` to see the output. Notice `a / b` produces `3` (integer division discards the remainder). Also compare `(a+b)*2` vs `a+b*2` -- parentheses change the result from `26` to `16` because `*` has higher precedence than `+`.
+Run with `go run .` to see the output. Notice `evaluate(10, 5, '/')` produces `2` (integer division discards the remainder) and `evaluate(10, 5, '%')` produces `2` — the remainder that division discarded. The output is deterministic: the same operands and operator always produce the same value.
+
+> [!NOTE]
+> **Zero-Magic Preview:** The example calls a function and compares `op` against rune literals using `if` statements. These constructs are formally taught in Lessons 09 (if and else) and 21 (runes and Unicode). For now, read the function as a dispatch table: each comparison selects one arithmetic expression to evaluate.
 
 ## Step-by-step execution
 

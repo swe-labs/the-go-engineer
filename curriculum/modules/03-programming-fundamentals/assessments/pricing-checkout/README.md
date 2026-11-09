@@ -43,7 +43,7 @@ Plan for 60 to 90 minutes.
 | **Proof** | 25% | Tests cover normal cases and edge cases (empty items, negative cents, zero tax, boundary quantities at 10/50/100) | Tests cover normal happy-path cases only | No meaningful test coverage |
 | **Code quality** | 20% | Idiomatic Go: proper error returns, clean switch/if logic, `fmt.Sprintf` formatting, no unused variables | Mostly readable with minor style issues | Unformatted, unidiomatic, or hard to follow |
 
-**Passing score**: 70% (weighted total of 3.5/5 average across dimensions)
+**Passing score**: 80% (weighted total of 3.5/5 average across dimensions)
 
 ## Review questions
 
@@ -61,7 +61,7 @@ You pass when all tests pass, your checkout output matches the expected format, 
 
 ## Retake policy
 
-If you score below 70%, review the lessons corresponding to your rubric gaps (types, control flow, or error handling), fix the issues, and resubmit with a short correction note explaining what you changed and why.
+If you score below 80%, review the lessons corresponding to your rubric gaps (types, control flow, or error handling), fix the issues, and resubmit with a short correction note explaining what you changed and why.
 
 ## NEXT UP
 

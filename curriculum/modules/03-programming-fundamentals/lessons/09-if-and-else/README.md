@@ -163,6 +163,13 @@ func divide(a, b float64) (float64, error) {
 	return a / b, nil
 }
 
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 func validateAge(s string) error {
 	if age, err := strconv.Atoi(s); err != nil {
 		return fmt.Errorf("invalid age: %w", err)
@@ -172,6 +179,21 @@ func validateAge(s string) error {
 		return fmt.Errorf("age %d is under 18", age)
 	}
 	return nil
+}
+
+func gradeClassification(score int) string {
+	if score < 0 || score > 100 {
+		return "invalid"
+	} else if score >= 90 {
+		return "A"
+	} else if score >= 80 {
+		return "B"
+	} else if score >= 70 {
+		return "C"
+	} else if score >= 60 {
+		return "D"
+	}
+	return "F"
 }
 
 func main() {
@@ -192,6 +214,11 @@ func main() {
 		} else {
 			fmt.Printf("age %q valid\n", s)
 		}
+	}
+
+	scores := []int{-5, 0, 45, 70, 85, 95, 100, 101}
+	for _, s := range scores {
+		fmt.Printf("score %d -> %s\n", s, gradeClassification(s))
 	}
 }
 ```

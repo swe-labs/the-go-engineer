@@ -1,7 +1,7 @@
 # Comma-ok idiom
 
-> "Explicit error and status checking turns runtime surprises into deterministic flow control."
-> — Rob Pike
+> *"Errors are values."*
+> — Rob Pike, Go Proverbs (2015)
 
 ## Learning objective
 
@@ -112,55 +112,73 @@ if hj, ok := w.(http.Hijacker); ok {
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func describe(i interface{}) {
-	fmt.Printf("(%v, %T) -> ", i, i)
-
-	v, ok := i.(string)
-	if ok {
-		fmt.Println("is a string:", v)
-		return
+func LookupSafe(data map[string]interface{}, key string, expectedType string) (interface{}, bool, error) {
+	val, exists := data[key]
+	if !exists {
+		return nil, false, nil
 	}
 
-	w, ok := i.(int)
-	if ok {
-		fmt.Println("is an int:", w)
-		return
+	switch expectedType {
+	case "string":
+		v, ok := val.(string)
+		return v, ok, nil
+	case "int":
+		v, ok := val.(int)
+		return v, ok, nil
+	case "float64":
+		v, ok := val.(float64)
+		return v, ok, nil
+	case "bool":
+		v, ok := val.(bool)
+		return v, ok, nil
+	default:
+		return nil, false, fmt.Errorf("unknown type: %s", expectedType)
 	}
-
-	fmt.Println("unknown type")
 }
 
 func main() {
-	scores := map[string]int{
-		"alice": 92,
-		"bob":   85,
+	data := map[string]interface{}{
+		"name":   "Alice",
+		"age":    30,
+		"score":  95.5,
+		"active": true,
 	}
 
-	if score, ok := scores["alice"]; ok {
-		fmt.Println("Alice score:", score)
+	if v, ok, err := LookupSafe(data, "name", "string"); ok {
+		fmt.Printf("name: %s\n", v.(string))
+	} else if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("name not found")
 	}
 
-	if _, ok := scores["eve"]; !ok {
-		fmt.Println("Eve not found")
+	if v, ok, err := LookupSafe(data, "age", "string"); ok {
+		fmt.Printf("age as string: %s\n", v.(string))
+	} else if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("age not found")
 	}
 
-	describe("hello")
-	describe(42)
-	describe(3.14)
-
-	ch := make(chan int, 2)
-	ch <- 10
-	ch <- 20
-	close(ch)
-
-	for v, ok := <-ch; ok; v, ok = <-ch {
-		fmt.Println("Received:", v)
+	if v, ok, err := LookupSafe(data, "score", "float64"); ok {
+		fmt.Printf("score: %.1f\n", v.(float64))
+	} else if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("score not found")
 	}
 
-	v, ok := <-ch
-	fmt.Printf("After close: v=%d, ok=%v\n", v, ok)
+	if _, ok, err := LookupSafe(data, "missing", "string"); ok {
+		fmt.Println("found missing key")
+	} else if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("missing key correctly reported as not found")
+	}
 }
 ```
 

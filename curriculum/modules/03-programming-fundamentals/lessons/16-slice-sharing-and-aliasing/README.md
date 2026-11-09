@@ -1,7 +1,7 @@
 # Slice sharing and aliasing
 
-> "Aliasing without synchronization is the root of unexpected state mutation."
-> — Russ Cox
+> *"Slicing does not copy the slice's data. It creates a new slice value that points to the original array."*
+> — Andrew Gerrand, *Go Slices: usage and internals* (2011)
 
 ## Learning objective
 
@@ -95,32 +95,45 @@ package main
 
 import "fmt"
 
+func splitAndCopy(data []int, chunkSize int) [][]int {
+	var result [][]int
+	for i := 0; i < len(data); i += chunkSize {
+		end := i + chunkSize
+		if end > len(data) {
+			end = len(data)
+		}
+		chunk := make([]int, end-i)
+		copy(chunk, data[i:end])
+		result = append(result, chunk)
+	}
+	return result
+}
+
+func unsafeSplit(data []int, chunkSize int) [][]int {
+	var result [][]int
+	for i := 0; i < len(data); i += chunkSize {
+		end := i + chunkSize
+		if end > len(data) {
+			end = len(data)
+		}
+		result = append(result, data[i:end])
+	}
+	return result
+}
+
 func main() {
-	// Aliasing via slice expression
-	original := []int{1, 2, 3, 4, 5, 6}
-	sub := original[1:4] // shares backing array
-	fmt.Println("original:", original, "sub:", sub)
+	data := []int{0, 1, 2, 3, 4, 5}
 
-	// Modify through alias
-	sub[0] = 99
-	fmt.Println("after sub[0]=99 — original:", original)
+	safe := splitAndCopy(data, 2)
+	unsafe := unsafeSplit(data, 2)
 
-	// Append within capacity overwrites
-	sub = append(sub, 100)
-	fmt.Println("after append to sub — original:", original)
+	data[1] = 99
+	data[3] = 88
+	data[5] = 77
 
-	// Defensive copy
-	safe := make([]int, 3)
-	copy(safe, original[1:4])
-	safe[0] = -1
-	fmt.Println("original after safe modification:", original)
-	fmt.Println("safe:", safe)
-
-	// Clone idiom
-	clone := append([]int(nil), original...)
-	clone[0] = 777
-	fmt.Println("original after clone modification:", original)
-	fmt.Println("clone:", clone)
+	fmt.Println("original modified:", data)
+	fmt.Println("safe chunks (no aliasing):", safe)
+	fmt.Println("unsafe chunks (aliasing):", unsafe)
 }
 ```
 

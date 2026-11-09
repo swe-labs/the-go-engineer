@@ -65,12 +65,12 @@ Curriculum completion time cannot be calculated from reading time alone. A reali
 
 | Activity Layer | Items | On-Paper Metadata | Realistic Learner Effort | Notes |
 | :--- | :---: | :---: | :---: | :--- |
-| **Instructional Lessons & Labs** | 321 | 238.0 hrs | 235 – 265 hrs | Reading, mental models, running code examples, review questions (Modules 00–16) |
+| **Instructional Lessons & Labs** | 321 | 234.5 hrs | 235 – 265 hrs | Reading, mental models, running code examples, review questions (Modules 00–16) |
 | **Mini-Projects** | 18 | 36.0 hrs | 36 – 72 hrs | Immediate practical reinforcement (2–4 hours per project) |
 | **Portfolio Projects** | 8 | 16.0 hrs | 65 – 120 hrs | Multi-component services with tests, migrations, CI/CD (8–15 hours per project) |
 | **Flagship Opslane Milestones & Projects** | 17 | 34.0 hrs | 55 – 85 hrs | Integrated production system with auth, DB, payments, worker pools, metrics (Module 18) |
 | **In-Path Assessments & Defense** | 57 | 57.0 hrs | 45 – 60 hrs | Self-evaluation checklists, code reviews, and capstone oral/technical defense |
-| **Core Total** | **421** | **381.0 hrs** | **435 – 600 hrs** | **Realistic full engineering workload across all 18 core modules** |
+| **Core Total** | **421** | **377.5 hrs** | **435 – 600 hrs** | **Realistic full engineering workload across all 18 core modules** |
 
 ### 2. Weekly Commitment Planning Models
 
@@ -229,26 +229,26 @@ internal/tools/curriculum/
 
 | #   | Type    | Slug | Title | Minutes |
 | --- | ------- | ---- | ----- | ------- |
-| 1   | concept | values-and-expressions | **Values and expressions** | 45 |
-| 2   | concept | variables | **Variables** | 45 |
+| 1   | concept | values-and-expressions | **Values and expressions** | 30 |
+| 2   | concept | variables | **Variables** | 30 |
 | 3   | concept | types | **Types** | 45 |
-| 4   | concept | zero-values | **Zero values** | 45 |
-| 5   | concept | type-conversions | **Type conversions** | 45 |
-| 6   | concept | constants | **Constants** | 45 |
-| 7   | concept | iota | **iota** | 45 |
-| 8   | concept | boolean-logic | **Boolean logic** | 45 |
-| 9   | concept | if-and-else | **If and else** | 45 |
-| 10   | concept | switch | **Switch** | 45 |
-| 11   | concept | loops | **Loops** | 45 |
+| 4   | concept | zero-values | **Zero values** | 30 |
+| 5   | concept | type-conversions | **Type conversions** | 30 |
+| 6   | concept | constants | **Constants** | 30 |
+| 7   | concept | iota | **iota** | 30 |
+| 8   | concept | boolean-logic | **Boolean logic** | 30 |
+| 9   | concept | if-and-else | **If and else** | 30 |
+| 10   | concept | switch | **Switch** | 30 |
+| 11   | concept | loops | **Loops** | 30 |
 | 12   | concept | range | **Range** | 45 |
-| 13   | concept | arrays | **Arrays** | 45 |
+| 13   | concept | arrays | **Arrays** | 30 |
 | 14   | concept | slices | **Slices** | 45 |
 | 15   | concept | slice-length-and-capacity | **Slice length and capacity** | 45 |
 | 16   | concept | slice-sharing-and-aliasing | **Slice sharing and aliasing** | 45 |
 | 17   | concept | maps | **Maps** | 45 |
-| 18   | concept | comma-ok-idiom | **Comma-ok idiom** | 45 |
-| 19   | concept | strings | **Strings** | 45 |
-| 20   | concept | bytes | **Bytes** | 45 |
+| 18   | concept | comma-ok-idiom | **Comma-ok idiom** | 30 |
+| 19   | concept | strings | **Strings** | 30 |
+| 20   | concept | bytes | **Bytes** | 30 |
 | 21   | concept | runes-and-unicode | **Runes and Unicode** | 45 |
 | 22   | concept | pointers-as-addresses | **Pointers as addresses** | 45 |
 | 23   | concept | beginner-pointer-mistakes | **Beginner pointer mistakes** | 45 |

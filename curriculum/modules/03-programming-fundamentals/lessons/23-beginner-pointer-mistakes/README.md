@@ -76,45 +76,49 @@ package main
 
 import "fmt"
 
-func main() {
-	// 1. Nil dereference
-	var p *int
-	if p != nil {
-		*p = 5
+func makeIncrementer() func() int {
+	counter := 0
+	return func() int {
+		counter++
+		return counter
 	}
-	// Without the nil check, *p = 5 panics.
+}
 
-	// 2. Returning pointer to local variable (fine in Go)
-	pt := newPoint(3, 4)
-	fmt.Println("point from function:", pt)
-
-	// 3. Value vs pointer receiver
-	d := &Dog{name: "Rex"}
-	d.Bark() // works: *Dog implements Speaker
-	// Dog{name: "Rex"}.Bark() // compile error: Dog does not implement Bark (value receiver)
-
-	// 4. Range variable aliasing (pre-Go 1.22)
-	items := []int{1, 2, 3}
-	ptrs := []*int{}
+func captureCorrect(items []int) []*int {
+	var ptrs []*int
 	for _, v := range items {
-		v := v // create new variable per iteration
+		v := v
 		ptrs = append(ptrs, &v)
 	}
-	for i, p := range ptrs {
-		fmt.Printf("ptrs[%d] = %d (addr=%p)\n", i, *p, p)
+	return ptrs
+}
+
+func captureBuggy(items []int) []*int {
+	var ptrs []*int
+	for _, v := range items {
+		ptrs = append(ptrs, &v)
 	}
+	return ptrs
 }
 
-type Dog struct {
-	name string
-}
+func main() {
+	inc := makeIncrementer()
+	fmt.Println("inc():", inc())
+	fmt.Println("inc():", inc())
+	fmt.Println("inc():", inc())
 
-func (d *Dog) Bark() {
-	fmt.Println(d.name, "says woof!")
-}
+	items := []int{10, 20, 30}
+	fmt.Println("\nBuggy capture:")
+	buggy := captureBuggy(items)
+	for _, p := range buggy {
+		fmt.Println(*p)
+	}
 
-func newPoint(x, y int) *struct{ X, Y int } {
-	return &struct{ X, Y int }{x, y}
+	fmt.Println("\nCorrect capture:")
+	correct := captureCorrect(items)
+	for _, p := range correct {
+		fmt.Println(*p)
+	}
 }
 ```
 

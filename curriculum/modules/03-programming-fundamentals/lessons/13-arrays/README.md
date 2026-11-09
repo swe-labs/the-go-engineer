@@ -1,7 +1,7 @@
 # Arrays
 
-> "Contiguous memory is the foundation of high-performance computing."
-> — John von Neumann
+> *"Functions delay binding; data structures induce binding."*
+> — Alan J. Perlis, *Epigrams in Programming*
 
 ## Learning objective
 
@@ -86,38 +86,40 @@ Go's `crypto` packages heavily use fixed-size arrays because they need compile-t
 ```go
 package main
 
-import (
-	"fmt"
-	"reflect"
-)
+import "fmt"
+
+func sumAndAverage(nums [8]float64) (sum float64, avg float64) {
+	for _, v := range nums {
+		sum += v
+	}
+	avg = sum / float64(len(nums))
+	return
+}
+
+func reverse(arr *[6]int) {
+	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
+		arr[i], arr[j] = arr[j], arr[i]
+	}
+}
+
+func modifyAttempt(arr [6]int) {
+	arr[0] = 999
+}
 
 func main() {
-	var a [5]int
-	a[0] = 10
-	a[1] = 20
-	fmt.Println("a:", a)
+	nums := [8]float64{1.5, 2.5, 3.0, 4.0, 5.5, 6.0, 7.5, 8.0}
+	sum, avg := sumAndAverage(nums)
+	fmt.Printf("sum=%.1f avg=%.2f\n", sum, avg)
 
-	// Array literal
-	b := [3]string{"go", "rust", "zig"}
-	fmt.Println("b:", b)
+	orig := [6]int{1, 2, 3, 4, 5, 6}
+	fmt.Println("before reverse:", orig)
+	reverse(&orig)
+	fmt.Println("after reverse:", orig)
 
-	// Ellipsis counts the initializers
-	c := [...]int{2, 4, 6, 8}
-	fmt.Println("c:", c, "len:", len(c))
-
-	// Value semantics: copying
-	d := c
-	d[0] = 999
-	fmt.Println("c after d copy:", c)
-	fmt.Println("d:", d)
-
-	// Comparison
-	fmt.Println("b == [3]string{\"go\", \"rust\", \"zig\"}:", b == [3]string{"go", "rust", "zig"})
-
-	// Type distinction
-	fmt.Println("Type of a:", reflect.TypeOf(a))
-	fmt.Println("Type of b:", reflect.TypeOf(b))
-	fmt.Println("Type of c:", reflect.TypeOf(c))
+	cp := orig
+	modifyAttempt(cp)
+	fmt.Println("original after modifyAttempt:", orig)
+	fmt.Println("copy inside modifyAttempt was a copy:", cp)
 }
 ```
 
