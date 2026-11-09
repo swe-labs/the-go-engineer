@@ -2,12 +2,12 @@
 # commit-msg hook: validates commit message format.
 #
 # Format: [TYPE] short imperative description
-# Types:  FEAT | FIX | DOCS | TEST | CHORE | REFACTOR | SECURITY | RELEASE
+# Types:  FEAT | FIX | DOCS | TEST | CHORE | REFACTOR | PERF | STYLE | TOOLING | CURRICULUM | SECURITY | RELEASE
 #
 # Install: git config core.hooksPath .githooks
 
 MSG_FILE="$1"
-COMMIT_RX='^\[(FEAT|FIX|DOCS|TEST|CHORE|REFACTOR|SECURITY|RELEASE)\] .+'
+COMMIT_RX='^\[(FEAT|FIX|DOCS|TEST|CHORE|REFACTOR|PERF|STYLE|TOOLING|CURRICULUM|SECURITY|RELEASE)\] .+'
 SUBJECT=$(head -1 "$MSG_FILE")
 
 # Allow merge commits
@@ -21,7 +21,7 @@ if ! echo "$SUBJECT" | grep -Eq "$COMMIT_RX"; then
 	echo "  Example:  [FIX] correct tenant scoping in DB.3"
 	echo "  Example:  [DOCS] align release workflow with v2.1 maintenance"
 	echo ""
-	echo "  Allowed types: FEAT | FIX | DOCS | TEST | CHORE | REFACTOR | SECURITY | RELEASE"
+	echo "  Allowed types: FEAT | FIX | DOCS | TEST | CHORE | REFACTOR | PERF | STYLE | TOOLING | CURRICULUM | SECURITY | RELEASE"
 	echo ""
 	echo "  Your subject: $SUBJECT"
 	echo ""
