@@ -10,7 +10,7 @@ Every lesson `main.go` file must start with this header:
 
 ```go
 // Copyright (c) 2026 Rasel Hossen
-// Licensed under The Go Engineer License v1.0
+// Licensed under the MIT License (see LICENSE at the repository root)
 
 // ============================================================================
 // Module NN: Module Name - Lesson Title

@@ -1,7 +1,7 @@
 # The Go Engineer
 
 [![CI](https://github.com/rasel9t6/the-go-engineer/actions/workflows/ci.yml/badge.svg)](https://github.com/rasel9t6/the-go-engineer/actions)
-[![License: TGE License v1.0](https://img.shields.io/badge/License-TGE_v1.0-red.svg)](#license)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 > **Release status:** `v3.0.0` on the `release/v3` line. Authoritative curriculum metadata lives in [`curriculum/`](./curriculum/README.md).
 
@@ -136,7 +136,8 @@ Contributions are welcome. Before opening a pull request, read:
 
 ## License
 
-This project is licensed under The Go Engineer License (TGE License) v1.0.
+This project is licensed under the [MIT License](./LICENSE).
 
-- Free for personal, educational, and non-commercial learning.
-- Commercial redistribution, corporate training programs, or commercial platform hosting requires written permission.
+- Free for personal learning, forked study, modification, and redistribution.
+- Commercial reuse, including paid courses and training programs, is permitted under the same terms.
+- Contributions are welcome: submitting a pull request licenses your contribution to the project under MIT.
