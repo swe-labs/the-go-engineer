@@ -1,0 +1,48 @@
+package components
+
+import (
+	"fmt"
+	"strconv"
+)
+
+templ TaskRow(t *Task) {
+	<tr id={ fmt.Sprintf("task-%d", t.ID) } class={ fmt.Sprintf("task-row status-%s", t.StatusLower) }>
+		<td class="font-mono text-muted text-xs">{ fmt.Sprintf("#%d", t.ID) }</td>
+		<td class="font-semibold">{ t.Type }</td>
+		<td>
+			<span class={ fmt.Sprintf("status-badge badge-%s", t.StatusLower) }>
+				{ t.Status }
+			</span>
+		</td>
+		<td class="font-mono text-xs text-muted">
+			if t.WorkerID > 0 {
+				{ "Worker-" + strconv.Itoa(t.WorkerID) }
+			} else {
+				—
+			}
+		</td>
+		<td class="font-mono text-xs">{ t.DurationStr }</td>
+		<td class="text-right">
+			if t.Status == "QUEUED" || t.Status == "RUNNING" {
+				<button
+					type="button"
+					class="btn-action-cancel"
+					data-on-click={ fmt.Sprintf("@post('/tasks/%d/cancel')", t.ID) }
+					title="Cancel execution"
+				>
+					Cancel
+				</button>
+			} else {
+				<span class="text-xs text-muted font-mono">Done</span>
+			}
+		</td>
+	</tr>
+}
+
+templ LogEntry(timeStr, msg string, isSystem bool) {
+	<div class={ "log-entry", templ.KV("log-system", isSystem) }>
+		<span class="log-time font-mono">{ timeStr }</span>
+		<span class="log-msg">{ msg }</span>
+	</div>
+}
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog — Browser JS & Fetch API</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/app.js" defer></script>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Application Header -->
+        <header class="app-header">
+            <div class="header-brand">
+                <span class="brand-badge">STAGE 02</span>
+                <h1 class="brand-title">Go Engineer Book Catalog</h1>
+            </div>
+            <div class="header-status">
+                <span id="connection-status" class="status-indicator online">REST API Connected</span>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="app-main">
+            <!-- Left Panel: Search & Book List -->
+            <section class="catalog-section" aria-labelledby="catalog-heading">
+                <div class="section-toolbar">
+                    <div>
+                        <h2 id="catalog-heading" class="section-title">Library Collection</h2>
+                        <p class="section-subtitle">Real-time debounced search &amp; asynchronous deletion</p>
+                    </div>
+                    <div class="stats-badge" id="stats-badge" aria-live="polite">
+                        <span id="books-count">0</span> Books
+                    </div>
+                </div>
+
+                <!-- Debounced Search Bar -->
+                <div class="search-box">
+                    <label for="search-input" class="sr-only">Search books</label>
+                    <input 
+                        type="search" 
+                        id="search-input" 
+                        class="search-input" 
+                        placeholder="Search by title, author, or ISBN (300ms debounce)..." 
+                        autocomplete="off"
+                    >
+                    <div id="search-spinner" class="spinner" hidden aria-hidden="true"></div>
+                </div>
+
+                <!-- Book Cards Container -->
+                <div id="books-container" class="books-container" role="region" aria-live="polite">
+                    <!-- Dynamic cards injected via app.js -->
+                </div>
+            </section>
+
+            <!-- Right Panel: Create Book Form -->
+            <aside class="form-section" aria-labelledby="form-heading">
+                <div class="form-card">
+                    <h2 id="form-heading" class="form-title">Add New Publication</h2>
+                    <p class="form-subtitle">Dispatches async POST request with inline error handling</p>
+
+                    <!-- Global Form Notification -->
+                    <div id="form-alert" class="alert-box" hidden role="alert"></div>
+
+                    <form id="add-book-form" novalidate>
+                        <div class="form-group">
+                            <label for="book-title">Title <span class="required">*</span></label>
+                            <input type="text" id="book-title" name="title" placeholder="e.g. Learning Go" required>
+                            <span class="field-error" id="error-title" aria-live="polite"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="book-author">Author(s) <span class="required">*</span></label>
+                            <input type="text" id="book-author" name="author" placeholder="e.g. Jon Bodner" required>
+                            <span class="field-error" id="error-author" aria-live="polite"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="book-isbn">ISBN-10 or 13 <span class="required">*</span></label>
+                                <input type="text" id="book-isbn" name="isbn" placeholder="9781492077213" required>
+                                <span class="field-error" id="error-isbn" aria-live="polite"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="book-price">Price ($ USD) <span class="required">*</span></label>
+                                <input type="number" id="book-price" name="price" step="0.01" min="0.01" placeholder="39.99" required>
+                                <span class="field-error" id="error-price" aria-live="polite"></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submit-btn" class="btn-submit">
+                            <span class="btn-text">Add Book to Catalog</span>
+                            <span class="btn-spinner" hidden aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="app-footer">
+            <p>The Go Engineer &mdash; Frontend Companion Track &mdash; Stage 2 (DOM &amp; Fetch API)</p>
+            <p class="footer-note">Module 08 REST API Backend Integration &bull; Zero external client libraries</p>
+        </footer>
+    </div>
+</body>
+</html>

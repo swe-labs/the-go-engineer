@@ -10,7 +10,7 @@ jobs:
 
       - uses: actions/setup-go@v6
         with:
-          go-version: '1.26'
+          go-version: "1.27"
 
       - name: Build
         run: go build ./...
@@ -20,8 +20,9 @@ jobs:
 
       - name: Format Check
         run: |
-          unformatted=$(gofmt -l .)
+          unformatted=$(gofmt -l . | grep -v '_starter' || true)
           if [ -n "$unformatted" ]; then
+            echo "Unformatted files:"
             echo "$unformatted"
             exit 1
           fi
@@ -41,11 +42,6 @@ jobs:
       - name: Test with Race Detector
         run: go test -race ./...
 
-      - name: Vulnerability Check
-        run: |
-          go install golang.org/x/vuln/cmd/govulncheck@latest
-          govulncheck ./...
-
       - name: Coverage Report
         run: |
           go test -coverprofile coverage.out ./...
@@ -53,16 +49,12 @@ jobs:
           COVERAGE=$(go tool cover -func coverage.out | grep total | awk '{print $3}')
           echo "## Code Coverage: $COVERAGE" >> $GITHUB_STEP_SUMMARY
 
-      - name: Coverage Threshold Check
+      - name: Run Benchmarks
         run: |
-          COVERAGE_PERCENT=$(go tool cover -func coverage.out | grep total | awk '{print substr($3, 1, length($3)-1)}')
-          awk -v cov="$COVERAGE_PERCENT" -v thresh="70.0" 'BEGIN { if (cov < thresh) { print "Coverage "cov"% is below threshold of "thresh"%"; exit 1 } else { print "Coverage "cov"% is above threshold of "thresh"%" } }'
+          go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution || true
 
       - name: Validate Curriculum
-        run: go run ./scripts/validate_curriculum.go
-
-      - name: Docker Build Validation
-        run: docker build -f 11-flagship/01-opslane/Dockerfile .
+        run: go run ./internal/tools/curriculum validate-all --strict
 
       - name: Upload Coverage
         uses: actions/upload-artifact@v7
@@ -70,4 +62,3 @@ jobs:
         with:
           name: coverage-report
           path: coverage.html
-

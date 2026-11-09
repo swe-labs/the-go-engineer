@@ -1,0 +1,11 @@
+# Bounds voluntary disruption during a node drain or cluster upgrade. It does
+# not affect the rolling update strategy; that is the Deployment's job.
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: orders-api
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: orders-api

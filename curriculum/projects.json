@@ -1,0 +1,5651 @@
+{
+  "architectural_decision": {
+    "core_rule": "Optimize for learner progression, zero magic, rigorous proof of understanding, production-grade documentation, and job readiness.",
+    "decision": "Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.",
+    "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
+    "manifest_policy": "Authoritative modular v3 manifests are the active source of truth for the curriculum engine.",
+    "v2_policy": "curriculum.v2.json is archived legacy import data, not the active source of truth."
+  },
+  "curriculum_version": "3.0.0",
+  "document_type": "projects",
+  "last_updated": "2026-10-23",
+  "name": "The Go Engineer v3 — Projects",
+  "projects": [
+    {
+      "assessment_id": "assessment-project-shell-git-lab",
+      "deliverables": [
+        "Completed shell and Git workflow in your working directory",
+        "All verification checks passing (bash verify.sh)",
+        "Explanation of design decisions and commands used"
+      ],
+      "difficulty": "foundation",
+      "documentation_mode": "project",
+      "id": "project-shell-git-lab",
+      "module_id": "module-01",
+      "order": 1,
+      "placement_anchor_item_id": "core-01-15",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Shell + Git Lab can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-01-01",
+        "core-01-02",
+        "core-01-03"
+      ],
+      "prerequisites": [
+        "core-01-01",
+        "core-01-02",
+        "core-01-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "process lifecycle",
+        "stdin/stdout/stderr",
+        "shell pipelines"
+      ],
+      "reinforces": [
+        "core-01-01",
+        "core-01-02",
+        "core-01-03",
+        "core-01-04",
+        "core-01-05",
+        "core-01-06",
+        "core-01-07",
+        "core-01-08",
+        "core-01-09",
+        "core-01-10",
+        "core-01-11",
+        "core-01-12",
+        "core-01-13",
+        "core-01-14",
+        "core-01-15"
+      ],
+      "required_concepts": [
+        "process lifecycle",
+        "stdin/stdout/stderr",
+        "shell pipelines"
+      ],
+      "rubric": [
+        {
+          "criterion": "Correctness",
+          "description": "Shell commands execute correctly; Git repository has proper commit history, branches, and conflict resolution.",
+          "weight": 35
+        },
+        {
+          "criterion": "Process quality",
+          "description": "Workflow follows best practices: meaningful commits, sensible branching, clean command structure.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Git log, branch graph, and documentation demonstrate a complete and correct workflow.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear explanation of shell and Git commands, including why specific approaches were chosen.",
+          "weight": 15
+        }
+      ],
+      "slug": "shell-git-lab",
+      "source_legacy_ids": [],
+      "stage": "foundations",
+      "status": "ready",
+      "summary": "Build and navigate a real shell environment, then manage code changes through a complete Git workflow.",
+      "tasks": [
+        {
+          "instruction": "Open your terminal, verify shell access, navigate directories, create and delete files, and configure basic shell aliases.",
+          "title": "Set up and navigate the terminal"
+        },
+        {
+          "instruction": "Initialize a Git repository, stage and commit changes, create branches, merge, and resolve a simulated merge conflict.",
+          "title": "Initialize and manage a Git repository"
+        },
+        {
+          "instruction": "Document your shell and Git workflow, including commands used, decisions made, and how you resolved the merge conflict.",
+          "title": "Explain your workflow"
+        }
+      ],
+      "title": "Shell + Git Lab",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run verify.ps1 (Windows) or verify.sh (Linux/macOS) from the project directory.",
+          "Verify all checks pass.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "powershell -ExecutionPolicy Bypass -File ./verify.ps1",
+        "test_command": "powershell -ExecutionPolicy Bypass -File ./verify.ps1"
+      }
+    },
+    {
+      "assessment_id": "assessment-project-tooling-failure-lab",
+      "deliverables": [
+        "Working implementation of Tooling Failure Lab",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "foundation",
+      "documentation_mode": "project",
+      "id": "project-tooling-failure-lab",
+      "module_id": "module-02",
+      "order": 2,
+      "placement_anchor_item_id": "core-02-14",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Tooling Failure Lab can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03"
+      ],
+      "prerequisites": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "go build",
+        "go module cache",
+        "compiler errors"
+      ],
+      "reinforces": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03",
+        "core-02-04",
+        "core-02-05",
+        "core-02-06",
+        "core-02-07",
+        "core-02-08",
+        "core-02-09",
+        "core-02-10",
+        "core-02-11",
+        "core-02-12",
+        "core-02-13",
+        "core-02-14"
+      ],
+      "required_concepts": [
+        "go build",
+        "go module cache",
+        "compiler errors"
+      ],
+      "rubric": [
+        {
+          "criterion": "Correctness",
+          "description": "Go installation is correct; failure simulations are realistic and resolvable.",
+          "weight": 35
+        },
+        {
+          "criterion": "Diagnostic quality",
+          "description": "Systematic diagnostic approach: identifying symptoms, isolating causes, applying fixes.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Terminal outputs, diagnostic logs, and verification commands prove each failure mode was reproduced and resolved.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear explanation of each failure mechanism, toolchain interaction, and resolution step.",
+          "weight": 15
+        }
+      ],
+      "slug": "tooling-failure-lab",
+      "source_legacy_ids": [],
+      "stage": "tooling",
+      "status": "ready",
+      "summary": "Install Go tooling, then deliberately introduce and diagnose common Go setup failures.",
+      "tasks": [
+        {
+          "instruction": "Install Go, set up GOPATH or workspace, verify the installation with go version, and run a hello-world program.",
+          "title": "Install and configure Go"
+        },
+        {
+          "instruction": "Simulate common tooling failures: wrong PATH, broken GOPATH, missing dependencies, and module resolution errors. Diagnose each failure using available tooling output.",
+          "title": "Introduce and diagnose tooling failures"
+        },
+        {
+          "instruction": "Write a troubleshooting guide documenting each failure, the diagnostic steps taken, and the resolution.",
+          "title": "Document your troubleshooting"
+        }
+      ],
+      "title": "Tooling Failure Lab",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-pricing-checkout",
+      "deliverables": [
+        "Working implementation of Pricing Checkout",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-pricing-checkout",
+      "module_id": "module-03",
+      "order": 3,
+      "placement_anchor_item_id": "core-03-23",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Pricing Checkout can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
+      "prerequisites": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "slice header",
+        "pointer semantics",
+        "stack vs heap"
+      ],
+      "reinforces": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03",
+        "core-03-04",
+        "core-03-05",
+        "core-03-06",
+        "core-03-07",
+        "core-03-08",
+        "core-03-09",
+        "core-03-10",
+        "core-03-11",
+        "core-03-12",
+        "core-03-13",
+        "core-03-14",
+        "core-03-15",
+        "core-03-16",
+        "core-03-17",
+        "core-03-18",
+        "core-03-19",
+        "core-03-20",
+        "core-03-21",
+        "core-03-22",
+        "core-03-23",
+        "core-03-24"
+      ],
+      "required_concepts": [
+        "slice header",
+        "pointer semantics",
+        "stack vs heap"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-pricing-checkout-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-pricing-checkout-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-pricing-checkout-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-pricing-checkout-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "pricing-checkout",
+      "source_legacy_ids": [],
+      "stage": "go-core",
+      "status": "ready",
+      "summary": "Build a pricing calculator and checkout system using Go fundamentals: variables, control flow, and structs.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "03-programming-fundamentals"
+          ],
+          "id": "project-pricing-checkout-task-build",
+          "instruction": "Implement a Go program that calculates pricing with tax, discounts, and currency formatting using variables, structs, and control flow.",
+          "instructions": "Implement the main requirements for Pricing Checkout.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "03-programming-fundamentals"
+          ],
+          "id": "project-pricing-checkout-task-test",
+          "instruction": "Write table-driven tests covering normal pricing, edge cases (zero, negative), and discount boundaries.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "03-programming-fundamentals"
+          ],
+          "id": "project-pricing-checkout-task-explain",
+          "instruction": "Explain your struct design choices, how you handle invalid input, and what trade-offs you considered.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        },
+        {
+          "description": "Implement quantity-based tier pricing lookup using slices.BinarySearch over sorted tier thresholds.",
+          "id": "project-pricing-checkout-task-binary-search",
+          "title": "Optimized Tier Lookup with Binary Search"
+        }
+      ],
+      "title": "Pricing Checkout",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-contact-directory",
+      "deliverables": [
+        "Working implementation of Contact Directory",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-contact-directory",
+      "module_id": "module-03",
+      "order": 4,
+      "placement_anchor_item_id": "core-03-23",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Contact Directory can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
+      "prerequisites": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "slice header",
+        "pointer semantics",
+        "stack vs heap"
+      ],
+      "reinforces": [
+        "core-03-01",
+        "core-03-02",
+        "core-03-03",
+        "core-03-04",
+        "core-03-05",
+        "core-03-06",
+        "core-03-07",
+        "core-03-08",
+        "core-03-09",
+        "core-03-10",
+        "core-03-11",
+        "core-03-12",
+        "core-03-13",
+        "core-03-14",
+        "core-03-15",
+        "core-03-16",
+        "core-03-17",
+        "core-03-18",
+        "core-03-19",
+        "core-03-20",
+        "core-03-21",
+        "core-03-22",
+        "core-03-23"
+      ],
+      "required_concepts": [
+        "slice header",
+        "pointer semantics",
+        "stack vs heap"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-contact-directory-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-contact-directory-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-contact-directory-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-contact-directory-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "contact-directory",
+      "source_legacy_ids": [],
+      "stage": "go-core",
+      "status": "ready",
+      "summary": "Implement a contact directory manager using Go data structures: slices, maps, and custom types.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "03-programming-fundamentals"
+          ],
+          "id": "project-contact-directory-task-build",
+          "instruction": "Build a contact directory using Go slices and maps: add, search, update, and delete contacts with input validation.",
+          "instructions": "Implement the main requirements for Contact Directory.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "03-programming-fundamentals"
+          ],
+          "id": "project-contact-directory-task-test",
+          "instruction": "Write tests that verify CRUD operations, duplicate detection, and empty directory edge cases.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "03-programming-fundamentals"
+          ],
+          "id": "project-contact-directory-task-explain",
+          "instruction": "Explain your data structure choices and how you handle missing or malformed contact entries.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Contact Directory",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-order-summary-refactor",
+      "deliverables": [
+        "Working implementation of Order Summary Refactor",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-order-summary-refactor",
+      "module_id": "module-04",
+      "order": 5,
+      "placement_anchor_item_id": "core-04-18",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Order Summary Refactor can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-04-01",
+        "core-04-02",
+        "core-04-03"
+      ],
+      "prerequisites": [
+        "core-04-01",
+        "core-04-02",
+        "core-04-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "memory aliasing",
+        "errors as values",
+        "error wrapping",
+        "panic/recover"
+      ],
+      "reinforces": [
+        "core-04-01",
+        "core-04-02",
+        "core-04-03",
+        "core-04-04",
+        "core-04-05",
+        "core-04-06",
+        "core-04-07",
+        "core-04-08",
+        "core-04-09",
+        "core-04-10",
+        "core-04-11",
+        "core-04-12",
+        "core-04-13",
+        "core-04-14",
+        "core-04-15",
+        "core-04-16",
+        "core-04-17",
+        "core-04-18"
+      ],
+      "required_concepts": [
+        "memory aliasing",
+        "errors as values",
+        "error wrapping",
+        "panic/recover"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-order-summary-refactor-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-order-summary-refactor-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-order-summary-refactor-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-order-summary-refactor-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "order-summary-refactor",
+      "source_legacy_ids": [],
+      "stage": "go-core",
+      "status": "ready",
+      "summary": "Refactor a monolithic order summary function into well-structured Go code with proper error handling.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "04-functions-errors-data-semantics"
+          ],
+          "id": "project-order-summary-refactor-task-build",
+          "instruction": "Refactor a monolithic order summary function into well-separated Go functions with clear responsibilities and proper error returns.",
+          "instructions": "Implement the main requirements for Order Summary Refactor.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "04-functions-errors-data-semantics"
+          ],
+          "id": "project-order-summary-refactor-task-test",
+          "instruction": "Write tests that cover the original behavior, then verify the refactored version produces identical output.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "04-functions-errors-data-semantics"
+          ],
+          "id": "project-order-summary-refactor-task-explain",
+          "instruction": "Explain your refactoring decisions: what you extracted, why, and how you preserved correctness.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Order Summary Refactor",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-bank-account",
+      "deliverables": [
+        "Working implementation of Bank Account",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-bank-account",
+      "module_id": "module-05",
+      "order": 6,
+      "placement_anchor_item_id": "core-05-23",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Bank Account can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
+      "prerequisites": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "interface semantics",
+        "nil interface",
+        "package layout",
+        "generics and type parameters"
+      ],
+      "reinforces": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03",
+        "core-05-04",
+        "core-05-05",
+        "core-05-06",
+        "core-05-07",
+        "core-05-08",
+        "core-05-09",
+        "core-05-10",
+        "core-05-11",
+        "core-05-12",
+        "core-05-13",
+        "core-05-14",
+        "core-05-15",
+        "core-05-16",
+        "core-05-17",
+        "core-05-18",
+        "core-05-19",
+        "core-05-20",
+        "core-05-21",
+        "core-05-22",
+        "core-05-23",
+        "core-05-24"
+      ],
+      "required_concepts": [
+        "interface semantics",
+        "nil interface",
+        "package layout"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-bank-account-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-bank-account-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-bank-account-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-bank-account-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "bank-account",
+      "source_legacy_ids": [],
+      "stage": "engineering-core",
+      "status": "ready",
+      "summary": "Build a bank account system demonstrating Go types, interfaces, and method sets.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ],
+          "id": "project-bank-account-task-build",
+          "instruction": "Implement a BankAccount type with methods for deposit, withdraw, and balance — using proper Go receiver semantics.",
+          "instructions": "Implement the main requirements for Bank Account.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ],
+          "id": "project-bank-account-task-test",
+          "instruction": "Write tests that verify account operations, zero-value behavior, and concurrent access safety.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ],
+          "id": "project-bank-account-task-explain",
+          "instruction": "Explain your method set design and how Go’s type system influences your interface choices.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        },
+        {
+          "description": "Implement a generic audit event buffer TransactionBuffer[T any] to store and filter account ledger operations without runtime type assertions.",
+          "id": "project-bank-account-task-generic-buffer",
+          "title": "Type-Safe Generic Transaction Buffer"
+        }
+      ],
+      "title": "Bank Account",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-payroll-processor",
+      "deliverables": [
+        "Working implementation of Payroll Processor",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-payroll-processor",
+      "module_id": "module-05",
+      "order": 7,
+      "placement_anchor_item_id": "core-05-23",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Payroll Processor can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
+      "prerequisites": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "interface semantics",
+        "nil interface",
+        "package layout"
+      ],
+      "reinforces": [
+        "core-05-01",
+        "core-05-02",
+        "core-05-03",
+        "core-05-04",
+        "core-05-05",
+        "core-05-06",
+        "core-05-07",
+        "core-05-08",
+        "core-05-09",
+        "core-05-10",
+        "core-05-11",
+        "core-05-12",
+        "core-05-13",
+        "core-05-14",
+        "core-05-15",
+        "core-05-16",
+        "core-05-17",
+        "core-05-18",
+        "core-05-19",
+        "core-05-20",
+        "core-05-21",
+        "core-05-22",
+        "core-05-23"
+      ],
+      "required_concepts": [
+        "interface semantics",
+        "nil interface",
+        "package layout"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-payroll-processor-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-payroll-processor-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-payroll-processor-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-payroll-processor-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "payroll-processor",
+      "source_legacy_ids": [],
+      "stage": "engineering-core",
+      "status": "ready",
+      "summary": "Implement a payroll processor using Go packages, modules, and interface composition.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ],
+          "id": "project-payroll-processor-task-build",
+          "instruction": "Build a payroll processor using Go interfaces for different employee types (hourly, salaried, contractor) with polymorphic pay calculation.",
+          "instructions": "Implement the main requirements for Payroll Processor.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ],
+          "id": "project-payroll-processor-task-test",
+          "instruction": "Write tests for each employee type, including edge cases like overtime, zero hours, and negative rates.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "05-types-interfaces-packages-modules"
+          ],
+          "id": "project-payroll-processor-task-explain",
+          "instruction": "Explain your interface hierarchy and how Go’s implicit interface satisfaction shapes your design.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Payroll Processor",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-bug-hunt-pack",
+      "deliverables": [
+        "Working implementation of Bug Hunt Pack",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-bug-hunt-pack",
+      "module_id": "module-06",
+      "order": 8,
+      "placement_anchor_item_id": "core-06-21",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Bug Hunt Pack can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
+      "prerequisites": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "go test",
+        "test coverage",
+        "Delve debugger"
+      ],
+      "reinforces": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03",
+        "core-06-04",
+        "core-06-05",
+        "core-06-06",
+        "core-06-07",
+        "core-06-08",
+        "core-06-09",
+        "core-06-10",
+        "core-06-11",
+        "core-06-12",
+        "core-06-13",
+        "core-06-14",
+        "core-06-15",
+        "core-06-16",
+        "core-06-17",
+        "core-06-18",
+        "core-06-19",
+        "core-06-20",
+        "core-06-21"
+      ],
+      "required_concepts": [
+        "go test",
+        "test coverage",
+        "Delve debugger"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-bug-hunt-pack-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-bug-hunt-pack-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-bug-hunt-pack-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-bug-hunt-pack-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "bug-hunt-pack",
+      "source_legacy_ids": [],
+      "stage": "engineering-core",
+      "status": "ready",
+      "summary": "Identify, diagnose, and fix a set of deliberately introduced bugs across multiple Go packages.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ],
+          "id": "project-bug-hunt-pack-task-build",
+          "instruction": "Identify and fix a set of deliberate bugs across multiple Go packages covering logic errors, race conditions, and nil pointer dereferences.",
+          "instructions": "Implement the main requirements for Bug Hunt Pack.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ],
+          "id": "project-bug-hunt-pack-task-test",
+          "instruction": "Write tests that reproduce each bug, then verify the fix without breaking existing behavior.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ],
+          "id": "project-bug-hunt-pack-task-explain",
+          "instruction": "Document each bug: root cause, how you diagnosed it, and what test prevents regression.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Bug Hunt Pack",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go test ./...",
+        "test_command": "go test -race ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-refactor-under-tests",
+      "deliverables": [
+        "Working implementation of Refactor Under Tests",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-refactor-under-tests",
+      "module_id": "module-06",
+      "order": 9,
+      "placement_anchor_item_id": "core-06-21",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Refactor Under Tests can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
+      "prerequisites": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "go test",
+        "test coverage",
+        "Delve debugger"
+      ],
+      "reinforces": [
+        "core-06-01",
+        "core-06-02",
+        "core-06-03",
+        "core-06-04",
+        "core-06-05",
+        "core-06-06",
+        "core-06-07",
+        "core-06-08",
+        "core-06-09",
+        "core-06-10",
+        "core-06-11",
+        "core-06-12",
+        "core-06-13",
+        "core-06-14",
+        "core-06-15",
+        "core-06-16",
+        "core-06-17",
+        "core-06-18",
+        "core-06-19",
+        "core-06-20",
+        "core-06-21"
+      ],
+      "required_concepts": [
+        "go test",
+        "test coverage",
+        "Delve debugger"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-refactor-under-tests-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-refactor-under-tests-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-refactor-under-tests-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-refactor-under-tests-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "refactor-under-tests",
+      "source_legacy_ids": [],
+      "stage": "engineering-core",
+      "status": "ready",
+      "summary": "Add test coverage to legacy Go code, then refactor it while keeping all tests passing.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ],
+          "id": "project-refactor-under-tests-task-build",
+          "instruction": "Write comprehensive tests for a legacy Go package to characterize its existing behavior before refactoring.",
+          "instructions": "Implement the main requirements for Refactor Under Tests.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ],
+          "id": "project-refactor-under-tests-task-test",
+          "instruction": "Refactor the code for clarity and maintainability while keeping all tests passing without changes.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "06-testing-debugging-refactoring"
+          ],
+          "id": "project-refactor-under-tests-task-explain",
+          "instruction": "Compare before and after: what improved, what risks remain, and how the test suite gives confidence.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Refactor Under Tests",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go test ./...",
+        "test_command": "go test -race ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-file-organizer",
+      "deliverables": [
+        "Working implementation of File Organizer",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-file-organizer",
+      "module_id": "module-07",
+      "order": 10,
+      "placement_anchor_item_id": "core-07-21",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "File Organizer can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
+      "prerequisites": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ],
+      "reinforces": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03",
+        "core-07-04",
+        "core-07-05",
+        "core-07-06",
+        "core-07-07",
+        "core-07-08",
+        "core-07-09",
+        "core-07-10",
+        "core-07-11",
+        "core-07-12",
+        "core-07-13",
+        "core-07-14",
+        "core-07-15",
+        "core-07-16",
+        "core-07-17",
+        "core-07-18",
+        "core-07-19",
+        "core-07-20",
+        "core-07-21"
+      ],
+      "required_concepts": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-file-organizer-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-file-organizer-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-file-organizer-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-file-organizer-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "file-organizer",
+      "source_legacy_ids": [],
+      "stage": "cli-io",
+      "status": "ready",
+      "summary": "Build a CLI tool that organizes files by type, extension, or metadata using Go file I/O.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "07-cli-files-json-config"
+          ],
+          "id": "project-file-organizer-task-build",
+          "instruction": "Build a CLI tool that scans a directory and organizes files into subdirectories by extension, date, or user-specified rules.",
+          "instructions": "Implement the main requirements for File Organizer.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "07-cli-files-json-config"
+          ],
+          "id": "project-file-organizer-task-test",
+          "instruction": "Write tests covering empty directories, nested files, symlinks, and permission errors.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "07-cli-files-json-config"
+          ],
+          "id": "project-file-organizer-task-explain",
+          "instruction": "Explain your CLI flag design, file I/O strategy, and how you handle edge cases like name collisions.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "File Organizer",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-log-search",
+      "deliverables": [
+        "Working implementation of Log Search",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-log-search",
+      "module_id": "module-07",
+      "order": 11,
+      "placement_anchor_item_id": "core-07-21",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Log Search can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
+      "prerequisites": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ],
+      "reinforces": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03",
+        "core-07-04",
+        "core-07-05",
+        "core-07-06",
+        "core-07-07",
+        "core-07-08",
+        "core-07-09",
+        "core-07-10",
+        "core-07-11",
+        "core-07-12",
+        "core-07-13",
+        "core-07-14",
+        "core-07-15",
+        "core-07-16",
+        "core-07-17",
+        "core-07-18",
+        "core-07-19",
+        "core-07-20",
+        "core-07-21"
+      ],
+      "required_concepts": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-log-search-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-log-search-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-log-search-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-log-search-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "log-search",
+      "source_legacy_ids": [],
+      "stage": "cli-io",
+      "status": "ready",
+      "summary": "Implement a log search and filtering tool using Go CLI flags, file reading, and pattern matching.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "07-cli-files-json-config"
+          ],
+          "id": "project-log-search-task-build",
+          "instruction": "Implement a CLI log search tool that reads log files, filters by level/timestamp/pattern, and outputs results with context lines.",
+          "instructions": "Implement the main requirements for Log Search.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "07-cli-files-json-config"
+          ],
+          "id": "project-log-search-task-test",
+          "instruction": "Write tests covering large files, regex patterns, no-match cases, and malformed log entries.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "07-cli-files-json-config"
+          ],
+          "id": "project-log-search-task-explain",
+          "instruction": "Explain your stream processing approach, memory efficiency, and how you handle encoding variations.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Log Search",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-config-parser",
+      "deliverables": [
+        "Working implementation of Config Parser",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "id": "project-config-parser",
+      "module_id": "module-07",
+      "order": 12,
+      "placement_anchor_item_id": "core-07-21",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Config Parser can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
+      "prerequisites": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ],
+      "reinforces": [
+        "core-07-01",
+        "core-07-02",
+        "core-07-03",
+        "core-07-04",
+        "core-07-05",
+        "core-07-06",
+        "core-07-07",
+        "core-07-08",
+        "core-07-09",
+        "core-07-10",
+        "core-07-11",
+        "core-07-12",
+        "core-07-13",
+        "core-07-14",
+        "core-07-15",
+        "core-07-16",
+        "core-07-17",
+        "core-07-18",
+        "core-07-19",
+        "core-07-20",
+        "core-07-21"
+      ],
+      "required_concepts": [
+        "file I/O",
+        "JSON encoding/decoding"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-config-parser-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-config-parser-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-config-parser-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-config-parser-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "config-parser",
+      "source_legacy_ids": [],
+      "stage": "cli-io",
+      "status": "ready",
+      "summary": "Parse and validate configuration files in JSON and YAML formats, with environment variable overrides.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "07-cli-files-json-config"
+          ],
+          "id": "project-config-parser-task-build",
+          "instruction": "Parse configuration files in JSON and YAML formats with environment variable override support and schema validation.",
+          "instructions": "Implement the main requirements for Config Parser.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "07-cli-files-json-config"
+          ],
+          "id": "project-config-parser-task-test",
+          "instruction": "Write tests for each format, merge semantics, missing required fields, type coercion, and override precedence.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "07-cli-files-json-config"
+          ],
+          "id": "project-config-parser-task-explain",
+          "instruction": "Explain your parser design: format detection, schema validation, override ordering, and error reporting.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Config Parser",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-book-catalog-rest-api",
+      "deliverables": [
+        "Working implementation of Book Catalog REST API",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "intermediate",
+      "documentation_mode": "project",
+      "id": "project-book-catalog-rest-api",
+      "module_id": "module-08",
+      "order": 13,
+      "placement_anchor_item_id": "core-08-20",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Book Catalog REST API can be used as a learning proof artifact.",
+        "demo_required": true,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-08-01",
+        "core-08-02",
+        "core-08-03"
+      ],
+      "prerequisites": [
+        "core-08-01",
+        "core-08-02",
+        "core-08-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "HTTP handler lifecycle",
+        "HTTP timeouts",
+        "graceful shutdown",
+        "middleware pattern"
+      ],
+      "reinforces": [
+        "core-08-01",
+        "core-08-02",
+        "core-08-03",
+        "core-08-04",
+        "core-08-05",
+        "core-08-06",
+        "core-08-07",
+        "core-08-08",
+        "core-08-09",
+        "core-08-10",
+        "core-08-11",
+        "core-08-12",
+        "core-08-13",
+        "core-08-14",
+        "core-08-15",
+        "core-08-16",
+        "core-08-17",
+        "core-08-18",
+        "core-08-19",
+        "core-08-20"
+      ],
+      "required_concepts": [
+        "HTTP handler lifecycle",
+        "HTTP timeouts",
+        "graceful shutdown",
+        "middleware pattern"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-book-catalog-rest-api-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-book-catalog-rest-api-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-book-catalog-rest-api-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-book-catalog-rest-api-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "book-catalog-rest-api",
+      "source_legacy_ids": [],
+      "stage": "backend",
+      "status": "ready",
+      "summary": "Build a REST API for a book catalog with CRUD endpoints, middleware, and JSON encoding.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "08-http-rest-apis"
+          ],
+          "id": "project-book-catalog-rest-api-task-build",
+          "instruction": "Build a REST API for a book catalog with CRUD endpoints (GET/POST/PUT/DELETE), proper status codes, and JSON request/response bodies.",
+          "instructions": "Implement the main requirements for Book Catalog REST API.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "08-http-rest-apis"
+          ],
+          "id": "project-book-catalog-rest-api-task-test",
+          "instruction": "Write integration tests that test each endpoint end-to-end with valid and invalid payloads.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "08-http-rest-apis"
+          ],
+          "id": "project-book-catalog-rest-api-task-explain",
+          "instruction": "Explain your route design, middleware choices, error handling strategy, and API structure.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Book Catalog REST API",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./cmd/server/main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-task-api-postgres",
+      "deliverables": [
+        "Working implementation of Task API with Postgres",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "intermediate",
+      "documentation_mode": "project",
+      "id": "project-task-api-postgres",
+      "module_id": "module-09",
+      "order": 14,
+      "placement_anchor_item_id": "core-09-26",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Task API with Postgres can be used as a learning proof artifact.",
+        "demo_required": true,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-09-01",
+        "core-09-02",
+        "core-09-03"
+      ],
+      "prerequisites": [
+        "core-09-01",
+        "core-09-02",
+        "core-09-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "database/sql pool",
+        "SQL transactions",
+        "migrations",
+        "SQL injection"
+      ],
+      "reinforces": [
+        "core-09-01",
+        "core-09-02",
+        "core-09-03",
+        "core-09-04",
+        "core-09-05",
+        "core-09-06",
+        "core-09-07",
+        "core-09-08",
+        "core-09-09",
+        "core-09-10",
+        "core-09-11",
+        "core-09-12",
+        "core-09-13",
+        "core-09-14",
+        "core-09-15",
+        "core-09-16",
+        "core-09-17",
+        "core-09-18",
+        "core-09-19",
+        "core-09-20",
+        "core-09-21",
+        "core-09-22",
+        "core-09-23",
+        "core-09-24",
+        "core-09-25",
+        "core-09-26"
+      ],
+      "required_concepts": [
+        "database/sql pool",
+        "SQL transactions",
+        "migrations",
+        "SQL injection"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-task-api-postgres-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-task-api-postgres-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-task-api-postgres-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-task-api-postgres-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "task-api-with-postgres",
+      "source_legacy_ids": [],
+      "stage": "data",
+      "status": "ready",
+      "summary": "Build a task management API backed by PostgreSQL with migrations, queries, and transactions.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "09-sql-postgres-persistence"
+          ],
+          "id": "project-task-api-postgres-task-build",
+          "instruction": "Build a task management API backed by PostgreSQL with CRUD endpoints, migrations, prepared statements, and transaction support.",
+          "instructions": "Implement the main requirements for Task API with Postgres.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "09-sql-postgres-persistence"
+          ],
+          "id": "project-task-api-postgres-task-test",
+          "instruction": "Write integration tests that test queries with database fixtures, including rollback on error.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "09-sql-postgres-persistence"
+          ],
+          "id": "project-task-api-postgres-task-explain",
+          "instruction": "Explain your schema design, migration strategy, connection pooling, and transaction boundaries.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        },
+        {
+          "done_when": [
+            "pg_dump snapshot is generated in custom format with transaction consistency.",
+            "Active PostgreSQL container and volume are destroyed.",
+            "Fresh database container is provisioned and restored using pg_restore.",
+            "Automated integrity verification query confirms row counts, foreign key constraints, and sequence alignment."
+          ],
+          "files_touched": [
+            "09-sql-postgres-persistence"
+          ],
+          "id": "project-task-api-postgres-task-disaster-recovery",
+          "instruction": "Execute an end-to-end disaster recovery drill: snapshot with pg_dump, destroy container and volume, restore into a fresh instance with pg_restore, and verify database integrity.",
+          "instructions": "Prove that application data survives complete container and volume destruction.",
+          "title": "Disaster recovery drill & integrity verification",
+          "type": "verify"
+        }
+      ],
+      "title": "Task API with Postgres",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "docker compose up -d && go run ./cmd/server/main.go",
+        "test_command": "go test -tags=integration ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-secure-authenticated-api",
+      "deliverables": [
+        "Working implementation of Secure Authenticated API",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "intermediate",
+      "documentation_mode": "project",
+      "id": "project-secure-authenticated-api",
+      "module_id": "module-10",
+      "order": 15,
+      "placement_anchor_item_id": "core-10-24",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Secure Authenticated API can be used as a learning proof artifact.",
+        "demo_required": true,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-10-01",
+        "core-10-02",
+        "core-10-03"
+      ],
+      "prerequisites": [
+        "core-10-01",
+        "core-10-02",
+        "core-10-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "JWT",
+        "RBAC",
+        "SQL injection"
+      ],
+      "reinforces": [
+        "core-10-01",
+        "core-10-02",
+        "core-10-03",
+        "core-10-04",
+        "core-10-05",
+        "core-10-06",
+        "core-10-07",
+        "core-10-08",
+        "core-10-09",
+        "core-10-10",
+        "core-10-11",
+        "core-10-12",
+        "core-10-13",
+        "core-10-14",
+        "core-10-15",
+        "core-10-16",
+        "core-10-17",
+        "core-10-18",
+        "core-10-19",
+        "core-10-20",
+        "core-10-21",
+        "core-10-22",
+        "core-10-23",
+        "core-10-24"
+      ],
+      "required_concepts": [
+        "JWT",
+        "RBAC",
+        "SQL injection"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-secure-authenticated-api-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-secure-authenticated-api-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-secure-authenticated-api-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-secure-authenticated-api-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "secure-authenticated-api",
+      "source_legacy_ids": [],
+      "stage": "security",
+      "status": "ready",
+      "summary": "Add authentication and authorization to an API using JWT tokens, bcrypt passwords, and security middleware.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "10-auth-security"
+          ],
+          "id": "project-secure-authenticated-api-task-build",
+          "instruction": "Add JWT-based authentication and bcrypt password hashing to an API, with middleware for protected routes and role-based access.",
+          "instructions": "Implement the main requirements for Secure Authenticated API.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "10-auth-security"
+          ],
+          "id": "project-secure-authenticated-api-task-test",
+          "instruction": "Write tests for token generation, validation, expiration, invalid tokens, and unauthorized access.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "10-auth-security"
+          ],
+          "id": "project-secure-authenticated-api-task-explain",
+          "instruction": "Explain your security design: token format, password hashing choices, middleware architecture, and threat model.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        },
+        {
+          "done_when": [
+            "Unauthenticated request without token receives deterministic 401 Unauthorized with structured JSON error.",
+            "Authenticated request with insufficient role receives 403 Forbidden with zero administrative data leakage.",
+            "Cross-tenant isolation test proves User from Tenant A receives 403/404 attempting to access Tenant B resource.",
+            "Expired and tampered tokens receive immediate 401 rejection."
+          ],
+          "files_touched": [
+            "10-auth-security"
+          ],
+          "id": "project-secure-authenticated-api-task-authz-suite",
+          "instruction": "Implement a rigorous negative authorization test suite verifying 401 vs 403 separation, role mismatch rejection, and cross-tenant boundary isolation.",
+          "instructions": "Demonstrate through automated tests that unauthorized requests and cross-tenant access attempts are rejected deterministically.",
+          "title": "Negative authorization and tenant isolation suite",
+          "type": "verify"
+        }
+      ],
+      "title": "Secure Authenticated API",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "docker compose up -d && go run ./cmd/server/main.go",
+        "test_command": "go test -tags=integration ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-concurrent-downloader",
+      "deliverables": [
+        "Working implementation of Concurrent Downloader",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "intermediate",
+      "documentation_mode": "project",
+      "id": "project-concurrent-downloader",
+      "module_id": "module-11",
+      "order": 18,
+      "placement_anchor_item_id": "core-11-28",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Concurrent Downloader can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
+      "prerequisites": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "goroutine",
+        "channel",
+        "mutex",
+        "race condition",
+        "goroutine leak",
+        "errgroup",
+        "backpressure",
+        "context cancellation",
+        "context deadlines",
+        "race detector"
+      ],
+      "reinforces": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03",
+        "core-11-04",
+        "core-11-05",
+        "core-11-06",
+        "core-11-07",
+        "core-11-08",
+        "core-11-09",
+        "core-11-10",
+        "core-11-11",
+        "core-11-12",
+        "core-11-13",
+        "core-11-14",
+        "core-11-15",
+        "core-11-16",
+        "core-11-17",
+        "core-11-18",
+        "core-11-19",
+        "core-11-20",
+        "core-11-21",
+        "core-11-22",
+        "core-11-23",
+        "core-11-24",
+        "core-11-25",
+        "core-11-26",
+        "core-11-27",
+        "core-11-28"
+      ],
+      "required_concepts": [
+        "goroutine",
+        "channel",
+        "mutex",
+        "race condition",
+        "goroutine leak",
+        "errgroup",
+        "backpressure",
+        "context cancellation",
+        "context deadlines",
+        "race detector"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-concurrent-downloader-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-concurrent-downloader-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-concurrent-downloader-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-concurrent-downloader-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "concurrent-downloader",
+      "source_legacy_ids": [],
+      "stage": "concurrency",
+      "status": "ready",
+      "summary": "Advanced concurrency extension: implement a chunked multi-part file downloader with HTTP Range requests, retry backoff, progress tracking, and stream re-assembly.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "11-context-time-concurrency"
+          ],
+          "id": "project-concurrent-downloader-task-build",
+          "instruction": "Build a concurrent file downloader that downloads multiple URLs in parallel using goroutines, with progress reporting and error handling.",
+          "instructions": "Implement the main requirements for Concurrent Downloader.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "11-context-time-concurrency"
+          ],
+          "id": "project-concurrent-downloader-task-test",
+          "instruction": "Write tests covering concurrent downloads, partial failures, timeouts, and retry behavior.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "11-context-time-concurrency"
+          ],
+          "id": "project-concurrent-downloader-task-explain",
+          "instruction": "Explain your concurrency design: worker count, error propagation, cancellation, and resource management.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Concurrent Downloader",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test -race ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-url-health-checker",
+      "deliverables": [
+        "Working implementation of URL Health Checker",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "intermediate",
+      "documentation_mode": "project",
+      "id": "project-url-health-checker",
+      "module_id": "module-11",
+      "order": 17,
+      "placement_anchor_item_id": "core-11-28",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "URL Health Checker can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
+      "prerequisites": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "goroutine",
+        "channel",
+        "mutex",
+        "race condition",
+        "goroutine leak",
+        "errgroup",
+        "backpressure",
+        "context cancellation",
+        "context deadlines",
+        "race detector"
+      ],
+      "reinforces": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03",
+        "core-11-04",
+        "core-11-05",
+        "core-11-06",
+        "core-11-07",
+        "core-11-08",
+        "core-11-09",
+        "core-11-10",
+        "core-11-11",
+        "core-11-12",
+        "core-11-13",
+        "core-11-14",
+        "core-11-15",
+        "core-11-16",
+        "core-11-17",
+        "core-11-18",
+        "core-11-19",
+        "core-11-20",
+        "core-11-21",
+        "core-11-22",
+        "core-11-23",
+        "core-11-24",
+        "core-11-25",
+        "core-11-26",
+        "core-11-27",
+        "core-11-28"
+      ],
+      "required_concepts": [
+        "goroutine",
+        "channel",
+        "mutex",
+        "race condition",
+        "goroutine leak",
+        "errgroup",
+        "backpressure",
+        "context cancellation",
+        "context deadlines",
+        "race detector"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-url-health-checker-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-url-health-checker-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-url-health-checker-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-url-health-checker-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "url-health-checker",
+      "source_legacy_ids": [],
+      "stage": "concurrency",
+      "status": "ready",
+      "summary": "Applied concurrency project: build a concurrent HTTP health check probe utilizing the bounded worker pool pattern to query URL endpoints with timeout control and error collection.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "11-context-time-concurrency"
+          ],
+          "id": "project-url-health-checker-task-build",
+          "instruction": "Implement a URL health checker that monitors endpoints concurrently, detects status changes, and reports results with configurable intervals.",
+          "instructions": "Implement the main requirements for URL Health Checker.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "11-context-time-concurrency"
+          ],
+          "id": "project-url-health-checker-task-test",
+          "instruction": "Write tests covering endpoint transitions (up/down/flapping), timeout handling, and concurrent monitoring.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "11-context-time-concurrency"
+          ],
+          "id": "project-url-health-checker-task-explain",
+          "instruction": "Explain your monitoring design: polling strategy, state management, alert generation, and concurrency model.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "URL Health Checker",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test -race ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-bounded-worker-pool",
+      "deliverables": [
+        "Working implementation of Bounded Worker Pool",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "intermediate",
+      "documentation_mode": "project",
+      "id": "project-bounded-worker-pool",
+      "module_id": "module-11",
+      "order": 16,
+      "placement_anchor_item_id": "core-11-28",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Bounded Worker Pool can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
+      "prerequisites": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "goroutine",
+        "channel",
+        "mutex",
+        "race condition",
+        "goroutine leak",
+        "errgroup",
+        "backpressure",
+        "context cancellation",
+        "context deadlines",
+        "race detector"
+      ],
+      "reinforces": [
+        "core-11-01",
+        "core-11-02",
+        "core-11-03",
+        "core-11-04",
+        "core-11-05",
+        "core-11-06",
+        "core-11-07",
+        "core-11-08",
+        "core-11-09",
+        "core-11-10",
+        "core-11-11",
+        "core-11-12",
+        "core-11-13",
+        "core-11-14",
+        "core-11-15",
+        "core-11-16",
+        "core-11-17",
+        "core-11-18",
+        "core-11-19",
+        "core-11-20",
+        "core-11-21",
+        "core-11-22",
+        "core-11-23",
+        "core-11-24",
+        "core-11-25",
+        "core-11-26",
+        "core-11-27",
+        "core-11-28"
+      ],
+      "required_concepts": [
+        "goroutine",
+        "channel",
+        "mutex",
+        "race condition",
+        "goroutine leak",
+        "errgroup",
+        "backpressure",
+        "context cancellation",
+        "context deadlines",
+        "race detector"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-bounded-worker-pool-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-bounded-worker-pool-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-bounded-worker-pool-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-bounded-worker-pool-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "bounded-worker-pool",
+      "source_legacy_ids": [],
+      "stage": "concurrency",
+      "status": "ready",
+      "summary": "Foundational concurrency mini-project: implement channel-based worker synchronization with fixed worker counts, graceful cancellation, and panic containment.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "11-context-time-concurrency"
+          ],
+          "id": "project-bounded-worker-pool-task-build",
+          "instruction": "Build a bounded worker pool that processes jobs from a queue with configurable worker count, graceful shutdown, and error collection.",
+          "instructions": "Implement the main requirements for Bounded Worker Pool.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "11-context-time-concurrency"
+          ],
+          "id": "project-bounded-worker-pool-task-test",
+          "instruction": "Write tests covering job distribution, worker failure, graceful shutdown, and backlog handling.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "11-context-time-concurrency"
+          ],
+          "id": "project-bounded-worker-pool-task-explain",
+          "instruction": "Explain your pool design: job queue, worker lifecycle, backpressure, and shutdown coordination with context.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Bounded Worker Pool",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test -race ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-pii-redactor",
+      "deliverables": [
+        "Working implementation of PII Redactor",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "intermediate",
+      "documentation_mode": "project",
+      "id": "project-pii-redactor",
+      "module_id": "module-12",
+      "order": 19,
+      "placement_anchor_item_id": "core-12-12",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "PII Redactor can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
+      "prerequisites": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "structured logging",
+        "distributed tracing"
+      ],
+      "reinforces": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03",
+        "core-12-04",
+        "core-12-05",
+        "core-12-06",
+        "core-12-07",
+        "core-12-08",
+        "core-12-09",
+        "core-12-10",
+        "core-12-11",
+        "core-12-12"
+      ],
+      "required_concepts": [
+        "structured logging",
+        "distributed tracing"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-pii-redactor-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-pii-redactor-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-pii-redactor-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-pii-redactor-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "pii-redactor",
+      "source_legacy_ids": [],
+      "stage": "reliability",
+      "status": "ready",
+      "summary": "Build a privacy-preserving log redactor that masks sensitive PII attributes (emails, credit cards, SSNs) before structured logs are shipped to collectors.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ],
+          "id": "project-pii-redactor-task-build",
+          "instruction": "Build a PII redaction service with structured logging, error tracking, and metrics for redaction operations and failures.",
+          "instructions": "Implement the main requirements for PII Redactor.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ],
+          "id": "project-pii-redactor-task-test",
+          "instruction": "Write tests for redaction patterns, log output verification, metric collection, and error scenarios.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ],
+          "id": "project-pii-redactor-task-explain",
+          "instruction": "Explain your observability design: log structure, metric exposure, error classification, and monitoring coverage.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "PII Redactor",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./cmd/server/main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-observability-retrofit",
+      "deliverables": [
+        "Working implementation of Observability Retrofit",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "project",
+      "id": "project-observability-retrofit",
+      "module_id": "module-12",
+      "order": 20,
+      "placement_anchor_item_id": "core-12-12",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Observability Retrofit can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
+      "prerequisites": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "structured logging",
+        "distributed tracing"
+      ],
+      "reinforces": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03",
+        "core-12-04",
+        "core-12-05",
+        "core-12-06",
+        "core-12-07",
+        "core-12-08",
+        "core-12-09",
+        "core-12-10",
+        "core-12-11",
+        "core-12-12"
+      ],
+      "required_concepts": [
+        "structured logging",
+        "distributed tracing"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-observability-retrofit-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-observability-retrofit-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-observability-retrofit-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-observability-retrofit-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "observability-retrofit",
+      "source_legacy_ids": [],
+      "stage": "reliability",
+      "status": "ready",
+      "summary": "Add structured logging, metrics, and tracing to an existing Go application without changing its behavior.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ],
+          "id": "project-observability-retrofit-task-build",
+          "instruction": "Add structured logging, OpenTelemetry tracing, and Prometheus metrics to an existing Go application without changing its external behavior.",
+          "instructions": "Implement the main requirements for Observability Retrofit.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ],
+          "id": "project-observability-retrofit-task-test",
+          "instruction": "Write tests that verify the observability output: log lines, trace spans, and metric values under load.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "12-observability-performance-reliability"
+          ],
+          "id": "project-observability-retrofit-task-explain",
+          "instruction": "Explain your retrofit strategy: instrumentation points, performance impact, and how you verified zero behavior change.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Observability Retrofit",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./cmd/server/main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-profile-and-fix-lab",
+      "deliverables": [
+        "Working implementation of Profile and Fix Lab",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "project",
+      "id": "project-profile-and-fix-lab",
+      "module_id": "module-13",
+      "order": 21,
+      "placement_anchor_item_id": "core-13-08",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Profile and Fix Lab can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-13-01",
+        "core-13-02",
+        "core-13-03"
+      ],
+      "prerequisites": [
+        "core-13-01",
+        "core-13-02",
+        "core-13-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "CPU profiling",
+        "heap allocation optimization",
+        "escape analysis",
+        "sync.Pool memory reuse"
+      ],
+      "reinforces": [
+        "core-13-01",
+        "core-13-02",
+        "core-13-03",
+        "core-13-04",
+        "core-13-05",
+        "core-13-06",
+        "core-13-07",
+        "core-13-08"
+      ],
+      "required_concepts": [
+        "pprof profiling",
+        "benchmarking performance",
+        "memory allocation",
+        "escape analysis",
+        "sync.Pool"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-profile-and-fix-lab-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-profile-and-fix-lab-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-profile-and-fix-lab-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-profile-and-fix-lab-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "profile-and-fix-lab",
+      "source_legacy_ids": [],
+      "stage": "core",
+      "status": "ready",
+      "summary": "Profile a CPU and memory bottlenecked Go batch-processing application using pprof, identify heap allocation hotspots, and apply mechanical optimizations to eliminate GC pressure.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "13-performance-memory-engineering"
+          ],
+          "id": "project-profile-and-fix-lab-task-build",
+          "instruction": "Use pprof to profile a Go application, identify CPU and memory bottlenecks, and apply targeted optimizations.",
+          "instructions": "Implement the main requirements for Profile and Fix Lab.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "13-performance-memory-engineering"
+          ],
+          "id": "project-profile-and-fix-lab-task-test",
+          "instruction": "Write benchmarks that measure before/after performance and verify improvement without correctness regression.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "13-performance-memory-engineering"
+          ],
+          "id": "project-profile-and-fix-lab-task-explain",
+          "instruction": "Document your profiling process: flame graph analysis, identified bottleneck, fix applied, and measured improvement.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Profile and Fix Lab",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run .",
+        "test_command": "go test -v ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-modular-refactor-review",
+      "deliverables": [
+        "Working implementation of Modular Refactor Review",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "project",
+      "id": "project-modular-refactor-review",
+      "module_id": "module-14",
+      "order": 22,
+      "placement_anchor_item_id": "core-14-17",
+      "portfolio": {
+        "architecture_defense_required": true,
+        "artifact_description": "Modular Refactor Review can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-14-01",
+        "core-14-02",
+        "core-14-03"
+      ],
+      "prerequisites": [
+        "core-14-01",
+        "core-14-02",
+        "core-14-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "repository pattern",
+        "hexagonal architecture"
+      ],
+      "reinforces": [
+        "core-14-01",
+        "core-14-02",
+        "core-14-03",
+        "core-14-04",
+        "core-14-05",
+        "core-14-06",
+        "core-14-07",
+        "core-14-08",
+        "core-14-09",
+        "core-14-10",
+        "core-14-11",
+        "core-14-12",
+        "core-14-13",
+        "core-14-14",
+        "core-14-15",
+        "core-14-16",
+        "core-14-17"
+      ],
+      "required_concepts": [
+        "repository pattern",
+        "hexagonal architecture"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-modular-refactor-review-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-modular-refactor-review-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-modular-refactor-review-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-modular-refactor-review-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "modular-refactor-review",
+      "source_legacy_ids": [],
+      "stage": "architecture",
+      "status": "ready",
+      "summary": "Refactor a monolith into a modular, layered architecture with dependency injection and interface-based design.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "13-architecture-systems-thinking"
+          ],
+          "id": "project-modular-refactor-review-task-build",
+          "instruction": "Refactor a monolithic Go application into a modular architecture with layered packages, dependency injection, and interface-based boundaries.",
+          "instructions": "Implement the main requirements for Modular Refactor Review.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "13-architecture-systems-thinking"
+          ],
+          "id": "project-modular-refactor-review-task-test",
+          "instruction": "Write integration tests that verify the refactored system produces identical behavior through the external API.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "13-architecture-systems-thinking"
+          ],
+          "id": "project-modular-refactor-review-task-explain",
+          "instruction": "Explain your architecture: package structure, dependency flow, interface contracts, and testing strategy.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Modular Refactor Review",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./cmd/server/main.go",
+        "test_command": "go test ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-dockerized-service-cicd",
+      "deliverables": [
+        "Working implementation of Dockerized Service with CI/CD",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "project",
+      "id": "project-dockerized-service-cicd",
+      "module_id": "module-15",
+      "order": 23,
+      "placement_anchor_item_id": "core-15-19",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Dockerized Service with CI/CD can be used as a learning proof artifact.",
+        "demo_required": true,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-15-01",
+        "core-15-02",
+        "core-15-03"
+      ],
+      "prerequisites": [
+        "core-15-08",
+        "core-15-12",
+        "core-15-13"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "Docker multi-stage build",
+        "CI pipeline"
+      ],
+      "reinforces": null,
+      "required_concepts": [
+        "Docker multi-stage build",
+        "CI pipeline"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-dockerized-service-cicd-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-dockerized-service-cicd-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-dockerized-service-cicd-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-dockerized-service-cicd-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "dockerized-service-with-ci-cd",
+      "source_legacy_ids": [],
+      "stage": "delivery",
+      "status": "ready",
+      "summary": "Containerize a Go service with a multi-stage Dockerfile and set up a CI/CD pipeline for automated build and deploy.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "14-docker-cicd-linux-deployment"
+          ],
+          "id": "project-dockerized-service-cicd-task-build",
+          "instruction": "Create a multi-stage Dockerfile for a Go service, then set up a CI/CD pipeline with GitHub Actions for automated build, test, and deploy.",
+          "instructions": "Implement the main requirements for Dockerized Service with CI/CD.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "14-docker-cicd-linux-deployment"
+          ],
+          "id": "project-dockerized-service-cicd-task-test",
+          "instruction": "Write tests that run inside the container and verify the deployed service responds correctly.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "14-docker-cicd-linux-deployment"
+          ],
+          "id": "project-dockerized-service-cicd-task-explain",
+          "instruction": "Explain your containerization choices: base image, layer optimization, security considerations, and pipeline stages.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Dockerized Service with CI/CD",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "docker compose up --build",
+        "test_command": "docker compose run --rm test"
+      }
+    },
+    {
+      "assessment_id": "assessment-project-portfolio-review-pack",
+      "deliverables": [
+        "Working implementation of Portfolio Review Pack",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "project",
+      "id": "project-portfolio-review-pack",
+      "module_id": "module-16",
+      "order": 24,
+      "placement_anchor_item_id": "core-16-15",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Portfolio Review Pack can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03"
+      ],
+      "prerequisites": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "portfolio strategy",
+        "technical writing",
+        "code review readiness"
+      ],
+      "reinforces": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03",
+        "core-16-04",
+        "core-16-05",
+        "core-16-06",
+        "core-16-07",
+        "core-16-08",
+        "core-16-09",
+        "core-16-10",
+        "core-16-11",
+        "core-16-12",
+        "core-16-13",
+        "core-16-14",
+        "core-16-15"
+      ],
+      "required_concepts": [
+        "portfolio strategy",
+        "technical writing",
+        "code review readiness"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-portfolio-review-pack-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-portfolio-review-pack-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-portfolio-review-pack-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-portfolio-review-pack-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "portfolio-review-pack",
+      "source_legacy_ids": [],
+      "stage": "career",
+      "status": "ready",
+      "summary": "Curate and present your strongest Go projects in a professional portfolio format for job applications.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "15-portfolio-interview-capstone"
+          ],
+          "id": "project-portfolio-review-pack-task-build",
+          "instruction": "Curate your strongest Go projects, write professional READMEs, and organize them into a portfolio ready for job applications.",
+          "instructions": "Implement the main requirements for Portfolio Review Pack.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "15-portfolio-interview-capstone"
+          ],
+          "id": "project-portfolio-review-pack-task-test",
+          "instruction": "Review each project for completeness: tests, documentation, error handling, and idiomatic Go style.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "15-portfolio-interview-capstone"
+          ],
+          "id": "project-portfolio-review-pack-task-explain",
+          "instruction": "Prepare a presentation explaining your technical growth, design philosophy, and the most challenging problem you solved.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Portfolio Review Pack",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "bash ./portfolio-check.sh",
+        "test_command": "bash ./portfolio-check.sh"
+      }
+    },
+    {
+      "assessment_id": "assessment-project-opslane",
+      "deliverables": [
+        "Working implementation of Opslane Flagship",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "flagship",
+      "documentation_mode": "flagship",
+      "id": "project-opslane",
+      "module_id": "module-18",
+      "order": 25,
+      "placement_anchor_item_id": "opslane-15",
+      "portfolio": {
+        "architecture_defense_required": true,
+        "artifact_description": "Opslane Flagship can be used as a learning proof artifact.",
+        "demo_required": true,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "opslane-01",
+        "opslane-02",
+        "opslane-03"
+      ],
+      "prerequisites": [
+        "opslane-01",
+        "opslane-02",
+        "opslane-03"
+      ],
+      "readme_contract": {
+        "contract_id": "flagship.v3",
+        "documentation_mode": "flagship",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "context cancellation",
+        "graceful shutdown",
+        "migrations",
+        "RBAC",
+        "middleware pattern",
+        "errgroup",
+        "backpressure",
+        "structured logging",
+        "distributed tracing",
+        "Docker multi-stage build",
+        "CI pipeline"
+      ],
+      "reinforces": [
+        "opslane-01",
+        "opslane-02",
+        "opslane-03",
+        "opslane-04",
+        "opslane-05",
+        "opslane-06",
+        "opslane-07",
+        "opslane-08",
+        "opslane-09",
+        "opslane-10",
+        "opslane-11",
+        "opslane-12",
+        "opslane-13",
+        "opslane-14",
+        "opslane-15"
+      ],
+      "required_concepts": [
+        "context cancellation",
+        "graceful shutdown",
+        "migrations",
+        "RBAC",
+        "middleware pattern",
+        "errgroup",
+        "backpressure",
+        "structured logging",
+        "distributed tracing",
+        "Docker multi-stage build",
+        "CI pipeline"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-opslane-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-opslane-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-opslane-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-opslane-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "opslane-flagship",
+      "source_legacy_ids": [],
+      "stage": "flagship",
+      "status": "ready",
+      "summary": "Build and deploy a full-stack application with operations dashboard, automated testing, CI/CD, and observability.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "17-flagship-opslane"
+          ],
+          "id": "project-opslane-task-build",
+          "instruction": "Build and deploy a full-stack application with Go backend, operations dashboard, automated CI/CD, observability stack, and production readiness.",
+          "instructions": "Implement the main requirements for Opslane Flagship.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "17-flagship-opslane"
+          ],
+          "id": "project-opslane-task-test",
+          "instruction": "Write comprehensive tests across all layers: unit, integration, and end-to-end tests for critical paths.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "17-flagship-opslane"
+          ],
+          "id": "project-opslane-task-explain",
+          "instruction": "Document the complete system architecture, deployment process, monitoring setup, and incident response plan.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Opslane Flagship",
+      "type": "flagship",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "docker compose up --build",
+        "test_command": "go test -tags=integration -race ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-course-setup",
+      "deliverables": [
+        "Configured terminal and Git identity",
+        "Verified text editor and local development workspace",
+        "Environment documentation file (setup.txt)"
+      ],
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "id": "project-course-setup",
+      "module_id": "module-00",
+      "placement_anchor_item_id": "core-00-10",
+      "prerequisite_item_ids": [
+        "core-00-10"
+      ],
+      "prerequisites": [
+        "core-00-10"
+      ],
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "zero-magic learning",
+        "repository navigation",
+        "local toolchain execution"
+      ],
+      "required_concepts": [
+        "zero-magic learning",
+        "repository navigation",
+        "local toolchain execution"
+      ],
+      "rubric": [
+        {
+          "criterion": "Correctness",
+          "description": "Terminal environment and Git committer identity configured correctly.",
+          "weight": 35
+        },
+        {
+          "criterion": "Environment quality",
+          "description": "Text editor and dedicated local workspace directory properly established.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Output from git version, committer config, and workspace creation demonstrate a working setup.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear documentation of environment choices and personal workspace location.",
+          "weight": 15
+        }
+      ],
+      "schema_version": "3.1.0",
+      "slug": "course-setup-verification",
+      "source_legacy_ids": [],
+      "stage": "foundations",
+      "status": "ready",
+      "summary": "Verify your complete course environment: terminal shell, Git configuration, editor setup, and workspace initialization.",
+      "tags": [
+        "orientation",
+        "setup"
+      ],
+      "tasks": [
+        {
+          "instruction": "Verify your terminal shell, check working directory, and confirm basic shell command execution.",
+          "title": "Verify terminal shell"
+        },
+        {
+          "instruction": "Confirm Git is installed and configure committer name and email.",
+          "title": "Configure Git identity"
+        },
+        {
+          "instruction": "Establish your dedicated local workspace directory for course projects and record setup.txt.",
+          "title": "Establish workspace and record setup"
+        }
+      ],
+      "title": "Course Setup Verification",
+      "type": "mini-project",
+      "verification": "Manual review: ensure Git version, configured identity, editor confirmation, and workspace directory are present."
+    },
+    {
+      "assessment_id": "assessment-project-performance-analysis-lab",
+      "deliverables": [
+        "pprof CPU and heap profiles",
+        "Optimized Go code with benchmarks",
+        "Performance analysis report"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "tutorial",
+      "id": "project-performance-analysis-lab",
+      "module_id": "module-13",
+      "placement_anchor_item_id": "core-13-08",
+      "prerequisite_item_ids": [
+        "core-13-01",
+        "core-13-04"
+      ],
+      "prerequisites": [
+        "core-13-01",
+        "core-13-04"
+      ],
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "CPU and heap profiling",
+        "escape analysis and stack allocation",
+        "benchmark-driven optimization"
+      ],
+      "required_concepts": [
+        "pprof profiling",
+        "benchmarking performance",
+        "memory allocation"
+      ],
+      "rubric": [
+        {
+          "criterion": "Profiling accuracy",
+          "description": "Correct identification of CPU and memory bottlenecks with pprof flame graphs and heap profiles.",
+          "weight": 35
+        },
+        {
+          "criterion": "Optimization quality",
+          "description": "Optimizations target the real bottlenecks and follow Go performance best practices.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Before/after benchmark data with statistical significance and profiling evidence.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear explanation of profiling process, bottleneck analysis, and optimization rationale.",
+          "weight": 15
+        }
+      ],
+      "schema_version": "3.1.0",
+      "slug": "performance-analysis-lab",
+      "source_legacy_ids": [],
+      "stage": "core",
+      "status": "ready",
+      "summary": "Profile a Go application with pprof, identify CPU and memory bottlenecks, and apply targeted optimizations with measurable improvements.",
+      "tags": [
+        "performance",
+        "profiling",
+        "optimization"
+      ],
+      "tasks": [
+        {
+          "instruction": "Run pprof CPU profiling on a provided Go application, generate a flame graph, and identify the top 3 CPU hotspots.",
+          "title": "Profile CPU usage with pprof"
+        },
+        {
+          "instruction": "Use pprof heap profiling and escape analysis to identify excessive allocations and objects escaping to the heap.",
+          "title": "Analyze memory allocations"
+        },
+        {
+          "instruction": "Apply targeted optimizations (object pooling, slice preallocation, escape reduction) and measure before/after with benchmarks.",
+          "title": "Optimize and benchmark"
+        }
+      ],
+      "title": "Performance Analysis Lab",
+      "type": "mini-project",
+      "verification": "Automated: before/after benchmark comparison. Manual review: flame graph analysis and optimization report."
+    },
+    {
+      "assessment_id": "assessment-project-advanced-electives",
+      "deliverables": [
+        "Working Go project on elective topic",
+        "Tests and benchmarks",
+        "Technical summary and design document"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "tutorial",
+      "id": "project-advanced-electives",
+      "module_id": "module-17",
+      "placement_anchor_item_id": "elective-20",
+      "prerequisite_item_ids": [
+        "core-16-15"
+      ],
+      "prerequisites": [
+        "core-16-15"
+      ],
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "generic constraints",
+        "grpc protocol",
+        "sync pool memory reuse",
+        "cqrs architecture"
+      ],
+      "required_concepts": [
+        "generic constraints",
+        "grpc protocol",
+        "sync pool memory reuse",
+        "cqrs architecture"
+      ],
+      "rubric": [
+        {
+          "criterion": "Technical depth",
+          "description": "Project demonstrates advanced Go concepts from the chosen elective with correct implementation.",
+          "weight": 35
+        },
+        {
+          "criterion": "Code quality",
+          "description": "Code follows Go idioms, is well-structured, tested, and documented.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Tests, benchmarks, or demonstrations verify the implementation works correctly.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear technical write-up explaining the advanced concepts, design choices, and trade-offs.",
+          "weight": 15
+        }
+      ],
+      "schema_version": "3.1.0",
+      "slug": "advanced-electives-capstone",
+      "source_legacy_ids": [],
+      "stage": "elective",
+      "status": "ready",
+      "summary": "Apply advanced Go topics from the electives path: build a project demonstrating functional programming, systems programming, or cloud-native Go patterns.",
+      "tags": [
+        "elective",
+        "advanced",
+        "capstone"
+      ],
+      "tasks": [
+        {
+          "instruction": "Select an advanced Go topic from the electives, define a project scope, and outline the implementation plan.",
+          "title": "Choose and plan an elective topic"
+        },
+        {
+          "instruction": "Build a working Go application that demonstrates your chosen elective topic with proper packages, tests, and documentation.",
+          "title": "Implement the project"
+        },
+        {
+          "instruction": "Write a technical summary explaining the advanced concepts used, design decisions, and what you learned.",
+          "title": "Present your work"
+        }
+      ],
+      "title": "Advanced Electives Capstone",
+      "type": "mini-project",
+      "verification": "Manual review of project implementation, tests, and technical write-up against elective module criteria."
+    },
+    {
+      "assessment_id": "assessment-project-kubernetes-go-service",
+      "deliverables": [
+        "Module 15 Go service deployed to a local kind or k3d cluster",
+        "Production Deployment with probes, resources, and a hardened security context",
+        "Service and Ingress (or NodePort fallback)",
+        "Demonstrated rollout, rollback, and PodDisruptionBudget during a node drain",
+        "Runbook extension covering rollout, verification, rollback, and the top three failure modes"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "tutorial",
+      "id": "project-kubernetes-go-service",
+      "module_id": "module-17",
+      "placement_anchor_item_id": "elective-26",
+      "prerequisite_item_ids": [
+        "core-15-19"
+      ],
+      "prerequisites": [
+        "core-15-19"
+      ],
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "desired state and reconciliation",
+        "readiness gate",
+        "cgroup CPU quota",
+        "rolling update"
+      ],
+      "required_concepts": [
+        "desired state and reconciliation",
+        "readiness gate",
+        "cgroup CPU quota",
+        "rolling update"
+      ],
+      "rubric": [
+        {
+          "criterion": "Correctness",
+          "description": "The service runs in the cluster, traffic reaches it, and the rollout, rollback, and drain all complete as specified.",
+          "weight": 35
+        },
+        {
+          "criterion": "Production readiness",
+          "description": "Probes, resource requests and limits, the hardened security context, and the ConfigMap/Secret split are all present and correct.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Rollout status, the version endpoint, probe results, and drain evidence are captured and interpreted.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear written defense of each object, the tested failure modes, and the tradeoffs.",
+          "weight": 15
+        }
+      ],
+      "schema_version": "3.1.0",
+      "slug": "kubernetes-go-service-capstone",
+      "source_legacy_ids": [],
+      "stage": "elective",
+      "status": "ready",
+      "summary": "Deploy a containerized Go service to a local Kubernetes cluster and operate it with production-grade objects: probes, resource limits, a hardened security context, a ConfigMap/Secret split, a verified rolling update, a rollback, and a PodDisruptionBudget.",
+      "tags": [
+        "elective",
+        "kubernetes",
+        "operations",
+        "capstone"
+      ],
+      "tasks": [
+        {
+          "instruction": "Stand up a local kind or k3d cluster and load the Module 15 service image.",
+          "title": "Provision the cluster"
+        },
+        {
+          "instruction": "Write the Deployment, Service, Ingress or NodePort, ConfigMap, Secret, and PodDisruptionBudget, and apply them.",
+          "title": "Declare the desired state"
+        },
+        {
+          "instruction": "Roll out a change, verify the serving revision through the version endpoint, roll back, and drain a node under the PodDisruptionBudget.",
+          "title": "Operate and recover"
+        },
+        {
+          "instruction": "Write the runbook extension and defend each object and failure mode in writing.",
+          "title": "Document and defend"
+        }
+      ],
+      "title": "Kubernetes Go Service Capstone",
+      "type": "mini-project",
+      "verification": "Run the verification commands to confirm rollout status, the serving revision, the security context, resource settings, the PodDisruptionBudget, the rollback, and a node drain, then review the written defense against the rubric."
+    }
+  ],
+  "quality_gates": [
+    "schema-valid",
+    "graph-valid",
+    "no-orphan-core-items",
+    "all-prerequisites-exist",
+    "implemented-items-have-readmes",
+    "implemented-items-have-run-or-test-command",
+    "projects-have-rubrics",
+    "lessons-have-zero-magic-contract",
+    "future-concepts-have-preview-only",
+    "electives-do-not-block-core",
+    "legacy-v2-is-not-authoritative",
+    "starter-solution-parity",
+    "no-broken-internal-links",
+    "readme-required-headings-valid",
+    "readme-level-purpose-valid",
+    "readme-crossrefs-rendered-with-human-titles",
+    "readme-no-generic-zero-magic-placeholders",
+    "readme-no-stale-v2-section-labels",
+    "readme-next-step-valid",
+    "readme-module-map-generated-from-curriculum",
+    "readme-project-rubric-present",
+    "readme-assessment-evidence-present",
+    "readme-preview-only-required-for-future-concepts",
+    "readme-no-elective-blocks-core",
+    "readme-no-broken-human-readable-links"
+  ],
+  "schema_version": "3.1.0",
+  "status": "stable",
+  "validation_commands": {
+    "validate_all": "go run ./internal/tools/curriculum validate-all",
+    "validate_graph": "go run ./internal/tools/curriculum validate-graph",
+    "validate_lessons": "go run ./internal/tools/curriculum validate-lessons",
+    "validate_readmes": "go run ./internal/tools/curriculum validate-readmes",
+    "validate_schema": "go run ./internal/tools/curriculum validate-schema"
+  }
+}

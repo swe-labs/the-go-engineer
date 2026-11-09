@@ -1,54 +1,34 @@
 # Contributing to The Go Engineer
 
-This guide defines the required workflow for contributions to the stable v2.1 repository.
+This guide defines the required workflow for contributions to **The Go Engineer v3**.
 
 ## Source of Truth
 
 Read these documents before changing curriculum, code, validation, or release surfaces:
 
 | Document | Purpose |
-| --- | --- |
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | locked v2.1 public structure |
-| [curriculum.v2.json](./curriculum.v2.json) | machine-readable curriculum registry |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | README-first teaching contract |
+|---|---|
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | Canonical v3 public structure |
+| [`curriculum/`](./curriculum/README.md) | Modular curriculum metadata manifests |
+| [`curriculum/zero-magic-authoring-spec.md`](./curriculum/zero-magic-authoring-spec.md) | Zero-magic teaching specification |
 | [CODE-STANDARDS.md](./CODE-STANDARDS.md) | Go and teaching-code standards |
-| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | verification expectations |
-| [RELEASE.md](./RELEASE.md) | release and branch process |
+| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | Verification and test expectations |
+| [RELEASE.md](./RELEASE.md) | Release and branch workflow |
 
 If documents disagree on public curriculum structure, `ARCHITECTURE.md` wins.
 
-## First-Time Contributor Path
-
-New here? Start small.
-
-1. Pick an open issue labeled `good first issue`, `help wanted`, documentation, tests, or lesson-polish.
-2. Comment on the issue before starting so duplicated work is avoided.
-3. Keep the first PR narrow: one README improvement, one test improvement, one small example correction, or one contributor-facing doc fix.
-4. Run the minimum local checks:
-
-```bash
-go test ./...
-go run ./scripts/validate_curriculum.go
-```
-
-5. Open a draft PR and link the issue with `Closes #<issue>`.
-
-Maintainers will help new contributors through stricter validation, review comments, and final PR readiness. Larger curriculum, validator, CI, release, or Opslane changes must still follow the full workflow below.
-
 ## Architecture Rule
 
-The public architecture is locked at 12 sections, `s00` through `s11`.
-
-Do not add, remove, rename, or reorder public root sections unless a maintainer explicitly approves architecture work.
+The canonical v3 architecture consists of 18 core modules (`00`–`16` plus `18-flagship-opslane`) under `curriculum/modules/`, accompanied by the Companion Full-Stack Frontend Track and 26 Advanced Electives.
 
 Allowed work includes:
 
-- lesson corrections and depth improvements
-- tests and proof surfaces
-- README/source/curriculum metadata alignment
-- validator and CI improvements
-- Opslane flagship depth inside `s11`
-- public documentation cleanup
+- lesson corrections, depth improvements, and zero-magic explanations
+- project tests, starters, and reference solutions
+- curriculum metadata alignment across `curriculum/*.json`
+- quality tooling improvements in `internal/tools/curriculum`
+- Opslane milestone enhancements inside `curriculum/modules/18-flagship-opslane/`
+- public documentation improvements
 
 ## Issue First
 
@@ -60,7 +40,7 @@ Issue title format:
 [TYPE] short description
 ```
 
-Allowed types (match the branch prefix mapping below):
+Allowed types:
 
 ```text
 [FEAT] [FIX] [DOCS] [TEST] [CHORE] [REFACTOR] [SECURITY] [RELEASE]
@@ -76,52 +56,26 @@ Issue body should include:
 
 ## Branches
 
-Bracketed types are for human-facing surfaces (issues, PRs, commits). Branch names use the corresponding slash-prefixed type to avoid URL encoding and shell issues.
-
-| Type | Branch prefix | Example |
-| --- | --- | --- |
-| `[FEAT]` | `feat/` | `feat/s03-functions-basics` |
-| `[FIX]` | `fix/` | `fix/s06-tenant-scoping` |
-| `[DOCS]` | `docs/` | `docs/release-readiness` |
-| `[TEST]` | `test/` | `test/s08-benchmark-coverage` |
-| `[CHORE]` | `chore/` | `chore/tooling-update` |
-| `[REFACTOR]` | `refactor/` | `refactor/config-validation` |
-| `[SECURITY]` | `security/` | `security/input-sanitization` |
-| `[RELEASE]` | `release/` | `release/v2.1.2-prep` |
-
-Long-lived lines:
-
 | Branch | Purpose |
-| --- | --- |
-| `main` | active post-v2.1 implementation and integration line |
-| `release/v2` | stable v2.1.x maintenance line |
-| `release/v1` | stable v1 maintenance line |
+|---|---|
+| `main` | active development and next-generation feature work |
+| `release/v3` | active v3 release preparation and maintenance line |
 
-Branch from the line that should receive the change. Include the lesson section number (`sNN`) when the change is specific to one section.
+Branch from the line that should receive the change.
 
 Examples:
 
 ```bash
 git switch main
 git pull --ff-only origin main
-git switch -c docs/public-release-readiness
+git switch -c feat/new-feature
 ```
 
 ```bash
-git switch release/v2
-git pull --ff-only origin release/v2
-git switch -c release/v2.1.2-prep
+git switch release/v3
+git pull --ff-only origin release/v3
+git switch -c fix/patch-fix
 ```
-
-## Pull Requests
-
-PR titles use the same bracketed format as issues:
-
-```text
-[TYPE] short description
-```
-
-Open a draft PR early and link the issue with `Closes #<issue>`.
 
 ## Pull Requests
 
@@ -148,7 +102,7 @@ Use bracketed commit messages:
 Examples:
 
 ```text
-[DOCS] align README with v2.1.1 stable release
+[DOCS] align README with v3.0.0 architecture
 [FIX] replace blocking REST API test with httptest
 [TEST] add repository behavior coverage
 [CHORE] tighten curriculum validator
@@ -156,45 +110,64 @@ Examples:
 
 Keep commits logical. Do not mix unrelated formatting, docs, and behavior changes unless the PR is explicitly a repository-wide cleanup.
 
-## Lesson Contract
+## Lesson Contract & Anti-Overengineering Standards
 
-Every learner-facing lesson README must include these sections in order:
+All instructional READMEs conform to the canonical pedagogical contract defined in [`curriculum/readme.contracts.json`](./curriculum/readme.contracts.json) and enforced by the zero-magic curriculum architecture.
 
-1. `## Mission`
-2. `## Prerequisites`
-3. `## Mental Model`
-4. `## Visual Model`
-5. `## Machine View`
-6. `## Run Instructions`
-7. `## Code Walkthrough`
-8. `## Try It`
-9. `## In Production`
-10. `## Thinking Questions`
-11. `## Next Step`
+### 1. Core Required Headings (Mandatory for All Lessons)
+Every lesson README must include these 6 core sections in order:
+1. `## Learning objective` — Measurable, behavior-based statement: "By the end of this lesson, you will be able to..."
+2. `## Why this matters` — Real-world operational context: production incidents, system design tradeoffs.
+3. `## Mental model` — Concrete, durable physical analogy that grounds the abstract concept without hand-waving.
+4. `## Common mistakes` — Markdown table (`Mistake | Why it happens | Fix`) documenting real mistakes observed in production code.
+5. `## Review questions` — 4–5 conceptual and diagnostic questions testing mechanical comprehension.
+6. `## NEXT UP` — Relative link and canonical item ID to the next sequential learning node.
 
-Exercises replace `## Code Walkthrough` with `## Solution Walkthrough` and include `## Verification Surface`.
+### 2. Contextual Headings (Applied by Subtype Profile)
+To prevent cognitive overload and avoid artificial padding, the remaining 11 headings are included only when justified by cognitive necessity and the lesson's subtype profile:
+- `## Visual Model` — Mermaid diagram visualizing lifecycle, topology, or data flow.
+- `## Memory Layout` — Stack vs heap allocations, struct padding, or pointer indirection.
+- `## Physical Timeline` — Execution trace or concurrency sequence diagram.
+- `## Machine View` — OS syscalls, assembly snippets, or runtime scheduler events.
+- `## Common Failure Modes` — Root causes, compiler errors, or panic scenarios.
+- `## Edge Cases` — Boundary conditions, zero values, or overflow behaviors.
+- `## Benchmark & Allocation Analysis` — Benchmarks and zero-alloc profiling.
+- `## Production Notes` — Hardened configuration, rate limits, or deployment caveats.
+- `## Review Questions & Explanations` — Self-assessment questions with answers.
+- `## Verification Surface` — Automated test commands, test cases, and assertions (required for exercises/projects).
+- `## Portfolio Artifact` — Deliverables, architecture notes, and defense rubrics (required for capstones).
+
+### 3. Subtype Profiles
+Subtypes declared in `curriculum/path.core.json` and `curriculum/path.electives.json`:
+- `orientation` — Course navigation, learning strategy, mental models, portfolio proof. Mandates `Core idea` / `Visual model`. Omits `Under the hood`, `Go example`, `Step-by-step execution`, `Debugging walkthrough`, `Production notes`, `Performance implications`, `Practice task`, `Tests / verification`. Contains zero Go code blocks.
+- `concept` — Deep language semantics, types, and memory mechanics. Mandates `Under the hood`, `Go example`, `Step-by-step execution`, `Performance implications`, `Practice task`.
+- `testing` — Table-driven tests, mocks. Mandates `Go example`, `Step-by-step execution`, `Practice task`, `Tests / verification`.
+- `debugging` — Delve, pprof, race detection. Mandates `Go example`, `Under the hood`, `Debugging walkthrough`, `Practice task`, `Tests / verification`.
+- `security` — Authentication, authorization, injection vulnerabilities. Mandates `Production notes`, `Go example`, `Step-by-step execution`.
+- `operations` — Systems, Linux, Docker, CI/CD, runbooks. Mandates `Go example`, `Step-by-step execution`, `Production notes`, `Tests / verification`.
+- `architecture` — Monoliths, clean domain boundaries, invariants. Mandates `Core idea`, `Visual model`, `Under the hood`, `How Go uses it`, `Production notes`.
+- `career` — Portfolio, READMEs, interviews. Mandates `Core idea`, `Practice task`. Omits `Under the hood`, `Go example`, `Performance implications`.
+- `reference` — Conceptual overviews with no runnable code. Code policy typically `forbidden`.
+- `lab` — Hands-on exercises with a runnable solution. Mandates `Go example`, `Tests / verification`.
 
 Every lesson `main.go` should include:
 
 - copyright and license header
-- section, lesson title, and level matching `curriculum.v2.json`
+- module, lesson title, and level
 - `WHAT YOU'LL LEARN`
 - `WHY THIS MATTERS`
-- exact `RUN:` command matching `curriculum.v2.json`
+- exact `RUN:` command
 - readable teaching comments
-- Machine Role comments for major constructs that explain role, boundary, invariant, or failure mode
 - `KEY TAKEAWAY`
-- `NEXT UP:` footer matching `curriculum.v2.json`
+- `NEXT UP:` footer matching canonical progression in `curriculum/path.core.json`
 
 ## Cross-References
 
 When a lesson uses a concept from another point in the curriculum:
 
-- use `[!NOTE]` for prerequisite context, backward references, and gentle forward references
-- use `[!TIP]` for actionable navigation, rerun suggestions, or learner practice advice
-- keep cross-references inline rather than as detached navigation blocks
-- include the lesson ID and a clickable local `README.md` link when referencing a specific lesson
-- avoid legacy `Forward Reference` or `Backward Reference` labels
+- forward reference later concepts briefly and name the future lesson or module
+- backward reference previously established ideas when they are reused
+- keep cross-references inline with the explanation rather than as detached navigation blocks
 
 ## Validation
 
@@ -203,38 +176,32 @@ Run the CI-equivalent bundle before final review:
 ```bash
 go build ./...
 go vet ./...
-unformatted=$(gofmt -l .); test -z "$unformatted" || (echo "$unformatted" && exit 1)
+unformatted=$(gofmt -l . | grep -v '_starter' || true); test -z "$unformatted" || (echo "$unformatted" && exit 1)
 go mod tidy
 git diff --exit-code -- go.mod go.sum
 go test ./...
-go test -race ./...
-go test -coverprofile=coverage.out ./...
+go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...
+go test -v ./internal/tools/curriculum/...
 go run ./scripts/validate_curriculum.go
-```
-
-On PowerShell, quote the coverage flag if needed:
-
-```powershell
-go test "-coverprofile=coverage.out" ./...
 ```
 
 For benchmark-related changes:
 
 ```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/02-testing/04-benchmarks/
+go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution
 ```
 
 ## Review Standard
 
 Before final review:
 
-- architecture v2.1 remains intact
-- `curriculum.v2.json` matches files and lesson metadata
-- README, source, tests, and section maps agree
-- `NEXT UP:` footers match curriculum metadata
+- canonical v3 18-module architecture remains intact
+- manifests in `curriculum/` match files and lesson metadata
+- README, source, tests, and module maps agree
+- `NEXT UP:` footers match curriculum metadata in `curriculum/path.core.json`
 - Go code is formatted and idiomatic
 - tests prove behavior where behavior should be provable
-- CI-equivalent validation passes locally
+- all automated curriculum quality gates pass (`go run ./scripts/validate_curriculum.go`)
 - P0/P1/P2 findings are fixed or explicitly documented
 
 Final squash merge is maintainer-controlled.

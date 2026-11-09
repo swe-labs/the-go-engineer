@@ -1,0 +1,22 @@
+<div id="metrics-panel" class="metrics-grid" {{ if .OOB }}hx-swap-oob="true"{{ end }}>
+    <div class="metric-card">
+        <div class="metric-label">Active Workers</div>
+        <div class="metric-value font-mono text-emerald">{{ .ActiveWorkers }} / {{ .TotalWorkers }}</div>
+        <div class="metric-sub">Worker Pool Capacity</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-label">Queue Depth</div>
+        <div class="metric-value font-mono {{ if gt .QueueDepth 5 }}text-amber{{ else }}text-primary{{ end }}">{{ .QueueDepth }}</div>
+        <div class="metric-sub">Buffered Channel Backlog</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-label">Completed Jobs</div>
+        <div class="metric-value font-mono text-purple">{{ .CompletedJobs }}</div>
+        <div class="metric-sub">Processed Lifecycle Tasks</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-label">Goroutines</div>
+        <div class="metric-value font-mono text-cyan">{{ .Goroutines }}</div>
+        <div class="metric-sub">Runtime Scheduler Threads</div>
+    </div>
+</div>

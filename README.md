@@ -1,228 +1,143 @@
 # The Go Engineer
 
 [![CI](https://github.com/swe-labs/the-go-engineer/actions/workflows/ci.yml/badge.svg)](https://github.com/swe-labs/the-go-engineer/actions)
-[![License: TGE License v1.0](https://img.shields.io/badge/License-TGE_v1.0-red.svg)](#license)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-Master Go backend engineering by moving from machine fundamentals to a production-shaped SaaS backend.
+> **Release status:** `v3.0.0` on the `release/v3` line. Authoritative curriculum metadata lives in [`curriculum/`](./curriculum/README.md).
 
-The Go Engineer is a repository-first learning system with:
+## What is The Go Engineer?
 
-- 219 registered curriculum items
-- 12 locked sections from fundamentals to production systems
-- runnable Go lessons and exercises
-- tests, race checks, coverage, CI, and curriculum validation
-- Opslane, an integrated SaaS backend capstone
+**The Go Engineer** is an open, repository-first curriculum that takes software engineers from foundational programming to production-grade Go systems engineering.
 
-If this repository helps you learn or teach Go, star it so more learners can find it.
+Every lesson is built on a **zero-magic** standard: mental models of the operating system and the Go runtime, runnable self-contained examples, automated test suites, and explicit failure-mode engineering — with no unexplained framework abstractions. Nothing is hand-waved. If a lesson introduces a mechanism, it explains what the machine actually does: how memory is laid out, how goroutines are scheduled, how the database connection pool drains, and what happens when the process receives `SIGTERM`.
 
-## What You Will Build
+The curriculum is not a collection of snippets. It is a single governed repository: 19 modules, hundreds of lessons and labs, module project capstones, an assessment registry, and an automated quality suite that keeps the whole thing honest.
 
-The curriculum ends with [Opslane](./11-flagship/01-opslane), a production-shaped multi-tenant SaaS backend. Opslane brings the curriculum together through configuration, database models, authentication, tenant isolation, HTTP APIs, order processing, payment simulation, event workers, caching, observability, and graceful shutdown.
+## Who this is for
 
-This is not only a syntax course. The goal is to build the habits behind real Go backend systems: explicit failure handling, clean package boundaries, tests as proof surfaces, operational thinking, and maintainable production code.
+- **Career transitioners** moving into backend software engineering who want a single, self-contained path instead of a scattered tutorial trail.
+- **Computer science graduates** who know the theory but have never built, operated, or defended a production-shaped system.
+- **Working backend engineers** leveling up in Go who want depth on concurrency, persistence, observability, performance, and deployment rather than surface-level framework tours.
+- **Self-directed learners** who prefer runnable code, automated proof, and explicit reasoning over video courses and copy-paste walkthroughs.
 
-## Start Here
+You should be comfortable using a terminal. Prior Go experience is helpful but not required — Module 00 assumes nothing.
 
-Requirements:
+## What you will become able to do
 
-- Go version declared in [go.mod](./go.mod)
-- CGO-capable C compiler for `go test -race ./...` and SQLite-backed paths
+By graduation you will be able to, without hand-holding:
+
+- **Read and explain Go from first principles** — value vs. reference semantics, stack and heap allocation, interfaces, and the runtime's scheduling model.
+- **Design and build backend services** — HTTP APIs, relational persistence with SQL and PostgreSQL, authentication, authorization, and tenant isolation.
+- **Write concurrent code that is correct** — goroutines, channels, worker pools, `context` cancellation, and graceful shutdown under real load.
+- **Debug unassisted** — reproduce a failure, read a stack trace and a heap profile, and form a hypothesis from evidence rather than guessing.
+- **Engineer for performance** — benchmark, profile, and optimize with `pprof` and memory-layout reasoning instead of superstition.
+- **Operate and ship software** — structured logging, metrics, tracing, containers, CI/CD, and reproducible deployment runbooks.
+- **Defend your work** — explain architecture tradeoffs, respond to code review, and present a portfolio-grade system to a hiring panel.
+
+## Core learning path
+
+The core path runs through 18 modules in order, from orientation to the flagship capstone. Module 17 (Advanced Electives) is an optional companion track.
+
+| # | Module | Phase | What it delivers |
+|---|---|---|---|
+| 00 | [Orientation](./curriculum/modules/00-orientation/README.md) | orientation | The learning system, workflow, and zero-magic contract |
+| 01 | [Computers, Terminal, Git, and the Web](./curriculum/modules/01-computers-terminal-git-web/README.md) | foundations | The machine, shell, Git, and web basics |
+| 02 | [Go Setup and Tooling](./curriculum/modules/02-go-setup-tooling/README.md) | tooling | A normal, repeatable Go toolchain |
+| 03 | [Programming Fundamentals with Go](./curriculum/modules/03-programming-fundamentals/README.md) | go-core | Core programming without hidden assumptions |
+| 04 | [Functions, Errors, and Data Semantics](./curriculum/modules/04-functions-errors-data-semantics/README.md) | go-core | Boundaries, failure, cleanup, and mutation |
+| 05 | [Types, Interfaces, Packages, and Modules](./curriculum/modules/05-types-interfaces-packages-modules/README.md) | engineering-core | Maintainable, modular Go programs |
+| 06 | [Testing, Debugging, and Refactoring](./curriculum/modules/06-testing-debugging-refactoring/README.md) | engineering-core | Proof, diagnosis, and safe change |
+| 07 | [CLI, Files, JSON, and Config](./curriculum/modules/07-cli-files-json-config/README.md) | cli-io | Useful local programs and process lifecycle |
+| 08 | [HTTP and REST APIs](./curriculum/modules/08-http-rest-apis/README.md) | data | The first serious backend service |
+| 09 | [SQL and PostgreSQL Persistence](./curriculum/modules/09-sql-postgres-persistence/README.md) | security | Real relational backend work |
+| 10 | [Authentication, Authorization, and Security](./curriculum/modules/10-auth-security/README.md) | concurrency | Explicit, secure backend behavior |
+| 11 | [Lifecycle, Context, and Concurrency](./curriculum/modules/11-lifecycle-context-concurrency/README.md) | reliability | Safe concurrent systems and request lifecycle |
+| 12 | [Observability and Diagnostics](./curriculum/modules/12-observability-diagnostics/README.md) | performance | Services you can see into |
+| 13 | [Performance and Memory Engineering](./curriculum/modules/13-performance-memory-engineering/README.md) | performance | Profiling and benchmark-driven optimization |
+| 14 | [Architecture and Distributed Systems](./curriculum/modules/14-architecture-distributed-systems/README.md) | architecture | Architecture as tradeoff reasoning |
+| 15 | [Docker, CI/CD, and Deployment](./curriculum/modules/15-docker-cicd-deployment/README.md) | delivery | Shippable, repeatable software |
+| 16 | [Portfolio and Interview Readiness](./curriculum/modules/16-portfolio-interview-readiness/README.md) | career | Competence converted into employability |
+| 18 | [Flagship Opslane](./curriculum/modules/18-flagship-opslane/README.md) | flagship | Final graduation proof |
+
+The full catalogue, pacing guide, and workload estimates are in [`curriculum/README.md`](./curriculum/README.md). Visual progression charts are in [`docs/PROGRESSION.md`](./docs/PROGRESSION.md).
+
+## Projects and proof system
+
+Learning is proven, not assumed. Each module ends in a **project capstone** with a starter and a solution, a grading rubric whose weights sum to 100%, and an automatically verified artifact. Alongside the projects sits an **assessment registry** of checkpoints, quizzes, and defenses, each with a README, questions, rubric, and answer key.
+
+Proof is verified mechanically. The curriculum ships a structural validator that checks every item's README, files, links, prerequisite closure, concept ownership, and assessment artifacts, so a lesson cannot quietly drift out of compliance. You can run the same gates a maintainer runs (see below).
+
+The **dual-state starter/solution model** means every project begins as a runnable starter with failing tests and ends as a passing reference solution — so "done" always means "the tests pass", not "it looks finished".
+
+## How to start
+
+### Prerequisites
+
+- **Go:** 1.27+ (declared in [`go.mod`](./go.mod))
+- **Git:** standard git CLI
+- **Operating system:** Linux, macOS, or Windows (WSL2 or MinGW-w64 recommended for CGO race detection)
+
+### Setup
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/swe-labs/the-go-engineer.git
 cd the-go-engineer
+
+# 2. Download dependencies
 go mod download
-go run ./00-how-computers-work/01-what-is-a-program
 ```
 
-Run the curriculum validator:
+Then open the first lesson and follow it in order:
+
+- [`curriculum/modules/00-orientation/lessons/01-how-to-use-this-repository/README.md`](./curriculum/modules/00-orientation/lessons/01-how-to-use-this-repository/README.md)
+
+## How to validate your progress
+
+The repository includes both a curriculum structural validator and standard Go test suites:
 
 ```bash
-go run ./scripts/validate_curriculum.go
-```
+# 1. Run the full automated curriculum quality gate
+go run ./scripts/validate_curriculum.go validate-all
 
-Expected stable output:
-
-```text
-Success! 601 files with run commands validated, and 12 v2 sections plus 215 v2 items checked.
-```
-
-## Who This Is For
-
-This repository is for:
-
-- beginners who want to learn Go deeply instead of memorizing syntax
-- backend developers moving to Go from another stack
-- self-taught developers who want production engineering habits
-- engineers preparing for backend interviews and system implementation work
-- teams that want a structured Go learning path with runnable proof surfaces
-
-## Status
-
-Current stable line: `v2.1.x`
-
-Current stable release: `v2.1.1`
-
-Supported branches:
-
-| Branch | Purpose |
-| --- | --- |
-| `main` | active post-v2.1 implementation and integration line |
-| `release/v2` | stable v2.1.x maintenance line |
-| `release/v1` | stable v1 maintenance line |
-
-Architecture v2.1 is locked. Normal work may improve lessons, tests, documentation, validators, or the Opslane flagship implementation, but must not add, remove, rename, or reorder public root sections without explicit maintainer approval.
-
-## Curriculum Map
-
-```mermaid
-flowchart LR
-  s00["s00 Machine Basics"] --> s01["s01 Go Setup"]
-  s01 --> s02["s02 Language Basics"]
-  s02 --> s03["s03 Functions and Errors"]
-  s03 --> s04["s04 Types and Design"]
-  s04 --> s05["s05 Packages and I/O"]
-  s05 --> s06["s06 Backend and Databases"]
-  s06 --> s07["s07 Concurrency"]
-  s07 --> s08["s08 Quality and Testing"]
-  s08 --> s09["s09 Architecture and Security"]
-  s09 --> s10["s10 Production"]
-  s10 --> s11["s11 Opslane"]
-```
-
-| Phase | Sections | Focus | Progress |
-| --- | --- | --- | --- |
-| 0 | s00 | machine foundation | 0% to 5% |
-| 1 | s01-s04 | language foundation | 5% to 52% |
-| 2 | s05-s08 | engineering core | 52% to 87% |
-| 3 | s09-s10 | systems engineering | 87% to 96% |
-| 4 | s11 | integrated flagship project | 96% to 100% |
-
-## Choose Your Path
-
-Use [LEARNING-PATH.md](./LEARNING-PATH.md) for the full path, bridge path, or targeted section path.
-
-For a paced route through the same material, use the [30-Day Go Engineer Challenge](./docs/challenges/30-day-go-engineer.md).
-
-## Community
-
-Use [docs/community/README.md](./docs/community/README.md) for Q&A format, progress sharing, issue etiquette, and contributor entry points.
-
-New contributors should start with `good first issue`, `help wanted`, documentation, tests, or lesson-polish tasks.
-
-Before opening a large PR, read [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-## Sections
-
-| Section | Folder | Primary outcome |
-| --- | --- | --- |
-| s00 | [00-how-computers-work](./00-how-computers-work) | understand execution, memory, terminal use, and processes |
-| s01 | [01-getting-started](./01-getting-started) | install Go, run programs, and read tool output |
-| s02 | [02-language-basics](./02-language-basics) | use values, control flow, slices, maps, and pointers intentionally |
-| s03 | [03-functions-errors](./03-functions-errors) | compose functions and handle failure explicitly |
-| s04 | [04-types-design](./04-types-design) | model behavior with structs, methods, interfaces, composition, and generics |
-| s05 | [05-packages-io](./05-packages-io) | work with modules, packages, CLI input, encoding, and filesystems |
-| s06 | [06-backend-db](./06-backend-db) | build HTTP servers, API contracts, gRPC services, and database-backed code |
-| s07 | [07-concurrency](./07-concurrency) | coordinate goroutines, channels, context, synchronization, and worker patterns |
-| s08 | [08-quality-test](./08-quality-test) | test, benchmark, profile, and verify behavior with evidence |
-| s09 | [09-architecture](./09-architecture) | apply package design, architecture patterns, and security controls |
-| s10 | [10-production](./10-production) | add logging, shutdown, configuration, observability, deployment, and code generation |
-| s11 | [11-flagship](./11-flagship) | integrate the curriculum through the Opslane SaaS backend capstone |
-
-## Learning Model
-
-Each lesson is designed around four surfaces:
-
-- a README-first explanation with prerequisites, mental model, machine view, and production notes
-- runnable Go code that demonstrates the concept directly
-- tests or verification surfaces where behavior should be provable
-- inline cross-references when a concept depends on another lesson
-
-The curriculum avoids unexplained jumps. If a later idea appears early, the lesson names the future lesson or section that teaches it in detail. If a current idea depends on previous work, the lesson points back to the earlier lesson that established it. README cross-references use `[!NOTE]` or `[!TIP]` alerts, include lesson IDs, and link to the target `README.md` when naming a specific lesson.
-
-## Validation
-
-Run the CI-equivalent bundle before release or review:
-
-```bash
-go build ./...
-go vet ./...
-unformatted=$(gofmt -l .); test -z "$unformatted" || (echo "$unformatted" && exit 1)
-go mod tidy
-git diff --exit-code -- go.mod go.sum
+# 2. Run the full unit and integration test suite
 go test ./...
-go test -race ./...
-go test -coverprofile=coverage.out ./...
-go run ./scripts/validate_curriculum.go
+
+# 3. Run static analysis
+go vet ./...
+
+# 4. Verify code formatting
+gofmt -l .
+
+# 5. Run the race detector on the concurrency and flagship modules
+go test -race ./curriculum/modules/11-lifecycle-context-concurrency/... ./curriculum/modules/18-flagship-opslane/...
 ```
 
-For benchmark-related changes:
+Add `--strict` to the first command to promote every advisory to a hard failure; this is the release gate. Each module's own README lists its project and assessment verification commands.
 
-```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/02-testing/04-benchmarks/
-```
+## Advanced electives
 
-## Documentation
+[Module 17: Advanced Electives](./curriculum/electives/advanced-electives/README.md) is an optional, non-blocking specialization track of 26 lessons across five streams — advanced Go typing and metaprogramming, modern RPC and serialization (Protobuf, gRPC), high-throughput concurrency primitives, distributed-systems patterns, and Kubernetes operations. Take it alongside or after the capstone to extend your stack without diluting the core path.
 
-| Document | Purpose |
-| --- | --- |
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | locked public curriculum structure |
-| [curriculum.v2.json](./curriculum.v2.json) | machine-readable curriculum registry |
-| [CURRICULUM-BLUEPRINT.md](./CURRICULUM-BLUEPRINT.md) | teaching contract and lesson authoring rules |
-| [LEARNING-PATH.md](./LEARNING-PATH.md) | recommended paths through the curriculum |
-| [docs/challenges/30-day-go-engineer.md](./docs/challenges/30-day-go-engineer.md) | paced 30-day learner challenge |
-| [docs/community/README.md](./docs/community/README.md) | community and contributor entry points |
-| [docs/PROGRESSION.md](./docs/PROGRESSION.md) | phase and milestone progression |
-| [CODE-STANDARDS.md](./CODE-STANDARDS.md) | Go source, comments, and teaching-code standards |
-| [TESTING-STANDARDS.md](./TESTING-STANDARDS.md) | test and verification expectations |
-| [COMMON-MISTAKES.md](./COMMON-MISTAKES.md) | common Go mistakes and where they are taught |
-| [docs/ENGINEERING_ERROR_FRAMEWORK.md](./docs/ENGINEERING_ERROR_FRAMEWORK.md) | backend and production error model |
-| [docs/flagship/OPSLANE_SAAS_BACKEND.md](./docs/flagship/OPSLANE_SAAS_BACKEND.md) | Opslane flagship specification |
-| [CONTRIBUTING.md](./CONTRIBUTING.md) | contribution and pull request workflow |
-| [SECURITY.md](./SECURITY.md) | vulnerability reporting and disclosure policy |
-| [docs/security/OPSLANE_THREAT_MODEL.md](./docs/security/OPSLANE_THREAT_MODEL.md) | Opslane threat model and abuse-case checklist |
-| [docs/KNOWN_LIMITATIONS.md](./docs/KNOWN_LIMITATIONS.md) | intentional educational boundaries and tradeoffs |
-| [docs/MATURITY_SCORECARD.md](./docs/MATURITY_SCORECARD.md) | public maturity criteria and verification checklist |
-| [RELEASE.md](./RELEASE.md) | release and branch maintenance process |
-| [MAINTAINER-CHECKLIST.md](./MAINTAINER-CHECKLIST.md) | maintainer review and release checklist |
-| [CHANGELOG.md](./CHANGELOG.md) | release history |
+## Flagship Opslane
 
-## Contribution Workflow
+[Module 18: Flagship Opslane](./curriculum/modules/18-flagship-opslane/README.md) is the graduation capstone: a multi-tenant incident-management SaaS backend that integrates everything from Modules 00–15 — API design, persistence, authentication, tenant isolation, an event bus, bounded worker pools, caching, observability, and graceful shutdown — into one system you run, operate, and defend. The full architecture is specified in [`docs/flagship/OPSLANE_SAAS_BACKEND.md`](./docs/flagship/OPSLANE_SAAS_BACKEND.md).
 
-Contributions follow [CONTRIBUTING.md](./CONTRIBUTING.md):
+## Contributing and maintenance
 
-1. Create or confirm an issue.
-2. Branch from the correct long-lived line.
-3. Open a draft PR early.
-4. Keep commits focused and use the bracketed commit format.
-5. Run local validation.
-6. Address review findings and CI failures.
-7. Hand off for maintainer review and squash merge.
+Contributions are welcome. Before opening a pull request, read:
 
-Commit format:
-
-```text
-[TYPE] short imperative description
-```
-
-Allowed types:
-
-```text
-[FEAT] [FIX] [DOCS] [TEST] [CHORE] [REFACTOR] [SECURITY] [RELEASE]
-```
-
-## Windows CGO Note
-
-Some paths use CGO through SQLite or the Go race detector. On Windows, install a GCC-compatible toolchain such as MinGW-w64 or use WSL2, then verify:
-
-```bash
-go env CGO_ENABLED CC CXX
-go test -race ./...
-```
+- **[Contribution Guidelines (`CONTRIBUTING.md`)](./CONTRIBUTING.md):** workflow, review expectations, and the authoring standard.
+- **[Maintainer Checklist (`MAINTAINER-CHECKLIST.md`)](./MAINTAINER-CHECKLIST.md):** the release gate and verification steps.
+- **[Zero-Magic Authoring Specification](./curriculum/zero-magic-authoring-spec.md):** the principles every lesson and project must follow.
+- **[System Architecture (`ARCHITECTURE.md`)](./ARCHITECTURE.md):** the canonical v3 architecture and metadata manifests.
+- **[Quality Rubrics](./curriculum/quality-rubric.md):** the evaluation criteria for code, proof, and documentation.
+- **[Release History (`CHANGELOG.md`)](./CHANGELOG.md):** version history and migration notes.
 
 ## License
 
-This project is licensed under The Go Engineer License (TGE License) v1.0.
+This project is licensed under the [MIT License](./LICENSE).
 
-- Free for personal, educational, and non-commercial use
-- Commercial use requires written permission
+- Free for personal learning, forked study, modification, and redistribution.
+- Commercial reuse, including paid courses and training programs, is permitted under the same terms.
+- Contributions are welcome: submitting a pull request licenses your contribution to the project under MIT.

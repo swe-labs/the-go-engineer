@@ -1,0 +1,221 @@
+# Pull requests and code review
+
+> *"Given enough eyeballs, all bugs are shallow."*  
+> — **Eric S. Raymond**, *The Cathedral and the Bazaar* (1999) (Linus's Law)
+
+## Learning objective
+
+Author professional GitHub Pull Requests, review peer diffs, and address code review feedback iteratively.
+
+## Why this matters
+
+Writing code alone leads to blind spots — the author knows what the code should do and may not notice edge cases, readability issues, or design flaws. Code review provides a second (and third, fourth) pair of eyes to catch issues early.
+
+## Mental model
+
+Code review is pair debugging at scale — the author writes the solution, and reviewers validate assumptions, catch blind spots, and ensure consistency. The goal is not to find every bug but to share context, raise the team's collective code quality bar, and spread knowledge.
+
+## Visual model
+
+```mermaid
+flowchart TD
+    classDef frontDoor fill:#1a233a,stroke:#3b82f6,stroke-width:2px,color:#ffffff;
+    classDef exitGate fill:#1e3a1e,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+    classDef standardNode fill:#22272e,stroke:#444c56,stroke-width:1px,color:#ffffff;
+    classDef capstoneNode fill:#2d2215,stroke:#f59e0b,stroke-width:2px,color:#ffffff;
+    PR_OPEN["Developer Opens Pull Request with Atomic Diff (<300 lines)"] --> CI["Automated CI Verification (Tests, Linter, Build)"]
+    
+    CI -->|CI Passes| REVIEW["Senior Engineer Reviews Diff"]
+    CI -->|CI Fails| FIX_CI["Developer Fixes Build"] --> CI
+
+    REVIEW --> FEEDBACK{"Review Outcome"}
+    
+    FEEDBACK -->|Inline Comments / Changes Requested| PUSH_FIX["Developer Pushes Follow-Up Commit"] --> CI
+    FEEDBACK -->|LGTM & Approved| MERGE["Squash & Merge into main"]
+```
+
+## Core idea
+
+A pull request is a proposal to merge changes from one branch into another, with attached discussion, review comments, and automated checks. Code review is the process of examining those changes to catch defects, improve design, and share context before the code reaches production.
+
+## Under the hood
+
+### Pull Request Anatomy & Review Cognitive Load
+
+A high-quality pull request is engineered to minimize reviewer cognitive load:
+1. **Atomic Scope**: The PR solves one specific problem. Industry experience consistently shows reviewer defect-finding efficiency drops sharply once a review exceeds roughly 400 lines of code.
+2. **Standard PR Structure**:
+   - **Why (Context)**: What problem or ticket does this address?
+   - **What (Solution)**: How does this implementation solve it?
+   - **Verification (Proof)**: Exact test commands executed (`go test -race ./...`) and benchmark results.
+   - **Migration / Risk**: Any breaking changes, config adjustments, or database migration requirements.
+
+### The Conventional Comments Standard
+
+Ambiguous review comments cause friction and review delays. Professional teams adopt **Conventional Comments** to label feedback intent explicitly:
+
+| Label | Intent | Merge Blocking? | Example |
+| :--- | :--- | :--- | :--- |
+| **`issue:`** | Identifies a bug, memory leak, security vulnerability, or broken contract. | **Yes** | `issue: db connection is not closed on early error return, leaking file descriptors.` |
+| **`suggestion:`** | A concrete improvement recommendation with proposed code. | No | `suggestion: use strings.Builder here to avoid unnecessary memory allocations in the loop.` |
+| **`question:`** | Seeking clarification to understand the author's reasoning. | No | `question: what happens if the payment provider API returns a 504 timeout during charge?` |
+| **`nit:`** | Minor cosmetic polish or personal preference. | No | `nit: typo in error message string ('recieved' -> 'received').` |
+| **`praise:`** | Positive reinforcement of clean, idiomatic code. | No | `praise: excellent table-driven test coverage for edge case unicode strings!` |
+
+Under the hood, GitHub stores PR reviews as discrete event records linked to Git commit SHAs. When a reviewer clicks **"Request changes"**, GitHub's branch protection engine blocks merging until the author pushes updates and the reviewer re-evaluates the diff.
+
+## How Go uses it
+
+Go code review follows strict conventions documented in "CodeReviewComments" on the Go wiki. Reviewers check for proper error handling, correct use of interfaces, test coverage, and idiomatic Go style. The `go vet` and `gofmt` tools automate style and correctness checks.
+
+## Go example
+
+The example program simulates a code review process: a diff with changed lines, a reviewer who inspects each change and leaves comments, and a merge decision based on review outcomes.
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// DiffLine represents a single line change in a pull request diff.
+type DiffLine struct {
+	LineNumber int
+	Type       string // "+", "-", " "
+	Content    string
+}
+
+// ReviewComment represents inline feedback left by a reviewer.
+type ReviewComment struct {
+	LineNumber int
+	Reviewer   string
+	Comment    string
+	IsBlocking bool
+}
+
+func main() {
+	fmt.Println("=== Code Review Workflow Simulation ===")
+
+	diff := []DiffLine{
+		{LineNumber: 10, Type: " ", Content: "func ConnectDB() (*sql.DB, error) {"},
+		{LineNumber: 11, Type: "-", Content: "    db, _ := sql.Open(\"postgres\", connStr)"},
+		{LineNumber: 11, Type: "+", Content: "    db, err := sql.Open(\"postgres\", connStr)"},
+		{LineNumber: 12, Type: "+", Content: "    if err != nil { return nil, err }"},
+		{LineNumber: 13, Type: " ", Content: "    return db, nil"},
+	}
+
+	fmt.Println("--- Diff Under Review ---")
+	for _, l := range diff {
+		fmt.Printf("%3d | %s %s\n", l.LineNumber, l.Type, l.Content)
+	}
+
+	comments := []ReviewComment{
+		{
+			LineNumber: 11,
+			Reviewer:   "senior-gopher",
+			Comment:    "Nice catch replacing the blank identifier with explicit error checking!",
+			IsBlocking: false,
+		},
+		{
+			LineNumber: 13,
+			Reviewer:   "senior-gopher",
+			Comment:    "Consider adding db.Ping() before returning to verify the connection is alive.",
+			IsBlocking: false,
+		},
+	}
+
+	fmt.Println("\n--- Review Comments ---")
+	hasBlockingComments := false
+	for _, c := range comments {
+		tag := "SUGGESTION"
+		if c.IsBlocking {
+			tag = "BLOCKING"
+			hasBlockingComments = true
+		}
+		fmt.Printf("[%s] Line %d by @%s: %s\n", tag, c.LineNumber, c.Reviewer, c.Comment)
+	}
+
+	fmt.Println("\n--- Merge Decision ---")
+	if !hasBlockingComments {
+		fmt.Println("Decision: APPROVED. No blocking review comments remaining; ready to merge.")
+	} else {
+		fmt.Println("Decision: CHANGES REQUESTED. Address blocking comments before merging.")
+	}
+}
+```
+
+## Step-by-step execution
+
+1. Open the PR on GitHub — review the "Files Changed" tab to see the full diff.
+2. Read each changed file starting from the most critical (business logic) to the least (tests, config).
+3. For each change, ask: is this correct? Is it clear? Is it tested? Could it break anything?
+4. Leave inline comments for specific lines, and a summary comment with overall feedback.
+5. The author addresses feedback, and the cycle repeats until approval — then the PR is merged.
+
+## Common mistakes
+
+| Mistake | Why it happens | Fix |
+|---|---|---|
+| Submitting a massive PR with 50+ files changed | Combining multiple changes into one PR | Break large changes into smaller, incremental PRs (under 300 lines) |
+| Taking review feedback personally | Confusing code critique with personal criticism | Remember: review is about code quality, not the author |
+| Merging without CI checks passing | Impatience or ignoring red status checks | Never merge until all required status checks pass |
+
+## Debugging walkthrough
+
+**Scenario: A code review cycle takes 5+ days because the PR is too large.**
+- **Cause:** Large PRs are harder to review; reviewers procrastinate on big changes.
+- **Diagnosis:** Check the PR's line count and file count.
+- **Resolution:** Break the change into focused PRs under 300 lines changed. Each PR should do one thing.
+
+**Scenario: A developer resolves a review comment with a force-push, losing discussion history.**
+- **Cause:** Force-pushing after rebasing changes commit hashes, disconnecting comments from code.
+- **Diagnosis:** Review comments reference old commit hashes that no longer exist.
+- **Resolution:** Add new commits to address feedback instead of rebasing. If rebasing is necessary, only rebase before review, not after.
+
+## Production notes
+
+Every professional software team uses code review. Google mandates at least one review before any code is merged. Open-source projects like Go, Kubernetes, and VS Code require reviews from maintainers. Code review is the primary quality gate in modern software development.
+
+## Performance implications
+
+- Each review cycle adds 1-24 hours to delivery time — smaller, focused PRs reduce this latency.
+- Thorough code review catches a large share of defects before they reach production, where fixes cost far more than at review time.
+- Mechanical style issues should be automated (formatters, linters) so reviewers can focus on logic and design.
+
+## Practice task
+
+1. Open `main.go` and add a blocking review comment to `comments`:
+   - Line 11: `"issue: sql.Open does not validate credentials; call db.Ping() or connection will remain unverified."`
+   - Set `IsBlocking: true`.
+2. Run the program and verify that the merge decision transitions from `APPROVED` to `CHANGES REQUESTED`.
+3. Simulate author response: add a diff line fixing the issue (`db.PingContext(ctx)`), clear the blocking comment, and re-run to verify transition back to `APPROVED`.
+
+## Tests / verification
+
+1. Run the automated lesson tests:
+   ```bash
+   go test -v ./curriculum/modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review
+   ```
+2. Run the lesson demonstration program:
+   ```bash
+   go run ./curriculum/modules/01-computers-terminal-git-web/lessons/13-pull-requests-and-code-review
+   ```
+3. Test code review practices in an open-source repo:
+   - Open a pull request on GitHub (e.g., on a public repo like `golang/go`). Read the diff in the "Files changed" tab.
+   - Categorize comments using Conventional Comments (`issue:`, `suggestion:`, `nit:`, `question:`).
+   - Verify how the PR status transitions from "Review required" to "Approved" or "Changes requested".
+
+Although the [Shell + Git Lab](../../projects/shell-git-lab/README.md) is a local repository exercise, the code review skills you learn here — writing clear descriptions, reading diffs, leaving constructive feedback — apply directly when you share your project on GitHub and open your first real PR.
+
+## Review questions
+
+1. What information should a good PR description include?
+2. How should you respond to a code review comment requesting a change?
+3. What is the difference between a blocking and a non-blocking review comment?
+4. Why should style feedback be automated rather than manual?
+5. What does "approve" mean in a code review context?
+
+## NEXT UP
+
+[Lesson 14: Web preview — client, server, DNS, and ports](../14-web-preview-client-server-dns-and-ports/README.md)

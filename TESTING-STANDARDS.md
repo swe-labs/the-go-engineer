@@ -2,7 +2,7 @@
 
 This document establishes testing standards for The Go Engineer curriculum.
 
-Section references follow the locked v2.1 architecture from `ARCHITECTURE.md`.
+Module references follow the canonical v3 architecture from [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## Testing Promise
 
@@ -45,7 +45,7 @@ Use descriptive `name` fields and `t.Run`.
 
 ### Level 3: HTTP Handler Tests
 
-Required for HTTP handlers in s06 onward.
+Required for HTTP handlers in Module 08 onward.
 
 Use `httptest` instead of launching a real server unless the lesson explicitly teaches server lifecycle behavior.
 
@@ -90,7 +90,7 @@ Required or strongly recommended for parsing, decoding, validation, and input-bo
 
 ### Level 7: API and gRPC Tests
 
-Required for API contracts in s06 and related sections.
+Required for API contracts in Module 08 and related modules.
 
 ## Error Handling in Tests
 
@@ -123,46 +123,31 @@ func setupTestDB(t *testing.T) *sql.DB {
 
 ## Coverage Goals
 
-| Area | Target |
-| --- | --- |
-| General minimum where no stricter section target exists | 75% |
-| Foundation-level lesson items with testable behavior | 80% |
-| s06 Backend, APIs & Databases | 85% |
-| s08 Quality & Testing | 95% |
-| s09 Architecture & Security | 85% |
-| s11 Opslane Flagship | 90% |
+| Area                                                    | Target |
+| ------------------------------------------------------- | ------ |
+| General minimum where no stricter module target exists  | 75%    |
+| Phase 0-1 foundation lessons with testable behavior     | 80%    |
+| Module 08 HTTP/REST & Module 09 SQL Persistence         | 85%    |
+| Module 06 Testing, Debugging & Refactoring              | 95%    |
+| Module 10 Auth & Security, Module 14 Architecture       | 85%    |
+| Module 18 Flagship Opslane Capstone                     | 90%    |
 
 Coverage is a signal, not a substitute for meaningful assertions.
 
 ## Required Local Verification
 
-For full PR readiness, use the same CI-equivalent bundle as `CODE-STANDARDS.md`, plus the coverage summary command below:
-
 ```bash
-go build ./...
-go vet ./...
-unformatted=$(gofmt -l .); test -z "$unformatted" || (echo "$unformatted" && exit 1)
-go mod tidy
-git diff --exit-code -- go.mod go.sum
 go test ./...
 go test -race ./...
-go test -coverprofile=coverage.out ./...
+go test -coverprofile coverage.out ./...
 go tool cover -func coverage.out
 go run ./scripts/validate_curriculum.go
 ```
 
-On PowerShell, quote the coverage flag if needed:
-
-```powershell
-go test "-coverprofile=coverage.out" ./...
-```
-
-Do not commit generated `coverage.out` or `coverage.html` artifacts.
-
 For benchmark changes:
 
 ```bash
-go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/02-testing/04-benchmarks/
+go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution
 ```
 
 ## CI Expectations

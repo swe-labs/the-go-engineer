@@ -1,4 +1,4 @@
-.PHONY: build test test-race test-verbose bench vet fmt fmt-check lint tidy deps-check deps-update clean run-hello run-env cover validate ci help
+.PHONY: build test test-race test-verbose bench vet fmt fmt-check lint tidy deps-check deps-update clean run-hello run-env cover validate catalog ci help
 
 # ============================================================================
 # The Go Engineer — Makefile
@@ -34,7 +34,7 @@ test-verbose: ## Run all tests with verbose output
 
 bench: ## Run benchmark suite
 	@echo "Running benchmarks..."
-	go test -bench=. -benchmem -count=1 ./08-quality-test/01-quality-and-performance/testing/benchmarks/
+	go test -bench=. -benchmem -count=1 ./curriculum/modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution
 
 cover: ## Run tests with coverage report
 	@echo "Generating coverage report..."
@@ -48,14 +48,15 @@ vet: ## Run go vet
 	go vet ./...
 	@echo "Vet passed"
 
-fmt: ## Format all Go files
+fmt: ## Format all Go files (excluding starter code)
 	@echo "Formatting code..."
-	gofmt -w .
+	@find . -name "*.go" -not -path "*/_starter/*" -exec gofmt -w {} + 2>/dev/null || gofmt -w .
 	@echo "Formatted"
 
-fmt-check: ## Check formatting without writing files
+fmt-check: ## Check formatting without writing files (excluding starter code)
 	@echo "Checking formatting..."
-	@test -z "$$(gofmt -l .)" || (echo "Unformatted files:" && gofmt -l . && exit 1)
+	@unformatted="$$(gofmt -l . | grep -v '_starter' || true)"; \
+	test -z "$$unformatted" || (echo "Unformatted files:" && echo "$$unformatted" && exit 1)
 	@echo "All files formatted"
 
 lint: vet fmt-check ## Run vet and format check
@@ -81,15 +82,20 @@ deps-update: ## Update dependencies
 ## Curriculum
 validate: ## Run curriculum validator
 	@echo "Validating curriculum..."
-	go run ./scripts/validate_curriculum.go
-	@echo "Curriculum valid"
+	go run ./internal/tools/curriculum validate-all
+	@echo "Curriculum validation completed"
+
+catalog: ## Regenerate curriculum/README.md from manifests
+	@echo "Generating curriculum README..."
+	go run ./internal/tools/curriculum generate-catalog
+	@echo "Curriculum README generated"
 
 ## Run Examples
 run-hello: ## Run the Hello World example
-	go run ./01-getting-started/2-hello-world
+	go run ./curriculum/modules/00-orientation/lessons/01-how-to-use-this-repository/main.go
 
 run-env: ## Run the environment check
-	go run ./01-getting-started/4-dev-environment
+	go run ./curriculum/modules/02-go-setup-tooling/lessons/01-toolchain-installation-and-path/main.go
 
 ## CI
 ci: build vet fmt-check tidy test test-race cover validate ## Run CI-equivalent local checks
@@ -97,7 +103,7 @@ ci: build vet fmt-check tidy test test-race cover validate ## Run CI-equivalent 
 
 clean: ## Remove build artifacts and caches
 	@echo "Cleaning..."
-	rm -f coverage.out coverage.html
+	rm -f coverage.out coverage.html curriculum.exe *.exe
 	go clean -cache -testcache
 	@echo "Clean"
 

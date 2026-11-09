@@ -1,0 +1,170 @@
+package components
+
+templ Dashboard(m MetricsSnapshot, tasks []*Task) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>Worker Pool &amp; Metrics Dashboard — HTMX + Alpine.js</title>
+			<link rel="stylesheet" href="/static/style.css"/>
+			<!-- Embedded Offline Vendor Scripts -->
+			<script src="/static/htmx.min.js"></script>
+			<script src="/static/sse.js"></script>
+			<script defer src="/static/alpine.min.js"></script>
+		</head>
+		<body x-data="{ modalOpen: false, terminalOpen: true }">
+			<div class="dashboard-layout" hx-ext="sse" sse-connect="/events">
+				<!-- Dashboard Header -->
+				<header class="dashboard-header">
+					<div class="brand">
+						<span class="brand-pill">STAGE 04</span>
+						<h1 class="brand-heading">Opslane Concurrency &amp; Metrics Dashboard</h1>
+					</div>
+					<div class="header-status">
+						<span class="live-dot" title="Server-Sent Events active"></span>
+						<span class="text-xs text-muted">SSE Stream: <strong class="text-emerald">CONNECTED</strong></span>
+					</div>
+				</header>
+
+				<!-- Main Dashboard Workspace -->
+				<main class="dashboard-main">
+					<!-- Metrics Bar (Refreshed via SSE or OOB on /tasks actions) -->
+					<section sse-swap="metric" class="section-metrics">
+						@MetricsCard(m)
+					</section>
+
+					<!-- Action Toolbar & Quick Dispatch -->
+					<section class="toolbar-section">
+						<div class="toolbar-title-group">
+							<h2 class="section-title">Background Worker Pool</h2>
+							<p class="section-subtitle">Module 11 Goroutine workers controlled via HTMX partial swaps &amp; SSE events</p>
+						</div>
+
+						<div class="toolbar-buttons">
+							<!-- Quick Task Buttons -->
+							<button
+								type="button"
+								class="btn btn-outline"
+								hx-post="/tasks?type=Data+Ingestion"
+								hx-target="#tasks-table-body"
+								hx-swap="afterbegin"
+							>
+								+ Ingestion Job
+							</button>
+							<button
+								type="button"
+								class="btn btn-outline"
+								hx-post="/tasks?type=Index+Reconciliation"
+								hx-target="#tasks-table-body"
+								hx-swap="afterbegin"
+							>
+								+ Reconciliation Job
+							</button>
+
+							<!-- Alpine.js Modal Trigger -->
+							<button
+								type="button"
+								class="btn btn-primary"
+								@click="modalOpen = true"
+							>
+								Custom Task Dispatch …
+							</button>
+						</div>
+					</section>
+
+					<!-- Tasks Table -->
+					<section class="table-container">
+						<table class="tasks-table">
+							<thead>
+								<tr>
+									<th class="w-16">ID</th>
+									<th>Job Description</th>
+									<th>Status</th>
+									<th>Assigned Worker</th>
+									<th>Duration</th>
+									<th class="text-right">Action</th>
+								</tr>
+							</thead>
+							<tbody id="tasks-table-body">
+								for _, t := range tasks {
+									@TaskRow(t)
+								}
+							</tbody>
+						</table>
+					</section>
+
+					<!-- Live SSE Log Terminal Drawer (Managed with Alpine.js) -->
+					<section class="terminal-section" x-cloak>
+						<div class="terminal-header" @click="terminalOpen = !terminalOpen">
+							<div class="terminal-title">
+								<span class="terminal-icon">&gt;_</span>
+								<span>Live Worker Pool Execution Stream (SSE Event: <code>log</code>)</span>
+							</div>
+							<button type="button" class="btn-toggle" x-text="terminalOpen ? 'Collapse' : 'Expand'"></button>
+						</div>
+
+						<div class="terminal-body" x-show="terminalOpen" x-transition>
+							<div id="log-stream" sse-swap="log" class="terminal-logs">
+								@LogEntry("00:00:00", "[SYSTEM] Listening for Server-Sent Events on /events channel...", true)
+							</div>
+						</div>
+					</section>
+				</main>
+
+				<!-- Alpine.js Custom Task Dispatch Modal Dialog -->
+				<div
+					class="modal-backdrop"
+					x-show="modalOpen"
+					x-transition.opacity
+					style="display: none;"
+					@keydown.escape.window="modalOpen = false"
+				>
+					<div
+						class="modal-content"
+						@click.away="modalOpen = false"
+						x-show="modalOpen"
+						x-transition.scale
+					>
+						<div class="modal-header">
+							<h3 class="modal-title">Dispatch Custom Background Job</h3>
+							<button type="button" class="modal-close" @click="modalOpen = false">&times;</button>
+						</div>
+						<form
+							hx-post="/tasks"
+							hx-target="#tasks-table-body"
+							hx-swap="afterbegin"
+							@htmx:after-request="modalOpen = false"
+						>
+							<div class="modal-body">
+								<div class="form-group">
+									<label for="custom-type">Job Classification</label>
+									<select id="custom-type" name="type" class="form-select">
+										<option value="Database Vacuum">Database Vacuum &amp; Optimize</option>
+										<option value="Payment Batch Ledger">Payment Batch Settlement</option>
+										<option value="Audit Snapshot Generation">Audit Snapshot Generation</option>
+										<option value="Dead Letter Queue Replay">Dead Letter Queue Replay</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="custom-duration">Simulated Work Duration (Seconds)</label>
+									<input type="number" id="custom-duration" name="duration" value="3" min="1" max="15" class="form-input"/>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" @click="modalOpen = false">Cancel</button>
+								<button type="submit" class="btn btn-primary">Queue Worker Job</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<footer class="dashboard-footer">
+					<p>The Go Engineer — Frontend Companion Track — Stage 4 (HTMX &amp; Alpine.js Hypermedia)</p>
+					<p class="footer-note">Module 11 Concurrency • Module 12 Observability • Real-time Server-Sent Events</p>
+				</footer>
+			</div>
+		</body>
+	</html>
+}
+

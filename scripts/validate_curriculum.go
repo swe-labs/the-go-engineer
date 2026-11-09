@@ -1,42 +1,27 @@
 //go:build ignore
 
-// Package main provides the command-line entry point for curriculum validation.
-// Run with: go run ./scripts/validate_curriculum.go
-// It invokes the curriculumvalidator package to check all lesson files and metadata.
 package main
 
 import (
 	"fmt"
 	"os"
-
-	"github.com/swe-labs/the-go-engineer/scripts/internal/curriculumvalidator"
+	"os/exec"
 )
 
 func main() {
-	result, err := curriculumvalidator.Validate(".", func(message string) {
-		fmt.Println(message)
-	})
-	if err != nil {
-		fmt.Println(err)
+	args := []string{"run", "./internal/tools/curriculum"}
+	if len(os.Args) > 1 {
+		args = append(args, os.Args[1:]...)
+	} else {
+		args = append(args, "validate-all")
+	}
+
+	cmd := exec.Command("go", args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		fmt.Fprintf(os.Stderr, "Curriculum validation failed: %v\n", err)
 		os.Exit(1)
 	}
-
-	if result.ErrorCount == 0 {
-		if result.HasV2 {
-			if result.PlaceholderCount > 0 {
-				fmt.Printf("Success! %d files with run commands validated, and %d v2 sections plus %d v2 items checked (%d placeholder warnings).\n",
-					result.FilesScanned, result.V2SectionCount, result.V2ItemCount, result.PlaceholderCount)
-			} else {
-				fmt.Printf("Success! %d files with run commands validated, and %d v2 sections plus %d v2 items checked.\n",
-					result.FilesScanned, result.V2SectionCount, result.V2ItemCount)
-			}
-			return
-		}
-
-		fmt.Printf("Success! %d files with run commands validated. No v2 curriculum registry found.\n", result.FilesScanned)
-		return
-	}
-
-	fmt.Printf("Found %d validation errors.\n", result.ErrorCount)
-	os.Exit(1)
+	fmt.Println("Curriculum validation passed successfully.")
 }

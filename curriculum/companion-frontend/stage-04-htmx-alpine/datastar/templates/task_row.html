@@ -1,0 +1,25 @@
+<tr id="task-{{ .ID }}" class="task-row status-{{ .StatusLower }}">
+    <td class="font-mono text-muted text-xs">#{{ .ID }}</td>
+    <td class="font-semibold">{{ .Type }}</td>
+    <td>
+        <span class="status-badge badge-{{ .StatusLower }}">
+            {{ .Status }}
+        </span>
+    </td>
+    <td class="font-mono text-xs text-muted">{{ if .WorkerID }}Worker-{{ .WorkerID }}{{ else }}&mdash;{{ end }}</td>
+    <td class="font-mono text-xs">{{ .DurationStr }}</td>
+    <td class="text-right">
+        {{ if or (eq .Status "QUEUED") (eq .Status "RUNNING") }}
+        <button 
+            type="button" 
+            class="btn-action-cancel" 
+            data-on-click="@post('/tasks/{{ .ID }}/cancel')" 
+            title="Cancel execution"
+        >
+            Cancel
+        </button>
+        {{ else }}
+        <span class="text-xs text-muted font-mono">Done</span>
+        {{ end }}
+    </td>
+</tr>

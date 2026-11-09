@@ -1,0 +1,36 @@
+{
+  "schema_version": "3.1.0",
+  "document_type": "curriculum_expected",
+  "curriculum_version": "3.0.0",
+  "last_updated": "2026-10-23",
+  "name": "The Go Engineer v3 — Expected Inventory",
+  "status": "stable",
+  "purpose": "Single source of truth for curriculum inventory counts, canonical dates, and locked modules. Validators read these values instead of hardcoding magic numbers in Go.",
+  "inventory": {
+    "core_items": 421,
+    "core_modules": 18,
+    "elective_items": 26,
+    "elective_modules": 1,
+    "total_items": 447,
+    "total_modules": 19,
+    "assessments": 48,
+    "projects": 29,
+    "concepts": 69,
+    "starter_parity_projects": 27,
+    "opslane_milestones": 14,
+    "path_project_items": 28,
+    "path_assessment_items": 57,
+    "shared_readme_bindings": 15
+  },
+  "locked_modules": [
+    "module-00",
+    "module-01",
+    "module-02",
+    "module-03",
+    "module-04"
+  ],
+  "release_gate": {
+    "max_open_warnings": 0,
+    "note": "A release build passes --strict; the default build fails only on errors."
+  }
+}

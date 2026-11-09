@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found — Go Engineer Wiki</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="wiki-layout">
+        <header class="wiki-header">
+            <div class="brand">
+                <a href="/wiki/welcome" class="brand-link">
+                    <span class="brand-badge">GO</span>
+                    <span class="brand-title">The Go Engineer Wiki</span>
+                </a>
+            </div>
+        </header>
+
+        <main class="not-found-main">
+            <div class="not-found-card">
+                <h1 class="not-found-code">404</h1>
+                <h2 class="not-found-title">Document Not Found</h2>
+                <p class="not-found-msg">
+                    The requested wiki document <code>"{{ .Slug }}"</code> does not exist in the knowledge repository.
+                </p>
+                <a href="/wiki/welcome" class="btn-return">&larr; Return to Welcome Page</a>
+            </div>
+        </main>
+
+        <footer class="wiki-footer">
+            <p>The Go Engineer &mdash; Frontend Companion Track &mdash; Stage 1</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,270 @@
+{
+  "$id": "https://github.com/swe-labs/the-go-engineer/curriculum/schema.v3.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "The Go Engineer Curriculum Schema v3",
+  "description": "Accepts schema_version 3.0.0 and 3.1.x. 3.0.0 files are legacy-compatible reads. 3.1.x is the active authoring version.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "document_type",
+    "curriculum_version"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "workspace_manifest"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "source_of_truth",
+          "files",
+          "quality_gates"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "core_path"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "modules",
+          "items"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "elective_path"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "modules",
+          "items"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "projects"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "projects"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "assessments"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "assessments"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "crossrefs"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "crossrefs"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "readme_contracts"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "contracts"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "migration"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "migration"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "concept_ownership_registry"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "concepts"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "operational_failure_taxonomy"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "failure_categories",
+          "required_coverage"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "architectural_decision": {
+      "type": "object"
+    },
+    "assessments": {
+      "type": "array"
+    },
+    "concepts": {
+      "type": "array"
+    },
+    "contracts": {
+      "type": "array"
+    },
+    "crossrefs": {
+      "type": "object"
+    },
+    "curriculum_version": {
+      "type": "string"
+    },
+    "document_type": {
+      "enum": [
+        "workspace_manifest",
+        "core_path",
+        "elective_path",
+        "projects",
+        "assessments",
+        "crossrefs",
+        "readme_contracts",
+        "migration",
+        "curriculum_full_bundle",
+        "operational_failure_taxonomy",
+        "concept_ownership_registry"
+      ],
+      "type": "string"
+    },
+    "failure_categories": {
+      "type": "array"
+    },
+    "files": {
+      "type": "object"
+    },
+    "generated_files": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "items": {
+      "type": "array"
+    },
+    "last_updated": {
+      "type": "string"
+    },
+    "migration": {
+      "type": "object"
+    },
+    "modules": {
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "path": {
+      "type": "object"
+    },
+    "policy": {
+      "type": "object"
+    },
+    "projects": {
+      "type": "array"
+    },
+    "quality_gates": {
+      "type": "array"
+    },
+    "required_coverage": {
+      "type": "object"
+    },
+    "schema_version": {
+      "description": "Accepts 3.0.0 and 3.1.x. 3.0.0 = legacy compatible. 3.1.x = active authoring version.",
+      "pattern": "^(3\\.0\\.0|3\\.1\\.[0-9]+)$",
+      "type": "string"
+    },
+    "schema_version_policy": {
+      "type": "object"
+    },
+    "source_of_truth": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "status": {
+      "type": "string"
+    },
+    "validation_commands": {
+      "type": "object"
+    }
+  },
+  "x_backward_compatibility": {
+    "3.0.0_to_3.1.0": "Files at schema_version 3.0.0 are valid reads. They must be migrated to 3.1.0 before new fields are written. Generators must reject writing 3.1.0-only fields into 3.0.0 files.",
+    "3.1.0_new_document_types": [
+      "concept_ownership_registry",
+      "operational_failure_taxonomy"
+    ],
+    "3.1.0_new_fields_in_projects": [
+      "placement_anchor_item_id",
+      "prerequisite_item_ids",
+      "required_concepts",
+      "reinforcement_targets"
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+package ui
+
+// InputProps defines customization options for the shadcn-templ Input component.
+type InputProps struct {
+	Type        string // text, email, password, file, number, search, etc.
+	Name        string
+	Value       string
+	Placeholder string
+	Disabled    bool
+	ReadOnly    bool
+	Required    bool
+	Accept      string
+	Form        string
+	Class       string
+	ID          string
+	Attributes  templ.Attributes
+}
+
+func getInputClasses(props InputProps) string {
+	base := "flex h-9 w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-1 text-sm text-slate-100 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
+	if props.Class != "" {
+		base += " " + props.Class
+	}
+	return base
+}
+
+// Input renders an accessible native input with shadcn/ui dark styling.
+templ Input(props InputProps) {
+	<input
+		if props.ID != "" {
+			id={ props.ID }
+		}
+		if props.Name != "" {
+			name={ props.Name }
+		}
+		if props.Type != "" {
+			type={ props.Type }
+		} else {
+			type="text"
+		}
+		if props.Value != "" {
+			value={ props.Value }
+		}
+		if props.Placeholder != "" {
+			placeholder={ props.Placeholder }
+		}
+		if props.Accept != "" {
+			accept={ props.Accept }
+		}
+		if props.Form != "" {
+			form={ props.Form }
+		}
+		disabled?={ props.Disabled }
+		readonly?={ props.ReadOnly }
+		required?={ props.Required }
+		class={ getInputClasses(props) }
+		{ props.Attributes... }
+	/>
+}
