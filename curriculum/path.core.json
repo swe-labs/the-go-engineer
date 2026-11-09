@@ -4713,7 +4713,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 45,
+      "estimated_minutes": 30,
       "files": {
         "assets_dir": "",
         "diagram_paths": [],
@@ -5814,7 +5814,7 @@
       },
       "difficulty": "foundation",
       "documentation_mode": "tutorial",
-      "estimated_minutes": 30,
+      "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
         "diagram_paths": [],

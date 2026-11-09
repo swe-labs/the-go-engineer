@@ -204,13 +204,13 @@ internal/tools/curriculum/
 
 | #   | Type    | Slug | Title | Minutes |
 | --- | ------- | ---- | ----- | ------- |
-| 1   | concept | install-and-verify-go | **Install and verify Go** | 45 |
+| 1   | concept | install-and-verify-go | **Install and verify Go** | 30 |
 | 2   | concept | hello-world | **Hello World** | 30 |
 | 3   | concept | go-run | **go run** | 30 |
 | 4   | concept | go-build | **go build** | 45 |
 | 5   | testing | go-test | **go test** | 45 |
 | 6   | concept | gofmt | **gofmt** | 30 |
-| 7   | concept | go-vet | **go vet** | 30 |
+| 7   | concept | go-vet | **go vet** | 45 |
 | 8   | concept | go-doc | **go doc** | 30 |
 | 9   | concept | editor-setup-and-gopls | **Editor setup and gopls** | 45 |
 | 10   | concept | reading-compiler-errors | **Reading compiler errors** | 45 |
