@@ -86,14 +86,51 @@ defer func() { fmt.Println("elapsed:", time.Since(start)) }()
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func countdown() {
+	fmt.Println("start")
+	for i := 1; i <= 3; i++ {
+		defer fmt.Println(i)
+	}
+	fmt.Println("launch")
+}
+
+func addLogger(fn func(int) int) func(int) (int, error) {
+	return func(x int) (result int, err error) {
+		defer func() {
+			fmt.Printf("called with %d, result %d\n", x, result)
+		}()
+		result = fn(x)
+		return result, nil
+	}
+}
+
+func square(x int) int {
+	return x * x
+}
 
 func main() {
-	fmt.Println("start")
-	defer fmt.Println("first defer")
-	defer fmt.Println("second defer")
-	defer fmt.Println("third defer")
-	fmt.Println("end")
+	fmt.Println("=== countdown ===")
+	countdown()
+
+	fmt.Println("\n=== addLogger ===")
+	loggedSquare := addLogger(square)
+	res, err := loggedSquare(5)
+	if err != nil {
+		fmt.Println("error:", err)
+	} else {
+		fmt.Println("returned:", res)
+	}
+
+	res, err = loggedSquare(-3)
+	if err != nil {
+		fmt.Println("error:", err)
+	} else {
+		fmt.Println("returned:", res)
+	}
 }
 ```
 
@@ -123,28 +160,11 @@ func double(x int) (result int) {
 `double(5)` returns `12`, not `6`. The deferred closure modifies `result` after `x + 1` (6) is assigned to `result`, doubling it to 12.
 
 ## Step-by-step execution
-
-For the LIFO example:
-
-1. `fmt.Println("start")` executes immediately → prints "start".
-2. `defer fmt.Println("first defer")` -- the argument `"first defer"` is evaluated and frozen. The `_defer` struct is prepended to the goroutine's defer list.
-3. `defer fmt.Println("second defer")` -- same process. This struct is now at the front of the list.
-4. `defer fmt.Println("third defer")` -- now at the front.
-5. `fmt.Println("end")` executes immediately → prints "end".
-6. Function is about to return. The runtime calls `deferreturn`.
-7. Pop the front of the list: `fmt.Println("third defer")` executes → prints "third defer".
-8. Pop next: `fmt.Println("second defer")` → prints "second defer".
-9. Pop next: `fmt.Println("first defer")` → prints "first defer".
-10. Function returns to caller.
-
-For the named return example:
-
-1. `double(5)` is called. `result` is initialized to zero value (0 for int).
-2. `defer func() { result *= 2 }()` -- the closure captures `result` by reference (closure capture, not argument capture).
-3. `return x + 1` evaluates to `6`. This value is assigned to `result` (the named return).
-4. The deferred function runs: `result *= 2` → `result` becomes `12`.
-5. Function returns `result` (12).
-
+1. `countdown` prints "start", then defers three `fmt.Println(i)` calls for `i` = 1, 2, 3 — arguments are evaluated **now**, only the calls are deferred.
+2. "launch" prints immediately after the loop, before any deferred call.
+3. When `countdown` returns, the deferred calls run in LIFO order: `3`, then `2`, then `1`.
+4. `addLogger(square)(5)` demonstrates a deferred closure capturing **named return values**: the deferred function reads `result` after `return result, nil` has assigned it, printing "called with 5, result 25".
+5. The second call (`loggedSquare(-3)`) shows the same pattern with result `9`.
 ## Common mistakes
 
 - **Assuming deferred calls run at block scope**: `defer` is function-scoped, not block-scoped. If you `defer f()` inside a `for` loop, the deferred calls do not run at the end of each iteration; they all run when the function returns.

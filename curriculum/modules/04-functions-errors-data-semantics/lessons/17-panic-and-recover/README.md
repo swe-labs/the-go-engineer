@@ -103,53 +103,67 @@ package main
 import (
 	"errors"
 	"fmt"
-	"log"
 )
 
-var ErrInvalidInput = errors.New("invalid input")
-
-func riskyOperation(input string) (result string, err error) {
+func safeDivide(a, b int) (result int, err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			log.Printf("recovered from panic: %v", r)
-			err = fmt.Errorf("panic recovered: %v", r)
+			err = fmt.Errorf("panic: %v", r)
 		}
 	}()
-	if input == "" {
-		panic("input must not be empty")
+	if b == 0 {
+		panic("division by zero")
 	}
-	if input == "error" {
-		return "", ErrInvalidInput
+	return a / b, nil
+}
+
+func safeBatch(dividends, divisors []int) (results []int, err error) {
+	if len(dividends) != len(divisors) {
+		return nil, errors.New("mismatched slice lengths")
 	}
-	return "processed: " + input, nil
+	results = make([]int, len(dividends))
+	for i := range dividends {
+		func(i int) {
+			res, e := safeDivide(dividends[i], divisors[i])
+			if e != nil {
+				err = errors.Join(err, fmt.Errorf("item %d: %w", i, e))
+				return
+			}
+			results[i] = res
+		}(i)
+	}
+	return results, err
 }
 
 func main() {
-	for _, input := range []string{"hello", "error", ""} {
-		result, err := riskyOperation(input)
+	testCases := []struct{ a, b int }{
+		{10, 2},
+		{10, 0},
+		{20, 4},
+	}
+	for _, tc := range testCases {
+		res, err := safeDivide(tc.a, tc.b)
 		if err != nil {
-			fmt.Printf("riskyOperation(%q): error: %v\n", input, err)
+			fmt.Printf("safeDivide(%d, %d): error: %v\n", tc.a, tc.b, err)
 		} else {
-			fmt.Printf("riskyOperation(%q): %s\n", input, result)
+			fmt.Printf("safeDivide(%d, %d): %d\n", tc.a, tc.b, res)
 		}
 	}
+
+	// Batch test
+	results, err := safeBatch([]int{10, 20, 30}, []int{2, 0, 3})
+	if err != nil {
+		fmt.Printf("safeBatch errors: %v\n", err)
+	}
+	fmt.Printf("safeBatch results: %v\n", results)
 }
 ```
 
 ## Step-by-step execution
-
-For `riskyOperation("")`:
-
-1. `defer func() { ... }()` is registered.
-2. `input == ""` is true → `panic("input must not be empty")` is called.
-3. The deferred function runs (stack unwinding).
-4. Inside the deferred function, `recover()` returns `"input must not be empty"`.
-5. The panic is stopped. The deferred function assigns the error to the named return `err`.
-6. The function returns `("", error(...))` normally.
-7. `main` prints the error.
-
-Without the deferred `recover`, step 4-6 would be: the program prints the panic value and stack trace, then exits with a non-zero status.
-
+1. `safeDivide(10, 2)` computes normally and returns `(5, nil)` — no panic.
+2. `safeDivide(10, 0)` executes `panic("division by zero")`; the deferred closure catches it with `recover()`, converts it to `fmt.Errorf("panic: %v", r)`, and returns it as an ordinary error — the process never crashes.
+3. `safeDivide(20, 4)` returns `5` normally.
+4. `safeBatch` runs three divisions; item 1 (10/0) panics, is recovered per-iteration, and the joined error reports "item 1: panic: division by zero" — the successful results `[5 0 10]` are still returned alongside the error.
 ## Common mistakes
 
 - **Calling `recover` outside a deferred function**: `recover()` returns `nil` if called directly in a function body, not inside a `defer`. It must be inside a `defer` that runs during the unwinding.

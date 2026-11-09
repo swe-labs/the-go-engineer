@@ -1,6 +1,7 @@
 # Pointer and value mutation behavior
 
-> *"Pointers are like jumps, only worse."* — Tony Hoare
+> *"Pointers are like jumps, leading wildly from one part of the data structure to another."*
+> — C.A.R. Hoare, *Hints on Programming Language Design* (1973)
 
 ## Learning objective
 
@@ -102,80 +103,71 @@ package main
 
 import "fmt"
 
-type Account struct {
-	Balance int
+type Bank struct {
+	accounts map[string]int
 }
 
-// Value receiver — cannot modify balance.
-func (a Account) BalanceString() string {
-	return fmt.Sprintf("$%d", a.Balance)
+func NewBank() *Bank {
+	return &Bank{accounts: make(map[string]int)}
 }
 
-// Pointer receiver — can modify balance.
-func (a *Account) Deposit(amount int) {
-	if a == nil {
+func (b *Bank) Deposit(name string, amount int) {
+	if b == nil || b.accounts == nil {
 		return
 	}
-	a.Balance += amount
+	b.accounts[name] += amount
 }
 
-// Pointer receiver — can modify balance.
-func (a *Account) Withdraw(amount int) bool {
-	if a == nil {
+func (b *Bank) Withdraw(name string, amount int) bool {
+	if b == nil || b.accounts == nil {
 		return false
 	}
-	if amount > a.Balance {
+	if b.accounts[name] < amount {
 		return false
 	}
-	a.Balance -= amount
+	b.accounts[name] -= amount
 	return true
 }
 
-// Function with pointer parameter.
-func transfer(from, to *Account, amount int) bool {
-	if from == nil || to == nil {
-		return false
+func (b *Bank) Balance(name string) (int, bool) {
+	if b == nil || b.accounts == nil {
+		return 0, false
 	}
-	if from.Withdraw(amount) {
-		to.Deposit(amount)
-		return true
-	}
-	return false
+	bal, ok := b.accounts[name]
+	return bal, ok
 }
 
 func main() {
-	alice := &Account{Balance: 100}
-	bob := &Account{Balance: 50}
+	bank := NewBank()
 
-	fmt.Println("Alice:", alice.BalanceString())
-	fmt.Println("Bob:", bob.BalanceString())
+	bank.Deposit("Alice", 200)
+	bank.Deposit("Bob", 100)
 
-	transfer(alice, bob, 30)
-	fmt.Println("After transfer of $30:")
-	fmt.Println("Alice:", alice.BalanceString())
-	fmt.Println("Bob:", bob.BalanceString())
+	fmt.Println("Alice balance:", balStr(bank.Balance("Alice")))
+	fmt.Println("Bob balance:", balStr(bank.Balance("Bob")))
 
-	var nilAccount *Account
-	nilAccount.Deposit(50) // safe — nil check inside method
-	fmt.Println("nilAccount after Deposit:", nilAccount)
+	bank.Withdraw("Alice", 50)
+	fmt.Println("After withdrawal, Alice:", balStr(bank.Balance("Alice")))
+
+	bank.Withdraw("Bob", 999)
+	fmt.Println("Bob attempted large withdraw:", balStr(bank.Balance("Bob")))
+}
+
+func balStr(bal int, ok bool) string {
+	if !ok {
+		return "N/A"
+	}
+	return fmt.Sprintf("$%d", bal)
 }
 ```
 
 ## Step-by-step execution
-
-For `transfer(alice, bob, 30)`:
-
-1. `from` = pointer to Alice's account, `to` = pointer to Bob's account. Both pointers are copied onto the stack (8 bytes each).
-2. `from.Withdraw(30)`:
-   - `from` is not nil.
-   - `30 <= 100` → true.
-   - `from.Balance -= 30` → Alice's balance becomes `70`.
-   - Returns `true`.
-3. `to.Deposit(30)`:
-   - `to` is not nil.
-   - `to.Balance += 30` → Bob's balance becomes `80`.
-4. Returns `true`.
-
+1. `NewBank()` returns `&Bank{...}` — a pointer to a struct whose `accounts` map is heap-allocated.
+2. `bank.Deposit("Alice", 200)` is a pointer-receiver call: `b` is a copy of the pointer, but it addresses the same `Bank` struct, so `b.accounts[name] += amount` mutates the shared map.
+3. `Balance("Alice")` reads through the same pointer: `$200`.
+4. `Withdraw("Alice", 50)` mutates again: `$150`.
+5. `Withdraw("Bob", 999)` fails the balance guard and returns `false` — Bob's balance stays `$100`.
+6. Contrast: had the methods used value receivers, each call would have copied the `Bank` struct and the mutations would be lost.
 ## Common mistakes
 
 - **Forgetting `&` when calling a pointer-param function**: `zero(a)` with `func zero(x *int)` — compile error. Use `zero(&a)`.

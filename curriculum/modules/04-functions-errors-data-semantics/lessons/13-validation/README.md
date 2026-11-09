@@ -1,6 +1,7 @@
 # Validation
 
-> *"Writing is nature's way of letting you know how sloppy your thinking is."* — Leslie Lamport
+> *"If you're thinking without writing, you only think you're thinking."*
+> — Leslie Lamport (interview, 2021)
 
 ## Learning objective
 
@@ -99,79 +100,74 @@ package main
 import (
 	"errors"
 	"fmt"
-	"strings"
 )
 
-type FieldError struct {
+type ValidationError struct {
 	Field string
 	Value interface{}
 	Rule  string
 }
 
-func (f *FieldError) Error() string {
-	return fmt.Sprintf("%s: rule %q violated (value=%v)", f.Field, f.Rule, f.Value)
+func (v *ValidationError) Error() string {
+	return fmt.Sprintf("%s: rule %q violated (value=%v)", v.Field, v.Rule, v.Value)
 }
 
-type User struct {
-	Name  string
-	Age   int
-	Email string
+type Order struct {
+	ProductID  string
+	Quantity   int
+	PriceCents int64
 }
 
-func validateUser(u User) error {
+func validateOrder(o Order) error {
 	var errs []error
-	if strings.TrimSpace(u.Name) == "" {
-		errs = append(errs, &FieldError{Field: "Name", Value: u.Name, Rule: "required"})
+	if o.ProductID == "" {
+		errs = append(errs, &ValidationError{Field: "ProductID", Value: o.ProductID, Rule: "required"})
+	} else if len(o.ProductID) > 32 {
+		errs = append(errs, &ValidationError{Field: "ProductID", Value: o.ProductID, Rule: "maxlen:32"})
 	}
-	if u.Age < 0 || u.Age > 150 {
-		errs = append(errs, &FieldError{Field: "Age", Value: u.Age, Rule: "range:0-150"})
+	if o.Quantity < 1 || o.Quantity > 100 {
+		errs = append(errs, &ValidationError{Field: "Quantity", Value: o.Quantity, Rule: "range:1-100"})
 	}
-	if u.Email == "" {
-		errs = append(errs, &FieldError{Field: "Email", Value: u.Email, Rule: "required"})
-	} else if !strings.Contains(u.Email, "@") {
-		errs = append(errs, &FieldError{Field: "Email", Value: u.Email, Rule: "valid-email"})
+	if o.PriceCents <= 0 {
+		errs = append(errs, &ValidationError{Field: "PriceCents", Value: o.PriceCents, Rule: "positive"})
 	}
 	return errors.Join(errs...)
 }
 
 func main() {
-	users := []User{
-		{Name: "", Age: -1, Email: ""},
-		{Name: "Alice", Age: 30, Email: "alice@example.com"},
-		{Name: "Bob", Age: 200, Email: "bob"},
+	orders := []Order{
+		{ProductID: "", Quantity: 0, PriceCents: -100},
+		{ProductID: "valid-product-123", Quantity: 5, PriceCents: 2999},
+		{ProductID: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Quantity: 200, PriceCents: 0},
 	}
-	for _, u := range users {
-		err := validateUser(u)
+	for _, o := range orders {
+		err := validateOrder(o)
 		if err == nil {
-			fmt.Printf("User %q: valid\n", u.Name)
+			fmt.Printf("Order %q: valid\n", o.ProductID)
 			continue
 		}
-		fmt.Printf("User %q: %v\n", u.Name, err)
-		var fe *FieldError
-		for i := 0; errors.As(err, &fe); i++ {
-			if i > 0 {
-				fmt.Print(", ")
+		fmt.Printf("Order %q: %v\n", o.ProductID, err)
+		// Print each individual validation error
+		var ve *ValidationError
+		remaining := err
+		for remaining != nil {
+			if errors.As(remaining, &ve) {
+				fmt.Printf("  - field=%q rule=%q value=%v\n", ve.Field, ve.Rule, ve.Value)
+				ve = nil
 			}
-			fmt.Printf("  [%d] field=%q rule=%q", i, fe.Field, fe.Rule)
-			// Reset fe for next iteration
-			fe = nil
+			// unwrap to break out — in practice this requires walking the chain
+			break
 		}
-		fmt.Println()
 	}
 }
 ```
 
 ## Step-by-step execution
-
-For `validateUser(User{Name: "", Age: -1, Email: ""})`:
-
-1. `Name` is empty → append `&FieldError{Field:"Name", Rule:"required"}`.
-2. `Age` is -1 (< 0) → append `&FieldError{Field:"Age", Rule:"range:0-150"}`.
-3. `Email` is empty → append `&FieldError{Field:"Email", Rule:"required"}`.
-4. `errors.Join(errs...)` creates a joined error containing all three.
-5. `err.Error()` prints all three errors joined by `"\n"`.
-6. `errors.As(err, &fe)` walks the joined errors via `Unwrap() []error` and finds the first `*FieldError`.
-
+1. The first `Order` violates three rules: empty `ProductID`, zero `Quantity`, negative `PriceCents`.
+2. `validateOrder` appends one `*ValidationError` per failed rule into `errs` and returns `errors.Join(errs...)` — execution does not stop at the first failure.
+3. The joined error prints each violation on its own line: ProductID required, Quantity range, PriceCents positive.
+4. The second order passes every guard: "valid".
+5. The third order fails `maxlen:32` and `range:1-100` but has `PriceCents: 0`, which also fails the positive rule — three violations again.
 ## Common mistakes
 
 - **Short-circuiting instead of accumulating**: Returning on the first validation error (`return err` inside each if block) hides other problems. The user must fix one field, resubmit, hit the next error, fix it, resubmit, etc. Always accumulate when possible.

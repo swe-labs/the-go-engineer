@@ -125,66 +125,47 @@ package main
 import (
 	"errors"
 	"fmt"
-	"os"
 )
 
-var (
-	ErrNotFound = errors.New("item not found")
-	ErrExpired  = errors.New("item expired")
-)
+var ErrTimeout = errors.New("timeout")
 
-type QueryError struct {
-	Query string
-	Err   error
+type NetworkError struct {
+	Msg       string
+	IsTimeout bool
 }
 
-func (q *QueryError) Error() string {
-	return fmt.Sprintf("query %q: %v", q.Query, q.Err)
+func (n *NetworkError) Error() string {
+	return n.Msg
 }
 
-func (q *QueryError) Unwrap() error {
-	return q.Err
+func (n *NetworkError) Is(target error) bool {
+	return target == ErrTimeout && n.IsTimeout
 }
 
-func findItem(id string) error {
-	if id == "" {
-		return &QueryError{Query: "findItem", Err: ErrNotFound}
+func callService(shouldTimeout bool) error {
+	if shouldTimeout {
+		return &NetworkError{Msg: "service timed out", IsTimeout: true}
 	}
-	if id == "old" {
-		return &QueryError{Query: "findItem", Err: ErrExpired}
-	}
-	return nil
+	return &NetworkError{Msg: "service failed", IsTimeout: false}
 }
 
 func main() {
-	for _, id := range []string{"", "old", "valid"} {
-		err := findItem(id)
-		switch {
-		case errors.Is(err, ErrNotFound):
-			fmt.Printf("%q: not found\n", id)
-		case errors.Is(err, ErrExpired):
-			fmt.Printf("%q: expired\n", id)
-		case err == nil:
-			fmt.Printf("%q: found\n", id)
-		default:
-			fmt.Printf("%q: unexpected: %v\n", id, err)
+	for _, val := range []bool{true, false} {
+		err := callService(val)
+		if errors.Is(err, ErrTimeout) {
+			fmt.Printf("callService(%v): timeout error: %v\n", val, err)
+		} else {
+			fmt.Printf("callService(%v): other error: %v\n", val, err)
 		}
 	}
 }
 ```
 
 ## Step-by-step execution
-
-For `findItem("")`:
-
-1. `id == ""` is true, so a `*QueryError` is created wrapping `ErrNotFound`.
-2. `main` calls `errors.Is(err, ErrNotFound)`.
-3. `err == ErrNotFound` is `false` (different types: `*QueryError` vs `*errors.errorString`).
-4. Check `Is(error) bool` -- `*QueryError` does not implement it, skip.
-5. Call `err.Unwrap()` -- returns `ErrNotFound`.
-6. Next iteration: `err == target` is `true` (both are `ErrNotFound`).
-7. Return `true`.
-
+1. `callService(true)` returns a `*NetworkError` with `IsTimeout: true`.
+2. `errors.Is(err, ErrTimeout)` does not just compare pointers — it calls the error's own `Is(target)` method, which returns `true` because `IsTimeout` is set and the target matches the sentinel.
+3. `callService(false)` returns a `*NetworkError` with `IsTimeout: false`; its `Is` method returns `false`, so `errors.Is` reports a non-timeout failure.
+4. The lesson: a custom error type can participate in `errors.Is` matching by implementing `Is(target error) bool` — no wrapping required.
 ## Common mistakes
 
 - **Using `==` instead of `errors.Is` on wrapped errors**: `err == ErrNotFound` returns `false` when `err` wraps `ErrNotFound`. Always use `errors.Is` when the error might be wrapped.

@@ -141,24 +141,26 @@ import (
 	"time"
 )
 
-var ErrTransient = errors.New("transient error")
-var ErrPermanent = errors.New("permanent error")
+var (
+	ErrTransient = errors.New("transient error")
+	ErrPermanent = errors.New("permanent error")
+)
 
-func stepA(input string) error {
-	if input == "fail" {
-		return fmt.Errorf("step A: %w", ErrPermanent)
+func build(service string) error {
+	if service == "" {
+		return fmt.Errorf("build: %w", ErrPermanent)
 	}
 	return nil
 }
 
-func stepB() error {
+func test(service string) error {
 	if rand.Intn(2) == 0 {
-		return fmt.Errorf("step B: %w", ErrTransient)
+		return fmt.Errorf("test: %w", ErrTransient)
 	}
 	return nil
 }
 
-func stepC() error {
+func deployToProd(service string) error {
 	return nil
 }
 
@@ -180,45 +182,38 @@ func retry(attempts int, fn func() error) error {
 	return fmt.Errorf("all %d attempts failed: %w", attempts, err)
 }
 
-func orchestrator(input string) error {
-	if err := stepA(input); err != nil {
-		return fmt.Errorf("orchestrator: %w", err)
+func deploy(service string) error {
+	if err := build(service); err != nil {
+		return fmt.Errorf("deploy: %w", err)
 	}
-	if err := retry(3, stepB); err != nil {
-		return fmt.Errorf("orchestrator: %w", err)
+	if err := retry(3, func() error { return test(service) }); err != nil {
+		return fmt.Errorf("deploy: %w", err)
 	}
-	if err := stepC(); err != nil {
-		return fmt.Errorf("orchestrator: %w", err)
+	if err := deployToProd(service); err != nil {
+		return fmt.Errorf("deploy: %w", err)
 	}
 	return nil
 }
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	for _, input := range []string{"ok", "fail"} {
-		err := orchestrator(input)
+	for _, svc := range []string{"", "my-api"} {
+		err := deploy(svc)
 		if err == nil {
-			fmt.Printf("input %q: success\n", input)
+			fmt.Printf("deploy(%q): success\n", svc)
 		} else {
-			fmt.Printf("input %q: %v\n", input, err)
+			fmt.Printf("deploy(%q): %v\n", svc, err)
 		}
 	}
 }
 ```
 
 ## Step-by-step execution
-
-For `orchestrator("ok")`:
-
-1. `stepA("ok")` returns nil.
-2. `retry(3, stepB)` is called.
-3. Inside `retry`, `stepB()` is called.
-4. If `stepB()` returns nil, the function returns immediately.
-5. If `stepB()` returns a transient error, `retry` sleeps 10ms and tries again (up to 3 times).
-6. If all retries fail, the last error (wrapped) is returned.
-7. If `stepB` ultimately succeeds, `stepC()` is called.
-8. All steps succeed → `orchestrator` returns nil.
-
+1. `deploy("")` calls `build`, which fails with `ErrPermanent` wrapped as "deploy: build: permanent error" — `deploy` returns immediately.
+2. `deploy("my-api")` passes `build` and enters `retry(3, test)`.
+3. `test` fails randomly with `ErrTransient` — `isTransient` returns `true`, so `retry` sleeps 10 ms and tries again, up to three attempts.
+4. When `test` succeeds, `deployToProd` runs (always succeeds) and `deploy` returns `nil`.
+5. Had `test` failed with a permanent error, `retry` would return immediately without further attempts — transient errors retry, permanent errors abort.
 ## Common mistakes
 
 - **Silent error swallowing**: `go someFunc()` starts a goroutine whose error is never checked. Either handle the error in the goroutine or pass it back via a channel.

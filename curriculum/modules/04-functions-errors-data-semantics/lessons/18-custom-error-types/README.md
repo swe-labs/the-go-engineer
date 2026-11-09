@@ -112,86 +112,78 @@ import (
 	"fmt"
 )
 
-type APIError struct {
-	StatusCode int
-	Message    string
-	Err        error
+type DBError struct {
+	Code    string
+	Message string
+	Err     error
 }
 
-func (e *APIError) Error() string {
+func (e *DBError) Error() string {
 	if e.Err != nil {
-		return fmt.Sprintf("API %d: %s (cause: %v)", e.StatusCode, e.Message, e.Err)
+		return fmt.Sprintf("DB %s: %s (cause: %v)", e.Code, e.Message, e.Err)
 	}
-	return fmt.Sprintf("API %d: %s", e.StatusCode, e.Message)
+	return fmt.Sprintf("DB %s: %s", e.Code, e.Message)
 }
 
-func (e *APIError) Unwrap() error {
+func (e *DBError) Unwrap() error {
 	return e.Err
 }
 
-func (e *APIError) Is(target error) bool {
-	t, ok := target.(*APIError)
+func (e *DBError) Is(target error) bool {
+	t, ok := target.(*DBError)
 	if !ok {
 		return false
 	}
-	return e.StatusCode == t.StatusCode
+	return e.Code == t.Code
 }
 
-var ErrNotFound = &APIError{StatusCode: 404, Message: "not found"}
-var ErrServerError = &APIError{StatusCode: 500, Message: "server error"}
+var ErrNotFound = &DBError{Code: "NOT_FOUND", Message: "not found"}
 
-func getUser(id string) error {
-	if id == "" {
-		return fmt.Errorf("getUser: %w", ErrNotFound)
-	}
-	if id == "crash" {
-		return fmt.Errorf("getUser: %w", &APIError{
-			StatusCode: 500,
-			Message:    "internal failure",
-			Err:        errors.New("timeout connecting to database"),
+func queryDB(id string) error {
+	switch {
+	case id == "":
+		return fmt.Errorf("queryDB: %w", &DBError{Code: "NOT_FOUND", Message: "user not found"})
+	case id == "dup":
+		return fmt.Errorf("queryDB: %w", &DBError{
+			Code:    "DUPLICATE_KEY",
+			Message: "duplicate",
+			Err:     errors.New("unique constraint violation"),
 		})
+	default:
+		return nil
 	}
-	return nil
 }
 
 func main() {
-	for _, id := range []string{"", "crash", "valid"} {
-		err := getUser(id)
-		var apiErr *APIError
+	for _, id := range []string{"", "dup", "valid"} {
+		err := queryDB(id)
+		var dbErr *DBError
 		switch {
-		case errors.As(err, &apiErr):
-			fmt.Printf("getUser(%q): HTTP %d: %s", id, apiErr.StatusCode, apiErr.Message)
-			if apiErr.Err != nil {
-				fmt.Printf(" (cause: %v)", apiErr.Err)
+		case errors.As(err, &dbErr):
+			fmt.Printf("queryDB(%q): code=%s msg=%q", id, dbErr.Code, dbErr.Message)
+			if dbErr.Err != nil {
+				fmt.Printf(" cause=%v", dbErr.Err)
 			}
 			fmt.Println()
 		case err == nil:
-			fmt.Printf("getUser(%q): success\n", id)
+			fmt.Printf("queryDB(%q): success\n", id)
 		default:
-			fmt.Printf("getUser(%q): unexpected: %v\n", id, err)
+			fmt.Printf("queryDB(%q): unexpected: %v\n", id, err)
 		}
 
 		if errors.Is(err, ErrNotFound) {
-			fmt.Printf("  -> matches ErrNotFound (404)\n")
+			fmt.Printf("  -> matches ErrNotFound\n")
 		}
 	}
 }
 ```
 
 ## Step-by-step execution
-
-For `getUser("crash")`:
-
-1. `id == "crash"` is true.
-2. A new `*APIError{StatusCode:500, Message:"internal failure", Err:errors.New("timeout...")}` is created.
-3. `fmt.Errorf("getUser: %w", &apiErr)` wraps it.
-4. In `main`, `errors.As(err, &apiErr)` walks the chain.
-5. The wrapper's `Unwrap()` returns the `*APIError`.
-6. `reflectlite.TypeOf(*APIError).AssignableTo(*APIError)` is true.
-7. `apiErr` is assigned the `*APIError`.
-8. `apiErr.StatusCode` is 500, `apiErr.Err` is the timeout error.
-9. `errors.Is(err, ErrNotFound)` walks: wrapper → `*APIError(500)` → `*APIError.Is(*APIError(404))` → `StatusCode` 500 != 404 → false.
-
+1. `queryDB("")` returns a `*DBError` with `Code: "NOT_FOUND"` and no wrapped cause.
+2. `errors.Is(err, ErrNotFound)` matches — `DBError` implements `Is`, mapping its `Code` to the sentinel.
+3. `queryDB("dup")` returns a `*DBError` with `Code: "DUPLICATE_KEY"` and a wrapped cause ("unique constraint violation"); `Error()` prints the code, message, and cause.
+4. `queryDB("valid")` returns `nil` — success.
+5. The custom type carries structured fields the caller can inspect with `errors.As` — something a bare `errors.New` string cannot express.
 ## Common mistakes
 
 - **Defining a custom error type when a sentinel suffices**: If you only need equality checking and no structured data, use `errors.New`. Custom types add complexity.

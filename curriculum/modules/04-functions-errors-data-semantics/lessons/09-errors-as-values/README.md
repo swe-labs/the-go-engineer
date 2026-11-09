@@ -1,6 +1,7 @@
 # Errors as values
 
-> *"Errors are values. Treat them as such."* — Rob Pike
+> *"Errors are values."*
+> — Rob Pike, Go Proverbs (2015)
 
 ## Learning objective
 
@@ -117,66 +118,48 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
-var ErrNegative = errors.New("value is negative")
-var ErrZero = errors.New("value is zero")
-
-// Returns (T, error) — idiomatic Go.
-func positiveSquare(n int) (int, error) {
-	if n < 0 {
-		return 0, ErrNegative
-	}
-	if n == 0 {
-		return 0, ErrZero
-	}
-	return n * n, nil
-}
+var (
+	ErrInvalidAge      = errors.New("invalid age")
+	ErrNegativeAge     = errors.New("age must be positive")
+	ErrUnreasonableAge = errors.New("age exceeds 150")
+)
 
 func main() {
-	inputs := []int{4, -1, 0, 9}
-	for _, n := range inputs {
-		result, err := positiveSquare(n)
+	inputs := []string{"25", "-1", "abc", "200"}
+	for _, s := range inputs {
+		age, err := parseAge(s)
 		if err != nil {
-			fmt.Printf("positiveSquare(%d) error: %v\n", n, err)
+			fmt.Printf("parseAge(%q) error: %v\n", s, err)
 		} else {
-			fmt.Printf("positiveSquare(%d) = %d\n", n, result)
+			fmt.Printf("parseAge(%q) = %d\n", s, age)
 		}
 	}
+}
 
-	// Sentinel error comparison.
-	_, err := positiveSquare(-5)
-	if err == ErrNegative {
-		fmt.Println("Got expected negative error")
+func parseAge(s string) (int, error) {
+	n, err := strconv.Atoi(s)
+	if err != nil {
+		return 0, ErrInvalidAge
 	}
-
-	// Error as a value: store in a slice.
-	errs := []error{ErrNegative, ErrZero, errors.New("custom error")}
-	fmt.Println("Stored errors:")
-	for _, e := range errs {
-		fmt.Println(" -", e)
+	if n < 0 {
+		return 0, ErrNegativeAge
 	}
+	if n > 150 {
+		return 0, ErrUnreasonableAge
+	}
+	return n, nil
 }
 ```
 
 ## Step-by-step execution
-
-For `positiveSquare(-1)`:
-
-1. `n < 0` is true.
-2. Returns `0, ErrNegative`.
-3. Caller receives `result = 0, err = ErrNegative`.
-4. `if err != nil` → true.
-5. Prints `"positiveSquare(-1) error: value is negative"`.
-
-For `positiveSquare(4)`:
-
-1. `n < 0` false, `n == 0` false.
-2. Computes `n * n = 16`.
-3. Returns `16, nil`.
-4. `if err != nil` → false.
-5. Prints `"positiveSquare(4) = 16"`.
-
+1. `parseAge("25")`: `strconv.Atoi` succeeds, both guards pass, and the function returns `(25, nil)`.
+2. `parseAge("-1")`: `Atoi` succeeds, but `n < 0` matches `ErrNegativeAge` — the sentinel is returned as the error value.
+3. `parseAge("abc")`: `Atoi` fails; the function returns the `ErrInvalidAge` sentinel instead of exposing the raw parse error.
+4. `parseAge("200")`: `n > 150` matches `ErrUnreasonableAge`.
+5. Each caller compares and prints the error value like any other value — no panic, no control-flow magic; the sentinel identity can later be tested with `errors.Is`.
 ## Common mistakes
 
 - **Checking `err != nil` after ignoring it**: `result, _ := positiveSquare(-1)` discards the error. The caller gets `0` and thinks it is a valid result.

@@ -1,6 +1,7 @@
 # Return values
 
-> *"The purpose of a function is to compute a result from its arguments."* — C.A.R. Hoare
+> *"Functions delay binding; data structures induce binding."*
+> — Alan J. Perlis, *Epigrams in Programming*
 
 ## Learning objective
 
@@ -83,61 +84,35 @@ package main
 
 import "fmt"
 
-// Single explicit return.
-func square(n int) int {
-	return n * n
+func main() {
+	fmt.Println("factorial(5) =", factorial(5))
+	fmt.Println("factorial(0) =", factorial(0))
+	fmt.Println("factorial(1) =", factorial(1))
+	fmt.Println("safeDivide(10, 3) =", safeDivide(10, 3))
+	fmt.Println("safeDivide(10, 0) =", safeDivide(10, 0))
 }
 
-// Named return with naked return.
-func divide(a, b int) (result int) {
-	if b == 0 {
-		return 0 // explicit early return, not naked
+func factorial(n int) (result int) {
+	if n <= 1 {
+		return 1
 	}
-	result = a / b
-	return // naked — returns result
-}
-
-// Named returns with multiple variables.
-func rectangleProps(w, h int) (area, perimeter int) {
-	area = w * h
-	perimeter = 2 * (w + h)
+	result = n * factorial(n-1)
 	return
 }
 
-// Early return pattern.
 func safeDivide(a, b int) int {
 	if b == 0 {
 		return 0
 	}
 	return a / b
 }
-
-func main() {
-	fmt.Println("square(5) =", square(5))
-	fmt.Println("divide(10, 3) =", divide(10, 3))
-	fmt.Println("divide(5, 0) =", divide(5, 0))
-
-	a, p := rectangleProps(4, 5)
-	fmt.Printf("rectangleProps(4, 5): area=%d, perimeter=%d\n", a, p)
-
-	fmt.Println("safeDivide(9, 3) =", safeDivide(9, 3))
-}
 ```
 
 ## Step-by-step execution
-
-For `divide(10, 3)`:
-
-1. Stack frame for `divide` is created. Named return variable `result` is initialised to `0` (zero value for `int`).
-2. `b == 0` is false, so early return is skipped.
-3. `result = 10 / 3` assigns `3` to `result`.
-4. Naked `return` returns the current value of `result`, which is `3`.
-
-For `divide(5, 0)`:
-
-1. `result` initialised to `0`.
-2. `b == 0` is true, explicit `return 0` returns `0` immediately. The naked `return` at the end is never reached.
-
+1. `factorial(5)` recurses: each frame multiplies `n` by the result of `factorial(n-1)`; the named return `result` holds the product at each level, unwinding to `120`.
+2. `factorial(0)` and `factorial(1)` hit the `n <= 1` base case and return `1`.
+3. `safeDivide(10, 3)` passes the `b == 0` guard and returns `3` (integer division).
+4. `safeDivide(10, 0)` hits the guard and returns `0` — the function signals failure through the value it returns rather than crashing.
 ## Common mistakes
 
 - **Using naked returns in long functions**: Naked returns hide what is being returned. In functions longer than ~10 lines, prefer explicit `return result`.

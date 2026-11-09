@@ -1,6 +1,7 @@
 # Multiple return values
 
-> *"Multiple return values provide a cleaner way to handle errors and status without global state."* — Rob Pike
+> *"Clear is better than clever."*
+> — Rob Pike, Go Proverbs (2015)
 
 ## Learning objective
 
@@ -100,68 +101,40 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
-// (T, error) idiom.
-func divide(a, b int) (int, error) {
-	if b == 0 {
-		return 0, errors.New("division by zero")
-	}
-	return a / b, nil
-}
-
-// Named multiple returns with naked return.
-func split(sum int) (x, y int) {
-	x = sum * 4 / 9
-	y = sum - x
-	return
-}
-
 func main() {
-	// Normal call checking error.
-	result, err := divide(10, 3)
-	if err != nil {
-		fmt.Println("Error:", err)
-	} else {
-		fmt.Println("divide(10, 3) =", result)
+	inputs := []string{"42", "-1", "abc", "0"}
+	for _, s := range inputs {
+		val, err := parsePositive(s)
+		if err != nil {
+			fmt.Printf("parsePositive(%q) error: %v\n", s, err)
+		} else {
+			fmt.Printf("parsePositive(%q) = %d\n", s, val)
+		}
 	}
+}
 
-	// Error case.
-	result, err = divide(5, 0)
+func parsePositive(s string) (int, error) {
+	n, err := strconv.Atoi(s)
 	if err != nil {
-		fmt.Println("divide(5, 0) error:", err)
+		return 0, err
 	}
-
-	// Blank identifier — ignoring the error (ok for this demo).
-	q, _ := divide(20, 4)
-	fmt.Println("divide(20, 4) quotient:", q)
-
-	// Named returns.
-	a, b := split(17)
-	fmt.Println("split(17) =", a, b)
-
-	// Only one value using blank.
-	x, _ := split(10)
-	fmt.Println("split(10) x =", x)
+	if n <= 0 {
+		return 0, errors.New("value must be positive")
+	}
+	return n, nil
 }
 ```
 
 ## Step-by-step execution
-
-For `divide(5, 0)`:
-
-1. `b == 0` is true.
-2. `return 0, errors.New("division by zero")` — both values are placed on the caller's stack.
-3. Caller assigns `result = 0`, `err = <error value>`.
-4. `err != nil` is true, so the error branch prints.
-
-For `split(17)`:
-
-1. Named returns `x` and `y` initialised to `0`.
-2. `x = 17 * 4 / 9 = 68 / 9 = 7` (integer division).
-3. `y = 17 - 7 = 10`.
-4. Naked `return` returns `(7, 10)`.
-
+1. `main` iterates over the inputs `"42"`, `"-1"`, `"abc"`, `"0"`.
+2. For `"42"`: `strconv.Atoi` succeeds, the `n <= 0` guard passes, and `parsePositive` returns `(42, nil)` — the caller prints `42`.
+3. For `"-1"`: `Atoi` succeeds but `n <= 0`, so `parsePositive` returns `(0, errors.New("value must be positive"))`.
+4. For `"abc"`: `Atoi` fails, and the parse error is returned as-is — the caller sees the exact `strconv` message.
+5. For `"0"`: the positivity guard fires again.
+6. Each call site uses the two-value idiom: the value and the error are inspected together.
 ## Common mistakes
 
 - **Calling a multi-return function in a single-value context**: `result := divide(10, 3)` is a compile error — you must assign both values, or use `_` for the ones you ignore.

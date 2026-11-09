@@ -1,6 +1,7 @@
 # Error wrapping
 
-> *"Wrapping an error gives context to the caller while preserving the underlying cause."* — Russ Cox
+> *"Wrapping in an error type is more work but more useful."*
+> — Russ Cox, Go 2 Error Inspection proposal (2019)
 
 ## Learning objective
 
@@ -86,52 +87,44 @@ package main
 import (
 	"errors"
 	"fmt"
-	"os"
 )
 
 var ErrNotFound = errors.New("resource not found")
 
-func loadConfig(path string) error {
-	_, err := os.Open(path)
-	if err != nil {
-		return fmt.Errorf("open config: %w", err)
+func fetchData(source string) error {
+	switch {
+	case source == "":
+		return fmt.Errorf("fetch %s: %w", source, ErrNotFound)
+	case source == "badhost":
+		return fmt.Errorf("fetch %s: %w", source, errors.New("connection refused"))
+	case source == "valid":
+		return nil
+	default:
+		return fmt.Errorf("fetch %s: %w", source, errors.New("unknown source"))
 	}
-	return nil
-}
-
-func fetchUser(id int) error {
-	if id <= 0 {
-		return fmt.Errorf("fetch user %d: %w", id, ErrNotFound)
-	}
-	return nil
 }
 
 func main() {
-	err := loadConfig("/nonexistent/config.yaml")
-	fmt.Println("Error:", err)
-	fmt.Println("Unwrapped:", errors.Unwrap(err))
-	fmt.Println("Is os.ErrNotExist:", errors.Is(err, os.ErrNotExist))
-
-	err2 := fetchUser(-1)
-	fmt.Println("\nError:", err2)
-	fmt.Println("Is ErrNotFound:", errors.Is(err2, ErrNotFound))
+	sources := []string{"", "badhost", "valid"}
+	for _, src := range sources {
+		err := fetchData(src)
+		if err == nil {
+			fmt.Printf("fetchData(%q): OK\n", src)
+			continue
+		}
+		fmt.Printf("fetchData(%q): %v\n", src, err)
+		fmt.Printf("  errors.Is(err, ErrNotFound) = %v\n", errors.Is(err, ErrNotFound))
+		fmt.Printf("  errors.Unwrap(err)          = %v\n", errors.Unwrap(err))
+	}
 }
 ```
 
 ## Step-by-step execution
-
-When `loadConfig` is called with a nonexistent path:
-
-1. `os.Open("/nonexistent/config.yaml")` returns a `*os.PathError` wrapping `syscall.ENOENT`.
-2. The `if err != nil` branch triggers.
-3. `fmt.Errorf("open config: %w", err)` creates a `*fmt.wrapError`:
-   - `msg` = `"open config: open /nonexistent/config.yaml: The system cannot find the file specified."`
-   - `err` = the `*os.PathError`.
-4. The wrapped error propagates back to `main`.
-5. `err.Error()` prints the full chain: `"open config: open /nonexistent/config.yaml: The system cannot find the file specified."`.
-6. `errors.Unwrap(err)` returns one level: the `*os.PathError`.
-7. `errors.Is(err, os.ErrNotExist)` walks the chain, finds `os.ErrNotExist` in the `*os.PathError`, and returns `true`.
-
+1. `fetchData("")` returns `fmt.Errorf("fetch %s: %w", source, ErrNotFound)` — the error carries context ("fetch :") plus the wrapped sentinel.
+2. `errors.Is(err, ErrNotFound)` walks the wrap chain and finds the sentinel: `true`.
+3. `errors.Unwrap(err)` strips the context layer and prints the bare sentinel: "resource not found".
+4. `fetchData("badhost")` wraps a fresh "connection refused" error; `errors.Is` returns `false` because the chain does not contain `ErrNotFound`.
+5. `fetchData("valid")` returns `nil` — the caller prints OK.
 ## Common mistakes
 
 - **Using `%v` or `%s` instead of `%w`**: `fmt.Errorf("context: %v", err)` prints the error string but discards the error value. `errors.Is` and `errors.As` will not find the original error. Only `%w` preserves the unwrap chain.

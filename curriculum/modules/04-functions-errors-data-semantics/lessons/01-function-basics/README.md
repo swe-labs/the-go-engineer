@@ -1,6 +1,7 @@
 # Function basics
 
-> *"Subroutines are the primary mechanism for structure in programs."* — Maurice Wilkes
+> *"The purpose of abstracting is not to be vague, but to create a new semantic level in which one can be absolutely precise."*
+> — Edsger W. Dijkstra, *The Humble Programmer* (1972)
 
 ## Learning objective
 
@@ -89,54 +90,53 @@ package main
 
 import "fmt"
 
-// A named function with two int parameters and one int return value.
+func main() {
+	fmt.Println("add(3, 5)     =", add(3, 5))
+	fmt.Println("subtract(10, 4) =", subtract(10, 4))
+	fmt.Println("operate(6, 2, \"mul\") =", operate(6, 2, "mul"))
+	fmt.Println("operate(10, 3, \"div\") =", operate(10, 3, "div"))
+
+	double := func(x int) int {
+		return x * 2
+	}
+	fmt.Println("double(9)     =", double(9))
+}
+
 func add(a int, b int) int {
 	return a + b
 }
 
-// A named function with no return value (procedure).
-func greet(name string) {
-	fmt.Println("Hello,", name)
+func subtract(a int, b int) int {
+	return a - b
 }
 
-func main() {
-	greet("Alice")
-
-	sum := add(3, 5)
-	fmt.Println("3 + 5 =", sum)
-
-	// Anonymous function assigned to a variable.
-	double := func(x int) int {
-		return x * 2
+func operate(a, b int, op string) int {
+	if op == "add" {
+		return a + b
 	}
-	fmt.Println("double(7) =", double(7))
-
-	// Passing an anonymous function as an argument.
-	apply := func(f func(int) int, v int) int {
-		return f(v)
+	if op == "sub" {
+		return a - b
 	}
-	result := apply(double, 10)
-	fmt.Println("apply(double, 10) =", result)
+	if op == "mul" {
+		return a * b
+	}
+	if op == "div" {
+		return a / b
+	}
+	panic("unknown operator: " + op)
 }
 ```
 
 ## Step-by-step execution
+1. `main` starts; the runtime pushes its stack frame.
+2. `add(3, 5)` is called: a new frame receives copies of `3` and `5` as parameters `a` and `b`; the frame computes and returns `8`.
+3. `subtract(10, 4)` is called the same way and returns `6`.
+4. `operate(6, 2, "mul")` dispatches: `op == "mul"` matches, so it returns `6 * 2 = 12`.
+5. `operate(10, 3, "div")` returns `10 / 3 = 3` (integer division truncates).
+6. The anonymous function assigned to `double` is created in `main`'s frame; `double(9)` invokes it and returns `18`.
+7. `main`'s frame is popped and the process exits with status 0.
 
-For `greet("Alice")`:
-
-1. `main` calls `greet` passing the string `"Alice"`.
-2. A new stack frame is created for `greet`. Parameter `name` receives the copy `"Alice"`.
-3. `fmt.Println` executes using the local `name` variable.
-4. `greet` returns; its stack frame is popped.
-5. Execution resumes in `main` at the line after the call.
-
-For `add(3, 5)`:
-
-1. `main` pushes `3` and `5` onto the new frame as parameters `a` and `b`.
-2. The expression `a + b` evaluates to `8`.
-3. The value `8` is returned to the caller.
-4. `main` assigns `8` to variable `sum`.
-
+The `panic("unknown operator: " + op)` at the end of `operate` fires only for operators outside the four handled cases — `panic` is formally taught in Lesson 17.
 ## Common mistakes
 
 - **Missing parentheses on call**: `greet` (without `()`) does not call the function — it evaluates to the function value itself. Only `greet()` invokes it.

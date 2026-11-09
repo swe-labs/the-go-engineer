@@ -129,73 +129,50 @@ import (
 	"fmt"
 )
 
-type ValidationError struct {
-	Field string
-	Value interface{}
-	Rule  string
+type HTTPError struct {
+	StatusCode int
+	Body       string
 }
 
-func (v *ValidationError) Error() string {
-	return fmt.Sprintf("validation: field %q (value=%v) failed rule %q", v.Field, v.Value, v.Rule)
+func (h *HTTPError) Error() string {
+	return fmt.Sprintf("HTTP %d: %s", h.StatusCode, h.Body)
 }
 
-type DBError struct {
-	Code    int
-	Message string
-}
-
-func (d *DBError) Error() string {
-	return fmt.Sprintf("db error %d: %s", d.Code, d.Message)
-}
-
-func saveUser(name string, age int) error {
-	if name == "" {
-		return &ValidationError{Field: "name", Value: name, Rule: "required"}
+func fetchURL(url string) error {
+	switch url {
+	case "/missing":
+		return fmt.Errorf("fetch %s: %w", url, &HTTPError{StatusCode: 404, Body: "not found"})
+	case "/broken":
+		return fmt.Errorf("fetch %s: %w", url, &HTTPError{StatusCode: 500, Body: "server error"})
+	case "/ok":
+		return nil
+	default:
+		return fmt.Errorf("fetch %s: %w", url, &HTTPError{StatusCode: 400, Body: "bad request"})
 	}
-	if age < 0 || age > 150 {
-		return &ValidationError{Field: "age", Value: age, Rule: "range:0-150"}
-	}
-	if name == "crash" {
-		return fmt.Errorf("save: %w", &DBError{Code: 1062, Message: "duplicate entry"})
-	}
-	return nil
 }
 
 func main() {
-	for _, name := range []string{"", "alice", "crash"} {
-		err := saveUser(name, 200)
-		var valErr *ValidationError
-		var dbErr *DBError
-
-		switch {
-		case errors.As(err, &valErr):
-			fmt.Printf("Validation failed: field=%q rule=%q value=%v\n", valErr.Field, valErr.Rule, valErr.Value)
-		case errors.As(err, &dbErr):
-			fmt.Printf("Database error: code=%d msg=%q\n", dbErr.Code, dbErr.Message)
-		case err == nil:
-			fmt.Printf("User %q saved\n", name)
-		default:
-			fmt.Printf("Unknown error: %v\n", err)
+	urls := []string{"/missing", "/broken", "/ok", "/other"}
+	for _, url := range urls {
+		err := fetchURL(url)
+		var httpErr *HTTPError
+		if errors.As(err, &httpErr) {
+			fmt.Printf("URL %s -> HTTP %d: %q\n", url, httpErr.StatusCode, httpErr.Body)
+		} else if err == nil {
+			fmt.Printf("URL %s -> OK\n", url)
+		} else {
+			fmt.Printf("URL %s -> unknown: %v\n", url, err)
 		}
 	}
 }
 ```
 
 ## Step-by-step execution
-
-For `saveUser("crash", 200)`:
-
-1. `name != ""`, `age` is outside range, so `saveUser` would return `ValidationError` first... wait, let me re-examine. `age=200` fails the range check. So `saveUser` returns a `*ValidationError`. But for `name="crash"`, `age=200`, the age check fires first and returns `ValidationError`. Let me trace `name="crash"` with `age=25`:
-
-1. `name != ""`, `age=25` passes.
-2. `name == "crash"` is true.
-3. `DBError` is created: `{Code: 1062, Message: "duplicate entry"}`.
-4. `fmt.Errorf("save: %w", &dbErr)` wraps it.
-5. `main` gets the wrapped error.
-6. `errors.As(err, &valErr)` -- `*ValidationError` doesn't match `*fmt.wrapError`; unwrap → `*DBError` doesn't match `*ValidationError`; unwrap → nil, no match → `false`.
-7. `errors.As(err, &dbErr)` -- `*fmt.wrapError` doesn't match `*DBError`; unwrap → `*DBError` matches `*DBError`; assign and return `true`.
-8. Prints `"Database error: code=1062 msg='duplicate entry'"`.
-
+1. `fetchURL("/missing")` wraps a `*HTTPError{404, "not found"}` with `%w`.
+2. `errors.As(err, &httpErr)` walks the chain, finds a `*HTTPError`, and points `httpErr` at it — the caller extracts `StatusCode` and `Body`.
+3. `/broken` and `/other` are handled the same way with different status codes.
+4. `/ok` returns `nil`, so `errors.As` is skipped and the caller prints OK.
+5. `errors.As` differs from `errors.Is`: it matches by **type** (extracting the struct) rather than by **value** (matching a sentinel).
 ## Common mistakes
 
 - **Passing `nil` as the target pointer**: `errors.As(err, nil)` panics. The target must be a non-nil pointer.
