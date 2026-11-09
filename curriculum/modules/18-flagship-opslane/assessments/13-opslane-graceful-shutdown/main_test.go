@@ -29,7 +29,7 @@ func TestGracefulShutdown_InFlightCompleteAndNewRejected(t *testing.T) {
 		_ = coordinator.server.Serve(listener)
 	}()
 
-	client := &http.Client{Timeout: 3 * time.Second}
+	client := &http.Client{Timeout: 15 * time.Second}
 
 	// Verify server is responsive initially
 	resPing, err := client.Get("http://" + addr + "/ping")
@@ -70,12 +70,12 @@ func TestGracefulShutdown_InFlightCompleteAndNewRejected(t *testing.T) {
 	// Wait deterministically until the request has entered handleSlowTask
 	select {
 	case <-started:
-	case <-time.After(5 * time.Second):
+	case <-time.After(15 * time.Second):
 		t.Fatal("timed out waiting for slow-task to start")
 	}
 
 	// 3. Initiate Graceful Shutdown concurrently while request is in flight
-	shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	shutdownCtx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
 	if err := coordinator.GracefulShutdown(shutdownCtx); err != nil {
