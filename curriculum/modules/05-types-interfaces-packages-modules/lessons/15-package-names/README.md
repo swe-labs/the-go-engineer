@@ -83,19 +83,20 @@ The `go/build` package uses `GOPATH` or module mode to resolve import paths to d
 ## Go example
 
 ```go
-// Package greeter provides friendly greeting functions.
-package greeter
+package main
 
-import "fmt"
+import (
+	"fmt"
 
-// Hello returns a greeting for the given name.
-func Hello(name string) string {
-	return fmt.Sprintf("Hello, %s!", name)
-}
+	"github.com/swe-labs/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names/mathutil"
+	"github.com/swe-labs/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/15-package-names/strutil"
+)
 
-// Hi prints a casual greeting to stdout.
-func Hi(name string) {
-	fmt.Printf("Hi, %s!\n", name)
+func main() {
+	a, b := 7, 3
+	fmt.Printf("%d + %d = %d\n", a, b, mathutil.Add(a, b))
+	fmt.Printf("%d * %d = %d\n", a, b, mathutil.Mul(a, b))
+	fmt.Println(strutil.Upper("hello, go!"))
 }
 ```
 

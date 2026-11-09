@@ -147,36 +147,26 @@ Example functions are compiled and run as part of `go test`. The `// Output:` co
 ## Go example
 
 ```go
-// Package greeter provides friendly greeting functions.
-//
-// Use [Hello] to create a greeting string, or [Hi] to print
-// a casual greeting directly.
-//
-// Example:
-//
-//	msg := greeter.Hello("World")
-//	fmt.Println(msg)
-package greeter
+package main
 
-import "fmt"
+import (
+	"fmt"
 
-// Hello returns a greeting for the given name.
-//
-// The greeting includes the name and an exclamation mark.
-//
-// Example:
-//
-//	greeting := greeter.Hello("Alice")
-//	fmt.Println(greeting) // Hello, Alice!
-func Hello(name string) string {
-	return fmt.Sprintf("Hello, %s!", name)
-}
+	"github.com/swe-labs/the-go-engineer/curriculum/modules/05-types-interfaces-packages-modules/lessons/23-documentation-comments/calc"
+)
 
-// Hi prints a casual greeting to stdout.
-//
-// Deprecated: Use [Hello] and print the result yourself.
-func Hi(name string) {
-	fmt.Printf("Hi, %s!\n", name)
+func main() {
+	// Test Sum.
+	fmt.Println("Sum(1,2,3) =", calc.Sum(1, 2, 3))
+
+	// Test Calculator.
+	c := calc.NewCalculator()
+	c.Add(10)
+	c.Add(20)
+	fmt.Println("Calculator result:", c.Result())
+
+	// Test deprecated function.
+	fmt.Println("OldSum(4,5) =", calc.OldSum(4, 5))
 }
 ```
 

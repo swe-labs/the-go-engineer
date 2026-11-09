@@ -10,7 +10,7 @@ Real-world financial systems handle diverse employment contracts (full-time sala
 
 ## Prerequisites
 
-Complete all Module 05 lessons (01–23) on interfaces, method sets, struct embedding, implicit satisfaction, error wrapping, and package boundaries.
+Complete all Module 05 lessons (01–24) on interfaces, method sets, struct embedding, implicit satisfaction, error wrapping, and package boundaries.
 
 ## Available concepts
 

@@ -88,9 +88,8 @@ For struct embedding, the compiler creates a field with the type name and genera
 package main
 
 import (
+	"bytes"
 	"fmt"
-	"io"
-	"strings"
 )
 
 type Reader interface {
@@ -115,8 +114,31 @@ func (l Logger) Log(msg string) {
 }
 
 type Server struct {
-	Logger // embedded
-	Host   string
+	Logger
+	Host string
+}
+
+type Pinger interface {
+	Ping() error
+}
+
+type HealthChecker interface {
+	Pinger
+	Status() map[string]string
+}
+
+type SimplePinger struct{}
+
+func (s SimplePinger) Ping() error {
+	return nil
+}
+
+type Monitor struct {
+	SimplePinger
+}
+
+func (m Monitor) Status() map[string]string {
+	return map[string]string{"status": "ok"}
 }
 
 func main() {
@@ -124,14 +146,20 @@ func main() {
 		Logger: Logger{prefix: "api"},
 		Host:   "localhost:8080",
 	}
-	s.Log("server started") // promoted method
+	s.Log("server started")
 
-	// Interface embedding demonstration
-	var rw ReadWriter = &strings.Builder{}
+	var buf bytes.Buffer
+	var rw ReadWriter = &buf
 	rw.Write([]byte("hello"))
-	var buf [16]byte
-	n, _ := rw.Read(buf[:])
-	fmt.Println("read:", string(buf[:n]))
+	var readBuf [16]byte
+	n, _ := rw.Read(readBuf[:])
+	fmt.Println("read:", string(readBuf[:n]))
+
+	var hc HealthChecker = Monitor{}
+	if err := hc.Ping(); err != nil {
+		fmt.Println("ping failed:", err)
+	}
+	fmt.Println("status:", hc.Status())
 }
 ```
 

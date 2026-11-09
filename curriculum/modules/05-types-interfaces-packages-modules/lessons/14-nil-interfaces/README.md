@@ -86,7 +86,6 @@ package main
 
 import "fmt"
 
-// MyError is a custom error type.
 type MyError struct {
 	Msg string
 }
@@ -98,15 +97,20 @@ func (e *MyError) Error() string {
 	return e.Msg
 }
 
-// doWork returns a nil *MyError wrapped in error.
 func doWork() error {
-	var err *MyError // nil pointer of concrete type
-	return err       // wraps as (*MyError, nil) — non-nil interface!
+	var err *MyError
+	return err
 }
 
-// doWorkSafe returns a nil error when there is no error.
 func doWorkSafe() error {
-	return nil // true nil interface
+	return nil
+}
+
+func getError(shouldFail bool) error {
+	if shouldFail {
+		return &MyError{Msg: "something went wrong"}
+	}
+	return nil
 }
 
 func main() {
@@ -116,15 +120,11 @@ func main() {
 	err2 := doWorkSafe()
 	fmt.Printf("doWorkSafe: err == nil = %v, err = %v\n", err2 == nil, err2)
 
-	// Safe pattern: use a helper to unwrap typed nils.
-	fmt.Println("Safe nil check:", safeError(err))
-}
-
-func safeError(err error) string {
-	if err == nil {
-		return "no error"
+	fmt.Println("--- getError ---")
+	for _, flag := range []bool{false, true} {
+		e := getError(flag)
+		fmt.Printf("getError(%v) == nil: %v, value: %v\n", flag, e == nil, e)
 	}
-	return fmt.Sprintf("error: %v", err)
 }
 ```
 

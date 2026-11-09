@@ -138,42 +138,6 @@ import (
 	"os/exec"
 )
 
-func main() {
-	tmpDir, err := os.MkdirTemp("", "dep-demo")
-	if err != nil {
-		panic(err)
-	}
-	defer os.RemoveAll(tmpDir)
-
-	// 1. Init module.
-	runCmd(tmpDir, "go", "mod", "init", "example.com/dep-demo")
-
-	// 2. Create main.go.
-	mainSrc := `package main
-import "fmt"
-import "rsc.io/quote"
-func main() { fmt.Println(quote.Hello()) }
-`
-	os.WriteFile(tmpDir+"/main.go", []byte(mainSrc), 0644)
-
-	// 3. go get a specific version.
-	runCmd(tmpDir, "go", "get", "rsc.io/quote@v1.5.2")
-
-	// 4. Show go.mod.
-	data, _ := os.ReadFile(tmpDir + "/go.mod")
-	fmt.Printf("go.mod after go get:\n%s\n", data)
-
-	// 5. List all modules.
-	runCmd(tmpDir, "go", "list", "-m", "all")
-
-	// 6. Upgrade to patch.
-	runCmd(tmpDir, "go", "get", "-u=patch", "./...")
-
-	// 7. Show final go.mod.
-	data, _ = os.ReadFile(tmpDir + "/go.mod")
-	fmt.Printf("After patch upgrade:\n%s\n", data)
-}
-
 func runCmd(dir, name string, args ...string) {
 	cmd := exec.Command(name, args...)
 	cmd.Dir = dir
@@ -182,6 +146,36 @@ func runCmd(dir, name string, args ...string) {
 	if err != nil {
 		panic(fmt.Sprintf("%v: %v\n%s", name, err, out))
 	}
+}
+
+func main() {
+	tmpDir, err := os.MkdirTemp("", "dep-demo")
+	if err != nil {
+		panic(err)
+	}
+	defer os.RemoveAll(tmpDir)
+
+	runCmd(tmpDir, "go", "mod", "init", "example.com/dep-demo")
+
+	mainSrc := `package main
+import "fmt"
+import "rsc.io/quote"
+func main() { fmt.Println(quote.Hello()) }
+`
+	if err := os.WriteFile(tmpDir+"/main.go", []byte(mainSrc), 0644); err != nil {
+		panic(err)
+	}
+
+	runCmd(tmpDir, "go", "get", "rsc.io/quote@v1.5.2")
+
+	data, _ := os.ReadFile(tmpDir + "/go.mod")
+	fmt.Printf("go.mod:\n%s\n", data)
+
+	runCmd(tmpDir, "go", "list", "-m", "all")
+
+	runCmd(tmpDir, "go", "mod", "tidy")
+
+	fmt.Println("Dependency management demo complete.")
 }
 ```
 
