@@ -135,7 +135,7 @@ func RunMigrations(ctx context.Context, db *sql.DB, driver string) error {
 		from_status VARCHAR(32) NOT NULL,
 		to_status VARCHAR(32) NOT NULL,
 		changed_at TIMESTAMP NOT NULL,
-		FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
+		CONSTRAINT fk_task_audit_logs_task FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 	);
 	`
 	if _, err := db.ExecContext(ctx, schema); err != nil {
@@ -145,6 +145,10 @@ func RunMigrations(ctx context.Context, db *sql.DB, driver string) error {
 	if driver == "pgx" {
 		const upgradeFK = `DO $$
 BEGIN
+    -- Reconcile legacy data first: rows referencing deleted tasks would fail
+    -- constraint validation when the FK is added.
+    DELETE FROM task_audit_logs
+    WHERE NOT EXISTS (SELECT 1 FROM tasks t WHERE t.id = task_audit_logs.task_id);
     IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_task_audit_logs_task') THEN
         ALTER TABLE task_audit_logs ADD CONSTRAINT fk_task_audit_logs_task
             FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;

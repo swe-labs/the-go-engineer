@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS task_audit_logs (
     from_status VARCHAR(32) NOT NULL,
     to_status VARCHAR(32) NOT NULL,
     changed_at TIMESTAMP NOT NULL,
-    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
+    CONSTRAINT fk_task_audit_logs_task FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 );
 ```
 

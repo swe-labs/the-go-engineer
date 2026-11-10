@@ -45,7 +45,13 @@ func main() {
 
 	fmt.Println("Connected to database")
 
-	db.Exec(`CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY, name TEXT)`)
+	// DDL differs by dialect: SQLite auto-generates INTEGER PRIMARY KEY from
+	// the rowid; PostgreSQL needs an explicit identity (SERIAL).
+	createSQL := `CREATE TABLE IF NOT EXISTS items (id SERIAL PRIMARY KEY, name TEXT)`
+	if driver == "sqlite" {
+		createSQL = `CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY, name TEXT)`
+	}
+	db.Exec(createSQL)
 
 	_, err = db.Exec(`INSERT INTO items (name) VALUES ('production item')`)
 	if err != nil {

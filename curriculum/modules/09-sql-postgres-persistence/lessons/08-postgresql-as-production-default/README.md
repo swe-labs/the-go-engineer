@@ -139,7 +139,13 @@ func main() {
 
 	fmt.Println("Connected to database")
 
-	db.Exec(`CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY, name TEXT)`)
+	// DDL differs by dialect: SQLite auto-generates INTEGER PRIMARY KEY from
+	// the rowid; PostgreSQL needs an explicit identity (SERIAL).
+	createSQL := `CREATE TABLE IF NOT EXISTS items (id SERIAL PRIMARY KEY, name TEXT)`
+	if driver == "sqlite" {
+		createSQL = `CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY, name TEXT)`
+	}
+	db.Exec(createSQL)
 
 	_, err = db.Exec(`INSERT INTO items (name) VALUES ('production item')`)
 	if err != nil {
@@ -163,7 +169,7 @@ func main() {
 
 1. `main()` picks the driver from the DSN: a `postgres://` URL selects `"pgx"` (the stdlib registration name), anything else uses `"sqlite"`. With no `DATABASE_URL`, the example falls back to an in-memory SQLite database.
 2. `db.Ping()` verifies the connection is alive. For SQLite in-memory, this always succeeds.
-3. The rest of the code (CREATE TABLE, INSERT, SELECT) uses the same `database/sql` API that works with PostgreSQL.
+3. The rest of the code uses the same `database/sql` API for both engines — the one place dialect matters here is the DDL: SQLite auto-generates `INTEGER PRIMARY KEY` values from the rowid, while PostgreSQL needs `SERIAL` (or `IDENTITY`) to auto-generate the `id`. The example picks the DDL by driver.
 4. The program prints the PostgreSQL connection string pattern that would be used in production.
 
 ## Common mistakes
