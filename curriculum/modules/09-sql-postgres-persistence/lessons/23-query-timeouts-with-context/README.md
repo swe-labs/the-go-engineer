@@ -65,10 +65,10 @@ Pattern:
 
 When you call `QueryContext(ctx, ...)`:
 
-1. The `database/sql` package starts a goroutine that monitors `ctx.Done()`.
-2. If the context is canceled, the goroutine calls `db.cancelRequest(connID)`.
-3. The driver (e.g., modernc.org/sqlite) receives an interrupt signal.
-4. The in-progress query is aborted, and the connection is returned to the pool.
+1. The `database/sql` package starts a goroutine that monitors `ctx.Done()` alongside the query.
+2. If the context is canceled first, the package interrupts the driver — for context-aware drivers like modernc.org/sqlite by aborting the running statement, and by forcibly closing the underlying connection otherwise.
+3. In SQLite terms, the running `sqlite3_step()` returns `SQLITE_INTERRUPT` and the statement stops.
+4. Because a canceled connection may be left in an unknown state, `database/sql` closes it instead of reusing it; the pool opens a fresh connection on demand.
 5. `QueryContext` returns `context.DeadlineExceeded` or `context.Canceled`.
 
 With SQLite specifically: `sqlite3_interrupt()` is called on the database connection, which causes the current `sqlite3_step()` to return `SQLITE_INTERRUPT`.
@@ -108,21 +108,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Insert some data
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 2000; i++ {
 		db.Exec("INSERT INTO numbers (value) VALUES (?)", fmt.Sprintf("number-%d", i))
 	}
 
-	// Simulate a slow query using load_extension or a busy wait
-	// In SQLite, we use a deliberately expensive query
-	slowQuery := `SELECT a.value || b.value AS combined
-		FROM numbers a
+	slowQuery := `SELECT COUNT(*) FROM numbers a
 		CROSS JOIN numbers b
 		CROSS JOIN numbers c
-		LIMIT 1000000`
+		CROSS JOIN numbers d`
 
-	// Query with a very short timeout (1ms) to demonstrate cancellation
-	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Microsecond)
 	defer cancel()
 
 	start := time.Now()
@@ -134,10 +129,9 @@ func main() {
 	} else if err != nil {
 		fmt.Printf("Query error: %v\n", err)
 	} else {
-		fmt.Println("Query succeeded (unexpected with 1ms timeout)")
+		fmt.Println("Query succeeded (unexpected with 1us timeout)")
 	}
 
-	// Successful query with adequate timeout
 	ctx2, cancel2 := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel2()
 

@@ -26,7 +26,10 @@ func MonitorPool(db *sql.DB) *sql.DBStats {
 }
 
 func main() {
-	db, err := sql.Open("sqlite", ":memory:")
+	// file::memory:?cache=shared lets every pooled connection see the same
+	// in-memory database — a bare ":memory:" gives each connection its own
+	// private database (see lesson 07).
+	db, err := sql.Open("sqlite", "file::memory:?cache=shared")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -63,8 +63,8 @@ The four standard join types:
 |---|---|
 | `INNER JOIN` | Only rows where the condition matches in both tables |
 | `LEFT JOIN` | All rows from the left table, plus matching right rows (NULL if no match) |
-| `RIGHT JOIN` | All rows from the right table, plus matching left rows (SQLite does not support natively — swap tables and use LEFT JOIN) |
-| `FULL JOIN` | All rows from both tables (not supported in SQLite — emulate with UNION) |
+| `RIGHT JOIN` | All rows from the right table, plus matching left rows (supported in SQLite 3.39+ — verify with your driver's bundled version; on older SQLite, swap tables and use LEFT JOIN) |
+| `FULL JOIN` | All rows from both tables (supported in SQLite 3.39+ as `FULL OUTER JOIN`; on older SQLite, emulate with a UNION of LEFT and RIGHT joins) |
 
 In Go, you scan joined results like any other query. Column order in `Scan` must match the SELECT list order.
 
@@ -97,6 +97,20 @@ import (
 	_ "modernc.org/sqlite"
 )
 
+type OrderWithUser struct {
+	OrderID  int
+	UserID   int
+	Total    float64
+	UserName sql.NullString
+}
+
+type UserWithOrder struct {
+	UserID   int
+	UserName string
+	OrderID  sql.NullInt64
+	Total    sql.NullFloat64
+}
+
 func main() {
 	db, err := sql.Open("sqlite", ":memory:")
 	if err != nil {
@@ -114,43 +128,26 @@ func main() {
 		log.Fatal(err)
 	}
 
-	type OrderWithUser struct {
-		OrderID int
-		UserID  int
-		Total   float64
-		// LEFT JOIN produces NULL name for users without orders
-		UserName sql.NullString
-	}
-
-	// INNER JOIN — only users with orders
 	fmt.Println("=== INNER JOIN ===")
-	rows, _ := db.Query(`SELECT orders.id, orders.user_id, orders.total, users.name
-		FROM orders INNER JOIN users ON orders.user_id = users.id
-		ORDER BY orders.id`)
-	scanAndPrint(rows)
-
-	// LEFT JOIN — all orders, even if user is missing (unlikely here)
-	fmt.Println("\n=== LEFT JOIN (orders -> users) ===")
-	rows, _ = db.Query(`SELECT orders.id, orders.user_id, orders.total, users.name
-		FROM orders LEFT JOIN users ON orders.user_id = users.id
-		ORDER BY orders.id`)
-	scanAndPrint(rows)
-
-	// LEFT JOIN — all users, with their orders (NULL if no order)
-	fmt.Println("\n=== LEFT JOIN (users -> orders) ===")
-	type UserWithOrder struct {
-		UserID   int
-		UserName string
-		OrderID  sql.NullInt64
-		Total    sql.NullFloat64
+	rows, err := db.Query(`SELECT orders.id, orders.user_id, orders.total, users.name
+		FROM orders INNER JOIN users ON orders.user_id = users.id ORDER BY orders.id`)
+	if err != nil {
+		log.Fatal(err)
 	}
-	userRows, _ := db.Query(`SELECT users.id, users.name, orders.id, orders.total
-		FROM users LEFT JOIN orders ON users.id = orders.user_id
-		ORDER BY users.id, orders.id`)
+	printOrderWithUser(rows)
+
+	fmt.Println("\n=== LEFT JOIN (users -> orders) ===")
+	userRows, err := db.Query(`SELECT users.id, users.name, orders.id, orders.total
+		FROM users LEFT JOIN orders ON users.id = orders.user_id ORDER BY users.id, orders.id`)
+	if err != nil {
+		log.Fatal(err)
+	}
 	defer userRows.Close()
 	for userRows.Next() {
 		var uwo UserWithOrder
-		userRows.Scan(&uwo.UserID, &uwo.UserName, &uwo.OrderID, &uwo.Total)
+		if err := userRows.Scan(&uwo.UserID, &uwo.UserName, &uwo.OrderID, &uwo.Total); err != nil {
+			log.Fatal(err)
+		}
 		if uwo.OrderID.Valid {
 			fmt.Printf("User %s (id=%d): Order %d = $%.2f\n", uwo.UserName, uwo.UserID, uwo.OrderID.Int64, uwo.Total.Float64)
 		} else {
@@ -159,11 +156,13 @@ func main() {
 	}
 }
 
-func scanAndPrint(rows *sql.Rows) {
+func printOrderWithUser(rows *sql.Rows) {
 	defer rows.Close()
 	for rows.Next() {
 		var o OrderWithUser
-		rows.Scan(&o.OrderID, &o.UserID, &o.Total, &o.UserName)
+		if err := rows.Scan(&o.OrderID, &o.UserID, &o.Total, &o.UserName); err != nil {
+			log.Fatal(err)
+		}
 		fmt.Printf("Order %d: user %d, $%.2f, name=%s\n", o.OrderID, o.UserID, o.Total, o.UserName.String)
 	}
 }
@@ -190,7 +189,7 @@ For `LEFT JOIN` with `users LEFT JOIN orders`:
 - **N+1 queries**: Fetching orders for each user in a loop instead of one JOIN.
 - **Ambiguous column names**: `SELECT id` fails when both tables have `id`. Use aliases: `SELECT users.id AS user_id, orders.id AS order_id`.
 - **Forgetting JOIN condition**: `FROM users, orders` produces a Cartesian product. Always use `ON` or `WHERE` to specify the join condition.
-- **RIGHT JOIN not supported in SQLite**: SQLite only supports LEFT JOIN. Use LEFT JOIN with swapped table order.
+- **Assuming RIGHT JOIN is unavailable (or universally available) in SQLite**: SQLite added `RIGHT JOIN` and `FULL OUTER JOIN` in version 3.39 (2022) — the module's `modernc.org/sqlite` driver ships 3.53, so both work here. Check your driver's bundled version before relying on them; on older engines, swap tables and use LEFT JOIN.
 
 ## Debugging walkthrough
 
@@ -247,7 +246,7 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/20-joins
 1. What is the difference between INNER JOIN and LEFT JOIN?
 2. When scanning a LEFT JOIN result, why must you use `sql.NullString` for right-table columns?
 3. What is the N+1 query problem and how do joins solve it?
-4. Why doesn't SQLite support RIGHT JOIN, and what is the workaround?
+4. Since which SQLite version is RIGHT JOIN supported, and what is the portable workaround for older engines?
 5. How does an index on the join column affect query performance?
 
 ## NEXT UP

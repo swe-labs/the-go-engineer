@@ -6,7 +6,7 @@ Scan nullable database columns into Go safely using `sql.NullString`, `sql.NullI
 
 ## Why this matters
 
-SQL NULL is not zero, empty string, or false — it means "unknown" or "missing." If you scan a NULL column into a plain Go `string`, you get `""`. If you scan it into an `int`, you get `0`. Both silently corrupt your data. Production systems crash, send wrong invoices, or skip records because NULL was not handled explicitly. The `database/sql` package provides nullable types that force you to decide: is this value valid, or is it NULL?
+SQL NULL is not zero, empty string, or false — it means "unknown" or "missing." `database/sql` refuses to scan a NULL into a plain `string` or `int`: the scan returns an error (`converting NULL to string is unsupported`), which surfaces at runtime as a failed request, not a corrupted value. That refusal is deliberate — it forces you to decide how each nullable column is represented in Go. The `sql.Null*` types and pointer targets (`*string`) are the two sanctioned answers, and both make "valid value vs. NULL" an explicit check instead of a runtime surprise.
 
 ## Mental model
 
@@ -47,7 +47,7 @@ flowchart TD
 
 ## Core idea
 
-Go's `database/sql` defines four nullable types in the standard library:
+Go's `database/sql` defines five named nullable types in the standard library, plus the generic `sql.Null[V]` (Go 1.22+):
 
 | Go type | SQL NULL equivalent | Zero value when Valid=false |
 |---|---|---|
@@ -66,14 +66,14 @@ When `db.QueryRow("SELECT name FROM users WHERE id = ?", 1).Scan(&s)` executes:
 1. The SQLite driver returns a byte slice or nil for the column value.
 2. `Scan` calls the `sql.Scanner` interface on the target.
 3. `sql.NullString.Scan` checks: if the raw value is nil, set `Valid = false`; otherwise convert bytes to string, set `String = result`, `Valid = true`.
-4. For JSON, `sql.NullString.MarshalJSON` returns `null` when `Valid` is false, and the quoted string otherwise.
+4. For JSON, note that the standard `sql.Null*` types do **not** implement `json.Marshaler` — they marshal as plain objects (`{"String": "...", "Valid": true}`), never as bare `null`. If your API needs `null` JSON semantics, use pointer fields or write a small custom type.
 
 Internally, each Null type is a struct with an exported value field and a `Valid` field — no magic, no allocation on scan.
 
 ## How Go uses it
 
-- **Table scans**: any column with a `NULL` constraint must be scanned into a nullable type.
-- **JSON APIs**: `json.Marshal(sql.NullString{String: "hello", Valid: true})` → `"hello"`; `json.Marshal(sql.NullString{Valid: false})` → `null`.
+- **Table scans**: any nullable column must be scanned into a nullable type — a plain `string` scan fails at runtime with `converting NULL to string is unsupported`.
+- **JSON APIs**: `sql.Null*` types marshal as plain structs (`{"String": "hello", "Valid": true}`); for `null`-style JSON, use pointer fields or a custom marshaler.
 - **Optional filter parameters**: nullable fields in WHERE clauses.
 - **Partial updates**: only update fields where `Valid` is true.
 
@@ -90,6 +90,14 @@ import (
 
 	_ "modernc.org/sqlite"
 )
+
+type Product struct {
+	ID          int
+	Name        string
+	Description sql.NullString
+	Price       float64
+	Stock       sql.NullInt64
+}
 
 func main() {
 	db, err := sql.Open("sqlite", ":memory:")
@@ -117,59 +125,99 @@ func main() {
 		log.Fatal(err)
 	}
 
-	rows, err := db.Query("SELECT id, name, description, price, stock FROM products ORDER BY id")
+	products, err := GetProducts(db)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	for _, p := range products {
+		b, _ := json.MarshalIndent(p, "", "  ")
+		fmt.Printf("%s\n", b)
+	}
+}
+
+func GetProducts(db *sql.DB) ([]Product, error) {
+	rows, err := db.Query("SELECT id, name, description, price, stock FROM products ORDER BY id")
+	if err != nil {
+		return nil, err
+	}
 	defer rows.Close()
 
-	type Product struct {
-		ID          int
-		Name        string
-		Description sql.NullString
-		Price       float64
-		Stock       sql.NullInt64
-	}
-
+	var products []Product
 	for rows.Next() {
 		var p Product
-		err := rows.Scan(&p.ID, &p.Name, &p.Description, &p.Price, &p.Stock)
-		if err != nil {
-			log.Fatal(err)
+		if err := rows.Scan(&p.ID, &p.Name, &p.Description, &p.Price, &p.Stock); err != nil {
+			return nil, err
 		}
-		jsonBytes, _ := json.MarshalIndent(p, "", "  ")
-		fmt.Printf("Product %d: %s\n", p.ID, jsonBytes)
+		products = append(products, p)
 	}
+	return products, rows.Err()
+}
+
+func NonNullProducts(db *sql.DB) ([]Product, error) {
+	rows, err := db.Query("SELECT id, name, description, price, stock FROM products WHERE description IS NOT NULL ORDER BY id")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var products []Product
+	for rows.Next() {
+		var p Product
+		if err := rows.Scan(&p.ID, &p.Name, &p.Description, &p.Price, &p.Stock); err != nil {
+			return nil, err
+		}
+		products = append(products, p)
+	}
+	return products, rows.Err()
 }
 ```
 
-Output:
+Output (actual, captured from `go run`):
 
 ```
-Product 1: {
+{
   "ID": 1,
   "Name": "Widget",
-  "Description": "A useful widget",
+  "Description": {
+    "String": "A useful widget",
+    "Valid": true
+  },
   "Price": 9.99,
-  "Stock": 100
+  "Stock": {
+    "Int64": 100,
+    "Valid": true
+  }
 }
-Product 2: {
+{
   "ID": 2,
   "Name": "Gadget",
-  "Description": null,
+  "Description": {
+    "String": "",
+    "Valid": false
+  },
   "Price": 24.99,
-  "Stock": 0
+  "Stock": {
+    "Int64": 0,
+    "Valid": true
+  }
 }
-Product 3: {
+{
   "ID": 3,
   "Name": "Doohickey",
-  "Description": "Premium doohickey",
+  "Description": {
+    "String": "Premium doohickey",
+    "Valid": true
+  },
   "Price": 49.99,
-  "Stock": null
+  "Stock": {
+    "Int64": 0,
+    "Valid": false
+  }
 }
 ```
 
-Notice: Product 2 has `Description: null` (NULL in DB) and `Stock: 0` (real zero, not NULL). Product 3 has `Stock: null` (NULL in DB). JSON output distinguishes them correctly because we used nullable types.
+Notice: Product 2 has `Description.Valid: false` (NULL in DB) and `Stock.Valid: true` with `Int64: 0` (a real zero, not NULL). Product 3 has `Stock.Valid: false` (NULL in DB). The `Valid` flag — not the value field — is what distinguishes NULL from a legitimate zero, in Go and in the marshaled JSON.
 
 ## Step-by-step execution
 
@@ -180,25 +228,25 @@ For the scan `rows.Scan(&p.Description)` on the Gadget row:
 3. `sql.NullString.Scan` receives `nil`.
 4. Since the value is nil, `Valid` is set to `false`.
 5. The `String` field retains its zero value (`""`).
-6. `json.Marshal` checks `Valid` → `false` → outputs `null`.
+6. `json.Marshal` has no `NullString`-specific path, so it emits the struct as-is: `{"String": "", "Valid": false}`.
 
 For the Widget row:
 
 1. SQLite returns `"A useful widget"`.
 2. The driver passes it as `[]byte("A useful widget")`.
 3. `Scan` converts bytes to `string`, sets `String = "A useful widget"`, `Valid = true`.
-4. `json.Marshal` checks `Valid` → `true` → outputs `"A useful widget"`.
+4. `json.Marshal` emits `{"String": "A useful widget", "Valid": true}`.
 
 ## Common mistakes
 
-- Scanning NULL into `string` or `int`: Go silently produces `""` or `0`, indistinguishable from real data. Always use `sql.Null*` for nullable columns.
+- Scanning NULL into `string` or `int`: the scan **errors** at runtime (`converting NULL to string is unsupported`) — and if the error is swallowed, downstream code keeps running with zero values. Use `sql.Null*` (or `*T`) for nullable columns so the NULL is represented, not rejected.
 - Forgetting to check `Valid`: reading `NullString.String` when `Valid` is false gives `""` — which might be a valid empty string. Check `Valid` first.
 - Using `sql.NullString` for `NOT NULL` columns: unnecessary overhead. Use plain `string` when the column is guaranteed non-NULL.
 - Confusing NULL with zero in business logic: `stock = 0` means "out of stock." `stock IS NULL` means "stock unknown." They are not the same.
 
 ## Debugging walkthrough
 
-**Scenario**: A pricing report shows `$0.00` for some products. Expected: those products should be excluded from the report.
+**Scenario**: A pricing endpoint starts returning HTTP 500s in production. The logs show scan errors for some rows.
 
 ```go
 type Product struct {
@@ -209,12 +257,15 @@ type Product struct {
 
 for rows.Next() {
 	var p Product
-	rows.Scan(&p.ID, &p.Name, &p.Price)
+	err := rows.Scan(&p.ID, &p.Name, &p.Price)
+	if err != nil {
+		log.Fatal(err) // sql: Scan error on column index 2, name "price": converting NULL to float64 is unsupported
+	}
 	fmt.Printf("%s: $%.2f\n", p.Name, p.Price)
 }
 ```
 
-**Root cause**: The `price` column is `REAL NOT NULL` in schema, so `float64` works — but the `stock` column is `INTEGER NULL`. If a product has `price NOT NULL` but the report query joined a table with NULL prices, or if a migration removed the NOT NULL constraint, NULL creeps in.
+**Root cause**: The schema allowed `price REAL NULL` (or a migration dropped the `NOT NULL` constraint), and at least one row has a NULL price. `database/sql` refuses to scan NULL into a plain `float64`, so every NULL row aborts the report — the whole endpoint dies because of one row.
 
 **Fix**: Use `sql.NullFloat64` for any column that might ever be NULL. Check `Valid`. Log or skip NULL prices.
 
@@ -238,14 +289,14 @@ for rows.Next() {
 ## Production notes
 
 - **API contracts**: Document which fields can be null in your API schema (OpenAPI). Use `omitempty` with care — it omits zero values, not null.
-- **JSON encoding**: `sql.NullString` marshals to `null` when `Valid` is false. Custom JSON encoding can strip null fields, include them as null, or skip them — decide per endpoint.
+- **JSON encoding**: `sql.Null*` types marshal as plain structs (`{"String": "...", "Valid": false}`) — the standard library does not emit `null` for them. If an endpoint needs `null` semantics, use pointer fields or a custom marshaler, and decide per endpoint.
 - **CSV exports**: NULL cells should be empty or the string `NULL`. Decide and document.
 - **gRPC / protobuf**: Use `google.protobuf.StringValue` (wrapper types) for nullable fields; they map to pointers or `sql.Null*` on the Go side.
 
 ## Performance implications
 
 - `sql.Null*` types add a single `bool` field — negligible memory overhead.
-- JSON marshaling of nullable types checks `Valid` in a branch — sub-nanosecond cost.
+- Marshaling a `Null*` struct is ordinary struct encoding — no special-casing, no measurable cost.
 - Scanning into nullable types is identical to scanning into plain types plus a nil check.
 - Generics `sql.Null[V]` (Go 1.22+) may reduce boilerplate but currently has limited driver support. Stick with the named types for broad compatibility.
 
@@ -270,8 +321,8 @@ go test ./curriculum/modules/09-sql-postgres-persistence/lessons/15-null-handlin
 ## Review questions
 
 1. What is the difference between `""` (empty string) and SQL NULL when scanned into `sql.NullString`?
-2. Why does scanning a NULL column into a plain `int` produce 0, and why is that dangerous?
-3. What does `json.Marshal(sql.NullString{Valid: false})` return?
+2. What exactly happens when you scan a NULL column into a plain `int`, and why is the resulting behavior safer than silent zero-filling?
+3. What does `json.Marshal(sql.NullString{Valid: false})` return, and what would you use if the API contract requires `null`?
 4. When would you use `sql.NullTime` instead of `time.Time` for a `TIMESTAMP` column?
 5. How does `Scan` decide whether to set `Valid` to true or false?
 

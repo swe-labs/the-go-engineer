@@ -46,13 +46,15 @@ In SQLite, foreign key enforcement must be enabled at runtime with `PRAGMA forei
 
 ## Under the hood
 
-When a foreign key constraint is defined, the database creates an index on the referencing column(s) (if one does not already exist). On every INSERT or UPDATE of the child table, the database checks that the new foreign key value exists in the parent table. On every DELETE or UPDATE of the parent table, the database scans for referencing child rows and applies the configured action.
+When a foreign key constraint is defined, the referenced parent column already carries a primary-key or unique index, but **neither SQLite nor PostgreSQL creates an index on the referencing (child) columns** — you must add those yourself (see Production notes). On every INSERT or UPDATE of the child table, the database checks that the new foreign key value exists in the parent table. On every DELETE or UPDATE of the parent table, the database scans for referencing child rows and applies the configured action — an unindexed child column turns that scan into a full table scan.
 
 This check happens inside the same transaction as the DML statement. If the check fails, the statement is rolled back and an error is returned.
 
 ## How Go uses it
 
 Go enables `PRAGMA foreign_keys = ON` via `db.Exec` immediately after connecting to SQLite. For PostgreSQL, foreign keys are enforced by default. The Go code does not need special handling for foreign keys — the `database/sql` error from a constraint violation is returned as a regular `error` from `Exec` or `Query`.
+
+One caveat: the pragma is **per connection**, not per `*sql.DB`. In this lesson's examples every statement runs sequentially, so `database/sql` reuses the same pooled connection and the pragma stays in effect — but a pool that opens additional connections (for example under concurrent load) would run with foreign keys off on those connections. For multi-connection SQLite setups, set the pragma on every new connection (via a driver connect hook) or cap the pool with `db.SetMaxOpenConns(1)`.
 
 ## Go example
 
@@ -106,13 +108,11 @@ func main() {
 
 	fmt.Println("Inserted department and employee successfully")
 
-	// Try inserting with invalid dept_id
 	_, err = db.Exec(`INSERT INTO employees (name, dept_id) VALUES ('Bob', 999)`)
 	if err != nil {
 		fmt.Println("Foreign key violation caught:", err)
 	}
 
-	// Cascade delete
 	_, err = db.Exec(`DELETE FROM departments WHERE id = 1`)
 	if err != nil {
 		log.Fatal(err)
@@ -137,7 +137,7 @@ func main() {
 
 ## Common mistakes
 
-- **Forgetting `PRAGMA foreign_keys = ON`**: Foreign key violations are silently ignored in SQLite unless this pragma is set. Always execute it right after `sql.Open`.
+- **Forgetting `PRAGMA foreign_keys = ON`**: Foreign key violations are silently ignored in SQLite unless this pragma is set. Always execute it right after `sql.Open` — and remember it is per connection (see How Go uses it), so pooled connections opened later run without it unless you set it there too.
 - **Using `ON DELETE CASCADE` without understanding the implications**: Cascading deletes can remove far more data than expected. Use `RESTRICT` or `NO ACTION` as the default and only use `CASCADE` when the child data is meaningless without the parent.
 - **Defining a foreign key that references a non-unique column**: The target column must be `PRIMARY KEY` or have a `UNIQUE` constraint.
 - **Creating circular foreign key references**: Table A references B and B references A. This prevents inserting into either table.

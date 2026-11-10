@@ -142,19 +142,16 @@ func main() {
 		fmt.Printf("Inserted %s with id=%d\n", u.Name, id)
 	}
 
-	// Try violating NOT NULL
 	_, err = db.Exec(`INSERT INTO users (name, email, age) VALUES (NULL, 'null@test.com', 20)`)
 	if err != nil {
 		fmt.Println("NOT NULL violation:", err)
 	}
 
-	// Try violating CHECK
 	_, err = db.Exec(`INSERT INTO users (name, email, age) VALUES ('Test', 'test@test.com', -5)`)
 	if err != nil {
 		fmt.Println("CHECK violation:", err)
 	}
 
-	// Try violating UNIQUE
 	_, err = insertUser(db, &User{Name: "Alice2", Email: "alice@example.com", Age: 35})
 	if err != nil {
 		fmt.Println("UNIQUE violation:", err)
@@ -174,8 +171,8 @@ func main() {
 
 - **Relying only on Go validation without DB constraints**: A bug in the validation logic lets invalid data through. Always add database constraints as a safety net.
 - **Using `CHECK` with functions that are not deterministic**: SQLite allows `CHECK( random() > 0.5 )`, which is evaluated per row and may produce inconsistent results. Avoid non-deterministic expressions.
-- **Creating a `UNIQUE` constraint on a nullable column**: SQLite allows multiple NULLs in a UNIQUE column (NULL != NULL). This surprises developers coming from PostgreSQL, where this is configurable.
-- **Putting constraints on optional columns inappropriately**: A column with `DEFAULT 0` and `NOT NULL` prevents users from omitting the column. Only use `NOT NULL` when every row truly must have a value.
+- **Creating a `UNIQUE` constraint on a nullable column**: SQLite allows multiple NULLs in a UNIQUE column (NULL != NULL) — and so does PostgreSQL by default (NULLs are distinct). PostgreSQL 15+ lets you opt out with `UNIQUE NULLS NOT DISTINCT`; SQLite has no equivalent.
+- **Confusing `NOT NULL` with and without `DEFAULT`**: A `NOT NULL` column **with** a `DEFAULT` accepts omitted values (the default fills in). It is a bare `NOT NULL` column with no default that forces every INSERT to supply the value. Decide which behavior you want before choosing the combination.
 
 ## Debugging walkthrough
 

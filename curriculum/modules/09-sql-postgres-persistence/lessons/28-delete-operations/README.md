@@ -15,7 +15,7 @@ Hard delete:     Row is gone forever. SELECT finds nothing.
                  DELETE FROM users WHERE id = 1;
 
 Soft delete:     Row is marked as deleted. Queries filter it out.
-                 UPDATE users SET deleted_at = NOW() WHERE id = 1;
+                 UPDATE users SET deleted_at = CURRENT_TIMESTAMP WHERE id = 1;
                  SELECT * FROM users WHERE deleted_at IS NULL;
 
 CASCADE delete:  Deleting a parent row automatically deletes children.
@@ -33,7 +33,7 @@ flowchart TD
         H3["Violates foreign keys unless ON DELETE CASCADE is configured"]
     end
 
-    subgraph SoftDelete["Soft Delete: UPDATE users SET deleted_at = NOW() WHERE id = $1"]
+    subgraph SoftDelete["Soft Delete: UPDATE users SET deleted_at = CURRENT_TIMESTAMP WHERE id = $1"]
         S1["Row remains in table; flagged with timestamp"]
         S2["Queries must filter: WHERE deleted_at IS NULL"]
         S3["Auditable and reversible; avoids cascade deletions"]
@@ -104,7 +104,6 @@ func main() {
 	}
 	defer db.Close()
 
-	// Enable foreign keys
 	db.Exec("PRAGMA foreign_keys = ON")
 
 	_, err = db.Exec(`
@@ -117,37 +116,33 @@ func main() {
 			id INTEGER PRIMARY KEY,
 			user_id INTEGER NOT NULL,
 			total REAL NOT NULL,
+			created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 			FOREIGN KEY (user_id) REFERENCES users(id)
 		);
 		INSERT INTO users VALUES (1, 'Alice', NULL);
 		INSERT INTO users VALUES (2, 'Bob', NULL);
 		INSERT INTO users VALUES (3, 'Carol', NULL);
-		INSERT INTO orders VALUES (101, 1, 50.00);
-		INSERT INTO orders VALUES (102, 1, 30.00);
-		INSERT INTO orders VALUES (103, 3, 20.00);
+		INSERT INTO orders VALUES (101, 1, 50.00, '2024-01-15');
+		INSERT INTO orders VALUES (102, 1, 30.00, '2024-06-20');
+		INSERT INTO orders VALUES (103, 3, 20.00, '2024-03-10');
 	`)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Soft delete Bob (id=2)
 	result, _ := db.Exec("UPDATE users SET deleted_at = ? WHERE id = ?", time.Now().UTC(), 2)
 	rows, _ := result.RowsAffected()
 	fmt.Printf("Soft deleted %d user(s)\n", rows)
 
-	// Query only active users
 	countActive(db)
 	countDeleted(db)
 
-	// Hard delete by IN clause (batch)
 	result, _ = db.Exec("DELETE FROM orders WHERE user_id = ? AND total < ?", 1, 40.00)
 	rows, _ = result.RowsAffected()
 	fmt.Printf("Hard deleted %d order(s) for user 1 with total < 40\n", rows)
 
-	// Demonstrate cascade is NOT automatic without FK declaration
 	queryOrders(db, 1)
 
-	// Restore soft-deleted user (undelete)
 	result, _ = db.Exec("UPDATE users SET deleted_at = NULL WHERE id = ?", 2)
 	rows, _ = result.RowsAffected()
 	fmt.Printf("Restored %d user(s)\n", rows)
@@ -168,13 +163,18 @@ func countDeleted(db *sql.DB) {
 }
 
 func queryOrders(db *sql.DB, userID int) {
-	rows, _ := db.Query("SELECT id, total FROM orders WHERE user_id = ?", userID)
+	rows, err := db.Query("SELECT id, total FROM orders WHERE user_id = ?", userID)
+	if err != nil {
+		log.Fatal(err)
+	}
 	defer rows.Close()
 	fmt.Printf("Orders for user %d:\n", userID)
 	for rows.Next() {
 		var id int
 		var total float64
-		rows.Scan(&id, &total)
+		if err := rows.Scan(&id, &total); err != nil {
+			log.Fatal(err)
+		}
 		fmt.Printf("  Order %d: $%.2f\n", id, total)
 	}
 }
@@ -239,12 +239,12 @@ db.Exec("UPDATE users SET deleted_at = ? WHERE id = 1", time.Now())
 - **Hard delete cleanup**: Schedule periodic cleanup of soft-deleted rows older than a retention period (e.g., 90 days).
 - **Audit log**: Log all DELETE operations with user ID, timestamp, and affected rows for compliance.
 - **Foreign key handling**: SQLite requires `PRAGMA foreign_keys = ON` per connection. It's off by default. Always enable it in your application.
-- **Batch delete limits**: Very large IN clauses (10,000+ IDs) may hit SQLite's limit. Use a temporary table with JOIN instead.
+- **Batch delete limits**: SQLite caps bound parameters (32766 per statement in modern versions; 999 before 3.32), so an IN clause with one placeholder per ID can exceed it. Use a temporary table with JOIN for bulk deletes.
 
 ## Performance implications
 
 - DELETE removes rows from the table B-tree and all indexes — O(log n) per index.
-- Soft delete (UPDATE on `deleted_at`) is identical cost to UPDATE — no index rebuild on `deleted_at` if indexed.
+- Soft delete (UPDATE on `deleted_at`) has the same cost as any UPDATE — including index maintenance if `deleted_at` is indexed.
 - CASCADE deletes compound the cost: deleting one parent may delete 1000 children.
 - Batch DELETE with IN clause is faster than individual DELETE statements (fewer round-trips and transactions).
 - Deleted pages are reused. SQLite does not automatically shrink the database file. Use `VACUUM` to reclaim space after bulk deletes.

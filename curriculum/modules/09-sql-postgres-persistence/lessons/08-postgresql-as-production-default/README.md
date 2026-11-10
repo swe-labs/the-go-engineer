@@ -89,7 +89,7 @@ Connection string parameters:
 
 ## Go example
 
-Since PostgreSQL is not available in this environment, the example connects to SQLite but shows the PostgreSQL connection string and code pattern. The logic is identical — `database/sql` abstracts the difference.
+The example reads a DSN from `DATABASE_URL` (falling back to in-memory SQLite) and selects the driver from the DSN shape: `postgres://` URLs use the pgx stdlib driver, everything else uses SQLite. `ConnectDB` opens, pings, and applies pool limits — exactly the production connection sequence. The logic is identical either way — `database/sql` abstracts the difference.
 
 ```go
 package main
@@ -98,31 +98,55 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
+	"strings"
 
+	_ "github.com/jackc/pgx/v5/stdlib"
 	_ "modernc.org/sqlite"
 )
 
-// In production, use:
-// import _ "github.com/jackc/pgx/v5/stdlib"
-// db, err := sql.Open("pgx", "postgres://user:pass@localhost:5432/mydb?sslmode=disable")
+// ConnectDB selects the driver from the DSN shape: PostgreSQL URLs use the
+// pgx stdlib driver ("pgx"); anything else falls back to SQLite.
+func ConnectDB(driver, dsn string) (*sql.DB, error) {
+	db, err := sql.Open(driver, dsn)
+	if err != nil {
+		return nil, err
+	}
+	if err := db.Ping(); err != nil {
+		db.Close()
+		return nil, err
+	}
+	db.SetMaxOpenConns(10)
+	db.SetMaxIdleConns(3)
+	return db, nil
+}
 
 func main() {
-	// Simulating the pattern with SQLite
-	db, err := sql.Open("sqlite", ":memory:")
+	dsn := os.Getenv("DATABASE_URL")
+	driver := "sqlite"
+	if dsn == "" {
+		dsn = ":memory:"
+	}
+	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
+		driver = "pgx"
+	}
+
+	db, err := ConnectDB(driver, dsn)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	if err := db.Ping(); err != nil {
-		log.Fatal(err)
+	fmt.Println("Connected to database")
+
+	// DDL differs by dialect: SQLite auto-generates INTEGER PRIMARY KEY from
+	// the rowid; PostgreSQL needs an explicit identity (SERIAL).
+	createSQL := `CREATE TABLE IF NOT EXISTS items (id SERIAL PRIMARY KEY, name TEXT)`
+	if driver == "sqlite" {
+		createSQL = `CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY, name TEXT)`
 	}
+	db.Exec(createSQL)
 
-	fmt.Println("Connected to database (simulated with SQLite)")
-
-	db.Exec(`CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY, name TEXT)`)
-
-	// Insert and query — same code works for PostgreSQL
 	_, err = db.Exec(`INSERT INTO items (name) VALUES ('production item')`)
 	if err != nil {
 		log.Fatal(err)
@@ -135,11 +159,6 @@ func main() {
 	}
 	fmt.Printf("Queried: %s\n", name)
 
-	// Check PostgreSQL-specific feature support
-	var level string
-	db.QueryRow(`SELECT sqlite_version()`).Scan(&level)
-	fmt.Println("DB version:", level)
-
 	fmt.Println("\n--- PostgreSQL connection string example ---")
 	fmt.Println("Driver: pgx")
 	fmt.Println("DSN:    postgres://user:password@localhost:5432/mydb?sslmode=disable")
@@ -148,14 +167,14 @@ func main() {
 
 ## Step-by-step execution
 
-1. `sql.Open("sqlite", ":memory:")` opens a SQLite database. To use PostgreSQL, change the driver to `"pgx"` and the DSN to a PostgreSQL connection string.
+1. `main()` picks the driver from the DSN: a `postgres://` URL selects `"pgx"` (the stdlib registration name), anything else uses `"sqlite"`. With no `DATABASE_URL`, the example falls back to an in-memory SQLite database.
 2. `db.Ping()` verifies the connection is alive. For SQLite in-memory, this always succeeds.
-3. The rest of the code (CREATE TABLE, INSERT, SELECT) uses the same `database/sql` API that works with PostgreSQL.
+3. The rest of the code uses the same `database/sql` API for both engines — the one place dialect matters here is the DDL: SQLite auto-generates `INTEGER PRIMARY KEY` values from the rowid, while PostgreSQL needs `SERIAL` (or `IDENTITY`) to auto-generate the `id`. The example picks the DDL by driver.
 4. The program prints the PostgreSQL connection string pattern that would be used in production.
 
 ## Common mistakes
 
-- **Using `lib/pq` instead of `pgx`**: `lib/pq` is maintained but `pgx` is faster, more feature-rich, and the actively recommended driver. Use `github.com/jackc/pgx/v5/stdlib`.
+- **Using `lib/pq` instead of `pgx`**: `lib/pq` is in maintenance mode; `pgx` is faster, more feature-rich, and the actively recommended driver. Use `github.com/jackc/pgx/v5/stdlib`.
 - **Hardcoding connection strings**: Store them in environment variables or a config file, never in source code.
 - **Using `sslmode=disable` in production**: This sends credentials and data in plaintext. Use `sslmode=verify-full` with proper certificates.
 - **Assuming PostgreSQL defaults are secure**: By default, PostgreSQL trusts local connections. Configure `pg_hba.conf` for your environment.
@@ -196,15 +215,15 @@ if err := db.Ping(); err != nil {
 
 ## Practice task
 
-Write a function `ConnectPostgres(dsn string) (*sql.DB, error)` that:
-1. Opens a connection using `pgx` driver (but test with SQLite).
+Write a function `ConnectDB(driver, dsn string) (*sql.DB, error)` that:
+1. Opens a connection with the given driver name (select `"pgx"` when the DSN starts with `postgres://`).
 2. Calls `Ping` to verify connectivity.
 3. Sets `SetMaxOpenConns(10)` and `SetMaxIdleConns(3)`.
 4. Returns the `*sql.DB`.
 
 Then write a `main()` that:
 1. Reads a DSN from an environment variable `DATABASE_URL` (fallback to `:memory:` for SQLite).
-2. Calls `ConnectPostgres`.
+2. Calls `ConnectDB`.
 3. Creates a table, inserts a row, and queries it.
 
 ## Tests / verification

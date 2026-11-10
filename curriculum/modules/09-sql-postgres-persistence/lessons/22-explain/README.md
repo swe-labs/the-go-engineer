@@ -46,12 +46,13 @@ Buffers: shared hit=3 (Ultra-fast direct lookup!)"]
 
 ## Core idea
 
-In SQLite, `EXPLAIN QUERY PLAN` returns three columns:
+In SQLite, `EXPLAIN QUERY PLAN` returns four columns:
 
 | Column | Meaning |
 |---|---|
 | `id` | Node ID (indentation shows parent-child) |
 | `parent` | Parent node ID |
+| `notused` | Unused; reserved for future use — scan over it |
 | `detail` | Description of the operation |
 
 Key operations:
@@ -70,11 +71,11 @@ When you run a query, SQLite's query planner:
 4. Chooses the lowest-cost plan.
 
 The cost estimation uses:
-- `sqlite_stat1` table (populated by `ANALYZE`) with histogram data.
+- The `sqlite_stat1` table (populated by `ANALYZE`), which records table row counts and index cardinality. (`sqlite_stat4` adds histogram-like column samples, but only in builds compiled with `SQLITE_ENABLE_STAT4`.)
 - Heuristics: index lookup costs ~O(log n), full scan costs ~O(n).
-- Constants: each page read costs ~1.0, each row processed costs ~0.01.
+- SQLite's planner works in logarithmic cost units — it compares the log of rows/pages a plan touches, not raw byte costs.
 
-`EXPLAIN QUERY PLAN` shows the chosen plan with cost estimates in the detail column.
+`EXPLAIN QUERY PLAN` shows only the chosen plan's shape in the `detail` column — no cost numbers. (Costs appear in PostgreSQL's `EXPLAIN` output, not SQLite's.)
 
 ## How Go uses it
 
@@ -121,7 +122,6 @@ func main() {
 		"SELECT * FROM users WHERE id = 1",
 		"SELECT * FROM users WHERE email = 'alice@example.com'",
 		"SELECT * FROM users ORDER BY name",
-		"SELECT * FROM users WHERE name LIKE 'A%'",
 	}
 
 	fmt.Println("=== Without Indexes ===")
@@ -133,7 +133,7 @@ func main() {
 	db.Exec("CREATE INDEX idx_users_email ON users(email)")
 	db.Exec("CREATE INDEX idx_users_name ON users(name)")
 
-	fmt.Println("\n\n=== With Indexes ===")
+	fmt.Println("\n=== With Indexes ===")
 	for _, q := range queries {
 		fmt.Printf("\nQuery: %s\n", q)
 		printPlan(db, q)
@@ -147,28 +147,41 @@ func printPlan(db *sql.DB, query string) {
 	}
 	defer rows.Close()
 	for rows.Next() {
-		var id, parent int
+		var id, parent, notused int
 		var detail string
-		rows.Scan(&id, &parent, &detail)
+		if err := rows.Scan(&id, &parent, &notused, &detail); err != nil {
+			log.Fatal(err)
+		}
 		fmt.Printf("  id=%d parent=%d %s\n", id, parent, detail)
 	}
 }
 ```
 
-Output (without indexes):
+Output (actual, captured from `go run`):
+
+Without indexes:
 ```
 Query: SELECT * FROM users WHERE id = 1
-  id=0 parent=0 SEARCH users USING INTEGER PRIMARY KEY (rowid=?)
+  id=2 parent=0 SEARCH users USING INTEGER PRIMARY KEY (rowid=?)
 
 Query: SELECT * FROM users WHERE email = 'alice@example.com'
-  id=0 parent=0 SCAN users                         ← full scan!
+  id=2 parent=0 SCAN users
+
+Query: SELECT * FROM users ORDER BY name
+  id=3 parent=0 SCAN users
+  id=11 parent=0 USE TEMP B-TREE FOR ORDER BY
 ```
 
-Output (with indexes):
+With indexes:
 ```
 Query: SELECT * FROM users WHERE email = 'alice@example.com'
-  id=0 parent=0 SEARCH users USING INDEX idx_users_email (email=?)  ← index!
+  id=3 parent=0 SEARCH users USING INDEX idx_users_email (email=?)
+
+Query: SELECT * FROM users ORDER BY name
+  id=4 parent=0 SCAN users USING INDEX idx_users_name
 ```
+
+Note that the `id` values are small integers (2, 3, 4...) chosen by the planner, not a stable contract — match plans by their `detail` text, not by node IDs.
 
 ## Step-by-step execution
 
@@ -199,9 +212,9 @@ For `EXPLAIN QUERY PLAN SELECT * FROM users WHERE email = 'alice@example.com'`:
 SELECT * FROM users WHERE id IN (1, 2, 3, ..., 1000);
 ```
 
-**Plan**: `SCAN users` — the planner decides a full scan is cheaper than 1000 individual index lookups.
+**Plan**: verified against this module's driver (SQLite 3.53), even a 10-element `IN` list on the rowid produces `SEARCH users USING INTEGER PRIMARY KEY (rowid=?)` — SQLite loops the index lookup once per list element rather than falling back to a scan. So if an `IN` query on an indexed column is slow, the index is not being used at all (wrong column, type mismatch, or a function wrapping the column) — check the plan, don't assume the list size forced a scan.
 
-**Fix**: If the list is small, the index is used. For large lists, a full scan is often correct. Use a temporary table with a JOIN for very large lists.
+**Fix**: For very large lists, a temporary table with a JOIN keeps the SQL bind-parameter count low (SQLite caps bound parameters — 32766 in modern versions):
 
 ```sql
 CREATE TEMP TABLE ids (id INTEGER PRIMARY KEY);
@@ -220,10 +233,10 @@ SELECT * FROM users JOIN ids ON users.id = ids.id;
 
 ## Performance implications
 
-- A query plan reveals the exact cost. If the cost grows linearly with table size, you need an index.
+- A query plan reveals which access paths the planner chose. If a plan's cost grows linearly with table size, you need an index.
 - Some operations are inherently expensive: `ORDER BY` without an index requires sorting all rows (O(n log n) memory). Add an index on the sort column.
 - Subqueries in `WHERE` or `FROM` may be executed per row (correlated subquery). Check the plan for `SCAN` nested inside loops.
-- The planner's cost estimates are only as good as the statistics. Run `ANALYZE` after significant data changes.
+- The planner's choices are only as good as the statistics. Run `ANALYZE` after significant data changes.
 
 ## Practice task
 

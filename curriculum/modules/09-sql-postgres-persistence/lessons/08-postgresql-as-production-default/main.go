@@ -5,12 +5,16 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
+	_ "github.com/jackc/pgx/v5/stdlib"
 	_ "modernc.org/sqlite"
 )
 
-func ConnectDB(dsn string) (*sql.DB, error) {
-	db, err := sql.Open("sqlite", dsn)
+// ConnectDB selects the driver from the DSN shape: PostgreSQL URLs use the
+// pgx stdlib driver ("pgx"); anything else falls back to SQLite.
+func ConnectDB(driver, dsn string) (*sql.DB, error) {
+	db, err := sql.Open(driver, dsn)
 	if err != nil {
 		return nil, err
 	}
@@ -25,11 +29,15 @@ func ConnectDB(dsn string) (*sql.DB, error) {
 
 func main() {
 	dsn := os.Getenv("DATABASE_URL")
+	driver := "sqlite"
 	if dsn == "" {
 		dsn = ":memory:"
 	}
+	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
+		driver = "pgx"
+	}
 
-	db, err := ConnectDB(dsn)
+	db, err := ConnectDB(driver, dsn)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -37,7 +45,13 @@ func main() {
 
 	fmt.Println("Connected to database")
 
-	db.Exec(`CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY, name TEXT)`)
+	// DDL differs by dialect: SQLite auto-generates INTEGER PRIMARY KEY from
+	// the rowid; PostgreSQL needs an explicit identity (SERIAL).
+	createSQL := `CREATE TABLE IF NOT EXISTS items (id SERIAL PRIMARY KEY, name TEXT)`
+	if driver == "sqlite" {
+		createSQL = `CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY, name TEXT)`
+	}
+	db.Exec(createSQL)
 
 	_, err = db.Exec(`INSERT INTO items (name) VALUES ('production item')`)
 	if err != nil {

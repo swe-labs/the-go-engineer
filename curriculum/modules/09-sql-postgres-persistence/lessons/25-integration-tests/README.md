@@ -89,8 +89,6 @@ import (
 	_ "modernc.org/sqlite"
 )
 
-//go:build integration
-
 type User struct {
 	ID    int
 	Name  string
@@ -121,7 +119,6 @@ func (r *UserRepository) Create(ctx context.Context, name, email string) (*User,
 	return r.GetByID(ctx, int(id))
 }
 
-// Main function (integration test uses same code)
 func main() {
 	db, err := sql.Open("sqlite", ":memory:")
 	if err != nil {
@@ -137,7 +134,7 @@ func main() {
 }
 ```
 
-Integration test file (`main_test.go` without build tag — tests that also work as unit tests, and a separate `integration_test.go` with build tag):
+Integration test file — in this lesson the tagged tests live in `main_test.go` itself, with the build constraint on the first line (a build tag must appear **before** the `package` clause to take effect). Without `-tags=integration`, `go test` reports no tests for the package:
 
 ```go
 // integration_test.go

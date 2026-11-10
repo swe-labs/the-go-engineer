@@ -85,9 +85,49 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strings"
 
 	_ "modernc.org/sqlite"
 )
+
+func CreateTable(db *sql.DB) error {
+	_, err := db.Exec(`CREATE TABLE IF NOT EXISTS orders (
+		id INTEGER PRIMARY KEY,
+		customer TEXT NOT NULL,
+		amount INTEGER NOT NULL,
+		status TEXT NOT NULL DEFAULT 'pending'
+	)`)
+	return err
+}
+
+func InsertOrder(db *sql.DB, customer string, amount int) (int64, error) {
+	res, err := db.Exec(`INSERT INTO orders (customer, amount) VALUES (?, ?)`, customer, amount)
+	if err != nil {
+		return 0, err
+	}
+	return res.LastInsertId()
+}
+
+func InsertOrdersBatch(db *sql.DB, orders []struct {
+	Customer string
+	Amount   int
+}) (int64, error) {
+	if len(orders) == 0 {
+		return 0, nil
+	}
+	placeholders := make([]string, len(orders))
+	args := make([]interface{}, 0, len(orders)*2)
+	for i, o := range orders {
+		placeholders[i] = "(?, ?)"
+		args = append(args, o.Customer, o.Amount)
+	}
+	query := fmt.Sprintf("INSERT INTO orders (customer, amount) VALUES %s", strings.Join(placeholders, ", "))
+	res, err := db.Exec(query, args...)
+	if err != nil {
+		return 0, err
+	}
+	return res.RowsAffected()
+}
 
 func main() {
 	db, err := sql.Open("sqlite", ":memory:")
@@ -96,60 +136,66 @@ func main() {
 	}
 	defer db.Close()
 
-	db.Exec(`CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL UNIQUE)`)
+	if err := CreateTable(db); err != nil {
+		log.Fatal(err)
+	}
 
-	// 1. Single insert with LastInsertId
-	res, err := db.Exec(`INSERT INTO users (name, email) VALUES (?, ?)`, "Alice", "alice@example.com")
+	res, err := db.Exec(`INSERT INTO orders (customer, amount) VALUES (?, ?)`, "Alice", 100)
 	if err != nil {
 		log.Fatal(err)
 	}
 	aliceID, _ := res.LastInsertId()
-	fmt.Printf("Alice inserted with id=%d\n", aliceID)
+	fmt.Printf("Alice order inserted with id=%d\n", aliceID)
 
-	// 2. Prepared statement for repeated inserts
-	stmt, err := db.Prepare(`INSERT INTO users (name, email) VALUES (?, ?)`)
+	stmt, err := db.Prepare(`INSERT INTO orders (customer, amount) VALUES (?, ?)`)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer stmt.Close()
 
-	extraUsers := []struct{ name, email string }{
-		{"Bob", "bob@example.com"},
-		{"Carol", "carol@example.com"},
+	extraOrders := []struct {
+		customer string
+		amount   int
+	}{
+		{"Bob", 200},
+		{"Carol", 300},
 	}
-	for _, u := range extraUsers {
-		res, err := stmt.Exec(u.name, u.email)
+	for _, o := range extraOrders {
+		res, err := stmt.Exec(o.customer, o.amount)
 		if err != nil {
 			log.Fatal(err)
 		}
 		id, _ := res.LastInsertId()
-		fmt.Printf("%s inserted with id=%d\n", u.name, id)
+		fmt.Printf("%s order inserted with id=%d\n", o.customer, id)
 	}
 
-	// 3. Multi-value INSERT
-	res, err = db.Exec(
-		`INSERT INTO users (name, email) VALUES (?, ?), (?, ?)`,
-		"Dave", "dave@example.com", "Eve", "eve@example.com",
-	)
+	batchOrders := []struct {
+		Customer string
+		Amount   int
+	}{
+		{"Dave", 400},
+		{"Eve", 500},
+	}
+	count, err := InsertOrdersBatch(db, batchOrders)
 	if err != nil {
 		log.Fatal(err)
 	}
-	count, _ := res.RowsAffected()
-	fmt.Printf("Batch inserted %d users\n", count)
+	fmt.Printf("Batch inserted %d orders\n", count)
 
-	// Verify all users
-	rows, err := db.Query(`SELECT id, name, email FROM users ORDER BY id`)
+	rows, err := db.Query(`SELECT id, customer, amount, status FROM orders ORDER BY id`)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer rows.Close()
+	fmt.Println("All orders:")
 	for rows.Next() {
 		var id int
-		var name, email string
-		if err := rows.Scan(&id, &name, &email); err != nil {
+		var customer, status string
+		var amount int
+		if err := rows.Scan(&id, &customer, &amount, &status); err != nil {
 			log.Fatal(err)
 		}
-		fmt.Printf("  %d: %s <%s>\n", id, name, email)
+		fmt.Printf("  %d: %s ($%d) [%s]\n", id, customer, amount, status)
 	}
 }
 ```
@@ -166,7 +212,7 @@ func main() {
 ## Common mistakes
 
 - **Ignoring the error from `db.Exec`**: An INSERT can fail due to constraints, unique violations, or type mismatches. Always check the error.
-- **Using `LastInsertId` with non-SEQUENCE tables**: In PostgreSQL with `lib/pq`, `LastInsertId` is not supported (use `RETURNING id` with `QueryRow` instead). SQLite supports it for `INTEGER PRIMARY KEY`.
+- **Using `LastInsertId` where it is unsupported**: PostgreSQL has no "last insert id" primitive — with `lib/pq` the call errors (see lesson 04). Use `RETURNING id` with `QueryRow` for PostgreSQL, and `INTEGER PRIMARY KEY` tables in SQLite.
 - **Not closing prepared statements**: `db.Prepare` returns a `*sql.Stmt` that must be closed with `stmt.Close()` to free database resources.
 - **Assuming `RowsAffected` always returns the number of rows**: Some drivers return 0 for statements that don't produce a row count.
 
@@ -183,9 +229,9 @@ for _, u := range users {
 }
 ```
 
-**Symptom**: LastInsertId returns 0 after first insert.
+**Symptom**: LastInsertId returns 0 (or errors) although the INSERT succeeded.
 
-**Root cause**: Some drivers reset the last insert ID after each `Exec` if the table changes. But more commonly: the driver doesn't support `LastInsertId`, or the table uses a non-integer primary key.
+**Root cause**: `LastInsertId` is driver- and table-dependent. PostgreSQL drivers have no last-insert-id primitive to query — `lib/pq` returns an error. In SQLite, the value is the last inserted rowid on that connection: `WITHOUT ROWID` tables have no rowid, so they report 0, and a `TEXT`/UUID primary-key table reports its *hidden internal rowid* — not the text key you inserted.
 
 **Fix**: For PostgreSQL with `pgx`, use `RETURNING id`:
 
@@ -203,8 +249,8 @@ db.QueryRow(`INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id`, u.Na
 
 ## Performance implications
 
-- Prepared statements: 20-50% faster for repeated inserts because SQL parsing and planning are done once.
-- Transaction-wrapped batch inserts: 10-100x faster than individual inserts because each transaction flush is expensive.
+- Prepared statements: faster for repeated inserts because SQL parsing and planning happen once — the gain grows with statement complexity.
+- Transaction-wrapped batch inserts: one to two orders of magnitude faster than individual auto-commit inserts, because each transaction flush is expensive (SQLite's own documentation measures this gap on bulk loads).
 - Multi-value INSERT (single statement, multiple values): fastest for known-in-advance data, but limited by SQL statement length.
 - In SQLite, `INSERT` within a transaction is dramatically faster because each INSERT normally triggers a WAL flush. Always batch in a transaction for bulk loads.
 

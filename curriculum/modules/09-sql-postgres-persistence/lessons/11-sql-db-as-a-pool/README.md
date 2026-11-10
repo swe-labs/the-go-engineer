@@ -71,7 +71,7 @@ When `db.Exec` is called:
 4. When a connection is released, return it to `free` (if `free < maxIdle`) or close it.
 5. If `wait` has queued requests, wake the first one.
 
-`SetConnMaxLifetime` works via a timer: when a connection is created, a goroutine waits for `maxLifetime`, then marks the connection as expired. The connection is closed when returned to the pool.
+`SetConnMaxLifetime` works by lazy age checks: the pool records each connection's creation time, and whenever a connection is borrowed or returned it compares that age against `maxLifetime`, closing expired connections instead of reusing them. There is no per-connection timer goroutine — expiry is enforced on borrow/return.
 
 ## How Go uses it
 
@@ -99,6 +99,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"sync"
 	"time"
 
 	_ "modernc.org/sqlite"
@@ -109,6 +110,14 @@ func configurePool(db *sql.DB) {
 	db.SetMaxIdleConns(3)
 	db.SetConnMaxLifetime(30 * time.Second)
 	db.SetConnMaxIdleTime(10 * time.Second)
+}
+
+func MonitorPool(db *sql.DB) *sql.DBStats {
+	stats := db.Stats()
+	if stats.WaitCount > 100 {
+		log.Printf("WARNING: pool contention — %d waits", stats.WaitCount)
+	}
+	return &stats
 }
 
 func main() {
@@ -122,20 +131,23 @@ func main() {
 
 	db.Exec(`CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY, ts TEXT, msg TEXT)`)
 
-	// Simulate concurrent work
+	var wg sync.WaitGroup
 	for i := 0; i < 5; i++ {
+		wg.Add(1)
 		go func(n int) {
-			_, err := db.Exec(`INSERT INTO events (ts, msg) VALUES (datetime('now'), ?)`,
-				fmt.Sprintf("event %d", n))
-			if err != nil {
-				log.Printf("insert error: %v", err)
+			defer wg.Done()
+			for j := 0; j < 5; j++ {
+				_, err := db.Exec(`INSERT INTO events (ts, msg) VALUES (datetime('now'), ?)`,
+					fmt.Sprintf("event %d-%d", n, j))
+				if err != nil {
+					log.Printf("insert error: %v", err)
+				}
 			}
 		}(i)
 	}
+	wg.Wait()
 
-	time.Sleep(100 * time.Millisecond)
-
-	stats := db.Stats()
+	stats := MonitorPool(db)
 	fmt.Printf("Pool stats:\n")
 	fmt.Printf("  MaxOpen:     %d\n", stats.MaxOpenConnections)
 	fmt.Printf("  Open:        %d\n", stats.OpenConnections)
@@ -152,7 +164,7 @@ func main() {
 
 ## Step-by-step execution
 
-1. `configurePool` sets the pool limits. For this in-memory SQLite, the limits are not binding (SQLite handles everything in-process), but they demonstrate the configuration pattern.
+1. `configurePool` sets the pool limits. The main opens a shared-cache in-memory database (`file::memory:?cache=shared`) so all pooled connections see the same tables — a bare `:memory:` would give each connection a separate private database. With everything in-process the limits are not binding, but they demonstrate the configuration pattern.
 2. Five goroutines each insert an event concurrently. The pool manages the five concurrent requests, handing out connections from the pool.
 3. `db.Stats()` returns current pool statistics: how many connections are open, in use, idle, and how many goroutines are waiting.
 4. The program prints the pool stats and the total event count.
@@ -167,7 +179,7 @@ func main() {
 ## Debugging walkthrough
 
 ```go
-db, _ := sql.Open("postgres", dsn)
+db, _ := sql.Open("pgx", dsn)
 // No pool configuration
 
 for i := 0; i < 1000; i++ {
@@ -215,7 +227,7 @@ Write a function `MonitorPool(db *sql.DB) *sql.DBStats` that:
 Then write a `main()` that:
 1. Opens an in-memory SQLite database.
 2. Configures the pool: MaxOpenConns=5, MaxIdleConns=2, ConnMaxLifetime=10s.
-3. Launches 10 goroutines that each do 10 INSERTs.
+3. Launches 5 goroutines that each do 5 INSERTs.
 4. Calls `MonitorPool` periodically.
 5. Reports the final stats.
 

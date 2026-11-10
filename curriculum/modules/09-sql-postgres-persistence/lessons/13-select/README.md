@@ -45,10 +45,10 @@ Variations:
 When `db.Query` is called:
 
 1. A connection is acquired from the pool.
-2. The SQL is sent to the database. The database opens a **portal** (a server-side cursor) for the result set.
-3. As `rows.Next()` is called, the driver fetches rows from the portal, typically in batches (default 1 row per fetch for SQLite, configurable for PostgreSQL).
-4. When `rows.Close()` is called (explicitly or via `defer`), the portal is closed and the connection returns to the pool.
-5. If `rows.Next()` returns `false` and all rows have been consumed, the portal is automatically closed and the connection is released — but it is safer to always call `rows.Close()`.
+2. The SQL is sent to the database. PostgreSQL opens a **portal** (a server-side cursor) for the result set; SQLite steps through a client-side statement cursor.
+3. As `rows.Next()` is called, the driver fetches rows — from the portal over the wire for PostgreSQL, or one statement step at a time for SQLite.
+4. When `rows.Close()` is called (explicitly or via `defer`), the cursor is closed and the connection returns to the pool.
+5. If `rows.Next()` returns `false` and all rows have been consumed, the cursor is automatically closed and the connection is released — but it is safer to always call `rows.Close()`.
 
 ## How Go uses it
 
@@ -98,6 +98,53 @@ type Product struct {
 	Name  string
 	Price float64
 	Stock int
+}
+
+func SearchProducts(db *sql.DB, minPrice, maxPrice float64) ([]Product, error) {
+	rows, err := db.Query(`SELECT id, name, price, stock FROM products WHERE price >= ? AND price <= ? ORDER BY price`, minPrice, maxPrice)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var products []Product
+	for rows.Next() {
+		var p Product
+		if err := rows.Scan(&p.ID, &p.Name, &p.Price, &p.Stock); err != nil {
+			return nil, err
+		}
+		products = append(products, p)
+	}
+	return products, rows.Err()
+}
+
+func queryAllProducts(db *sql.DB) ([]Product, error) {
+	rows, err := db.Query(`SELECT id, name, price, stock FROM products ORDER BY id`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var products []Product
+	for rows.Next() {
+		var p Product
+		if err := rows.Scan(&p.ID, &p.Name, &p.Price, &p.Stock); err != nil {
+			return nil, err
+		}
+		products = append(products, p)
+	}
+	return products, rows.Err()
+}
+
+func queryProductByID(db *sql.DB, id int) (*Product, error) {
+	var p Product
+	err := db.QueryRow(`SELECT id, name, price, stock FROM products WHERE id = ?`, id).Scan(
+		&p.ID, &p.Name, &p.Price, &p.Stock,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &p, nil
 }
 
 func main() {
@@ -155,35 +202,16 @@ func main() {
 	if err := rows.Err(); err != nil {
 		log.Fatal(err)
 	}
-}
 
-func queryAllProducts(db *sql.DB) ([]Product, error) {
-	rows, err := db.Query(`SELECT id, name, price, stock FROM products ORDER BY id`)
+	fmt.Println("\n=== Search: products $10-$30 ===")
+	results, err := SearchProducts(db, 10.00, 30.00)
 	if err != nil {
-		return nil, err
+		log.Fatal(err)
 	}
-	defer rows.Close()
-
-	var products []Product
-	for rows.Next() {
-		var p Product
-		if err := rows.Scan(&p.ID, &p.Name, &p.Price, &p.Stock); err != nil {
-			return nil, err
-		}
-		products = append(products, p)
+	fmt.Printf("Found %d product(s):\n", len(results))
+	for _, p := range results {
+		fmt.Printf("  %s ($%.2f)\n", p.Name, p.Price)
 	}
-	return products, rows.Err()
-}
-
-func queryProductByID(db *sql.DB, id int) (*Product, error) {
-	var p Product
-	err := db.QueryRow(`SELECT id, name, price, stock FROM products WHERE id = ?`, id).Scan(
-		&p.ID, &p.Name, &p.Price, &p.Stock,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return &p, nil
 }
 ```
 
@@ -199,8 +227,8 @@ func queryProductByID(db *sql.DB, id int) (*Product, error) {
 
 - **Not checking `rows.Err()`**: After the `for rows.Next()` loop, there may be an iteration error (network issue, context cancellation). Always check `rows.Err()`.
 - **Using `db.Query` when `db.QueryRow` suffices**: `db.Query` allocates a `*sql.Rows` that must be closed. For a single row, use `db.QueryRow`.
-- **Scanning before `rows.Next()`**: Calling `rows.Scan` without first calling `rows.Next()` scans garbage data (or panics with nil pointer). Always check `rows.Next()` first, or use `QueryRow`.
-- **Reusing Scan destinations**: If you scan into the same variable in a loop, all appended rows share the last value. Create new variables or dereference pointers in each iteration.
+- **Scanning before `rows.Next()`**: Calling `rows.Scan` before any `rows.Next()` returns the error `sql: Scan called without calling Next()` — no garbage, just a clean failure. Always call `rows.Next()` first, or use `QueryRow`.
+- **Appending pointers to a loop variable**: If you scan into `var p Product` and append `&p`, every appended element aliases the same struct and ends up holding the last row's values. Append the value (`products = append(products, p)`), or declare a new variable per iteration.
 
 ## Debugging walkthrough
 
@@ -222,7 +250,7 @@ for rows.Next() {
 }
 ```
 
-**Symptom**: Scan error: `sql: expected 3 destination arguments in Scan, not 2`.
+**Symptom**: Scan error: `sql: expected 2 destination arguments in Scan, not 3` (the message reports the SELECT's column count first, then the destination count).
 
 **Root cause**: The SELECT list has 2 columns (`id, name`) but `Scan` expects 3 (`&p.ID, &p.Name, &p.Price`). The number of Scan arguments must match the number of SELECT columns.
 
@@ -238,7 +266,7 @@ for rows.Next() {
 ## Performance implications
 
 - `rows.Next()` fetches one row at a time from the database by default (for SQLite). For large result sets, this minimizes memory but adds per-row network overhead.
-- For PostgreSQL, the driver can be configured with `PreferSimpleProtocol` to use the simple query protocol (text-based) or the extended protocol (binary, faster).
+- For PostgreSQL, pgx v5's `QueryExecMode` selects between the simple query protocol (text-based, one round trip) and the extended protocol (prepared, binary-encoded, faster for hot paths).
 - `SELECT *` fetches all columns over the network, even unused ones. Be selective.
 - Filter as much as possible in SQL (`WHERE`, `LIMIT`) rather than in Go. Databases are optimized for filtering.
 
@@ -249,7 +277,7 @@ Write a function `SearchProducts(db *sql.DB, minPrice, maxPrice float64) ([]Prod
 2. Returns the matching products ordered by price ascending.
 3. Uses `db.Query` with parameters.
 
-Then write a `main()` that: inserts 5 products and searches for products in the $10–$30 range.
+Then write a `main()` that: inserts 3 products and searches for products in the $10–$30 range.
 
 ## Tests / verification
 

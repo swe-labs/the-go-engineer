@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strings"
 
 	_ "modernc.org/sqlite"
 )
@@ -102,7 +103,7 @@ func PartialUpdateProduct(db *sql.DB, id int, p PartialUpdate) (int64, error) {
 		return 0, fmt.Errorf("no fields to update")
 	}
 
-	query += join(updates, ", ") + " WHERE id = ?"
+	query += strings.Join(updates, ", ") + " WHERE id = ?"
 	args = append(args, id)
 
 	result, err := db.Exec(query, args...)
@@ -110,17 +111,6 @@ func PartialUpdateProduct(db *sql.DB, id int, p PartialUpdate) (int64, error) {
 		return 0, err
 	}
 	return result.RowsAffected()
-}
-
-func join(items []string, sep string) string {
-	result := ""
-	for i, s := range items {
-		if i > 0 {
-			result += sep
-		}
-		result += s
-	}
-	return result
 }
 
 func ptr[T any](v T) *T { return &v }

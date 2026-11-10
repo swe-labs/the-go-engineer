@@ -17,7 +17,7 @@ import (
 	"syscall"
 	"time"
 
-	_ "github.com/lib/pq"
+	_ "github.com/swe-labs/the-go-engineer/curriculum/modules/09-sql-postgres-persistence/projects/task-api-with-postgres/pgdriver"
 	_ "modernc.org/sqlite"
 )
 
@@ -88,9 +88,9 @@ func GenerateID() string {
 	return hex.EncodeToString(b)
 }
 
-// Rebind translates standard '?' placeholders to PostgreSQL '$1, $2' if driver is postgres.
+// Rebind translates standard '?' placeholders to PostgreSQL '$1, $2' if driver is pgx.
 func Rebind(query string, driver string) string {
-	if driver != "postgres" {
+	if driver != "pgx" {
 		return query
 	}
 	var sb strings.Builder
@@ -107,13 +107,19 @@ func Rebind(query string, driver string) string {
 }
 
 func ConfigurePool(db *sql.DB) {
-	// TODO: Configure connection pool limits (MaxOpenConns, MaxIdleConns, ConnMaxLifetime)
+	// Provided: pool limits are pre-tuned (25 open / 10 idle / 15m lifetime).
+	// Your task is to verify these values and explain the trade-offs.
 	db.SetMaxOpenConns(25)
 	db.SetMaxIdleConns(10)
 	db.SetConnMaxLifetime(15 * time.Minute)
 }
 
-func RunMigrations(ctx context.Context, db *sql.DB) error {
+// RunMigrations applies the DDL idempotently. For PostgreSQL databases
+// created before the task_audit_logs foreign key existed, an upgrade step
+// adds the constraint when it is missing (CREATE TABLE IF NOT EXISTS alone
+// would skip it). SQLite has no ALTER ADD CONSTRAINT and rebuilds are out of
+// scope for this exercise: fresh SQLite databases get the FK from the DDL.
+func RunMigrations(ctx context.Context, db *sql.DB, driver string) error {
 	schema := `
 	CREATE TABLE IF NOT EXISTS tasks (
 		id VARCHAR(64) PRIMARY KEY,
@@ -129,11 +135,38 @@ func RunMigrations(ctx context.Context, db *sql.DB) error {
 		task_id VARCHAR(64) NOT NULL,
 		from_status VARCHAR(32) NOT NULL,
 		to_status VARCHAR(32) NOT NULL,
-		changed_at TIMESTAMP NOT NULL
+		changed_at TIMESTAMP NOT NULL,
+		CONSTRAINT fk_task_audit_logs_task FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 	);
 	`
-	_, err := db.ExecContext(ctx, schema)
-	return err
+	if _, err := db.ExecContext(ctx, schema); err != nil {
+		return err
+	}
+
+	if driver == "pgx" {
+		const upgradeFK = `DO $$
+BEGIN
+    -- to_regclass resolves through the active search_path, so the check
+    -- targets the exact table this application uses.
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_constraint c
+        WHERE c.conname = 'fk_task_audit_logs_task'
+          AND c.conrelid = to_regclass('task_audit_logs')
+    ) THEN
+        -- One-time upgrade path: reconcile legacy rows that reference deleted
+        -- tasks (they would fail constraint validation), then add the FK.
+        DELETE FROM task_audit_logs
+        WHERE NOT EXISTS (SELECT 1 FROM tasks t WHERE t.id = task_audit_logs.task_id);
+        ALTER TABLE task_audit_logs ADD CONSTRAINT fk_task_audit_logs_task
+            FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
+    END IF;
+END $$;`
+		if _, err := db.ExecContext(ctx, upgradeFK); err != nil {
+			return fmt.Errorf("foreign key upgrade migration: %w", err)
+		}
+	}
+	return nil
 }
 
 type TaskRepository struct {
@@ -349,13 +382,15 @@ func writeJSON(w http.ResponseWriter, status int, data any) {
 
 func main() {
 	driver := "sqlite"
-	dsn := "file::memory:?cache=shared"
+	// _pragma=foreign_keys(1) enables FK enforcement on every pooled connection
+	// (the pragma is per connection - see lesson 05).
+	dsn := "file::memory:?cache=shared&_pragma=foreign_keys(1)"
 
 	if envURL := os.Getenv("DATABASE_URL"); envURL != "" {
-		driver = "postgres"
+		driver = "pgx"
 		dsn = envURL
-	} else if envDriver := os.Getenv("DB_DRIVER"); envDriver == "postgres" {
-		driver = "postgres"
+	} else if envDriver := os.Getenv("DB_DRIVER"); envDriver == "pgx" {
+		driver = "pgx"
 		dsn = "postgres://postgres:postgrespassword@localhost:5432/taskdb?sslmode=disable"
 	}
 
@@ -376,7 +411,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err := RunMigrations(ctx, db); err != nil {
+	if err := RunMigrations(ctx, db, driver); err != nil {
 		slog.Error("migration failed", "error", err)
 		os.Exit(1)
 	}

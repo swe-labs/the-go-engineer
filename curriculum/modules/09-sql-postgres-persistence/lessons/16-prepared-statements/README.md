@@ -83,6 +83,12 @@ import (
 	_ "modernc.org/sqlite"
 )
 
+type Product struct {
+	ID    int
+	Name  string
+	Price float64
+}
+
 func main() {
 	db, err := sql.Open("sqlite", ":memory:")
 	if err != nil {
@@ -90,43 +96,56 @@ func main() {
 	}
 	defer db.Close()
 
-	_, err = db.Exec(`CREATE TABLE users (
+	_, err = db.Exec(`CREATE TABLE products (
 		id INTEGER PRIMARY KEY,
 		name TEXT NOT NULL,
-		email TEXT NOT NULL UNIQUE
+		price REAL NOT NULL
 	)`)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	users := []struct {
-		name  string
-		email string
-	}{
-		{"Alice", "alice@example.com"},
-		{"Bob", "bob@example.com"},
-		{"Charlie", "charlie@example.com"},
+	products := []Product{
+		{Name: "Widget", Price: 9.99},
+		{Name: "Gadget", Price: 24.99},
+		{Name: "Doohickey", Price: 49.99},
+		{Name: "Thingamajig", Price: 14.99},
+		{Name: "Whatsit", Price: 3.99},
 	}
 
-	stmt, err := db.Prepare("INSERT INTO users (name, email) VALUES (?, ?)")
+	if err := BatchInsertProducts(db, products); err != nil {
+		log.Fatal(err)
+	}
+
+	rows, err := db.Query("SELECT id, name, price FROM products ORDER BY id")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer stmt.Close()
+	defer rows.Close()
 
-	for _, u := range users {
-		result, err := stmt.Exec(u.name, u.email)
-		if err != nil {
+	fmt.Println("Inserted products:")
+	for rows.Next() {
+		var p Product
+		if err := rows.Scan(&p.ID, &p.Name, &p.Price); err != nil {
 			log.Fatal(err)
 		}
-		id, _ := result.LastInsertId()
-		fmt.Printf("Inserted user %d: %s <%s>\n", id, u.name, u.email)
+		fmt.Printf("  %d: %s ($%.2f)\n", p.ID, p.Name, p.Price)
 	}
+}
 
-	row := db.QueryRow("SELECT COUNT(*) FROM users")
-	var count int
-	row.Scan(&count)
-	fmt.Printf("Total users: %d\n", count)
+func BatchInsertProducts(db *sql.DB, products []Product) error {
+	stmt, err := db.Prepare("INSERT INTO products (name, price) VALUES (?, ?)")
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	for _, p := range products {
+		if _, err := stmt.Exec(p.Name, p.Price); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 ```
 
@@ -204,17 +223,17 @@ This reduces round-trips to 1 prepare + N executes = N+1. For bulk operations, c
 
 ## Production notes
 
-- **Statement pooling**: `database/sql` internally caches prepared statements per connection. Calling `Prepare` multiple times with the same SQL reuses the cached statement on that connection.
+- **Statement lifecycle**: `database/sql` does not deduplicate `db.Prepare` calls — two `Prepare` calls with the same SQL create two independent `*sql.Stmt` handles. A `Stmt` is prepared on a specific pooled connection the first time it is used (and on other pool connections if shared later via `tx.Stmt`). pgx, when used directly, can cache statements by SQL text.
 - **Connection pinning**: After `Prepare`, subsequent `Exec`/`Query` calls must use the same connection. This can reduce connection pool utilization under high concurrency.
 - **PostgreSQL specifics**: Use `$1, $2` instead of `?` for parameter markers. The `database/sql` interface abstracts this via `db.Rebind()` in some drivers.
-- **Monitoring**: Track `stmt.Prepare` count and `stmt.Close` in production to detect leaks.
+- **Monitoring**: Track prepare and close counts in production metrics to detect statement leaks.
 
 ## Performance implications
 
 - Prepared statements eliminate SQL parsing overhead on repeated executions.
 - Parameter binding sends values in binary format (more efficient than text encoding in SQL strings).
 - For one-off queries, `db.Exec` with inline SQL is fine. For hot-path queries, prepare and cache.
-- The `database/sql` connection pool's prepared statement cache may grow unbounded if you prepare many distinct SQL strings. Use `db.Stats()` to monitor.
+- Statement handles that are never `Close`d accumulate on their pooled connections. If you `Prepare` many distinct SQL strings, track their lifecycle explicitly.
 
 ## Practice task
 

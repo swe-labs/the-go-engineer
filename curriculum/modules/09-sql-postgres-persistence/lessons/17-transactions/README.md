@@ -114,33 +114,49 @@ func main() {
 	fmt.Printf("Alice: $%.2f, Bob: $%.2f\n", aliceBalance, bobBalance)
 }
 
-func Transfer(db *sql.DB, fromID, toID int, amount float64) error {
+func Transfer(db *sql.DB, fromID, toID int, amount float64) (err error) {
 	tx, err := db.Begin()
 	if err != nil {
 		return err
 	}
+	defer func() {
+		if err != nil {
+			tx.Rollback()
+		}
+	}()
 
 	var fromBalance float64
 	err = tx.QueryRow("SELECT balance FROM accounts WHERE id = ?", fromID).Scan(&fromBalance)
 	if err != nil {
-		tx.Rollback()
 		return fmt.Errorf("read from account: %w", err)
 	}
+	if amount <= 0 {
+		err = fmt.Errorf("transfer amount must be positive: %.2f", amount)
+		return err
+	}
 	if fromBalance < amount {
-		tx.Rollback()
-		return fmt.Errorf("insufficient funds: %.2f < %.2f", fromBalance, amount)
+		err = fmt.Errorf("insufficient funds: %.2f < %.2f", fromBalance, amount)
+		return err
 	}
 
 	_, err = tx.Exec("UPDATE accounts SET balance = balance - ? WHERE id = ?", amount, fromID)
 	if err != nil {
-		tx.Rollback()
-		return fmt.Errorf("debit from account %d: %w", fromID, err)
+		return fmt.Errorf("debit: %w", err)
+	}
+
+	var toExists int
+	err = tx.QueryRow("SELECT COUNT(*) FROM accounts WHERE id = ?", toID).Scan(&toExists)
+	if err != nil {
+		return fmt.Errorf("check target account: %w", err)
+	}
+	if toExists == 0 {
+		err = fmt.Errorf("target account %d does not exist", toID)
+		return err
 	}
 
 	_, err = tx.Exec("UPDATE accounts SET balance = balance + ? WHERE id = ?", amount, toID)
 	if err != nil {
-		tx.Rollback()
-		return fmt.Errorf("credit to account %d: %w", toID, err)
+		return fmt.Errorf("credit: %w", err)
 	}
 
 	return tx.Commit()
@@ -152,13 +168,13 @@ func Transfer(db *sql.DB, fromID, toID int, amount float64) error {
 For `Transfer(db, 1, 2, 200.00)`:
 
 1. `db.Begin()` sends `BEGIN TRANSACTION`, pins connection C1.
-2. `tx.QueryRow("SELECT balance FROM accounts WHERE id = 1")` runs on C1. Returns 1000.00.
-3. Check passes (1000 >= 200).
-4. `tx.Exec("UPDATE accounts SET balance = balance - 200 WHERE id = 1")` runs on C1. Alice's balance is now 800.00 (visible only within the transaction).
-5. `tx.Exec("UPDATE accounts SET balance = balance + 200 WHERE id = 2")` runs on C1. Bob's balance is now 700.00 (visible only within the transaction).
-6. `tx.Commit()` sends `COMMIT`. Both changes become visible. Connection C1 returns to pool.
+2. `tx.QueryRow("SELECT balance FROM accounts WHERE id = ?", 1)` runs on C1. Returns 1000.00.
+3. Validation passes: the amount is positive and 1000 >= 200.
+4. `tx.Exec("UPDATE accounts SET balance = balance - ? WHERE id = ?", 200, 1)` runs on C1. Alice's balance is now 800.00 (visible only within the transaction).
+5. The target-existence check confirms account 2 exists, then `tx.Exec("UPDATE accounts SET balance = balance + ? WHERE id = ?", 200, 2)` runs on C1. Bob's balance is now 700.00 (visible only within the transaction).
+6. `tx.Commit()` sends `COMMIT`. Both changes become visible. The deferred rollback sees `err == nil` and does nothing; connection C1 returns to the pool.
 
-If step 4 succeeds but step 5 fails (e.g., invalid account), the rollback in step 5's error handler reverts the debit. The database is consistent.
+If step 4 or 5 fails (e.g., invalid account), the returned error makes `err` non-nil, so the deferred `tx.Rollback()` runs when the function exits — reverting the debit. The database is consistent.
 
 ## Common mistakes
 

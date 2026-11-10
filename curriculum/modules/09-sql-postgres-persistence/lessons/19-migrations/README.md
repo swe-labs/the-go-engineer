@@ -66,7 +66,7 @@ Popular Go migration tools:
 |---|---|---|
 | golang-migrate/migrate | File-based, many DB drivers | `schema_migrations` table |
 | pressly/goose | File-based, supports Go migrations | `goose_db_version` table |
-| ariga/atlas | Declarative schema comparison | state file |
+| ariga/atlas | Declarative schema comparison | `atlas_schema_revisions` table (versioned mode) |
 
 All work similarly:
 1. Read all migration files, sorted by version.
@@ -104,17 +104,24 @@ type Migration struct {
 }
 
 var migrations = []Migration{
-	{Version: 1, Up: `CREATE TABLE IF NOT EXISTS users (
-		id INTEGER PRIMARY KEY,
-		name TEXT NOT NULL,
-		email TEXT NOT NULL
-	)`, Down: "DROP TABLE IF EXISTS users"},
-	{Version: 2, Up: `ALTER TABLE users ADD COLUMN age INTEGER DEFAULT 0`,
+	{
+		Version: 1,
+		Up: `CREATE TABLE IF NOT EXISTS users (
+			id INTEGER PRIMARY KEY,
+			name TEXT NOT NULL,
+			email TEXT NOT NULL
+		)`,
+		Down: "DROP TABLE IF EXISTS users",
+	},
+	{
+		Version: 2,
+		Up:      "ALTER TABLE users ADD COLUMN age INTEGER DEFAULT 0",
 		Down: `CREATE TABLE IF NOT EXISTS users_backup AS SELECT id, name, email FROM users;
-			DROP TABLE users;
-			CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL);
-			INSERT INTO users SELECT id, name, email FROM users_backup;
-			DROP TABLE IF EXISTS users_backup;`},
+DROP TABLE users;
+CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL);
+INSERT INTO users SELECT id, name, email FROM users_backup;
+DROP TABLE IF EXISTS users_backup;`,
+	},
 }
 
 type Migrator struct {
@@ -149,7 +156,10 @@ func (m *Migrator) CurrentVersion() (int, error) {
 }
 
 func (m *Migrator) Up() error {
-	current, _ := m.CurrentVersion()
+	current, err := m.CurrentVersion()
+	if err != nil {
+		return err
+	}
 	sort.Slice(migrations, func(i, j int) bool {
 		return migrations[i].Version < migrations[j].Version
 	})
@@ -158,31 +168,134 @@ func (m *Migrator) Up() error {
 			continue
 		}
 		log.Printf("Applying migration %d...\n", mig.Version)
-		m.apply(mig)
+		if err := m.apply(mig); err != nil {
+			return fmt.Errorf("migration %d: %w", mig.Version, err)
+		}
 	}
 	return nil
 }
 
-func (m *Migrator) apply(mig Migration) error {
-	tx, _ := m.db.Begin()
-	defer tx.Rollback()
-	for _, stmt := range strings.Split(mig.Up, ";") {
+func (m *Migrator) apply(mig Migration) (err error) {
+	tx, err := m.db.Begin()
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err != nil {
+			tx.Rollback()
+		}
+	}()
+
+	statements := strings.Split(mig.Up, ";")
+	for _, stmt := range statements {
 		stmt = strings.TrimSpace(stmt)
 		if stmt == "" {
 			continue
 		}
-		tx.Exec(stmt)
+		_, err = tx.Exec(stmt)
+		if err != nil {
+			return fmt.Errorf("statement %q: %w", stmt[:clip(len(stmt), 60)], err)
+		}
 	}
-	tx.Exec("INSERT INTO schema_migrations (version) VALUES (?)", mig.Version)
+
+	_, err = tx.Exec("INSERT INTO schema_migrations (version) VALUES (?)", mig.Version)
+	if err != nil {
+		return err
+	}
+	return tx.Commit()
+}
+
+func clip(n, max int) int {
+	if n > max {
+		return max
+	}
+	return n
+}
+
+func (m *Migrator) Down() error {
+	current, err := m.CurrentVersion()
+	if err != nil {
+		return err
+	}
+	if current == 0 {
+		return nil
+	}
+	sort.Slice(migrations, func(i, j int) bool {
+		return migrations[i].Version > migrations[j].Version
+	})
+	for _, mig := range migrations {
+		if mig.Version > current {
+			continue
+		}
+		log.Printf("Reverting migration %d...\n", mig.Version)
+		if err := m.revert(mig); err != nil {
+			return fmt.Errorf("revert migration %d: %w", mig.Version, err)
+		}
+		break
+	}
+	return nil
+}
+
+func (m *Migrator) revert(mig Migration) error {
+	tx, err := m.db.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+
+	statements := strings.Split(mig.Down, ";")
+	for _, stmt := range statements {
+		stmt = strings.TrimSpace(stmt)
+		if stmt == "" {
+			continue
+		}
+		if _, err := tx.Exec(stmt); err != nil {
+			return err
+		}
+	}
+
+	if _, err := tx.Exec("DELETE FROM schema_migrations WHERE version = ?", mig.Version); err != nil {
+		return err
+	}
 	return tx.Commit()
 }
 
 func main() {
-	db, _ := sql.Open("sqlite", ":memory:")
+	db, err := sql.Open("sqlite", ":memory:")
+	if err != nil {
+		log.Fatal(err)
+	}
 	defer db.Close()
 
 	m := NewMigrator(db)
-	m.Up()
+	if err := m.Up(); err != nil {
+		log.Fatal(err)
+	}
+
+	var tableCount int
+	db.QueryRow("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='users'").Scan(&tableCount)
+	fmt.Printf("Users table exists: %v\n", tableCount == 1)
+
+	var hasAge int
+	rows, err := db.Query("PRAGMA table_info(users)")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var cid int
+		var name, ctype string
+		var notnull bool
+		var dflt sql.NullString
+		var pk int
+		if err := rows.Scan(&cid, &name, &ctype, &notnull, &dflt, &pk); err != nil {
+			log.Fatal(err)
+		}
+		if name == "age" {
+			hasAge = 1
+		}
+	}
+	fmt.Printf("Age column exists: %v\n", hasAge == 1)
 
 	version, _ := m.CurrentVersion()
 	fmt.Printf("Current migration version: %d\n", version)
@@ -194,10 +307,12 @@ func main() {
 Starting from version 0:
 1. `ensureTable()` creates `schema_migrations` if not exists.
 2. `CurrentVersion()` queries `MAX(version)` — returns 0.
-3. Sort migrations ascending.
-4. Migration 1: version > current — apply in a transaction.
-5. Migration 2: version > current — apply.
-6. Done. Current version: 2.
+3. `Up()` sorts migrations ascending.
+4. Migration 1 (version > 0): applied inside a transaction that also inserts the version row; a failed statement aborts the whole transaction and the error is wrapped with the migration number.
+5. Migration 2 (version > 1): `ALTER TABLE users ADD COLUMN age INTEGER DEFAULT 0` applied the same way.
+6. `main()` then verifies the result directly: `sqlite_master` confirms the `users` table exists, `PRAGMA table_info(users)` confirms the `age` column was added, and `CurrentVersion()` reports 2.
+
+`Down()` runs the reverse path: it finds the highest applied version, executes that migration's `Down` SQL in a transaction, and deletes its version row — leaving the schema exactly one step behind.
 
 ## Common mistakes
 
@@ -208,7 +323,11 @@ Starting from version 0:
 
 ## Debugging walkthrough
 
-Migration 3 causes "duplicate column" on production. Fix: use `IF NOT EXISTS` for additive changes.
+**Scenario**: Re-running migration 3 on production fails with "duplicate column name".
+
+**Root cause**: The migration ran twice — the version tracking table was missing a row (a hand-applied migration, a restored backup, or a parallel deploy), so the runner replayed an already-applied `ALTER TABLE ... ADD COLUMN`.
+
+**Fix**: The correct fix is making the version tracking authoritative, not papering over the SQL. `CREATE TABLE IF NOT EXISTS` works for additive table creation, but note that SQLite has **no** `ADD COLUMN IF NOT EXISTS` (verified: SQLite rejects the syntax, while PostgreSQL supports it since 9.6). For SQLite, either restore the missing version row and re-run the runner, or guard the statement by checking `PRAGMA table_info` before issuing the `ALTER TABLE`.
 
 ## Production notes
 

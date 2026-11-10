@@ -32269,7 +32269,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/01-why-databases-exist/main_test.go"
       },
       "id": "core-09-01",
-      "learning_objective": "Model relational database schemas, tables, primary keys, and relationships for Go backend applications.",
+      "learning_objective": "Explain why applications need persistent storage, contrast flat-file storage with a relational database across correctness, concurrency, and consistency dimensions, and write a Go program that uses SQLite to persist and query data.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-02"
@@ -32454,7 +32454,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/02-relational-modeling/main_test.go"
       },
       "id": "core-09-02",
-      "learning_objective": "Connect to PostgreSQL instances and configure connection pools using database/sql and pgx drivers.",
+      "learning_objective": "Design a relational schema by identifying entities, attributes, and relationships, apply normalization rules up to third normal form, and map the result to Go structs that mirror the relational model.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-03"
@@ -32646,7 +32646,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/03-tables-rows-and-columns/main_test.go"
       },
       "id": "core-09-03",
-      "learning_objective": "Tune database connection pool limits (max open, max idle, connection lifetimes) for production workloads.",
+      "learning_objective": "Write `CREATE TABLE` statements with appropriate data types and column constraints, explain how rows and columns map to Go types, and query table metadata from SQLite's internal schema.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-04"
@@ -32831,7 +32831,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/04-primary-keys/main_test.go"
       },
       "id": "core-09-04",
-      "learning_objective": "Manage database schema migrations sequentially using SQL migration scripts and migration tooling.",
+      "learning_objective": "Choose and implement primary keys in SQL tables \u2014 auto-increment integers, UUIDs, or composite keys \u2014 and write Go code that correctly inserts, retrieves, and references rows by primary key.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-05"
@@ -33023,7 +33023,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/05-foreign-keys/main_test.go"
       },
       "id": "core-09-05",
-      "learning_objective": "Execute parameter-bound SQL statements to prevent SQL injection vulnerabilities.",
+      "learning_objective": "Define foreign key constraints to enforce referential integrity, choose appropriate `ON DELETE` and `ON UPDATE` actions, and write Go code that respects and tests foreign key rules.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-06"
@@ -33208,7 +33208,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/06-constraints/main_test.go"
       },
       "id": "core-09-06",
-      "learning_objective": "Execute single-row queries using db.QueryRow() and scan columns into Go variables and structs.",
+      "learning_objective": "Apply column and table constraints (`NOT NULL`, `UNIQUE`, `CHECK`, `DEFAULT`) to enforce data quality at the database level, and contrast database constraints with Go-side validation.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-07"
@@ -33400,7 +33400,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/07-sqlite-as-a-local-learning-tool/main_test.go"
       },
       "id": "core-09-07",
-      "learning_objective": "Handle sql.ErrNoRows cleanly to return 404 Not Found responses on missing records.",
+      "learning_objective": "Use SQLite as a local, zero-configuration database for development and testing, understand its in-memory and file-backed modes, and recognize its limitations compared to PostgreSQL.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-08"
@@ -33585,7 +33585,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/08-postgresql-as-production-default/main_test.go"
       },
       "id": "core-09-08",
-      "learning_objective": "Execute multi-row queries with db.Query(), iterating over rows and closing sql.Rows to prevent connection leaks.",
+      "learning_objective": "Describe PostgreSQL's key features that make it the recommended production database, construct a connection string, and connect to PostgreSQL from Go using the `pgx` driver.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-09"
@@ -33777,7 +33777,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/09-docker-compose-for-postgres/main_test.go"
       },
       "id": "core-09-09",
-      "learning_objective": "Execute INSERT, UPDATE, and DELETE statements using db.Exec(), verifying rows affected.",
+      "learning_objective": "Write a Docker Compose file to run PostgreSQL locally, connect to it from Go, and understand how volumes, ports, and environment variables configure the database service.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-10"
@@ -33962,7 +33962,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/10-database-sql/main_test.go"
       },
       "id": "core-09-10",
-      "learning_objective": "Handle NULL database column values using sql.NullString, pointer fields, or database COALESCE functions.",
+      "learning_objective": "Use Go's `database/sql` package to open a database connection, register a driver, execute queries, and handle connection lifecycle with `sql.Open`, `sql.DB`, and `db.Ping`.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-11"
@@ -33980,7 +33980,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "The learner must write a database/sql program that handles success and error cases, test it with edge cases (empty, nil, invalid input), and explain the tradeoffs of different database/sql approaches.",
+        "practice_task": "The learner must write an InitDB(driverName, dsn string) (*sql.DB, error) function that opens a connection, pings it, applies SetMaxOpenConns(5), and returns the pool handle; then a main() that creates a logs table, inserts three entries, and queries them back.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -34156,7 +34156,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/11-sql-db-as-a-pool/main_test.go"
       },
       "id": "core-09-11",
-      "learning_objective": "Coordinate multi-statement database transactions using tx.Begin, tx.Commit, and deferred tx.Rollback.",
+      "learning_objective": "Configure a `sql.DB` connection pool with `SetMaxOpenConns`, `SetMaxIdleConns`, and `SetConnMaxLifetime`, and explain how pool settings affect application performance and reliability.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-12"
@@ -34341,7 +34341,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/12-insert/main_test.go"
       },
       "id": "core-09-12",
-      "learning_objective": "Evaluate SQL transaction isolation levels and manage concurrency anomalies (dirty reads, phantom reads).",
+      "learning_objective": "Insert rows into SQL tables using Go's `db.Exec`, retrieve the last inserted ID, use prepared statements for efficient repeated inserts, and batch insert multiple rows.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-13"
@@ -34533,7 +34533,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/13-select/main_test.go"
       },
       "id": "core-09-13",
-      "learning_objective": "Generate type-safe Go database code from pure SQL queries using sqlc.",
+      "learning_objective": "Query data from a SQL table using Go's `db.Query`, iterate over result rows with `sql.Rows`, and handle query errors gracefully.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-14"
@@ -34718,7 +34718,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/14-scanning-rows/main_test.go"
       },
       "id": "core-09-14",
-      "learning_objective": "Organize repository layer patterns decoupling domain services from direct database query execution.",
+      "learning_objective": "Use `rows.Scan` to map SQL result columns to Go variables, handle column ordering and type conversions, and debug common scanning errors.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-15"
@@ -34910,7 +34910,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/15-null-handling/main_test.go"
       },
       "id": "core-09-15",
-      "learning_objective": "Test database repository implementations using real PostgreSQL containers in integration test suites.",
+      "learning_objective": "Scan nullable database columns into Go safely using `sql.NullString`, `sql.NullInt64`, and related types, distinguish NULL from zero values, and handle JSON serialization of nullable fields.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-16"
@@ -35095,7 +35095,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/16-prepared-statements/main_test.go"
       },
       "id": "core-09-16",
-      "learning_objective": "Design B-tree and composite database indexes to optimize query performance and enforce unique constraints.",
+      "learning_objective": "Use `db.Prepare` to create prepared statements, execute them with `Exec` and `Query`, understand how they prevent SQL injection, and manage statement lifecycle with `Close`.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-17"
@@ -35289,7 +35289,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/17-transactions/main_test.go"
       },
       "id": "core-09-17",
-      "learning_objective": "Analyze SQL query execution plans using EXPLAIN and EXPLAIN ANALYZE to eliminate sequential table scans.",
+      "learning_objective": "Group multiple SQL operations into atomic transactions using `db.Begin`, `tx.Commit`, and `tx.Rollback`, and understand transaction isolation in Go's `database/sql`.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-18"
@@ -35476,7 +35476,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/18-rollback-discipline/main_test.go"
       },
       "id": "core-09-18",
-      "learning_objective": "Model and query one-to-many and many-to-many relationships using foreign keys and junction tables.",
+      "learning_objective": "Apply deferred rollback patterns, handle no-op rollback after commit, and write reusable transaction helper functions that eliminate rollback boilerplate.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-19"
@@ -35668,7 +35668,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/19-migrations/main_test.go"
       },
       "id": "core-09-19",
-      "learning_objective": "Query joined relational tables and scan multi-table result sets into domain models.",
+      "learning_objective": "Apply schema migrations in Go using versioned, idempotent migration files, understand migration tooling (golang-migrate, goose), and implement a simple migration runner with up/down semantics.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-20"
@@ -35853,7 +35853,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/20-joins/main_test.go"
       },
       "id": "core-09-20",
-      "learning_objective": "Model soft deletes using deleted_at timestamps while maintaining unique constraint integrity.",
+      "learning_objective": "Combine data from multiple tables using INNER JOIN, LEFT JOIN, and other join types, scan joined result sets in Go, and recognize the N+1 query problem.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-21"
@@ -36045,7 +36045,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/21-indexes/main_test.go"
       },
       "id": "core-09-21",
-      "learning_objective": "Implement paginated database queries using keyset (cursor-based) and offset-based pagination.",
+      "learning_objective": "Create B-tree indexes in SQLite, understand how indexes accelerate queries, design composite indexes, use `EXPLAIN QUERY PLAN` to verify index usage, and evaluate the tradeoffs of index maintenance.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-22"
@@ -36230,7 +36230,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/22-explain/main_test.go"
       },
       "id": "core-09-22",
-      "learning_objective": "Implement database health check probes (/healthz) verifying connection pool liveness and responsiveness.",
+      "learning_objective": "Read and interpret SQLite `EXPLAIN QUERY PLAN` output, distinguish sequential scans from index scans, understand cost estimation, and use query plans to optimize slow queries.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-23"
@@ -36437,7 +36437,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/23-query-timeouts-with-context/main_test.go"
       },
       "id": "core-09-23",
-      "learning_objective": "Serialize and query semi-structured JSON documents in PostgreSQL using JSONB columns.",
+      "learning_objective": "Use Go's context package with `context.WithTimeout`, `db.ExecContext`, and `db.QueryContext` to set deadlines on database operations and handle cancellation gracefully.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-24"
@@ -36624,7 +36624,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/24-repository-and-service-seam/main_test.go"
       },
       "id": "core-09-24",
-      "learning_objective": "Execute database disaster recovery drills: dump schemas/data, drop databases, restore, and verify integrity.",
+      "learning_objective": "Abstract database access behind repository interfaces, implement a service layer that depends on interfaces, and test business logic with fake repositories using dependency injection.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-25"
@@ -36816,7 +36816,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/25-integration-tests/main_test.go"
       },
       "id": "core-09-25",
-      "learning_objective": "Implement optimistic locking using record version columns to prevent lost updates during concurrent edits.",
+      "learning_objective": "Write integration tests that exercise real database operations with in-memory SQLite, implement proper setup/teardown, use build tags to separate unit from integration tests, and structure test helpers for maintainable database testing.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-26"
@@ -37003,7 +37003,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/26-sqlc/main_test.go"
       },
       "id": "core-09-26",
-      "learning_objective": "Prevent connection leaks by strictly closing sql.Rows, prepared statements, and rolled-back transactions.",
+      "learning_objective": "Generate type-safe Go code from SQL queries using sqlc, understand the SQL-first approach, and write queries that produce idiomatic Go code with proper error handling.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-27"
@@ -37151,7 +37151,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/27-update-operations/main_test.go"
       },
       "id": "core-09-27",
-      "learning_objective": "Understand and apply UPDATE operations using sqlc-generated code in Go.",
+      "learning_objective": "Update existing rows in SQLite from Go using `UPDATE SET`, `db.Exec`, and prepared statements, implement optimistic locking with version numbers, manage `updated_at` timestamps, and handle partial updates.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-09-28"
@@ -37169,7 +37169,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "The learner must implement an HTTP PATCH handler that updates a subset of resource fields using sqlc-generated UPDATE code, includes optimistic locking with a version field, and returns the updated row.",
+        "practice_task": "The learner must write an UpdateProductStock(db, id, newStock, expectedVersion) function that implements optimistic locking with a version column, returns success/conflict, and test it with concurrent goroutines simulating conflicting updates.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
@@ -37298,7 +37298,7 @@
         "test_path": "modules/09-sql-postgres-persistence/lessons/28-delete-operations/main_test.go"
       },
       "id": "core-09-28",
-      "learning_objective": "Understand and apply DELETE operations using sqlc-generated code in Go.",
+      "learning_objective": "Remove rows from SQLite databases from Go using hard delete, soft delete with `deleted_at`, CASCADE DELETE via foreign keys, and batch delete strategies with `IN` clauses.",
       "module_id": "module-09",
       "next_item_ids": [
         "core-10-01"
@@ -37316,7 +37316,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "The learner must implement a soft-delete endpoint that sets a deleted_at timestamp instead of removing the row, add a recovery endpoint that clears the deleted_at flag, and demonstrate that queries filter out soft-deleted rows by default.",
+        "practice_task": "The learner must write a SafeDeleteUser(db, userID) function that, inside one transaction, soft-deletes the user, hard-deletes orders older than 30 days, transfers remaining orders to a ghost user, and commits or rolls back atomically.",
         "project_id": "project-task-api-postgres",
         "rubric_ids": [
           "rubric-module-09"
