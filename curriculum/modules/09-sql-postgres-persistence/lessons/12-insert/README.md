@@ -212,7 +212,7 @@ func main() {
 ## Common mistakes
 
 - **Ignoring the error from `db.Exec`**: An INSERT can fail due to constraints, unique violations, or type mismatches. Always check the error.
-- **Using `LastInsertId` where it is unsupported**: PostgreSQL has no "last insert id" primitive — with `lib/pq` the call errors, and `WITHOUT ROWID` SQLite tables (or inserts into UUID-keyed tables) report 0 (see lesson 04). Use `RETURNING id` with `QueryRow` for PostgreSQL, and `INTEGER PRIMARY KEY` tables in SQLite.
+- **Using `LastInsertId` where it is unsupported**: PostgreSQL has no "last insert id" primitive — with `lib/pq` the call errors (see lesson 04). Use `RETURNING id` with `QueryRow` for PostgreSQL, and `INTEGER PRIMARY KEY` tables in SQLite.
 - **Not closing prepared statements**: `db.Prepare` returns a `*sql.Stmt` that must be closed with `stmt.Close()` to free database resources.
 - **Assuming `RowsAffected` always returns the number of rows**: Some drivers return 0 for statements that don't produce a row count.
 
@@ -231,7 +231,7 @@ for _, u := range users {
 
 **Symptom**: LastInsertId returns 0 (or errors) although the INSERT succeeded.
 
-**Root cause**: `LastInsertId` is driver- and table-dependent. PostgreSQL drivers have no last-insert-id primitive to query — `lib/pq` returns an error. In SQLite, the value exists only for rowid tables: `WITHOUT ROWID` tables report 0, and a `TEXT`/UUID primary key has no auto-increment id to report at all.
+**Root cause**: `LastInsertId` is driver- and table-dependent. PostgreSQL drivers have no last-insert-id primitive to query — `lib/pq` returns an error. In SQLite, the value is the last inserted rowid on that connection: `WITHOUT ROWID` tables have no rowid, so they report 0, and a `TEXT`/UUID primary-key table reports its *hidden internal rowid* — not the text key you inserted.
 
 **Fix**: For PostgreSQL with `pgx`, use `RETURNING id`:
 
