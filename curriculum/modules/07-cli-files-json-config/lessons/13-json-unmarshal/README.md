@@ -63,41 +63,48 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"time"
 )
 
 type Event struct {
-	ID        int       `json:"id"`
-	Name      string    `json:"name"`
-	Timestamp time.Time `json:"timestamp"`
-	Tags      []string  `json:"tags,omitempty"`
-	Metadata  json.RawMessage `json:"metadata,omitempty"`
+	ID        int             `json:"id"`
+	Title     string          `json:"title"`
+	Timestamp string          `json:"timestamp"`
+	Payload   json.RawMessage `json:"payload,omitempty"`
+}
+
+func UnmarshalEvent(data []byte) (Event, error) {
+	var e Event
+	if err := json.Unmarshal(data, &e); err != nil {
+		return Event{}, err
+	}
+	return e, nil
 }
 
 func main() {
-	input := `{
-		"id": 42,
-		"name": "deploy",
+	valid := []byte(`{
+		"id": 1,
+		"title": "deploy",
 		"timestamp": "2025-06-01T10:00:00Z",
-		"tags": ["prod", "us-east"],
-		"metadata": {"env": "production", "version": "2.1"}
-	}`
-
-	var e Event
-	if err := json.Unmarshal([]byte(input), &e); err != nil {
-		fmt.Println("Error:", err)
-		return
+		"payload": {"env": "prod"}
+	}`)
+	e, err := UnmarshalEvent(valid)
+	if err != nil {
+		fmt.Println("Valid case error:", err)
+	} else {
+		fmt.Printf("Valid: ID=%d Title=%q TS=%q Payload=%s\n", e.ID, e.Title, e.Timestamp, string(e.Payload))
 	}
-	fmt.Printf("ID: %d\n", e.ID)
-	fmt.Printf("Name: %s\n", e.Name)
-	fmt.Printf("Timestamp: %s\n", e.Timestamp.Format(time.RFC3339))
-	fmt.Printf("Tags: %v\n", e.Tags)
-	fmt.Printf("Metadata (raw): %s\n", string(e.Metadata))
 
-	// json.RawMessage can be unmarshaled later
-	var meta map[string]string
-	json.Unmarshal(e.Metadata, &meta)
-	fmt.Printf("Parsed metadata: %v\n", meta)
+	wrongType := []byte(`{"id": "not-a-number", "title": "x", "timestamp": "2025-01-01T00:00:00Z"}`)
+	_, err = UnmarshalEvent(wrongType)
+	fmt.Println("Wrong type error:", err)
+
+	noTimestamp := []byte(`{"id": 2, "title": "test"}`)
+	e2, err := UnmarshalEvent(noTimestamp)
+	if err != nil {
+		fmt.Println("No timestamp error:", err)
+	} else {
+		fmt.Printf("No timestamp: ID=%d Title=%q TS=%q\n", e2.ID, e2.Title, e2.Timestamp)
+	}
 }
 ```
 

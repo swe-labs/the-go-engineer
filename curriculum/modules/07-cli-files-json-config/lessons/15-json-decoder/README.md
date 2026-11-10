@@ -61,57 +61,47 @@ When `Decode` is called, it consumes one complete JSON value (which may contain 
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
 	"strings"
 )
 
+func SumJSON(r io.Reader) (int, error) {
+	dec := json.NewDecoder(r)
+	var sum int
+	for {
+		var v int
+		err := dec.Decode(&v)
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return 0, err
+		}
+		sum += v
+	}
+	return sum, nil
+}
+
 func main() {
-	// NDJSON: multiple JSON objects, one per line
-	ndjson := `{"id":1,"name":"Alice"}
-{"id":2,"name":"Bob"}
-{"id":3,"name":"Carol"}`
-
-	dec := json.NewDecoder(strings.NewReader(ndjson))
-	type Person struct {
-		ID   int    `json:"id"`
-		Name string `json:"name"`
+	data := `42
+100
+8
+`
+	sum, err := SumJSON(strings.NewReader(data))
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Printf("Sum: %d\n", sum)
 	}
 
-	for {
-		var p Person
-		err := dec.Decode(&p)
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			fmt.Println("Decode error:", err)
-			break
-		}
-		fmt.Printf("Person: ID=%d, Name=%s\n", p.ID, p.Name)
-	}
-
-	// Token-based streaming over a JSON array
-	fmt.Println("\nToken-based array parsing:")
-	array := `["go", "rust", "zig"]`
-	dec2 := json.NewDecoder(bytes.NewReader([]byte(array)))
-	for {
-		t, err := dec2.Token()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			fmt.Println("Token error:", err)
-			break
-		}
-		if delim, ok := t.(json.Delim); ok {
-			fmt.Printf("Delimiter: %c\n", delim)
-		} else {
-			fmt.Printf("Token: %v (type: %T)\n", t, t)
-		}
-	}
+	// Error case: non-number
+	bad := `42
+not-a-number
+`
+	_, err = SumJSON(strings.NewReader(bad))
+	fmt.Println("Bad input error:", err)
 }
 ```
 

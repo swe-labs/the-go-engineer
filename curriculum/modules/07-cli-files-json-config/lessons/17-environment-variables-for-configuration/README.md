@@ -54,7 +54,6 @@ Changing environment variables with `os.Setenv` modifies the current process's b
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"strconv"
@@ -66,14 +65,12 @@ type Config struct {
 	Verbose bool
 }
 
-func LoadConfig() Config {
+func ConfigFromEnv() Config {
 	cfg := Config{
 		Port:    8080,
 		DBURL:   "postgres://localhost:5432/app?sslmode=disable",
 		Verbose: false,
 	}
-
-	// Override from environment variables
 	if v := os.Getenv("PORT"); v != "" {
 		if p, err := strconv.Atoi(v); err == nil {
 			cfg.Port = p
@@ -82,66 +79,28 @@ func LoadConfig() Config {
 	if v := os.Getenv("DATABASE_URL"); v != "" {
 		cfg.DBURL = v
 	}
-	if v, ok := os.LookupEnv("VERBOSE"); ok && v == "true" {
-		cfg.Verbose = true
-	} else if ok && v == "false" {
-		cfg.Verbose = false
+	if v, ok := os.LookupEnv("VERBOSE"); ok {
+		cfg.Verbose = v == "true"
 	}
-
 	return cfg
 }
 
-// Flag + env pattern: flag default can be overridden by env var
-func LoadConfigWithFlags() Config {
-	port := flag.Int("port", 8080, "server port")
-	dbURL := flag.String("db", "postgres://localhost:5432/app?sslmode=disable", "database URL")
-	verbose := flag.Bool("verbose", false, "enable verbose logging")
-	flag.Parse()
-
-	// Environment variables override flag defaults
-	if v := os.Getenv("PORT"); v != "" {
-		if p, err := strconv.Atoi(v); err == nil {
-			*port = p
-		}
-	}
-	if v := os.Getenv("DATABASE_URL"); v != "" {
-		*dbURL = v
-	}
-	if v := os.Getenv("VERBOSE"); v != "" {
-		*verbose = v == "true"
-	}
-
-	return Config{Port: *port, DBURL: *dbURL, Verbose: *verbose}
-}
-
 func main() {
-	// Show current env config
-	cfg := LoadConfig()
-	fmt.Printf("Port: %d\n", cfg.Port)
-	fmt.Printf("DBURL: %s\n", cfg.DBURL)
-	fmt.Printf("Verbose: %v\n", cfg.Verbose)
+	// Before setting env vars
+	cfg := ConfigFromEnv()
+	fmt.Printf("Default config: Port=%d DBURL=%s Verbose=%v\n", cfg.Port, cfg.DBURL, cfg.Verbose)
 
-	// Set an env var for this process and re-read
+	// Set env vars for demonstration
 	os.Setenv("PORT", "3000")
 	os.Setenv("DATABASE_URL", "postgres://prod:5432/db?sslmode=require")
 	os.Setenv("VERBOSE", "true")
 
-	cfg2 := LoadConfig()
-	fmt.Println("\nAfter Setenv:")
-	fmt.Printf("Port: %d\n", cfg2.Port)
-	fmt.Printf("DBURL: %s\n", cfg2.DBURL)
-	fmt.Printf("Verbose: %v\n", cfg2.Verbose)
+	cfg2 := ConfigFromEnv()
+	fmt.Printf("After setenv:  Port=%d DBURL=%s Verbose=%v\n", cfg2.Port, cfg2.DBURL, cfg2.Verbose)
 
-	// Demonstrate flag-based config (run without flags to see defaults)
-	cfg3 := LoadConfigWithFlags()
-	fmt.Println("\nFlag-based config:")
-	fmt.Printf("Port: %d\n", cfg3.Port)
-	fmt.Printf("DBURL: %s\n", cfg3.DBURL)
-	fmt.Printf("Verbose: %v\n", cfg3.Verbose)
-
-	// List all environment variables (truncated)
-	envs := os.Environ()
-	fmt.Printf("\nTotal env vars: %d\n", len(envs))
+	// LookupEnv for missing variable
+	val, ok := os.LookupEnv("MISSING_VAR")
+	fmt.Printf("LookupEnv(MISSING_VAR): val=%q ok=%v\n", val, ok)
 }
 ```
 

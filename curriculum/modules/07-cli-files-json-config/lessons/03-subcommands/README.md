@@ -76,6 +76,9 @@ import (
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: mytool <command> [flags]")
+		fmt.Println("Commands:")
+		fmt.Println("  greet  Print a greeting")
+		fmt.Println("  add    Add two numbers")
 		os.Exit(1)
 	}
 
