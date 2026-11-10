@@ -82,6 +82,7 @@ import (
 )
 
 func main() {
+	// Multi-writer: write to stdout and compute SHA-256 simultaneously
 	var buf strings.Builder
 	hash := sha256.New()
 	multi := io.MultiWriter(os.Stdout, &buf, hash)

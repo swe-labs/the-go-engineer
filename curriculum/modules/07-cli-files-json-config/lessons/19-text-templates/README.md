@@ -67,9 +67,9 @@ Pipelines evaluate left-to-right: `{{.Name | printf "%q"}}` evaluates `.Name` to
 package main
 
 import (
-	"os"
+	"bytes"
+	"fmt"
 	"text/template"
-	"time"
 )
 
 type Task struct {
@@ -78,50 +78,47 @@ type Task struct {
 	Done     bool
 }
 
-type Report struct {
-	Title    string
-	Tasks    []Task
-	GenTime  time.Time
+const taskTmpl = `{{range .}}[{{if .Done}}X{{else}} {{end}}] {{.Name}} {{.Priority | label}}
+{{end}}`
+
+func label(priority int) string {
+	switch priority {
+	case 1:
+		return "[HIGH]"
+	case 2:
+		return "[MED]"
+	case 3:
+		return "[LOW]"
+	default:
+		return "[UNKNOWN]"
+	}
 }
 
-const reportTmpl = `
-Report: {{.Title}}
-Generated: {{.GenTime | date "2006-01-02 15:04"}}
-{{if .Tasks}}
-Tasks:
-{{range .Tasks}}  [{{if .Done}}X{{else}} {{end}}] {{.Name}} (priority {{.Priority}})
-{{end}}{{else}}No tasks to report.
-{{end}}Total tasks: {{len .Tasks}}
-`
+func RenderTasks(tasks []Task) (string, error) {
+	tmpl := template.Must(template.New("tasks").Funcs(template.FuncMap{
+		"label": label,
+	}).Parse(taskTmpl))
 
-// date is a custom function for template use
-func date(format string) func(time.Time) string {
-	return func(t time.Time) string {
-		return t.Format(format)
+	var buf bytes.Buffer
+	if err := tmpl.Execute(&buf, tasks); err != nil {
+		return "", err
 	}
+	return buf.String(), nil
 }
 
 func main() {
-	report := Report{
-		Title: "Sprint 24 Status",
-		Tasks: []Task{
-			{Name: "Implement login", Priority: 1, Done: true},
-			{Name: "Write tests", Priority: 2, Done: false},
-			{Name: "Deploy to staging", Priority: 1, Done: false},
-		},
-		GenTime: time.Now(),
+	tasks := []Task{
+		{Name: "Implement login", Priority: 1, Done: true},
+		{Name: "Write tests", Priority: 2, Done: false},
+		{Name: "Fix bug #42", Priority: 3, Done: false},
 	}
 
-	tmpl, err := template.New("report").Funcs(template.FuncMap{
-		"date": date,
-	}).Parse(reportTmpl)
+	output, err := RenderTasks(tasks)
 	if err != nil {
-		panic(err)
+		fmt.Println("Error:", err)
+		return
 	}
-
-	if err := tmpl.Execute(os.Stdout, report); err != nil {
-		panic(err)
-	}
+	fmt.Print(output)
 }
 ```
 

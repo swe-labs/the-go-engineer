@@ -57,14 +57,23 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"os"
-	"strings"
+	"io"
 )
 
 type Product struct {
 	SKU   string  `json:"sku"`
 	Name  string  `json:"name"`
 	Price float64 `json:"price"`
+}
+
+func WriteProducts(products []Product, w io.Writer) error {
+	enc := json.NewEncoder(w)
+	for _, p := range products {
+		if err := enc.Encode(p); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func main() {
@@ -74,37 +83,12 @@ func main() {
 		{"A300", "Doohickey", 4.99},
 	}
 
-	// Encode to os.Stdout with indentation
-	fmt.Println("=== Stdout with indentation ===")
-	enc := json.NewEncoder(os.Stdout)
-	enc.SetIndent("", "  ")
-	for _, p := range products {
-		if err := enc.Encode(p); err != nil {
-			fmt.Fprintf(os.Stderr, "encode error: %v\n", err)
-		}
-	}
-
-	// Encode to a buffer with SetEscapeHTML disabled
-	fmt.Println("\n=== Buffer (no HTML escaping) ===")
 	var buf bytes.Buffer
-	enc2 := json.NewEncoder(&buf)
-	enc2.SetEscapeHTML(false)
-	enc2.Encode(Product{"B500", "Chip < v2 > & Co", 149.99})
+	if err := WriteProducts(products, &buf); err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	fmt.Print(buf.String())
-
-	// NDJSON example
-	fmt.Println("=== NDJSON (compact, newline-delimited) ===")
-	var ndjson bytes.Buffer
-	enc3 := json.NewEncoder(&ndjson)
-	// default: no indent, HTML escaping on
-	for _, p := range products {
-		enc3.Encode(p)
-	}
-	lines := strings.Split(strings.TrimSpace(ndjson.String()), "\n")
-	fmt.Printf("Wrote %d lines\n", len(lines))
-	for _, line := range lines {
-		fmt.Println("  " + line)
-	}
 }
 ```
 

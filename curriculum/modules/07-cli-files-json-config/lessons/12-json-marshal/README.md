@@ -74,42 +74,46 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
-	"time"
 )
 
-type Order struct {
-	ID        int       `json:"id"`
-	Product   string    `json:"product"`
-	Quantity  int       `json:"quantity"`
-	Price     float64   `json:"price"`
-	CreatedAt time.Time `json:"created_at"`
-	Notes     string    `json:"notes,omitempty"`
-	Secret    string    `json:"-"`
+type User struct {
+	Name  string `json:"name"`
+	Age   int    `json:"age"`
+	Email string `json:"email,omitempty"`
+}
+
+func MarshalUser(name string, age int, email string) (string, error) {
+	if age < 0 {
+		return "", errors.New("age must not be negative")
+	}
+	u := User{Name: name, Age: age, Email: email}
+	b, err := json.MarshalIndent(u, "", "  ")
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }
 
 func main() {
-	o := Order{
-		ID:        1001,
-		Product:   "Widget",
-		Quantity:  3,
-		Price:     14.99,
-		CreatedAt: time.Date(2025, 6, 1, 10, 0, 0, 0, time.UTC),
-		Notes:     "",
-		Secret:    "admin-password",
+	cases := []struct {
+		name  string
+		age   int
+		email string
+	}{
+		{"Alice", 30, "alice@example.com"},
+		{"Bob", 25, ""},
+		{"Carol", -1, "carol@test.org"},
 	}
-
-	compact, _ := json.Marshal(o)
-	fmt.Println("Compact:", string(compact))
-
-	pretty, _ := json.MarshalIndent(o, "", "  ")
-	fmt.Println("Pretty:")
-	fmt.Println(string(pretty))
-
-	// MarshalIndent with prefix
-	prefixed, _ := json.MarshalIndent(o, "> ", "  ")
-	fmt.Println("Prefixed:")
-	fmt.Println(string(prefixed))
+	for _, c := range cases {
+		result, err := MarshalUser(c.name, c.age, c.email)
+		if err != nil {
+			fmt.Printf("MarshalUser(%q, %d, %q) error: %v\n", c.name, c.age, c.email, err)
+		} else {
+			fmt.Printf("MarshalUser(%q, %d, %q) =\n%s\n", c.name, c.age, c.email, result)
+		}
+	}
 }
 ```
 

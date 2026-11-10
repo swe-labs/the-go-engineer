@@ -71,7 +71,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"
 )
 
 type DBConfig struct {
@@ -83,10 +82,10 @@ type DBConfig struct {
 }
 
 type AppConfig struct {
-	ServerPort int       `json:"server_port"`
-	LogLevel   string    `json:"log_level"`
-	Database   DBConfig  `json:"database"`
-	Debug      bool      `json:"debug"`
+	ServerPort int      `json:"server_port"`
+	LogLevel   string   `json:"log_level"`
+	Database   DBConfig `json:"database"`
+	Debug      bool     `json:"debug"`
 }
 
 func DefaultConfig() AppConfig {
@@ -101,57 +100,40 @@ func DefaultConfig() AppConfig {
 	}
 }
 
-func LoadConfig(path string) (AppConfig, error) {
+func LoadAppConfig(paths ...string) (AppConfig, error) {
 	cfg := DefaultConfig()
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return cfg, err
-	}
-	if err := json.Unmarshal(data, &cfg); err != nil {
-		return cfg, err
-	}
-	return cfg, nil
-}
-
-func LoadConfigWithOverride(basePath, overridePath string) (AppConfig, error) {
-	cfg, err := LoadConfig(basePath)
-	if err != nil {
-		return cfg, err
-	}
-	if _, err := os.Stat(overridePath); os.IsNotExist(err) {
-		return cfg, nil
-	}
-	data, err := os.ReadFile(overridePath)
-	if err != nil {
-		return cfg, err
-	}
-	if err := json.Unmarshal(data, &cfg); err != nil {
-		return cfg, err
+	for _, path := range paths {
+		if _, err := os.Stat(path); os.IsNotExist(err) {
+			continue
+		}
+		data, err := os.ReadFile(path)
+		if err != nil {
+			return cfg, err
+		}
+		if err := json.Unmarshal(data, &cfg); err != nil {
+			return cfg, err
+		}
 	}
 	return cfg, nil
 }
 
 func main() {
-	dir, _ := os.Getwd()
-	base := filepath.Join(dir, "config.base.json")
-	over := filepath.Join(dir, "config.override.json")
+	// Create temporary config files for demonstration
+	os.WriteFile("_test_base.json", []byte(`{"server_port":9090,"database":{"host":"prod.example.com"}}`), 0644)
+	os.WriteFile("_test_override.json", []byte(`{"debug":true,"database":{"port":5433}}`), 0644)
+	defer os.Remove("_test_base.json")
+	defer os.Remove("_test_override.json")
 
-	// Create sample config files
-	os.WriteFile(base, []byte(`{"server_port":9090,"database":{"host":"prod.example.com"}}`), 0644)
-	os.WriteFile(over, []byte(`{"debug":true,"database":{"port":5433}}`), 0644)
-	defer os.Remove(base)
-	defer os.Remove(over)
-
-	cfg, err := LoadConfigWithOverride(base, over)
+	cfg, err := LoadAppConfig("_test_base.json", "_test_override.json", "_test_nonexistent.json")
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
 	}
-	fmt.Printf("Port: %d\n", cfg.ServerPort)          // 9090 (from base)
-	fmt.Printf("LogLevel: %s\n", cfg.LogLevel)         // "info" (default, not overridden)
-	fmt.Printf("Debug: %v\n", cfg.Debug)               // true (from override)
-	fmt.Printf("DB Host: %s\n", cfg.Database.Host)     // "prod.example.com" (from base)
-	fmt.Printf("DB Port: %d\n", cfg.Database.Port)     // 5433 (overridden)
+	fmt.Printf("ServerPort: %d\n", cfg.ServerPort)
+	fmt.Printf("LogLevel: %s\n", cfg.LogLevel)
+	fmt.Printf("Debug: %v\n", cfg.Debug)
+	fmt.Printf("DB Host: %s\n", cfg.Database.Host)
+	fmt.Printf("DB Port: %d\n", cfg.Database.Port)
 }
 ```
 

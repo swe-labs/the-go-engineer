@@ -95,35 +95,52 @@ import (
 	"strings"
 )
 
-// Run is the core CLI logic. Returns exit code.
 func Run(r io.Reader, w io.Writer, args []string) int {
-	fs := flag.NewFlagSet("greet", flag.ContinueOnError)
+	fs := flag.NewFlagSet("wc", flag.ContinueOnError)
 	fs.SetOutput(w)
-	upper := fs.Bool("upper", false, "convert to uppercase")
-	name := fs.String("name", "World", "name to greet")
+	countLines := fs.Bool("l", false, "count lines (default)")
+	countWords := fs.Bool("w", false, "count words")
+	countChars := fs.Bool("c", false, "count characters")
 
 	if err := fs.Parse(args); err != nil {
 		return 1
 	}
 
-	greeting := fmt.Sprintf("Hello, %s!", *name)
-	if *upper {
-		greeting = strings.ToUpper(greeting)
+	// If no mode flag set, default to lines
+	if !*countLines && !*countWords && !*countChars {
+		*countLines = true
 	}
-	fmt.Fprintln(w, greeting)
 
-	// Read additional names from stdin (one per line)
 	scanner := bufio.NewScanner(r)
-	for scanner.Scan() {
-		line := strings.TrimSpace(scanner.Text())
-		if line == "" {
-			continue
+	var lines, words, chars int
+
+	if *countWords || *countChars {
+		for scanner.Scan() {
+			line := scanner.Text()
+			lines++
+			chars += len(line) + 1 // +1 for newline
+			words += len(strings.Fields(line))
 		}
-		g := fmt.Sprintf("Hello, %s!", line)
-		if *upper {
-			g = strings.ToUpper(g)
+	} else {
+		for scanner.Scan() {
+			lines++
 		}
-		fmt.Fprintln(w, g)
+	}
+
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintln(w, "read error:", err)
+		return 1
+	}
+
+	switch {
+	case *countLines && !*countWords && !*countChars:
+		fmt.Fprintln(w, lines)
+	case *countWords:
+		fmt.Fprintln(w, words)
+	case *countChars:
+		fmt.Fprintln(w, chars)
+	default:
+		fmt.Fprintln(w, lines)
 	}
 	return 0
 }
