@@ -15,7 +15,7 @@ import (
 
 func setupTestDB(t *testing.T) (*sql.DB, *TaskRepository) {
 	t.Helper()
-	db, err := sql.Open("sqlite", "file::memory:?cache=shared")
+	db, err := sql.Open("sqlite", "file::memory:?cache=shared&_pragma=foreign_keys(1)")
 	if err != nil {
 		t.Fatalf("failed to open in-memory db: %v", err)
 	}

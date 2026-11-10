@@ -497,7 +497,9 @@ func writeJSON(w http.ResponseWriter, status int, data any) {
 
 func main() {
 	driver := "sqlite"
-	dsn := "file::memory:?cache=shared"
+	// _pragma=foreign_keys(1) enables FK enforcement on every pooled connection
+	// (the pragma is per connection - see lesson 05).
+	dsn := "file::memory:?cache=shared&_pragma=foreign_keys(1)"
 
 	if envURL := os.Getenv("DATABASE_URL"); envURL != "" {
 		driver = "pgx"

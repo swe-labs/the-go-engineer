@@ -199,7 +199,7 @@ fmt.Println(id) // always 0
 
 **Symptom**: LastInsertId returns 0 even though the INSERT reported no error.
 
-**Root cause**: `sqlite3_last_insert_rowid` reports the rowid of the most recent successful INSERT **on that connection** — it is 0 on a connection that has not inserted yet, and it is 0 for `WITHOUT ROWID` tables (whose primary keys live in a separate index B-tree, not as rowids). A `TEXT PRIMARY KEY` course table is the classic case: the insert succeeds, but there is no rowid to report.
+**Root cause**: `sqlite3_last_insert_rowid` reports the rowid of the most recent successful INSERT **on that connection** — it is 0 on a connection that has not inserted yet, and it is 0 for `WITHOUT ROWID` tables (whose primary keys live in a separate index B-tree with no rowid). Note the trap: a `TEXT PRIMARY KEY` table is still an ordinary rowid table, so `LastInsertId` returns its hidden internal rowid - a number that has nothing to do with the text key you inserted.
 
 **Fix**: Check the error before using `LastInsertId`, and verify the column definition is exactly `INTEGER PRIMARY KEY`.
 
