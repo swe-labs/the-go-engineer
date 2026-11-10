@@ -17,7 +17,7 @@ import (
 	"syscall"
 	"time"
 
-	_ "github.com/lib/pq"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	_ "modernc.org/sqlite"
 )
 
@@ -88,9 +88,9 @@ func GenerateID() string {
 	return hex.EncodeToString(b)
 }
 
-// Rebind translates standard '?' placeholders to PostgreSQL '$1, $2' if driver is postgres.
+// Rebind translates standard '?' placeholders to PostgreSQL '$1, $2' if driver is pgx.
 func Rebind(query string, driver string) string {
-	if driver != "postgres" {
+	if driver != "pgx" {
 		return query
 	}
 	var sb strings.Builder
@@ -129,7 +129,8 @@ func RunMigrations(ctx context.Context, db *sql.DB) error {
 		task_id VARCHAR(64) NOT NULL,
 		from_status VARCHAR(32) NOT NULL,
 		to_status VARCHAR(32) NOT NULL,
-		changed_at TIMESTAMP NOT NULL
+		changed_at TIMESTAMP NOT NULL,
+		FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 	);
 	`
 	_, err := db.ExecContext(ctx, schema)
@@ -499,10 +500,10 @@ func main() {
 	dsn := "file::memory:?cache=shared"
 
 	if envURL := os.Getenv("DATABASE_URL"); envURL != "" {
-		driver = "postgres"
+		driver = "pgx"
 		dsn = envURL
-	} else if envDriver := os.Getenv("DB_DRIVER"); envDriver == "postgres" {
-		driver = "postgres"
+	} else if envDriver := os.Getenv("DB_DRIVER"); envDriver == "pgx" {
+		driver = "pgx"
 		dsn = "postgres://postgres:postgrespassword@localhost:5432/taskdb?sslmode=disable"
 	}
 

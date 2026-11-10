@@ -173,13 +173,6 @@ func (m *Migrator) revert(mig Migration) error {
 	return tx.Commit()
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
 func main() {
 	db, err := sql.Open("sqlite", ":memory:")
 	if err != nil {

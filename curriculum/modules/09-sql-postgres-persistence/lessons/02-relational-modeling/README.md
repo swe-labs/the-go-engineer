@@ -71,7 +71,7 @@ Normal forms (simplified):
 
 ## Under the hood
 
-Relational model theory, developed by E. F. Codd in 1970, is grounded in set theory and first-order predicate logic. A table is a mathematical relation: a set of tuples (rows) over a set of attributes (columns). SQL is the concrete language that implements relational algebra operations: SELECT (σ, projection), WHERE (σ, selection), JOIN (⋈), GROUP BY (aggregation).
+Relational model theory, developed by E. F. Codd in 1970, is grounded in set theory and first-order predicate logic. A table is a mathematical relation: a set of tuples (rows) over a set of attributes (columns). SQL is the concrete language that implements relational algebra operations: the SELECT list projects columns (π), WHERE filters rows (σ), JOIN combines relations (⋈), and GROUP BY aggregates.
 
 When a Go program issues `SELECT u.name, o.total FROM users u JOIN orders o ON u.id = o.user_id`, the database engine:
 
@@ -84,7 +84,7 @@ The Go struct serves as the application-level data structure representing rows s
 
 ## How Go uses it
 
-In contrast to ecosystems that rely on heavy **Object-Relational Mapping (ORM)** frameworks (which obscure SQL execution, risk N+1 query cascades, and hide transaction semantics), idiomatic Go favors explicit data mapping. Go structs define schema bindings using struct tags (e.g., `db:"name"` or `json:"name"`), scanned explicitly via standard `database/sql` row iterators or type-safe code generators like `sqlc`. A typical projection mapping:
+In contrast to ecosystems that rely on heavy **Object-Relational Mapping (ORM)** frameworks (which obscure SQL execution, risk N+1 query cascades, and hide transaction semantics), idiomatic Go favors explicit data mapping. Go structs mirror the schema, and column-to-field mapping is positional: standard `database/sql` `Scan` maps by SELECT-list order, mapping libraries like `sqlx` honor `db:"..."` tags, and `sqlc` generates the scan calls for you. A typical projection mapping:
 
 ```go
 type User struct {
@@ -219,7 +219,7 @@ func main() {
 - **Storing lists in a single column** (violating 1NF). Example: `tags TEXT` containing `"go,sql,api"`. Fix: create a separate `tags` table with one row per tag, linked by foreign key.
 - **Copying the same data across rows** (violating 3NF). Example: storing `user_name` and `user_email` in the `orders` table. Fix: store only `user_id` and JOIN to get the name.
 - **Modeling many-to-many without a junction table**. Example: students and courses need a `enrollments` table with `student_id` and `course_id` as a composite primary key.
-- **Using float for monetary values**. Example: `total REAL`. Floating-point rounding causes accounting errors. Use `INTEGER` (cents) or a `NUMERIC` type.
+- **Using float for monetary values**. Example: `total REAL`. Floating-point rounding causes accounting errors. Use `INTEGER` (cents) or a `NUMERIC` type. (The examples in this module use `REAL` for brevity — real financial schemas should follow this rule, not the examples.)
 
 ## Debugging walkthrough
 

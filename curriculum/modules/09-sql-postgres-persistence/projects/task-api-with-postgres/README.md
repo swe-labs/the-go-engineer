@@ -10,7 +10,7 @@ Almost every scalable backend relies on relational persistence. Poor connection 
 
 ## Prerequisites
 
-Complete all Module 09 lessons (01–26) covering SQL fundamentals, database drivers, connection pools, CRUD operations, transactions, and migration strategies.
+Complete all Module 09 lessons (01–28) covering SQL fundamentals, database drivers, connection pools, CRUD operations, transactions, and migration strategies.
 
 ## Available concepts
 
@@ -66,9 +66,9 @@ CREATE TABLE IF NOT EXISTS task_audit_logs (
 
 ### Task 1 — Connection pool & migration runner
 
-In `_starter/main.go`:
-- Implement `ConfigurePool(db *sql.DB)`: set max open connections to 25, max idle connections to 10, and connection max lifetime to 15 minutes.
-- Implement `RunMigrations(ctx context.Context, db *sql.DB) error`: apply the DDL schema idempotently.
+In `_starter/main.go`, `ConfigurePool` and `RunMigrations` are already provided — study them first:
+- `ConfigurePool(db *sql.DB)` sets max open connections to 25, max idle connections to 10, and connection max lifetime to 15 minutes. Verify you can explain each value's trade-off.
+- `RunMigrations(ctx context.Context, db *sql.DB) error` applies the DDL schema idempotently via `CREATE TABLE IF NOT EXISTS`.
 
 ### Task 2 — Implement parameterized repository CRUD
 

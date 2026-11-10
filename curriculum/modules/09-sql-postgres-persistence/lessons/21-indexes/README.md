@@ -33,7 +33,7 @@ flowchart TD
         ROOT["Root Node (Keys: m@...)"]
         ROOT --> B1["Branch Page (Keys: a@.. to l@..)"]
         ROOT --> B2["Branch Page (Keys: m@.. to z@..)"]
-        B1 --> L1["Leaf: 'alice@...' -> Heap CTID (Page 4, Slot 2)"]
+        B1 --> L1["Leaf: 'alice@...' -> rowid 5001"]
     end
 
     subgraph Heap["Table Heap Data (Disk Blocks)"]
@@ -72,7 +72,7 @@ A B-tree index in SQLite:
 4. Height of the tree: for 1M rows, height ≈ 4 (page size / entries per page → log_50(1M) ≈ 4).
 5. Lookup cost: 4 pages read (one per tree level) + 1 page read for the actual row data = 5 total reads.
 
-Without an index: 1M pages read (full table scan, but compressed into fewer pages if using B-tree for the table itself — SQLite's table is a B-tree on the rowid).
+Without an index: the full table scan reads every leaf page of the table's B-tree — for 1M rows at 50-100 rows per 4KB page, that is roughly 10,000-20,000 pages, versus 5 page reads for the indexed lookup.
 
 ## How Go uses it
 
@@ -114,9 +114,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Insert 10,000 users
 	fmt.Println("Inserting 10,000 users...")
-	start := time.Now()
 	tx, _ := db.Begin()
 	for i := 0; i < 10000; i++ {
 		tx.Exec("INSERT INTO users (name, email) VALUES (?, ?)",
@@ -124,23 +122,20 @@ func main() {
 			fmt.Sprintf("user%d@example.com", i))
 	}
 	tx.Commit()
-	fmt.Printf("Inserted in %v\n", time.Since(start))
+	fmt.Println("Done inserting.")
 
-	// Query without index
-	fmt.Println("\n--- Query without index ---")
+	fmt.Println("--- Query without index ---")
 	explainQueryPlan(db, "SELECT * FROM users WHERE email = 'user5000@example.com'")
 
-	start = time.Now()
+	start := time.Now()
 	var name string
 	db.QueryRow("SELECT name FROM users WHERE email = 'user5000@example.com'").Scan(&name)
-	fmt.Printf("Lookup without index: %v\n", time.Since(start))
+	fmt.Printf("Lookup without index: %v\n\n", time.Since(start))
 
-	// Create index
 	db.Exec("CREATE INDEX idx_users_email ON users(email)")
-	fmt.Println("\nCreated index on email.")
+	fmt.Println("Created index on email.")
 
-	// Query with index
-	fmt.Println("\n--- Query with index ---")
+	fmt.Println("--- Query with index ---")
 	explainQueryPlan(db, "SELECT * FROM users WHERE email = 'user5000@example.com'")
 
 	start = time.Now()
@@ -157,7 +152,8 @@ func explainQueryPlan(db *sql.DB, query string) {
 	for rows.Next() {
 		var id, parent int
 		var detail string
-		rows.Scan(&id, &parent, &detail)
+		var notused int
+		rows.Scan(&id, &parent, &notused, &detail)
 		fmt.Printf("  %s\n", detail)
 	}
 }
@@ -214,7 +210,7 @@ Re-check the query plan. It should show `SEARCH orders USING INDEX idx_orders_us
 
 - **Monitoring**: Identify slow queries via database logs or application tracing. Add indexes based on actual query patterns, not guesses.
 - **Index maintenance**: In PostgreSQL, `CREATE INDEX` blocks writes (table-level lock). Use `CREATE INDEX CONCURRENTLY` in production.
-- **Index size**: In SQLite, an index is about 1.5x the size of the indexed data. Factor this into storage planning.
+- **Index size**: A secondary index in SQLite stores each key plus a rowid, so its footprint is on the order of the indexed column's data — budget for it in storage planning, and measure with a real dataset.
 - **Covering indexes**: An index that includes all columns needed by a query (covering index) eliminates the need to read the table entirely — the query is served from the index alone.
 - **Drop unused indexes**: Periodically review index usage statistics and drop indexes that are never used.
 

@@ -99,26 +99,39 @@ import (
 	_ "modernc.org/sqlite"
 )
 
+func InitDB(driverName, dsn string) (*sql.DB, error) {
+	db, err := sql.Open(driverName, dsn)
+	if err != nil {
+		return nil, err
+	}
+	if err := db.Ping(); err != nil {
+		db.Close()
+		return nil, err
+	}
+	db.SetMaxOpenConns(5)
+	return db, nil
+}
+
+func mustRowsAffected(res sql.Result) int64 {
+	n, _ := res.RowsAffected()
+	return n
+}
+
 func main() {
-	db, err := sql.Open("sqlite", ":memory:")
+	db, err := InitDB("sqlite", ":memory:")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	if err := db.Ping(); err != nil {
-		log.Fatal(err)
-	}
 	fmt.Println("Connected (pool ready)")
 
-	// Exec — for statements that don't return rows
 	res, err := db.Exec(`CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY, val TEXT)`)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("Table created: %d rows affected\n", mustRowsAffected(res))
 
-	// Exec with INSERT
 	res, err = db.Exec(`INSERT INTO test (val) VALUES ('hello')`)
 	if err != nil {
 		log.Fatal(err)
@@ -126,7 +139,6 @@ func main() {
 	id, _ := res.LastInsertId()
 	fmt.Printf("Inserted row id=%d\n", id)
 
-	// QueryRow — single row
 	var val string
 	err = db.QueryRow(`SELECT val FROM test WHERE id = ?`, id).Scan(&val)
 	if err != nil {
@@ -134,7 +146,6 @@ func main() {
 	}
 	fmt.Printf("Queried: %s\n", val)
 
-	// Query — multiple rows
 	rows, err := db.Query(`SELECT id, val FROM test ORDER BY id`)
 	if err != nil {
 		log.Fatal(err)
@@ -152,17 +163,12 @@ func main() {
 		log.Fatal(err)
 	}
 }
-
-func mustRowsAffected(res sql.Result) int64 {
-	n, _ := res.RowsAffected()
-	return n
-}
 ```
 
 ## Step-by-step execution
 
-1. `sql.Open("sqlite", ":memory:")` registers the driver name and DSN. No connection is made yet.
-2. `db.Ping()` triggers the first actual connection to the in-memory SQLite database.
+1. `InitDB("sqlite", ":memory:")` calls `sql.Open`, which registers the driver name and DSN. No connection is made yet.
+2. `InitDB` calls `db.Ping()`, which triggers the first actual connection, then applies `SetMaxOpenConns(5)` before returning the pool handle.
 3. `db.Exec` runs a `CREATE TABLE` statement. It acquires a connection from the pool, executes the statement, and returns the connection.
 4. A second `db.Exec` inserts a row. `LastInsertId` returns the auto-increment ID.
 5. `db.QueryRow` fetches a single row and scans the value into a Go variable.

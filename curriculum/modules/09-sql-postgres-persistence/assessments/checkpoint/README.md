@@ -47,8 +47,8 @@ This checkpoint covers:
 - Query patterns: `db.Exec`, `db.Query`, and `db.QueryRow` with context deadlines
 - Result scanning: mapping database rows to Go structs, handling NULL values with `sql.Null*` types, and checking `rows.Err()`
 - ACID transactions: atomic operations with `db.BeginTx`, deferred rollback pattern (`defer tx.Rollback()`), and isolation levels
-- Performance optimizations: prepared statement caching and index utilization
-- Disaster recovery operations: database dumps, restoration procedures, and data integrity verification
+- Performance optimizations: prepared statement reuse and index utilization
+- Operational basics: backup and cleanup primitives (`VACUUM INTO`, WAL checkpoints) and data integrity verification
 
 ## Evidence required
 
@@ -92,4 +92,4 @@ Learner may retry after fixing rubric gaps and writing a short correction note.
 
 ## NEXT UP
 
-[Module 10: Authentication and Security](../../../10-auth-security/README.md)
+[Module 10: Authentication, Authorization, and Security](../../../10-auth-security/README.md)

@@ -22,10 +22,10 @@ flowchart TD
         VOL["Docker Named Volume: pg_data
 (Persists data across container restarts)"]
 
-        subgraph Container["PostgreSQL 16 Docker Container"]
+        subgraph Container["PostgreSQL 17 Docker Container"]
             PG["postgres daemon
-POSTGRES_DB=opslane
-POSTGRES_USER=postgres"]
+POSTGRES_DB=myapp
+POSTGRES_USER=app"]
         end
 
         COMPOSE --> Container
@@ -92,13 +92,30 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"time"
 
 	_ "modernc.org/sqlite"
 )
 
-// docker-compose.yaml content is shown in the README.
-// In production, connect with pgx:
-// db, err := sql.Open("pgx", "postgres://app:secret@localhost:5432/myapp?sslmode=disable")
+func WaitForDB(dsn string, maxRetries int) (*sql.DB, error) {
+	var db *sql.DB
+	var err error
+
+	for i := 0; i < maxRetries; i++ {
+		db, err = sql.Open("sqlite", dsn)
+		if err != nil {
+			time.Sleep(time.Second)
+			continue
+		}
+		err = db.Ping()
+		if err == nil {
+			return db, nil
+		}
+		db.Close()
+		time.Sleep(time.Second)
+	}
+	return nil, fmt.Errorf("could not connect after %d retries: %w", maxRetries, err)
+}
 
 func main() {
 	fmt.Println("--- Docker Compose for PostgreSQL ---")
@@ -110,8 +127,7 @@ func main() {
 	fmt.Println("  postgres://app:secret@localhost:5432/myapp?sslmode=disable")
 	fmt.Println()
 
-	// Simulate with SQLite
-	db, err := sql.Open("sqlite", ":memory:")
+	db, err := WaitForDB(":memory:", 3)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -146,7 +162,7 @@ func main() {
 
 1. The Docker Compose file defines a `postgres` service with environment variables, port mapping, and a named volume.
 2. Running `docker compose up -d` starts the PostgreSQL container in the background.
-3. The Go program connects to the database via `localhost:5432` (the mapped port).
+3. The Go program calls `WaitForDB(":memory:", 3)`, which retries `sql.Open` + `Ping` up to three times with a one-second delay — the same wait-and-retry pattern you need when a Dockerized PostgreSQL is still starting up.
 4. The program creates a table, inserts sample data, and queries it — using the same `database/sql` API as SQLite.
 5. When the container is stopped (`docker compose down`), the `pgdata` volume retains the data.
 
@@ -194,8 +210,8 @@ healthcheck:
 
 ## Performance implications
 
-- Docker containers add negligible overhead for PostgreSQL — within 1-2% of native performance.
-- Named volumes on Docker Desktop (macOS/Windows) are slower than native Linux volumes due to filesystem translation. Use `gRPC FUSE` or a remote Docker host for serious performance testing.
+- Docker containers add negligible overhead for PostgreSQL — typically a low single-digit percentage of native performance.
+- On Docker Desktop (macOS/Windows), **bind mounts** of host directories are slow due to filesystem translation. Named volumes live inside the Linux VM's filesystem and are near-native — which is another reason to use the `pgdata` named volume instead of mounting a host directory.
 - The Docker networking bridge adds sub-millisecond latency to localhost connections, which is insignificant for most applications.
 
 ## Practice task

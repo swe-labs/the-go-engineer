@@ -106,6 +106,13 @@ type Employee struct {
 	Active bool
 }
 
+type Person struct {
+	ID    int
+	Name  string
+	Email sql.NullString
+	Age   sql.NullInt64
+}
+
 func scanEmployee(row *sql.Row) (Employee, error) {
 	var e Employee
 	err := row.Scan(&e.ID, &e.Name, &e.Salary, &e.Active)
@@ -123,6 +130,12 @@ func scanEmployees(rows *sql.Rows) ([]Employee, error) {
 		employees = append(employees, e)
 	}
 	return employees, rows.Err()
+}
+
+func scanPerson(row *sql.Row) (Person, error) {
+	var p Person
+	err := row.Scan(&p.ID, &p.Name, &p.Email, &p.Age)
+	return p, err
 }
 
 func main() {
@@ -197,6 +210,33 @@ func main() {
 	if err := rows.Err(); err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println("\n=== Person scan with NULL handling ===")
+	db.Exec(`CREATE TABLE IF NOT EXISTS people (
+		id INTEGER PRIMARY KEY,
+		name TEXT NOT NULL,
+		email TEXT,
+		age INTEGER
+	)`)
+	db.Exec(`INSERT INTO people (name, email, age) VALUES ('Alice', 'alice@example.com', 30)`)
+	db.Exec(`INSERT INTO people (name, email, age) VALUES ('Bob', NULL, NULL)`)
+
+	for i := 1; i <= 2; i++ {
+		p, err := scanPerson(db.QueryRow(`SELECT id, name, email, age FROM people WHERE id = ?`, i))
+		if err != nil {
+			log.Fatal(err)
+		}
+		if p.Email.Valid {
+			fmt.Printf("  %d: %s (email=%s, age=", p.ID, p.Name, p.Email.String)
+		} else {
+			fmt.Printf("  %d: %s (email=none, age=", p.ID, p.Name)
+		}
+		if p.Age.Valid {
+			fmt.Printf("%d)\n", p.Age.Int64)
+		} else {
+			fmt.Printf("unknown)\n")
+		}
+	}
 }
 ```
 
@@ -209,10 +249,10 @@ func main() {
 
 ## Common mistakes
 
-- **Column count mismatch**: SELECT returns 4 columns but Scan provides 3 arguments → `sql: expected 4 destination arguments, not 3`.
+- **Column count mismatch**: SELECT returns 4 columns but Scan provides 3 arguments → `sql: expected 4 destination arguments in Scan, not 3`.
 - **Column order mismatch**: SELECT is `id, name, salary` but Scan is `&name, &id, &salary` → type conversion error (name is string, id is int).
-- **Scanning NULL into non-pointer type**: If `phone TEXT` is NULL and you scan into `var phone string`, Scan returns `sql: Scan error on column index 2: converting NULL to string is unsupported`. Fix: use `sql.NullString`.
-- **Reusing the same variable in a loop without creating new structs**: When appending to a slice, each appended element shares the same memory if you scan into the same struct. Fix: create a new struct in each iteration.
+- **Scanning NULL into non-pointer type**: If `phone TEXT` is NULL and you scan into `var phone string`, Scan returns `sql: Scan error on column index 2, name "phone": converting NULL to string is unsupported`. Fix: use `sql.NullString`.
+- **Appending pointers to a loop variable**: When you scan into `var e Employee` and append `&e` (a pointer), every appended element aliases the same struct and ends up holding the last row's values. Append the value (`employees = append(employees, e)`) or declare a fresh variable per iteration.
 
 ## Debugging walkthrough
 
@@ -232,7 +272,7 @@ for rows.Next() {
 }
 ```
 
-**Symptom**: `Scan error on column index 0: converting TEXT "Alice" to int is unsupported`.
+**Symptom**: `sql: Scan error on column index 0, name "name": converting driver.Value type string ("Alice") to a int: invalid syntax`.
 
 **Root cause**: SELECT is `name, id` but Scan expects `id, name`. Column 0 (name = "Alice") is being scanned into `&e.ID` (int), which fails.
 
@@ -241,7 +281,7 @@ for rows.Next() {
 ## Production notes
 
 - Always scan into named struct fields, not anonymous variables. This makes the mapping explicit and readable.
-- Use `sql.NullString`, `sql.NullInt64`, `sql.NullFloat64`, `sql.NullBool`, `sql.NullTime` for nullable columns. Go 1.21+ also has `sql.Null[T]`.
+- Use `sql.NullString`, `sql.NullInt64`, `sql.NullFloat64`, `sql.NullBool`, `sql.NullTime` for nullable columns. Go 1.22+ also has the generic `sql.Null[T]`.
 - Write helper functions (`scanEmployee`) to avoid repeating Scan calls.
 - For large result sets, scan in batches (e.g., scan 100 rows, process, scan next 100) to bound memory usage.
 - In PostgreSQL, use `$1`, `$2` parameter markers. In SQLite, use `?`. The Scan code is identical.

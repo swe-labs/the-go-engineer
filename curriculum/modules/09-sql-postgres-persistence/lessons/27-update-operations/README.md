@@ -108,10 +108,10 @@ An UPDATE in SQLite:
 package main
 
 import (
-	"context"
 	"database/sql"
 	"fmt"
 	"log"
+	"strings"
 
 	_ "modernc.org/sqlite"
 )
@@ -122,6 +122,12 @@ type Product struct {
 	Price   float64
 	Stock   int
 	Version int
+}
+
+type PartialUpdate struct {
+	Name  *string
+	Price *float64
+	Stock *int
 }
 
 func main() {
@@ -146,36 +152,27 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Simple update
 	result, err := db.Exec("UPDATE products SET price = ? WHERE id = ?", 12.99, 1)
 	if err != nil {
 		log.Fatal(err)
 	}
 	rows, _ := result.RowsAffected()
-	fmt.Printf("Updated %d row(s)\n", rows)
+	fmt.Printf("Simple update affected %d row(s)\n", rows)
 
-	// Optimistic locking update
 	expectedVersion := 1
-	newStock := 15
 	result, err = db.Exec(
 		"UPDATE products SET stock = ?, version = version + 1 WHERE id = ? AND version = ?",
-		newStock, 1, expectedVersion)
+		15, 1, expectedVersion)
 	if err != nil {
 		log.Fatal(err)
 	}
 	rows, _ = result.RowsAffected()
 	if rows == 0 {
-		fmt.Println("Optimistic lock failed — row was modified by another transaction")
+		fmt.Println("Optimistic lock failed")
 	} else {
 		fmt.Println("Optimistic lock succeeded")
 	}
 
-	// Partial update
-	type PartialUpdate struct {
-		Name  *string
-		Price *float64
-		Stock *int
-	}
 	update := PartialUpdate{
 		Name:  nil,
 		Price: ptr(19.99),
@@ -213,7 +210,7 @@ func PartialUpdateProduct(db *sql.DB, id int, p PartialUpdate) (int64, error) {
 		return 0, fmt.Errorf("no fields to update")
 	}
 
-	query += join(updates, ", ") + " WHERE id = ?"
+	query += strings.Join(updates, ", ") + " WHERE id = ?"
 	args = append(args, id)
 
 	result, err := db.Exec(query, args...)
@@ -221,17 +218,6 @@ func PartialUpdateProduct(db *sql.DB, id int, p PartialUpdate) (int64, error) {
 		return 0, err
 	}
 	return result.RowsAffected()
-}
-
-func join(items []string, sep string) string {
-	result := ""
-	for i, s := range items {
-		if i > 0 {
-			result += sep
-		}
-		result += s
-	}
-	return result
 }
 
 func ptr[T any](v T) *T { return &v }
@@ -245,8 +231,6 @@ func printProduct(db *sql.DB, id int) {
 	}
 	fmt.Printf("Product %d: %s $%.2f stock=%d version=%d\n", p.ID, p.Name, p.Price, p.Stock, p.Version)
 }
-
-var _ = context.Background
 ```
 
 ## Step-by-step execution
@@ -295,7 +279,7 @@ result, err := db.Exec(
 - **Batch updates**: Use a transaction for multiple UPDATEs. Each UPDATE in auto-commit mode is a separate transaction.
 - **Index maintenance**: Updating an indexed column forces an index update. Measure the write workload.
 - **Lock contention**: Long-running transactions holding UPDATE locks block other writers. Keep transactions short.
-- **Returning data**: PostgreSQL supports `UPDATE ... RETURNING *` to return the updated row. SQLite does not — you must re-query.
+- **Returning data**: Both engines support `UPDATE ... RETURNING` — PostgreSQL since long ago, SQLite since 3.35 (see lesson 04). With RETURNING you get the updated row in one round trip; otherwise re-query.
 - **Partial update patterns**: In REST APIs, use `PATCH` with JSON Merge Patch (RFC 7396) or JSON Patch (RFC 6902) for partial updates.
 
 ## Performance implications
@@ -303,7 +287,7 @@ result, err := db.Exec(
 - Updating a row with an index on the changed column requires O(log n) index maintenance.
 - Updating many rows with a single `UPDATE ... WHERE id IN (...)` is faster than individual UPDATEs.
 - SQLite's WAL mode allows concurrent reads during an UPDATE.
-- `RowsAffected()` requires a round-trip to the driver. For single-row UPDATEs, it's cheap.
+- `RowsAffected()` comes back with the `Exec` result itself — no extra query needed.
 
 ## Practice task
 

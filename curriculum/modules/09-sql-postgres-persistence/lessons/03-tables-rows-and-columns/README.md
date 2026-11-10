@@ -219,14 +219,14 @@ for rows.Next() {
 - Prefer `TEXT` for timestamps in SQLite (ISO 8601 format). PostgreSQL has native `TIMESTAMPTZ`.
 - Use `INTEGER PRIMARY KEY` for SQLite auto-increment, and `BIGSERIAL` / `UUID` for PostgreSQL.
 - Document the schema with comments in migration files. SQLite stores the `sql` text in `sqlite_master`, so the original CREATE is recoverable.
-- In production PostgreSQL, use `VARCHAR(n)` instead of `TEXT` for fields with a natural maximum length.
+- In PostgreSQL, `TEXT` is the conventional column type; `VARCHAR(n)` is identical except that it enforces a maximum length. Choose `VARCHAR(n)` only when the length cap is a real business rule.
 
 ## Performance implications
 
-- Column order in the table definition affects storage alignment. Put `INTEGER` columns before `TEXT` columns for slightly better B-tree page density.
+- Column order in the table definition affects storage alignment in PostgreSQL, where fixed-width types are padded to 1-, 4-, or 8-byte boundaries. Put larger fixed-width columns first there. SQLite rows are length-prefixed serial types, so column order does not change row size.
 - `NOT NULL` and `CHECK` constraints are evaluated on every INSERT/UPDATE but have negligible cost.
 - Selecting only the columns you need (`SELECT name` instead of `SELECT *`) reduces I/O and memory.
-- `INTEGER PRIMARY KEY` in SQLite is the rowid alias and is stored in the B-tree interior pages, making lookups by primary key extremely fast.
+- `INTEGER PRIMARY KEY` in SQLite is the rowid alias, so a primary-key lookup keys the table's B-tree directly — no secondary index hop.
 
 ## Practice task
 

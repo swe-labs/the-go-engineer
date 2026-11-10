@@ -80,6 +80,22 @@ import (
 	_ "modernc.org/sqlite"
 )
 
+func SaveAndLoad(db *sql.DB, msg string) (int, error) {
+	_, err := db.Exec(`CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY, content TEXT NOT NULL)`)
+	if err != nil {
+		return 0, err
+	}
+	res, err := db.Exec(`INSERT INTO notes (content) VALUES (?)`, msg)
+	if err != nil {
+		return 0, err
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
+	return int(id), nil
+}
+
 func main() {
 	db, err := sql.Open("sqlite", ":memory:")
 	if err != nil {
@@ -87,8 +103,7 @@ func main() {
 	}
 	defer db.Close()
 
-	sqlStmt := `CREATE TABLE IF NOT EXISTS messages (id INTEGER NOT NULL PRIMARY KEY, text TEXT NOT NULL);`
-	_, err = db.Exec(sqlStmt)
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS messages (id INTEGER NOT NULL PRIMARY KEY, text TEXT NOT NULL);`)
 	if err != nil {
 		log.Fatalf("create table: %v", err)
 	}
@@ -105,16 +120,23 @@ func main() {
 		log.Fatalf("query: %v", err)
 	}
 	fmt.Printf("Row: id=%d, text=%q\n", id, text)
+
+	id2, err := SaveAndLoad(db, "practice note")
+	if err != nil {
+		log.Fatalf("SaveAndLoad: %v", err)
+	}
+	fmt.Printf("Saved note with id=%d\n", id2)
 }
 ```
 
 ## Step-by-step execution
 
 1. `sql.Open("sqlite", ":memory:")` creates an in-memory SQLite database — no file is written to disk. The driver is registered by the blank import `_ "modernc.org/sqlite"`.
-2. `db.Exec(createSQL)` executes the CREATE TABLE statement. The database creates the schema in memory.
-3. `db.Exec(insertSQL, "Hello from SQLite!")` inserts one row. The `?` is a parameter marker — SQLite binds the value safely.
-4. `db.QueryRow(selectSQL, 1).Scan(&id, &text)` retrieves the row where `id = 1` and maps the columns to Go variables `id` and `text`.
-5. The program prints the result and exits. Because the database is in-memory, all data is lost when the connection closes — this demonstrates why persistence to disk files (or a remote database) matters for production data.
+2. `db.Exec(sqlStmt)` executes the CREATE TABLE statement. The database creates the schema in memory.
+3. `db.Exec("INSERT INTO messages (text) VALUES (?)", "Hello from SQLite!")` inserts one row. The `?` is a parameter marker — SQLite binds the value safely.
+4. `db.QueryRow("SELECT id, text FROM messages WHERE id = ?", 1).Scan(&id, &text)` retrieves the row where `id = 1` and maps the columns to Go variables `id` and `text`.
+5. `SaveAndLoad(db, "practice note")` creates a second `notes` table, inserts one row, and returns the generated `id` via `res.LastInsertId()`.
+6. The program prints both results and exits. Because the database is in-memory, all data is lost when the connection closes — this demonstrates why persistence to disk files (or a remote database) matters for production data.
 
 ## Common mistakes
 
@@ -189,7 +211,7 @@ go run ./curriculum/modules/09-sql-postgres-persistence/lessons/01-why-databases
 go test ./curriculum/modules/09-sql-postgres-persistence/lessons/01-why-databases-exist
 ```
 
-The tests verify that a database can be opened, queried, and that concurrent operations do not corrupt data.
+The tests verify that an in-memory database opens and pings, that an INSERT/SELECT round trip preserves the value, and that `SaveAndLoad` returns the correct auto-generated IDs across multiple inserts.
 
 ## Review questions
 

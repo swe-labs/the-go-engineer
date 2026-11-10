@@ -115,14 +115,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	WithTx(db, func(tx *sql.Tx) error {
-		_, err := tx.Exec("INSERT INTO items (name, quantity) VALUES (?, ?)", "Widget", 10)
-		if err != nil {
+	err = WithTx(db, func(tx *sql.Tx) error {
+		if _, err := tx.Exec("INSERT INTO items (name, quantity) VALUES (?, ?)", "Widget", 10); err != nil {
 			return err
 		}
-		_, err = tx.Exec("INSERT INTO items (name, quantity) VALUES (?, ?)", "Gadget", 5)
+		_, err := tx.Exec("INSERT INTO items (name, quantity) VALUES (?, ?)", "Gadget", 5)
 		return err
 	})
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	var count int
 	db.QueryRow("SELECT COUNT(*) FROM items").Scan(&count)
@@ -187,7 +189,7 @@ For `WithTx(db, fn)` where `fn` fails:
 
 - Not using `defer` for rollback: Every error path must manually call `tx.Rollback()`. One missed path = leaked connection.
 - Calling `tx.Rollback()` unconditionally after commit: Returns `sql.ErrTxDone`. Harmless but noisy. Check `err` first.
-- Forgetting to include panic recovery in `defer`: A panic before commit leaves the transaction open. The `defer` pattern should recover panics and roll back.
+- Forgetting panics in the defer: With the err-conditional defer, a panic unwinds with `err` still nil, so the rollback is skipped and the transaction leaks (though the process usually dies anyway). The `WithTx` pattern recovers the panic, rolls back, and re-panics — cleanup happens even on the panic path.
 - Using `db.Begin()` instead of `db.BeginTx(ctx)` in production: `BeginTx` allows context cancellation to abort the transaction.
 - Passing `*sql.DB` to the closure instead of `*sql.Tx`: Inside the closure, use `tx.Exec`, not `db.Exec`.
 

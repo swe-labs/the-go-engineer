@@ -18,8 +18,8 @@ A primary key is the row's passport. It uniquely identifies that row among all o
 flowchart TD
     subgraph PrimaryKeyIndex["Primary Key B-Tree Index (Unique Invariant)"]
         ROOT["Root Node"] --> BRANCH["Branch Page"]
-        BRANCH --> LEAF1["Leaf: ID 101 -> Heap Pointer CTID (0, 1)"]
-        BRANCH --> LEAF2["Leaf: ID 102 -> Heap Pointer CTID (0, 2)"]
+        BRANCH --> LEAF1["Leaf: ID 101 -> rowid 101"]
+        BRANCH --> LEAF2["Leaf: ID 102 -> rowid 102"]
     end
     NOTE["Guarantees uniqueness and O(log N) point lookup performance"]
     PrimaryKeyIndex -.-> NOTE
@@ -52,7 +52,7 @@ UUIDs are not native to SQLite. They are stored as `TEXT` (or `BLOB` for compact
 
 ## How Go uses it
 
-Go's `database/sql` retrieves primary key values after INSERT via `Result.LastInsertId()`. This works for `INTEGER PRIMARY KEY` in SQLite. For UUIDs, the Go code generates the UUID (using `github.com/google/uuid`) and inserts it as a string. The `LastInsertId` method is not meaningful for UUID primary keys.
+Go's `database/sql` retrieves primary key values after INSERT via `Result.LastInsertId()`. This works for `INTEGER PRIMARY KEY` in SQLite. For UUIDs, the Go code generates the UUID itself — the example builds an RFC 4122 v4 UUID from `crypto/rand` bytes, setting the version and variant bits — and inserts it as a string. The `LastInsertId` method is not meaningful for UUID primary keys.
 
 ## Go example
 
@@ -60,6 +60,7 @@ Go's `database/sql` retrieves primary key values after INSERT via `Result.LastIn
 package main
 
 import (
+	"crypto/rand"
 	"database/sql"
 	"fmt"
 	"log"
@@ -114,6 +115,15 @@ func insertBook(db *sql.DB, b *Book) (int64, error) {
 	return res.LastInsertId()
 }
 
+func newUUID() string {
+	b := make([]byte, 16)
+	_, _ = rand.Read(b)
+	b[6] = (b[6] & 0x0f) | 0x40
+	b[8] = (b[8] & 0x3f) | 0x80
+	return fmt.Sprintf("%08x-%04x-%04x-%04x-%012x",
+		b[0:4], b[4:6], b[6:8], b[8:10], b[10:16])
+}
+
 func main() {
 	db, err := sql.Open("sqlite", ":memory:")
 	if err != nil {
@@ -146,6 +156,18 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("%s wrote %s\n", name, title)
+
+	// Example with UUID primary key
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS courses (id TEXT PRIMARY KEY, name TEXT NOT NULL)`)
+	if err != nil {
+		log.Fatal(err)
+	}
+	courseID := newUUID()
+	_, err = db.Exec(`INSERT INTO courses (id, name) VALUES (?, ?)`, courseID, "Go 101")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Course inserted with uuid pk=%s\n", courseID)
 }
 ```
 
@@ -155,11 +177,12 @@ func main() {
 2. An author row is inserted without specifying `id`. SQLite assigns the next rowid — in this case `1`.
 3. A book row is inserted. The `author_id` column references the author's primary key. This links the book to the author.
 4. The JOIN query uses primary keys (`a.id = b.author_id`) to retrieve related data efficiently.
+5. A `courses` table with a `TEXT` primary key demonstrates the UUID strategy: `newUUID()` builds a version-4 UUID from `crypto/rand` bytes, and the generated string is inserted as the primary key. `LastInsertId` does not apply to this table.
 
 ## Common mistakes
 
 - **Using a mutable natural key as primary key**. Example: using `email` as the primary key for a `users` table. If the user changes their email, all referencing rows must be updated. Fix: use an auto-increment integer or UUID as the surrogate key and put a `UNIQUE` constraint on `email`.
-- **Forgetting that `INTEGER PRIMARY KEY` is special in SQLite**. Only `INTEGER` (exact word) aliases rowid. `INT PRIMARY KEY` creates a regular non-rowid integer column, which does not auto-increment.
+- **Forgetting that `INTEGER PRIMARY KEY` is special in SQLite**. Only `INTEGER` (exact word) aliases the rowid. `INT PRIMARY KEY` creates a separate unique index, and because SQLite's `PRIMARY KEY` does not imply `NOT NULL` (except for `INTEGER PRIMARY KEY`), inserting without a value stores a NULL `id` — while `LastInsertId` still reports the internal rowid, which can differ from what you expect.
 - **Relying on `LastInsertId` for non-integer keys**. For UUID primary keys, read the generated value back with a `RETURNING` clause (SQLite 3.35+) or by selecting after insert.
 - **Assuming primary key values are sequential without gaps**. Deleting rows creates gaps. SQLite may reuse rowids from deleted rows.
 
@@ -174,9 +197,9 @@ id, _ := res.LastInsertId()
 fmt.Println(id) // always 0
 ```
 
-**Symptom**: LastInsertId returns 0.
+**Symptom**: LastInsertId returns 0 even though the INSERT reported no error.
 
-**Root cause**: The INSERT might have failed silently (if `err` is not nil) or the table has an `INT` (not `INTEGER`) primary key. Only `INTEGER PRIMARY KEY` aliases rowid.
+**Root cause**: `sqlite3_last_insert_rowid` reports the rowid of the most recent successful INSERT **on that connection** — it is 0 on a connection that has not inserted yet, and it is 0 for `WITHOUT ROWID` tables (whose primary keys live in a separate index B-tree, not as rowids). A `TEXT PRIMARY KEY` course table is the classic case: the insert succeeds, but there is no rowid to report.
 
 **Fix**: Check the error before using `LastInsertId`, and verify the column definition is exactly `INTEGER PRIMARY KEY`.
 

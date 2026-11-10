@@ -51,8 +51,10 @@ Go uses SQLite through the `database/sql` interface. The import path is `modernc
 ```go
 import _ "modernc.org/sqlite"
 
+// Either an in-memory database...
 db, err := sql.Open("sqlite", ":memory:")
-db, err := sql.Open("sqlite", "./data.db")
+// ...or a file-backed one
+db2, err := sql.Open("sqlite", "./data.db")
 ```
 
 The driver name is `"sqlite"`. The second argument is the data source name (DSN), which can be:
@@ -83,7 +85,6 @@ import (
 )
 
 func main() {
-	// In-memory database
 	memDB, err := sql.Open("sqlite", ":memory:")
 	if err != nil {
 		log.Fatal(err)
@@ -97,7 +98,6 @@ func main() {
 	memDB.QueryRow(`SELECT note FROM memo WHERE id = 1`).Scan(&note)
 	fmt.Println("Memory DB:", note)
 
-	// File-backed database
 	tmpDir := os.TempDir()
 	dbPath := filepath.Join(tmpDir, "sqlite_example.db")
 	defer os.Remove(dbPath)
@@ -113,10 +113,8 @@ func main() {
 	fileDB.QueryRow(`SELECT title FROM tasks WHERE id = 1`).Scan(&note)
 	fmt.Println("File DB:", note)
 
-	// Enable WAL mode
 	fileDB.Exec(`PRAGMA journal_mode=WAL`)
 
-	// Query SQLite version
 	var version string
 	memDB.QueryRow(`SELECT sqlite_version()`).Scan(&version)
 	fmt.Println("SQLite version:", version)
@@ -175,8 +173,8 @@ db2.Exec(`INSERT INTO t VALUES (1)`)
 
 ## Performance implications
 
-- In-memory SQLite: 50,000+ simple queries per second on modern hardware.
-- File-backed SQLite (WAL mode): 10,000–50,000 reads/sec, 500–5,000 writes/sec depending on disk speed.
+- In-memory SQLite handles simple point queries at rates in the tens of thousands per second on modern hardware.
+- File-backed SQLite (WAL mode) typically manages tens of thousands of reads per second; write throughput depends heavily on disk speed and transaction batching.
 - SQLite write throughput is fundamentally limited by the single-writer constraint. Concurrent writers queue.
 - `BEGIN IMMEDIATE` transaction mode starts a write transaction immediately instead of upgrading from a read, avoiding some `database is locked` errors.
 - Benchmark your specific workload — SQLite performance varies dramatically with schema, data size, and access pattern.
