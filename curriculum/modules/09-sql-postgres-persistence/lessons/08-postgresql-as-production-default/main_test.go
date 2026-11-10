@@ -8,7 +8,7 @@ import (
 )
 
 func TestConnectDB(t *testing.T) {
-	db, err := ConnectDB(":memory:")
+	db, err := ConnectDB("sqlite", ":memory:")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -28,7 +28,7 @@ func TestConnectDBInvalidDSN(t *testing.T) {
 }
 
 func TestConnectAndQuery(t *testing.T) {
-	db, err := ConnectDB(":memory:")
+	db, err := ConnectDB("sqlite", ":memory:")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -55,7 +55,7 @@ func TestConnectAndQuery(t *testing.T) {
 }
 
 func TestPoolSettings(t *testing.T) {
-	db, err := ConnectDB(":memory:")
+	db, err := ConnectDB("sqlite", ":memory:")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -69,7 +69,7 @@ func TestPoolSettings(t *testing.T) {
 
 func TestMultipleConnects(t *testing.T) {
 	for i := 0; i < 5; i++ {
-		db, err := ConnectDB(":memory:")
+		db, err := ConnectDB("sqlite", ":memory:")
 		if err != nil {
 			t.Fatalf("connect %d: %v", i, err)
 		}

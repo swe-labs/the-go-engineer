@@ -113,7 +113,12 @@ func ConfigurePool(db *sql.DB) {
 	db.SetConnMaxIdleTime(5 * time.Minute)
 }
 
-func RunMigrations(ctx context.Context, db *sql.DB) error {
+// RunMigrations applies the DDL idempotently. For PostgreSQL databases
+// created before the task_audit_logs foreign key existed, an upgrade step
+// adds the constraint when it is missing (CREATE TABLE IF NOT EXISTS alone
+// would skip it). SQLite has no ALTER ADD CONSTRAINT and rebuilds are out of
+// scope for this exercise: fresh SQLite databases get the FK from the DDL.
+func RunMigrations(ctx context.Context, db *sql.DB, driver string) error {
 	schema := `
 	CREATE TABLE IF NOT EXISTS tasks (
 		id VARCHAR(64) PRIMARY KEY,
@@ -133,8 +138,23 @@ func RunMigrations(ctx context.Context, db *sql.DB) error {
 		FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 	);
 	`
-	_, err := db.ExecContext(ctx, schema)
-	return err
+	if _, err := db.ExecContext(ctx, schema); err != nil {
+		return err
+	}
+
+	if driver == "pgx" {
+		const upgradeFK = `DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_task_audit_logs_task') THEN
+        ALTER TABLE task_audit_logs ADD CONSTRAINT fk_task_audit_logs_task
+            FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
+    END IF;
+END $$;`
+		if _, err := db.ExecContext(ctx, upgradeFK); err != nil {
+			return fmt.Errorf("foreign key upgrade migration: %w", err)
+		}
+	}
+	return nil
 }
 
 type TaskRepository struct {
@@ -526,7 +546,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err := RunMigrations(ctx, db); err != nil {
+	if err := RunMigrations(ctx, db, driver); err != nil {
 		slog.Error("migration failed", "error", err)
 		os.Exit(1)
 	}

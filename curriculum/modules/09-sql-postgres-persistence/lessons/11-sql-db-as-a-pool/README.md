@@ -164,7 +164,7 @@ func main() {
 
 ## Step-by-step execution
 
-1. `configurePool` sets the pool limits. For this in-memory SQLite, the limits are not binding (SQLite handles everything in-process), but they demonstrate the configuration pattern.
+1. `configurePool` sets the pool limits. The main opens a shared-cache in-memory database (`file::memory:?cache=shared`) so all pooled connections see the same tables — a bare `:memory:` would give each connection a separate private database. With everything in-process the limits are not binding, but they demonstrate the configuration pattern.
 2. Five goroutines each insert an event concurrently. The pool manages the five concurrent requests, handing out connections from the pool.
 3. `db.Stats()` returns current pool statistics: how many connections are open, in use, idle, and how many goroutines are waiting.
 4. The program prints the pool stats and the total event count.

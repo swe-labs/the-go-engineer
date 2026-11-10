@@ -25,7 +25,7 @@ func setupTestDB(t *testing.T) (*sql.DB, *TaskRepository) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	if err := RunMigrations(ctx, db); err != nil {
+	if err := RunMigrations(ctx, db, "sqlite"); err != nil {
 		t.Fatalf("failed to run migrations: %v", err)
 	}
 
