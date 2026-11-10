@@ -92,32 +92,40 @@ import (
 	"time"
 )
 
-// requestTimer is a struct-based handler that logs how long each request takes.
-type requestTimer struct {
+type Logger struct {
 	handler http.Handler
 }
 
-func (rt *requestTimer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (l *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	start := time.Now()
-	rt.handler.ServeHTTP(w, r)
-	log.Printf("%s %s took %v", r.Method, r.URL.Path, time.Since(start))
+	l.handler.ServeHTTP(w, r)
+	log.Printf("%s %s %s", r.Method, r.URL.Path, time.Since(start))
 }
 
-// GreetingHandler holds a dependency (greeting template).
-type GreetingHandler struct {
-	Greeting string
+type AdminCheck struct {
+	handler http.Handler
 }
 
-func (gh *GreetingHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (a *AdminCheck) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.Header.Get("X-Admin") != "true" {
+		http.Error(w, "Forbidden", http.StatusForbidden)
+		return
+	}
+	a.handler.ServeHTTP(w, r)
+}
+
+func adminHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	fmt.Fprintf(w, "%s, %s!", gh.Greeting, r.URL.Query().Get("name"))
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprint(w, "Welcome, admin!")
 }
 
 func main() {
-	greet := &GreetingHandler{Greeting: "Hello"}
-	timed := &requestTimer{handler: greet}
+	var h http.Handler = http.HandlerFunc(adminHandler)
+	h = &AdminCheck{handler: h}
+	h = &Logger{handler: h}
 
-	http.Handle("/greet", timed)
+	http.Handle("/admin", h)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 ```

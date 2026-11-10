@@ -77,10 +77,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
-	"net/http/httptest"
-	"strings"
-	"testing"
 )
 
 type User struct {
@@ -100,7 +98,20 @@ func usersHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(users)
+	if err := json.NewEncoder(w).Encode(users); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func adminMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		role := r.Header.Get("X-Role")
+		if role != "admin" {
+			http.Error(w, "forbidden", http.StatusForbidden)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }
 
 func greetingHandler(w http.ResponseWriter, r *http.Request) {
@@ -111,59 +122,17 @@ func greetingHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello, %s!", name)
 }
 
-// --- Tests ---
-
-func TestUsersHandler(t *testing.T) {
-	req := httptest.NewRequest(http.MethodGet, "/api/users", nil)
-	rec := httptest.NewRecorder()
-	usersHandler(rec, req)
-
-	resp := rec.Result()
-	if resp.StatusCode != http.StatusOK {
-		t.Fatalf("expected 200, got %d", resp.StatusCode)
-	}
-	var got []User
-	json.NewDecoder(resp.Body).Decode(&got)
-	resp.Body.Close()
-	if len(got) != 2 {
-		t.Fatalf("expected 2 users, got %d", len(got))
-	}
-}
-
-func TestGreetingTableDriven(t *testing.T) {
-	tests := []struct {
-		name  string
-		query string
-		want  string
-	}{
-		{"default", "", "Hello, world!"},
-		{"named", "name=Go", "Hello, Go!"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			req := httptest.NewRequest(http.MethodGet, "/greet?"+tt.query, nil)
-			rec := httptest.NewRecorder()
-			greetingHandler(rec, req)
-			if got := strings.TrimSpace(rec.Body.String()); got != tt.want {
-				t.Errorf("got %q, want %q", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestWithServer(t *testing.T) {
+func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/users", usersHandler)
-	server := httptest.NewServer(mux)
-	defer server.Close()
+	mux.Handle("/api/admin", adminMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "admin area")
+	})))
+	mux.HandleFunc("/greet", greetingHandler)
 
-	resp, err := http.Get(server.URL + "/api/users")
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		t.Fatalf("expected 200, got %d", resp.StatusCode)
+	log.Println("Server starting on :8080")
+	if err := http.ListenAndServe(":8080", mux); err != nil {
+		log.Fatal(err)
 	}
 }
 ```

@@ -87,54 +87,65 @@ import (
 	"strings"
 )
 
-type ProductInput struct {
-	Name     string  `json:"name"`
-	Price    float64 `json:"price"`
-	Category string  `json:"category"`
-	Email    string  `json:"email"`
-}
-
 type ValidationError struct {
 	Field   string `json:"field"`
 	Message string `json:"message"`
 }
 
-var validCategories = map[string]bool{
-	"electronics": true,
-	"clothing":    true,
-	"food":        true,
+var validEmail = regexp.MustCompile(`(?i)^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$`)
+var alphanumeric = regexp.MustCompile(`^[a-zA-Z0-9]+$`)
+var validRoles = map[string]bool{
+	"admin": true, "editor": true, "viewer": true,
 }
 
-var emailRegex = regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$`)
-
-func validateProduct(input ProductInput) []ValidationError {
+func validateUser(input map[string]interface{}) []ValidationError {
 	var errs []ValidationError
 
-	if strings.TrimSpace(input.Name) == "" {
-		errs = append(errs, ValidationError{Field: "name", Message: "name is required"})
-	} else if len(input.Name) < 3 {
-		errs = append(errs, ValidationError{Field: "name", Message: "name must be at least 3 characters"})
+	username, _ := input["username"].(string)
+	username = strings.TrimSpace(username)
+	if username == "" {
+		errs = append(errs, ValidationError{Field: "username", Message: "username is required"})
+	} else {
+		if len(username) < 3 || len(username) > 30 {
+			errs = append(errs, ValidationError{Field: "username", Message: "username must be 3-30 characters"})
+		}
+		if !alphanumeric.MatchString(username) {
+			errs = append(errs, ValidationError{Field: "username", Message: "username must be alphanumeric"})
+		}
 	}
 
-	if input.Price <= 0 {
-		errs = append(errs, ValidationError{Field: "price", Message: "price must be greater than 0"})
-	} else if input.Price > 10000 {
-		errs = append(errs, ValidationError{Field: "price", Message: "price must not exceed 10000"})
+	ageVal, ageOk := input["age"]
+	if !ageOk {
+		errs = append(errs, ValidationError{Field: "age", Message: "age is required"})
+	} else {
+		ageFloat, ok := ageVal.(float64)
+		if !ok {
+			errs = append(errs, ValidationError{Field: "age", Message: "age must be a number"})
+		} else {
+			age := int(ageFloat)
+			if age < 13 || age > 150 {
+				errs = append(errs, ValidationError{Field: "age", Message: "age must be between 13 and 150"})
+			}
+		}
 	}
 
-	if !validCategories[input.Category] {
-		errs = append(errs, ValidationError{Field: "category", Message: fmt.Sprintf("category must be one of: electronics, clothing, food")})
+	if email, ok := input["email"].(string); ok && email != "" {
+		if !validEmail.MatchString(email) {
+			errs = append(errs, ValidationError{Field: "email", Message: "invalid email format"})
+		}
 	}
 
-	if input.Email != "" && !emailRegex.MatchString(input.Email) {
-		errs = append(errs, ValidationError{Field: "email", Message: "invalid email format"})
+	if role, ok := input["role"].(string); ok && role != "" {
+		if !validRoles[role] {
+			errs = append(errs, ValidationError{Field: "role", Message: fmt.Sprintf("role must be one of: admin, editor, viewer")})
+		}
 	}
 
 	return errs
 }
 
-func productHandler(w http.ResponseWriter, r *http.Request) {
-	var input ProductInput
+func userHandler(w http.ResponseWriter, r *http.Request) {
+	var input map[string]interface{}
 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
@@ -142,7 +153,7 @@ func productHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	errs := validateProduct(input)
+	errs := validateUser(input)
 	if len(errs) > 0 {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnprocessableEntity)
@@ -157,7 +168,7 @@ func productHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /products", productHandler)
+	mux.HandleFunc("POST /users", userHandler)
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 ```

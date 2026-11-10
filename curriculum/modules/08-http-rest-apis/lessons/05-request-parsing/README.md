@@ -74,61 +74,74 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 )
 
-// SearchParams holds parsed request data.
-type SearchParams struct {
-	Query string `json:"query"`
-	Page  int    `json:"page"`
-	Limit int    `json:"limit"`
+type InputData struct {
+	Name  string `json:"name"`
+	Count int    `json:"count"`
 }
 
-func searchHandler(w http.ResponseWriter, r *http.Request) {
-	// Parse query string.
-	params := SearchParams{
-		Query: r.URL.Query().Get("q"),
-		Limit: 20,
-	}
-	if p := r.URL.Query().Get("page"); p != "" {
-		if v, err := strconv.Atoi(p); err == nil {
-			params.Page = v
-		}
-	}
-	if l := r.URL.Query().Get("limit"); l != "" {
-		if v, err := strconv.Atoi(l); err == nil {
-			params.Limit = v
-		}
+type ErrorResponse struct {
+	Errors map[string]string `json:"errors"`
+}
+
+func processHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+	if id == "" {
+		writeErrors(w, http.StatusBadRequest, map[string]string{"id": "path parameter {id} is required"})
+		return
 	}
 
-	// Read auth header.
-	auth := r.Header.Get("Authorization")
+	format := r.URL.Query().Get("format")
+	if format == "" {
+		format = "json"
+	}
+	if format != "json" {
+		writeErrors(w, http.StatusBadRequest, map[string]string{"format": "unsupported format, use 'json'"})
+		return
+	}
+
+	traceID := r.Header.Get("X-Trace-ID")
+
+	var input InputData
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		writeErrors(w, http.StatusBadRequest, map[string]string{"body": "invalid JSON: " + err.Error()})
+		return
+	}
+
+	errs := make(map[string]string)
+	if input.Name == "" {
+		errs["name"] = "field 'name' is required"
+	}
+	if input.Count == 0 {
+		errs["count"] = "field 'count' is required and must be non-zero"
+	}
+	if len(errs) > 0 {
+		writeErrors(w, http.StatusBadRequest, errs)
+		return
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
-		"params": params,
-		"auth":   auth[:min(len(auth), 8)] + "...",
+		"id":       id,
+		"name":     input.Name,
+		"count":    input.Count,
+		"format":   format,
+		"trace_id": traceID,
 	})
 }
 
-func createHandler(w http.ResponseWriter, r *http.Request) {
-	var body map[string]interface{}
-	if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
-		http.Error(w, `{"error":"invalid JSON"}`, http.StatusBadRequest)
-		return
-	}
+func writeErrors(w http.ResponseWriter, status int, errs map[string]string) {
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(body)
+	w.WriteHeader(status)
+	json.NewEncoder(w).Encode(ErrorResponse{Errors: errs})
 }
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /search", searchHandler)
-	mux.HandleFunc("POST /data", createHandler)
+	mux.HandleFunc("POST /process/{id}", processHandler)
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 ```

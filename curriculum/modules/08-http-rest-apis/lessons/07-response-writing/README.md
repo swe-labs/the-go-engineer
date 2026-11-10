@@ -89,46 +89,46 @@ import (
 	"time"
 )
 
-type Event struct {
-	ID        int    `json:"id"`
-	Message   string `json:"message"`
+type ReportHeader struct {
+	Type      string `json:"type"`
 	Timestamp string `json:"timestamp"`
+	Total     int    `json:"total"`
 }
 
-func singleEventHandler(w http.ResponseWriter, r *http.Request) {
-	event := Event{
-		ID:        1,
-		Message:   "hello",
-		Timestamp: time.Now().Format(time.RFC3339),
-	}
-	writeJSON(w, http.StatusOK, event)
+type ReportItem struct {
+	ID    int    `json:"id"`
+	Value string `json:"value"`
 }
 
-func eventsListHandler(w http.ResponseWriter, r *http.Request) {
-	events := []Event{
-		{ID: 1, Message: "start", Timestamp: time.Now().Format(time.RFC3339)},
-		{ID: 2, Message: "processing", Timestamp: time.Now().Format(time.RFC3339)},
-		{ID: 3, Message: "complete", Timestamp: time.Now().Format(time.RFC3339)},
-	}
-	writeJSON(w, http.StatusOK, events)
+type ReportFooter struct {
+	Status string `json:"status"`
 }
 
-func streamHandler(w http.ResponseWriter, r *http.Request) {
-	flusher, ok := w.(http.Flusher)
-	if !ok {
-		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "streaming not supported"})
-		return
-	}
-
-	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("Cache-Control", "no-cache")
+func reportHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 
-	for i := 0; i < 5; i++ {
-		fmt.Fprintf(w, "data: message %d at %s\n\n", i, time.Now().Format(time.RFC3339))
-		flusher.Flush()
-		time.Sleep(500 * time.Millisecond)
+	// Stream the JSON structure: header, array of items, footer.
+	encoder := json.NewEncoder(w)
+	encoder.Encode(map[string]string{"header": "report"})
+	encoder.Encode(ReportHeader{
+		Type:      "summary",
+		Timestamp: time.Now().Format(time.RFC3339),
+		Total:     100,
+	})
+	encoder.Encode(map[string]string{"items": "start"})
+	for i := 0; i < 100; i++ {
+		encoder.Encode(ReportItem{
+			ID:    i + 1,
+			Value: fmt.Sprintf("item-%d", i+1),
+		})
 	}
+	encoder.Encode(map[string]string{"items": "end"})
+	encoder.Encode(ReportFooter{Status: "complete"})
+}
+
+func pingHandler(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, http.StatusOK, map[string]string{"message": "pong"})
 }
 
 func writeJSON(w http.ResponseWriter, status int, data interface{}) {
@@ -139,9 +139,8 @@ func writeJSON(w http.ResponseWriter, status int, data interface{}) {
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /event", singleEventHandler)
-	mux.HandleFunc("GET /events", eventsListHandler)
-	mux.HandleFunc("GET /stream", streamHandler)
+	mux.HandleFunc("GET /ping", pingHandler)
+	mux.HandleFunc("GET /report", reportHandler)
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 ```

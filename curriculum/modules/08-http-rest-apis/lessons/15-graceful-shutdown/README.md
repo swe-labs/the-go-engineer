@@ -81,13 +81,10 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 	"time"
 )
-
-func fastHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "ok")
-}
 
 func slowHandler(w http.ResponseWriter, r *http.Request) {
 	select {
@@ -96,6 +93,10 @@ func slowHandler(w http.ResponseWriter, r *http.Request) {
 	case <-r.Context().Done():
 		return
 	}
+}
+
+func fastHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "ok")
 }
 
 func main() {
@@ -108,7 +109,6 @@ func main() {
 		Handler: mux,
 	}
 
-	// Run server in background
 	go func() {
 		log.Println("Server starting on :8080")
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
@@ -116,7 +116,6 @@ func main() {
 		}
 	}()
 
-	// Wait for signal
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	sig := <-quit
@@ -129,6 +128,18 @@ func main() {
 		log.Fatalf("shutdown: %v", err)
 	}
 	log.Println("Server exited gracefully")
+}
+
+func shutdownWithWG(srv *http.Server, timeout time.Duration) error {
+	var wg sync.WaitGroup
+
+	srv.RegisterOnShutdown(func() {
+		wg.Wait()
+	})
+
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	defer cancel()
+	return srv.Shutdown(ctx)
 }
 ```
 

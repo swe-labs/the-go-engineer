@@ -108,7 +108,6 @@ import (
 	"net/http"
 )
 
-// APIError is the standard error envelope.
 type FieldError struct {
 	Field   string `json:"field"`
 	Message string `json:"message"`
@@ -136,69 +135,32 @@ var errInternal = APIError{
 	Message: "An unexpected error occurred",
 }
 
-func getUserHandler(w http.ResponseWriter, r *http.Request) {
+func deleteResourceHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
+
 	if id == "" {
 		writeError(w, http.StatusBadRequest, APIError{
 			Code:    "BAD_REQUEST",
-			Message: "Missing user ID",
+			Message: "Missing resource ID",
 		})
 		return
 	}
 
-	// Simulate not-found lookup.
+	if id == "panic" {
+		panic("simulated panic for testing")
+	}
+
 	if id != "42" {
 		writeError(w, http.StatusNotFound, errNotFound)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"id": "42", "name": "Alice"})
-}
-
-func createUserHandler(w http.ResponseWriter, r *http.Request) {
-	var input struct {
-		Name  string `json:"name"`
-		Email string `json:"email"`
-		Age   int    `json:"age"`
-	}
-	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
-		writeError(w, http.StatusBadRequest, APIError{
-			Code:    "INVALID_JSON",
-			Message: "The request body is not valid JSON",
-		})
-		return
-	}
-
-	var errs []FieldError
-	if input.Name == "" {
-		errs = append(errs, FieldError{Field: "name", Message: "Name is required"})
-	}
-	if input.Email == "" {
-		errs = append(errs, FieldError{Field: "email", Message: "Email is required"})
-	}
-	if input.Age < 18 {
-		errs = append(errs, FieldError{Field: "age", Message: "Must be at least 18"})
-	}
-
-	if len(errs) > 0 {
-		writeError(w, http.StatusUnprocessableEntity, APIError{
-			Code:    "VALIDATION_ERROR",
-			Message: "The request contains invalid fields",
-			Details: errs,
-		})
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(input)
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /users/{id}", getUserHandler)
-	mux.HandleFunc("POST /users", createUserHandler)
+	mux.HandleFunc("DELETE /resources/{id}", deleteResourceHandler)
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 ```

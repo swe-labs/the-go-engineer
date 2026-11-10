@@ -10,7 +10,7 @@ The vast majority of real-world Go backend services are HTTP web APIs. Writing h
 
 ## Prerequisites
 
-Complete all Module 08 lessons (01–20) on HTTP fundamentals, standard library routing, middleware patterns, JSON streaming, and server lifecycle.
+Complete all Module 08 lessons (01–21) on HTTP fundamentals, standard library routing, middleware patterns, JSON streaming, and server lifecycle.
 
 ## Available concepts
 

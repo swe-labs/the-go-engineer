@@ -107,52 +107,50 @@ func writeJSON(w http.ResponseWriter, status int, data interface{}) {
 	json.NewEncoder(w).Encode(data)
 }
 
-// withRecovery catches panics and returns structured JSON errors.
+// recoveryWriter wraps ResponseWriter to track whether headers were written.
+type recoveryWriter struct {
+	http.ResponseWriter
+	wroteHeader bool
+	status      int
+}
+
+func (w *recoveryWriter) WriteHeader(code int) {
+	if !w.wroteHeader {
+		w.status = code
+		w.wroteHeader = true
+		w.ResponseWriter.WriteHeader(code)
+	}
+}
+
+func (w *recoveryWriter) Write(b []byte) (int, error) {
+	if !w.wroteHeader {
+		w.WriteHeader(http.StatusOK)
+	}
+	return w.ResponseWriter.Write(b)
+}
+
 func withRecovery(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		rw := &recoveryWriter{ResponseWriter: w, status: http.StatusOK}
 		defer func() {
 			if rec := recover(); rec != nil {
 				log.Printf("PANIC: %v\n%s", rec, debug.Stack())
-				writeJSON(w, http.StatusInternalServerError, APIError{
-					Code:    "INTERNAL_ERROR",
-					Message: "An unexpected error occurred",
-				})
+				if !rw.wroteHeader {
+					writeJSON(rw, http.StatusInternalServerError, APIError{
+						Code:    "PANIC",
+						Message: "internal error",
+					})
+				}
 			}
 		}()
-		next.ServeHTTP(w, r)
-	})
-}
+		next.ServeHTTP(rw, r)
 
-// withErrorTracking wraps ResponseWriter to catch handlers that write
-// error status codes without a proper JSON body.
-type errorTrackingWriter struct {
-	http.ResponseWriter
-	status int
-}
-
-func (w *errorTrackingWriter) WriteHeader(code int) {
-	w.status = code
-	w.ResponseWriter.WriteHeader(code)
-}
-
-func withErrorTracking(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		tw := &errorTrackingWriter{ResponseWriter: w, status: http.StatusOK}
-		next.ServeHTTP(tw, r)
-		if tw.status >= 500 {
-			log.Printf("ERROR: %s %s returned %d", r.Method, r.URL.Path, tw.status)
+		// If the handler wrote a 5xx without a proper JSON body, wrap it.
+		if rw.status >= 500 && !rw.wroteHeader {
+			// Headers already sent; we can't replace the body.
+			// In a real app, the handler should use writeJSON.
+			log.Printf("WARNING: handler returned %d without JSON body", rw.status)
 		}
-	})
-}
-
-func crashHandler(w http.ResponseWriter, r *http.Request) {
-	panic("database connection lost")
-}
-
-func notFoundHandler(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, http.StatusNotFound, APIError{
-		Code:    "NOT_FOUND",
-		Message: "The requested resource was not found",
 	})
 }
 
@@ -160,11 +158,27 @@ func okHandler(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }
 
+func panicHandler(w http.ResponseWriter, r *http.Request) {
+	panic("simulated database failure")
+}
+
+func notFoundHandler(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, http.StatusNotFound, APIError{
+		Code:    "NOT_FOUND",
+		Message: "resource not found",
+	})
+}
+
+func plainErrorHandler(w http.ResponseWriter, r *http.Request) {
+	http.Error(w, "something went wrong", http.StatusInternalServerError)
+}
+
 func main() {
 	mux := http.NewServeMux()
-	mux.Handle("/ok", withRecovery(withErrorTracking(http.HandlerFunc(okHandler))))
-	mux.Handle("/crash", withRecovery(withErrorTracking(http.HandlerFunc(crashHandler))))
-	mux.Handle("/notfound", withRecovery(withErrorTracking(http.HandlerFunc(notFoundHandler))))
+	mux.Handle("/ok", withRecovery(http.HandlerFunc(okHandler)))
+	mux.Handle("/panic", withRecovery(http.HandlerFunc(panicHandler)))
+	mux.Handle("/notfound", withRecovery(http.HandlerFunc(notFoundHandler)))
+	mux.Handle("/plain-error", withRecovery(http.HandlerFunc(plainErrorHandler)))
 
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
