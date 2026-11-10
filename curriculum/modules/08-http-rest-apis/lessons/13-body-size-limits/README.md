@@ -70,6 +70,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"strings"
@@ -85,7 +86,6 @@ func commentHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Limit body to 100 bytes
 	r.Body = http.MaxBytesReader(w, r.Body, 100)
 
 	var c Comment
@@ -110,14 +110,40 @@ func maxBytesMiddleware(limit int64) func(http.Handler) http.Handler {
 	}
 }
 
+func secureCommentHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var c Comment
+	if err := json.NewDecoder(r.Body).Decode(&c); err != nil {
+		http.Error(w, "bad request", http.StatusBadRequest)
+		return
+	}
+
+	fmt.Fprintf(w, "ok: %s", c.Text)
+}
+
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/comment", commentHandler)
 
-	secured := maxBytesMiddleware(1 << 20)(http.HandlerFunc(commentHandler))
-	mux.Handle("/secure-comment", secured)
+	secureMux := http.NewServeMux()
+	secureMux.Handle("/secure-comment", maxBytesMiddleware(100)(http.HandlerFunc(secureCommentHandler)))
 
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Println("Server starting on :8080")
+	if err := http.ListenAndServe(":8080", mux); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func readBody(r io.Reader) (string, error) {
+	b, err := io.ReadAll(r)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }
 ```
 

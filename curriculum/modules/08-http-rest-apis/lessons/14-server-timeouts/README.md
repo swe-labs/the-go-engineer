@@ -96,19 +96,33 @@ func fastHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "fast response")
 }
 
-func main() {
+func echoHandler(w http.ResponseWriter, r *http.Request) {
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, "read error", http.StatusBadRequest)
+		return
+	}
+	fmt.Fprintf(w, "echo: %s", body)
+}
+
+func newServer(addr string, readTimeout, writeTimeout, idleTimeout, readHeaderTimeout time.Duration) *http.Server {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/fast", fastHandler)
 	mux.HandleFunc("/slow", slowHandler)
+	mux.HandleFunc("/echo", echoHandler)
 
-	srv := &http.Server{
-		Addr:              ":8080",
+	return &http.Server{
+		Addr:              addr,
 		Handler:           mux,
-		ReadTimeout:       5 * time.Second,
-		WriteTimeout:      10 * time.Second,
-		IdleTimeout:       60 * time.Second,
-		ReadHeaderTimeout: 2 * time.Second,
+		ReadTimeout:       readTimeout,
+		WriteTimeout:      writeTimeout,
+		IdleTimeout:       idleTimeout,
+		ReadHeaderTimeout: readHeaderTimeout,
 	}
+}
+
+func main() {
+	srv := newServer(":8080", 5*time.Second, 10*time.Second, 60*time.Second, 2*time.Second)
 
 	log.Println("Server starting on :8080")
 	if err := srv.ListenAndServe(); err != http.ErrServerClosed {
@@ -116,7 +130,6 @@ func main() {
 	}
 }
 
-// Client-side timeout using context
 func fetchWithTimeout(url string, timeout time.Duration) (string, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
@@ -133,7 +146,10 @@ func fetchWithTimeout(url string, timeout time.Duration) (string, error) {
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
-	return string(body), err
+	if err != nil {
+		return "", err
+	}
+	return string(body), nil
 }
 ```
 

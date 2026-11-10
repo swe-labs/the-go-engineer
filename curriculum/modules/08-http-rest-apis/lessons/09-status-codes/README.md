@@ -94,74 +94,74 @@ import (
 	"sync/atomic"
 )
 
-type Item struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+type Order struct {
+	ID     string `json:"id"`
+	Item   string `json:"item"`
+	Status string `json:"status"`
 }
 
 var (
-	items   = map[string]Item{}
-	nextID  int64
+	orders  = map[string]Order{}
+	orderID int64
 )
 
-func createItem(w http.ResponseWriter, r *http.Request) {
-	var input Item
+func createOrder(w http.ResponseWriter, r *http.Request) {
+	var input struct {
+		Item string `json:"item"`
+	}
 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
-		http.Error(w, "invalid JSON", http.StatusBadRequest)
+		http.Error(w, `{"error":"invalid JSON"}`, http.StatusBadRequest)
 		return
 	}
-	if input.Name == "" {
-		http.Error(w, "name is required", http.StatusUnprocessableEntity)
+	if input.Item == "" {
+		http.Error(w, `{"error":"item is required"}`, http.StatusUnprocessableEntity)
 		return
 	}
 
-	id := fmt.Sprintf("item-%d", atomic.AddInt64(&nextID, 1))
-	input.ID = id
-	items[id] = input
+	id := fmt.Sprintf("ord-%d", atomic.AddInt64(&orderID, 1))
+	order := Order{ID: id, Item: input.Item, Status: "created"}
+	orders[id] = order
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(input)
+	json.NewEncoder(w).Encode(order)
 }
 
-func getItem(w http.ResponseWriter, r *http.Request) {
+func getOrder(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
-	if id == "" {
-		http.Error(w, "missing id", http.StatusBadRequest)
+	order, ok := orders[id]
+	if !ok {
+		http.Error(w, `{"error":"order not found"}`, http.StatusNotFound)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(order)
+}
+
+func cancelOrder(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+	order, ok := orders[id]
+	if !ok {
+		http.Error(w, `{"error":"order not found"}`, http.StatusNotFound)
+		return
+	}
+	if order.Status == "cancelled" {
+		http.Error(w, `{"error":"order already cancelled"}`, http.StatusConflict)
 		return
 	}
 
-	item, ok := items[id]
-	if !ok {
-		http.Error(w, "not found", http.StatusNotFound)
-		return
-	}
+	order.Status = "cancelled"
+	orders[id] = order
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(item)
-}
-
-func deleteItem(w http.ResponseWriter, r *http.Request) {
-	id := r.PathValue("id")
-	if id == "" {
-		http.Error(w, "missing id", http.StatusBadRequest)
-		return
-	}
-
-	if _, ok := items[id]; !ok {
-		http.Error(w, "not found", http.StatusNotFound)
-		return
-	}
-
-	delete(items, id)
-	w.WriteHeader(http.StatusNoContent)
+	json.NewEncoder(w).Encode(order)
 }
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /items", createItem)
-	mux.HandleFunc("GET /items/{id}", getItem)
-	mux.HandleFunc("DELETE /items/{id}", deleteItem)
+	mux.HandleFunc("POST /orders", createOrder)
+	mux.HandleFunc("GET /orders/{id}", getOrder)
+	mux.HandleFunc("PUT /orders/{id}/cancel", cancelOrder)
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 ```

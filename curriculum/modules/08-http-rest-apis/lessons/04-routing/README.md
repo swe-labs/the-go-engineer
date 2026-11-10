@@ -75,55 +75,58 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 )
 
-type User struct {
+type Task struct {
 	ID   string `json:"id"`
-	Name string `json:"name"`
+	Text string `json:"text"`
+	Done bool   `json:"done"`
 }
 
-// In-memory store for demonstration.
-var users = map[string]User{
-	"1": {ID: "1", Name: "Alice"},
-	"2": {ID: "2", Name: "Bob"},
+var tasks = map[string]Task{
+	"1": {ID: "1", Text: "Buy groceries", Done: false},
+	"2": {ID: "2", Text: "Write Go code", Done: true},
 }
 
-func listUsers(w http.ResponseWriter, r *http.Request) {
+func listTasks(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(users)
+	json.NewEncoder(w).Encode(tasks)
 }
 
-func getUser(w http.ResponseWriter, r *http.Request) {
+func getTask(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
-	u, ok := users[id]
+	t, ok := tasks[id]
 	if !ok {
-		http.Error(w, `{"error":"not found"}`, http.StatusNotFound)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(map[string]string{"error": "task not found"})
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(u)
+	json.NewEncoder(w).Encode(t)
 }
 
-func createUser(w http.ResponseWriter, r *http.Request) {
-	var u User
-	if err := json.NewDecoder(r.Body).Decode(&u); err != nil {
-		http.Error(w, `{"error":"invalid JSON"}`, http.StatusBadRequest)
+func createTask(w http.ResponseWriter, r *http.Request) {
+	var t Task
+	if err := json.NewDecoder(r.Body).Decode(&t); err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(map[string]string{"error": "invalid JSON"})
 		return
 	}
-	users[u.ID] = u
+	tasks[t.ID] = t
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(u)
+	json.NewEncoder(w).Encode(t)
 }
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /users", listUsers)
-	mux.HandleFunc("GET /users/{id}", getUser)
-	mux.HandleFunc("POST /users", createUser)
+	mux.HandleFunc("GET /tasks", listTasks)
+	mux.HandleFunc("GET /tasks/{id}", getTask)
+	mux.HandleFunc("POST /tasks", createTask)
 
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
