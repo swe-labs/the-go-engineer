@@ -138,4 +138,11 @@ func main() {
 		resp.Body.Close()
 		time.Sleep(200 * time.Millisecond)
 	}
+
+	fmt.Println("\nWaiting 1.1s for the bucket to refill (1 token/sec)...")
+	time.Sleep(1100 * time.Millisecond)
+	resp, _ := http.Get(ts.URL + "/api")
+	fmt.Printf("  Request 6 (after refill): status=%d, remaining=%s\n",
+		resp.StatusCode, resp.Header.Get("X-RateLimit-Remaining"))
+	resp.Body.Close()
 }

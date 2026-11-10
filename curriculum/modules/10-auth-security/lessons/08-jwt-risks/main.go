@@ -4,7 +4,9 @@ import (
 	"crypto/hmac"
 	"crypto/rand"
 	"crypto/rsa"
+	"crypto/sha256"
 	"encoding/base64"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -18,7 +20,6 @@ import (
 var (
 	rsaPrivateKey *rsa.PrivateKey
 	rsaPublicKey  *rsa.PublicKey
-	hmacSecret    = []byte("my-super-secret-key-change-in-production")
 )
 
 func init() {
@@ -103,18 +104,69 @@ func VerifyTokenSafe(tokenStr string, denyList *DenyList) (*SafeClaims, error) {
 	return claims, nil
 }
 
-// Vulnerable verifier for demonstration.
+// VerifyTokenVulnerable is a hand-rolled verifier that reproduces the two
+// historical flaws this lesson teaches. golang-jwt/jwt v5 blocks both (a nil
+// keyfunc errors out, and HS256 verification rejects non-byte keys), so the
+// vulnerable behavior is implemented manually for demonstration:
+//
+//  1. Algorithm confusion: the attacker-controlled alg header selects the
+//     verification key, so an HS256 token "signed" with the RSA public-key
+//     bytes is accepted.
+//  2. alg: none: tokens with no algorithm are accepted without any
+//     signature check.
 func VerifyTokenVulnerable(tokenStr string) (string, error) {
-	token, err := jwt.Parse(tokenStr, nil)
+	parts := strings.Split(tokenStr, ".")
+	if len(parts) != 3 {
+		return "", errors.New("malformed token")
+	}
+	headerBytes, err := base64.RawURLEncoding.DecodeString(parts[0])
 	if err != nil {
 		return "", err
 	}
-	claims, ok := token.Claims.(jwt.MapClaims)
-	if !ok || !token.Valid {
-		return "", errors.New("invalid token")
+	payloadBytes, err := base64.RawURLEncoding.DecodeString(parts[1])
+	if err != nil {
+		return "", err
+	}
+	var header struct {
+		Alg string `json:"alg"`
+	}
+	if err := json.Unmarshal(headerBytes, &header); err != nil {
+		return "", err
+	}
+	if header.Alg == "none" {
+		// VULNERABILITY: no signature verification at all.
+		var claims map[string]any
+		if err := json.Unmarshal(payloadBytes, &claims); err != nil {
+			return "", err
+		}
+		sub, _ := claims["sub"].(string)
+		return sub, nil
+	}
+	if header.Alg != "HS256" {
+		return "", fmt.Errorf("unsupported algorithm: %s", header.Alg)
+	}
+	// VULNERABILITY: the HMAC "secret" is derived from the server's RSA
+	// public key — the exact bytes an attacker can obtain from JWKS.
+	secret := rsaPublicKey.N.Bytes()
+	mac := hmac.New(sha256.New, secret)
+	mac.Write([]byte(parts[0] + "." + parts[1]))
+	if !hmac.Equal(mac.Sum(nil), mustDecode(parts[2])) {
+		return "", errors.New("signature verification failed")
+	}
+	var claims map[string]any
+	if err := json.Unmarshal(payloadBytes, &claims); err != nil {
+		return "", err
 	}
 	sub, _ := claims["sub"].(string)
 	return sub, nil
+}
+
+func mustDecode(s string) []byte {
+	b, err := base64.RawURLEncoding.DecodeString(s)
+	if err != nil {
+		return nil
+	}
+	return b
 }
 
 func VerifyTokenWithAlgCheck(tokenStr string, key interface{}) (jwt.MapClaims, error) {
@@ -140,9 +192,9 @@ func DemonstrateForgery(publicKey *rsa.PublicKey) string {
 		"exp": time.Now().Add(1 * time.Hour).Unix(),
 		"iat": time.Now().Unix(),
 	})
-	// In the real attack, the HMAC secret would be the public key bytes.
-	keyBytes := []byte(fmt.Sprintf("%v", publicKey))
-	forgedStr, _ := forged.SignedString(keyBytes)
+	// In the real attack, the HMAC secret is the RSA public-key modulus
+	// bytes (obtainable from the JWKS endpoint).
+	forgedStr, _ := forged.SignedString(publicKey.N.Bytes())
 	return forgedStr
 }
 
@@ -173,9 +225,9 @@ func main() {
 
 	sub, err := VerifyTokenVulnerable(forged)
 	if err != nil {
-		fmt.Println("Safe: Vulnerable verifier rejected:", err)
+		fmt.Println("Vulnerable verifier rejected the forgery:", err)
 	} else {
-		fmt.Println("WARNING: Vulnerable verifier accepted forged token as:", sub)
+		fmt.Println("VULNERABLE: verifier accepted forged token as user:", sub)
 	}
 
 	_, err = VerifyTokenWithAlgCheck(forged, rsaPublicKey)
@@ -190,10 +242,8 @@ func main() {
 
 	sub2, err := VerifyTokenVulnerable(noneToken)
 	if err != nil {
-		fmt.Println("Safe: None-alg rejected:", err)
+		fmt.Println("None-alg rejected:", err)
 	} else {
-		fmt.Println("WARNING: None-alg token accepted as:", sub2)
+		fmt.Println("VULNERABLE: none-alg token accepted as user:", sub2)
 	}
 }
-
-var _ = hmac.Equal

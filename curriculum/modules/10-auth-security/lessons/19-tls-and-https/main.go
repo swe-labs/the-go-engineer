@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"io"
 	"math/big"
+	"net"
 	"net/http"
 	"net/http/httptest"
 	"time"
@@ -33,6 +34,7 @@ func generateCert() (tls.Certificate, error) {
 		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
 		BasicConstraintsValid: true,
 		DNSNames:              []string{"localhost"},
+		IPAddresses:           []net.IP{net.ParseIP("127.0.0.1"), net.ParseIP("::1")},
 	}
 
 	certDER, err := x509.CreateCertificate(rand.Reader, &template, &template, &key.PublicKey, key)
@@ -57,10 +59,14 @@ func serverConfig() *tls.Config {
 	}
 }
 
-func clientConfig() *tls.Config {
+func clientConfig(serverCert *x509.Certificate) *tls.Config {
+	// Trust the demo server by adding its certificate to the pool -
+	// never InsecureSkipVerify, which silently disables all verification.
+	pool := x509.NewCertPool()
+	pool.AddCert(serverCert)
 	return &tls.Config{
-		InsecureSkipVerify: true,
-		MinVersion:         tls.VersionTLS12,
+		RootCAs:    pool,
+		MinVersion: tls.VersionTLS12,
 	}
 }
 
@@ -82,9 +88,13 @@ func main() {
 
 	fmt.Println("TLS server at:", ts.URL)
 
+	serverCert := tlsConfig.Certificates[0].Leaf
+	if serverCert == nil {
+		panic("parsed leaf certificate unavailable")
+	}
 	client := &http.Client{
 		Transport: &http.Transport{
-			TLSClientConfig: clientConfig(),
+			TLSClientConfig: clientConfig(serverCert),
 		},
 	}
 

@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -89,11 +90,9 @@ func (h *csrfHandler) transfer(w http.ResponseWriter, r *http.Request) {
 func middlewareCSRF(next http.Handler, protector *CSRFProtector) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost || r.Method == http.MethodPut || r.Method == http.MethodDelete {
-			sameSite := r.Header.Get("X-Same-Site")
-			if sameSite == "strict" {
-				next.ServeHTTP(w, r)
-				return
-			}
+			// Origin/Referer checking is a secondary defense; the primary ones are
+			// the CSRF token below and SameSite cookie attributes set on the session
+			// cookie itself (never a request header - attackers control headers).
 			origin := r.Header.Get("Origin")
 			referer := r.Header.Get("Referer")
 			if origin == "" && referer == "" {
@@ -120,20 +119,45 @@ func main() {
 
 	fmt.Println("=== CSRF Protection Demo ===")
 
-	resp, _ := http.Post(ts.URL+"/login", "application/json", http.NoBody)
-	fmt.Println("POST /login response:", resp.Status)
-	resp.Body.Close()
+	// The demo client sends Origin like a same-origin browser would.
+	postWithOrigin := func(path string, headers map[string]string) (int, string) {
+		req, _ := http.NewRequest("POST", ts.URL+path, http.NoBody)
+		req.Header.Set("Origin", ts.URL)
+		for k, v := range headers {
+			req.Header.Set(k, v)
+		}
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			return 0, err.Error()
+		}
+		defer resp.Body.Close()
+		body := new(strings.Builder)
+		io.Copy(body, resp.Body)
+		return resp.StatusCode, body.String()
+	}
 
-	req, _ := http.NewRequest("POST", ts.URL+"/transfer", http.NoBody)
-	req.Header.Set("X-Session-ID", "session-abc-123")
-	req.Header.Set("X-CSRF-Token", "invalid-token")
-	resp, _ = http.DefaultClient.Do(req)
-	body := new(strings.Builder)
-	io.Copy(body, resp.Body)
-	fmt.Println("POST /transfer (bad token):", resp.Status, body.String())
-	resp.Body.Close()
+	_, loginBody := postWithOrigin("/login", nil)
+	fmt.Println("POST /login:", loginBody)
+	var loginResp struct {
+		Session   string `json:"session"`
+		CSRFToken string `json:"csrf_token"`
+	}
+	json.Unmarshal([]byte(loginBody), &loginResp)
+
+	status, badBody := postWithOrigin("/transfer", map[string]string{
+		"X-Session-ID": loginResp.Session,
+		"X-CSRF-Token": "invalid-token",
+	})
+	fmt.Printf("POST /transfer (bad token): %d %s\n", status, badBody)
+
+	status, goodBody := postWithOrigin("/transfer", map[string]string{
+		"X-Session-ID": loginResp.Session,
+		"X-CSRF-Token": loginResp.CSRFToken,
+	})
+	fmt.Printf("POST /transfer (valid token): %d %s\n", status, goodBody)
 
 	fmt.Println("\n=== SameSite cookie note ===")
 	fmt.Println("Real CSRF protection uses SameSite=Strict cookies + CSRF tokens.")
-	fmt.Println("This example shows the token validation pattern statelessly.")
+	fmt.Println("SameSite is enforced via the cookie attribute set by the server,")
+	fmt.Println("never via a request header (clients control their own headers).")
 }

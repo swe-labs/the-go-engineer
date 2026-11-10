@@ -57,14 +57,19 @@ func (e *RBACEngine) HasPermission(userID string, perm Permission) bool {
 		if role == nil {
 			continue
 		}
-		if e.roleHasPermission(role, perm) {
+		if e.roleHasPermission(role, perm, make(map[string]bool)) {
 			return true
 		}
 	}
 	return false
 }
 
-func (e *RBACEngine) roleHasPermission(role *Role, perm Permission) bool {
+func (e *RBACEngine) roleHasPermission(role *Role, perm Permission, visited map[string]bool) bool {
+	// Cycle guard: cyclic role inheritance must terminate.
+	if visited[role.Name] {
+		return false
+	}
+	visited[role.Name] = true
 	for _, p := range role.Permissions {
 		if permissionMatches(p, perm) {
 			return true
@@ -74,7 +79,7 @@ func (e *RBACEngine) roleHasPermission(role *Role, perm Permission) bool {
 		e.mu.RLock()
 		parent := e.roles[parentName]
 		e.mu.RUnlock()
-		if parent != nil && e.roleHasPermission(parent, perm) {
+		if parent != nil && e.roleHasPermission(parent, perm, visited) {
 			return true
 		}
 	}

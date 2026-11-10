@@ -514,7 +514,15 @@ func writeJSON(w http.ResponseWriter, status int, data any) {
 func main() {
 	secret := []byte(os.Getenv("JWT_SECRET"))
 	if len(secret) == 0 {
-		secret = []byte("super-secure-production-jwt-signing-secret-key-256")
+		// No hardcoded fallback (lesson 20): generate an ephemeral random
+		// secret so tokens cannot be forged by anyone reading the source.
+		// Set JWT_SECRET in production for stable tokens across restarts.
+		secret = make([]byte, 32)
+		if _, err := rand.Read(secret); err != nil {
+			slog.Error("JWT secret generation failed", "error", err)
+			os.Exit(1)
+		}
+		slog.Warn("JWT_SECRET not set; using an ephemeral random secret (tokens reset on restart)")
 	}
 
 	store := NewMemoryStore()

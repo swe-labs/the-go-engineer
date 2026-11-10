@@ -84,7 +84,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -96,38 +95,30 @@ type contextKey string
 
 const userKey contextKey = "user"
 
-// User represents an authenticated identity.
 type User struct {
 	ID    string
 	Role  string
 	Email string
 }
 
-// Trust boundary 1: TLS termination (assumed at load balancer).
-// Trust boundary 2: Authentication middleware.
 func authMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Extract token from Authorization header.
 		auth := r.Header.Get("Authorization")
 		if auth == "" || !strings.HasPrefix(auth, "Bearer ") {
 			http.Error(w, `{"error":"missing token"}`, http.StatusUnauthorized)
 			return
 		}
 		token := strings.TrimPrefix(auth, "Bearer ")
-		// In production: validate JWT or session token here.
-		// For this example, a simple token-to-user mapping.
 		user, ok := validateToken(token)
 		if !ok {
 			http.Error(w, `{"error":"invalid token"}`, http.StatusUnauthorized)
 			return
 		}
-		// Store user in context (crosses trust boundary into handler).
 		ctx := context.WithValue(r.Context(), userKey, user)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
 
-// Trust boundary 3: Authorization middleware (separate from auth).
 func requireRole(role string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -145,31 +136,7 @@ func requireRole(role string) func(http.Handler) http.Handler {
 	}
 }
 
-// Trust boundary 4: handler processes authenticated, authorized request.
-func profileHandler(w http.ResponseWriter, r *http.Request) {
-	user, ok := r.Context().Value(userKey).(User)
-	if !ok {
-		http.Error(w, `{"error":"unauthenticated"}`, http.StatusUnauthorized)
-		return
-	}
-	// Database trust boundary: parameterized query prevents injection.
-	json.NewEncoder(w).Encode(map[string]string{
-		"user_id": user.ID,
-		"email":   user.Email,
-		"role":    user.Role,
-	})
-}
-
-func adminHandler(w http.ResponseWriter, r *http.Request) {
-	user, _ := r.Context().Value(userKey).(User)
-	json.NewEncoder(w).Encode(map[string]string{
-		"message": fmt.Sprintf("Welcome admin %s", user.Email),
-		"access":  "admin_panel",
-	})
-}
-
 func validateToken(token string) (User, bool) {
-	// Simulated token validation.
 	tokens := map[string]User{
 		"token-user":  {ID: "u1", Role: "user", Email: "alice@example.com"},
 		"token-admin": {ID: "u2", Role: "admin", Email: "bob@example.com"},
@@ -178,27 +145,41 @@ func validateToken(token string) (User, bool) {
 	return u, ok
 }
 
+func BuildMiddlewareChain(boundaries []string) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			for _, b := range boundaries {
+				log.Printf("[trust-boundary] crossing: %s", b)
+			}
+			next.ServeHTTP(w, r)
+		})
+	}
+}
+
 func main() {
 	mux := http.NewServeMux()
-	// Public endpoint (no trust boundary check).
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	// Protected endpoints with auth boundary.
 	protected := http.NewServeMux()
-	protected.HandleFunc("/profile", profileHandler)
-	protected.HandleFunc("/admin", adminHandler)
+	protected.HandleFunc("/profile", func(w http.ResponseWriter, r *http.Request) {
+		user, ok := r.Context().Value(userKey).(User)
+		if !ok {
+			http.Error(w, `{"error":"unauthenticated"}`, http.StatusUnauthorized)
+			return
+		}
+		fmt.Fprintf(w, `{"user_id":"%s","role":"%s"}`, user.ID, user.Role)
+	})
 
-	// Middleware chain: auth -> optional role check.
 	mux.Handle("/api/", authMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Strip /api prefix and route to protected mux.
 		r.URL.Path = strings.TrimPrefix(r.URL.Path, "/api")
 		protected.ServeHTTP(w, r)
 	})))
 
-	// Admin-only sub-boundary.
-	mux.Handle("/api/admin", authMiddleware(requireRole("admin")(http.HandlerFunc(adminHandler))))
+	mux.Handle("/api/admin", authMiddleware(requireRole("admin")(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, `{"access":"admin_panel"}`)
+	}))))
 
 	server := &http.Server{
 		Addr:         ":8080",
@@ -206,8 +187,8 @@ func main() {
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
-	log.Printf("Server starting on %s", server.Addr)
-	log.Fatal(server.ListenAndServe())
+	fmt.Println("Trust boundaries server on :8080")
+	server.ListenAndServe()
 }
 ```
 
@@ -281,7 +262,7 @@ Middleware-based trust boundaries add overhead proportional to the number of mid
 - TLS handshake: ~1-5ms for full handshake, negligible for session resumption.
 - Database trust boundary: parameterized queries have no overhead compared to string concatenation.
 
-For high-throughput services, pre-validate tokens at the gateway/ingress level so internal services trust the already-validated identity header.
+For high-throughput services, tokens can be validated once at the gateway and the identity forwarded as a header - but only when the gateway-to-service link is mutually authenticated (mTLS or a service mesh). Without that, any process that can reach the service could forge the header, which is exactly the spoofing threat this lesson exists to prevent.
 
 ## Practice task
 

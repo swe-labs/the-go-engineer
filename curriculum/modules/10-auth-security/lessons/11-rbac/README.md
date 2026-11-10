@@ -149,7 +149,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -157,24 +156,20 @@ import (
 	"sync"
 )
 
-// Permission represents a single action on a resource.
 type Permission string
 
-// RBACEngine manages roles and permissions.
 type RBACEngine struct {
 	mu        sync.RWMutex
 	roles     map[string]*Role
 	userRoles map[string][]string
 }
 
-// Role defines a named set of permissions with optional inheritance.
 type Role struct {
 	Name        string       `json:"name"`
 	Permissions []Permission `json:"permissions"`
 	Inherits    []string     `json:"inherits,omitempty"`
 }
 
-// NewRBACEngine creates an empty RBAC engine.
 func NewRBACEngine() *RBACEngine {
 	return &RBACEngine{
 		roles:     make(map[string]*Role),
@@ -182,18 +177,12 @@ func NewRBACEngine() *RBACEngine {
 	}
 }
 
-// AddRole registers a role with permissions and inheritance.
 func (e *RBACEngine) AddRole(name string, permissions []Permission, inherits []string) {
 	e.mu.Lock()
 	defer e.mu.Unlock()
-	e.roles[name] = &Role{
-		Name:        name,
-		Permissions: permissions,
-		Inherits:    inherits,
-	}
+	e.roles[name] = &Role{Name: name, Permissions: permissions, Inherits: inherits}
 }
 
-// AssignRole assigns a role to a user.
 func (e *RBACEngine) AssignRole(userID, roleName string) error {
 	e.mu.Lock()
 	defer e.mu.Unlock()
@@ -204,12 +193,10 @@ func (e *RBACEngine) AssignRole(userID, roleName string) error {
 	return nil
 }
 
-// HasPermission checks if a user has a permission through any assigned role.
 func (e *RBACEngine) HasPermission(userID string, perm Permission) bool {
 	e.mu.RLock()
 	roleNames := e.userRoles[userID]
 	e.mu.RUnlock()
-
 	for _, name := range roleNames {
 		e.mu.RLock()
 		role := e.roles[name]
@@ -217,14 +204,19 @@ func (e *RBACEngine) HasPermission(userID string, perm Permission) bool {
 		if role == nil {
 			continue
 		}
-		if e.roleHasPermission(role, perm) {
+		if e.roleHasPermission(role, perm, make(map[string]bool)) {
 			return true
 		}
 	}
 	return false
 }
 
-func (e *RBACEngine) roleHasPermission(role *Role, perm Permission) bool {
+func (e *RBACEngine) roleHasPermission(role *Role, perm Permission, visited map[string]bool) bool {
+	// Cycle guard: cyclic role inheritance must terminate.
+	if visited[role.Name] {
+		return false
+	}
+	visited[role.Name] = true
 	for _, p := range role.Permissions {
 		if permissionMatches(p, perm) {
 			return true
@@ -234,14 +226,13 @@ func (e *RBACEngine) roleHasPermission(role *Role, perm Permission) bool {
 		e.mu.RLock()
 		parent := e.roles[parentName]
 		e.mu.RUnlock()
-		if parent != nil && e.roleHasPermission(parent, perm) {
+		if parent != nil && e.roleHasPermission(parent, perm, visited) {
 			return true
 		}
 	}
 	return false
 }
 
-// permissionMatches supports wildcard matching: "documents:*" matches "documents:read".
 func permissionMatches(allow, required Permission) bool {
 	if allow == Permission("*") {
 		return true
@@ -253,26 +244,6 @@ func permissionMatches(allow, required Permission) bool {
 	return allow == required
 }
 
-// Middleware returns an HTTP middleware that enforces a permission.
-func (e *RBACEngine) Middleware(perm Permission) func(http.Handler) http.Handler {
-	return func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			// Extract user ID from context (set by auth middleware).
-			userID := r.Header.Get("X-User-ID")
-			if userID == "" {
-				http.Error(w, `{"error":"unauthenticated"}`, http.StatusUnauthorized)
-				return
-			}
-			if !e.HasPermission(userID, perm) {
-				http.Error(w, `{"error":"insufficient permissions"}`, http.StatusForbidden)
-				return
-			}
-			next.ServeHTTP(w, r)
-		})
-	}
-}
-
-// GetUserPermissions returns all permissions for a user (for debugging/audit).
 func (e *RBACEngine) GetUserPermissions(userID string) []Permission {
 	var result []Permission
 	e.mu.RLock()
@@ -312,7 +283,22 @@ func (e *RBACEngine) collectPermissions(role *Role, seen map[Permission]bool, vi
 	}
 }
 
-// Permissions as constants.
+func BuildRBAC(roleDefs map[string][]string, hierarchy map[string][]string) *RBACEngine {
+	e := NewRBACEngine()
+	for name, perms := range roleDefs {
+		var ps []Permission
+		for _, p := range perms {
+			ps = append(ps, Permission(p))
+		}
+		e.AddRole(name, ps, hierarchy[name])
+	}
+	return e
+}
+
+func CheckAccess(engine *RBACEngine, userID, resource, action string) bool {
+	return engine.HasPermission(userID, Permission(resource+":"+action))
+}
+
 const (
 	PermDocRead   Permission = "documents:read"
 	PermDocWrite  Permission = "documents:write"
@@ -322,24 +308,18 @@ const (
 
 func main() {
 	rbac := NewRBACEngine()
-
-	// Define roles with hierarchy.
 	rbac.AddRole("viewer", []Permission{PermDocRead}, nil)
 	rbac.AddRole("editor", []Permission{PermDocWrite, PermDocDelete}, []string{"viewer"})
 	rbac.AddRole("admin", []Permission{PermUserAdmin, "documents:*"}, []string{"editor"})
 
-	// Assign roles to users.
 	rbac.AssignRole("alice", "viewer")
 	rbac.AssignRole("bob", "editor")
 	rbac.AssignRole("carol", "admin")
 
-	// Test permissions.
-	users := []string{"alice", "bob", "carol"}
-	for _, u := range users {
+	for _, u := range []string{"alice", "bob", "carol"} {
 		fmt.Printf("User %s permissions: %v\n", u, rbac.GetUserPermissions(u))
 	}
 
-	// Permission checks.
 	fmt.Println("\n=== Permission Checks ===")
 	tests := []struct {
 		user string
@@ -358,23 +338,24 @@ func main() {
 		fmt.Printf("%s can %s: %v\n", t.user, t.perm, result)
 	}
 
-	// HTTP server with RBAC middleware.
+	// HTTP
 	mux := http.NewServeMux()
-	mux.Handle("/api/docs", rbac.Middleware(PermDocRead)(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
+	mux.Handle("/api/docs", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		userID := r.Header.Get("X-User-ID")
+		if userID == "" {
+			http.Error(w, `{"error":"unauthenticated"}`, http.StatusUnauthorized)
+			return
+		}
+		if !rbac.HasPermission(userID, PermDocRead) {
+			http.Error(w, `{"error":"forbidden"}`, http.StatusForbidden)
+			return
+		}
 		json.NewEncoder(w).Encode(map[string]string{"docs": "list"})
-	})))
-	mux.Handle("/api/admin", rbac.Middleware(PermUserAdmin)(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]string{"panel": "admin"})
-	})))
+	}))
 
-	log.Println("Server on :8080")
+	fmt.Println("\nRBAC server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
-
-// Ensure errors is used.
-var _ = errors.New
 ```
 
 ## Step-by-step execution

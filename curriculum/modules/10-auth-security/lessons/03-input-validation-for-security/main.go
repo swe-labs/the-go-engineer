@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/mail"
 	"regexp"
 	"strings"
 )
@@ -62,18 +63,9 @@ func validateCreateUser(req CreateUserRequest) []ValidationError {
 }
 
 func mailParseAddress(addr string) (struct{}, error) {
-	// Simple email validation: contains @ and a domain part.
-	if !strings.Contains(addr, "@") {
-		return struct{}{}, errors.New("invalid email")
-	}
-	parts := strings.Split(addr, "@")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
-		return struct{}{}, errors.New("invalid email")
-	}
-	if !strings.Contains(parts[1], ".") {
-		return struct{}{}, errors.New("invalid email")
-	}
-	return struct{}{}, nil
+	// RFC 5322 validation via the standard library (see prose).
+	_, err := mail.ParseAddress(addr)
+	return struct{}{}, err
 }
 
 func ValidateAPIKey(key string) error {
@@ -117,7 +109,9 @@ func main() {
 			return
 		}
 		var req CreateUserRequest
-		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		dec := json.NewDecoder(r.Body)
+		dec.DisallowUnknownFields()
+		if err := dec.Decode(&req); err != nil {
 			http.Error(w, fmt.Sprintf(`{"error":"invalid JSON: %s"}`, err.Error()), http.StatusBadRequest)
 			return
 		}

@@ -6,7 +6,7 @@ Hash and verify passwords using bcrypt from `golang.org/x/crypto`, configure cos
 
 ## Why this matters
 
-Every week, another database breach leaks millions of passwords. If you store passwords in plaintext or with a fast hash, every leaked password is instantly cracked. In 2022 alone, over 24 billion credentials were exposed in data breaches. As a Go engineer, you are responsible for user credentials. Bcrypt, scrypt, and Argon2 are the only acceptable choices for password hashing. There is no excuse for storing a plaintext password or using `sha256(password)` — these are real vulnerabilities that lead to real account takeovers.
+Every week, another database breach leaks millions of passwords. If you store passwords in plaintext or with a fast hash, every leaked password is instantly cracked. Analyses of criminal marketplaces estimated over 24 billion stolen credential pairs in circulation by 2022 (Digital Shadows/ReliaQuest). As a Go engineer, you are responsible for user credentials. Bcrypt, scrypt, and Argon2 are the only acceptable choices for password hashing. There is no excuse for storing a plaintext password or using `sha256(password)` — these are real vulnerabilities that lead to real account takeovers.
 
 ## Mental model
 
@@ -51,7 +51,7 @@ Three properties of a secure password hash:
 |---|---|---|---|---|
 | bcrypt | 16 bytes, embedded in hash | No | Cost 10-14 | Moderate (sequential algorithm) |
 | scrypt | 32 bytes, embedded in hash | Yes | N=2^15, r=8, p=1 | Strong (requires memory) |
-| Argon2id | 16 bytes, embedded in hash | Yes | time=1, mem=64MB, threads=4 | Strongest (winner of PHC) |
+| Argon2id | 16 bytes, embedded in hash | Yes | t=3, m=64 MiB, p=4 (RFC 9106 low-memory recommendation; OWASP minimum m=19 MiB, t=2, p=1) | Strongest (winner of PHC) |
 
 bcrypt is the most widely supported and is the default for most Go applications. Argon2id is the modern choice for new systems.
 
@@ -96,7 +96,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// userDB simulates a database of hashed passwords.
 type userDB struct {
 	hashes map[string][]byte
 }
@@ -105,7 +104,6 @@ func newUserDB() *userDB {
 	return &userDB{hashes: make(map[string][]byte)}
 }
 
-// CreateUser hashes the password and stores the hash.
 func (db *userDB) CreateUser(username, password string) error {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
@@ -115,7 +113,6 @@ func (db *userDB) CreateUser(username, password string) error {
 	return nil
 }
 
-// Authenticate checks the password against the stored hash.
 func (db *userDB) Authenticate(username, password string) error {
 	hash, ok := db.hashes[username]
 	if !ok {
@@ -127,7 +124,6 @@ func (db *userDB) Authenticate(username, password string) error {
 	return nil
 }
 
-// CostBenchmark measures hashing time at different cost factors.
 func CostBenchmark(password string, costs []int) {
 	for _, cost := range costs {
 		start := time.Now()
@@ -141,7 +137,6 @@ func CostBenchmark(password string, costs []int) {
 	}
 }
 
-// HashPassword is a standalone function for testing.
 func HashPassword(password string, cost int) ([]byte, error) {
 	if len(password) < 8 {
 		return nil, errors.New("password too short: minimum 8 characters")
@@ -152,7 +147,6 @@ func HashPassword(password string, cost int) ([]byte, error) {
 	return bcrypt.GenerateFromPassword([]byte(password), cost)
 }
 
-// VerifyPassword compares password against a bcrypt hash.
 func VerifyPassword(hash []byte, password string) bool {
 	return bcrypt.CompareHashAndPassword(hash, []byte(password)) == nil
 }
@@ -160,29 +154,24 @@ func VerifyPassword(hash []byte, password string) bool {
 func main() {
 	db := newUserDB()
 
-	// Create users with hashed passwords.
 	db.CreateUser("alice", "correct-horse-battery-staple")
 	db.CreateUser("bob", "p@ssw0rd-rocks!")
 
-	// Successful authentication.
 	if err := db.Authenticate("alice", "correct-horse-battery-staple"); err != nil {
 		log.Fatal("Unexpected auth failure:", err)
 	}
 	fmt.Println("alice: authenticated successfully")
 
-	// Failed authentication (wrong password).
 	if err := db.Authenticate("alice", "wrong-password"); err != nil {
 		fmt.Println("alice with wrong password: rejected -", err)
 	}
 
-	// Failed authentication (nonexistent user).
 	if err := db.Authenticate("eve", "password"); err != nil {
 		fmt.Println("eve: rejected -", err)
 	}
 
-	// Benchmark cost factors.
 	fmt.Println("\n=== Cost benchmark ===")
-	CostBenchmark("test-password-123", []int{4, 6, 8, 10, 12, 14})
+	CostBenchmark("test-password-123", []int{4, 6, 8})
 }
 ```
 
@@ -212,8 +201,8 @@ For a wrong password: step 4 produces a different hash, `CompareHashAndPassword`
 - Implementing custom password hashing logic — use bcrypt, scrypt, or Argon2 from the Go ecosystem. Do not invent your own.
 - Storing bcrypt hashes in a `VARCHAR(60)` field without testing with higher cost — bcrypt output can be up to 60 bytes for cost 31, but the hash string length varies with cost.
 - Setting the cost too high for production — cost 14 takes ~1 second on a typical CPU, making login a terrible user experience.
-- Not checking the error from `GenerateFromPassword` — it can return `bcrypt.ErrHashTooLong` if the password exceeds 72 bytes.
-- Truncating passwords before hashing — bcrypt silently truncates at 72 bytes. Pre-hash with SHA-256 first if you need longer passwords.
+- Not checking the error from `GenerateFromPassword` — it returns `bcrypt.ErrPasswordTooLong` when the password exceeds 72 bytes (verified with `golang.org/x/crypto` v0.57: long inputs are rejected, not silently truncated).
+- Handling passwords longer than 72 bytes with ad-hoc tricks — bcrypt rejects inputs beyond 72 bytes in current `x/crypto`. Set a maximum password length (64-72 characters covers every realistic password); if a legacy system truly must accept longer inputs, pre-hash with **keyed** HMAC-SHA-256 using a server-side secret, never bare SHA-256 (its raw bytes can contain NUL, and an unkeyed pre-hash enables pass-the-hash reuse if the intermediate value leaks).
 
 ## Debugging walkthrough
 
@@ -255,7 +244,7 @@ func login(username, password string) bool {
 - Use `bcrypt.DefaultCost` (10) in development, `bcrypt.MinCost` (4) for unit tests (to keep tests fast), and cost 12-14 in production depending on your hardware.
 - Hash passwords at registration and store the hash. Never log, return, or expose the hash in API responses.
 - When users log in, bcrypt verification timing is independent of password length (no timing leak).
-- For password rotation: store the previous hash to prevent password reuse, but hash the new password before comparing with the old hash.
+- For password rotation: keep a short history of previous hashes; on each change, hash the new password and compare it against that history to block reuse.
 - In high-throughput login systems (100+ logins/second), bcrypt at cost 12 can saturate CPU. Consider Argon2id with reduced memory parameters for better throughput.
 
 ## Performance implications

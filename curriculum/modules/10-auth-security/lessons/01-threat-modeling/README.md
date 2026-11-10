@@ -88,35 +88,28 @@ In a typical Go service, you model threats at each handler, each database call, 
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
-	"net/http"
 	"strings"
 )
 
-// Asset represents a protected resource in the system.
 type Asset struct {
-	ID       string `json:"id"`
-	OwnerID  string `json:"owner_id"`
-	Payload  string `json:"payload,omitempty"`
+	ID      string
+	OwnerID string
+	Payload string
 }
 
-// Threat models a single identified threat.
 type Threat struct {
 	ID          string
-	Category    string // STRIDE category
+	Category    string
 	Asset       string
 	Description string
-	Severity    int // DREAD score 1-10
+	Severity    int
 	Mitigation  string
 }
 
-// analyzeThreats applies STRIDE categories to a set of assets.
 func analyzeThreats(assets []Asset) []Threat {
 	var threats []Threat
 	for _, a := range assets {
-		// Spoofing: can an attacker claim ownership?
 		threats = append(threats, Threat{
 			ID:          "S-" + a.ID,
 			Category:    "Spoofing",
@@ -125,7 +118,6 @@ func analyzeThreats(assets []Asset) []Threat {
 			Severity:    8,
 			Mitigation:  "Validate JWT claims before any mutation; store OwnerID server-side only",
 		})
-		// Tampering: can an attacker modify the payload?
 		threats = append(threats, Threat{
 			ID:          "T-" + a.ID,
 			Category:    "Tampering",
@@ -134,7 +126,6 @@ func analyzeThreats(assets []Asset) []Threat {
 			Severity:    9,
 			Mitigation:  "Enforce TLS; sign payloads with HMAC for idempotency",
 		})
-		// Information disclosure: can an attacker read another user's asset?
 		threats = append(threats, Threat{
 			ID:          "I-" + a.ID,
 			Category:    "Information Disclosure",
@@ -147,31 +138,7 @@ func analyzeThreats(assets []Asset) []Threat {
 	return threats
 }
 
-func main() {
-	assets := []Asset{
-		{ID: "doc-1", OwnerID: "user-42", Payload: "confidential report"},
-		{ID: "doc-2", OwnerID: "user-99", Payload: "financial data"},
-	}
-	threats := analyzeThreats(assets)
-	for _, t := range threats {
-		fmt.Printf("[%s] %s (severity: %d): %s\n  Mitigation: %s\n\n", t.Category, t.Description, t.Severity, t.Mitigation)
-	}
-
-	// Simulate DREAD prioritization: sort by severity descending
-	fmt.Println("=== Prioritized threats (highest severity first) ===")
-	ordered := prioritizeBySeverity(threats)
-	for _, t := range ordered {
-		fmt.Printf("[%d] %s: %s\n", t.Severity, t.ID, t.Description)
-	}
-
-	// Start a simple server (trust boundary demonstration)
-	http.HandleFunc("/api/assets/", assetHandler(assets))
-	log.Println("Server listening on :8080")
-	// In production, use log.Fatal(http.ListenAndServeTLS(...))
-}
-
 func prioritizeBySeverity(threats []Threat) []Threat {
-	// Simple insertion sort by severity descending
 	out := make([]Threat, len(threats))
 	copy(out, threats)
 	for i := 1; i < len(out); i++ {
@@ -182,27 +149,74 @@ func prioritizeBySeverity(threats []Threat) []Threat {
 	return out
 }
 
-func assetHandler(assets []Asset) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		// Trust boundary: every handler must authenticate the caller
-		userID := r.Header.Get("X-User-ID")
-		if userID == "" {
-			http.Error(w, "unauthorized", http.StatusUnauthorized)
-			return
-		}
-		// Authorization check: user can only access their own assets
-		assetID := strings.TrimPrefix(r.URL.Path, "/api/assets/")
-		for _, a := range assets {
-			if a.ID == assetID {
-				if a.OwnerID != userID {
-					http.Error(w, "forbidden", http.StatusForbidden)
-					return
-				}
-				json.NewEncoder(w).Encode(a)
-				return
+func BuildThreatModel(endpoints []string, assets []string) map[string][]Threat {
+	result := make(map[string][]Threat)
+	for _, ep := range endpoints {
+		var endpointThreats []Threat
+		for _, asset := range assets {
+			epLower := strings.ToLower(ep)
+			if strings.Contains(epLower, "login") {
+				endpointThreats = append(endpointThreats, Threat{
+					ID:          "S-" + asset,
+					Category:    "Spoofing",
+					Asset:       asset,
+					Description: fmt.Sprintf("Attacker brute-forces credentials at %s to access %s", ep, asset),
+					Severity:    9,
+					Mitigation:  "Rate-limit login; enforce account lockout after N failures",
+				})
+			}
+			if strings.Contains(epLower, "documents") || strings.Contains(epLower, "admin") {
+				endpointThreats = append(endpointThreats, Threat{
+					ID:          "I-" + asset,
+					Category:    "Information Disclosure",
+					Asset:       asset,
+					Description: fmt.Sprintf("Unauthenticated user reads %s via %s", asset, ep),
+					Severity:    8,
+					Mitigation:  "Require auth middleware on " + ep,
+				})
+				endpointThreats = append(endpointThreats, Threat{
+					ID:          "E-" + asset,
+					Category:    "Elevation of Privilege",
+					Asset:       asset,
+					Description: fmt.Sprintf("Low-privilege user accesses %s through %s", asset, ep),
+					Severity:    10,
+					Mitigation:  "Enforce RBAC middleware on " + ep,
+				})
 			}
 		}
-		http.Error(w, "not found", http.StatusNotFound)
+		if len(endpointThreats) > 0 {
+			result[ep] = endpointThreats
+		}
+	}
+	return result
+}
+
+func main() {
+	assets := []Asset{
+		{ID: "doc-1", OwnerID: "user-42", Payload: "confidential report"},
+		{ID: "doc-2", OwnerID: "user-99", Payload: "financial data"},
+	}
+	threats := analyzeThreats(assets)
+	for _, t := range threats {
+		fmt.Printf("[%s] %s (severity: %d)\n  Mitigation: %s\n\n", t.Category, t.Description, t.Severity, t.Mitigation)
+	}
+
+	fmt.Println("=== Prioritized threats ===")
+	ordered := prioritizeBySeverity(threats)
+	for _, t := range ordered {
+		fmt.Printf("[%d] %s: %s\n", t.Severity, t.ID, t.Description)
+	}
+
+	fmt.Println("\n=== BuildThreatModel ===")
+	model := BuildThreatModel(
+		[]string{"POST /login", "GET /documents", "DELETE /admin/users"},
+		[]string{"password_hash", "document_content", "admin_session"},
+	)
+	for ep, thrs := range model {
+		fmt.Printf("Endpoint: %s\n", ep)
+		for _, t := range thrs {
+			fmt.Printf("  [%s] %s\n", t.Category, t.Description)
+		}
 	}
 }
 ```
@@ -214,9 +228,9 @@ For the threat analysis above with assets `doc-1` (owner user-42) and `doc-2` (o
 1. `analyzeThreats` iterates over each asset.
 2. For `doc-1`, three threats are created: spoofing (modify owner), tampering (modify payload), information disclosure (read by another user).
 3. Each threat receives a DREAD-like severity score.
-4. `prioritizeBySeverity` sorts threats: tampering (9), spoofing (8), information disclosure (7), repeated for `doc-2`.
+4. `prioritizeBySeverity` sorts the six threats by severity descending: tampering (9), spoofing (8), information disclosure (7).
 5. The output prints each threat with its mitigation strategy.
-6. The HTTP handler demonstrates the trust boundary: `X-User-ID` header is the gate. If missing `->` 401. If present but not the owner `->` 403.
+6. `BuildThreatModel` maps three endpoints (`POST /login`, `GET /documents`, `DELETE /admin/users`) to per-endpoint threat lists: login yields a spoofing threat; documents and admin endpoints yield information-disclosure and elevation-of-privilege threats.
 
 ## Common mistakes
 
@@ -263,7 +277,7 @@ func searchHandler(db *sql.DB) http.HandlerFunc {
 
 - Every endpoint should have an associated threat model entry. Link threat IDs in code comments for audit trails.
 - Automate threat model reviews in CI: require a THREAT_MODEL.md update for any new endpoint.
-- Use tools like Threat Dragon, OWASP Threat Dragon, or Microsoft TMT for diagram-based modeling.
+- Use diagram-based modeling tools such as OWASP Threat Dragon or the Microsoft Threat Modeling Tool.
 - For Go gRPC services, model threats at each RPC call boundary. gRPC interceptor chains are trust boundaries.
 - Integrate threat modeling with your incident response runbooks: each threat should map to a detection rule.
 
@@ -274,7 +288,7 @@ Threat modeling itself has no runtime cost — it is a design-time activity. How
 - Input validation adds CPU overhead per request but prevents injection attacks.
 - Authorization checks add database queries or cache lookups per request.
 - Rate limiting uses memory for token buckets and CPU for time comparisons.
-- Encryption (TLS, AEAD) adds 5-15% CPU overhead but is mandatory for data in transit.
+- Encryption (TLS, AEAD) adds CPU overhead (typically a low single-digit percentage of request cost) but is mandatory for data in transit.
 
 Profile your mitigations: a bcrypt hash (cost 12) takes ~250ms on typical hardware — placing it on every request is a DoS vector itself.
 

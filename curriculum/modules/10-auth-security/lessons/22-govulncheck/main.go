@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 type VulnEntry struct {
@@ -42,14 +43,32 @@ func checkVulnerabilities(modules []ModuleVersion, vulnDB *VulnDB) []VulnEntry {
 	var found []VulnEntry
 	for _, mod := range modules {
 		for _, vuln := range vulnDB.Vulnerabilities {
-			if vuln.Module == mod.Path {
-				if mod.Version != "v"+vuln.FixedIn {
-					found = append(found, vuln)
-				}
+			if vuln.Module != mod.Path {
+				continue
+			}
+			// Only flag versions BELOW the fix (a simple numeric compare on
+			// major.minor.patch; production code should use golang.org/x/mod/semver).
+			if versionLess(mod.Version, "v"+vuln.FixedIn) {
+				found = append(found, vuln)
 			}
 		}
 	}
 	return found
+}
+
+// versionLess compares two semver strings (vMAJOR.MINOR.PATCH).
+func versionLess(a, b string) bool {
+	parse := func(v string) [3]int {
+		var out [3]int
+		v = strings.TrimPrefix(v, "v")
+		parts := strings.SplitN(v, ".", 3)
+		for i, p := range parts {
+			fmt.Sscanf(p, "%d", &out[i])
+		}
+		return out
+	}
+	pa, pb := parse(a), parse(b)
+	return pa[0] < pb[0] || (pa[0] == pb[0] && (pa[1] < pb[1] || (pa[1] == pb[1] && pa[2] < pb[2])))
 }
 
 func checkGovulncheckInstalled() bool {

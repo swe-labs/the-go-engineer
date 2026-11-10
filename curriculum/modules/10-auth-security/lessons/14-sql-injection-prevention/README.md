@@ -92,21 +92,21 @@ import (
 	"strings"
 )
 
-func unsafeQuery(template, input string) string {
-	return strings.ReplaceAll(template, "'{input}'", "'"+input+"'")
+func unsafeQuery(queryTemplate, userInput string) string {
+	return strings.ReplaceAll(queryTemplate, "'{input}'", "'"+userInput+"'")
+}
+
+func safeQuery(queryTemplate, userInput string) string {
+	return strings.ReplaceAll(queryTemplate, "?", fmt.Sprintf("'%s'", escapeSQLString(userInput)))
 }
 
 func escapeSQLString(s string) string {
-	return strings.ReplaceAll(s, "'", "''")
-}
-
-func safeQuery(template, input string) string {
-	escaped := escapeSQLString(input)
-	return strings.ReplaceAll(template, "?", "'"+escaped+"'")
+	r := strings.ReplaceAll(s, "'", "''")
+	return r
 }
 
 func isInjection(query string) bool {
-	dangerous := []string{" OR ", " UNION ", " DROP ", " -- ", "/*", ";", "1'='1"}
+	dangerous := []string{" OR ", " UNION ", " DROP ", " -- ", "/*", "*/", ";", "1'='1"}
 	upper := strings.ToUpper(query)
 	for _, d := range dangerous {
 		if strings.Contains(upper, d) {
@@ -123,21 +123,54 @@ func simulateDBLookup(query string) string {
 	if strings.Contains(query, "alice") {
 		return "alice@example.com"
 	}
+	if strings.Contains(query, "bob") {
+		return "bob@example.com"
+	}
 	return "no results"
 }
 
 func main() {
-	base := "SELECT email FROM users WHERE username = '{input}'"
+	baseQuery := "SELECT email FROM users WHERE username = '{input}'"
 
-	fmt.Println("=== Unsafe query ===")
-	q1 := unsafeQuery(base, "alice' OR '1'='1")
-	fmt.Println("Query:", q1)
-	fmt.Println("Result:", simulateDBLookup(q1))
+	fmt.Println("=== SQL Injection Simulation ===")
+	fmt.Println("Base query:", baseQuery)
 
-	fmt.Println("\n=== Safe query (parameterized) ===")
-	q2 := safeQuery("SELECT email FROM users WHERE username = ?", "alice' OR '1'='1")
-	fmt.Println("Query:", q2)
-	fmt.Println("Result:", simulateDBLookup(q2))
+	fmt.Println("\n1. Normal input:")
+	normalInput := "alice"
+	q1 := unsafeQuery(baseQuery, normalInput)
+	fmt.Printf("  Query: %s\n", q1)
+	fmt.Printf("  Result: %s\n", simulateDBLookup(q1))
+
+	fmt.Println("\n2. Injection attempt:")
+	injectionInput := "alice' OR '1'='1"
+	q2 := unsafeQuery(baseQuery, injectionInput)
+	fmt.Printf("  Query: %s\n", q2)
+	fmt.Printf("  Result: %s\n", simulateDBLookup(q2))
+
+	fmt.Println("\n3. Injection attempt with UNION:")
+	unionInput := "nonexistent' UNION SELECT * FROM users; --"
+	q3 := unsafeQuery(baseQuery, unionInput)
+	fmt.Printf("  Query: %s\n", q3)
+	fmt.Printf("  Injection detected: %v\n", isInjection(q3))
+
+	fmt.Println("\n4. What parameterization actually is (SQL text and data travel separately):")
+	safeInput := "alice' OR '1'='1"
+	paramSQL := "SELECT email FROM users WHERE username = ?"
+	fmt.Printf("  SQL text sent to DB:    %s\n", paramSQL)
+	fmt.Printf("  Parameter bound after: %q\n", safeInput)
+	fmt.Println("  The database compiles the statement with ? as a slot, then binds the value as data.")
+	fmt.Println("  The input can never change the structure of the statement.")
+
+	fmt.Println("\n5. Escaped concatenation (a weaker defense, not parameterization):")
+	escapeInput := "alice' OR '1'='1"
+	escaped := escapeSQLString(escapeInput)
+	q5 := unsafeQuery(baseQuery, escaped)
+	fmt.Printf("  Escaped input: %s\n", escaped)
+	fmt.Printf("  Query: %s\n", q5)
+	fmt.Println("  Escaping survived this case, but it fails on alternate encodings and second-order injection.")
+
+	fmt.Println("\n6. Injection-pattern detection (a monitoring heuristic, not a defense):")
+	fmt.Printf("  isInjection(q2) = %v\n", isInjection(q2))
 }
 ```
 
@@ -159,7 +192,7 @@ For the safe parameterized query `SELECT email FROM users WHERE username = ?`:
 3. Go sends the parameter value: `alice' OR '1'='1`.
 4. Database binds the value as a string literal in the parameter slot.
 5. The database searches for a username whose literal value is `alice' OR '1'='1`.
-6. No such user exists, so `QueryRow` returns `sql.ErrNoRows`.
+6. No such user exists, so `QueryRow` returns `sql.ErrNoRows`. The demo prints the SQL text and the bound parameter side by side to make the separation visible, and labels the escaped-concatenation variant that follows as a *weaker* defense - not the real one.
 
 ## Common mistakes
 

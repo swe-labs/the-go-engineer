@@ -31,7 +31,9 @@ type RefreshTokenInfo struct {
 
 func NewRefreshTokenStore() *RefreshTokenStore {
 	key := make([]byte, 32)
-	rand.Read(key)
+	if _, err := rand.Read(key); err != nil {
+		panic(err) // crypto/rand failure is unrecoverable for a token store
+	}
 	return &RefreshTokenStore{
 		tokens:  make(map[string]*RefreshTokenInfo),
 		hmacKey: key,
@@ -40,7 +42,9 @@ func NewRefreshTokenStore() *RefreshTokenStore {
 
 func generateRandomString(length int) string {
 	bytes := make([]byte, length)
-	rand.Read(bytes)
+	if _, err := rand.Read(bytes); err != nil {
+		panic(err) // crypto/rand failure is unrecoverable for token generation
+	}
 	return hex.EncodeToString(bytes)
 }
 

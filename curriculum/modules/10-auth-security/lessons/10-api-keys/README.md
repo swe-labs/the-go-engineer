@@ -38,12 +38,12 @@ An API key system has five parts:
 4. **Scoping**: attach permissions (read, write, admin) to each key.
 5. **Rotation**: allow replacing a key without changing the scoping or metadata.
 
-Key format best practice: `prefix + random_bytes(base62)`. Example: `api_key_6HzmLMNPqA9rBx8Cw4fDgE2hJk5nV7` (prefix = "api_key_", random = 22 alphanumeric chars).
+Key format best practice: `prefix + random bytes(base64url)`. A 32-byte random payload encodes to 43 base64url characters (the example code does exactly this).
 
 | Component | Size | Example |
 |---|---|---|
 | Prefix (optional) | 5-15 chars | `api_key_`, `svc_key_` |
-| Random payload | 32 bytes -> ~44 base64 chars | `6HzmLMNPqA9rBx8Cw4fDgE2hJk5nV7` |
+| Random payload | 32 bytes -> 43 base64url chars | e.g. `hK5Qp2mV8xR9sT3wY6zA1bC4dE7fG0jL` |
 | Total | ~50-60 chars | `api_key_6HzmLMNPqA9rBx8Cw4fDgE2hJk5nV7` |
 
 ## Under the hood
@@ -78,7 +78,6 @@ Third-party packages like `github.com/gorilla/mux` or `chi` provide middleware p
 package main
 
 import (
-	"crypto/hmac"
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/base64"
@@ -93,11 +92,10 @@ import (
 	"time"
 )
 
-// APIKey represents a stored API key record.
 type APIKey struct {
 	ID          string    `json:"id"`
 	KeyPrefix   string    `json:"key_prefix"`
-	KeyHash     string    `json:"key_hash"`  // SHA-256 of the full key
+	KeyHash     string    `json:"key_hash"`
 	Description string    `json:"description"`
 	Scopes      []string  `json:"scopes"`
 	CreatedAt   time.Time `json:"created_at"`
@@ -105,10 +103,9 @@ type APIKey struct {
 	ExpiresAt   time.Time `json:"expires_at,omitempty"`
 }
 
-// KeyStore is a thread-safe API key store (simulates a database).
 type KeyStore struct {
-	mu       sync.RWMutex
-	keysByID map[string]*APIKey
+	mu         sync.RWMutex
+	keysByID   map[string]*APIKey
 	keysByHash map[string]*APIKey
 }
 
@@ -142,46 +139,31 @@ func (ks *KeyStore) Delete(id string) {
 	}
 }
 
-// GenerateAPIKey creates a new API key with a prefix and scopes.
-// Returns the full plaintext key (shown once) and the stored record.
 func GenerateAPIKey(prefix string, scopes []string, ttl time.Duration) (string, *APIKey, error) {
 	if prefix == "" {
 		prefix = "sk"
 	}
-	// Generate 32 random bytes.
 	b := make([]byte, 32)
 	if _, err := rand.Read(b); err != nil {
 		return "", nil, fmt.Errorf("random: %w", err)
 	}
-	// Encode as base62-like using base64url (no padding).
 	randomPart := base64.RawURLEncoding.EncodeToString(b)
-
-	// Full key with prefix. Example: "api_key_abc123..."
 	fullKey := prefix + "_" + randomPart
-
-	// Hash the full key for storage.
 	hash := HashKey(fullKey)
-
 	now := time.Now()
 	record := &APIKey{
-		ID:          generateID(),
-		KeyPrefix:   prefix + "_",
-		KeyHash:     hash,
-		Description: "Auto-generated key",
-		Scopes:      scopes,
-		CreatedAt:   now,
-		ExpiresAt:   now.Add(ttl),
+		ID: generateID(), KeyPrefix: prefix + "_", KeyHash: hash,
+		Description: "Auto-generated key", Scopes: scopes,
+		CreatedAt: now, ExpiresAt: now.Add(ttl),
 	}
 	return fullKey, record, nil
 }
 
-// HashKey returns the SHA-256 hex hash of a key.
 func HashKey(key string) string {
 	h := sha256.Sum256([]byte(key))
 	return hex.EncodeToString(h[:])
 }
 
-// ValidateKey checks a presented key against the store.
 func ValidateKey(store *KeyStore, presentedKey string, requiredScope string) (*APIKey, error) {
 	hash := HashKey(presentedKey)
 	record, ok := store.GetByHash(hash)
@@ -218,80 +200,73 @@ func generateID() string {
 	return hex.EncodeToString(b)
 }
 
-// RotateAPIKey creates a new key with the same metadata as an existing one.
-func RotateAPIKey(store *KeyStore, existingID, prefix string) (string, *APIKey, error) {
-	store.mu.RLock()
-	existing, ok := store.keysByID[existingID]
-	store.mu.RUnlock()
-	if !ok {
-		return "", nil, errors.New("key not found")
+func CreateAPIKey(prefix string, scopes []string) (fullKey string, hash string, err error) {
+	fk, record, e := GenerateAPIKey(prefix, scopes, 365*24*time.Hour)
+	if e != nil {
+		return "", "", e
 	}
-	// Generate new key with same scopes.
-	fullKey, record, err := GenerateAPIKey(prefix, existing.Scopes, time.Until(existing.ExpiresAt))
-	if err != nil {
-		return "", nil, err
-	}
-	// Delete old key.
-	store.Delete(existingID)
-	// Add new key.
-	store.Add(record)
-	return fullKey, record, nil
+	return fk, record.KeyHash, nil
 }
 
-// APIKeyMiddleware validates API keys on protected routes.
-func APIKeyMiddleware(store *KeyStore, requiredScope string) func(http.Handler) http.Handler {
-	return func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			key := r.Header.Get("X-API-Key")
-			if key == "" {
-				key = r.URL.Query().Get("api_key") // fallback (less secure)
-			}
-			if key == "" {
-				http.Error(w, `{"error":"missing API key"}`, http.StatusUnauthorized)
-				return
-			}
-			_, err := ValidateKey(store, key, requiredScope)
-			if err != nil {
-				http.Error(w, fmt.Sprintf(`{"error":"%s"}`, err.Error()), http.StatusForbidden)
-				return
-			}
-			next.ServeHTTP(w, r)
-		})
+func ValidateAPIKeyFunc(store map[string]*APIKey, presentedKey, requiredScope string) error {
+	hash := HashKey(presentedKey)
+	record, ok := store[hash]
+	if !ok {
+		return errors.New("invalid key")
 	}
+	if requiredScope != "" && !hasScope(record.Scopes, requiredScope) {
+		return fmt.Errorf("insufficient scope: need %s", requiredScope)
+	}
+	return nil
 }
 
 func main() {
 	store := NewKeyStore()
 
-	// Create keys with different scopes.
 	key1, record1, _ := GenerateAPIKey("api_key", []string{"documents:read", "documents:write"}, 365*24*time.Hour)
 	store.Add(record1)
-	fmt.Printf("Created key 1: %s\n  Scopes: %v\n  Hash (stored): %s...\n\n", key1, record1.Scopes, record1.KeyHash[:16])
+	fmt.Printf("Key 1: %s...  hash: %s...  scopes: %v\n", key1[:20], record1.KeyHash[:16], record1.Scopes)
 
 	key2, record2, _ := GenerateAPIKey("api_key", []string{"documents:read"}, 365*24*time.Hour)
 	store.Add(record2)
-	fmt.Printf("Created key 2 (read-only): %s\n  Scopes: %v\n\n", key2, record2.Scopes)
+	fmt.Printf("Key 2: %s...  scopes: %v\n", key2[:20], record2.Scopes)
 
-	// Simulate reading key 1 from logs for testing.
-	_ = key1
+	// Validate
+	_, err := ValidateKey(store, key1, "documents:write")
+	if err != nil {
+		log.Fatal("Unexpected:", err)
+	}
+	fmt.Println("Key 1 validated for documents:write")
 
-	// Set up HTTP routes.
-	mux := http.NewServeMux()
-	mux.Handle("/api/documents", APIKeyMiddleware(store, "documents:read")(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	_, err = ValidateKey(store, key1, "documents:delete")
+	if err != nil {
+		fmt.Println("Key 1 correctly denied for documents:delete:", err)
+	}
+
+	_, err = ValidateKey(store, "invalid-key", "documents:read")
+	if err != nil {
+		fmt.Println("Invalid key correctly rejected:", err)
+	}
+
+	// HTTP
+	http.Handle("/api/documents", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		key := r.Header.Get("X-API-Key")
+		if key == "" {
+			http.Error(w, `{"error":"missing API key"}`, http.StatusUnauthorized)
+			return
+		}
+		_, err := ValidateKey(store, key, "documents:read")
+		if err != nil {
+			http.Error(w, fmt.Sprintf(`{"error":"%s"}`, err.Error()), http.StatusForbidden)
+			return
+		}
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]string{"status": "read access granted"})
-	})))
-	mux.Handle("/api/documents/write", APIKeyMiddleware(store, "documents:write")(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]string{"status": "write access granted"})
-	})))
+	}))
 
-	log.Println("Server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	fmt.Println("\nAPI key server on :8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
-
-// Ensure the hmac import is used.
-var _ = hmac.Equal
 ```
 
 ## Step-by-step execution

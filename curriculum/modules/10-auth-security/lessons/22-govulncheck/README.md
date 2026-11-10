@@ -112,17 +112,37 @@ govulncheck ./...
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
+	"os/exec"
 	"strings"
 )
 
 type VulnEntry struct {
-	ID          string
-	Module      string
-	Version     string
-	Description string
-	FixedIn     string
-	Severity    string
+	ID          string `json:"id"`
+	Package     string `json:"package"`
+	Module      string `json:"module"`
+	Version     string `json:"version"`
+	Description string `json:"description"`
+	FixedIn     string `json:"fixed_in"`
+	Severity    string `json:"severity"`
+}
+
+type VulnDB struct {
+	Vulnerabilities []VulnEntry `json:"vulnerabilities"`
+}
+
+func loadVulnDB(path string) (*VulnDB, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	var db VulnDB
+	if err := json.Unmarshal(data, &db); err != nil {
+		return nil, err
+	}
+	return &db, nil
 }
 
 type ModuleVersion struct {
@@ -130,30 +150,100 @@ type ModuleVersion struct {
 	Version string
 }
 
-func checkVulnerabilities(modules []ModuleVersion, vulns []VulnEntry) []VulnEntry {
+func checkVulnerabilities(modules []ModuleVersion, vulnDB *VulnDB) []VulnEntry {
 	var found []VulnEntry
 	for _, mod := range modules {
-		for _, v := range vulns {
-			if v.Module == mod.Path && strings.HasPrefix(mod.Version, strings.TrimSuffix(v.Version, "+")) {
-				found = append(found, v)
+		for _, vuln := range vulnDB.Vulnerabilities {
+			if vuln.Module != mod.Path {
+				continue
+			}
+			// Only flag versions BELOW the fix (a simple numeric compare on
+			// major.minor.patch; production code should use golang.org/x/mod/semver).
+			if versionLess(mod.Version, "v"+vuln.FixedIn) {
+				found = append(found, vuln)
 			}
 		}
 	}
 	return found
 }
 
-func main() {
-	vulns := []VulnEntry{
-		{ID: "GO-2024-0001", Module: "golang.org/x/crypto", Version: "<0.17.0",
-			Description: "DoS in RSA key generation", FixedIn: "0.17.0", Severity: "HIGH"},
+// versionLess compares two semver strings (vMAJOR.MINOR.PATCH).
+func versionLess(a, b string) bool {
+	parse := func(v string) [3]int {
+		var out [3]int
+		v = strings.TrimPrefix(v, "v")
+		parts := strings.SplitN(v, ".", 3)
+		for i, p := range parts {
+			fmt.Sscanf(p, "%d", &out[i])
+		}
+		return out
 	}
+	pa, pb := parse(a), parse(b)
+	return pa[0] < pb[0] || (pa[0] == pb[0] && (pa[1] < pb[1] || (pa[1] == pb[1] && pa[2] < pb[2])))
+}
+
+func checkGovulncheckInstalled() bool {
+	_, err := exec.LookPath("govulncheck")
+	return err == nil
+}
+
+func main() {
+	fmt.Println("=== govulncheck Demo ===")
+
+	// Simulated database for the demo - the real govulncheck queries https://vuln.go.dev.
+	// Entry 1 mirrors a real advisory: golang.org/x/crypto SSH fixes (incl. Terrapin,
+	// CVE-2023-48795) landed in v0.17.0.
+	vulnDB := &VulnDB{
+		Vulnerabilities: []VulnEntry{
+			{
+				ID:          "GO-2024-0001",
+				Module:      "golang.org/x/crypto",
+				Version:     "<0.17.0",
+				Description: "Denial of service in the SSH handshake (Terrapin, CVE-2023-48795)",
+				FixedIn:     "0.17.0",
+				Severity:    "HIGH",
+			},
+			{
+				ID:          "GO-2024-0002",
+				Module:      "github.com/gorilla/mux",
+				Version:     "<1.8.1",
+				Description: "Path traversal vulnerability in ServeHTTP",
+				FixedIn:     "1.8.1",
+				Severity:    "MEDIUM",
+			},
+		},
+	}
+
 	modules := []ModuleVersion{
 		{Path: "golang.org/x/crypto", Version: "v0.16.0"},
+		{Path: "github.com/gorilla/mux", Version: "v1.8.0"},
+		{Path: "github.com/lib/pq", Version: "v1.10.9"},
 	}
-	results := checkVulnerabilities(modules, vulns)
-	for _, v := range results {
-		fmt.Printf("[%s] %s: %s (fix: %s)\n", v.Severity, v.ID, v.Description, v.FixedIn)
+
+	fmt.Println("\nScanning modules for vulnerabilities...")
+	vulnerabilities := checkVulnerabilities(modules, vulnDB)
+
+	if len(vulnerabilities) == 0 {
+		fmt.Println("No vulnerabilities found.")
+	} else {
+		fmt.Printf("Found %d vulnerability(ies):\n", len(vulnerabilities))
+		for _, v := range vulnerabilities {
+			fmt.Printf("  [%s] %s (%s)\n", v.Severity, v.ID, v.Module)
+			fmt.Printf("    %s\n", v.Description)
+			fmt.Printf("    Fix: update to %s\n", v.FixedIn)
+		}
 	}
+
+	fmt.Println("\n=== govulncheck integration ===")
+	if checkGovulncheckInstalled() {
+		fmt.Println("govulncheck is installed. Run: govulncheck ./...")
+	} else {
+		fmt.Println("govulncheck not installed. Install with: go install golang.org/x/vuln/cmd/govulncheck@latest")
+	}
+
+	fmt.Println("\n=== Vulnerability Database (OSV format) ===")
+	fmt.Println("Go vulnerability database: https://vuln.go.dev")
+	fmt.Println("OSV format: Open Source Vulnerability format")
 }
 ```
 

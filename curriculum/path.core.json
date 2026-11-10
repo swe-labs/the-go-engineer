@@ -37489,7 +37489,7 @@
         "test_path": "modules/10-auth-security/lessons/01-threat-modeling/main_test.go"
       },
       "id": "core-10-01",
-      "learning_objective": "Perform threat modeling for backend APIs, identifying trust boundaries, attack vectors, and mitigations.",
+      "learning_objective": "Build and analyze threat models using STRIDE, DREAD, and attack trees to identify security risks in Go web services, and translate each identified threat into a concrete security requirement.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-02"
@@ -37675,7 +37675,7 @@
         "test_path": "modules/10-auth-security/lessons/02-trust-boundaries/main_test.go"
       },
       "id": "core-10-02",
-      "learning_objective": "Define trust boundaries between external client inputs, API gateways, internal services, and databases.",
+      "learning_objective": "Identify trust boundaries in Go web service architectures, implement middleware-based gate patterns at each boundary, and apply a zero-trust mindset where every request is authenticated and authorized regardless of origin.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-03"
@@ -37866,7 +37866,7 @@
         "test_path": "modules/10-auth-security/lessons/03-input-validation-for-security/main_test.go"
       },
       "id": "core-10-03",
-      "learning_objective": "Validate and sanitize all incoming user inputs to protect downstream systems from injection and corruption.",
+      "learning_objective": "Implement security-focused input validation in Go using allowlists, denylists, and sanitization, and distinguish between validation for correctness and validation for security.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-04"
@@ -38049,7 +38049,7 @@
         "test_path": "modules/10-auth-security/lessons/04-authentication-vs-authorization/main_test.go"
       },
       "id": "core-10-04",
-      "learning_objective": "Differentiate authentication (verifying caller identity) from authorization (verifying permissions).",
+      "learning_objective": "Distinguish authentication (proving identity) from authorization (granting permission), implement them as separate middleware layers in Go, and use claims-based authorization to make permission decisions at the resource level.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-05"
@@ -38240,7 +38240,7 @@
         "test_path": "modules/10-auth-security/lessons/05-password-hashing/main_test.go"
       },
       "id": "core-10-05",
-      "learning_objective": "Hash and verify passwords securely using bcrypt with appropriate adaptive work factors.",
+      "learning_objective": "Hash and verify passwords using bcrypt from `golang.org/x/crypto`, configure cost factors appropriately, and explain why SHA-256, AES, and custom hash functions are unsafe for password storage.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-06"
@@ -38426,7 +38426,7 @@
         "test_path": "modules/10-auth-security/lessons/06-sessions-and-cookies/main_test.go"
       },
       "id": "core-10-06",
-      "learning_objective": "Implement stateful server-side sessions, secure cookie attributes (HttpOnly, Secure, SameSite), and session invalidation.",
+      "learning_objective": "Implement session-based authentication in Go using secure cookies (HttpOnly, Secure, SameSite), manage session state in a server-side store, and handle session expiry, rotation, and invalidation.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-07"
@@ -38617,7 +38617,7 @@
         "test_path": "modules/10-auth-security/lessons/07-jwt-implementation/main_test.go"
       },
       "id": "core-10-07",
-      "learning_objective": "Construct and sign stateless JSON Web Tokens (JWT) containing standard and custom claims.",
+      "learning_objective": "Issue and verify JSON Web Tokens in Go using the `golang-jwt/jwt` library, configure RSA or HMAC signing, embed custom claims, and compose JWT verification middleware.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-08"
@@ -38801,7 +38801,7 @@
         "test_path": "modules/10-auth-security/lessons/08-jwt-risks/main_test.go"
       },
       "id": "core-10-08",
-      "learning_objective": "Identify JWT security risks: weak secret keys, none algorithm vulnerabilities, and lack of revocation.",
+      "learning_objective": "Identify and mitigate common JWT vulnerabilities in Go services including the `alg=none` attack, key confusion, token theft, replay attacks, and the inherent difficulty of token revocation.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-09"
@@ -39001,7 +39001,7 @@
         "test_path": "modules/10-auth-security/lessons/09-oauth2-and-oidc-overview/main_test.go"
       },
       "id": "core-10-09",
-      "learning_objective": "Implement OAuth2 and OpenID Connect (OIDC) client verification flows for third-party identity federation.",
+      "learning_objective": "Explain the four OAuth2 grant flows and understand how OIDC adds an identity layer on top. Implement an OAuth2 authorization code client in Go using `golang.org/x/oauth2` and validate an OIDC ID token.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-10"
@@ -39189,7 +39189,7 @@
         "test_path": "modules/10-auth-security/lessons/10-api-keys/main_test.go"
       },
       "id": "core-10-10",
-      "learning_objective": "Generate, hash, and authenticate high-entropy API keys for machine-to-machine integrations.",
+      "learning_objective": "Generate, hash, validate, and rotate API keys in Go using cryptographically secure randomness, store only hashed keys in the database, and scope keys to specific permissions.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-11"
@@ -39384,7 +39384,7 @@
         "test_path": "modules/10-auth-security/lessons/11-rbac/main_test.go"
       },
       "id": "core-10-11",
-      "learning_objective": "Implement Role-Based Access Control (RBAC) middleware verifying user roles against endpoint requirements.",
+      "learning_objective": "Design and implement role-based access control in Go using roles, permissions, and role hierarchies, and enforce authorization decisions in HTTP middleware.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-12"
@@ -39572,7 +39572,7 @@
         "test_path": "modules/10-auth-security/lessons/12-abac-and-policy-checks/main_test.go"
       },
       "id": "core-10-12",
-      "learning_objective": "Implement Attribute-Based Access Control (ABAC) evaluating resource ownership and environmental attributes.",
+      "learning_objective": "Implement attribute-based access control in Go using policy rules that evaluate user attributes, resource attributes, and environmental context to make fine-grained authorization decisions.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-13"
@@ -39774,7 +39774,7 @@
         "test_path": "modules/10-auth-security/lessons/13-tenant-isolation-basics/main_test.go"
       },
       "id": "core-10-13",
-      "learning_objective": "Enforce strict multi-tenant data isolation, scoping all database queries by authenticated tenant IDs.",
+      "learning_objective": "Implement tenant isolation in multi-tenant Go services using database-level row filtering, context-based tenant propagation, and middleware enforcement to prevent cross-tenant data leakage.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-14"
@@ -39961,7 +39961,7 @@
         "test_path": "modules/10-auth-security/lessons/14-sql-injection-prevention/main_test.go"
       },
       "id": "core-10-14",
-      "learning_objective": "Prevent SQL injection completely by using parameterized queries and static analysis checks.",
+      "learning_objective": "Write and defend Go database queries against SQL injection by always using parameterized queries, recognizing unsafe string concatenation patterns, and understanding why input escaping alone is insufficient.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-15"
@@ -40157,7 +40157,7 @@
         "test_path": "modules/10-auth-security/lessons/15-xss/main_test.go"
       },
       "id": "core-10-15",
-      "learning_objective": "Mitigate Cross-Site Scripting (XSS) by encoding outputs and setting Content Security Policy (CSP) headers.",
+      "learning_objective": "Identify reflected, stored, and DOM-based Cross-Site Scripting (XSS) vulnerabilities and prevent them using Go's `html/template` auto-escaping, Content-Security-Policy headers, and proper output encoding.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-16"
@@ -40345,7 +40345,7 @@
         "test_path": "modules/10-auth-security/lessons/16-csrf/main_test.go"
       },
       "id": "core-10-16",
-      "learning_objective": "Prevent Cross-Site Request Forgery (CSRF) on state-changing requests using SameSite cookies and anti-CSRF tokens.",
+      "learning_objective": "Identify Cross-Site Request Forgery (CSRF) attacks and implement server-side protections using anti-CSRF tokens, SameSite cookies, origin/referer header validation, and middleware patterns in Go.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-17"
@@ -40541,7 +40541,7 @@
         "test_path": "modules/10-auth-security/lessons/17-cors/main_test.go"
       },
       "id": "core-10-17",
-      "learning_objective": "Configure Cross-Origin Resource Sharing (CORS) headers strictly, rejecting wildcard origins with credentials.",
+      "learning_objective": "Configure Cross-Origin Resource Sharing (CORS) headers in Go HTTP servers, handle preflight requests correctly, and understand the security boundaries of the browser's same-origin policy.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-18"
@@ -40728,7 +40728,7 @@
         "test_path": "modules/10-auth-security/lessons/18-rate-limiting/main_test.go"
       },
       "id": "core-10-18",
-      "learning_objective": "Protect API endpoints from denial-of-service and brute-force attacks using token bucket rate limiting.",
+      "learning_objective": "Implement rate limiting in Go HTTP services using the token bucket algorithm, apply per-IP and per-user limits, propagate rate limit headers, and prevent resource exhaustion and abuse.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-19"
@@ -40924,7 +40924,7 @@
         "test_path": "modules/10-auth-security/lessons/19-tls-and-https/main_test.go"
       },
       "id": "core-10-19",
-      "learning_objective": "Configure TLS/HTTPS servers with modern cipher suites and enforce encrypted transit communications.",
+      "learning_objective": "Configure TLS certificates for Go HTTP servers, understand the TLS handshake process, generate self-signed certificates for development, and enforce secure HTTPS connections with modern cipher suites.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-20"
@@ -41113,7 +41113,7 @@
         "test_path": "modules/10-auth-security/lessons/20-secrets-management/main_test.go"
       },
       "id": "core-10-20",
-      "learning_objective": "Manage application secrets securely using environment variables and secret managers, avoiding code commits.",
+      "learning_objective": "Manage secrets in Go applications using environment variables, encrypted storage, secret stores, and proper `.gitignore` patterns to prevent accidental exposure of credentials and cryptographic keys.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-21"
@@ -41309,7 +41309,7 @@
         "test_path": "modules/10-auth-security/lessons/21-dependency-security/main_test.go"
       },
       "id": "core-10-21",
-      "learning_objective": "Audit third-party dependencies and supply-chain integrity using go.sum and vulnerability scanning.",
+      "learning_objective": "Assess and mitigate software supply chain risks in Go projects by verifying dependency integrity with `go.sum`, minimizing dependency surface area, reviewing dependencies for malicious code, and maintaining a software bill of materials.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-22"
@@ -41497,7 +41497,7 @@
         "test_path": "modules/10-auth-security/lessons/22-govulncheck/main_test.go"
       },
       "id": "core-10-22",
-      "learning_objective": "Detect reachable vulnerability call paths in compiled Go binaries and dependencies using govulncheck.",
+      "learning_objective": "Use the `govulncheck` tool to scan Go projects for known vulnerabilities, interpret its output, integrate it into CI/CD pipelines, and apply fixes for vulnerable dependencies.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-23"
@@ -41691,7 +41691,7 @@
         "test_path": "modules/10-auth-security/lessons/23-owasp-for-go-apis/main_test.go"
       },
       "id": "core-10-23",
-      "learning_objective": "Audit and mitigate OWASP API Security Top 10 vulnerabilities across authentication, authorization, and data exposure.",
+      "learning_objective": "Apply the OWASP API Security Top 10 to Go API development, identify common Go-specific vulnerabilities, and maintain a security checklist for API development and code review.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-24"
@@ -41880,7 +41880,7 @@
         "test_path": "modules/10-auth-security/lessons/24-secure-logging/main_test.go"
       },
       "id": "core-10-24",
-      "learning_objective": "Redact credentials, tokens, and PII from application logs to prevent sensitive data leakage.",
+      "learning_objective": "Implement structured logging in Go that never exposes secrets or PII by using redaction, appropriate log levels, and audit trails for security-relevant events.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-10-25"
@@ -42030,7 +42030,7 @@
         "test_path": "modules/10-auth-security/lessons/25-refresh-tokens/main_test.go"
       },
       "id": "core-10-25",
-      "learning_objective": "Implement a secure refresh token rotation flow in Go.",
+      "learning_objective": "Implement a secure refresh token rotation flow in Go with short-lived access tokens, long-lived refresh tokens, rotation on use, revocation, and secure storage using cryptographic hashing and HMAC.",
       "module_id": "module-10",
       "next_item_ids": [
         "core-11-01"

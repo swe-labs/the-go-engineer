@@ -45,9 +45,14 @@ func TestTLSServer(t *testing.T) {
 	ts.StartTLS()
 	defer ts.Close()
 
+	// Trust the server by adding its certificate to the pool.
+	serverCert := tlsConfig.Certificates[0].Leaf
+	if serverCert == nil {
+		t.Fatal("parsed leaf certificate unavailable")
+	}
 	client := &http.Client{
 		Transport: &http.Transport{
-			TLSClientConfig: clientConfig(),
+			TLSClientConfig: clientConfig(serverCert),
 		},
 	}
 

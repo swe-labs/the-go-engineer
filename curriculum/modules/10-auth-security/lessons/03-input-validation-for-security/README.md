@@ -6,7 +6,7 @@ Implement security-focused input validation in Go using allowlists, denylists, a
 
 ## Why this matters
 
-Input validation is the most effective defense against injection attacks (SQL, NoSQL, OS command, LDAP), path traversal, buffer overflows, and XSS. Half of the OWASP Top 10 vulnerabilities involve missing or insufficient input validation. Security-focused validation is different from form validation: it enforces what is allowed rather than what is familiar. An email field that rejects `' OR 1=1;--` is not being pedantic — it is preventing SQL injection.
+Input validation is the most effective defense against injection attacks (SQL, NoSQL, OS command, LDAP), path traversal, and XSS. Multiple OWASP Top 10 categories - injection, cross-site scripting, and the validation gaps behind broken access control - trace back to missing or insufficient input validation. Security-focused validation is different from form validation: it enforces what is allowed rather than what is familiar. An email field that rejects `' OR 1=1;--` is not being pedantic — it is preventing SQL injection.
 
 ## Mental model
 
@@ -50,7 +50,7 @@ Security validation focuses on type and format. Business validation handles sema
 
 ## Under the hood
 
-Go's `encoding/json` performs type validation during unmarshalling: it rejects type mismatches (string where int expected) and malformed UTF-8. But it does not enforce string length, character classes, or semantic rules.
+Go's `encoding/json` performs type validation during unmarshalling: it rejects type mismatches (a string where an int is expected). Invalid UTF-8 in string values is replaced with U+FFFD rather than rejected, so byte-level hygiene must not rely on the decoder. Neither does it enforce string length, character classes, unknown-field rejection (`DisallowUnknownFields`), or semantic rules.
 
 The `go-playground/validator` package uses struct tags for declarative validation:
 
@@ -90,20 +90,16 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/mail"
 	"regexp"
 	"strings"
 )
 
 var (
-	// Allowlist: alphanumeric username, 3-30 chars.
 	usernameRE = regexp.MustCompile(`^[a-zA-Z0-9_]{3,30}$`)
-	// Allowlist: UUID v4 format.
-	uuidRE = regexp.MustCompile(`^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$`)
-	// Allowlist: alphanumeric, hyphens, underscores for document IDs.
-	docIDRE = regexp.MustCompile(`^[a-zA-Z0-9_-]{1,64}$`)
+	docIDRE    = regexp.MustCompile(`^[a-zA-Z0-9_-]{1,64}$`)
 )
 
-// CreateUserRequest is validated at the API boundary.
 type CreateUserRequest struct {
 	Username     string `json:"username"`
 	Email        string `json:"email"`
@@ -111,7 +107,6 @@ type CreateUserRequest struct {
 	ReferralCode string `json:"referral_code,omitempty"`
 }
 
-// ValidationError holds field-level validation failures.
 type ValidationError struct {
 	Field   string `json:"field"`
 	Message string `json:"message"`
@@ -121,85 +116,66 @@ func (v ValidationError) Error() string {
 	return fmt.Sprintf("%s: %s", v.Field, v.Message)
 }
 
-// validateCreateUser applies security validation gates.
 func validateCreateUser(req CreateUserRequest) []ValidationError {
 	var errs []ValidationError
 
-	// Gate 1: type check (JSON unmarshalling handles this)
-
-	// Gate 2: format check with allowlist
 	if !usernameRE.MatchString(req.Username) {
 		errs = append(errs, ValidationError{
-			Field:   "username",
-			Message: "must be 3-30 alphanumeric characters or underscores",
+			Field: "username", Message: "must be 3-30 alphanumeric characters or underscores",
 		})
 	}
 
-	// Gate 3: format check with standard library
-	if _, err := mail.ParseAddress(req.Email); err != nil {
+	if _, err := mailParseAddress(req.Email); err != nil {
 		errs = append(errs, ValidationError{
-			Field:   "email",
-			Message: "must be a valid email address",
+			Field: "email", Message: "must be a valid email address",
 		})
 	}
 
-	// Gate 4: length check for security (prevent large password DoS)
 	if len(req.Password) < 8 || len(req.Password) > 128 {
 		errs = append(errs, ValidationError{
-			Field:   "password",
-			Message: "must be between 8 and 128 characters",
+			Field: "password", Message: "must be between 8 and 128 characters",
 		})
 	}
 
-	// Gate 5: allowlist on optional referral code
 	if req.ReferralCode != "" && !docIDRE.MatchString(req.ReferralCode) {
 		errs = append(errs, ValidationError{
-			Field:   "referral_code",
-			Message: "contains invalid characters",
+			Field: "referral_code", Message: "contains invalid characters",
 		})
 	}
 
 	return errs
 }
 
-// SanitizeString removes characters not in the allowlist.
-func SanitizeString(input string, allowed *regexp.Regexp) string {
-	return allowed.ReplaceAllString(input, "")
+func mailParseAddress(addr string) (struct{}, error) {
+	// RFC 5322 validation via the standard library (see prose).
+	_, err := mail.ParseAddress(addr)
+	return struct{}{}, err
 }
 
-func main() {
-	http.HandleFunc("/users", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-			return
+func ValidateAPIKey(key string) error {
+	if len(key) == 0 {
+		return errors.New("key must not be empty")
+	}
+	if len(key) < 32 {
+		return fmt.Errorf("key too short: %d < 32", len(key))
+	}
+	if len(key) > 128 {
+		return fmt.Errorf("key too long: %d > 128", len(key))
+	}
+	for _, c := range key {
+		if !((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '-' || c == '_') {
+			return fmt.Errorf("invalid character: %c", c)
 		}
-
-		var req CreateUserRequest
-		// Gate 0: JSON type validation at the boundary.
-		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-			http.Error(w, fmt.Sprintf(`{"error":"invalid JSON: %s"}`, err.Error()), http.StatusBadRequest)
-			return
-		}
-
-		// Security validation gates.
-		if errs := validateCreateUser(req); len(errs) > 0 {
-			w.Header().Set("Content-Type", "application/json")
-			w.WriteHeader(http.StatusUnprocessableEntity)
-			json.NewEncoder(w).Encode(map[string]interface{}{"errors": errs})
-			return
-		}
-
-		// At this point, input is validated.
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(map[string]string{"status": "created", "username": req.Username})
-	})
-
-	log.Println("Server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	}
+	compromised := map[string]bool{
+		"compromised-key-1234567890abcdef1234567890": true,
+	}
+	if compromised[key] {
+		return errors.New("key has been compromised")
+	}
+	return nil
 }
 
-// For testing purposes.
 func validateName(name string) error {
 	if strings.TrimSpace(name) == "" {
 		return errors.New("name must not be empty")
@@ -210,9 +186,32 @@ func validateName(name string) error {
 	return nil
 }
 
-func mail_parseAddress(email string) error {
-	_, err := mail.ParseAddress(email)
-	return err
+func main() {
+	http.HandleFunc("/users", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		var req CreateUserRequest
+		dec := json.NewDecoder(r.Body)
+		dec.DisallowUnknownFields()
+		if err := dec.Decode(&req); err != nil {
+			http.Error(w, fmt.Sprintf(`{"error":"invalid JSON: %s"}`, err.Error()), http.StatusBadRequest)
+			return
+		}
+		if errs := validateCreateUser(req); len(errs) > 0 {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusUnprocessableEntity)
+			json.NewEncoder(w).Encode(map[string]interface{}{"errors": errs})
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+		json.NewEncoder(w).Encode(map[string]string{"status": "created", "username": req.Username})
+	})
+
+	fmt.Println("Input validation server on :8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 ```
 
@@ -220,8 +219,8 @@ func mail_parseAddress(email string) error {
 
 For a POST request to `/users` with body `{"username":"alice","email":"alice@test.com","password":"secret123"}`:
 
-1. JSON decoder parses the body. If malformed JSON, return 400. Trust boundary crossed: raw bytes -> Go struct.
-2. `validateCreateUser` runs five validation gates sequentially.
+1. The decoder parses the body with `DisallowUnknownFields`. If the JSON is malformed or carries unknown fields, return 400. Trust boundary crossed: raw bytes -> Go struct.
+2. `validateCreateUser` runs four validation gates sequentially (the JSON type gate ran inside the decoder, which also rejects unknown fields via `DisallowUnknownFields`).
 3. Gate 1 (type): handled by JSON decoder — `username` is a string, not a number.
 4. Gate 2 (format): `usernameRE.MatchString("alice")` returns true. Pass.
 5. Gate 3 (format): `mail.ParseAddress("alice@test.com")` returns no error. Pass.

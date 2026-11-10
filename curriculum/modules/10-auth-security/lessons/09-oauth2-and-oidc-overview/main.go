@@ -179,7 +179,10 @@ func main() {
 	builtURL := BuildAuthURL("demo-client", "http://localhost:8080/callback", "test-state", "test-challenge")
 	fmt.Println("3. Built auth URL:", builtURL[:70], "...")
 
-	mockIDToken := "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbGljZSIsImlzcyI6Imh0dHBzOi8vYXV0aC5leGFtcGxlLmNvbSIsImV4cCI6OTk5OTk5OTk5OX0"
-	idToken, _ := ParseIDToken(mockIDToken)
+	mockIDToken := "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbGljZSIsImlzcyI6Imh0dHBzOi8vYXV0aC5leGFtcGxlLmNvbSIsImV4cCI6OTk5OTk5OTk5OX0.c2lnbmF0dXJl"
+	idToken, err := ParseIDToken(mockIDToken)
+	if err != nil {
+		log.Fatal("ID token parse failed:", err)
+	}
 	fmt.Printf("4. ID Token: sub=%s email=%s name=%s\n", idToken.Subject, idToken.Email, idToken.Name)
 }

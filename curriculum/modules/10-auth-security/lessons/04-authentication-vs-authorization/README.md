@@ -120,7 +120,6 @@ type contextKey string
 
 const claimsKey contextKey = "claims"
 
-// Claims represent the authenticated user's identity and permissions.
 type Claims struct {
 	UserID string   `json:"user_id"`
 	Role   string   `json:"role"`
@@ -128,7 +127,6 @@ type Claims struct {
 	Tenant string   `json:"tenant"`
 }
 
-// AuthN middleware: verifies identity.
 func authNMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		auth := r.Header.Get("Authorization")
@@ -147,7 +145,6 @@ func authNMiddleware(next http.Handler) http.Handler {
 	})
 }
 
-// AuthZ middleware: verifies permission. Returns a 403 on failure.
 func authZMiddleware(requiredPerm string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -165,7 +162,6 @@ func authZMiddleware(requiredPerm string) func(http.Handler) http.Handler {
 	}
 }
 
-// verifyToken simulates JWT verification. In production, use golang-jwt.
 func verifyToken(token string) (Claims, error) {
 	tokens := map[string]Claims{
 		"admin-token": {
@@ -191,13 +187,11 @@ func verifyToken(token string) (Claims, error) {
 	return c, nil
 }
 
-// hasPermission checks a specific permission in claims.
 func hasPermission(c Claims, required string) bool {
 	for _, p := range c.Perms {
 		if p == required {
 			return true
 		}
-		// Wildcard: doc:* matches doc:read, doc:write, etc.
 		if strings.HasSuffix(p, ":*") {
 			prefix := strings.TrimSuffix(p, ":*")
 			if strings.HasPrefix(required, prefix+":") {
@@ -208,55 +202,43 @@ func hasPermission(c Claims, required string) bool {
 	return false
 }
 
-// Handlers (no auth logic, just business logic).
-func listDocsHandler(w http.ResponseWriter, r *http.Request) {
-	claims := r.Context().Value(claimsKey).(Claims)
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"user":   claims.UserID,
-		"tenant": claims.Tenant,
-		"docs":   []string{"doc1.md", "doc2.md"},
-	})
+func AuthN(token string) (Claims, error) {
+	return verifyToken(token)
 }
 
-func createDocHandler(w http.ResponseWriter, r *http.Request) {
-	claims := r.Context().Value(claimsKey).(Claims)
-	json.NewEncoder(w).Encode(map[string]string{
-		"status":   "created",
-		"by":       claims.UserID,
-		"document": "new-doc.md",
-	})
-}
-
-func deleteDocHandler(w http.ResponseWriter, r *http.Request) {
-	claims := r.Context().Value(claimsKey).(Claims)
-	json.NewEncoder(w).Encode(map[string]string{
-		"status":   "deleted",
-		"by":       claims.UserID,
-		"document": strings.TrimPrefix(r.URL.Path, "/api/docs/"),
-	})
+func AuthZ(claims Claims, requiredPerm string, resourceOwner string) bool {
+	if claims.Role == "admin" {
+		return true
+	}
+	if !hasPermission(claims, requiredPerm) {
+		return false
+	}
+	// Resource-level check: a non-admin must own the resource. Without this,
+	// anyone holding the permission could touch anyone else's resource (BOLA).
+	return claims.UserID == resourceOwner
 }
 
 func main() {
 	mux := http.NewServeMux()
-
-	// Public endpoint (no authN or authZ).
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	// Protected API group: authN first, then per-route authZ.
 	api := http.NewServeMux()
-	api.Handle("/docs", authZMiddleware("doc:read")(http.HandlerFunc(listDocsHandler)))
-	api.Handle("/docs/create", authZMiddleware("doc:write")(http.HandlerFunc(createDocHandler)))
-	api.Handle("/docs/", authZMiddleware("doc:delete")(http.HandlerFunc(deleteDocHandler)))
+	api.Handle("/docs", authZMiddleware("doc:read")(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]string{"status": "docs list"})
+	})))
+	api.Handle("/docs/create", authZMiddleware("doc:write")(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]string{"status": "created"})
+	})))
 
 	mux.Handle("/api/", authNMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		r.URL.Path = strings.TrimPrefix(r.URL.Path, "/api")
 		api.ServeHTTP(w, r)
 	})))
 
-	log.Println("Server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	fmt.Println("AuthN/AuthZ server on :8080")
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 ```
 

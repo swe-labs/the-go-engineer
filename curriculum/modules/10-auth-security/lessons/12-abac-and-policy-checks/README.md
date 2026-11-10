@@ -80,7 +80,7 @@ type Condition struct {
 }
 ```
 
-The evaluation loop iterates rules, evaluates each condition, and returns the first matching effect. Deny rules take precedence (explicit deny overrides implicit allow).
+The evaluator runs two passes: it checks every `deny` rule first, then the first matching `allow` rule, and falls through to a default-deny. Deny therefore overrides allow regardless of rule order - the security-correct semantics (reordering rules must not change the outcome).
 
 In production, policy engines use:
 
@@ -123,44 +123,37 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"net"
 	"net/http"
 	"strings"
 	"sync"
 	"time"
 )
 
-// Attributes holds all context for an ABAC decision.
 type Attributes struct {
-	UserDepartment string `json:"user_department"`
-	UserClearance  int    `json:"user_clearance"`
-	UserRole       string `json:"user_role"`
-
+	UserDepartment     string `json:"user_department"`
+	UserClearance      int    `json:"user_clearance"`
+	UserRole           string `json:"user_role"`
 	ResourceDepartment string `json:"resource_department"`
 	ResourceOwner      string `json:"resource_owner"`
 	ResourceClass      int    `json:"resource_class"`
-
-	EnvTime     string `json:"env_time"`
-	EnvMethod   string `json:"env_method"`
-	EnvIP       string `json:"env_ip"`
-	EnvTenantID string `json:"env_tenant_id"`
+	EnvTime            string `json:"env_time"`
+	EnvMethod          string `json:"env_method"`
+	EnvIP              string `json:"env_ip"`
+	EnvTenantID        string `json:"env_tenant_id"`
 }
 
-// Condition is a single attribute check.
 type Condition struct {
 	Attribute string      `json:"attribute"`
-	Operator  string      `json:"operator"` // eq, neq, gt, gte, lt, lte, in, contains
+	Operator  string      `json:"operator"`
 	Value     interface{} `json:"value"`
 }
 
-// PolicyRule is a single ABAC rule.
 type PolicyRule struct {
 	Name       string      `json:"name"`
-	Effect     string      `json:"effect"` // allow, deny
+	Effect     string      `json:"effect"`
 	Conditions []Condition `json:"conditions"`
 }
 
-// PolicyEngine evaluates policy rules against attributes.
 type PolicyEngine struct {
 	mu    sync.RWMutex
 	rules []PolicyRule
@@ -176,27 +169,35 @@ func (pe *PolicyEngine) AddRule(rule PolicyRule) {
 	pe.rules = append(pe.rules, rule)
 }
 
-// Evaluate checks all rules against the given attributes.
-// Returns (allowed, ruleName, error).
 func (pe *PolicyEngine) Evaluate(attrs *Attributes) (bool, string, error) {
 	pe.mu.RLock()
 	defer pe.mu.RUnlock()
-
+	// Pass 1: explicit deny always wins, regardless of rule order.
 	for _, rule := range pe.rules {
+		if rule.Effect != "deny" {
+			continue
+		}
 		matches, err := evaluateConditions(rule.Conditions, attrs)
 		if err != nil {
 			return false, rule.Name, err
 		}
 		if matches {
-			switch rule.Effect {
-			case "allow":
-				return true, rule.Name, nil
-			case "deny":
-				return false, rule.Name, nil
-			}
+			return false, rule.Name, nil
 		}
 	}
-	// Default-deny: no matching rule -> deny.
+	// Pass 2: first matching allow rule.
+	for _, rule := range pe.rules {
+		if rule.Effect != "allow" {
+			continue
+		}
+		matches, err := evaluateConditions(rule.Conditions, attrs)
+		if err != nil {
+			return false, rule.Name, err
+		}
+		if matches {
+			return true, rule.Name, nil
+		}
+	}
 	return false, "default-deny", nil
 }
 
@@ -206,7 +207,8 @@ func evaluateConditions(conditions []Condition, attrs *Attributes) (bool, error)
 		if err != nil {
 			return false, err
 		}
-		ok, err := evaluateCondition(c.Operator, attrValue, c.Value)
+		resolved := resolveValue(c.Value, attrs)
+		ok, err := evaluateCondition(c.Operator, attrValue, resolved)
 		if err != nil {
 			return false, err
 		}
@@ -244,6 +246,20 @@ func getAttributeValue(attr string, attrs *Attributes) (interface{}, error) {
 	}
 }
 
+// resolveValue resolves attribute references like "${user.department}".
+func resolveValue(v interface{}, attrs *Attributes) interface{} {
+	s, ok := v.(string)
+	if !ok || !strings.HasPrefix(s, "${") || !strings.HasSuffix(s, "}") {
+		return v
+	}
+	attr := strings.TrimSuffix(strings.TrimPrefix(s, "${"), "}")
+	val, err := getAttributeValue(attr, attrs)
+	if err != nil {
+		return v
+	}
+	return val
+}
+
 func evaluateCondition(op string, actual, expected interface{}) (bool, error) {
 	switch op {
 	case "eq":
@@ -261,8 +277,7 @@ func evaluateCondition(op string, actual, expected interface{}) (bool, error) {
 	case "in":
 		return inList(actual, expected)
 	case "contains":
-		s := fmt.Sprintf("%v", actual)
-		return strings.Contains(s, fmt.Sprintf("%v", expected)), nil
+		return strings.Contains(fmt.Sprintf("%v", actual), fmt.Sprintf("%v", expected)), nil
 	default:
 		return false, fmt.Errorf("unknown operator: %s", op)
 	}
@@ -274,8 +289,6 @@ func toFloat(v interface{}) float64 {
 		return val
 	case int:
 		return float64(val)
-	case string:
-		return float64(len(val))
 	}
 	return 0
 }
@@ -293,128 +306,85 @@ func inList(actual interface{}, expected interface{}) (bool, error) {
 	return false, nil
 }
 
-// Example policies for a document management system.
-func setupPolicies() *PolicyEngine {
+func EvaluatePolicy(pe *PolicyEngine, userDept, userClearance string, resourceDept string, resourceClass int, method string) (bool, string) {
+	clearance := 0
+	if userClearance == "admin" {
+		clearance = 99
+	} else {
+		fmt.Sscanf(userClearance, "%d", &clearance)
+	}
+	attrs := &Attributes{
+		UserDepartment:     userDept,
+		UserClearance:      clearance,
+		UserRole:           userClearance,
+		ResourceDepartment: resourceDept,
+		ResourceClass:      resourceClass,
+		EnvMethod:          method,
+		EnvTime:            time.Now().Format("15:04"),
+		EnvIP:              "10.0.0.1",
+	}
+	allowed, rule, _ := pe.Evaluate(attrs)
+	return allowed, rule
+}
+
+func main() {
 	pe := NewPolicyEngine()
 
-	// Rule 1: Users can read documents in their own department.
+	// Admin override must come first (break-glass policy).
 	pe.AddRule(PolicyRule{
-		Name:   "same-department-read",
-		Effect: "allow",
-		Conditions: []Condition{
-			{Attribute: "env.method", Operator: "eq", Value: "GET"},
-			{Attribute: "user.department", Operator: "eq", Value: "${resource.department}"},
-			{Attribute: "env.tenant_id", Operator: "eq", Value: "${resource.tenant}"},
-		},
-	})
-
-	// Rule 2: Users with clearance >= resource class can view.
-	pe.AddRule(PolicyRule{
-		Name:   "clearance-based-access",
-		Effect: "allow",
-		Conditions: []Condition{
-			{Attribute: "env.method", Operator: "eq", Value: "GET"},
-			{Attribute: "user.clearance", Operator: "gte", Value: "${resource.class}"},
-		},
-	})
-
-	// Rule 3: Deny access from non-corporate IPs (simulated).
-	pe.AddRule(PolicyRule{
-		Name:   "corporate-ip-only",
-		Effect: "deny",
-		Conditions: []Condition{
-			{Attribute: "env.ip", Operator: "eq", Value: "10.0.0.1"},
-		},
-	})
-
-	// Rule 4: Allow admins anything (break-glass rule).
-	pe.AddRule(PolicyRule{
-		Name:   "admin-override",
-		Effect: "allow",
+		Name: "admin-override", Effect: "allow",
 		Conditions: []Condition{
 			{Attribute: "user.role", Operator: "eq", Value: "admin"},
 		},
 	})
+	pe.AddRule(PolicyRule{
+		Name: "same-dept", Effect: "allow",
+		Conditions: []Condition{
+			{Attribute: "user.department", Operator: "eq", Value: "${resource.department}"},
+			{Attribute: "env.method", Operator: "eq", Value: "GET"},
+		},
+	})
+	pe.AddRule(PolicyRule{
+		Name: "clearance", Effect: "allow",
+		Conditions: []Condition{
+			{Attribute: "user.clearance", Operator: "gte", Value: 3},
+			{Attribute: "env.method", Operator: "eq", Value: "GET"},
+		},
+	})
+	pe.AddRule(PolicyRule{
+		Name: "deny-delete", Effect: "deny",
+		Conditions: []Condition{
+			{Attribute: "env.method", Operator: "eq", Value: "DELETE"},
+			{Attribute: "user.role", Operator: "neq", Value: "admin"},
+		},
+	})
 
-	return pe
-}
-
-func main() {
-	pe := setupPolicies()
-
-	// Test scenarios.
 	scenarios := []struct {
-		name  string
-		attrs *Attributes
+		name            string
+		userDept        string
+		userClearance   string
+		resourceDept    string
+		resourceClass   int
+		method          string
+		expectedAllowed bool
 	}{
-		{
-			name: "Same department, GET request",
-			attrs: &Attributes{
-				UserDepartment:     "engineering",
-				UserClearance:      3,
-				UserRole:           "engineer",
-				ResourceDepartment: "engineering",
-				ResourceClass:      2,
-				EnvMethod:          "GET",
-				EnvTime:            "14:00",
-				EnvIP:              "10.0.0.1",
-				EnvTenantID:        "tenant-1",
-			},
-		},
-		{
-			name: "Different department, no clearance",
-			attrs: &Attributes{
-				UserDepartment:     "engineering",
-				UserClearance:      1,
-				UserRole:           "intern",
-				ResourceDepartment: "finance",
-				ResourceClass:      3,
-				EnvMethod:          "GET",
-				EnvTime:            "14:00",
-				EnvIP:              "10.0.0.1",
-				EnvTenantID:        "tenant-1",
-			},
-		},
-		{
-			name: "Admin overrides all restrictions",
-			attrs: &Attributes{
-				UserDepartment:     "engineering",
-				UserClearance:      5,
-				UserRole:           "admin",
-				ResourceDepartment: "finance",
-				ResourceClass:      5,
-				EnvMethod:          "DELETE",
-				EnvTime:            "03:00",
-				EnvIP:              "192.168.1.1",
-				EnvTenantID:        "tenant-2",
-			},
-		},
-		{
-			name: "High clearance, different department",
-			attrs: &Attributes{
-				UserDepartment:     "engineering",
-				UserClearance:      5,
-				UserRole:           "senior-engineer",
-				ResourceDepartment: "finance",
-				ResourceClass:      3,
-				EnvMethod:          "GET",
-				EnvTime:            "14:00",
-				EnvIP:              "10.0.0.1",
-				EnvTenantID:        "tenant-1",
-			},
-		},
+		{"Same dept GET", "engineering", "3", "engineering", 2, "GET", true},
+		{"Different dept low clearance", "engineering", "1", "finance", 3, "GET", false},
+		{"Admin override", "engineering", "admin", "finance", 5, "DELETE", true},
+		{"High clearance different dept", "engineering", "5", "finance", 3, "GET", true},
+		{"DELETE denied", "engineering", "3", "engineering", 2, "DELETE", false},
 	}
 
 	for _, s := range scenarios {
-		allowed, rule, err := pe.Evaluate(s.attrs)
-		if err != nil {
-			fmt.Printf("  ERROR: %v\n", err)
-			continue
+		allowed, rule := EvaluatePolicy(pe, s.userDept, s.userClearance, s.resourceDept, s.resourceClass, s.method)
+		status := "PASS"
+		if allowed != s.expectedAllowed {
+			status = "FAIL"
 		}
-		fmt.Printf("[%s] Allowed=%v (rule: %s)\n", s.name, allowed, rule)
+		fmt.Printf("[%s] %s: allowed=%v (rule: %s)\n", status, s.name, allowed, rule)
 	}
 
-	// HTTP handler with ABAC middleware.
+	// HTTP
 	http.HandleFunc("/api/documents/", func(w http.ResponseWriter, r *http.Request) {
 		attrs := &Attributes{
 			UserDepartment:     r.Header.Get("X-Department"),
@@ -425,7 +395,6 @@ func main() {
 			EnvMethod:          r.Method,
 			EnvTime:            time.Now().Format("15:04"),
 			EnvIP:              r.RemoteAddr,
-			EnvTenantID:        r.Header.Get("X-Tenant-ID"),
 		}
 		allowed, rule, _ := pe.Evaluate(attrs)
 		if !allowed {
@@ -433,17 +402,12 @@ func main() {
 			http.Error(w, `{"error":"forbidden"}`, http.StatusForbidden)
 			return
 		}
-		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]string{"status": "access granted"})
 	})
 
-	// Use log to suppress unused variable warning.
-	log.Println("Server on :8080")
+	fmt.Println("\nABAC server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
-
-// Ensure errors is used.
-var _ = errors.New
 ```
 
 ## Step-by-step execution

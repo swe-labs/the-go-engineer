@@ -6,7 +6,7 @@ Identify and mitigate common JWT vulnerabilities in Go services including the `a
 
 ## Why this matters
 
-JWTs are widely adopted but frequently misimplemented. The "none algorithm" vulnerability was present in every major JWT library in 2015, including `golang-jwt/jwt` (then `dgrijalva/jwt-go`). Key confusion attacks (forcing an RS256 public key to verify an HS256 token) have compromised real-world auth systems. Token theft via XSS or network interception is the most common attack on JWT-based systems because the stateless design makes revocation near-impossible without a denylist. Understanding these risks is essential before deploying JWTs in production — the convenience of stateless tokens comes with a distinct security tradeoff.
+JWTs are widely adopted but frequently misimplemented. The "none algorithm" vulnerability swept through several major JWT libraries in 2015 (Tim McLean's research), and key confusion attacks (forcing an RS256 public key to verify an HS256 token) have compromised real-world auth systems. Token theft via XSS or network interception is the most common attack on JWT-based systems because the stateless design makes revocation near-impossible without a denylist. Understanding these risks is essential before deploying JWTs in production — the convenience of stateless tokens comes with a distinct security tradeoff.
 
 ## Mental model
 
@@ -66,13 +66,13 @@ Mitigation: always validate that the algorithm matches the expected one before v
 
 **`alg: none` attack**: The `none` algorithm means "no signature." Vulnerable libraries accept tokens without signatures when the algorithm is `none`. `golang-jwt/jwt` v5 explicitly rejects `none` by default, but older versions (v3 and earlier) were vulnerable.
 
-**Token theft**: Since JWTs are sent with every request (typically as a Bearer header), any XSS vulnerability or insecure channel can leak the token. Unlike session cookies, JWTs cannot be marked `HttpOnly` because they are not cookies — they are in JavaScript-accessible storage or headers.
+**Token theft**: Since JWTs are sent with every request (typically as a Bearer header), any XSS vulnerability or insecure channel can leak the token. JWTs sent as `Authorization` headers or kept in `localStorage` are readable by JavaScript, so any XSS can exfiltrate them. Storing the JWT in an `HttpOnly` cookie regains that protection at the cost of CSRF exposure (see lesson 16).
 
 ## How Go uses it
 
 `golang-jwt/jwt` v5 includes built-in protections against many of these attacks:
 
-- **`alg: none`**: the library rejects tokens with `alg: none` unless explicitly configured with `jwt.WithValidMethods`.
+- **`alg: none`**: v5 rejects unsigned tokens by default — accepting them requires explicitly signing with `jwt.UnsafeAllowNoneSignatureType`. `jwt.WithValidMethods([]string{"RS256"})` additionally whitelists the algorithms you expect.
 - **Algorithm validation**: the key function (`KeyFunc`) receives the parsed token and can inspect `token.Method` to verify the algorithm.
 - **`jwt.ParseWithClaims`**: must be used instead of `jwt.Parse` to ensure claims are type-safe.
 
@@ -80,7 +80,7 @@ The Go security team recommends:
 
 1. Always use `jwt.ParseWithClaims` with a concrete claims struct.
 2. Validate `token.Method` against a whitelist in the key function.
-3. Never use `jwt.Parse` without a key function (passing `nil` was the root cause of many `alg: none` vulnerabilities).
+3. Never pass `nil` as the key function — v5 returns an "unverifiable" error rather than accepting the token, but a `nil` keyfunc is always a bug worth a compile-time-visible guard.
 4. Use asymmetric algorithms (RS256/ES256) for multi-service architectures.
 
 ## Go example
@@ -108,7 +108,6 @@ import (
 var (
 	rsaPrivateKey *rsa.PrivateKey
 	rsaPublicKey  *rsa.PublicKey
-	hmacSecret    = []byte("my-super-secret-key-change-in-production")
 )
 
 func init() {
@@ -120,7 +119,6 @@ func init() {
 	rsaPublicKey = &rsaPrivateKey.PublicKey
 }
 
-// DenyList stores revoked token IDs.
 type DenyList struct {
 	mu sync.RWMutex
 	m  map[string]time.Time
@@ -152,14 +150,12 @@ func (dl *DenyList) IsRevoked(jti string) bool {
 	return true
 }
 
-// SafeClaims includes a JTI for revocation support.
 type SafeClaims struct {
 	jwt.RegisteredClaims
 	Role  string `json:"role"`
 	Scope string `json:"scope"`
 }
 
-// IssueToken creates a JWT with RS256.
 func IssueToken(userID, role string) (string, error) {
 	now := time.Now()
 	claims := SafeClaims{
@@ -176,10 +172,8 @@ func IssueToken(userID, role string) (string, error) {
 	return token.SignedString(rsaPrivateKey)
 }
 
-// VerifyTokenSafe validates a JWT with algorithm whitelisting and denylist check.
 func VerifyTokenSafe(tokenStr string, denyList *DenyList) (*SafeClaims, error) {
 	token, err := jwt.ParseWithClaims(tokenStr, &SafeClaims{}, func(token *jwt.Token) (interface{}, error) {
-		// SECURITY: algorithm validation prevents key confusion.
 		if token.Method != jwt.SigningMethodRS256 {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
@@ -192,104 +186,154 @@ func VerifyTokenSafe(tokenStr string, denyList *DenyList) (*SafeClaims, error) {
 	if !ok || !token.Valid {
 		return nil, errors.New("invalid token")
 	}
-	// Denylist check: has this token been revoked?
 	if denyList.IsRevoked(claims.ID) {
 		return nil, errors.New("token revoked")
 	}
 	return claims, nil
 }
 
-// VULNERABLE verification — for demonstration only.
+// VerifyTokenVulnerable is a hand-rolled verifier that reproduces the two
+// historical flaws this lesson teaches. golang-jwt/jwt v5 blocks both (a nil
+// keyfunc errors out, and HS256 verification rejects non-byte keys), so the
+// vulnerable behavior is implemented manually for demonstration:
+//
+//  1. Algorithm confusion: the attacker-controlled alg header selects the
+//     verification key, so an HS256 token "signed" with the RSA public-key
+//     bytes is accepted.
+//  2. alg: none: tokens with no algorithm are accepted without any
+//     signature check.
 func VerifyTokenVulnerable(tokenStr string) (string, error) {
-	// VULNERABILITY: passes nil as key function — algorithm is not validated.
-	token, err := jwt.Parse(tokenStr, nil)
+	parts := strings.Split(tokenStr, ".")
+	if len(parts) != 3 {
+		return "", errors.New("malformed token")
+	}
+	headerBytes, err := base64.RawURLEncoding.DecodeString(parts[0])
 	if err != nil {
 		return "", err
 	}
-	claims, ok := token.Claims.(jwt.MapClaims)
-	if !ok || !token.Valid {
-		return "", errors.New("invalid token")
+	payloadBytes, err := base64.RawURLEncoding.DecodeString(parts[1])
+	if err != nil {
+		return "", err
 	}
-	return claims["sub"].(string), nil
+	var header struct {
+		Alg string `json:"alg"`
+	}
+	if err := json.Unmarshal(headerBytes, &header); err != nil {
+		return "", err
+	}
+	if header.Alg == "none" {
+		// VULNERABILITY: no signature verification at all.
+		var claims map[string]any
+		if err := json.Unmarshal(payloadBytes, &claims); err != nil {
+			return "", err
+		}
+		sub, _ := claims["sub"].(string)
+		return sub, nil
+	}
+	if header.Alg != "HS256" {
+		return "", fmt.Errorf("unsupported algorithm: %s", header.Alg)
+	}
+	// VULNERABILITY: the HMAC "secret" is derived from the server's RSA
+	// public key — the exact bytes an attacker can obtain from JWKS.
+	secret := rsaPublicKey.N.Bytes()
+	mac := hmac.New(sha256.New, secret)
+	mac.Write([]byte(parts[0] + "." + parts[1]))
+	if !hmac.Equal(mac.Sum(nil), mustDecode(parts[2])) {
+		return "", errors.New("signature verification failed")
+	}
+	var claims map[string]any
+	if err := json.Unmarshal(payloadBytes, &claims); err != nil {
+		return "", err
+	}
+	sub, _ := claims["sub"].(string)
+	return sub, nil
 }
 
-// DemonstrateAlgorithmConfusion shows how key confusion works.
-func DemonstrateAlgorithmConfusion() {
-	// An attacker obtains the public key (usually via JWKS endpoint).
-	attackerPublicKeyPEM := rsaPublicKey
+func mustDecode(s string) []byte {
+	b, err := base64.RawURLEncoding.DecodeString(s)
+	if err != nil {
+		return nil
+	}
+	return b
+}
 
-	// Attacker creates a forged JWT with alg: HS256, signed with public key as secret.
+func VerifyTokenWithAlgCheck(tokenStr string, key interface{}) (jwt.MapClaims, error) {
+	token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
+		if token.Method != jwt.SigningMethodRS256 {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return key, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok || !token.Valid {
+		return nil, errors.New("invalid token")
+	}
+	return claims, nil
+}
+
+func DemonstrateForgery(publicKey *rsa.PublicKey) string {
 	forged := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": "admin",
 		"exp": time.Now().Add(1 * time.Hour).Unix(),
 		"iat": time.Now().Unix(),
 	})
-	forgedStr, _ := forged.SignedString(attackerPublicKeyPEM)
-
-	fmt.Println("Forged token (HS256 signed with public key):")
-	fmt.Println(forgedStr[:80], "...")
-
-	// Vulnerable server accepts it.
-	sub, err := VerifyTokenVulnerable(forgedStr)
-	if err != nil {
-		fmt.Println("Vulnerable server rejected (good):", err)
-	} else {
-		fmt.Println("VULNERABLE: Server accepted forged token as user:", sub)
-	}
-
-	// Safe server rejects it.
-	_, err = VerifyTokenSafe(forgedStr, NewDenyList())
-	if err != nil {
-		fmt.Println("Safe server rejected:", err)
-	}
-}
-
-// DemonstrateNoneAlg shows the alg: none attack.
-func DemonstrateNoneAlg() {
-	// Attacker crafts a token with alg: none and no signature.
-	header := base64.RawURLEncoding.EncodeToString([]byte(`{"alg":"none","typ":"JWT"}`))
-	payload := base64.RawURLEncoding.EncodeToString([]byte(`{"sub":"admin","role":"admin","exp":9999999999}`))
-	noneToken := fmt.Sprintf("%s.%s.", header, payload)
-
-	fmt.Println("\nNone-alg token:")
-	fmt.Println(noneToken[:80], "...")
-
-	sub, err := VerifyTokenVulnerable(noneToken)
-	if err != nil {
-		fmt.Println("Safe: Server rejected none-alg token:", err)
-	} else {
-		fmt.Println("VULNERABLE: Server accepted none-alg token as user:", sub)
-	}
+	// In the real attack, the HMAC secret is the RSA public-key modulus
+	// bytes (obtainable from the JWKS endpoint).
+	forgedStr, _ := forged.SignedString(publicKey.N.Bytes())
+	return forgedStr
 }
 
 func main() {
-	fmt.Println("=== JWT vulnerability demonstrations ===\n")
+	fmt.Println("=== JWT Risk Demonstrations ===")
+	fmt.Println()
 
-	// 1. Issue a legitimate token.
 	token, _ := IssueToken("alice", "user")
-	fmt.Println("Legitimate token for alice:")
-	fmt.Println(token[:80], "...\n")
+	fmt.Println("Legitimate token:", token[:60], "...")
+	fmt.Println()
 
-	// 2. Normal verification.
 	denyList := NewDenyList()
 	claims, err := VerifyTokenSafe(token, denyList)
 	if err != nil {
 		log.Fatal("Unexpected:", err)
 	}
-	fmt.Printf("Verified: user=%s role=%s jti=%s\n\n", claims.Subject, claims.Role, claims.ID)
+	fmt.Printf("Verified: user=%s, role=%s, jti=%s\n\n", claims.Subject, claims.Role, claims.ID)
 
-	// 3. Revoke and verify.
 	denyList.Revoke(claims.ID, claims.ExpiresAt.Time)
 	_, err = VerifyTokenSafe(token, denyList)
-	if err != nil {
-		fmt.Println("Revoked token correctly rejected:", err, "\n")
+	if err != nil && strings.Contains(err.Error(), "revoked") {
+		fmt.Println("Revoked token correctly rejected")
 	}
 
-	// 4. Algorithm confusion demo.
-	DemonstrateAlgorithmConfusion()
+	// Algorithm confusion demo.
+	forged := DemonstrateForgery(rsaPublicKey)
+	fmt.Println("Forged token (HS256 with public key):", forged[:60], "...")
 
-	// 5. None alg demo.
-	DemonstrateNoneAlg()
+	sub, err := VerifyTokenVulnerable(forged)
+	if err != nil {
+		fmt.Println("Vulnerable verifier rejected the forgery:", err)
+	} else {
+		fmt.Println("VULNERABLE: verifier accepted forged token as user:", sub)
+	}
+
+	_, err = VerifyTokenWithAlgCheck(forged, rsaPublicKey)
+	if err != nil {
+		fmt.Println("Safe verifier rejected forged token:", err)
+	}
+
+	// None-alg demo.
+	header := base64.RawURLEncoding.EncodeToString([]byte(`{"alg":"none","typ":"JWT"}`))
+	payload := base64.RawURLEncoding.EncodeToString([]byte(`{"sub":"admin","role":"admin","exp":9999999999}`))
+	noneToken := fmt.Sprintf("%s.%s.", header, payload)
+
+	sub2, err := VerifyTokenVulnerable(noneToken)
+	if err != nil {
+		fmt.Println("None-alg rejected:", err)
+	} else {
+		fmt.Println("VULNERABLE: none-alg token accepted as user:", sub2)
+	}
 }
 ```
 
@@ -299,12 +343,12 @@ For the algorithm confusion demonstration:
 
 1. The attacker obtains the server's RSA public key (often from a public JWKS endpoint).
 2. The attacker creates a JWT with header `{"alg":"HS256"}` and payload `{"sub":"admin","exp":...}`.
-3. The attacker signs the token using HMAC-SHA256 with the public key bytes as the secret.
-4. The vulnerable server parses the token, sees `alg: HS256`, reads the "secret" from its key store — but the key store contains the public key, which is the same bytes the attacker used.
-5. The server computes the HMAC signature using the public key as the secret and gets a match.
-6. Server accepts the forged admin token.
+3. The attacker signs the token using HMAC-SHA256 with the public-key modulus bytes as the secret.
+4. The hand-rolled vulnerable verifier in the example trusts the `alg` header to select the key, derives its HMAC secret from those same public-key bytes, and validates the MAC - it matches.
+5. It also accepts `alg: none` tokens with no signature check at all.
+6. Both forged tokens authenticate as `admin` on the vulnerable verifier. Run the lesson program to see this demonstrated end-to-end.
 
-The safe server prevents this by validating `token.Method` against `jwt.SigningMethodRS256` before selecting the key.
+The safe verifier prevents both by pinning `token.Method` to `jwt.SigningMethodRS256` before selecting the key. Note that `golang-jwt/jwt` v5 itself blocks both attacks (a nil keyfunc errors out, and HMAC verification rejects non-byte keys) - the hand-rolled verifier exists because the flaws live in verifier *policy*, which is exactly what the safe key function pins down.
 
 ## Common mistakes
 
