@@ -146,11 +146,11 @@ func RunMigrations(ctx context.Context, db *sql.DB, driver string) error {
 	if driver == "pgx" {
 		const upgradeFK = `DO $$
 BEGIN
-    -- Reconcile legacy data first: rows referencing deleted tasks would fail
-    -- constraint validation when the FK is added.
-    DELETE FROM task_audit_logs
-    WHERE NOT EXISTS (SELECT 1 FROM tasks t WHERE t.id = task_audit_logs.task_id);
     IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_task_audit_logs_task') THEN
+        -- One-time upgrade path: reconcile legacy rows that reference deleted
+        -- tasks (they would fail constraint validation), then add the FK.
+        DELETE FROM task_audit_logs
+        WHERE NOT EXISTS (SELECT 1 FROM tasks t WHERE t.id = task_audit_logs.task_id);
         ALTER TABLE task_audit_logs ADD CONSTRAINT fk_task_audit_logs_task
             FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
     END IF;
