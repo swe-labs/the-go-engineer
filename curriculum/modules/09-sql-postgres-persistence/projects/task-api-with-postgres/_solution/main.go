@@ -145,12 +145,13 @@ func RunMigrations(ctx context.Context, db *sql.DB, driver string) error {
 	if driver == "pgx" {
 		const upgradeFK = `DO $$
 BEGIN
+    -- to_regclass resolves through the active search_path, so the check
+    -- targets the exact table this application uses.
     IF NOT EXISTS (
         SELECT 1
         FROM pg_constraint c
-        JOIN pg_class t ON t.oid = c.conrelid
         WHERE c.conname = 'fk_task_audit_logs_task'
-          AND t.relname = 'task_audit_logs'
+          AND c.conrelid = to_regclass('task_audit_logs')
     ) THEN
         -- One-time upgrade path: reconcile legacy rows that reference deleted
         -- tasks (they would fail constraint validation), then add the FK.
