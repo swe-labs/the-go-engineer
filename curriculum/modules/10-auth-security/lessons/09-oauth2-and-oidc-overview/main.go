@@ -184,5 +184,8 @@ func main() {
 	if err != nil {
 		log.Fatal("ID token parse failed:", err)
 	}
-	fmt.Printf("4. ID Token: sub=%s email=%s name=%s\n", idToken.Subject, idToken.Email, idToken.Name)
+	// UNVERIFIED: ParseIDToken only base64-decodes the payload; the third
+	// segment here is a dummy. Production code MUST verify the signature,
+	// iss, aud, and exp via an OIDC verifier (go-oidc) before trusting claims.
+	fmt.Printf("4. ID Token claims (UNVERIFIED - demo only): sub=%s email=%s name=%s\n", idToken.Subject, idToken.Email, idToken.Name)
 }

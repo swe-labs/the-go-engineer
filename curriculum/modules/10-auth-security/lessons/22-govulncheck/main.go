@@ -57,17 +57,25 @@ func checkVulnerabilities(modules []ModuleVersion, vulnDB *VulnDB) []VulnEntry {
 }
 
 // versionLess compares two semver strings (vMAJOR.MINOR.PATCH).
+// Prerelease builds (v0.17.0-rc.1) sort BEFORE the release, so a
+// version with a prerelease suffix and equal core numbers is "less".
+// Production code should use golang.org/x/mod/semver.
 func versionLess(a, b string) bool {
-	parse := func(v string) [3]int {
+	parse := func(v string) ([3]int, bool) {
 		var out [3]int
+		prerelease := strings.ContainsAny(v, "-+")
 		v = strings.TrimPrefix(v, "v")
 		parts := strings.SplitN(v, ".", 3)
 		for i, p := range parts {
 			fmt.Sscanf(p, "%d", &out[i])
 		}
-		return out
+		return out, prerelease
 	}
-	pa, pb := parse(a), parse(b)
+	pa, aPre := parse(a)
+	pb, bPre := parse(b)
+	if aPre != bPre {
+		return aPre
+	}
 	return pa[0] < pb[0] || (pa[0] == pb[0] && (pa[1] < pb[1] || (pa[1] == pb[1] && pa[2] < pb[2])))
 }
 

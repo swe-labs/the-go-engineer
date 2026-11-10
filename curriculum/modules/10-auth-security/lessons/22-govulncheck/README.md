@@ -168,17 +168,25 @@ func checkVulnerabilities(modules []ModuleVersion, vulnDB *VulnDB) []VulnEntry {
 }
 
 // versionLess compares two semver strings (vMAJOR.MINOR.PATCH).
+// Prerelease builds (v0.17.0-rc.1) sort BEFORE the release, so a
+// version with a prerelease suffix and equal core numbers is "less".
+// Production code should use golang.org/x/mod/semver.
 func versionLess(a, b string) bool {
-	parse := func(v string) [3]int {
+	parse := func(v string) ([3]int, bool) {
 		var out [3]int
+		prerelease := strings.ContainsAny(v, "-+")
 		v = strings.TrimPrefix(v, "v")
 		parts := strings.SplitN(v, ".", 3)
 		for i, p := range parts {
 			fmt.Sscanf(p, "%d", &out[i])
 		}
-		return out
+		return out, prerelease
 	}
-	pa, pb := parse(a), parse(b)
+	pa, aPre := parse(a)
+	pb, bPre := parse(b)
+	if aPre != bPre {
+		return aPre
+	}
 	return pa[0] < pb[0] || (pa[0] == pb[0] && (pa[1] < pb[1] || (pa[1] == pb[1] && pa[2] < pb[2])))
 }
 
@@ -190,16 +198,13 @@ func checkGovulncheckInstalled() bool {
 func main() {
 	fmt.Println("=== govulncheck Demo ===")
 
-	// Simulated database for the demo - the real govulncheck queries https://vuln.go.dev.
-	// Entry 1 mirrors a real advisory: golang.org/x/crypto SSH fixes (incl. Terrapin,
-	// CVE-2023-48795) landed in v0.17.0.
 	vulnDB := &VulnDB{
 		Vulnerabilities: []VulnEntry{
 			{
 				ID:          "GO-2024-0001",
 				Module:      "golang.org/x/crypto",
 				Version:     "<0.17.0",
-				Description: "Denial of service in the SSH handshake (Terrapin, CVE-2023-48795)",
+				Description: "Denial of service in RSA key generation",
 				FixedIn:     "0.17.0",
 				Severity:    "HIGH",
 			},
