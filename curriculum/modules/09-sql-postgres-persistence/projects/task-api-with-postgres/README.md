@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS task_audit_logs (
 
 In `_starter/main.go`, `ConfigurePool` and `RunMigrations` are already provided — study them first:
 - `ConfigurePool(db *sql.DB)` sets max open connections to 25, max idle connections to 10, and connection max lifetime to 15 minutes. Verify you can explain each value's trade-off.
-- `RunMigrations(ctx context.Context, db *sql.DB) error` applies the DDL schema idempotently via `CREATE TABLE IF NOT EXISTS`.
+- `RunMigrations(ctx context.Context, db *sql.DB, driver string) error` applies the DDL schema idempotently via `CREATE TABLE IF NOT EXISTS` (the driver selects the PostgreSQL foreign-key upgrade path).
 
 ### Task 2 — Implement parameterized repository CRUD
 
