@@ -17,7 +17,7 @@ import (
 	"syscall"
 	"time"
 
-	_ "github.com/jackc/pgx/v5/stdlib"
+	_ "github.com/swe-labs/the-go-engineer/curriculum/modules/09-sql-postgres-persistence/projects/task-api-with-postgres/pgdriver"
 	_ "modernc.org/sqlite"
 )
 
