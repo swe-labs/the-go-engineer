@@ -48112,7 +48112,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/01-why-observability-exists/main_test.go"
       },
       "id": "core-12-01",
-      "learning_objective": "Formulate an observability mindset based on the three telemetry pillars: structured logs, metrics, and traces.",
+      "learning_objective": "Explain why observability is a prerequisite for operating production Go services, distinguish observability from monitoring, and identify the three pillars (logs, metrics, traces) with their specific use cases.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-02"
@@ -48308,7 +48308,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/02-structured-logging-with-slog/main_test.go"
       },
       "id": "core-12-02",
-      "learning_objective": "Implement production structured logging using Go's standard library log/slog with JSON and text handlers.",
+      "learning_objective": "Use Go's `log/slog` package to write structured log entries with levels, JSON and text handlers, and typed attributes, and select the appropriate handler and log level for a given production scenario.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-03"
@@ -48518,7 +48518,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/03-request-scoped-logging/main_test.go"
       },
       "id": "core-12-03",
-      "learning_objective": "Generate and propagate correlation IDs across incoming HTTP requests and background operations.",
+      "learning_objective": "Attach per-request fields (request ID, user ID, trace ID) to every log line within a request's scope by storing a derived logger in `context.Context` and retrieving it in handlers and downstream functions.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-04"
@@ -48719,7 +48719,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/04-correlation-ids/main_test.go"
       },
       "id": "core-12-04",
-      "learning_objective": "Configure appropriate log levels (DEBUG, INFO, WARN, ERROR) and filter noise in production environments.",
+      "learning_objective": "Propagate a correlation ID across service boundaries using context.Context for in-process calls and HTTP headers for out-of-process calls, enabling end-to-end request tracing in a distributed system.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-05"
@@ -48935,7 +48935,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/05-pii-redaction/main_test.go"
       },
       "id": "core-12-05",
-      "learning_objective": "Attach request-scoped contextual attributes (user ID, tenant ID, request path) to slog instances.",
+      "learning_objective": "Implement a custom `slog.Handler` that redacts personally identifiable information (PII) from log output by intercepting and masking attribute values before serialization.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-06"
@@ -49129,7 +49129,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/06-metrics/main_test.go"
       },
       "id": "core-12-06",
-      "learning_objective": "Mask sensitive PII and confidential credentials before writing structured log entries.",
+      "learning_objective": "Instrument a Go service with custom metrics (counter, gauge) using `expvar`, and implement a thread-safe in-memory metrics store that tracks request count, error count, and average latency.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-07"
@@ -49331,7 +49331,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/07-prometheus/main_test.go"
       },
       "id": "core-12-07",
-      "learning_objective": "Instrument application performance using Prometheus metric counters, gauges, and histogram buckets.",
+      "learning_objective": "Instrument a Go HTTP service with Prometheus counters, gauges, and histograms, expose a `/metrics` endpoint, and verify metric values programmatically.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-08"
@@ -49524,7 +49524,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/08-tracing/main_test.go"
       },
       "id": "core-12-08",
-      "learning_objective": "Expose Prometheus scrape endpoints (/metrics) and monitor HTTP request rates, errors, and latencies.",
+      "learning_objective": "Implement manual distributed tracing in Go using context propagation, create parent-child span relationships, and extract trace context from HTTP headers.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-09"
@@ -49726,7 +49726,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/09-opentelemetry/main_test.go"
       },
       "id": "core-12-09",
-      "learning_objective": "Trace distributed requests across microservice boundaries using OpenTelemetry spans and trace context headers.",
+      "learning_objective": "Instrument Go code with OpenTelemetry tracing: create a tracer provider, start and end spans, add attributes and events, and export spans to a backend.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-10"
@@ -49916,7 +49916,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/10-alerting-mindset/main_test.go"
       },
       "id": "core-12-10",
-      "learning_objective": "Implement separate liveness (/livez) and readiness (/readyz) container health check endpoints.",
+      "learning_objective": "Design meaningful SLO-based alerts by calculating SLIs, burn rates, and alert severity, and distinguish actionable alerts from noise.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-11"
@@ -50116,7 +50116,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/11-incident-debugging/main_test.go"
       },
       "id": "core-12-11",
-      "learning_objective": "Design proactive alerting strategies based on service-level objectives (SLOs) rather than raw metric noise.",
+      "learning_objective": "Apply hypothesis-driven debugging methodology to production Go incidents, using structured observability data, pprof profiling, and systematic root-cause analysis.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-12-12"
@@ -50324,7 +50324,7 @@
         "test_path": "modules/12-observability-diagnostics/lessons/12-reliability-review/main_test.go"
       },
       "id": "core-12-12",
-      "learning_objective": "Construct an actionable production incident runbook with diagnostic triage steps and escalation paths.",
+      "learning_objective": "Build resilient Go services by applying reliability patterns: circuit breakers, bulkheads, graceful degradation, redundancy, and a thorough reliability checklist.",
       "module_id": "module-12",
       "next_item_ids": [
         "core-13-01"

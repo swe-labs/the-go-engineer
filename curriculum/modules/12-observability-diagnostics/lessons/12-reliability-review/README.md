@@ -94,15 +94,27 @@ const (
 	StateHalfOpen State = 2
 )
 
+func (s State) String() string {
+	switch s {
+	case StateClosed:
+		return "closed"
+	case StateOpen:
+		return "open"
+	case StateHalfOpen:
+		return "half-open"
+	}
+	return "unknown"
+}
+
 type CircuitBreaker struct {
-	mu               sync.Mutex
-	state            State
-	failureCount     int
-	successCount     int
-	threshold        int
-	halfOpenMax      int
-	cooldown         time.Duration
-	lastFailureTime  time.Time
+	mu              sync.Mutex
+	state           State
+	failureCount    int
+	successCount    int
+	threshold       int
+	halfOpenMax     int
+	cooldown        time.Duration
+	lastFailureTime time.Time
 }
 
 func NewCircuitBreaker(threshold int, cooldown time.Duration) *CircuitBreaker {
@@ -114,6 +126,12 @@ func NewCircuitBreaker(threshold int, cooldown time.Duration) *CircuitBreaker {
 	}
 }
 
+func (cb *CircuitBreaker) State() State {
+	cb.mu.Lock()
+	defer cb.mu.Unlock()
+	return cb.state
+}
+
 func (cb *CircuitBreaker) Call(ctx context.Context, fn func(context.Context) error) error {
 	cb.mu.Lock()
 
@@ -121,11 +139,10 @@ func (cb *CircuitBreaker) Call(ctx context.Context, fn func(context.Context) err
 	case StateOpen:
 		if time.Since(cb.lastFailureTime) < cb.cooldown {
 			cb.mu.Unlock()
-			return errors.New("circuit breaker: open")
+			return errors.New("circuit breaker open")
 		}
 		cb.state = StateHalfOpen
 		cb.successCount = 0
-
 	case StateHalfOpen:
 		if cb.successCount >= cb.halfOpenMax {
 			cb.state = StateClosed
@@ -151,9 +168,6 @@ func (cb *CircuitBreaker) Call(ctx context.Context, fn func(context.Context) err
 	}
 
 	cb.successCount++
-	if cb.state == StateHalfOpen {
-		cb.successCount++
-	}
 	return nil
 }
 
@@ -167,6 +181,11 @@ func NewBulkhead(maxConcurrent int) *Bulkhead {
 
 func (b *Bulkhead) Execute(ctx context.Context, fn func(context.Context) error) error {
 	select {
+	case <-ctx.Done():
+		return ctx.Err()
+	default:
+	}
+	select {
 	case b.sem <- struct{}{}:
 		defer func() { <-b.sem }()
 		return fn(ctx)
@@ -178,10 +197,10 @@ func (b *Bulkhead) Execute(ctx context.Context, fn func(context.Context) error) 
 type DegradationFunc func(ctx context.Context) (string, error)
 
 type ResilientClient struct {
-	primary   DegradationFunc
-	fallback  DegradationFunc
-	breaker   *CircuitBreaker
-	bulkhead  *Bulkhead
+	primary  DegradationFunc
+	fallback DegradationFunc
+	breaker  *CircuitBreaker
+	bulkhead *Bulkhead
 }
 
 func NewResilientClient(primary, fallback DegradationFunc) *ResilientClient {
@@ -194,19 +213,19 @@ func NewResilientClient(primary, fallback DegradationFunc) *ResilientClient {
 }
 
 func (c *ResilientClient) Fetch(ctx context.Context) (string, error) {
-	result, err := c.breaker.Call(ctx, func(ctx context.Context) error {
-		res, err := c.bulkhead.Execute(ctx, func(ctx context.Context) error {
+	var result string
+	err := c.breaker.Call(ctx, func(ctx context.Context) error {
+		return c.bulkhead.Execute(ctx, func(ctx context.Context) error {
 			r, e := c.primary(ctx)
 			result = r
 			return e
 		})
-		return err
 	})
 
 	if err != nil {
 		fallbackResult, fallbackErr := c.fallback(ctx)
 		if fallbackErr != nil {
-			return "", fmt.Errorf("primary and fallback both failed: %w", fallbackErr)
+			return "", fmt.Errorf("all paths failed: %w", fallbackErr)
 		}
 		return fallbackResult + " (degraded)", nil
 	}
@@ -215,11 +234,11 @@ func (c *ResilientClient) Fetch(ctx context.Context) (string, error) {
 }
 
 func main() {
-	primaryCallCount := 0
+	callCount := 0
 	client := NewResilientClient(
 		func(ctx context.Context) (string, error) {
-			primaryCallCount++
-			if primaryCallCount <= 3 {
+			callCount++
+			if callCount <= 3 {
 				return "", errors.New("primary failure")
 			}
 			return "primary data", nil
@@ -229,19 +248,16 @@ func main() {
 		},
 	)
 
+	fmt.Println("=== Resilient Client Demo ===")
 	for i := 0; i < 8; i++ {
 		result, err := client.Fetch(context.Background())
+		state := client.breaker.State()
 		if err != nil {
-			fmt.Printf("Request %d: error — %v\n", i+1, err)
+			fmt.Printf("Request %d: error [breaker=%s] — %v\n", i+1, state, err)
 		} else {
-			fmt.Printf("Request %d: %s\n", i+1, result)
+			fmt.Printf("Request %d: %q [breaker=%s]\n", i+1, result, state)
 		}
 	}
-
-	fmt.Println("\nReliability patterns applied:")
-	fmt.Println("  - Circuit breaker: stops cascading failures")
-	fmt.Println("  - Bulkhead: isolates dependency resource usage")
-	fmt.Println("  - Degradation: falls back to cached data")
 }
 ```
 

@@ -46,14 +46,14 @@ Where did time go?
 
 Observability is designed in, not retrofitted. A system is observable when you can determine its internal state from the data it emits — without guessing, without reproducing, without redeploying with new log lines.
 
-The opposite of observability is "blind debugging": adding a log line, redeploying, waiting for the error to recur, and repeating. This cycle takes 20–60 minutes per iteration and fails entirely for intermittent issues.
+The opposite of observability is "blind debugging": adding a log line, redeploying, waiting for the error to recur, and repeating. Each cycle costs a build-and-deploy round trip — often tens of minutes — and fails entirely for intermittent issues.
 
 ## Under the hood
 
 At the machine level, every observability signal occupies CPU, memory, and I/O:
 
 - **Log I/O**: Each structured log line serializes key-value pairs into a buffer, acquires a write lock on the output stream (or enqueues to a buffer), and flushes to disk or network. The cost is ~1–10μs per line depending on the number of attributes.
-- **Metric aggregation**: A counter increment is a single atomic CPU instruction (LOCK XADD on x86). A histogram bucket update requires a mutex lock on the bucket slice. Prometheus client_golang uses a sync.Mutex for histograms and atomic.AddUint64 for counters.
+- **Metric aggregation**: A counter increment is a single atomic CPU instruction (LOCK XADD on x86). A histogram bucket update is an atomic add on the bucket's uint64 counter (verified in `client_golang` v1.23: `sync/atomic`, no mutex on the observe path).
 - **Trace spans**: Each span allocates a struct with a span ID, parent ID, timestamps, and attributes. Span lifecycle: start → add attributes → end → enqueue for export. The allocation and queuing cost is ~100–500ns per span.
 
 Every observability library adds a code path to the hot path of your handler. The key is keeping the cost below 1% of request latency so it is negligible at the p99 level.
@@ -62,7 +62,7 @@ Every observability library adds a code path to the hot path of your handler. Th
 
 Go's standard library provides the building blocks for all three pillars:
 
-- **Logs**: `log/slog` (Go 1.21+) for structured logging with levels, handlers (text, JSON), and context-scoped loggers.
+- **Logs**: `log/slog` (Go 1.21+) for structured logging with levels, handlers (text, JSON), and context-scoped loggers. (`log` itself prefixes each line with the date and time in `2009/01/23 01:23:23` form via `LstdFlags` — no timezone, no structure.)
 - **Metrics**: `expvar` for exporting runtime and custom metrics as JSON over HTTP at `/debug/vars`. The `runtime` package exposes MemStats, NumGoroutine, NumCPU, and GC stats.
 - **Traces**: No built-in tracer, but Go uses the OpenTelemetry SDK for distributed tracing. The `net/http` package wraps HTTP handlers and transports for span creation and propagation.
 
@@ -93,9 +93,26 @@ func ObservableLog(path string, status int, dur time.Duration) {
 	)
 }
 
+// LogRequest writes a structured log entry with request-scoped fields.
+func LogRequest(logger *slog.Logger, handler, method, path string, statusCode int, latencyMs int64) {
+	logger.Info("request completed",
+		"handler", handler,
+		"method", method,
+		"path", path,
+		"status_code", statusCode,
+		"latency_ms", latencyMs,
+	)
+}
+
 func main() {
+	fmt.Println("=== BlindLog (unstructured) ===")
 	BlindLog("/api/orders", 500, 5200*time.Millisecond)
+
+	fmt.Println("\n=== ObservableLog (structured) ===")
 	ObservableLog("/api/orders", 500, 5200*time.Millisecond)
+
+	fmt.Println("\n=== LogRequest ===")
+	LogRequest(slog.Default(), "OrderHandler", "POST", "/api/orders", 500, 5200)
 }
 ```
 
@@ -115,7 +132,7 @@ For `ObservableLog("/api/orders", 500, 5200*time.Millisecond)` with a default te
 
 - **Observability as an afterthought**: Adding logging, metrics, and tracing after the first production incident. The team is blind during the incident and must deploy an observability fix to understand the outage. By the time the data arrives, the incident may have self-resolved with no root cause identified.
 
-- **Logging everything at INFO level**: A service with 1000 requests/second logging 10 fields per request produces 10,000 log lines/second. At this volume, operators cannot distinguish a routine request from an error without complex queries. The signal is drowned in noise.
+- **Logging everything at INFO level**: A service with 1000 requests/second logging one line with 10 fields per request produces 1000 log lines/second — and a service that logs ten statements per request produces 10,000. At this volume, operators cannot distinguish a routine request from an error without complex queries. The signal is drowned in noise.
 
 - **Using fmt.Println for production diagnostics**: Unstructured text cannot be queried by a log aggregator (Datadog, Grafana Loki, CloudWatch). To find all errors for a specific endpoint, operators must grep raw files — which is impossible in ephemeral container environments.
 
@@ -160,7 +177,7 @@ With this change, the log aggregator shows that errors correlate with `user_id` 
 
 ## Production notes
 
-Every production Go service at scale depends on observability. Kubernetes uses structured logging throughout, exposing metrics via a `/metrics` endpoint scraped by Prometheus. Docker Hub uses correlation IDs across its microservices. Uber's observability pipeline processes billions of spans per day.
+Every production Go service at scale depends on observability. Kubernetes uses structured logging throughout, exposing metrics via a `/metrics` endpoint scraped by Prometheus. Uber has published extensively on the scale of its distributed tracing pipeline. The specific vendors matter less than the pattern: correlation across signals is what makes large systems debuggable.
 
 Without observability, a 10-query database slowdown is invisible until users report errors — with observability, the p99 latency chart shows the degradation in real time. SRE teams define SLOs (service level objectives) based on metrics: latency < 200ms for 99.9% of requests over 30 days. These SLOs are impossible to measure without a metrics pipeline.
 
@@ -178,15 +195,7 @@ The rule: never let observability add more than 1% to your p99 latency. If it do
 
 ## Practice task
 
-Complete the function `LogRequest` that writes a structured log entry with all request context:
-
-```go
-func LogRequest(logger *slog.Logger, handler, method, path string, statusCode int, latencyMs int64) {
-	// Log a structured entry with all parameters as attributes
-}
-```
-
-Use `logger.Info` and pass each parameter as a key-value pair. Run `go run .` to see the output, then `go test .` to verify your implementation against the table-driven tests.
+Study the reference implementation of `LogRequest` in `main.go` (it logs a structured entry with `handler`, `method`, `path`, `status_code`, and `latency_ms` attributes), then extend it: add a `request_id` attribute sourced from a `context.Context` parameter, and write a table-driven test asserting the new attribute appears in the handler output. Use `slog.NewTextHandler` with a `bytes.Buffer` to capture the output in tests.
 
 ## Tests / verification
 

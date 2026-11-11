@@ -6,7 +6,7 @@ Design meaningful SLO-based alerts by calculating SLIs, burn rates, and alert se
 
 ## Why this matters
 
-Bad alerts destroy on-call trust. A team that receives 50 alerts per night ignores all of them — including the one that signals a real outage. Alert fatigue is the leading cause of incident response delays. Google SRE research shows that teams with >10 alerts per on-call shift have a mean-time-to-respond (MTTR) 3x higher than teams with <5 alerts. Mastering alerting mindset means designing alerts that fire only when a human must act. Everything else is a dashboard or a log.
+Bad alerts destroy on-call trust. A team that receives 50 alerts per night ignores all of them — including the one that signals a real outage. Alert fatigue is a leading cause of incident response delays. Mastering alerting mindset means designing alerts that fire only when a human must act. Everything else is a dashboard or a log.
 
 ## Mental model
 
@@ -100,15 +100,15 @@ import (
 )
 
 type SLOConfig struct {
-	Window        time.Duration
-	Target        float64 // e.g., 0.999 for 99.9%
-	ErrorBudget   float64 // computed: 1 - target
+	Window      time.Duration
+	Target      float64
+	ErrorBudget float64
 }
 
 type BurnRateAlert struct {
-	Severity     string
-	Threshold    float64 // burn rate multiplier
-	Window       time.Duration
+	Severity  string
+	Threshold float64
+	Window    time.Duration
 }
 
 type SLI struct {
@@ -127,10 +127,12 @@ func (s SLI) SuccessRate() float64 {
 	return 1 - s.ErrorRate()
 }
 
-func computeBurnRate(currentErrors int, currentTotal int, since time.Duration, slo SLOConfig) float64 {
-	actualErrorRate := float64(currentErrors) / float64(currentTotal)
+func computeBurnRate(errors, total int, since time.Duration, slo SLOConfig) float64 {
+	if total == 0 {
+		return 0
+	}
+	actualErrorRate := float64(errors) / float64(total)
 	maxAllowedErrorRate := 1 - slo.Target
-
 	if maxAllowedErrorRate == 0 {
 		return 0
 	}
@@ -140,7 +142,6 @@ func computeBurnRate(currentErrors int, currentTotal int, since time.Duration, s
 func evaluateAlert(sli SLI, since time.Duration, slo SLOConfig, alerts []BurnRateAlert) []string {
 	var firing []string
 	burnRate := computeBurnRate(sli.ErrorRequests, sli.TotalRequests, since, slo)
-
 	for _, alert := range alerts {
 		if burnRate >= alert.Threshold {
 			firing = append(firing, alert.Severity)
@@ -162,10 +163,10 @@ func main() {
 	}
 
 	scenarios := []struct {
-		name         string
-		total        int
-		errors       int
-		since        time.Duration
+		name   string
+		total  int
+		errors int
+		since  time.Duration
 	}{
 		{"normal operation", 10000, 2, 1 * time.Hour},
 		{"brief spike", 1000, 50, 1 * time.Hour},
@@ -185,7 +186,7 @@ func main() {
 		fmt.Printf("  Requests: %d, Errors: %d, Error rate: %.2f%%\n", s.total, s.errors, rate)
 		fmt.Printf("  Burn rate: %.1fx\n", burn)
 		if len(firing) == 0 {
-			fmt.Println("  Status: OK")
+			fmt.Println("  Status: OK (no alerts)")
 		} else {
 			fmt.Printf("  Alerts firing: %v\n", firing)
 		}

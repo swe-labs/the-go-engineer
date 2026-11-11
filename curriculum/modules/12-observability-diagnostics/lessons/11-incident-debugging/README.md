@@ -97,15 +97,20 @@ import (
 	"math/rand"
 	"net/http"
 	_ "net/http/pprof"
+	"runtime"
 	"sync"
 	"time"
 )
 
 var (
-	leakedGoroutines sync.WaitGroup
 	mu               sync.Mutex
 	contendedCounter int
 )
+
+func init() {
+	runtime.SetMutexProfileFraction(5)
+	runtime.SetBlockProfileRate(1)
+}
 
 func main() {
 	http.HandleFunc("/api/leak", leakHandler)
@@ -113,12 +118,12 @@ func main() {
 	http.HandleFunc("/api/contend", contendHandler)
 
 	go func() {
-		log.Println("pprof available at /debug/pprof/")
-		log.Println("Simulate: open http://localhost:8080/debug/pprof/")
-		fmt.Println("\nReady. Trigger scenarios:")
-		fmt.Println("  GET /api/leak    — leaks goroutines")
-		fmt.Println("  GET /api/work    — CPU-intensive work")
-		fmt.Println("  GET /api/contend — mutex contention")
+		log.Println("Server starting on :8080")
+		log.Println("Profiles at /debug/pprof/")
+		fmt.Println("\nEndpoints:")
+		fmt.Println("  GET /api/leak    — simulate goroutine leak")
+		fmt.Println("  GET /api/work    — simulate CPU work")
+		fmt.Println("  GET /api/contend — simulate mutex contention")
 		log.Fatal(http.ListenAndServe(":8080", nil))
 	}()
 
@@ -126,22 +131,21 @@ func main() {
 }
 
 func leakHandler(w http.ResponseWriter, r *http.Request) {
-	for i := 0; i < 10; i++ {
-		leakedGoroutines.Add(1)
+	count := 10
+	for i := 0; i < count; i++ {
 		go func(id int) {
-			defer leakedGoroutines.Done()
 			ch := make(chan struct{})
-			<-ch // blocks forever — leak
+			<-ch
 		}(i)
 	}
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"leaked": 10}`))
+	fmt.Fprintf(w, `{"leaked": %d}`, count)
 }
 
 func workHandler(w http.ResponseWriter, r *http.Request) {
 	start := time.Now()
 	result := 0
-	for i := 0; i < 10_000_000; i++ {
+	for i := 0; i < 5_000_000; i++ {
 		result += rand.Intn(1000)
 	}
 	w.WriteHeader(http.StatusOK)
@@ -150,7 +154,7 @@ func workHandler(w http.ResponseWriter, r *http.Request) {
 
 func contendHandler(w http.ResponseWriter, r *http.Request) {
 	var wg sync.WaitGroup
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()

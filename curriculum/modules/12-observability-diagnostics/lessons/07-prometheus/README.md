@@ -12,7 +12,7 @@ Metrics are the backbone of production observability. Prometheus is the CNCF-gra
 
 Prometheus is like a meter reader who walks a route every 15 seconds (scrape interval), reading each household's meter (HTTP `/metrics` endpoint) and recording the numbers (time series) in a ledger (TSDB). The meter reader decides when to read — the household never calls to report a reading (pull model, not push). Each household has multiple meters: electricity (request count), water pressure (latency), temperature (memory usage). If a meter is unreadable (service down), the reader notes it. An analyst (Grafana) can query the ledger: "what was the average request rate in the last hour?" The reader only records what exists; if the household installs a new meter (new metric), the reader automatically discovers it at the next scrape.
 
-The analogy breaks for histograms: a histogram is not a single meter but a set of 15+ sub-meters, each counting how many readings fell into a specific bucket (≤10ms, ≤25ms, ≤50ms, ≤100ms, ≤250ms, etc.). Prometheus never computes percentiles server-side; it stores bucket counts, and the query tool (PromQL) estimates percentiles by linear interpolation within the bucket.
+The analogy breaks for histograms: a histogram is not a single meter but a set of sub-meters, one per bucket, each counting how many readings fell into that bucket. The default `prometheus.DefBuckets` define 11 cumulative boundaries (.005s to 10s); custom buckets can use any count. Prometheus never computes percentiles server-side; it stores bucket counts, and the query tool (PromQL) estimates percentiles by linear interpolation within the bucket.
 
 ## Visual model
 
@@ -79,7 +79,6 @@ Best practice: serve `/metrics` on a separate port (e.g., `:9091`) to avoid conf
 package main
 
 import (
-	"fmt"
 	"log"
 	"math/rand"
 	"net/http"
@@ -110,8 +109,16 @@ var (
 
 func main() {
 	http.Handle("/metrics", promhttp.Handler())
-	http.Handle("/api/hello", instrumentedHandler(http.HandlerFunc(helloHandler)))
-	http.Handle("/api/echo", instrumentedHandler(http.HandlerFunc(echoHandler)))
+	http.Handle("/api/hello", instrumentedHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		time.Sleep(time.Duration(rand.Intn(50)) * time.Millisecond)
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"message":"hello"}`))
+	})))
+	http.Handle("/api/echo", instrumentedHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"echo":"ok"}`))
+	})))
 
 	log.Println("Server starting on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
@@ -127,7 +134,7 @@ func instrumentedHandler(next http.Handler) http.Handler {
 
 		duration := time.Since(start).Seconds()
 		inFlight.Dec()
-		requestsTotal.WithLabelValues(r.Method, r.URL.Path, fmt.Sprint(lrw.statusCode)).Inc()
+		requestsTotal.WithLabelValues(r.Method, r.URL.Path, statusText(lrw.statusCode)).Inc()
 		requestDuration.Observe(duration)
 	})
 }
@@ -142,16 +149,20 @@ func (lrw *loggingResponseWriter) WriteHeader(code int) {
 	lrw.ResponseWriter.WriteHeader(code)
 }
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(time.Duration(rand.Intn(50)) * time.Millisecond)
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"message":"hello"}`))
-}
-
-func echoHandler(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"echo":"ok"}`))
+func statusText(code int) string {
+	if code < 200 {
+		return "1xx"
+	}
+	if code < 300 {
+		return "2xx"
+	}
+	if code < 400 {
+		return "3xx"
+	}
+	if code < 500 {
+		return "4xx"
+	}
+	return "5xx"
 }
 ```
 

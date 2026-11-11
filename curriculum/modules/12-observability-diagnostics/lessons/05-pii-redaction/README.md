@@ -117,11 +117,13 @@ import (
 	"strings"
 )
 
+// RedactHandler wraps an slog.Handler and redacts values for sensitive keys.
 type RedactHandler struct {
 	inner  slog.Handler
 	redact map[string]bool
 }
 
+// NewRedactHandler creates a handler that redacts specified keys.
 func NewRedactHandler(inner slog.Handler, sensitiveKeys ...string) *RedactHandler {
 	r := make(map[string]bool, len(sensitiveKeys))
 	for _, k := range sensitiveKeys {
@@ -158,17 +160,24 @@ func (h *RedactHandler) WithGroup(name string) slog.Handler {
 	return &RedactHandler{inner: h.inner.WithGroup(name), redact: h.redact}
 }
 
-func main() {
-	baseHandler := slog.NewTextHandler(os.Stdout, nil)
-	handler := NewRedactHandler(baseHandler, "email", "password", "ssn", "credit_card")
-	logger := slog.New(handler)
-
+// LogUser logs user data with PII automatically redacted.
+func LogUser(logger *slog.Logger, userID, email, name, role string) {
 	logger.Info("user operation",
-		"user_id", "u-42",
-		"email", "alice@example.com",
-		"name", "Alice Smith",
-		"role", "admin",
+		"user_id", userID,
+		"email", email,
+		"name", name,
+		"role", role,
 	)
+}
+
+func main() {
+	baseHandler := slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo})
+	redactHandler := NewRedactHandler(baseHandler, "email", "password", "ssn", "credit_card")
+	logger := slog.New(redactHandler)
+
+	LogUser(logger, "u-42", "alice@example.com", "Alice Smith", "admin")
+
+	slog.Info("note: email value above should appear as [REDACTED]")
 }
 ```
 
@@ -197,6 +206,8 @@ For `logger.Info("user operation", "email", "alice@example.com", "role", "admin"
 - **Case-insensitive matching only on keys, not values**: Some developers try to match PII patterns in values (e.g., `\b[\w.]+@\w+\.\w+\b`). This is expensive and error-prone. Fix: match on keys, which are controlled by the developer, rather than values, which are user data.
 
 - **Not redacting in error strings**: Error messages that include user input (`fmt.Errorf("user %s not found: invalid email %s", userID, email)`) leak PII if the error is logged. Fix: wrap errors without user data in the message, or redact error string attributes at the handler level.
+
+- **Assuming the wrapper intercepts everything**: attrs attached via `logger.With("email", ...)` bypass `Handle` entirely — the wrapper's `WithAttrs` delegates to the inner handler before redaction can see them, so pre-attached sensitive values reach the output unredacted. Fix: route `WithAttrs` through the wrapper's own redaction logic (redact the incoming attrs before delegating), or document that sensitive values must only be passed as per-record attrs.
 
 ## Debugging walkthrough
 

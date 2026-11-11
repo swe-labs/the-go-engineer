@@ -103,16 +103,19 @@ import (
 	"sync/atomic"
 )
 
+// MetricsStore tracks request metrics in memory.
 type MetricsStore struct {
 	requestCount  atomic.Int64
 	errorCount    atomic.Int64
 	totalDuration atomic.Int64
 }
 
+// NewMetricsStore returns an initialized MetricsStore.
 func NewMetricsStore() *MetricsStore {
 	return &MetricsStore{}
 }
 
+// RecordRequest records a request with its duration and error status.
 func (m *MetricsStore) RecordRequest(durationMs int64, isError bool) {
 	m.requestCount.Add(1)
 	m.totalDuration.Add(durationMs)
@@ -121,6 +124,7 @@ func (m *MetricsStore) RecordRequest(durationMs int64, isError bool) {
 	}
 }
 
+// Snapshot returns the current metrics values.
 func (m *MetricsStore) Snapshot() (requests, errors, avgDurationMs int64) {
 	reqs := m.requestCount.Load()
 	errs := m.errorCount.Load()
@@ -131,6 +135,7 @@ func (m *MetricsStore) Snapshot() (requests, errors, avgDurationMs int64) {
 	return reqs, errs, avgDurationMs
 }
 
+// expvar metrics (global, for production exposure).
 var (
 	expRequests = expvar.NewInt("http_requests_total")
 	expErrors   = expvar.NewInt("http_errors_total")
@@ -231,7 +236,7 @@ Different metric types have different costs:
 - **Atomic counter (`expvar.Int`)**: `Add` is a single `atomic.AddInt64` instruction (~50ns). No allocations. The fastest metric type.
 - **Atomic gauge (`expvar.Int` with Set)**: `Set` is a single `atomic.StoreInt64` instruction (~20ns). Also zero allocations.
 - **expvar.Map**: `Add(key, delta)` involves a map lookup (amortized O(1)) plus an atomic add on the inner Int. If the key does not exist, it creates a new Int, which allocates.
-- **Histogram**: Requires multiple bucket counters and a mutex for concurrent safety. A histogram with 10 buckets costs ~200ns per observe plus ~200 bytes allocation for the buckets.
+- **Histogram**: Bucket counters are plain `uint64` fields updated with `sync/atomic` (verified in `client_golang` v1.23 — no mutex on the observe path). The bucket array is allocated once at registration; `Observe` itself allocates nothing. Cost per observe is roughly a binary search over the bucket bounds plus two atomic adds.
 
 For the critical request path, use atomic counters and gauges. Use histograms on a sampled subset of requests (1 in 100) for p99 latency tracking, or use Prometheus client's histograms which are optimized for concurrent access.
 
