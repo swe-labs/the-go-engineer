@@ -66,17 +66,22 @@ func main() {
 	fmt.Printf("  Query: %s\n", q3)
 	fmt.Printf("  Injection detected: %v\n", isInjection(q3))
 
-	fmt.Println("\n4. Parameterized query (safe):")
+	fmt.Println("\n4. What parameterization actually is (SQL text and data travel separately):")
 	safeInput := "alice' OR '1'='1"
-	q4 := safeQuery("SELECT email FROM users WHERE username = ?", safeInput)
-	fmt.Printf("  Query: %s\n", q4)
-	fmt.Printf("  Result: %s\n", simulateDBLookup(q4))
+	paramSQL := "SELECT email FROM users WHERE username = ?"
+	fmt.Printf("  SQL text sent to DB:    %s\n", paramSQL)
+	fmt.Printf("  Parameter bound after: %q\n", safeInput)
+	fmt.Println("  The database compiles the statement with ? as a slot, then binds the value as data.")
+	fmt.Println("  The input can never change the structure of the statement.")
 
-	fmt.Println("\n5. Escaped injection (safe):")
+	fmt.Println("\n5. Escaped concatenation (a weaker defense, not parameterization):")
 	escapeInput := "alice' OR '1'='1"
 	escaped := escapeSQLString(escapeInput)
 	q5 := unsafeQuery(baseQuery, escaped)
 	fmt.Printf("  Escaped input: %s\n", escaped)
 	fmt.Printf("  Query: %s\n", q5)
-	fmt.Printf("  Injection detected: %v\n", isInjection(q5))
+	fmt.Println("  Escaping survived this case, but it fails on alternate encodings and second-order injection.")
+
+	fmt.Println("\n6. Injection-pattern detection (a monitoring heuristic, not a defense):")
+	fmt.Printf("  isInjection(q2) = %v\n", isInjection(q2))
 }

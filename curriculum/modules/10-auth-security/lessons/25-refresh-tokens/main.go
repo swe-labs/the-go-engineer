@@ -17,30 +17,38 @@ type TokenPair struct {
 }
 
 type RefreshTokenStore struct {
-	mu      sync.RWMutex
-	tokens  map[string]*RefreshTokenInfo
-	hmacKey []byte
+	mu              sync.RWMutex
+	tokens          map[string]*RefreshTokenInfo
+	revokedFamilies map[string]bool
+	hmacKey         []byte
 }
 
 type RefreshTokenInfo struct {
 	TokenHash string
 	UserID    string
+	FamilyID  string
 	ExpiresAt time.Time
+	Used      bool
 	Revoked   bool
 }
 
 func NewRefreshTokenStore() *RefreshTokenStore {
 	key := make([]byte, 32)
-	rand.Read(key)
+	if _, err := rand.Read(key); err != nil {
+		panic(err) // crypto/rand failure is unrecoverable for a token store
+	}
 	return &RefreshTokenStore{
-		tokens:  make(map[string]*RefreshTokenInfo),
-		hmacKey: key,
+		tokens:          make(map[string]*RefreshTokenInfo),
+		revokedFamilies: make(map[string]bool),
+		hmacKey:         key,
 	}
 }
 
 func generateRandomString(length int) string {
 	bytes := make([]byte, length)
-	rand.Read(bytes)
+	if _, err := rand.Read(bytes); err != nil {
+		panic(err) // crypto/rand failure is unrecoverable for token generation
+	}
 	return hex.EncodeToString(bytes)
 }
 
@@ -50,19 +58,18 @@ func (s *RefreshTokenStore) hashToken(token string) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func (s *RefreshTokenStore) Issue(userID string, accessTTL, refreshTTL time.Duration) *TokenPair {
+func (s *RefreshTokenStore) issueInFamilyLocked(userID, familyID string, accessTTL, refreshTTL time.Duration) *TokenPair {
 	accessToken := generateRandomString(32)
 	refreshToken := generateRandomString(64)
 
 	refreshHash := s.hashToken(refreshToken)
 
-	s.mu.Lock()
 	s.tokens[refreshHash] = &RefreshTokenInfo{
 		TokenHash: refreshHash,
 		UserID:    userID,
+		FamilyID:  familyID,
 		ExpiresAt: time.Now().Add(refreshTTL),
 	}
-	s.mu.Unlock()
 
 	return &TokenPair{
 		AccessToken:  accessToken,
@@ -71,30 +78,49 @@ func (s *RefreshTokenStore) Issue(userID string, accessTTL, refreshTTL time.Dura
 	}
 }
 
+func (s *RefreshTokenStore) revokeFamilyLocked(familyID string) {
+	s.revokedFamilies[familyID] = true
+	for _, info := range s.tokens {
+		if info.FamilyID == familyID {
+			info.Revoked = true
+		}
+	}
+}
+
+func (s *RefreshTokenStore) Issue(userID string, accessTTL, refreshTTL time.Duration) *TokenPair {
+	familyID := generateRandomString(16)
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.issueInFamilyLocked(userID, familyID, accessTTL, refreshTTL)
+}
+
 func (s *RefreshTokenStore) Rotate(refreshToken string, accessTTL, refreshTTL time.Duration) (*TokenPair, error) {
 	hash := s.hashToken(refreshToken)
 
 	s.mu.Lock()
+	defer s.mu.Unlock()
+
 	info, ok := s.tokens[hash]
 	if !ok {
-		s.mu.Unlock()
 		return nil, fmt.Errorf("refresh token not found")
 	}
 
-	if info.Revoked {
-		s.mu.Unlock()
+	if info.Revoked || s.revokedFamilies[info.FamilyID] {
 		return nil, fmt.Errorf("refresh token revoked")
 	}
 
+	if info.Used {
+		// Replay of a consumed token indicates theft: revoke the entire family.
+		s.revokeFamilyLocked(info.FamilyID)
+		return nil, fmt.Errorf("refresh token reuse detected: family revoked")
+	}
+
 	if time.Now().After(info.ExpiresAt) {
-		s.mu.Unlock()
 		return nil, fmt.Errorf("refresh token expired")
 	}
 
-	delete(s.tokens, hash)
-	s.mu.Unlock()
-
-	return s.Issue(info.UserID, accessTTL, refreshTTL), nil
+	info.Used = true
+	return s.issueInFamilyLocked(info.UserID, info.FamilyID, accessTTL, refreshTTL), nil
 }
 
 func (s *RefreshTokenStore) Revoke(refreshToken string) bool {
@@ -105,7 +131,7 @@ func (s *RefreshTokenStore) Revoke(refreshToken string) bool {
 	if !ok {
 		return false
 	}
-	info.Revoked = true
+	s.revokeFamilyLocked(info.FamilyID)
 	return true
 }
 
@@ -117,8 +143,11 @@ func (s *RefreshTokenStore) Validate(refreshToken string) (string, error) {
 	if !ok {
 		return "", fmt.Errorf("token not found")
 	}
-	if info.Revoked {
+	if info.Revoked || s.revokedFamilies[info.FamilyID] {
 		return "", fmt.Errorf("token revoked")
+	}
+	if info.Used {
+		return "", fmt.Errorf("token already used")
 	}
 	if time.Now().After(info.ExpiresAt) {
 		return "", fmt.Errorf("token expired")

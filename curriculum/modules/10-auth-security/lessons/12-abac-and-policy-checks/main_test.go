@@ -30,6 +30,7 @@ func setupTestEngine() *PolicyEngine {
 		Name: "deny-delete", Effect: "deny",
 		Conditions: []Condition{
 			{Attribute: "env.method", Operator: "eq", Value: "DELETE"},
+			{Attribute: "user.role", Operator: "neq", Value: "admin"},
 		},
 	})
 	return pe

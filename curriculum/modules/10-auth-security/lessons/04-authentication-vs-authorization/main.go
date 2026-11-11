@@ -106,8 +106,9 @@ func AuthZ(claims Claims, requiredPerm string, resourceOwner string) bool {
 	if !hasPermission(claims, requiredPerm) {
 		return false
 	}
-	// Resource-level check: user must own the resource or be admin.
-	return true
+	// Resource-level check: a non-admin must own the resource. Without this,
+	// anyone holding the permission could touch anyone else's resource (BOLA).
+	return claims.UserID == resourceOwner
 }
 
 func main() {

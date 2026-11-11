@@ -54,18 +54,30 @@ func (pe *PolicyEngine) AddRule(rule PolicyRule) {
 func (pe *PolicyEngine) Evaluate(attrs *Attributes) (bool, string, error) {
 	pe.mu.RLock()
 	defer pe.mu.RUnlock()
+	// Pass 1: explicit deny always wins, regardless of rule order.
 	for _, rule := range pe.rules {
+		if rule.Effect != "deny" {
+			continue
+		}
 		matches, err := evaluateConditions(rule.Conditions, attrs)
 		if err != nil {
 			return false, rule.Name, err
 		}
 		if matches {
-			switch rule.Effect {
-			case "allow":
-				return true, rule.Name, nil
-			case "deny":
-				return false, rule.Name, nil
-			}
+			return false, rule.Name, nil
+		}
+	}
+	// Pass 2: first matching allow rule.
+	for _, rule := range pe.rules {
+		if rule.Effect != "allow" {
+			continue
+		}
+		matches, err := evaluateConditions(rule.Conditions, attrs)
+		if err != nil {
+			return false, rule.Name, err
+		}
+		if matches {
+			return true, rule.Name, nil
 		}
 	}
 	return false, "default-deny", nil
@@ -225,6 +237,7 @@ func main() {
 		Name: "deny-delete", Effect: "deny",
 		Conditions: []Condition{
 			{Attribute: "env.method", Operator: "eq", Value: "DELETE"},
+			{Attribute: "user.role", Operator: "neq", Value: "admin"},
 		},
 	})
 

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/mail"
 	"regexp"
 	"strings"
 )
@@ -27,7 +28,7 @@ type ValidationError struct {
 	Message string `json:"message"`
 }
 
-func (v ValidationError) Error() string {
+func (v *ValidationError) Error() string {
 	return fmt.Sprintf("%s: %s", v.Field, v.Message)
 }
 
@@ -62,18 +63,9 @@ func validateCreateUser(req CreateUserRequest) []ValidationError {
 }
 
 func mailParseAddress(addr string) (struct{}, error) {
-	// Simple email validation: contains @ and a domain part.
-	if !strings.Contains(addr, "@") {
-		return struct{}{}, errors.New("invalid email")
-	}
-	parts := strings.Split(addr, "@")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
-		return struct{}{}, errors.New("invalid email")
-	}
-	if !strings.Contains(parts[1], ".") {
-		return struct{}{}, errors.New("invalid email")
-	}
-	return struct{}{}, nil
+	// RFC 5322 validation via the standard library (see prose).
+	_, err := mail.ParseAddress(addr)
+	return struct{}{}, err
 }
 
 func ValidateAPIKey(key string) error {
@@ -110,27 +102,38 @@ func validateName(name string) error {
 	return nil
 }
 
-func main() {
-	http.HandleFunc("/users", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-			return
-		}
-		var req CreateUserRequest
-		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-			http.Error(w, fmt.Sprintf(`{"error":"invalid JSON: %s"}`, err.Error()), http.StatusBadRequest)
-			return
-		}
-		if errs := validateCreateUser(req); len(errs) > 0 {
-			w.Header().Set("Content-Type", "application/json")
-			w.WriteHeader(http.StatusUnprocessableEntity)
-			json.NewEncoder(w).Encode(map[string]interface{}{"errors": errs})
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(map[string]string{"status": "created", "username": req.Username})
+func writeJSON(w http.ResponseWriter, status int, payload any) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	json.NewEncoder(w).Encode(payload)
+}
+
+func createUserHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	var req CreateUserRequest
+	dec := json.NewDecoder(r.Body)
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&req); err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{
+			"error": "invalid JSON: " + err.Error(),
+		})
+		return
+	}
+	if errs := validateCreateUser(req); len(errs) > 0 {
+		writeJSON(w, http.StatusUnprocessableEntity, map[string]any{"errors": errs})
+		return
+	}
+	writeJSON(w, http.StatusCreated, map[string]string{
+		"status":   "created",
+		"username": req.Username,
 	})
+}
+
+func main() {
+	http.HandleFunc("/users", createUserHandler)
 
 	fmt.Println("Input validation server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))

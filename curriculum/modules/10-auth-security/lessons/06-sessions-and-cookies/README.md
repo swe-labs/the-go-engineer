@@ -138,7 +138,6 @@ type sessionKeyType string
 
 const sessionKey sessionKeyType = "session"
 
-// Session holds data for an authenticated user.
 type Session struct {
 	ID        string
 	UserID    string
@@ -147,7 +146,6 @@ type Session struct {
 	ExpiresAt time.Time
 }
 
-// SessionStore is a simple in-memory session store.
 type SessionStore struct {
 	mu       sync.RWMutex
 	sessions map[string]*Session
@@ -164,11 +162,8 @@ func (ss *SessionStore) Create(userID, role string, ttl time.Duration) (*Session
 	}
 	now := time.Now()
 	s := &Session{
-		ID:        id,
-		UserID:    userID,
-		Role:      role,
-		CreatedAt: now,
-		ExpiresAt: now.Add(ttl),
+		ID: id, UserID: userID, Role: role,
+		CreatedAt: now, ExpiresAt: now.Add(ttl),
 	}
 	ss.mu.Lock()
 	ss.sessions[id] = s
@@ -204,108 +199,85 @@ func generateSessionID() (string, error) {
 	return hex.EncodeToString(b), nil
 }
 
-// sessionCookie creates a secure session cookie.
 func sessionCookie(sessionID string, maxAge int) *http.Cookie {
 	return &http.Cookie{
-		Name:     "session_id",
-		Value:    sessionID,
-		HttpOnly: true,
-		Secure:   true, // set to false for local dev without TLS
-		SameSite: http.SameSiteLaxMode,
-		Path:     "/",
-		MaxAge:   maxAge,
+		Name: "session_id", Value: sessionID,
+		HttpOnly: true, Secure: false,
+		SameSite: http.SameSiteLaxMode, Path: "/",
+		MaxAge: maxAge,
 	}
 }
 
 var store = NewSessionStore()
 
-// loginHandler authenticates credentials and creates a session.
-func loginHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-	var creds struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
-	}
-	if err := json.NewDecoder(r.Body).Decode(&creds); err != nil {
-		http.Error(w, "invalid request", http.StatusBadRequest)
-		return
-	}
-	// In production: verify against database with bcrypt.
-	if creds.Username != "alice" || creds.Password != "secret123" {
-		http.Error(w, "invalid credentials", http.StatusUnauthorized)
-		return
-	}
-	s, err := store.Create(creds.Username, "user", 7*24*time.Hour)
-	if err != nil {
-		http.Error(w, "internal error", http.StatusInternalServerError)
-		return
-	}
-	http.SetCookie(w, sessionCookie(s.ID, 86400*7))
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"status": "logged_in"})
+func CreateSession(store *SessionStore, userID, role string, ttl time.Duration) (*Session, error) {
+	return store.Create(userID, role, ttl)
 }
 
-// logoutHandler destroys the session.
-func logoutHandler(w http.ResponseWriter, r *http.Request) {
-	cookie, err := r.Cookie("session_id")
-	if err == nil {
-		store.Delete(cookie.Value)
-	}
-	http.SetCookie(w, sessionCookie("", -1)) // Clear cookie
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"status": "logged_out"})
-}
-
-// profileHandler shows the user's session data.
-func profileHandler(w http.ResponseWriter, r *http.Request) {
-	session, ok := r.Context().Value(sessionKey).(*Session)
-	if !ok || session == nil {
-		http.Error(w, "unauthorized", http.StatusUnauthorized)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"user_id":    session.UserID,
-		"role":       session.Role,
-		"created_at": session.CreatedAt,
-		"expires_at": session.ExpiresAt,
-	})
-}
-
-// sessionMiddleware loads the session on every request.
-func sessionMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		cookie, err := r.Cookie("session_id")
-		if err != nil {
-			// No cookie: continue without session.
-			next.ServeHTTP(w, r)
-			return
-		}
-		session, err := store.Get(cookie.Value)
-		if err != nil {
-			// Invalid or expired session: clear cookie.
-			http.SetCookie(w, sessionCookie("", -1))
-			next.ServeHTTP(w, r)
-			return
-		}
-		ctx := context.WithValue(r.Context(), sessionKey, session)
-		next.ServeHTTP(w, r.WithContext(ctx))
-	})
+func GetSession(store *SessionStore, sessionID string) (*Session, error) {
+	return store.Get(sessionID)
 }
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/login", loginHandler)
-	mux.HandleFunc("/logout", logoutHandler)
-	mux.HandleFunc("/profile", profileHandler)
+	mux.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		var creds struct {
+			Username string `json:"username"`
+			Password string `json:"password"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&creds); err != nil {
+			http.Error(w, "invalid request", http.StatusBadRequest)
+			return
+		}
+		if creds.Username != "alice" || creds.Password != "secret123" {
+			http.Error(w, "invalid credentials", http.StatusUnauthorized)
+			return
+		}
+		s, err := store.Create(creds.Username, "user", 7*24*time.Hour)
+		if err != nil {
+			http.Error(w, "internal error", http.StatusInternalServerError)
+			return
+		}
+		http.SetCookie(w, sessionCookie(s.ID, 86400*7))
+		json.NewEncoder(w).Encode(map[string]string{"status": "logged_in"})
+	})
+	mux.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
+		cookie, err := r.Cookie("session_id")
+		if err == nil {
+			store.Delete(cookie.Value)
+		}
+		http.SetCookie(w, sessionCookie("", -1))
+		json.NewEncoder(w).Encode(map[string]string{"status": "logged_out"})
+	})
+	mux.HandleFunc("/profile", func(w http.ResponseWriter, r *http.Request) {
+		session, ok := r.Context().Value(sessionKey).(*Session)
+		if !ok || session == nil {
+			http.Error(w, "unauthorized", http.StatusUnauthorized)
+			return
+		}
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"user_id": session.UserID, "role": session.Role,
+			"expires_at": session.ExpiresAt,
+		})
+	})
 
-	var h http.Handler = mux
-	h = sessionMiddleware(h)
+	var h http.Handler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		cookie, err := r.Cookie("session_id")
+		if err == nil {
+			session, err := store.Get(cookie.Value)
+			if err == nil {
+				ctx := context.WithValue(r.Context(), sessionKey, session)
+				r = r.WithContext(ctx)
+			}
+		}
+		mux.ServeHTTP(w, r)
+	})
 
-	log.Println("Server on :8080")
+	fmt.Println("Session server on :8080")
 	log.Fatal(http.ListenAndServe(":8080", h))
 }
 ```
@@ -314,10 +286,10 @@ func main() {
 
 For a login request `POST /login` with `{"username":"alice","password":"secret123"}`:
 
-1. `loginHandler` decodes JSON. Validates credentials against database (simulated).
+1. The `/login` handler decodes JSON and validates credentials (simulated - production verifies against a bcrypt-hashed database record).
 2. On success, `store.Create("alice", "user", 7*24*time.Hour)` generates a 64-character hex session ID.
 3. Session is stored in `store.sessions` map.
-4. Response includes `Set-Cookie: session_id=<id>; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=604800`.
+4. Response includes `Set-Cookie: session_id=<id>; HttpOnly; SameSite=Lax; Path=/; Max-Age=604800`. The example leaves `Secure` off so it runs on plain `http://localhost` - the code comment marks it; production sessions set `Secure: true`.
 5. Browser stores the cookie and sends it on subsequent requests.
 
 For `GET /profile` with the session cookie:

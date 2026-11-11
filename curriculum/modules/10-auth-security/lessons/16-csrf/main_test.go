@@ -91,20 +91,111 @@ func TestCSRFMiddlewareOriginCheck(t *testing.T) {
 	tests := []struct {
 		name       string
 		method     string
+		target     string
 		headers    map[string]string
 		wantStatus int
 	}{
 		{
 			name:       "GET request passes",
-			method:     "GET",
+			method:     http.MethodGet,
+			target:     "http://example.com/",
 			headers:    map[string]string{},
 			wantStatus: http.StatusOK,
+		},
+		{
+			name:       "POST missing Origin and Referer fails",
+			method:     http.MethodPost,
+			target:     "http://example.com/",
+			headers:    map[string]string{},
+			wantStatus: http.StatusForbidden,
+		},
+		{
+			name:   "POST matching http Origin passes",
+			method: http.MethodPost,
+			target: "http://example.com/",
+			headers: map[string]string{
+				"Origin": "http://example.com",
+			},
+			wantStatus: http.StatusOK,
+		},
+		{
+			name:   "POST matching https Origin passes",
+			method: http.MethodPost,
+			target: "https://example.com/",
+			headers: map[string]string{
+				"Origin": "https://example.com",
+			},
+			wantStatus: http.StatusOK,
+		},
+		{
+			name:   "POST cross-site Origin fails",
+			method: http.MethodPost,
+			target: "https://example.com/",
+			headers: map[string]string{
+				"Origin": "https://evil.example",
+			},
+			wantStatus: http.StatusForbidden,
+		},
+		{
+			name:   "POST prefix-spoofed Origin fails",
+			method: http.MethodPost,
+			target: "http://example.com/",
+			headers: map[string]string{
+				"Origin": "http://example.com.evil.example",
+			},
+			wantStatus: http.StatusForbidden,
+		},
+		{
+			name:   "POST scheme-mismatched Origin fails",
+			method: http.MethodPost,
+			target: "https://example.com/",
+			headers: map[string]string{
+				"Origin": "http://example.com",
+			},
+			wantStatus: http.StatusForbidden,
+		},
+		{
+			name:   "POST null Origin fails",
+			method: http.MethodPost,
+			target: "http://example.com/",
+			headers: map[string]string{
+				"Origin": "null",
+			},
+			wantStatus: http.StatusForbidden,
+		},
+		{
+			name:   "POST matching Referer passes when Origin absent",
+			method: http.MethodPost,
+			target: "https://example.com/",
+			headers: map[string]string{
+				"Referer": "https://example.com/transfer?step=1",
+			},
+			wantStatus: http.StatusOK,
+		},
+		{
+			name:   "POST cross-site Referer fails",
+			method: http.MethodPost,
+			target: "https://example.com/",
+			headers: map[string]string{
+				"Referer": "https://evil.example/attack",
+			},
+			wantStatus: http.StatusForbidden,
+		},
+		{
+			name:   "POST untrusted Origin fails even with matching Referer",
+			method: http.MethodPost,
+			target: "http://example.com/",
+			headers: map[string]string{
+				"Origin":  "https://evil.example",
+				"Referer": "http://example.com/form",
+			},
+			wantStatus: http.StatusForbidden,
 		},
 	}
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			req := httptest.NewRequest(tc.method, "/", nil)
+			req := httptest.NewRequest(tc.method, tc.target, nil)
 			for k, v := range tc.headers {
 				req.Header.Set(k, v)
 			}

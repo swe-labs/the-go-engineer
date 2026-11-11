@@ -109,36 +109,111 @@ import (
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"fmt"
+	"io"
 	"math/big"
+	"net"
 	"net/http"
+	"net/http/httptest"
 	"time"
 )
 
-func generateCert() tls.Certificate {
-	key, _ := rsa.GenerateKey(rand.Reader, 2048)
-	template := &x509.Certificate{
-		SerialNumber: big.NewInt(1),
-		Subject:      pkix.Name{Organization: []string{"Lesson"}},
-		DNSNames:     []string{"localhost"},
-		NotBefore:    time.Now(),
-		NotAfter:     time.Now().Add(365 * 24 * time.Hour),
-		KeyUsage:     x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
-		ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
+func generateCert() (tls.Certificate, error) {
+	key, err := rsa.GenerateKey(rand.Reader, 2048)
+	if err != nil {
+		return tls.Certificate{}, err
 	}
-	certDER, _ := x509.CreateCertificate(rand.Reader, template, template, &key.PublicKey, key)
+
+	template := x509.Certificate{
+		SerialNumber: big.NewInt(1),
+		Subject: pkix.Name{
+			Organization: []string{"Go Engineer Lesson"},
+			CommonName:   "localhost",
+		},
+		NotBefore:             time.Now(),
+		NotAfter:              time.Now().Add(365 * 24 * time.Hour),
+		KeyUsage:              x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
+		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
+		BasicConstraintsValid: true,
+		DNSNames:              []string{"localhost"},
+		IPAddresses:           []net.IP{net.ParseIP("127.0.0.1"), net.ParseIP("::1")},
+	}
+
+	certDER, err := x509.CreateCertificate(rand.Reader, &template, &template, &key.PublicKey, key)
+	if err != nil {
+		return tls.Certificate{}, err
+	}
+
 	certPEM := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: certDER})
 	keyPEM := pem.EncodeToMemory(&pem.Block{Type: "RSA PRIVATE KEY", Bytes: x509.MarshalPKCS1PrivateKey(key)})
-	cert, _ := tls.X509KeyPair(certPEM, keyPEM)
-	return cert
+
+	return tls.X509KeyPair(certPEM, keyPEM)
 }
 
-func main() {
-	cert := generateCert()
-	config := &tls.Config{
+func serverConfig() *tls.Config {
+	cert, err := generateCert()
+	if err != nil {
+		panic(err)
+	}
+	return &tls.Config{
 		Certificates: []tls.Certificate{cert},
 		MinVersion:   tls.VersionTLS12,
 	}
-	fmt.Println("TLS configured with", len(config.Certificates), "certificate(s)")
+}
+
+func clientConfig(serverCert *x509.Certificate) *tls.Config {
+	// Trust the demo server by adding its certificate to the pool -
+	// never InsecureSkipVerify, which silently disables all verification.
+	pool := x509.NewCertPool()
+	pool.AddCert(serverCert)
+	return &tls.Config{
+		RootCAs:    pool,
+		MinVersion: tls.VersionTLS12,
+	}
+}
+
+func main() {
+	fmt.Println("=== TLS Server Demo ===")
+	fmt.Println("Generating self-signed certificate...")
+
+	tlsConfig := serverConfig()
+	mux := http.NewServeMux()
+	mux.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"message":"Hello over TLS!"}`))
+	})
+
+	ts := httptest.NewUnstartedServer(mux)
+	ts.TLS = tlsConfig
+	ts.StartTLS()
+	defer ts.Close()
+
+	fmt.Println("TLS server at:", ts.URL)
+
+	serverCert := tlsConfig.Certificates[0].Leaf
+	if serverCert == nil {
+		panic("parsed leaf certificate unavailable")
+	}
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: clientConfig(serverCert),
+		},
+	}
+
+	resp, err := client.Get(ts.URL + "/hello")
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, _ := io.ReadAll(resp.Body)
+	fmt.Println("Response:", string(body))
+	fmt.Println("TLS version:", resp.TLS.Version)
+	fmt.Println("Server cert CN:", resp.TLS.PeerCertificates[0].Subject.CommonName)
+
+	fmt.Println("\n=== TLS config check ===")
+	cfg := tlsConfig
+	fmt.Printf("MinVersion: %d (TLS 1.2=%d, TLS 1.3=%d)\n", cfg.MinVersion, tls.VersionTLS12, tls.VersionTLS13)
+	fmt.Printf("Certificates: %d\n", len(cfg.Certificates))
 }
 ```
 
@@ -164,7 +239,7 @@ When a browser connects to `https://example.com`:
 
 - Mistake: Setting `InsecureSkipVerify: true` in production client code.
   - Why it happens: Developers bypass certificate validation to make errors go away during development.
-  - Fix: Never skip verification in production. Configure proper root CAs for internal certificates.
+  - Fix: Never skip verification - not even in examples. The lesson demo trusts its self-signed server by adding the certificate to a `RootCAs` pool; real clients configure proper root CAs for internal certificates.
 
 - Mistake: Using outdated TLS versions (TLS 1.0, 1.1) that are vulnerable to protocol downgrade attacks.
   - Why it happens: Default Go TLS config allows all versions if not explicitly set.

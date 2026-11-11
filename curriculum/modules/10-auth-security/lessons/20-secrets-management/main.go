@@ -95,7 +95,8 @@ func main() {
 	sm.Set("API_KEY", "sk-live-abc123def456")
 
 	secretValue, _ := sm.Get("DB_PASSWORD")
-	fmt.Println("Stored secret:", "DB_PASSWORD =", secretValue)
+	// Mask before printing - the demo itself must not print plaintext secrets.
+	fmt.Println("Stored secret: DB_PASSWORD =", secretValue[:2]+"...[masked]")
 
 	encrypted, err := encrypt([]byte(`{"DB_PASSWORD":"s3cret!p4ss","API_KEY":"sk-live-abc123def456"}`), key)
 	if err != nil {
@@ -115,8 +116,8 @@ func main() {
 	os.Setenv("APP_DB_URL", "postgres://user:pass@localhost:5432/db")
 	os.Setenv("APP_REDIS_URL", "redis://localhost:6379")
 	envSecrets := loadFromEnv("APP_")
-	for k, v := range envSecrets {
-		fmt.Printf("  %s = %s\n", k, v)
+	for k := range envSecrets {
+		fmt.Printf("  %s = [masked]\n", k)
 	}
 
 	fmt.Println("\nNote: In production, use a secret store like HashiCorp Vault.")

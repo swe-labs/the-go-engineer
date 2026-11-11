@@ -4,6 +4,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/golang-jwt/jwt/v5"
 )
 
 func TestCreateJWT_Valid(t *testing.T) {
@@ -61,5 +63,58 @@ func TestIssueAndValidateRSA(t *testing.T) {
 	}
 	if claims.Role != "editor" {
 		t.Errorf("expected editor, got %s", claims.Role)
+	}
+}
+
+func TestVerifyJWT_RejectsInvalidClaims(t *testing.T) {
+	secret := []byte("secret")
+	now := time.Now()
+	tests := []struct {
+		name   string
+		claims jwt.MapClaims
+	}{
+		{
+			name: "numeric subject",
+			claims: jwt.MapClaims{
+				"sub":  12345,
+				"role": "admin",
+				"exp":  now.Add(1 * time.Hour).Unix(),
+			},
+		},
+		{
+			name: "missing subject",
+			claims: jwt.MapClaims{
+				"role": "admin",
+				"exp":  now.Add(1 * time.Hour).Unix(),
+			},
+		},
+		{
+			name: "empty subject",
+			claims: jwt.MapClaims{
+				"sub":  "",
+				"role": "admin",
+				"exp":  now.Add(1 * time.Hour).Unix(),
+			},
+		},
+		{
+			name: "non-string role",
+			claims: jwt.MapClaims{
+				"sub":  "alice",
+				"role": 42,
+				"exp":  now.Add(1 * time.Hour).Unix(),
+			},
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			tok, err := jwt.NewWithClaims(jwt.SigningMethodHS256, tc.claims).SignedString(secret)
+			if err != nil {
+				t.Fatalf("sign token: %v", err)
+			}
+			if _, _, err := VerifyJWT(tok, secret); err == nil {
+				t.Errorf("VerifyJWT should fail for %s", tc.name)
+			}
+		})
 	}
 }

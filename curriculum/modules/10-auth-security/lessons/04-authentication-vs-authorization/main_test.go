@@ -45,6 +45,15 @@ func TestAuthZ_NonOwnerNoAdmin(t *testing.T) {
 	}
 }
 
+func TestAuthZ_NonOwnerWithPermDenied(t *testing.T) {
+	// The critical case: the user HAS the required permission but does NOT
+	// own the resource. Ownership must still deny access (BOLA defense).
+	claims := Claims{UserID: "u2", Role: "user", Perms: []string{"doc:read"}}
+	if AuthZ(claims, "doc:read", "u3") {
+		t.Error("expected non-owner with permission to be denied by ownership check")
+	}
+}
+
 func TestHasPermission_ExactMatch(t *testing.T) {
 	c := Claims{Perms: []string{"doc:read"}}
 	if !hasPermission(c, "doc:read") {

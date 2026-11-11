@@ -179,7 +179,13 @@ func main() {
 	builtURL := BuildAuthURL("demo-client", "http://localhost:8080/callback", "test-state", "test-challenge")
 	fmt.Println("3. Built auth URL:", builtURL[:70], "...")
 
-	mockIDToken := "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbGljZSIsImlzcyI6Imh0dHBzOi8vYXV0aC5leGFtcGxlLmNvbSIsImV4cCI6OTk5OTk5OTk5OX0"
-	idToken, _ := ParseIDToken(mockIDToken)
-	fmt.Printf("4. ID Token: sub=%s email=%s name=%s\n", idToken.Subject, idToken.Email, idToken.Name)
+	mockIDToken := "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbGljZSIsImlzcyI6Imh0dHBzOi8vYXV0aC5leGFtcGxlLmNvbSIsImV4cCI6OTk5OTk5OTk5OX0.c2lnbmF0dXJl"
+	idToken, err := ParseIDToken(mockIDToken)
+	if err != nil {
+		log.Fatal("ID token parse failed:", err)
+	}
+	// UNVERIFIED: ParseIDToken only base64-decodes the payload; the third
+	// segment here is a dummy. Production code MUST verify the signature,
+	// iss, aud, and exp via an OIDC verifier (go-oidc) before trusting claims.
+	fmt.Printf("4. ID Token claims (UNVERIFIED - demo only): sub=%s email=%s name=%s\n", idToken.Subject, idToken.Email, idToken.Name)
 }

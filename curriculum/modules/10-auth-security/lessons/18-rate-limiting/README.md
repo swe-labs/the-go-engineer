@@ -92,6 +92,8 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"sync"
 	"time"
 )
@@ -133,17 +135,106 @@ func (tb *TokenBucket) Allow() bool {
 	return false
 }
 
-func main() {
-	bucket := NewTokenBucket(3, 1.0)
-	fmt.Printf("Capacity: %d, Refill: %.0f/s\n", bucket.capacity, bucket.refillRate)
+type RateLimiter struct {
+	mu       sync.RWMutex
+	buckets  map[string]*TokenBucket
+	capacity int
+	rate     float64
+}
 
+func NewRateLimiter(capacity int, rate float64) *RateLimiter {
+	return &RateLimiter{
+		buckets:  make(map[string]*TokenBucket),
+		capacity: capacity,
+		rate:     rate,
+	}
+}
+
+func (rl *RateLimiter) getBucket(key string) *TokenBucket {
+	rl.mu.RLock()
+	bucket, ok := rl.buckets[key]
+	rl.mu.RUnlock()
+	if ok {
+		return bucket
+	}
+
+	rl.mu.Lock()
+	defer rl.mu.Unlock()
+
+	bucket, ok = rl.buckets[key]
+	if ok {
+		return bucket
+	}
+
+	bucket = NewTokenBucket(rl.capacity, rl.rate)
+	rl.buckets[key] = bucket
+	return bucket
+}
+
+func (rl *RateLimiter) Middleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		ip := r.RemoteAddr
+		bucket := rl.getBucket(ip)
+
+		if !bucket.Allow() {
+			w.Header().Set("Retry-After", "1")
+			w.Header().Set("X-RateLimit-Limit", fmt.Sprintf("%d", rl.capacity))
+			w.Header().Set("X-RateLimit-Remaining", "0")
+			http.Error(w, "rate limit exceeded", http.StatusTooManyRequests)
+			return
+		}
+
+		w.Header().Set("X-RateLimit-Limit", fmt.Sprintf("%d", rl.capacity))
+		w.Header().Set("X-RateLimit-Remaining", fmt.Sprintf("%d", bucket.Tokens()))
+		next.ServeHTTP(w, r)
+	})
+}
+
+func (tb *TokenBucket) Tokens() int {
+	tb.mu.Lock()
+	defer tb.mu.Unlock()
+	return tb.tokens
+}
+
+func main() {
+	fmt.Println("=== Token Bucket Rate Limiter ===")
+
+	bucket := NewTokenBucket(3, 1.0)
+	fmt.Printf("Capacity: %d, Refill rate: %.0f token/sec\n", bucket.capacity, bucket.refillRate)
+
+	fmt.Println("\nAllowed requests:")
 	for i := 0; i < 10; i++ {
 		allowed := bucket.Allow()
-		fmt.Printf("Request %d: allowed=%v\n", i+1, allowed)
+		fmt.Printf("  Request %d: allowed=%v, tokens=%d\n", i+1, allowed, bucket.tokens)
 		if !allowed {
 			break
 		}
 	}
+
+	fmt.Println("\n=== Rate Limiter Middleware ===")
+	limiter := NewRateLimiter(2, 1.0)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(`{"status":"ok"}`))
+	})
+
+	ts := httptest.NewServer(limiter.Middleware(mux))
+	defer ts.Close()
+
+	for i := 0; i < 5; i++ {
+		resp, _ := http.Get(ts.URL + "/api")
+		fmt.Printf("  Request %d: status=%d, remaining=%s\n",
+			i+1, resp.StatusCode, resp.Header.Get("X-RateLimit-Remaining"))
+		resp.Body.Close()
+		time.Sleep(200 * time.Millisecond)
+	}
+
+	fmt.Println("\nWaiting 1.1s for the bucket to refill (1 token/sec)...")
+	time.Sleep(1100 * time.Millisecond)
+	resp, _ := http.Get(ts.URL + "/api")
+	fmt.Printf("  Request 6 (after refill): status=%d, remaining=%s\n",
+		resp.StatusCode, resp.Header.Get("X-RateLimit-Remaining"))
+	resp.Body.Close()
 }
 ```
 

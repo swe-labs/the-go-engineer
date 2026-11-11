@@ -70,19 +70,21 @@ func ValidateToken(tokenString string) (*CustomClaims, error) {
 
 func CreateJWT(userID, role string, secret []byte, ttl time.Duration) (string, error) {
 	now := time.Now()
-	claims := jwt.RegisteredClaims{
-		Subject:   userID,
-		ExpiresAt: jwt.NewNumericDate(now.Add(ttl)),
-		IssuedAt:  jwt.NewNumericDate(now),
-		ID:        fmt.Sprintf("%s-%d", userID, now.UnixNano()),
+	// Role is a claim: it belongs in the signed payload, never in the header.
+	// The header is for algorithm/token-type metadata only.
+	claims := jwt.MapClaims{
+		"sub":  userID,
+		"role": role,
+		"exp":  now.Add(ttl).Unix(),
+		"iat":  now.Unix(),
+		"jti":  fmt.Sprintf("%s-%d", userID, now.UnixNano()),
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	token.Header["role"] = role
 	return token.SignedString(secret)
 }
 
 func VerifyJWT(tokenStr string, secret []byte) (string, string, error) {
-	token, err := jwt.ParseWithClaims(tokenStr, &jwt.RegisteredClaims{}, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(tokenStr, jwt.MapClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
@@ -91,12 +93,22 @@ func VerifyJWT(tokenStr string, secret []byte) (string, string, error) {
 	if err != nil {
 		return "", "", err
 	}
-	claims, ok := token.Claims.(*jwt.RegisteredClaims)
+	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok || !token.Valid {
 		return "", "", fmt.Errorf("invalid token")
 	}
-	role, _ := token.Header["role"].(string)
-	return claims.Subject, role, nil
+	sub, ok := claims["sub"].(string)
+	if !ok || sub == "" {
+		return "", "", fmt.Errorf("invalid subject claim")
+	}
+	var role string
+	if rawRole, exists := claims["role"]; exists {
+		role, ok = rawRole.(string)
+		if !ok {
+			return "", "", fmt.Errorf("invalid role claim")
+		}
+	}
+	return sub, role, nil
 }
 
 func main() {

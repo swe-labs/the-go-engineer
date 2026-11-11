@@ -126,7 +126,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strings"
 	"sync"
 	"time"
 )
@@ -135,7 +134,6 @@ type tenantKeyType string
 
 const tenantKey tenantKeyType = "tenant_id"
 
-// Document is a tenant-scoped resource.
 type Document struct {
 	ID        string    `json:"id"`
 	TenantID  string    `json:"-"`
@@ -144,7 +142,6 @@ type Document struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// TenantStore simulates a shared database with tenant isolation.
 type TenantStore struct {
 	mu        sync.RWMutex
 	documents []Document
@@ -162,11 +159,8 @@ func (ts *TenantStore) AddDocument(ctx context.Context, title, content string) (
 	b := make([]byte, 16)
 	rand.Read(b)
 	doc := Document{
-		ID:        hex.EncodeToString(b),
-		TenantID:  tenantID,
-		Title:     title,
-		Content:   content,
-		CreatedAt: time.Now(),
+		ID: hex.EncodeToString(b), TenantID: tenantID,
+		Title: title, Content: content, CreatedAt: time.Now(),
 	}
 	ts.mu.Lock()
 	ts.documents = append(ts.documents, doc)
@@ -181,7 +175,6 @@ func (ts *TenantStore) GetDocuments(ctx context.Context) ([]Document, error) {
 	}
 	ts.mu.RLock()
 	defer ts.mu.RUnlock()
-
 	var result []Document
 	for _, d := range ts.documents {
 		if d.TenantID == tenantID {
@@ -191,7 +184,6 @@ func (ts *TenantStore) GetDocuments(ctx context.Context) ([]Document, error) {
 	return result, nil
 }
 
-// GetDocument retrieves a single document with tenant isolation.
 func (ts *TenantStore) GetDocument(ctx context.Context, docID string) (*Document, error) {
 	tenantID, err := getTenantID(ctx)
 	if err != nil {
@@ -199,7 +191,6 @@ func (ts *TenantStore) GetDocument(ctx context.Context, docID string) (*Document
 	}
 	ts.mu.RLock()
 	defer ts.mu.RUnlock()
-
 	for _, d := range ts.documents {
 		if d.ID == docID && d.TenantID == tenantID {
 			return &d, nil
@@ -208,17 +199,12 @@ func (ts *TenantStore) GetDocument(ctx context.Context, docID string) (*Document
 	return nil, errors.New("document not found")
 }
 
-// BUGGY: GetDocumentWithoutTenantFilter retrieves a document without tenant check.
-// This demonstrates a cross-tenant leak vulnerability.
-func (ts *TenantStore) GetDocumentWithoutTenantFilter(docID string) (*Document, error) {
+func (ts *TenantStore) GetDocumentsNoFilter(ctx context.Context) ([]Document, error) {
 	ts.mu.RLock()
 	defer ts.mu.RUnlock()
-	for _, d := range ts.documents {
-		if d.ID == docID {
-			return &d, nil
-		}
-	}
-	return nil, errors.New("document not found")
+	out := make([]Document, len(ts.documents))
+	copy(out, ts.documents)
+	return out, nil
 }
 
 func getTenantID(ctx context.Context) (string, error) {
@@ -229,44 +215,17 @@ func getTenantID(ctx context.Context) (string, error) {
 	return tid, nil
 }
 
-// TenantMiddleware extracts tenant ID and stores it in context.
-func TenantMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		var tenantID string
-		// Try header first, then subdomain, then JWT claim.
-		tenantID = r.Header.Get("X-Tenant-ID")
-		if tenantID == "" {
-			// Extract from subdomain: tenant.example.com -> "tenant"
-			parts := strings.Split(r.Host, ".")
-			if len(parts) >= 2 {
-				tenantID = parts[0]
-			}
-		}
-		if tenantID == "" {
-			http.Error(w, `{"error":"tenant not identified"}`, http.StatusBadRequest)
-			return
-		}
-		ctx := context.WithValue(r.Context(), tenantKey, tenantID)
-		next.ServeHTTP(w, r.WithContext(ctx))
-	})
+func CreateDocument(ctx context.Context, title, content string) (*Document, error) {
+	return NewTenantStore().AddDocument(ctx, title, content)
 }
 
-// TenantIsolationMiddleware logs cross-tenant access attempts.
-func TenantIsolationMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		tenantID := r.Header.Get("X-Tenant-ID")
-		// Log any request that tries to access without tenant context.
-		if tenantID == "" && r.URL.Path != "/health" {
-			log.Printf("[WARN] Request without tenant context: %s %s", r.Method, r.URL.Path)
-		}
-		next.ServeHTTP(w, r)
-	})
+func GetDocuments(ctx context.Context) ([]Document, error) {
+	return NewTenantStore().GetDocuments(ctx)
 }
 
 func main() {
 	store := NewTenantStore()
 
-	// Pre-populate data for two tenants.
 	ctx1 := context.WithValue(context.Background(), tenantKey, "acme-corp")
 	ctx2 := context.WithValue(context.Background(), tenantKey, "globex-inc")
 
@@ -274,7 +233,6 @@ func main() {
 	store.AddDocument(ctx1, "Acme Product Roadmap", "Q3-Q4 features")
 	store.AddDocument(ctx2, "Globex Financial Report", "Q2 earnings")
 
-	// Demonstrate proper isolation.
 	fmt.Println("=== Correct tenant isolation ===")
 	docs1, _ := store.GetDocuments(ctx1)
 	fmt.Printf("Acme-Corp documents (%d):\n", len(docs1))
@@ -288,23 +246,29 @@ func main() {
 		fmt.Printf("  - %s\n", d.Title)
 	}
 
-	// Demonstrate cross-tenant leak (BUG).
 	fmt.Println("\n=== Cross-tenant leak (bug without tenant filter) ===")
-	leaked, _ := store.GetDocumentWithoutTenantFilter(docs1[0].ID)
-	fmt.Printf("Acme document retrieved without tenant check: '%s'\n", leaked.Title)
+	all, _ := store.GetDocumentsNoFilter(context.Background())
+	fmt.Printf("All documents without filter (%d items):\n", len(all))
+	for _, d := range all {
+		fmt.Printf("  - %s (tenant: %s)\n", d.Title, d.TenantID)
+	}
 	fmt.Println("SECURITY ISSUE: Any tenant can access any document!")
 
-	// HTTP handlers with tenant isolation.
+	// HTTP
 	mux := http.NewServeMux()
-
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	})
-
-	mux.Handle("/api/documents", TenantMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	mux.Handle("/api/documents", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		tenantID := r.Header.Get("X-Tenant-ID")
+		if tenantID == "" {
+			http.Error(w, `{"error":"tenant not identified"}`, http.StatusBadRequest)
+			return
+		}
+		ctx := context.WithValue(r.Context(), tenantKey, tenantID)
 		switch r.Method {
 		case "GET":
-			docs, err := store.GetDocuments(r.Context())
+			docs, err := store.GetDocuments(ctx)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
@@ -320,7 +284,7 @@ func main() {
 				http.Error(w, "invalid request", http.StatusBadRequest)
 				return
 			}
-			doc, err := store.AddDocument(r.Context(), req.Title, req.Content)
+			doc, err := store.AddDocument(ctx, req.Title, req.Content)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
@@ -331,17 +295,11 @@ func main() {
 		default:
 			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		}
-	})))
+	}))
 
-	var h http.Handler = mux
-	h = TenantIsolationMiddleware(h)
-
-	log.Println("Server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", h))
+	fmt.Println("\nTenant isolation server on :8080")
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }
-
-// Ensure errors is used.
-var _ = errors.New
 ```
 
 ## Step-by-step execution

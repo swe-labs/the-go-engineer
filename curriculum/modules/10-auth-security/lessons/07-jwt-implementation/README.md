@@ -6,7 +6,7 @@ Issue and verify JSON Web Tokens in Go using the `golang-jwt/jwt` library, confi
 
 ## Why this matters
 
-JWTs enable stateless authentication: the token itself contains the user's identity and permissions, verified by a digital signature. No server-side session store is needed — every service that has the public key can verify a token independently. This makes JWTs the standard for microservice authentication, OAuth2 access tokens, OIDC ID tokens, and API authentication. Stripe, GitHub, Google, and Auth0 all use JWTs. Go's performance and concurrency model make it an ideal language for JWT issuing and verification at scale.
+JWTs enable stateless authentication: the token itself contains the user's identity and permissions, verified by a digital signature. No server-side session store is needed — every service that has the public key can verify a token independently. This makes JWTs the standard for microservice authentication, OAuth2 access tokens, OIDC ID tokens, and API authentication (GitHub Apps authenticate installations with short-lived JWTs; Google and Auth0 issue JWT-formatted ID and access tokens). Go's performance and concurrency model make it an ideal language for JWT issuing and verification at scale.
 
 ## Mental model
 
@@ -94,7 +94,6 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-// CustomClaims extends the standard registered claims.
 type CustomClaims struct {
 	jwt.RegisteredClaims
 	Role     string `json:"role"`
@@ -107,8 +106,6 @@ var (
 )
 
 func init() {
-	// Generate an RSA key pair for signing.
-	// In production, load from a secure file or env variable.
 	var err error
 	privateKey, err = rsa.GenerateKey(rand.Reader, 2048)
 	if err != nil {
@@ -117,7 +114,6 @@ func init() {
 	publicKey = &privateKey.PublicKey
 }
 
-// IssueToken creates a signed JWT for a user.
 func IssueToken(userID, role, tenantID string, ttl time.Duration) (string, error) {
 	now := time.Now()
 	claims := CustomClaims{
@@ -136,10 +132,8 @@ func IssueToken(userID, role, tenantID string, ttl time.Duration) (string, error
 	return token.SignedString(privateKey)
 }
 
-// ValidateToken parses and verifies a JWT, returning the claims.
 func ValidateToken(tokenString string) (*CustomClaims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
-		// Validate the signing method.
 		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
@@ -155,9 +149,92 @@ func ValidateToken(tokenString string) (*CustomClaims, error) {
 	return claims, nil
 }
 
-// authMiddleware verifies JWTs on protected routes.
-func authMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func CreateJWT(userID, role string, secret []byte, ttl time.Duration) (string, error) {
+	now := time.Now()
+	// Role is a claim: it belongs in the signed payload, never in the header.
+	// The header is for algorithm/token-type metadata only.
+	claims := jwt.MapClaims{
+		"sub":  userID,
+		"role": role,
+		"exp":  now.Add(ttl).Unix(),
+		"iat":  now.Unix(),
+		"jti":  fmt.Sprintf("%s-%d", userID, now.UnixNano()),
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString(secret)
+}
+
+func VerifyJWT(tokenStr string, secret []byte) (string, string, error) {
+	token, err := jwt.ParseWithClaims(tokenStr, jwt.MapClaims{}, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return secret, nil
+	})
+	if err != nil {
+		return "", "", err
+	}
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok || !token.Valid {
+		return "", "", fmt.Errorf("invalid token")
+	}
+	sub, ok := claims["sub"].(string)
+	if !ok || sub == "" {
+		return "", "", fmt.Errorf("invalid subject claim")
+	}
+	var role string
+	if rawRole, exists := claims["role"]; exists {
+		role, ok = rawRole.(string)
+		if !ok {
+			return "", "", fmt.Errorf("invalid role claim")
+		}
+	}
+	return sub, role, nil
+}
+
+func main() {
+	// Standalone usage
+	token, _ := IssueToken("alice", "admin", "acme-corp", 1*time.Hour)
+	fmt.Println("Token:", token[:80], "...")
+
+	claims, err := ValidateToken(token)
+	if err != nil {
+		log.Fatal("Validation failed:", err)
+	}
+	fmt.Printf("Validated: user=%s role=%s tenant=%s\n", claims.Subject, claims.Role, claims.TenantID)
+
+	// HMAC example
+	hmacToken, _ := CreateJWT("bob", "editor", []byte("secret-key"), 30*time.Minute)
+	sub, role, err := VerifyJWT(hmacToken, []byte("secret-key"))
+	if err != nil {
+		log.Fatal("HMAC validation failed:", err)
+	}
+	fmt.Printf("HMAC: user=%s role=%s\n", sub, role)
+
+	// HTTP server
+	http.HandleFunc("/token", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		var req struct {
+			UserID   string `json:"user_id"`
+			Role     string `json:"role"`
+			TenantID string `json:"tenant_id"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+			http.Error(w, "invalid request", http.StatusBadRequest)
+			return
+		}
+		token, err := IssueToken(req.UserID, req.Role, req.TenantID, 1*time.Hour)
+		if err != nil {
+			http.Error(w, "token generation failed", http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(map[string]string{"token": token})
+	})
+
+	http.Handle("/protected", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		auth := r.Header.Get("Authorization")
 		if auth == "" || !strings.HasPrefix(auth, "Bearer ") {
 			http.Error(w, `{"error":"missing token"}`, http.StatusUnauthorized)
@@ -169,69 +246,14 @@ func authMiddleware(next http.Handler) http.Handler {
 			http.Error(w, fmt.Sprintf(`{"error":"%s"}`, err.Error()), http.StatusUnauthorized)
 			return
 		}
-		// In production, store claims in context.
-		_ = claims
-		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]interface{}{
-			"message":   "authenticated",
-			"user_id":   claims.Subject,
-			"role":      claims.Role,
-			"tenant_id": claims.TenantID,
-			"expires":   claims.ExpiresAt,
+			"message": "authenticated", "user_id": claims.Subject,
+			"role": claims.Role, "tenant_id": claims.TenantID,
 		})
-	})
-}
+	}))
 
-// tokenHandler issues a token for demo purposes.
-func tokenHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-	var req struct {
-		UserID   string `json:"user_id"`
-		Role     string `json:"role"`
-		TenantID string `json:"tenant_id"`
-	}
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, "invalid request", http.StatusBadRequest)
-		return
-	}
-	token, err := IssueToken(req.UserID, req.Role, req.TenantID, 1*time.Hour)
-	if err != nil {
-		http.Error(w, "token generation failed", http.StatusInternalServerError)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{"token": token})
-}
-
-func main() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/token", tokenHandler)
-	mux.Handle("/protected", authMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]string{"data": "sensitive information"})
-	})))
-
-	log.Println("Server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", mux))
-}
-
-// Standalone functions for testing.
-
-// CreateToken is a convenience wrapper for testing: returns a signed JWT string.
-func CreateToken(userID, role string, ttl time.Duration) (string, error) {
-	return IssueToken(userID, role, "default-tenant", ttl)
-}
-
-// VerifyToken returns the subject (user ID) from a valid token, or an error.
-func VerifyToken(tokenStr string) (string, error) {
-	claims, err := ValidateToken(tokenStr)
-	if err != nil {
-		return "", err
-	}
-	return claims.Subject, nil
+	fmt.Println("JWT server on :8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 ```
 
@@ -261,27 +283,31 @@ For `GET /protected` with `Authorization: Bearer <token>`:
 - Using symmetric signing (HS256) for multi-service architectures — the shared secret must be distributed to every service, increasing exposure.
 - Not setting expiration (`exp` claim) — tokens that never expire remain valid indefinitely if leaked.
 - Storing sensitive data in JWT claims — the payload is base64-encoded, not encrypted. Anyone with the token can read claims.
-- Not using `jwt.ParseWithClaims` — using `jwt.Parse` and casting claims manually misses claim validation.
+- Not using `jwt.ParseWithClaims` — `jwt.Parse` returns `MapClaims`, so every claim access needs a runtime type assertion; `ParseWithClaims` with a concrete struct gives you typed fields and compile-time shape checking.
 
 ## Debugging walkthrough
 
 Consider this token verification code:
 
 ```go
-func ValidateToken(tokenString string) (jwt.MapClaims, error) {
-    token, err := jwt.Parse(tokenString, nil)
+func ValidateToken(tokenString string) (*CustomClaims, error) {
+    // Looks plausible, but the key function blindly returns the key without
+    // checking which algorithm the token claims:
+    token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+        return publicKey, nil
+    })
     if err != nil {
         return nil, err
     }
-    return token.Claims.(jwt.MapClaims), nil
+    return token.Claims.(*CustomClaims), nil
 }
 ```
 
-**Symptom**: Tokens with `alg: none` are accepted. The server is vulnerable to the "none algorithm" attack.
+**Symptom**: The verifier accepts tokens signed by algorithms it never intended to allow, and the only thing standing between an attacker and a forged token is whichever check the library happens to perform for the key type.
 
-**Investigation**: Passing `nil` as the key function means the library does not enforce any signing method. An attacker can set `alg` to `none`, omit the signature, and present any claims.
+**Investigation** (verified against `golang-jwt/jwt` v5.3.1): passing `nil` as the key function does not silently accept `alg: none` — the library returns `token is unverifiable: no keyfunc was provided`. v5 also type-checks HMAC keys, so an `*rsa.PublicKey` handed to an HS256 token fails with "key is of invalid type". The remaining attack surface is narrower but real: the key function must still pin the algorithm, because key-selection logic (especially hand-rolled or JWKS-backed keyfuncs) is exactly where algorithm confusion historically lived.
 
-**Root cause**: The key function must validate the signing algorithm. `nil` disables verification.
+**Root cause**: The key function is the policy point for which algorithms and keys are acceptable. Leaving it unchecked outsources that policy to library defaults, which are hardening-evolution territory (v5 defaults are stricter than v3/v4; older or alternative libraries differ).
 
 **Fix**:
 

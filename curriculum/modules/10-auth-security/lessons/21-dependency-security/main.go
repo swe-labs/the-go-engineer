@@ -77,7 +77,10 @@ func main() {
 	os.WriteFile(tmpFile, []byte(content), 0644)
 	defer os.Remove(tmpFile)
 
-	h, _ := hashModule(tmpFile)
+	h, err := hashModule(tmpFile)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Printf("  go.sum hash: %s...\n", h[:16])
 
 	fmt.Println("\n3. Dependency minification (unused deps removal)")

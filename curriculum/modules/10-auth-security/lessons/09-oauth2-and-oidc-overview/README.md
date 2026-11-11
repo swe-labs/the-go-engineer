@@ -50,10 +50,11 @@ The four grant flows (authorization grant types):
 
 | Flow | Who uses it | Security |
 |---|---|---|
-| Authorization code | Web apps with backend | Most secure — token never reaches browser |
-| Authorization code + PKCE | SPAs, mobile apps | Secure without client secret |
+| Authorization code (+ PKCE) | Web apps with backend | Most secure — token never touches the browser |
+| Authorization code + PKCE | SPAs, mobile apps (public clients) | Secure without a client secret |
 | Client credentials | Service-to-service | No user involved, machine-to-machine |
-| Authorization code + PKCE is the modern replacement for the implicit flow (which is deprecated). |
+| Implicit | Deprecated | Do not use — replaced by authorization code + PKCE |
+| Resource owner password | Legacy only | Do not use — cannot do MFA/federation |
 
 OIDC extends OAuth2 with:
 
@@ -66,7 +67,7 @@ OIDC extends OAuth2 with:
 
 The authorization code flow with PKCE:
 
-1. Client generates a `code_verifier` (random string) and `code_challenge` = SHA256(code_verifier).
+1. Client generates a `code_verifier` (random string) and `code_challenge` = BASE64URL-ENCODE(SHA256(ASCII(code_verifier))) per RFC 7636.
 2. Client redirects user to authorization server with `client_id`, `redirect_uri`, `scope`, `code_challenge`.
 3. User authenticates and consents.
 4. Authorization server redirects back to `redirect_uri` with a one-time `code`.
@@ -111,23 +112,18 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"strings"
 	"time"
-
-	"golang.org/x/oauth2"
 )
 
-// PKCEParams holds the PKCE challenge and verifier values.
 type PKCEParams struct {
 	Verifier        string
 	Challenge       string
 	ChallengeMethod string
 }
 
-// GeneratePKCE creates a code verifier and challenge per RFC 7636.
 func GeneratePKCE() (*PKCEParams, error) {
 	b := make([]byte, 32)
 	if _, err := rand.Read(b); err != nil {
@@ -137,66 +133,59 @@ func GeneratePKCE() (*PKCEParams, error) {
 	hash := sha256.Sum256([]byte(verifier))
 	challenge := base64.RawURLEncoding.EncodeToString(hash[:])
 	return &PKCEParams{
-		Verifier:        verifier,
-		Challenge:       challenge,
-		ChallengeMethod: "S256",
+		Verifier: verifier, Challenge: challenge, ChallengeMethod: "S256",
 	}, nil
 }
 
-// OAuthClient simulates a minimal OAuth2 authorization server for demonstration.
-// In production, you connect to Google, GitHub, Auth0, etc.
 type OAuthClient struct {
-	clientID     string
+	clientID    string
 	redirectURI string
 	authzServer string
 	httpClient  *http.Client
 	scopes      []string
 }
 
-// NewOAuthClient creates a client configured for a provider.
 func NewOAuthClient(clientID, redirectURI, authzServer string, scopes []string) *OAuthClient {
 	return &OAuthClient{
-		clientID:     clientID,
-		redirectURI: redirectURI,
-		authzServer: authzServer,
-		httpClient:  &http.Client{Timeout: 10 * time.Second},
-		scopes:      scopes,
+		clientID: clientID, redirectURI: redirectURI,
+		authzServer: authzServer, httpClient: &http.Client{Timeout: 10 * time.Second},
+		scopes: scopes,
 	}
 }
 
-// AuthURL returns the authorization URL with PKCE.
 func (c *OAuthClient) AuthURL(state string, pkce *PKCEParams) string {
-	params := fmt.Sprintf(
-		"response_type=code&client_id=%s&redirect_uri=%s&scope=%s&state=%s&code_challenge=%s&code_challenge_method=%s",
-		c.clientID, c.redirectURI, strings.Join(c.scopes, " "), state, pkce.Challenge, pkce.ChallengeMethod,
+	return fmt.Sprintf(
+		"%s/authorize?response_type=code&client_id=%s&redirect_uri=%s&scope=%s&state=%s&code_challenge=%s&code_challenge_method=%s",
+		c.authzServer, c.clientID, c.redirectURI, strings.Join(c.scopes, " "),
+		state, pkce.Challenge, pkce.ChallengeMethod,
 	)
-	return c.authzServer + "/authorize?" + params
 }
 
-// ExchangeCode sends the authorization code and PKCE verifier to the token endpoint.
-func (c *OAuthClient) ExchangeCode(ctx context.Context, code, verifier string) (*oauth2.Token, error) {
+func (c *OAuthClient) ExchangeCode(ctx context.Context, code, verifier string) (string, error) {
 	body := fmt.Sprintf(
 		"grant_type=authorization_code&code=%s&redirect_uri=%s&client_id=%s&code_verifier=%s",
 		code, c.redirectURI, c.clientID, verifier,
 	)
 	req, err := http.NewRequestWithContext(ctx, "POST", c.authzServer+"/token", strings.NewReader(body))
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	defer resp.Body.Close()
-	var token oauth2.Token
-	if err := json.NewDecoder(resp.Body).Decode(&token); err != nil {
-		return nil, err
+	var result struct {
+		AccessToken string `json:"access_token"`
+		TokenType   string `json:"token_type"`
 	}
-	return &token, nil
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return "", err
+	}
+	return result.AccessToken, nil
 }
 
-// IDToken represents a parsed OIDC ID token for demonstration.
 type IDToken struct {
 	Subject   string `json:"sub"`
 	Email     string `json:"email"`
@@ -205,8 +194,6 @@ type IDToken struct {
 	ExpiresAt int64  `json:"exp"`
 }
 
-// ParseIDToken parses a raw ID token string (JWT) without verification.
-// In production, use github.com/coreos/go-oidc/v3/oidc for verification.
 func ParseIDToken(rawIDToken string) (*IDToken, error) {
 	parts := strings.Split(rawIDToken, ".")
 	if len(parts) != 3 {
@@ -223,102 +210,90 @@ func ParseIDToken(rawIDToken string) (*IDToken, error) {
 	return &token, nil
 }
 
-// SimulatedTokenEndpoint handles token exchange in our mock server.
-func SimulatedTokenEndpoint() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		if err := r.ParseForm(); err != nil {
-			http.Error(w, "bad request", http.StatusBadRequest)
-			return
-		}
-		code := r.FormValue("code")
-		verifier := r.FormValue("code_verifier")
+func BuildAuthURL(clientID, redirectURI, state, challenge string) string {
+	return fmt.Sprintf(
+		"https://auth.example.com/authorize?response_type=code&client_id=%s&redirect_uri=%s&state=%s&code_challenge=%s&code_challenge_method=S256",
+		clientID, redirectURI, state, challenge,
+	)
+}
 
-		// Verify PKCE: in production, server stores challenge from auth request.
-		if code == "" || verifier == "" {
-			http.Error(w, "missing code or verifier", http.StatusBadRequest)
-			return
-		}
-
-		// Return a mock token response.
-		tokenResp := struct {
-			AccessToken  string `json:"access_token"`
-			TokenType    string `json:"token_type"`
-			ExpiresIn    int    `json:"expires_in"`
-			IDToken      string `json:"id_token,omitempty"`
-		}{
-			AccessToken: "mock-access-token-" + code[:8],
-			TokenType:   "Bearer",
-			ExpiresIn:   3600,
-			IDToken:     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbGljZSIsImlzcyI6Imh0dHBzOi8vYXV0aC5leGFtcGxlLmNvbSIsImV4cCI6OTk5OTk5OTk5OX0.signature",
-		}
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(tokenResp)
+func ExchangeCodeForToken(ctx context.Context, code, verifier, tokenEndpoint string) (string, error) {
+	body := fmt.Sprintf(
+		"grant_type=authorization_code&code=%s&code_verifier=%s", code, verifier,
+	)
+	req, err := http.NewRequestWithContext(ctx, "POST", tokenEndpoint, strings.NewReader(body))
+	if err != nil {
+		return "", err
 	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	client := &http.Client{Timeout: 10 * time.Second}
+	resp, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	var result struct {
+		AccessToken string `json:"access_token"`
+	}
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return "", err
+	}
+	return result.AccessToken, nil
 }
 
 func main() {
-	// Start a mock authorization and token server.
 	http.HandleFunc("/authorize", func(w http.ResponseWriter, r *http.Request) {
-		// Redirect back to the callback with a code.
 		code := "auth-code-abc123"
 		state := r.URL.Query().Get("state")
 		redirectURI := r.URL.Query().Get("redirect_uri")
 		http.Redirect(w, r, fmt.Sprintf("%s?code=%s&state=%s", redirectURI, code, state), http.StatusFound)
 	})
-	http.HandleFunc("/token", SimulatedTokenEndpoint())
+	http.HandleFunc("/token", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"access_token": "mock-access-token-abc123",
+			"token_type":   "Bearer",
+			"expires_in":   3600,
+		})
+	})
 
 	go func() {
-		log.Println("OAuth2 mock server on :9090")
+		fmt.Println("OAuth2 mock server on :9090")
 		log.Fatal(http.ListenAndServe(":9090", nil))
 	}()
-	time.Sleep(100 * time.Millisecond) // let server start
+	time.Sleep(100 * time.Millisecond)
 
-	// Client side: initiate OAuth2 flow.
-	fmt.Println("=== OAuth2 Authorization Code Flow with PKCE ===\n")
+	fmt.Println("=== OAuth2 Authorization Code Flow with PKCE ===")
+	fmt.Println()
 
-	client := NewOAuthClient(
-		"demo-client",
-		"http://localhost:8080/callback",
-		"http://localhost:9090",
-		[]string{"openid", "profile", "email"},
-	)
-
-	// Step 1: Generate PKCE challenge.
+	client := NewOAuthClient("demo-client", "http://localhost:8080/callback", "http://localhost:9090", []string{"openid", "profile"})
 	pkce, _ := GeneratePKCE()
 	state := "random-state-123"
 
-	// Step 2: Build authorization URL.
 	authURL := client.AuthURL(state, pkce)
-	fmt.Println("1. Redirect user to:", authURL[:100], "...\n")
+	fmt.Println("1. Authorization URL:", authURL[:80], "...")
+	fmt.Println()
 
-	// Step 3: Simulate callback (user is redirected back with code).
 	code := "auth-code-abc123"
-
-	// Step 4: Exchange code for tokens.
 	ctx := context.Background()
-	token, err := client.ExchangeCode(ctx, code, pkce.Verifier)
+	accessToken, err := client.ExchangeCode(ctx, code, pkce.Verifier)
 	if err != nil {
 		log.Fatal("Token exchange failed:", err)
 	}
-	fmt.Printf("2. Access token: %s...\n", token.AccessToken[:20])
+	fmt.Printf("2. Access token: %s\n", accessToken)
 
-	// Step 5: Use access token to call resource API.
-	req, _ := http.NewRequestWithContext(ctx, "GET", "http://localhost:9090/userinfo", nil)
-	req.Header.Set("Authorization", "Bearer "+token.AccessToken)
-	// In production, this calls the provider's /userinfo endpoint.
-	fmt.Println("3. Token type:", token.TokenType)
-	fmt.Printf("4. Expires in: %.0f seconds\n\n", token.Expiry.Sub(time.Now()).Seconds())
+	builtURL := BuildAuthURL("demo-client", "http://localhost:8080/callback", "test-state", "test-challenge")
+	fmt.Println("3. Built auth URL:", builtURL[:70], "...")
 
-	// Parse ID token (in production, verify with go-oidc).
-	// For this demo we manually set an ID token.
-	mockIDToken := "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbGljZSIsImlzcyI6Imh0dHBzOi8vYXV0aC5leGFtcGxlLmNvbSIsImV4cCI6OTk5OTk5OTk5OX0"
-	idToken, _ := ParseIDToken(mockIDToken)
-	fmt.Printf("5. ID Token claims:\n   Subject: %s\n   Email: %s\n   Name: %s\n   Issuer: %s\n",
-		idToken.Subject, idToken.Email, idToken.Name, idToken.Issuer)
+	mockIDToken := "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbGljZSIsImlzcyI6Imh0dHBzOi8vYXV0aC5leGFtcGxlLmNvbSIsImV4cCI6OTk5OTk5OTk5OX0.c2lnbmF0dXJl"
+	idToken, err := ParseIDToken(mockIDToken)
+	if err != nil {
+		log.Fatal("ID token parse failed:", err)
+	}
+	// UNVERIFIED: ParseIDToken only base64-decodes the payload; the third
+	// segment here is a dummy. Production code MUST verify the signature,
+	// iss, aud, and exp via an OIDC verifier (go-oidc) before trusting claims.
+	fmt.Printf("4. ID Token claims (UNVERIFIED - demo only): sub=%s email=%s name=%s\n", idToken.Subject, idToken.Email, idToken.Name)
 }
-
-// Ensure io is used (for compilation).
-var _ = io.Discard
 ```
 
 ## Step-by-step execution
