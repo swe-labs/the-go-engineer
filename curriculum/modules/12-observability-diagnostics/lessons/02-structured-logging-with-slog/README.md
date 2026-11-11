@@ -63,7 +63,7 @@ When you call `logger.Info("msg", "key1", val1, "key2", val2)`, the internal pat
 1. `Logger.Info` calls `Logger.log(nil, LevelInfo, "msg", args...)`.
 2. `Logger.log` verifies the handler is enabled for LevelInfo.
 3. It creates a `slog.Record` with the current time, LevelInfo, message, and caller PC.
-4. It converts the variadic args to attrs by pairing consecutive args as key-value. If an odd number of args is provided, the trailing orphan arg becomes a **key** whose serialized value is `!BADKEY` (verified on go1.27: text handler emits `!BADKEY=quantity`, JSON handler emits `"!BADKEY":"quantity"`).
+4. It converts the variadic args to attrs by pairing consecutive args as key-value. If an odd number of args is provided, the trailing orphan arg becomes the **value** stored under the synthetic key `!BADKEY` (verified on go1.27: text handler emits `!BADKEY=quantity`, JSON handler emits `"!BADKEY":"quantity"` — the orphan string is the value, `!BADKEY` is the key).
 5. The record is passed to the handler's `Handle` method.
 6. The handler serializes the record and writes to the output writer.
 
@@ -173,7 +173,7 @@ For `slog.Info("user login", "user_id", "u-42", "ip", "10.0.0.1")` with a JSON h
 
 - **Using slog for unstructured messages**: `slog.Info(fmt.Sprintf("user %d logged in", id))` puts the entire message in the `msg` field, making it opaque to structured queries. Always pass structured data as separate attributes: `slog.Info("user logged in", "user_id", id)`.
 
-- **Mismatching key-value pairs**: `slog.Info("process", "key1", val1, "key2")` — an odd number of args turns the trailing arg into a key whose value is `!BADKEY`. `go vet` catches this statically ("call to slog.Logger.Info missing a final value") and `go test` runs that check by default, so the bug surfaces at build time in tests — but `go run` skips it, so dynamic-attr call sites should still prefer `LogAttrs` with typed `slog.Attr`.
+- **Mismatching key-value pairs**: `slog.Info("process", "key1", val1, "key2")` — an odd number of args stores the trailing arg as the value under the synthetic key `!BADKEY`. `go vet` catches this statically ("call to slog.Logger.Info missing a final value") and `go test` runs that check by default, so the bug surfaces at build time in tests — but `go run` skips it, so dynamic-attr call sites should still prefer `LogAttrs` with typed `slog.Attr`.
 
 - **Using slog.Default() in library code**: Libraries should accept a `*slog.Logger` parameter (or use context-based retrieval) instead of calling `slog.Default()`. If the application sets a custom handler, the library should use it too.
 
@@ -193,9 +193,9 @@ slog.Info("creating order",
 )
 ```
 
-**Symptom**: The log output shows `!BADKEY=quantity` (text handler) or `"!BADKEY":"quantity"` (JSON handler) for every log line — note the stray arg became the *key*.
+**Symptom**: The log output shows `!BADKEY=quantity` (text handler) or `"!BADKEY":"quantity"` (JSON handler) for every log line — note the synthetic `!BADKEY` *key* holds the orphan argument as its value.
 
-**Root cause**: The `quantity` argument has no corresponding value. slog pairs it as a key whose serialized value is the literal `!BADKEY` (verified on go1.27 in both handlers — JSON emits `"!BADKEY":"quantity"`, not `null`). Note also that `go test` would reject this call at build time via the vet `slog` check ("missing a final value"); only `go run` and vet-skipped builds reach the handler.
+**Root cause**: The `quantity` argument has no corresponding value. slog records it as the *value* under the synthetic key `!BADKEY` (verified on go1.27 in both handlers — JSON emits `"!BADKEY":"quantity"`, not `null`). Note also that `go test` would reject this call at build time via the vet `slog` check ("missing a final value"); only `go run` and vet-skipped builds reach the handler.
 
 **Fix**: Use `LogAttrs` with typed attributes:
 
