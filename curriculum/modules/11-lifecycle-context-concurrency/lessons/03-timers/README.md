@@ -10,7 +10,7 @@ Timers are the building block for timeouts, retries, heartbeat intervals, and de
 
 ## Mental model
 
-A timer is a one-shot alarm that fires exactly once after a specified duration. Think of it as a countdown that sends a pulse on a channel when it reaches zero. You can cancel the alarm before it rings (`Stop`), or rewind it to count down from a new duration (`Reset`). Once it rings, the channel holds exactly one tick — be sure to drain it before resetting.
+A timer is a one-shot alarm that fires exactly once after a specified duration. Think of it as a countdown that sends a pulse on a channel when it reaches zero. You can cancel the alarm before it rings (`Stop`), or rewind it to count down from a new duration (`Reset`). On Go 1.23+ the channel is unbuffered and `Reset` waits for the new deadline — no draining required. (Before Go 1.23, a fired-but-unreceived value sat in a buffered channel, and the doctrine was to drain before resetting.)
 
 ## Visual model
 
@@ -111,13 +111,13 @@ func main() {
   - Why (historical): Before Go 1.23, `Timer` channels were buffered, so a fired-but-unreceived value sat in the channel and was delivered immediately after `Reset`.
   - Fix: On Go 1.23+ the channel is unbuffered and `Reset` on a fired-but-unreceived timer waits for the **new** deadline — verified on go1.27 (a 300ms reset waited 300ms, no stale delivery). The old `if !timer.Stop() { <-timer.C }` dance is unnecessary in code that only targets Go 1.23+; keep it only in code that must run on older Go.
 
-- Mistake: Forgetting to stop a timer after use.
-  - Why: The timer remains in the runtime heap until it fires, keeping resources alive and preventing GC.
-  - Fix: Always defer `timer.Stop()` when the timer lifetime is tied to a function scope.
+- Mistake: Forgetting to stop a timer after use (pre-Go-1.23 concern).
+  - Why: Before Go 1.23, an unreferenced timer stayed in the runtime heap until it fired. On Go 1.23+, a timer no longer referenced by any code becomes garbage-collectible immediately — but `Stop` is still the explicit-cleanup idiom, and any goroutine blocked on the channel keeps the timer alive.
+  - Fix: Prefer `defer timer.Stop()` when the timer lifetime is tied to a function scope.
 
 - Mistake: Using `time.After` in a loop that recreates it every iteration.
-  - Why: Each iteration allocates a new timer that remains in the heap until it fires.
-  - Fix: Use `time.NewTimer` once and call `Reset` after draining.
+  - Why: Each iteration allocates a new timer that stays alive until it fires; in a long-running loop with large timeouts, many timers can accumulate (on Go 1.23+ unreferenced ones are GC-eligible, but the churn remains wasteful).
+  - Fix: Use `time.NewTimer` once and call `Reset` per iteration.
 
 - Mistake: Assuming `Stop`'s return value tells you whether a value is pending.
   - Why: On Go 1.23+ the return value no longer maps to "value pending" — verified on go1.27: `Stop` returned `true` for an already-fired timer and no value was ever delivered afterward. Pre-1.23, `false` meant fired-and-possibly-buffered.
@@ -179,7 +179,7 @@ if timeout <= 0 {
 - Active timers consume runtime heap space — many concurrent timers increase scheduler overhead.
 - `timer.Stop` is an O(log n) operation on the timer heap.
 - `timer.Reset` is O(log n) remove + O(log n) insert.
-- `time.After` leaks if the timer fires after the `select` chooses another case — the timer goroutine survives until the duration elapses. Use `NewTimer` + `Stop` in long-lived selects.
+- `time.After` in a `select` wastes the timer when another case wins — the timer lives until its duration elapses. In long-lived selects, use `NewTimer` + `Stop` (on Go 1.23+ the unreferenced timer is also GC-eligible, so this is an efficiency fix, not a leak fix).
 
 ## Practice task
 
@@ -202,7 +202,7 @@ The existing tests verify timer fire, stop, reset, and `time.After`. After the p
 ## Review questions
 
 1. What does `timer.Stop()` return if the timer has already fired?
-2. Why must you drain `timer.C` before calling `timer.Reset()`?
+2. On which Go version does `Reset` stop requiring channel draining, and what made that safe?
 3. What is the difference between `time.After(d)` and `time.NewTimer(d).C`?
 4. What happens if you call `time.NewTimer(-1 * time.Second)`?
 5. How does the Go runtime track pending timers internally?

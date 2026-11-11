@@ -144,7 +144,7 @@ func rateLimit(events int, per time.Duration) {
 **Investigation**: Add a print of `interval`:
 
 ```go
-fmt.Println("interval:", interval)  // interval: 10ms
+fmt.Println("interval:", interval)  // interval: 10ns — 1000 nanoseconds divided by 100 events
 ```
 
 That looks correct. But then check the caller — maybe it passes `int64` without conversion:

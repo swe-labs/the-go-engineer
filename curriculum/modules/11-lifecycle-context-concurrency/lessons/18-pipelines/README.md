@@ -232,7 +232,7 @@ For the pipeline `generator(1..5) -> multiply(factor 2) -> add(delta 10)`:
 1. `generator` sends 1. `multiply` receives 1, computes 2, sends 2. `add` receives 2, computes 12. Main receives 12.
 2. `generator` sends 2. `multiply` -> 4, `add` -> 14. Main receives 14.
 3. Continues for 3, 4, 5. Main receives 16, 18, 20.
-4. After 100ms the context deadline fires: every stage's `select` takes the `ctx.Done()` branch, each goroutine returns, and each stage's output channel is closed via `defer close(out)`.
+4. The generator has only five values, so every stage normally drains and finishes via channel closure: `generator` closes its output after sending five values, each downstream `range` loop ends on that close, and each stage closes its own output via `defer close(out)`. The `ctx.Done()` branches exist for the failure path — if a stage stalls past the 100ms deadline (a slow consumer downstream, an infinite generator), the `select` takes `ctx.Done()` and every goroutine unwinds instead of leaking.
 
 The pipeline processes one item at a time through all stages. Each stage can block if the next is not ready — this is backpressure. The context deadline bounds the whole pipeline, so slow stages cannot hang the process.
 
