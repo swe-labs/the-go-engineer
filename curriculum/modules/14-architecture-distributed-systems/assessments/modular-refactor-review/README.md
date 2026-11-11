@@ -176,3 +176,7 @@ go test -v -race ./curriculum/modules/14-architecture-distributed-systems/projec
 ## Retake policy
 
 If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.
+
+## NEXT UP
+
+[Module 14 Checkpoint](../checkpoint/README.md)

@@ -144,8 +144,7 @@ type NotificationService struct {
 func (n *NotificationService) OnOrderPlaced(event Event) {
 	data := event.Data.(OrderPlacedData)
 	n.mu.Lock()
-	n.notifications = append(n.notifications,
-		fmt.Sprintf("Order %s for $%.2f placed", data.OrderID, data.Total))
+	n.notifications = append(n.notifications, fmt.Sprintf("Order %s for $%.2f placed", data.OrderID, data.Total))
 	n.mu.Unlock()
 }
 
@@ -165,8 +164,7 @@ type InventoryService struct {
 func (i *InventoryService) OnOrderPlaced(event Event) {
 	data := event.Data.(OrderPlacedData)
 	i.mu.Lock()
-	i.reserved = append(i.reserved,
-		fmt.Sprintf("Inventory reserved for %s", data.OrderID))
+	i.reserved = append(i.reserved, fmt.Sprintf("Inventory reserved for %s", data.OrderID))
 	i.mu.Unlock()
 }
 

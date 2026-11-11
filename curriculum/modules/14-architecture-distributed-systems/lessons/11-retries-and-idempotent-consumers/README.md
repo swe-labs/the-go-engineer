@@ -84,88 +84,123 @@ import (
 )
 
 type DedupStore struct {
-	mu   sync.Mutex
-	seen map[string]bool
+	mu     sync.Mutex
+	seen   map[string]bool
+	onMiss func(string)
+	onDup  func(string)
 }
 
-func NewDedupStore() *DedupStore {
-	return &DedupStore{seen: make(map[string]bool)}
+func NewDedupStore(onMiss, onDup func(string)) *DedupStore {
+	return &DedupStore{
+		seen:   make(map[string]bool),
+		onMiss: onMiss,
+		onDup:  onDup,
+	}
 }
 
 func (d *DedupStore) TryProcess(key string) bool {
 	d.mu.Lock()
 	defer d.mu.Unlock()
 	if d.seen[key] {
+		if d.onDup != nil {
+			d.onDup(key)
+		}
 		return false
 	}
 	d.seen[key] = true
+	if d.onMiss != nil {
+		d.onMiss(key)
+	}
 	return true
+}
+
+func (d *DedupStore) Seen(key string) bool {
+	d.mu.Lock()
+	defer d.mu.Unlock()
+	return d.seen[key]
+}
+
+func (d *DedupStore) Count() int {
+	d.mu.Lock()
+	defer d.mu.Unlock()
+	return len(d.seen)
 }
 
 type RetryConfig struct {
 	MaxAttempts int
 	BaseDelay   time.Duration
 	MaxDelay    time.Duration
+	Jitter      bool
 }
 
-func Retry(cfg RetryConfig, op func() error) error {
+type Result struct {
+	Attempts int
+	Success  bool
+	Err      error
+}
+
+func RetryWithBackoff(cfg RetryConfig, op func() error) Result {
 	var lastErr error
 	for attempt := 1; attempt <= cfg.MaxAttempts; attempt++ {
-		if err := op(); err != nil {
-			lastErr = err
-			if attempt == cfg.MaxAttempts {
-				break
-			}
-			delay := cfg.BaseDelay * (1 << uint(attempt-1))
-			if delay > cfg.MaxDelay {
-				delay = cfg.MaxDelay
-			}
+		err := op()
+		if err == nil {
+			return Result{Attempts: attempt, Success: true}
+		}
+		lastErr = err
+		if attempt == cfg.MaxAttempts {
+			break
+		}
+		delay := cfg.BaseDelay * (1 << uint(attempt-1))
+		if delay > cfg.MaxDelay {
+			delay = cfg.MaxDelay
+		}
+		if cfg.Jitter {
 			jitter := time.Duration(rand.Int63n(int64(delay))) / 2
-			time.Sleep(delay/2 + jitter)
-			continue
+			delay = delay/2 + jitter
+		}
+		time.Sleep(delay)
+	}
+	return Result{Attempts: cfg.MaxAttempts, Success: false, Err: lastErr}
+}
+
+var failCounter int
+var failMu sync.Mutex
+
+func flakyOperation(succeedAfter int) func() error {
+	return func() error {
+		failMu.Lock()
+		defer failMu.Unlock()
+		failCounter++
+		if failCounter < succeedAfter {
+			return fmt.Errorf("transient error (attempt %d)", failCounter)
 		}
 		return nil
 	}
-	return lastErr
-}
-
-var attemptCount int
-var mu sync.Mutex
-
-func flakyHandler(n int) error {
-	mu.Lock()
-	attemptCount++
-	count := attemptCount
-	mu.Unlock()
-	if count < n {
-		return fmt.Errorf("transient error (attempt %d)", count)
-	}
-	return nil
 }
 
 func main() {
-	store := NewDedupStore()
-	keys := []string{"pay-1", "pay-2", "pay-1", "pay-3", "pay-2"}
-	for _, k := range keys {
-		if store.TryProcess(k) {
-			fmt.Printf("processed: %s\n", k)
-		} else {
-			fmt.Printf("duplicate: %s\n", k)
-		}
-	}
+	idempotencyKeys := []string{"payment-1", "refund-2", "payment-1"}
+	processed := 0
+	deduped := 0
+	store := NewDedupStore(
+		func(k string) { processed++ },
+		func(k string) { deduped++ },
+	)
 
-	mu.Lock()
-	attemptCount = 0
-	mu.Unlock()
-
-	err := Retry(RetryConfig{MaxAttempts: 5, BaseDelay: 10 * time.Millisecond, MaxDelay: 100 * time.Millisecond}, func() error {
-		return flakyHandler(3)
-	})
-	if err != nil {
-		fmt.Printf("retry failed: %v\n", err)
-	} else {
-		fmt.Println("retry succeeded")
+	for _, key := range idempotencyKeys {
+		store.TryProcess(key)
 	}
+	fmt.Printf("Processed: %d, Deduped: %d\n", processed, deduped)
+
+	failCounter = 0
+	cfg := RetryConfig{
+		MaxAttempts: 5,
+		BaseDelay:   10 * time.Millisecond,
+		MaxDelay:    100 * time.Millisecond,
+		Jitter:      false,
+	}
+	result := RetryWithBackoff(cfg, flakyOperation(3))
+	fmt.Printf("Retry result: success=%v attempts=%d err=%v\n", result.Success, result.Attempts, result.Err)
 }
 ```
 

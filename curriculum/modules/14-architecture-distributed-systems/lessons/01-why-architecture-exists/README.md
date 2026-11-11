@@ -122,23 +122,37 @@ func (p *OrderProcessor) Process(orderID string, amount float64) error {
 }
 
 type ConsoleLogger struct{}
-func (ConsoleLogger) Log(message string) { fmt.Println("LOG:", message) }
+
+func (ConsoleLogger) Log(message string) {
+	fmt.Println("LOG:", message)
+}
 
 type StripeGateway struct{}
-func (StripeGateway) Charge(amount float64) error { fmt.Printf("Stripe: charging $%.2f\n", amount); return nil }
+
+func (StripeGateway) Charge(amount float64) error {
+	fmt.Printf("Stripe: charging $%.2f\n", amount)
+	return nil
+}
 
 type AmountValidator struct{}
+
 func (AmountValidator) Validate(amount float64) error {
-	if amount <= 0 { return errors.New("amount must be positive") }
+	if amount <= 0 {
+		return errors.New("amount must be positive")
+	}
 	return nil
 }
 
 func main() {
 	tight := BadOrderService{}
-	tight.Process("ORD-001", 49.99)
+	if err := tight.Process("ORD-001", 49.99); err != nil {
+		fmt.Println("Error:", err)
+	}
 
 	loose := NewOrderProcessor(ConsoleLogger{}, StripeGateway{}, AmountValidator{})
-	loose.Process("ORD-002", 99.99)
+	if err := loose.Process("ORD-002", 99.99); err != nil {
+		fmt.Println("Error:", err)
+	}
 }
 ```
 

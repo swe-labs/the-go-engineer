@@ -88,9 +88,9 @@ type CacheAside struct {
 	mu       sync.RWMutex
 	entries  map[string]CacheEntry
 	ttl      time.Duration
-	loadFunc func(string) (string, error)
-	hits     int
+	loadFunc func(key string) (string, error)
 	misses   int
+	hits     int
 }
 
 func NewCacheAside(ttl time.Duration, load func(string) (string, error)) *CacheAside {
@@ -121,11 +121,16 @@ func (c *CacheAside) Get(key string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
 	c.mu.Lock()
 	c.entries[key] = CacheEntry{Value: value, ExpiresAt: time.Now().Add(c.ttl)}
 	c.mu.Unlock()
 	return value, nil
+}
+
+func (c *CacheAside) Set(key, value string) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.entries[key] = CacheEntry{Value: value, ExpiresAt: time.Now().Add(c.ttl)}
 }
 
 func (c *CacheAside) Invalidate(key string) {
@@ -134,23 +139,47 @@ func (c *CacheAside) Invalidate(key string) {
 	delete(c.entries, key)
 }
 
-type WriteBehind struct {
+func (c *CacheAside) Stats() (hits, misses int) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return c.hits, c.misses
+}
+
+func (c *CacheAside) Len() int {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return len(c.entries)
+}
+
+type WriteBehindCache struct {
 	mu        sync.Mutex
 	entries   map[string]string
-	writeFunc func(string, string) error
+	writeFunc func(key, value string) error
+	pending   int
 }
 
-func NewWriteBehind(write func(string, string) error) *WriteBehind {
-	return &WriteBehind{entries: make(map[string]string), writeFunc: write}
+func NewWriteBehindCache(write func(string, string) error) *WriteBehindCache {
+	return &WriteBehindCache{
+		entries:   make(map[string]string),
+		writeFunc: write,
+	}
 }
 
-func (w *WriteBehind) Set(key, value string) {
+func (w *WriteBehindCache) Set(key, value string) {
 	w.mu.Lock()
 	defer w.mu.Unlock()
 	w.entries[key] = value
+	w.pending++
 }
 
-func (w *WriteBehind) Flush() error {
+func (w *WriteBehindCache) Get(key string) (string, bool) {
+	w.mu.Lock()
+	defer w.mu.Unlock()
+	v, ok := w.entries[key]
+	return v, ok
+}
+
+func (w *WriteBehindCache) Flush() error {
 	w.mu.Lock()
 	defer w.mu.Unlock()
 	for k, v := range w.entries {
@@ -159,32 +188,76 @@ func (w *WriteBehind) Flush() error {
 		}
 		delete(w.entries, k)
 	}
+	w.pending = 0
 	return nil
+}
+
+func (w *WriteBehindCache) Pending() int {
+	w.mu.Lock()
+	defer w.mu.Unlock()
+	return w.pending
+}
+
+type CacheHierarchy struct {
+	l1 *CacheAside
+	l2 *CacheAside
+}
+
+func NewCacheHierarchy(l1ttl, l2ttl time.Duration, load func(string) (string, error)) *CacheHierarchy {
+	return &CacheHierarchy{
+		l1: NewCacheAside(l1ttl, func(key string) (string, error) {
+			val, err := load(key)
+			return val, err
+		}),
+		l2: NewCacheAside(l2ttl, load),
+	}
+}
+
+func (h *CacheHierarchy) Get(key string) (string, error) {
+	val, err := h.l1.Get(key)
+	if err == nil {
+		return val, nil
+	}
+	val, err = h.l2.Get(key)
+	if err != nil {
+		return "", err
+	}
+	h.l1.Set(key, val)
+	return val, nil
 }
 
 func expensiveLoad(key string) (string, error) {
 	time.Sleep(10 * time.Millisecond)
-	return fmt.Sprintf("loaded-%s", key), nil
+	return fmt.Sprintf("value-for-%s", key), nil
 }
 
 func main() {
-	cache := NewCacheAside(5*time.Minute, expensiveLoad)
+	cache := NewCacheAside(100*time.Millisecond, expensiveLoad)
 
-	val, _ := cache.Get("user:42")
-	fmt.Println("first:", val)
-	val, _ = cache.Get("user:42")
-	fmt.Println("cached:", val)
+	val, _ := cache.Get("user:1")
+	fmt.Println("first get:", val)
 
-	cache.Invalidate("user:42")
-	fmt.Println("invalidated")
+	val, _ = cache.Get("user:1")
+	fmt.Println("second get (cache hit):", val)
 
-	wb := NewWriteBehind(func(k, v string) error {
-		fmt.Printf("writing %s=%s\n", k, v)
+	hits, misses := cache.Stats()
+	fmt.Printf("hits=%d misses=%d\n", hits, misses)
+
+	time.Sleep(150 * time.Millisecond)
+	val, _ = cache.Get("user:1")
+	fmt.Println("after expiry:", val)
+
+	wb := NewWriteBehindCache(func(k, v string) error {
+		fmt.Printf("flushed: %s=%s\n", k, v)
 		return nil
 	})
-	wb.Set("count", "100")
-	wb.Set("total", "500")
+	wb.Set("k1", "v1")
+	wb.Set("k2", "v2")
+	fmt.Printf("pending before flush: %d\n", wb.Pending())
 	wb.Flush()
+	fmt.Printf("pending after flush: %d\n", wb.Pending())
+
+	_ = CacheHierarchy{}
 }
 ```
 

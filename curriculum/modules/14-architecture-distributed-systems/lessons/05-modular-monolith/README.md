@@ -113,7 +113,6 @@ type InvoiceStore interface {
 	FindByOrderID(orderID string) (Invoice, error)
 }
 
-// BillingContext - handles invoicing and payments.
 type BillingService struct {
 	invoices InvoiceStore
 }
@@ -130,7 +129,6 @@ func (s *BillingService) CreateInvoice(order Order) (Invoice, error) {
 	return inv, nil
 }
 
-// OrderingContext - handles order placement and orchestration.
 type OrderingBoundedContext struct {
 	orders  OrderStore
 	billing *BillingService
@@ -156,9 +154,59 @@ func (ctx *OrderingBoundedContext) PlaceOrder(id string, total float64) (Order, 
 	return order, nil
 }
 
+type inMemoryOrderStore struct {
+	data map[string]Order
+}
+
+func newInMemoryOrderStore() *inMemoryOrderStore {
+	return &inMemoryOrderStore{data: make(map[string]Order)}
+}
+
+func (s *inMemoryOrderStore) Save(order Order) error {
+	s.data[order.ID] = order
+	return nil
+}
+
+func (s *inMemoryOrderStore) FindByID(id string) (Order, error) {
+	o, ok := s.data[id]
+	if !ok {
+		return Order{}, errors.New("order not found")
+	}
+	return o, nil
+}
+
+type inMemoryInvoiceStore struct {
+	data map[string]Invoice
+}
+
+func newInMemoryInvoiceStore() *inMemoryInvoiceStore {
+	return &inMemoryInvoiceStore{data: make(map[string]Invoice)}
+}
+
+func (s *inMemoryInvoiceStore) Save(invoice Invoice) error {
+	s.data[invoice.OrderID] = invoice
+	return nil
+}
+
+func (s *inMemoryInvoiceStore) FindByOrderID(orderID string) (Invoice, error) {
+	inv, ok := s.data[orderID]
+	if !ok {
+		return Invoice{}, errors.New("invoice not found")
+	}
+	return inv, nil
+}
+
 func main() {
-	ctx := NewOrderingBoundedContext(newInMemoryOrderStore(), NewBillingService(newInMemoryInvoiceStore()))
-	order, _ := ctx.PlaceOrder("ORD-001", 129.99)
+	orders := newInMemoryOrderStore()
+	invoices := newInMemoryInvoiceStore()
+	billing := NewBillingService(invoices)
+	ordering := NewOrderingBoundedContext(orders, billing)
+
+	order, err := ordering.PlaceOrder("ORD-001", 129.99)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	fmt.Printf("Order placed: %s (status: %s)\n", order.ID, order.Status)
 }
 ```

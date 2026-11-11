@@ -68,31 +68,42 @@ Go's standard library and runtime use queues pervasively:
 package main
 
 import (
+	"errors"
 	"fmt"
 	"sync"
 	"sync/atomic"
+	"time"
 )
 
 type Queue struct {
-	mu    sync.Mutex
-	items []int
+	mu     sync.Mutex
+	items  []int
+	closed bool
 }
 
-func (q *Queue) Enqueue(item int) {
+func NewQueue() *Queue {
+	return &Queue{items: make([]int, 0)}
+}
+
+func (q *Queue) Enqueue(item int) error {
 	q.mu.Lock()
 	defer q.mu.Unlock()
+	if q.closed {
+		return errors.New("queue closed")
+	}
 	q.items = append(q.items, item)
+	return nil
 }
 
-func (q *Queue) Dequeue() (int, bool) {
+func (q *Queue) Dequeue() (int, error) {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	if len(q.items) == 0 {
-		return 0, false
+		return 0, errors.New("queue empty")
 	}
 	item := q.items[0]
 	q.items = q.items[1:]
-	return item, true
+	return item, nil
 }
 
 func (q *Queue) Len() int {
@@ -101,49 +112,66 @@ func (q *Queue) Len() int {
 	return len(q.items)
 }
 
+func (q *Queue) Close() {
+	q.mu.Lock()
+	defer q.mu.Unlock()
+	q.closed = true
+}
+
 type WorkerPool struct {
-	queue     *Queue
-	workers   int
-	processed atomic.Int64
-	wg        sync.WaitGroup
+	queue      *Queue
+	numWorkers int
+	processed  atomic.Int64
+	wg         sync.WaitGroup
 }
 
-func NewWorkerPool(q *Queue, n int) *WorkerPool {
-	return &WorkerPool{queue: q, workers: n}
+func NewWorkerPool(queue *Queue, numWorkers int) *WorkerPool {
+	return &WorkerPool{queue: queue, numWorkers: numWorkers}
 }
 
-func (wp *WorkerPool) Start(fn func(int)) {
-	for range wp.workers {
+func (wp *WorkerPool) Start(handler func(int)) {
+	for i := range wp.numWorkers {
 		wp.wg.Add(1)
-		go func() {
+		go func(id int) {
 			defer wp.wg.Done()
 			for {
-				item, ok := wp.queue.Dequeue()
-				if !ok {
+				item, err := wp.queue.Dequeue()
+				if err != nil {
 					return
 				}
-				fn(item)
+				handler(item)
 				wp.processed.Add(1)
+				_ = id
 			}
-		}()
+		}(i)
 	}
 }
 
-func (wp *WorkerPool) Wait()  { wp.wg.Wait() }
-func (wp *WorkerPool) Count() int64 { return wp.processed.Load() }
+func (wp *WorkerPool) Wait() {
+	wp.wg.Wait()
+}
 
-func main() {
-	q := &Queue{}
-	for i := range 20 {
+func (wp *WorkerPool) Processed() int64 {
+	return wp.processed.Load()
+}
+
+func produceInts(q *Queue, count int) {
+	for i := range count {
 		q.Enqueue(i)
 	}
+}
+
+func main() {
+	q := NewQueue()
+	produceInts(q, 20)
 
 	pool := NewWorkerPool(q, 4)
-	pool.Start(func(n int) {
-		fmt.Printf("worker consumed: %d\n", n)
-	})
+	double := func(n int) { fmt.Printf("processed: %d\n", n*2) }
+	pool.Start(double)
+	time.Sleep(100 * time.Millisecond)
+	q.Close()
 	pool.Wait()
-	fmt.Printf("total processed: %d\n", pool.Count())
+	fmt.Printf("Total processed: %d\n", pool.Processed())
 }
 ```
 
@@ -158,7 +186,7 @@ For the worker pool example with 20 items and 4 workers:
 5. Each goroutine calls the handler `fn(item)` then increments `processed`.
 6. When all 20 items are dequeued, `Dequeue` returns `false` and each goroutine exits its loop.
 7. `pool.Wait()` blocks until all 4 goroutines call `wg.Done()`.
-8. `pool.Count()` returns 20, confirming every item was processed exactly once.
+8. `pool.Count()` returns 20, confirming every item was processed once with no duplicates lost or double-processed.
 
 The key property: multiple goroutines compete for the same queue, but the mutex guarantees each item is dequeued by exactly one worker.
 

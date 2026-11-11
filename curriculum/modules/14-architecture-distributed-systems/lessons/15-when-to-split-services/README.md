@@ -36,7 +36,7 @@ Triggers for splitting:
 
 | Trigger | Description |
 |---|---|
-| Team size > 8 (Dunbar number) | Beyond 8 developers on a single codebase, communication overhead dominates |
+| Team size > 8 (single-team ownership limit) | Beyond ~8 developers on a single codebase, communication overhead dominates (two-pizza heuristic; Dunbar's number applies at ~150 across an org) |
 | Deployment coupling | Every deploy requires coordinated releases across teams |
 | Data ownership conflict | Two teams frequently change the same database schema |
 | Scaling requirements differ | One part of the system needs more resources than another |
@@ -86,9 +86,10 @@ import (
 )
 
 type BoundedContext struct {
-	Name      string
-	OwnsData  []string
-	TeamSize  int
+	Name     string
+	OwnsData []string
+	TeamSize int
+	APICalls []string
 }
 
 type SplittingAnalysis struct {
@@ -98,26 +99,30 @@ type SplittingAnalysis struct {
 	RiskLevel         string
 }
 
-func AnalyzeSplit(ctx BoundedContext) SplittingAnalysis {
-	a := SplittingAnalysis{Context: ctx.Name}
+func AnalyzeSplitContext(ctx BoundedContext) SplittingAnalysis {
+	analysis := SplittingAnalysis{Context: ctx.Name}
+	reasons := []string{}
+
 	if ctx.TeamSize > 8 {
-		a.Reasons = append(a.Reasons, "team exceeds 8 developers")
+		reasons = append(reasons, "team size exceeds single-team ownership (two-pizza) limit")
 	}
 	if len(ctx.OwnsData) > 5 {
-		a.Reasons = append(a.Reasons, "owns more than 5 data entities")
+		reasons = append(reasons, "context owns too many data entities")
 	}
+	analysis.Reasons = reasons
 
-	if len(a.Reasons) >= 2 {
-		a.RecommendedAction = fmt.Sprintf("split %s into separate service", ctx.Name)
-		a.RiskLevel = "medium"
-	} else if len(a.Reasons) >= 1 {
-		a.RecommendedAction = fmt.Sprintf("monitor %s for further growth", ctx.Name)
-		a.RiskLevel = "low"
+	if len(reasons) >= 2 {
+		analysis.RecommendedAction = fmt.Sprintf("split %s into separate service", ctx.Name)
+		analysis.RiskLevel = "medium"
+	} else if len(reasons) >= 1 {
+		analysis.RecommendedAction = fmt.Sprintf("monitor %s for further growth", ctx.Name)
+		analysis.RiskLevel = "low"
 	} else {
-		a.RecommendedAction = "keep as part of monolith"
-		a.RiskLevel = "none"
+		analysis.RecommendedAction = "keep as part of monolith"
+		analysis.RiskLevel = "none"
 	}
-	return a
+	analysis.Reasons = reasons
+	return analysis
 }
 
 type ServiceCoupling struct {
@@ -129,55 +134,86 @@ type ServiceCoupling struct {
 
 func EvaluateCoupling(c ServiceCoupling) string {
 	if len(c.SharedData) > 0 && c.CallPerSec > 100 {
-		return fmt.Sprintf("high coupling: %s and %s should consider merging", c.ServiceA, c.ServiceB)
+		return fmt.Sprintf("high coupling between %s and %s: consider merging", c.ServiceA, c.ServiceB)
 	}
 	if len(c.SharedData) > 0 {
-		return fmt.Sprintf("medium coupling: %s and %s share %v", c.ServiceA, c.ServiceB, c.SharedData)
+		return fmt.Sprintf("medium coupling: shared data %v needs ownership resolution", c.SharedData)
 	}
 	return fmt.Sprintf("low coupling: %s and %s are independent", c.ServiceA, c.ServiceB)
 }
 
-var SplitStrategies = map[string][]string{
+type SplittingStrategy struct {
+	Name       string
+	Steps      []string
+	Downtime   bool
+	DurationMs int
+}
+
+var Strategies = map[string]SplittingStrategy{
 	"strangler-fig": {
-		"add proxy routing layer",
-		"migrate one endpoint at a time to new service",
-		"route new service via proxy",
-		"remove old endpoint code when traffic fully migrated",
+		Name: "Strangler Fig",
+		Steps: []string{
+			"identify bounded context boundary",
+			"add proxy layer routing traffic to new service",
+			"migrate one endpoint at a time",
+			"remove old code when all traffic routed",
+		},
+		Downtime:   false,
+		DurationMs: 5000,
 	},
 	"database-separation": {
-		"extract schema for bounded context",
-		"set up new database",
-		"run dual-writes to both databases",
-		"switch reads to new database",
-		"remove old schema from shared database",
+		Name: "Database Separation",
+		Steps: []string{
+			"extract schema for bounded context",
+			"set up new database instance",
+			"run dual-writes for consistency check",
+			"switch reads to new database",
+			"remove old schema",
+		},
+		Downtime:   true,
+		DurationMs: 10000,
+	},
+	"event-driven-split": {
+		Name: "Event-driven Split",
+		Steps: []string{
+			"publish events for the bounded context's data",
+			"build new service consuming events",
+			"route new requests to new service",
+			"backfill old data",
+			"deprecate old service",
+		},
+		Downtime:   false,
+		DurationMs: 15000,
 	},
 }
 
 func main() {
 	orderCtx := BoundedContext{
 		Name:     "Order Management",
-		OwnsData: []string{"orders", "items", "payments", "refunds", "shipments", "history"},
-		TeamSize: 9,
+		OwnsData: []string{"orders", "order_items", "payments", "refunds", "shipments", "inventory_reservations"},
+		TeamSize: 10,
 	}
-	analysis := AnalyzeSplit(orderCtx)
-	fmt.Printf("Context: %s\n", analysis.Context)
+	analysis := AnalyzeSplitContext(orderCtx)
+	fmt.Printf("Analysis for %s:\n", analysis.Context)
 	for _, r := range analysis.Reasons {
 		fmt.Printf("  - %s\n", r)
 	}
-	fmt.Printf("Action: %s (risk: %s)\n\n", analysis.RecommendedAction, analysis.RiskLevel)
+	fmt.Printf("  Action: %s (risk: %s)\n\n", analysis.RecommendedAction, analysis.RiskLevel)
 
 	coupling := ServiceCoupling{
 		ServiceA:   "Orders",
 		ServiceB:   "Inventory",
 		SharedData: []string{"product_sku"},
-		CallPerSec: 300,
+		CallPerSec: 250,
 	}
 	fmt.Println(EvaluateCoupling(coupling))
 
-	fmt.Println("\nStrangler Fig strategy:")
-	for _, s := range SplitStrategies["strangler-fig"] {
+	strat := Strategies["strangler-fig"]
+	fmt.Printf("\n%s strategy:\n", strat.Name)
+	for _, s := range strat.Steps {
 		fmt.Printf("  - %s\n", s)
 	}
+	fmt.Printf("Downtime required: %v\n", strat.Downtime)
 }
 ```
 

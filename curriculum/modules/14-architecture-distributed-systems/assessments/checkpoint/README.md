@@ -100,3 +100,7 @@ Submit your architectural breakdown addressing Scenarios 1–4 and the interface
 ## Retake policy
 
 If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.
+
+## NEXT UP
+
+[Module 15: Docker, CI/CD, and Deployment](../../../15-docker-cicd-deployment/README.md)

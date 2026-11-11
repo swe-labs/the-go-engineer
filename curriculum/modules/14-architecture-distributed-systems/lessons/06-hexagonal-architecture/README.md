@@ -114,18 +114,15 @@ type User struct {
 	Email string
 }
 
-// Driven port
 type UserRepository interface {
 	Save(user User) error
 	FindByID(id string) (User, error)
 }
 
-// Driven port
 type EmailService interface {
 	SendWelcome(email string) error
 }
 
-// Core domain
 type UserService struct {
 	repo  UserRepository
 	email EmailService
@@ -149,7 +146,6 @@ func (s *UserService) RegisterUser(id, email string) error {
 	return nil
 }
 
-// Driven adapter: in-memory repository
 type InMemoryUserRepoAdapter struct {
 	mu    sync.RWMutex
 	users map[string]User
@@ -176,12 +172,26 @@ func (a *InMemoryUserRepoAdapter) FindByID(id string) (User, error) {
 	return u, nil
 }
 
-// Driven adapter: console email sender
 type ConsoleEmailAdapter struct{}
 
 func (ConsoleEmailAdapter) SendWelcome(email string) error {
 	fmt.Printf("Welcome email sent to %s\n", email)
 	return nil
+}
+
+type LoggerMiddleware struct {
+	next UserRepository
+	logs []string
+}
+
+func (m *LoggerMiddleware) Save(user User) error {
+	m.logs = append(m.logs, fmt.Sprintf("saving user %s", user.ID))
+	return m.next.Save(user)
+}
+
+func (m *LoggerMiddleware) FindByID(id string) (User, error) {
+	m.logs = append(m.logs, fmt.Sprintf("finding user %s", id))
+	return m.next.FindByID(id)
 }
 
 func main() {

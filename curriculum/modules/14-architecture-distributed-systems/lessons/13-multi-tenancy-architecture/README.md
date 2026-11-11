@@ -94,9 +94,9 @@ import (
 
 type Tenant string
 
-type ctxKey string
+type contextKey string
 
-const tenantKey ctxKey = "tenant"
+const tenantKey contextKey = "tenant"
 
 func WithTenant(ctx context.Context, t Tenant) context.Context {
 	return context.WithValue(ctx, tenantKey, t)
@@ -116,7 +116,7 @@ func NewTenantStore() *TenantStore {
 	return &TenantStore{data: make(map[string]map[string]string)}
 }
 
-func (s *TenantStore) Set(ctx context.Context, key, val string) error {
+func (s *TenantStore) Set(ctx context.Context, key, value string) error {
 	tenant, ok := TenantFromContext(ctx)
 	if !ok {
 		return fmt.Errorf("no tenant in context")
@@ -126,7 +126,7 @@ func (s *TenantStore) Set(ctx context.Context, key, val string) error {
 	if s.data[string(tenant)] == nil {
 		s.data[string(tenant)] = make(map[string]string)
 	}
-	s.data[string(tenant)][key] = val
+	s.data[string(tenant)][key] = value
 	return nil
 }
 
@@ -139,32 +139,33 @@ func (s *TenantStore) Get(ctx context.Context, key string) (string, error) {
 	defer s.mu.Unlock()
 	val, ok := s.data[string(tenant)][key]
 	if !ok {
-		return "", fmt.Errorf("key not found for %s", tenant)
+		return "", fmt.Errorf("key not found for tenant %s", tenant)
 	}
 	return val, nil
 }
 
 type TenantConfig struct {
-	Tenant         Tenant
-	MaxConnections int
+	Tenant          Tenant
+	MaxConnections  int
+	RateLimitPerSec int
 }
 
-type ConfigManager struct {
+type MultiTenantConfig struct {
 	mu      sync.RWMutex
 	configs map[Tenant]TenantConfig
 }
 
-func NewConfigManager() *ConfigManager {
-	return &ConfigManager{configs: make(map[Tenant]TenantConfig)}
+func NewMultiTenantConfig() *MultiTenantConfig {
+	return &MultiTenantConfig{configs: make(map[Tenant]TenantConfig)}
 }
 
-func (m *ConfigManager) Set(cfg TenantConfig) {
+func (m *MultiTenantConfig) SetConfig(cfg TenantConfig) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	m.configs[cfg.Tenant] = cfg
 }
 
-func (m *ConfigManager) Get(ctx context.Context) (TenantConfig, error) {
+func (m *MultiTenantConfig) GetConfig(ctx context.Context) (TenantConfig, error) {
 	tenant, ok := TenantFromContext(ctx)
 	if !ok {
 		return TenantConfig{}, fmt.Errorf("no tenant in context")
@@ -173,30 +174,45 @@ func (m *ConfigManager) Get(ctx context.Context) (TenantConfig, error) {
 	defer m.mu.RUnlock()
 	cfg, ok := m.configs[tenant]
 	if !ok {
-		return TenantConfig{}, fmt.Errorf("no config for %s", tenant)
+		return TenantConfig{}, fmt.Errorf("no config for tenant %s", tenant)
 	}
 	return cfg, nil
 }
 
+func (m *MultiTenantConfig) AllConfigs() []TenantConfig {
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	result := make([]TenantConfig, 0, len(m.configs))
+	for _, cfg := range m.configs {
+		result = append(result, cfg)
+	}
+	return result
+}
+
 func main() {
-	ctx1 := WithTenant(context.Background(), Tenant("acme"))
-	ctx2 := WithTenant(context.Background(), Tenant("globex"))
+	ctx1 := WithTenant(context.Background(), Tenant("acme-corp"))
+	ctx2 := WithTenant(context.Background(), Tenant("globex-inc"))
 
 	store := NewTenantStore()
-	store.Set(ctx1, "theme", "dark")
-	store.Set(ctx2, "theme", "light")
-	store.Set(ctx2, "timezone", "UTC")
+	store.Set(ctx1, "api_key", "sk-acme-123")
+	store.Set(ctx2, "api_key", "sk-globex-456")
 
-	theme1, _ := store.Get(ctx1, "theme")
-	theme2, _ := store.Get(ctx2, "theme")
-	tz2, _ := store.Get(ctx2, "timezone")
-	fmt.Printf("acme theme: %s\nglobex theme: %s\nglobex tz: %s\n", theme1, theme2, tz2)
+	if v, err := store.Get(ctx1, "api_key"); err == nil {
+		fmt.Printf("acme-corp api_key: %s\n", v)
+	}
+	if v, err := store.Get(ctx2, "api_key"); err == nil {
+		fmt.Printf("globex-inc api_key: %s\n", v)
+	}
 
-	cfg := NewConfigManager()
-	cfg.Set(TenantConfig{Tenant: "acme", MaxConnections: 50})
-	cfg.Set(TenantConfig{Tenant: "globex", MaxConnections: 10})
-	if c, _ := cfg.Get(ctx1); c.MaxConnections == 50 {
-		fmt.Println("acme config verified")
+	cfg := NewMultiTenantConfig()
+	cfg.SetConfig(TenantConfig{Tenant: "acme-corp", MaxConnections: 10, RateLimitPerSec: 100})
+	cfg.SetConfig(TenantConfig{Tenant: "globex-inc", MaxConnections: 5, RateLimitPerSec: 50})
+
+	if c, err := cfg.GetConfig(ctx1); err == nil {
+		fmt.Printf("acme-corp config: %+v\n", c)
+	}
+	if c, err := cfg.GetConfig(ctx2); err == nil {
+		fmt.Printf("globex-inc config: %+v\n", c)
 	}
 }
 ```

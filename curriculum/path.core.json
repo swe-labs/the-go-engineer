@@ -51617,7 +51617,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/01-why-architecture-exists/main_test.go"
       },
       "id": "core-14-01",
-      "learning_objective": "Evaluate architectural patterns and tradeoffs, balancing monolith simplicity against distributed complexity.",
+      "learning_objective": "Identify coupling and cohesion in Go code, explain Conway's law and its effect on software structure, evaluate architectural drivers (team size, change velocity, domain complexity), and apply a tradeoff-first mindset when choosing between design alternatives.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-02"
@@ -51756,7 +51756,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/02-package-boundaries/main_test.go"
       },
       "id": "core-14-02",
-      "learning_objective": "Design modular monoliths with strict package boundary encapsulation and explicit dependency injection.",
+      "learning_objective": "Design Go packages with clear boundaries, use internal packages to hide implementation details, enforce dependency direction, avoid cyclic dependencies, and organize packages by domain rather than by layer.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-03"
@@ -51895,7 +51895,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/03-service-layer/main_test.go"
       },
       "id": "core-14-03",
-      "learning_objective": "Implement Hexagonal / Clean Architecture separating domain entities, use-case services, and adapter interfaces.",
+      "learning_objective": "Design and implement a service layer that isolates business logic from transport and storage, use constructor-based dependency injection to make services testable, and recognize when a service layer adds value versus when it is a thin pass-through.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-04"
@@ -52038,7 +52038,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/04-repository-pattern-deep-dive/main_test.go"
       },
       "id": "core-14-04",
-      "learning_objective": "Apply the Service Layer pattern to orchestrate business workflows independent of transport and persistence.",
+      "learning_objective": "Design repository interfaces that abstract data access, implement in-memory repositories for testing, and swap storage backends without changing business logic.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-05"
@@ -52179,7 +52179,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/05-modular-monolith/main_test.go"
       },
       "id": "core-14-05",
-      "learning_objective": "Apply the Repository pattern to decouple data access logic from core domain business rules.",
+      "learning_objective": "Design a modular monolith with bounded contexts communicating through interfaces, evolve the architecture from monolith to services when needed, and recognize when a monolith is the right choice.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-06"
@@ -52321,7 +52321,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/06-hexagonal-architecture/main_test.go"
       },
       "id": "core-14-06",
-      "learning_objective": "Enforce core domain invariants and business rules within entity models to prevent corrupt application state.",
+      "learning_objective": "Design a hexagonal architecture with ports (interfaces) and adapters (implementations), separate core domain from infrastructure concerns, and swap adapters for testing without modifying core logic.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-07"
@@ -52464,7 +52464,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/07-domain-modeling/main_test.go"
       },
       "id": "core-14-07",
-      "learning_objective": "Design event-driven architectures with asynchronous domain events, producers, and decoupled subscribers.",
+      "learning_objective": "Model business domains in Go using entities, value objects, and aggregates. Capture domain logic within struct types and raise domain events for cross-context communication.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-08"
@@ -52604,7 +52604,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/08-invariants/main_test.go"
       },
       "id": "core-14-08",
-      "learning_objective": "Publish and consume messages from message queues, handling message serialization, acknowledgments, and dead-letter queues.",
+      "learning_objective": "Identify and enforce business invariants at system boundaries, implement consistency checks in Go, and prevent invalid state transitions through encapsulation and validation.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-09"
@@ -52748,7 +52748,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/09-event-driven-basics/main_test.go"
       },
       "id": "core-14-09",
-      "learning_objective": "Design idempotent consumers that safely handle duplicate message deliveries without corrupting state.",
+      "learning_objective": "Design and implement an in-memory event bus in Go, use publish/subscribe to decouple producers from consumers, and compose multiple handlers for the same event without coordination.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-10"
@@ -52946,7 +52946,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/10-queues/main_test.go"
       },
       "id": "core-14-10",
-      "learning_objective": "Implement distributed retry strategies with exponential backoff, jitter, and dead-letter queue routing.",
+      "learning_objective": "Implement an in-memory FIFO queue, build a producer-consumer pattern using buffered Go channels, and deploy a concurrent worker pool that drains work from a shared queue.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-11"
@@ -53136,7 +53136,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/11-retries-and-idempotent-consumers/main_test.go"
       },
       "id": "core-14-11",
-      "learning_objective": "Implement the transactional outbox pattern to guarantee atomic database updates and event publishing.",
+      "learning_objective": "Implement at-least-once delivery semantics with idempotency keys, build a deduplication store, and apply exponential backoff retry logic in Go consumers.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-12"
@@ -53343,7 +53343,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/12-payment-workflow-design/main_test.go"
       },
       "id": "core-14-12",
-      "learning_objective": "Architect multi-tenant backend systems with database-per-tenant, schema-per-tenant, or column-scoped isolation.",
+      "learning_objective": "Design a payment workflow using the saga pattern with compensating transactions, implement a workflow state machine in Go, and handle failures gracefully without leaving the system in an inconsistent state.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-13"
@@ -53537,7 +53537,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/13-multi-tenancy-architecture/main_test.go"
       },
       "id": "core-14-13",
-      "learning_objective": "Enforce strict tenant data boundaries across API handlers, background workers, and caching layers.",
+      "learning_objective": "Implement tenant isolation models (silent, shared, hybrid) in Go, propagate tenant context through the application using context.Context, and scope database queries by tenant identifier at the row level.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-14"
@@ -53732,7 +53732,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/14-caching-architecture/main_test.go"
       },
       "id": "core-14-14",
-      "learning_objective": "Design multi-tier caching architectures (in-memory L1, distributed Redis L2) with cache-aside and write-through patterns.",
+      "learning_objective": "Implement cache-aside, read-through, and write-behind caching strategies in Go, understand cache hierarchy in distributed systems, and measure hit rate, miss rate, and staleness tradeoffs.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-15"
@@ -53921,7 +53921,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/15-when-to-split-services/main_test.go"
       },
       "id": "core-14-15",
-      "learning_objective": "Evaluate organizational and technical criteria for splitting monolithic codebases into independent microservices.",
+      "learning_objective": "Identify bounded contexts that are candidates for service splitting, evaluate team size and deployment coupling triggers, design splitting strategies (strangler fig, database separation, event-driven), and apply data ownership principles.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-16"
@@ -54117,7 +54117,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/16-microservices-as-a-tradeoff-not-a-default/main_test.go"
       },
       "id": "core-14-16",
-      "learning_objective": "Recognize microservices as an organizational tradeoff rather than a default architecture, evaluating operational costs.",
+      "learning_objective": "Evaluate the concrete tradeoffs of microservices vs monoliths for a given system, calculate the latency cost of distributed calls, and apply a decision framework that recommends microservices only when the benefits outweigh the costs.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-17"
@@ -54314,7 +54314,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/17-architecture-decision-records/main_test.go"
       },
       "id": "core-14-17",
-      "learning_objective": "Author Architecture Decision Records (ADRs) documenting architectural context, options considered, decisions, and consequences.",
+      "learning_objective": "Write architecture decision records (ADRs) using the standard format, manage the ADR lifecycle from proposal to supersession, document tradeoffs with pros and cons, and implement a Go-based ADR management tool.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-15-01"

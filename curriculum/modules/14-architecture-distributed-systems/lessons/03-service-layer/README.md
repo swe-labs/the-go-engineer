@@ -83,6 +83,8 @@ import (
 	"fmt"
 )
 
+var errUserNotFound = errors.New("user not found")
+
 type User struct {
 	ID    string
 	Name  string
@@ -93,8 +95,6 @@ type UserRepository interface {
 	Save(user User) error
 	FindByID(id string) (User, error)
 }
-
-var errUserNotFound = errors.New("user not found")
 
 type UserService struct {
 	repo UserRepository
@@ -147,10 +147,18 @@ func main() {
 	repo := newInMemoryUserRepo()
 	svc := NewUserService(repo)
 
-	user, _ := svc.Register("Alice", "alice@example.com")
+	user, err := svc.Register("Alice", "alice@example.com")
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	fmt.Printf("Registered: %+v\n", user)
 
-	fetched, _ := svc.GetUser(user.ID)
+	fetched, err := svc.GetUser(user.ID)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	fmt.Printf("Fetched: %+v\n", fetched)
 }
 ```
