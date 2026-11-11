@@ -1,6 +1,9 @@
 package main
 
 import (
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
 	"strings"
 	"testing"
 )
@@ -111,5 +114,71 @@ func TestValidateName_InvalidChars(t *testing.T) {
 func TestValidateName_Valid(t *testing.T) {
 	if err := validateName("alice_123"); err != nil {
 		t.Errorf("expected nil, got %v", err)
+	}
+}
+
+func TestCreateUserHandler_JSONResponses(t *testing.T) {
+	tests := []struct {
+		name           string
+		method         string
+		body           string
+		wantStatus     int
+		wantCT         string
+		wantErrorSub   string
+		wantCreatedUsr string
+	}{
+		{
+			name:         "unknown field produces valid JSON error",
+			method:       http.MethodPost,
+			body:         `{"username":"alice","email":"alice@example.com","password":"secret123","role":"admin"}`,
+			wantStatus:   http.StatusBadRequest,
+			wantCT:       "application/json",
+			wantErrorSub: `unknown field "role"`,
+		},
+		{
+			name:         "malformed JSON produces valid JSON error",
+			method:       http.MethodPost,
+			body:         `{"username":`,
+			wantStatus:   http.StatusBadRequest,
+			wantCT:       "application/json",
+			wantErrorSub: "invalid JSON:",
+		},
+		{
+			name:           "valid payload returns created JSON",
+			method:         http.MethodPost,
+			body:           `{"username":"alice","email":"alice@example.com","password":"secret123"}`,
+			wantStatus:     http.StatusCreated,
+			wantCT:         "application/json",
+			wantCreatedUsr: "alice",
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			req := httptest.NewRequest(tc.method, "/users", strings.NewReader(tc.body))
+			rec := httptest.NewRecorder()
+			createUserHandler(rec, req)
+
+			if rec.Code != tc.wantStatus {
+				t.Fatalf("status = %d, want %d; body=%s", rec.Code, tc.wantStatus, rec.Body.String())
+			}
+			if gotCT := rec.Header().Get("Content-Type"); !strings.Contains(gotCT, tc.wantCT) {
+				t.Errorf("Content-Type = %q, want %q", gotCT, tc.wantCT)
+			}
+
+			var payload map[string]any
+			if err := json.Unmarshal(rec.Body.Bytes(), &payload); err != nil {
+				t.Fatalf("response is not valid JSON (%v): %s", err, rec.Body.String())
+			}
+			if tc.wantErrorSub != "" {
+				errMsg, _ := payload["error"].(string)
+				if !strings.Contains(errMsg, tc.wantErrorSub) {
+					t.Errorf("error = %q, want substring %q", errMsg, tc.wantErrorSub)
+				}
+			}
+			if tc.wantCreatedUsr != "" && payload["username"] != tc.wantCreatedUsr {
+				t.Errorf("username = %v, want %q", payload["username"], tc.wantCreatedUsr)
+			}
+		})
 	}
 }
