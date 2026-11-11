@@ -121,3 +121,26 @@ func TestCheckGovulncheckInstalled(t *testing.T) {
 	result := checkGovulncheckInstalled()
 	_ = result
 }
+
+func TestVersionLess(t *testing.T) {
+	tests := []struct {
+		a, b string
+		want bool
+		desc string
+	}{
+		{"v0.16.0", "v0.17.0", true, "older core is less"},
+		{"v0.18.0", "v0.17.0", false, "newer core is NOT less"},
+		{"v1.0.0-rc.1", "v1.0.0", true, "prerelease sorts before its release"},
+		{"v1.0.0", "v1.0.0-rc.1", false, "release sorts after its prerelease"},
+		{"v1.0.0-rc.1", "v0.17.0", false, "newer core with prerelease suffix is NOT less (regression)"},
+		{"v2.0.0+incompatible", "v2.0.0", false, "build metadata ignored (regression)"},
+		{"v0.17.0", "v0.17.0", false, "equal versions are NOT less"},
+	}
+	for _, tc := range tests {
+		t.Run(tc.desc, func(t *testing.T) {
+			if got := versionLess(tc.a, tc.b); got != tc.want {
+				t.Errorf("versionLess(%s, %s) = %v, want %v", tc.a, tc.b, got, tc.want)
+			}
+		})
+	}
+}

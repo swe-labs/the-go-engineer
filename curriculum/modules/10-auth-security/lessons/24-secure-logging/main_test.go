@@ -71,6 +71,11 @@ func TestRedactCaseInsensitive(t *testing.T) {
 		"Password": "s3cret!",
 		"SECRET":   "my-secret",
 		"Token":    "abc123",
+		// The camelCase spelling must hit the lowercase "apikey" entry
+		// (regression: the map once carried "apiKey", which the
+		// lowercased lookup could never match - a plaintext leak).
+		"apiKey": "sk-live-xyz",
+		"APIKey": "sk-live-xyz",
 	}
 
 	result := logger.redact(fields)

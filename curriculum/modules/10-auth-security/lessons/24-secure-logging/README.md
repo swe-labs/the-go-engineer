@@ -150,9 +150,12 @@ type SecureLogger struct {
 func NewSecureLogger(minLevel LogLevel) *SecureLogger {
 	return &SecureLogger{
 		MinLevel: minLevel,
+		// Keys must be lowercase: redact() lowercases field names before
+		// lookup, so a mixed-case entry like "apiKey" would never match
+		// (field "apiKey" or "APIKey" looks up "apikey").
 		RedactedKeys: map[string]bool{
 			"password": true, "secret": true, "token": true,
-			"api_key": true, "apiKey": true, "access_token": true,
+			"api_key": true, "apikey": true, "access_token": true,
 			"refresh_token": true, "ssn": true, "credit_card": true,
 			"cvv": true, "cvc": true, // PCI DSS: never store or log CVV at all
 		},
@@ -256,7 +259,7 @@ func main() {
 		fmt.Printf("  [%s] %s: %s\n", e.Level, e.Timestamp, e.Message)
 	}
 
-	fmt.Println("\nNote: Passwords, credit cards, tokens, and CVV codes are redacted. PCI DSS prohibits storing CVV anywhere post-authorization - redaction is the backstop, not the fix.")
+	fmt.Println("\nNote: Passwords, credit cards, and tokens are redacted.")
 	fmt.Println("Sensitive fields should never appear in logs.")
 }
 ```

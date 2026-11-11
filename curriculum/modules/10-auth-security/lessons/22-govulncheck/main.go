@@ -79,10 +79,13 @@ func versionLess(a, b string) bool {
 	}
 	pa, aPre := parse(a)
 	pb, bPre := parse(b)
-	if aPre != bPre {
-		return aPre
+	coreLess := pa[0] < pb[0] || (pa[0] == pb[0] && (pa[1] < pb[1] || (pa[1] == pb[1] && pa[2] < pb[2])))
+	coreGreater := pa[0] > pb[0] || (pa[0] == pb[0] && (pa[1] > pb[1] || (pa[1] == pb[1] && pa[2] > pb[2])))
+	if coreLess || coreGreater {
+		return coreLess
 	}
-	return pa[0] < pb[0] || (pa[0] == pb[0] && (pa[1] < pb[1] || (pa[1] == pb[1] && pa[2] < pb[2])))
+	// Equal core versions: a prerelease sorts before its release.
+	return aPre && !bPre
 }
 
 func checkGovulncheckInstalled() bool {
