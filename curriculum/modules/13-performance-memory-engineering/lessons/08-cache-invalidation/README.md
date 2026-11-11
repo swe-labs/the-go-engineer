@@ -52,9 +52,9 @@ Each strategy is appropriate for different consistency requirements:
 
 In Go, cache invalidation typically uses one of three patterns:
 
-1. **Cache-aside with delete**: The application reads from cache first. On cache miss, reads from DB and populates the cache. On writes, it updates the DB and deletes the cache entry (or updates it). This is the most common pattern because it handles concurrent writes safely — deleting is idempotent, and the next read fetches fresh data.
+1. **Cache-aside with delete**: The application reads from cache first. On cache miss, reads from DB and populates the cache. On writes, it updates the DB and deletes the cache entry (or updates it). This is the most common pattern — but note the race window: a reader that fetched the old DB value just before the writer commits can repopulate the cache with stale data after the delete. The stale entry survives until its TTL expires, so cache-aside alone is not strongly consistent; bound the staleness with TTLs, use versioned keys, or prefer write-through when read-your-writes matters.
 
-2. **Write-through**: The application updates both cache and DB atomically. Go has no built-in distributed transaction support, so this requires coordinating a two-phase commit between cache (Redis) and DB (PostgreSQL) — typically implemented with the outbox pattern: write to a DB table, a separate process reads the outbox and updates the cache.
+2. **Write-through with an outbox**: The application commits the DB update and an outbox record in one atomic database transaction; a separate relay process reads the outbox and updates the cache asynchronously. This does NOT make the cache write atomic with the DB write — readers can still see briefly stale cache entries until the relay runs — but it guarantees the cache update is never lost, which is the property write-through actually needs.
 
 3. **Cache stampede prevention**: When a popular key expires and multiple requests simultaneously try to refresh it, they all hit the DB. `golang.org/x/sync/singleflight` coalesces concurrent calls: only one goroutine performs the DB query; the rest wait for its result. Probabilistic early expiration (PEE) adds jitter to TTLs: each entry expires at `baseTTL + rand(0, jitterWindow)` so not all entries expire simultaneously.
 
