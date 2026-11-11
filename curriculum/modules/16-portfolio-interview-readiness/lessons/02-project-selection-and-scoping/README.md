@@ -114,18 +114,18 @@ func (c ComplexityLevel) String() string {
 }
 
 type ProjectScope struct {
-	Name             string
-	Description      string
-	NumFeatures      int
-	NumIntegrations  int
-	HasAuth          bool
-	HasDatabase      bool
-	HasExternalAPI   bool
-	NeedsUI          bool
-	TeamSize         int
-	EstimatedWeeks   float64
-	Complexity       ComplexityLevel
-	RiskFactors      []string
+	Name            string
+	Description     string
+	NumFeatures     int
+	NumIntegrations int
+	HasAuth         bool
+	HasDatabase     bool
+	HasExternalAPI  bool
+	NeedsUI         bool
+	TeamSize        int
+	EstimatedWeeks  float64
+	Complexity      ComplexityLevel
+	RiskFactors     []string
 }
 
 type ComplexityEstimator struct {
@@ -208,23 +208,24 @@ func (s ProjectScope) Summary() string {
 
 func main() {
 	est := DefaultEstimator()
+
 	projects := []ProjectScope{
 		{
-			Name: "URL Shortener API",
+			Name:        "URL Shortener API",
 			Description: "A REST API that shortens URLs with redirect tracking and analytics",
 			NumFeatures: 4, NumIntegrations: 1,
 			HasAuth: true, HasDatabase: true, HasExternalAPI: false,
 			NeedsUI: false, TeamSize: 1,
 		},
 		{
-			Name: "CLI Task Manager",
+			Name:        "CLI Task Manager",
 			Description: "A command-line task management tool with local storage",
 			NumFeatures: 3, NumIntegrations: 0,
 			HasAuth: false, HasDatabase: true, HasExternalAPI: false,
 			NeedsUI: false, TeamSize: 1,
 		},
 		{
-			Name: "Full SaaS Dashboard",
+			Name:        "Full SaaS Dashboard",
 			Description: "A full-featured SaaS dashboard with multi-tenant auth and analytics",
 			NumFeatures: 8, NumIntegrations: 3,
 			HasAuth: true, HasDatabase: true, HasExternalAPI: true,

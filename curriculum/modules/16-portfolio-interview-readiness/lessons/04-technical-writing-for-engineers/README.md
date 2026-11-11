@@ -280,6 +280,7 @@ func (r DocReport) Summary() string {
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: go run . <file.go>")
+		fmt.Println("Example: go run . main.go")
 		os.Exit(1)
 	}
 

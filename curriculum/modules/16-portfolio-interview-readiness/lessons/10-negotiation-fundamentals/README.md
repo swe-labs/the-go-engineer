@@ -6,7 +6,7 @@ Evaluate job offers by calculating total compensation across salary, equity, bon
 
 ## Why this matters
 
-Most engineers focus exclusively on base salary during negotiations, leaving 20-40% of total compensation on the table. Equity, signing bonuses, performance bonuses, remote budgets, education stipends, and other perks can dramatically change the value of an offer. Companies expect candidates to negotiate. A well-prepared negotiation signals seniority and confidence. Engineers who negotiate earn 15-30% more over their careers than those who accept the first offer.
+Most engineers focus exclusively on base salary during negotiations, ignoring the components that often make up a large share of total compensation. Equity, signing bonuses, performance bonuses, remote budgets, education stipends, and other perks can change an offer's value dramatically — and unlike base salary, some of these are easier for a hiring manager to flex. Companies expect candidates to negotiate; a well-prepared negotiation signals seniority and confidence.
 
 ## Mental model
 
@@ -76,7 +76,7 @@ type Compensation struct {
 	BaseSalary     float64
 	EquityPerYear  float64
 	SigningBonus   float64
-	AnnualBonusPct float64
+	AnnualBonusPct float64 // percentage of base
 	RemoteBudget   float64
 	OtherPerks     float64
 }
@@ -90,8 +90,12 @@ type Offer struct {
 
 func (o Offer) TotalFirstYear() float64 {
 	c := o.Comp
-	return c.BaseSalary + c.EquityPerYear + c.SigningBonus +
-		(c.BaseSalary * c.AnnualBonusPct / 100) + c.RemoteBudget + c.OtherPerks
+	return c.BaseSalary + c.EquityPerYear + c.SigningBonus + (c.BaseSalary * c.AnnualBonusPct / 100) + c.RemoteBudget + c.OtherPerks
+}
+
+func (o Offer) TotalRecurring() float64 {
+	c := o.Comp
+	return c.BaseSalary + c.EquityPerYear + (c.BaseSalary * c.AnnualBonusPct / 100) + c.RemoteBudget + c.OtherPerks
 }
 
 type ComparisonResult struct {
@@ -104,11 +108,14 @@ type ComparisonResult struct {
 func CompareOffers(offers []Offer) []ComparisonResult {
 	var results []ComparisonResult
 	for _, o := range offers {
+		fy := o.TotalFirstYear()
+		rec := o.TotalRecurring()
+		monthly := fy / 12
 		results = append(results, ComparisonResult{
 			Offer:      o,
-			FirstYear:  o.TotalFirstYear(),
-			Recurring:  o.TotalRecurring(),
-			MonthlyNet: o.TotalFirstYear() / 12,
+			FirstYear:  fy,
+			Recurring:  rec,
+			MonthlyNet: monthly,
 		})
 	}
 	return results
@@ -116,18 +123,56 @@ func CompareOffers(offers []Offer) []ComparisonResult {
 
 func main() {
 	offers := []Offer{
-		{Company: "Stripe", Title: "Senior Backend Engineer", Location: "Remote US",
-			Comp: Compensation{BaseSalary: 185000, EquityPerYear: 45000, SigningBonus: 30000, AnnualBonusPct: 10, RemoteBudget: 5000}},
-		{Company: "GitLab", Title: "Senior Go Engineer", Location: "Remote Global",
-			Comp: Compensation{BaseSalary: 165000, EquityPerYear: 35000, SigningBonus: 15000, AnnualBonusPct: 15, RemoteBudget: 5000, OtherPerks: 3000}},
-		{Company: "Shopify", Title: "Backend Developer", Location: "Remote Canada",
-			Comp: Compensation{BaseSalary: 175000, EquityPerYear: 25000, SigningBonus: 10000, AnnualBonusPct: 5, RemoteBudget: 2000}},
+		{
+			Company:  "Stripe",
+			Title:    "Senior Backend Engineer",
+			Location: "Remote US",
+			Comp: Compensation{
+				BaseSalary:     185000,
+				EquityPerYear:  45000,
+				SigningBonus:   30000,
+				AnnualBonusPct: 10,
+				RemoteBudget:   5000,
+			},
+		},
+		{
+			Company:  "GitLab",
+			Title:    "Senior Go Engineer",
+			Location: "Remote Global",
+			Comp: Compensation{
+				BaseSalary:     165000,
+				EquityPerYear:  35000,
+				SigningBonus:   15000,
+				AnnualBonusPct: 15,
+				RemoteBudget:   5000,
+				OtherPerks:     3000,
+			},
+		},
+		{
+			Company:  "Shopify",
+			Title:    "Backend Developer",
+			Location: "Remote Canada",
+			Comp: Compensation{
+				BaseSalary:     175000,
+				EquityPerYear:  25000,
+				SigningBonus:   10000,
+				AnnualBonusPct: 5,
+				RemoteBudget:   2000,
+			},
+		},
 	}
+
 	results := CompareOffers(offers)
-	fmt.Printf("%-20s %15s %15s %15s\n", "Company", "First Year", "Recurring", "Monthly")
-	fmt.Println(strings.Repeat("-", 65))
+	fmt.Printf("%-20s %-30s %15s %15s %15s\n", "Company", "Role", "First Year", "Recurring", "Monthly")
+	fmt.Println("------" + strings.Repeat("-", 75))
 	for _, r := range results {
-		fmt.Printf("%-20s $%12.0f $%12.0f $%12.0f\n", r.Offer.Company, r.FirstYear, r.Recurring, r.MonthlyNet)
+		fmt.Printf("%-20s %-30s $%12.0f $%12.0f $%12.0f\n",
+			r.Offer.Company,
+			r.Offer.Title,
+			r.FirstYear,
+			r.Recurring,
+			r.MonthlyNet,
+		)
 	}
 }
 ```

@@ -45,7 +45,7 @@ The most important rule: one post, one concept. If you try to cover goroutines, 
 
 ## Under the hood
 
-Readers scan before they read. Eye-tracking studies show developers jump to code blocks first, then headings, then bullet lists. Design your post for scanning:
+Readers scan before they read: on technical posts, developers typically jump to code blocks first, then headings, then bullet lists. Design your post for scanning:
 
 1. **Code blocks are anchors.** Every code block should be independently understandable. Add comments inside code blocks for readers who skip the prose.
 2. **Headings tell the story.** A reader should understand the post's argument by reading only the headings. Make them descriptive: "Why buffered channels can hide bugs" not "Channels."
@@ -87,6 +87,7 @@ type BlogPost struct {
 type BlogQuality struct {
 	Post            BlogPost
 	TotalWords      int
+	AvgSectionWords float64
 	CodeRatio       float64
 	HasIntro        bool
 	HasConclusion   bool
@@ -100,6 +101,9 @@ func AnalyzePost(post BlogPost) BlogQuality {
 	for _, s := range post.Sections {
 		q.TotalWords += s.WordCount
 		totalCodeWords += s.CodeBlocks * 30
+	}
+	if len(post.Sections) > 0 {
+		q.AvgSectionWords = float64(q.TotalWords) / float64(len(post.Sections))
 	}
 	if q.TotalWords > 0 {
 		q.CodeRatio = float64(totalCodeWords) / float64(q.TotalWords) * 100
@@ -116,11 +120,16 @@ func AnalyzePost(post BlogPost) BlogQuality {
 }
 
 func scoreReadability(totalWords, sectionCount, codeWords int) string {
+	avg := float64(totalWords) / float64(max(sectionCount, 1))
 	switch {
 	case totalWords < 300:
 		return "too short"
 	case totalWords > 5000:
 		return "too long"
+	case avg < 100:
+		return "sections too short"
+	case avg > 1500:
+		return "sections too long"
 	case float64(codeWords)/float64(max(totalWords, 1)) > 0.5:
 		return "too much code"
 	default:
@@ -157,7 +166,7 @@ func GenerateOutline(post BlogPost) string {
 		}
 		b.WriteString("\n\n")
 		if i == 0 {
-			b.WriteString("> Hook: Open with a problem statement\n\n")
+			b.WriteString("> Hook: Open with a problem statement or surprising fact\n\n")
 		} else if i == len(post.Sections)-1 {
 			b.WriteString("> Key takeaway: Summarize main points\n\n")
 		} else {
@@ -167,7 +176,12 @@ func GenerateOutline(post BlogPost) string {
 	return b.String()
 }
 
-func max(a, b int) int { if a > b { return a }; return b }
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
 
 func main() {
 	post := BlogPost{
@@ -182,9 +196,11 @@ func main() {
 			{Heading: "Conclusion", WordCount: 100, CodeBlocks: 0},
 		},
 	}
+
 	q := AnalyzePost(post)
 	fmt.Printf("Analysis for: %s\n", q.Post.Title)
 	fmt.Printf("  Total words:     %d\n", q.TotalWords)
+	fmt.Printf("  Avg per section: %.0f\n", q.AvgSectionWords)
 	fmt.Printf("  Code ratio:      %.1f%%\n", q.CodeRatio)
 	fmt.Printf("  Readability:     %s\n", q.Readability)
 	fmt.Printf("  Has intro:       %v\n", q.HasIntro)
@@ -194,7 +210,10 @@ func main() {
 		for _, iss := range q.Issues {
 			fmt.Printf("    - %s\n", iss)
 		}
+	} else {
+		fmt.Println("  No issues found")
 	}
+
 	fmt.Println("\nGenerated Outline:")
 	fmt.Print(GenerateOutline(post))
 }

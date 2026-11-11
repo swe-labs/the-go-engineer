@@ -119,3 +119,7 @@ Submit your answers to the 10 questions in `questions.md` demonstrating mastery 
 ## Retake policy
 
 If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.
+
+## NEXT UP
+
+[Module 18: Flagship Opslane](../../../18-flagship-opslane/README.md)

@@ -57351,7 +57351,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/01-portfolio-strategy/main_test.go"
       },
       "id": "core-16-01",
-      "learning_objective": "Develop a job-ready understanding of Portfolio strategy.",
+      "learning_objective": "Build a standout Go engineering portfolio by selecting, analyzing, and presenting projects that demonstrate technical depth, clean code practices, and real-world impact.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-02"
@@ -57557,7 +57557,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/02-project-selection-and-scoping/main_test.go"
       },
       "id": "core-16-02",
-      "learning_objective": "Develop a job-ready understanding of Project selection and scoping.",
+      "learning_objective": "Select a portfolio project that matches your skill level and goals, define its MVP scope, estimate timeline and complexity, and avoid common scope creep traps.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-03"
@@ -57763,7 +57763,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/03-code-review-readiness/main_test.go"
       },
       "id": "core-16-03",
-      "learning_objective": "Develop a job-ready understanding of Code review readiness.",
+      "learning_objective": "Prepare Go code for professional code review by running a structured checklist across six categories (correctness, style, performance, security, reliability, maintainability) and interpreting the results to improve code quality before submitting a PR.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-04"
@@ -57962,7 +57962,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/04-technical-writing-for-engineers/main_test.go"
       },
       "id": "core-16-04",
-      "learning_objective": "Develop a job-ready understanding of Technical writing for engineers.",
+      "learning_objective": "Write clear, effective technical documentation for Go projects including README files, API documentation, architecture docs, and Go doc comments that render correctly with `godoc`.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-05"
@@ -58168,7 +58168,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/05-resume-and-linkedin-optimization/main_test.go"
       },
       "id": "core-16-05",
-      "learning_objective": "Develop a job-ready understanding of Resume and LinkedIn optimization.",
+      "learning_objective": "Craft a resume and LinkedIn profile optimized for Go engineering roles by analyzing keyword coverage, structuring achievement-based bullets, and understanding how applicant tracking systems score your profile.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-06"
@@ -58360,7 +58360,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/06-behavioral-interview-preparation/main_test.go"
       },
       "id": "core-16-06",
-      "learning_objective": "Develop a job-ready understanding of Behavioral interview preparation.",
+      "learning_objective": "Prepare for behavioral interviews using the STAR method (Situation, Task, Action, Result) and analyze your responses to ensure every story includes context, challenge, contribution, and measurable outcome.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-07"
@@ -58559,7 +58559,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/07-system-design-interview-basics/main_test.go"
       },
       "id": "core-16-07",
-      "learning_objective": "Develop a job-ready understanding of System design interview basics.",
+      "learning_objective": "Approach system design interviews with a structured framework: parse requirements, estimate capacity, identify tradeoffs, and communicate a coherent design under time pressure.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-08"
@@ -58751,7 +58751,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/08-live-coding-interview-practice/main_test.go"
       },
       "id": "core-16-08",
-      "learning_objective": "Develop a job-ready understanding of Live coding interview practice.",
+      "learning_objective": "Approach live coding interviews with a structured problem-solving framework, verbalize your thought process clearly, write testable Go code under time pressure, and handle feedback gracefully.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-09"
@@ -58950,7 +58950,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/09-take-home-project-strategy/main_test.go"
       },
       "id": "core-16-09",
-      "learning_objective": "Develop a job-ready understanding of Take-home project strategy.",
+      "learning_objective": "Develop a systematic approach to completing take-home projects that demonstrates production-quality software engineering, including requirements analysis, time management, testing strategy, documentation, and a structured submission checklist.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-10"
@@ -59142,7 +59142,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/10-negotiation-fundamentals/main_test.go"
       },
       "id": "core-16-10",
-      "learning_objective": "Develop a job-ready understanding of Negotiation fundamentals.",
+      "learning_objective": "Evaluate job offers by calculating total compensation across salary, equity, bonuses, and benefits, and apply negotiation strategies including BATNA preparation, timing, and value-anchored counter-offers.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-11"
@@ -59341,7 +59341,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/11-open-source-contribution/main_test.go"
       },
       "id": "core-16-11",
-      "learning_objective": "Develop a job-ready understanding of Open source contribution.",
+      "learning_objective": "Contribute effectively to open source Go projects by finding suitable projects, making well-scoped first contributions, following PR etiquette, participating in issue triage, and building a professional reputation through sustained quality contributions.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-12"
@@ -59533,7 +59533,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/12-technical-blog-writing/main_test.go"
       },
       "id": "core-16-12",
-      "learning_objective": "Develop a job-ready understanding of Technical blog writing.",
+      "learning_objective": "Write clear, engaging technical blog posts about Go that effectively explain concepts, demonstrate code, and connect with your target audience \u2014 using a repeatable structure that maximizes readability and impact.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-13"
@@ -59732,7 +59732,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/13-conference-talk-preparation/main_test.go"
       },
       "id": "core-16-13",
-      "learning_objective": "Develop a job-ready understanding of Conference talk preparation.",
+      "learning_objective": "Write compelling conference talk proposals, structure talks for maximum audience impact, design effective slides, and deliver live demos with confidence \u2014 increasing your acceptance rate at Go-focused conferences.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-14"
@@ -59924,7 +59924,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/14-mentorship-and-code-review/main_test.go"
       },
       "id": "core-16-14",
-      "learning_objective": "Develop a job-ready understanding of Mentorship and code review.",
+      "learning_objective": "Provide constructive, actionable code review feedback that helps other engineers grow, and practice mentorship techniques that accelerate the development of junior and peer engineers in a professional Go environment.",
       "module_id": "module-16",
       "next_item_ids": [
         "core-16-15"
@@ -60131,7 +60131,7 @@
         "test_path": "modules/16-portfolio-interview-readiness/lessons/15-career-roadmap/main_test.go"
       },
       "id": "core-16-15",
-      "learning_objective": "Develop a job-ready understanding of Career roadmap.",
+      "learning_objective": "Create a structured career development plan by analyzing your current skills against target role requirements, identifying gaps, prioritizing learning areas, and building a timeline for professional growth as a Go engineer.",
       "module_id": "module-16",
       "next_item_ids": [],
       "order": 15,

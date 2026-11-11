@@ -203,12 +203,11 @@ func (sd *SystemDesign) EstimateStorage() {
 	}
 	estimated, unit := bytesToUnit(totalBytes)
 	sd.Estimates = append(sd.Estimates, CapacityEstimate{
-		Requirement:    Requirement{Name: "Total Storage", Unit: Bytes},
-		EstimatedValue: estimated,
-		EstimatedUnit:  unit,
-		Assumptions:    []string{"assumes single-copy storage", "no compression applied"},
-		Recommendations: []string{"add replication factor (3x for durability)",
-			"consider compression (2-5x reduction)", "plan for 20% annual growth"},
+		Requirement:     Requirement{Name: "Total Storage", Unit: Bytes},
+		EstimatedValue:  estimated,
+		EstimatedUnit:   unit,
+		Assumptions:     []string{"assumes single-copy storage", "no compression applied"},
+		Recommendations: []string{"add replication factor (3x for durability)", "consider compression (2-5x reduction)", "plan for 20% annual growth"},
 	})
 }
 
@@ -223,13 +222,20 @@ func (sd *SystemDesign) EstimateThroughput() {
 	peakRPS := totalRPS * 2.0
 
 	sd.Estimates = append(sd.Estimates, CapacityEstimate{
-		Requirement:    Requirement{Name: "Throughput", Value: totalRPS, Unit: RequestsPerSecond},
-		EstimatedValue: peakRPS,
-		EstimatedUnit:  RequestsPerSecond,
-		Assumptions:    []string{"peak traffic is 2x average", fmt.Sprintf("annual growth rate: %.0f%%", (growth-1)*100)},
-		Recommendations: []string{"design for 2x peak headroom", "use connection pooling",
-			"consider CDN for static content"},
+		Requirement:     Requirement{Name: "Throughput", Value: totalRPS, Unit: RequestsPerSecond},
+		EstimatedValue:  peakRPS,
+		EstimatedUnit:   RequestsPerSecond,
+		Assumptions:     []string{"peak traffic is 2x average", fmt.Sprintf("annual growth rate: %.0f%%", (growth-1)*100)},
+		Recommendations: []string{"design for 2x peak headroom", "use connection pooling", "consider CDN for static content"},
 	})
+
+	storageRPS := totalRPS * 365 * 86400
+	for _, req := range sd.Requirements {
+		if req.Unit == Records {
+			storageRPS *= req.Value
+		}
+	}
+	_ = storageRPS
 }
 
 func (sd *SystemDesign) PrintReport() string {
