@@ -62,7 +62,7 @@ TTL expiration uses lazy eviction (check on `Get`) plus a periodic cleanup gorou
 
 - The standard library's `net/http` uses an internal cache for parsed HTTP header keys.
 - `encoding/json` caches `reflect.Type` metadata for struct tags.
-- The Go compiler uses a cache for `buildid` lookups and import graph resolution.
+- The Go build system keeps a content-addressed build cache (artifacts keyed by input hashes), which is why unchanged packages rebuild instantly.
 - Kubernetes API server uses an in-memory cache backed by etcd watches.
 - Most Go web frameworks (Gin, Echo, Fiber) provide middleware for response caching.
 

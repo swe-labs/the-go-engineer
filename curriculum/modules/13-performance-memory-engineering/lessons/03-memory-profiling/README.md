@@ -48,11 +48,11 @@ The default view for `go tool pprof` on a heap profile is `inuse_space`. For lea
 
 ## Under the hood
 
-Heap profiling lives in `runtime/mprof.go`. Each M (OS thread) maintains a per-thread allocation counter. When `mallocgc` is called, it increments the counter by the allocation size. When the counter exceeds `MemProfileRate / 2` (default 512 KB / 2 = 256 KB), the runtime generates a random number between 0 and `MemProfileRate - 1`. If the counter exceeds this random number, a sample is taken. This produces an average sampling rate of one sample per `MemProfileRate` bytes allocated.
+Heap profiling lives in `runtime/mprof.go`. Each thread maintains a `nextSample` counter drawn from an exponential distribution with mean `MemProfileRate` (default 512×1024). `mallocgc` subtracts each allocation's size from the counter; when it goes negative, a sample is taken and a new counter is drawn — so on average one sample lands per `MemProfileRate` bytes allocated. Allocations at least half the rate are sampled with probability proportional to their size.
 
-On a sample, `recordstacktrace` captures up to 32 PC values from the current goroutine's stack. The record is stored in a global slice of `MemProfileRecord` entries. Each record contains: `AllocBytes` (total bytes allocated at this site), `FreeBytes` (bytes freed), `AllocObjects` (count allocated), `FreeObjects` (count freed), and the stack trace. On `WriteHeapProfile`, the runtime iterates all records, computes `inuse = AllocBytes - FreeBytes`, and serializes as a pprof profile.
+On a sample, the runtime captures up to 32 PC values from the current goroutine's stack (`MemProfileRecord.Stack0 [32]uintptr`). The record is stored in a hash table keyed by the stack trace — repeated allocations from the same call site merge into one accumulating record. Each record contains: `AllocBytes` (total bytes allocated at this site), `FreeBytes` (bytes freed), `AllocObjects` (count allocated), `FreeObjects` (count freed), and the stack trace. On `WriteHeapProfile`, the runtime iterates the live records, computes `inuse = AllocBytes - FreeBytes`, and serializes as a pprof profile.
 
-The key sampling invariance: the probability of sampling a particular allocation is proportional to its size, not its frequency. A 1 KB allocation is 1000x more likely to be sampled than a 1-byte allocation.
+The key sampling invariance: the expected number of samples for a particular allocation pattern is proportional to bytes allocated, not call frequency. A 1 KB allocation is roughly 1000x more likely to be sampled than a 1-byte allocation, and allocations at least half the rate (256 KB at default settings) are sampled with probability `size/rate`.
 
 ## How Go uses it
 

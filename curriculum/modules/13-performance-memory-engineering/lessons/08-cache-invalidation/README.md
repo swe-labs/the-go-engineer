@@ -64,7 +64,7 @@ In Go, cache invalidation typically uses one of three patterns:
 - The `hashicorp/golang-lru` package provides LRU eviction with optional `evicted` callbacks for write-invalidate patterns.
 - Redis (`go-redis`) supports SET with `NX` (set if not exists) for distributed write-invalidate and EXPIRE for TTL.
 - etcd's watch mechanism is the foundation for Kubernetes' cache invalidation: clients watch for resource changes and invalidate local caches.
-- The Go community's `groupcache` implements a distributed cache with consistent hashing and automatic invalidation via peer communication.
+- The Go community's `groupcache` implements a distributed cache with consistent hashing and peer-to-peer fetch dedup — notably it has **no invalidation at all** (entries are immutable until eviction), which is itself an instructive design choice: some systems sidestep invalidation by never mutating cached data.
 
 ## Go example
 
@@ -148,6 +148,12 @@ func (c *StaleWhileRevalidateCache) Delete(key string) {
 
 func (c *StaleWhileRevalidateCache) Invalidate(key string) {
 	c.Delete(key)
+}
+
+func (c *StaleWhileRevalidateCache) Len() int {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return len(c.entries)
 }
 
 func main() {

@@ -111,3 +111,7 @@ Submit your detailed answers for Scenarios 1–5 alongside your verified code an
 ## Retake policy
 
 If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.
+
+## NEXT UP
+
+[Module 14: Architecture and Distributed Systems](../../../14-architecture-distributed-systems/README.md)

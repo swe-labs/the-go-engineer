@@ -50464,7 +50464,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/01-pprof/main_test.go"
       },
       "id": "core-13-01",
-      "learning_objective": "Analyze memory alignment, field ordering, and struct padding to optimize struct memory layout.",
+      "learning_objective": "Capture CPU and heap profiles programmatically using `runtime/pprof`, serve them via `net/http/pprof`, and inspect them with `go tool pprof` to identify performance hotspots and memory patterns in Go programs.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-02"
@@ -50605,7 +50605,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/02-cpu-profiling/main_test.go"
       },
       "id": "core-13-02",
-      "learning_objective": "Inspect compiler escape analysis decisions using -gcflags=\"-m\" to determine stack vs heap allocations.",
+      "learning_objective": "Collect CPU profiles from Go programs, interpret the output of `go tool pprof`, identify hotspots using `top`, `list`, and `web` commands, and read flame graphs to prioritize optimization targets.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-03"
@@ -50752,7 +50752,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/03-memory-profiling/main_test.go"
       },
       "id": "core-13-03",
-      "learning_objective": "Analyze the Go runtime tri-color mark-and-sweep garbage collector, allocation pacing, and GOGC tuning.",
+      "learning_objective": "Collect and interpret Go heap profiles, distinguish between alloc_objects, alloc_space, inuse_objects, and inuse_space views, detect memory leaks by comparing heap profiles over time, and identify the call sites responsible for excessive allocation.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-04"
@@ -50896,7 +50896,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/04-benchmarks/main_test.go"
       },
       "id": "core-13-04",
-      "learning_objective": "Capture and analyze CPU profiles using pprof to locate functions consuming the most execution time.",
+      "learning_objective": "Write and run Go benchmark functions using `testing.B`, interpret benchmark output, use `-benchmem` to measure allocations, compare benchmark results with `benchstat`, and apply benchmarks to prevent performance regressions.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-05"
@@ -51037,7 +51037,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/05-escape-analysis/main_test.go"
       },
       "id": "core-13-05",
-      "learning_objective": "Capture and analyze heap memory allocation profiles using pprof to eliminate hot allocation paths.",
+      "learning_objective": "Explain how the Go compiler decides whether to allocate a value on the stack or heap, use `go build -gcflags=-m` to inspect escape analysis decisions, and write code that minimizes heap allocations by keeping values on the stack.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-06"
@@ -51182,7 +51182,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/06-memory-layout/main_test.go"
       },
       "id": "core-13-06",
-      "learning_objective": "Compare benchmark results and verify statistical significance of optimizations using benchstat.",
+      "learning_objective": "Explain how Go aligns struct fields in memory, use `unsafe.Sizeof` and `unsafe.Offsetof` to measure struct sizes and field offsets, reorder struct fields to minimize padding waste, and understand how struct layout affects CPU cache utilization.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-07"
@@ -51330,7 +51330,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/07-caching-basics/main_test.go"
       },
       "id": "core-13-07",
-      "learning_objective": "Implement in-memory caching with TTL expiration, cache invalidation, and memory budget caps.",
+      "learning_objective": "Build an in-memory cache in Go with TTL expiry and concurrent access safety, choose between `sync.Map` and `map` with `sync.RWMutex` for different access patterns, implement LRU eviction, and understand read-through vs write-through cache strategies.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-08"
@@ -51476,7 +51476,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/08-cache-invalidation/main_test.go"
       },
       "id": "core-13-08",
-      "learning_objective": "Profile and resolve lock contention bottlenecks in concurrent code using mutex and block profiles.",
+      "learning_objective": "Implement cache invalidation strategies in Go, including TTL-based expiry, write-invalidate, write-update, and stale-while-revalidate patterns, and prevent cache stampede using singleflight and probabilistic early expiration.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-14-01"

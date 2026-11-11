@@ -44,9 +44,9 @@ pprof collects stack trace samples at runtime and groups them by call path. The 
 
 ## Under the hood
 
-The `runtime/pprof` package hooks into the Go runtime's sampling infrastructure. For CPU profiling, the runtime installs a SIGPROF signal handler (on Unix) that fires at the configured frequency (default 100 Hz). On each signal, the handler reads the interrupted goroutine's program counter and stack pointer from the signal context, unwinds the stack using Go's metadata table (`gopclntab`), and hashes the resulting call stack into a fixed-size hash table with an incrementing count.
+The `runtime/pprof` package hooks into the Go runtime's sampling infrastructure. For CPU profiling, the runtime installs a SIGPROF signal handler (on Unix) that fires at the configured frequency (default 100 Hz). On each signal, the handler reads the interrupted goroutine's program counter and stack pointer from the signal context, unwinds the stack using Go's metadata table (`gopclntab`), and appends the resulting call stack to a lock-free `profBuf` ring buffer — a dedicated writer goroutine streams samples to the output incrementally (verified in `runtime/cpuprof.go`: no hash table, no FNV hashing).
 
-For heap profiling, the sampling happens at allocation time. Each call to `runtime.mallocgc` increments a per-thread allocation counter. When the counter exceeds `MemProfileRate / 2` (default 512 KB / 2 = 256 KB), the runtime generates a random number and decides whether to sample. On a sample, it captures up to 32 stack frames and stores the record with allocated bytes, freed bytes, and object counts.
+For heap profiling, the sampling happens at allocation time. Each thread maintains a `nextSample` counter drawn from an exponential distribution with mean `MemProfileRate` (default 512×1024, verified in `runtime/mprof.go`). Every allocation decrements the counter by its size; when it goes negative, a sample is taken and a new counter is drawn. Large allocations (half the rate or more) are sampled with probability proportional to their size. On a sample, the runtime captures the stack (32 frames for memory records — `MemProfileRecord.Stack0 [32]uintptr`) and stores allocated bytes, freed bytes, and object counts.
 
 The `net/http/pprof` package registers HTTP handlers on `DefaultServeMux` at paths like `/debug/pprof/`, `/debug/pprof/heap`, and `/debug/pprof/profile`. When a request arrives, it calls the corresponding `runtime/pprof` function and streams the protobuf-encoded profile to the HTTP response.
 
@@ -112,6 +112,7 @@ func main() {
 	}
 
 	fmt.Println("Profiles written to cpu.pprof and heap.pprof")
+
 	time.Sleep(100 * time.Millisecond)
 }
 ```
@@ -173,11 +174,11 @@ This shows the exact lines within `cacheEntries` that allocate. If the function 
 - Import `net/http/pprof` with a blank identifier: `import _ "net/http/pprof"`. This registers debug handlers on the default mux. For security, use a separate HTTP server on an internal port.
 - Profile overhead: CPU profiling adds ~5% CPU overhead at 100 Hz. Heap profiling adds ~1-3% allocation overhead. Enable profiling only during investigation windows, or use a continuous profiler (Datadog, Google Cloud Profiler) that respects rate limits.
 - In Kubernetes, expose pprof on a separate container port and configure the liveness probe to collect a heap profile on OOM risk.
-- Profile file sizes: a 30-second CPU profile is typically 50-200 KB. Heap profiles are 10-50 KB. These are safe to store and compare.
+- Profile file sizes are modest — a 30-second CPU profile and a heap profile are both typically in the tens-to-hundreds of KB range, safe to store and compare. Exact size depends on stack depth and sample count.
 
 ## Performance implications
 
-Profiling itself has a cost. The signal handler for CPU profiling runs at 100 Hz and performs stack unwinding, hashing, and hash table insertion. This adds approximately 5% CPU overhead. Heap profiling samples 1 in every ~512 KB of allocation, adding roughly 1-3% overhead to allocation-heavy code. In latency-sensitive paths, consider disabling profiling during normal operation and enabling it only when investigating a specific issue.
+Profiling itself has a cost. The signal handler for CPU profiling runs at 100 Hz and performs stack unwinding and buffer appends (a dedicated writer goroutine does the serialization). This adds a few percent of CPU overhead. Heap profiling samples 1 in every ~512 KB of allocation, adding roughly 1-3% overhead to allocation-heavy code. In latency-sensitive paths, consider disabling profiling during normal operation and enabling it only when investigating a specific issue.
 
 ## Practice task
 
