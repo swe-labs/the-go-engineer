@@ -62,10 +62,16 @@ func checkVulnerabilities(modules []ModuleVersion, vulnDB *VulnDB) []VulnEntry {
 // Production code should use golang.org/x/mod/semver.
 func versionLess(a, b string) bool {
 	parse := func(v string) ([3]int, bool) {
+		// Build metadata (+incompatible) is ignored for ordering; only a
+		// "-" suffix after the core version marks a prerelease, which sorts
+		// before its release. Production code should use semver.Compare.
+		prerelease := strings.Contains(strings.TrimPrefix(v, "v"), "-")
+		core := v
+		if i := strings.IndexAny(v, "-+"); i >= 0 {
+			core = v[:i]
+		}
 		var out [3]int
-		prerelease := strings.ContainsAny(v, "-+")
-		v = strings.TrimPrefix(v, "v")
-		parts := strings.SplitN(v, ".", 3)
+		parts := strings.SplitN(strings.TrimPrefix(core, "v"), ".", 3)
 		for i, p := range parts {
 			fmt.Sscanf(p, "%d", &out[i])
 		}

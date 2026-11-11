@@ -155,7 +155,6 @@ func NewSecureLogger(minLevel LogLevel) *SecureLogger {
 			"api_key": true, "apiKey": true, "access_token": true,
 			"refresh_token": true, "ssn": true, "credit_card": true,
 			"cvv": true, "cvc": true, // PCI DSS: never store or log CVV at all
-			"cvv": true, "cvc": true, // PCI DSS: never store or log CVV at all
 		},
 	}
 }
