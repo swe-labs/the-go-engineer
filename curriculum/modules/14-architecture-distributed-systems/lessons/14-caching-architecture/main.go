@@ -131,13 +131,17 @@ type CacheHierarchy struct {
 }
 
 func NewCacheHierarchy(l1ttl, l2ttl time.Duration, load func(string) (string, error)) *CacheHierarchy {
-	return &CacheHierarchy{
-		l1: NewCacheAside(l1ttl, func(key string) (string, error) {
-			val, err := load(key)
-			return val, err
-		}),
-		l2: NewCacheAside(l2ttl, load),
-	}
+	// Build L2 first: L1 misses fall through to L2, and L2 hits are
+	// promoted into L1 so the backing store is only hit when both miss.
+	l2 := NewCacheAside(l2ttl, load)
+	l1 := NewCacheAside(l1ttl, func(key string) (string, error) {
+		val, err := l2.Get(key)
+		if err == nil {
+			return val, nil
+		}
+		return load(key)
+	})
+	return &CacheHierarchy{l1: l1, l2: l2}
 }
 
 func (h *CacheHierarchy) Get(key string) (string, error) {
