@@ -208,11 +208,10 @@ func NewCacheHierarchy(l1ttl, l2ttl time.Duration, load func(string) (string, er
 	// promoted into L1 so the backing store is only hit when both miss.
 	l2 := NewCacheAside(l2ttl, load)
 	l1 := NewCacheAside(l1ttl, func(key string) (string, error) {
-		val, err := l2.Get(key)
-		if err == nil {
-			return val, nil
-		}
-		return load(key)
+		// Propagate the L2 result — including its error. A fallback load
+		// here would double (or, via the hierarchy's own L2 retry, triple)
+		// origin reads during an outage.
+		return l2.Get(key)
 	})
 	return &CacheHierarchy{l1: l1, l2: l2}
 }
