@@ -10,7 +10,7 @@ Under regulations like GDPR, HIPAA, and PCI-DSS, logging raw Personally Identifi
 
 ## Prerequisites
 
-Complete all Module 12 lessons (01–21) on structured logging with `log/slog`, custom handlers, metrics instrumentation, and secure data handling.
+Complete all Module 12 lessons (01–12) on structured logging with `log/slog`, custom handlers, metrics instrumentation, and secure data handling.
 
 ## Available concepts
 

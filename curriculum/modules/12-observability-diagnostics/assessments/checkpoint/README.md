@@ -107,3 +107,7 @@ Submit a markdown document containing your complete technical analyses for Scena
 ## Retake policy
 
 If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.
+
+## NEXT UP
+
+[Module 13: Performance and Memory Engineering](../../../13-performance-memory-engineering/README.md)

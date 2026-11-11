@@ -60,7 +60,7 @@ A manual tracing library works through several layers:
 
 Context propagation in Go uses `context.Context` as the carrier. The span is stored in the context using a private context key type to avoid collisions. When a service calls another service, it injects the trace context into the outgoing request headers. The receiving service extracts the trace context from the incoming headers and creates a child span.
 
-The propagation format (W3C TraceContext) encodes the trace ID, span ID, and trace flags as a comma-separated hex string. The `traceparent` header format is:
+The propagation format (W3C TraceContext) encodes the trace ID, span ID, and trace flags as a single hyphen-separated string (matching the example above). The `traceparent` header format is:
 
 ```
 00-<trace_id_32_hex>-<parent_span_id_16_hex>-<trace_flags_2_hex>
@@ -81,13 +81,12 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"fmt"
-	"log"
 	"time"
 )
 
 type SpanContext struct {
-	TraceID    string
-	SpanID     string
+	TraceID      string
+	SpanID       string
 	ParentSpanID string
 }
 
@@ -97,7 +96,14 @@ type Span struct {
 	StartTime  time.Time
 	EndTime    time.Time
 	Attributes map[string]string
+	Events     []SpanEvent
 	Children   []*Span
+	parent     *Span
+}
+
+type SpanEvent struct {
+	Timestamp time.Time
+	Name      string
 }
 
 func generateID(bytes int) string {
@@ -113,7 +119,7 @@ func NewTrace() SpanContext {
 	}
 }
 
-func NewChildSpan(parent SpanContext) SpanContext {
+func newChildContext(parent SpanContext) SpanContext {
 	return SpanContext{
 		TraceID:      parent.TraceID,
 		SpanID:       generateID(8),
@@ -121,18 +127,13 @@ func NewChildSpan(parent SpanContext) SpanContext {
 	}
 }
 
-type Tracer struct {
-	root *Span
-}
-
-func (t *Tracer) StartSpan(ctx SpanContext, operation string) (*Span, *Tracer) {
-	span := &Span{
+func StartSpan(ctx SpanContext, operation string) *Span {
+	return &Span{
 		Context:    ctx,
 		Operation:  operation,
 		StartTime:  time.Now(),
 		Attributes: make(map[string]string),
 	}
-	return span, &Tracer{root: span}
 }
 
 func (s *Span) End() {
@@ -143,46 +144,83 @@ func (s *Span) SetAttribute(key, value string) {
 	s.Attributes[key] = value
 }
 
-func (s *Span) AddChild(child *Span) {
+func (s *Span) AddEvent(name string) {
+	s.Events = append(s.Events, SpanEvent{Timestamp: time.Now(), Name: name})
+}
+
+func (s *Span) StartChild(operation string) *Span {
+	child := StartSpan(newChildContext(s.Context), operation)
+	child.parent = s
 	s.Children = append(s.Children, child)
+	return child
 }
 
-func simulateServiceCall(tracer *Tracer, traceCtx SpanContext, serviceName string, duration time.Duration) {
-	childCtx := NewChildSpan(traceCtx)
-	span, _ := tracer.StartSpan(childCtx, serviceName)
-	span.SetAttribute("service", serviceName)
-	time.Sleep(duration)
-	span.End()
-	fmt.Printf("[%s] Span %s: %s (%v)\n",
-		traceCtx.TraceID[:8], span.Context.SpanID[:8], span.Operation, span.EndTime.Sub(span.StartTime))
+func (s *Span) Duration() time.Duration {
+	if s.EndTime.IsZero() {
+		return time.Since(s.StartTime)
+	}
+	return s.EndTime.Sub(s.StartTime)
 }
 
-func main() {
-	traceCtx := NewTrace()
-	tracer := &Tracer{}
-	root, _ := tracer.StartSpan(traceCtx, "GET /api/orders")
+func (s *Span) String() string {
+	return s.format("")
+}
+
+func (s *Span) format(indent string) string {
+	result := fmt.Sprintf("%s%s [%s] (%v)", indent, s.Operation, s.Context.SpanID[:6], s.Duration())
+	for k, v := range s.Attributes {
+		result += fmt.Sprintf("\n%s  %s: %s", indent, k, v)
+	}
+	for _, e := range s.Events {
+		result += fmt.Sprintf("\n%s  ! %s", indent, e.Name)
+	}
+	for _, c := range s.Children {
+		result += "\n" + c.format(indent+"  ")
+	}
+	return result
+}
+
+func simulateRequest() *Span {
+	rootCtx := NewTrace()
+	root := StartSpan(rootCtx, "GET /api/orders")
 	root.SetAttribute("http.method", "GET")
 	root.SetAttribute("http.path", "/api/orders")
 
-	simulateServiceCall(tracer, traceCtx, "auth_service", 10*time.Millisecond)
-	simulateServiceCall(tracer, traceCtx, "order_service", 30*time.Millisecond)
-	simulateServiceCall(tracer, traceCtx, "payment_service", 50*time.Millisecond)
+	auth := root.StartChild("auth.verify_token")
+	auth.SetAttribute("token.source", "header")
+	time.Sleep(5 * time.Millisecond)
+	auth.AddEvent("token.cached")
+	auth.End()
+
+	db := root.StartChild("db.query_orders")
+	db.SetAttribute("db.statement", "SELECT * FROM orders WHERE user_id = ?")
+	time.Sleep(20 * time.Millisecond)
+	db.End()
+
+	payment := root.StartChild("payment.check_status")
+	payment.SetAttribute("payment.provider", "stripe")
+	time.Sleep(15 * time.Millisecond)
+	payment.End()
 
 	root.End()
-	log.Printf("Trace %s completed: %d spans, total duration %v",
-		traceCtx.TraceID[:8], 4, root.EndTime.Sub(root.StartTime))
+	return root
+}
+
+func main() {
+	root := simulateRequest()
+	fmt.Println(root)
 }
 ```
 
 ## Step-by-step execution
 
 1. `NewTrace()` generates a 128-bit trace ID and 64-bit root span ID using `crypto/rand`.
-2. `Tracer.StartSpan` creates a span with the given context and operation name, recording the start time.
-3. `simulateServiceCall` creates a child span context (same trace ID, new span ID, parent span ID set) and calls `StartSpan`.
-4. The child span simulates work with `time.Sleep` and records attributes.
-5. `span.End()` records the end time; the duration is computed when printed.
-6. Each span prints its trace ID prefix, span ID prefix, operation name, and duration.
-7. The root span shows the total trace duration.
+2. `StartSpan(rootCtx, "GET /api/orders")` creates the root span with its start time and an empty attribute map.
+3. `root.StartChild("auth.verify_token")` builds a child context (same trace ID, new span ID, parent span ID set), links the child to the parent, and starts it.
+4. Each child simulates work with `time.Sleep`, records attributes (`db.statement`, `payment.provider`), and adds events (`auth.AddEvent("token.cached")`).
+5. `child.End()` records the end time; `Duration()` returns the elapsed time once ended.
+6. The root span prints its tree via the recursive `format`: operation name, 6-char span-ID prefix, and duration per span, with attributes and events indented under each.
+7. The root span shows the total trace duration (roughly the sum of the three sleeps).
 
 ## Common mistakes
 

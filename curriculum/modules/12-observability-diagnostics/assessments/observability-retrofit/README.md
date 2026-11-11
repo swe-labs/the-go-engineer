@@ -161,3 +161,7 @@ go test -v -race ./curriculum/modules/12-observability-diagnostics/projects/obse
 ## Retake policy
 
 If you score below the passing standard, review the corresponding lesson and project deliverables against the rubric, fix the identified gaps, and resubmit with a short note explaining what changed and why.
+
+## NEXT UP
+
+[Module 12 Checkpoint](../checkpoint/README.md)

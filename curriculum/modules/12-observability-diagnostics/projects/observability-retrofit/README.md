@@ -10,7 +10,7 @@ In modern distributed microservice environments, applications cannot be operated
 
 ## Prerequisites
 
-Complete all Module 12 lessons (01–21) on structured logging with `log/slog`, Prometheus metrics instrumentation (Counters, Histograms, Gauges), OpenTelemetry distributed tracing spans and context propagation, and graceful shutdown.
+Complete all Module 12 lessons (01–12) on structured logging with `log/slog`, Prometheus metrics instrumentation (Counters, Histograms, Gauges), OpenTelemetry distributed tracing spans and context propagation, and graceful shutdown.
 
 ## Available concepts
 

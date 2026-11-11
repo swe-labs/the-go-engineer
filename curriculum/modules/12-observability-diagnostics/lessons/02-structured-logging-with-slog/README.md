@@ -63,11 +63,11 @@ When you call `logger.Info("msg", "key1", val1, "key2", val2)`, the internal pat
 1. `Logger.Info` calls `Logger.log(nil, LevelInfo, "msg", args...)`.
 2. `Logger.log` verifies the handler is enabled for LevelInfo.
 3. It creates a `slog.Record` with the current time, LevelInfo, message, and caller PC.
-4. It converts the variadic args to attrs by pairing consecutive args as key-value. If an odd number of args is provided, the last key gets a `nil` value.
+4. It converts the variadic args to attrs by pairing consecutive args as key-value. If an odd number of args is provided, the trailing orphan arg becomes the **value** stored under the synthetic key `!BADKEY` (verified on go1.27: text handler emits `!BADKEY=quantity`, JSON handler emits `"!BADKEY":"quantity"` — the orphan string is the value, `!BADKEY` is the key).
 5. The record is passed to the handler's `Handle` method.
 6. The handler serializes the record and writes to the output writer.
 
-`slog.Record` is optimized for zero-allocation in the common case: it stores up to 10 attrs inline (in a ring buffer) and only allocates when exceeded.
+`slog.Record` is optimized for zero-allocation in the common case: it stores up to **5** attrs inline (`nAttrsInline = 5` in `log/slog/record.go` — a fixed array, not a ring buffer) and allocates a slice only when exceeded.
 
 ## How Go uses it
 
@@ -108,6 +108,22 @@ import (
 	"time"
 )
 
+// NewTextLogger creates a structured text logger.
+func NewTextLogger() *slog.Logger {
+	return slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
+}
+
+// NewJSONLogger creates a structured JSON logger.
+func NewJSONLogger() *slog.Logger {
+	return slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
+}
+
+// LogAtLevel logs a message at the specified level with structured attributes.
+func LogAtLevel(logger *slog.Logger, level slog.Level, msg string, attrs ...slog.Attr) {
+	logger.LogAttrs(nil, level, msg, attrs...)
+}
+
+// LogRequest logs a structured HTTP request entry.
 func LogRequest(logger *slog.Logger, method, path string, status int, dur time.Duration) {
 	logger.Info("http request",
 		"method", method,
@@ -118,11 +134,16 @@ func LogRequest(logger *slog.Logger, method, path string, status int, dur time.D
 }
 
 func main() {
-	textLogger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
-	jsonLogger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
+	textLogger := NewTextLogger()
+	jsonLogger := NewJSONLogger()
 
+	slog.Info("=== Text logger ===")
 	LogRequest(textLogger, "GET", "/api/users", 200, 42*time.Millisecond)
-	LogRequest(jsonLogger, "POST", "/api/orders", 500, 5200*time.Millisecond)
+	LogAtLevel(textLogger, slog.LevelWarn, "slow query detected", slog.Int("query_ms", 3200))
+
+	slog.Info("\n=== JSON logger ===")
+	LogRequest(jsonLogger, "POST", "/api/orders", 201, 150*time.Millisecond)
+	LogAtLevel(jsonLogger, slog.LevelError, "database connection failed", slog.String("db", "postgres"), slog.Int("retry", 3))
 }
 ```
 
@@ -152,7 +173,7 @@ For `slog.Info("user login", "user_id", "u-42", "ip", "10.0.0.1")` with a JSON h
 
 - **Using slog for unstructured messages**: `slog.Info(fmt.Sprintf("user %d logged in", id))` puts the entire message in the `msg` field, making it opaque to structured queries. Always pass structured data as separate attributes: `slog.Info("user logged in", "user_id", id)`.
 
-- **Mismatching key-value pairs**: `slog.Info("process", "key1", val1, "key2")` — an odd number of args causes the last key to receive a nil value. Go does not warn about this at compile time. Always use `LogAttrs` with typed `slog.Attr` when the number of args is dynamic.
+- **Mismatching key-value pairs**: `slog.Info("process", "key1", val1, "key2")` — an odd number of args stores the trailing arg as the value under the synthetic key `!BADKEY`. `go vet` catches this statically ("call to slog.Logger.Info missing a final value") and `go test` runs that check by default, so the bug surfaces at build time in tests — but `go run` skips it, so dynamic-attr call sites should still prefer `LogAttrs` with typed `slog.Attr`.
 
 - **Using slog.Default() in library code**: Libraries should accept a `*slog.Logger` parameter (or use context-based retrieval) instead of calling `slog.Default()`. If the application sets a custom handler, the library should use it too.
 
@@ -172,9 +193,9 @@ slog.Info("creating order",
 )
 ```
 
-**Symptom**: The log aggregator shows `quantity=!BADKEY` for every log line.
+**Symptom**: The log output shows `!BADKEY=quantity` (text handler) or `"!BADKEY":"quantity"` (JSON handler) for every log line — note the synthetic `!BADKEY` *key* holds the orphan argument as its value.
 
-**Root cause**: The `quantity` key has no corresponding value. slog treats the missing value as `nil`, which the handler serializes as `!BADKEY` (text handler) or `null` (JSON handler).
+**Root cause**: The `quantity` argument has no corresponding value. slog records it as the *value* under the synthetic key `!BADKEY` (verified on go1.27 in both handlers — JSON emits `"!BADKEY":"quantity"`, not `null`). Note also that `go test` would reject this call at build time via the vet `slog` check ("missing a final value"); only `go run` and vet-skipped builds reach the handler.
 
 **Fix**: Use `LogAttrs` with typed attributes:
 
