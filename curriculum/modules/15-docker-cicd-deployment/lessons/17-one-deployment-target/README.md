@@ -268,7 +268,7 @@ For a blue-green deployment from v1.0.0 to v2.0.0:
 For rollback:
 1. `Rollback()` is called.
 2. Step: "Switching traffic back to blue (v1.0.0)" — load balancer switches back.
-3. The current and new targets are swapped.
+3. No target swap occurs — `Current` already names the original live environment (the rollback target), so it remains correct after the rollback completes.
 
 ## Common mistakes
 
