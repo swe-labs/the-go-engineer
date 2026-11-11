@@ -48,17 +48,17 @@ The compiler ensures every field's offset is a multiple of its alignment by addi
 
 ## Under the hood
 
-Go follows the System V AMD64 ABI alignment rules on most platforms. When compiling a struct, the compiler processes fields in declaration order, maintaining a current offset:
+Go computes struct layout itself (on 64-bit platforms the rules coincide with the System V AMD64 ABI). When compiling a struct, the compiler processes fields in declaration order, maintaining a current offset:
 
 1. For each field, compute `offset % field.alignment`. If non-zero, add `field.alignment - (offset % field.alignment)` bytes of padding.
 2. Place the field at the new offset.
 3. After all fields, compute `finalSize % maxAlignment`. If non-zero, add `maxAlignment - (finalSize % maxAlignment)` bytes of trailing padding.
 
-The resulting layout is visible via `unsafe.Offsetof(field)`. The compiler may reorder fields for optimization (Go 1.18+ attempts field reordering by size), but this does not change observable behavior — field reordering is only applied when it does not affect memory safety. To guarantee a specific layout, use `encoding/binary` or manual serialization.
+The resulting layout is visible via `unsafe.Offsetof(field)`. The compiler does **not** reorder fields — `unsafe.Offsetof` results are deterministic and the declaration order is honored exactly, which is precisely why field order in the source is a real layout decision. (Any claim that "Go 1.18+ reorders fields by size" is a persistent myth: no Go compiler version has ever reordered struct fields.)
 
 ## How Go uses it
 
-- The standard library's `sync.Mutex` fits in 8 bytes (a single uint32 for non-sema implementations).
+- The standard library's `sync.Mutex` is 8 bytes: an `int32` state word plus a `uint32` semaphore field.
 - `net/http.Server` field order is carefully arranged to minimize size and avoid false sharing.
 - `runtime.g` (goroutine struct) is hundreds of bytes with fields ordered by access frequency and alignment.
 - `encoding/binary` reads struct fields by computing offsets manually, relying on the layout guarantee within a single struct.
@@ -151,7 +151,7 @@ A caching layer uses a struct to store entries. Profiling shows high memory usag
 ```go
 type CacheEntry struct {
 	Key       string    // 16 bytes
-	ExpiresAt time.Time // 24 bytes (struct{sec,nsec,loc})
+	ExpiresAt time.Time // 24 bytes (wall uint64, ext int64, loc pointer since Go 1.9)
 	Value     []byte    // 24 bytes (ptr + len + cap)
 	HitCount  int32     // 4 bytes
 	Flags     bool      // 1 byte
@@ -185,7 +185,7 @@ After reordering, the size drops from 88 to 72 bytes, saving 18% per entry. For 
 - Always verify struct sizes with `unsafe.Sizeof`. Compiler versions and architectures may differ.
 - Field ordering is a documentation concern: sort by descending size, but keep related fields together within the same size tier.
 - Cache line alignment matters for concurrent structs accessed by different goroutines. Add `_ [cacheLinePad]byte` to separate hot fields.
-- Go 1.18+ performs automatic field reordering in some cases, but do not rely on it. Always order explicitly.
+- The Go compiler never reorders struct fields — declaration order is the memory layout, always. Order fields explicitly by descending size to minimize padding.
 - For wire formats (network, disk), do not depend on Go's in-memory layout. Use `encoding/gob`, `encoding/binary`, or protobuf.
 
 ## Performance implications

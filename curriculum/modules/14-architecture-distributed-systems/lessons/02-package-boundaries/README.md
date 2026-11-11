@@ -127,7 +127,7 @@ func main() {
 }
 ```
 
-This demonstrates the key package-boundary concepts even within a single package. `Repository` is an exported interface -- the public contract. `inMemoryStore` is an unexported implementation -- it can be replaced entirely without affecting consumers. `NewExportedService` is the constructor that accepts the interface. The main function only interacts with the exported surface.
+This demonstrates the key package-boundary concepts even within a single package. `Repository` is an exported interface -- the public contract. `inMemoryStore` is an unexported implementation -- consumers outside the package cannot name it, so it can be replaced entirely without affecting them. `NewExportedService` is the constructor that accepts the interface. (Because this demo lives in one `main` package, `main` can still reach the unexported `repo` field directly -- in a real multi-package layout, `main` would import the package and see only the exported constructor and interface.)
 
 ## Step-by-step execution
 

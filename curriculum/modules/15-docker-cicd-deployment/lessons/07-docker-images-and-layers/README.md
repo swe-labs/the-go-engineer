@@ -98,9 +98,22 @@ var recommendedLayers = []LayerInfo{
 	{Command: "RUN CGO_ENABLED=0 go build -o server .", SizeBytes: 15_000_000, Cacheable: false},
 }
 
+type BuildSuggestion struct {
+	Layers        []LayerInfo `json:"layers"`
+	EstimatedSize int64       `json:"estimated_size_bytes"`
+}
+
 func layersHandler(w http.ResponseWriter, r *http.Request) {
+	var total int64
+	for _, l := range recommendedLayers {
+		total += l.SizeBytes
+	}
+	suggestion := BuildSuggestion{
+		Layers:        recommendedLayers,
+		EstimatedSize: total,
+	}
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(recommendedLayers)
+	json.NewEncoder(w).Encode(suggestion)
 }
 
 func main() {

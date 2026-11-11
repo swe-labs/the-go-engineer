@@ -49,9 +49,9 @@ The framework runs the benchmark with increasing `b.N` until the total duration 
 
 ## Under the hood
 
-When `go test -bench=.` runs, the testing framework parses benchmark function names, creates a `testing.B` for each, and calls the benchmark function. The framework starts with `b.N = 1` and runs the function once. It measures the wall-clock duration with `time.Now()`. If the duration is below the minimum benchmark time (default 1 second), it computes a scaling factor: `target_duration / measured_duration * 1.1`. It then runs again with the estimated N. It repeats this calibration loop until either the runtime is above the minimum time or N stops growing.
+When `go test -bench=.` runs, the testing framework parses benchmark function names, creates a `testing.B` for each, and calls the benchmark function. The framework starts with `b.N = 1` and runs the function once. It measures the wall-clock duration with `time.Now()`. If the duration is below the benchmark time (default 1 second), it predicts the required iterations with `predictN`: `n = goalns * prevIters / prevns`, then `n += n/5` (a 1.2x safety margin, verified in `testing/benchmark.go`). It repeats this calibration loop until the runtime is above the minimum time or N stops growing.
 
-Internally, `testing.B` calls `runtime.ReadMemStats` before and after the benchmark loop to compute `B/op` and `allocs/op`. The reported value is the delta divided by `b.N`. The framework also tracks the number of iterations completed and reports the minimum time across runs (not the average) to reduce noise from GC or OS scheduling.
+Internally, `testing.B` calls `runtime.ReadMemStats` before and after the benchmark loop to compute `B/op` and `allocs/op`. The reported value is the delta divided by `b.N`. The final reported result comes from the single last calibration run (verified in `testing/benchmark.go` — no multi-run averaging or minimum selection); use `-count=N` to collect multiple measurements and let `benchstat` handle the statistics.
 
 ## How Go uses it
 
@@ -132,8 +132,8 @@ BenchmarkConcatBuilder-8  20000000    85 ns/op   64 B/op   1 allocs/op
 1. `go test -bench=.` discovers `BenchmarkConcatPlus` and `BenchmarkConcatBuilder`.
 2. For `BenchmarkConcatPlus`, the framework sets `b.N = 1` and calls the function.
 3. The loop runs once: `concatPlus` builds the string using `+=` (which allocates a new string on each concatenation).
-4. The framework measures ~300 ns. Since this is below 1 second, it computes `N = 1s / 300ns * 1.1 ≈ 3,600,000`.
-5. The framework runs with `b.N = 3,600,000`, calls `runtime.ReadMemStats`, runs the loop, calls `ReadMemStats` again, and measures the delta.
+4. The framework measures ~300 ns. Since this is below 1 second, it computes `N = 1s / 300ns ≈ 3,333,333`, then adds the 1.2x margin (`n += n/5`) for `N ≈ 4,000,000`.
+5. The framework runs with `b.N = 4,000,000`, calls `runtime.ReadMemStats`, runs the loop, calls `ReadMemStats` again, and measures the delta.
 6. Results: `ns/op = total_time / N`, `B/op = (alloc_bytes_after - alloc_bytes_before) / N`, `allocs/op = (alloc_count_after - alloc_count_before) / N`.
 7. For `BenchmarkConcatBuilder`, the same process yields fewer allocations (1 vs 7) and lower `ns/op`.
 

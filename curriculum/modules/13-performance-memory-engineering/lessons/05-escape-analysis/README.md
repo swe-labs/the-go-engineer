@@ -94,6 +94,9 @@ func main() {
 	b := heapAllocated(2, "Bob")
 
 	fmt.Println(a, b)
+
+	// To see escape analysis decisions, run:
+	// go build -gcflags='-m -m' ./curriculum/modules/13-performance-memory-engineering/lessons/05-escape-analysis
 }
 ```
 

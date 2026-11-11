@@ -50464,7 +50464,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/01-pprof/main_test.go"
       },
       "id": "core-13-01",
-      "learning_objective": "Analyze memory alignment, field ordering, and struct padding to optimize struct memory layout.",
+      "learning_objective": "Capture CPU and heap profiles programmatically using `runtime/pprof`, serve them via `net/http/pprof`, and inspect them with `go tool pprof` to identify performance hotspots and memory patterns in Go programs.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-02"
@@ -50605,7 +50605,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/02-cpu-profiling/main_test.go"
       },
       "id": "core-13-02",
-      "learning_objective": "Inspect compiler escape analysis decisions using -gcflags=\"-m\" to determine stack vs heap allocations.",
+      "learning_objective": "Collect CPU profiles from Go programs, interpret the output of `go tool pprof`, identify hotspots using `top`, `list`, and `web` commands, and read flame graphs to prioritize optimization targets.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-03"
@@ -50752,7 +50752,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/03-memory-profiling/main_test.go"
       },
       "id": "core-13-03",
-      "learning_objective": "Analyze the Go runtime tri-color mark-and-sweep garbage collector, allocation pacing, and GOGC tuning.",
+      "learning_objective": "Collect and interpret Go heap profiles, distinguish between alloc_objects, alloc_space, inuse_objects, and inuse_space views, detect memory leaks by comparing heap profiles over time, and identify the call sites responsible for excessive allocation.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-04"
@@ -50896,7 +50896,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/04-benchmarks/main_test.go"
       },
       "id": "core-13-04",
-      "learning_objective": "Capture and analyze CPU profiles using pprof to locate functions consuming the most execution time.",
+      "learning_objective": "Write and run Go benchmark functions using `testing.B`, interpret benchmark output, use `-benchmem` to measure allocations, compare benchmark results with `benchstat`, and apply benchmarks to prevent performance regressions.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-05"
@@ -51037,7 +51037,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/05-escape-analysis/main_test.go"
       },
       "id": "core-13-05",
-      "learning_objective": "Capture and analyze heap memory allocation profiles using pprof to eliminate hot allocation paths.",
+      "learning_objective": "Explain how the Go compiler decides whether to allocate a value on the stack or heap, use `go build -gcflags=-m` to inspect escape analysis decisions, and write code that minimizes heap allocations by keeping values on the stack.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-06"
@@ -51182,7 +51182,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/06-memory-layout/main_test.go"
       },
       "id": "core-13-06",
-      "learning_objective": "Compare benchmark results and verify statistical significance of optimizations using benchstat.",
+      "learning_objective": "Explain how Go aligns struct fields in memory, use `unsafe.Sizeof` and `unsafe.Offsetof` to measure struct sizes and field offsets, reorder struct fields to minimize padding waste, and understand how struct layout affects CPU cache utilization.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-07"
@@ -51330,7 +51330,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/07-caching-basics/main_test.go"
       },
       "id": "core-13-07",
-      "learning_objective": "Implement in-memory caching with TTL expiration, cache invalidation, and memory budget caps.",
+      "learning_objective": "Build an in-memory cache in Go with TTL expiry and concurrent access safety, choose between `sync.Map` and `map` with `sync.RWMutex` for different access patterns, implement LRU eviction, and understand read-through vs write-through cache strategies.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-13-08"
@@ -51476,7 +51476,7 @@
         "test_path": "modules/13-performance-memory-engineering/lessons/08-cache-invalidation/main_test.go"
       },
       "id": "core-13-08",
-      "learning_objective": "Profile and resolve lock contention bottlenecks in concurrent code using mutex and block profiles.",
+      "learning_objective": "Implement cache invalidation strategies in Go, including TTL-based expiry, write-invalidate, write-update, and stale-while-revalidate patterns, and prevent cache stampede using singleflight and probabilistic early expiration.",
       "module_id": "module-13",
       "next_item_ids": [
         "core-14-01"
@@ -51617,7 +51617,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/01-why-architecture-exists/main_test.go"
       },
       "id": "core-14-01",
-      "learning_objective": "Evaluate architectural patterns and tradeoffs, balancing monolith simplicity against distributed complexity.",
+      "learning_objective": "Identify coupling and cohesion in Go code, explain Conway's law and its effect on software structure, evaluate architectural drivers (team size, change velocity, domain complexity), and apply a tradeoff-first mindset when choosing between design alternatives.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-02"
@@ -51756,7 +51756,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/02-package-boundaries/main_test.go"
       },
       "id": "core-14-02",
-      "learning_objective": "Design modular monoliths with strict package boundary encapsulation and explicit dependency injection.",
+      "learning_objective": "Design Go packages with clear boundaries, use internal packages to hide implementation details, enforce dependency direction, avoid cyclic dependencies, and organize packages by domain rather than by layer.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-03"
@@ -51895,7 +51895,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/03-service-layer/main_test.go"
       },
       "id": "core-14-03",
-      "learning_objective": "Implement Hexagonal / Clean Architecture separating domain entities, use-case services, and adapter interfaces.",
+      "learning_objective": "Design and implement a service layer that isolates business logic from transport and storage, use constructor-based dependency injection to make services testable, and recognize when a service layer adds value versus when it is a thin pass-through.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-04"
@@ -52038,7 +52038,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/04-repository-pattern-deep-dive/main_test.go"
       },
       "id": "core-14-04",
-      "learning_objective": "Apply the Service Layer pattern to orchestrate business workflows independent of transport and persistence.",
+      "learning_objective": "Design repository interfaces that abstract data access, implement in-memory repositories for testing, and swap storage backends without changing business logic.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-05"
@@ -52179,7 +52179,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/05-modular-monolith/main_test.go"
       },
       "id": "core-14-05",
-      "learning_objective": "Apply the Repository pattern to decouple data access logic from core domain business rules.",
+      "learning_objective": "Design a modular monolith with bounded contexts communicating through interfaces, evolve the architecture from monolith to services when needed, and recognize when a monolith is the right choice.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-06"
@@ -52321,7 +52321,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/06-hexagonal-architecture/main_test.go"
       },
       "id": "core-14-06",
-      "learning_objective": "Enforce core domain invariants and business rules within entity models to prevent corrupt application state.",
+      "learning_objective": "Design a hexagonal architecture with ports (interfaces) and adapters (implementations), separate core domain from infrastructure concerns, and swap adapters for testing without modifying core logic.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-07"
@@ -52464,7 +52464,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/07-domain-modeling/main_test.go"
       },
       "id": "core-14-07",
-      "learning_objective": "Design event-driven architectures with asynchronous domain events, producers, and decoupled subscribers.",
+      "learning_objective": "Model business domains in Go using entities, value objects, and aggregates. Capture domain logic within struct types and raise domain events for cross-context communication.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-08"
@@ -52604,7 +52604,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/08-invariants/main_test.go"
       },
       "id": "core-14-08",
-      "learning_objective": "Publish and consume messages from message queues, handling message serialization, acknowledgments, and dead-letter queues.",
+      "learning_objective": "Identify and enforce business invariants at system boundaries, implement consistency checks in Go, and prevent invalid state transitions through encapsulation and validation.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-09"
@@ -52748,7 +52748,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/09-event-driven-basics/main_test.go"
       },
       "id": "core-14-09",
-      "learning_objective": "Design idempotent consumers that safely handle duplicate message deliveries without corrupting state.",
+      "learning_objective": "Design and implement an in-memory event bus in Go, use publish/subscribe to decouple producers from consumers, and compose multiple handlers for the same event without coordination.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-10"
@@ -52946,7 +52946,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/10-queues/main_test.go"
       },
       "id": "core-14-10",
-      "learning_objective": "Implement distributed retry strategies with exponential backoff, jitter, and dead-letter queue routing.",
+      "learning_objective": "Implement an in-memory FIFO queue, build a producer-consumer pattern using buffered Go channels, and deploy a concurrent worker pool that drains work from a shared queue.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-11"
@@ -53136,7 +53136,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/11-retries-and-idempotent-consumers/main_test.go"
       },
       "id": "core-14-11",
-      "learning_objective": "Implement the transactional outbox pattern to guarantee atomic database updates and event publishing.",
+      "learning_objective": "Implement at-least-once delivery semantics with idempotency keys, build a deduplication store, and apply exponential backoff retry logic in Go consumers.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-12"
@@ -53343,7 +53343,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/12-payment-workflow-design/main_test.go"
       },
       "id": "core-14-12",
-      "learning_objective": "Architect multi-tenant backend systems with database-per-tenant, schema-per-tenant, or column-scoped isolation.",
+      "learning_objective": "Design a payment workflow using the saga pattern with compensating transactions, implement a workflow state machine in Go, and handle failures gracefully without leaving the system in an inconsistent state.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-13"
@@ -53537,7 +53537,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/13-multi-tenancy-architecture/main_test.go"
       },
       "id": "core-14-13",
-      "learning_objective": "Enforce strict tenant data boundaries across API handlers, background workers, and caching layers.",
+      "learning_objective": "Implement tenant isolation models (silent, shared, hybrid) in Go, propagate tenant context through the application using context.Context, and scope database queries by tenant identifier at the row level.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-14"
@@ -53732,7 +53732,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/14-caching-architecture/main_test.go"
       },
       "id": "core-14-14",
-      "learning_objective": "Design multi-tier caching architectures (in-memory L1, distributed Redis L2) with cache-aside and write-through patterns.",
+      "learning_objective": "Implement cache-aside, read-through, and write-behind caching strategies in Go, understand cache hierarchy in distributed systems, and measure hit rate, miss rate, and staleness tradeoffs.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-15"
@@ -53921,7 +53921,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/15-when-to-split-services/main_test.go"
       },
       "id": "core-14-15",
-      "learning_objective": "Evaluate organizational and technical criteria for splitting monolithic codebases into independent microservices.",
+      "learning_objective": "Identify bounded contexts that are candidates for service splitting, evaluate team size and deployment coupling triggers, design splitting strategies (strangler fig, database separation, event-driven), and apply data ownership principles.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-16"
@@ -54117,7 +54117,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/16-microservices-as-a-tradeoff-not-a-default/main_test.go"
       },
       "id": "core-14-16",
-      "learning_objective": "Recognize microservices as an organizational tradeoff rather than a default architecture, evaluating operational costs.",
+      "learning_objective": "Evaluate the concrete tradeoffs of microservices vs monoliths for a given system, calculate the latency cost of distributed calls, and apply a decision framework that recommends microservices only when the benefits outweigh the costs.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-14-17"
@@ -54314,7 +54314,7 @@
         "test_path": "modules/14-architecture-distributed-systems/lessons/17-architecture-decision-records/main_test.go"
       },
       "id": "core-14-17",
-      "learning_objective": "Author Architecture Decision Records (ADRs) documenting architectural context, options considered, decisions, and consequences.",
+      "learning_objective": "Write architecture decision records (ADRs) using the standard format, manage the ADR lifecycle from proposal to supersession, document tradeoffs with pros and cons, and implement a Go-based ADR management tool.",
       "module_id": "module-14",
       "next_item_ids": [
         "core-15-01"
@@ -54455,7 +54455,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/01-linux-processes/main_test.go"
       },
       "id": "core-15-01",
-      "learning_objective": "Trace Linux process initialization, PID 1 init responsibilities, signal forwarding, and process reaping in containers.",
+      "learning_objective": "Use Go's `os/exec` package to spawn child processes, capture their stdout/stderr, inspect exit codes, and manage process lifecycle without creating zombies or leaking resources.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-02"
@@ -54598,7 +54598,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/02-signals/main_test.go"
       },
       "id": "core-15-02",
-      "learning_objective": "Intercept OS signals (SIGTERM, SIGINT) in Go services to complete in-flight requests and shut down gracefully.",
+      "learning_objective": "Handle OS signals (SIGINT, SIGTERM, SIGHUP) in Go programs using `os/signal.Notify`, implement graceful shutdown in HTTP servers, and avoid the pitfalls of signal handling in containerized environments.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-03"
@@ -54746,7 +54746,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/03-logs/main_test.go"
       },
       "id": "core-15-03",
-      "learning_objective": "Configure application logging to write raw JSON to standard output (stdout/stderr) for container log collectors.",
+      "learning_objective": "Write structured logs to stdout/stderr using Go's `log/slog` package, distinguish between log levels, and follow the 12-factor app logging convention required by Docker and container orchestrators.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-04"
@@ -54911,7 +54911,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/04-file-permissions/main_test.go"
       },
       "id": "core-15-04",
-      "learning_objective": "Enforce POSIX file permission modes and directory ownership in containerized environments.",
+      "learning_objective": "Read and set Unix file permissions using Go's `os.FileMode`, understand octal permission notation, and avoid common permission pitfalls when writing files in Docker containers.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-05"
@@ -55082,7 +55082,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/05-networking-basics/main_test.go"
       },
       "id": "core-15-05",
-      "learning_objective": "Analyze container networking basics: port binding, bridge networks, DNS service discovery, and NAT routing.",
+      "learning_objective": "Create TCP servers and clients using Go's `net` package, understand ports, listening addresses (localhost vs 0.0.0.0), and the difference between TCP and UDP transport.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-06"
@@ -55222,7 +55222,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/06-docker-basics/main_test.go"
       },
       "id": "core-15-06",
-      "learning_objective": "Build, tag, and inspect Docker container images from Dockerfiles using the docker CLI.",
+      "learning_objective": "Write a Dockerfile for a Go application, build a minimal Docker image using `FROM`, `RUN`, `COPY`, `CMD`, and understand how Docker containers map to Linux processes.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-07"
@@ -55407,7 +55407,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/07-docker-images-and-layers/main_test.go"
       },
       "id": "core-15-07",
-      "learning_objective": "Optimize Docker image layer caching, ordering instructions from least-frequently changed to most-frequently changed.",
+      "learning_objective": "Explain how Docker image layers work, optimize `COPY` ordering for cache efficiency, write `.dockerignore` files, and evaluate layer size impact on build and deployment speed.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-08"
@@ -55579,7 +55579,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/08-multi-stage-builds/main_test.go"
       },
       "id": "core-15-08",
-      "learning_objective": "Author multi-stage Dockerfiles compiling Go binaries in a builder stage and deploying into a minimal scratch or alpine runtime image.",
+      "learning_objective": "Design multi-stage Dockerfiles that separate build and runtime environments, produce tiny images using `scratch` or `distroless` base images, and configure `CGO_ENABLED=0` for fully static Go binaries.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-09"
@@ -55719,7 +55719,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/09-docker-compose/main_test.go"
       },
       "id": "core-15-09",
-      "learning_objective": "Define and orchestrate multi-container local environments (Go API, PostgreSQL, Redis) using Docker Compose.",
+      "learning_objective": "Define multi-service Go applications using `docker-compose.yml` with services, environment variables, volumes, ports, and inter-service dependencies managed by Compose.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-10"
@@ -55861,7 +55861,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/10-container-health-checks/main_test.go"
       },
       "id": "core-15-10",
-      "learning_objective": "Configure Docker and container orchestration HEALTHCHECK directives to verify service liveness automatically.",
+      "learning_objective": "Implement `/healthz` and `/readyz` HTTP endpoints in Go, configure Docker `HEALTHCHECK` and Kubernetes readiness/liveness probes, and distinguish between application startup, liveness, and readiness states.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-11"
@@ -56001,7 +56001,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/11-github-actions/main_test.go"
       },
       "id": "core-15-11",
-      "learning_objective": "Author automated GitHub Actions CI workflows executing on push and pull request events.",
+      "learning_objective": "Parse, validate, and generate GitHub Actions workflow configurations using Go, and explain how workflow YAML, jobs, steps, actions, matrix builds, runners, and caching work together in a CI pipeline.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-12"
@@ -56141,7 +56141,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/12-ci-pipeline/main_test.go"
       },
       "id": "core-15-12",
-      "learning_objective": "Build multi-step CI pipelines incorporating dependency caching, code formatting, vet analysis, race-enabled tests, and coverage reporting.",
+      "learning_objective": "Design, model, and validate a continuous integration pipeline for a Go project, comprising lint, vet, test, and build stages, and distinguish CI from CD in the context of pipeline-as-code practices.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-13"
@@ -56283,7 +56283,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/13-release-artifacts/main_test.go"
       },
       "id": "core-15-13",
-      "learning_objective": "Compile cross-platform release binaries and publish tagged container images to container registries in CI.",
+      "learning_objective": "Version, build, checksum, and verify Go binaries as release artifacts, using ldflags for version injection and SHA256 checksums for integrity verification.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-14"
@@ -56423,7 +56423,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/14-config-in-deployment/main_test.go"
       },
       "id": "core-15-14",
-      "learning_objective": "Inject production environment variables and configuration files into containers without baking secrets into image layers.",
+      "learning_objective": "Load, validate, and manage application configuration from environment variables in a Go service, following 12-factor app principles, and mask sensitive values in log output.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-15"
@@ -56563,7 +56563,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/15-secrets-in-deployment/main_test.go"
       },
       "id": "core-15-15",
-      "learning_objective": "Manage deployment secrets securely using environment injection, secret mounts, and runtime access controls.",
+      "learning_objective": "Implement a secrets management abstraction in Go that supports multiple backends (env vars, in-memory, secret stores), parse .env files safely, sanitize secrets in logs, and resolve templates with secret substitution.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-16"
@@ -56703,7 +56703,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/16-vulnerability-scanning/main_test.go"
       },
       "id": "core-15-16",
-      "learning_objective": "Scan container images and dependencies for known vulnerabilities in CI pipelines using govulncheck and Trivy.",
+      "learning_objective": "Model vulnerability scan reports in Go, evaluate severity-based policy gates, and integrate vulnerability scanning into a CI pipeline to block deployments with critical or high-severity findings.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-17"
@@ -56843,7 +56843,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/17-one-deployment-target/main_test.go"
       },
       "id": "core-15-17",
-      "learning_objective": "Deploy a containerized Go service to a real cloud or VPS deployment target with persistent volume mounts.",
+      "learning_objective": "Model deployment strategies (blue-green, canary, rolling, recreate) in Go, implement deploy and rollback logic for each strategy, and determine which strategies provide zero-downtime deployments.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-18"
@@ -56983,7 +56983,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/18-rollback-basics/main_test.go"
       },
       "id": "core-15-18",
-      "learning_objective": "Formulate and execute deployment rollback procedures to restore service quickly following failed releases.",
+      "learning_objective": "Design and implement rollback plans for deployment failures in Go, model different rollback reasons (error rate, latency, health checks, database issues), and build automated rollback decision logic.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-19"
@@ -57131,7 +57131,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/19-deployment-runbook/main_test.go"
       },
       "id": "core-15-19",
-      "learning_objective": "Author a production deployment runbook detailing provisioning steps, health verification, backup procedures, and emergency operations.",
+      "learning_objective": "Design, validate, and generate deployment runbooks in Go that structure pre-deploy checks, deploy steps, post-deploy verification, rollback procedures, and incident contacts for a production Go service.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-16-01"

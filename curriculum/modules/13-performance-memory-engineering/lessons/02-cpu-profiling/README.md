@@ -44,7 +44,7 @@ The key distinction in every view: **flat** time is samples where the function w
 
 ## Under the hood
 
-When `pprof.StartCPUProfile` is called, the Go runtime programs the OS interval timer (via `setitimer` on Linux, `ITIMER_PROF`) to deliver `SIGPROF` at 100 Hz. The signal handler (`sigprof` in `runtime/signal_unix.go`) reads the interrupted thread's `m` (OS thread) and `gp` (goroutine pointer) from thread-local storage. It calls `gentraceback` to unwind the goroutine's stack: starting from the PC/SP saved in the signal context, it walks frame-by-frame using Go's stack map metadata. Each frame's PC is mapped to a function name and line number via the `gopclntab` (Go Program Counter Line Number Table). The resulting stack trace is hashed with FNV-1a into a fixed-size hash table. On `StopCPUProfile`, the runtime serializes all buckets into protobuf format.
+When `pprof.StartCPUProfile` is called, the Go runtime programs the OS interval timer (via `setitimer` on Linux, `ITIMER_PROF`) to deliver `SIGPROF` at 100 Hz. The signal handler (`sigprof` in `runtime/signal_unix.go`) reads the interrupted thread's `m` (OS thread) and `gp` (goroutine pointer) from thread-local storage. It calls `gentraceback` to unwind the goroutine's stack: starting from the PC/SP saved in the signal context, it walks frame-by-frame using Go's stack map metadata. Each frame's PC is mapped to a function name and line number via the `gopclntab` (Go Program Counter Line Number Table). The resulting stack trace is appended to a lock-free `profBuf` ring buffer (`runtime/cpuprof.go` — verified: no hash table, no FNV hashing in the CPU profiler). A dedicated profile-writer goroutine drains the buffer and streams the protobuf encoding to the writer incrementally; `StopCPUProfile` flushes the remaining records.
 
 ## How Go uses it
 
@@ -119,7 +119,7 @@ go tool pprof -web cpu_profile.pprof     # requires Graphviz
 3. For each `i`, `isPrime(i)` is called. Inside `isPrime`, `math.Sqrt` computes the square root and the loop checks divisibility.
 4. The signal handler fires approximately every 10 ms. If the CPU is inside `isPrime` when the signal arrives, that call stack (countPrimes → isPrime) is recorded.
 5. After processing 100,000 numbers, `main` proceeds to the defer.
-6. `pprof.StopCPUProfile()` serializes the hash table of samples to `cpu_profile.pprof`.
+6. `pprof.StopCPUProfile()` flushes the `profBuf` ring buffer and finalizes the protobuf stream to `cpu_profile.pprof`.
 7. Running `go tool pprof -top cpu_profile.pprof` shows the distribution. `isPrime` dominates because the inner loop executes most iterations.
 
 ## Common mistakes
@@ -147,7 +147,7 @@ Showing nodes accounting for 45.6s, 87.5% of 52.1s total
      8.3s 15.9% 74.0%     30.5s 58.5%  main.handleRequest
 ```
 
-`encoding/json.(*Decoder).reflectValue` has 34.9% flat CPU. This is JSON decoding using reflection. The 12.1s in `mallocgc` indicates heavy allocation. The fix: use `json.Decoder` with `DisallowUnknownFields` or switch to a faster JSON library (`github.com/goccy/go-json`, `github.com/valyala/fastjson`). After the fix, collect another profile and compare: the `encoding/json` node should drop below 5%.
+`encoding/json.(*Decoder).reflectValue` has 34.9% flat CPU. This is JSON decoding using reflection. The 12.1s in `mallocgc` indicates heavy allocation. The fix: decode into pre-declared concrete types to cut reflection work, or switch to a faster JSON library (`github.com/goccy/go-json`, `github.com/valyala/fastjson`). After the fix, collect another profile and compare: the `encoding/json` node should drop below 5%.
 
 ## Production notes
 
@@ -158,7 +158,7 @@ Showing nodes accounting for 45.6s, 87.5% of 52.1s total
 
 ## Performance implications
 
-The signal-based sampling mechanism adds deterministic overhead: each SIGPROF signal triggers a context switch to the signal handler, stack unwinding, and hash table insertion. At 100 Hz, this is approximately 5% CPU overhead. The overhead is proportional to the sample rate: at 1000 Hz, overhead approaches 30%. Go's default of 100 Hz balances statistical significance with overhead. For most investigations, 30 seconds at 100 Hz (3,000 samples) provides sufficient accuracy.
+The signal-based sampling mechanism adds overhead: each SIGPROF signal triggers a context switch to the signal handler, stack unwinding, and buffer append. At the default 100 Hz this is roughly a few percent of CPU. The overhead scales linearly with the sample rate — a 1000 Hz profile costs ten times as much, which is why profiling above the default is reserved for short, targeted investigations. For most work, 30 seconds at 100 Hz (3,000 samples) provides sufficient accuracy.
 
 ## Practice task
 

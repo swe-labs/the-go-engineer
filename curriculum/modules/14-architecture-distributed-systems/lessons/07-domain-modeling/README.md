@@ -185,9 +185,14 @@ func NewOrder(id, customer string, items []OrderItem, shipping Address) (*Order,
 	if len(items) == 0 {
 		return nil, errors.New("order must have at least one item")
 	}
+	now := time.Now()
 	order := &Order{
-		ID: id, Customer: customer, Items: items,
-		Shipping: shipping, Status: OrderPending, CreatedAt: time.Now(),
+		ID:        id,
+		Customer:  customer,
+		Items:     items,
+		Shipping:  shipping,
+		Status:    OrderPending,
+		CreatedAt: now,
 	}
 	order.raiseEvent("order.created", nil)
 	return order, nil
@@ -212,8 +217,10 @@ func (o *Order) Ship() error {
 
 func (o *Order) raiseEvent(eventType string, data interface{}) {
 	o.Events = append(o.Events, OrderEvent{
-		OrderID: o.ID, EventType: eventType,
-		Timestamp: time.Now(), Data: data,
+		OrderID:   o.ID,
+		EventType: eventType,
+		Timestamp: time.Now(),
+		Data:      data,
 	})
 }
 
@@ -223,7 +230,7 @@ func main() {
 	order, _ := NewOrder("ORD-001", "Alice", []OrderItem{item}, addr)
 
 	fmt.Printf("Order %s: $%.2f (status: %s)\n", order.ID, order.Total(), order.Status)
-	order.Ship()
+	_ = order.Ship()
 	fmt.Printf("Order shipped: %s\n", order.Status)
 	fmt.Printf("Events: %d raised\n", len(order.Events))
 }

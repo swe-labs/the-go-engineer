@@ -57,6 +57,9 @@ func (a *ArchitectureDecisionRecord) String() string {
 	result += fmt.Sprintf("## Context\n%s\n\n", a.Context)
 	result += fmt.Sprintf("## Decision\n%s\n\n", a.Decision)
 	result += fmt.Sprintf("## Consequences\n%s\n\n", a.Consequences)
+	if a.Supersedes != "" {
+		result += fmt.Sprintf("Superseded by: %s\n\n", a.Supersedes)
+	}
 	if len(a.Alternatives) > 0 {
 		result += "## Alternatives Considered\n"
 		for _, alt := range a.Alternatives {

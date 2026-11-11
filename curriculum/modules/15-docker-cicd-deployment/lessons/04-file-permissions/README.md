@@ -70,27 +70,42 @@ import (
 	"os"
 )
 
+func writeSecureFile(path string, data []byte) error {
+	if err := os.WriteFile(path, data, 0600); err != nil {
+		return err
+	}
+	// os.WriteFile's perm argument only applies when the file does not
+	// exist. Re-chmod so a pre-existing permissive file is also secured.
+	return os.Chmod(path, 0600)
+}
+
+func readPermissions(path string) (os.FileMode, error) {
+	info, err := os.Stat(path)
+	if err != nil {
+		return 0, err
+	}
+	return info.Mode().Perm(), nil
+}
+
 func main() {
-	file, err := os.CreateTemp("", "perms-*.txt")
+	tmpFile, err := os.CreateTemp("", "secure-*.txt")
 	if err != nil {
 		panic(err)
 	}
-	defer os.Remove(file.Name())
-	defer file.Close()
+	path := tmpFile.Name()
+	tmpFile.Close()
+	defer os.Remove(path)
 
-	info, _ := os.Stat(file.Name())
-	fmt.Printf("Default mode: %#o\n", info.Mode().Perm())
+	if err := writeSecureFile(path, []byte("secret data")); err != nil {
+		panic(err)
+	}
 
-	os.Chmod(file.Name(), 0600)
-	info, _ = os.Stat(file.Name())
-	fmt.Printf("After chmod 0600: %#o\n", info.Mode().Perm())
-
-	os.Chmod(file.Name(), 0755)
-	info, _ = os.Stat(file.Name())
-	fmt.Printf("After chmod 0755: %#o\n", info.Mode().Perm())
-
-	fmt.Printf("IsRegular: %v\n", info.Mode().IsRegular())
-	fmt.Printf("Perm string: %s\n", info.Mode().Perm())
+	mode, err := readPermissions(path)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("File mode: %#o\n", mode)
+	fmt.Printf("Is secure: %v\n", mode == 0600)
 }
 ```
 

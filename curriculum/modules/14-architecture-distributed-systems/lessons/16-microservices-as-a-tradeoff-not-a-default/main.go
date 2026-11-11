@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"time"
 )
 
 type Tradeoff struct {
@@ -139,7 +138,7 @@ func main() {
 		fmt.Printf("  - %s\n", c)
 	}
 
-	est := EstimateRequestLatency(3, 50, time.Millisecond.Seconds()*5)
+	est := EstimateRequestLatency(3, 50, 5) // 5 ms network latency per call
 	fmt.Printf("\nMonolith latency: %.2fms\n", est.MonolithMs)
 	fmt.Printf("Microservice latency: %.2fms\n", est.MicroserviceMs)
 	fmt.Printf("Break-even acceptable: %v\n", est.BreakEven)

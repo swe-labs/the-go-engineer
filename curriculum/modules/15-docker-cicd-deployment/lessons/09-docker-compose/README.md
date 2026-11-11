@@ -104,7 +104,7 @@ import (
 	"os"
 )
 
-type Config struct {
+type AppConfig struct {
 	ServiceName string `json:"service_name"`
 	Version     string `json:"version"`
 	DatabaseURL string `json:"database_url"`
@@ -113,7 +113,7 @@ type Config struct {
 }
 
 func configHandler(w http.ResponseWriter, r *http.Request) {
-	cfg := Config{
+	cfg := AppConfig{
 		ServiceName: getEnv("SERVICE_NAME", "api"),
 		Version:     getEnv("VERSION", "1.0.0"),
 		DatabaseURL: getEnv("DATABASE_URL", "not-configured"),
@@ -125,6 +125,7 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 }
 

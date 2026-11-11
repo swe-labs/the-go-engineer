@@ -112,7 +112,7 @@ func (d *Deployment) Rollback() []string {
 	}
 	switch d.Strategy {
 	case StrategyBlueGreen:
-		events = append(events, fmt.Sprintf("Switching traffic back to %s (%s)", d.Current.Name, d.Current.Version))
+		events = append(events, fmt.Sprintf("Switching traffic back to %s (%s)", d.New.Name, d.New.Version))
 	case StrategyCanary:
 		events = append(events, "Reverting all traffic to production version")
 		events = append(events, "Removing canary instances")

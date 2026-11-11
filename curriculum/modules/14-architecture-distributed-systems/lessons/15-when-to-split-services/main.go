@@ -23,7 +23,7 @@ func AnalyzeSplitContext(ctx BoundedContext) SplittingAnalysis {
 	reasons := []string{}
 
 	if ctx.TeamSize > 8 {
-		reasons = append(reasons, "team size exceeds Dunbar limit")
+		reasons = append(reasons, "team size exceeds single-team ownership (two-pizza) limit")
 	}
 	if len(ctx.OwnsData) > 5 {
 		reasons = append(reasons, "context owns too many data entities")

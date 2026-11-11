@@ -82,6 +82,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 type Workflow struct {
@@ -125,30 +127,40 @@ func ValidateWorkflow(w Workflow) []error {
 	}
 	for i, job := range w.Jobs {
 		if job.Name == "" {
-			errs = append(errs, ValidationError{
-				fmt.Sprintf("jobs[%d].name", i), "job name is required",
-			})
+			errs = append(errs, ValidationError{fmt.Sprintf("jobs[%d].name", i), "job name is required"})
 		}
 		if job.RunsOn == "" {
-			errs = append(errs, ValidationError{
-				fmt.Sprintf("jobs[%d].runs-on", i), "runs-on is required",
-			})
+			errs = append(errs, ValidationError{fmt.Sprintf("jobs[%d].runs-on", i), "runs-on is required"})
 		}
 		for j, step := range job.Steps {
 			if step.Name == "" {
-				errs = append(errs, ValidationError{
-					fmt.Sprintf("jobs[%d].steps[%d].name", i, j), "step name is required",
-				})
+				errs = append(errs, ValidationError{fmt.Sprintf("jobs[%d].steps[%d].name", i, j), "step name is required"})
 			}
 			if step.Run == "" && step.Uses == "" {
-				errs = append(errs, ValidationError{
-					fmt.Sprintf("jobs[%d].steps[%d]", i, j),
-					"step must have run or uses",
-				})
+				errs = append(errs, ValidationError{fmt.Sprintf("jobs[%d].steps[%d]", i, j), "step must have run or uses"})
+			}
+			if step.Timeout > 360 {
+				errs = append(errs, ValidationError{fmt.Sprintf("jobs[%d].steps[%d].timeout", i, j), "timeout exceeds 360 minutes"})
 			}
 		}
 	}
 	return errs
+}
+
+func GoCacheKey(goVersion, osName string, sumHash string) string {
+	return fmt.Sprintf("go-cache-%s-%s-%s", goVersion, osName, sumHash[:8])
+}
+
+func GenerateCacheStep(key, restoreKey, path string) Step {
+	return Step{
+		Name: "Cache Go modules",
+		Uses: "actions/cache@v4",
+		With: map[string]string{
+			"key":          key,
+			"restore-keys": restoreKey,
+			"path":         path,
+		},
+	}
 }
 
 func ExpandMatrix(matrix map[string][]string) []map[string]string {
@@ -181,6 +193,23 @@ func ExpandMatrix(matrix map[string][]string) []map[string]string {
 	return result
 }
 
+func SuggestRunner(goVersion string, osSuffix string) string {
+	if osSuffix == "" {
+		return "ubuntu-latest"
+	}
+	if strings.Contains(osSuffix, "win") {
+		return "windows-latest"
+	}
+	if strings.Contains(osSuffix, "mac") {
+		return "macos-latest"
+	}
+	return "ubuntu-latest"
+}
+
+func init() {
+	_ = filepath.Join
+}
+
 func main() {
 	w := Workflow{
 		Name: "CI",
@@ -191,8 +220,7 @@ func main() {
 				RunsOn: "ubuntu-latest",
 				Steps: []Step{
 					{Name: "Checkout", Uses: "actions/checkout@v4"},
-					{Name: "Setup Go", Uses: "actions/setup-go@v6",
-						With: map[string]string{"go-version": "1.27"}},
+					{Name: "Setup Go", Uses: "actions/setup-go@v6", With: map[string]string{"go-version": "1.27"}},
 					{Name: "Run tests", Run: "go test ./..."},
 				},
 			},
@@ -207,14 +235,21 @@ func main() {
 	}
 	fmt.Printf("Workflow %q validated OK (%d jobs)\n", w.Name, len(w.Jobs))
 
+	cacheStep := GenerateCacheStep(
+		GoCacheKey("1.27", "ubuntu", "abcdef1234567890"),
+		"go-cache-1.27-ubuntu-",
+		"~/.cache/go",
+	)
+	fmt.Printf("Cache step: %s (key=%s)\n", cacheStep.Name, cacheStep.With["key"])
+
 	matrix := map[string][]string{
 		"go": {"1.26", "1.27"},
 		"os": {"ubuntu", "windows"},
 	}
 	combos := ExpandMatrix(matrix)
-	fmt.Printf("Matrix produces %d combinations:\n", len(combos))
+	fmt.Printf("Matrix combinations: %d\n", len(combos))
 	for _, c := range combos {
-		fmt.Printf("  go=%s os=%s\n", c["go"], c["os"])
+		fmt.Printf("  go=%s os=%s runner=%s\n", c["go"], c["os"], SuggestRunner(c["go"], c["os"]))
 	}
 }
 ```

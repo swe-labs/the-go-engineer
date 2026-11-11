@@ -67,22 +67,32 @@ Production patterns: request-scoped loggers with `slog.With` to add trace_id, ha
 package main
 
 import (
+	"io"
 	"log/slog"
 	"os"
+	"time"
 )
 
-func main() {
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelDebug,
+func newJSONLogger(w io.Writer, minLevel slog.Level) *slog.Logger {
+	return slog.New(slog.NewJSONHandler(w, &slog.HandlerOptions{
+		Level: minLevel,
 	}))
+}
 
-	logger.Debug("starting up", "version", "1.0.0")
-	logger.Info("server listening", "addr", ":8080")
-	logger.Warn("high memory usage", "pct", 87.5)
-	logger.Error("connection refused", "remote", "10.0.0.1:5432", "attempt", 3)
+func logRequest(logger *slog.Logger, method, path string, status int, duration time.Duration) {
+	logger.Info("request",
+		"method", method,
+		"path", path,
+		"status", status,
+		"duration_ms", duration.Milliseconds(),
+	)
+}
 
-	slog.SetDefault(logger)
-	slog.Info("this uses the default logger")
+func main() {
+	logger := newJSONLogger(os.Stdout, slog.LevelInfo)
+	logRequest(logger, "GET", "/api/users", 200, 15*time.Millisecond)
+	logRequest(logger, "POST", "/api/orders", 201, 42*time.Millisecond)
+	logger.Debug("this message is suppressed at Info level")
 }
 ```
 

@@ -26,7 +26,8 @@ func main() {
 	fmt.Printf("Output: %s", out)
 	fmt.Printf("Exit code: %d\n", code)
 
-	_, code, err = runCommand("cmd", "/c", "exit /b 42")
+	// An unknown go subcommand exits with status 2 on every platform.
+	_, code, err = runCommand("go", "this-subcommand-does-not-exist")
 	if err != nil {
 		fmt.Printf("Expected failure, exit code: %d\n", code)
 	}

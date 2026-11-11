@@ -6,7 +6,7 @@ Design multi-stage Dockerfiles that separate build and runtime environments, pro
 
 ## Why this matters
 
-A multi-stage Dockerfile is the standard way to build Go containers in production. It produces a final image containing only the compiled binary — no compiler, no package manager, no shell, no source code. This reduces the attack surface, decreases pull time, and eliminates variant analysis work for security scanners. Every major Go project (Docker CLI, Kubernetes, Prometheus, Grafana, Caddy) uses multi-stage builds.
+A multi-stage Dockerfile is the standard way to build Go containers in production. It produces a final image containing only the compiled binary — no compiler, no package manager, no shell, no source code. This reduces the attack surface, decreases pull time, and eliminates variant analysis work for security scanners. Major Go projects (Kubernetes, Prometheus, Docker CLI, Caddy) build their containers this way.
 
 ## Mental model
 
