@@ -93,8 +93,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"net/http/httptest"
+	"net/netip"
 	"net/url"
 	"strings"
 	"sync"
@@ -174,51 +176,133 @@ func (h *csrfHandler) transfer(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"status":"transferred"}`))
 }
 
-func expectedOrigin(r *http.Request) (scheme, host string) {
-	scheme = "http"
+// OriginConfig lets callers behind TLS termination specify explicit public
+// origins or reverse-proxy CIDRs whose X-Forwarded-Proto header is trusted.
+type OriginConfig struct {
+	TrustedOrigins []string
+	TrustedProxies []netip.Prefix
+}
+
+type originPair struct {
+	scheme string
+	host   string
+}
+
+func parseTrustedOrigins(raw []string) []originPair {
+	var out []originPair
+	for _, entry := range raw {
+		u, err := url.Parse(strings.TrimSpace(entry))
+		if err != nil || u.User != nil || u.Host == "" {
+			continue
+		}
+		if !strings.EqualFold(u.Scheme, "http") && !strings.EqualFold(u.Scheme, "https") {
+			continue
+		}
+		if (u.Path != "" && u.Path != "/") || u.RawQuery != "" || u.Fragment != "" {
+			continue
+		}
+		out = append(out, originPair{scheme: u.Scheme, host: u.Host})
+	}
+	return out
+}
+
+func isTrustedProxy(remoteAddr string, proxies []netip.Prefix) bool {
+	if len(proxies) == 0 || remoteAddr == "" {
+		return false
+	}
+	host, _, err := net.SplitHostPort(remoteAddr)
+	if err != nil {
+		host = remoteAddr
+	}
+	addr, err := netip.ParseAddr(host)
+	if err != nil {
+		return false
+	}
+	addr = addr.Unmap()
+	for _, p := range proxies {
+		if p.Contains(addr) {
+			return true
+		}
+	}
+	return false
+}
+
+func forwardedProto(r *http.Request) string {
+	raw, _, _ := strings.Cut(r.Header.Get("X-Forwarded-Proto"), ",")
+	proto := strings.TrimSpace(raw)
+	if strings.EqualFold(proto, "https") {
+		return "https"
+	}
+	if strings.EqualFold(proto, "http") {
+		return "http"
+	}
+	return ""
+}
+
+func expectedOrigin(r *http.Request, proxies []netip.Prefix) originPair {
+	if isTrustedProxy(r.RemoteAddr, proxies) {
+		if proto := forwardedProto(r); proto != "" {
+			return originPair{scheme: proto, host: r.Host}
+		}
+	}
+	scheme := "http"
 	if r.TLS != nil {
 		scheme = "https"
 	}
-	return scheme, r.Host
+	return originPair{scheme: scheme, host: r.Host}
 }
 
-func isTrustedOrigin(rawURL, expectedScheme, expectedHost string, allowPath bool) bool {
-	if rawURL == "" || rawURL == "null" || expectedHost == "" {
+func matchesOrigin(rawURL string, allowed []originPair, allowPath bool) bool {
+	if rawURL == "" || rawURL == "null" {
 		return false
 	}
 	u, err := url.Parse(rawURL)
 	if err != nil || u.User != nil {
 		return false
 	}
-	if !strings.EqualFold(u.Scheme, expectedScheme) || !strings.EqualFold(u.Host, expectedHost) {
-		return false
-	}
 	if !allowPath && (u.Path != "" || u.RawQuery != "" || u.Fragment != "") {
 		return false
 	}
-	return true
+	for _, a := range allowed {
+		if a.host != "" && strings.EqualFold(u.Scheme, a.scheme) && strings.EqualFold(u.Host, a.host) {
+			return true
+		}
+	}
+	return false
 }
 
-func middlewareCSRF(next http.Handler, protector *CSRFProtector) http.Handler {
+func middlewareCSRF(next http.Handler, cfg ...OriginConfig) http.Handler {
+	var policy OriginConfig
+	for _, c := range cfg {
+		policy.TrustedOrigins = append(policy.TrustedOrigins, c.TrustedOrigins...)
+		policy.TrustedProxies = append(policy.TrustedProxies, c.TrustedProxies...)
+	}
+	explicitMode := len(policy.TrustedOrigins) > 0
+	configuredOrigins := parseTrustedOrigins(policy.TrustedOrigins)
+
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet, http.MethodHead, http.MethodOptions:
 			next.ServeHTTP(w, r)
 			return
 		}
-		// Origin/Referer comparison against the trusted scheme and host is a
-		// secondary defense alongside the CSRF token and SameSite cookies.
-		scheme, host := expectedOrigin(r)
+		// Origin/Referer comparison against configured public origins or the
+		// request scheme/host (honoring X-Forwarded-Proto only from trusted
+		// proxies) is a secondary defense alongside CSRF tokens and SameSite cookies.
+		allowed := configuredOrigins
+		if !explicitMode {
+			allowed = []originPair{expectedOrigin(r, policy.TrustedProxies)}
+		}
 		origin := r.Header.Get("Origin")
 		referer := r.Header.Get("Referer")
 		switch {
 		case origin != "":
-			if !isTrustedOrigin(origin, scheme, host, false) {
+			if !matchesOrigin(origin, allowed, false) {
 				http.Error(w, "CSRF: untrusted origin", http.StatusForbidden)
 				return
 			}
 		case referer != "":
-			if !isTrustedOrigin(referer, scheme, host, true) {
+			if !matchesOrigin(referer, allowed, true) {
 				http.Error(w, "CSRF: untrusted referer", http.StatusForbidden)
 				return
 			}
@@ -238,7 +322,7 @@ func main() {
 	mux.HandleFunc("/login", h.login)
 	mux.HandleFunc("/transfer", h.transfer)
 
-	handler := middlewareCSRF(mux, protector)
+	handler := middlewareCSRF(mux)
 
 	ts := httptest.NewServer(handler)
 	defer ts.Close()
