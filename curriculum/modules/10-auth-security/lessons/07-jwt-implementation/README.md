@@ -178,8 +178,17 @@ func VerifyJWT(tokenStr string, secret []byte) (string, string, error) {
 	if !ok || !token.Valid {
 		return "", "", fmt.Errorf("invalid token")
 	}
-	sub, _ := claims["sub"].(string)
-	role, _ := claims["role"].(string)
+	sub, ok := claims["sub"].(string)
+	if !ok || sub == "" {
+		return "", "", fmt.Errorf("invalid subject claim")
+	}
+	var role string
+	if rawRole, exists := claims["role"]; exists {
+		role, ok = rawRole.(string)
+		if !ok {
+			return "", "", fmt.Errorf("invalid role claim")
+		}
+	}
 	return sub, role, nil
 }
 

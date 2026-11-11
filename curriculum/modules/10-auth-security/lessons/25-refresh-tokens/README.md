@@ -123,15 +123,18 @@ type TokenPair struct {
 }
 
 type RefreshTokenStore struct {
-	mu      sync.RWMutex
-	tokens  map[string]*RefreshTokenInfo
-	hmacKey []byte
+	mu              sync.RWMutex
+	tokens          map[string]*RefreshTokenInfo
+	revokedFamilies map[string]bool
+	hmacKey         []byte
 }
 
 type RefreshTokenInfo struct {
 	TokenHash string
 	UserID    string
+	FamilyID  string
 	ExpiresAt time.Time
+	Used      bool
 	Revoked   bool
 }
 
@@ -141,8 +144,9 @@ func NewRefreshTokenStore() *RefreshTokenStore {
 		panic(err) // crypto/rand failure is unrecoverable for a token store
 	}
 	return &RefreshTokenStore{
-		tokens:  make(map[string]*RefreshTokenInfo),
-		hmacKey: key,
+		tokens:          make(map[string]*RefreshTokenInfo),
+		revokedFamilies: make(map[string]bool),
+		hmacKey:         key,
 	}
 }
 
@@ -160,19 +164,18 @@ func (s *RefreshTokenStore) hashToken(token string) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func (s *RefreshTokenStore) Issue(userID string, accessTTL, refreshTTL time.Duration) *TokenPair {
+func (s *RefreshTokenStore) issueInFamilyLocked(userID, familyID string, accessTTL, refreshTTL time.Duration) *TokenPair {
 	accessToken := generateRandomString(32)
 	refreshToken := generateRandomString(64)
 
 	refreshHash := s.hashToken(refreshToken)
 
-	s.mu.Lock()
 	s.tokens[refreshHash] = &RefreshTokenInfo{
 		TokenHash: refreshHash,
 		UserID:    userID,
+		FamilyID:  familyID,
 		ExpiresAt: time.Now().Add(refreshTTL),
 	}
-	s.mu.Unlock()
 
 	return &TokenPair{
 		AccessToken:  accessToken,
@@ -181,30 +184,49 @@ func (s *RefreshTokenStore) Issue(userID string, accessTTL, refreshTTL time.Dura
 	}
 }
 
+func (s *RefreshTokenStore) revokeFamilyLocked(familyID string) {
+	s.revokedFamilies[familyID] = true
+	for _, info := range s.tokens {
+		if info.FamilyID == familyID {
+			info.Revoked = true
+		}
+	}
+}
+
+func (s *RefreshTokenStore) Issue(userID string, accessTTL, refreshTTL time.Duration) *TokenPair {
+	familyID := generateRandomString(16)
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.issueInFamilyLocked(userID, familyID, accessTTL, refreshTTL)
+}
+
 func (s *RefreshTokenStore) Rotate(refreshToken string, accessTTL, refreshTTL time.Duration) (*TokenPair, error) {
 	hash := s.hashToken(refreshToken)
 
 	s.mu.Lock()
+	defer s.mu.Unlock()
+
 	info, ok := s.tokens[hash]
 	if !ok {
-		s.mu.Unlock()
 		return nil, fmt.Errorf("refresh token not found")
 	}
 
-	if info.Revoked {
-		s.mu.Unlock()
+	if info.Revoked || s.revokedFamilies[info.FamilyID] {
 		return nil, fmt.Errorf("refresh token revoked")
 	}
 
+	if info.Used {
+		// Replay of a consumed token indicates theft: revoke the entire family.
+		s.revokeFamilyLocked(info.FamilyID)
+		return nil, fmt.Errorf("refresh token reuse detected: family revoked")
+	}
+
 	if time.Now().After(info.ExpiresAt) {
-		s.mu.Unlock()
 		return nil, fmt.Errorf("refresh token expired")
 	}
 
-	delete(s.tokens, hash)
-	s.mu.Unlock()
-
-	return s.Issue(info.UserID, accessTTL, refreshTTL), nil
+	info.Used = true
+	return s.issueInFamilyLocked(info.UserID, info.FamilyID, accessTTL, refreshTTL), nil
 }
 
 func (s *RefreshTokenStore) Revoke(refreshToken string) bool {
@@ -215,7 +237,7 @@ func (s *RefreshTokenStore) Revoke(refreshToken string) bool {
 	if !ok {
 		return false
 	}
-	info.Revoked = true
+	s.revokeFamilyLocked(info.FamilyID)
 	return true
 }
 
@@ -227,8 +249,11 @@ func (s *RefreshTokenStore) Validate(refreshToken string) (string, error) {
 	if !ok {
 		return "", fmt.Errorf("token not found")
 	}
-	if info.Revoked {
+	if info.Revoked || s.revokedFamilies[info.FamilyID] {
 		return "", fmt.Errorf("token revoked")
+	}
+	if info.Used {
+		return "", fmt.Errorf("token already used")
 	}
 	if time.Now().After(info.ExpiresAt) {
 		return "", fmt.Errorf("token expired")
@@ -290,17 +315,17 @@ For a refresh token rotation with reuse detection:
 1. User logs in. Server issues access token (15 min) and refresh token (30 days). Store hash in database.
 2. After 15 minutes, client receives 401. Client calls `POST /auth/refresh` with the refresh token.
 3. Server hashes the refresh token with HMAC, looks up in database. Found, valid, not expired, not revoked.
-4. Server atomically deletes the old token hash and inserts a new token hash. Returns new access token and new refresh token.
+4. Server marks the old token hash as used within the token family and inserts a new token hash in the same family. Returns new access token and new refresh token.
 5. Client stores the new tokens and retries the original request.
 
 **Attack scenario -- token theft:**
 
 1. Attacker steals the user's refresh token (e.g., via XSS or device compromise).
-2. Attacker calls `POST /auth/refresh` with the stolen token. Server rotates it. Attacker gets new tokens.
+2. Attacker calls `POST /auth/refresh` with the stolen token. Server marks it as used and rotates to a new token in the same family. Attacker gets new tokens.
 3. Legitimate user's next API call gets 401. User calls `POST /auth/refresh` with their (now-stale) refresh token.
-4. Server looks up the hash... but the old token was deleted in step 2. The user's refresh fails.
-5. Server detects reuse of an already-rotated token. This is a signal of token theft.
-6. Server can revoke ALL tokens for this user and force re-login.
+4. Server looks up the hash and sees the token is already marked used. The user's refresh fails.
+5. Server detects replay of an already-rotated token. This signals token theft.
+6. Server revokes the entire token family (invalidating the attacker's replacement token too) and forces re-login.
 
 **Without rotation:**
 1. Attacker steals refresh token. Both attacker and user can use it for 30 days.
