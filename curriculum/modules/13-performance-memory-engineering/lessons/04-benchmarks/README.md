@@ -133,7 +133,7 @@ BenchmarkConcatBuilder-8  20000000    85 ns/op   64 B/op   1 allocs/op
 2. For `BenchmarkConcatPlus`, the framework sets `b.N = 1` and calls the function.
 3. The loop runs once: `concatPlus` builds the string using `+=` (which allocates a new string on each concatenation).
 4. The framework measures ~300 ns. Since this is below 1 second, it computes `N = 1s / 300ns ≈ 3,333,333`, then adds the 1.2x margin (`n += n/5`) for `N ≈ 4,000,000`.
-5. The framework runs with `b.N = 3,600,000`, calls `runtime.ReadMemStats`, runs the loop, calls `ReadMemStats` again, and measures the delta.
+5. The framework runs with `b.N = 4,000,000`, calls `runtime.ReadMemStats`, runs the loop, calls `ReadMemStats` again, and measures the delta.
 6. Results: `ns/op = total_time / N`, `B/op = (alloc_bytes_after - alloc_bytes_before) / N`, `allocs/op = (alloc_count_after - alloc_count_before) / N`.
 7. For `BenchmarkConcatBuilder`, the same process yields fewer allocations (1 vs 7) and lower `ns/op`.
 
