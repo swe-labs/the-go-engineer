@@ -105,7 +105,6 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
-	"runtime"
 	"strings"
 )
 
@@ -200,7 +199,7 @@ func main() {
 	fmt.Println("Release artifacts")
 	fmt.Printf("Version: %s, Commit: %s, Built: %s\n", Version, Commit, BuildTime)
 
-	app := NewArtifact("myapp", "v1.2.3", runtime.GOOS, runtime.GOARCH, []byte("binary-content"))
+	app := NewArtifact("myapp", "v1.2.3", "linux", "amd64", []byte("binary-content"))
 	app.Checksum = app.ComputeChecksum()
 	fmt.Printf("Binary: %s\n", app.BinaryName())
 	fmt.Printf("SHA256: %s\n", app.Checksum)

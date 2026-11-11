@@ -54455,7 +54455,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/01-linux-processes/main_test.go"
       },
       "id": "core-15-01",
-      "learning_objective": "Trace Linux process initialization, PID 1 init responsibilities, signal forwarding, and process reaping in containers.",
+      "learning_objective": "Use Go's `os/exec` package to spawn child processes, capture their stdout/stderr, inspect exit codes, and manage process lifecycle without creating zombies or leaking resources.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-02"
@@ -54598,7 +54598,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/02-signals/main_test.go"
       },
       "id": "core-15-02",
-      "learning_objective": "Intercept OS signals (SIGTERM, SIGINT) in Go services to complete in-flight requests and shut down gracefully.",
+      "learning_objective": "Handle OS signals (SIGINT, SIGTERM, SIGHUP) in Go programs using `os/signal.Notify`, implement graceful shutdown in HTTP servers, and avoid the pitfalls of signal handling in containerized environments.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-03"
@@ -54746,7 +54746,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/03-logs/main_test.go"
       },
       "id": "core-15-03",
-      "learning_objective": "Configure application logging to write raw JSON to standard output (stdout/stderr) for container log collectors.",
+      "learning_objective": "Write structured logs to stdout/stderr using Go's `log/slog` package, distinguish between log levels, and follow the 12-factor app logging convention required by Docker and container orchestrators.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-04"
@@ -54911,7 +54911,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/04-file-permissions/main_test.go"
       },
       "id": "core-15-04",
-      "learning_objective": "Enforce POSIX file permission modes and directory ownership in containerized environments.",
+      "learning_objective": "Read and set Unix file permissions using Go's `os.FileMode`, understand octal permission notation, and avoid common permission pitfalls when writing files in Docker containers.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-05"
@@ -55082,7 +55082,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/05-networking-basics/main_test.go"
       },
       "id": "core-15-05",
-      "learning_objective": "Analyze container networking basics: port binding, bridge networks, DNS service discovery, and NAT routing.",
+      "learning_objective": "Create TCP servers and clients using Go's `net` package, understand ports, listening addresses (localhost vs 0.0.0.0), and the difference between TCP and UDP transport.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-06"
@@ -55222,7 +55222,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/06-docker-basics/main_test.go"
       },
       "id": "core-15-06",
-      "learning_objective": "Build, tag, and inspect Docker container images from Dockerfiles using the docker CLI.",
+      "learning_objective": "Write a Dockerfile for a Go application, build a minimal Docker image using `FROM`, `RUN`, `COPY`, `CMD`, and understand how Docker containers map to Linux processes.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-07"
@@ -55407,7 +55407,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/07-docker-images-and-layers/main_test.go"
       },
       "id": "core-15-07",
-      "learning_objective": "Optimize Docker image layer caching, ordering instructions from least-frequently changed to most-frequently changed.",
+      "learning_objective": "Explain how Docker image layers work, optimize `COPY` ordering for cache efficiency, write `.dockerignore` files, and evaluate layer size impact on build and deployment speed.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-08"
@@ -55579,7 +55579,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/08-multi-stage-builds/main_test.go"
       },
       "id": "core-15-08",
-      "learning_objective": "Author multi-stage Dockerfiles compiling Go binaries in a builder stage and deploying into a minimal scratch or alpine runtime image.",
+      "learning_objective": "Design multi-stage Dockerfiles that separate build and runtime environments, produce tiny images using `scratch` or `distroless` base images, and configure `CGO_ENABLED=0` for fully static Go binaries.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-09"
@@ -55719,7 +55719,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/09-docker-compose/main_test.go"
       },
       "id": "core-15-09",
-      "learning_objective": "Define and orchestrate multi-container local environments (Go API, PostgreSQL, Redis) using Docker Compose.",
+      "learning_objective": "Define multi-service Go applications using `docker-compose.yml` with services, environment variables, volumes, ports, and inter-service dependencies managed by Compose.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-10"
@@ -55861,7 +55861,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/10-container-health-checks/main_test.go"
       },
       "id": "core-15-10",
-      "learning_objective": "Configure Docker and container orchestration HEALTHCHECK directives to verify service liveness automatically.",
+      "learning_objective": "Implement `/healthz` and `/readyz` HTTP endpoints in Go, configure Docker `HEALTHCHECK` and Kubernetes readiness/liveness probes, and distinguish between application startup, liveness, and readiness states.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-11"
@@ -56001,7 +56001,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/11-github-actions/main_test.go"
       },
       "id": "core-15-11",
-      "learning_objective": "Author automated GitHub Actions CI workflows executing on push and pull request events.",
+      "learning_objective": "Parse, validate, and generate GitHub Actions workflow configurations using Go, and explain how workflow YAML, jobs, steps, actions, matrix builds, runners, and caching work together in a CI pipeline.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-12"
@@ -56141,7 +56141,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/12-ci-pipeline/main_test.go"
       },
       "id": "core-15-12",
-      "learning_objective": "Build multi-step CI pipelines incorporating dependency caching, code formatting, vet analysis, race-enabled tests, and coverage reporting.",
+      "learning_objective": "Design, model, and validate a continuous integration pipeline for a Go project, comprising lint, vet, test, and build stages, and distinguish CI from CD in the context of pipeline-as-code practices.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-13"
@@ -56283,7 +56283,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/13-release-artifacts/main_test.go"
       },
       "id": "core-15-13",
-      "learning_objective": "Compile cross-platform release binaries and publish tagged container images to container registries in CI.",
+      "learning_objective": "Version, build, checksum, and verify Go binaries as release artifacts, using ldflags for version injection and SHA256 checksums for integrity verification.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-14"
@@ -56423,7 +56423,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/14-config-in-deployment/main_test.go"
       },
       "id": "core-15-14",
-      "learning_objective": "Inject production environment variables and configuration files into containers without baking secrets into image layers.",
+      "learning_objective": "Load, validate, and manage application configuration from environment variables in a Go service, following 12-factor app principles, and mask sensitive values in log output.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-15"
@@ -56563,7 +56563,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/15-secrets-in-deployment/main_test.go"
       },
       "id": "core-15-15",
-      "learning_objective": "Manage deployment secrets securely using environment injection, secret mounts, and runtime access controls.",
+      "learning_objective": "Implement a secrets management abstraction in Go that supports multiple backends (env vars, in-memory, secret stores), parse .env files safely, sanitize secrets in logs, and resolve templates with secret substitution.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-16"
@@ -56703,7 +56703,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/16-vulnerability-scanning/main_test.go"
       },
       "id": "core-15-16",
-      "learning_objective": "Scan container images and dependencies for known vulnerabilities in CI pipelines using govulncheck and Trivy.",
+      "learning_objective": "Model vulnerability scan reports in Go, evaluate severity-based policy gates, and integrate vulnerability scanning into a CI pipeline to block deployments with critical or high-severity findings.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-17"
@@ -56843,7 +56843,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/17-one-deployment-target/main_test.go"
       },
       "id": "core-15-17",
-      "learning_objective": "Deploy a containerized Go service to a real cloud or VPS deployment target with persistent volume mounts.",
+      "learning_objective": "Model deployment strategies (blue-green, canary, rolling, recreate) in Go, implement deploy and rollback logic for each strategy, and determine which strategies provide zero-downtime deployments.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-18"
@@ -56983,7 +56983,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/18-rollback-basics/main_test.go"
       },
       "id": "core-15-18",
-      "learning_objective": "Formulate and execute deployment rollback procedures to restore service quickly following failed releases.",
+      "learning_objective": "Design and implement rollback plans for deployment failures in Go, model different rollback reasons (error rate, latency, health checks, database issues), and build automated rollback decision logic.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-15-19"
@@ -57131,7 +57131,7 @@
         "test_path": "modules/15-docker-cicd-deployment/lessons/19-deployment-runbook/main_test.go"
       },
       "id": "core-15-19",
-      "learning_objective": "Author a production deployment runbook detailing provisioning steps, health verification, backup procedures, and emergency operations.",
+      "learning_objective": "Design, validate, and generate deployment runbooks in Go that structure pre-deploy checks, deploy steps, post-deploy verification, rollback procedures, and incident contacts for a production Go service.",
       "module_id": "module-15",
       "next_item_ids": [
         "core-16-01"

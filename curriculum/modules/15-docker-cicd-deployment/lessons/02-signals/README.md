@@ -69,6 +69,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
@@ -76,27 +77,43 @@ import (
 	"time"
 )
 
-func main() {
+func startServer(addr string) (*http.Server, net.Addr, error) {
+	listener, err := net.Listen("tcp", addr)
+	if err != nil {
+		return nil, nil, err
+	}
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello"))
+		w.Write([]byte("ok"))
 	})
 
-	srv := &http.Server{Addr: ":8080", Handler: mux}
-
+	srv := &http.Server{Handler: mux}
 	go func() {
-		slog.Info("server listening", "addr", srv.Addr)
-		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		if err := srv.Serve(listener); err != nil && err != http.ErrServerClosed {
 			slog.Error("server error", "error", err)
 		}
 	}()
+	return srv, listener.Addr(), nil
+}
 
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	sig := <-quit
-	slog.Info("received signal, shutting down", "signal", sig)
+func waitForSignal(signals ...os.Signal) os.Signal {
+	ch := make(chan os.Signal, 1)
+	signal.Notify(ch, signals...)
+	return <-ch
+}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+func main() {
+	srv, addr, err := startServer(":8080")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("server started on %s, waiting for signal\n", addr)
+
+	sig := waitForSignal(syscall.SIGINT, syscall.SIGTERM)
+	slog.Info("shutting down", "signal", sig)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
