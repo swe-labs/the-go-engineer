@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"strings"
 	"sync"
 )
@@ -87,18 +88,57 @@ func (h *csrfHandler) transfer(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"status":"transferred"}`))
 }
 
+func expectedOrigin(r *http.Request) (scheme, host string) {
+	scheme = "http"
+	if r.TLS != nil {
+		scheme = "https"
+	}
+	return scheme, r.Host
+}
+
+func isTrustedOrigin(rawURL, expectedScheme, expectedHost string, allowPath bool) bool {
+	if rawURL == "" || rawURL == "null" || expectedHost == "" {
+		return false
+	}
+	u, err := url.Parse(rawURL)
+	if err != nil || u.User != nil {
+		return false
+	}
+	if !strings.EqualFold(u.Scheme, expectedScheme) || !strings.EqualFold(u.Host, expectedHost) {
+		return false
+	}
+	if !allowPath && (u.Path != "" || u.RawQuery != "" || u.Fragment != "") {
+		return false
+	}
+	return true
+}
+
 func middlewareCSRF(next http.Handler, protector *CSRFProtector) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == http.MethodPost || r.Method == http.MethodPut || r.Method == http.MethodDelete {
-			// Origin/Referer checking is a secondary defense; the primary ones are
-			// the CSRF token below and SameSite cookie attributes set on the session
-			// cookie itself (never a request header - attackers control headers).
-			origin := r.Header.Get("Origin")
-			referer := r.Header.Get("Referer")
-			if origin == "" && referer == "" {
-				http.Error(w, "CSRF: missing origin or referer", http.StatusForbidden)
+		switch r.Method {
+		case http.MethodGet, http.MethodHead, http.MethodOptions:
+			next.ServeHTTP(w, r)
+			return
+		}
+		// Origin/Referer comparison against the trusted scheme and host is a
+		// secondary defense alongside the CSRF token and SameSite cookies.
+		scheme, host := expectedOrigin(r)
+		origin := r.Header.Get("Origin")
+		referer := r.Header.Get("Referer")
+		switch {
+		case origin != "":
+			if !isTrustedOrigin(origin, scheme, host, false) {
+				http.Error(w, "CSRF: untrusted origin", http.StatusForbidden)
 				return
 			}
+		case referer != "":
+			if !isTrustedOrigin(referer, scheme, host, true) {
+				http.Error(w, "CSRF: untrusted referer", http.StatusForbidden)
+				return
+			}
+		default:
+			http.Error(w, "CSRF: missing origin or referer", http.StatusForbidden)
+			return
 		}
 		next.ServeHTTP(w, r)
 	})
