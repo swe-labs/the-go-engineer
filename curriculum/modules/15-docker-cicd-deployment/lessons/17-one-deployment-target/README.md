@@ -208,14 +208,16 @@ func (d *Deployment) Rollback() []string {
 	}
 	switch d.Strategy {
 	case StrategyBlueGreen:
-		events = append(events, fmt.Sprintf("Switching traffic back to %s (%s)", d.New.Name, d.New.Version))
+		// Deploy() never swapped Current/New, so Current still names the
+		// original live environment — the rollback target. No swap here:
+		// swapping would promote the failed release back to Current.
+		events = append(events, fmt.Sprintf("Switching traffic back to %s (%s)", d.Current.Name, d.Current.Version))
 	case StrategyCanary:
 		events = append(events, "Reverting all traffic to production version")
 		events = append(events, "Removing canary instances")
 	default:
 		events = append(events, fmt.Sprintf("Redeploying version %s", d.Current.Version))
 	}
-	d.New, d.Current = d.Current, d.New
 	d.Done = false
 	return events
 }
