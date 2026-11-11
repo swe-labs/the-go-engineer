@@ -52,7 +52,7 @@ Heap profiling lives in `runtime/mprof.go`. Each thread maintains a `nextSample`
 
 On a sample, the runtime captures up to 32 PC values from the current goroutine's stack (`MemProfileRecord.Stack0 [32]uintptr`). The record is stored in a hash table keyed by the stack trace — repeated allocations from the same call site merge into one accumulating record. Each record contains: `AllocBytes` (total bytes allocated at this site), `FreeBytes` (bytes freed), `AllocObjects` (count allocated), `FreeObjects` (count freed), and the stack trace. On `WriteHeapProfile`, the runtime iterates the live records, computes `inuse = AllocBytes - FreeBytes`, and serializes as a pprof profile.
 
-The key sampling invariance: the expected number of samples for a particular allocation pattern is proportional to bytes allocated, not call frequency — on average one sample per `MemProfileRate` bytes allocated. Larger allocations are proportionally more likely to push the counter negative, and an allocation larger than the rate itself is almost certain to be sampled.
+The key sampling invariance: the expected number of samples for a particular allocation pattern is proportional to bytes allocated, not call frequency — on average one sample per `MemProfileRate` bytes allocated. For an individual allocation, the probability of pushing a freshly drawn counter negative is `1 - exp(-size/MemProfileRate)` — about 63% for an allocation equal to the rate, approaching certainty only for allocations several times the rate.
 
 ## How Go uses it
 
