@@ -215,12 +215,12 @@ func main() {
 ## Step-by-step execution
 
 1. `NewTrace()` generates a 128-bit trace ID and 64-bit root span ID using `crypto/rand`.
-2. `Tracer.StartSpan` creates a span with the given context and operation name, recording the start time.
-3. `simulateServiceCall` creates a child span context (same trace ID, new span ID, parent span ID set) and calls `StartSpan`.
-4. The child span simulates work with `time.Sleep` and records attributes.
-5. `span.End()` records the end time; the duration is computed when printed.
-6. Each span prints its trace ID prefix, span ID prefix, operation name, and duration.
-7. The root span shows the total trace duration.
+2. `StartSpan(rootCtx, "GET /api/orders")` creates the root span with its start time and an empty attribute map.
+3. `root.StartChild("auth.verify_token")` builds a child context (same trace ID, new span ID, parent span ID set), links the child to the parent, and starts it.
+4. Each child simulates work with `time.Sleep`, records attributes (`db.statement`, `payment.provider`), and adds events (`auth.AddEvent("token.cached")`).
+5. `child.End()` records the end time; `Duration()` returns the elapsed time once ended.
+6. The root span prints its tree via the recursive `format`: operation name, 6-char span-ID prefix, and duration per span, with attributes and events indented under each.
+7. The root span shows the total trace duration (roughly the sum of the three sleeps).
 
 ## Common mistakes
 

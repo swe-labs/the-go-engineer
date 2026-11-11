@@ -236,7 +236,7 @@ Different metric types have different costs:
 - **Atomic counter (`expvar.Int`)**: `Add` is a single `atomic.AddInt64` instruction (~50ns). No allocations. The fastest metric type.
 - **Atomic gauge (`expvar.Int` with Set)**: `Set` is a single `atomic.StoreInt64` instruction (~20ns). Also zero allocations.
 - **expvar.Map**: `Add(key, delta)` involves a map lookup (amortized O(1)) plus an atomic add on the inner Int. If the key does not exist, it creates a new Int, which allocates.
-- **Histogram**: Bucket counters are plain `uint64` fields updated with `sync/atomic` (verified in `client_golang` v1.23 — no mutex on the observe path). The bucket array is allocated once at registration; `Observe` itself allocates nothing. Cost per observe is roughly a binary search over the bucket bounds plus two atomic adds.
+- **Histogram**: Bucket counters are plain `uint64` fields updated with `sync/atomic` (verified in `client_golang` v1.23 — no mutex on the observe path). The bucket array is allocated once at registration. `Observe` performs a **linear search** over the bucket bounds, then updates the matched bucket, the total count, and the sum — plus bookkeeping on the hot/cold counter pair. Cost per observe is a handful of atomic adds (tens of nanoseconds); no per-observe allocation, though native-histogram sparse buckets can allocate during `Observe` when native histograms are enabled.
 
 For the critical request path, use atomic counters and gauges. Use histograms on a sampled subset of requests (1 in 100) for p99 latency tracking, or use Prometheus client's histograms which are optimized for concurrent access.
 
