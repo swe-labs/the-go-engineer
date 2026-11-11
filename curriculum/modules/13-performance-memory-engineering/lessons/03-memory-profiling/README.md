@@ -48,7 +48,7 @@ The default view for `go tool pprof` on a heap profile is `inuse_space`. For lea
 
 ## Under the hood
 
-Heap profiling lives in `runtime/mprof.go`. Each thread maintains a `nextSample` counter drawn from an exponential distribution with mean `MemProfileRate` (default 512×1024). `mallocgc` subtracts each allocation's size from the counter; when it goes negative, a sample is taken and a new counter is drawn — so on average one sample lands per `MemProfileRate` bytes allocated. Allocations at least half the rate are sampled with probability proportional to their size.
+Heap profiling lives in `runtime/mprof.go`. Each thread maintains a `nextSample` counter drawn from an exponential distribution with mean `MemProfileRate` (default 512×1024). `mallocgc` subtracts each allocation's size from the counter; when it goes negative, a sample is taken and a new counter is drawn — so on average one sample lands per `MemProfileRate` bytes allocated. Every allocation — regardless of size — goes through the same decrement-and-sample path (verified in `runtime/malloc.go`); larger allocations are simply more likely to push the counter negative.
 
 On a sample, the runtime captures up to 32 PC values from the current goroutine's stack (`MemProfileRecord.Stack0 [32]uintptr`). The record is stored in a hash table keyed by the stack trace — repeated allocations from the same call site merge into one accumulating record. Each record contains: `AllocBytes` (total bytes allocated at this site), `FreeBytes` (bytes freed), `AllocObjects` (count allocated), `FreeObjects` (count freed), and the stack trace. On `WriteHeapProfile`, the runtime iterates the live records, computes `inuse = AllocBytes - FreeBytes`, and serializes as a pprof profile.
 
