@@ -71,7 +71,12 @@ import (
 )
 
 func writeSecureFile(path string, data []byte) error {
-	return os.WriteFile(path, data, 0600)
+	if err := os.WriteFile(path, data, 0600); err != nil {
+		return err
+	}
+	// os.WriteFile's perm argument only applies when the file does not
+	// exist. Re-chmod so a pre-existing permissive file is also secured.
+	return os.Chmod(path, 0600)
 }
 
 func readPermissions(path string) (os.FileMode, error) {
