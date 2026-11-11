@@ -96,7 +96,7 @@ func main() {
 	g, ctx := errgroup.WithContext(context.Background())
 
 	for _, url := range urls {
-		url := url // capture loop variable
+		url := url
 		g.Go(func() error {
 			return fetchURL(ctx, url)
 		})

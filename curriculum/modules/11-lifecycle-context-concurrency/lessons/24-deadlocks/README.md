@@ -69,7 +69,7 @@ func deadlockExample() {
 	go func() {
 		defer wg.Done()
 		mu1.Lock()
-		time.Sleep(10 * time.Millisecond) // force interleaving
+		time.Sleep(10 * time.Millisecond)
 		mu2.Lock()
 		mu2.Unlock()
 		mu1.Unlock()
@@ -79,7 +79,7 @@ func deadlockExample() {
 		defer wg.Done()
 		mu2.Lock()
 		time.Sleep(10 * time.Millisecond)
-		mu1.Lock() // deadlock: mu2 holds, mu1 held by other goroutine
+		mu1.Lock()
 		mu1.Unlock()
 		mu2.Unlock()
 	}()
@@ -101,7 +101,7 @@ func safeOrderedLock() {
 
 	go func() {
 		defer wg.Done()
-		mu1.Lock() // same order: mu1 before mu2
+		mu1.Lock()
 		mu2.Lock()
 		mu2.Unlock()
 		mu1.Unlock()
@@ -179,7 +179,7 @@ Fix: use a goroutine for the sender, or use a buffered channel.
 
 ## Production notes
 
-Deadlocks in production are rare in well-reviewed code but happen most often during refactoring when a function that acquires a lock starts calling another function that also acquires a lock. A common trigger is adding instrumentation or logging inside a locked section: if the logger itself acquires a lock, you can create a deadlock between the application lock and the logger lock. Enforce lock ordering by convention and code review. For complex locking, document the lock hierarchy as a comment above the mutex declarations. Use `go test -race` to detect potential deadlocks (the race detector can catch some lock-order inversions). For channels, use `select` with `default` to avoid blocking when no goroutine is ready to communicate.
+Deadlocks in production are rare in well-reviewed code but happen most often during refactoring when a function that acquires a lock starts calling another function that also acquires a lock. A common trigger is adding instrumentation or logging inside a locked section: if the logger itself acquires a lock, you can create a deadlock between the application lock and the logger lock. Enforce lock ordering by convention and code review. For complex locking, document the lock hierarchy as a comment above the mutex declarations. Do not rely on `go test -race` for deadlocks — the race detector reports data races, not lock-order inversions or circular waits. Standard tooling has no deadlock checker; the runtime only detects *total* deadlock (every goroutine blocked) and panics with "all goroutines are asleep". For channels, use `select` with `default` or timeouts to avoid blocking when no goroutine is ready to communicate.
 
 ## Performance implications
 

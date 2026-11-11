@@ -64,11 +64,11 @@ type RacyCounter struct {
 }
 
 func (c *RacyCounter) Add(n int) {
-	c.value += n // DATA RACE: concurrent writes
+	c.value += n
 }
 
 func (c *RacyCounter) Value() int {
-	return c.value // DATA RACE: concurrent read with write
+	return c.value
 }
 
 type SafeCounter struct {
@@ -105,7 +105,7 @@ func main() {
 	wg.Wait()
 
 	fmt.Printf("Expected: %d\n", n)
-	fmt.Printf("Racy counter: %d (may differ)\n", racy.Value())
+	fmt.Printf("Racy counter: %d (may differ due to data race)\n", racy.Value())
 	fmt.Printf("Safe counter: %d (correct)\n", safe.Value())
 }
 ```

@@ -6,7 +6,7 @@ Use `go build -race` and `go test -race` to detect data races in Go programs, in
 
 ## Why this matters
 
-Data races are the most insidious bugs in concurrent Go programs. They can go undetected for months, producing wrong results only under specific load patterns or on particular hardware. The Go race detector is a compile-time instrumentation tool that catches races at runtime with near-zero false positives. Every professional Go team runs the race detector as part of CI. Without it, shipping concurrent Go code is reckless.
+Data races are the most insidious bugs in concurrent Go programs. They can go undetected for months, producing wrong results only under specific load patterns or on particular hardware. The Go race detector (ThreadSanitizer) instruments memory accesses at compile time and catches races at runtime with essentially zero false positives — every report is a real race. Every professional Go team runs the race detector as part of CI. Without it, shipping concurrent Go code is reckless.
 
 ## Mental model
 
@@ -81,7 +81,8 @@ func (c *SharedCounter) Value() int {
 }
 
 func racyAdd(c *SharedCounter, n int) {
-	c.value += n // deliberate race for demonstration
+	// Direct write without lock simulates a race
+	c.value += n
 }
 
 func main() {
@@ -100,8 +101,24 @@ func main() {
 
 	fmt.Printf("Safe counter: %d (expected %d)\n", safe.Value(), n)
 
-	fmt.Println("\nRun with -race to verify no races in the safe version.")
-	fmt.Println("Try adding racyAdd calls to trigger a report.")
+	// Deliberate data race: 100 goroutines mutate SharedCounter.value with no
+	// lock. Without -race this may still print 1000 (races are intermittent);
+	// with `go run -race .` the detector reports the read-write race and the
+	// program exits with status 66. That report is the demonstration.
+	racyWG := sync.WaitGroup{}
+	racyWG.Add(n)
+	for i := 0; i < n; i++ {
+		go func() {
+			defer racyWG.Done()
+			racyAdd(safe, 1)
+		}()
+	}
+	racyWG.Wait()
+	fmt.Printf("Racy counter (racyAdd, no lock): %d\n", safe.Value())
+
+	fmt.Println("\nRun without -race: the racy counter may silently print a wrong value.")
+	fmt.Println("Run with: go run -race . - the detector prints the race report and exits with status 66.")
+	fmt.Println("Run tests with: go test -race . (the tests themselves are race-free).")
 }
 ```
 
@@ -200,7 +217,7 @@ Integrate the race detector in CI by running all unit and integration tests with
 
 ## Performance implications
 
-The race detector adds 5-10x CPU overhead and 2-5x memory overhead. Garbage collection latency increases because TSan shadow memory must be scanned. Never ship a `-race` binary to production. The overhead is acceptable for testing: a test suite that takes 30 seconds normally may take 3-4 minutes with `-race`. Use `-count=1` to disable test caching when running with `-race`.
+Per the official Go documentation, race detection can increase memory usage by 5-10x and execution time by 2-20x. Never ship a `-race` binary to production. The overhead is acceptable for testing: a test suite that takes 30 seconds normally may take several minutes with `-race`. Use `-count=1` to disable test caching when running with `-race`.
 
 ## Practice task
 

@@ -43,8 +43,8 @@ Key timer operations:
 |---|---|
 | `time.NewTimer(d)` | Creates a timer that fires after `d` |
 | `<-timer.C` | Blocks until timer fires (or returns immediately if already fired) |
-| `timer.Stop()` | Prevents the timer from firing; returns `true` if stopped before firing |
-| `timer.Reset(d)` | Changes the timer to fire after `d`; must call on stopped/expired timers |
+| `timer.Stop()` | Prevents a future firing; in Go 1.23+ the return value no longer tells you whether a value is pending on the channel |
+| `timer.Reset(d)` | Rearms the timer to fire after `d`; on Go 1.23+ no channel draining is required |
 | `time.After(d)` | Returns a channel directly, equivalent to `NewTimer(d).C` |
 
 ## Under the hood
@@ -53,7 +53,7 @@ Each `time.Timer` is managed by the Go runtime's timer heap (a min-heap keyed by
 
 ## How Go uses it
 
-- `net/http`: `Transport.DialTimeout` uses `time.After` under the hood to limit connection establishment.
+- `net/http`: `Transport` timeouts (`DialContext` deadlines, `ResponseHeaderTimeout`) are enforced by deadline-based timers inside the net package, not by `time.After` in your code.
 - `context`: `WithTimeout` creates a timer via `time.AfterFunc` that calls the cancel function.
 - `database/sql`: Connection retry loops use timers for backoff intervals.
 - `os/signal`: Signal notification uses a channel pattern analogous to timers.
@@ -107,9 +107,9 @@ func main() {
 
 ## Common mistakes
 
-- Mistake: Calling `Reset` on an active timer without draining the channel.
-  - Why: If the timer already fired, its channel holds a stale value. `Reset` followed by `<-timer.C` returns immediately with the old value.
-  - Fix: Drain the channel before resetting: `if !timer.Stop() { <-timer.C }`.
+- Mistake (pre-Go-1.23 doctrine, obsolete on modern Go): Draining the channel before `Reset`.
+  - Why (historical): Before Go 1.23, `Timer` channels were buffered, so a fired-but-unreceived value sat in the channel and was delivered immediately after `Reset`.
+  - Fix: On Go 1.23+ the channel is unbuffered and `Reset` on a fired-but-unreceived timer waits for the **new** deadline — verified on go1.27 (a 300ms reset waited 300ms, no stale delivery). The old `if !timer.Stop() { <-timer.C }` dance is unnecessary in code that only targets Go 1.23+; keep it only in code that must run on older Go.
 
 - Mistake: Forgetting to stop a timer after use.
   - Why: The timer remains in the runtime heap until it fires, keeping resources alive and preventing GC.
@@ -119,9 +119,9 @@ func main() {
   - Why: Each iteration allocates a new timer that remains in the heap until it fires.
   - Fix: Use `time.NewTimer` once and call `Reset` after draining.
 
-- Mistake: Reading from `timer.C` after `Stop` returns `false`.
-  - Why: `Stop` returning `false` means the timer already fired. The channel contains a value that must be drained.
-  - Fix: Always drain when `Stop` returns `false`: `if !timer.Stop() { <-timer.C }`.
+- Mistake: Assuming `Stop`'s return value tells you whether a value is pending.
+  - Why: On Go 1.23+ the return value no longer maps to "value pending" — verified on go1.27: `Stop` returned `true` for an already-fired timer and no value was ever delivered afterward. Pre-1.23, `false` meant fired-and-possibly-buffered.
+  - Fix: On modern Go, treat `Stop` as cleanup only; do not branch on its return value for channel draining.
 
 ## Debugging walkthrough
 
@@ -141,19 +141,11 @@ func fetchWithTimeout(url string, timeout time.Duration) {
 }
 ```
 
-**Symptom**: The function always prints "timeout" immediately, even before the timeout duration.
+**Symptom**: With a valid `timeout` (e.g. `2*time.Second`) the function works, but with `timeout = 0` or a negative value passed in from config, it prints "timeout" immediately.
 
-**Investigation**: Add a timestamp at the timer creation and at the channel read.
+**Investigation**: Log the timeout at function entry: `fmt.Println("timeout:", timeout)` — the log shows `0s` or a negative value.
 
-```go
-fmt.Println("timer created at", time.Now().Format(time.StampMilli))
-<-timer.C
-fmt.Println("timer fired at", time.Now().Format(time.StampMilli))
-```
-
-The timer fires almost instantly.
-
-**Root cause**: The goroutine is launched but the main goroutine immediately blocks on `<-timer.C`. The timer is created correctly, but nothing is printed before it — the problem is that the caller may pass a very small or negative timeout. With a negative timeout, `NewTimer` creates a timer that fires immediately.
+**Root cause**: With a non-positive duration, `NewTimer` creates a timer that fires immediately, so `<-timer.C` returns at once and the simulated HTTP call never gets a chance. The timer mechanics are fine; the input is not.
 
 **Fix**: Validate the timeout before creating the timer:
 
@@ -168,8 +160,9 @@ if timeout <= 0 {
 - Always use `defer timer.Stop()` to ensure cleanup, even on the happy path.
 - Use `time.After` for simple `select` cases where the timer is used once and discarded.
 - Use `time.NewTimer` with `Reset` when the same timer is reused (e.g., retry loops with backoff).
-- Never reuse a timer without draining its channel first; use the helper pattern:
+- On Go 1.23+, call `Reset` directly — no channel draining is required (the channel is unbuffered and `Reset` waits for the new deadline). Only pre-1.23 code needs the legacy helper:
   ```go
+  // Pre-Go-1.23 only:
   if !timer.Stop() {
       select {
       case <-timer.C:

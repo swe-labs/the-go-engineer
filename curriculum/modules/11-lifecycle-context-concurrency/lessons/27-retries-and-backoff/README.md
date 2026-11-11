@@ -83,7 +83,6 @@ func retryWithBackoff(ctx context.Context, cfg RetryConfig, fn func(context.Cont
 		if attempt == cfg.MaxAttempts {
 			return fmt.Errorf("all %d attempts failed: %w", cfg.MaxAttempts, err)
 		}
-
 		delay := cfg.BaseDelay * (1 << (attempt - 1))
 		if delay > cfg.MaxDelay {
 			delay = cfg.MaxDelay
@@ -101,6 +100,7 @@ func retryWithBackoff(ctx context.Context, cfg RetryConfig, fn func(context.Cont
 }
 
 func unstableOp(ctx context.Context) error {
+	// Simulate failure 70% of the time
 	if rand.Intn(100) < 70 {
 		return fmt.Errorf("transient error")
 	}

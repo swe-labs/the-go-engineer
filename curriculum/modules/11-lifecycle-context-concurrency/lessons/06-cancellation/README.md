@@ -117,7 +117,7 @@ func main() {
 ## Step-by-step execution
 
 1. `context.WithCancel(context.Background())` creates a `cancelCtx` with a nil `Done` channel.
-2. Three worker goroutines start, each entering an infinite loop. In each iteration, they check `ctx.Done()` via select. Since `Done()` is nil initially, the `case <-ctx.Done()` branch blocks forever — the `default` case runs.
+2. Three worker goroutines start, each entering an infinite loop. In each iteration, the `select` offers the `ctx.Done()` case and a `default`. Before cancellation no signal is pending on `Done()` (the channel blocks until `cancel()` closes it), so `select` falls through to `default` immediately.
 3. Each worker prints a message and sleeps 200ms.
 4. After 500ms, `cancel()` is called. The `Done` channel is created and closed. `Err()` is set to `Canceled`.
 5. All three workers' `select` statements now find the `ctx.Done()` case ready. They print their shutdown message and return.

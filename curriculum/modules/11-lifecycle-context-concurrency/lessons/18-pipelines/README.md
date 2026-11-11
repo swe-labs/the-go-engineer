@@ -120,6 +120,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"sync"
+	"time"
 )
 
 func generator(ctx context.Context, nums ...int) <-chan int {
@@ -137,13 +139,13 @@ func generator(ctx context.Context, nums ...int) <-chan int {
 	return out
 }
 
-func square(ctx context.Context, in <-chan int) <-chan int {
+func multiply(ctx context.Context, in <-chan int, factor int) <-chan int {
 	out := make(chan int)
 	go func() {
 		defer close(out)
 		for n := range in {
 			select {
-			case out <- n * n:
+			case out <- n * factor:
 			case <-ctx.Done():
 				return
 			}
@@ -152,46 +154,87 @@ func square(ctx context.Context, in <-chan int) <-chan int {
 	return out
 }
 
-func oddFilter(ctx context.Context, in <-chan int) <-chan int {
+func add(ctx context.Context, in <-chan int, delta int) <-chan int {
 	out := make(chan int)
 	go func() {
 		defer close(out)
 		for n := range in {
-			if n%2 != 0 {
-				select {
-				case out <- n:
-				case <-ctx.Done():
-					return
-				}
+			select {
+			case out <- n + delta:
+			case <-ctx.Done():
+				return
 			}
 		}
 	}()
 	return out
 }
 
-func main() {
-	ctx := context.Background()
-	gen := generator(ctx, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-	sq := square(ctx, gen)
-	odd := oddFilter(ctx, sq)
+func fanOut(ctx context.Context, in <-chan int, n int) []<-chan int {
+	outs := make([]<-chan int, n)
+	for i := 0; i < n; i++ {
+		outs[i] = multiply(ctx, in, i+1)
+	}
+	return outs
+}
 
-	for v := range odd {
+func fanIn(ctx context.Context, channels ...<-chan int) <-chan int {
+	out := make(chan int)
+	var wg sync.WaitGroup
+	for _, ch := range channels {
+		wg.Add(1)
+		go func(c <-chan int) {
+			defer wg.Done()
+			for n := range c {
+				select {
+				case out <- n:
+				case <-ctx.Done():
+					return
+				}
+			}
+		}(ch)
+	}
+	go func() {
+		wg.Wait()
+		close(out)
+	}()
+	return out
+}
+
+func main() {
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
+	defer cancel()
+
+	fmt.Println("=== Basic pipeline ===")
+	gen := generator(ctx, 1, 2, 3, 4, 5)
+	mul := multiply(ctx, gen, 2)
+	add2 := add(ctx, mul, 10)
+
+	for v := range add2 {
 		fmt.Println(v)
 	}
-	// Output: 1, 9, 25, 49, 81
+	fmt.Println()
+
+	fmt.Println("=== Fan-out / Fan-in ===")
+	gen2 := generator(ctx, 1, 2, 3)
+	fanned := fanOut(ctx, gen2, 3)
+	merged := fanIn(ctx, fanned...)
+
+	for v := range merged {
+		fmt.Printf("merged: %d\n", v)
+	}
 }
 ```
 
 ## Step-by-step execution
 
-For the pipeline `generator(1..5) -> square -> oddFilter`:
+For the pipeline `generator(1..5) -> multiply(factor 2) -> add(delta 10)`:
 
-1. `generator` sends 1. `square` receives 1, computes 1, sends 1. `oddFilter` receives 1, passes it through (1 is odd). Main receives 1.
-2. `generator` sends 2. `square` receives 2, computes 4, sends 4. `oddFilter` receives 4, drops it (4 is even). No output to main.
-3. `generator` sends 3. `square` → 9. `oddFilter` passes (9 is odd). Main receives 9.
-4. Continues for 4, 5. Main receives 25.
+1. `generator` sends 1. `multiply` receives 1, computes 2, sends 2. `add` receives 2, computes 12. Main receives 12.
+2. `generator` sends 2. `multiply` -> 4, `add` -> 14. Main receives 14.
+3. Continues for 3, 4, 5. Main receives 16, 18, 20.
+4. After 100ms the context deadline fires: every stage's `select` takes the `ctx.Done()` branch, each goroutine returns, and each stage's output channel is closed via `defer close(out)`.
 
-The pipeline processes one item at a time through all stages. Each stage can block if the next is not ready — this is backpressure.
+The pipeline processes one item at a time through all stages. Each stage can block if the next is not ready — this is backpressure. The context deadline bounds the whole pipeline, so slow stages cannot hang the process.
 
 ## Common mistakes
 

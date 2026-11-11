@@ -42236,7 +42236,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/01-time-basics/main_test.go"
       },
       "id": "core-11-01",
-      "learning_objective": "Measure, format, and manipulate timestamps and timezones using the standard library time package.",
+      "learning_objective": "Use `time.Time`, `time.Now`, `time.Format`, `time.Parse`, `time.Duration`, `time.Since`, and `time.Until` to read, display, and manipulate timestamps in Go programs.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-02"
@@ -42436,7 +42436,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/02-durations/main_test.go"
       },
       "id": "core-11-02",
-      "learning_objective": "Represent time spans using time.Duration and perform elapsed-time and timeout calculations.",
+      "learning_objective": "Represent, compute, compare, and format spans of time using `time.Duration` and its associated constants, arithmetic, and conversion methods.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-03"
@@ -42641,7 +42641,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/03-timers/main_test.go"
       },
       "id": "core-11-03",
-      "learning_objective": "Schedule one-shot delayed executions and timeout events using time.Timer and time.After.",
+      "learning_objective": "Create, stop, and reset one-shot timed events using `time.NewTimer`, `time.After`, `timer.Stop`, and `timer.Reset` in concurrent Go programs.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-04"
@@ -42841,7 +42841,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/04-tickers/main_test.go"
       },
       "id": "core-11-04",
-      "learning_objective": "Schedule recurring interval tasks using time.Ticker, ensuring tickers are stopped to prevent resource leaks.",
+      "learning_objective": "Create, use, and stop periodic tickers with `time.NewTicker` and `time.Tick` for recurring tasks such as heartbeats, polling, and periodic cleanup.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-05"
@@ -43046,7 +43046,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/05-context-basics/main_test.go"
       },
       "id": "core-11-05",
-      "learning_objective": "Spawn concurrent lightweight goroutines and contrast Go's M:N runtime scheduler with OS threads.",
+      "learning_objective": "Create, derive, and use Go's `context.Context` to carry cancellation signals, deadlines, and request-scoped values across goroutine boundaries.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-06"
@@ -43246,7 +43246,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/06-cancellation/main_test.go"
       },
       "id": "core-11-06",
-      "learning_objective": "Synchronize goroutine completion deterministically using sync.WaitGroup (Add, Done, Wait).",
+      "learning_objective": "Use `context.WithCancel` to propagate cancellation signals across goroutines, implement graceful shutdown patterns, and prevent goroutine leaks by listening on `ctx.Done()`.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-07"
@@ -43466,7 +43466,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/07-timeouts/main_test.go"
       },
       "id": "core-11-07",
-      "learning_objective": "Communicate and share memory safely between goroutines using unbuffered channels as synchronization points.",
+      "learning_objective": "Apply and propagate timeouts using `context.WithTimeout`, detect `DeadlineExceeded` errors, and implement timeout hierarchies that prevent cascading failures.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-08"
@@ -43666,7 +43666,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/08-deadlines/main_test.go"
       },
       "id": "core-11-08",
-      "learning_objective": "Decouple producer-consumer processing speeds using buffered channels with bounded capacities.",
+      "learning_objective": "Apply absolute deadlines using `context.WithDeadline`, distinguish deadlines from relative timeouts, and use deadlines to enforce latency SLOs in HTTP servers and downstream calls.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-09"
@@ -43871,7 +43871,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/09-context-values-with-caveats/main_test.go"
       },
       "id": "core-11-09",
-      "learning_objective": "Signal completion and terminate channel iteration safely by closing channels from the sender side.",
+      "learning_objective": "Use `context.WithValue` to carry request-scoped data, implement type-safe context keys, and understand when context values are appropriate \u2014 and when they are not.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-10"
@@ -44069,7 +44069,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/10-why-concurrency-exists/main_test.go"
       },
       "id": "core-11-10",
-      "learning_objective": "Iterate over streams of channel values using for range loops that terminate cleanly upon channel closure.",
+      "learning_objective": "Distinguish concurrency from parallelism, explain Amdahl's law and its impact on scaling, classify workloads as CPU-bound or IO-bound, and describe Go's concurrency model based on goroutines and channels.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-11"
@@ -44275,7 +44275,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/11-goroutines/main_test.go"
       },
       "id": "core-11-11",
-      "learning_objective": "Multiplex channel communications and handle non-blocking operations using select statements.",
+      "learning_objective": "Spawn concurrent work with the `go` keyword, reason about goroutine scheduling and lifecycle, and control parallelism with `GOMAXPROCS`.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-12"
@@ -44481,7 +44481,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/12-waitgroups/main_test.go"
       },
       "id": "core-11-12",
-      "learning_objective": "Enforce strict channel ownership: producers create, send, and close channels while consumers read.",
+      "learning_objective": "Coordinate goroutine completion with `sync.WaitGroup` by correctly using `Add`, `Done`, and `Wait`, and apply the typed WaitGroup pattern for collecting results.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-13"
@@ -44689,7 +44689,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/13-channels/main_test.go"
       },
       "id": "core-11-13",
-      "learning_objective": "Protect shared mutable state across goroutines using sync.Mutex to avoid data races.",
+      "learning_objective": "Create, send to, and receive from unbuffered channels, and explain their blocking semantics and role as synchronization primitives.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-14"
@@ -44890,7 +44890,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/14-buffered-channels/main_test.go"
       },
       "id": "core-11-14",
-      "learning_objective": "Optimize read-heavy concurrent data structures using sync.RWMutex for concurrent reads and exclusive writes.",
+      "learning_objective": "Create and use buffered channels with explicit capacity, explain when send blocks and when receive blocks, and apply the channel-as-semaphore pattern.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-15"
@@ -45098,7 +45098,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/15-closing-channels/main_test.go"
       },
       "id": "core-11-15",
-      "learning_objective": "Perform lock-free atomic arithmetic and pointer swaps using sync/atomic for high-performance counters.",
+      "learning_objective": "Use `close(ch)` to signal completion, detect closed channels with the comma-ok idiom, iterate with `range`, and apply the \"who closes?\" discipline.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-16"
@@ -45299,7 +45299,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/16-channel-ownership/main_test.go"
       },
       "id": "core-11-16",
-      "learning_objective": "Detect concurrent data access races at test and run time using Go's built-in race detector (-race).",
+      "learning_objective": "Apply the ownership discipline: the goroutine that creates a channel owns it, sends on it, and closes it; consumers only receive until the channel is closed.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-17"
@@ -45508,7 +45508,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/17-backpressure/main_test.go"
       },
       "id": "core-11-17",
-      "learning_objective": "Identify and prevent circular wait deadlock scenarios in multi-lock concurrent architectures.",
+      "learning_objective": "Apply backpressure using bounded channels to control producer-consumer rates, implement load shedding with rejection patterns, and monitor queue depth in production.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-18"
@@ -45707,7 +45707,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/18-pipelines/main_test.go"
       },
       "id": "core-11-18",
-      "learning_objective": "Diagnose and eliminate goroutine leaks caused by blocked channel reads, writes, or missing cancellation.",
+      "learning_objective": "Build concurrent pipelines using channels to compose stages, apply fan-out/fan-in for parallelism, and propagate cancellation through the pipeline with context.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-19"
@@ -45913,7 +45913,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/19-mutex-and-rwmutex/main_test.go"
       },
       "id": "core-11-19",
-      "learning_objective": "Propagate cancellation signals across call trees and asynchronous workers using context.WithCancel.",
+      "learning_objective": "Protect shared state with `sync.Mutex` and `sync.RWMutex`, understand critical sections, and choose between exclusive and shared locks based on read/write patterns.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-20"
@@ -46122,7 +46122,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/20-atomics-with-caution/main_test.go"
       },
       "id": "core-11-20",
-      "learning_objective": "Enforce operational time bounds on network and database calls using context.WithTimeout and context.WithDeadline.",
+      "learning_objective": "Use `sync/atomic` operations (`AddInt64`, `Load`, `Store`, `CompareAndSwap`) for lock-free counters and flags, and decide when atomics are appropriate versus mutexes.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-21"
@@ -46328,7 +46328,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/21-race-conditions/main_test.go"
       },
       "id": "core-11-21",
-      "learning_objective": "Pass request-scoped telemetry and authentication metadata down call stacks using context.WithValue.",
+      "learning_objective": "Define a data race, identify race conditions in concurrent Go code, and fix them using a mutex or a channel.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-22"
@@ -46529,7 +46529,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/22-race-detector/main_test.go"
       },
       "id": "core-11-22",
-      "learning_objective": "Manage groups of concurrent goroutines returning errors and canceling sibling workers using golang.org/x/sync/errgroup.",
+      "learning_objective": "Use `go build -race` and `go test -race` to detect data races in Go programs, interpret the report, and integrate race detection into CI.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-23"
@@ -46735,7 +46735,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/23-goroutine-leaks/main_test.go"
       },
       "id": "core-11-23",
-      "learning_objective": "Implement bounded worker pools with fixed worker counts to process task queues without overwhelming system resources.",
+      "learning_objective": "Identify why goroutines leak, detect leaks using runtime metrics and profiling, and apply prevention patterns with context cancellation and channel ownership.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-24"
@@ -46938,7 +46938,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/24-deadlocks/main_test.go"
       },
       "id": "core-11-24",
-      "learning_objective": "Compose concurrent data pipelines connecting stages via channels with backpressure and cancellation.",
+      "learning_objective": "Define deadlock using the four Coffman conditions, detect deadlocks in Go programs, and prevent them with consistent mutex ordering and channel discipline.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-25"
@@ -47146,7 +47146,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/25-errgroup/main_test.go"
       },
       "id": "core-11-25",
-      "learning_objective": "Apply backpressure to shed load or slow down producers when downstream consumers reach saturation.",
+      "learning_objective": "Use `golang.org/x/sync/errgroup` to run goroutines in a fan-out pattern, propagate the first error, and cancel remaining work via context.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-26"
@@ -47345,7 +47345,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/26-bounded-worker-pools/main_test.go"
       },
       "id": "core-11-26",
-      "learning_objective": "Implement transient fault retry mechanisms with exponential backoff and randomized jitter.",
+      "learning_objective": "Implement a bounded worker pool using a buffered channel as a semaphore, dispatch jobs to a fixed number of workers, and collect results.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-27"
@@ -47551,7 +47551,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/27-retries-and-backoff/main_test.go"
       },
       "id": "core-11-27",
-      "learning_objective": "Intercept SIGINT and SIGTERM OS signals to execute clean graceful shutdown of HTTP servers and worker pools.",
+      "learning_objective": "Implement exponential backoff with jitter, manage retry budgets, and make retries context-aware so they respect cancellation.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-28"
@@ -47758,7 +47758,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/28-idempotency-keys/main_test.go"
       },
       "id": "core-11-28",
-      "learning_objective": "Design and implement idempotency keys for HTTP APIs in Go.",
+      "learning_objective": "Design an idempotency-key-based deduplication system for HTTP APIs, implement concurrent-safe dedup storage with a mutex, and ensure retry safety.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-11-29"
@@ -47906,7 +47906,7 @@
         "test_path": "modules/11-lifecycle-context-concurrency/lessons/29-sync-once/main_test.go"
       },
       "id": "core-11-29",
-      "learning_objective": "Ensure thread-safe, one-time lazy initialization of shared resources across concurrent goroutines using sync.Once.",
+      "learning_objective": "Use `sync.Once` for thread-safe lazy initialization, implement the singleton pattern, and understand when to use `sync.Pool` as an alternative.",
       "module_id": "module-11",
       "next_item_ids": [
         "core-12-01"

@@ -79,7 +79,7 @@ When to use atomics:
 
 Atomic operations compile to CPU instructions like `LOCK XADD` (x86) or `LDADD` (ARM). These instructions:
 
-1. Lock the memory bus (or cache line) so no other core can read or write the same address concurrently.
+1. Claim exclusive ownership of the cache line holding the address (via the cache-coherence protocol), so no other core can read or write it concurrently.
 2. Perform the operation (add, compare-and-swap, etc.).
 3. Unlock.
 
@@ -118,52 +118,97 @@ import (
 	"sync/atomic"
 )
 
-type ServerMetrics struct {
-	requests atomic.Int64
-	errors   atomic.Int64
-	active   atomic.Int64
+type AtomicCounter struct {
+	value atomic.Int64
 }
 
-func (m *ServerMetrics) RequestHandled() {
-	m.requests.Add(1)
+func (c *AtomicCounter) Add(n int64) {
+	c.value.Add(n)
 }
 
-func (m *ServerMetrics) ErrorOccurred() {
-	m.errors.Add(1)
+func (c *AtomicCounter) Load() int64 {
+	return c.value.Load()
 }
 
-func (m *ServerMetrics) ConnectionOpened() {
-	m.active.Add(1)
+type Config struct {
+	mu     sync.RWMutex
+	params map[string]string
 }
 
-func (m *ServerMetrics) ConnectionClosed() {
-	m.active.Add(-1)
+func (c *Config) Get(key string) string {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return c.params[key]
 }
 
-func (m *ServerMetrics) Snapshot() (requests, errors, active int64) {
-	return m.requests.Load(), m.errors.Load(), m.active.Load()
+func (c *Config) Set(key, value string) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.params[key] = value
+}
+
+type AtomicFlag struct {
+	value atomic.Bool
+}
+
+func (f *AtomicFlag) Set() {
+	f.value.Store(true)
+}
+
+func (f *AtomicFlag) IsSet() bool {
+	return f.value.Load()
+}
+
+func (f *AtomicFlag) TrySet() bool {
+	return f.value.CompareAndSwap(false, true)
 }
 
 func main() {
-	var m ServerMetrics
+	fmt.Println("=== Atomic counter ===")
 	var wg sync.WaitGroup
+	counter := AtomicCounter{}
+
+	for i := 0; i < 1000; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			counter.Add(1)
+		}()
+	}
+	wg.Wait()
+	fmt.Printf("Counter: %d (expected 1000)\n", counter.Load())
+
+	fmt.Println("\n=== Atomic flag (CompareAndSwap) ===")
+	flag := AtomicFlag{}
+
+	var wg2 sync.WaitGroup
+	for i := 0; i < 10; i++ {
+		wg2.Add(1)
+		go func(id int) {
+			defer wg2.Done()
+			if flag.TrySet() {
+				fmt.Printf("goroutine %d set the flag\n", id)
+			} else {
+				fmt.Printf("goroutine %d: flag already set\n", id)
+			}
+		}(i)
+	}
+	wg2.Wait()
+
+	fmt.Println("\n=== When to use mutex vs atomic ===")
+	config := Config{params: make(map[string]string)}
+	config.Set("host", "localhost")
+	config.Set("port", "8080")
 
 	for i := 0; i < 100; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			m.ConnectionOpened()
-			m.RequestHandled()
-			if i%10 == 0 {
-				m.ErrorOccurred()
-			}
-			m.ConnectionClosed()
+			_ = config.Get("host")
 		}()
 	}
 	wg.Wait()
-
-	req, err, act := m.Snapshot()
-	fmt.Printf("requests=%d errors=%d active=%d\n", req, err, act)
+	fmt.Printf("Config host: %s\n", config.Get("host"))
 }
 ```
 
@@ -186,10 +231,10 @@ No goroutine ever sees a stale or intermediate value. If this were a regular `co
 ## Common mistakes
 
 - **Using atomics for non-atomic needs**: `counter++` where `counter` is `atomic.Int64` — even though the variable is atomic, the `++` is not the atomic add. You must use `counter.Add(1)`. The `atomic.Int64` type only makes the `Load`/`Store`/`Add` methods atomic, not regular arithmetic.
-- **Forgetting memory ordering**: if goroutine A writes multiple values (one atomic, one not), another goroutine B might see the atomic write but not the non-atomic write. Use `atomic.Store` for all synchronized variables, not just one.
+- **Mixing atomic and non-atomic access to the same variable**: reading `c.value` directly while other goroutines use `c.value.Add()` is still a data race — the plain read bypasses the atomic protocol. Go's memory model guarantees that writes performed *before* an atomic store are visible to a goroutine that observes that store (happens-before), so atomic publication of a group of values works — but every concurrent access to the published variable itself must go through the atomic API.
 - **Using atomics when a mutex is needed**: atomic operations cannot atomically update two related fields. If `x` and `y` must be consistent, use a mutex.
 - **CAS in a tight loop (contended)**: if `CompareAndSwap` fails repeatedly (high contention), the loop burns CPU. This is called "livelock." Mutexes are better under high contention.
-- **Using atomics with non-word-sized types**: atomics only work with integer types, pointers, and `bool`. You cannot atomically update a `struct`, `string`, or `slice`.
+- **Using atomics with non-word-sized types**: `sync/atomic` operates on integer types, `bool` (`atomic.Bool`), and pointers (`atomic.Pointer[T]`). For structs, strings, or slices, use `atomic.Value` (stores any single value atomically) or protect the data with a mutex — never a plain read-modify-write.
 
 ## Debugging walkthrough
 

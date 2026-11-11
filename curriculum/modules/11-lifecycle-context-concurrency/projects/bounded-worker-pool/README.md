@@ -10,7 +10,7 @@ Unbounded goroutine spawning (`go func()`) under load is a leading cause of memo
 
 ## Prerequisites
 
-Complete all Module 11 lessons (01–28) on goroutines, channels, synchronization primitives (`sync.Mutex`, `sync.WaitGroup`, `sync.Once`), atomic operations, `context.Context` cancellation, and race detector diagnostics.
+Complete all Module 11 lessons (01–29) on goroutines, channels, synchronization primitives (`sync.Mutex`, `sync.WaitGroup`, `sync.Once`), atomic operations, `context.Context` cancellation, and race detector diagnostics.
 
 ## Available concepts
 
@@ -106,4 +106,4 @@ PASS
 
 ## NEXT UP
 
-[Flagship Opslane Capstone](../../../18-flagship-opslane/README.md)
+[Concurrent Downloader](../concurrent-downloader/README.md)
