@@ -28,9 +28,6 @@ type ValidationError struct {
 	Message string `json:"message"`
 }
 
-var _ error = *new(ValidationError)
-
-
 func (v ValidationError) Error() string {
 	return fmt.Sprintf("%s: %s", v.Field, v.Message)
 }
