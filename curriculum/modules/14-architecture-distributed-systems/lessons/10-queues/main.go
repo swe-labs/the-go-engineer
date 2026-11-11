@@ -32,6 +32,11 @@ func (q *Queue) Dequeue() (int, error) {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	if len(q.items) == 0 {
+		// An empty queue is temporary — producers may enqueue again.
+		// A closed queue is terminal — the workers should exit.
+		if q.closed {
+			return 0, errors.New("queue closed")
+		}
 		return 0, errors.New("queue empty")
 	}
 	item := q.items[0]
@@ -70,6 +75,12 @@ func (wp *WorkerPool) Start(handler func(int)) {
 			for {
 				item, err := wp.queue.Dequeue()
 				if err != nil {
+					// "queue empty": wait briefly and retry — producers may
+					// still enqueue. "queue closed": the producer is done.
+					if err.Error() == "queue empty" {
+						time.Sleep(10 * time.Millisecond)
+						continue
+					}
 					return
 				}
 				handler(item)

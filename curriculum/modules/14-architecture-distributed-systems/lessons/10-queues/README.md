@@ -99,6 +99,11 @@ func (q *Queue) Dequeue() (int, error) {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	if len(q.items) == 0 {
+		// An empty queue is temporary — producers may enqueue again.
+		// A closed queue is terminal — the workers should exit.
+		if q.closed {
+			return 0, errors.New("queue closed")
+		}
 		return 0, errors.New("queue empty")
 	}
 	item := q.items[0]
@@ -137,6 +142,12 @@ func (wp *WorkerPool) Start(handler func(int)) {
 			for {
 				item, err := wp.queue.Dequeue()
 				if err != nil {
+					// "queue empty": wait briefly and retry — producers may
+					// still enqueue. "queue closed": the producer is done.
+					if err.Error() == "queue empty" {
+						time.Sleep(10 * time.Millisecond)
+						continue
+					}
 					return
 				}
 				handler(item)
@@ -182,11 +193,11 @@ For the worker pool example with 20 items and 4 workers:
 1. `main` enqueues integers 0 through 19 into the slice-backed queue.
 2. `NewWorkerPool` creates a pool with 4 workers, each tracking processed via `atomic.Int64`.
 3. `pool.Start` launches 4 goroutines. Each goroutine loops, calling `Dequeue`.
-4. `Dequeue` acquires the mutex, checks `len(q.items) == 0`, reads `q.items[0]`, re-slices to `q.items[1:]`, releases the mutex.
+4. Each `Dequeue` acquires the mutex and pops `q.items[0]`. An empty queue returns a "queue empty" error (workers wait and retry); a closed-and-empty queue returns "queue closed" (workers exit).
 5. Each goroutine calls the handler `fn(item)` then increments `processed`.
-6. When all 20 items are dequeued, `Dequeue` returns `false` and each goroutine exits its loop.
+6. Once the queue drains, `main` calls `q.Close()`; the next `Dequeue` on the closed queue returns "queue closed" and each worker exits its loop.
 7. `pool.Wait()` blocks until all 4 goroutines call `wg.Done()`.
-8. `pool.Count()` returns 20, confirming every item was processed once with no duplicates lost or double-processed.
+8. `pool.Processed()` returns 20, confirming every item was processed once with no duplicates lost or double-processed.
 
 The key property: multiple goroutines compete for the same queue, but the mutex guarantees each item is dequeued by exactly one worker.
 
