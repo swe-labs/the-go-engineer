@@ -48,7 +48,10 @@ func checkVulnerabilities(modules []ModuleVersion, vulnDB *VulnDB) []VulnEntry {
 			}
 			// Only flag versions BELOW the fix (a simple numeric compare on
 			// major.minor.patch; production code should use golang.org/x/mod/semver).
-			if versionLess(mod.Version, "v"+vuln.FixedIn) {
+			// An advisory with no published fix must stay flagged: comparing
+			// against an empty FixedIn would parse as v0.0.0 and silently
+			// suppress it.
+			if vuln.FixedIn == "" || versionLess(mod.Version, "v"+vuln.FixedIn) {
 				found = append(found, vuln)
 			}
 		}
